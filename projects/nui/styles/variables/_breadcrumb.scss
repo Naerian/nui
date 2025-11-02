@@ -1,0 +1,113 @@
+// =======================
+// BREADCRUMB - Variables Específicas del Componente
+// =======================
+
+// Anchos
+$breadcrumb-min-width: 5rem !default;
+$breadcrumb-max-width: 20rem !default;
+
+// Espaciados y gaps
+$breadcrumb-item-max-width: 250px !default;
+
+// Alturas específicas
+$breadcrumb-collapsed-min-width: 36px !default;
+$breadcrumb-collapsed-height: 28px !default;
+$breadcrumb-collapsed-min-width-tablet: 32px !default;
+$breadcrumb-collapsed-height-tablet: 26px !default;
+$breadcrumb-collapsed-min-width-mobile: 30px !default;
+$breadcrumb-collapsed-height-mobile: 24px !default;
+
+// Botón de copia
+$breadcrumb-copy-button-size: 28px !default;
+
+// Overlay
+$breadcrumb-overlay-max-height: 60vh !default;
+$breadcrumb-overlay-max-height-mobile: 70vh !default;
+$breadcrumb-overlay-scrollbar-width: 4px !default;
+$breadcrumb-overlay-item-min-height: 36px !default;
+$breadcrumb-overlay-item-min-height-mobile: 30px !default;
+
+// Animaciones
+$breadcrumb-transition-duration: 0.2s !default;
+$breadcrumb-transition-timing: ease-in-out !default;
+$breadcrumb-shimmer-duration: 1.5s !default;
+$breadcrumb-pulse-duration: 1.5s !default;
+
+// Escalas y transformaciones
+$breadcrumb-hover-icon-scale: 1.15 !default;
+$breadcrumb-active-scale: 0.95 !default;
+$breadcrumb-collapsed-active-icon-scale: 1.05 !default;
+$breadcrumb-collapsed-expanded-icon-scale: 1.1 !default;
+$breadcrumb-collapsed-expanded-rotation: 90deg !default;
+$breadcrumb-overlay-item-active-scale: 0.98 !default;
+$breadcrumb-overlay-item-mobile-active-scale: 0.97 !default;
+
+// Opacidades
+$breadcrumb-separator-opacity: 0.6 !default;
+$breadcrumb-overlay-arrow-opacity: 0.5 !default;
+
+// Responsive breakpoints específicos
+$breadcrumb-tablet-breakpoint: 768px !default;
+$breadcrumb-mobile-breakpoint: 576px !default;
+
+// Font sizes específicos
+$breadcrumb-separator-font-size-tablet: 0.9em !default;
+$breadcrumb-separator-font-size-mobile: 0.85em !default;
+$breadcrumb-collapsed-icon-font-size: 1.3em !default;
+$breadcrumb-collapsed-icon-font-size-tablet: 1.2em !default;
+$breadcrumb-collapsed-icon-font-size-mobile: 1.1em !default;
+
+@import "config";
+
+$breadcrumb-separator-margin: var(--spacing-xs) !default;
+
+:root {
+  // Layout básico
+  --breadcrumb-min-width: #{$breadcrumb-min-width};
+  --breadcrumb-max-width: #{$breadcrumb-max-width};
+  --breadcrumb-separator-margin: #{$breadcrumb-separator-margin};
+  --breadcrumb-item-max-width: #{$breadcrumb-item-max-width};
+
+  // Collapsed state (responsive)
+  --breadcrumb-collapsed-min-width: #{$breadcrumb-collapsed-min-width};
+  --breadcrumb-collapsed-height: #{$breadcrumb-collapsed-height};
+  --breadcrumb-collapsed-min-width-tablet: #{$breadcrumb-collapsed-min-width-tablet};
+  --breadcrumb-collapsed-height-tablet: #{$breadcrumb-collapsed-height-tablet};
+  --breadcrumb-collapsed-min-width-mobile: #{$breadcrumb-collapsed-min-width-mobile};
+  --breadcrumb-collapsed-height-mobile: #{$breadcrumb-collapsed-height-mobile};
+
+  // Copy button y overlay
+  --breadcrumb-copy-button-size: #{$breadcrumb-copy-button-size};
+  --breadcrumb-overlay-max-height: #{$breadcrumb-overlay-max-height};
+  --breadcrumb-overlay-max-height-mobile: #{$breadcrumb-overlay-max-height-mobile};
+  --breadcrumb-overlay-scrollbar-width: #{$breadcrumb-overlay-scrollbar-width};
+  --breadcrumb-overlay-item-min-height: #{$breadcrumb-overlay-item-min-height};
+  --breadcrumb-overlay-item-min-height-mobile: #{$breadcrumb-overlay-item-min-height-mobile};
+
+  // Transiciones y animaciones
+  --breadcrumb-transition-duration: #{$breadcrumb-transition-duration};
+  --breadcrumb-transition-timing: #{$breadcrumb-transition-timing};
+  --breadcrumb-shimmer-duration: #{$breadcrumb-shimmer-duration};
+  --breadcrumb-pulse-duration: #{$breadcrumb-pulse-duration};
+
+  // Escalas y transformaciones
+  --breadcrumb-hover-icon-scale: #{$breadcrumb-hover-icon-scale};
+  --breadcrumb-active-scale: #{$breadcrumb-active-scale};
+  --breadcrumb-collapsed-active-icon-scale: #{$breadcrumb-collapsed-active-icon-scale};
+  --breadcrumb-collapsed-expanded-icon-scale: #{$breadcrumb-collapsed-expanded-icon-scale};
+  --breadcrumb-collapsed-expanded-rotation: #{$breadcrumb-collapsed-expanded-rotation};
+  --breadcrumb-overlay-item-active-scale: #{$breadcrumb-overlay-item-active-scale};
+  --breadcrumb-overlay-item-mobile-active-scale: #{$breadcrumb-overlay-item-mobile-active-scale};
+
+  // Opacidades
+  --breadcrumb-separator-opacity: #{$breadcrumb-separator-opacity};
+  // --breadcrumb-skeleton-separator-opacity: #{$breadcrumb-skeleton-separator-opacity}; // ❌ NO USADA - Eliminada
+  --breadcrumb-overlay-arrow-opacity: #{$breadcrumb-overlay-arrow-opacity};
+
+  // Font sizes responsive
+  --breadcrumb-separator-font-size-tablet: #{$breadcrumb-separator-font-size-tablet};
+  --breadcrumb-separator-font-size-mobile: #{$breadcrumb-separator-font-size-mobile};
+  --breadcrumb-collapsed-icon-font-size: #{$breadcrumb-collapsed-icon-font-size};
+  --breadcrumb-collapsed-icon-font-size-tablet: #{$breadcrumb-collapsed-icon-font-size-tablet};
+  --breadcrumb-collapsed-icon-font-size-mobile: #{$breadcrumb-collapsed-icon-font-size-mobile};
+}

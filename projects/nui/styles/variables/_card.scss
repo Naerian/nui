@@ -1,0 +1,81 @@
+// ========================================
+// CARD - Variables
+// ========================================
+//
+// Variables centralizadas para personalizar el componente Card.
+// Todas las variables usan !default para permitir sobrescritura.
+
+// ===== DIMENSIONES BASE =====
+$card-min-height: 1.25rem !default; // 20px mínimo
+$card-header-min-height: 3.5rem !default; // 56px
+$card-footer-min-height: 2.5rem !default; // 40px
+$card-skeleton-min-height: 200px !default;
+$card-badge-min-height: 1.5rem !default; // 24px
+$card-badge-min-width: 1.5rem !default; // 24px
+
+// ===== BADGE (sobre imagen) =====
+$card-badge-min-height: 1.5rem !default; // 24px
+$card-badge-min-width: 1.5rem !default; // 24px
+$card-badge-letter-spacing: 0.5px !default;
+$card-badge-backdrop-blur: 4px !default;
+$card-badge-opacity: 0.9 !default;
+$card-badge-opacity-dark: 0.8 !default; // Para badge dark
+$card-badge-opacity-light: 0.9 !default; // Para badge light
+
+// ===== IMAGEN =====
+$card-image-hover-zoom-scale: 1.08 !default;
+$card-image-hover-zoom-duration: 400ms !default;
+$card-image-hover-zoom-easing: cubic-bezier(0.4, 0, 0.2, 1) !default;
+
+// ===== SKELETON LOADING =====
+$card-skeleton-min-height: 200px !default;
+$card-skeleton-animation-duration: 1.5s !default;
+$card-skeleton-animation-easing: ease-in-out !default;
+$card-skeleton-background-size: 200% 100% !default;
+
+// ===== HEADER =====
+$card-header-icon-margin-top: 0.25rem !default; // Alineación óptica con texto
+
+// ===== FOOTER =====
+$card-footer-border-width: 1px !default;
+
+// ===== OVERLAY (gradiente sobre imagen) =====
+// Los valores de gradiente se mantienen en el componente por su complejidad
+// pero se pueden sobrescribir creando mixins personalizados
+
+// ===== BADGE COLORS (opacidades) =====
+// Las opacidades de los badges por color se generan dinámicamente
+$card-badge-colors: primary, secondary, success, danger, warning, info, dark, light !default;
+
+// ===== EXPORTAR CSS VARIABLES =====
+:root {
+  // Dimensiones
+  --card-min-height: #{$card-min-height};
+  --card-header-min-height: #{$card-header-min-height};
+  --card-footer-min-height: #{$card-footer-min-height};
+
+  // Badge
+  --card-badge-min-height: #{$card-badge-min-height};
+  --card-badge-min-width: #{$card-badge-min-width};
+  --card-badge-letter-spacing: #{$card-badge-letter-spacing};
+  --card-badge-backdrop-blur: #{$card-badge-backdrop-blur};
+  --card-badge-opacity: #{$card-badge-opacity};
+  --card-badge-opacity-dark: #{$card-badge-opacity-dark};
+  --card-badge-opacity-light: #{$card-badge-opacity-light};
+
+  // Imagen
+  --card-image-hover-zoom-scale: #{$card-image-hover-zoom-scale};
+  --card-image-hover-zoom-duration: #{$card-image-hover-zoom-duration};
+  --card-image-hover-zoom-easing: #{$card-image-hover-zoom-easing};
+
+  // Skeleton
+  --card-skeleton-min-height: #{$card-skeleton-min-height};
+  --card-skeleton-animation-duration: #{$card-skeleton-animation-duration};
+  --card-skeleton-background-size: #{$card-skeleton-background-size};
+
+  // Header
+  --card-header-icon-margin-top: #{$card-header-icon-margin-top};
+
+  // Footer
+  --card-footer-border-width: #{$card-footer-border-width};
+}

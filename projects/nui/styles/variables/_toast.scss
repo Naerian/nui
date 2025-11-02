@@ -1,0 +1,181 @@
+// ========================================
+// TOAST - Variables
+// ========================================
+
+// ===== DIMENSIONES =====
+$toast-width: 24rem !default;
+$toast-width-mobile: calc(100vw - 1.5rem) !default;
+$toast-min-height: 3.5rem !default;
+$toast-max-width: 32rem !default;
+$toast-padding: 1rem !default;
+$toast-padding-compact: 0.75rem !default;
+$toast-gap: 0.75rem !default;
+$toast-content-gap: 0.25rem !default;
+
+// ===== BORDES Y RADIOS =====
+$toast-border-radius: 0.5rem !default;
+$toast-border-width: 1px !default;
+$toast-action-radius: 0.25rem !default;
+$toast-button-radius: 0.5rem !default;
+
+// ===== BOTÓN DE CERRAR Y EXPANDIR =====
+$toast-close-button-size: 1.5rem !default;
+$toast-close-text-size: 0.875rem !default;
+
+// ===== ICONOS =====
+$toast-icon-size: 1.5rem !default;
+$toast-icon-size-top: 2rem !default;
+$toast-icon-gap: 0.75rem !default;
+$toast-icon-bg-size: 2.25rem !default;
+
+// ===== TIPOGRAFÍA =====
+$toast-title-size: 0.9375rem !default; // 15px
+$toast-title-weight: 600 !default;
+$toast-title-line-height: 1.4 !default;
+
+$toast-message-size: 0.875rem !default; // 14px
+$toast-message-weight: 400 !default;
+$toast-message-line-height: 1.5 !default;
+
+$toast-content-size: 0.75rem !default; // 12px
+
+$toast-action-size: 0.8125rem !default; // 13px
+$toast-action-weight: 500 !default;
+
+// ===== ESPACIADO =====
+$toast-offset-x: 1rem !default;
+$toast-offset-y: 1rem !default;
+$toast-stack-gap: 0.75rem !default;
+
+// ===== Z-INDEX =====
+$toast-z-index: 999999 !default;
+
+// ===== SOMBRAS =====
+$toast-shadow:
+  0 2px 8px rgba(0, 0, 0, 0.08),
+  0 4px 16px rgba(0, 0, 0, 0.06),
+  0 0 0 1px rgba(0, 0, 0, 0.04) !default;
+
+// ===== PROGRESS BAR =====
+$toast-progress-height: 0.25rem !default;
+$toast-progress-opacity: 0.85 !default;
+
+// ===== ANIMACIONES =====
+$toast-animation-duration: 300ms !default;
+$toast-animation-easing: cubic-bezier(0.4, 0, 0.2, 1) !default;
+$toast-animation-easing-out: cubic-bezier(0.4, 0, 1, 1) !default;
+$toast-animation-easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55) !default;
+$toast-transition-easing: cubic-bezier(0.4, 0, 0.2, 1) !default;
+
+// ===== TRANSICIONES =====
+$toast-transition-duration: 300ms !default;
+$toast-transition-easing: cubic-bezier(0.4, 0, 0.2, 1) !default;
+
+// ===== OPACIDADES =====
+$toast-opacity: 0.98 !default;
+$toast-hover-opacity: 1 !default;
+$toast-disabled-opacity: 0.6 !default;
+$toast-button-opacity: 0.6 !default;
+
+// ===== SWIPE =====
+$toast-swipe-threshold: 100px !default;
+$toast-swipe-opacity-threshold: 0.5 !default;
+
+// ===== RESPONSIVE BREAKPOINTS =====
+$toast-mobile-breakpoint: 640px !default;
+$toast-tablet-breakpoint: 768px !default;
+
+// ===== COLORES BASE (se sobrescriben con mixins de tema) =====
+$toast-bg: rgba(255, 255, 255, 0.95) !default;
+$toast-color: #333 !default;
+$toast-border-color: rgba(0, 0, 0, 0.06) !default;
+$toast-close-btn-color: rgba(0, 0, 0, 0.5) !default;
+$toast-close-btn-hover: rgba(0, 0, 0, 0.8) !default;
+$toast-action-bg: rgba(0, 0, 0, 0.04) !default;
+$toast-action-hover-bg: rgba(0, 0, 0, 0.08) !default;
+
+// ===== STACKING EFFECT =====
+$toast-stack-scale-1: 0.97 !default;
+$toast-stack-scale-2: 0.94 !default;
+$toast-stack-opacity-1: 0.82 !default;
+$toast-stack-opacity-2: 0.7 !default;
+$toast-stack-blur-1: 0.5px !default;
+$toast-stack-blur-2: 1px !default;
+$toast-stack-translate-y-1: -3px !default;
+$toast-stack-translate-y-2: -6px !default;
+
+// ===== CUSTOM PROPERTIES (CSS Variables) =====
+:root {
+  // Dimensiones
+  --nui-toast-width: #{$toast-width};
+  --nui-toast-min-height: #{$toast-min-height};
+  --nui-toast-max-width: #{$toast-max-width};
+  --nui-toast-padding: #{$toast-padding};
+  --nui-toast-gap: #{$toast-gap};
+  --nui-toast-content-gap: #{$toast-content-gap};
+
+  // Bordes
+  --nui-toast-radius: #{$toast-border-radius};
+  --nui-toast-border-width: #{$toast-border-width};
+  --nui-toast-action-radius: #{$toast-action-radius};
+  --nui-toast-button-radius: #{$toast-button-radius};
+
+  // Botones de cerrar y expandir
+  --nui-toast-close-button-size: #{$toast-close-button-size};
+  --nui-toast-close-text-size: #{$toast-close-text-size};
+
+  // Iconos
+  --nui-toast-icon-size: #{$toast-icon-size};
+  --nui-toast-icon-size-top: #{$toast-icon-size-top};
+  --nui-toast-icon-gap: #{$toast-icon-gap};
+  --nui-toast-icon-bg-size: #{$toast-icon-bg-size};
+
+  // Tipografía
+  --nui-toast-title-size: #{$toast-title-size};
+  --nui-toast-title-weight: #{$toast-title-weight};
+  --nui-toast-title-line-height: #{$toast-title-line-height};
+  --nui-toast-message-size: #{$toast-message-size};
+  --nui-toast-message-weight: #{$toast-message-weight};
+  --nui-toast-message-line-height: #{$toast-message-line-height};
+  --nui-toast-action-size: #{$toast-action-size};
+  --nui-toast-action-weight: #{$toast-action-weight};
+  --nui-toast-content-size: #{$toast-content-size};
+
+  // Espaciado
+  --nui-toast-offset-x: #{$toast-offset-x};
+  --nui-toast-offset-y: #{$toast-offset-y};
+  --nui-toast-stack-gap: #{$toast-stack-gap};
+
+  // Z-index
+  --nui-toast-z-index: #{$toast-z-index};
+
+  // Progress bar
+  --nui-toast-progress-height: #{$toast-progress-height};
+  --nui-toast-progress-opacity: #{$toast-progress-opacity};
+
+  // Animaciones
+  --nui-toast-animation-duration: #{$toast-animation-duration};
+  --nui-toast-transition-duration: #{$toast-transition-duration};
+  --nui-toast-transition-easing: #{$toast-transition-easing};
+
+  // Opacidades
+  --nui-toast-opacity: #{$toast-opacity};
+  --nui-toast-hover-opacity: #{$toast-hover-opacity};
+  --nui-toast-button-opacity: #{$toast-button-opacity};
+
+  // Swipe
+  --nui-toast-swipe-threshold: #{$toast-swipe-threshold};
+
+  // Stacking
+  --nui-toast-stack-scale-1: #{$toast-stack-scale-1};
+  --nui-toast-stack-scale-2: #{$toast-stack-scale-2};
+  --nui-toast-stack-opacity-1: #{$toast-stack-opacity-1};
+  --nui-toast-stack-opacity-2: #{$toast-stack-opacity-2};
+  --nui-toast-stack-blur-1: #{$toast-stack-blur-1};
+  --nui-toast-stack-blur-2: #{$toast-stack-blur-2};
+  --nui-toast-stack-translate-y-1: #{$toast-stack-translate-y-1};
+  --nui-toast-stack-translate-y-2: #{$toast-stack-translate-y-2};
+
+  // Sombras
+  --nui-toast-shadow: #{$toast-shadow};
+}

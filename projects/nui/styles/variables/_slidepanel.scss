@@ -1,0 +1,13 @@
+// =======================
+// SLIDE PANEL - Variables Específicas del Componente
+// =======================
+
+:root {
+  --slidepanel-header-padding: #{$spacing-md};
+  --slidepanel-title-size: #{$font-size-lg};
+  --slidepanel-title-weight: #{$font-weight-semibold};
+
+  --slidepanel-content-padding: #{$spacing-md};
+
+  --slidepanel-footer-padding: #{$spacing-md};
+}

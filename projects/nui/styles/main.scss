@@ -1,0 +1,34 @@
+//------------------------------------------------------------
+// ## 1. Configuración base
+//------------------------------------------------------------
+@import "config"; // Constantes globales primero
+@import "functions"; // Funciones SCSS (deben ir antes de mixins)
+
+//------------------------------------------------------------
+// ## 2. Variables y tokens de diseño
+//------------------------------------------------------------
+@import "variables/variables"; // Variables ANTES de usarse en mixins/componentes
+
+//------------------------------------------------------------
+// ## 3. Mixins (usan variables)
+//------------------------------------------------------------
+@import "mixins"; // Mixins generales que usan las variables
+
+//------------------------------------------------------------
+// ## 4. Temas (generan CSS variables)
+//------------------------------------------------------------
+@import "theme-config"; // Configuración de temas
+@import "theme"; // Generación de temas (usa theme-config)
+
+//------------------------------------------------------------
+// ## 5. Estilos base y tipografía
+//------------------------------------------------------------
+@import "fonts"; // @font-face declarations
+@import "base"; // Reset/normalize + estilos base HTML
+@import "typography"; // Estilos tipográficos globales
+@import "forms"; // Estilos base de formularios
+
+//------------------------------------------------------------
+// ## 6. Componentes globales (CDK Overlay, etc.)
+//------------------------------------------------------------
+@import "components/components"; // Estilos globales de componentes

@@ -1,0 +1,26 @@
+// ==========================================
+// PRESET: MINIMAL (Minimalista Refinado)
+// ==========================================
+// Paleta minimal con colores sutiles perfecta para portfolios,
+// blogs, estudios de diseño y proyectos que buscan elegancia
+
+// Colores principales - Minimal sofisticado
+$color-primary: #18181b !default;    // Zinc/Casi negro - Principal
+$color-secondary: #71717a !default;  // Zinc medio - Secundario
+$color-accent: #a855f7 !default;     // Púrpura vibrante - Acento (único toque de color)
+
+// Colores semánticos
+$color-success: #22c55e !default;    // Verde limpio - Éxito
+$color-info: #3b82f6 !default;       // Azul limpio - Información
+$color-warning: #f59e0b !default;    // Amarillo limpio - Advertencia
+$color-danger: #ef4444 !default;     // Rojo limpio - Peligro
+
+// Dark theme versions (inversión elegante)
+$color-primary-dark: #fafafa !default;    // Casi blanco - Principal
+$color-secondary-dark: #a1a1aa !default;  // Zinc claro - Secundario
+$color-accent-dark: #c084fc !default;     // Púrpura más claro - Acento
+
+$color-success-dark: #4ade80 !default;
+$color-info-dark: #60a5fa !default;
+$color-warning-dark: #fbbf24 !default;
+$color-danger-dark: #f87171 !default;

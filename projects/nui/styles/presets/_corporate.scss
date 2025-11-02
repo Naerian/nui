@@ -1,0 +1,26 @@
+// ==========================================
+// PRESET: CORPORATE (Azul Profesional)
+// ==========================================
+// Paleta corporativa tradicional perfecta para empresas,
+// banca, seguros y proyectos que buscan transmitir confianza
+
+// Colores principales - Corporativo clásico
+$color-primary: #2563eb !default;    // Azul corporativo - Principal
+$color-secondary: #64748b !default;  // Slate neutral - Secundario
+$color-accent: #8b5cf6 !default;     // Púrpura profesional - Acento
+
+// Colores semánticos
+$color-success: #059669 !default;    // Verde esmeralda - Éxito
+$color-info: #0284c7 !default;       // Azul cielo - Información
+$color-warning: #d97706 !default;    // Naranja ámbar - Advertencia
+$color-danger: #dc2626 !default;     // Rojo - Peligro
+
+// Dark theme versions (más brillantes para contraste)
+$color-primary-dark: #60a5fa !default;    // Azul más claro
+$color-secondary-dark: #94a3b8 !default;  // Slate más claro
+$color-accent-dark: #a78bfa !default;     // Púrpura más claro
+
+$color-success-dark: #10b981 !default;
+$color-info-dark: #38bdf8 !default;
+$color-warning-dark: #f59e0b !default;
+$color-danger-dark: #f87171 !default;

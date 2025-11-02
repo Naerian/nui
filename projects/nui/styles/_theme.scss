@@ -1,0 +1,18 @@
+@import "themes/light";
+@import "themes/dark";
+
+// ==========================================
+// THEME ORCHESTRATION
+// ==========================================
+// Este archivo orquesta la aplicación de temas light y dark
+// Los detalles de cada tema están en styles/themes/_light.scss y _dark.scss
+
+:root {
+  // LIGHT THEME (tema por defecto)
+  @include apply-light-theme;
+}
+
+.theme-dark {
+  // DARK THEME
+  @include apply-dark-theme;
+}

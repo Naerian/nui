@@ -1,0 +1,26 @@
+// ==========================================
+// PRESET: WARM (Cálido y Vibrante)
+// ==========================================
+// Paleta moderna con tonos cálidos perfecta para e-commerce,
+// lifestyle, apps consumer y proyectos que buscan transmitir energía
+
+// Colores principales - Tonos cálidos
+$color-primary: #ff6b35 !default;    // Coral/Naranja quemado - Principal
+$color-secondary: #f7931e !default;  // Amarillo dorado - Secundario
+$color-accent: #c1121f !default;     // Rojo intenso - Acento
+
+// Colores semánticos
+$color-success: #2a9d8f !default;    // Verde azulado - Éxito
+$color-info: #457b9d !default;       // Azul océano - Información
+$color-warning: #f77f00 !default;    // Naranja brillante - Advertencia
+$color-danger: #c1121f !default;     // Rojo intenso - Peligro (igual que accent)
+
+// Dark theme versions (más brillantes)
+$color-primary-dark: #ff8c5a !default;    // Coral más claro
+$color-secondary-dark: #ffa64d !default;  // Dorado más brillante
+$color-accent-dark: #ff4458 !default;     // Rojo más brillante
+
+$color-success-dark: #3fbfaf !default;
+$color-info-dark: #6fa1c7 !default;
+$color-warning-dark: #ff9d33 !default;
+$color-danger-dark: #ff4458 !default;

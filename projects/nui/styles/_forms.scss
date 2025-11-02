@@ -1,0 +1,100 @@
+@import "theme-config";
+@import "config";
+@import "mixins";
+
+label {
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+  display: block;
+  cursor: default;
+  @include transition(color 0.2s ease-in-out);
+
+  label:has(+ input:focus),
+  label:has(~ input:focus),
+  &--focused {
+    color: var(--color-accent);
+  }
+}
+
+// Consideración adicional para campos requeridos
+label abbr {
+  color: var(--color-danger);
+  font-weight: var(--font-weight-bold);
+  margin-left: var(--spacing-xs);
+  text-decoration: none;
+  cursor: default;
+}
+
+// Estilo para el icono creado con la directiva `ClearableDirective`
+.nui-clear-field-button {
+  transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
+
+  @each $size-key, $input-size in $component-heights {
+    &--#{$size-key} {
+      width: var(--component-height-#{$size-key});
+      height: var(--component-height-#{$size-key});
+      font-size: calc(var(--font-size-#{$size-key}) * 1.5);
+      color: var(--icon-field-color);
+      opacity: 0.3;
+      text-align: center;
+    }
+  }
+
+  &:focus,
+  &:active {
+    @include outline-focus;
+    border-radius: var(--border-radius-md);
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 0.85;
+  }
+
+  // Mejorar disabled state si lo necesitas
+  &:disabled,
+  &[aria-disabled="true"] {
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
+
+  // Mejorar posicionamiento para diferentes contextos
+  &[style*="position: absolute"] {
+    // Estilos específicos para posicionamiento absoluto
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    min-width: 44px; // Accesibilidad táctil
+    min-height: 44px;
+  }
+}
+
+// Para el contenedor que usa la directiva
+.has-clear-button {
+  position: relative;
+
+  // Añadir padding a inputs para el botón
+  input,
+  textarea,
+  select {
+    padding-right: calc(var(--component-height-md) + 8px);
+  }
+
+  // Para diferentes tamaños
+  @each $size-key, $input-size in $component-heights {
+    &--#{$size-key} {
+      input,
+      textarea,
+      select {
+        padding-right: calc(var(--component-height-#{$size-key}) + 8px);
+      }
+    }
+  }
+}

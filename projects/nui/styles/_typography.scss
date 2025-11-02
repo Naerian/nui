@@ -1,0 +1,88 @@
+@import "mixins";
+@import "theme-config";
+
+// ========================================
+// BASE TYPOGRAPHY
+// ========================================
+
+html,
+:host {
+  font-family: var(--font-family);
+  // Mejora la calidad de renderizado de texto
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// ========================================
+// HEADINGS
+// ========================================
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+  line-height: 1.2;
+  color: var(--color-text-heading);
+}
+
+h1 {
+  @include heading(h1);
+}
+
+h2 {
+  @include heading(h2);
+}
+
+h3 {
+  @include heading(h3);
+}
+
+h4 {
+  @include heading(h4);
+}
+
+h5 {
+  @include heading(h5);
+}
+
+h6 {
+  @include heading(h6);
+}
+
+// ========================================
+// TEXT ELEMENTS
+// ========================================
+
+small {
+  font-size: var(--font-size-s); // 12px
+  color: var(--color-text-muted);
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--spacing-s);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    text-decoration 0.2s ease;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  // Accesibilidad: focus visible para navegación por teclado
+  &:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}

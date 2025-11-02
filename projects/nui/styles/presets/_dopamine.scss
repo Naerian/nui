@@ -1,0 +1,26 @@
+// ==========================================
+// PRESET: DOPAMINE (Maximalista Alegre)
+// ==========================================
+// Paleta vibrante con colores "felices" perfecta para apps educativas,
+// wellness, creatividad y proyectos que buscan transmitir optimismo
+
+// Colores principales - Maximalismo dopamina
+$color-primary: #84cc16 !default;    // Lime brillante - Principal
+$color-secondary: #f59e0b !default;  // Amber vivo - Secundario
+$color-accent: #ec4899 !default;     // Pink intenso - Acento
+
+// Colores semánticos
+$color-success: #22c55e !default;    // Verde brillante - Éxito
+$color-info: #06b6d4 !default;       // Cyan brillante - Información
+$color-warning: #f59e0b !default;    // Amber vivo - Advertencia (igual que secondary)
+$color-danger: #ef4444 !default;     // Rojo coral - Peligro
+
+// Dark theme versions (mantienen alegría)
+$color-primary-dark: #a3e635 !default;    // Lime más claro
+$color-secondary-dark: #fbbf24 !default;  // Amber más brillante
+$color-accent-dark: #f472b6 !default;     // Pink más claro
+
+$color-success-dark: #4ade80 !default;
+$color-info-dark: #22d3ee !default;
+$color-warning-dark: #fbbf24 !default;
+$color-danger-dark: #f87171 !default;

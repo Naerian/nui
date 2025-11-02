@@ -1,0 +1,102 @@
+@import "@angular/cdk/overlay-prebuilt.css";
+@import "theme";
+@import "mixins";
+
+// ==========================================
+// MODAL OVERLAY & BACKDROP STYLES
+// ==========================================
+// Estilos globales para el sistema de modal custom con CDK
+
+// Backdrop (fondo oscuro)
+.nui-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-backdrop);
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+// Panel del modal
+.nui-modal-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  animation: scaleIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none; // El modal-box maneja los eventos
+
+  > * {
+    pointer-events: auto;
+  }
+}
+
+.nui-modal-dialog-backdrop {
+  @include overlay-backdrop();
+}
+
+// Animación de entrada (fade-in)
+.nui-modal-dialog-backdrop.cdk-overlay-backdrop-showing {
+  opacity: 1;
+}
+
+// Estado inicial (antes de mostrar)
+.nui-modal-dialog-backdrop:not(.cdk-overlay-backdrop-showing) {
+  opacity: 0;
+}
+
+// Animaciones
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Clases de utilidad para animaciones custom
+.nui-modal-animate-fade {
+  .nui-modal-panel {
+    animation: fadeIn 0.2s ease-out !important;
+  }
+}
+
+.nui-modal-animate-slide {
+  .nui-modal-panel {
+    animation: slideDown 0.3s ease-out !important;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .nui-modal-panel {
+    padding: var(--spacing-md, 1.2rem);
+  }
+}

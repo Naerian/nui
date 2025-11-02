@@ -1,0 +1,1512 @@
+// ========================================
+// TYPOGRAPHY MIXINS
+// ========================================
+
+/// Mixin para aplicar estilos tipográficos de encabezados h1-h6
+/// Versión optimizada que usa CSS variables y lógica simplificada
+/// @param {String} $level - Nivel del heading (h1, h2, h3, h4, h5, h6)
+/// @example
+///   @include heading(h1);
+@mixin heading($level) {
+  font-size: var(--font-size-#{$level});
+  line-height: var(--line-height-#{$level});
+  font-weight: var(
+    --font-weight-#{if(index((h1, h2, h3), $level), "bold", "semibold")}
+  );
+}
+
+// ========================================
+// COMPONENT SIZE MIXINS
+// ========================================
+
+/// Mixin genérico para generar todas las variantes de tamaño de un componente
+/// @param {String} $component - Nombre del componente
+/// @param {List} $sizes - Lista de tamaños (default: xs, s, sm, md, lg, xl)
+@mixin generate-component-sizes($component, $sizes: (xs, s, sm, md, lg, xl)) {
+  @each $size in $sizes {
+    &.#{$component}--#{$size} {
+      @include component-size($size);
+    }
+  }
+}
+
+/// Mixin para definir tamaños de componentes
+/// @param {String} $size - Tamaño del componente (xs, s, md, lg, xl)
+@mixin component-size($size) {
+  height: var(
+    --component-height-#{$size},
+    #{map-get($component-heights, $size)}
+  );
+  min-height: var(
+    --component-height-#{$size},
+    #{map-get($component-heights, $size)}
+  );
+  padding: var(
+    --component-padding-#{$size},
+    #{map-get($component-paddings, $size)}
+  );
+  font-size: var(
+    --component-font-size-#{$size},
+    #{map-get($component-font-sizes, $size)}
+  );
+}
+
+/// Mixin para definir tamaños de componentes de textarea
+/// @param {String} $size - Tamaño del textarea (xs, s, md, lg, xl)
+@mixin component-textarea-size($size) {
+  padding: var(
+    --component-padding-#{$size},
+    #{map-get($component-paddings, $size)}
+  );
+  font-size: var(
+    --component-font-size-#{$size},
+    #{map-get($component-font-sizes, $size)}
+  );
+}
+
+/// Mixin para aplicar tamaño de fuente según el tamaño del componente
+/// @param {String} $size - Tamaño del componente (xs, s, md, lg, xl)
+@mixin component-font-size($size) {
+  font-size: var(
+    --component-font-size-#{$size},
+    #{map-get($component-font-sizes, $size)}
+  );
+}
+
+/// Mixin para aplicar line-height según el tamaño del componente
+/// @param {String} $size - Tamaño del componente (xs, s, md, lg, xl)
+@mixin component-line-height($size) {
+  line-height: var(
+    --component-line-height-#{$size},
+    #{map-get($component-line-heights, $size)}
+  );
+}
+
+/// Mixin para aplicar tamaño de fuente a los iconos de los componentes
+/// @param {String} $size - Tamaño del icono (xs, s, md, lg, xl)
+@mixin component-icon-size($size) {
+  height: var(
+    --component-height-#{$size},
+    #{map-get($component-heights, $size)}
+  );
+  min-height: var(
+    --component-height-#{$size},
+    #{map-get($component-heights, $size)}
+  );
+  padding: var(
+    --component-padding-#{$size},
+    #{map-get($component-paddings, $size)}
+  );
+  font-size: calc(
+    var(
+        --component-font-size-#{$size},
+        #{map-get($component-font-sizes, $size)}
+      ) *
+      1.2
+  );
+  line-height: calc(
+    var(
+        --component-font-size-#{$size},
+        #{map-get($component-font-sizes, $size)}
+      ) *
+      1.2
+  );
+}
+
+/// Mixin para aplicar tamaño al spinner
+/// @param {String} $size - Tamaño del spinner (xs, s, md, lg, xl)
+@mixin spinner-size($size) {
+  .nui-spinner-circle--#{$size} {
+    width: var(--spinner-size-#{$size}, #{map-get($spinner-sizes, $size)});
+    height: var(--spinner-size-#{$size}, #{map-get($spinner-sizes, $size)});
+    border-width: var(
+      --spinner-border-width-#{$size},
+      #{map-get($spinner-border-widths, $size)}
+    );
+  }
+
+  .nui-spinner-wrapper--#{$size} {
+    gap: var(--spinner-gap-#{$size}, #{map-get($spinner-gaps, $size)});
+  }
+
+  .nui-spinner-label--#{$size} {
+    font-size: var(
+      --spinner-label-font-size-#{$size},
+      #{map-get($spinner-label-font-sizes, $size)}
+    );
+  }
+}
+
+/// Mixin para definir la altura de las barras de progreso
+/// @param {String} $size - Tamaño de la barra (xs, s, sm, md, lg, xl)
+@mixin progress-bar-height($size) {
+  height: var(
+    --progress-bar-height-#{$size},
+    #{map-get($progress-bar-heights, $size)}
+  );
+}
+
+/// Mixin para aplicar tamaño al switch (type="switch")
+/// @param {String} $size - Tamaño del switch (xs, s, sm, md, lg, xl)
+@mixin switch-track-size($size) {
+  width: var(
+    --switch-track-width-#{$size},
+    #{map-get($switch-track-widths, $size)}
+  );
+  height: var(
+    --switch-track-height-#{$size},
+    #{map-get($switch-track-heights, $size)}
+  );
+}
+
+/// Mixin para aplicar tamaño al thumb del switch (type="switch")
+/// @param {String} $size - Tamaño del thumb (xs, s, sm, md, lg, xl)
+@mixin switch-thumb-size($size) {
+  width: var(
+    --switch-thumb-size-#{$size},
+    #{map-get($switch-thumb-sizes, $size)}
+  );
+  height: var(
+    --switch-thumb-size-#{$size},
+    #{map-get($switch-thumb-sizes, $size)}
+  );
+}
+
+/// Mixin completo para generar un switch size con posicionamiento y transform calculados
+/// Calcula automáticamente el translateX basándose en: track-width - thumb-size - (2 * offset)
+/// @param {String} $size - Tamaño del switch (xs, s, sm, md, lg, xl)
+/// @example
+///   .nui-switch--xs { @include switch-size(xs); }
+@mixin switch-size($size) {
+  $track-width: map-get($switch-track-widths, $size);
+  $thumb-size: map-get($switch-thumb-sizes, $size);
+  $offset: if(
+    $size == xs,
+    $switch-thumb-offset-xs,
+    $switch-thumb-offset-default
+  );
+
+  // Calcular el translateX: ancho del track - tamaño del thumb - (2 * offset) - border-width * 2
+  $translate-x: calc(
+    #{$track-width} - #{$thumb-size} - (2 * #{$offset}) -
+      (2 * #{$switch-track-border-width})
+  );
+
+  .nui-switch__track {
+    @include switch-track-size($size);
+  }
+
+  .nui-switch__thumb {
+    @include switch-thumb-size($size);
+    top: $offset;
+    left: $offset;
+  }
+
+  &.nui-switch--checked .nui-switch__thumb {
+    transform: translateX($translate-x);
+  }
+}
+
+// ========================================
+// LAYOUT MIXINS - FLEXBOX
+// ========================================
+
+/// Mixin principal de flexbox parametrizado
+/// Reemplaza a los 11 mixins flex-* anteriores con un solo mixin flexible
+/// @param {String} $direction - Dirección del flex (row, column) [default: row]
+/// @param {String} $align - Alineación de items (flex-start, center, flex-end, stretch, baseline) [default: stretch]
+/// @param {String} $justify - Justificación del contenido (flex-start, center, flex-end, space-between, space-around, space-evenly) [default: flex-start]
+/// @example
+///   @include flex(row, center, space-between);
+///   @include flex(column, flex-start, center);
+@mixin flex($direction: row, $align: stretch, $justify: flex-start) {
+  display: flex;
+  @if $direction != row {
+    flex-direction: $direction;
+  }
+  @if $align != stretch {
+    align-items: $align;
+  }
+  @if $justify != flex-start {
+    justify-content: $justify;
+  }
+}
+
+// ========================================
+// BACKWARD COMPATIBILITY ALIASES
+// ========================================
+// Mantienen compatibilidad con código existente
+// Usar el nuevo mixin flex() en código nuevo
+
+/// @deprecated Usa @include flex(row, flex-start, flex-start)
+@mixin flex-start-start {
+  @include flex(row, flex-start, flex-start);
+}
+
+/// @deprecated Usa @include flex(row, center, center)
+@mixin flex-center {
+  @include flex(row, center, center);
+}
+
+/// @deprecated Usa @include flex(row, flex-start, space-between)
+@mixin flex-start-between {
+  @include flex(row, flex-start, space-between);
+}
+
+/// @deprecated Usa @include flex(row, center, space-between)
+@mixin flex-center-between {
+  @include flex(row, center, space-between);
+}
+
+/// @deprecated Usa @include flex(row, center)
+@mixin flex-row-center {
+  @include flex(row, center);
+}
+
+/// @deprecated Usa @include flex(row, center, flex-start)
+@mixin flex-row-center-start {
+  @include flex(row, center, flex-start);
+}
+
+/// @deprecated Usa @include flex(column, center)
+@mixin flex-col-center {
+  @include flex(column, center);
+}
+
+/// @deprecated Usa @include flex(column, center, center)
+@mixin flex-col-center-center {
+  @include flex(column, center, center);
+}
+
+/// @deprecated Usa @include flex(column, flex-start, center)
+@mixin flex-col-start-center {
+  @include flex(column, flex-start, center);
+}
+
+/// @deprecated Usa @include flex(column, flex-start)
+@mixin flex-col-start {
+  @include flex(column, flex-start);
+}
+
+/// @deprecated Usa @include flex(column, stretch) o simplemente @include flex(column)
+@mixin flex-col-stretch {
+  @include flex(column, stretch);
+}
+
+// ========================================
+// STATE MIXINS
+// ========================================
+
+/// Mixin para aplicar transiciones CSS
+/// Versión moderna sin prefijos vendor (todos los navegadores modernos soportan transition)
+/// Si necesitas soporte para navegadores legacy, usa Autoprefixer
+/// @param {String} $args - Propiedades de transición
+/// @example
+///   @include transition(all 0.2s ease-in-out);
+///   @include transition(opacity 0.3s, transform 0.3s);
+@mixin transition($args...) {
+  transition: $args;
+}
+
+/// Mixin para aplicar estilo a un elemento deshabilitado
+/// Versión mejorada sin !important y con mejor accesibilidad
+/// @param {Number} $opacity - Opacidad del elemento deshabilitado [default: 0.5]
+/// @example
+///   @include disabled;
+///   @include disabled(0.6);
+@mixin disabled($opacity: 0.5) {
+  opacity: var(--disabled-opacity, $opacity);
+  cursor: not-allowed;
+  pointer-events: none;
+  filter: grayscale(30%);
+
+  // Mantén accesibilidad de focus - solo ajusta color, no elimines outline
+  &:focus-visible {
+    outline-color: var(--outline-disabled-color, var(--color-gray-400));
+    outline-width: var(--border-width-xs);
+    outline-style: solid;
+  }
+}
+
+// ========================================
+// UTILITY MIXINS
+// ========================================
+
+/// Mixin para truncar texto con ellipsis
+/// @example
+///   @include ellipsis-text;
+@mixin ellipsis-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/// Mixin para aplicar un foco de contorno
+/// @param {Color} $color - Color del outline [default: var(--outline-color)]
+/// @example
+///   @include outline-focus;
+///   @include outline-focus(#14b8a6);
+@mixin outline-focus($color: var(--outline-color)) {
+  outline-color: $color;
+  outline-style: solid;
+  outline-width: var(--border-width-xs);
+  box-shadow: 0px 0px 2px var(--border-width-xs) var(--focus-ring-color);
+}
+
+/// Mixin para aplicar outline de error en campos
+/// @example
+///   @include outline-field-error;
+@mixin outline-field-error {
+  box-shadow: 0px 0px 2px var(--border-width-xs) var(--color-danger);
+}
+
+/// Mixin para aplicar un borde de error
+/// @example
+///   @include field-error;
+@mixin field-error {
+  border: var(--border-width-xs) solid var(--color-danger);
+}
+
+// ========================================
+// RESPONSIVE MIXINS
+// ========================================
+
+/// Media query para pantallas extra pequeñas (< 576px)
+/// @example
+///   @include media-xs { font-size: 12px; }
+@mixin media-xs {
+  @media (max-width: #{$breakpoint-sm - 1}) {
+    @content;
+  }
+}
+
+/// Media query para pantallas pequeñas (>= 576px)
+/// @example
+///   @include media-sm { font-size: 14px; }
+@mixin media-sm {
+  @media (min-width: #{$breakpoint-sm}) {
+    @content;
+  }
+}
+
+/// Media query para pantallas medianas (>= 768px)
+/// @example
+///   @include media-md { font-size: 16px; }
+@mixin media-md {
+  @media (min-width: #{$breakpoint-md}) {
+    @content;
+  }
+}
+
+/// Media query para pantallas grandes (>= 992px)
+/// @example
+///   @include media-lg { font-size: 18px; }
+@mixin media-lg {
+  @media (min-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
+/// Media query para pantallas extra grandes (>= 1200px)
+/// @example
+///   @include media-xl { font-size: 20px; }
+@mixin media-xl {
+  @media (min-width: #{$breakpoint-xl}) {
+    @content;
+  }
+}
+
+/// Media query para pantallas extra extra grandes (>= 1400px)
+/// @example
+///   @include media-xxl { font-size: 22px; }
+@mixin media-xxl {
+  @media (min-width: #{$breakpoint-xxl}) {
+    @content;
+  }
+}
+
+// ========================================
+// CHIP MIXINS
+// ========================================
+
+/// Mixin para restaurar padding en chips con imagen y removibles
+/// @param {String} $side - 'start' o 'end' para indicar qué lado restaurar
+/// @example
+///   @include chip-restore-padding-for-remove('end');
+@mixin chip-restore-padding-for-remove($side) {
+  $sizes: xs, s, sm, md, lg, xl;
+
+  @each $size in $sizes {
+    &.nui-chip--#{$size} {
+      padding-inline-#{$side}: var(--chip-padding-x-#{$size});
+    }
+  }
+}
+
+/// Mixin para definir estilos solid/default de chips (sin variante específica)
+/// @example
+///   @include chip-variant-solid { background: red; }
+@mixin chip-variant-solid {
+  &:not(.nui-chip--outline):not(.nui-chip--ghost),
+  &.nui-chip--solid {
+    @content;
+  }
+}
+
+/// Mixin para generar estilos de tamaño
+/// @param {String} $size - Tamaño del chip (xs, s, sm, md, lg, xl)
+/// @example
+///   @include chip-size(xs);
+@mixin chip-size($size) {
+  padding-block: var(--chip-padding-y-#{$size});
+  padding-inline: var(--chip-padding-x-#{$size});
+  font-size: var(--chip-font-size-#{$size});
+  border-radius: var(--chip-border-radius-#{$size});
+
+  --chip-image-width: var(--chip-image-width-#{$size});
+  --chip-image-height: var(--chip-image-height-#{$size});
+
+  // Padding reducido para chips con imagen
+  &.nui-chip--has-image {
+    padding-block: calc(var(--chip-padding-y-#{$size}) / 2);
+    padding-inline: calc(var(--chip-padding-x-#{$size}) / 2);
+
+    &.nui-chip--image-align-left {
+      @include chip-restore-padding-for-remove("end");
+    }
+
+    &.nui-chip--image-align-right {
+      @include chip-restore-padding-for-remove("start");
+    }
+  }
+}
+
+// ========================================
+// OVERLAY & BACKDROP MIXINS
+// ========================================
+
+/// Mixin para crear un backdrop overlay
+/// Utiliza las variables CSS del design system para theming consistente
+/// @example
+///   .my-backdrop { @include overlay-backdrop(); }
+@mixin overlay-backdrop() {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-backdrop);
+
+  // Optimizaciones para animación fluida a 60fps (inspirado en Material-UI Drawer)
+  // Usa easeOut para entrada suave y sharp para salida rápida (sincronizado con slidepanel)
+  transition: opacity 225ms cubic-bezier(0, 0, 0.2, 1);
+
+  // GPU acceleration optimizations
+  will-change: opacity; // Hints browser about opacity changes
+  transform: translateZ(0); // Forces GPU layer creation
+  backface-visibility: hidden; // Prevents flickering during transitions
+  -webkit-font-smoothing: antialiased; // Smooth text rendering during animation
+  contain: strict; // Isolates backdrop rendering (better perf)
+}
+
+// ========================================
+// PROGRESS BAR MIXINS
+// ========================================
+
+// Mixin para generar estilos de color
+@mixin progress-bar-theme($color) {
+  --pb-fill-bg: var(--progress-bar-#{$color}-fill-bg);
+  --pb-fill-hover-bg: var(--progress-bar-#{$color}-fill-hover-bg);
+  --pb-track-bg: var(--progress-bar-#{$color}-track-bg);
+  --pb-track-border: var(--progress-bar-#{$color}-track-border);
+  --pb-text: var(--progress-bar-#{$color}-text);
+  --pb-value-text: var(--progress-bar-#{$color}-value-text);
+  --pb-label-text: var(--progress-bar-#{$color}-label-text);
+}
+// ========================================
+
+// =======================================
+// BUTTON GROUP MIXINS
+// ========================================
+
+/// Mixin para generar variantes de color del Button Group
+/// Reduce la repetición de código y facilita la extensión
+/// @param {String} $variant - Variante del grupo (solid, outline, ghost)
+/// @param {String} $color - Color base (primary, success, etc.)
+@mixin button-group-colors($variant, $color) {
+  &.nui-button-group--#{$variant}.nui-button-group--#{$color}:not(
+      .nui-button-group--segmented
+    ) {
+    border-color: var(--button-group-#{$color}-#{$variant}-box-border);
+    .nui-button-group__option {
+      color: var(--button-group-#{$color}-#{$variant}-inactive-text);
+      background-color: var(--button-group-#{$color}-#{$variant}-inactive-bg);
+      border-color: var(--button-group-#{$color}-#{$variant}-inactive-border);
+
+      // Estados hover en modo "inactive" (no disabled, no selected)
+      &:not(.nui-button-group__option--disabled):not(
+          .nui-button-group__option--selected
+        ):hover {
+        background-color: var(
+          --button-group-#{$color}-#{$variant}-inactive-hover-bg
+        );
+        color: var(--button-group-#{$color}-#{$variant}-inactive-text);
+        border-color: var(--button-group-#{$color}-#{$variant}-inactive-border);
+      }
+
+      // Estilos de focus
+      &:focus-visible {
+        outline: 2px solid var(--color-#{$color}-tint-65);
+        outline-offset: -2px;
+      }
+    }
+
+    .nui-button-group__option--selected {
+      background-color: var(--button-group-#{$color}-#{$variant}-bg);
+      color: var(--button-group-#{$color}-#{$variant}-text);
+      border-color: var(--button-group-#{$color}-#{$variant}-border);
+
+      // Estados hover en modo "checked" (no disabled)
+      &:hover:not(.nui-button-group__option--disabled) {
+        background-color: var(--button-group-#{$color}-#{$variant}-hover-bg);
+        color: var(--button-group-#{$color}-#{$variant}-text);
+        border-color: var(--button-group-#{$color}-#{$variant}-border);
+      }
+    }
+  }
+}
+
+/// Mixin para variantes de color del Button Group en modo segmented
+/// Genera estilos para .nui-button-group--segmented con variantes de color
+/// @param {String} $variant - Variante del grupo (solid, outline, ghost)
+/// @param {String} $color - Color base (primary, success, etc.)
+@mixin button-group-segmented-colors($variant, $color) {
+  &.nui-button-group--#{$variant}.nui-button-group--#{$color}.nui-button-group--segmented {
+    border-color: var(--button-group-#{$color}-#{$variant}-box-border);
+
+    .nui-button-group__option {
+      color: var(--button-group-#{$color}-#{$variant}-inactive-text);
+      background-color: var(--button-group-#{$color}-#{$variant}-inactive-bg);
+      border-color: var(--button-group-#{$color}-#{$variant}-inactive-border);
+
+      // Estados hover en modo "inactive" (no disabled, no selected)
+      &:not(.nui-button-group__option--disabled):not(
+          .nui-button-group__option--selected
+        ):hover {
+        background-color: var(
+          --button-group-#{$color}-#{$variant}-inactive-hover-bg
+        );
+        color: var(--button-group-#{$color}-#{$variant}-inactive-text);
+        border-color: var(--button-group-#{$color}-#{$variant}-inactive-border);
+      }
+
+      // Estilos de focus
+      &:focus-visible {
+        outline: 2px solid var(--color-#{$color}-tint-65);
+        outline-offset: -2px;
+      }
+    }
+
+    .nui-button-group__option--selected {
+      background-color: var(--button-group-#{$color}-#{$variant}-bg);
+      color: var(--button-group-#{$color}-#{$variant}-text);
+      border-color: var(--button-group-#{$color}-#{$variant}-border);
+
+      // Estados hover en modo "checked" (no disabled)
+      &:hover:not(.nui-button-group__option--disabled) {
+        background-color: var(--button-group-#{$color}-#{$variant}-hover-bg);
+        color: var(--button-group-#{$color}-#{$variant}-text);
+        border-color: var(--button-group-#{$color}-#{$variant}-border);
+      }
+    }
+  }
+}
+// ========================================
+
+// =======================================
+// SWITCH MIXINS
+// ========================================
+
+/// Mixin para generar variantes de color del Switch
+/// Reduce la repetición de código en ~70%
+/// @param {String} $color - Color del switch (primary, success, danger, etc.)
+@mixin switch-colors($color) {
+  &--#{$color} {
+    // Estilos para el track cuando está checked
+    &.nui-switch--checked .nui-switch__track {
+      background-color: var(--switch-#{$color}-color);
+      border-color: var(--switch-#{$color}-color);
+
+      // Hover styles when checked
+      &:hover {
+        background-color: var(--switch-#{$color}-color-hover);
+        border-color: var(--switch-#{$color}-color-hover);
+      }
+    }
+
+    &:focus-visible {
+      .nui-switch__track-wrapper .nui-switch__track {
+        outline: 2px solid var(--color-#{$color}-tint-65);
+        outline-offset: -2px;
+      }
+    }
+  }
+}
+
+/// Mixin para variantes de botón del Switch (solid, outline, ghost)
+/// Optimiza las 3 variantes con un solo mixin parametrizado
+/// @param {String} $variant - Variante del botón (solid, outline, ghost)
+/// @param {String} $color - Color del switch (primary, success, danger, etc.)
+@mixin switch-button-variant($variant, $color) {
+  &.nui-switch--#{$variant}.nui-switch--#{$color} {
+    .nui-switch__button {
+      background-color: var(--switch-#{$color}-button-#{$variant}-inactive-bg);
+      color: var(--switch-#{$color}-button-#{$variant}-inactive-text);
+      border-color: var(--switch-#{$color}-button-#{$variant}-inactive-border);
+    }
+
+    // Estados hover en modo "inactive" (no disabled, no checked)
+    &:not(.nui-switch--disabled, .nui-switch--checked):hover {
+      .nui-switch__button {
+        background-color: var(
+          --switch-#{$color}-button-#{$variant}-inactive-hover-bg
+        );
+        color: var(--switch-#{$color}-button-#{$variant}-inactive-text);
+        border-color: var(
+          --switch-#{$color}-button-#{$variant}-inactive-border
+        );
+      }
+    }
+    // Estados checked
+    &.nui-switch--checked {
+      .nui-switch__button {
+        background-color: var(--switch-#{$color}-button-#{$variant}-bg);
+        color: var(--switch-#{$color}-button-#{$variant}-text);
+        border-color: var(--switch-#{$color}-button-#{$variant}-border);
+      }
+
+      // Estados hover en modo "checked" (no disabled)
+      &:not(.nui-switch--disabled):hover {
+        .nui-switch__button {
+          background-color: var(--switch-#{$color}-button-#{$variant}-hover-bg);
+          color: var(--switch-#{$color}-button-#{$variant}-text);
+          border-color: var(--switch-#{$color}-button-#{$variant}-border);
+        }
+      }
+    }
+
+    &:focus-visible {
+      .nui-switch__button {
+        outline: 2px solid var(--color-#{$color}-tint-65);
+        outline-offset: -2px;
+      }
+    }
+  }
+}
+
+// ========================================
+// BREADCRUMB MIXINS
+// ========================================
+
+/// Mixin para generar temas de Breadcrumb
+/// Elimina la repetición masiva de código en ~75%
+/// @param {String} $color - Color del tema (primary, secondary, accent, etc.)
+@mixin breadcrumb-theme($color) {
+  // Estilos base del breadcrumb con el tema específico
+  &--#{$color} {
+    .nui-breadcrumb__item {
+      color: var(--color-#{$color});
+
+      &--active,
+      &:hover:not(&--active),
+      &:focus:not(&--active):not(&--disabled),
+      &:active:not(&--active):not(&--disabled) {
+        background-color: var(--color-#{$color}-tint-95);
+        color: var(--color-#{$color});
+        outline: none;
+      }
+    }
+
+    .nui-breadcrumb__separator {
+      color: var(--color-#{$color});
+      opacity: var(--breadcrumb-separator-opacity);
+    }
+  }
+
+  // Estilos del overlay con el tema específico
+  &__overlay.nui-breadcrumb--#{$color} {
+    border-color: var(--color-#{$color}-tint-95);
+
+    .nui-breadcrumb__overlay-item {
+      &:hover,
+      &:active,
+      &:focus:not(&--disabled),
+      &:active:not(&--disabled) {
+        background-color: var(--color-#{$color}-tint-95);
+        color: var(--color-#{$color});
+
+        &::after {
+          color: var(--color-#{$color});
+        }
+      }
+    }
+  }
+}
+
+// ========================================
+// ACTION MENU MIXINS
+// ========================================
+
+/// Mixin para generar temas de Action Menu
+/// Similar al breadcrumb-theme para mantener consistencia
+/// @param {String} $color - Color del tema (primary, secondary, accent, etc.)
+@mixin action-menu-theme($color) {
+  &--#{$color} {
+    border-color: var(--color-#{$color}-tint-95);
+
+    .nui-action-menu__item,
+    .nui-action-menu-submenu__item {
+      &:hover:not(&--disabled),
+      &:active:not(&--disabled),
+      &:focus:not(&--disabled),
+      &:active:not(&--disabled) {
+        background-color: var(--color-#{$color}-tint-95);
+        color: var(--color-#{$color});
+        outline: none;
+
+        .nui-action-menu__item__icon,
+        .nui-action-menu__item__shortcut,
+        .nui-action-menu__item__arrow {
+          color: var(--color-#{$color});
+          border-color: var(--color-#{$color}-tint-65);
+        }
+      }
+    }
+  }
+}
+
+/// Mixin para responsive breakpoints de Breadcrumb
+/// @param {String} $breakpoint - Breakpoint (tablet, mobile)
+/// @param {Map} $config - Configuración específica del breakpoint
+@mixin breadcrumb-responsive($breakpoint, $config: ()) {
+  $gap: map-get($config, gap) or var(--spacing-xs);
+  $min-height: map-get($config, min-height) or var(--component-height-xs);
+  $separator-margin: map-get($config, separator-margin) or
+    calc(var(--spacing-xs) / 2);
+  $separator-font-size: map-get($config, separator-font-size) or 0.9em;
+  $item-padding: map-get($config, item-padding) or var(--spacing-xs);
+  $collapsed-min-width: map-get($config, collapsed-min-width) or 32px;
+  $collapsed-height: map-get($config, collapsed-height) or 26px;
+  $collapsed-icon-size: map-get($config, collapsed-icon-size) or 1.2em;
+
+  gap: $gap;
+  @if $breakpoint == mobile {
+    min-height: $min-height;
+    padding: var(--spacing-xs) var(--spacing-xs);
+  } @else {
+    min-height: $min-height;
+  }
+
+  &__separator {
+    margin: 0 $separator-margin;
+    font-size: $separator-font-size;
+  }
+
+  &__item {
+    padding: $item-padding $item-padding;
+    @include component-font-size(if($breakpoint == mobile, s, sm));
+    @include component-line-height(if($breakpoint == mobile, s, sm));
+
+    &--collapsed {
+      min-width: $collapsed-min-width;
+      height: $collapsed-height;
+      @if $breakpoint == mobile {
+        padding: var(--spacing-xs);
+      }
+
+      i {
+        font-size: $collapsed-icon-size;
+        @if $breakpoint == mobile {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+// ========================================
+// PAGINATOR MIXINS
+// ========================================
+
+/// Mixin para generar variantes de color del Paginator
+/// Reduce la repetición de código y facilita la extensión
+/// @param {String} $variant - Variante del paginador (solid, outline, ghost)
+/// @param {String} $color - Color base (primary, success, etc.)
+@mixin paginator-colors($variant, $color) {
+  &.nui-paginator-container--#{$variant}.nui-paginator-container--#{$color} {
+    .nui-paginator__page-jump-button,
+    .nui-paginator__load-more-button {
+      color: var(--paginator-#{$color}-#{$variant}-text);
+      background-color: var(--paginator-#{$color}-#{$variant}-bg);
+      border-color: var(--paginator-#{$color}-#{$variant}-border);
+
+      &:focus,
+      &:hover {
+        background-color: var(--paginator-#{$color}-#{$variant}-hover-bg);
+        color: var(--paginator-#{$color}-#{$variant}-text);
+        border-color: var(--paginator-#{$color}-#{$variant}-border);
+      }
+
+      &:active {
+        background-color: var(--paginator-#{$color}-#{$variant}-active-bg);
+      }
+
+      // Estilos de focus
+      &:focus-visible {
+        outline: 2px solid var(--color-#{$color}-tint-65);
+        outline-offset: -2px;
+      }
+    }
+
+    .nui-paginator__page-jump-input {
+      &:hover:not(&--disabled) {
+        border-color: var(--color-#{$color}-tint-65);
+      }
+    }
+
+    .nui-paginator__button {
+      color: var(--paginator-#{$color}-#{$variant}-inactive-text);
+      background-color: var(--paginator-#{$color}-#{$variant}-inactive-bg);
+      border-color: var(--paginator-#{$color}-#{$variant}-inactive-border);
+
+      // Estados hover en modo "inactive" (no disabled, no active)
+      &:not(.nui-paginator__button--disabled):not(
+          .nui-paginator__button--active
+        ):hover,
+      &:not(.nui-paginator__button--disabled):not(
+          .nui-paginator__button--active
+        ):focus {
+        background-color: var(
+          --paginator-#{$color}-#{$variant}-inactive-hover-bg
+        );
+        color: var(--paginator-#{$color}-#{$variant}-inactive-text);
+        border-color: var(--paginator-#{$color}-#{$variant}-inactive-border);
+      }
+
+      &.nui-paginator__button--active:not(
+          .nui-paginator__button--disabled
+        ):active {
+        background-color: var(--paginator-#{$color}-#{$variant}-active-bg);
+      }
+    }
+
+    .nui-paginator__page-jump-input,
+    .nui-paginator__page-jump-button,
+    .nui-paginator__button,
+    .nui-paginator__load-more-button {
+      // Estilos de focus
+      &:focus-visible {
+        outline: 2px solid var(--color-#{$color}-tint-65);
+        outline-offset: -2px;
+      }
+    }
+
+    .nui-paginator__button--active {
+      background-color: var(--paginator-#{$color}-#{$variant}-bg);
+      color: var(--paginator-#{$color}-#{$variant}-text);
+      border-color: var(--paginator-#{$color}-#{$variant}-border);
+
+      // Estados hover en modo "active" (no disabled)
+      &:hover:not(.nui-paginator__button--disabled) {
+        background-color: var(--paginator-#{$color}-#{$variant}-hover-bg);
+        color: var(--paginator-#{$color}-#{$variant}-text);
+        border-color: var(--paginator-#{$color}-#{$variant}-border);
+      }
+    }
+  }
+}
+
+/// Mixin para generar tamaños del Paginator
+/// Permite aplicar todos los estilos de tamaño de forma consistente
+/// @param {String} $size - Tamaño del paginador (xs, s, sm, md, lg, xl)
+@mixin paginator-size($size) {
+  .nui-paginator__button,
+  .nui-paginator__page-jump-button,
+  .nui-paginator__load-more-button {
+    min-width: var(--paginator-button-size-#{$size});
+    min-height: var(--paginator-button-size-#{$size});
+    width: var(--paginator-button-size-#{$size});
+    height: var(--paginator-button-size-#{$size});
+    font-size: var(--component-font-size-#{$size});
+    padding: 0;
+
+    i {
+      font-size: var(--paginator-icon-size-#{$size});
+    }
+  }
+
+  .nui-paginator__page-size-label,
+  .nui-paginator__page-jump-label,
+  .nui-paginator__info-text {
+    font-size: var(--component-font-size-#{$size});
+  }
+
+  .nui-paginator__page-jump-input {
+    min-height: var(--paginator-button-size-#{$size});
+    height: var(--paginator-button-size-#{$size});
+  }
+
+  .nui-paginator__load-more-button {
+    min-width: auto;
+    width: auto;
+    padding: var(--spacing-sm) var(--spacing-lg);
+  }
+
+  .nui-paginator__fractional-info,
+  .nui-paginator__current-page,
+  .nui-paginator__page-jump-input {
+    font-size: var(--component-font-size-#{$size});
+  }
+}
+
+// ========================================
+// TABS
+// ========================================
+
+// Mixin para generar tamaños de Tabs
+/// Elimina la repetición masiva de código en ~80%
+@mixin tabs-size($size) {
+  &--#{$size} {
+    .nui-tabs__tab {
+      font-size: var(--font-size-#{$size});
+      padding: var(--tabs-tab-padding-#{$size});
+      gap: var(--tabs-tab-gap-#{$size});
+    }
+
+    &.nui-tabs--enclosed {
+      .nui-tabs__nav {
+        gap: var(--tabs-tab-gap-xs);
+        margin-bottom: calc(-1 * var(--border-width-xs));
+      }
+
+      .nui-tabs__content {
+        padding: var(--spacing-md);
+      }
+    }
+
+    &.nui-tabs--pills {
+      .nui-tabs__nav {
+        gap: var(--tabs-tab-gap-sm);
+      }
+    }
+
+    &.nui-tabs--soft {
+      .nui-tabs__nav {
+        gap: var(--tabs-tab-gap-xs);
+        padding: var(--spacing-xs);
+        border-radius: var(--border-radius-md);
+      }
+
+      .nui-tabs__tab {
+        border-radius: var(--border-radius-sm);
+      }
+    }
+
+    &.nui-tabs--buttons {
+      .nui-tabs__nav {
+        gap: var(--tabs-tab-gap-s);
+      }
+
+      .nui-tabs__tab {
+        padding: var(--tabs-tab-padding-#{$size});
+        border-radius: var(--border-radius-md);
+      }
+    }
+  }
+}
+
+// Mixin para generar variantes de Tabs
+/// Aplica estilos de color específicos a cada variante de tabs
+/// Se llama desde .nui-tabs--{color}.nui-tabs--{variant}
+/// @param {String} $variant - Variante de tabs (underline, enclosed, pills, soft, buttons)
+/// @param {String} $color - Color del tema (primary, secondary, accent, success, warning, danger, info)
+@mixin tabs-variant($variant, $color) {
+  .nui-tabs__scroll-btn {
+    color: var(--color-#{$color});
+    background-color: var(--tabs-#{$color}-scroll-btn-bg);
+    border-color: var(--tabs-#{$color}-scroll-btn-border);
+
+    &:hover:not(&--disabled) {
+      background-color: var(--tabs-#{$color}-scroll-btn-hover-bg);
+      border-color: var(--tabs-#{$color}-scroll-btn-hover-border);
+      color: var(--color-#{$color});
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-#{$color}-tint-65);
+      outline-offset: -2px;
+    }
+  }
+
+  .nui-tabs__tab,
+  .nui-tabs__panel {
+    &:focus-visible,
+    &:focus {
+      outline: 2px solid var(--color-#{$color}-tint-65);
+      outline-offset: -2px;
+    }
+  }
+
+  @if $variant == underline {
+    .nui-tabs__nav {
+      border-bottom-color: var(--color-border);
+    }
+
+    .nui-tabs__tab {
+      &:hover:not(&--disabled):not(&--active) {
+        border-bottom-color: var(
+          --tabs-#{$color}-underline-inactive-hover-border
+        );
+      }
+
+      &--active {
+        border-bottom-color: var(--tabs-#{$color}-underline-active-border);
+        color: var(--color-#{$color});
+
+        &:hover:not(&--disabled) {
+          border-bottom-color: var(
+            --tabs-#{$color}-underline-active-hover-border
+          );
+          color: var(--tabs-#{$color}-underline-active-hover-text);
+        }
+      }
+    }
+  }
+
+  @if $variant == enclosed {
+    .nui-tabs__tab {
+      &:hover:not(&--disabled):not(&--active) {
+        border-color: var(--tabs-#{$color}-enclosed-inactive-hover-border);
+        background-color: var(--tabs-#{$color}-enclosed-inactive-hover-bg);
+      }
+
+      &--active {
+        background-color: var(--tabs-#{$color}-enclosed-active-bg);
+        border-color: var(--tabs-#{$color}-enclosed-active-border);
+        color: var(--tabs-#{$color}-enclosed-active-text);
+
+        &:hover:not(&--disabled) {
+          background-color: var(--tabs-#{$color}-enclosed-active-hover-bg);
+          border-color: var(--tabs-#{$color}-enclosed-active-hover-border);
+          color: var(--tabs-#{$color}-enclosed-active-hover-text);
+        }
+      }
+    }
+
+    .nui-tabs__content {
+      border-color: var(--tabs-#{$color}-enclosed-active-border);
+      box-shadow: var(--tabs-enclosed-content-shadow);
+    }
+  }
+
+  @if $variant == pills {
+    .nui-tabs__tab {
+      &:hover:not(&--disabled):not(&--active) {
+        background-color: var(--tabs-#{$color}-pills-inactive-hover-bg);
+      }
+
+      &--active {
+        background-color: var(--tabs-#{$color}-pills-active-bg);
+        color: var(--tabs-#{$color}-pills-active-text);
+
+        &:hover:not(&--disabled) {
+          background-color: var(--tabs-#{$color}-pills-active-hover-bg);
+        }
+
+        .nui-tabs__tab-badge {
+          background-color: var(--tabs-#{$color}-pills-active-badge-bg);
+          color: var(--tabs-#{$color}-pills-active-badge-text);
+        }
+      }
+    }
+  }
+
+  @if $variant == soft {
+    .nui-tabs__nav {
+      box-shadow: var(--tabs-soft-nav-shadow);
+    }
+
+    .nui-tabs__tab {
+      &:hover:not(&--disabled):not(&--active) {
+        background-color: var(--tabs-#{$color}-soft-inactive-hover-bg);
+        color: var(--tabs-#{$color}-soft-inactive-hover-text);
+      }
+      &--active {
+        background-color: var(--tabs-#{$color}-soft-active-bg);
+        color: var(--tabs-#{$color}-soft-active-text);
+        box-shadow: var(--tabs-#{$color}-soft-active-box-shadow);
+
+        &:hover:not(&--disabled) {
+          background-color: var(--tabs-#{$color}-soft-active-hover-bg);
+        }
+      }
+    }
+  }
+
+  @if $variant == buttons {
+    .nui-tabs__tab {
+      border-color: var(--tabs-#{$color}-buttons-inactive-border);
+
+      &:hover:not(&--disabled):not(&--active) {
+        border-color: var(--tabs-#{$color}-buttons-inactive-hover-border);
+        background-color: var(--tabs-#{$color}-buttons-inactive-hover-bg);
+      }
+
+      &--active {
+        background-color: var(--tabs-#{$color}-buttons-active-bg);
+        color: var(--tabs-#{$color}-buttons-active-text);
+        border-color: var(--tabs-#{$color}-buttons-active-border);
+      }
+    }
+  }
+}
+
+// ========================================
+// CALENDAR MIXINS
+// ========================================
+
+/// Mixin para generar estilos de tamaño de Calendar
+/// Elimina la repetición masiva de código en ~85%
+/// @param {String} $size - Tamaño del calendar (xs, s, sm, md, lg, xl)
+@mixin calendar-size($size) {
+  max-width: map-get($calendar-widths, $size);
+  padding: map-get($calendar-paddings, $size);
+
+  .nui-calendar__days,
+  .nui-calendar__weekdays {
+    gap: map-get($calendar-gaps, $size);
+  }
+
+  .nui-calendar__day {
+    font-size: map-get($calendar-day-fonts, $size);
+    min-width: map-get($calendar-day-sizes, $size);
+    min-height: map-get($calendar-day-sizes, $size);
+
+    &--today {
+      &::after {
+        // Ajuste de tamaño del indicador según el tamaño
+        @if $size == xs or $size == s {
+          width: 0.2rem;
+          height: 0.2rem;
+        } @else if $size == sm or $size == md {
+          width: 0.25rem;
+          height: 0.25rem;
+        } @else if $size == lg {
+          width: 0.3rem;
+          height: 0.3rem;
+        } @else if $size == xl {
+          width: 0.35rem;
+          height: 0.35rem;
+        }
+      }
+    }
+  }
+
+  .nui-calendar__weekday {
+    font-size: map-get($calendar-weekday-fonts, $size);
+    min-height: map-get($calendar-weekday-heights, $size);
+  }
+
+  .nui-calendar__title-button {
+    font-size: map-get($calendar-title-fonts, $size);
+
+    // Padding progresivo según tamaño
+    @if $size == xs {
+      padding: $spacing-xs $spacing-s;
+    } @else if $size == s {
+      padding: $spacing-xs $spacing-sm;
+    } @else if $size == sm {
+      padding: $spacing-s $spacing-sm;
+    } @else if $size == md {
+      padding: $spacing-sm $spacing-md;
+    } @else if $size == lg {
+      padding: $spacing-sm $spacing-lg;
+    } @else if $size == xl {
+      padding: $spacing-md $spacing-xl;
+    }
+  }
+
+  .nui-calendar__title-text {
+    font-size: map-get($calendar-title-fonts, $size);
+  }
+
+  .nui-calendar__month,
+  .nui-calendar__year {
+    font-size: map-get($calendar-day-fonts, $size);
+
+    @if $size == xs {
+      padding: $spacing-xs $spacing-s;
+    } @else if $size == s {
+      padding: $spacing-xs $spacing-sm;
+    } @else if $size == sm {
+      padding: $spacing-s $spacing-sm;
+    } @else if $size == md {
+      padding: $spacing-sm $spacing-md;
+    } @else if $size == lg {
+      padding: $spacing-sm $spacing-lg;
+    } @else if $size == xl {
+      padding: $spacing-md $spacing-xl;
+    }
+  }
+}
+
+// ========================================
+// TOAST MIXINS
+// ========================================
+
+/// Mixin para aplicar estilos de color a un toast
+/// @param {String} $color - Color del toast (primary, success, danger, warning, info, etc.)
+@mixin toast-color($color) {
+  &.nui-toast--#{$color} {
+    background-color: var(--toast-#{$color}-bg);
+    color: var(--toast-#{$color}-color);
+    border: var(--nui-toast-border-width) solid var(--toast-#{$color}-border);
+
+    // Hover mejorado
+    &:hover {
+      background-color: var(
+        --toast-#{$color}-bg-hover,
+        var(--toast-#{$color}-bg)
+      );
+    }
+
+    .nui-toast__icon {
+      color: var(--toast-#{$color}-icon-color);
+      background: var(--toast-#{$color}-icon-bg);
+    }
+
+    .nui-toast__title {
+      color: var(--toast-#{$color}-title-color);
+    }
+
+    .nui-toast__message {
+      color: var(--toast-#{$color}-color);
+    }
+
+    .nui-toast__progress-bar {
+      background: linear-gradient(
+        90deg,
+        var(--toast-#{$color}-progress-bg) 0%,
+        var(--toast-#{$color}-progress-bg) 85%,
+        transparent 100%
+      );
+    }
+
+    .nui-toast__close-button,
+    .nui-toast__expand-button {
+      color: var(--toast-#{$color}-close-color);
+
+      &:hover {
+        color: var(--toast-#{$color}-close-hover);
+        background: var(--toast-#{$color}-icon-bg);
+      }
+    }
+
+    // Borde interno en ::before con color del tema
+    &::before {
+      background: linear-gradient(
+        135deg,
+        rgba(var(--color-#{$color}-rgb), 0.15) 0%,
+        rgba(var(--color-#{$color}-rgb), 0.08) 50%,
+        rgba(var(--color-#{$color}-rgb), 0.02) 100%
+      );
+    }
+  }
+}
+
+/// Mixin para generar todas las variantes de color de toast
+@mixin generate-toast-colors() {
+  @include toast-color("primary");
+  @include toast-color("accent");
+  @include toast-color("secondary");
+  @include toast-color("success");
+  @include toast-color("danger");
+  @include toast-color("warning");
+  @include toast-color("info");
+}
+
+/// Mixin para generar todas las variantes de color de toast
+@mixin generate-toast-colors() {
+  @include toast-color("primary");
+  @include toast-color("accent");
+  @include toast-color("secondary");
+  @include toast-color("success");
+  @include toast-color("danger");
+  @include toast-color("warning");
+  @include toast-color("info");
+}
+
+// ========================================
+// AVATAR MIXINS
+// ========================================
+
+/// Mixin para aplicar tamaño a un avatar
+/// @param {String} $size - Tamaño del avatar (xs, sm, md, lg, xl)
+@mixin avatar-size($size) {
+  width: var(--avatar-size-#{$size});
+  height: var(--avatar-size-#{$size});
+  font-size: var(--avatar-font-size-#{$size});
+
+  .nui-avatar__icon {
+    font-size: var(--avatar-icon-size-#{$size});
+  }
+}
+
+/// Mixin para aplicar variante de forma a un avatar
+/// @param {String} $variant - Variante del avatar (circular, rounded, square)
+@mixin avatar-variant($variant) {
+  @if $variant == "circular" {
+    border-radius: var(--avatar-border-radius-circular);
+  } @else if $variant == "rounded" {
+    border-radius: var(--avatar-border-radius-rounded);
+  } @else if $variant == "square" {
+    border-radius: var(--avatar-border-radius-square);
+  }
+}
+
+/// Mixin para generar todos los tamaños de avatar
+@mixin generate-avatar-sizes() {
+  &.nui-avatar--xs {
+    @include avatar-size(xs);
+  }
+
+  &.nui-avatar--sm {
+    @include avatar-size(sm);
+  }
+
+  &.nui-avatar--md {
+    @include avatar-size(md);
+  }
+
+  &.nui-avatar--lg {
+    @include avatar-size(lg);
+  }
+
+  &.nui-avatar--xl {
+    @include avatar-size(xl);
+  }
+}
+
+/// Mixin para generar todas las variantes de forma de avatar
+@mixin generate-avatar-variants() {
+  &.nui-avatar--circular {
+    @include avatar-variant(circular);
+  }
+
+  &.nui-avatar--rounded {
+    @include avatar-variant(rounded);
+  }
+
+  &.nui-avatar--square {
+    @include avatar-variant(square);
+  }
+}
+
+/// Mixin para generar todos los colores de avatar
+@mixin generate-avatar-colors() {
+  &.nui-avatar--primary {
+    background-color: var(--avatar-primary-bg);
+    color: var(--avatar-primary-color);
+  }
+
+  &.nui-avatar--secondary {
+    background-color: var(--avatar-secondary-bg);
+    color: var(--avatar-secondary-color);
+  }
+
+  &.nui-avatar--accent {
+    background-color: var(--avatar-accent-bg);
+    color: var(--avatar-accent-color);
+  }
+
+  &.nui-avatar--success {
+    background-color: var(--avatar-success-bg);
+    color: var(--avatar-success-color);
+  }
+
+  &.nui-avatar--info {
+    background-color: var(--avatar-info-bg);
+    color: var(--avatar-info-color);
+  }
+
+  &.nui-avatar--warning {
+    background-color: var(--avatar-warning-bg);
+    color: var(--avatar-warning-color);
+  }
+
+  &.nui-avatar--danger {
+    background-color: var(--avatar-danger-bg);
+    color: var(--avatar-danger-color);
+  }
+}
+
+/// Mixin para estilos base del avatar
+@mixin avatar-base() {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  user-select: none;
+  vertical-align: middle;
+
+  // Color por defecto
+  background-color: var(--avatar-default-bg);
+  color: var(--avatar-default-color);
+  font-weight: var(--avatar-font-weight);
+  line-height: var(--avatar-line-height);
+
+  // Transición suave
+  transition: var(--avatar-transition);
+}
+
+/// Mixin para avatar group
+@mixin avatar-group-base() {
+  display: inline-flex;
+  align-items: center;
+}
+
+/// Mixin para avatares dentro de un grupo
+@mixin avatar-group-item() {
+  position: relative;
+  transition: var(--avatar-transition);
+  z-index: var(--avatar-z-index-base, 0);
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:hover {
+    z-index: var(--avatar-group-z-index-hover);
+    transform: scale(var(--avatar-group-hover-scale));
+  }
+}
+
+/// Mixin para bordes en avatar group
+@mixin avatar-group-bordered() {
+  .nui-avatar-group__avatar,
+  .nui-avatar-group__excess {
+    border: var(--avatar-group-border-width) solid
+      var(--avatar-group-border-color);
+    box-shadow: 0 0 0 1px var(--avatar-group-border-color);
+  }
+}
+
+/// Mixin para el indicador de exceso (+N)
+@mixin avatar-excess($size) {
+  width: var(--avatar-excess-size-#{$size});
+  height: var(--avatar-excess-size-#{$size});
+  font-size: var(--avatar-excess-font-size-#{$size});
+  font-weight: var(--avatar-excess-font-weight);
+}

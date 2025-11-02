@@ -1,0 +1,79 @@
+// ========================================
+// TOOLTIP - Variables
+// ========================================
+//
+// Variables centralizadas para personalizar el componente Tooltip.
+// Todas las variables usan !default para permitir sobrescritura.
+//
+// Cómo personalizar:
+// ------------------
+// 1. Define tus propias variables ANTES de importar este archivo
+// 2. Las variables SCSS ($tooltip-*) afectan todos los tooltips
+// 3. Las CSS variables (--tooltip-*) se pueden sobrescribir en :root o por tema
+//
+// Ejemplo de personalización:
+// ```scss
+// // En tu archivo custom-variables.scss
+// $tooltip-padding-y: 0.5rem;
+// $tooltip-padding-x: 0.75rem;
+// $tooltip-font-size: var(--font-size-s);
+//
+// @import "variables/tooltip";
+// ```
+//
+// ========================================
+
+// ===== ESPACIADO =====
+$tooltip-padding-y: 0.375rem !default;
+$tooltip-padding-x: 0.625rem !default;
+$tooltip-max-width: 15rem !default;
+
+// ===== TIPOGRAFÍA =====
+$tooltip-font-size: var(--font-size-xs) !default;
+$tooltip-font-weight: var(--font-weight-medium) !default;
+$tooltip-line-height: var(--line-height-sm) !default;
+
+// ===== BORDES Y RADIOS =====
+$tooltip-border-radius: var(--border-radius-sm) !default;
+
+// ===== SOMBRAS =====
+$tooltip-shadow: var(--shadow-elevated) !default;
+
+// ===== Z-INDEX =====
+$tooltip-z-index: 1000 !default;
+
+// ===== ANIMACIÓN =====
+$tooltip-transition-duration: 150ms !default;
+$tooltip-transition-timing: cubic-bezier(0.4, 0, 0.2, 1) !default;
+
+// ===== FLECHA =====
+$tooltip-arrow-size: 0.5rem !default;
+
+// ===== EXPORTAR CSS VARIABLES =====
+:root {
+  // Espaciado
+  --tooltip-padding-y: #{$tooltip-padding-y};
+  --tooltip-padding-x: #{$tooltip-padding-x};
+  --tooltip-max-width: #{$tooltip-max-width};
+
+  // Tipografía
+  --tooltip-font-size: #{$tooltip-font-size};
+  --tooltip-font-weight: #{$tooltip-font-weight};
+  --tooltip-line-height: #{$tooltip-line-height};
+
+  // Bordes
+  --tooltip-border-radius: #{$tooltip-border-radius};
+
+  // Z-index
+  --tooltip-z-index: #{$tooltip-z-index};
+
+  // Animación
+  --tooltip-transition-duration: #{$tooltip-transition-duration};
+  --tooltip-transition-timing: #{$tooltip-transition-timing};
+
+  // Flecha
+  --tooltip-arrow-size: #{$tooltip-arrow-size};
+
+  // Sombra
+  --tooltip-shadow: #{$tooltip-shadow};
+}

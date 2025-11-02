@@ -1,0 +1,241 @@
+// ===== CONTENEDOR DE ITEMS =====
+.nui-fab-button-items-container {
+  position: absolute;
+  display: flex;
+  gap: var(--fab-button-item-spacing);
+  pointer-events: none;
+  z-index: 1;
+
+  &.nui-fab-button-items-visible {
+    pointer-events: all;
+  }
+
+  // Direcciones para layout linear
+  &.nui-fab-button-direction-up:not(.nui-fab-button-layout-circle):not(
+      .nui-fab-button-layout-semi-circle
+    ):not(.nui-fab-button-layout-quarter-circle) {
+    flex-direction: column-reverse;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: var(--fab-button-item-spacing);
+  }
+
+  &.nui-fab-button-direction-down:not(.nui-fab-button-layout-circle):not(
+      .nui-fab-button-layout-semi-circle
+    ):not(.nui-fab-button-layout-quarter-circle) {
+    flex-direction: column;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: var(--fab-button-item-spacing);
+  }
+
+  &.nui-fab-button-direction-left:not(.nui-fab-button-layout-circle):not(
+      .nui-fab-button-layout-semi-circle
+    ):not(.nui-fab-button-layout-quarter-circle) {
+    flex-direction: row-reverse;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: var(--fab-button-item-spacing);
+  }
+
+  &.nui-fab-button-direction-right:not(.nui-fab-button-layout-circle):not(
+      .nui-fab-button-layout-semi-circle
+    ):not(.nui-fab-button-layout-quarter-circle) {
+    flex-direction: row;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: var(--fab-button-item-spacing);
+  }
+
+  // Posicionamiento para layouts circulares - centrado en el botón principal
+  &.nui-fab-button-layout-circle,
+  &.nui-fab-button-layout-semi-circle,
+  &.nui-fab-button-layout-quarter-circle {
+    // Posición: el punto de origen es el centro del botón principal
+    top: 50%;
+    left: 50%;
+
+    // Sin dimensiones - los items se posicionan absolutamente desde aquí
+    width: 0;
+    height: 0;
+
+    // Sin gap en layouts circulares (el spacing se controla con radius)
+    gap: 0;
+  }
+}
+
+// ===== ITEM INDIVIDUAL =====
+.nui-fab-button-item {
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0);
+  transition:
+    opacity var(--fab-button-transition-duration)
+      var(--fab-button-transition-timing),
+    transform var(--fab-button-transition-duration)
+      var(--fab-button-transition-timing);
+
+  &-content {
+    display: flex;
+    align-items: center;
+    gap: var(--fab-button-label-gap);
+  }
+
+  &.nui-fab-button-item-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  // Animaciones
+  &.nui-fab-button-animation-fade {
+    &:not(.nui-fab-button-item-visible) {
+      transform: none;
+    }
+  }
+
+  &.nui-fab-button-animation-slide {
+    &.nui-fab-button-direction-up:not(.nui-fab-button-item-visible) {
+      transform: translateY(20px);
+    }
+
+    &.nui-fab-button-direction-down:not(.nui-fab-button-item-visible) {
+      transform: translateY(-20px);
+    }
+
+    &.nui-fab-button-direction-left:not(.nui-fab-button-item-visible) {
+      transform: translateX(20px);
+    }
+
+    &.nui-fab-button-direction-right:not(.nui-fab-button-item-visible) {
+      transform: translateX(-20px);
+    }
+  }
+
+  // Orden de las labels según la dirección
+  &.nui-fab-button-direction-left,
+  &.nui-fab-button-direction-up {
+    flex-direction: row-reverse;
+  }
+}
+
+// ===== BOTÓN DEL ITEM =====
+.nui-fab-button-item-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--fab-button-border-radius);
+  border: var(--fab-button-border-width) solid;
+  font-family: var(--fab-button-font-family);
+  font-weight: var(--fab-button-font-weight);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  text-decoration: none;
+  transition:
+    background-color var(--fab-button-transition-duration)
+      var(--fab-button-transition-timing),
+    color var(--fab-button-transition-duration)
+      var(--fab-button-transition-timing),
+    border-color var(--fab-button-transition-duration)
+      var(--fab-button-transition-timing),
+    box-shadow var(--fab-button-transition-duration)
+      var(--fab-button-transition-timing),
+    transform 0.1s var(--fab-button-transition-timing);
+
+  &:focus-visible {
+    outline: var(--fab-button-focus-outline-width) solid currentColor;
+    outline-offset: var(--fab-button-focus-outline-offset);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Tamaños
+  $sizes: xs, s, sm, md, lg, xl;
+  @each $size in $sizes {
+    &.nui-fab-button-item-size-#{$size} {
+      width: var(--fab-button-item-size-#{$size});
+      height: var(--fab-button-item-size-#{$size});
+      font-size: var(--fab-button-label-font-size-#{$size});
+    }
+
+    &.nui-fab-button-item-size-#{$size} ~ .nui-fab-button-item-label,
+    &.nui-fab-button-item-size-#{$size} + .nui-fab-button-item-label,
+    .nui-fab-button-item-label:has(+ &.nui-fab-button-item-size-#{$size}) {
+      font-size: var(--fab-button-label-font-size-#{$size});
+    }
+  }
+}
+
+// ===== ESTILOS POR COLOR Y VARIANTE =====
+$colors: primary, secondary, success, info, warning, danger, accent;
+$variants: solid, outline, ghost;
+
+@each $color in $colors {
+  @each $variant in $variants {
+    .nui-fab-button-item-button.nui-fab-button-item-color-#{$color}.nui-fab-button-item-variant-#{$variant} {
+      background-color: var(--fab-button-#{$color}-#{$variant}-bg);
+      color: var(--fab-button-#{$color}-#{$variant}-text);
+      border-color: var(--fab-button-#{$color}-#{$variant}-border);
+
+      &:hover:not(:disabled),
+      &:focus:not(:disabled) {
+        background-color: var(--fab-button-#{$color}-#{$variant}-hover-bg);
+        color: var(--fab-button-#{$color}-#{$variant}-hover-text);
+        border-color: var(--fab-button-#{$color}-#{$variant}-hover-border);
+      }
+
+      &:active:not(:disabled) {
+        background-color: var(--fab-button-#{$color}-#{$variant}-active-bg);
+        border-color: var(--fab-button-#{$color}-#{$variant}-active-border);
+      }
+    }
+  }
+
+  .nui-fab-button-item-button.nui-fab-button-item-color-#{$color} {
+    &:focus-visible {
+      outline: var(--fab-button-focus-outline-width)
+        solid
+        var(--fab-button-#{$color}-focus-color);
+      outline-offset: var(--fab-button-focus-outline-offset);
+    }
+  }
+}
+
+// ===== COLORES PERSONALIZADOS =====
+// Cuando se usan backgroundColor y textColor personalizados,
+// se aplican CSS custom properties para hover y active states
+.nui-fab-button-item-button[data-custom-color="true"] {
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
+    background-color: var(--fab-item-custom-bg-hover) !important;
+    border-color: var(--fab-item-custom-bg-hover) !important;
+  }
+
+  &:active:not(:disabled) {
+    background-color: var(--fab-item-custom-bg-active) !important;
+    border-color: var(--fab-item-custom-bg-active) !important;
+  }
+}
+
+// ===== LABEL DEL ITEM =====
+.nui-fab-button-item-label {
+  background: var(--fab-button-label-bg);
+  color: var(--fab-button-label-text);
+  padding: var(--fab-button-label-padding);
+  border-radius: var(--border-radius-sm);
+  font-weight: var(--fab-button-font-weight);
+  font-family: var(--fab-button-font-family);
+  white-space: nowrap;
+  border: 1px solid var(--fab-button-label-border);
+  box-shadow: var(--fab-button-label-shadow);
+  pointer-events: none;
+}

@@ -1,0 +1,200 @@
+// =======================
+// CHIP - Variables Específicas del Componente
+// =======================
+// IMPORTANTE: Este archivo debe importarse ANTES de _config.scss para que las variables
+// estén disponibles cuando se necesiten.
+
+// Padding vertical (block) para chips - Escala coherente
+$chip-padding-y: (
+  xs: 0.125rem,
+  // 2px  - Mínimo (chips muy compactos)
+  s: 0.25rem,
+  // 4px  - Pequeño (chips compactos)
+  sm: 0.3125rem,
+  // 5px  - Pequeño-medio (transición)
+  md: 0.375rem,
+  // 6px  - ESTÁNDAR (chips normales)
+  lg: 0.5rem,
+  // 8px  - Grande (chips destacados)
+  xl: 0.625rem, // 10px - Extra grande (chips muy destacados)
+) !default;
+
+// Padding horizontal (inline) para chips - Escala coherente
+$chip-padding-x: (
+  xs: 0.5rem,
+  // 8px  - Mínimo (chips compactos)
+  s: 0.625rem,
+  // 10px - Pequeño (chips normales)
+  sm: 0.6875rem,
+  // 11px - Pequeño-medio (transición)
+  md: 0.75rem,
+  // 12px - ESTÁNDAR (chips destacados)
+  lg: 1rem,
+  // 16px - Grande (chips amplios)
+  xl: 1.25rem, // 20px - Extra grande (chips muy amplios)
+) !default;
+
+// Border radius para chips - Necesita importar $border-radius-pill primero
+// Se definirá después del import de config
+
+// Font sizes para chips - Escala coherente
+$chip-font-size: (
+  xs: 0.6875rem,
+  // 11px - Extra pequeño
+  s: 0.75rem,
+  // 12px - Pequeño
+  sm: 0.8125rem,
+  // 13px - Pequeño-medio
+  md: 0.875rem,
+  // 14px - ESTÁNDAR
+  lg: 1rem,
+  // 16px - Grande
+  xl: 1.125rem, // 18px - Extra grande
+) !default;
+
+// Variables semánticas para chips - Evitar magic numbers
+$chip-container-gap: 0.375rem !default; // Gap entre elementos internos del chip
+$chip-image-margin-negative: -0.08 !default; // Porcentaje negativo para sobresalir imagen (8%)
+$chip-image-gap: 0.25rem !default; // Gap entre imagen y texto (4px)
+$chip-remove-gap-start: 0.125rem !default; // Gap antes del botón de eliminar (2px)
+$chip-remove-margin-negative: -0.125rem !default; // Margin negativo del botón eliminar (2px hacia dentro)
+$chip-border-drop-size: 0.125rem !default; // Tamaño del borde extra al hacer drop (2px)
+$chip-border-drop-style: dashed !default; // Estilo del borde extra al hacer drop
+
+@import "config";
+
+// Border radius para chips - Todos usan pill (podría simplificarse a variable simple en futuro)
+// NOTA: Se mantiene como map por compatibilidad con _theme-config.scss
+$chip-border-radius: (
+  xs: $border-radius-pill,
+  // 9999px - Todos los tamaños usan el mismo valor
+  s: $border-radius-pill,
+  sm: $border-radius-pill,
+  md: $border-radius-pill,
+  lg: $border-radius-pill,
+  xl: $border-radius-pill,
+) !default;
+
+// ===== CHIP SELECTOR =====
+$chip-selector-gap: 0.75rem !default;
+$chip-selector-toolbar-gap: 0.75rem !default;
+$chip-selector-search-max-width: 400px !default;
+$chip-selector-counter-gap: 0.5rem !default;
+$chip-selector-counter-font-size: 0.875rem !default;
+$chip-selector-counter-max-font-size: 0.8125rem !default;
+$chip-selector-counter-max-opacity: 0.7 !default;
+
+// ===== CHIP LIST (CDK Drag & Drop) =====
+$chip-list-drag-placeholder-opacity-before: 0.2 !default;
+$chip-list-drag-preview-opacity: 0.8 !default;
+$chip-list-drag-preview-rotation: 3deg !default;
+$chip-list-drag-color-mix-percentage: 15% !default;
+$chip-list-drag-hover-color-mix-percentage: 8% !default;
+$chip-list-drag-shadow-spread: 4px !default;
+$chip-list-disabled-opacity: 0.6 !default;
+
+// Animaciones
+$chip-list-pulse-placeholder-opacity-min: 0.8 !default;
+$chip-list-pulse-placeholder-scale-max: 1.5 !default;
+$chip-list-pulse-drop-zone-opacity-min: 0.6 !default;
+$chip-list-pulse-drop-zone-scale-max: 1.02 !default;
+
+// Tamaños de imagen para chips - Escala coherente
+$chip-image-sizes: (
+  xs: 1.25rem,
+  // 20px (100% de altura estimada ~20px)
+  s: 1.5rem,
+  // 24px (100% de altura estimada ~24px)
+  sm: 1.75rem,
+  // 28px (100% de altura estimada ~28px)
+  md: 2rem,
+  // 32px (100% de altura estimada ~32px)
+  lg: 2.5rem,
+  // 40px (100% de altura estimada ~40px)
+  xl: 3rem, // 48px (100% de altura estimada ~48px)
+);
+
+// Alias para compatibilidad (reutilización DRY)
+$chip-image-widths: $chip-image-sizes;
+$chip-image-heights: $chip-image-sizes;
+
+:root {
+  // Padding vertical por tamaño
+  --chip-padding-y-xs: #{map-get($chip-padding-y, xs)};
+  --chip-padding-y-s: #{map-get($chip-padding-y, s)};
+  --chip-padding-y-sm: #{map-get($chip-padding-y, sm)};
+  --chip-padding-y-md: #{map-get($chip-padding-y, md)};
+  --chip-padding-y-lg: #{map-get($chip-padding-y, lg)};
+  --chip-padding-y-xl: #{map-get($chip-padding-y, xl)};
+
+  // Padding horizontal por tamaño
+  --chip-padding-x-xs: #{map-get($chip-padding-x, xs)};
+  --chip-padding-x-s: #{map-get($chip-padding-x, s)};
+  --chip-padding-x-sm: #{map-get($chip-padding-x, sm)};
+  --chip-padding-x-md: #{map-get($chip-padding-x, md)};
+  --chip-padding-x-lg: #{map-get($chip-padding-x, lg)};
+  --chip-padding-x-xl: #{map-get($chip-padding-x, xl)};
+
+  // Border radius por tamaño
+  --chip-border-radius-xs: #{map-get($chip-border-radius, xs)};
+  --chip-border-radius-s: #{map-get($chip-border-radius, s)};
+  --chip-border-radius-sm: #{map-get($chip-border-radius, sm)};
+  --chip-border-radius-md: #{map-get($chip-border-radius, md)};
+  --chip-border-radius-lg: #{map-get($chip-border-radius, lg)};
+  --chip-border-radius-xl: #{map-get($chip-border-radius, xl)};
+
+  // Font sizes por tamaño
+  --chip-font-size-xs: #{map-get($chip-font-size, xs)};
+  --chip-font-size-s: #{map-get($chip-font-size, s)};
+  --chip-font-size-sm: #{map-get($chip-font-size, sm)};
+  --chip-font-size-md: #{map-get($chip-font-size, md)};
+  --chip-font-size-lg: #{map-get($chip-font-size, lg)};
+  --chip-font-size-xl: #{map-get($chip-font-size, xl)};
+
+  // Image widths por tamaño
+  --chip-image-width-xs: #{map-get($chip-image-widths, xs)};
+  --chip-image-width-s: #{map-get($chip-image-widths, s)};
+  --chip-image-width-sm: #{map-get($chip-image-widths, sm)};
+  --chip-image-width-md: #{map-get($chip-image-widths, md)};
+  --chip-image-width-lg: #{map-get($chip-image-widths, lg)};
+  --chip-image-width-xl: #{map-get($chip-image-widths, xl)};
+
+  // Image heights por tamaño
+  --chip-image-height-xs: #{map-get($chip-image-heights, xs)};
+  --chip-image-height-s: #{map-get($chip-image-heights, s)};
+  --chip-image-height-sm: #{map-get($chip-image-heights, sm)};
+  --chip-image-height-md: #{map-get($chip-image-heights, md)};
+  --chip-image-height-lg: #{map-get($chip-image-heights, lg)};
+  --chip-image-height-xl: #{map-get($chip-image-heights, xl)};
+
+  // Propiedades adicionales
+  --chip-container-gap: #{$chip-container-gap};
+  --chip-image-margin-negative: #{$chip-image-margin-negative};
+  --chip-image-gap: #{$chip-image-gap};
+  --chip-remove-gap-start: #{$chip-remove-gap-start};
+  --chip-remove-margin-negative: #{$chip-remove-margin-negative};
+  --chip-border-drop-size: #{$chip-border-drop-size};
+  --chip-border-drop-style: #{$chip-border-drop-style};
+
+  // CHIP SELECTOR
+  --chip-selector-gap: #{$chip-selector-gap};
+  --chip-selector-toolbar-gap: #{$chip-selector-toolbar-gap};
+  --chip-selector-search-max-width: #{$chip-selector-search-max-width};
+  --chip-selector-counter-gap: #{$chip-selector-counter-gap};
+  --chip-selector-counter-font-size: #{$chip-selector-counter-font-size};
+  --chip-selector-counter-max-font-size: #{$chip-selector-counter-max-font-size};
+  --chip-selector-counter-max-opacity: #{$chip-selector-counter-max-opacity};
+
+  // CHIP LIST (CDK Drag & Drop)
+  --chip-list-drag-placeholder-opacity-before: #{$chip-list-drag-placeholder-opacity-before};
+  --chip-list-drag-preview-opacity: #{$chip-list-drag-preview-opacity};
+  --chip-list-drag-preview-rotation: #{$chip-list-drag-preview-rotation};
+  --chip-list-drag-color-mix-percentage: #{$chip-list-drag-color-mix-percentage};
+  --chip-list-drag-hover-color-mix-percentage: #{$chip-list-drag-hover-color-mix-percentage};
+  --chip-list-drag-shadow-spread: #{$chip-list-drag-shadow-spread};
+  --chip-list-disabled-opacity: #{$chip-list-disabled-opacity};
+  --chip-list-pulse-placeholder-opacity-min: #{$chip-list-pulse-placeholder-opacity-min};
+  --chip-list-pulse-placeholder-scale-max: #{$chip-list-pulse-placeholder-scale-max};
+  --chip-list-pulse-drop-zone-opacity-min: #{$chip-list-pulse-drop-zone-opacity-min};
+  --chip-list-pulse-drop-zone-scale-max: #{$chip-list-pulse-drop-zone-scale-max};
+}

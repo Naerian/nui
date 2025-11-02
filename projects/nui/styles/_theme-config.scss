@@ -1,0 +1,165 @@
+@import "config";
+@import "mixins";
+
+:root {
+  // =======================
+  // TIPOGRAFÍA
+  // =======================
+  --font-family: #{$font-family};
+
+  --font-size-xs: #{$font-size-xs};
+  --font-size-s: #{$font-size-s};
+  --font-size-sm: #{$font-size-sm};
+  --font-size-md: #{$font-size-md};
+  --font-size-lg: #{$font-size-lg};
+  --font-size-xl: #{$font-size-xl};
+
+  --font-size-h1: #{$font-size-h1};
+  --font-size-h2: #{$font-size-h2};
+  --font-size-h3: #{$font-size-h3};
+  --font-size-h4: #{$font-size-h4};
+  --font-size-h5: #{$font-size-h5};
+  --font-size-h6: #{$font-size-h6};
+
+  --font-weight-regular: #{$font-weight-regular};
+  --font-weight-medium: #{$font-weight-medium};
+  --font-weight-semibold: #{$font-weight-semibold};
+  --font-weight-bold: #{$font-weight-bold};
+
+  --line-height-h1: #{$line-height-h1};
+  --line-height-h2: #{$line-height-h2};
+  --line-height-h3: #{$line-height-h3};
+  --line-height-h4: #{$line-height-h4};
+  --line-height-h5: #{$line-height-h5};
+  --line-height-h6: #{$line-height-h6};
+
+  --line-height-xs: #{$line-height-xs};
+  --line-height-s: #{$line-height-s};
+  --line-height-sm: #{$line-height-sm};
+  --line-height-md: #{$line-height-md};
+  --line-height-lg: #{$line-height-lg};
+  --line-height-xl: #{$line-height-xl};
+
+  // =======================
+  // BORDES Y RADIOS
+  // =======================
+
+  // Border radius - Escala completa
+  --border-radius-xs: #{$border-radius-xs};
+  --border-radius-s: #{$border-radius-s};
+  --border-radius-sm: #{$border-radius-sm};
+  --border-radius-md: #{$border-radius-md};
+  --border-radius-lg: #{$border-radius-lg};
+  --border-radius-xl: #{$border-radius-xl};
+  --border-radius-circle: #{$border-radius-circle};
+  --border-radius-pill: #{$border-radius-pill};
+
+  // Border widths - Escala completa
+  --border-width-xs: #{$border-width-xs};
+  --border-width-s: #{$border-width-s};
+  --border-width-sm: #{$border-width-sm};
+  --border-width-md: #{$border-width-md};
+  --border-width-lg: #{$border-width-lg};
+  --border-width-xl: #{$border-width-xl};
+
+  // =======================
+  // ESPACIADOS
+  // =======================
+  --spacing-xs: #{$spacing-xs};
+  --spacing-s: #{$spacing-s};
+  --spacing-sm: #{$spacing-sm};
+  --spacing-md: #{$spacing-md};
+  --spacing-lg: #{$spacing-lg};
+  --spacing-xl: #{$spacing-xl};
+
+  // =======================
+  // SOMBRAS
+  // =======================
+  --box-shadow-xs: #{$box-shadow-xs};
+  --box-shadow-s: #{$box-shadow-s};
+  --box-shadow-sm: #{$box-shadow-sm};
+  --box-shadow-md: #{$box-shadow-md};
+  --box-shadow-lg: #{$box-shadow-lg};
+  --box-shadow-xl: #{$box-shadow-xl};
+  --box-shadow-button-hover: #{$box-shadow-button-hover};
+
+  // Sombras semánticas (variables de alto nivel para tipos de componente)
+  --shadow-container: var(
+    --box-shadow-sm
+  ); // Componentes contenedores (Card, Calendar, TimePicker, Panel)
+  --shadow-elevated: var(
+    --box-shadow-md
+  ); // Componentes flotantes/elevados (Dropdown, Modal, ContextMenu, Tooltip)
+  --shadow-interactive: var(
+    --box-shadow-s
+  ); // Elementos interactivos (Button hover, List items, Paginator)
+  --shadow-field: var(
+    --box-shadow-xs
+  ); // Form fields (Input, Select, TextArea, InputNumber)
+  --shadow-none: none; // Sin sombra
+
+  // =======================
+  // TRANSICIONES
+  // =======================
+  --transition-duration-fast: #{$transition-duration-fast};
+  --transition-duration-normal: #{$transition-duration-normal};
+  --transition-duration-slow: #{$transition-duration-slow};
+  --transition-duration-base: #{$transition-duration-base};
+  --transition-timing-function-ease: #{$transition-timing-function-ease};
+
+  // =======================
+  // COMPONENTES (VALORES INDIVIDUALES DE MAPAS)
+  // =======================
+
+  // Alturas de componentes
+  --component-height-xs: #{map-get($component-heights, xs)};
+  --component-height-s: #{map-get($component-heights, s)};
+  --component-height-sm: #{map-get($component-heights, sm)};
+  --component-height-md: #{map-get($component-heights, md)};
+  --component-height-lg: #{map-get($component-heights, lg)};
+  --component-height-xl: #{map-get($component-heights, xl)};
+
+  // Padding de componentes
+  --component-padding-xs: #{map-get($component-paddings, xs)};
+  --component-padding-s: #{map-get($component-paddings, s)};
+  --component-padding-sm: #{map-get($component-paddings, sm)};
+  --component-padding-md: #{map-get($component-paddings, md)};
+  --component-padding-lg: #{map-get($component-paddings, lg)};
+  --component-padding-xl: #{map-get($component-paddings, xl)};
+
+  // Tamaños de fuente de componentes
+  --component-font-size-xs: #{map-get($component-font-sizes, xs)};
+  --component-font-size-s: #{map-get($component-font-sizes, s)};
+  --component-font-size-sm: #{map-get($component-font-sizes, sm)};
+  --component-font-size-md: #{map-get($component-font-sizes, md)};
+  --component-font-size-lg: #{map-get($component-font-sizes, lg)};
+  --component-font-size-xl: #{map-get($component-font-sizes, xl)};
+
+  // Pesos de fuente de componentes
+  --component-font-weight-xs: #{map-get($component-font-weights, xs)};
+  --component-font-weight-s: #{map-get($component-font-weights, s)};
+  --component-font-weight-sm: #{map-get($component-font-weights, sm)};
+  --component-font-weight-md: #{map-get($component-font-weights, md)};
+  --component-font-weight-lg: #{map-get($component-font-weights, lg)};
+  --component-font-weight-xl: #{map-get($component-font-weights, xl)};
+
+  // Line heights de componentes
+  --component-line-height-xs: #{map-get($component-line-heights, xs)};
+  --component-line-height-s: #{map-get($component-line-heights, s)};
+  --component-line-height-sm: #{map-get($component-line-heights, sm)};
+  --component-line-height-md: #{map-get($component-line-heights, md)};
+  --component-line-height-lg: #{map-get($component-line-heights, lg)};
+  --component-line-height-xl: #{map-get($component-line-heights, xl)};
+
+  // =======================
+  // Z-INDEX (Global)
+  // =======================
+  --z-index-floating: #{$z-index-floating};
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-tooltip: 1070;
+}

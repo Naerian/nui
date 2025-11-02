@@ -1,0 +1,210 @@
+// Estilos base del botón (compartidos entre componente y directiva)
+@mixin button-base-styles {
+  display: flex;
+  gap: var(--button-gap);
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: var(--button-border-radius);
+  font-weight: var(--button-font-weight);
+  text-decoration: none;
+  font-family: var(--font-family);
+  border-width: var(--button-border-width);
+  border-style: solid;
+  transition:
+    background-color var(--button-transition-duration) var(--button-transition-timing),
+    color var(--button-transition-duration) var(--button-transition-timing),
+    border-color var(--button-transition-duration) var(--button-transition-timing),
+    box-shadow var(--button-transition-duration) var(--button-transition-timing);
+
+  // Focus visible
+  &:focus-visible {
+    outline-width: var(--button-focus-outline-width);
+    outline-style: solid;
+    outline-offset: var(--button-focus-outline-offset);
+  }
+
+  // ===== TAMAÑOS =====
+  $sizes: xs, s, sm, md, lg, xl;
+  @each $size in $sizes {
+    &--#{$size} {
+      @include component-size($size);
+      i {
+        font-size: var(--component-font-size-#{$size});
+      }
+    }
+  }
+
+  // Anchos especiales
+  &--full {
+    width: 100% !important;
+  }
+
+  &--fit {
+    width: fit-content !important;
+  }
+
+  // Contenido de texto dentro del botón
+  span,
+  p,
+  div {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  // ===== BOTÓN ICONO =====
+  &--icon {
+    box-shadow: none;
+    min-width: unset;
+    padding: 0;
+    
+    @each $size in $sizes {
+      &.nui-btn--#{$size} {
+        width: var(--component-height-#{$size});
+        height: var(--component-height-#{$size});
+        i {
+          font-size: var(--component-font-size-#{$size});
+        }
+      }
+    }
+    
+    i {
+      margin: 0;
+    }
+  }
+
+  // ===== ESTILOS POR COLOR Y VARIANTE =====
+  $colors: primary, secondary, success, info, warning, danger, accent;
+  $variants: solid, outline, ghost;
+
+  @each $color in $colors {
+    @each $variant in $variants {
+      &--#{$color}.nui-btn--#{$variant} {
+        background-color: var(--button-#{$color}-#{$variant}-bg);
+        color: var(--button-#{$color}-#{$variant}-text);
+        border-color: var(--button-#{$color}-#{$variant}-border);
+
+        &:focus:not(:disabled),
+        &:hover:not(:disabled) {
+          background-color: var(--button-#{$color}-#{$variant}-hover-bg);
+          color: var(--button-#{$color}-#{$variant}-hover-text);
+          border-color: var(--button-#{$color}-#{$variant}-hover-border);
+        }
+
+        &:active:not(:disabled) {
+          background-color: var(--button-#{$color}-#{$variant}-active-bg);
+          border-color: var(--button-#{$color}-#{$variant}-active-border);
+          outline: none;
+        }
+
+        &:focus-visible {
+          outline-color: var(--button-#{$color}-focus-color);
+        }
+
+        // Icono
+        i::before {
+          color: currentColor;
+        }
+      }
+    }
+
+    // Variant por defecto es solid (cuando no se especifica)
+    &--#{$color}:not(.nui-btn--solid):not(.nui-btn--outline):not(.nui-btn--ghost) {
+      background-color: var(--button-#{$color}-solid-bg);
+      color: var(--button-#{$color}-solid-text);
+      border-color: var(--button-#{$color}-solid-border);
+
+      &:focus:not(:disabled),
+      &:hover:not(:disabled) {
+        background-color: var(--button-#{$color}-solid-hover-bg);
+        color: var(--button-#{$color}-solid-hover-text);
+        border-color: var(--button-#{$color}-solid-hover-border);
+      }
+
+      &:active:not(:disabled) {
+        background-color: var(--button-#{$color}-solid-active-bg);
+        border-color: var(--button-#{$color}-solid-active-border);
+        outline: none;
+      }
+
+      i::before {
+        color: currentColor;
+      }
+    }
+  }
+
+  // ====================================================================
+  // Estado de carga (loading)
+  // ====================================================================
+  &--loading {
+    position: relative;
+    pointer-events: none;
+  }
+
+  &__spinner {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      animation: spin var(--button-spin-duration) linear infinite;
+    }
+  }
+
+  &__content--hidden {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+  }
+
+  // Animación de rotación para el spinner
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  // ====================================================================
+  // Estado deshabilitado
+  // ====================================================================
+  &:disabled,
+  &[disabled],
+  &--disabled,
+  &.nui-btn--disabled {
+    @include disabled;
+    pointer-events: none;
+    cursor: not-allowed;
+
+    &:hover,
+    &:focus,
+    &:active {
+      cursor: not-allowed;
+    }
+  }
+}
+
+// ============================================================================
+// Estilos globales para la directiva nuiButton
+// ============================================================================
+// Estos estilos se aplican a elementos HTML nativos que usen la directiva
+// Cuando se use como librería, estos estilos deben importarse en el
+// styles.scss del consumidor o incluirse en el bundle de la librería
+// ============================================================================
+
+.nui-btn {
+  @include button-base-styles;
+
+  // Asegurar que links no tengan underline (sobrescribir estilos globales)
+  &,
+  &:link,
+  &:visited,
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none !important;
+  }
+}

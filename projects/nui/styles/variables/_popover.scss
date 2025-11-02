@@ -1,0 +1,92 @@
+// ========================================
+// POPOVER - Variables
+// ========================================
+//
+// Variables centralizadas para personalizar el componente Popover.
+// Todas las variables usan !default para permitir sobrescritura.
+//
+// Cómo personalizar:
+// ------------------
+// 1. Define tus propias variables ANTES de importar este archivo
+// 2. Las variables SCSS ($popover-*) afectan todos los popovers
+// 3. Las CSS variables (--popover-*) se pueden sobrescribir en :root o por tema
+//
+// Ejemplo de personalización:
+// ```scss
+// // En tu archivo custom-variables.scss
+// $popover-padding: 1rem;
+// $popover-max-width: 400px;
+//
+// @import "variables/popover";
+// ```
+//
+// ========================================
+
+// ===== ESPACIADO =====
+$popover-padding: 1rem !default;
+$popover-max-width: 20rem !default;
+$popover-min-width: 10rem !default;
+
+// ===== TIPOGRAFÍA =====
+$popover-font-size: var(--font-size-sm) !default;
+$popover-font-weight: var(--font-weight-regular) !default;
+$popover-line-height: var(--line-height-md) !default;
+
+// ===== BORDES Y RADIOS =====
+$popover-border-radius: var(--border-radius-md) !default;
+$popover-border: var(--border-container) !default;
+
+// ===== COLORES =====
+// Los colores se manejan por tema en theme-config
+$popover-bg: var(--popover-bg) !default;
+$popover-text: var(--popover-text) !default;
+
+// ===== SOMBRAS =====
+$popover-shadow: var(--shadow-elevated) !default;
+
+// ===== Z-INDEX =====
+$popover-z-index: 1000 !default;
+
+// ===== FLECHA =====
+$popover-arrow-size: 8px !default;
+$popover-arrow-border-width: 1px !default;
+$popover-arrow-offset: 12px !default; // Distancia desde el borde del popover
+
+// ===== ANIMACIÓN =====
+$popover-transition-duration: 200ms !default;
+$popover-transition-timing: cubic-bezier(0.4, 0, 0.2, 1) !default;
+
+:root {
+  // Espaciado
+  --popover-padding: #{$popover-padding};
+  --popover-max-width: #{$popover-max-width};
+  --popover-min-width: #{$popover-min-width};
+
+  // Tipografía
+  --popover-font-size: #{$popover-font-size};
+  --popover-font-weight: #{$popover-font-weight};
+  --popover-line-height: #{$popover-line-height};
+
+  // Bordes y radios
+  --popover-border-radius: #{$popover-border-radius};
+  --popover-border: #{$popover-border};
+
+  // Colores
+  --popover-bg: #{$popover-bg};
+  --popover-text: #{$popover-text};
+
+  // Sombra
+  --popover-shadow: #{$popover-shadow};
+
+  // Z-Index
+  --popover-z-index: #{$popover-z-index};
+
+  // Flecha
+  --popover-arrow-size: #{$popover-arrow-size};
+  --popover-arrow-border-width: #{$popover-arrow-border-width};
+  --popover-arrow-offset: #{$popover-arrow-offset};
+
+  // Animación
+  --popover-transition-duration: #{$popover-transition-duration};
+  --popover-transition-timing: #{$popover-transition-timing};
+}

@@ -1,0 +1,90 @@
+// ========================================
+// BUTTON - Variables
+// ========================================
+//
+// Variables centralizadas para personalizar el componente Button.
+// Todas las variables usan !default para permitir sobrescritura.
+//
+// Cómo personalizar:
+// ------------------
+// 1. Define tus propias variables ANTES de importar este archivo
+// 2. Las variables SCSS ($button-*) afectan todos los botones
+// 3. Las CSS variables (--button-*) se pueden sobrescribir en :root o por tema
+//
+// Ejemplo de personalización:
+// ```scss
+// // En tu archivo custom-variables.scss
+// $button-gap: 0.75rem;
+// $button-border-radius: 0.375rem;
+// $button-focus-outline-width: 3px;
+//
+// @import "variables/button";
+// ```
+//
+// Para temas específicos, usa los mixins en themes/_theme-mixins.scss
+// que generan automáticamente las variables de color por cada modo
+// (--button-{mode}-bg, --button-{mode}-text, etc.)
+//
+// ========================================
+
+// ===== ESPACIADO =====
+$button-gap: 0.5rem !default;
+
+// ===== BORDES Y RADIOS =====
+$button-border-radius: var(--border-radius-md) !default;
+$button-border-width: var(--border-width-xs) !default;
+
+// ===== TIPOGRAFÍA =====
+$button-font-weight: var(--font-weight-medium) !default;
+$button-font-family: var(--font-family) !default;
+
+// ===== TRANSFORMACIONES Y ANIMACIONES =====
+$button-spin-duration: 1s !default;
+
+// ===== FOCUS =====
+$button-focus-outline-width: 2px !default;
+$button-focus-outline-offset: -1px !default;
+
+// ===== OUTLINE VARIANT =====
+$button-outline-border-width: var(--border-width-xs) !default;
+$button-outline-border-style: solid !default;
+
+// ===== DISABLED STATE =====
+// Los estilos disabled se manejan con el mixin @include disabled
+
+// ===== BUTTON MODES =====
+// Los colores se generan dinámicamente en theme-mixins
+// Cada modo (primary, secondary, success, info, warning, danger, accent) tiene:
+// - --button-{mode}-bg
+// - --button-{mode}-border-color
+// - --button-{mode}-text
+// - --button-{mode}-hover-bg
+// - --button-{mode}-ghost-text
+// - --button-{mode}-icon-color
+// - --button-{mode}-ghost-icon-color
+// - --button-{mode}-ghost-hover-bg
+
+$button-modes: primary, secondary, success, info, warning, danger, accent !default;
+
+// ===== EXPORTAR CSS VARIABLES =====
+:root {
+  // Espaciado
+  --button-gap: #{$button-gap};
+
+  // Bordes
+  --button-border-radius: #{$button-border-radius};
+  --button-border-width: #{$button-border-width};
+
+  // Tipografía
+  --button-font-weight: #{$button-font-weight};
+
+  // Transformaciones
+  --button-spin-duration: #{$button-spin-duration};
+
+  // Focus
+  --button-focus-outline-width: #{$button-focus-outline-width};
+  --button-focus-outline-offset: #{$button-focus-outline-offset};
+
+  // Outline
+  --button-outline-border-width: #{$button-outline-border-width};
+}

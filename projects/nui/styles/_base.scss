@@ -1,0 +1,126 @@
+@import "theme";
+
+// ==========================================
+// BOX SIZING (FUNDAMENTAL)
+// ==========================================
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+// ==========================================
+// HTML & HOST
+// ==========================================
+html, :host {
+  font-family: var(--font-family);
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  line-height: 1.5;
+  font-feature-settings: normal;
+  -webkit-tap-highlight-color: transparent;
+
+  i {
+    line-height: 1;
+  }
+}
+
+// ==========================================
+// BODY
+// ==========================================
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--surface-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// ==========================================
+// HEADINGS
+// ==========================================
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+}
+
+// ==========================================
+// FORM ELEMENTS
+// ==========================================
+button, input, optgroup, select, textarea {
+  font-family: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+// ==========================================
+// LINKS
+// ==========================================
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--color-primary);
+    opacity: 0.8;
+  }
+}
+
+// ==========================================
+// FOCUS STATES
+// ==========================================
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+// ==========================================
+// SELECTION
+// ==========================================
+::selection {
+  background-color: var(--color-selection);
+  color: var(--color-text);
+}
+
+// ==========================================
+// SCROLLBAR (Webkit browsers)
+// ==========================================
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scroll-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb-bg);
+  border-radius: 4px;
+
+  &:hover {
+    background: var(--color-gray-500);
+  }
+}
+
+// ==========================================
+// UTILITY CLASSES
+// ==========================================
+mark.highlight {
+  background-color: var(--color-highlight);
+  color: inherit;
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--border-radius-sm);
+  padding: 0 0.25rem;
+}
