@@ -23,10 +23,8 @@
 //------------------------------------------------------------
 // ## 5. Estilos base y tipografía
 //------------------------------------------------------------
-@import "fonts"; // @font-face declarations
 @import "base"; // Reset/normalize + estilos base HTML
 @import "typography"; // Estilos tipográficos globales
-@import "forms"; // Estilos base de formularios
 
 //------------------------------------------------------------
 // ## 6. Componentes globales (CDK Overlay, etc.)
