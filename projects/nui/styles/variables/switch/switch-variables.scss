@@ -1,0 +1,54 @@
+// ========================================
+// SWITCH - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Switch.
+// Se incluyen a través del mixin nui-switch-vars.
+//
+// Uso:
+// ```scss
+// :root {
+//   @include nui-switch-vars;
+// }
+// ```
+//
+// ========================================
+
+@mixin nui-switch-vars {
+  // Track heights por tamaño
+  --switch-track-height-xs: #{map-get($switch-track-heights, xs)};
+  --switch-track-height-s: #{map-get($switch-track-heights, s)};
+  --switch-track-height-sm: #{map-get($switch-track-heights, sm)};
+  --switch-track-height-md: #{map-get($switch-track-heights, md)};
+  --switch-track-height-lg: #{map-get($switch-track-heights, lg)};
+  --switch-track-height-xl: #{map-get($switch-track-heights, xl)};
+
+  // Track widths por tamaño
+  --switch-track-width-xs: #{map-get($switch-track-widths, xs)};
+  --switch-track-width-s: #{map-get($switch-track-widths, s)};
+  --switch-track-width-sm: #{map-get($switch-track-widths, sm)};
+  --switch-track-width-md: #{map-get($switch-track-widths, md)};
+  --switch-track-width-lg: #{map-get($switch-track-widths, lg)};
+  --switch-track-width-xl: #{map-get($switch-track-widths, xl)};
+
+  // Thumb sizes por tamaño
+  --switch-thumb-size-xs: #{map-get($switch-thumb-sizes, xs)};
+  --switch-thumb-size-s: #{map-get($switch-thumb-sizes, s)};
+  --switch-thumb-size-sm: #{map-get($switch-thumb-sizes, sm)};
+  --switch-thumb-size-md: #{map-get($switch-thumb-sizes, md)};
+  --switch-thumb-size-lg: #{map-get($switch-thumb-sizes, lg)};
+  --switch-thumb-size-xl: #{map-get($switch-thumb-sizes, xl)};
+
+  // Propiedades adicionales
+  --switch-thumb-offset-xs: #{$switch-thumb-offset-xs};
+  --switch-thumb-offset-default: #{$switch-thumb-offset-default};
+  --switch-track-border-width: #{$switch-track-border-width};
+  --switch-disabled-opacity: #{$switch-disabled-opacity};
+  --switch-gap-default: #{$switch-gap-default};
+  --switch-gap-small: #{$switch-gap-small};
+  --switch-icon-scale: #{$switch-icon-scale};
+  --switch-z-index-focus: #{$switch-z-index-focus};
+  --switch-transition-duration: #{$switch-transition-duration};
+  --switch-transition-timing: #{$switch-transition-timing};
+  --switch-thumb-shadow: #{$switch-thumb-shadow};
+}

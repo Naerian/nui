@@ -1,0 +1,81 @@
+// ========================================
+// AVATAR - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Avatar.
+// Se incluyen a través del mixin nui-avatar-vars.
+//
+// Uso:
+// ```scss
+// :root {
+//   @include nui-avatar-vars;
+// }
+// ```
+//
+// ========================================
+
+@mixin nui-avatar-vars {
+  // Tamaños
+  --avatar-size-xs: #{$avatar-size-xs};
+  --avatar-size-sm: #{$avatar-size-sm};
+  --avatar-size-md: #{$avatar-size-md};
+  --avatar-size-lg: #{$avatar-size-lg};
+  --avatar-size-xl: #{$avatar-size-xl};
+
+  // Exceso tamaños
+  --avatar-excess-size-xs: calc(#{$avatar-size-xs} / 2);
+  --avatar-excess-size-sm: calc(#{$avatar-size-sm} / 2);
+  --avatar-excess-size-md: calc(#{$avatar-size-md} / 2);
+  --avatar-excess-size-lg: calc(#{$avatar-size-lg} / 2);
+  --avatar-excess-size-xl: calc(#{$avatar-size-xl} / 2);
+
+  // Font sizes
+  --avatar-font-size-xs: #{$avatar-font-size-xs};
+  --avatar-font-size-sm: #{$avatar-font-size-sm};
+  --avatar-font-size-md: #{$avatar-font-size-md};
+  --avatar-font-size-lg: #{$avatar-font-size-lg};
+  --avatar-font-size-xl: #{$avatar-font-size-xl};
+
+  // Icon sizes
+  --avatar-icon-size-xs: #{$avatar-icon-size-xs};
+  --avatar-icon-size-sm: #{$avatar-icon-size-sm};
+  --avatar-icon-size-md: #{$avatar-icon-size-md};
+  --avatar-icon-size-lg: #{$avatar-icon-size-lg};
+  --avatar-icon-size-xl: #{$avatar-icon-size-xl};
+
+  // Bordes
+  --avatar-border-radius-rounded: #{$avatar-border-radius-rounded};
+  --avatar-border-radius-circular: #{$avatar-border-radius-circular};
+  --avatar-border-radius-square: #{$avatar-border-radius-square};
+
+  // Tipografía
+  --avatar-font-weight: #{$avatar-font-weight};
+  --avatar-line-height: #{$avatar-line-height};
+  --avatar-text-transform: #{$avatar-text-transform};
+
+  // Z-index
+  --avatar-z-index-base: #{$avatar-z-index-base};
+  --avatar-z-index-hover: #{$avatar-z-index-hover};
+
+  // Avatar Group
+  --avatar-group-spacing: #{$avatar-group-spacing};
+  --avatar-group-border-width: #{$avatar-group-border-width};
+  --avatar-group-hover-scale: #{$avatar-group-hover-scale};
+  --avatar-group-z-index-hover: #{$avatar-group-z-index-hover};
+
+  // Exceso
+  --avatar-excess-font-size-xs: #{$avatar-excess-font-size-xs};
+  --avatar-excess-font-size-sm: #{$avatar-excess-font-size-sm};
+  --avatar-excess-font-size-md: #{$avatar-excess-font-size-md};
+  --avatar-excess-font-size-lg: #{$avatar-excess-font-size-lg};
+  --avatar-excess-font-size-xl: #{$avatar-excess-font-size-xl};
+  --avatar-excess-font-weight: #{$avatar-excess-font-weight};
+
+  // Transiciones
+  --avatar-transition: all #{$avatar-transition-duration}
+    #{$avatar-transition-timing};
+
+  // NOTA: Las variables de color (--avatar-default-bg, --avatar-primary-bg, etc.)
+  // se definen en los mixins de tema (avatar-theme)
+  // ubicados en src/styles/themes/_theme-mixins.scss
+}

@@ -1,0 +1,29 @@
+// ========================================
+// PANEL - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Panel.
+// Se incluyen a través del mixin nui-panel-vars.
+//
+// ========================================
+
+@mixin nui-panel-vars {
+  // Animation durations
+  --panel-animation-duration: #{$panel-animation-duration};
+  --panel-animation-opacity-duration: #{$panel-animation-opacity-duration};
+  
+  // Animation values
+  --panel-animation-opacity-collapsed: #{$panel-animation-opacity-collapsed};
+  --panel-animation-opacity-expanded: #{$panel-animation-opacity-expanded};
+  
+  // Animation easing
+  --panel-animation-easing: #{$panel-animation-easing};
+  --panel-animation-opacity-easing: #{$panel-animation-opacity-easing};
+  
+  // Toggle
+  --panel-toggle-transition-duration: #{$panel-toggle-transition-duration};
+  --panel-toggle-transition-timing: #{$panel-toggle-transition-timing};
+  
+  // Footer
+  --panel-footer-border-width: #{$panel-footer-border-width};
+}

@@ -1,0 +1,77 @@
+// ========================================
+// FAB BUTTON - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Fab Button.
+// Se incluyen a través del mixin nui-fab-button-vars.
+//
+// Uso:
+// ```scss
+// :root {
+//   @include nui-fab-button-vars;
+// }
+// ```
+//
+// ========================================
+
+@mixin nui-fab-button-vars {
+  // Dimensiones
+  --fab-button-size-xs: #{$fab-button-size-xs};
+  --fab-button-size-s: #{$fab-button-size-s};
+  --fab-button-size-sm: #{$fab-button-size-sm};
+  --fab-button-size-md: #{$fab-button-size-md};
+  --fab-button-size-lg: #{$fab-button-size-lg};
+  --fab-button-size-xl: #{$fab-button-size-xl};
+
+  --fab-button-item-size-xs: #{$fab-button-item-size-xs};
+  --fab-button-item-size-s: #{$fab-button-item-size-s};
+  --fab-button-item-size-sm: #{$fab-button-item-size-sm};
+  --fab-button-item-size-md: #{$fab-button-item-size-md};
+  --fab-button-item-size-lg: #{$fab-button-item-size-lg};
+  --fab-button-item-size-xl: #{$fab-button-item-size-xl};
+
+  --fab-button-font-size-xs: #{$fab-button-font-size-xs};
+  --fab-button-font-size-s: #{$fab-button-font-size-s};
+  --fab-button-font-size-sm: #{$fab-button-font-size-sm};
+  --fab-button-font-size-md: #{$fab-button-font-size-md};
+  --fab-button-font-size-lg: #{$fab-button-font-size-lg};
+  --fab-button-font-size-xl: #{$fab-button-font-size-xl};
+
+  --fab-button-label-font-size-xs: #{$fab-button-label-font-size-xs};
+  --fab-button-label-font-size-s: #{$fab-button-label-font-size-s};
+  --fab-button-label-font-size-sm: #{$fab-button-label-font-size-sm};
+  --fab-button-label-font-size-md: #{$fab-button-label-font-size-md};
+  --fab-button-label-font-size-lg: #{$fab-button-label-font-size-lg};
+  --fab-button-label-font-size-xl: #{$fab-button-label-font-size-xl};
+
+  // Espaciado
+  --fab-button-item-spacing: #{$fab-button-item-spacing};
+  --fab-button-label-gap: #{$fab-button-label-gap};
+  --fab-button-label-padding: #{$fab-button-label-padding};
+
+  // Bordes
+  --fab-button-border-radius: #{$fab-button-border-radius};
+  --fab-button-border-width: #{$fab-button-border-width};
+
+  // Overlay
+  --fab-button-overlay-bg: #{$fab-button-overlay-bg};
+
+  // Animaciones
+  --fab-button-transition-duration: #{$fab-button-transition-duration};
+  --fab-button-transition-timing: #{$fab-button-transition-timing};
+  --fab-button-icon-rotation: #{$fab-button-icon-rotation};
+
+  // Tipografía
+  --fab-button-font-weight: #{$fab-button-font-weight};
+  --fab-button-font-family: #{$fab-button-font-family};
+  --fab-button-label-font-size: #{$fab-button-label-font-size};
+
+  // Focus
+  --fab-button-focus-outline-width: #{$fab-button-focus-outline-width};
+  --fab-button-focus-outline-offset: #{$fab-button-focus-outline-offset};
+
+  // Z-index
+  --fab-button-z-index: #{$fab-button-z-index};
+  --fab-button-overlay-z-index: #{$fab-button-overlay-z-index};
+  --fab-button-items-z-index: #{$fab-button-items-z-index};
+}

@@ -1,0 +1,43 @@
+// ========================================
+// POPOVER - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Popover.
+// Se incluyen a través del mixin nui-popover-vars.
+//
+// ========================================
+
+@mixin nui-popover-vars {
+  // Espaciado
+  --popover-padding: #{$popover-padding};
+  --popover-max-width: #{$popover-max-width};
+  --popover-min-width: #{$popover-min-width};
+
+  // Tipografía
+  --popover-font-size: #{$popover-font-size};
+  --popover-font-weight: #{$popover-font-weight};
+  --popover-line-height: #{$popover-line-height};
+
+  // Bordes y radios
+  --popover-border-radius: #{$popover-border-radius};
+  --popover-border: #{$popover-border};
+
+  // Colores
+  --popover-bg: #{$popover-bg};
+  --popover-text: #{$popover-text};
+
+  // Sombra
+  --popover-shadow: #{$popover-shadow};
+
+  // Z-Index
+  --popover-z-index: #{$popover-z-index};
+
+  // Flecha
+  --popover-arrow-size: #{$popover-arrow-size};
+  --popover-arrow-border-width: #{$popover-arrow-border-width};
+  --popover-arrow-offset: #{$popover-arrow-offset};
+
+  // Animación
+  --popover-transition-duration: #{$popover-transition-duration};
+  --popover-transition-timing: #{$popover-transition-timing};
+}

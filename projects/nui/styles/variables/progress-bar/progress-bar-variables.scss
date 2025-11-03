@@ -1,0 +1,43 @@
+// ========================================
+// PROGRESS BAR - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Progress Bar.
+// Se incluyen a través del mixin nui-progress-bar-vars.
+//
+// Uso:
+// ```scss
+// :root {
+//   @include nui-progress-bar-vars;
+// }
+// ```
+//
+// ========================================
+
+@mixin nui-progress-bar-vars {
+  // Alturas por tamaño
+  --progress-bar-height-xs: #{map-get($progress-bar-heights, xs)};
+  --progress-bar-height-s: #{map-get($progress-bar-heights, s)};
+  --progress-bar-height-sm: #{map-get($progress-bar-heights, sm)};
+  --progress-bar-height-md: #{map-get($progress-bar-heights, md)};
+  --progress-bar-height-lg: #{map-get($progress-bar-heights, lg)};
+  --progress-bar-height-xl: #{map-get($progress-bar-heights, xl)};
+
+  // Font sizes por tamaño
+  --progress-bar-font-sizes-xs: #{map-get($progress-bar-font-sizes, xs)};
+  --progress-bar-font-sizes-s: #{map-get($progress-bar-font-sizes, s)};
+  --progress-bar-font-sizes-sm: #{map-get($progress-bar-font-sizes, sm)};
+  --progress-bar-font-sizes-md: #{map-get($progress-bar-font-sizes, md)};
+  --progress-bar-font-sizes-lg: #{map-get($progress-bar-font-sizes, lg)};
+  --progress-bar-font-sizes-xl: #{map-get($progress-bar-font-sizes, xl)};
+  
+  // Transitions
+  --progress-bar-transition-duration-fast: #{$progress-bar-transition-duration-fast};
+  --progress-bar-transition-duration-medium: #{$progress-bar-transition-duration-medium};
+  --progress-bar-transition-timing-ease: #{$progress-bar-transition-timing-ease};
+  --progress-bar-transition-timing-ease-out: #{$progress-bar-transition-timing-ease-out};
+  
+  // Animations
+  --progress-bar-indeterminate-duration: #{$progress-bar-indeterminate-duration};
+  --progress-bar-indeterminate-timing: #{$progress-bar-indeterminate-timing};
+}

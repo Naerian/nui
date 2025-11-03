@@ -1,0 +1,47 @@
+// ========================================
+// CARD - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Card.
+// Se incluyen a través del mixin nui-card-vars.
+//
+// Uso:
+// ```scss
+// :root {
+//   @include nui-card-vars;
+// }
+// ```
+//
+// ========================================
+
+@mixin nui-card-vars {
+  // Dimensiones
+  --card-min-height: #{$card-min-height};
+  --card-header-min-height: #{$card-header-min-height};
+  --card-footer-min-height: #{$card-footer-min-height};
+
+  // Badge
+  --card-badge-min-height: #{$card-badge-min-height};
+  --card-badge-min-width: #{$card-badge-min-width};
+  --card-badge-letter-spacing: #{$card-badge-letter-spacing};
+  --card-badge-backdrop-blur: #{$card-badge-backdrop-blur};
+  --card-badge-opacity: #{$card-badge-opacity};
+  --card-badge-opacity-dark: #{$card-badge-opacity-dark};
+  --card-badge-opacity-light: #{$card-badge-opacity-light};
+
+  // Imagen
+  --card-image-hover-zoom-scale: #{$card-image-hover-zoom-scale};
+  --card-image-hover-zoom-duration: #{$card-image-hover-zoom-duration};
+  --card-image-hover-zoom-easing: #{$card-image-hover-zoom-easing};
+
+  // Skeleton
+  --card-skeleton-min-height: #{$card-skeleton-min-height};
+  --card-skeleton-animation-duration: #{$card-skeleton-animation-duration};
+  --card-skeleton-background-size: #{$card-skeleton-background-size};
+
+  // Header
+  --card-header-icon-margin-top: #{$card-header-icon-margin-top};
+
+  // Footer
+  --card-footer-border-width: #{$card-footer-border-width};
+}

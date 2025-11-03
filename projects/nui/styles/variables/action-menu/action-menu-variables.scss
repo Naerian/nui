@@ -1,0 +1,23 @@
+// ========================================
+// ACTION MENU - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Action Menu.
+// Se incluyen a través del mixin nui-action-menu-vars.
+//
+// Uso:
+// ```scss
+// :root {
+//   @include nui-action-menu-vars;
+// }
+// ```
+//
+// ========================================
+
+@mixin nui-action-menu-vars {
+  --action-menu-min-width: #{$action-menu-min-width};
+  --action-menu-max-width: #{$action-menu-max-width};
+  --action-menu-item-gap: #{$action-menu-item-gap};
+  --action-menu-item-border: #{$action-menu-item-border};
+  --action-menu-arrow-padding-left: #{$action-menu-arrow-padding-left};
+}

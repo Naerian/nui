@@ -1,6 +1,29 @@
 @import "config";
 @import "mixins";
 
+// Importar todas las variables CSS (mixins) de los componentes
+@import "variables/action-menu/action-menu-variables";
+@import "variables/avatar/avatar-variables";
+@import "variables/breadcrumb/breadcrumb-variables";
+@import "variables/button-group/button-group-variables";
+@import "variables/button/button-variables";
+@import "variables/calendar/calendar-variables";
+@import "variables/card/card-variables";
+@import "variables/chip/chip-variables";
+@import "variables/fab-button/fab-button-variables";
+@import "variables/spinner/spinner-variables";
+@import "variables/toast/toast-variables";
+@import "variables/tooltip/tooltip-variables";
+@import "variables/popover/popover-variables";
+@import "variables/progress-bar/progress-bar-variables";
+@import "variables/switch/switch-variables";
+@import "variables/panel/panel-variables";
+@import "variables/modal-dialog/modal-dialog-variables";
+@import "variables/paginator/paginator-variables";
+@import "variables/slidepanel/slidepanel-variables";
+@import "variables/tab/tab-variables";
+@import "variables/time-picker/time-picker-variables";
+
 :root {
   // =======================
   // TIPOGRAFÍA
@@ -155,4 +178,30 @@
   // Z-INDEX (Global)
   // =======================
   --z-index-floating: #{$z-index-floating};
+
+  // ========================================
+  // COMPONENT VARIABLES
+  // ========================================
+  // Incluir todas las variables CSS de los componentes
+  @include nui-action-menu-vars;
+  @include nui-avatar-vars;
+  @include nui-breadcrumb-vars;
+  @include nui-button-group-vars;
+  @include nui-button-vars;
+  @include nui-calendar-vars;
+  @include nui-card-vars;
+  @include nui-chip-vars;
+  @include nui-fab-button-vars;
+  @include nui-spinner-vars;
+  @include nui-toast-vars;
+  @include nui-tooltip-vars;
+  @include nui-popover-vars;
+  @include nui-progress-bar-vars;
+  @include nui-switch-vars;
+  @include nui-panel-vars;
+  @include nui-modal-dialog-vars;
+  @include nui-paginator-vars;
+  @include nui-slidepanel-vars;
+  @include nui-tab-vars;
+  @include nui-time-picker-vars;
 }

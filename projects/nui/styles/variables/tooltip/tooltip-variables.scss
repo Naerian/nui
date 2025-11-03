@@ -1,0 +1,43 @@
+// ========================================
+// TOOLTIP - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Tooltip.
+// Se incluyen a través del mixin nui-tooltip-vars.
+//
+// Uso:
+// ```scss
+// :root {
+//   @include nui-tooltip-vars;
+// }
+// ```
+//
+// ========================================
+
+@mixin nui-tooltip-vars {
+  // Espaciado
+  --tooltip-padding-y: #{$tooltip-padding-y};
+  --tooltip-padding-x: #{$tooltip-padding-x};
+  --tooltip-max-width: #{$tooltip-max-width};
+
+  // Tipografía
+  --tooltip-font-size: #{$tooltip-font-size};
+  --tooltip-font-weight: #{$tooltip-font-weight};
+  --tooltip-line-height: #{$tooltip-line-height};
+
+  // Bordes
+  --tooltip-border-radius: #{$tooltip-border-radius};
+
+  // Z-index
+  --tooltip-z-index: #{$tooltip-z-index};
+
+  // Animación
+  --tooltip-transition-duration: #{$tooltip-transition-duration};
+  --tooltip-transition-timing: #{$tooltip-transition-timing};
+
+  // Flecha
+  --tooltip-arrow-size: #{$tooltip-arrow-size};
+
+  // Sombra
+  --tooltip-shadow: #{$tooltip-shadow};
+}

@@ -1,0 +1,118 @@
+// ========================================
+// MODAL DIALOG - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Modal Dialog.
+// Se incluyen a través del mixin nui-modal-dialog-vars.
+//
+// Uso:
+// ```scss
+// :root {
+//   @include nui-modal-dialog-vars;
+// }
+// ```
+//
+// ========================================
+
+@mixin nui-modal-dialog-vars {
+  // Dimensiones
+  --modal-min-width: #{$modal-min-width};
+  --modal-max-width: #{$modal-max-width};
+  --modal-padding: #{$modal-padding};
+  --modal-gap: #{$modal-gap};
+
+  // Bordes y radios
+  --modal-border-radius: #{$modal-border-radius};
+  --modal-border: #{$modal-border};
+  --modal-shadow: #{$modal-shadow};
+
+  // Botón de cierre
+  --modal-close-position: #{$modal-close-position};
+  --modal-close-z-index: #{$modal-close-z-index};
+
+  // Título
+  --modal-title-font-size: #{$modal-title-font-size};
+  --modal-title-font-family: #{$modal-title-font-family};
+  --modal-title-font-weight: #{$modal-title-font-weight};
+  --modal-title-gap: #{$modal-title-gap};
+  --modal-title-margin-bottom: #{$modal-title-margin-bottom};
+  --modal-title-padding-bottom: #{$modal-title-padding-bottom};
+  --modal-title-border-width: #{$modal-title-border-width};
+  --modal-title-border-color: #{$modal-title-border-color};
+  --modal-title-line-height: #{$modal-title-line-height};
+
+  // Título - Icono
+  --modal-title-icon-size: #{$modal-title-icon-size};
+  --modal-title-icon-line-height: #{$modal-title-icon-line-height};
+
+  // Cuerpo
+  --modal-body-font-size: #{$modal-body-font-size};
+  --modal-body-font-family: #{$modal-body-font-family};
+  --modal-body-line-height: #{$modal-body-line-height};
+  --modal-body-paragraph-margin: #{$modal-body-paragraph-margin};
+  --modal-body-list-margin: #{$modal-body-list-margin};
+  --modal-body-list-padding: #{$modal-body-list-padding};
+
+  // Footer
+  --modal-footer-margin-top: #{$modal-footer-margin-top};
+  --modal-footer-gap: #{$modal-footer-gap};
+  --modal-footer-gap-mobile: #{$modal-footer-gap-mobile};
+  --modal-footer-min-height: #{$modal-footer-min-height};
+  --modal-footer-mobile-breakpoint: #{$modal-footer-mobile-breakpoint};
+
+  // Custom templates
+  --modal-custom-header-margin: #{$modal-custom-header-margin};
+  --modal-custom-body-margin: #{$modal-custom-body-margin};
+  --modal-custom-footer-margin: #{$modal-custom-footer-margin};
+
+  // Progress bar
+  --modal-progress-height: #{$modal-progress-height};
+  --modal-progress-bg: #{$modal-progress-bg};
+  --modal-progress-border-radius: #{$modal-progress-border-radius};
+  --modal-progress-z-index: #{$modal-progress-z-index};
+  --modal-progress-fill-bg: #{$modal-progress-fill-bg};
+  --modal-progress-transition: #{$modal-progress-transition};
+  --modal-progress-pulse-duration: #{$modal-progress-pulse-duration};
+  --modal-progress-pulse-easing: #{$modal-progress-pulse-easing};
+  --modal-progress-pulse-opacity-min: #{$modal-progress-pulse-opacity-min};
+
+  // Countdown
+  --modal-countdown-font-size: #{$modal-countdown-font-size};
+  --modal-countdown-font-weight: #{$modal-countdown-font-weight};
+  --modal-countdown-line-height: #{$modal-countdown-line-height};
+  --modal-countdown-bg: #{$modal-countdown-bg};
+  --modal-countdown-padding: #{$modal-countdown-padding};
+  --modal-countdown-border-radius: #{$modal-countdown-border-radius};
+  --modal-countdown-min-width: #{$modal-countdown-min-width};
+  --modal-countdown-margin-left: #{$modal-countdown-margin-left};
+
+  // Loading
+  --modal-loading-gap: #{$modal-loading-gap};
+  --modal-loading-padding: #{$modal-loading-padding};
+  --modal-loading-min-height: #{$modal-loading-min-height};
+  --modal-loading-message-size: #{$modal-loading-message-size};
+  --modal-loading-message-line-height: #{$modal-loading-message-line-height};
+
+  // With timeout
+  --modal-with-timeout-padding-top: #{$modal-with-timeout-padding-top};
+
+  // Verification
+  --modal-verification-gap: #{$modal-verification-gap};
+  --modal-verification-margin-top: #{$modal-verification-margin-top};
+  --modal-verification-label-size: #{$modal-verification-label-size};
+  --modal-verification-label-weight: #{$modal-verification-label-weight};
+  --modal-verification-label-line-height: #{$modal-verification-label-line-height};
+  --modal-verification-container-gap: #{$modal-verification-container-gap};
+  --modal-verification-container-padding: #{$modal-verification-container-padding};
+  --modal-verification-container-radius: #{$modal-verification-container-radius};
+  --modal-verification-container-border: #{$modal-verification-container-border};
+  --modal-verification-text-label-size: #{$modal-verification-text-label-size};
+  --modal-verification-text-label-weight: #{$modal-verification-text-label-weight};
+  --modal-verification-text-family: #{$modal-verification-text-family};
+  --modal-verification-text-weight: #{$modal-verification-text-weight};
+  --modal-verification-text-size: #{$modal-verification-text-size};
+  --modal-verification-text-line-height: #{$modal-verification-text-line-height};
+  --modal-verification-text-letter-spacing: #{$modal-verification-text-letter-spacing};
+  --modal-verification-error-size: #{$modal-verification-error-size};
+  --modal-verification-error-margin-top: #{$modal-verification-error-margin-top};
+}

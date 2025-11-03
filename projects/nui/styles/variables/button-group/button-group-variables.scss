@@ -1,0 +1,43 @@
+// ========================================
+// BUTTON GROUP - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Button Group.
+// Se incluyen a través del mixin nui-button-group-vars.
+//
+// Uso:
+// ```scss
+// :root {
+//   @include nui-button-group-vars;
+// }
+// ```
+//
+// ========================================
+
+@mixin nui-button-group-vars {
+  // Z-index layers
+  --button-group-z-index-base: #{$button-group-z-index-base};
+  --button-group-z-index-hover: #{$button-group-z-index-hover};
+  --button-group-z-index-selected: #{$button-group-z-index-selected};
+  --button-group-z-index-focus: #{$button-group-z-index-focus};
+
+  // Opacidades
+  --button-group-disabled-opacity: #{$button-group-disabled-opacity};
+  --button-group-container-disabled-opacity: #{$button-group-container-disabled-opacity};
+
+  // Gaps y paddings
+  --button-group-segmented-gap: #{$button-group-segmented-gap};
+  --button-group-segmented-padding: #{$button-group-segmented-padding};
+
+  // Animaciones
+  --button-group-animation-scale-from: #{$button-group-animation-scale-from};
+  --button-group-animation-scale-to: #{$button-group-animation-scale-to};
+
+  // Icon sizes por tamaño
+  --button-group-icon-size-xs: #{$button-group-icon-size-xs};
+  --button-group-icon-size-s: #{$button-group-icon-size-s};
+  --button-group-icon-size-sm: #{$button-group-icon-size-sm};
+  --button-group-icon-size-md: #{$button-group-icon-size-md};
+  --button-group-icon-size-lg: #{$button-group-icon-size-lg};
+  --button-group-icon-size-xl: #{$button-group-icon-size-xl};
+}

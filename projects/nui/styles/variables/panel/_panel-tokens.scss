@@ -1,0 +1,29 @@
+// ========================================
+// PANEL - Tokens (SCSS Variables)
+// ========================================
+//
+// Variables SCSS centralizadas para personalizar el componente Panel.
+// Todas las variables usan !default para permitir sobrescritura.
+//
+// ========================================
+
+// Duración de la animación de collapse/expand (ms)
+$panel-animation-duration: 320ms !default;
+
+// Opacidad durante la animación
+$panel-animation-opacity-collapsed: 0 !default;
+$panel-animation-opacity-expanded: 1 !default;
+
+// Transición de opacidad (más rápida que max-height)
+$panel-animation-opacity-duration: 240ms !default;
+
+// Curva de animación
+$panel-animation-easing: cubic-bezier(0.4, 0, 0.2, 1) !default;
+$panel-animation-opacity-easing: cubic-bezier(0.4, 0, 0.6, 1) !default;
+
+// Toggle animation
+$panel-toggle-transition-duration: 200ms !default;
+$panel-toggle-transition-timing: cubic-bezier(0.4, 0, 0.2, 1) !default;
+
+// Footer border
+$panel-footer-border-width: 1px !default;

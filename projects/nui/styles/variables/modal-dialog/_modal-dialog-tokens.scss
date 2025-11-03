@@ -1,0 +1,135 @@
+// ========================================
+// MODAL DIALOG - Tokens (SCSS Variables)
+// ========================================
+//
+// Variables SCSS centralizadas para personalizar el componente Modal Dialog.
+// Todas las variables usan !default para permitir sobrescritura.
+//
+// Cómo personalizar:
+// ------------------
+// 1. Define tus propias variables ANTES de importar este archivo
+// 2. Las variables SCSS ($modal-*) afectan todos los modales
+//
+// Ejemplo de personalización:
+// ```scss
+// // En tu archivo custom-variables.scss
+// $modal-min-width: 320px;
+// $modal-title-font-size: 1.25rem;
+// $modal-progress-height: 8px;
+//
+// @import "variables/modal-dialog/modal-dialog-tokens";
+// ```
+//
+// Para temas específicos, usa los mixins en themes/_theme-mixins.scss
+// que generan automáticamente las variables de color (--modal-{type}-icon-color, etc.)
+//
+// ========================================
+
+// ===== DIMENSIONES =====
+$modal-min-width: 280px !default;
+$modal-max-width: 90vw !default;
+$modal-padding: var(--spacing-md, 1.2rem) !default;
+$modal-gap: var(--spacing-xs, 0.625rem) !default;
+
+// ===== BORDES Y RADIOS =====
+$modal-border-radius: var(--border-radius-md, 0.5rem) !default;
+$modal-border: var(--border-container) !default;
+$modal-shadow: var(--shadow-elevated) !default;
+
+// ===== BOTÓN DE CIERRE =====
+$modal-close-position: var(--spacing-sm, 0.75rem) !default;
+$modal-close-z-index: 10 !default;
+
+// ===== TÍTULO =====
+$modal-title-font-size: var(--font-size-h6) !default;
+$modal-title-font-family: var(--font-family) !default;
+$modal-title-font-weight: var(--font-weight-semibold) !default;
+$modal-title-gap: var(--spacing-xs, 0.625rem) !default;
+$modal-title-margin-bottom: var(--spacing-s, 0.625rem) !default;
+$modal-title-padding-bottom: var(--spacing-s, 0.25rem) !default;
+$modal-title-border-width: var(--border-width-xs) !default;
+$modal-title-border-color: var(--color-border) !default;
+$modal-title-line-height: 1.3 !default;
+
+// ===== TÍTULO - ICONO =====
+$modal-title-icon-size: 1.25rem !default;
+$modal-title-icon-line-height: 1 !default;
+
+// ===== CUERPO/CONTENIDO =====
+$modal-body-font-size: var(--font-size-sm) !default;
+$modal-body-font-family: var(--font-family) !default;
+$modal-body-line-height: 1.5 !default;
+$modal-body-paragraph-margin: 0 0 0.5rem 0 !default;
+$modal-body-list-margin: 0.5rem 0 !default;
+$modal-body-list-padding: 1.5rem !default;
+
+// ===== FOOTER =====
+$modal-footer-margin-top: var(--spacing-xs, 0.625rem) !default;
+$modal-footer-gap: var(--spacing-md, 1.25rem) !default;
+$modal-footer-gap-mobile: var(--spacing-sm, 0.75rem) !default;
+$modal-footer-min-height: 45px !default;
+$modal-footer-mobile-breakpoint: 480px !default;
+
+// ===== CUSTOM TEMPLATES =====
+$modal-custom-header-margin: var(--spacing-xs, 0.625rem) !default;
+$modal-custom-body-margin: var(--spacing-sm, 0.75rem) 0 !default;
+$modal-custom-footer-margin: var(--spacing-xs, 0.625rem) !default;
+
+// ===== PROGRESS BAR (TIMEOUT) =====
+$modal-progress-height: 6px !default;
+$modal-progress-bg: rgba(0, 0, 0, 0.1) !default;
+$modal-progress-border-radius: var(--border-radius-md) var(--border-radius-md) 0 0 !default;
+$modal-progress-z-index: 20 !default;
+$modal-progress-fill-bg: var(--color-modal-gradient) !default;
+$modal-progress-transition: width 0.05s linear !default;
+$modal-progress-pulse-duration: 2s !default;
+$modal-progress-pulse-easing: ease-in-out !default;
+$modal-progress-pulse-opacity-min: 0.8 !default;
+
+// ===== COUNTDOWN INDICATOR =====
+$modal-countdown-font-size: var(--font-size-s) !default;
+$modal-countdown-font-weight: var(--font-weight-semibold) !default;
+$modal-countdown-line-height: 1.2rem !default;
+$modal-countdown-bg: var(--modal-countdown-bg) !default;
+$modal-countdown-padding: 0.125rem 0.5rem !default;
+$modal-countdown-border-radius: var(--border-radius-sm) !default;
+$modal-countdown-min-width: 2.5rem !default;
+$modal-countdown-margin-left: var(--spacing-xs) !default;
+
+// ===== LOADING STATE =====
+$modal-loading-gap: var(--spacing-md, 1.2rem) !default;
+$modal-loading-padding: var(--spacing-lg, 1.5rem) !default;
+$modal-loading-min-height: 200px !default;
+$modal-loading-message-size: var(--font-size-sm) !default;
+$modal-loading-message-line-height: 1.4 !default;
+
+// ===== WITH TIMEOUT STATE =====
+$modal-with-timeout-padding-top: calc(#{$modal-padding} + 8px) !default;
+
+// ===== VERIFICATION FIELD =====
+$modal-verification-gap: var(--spacing-sm, 0.75rem) !default;
+$modal-verification-margin-top: var(--spacing-sm, 0.75rem) !default;
+$modal-verification-label-size: var(--font-size-sm) !default;
+$modal-verification-label-weight: var(--font-weight-medium) !default;
+$modal-verification-label-line-height: 1.4 !default;
+
+$modal-verification-container-gap: var(--spacing-xs, 0.25rem) !default;
+$modal-verification-container-padding: var(--spacing-sm, 0.75rem) !default;
+$modal-verification-container-radius: var(--border-radius-md, 0.5rem) !default;
+$modal-verification-container-border: none !default;
+
+$modal-verification-text-label-size: var(--font-size-md) !default;
+$modal-verification-text-label-weight: var(--font-weight-medium) !default;
+
+$modal-verification-text-family: "Mono", "Courier New", monospace !default;
+$modal-verification-text-weight: var(--font-weight-semibold) !default;
+$modal-verification-text-size: var(--font-size-sm) !default;
+$modal-verification-text-line-height: normal !default;
+$modal-verification-text-letter-spacing: 0.063rem !default;
+
+$modal-verification-error-size: var(--font-size-xs) !default;
+$modal-verification-error-margin-top: -0.25rem !default;
+
+// ===== MODAL TYPES (COLORES) =====
+// Los colores específicos se generan dinámicamente en theme-mixins
+$modal-types: primary, secondary, success, info, warning, danger, accent !default;

@@ -1,0 +1,65 @@
+// ========================================
+// BREADCRUMB - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Breadcrumb.
+// Se incluyen a través del mixin nui-breadcrumb-vars.
+//
+// Uso:
+// ```scss
+// :root {
+//   @include nui-breadcrumb-vars;
+// }
+// ```
+//
+// ========================================
+
+@mixin nui-breadcrumb-vars {
+  // Layout básico
+  --breadcrumb-min-width: #{$breadcrumb-min-width};
+  --breadcrumb-max-width: #{$breadcrumb-max-width};
+  --breadcrumb-separator-margin: #{$breadcrumb-separator-margin};
+  --breadcrumb-item-max-width: #{$breadcrumb-item-max-width};
+
+  // Collapsed state (responsive)
+  --breadcrumb-collapsed-min-width: #{$breadcrumb-collapsed-min-width};
+  --breadcrumb-collapsed-height: #{$breadcrumb-collapsed-height};
+  --breadcrumb-collapsed-min-width-tablet: #{$breadcrumb-collapsed-min-width-tablet};
+  --breadcrumb-collapsed-height-tablet: #{$breadcrumb-collapsed-height-tablet};
+  --breadcrumb-collapsed-min-width-mobile: #{$breadcrumb-collapsed-min-width-mobile};
+  --breadcrumb-collapsed-height-mobile: #{$breadcrumb-collapsed-height-mobile};
+
+  // Copy button y overlay
+  --breadcrumb-copy-button-size: #{$breadcrumb-copy-button-size};
+  --breadcrumb-overlay-max-height: #{$breadcrumb-overlay-max-height};
+  --breadcrumb-overlay-max-height-mobile: #{$breadcrumb-overlay-max-height-mobile};
+  --breadcrumb-overlay-scrollbar-width: #{$breadcrumb-overlay-scrollbar-width};
+  --breadcrumb-overlay-item-min-height: #{$breadcrumb-overlay-item-min-height};
+  --breadcrumb-overlay-item-min-height-mobile: #{$breadcrumb-overlay-item-min-height-mobile};
+
+  // Transiciones y animaciones
+  --breadcrumb-transition-duration: #{$breadcrumb-transition-duration};
+  --breadcrumb-transition-timing: #{$breadcrumb-transition-timing};
+  --breadcrumb-shimmer-duration: #{$breadcrumb-shimmer-duration};
+  --breadcrumb-pulse-duration: #{$breadcrumb-pulse-duration};
+
+  // Escalas y transformaciones
+  --breadcrumb-hover-icon-scale: #{$breadcrumb-hover-icon-scale};
+  --breadcrumb-active-scale: #{$breadcrumb-active-scale};
+  --breadcrumb-collapsed-active-icon-scale: #{$breadcrumb-collapsed-active-icon-scale};
+  --breadcrumb-collapsed-expanded-icon-scale: #{$breadcrumb-collapsed-expanded-icon-scale};
+  --breadcrumb-collapsed-expanded-rotation: #{$breadcrumb-collapsed-expanded-rotation};
+  --breadcrumb-overlay-item-active-scale: #{$breadcrumb-overlay-item-active-scale};
+  --breadcrumb-overlay-item-mobile-active-scale: #{$breadcrumb-overlay-item-mobile-active-scale};
+
+  // Opacidades
+  --breadcrumb-separator-opacity: #{$breadcrumb-separator-opacity};
+  --breadcrumb-overlay-arrow-opacity: #{$breadcrumb-overlay-arrow-opacity};
+
+  // Font sizes responsive
+  --breadcrumb-separator-font-size-tablet: #{$breadcrumb-separator-font-size-tablet};
+  --breadcrumb-separator-font-size-mobile: #{$breadcrumb-separator-font-size-mobile};
+  --breadcrumb-collapsed-icon-font-size: #{$breadcrumb-collapsed-icon-font-size};
+  --breadcrumb-collapsed-icon-font-size-tablet: #{$breadcrumb-collapsed-icon-font-size-tablet};
+  --breadcrumb-collapsed-icon-font-size-mobile: #{$breadcrumb-collapsed-icon-font-size-mobile};
+}

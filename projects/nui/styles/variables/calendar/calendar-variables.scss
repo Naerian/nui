@@ -1,0 +1,36 @@
+// ========================================
+// CALENDAR - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Calendar.
+// Se incluyen a través del mixin nui-calendar-vars.
+//
+// Uso:
+// ```scss
+// :root {
+//   @include nui-calendar-vars;
+// }
+// ```
+//
+// ========================================
+
+@mixin nui-calendar-vars {
+  // Full width mode
+  --calendar-full-min-width: #{$calendar-full-min-width};
+  
+  // Borders
+  --calendar-tabs-border-width: #{$calendar-tabs-border-width};
+  --calendar-preset-border-width: #{$calendar-preset-border-width};
+  --calendar-day-border-width: #{$calendar-day-border-width};
+  
+  // Opacities
+  --calendar-day-other-month-opacity: #{$calendar-day-other-month-opacity};
+  
+  // Transforms
+  --calendar-preset-hover-translateY: #{$calendar-preset-hover-translateY};
+  --calendar-preset-active-translateY: #{$calendar-preset-active-translateY};
+  
+  // Outline (focus states)
+  --calendar-focus-outline-width: #{$calendar-focus-outline-width};
+  --calendar-focus-outline-offset: #{$calendar-focus-outline-offset};
+}
