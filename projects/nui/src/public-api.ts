@@ -1,6 +1,10 @@
-/*
- * Public API Surface of nui
- */
+// Config
+export * from './lib/configs';
 
-export * from './lib/nui.service';
-export * from './lib/nui.component';
+// Translations
+export * from './lib/translations';
+
+// Components
+export * from './lib/components/button';
+export * from './lib/components/toast';
+export * from './lib/components/tooltip';
