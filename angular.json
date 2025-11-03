@@ -58,10 +58,7 @@
               "projects/playground/src/assets"
             ],
             "styles": ["projects/playground/src/styles.scss"],
-            "scripts": [],
-            "stylePreprocessorOptions": {
-              "includePaths": ["projects/nui/src/styles"]
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {

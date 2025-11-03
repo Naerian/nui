@@ -233,67 +233,6 @@
 }
 
 // ========================================
-// BACKWARD COMPATIBILITY ALIASES
-// ========================================
-// Mantienen compatibilidad con código existente
-// Usar el nuevo mixin flex() en código nuevo
-
-/// @deprecated Usa @include flex(row, flex-start, flex-start)
-@mixin flex-start-start {
-  @include flex(row, flex-start, flex-start);
-}
-
-/// @deprecated Usa @include flex(row, center, center)
-@mixin flex-center {
-  @include flex(row, center, center);
-}
-
-/// @deprecated Usa @include flex(row, flex-start, space-between)
-@mixin flex-start-between {
-  @include flex(row, flex-start, space-between);
-}
-
-/// @deprecated Usa @include flex(row, center, space-between)
-@mixin flex-center-between {
-  @include flex(row, center, space-between);
-}
-
-/// @deprecated Usa @include flex(row, center)
-@mixin flex-row-center {
-  @include flex(row, center);
-}
-
-/// @deprecated Usa @include flex(row, center, flex-start)
-@mixin flex-row-center-start {
-  @include flex(row, center, flex-start);
-}
-
-/// @deprecated Usa @include flex(column, center)
-@mixin flex-col-center {
-  @include flex(column, center);
-}
-
-/// @deprecated Usa @include flex(column, center, center)
-@mixin flex-col-center-center {
-  @include flex(column, center, center);
-}
-
-/// @deprecated Usa @include flex(column, flex-start, center)
-@mixin flex-col-start-center {
-  @include flex(column, flex-start, center);
-}
-
-/// @deprecated Usa @include flex(column, flex-start)
-@mixin flex-col-start {
-  @include flex(column, flex-start);
-}
-
-/// @deprecated Usa @include flex(column, stretch) o simplemente @include flex(column)
-@mixin flex-col-stretch {
-  @include flex(column, stretch);
-}
-
-// ========================================
 // STATE MIXINS
 // ========================================
 
