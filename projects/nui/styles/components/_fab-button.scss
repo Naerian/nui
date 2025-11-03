@@ -1,3 +1,9 @@
+@import "../config";
+@import "../theme";
+@import "../theme-config";
+@import "../mixins";
+@import "../variables/fab-button/fab-button-variables.scss";
+
 // ===== CONTENEDOR DE ITEMS =====
 .nui-fab-button-items-container {
   position: absolute;
@@ -74,8 +80,7 @@
   align-items: center;
   opacity: 0;
   transform: scale(0);
-  transition:
-    opacity var(--fab-button-transition-duration)
+  transition: opacity var(--fab-button-transition-duration)
       var(--fab-button-transition-timing),
     transform var(--fab-button-transition-duration)
       var(--fab-button-transition-timing);
@@ -137,8 +142,7 @@
   user-select: none;
   outline: none;
   text-decoration: none;
-  transition:
-    background-color var(--fab-button-transition-duration)
+  transition: background-color var(--fab-button-transition-duration)
       var(--fab-button-transition-timing),
     color var(--fab-button-transition-duration)
       var(--fab-button-transition-timing),

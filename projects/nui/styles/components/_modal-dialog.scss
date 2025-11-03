@@ -1,8 +1,8 @@
-@import "config";
-@import "theme";
-@import "theme-config";
-@import "mixins";
-@import "variables/modal-dialog";
+@import "../config";
+@import "../theme";
+@import "../theme-config";
+@import "../mixins";
+@import "../variables/modal-dialog/modal-dialog-variables.scss";
 
 .modal-box {
   display: flex;

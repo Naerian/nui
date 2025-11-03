@@ -1,6 +1,8 @@
 @import "../config";
+@import "../theme";
+@import "../theme-config";
 @import "../mixins";
-@import "../variables/popover";
+@import "../variables/popover/popover-variables.scss";
 
 // ========================================
 // POPOVER - Estilos globales

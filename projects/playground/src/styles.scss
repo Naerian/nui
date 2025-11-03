@@ -1,1 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+// Importar la librería NUI usando el archivo de entrada especial para distribución
+@import "nui/styles/nui";
+
+:root {
+    --spacing-md: 5rem;
+}
