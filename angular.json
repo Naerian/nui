@@ -57,7 +57,10 @@
               "projects/playground/src/favicon.ico",
               "projects/playground/src/assets"
             ],
-            "styles": ["projects/playground/src/styles.scss"],
+            "styles": [
+              "dist/nui/styles/nui.css",
+              "projects/playground/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
