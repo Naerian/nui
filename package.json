@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "start": "ng serve playground",
-    "build:nui": "ng build nui",
+    "build:nui": "ng build nui && npm run build:styles",
+    "build:styles": "sass projects/nui/styles/nui.scss dist/nui/styles/nui.css --style=compressed --no-source-map",
     "build:play": "ng build playground",
     "test:nui": "ng test nui"
   },
@@ -38,6 +39,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^17.3.0",
+    "sass": "^1.80.0",
     "typescript": "~5.4.2"
   }
 }

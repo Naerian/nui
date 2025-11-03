@@ -1,6 +1,15 @@
 {
   "name": "nui",
   "version": "0.0.1",
+  "style": "styles/nui.css",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./fesm2022/nui.mjs"
+    },
+    "./styles/nui.css": "./styles/nui.css",
+    "./styles/*": "./styles/*"
+  },
   "peerDependencies": {
     "@angular/common": "^17.3.0",
     "@angular/core": "^17.3.0",
@@ -9,5 +18,7 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": [
+    "*.css"
+  ]
 }

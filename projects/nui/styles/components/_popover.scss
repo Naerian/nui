@@ -1,7 +1,6 @@
 @import "../config";
-@import "../theme";
-@import "../theme-config";
 @import "../mixins";
+// NOTA: No importar theme ni theme-config aquí, ya están incluidos globalmente en nui.scss
 @import "../variables/popover/popover-variables.scss";
 
 // ========================================

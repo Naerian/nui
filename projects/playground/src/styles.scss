@@ -1,6 +1,9 @@
-// Importar la librería NUI usando el archivo de entrada especial para distribución
+// Importar la librería NUI usando SCSS
 @import "nui/styles/nui";
 
+// PERSONALIZACIÓN: Sobrescribe las variables del tema
 :root {
   --button-primary-solid-bg: #007bff;
 }
+
+

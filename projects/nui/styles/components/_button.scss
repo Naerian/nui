@@ -1,8 +1,7 @@
 @import "../config";
-@import "../theme";
-@import "../theme-config";
 @import "../mixins";
-// Variables importadas desde theme-config
+// NOTA: No importar theme ni theme-config aquí, ya están incluidos globalmente en nui.scss
+// Importarlos aquí causa que se dupliquen los bloques :root, impidiendo la personalización
 
 // Estilos base del botón (compartidos entre componente y directiva)
 @mixin button-base-styles {
