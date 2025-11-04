@@ -1,14 +1,11 @@
 @import "../config";
 @import "../colors";
-@import "theme-mixins";
 
 // ==========================================
 // DARK THEME
 // ==========================================
-// Paleta de colores para el tema oscuro (más vibrantes para contraste)
-// primary: #14b8a6 (Teal-500) - Más brillante que light
-// secondary: #a8b3bf (Slate-400) - Más claro que light
-// accent: #a371f7 (Purple-500) - Más brillante que light
+// All color generation is now handled by ThemeService in TypeScript
+// This file only keeps SCSS variable definitions for backward compatibility
 
 // Colores base para dark theme
 $dark-theme-colors: (
@@ -39,15 +36,6 @@ $dark-grays: (
 // DARK THEME - APLICACIÓN
 // ==========================================
 @mixin apply-dark-theme {
-  // Generar variables de color base
-  @include generate-color-variables($dark-theme-colors, $dark-grays, true);
-
-  // Variables específicas de tema
-  @include theme-specific-variables(true);
-
-  // Variables de componentes (Button, Chip, Switch)
-  @include generate-component-variables($dark-theme-colors, true);
-
   // Custom properties para switch (solo las necesarias)
   --color-switch-track-bg: #{$color-switch-track-bg-dark};
   --color-switch-track-border: #{$color-switch-track-border-dark};

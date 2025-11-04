@@ -11,12 +11,26 @@ export interface ThemeColors {
   danger: string;
 }
 
+export interface ThemeGrays {
+  50: string;
+  100: string;
+  200: string;
+  300: string;
+  400: string;
+  500: string;
+  600: string;
+  700: string;
+  800: string;
+  900: string;
+}
+
 export interface ThemePreset {
   name: string;
   colors: {
     light: ThemeColors;
     dark: ThemeColors;
   };
+  grays?: ThemeGrays; // Optional, falls back to default neutral grays
 }
 
 export interface ThemeConfig {
@@ -70,7 +84,14 @@ export class ThemeService {
 
   private generateComponentVariables(): string {
     const colors = this.isDark ? this.currentPreset.colors.dark : this.currentPreset.colors.light;
+    const grays = this.currentPreset.grays || this.getDefaultGrays();
+    
     let css = ':root {\n';
+    
+    // Structural variables (grays, text, bg, borders, shadows, focus, overlay)
+    css += this.generateStructuralVariables(grays);
+    
+    // Component color variables
     Object.entries(colors).forEach(([name, baseColor]) => {
       css += this.generateButtonVariables(name, baseColor);
       css += this.generateFabButtonVariables(name, baseColor);
@@ -84,6 +105,67 @@ export class ThemeService {
     });
     css += '}\n';
     return css;
+  }
+
+  private getDefaultGrays(): ThemeGrays {
+    return {
+      50: '#f9fafb',
+      100: '#f3f4f6',
+      200: '#e5e7eb',
+      300: '#d1d5db',
+      400: '#9ca3af',
+      500: '#6b7280',
+      600: '#4b5563',
+      700: '#374151',
+      800: '#1f2937',
+      900: '#111827'
+    };
+  }
+
+  private generateStructuralVariables(grays: ThemeGrays): string {
+    const isDark = this.isDark;
+    return `
+  /* Gray scale */
+  --gray-50: ${grays[50]};
+  --gray-100: ${grays[100]};
+  --gray-200: ${grays[200]};
+  --gray-300: ${grays[300]};
+  --gray-400: ${grays[400]};
+  --gray-500: ${grays[500]};
+  --gray-600: ${grays[600]};
+  --gray-700: ${grays[700]};
+  --gray-800: ${grays[800]};
+  --gray-900: ${grays[900]};
+
+  /* Background colors */
+  --bg-primary: ${isDark ? grays[900] : '#ffffff'};
+  --bg-secondary: ${isDark ? grays[800] : grays[50]};
+  --bg-tertiary: ${isDark ? grays[700] : grays[100]};
+
+  /* Text colors */
+  --text-primary: ${isDark ? grays[50] : grays[900]};
+  --text-secondary: ${isDark ? grays[300] : grays[600]};
+  --text-tertiary: ${isDark ? grays[400] : grays[500]};
+  --text-disabled: ${isDark ? grays[600] : grays[400]};
+
+  /* Border colors */
+  --border-primary: ${isDark ? grays[700] : grays[200]};
+  --border-secondary: ${isDark ? grays[800] : grays[100]};
+
+  /* Shadow colors */
+  --shadow-sm: ${isDark ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.1)'};
+  --shadow-md: ${isDark ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0.15)'};
+  --shadow-lg: ${isDark ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.2)'};
+  --shadow-xl: ${isDark ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.25)'};
+
+  /* Focus ring */
+  --focus-ring-color: ${isDark ? 'rgba(96, 165, 250, 0.5)' : 'rgba(59, 130, 246, 0.5)'};
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+
+  /* Overlay */
+  --overlay-bg: ${isDark ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.5)'};
+`;
   }
 
   private generateButtonVariables(name: string, color: string): string {
