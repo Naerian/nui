@@ -12,8 +12,8 @@
 //------------------------------------------------------------
 // ## 3. Temas (generan CSS variables)
 //------------------------------------------------------------
-@import "theme-config"; // Configuración de temas
-@import "theme"; // Generación de temas (usa theme-config)
+@import "theme-config"; // Configuración de temas (todas las variables CSS)
+// Nota: La generación de colores ahora se maneja por ThemeService en TypeScript
 
 //------------------------------------------------------------
 // ## 4. Estilos base y tipografía

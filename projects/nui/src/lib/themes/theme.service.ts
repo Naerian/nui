@@ -88,8 +88,11 @@ export class ThemeService {
     
     let css = ':root {\n';
     
-    // Structural variables (grays, text, bg, borders, shadows, focus, overlay)
+    // Structural variables (grays, text, bg, borders, shadows, focus, overlay, backdrop, spinner, switch)
     css += this.generateStructuralVariables(grays);
+    
+    // Modal gradient (uses warning and danger from preset)
+    css += `  --color-modal-gradient: linear-gradient(90deg, ${colors.warning}, ${colors.danger});\n`;
     
     // Component color variables
     Object.entries(colors).forEach(([name, baseColor]) => {
@@ -163,8 +166,19 @@ export class ThemeService {
   --focus-ring-width: 2px;
   --focus-ring-offset: 2px;
 
-  /* Overlay */
+  /* Overlay & Backdrop */
   --overlay-bg: ${isDark ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.5)'};
+  --color-backdrop: ${isDark ? 'rgba(0, 0, 0, 0.75)' : 'rgba(0, 0, 0, 0.5)'};
+
+  /* Spinner */
+  --color-spinner-border: ${isDark ? grays[700] : grays[200]};
+  --color-spinner-backdrop: ${isDark ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)'};
+
+  /* Switch */
+  --color-switch-track-bg: ${isDark ? grays[700] : grays[200]};
+  --color-switch-track-border: ${isDark ? grays[600] : grays[300]};
+  --color-switch-track-hover-border: ${isDark ? grays[500] : grays[400]};
+  --color-switch-thumb-bg: ${isDark ? '#ffffff' : '#ffffff'};
 `;
   }
 
