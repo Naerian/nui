@@ -1,3 +1,38 @@
-<nui-button>Hola</nui-button>
-<nui-button icon="ri-arrow-up-circle-fill"></nui-button>
-<nui-button icon="ri-arrow-up-circle-fill">Hola</nui-button>
+<div style="padding: 2rem; font-family: system-ui, sans-serif;">
+  <h1>{{ title }}</h1>
+  
+  <section style="margin: 2rem 0;">
+    <h2>Theme Presets</h2>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+      <nui-button (click)="switchTheme('aura')">Aura (Default)</nui-button>
+      <nui-button (click)="switchTheme('dopamine')">Dopamine</nui-button>
+      <nui-button (click)="switchTheme('corporate')">Corporate</nui-button>
+      <nui-button (click)="switchTheme('minimal')">Minimal</nui-button>
+      <nui-button (click)="switchTheme('neon')">Neon</nui-button>
+      <nui-button (click)="switchTheme('warm')">Warm</nui-button>
+    </div>
+  </section>
+
+  <section style="margin: 2rem 0;">
+    <h2>Button Variants</h2>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+      <nui-button color="primary">Primary</nui-button>
+      <nui-button color="secondary">Secondary</nui-button>
+      <nui-button color="accent">Accent</nui-button>
+      <nui-button color="success">Success</nui-button>
+      <nui-button color="info">Info</nui-button>
+      <nui-button color="warning">Warning</nui-button>
+      <nui-button color="danger">Danger</nui-button>
+    </div>
+  </section>
+
+  <section style="margin: 2rem 0;">
+    <h2>With Icons</h2>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+      <nui-button icon="ri-arrow-up-circle-fill" color="primary">Upload</nui-button>
+      <nui-button icon="ri-arrow-down-circle-fill" color="info">Download</nui-button>
+      <nui-button icon="ri-check-line" color="success">Confirm</nui-button>
+      <nui-button icon="ri-close-line" color="danger">Cancel</nui-button>
+    </div>
+  </section>
+</div>

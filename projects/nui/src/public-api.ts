@@ -4,6 +4,9 @@ export * from './lib/configs';
 // Translations
 export * from './lib/translations';
 
+// Theming
+export * from './lib/themes';
+
 // Components
 export * from './lib/components/button';
 export * from './lib/components/toast';

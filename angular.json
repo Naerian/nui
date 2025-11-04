@@ -58,7 +58,6 @@
               "projects/playground/src/assets"
             ],
             "styles": [
-              "dist/nui/styles/nui.css",
               "projects/playground/src/styles.scss"
             ],
             "scripts": []
