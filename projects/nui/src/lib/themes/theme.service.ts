@@ -74,6 +74,13 @@ export class ThemeService {
     Object.entries(colors).forEach(([name, baseColor]) => {
       css += this.generateButtonVariables(name, baseColor);
       css += this.generateFabButtonVariables(name, baseColor);
+      css += this.generateButtonGroupVariables(name, baseColor);
+      css += this.generateChipVariables(name, baseColor);
+      css += this.generateSwitchVariables(name, baseColor);
+      css += this.generateModalVariables(name, baseColor);
+      css += this.generateToastVariables(name, baseColor);
+      css += this.generateProgressBarVariables(name, baseColor);
+      css += this.generatePaginatorVariables(name, baseColor);
     });
     css += '}\n';
     return css;
@@ -142,6 +149,146 @@ export class ThemeService {
   --fab-button-${name}-ghost-active-bg: ${this.isDark ? this.shade(color, 80) : this.tint(color, 90)};
   --fab-button-${name}-ghost-active-border: transparent;
   --fab-button-${name}-focus-color: ${this.tint(color, 60)};
+`;
+  }
+
+  private generateButtonGroupVariables(name: string, color: string): string {
+    const hoverColor = this.shade(color, 10);
+    const hoverBg = this.withAlpha(color, 0.05);
+    const inactiveBorder = this.isDark ? '#27272a' : '#e4e4e7';
+    const inactiveBg = this.isDark ? '#18181b' : '#ffffff';
+    return `
+  --button-group-${name}-solid-bg: ${color};
+  --button-group-${name}-solid-text: ${this.isDark ? '#f8fafc' : '#ffffff'};
+  --button-group-${name}-solid-border: ${color};
+  --button-group-${name}-solid-hover-bg: ${hoverColor};
+  --button-group-${name}-solid-inactive-text: ${color};
+  --button-group-${name}-solid-inactive-bg: ${inactiveBg};
+  --button-group-${name}-solid-inactive-border: ${inactiveBorder};
+  --button-group-${name}-solid-inactive-hover-bg: ${hoverBg};
+  --button-group-${name}-outline-bg: ${this.withAlpha(color, 0.1)};
+  --button-group-${name}-outline-text: ${color};
+  --button-group-${name}-outline-border: ${color};
+  --button-group-${name}-outline-hover-bg: ${this.withAlpha(color, 0.2)};
+  --button-group-${name}-outline-inactive-bg: transparent;
+  --button-group-${name}-outline-inactive-border: ${inactiveBorder};
+  --button-group-${name}-ghost-bg: ${this.withAlpha(color, 0.1)};
+  --button-group-${name}-ghost-text: ${color};
+  --button-group-${name}-ghost-hover-bg: ${this.withAlpha(color, 0.2)};
+  --button-group-${name}-ghost-inactive-bg: transparent;
+`;
+  }
+
+  private generateChipVariables(name: string, color: string): string {
+    const hoverColor = this.shade(color, 10);
+    const selectedBg = this.isDark ? this.shade(color, 15) : this.shade(color, 10);
+    const textOnColor = this.isDark ? '#f8fafc' : '#ffffff';
+    return `
+  --chip-${name}-solid-bg: ${color};
+  --chip-${name}-solid-text: ${textOnColor};
+  --chip-${name}-solid-border: ${color};
+  --chip-${name}-solid-hover-bg: ${hoverColor};
+  --chip-${name}-solid-selected-bg: ${selectedBg};
+  --chip-${name}-outline-bg: transparent;
+  --chip-${name}-outline-text: ${color};
+  --chip-${name}-outline-border: ${color};
+  --chip-${name}-outline-hover-bg: ${this.withAlpha(color, 0.1)};
+  --chip-${name}-outline-selected-bg: ${selectedBg};
+  --chip-${name}-outline-selected-text: ${textOnColor};
+  --chip-${name}-ghost-bg: ${this.isDark ? this.shade(color, 80) : this.tint(color, 90)};
+  --chip-${name}-ghost-text: ${color};
+  --chip-${name}-ghost-hover-bg: ${this.withAlpha(color, 0.2)};
+  --chip-${name}-ghost-selected-bg: ${this.isDark ? this.shade(color, 60) : this.tint(color, 80)};
+  --chip-${name}-ghost-selected-text: ${textOnColor};
+  --chip-${name}-focus-color: ${this.tint(color, 60)};
+`;
+  }
+
+  private generateSwitchVariables(name: string, color: string): string {
+    const hoverColor = this.shade(color, 10);
+    return `
+  --switch-${name}-color: ${color};
+  --switch-${name}-color-hover: ${hoverColor};
+  --switch-${name}-button-solid-bg: ${color};
+  --switch-${name}-button-solid-text: ${this.isDark ? '#f8fafc' : '#ffffff'};
+  --switch-${name}-button-solid-hover-bg: ${hoverColor};
+  --switch-${name}-button-solid-inactive-bg: ${this.withAlpha(color, 0.2)};
+  --switch-${name}-button-solid-inactive-text: ${color};
+  --switch-${name}-button-outline-bg: ${this.withAlpha(color, 0.1)};
+  --switch-${name}-button-outline-text: ${color};
+  --switch-${name}-button-outline-hover-bg: ${this.withAlpha(color, 0.2)};
+  --switch-${name}-button-ghost-bg: ${this.withAlpha(color, 0.1)};
+  --switch-${name}-button-ghost-text: ${color};
+  --switch-${name}-button-ghost-hover-bg: ${this.withAlpha(color, 0.2)};
+`;
+  }
+
+  private generateModalVariables(name: string, color: string): string {
+    return `
+  --modal-${name}-icon-color: ${color};
+  --modal-${name}-text-color: ${color};
+  --modal-${name}-border-color: ${color};
+`;
+  }
+
+  private generateToastVariables(name: string, color: string): string {
+    const bgColor = this.isDark ? this.shade(color, 85) : this.tint(color, 96);
+    const bgColorHover = this.isDark ? this.shade(color, 80) : this.tint(color, 94);
+    const borderColor = this.isDark ? this.shade(color, 70) : this.tint(color, 80);
+    const textColor = this.isDark ? this.tint(color, 75) : this.shade(color, 25);
+    const titleColor = this.isDark ? this.tint(color, 65) : this.shade(color, 30);
+    const iconColor = this.isDark ? this.tint(color, 40) : color;
+    const progressColor = this.isDark ? this.tint(color, 50) : color;
+    return `
+  --toast-${name}-bg: ${bgColor};
+  --toast-${name}-bg-hover: ${bgColorHover};
+  --toast-${name}-border: ${borderColor};
+  --toast-${name}-color: ${textColor};
+  --toast-${name}-title-color: ${titleColor};
+  --toast-${name}-icon-color: ${iconColor};
+  --toast-${name}-icon-bg: ${this.withAlpha(color, this.isDark ? 0.2 : 0.1)};
+  --toast-${name}-progress-bg: ${progressColor};
+  --toast-${name}-close-color: ${color};
+  --toast-${name}-close-hover: ${color};
+`;
+  }
+
+  private generateProgressBarVariables(name: string, color: string): string {
+    return `
+  --progress-bar-${name}-fill-bg: ${color};
+  --progress-bar-${name}-fill-hover-bg: ${this.shade(color, 10)};
+  --progress-bar-${name}-track-bg: ${this.isDark ? this.shade(color, 80) : this.tint(color, 90)};
+  --progress-bar-${name}-track-border: ${this.isDark ? this.shade(color, 70) : this.tint(color, 80)};
+  --progress-bar-${name}-text: ${this.isDark ? '#f8fafc' : '#ffffff'};
+  --progress-bar-${name}-value-text: ${color};
+`;
+  }
+
+  private generatePaginatorVariables(name: string, color: string): string {
+    const hoverColor = this.shade(color, 10);
+    const activeColor = this.shade(color, 20);
+    const hoverBg = this.withAlpha(color, 0.05);
+    const inactiveBorder = this.isDark ? '#27272a' : '#e4e4e7';
+    const inactiveBg = this.isDark ? '#18181b' : '#ffffff';
+    const ghostActive = this.isDark ? this.shade(color, 80) : this.tint(color, 90);
+    return `
+  --paginator-${name}-solid-bg: ${color};
+  --paginator-${name}-solid-text: ${this.isDark ? '#f8fafc' : '#ffffff'};
+  --paginator-${name}-solid-hover-bg: ${hoverColor};
+  --paginator-${name}-solid-active-bg: ${activeColor};
+  --paginator-${name}-solid-inactive-text: ${color};
+  --paginator-${name}-solid-inactive-bg: ${inactiveBg};
+  --paginator-${name}-solid-inactive-border: ${inactiveBorder};
+  --paginator-${name}-solid-inactive-hover-bg: ${hoverBg};
+  --paginator-${name}-outline-bg: transparent;
+  --paginator-${name}-outline-text: ${color};
+  --paginator-${name}-outline-hover-bg: ${this.withAlpha(color, 0.1)};
+  --paginator-${name}-outline-active-bg: ${ghostActive};
+  --paginator-${name}-outline-inactive-bg: transparent;
+  --paginator-${name}-ghost-bg: ${this.isDark ? this.shade(color, 80) : this.tint(color, 90)};
+  --paginator-${name}-ghost-text: ${color};
+  --paginator-${name}-ghost-hover-bg: ${this.withAlpha(color, 0.1)};
+  --paginator-${name}-ghost-active-bg: ${ghostActive};
 `;
   }
 

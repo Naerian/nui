@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ButtonComponent } from '../../../nui/src/public-api';
-import { ThemeService, aura, dopamine, corporate, minimal, neon, warm } from '../../../nui/src/public-api';
+import { ThemeService, aura, dopamine, corporate, minimal, neon, warm, sunset, twilight } from '../../../nui/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,7 @@ export class AppComponent {
   constructor(private themeService: ThemeService) {}
 
   switchTheme(presetName: string) {
-    const presets: any = { aura, dopamine, corporate, minimal, neon, warm };
+    const presets: any = { aura, dopamine, corporate, minimal, neon, warm, sunset, twilight };
     this.themeService.usePreset(presets[presetName]);
   }
 }
