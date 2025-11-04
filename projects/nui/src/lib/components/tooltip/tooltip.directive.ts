@@ -12,6 +12,7 @@ import {
   HostListener,
   DestroyRef,
   ComponentRef,
+  booleanAttribute,
 } from '@angular/core';
 import {
   Overlay,
@@ -128,7 +129,7 @@ export class TooltipDirective implements OnInit, OnDestroy {
    * Desactiva el tooltip
    * @default false
    */
-  @Input() tooltipDisabled = false;
+  @Input({ transform: booleanAttribute }) tooltipDisabled = false;
 
   /**
    * Clase CSS personalizada para el tooltip
@@ -139,13 +140,13 @@ export class TooltipDirective implements OnInit, OnDestroy {
    * Muestra una flecha apuntando al elemento
    * @default true (o valor global configurado)
    */
-  @Input() tooltipShowArrow?: boolean;
+  @Input({ transform: booleanAttribute }) tooltipShowArrow?: boolean;
 
   /**
    * Permite interactuar con el contenido del tooltip (hover sobre el tooltip)
    * @default false (o valor global configurado)
    */
-  @Input() tooltipInteractive?: boolean;
+  @Input({ transform: booleanAttribute }) tooltipInteractive?: boolean;
 
   private isVisible = signal(false);
   private isMouseOverHost = false;

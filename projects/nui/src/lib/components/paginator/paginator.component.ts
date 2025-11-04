@@ -14,6 +14,7 @@ import {
   Output,
   EventEmitter,
   computed,
+  booleanAttribute,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -239,13 +240,13 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Mostrar botones de primera y última página.
    * @default true
    */
-  @Input() showFirstLast: boolean = true;
+  @Input({ transform: booleanAttribute }) showFirstLast: boolean = true;
 
   /**
    * Indica si el paginador está deshabilitado.
    * @default false
    */
-  @Input() disabled: boolean = false;
+  @Input({ transform: booleanAttribute }) disabled: boolean = false;
 
   /**
    * Número total de items/resultados.
@@ -284,26 +285,26 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Mostrar selector de items por página.
    * @default false
    */
-  @Input() showPageSizeSelector: boolean = false;
+  @Input({ transform: booleanAttribute }) showPageSizeSelector: boolean = false;
 
   /**
    * Mostrar información del rango de items.
    * Ejemplo: "Mostrando 11-20 de 150 resultados"
    * @default true
    */
-  @Input() showItemRange: boolean = true;
+  @Input({ transform: booleanAttribute }) showItemRange: boolean = true;
 
   /**
    * Mostrar input para saltar a una página específica.
    * @default false
    */
-  @Input() showPageJump: boolean = false;
+  @Input({ transform: booleanAttribute }) showPageJump: boolean = false;
 
   /**
    * Scroll automático al cambiar página.
    * @default false
    */
-  @Input() autoScroll?: boolean;
+  @Input({ transform: booleanAttribute }) autoScroll?: boolean;
 
   /**
    * Elemento target para scroll (selector CSS o elemento).
@@ -363,13 +364,13 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Cuando está activo, el paginador cambia automáticamente a modo 'fractional' en dispositivos móviles,
    * @default true
    */
-  @Input() autoMobile: boolean = true;
+  @Input({ transform: booleanAttribute }) autoMobile: boolean = true;
 
   /**
    * Autoajustar el paginador para envolver los botones en pantallas pequeñas.
    * @default true
    */
-  @Input() autoWrap: boolean = true;
+  @Input({ transform: booleanAttribute }) autoWrap: boolean = true;
 
   /**
    * Configuración de iconos personalizables.

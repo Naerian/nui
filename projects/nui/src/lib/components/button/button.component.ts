@@ -12,6 +12,7 @@ import {
   ChangeDetectorRef,
   ViewEncapsulation,
   ChangeDetectionStrategy,
+  booleanAttribute,
 } from '@angular/core';
 import { ButtonIconPosition, ButtonType, ButtonWidth, ButtonLoadingPosition } from './models/button.model';
 import { NUI_CONFIG, NUIColor, NUISize, NUIVariant, DEFAULT_COLOR, DEFAULT_SIZE, DEFAULT_VARIANT } from '../../configs';
@@ -150,7 +151,7 @@ export class ButtonComponent implements OnInit, AfterContentInit {
    * Muestra un spinner y deshabilita las interacciones.
    * @default false
    */
-  @Input() loading: boolean = false;
+  @Input({ transform: booleanAttribute }) loading: boolean = false;
 
   /**
    * Posición del spinner de carga en el botón.
@@ -200,7 +201,7 @@ export class ButtonComponent implements OnInit, AfterContentInit {
    * Cuando está deshabilitado, no responde a eventos de click.
    * @default false
    */
-  @Input() disabled: boolean = false;
+  @Input({ transform: booleanAttribute }) disabled: boolean = false;
 
   /**
    * Ancho del botón.

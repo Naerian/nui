@@ -10,6 +10,7 @@ import {
   OnInit,
   ComponentRef,
   Injector,
+  booleanAttribute,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
@@ -82,7 +83,7 @@ export class PopoverComponent implements OnInit {
   /**
    * Mostrar flecha
    */
-  @Input() showArrow = true;
+  @Input({ transform: booleanAttribute }) showArrow = true;
 
   /**
    * ID único para accesibilidad

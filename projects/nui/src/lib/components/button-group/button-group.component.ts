@@ -8,6 +8,7 @@ import {
   forwardRef,
   ElementRef,
   inject,
+  booleanAttribute,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -161,12 +162,12 @@ export class ButtonGroupComponent implements ControlValueAccessor {
   /**
    * Si el componente está deshabilitado
    */
-  @Input() disabled = false;
+  @Input({ transform: booleanAttribute }) disabled = false;
 
   /**
    * Si muestra solo iconos (sin texto)
    */
-  @Input() iconOnly = false;
+  @Input({ transform: booleanAttribute }) iconOnly = false;
 
   /**
    * Ancho del botón.

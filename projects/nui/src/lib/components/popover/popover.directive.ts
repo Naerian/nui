@@ -17,6 +17,7 @@ import {
   Type,
   Injector,
   untracked,
+  booleanAttribute,
 } from '@angular/core';
 import {
   Overlay,
@@ -144,7 +145,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
    * Desactiva el popover
    * @default false
    */
-  @Input() popoverDisabled = false;
+  @Input({ transform: booleanAttribute }) popoverDisabled = false;
 
   /**
    * Clase CSS personalizada para el popover
@@ -161,13 +162,13 @@ export class PopoverDirective implements OnInit, OnDestroy {
    * Cierra el popover al hacer click fuera
    * @default true (o valor global configurado)
    */
-  @Input() popoverCloseOnClickOutside?: boolean;
+  @Input({ transform: booleanAttribute }) popoverCloseOnClickOutside?: boolean;
 
   /**
    * Cierra el popover al presionar Escape
    * @default true (o valor global configurado)
    */
-  @Input() popoverCloseOnEscape?: boolean;
+  @Input({ transform: booleanAttribute }) popoverCloseOnEscape?: boolean;
 
   /**
    * Ancho máximo del popover
@@ -201,20 +202,20 @@ export class PopoverDirective implements OnInit, OnDestroy {
    * 
    * @default false para click/focus/manual, true para hover (o valor global configurado)
    */
-  @Input() popoverAllowMultiple?: boolean;
+  @Input({ transform: booleanAttribute }) popoverAllowMultiple?: boolean;
 
   /**
    * Muestra un backdrop (fondo oscuro) detrás del popover
    * @default false
    */
-  @Input() popoverBackdrop = false;
+  @Input({ transform: booleanAttribute }) popoverBackdrop = false;
 
   /**
    * Cierra el popover al hacer click en el backdrop
    * Solo tiene efecto si popoverBackdrop=true
    * @default true
    */
-  @Input() backdropClose = true;
+  @Input({ transform: booleanAttribute }) backdropClose = true;
 
   /**
    * Z-index del popover (útil para controlar el orden de apilamiento)

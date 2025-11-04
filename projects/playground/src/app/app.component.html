@@ -1,9 +1,9 @@
-<div style="padding: 2rem; font-family: system-ui, sans-serif;">
+<div style="padding: 2rem; font-family: system-ui, sans-serif">
   <h1>{{ title }}</h1>
-  
-  <section style="margin: 2rem 0;">
+
+  <section style="margin: 2rem 0">
     <h2>Theme Presets</h2>
-    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0">
       <nui-button (click)="switchTheme('aura')">Aura (Default)</nui-button>
       <nui-button (click)="switchTheme('dopamine')">Dopamine</nui-button>
       <nui-button (click)="switchTheme('corporate')">Corporate</nui-button>
@@ -15,9 +15,9 @@
     </div>
   </section>
 
-  <section style="margin: 2rem 0;">
+  <section style="margin: 2rem 0">
     <h2>Button Variants</h2>
-    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0">
       <nui-button color="primary">Primary</nui-button>
       <nui-button color="secondary">Secondary</nui-button>
       <nui-button color="accent">Accent</nui-button>
@@ -28,13 +28,32 @@
     </div>
   </section>
 
-  <section style="margin: 2rem 0;">
+  <section style="margin: 2rem 0">
     <h2>With Icons</h2>
-    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
-      <nui-button icon="ri-arrow-up-circle-fill" color="primary">Upload</nui-button>
-      <nui-button icon="ri-arrow-down-circle-fill" color="info">Download</nui-button>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0">
+      <nui-button icon="ri-arrow-up-circle-fill" color="primary"
+        >Upload</nui-button
+      >
+      <nui-button icon="ri-arrow-down-circle-fill" color="info"
+        >Download</nui-button
+      >
       <nui-button icon="ri-check-line" color="success">Confirm</nui-button>
       <nui-button icon="ri-close-line" color="danger">Cancel</nui-button>
     </div>
+  </section>
+
+  <section style="margin: 2rem 0">
+    <h2>Button Group</h2>
+    <nui-button-group [options]="buttonGroups"></nui-button-group>
+  </section>
+
+  <section style="margin: 2rem 0">
+    <h2>Disabled Buttons</h2>
+    <nui-button-group [options]="buttonGroupsWithDisabled"></nui-button-group>
+  </section>
+
+  <section style="margin: 2rem 0">
+    <h2>Buttons with Icons</h2>
+    <nui-button-group [options]="buttonGroupsWithIcons"></nui-button-group>
   </section>
 </div>
