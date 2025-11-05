@@ -8,10 +8,22 @@ import {
 } from '@angular/core';
 import { ActionMenuItem } from '../models/action-menu.model';
 import { NUISize, DEFAULT_SIZE } from '../../../configs';
+import { CommonModule } from '@angular/common';
+import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
+import { ActionMenuItemComponent } from '../action-menu-item/action-menu-item.component';
 
 @Component({
   selector: 'nui-action-menu-submenu',
   templateUrl: './action-menu-submenu.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    CdkMenu,
+    CdkMenuItem,
+    CdkMenuTrigger,
+    ActionMenuItemComponent,
+    ActionMenuSubmenuComponent,
+  ],
   encapsulation: ViewEncapsulation.None,
 })
 export class ActionMenuSubmenuComponent {

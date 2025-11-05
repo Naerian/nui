@@ -13,10 +13,20 @@ import {
 import { ActionMenuType, ActionMenuItem } from './models/action-menu.model';
 import { ActionMenuItemComponent } from './action-menu-item/action-menu-item.component';
 import { ButtonIconPosition, ButtonWidth } from '../button/models/button.model';
-import { CdkMenu, CdkMenuTrigger } from '@angular/cdk/menu';
+import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import { Subject, takeUntil, merge, fromEvent, throttleTime } from 'rxjs';
 import { FADE_IN_OUT_SCALE } from '../../animations';
-import { DEFAULT_COLOR, DEFAULT_SIZE, NUI_CONFIG, NUIColor, NUISize, NUIVariant } from '../../configs';
+import {
+  DEFAULT_COLOR,
+  DEFAULT_SIZE,
+  NUI_CONFIG,
+  NUIColor,
+  NUISize,
+  NUIVariant,
+} from '../../configs';
+import { ActionMenuSubmenuComponent } from './action-menu-submenu/action-menu-submenu.component';
+import { CommonModule } from '@angular/common';
+import { ButtonDirective } from '../button';
 
 @Component({
   selector: 'nui-action-menu',
@@ -26,6 +36,16 @@ import { DEFAULT_COLOR, DEFAULT_SIZE, NUI_CONFIG, NUIColor, NUISize, NUIVariant 
     '[class.nui-action-menu--disabled]': 'disabled',
     '[class.nui-action-menu--fullWidth]': 'width === "full"',
   },
+  standalone: true,
+  imports: [
+    CommonModule,
+    CdkMenu,
+    CdkMenuItem,
+    CdkMenuTrigger,
+    ActionMenuItemComponent,
+    ActionMenuSubmenuComponent,
+    ButtonDirective,
+  ],
   animations: [FADE_IN_OUT_SCALE],
   encapsulation: ViewEncapsulation.None,
 })
@@ -187,7 +207,7 @@ export class ActionMenuComponent {
     // Escuchar scroll en múltiples contextos
     const scroll$ = merge(
       fromEvent(window, 'scroll', { capture: true, passive: true }),
-      fromEvent(document, 'scroll', { capture: true, passive: true }),
+      fromEvent(document, 'scroll', { capture: true, passive: true })
     ).pipe(throttleTime(16), takeUntil(this.ngUnsubscribe$)); // ~60fps
 
     scroll$.subscribe(() => {
@@ -264,6 +284,10 @@ export class ActionMenuComponent {
    * @param {ActionMenuItem} item - El item del menú que se ha clicado.
    */
   onItemClick(item: ActionMenuItem) {
+    if (item.onAction) {
+      item.onAction();
+    }
+
     this.onItemAction.emit(item);
   }
 

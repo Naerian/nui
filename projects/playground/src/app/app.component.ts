@@ -4,10 +4,10 @@ import {
   ButtonComponent,
   ButtonGroupComponent,
   ButtonGroupOption,
-  ActionMenuModule,
   AvatarGroupItem,
   AvatarComponent,
   AvatarGroupComponent,
+  ActionMenuComponent,
 } from 'nui';
 import {
   ThemeService,
@@ -24,7 +24,13 @@ import {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ButtonComponent, ButtonGroupComponent, ActionMenuModule, AvatarComponent, AvatarGroupComponent],
+  imports: [
+    ButtonComponent,
+    ButtonGroupComponent,
+    ActionMenuComponent,
+    AvatarComponent,
+    AvatarGroupComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -55,6 +61,19 @@ export class AppComponent {
     { label: 'Descargar', icon: 'ri-download-2-line', action: 'download' },
     { label: 'Archivar', icon: 'ri-archive-line', action: 'archive' },
     { label: 'Eliminar', icon: 'ri-delete-bin-line', action: 'delete' },
+  ];
+
+  actionMenuItemsOnAction: ActionMenuItem[] = [
+    {
+      label: 'Copiar',
+      icon: 'ri-file-copy-line',
+      onAction: () => this.copyToClipboard(),
+    },
+    {
+      label: 'Pegar',
+      icon: 'ri-clipboard-line',
+      onAction: () => this.pasteFromClipboard(),
+    },
   ];
 
   /**

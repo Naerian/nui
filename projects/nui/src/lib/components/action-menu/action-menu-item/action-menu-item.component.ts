@@ -12,6 +12,7 @@ import { ActionMenuItem } from '../models/action-menu.model';
 
 @Component({
   selector: 'nui-action-menu-item',
+  standalone: true,
   templateUrl: './action-menu-item.component.html',
 })
 export class ActionMenuItemComponent {
