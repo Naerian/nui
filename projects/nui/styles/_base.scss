@@ -63,12 +63,12 @@ button, input, optgroup, select, textarea {
 // LINKS
 // ==========================================
 a {
-  color: var(--color-primary);
+  color: var(--nui-color-primary);
   text-decoration: none;
   transition: color 0.2s ease;
 
   &:hover {
-    color: var(--color-primary);
+    color: var(--nui-color-primary);
     opacity: 0.8;
   }
 }
@@ -77,7 +77,7 @@ a {
 // FOCUS STATES
 // ==========================================
 :focus-visible {
-  outline: 2px solid var(--color-focus-ring);
+  outline: 2px solid var(--nui-color-focus-ring);
   outline-offset: 2px;
 }
 
@@ -85,8 +85,8 @@ a {
 // SELECTION
 // ==========================================
 ::selection {
-  background-color: var(--color-selection);
-  color: var(--text-primary);
+  background-color: var(--nui-color-selection);
+  color: var(--nui-text-primary);
 }
 
 // ==========================================
@@ -106,7 +106,7 @@ a {
   border-radius: 4px;
 
   &:hover {
-    background: var(--color-gray-500);
+    background: var(--nui-color-gray-500);
   }
 }
 
@@ -114,7 +114,7 @@ a {
 // UTILITY CLASSES
 // ==========================================
 mark.highlight {
-  background-color: var(--color-highlight);
+  background-color: var(--nui-color-highlight);
   color: inherit;
   font-weight: var(--font-weight-semibold);
   border-radius: var(--border-radius-sm);

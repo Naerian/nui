@@ -39,7 +39,7 @@ Then customize in your `styles.scss`:
 
 ```scss
 :root {
-  --button-primary-solid-bg: #007bff;
+  --nui-button-primary-solid-bg: #007bff;
 }
 ```
 
@@ -66,7 +66,7 @@ If you need more control or already have CDK styles imported elsewhere:
 @import 'nui/styles/nui';
 
 :root {
-  --button-primary-solid-bg: #007bff;
+  --nui-button-primary-solid-bg: #007bff;
 }
 ```
 

@@ -34,8 +34,8 @@ Esta es la forma más sencilla, similar a PrimeNG. No requiere `@import` en tu `
 
 // Puedes sobrescribir variables CSS:
 :root {
-  --button-primary-solid-bg: #007bff;
-  --color-primary: #custom-color;
+  --nui-button-primary-solid-bg: #007bff;
+  --nui-color-primary: #custom-color;
 }
 ```
 
@@ -66,7 +66,7 @@ $color-primary: #custom-color;
 
 // Sobrescribir CSS custom properties DESPUÉS
 :root {
-  --button-primary-solid-bg: #007bff;
+  --nui-button-primary-solid-bg: #007bff;
 }
 ```
 
@@ -110,7 +110,7 @@ Usa el CSS pre-compilado pero importa solo las partes que necesitas personalizar
 
 // Y sobrescribir variables CSS
 :root {
-  --button-primary-solid-bg: #007bff;
+  --nui-button-primary-solid-bg: #007bff;
 }
 ```
 

@@ -121,18 +121,18 @@
 
     // Estilos para enlaces dentro del tooltip
     a {
-      color: var(--color-primary);
+      color: var(--nui-color-primary);
       text-decoration: underline;
       font-weight: var(--font-weight-medium);
       transition: color 0.2s ease;
 
       &:hover {
-        color: var(--color-primary-hover);
+        color: var(--nui-color-primary-hover);
         text-decoration: none;
       }
 
       &:focus-visible {
-        outline: 2px solid var(--color-primary);
+        outline: 2px solid var(--nui-color-primary);
         outline-offset: 2px;
         border-radius: 2px;
       }

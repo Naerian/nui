@@ -18,22 +18,22 @@
 
 @mixin nui-button-vars {
   // Espaciado
-  --button-gap: #{tokens.$button-gap};
+  --nui-button-gap: #{tokens.$button-gap};
 
   // Bordes
-  --button-border-radius: #{tokens.$button-border-radius};
-  --button-border-width: #{tokens.$button-border-width};
+  --nui-button-border-radius: #{tokens.$button-border-radius};
+  --nui-button-border-width: #{tokens.$button-border-width};
 
   // Tipografía
-  --button-font-weight: #{tokens.$button-font-weight};
+  --nui-button-font-weight: #{tokens.$button-font-weight};
 
   // Transformaciones
-  --button-spin-duration: #{tokens.$button-spin-duration};
+  --nui-button-spin-duration: #{tokens.$button-spin-duration};
 
   // Focus
-  --button-focus-outline-width: #{tokens.$button-focus-outline-width};
-  --button-focus-outline-offset: #{tokens.$button-focus-outline-offset};
+  --nui-button-focus-outline-width: #{tokens.$button-focus-outline-width};
+  --nui-button-focus-outline-offset: #{tokens.$button-focus-outline-offset};
 
   // Outline
-  --button-outline-border-width: #{tokens.$button-outline-border-width};
+  --nui-button-outline-border-width: #{tokens.$button-outline-border-width};
 }

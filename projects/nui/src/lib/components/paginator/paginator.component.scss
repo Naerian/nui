@@ -21,7 +21,7 @@
 
   &-text {
     font-size: var(--font-size-sm);
-    color: var(--text-primary-secondary);
+    color: var(--nui-text-primary-secondary);
     font-weight: var(--font-weight-medium);
   }
 }
@@ -37,7 +37,7 @@
 
   &-label {
     font-size: var(--font-size-sm);
-    color: var(--text-primary-secondary);
+    color: var(--nui-text-primary-secondary);
     font-weight: var(--font-weight-medium);
     white-space: nowrap;
   }
@@ -53,22 +53,22 @@
 
   &-label {
     font-size: var(--font-size-sm);
-    color: var(--text-primary-secondary);
+    color: var(--nui-text-primary-secondary);
     font-weight: var(--font-weight-medium);
     white-space: nowrap;
   }
 
   &-input {
-    width: var(--paginator-page-jump-input-width);
+    width: var(--nui-paginator-page-jump-input-width);
     padding: var(--spacing-xs) var(--spacing-sm);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
-    color: var(--text-primary);
-    background-color: var(--bg-primary);
-    border: var(--paginator-input-border-width) solid var(--color-border);
+    color: var(--nui-text-primary);
+    background-color: var(--nui-bg-primary);
+    border: var(--nui-paginator-input-border-width) solid var(--nui-color-border);
     border-radius: var(--border-radius-md);
     text-align: center;
-    transition: all var(--paginator-transition-duration) var(--paginator-transition-timing);
+    transition: all var(--nui-paginator-transition-duration) var(--nui-paginator-transition-timing);
 
     &--disabled {
       opacity: 0.5;
@@ -90,7 +90,7 @@
     font-weight: var(--font-weight-semibold);
     border-radius: var(--border-radius-md);
     cursor: pointer;
-    transition: all var(--paginator-transition-duration) var(--paginator-transition-timing);
+    transition: all var(--nui-paginator-transition-duration) var(--nui-paginator-transition-timing);
     white-space: nowrap;
   }
 }
@@ -101,12 +101,12 @@
 .nui-paginator {
   display: inline-flex;
   align-items: center;
-  gap: var(--paginator-gap);
+  gap: var(--nui-paginator-gap);
   user-select: none;
 
   // Estado deshabilitado del contenedor
   &--disabled {
-    opacity: var(--paginator-disabled-opacity);
+    opacity: var(--nui-paginator-disabled-opacity);
     pointer-events: none;
   }
 }
@@ -119,13 +119,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: var(--paginator-button-border-width) solid transparent;
+  border: var(--nui-paginator-button-border-width) solid transparent;
   border-radius: var(--border-radius-md);
   font-weight: var(--font-weight-medium);
   cursor: pointer;
-  transition: all var(--paginator-transition-duration) var(--paginator-transition-timing);
+  transition: all var(--nui-paginator-transition-duration) var(--nui-paginator-transition-timing);
   position: relative;
-  z-index: var(--paginator-z-index-base);
+  z-index: var(--nui-paginator-z-index-base);
 
   // Prevenir selección de texto
   user-select: none;
@@ -133,25 +133,25 @@
 
   // Estados interactivos
   &:hover:not(&--disabled) {
-    z-index: var(--paginator-z-index-hover);
-    transform: scale(var(--paginator-animation-scale-to));
+    z-index: var(--nui-paginator-z-index-hover);
+    transform: scale(var(--nui-paginator-animation-scale-to));
   }
 
   &:active:not(&--disabled) {
-    z-index: var(--paginator-z-index-active);
-    transform: scale(var(--paginator-animation-scale-from));
+    z-index: var(--nui-paginator-z-index-active);
+    transform: scale(var(--nui-paginator-animation-scale-from));
     outline: none;
   }
 
   &:focus-visible {
-    outline: var(--paginator-focus-outline-width) solid currentColor;
-    outline-offset: var(--paginator-focus-outline-offset);
+    outline: var(--nui-paginator-focus-outline-width) solid currentColor;
+    outline-offset: var(--nui-paginator-focus-outline-offset);
   }
 
   // Estado deshabilitado
   &--disabled {
     cursor: not-allowed;
-    opacity: var(--paginator-disabled-opacity);
+    opacity: var(--nui-paginator-disabled-opacity);
   }
 
   // Iconos dentro de los botones
@@ -171,7 +171,7 @@
   align-items: center;
   justify-content: center;
   padding: 0 0.25rem;
-  color: var(--text-primary-secondary);
+  color: var(--nui-text-primary-secondary);
   font-weight: var(--font-weight-medium);
   user-select: none;
 }
@@ -217,13 +217,13 @@
   align-items: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
-  background-color: var(--color-background-overlay);
+  background-color: var(--nui-color-background-overlay);
   border-radius: var(--border-radius-md);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--nui-color-border);
 
   &-text {
     font-size: var(--font-size-sm);
-    color: var(--text-primary-secondary);
+    color: var(--nui-text-primary-secondary);
     font-weight: var(--font-weight-medium);
   }
 }
@@ -245,7 +245,7 @@
 
     &-text {
       font-size: var(--font-size-sm);
-      color: var(--text-primary-secondary);
+      color: var(--nui-text-primary-secondary);
       font-weight: var(--font-weight-medium);
       text-align: center;
     }
@@ -259,7 +259,7 @@
 
     &-text {
       font-size: var(--font-size-sm);
-      color: var(--text-primary-disabled);
+      color: var(--nui-text-primary-disabled);
       font-style: italic;
     }
   }
@@ -306,7 +306,7 @@
   .nui-paginator__fractional-info {
     display: flex;
     align-items: center;
-    margin: 0 var(--paginator-compact-spacing);
+    margin: 0 var(--nui-paginator-compact-spacing);
   }
 }
 

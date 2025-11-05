@@ -228,13 +228,13 @@ export const myCustomPreset: ThemePreset = {
 
 ### What's injected via CSS-in-JS?
 Only 7 semantic colors × 2 modes = 14 values:
-- `--color-primary`
-- `--color-secondary`
-- `--color-accent`
-- `--color-success`
-- `--color-info`
-- `--color-warning`
-- `--color-danger`
+- `--nui-color-primary`
+- `--nui-color-secondary`
+- `--nui-color-accent`
+- `--nui-color-success`
+- `--nui-color-info`
+- `--nui-color-warning`
+- `--nui-color-danger`
 
 These override the default colors from `nui.css` when a preset is applied.
 

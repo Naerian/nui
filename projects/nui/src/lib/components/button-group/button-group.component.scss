@@ -32,11 +32,11 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-primary);
+    background: var(--nui-bg-primary);
     border-width: var(--border-width-xs);
     border-style: solid;
-    border-color: var(--border-primary);
-    color: var(--text-secondary);
+    border-color: var(--nui-border-primary);
+    color: var(--nui-text-secondary);
     font-family: var(--font-family);
     font-weight: var(--font-weight-medium);
     cursor: pointer;
@@ -44,7 +44,7 @@
       var(--transition-timing-function-ease);
     white-space: nowrap;
     position: relative;
-    z-index: var(--button-group-z-index-base);
+    z-index: var(--nui-button-group-z-index-base);
 
     // Eliminamos el doble borde entre botones
     & + .nui-button-group__option {
@@ -65,17 +65,17 @@
 
     &:hover:not(&--disabled):not(&--selected) {
       background-color: var(--surface-secondary);
-      color: var(--text-primary);
-      z-index: var(--button-group-z-index-hover);
+      color: var(--nui-text-primary);
+      z-index: var(--nui-button-group-z-index-hover);
     }
 
     &--selected {
-      background-color: var(--color-primary);
-      color: var(--color-on-primary);
-      border-color: var(--color-primary);
+      background-color: var(--nui-color-primary);
+      color: var(--nui-color-on-primary);
+      border-color: var(--nui-color-primary);
       border-width: var(--border-width-xs);
       border-style: solid;
-      z-index: var(--button-group-z-index-selected);
+      z-index: var(--nui-button-group-z-index-selected);
 
       // Ocultar el borde derecho del botón anterior cuando este está seleccionado
       + .nui-button-group__option {
@@ -84,7 +84,7 @@
     }
 
     &--disabled {
-      opacity: var(--button-group-disabled-opacity);
+      opacity: var(--nui-button-group-disabled-opacity);
       cursor: not-allowed;
     }
   }
@@ -102,7 +102,7 @@
 
   // Estado disabled del contenedor
   &--disabled {
-    opacity: var(--button-group-container-disabled-opacity);
+    opacity: var(--nui-button-group-container-disabled-opacity);
     pointer-events: none;
   }
 
@@ -158,7 +158,7 @@
 
     .nui-button-group__icon {
       font-size: var(
-        --button-group-icon-size-#{$size-key},
+        --nui-button-group-icon-size-#{$size-key},
         #{map.get($size-config, icon-size)}
       );
     }
@@ -171,41 +171,41 @@
 // Estilo iOS/Toggle: botones con fondo contenedor y espaciado interno
 
 .nui-button-group--segmented {
-  gap: var(--button-group-segmented-gap);
+  gap: var(--nui-button-group-segmented-gap);
   background-color: var(--surface-secondary);
-  padding: var(--button-group-segmented-padding);
-  border: var(--border-width-xs) solid var(--border-primary);
+  padding: var(--nui-button-group-segmented-padding);
+  border: var(--border-width-xs) solid var(--nui-border-primary);
   border-radius: var(--border-radius-md);
 
   .nui-button-group__option {
     background: transparent;
     border-width: var(--border-width-xs);
     border-style: solid;
-    border-color: var(--border-primary);
+    border-color: var(--nui-border-primary);
     border-radius: calc(
-      var(--border-radius-md) - var(--button-group-segmented-padding)
+      var(--border-radius-md) - var(--nui-button-group-segmented-padding)
     );
     margin: 0;
 
     // Hover más sutil en modo segmented
     &:hover:not(&--disabled):not(&--selected) {
       background-color: var(--surface-tertiary);
-      color: var(--text-primary);
+      color: var(--nui-text-primary);
     }
 
     // Estado seleccionado con fondo blanco y sombra
     &--selected {
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
+      background-color: var(--nui-bg-primary);
+      color: var(--nui-text-primary);
       position: relative;
-      z-index: var(--button-group-z-index-selected);
+      z-index: var(--nui-button-group-z-index-selected);
     }
 
     // No hay bordes redondeados especiales en primer/último
     &:first-child,
     &:last-child {
       border-radius: calc(
-        var(--border-radius-md) - var(--button-group-segmented-padding)
+        var(--border-radius-md) - var(--nui-button-group-segmented-padding)
       );
     }
   }
@@ -227,11 +227,11 @@
 @keyframes buttonGroupFadeIn {
   from {
     opacity: 0;
-    transform: scale(var(--button-group-animation-scale-from));
+    transform: scale(var(--nui-button-group-animation-scale-from));
   }
   to {
     opacity: 1;
-    transform: scale(var(--button-group-animation-scale-to));
+    transform: scale(var(--nui-button-group-animation-scale-to));
   }
 }
 
@@ -252,7 +252,7 @@
 
       .nui-button-group__option {
         border-radius: var(--border-radius-sm) !important;
-        border: var(--border-width-xs) solid var(--border-primary);
+        border: var(--border-width-xs) solid var(--nui-border-primary);
       }
     }
   }

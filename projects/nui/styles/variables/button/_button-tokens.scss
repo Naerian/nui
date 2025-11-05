@@ -22,7 +22,7 @@
 //
 // Para temas específicos, usa los mixins en themes/_theme-mixins.scss
 // que generan automáticamente las variables de color por cada modo
-// (--button-{mode}-bg, --button-{mode}-text, etc.)
+// (--nui-button-{mode}-bg, --nui-button-{mode}-text, etc.)
 //
 // ========================================
 
@@ -54,13 +54,13 @@ $button-outline-border-style: solid !default;
 // ===== BUTTON MODES =====
 // Los colores se generan dinámicamente en theme-mixins
 // Cada modo (primary, secondary, success, info, warning, danger, accent) tiene:
-// - --button-{mode}-bg
-// - --button-{mode}-border-color
-// - --button-{mode}-text
-// - --button-{mode}-hover-bg
-// - --button-{mode}-ghost-text
-// - --button-{mode}-icon-color
-// - --button-{mode}-ghost-icon-color
-// - --button-{mode}-ghost-hover-bg
+// - --nui-button-{mode}-bg
+// - --nui-button-{mode}-border-color
+// - --nui-button-{mode}-text
+// - --nui-button-{mode}-hover-bg
+// - --nui-button-{mode}-ghost-text
+// - --nui-button-{mode}-icon-color
+// - --nui-button-{mode}-ghost-icon-color
+// - --nui-button-{mode}-ghost-hover-bg
 
 $button-modes: primary, secondary, success, info, warning, danger, accent !default;

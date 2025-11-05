@@ -5,6 +5,9 @@ import {
   ButtonGroupComponent,
   ButtonGroupOption,
   ActionMenuModule,
+  AvatarGroupItem,
+  AvatarComponent,
+  AvatarGroupComponent,
 } from 'nui';
 import {
   ThemeService,
@@ -21,7 +24,7 @@ import {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ButtonComponent, ButtonGroupComponent, ActionMenuModule],
+  imports: [ButtonComponent, ButtonGroupComponent, ActionMenuModule, AvatarComponent, AvatarGroupComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -53,6 +56,112 @@ export class AppComponent {
     { label: 'Archivar', icon: 'ri-archive-line', action: 'archive' },
     { label: 'Eliminar', icon: 'ri-delete-bin-line', action: 'delete' },
   ];
+
+  /**
+   * Lista de usuarios para el AvatarGroup
+   */
+  users: AvatarGroupItem[] = [
+    {
+      src: 'https://i.pravatar.cc/150?img=1',
+      alt: 'María García',
+      tooltip: 'María García - Desarrolladora',
+    },
+    {
+      src: 'https://i.pravatar.cc/150?img=2',
+      alt: 'Juan Pérez',
+      tooltip: 'Juan Pérez - Diseñador',
+    },
+    {
+      src: 'https://i.pravatar.cc/150?img=3',
+      alt: 'Ana López',
+      tooltip: 'Ana López - Product Manager',
+    },
+    {
+      initials: 'RM',
+      color: 'primary',
+      alt: 'Roberto Martínez',
+      tooltip: 'Roberto Martínez - DevOps',
+    },
+    {
+      initials: 'LC',
+      color: 'success',
+      alt: 'Laura Castro',
+      tooltip: 'Laura Castro - QA Engineer',
+    },
+    {
+      initials: 'DS',
+      color: 'warning',
+      alt: 'Diego Sánchez',
+      tooltip: 'Diego Sánchez - Backend Developer',
+    },
+    {
+      initials: 'SM',
+      color: 'info',
+      alt: 'Sofía Morales',
+      tooltip: 'Sofía Morales - Frontend Developer',
+    },
+  ];
+
+  /**
+   * Equipo pequeño
+   */
+  smallTeam: AvatarGroupItem[] = [
+    {
+      src: 'https://i.pravatar.cc/150?img=10',
+      alt: 'Carlos Ruiz',
+    },
+    {
+      initials: 'MT',
+      color: 'primary',
+      alt: 'Marta Torres',
+    },
+    {
+      initials: 'PG',
+      color: 'success',
+      alt: 'Pablo González',
+    },
+  ];
+
+  /**
+   * Participantes del proyecto
+   */
+  projectParticipants: AvatarGroupItem[] = [
+    {
+      initials: 'JD',
+      color: 'primary',
+      tooltip: 'John Doe - Lead Developer',
+    },
+    {
+      initials: 'AS',
+      color: 'secondary',
+      tooltip: 'Alice Smith - UX Designer',
+    },
+    {
+      icon: 'ri-user-line',
+      color: 'info',
+      tooltip: 'Guest User',
+    },
+    {
+      initials: 'BC',
+      color: 'success',
+      tooltip: 'Bob Cooper - Tester',
+    },
+    {
+      initials: 'EJ',
+      color: 'warning',
+      tooltip: 'Emma Johnson - Analyst',
+    },
+  ];
+
+  /**
+   * URL de imagen de prueba
+   */
+  testImageUrl = 'https://i.pravatar.cc/150?img=5';
+
+  /**
+   * URL de imagen que falla (para probar fallback)
+   */
+  brokenImageUrl = 'https://invalid-url.com/image.jpg';
 
   menuItems: ActionMenuItem[] = [
     {

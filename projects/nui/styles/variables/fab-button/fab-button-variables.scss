@@ -18,62 +18,62 @@
 
 @mixin nui-fab-button-vars {
   // Dimensiones
-  --fab-button-size-xs: #{tokens.$fab-button-size-xs};
-  --fab-button-size-s: #{tokens.$fab-button-size-s};
-  --fab-button-size-sm: #{tokens.$fab-button-size-sm};
-  --fab-button-size-md: #{tokens.$fab-button-size-md};
-  --fab-button-size-lg: #{tokens.$fab-button-size-lg};
-  --fab-button-size-xl: #{tokens.$fab-button-size-xl};
+  --nui-fab-button-size-xs: #{tokens.$fab-button-size-xs};
+  --nui-fab-button-size-s: #{tokens.$fab-button-size-s};
+  --nui-fab-button-size-sm: #{tokens.$fab-button-size-sm};
+  --nui-fab-button-size-md: #{tokens.$fab-button-size-md};
+  --nui-fab-button-size-lg: #{tokens.$fab-button-size-lg};
+  --nui-fab-button-size-xl: #{tokens.$fab-button-size-xl};
 
-  --fab-button-item-size-xs: #{tokens.$fab-button-item-size-xs};
-  --fab-button-item-size-s: #{tokens.$fab-button-item-size-s};
-  --fab-button-item-size-sm: #{tokens.$fab-button-item-size-sm};
-  --fab-button-item-size-md: #{tokens.$fab-button-item-size-md};
-  --fab-button-item-size-lg: #{tokens.$fab-button-item-size-lg};
-  --fab-button-item-size-xl: #{tokens.$fab-button-item-size-xl};
+  --nui-fab-button-item-size-xs: #{tokens.$fab-button-item-size-xs};
+  --nui-fab-button-item-size-s: #{tokens.$fab-button-item-size-s};
+  --nui-fab-button-item-size-sm: #{tokens.$fab-button-item-size-sm};
+  --nui-fab-button-item-size-md: #{tokens.$fab-button-item-size-md};
+  --nui-fab-button-item-size-lg: #{tokens.$fab-button-item-size-lg};
+  --nui-fab-button-item-size-xl: #{tokens.$fab-button-item-size-xl};
 
-  --fab-button-font-size-xs: #{tokens.$fab-button-font-size-xs};
-  --fab-button-font-size-s: #{tokens.$fab-button-font-size-s};
-  --fab-button-font-size-sm: #{tokens.$fab-button-font-size-sm};
-  --fab-button-font-size-md: #{tokens.$fab-button-font-size-md};
-  --fab-button-font-size-lg: #{tokens.$fab-button-font-size-lg};
-  --fab-button-font-size-xl: #{tokens.$fab-button-font-size-xl};
+  --nui-fab-button-font-size-xs: #{tokens.$fab-button-font-size-xs};
+  --nui-fab-button-font-size-s: #{tokens.$fab-button-font-size-s};
+  --nui-fab-button-font-size-sm: #{tokens.$fab-button-font-size-sm};
+  --nui-fab-button-font-size-md: #{tokens.$fab-button-font-size-md};
+  --nui-fab-button-font-size-lg: #{tokens.$fab-button-font-size-lg};
+  --nui-fab-button-font-size-xl: #{tokens.$fab-button-font-size-xl};
 
-  --fab-button-label-font-size-xs: #{tokens.$fab-button-label-font-size-xs};
-  --fab-button-label-font-size-s: #{tokens.$fab-button-label-font-size-s};
-  --fab-button-label-font-size-sm: #{tokens.$fab-button-label-font-size-sm};
-  --fab-button-label-font-size-md: #{tokens.$fab-button-label-font-size-md};
-  --fab-button-label-font-size-lg: #{tokens.$fab-button-label-font-size-lg};
-  --fab-button-label-font-size-xl: #{tokens.$fab-button-label-font-size-xl};
+  --nui-fab-button-label-font-size-xs: #{tokens.$fab-button-label-font-size-xs};
+  --nui-fab-button-label-font-size-s: #{tokens.$fab-button-label-font-size-s};
+  --nui-fab-button-label-font-size-sm: #{tokens.$fab-button-label-font-size-sm};
+  --nui-fab-button-label-font-size-md: #{tokens.$fab-button-label-font-size-md};
+  --nui-fab-button-label-font-size-lg: #{tokens.$fab-button-label-font-size-lg};
+  --nui-fab-button-label-font-size-xl: #{tokens.$fab-button-label-font-size-xl};
 
   // Espaciado
-  --fab-button-item-spacing: #{tokens.$fab-button-item-spacing};
-  --fab-button-label-gap: #{tokens.$fab-button-label-gap};
-  --fab-button-label-padding: #{tokens.$fab-button-label-padding};
+  --nui-fab-button-item-spacing: #{tokens.$fab-button-item-spacing};
+  --nui-fab-button-label-gap: #{tokens.$fab-button-label-gap};
+  --nui-fab-button-label-padding: #{tokens.$fab-button-label-padding};
 
   // Bordes
-  --fab-button-border-radius: #{tokens.$fab-button-border-radius};
-  --fab-button-border-width: #{tokens.$fab-button-border-width};
+  --nui-fab-button-border-radius: #{tokens.$fab-button-border-radius};
+  --nui-fab-button-border-width: #{tokens.$fab-button-border-width};
 
   // Overlay
-  --fab-button-overlay-bg: #{tokens.$fab-button-overlay-bg};
+  --nui-fab-button-overlay-bg: #{tokens.$fab-button-overlay-bg};
 
   // Animaciones
-  --fab-button-transition-duration: #{tokens.$fab-button-transition-duration};
-  --fab-button-transition-timing: #{tokens.$fab-button-transition-timing};
-  --fab-button-icon-rotation: #{tokens.$fab-button-icon-rotation};
+  --nui-fab-button-transition-duration: #{tokens.$fab-button-transition-duration};
+  --nui-fab-button-transition-timing: #{tokens.$fab-button-transition-timing};
+  --nui-fab-button-icon-rotation: #{tokens.$fab-button-icon-rotation};
 
   // Tipografía
-  --fab-button-font-weight: #{tokens.$fab-button-font-weight};
-  --fab-button-font-family: #{tokens.$fab-button-font-family};
-  --fab-button-label-font-size: #{tokens.$fab-button-label-font-size};
+  --nui-fab-button-font-weight: #{tokens.$fab-button-font-weight};
+  --nui-fab-button-font-family: #{tokens.$fab-button-font-family};
+  --nui-fab-button-label-font-size: #{tokens.$fab-button-label-font-size};
 
   // Focus
-  --fab-button-focus-outline-width: #{tokens.$fab-button-focus-outline-width};
-  --fab-button-focus-outline-offset: #{tokens.$fab-button-focus-outline-offset};
+  --nui-fab-button-focus-outline-width: #{tokens.$fab-button-focus-outline-width};
+  --nui-fab-button-focus-outline-offset: #{tokens.$fab-button-focus-outline-offset};
 
   // Z-index
-  --fab-button-z-index: #{tokens.$fab-button-z-index};
-  --fab-button-overlay-z-index: #{tokens.$fab-button-overlay-z-index};
-  --fab-button-items-z-index: #{tokens.$fab-button-items-z-index};
+  --nui-fab-button-z-index: #{tokens.$fab-button-z-index};
+  --nui-fab-button-overlay-z-index: #{tokens.$fab-button-overlay-z-index};
+  --nui-fab-button-items-z-index: #{tokens.$fab-button-items-z-index};
 }

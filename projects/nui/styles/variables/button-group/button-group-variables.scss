@@ -21,28 +21,28 @@
 // Configuración unificada de ButtonGroup usando variables del sistema
 @mixin nui-button-group-vars {
   // Z-index layers
-  --button-group-z-index-base: #{tokens.$button-group-z-index-base};
-  --button-group-z-index-hover: #{tokens.$button-group-z-index-hover};
-  --button-group-z-index-selected: #{tokens.$button-group-z-index-selected};
-  --button-group-z-index-focus: #{tokens.$button-group-z-index-focus};
+  --nui-button-group-z-index-base: #{tokens.$button-group-z-index-base};
+  --nui-button-group-z-index-hover: #{tokens.$button-group-z-index-hover};
+  --nui-button-group-z-index-selected: #{tokens.$button-group-z-index-selected};
+  --nui-button-group-z-index-focus: #{tokens.$button-group-z-index-focus};
 
   // Opacidades
-  --button-group-disabled-opacity: #{tokens.$button-group-disabled-opacity};
-  --button-group-container-disabled-opacity: #{tokens.$button-group-container-disabled-opacity};
+  --nui-button-group-disabled-opacity: #{tokens.$button-group-disabled-opacity};
+  --nui-button-group-container-disabled-opacity: #{tokens.$button-group-container-disabled-opacity};
 
   // Gaps y paddings
-  --button-group-segmented-gap: #{tokens.$button-group-segmented-gap};
-  --button-group-segmented-padding: #{tokens.$button-group-segmented-padding};
+  --nui-button-group-segmented-gap: #{tokens.$button-group-segmented-gap};
+  --nui-button-group-segmented-padding: #{tokens.$button-group-segmented-padding};
 
   // Animaciones
-  --button-group-animation-scale-from: #{tokens.$button-group-animation-scale-from};
-  --button-group-animation-scale-to: #{tokens.$button-group-animation-scale-to};
+  --nui-button-group-animation-scale-from: #{tokens.$button-group-animation-scale-from};
+  --nui-button-group-animation-scale-to: #{tokens.$button-group-animation-scale-to};
 
   // Icon sizes por tamaño
-  --button-group-icon-size-xs: #{tokens.$button-group-icon-size-xs};
-  --button-group-icon-size-s: #{tokens.$button-group-icon-size-s};
-  --button-group-icon-size-sm: #{tokens.$button-group-icon-size-sm};
-  --button-group-icon-size-md: #{tokens.$button-group-icon-size-md};
-  --button-group-icon-size-lg: #{tokens.$button-group-icon-size-lg};
-  --button-group-icon-size-xl: #{tokens.$button-group-icon-size-xl};
+  --nui-button-group-icon-size-xs: #{tokens.$button-group-icon-size-xs};
+  --nui-button-group-icon-size-s: #{tokens.$button-group-icon-size-s};
+  --nui-button-group-icon-size-sm: #{tokens.$button-group-icon-size-sm};
+  --nui-button-group-icon-size-md: #{tokens.$button-group-icon-size-md};
+  --nui-button-group-icon-size-lg: #{tokens.$button-group-icon-size-lg};
+  --nui-button-group-icon-size-xl: #{tokens.$button-group-icon-size-xl};
 }

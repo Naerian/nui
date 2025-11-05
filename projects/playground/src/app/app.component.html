@@ -87,4 +87,19 @@
       />
     </div>
   </section>
+
+  <section style="margin: 2rem 0">
+    <h2>Avatar Group Example</h2>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0">
+      <nui-avatar-group [avatars]="users" [max]="5" />
+    </div>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0">
+      <nui-avatar-group [avatars]="smallTeam" [max]="3" layout="stacked" />
+    </div>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0">
+      <nui-avatar [src]="testImageUrl" alt="Usuario de prueba" />
+      <nui-avatar [src]="testImageUrl" alt="Usuario" size="sm" />
+      <nui-avatar [src]="testImageUrl" alt="Usuario" size="lg" />
+    </div>
+  </section>
 </div>

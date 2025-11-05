@@ -21,7 +21,7 @@
 // ```
 //
 // Para temas específicos, usa los mixins en themes/_theme-mixins.scss
-// que generan automáticamente las variables de color (--modal-{type}-icon-color, etc.)
+// que generan automáticamente las variables de color (--nui-modal-{type}-icon-color, etc.)
 //
 // ========================================
 
@@ -34,7 +34,7 @@ $modal-gap: var(--spacing-xs, 0.625rem) !default;
 // ===== BORDES Y RADIOS =====
 $modal-border-radius: var(--border-radius-md, 0.5rem) !default;
 $modal-border: var(--border-container) !default;
-$modal-shadow: var(--shadow-elevated) !default;
+$modal-shadow: var(--nui-shadow-elevated) !default;
 
 // ===== BOTÓN DE CIERRE =====
 $modal-close-position: var(--spacing-sm, 0.75rem) !default;
@@ -48,7 +48,7 @@ $modal-title-gap: var(--spacing-xs, 0.625rem) !default;
 $modal-title-margin-bottom: var(--spacing-s, 0.625rem) !default;
 $modal-title-padding-bottom: var(--spacing-s, 0.25rem) !default;
 $modal-title-border-width: var(--border-width-xs) !default;
-$modal-title-border-color: var(--color-border) !default;
+$modal-title-border-color: var(--nui-color-border) !default;
 $modal-title-line-height: 1.3 !default;
 
 // ===== TÍTULO - ICONO =====
@@ -80,7 +80,7 @@ $modal-progress-height: 6px !default;
 $modal-progress-bg: rgba(0, 0, 0, 0.1) !default;
 $modal-progress-border-radius: var(--border-radius-md) var(--border-radius-md) 0 0 !default;
 $modal-progress-z-index: 20 !default;
-$modal-progress-fill-bg: var(--color-modal-gradient) !default;
+$modal-progress-fill-bg: var(--nui-color-modal-gradient) !default;
 $modal-progress-transition: width 0.05s linear !default;
 $modal-progress-pulse-duration: 2s !default;
 $modal-progress-pulse-easing: ease-in-out !default;
@@ -90,7 +90,7 @@ $modal-progress-pulse-opacity-min: 0.8 !default;
 $modal-countdown-font-size: var(--font-size-s) !default;
 $modal-countdown-font-weight: var(--font-weight-semibold) !default;
 $modal-countdown-line-height: 1.2rem !default;
-$modal-countdown-bg: var(--modal-countdown-bg) !default;
+$modal-countdown-bg: var(--nui-modal-countdown-bg) !default;
 $modal-countdown-padding: 0.125rem 0.5rem !default;
 $modal-countdown-border-radius: var(--border-radius-sm) !default;
 $modal-countdown-min-width: 2.5rem !default;

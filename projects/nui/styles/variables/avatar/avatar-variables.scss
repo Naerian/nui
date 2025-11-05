@@ -18,61 +18,61 @@
 
 @mixin nui-avatar-vars {
   // Tamaños
-  --avatar-size-xs: #{tokens.$avatar-size-xs};
-  --avatar-size-sm: #{tokens.$avatar-size-sm};
-  --avatar-size-md: #{tokens.$avatar-size-md};
-  --avatar-size-lg: #{tokens.$avatar-size-lg};
-  --avatar-size-xl: #{tokens.$avatar-size-xl};
+  --nui-avatar-size-xs: #{tokens.$avatar-size-xs};
+  --nui-avatar-size-sm: #{tokens.$avatar-size-sm};
+  --nui-avatar-size-md: #{tokens.$avatar-size-md};
+  --nui-avatar-size-lg: #{tokens.$avatar-size-lg};
+  --nui-avatar-size-xl: #{tokens.$avatar-size-xl};
 
   // Exceso tamaños
-  --avatar-excess-size-xs: calc(#{tokens.$avatar-size-xs} / 2);
-  --avatar-excess-size-sm: calc(#{tokens.$avatar-size-sm} / 2);
-  --avatar-excess-size-md: calc(#{tokens.$avatar-size-md} / 2);
-  --avatar-excess-size-lg: calc(#{tokens.$avatar-size-lg} / 2);
-  --avatar-excess-size-xl: calc(#{tokens.$avatar-size-xl} / 2);
+  --nui-avatar-excess-size-xs: calc(#{tokens.$avatar-size-xs} / 2);
+  --nui-avatar-excess-size-sm: calc(#{tokens.$avatar-size-sm} / 2);
+  --nui-avatar-excess-size-md: calc(#{tokens.$avatar-size-md} / 2);
+  --nui-avatar-excess-size-lg: calc(#{tokens.$avatar-size-lg} / 2);
+  --nui-avatar-excess-size-xl: calc(#{tokens.$avatar-size-xl} / 2);
 
   // Font sizes
-  --avatar-font-size-xs: #{tokens.$avatar-font-size-xs};
-  --avatar-font-size-sm: #{tokens.$avatar-font-size-sm};
-  --avatar-font-size-md: #{tokens.$avatar-font-size-md};
-  --avatar-font-size-lg: #{tokens.$avatar-font-size-lg};
-  --avatar-font-size-xl: #{tokens.$avatar-font-size-xl};
+  --nui-avatar-font-size-xs: #{tokens.$avatar-font-size-xs};
+  --nui-avatar-font-size-sm: #{tokens.$avatar-font-size-sm};
+  --nui-avatar-font-size-md: #{tokens.$avatar-font-size-md};
+  --nui-avatar-font-size-lg: #{tokens.$avatar-font-size-lg};
+  --nui-avatar-font-size-xl: #{tokens.$avatar-font-size-xl};
 
   // Icon sizes
-  --avatar-icon-size-xs: #{tokens.$avatar-icon-size-xs};
-  --avatar-icon-size-sm: #{tokens.$avatar-icon-size-sm};
-  --avatar-icon-size-md: #{tokens.$avatar-icon-size-md};
-  --avatar-icon-size-lg: #{tokens.$avatar-icon-size-lg};
-  --avatar-icon-size-xl: #{tokens.$avatar-icon-size-xl};
+  --nui-avatar-icon-size-xs: #{tokens.$avatar-icon-size-xs};
+  --nui-avatar-icon-size-sm: #{tokens.$avatar-icon-size-sm};
+  --nui-avatar-icon-size-md: #{tokens.$avatar-icon-size-md};
+  --nui-avatar-icon-size-lg: #{tokens.$avatar-icon-size-lg};
+  --nui-avatar-icon-size-xl: #{tokens.$avatar-icon-size-xl};
 
   // Bordes
-  --avatar-border-radius-rounded: #{tokens.$avatar-border-radius-rounded};
-  --avatar-border-radius-circular: #{tokens.$avatar-border-radius-circular};
-  --avatar-border-radius-square: #{tokens.$avatar-border-radius-square};
+  --nui-avatar-border-radius-rounded: #{tokens.$avatar-border-radius-rounded};
+  --nui-avatar-border-radius-circular: #{tokens.$avatar-border-radius-circular};
+  --nui-avatar-border-radius-square: #{tokens.$avatar-border-radius-square};
 
   // Tipografía
-  --avatar-font-weight: #{tokens.$avatar-font-weight};
-  --avatar-line-height: #{tokens.$avatar-line-height};
-  --avatar-text-transform: #{tokens.$avatar-text-transform};
+  --nui-avatar-font-weight: #{tokens.$avatar-font-weight};
+  --nui-avatar-line-height: #{tokens.$avatar-line-height};
+  --nui-avatar-text-transform: #{tokens.$avatar-text-transform};
 
   // Z-index
-  --avatar-z-index-base: #{tokens.$avatar-z-index-base};
-  --avatar-z-index-hover: #{tokens.$avatar-z-index-hover};
+  --nui-avatar-z-index-base: #{tokens.$avatar-z-index-base};
+  --nui-avatar-z-index-hover: #{tokens.$avatar-z-index-hover};
 
   // Avatar Group
-  --avatar-group-spacing: #{tokens.$avatar-group-spacing};
-  --avatar-group-border-width: #{tokens.$avatar-group-border-width};
-  --avatar-group-hover-scale: #{tokens.$avatar-group-hover-scale};
-  --avatar-group-z-index-hover: #{tokens.$avatar-group-z-index-hover};
+  --nui-avatar-group-spacing: #{tokens.$avatar-group-spacing};
+  --nui-avatar-group-border-width: #{tokens.$avatar-group-border-width};
+  --nui-avatar-group-hover-scale: #{tokens.$avatar-group-hover-scale};
+  --nui-avatar-group-z-index-hover: #{tokens.$avatar-group-z-index-hover};
 
   // Exceso
-  --avatar-excess-font-size-xs: #{tokens.$avatar-excess-font-size-xs};
-  --avatar-excess-font-size-sm: #{tokens.$avatar-excess-font-size-sm};
-  --avatar-excess-font-size-md: #{tokens.$avatar-excess-font-size-md};
-  --avatar-excess-font-size-lg: #{tokens.$avatar-excess-font-size-lg};
-  --avatar-excess-font-size-xl: #{tokens.$avatar-excess-font-size-xl};
-  --avatar-excess-font-weight: #{tokens.$avatar-excess-font-weight};
+  --nui-avatar-excess-font-size-xs: #{tokens.$avatar-excess-font-size-xs};
+  --nui-avatar-excess-font-size-sm: #{tokens.$avatar-excess-font-size-sm};
+  --nui-avatar-excess-font-size-md: #{tokens.$avatar-excess-font-size-md};
+  --nui-avatar-excess-font-size-lg: #{tokens.$avatar-excess-font-size-lg};
+  --nui-avatar-excess-font-size-xl: #{tokens.$avatar-excess-font-size-xl};
+  --nui-avatar-excess-font-weight: #{tokens.$avatar-excess-font-weight};
 
   // Transiciones
-  --avatar-transition: all #{tokens.$avatar-transition-duration} #{tokens.$avatar-transition-timing};
+  --nui-avatar-transition: all #{tokens.$avatar-transition-duration} #{tokens.$avatar-transition-timing};
 }

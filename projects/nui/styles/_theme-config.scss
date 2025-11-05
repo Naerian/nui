@@ -108,19 +108,19 @@
   --box-shadow-button-hover: #{config.$box-shadow-button-hover};
 
   // Sombras semánticas (variables de alto nivel para tipos de componente)
-  --shadow-container: var(
+  --nui-shadow-container: var(
     --box-shadow-sm
   ); // Componentes contenedores (Card, Calendar, TimePicker, Panel)
-  --shadow-elevated: var(
+  --nui-shadow-elevated: var(
     --box-shadow-md
   ); // Componentes flotantes/elevados (Dropdown, Modal, ContextMenu, Tooltip)
-  --shadow-interactive: var(
+  --nui-shadow-interactive: var(
     --box-shadow-s
   ); // Elementos interactivos (Button hover, List items, Paginator)
-  --shadow-field: var(
+  --nui-shadow-field: var(
     --box-shadow-xs
   ); // Form fields (Input, Select, TextArea, InputNumber)
-  --shadow-none: none; // Sin sombra
+  --nui-shadow-none: none; // Sin sombra
 
   // =======================
   // TRANSICIONES

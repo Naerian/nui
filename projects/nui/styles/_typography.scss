@@ -27,7 +27,7 @@ h6 {
   margin-top: 0;
   margin-bottom: var(--spacing-md);
   line-height: 1.2;
-  color: var(--text-primary-heading);
+  color: var(--nui-text-primary-heading);
 }
 
 h1 {
@@ -60,7 +60,7 @@ h6 {
 
 small {
   font-size: var(--font-size-s); // 12px
-  color: var(--text-primary-muted);
+  color: var(--nui-text-primary-muted);
 }
 
 p {
@@ -69,7 +69,7 @@ p {
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--nui-color-primary);
   text-decoration: none;
   transition:
     color 0.2s ease,
@@ -81,7 +81,7 @@ a {
 
   // Accesibilidad: focus visible para navegación por teclado
   &:focus-visible {
-    outline: 2px solid var(--color-focus-ring);
+    outline: 2px solid var(--nui-color-focus-ring);
     outline-offset: 2px;
     border-radius: 2px;
   }

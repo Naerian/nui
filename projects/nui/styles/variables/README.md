@@ -23,9 +23,9 @@ $button-border-width: 1px !default;
 
 // 2. button-variables.scss - Converts to CSS vars
 @mixin nui-button-vars {
-  --button-gap: #{$button-gap};
-  --button-border-radius: #{$button-border-radius};
-  --button-border-width: #{$button-border-width};
+  --nui-button-gap: #{$button-gap};
+  --nui-button-border-radius: #{$button-border-radius};
+  --nui-button-border-width: #{$button-border-width};
 }
 
 // 3. _theme-config.scss - Includes the mixin
@@ -49,9 +49,9 @@ $button-border-width: 1px !default;
 Color-related variables are **NOT** defined in SCSS. They are generated dynamically by the `ThemeService` in TypeScript.
 
 Examples:
-- `--button-primary-solid-bg`
-- `--chip-success-outline-text`
-- `--toast-danger-icon-color`
+- `--nui-button-primary-solid-bg`
+- `--nui-chip-success-outline-text`
+- `--nui-toast-danger-icon-color`
 
 See `projects/nui/src/lib/themes/theme.service.ts` for color generation logic.
 
@@ -78,9 +78,9 @@ $chip-padding-x: (
 
 ```scss
 :root {
-  --button-gap: 0.75rem;
-  --button-border-radius: 0.5rem;
-  --chip-padding-x-md: 1rem;
+  --nui-button-gap: 0.75rem;
+  --nui-button-border-radius: 0.5rem;
+  --nui-chip-padding-x-md: 1rem;
 }
 ```
 
@@ -173,7 +173,7 @@ Adding new components follows the same pattern:
 ## 💡 Best Practices
 
 1. **Never hardcode colors** in component SCSS - use CSS variables
-2. **Use semantic names** for variables (e.g., `--button-gap` not `--spacing-1`)
+2. **Use semantic names** for variables (e.g., `--nui-button-gap` not `--spacing-1`)
 3. **Group related variables** by component in separate folders
 4. **Document magic numbers** with comments explaining the rationale
 5. **Use `!default`** for all SCSS variables to allow customization

@@ -20,7 +20,7 @@
 //
 // Para temas específicos, usa los mixins en themes/_theme-mixins.scss
 // que generan automáticamente las variables de color por cada modo
-// (--fab-button-{color}-bg, --fab-button-{color}-text, etc.)
+// (--nui-fab-button-{color}-bg, --nui-fab-button-{color}-text, etc.)
 //
 // ========================================
 
@@ -66,7 +66,7 @@ $fab-button-border-radius: var(--border-radius-md) !default;
 $fab-button-border-width: var(--border-width-xs) !default;
 
 // ===== OVERLAY =====
-$fab-button-overlay-bg: var(--color-backdrop) !default;
+$fab-button-overlay-bg: var(--nui-color-backdrop) !default;
 
 // ===== ANIMACIONES =====
 $fab-button-transition-duration: 0.3s !default;

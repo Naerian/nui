@@ -273,8 +273,8 @@
 
   // Custom (sin color específico)
   &.nui-toast--custom {
-    background-color: var(--toast-bg);
-    color: var(--toast-color);
+    background-color: var(--nui-toast-bg);
+    color: var(--nui-toast-color);
     border: var(--nui-toast-border-width) solid var(--nui-toast-border-color);
   }
 
