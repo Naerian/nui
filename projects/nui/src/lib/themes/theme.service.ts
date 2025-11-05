@@ -94,8 +94,38 @@ export class ThemeService {
     // Modal gradient (uses warning and danger from preset)
     css += `  --color-modal-gradient: linear-gradient(90deg, ${colors.warning}, ${colors.danger});\n`;
     
-    // Component color variables
+    // Generate base color variables and their tints/shades
     Object.entries(colors).forEach(([name, baseColor]) => {
+      // Base color
+      css += `  --color-${name}: ${baseColor};\n`;
+      
+      // Generate tints (lighter versions): 95, 90, 80, 70, 60, 50
+      css += `  --color-${name}-tint-95: ${this.tint(baseColor, 95)};\n`;
+      css += `  --color-${name}-tint-90: ${this.tint(baseColor, 90)};\n`;
+      css += `  --color-${name}-tint-80: ${this.tint(baseColor, 80)};\n`;
+      css += `  --color-${name}-tint-70: ${this.tint(baseColor, 70)};\n`;
+      css += `  --color-${name}-tint-60: ${this.tint(baseColor, 60)};\n`;
+      css += `  --color-${name}-tint-50: ${this.tint(baseColor, 50)};\n`;
+      
+      // Generate shades (darker versions): 10, 20, 30, 40, 50
+      css += `  --color-${name}-shade-10: ${this.shade(baseColor, 10)};\n`;
+      css += `  --color-${name}-shade-20: ${this.shade(baseColor, 20)};\n`;
+      css += `  --color-${name}-shade-30: ${this.shade(baseColor, 30)};\n`;
+      css += `  --color-${name}-shade-40: ${this.shade(baseColor, 40)};\n`;
+      css += `  --color-${name}-shade-50: ${this.shade(baseColor, 50)};\n`;
+      
+      // Generate alpha variants: 10, 20, 30, 40, 50, 60, 70, 80, 90
+      css += `  --color-${name}-alpha-10: ${this.withAlpha(baseColor, 0.1)};\n`;
+      css += `  --color-${name}-alpha-20: ${this.withAlpha(baseColor, 0.2)};\n`;
+      css += `  --color-${name}-alpha-30: ${this.withAlpha(baseColor, 0.3)};\n`;
+      css += `  --color-${name}-alpha-40: ${this.withAlpha(baseColor, 0.4)};\n`;
+      css += `  --color-${name}-alpha-50: ${this.withAlpha(baseColor, 0.5)};\n`;
+      css += `  --color-${name}-alpha-60: ${this.withAlpha(baseColor, 0.6)};\n`;
+      css += `  --color-${name}-alpha-70: ${this.withAlpha(baseColor, 0.7)};\n`;
+      css += `  --color-${name}-alpha-80: ${this.withAlpha(baseColor, 0.8)};\n`;
+      css += `  --color-${name}-alpha-90: ${this.withAlpha(baseColor, 0.9)};\n`;
+      
+      // Component-specific variables
       css += this.generateButtonVariables(name, baseColor);
       css += this.generateFabButtonVariables(name, baseColor);
       css += this.generateButtonGroupVariables(name, baseColor);

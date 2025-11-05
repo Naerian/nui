@@ -59,18 +59,32 @@
 
   <section style="margin: 2rem 0">
     <h2>Action Menu Example</h2>
-    <nui-action-menu
-      [items]="actionMenuItems"
-      [label]="'Acciones'"
-      [icon]="'ri-more-2-line'"
-      (onItemAction)="onActionSelected($event)"
-    />
-    <nui-action-menu
-      [type]="'static'"
-      [items]="actionMenuItems"
-      [label]="'Acciones'"
-      [icon]="'ri-more-2-line'"
-      (onItemAction)="onActionSelected($event)"
-    />
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0">
+      <nui-action-menu
+        [items]="actionMenuItems"
+        [label]="'Acciones'"
+        [icon]="'ri-more-2-line'"
+        (onItemAction)="onActionSelected($event)"
+      />
+      <nui-action-menu
+        [items]="actionMenuItems"
+        [label]="'Acciones'"
+        [color]="'accent'"
+        [icon]="'ri-more-2-line'"
+        (onItemAction)="onActionSelected($event)"
+      />
+      <nui-action-menu
+        [items]="actionMenuItems"
+        [icon]="'ri-home-heart-line'"
+        [color]="'danger'"
+        (onItemAction)="onActionSelected($event)"
+      />
+      <nui-action-menu
+        [items]="actionMenuItems"
+        [icon]="'ri-arrow-up-circle-fill'"
+        [color]="'danger'"
+        (onItemAction)="onActionSelected($event)"
+      />
+    </div>
   </section>
 </div>
