@@ -4,7 +4,6 @@
   "style": "styles/nui.css",
   "exports": {
     ".": {
-      "types": "./index.d.ts",
       "default": "./fesm2022/nui.mjs"
     },
     "./styles/nui.css": "./styles/nui.css",
