@@ -1,5 +1,5 @@
-@import "../config";
-@import "../mixins";
+@use "../config";
+@use "../mixins";
 // NOTA: No importar theme ni theme-config aquí, ya están incluidos globalmente en nui.scss
 // Importarlos aquí causa que se dupliquen los bloques :root, impidiendo la personalización
 
@@ -34,7 +34,7 @@
   $sizes: xs, s, sm, md, lg, xl;
   @each $size in $sizes {
     &--#{$size} {
-      @include component-size($size);
+      @include mixins.component-size($size);
       i {
         font-size: var(--component-font-size-#{$size});
       }
@@ -183,7 +183,7 @@
   &[disabled],
   &--disabled,
   &.nui-btn--disabled {
-    @include disabled;
+    @include mixins.disabled;
     pointer-events: none;
     cursor: not-allowed;
 

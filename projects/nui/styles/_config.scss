@@ -1,4 +1,4 @@
-@import "colors";
+@use "colors";
 
 // =======================
 // TIPOGRAFÍA
@@ -188,29 +188,3 @@ $breakpoint-xxl: 1536px !default; // Extra extra large devices (larger desktops)
 // GO TO TOP
 // =======================
 $z-index-floating: 1000 !default;
-
-// ========================================
-// COMPONENT TOKENS IMPORTS
-// ========================================
-// Importar todas las variables SCSS (tokens) de los componentes
-@import "variables/action-menu/action-menu-tokens";
-@import "variables/avatar/avatar-tokens";
-@import "variables/breadcrumb/breadcrumb-tokens";
-@import "variables/button-group/button-group-tokens";
-@import "variables/button/button-tokens";
-@import "variables/calendar/calendar-tokens";
-@import "variables/card/card-tokens";
-@import "variables/chip/chip-tokens";
-@import "variables/fab-button/fab-button-tokens";
-@import "variables/spinner/spinner-tokens";
-@import "variables/toast/toast-tokens";
-@import "variables/tooltip/tooltip-tokens";
-@import "variables/popover/popover-tokens";
-@import "variables/progress-bar/progress-bar-tokens";
-@import "variables/switch/switch-tokens";
-@import "variables/panel/panel-tokens";
-@import "variables/modal-dialog/modal-dialog-tokens";
-@import "variables/paginator/paginator-tokens";
-@import "variables/slidepanel/slidepanel-tokens";
-@import "variables/tab/tab-tokens";
-@import "variables/time-picker/time-picker-tokens";

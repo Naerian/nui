@@ -1,6 +1,8 @@
-@import "../../../../styles/config";
-@import "../../../../styles/mixins";
-@import "../../../../styles/variables/button-group/button-group-variables.scss";
+@use "sass:map";
+@use "../../../../styles/config";
+@use "../../../../styles/mixins";
+@use "../../../../styles/variables/button-group/button-group-tokens" as button-group-tokens;
+@use "../../../../styles/variables/button-group/button-group-variables.scss" as button-group-vars;
 
 .nui-button-group {
   display: inline-flex;
@@ -112,9 +114,9 @@
   // Generación automática de variantes usando mixin (reduce ~85% de código)
   $colors: primary, secondary, success, info, warning, danger, accent;
   @each $color in $colors {
-    @include button-group-colors(solid, $color);
-    @include button-group-colors(outline, $color);
-    @include button-group-colors(ghost, $color);
+    @include mixins.button-group-colors(solid, $color);
+    @include mixins.button-group-colors(outline, $color);
+    @include mixins.button-group-colors(ghost, $color);
   }
 
   // ==================
@@ -136,28 +138,28 @@
 // SIZE VARIANTS
 // ==================
 
-@each $size-key, $size-config in $button-group-sizes {
+@each $size-key, $size-config in button-group-tokens.$button-group-sizes {
   .nui-button-group--#{$size-key} {
     .nui-button-group__option {
       height: var(
         --component-height-#{$size-key},
-        #{map-get($size-config, height)}
+        #{map.get($size-config, height)}
       );
       padding: var(
         --component-padding-#{$size-key},
-        #{map-get($size-config, padding)}
+        #{map.get($size-config, padding)}
       );
       font-size: var(
         --component-font-size-#{$size-key},
-        #{map-get($size-config, font-size)}
+        #{map.get($size-config, font-size)}
       );
-      gap: map-get($size-config, gap);
+      gap: map.get($size-config, gap);
     }
 
     .nui-button-group__icon {
       font-size: var(
         --button-group-icon-size-#{$size-key},
-        #{map-get($size-config, icon-size)}
+        #{map.get($size-config, icon-size)}
       );
     }
   }
@@ -212,9 +214,9 @@
   // Generación automática de variantes usando mixin (reduce ~85% de código)
   $colors: primary, secondary, success, info, warning, danger, accent;
   @each $color in $colors {
-    @include button-group-segmented-colors(solid, $color);
-    @include button-group-segmented-colors(outline, $color);
-    @include button-group-segmented-colors(ghost, $color);
+    @include mixins.button-group-segmented-colors(solid, $color);
+    @include mixins.button-group-segmented-colors(outline, $color);
+    @include mixins.button-group-segmented-colors(ghost, $color);
   }
 }
 
@@ -242,7 +244,7 @@
 // RESPONSIVE
 // ==================
 
-@media (max-width: #{$breakpoint-md - 1px}) {
+@media (max-width: #{config.$breakpoint-md - 1px}) {
   .nui-button-group {
     // En mobile, permitir wrap si hay muchas opciones
     &--wrap-mobile {

@@ -1,3 +1,5 @@
+@use "popover-tokens" as tokens;
+
 // ========================================
 // POPOVER - Variables (CSS Custom Properties)
 // ========================================
@@ -9,35 +11,35 @@
 
 @mixin nui-popover-vars {
   // Espaciado
-  --popover-padding: #{$popover-padding};
-  --popover-max-width: #{$popover-max-width};
-  --popover-min-width: #{$popover-min-width};
+  --popover-padding: #{tokens.$popover-padding};
+  --popover-max-width: #{tokens.$popover-max-width};
+  --popover-min-width: #{tokens.$popover-min-width};
 
   // Tipografía
-  --popover-font-size: #{$popover-font-size};
-  --popover-font-weight: #{$popover-font-weight};
-  --popover-line-height: #{$popover-line-height};
+  --popover-font-size: #{tokens.$popover-font-size};
+  --popover-font-weight: #{tokens.$popover-font-weight};
+  --popover-line-height: #{tokens.$popover-line-height};
 
   // Bordes y radios
-  --popover-border-radius: #{$popover-border-radius};
-  --popover-border: #{$popover-border};
+  --popover-border-radius: #{tokens.$popover-border-radius};
+  --popover-border: #{tokens.$popover-border};
 
   // Colores
-  --popover-bg: #{$popover-bg};
-  --popover-text: #{$popover-text};
+  --popover-bg: #{tokens.$popover-bg};
+  --popover-text: #{tokens.$popover-text};
 
   // Sombra
-  --popover-shadow: #{$popover-shadow};
+  --popover-shadow: #{tokens.$popover-shadow};
 
   // Z-Index
-  --popover-z-index: #{$popover-z-index};
+  --popover-z-index: #{tokens.$popover-z-index};
 
   // Flecha
-  --popover-arrow-size: #{$popover-arrow-size};
-  --popover-arrow-border-width: #{$popover-arrow-border-width};
-  --popover-arrow-offset: #{$popover-arrow-offset};
+  --popover-arrow-size: #{tokens.$popover-arrow-size};
+  --popover-arrow-border-width: #{tokens.$popover-arrow-border-width};
+  --popover-arrow-offset: #{tokens.$popover-arrow-offset};
 
   // Animación
-  --popover-transition-duration: #{$popover-transition-duration};
-  --popover-transition-timing: #{$popover-transition-timing};
+  --popover-transition-duration: #{tokens.$popover-transition-duration};
+  --popover-transition-timing: #{tokens.$popover-transition-timing};
 }

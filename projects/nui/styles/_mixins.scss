@@ -1,3 +1,7 @@
+@use "config";
+
+@use "sass:list";
+@use "sass:map";
 // ========================================
 // TYPOGRAPHY MIXINS
 // ========================================
@@ -11,7 +15,7 @@
   font-size: var(--font-size-#{$level});
   line-height: var(--line-height-#{$level});
   font-weight: var(
-    --font-weight-#{if(index((h1, h2, h3), $level), "bold", "semibold")}
+    --font-weight-#{if(list.index((h1, h2, h3), $level), "bold", "semibold")}
   );
 }
 
@@ -35,19 +39,19 @@
 @mixin component-size($size) {
   height: var(
     --component-height-#{$size},
-    #{map-get($component-heights, $size)}
+    #{map.get(config.$component-heights, $size)}
   );
   min-height: var(
     --component-height-#{$size},
-    #{map-get($component-heights, $size)}
+    #{map.get(config.$component-heights, $size)}
   );
   padding: var(
     --component-padding-#{$size},
-    #{map-get($component-paddings, $size)}
+    #{map.get(config.$component-paddings, $size)}
   );
   font-size: var(
     --component-font-size-#{$size},
-    #{map-get($component-font-sizes, $size)}
+    #{map.get(config.$component-font-sizes, $size)}
   );
 }
 
@@ -56,11 +60,11 @@
 @mixin component-textarea-size($size) {
   padding: var(
     --component-padding-#{$size},
-    #{map-get($component-paddings, $size)}
+    #{map.get(config.$component-paddings, $size)}
   );
   font-size: var(
     --component-font-size-#{$size},
-    #{map-get($component-font-sizes, $size)}
+    #{map.get(config.$component-font-sizes, $size)}
   );
 }
 
@@ -69,7 +73,7 @@
 @mixin component-font-size($size) {
   font-size: var(
     --component-font-size-#{$size},
-    #{map-get($component-font-sizes, $size)}
+    #{map.get(config.$component-font-sizes, $size)}
   );
 }
 
@@ -78,7 +82,7 @@
 @mixin component-line-height($size) {
   line-height: var(
     --component-line-height-#{$size},
-    #{map-get($component-line-heights, $size)}
+    #{map.get(config.$component-line-heights, $size)}
   );
 }
 
@@ -87,27 +91,27 @@
 @mixin component-icon-size($size) {
   height: var(
     --component-height-#{$size},
-    #{map-get($component-heights, $size)}
+    #{map.get(config.$component-heights, $size)}
   );
   min-height: var(
     --component-height-#{$size},
-    #{map-get($component-heights, $size)}
+    #{map.get(config.$component-heights, $size)}
   );
   padding: var(
     --component-padding-#{$size},
-    #{map-get($component-paddings, $size)}
+    #{map.get(config.$component-paddings, $size)}
   );
   font-size: calc(
     var(
         --component-font-size-#{$size},
-        #{map-get($component-font-sizes, $size)}
+        #{map.get(config.$component-font-sizes, $size)}
       ) *
       1.2
   );
   line-height: calc(
     var(
         --component-font-size-#{$size},
-        #{map-get($component-font-sizes, $size)}
+        #{map.get(config.$component-font-sizes, $size)}
       ) *
       1.2
   );
@@ -117,22 +121,22 @@
 /// @param {String} $size - Tamaño del spinner (xs, s, md, lg, xl)
 @mixin spinner-size($size) {
   .nui-spinner-circle--#{$size} {
-    width: var(--spinner-size-#{$size}, #{map-get($spinner-sizes, $size)});
-    height: var(--spinner-size-#{$size}, #{map-get($spinner-sizes, $size)});
+    width: var(--spinner-size-#{$size}, #{map.get($spinner-sizes, $size)});
+    height: var(--spinner-size-#{$size}, #{map.get($spinner-sizes, $size)});
     border-width: var(
       --spinner-border-width-#{$size},
-      #{map-get($spinner-border-widths, $size)}
+      #{map.get($spinner-border-widths, $size)}
     );
   }
 
   .nui-spinner-wrapper--#{$size} {
-    gap: var(--spinner-gap-#{$size}, #{map-get($spinner-gaps, $size)});
+    gap: var(--spinner-gap-#{$size}, #{map.get($spinner-gaps, $size)});
   }
 
   .nui-spinner-label--#{$size} {
     font-size: var(
       --spinner-label-font-size-#{$size},
-      #{map-get($spinner-label-font-sizes, $size)}
+      #{map.get($spinner-label-font-sizes, $size)}
     );
   }
 }
@@ -142,7 +146,7 @@
 @mixin progress-bar-height($size) {
   height: var(
     --progress-bar-height-#{$size},
-    #{map-get($progress-bar-heights, $size)}
+    #{map.get($progress-bar-heights, $size)}
   );
 }
 
@@ -151,11 +155,11 @@
 @mixin switch-track-size($size) {
   width: var(
     --switch-track-width-#{$size},
-    #{map-get($switch-track-widths, $size)}
+    #{map.get($switch-track-widths, $size)}
   );
   height: var(
     --switch-track-height-#{$size},
-    #{map-get($switch-track-heights, $size)}
+    #{map.get($switch-track-heights, $size)}
   );
 }
 
@@ -164,11 +168,11 @@
 @mixin switch-thumb-size($size) {
   width: var(
     --switch-thumb-size-#{$size},
-    #{map-get($switch-thumb-sizes, $size)}
+    #{map.get($switch-thumb-sizes, $size)}
   );
   height: var(
     --switch-thumb-size-#{$size},
-    #{map-get($switch-thumb-sizes, $size)}
+    #{map.get($switch-thumb-sizes, $size)}
   );
 }
 
@@ -178,8 +182,8 @@
 /// @example
 ///   .nui-switch--xs { @include switch-size(xs); }
 @mixin switch-size($size) {
-  $track-width: map-get($switch-track-widths, $size);
-  $thumb-size: map-get($switch-thumb-sizes, $size);
+  $track-width: map.get($switch-track-widths, $size);
+  $thumb-size: map.get($switch-thumb-sizes, $size);
   $offset: if(
     $size == xs,
     $switch-thumb-offset-xs,
@@ -314,7 +318,7 @@
 /// @example
 ///   @include media-xs { font-size: 12px; }
 @mixin media-xs {
-  @media (max-width: #{$breakpoint-sm - 1}) {
+  @media (max-width: #{config.$breakpoint-sm - 1}) {
     @content;
   }
 }
@@ -323,7 +327,7 @@
 /// @example
 ///   @include media-sm { font-size: 14px; }
 @mixin media-sm {
-  @media (min-width: #{$breakpoint-sm}) {
+  @media (min-width: #{config.$breakpoint-sm}) {
     @content;
   }
 }
@@ -332,7 +336,7 @@
 /// @example
 ///   @include media-md { font-size: 16px; }
 @mixin media-md {
-  @media (min-width: #{$breakpoint-md}) {
+  @media (min-width: #{config.$breakpoint-md}) {
     @content;
   }
 }
@@ -341,7 +345,7 @@
 /// @example
 ///   @include media-lg { font-size: 18px; }
 @mixin media-lg {
-  @media (min-width: #{$breakpoint-lg}) {
+  @media (min-width: #{config.$breakpoint-lg}) {
     @content;
   }
 }
@@ -350,7 +354,7 @@
 /// @example
 ///   @include media-xl { font-size: 20px; }
 @mixin media-xl {
-  @media (min-width: #{$breakpoint-xl}) {
+  @media (min-width: #{config.$breakpoint-xl}) {
     @content;
   }
 }
@@ -359,7 +363,7 @@
 /// @example
 ///   @include media-xxl { font-size: 22px; }
 @mixin media-xxl {
-  @media (min-width: #{$breakpoint-xxl}) {
+  @media (min-width: #{config.$breakpoint-xxl}) {
     @content;
   }
 }
@@ -728,15 +732,15 @@
 /// @param {String} $breakpoint - Breakpoint (tablet, mobile)
 /// @param {Map} $config - Configuración específica del breakpoint
 @mixin breadcrumb-responsive($breakpoint, $config: ()) {
-  $gap: map-get($config, gap) or var(--spacing-xs);
-  $min-height: map-get($config, min-height) or var(--component-height-xs);
-  $separator-margin: map-get($config, separator-margin) or
+  $gap: map.get($config, gap) or var(--spacing-xs);
+  $min-height: map.get($config, min-height) or var(--component-height-xs);
+  $separator-margin: map.get($config, separator-margin) or
     calc(var(--spacing-xs) / 2);
-  $separator-font-size: map-get($config, separator-font-size) or 0.9em;
-  $item-padding: map-get($config, item-padding) or var(--spacing-xs);
-  $collapsed-min-width: map-get($config, collapsed-min-width) or 32px;
-  $collapsed-height: map-get($config, collapsed-height) or 26px;
-  $collapsed-icon-size: map-get($config, collapsed-icon-size) or 1.2em;
+  $separator-font-size: map.get($config, separator-font-size) or 0.9em;
+  $item-padding: map.get($config, item-padding) or var(--spacing-xs);
+  $collapsed-min-width: map.get($config, collapsed-min-width) or 32px;
+  $collapsed-height: map.get($config, collapsed-height) or 26px;
+  $collapsed-icon-size: map.get($config, collapsed-icon-size) or 1.2em;
 
   gap: $gap;
   @if $breakpoint == mobile {
@@ -1118,18 +1122,18 @@
 /// Elimina la repetición masiva de código en ~85%
 /// @param {String} $size - Tamaño del calendar (xs, s, sm, md, lg, xl)
 @mixin calendar-size($size) {
-  max-width: map-get($calendar-widths, $size);
-  padding: map-get($calendar-paddings, $size);
+  max-width: map.get($calendar-widths, $size);
+  padding: map.get($calendar-paddings, $size);
 
   .nui-calendar__days,
   .nui-calendar__weekdays {
-    gap: map-get($calendar-gaps, $size);
+    gap: map.get($calendar-gaps, $size);
   }
 
   .nui-calendar__day {
-    font-size: map-get($calendar-day-fonts, $size);
-    min-width: map-get($calendar-day-sizes, $size);
-    min-height: map-get($calendar-day-sizes, $size);
+    font-size: map.get($calendar-day-fonts, $size);
+    min-width: map.get($calendar-day-sizes, $size);
+    min-height: map.get($calendar-day-sizes, $size);
 
     &--today {
       &::after {
@@ -1152,49 +1156,49 @@
   }
 
   .nui-calendar__weekday {
-    font-size: map-get($calendar-weekday-fonts, $size);
-    min-height: map-get($calendar-weekday-heights, $size);
+    font-size: map.get($calendar-weekday-fonts, $size);
+    min-height: map.get($calendar-weekday-heights, $size);
   }
 
   .nui-calendar__title-button {
-    font-size: map-get($calendar-title-fonts, $size);
+    font-size: map.get($calendar-title-fonts, $size);
 
     // Padding progresivo según tamaño
     @if $size == xs {
-      padding: $spacing-xs $spacing-s;
+      padding: config.$spacing-xs config.$spacing-s;
     } @else if $size == s {
-      padding: $spacing-xs $spacing-sm;
+      padding: config.$spacing-xs config.$spacing-sm;
     } @else if $size == sm {
-      padding: $spacing-s $spacing-sm;
+      padding: config.$spacing-s config.$spacing-sm;
     } @else if $size == md {
-      padding: $spacing-sm $spacing-md;
+      padding: config.$spacing-sm config.$spacing-md;
     } @else if $size == lg {
-      padding: $spacing-sm $spacing-lg;
+      padding: config.$spacing-sm config.$spacing-lg;
     } @else if $size == xl {
-      padding: $spacing-md $spacing-xl;
+      padding: config.$spacing-md config.$spacing-xl;
     }
   }
 
   .nui-calendar__title-text {
-    font-size: map-get($calendar-title-fonts, $size);
+    font-size: map.get($calendar-title-fonts, $size);
   }
 
   .nui-calendar__month,
   .nui-calendar__year {
-    font-size: map-get($calendar-day-fonts, $size);
+    font-size: map.get($calendar-day-fonts, $size);
 
     @if $size == xs {
-      padding: $spacing-xs $spacing-s;
+      padding: config.$spacing-xs config.$spacing-s;
     } @else if $size == s {
-      padding: $spacing-xs $spacing-sm;
+      padding: config.$spacing-xs config.$spacing-sm;
     } @else if $size == sm {
-      padding: $spacing-s $spacing-sm;
+      padding: config.$spacing-s config.$spacing-sm;
     } @else if $size == md {
-      padding: $spacing-sm $spacing-md;
+      padding: config.$spacing-sm config.$spacing-md;
     } @else if $size == lg {
-      padding: $spacing-sm $spacing-lg;
+      padding: config.$spacing-sm config.$spacing-lg;
     } @else if $size == xl {
-      padding: $spacing-md $spacing-xl;
+      padding: config.$spacing-md config.$spacing-xl;
     }
   }
 }

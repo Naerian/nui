@@ -1,12 +1,12 @@
-@import "../../../../styles/config";
-@import "../../../../styles/mixins";
-@import "../../../../styles/variables/button/button-variables.scss";
-@import "../../../../styles/components/button";
+@use "../../../../styles/config";
+@use "../../../../styles/mixins";
+@use "../../../../styles/variables/button/button-variables.scss";
+@use "../../../../styles/components/button";
 
 :host {
   display: inline-block;
   cursor: pointer;
-  @include transition(opacity 0.2s ease-in-out);
+  @include mixins.transition(opacity 0.2s ease-in-out);
 
   // Aplicar width al host cuando se usan los modificadores
   &.full-width {
@@ -27,7 +27,7 @@
 // ============================================================================
 
 .nui-btn {
-  @include button-base-styles;
+  @include button.button-base-styles;
 
   // ====================================================================
   // Contenido vacío - ocultar sin ocupar espacio

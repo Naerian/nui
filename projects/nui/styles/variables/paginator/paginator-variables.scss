@@ -1,54 +1,66 @@
+@use "paginator-tokens" as tokens;
+
 // =======================
-// PAGINATOR - CSS Custom Properties Mixin
+// PAGINATOR - Variables (CSS Custom Properties)
 // =======================
+//
+// CSS variables para el componente Paginator.
+// Se incluyen a través del mixin nui-paginator-vars.
+
+// Uso:
+// ```scss
+// :root {
+//   @include nui-paginator-vars;
+// }
+// ```
 
 @mixin nui-paginator-vars {
   // Z-index layers
-  --paginator-z-index-base: #{$paginator-z-index-base};
-  --paginator-z-index-hover: #{$paginator-z-index-hover};
-  --paginator-z-index-active: #{$paginator-z-index-active};
-  --paginator-z-index-focus: #{$paginator-z-index-focus};
+  --paginator-z-index-base: #{tokens.$paginator-z-index-base};
+  --paginator-z-index-hover: #{tokens.$paginator-z-index-hover};
+  --paginator-z-index-active: #{tokens.$paginator-z-index-active};
+  --paginator-z-index-focus: #{tokens.$paginator-z-index-focus};
 
   // Opacidades
-  --paginator-disabled-opacity: #{$paginator-disabled-opacity};
+  --paginator-disabled-opacity: #{tokens.$paginator-disabled-opacity};
 
   // Gaps y paddings
-  --paginator-gap: #{$paginator-gap};
-  --paginator-compact-gap: #{$paginator-compact-gap};
-  --paginator-compact-spacing: #{$paginator-compact-spacing};
+  --paginator-gap: #{tokens.$paginator-gap};
+  --paginator-compact-gap: #{tokens.$paginator-compact-gap};
+  --paginator-compact-spacing: #{tokens.$paginator-compact-spacing};
 
   // Animaciones
-  --paginator-animation-scale-from: #{$paginator-animation-scale-from};
-  --paginator-animation-scale-to: #{$paginator-animation-scale-to};
+  --paginator-animation-scale-from: #{tokens.$paginator-animation-scale-from};
+  --paginator-animation-scale-to: #{tokens.$paginator-animation-scale-to};
 
   // Icon sizes por tamaño
-  --paginator-icon-size-xs: #{$paginator-icon-size-xs};
-  --paginator-icon-size-s: #{$paginator-icon-size-s};
-  --paginator-icon-size-sm: #{$paginator-icon-size-sm};
-  --paginator-icon-size-md: #{$paginator-icon-size-md};
-  --paginator-icon-size-lg: #{$paginator-icon-size-lg};
-  --paginator-icon-size-xl: #{$paginator-icon-size-xl};
+  --paginator-icon-size-xs: #{tokens.$paginator-icon-size-xs};
+  --paginator-icon-size-s: #{tokens.$paginator-icon-size-s};
+  --paginator-icon-size-sm: #{tokens.$paginator-icon-size-sm};
+  --paginator-icon-size-md: #{tokens.$paginator-icon-size-md};
+  --paginator-icon-size-lg: #{tokens.$paginator-icon-size-lg};
+  --paginator-icon-size-xl: #{tokens.$paginator-icon-size-xl};
 
   // Button sizes por tamaño
-  --paginator-button-size-xs: #{$paginator-button-size-xs};
-  --paginator-button-size-s: #{$paginator-button-size-s};
-  --paginator-button-size-sm: #{$paginator-button-size-sm};
-  --paginator-button-size-md: #{$paginator-button-size-md};
-  --paginator-button-size-lg: #{$paginator-button-size-lg};
-  --paginator-button-size-xl: #{$paginator-button-size-xl};
+  --paginator-button-size-xs: #{tokens.$paginator-button-size-xs};
+  --paginator-button-size-s: #{tokens.$paginator-button-size-s};
+  --paginator-button-size-sm: #{tokens.$paginator-button-size-sm};
+  --paginator-button-size-md: #{tokens.$paginator-button-size-md};
+  --paginator-button-size-lg: #{tokens.$paginator-button-size-lg};
+  --paginator-button-size-xl: #{tokens.$paginator-button-size-xl};
   
   // Dimensions
-  --paginator-page-jump-input-width: #{$paginator-page-jump-input-width};
+  --paginator-page-jump-input-width: #{tokens.$paginator-page-jump-input-width};
   
   // Borders
-  --paginator-input-border-width: #{$paginator-input-border-width};
-  --paginator-button-border-width: #{$paginator-button-border-width};
+  --paginator-input-border-width: #{tokens.$paginator-input-border-width};
+  --paginator-button-border-width: #{tokens.$paginator-button-border-width};
   
   // Outline
-  --paginator-focus-outline-width: #{$paginator-focus-outline-width};
-  --paginator-focus-outline-offset: #{$paginator-focus-outline-offset};
+  --paginator-focus-outline-width: #{tokens.$paginator-focus-outline-width};
+  --paginator-focus-outline-offset: #{tokens.$paginator-focus-outline-offset};
   
   // Transitions
-  --paginator-transition-duration: #{$paginator-transition-duration};
-  --paginator-transition-timing: #{$paginator-transition-timing};
+  --paginator-transition-duration: #{tokens.$paginator-transition-duration};
+  --paginator-transition-timing: #{tokens.$paginator-transition-timing};
 }

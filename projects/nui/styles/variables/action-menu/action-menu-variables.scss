@@ -1,3 +1,5 @@
+@use "action-menu-tokens" as tokens;
+
 // ========================================
 // ACTION MENU - Variables (CSS Custom Properties)
 // ========================================
@@ -15,9 +17,9 @@
 // ========================================
 
 @mixin nui-action-menu-vars {
-  --action-menu-min-width: #{$action-menu-min-width};
-  --action-menu-max-width: #{$action-menu-max-width};
-  --action-menu-item-gap: #{$action-menu-item-gap};
-  --action-menu-item-border: #{$action-menu-item-border};
-  --action-menu-arrow-padding-left: #{$action-menu-arrow-padding-left};
+  --action-menu-min-width: #{tokens.$action-menu-min-width};
+  --action-menu-max-width: #{tokens.$action-menu-max-width};
+  --action-menu-item-gap: #{tokens.$action-menu-item-gap};
+  --action-menu-item-border: #{tokens.$action-menu-item-border};
+  --action-menu-arrow-padding-left: #{tokens.$action-menu-arrow-padding-left};
 }

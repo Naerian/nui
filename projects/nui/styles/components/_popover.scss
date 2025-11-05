@@ -1,7 +1,7 @@
-@import "../config";
-@import "../mixins";
+@use "../config";
+@use "../mixins";
 // NOTA: No importar theme ni theme-config aquí, ya están incluidos globalmente en nui.scss
-@import "../variables/popover/popover-variables.scss";
+@use "../variables/popover/popover-variables.scss";
 
 // ========================================
 // POPOVER - Estilos globales
@@ -220,7 +220,7 @@
 
 // Backdrop para popovers con popoverBackdrop=true
 .nui-popover-backdrop {
-  @include overlay-backdrop();
+  @include mixins.overlay-backdrop();
 }
 
 // Media queries para responsive

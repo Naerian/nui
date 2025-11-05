@@ -5,9 +5,6 @@
 // Variables SCSS centralizadas para personalizar el componente Spinner.
 // Todas las variables usan !default para permitir sobrescritura.
 //
-// Estas variables permiten personalizar todos los aspectos visuales y funcionales
-// del componente Spinner sin modificar directamente los estilos del componente.
-//
 // ========================================
 
 // Spinner sizes - Escala coherente con múltiplos de 4px
@@ -25,12 +22,13 @@ $spinner-border-md: 0.1875rem !default;
 $spinner-border-lg: 0.3125rem !default;
 $spinner-border-xl: 0.4375rem !default;
 
-$spinner-gap-xs: $spacing-xs !default;
-$spinner-gap-s: $spacing-xs !default;
-$spinner-gap-sm: $spacing-sm !default;
-$spinner-gap-md: $spacing-md !default;
-$spinner-gap-lg: $spacing-lg !default;
-$spinner-gap-xl: $spacing-xl !default;
+// Estos valores se definirán con los valores reales de config en spinner-variables.scss
+$spinner-gap-xs: 0.25rem !default;
+$spinner-gap-s: 0.25rem !default;
+$spinner-gap-sm: 0.5rem !default;
+$spinner-gap-md: 0.75rem !default;
+$spinner-gap-lg: 1rem !default;
+$spinner-gap-xl: 1.5rem !default;
 
 $spinner-label-font-size-xs: 0.625rem !default;  // 10px
 $spinner-label-font-size-s: 0.75rem !default;    // 12px

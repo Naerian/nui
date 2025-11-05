@@ -1,7 +1,5 @@
-@import "../config";
-@import "../mixins";
-// NOTA: No importar theme ni theme-config aquí, ya están incluidos globalmente en nui.scss
-@import "../variables/toast/toast-variables.scss";
+@use "../mixins";
+@use "../variables/toast/toast-variables.scss";
 
 // ===== CONTENEDOR GLOBAL =====
 .nui-toast-container {
@@ -277,11 +275,11 @@
   &.nui-toast--custom {
     background-color: var(--toast-bg);
     color: var(--toast-color);
-    border: var(--nui-toast-border-width) solid var(--toast-border-color);
+    border: var(--nui-toast-border-width) solid var(--nui-toast-border-color);
   }
 
   // Generar variantes de color
-  @include generate-toast-colors();
+  @include mixins.generate-toast-colors();
 }
 
 // ===== ELEMENTOS DEL TOAST =====
@@ -566,10 +564,10 @@
 
 // ===== RESPONSIVE =====
 
-@media (max-width: $toast-mobile-breakpoint) {
+@media (max-width: var(--nui-toast-mobile-breakpoint)) {
   .nui-toast {
-    --nui-toast-width: #{$toast-width-mobile};
-    --nui-toast-padding: #{$toast-padding-compact};
+    --nui-toast-width: var(--nui-toast-width-mobile);
+    --nui-toast-padding: var(--nui-toast-padding-compact);
     --nui-toast-offset-x: 0.75rem;
     --nui-toast-offset-y: 0.75rem;
   }
@@ -678,7 +676,7 @@
 
 // Clase helper para toasts compactos
 .nui-toast--compact {
-  --nui-toast-padding: #{$toast-padding-compact};
+  --nui-toast-padding: var(--nui-toast-padding-compact);
   --nui-toast-gap: 0.5rem;
   --nui-toast-content-gap: 0.125rem;
 

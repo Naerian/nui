@@ -1,5 +1,5 @@
-@import "../config";
-@import "../mixins";
+@use "../config";
+@use "../mixins";
 // NOTA: No importar theme ni theme-config aquí, ya están incluidos globalmente en nui.scss
 
 // ==========================================
@@ -36,7 +36,7 @@
 }
 
 .nui-modal-dialog-backdrop {
-  @include overlay-backdrop();
+  @include mixins.overlay-backdrop();
 }
 
 // Animación de entrada (fade-in)

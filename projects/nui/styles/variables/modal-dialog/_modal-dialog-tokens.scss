@@ -129,7 +129,3 @@ $modal-verification-text-letter-spacing: 0.063rem !default;
 
 $modal-verification-error-size: var(--font-size-xs) !default;
 $modal-verification-error-margin-top: -0.25rem !default;
-
-// ===== MODAL TYPES (COLORES) =====
-// Los colores específicos se generan dinámicamente en theme-mixins
-$modal-types: primary, secondary, success, info, warning, danger, accent !default;

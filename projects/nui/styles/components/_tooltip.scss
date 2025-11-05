@@ -1,7 +1,7 @@
-@import "../config";
-@import "../mixins";
+@use "../config";
+@use "../mixins";
 // NOTA: No importar theme ni theme-config aquí, ya están incluidos globalmente en nui.scss
-@import "../variables/tooltip/tooltip-variables.scss";
+@use "../variables/tooltip/tooltip-variables.scss";
 
 // ========================================
 // TOOLTIP - Estilos globales

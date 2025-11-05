@@ -1,3 +1,5 @@
+@use "avatar-tokens" as tokens;
+
 // ========================================
 // AVATAR - Variables (CSS Custom Properties)
 // ========================================
@@ -16,62 +18,61 @@
 
 @mixin nui-avatar-vars {
   // Tamaños
-  --avatar-size-xs: #{$avatar-size-xs};
-  --avatar-size-sm: #{$avatar-size-sm};
-  --avatar-size-md: #{$avatar-size-md};
-  --avatar-size-lg: #{$avatar-size-lg};
-  --avatar-size-xl: #{$avatar-size-xl};
+  --avatar-size-xs: #{tokens.$avatar-size-xs};
+  --avatar-size-sm: #{tokens.$avatar-size-sm};
+  --avatar-size-md: #{tokens.$avatar-size-md};
+  --avatar-size-lg: #{tokens.$avatar-size-lg};
+  --avatar-size-xl: #{tokens.$avatar-size-xl};
 
   // Exceso tamaños
-  --avatar-excess-size-xs: calc(#{$avatar-size-xs} / 2);
-  --avatar-excess-size-sm: calc(#{$avatar-size-sm} / 2);
-  --avatar-excess-size-md: calc(#{$avatar-size-md} / 2);
-  --avatar-excess-size-lg: calc(#{$avatar-size-lg} / 2);
-  --avatar-excess-size-xl: calc(#{$avatar-size-xl} / 2);
+  --avatar-excess-size-xs: calc(#{tokens.$avatar-size-xs} / 2);
+  --avatar-excess-size-sm: calc(#{tokens.$avatar-size-sm} / 2);
+  --avatar-excess-size-md: calc(#{tokens.$avatar-size-md} / 2);
+  --avatar-excess-size-lg: calc(#{tokens.$avatar-size-lg} / 2);
+  --avatar-excess-size-xl: calc(#{tokens.$avatar-size-xl} / 2);
 
   // Font sizes
-  --avatar-font-size-xs: #{$avatar-font-size-xs};
-  --avatar-font-size-sm: #{$avatar-font-size-sm};
-  --avatar-font-size-md: #{$avatar-font-size-md};
-  --avatar-font-size-lg: #{$avatar-font-size-lg};
-  --avatar-font-size-xl: #{$avatar-font-size-xl};
+  --avatar-font-size-xs: #{tokens.$avatar-font-size-xs};
+  --avatar-font-size-sm: #{tokens.$avatar-font-size-sm};
+  --avatar-font-size-md: #{tokens.$avatar-font-size-md};
+  --avatar-font-size-lg: #{tokens.$avatar-font-size-lg};
+  --avatar-font-size-xl: #{tokens.$avatar-font-size-xl};
 
   // Icon sizes
-  --avatar-icon-size-xs: #{$avatar-icon-size-xs};
-  --avatar-icon-size-sm: #{$avatar-icon-size-sm};
-  --avatar-icon-size-md: #{$avatar-icon-size-md};
-  --avatar-icon-size-lg: #{$avatar-icon-size-lg};
-  --avatar-icon-size-xl: #{$avatar-icon-size-xl};
+  --avatar-icon-size-xs: #{tokens.$avatar-icon-size-xs};
+  --avatar-icon-size-sm: #{tokens.$avatar-icon-size-sm};
+  --avatar-icon-size-md: #{tokens.$avatar-icon-size-md};
+  --avatar-icon-size-lg: #{tokens.$avatar-icon-size-lg};
+  --avatar-icon-size-xl: #{tokens.$avatar-icon-size-xl};
 
   // Bordes
-  --avatar-border-radius-rounded: #{$avatar-border-radius-rounded};
-  --avatar-border-radius-circular: #{$avatar-border-radius-circular};
-  --avatar-border-radius-square: #{$avatar-border-radius-square};
+  --avatar-border-radius-rounded: #{tokens.$avatar-border-radius-rounded};
+  --avatar-border-radius-circular: #{tokens.$avatar-border-radius-circular};
+  --avatar-border-radius-square: #{tokens.$avatar-border-radius-square};
 
   // Tipografía
-  --avatar-font-weight: #{$avatar-font-weight};
-  --avatar-line-height: #{$avatar-line-height};
-  --avatar-text-transform: #{$avatar-text-transform};
+  --avatar-font-weight: #{tokens.$avatar-font-weight};
+  --avatar-line-height: #{tokens.$avatar-line-height};
+  --avatar-text-transform: #{tokens.$avatar-text-transform};
 
   // Z-index
-  --avatar-z-index-base: #{$avatar-z-index-base};
-  --avatar-z-index-hover: #{$avatar-z-index-hover};
+  --avatar-z-index-base: #{tokens.$avatar-z-index-base};
+  --avatar-z-index-hover: #{tokens.$avatar-z-index-hover};
 
   // Avatar Group
-  --avatar-group-spacing: #{$avatar-group-spacing};
-  --avatar-group-border-width: #{$avatar-group-border-width};
-  --avatar-group-hover-scale: #{$avatar-group-hover-scale};
-  --avatar-group-z-index-hover: #{$avatar-group-z-index-hover};
+  --avatar-group-spacing: #{tokens.$avatar-group-spacing};
+  --avatar-group-border-width: #{tokens.$avatar-group-border-width};
+  --avatar-group-hover-scale: #{tokens.$avatar-group-hover-scale};
+  --avatar-group-z-index-hover: #{tokens.$avatar-group-z-index-hover};
 
   // Exceso
-  --avatar-excess-font-size-xs: #{$avatar-excess-font-size-xs};
-  --avatar-excess-font-size-sm: #{$avatar-excess-font-size-sm};
-  --avatar-excess-font-size-md: #{$avatar-excess-font-size-md};
-  --avatar-excess-font-size-lg: #{$avatar-excess-font-size-lg};
-  --avatar-excess-font-size-xl: #{$avatar-excess-font-size-xl};
-  --avatar-excess-font-weight: #{$avatar-excess-font-weight};
+  --avatar-excess-font-size-xs: #{tokens.$avatar-excess-font-size-xs};
+  --avatar-excess-font-size-sm: #{tokens.$avatar-excess-font-size-sm};
+  --avatar-excess-font-size-md: #{tokens.$avatar-excess-font-size-md};
+  --avatar-excess-font-size-lg: #{tokens.$avatar-excess-font-size-lg};
+  --avatar-excess-font-size-xl: #{tokens.$avatar-excess-font-size-xl};
+  --avatar-excess-font-weight: #{tokens.$avatar-excess-font-weight};
 
   // Transiciones
-  --avatar-transition: all #{$avatar-transition-duration}
-    #{$avatar-transition-timing};
+  --avatar-transition: all #{tokens.$avatar-transition-duration} #{tokens.$avatar-transition-timing};
 }

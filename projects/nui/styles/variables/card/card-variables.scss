@@ -1,3 +1,5 @@
+@use "card-tokens" as tokens;
+
 // ========================================
 // CARD - Variables (CSS Custom Properties)
 // ========================================
@@ -16,32 +18,32 @@
 
 @mixin nui-card-vars {
   // Dimensiones
-  --card-min-height: #{$card-min-height};
-  --card-header-min-height: #{$card-header-min-height};
-  --card-footer-min-height: #{$card-footer-min-height};
+  --card-min-height: #{tokens.$card-min-height};
+  --card-header-min-height: #{tokens.$card-header-min-height};
+  --card-footer-min-height: #{tokens.$card-footer-min-height};
 
   // Badge
-  --card-badge-min-height: #{$card-badge-min-height};
-  --card-badge-min-width: #{$card-badge-min-width};
-  --card-badge-letter-spacing: #{$card-badge-letter-spacing};
-  --card-badge-backdrop-blur: #{$card-badge-backdrop-blur};
-  --card-badge-opacity: #{$card-badge-opacity};
-  --card-badge-opacity-dark: #{$card-badge-opacity-dark};
-  --card-badge-opacity-light: #{$card-badge-opacity-light};
+  --card-badge-min-height: #{tokens.$card-badge-min-height};
+  --card-badge-min-width: #{tokens.$card-badge-min-width};
+  --card-badge-letter-spacing: #{tokens.$card-badge-letter-spacing};
+  --card-badge-backdrop-blur: #{tokens.$card-badge-backdrop-blur};
+  --card-badge-opacity: #{tokens.$card-badge-opacity};
+  --card-badge-opacity-dark: #{tokens.$card-badge-opacity-dark};
+  --card-badge-opacity-light: #{tokens.$card-badge-opacity-light};
 
   // Imagen
-  --card-image-hover-zoom-scale: #{$card-image-hover-zoom-scale};
-  --card-image-hover-zoom-duration: #{$card-image-hover-zoom-duration};
-  --card-image-hover-zoom-easing: #{$card-image-hover-zoom-easing};
+  --card-image-hover-zoom-scale: #{tokens.$card-image-hover-zoom-scale};
+  --card-image-hover-zoom-duration: #{tokens.$card-image-hover-zoom-duration};
+  --card-image-hover-zoom-easing: #{tokens.$card-image-hover-zoom-easing};
 
   // Skeleton
-  --card-skeleton-min-height: #{$card-skeleton-min-height};
-  --card-skeleton-animation-duration: #{$card-skeleton-animation-duration};
-  --card-skeleton-background-size: #{$card-skeleton-background-size};
+  --card-skeleton-min-height: #{tokens.$card-skeleton-min-height};
+  --card-skeleton-animation-duration: #{tokens.$card-skeleton-animation-duration};
+  --card-skeleton-background-size: #{tokens.$card-skeleton-background-size};
 
   // Header
-  --card-header-icon-margin-top: #{$card-header-icon-margin-top};
+  --card-header-icon-margin-top: #{tokens.$card-header-icon-margin-top};
 
   // Footer
-  --card-footer-border-width: #{$card-footer-border-width};
+  --card-footer-border-width: #{tokens.$card-footer-border-width};
 }

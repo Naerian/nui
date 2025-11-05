@@ -1,48 +1,55 @@
+@use "tab-tokens" as tokens;
+
 // ========================================
 // TAB - Variables (CSS Custom Properties)
 // ========================================
 //
 // CSS variables para el componente Tab.
 // Se incluyen a través del mixin nui-tab-vars.
-//
-// ========================================
+
+// Uso:
+// ```scss
+// :root {
+//   @include nui-tab-vars;
+// }
+// ```
 
 @mixin nui-tab-vars {
-  --tabs-tab-padding-xs: #{$tabs-tab-padding-xs};
-  --tabs-tab-padding-s: #{$tabs-tab-padding-s};
-  --tabs-tab-padding-sm: #{$tabs-tab-padding-sm};
-  --tabs-tab-padding-md: #{$tabs-tab-padding-md};
-  --tabs-tab-padding-lg: #{$tabs-tab-padding-lg};
-  --tabs-tab-padding-xl: #{$tabs-tab-padding-xl};
+  --tabs-tab-padding-xs: #{tokens.$tabs-tab-padding-xs};
+  --tabs-tab-padding-s: #{tokens.$tabs-tab-padding-s};
+  --tabs-tab-padding-sm: #{tokens.$tabs-tab-padding-sm};
+  --tabs-tab-padding-md: #{tokens.$tabs-tab-padding-md};
+  --tabs-tab-padding-lg: #{tokens.$tabs-tab-padding-lg};
+  --tabs-tab-padding-xl: #{tokens.$tabs-tab-padding-xl};
 
-  --tabs-tab-gap-xs: #{$tabs-tab-gap-xs};
-  --tabs-tab-gap-s: #{$tabs-tab-gap-s};
-  --tabs-tab-gap-sm: #{$tabs-tab-gap-sm};
-  --tabs-tab-gap-md: #{$tabs-tab-gap-md};
-  --tabs-tab-gap-lg: #{$tabs-tab-gap-lg};
-  --tabs-tab-gap-xl: #{$tabs-tab-gap-xl};
+  --tabs-tab-gap-xs: #{tokens.$tabs-tab-gap-xs};
+  --tabs-tab-gap-s: #{tokens.$tabs-tab-gap-s};
+  --tabs-tab-gap-sm: #{tokens.$tabs-tab-gap-sm};
+  --tabs-tab-gap-md: #{tokens.$tabs-tab-gap-md};
+  --tabs-tab-gap-lg: #{tokens.$tabs-tab-gap-lg};
+  --tabs-tab-gap-xl: #{tokens.$tabs-tab-gap-xl};
 
-  --tabs-tab-border-radius: #{$tabs-tab-border-radius} #{$tabs-tab-border-radius} 0 0;
+  --tabs-tab-border-radius: #{tokens.$tabs-tab-border-radius} #{tokens.$tabs-tab-border-radius} 0 0;
     
   // Disabled state
-  --tabs-disabled-opacity: #{$tabs-disabled-opacity};
+  --tabs-disabled-opacity: #{tokens.$tabs-disabled-opacity};
   
   // Scroll buttons
-  --tabs-scroll-btn-size: #{$tabs-scroll-btn-size};
-  --tabs-scroll-btn-icon-size: #{$tabs-scroll-btn-icon-size};
-  --tabs-scroll-btn-disabled-opacity: #{$tabs-scroll-btn-disabled-opacity};
-  --tabs-scroll-btn-active-scale: #{$tabs-scroll-btn-active-scale};
+  --tabs-scroll-btn-size: #{tokens.$tabs-scroll-btn-size};
+  --tabs-scroll-btn-icon-size: #{tokens.$tabs-scroll-btn-icon-size};
+  --tabs-scroll-btn-disabled-opacity: #{tokens.$tabs-scroll-btn-disabled-opacity};
+  --tabs-scroll-btn-active-scale: #{tokens.$tabs-scroll-btn-active-scale};
   
   // Tab states
-  --tabs-tab-disabled-opacity: #{$tabs-tab-disabled-opacity};
+  --tabs-tab-disabled-opacity: #{tokens.$tabs-tab-disabled-opacity};
   
   // Icon
-  --tabs-icon-min-size: #{$tabs-icon-min-size};
+  --tabs-icon-min-size: #{tokens.$tabs-icon-min-size};
   
   // Medium size specific padding
-  --tabs-tab-padding-md-vertical: #{$tabs-tab-padding-md-vertical};
-  --tabs-tab-padding-lg-vertical: #{$tabs-tab-padding-lg-vertical};
+  --tabs-tab-padding-md-vertical: #{tokens.$tabs-tab-padding-md-vertical};
+  --tabs-tab-padding-lg-vertical: #{tokens.$tabs-tab-padding-lg-vertical};
   
   // Animations
-  --tabs-content-fade-in-transform: #{$tabs-content-fade-in-transform};
+  --tabs-content-fade-in-transform: #{tokens.$tabs-content-fade-in-transform};
 }

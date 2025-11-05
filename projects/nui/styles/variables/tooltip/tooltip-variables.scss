@@ -1,3 +1,5 @@
+@use "tooltip-tokens" as tokens;
+
 // ========================================
 // TOOLTIP - Variables (CSS Custom Properties)
 // ========================================
@@ -16,28 +18,28 @@
 
 @mixin nui-tooltip-vars {
   // Espaciado
-  --tooltip-padding-y: #{$tooltip-padding-y};
-  --tooltip-padding-x: #{$tooltip-padding-x};
-  --tooltip-max-width: #{$tooltip-max-width};
+  --tooltip-padding-y: #{tokens.$tooltip-padding-y};
+  --tooltip-padding-x: #{tokens.$tooltip-padding-x};
+  --tooltip-max-width: #{tokens.$tooltip-max-width};
 
   // Tipografía
-  --tooltip-font-size: #{$tooltip-font-size};
-  --tooltip-font-weight: #{$tooltip-font-weight};
-  --tooltip-line-height: #{$tooltip-line-height};
+  --tooltip-font-size: #{tokens.$tooltip-font-size};
+  --tooltip-font-weight: #{tokens.$tooltip-font-weight};
+  --tooltip-line-height: #{tokens.$tooltip-line-height};
 
   // Bordes
-  --tooltip-border-radius: #{$tooltip-border-radius};
+  --tooltip-border-radius: #{tokens.$tooltip-border-radius};
 
   // Z-index
-  --tooltip-z-index: #{$tooltip-z-index};
+  --tooltip-z-index: #{tokens.$tooltip-z-index};
 
   // Animación
-  --tooltip-transition-duration: #{$tooltip-transition-duration};
-  --tooltip-transition-timing: #{$tooltip-transition-timing};
+  --tooltip-transition-duration: #{tokens.$tooltip-transition-duration};
+  --tooltip-transition-timing: #{tokens.$tooltip-transition-timing};
 
   // Flecha
-  --tooltip-arrow-size: #{$tooltip-arrow-size};
+  --tooltip-arrow-size: #{tokens.$tooltip-arrow-size};
 
   // Sombra
-  --tooltip-shadow: #{$tooltip-shadow};
+  --tooltip-shadow: #{tokens.$tooltip-shadow};
 }

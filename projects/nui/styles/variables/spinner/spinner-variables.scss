@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "./spinner-tokens" as tokens;
+
 // ========================================
 // SPINNER - Variables (CSS Custom Properties)
 // ========================================
@@ -16,42 +19,42 @@
 
 @mixin nui-spinner-vars {
   // Tamaños del spinner
-  --spinner-size-xs: #{map-get($spinner-sizes, xs)};
-  --spinner-size-s: #{map-get($spinner-sizes, s)};
-  --spinner-size-sm: #{map-get($spinner-sizes, sm)};
-  --spinner-size-md: #{map-get($spinner-sizes, md)};
-  --spinner-size-lg: #{map-get($spinner-sizes, lg)};
-  --spinner-size-xl: #{map-get($spinner-sizes, xl)};
+  --spinner-size-xs: #{map.get(tokens.$spinner-sizes, xs)};
+  --spinner-size-s: #{map.get(tokens.$spinner-sizes, s)};
+  --spinner-size-sm: #{map.get(tokens.$spinner-sizes, sm)};
+  --spinner-size-md: #{map.get(tokens.$spinner-sizes, md)};
+  --spinner-size-lg: #{map.get(tokens.$spinner-sizes, lg)};
+  --spinner-size-xl: #{map.get(tokens.$spinner-sizes, xl)};
 
   // Anchos de borde del spinner
-  --spinner-border-xs: #{map-get($spinner-border-widths, xs)};
-  --spinner-border-s: #{map-get($spinner-border-widths, s)};
-  --spinner-border-sm: #{map-get($spinner-border-widths, sm)};
-  --spinner-border-md: #{map-get($spinner-border-widths, md)};
-  --spinner-border-lg: #{map-get($spinner-border-widths, lg)};
-  --spinner-border-xl: #{map-get($spinner-border-widths, xl)};
+  --spinner-border-xs: #{map.get(tokens.$spinner-border-widths, xs)};
+  --spinner-border-s: #{map.get(tokens.$spinner-border-widths, s)};
+  --spinner-border-sm: #{map.get(tokens.$spinner-border-widths, sm)};
+  --spinner-border-md: #{map.get(tokens.$spinner-border-widths, md)};
+  --spinner-border-lg: #{map.get(tokens.$spinner-border-widths, lg)};
+  --spinner-border-xl: #{map.get(tokens.$spinner-border-widths, xl)};
 
   // Gaps entre spinner y texto
-  --spinner-gap-xs: #{map-get($spinner-gaps, xs)};
-  --spinner-gap-s: #{map-get($spinner-gaps, s)};
-  --spinner-gap-sm: #{map-get($spinner-gaps, sm)};
-  --spinner-gap-md: #{map-get($spinner-gaps, md)};
-  --spinner-gap-lg: #{map-get($spinner-gaps, lg)};
-  --spinner-gap-xl: #{map-get($spinner-gaps, xl)};
+  --spinner-gap-xs: #{map.get(tokens.$spinner-gaps, xs)};
+  --spinner-gap-s: #{map.get(tokens.$spinner-gaps, s)};
+  --spinner-gap-sm: #{map.get(tokens.$spinner-gaps, sm)};
+  --spinner-gap-md: #{map.get(tokens.$spinner-gaps, md)};
+  --spinner-gap-lg: #{map.get(tokens.$spinner-gaps, lg)};
+  --spinner-gap-xl: #{map.get(tokens.$spinner-gaps, xl)};
 
   // Tamaños de la fuente
-  --spinner-label-font-size-xs: #{map-get($spinner-label-font-sizes, xs)};
-  --spinner-label-font-size-s: #{map-get($spinner-label-font-sizes, s)};
-  --spinner-label-font-size-sm: #{map-get($spinner-label-font-sizes, sm)};
-  --spinner-label-font-size-md: #{map-get($spinner-label-font-sizes, md)};
-  --spinner-label-font-size-lg: #{map-get($spinner-label-font-sizes, lg)};
-  --spinner-label-font-size-xl: #{map-get($spinner-label-font-sizes, xl)};
+  --spinner-label-font-size-xs: #{map.get(tokens.$spinner-label-font-sizes, xs)};
+  --spinner-label-font-size-s: #{map.get(tokens.$spinner-label-font-sizes, s)};
+  --spinner-label-font-size-sm: #{map.get(tokens.$spinner-label-font-sizes, sm)};
+  --spinner-label-font-size-md: #{map.get(tokens.$spinner-label-font-sizes, md)};
+  --spinner-label-font-size-lg: #{map.get(tokens.$spinner-label-font-sizes, lg)};
+  --spinner-label-font-size-xl: #{map.get(tokens.$spinner-label-font-sizes, xl)};
   
   // Z-index
-  --spinner-z-index-absolute: #{$spinner-z-index-absolute};
+  --spinner-z-index-absolute: #{tokens.$spinner-z-index-absolute};
   
   // Animation
-  --spinner-animation-duration: #{$spinner-animation-duration};
-  --spinner-animation-timing: #{$spinner-animation-timing};
-  --spinner-animation-duration-reduced-motion: #{$spinner-animation-duration-reduced-motion};
+  --spinner-animation-duration: #{tokens.$spinner-animation-duration};
+  --spinner-animation-timing: #{tokens.$spinner-animation-timing};
+  --spinner-animation-duration-reduced-motion: #{tokens.$spinner-animation-duration-reduced-motion};
 }

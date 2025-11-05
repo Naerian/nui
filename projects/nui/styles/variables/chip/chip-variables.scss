@@ -1,3 +1,7 @@
+@use "sass:map";
+@use "../../config";
+@use "./chip-tokens" as tokens;
+
 // ========================================
 // CHIP - Variables (CSS Custom Properties)
 // ========================================
@@ -16,81 +20,81 @@
 
 @mixin nui-chip-vars {
   // Padding vertical por tamaño
-  --chip-padding-y-xs: #{map-get($chip-padding-y, xs)};
-  --chip-padding-y-s: #{map-get($chip-padding-y, s)};
-  --chip-padding-y-sm: #{map-get($chip-padding-y, sm)};
-  --chip-padding-y-md: #{map-get($chip-padding-y, md)};
-  --chip-padding-y-lg: #{map-get($chip-padding-y, lg)};
-  --chip-padding-y-xl: #{map-get($chip-padding-y, xl)};
+  --chip-padding-y-xs: #{map.get(tokens.$chip-padding-y, xs)};
+  --chip-padding-y-s: #{map.get(tokens.$chip-padding-y, s)};
+  --chip-padding-y-sm: #{map.get(tokens.$chip-padding-y, sm)};
+  --chip-padding-y-md: #{map.get(tokens.$chip-padding-y, md)};
+  --chip-padding-y-lg: #{map.get(tokens.$chip-padding-y, lg)};
+  --chip-padding-y-xl: #{map.get(tokens.$chip-padding-y, xl)};
 
   // Padding horizontal por tamaño
-  --chip-padding-x-xs: #{map-get($chip-padding-x, xs)};
-  --chip-padding-x-s: #{map-get($chip-padding-x, s)};
-  --chip-padding-x-sm: #{map-get($chip-padding-x, sm)};
-  --chip-padding-x-md: #{map-get($chip-padding-x, md)};
-  --chip-padding-x-lg: #{map-get($chip-padding-x, lg)};
-  --chip-padding-x-xl: #{map-get($chip-padding-x, xl)};
+  --chip-padding-x-xs: #{map.get(tokens.$chip-padding-x, xs)};
+  --chip-padding-x-s: #{map.get(tokens.$chip-padding-x, s)};
+  --chip-padding-x-sm: #{map.get(tokens.$chip-padding-x, sm)};
+  --chip-padding-x-md: #{map.get(tokens.$chip-padding-x, md)};
+  --chip-padding-x-lg: #{map.get(tokens.$chip-padding-x, lg)};
+  --chip-padding-x-xl: #{map.get(tokens.$chip-padding-x, xl)};
 
   // Border radius por tamaño
-  --chip-border-radius-xs: #{map-get($chip-border-radius, xs)};
-  --chip-border-radius-s: #{map-get($chip-border-radius, s)};
-  --chip-border-radius-sm: #{map-get($chip-border-radius, sm)};
-  --chip-border-radius-md: #{map-get($chip-border-radius, md)};
-  --chip-border-radius-lg: #{map-get($chip-border-radius, lg)};
-  --chip-border-radius-xl: #{map-get($chip-border-radius, xl)};
+  --chip-border-radius-xs: #{map.get(tokens.$chip-border-radius, xs)};
+  --chip-border-radius-s: #{map.get(tokens.$chip-border-radius, s)};
+  --chip-border-radius-sm: #{map.get(tokens.$chip-border-radius, sm)};
+  --chip-border-radius-md: #{map.get(tokens.$chip-border-radius, md)};
+  --chip-border-radius-lg: #{map.get(tokens.$chip-border-radius, lg)};
+  --chip-border-radius-xl: #{map.get(tokens.$chip-border-radius, xl)};
 
   // Font sizes por tamaño
-  --chip-font-size-xs: #{map-get($chip-font-size, xs)};
-  --chip-font-size-s: #{map-get($chip-font-size, s)};
-  --chip-font-size-sm: #{map-get($chip-font-size, sm)};
-  --chip-font-size-md: #{map-get($chip-font-size, md)};
-  --chip-font-size-lg: #{map-get($chip-font-size, lg)};
-  --chip-font-size-xl: #{map-get($chip-font-size, xl)};
+  --chip-font-size-xs: #{map.get(tokens.$chip-font-size, xs)};
+  --chip-font-size-s: #{map.get(tokens.$chip-font-size, s)};
+  --chip-font-size-sm: #{map.get(tokens.$chip-font-size, sm)};
+  --chip-font-size-md: #{map.get(tokens.$chip-font-size, md)};
+  --chip-font-size-lg: #{map.get(tokens.$chip-font-size, lg)};
+  --chip-font-size-xl: #{map.get(tokens.$chip-font-size, xl)};
 
   // Image widths por tamaño
-  --chip-image-width-xs: #{map-get($chip-image-widths, xs)};
-  --chip-image-width-s: #{map-get($chip-image-widths, s)};
-  --chip-image-width-sm: #{map-get($chip-image-widths, sm)};
-  --chip-image-width-md: #{map-get($chip-image-widths, md)};
-  --chip-image-width-lg: #{map-get($chip-image-widths, lg)};
-  --chip-image-width-xl: #{map-get($chip-image-widths, xl)};
+  --chip-image-width-xs: #{map.get(tokens.$chip-image-widths, xs)};
+  --chip-image-width-s: #{map.get(tokens.$chip-image-widths, s)};
+  --chip-image-width-sm: #{map.get(tokens.$chip-image-widths, sm)};
+  --chip-image-width-md: #{map.get(tokens.$chip-image-widths, md)};
+  --chip-image-width-lg: #{map.get(tokens.$chip-image-widths, lg)};
+  --chip-image-width-xl: #{map.get(tokens.$chip-image-widths, xl)};
 
   // Image heights por tamaño
-  --chip-image-height-xs: #{map-get($chip-image-heights, xs)};
-  --chip-image-height-s: #{map-get($chip-image-heights, s)};
-  --chip-image-height-sm: #{map-get($chip-image-heights, sm)};
-  --chip-image-height-md: #{map-get($chip-image-heights, md)};
-  --chip-image-height-lg: #{map-get($chip-image-heights, lg)};
-  --chip-image-height-xl: #{map-get($chip-image-heights, xl)};
+  --chip-image-height-xs: #{map.get(tokens.$chip-image-heights, xs)};
+  --chip-image-height-s: #{map.get(tokens.$chip-image-heights, s)};
+  --chip-image-height-sm: #{map.get(tokens.$chip-image-heights, sm)};
+  --chip-image-height-md: #{map.get(tokens.$chip-image-heights, md)};
+  --chip-image-height-lg: #{map.get(tokens.$chip-image-heights, lg)};
+  --chip-image-height-xl: #{map.get(tokens.$chip-image-heights, xl)};
 
   // Propiedades adicionales
-  --chip-container-gap: #{$chip-container-gap};
-  --chip-image-margin-negative: #{$chip-image-margin-negative};
-  --chip-image-gap: #{$chip-image-gap};
-  --chip-remove-gap-start: #{$chip-remove-gap-start};
-  --chip-remove-margin-negative: #{$chip-remove-margin-negative};
-  --chip-border-drop-size: #{$chip-border-drop-size};
-  --chip-border-drop-style: #{$chip-border-drop-style};
+  --chip-container-gap: #{tokens.$chip-container-gap};
+  --chip-image-margin-negative: #{tokens.$chip-image-margin-negative};
+  --chip-image-gap: #{tokens.$chip-image-gap};
+  --chip-remove-gap-start: #{tokens.$chip-remove-gap-start};
+  --chip-remove-margin-negative: #{tokens.$chip-remove-margin-negative};
+  --chip-border-drop-size: #{tokens.$chip-border-drop-size};
+  --chip-border-drop-style: #{tokens.$chip-border-drop-style};
 
   // CHIP SELECTOR
-  --chip-selector-gap: #{$chip-selector-gap};
-  --chip-selector-toolbar-gap: #{$chip-selector-toolbar-gap};
-  --chip-selector-search-max-width: #{$chip-selector-search-max-width};
-  --chip-selector-counter-gap: #{$chip-selector-counter-gap};
-  --chip-selector-counter-font-size: #{$chip-selector-counter-font-size};
-  --chip-selector-counter-max-font-size: #{$chip-selector-counter-max-font-size};
-  --chip-selector-counter-max-opacity: #{$chip-selector-counter-max-opacity};
+  --chip-selector-gap: #{tokens.$chip-selector-gap};
+  --chip-selector-toolbar-gap: #{tokens.$chip-selector-toolbar-gap};
+  --chip-selector-search-max-width: #{tokens.$chip-selector-search-max-width};
+  --chip-selector-counter-gap: #{tokens.$chip-selector-counter-gap};
+  --chip-selector-counter-font-size: #{tokens.$chip-selector-counter-font-size};
+  --chip-selector-counter-max-font-size: #{tokens.$chip-selector-counter-max-font-size};
+  --chip-selector-counter-max-opacity: #{tokens.$chip-selector-counter-max-opacity};
 
   // CHIP LIST (CDK Drag & Drop)
-  --chip-list-drag-placeholder-opacity-before: #{$chip-list-drag-placeholder-opacity-before};
-  --chip-list-drag-preview-opacity: #{$chip-list-drag-preview-opacity};
-  --chip-list-drag-preview-rotation: #{$chip-list-drag-preview-rotation};
-  --chip-list-drag-color-mix-percentage: #{$chip-list-drag-color-mix-percentage};
-  --chip-list-drag-hover-color-mix-percentage: #{$chip-list-drag-hover-color-mix-percentage};
-  --chip-list-drag-shadow-spread: #{$chip-list-drag-shadow-spread};
-  --chip-list-disabled-opacity: #{$chip-list-disabled-opacity};
-  --chip-list-pulse-placeholder-opacity-min: #{$chip-list-pulse-placeholder-opacity-min};
-  --chip-list-pulse-placeholder-scale-max: #{$chip-list-pulse-placeholder-scale-max};
-  --chip-list-pulse-drop-zone-opacity-min: #{$chip-list-pulse-drop-zone-opacity-min};
-  --chip-list-pulse-drop-zone-scale-max: #{$chip-list-pulse-drop-zone-scale-max};
+  --chip-list-drag-placeholder-opacity-before: #{tokens.$chip-list-drag-placeholder-opacity-before};
+  --chip-list-drag-preview-opacity: #{tokens.$chip-list-drag-preview-opacity};
+  --chip-list-drag-preview-rotation: #{tokens.$chip-list-drag-preview-rotation};
+  --chip-list-drag-color-mix-percentage: #{tokens.$chip-list-drag-color-mix-percentage};
+  --chip-list-drag-hover-color-mix-percentage: #{tokens.$chip-list-drag-hover-color-mix-percentage};
+  --chip-list-drag-shadow-spread: #{tokens.$chip-list-drag-shadow-spread};
+  --chip-list-disabled-opacity: #{tokens.$chip-list-disabled-opacity};
+  --chip-list-pulse-placeholder-opacity-min: #{tokens.$chip-list-pulse-placeholder-opacity-min};
+  --chip-list-pulse-placeholder-scale-max: #{tokens.$chip-list-pulse-placeholder-scale-max};
+  --chip-list-pulse-drop-zone-opacity-min: #{tokens.$chip-list-pulse-drop-zone-opacity-min};
+  --chip-list-pulse-drop-zone-scale-max: #{tokens.$chip-list-pulse-drop-zone-scale-max};
 }

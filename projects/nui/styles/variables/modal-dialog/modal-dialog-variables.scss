@@ -1,3 +1,5 @@
+@use "modal-dialog-tokens" as tokens;
+
 // ========================================
 // MODAL DIALOG - Variables (CSS Custom Properties)
 // ========================================
@@ -16,103 +18,103 @@
 
 @mixin nui-modal-dialog-vars {
   // Dimensiones
-  --modal-min-width: #{$modal-min-width};
-  --modal-max-width: #{$modal-max-width};
-  --modal-padding: #{$modal-padding};
-  --modal-gap: #{$modal-gap};
+  --modal-min-width: #{tokens.$modal-min-width};
+  --modal-max-width: #{tokens.$modal-max-width};
+  --modal-padding: #{tokens.$modal-padding};
+  --modal-gap: #{tokens.$modal-gap};
 
   // Bordes y radios
-  --modal-border-radius: #{$modal-border-radius};
-  --modal-border: #{$modal-border};
-  --modal-shadow: #{$modal-shadow};
+  --modal-border-radius: #{tokens.$modal-border-radius};
+  --modal-border: #{tokens.$modal-border};
+  --modal-shadow: #{tokens.$modal-shadow};
 
   // Botón de cierre
-  --modal-close-position: #{$modal-close-position};
-  --modal-close-z-index: #{$modal-close-z-index};
+  --modal-close-position: #{tokens.$modal-close-position};
+  --modal-close-z-index: #{tokens.$modal-close-z-index};
 
   // Título
-  --modal-title-font-size: #{$modal-title-font-size};
-  --modal-title-font-family: #{$modal-title-font-family};
-  --modal-title-font-weight: #{$modal-title-font-weight};
-  --modal-title-gap: #{$modal-title-gap};
-  --modal-title-margin-bottom: #{$modal-title-margin-bottom};
-  --modal-title-padding-bottom: #{$modal-title-padding-bottom};
-  --modal-title-border-width: #{$modal-title-border-width};
-  --modal-title-border-color: #{$modal-title-border-color};
-  --modal-title-line-height: #{$modal-title-line-height};
+  --modal-title-font-size: #{tokens.$modal-title-font-size};
+  --modal-title-font-family: #{tokens.$modal-title-font-family};
+  --modal-title-font-weight: #{tokens.$modal-title-font-weight};
+  --modal-title-gap: #{tokens.$modal-title-gap};
+  --modal-title-margin-bottom: #{tokens.$modal-title-margin-bottom};
+  --modal-title-padding-bottom: #{tokens.$modal-title-padding-bottom};
+  --modal-title-border-width: #{tokens.$modal-title-border-width};
+  --modal-title-border-color: #{tokens.$modal-title-border-color};
+  --modal-title-line-height: #{tokens.$modal-title-line-height};
 
   // Título - Icono
-  --modal-title-icon-size: #{$modal-title-icon-size};
-  --modal-title-icon-line-height: #{$modal-title-icon-line-height};
+  --modal-title-icon-size: #{tokens.$modal-title-icon-size};
+  --modal-title-icon-line-height: #{tokens.$modal-title-icon-line-height};
 
   // Cuerpo
-  --modal-body-font-size: #{$modal-body-font-size};
-  --modal-body-font-family: #{$modal-body-font-family};
-  --modal-body-line-height: #{$modal-body-line-height};
-  --modal-body-paragraph-margin: #{$modal-body-paragraph-margin};
-  --modal-body-list-margin: #{$modal-body-list-margin};
-  --modal-body-list-padding: #{$modal-body-list-padding};
+  --modal-body-font-size: #{tokens.$modal-body-font-size};
+  --modal-body-font-family: #{tokens.$modal-body-font-family};
+  --modal-body-line-height: #{tokens.$modal-body-line-height};
+  --modal-body-paragraph-margin: #{tokens.$modal-body-paragraph-margin};
+  --modal-body-list-margin: #{tokens.$modal-body-list-margin};
+  --modal-body-list-padding: #{tokens.$modal-body-list-padding};
 
   // Footer
-  --modal-footer-margin-top: #{$modal-footer-margin-top};
-  --modal-footer-gap: #{$modal-footer-gap};
-  --modal-footer-gap-mobile: #{$modal-footer-gap-mobile};
-  --modal-footer-min-height: #{$modal-footer-min-height};
-  --modal-footer-mobile-breakpoint: #{$modal-footer-mobile-breakpoint};
+  --modal-footer-margin-top: #{tokens.$modal-footer-margin-top};
+  --modal-footer-gap: #{tokens.$modal-footer-gap};
+  --modal-footer-gap-mobile: #{tokens.$modal-footer-gap-mobile};
+  --modal-footer-min-height: #{tokens.$modal-footer-min-height};
+  --modal-footer-mobile-breakpoint: #{tokens.$modal-footer-mobile-breakpoint};
 
   // Custom templates
-  --modal-custom-header-margin: #{$modal-custom-header-margin};
-  --modal-custom-body-margin: #{$modal-custom-body-margin};
-  --modal-custom-footer-margin: #{$modal-custom-footer-margin};
+  --modal-custom-header-margin: #{tokens.$modal-custom-header-margin};
+  --modal-custom-body-margin: #{tokens.$modal-custom-body-margin};
+  --modal-custom-footer-margin: #{tokens.$modal-custom-footer-margin};
 
   // Progress bar
-  --modal-progress-height: #{$modal-progress-height};
-  --modal-progress-bg: #{$modal-progress-bg};
-  --modal-progress-border-radius: #{$modal-progress-border-radius};
-  --modal-progress-z-index: #{$modal-progress-z-index};
-  --modal-progress-fill-bg: #{$modal-progress-fill-bg};
-  --modal-progress-transition: #{$modal-progress-transition};
-  --modal-progress-pulse-duration: #{$modal-progress-pulse-duration};
-  --modal-progress-pulse-easing: #{$modal-progress-pulse-easing};
-  --modal-progress-pulse-opacity-min: #{$modal-progress-pulse-opacity-min};
+  --modal-progress-height: #{tokens.$modal-progress-height};
+  --modal-progress-bg: #{tokens.$modal-progress-bg};
+  --modal-progress-border-radius: #{tokens.$modal-progress-border-radius};
+  --modal-progress-z-index: #{tokens.$modal-progress-z-index};
+  --modal-progress-fill-bg: #{tokens.$modal-progress-fill-bg};
+  --modal-progress-transition: #{tokens.$modal-progress-transition};
+  --modal-progress-pulse-duration: #{tokens.$modal-progress-pulse-duration};
+  --modal-progress-pulse-easing: #{tokens.$modal-progress-pulse-easing};
+  --modal-progress-pulse-opacity-min: #{tokens.$modal-progress-pulse-opacity-min};
 
   // Countdown
-  --modal-countdown-font-size: #{$modal-countdown-font-size};
-  --modal-countdown-font-weight: #{$modal-countdown-font-weight};
-  --modal-countdown-line-height: #{$modal-countdown-line-height};
-  --modal-countdown-bg: #{$modal-countdown-bg};
-  --modal-countdown-padding: #{$modal-countdown-padding};
-  --modal-countdown-border-radius: #{$modal-countdown-border-radius};
-  --modal-countdown-min-width: #{$modal-countdown-min-width};
-  --modal-countdown-margin-left: #{$modal-countdown-margin-left};
+  --modal-countdown-font-size: #{tokens.$modal-countdown-font-size};
+  --modal-countdown-font-weight: #{tokens.$modal-countdown-font-weight};
+  --modal-countdown-line-height: #{tokens.$modal-countdown-line-height};
+  --modal-countdown-bg: #{tokens.$modal-countdown-bg};
+  --modal-countdown-padding: #{tokens.$modal-countdown-padding};
+  --modal-countdown-border-radius: #{tokens.$modal-countdown-border-radius};
+  --modal-countdown-min-width: #{tokens.$modal-countdown-min-width};
+  --modal-countdown-margin-left: #{tokens.$modal-countdown-margin-left};
 
   // Loading
-  --modal-loading-gap: #{$modal-loading-gap};
-  --modal-loading-padding: #{$modal-loading-padding};
-  --modal-loading-min-height: #{$modal-loading-min-height};
-  --modal-loading-message-size: #{$modal-loading-message-size};
-  --modal-loading-message-line-height: #{$modal-loading-message-line-height};
+  --modal-loading-gap: #{tokens.$modal-loading-gap};
+  --modal-loading-padding: #{tokens.$modal-loading-padding};
+  --modal-loading-min-height: #{tokens.$modal-loading-min-height};
+  --modal-loading-message-size: #{tokens.$modal-loading-message-size};
+  --modal-loading-message-line-height: #{tokens.$modal-loading-message-line-height};
 
   // With timeout
-  --modal-with-timeout-padding-top: #{$modal-with-timeout-padding-top};
+  --modal-with-timeout-padding-top: #{tokens.$modal-with-timeout-padding-top};
 
   // Verification
-  --modal-verification-gap: #{$modal-verification-gap};
-  --modal-verification-margin-top: #{$modal-verification-margin-top};
-  --modal-verification-label-size: #{$modal-verification-label-size};
-  --modal-verification-label-weight: #{$modal-verification-label-weight};
-  --modal-verification-label-line-height: #{$modal-verification-label-line-height};
-  --modal-verification-container-gap: #{$modal-verification-container-gap};
-  --modal-verification-container-padding: #{$modal-verification-container-padding};
-  --modal-verification-container-radius: #{$modal-verification-container-radius};
-  --modal-verification-container-border: #{$modal-verification-container-border};
-  --modal-verification-text-label-size: #{$modal-verification-text-label-size};
-  --modal-verification-text-label-weight: #{$modal-verification-text-label-weight};
-  --modal-verification-text-family: #{$modal-verification-text-family};
-  --modal-verification-text-weight: #{$modal-verification-text-weight};
-  --modal-verification-text-size: #{$modal-verification-text-size};
-  --modal-verification-text-line-height: #{$modal-verification-text-line-height};
-  --modal-verification-text-letter-spacing: #{$modal-verification-text-letter-spacing};
-  --modal-verification-error-size: #{$modal-verification-error-size};
-  --modal-verification-error-margin-top: #{$modal-verification-error-margin-top};
+  --modal-verification-gap: #{tokens.$modal-verification-gap};
+  --modal-verification-margin-top: #{tokens.$modal-verification-margin-top};
+  --modal-verification-label-size: #{tokens.$modal-verification-label-size};
+  --modal-verification-label-weight: #{tokens.$modal-verification-label-weight};
+  --modal-verification-label-line-height: #{tokens.$modal-verification-label-line-height};
+  --modal-verification-container-gap: #{tokens.$modal-verification-container-gap};
+  --modal-verification-container-padding: #{tokens.$modal-verification-container-padding};
+  --modal-verification-container-radius: #{tokens.$modal-verification-container-radius};
+  --modal-verification-container-border: #{tokens.$modal-verification-container-border};
+  --modal-verification-text-label-size: #{tokens.$modal-verification-text-label-size};
+  --modal-verification-text-label-weight: #{tokens.$modal-verification-text-label-weight};
+  --modal-verification-text-family: #{tokens.$modal-verification-text-family};
+  --modal-verification-text-weight: #{tokens.$modal-verification-text-weight};
+  --modal-verification-text-size: #{tokens.$modal-verification-text-size};
+  --modal-verification-text-line-height: #{tokens.$modal-verification-text-line-height};
+  --modal-verification-text-letter-spacing: #{tokens.$modal-verification-text-letter-spacing};
+  --modal-verification-error-size: #{tokens.$modal-verification-error-size};
+  --modal-verification-error-margin-top: #{tokens.$modal-verification-error-margin-top};
 }

@@ -1,3 +1,5 @@
+@use "button-tokens" as tokens;
+
 // ========================================
 // BUTTON - Variables (CSS Custom Properties)
 // ========================================
@@ -16,22 +18,22 @@
 
 @mixin nui-button-vars {
   // Espaciado
-  --button-gap: #{$button-gap};
+  --button-gap: #{tokens.$button-gap};
 
   // Bordes
-  --button-border-radius: #{$button-border-radius};
-  --button-border-width: #{$button-border-width};
+  --button-border-radius: #{tokens.$button-border-radius};
+  --button-border-width: #{tokens.$button-border-width};
 
   // Tipografía
-  --button-font-weight: #{$button-font-weight};
+  --button-font-weight: #{tokens.$button-font-weight};
 
   // Transformaciones
-  --button-spin-duration: #{$button-spin-duration};
+  --button-spin-duration: #{tokens.$button-spin-duration};
 
   // Focus
-  --button-focus-outline-width: #{$button-focus-outline-width};
-  --button-focus-outline-offset: #{$button-focus-outline-offset};
+  --button-focus-outline-width: #{tokens.$button-focus-outline-width};
+  --button-focus-outline-offset: #{tokens.$button-focus-outline-offset};
 
   // Outline
-  --button-outline-border-width: #{$button-outline-border-width};
+  --button-outline-border-width: #{tokens.$button-outline-border-width};
 }

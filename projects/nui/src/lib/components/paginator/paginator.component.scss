@@ -1,6 +1,6 @@
-@import "../../../../styles/config";
-@import "../../../../styles/mixins";
-@import "../../../../styles/variables/paginator/paginator-variables.scss";
+@use "../../../../styles/config";
+@use "../../../../styles/mixins";
+@use "../../../../styles/variables/paginator/paginator-variables.scss";
 
 // =======================
 // PAGINATOR CONTAINER
@@ -182,7 +182,7 @@
 
 @each $size-key in (xs, s, sm, md, lg, xl) {
   .nui-paginator-container--#{$size-key} {
-    @include paginator-size(#{$size-key});
+    @include mixins.paginator-size(#{$size-key});
   }
 }
 
@@ -191,9 +191,9 @@
 // =======================
 @each $color in (primary, secondary, success, info, warning, danger, accent) {
   .nui-paginator-container {
-    @include paginator-colors("solid", $color);
-    @include paginator-colors("outline", $color);
-    @include paginator-colors("ghost", $color);
+    @include mixins.paginator-colors("solid", $color);
+    @include mixins.paginator-colors("outline", $color);
+    @include mixins.paginator-colors("ghost", $color);
   }
 }
 

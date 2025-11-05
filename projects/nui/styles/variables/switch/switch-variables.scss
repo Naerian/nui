@@ -1,3 +1,6 @@
+@use "switch-tokens" as tokens;
+@use "sass:map";
+
 // ========================================
 // SWITCH - Variables (CSS Custom Properties)
 // ========================================
@@ -16,39 +19,39 @@
 
 @mixin nui-switch-vars {
   // Track heights por tamaño
-  --switch-track-height-xs: #{map-get($switch-track-heights, xs)};
-  --switch-track-height-s: #{map-get($switch-track-heights, s)};
-  --switch-track-height-sm: #{map-get($switch-track-heights, sm)};
-  --switch-track-height-md: #{map-get($switch-track-heights, md)};
-  --switch-track-height-lg: #{map-get($switch-track-heights, lg)};
-  --switch-track-height-xl: #{map-get($switch-track-heights, xl)};
+  --switch-track-height-xs: #{map.get(tokens.$switch-track-heights, xs)};
+  --switch-track-height-s: #{map.get(tokens.$switch-track-heights, s)};
+  --switch-track-height-sm: #{map.get(tokens.$switch-track-heights, sm)};
+  --switch-track-height-md: #{map.get(tokens.$switch-track-heights, md)};
+  --switch-track-height-lg: #{map.get(tokens.$switch-track-heights, lg)};
+  --switch-track-height-xl: #{map.get(tokens.$switch-track-heights, xl)};
 
   // Track widths por tamaño
-  --switch-track-width-xs: #{map-get($switch-track-widths, xs)};
-  --switch-track-width-s: #{map-get($switch-track-widths, s)};
-  --switch-track-width-sm: #{map-get($switch-track-widths, sm)};
-  --switch-track-width-md: #{map-get($switch-track-widths, md)};
-  --switch-track-width-lg: #{map-get($switch-track-widths, lg)};
-  --switch-track-width-xl: #{map-get($switch-track-widths, xl)};
+  --switch-track-width-xs: #{map.get(tokens.$switch-track-widths, xs)};
+  --switch-track-width-s: #{map.get(tokens.$switch-track-widths, s)};
+  --switch-track-width-sm: #{map.get(tokens.$switch-track-widths, sm)};
+  --switch-track-width-md: #{map.get(tokens.$switch-track-widths, md)};
+  --switch-track-width-lg: #{map.get(tokens.$switch-track-widths, lg)};
+  --switch-track-width-xl: #{map.get(tokens.$switch-track-widths, xl)};
 
   // Thumb sizes por tamaño
-  --switch-thumb-size-xs: #{map-get($switch-thumb-sizes, xs)};
-  --switch-thumb-size-s: #{map-get($switch-thumb-sizes, s)};
-  --switch-thumb-size-sm: #{map-get($switch-thumb-sizes, sm)};
-  --switch-thumb-size-md: #{map-get($switch-thumb-sizes, md)};
-  --switch-thumb-size-lg: #{map-get($switch-thumb-sizes, lg)};
-  --switch-thumb-size-xl: #{map-get($switch-thumb-sizes, xl)};
+  --switch-thumb-size-xs: #{map.get(tokens.$switch-thumb-sizes, xs)};
+  --switch-thumb-size-s: #{map.get(tokens.$switch-thumb-sizes, s)};
+  --switch-thumb-size-sm: #{map.get(tokens.$switch-thumb-sizes, sm)};
+  --switch-thumb-size-md: #{map.get(tokens.$switch-thumb-sizes, md)};
+  --switch-thumb-size-lg: #{map.get(tokens.$switch-thumb-sizes, lg)};
+  --switch-thumb-size-xl: #{map.get(tokens.$switch-thumb-sizes, xl)};
 
   // Propiedades adicionales
-  --switch-thumb-offset-xs: #{$switch-thumb-offset-xs};
-  --switch-thumb-offset-default: #{$switch-thumb-offset-default};
-  --switch-track-border-width: #{$switch-track-border-width};
-  --switch-disabled-opacity: #{$switch-disabled-opacity};
-  --switch-gap-default: #{$switch-gap-default};
-  --switch-gap-small: #{$switch-gap-small};
-  --switch-icon-scale: #{$switch-icon-scale};
-  --switch-z-index-focus: #{$switch-z-index-focus};
-  --switch-transition-duration: #{$switch-transition-duration};
-  --switch-transition-timing: #{$switch-transition-timing};
-  --switch-thumb-shadow: #{$switch-thumb-shadow};
+  --switch-thumb-offset-xs: #{tokens.$switch-thumb-offset-xs};
+  --switch-thumb-offset-default: #{tokens.$switch-thumb-offset-default};
+  --switch-track-border-width: #{tokens.$switch-track-border-width};
+  --switch-disabled-opacity: #{tokens.$switch-disabled-opacity};
+  --switch-gap-default: #{tokens.$switch-gap-default};
+  --switch-gap-small: #{tokens.$switch-gap-small};
+  --switch-icon-scale: #{tokens.$switch-icon-scale};
+  --switch-z-index-focus: #{tokens.$switch-z-index-focus};
+  --switch-transition-duration: #{tokens.$switch-transition-duration};
+  --switch-transition-timing: #{tokens.$switch-transition-timing};
+  --switch-thumb-shadow: #{tokens.$switch-thumb-shadow};
 }

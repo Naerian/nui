@@ -1,3 +1,5 @@
+@use "panel-tokens" as tokens;
+
 // ========================================
 // PANEL - Variables (CSS Custom Properties)
 // ========================================
@@ -9,21 +11,21 @@
 
 @mixin nui-panel-vars {
   // Animation durations
-  --panel-animation-duration: #{$panel-animation-duration};
-  --panel-animation-opacity-duration: #{$panel-animation-opacity-duration};
+  --panel-animation-duration: #{tokens.$panel-animation-duration};
+  --panel-animation-opacity-duration: #{tokens.$panel-animation-opacity-duration};
   
   // Animation values
-  --panel-animation-opacity-collapsed: #{$panel-animation-opacity-collapsed};
-  --panel-animation-opacity-expanded: #{$panel-animation-opacity-expanded};
+  --panel-animation-opacity-collapsed: #{tokens.$panel-animation-opacity-collapsed};
+  --panel-animation-opacity-expanded: #{tokens.$panel-animation-opacity-expanded};
   
   // Animation easing
-  --panel-animation-easing: #{$panel-animation-easing};
-  --panel-animation-opacity-easing: #{$panel-animation-opacity-easing};
+  --panel-animation-easing: #{tokens.$panel-animation-easing};
+  --panel-animation-opacity-easing: #{tokens.$panel-animation-opacity-easing};
   
   // Toggle
-  --panel-toggle-transition-duration: #{$panel-toggle-transition-duration};
-  --panel-toggle-transition-timing: #{$panel-toggle-transition-timing};
+  --panel-toggle-transition-duration: #{tokens.$panel-toggle-transition-duration};
+  --panel-toggle-transition-timing: #{tokens.$panel-toggle-transition-timing};
   
   // Footer
-  --panel-footer-border-width: #{$panel-footer-border-width};
+  --panel-footer-border-width: #{tokens.$panel-footer-border-width};
 }

@@ -1,3 +1,5 @@
+@use "toast-tokens" as tokens;
+
 // ========================================
 // TOAST - Variables (CSS Custom Properties)
 // ========================================
@@ -16,75 +18,90 @@
 
 @mixin nui-toast-vars {
   // Dimensiones
-  --nui-toast-width: #{$toast-width};
-  --nui-toast-min-height: #{$toast-min-height};
-  --nui-toast-max-width: #{$toast-max-width};
-  --nui-toast-padding: #{$toast-padding};
-  --nui-toast-gap: #{$toast-gap};
-  --nui-toast-content-gap: #{$toast-content-gap};
+  --nui-toast-width: #{tokens.$toast-width};
+  --nui-toast-width-mobile: #{tokens.$toast-width-mobile};
+  --nui-toast-min-height: #{tokens.$toast-min-height};
+  --nui-toast-max-width: #{tokens.$toast-max-width};
+  --nui-toast-padding: #{tokens.$toast-padding};
+  --nui-toast-padding-compact: #{tokens.$toast-padding-compact};
+  --nui-toast-gap: #{tokens.$toast-gap};
+  --nui-toast-content-gap: #{tokens.$toast-content-gap};
 
   // Bordes
-  --nui-toast-radius: #{$toast-border-radius};
-  --nui-toast-border-width: #{$toast-border-width};
-  --nui-toast-action-radius: #{$toast-action-radius};
-  --nui-toast-button-radius: #{$toast-button-radius};
+  --nui-toast-radius: #{tokens.$toast-border-radius};
+  --nui-toast-border-width: #{tokens.$toast-border-width};
+  --nui-toast-action-radius: #{tokens.$toast-action-radius};
+  --nui-toast-button-radius: #{tokens.$toast-button-radius};
 
   // Botones de cerrar y expandir
-  --nui-toast-close-button-size: #{$toast-close-button-size};
-  --nui-toast-close-text-size: #{$toast-close-text-size};
+  --nui-toast-close-button-size: #{tokens.$toast-close-button-size};
+  --nui-toast-close-text-size: #{tokens.$toast-close-text-size};
 
   // Iconos
-  --nui-toast-icon-size: #{$toast-icon-size};
-  --nui-toast-icon-size-top: #{$toast-icon-size-top};
-  --nui-toast-icon-gap: #{$toast-icon-gap};
-  --nui-toast-icon-bg-size: #{$toast-icon-bg-size};
+  --nui-toast-icon-size: #{tokens.$toast-icon-size};
+  --nui-toast-icon-size-top: #{tokens.$toast-icon-size-top};
+  --nui-toast-icon-gap: #{tokens.$toast-icon-gap};
+  --nui-toast-icon-bg-size: #{tokens.$toast-icon-bg-size};
+
+  // Responsive
+  --nui-toast-mobile-breakpoint: #{tokens.$toast-mobile-breakpoint};
+  --nui-toast-width-mobile: #{tokens.$toast-width-mobile};
 
   // Tipografía
-  --nui-toast-title-size: #{$toast-title-size};
-  --nui-toast-title-weight: #{$toast-title-weight};
-  --nui-toast-title-line-height: #{$toast-title-line-height};
-  --nui-toast-message-size: #{$toast-message-size};
-  --nui-toast-message-weight: #{$toast-message-weight};
-  --nui-toast-message-line-height: #{$toast-message-line-height};
-  --nui-toast-action-size: #{$toast-action-size};
-  --nui-toast-action-weight: #{$toast-action-weight};
-  --nui-toast-content-size: #{$toast-content-size};
+  --nui-toast-title-size: #{tokens.$toast-title-size};
+  --nui-toast-title-weight: #{tokens.$toast-title-weight};
+  --nui-toast-title-line-height: #{tokens.$toast-title-line-height};
+  --nui-toast-message-size: #{tokens.$toast-message-size};
+  --nui-toast-message-weight: #{tokens.$toast-message-weight};
+  --nui-toast-message-line-height: #{tokens.$toast-message-line-height};
+  --nui-toast-action-size: #{tokens.$toast-action-size};
+  --nui-toast-action-weight: #{tokens.$toast-action-weight};
+  --nui-toast-content-size: #{tokens.$toast-content-size};
 
   // Espaciado
-  --nui-toast-offset-x: #{$toast-offset-x};
-  --nui-toast-offset-y: #{$toast-offset-y};
-  --nui-toast-stack-gap: #{$toast-stack-gap};
+  --nui-toast-offset-x: #{tokens.$toast-offset-x};
+  --nui-toast-offset-y: #{tokens.$toast-offset-y};
+  --nui-toast-stack-gap: #{tokens.$toast-stack-gap};
 
   // Z-index
-  --nui-toast-z-index: #{$toast-z-index};
+  --nui-toast-z-index: #{tokens.$toast-z-index};
 
   // Progress bar
-  --nui-toast-progress-height: #{$toast-progress-height};
-  --nui-toast-progress-opacity: #{$toast-progress-opacity};
+  --nui-toast-progress-height: #{tokens.$toast-progress-height};
+  --nui-toast-progress-opacity: #{tokens.$toast-progress-opacity};
 
   // Animaciones
-  --nui-toast-animation-duration: #{$toast-animation-duration};
-  --nui-toast-transition-duration: #{$toast-transition-duration};
-  --nui-toast-transition-easing: #{$toast-transition-easing};
+  --nui-toast-animation-duration: #{tokens.$toast-animation-duration};
+  --nui-toast-transition-duration: #{tokens.$toast-transition-duration};
+  --nui-toast-transition-easing: #{tokens.$toast-transition-easing};
 
   // Opacidades
-  --nui-toast-opacity: #{$toast-opacity};
-  --nui-toast-hover-opacity: #{$toast-hover-opacity};
-  --nui-toast-button-opacity: #{$toast-button-opacity};
+  --nui-toast-opacity: #{tokens.$toast-opacity};
+  --nui-toast-hover-opacity: #{tokens.$toast-hover-opacity};
+  --nui-toast-button-opacity: #{tokens.$toast-button-opacity};
 
   // Swipe
-  --nui-toast-swipe-threshold: #{$toast-swipe-threshold};
+  --nui-toast-swipe-threshold: #{tokens.$toast-swipe-threshold};
+
+  // Colores base
+  --nui-toast-bg: #{tokens.$toast-bg};
+  --nui-toast-color: #{tokens.$toast-color};
+  --nui-toast-border-color: #{tokens.$toast-border-color};
+  --nui-toast-close-btn-color: #{tokens.$toast-close-btn-color};
+  --nui-toast-close-btn-hover: #{tokens.$toast-close-btn-hover};
+  --nui-toast-action-bg: #{tokens.$toast-action-bg};
+  --nui-toast-action-hover-bg: #{tokens.$toast-action-hover-bg};
 
   // Stacking
-  --nui-toast-stack-scale-1: #{$toast-stack-scale-1};
-  --nui-toast-stack-scale-2: #{$toast-stack-scale-2};
-  --nui-toast-stack-opacity-1: #{$toast-stack-opacity-1};
-  --nui-toast-stack-opacity-2: #{$toast-stack-opacity-2};
-  --nui-toast-stack-blur-1: #{$toast-stack-blur-1};
-  --nui-toast-stack-blur-2: #{$toast-stack-blur-2};
-  --nui-toast-stack-translate-y-1: #{$toast-stack-translate-y-1};
-  --nui-toast-stack-translate-y-2: #{$toast-stack-translate-y-2};
+  --nui-toast-stack-scale-1: #{tokens.$toast-stack-scale-1};
+  --nui-toast-stack-scale-2: #{tokens.$toast-stack-scale-2};
+  --nui-toast-stack-opacity-1: #{tokens.$toast-stack-opacity-1};
+  --nui-toast-stack-opacity-2: #{tokens.$toast-stack-opacity-2};
+  --nui-toast-stack-blur-1: #{tokens.$toast-stack-blur-1};
+  --nui-toast-stack-blur-2: #{tokens.$toast-stack-blur-2};
+  --nui-toast-stack-translate-y-1: #{tokens.$toast-stack-translate-y-1};
+  --nui-toast-stack-translate-y-2: #{tokens.$toast-stack-translate-y-2};
 
   // Sombras
-  --nui-toast-shadow: #{$toast-shadow};
+  --nui-toast-shadow: #{tokens.$toast-shadow};
 }

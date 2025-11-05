@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "../../config";
+
 // ========================================
 // BUTTON GROUP - Tokens (SCSS Variables)
 // ========================================
@@ -52,48 +55,47 @@ $button-group-icon-sizes: (
   xl: $button-group-icon-size-xl,
 ) !default;
 
-// Configuración unificada de ButtonGroup usando variables del sistema
 $button-group-sizes: (
   xs: (
-    height: map-get($component-heights, xs),
-    padding: map-get($component-paddings, xs),
-    font-size: map-get($component-font-sizes, xs),
-    gap: $spacing-xs,
+    height: map.get(config.$component-heights, xs),
+    padding: map.get(config.$component-paddings, xs),
+    font-size: map.get(config.$component-font-sizes, xs),
+    gap: config.$spacing-xs,
     icon-size: $button-group-icon-size-xs,
   ),
   s: (
-    height: map-get($component-heights, s),
-    padding: map-get($component-paddings, s),
-    font-size: map-get($component-font-sizes, s),
-    gap: $spacing-xs,
+    height: map.get(config.$component-heights, s),
+    padding: map.get(config.$component-paddings, s),
+    font-size: map.get(config.$component-font-sizes, s),
+    gap: config.$spacing-xs,
     icon-size: $button-group-icon-size-s,
   ),
   sm: (
-    height: map-get($component-heights, sm),
-    padding: map-get($component-paddings, sm),
-    font-size: map-get($component-font-sizes, sm),
-    gap: $spacing-s,
+    height: map.get(config.$component-heights, sm),
+    padding: map.get(config.$component-paddings, sm),
+    font-size: map.get(config.$component-font-sizes, sm),
+    gap: config.$spacing-s,
     icon-size: $button-group-icon-size-sm,
   ),
   md: (
-    height: map-get($component-heights, md),
-    padding: map-get($component-paddings, md),
-    font-size: map-get($component-font-sizes, md),
-    gap: $spacing-s,
+    height: map.get(config.$component-heights, md),
+    padding: map.get(config.$component-paddings, md),
+    font-size: map.get(config.$component-font-sizes, md),
+    gap: config.$spacing-s,
     icon-size: $button-group-icon-size-md,
   ),
   lg: (
-    height: map-get($component-heights, lg),
-    padding: map-get($component-paddings, lg),
-    font-size: map-get($component-font-sizes, lg),
-    gap: $spacing-sm,
+    height: map.get(config.$component-heights, lg),
+    padding: map.get(config.$component-paddings, lg),
+    font-size: map.get(config.$component-font-sizes, lg),
+    gap: config.$spacing-sm,
     icon-size: $button-group-icon-size-lg,
   ),
   xl: (
-    height: map-get($component-heights, xl),
-    padding: map-get($component-paddings, xl),
-    font-size: map-get($component-font-sizes, xl),
-    gap: $spacing-sm,
+    height: map.get(config.$component-heights, xl),
+    padding: map.get(config.$component-paddings, xl),
+    font-size: map.get(config.$component-font-sizes, xl),
+    gap: config.$spacing-sm,
     icon-size: $button-group-icon-size-xl,
   ),
-);
+) !default;
