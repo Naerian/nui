@@ -1,2 +1,6 @@
-// Import NUI base styles from source (for development)
-@import '../../nui/styles/nui';
+// Import NUI complete bundle (includes CDK Overlay styles automatically)
+// Using relative path to the source SCSS files
+@use '../../nui/styles/nui-bundle';
+
+// Playground-specific styles can go below
+

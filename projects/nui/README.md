@@ -8,21 +8,31 @@ Modern, customizable Angular component library with theme support.
 npm install nui
 ```
 
+> **Note:** NUI has `@angular/cdk` as a peer dependency. NPM will install it automatically.
+
 ## Styles Setup
 
 NUI offers multiple ways to import styles. Choose the one that fits your needs:
 
-### Option 1: Pre-compiled CSS (Recommended - Simplest)
+### Option 1: Complete Bundle (Recommended - Easiest)
 
-Add to your `angular.json`:
+This includes all NUI styles AND required CDK Overlay styles in a single import.
+
+**In angular.json:**
 
 ```json
 {
   "styles": [
-    "node_modules/nui/styles/nui.css",
+    "node_modules/nui/styles/nui-bundle.css",
     "src/styles.scss"
   ]
 }
+```
+
+**Or in styles.scss:**
+
+```scss
+@import 'nui/styles/nui-bundle';
 ```
 
 Then customize in your `styles.scss`:
@@ -33,12 +43,27 @@ Then customize in your `styles.scss`:
 }
 ```
 
-### Option 2: Full SCSS (Maximum Customization)
+### Option 2: Manual Import (Advanced)
 
-Import in your `styles.scss`:
+If you need more control or already have CDK styles imported elsewhere:
+
+**In angular.json:**
+
+```json
+{
+  "styles": [
+    "node_modules/@angular/cdk/overlay-prebuilt.css",
+    "node_modules/nui/styles/nui.css",
+    "src/styles.scss"
+  ]
+}
+```
+
+**Or in styles.scss:**
 
 ```scss
-@import "nui/styles/nui";
+@import '@angular/cdk/overlay-prebuilt.css';
+@import 'nui/styles/nui';
 
 :root {
   --button-primary-solid-bg: #007bff;

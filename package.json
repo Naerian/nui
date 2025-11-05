@@ -4,7 +4,9 @@
   "scripts": {
     "start": "ng serve playground",
     "build:nui": "ng build nui && npm run build:styles",
-    "build:styles": "sass projects/nui/styles/nui.scss dist/nui/styles/nui.css --style=compressed --no-source-map",
+    "build:styles": "npm run build:styles:nui && npm run build:styles:bundle",
+    "build:styles:nui": "sass projects/nui/styles/nui.scss dist/nui/styles/nui.css --style=compressed --no-source-map",
+    "build:styles:bundle": "sass projects/nui/styles/nui-bundle.scss dist/nui/styles/nui-bundle.css --style=compressed --no-source-map",
     "build:play": "ng build playground",
     "test:nui": "ng test nui"
   },
