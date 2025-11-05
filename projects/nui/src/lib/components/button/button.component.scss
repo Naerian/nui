@@ -1,12 +1,9 @@
-@use "../../../../styles/config";
-@use "../../../../styles/mixins";
-@use "../../../../styles/variables/button/button-variables.scss";
 @use "../../../../styles/components/button";
 
 :host {
   display: inline-block;
   cursor: pointer;
-  @include mixins.transition(opacity 0.2s ease-in-out);
+  transition: opacity 0.2s ease-in-out;
 
   // Aplicar width al host cuando se usan los modificadores
   &.full-width {

@@ -17,9 +17,9 @@
 // ========================================
 
 @mixin nui-action-menu-vars {
-  --action-menu-min-width: #{tokens.$action-menu-min-width};
-  --action-menu-max-width: #{tokens.$action-menu-max-width};
-  --action-menu-item-gap: #{tokens.$action-menu-item-gap};
-  --action-menu-item-border: #{tokens.$action-menu-item-border};
-  --action-menu-arrow-padding-left: #{tokens.$action-menu-arrow-padding-left};
+  --nui-action-menu-min-width: #{tokens.$action-menu-min-width};
+  --nui-action-menu-max-width: #{tokens.$action-menu-max-width};
+  --nui-action-menu-item-gap: #{tokens.$action-menu-item-gap};
+  --nui-action-menu-item-border: #{tokens.$action-menu-item-border};
+  --nui-action-menu-arrow-padding-left: #{tokens.$action-menu-arrow-padding-left};
 }

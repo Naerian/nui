@@ -240,17 +240,6 @@
 // STATE MIXINS
 // ========================================
 
-/// Mixin para aplicar transiciones CSS
-/// Versión moderna sin prefijos vendor (todos los navegadores modernos soportan transition)
-/// Si necesitas soporte para navegadores legacy, usa Autoprefixer
-/// @param {String} $args - Propiedades de transición
-/// @example
-///   @include transition(all 0.2s ease-in-out);
-///   @include transition(opacity 0.3s, transform 0.3s);
-@mixin transition($args...) {
-  transition: $args;
-}
-
 /// Mixin para aplicar estilo a un elemento deshabilitado
 /// Versión mejorada sin !important y con mejor accesibilidad
 /// @param {Number} $opacity - Opacidad del elemento deshabilitado [default: 0.5]

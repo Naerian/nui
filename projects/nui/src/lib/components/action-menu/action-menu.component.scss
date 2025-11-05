@@ -1,0 +1,165 @@
+@use "../../../../styles/mixins";
+@use "../../../../styles/variables/action-menu/action-menu-variables";
+
+.nui-action-menu,
+.nui-action-menu-submenu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: var(--nui-action-menu-min-width);
+  max-width: var(--nui-action-menu-max-width);
+  border: var(--border-width-xs) solid var(--border-primary);
+  background-color: var(--bg-primary);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-xs);
+  box-shadow: var(--shadow-elevated);
+  gap: var(--spacing-xs);
+
+  &--fullWidth {
+    width: 100%;
+  }
+
+  &--static {
+    box-shadow: var(--shadow-container);
+  }
+
+  &__item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    overflow: hidden;
+    background-color: transparent;
+    border: var(--nui-action-menu-item-border);
+    color: var(--text-primary);
+    border-radius: var(--border-radius-md);
+    user-select: none;
+    cursor: pointer;
+    gap: var(--nui-action-menu-item-gap);
+
+    &__container {
+      display: flex;
+      align-items: center;
+      gap: var(--nui-action-menu-item-gap);
+      flex: 1 1 auto;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    &__label {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+      flex: 1;
+      min-width: 0;
+      margin-right: var(--spacing-md);
+    }
+
+    &__icon {
+      font-size: inherit;
+      flex-shrink: 0;
+    }
+
+    &__shortcut {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--surface-tertiary);
+      color: var(--text-secondary);
+      padding: var(--spacing-xs);
+      border-radius: var(--border-radius-md);
+      border: var(--border-width-xs) solid var(--border-primary);
+    }
+
+    &__arrow {
+      flex-shrink: 0;
+      margin-left: auto;
+      padding-left: var(--nui-action-menu-arrow-padding-left);
+      display: flex;
+      align-items: center;
+    }
+
+    &:focus:not(&--disabled),
+    &:active:not(&--disabled),
+    &:hover:not(&--disabled),
+    &:active:not(&--disabled) {
+      background-color: var(--color-primary-tint-95);
+      color: var(--color-primary);
+      outline: none;
+
+      .nui-action-menu__item__icon,
+      .nui-action-menu__item__shortcut,
+      .nui-action-menu__item__arrow {
+        color: var(--color-primary);
+        border-color: var(--color-primary-tint-65);
+      }
+    }
+
+    &[disabled],
+    &:disabled,
+    &--disabled {
+      @include mixins.disabled;
+    }
+  }
+
+  .nui-action-menu__item,
+  .nui-action-menu-submenu__item {
+    @include mixins.component-size(md);
+  }
+  .nui-action-menu__item__shortcut {
+    font-size: var(--component-font-size-xs);
+    line-height: var(--component-font-size-xs);
+  }
+
+  // ====================
+  // TEMAS - Generación automática usando mixins
+  // ====================
+  $colors: primary, secondary, success, info, warning, danger, accent;
+  @each $color in $colors {
+    @include mixins.action-menu-theme($color);
+  }
+}
+
+// ====================
+// SUBMENU - Estilos específicos
+// ====================
+.nui-action-menu-submenu {
+  &__item {
+    gap: var(--nui-action-menu-item-gap);
+
+    &__container {
+      display: flex;
+      align-items: center;
+      gap: var(--nui-action-menu-item-gap);
+      flex: 1 1 auto;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    &__label {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+      flex: 1;
+      min-width: 0;
+    }
+
+    &__shortcut {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--surface-tertiary);
+      color: var(--text-secondary);
+      padding: var(--spacing-xs);
+      border-radius: var(--border-radius-md);
+      border: var(--border-width-xs) solid var(--border-primary);
+      margin-left: auto;
+    }
+  }
+}

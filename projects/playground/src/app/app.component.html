@@ -56,4 +56,21 @@
     <h2>Buttons with Icons</h2>
     <nui-button-group [options]="buttonGroupsWithIcons"></nui-button-group>
   </section>
+
+  <section style="margin: 2rem 0">
+    <h2>Action Menu Example</h2>
+    <nui-action-menu
+      [items]="actionMenuItems"
+      [label]="'Acciones'"
+      [icon]="'ri-more-2-line'"
+      (onItemAction)="onActionSelected($event)"
+    />
+    <nui-action-menu
+      [type]="'static'"
+      [items]="actionMenuItems"
+      [label]="'Acciones'"
+      [icon]="'ri-more-2-line'"
+      (onItemAction)="onActionSelected($event)"
+    />
+  </section>
 </div>

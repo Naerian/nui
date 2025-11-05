@@ -1,0 +1,76 @@
+<div
+  class="nui-action-menu-submenu nui-action-menu-submenu--{{ size }}"
+  cdkMenu
+  role="menu"
+  [attr.aria-orientation]="'vertical'"
+>
+  @for (item of items; track item.id) {
+    @if (!item.children) {
+      <button
+        class="nui-action-menu-submenu__item nui-action-menu-submenu__item--action"
+        cdkMenuItem
+        [disabled]="item.disabled"
+        (cdkMenuItemTriggered)="onItemClick(item)"
+        [attr.aria-label]="item.title || item.label"
+        role="menuitem"
+        type="button"
+      >
+        @if (item.icon) {
+          <i [class]="item.icon" class="nui-action-menu__item__icon"></i>
+        }
+        @if (item.templateRef && !item.label) {
+          <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
+        } @else {
+          <span class="nui-action-menu-submenu__item__label">{{
+            item.label
+          }}</span>
+        }
+        @if (item.shortcut) {
+          <span class="nui-action-menu-submenu__item__shortcut">{{
+            item.shortcut
+          }}</span>
+        }
+      </button>
+    }
+
+    @if (item.children) {
+      <button
+        class="nui-action-menu-submenu__item nui-action-menu-submenu__item--submenu"
+        [cdkMenuTriggerFor]="subMenuTemplate"
+        [cdkMenuTriggerData]="{ item: item }"
+        cdkMenuItem
+        [disabled]="item.disabled"
+        [attr.aria-label]="item.title || item.label"
+        [attr.aria-haspopup]="'menu'"
+        [attr.aria-expanded]="false"
+        role="menuitem"
+        type="button"
+      >
+        <div class="nui-action-menu-submenu__item__container">
+          @if (item.icon) {
+            <i [class]="item.icon" class="nui-action-menu__item__icon"></i>
+          }
+          @if (item.templateRef && !item.label) {
+            <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
+          } @else {
+            <span class="nui-action-menu-submenu__item__label">{{
+              item.label
+            }}</span>
+          }
+        </div>
+        <span class="nui-action-menu-submenu__item__arrow">
+          <i [class]="iconSubmenu"></i>
+        </span>
+      </button>
+    }
+  }
+</div>
+
+<ng-template #subMenuTemplate let-item="item">
+  <nui-action-menu-submenu
+    (onItemAction)="onItemAction.emit($event)"
+    [iconSubmenu]="iconSubmenu"
+    [size]="size"
+    [items]="item.children"
+  ></nui-action-menu-submenu>
+</ng-template>

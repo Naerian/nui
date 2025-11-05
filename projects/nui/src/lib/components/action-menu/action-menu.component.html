@@ -1,0 +1,113 @@
+@if (type === "dynamic") {
+  <button
+    nuiButton
+    [cdkMenuTriggerFor]="actionMenu"
+    (cdkMenuOpened)="onMenuOpened()"
+    (cdkMenuClosed)="onMenuClosed()"
+    [icon]="icon"
+    [iconPosition]="iconPosition"
+    [width]="width"
+    [color]="effectiveColor"
+    [size]="effectiveSize"
+    [variant]="effectiveVariant"
+    [disabled]="disabled"
+    [title]="title || label || ''"
+    [attr.aria-label]="ariaLabel || label || title || ''"
+    type="button"
+  >
+    @if (label) {
+      {{ label }}
+    }
+  </button>
+} @else {
+  <ng-container *ngTemplateOutlet="actionMenu"></ng-container>
+}
+
+<ng-template #actionMenu>
+  <div
+    class="
+      nui-action-menu 
+      nui-action-menu--{{ effectiveVariant }} 
+      nui-action-menu--{{ color }}
+    "
+    [class.nui-action-menu--static]="type === 'static'"
+    [class.nui-action-menu--dynamic]="type === 'dynamic'"
+    cdkMenu
+    [@fadeInOutScale]
+    role="menu"
+    [attr.aria-orientation]="'vertical'"
+  >
+    @for (item of mergedItems; track item.id) {
+      @if (!item.children) {
+        <button
+          class="nui-action-menu__item nui-action-menu__item--action"
+          cdkMenuItem
+          [disabled]="item.disabled"
+          (cdkMenuItemTriggered)="onItemClick(item)"
+          [attr.aria-label]="item.title || item.label"
+          role="menuitem"
+          type="button"
+        >
+          <div
+            class="nui-action-menu__item__container"
+            [class.nui-action-menu__item__container--icon]="item.icon"
+          >
+            @if (item.icon) {
+              <i [class]="item.icon" class="nui-action-menu__item__icon"></i>
+            }
+            @if (item.templateRef && !item.label) {
+              <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
+            } @else {
+              <span class="nui-action-menu__item__label">{{ item.label }}</span>
+            }
+          </div>
+          @if (item.shortcut) {
+            <span class="nui-action-menu__item__shortcut">{{
+              item.shortcut
+            }}</span>
+          }
+        </button>
+      }
+
+      @if (item.children) {
+        <button
+          class="nui-action-menu__item nui-action-menu__item--submenu"
+          [cdkMenuTriggerFor]="subMenuTemplate"
+          [cdkMenuTriggerData]="{ item: item }"
+          cdkMenuItem
+          [disabled]="item.disabled"
+          [attr.aria-label]="item.title || item.label"
+          [attr.aria-haspopup]="'menu'"
+          [attr.aria-expanded]="false"
+          role="menuitem"
+          type="button"
+        >
+          <div
+            class="nui-action-menu__item__container"
+            [class.nui-action-menu__item__container--icon]="item.icon"
+          >
+            @if (item.icon) {
+              <i [class]="item.icon" class="nui-action-menu__item__icon"></i>
+            }
+            @if (item.templateRef && !item.label) {
+              <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
+            } @else {
+              <span class="nui-action-menu__item__label">{{ item.label }}</span>
+            }
+          </div>
+          <span class="nui-action-menu__item__arrow">
+            <i [class]="iconSubmenu"></i>
+          </span>
+        </button>
+      }
+    }
+  </div>
+</ng-template>
+
+<ng-template #subMenuTemplate let-item="item">
+  <nui-action-menu-submenu
+    (onItemAction)="onItemClick($event)"
+    [iconSubmenu]="iconSubmenu"
+    [items]="item.children"
+  ></nui-action-menu-submenu>
+</ng-template>

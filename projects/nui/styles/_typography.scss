@@ -27,7 +27,7 @@ h6 {
   margin-top: 0;
   margin-bottom: var(--spacing-md);
   line-height: 1.2;
-  color: var(--color-text-heading);
+  color: var(--text-primary-heading);
 }
 
 h1 {
@@ -60,7 +60,7 @@ h6 {
 
 small {
   font-size: var(--font-size-s); // 12px
-  color: var(--color-text-muted);
+  color: var(--text-primary-muted);
 }
 
 p {

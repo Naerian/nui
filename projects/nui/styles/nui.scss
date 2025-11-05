@@ -25,4 +25,5 @@
 //------------------------------------------------------------
 // ## 5. Componentes globales (CDK Overlay, etc.)
 //------------------------------------------------------------
+@use '@angular/cdk/overlay-prebuilt.css';
 @use "components/components"; // Estilos globales de componentes

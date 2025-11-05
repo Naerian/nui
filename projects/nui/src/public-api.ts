@@ -14,3 +14,4 @@ export * from './lib/components/paginator';
 export * from './lib/components/popover';
 export * from './lib/components/toast';
 export * from './lib/components/tooltip';
+export * from './lib/components/action-menu';

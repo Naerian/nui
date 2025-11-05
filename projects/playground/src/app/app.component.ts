@@ -1,13 +1,29 @@
 import { Component } from '@angular/core';
-import { ButtonComponent, ButtonGroupComponent, ButtonGroupOption } from 'nui';
-import { ThemeService, aura, dopamine, corporate, minimal, neon, warm, sunset, twilight } from 'nui';
+import {
+  ActionMenuItem,
+  ButtonComponent,
+  ButtonGroupComponent,
+  ButtonGroupOption,
+  ActionMenuModule,
+} from 'nui';
+import {
+  ThemeService,
+  aura,
+  dopamine,
+  corporate,
+  minimal,
+  neon,
+  warm,
+  sunset,
+  twilight,
+} from 'nui';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ButtonComponent, ButtonGroupComponent, ],
+  imports: [ButtonComponent, ButtonGroupComponent, ActionMenuModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'NUI Theme System - Hybrid Approach';
@@ -30,10 +46,54 @@ export class AppComponent {
     { label: 'Right', value: 'right', icon: 'ri-arrow-up-line' },
   ];
 
+  actionMenuItems = [
+    { label: 'Ver detalles', icon: 'ri-eye-line', action: 'view' },
+    { label: 'Editar', icon: 'ri-edit-line', action: 'edit' },
+    { label: 'Descargar', icon: 'ri-download-2-line', action: 'download' },
+    { label: 'Archivar', icon: 'ri-archive-line', action: 'archive' },
+    { label: 'Eliminar', icon: 'ri-delete-bin-line', action: 'delete' },
+  ];
+
+  menuItems: ActionMenuItem[] = [
+    {
+      label: 'Copiar',
+      icon: 'ri-file-copy-line',
+      onAction: () => this.copyToClipboard(),
+    },
+    {
+      label: 'Pegar',
+      icon: 'ri-clipboard-line',
+      onAction: () => this.pasteFromClipboard(),
+    },
+  ];
+
   constructor(private themeService: ThemeService) {}
 
   switchTheme(presetName: string) {
-    const presets: any = { aura, dopamine, corporate, minimal, neon, warm, sunset, twilight };
+    const presets: any = {
+      aura,
+      dopamine,
+      corporate,
+      minimal,
+      neon,
+      warm,
+      sunset,
+      twilight,
+    };
     this.themeService.usePreset(presets[presetName]);
+  }
+
+  onActionSelected(action: ActionMenuItem) {
+    console.log(`Acción seleccionada: ${action}`);
+  }
+
+  private copyToClipboard() {
+    // Lógica de copiar
+    console.log('Copiado al portapapeles');
+  }
+
+  private pasteFromClipboard() {
+    // Lógica de pegar
+    console.log('Pegado desde portapapeles');
   }
 }

@@ -32,7 +32,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--surface-primary);
+    background: var(--bg-primary);
     border-width: var(--border-width-xs);
     border-style: solid;
     border-color: var(--border-primary);
@@ -195,7 +195,7 @@
 
     // Estado seleccionado con fondo blanco y sombra
     &--selected {
-      background-color: var(--surface-primary);
+      background-color: var(--bg-primary);
       color: var(--text-primary);
       position: relative;
       z-index: var(--button-group-z-index-selected);
