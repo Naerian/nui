@@ -77,7 +77,7 @@ a {
 // FOCUS STATES
 // ==========================================
 :focus-visible {
-  outline: 2px solid var(--nui-color-focus-ring);
+  outline: 2px solid var(--nui-focus-ring-color);
   outline-offset: 2px;
 }
 
@@ -85,7 +85,7 @@ a {
 // SELECTION
 // ==========================================
 ::selection {
-  background-color: var(--nui-color-selection);
+  background-color: var(--nui-color-selection-bg);
   color: var(--nui-text-primary);
 }
 

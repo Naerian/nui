@@ -197,6 +197,9 @@ export class ThemeService {
   --nui-focus-ring-width: 2px;
   --nui-focus-ring-offset: 2px;
 
+  /* Text selection */
+  --nui-color-selection-bg: ${isDark ? grays[500] : grays[200]};
+
   /* Overlay & Backdrop */
   --nui-overlay-bg: ${isDark ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.5)'};
   --nui-color-backdrop: ${isDark ? 'rgba(0, 0, 0, 0.75)' : 'rgba(0, 0, 0, 0.5)'};

@@ -10,7 +10,7 @@ Modern, flexible UI component library for Angular 17+ with hybrid theming system
 # Install dependencies
 npm install
 
-# Start playground dev server
+# Start showcase dev server
 npm start
 
 # Build library (includes CSS compilation)
@@ -50,7 +50,7 @@ nui/
 │   │       ├── themes/         # Theme mixins
 │   │       ├── components/     # Component styles
 │   │       └── variables/      # CSS variable definitions
-│   └── playground/             # Development/testing app
+│   └── showcase/             # Development/testing app
 ├── dist/
 │   └── nui/
 │       ├── styles/
@@ -89,10 +89,10 @@ See [Theme System Documentation](./projects/nui/src/lib/themes/README.md) for de
 
 | Command | Description |
 |---------|-------------|
-| `npm start` | Start playground dev server |
+| `npm start` | Start showcase dev server |
 | `npm run build:nui` | Build library + compile CSS |
 | `npm run build:styles` | Compile SCSS to CSS only |
-| `npm run build:play` | Build playground app |
+| `npm run build:play` | Build showcase app |
 | `npm run test:nui` | Run library tests |
 
 ## 🏗️ Build Process
@@ -117,7 +117,7 @@ npm run build:nui
 
 1. Create a feature branch from `migrate/core-foundations`
 2. Make your changes
-3. Test in playground: `npm start`
+3. Test in showcase: `npm start`
 4. Build library: `npm run build:nui`
 5. Submit a pull request
 

@@ -10,7 +10,7 @@ nui/
 │   ├── nui/              # Código de la librería
 │   │   ├── src/          # Componentes TypeScript
 │   │   └── styles/       # Estilos SCSS
-│   └── playground/       # Aplicación de prueba/desarrollo
+│   └── showcase/       # Aplicación de prueba/desarrollo
 │       └── src/
 │           └── styles.scss
 ├── dist/
@@ -27,11 +27,11 @@ nui/
 ### Desarrollo
 
 ```bash
-# Iniciar servidor de desarrollo (playground)
+# Iniciar servidor de desarrollo (showcase)
 npm start
 
-# Esto ejecuta: ng serve playground
-# El playground usa SCSS directamente desde projects/nui/styles/
+# Esto ejecuta: ng serve showcase
+# El showcase usa SCSS directamente desde projects/nui/styles/
 ```
 
 ### Build
@@ -53,12 +53,12 @@ npm run test:nui
 
 ## Estilos en Desarrollo vs Producción
 
-### Durante Desarrollo (Playground)
+### Durante Desarrollo (Showcase)
 
-El playground importa SCSS directamente:
+El showcase importa SCSS directamente:
 
 ```scss
-// projects/playground/src/styles.scss
+// projects/showcase/src/styles.scss
 @import "../../nui/styles/nui";
 ```
 
@@ -88,7 +88,7 @@ Los usuarios tienen dos opciones:
 ### 1. Trabajar en componentes
 
 ```bash
-# 1. Inicia el playground
+# 1. Inicia el showcase
 npm start
 
 # 2. Edita archivos en projects/nui/src/
@@ -98,7 +98,7 @@ npm start
 ### 2. Trabajar en estilos
 
 ```bash
-# 1. Inicia el playground
+# 1. Inicia el showcase
 npm start
 
 # 2. Edita archivos en projects/nui/styles/
@@ -126,9 +126,9 @@ npm publish
 
 ### Error: "Could not resolve node_modules/nui/styles/nui.css"
 
-**Problema:** Estás intentando usar `node_modules/nui/styles/nui.css` en el playground.
+**Problema:** Estás intentando usar `node_modules/nui/styles/nui.css` en el showcase.
 
-**Solución:** En el playground, usa la ruta relativa:
+**Solución:** En el showcase, usa la ruta relativa:
 ```scss
 @import "../../nui/styles/nui";
 ```
@@ -148,7 +148,7 @@ npm run build:nui
 
 **Problema:** Estás usando el CSS compilado en lugar del SCSS.
 
-**Solución:** En el playground, asegúrate de importar SCSS:
+**Solución:** En el showcase, asegúrate de importar SCSS:
 ```scss
 @import "../../nui/styles/nui";
 ```
@@ -228,7 +228,7 @@ Edita `_remixicon.scss` y usa `@font-face` con rutas locales.
 ## Contribuir
 
 1. Crea una rama: `git checkout -b feature/mi-feature`
-2. Desarrolla en el playground
+2. Desarrolla en el showcase
 3. Ejecuta tests: `npm run test:nui`
 4. Build: `npm run build:nui`
 5. Commit y push
