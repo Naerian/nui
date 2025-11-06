@@ -1,0 +1,58 @@
+// Import NUI complete bundle
+@import '../../nui/styles/nui-bundle.scss';
+
+// Import Bootstrap Grid & Utilities only
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+@import 'bootstrap/scss/root';
+@import 'bootstrap/scss/containers';
+@import 'bootstrap/scss/grid';
+@import 'bootstrap/scss/helpers';
+
+// Global reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--nui-bg-secondary);
+  color: var(--nui-text-primary);
+  line-height: 1.6;
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--nui-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--nui-border-primary);
+  border-radius: 5px;
+  
+  &:hover {
+    background: var(--nui-text-tertiary);
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--nui-border-primary) var(--nui-bg-secondary);
+}
+

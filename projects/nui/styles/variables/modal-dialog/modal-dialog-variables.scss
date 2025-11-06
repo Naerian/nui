@@ -1,0 +1,120 @@
+@use "modal-dialog-tokens" as tokens;
+
+// ========================================
+// MODAL DIALOG - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Modal Dialog.
+// Se incluyen a través del mixin nui-modal-dialog-vars.
+//
+// Uso:
+// ```scss
+// :root {
+//   @include nui-modal-dialog-vars;
+// }
+// ```
+//
+// ========================================
+
+@mixin nui-modal-dialog-vars {
+  // Dimensiones
+  --nui-modal-min-width: #{tokens.$modal-min-width};
+  --nui-modal-max-width: #{tokens.$modal-max-width};
+  --nui-modal-padding: #{tokens.$modal-padding};
+  --nui-modal-gap: #{tokens.$modal-gap};
+
+  // Bordes y radios
+  --nui-modal-border-radius: #{tokens.$modal-border-radius};
+  --nui-modal-border: #{tokens.$modal-border};
+  --nui-modal-shadow: #{tokens.$modal-shadow};
+
+  // Botón de cierre
+  --nui-modal-close-position: #{tokens.$modal-close-position};
+  --nui-modal-close-z-index: #{tokens.$modal-close-z-index};
+
+  // Título
+  --nui-modal-title-font-size: #{tokens.$modal-title-font-size};
+  --nui-modal-title-font-family: #{tokens.$modal-title-font-family};
+  --nui-modal-title-font-weight: #{tokens.$modal-title-font-weight};
+  --nui-modal-title-gap: #{tokens.$modal-title-gap};
+  --nui-modal-title-margin-bottom: #{tokens.$modal-title-margin-bottom};
+  --nui-modal-title-padding-bottom: #{tokens.$modal-title-padding-bottom};
+  --nui-modal-title-border-width: #{tokens.$modal-title-border-width};
+  --nui-modal-title-border-color: #{tokens.$modal-title-border-color};
+  --nui-modal-title-line-height: #{tokens.$modal-title-line-height};
+
+  // Título - Icono
+  --nui-modal-title-icon-size: #{tokens.$modal-title-icon-size};
+  --nui-modal-title-icon-line-height: #{tokens.$modal-title-icon-line-height};
+
+  // Cuerpo
+  --nui-modal-body-font-size: #{tokens.$modal-body-font-size};
+  --nui-modal-body-font-family: #{tokens.$modal-body-font-family};
+  --nui-modal-body-line-height: #{tokens.$modal-body-line-height};
+  --nui-modal-body-paragraph-margin: #{tokens.$modal-body-paragraph-margin};
+  --nui-modal-body-list-margin: #{tokens.$modal-body-list-margin};
+  --nui-modal-body-list-padding: #{tokens.$modal-body-list-padding};
+
+  // Footer
+  --nui-modal-footer-margin-top: #{tokens.$modal-footer-margin-top};
+  --nui-modal-footer-gap: #{tokens.$modal-footer-gap};
+  --nui-modal-footer-gap-mobile: #{tokens.$modal-footer-gap-mobile};
+  --nui-modal-footer-min-height: #{tokens.$modal-footer-min-height};
+  --nui-modal-footer-mobile-breakpoint: #{tokens.$modal-footer-mobile-breakpoint};
+
+  // Custom templates
+  --nui-modal-custom-header-margin: #{tokens.$modal-custom-header-margin};
+  --nui-modal-custom-body-margin: #{tokens.$modal-custom-body-margin};
+  --nui-modal-custom-footer-margin: #{tokens.$modal-custom-footer-margin};
+
+  // Progress bar
+  --nui-modal-progress-height: #{tokens.$modal-progress-height};
+  --nui-modal-progress-bg: #{tokens.$modal-progress-bg};
+  --nui-modal-progress-border-radius: #{tokens.$modal-progress-border-radius};
+  --nui-modal-progress-z-index: #{tokens.$modal-progress-z-index};
+  --nui-modal-progress-fill-bg: #{tokens.$modal-progress-fill-bg};
+  --nui-modal-progress-transition: #{tokens.$modal-progress-transition};
+  --nui-modal-progress-pulse-duration: #{tokens.$modal-progress-pulse-duration};
+  --nui-modal-progress-pulse-easing: #{tokens.$modal-progress-pulse-easing};
+  --nui-modal-progress-pulse-opacity-min: #{tokens.$modal-progress-pulse-opacity-min};
+
+  // Countdown
+  --nui-modal-countdown-font-size: #{tokens.$modal-countdown-font-size};
+  --nui-modal-countdown-font-weight: #{tokens.$modal-countdown-font-weight};
+  --nui-modal-countdown-line-height: #{tokens.$modal-countdown-line-height};
+  --nui-modal-countdown-bg: #{tokens.$modal-countdown-bg};
+  --nui-modal-countdown-padding: #{tokens.$modal-countdown-padding};
+  --nui-modal-countdown-border-radius: #{tokens.$modal-countdown-border-radius};
+  --nui-modal-countdown-min-width: #{tokens.$modal-countdown-min-width};
+  --nui-modal-countdown-margin-left: #{tokens.$modal-countdown-margin-left};
+
+  // Loading
+  --nui-modal-loading-gap: #{tokens.$modal-loading-gap};
+  --nui-modal-loading-padding: #{tokens.$modal-loading-padding};
+  --nui-modal-loading-min-height: #{tokens.$modal-loading-min-height};
+  --nui-modal-loading-message-size: #{tokens.$modal-loading-message-size};
+  --nui-modal-loading-message-line-height: #{tokens.$modal-loading-message-line-height};
+
+  // With timeout
+  --nui-modal-with-timeout-padding-top: #{tokens.$modal-with-timeout-padding-top};
+
+  // Verification
+  --nui-modal-verification-gap: #{tokens.$modal-verification-gap};
+  --nui-modal-verification-margin-top: #{tokens.$modal-verification-margin-top};
+  --nui-modal-verification-label-size: #{tokens.$modal-verification-label-size};
+  --nui-modal-verification-label-weight: #{tokens.$modal-verification-label-weight};
+  --nui-modal-verification-label-line-height: #{tokens.$modal-verification-label-line-height};
+  --nui-modal-verification-container-gap: #{tokens.$modal-verification-container-gap};
+  --nui-modal-verification-container-padding: #{tokens.$modal-verification-container-padding};
+  --nui-modal-verification-container-radius: #{tokens.$modal-verification-container-radius};
+  --nui-modal-verification-container-border: #{tokens.$modal-verification-container-border};
+  --nui-modal-verification-text-label-size: #{tokens.$modal-verification-text-label-size};
+  --nui-modal-verification-text-label-weight: #{tokens.$modal-verification-text-label-weight};
+  --nui-modal-verification-text-family: #{tokens.$modal-verification-text-family};
+  --nui-modal-verification-text-weight: #{tokens.$modal-verification-text-weight};
+  --nui-modal-verification-text-size: #{tokens.$modal-verification-text-size};
+  --nui-modal-verification-text-line-height: #{tokens.$modal-verification-text-line-height};
+  --nui-modal-verification-text-letter-spacing: #{tokens.$modal-verification-text-letter-spacing};
+  --nui-modal-verification-error-size: #{tokens.$modal-verification-error-size};
+  --nui-modal-verification-error-margin-top: #{tokens.$modal-verification-error-margin-top};
+}

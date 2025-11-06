@@ -1,93 +1,82 @@
-@import "colors";
+@use "colors";
 
 // =======================
 // TIPOGRAFÍA
 // =======================
-$font-family:
-  "Inter",
-  "OpenSans",
-  system-ui,
-  -apple-system,
-  "Segoe UI",
-  Roboto,
-  "Helvetica Neue",
-  Arial,
-  sans-serif,
-  "Apple Color Emoji",
-  "Segoe UI Emoji",
-  "Noto Color Emoji";
+$font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji" !default;
 
 // Body text sizes - Escala moderna con base 16px
-$font-size-xs: 0.75rem; // 12px - Mínimo legible (labels, captions, badges)
-$font-size-s: 0.875rem; // 14px - Compacto (tablas, metadatos, UI densa)
-$font-size-sm: 0.9375rem; // 15px - Pequeño-medio (alternativa suave)
-$font-size-md: 1rem; // 16px - BASE ESTÁNDAR (body, inputs, buttons)
-$font-size-lg: 1.125rem; // 18px - Grande (énfasis, lead paragraphs)
-$font-size-xl: 1.25rem; // 20px - Extra grande (subtítulos, destacados)
+$font-size-xs: 0.75rem !default; // 12px - Mínimo legible (labels, captions, badges)
+$font-size-s: 0.875rem !default; // 14px - Compacto (tablas, metadatos, UI densa)
+$font-size-sm: 0.9375rem !default; // 15px - Pequeño-medio (alternativa suave)
+$font-size-md: 1rem !default; // 16px - BASE ESTÁNDAR (body, inputs, buttons)
+$font-size-lg: 1.125rem !default; // 18px - Grande (énfasis, lead paragraphs)
+$font-size-xl: 1.25rem !default; // 20px - Extra grande (subtítulos, destacados)
 
 // Display/Heading sizes - Escala modular 1.25 (ratio de quinta perfecta)
-$font-size-h6: 1rem; // 16px - Heading mínimo (igual que body)
-$font-size-h5: 1.25rem; // 20px - Minor heading
-$font-size-h4: 1.5rem; // 24px - Section heading
-$font-size-h3: 1.875rem; // 30px - Major heading
-$font-size-h2: 2.25rem; // 36px - Page heading
-$font-size-h1: 3rem; // 48px - Hero heading
+$font-size-h6: 1rem !default; // 16px - Heading mínimo (igual que body)
+$font-size-h5: 1.25rem !default; // 20px - Minor heading
+$font-size-h4: 1.5rem !default; // 24px - Section heading
+$font-size-h3: 1.875rem !default; // 30px - Major heading
+$font-size-h2: 2.25rem !default; // 36px - Page heading
+$font-size-h1: 3rem !default; // 48px - Hero heading
 
 // Font weights - Estándar de la industria (perfecto para Inter)
-$font-weight-regular: 400; // Normal text
-$font-weight-medium: 500; // Emphasis
-$font-weight-semibold: 600; // Strong emphasis
-$font-weight-bold: 700; // Maximum emphasis
-$font-weight-extrabold: 800; // Opcional para casos especiales (Inter soporta 100-900)
+$font-weight-regular: 400 !default; // Normal text
+$font-weight-medium: 500 !default; // Emphasis
+$font-weight-semibold: 600 !default; // Strong emphasis
+$font-weight-bold: 700 !default; // Maximum emphasis
+$font-weight-extrabold: 800 !default; // Opcional para casos especiales (Inter soporta 100-900)
 
 // Line heights para headings - Decreciente (a mayor font-size, menor line-height)
-$line-height-h1: 1.1; // 48px - Muy compacto (títulos hero impactantes)
-$line-height-h2: 1.2; // 36px - Compacto (títulos de página)
-$line-height-h3: 1.25; // 30px - Ajustado (secciones importantes)
-$line-height-h4: 1.3; // 24px - Medio (subsecciones)
-$line-height-h5: 1.4; // 20px - Cómodo (títulos menores)
-$line-height-h6: 1.5; // 16px - Espacioso (igual que body para armonía)
+$line-height-h1: 1.1 !default; // 48px - Muy compacto (títulos hero impactantes)
+$line-height-h2: 1.2 !default; // 36px - Compacto (títulos de página)
+$line-height-h3: 1.25 !default; // 30px - Ajustado (secciones importantes)
+$line-height-h4: 1.3 !default; // 24px - Medio (subsecciones)
+$line-height-h5: 1.4 !default; // 20px - Cómodo (títulos menores)
+$line-height-h6: 1.5 !default; // 16px - Espacioso (igual que body para armonía)
 
 // Line heights para body text - Progresivo (legibilidad óptima)
-$line-height-xs: 1.4; // 12px - Legible (antes 1.2 muy apretado)
-$line-height-s: 1.5; // 14px - Cómodo (tablas, UI compacta)
-$line-height-sm: 1.5; // 15px - Estándar (textos secundarios)
-$line-height-md: 1.5; // 16px - BASE (óptimo para lectura prolongada)
-$line-height-lg: 1.6; // 18px - Espacioso (lead paragraphs, mejor legibilidad)
-$line-height-xl: 1.6; // 20px - Muy espacioso (destacados)
+$line-height-xs: 1.4 !default; // 12px - Legible (antes 1.2 muy apretado)
+$line-height-s: 1.5 !default; // 14px - Cómodo (tablas, UI compacta)
+$line-height-sm: 1.5 !default; // 15px - Estándar (textos secundarios)
+$line-height-md: 1.5 !default; // 16px - BASE (óptimo para lectura prolongada)
+$line-height-lg: 1.6 !default; // 18px - Espacioso (lead paragraphs, mejor legibilidad)
+$line-height-xl: 1.6 !default; // 20px - Muy espacioso (destacados)
 // =======================
 // BORDES Y RADIOS
 // =======================
 
 // Border radius - Escala geométrica con md=8px como base
-$border-radius-xs: 0.125rem; // 2px  - Muy sutil (badges, tags)
-$border-radius-s: 0.25rem; // 4px  - Sutil (inputs pequeños)
-$border-radius-sm: 0.375rem; // 6px  - Medio-sutil (alternativa)
-$border-radius-md: 0.5rem; // 8px  - ESTÁNDAR (botones, inputs, cards)
-$border-radius-lg: 0.75rem; // 12px - Grande (cards, paneles)
-$border-radius-xl: 1rem; // 16px - Muy grande (elementos destacados)
+$border-radius-xs: 0.125rem !default; // 2px  - Muy sutil (badges, tags)
+$border-radius-s: 0.25rem !default; // 4px  - Sutil (inputs pequeños)
+$border-radius-sm: 0.375rem !default; // 6px  - Medio-sutil (alternativa)
+$border-radius-md: 0.5rem !default; // 8px  - ESTÁNDAR (botones, inputs, cards)
+$border-radius-lg: 0.75rem !default; // 12px - Grande (cards, paneles)
+$border-radius-xl: 1rem !default; // 16px - Muy grande (elementos destacados)
 
-$border-radius-circle: 50%; // 50% para círculos
-$border-radius-pill: 624.9375rem; // 9999px para píldoras/botones redondeados
+$border-radius-circle: 50% !default; // 50% para círculos
+$border-radius-pill: 624.9375rem !default; // 9999px para píldoras/botones redondeados
 
 // Border widths - Escala coherente con border-radius
-$border-width-xs: 0.0625rem; // 1px  - Extra fino (dividers, focus rings)
-$border-width-s: 0.125rem; // 2px  - Fino (bordes normales)
-$border-width-sm: 0.1875rem; // 3px  - Medio-fino (énfasis moderado)
-$border-width-md: 0.25rem; // 4px  - ESTÁNDAR (bordes destacados)
-$border-width-lg: 0.375rem; // 6px  - Grueso (decorativo)
-$border-width-xl: 0.5rem; // 8px  - Muy grueso (muy decorativo)
+$border-width-xs: 0.0625rem !default; // 1px  - Extra fino (dividers, focus rings)
+$border-width-s: 0.125rem !default; // 2px  - Fino (bordes normales)
+$border-width-sm: 0.1875rem !default; // 3px  - Medio-fino (énfasis moderado)
+$border-width-md: 0.25rem !default; // 4px  - ESTÁNDAR (bordes destacados)
+$border-width-lg: 0.375rem !default; // 6px  - Grueso (decorativo)
+$border-width-xl: 0.5rem !default; // 8px  - Muy grueso (muy decorativo)
 
 // =======================
 // ESPACIADOS
 // =======================
 // Escala moderna basada en múltiplos de 4px
-$spacing-xs: 0.25rem; // 4px  - Mínimo (gaps pequeños, márgenes mínimos)
-$spacing-s: 0.5rem; // 8px  - ESTÁNDAR (padding por defecto, gaps normales)
-$spacing-sm: 0.75rem; // 12px - Medio (padding moderado)
-$spacing-md: 1rem; // 16px - Grande (padding cards, secciones)
-$spacing-lg: 1.5rem; // 24px - Muy grande (separadores de sección)
-$spacing-xl: 2rem; // 32px - Extra grande (márgenes grandes)
+$spacing-xs: 0.25rem !default; // 4px  - Mínimo (gaps pequeños, márgenes mínimos)
+$spacing-s: 0.5rem !default; // 8px  - ESTÁNDAR (padding por defecto, gaps normales)
+$spacing-sm: 0.75rem !default; // 12px - Medio (padding moderado)
+$spacing-md: 1rem !default; // 16px - Grande (padding cards, secciones)
+$spacing-lg: 1.5rem !default; // 24px - Muy grande (separadores de sección)
+$spacing-xl: 2rem !default; // 32px - Extra grande (márgenes grandes)
 
 // =======================
 // COMPONENTES GENERALES
@@ -104,8 +93,9 @@ $component-heights: (
   // 44px  - Medio (campos destacados)
   lg: 3rem,
   // 48px  - Grande (botones importantes)
-  xl: 3.5rem, // 56px  - Extra grande (hero buttons)
-);
+  xl: 3.5rem,
+  // 56px  - Extra grande (hero buttons)
+) !default;
 
 // Paddings de componentes - Escala progresiva (vertical horizontal)
 $component-paddings: (
@@ -119,8 +109,9 @@ $component-paddings: (
   // 12px 16px - Medio (botones destacados)
   lg: $spacing-md $spacing-lg,
   // 16px 24px - Grande (cards, paneles)
-  xl: $spacing-sm $spacing-xl, // 12px 32px - Extra grande (hero sections)
-);
+  xl: $spacing-sm $spacing-xl,
+  // 12px 32px - Extra grande (hero sections)
+) !default;
 
 // Tamaños de fuente por tamaño de componente
 $component-font-sizes: (
@@ -130,7 +121,7 @@ $component-font-sizes: (
   md: $font-size-md,
   lg: $font-size-lg,
   xl: $font-size-xl,
-);
+) !default;
 
 $component-line-heights: (
   xs: $line-height-xs,
@@ -139,7 +130,7 @@ $component-line-heights: (
   md: $line-height-md,
   lg: $line-height-lg,
   xl: $line-height-xl,
-);
+) !default;
 
 // Pesos de fuente por tamaño - Progresión coherente
 $component-font-weights: (
@@ -153,46 +144,47 @@ $component-font-weights: (
   // 500 - Medio
   lg: $font-weight-semibold,
   // 600 - Grande
-  xl: $font-weight-bold, // 700 - Extra grande (diferenciado)
-);
+  xl: $font-weight-bold,
+  // 700 - Extra grande (diferenciado)
+) !default;
 
 // ========================================
 // SOMBRAS (SHADOWS)
 // ========================================
-$box-shadow-xs: 0 0 0 with-alpha(black, 0); // Sin sombra
-$box-shadow-s: shadow(0 1px 2px, 0.05);
-$box-shadow-sm: shadow-layers(((0 2px 4px, 0.05), (0 1px 3px, 0.07)));
-$box-shadow-md: shadow-layers(((0 4px 6px, 0.1), (0 1px 3px, 0.08)));
-$box-shadow-lg: shadow-layers(((0 10px 15px, 0.1), (0 4px 6px, 0.05)));
-$box-shadow-xl: shadow-layers(((0 20px 25px, 0.15), (0 10px 10px, 0.05)));
+$box-shadow-xs: 0 0 0 with-alpha(black, 0) !default; // Sin sombra
+$box-shadow-s: shadow(0 1px 2px, 0.05) !default;
+$box-shadow-sm: shadow-layers(((0 2px 4px, 0.05), (0 1px 3px, 0.07))) !default;
+$box-shadow-md: shadow-layers(((0 4px 6px, 0.1), (0 1px 3px, 0.08))) !default;
+$box-shadow-lg: shadow-layers(((0 10px 15px, 0.1), (0 4px 6px, 0.05))) !default;
+$box-shadow-xl: shadow-layers(((0 20px 25px, 0.15), (0 10px 10px, 0.05))) !default;
 
 // Shadows específicas de componentes
-$box-shadow-component: shadow(0 1px 2px, 0.05);
-$box-shadow-button-hover: shadow(0 2px 6px, 0.08);
+$box-shadow-component: shadow(0 1px 2px, 0.05) !default;
+$box-shadow-button-hover: shadow(0 2px 6px, 0.08) !default;
 
 // =======================
 // TRANSICIONES
 // =======================
-$transition-duration-fast: 0.1s;
-$transition-duration-normal: 0.15s;
-$transition-duration-slow: 0.2s;
-$transition-duration-base: 0.25s;
-$transition-timing-function-ease: ease;
-$transition-timing-function-linear: linear;
-$transition-timing-function-ease-in-out: ease-in-out;
+$transition-duration-fast: 0.1s !default;
+$transition-duration-normal: 0.15s !default;
+$transition-duration-slow: 0.2s !default;
+$transition-duration-base: 0.25s !default;
+$transition-timing-function-ease: ease !default;
+$transition-timing-function-linear: linear !default;
+$transition-timing-function-ease-in-out: ease-in-out !default;
 
 // =======================
 // RESPONSIVE BREAKPOINTS
 // =======================
 // Breakpoints estándar alineados con Bootstrap/Tailwind
-$breakpoint-xs: 0; // Extra small devices (portrait phones)
-$breakpoint-sm: 480px; // Small devices (landscape phones)
-$breakpoint-md: 768px; // Medium devices (tablets)
-$breakpoint-lg: 1024px; // Large devices (desktops)
-$breakpoint-xl: 1280px; // Extra large devices (large desktops)
-$breakpoint-xxl: 1536px; // Extra extra large devices (larger desktops)
+$breakpoint-xs: 0 !default; // Extra small devices (portrait phones)
+$breakpoint-sm: 480px !default; // Small devices (landscape phones)
+$breakpoint-md: 768px !default; // Medium devices (tablets)
+$breakpoint-lg: 1024px !default; // Large devices (desktops)
+$breakpoint-xl: 1280px !default; // Extra large devices (large desktops)
+$breakpoint-xxl: 1536px !default; // Extra extra large devices (larger desktops)
 
 // =======================
 // GO TO TOP
 // =======================
-$z-index-floating: 1000;
+$z-index-floating: 1000 !default;

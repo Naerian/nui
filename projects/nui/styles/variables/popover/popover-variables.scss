@@ -1,0 +1,45 @@
+@use "popover-tokens" as tokens;
+
+// ========================================
+// POPOVER - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Popover.
+// Se incluyen a través del mixin nui-popover-vars.
+//
+// ========================================
+
+@mixin nui-popover-vars {
+  // Espaciado
+  --popover-padding: #{tokens.$popover-padding};
+  --popover-max-width: #{tokens.$popover-max-width};
+  --popover-min-width: #{tokens.$popover-min-width};
+
+  // Tipografía
+  --popover-font-size: #{tokens.$popover-font-size};
+  --popover-font-weight: #{tokens.$popover-font-weight};
+  --popover-line-height: #{tokens.$popover-line-height};
+
+  // Bordes y radios
+  --popover-border-radius: #{tokens.$popover-border-radius};
+  --popover-border: #{tokens.$popover-border};
+
+  // Colores
+  --popover-bg: #{tokens.$popover-bg};
+  --popover-text: #{tokens.$popover-text};
+
+  // Sombra
+  --popover-shadow: #{tokens.$popover-shadow};
+
+  // Z-Index
+  --popover-z-index: #{tokens.$popover-z-index};
+
+  // Flecha
+  --popover-arrow-size: #{tokens.$popover-arrow-size};
+  --popover-arrow-border-width: #{tokens.$popover-arrow-border-width};
+  --popover-arrow-offset: #{tokens.$popover-arrow-offset};
+
+  // Animación
+  --popover-transition-duration: #{tokens.$popover-transition-duration};
+  --popover-transition-timing: #{tokens.$popover-transition-timing};
+}

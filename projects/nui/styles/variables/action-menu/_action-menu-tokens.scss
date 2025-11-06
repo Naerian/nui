@@ -1,0 +1,63 @@
+// ========================================
+// ACTION MENU - Tokens (SCSS Variables)
+// ========================================
+//
+// Variables SCSS centralizadas para personalizar el componente Action Menu.
+// Todas las variables usan !default para permitir sobrescritura.
+//
+// Cómo personalizar:
+// ------------------
+// 1. Define tus propias variables ANTES de importar este archivo
+// 2. Las variables SCSS ($action-menu-*) afectan todos los menus
+//
+// Ejemplo de personalización:
+// ```scss
+// // En tu archivo custom-variables.scss
+// $action-menu-min-width: 12rem;
+// $action-menu-arrow-padding: 0.75rem;
+//
+// @import "variables/action-menu/action-menu-tokens";
+// ```
+//
+// ========================================
+
+// ===== DIMENSIONES =====
+$action-menu-min-width: 12rem !default;
+$action-menu-max-width: 20rem !default;
+
+// ===== ESPACIADO =====
+$action-menu-item-gap: var(--spacing-sm) !default;
+$action-menu-item-border: none !default;
+$action-menu-arrow-padding-left: 0.5rem !default;
+$action-menu-item-label-margin-right: var(--spacing-md) !default;
+
+// ===== BORDES Y LAYOUT =====
+$action-menu-border-width: var(--border-width-xs) !default;
+$action-menu-border-color: var(--nui-border-primary) !default;
+$action-menu-border-radius: var(--border-radius-md) !default;
+$action-menu-padding: var(--spacing-xs) !default;
+$action-menu-item-border-radius: var(--border-radius-md) !default;
+
+// ===== COLORES =====
+$action-menu-bg: var(--nui-bg-primary) !default;
+$action-menu-item-bg: transparent !default;
+$action-menu-item-color: var(--nui-text-primary) !default;
+
+// ===== SHORTCUT =====
+$action-menu-shortcut-bg: var(--surface-tertiary) !default;
+$action-menu-shortcut-color: var(--nui-text-secondary) !default;
+$action-menu-shortcut-padding: var(--spacing-xs) !default;
+$action-menu-shortcut-border-width: var(--border-width-xs) !default;
+$action-menu-shortcut-border-color: var(--nui-border-primary) !default;
+$action-menu-shortcut-border-radius: var(--border-radius-md) !default;
+$action-menu-shortcut-font-size: var(--component-font-size-xs) !default;
+
+// ===== SOMBRAS =====
+$action-menu-shadow: var(--nui-shadow-elevated) !default;
+$action-menu-static-shadow: var(--nui-shadow-container) !default;
+
+// ===== ESTADOS HOVER/ACTIVE =====
+$action-menu-item-hover-bg: var(--nui-color-primary-tint-95) !default;
+$action-menu-item-hover-color: var(--nui-color-primary) !default;
+$action-menu-item-hover-icon-color: var(--nui-color-primary) !default;
+$action-menu-item-hover-border-color: var(--nui-color-primary-tint-65) !default;

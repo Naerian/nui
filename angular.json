@@ -33,35 +33,34 @@
         }
       }
     },
-    "playground": {
+    "showcase": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/playground",
-      "sourceRoot": "projects/playground/src",
+      "root": "projects/showcase",
+      "sourceRoot": "projects/showcase/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/playground",
-            "index": "projects/playground/src/index.html",
-            "browser": "projects/playground/src/main.ts",
+            "outputPath": "dist/showcase",
+            "index": "projects/showcase/src/index.html",
+            "browser": "projects/showcase/src/main.ts",
             "polyfills": ["zone.js"],
-            "tsConfig": "projects/playground/tsconfig.app.json",
+            "tsConfig": "projects/showcase/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "projects/playground/src/favicon.ico",
-              "projects/playground/src/assets"
+              "projects/showcase/src/favicon.ico",
+              "projects/showcase/src/assets"
             ],
-            "styles": ["projects/playground/src/styles.scss"],
-            "scripts": [],
-            "stylePreprocessorOptions": {
-              "includePaths": ["projects/nui/src/styles"]
-            }
+            "styles": [
+              "projects/showcase/src/styles.scss"
+            ],
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -91,10 +90,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "playground:build:production"
+              "buildTarget": "showcase:build:production"
             },
             "development": {
-              "buildTarget": "playground:build:development"
+              "buildTarget": "showcase:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -102,20 +101,20 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "playground:build"
+            "buildTarget": "showcase:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "polyfills": ["zone.js", "zone.js/testing"],
-            "tsConfig": "projects/playground/tsconfig.spec.json",
+            "tsConfig": "projects/showcase/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "projects/playground/src/favicon.ico",
-              "projects/playground/src/assets"
+              "projects/showcase/src/favicon.ico",
+              "projects/showcase/src/assets"
             ],
-            "styles": ["projects/playground/src/styles.scss"],
+            "styles": ["projects/showcase/src/styles.scss"],
             "scripts": []
           }
         }

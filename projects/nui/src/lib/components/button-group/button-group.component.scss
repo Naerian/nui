@@ -1,0 +1,259 @@
+@use "sass:map";
+@use "../../../../styles/config";
+@use "../../../../styles/mixins";
+@use "../../../../styles/variables/button-group/button-group-tokens" as button-group-tokens;
+@use "../../../../styles/variables/button-group/button-group-variables.scss" as button-group-vars;
+
+.nui-button-group {
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: var(--border-radius-md);
+  user-select: none;
+
+  &--full {
+    width: 100%;
+    .nui-button-group__option {
+      flex: 1; // Los botones ocupan el mismo espacio
+    }
+  }
+
+  &--fit {
+    width: fit-content;
+    .nui-button-group__option {
+      width: auto;
+    }
+  }
+
+  &--auto {
+    width: auto;
+  }
+
+  &__option {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--nui-bg-primary);
+    border-width: var(--border-width-xs);
+    border-style: solid;
+    border-color: var(--nui-border-primary);
+    color: var(--nui-text-secondary);
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--transition-duration-fast)
+      var(--transition-timing-function-ease);
+    white-space: nowrap;
+    position: relative;
+    z-index: var(--nui-button-group-z-index-base);
+
+    // Eliminamos el doble borde entre botones
+    & + .nui-button-group__option {
+      border-left-color: transparent;
+    }
+
+    // Primer botón: border-radius izquierdo
+    &:first-child {
+      border-top-left-radius: var(--border-radius-md);
+      border-bottom-left-radius: var(--border-radius-md);
+    }
+
+    // Último botón: border-radius derecho, sin borde derecho
+    &:last-child {
+      border-top-right-radius: var(--border-radius-md);
+      border-bottom-right-radius: var(--border-radius-md);
+    }
+
+    &:hover:not(&--disabled):not(&--selected) {
+      background-color: var(--surface-secondary);
+      color: var(--nui-text-primary);
+      z-index: var(--nui-button-group-z-index-hover);
+    }
+
+    &--selected {
+      background-color: var(--nui-color-primary);
+      color: var(--nui-color-on-primary);
+      border-color: var(--nui-color-primary);
+      border-width: var(--border-width-xs);
+      border-style: solid;
+      z-index: var(--nui-button-group-z-index-selected);
+
+      // Ocultar el borde derecho del botón anterior cuando este está seleccionado
+      + .nui-button-group__option {
+        border-left-color: transparent;
+      }
+    }
+
+    &--disabled {
+      opacity: var(--nui-button-group-disabled-opacity);
+      cursor: not-allowed;
+    }
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    line-height: var(--line-height-md);
+  }
+
+  // Estado disabled del contenedor
+  &--disabled {
+    opacity: var(--nui-button-group-container-disabled-opacity);
+    pointer-events: none;
+  }
+
+  // ==================
+  // VARIANTES DE COLOR Y ESTILO
+  // ==================
+
+  // Generar variantes automáticamente usando mixin
+  // Generación automática de variantes usando mixin (reduce ~85% de código)
+  $colors: primary, secondary, success, info, warning, danger, accent;
+  @each $color in $colors {
+    @include mixins.button-group-colors(solid, $color);
+    @include mixins.button-group-colors(outline, $color);
+    @include mixins.button-group-colors(ghost, $color);
+  }
+
+  // ==================
+  // ICON ONLY MODE
+  // ==================
+
+  &--icon-only {
+    .nui-button-group__option {
+      aspect-ratio: 1; // Botones cuadrados
+    }
+
+    .nui-button-group__icon {
+      margin: 0; // Centrar icono
+    }
+  }
+}
+
+// ==================
+// SIZE VARIANTS
+// ==================
+
+@each $size-key, $size-config in button-group-tokens.$button-group-sizes {
+  .nui-button-group--#{$size-key} {
+    .nui-button-group__option {
+      height: var(
+        --component-height-#{$size-key},
+        #{map.get($size-config, height)}
+      );
+      padding: var(
+        --component-padding-#{$size-key},
+        #{map.get($size-config, padding)}
+      );
+      font-size: var(
+        --component-font-size-#{$size-key},
+        #{map.get($size-config, font-size)}
+      );
+      gap: map.get($size-config, gap);
+    }
+
+    .nui-button-group__icon {
+      font-size: var(
+        --nui-button-group-icon-size-#{$size-key},
+        #{map.get($size-config, icon-size)}
+      );
+    }
+  }
+}
+
+// ==================
+// MODO SEGMENTED
+// ==================
+// Estilo iOS/Toggle: botones con fondo contenedor y espaciado interno
+
+.nui-button-group--segmented {
+  gap: var(--nui-button-group-segmented-gap);
+  background-color: var(--surface-secondary);
+  padding: var(--nui-button-group-segmented-padding);
+  border: var(--border-width-xs) solid var(--nui-border-primary);
+  border-radius: var(--border-radius-md);
+
+  .nui-button-group__option {
+    background: transparent;
+    border-width: var(--border-width-xs);
+    border-style: solid;
+    border-color: var(--nui-border-primary);
+    border-radius: calc(
+      var(--border-radius-md) - var(--nui-button-group-segmented-padding)
+    );
+    margin: 0;
+
+    // Hover más sutil en modo segmented
+    &:hover:not(&--disabled):not(&--selected) {
+      background-color: var(--surface-tertiary);
+      color: var(--nui-text-primary);
+    }
+
+    // Estado seleccionado con fondo blanco y sombra
+    &--selected {
+      background-color: var(--nui-bg-primary);
+      color: var(--nui-text-primary);
+      position: relative;
+      z-index: var(--nui-button-group-z-index-selected);
+    }
+
+    // No hay bordes redondeados especiales en primer/último
+    &:first-child,
+    &:last-child {
+      border-radius: calc(
+        var(--border-radius-md) - var(--nui-button-group-segmented-padding)
+      );
+    }
+  }
+
+  // Generar variantes automáticamente usando mixin
+  // Generación automática de variantes usando mixin (reduce ~85% de código)
+  $colors: primary, secondary, success, info, warning, danger, accent;
+  @each $color in $colors {
+    @include mixins.button-group-segmented-colors(solid, $color);
+    @include mixins.button-group-segmented-colors(outline, $color);
+    @include mixins.button-group-segmented-colors(ghost, $color);
+  }
+}
+
+// ==================
+// ANIMATIONS
+// ==================
+
+@keyframes buttonGroupFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(var(--nui-button-group-animation-scale-from));
+  }
+  to {
+    opacity: 1;
+    transform: scale(var(--nui-button-group-animation-scale-to));
+  }
+}
+
+.nui-button-group {
+  animation: buttonGroupFadeIn var(--transition-duration-normal)
+    var(--transition-timing-function-ease);
+}
+
+// ==================
+// RESPONSIVE
+// ==================
+
+@media (max-width: #{config.$breakpoint-md - 1px}) {
+  .nui-button-group {
+    // En mobile, permitir wrap si hay muchas opciones
+    &--wrap-mobile {
+      flex-wrap: wrap;
+
+      .nui-button-group__option {
+        border-radius: var(--border-radius-sm) !important;
+        border: var(--border-width-xs) solid var(--nui-border-primary);
+      }
+    }
+  }
+}

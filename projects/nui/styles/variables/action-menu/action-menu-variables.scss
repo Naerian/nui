@@ -1,0 +1,57 @@
+@use "action-menu-tokens" as tokens;
+
+// ========================================
+// ACTION MENU - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Action Menu.
+// Se incluyen a través del mixin nui-action-menu-vars.
+//
+// Uso:
+// ```scss
+// :root {
+//   @include nui-action-menu-vars;
+// }
+// ```
+// ========================================// ========================================
+
+@mixin nui-action-menu-vars {
+  // Dimensiones
+  --nui-action-menu-min-width: #{tokens.$action-menu-min-width};
+  --nui-action-menu-max-width: #{tokens.$action-menu-max-width};
+  --nui-action-menu-item-gap: #{tokens.$action-menu-item-gap};
+  --nui-action-menu-item-border: #{tokens.$action-menu-item-border};
+  --nui-action-menu-arrow-padding-left: #{tokens.$action-menu-arrow-padding-left};
+  --nui-action-menu-item-label-margin-right: #{tokens.$action-menu-item-label-margin-right};
+
+  // Bordes y layout
+  --nui-action-menu-border-width: #{tokens.$action-menu-border-width};
+  --nui-action-menu-border-color: #{tokens.$action-menu-border-color};
+  --nui-action-menu-border-radius: #{tokens.$action-menu-border-radius};
+  --nui-action-menu-padding: #{tokens.$action-menu-padding};
+  --nui-action-menu-item-border-radius: #{tokens.$action-menu-item-border-radius};
+
+  // Colores
+  --nui-action-menu-bg: #{tokens.$action-menu-bg};
+  --nui-action-menu-item-bg: #{tokens.$action-menu-item-bg};
+  --nui-action-menu-item-color: #{tokens.$action-menu-item-color};
+
+  // Shortcut
+  --nui-action-menu-shortcut-bg: #{tokens.$action-menu-shortcut-bg};
+  --nui-action-menu-shortcut-color: #{tokens.$action-menu-shortcut-color};
+  --nui-action-menu-shortcut-padding: #{tokens.$action-menu-shortcut-padding};
+  --nui-action-menu-shortcut-border-width: #{tokens.$action-menu-shortcut-border-width};
+  --nui-action-menu-shortcut-border-color: #{tokens.$action-menu-shortcut-border-color};
+  --nui-action-menu-shortcut-border-radius: #{tokens.$action-menu-shortcut-border-radius};
+  --nui-action-menu-shortcut-font-size: #{tokens.$action-menu-shortcut-font-size};
+
+  // Sombras
+  --nui-action-menu-shadow: #{tokens.$action-menu-shadow};
+  --nui-action-menu-static-shadow: #{tokens.$action-menu-static-shadow};
+
+  // Estados hover/active
+  --nui-action-menu-item-hover-bg: #{tokens.$action-menu-item-hover-bg};
+  --nui-action-menu-item-hover-color: #{tokens.$action-menu-item-hover-color};
+  --nui-action-menu-item-hover-icon-color: #{tokens.$action-menu-item-hover-icon-color};
+  --nui-action-menu-item-hover-border-color: #{tokens.$action-menu-item-hover-border-color};
+}

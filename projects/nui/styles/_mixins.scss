@@ -1,3 +1,7 @@
+@use "config";
+
+@use "sass:list";
+@use "sass:map";
 // ========================================
 // TYPOGRAPHY MIXINS
 // ========================================
@@ -11,7 +15,7 @@
   font-size: var(--font-size-#{$level});
   line-height: var(--line-height-#{$level});
   font-weight: var(
-    --font-weight-#{if(index((h1, h2, h3), $level), "bold", "semibold")}
+    --font-weight-#{if(list.index((h1, h2, h3), $level), "bold", "semibold")}
   );
 }
 
@@ -35,19 +39,19 @@
 @mixin component-size($size) {
   height: var(
     --component-height-#{$size},
-    #{map-get($component-heights, $size)}
+    #{map.get(config.$component-heights, $size)}
   );
   min-height: var(
     --component-height-#{$size},
-    #{map-get($component-heights, $size)}
+    #{map.get(config.$component-heights, $size)}
   );
   padding: var(
     --component-padding-#{$size},
-    #{map-get($component-paddings, $size)}
+    #{map.get(config.$component-paddings, $size)}
   );
   font-size: var(
     --component-font-size-#{$size},
-    #{map-get($component-font-sizes, $size)}
+    #{map.get(config.$component-font-sizes, $size)}
   );
 }
 
@@ -56,11 +60,11 @@
 @mixin component-textarea-size($size) {
   padding: var(
     --component-padding-#{$size},
-    #{map-get($component-paddings, $size)}
+    #{map.get(config.$component-paddings, $size)}
   );
   font-size: var(
     --component-font-size-#{$size},
-    #{map-get($component-font-sizes, $size)}
+    #{map.get(config.$component-font-sizes, $size)}
   );
 }
 
@@ -69,7 +73,7 @@
 @mixin component-font-size($size) {
   font-size: var(
     --component-font-size-#{$size},
-    #{map-get($component-font-sizes, $size)}
+    #{map.get(config.$component-font-sizes, $size)}
   );
 }
 
@@ -78,7 +82,7 @@
 @mixin component-line-height($size) {
   line-height: var(
     --component-line-height-#{$size},
-    #{map-get($component-line-heights, $size)}
+    #{map.get(config.$component-line-heights, $size)}
   );
 }
 
@@ -87,27 +91,27 @@
 @mixin component-icon-size($size) {
   height: var(
     --component-height-#{$size},
-    #{map-get($component-heights, $size)}
+    #{map.get(config.$component-heights, $size)}
   );
   min-height: var(
     --component-height-#{$size},
-    #{map-get($component-heights, $size)}
+    #{map.get(config.$component-heights, $size)}
   );
   padding: var(
     --component-padding-#{$size},
-    #{map-get($component-paddings, $size)}
+    #{map.get(config.$component-paddings, $size)}
   );
   font-size: calc(
     var(
         --component-font-size-#{$size},
-        #{map-get($component-font-sizes, $size)}
+        #{map.get(config.$component-font-sizes, $size)}
       ) *
       1.2
   );
   line-height: calc(
     var(
         --component-font-size-#{$size},
-        #{map-get($component-font-sizes, $size)}
+        #{map.get(config.$component-font-sizes, $size)}
       ) *
       1.2
   );
@@ -117,22 +121,22 @@
 /// @param {String} $size - Tamaño del spinner (xs, s, md, lg, xl)
 @mixin spinner-size($size) {
   .nui-spinner-circle--#{$size} {
-    width: var(--spinner-size-#{$size}, #{map-get($spinner-sizes, $size)});
-    height: var(--spinner-size-#{$size}, #{map-get($spinner-sizes, $size)});
+    width: var(--spinner-size-#{$size}, #{map.get($spinner-sizes, $size)});
+    height: var(--spinner-size-#{$size}, #{map.get($spinner-sizes, $size)});
     border-width: var(
       --spinner-border-width-#{$size},
-      #{map-get($spinner-border-widths, $size)}
+      #{map.get($spinner-border-widths, $size)}
     );
   }
 
   .nui-spinner-wrapper--#{$size} {
-    gap: var(--spinner-gap-#{$size}, #{map-get($spinner-gaps, $size)});
+    gap: var(--spinner-gap-#{$size}, #{map.get($spinner-gaps, $size)});
   }
 
   .nui-spinner-label--#{$size} {
     font-size: var(
       --spinner-label-font-size-#{$size},
-      #{map-get($spinner-label-font-sizes, $size)}
+      #{map.get($spinner-label-font-sizes, $size)}
     );
   }
 }
@@ -141,8 +145,8 @@
 /// @param {String} $size - Tamaño de la barra (xs, s, sm, md, lg, xl)
 @mixin progress-bar-height($size) {
   height: var(
-    --progress-bar-height-#{$size},
-    #{map-get($progress-bar-heights, $size)}
+    --nui-progress-bar-height-#{$size},
+    #{map.get($progress-bar-heights, $size)}
   );
 }
 
@@ -150,12 +154,12 @@
 /// @param {String} $size - Tamaño del switch (xs, s, sm, md, lg, xl)
 @mixin switch-track-size($size) {
   width: var(
-    --switch-track-width-#{$size},
-    #{map-get($switch-track-widths, $size)}
+    --nui-switch-track-width-#{$size},
+    #{map.get($switch-track-widths, $size)}
   );
   height: var(
-    --switch-track-height-#{$size},
-    #{map-get($switch-track-heights, $size)}
+    --nui-switch-track-height-#{$size},
+    #{map.get($switch-track-heights, $size)}
   );
 }
 
@@ -163,12 +167,12 @@
 /// @param {String} $size - Tamaño del thumb (xs, s, sm, md, lg, xl)
 @mixin switch-thumb-size($size) {
   width: var(
-    --switch-thumb-size-#{$size},
-    #{map-get($switch-thumb-sizes, $size)}
+    --nui-switch-thumb-size-#{$size},
+    #{map.get($switch-thumb-sizes, $size)}
   );
   height: var(
-    --switch-thumb-size-#{$size},
-    #{map-get($switch-thumb-sizes, $size)}
+    --nui-switch-thumb-size-#{$size},
+    #{map.get($switch-thumb-sizes, $size)}
   );
 }
 
@@ -178,8 +182,8 @@
 /// @example
 ///   .nui-switch--xs { @include switch-size(xs); }
 @mixin switch-size($size) {
-  $track-width: map-get($switch-track-widths, $size);
-  $thumb-size: map-get($switch-thumb-sizes, $size);
+  $track-width: map.get($switch-track-widths, $size);
+  $thumb-size: map.get($switch-thumb-sizes, $size);
   $offset: if(
     $size == xs,
     $switch-thumb-offset-xs,
@@ -233,80 +237,8 @@
 }
 
 // ========================================
-// BACKWARD COMPATIBILITY ALIASES
-// ========================================
-// Mantienen compatibilidad con código existente
-// Usar el nuevo mixin flex() en código nuevo
-
-/// @deprecated Usa @include flex(row, flex-start, flex-start)
-@mixin flex-start-start {
-  @include flex(row, flex-start, flex-start);
-}
-
-/// @deprecated Usa @include flex(row, center, center)
-@mixin flex-center {
-  @include flex(row, center, center);
-}
-
-/// @deprecated Usa @include flex(row, flex-start, space-between)
-@mixin flex-start-between {
-  @include flex(row, flex-start, space-between);
-}
-
-/// @deprecated Usa @include flex(row, center, space-between)
-@mixin flex-center-between {
-  @include flex(row, center, space-between);
-}
-
-/// @deprecated Usa @include flex(row, center)
-@mixin flex-row-center {
-  @include flex(row, center);
-}
-
-/// @deprecated Usa @include flex(row, center, flex-start)
-@mixin flex-row-center-start {
-  @include flex(row, center, flex-start);
-}
-
-/// @deprecated Usa @include flex(column, center)
-@mixin flex-col-center {
-  @include flex(column, center);
-}
-
-/// @deprecated Usa @include flex(column, center, center)
-@mixin flex-col-center-center {
-  @include flex(column, center, center);
-}
-
-/// @deprecated Usa @include flex(column, flex-start, center)
-@mixin flex-col-start-center {
-  @include flex(column, flex-start, center);
-}
-
-/// @deprecated Usa @include flex(column, flex-start)
-@mixin flex-col-start {
-  @include flex(column, flex-start);
-}
-
-/// @deprecated Usa @include flex(column, stretch) o simplemente @include flex(column)
-@mixin flex-col-stretch {
-  @include flex(column, stretch);
-}
-
-// ========================================
 // STATE MIXINS
 // ========================================
-
-/// Mixin para aplicar transiciones CSS
-/// Versión moderna sin prefijos vendor (todos los navegadores modernos soportan transition)
-/// Si necesitas soporte para navegadores legacy, usa Autoprefixer
-/// @param {String} $args - Propiedades de transición
-/// @example
-///   @include transition(all 0.2s ease-in-out);
-///   @include transition(opacity 0.3s, transform 0.3s);
-@mixin transition($args...) {
-  transition: $args;
-}
 
 /// Mixin para aplicar estilo a un elemento deshabilitado
 /// Versión mejorada sin !important y con mejor accesibilidad
@@ -322,7 +254,7 @@
 
   // Mantén accesibilidad de focus - solo ajusta color, no elimines outline
   &:focus-visible {
-    outline-color: var(--outline-disabled-color, var(--color-gray-400));
+    outline-color: var(--outline-disabled-color, var(--nui-color-gray-400));
     outline-width: var(--border-width-xs);
     outline-style: solid;
   }
@@ -350,21 +282,21 @@
   outline-color: $color;
   outline-style: solid;
   outline-width: var(--border-width-xs);
-  box-shadow: 0px 0px 2px var(--border-width-xs) var(--focus-ring-color);
+  box-shadow: 0px 0px 2px var(--border-width-xs) var(--nui-focus-ring-color);
 }
 
 /// Mixin para aplicar outline de error en campos
 /// @example
 ///   @include outline-field-error;
 @mixin outline-field-error {
-  box-shadow: 0px 0px 2px var(--border-width-xs) var(--color-danger);
+  box-shadow: 0px 0px 2px var(--border-width-xs) var(--nui-color-danger);
 }
 
 /// Mixin para aplicar un borde de error
 /// @example
 ///   @include field-error;
 @mixin field-error {
-  border: var(--border-width-xs) solid var(--color-danger);
+  border: var(--border-width-xs) solid var(--nui-color-danger);
 }
 
 // ========================================
@@ -375,7 +307,7 @@
 /// @example
 ///   @include media-xs { font-size: 12px; }
 @mixin media-xs {
-  @media (max-width: #{$breakpoint-sm - 1}) {
+  @media (max-width: #{config.$breakpoint-sm - 1}) {
     @content;
   }
 }
@@ -384,7 +316,7 @@
 /// @example
 ///   @include media-sm { font-size: 14px; }
 @mixin media-sm {
-  @media (min-width: #{$breakpoint-sm}) {
+  @media (min-width: #{config.$breakpoint-sm}) {
     @content;
   }
 }
@@ -393,7 +325,7 @@
 /// @example
 ///   @include media-md { font-size: 16px; }
 @mixin media-md {
-  @media (min-width: #{$breakpoint-md}) {
+  @media (min-width: #{config.$breakpoint-md}) {
     @content;
   }
 }
@@ -402,7 +334,7 @@
 /// @example
 ///   @include media-lg { font-size: 18px; }
 @mixin media-lg {
-  @media (min-width: #{$breakpoint-lg}) {
+  @media (min-width: #{config.$breakpoint-lg}) {
     @content;
   }
 }
@@ -411,7 +343,7 @@
 /// @example
 ///   @include media-xl { font-size: 20px; }
 @mixin media-xl {
-  @media (min-width: #{$breakpoint-xl}) {
+  @media (min-width: #{config.$breakpoint-xl}) {
     @content;
   }
 }
@@ -420,7 +352,7 @@
 /// @example
 ///   @include media-xxl { font-size: 22px; }
 @mixin media-xxl {
-  @media (min-width: #{$breakpoint-xxl}) {
+  @media (min-width: #{config.$breakpoint-xxl}) {
     @content;
   }
 }
@@ -438,7 +370,7 @@
 
   @each $size in $sizes {
     &.nui-chip--#{$size} {
-      padding-inline-#{$side}: var(--chip-padding-x-#{$size});
+      padding-inline-#{$side}: var(--nui-chip-padding-x-#{$size});
     }
   }
 }
@@ -458,18 +390,18 @@
 /// @example
 ///   @include chip-size(xs);
 @mixin chip-size($size) {
-  padding-block: var(--chip-padding-y-#{$size});
-  padding-inline: var(--chip-padding-x-#{$size});
-  font-size: var(--chip-font-size-#{$size});
-  border-radius: var(--chip-border-radius-#{$size});
+  padding-block: var(--nui-chip-padding-y-#{$size});
+  padding-inline: var(--nui-chip-padding-x-#{$size});
+  font-size: var(--nui-chip-font-size-#{$size});
+  border-radius: var(--nui-chip-border-radius-#{$size});
 
-  --chip-image-width: var(--chip-image-width-#{$size});
-  --chip-image-height: var(--chip-image-height-#{$size});
+  --nui-chip-image-width: var(--nui-chip-image-width-#{$size});
+  --nui-chip-image-height: var(--nui-chip-image-height-#{$size});
 
   // Padding reducido para chips con imagen
   &.nui-chip--has-image {
-    padding-block: calc(var(--chip-padding-y-#{$size}) / 2);
-    padding-inline: calc(var(--chip-padding-x-#{$size}) / 2);
+    padding-block: calc(var(--nui-chip-padding-y-#{$size}) / 2);
+    padding-inline: calc(var(--nui-chip-padding-x-#{$size}) / 2);
 
     &.nui-chip--image-align-left {
       @include chip-restore-padding-for-remove("end");
@@ -495,7 +427,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--color-backdrop);
+  background-color: var(--nui-color-backdrop);
 
   // Optimizaciones para animación fluida a 60fps (inspirado en Material-UI Drawer)
   // Usa easeOut para entrada suave y sharp para salida rápida (sincronizado con slidepanel)
@@ -515,13 +447,13 @@
 
 // Mixin para generar estilos de color
 @mixin progress-bar-theme($color) {
-  --pb-fill-bg: var(--progress-bar-#{$color}-fill-bg);
-  --pb-fill-hover-bg: var(--progress-bar-#{$color}-fill-hover-bg);
-  --pb-track-bg: var(--progress-bar-#{$color}-track-bg);
-  --pb-track-border: var(--progress-bar-#{$color}-track-border);
-  --pb-text: var(--progress-bar-#{$color}-text);
-  --pb-value-text: var(--progress-bar-#{$color}-value-text);
-  --pb-label-text: var(--progress-bar-#{$color}-label-text);
+  --pb-fill-bg: var(--nui-progress-bar-#{$color}-fill-bg);
+  --pb-fill-hover-bg: var(--nui-progress-bar-#{$color}-fill-hover-bg);
+  --pb-track-bg: var(--nui-progress-bar-#{$color}-track-bg);
+  --pb-track-border: var(--nui-progress-bar-#{$color}-track-border);
+  --pb-text: var(--nui-progress-bar-#{$color}-text);
+  --pb-value-text: var(--nui-progress-bar-#{$color}-value-text);
+  --pb-label-text: var(--nui-progress-bar-#{$color}-label-text);
 }
 // ========================================
 
@@ -537,40 +469,40 @@
   &.nui-button-group--#{$variant}.nui-button-group--#{$color}:not(
       .nui-button-group--segmented
     ) {
-    border-color: var(--button-group-#{$color}-#{$variant}-box-border);
+    border-color: var(--nui-button-group-#{$color}-#{$variant}-box-border);
     .nui-button-group__option {
-      color: var(--button-group-#{$color}-#{$variant}-inactive-text);
-      background-color: var(--button-group-#{$color}-#{$variant}-inactive-bg);
-      border-color: var(--button-group-#{$color}-#{$variant}-inactive-border);
+      color: var(--nui-button-group-#{$color}-#{$variant}-inactive-text);
+      background-color: var(--nui-button-group-#{$color}-#{$variant}-inactive-bg);
+      border-color: var(--nui-button-group-#{$color}-#{$variant}-inactive-border);
 
       // Estados hover en modo "inactive" (no disabled, no selected)
       &:not(.nui-button-group__option--disabled):not(
           .nui-button-group__option--selected
         ):hover {
         background-color: var(
-          --button-group-#{$color}-#{$variant}-inactive-hover-bg
+          --nui-button-group-#{$color}-#{$variant}-inactive-hover-bg
         );
-        color: var(--button-group-#{$color}-#{$variant}-inactive-text);
-        border-color: var(--button-group-#{$color}-#{$variant}-inactive-border);
+        color: var(--nui-button-group-#{$color}-#{$variant}-inactive-text);
+        border-color: var(--nui-button-group-#{$color}-#{$variant}-inactive-border);
       }
 
       // Estilos de focus
       &:focus-visible {
-        outline: 2px solid var(--color-#{$color}-tint-65);
+        outline: 2px solid var(--nui-color-#{$color}-tint-65);
         outline-offset: -2px;
       }
     }
 
     .nui-button-group__option--selected {
-      background-color: var(--button-group-#{$color}-#{$variant}-bg);
-      color: var(--button-group-#{$color}-#{$variant}-text);
-      border-color: var(--button-group-#{$color}-#{$variant}-border);
+      background-color: var(--nui-button-group-#{$color}-#{$variant}-bg);
+      color: var(--nui-button-group-#{$color}-#{$variant}-text);
+      border-color: var(--nui-button-group-#{$color}-#{$variant}-border);
 
       // Estados hover en modo "checked" (no disabled)
       &:hover:not(.nui-button-group__option--disabled) {
-        background-color: var(--button-group-#{$color}-#{$variant}-hover-bg);
-        color: var(--button-group-#{$color}-#{$variant}-text);
-        border-color: var(--button-group-#{$color}-#{$variant}-border);
+        background-color: var(--nui-button-group-#{$color}-#{$variant}-hover-bg);
+        color: var(--nui-button-group-#{$color}-#{$variant}-text);
+        border-color: var(--nui-button-group-#{$color}-#{$variant}-border);
       }
     }
   }
@@ -582,41 +514,41 @@
 /// @param {String} $color - Color base (primary, success, etc.)
 @mixin button-group-segmented-colors($variant, $color) {
   &.nui-button-group--#{$variant}.nui-button-group--#{$color}.nui-button-group--segmented {
-    border-color: var(--button-group-#{$color}-#{$variant}-box-border);
+    border-color: var(--nui-button-group-#{$color}-#{$variant}-box-border);
 
     .nui-button-group__option {
-      color: var(--button-group-#{$color}-#{$variant}-inactive-text);
-      background-color: var(--button-group-#{$color}-#{$variant}-inactive-bg);
-      border-color: var(--button-group-#{$color}-#{$variant}-inactive-border);
+      color: var(--nui-button-group-#{$color}-#{$variant}-inactive-text);
+      background-color: var(--nui-button-group-#{$color}-#{$variant}-inactive-bg);
+      border-color: var(--nui-button-group-#{$color}-#{$variant}-inactive-border);
 
       // Estados hover en modo "inactive" (no disabled, no selected)
       &:not(.nui-button-group__option--disabled):not(
           .nui-button-group__option--selected
         ):hover {
         background-color: var(
-          --button-group-#{$color}-#{$variant}-inactive-hover-bg
+          --nui-button-group-#{$color}-#{$variant}-inactive-hover-bg
         );
-        color: var(--button-group-#{$color}-#{$variant}-inactive-text);
-        border-color: var(--button-group-#{$color}-#{$variant}-inactive-border);
+        color: var(--nui-button-group-#{$color}-#{$variant}-inactive-text);
+        border-color: var(--nui-button-group-#{$color}-#{$variant}-inactive-border);
       }
 
       // Estilos de focus
       &:focus-visible {
-        outline: 2px solid var(--color-#{$color}-tint-65);
+        outline: 2px solid var(--nui-color-#{$color}-tint-65);
         outline-offset: -2px;
       }
     }
 
     .nui-button-group__option--selected {
-      background-color: var(--button-group-#{$color}-#{$variant}-bg);
-      color: var(--button-group-#{$color}-#{$variant}-text);
-      border-color: var(--button-group-#{$color}-#{$variant}-border);
+      background-color: var(--nui-button-group-#{$color}-#{$variant}-bg);
+      color: var(--nui-button-group-#{$color}-#{$variant}-text);
+      border-color: var(--nui-button-group-#{$color}-#{$variant}-border);
 
       // Estados hover en modo "checked" (no disabled)
       &:hover:not(.nui-button-group__option--disabled) {
-        background-color: var(--button-group-#{$color}-#{$variant}-hover-bg);
-        color: var(--button-group-#{$color}-#{$variant}-text);
-        border-color: var(--button-group-#{$color}-#{$variant}-border);
+        background-color: var(--nui-button-group-#{$color}-#{$variant}-hover-bg);
+        color: var(--nui-button-group-#{$color}-#{$variant}-text);
+        border-color: var(--nui-button-group-#{$color}-#{$variant}-border);
       }
     }
   }
@@ -634,19 +566,19 @@
   &--#{$color} {
     // Estilos para el track cuando está checked
     &.nui-switch--checked .nui-switch__track {
-      background-color: var(--switch-#{$color}-color);
-      border-color: var(--switch-#{$color}-color);
+      background-color: var(--nui-switch-#{$color}-color);
+      border-color: var(--nui-switch-#{$color}-color);
 
       // Hover styles when checked
       &:hover {
-        background-color: var(--switch-#{$color}-color-hover);
-        border-color: var(--switch-#{$color}-color-hover);
+        background-color: var(--nui-switch-#{$color}-color-hover);
+        border-color: var(--nui-switch-#{$color}-color-hover);
       }
     }
 
     &:focus-visible {
       .nui-switch__track-wrapper .nui-switch__track {
-        outline: 2px solid var(--color-#{$color}-tint-65);
+        outline: 2px solid var(--nui-color-#{$color}-tint-65);
         outline-offset: -2px;
       }
     }
@@ -660,44 +592,44 @@
 @mixin switch-button-variant($variant, $color) {
   &.nui-switch--#{$variant}.nui-switch--#{$color} {
     .nui-switch__button {
-      background-color: var(--switch-#{$color}-button-#{$variant}-inactive-bg);
-      color: var(--switch-#{$color}-button-#{$variant}-inactive-text);
-      border-color: var(--switch-#{$color}-button-#{$variant}-inactive-border);
+      background-color: var(--nui-switch-#{$color}-button-#{$variant}-inactive-bg);
+      color: var(--nui-switch-#{$color}-button-#{$variant}-inactive-text);
+      border-color: var(--nui-switch-#{$color}-button-#{$variant}-inactive-border);
     }
 
     // Estados hover en modo "inactive" (no disabled, no checked)
     &:not(.nui-switch--disabled, .nui-switch--checked):hover {
       .nui-switch__button {
         background-color: var(
-          --switch-#{$color}-button-#{$variant}-inactive-hover-bg
+          --nui-switch-#{$color}-button-#{$variant}-inactive-hover-bg
         );
-        color: var(--switch-#{$color}-button-#{$variant}-inactive-text);
+        color: var(--nui-switch-#{$color}-button-#{$variant}-inactive-text);
         border-color: var(
-          --switch-#{$color}-button-#{$variant}-inactive-border
+          --nui-switch-#{$color}-button-#{$variant}-inactive-border
         );
       }
     }
     // Estados checked
     &.nui-switch--checked {
       .nui-switch__button {
-        background-color: var(--switch-#{$color}-button-#{$variant}-bg);
-        color: var(--switch-#{$color}-button-#{$variant}-text);
-        border-color: var(--switch-#{$color}-button-#{$variant}-border);
+        background-color: var(--nui-switch-#{$color}-button-#{$variant}-bg);
+        color: var(--nui-switch-#{$color}-button-#{$variant}-text);
+        border-color: var(--nui-switch-#{$color}-button-#{$variant}-border);
       }
 
       // Estados hover en modo "checked" (no disabled)
       &:not(.nui-switch--disabled):hover {
         .nui-switch__button {
-          background-color: var(--switch-#{$color}-button-#{$variant}-hover-bg);
-          color: var(--switch-#{$color}-button-#{$variant}-text);
-          border-color: var(--switch-#{$color}-button-#{$variant}-border);
+          background-color: var(--nui-switch-#{$color}-button-#{$variant}-hover-bg);
+          color: var(--nui-switch-#{$color}-button-#{$variant}-text);
+          border-color: var(--nui-switch-#{$color}-button-#{$variant}-border);
         }
       }
     }
 
     &:focus-visible {
       .nui-switch__button {
-        outline: 2px solid var(--color-#{$color}-tint-65);
+        outline: 2px solid var(--nui-color-#{$color}-tint-65);
         outline-offset: -2px;
       }
     }
@@ -715,38 +647,38 @@
   // Estilos base del breadcrumb con el tema específico
   &--#{$color} {
     .nui-breadcrumb__item {
-      color: var(--color-#{$color});
+      color: var(--nui-color-#{$color});
 
       &--active,
       &:hover:not(&--active),
       &:focus:not(&--active):not(&--disabled),
       &:active:not(&--active):not(&--disabled) {
-        background-color: var(--color-#{$color}-tint-95);
-        color: var(--color-#{$color});
+        background-color: var(--nui-color-#{$color}-tint-95);
+        color: var(--nui-color-#{$color});
         outline: none;
       }
     }
 
     .nui-breadcrumb__separator {
-      color: var(--color-#{$color});
+      color: var(--nui-color-#{$color});
       opacity: var(--breadcrumb-separator-opacity);
     }
   }
 
   // Estilos del overlay con el tema específico
   &__overlay.nui-breadcrumb--#{$color} {
-    border-color: var(--color-#{$color}-tint-95);
+    border-color: var(--nui-color-#{$color}-tint-95);
 
     .nui-breadcrumb__overlay-item {
       &:hover,
       &:active,
       &:focus:not(&--disabled),
       &:active:not(&--disabled) {
-        background-color: var(--color-#{$color}-tint-95);
-        color: var(--color-#{$color});
+        background-color: var(--nui-color-#{$color}-tint-95);
+        color: var(--nui-color-#{$color});
 
         &::after {
-          color: var(--color-#{$color});
+          color: var(--nui-color-#{$color});
         }
       }
     }
@@ -762,7 +694,7 @@
 /// @param {String} $color - Color del tema (primary, secondary, accent, etc.)
 @mixin action-menu-theme($color) {
   &--#{$color} {
-    border-color: var(--color-#{$color}-tint-95);
+    border-color: var(--nui-color-#{$color}-tint-95);
 
     .nui-action-menu__item,
     .nui-action-menu-submenu__item {
@@ -770,15 +702,15 @@
       &:active:not(&--disabled),
       &:focus:not(&--disabled),
       &:active:not(&--disabled) {
-        background-color: var(--color-#{$color}-tint-95);
-        color: var(--color-#{$color});
+        background-color: var(--nui-color-#{$color}-tint-95);
+        color: var(--nui-color-#{$color});
         outline: none;
 
         .nui-action-menu__item__icon,
         .nui-action-menu__item__shortcut,
         .nui-action-menu__item__arrow {
-          color: var(--color-#{$color});
-          border-color: var(--color-#{$color}-tint-65);
+          color: var(--nui-color-#{$color});
+          border-color: var(--nui-color-#{$color}-tint-65);
         }
       }
     }
@@ -789,15 +721,15 @@
 /// @param {String} $breakpoint - Breakpoint (tablet, mobile)
 /// @param {Map} $config - Configuración específica del breakpoint
 @mixin breadcrumb-responsive($breakpoint, $config: ()) {
-  $gap: map-get($config, gap) or var(--spacing-xs);
-  $min-height: map-get($config, min-height) or var(--component-height-xs);
-  $separator-margin: map-get($config, separator-margin) or
+  $gap: map.get($config, gap) or var(--spacing-xs);
+  $min-height: map.get($config, min-height) or var(--component-height-xs);
+  $separator-margin: map.get($config, separator-margin) or
     calc(var(--spacing-xs) / 2);
-  $separator-font-size: map-get($config, separator-font-size) or 0.9em;
-  $item-padding: map-get($config, item-padding) or var(--spacing-xs);
-  $collapsed-min-width: map-get($config, collapsed-min-width) or 32px;
-  $collapsed-height: map-get($config, collapsed-height) or 26px;
-  $collapsed-icon-size: map-get($config, collapsed-icon-size) or 1.2em;
+  $separator-font-size: map.get($config, separator-font-size) or 0.9em;
+  $item-padding: map.get($config, item-padding) or var(--spacing-xs);
+  $collapsed-min-width: map.get($config, collapsed-min-width) or 32px;
+  $collapsed-height: map.get($config, collapsed-height) or 26px;
+  $collapsed-icon-size: map.get($config, collapsed-icon-size) or 1.2em;
 
   gap: $gap;
   @if $breakpoint == mobile {
@@ -846,38 +778,38 @@
   &.nui-paginator-container--#{$variant}.nui-paginator-container--#{$color} {
     .nui-paginator__page-jump-button,
     .nui-paginator__load-more-button {
-      color: var(--paginator-#{$color}-#{$variant}-text);
-      background-color: var(--paginator-#{$color}-#{$variant}-bg);
-      border-color: var(--paginator-#{$color}-#{$variant}-border);
+      color: var(--nui-paginator--#{$color}-#{$variant}-text);
+      background-color: var(--nui-paginator--#{$color}-#{$variant}-bg);
+      border-color: var(--nui-paginator--#{$color}-#{$variant}-border);
 
       &:focus,
       &:hover {
-        background-color: var(--paginator-#{$color}-#{$variant}-hover-bg);
-        color: var(--paginator-#{$color}-#{$variant}-text);
-        border-color: var(--paginator-#{$color}-#{$variant}-border);
+        background-color: var(--nui-paginator--#{$color}-#{$variant}-hover-bg);
+        color: var(--nui-paginator--#{$color}-#{$variant}-text);
+        border-color: var(--nui-paginator--#{$color}-#{$variant}-border);
       }
 
       &:active {
-        background-color: var(--paginator-#{$color}-#{$variant}-active-bg);
+        background-color: var(--nui-paginator--#{$color}-#{$variant}-active-bg);
       }
 
       // Estilos de focus
       &:focus-visible {
-        outline: 2px solid var(--color-#{$color}-tint-65);
+        outline: 2px solid var(--nui-color-#{$color}-tint-65);
         outline-offset: -2px;
       }
     }
 
     .nui-paginator__page-jump-input {
       &:hover:not(&--disabled) {
-        border-color: var(--color-#{$color}-tint-65);
+        border-color: var(--nui-color-#{$color}-tint-65);
       }
     }
 
     .nui-paginator__button {
-      color: var(--paginator-#{$color}-#{$variant}-inactive-text);
-      background-color: var(--paginator-#{$color}-#{$variant}-inactive-bg);
-      border-color: var(--paginator-#{$color}-#{$variant}-inactive-border);
+      color: var(--nui-paginator--#{$color}-#{$variant}-inactive-text);
+      background-color: var(--nui-paginator--#{$color}-#{$variant}-inactive-bg);
+      border-color: var(--nui-paginator--#{$color}-#{$variant}-inactive-border);
 
       // Estados hover en modo "inactive" (no disabled, no active)
       &:not(.nui-paginator__button--disabled):not(
@@ -887,16 +819,16 @@
           .nui-paginator__button--active
         ):focus {
         background-color: var(
-          --paginator-#{$color}-#{$variant}-inactive-hover-bg
+          --nui-paginator--#{$color}-#{$variant}-inactive-hover-bg
         );
-        color: var(--paginator-#{$color}-#{$variant}-inactive-text);
-        border-color: var(--paginator-#{$color}-#{$variant}-inactive-border);
+        color: var(--nui-paginator--#{$color}-#{$variant}-inactive-text);
+        border-color: var(--nui-paginator--#{$color}-#{$variant}-inactive-border);
       }
 
       &.nui-paginator__button--active:not(
           .nui-paginator__button--disabled
         ):active {
-        background-color: var(--paginator-#{$color}-#{$variant}-active-bg);
+        background-color: var(--nui-paginator--#{$color}-#{$variant}-active-bg);
       }
     }
 
@@ -906,21 +838,21 @@
     .nui-paginator__load-more-button {
       // Estilos de focus
       &:focus-visible {
-        outline: 2px solid var(--color-#{$color}-tint-65);
+        outline: 2px solid var(--nui-color-#{$color}-tint-65);
         outline-offset: -2px;
       }
     }
 
     .nui-paginator__button--active {
-      background-color: var(--paginator-#{$color}-#{$variant}-bg);
-      color: var(--paginator-#{$color}-#{$variant}-text);
-      border-color: var(--paginator-#{$color}-#{$variant}-border);
+      background-color: var(--nui-paginator--#{$color}-#{$variant}-bg);
+      color: var(--nui-paginator--#{$color}-#{$variant}-text);
+      border-color: var(--nui-paginator--#{$color}-#{$variant}-border);
 
       // Estados hover en modo "active" (no disabled)
       &:hover:not(.nui-paginator__button--disabled) {
-        background-color: var(--paginator-#{$color}-#{$variant}-hover-bg);
-        color: var(--paginator-#{$color}-#{$variant}-text);
-        border-color: var(--paginator-#{$color}-#{$variant}-border);
+        background-color: var(--nui-paginator--#{$color}-#{$variant}-hover-bg);
+        color: var(--nui-paginator--#{$color}-#{$variant}-text);
+        border-color: var(--nui-paginator--#{$color}-#{$variant}-border);
       }
     }
   }
@@ -933,15 +865,15 @@
   .nui-paginator__button,
   .nui-paginator__page-jump-button,
   .nui-paginator__load-more-button {
-    min-width: var(--paginator-button-size-#{$size});
-    min-height: var(--paginator-button-size-#{$size});
-    width: var(--paginator-button-size-#{$size});
-    height: var(--paginator-button-size-#{$size});
+    min-width: var(--nui-paginator-button-size-#{$size});
+    min-height: var(--nui-paginator-button-size-#{$size});
+    width: var(--nui-paginator-button-size-#{$size});
+    height: var(--nui-paginator-button-size-#{$size});
     font-size: var(--component-font-size-#{$size});
     padding: 0;
 
     i {
-      font-size: var(--paginator-icon-size-#{$size});
+      font-size: var(--nui-paginator--icon-size-#{$size});
     }
   }
 
@@ -952,8 +884,8 @@
   }
 
   .nui-paginator__page-jump-input {
-    min-height: var(--paginator-button-size-#{$size});
-    height: var(--paginator-button-size-#{$size});
+    min-height: var(--nui-paginator-button-size-#{$size});
+    height: var(--nui-paginator-button-size-#{$size});
   }
 
   .nui-paginator__load-more-button {
@@ -1032,18 +964,18 @@
 /// @param {String} $color - Color del tema (primary, secondary, accent, success, warning, danger, info)
 @mixin tabs-variant($variant, $color) {
   .nui-tabs__scroll-btn {
-    color: var(--color-#{$color});
+    color: var(--nui-color-#{$color});
     background-color: var(--tabs-#{$color}-scroll-btn-bg);
     border-color: var(--tabs-#{$color}-scroll-btn-border);
 
     &:hover:not(&--disabled) {
       background-color: var(--tabs-#{$color}-scroll-btn-hover-bg);
       border-color: var(--tabs-#{$color}-scroll-btn-hover-border);
-      color: var(--color-#{$color});
+      color: var(--nui-color-#{$color});
     }
 
     &:focus-visible {
-      outline: 2px solid var(--color-#{$color}-tint-65);
+      outline: 2px solid var(--nui-color-#{$color}-tint-65);
       outline-offset: -2px;
     }
   }
@@ -1052,14 +984,14 @@
   .nui-tabs__panel {
     &:focus-visible,
     &:focus {
-      outline: 2px solid var(--color-#{$color}-tint-65);
+      outline: 2px solid var(--nui-color-#{$color}-tint-65);
       outline-offset: -2px;
     }
   }
 
   @if $variant == underline {
     .nui-tabs__nav {
-      border-bottom-color: var(--color-border);
+      border-bottom-color: var(--nui-color-border);
     }
 
     .nui-tabs__tab {
@@ -1071,7 +1003,7 @@
 
       &--active {
         border-bottom-color: var(--tabs-#{$color}-underline-active-border);
-        color: var(--color-#{$color});
+        color: var(--nui-color-#{$color});
 
         &:hover:not(&--disabled) {
           border-bottom-color: var(
@@ -1179,18 +1111,18 @@
 /// Elimina la repetición masiva de código en ~85%
 /// @param {String} $size - Tamaño del calendar (xs, s, sm, md, lg, xl)
 @mixin calendar-size($size) {
-  max-width: map-get($calendar-widths, $size);
-  padding: map-get($calendar-paddings, $size);
+  max-width: map.get($calendar-widths, $size);
+  padding: map.get($calendar-paddings, $size);
 
   .nui-calendar__days,
   .nui-calendar__weekdays {
-    gap: map-get($calendar-gaps, $size);
+    gap: map.get($calendar-gaps, $size);
   }
 
   .nui-calendar__day {
-    font-size: map-get($calendar-day-fonts, $size);
-    min-width: map-get($calendar-day-sizes, $size);
-    min-height: map-get($calendar-day-sizes, $size);
+    font-size: map.get($calendar-day-fonts, $size);
+    min-width: map.get($calendar-day-sizes, $size);
+    min-height: map.get($calendar-day-sizes, $size);
 
     &--today {
       &::after {
@@ -1213,49 +1145,49 @@
   }
 
   .nui-calendar__weekday {
-    font-size: map-get($calendar-weekday-fonts, $size);
-    min-height: map-get($calendar-weekday-heights, $size);
+    font-size: map.get($calendar-weekday-fonts, $size);
+    min-height: map.get($calendar-weekday-heights, $size);
   }
 
   .nui-calendar__title-button {
-    font-size: map-get($calendar-title-fonts, $size);
+    font-size: map.get($calendar-title-fonts, $size);
 
     // Padding progresivo según tamaño
     @if $size == xs {
-      padding: $spacing-xs $spacing-s;
+      padding: config.$spacing-xs config.$spacing-s;
     } @else if $size == s {
-      padding: $spacing-xs $spacing-sm;
+      padding: config.$spacing-xs config.$spacing-sm;
     } @else if $size == sm {
-      padding: $spacing-s $spacing-sm;
+      padding: config.$spacing-s config.$spacing-sm;
     } @else if $size == md {
-      padding: $spacing-sm $spacing-md;
+      padding: config.$spacing-sm config.$spacing-md;
     } @else if $size == lg {
-      padding: $spacing-sm $spacing-lg;
+      padding: config.$spacing-sm config.$spacing-lg;
     } @else if $size == xl {
-      padding: $spacing-md $spacing-xl;
+      padding: config.$spacing-md config.$spacing-xl;
     }
   }
 
   .nui-calendar__title-text {
-    font-size: map-get($calendar-title-fonts, $size);
+    font-size: map.get($calendar-title-fonts, $size);
   }
 
   .nui-calendar__month,
   .nui-calendar__year {
-    font-size: map-get($calendar-day-fonts, $size);
+    font-size: map.get($calendar-day-fonts, $size);
 
     @if $size == xs {
-      padding: $spacing-xs $spacing-s;
+      padding: config.$spacing-xs config.$spacing-s;
     } @else if $size == s {
-      padding: $spacing-xs $spacing-sm;
+      padding: config.$spacing-xs config.$spacing-sm;
     } @else if $size == sm {
-      padding: $spacing-s $spacing-sm;
+      padding: config.$spacing-s config.$spacing-sm;
     } @else if $size == md {
-      padding: $spacing-sm $spacing-md;
+      padding: config.$spacing-sm config.$spacing-md;
     } @else if $size == lg {
-      padding: $spacing-sm $spacing-lg;
+      padding: config.$spacing-sm config.$spacing-lg;
     } @else if $size == xl {
-      padding: $spacing-md $spacing-xl;
+      padding: config.$spacing-md config.$spacing-xl;
     }
   }
 }
@@ -1268,47 +1200,47 @@
 /// @param {String} $color - Color del toast (primary, success, danger, warning, info, etc.)
 @mixin toast-color($color) {
   &.nui-toast--#{$color} {
-    background-color: var(--toast-#{$color}-bg);
-    color: var(--toast-#{$color}-color);
-    border: var(--nui-toast-border-width) solid var(--toast-#{$color}-border);
+    background-color: var(--nui-toast-#{$color}-bg);
+    color: var(--nui-toast-#{$color}-color);
+    border: var(--nui-toast-border-width) solid var(--nui-toast-#{$color}-border);
 
     // Hover mejorado
     &:hover {
       background-color: var(
-        --toast-#{$color}-bg-hover,
-        var(--toast-#{$color}-bg)
+        --nui-toast-#{$color}-bg-hover,
+        var(--nui-toast-#{$color}-bg)
       );
     }
 
     .nui-toast__icon {
-      color: var(--toast-#{$color}-icon-color);
-      background: var(--toast-#{$color}-icon-bg);
+      color: var(--nui-toast-#{$color}-icon-color);
+      background: var(--nui-toast-#{$color}-icon-bg);
     }
 
     .nui-toast__title {
-      color: var(--toast-#{$color}-title-color);
+      color: var(--nui-toast-#{$color}-title-color);
     }
 
     .nui-toast__message {
-      color: var(--toast-#{$color}-color);
+      color: var(--nui-toast-#{$color}-color);
     }
 
     .nui-toast__progress-bar {
       background: linear-gradient(
         90deg,
-        var(--toast-#{$color}-progress-bg) 0%,
-        var(--toast-#{$color}-progress-bg) 85%,
+        var(--nui-toast-#{$color}-progress-bg) 0%,
+        var(--nui-toast-#{$color}-progress-bg) 85%,
         transparent 100%
       );
     }
 
     .nui-toast__close-button,
     .nui-toast__expand-button {
-      color: var(--toast-#{$color}-close-color);
+      color: var(--nui-toast-#{$color}-close-color);
 
       &:hover {
-        color: var(--toast-#{$color}-close-hover);
-        background: var(--toast-#{$color}-icon-bg);
+        color: var(--nui-toast-#{$color}-close-hover);
+        background: var(--nui-toast-#{$color}-icon-bg);
       }
     }
 
@@ -1316,9 +1248,9 @@
     &::before {
       background: linear-gradient(
         135deg,
-        rgba(var(--color-#{$color}-rgb), 0.15) 0%,
-        rgba(var(--color-#{$color}-rgb), 0.08) 50%,
-        rgba(var(--color-#{$color}-rgb), 0.02) 100%
+        rgba(var(--nui-color-#{$color}-rgb), 0.15) 0%,
+        rgba(var(--nui-color-#{$color}-rgb), 0.08) 50%,
+        rgba(var(--nui-color-#{$color}-rgb), 0.02) 100%
       );
     }
   }
@@ -1326,187 +1258,8 @@
 
 /// Mixin para generar todas las variantes de color de toast
 @mixin generate-toast-colors() {
-  @include toast-color("primary");
-  @include toast-color("accent");
-  @include toast-color("secondary");
-  @include toast-color("success");
-  @include toast-color("danger");
-  @include toast-color("warning");
-  @include toast-color("info");
-}
-
-/// Mixin para generar todas las variantes de color de toast
-@mixin generate-toast-colors() {
-  @include toast-color("primary");
-  @include toast-color("accent");
-  @include toast-color("secondary");
-  @include toast-color("success");
-  @include toast-color("danger");
-  @include toast-color("warning");
-  @include toast-color("info");
-}
-
-// ========================================
-// AVATAR MIXINS
-// ========================================
-
-/// Mixin para aplicar tamaño a un avatar
-/// @param {String} $size - Tamaño del avatar (xs, sm, md, lg, xl)
-@mixin avatar-size($size) {
-  width: var(--avatar-size-#{$size});
-  height: var(--avatar-size-#{$size});
-  font-size: var(--avatar-font-size-#{$size});
-
-  .nui-avatar__icon {
-    font-size: var(--avatar-icon-size-#{$size});
+  $colors: primary, secondary, success, info, warning, danger, accent;
+  @each $color in $colors {
+    @include toast-color($color);
   }
-}
-
-/// Mixin para aplicar variante de forma a un avatar
-/// @param {String} $variant - Variante del avatar (circular, rounded, square)
-@mixin avatar-variant($variant) {
-  @if $variant == "circular" {
-    border-radius: var(--avatar-border-radius-circular);
-  } @else if $variant == "rounded" {
-    border-radius: var(--avatar-border-radius-rounded);
-  } @else if $variant == "square" {
-    border-radius: var(--avatar-border-radius-square);
-  }
-}
-
-/// Mixin para generar todos los tamaños de avatar
-@mixin generate-avatar-sizes() {
-  &.nui-avatar--xs {
-    @include avatar-size(xs);
-  }
-
-  &.nui-avatar--sm {
-    @include avatar-size(sm);
-  }
-
-  &.nui-avatar--md {
-    @include avatar-size(md);
-  }
-
-  &.nui-avatar--lg {
-    @include avatar-size(lg);
-  }
-
-  &.nui-avatar--xl {
-    @include avatar-size(xl);
-  }
-}
-
-/// Mixin para generar todas las variantes de forma de avatar
-@mixin generate-avatar-variants() {
-  &.nui-avatar--circular {
-    @include avatar-variant(circular);
-  }
-
-  &.nui-avatar--rounded {
-    @include avatar-variant(rounded);
-  }
-
-  &.nui-avatar--square {
-    @include avatar-variant(square);
-  }
-}
-
-/// Mixin para generar todos los colores de avatar
-@mixin generate-avatar-colors() {
-  &.nui-avatar--primary {
-    background-color: var(--avatar-primary-bg);
-    color: var(--avatar-primary-color);
-  }
-
-  &.nui-avatar--secondary {
-    background-color: var(--avatar-secondary-bg);
-    color: var(--avatar-secondary-color);
-  }
-
-  &.nui-avatar--accent {
-    background-color: var(--avatar-accent-bg);
-    color: var(--avatar-accent-color);
-  }
-
-  &.nui-avatar--success {
-    background-color: var(--avatar-success-bg);
-    color: var(--avatar-success-color);
-  }
-
-  &.nui-avatar--info {
-    background-color: var(--avatar-info-bg);
-    color: var(--avatar-info-color);
-  }
-
-  &.nui-avatar--warning {
-    background-color: var(--avatar-warning-bg);
-    color: var(--avatar-warning-color);
-  }
-
-  &.nui-avatar--danger {
-    background-color: var(--avatar-danger-bg);
-    color: var(--avatar-danger-color);
-  }
-}
-
-/// Mixin para estilos base del avatar
-@mixin avatar-base() {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
-  user-select: none;
-  vertical-align: middle;
-
-  // Color por defecto
-  background-color: var(--avatar-default-bg);
-  color: var(--avatar-default-color);
-  font-weight: var(--avatar-font-weight);
-  line-height: var(--avatar-line-height);
-
-  // Transición suave
-  transition: var(--avatar-transition);
-}
-
-/// Mixin para avatar group
-@mixin avatar-group-base() {
-  display: inline-flex;
-  align-items: center;
-}
-
-/// Mixin para avatares dentro de un grupo
-@mixin avatar-group-item() {
-  position: relative;
-  transition: var(--avatar-transition);
-  z-index: var(--avatar-z-index-base, 0);
-
-  &:first-child {
-    margin-left: 0;
-  }
-
-  &:hover {
-    z-index: var(--avatar-group-z-index-hover);
-    transform: scale(var(--avatar-group-hover-scale));
-  }
-}
-
-/// Mixin para bordes en avatar group
-@mixin avatar-group-bordered() {
-  .nui-avatar-group__avatar,
-  .nui-avatar-group__excess {
-    border: var(--avatar-group-border-width) solid
-      var(--avatar-group-border-color);
-    box-shadow: 0 0 0 1px var(--avatar-group-border-color);
-  }
-}
-
-/// Mixin para el indicador de exceso (+N)
-@mixin avatar-excess($size) {
-  width: var(--avatar-excess-size-#{$size});
-  height: var(--avatar-excess-size-#{$size});
-  font-size: var(--avatar-excess-font-size-#{$size});
-  font-weight: var(--avatar-excess-font-weight);
 }

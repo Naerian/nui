@@ -1,0 +1,105 @@
+@use "../../../../styles/variables/avatar/avatar-variables";
+
+:host {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nui-avatar-group__list {
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+  margin: 0;
+}
+
+// ===== AVATARES INDIVIDUALES =====
+
+.nui-avatar-group__avatar {
+  position: relative;
+  transition: var(--nui-avatar-transition);
+  z-index: var(--nui-avatar-z-index-base, 0);
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:hover {
+    z-index: var(--nui-avatar-group-z-index-hover);
+    transform: scale(var(--nui-avatar-group-hover-scale));
+  }
+}
+
+// ===== BORDES =====
+
+:host.nui-avatar-group--bordered {
+  .nui-avatar-group__avatar,
+  .nui-avatar-group__excess {
+    border: var(--nui-avatar-group-border-width) solid
+      var(--nui-avatar-group-border-color);
+    box-shadow: 0 0 0 1px var(--nui-avatar-group-border-color);
+  }
+}
+
+// ===== INDICADOR DE EXCEDENTE "+N" =====
+
+.nui-avatar-group__excess {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  user-select: none;
+  background-color: var(--nui-avatar-excess-bg);
+  color: var(--nui-avatar-excess-color);
+  font-weight: var(--nui-avatar-excess-font-weight);
+  cursor: default;
+  transition: var(--nui-avatar-transition);
+  z-index: var(--nui-avatar-z-index-base);
+
+  &:hover {
+    z-index: var(--nui-avatar-group-z-index-hover);
+    transform: scale(var(--nui-avatar-group-hover-scale));
+    background-color: var(--nui-avatar-excess-hover-bg);
+  }
+
+  // Tamaños para excedente
+  @each $size-key in (xs, s, sm, md, lg, xl) {
+    &.nui-avatar-group__excess--#{$size-key} {
+      width: var(--nui-avatar-excess-size-#{$size-key});
+      height: var(--nui-avatar-excess-size-#{$size-key});
+      font-size: var(--nui-avatar-excess-font-size-#{$size-key});
+      font-weight: var(--nui-avatar-excess-font-weight);
+    }
+  }
+}
+
+.nui-avatar-group__list--stacked {
+  flex-direction: column;
+  .nui-avatar-group__avatar,
+  .nui-avatar-group__excess {
+    margin-left: 0;
+    margin-top: var(--nui-avatar-group-spacing);
+  }
+}
+
+.nui-avatar-group__list--inline {
+  .nui-avatar-group__avatar,
+  .nui-avatar-group__excess {
+    margin-left: var(--nui-avatar-group-spacing);
+    margin-top: 0;
+  }
+}
+
+// Variantes de forma para excedente
+
+.nui-avatar-group__excess--circular {
+  border-radius: var(--nui-avatar-border-radius-circular);
+}
+
+.nui-avatar-group__excess--rounded {
+  border-radius: var(--nui-avatar-border-radius-rounded);
+}
+
+.nui-avatar-group__excess--square {
+  border-radius: var(--nui-avatar-border-radius-square);
+}

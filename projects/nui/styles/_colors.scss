@@ -1,16 +1,4 @@
-// =======================
-// IMPORTAR PRESET (OPCIONAL)
-// =======================
-// Descomentar el preset que quieras usar para sobrescribir los colores por defecto
-// Solo puede estar activo UNO a la vez
-
-// @import "presets/warm";
-// @import "presets/neon";
-// @import "presets/dopamine";
-// @import "presets/corporate";
-// @import "presets/minimal";
-
-@import "functions";
+@use "functions";
 
 // =======================
 // COLORES GENERALES
@@ -20,18 +8,18 @@
 // color: $color-text;
 
 // Grises para UI - Usamos la escala "Slate" del color secundario para mayor coherencia
-$color-white: #ffffff;
-$color-gray-50: #f8fafc; // Slate-50 - Fondos muy sutiles
-$color-gray-100: #f1f5f9; // Slate-100 - Fondos sutiles, hover
-$color-gray-200: #e2e8f0; // Slate-200 - Bordes sutiles
-$color-gray-300: #cbd5e1; // Slate-300 - Bordes normales
-$color-gray-400: #94a3b8; // Slate-400 - Placeholders
-$color-gray-500: #64748b; // Slate-500 - Iconos, texto secundario (= secondary)
-$color-gray-600: #475569; // Slate-600 - Texto secundario oscuro
-$color-gray-700: #334155; // Slate-700 - Texto principal alternativo
-$color-gray-800: #1e293b; // Slate-800 - Texto principal
-$color-gray-900: #0f172a; // Slate-900 - Texto muy oscuro
-$color-black: #000000;
+$color-white: #ffffff !default;
+$color-gray-50: #f8fafc !default; // Slate-50 - Fondos muy sutiles
+$color-gray-100: #f1f5f9 !default; // Slate-100 - Fondos sutiles, hover
+$color-gray-200: #e2e8f0 !default; // Slate-200 - Bordes sutiles
+$color-gray-300: #cbd5e1 !default; // Slate-300 - Bordes normales
+$color-gray-400: #94a3b8 !default; // Slate-400 - Placeholders
+$color-gray-500: #64748b !default; // Slate-500 - Iconos, texto secundario (= secondary)
+$color-gray-600: #475569 !default; // Slate-600 - Texto secundario oscuro
+$color-gray-700: #334155 !default; // Slate-700 - Texto principal alternativo
+$color-gray-800: #1e293b !default; // Slate-800 - Texto principal
+$color-gray-900: #0f172a !default; // Slate-900 - Texto muy oscuro
+$color-black: #000000 !default;
 
 // Colores base (con !default para permitir sobrescritura por presets)
 $color-primary: #0d9488 !default; // Teal más oscuro (teal-600)
@@ -48,25 +36,25 @@ $color-warning: #d97706 !default; // Naranja oscuro para advertencias (amber-600
 $color-danger: #dc2626 !default; // Rojo oscuro para peligro / errores (red-600)
 
 // Color de texto principal
-$color-text: $color-gray-800;
-$color-text-secondary: $color-gray-700; // Ahora usa slate-500 (coherente con secondary)
-$color-text-muted: $color-gray-500; // Texto muy sutil
-$color-text-disabled: #a1a9b7; // Texto deshabilitado
-$color-text-hint: $color-gray-400; // Texto de ayuda / hints
-$color-text-heading: $color-gray-900; // Encabezados y títulos
+$color-text: $color-gray-800 !default;
+$color-text-secondary: $color-gray-700 !default; // Ahora usa slate-500 (coherente con secondary)
+$color-text-muted: $color-gray-500 !default; // Texto muy sutil
+$color-text-disabled: #a1a9b7 !default; // Texto deshabilitado
+$color-text-hint: $color-gray-400 !default; // Texto de ayuda / hints
+$color-text-heading: $color-gray-900 !default; // Encabezados y títulos
 
 // Color del anillo de enfoque para accesibilidad
-$focus-ring-color: with-alpha(
+$focus-ring-color: functions.with-alpha(
   $color-gray-600,
   0.7
-); // (Slate-600) con 70% opacidad
+) !default; // (Slate-600) con 70% opacidad
 
 // Color de highlight
-$color-highlight: with-alpha(#fbbf24, 0.4); // Amber-400 más cálido
+$color-highlight: functions.with-alpha(#fbbf24, 0.4) !default; // Amber-400 más cálido
 
 // Color para selección de texto
 // Usamos un tono más claro del color de acento para la selección de texto
-$color-selection: tint($color-accent, 40%);
+$color-selection: functions.tint($color-accent, 40%) !default;
 
 // =======================
 // SWITCH COLORS (LIGHT THEME)
@@ -74,10 +62,10 @@ $color-selection: tint($color-accent, 40%);
 // Switch (light theme)
 // Ejemplo de uso:
 // .nui-switch__track { background: $color-switch-track-bg; }
-$color-switch-track-bg: #e1e4e8;
-$color-switch-track-border: #d0d7de;
-$color-switch-track-hover-border: #afb8c1;
-$color-switch-thumb-bg: #ffffff;
+$color-switch-track-bg: #e1e4e8 !default;
+$color-switch-track-border: #d0d7de !default;
+$color-switch-track-hover-border: #afb8c1 !default;
+$color-switch-thumb-bg: #ffffff !default;
 
 // =======================
 // SPINNER
@@ -85,25 +73,25 @@ $color-switch-thumb-bg: #ffffff;
 // Spinner (light theme)
 // Ejemplo de uso:
 // .nui-spinner-circle { border-color: $color-spinner-border; }
-$color-spinner-border: with-alpha($color-black, 0.15); // Negro muy transparente
-$color-spinner-backdrop: with-alpha(
+$color-spinner-border: functions.with-alpha($color-black, 0.15) !default; // Negro muy transparente
+$color-spinner-backdrop: functions.with-alpha(
   $color-white,
   0.7
-); // Blanco semitransparente para el fondo del spinner
+) !default; // Blanco semitransparente para el fondo del spinner
 
 // =======================
 // MODAL BACKDROP
 // =======================
 // Modal backdrop
-$color-backdrop: with-alpha(
+$color-backdrop: functions.with-alpha(
   $color-black,
   0.5
-); // Negro semitransparente (50% opacity)
+) !default; // Negro semitransparente (50% opacity)
 
 // =======================
 // MODAL GRADIENT
 // =======================
-$color-modal-gradient: linear-gradient(90deg, $color-warning, $color-danger);
+$color-modal-gradient: linear-gradient(90deg, $color-warning, $color-danger) !default;
 
 // =======================
 // DARK THEME COLORS
@@ -112,16 +100,16 @@ $color-modal-gradient: linear-gradient(90deg, $color-warning, $color-danger);
 // =======================
 
 // Grises dark theme
-$color-gray-50-dark: #0d1117; // Charcoal deepest
-$color-gray-100-dark: #161b22; // Charcoal dark
-$color-gray-200-dark: #21262d; // Charcoal medium
-$color-gray-300-dark: #30363d; // Charcoal light
-$color-gray-400-dark: #484f58; // Gray medium
-$color-gray-500-dark: #6e7681; // Gray light
-$color-gray-600-dark: #8b949e; // Gray lighter
-$color-gray-700-dark: #c9d1d9; // Gray very light
-$color-gray-800-dark: #e6edf3; // Almost white
-$color-gray-900-dark: #f0f6fc; // White blue tint
+$color-gray-50-dark: #0d1117 !default; // Charcoal deepest
+$color-gray-100-dark: #161b22 !default; // Charcoal dark
+$color-gray-200-dark: #21262d !default; // Charcoal medium
+$color-gray-300-dark: #30363d !default; // Charcoal light
+$color-gray-400-dark: #484f58 !default; // Gray medium
+$color-gray-500-dark: #6e7681 !default; // Gray light
+$color-gray-600-dark: #8b949e !default; // Gray lighter
+$color-gray-700-dark: #c9d1d9 !default; // Gray very light
+$color-gray-800-dark: #e6edf3 !default; // Almost white
+$color-gray-900-dark: #f0f6fc !default; // White blue tint
 
 // Colores principales dark (más brillantes para contraste en fondos oscuros)
 $color-primary-dark: #14b8a6 !default; // Teal-500 (más brillante que light)
@@ -135,58 +123,58 @@ $color-warning-dark: #d29922 !default; // Amber-500 (más brillante que light)
 $color-danger-dark: #f85149 !default; // Red-500 (más brillante que light)
 
 // Color de texto principal
-$color-text-dark: $color-gray-800-dark; // Texto principal claro
-$color-text-secondary-dark: $color-gray-700-dark; // Texto secundario más claro
-$color-text-muted-dark: $color-gray-600-dark; // Texto muy sutil
-$color-text-disabled-dark: #3a404a; // Texto deshabilitado (oscuro diferenciado)
-$color-text-hint-dark: $color-gray-500-dark; // Texto de ayuda / hints
-$color-text-heading-dark: $color-gray-900-dark; // Encabezados y títulos
+$color-text-dark: $color-gray-800-dark !default; // Texto principal claro
+$color-text-secondary-dark: $color-gray-700-dark !default; // Texto secundario más claro
+$color-text-muted-dark: $color-gray-600-dark !default; // Texto muy sutil
+$color-text-disabled-dark: #3a404a !default; // Texto deshabilitado (oscuro diferenciado)
+$color-text-hint-dark: $color-gray-500-dark !default; // Texto de ayuda / hints
+$color-text-heading-dark: $color-gray-900-dark !default; // Encabezados y títulos
 
 // Color del anillo de enfoque para accesibilidad
-$focus-ring-color-dark: with-alpha(
+$focus-ring-color-dark: functions.with-alpha(
   $color-gray-600-dark,
   0.7
-); // (Slate-600) con 70% opacidad
+) !default; // (Slate-600) con 70% opacidad
 
 // Color de highlight
-$color-highlight-dark: with-alpha(
+$color-highlight-dark: functions.with-alpha(
   #fcd34d,
   0.3
-); // Amber-300 más visible en dark
+) !default; // Amber-300 más visible en dark
 
 // Color para selección de texto
 // Usamos un tono más claro del color de acento para la selección de texto
-$color-selection-dark: tint($color-accent, 5%);
+$color-selection-dark: functions.tint($color-accent, 5%) !default;
 
 // =======================
 // SWITCH COLORS (DARK THEME)
 // =======================
 // Switch (dark theme)
-$color-switch-track-bg-dark: #30363d;
-$color-switch-track-border-dark: #30363d;
-$color-switch-track-hover-border-dark: #484f58;
-$color-switch-thumb-bg-dark: $color-gray-50-dark;
+$color-switch-track-bg-dark: #30363d !default;
+$color-switch-track-border-dark: #30363d !default;
+$color-switch-track-hover-border-dark: #484f58 !default;
+$color-switch-thumb-bg-dark: $color-gray-50-dark !default;
 
 // =======================
 // SPINNER
 // =======================
 // Spinner (dark theme)
-$color-spinner-border-dark: with-alpha(
+$color-spinner-border-dark: functions.with-alpha(
   $color-white,
   0.15
-); // Blanco muy transparente
-$color-spinner-backdrop-dark: with-alpha(
+) !default; // Blanco muy transparente
+$color-spinner-backdrop-dark: functions.with-alpha(
   $color-black,
   0.7
-); // Negro semitransparente (70% opacity)
+) !default; // Negro semitransparente (70% opacity)
 
 // =======================
 // MODAL BACKDROP
 // =======================
 // Modal backdrop
-$color-backdrop-dark: with-alpha($color-black, 0.6); // Negro semitransparente (60% opacity)
+$color-backdrop-dark: functions.with-alpha($color-black, 0.6) !default; // Negro semitransparente (60% opacity)
 
 // =======================
 // MODAL GRADIENT
 // =======================
-$color-modal-gradient-dark: linear-gradient(90deg, $color-warning-dark, $color-danger-dark);
+$color-modal-gradient-dark: linear-gradient(90deg, $color-warning-dark, $color-danger-dark) !default;

@@ -1,3 +1,7 @@
+@use "sass:color";
+@use "sass:list";
+@use "sass:map";
+@use "sass:math";
 // ========================================
 // COLOR FUNCTIONS
 // ========================================
@@ -9,7 +13,7 @@
 /// @example
 ///   tint(#14b8a6, 50%) // Mezcla 50% blanco con teal
 @function tint($color, $percentage) {
-  @return mix(white, $color, $percentage);
+  @return color.mix(white, $color, $percentage);
 }
 
 /// Función para oscurecer un color mezclándolo con negro
@@ -19,7 +23,7 @@
 /// @example
 ///   shade(#14b8a6, 50%) // Mezcla 50% negro con teal
 @function shade($color, $percentage) {
-  @return mix(black, $color, $percentage);
+  @return color.mix(black, $color, $percentage);
 }
 
 /// Función para crear un color con transparencia (alpha)
@@ -57,7 +61,7 @@
 ///   px-to-rem(24px) // 1.5rem
 ///   px-to-rem(24px, 14px) // 1.714rem
 @function px-to-rem($px, $base: 16px) {
-  @if unit($px) != 'px' {
+  @if math.unit($px) != 'px' {
     @error "px-to-rem() espera un valor en px, recibió: #{$px}";
   }
   @return calc(strip-unit($px) / strip-unit($base)) * 1rem;
@@ -72,7 +76,7 @@
 ///   rem-to-px(1.5rem) // 24px
 ///   rem-to-px(1.5rem, 14px) // 21px
 @function rem-to-px($rem, $base: 16px) {
-  @if unit($rem) != 'rem' {
+  @if math.unit($rem) != 'rem' {
     @error "rem-to-px() espera un valor en rem, recibió: #{$rem}";
   }
   @return calc(strip-unit($rem) * strip-unit($base)) * 1px;
@@ -107,10 +111,10 @@
 @function shadow-layers($layers) {
   $result: ();
   @each $layer in $layers {
-    $base: nth($layer, 1);
-    $opacity: nth($layer, 2);
-    $color: if(length($layer) > 2, nth($layer, 3), black);
-    $result: append($result, shadow($base, $opacity, $color), comma);
+    $base: list.nth($layer, 1);
+    $opacity: list.nth($layer, 2);
+    $color: if(list.length($layer) > 2, list.nth($layer, 3), black);
+    $result: list.append($result, shadow($base, $opacity, $color), comma);
   }
   @return $result;
 }
@@ -128,8 +132,8 @@
 /// @example
 ///   map-get-default($component-heights, md, 2.5rem) // Valor de md o 2.5rem
 @function map-get-default($map, $key, $fallback: null) {
-  @if map-has-key($map, $key) {
-    @return map-get($map, $key);
+  @if map.has-key($map, $key) {
+    @return map.get($map, $key);
   }
   @return $fallback;
 }
@@ -146,9 +150,9 @@
 ///   luminance(#ffffff) // 1
 ///   luminance(#000000) // 0
 @function luminance($color) {
-  $red: red($color) / 255;
-  $green: green($color) / 255;
-  $blue: blue($color) / 255;
+  $red: color.red($color) / 255;
+  $green: color.green($color) / 255;
+  $blue: color.blue($color) / 255;
 
   // Convertir a espacio sRGB
   @if $red <= 0.03928 {

@@ -1,0 +1,138 @@
+<div
+  class="nui-toast__container"
+  [attr.role]="config().ariaRole || 'status'"
+  [attr.aria-live]="config().ariaLive || 'polite'"
+  [attr.aria-atomic]="true"
+  [style.transform]="isSwiping ? 'translateX(' + swipeDistance() + 'px)' : null"
+>
+  <!-- Barra de progreso en el borde SUPERIOR -->
+  @if (
+    config().progressBar && config().timeout && (config().timeout || 0) > 0
+  ) {
+    <div
+      class="nui-toast__progress-bar"
+      [style.width]="progressBarStyle().width"
+      [class.nui-toast__progress-bar--paused]="isPaused()"
+    ></div>
+  }
+
+  <!-- Botones de control (FUERA del body, posicionados absolute) -->
+  <div class="nui-toast__controls">
+    <!-- Botón de cerrar -->
+    @if (config().closeButton) {
+      <button
+        type="button"
+        class="nui-toast__close-button"
+        (click)="close(); $event.stopPropagation()"
+        [attr.aria-label]="translation.close"
+      >
+        <i class="ri-close-line"></i>
+      </button>
+    }
+    <!-- Botón de expandir (si es expandible) -->
+    @if (config().expandable) {
+      <button
+        type="button"
+        class="nui-toast__expand-button"
+        (click)="toggleExpanded(); $event.stopPropagation()"
+        [attr.aria-label]="
+          isExpanded() ? translation.collapse : translation.expand
+        "
+        [attr.aria-expanded]="isExpanded()"
+      >
+        <i
+          [class]="isExpanded() ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"
+        ></i>
+      </button>
+    }
+  </div>
+
+  <!-- Contenedor principal del contenido -->
+  <div class="nui-toast__body">
+    <!-- Icono (solo si showStandardContent es true) -->
+    @if (shouldShowIcon()) {
+      <div class="nui-toast__icon">
+        <i [class]="iconClass()"></i>
+      </div>
+    }
+
+    <!-- Contenido -->
+    <div class="nui-toast__content">
+      <!-- Título (solo si showStandardContent es true) -->
+      @if (shouldShowTitle()) {
+        <div class="nui-toast__title">
+          {{ config().title }}
+        </div>
+      }
+
+      <!-- Mensaje (solo si showStandardContent es true) -->
+      @if (shouldShowMessage()) {
+        <div class="nui-toast__message">
+          {{ config().message }}
+        </div>
+      }
+
+      <!-- HTML sanitizado (solo si showStandardContent es true) -->
+      @if (shouldShowHtml()) {
+        <div class="nui-toast__html" [innerHTML]="safeHtml()"></div>
+      }
+
+      <!-- Template personalizado (SIEMPRE se muestra si existe) -->
+      @if (config().template) {
+        <div class="nui-toast__template">
+          <ng-container
+            [ngTemplateOutlet]="config().template!"
+            [ngTemplateOutletContext]="config().templateContext || {}"
+          />
+        </div>
+      }
+
+      <!-- Contenido expandido -->
+      @if (isExpanded() && config().expandedContent) {
+        <div class="nui-toast__expanded-content">
+          @if (isExpandedContentString()) {
+            <div [innerHTML]="config().expandedContent"></div>
+          } @else {
+            <ng-container
+              [ngTemplateOutlet]="$any(config().expandedContent)"
+              [ngTemplateOutletContext]="config().templateContext || {}"
+            />
+          }
+        </div>
+      }
+
+      <!-- Acciones -->
+      @if (hasActions()) {
+        <div class="nui-toast__actions">
+          <!-- Acción principal -->
+          @if (config().action) {
+            <button
+              type="button"
+              nuiButton
+              [size]="config().buttonsSize || 'sm'"
+              [color]="buttonColor()"
+              [variant]="buttonVariant()"
+              (click)="onActionClick(config().action!, $event)"
+            >
+              {{ config().action!.label }}
+            </button>
+          }
+
+          <!-- Acciones adicionales -->
+          @for (action of config().actions; track action.label) {
+            <button
+              type="button"
+              nuiButton
+              [size]="config().buttonsSize || 'sm'"
+              [color]="buttonColor()"
+              [variant]="buttonVariant()"
+              (click)="onActionClick(action, $event)"
+            >
+              {{ action.label }}
+            </button>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="nui-toast-container__wrapper">
+  @for (toast of toasts(); track trackByToastId($index, toast)) {
+    <nui-toast
+      [toastRef]="toast"
+      (closed)="removeToast(toast.id)"
+    ></nui-toast>
+  }
+</div>

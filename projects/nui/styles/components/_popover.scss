@@ -1,7 +1,7 @@
-@import "@angular/cdk/overlay-prebuilt.css";
-@import "../config";
-@import "../mixins";
-@import "../variables/popover";
+@use "../config";
+@use "../mixins";
+// NOTA: No importar theme ni theme-config aquí, ya están incluidos globalmente en nui.scss
+@use "../variables/popover/popover-variables.scss";
 
 // ========================================
 // POPOVER - Estilos globales
@@ -99,11 +99,11 @@
     
     // Enlaces en el popover
     a {
-      color: var(--color-primary);
+      color: var(--nui-color-primary);
       text-decoration: underline;
       
       &:hover {
-        color: var(--color-primary-hover);
+        color: var(--nui-color-primary-hover);
       }
     }
     
@@ -186,7 +186,7 @@
         width: 1.5rem;
         height: 1.5rem;
         border: 2px solid var(--popover-border-color);
-        border-top-color: var(--color-primary);
+        border-top-color: var(--nui-color-primary);
         border-radius: 50%;
         animation: spin 0.8s linear infinite;
       }
@@ -214,13 +214,13 @@
 
 // Estados interactivos (focus visible para accesibilidad)
 .nui-popover:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--nui-color-primary);
   outline-offset: 2px;
 }
 
 // Backdrop para popovers con popoverBackdrop=true
 .nui-popover-backdrop {
-  @include overlay-backdrop();
+  @include mixins.overlay-backdrop();
 }
 
 // Media queries para responsive

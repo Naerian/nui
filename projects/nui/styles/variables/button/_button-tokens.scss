@@ -1,0 +1,66 @@
+// ========================================
+// BUTTON - Tokens (SCSS Variables)
+// ========================================
+//
+// Variables SCSS centralizadas para personalizar el componente Button.
+// Todas las variables usan !default para permitir sobrescritura.
+//
+// Cómo personalizar:
+// ------------------
+// 1. Define tus propias variables ANTES de importar este archivo
+// 2. Las variables SCSS ($button-*) afectan todos los botones
+//
+// Ejemplo de personalización:
+// ```scss
+// // En tu archivo custom-variables.scss
+// $button-gap: 0.75rem;
+// $button-border-radius: 0.375rem;
+// $button-focus-outline-width: 3px;
+//
+// @import "variables/button/button-tokens";
+// ```
+//
+// Para temas específicos, usa los mixins en themes/_theme-mixins.scss
+// que generan automáticamente las variables de color por cada modo
+// (--nui-button-{mode}-bg, --nui-button-{mode}-text, etc.)
+//
+// ========================================
+
+// ===== ESPACIADO =====
+$button-gap: 0.5rem !default;
+
+// ===== BORDES Y RADIOS =====
+$button-border-radius: var(--border-radius-md) !default;
+$button-border-width: var(--border-width-xs) !default;
+
+// ===== TIPOGRAFÍA =====
+$button-font-weight: var(--font-weight-medium) !default;
+$button-font-family: var(--font-family) !default;
+
+// ===== TRANSFORMACIONES Y ANIMACIONES =====
+$button-spin-duration: 1s !default;
+
+// ===== FOCUS =====
+$button-focus-outline-width: 2px !default;
+$button-focus-outline-offset: -1px !default;
+
+// ===== OUTLINE VARIANT =====
+$button-outline-border-width: var(--border-width-xs) !default;
+$button-outline-border-style: solid !default;
+
+// ===== DISABLED STATE =====
+// Los estilos disabled se manejan con el mixin @include disabled
+
+// ===== BUTTON MODES =====
+// Los colores se generan dinámicamente en theme-mixins
+// Cada modo (primary, secondary, success, info, warning, danger, accent) tiene:
+// - --nui-button-{mode}-bg
+// - --nui-button-{mode}-border-color
+// - --nui-button-{mode}-text
+// - --nui-button-{mode}-hover-bg
+// - --nui-button-{mode}-ghost-text
+// - --nui-button-{mode}-icon-color
+// - --nui-button-{mode}-ghost-icon-color
+// - --nui-button-{mode}-ghost-hover-bg
+
+$button-modes: primary, secondary, success, info, warning, danger, accent !default;

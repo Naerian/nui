@@ -1,0 +1,127 @@
+@use "sass:map";
+@use "../../config";
+
+// ========================================
+// CHIP - Tokens (SCSS Variables)
+// ========================================
+//
+// Variables SCSS centralizadas para personalizar el componente Chip.
+// Todas las variables usan !default para permitir sobrescritura.
+//
+// ========================================
+
+// Padding vertical (block) para chips - Escala coherente
+$chip-padding-y: (
+  xs: 0.125rem,
+  // 2px  - Mínimo (chips muy compactos)
+  s: 0.25rem,
+  // 4px  - Pequeño (chips compactos)
+  sm: 0.3125rem,
+  // 5px  - Pequeño-medio (transición)
+  md: 0.375rem,
+  // 6px  - ESTÁNDAR (chips normales)
+  lg: 0.5rem,
+  // 8px  - Grande (chips destacados)
+  xl: 0.625rem,
+  // 10px - Extra grande (chips muy destacados)
+) !default;
+
+// Padding horizontal (inline) para chips - Escala coherente
+$chip-padding-x: (
+  xs: 0.5rem,
+  // 8px  - Mínimo (chips compactos)
+  s: 0.625rem,
+  // 10px - Pequeño (chips normales)
+  sm: 0.6875rem,
+  // 11px - Pequeño-medio (transición)
+  md: 0.75rem,
+  // 12px - ESTÁNDAR (chips destacados)
+  lg: 1rem,
+  // 16px - Grande (chips amplios)
+  xl: 1.25rem,
+  // 20px - Extra grande (chips muy amplios)
+) !default;
+
+// Font sizes para chips - Escala coherente
+$chip-font-size: (
+  xs: 0.6875rem,
+  // 11px - Extra pequeño
+  s: 0.75rem,
+  // 12px - Pequeño
+  sm: 0.8125rem,
+  // 13px - Pequeño-medio
+  md: 0.875rem,
+  // 14px - ESTÁNDAR
+  lg: 1rem,
+  // 16px - Grande
+  xl: 1.125rem,
+  // 18px - Extra grande
+) !default;
+
+// Variables semánticas para chips - Evitar magic numbers
+$chip-container-gap: 0.375rem !default; // Gap entre elementos internos del chip
+$chip-image-margin-negative: -0.08 !default; // Porcentaje negativo para sobresalir imagen (8%)
+$chip-image-gap: 0.25rem !default; // Gap entre imagen y texto (4px)
+$chip-remove-gap-start: 0.125rem !default; // Gap antes del botón de eliminar (2px)
+$chip-remove-margin-negative: -0.125rem !default; // Margin negativo del botón eliminar (2px hacia dentro)
+$chip-border-drop-size: 0.125rem !default; // Tamaño del borde extra al hacer drop (2px)
+$chip-border-drop-style: dashed !default; // Estilo del borde extra al hacer drop
+
+// Border radius para chips - valor que se resolverá en chip-variables.scss
+// NOTA: El valor de border-radius-pill se obtiene de config en chip-variables.scss
+$chip-border-radius-pill: 9999px !default;
+
+// ===== CHIP SELECTOR =====
+$chip-selector-gap: 0.75rem !default;
+$chip-selector-toolbar-gap: 0.75rem !default;
+$chip-selector-search-max-width: 400px !default;
+$chip-selector-counter-gap: 0.5rem !default;
+$chip-selector-counter-font-size: 0.875rem !default;
+$chip-selector-counter-max-font-size: 0.8125rem !default;
+$chip-selector-counter-max-opacity: 0.7 !default;
+
+// ===== CHIP LIST (CDK Drag & Drop) =====
+$chip-list-drag-placeholder-opacity-before: 0.2 !default;
+$chip-list-drag-preview-opacity: 0.8 !default;
+$chip-list-drag-preview-rotation: 3deg !default;
+$chip-list-drag-color-mix-percentage: 15% !default;
+$chip-list-drag-hover-color-mix-percentage: 8% !default;
+$chip-list-drag-shadow-spread: 4px !default;
+$chip-list-disabled-opacity: 0.6 !default;
+
+// Animaciones
+$chip-list-pulse-placeholder-opacity-min: 0.8 !default;
+$chip-list-pulse-placeholder-scale-max: 1.5 !default;
+$chip-list-pulse-drop-zone-opacity-min: 0.6 !default;
+$chip-list-pulse-drop-zone-scale-max: 1.02 !default;
+
+// Tamaños de imagen para chips - Escala coherente
+$chip-image-sizes: (
+  xs: 1.25rem,
+  // 20px (100% de altura estimada ~20px)
+  s: 1.5rem,
+  // 24px (100% de altura estimada ~24px)
+  sm: 1.75rem,
+  // 28px (100% de altura estimada ~28px)
+  md: 2rem,
+  // 32px (100% de altura estimada ~32px)
+  lg: 2.5rem,
+  // 40px (100% de altura estimada ~40px)
+  xl: 3rem,
+  // 48px (100% de altura estimada ~48px)
+);
+
+// Border radius para chips - Todos los tamaños usan el mismo valor de píldora
+$chip-border-radius: (
+  xs: config.$border-radius-pill,
+  // 9999px - Todos los tamaños usan el mismo valor
+  s: config.$border-radius-pill,
+  sm: config.$border-radius-pill,
+  md: config.$border-radius-pill,
+  lg: config.$border-radius-pill,
+  xl: config.$border-radius-pill,
+) !default;
+
+// Alias para compatibilidad (reutilización DRY)
+$chip-image-widths: $chip-image-sizes;
+$chip-image-heights: $chip-image-sizes;

@@ -1,8 +1,8 @@
-@import "@angular/cdk/overlay-prebuilt.css";
-@import "theme";
-@import "mixins";
+@use "../config";
+@use "../mixins";
+// NOTA: No importar theme ni theme-config aquí, ya están incluidos globalmente en nui.scss
 
 // Estilos globales para el SlidePanel
 .slidepanel-backdrop {
-  @include overlay-backdrop();
+  @include mixins.overlay-backdrop();
 }

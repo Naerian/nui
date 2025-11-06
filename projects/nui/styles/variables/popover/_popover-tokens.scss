@@ -1,0 +1,42 @@
+// ========================================
+// POPOVER - Tokens (SCSS Variables)
+// ========================================
+//
+// Variables SCSS centralizadas para personalizar el componente Popover.
+// Todas las variables usan !default para permitir sobrescritura.
+//
+// ========================================
+
+// ===== ESPACIADO =====
+$popover-padding: 1rem !default;
+$popover-max-width: 20rem !default;
+$popover-min-width: 10rem !default;
+
+// ===== TIPOGRAFÍA =====
+$popover-font-size: var(--font-size-sm) !default;
+$popover-font-weight: var(--font-weight-regular) !default;
+$popover-line-height: var(--line-height-md) !default;
+
+// ===== BORDES Y RADIOS =====
+$popover-border-radius: var(--border-radius-md) !default;
+$popover-border: var(--border-container) !default;
+
+// ===== COLORES =====
+// Los colores se manejan por tema en theme-config
+$popover-bg: var(--popover-bg) !default;
+$popover-text: var(--popover-text) !default;
+
+// ===== SOMBRAS =====
+$popover-shadow: var(--nui-shadow-elevated) !default;
+
+// ===== Z-INDEX =====
+$popover-z-index: 1000 !default;
+
+// ===== FLECHA =====
+$popover-arrow-size: 8px !default;
+$popover-arrow-border-width: 1px !default;
+$popover-arrow-offset: 12px !default; // Distancia desde el borde del popover
+
+// ===== ANIMACIÓN =====
+$popover-transition-duration: 200ms !default;
+$popover-transition-timing: cubic-bezier(0.4, 0, 0.2, 1) !default;

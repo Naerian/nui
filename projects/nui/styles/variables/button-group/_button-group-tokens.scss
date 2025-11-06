@@ -1,0 +1,101 @@
+@use "sass:map";
+@use "../../config";
+
+// ========================================
+// BUTTON GROUP - Tokens (SCSS Variables)
+// ========================================
+//
+// Variables SCSS centralizadas para personalizar el componente Button Group.
+// Todas las variables usan !default para permitir sobrescritura.
+//
+// ========================================
+
+// Z-index layers para ButtonGroup
+$button-group-z-index-base: 0 !default;
+$button-group-z-index-hover: 1 !default;
+$button-group-z-index-selected: 1 !default;
+$button-group-z-index-focus: 2 !default;
+
+// Opacidad para estados
+$button-group-disabled-opacity: 0.4 !default;
+$button-group-container-disabled-opacity: 0.6 !default;
+
+// Gaps y offsets específicos
+$button-group-ghost-gap: 0.25rem !default; // 4px - Separación entre botones en modo ghost
+$button-group-segmented-gap: 0.125rem !default; // 2px - Separación interna en modo segmented
+$button-group-segmented-padding: 0.125rem !default; // 2px - Padding del contenedor segmented
+
+// Animation scaling
+$button-group-animation-scale-from: 0.98 !default;
+$button-group-animation-scale-to: 1 !default;
+
+// Icon sizes por tamaño de componente
+$button-group-icon-size-xs: 0.875rem !default; // 14px
+$button-group-icon-size-s: 1rem !default; // 16px
+$button-group-icon-size-sm: 1.125rem !default; // 18px
+$button-group-icon-size-md: 1.25rem !default; // 20px
+$button-group-icon-size-lg: 1.375rem !default; // 22px
+$button-group-icon-size-xl: 1.5rem !default; // 24px
+
+// Mapas de z-index para ButtonGroup
+$button-group-z-indexes: (
+  base: $button-group-z-index-base,
+  hover: $button-group-z-index-hover,
+  selected: $button-group-z-index-selected,
+  focus: $button-group-z-index-focus,
+) !default;
+
+// Mapa de icon sizes
+$button-group-icon-sizes: (
+  xs: $button-group-icon-size-xs,
+  s: $button-group-icon-size-s,
+  sm: $button-group-icon-size-sm,
+  md: $button-group-icon-size-md,
+  lg: $button-group-icon-size-lg,
+  xl: $button-group-icon-size-xl,
+) !default;
+
+$button-group-sizes: (
+  xs: (
+    height: map.get(config.$component-heights, xs),
+    padding: map.get(config.$component-paddings, xs),
+    font-size: map.get(config.$component-font-sizes, xs),
+    gap: config.$spacing-xs,
+    icon-size: $button-group-icon-size-xs,
+  ),
+  s: (
+    height: map.get(config.$component-heights, s),
+    padding: map.get(config.$component-paddings, s),
+    font-size: map.get(config.$component-font-sizes, s),
+    gap: config.$spacing-xs,
+    icon-size: $button-group-icon-size-s,
+  ),
+  sm: (
+    height: map.get(config.$component-heights, sm),
+    padding: map.get(config.$component-paddings, sm),
+    font-size: map.get(config.$component-font-sizes, sm),
+    gap: config.$spacing-s,
+    icon-size: $button-group-icon-size-sm,
+  ),
+  md: (
+    height: map.get(config.$component-heights, md),
+    padding: map.get(config.$component-paddings, md),
+    font-size: map.get(config.$component-font-sizes, md),
+    gap: config.$spacing-s,
+    icon-size: $button-group-icon-size-md,
+  ),
+  lg: (
+    height: map.get(config.$component-heights, lg),
+    padding: map.get(config.$component-paddings, lg),
+    font-size: map.get(config.$component-font-sizes, lg),
+    gap: config.$spacing-sm,
+    icon-size: $button-group-icon-size-lg,
+  ),
+  xl: (
+    height: map.get(config.$component-heights, xl),
+    padding: map.get(config.$component-paddings, xl),
+    font-size: map.get(config.$component-font-sizes, xl),
+    gap: config.$spacing-sm,
+    icon-size: $button-group-icon-size-xl,
+  ),
+) !default;

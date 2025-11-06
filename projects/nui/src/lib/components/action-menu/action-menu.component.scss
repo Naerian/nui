@@ -1,0 +1,165 @@
+@use "../../../../styles/mixins";
+@use "../../../../styles/variables/action-menu/action-menu-variables";
+
+.nui-action-menu,
+.nui-action-menu-submenu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: var(--nui-action-menu-min-width);
+  max-width: var(--nui-action-menu-max-width);
+  border: var(--nui-action-menu-border-width) solid var(--nui-action-menu-border-color);
+  background-color: var(--nui-action-menu-bg);
+  border-radius: var(--nui-action-menu-border-radius);
+  padding: var(--nui-action-menu-padding);
+  box-shadow: var(--nui-action-menu-shadow);
+  gap: var(--nui-action-menu-item-gap);
+
+  &--fullWidth {
+    width: 100%;
+  }
+
+  &--static {
+    box-shadow: var(--nui-action-menu-static-shadow);
+  }
+
+  &__item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    overflow: hidden;
+    background-color: var(--nui-action-menu-item-bg);
+    border: var(--nui-action-menu-item-border);
+    color: var(--nui-action-menu-item-color);
+    border-radius: var(--nui-action-menu-item-border-radius);
+    user-select: none;
+    cursor: pointer;
+    gap: var(--nui-action-menu-item-gap);
+
+    &__container {
+      display: flex;
+      align-items: center;
+      gap: var(--nui-action-menu-item-gap);
+      flex: 1 1 auto;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    &__label {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+      flex: 1;
+      min-width: 0;
+      margin-right: var(--nui-action-menu-item-label-margin-right);
+    }
+
+    &__icon {
+      font-size: inherit;
+      flex-shrink: 0;
+    }
+
+    &__shortcut {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--nui-action-menu-shortcut-bg);
+      color: var(--nui-action-menu-shortcut-color);
+      padding: var(--nui-action-menu-shortcut-padding);
+      border-radius: var(--nui-action-menu-shortcut-border-radius);
+      border: var(--nui-action-menu-shortcut-border-width) solid var(--nui-action-menu-shortcut-border-color);
+    }
+
+    &__arrow {
+      flex-shrink: 0;
+      margin-left: auto;
+      padding-left: var(--nui-action-menu-arrow-padding-left);
+      display: flex;
+      align-items: center;
+    }
+
+    &:focus:not(&--disabled),
+    &:active:not(&--disabled),
+    &:hover:not(&--disabled),
+    &:active:not(&--disabled) {
+      background-color: var(--nui-action-menu-item-hover-bg);
+      color: var(--nui-action-menu-item-hover-color);
+      outline: none;
+
+      .nui-action-menu__item__icon,
+      .nui-action-menu__item__shortcut,
+      .nui-action-menu__item__arrow {
+        color: var(--nui-action-menu-item-hover-icon-color);
+        border-color: var(--nui-action-menu-item-hover-border-color);
+      }
+    }
+
+    &[disabled],
+    &:disabled,
+    &--disabled {
+      @include mixins.disabled;
+    }
+  }
+
+  .nui-action-menu__item,
+  .nui-action-menu-submenu__item {
+    @include mixins.component-size(md);
+  }
+  .nui-action-menu__item__shortcut {
+    font-size: var(--nui-action-menu-shortcut-font-size);
+    line-height: var(--nui-action-menu-shortcut-font-size);
+  }
+
+  // ====================
+  // TEMAS - Generación automática usando mixins
+  // ====================
+  $colors: primary, secondary, success, info, warning, danger, accent;
+  @each $color in $colors {
+    @include mixins.action-menu-theme($color);
+  }
+}
+
+// ====================
+// SUBMENU - Estilos específicos
+// ====================
+.nui-action-menu-submenu {
+  &__item {
+    gap: var(--nui-action-menu-item-gap);
+
+    &__container {
+      display: flex;
+      align-items: center;
+      gap: var(--nui-action-menu-item-gap);
+      flex: 1 1 auto;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    &__label {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+      flex: 1;
+      min-width: 0;
+    }
+
+    &__shortcut {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--nui-action-menu-shortcut-bg);
+      color: var(--nui-action-menu-shortcut-color);
+      padding: var(--nui-action-menu-shortcut-padding);
+      border-radius: var(--nui-action-menu-shortcut-border-radius);
+      border: var(--nui-action-menu-shortcut-border-width) solid var(--nui-action-menu-shortcut-border-color);
+      margin-left: auto;
+    }
+  }
+}

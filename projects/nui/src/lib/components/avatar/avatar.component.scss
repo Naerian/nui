@@ -1,0 +1,76 @@
+@use "../../../../styles/variables/avatar/avatar-variables";
+
+.nui-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  user-select: none;
+  vertical-align: middle;
+
+  // Color por defecto
+  background-color: var(--nui-avatar-default-bg);
+  color: var(--nui-avatar-default-color);
+  font-weight: var(--nui-avatar-font-weight);
+  line-height: var(--nui-avatar-line-height);
+
+  // Transición suave
+  transition: var(--nui-avatar-transition);
+
+  // ===== VARIANTES DE FORMA =====
+  $variants: rounded, circular, square;
+  @each $variant in $variants {
+    &--#{$variant} {
+      border-radius: var(--nui-avatar-border-radius-#{$variant});
+    }
+  }
+
+  // ===== TAMAÑOS =====
+  $sizes: xs, sm, md, lg, xl;
+  @each $size in $sizes {
+    &--#{$size} {
+      width: var(--nui-avatar-size-#{$size});
+      height: var(--nui-avatar-size-#{$size});
+      font-size: var(--nui-avatar-font-size-#{$size});
+      line-height: var(--nui-avatar-font-size-#{$size});
+
+      .nui-avatar__icon {
+        font-size: var(--nui-avatar-icon-size-#{$size});
+      }
+    }
+  }
+
+  // ===== COLORES =====
+  $colors: primary, secondary, success, info, warning, danger, accent;
+  @each $color in $colors {
+    &--#{$color} {
+      background-color: var(--nui-avatar-#{$color}-bg);
+      color: var(--nui-avatar-#{$color}-color);
+    }
+  }
+}
+
+// ===== ELEMENTOS INTERNOS =====
+
+.nui-avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.nui-avatar__initials,
+.nui-avatar__fallback {
+  text-align: center;
+  text-transform: var(--nui-avatar-text-transform, uppercase);
+  line-height: var(--nui-avatar-line-height);
+}
+
+.nui-avatar__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: var(--nui-avatar-line-height);
+}

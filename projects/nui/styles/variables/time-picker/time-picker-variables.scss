@@ -1,0 +1,100 @@
+@use "time-picker-tokens" as tokens;
+
+// ========================================
+// TIME PICKER - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Time Picker.
+// Se incluyen a través del mixin nui-time-picker-vars.
+//
+// Uso:
+// ```scss
+// :root {
+//   @include nui-time-picker-vars;
+// }
+//
+// ========================================
+
+@mixin nui-time-picker-vars {
+  // Defaults (md size)
+  --time-picker-item-height: #{tokens.$time-picker-item-height-md};
+  --time-picker-font-size: var(--font-size-md);
+  --time-picker-padding: #{tokens.$time-picker-padding-md};
+  --time-picker-max-height: #{tokens.$time-picker-max-height-md};
+  --time-picker-min-height: #{tokens.$time-picker-min-height-md};
+
+  // Item heights por tamaño
+  --time-picker-item-height-xs: #{tokens.$time-picker-item-height-xs};
+  --time-picker-item-height-s: #{tokens.$time-picker-item-height-s};
+  --time-picker-item-height-sm: #{tokens.$time-picker-item-height-sm};
+  --time-picker-item-height-md: #{tokens.$time-picker-item-height-md};
+  --time-picker-item-height-lg: #{tokens.$time-picker-item-height-lg};
+  --time-picker-item-height-xl: #{tokens.$time-picker-item-height-xl};
+
+  // Paddings por tamaño
+  --time-picker-padding-xs: #{tokens.$time-picker-padding-xs};
+  --time-picker-padding-s: #{tokens.$time-picker-padding-s};
+  --time-picker-padding-sm: #{tokens.$time-picker-padding-sm};
+  --time-picker-padding-md: #{tokens.$time-picker-padding-md};
+  --time-picker-padding-lg: #{tokens.$time-picker-padding-lg};
+  --time-picker-padding-xl: #{tokens.$time-picker-padding-xl};
+
+  // Max heights por tamaño
+  --time-picker-max-height-xs: #{tokens.$time-picker-max-height-xs};
+  --time-picker-max-height-s: #{tokens.$time-picker-max-height-s};
+  --time-picker-max-height-sm: #{tokens.$time-picker-max-height-sm};
+  --time-picker-max-height-md: #{tokens.$time-picker-max-height-md};
+  --time-picker-max-height-lg: #{tokens.$time-picker-max-height-lg};
+  --time-picker-max-height-xl: #{tokens.$time-picker-max-height-xl};
+
+  // Min heights por tamaño
+  --time-picker-min-height-xs: #{tokens.$time-picker-min-height-xs};
+  --time-picker-min-height-s: #{tokens.$time-picker-min-height-s};
+  --time-picker-min-height-sm: #{tokens.$time-picker-min-height-sm};
+  --time-picker-min-height-md: #{tokens.$time-picker-min-height-md};
+  --time-picker-min-height-lg: #{tokens.$time-picker-min-height-lg};
+  --time-picker-min-height-xl: #{tokens.$time-picker-min-height-xl};
+
+  // Separador
+  --time-picker-separator-width: #{tokens.$time-picker-separator-width};
+  --time-picker-separator-line-width: #{tokens.$time-picker-separator-line-width};
+  --time-picker-separator-line-height: #{tokens.$time-picker-separator-line-height};
+  --time-picker-separator-border-radius: #{tokens.$time-picker-separator-border-radius};
+
+  // Items
+  --time-picker-items-gap: #{tokens.$time-picker-items-gap};
+  --time-picker-items-padding: #{tokens.$time-picker-items-padding};
+  --time-picker-items-border-radius: #{tokens.$time-picker-items-border-radius};
+
+  // Scrollbar
+  --time-picker-scrollbar-width: #{tokens.$time-picker-scrollbar-width};
+
+  // Opciones
+  --time-picker-option-min-height: #{tokens.$time-picker-option-min-height};
+
+  // Acciones
+  --time-picker-actions-gap: #{tokens.$time-picker-actions-gap};
+
+  // Min widths
+  --time-picker-min-width: #{tokens.$time-picker-min-width};
+  --time-picker-min-width-with-seconds: #{tokens.$time-picker-min-width-with-seconds};
+
+  // Borders
+  --time-picker-header-border-width: #{tokens.$time-picker-header-border-width};
+  --time-picker-item-border-width: #{tokens.$time-picker-item-border-width};
+
+  // Font sizes
+  --time-picker-display-font-size: #{tokens.$time-picker-display-font-size};
+  --time-picker-normalized-font-size: #{tokens.$time-picker-normalized-font-size};
+
+  // Separator alignment
+  --time-picker-separator-padding-top: #{tokens.$time-picker-separator-padding-top};
+
+  // Text shadows
+  --time-picker-separator-text-shadow: #{tokens.$time-picker-separator-text-shadow};
+
+  // Outline (focus states)
+  --time-picker-focus-outline-width: #{tokens.$time-picker-focus-outline-width};
+  --time-picker-focus-outline-offset: #{tokens.$time-picker-focus-outline-offset};
+  --time-picker-item-focus-outline-offset: #{tokens.$time-picker-item-focus-outline-offset};
+}

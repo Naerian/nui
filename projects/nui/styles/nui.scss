@@ -1,0 +1,31 @@
+//------------------------------------------------------------
+// ## 1. Configuración base
+//------------------------------------------------------------
+@use "config"; // Constantes globales primero
+@use "functions"; // Funciones SCSS (deben ir antes de mixins)
+
+//------------------------------------------------------------
+// ## 2. Mixins (usan variables)
+//------------------------------------------------------------
+@use "mixins"; // Mixins generales que usan las variables
+
+//------------------------------------------------------------
+// ## 3. Temas (generan CSS variables)
+//------------------------------------------------------------
+@use "theme-config"; // Configuración de temas (todas las variables CSS)
+// Nota: La generación de colores ahora se maneja por ThemeService en TypeScript
+
+//------------------------------------------------------------
+// ## 4. Estilos base y tipografía
+//------------------------------------------------------------
+@use "base"; // Reset/normalize + estilos base HTML
+@use "typography"; // Estilos tipográficos globales
+@use "icons/remixicon"; // Iconos Remix
+
+//------------------------------------------------------------
+// ## 5. Componentes globales
+//------------------------------------------------------------
+// NOTA: Los estilos del CDK Overlay deben ser importados por el consumidor de la librería
+// en su angular.json o styles.scss:
+// @import '@angular/cdk/overlay-prebuilt.css';
+@use "components/components"; // Estilos globales de componentes

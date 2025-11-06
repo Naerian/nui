@@ -1,0 +1,15 @@
+@use "../../config";
+
+// =======================
+// SLIDE PANEL - CSS Custom Properties Mixin
+// =======================
+
+@mixin nui-slidepanel-vars {
+  --slidepanel-header-padding: #{config.$spacing-md};
+  --slidepanel-title-size: #{config.$font-size-lg};
+  --slidepanel-title-weight: #{config.$font-weight-semibold};
+
+  --slidepanel-content-padding: #{config.$spacing-md};
+
+  --slidepanel-footer-padding: #{config.$spacing-md};
+}

@@ -1,0 +1,32 @@
+<div
+  [ngClass]="getContainerClasses()"
+  [class.nui-button-group--full]="width === 'full'"
+  [class.nui-button-group--fit]="width === 'fit'"
+  [attr.role]="mode === 'checkbox' ? 'group' : 'radiogroup'"
+  [attr.aria-disabled]="disabled"
+>
+  @for (option of options; track getOptionValue(option); let i = $index) {
+    <button
+      type="button"
+      [ngClass]="getOptionClasses(option)"
+      [disabled]="disabled || getOptionDisabled(option)"
+      [attr.aria-checked]="mode === 'checkbox' ? null : isSelected(option)"
+      [attr.aria-pressed]="mode === 'checkbox' ? isSelected(option) : null"
+      [attr.aria-label]="getOptionLabel(option)"
+      [title]="getOptionLabel(option)"
+      [tabindex]="getTabIndex(option, i)"
+      (click)="toggleOption(option)"
+      (keydown)="onKeydown($event, i)"
+      [attr.role]="mode === 'checkbox' ? 'checkbox' : 'radio'"
+    >
+      @if (getOptionIcon(option)) {
+        <i [class]="getOptionIcon(option)" class="nui-button-group__icon"></i>
+      }
+      @if (!iconOnly || !getOptionIcon(option)) {
+        <span class="nui-button-group__label">{{
+          getOptionLabel(option)
+        }}</span>
+      }
+    </button>
+  }
+</div>

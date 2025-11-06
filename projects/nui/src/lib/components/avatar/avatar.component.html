@@ -1,0 +1,28 @@
+<!-- Imagen -->
+@if (contentType() === 'image') {
+  <img
+    class="nui-avatar__image"
+    [src]="srcValue()"
+    [alt]="alt || ''"
+    (error)="onImageError()"
+  />
+}
+
+<!-- Iniciales -->
+@if (contentType() === 'initials') {
+  <span class="nui-avatar__initials">
+    {{ initials }}
+  </span>
+}
+
+<!-- Icono -->
+@if (contentType() === 'icon') {
+  <i class="nui-avatar__icon" [class]="displayIcon()"></i>
+}
+
+<!-- Fallback: Primera letra del alt -->
+@if (contentType() === 'fallback') {
+  <span class="nui-avatar__fallback">
+    {{ firstLetter() }}
+  </span>
+}

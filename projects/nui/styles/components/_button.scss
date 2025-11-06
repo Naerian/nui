@@ -1,34 +1,38 @@
+@use "../config";
+@use "../mixins";
+
 // Estilos base del botón (compartidos entre componente y directiva)
 @mixin button-base-styles {
   display: flex;
-  gap: var(--button-gap);
+  gap: var(--nui-button-gap);
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border-radius: var(--button-border-radius);
-  font-weight: var(--button-font-weight);
+  border-radius: var(--nui-button-border-radius);
+  font-weight: var(--nui-button-font-weight);
   text-decoration: none;
   font-family: var(--font-family);
-  border-width: var(--button-border-width);
+  border-width: var(--nui-button-border-width);
   border-style: solid;
-  transition:
-    background-color var(--button-transition-duration) var(--button-transition-timing),
-    color var(--button-transition-duration) var(--button-transition-timing),
-    border-color var(--button-transition-duration) var(--button-transition-timing),
-    box-shadow var(--button-transition-duration) var(--button-transition-timing);
+  transition: background-color var(--nui-button-transition-duration)
+      var(--nui-button-transition-timing),
+    color var(--nui-button-transition-duration) var(--nui-button-transition-timing),
+    border-color var(--nui-button-transition-duration)
+      var(--nui-button-transition-timing),
+    box-shadow var(--nui-button-transition-duration) var(--nui-button-transition-timing);
 
   // Focus visible
   &:focus-visible {
-    outline-width: var(--button-focus-outline-width);
+    outline-width: var(--nui-button-focus-outline-width);
     outline-style: solid;
-    outline-offset: var(--button-focus-outline-offset);
+    outline-offset: var(--nui-button-focus-outline-offset);
   }
 
   // ===== TAMAÑOS =====
   $sizes: xs, s, sm, md, lg, xl;
   @each $size in $sizes {
     &--#{$size} {
-      @include component-size($size);
+      @include mixins.component-size($size);
       i {
         font-size: var(--component-font-size-#{$size});
       }
@@ -58,7 +62,7 @@
     box-shadow: none;
     min-width: unset;
     padding: 0;
-    
+
     @each $size in $sizes {
       &.nui-btn--#{$size} {
         width: var(--component-height-#{$size});
@@ -68,7 +72,7 @@
         }
       }
     }
-    
+
     i {
       margin: 0;
     }
@@ -77,29 +81,28 @@
   // ===== ESTILOS POR COLOR Y VARIANTE =====
   $colors: primary, secondary, success, info, warning, danger, accent;
   $variants: solid, outline, ghost;
-
   @each $color in $colors {
     @each $variant in $variants {
       &--#{$color}.nui-btn--#{$variant} {
-        background-color: var(--button-#{$color}-#{$variant}-bg);
-        color: var(--button-#{$color}-#{$variant}-text);
-        border-color: var(--button-#{$color}-#{$variant}-border);
+        background-color: var(--nui-button-#{$color}-#{$variant}-bg);
+        color: var(--nui-button-#{$color}-#{$variant}-text);
+        border-color: var(--nui-button-#{$color}-#{$variant}-border);
 
         &:focus:not(:disabled),
         &:hover:not(:disabled) {
-          background-color: var(--button-#{$color}-#{$variant}-hover-bg);
-          color: var(--button-#{$color}-#{$variant}-hover-text);
-          border-color: var(--button-#{$color}-#{$variant}-hover-border);
+          background-color: var(--nui-button-#{$color}-#{$variant}-hover-bg);
+          color: var(--nui-button-#{$color}-#{$variant}-hover-text);
+          border-color: var(--nui-button-#{$color}-#{$variant}-hover-border);
         }
 
         &:active:not(:disabled) {
-          background-color: var(--button-#{$color}-#{$variant}-active-bg);
-          border-color: var(--button-#{$color}-#{$variant}-active-border);
+          background-color: var(--nui-button-#{$color}-#{$variant}-active-bg);
+          border-color: var(--nui-button-#{$color}-#{$variant}-active-border);
           outline: none;
         }
 
         &:focus-visible {
-          outline-color: var(--button-#{$color}-focus-color);
+          outline-color: var(--nui-button-#{$color}-focus-color);
         }
 
         // Icono
@@ -110,21 +113,23 @@
     }
 
     // Variant por defecto es solid (cuando no se especifica)
-    &--#{$color}:not(.nui-btn--solid):not(.nui-btn--outline):not(.nui-btn--ghost) {
-      background-color: var(--button-#{$color}-solid-bg);
-      color: var(--button-#{$color}-solid-text);
-      border-color: var(--button-#{$color}-solid-border);
+    &--#{$color}:not(.nui-btn--solid):not(.nui-btn--outline):not(
+        .nui-btn--ghost
+      ) {
+      background-color: var(--nui-button-#{$color}-solid-bg);
+      color: var(--nui-button-#{$color}-solid-text);
+      border-color: var(--nui-button-#{$color}-solid-border);
 
       &:focus:not(:disabled),
       &:hover:not(:disabled) {
-        background-color: var(--button-#{$color}-solid-hover-bg);
-        color: var(--button-#{$color}-solid-hover-text);
-        border-color: var(--button-#{$color}-solid-hover-border);
+        background-color: var(--nui-button-#{$color}-solid-hover-bg);
+        color: var(--nui-button-#{$color}-solid-hover-text);
+        border-color: var(--nui-button-#{$color}-solid-hover-border);
       }
 
       &:active:not(:disabled) {
-        background-color: var(--button-#{$color}-solid-active-bg);
-        border-color: var(--button-#{$color}-solid-active-border);
+        background-color: var(--nui-button-#{$color}-solid-active-bg);
+        border-color: var(--nui-button-#{$color}-solid-active-border);
         outline: none;
       }
 
@@ -148,7 +153,7 @@
     justify-content: center;
 
     i {
-      animation: spin var(--button-spin-duration) linear infinite;
+      animation: spin var(--nui-button-spin-duration) linear infinite;
     }
   }
 
@@ -175,7 +180,7 @@
   &[disabled],
   &--disabled,
   &.nui-btn--disabled {
-    @include disabled;
+    @include mixins.disabled;
     pointer-events: none;
     cursor: not-allowed;
 

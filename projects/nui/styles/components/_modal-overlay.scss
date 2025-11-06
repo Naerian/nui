@@ -1,6 +1,6 @@
-@import "@angular/cdk/overlay-prebuilt.css";
-@import "theme";
-@import "mixins";
+@use "../config";
+@use "../mixins";
+// NOTA: No importar theme ni theme-config aquí, ya están incluidos globalmente en nui.scss
 
 // ==========================================
 // MODAL OVERLAY & BACKDROP STYLES
@@ -14,7 +14,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--color-backdrop);
+  background: var(--nui-color-backdrop);
   z-index: 1000;
   animation: fadeIn 0.2s ease-out;
 }
@@ -36,7 +36,7 @@
 }
 
 .nui-modal-dialog-backdrop {
-  @include overlay-backdrop();
+  @include mixins.overlay-backdrop();
 }
 
 // Animación de entrada (fade-in)

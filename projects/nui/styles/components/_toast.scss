@@ -1,9 +1,5 @@
-// ========================================
-// TOAST - Estilos Globales
-// ========================================
-
-@import "../mixins";
-@import "../variables/toast";
+@use "../mixins";
+@use "../variables/toast/toast-variables.scss";
 
 // ===== CONTENEDOR GLOBAL =====
 .nui-toast-container {
@@ -235,8 +231,7 @@
   overflow: hidden;
 
   // Transiciones suaves
-  transition:
-    transform var(--nui-toast-transition-duration)
+  transition: transform var(--nui-toast-transition-duration)
       var(--nui-toast-transition-easing),
     opacity var(--nui-toast-transition-duration)
       var(--nui-toast-transition-easing),
@@ -261,8 +256,7 @@
       rgba(255, 255, 255, 0.08) 50%,
       rgba(255, 255, 255, 0.02) 100%
     );
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -279,13 +273,13 @@
 
   // Custom (sin color específico)
   &.nui-toast--custom {
-    background-color: var(--toast-bg);
-    color: var(--toast-color);
-    border: var(--nui-toast-border-width) solid var(--toast-border-color);
+    background-color: var(--nui-toast-bg);
+    color: var(--nui-toast-color);
+    border: var(--nui-toast-border-width) solid var(--nui-toast-border-color);
   }
 
   // Generar variantes de color
-  @include generate-toast-colors();
+  @include mixins.generate-toast-colors();
 }
 
 // ===== ELEMENTOS DEL TOAST =====
@@ -570,10 +564,10 @@
 
 // ===== RESPONSIVE =====
 
-@media (max-width: $toast-mobile-breakpoint) {
+@media (max-width: var(--nui-toast-mobile-breakpoint)) {
   .nui-toast {
-    --nui-toast-width: #{$toast-width-mobile};
-    --nui-toast-padding: #{$toast-padding-compact};
+    --nui-toast-width: var(--nui-toast-width-mobile);
+    --nui-toast-padding: var(--nui-toast-padding-compact);
     --nui-toast-offset-x: 0.75rem;
     --nui-toast-offset-y: 0.75rem;
   }
@@ -682,7 +676,7 @@
 
 // Clase helper para toasts compactos
 .nui-toast--compact {
-  --nui-toast-padding: #{$toast-padding-compact};
+  --nui-toast-padding: var(--nui-toast-padding-compact);
   --nui-toast-gap: 0.5rem;
   --nui-toast-content-gap: 0.125rem;
 

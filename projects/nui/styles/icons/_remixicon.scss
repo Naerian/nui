@@ -1,0 +1,26 @@
+﻿/*
+* Remix Icon v4.7.0
+* https://remixicon.com
+* https://github.com/Remix-Design/RemixIcon
+*
+* Copyright RemixIcon.com
+* Released under the Apache License Version 2.0
+*
+* Date: 2025-10-10
+*/
+
+// ========================================
+// IMPORTANTE: Uso de CDN
+// ========================================
+// Para evitar problemas con la resolución de rutas de fuentes,
+// RemixIcon se carga desde el CDN oficial.
+// Esto permite que la librería funcione tanto con @import SCSS
+// como con CSS pre-compilado sin configuración adicional.
+//
+// Si prefieres auto-hospedar las fuentes:
+// 1. Descarga las fuentes de https://github.com/Remix-Design/RemixIcon
+// 2. Colócalas en src/assets/fonts/
+// 3. Reemplaza el @import url() con @font-face apuntando a las rutas correctas
+// ========================================
+
+@import url('https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css');

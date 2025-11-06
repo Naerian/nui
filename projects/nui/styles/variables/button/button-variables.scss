@@ -1,0 +1,39 @@
+@use "button-tokens" as tokens;
+
+// ========================================
+// BUTTON - Variables (CSS Custom Properties)
+// ========================================
+//
+// CSS variables para el componente Button.
+// Se incluyen a través del mixin nui-button-vars.
+//
+// Uso:
+// ```scss
+// :root {
+//   @include nui-button-vars;
+// }
+// ```
+//
+// ========================================
+
+@mixin nui-button-vars {
+  // Espaciado
+  --nui-button-gap: #{tokens.$button-gap};
+
+  // Bordes
+  --nui-button-border-radius: #{tokens.$button-border-radius};
+  --nui-button-border-width: #{tokens.$button-border-width};
+
+  // Tipografía
+  --nui-button-font-weight: #{tokens.$button-font-weight};
+
+  // Transformaciones
+  --nui-button-spin-duration: #{tokens.$button-spin-duration};
+
+  // Focus
+  --nui-button-focus-outline-width: #{tokens.$button-focus-outline-width};
+  --nui-button-focus-outline-offset: #{tokens.$button-focus-outline-offset};
+
+  // Outline
+  --nui-button-outline-border-width: #{tokens.$button-outline-border-width};
+}
