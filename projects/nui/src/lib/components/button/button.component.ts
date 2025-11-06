@@ -14,6 +14,7 @@ import {
   ChangeDetectionStrategy,
   booleanAttribute,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { ButtonIconPosition, ButtonType, ButtonWidth, ButtonLoadingPosition } from './models/button.model';
 import { NUI_CONFIG, NUIColor, NUISize, NUIVariant, DEFAULT_COLOR, DEFAULT_SIZE, DEFAULT_VARIANT } from '../../configs';
 
@@ -25,8 +26,12 @@ import { NUI_CONFIG, NUIColor, NUISize, NUIVariant, DEFAULT_COLOR, DEFAULT_SIZE,
  * Soporta accesibilidad completa y configuración global.
  * 
  * @example
- * // Botón básico
+ * // Botón básico con contenido
  * <nui-button (onClick)="handleClick()">Click me</nui-button>
+ * 
+ * @example
+ * // Botón con label (alternativa al ng-content)
+ * <nui-button label="Click me" (onClick)="handleClick()"></nui-button>
  * 
  * @example
  * // Botón con configuración
@@ -43,7 +48,11 @@ import { NUI_CONFIG, NUIColor, NUISize, NUIVariant, DEFAULT_COLOR, DEFAULT_SIZE,
  * <nui-button icon="ri-settings-line" aria-label="Settings"></nui-button>
  * 
  * @example
- * // Botón con icono y texto
+ * // Botón con label e icono
+ * <nui-button label="Profile" icon="ri-user-line" [color]="'primary'"></nui-button>
+ * 
+ * @example
+ * // Botón con icono y texto mediante ng-content
  * <nui-button icon="ri-user-line" [color]="'primary'">
  *   Profile
  * </nui-button>
@@ -93,6 +102,7 @@ import { NUI_CONFIG, NUIColor, NUISize, NUIVariant, DEFAULT_COLOR, DEFAULT_SIZE,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
+  imports: [NgTemplateOutlet],
 })
 export class ButtonComponent implements OnInit, AfterContentInit {
   private elementRef = inject(ElementRef);
@@ -161,6 +171,17 @@ export class ButtonComponent implements OnInit, AfterContentInit {
    * @default 'start'
    */
   @Input() loadingPosition: ButtonLoadingPosition = 'start';
+
+  /**
+   * Texto del botón. Alternativa a usar ng-content.
+   * Prioridad: ng-content > label
+   * Si se proporciona contenido mediante ng-content, el label se ignora.
+   * @example
+   * <nui-button label="Click me"></nui-button>
+   * @example
+   * <nui-button label="Save" icon="ri-save-line"></nui-button>
+   */
+  @Input() label?: string;
 
   /**
    * Título del botón que se muestra como tooltip al pasar el mouse.
@@ -276,7 +297,13 @@ export class ButtonComponent implements OnInit, AfterContentInit {
             break;
           }
         } else if (node.nodeType === Node.ELEMENT_NODE) {
-          // Si hay elementos HTML (no solo texto), también cuenta como contenido
+          const element = node as HTMLElement;
+          // Ignorar el span que contiene el label (tiene style.display binding)
+          // Si el elemento tiene un binding de Angular para display, es nuestro label wrapper
+          if (element.tagName === 'SPAN' && element.hasAttribute('ng-reflect-style-display')) {
+            continue;
+          }
+          // Si hay otros elementos HTML, cuenta como contenido
           hasText = true;
           break;
         }
@@ -305,8 +332,17 @@ export class ButtonComponent implements OnInit, AfterContentInit {
   /**
    * Método para verificar si el botón tiene contenido visible.
    * Esto es útil para determinar si el botón tiene texto o iconos visibles.
+   * Incluye tanto ng-content como label.
    */
   get hasVisibleContent(): boolean {
+    return this._hasContent() || !!this.label;
+  }
+
+  /**
+   * Verifica si hay contenido proyectado via ng-content (excluyendo label)
+   * Usado en el template para determinar si mostrar el label o no
+   */
+  get hasProjectedContent(): boolean {
     return this._hasContent();
   }
 

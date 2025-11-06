@@ -37,11 +37,13 @@
     <!-- Contenido oculto cuando el spinner está en center -->
     <span class="nui-btn__content nui-btn__content--hidden">
       <ng-content></ng-content>
+      {{ label }}
     </span>
   } @else {
     <!-- Contenido visible normalmente -->
     <span class="nui-btn__content" [class.nui-btn__content--empty]="!hasVisibleContent">
       <ng-content></ng-content>
+      {{ label }}
     </span>
   }
 

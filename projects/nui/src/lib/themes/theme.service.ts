@@ -1,5 +1,6 @@
 import { Injectable, Inject, Optional } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface ThemeColors {
   primary: string;
@@ -35,9 +36,8 @@ export interface ThemePreset {
 
 export interface ThemeConfig {
   preset?: ThemePreset;
-  options?: {
-    darkModeSelector?: string | 'system';
-  };
+  darkMode?: 'auto' | 'manual' | 'system';
+  darkModeClass?: string;
 }
 
 export const NUI_THEME_CONFIG = Symbol('NUI_THEME_CONFIG');
@@ -47,6 +47,13 @@ export class ThemeService {
   private styleElement: HTMLStyleElement | null = null;
   private currentPreset: ThemePreset;
   private isDark = false;
+  private darkModeStrategy: 'auto' | 'manual' | 'system' = 'manual';
+  private darkModeClass: string = 'dark-mode';
+  private mediaQuery?: MediaQueryList;
+  
+  // Observable para notificar cambios de preset
+  private currentPresetSubject: BehaviorSubject<ThemePreset>;
+  public currentPreset$: Observable<ThemePreset>;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -59,6 +66,13 @@ export class ThemeService {
         dark: { primary: '#14b8a6', secondary: '#94a3b8', accent: '#a855f7', success: '#10b981', info: '#06b6d4', warning: '#f59e0b', danger: '#ef4444' }
       }
     };
+    
+    this.currentPresetSubject = new BehaviorSubject<ThemePreset>(this.currentPreset);
+    this.currentPreset$ = this.currentPresetSubject.asObservable();
+    
+    this.darkModeStrategy = config?.darkMode || 'manual';
+    this.darkModeClass = config?.darkModeClass || 'dark-mode';
+    
     this.init();
   }
 
@@ -69,12 +83,97 @@ export class ThemeService {
       this.styleElement.id = 'nui-theme-colors';
       this.document.head.appendChild(this.styleElement);
     }
+    
+    // Initialize dark mode based on strategy
+    if (this.darkModeStrategy === 'auto' || this.darkModeStrategy === 'system') {
+      this.setupSystemDarkMode();
+    }
+    
     this.updateColors();
+  }
+
+  private setupSystemDarkMode(): void {
+    if (typeof window === 'undefined') return;
+    
+    this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    this.isDark = this.mediaQuery.matches;
+    this.updateDarkModeClass();
+    
+    // Only listen for changes if strategy is 'auto'
+    if (this.darkModeStrategy === 'auto') {
+      this.mediaQuery.addEventListener('change', this.handleSystemDarkModeChange.bind(this));
+    }
+  }
+
+  private handleSystemDarkModeChange(e: MediaQueryListEvent): void {
+    this.isDark = e.matches;
+    this.updateDarkModeClass();
+    this.updateColors();
+  }
+
+  private updateDarkModeClass(): void {
+    if (this.isDark) {
+      this.document.documentElement.classList.add(this.darkModeClass);
+    } else {
+      this.document.documentElement.classList.remove(this.darkModeClass);
+    }
+  }
+
+  /**
+   * Manually toggle dark mode. 
+   * Only works when darkMode strategy is 'manual' or not set.
+   */
+  toggleDarkMode(): void {
+    if (this.darkModeStrategy !== 'manual') {
+      console.warn('toggleDarkMode() only works when darkMode strategy is "manual"');
+      return;
+    }
+    
+    this.isDark = !this.isDark;
+    this.updateDarkModeClass();
+    this.updateColors();
+  }
+
+  /**
+   * Manually set dark mode. 
+   * Only works when darkMode strategy is 'manual' or not set.
+   */
+  setDarkMode(enabled: boolean): void {
+    if (this.darkModeStrategy !== 'manual') {
+      console.warn('setDarkMode() only works when darkMode strategy is "manual"');
+      return;
+    }
+    
+    this.isDark = enabled;
+    this.updateDarkModeClass();
+    this.updateColors();
+  }
+
+  /**
+   * Get current dark mode state
+   */
+  isDarkMode(): boolean {
+    return this.isDark;
+  }
+
+  /**
+   * Get current dark mode strategy
+   */
+  getDarkModeStrategy(): 'auto' | 'manual' | 'system' {
+    return this.darkModeStrategy;
   }
 
   usePreset(preset: ThemePreset): void {
     this.currentPreset = preset;
+    this.currentPresetSubject.next(preset);
     this.updateColors();
+  }
+
+  /**
+   * Get current preset
+   */
+  getCurrentPreset(): ThemePreset {
+    return this.currentPreset;
   }
 
   updateColors(): void {

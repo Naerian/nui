@@ -34,8 +34,12 @@ import { NUI_CONFIG, NUIColor, DEFAULT_COLOR, NUISize, DEFAULT_SIZE, NUIVariant 
  * considera usar el componente `<nui-button>` en su lugar.
  *
  * @example
- * // Botón simple
+ * // Botón simple con contenido
  * <button nuiButton color="primary">Click me</button>
+ *
+ * @example
+ * // Botón con label (alternativa al contenido)
+ * <button nuiButton label="Click me" color="primary"></button>
  *
  * @example
  * // Botón de formulario
@@ -46,6 +50,10 @@ import { NUI_CONFIG, NUIColor, DEFAULT_COLOR, NUISize, DEFAULT_SIZE, NUIVariant 
  * @example
  * // Link con estilo de botón
  * <a nuiButton color="secondary" routerLink="/home">Home</a>
+ *
+ * @example
+ * // Botón con label e icono
+ * <button nuiButton label="Save" icon="ri-save-line" color="primary"></button>
  *
  * @example
  * // Botón con ancho completo
@@ -156,6 +164,17 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
   @Input() loadingPosition: ButtonLoadingPosition = 'start';
 
   /**
+   * Texto del botón. Alternativa a usar contenido directo.
+   * Prioridad: contenido HTML > label
+   * Si hay contenido HTML dentro del elemento, el label se ignora.
+   * @example
+   * <button nuiButton label="Click me"></button>
+   * @example
+   * <button nuiButton label="Save" icon="ri-save-line"></button>
+   */
+  @Input() label?: string;
+
+  /**
    * Título del botón que se muestra como tooltip al pasar el mouse.
    * También se usa como aria-label si el botón no tiene contenido visible.
    */
@@ -234,6 +253,7 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
 
   private mutationObserver?: MutationObserver;
   private iconElement?: HTMLElement;
+  private labelTextNode?: Text;
 
   ngOnInit(): void {
     this.updateClasses();
@@ -244,6 +264,7 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
     // Después de que la vista esté lista, evaluar el contenido y configurar observer
     // Usamos setTimeout para asegurar que el contenido esté completamente renderizado
     setTimeout(() => {
+      this.renderLabelIfNeeded();
       this.handleIconInput();
       this.setupContentObserver();
     }, 0);
@@ -274,6 +295,14 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
         this.handleIconInput();
       }, 0);
     }
+
+    // Manejar label - renderizar si cambió
+    if (changes['label']) {
+      setTimeout(() => {
+        this.renderLabelIfNeeded();
+        this.handleIconInput(); // Re-evaluar después de cambiar label
+      }, 0);
+    }
   }
 
   ngOnDestroy(): void {
@@ -286,6 +315,12 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
     if (this.iconElement) {
       this.iconElement.remove();
       this.iconElement = undefined;
+    }
+
+    // Limpiar el nodo de texto del label si existe
+    if (this.labelTextNode) {
+      this.labelTextNode.remove();
+      this.labelTextNode = undefined;
     }
   }
 
@@ -410,6 +445,7 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
 
   /**
    * Verifica si el botón tiene contenido de texto visible o elementos HTML
+   * Incluye tanto contenido HTML como el label input
    * Usa la misma lógica que ButtonComponent.checkContent() para consistencia
    * @returns true si hay contenido visible, false si está vacío o solo tiene iconos
    */
@@ -436,7 +472,72 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
       }
     }
     
-    return false;
+    // Si no hay contenido HTML pero hay label, también cuenta como contenido
+    return !!this.label;
+  }
+
+  /**
+   * Renderiza el label si está definido y no hay contenido HTML
+   * Prioridad: contenido HTML > label
+   */
+  private renderLabelIfNeeded(): void {
+    // Limpiar el nodo de texto anterior si existe
+    if (this.labelTextNode) {
+      this.labelTextNode.remove();
+      this.labelTextNode = undefined;
+    }
+
+    // Si no hay label, no hacer nada más
+    if (!this.label) {
+      return;
+    }
+
+    // Si ya hay contenido de texto (que no sea nuestro label), el label se ignora
+    const element = this.el.nativeElement;
+    const nodes = Array.from(element.childNodes) as Node[];
+    
+    for (const node of nodes) {
+      // Verificar nodos de texto que no sean nuestro labelTextNode
+      if (node.nodeType === Node.TEXT_NODE && node !== this.labelTextNode) {
+        const text = node.textContent?.trim() || '';
+        if (text.length > 0) {
+          // Ya hay contenido de texto, no usar label
+          return;
+        }
+      } 
+      // Verificar elementos HTML (excepto iconos)
+      else if (node.nodeType === Node.ELEMENT_NODE) {
+        const elementNode = node as HTMLElement;
+        if (elementNode.tagName !== 'I' && elementNode !== this.iconElement) {
+          // Ya hay contenido HTML, no usar label
+          return;
+        }
+      }
+    }
+
+    // Crear un nodo de texto con el label
+    this.labelTextNode = this.renderer.createText(this.label) as Text;
+    
+    // Insertar el texto en el botón
+    // Si hay icono en posición start, insertar después del icono
+    // Si hay icono en posición end, insertar antes del icono
+    // Si no hay icono, insertar como único contenido
+    
+    if (this.iconElement && this.iconPosition === 'start') {
+      // Insertar después del icono
+      const nextSibling = this.iconElement.nextSibling;
+      if (nextSibling) {
+        this.renderer.insertBefore(element, this.labelTextNode, nextSibling);
+      } else {
+        this.renderer.appendChild(element, this.labelTextNode);
+      }
+    } else if (this.iconElement && this.iconPosition === 'end') {
+      // Insertar antes del icono
+      this.renderer.insertBefore(element, this.labelTextNode, this.iconElement);
+    } else {
+      // No hay icono, insertar como único contenido
+      this.renderer.appendChild(element, this.labelTextNode);
+    }
   }
 
   /**
