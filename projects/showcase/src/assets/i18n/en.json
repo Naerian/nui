@@ -14,6 +14,7 @@
     "configuration": "Configuration",
     "theming": "Theming",
     "components": "Components",
+    "button": "Button",
     "examples": "Examples",
     "playground": "Playground"
   },
@@ -93,6 +94,52 @@
         "minimal": "Refined minimalist palette with subtle colors and elegant purple accent",
         "sunset": "Warm and vibrant palette with rose, pink and orange tones, perfect for creative apps",
         "ocean": "Calm and professional palette with deep blues and aqua tones, ideal for productivity"
+      }
+    }
+  },
+  "components": {
+    "button": {
+      "title": "Button",
+      "subtitle": "Versatile button component with multiple variants, sizes, and states",
+      "basic": {
+        "title": "Basic Button",
+        "description": "The simplest form of a button with default styling."
+      },
+      "variants": {
+        "title": "Variants",
+        "description": "Buttons come in three variants: solid (default), outline, and ghost."
+      },
+      "colors": {
+        "title": "Colors",
+        "description": "Buttons support all theme colors: primary, secondary, accent, success, info, warning, and danger."
+      },
+      "sizes": {
+        "title": "Sizes",
+        "description": "Five size options available: xs, sm, md (default), lg, and xl."
+      },
+      "icons": {
+        "title": "With Icons",
+        "description": "Add icons to buttons at the start or end position. Buttons with only an icon are rendered as circular icon buttons."
+      },
+      "loading": {
+        "title": "Loading State",
+        "description": "Display a loading spinner in three positions: start, end, or center (which replaces the content)."
+      },
+      "width": {
+        "title": "Width",
+        "description": "Control button width: auto (default), full (100%), or fit (fit-content)."
+      },
+      "disabled": {
+        "title": "Disabled State",
+        "description": "Disabled buttons prevent user interaction and display a dimmed appearance."
+      },
+      "events": {
+        "title": "Events",
+        "description": "Handle click events with the onClick output. Supports button types: button, submit, and reset."
+      },
+      "advanced": {
+        "title": "Advanced Combinations",
+        "description": "Combine multiple properties to create complex button variations for specific use cases."
       }
     }
   }

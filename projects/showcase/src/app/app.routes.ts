@@ -34,7 +34,17 @@ export const routes: Routes = [
   },
   {
     path: 'components',
-    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent) // Placeholder
+    children: [
+      {
+        path: '',
+        redirectTo: 'button',
+        pathMatch: 'full'
+      },
+      {
+        path: 'button',
+        loadComponent: () => import('./pages/components/button-page/button-page.component').then(m => m.ButtonPageComponent)
+      }
+    ]
   },
   {
     path: 'examples',

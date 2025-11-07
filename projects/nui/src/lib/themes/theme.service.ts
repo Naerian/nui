@@ -229,7 +229,7 @@ export class ThemeService {
       css += this.generateFabButtonVariables(name, baseColor);
       css += this.generateButtonGroupVariables(name, baseColor);
       css += this.generateChipVariables(name, baseColor);
-      css += this.generateSwitchVariables(name, baseColor);
+      css += this.generateSwitchButtonVariables(name, baseColor);
       css += this.generateModalVariables(name, baseColor);
       css += this.generateToastVariables(name, baseColor);
       css += this.generateProgressBarVariables(name, baseColor);
@@ -315,7 +315,7 @@ export class ThemeService {
 
   /* Avatar */
   --nui-avatar-default-bg: ${isDark ? 'var(--nui-color-secondary-shade-20)' : 'var(--nui-color-secondary)'};
-  --nui-avatar-default-color: ${isDark ? '#f8fafc' : '#ffffff'};
+  --nui-avatar-default-color: ${isDark ? '#0d1117' : '#ffffff'};
   --nui-avatar-group-border-color: ${isDark ? '#f8fafc' : '#ffffff'};
   --nui-avatar-excess-bg: ${isDark ? grays[700] : grays[300]};
   --nui-avatar-excess-color: ${isDark ? grays[200] : grays[700]};
@@ -326,7 +326,7 @@ export class ThemeService {
   private generateButtonVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
     const activeColor = this.shade(color, 20);
-    const textOnColor = this.isDark ? '#f8fafc' : '#ffffff';
+    const textOnColor = this.isDark ? '#0d1117' : '#ffffff';
     return `
   --nui-button-${name}-solid-bg: ${color};
   --nui-button-${name}-solid-text: ${textOnColor};
@@ -359,7 +359,7 @@ export class ThemeService {
   private generateFabButtonVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
     const activeColor = this.shade(color, 20);
-    const textOnColor = this.isDark ? '#f8fafc' : '#ffffff';
+    const textOnColor = this.isDark ? '#0d1117' : '#ffffff';
     return `
   --nui-fab-button-${name}-solid-bg: ${color};
   --nui-fab-button-${name}-solid-text: ${textOnColor};
@@ -396,7 +396,7 @@ export class ThemeService {
     const inactiveBg = this.isDark ? '#18181b' : '#ffffff';
     return `
   --nui-button-group-${name}-solid-bg: ${color};
-  --nui-button-group-${name}-solid-text: ${this.isDark ? '#f8fafc' : '#ffffff'};
+  --nui-button-group-${name}-solid-text: ${this.isDark ? '#0d1117' : '#ffffff'};
   --nui-button-group-${name}-solid-border: ${color};
   --nui-button-group-${name}-solid-hover-bg: ${hoverColor};
   --nui-button-group-${name}-solid-inactive-text: ${color};
@@ -419,7 +419,7 @@ export class ThemeService {
   private generateChipVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
     const selectedBg = this.isDark ? this.shade(color, 15) : this.shade(color, 10);
-    const textOnColor = this.isDark ? '#f8fafc' : '#ffffff';
+    const textOnColor = this.isDark ? '#0d1117' : '#ffffff';
     return `
   --nui-chip-${name}-solid-bg: ${color};
   --nui-chip-${name}-solid-text: ${textOnColor};
@@ -441,13 +441,13 @@ export class ThemeService {
 `;
   }
 
-  private generateSwitchVariables(name: string, color: string): string {
+  private generateSwitchButtonVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
     return `
   --nui-switch-${name}-color: ${color};
   --nui-switch-${name}-color-hover: ${hoverColor};
   --nui-switch-${name}-button-solid-bg: ${color};
-  --nui-switch-${name}-button-solid-text: ${this.isDark ? '#f8fafc' : '#ffffff'};
+  --nui-switch-${name}-button-solid-text: ${this.isDark ? '#0d1117' : '#ffffff'};
   --nui-switch-${name}-button-solid-hover-bg: ${hoverColor};
   --nui-switch-${name}-button-solid-inactive-bg: ${this.withAlpha(color, 0.2)};
   --nui-switch-${name}-button-solid-inactive-text: ${color};
@@ -496,7 +496,7 @@ export class ThemeService {
   --nui-progress-bar-${name}-fill-hover-bg: ${this.shade(color, 10)};
   --nui-progress-bar-${name}-track-bg: ${this.isDark ? this.shade(color, 80) : this.tint(color, 90)};
   --nui-progress-bar-${name}-track-border: ${this.isDark ? this.shade(color, 70) : this.tint(color, 80)};
-  --nui-progress-bar-${name}-text: ${this.isDark ? '#f8fafc' : '#ffffff'};
+  --nui-progress-bar-${name}-text: ${this.isDark ? '#0d1117' : '#ffffff'};
   --nui-progress-bar-${name}-value-text: ${color};
 `;
   }
@@ -510,7 +510,7 @@ export class ThemeService {
     const ghostActive = this.isDark ? this.shade(color, 80) : this.tint(color, 90);
     return `
   --nui-paginator--${name}-solid-bg: ${color};
-  --nui-paginator--${name}-solid-text: ${this.isDark ? '#f8fafc' : '#ffffff'};
+  --nui-paginator--${name}-solid-text: ${this.isDark ? '#0d1117' : '#ffffff'};
   --nui-paginator--${name}-solid-hover-bg: ${hoverColor};
   --nui-paginator--${name}-solid-active-bg: ${activeColor};
   --nui-paginator--${name}-solid-inactive-text: ${color};
@@ -531,7 +531,7 @@ export class ThemeService {
 
   private generateAvatarVariables(name: string, color: string): string {
     const shadeColor = this.isDark ? this.shade(color, 10) : color;
-    const textOnColor = this.isDark ? '#f8fafc' : '#ffffff';
+    const textOnColor = this.isDark ? '#0d1117' : '#ffffff';
     
     return `
   --nui-avatar-${name}-bg: ${shadeColor};

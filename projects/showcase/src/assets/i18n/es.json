@@ -14,6 +14,7 @@
     "configuration": "Configuración",
     "theming": "Temas",
     "components": "Componentes",
+    "button": "Botón",
     "examples": "Ejemplos",
     "playground": "Playground"
   },
@@ -93,6 +94,52 @@
         "minimal": "Paleta minimalista refinada con colores sutiles y acento púrpura elegante",
         "sunset": "Paleta cálida y vibrante con tonos rosa, naranja y coral, perfecta para apps creativas",
         "ocean": "Paleta tranquila y profesional con azules profundos y tonos aqua, ideal para productividad"
+      }
+    }
+  },
+  "components": {
+    "button": {
+      "title": "Botón",
+      "subtitle": "Componente de botón versátil con múltiples variantes, tamaños y estados",
+      "basic": {
+        "title": "Botón Básico",
+        "description": "La forma más simple de un botón con estilos predeterminados."
+      },
+      "variants": {
+        "title": "Variantes",
+        "description": "Los botones vienen en tres variantes: solid (predeterminado), outline y ghost."
+      },
+      "colors": {
+        "title": "Colores",
+        "description": "Los botones soportan todos los colores del tema: primary, secondary, accent, success, info, warning y danger."
+      },
+      "sizes": {
+        "title": "Tamaños",
+        "description": "Cinco opciones de tamaño disponibles: xs, sm, md (predeterminado), lg y xl."
+      },
+      "icons": {
+        "title": "Con Iconos",
+        "description": "Agrega iconos a los botones al inicio o al final. Los botones con solo un icono se renderizan como botones circulares de icono."
+      },
+      "loading": {
+        "title": "Estado de Carga",
+        "description": "Muestra un spinner de carga en tres posiciones: inicio, final o centro (que reemplaza el contenido)."
+      },
+      "width": {
+        "title": "Ancho",
+        "description": "Controla el ancho del botón: auto (predeterminado), full (100%) o fit (ajustado al contenido)."
+      },
+      "disabled": {
+        "title": "Estado Deshabilitado",
+        "description": "Los botones deshabilitados evitan la interacción del usuario y muestran una apariencia atenuada."
+      },
+      "events": {
+        "title": "Eventos",
+        "description": "Maneja eventos de clic con el output onClick. Soporta tipos de botón: button, submit y reset."
+      },
+      "advanced": {
+        "title": "Combinaciones Avanzadas",
+        "description": "Combina múltiples propiedades para crear variaciones complejas de botones para casos de uso específicos."
       }
     }
   }

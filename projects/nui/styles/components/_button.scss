@@ -16,13 +16,20 @@
   border-style: solid;
   transition: background-color var(--nui-button-transition-duration)
       var(--nui-button-transition-timing),
-    color var(--nui-button-transition-duration) var(--nui-button-transition-timing),
+    color var(--nui-button-transition-duration)
+      var(--nui-button-transition-timing),
     border-color var(--nui-button-transition-duration)
       var(--nui-button-transition-timing),
-    box-shadow var(--nui-button-transition-duration) var(--nui-button-transition-timing);
+    box-shadow var(--nui-button-transition-duration)
+      var(--nui-button-transition-timing);
+
+  &:focus:not(:disabled),
+  &:active:not(:disabled) {
+    outline: none;
+  }
 
   // Focus visible
-  &:focus-visible {
+  &:focus-visible:not(:disabled) {
     outline-width: var(--nui-button-focus-outline-width);
     outline-style: solid;
     outline-offset: var(--nui-button-focus-outline-offset);
@@ -98,7 +105,6 @@
         &:active:not(:disabled) {
           background-color: var(--nui-button-#{$color}-#{$variant}-active-bg);
           border-color: var(--nui-button-#{$color}-#{$variant}-active-border);
-          outline: none;
         }
 
         &:focus-visible {
@@ -130,7 +136,6 @@
       &:active:not(:disabled) {
         background-color: var(--nui-button-#{$color}-solid-active-bg);
         border-color: var(--nui-button-#{$color}-solid-active-border);
-        outline: none;
       }
 
       i::before {

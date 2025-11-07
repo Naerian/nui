@@ -58,7 +58,15 @@ export class SidebarComponent implements OnInit {
       label: 'Components',
       translationKey: 'sidebar.components',
       route: '/components',
-      icon: 'ri-layout-grid-line'
+      icon: 'ri-layout-grid-line',
+      children: [
+        {
+          label: 'Button',
+          translationKey: 'sidebar.button',
+          route: '/components/button',
+          icon: 'ri-checkbox-blank-line'
+        }
+      ]
     },
     {
       label: 'Examples',

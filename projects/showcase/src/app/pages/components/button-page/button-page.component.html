@@ -1,0 +1,170 @@
+<div class="docs-page">
+  <div class="page-header">
+    <h1>{{ 'components.button.title' | translate }}</h1>
+    <p class="subtitle">{{ 'components.button.subtitle' | translate }}</p>
+  </div>
+
+  <!-- 1. Botón Básico -->
+  <section class="section">
+    <h2>{{ 'components.button.basic.title' | translate }}</h2>
+    <p class="section-description">{{ 'components.button.basic.description' | translate }}</p>
+    
+    <div class="example-preview">
+      <nui-button>Click me</nui-button>
+    </div>
+
+    <app-code-block [examples]="basicButtonExamples"></app-code-block>
+  </section>
+
+  <!-- 2. Variantes -->
+  <section class="section">
+    <h2>{{ 'components.button.variants.title' | translate }}</h2>
+    <p class="section-description">{{ 'components.button.variants.description' | translate }}</p>
+    
+    <div class="example-preview">
+      <nui-button variant="solid">Solid Button</nui-button>
+      <nui-button variant="outline">Outline Button</nui-button>
+      <nui-button variant="ghost">Ghost Button</nui-button>
+    </div>
+
+    <app-code-block [examples]="variantExamples"></app-code-block>
+  </section>
+
+  <!-- 3. Colores -->
+  <section class="section">
+    <h2>{{ 'components.button.colors.title' | translate }}</h2>
+    <p class="section-description">{{ 'components.button.colors.description' | translate }}</p>
+    
+    <div class="example-preview">
+      <nui-button color="primary">Primary</nui-button>
+      <nui-button color="secondary">Secondary</nui-button>
+      <nui-button color="accent">Accent</nui-button>
+      <nui-button color="success">Success</nui-button>
+      <nui-button color="info">Info</nui-button>
+      <nui-button color="warning">Warning</nui-button>
+      <nui-button color="danger">Danger</nui-button>
+    </div>
+
+    <app-code-block [examples]="colorExamples"></app-code-block>
+  </section>
+
+  <!-- 4. Tamaños -->
+  <section class="section">
+    <h2>{{ 'components.button.sizes.title' | translate }}</h2>
+    <p class="section-description">{{ 'components.button.sizes.description' | translate }}</p>
+    
+    <div class="example-preview">
+      <nui-button size="xs">Extra Small</nui-button>
+      <nui-button size="sm">Small</nui-button>
+      <nui-button size="md">Medium</nui-button>
+      <nui-button size="lg">Large</nui-button>
+      <nui-button size="xl">Extra Large</nui-button>
+    </div>
+
+    <app-code-block [examples]="sizeExamples"></app-code-block>
+  </section>
+
+  <!-- 5. Con Iconos -->
+  <section class="section">
+    <h2>{{ 'components.button.icons.title' | translate }}</h2>
+    <p class="section-description">{{ 'components.button.icons.description' | translate }}</p>
+    
+    <div class="example-preview">
+      <nui-button icon="ri-user-line">Profile</nui-button>
+      <nui-button icon="ri-arrow-right-line" iconPosition="end">Next</nui-button>
+      <nui-button icon="ri-settings-line" aria-label="Settings"></nui-button>
+    </div>
+
+    <app-code-block [examples]="iconExamples"></app-code-block>
+  </section>
+
+  <!-- 6. Estado Loading -->
+  <section class="section">
+    <h2>{{ 'components.button.loading.title' | translate }}</h2>
+    <p class="section-description">{{ 'components.button.loading.description' | translate }}</p>
+    
+    <div class="example-preview">
+      <nui-button [loading]="isLoading" loadingPosition="start" (onClick)="simulateLoading()">
+        {{ isLoading ? 'Loading...' : 'Click to Load' }}
+      </nui-button>
+      <nui-button [loading]="true" loadingPosition="end">Loading...</nui-button>
+      <nui-button [loading]="true" loadingPosition="center">Loading...</nui-button>
+    </div>
+
+    <app-code-block [examples]="loadingExamples"></app-code-block>
+  </section>
+
+  <!-- 7. Ancho -->
+  <section class="section">
+    <h2>{{ 'components.button.width.title' | translate }}</h2>
+    <p class="section-description">{{ 'components.button.width.description' | translate }}</p>
+    
+    <div class="example-preview flex-column">
+      <nui-button width="auto">Auto Width</nui-button>
+      <nui-button width="full">Full Width</nui-button>
+      <nui-button width="fit">Fit Content</nui-button>
+    </div>
+
+    <app-code-block [examples]="widthExamples"></app-code-block>
+  </section>
+
+  <!-- 8. Estado Deshabilitado -->
+  <section class="section">
+    <h2>{{ 'components.button.disabled.title' | translate }}</h2>
+    <p class="section-description">{{ 'components.button.disabled.description' | translate }}</p>
+    
+    <div class="example-preview">
+      <nui-button [disabled]="true">Disabled Button</nui-button>
+      <nui-button variant="outline" [disabled]="true">Disabled Outline</nui-button>
+    </div>
+
+    <app-code-block [examples]="disabledExamples"></app-code-block>
+  </section>
+
+  <!-- 9. Eventos -->
+  <section class="section">
+    <h2>{{ 'components.button.events.title' | translate }}</h2>
+    <p class="section-description">{{ 'components.button.events.description' | translate }}</p>
+    
+    <div class="example-preview">
+      <nui-button (onClick)="handleClick()">Click Event</nui-button>
+      <nui-button type="submit" (onClick)="handleClick()">Submit Form</nui-button>
+    </div>
+
+    <app-code-block [examples]="eventExamples"></app-code-block>
+  </section>
+
+  <!-- 10. Combinaciones Avanzadas -->
+  <section class="section">
+    <h2>{{ 'components.button.advanced.title' | translate }}</h2>
+    <p class="section-description">{{ 'components.button.advanced.description' | translate }}</p>
+    
+    <div class="example-preview flex-column">
+      <nui-button 
+        color="primary" 
+        size="lg" 
+        icon="ri-save-line"
+        width="full"
+        (onClick)="handleClick()">
+        Save Changes
+      </nui-button>
+
+      <nui-button 
+        color="danger" 
+        variant="outline"
+        icon="ri-delete-bin-line"
+        (onClick)="handleClick()">
+        Delete
+      </nui-button>
+
+      <nui-button 
+        color="accent" 
+        size="xl"
+        icon="ri-add-line"
+        aria-label="Add new item">
+      </nui-button>
+    </div>
+
+    <app-code-block [examples]="advancedExamples"></app-code-block>
+  </section>
+</div>
