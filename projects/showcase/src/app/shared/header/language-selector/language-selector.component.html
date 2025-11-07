@@ -1,0 +1,30 @@
+<div class="language-selector">
+  <button 
+    class="language-trigger"
+    cdkOverlayOrigin
+    #trigger="cdkOverlayOrigin"
+    (click)="toggleDropdown()"
+    [attr.aria-label]="'header.language' | translate">
+    <i class="ri-global-line"></i>
+  </button>
+
+  <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="isOpen"
+    [cdkConnectedOverlayHasBackdrop]="true"
+    [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'"
+    (backdropClick)="closeDropdown()">
+    <div class="language-dropdown">
+      <button
+        *ngFor="let lang of languages"
+        class="language-item"
+        [class.active]="lang.code === currentLanguage"
+        (click)="selectLanguage(lang)">
+        <span class="language-flag">{{ lang.flag }}</span>
+        <span class="language-name">{{ lang.label }}</span>
+        <i class="ri-check-line" *ngIf="lang.code === currentLanguage"></i>
+      </button>
+    </div>
+  </ng-template>
+</div>

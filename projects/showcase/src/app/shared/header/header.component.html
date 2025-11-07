@@ -18,57 +18,10 @@
       <!-- Right: Controls -->
       <div class="col">
         <div class="header-controls">
-          <!-- Preset Selector -->
-          <div class="control-group">
-            <label class="control-label">{{ 'header.preset' | translate }}</label>
-            <select 
-              class="form-select form-select-sm"
-              [value]="currentPreset"
-              (change)="changePreset($any($event.target).value)">
-              <option *ngFor="let preset of presets" [value]="preset.value.name">
-                {{ preset.translationKey | translate }}
-              </option>
-            </select>
-          </div>
-
-          <!-- Dark Mode Toggle -->
-          <div class="control-group">
-            <label class="control-label">{{ 'header.theme' | translate }}</label>
-            <button 
-              class="btn-theme-toggle"
-              (click)="toggleDarkMode()"
-              [attr.aria-label]="isDark ? ('header.light' | translate) : ('header.dark' | translate)">
-              <i [class]="isDark ? 'ri-sun-line' : 'ri-moon-line'"></i>
-              <span>{{ (isDark ? 'header.light' : 'header.dark') | translate }}</span>
-            </button>
-          </div>
-
-          <!-- Language Selector -->
-          <div class="control-group">
-            <label class="control-label">{{ 'header.language' | translate }}</label>
-            <select 
-              class="form-select form-select-sm"
-              [value]="currentLanguage"
-              (change)="changeLanguage($any($event.target).value)"
-              #langSelect>
-              <option *ngFor="let lang of languages" [value]="lang.code" [selected]="lang.code === currentLanguage">
-                {{ lang.label }}
-              </option>
-            </select>
-          </div>
-
-          <!-- Version Selector -->
-          <div class="control-group">
-            <label class="control-label">{{ 'header.version' | translate }}</label>
-            <select 
-              class="form-select form-select-sm"
-              [value]="currentVersion"
-              (change)="changeVersion($any($event.target).value)">
-              <option *ngFor="let version of versions" [value]="version.value">
-                {{ version.label }}
-              </option>
-            </select>
-          </div>
+          <app-preset-selector></app-preset-selector>
+          <app-theme-toggle></app-theme-toggle>
+          <app-language-selector></app-language-selector>
+          <app-version-selector></app-version-selector>
         </div>
       </div>
     </div>

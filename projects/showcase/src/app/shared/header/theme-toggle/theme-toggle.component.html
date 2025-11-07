@@ -1,0 +1,6 @@
+<button 
+  class="theme-toggle"
+  (click)="toggleTheme()"
+  [attr.aria-label]="isDark ? ('header.light' | translate) : ('header.dark' | translate)">
+  <i [class]="isDark ? 'ri-sun-line' : 'ri-moon-line'"></i>
+</button>

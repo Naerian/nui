@@ -61,4 +61,11 @@ export class AppComponent implements OnInit {
       this.isSidebarCollapsed = config.sidebarCollapsed;
     });
   }
+
+  closeSidebarOnMobile(): void {
+    // Only close on mobile/tablet
+    if (window.innerWidth < 992) {
+      this.showcaseConfig.setSidebarCollapsed(true);
+    }
+  }
 }

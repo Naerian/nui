@@ -2,6 +2,11 @@
   <app-header></app-header>
   
   <div class="showcase-main" [class.sidebar-collapsed]="isSidebarCollapsed">
+    <!-- Sidebar overlay for mobile -->
+    <div class="sidebar-overlay" 
+         [class.visible]="!isSidebarCollapsed"
+         (click)="closeSidebarOnMobile()"></div>
+    
     <app-sidebar></app-sidebar>
     
     <main class="showcase-content">
