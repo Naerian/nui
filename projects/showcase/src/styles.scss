@@ -1,18 +1,6 @@
 // Import NUI complete bundle
 @import '../../nui/styles/nui-bundle.scss';
 
-// Import Bootstrap Grid & Utilities only
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
-@import 'bootstrap/scss/variables-dark';
-@import 'bootstrap/scss/maps';
-@import 'bootstrap/scss/mixins';
-@import 'bootstrap/scss/utilities';
-@import 'bootstrap/scss/root';
-@import 'bootstrap/scss/containers';
-@import 'bootstrap/scss/grid';
-@import 'bootstrap/scss/helpers';
-
 // Global reset
 * {
   margin: 0;
@@ -56,3 +44,72 @@ body {
   scrollbar-color: var(--nui-border-primary) var(--nui-bg-secondary);
 }
 
+// Showcase-specific styles
+.showcase-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.showcase-main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+
+  &.sidebar-collapsed {
+    .showcase-sidebar {
+      @media (min-width: 992px) {
+        width: 0;
+      }
+    }
+  }
+}
+
+.showcase-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 2rem;
+  background-color: var(--nui-bg-primary);
+
+  @media (max-width: 991px) {
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 767px) {
+    padding: 1rem;
+  }
+}
+
+// Link styles
+a {
+  color: var(--nui-color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--nui-color-primary-shade-10);
+  }
+}
+
+// Code blocks
+code {
+  font-family: 'Courier New', 'Consolas', monospace;
+  background-color: var(--nui-bg-tertiary);
+  padding: 0.2em 0.4em;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.9em;
+  color: var(--nui-color-accent);
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+// Selection
+::selection {
+  background-color: var(--nui-color-selection-bg);
+  color: var(--nui-text-primary);
+}

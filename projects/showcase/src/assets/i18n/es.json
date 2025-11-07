@@ -1,0 +1,95 @@
+{
+  "header": {
+    "title": "Librería de Componentes NUI",
+    "preset": "Preset",
+    "theme": "Tema",
+    "language": "Idioma",
+    "version": "Versión",
+    "light": "Claro",
+    "dark": "Oscuro"
+  },
+  "sidebar": {
+    "gettingStarted": "Comenzar",
+    "installation": "Instalación",
+    "configuration": "Configuración",
+    "theming": "Temas",
+    "components": "Componentes",
+    "examples": "Ejemplos",
+    "playground": "Playground"
+  },
+  "presets": {
+    "aura": "Aura",
+    "warm": "Cálido",
+    "neon": "Neón",
+    "dopamine": "Dopamina",
+    "corporate": "Corporativo",
+    "minimal": "Minimalista"
+  },
+  "footer": {
+    "license": "Incluye iconos de Remix Icon (Licencia MIT)",
+    "copyright": "© 2025 NUI. Todos los derechos reservados."
+  },
+  "codeBlock": {
+    "copy": "Copiar",
+    "copied": "¡Copiado!",
+    "copyCode": "Copiar código"
+  },
+  "pages": {
+    "home": {
+      "title": "Bienvenido a NUI",
+      "subtitle": "Una librería de componentes Angular moderna y personalizable",
+      "description": "Construye aplicaciones hermosas con nuestro conjunto completo de componentes UI"
+    },
+    "installation": {
+      "title": "Instalación",
+      "subtitle": "Comienza con NUI en tu proyecto Angular",
+      "step1": "Instala el paquete",
+      "step1Description": "Utiliza npm o yarn para instalar el paquete NUI en tu proyecto.",
+      "step2": "Importa el módulo NUI",
+      "step2Description": "Configura NUI en tu archivo de configuración de la aplicación. Define el preset que deseas utilizar y el modo de tema.",
+      "step2Title": "Configurar el proveedor de NUI",
+      "step3": "Importa los estilos",
+      "step3Description": "Puedes importar los estilos de NUI de tres formas diferentes: en tu archivo styles.scss global, en angular.json, o en project.json si utilizas Nx.",
+      "step3Title": "Importar los estilos de NUI",
+      "step4": "Comienza a usar componentes",
+      "step4Description": "Ya puedes utilizar cualquier componente de NUI en tus plantillas HTML.",
+      "step4Title": "Usar componentes de NUI"
+    },
+    "configuration": {
+      "title": "Configuración",
+      "subtitle": "Configura NUI según tus necesidades",
+      "presetConfig": "Configuración de Preset",
+      "presetConfigDescription": "Los presets definen la paleta de colores de tu aplicación. NUI incluye 6 presets predefinidos: aura, warm, neon, dopamine, corporate y minimal.",
+      "presetConfigTitle": "Configuración de Preset",
+      "darkModeConfig": "Configuración de Modo Oscuro",
+      "darkModeConfigDescription": "Controla cómo se aplica el modo oscuro en tu aplicación. Las opciones disponibles son: 'manual' (controlado por código), 'auto' (basado en hora del día), o 'system' (según las preferencias del sistema operativo).",
+      "darkModeConfigTitle": "Configuración de Modo Oscuro",
+      "customPresetConfig": "Preset Personalizado",
+      "customPresetConfigDescription": "Crea tu propio preset definiendo colores personalizados para los modos claro y oscuro. Cada preset debe incluir: primary, secondary, accent, success, info, warning y danger.",
+      "customPresetConfigTitle": "Crear Preset Personalizado"
+    },
+    "theming": {
+      "title": "Temas y Presets",
+      "subtitle": "Personaliza la apariencia de tu aplicación",
+      "description": "NUI incluye múltiples presets predefinidos. Cada preset define una paleta de colores única que se aplica a todos los componentes.",
+      "selectPreset": "Selecciona un preset para previsualizarlo",
+      "currentPreset": "Preset Actual",
+      "colorPalette": "Paleta de Colores",
+      "primary": "Primario",
+      "secondary": "Secundario",
+      "accent": "Acento",
+      "success": "Éxito",
+      "info": "Información",
+      "warning": "Advertencia",
+      "danger": "Peligro",
+      "presetDescriptions": {
+        "aura": "Paleta moderna y elegante por defecto con tonos teal y púrpura",
+        "warm": "Paleta energética con tonos coral y dorado cálidos, perfecta para e-commerce",
+        "neon": "Paleta cyberpunk futurista con colores cyan eléctrico y neón, ideal para gaming",
+        "dopamine": "Paleta optimista y alegre con tonos lime brillante y rosa",
+        "corporate": "Paleta azul profesional, perfecta para aplicaciones empresariales",
+        "minimal": "Paleta minimalista refinada con colores sutiles y acento púrpura elegante"
+      }
+    }
+  }
+}

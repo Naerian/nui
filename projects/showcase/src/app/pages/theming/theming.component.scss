@@ -1,0 +1,112 @@
+.theming-page {
+  padding: 2rem 0;
+
+  .page-header {
+    margin-bottom: 3rem;
+    text-align: center;
+
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--nui-text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-subtitle {
+      font-size: 1.25rem;
+      color: var(--nui-text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .page-description {
+      font-size: 1rem;
+      color: var(--nui-text-tertiary);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  }
+
+  .presets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .preset-card {
+    background-color: var(--nui-bg-secondary);
+    border: 1px solid var(--nui-border-primary);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 4px 12px var(--nui-shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .preset-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--nui-border-primary);
+
+      .preset-name {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--nui-text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .preset-description {
+        font-size: 0.875rem;
+        color: var(--nui-text-secondary);
+        margin: 0;
+        line-height: 1.5;
+      }
+    }
+
+    .color-palette {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .color-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .color-swatch {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--border-radius-md);
+      border: 2px solid var(--nui-border-primary);
+      flex-shrink: 0;
+      box-shadow: 0 2px 4px var(--nui-shadow-sm);
+    }
+
+    .color-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.125rem;
+      flex: 1;
+      min-width: 0;
+
+      .color-label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--nui-text-primary);
+        text-transform: capitalize;
+      }
+
+      .color-value {
+        font-size: 0.75rem;
+        font-family: 'Courier New', monospace;
+        color: var(--nui-text-tertiary);
+      }
+    }
+  }
+}

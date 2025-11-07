@@ -1,0 +1,46 @@
+<div class="docs-page">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h1 class="page-title">{{ 'pages.installation.title' | translate }}</h1>
+      <p class="page-subtitle">{{ 'pages.installation.subtitle' | translate }}</p>
+    </div>
+
+    <div class="docs-content">
+      <section class="docs-section">
+        <h2>{{ 'pages.installation.step1' | translate }}</h2>
+        <p class="section-description">{{ 'pages.installation.step1Description' | translate }}</p>
+        <app-code-block 
+          [code]="'npm install @your-org/nui'"
+          language="bash">
+        </app-code-block>
+      </section>
+
+      <section class="docs-section">
+        <h2>{{ 'pages.installation.step2' | translate }}</h2>
+        <p class="section-description">{{ 'pages.installation.step2Description' | translate }}</p>
+        <app-code-block 
+          [title]="'pages.installation.step2Title' | translate"
+          [examples]="step2Examples">
+        </app-code-block>
+      </section>
+
+      <section class="docs-section">
+        <h2>{{ 'pages.installation.step3' | translate }}</h2>
+        <p class="section-description">{{ 'pages.installation.step3Description' | translate }}</p>
+        <app-code-block 
+          [title]="'pages.installation.step3Title' | translate"
+          [examples]="step3Examples">
+        </app-code-block>
+      </section>
+
+      <section class="docs-section">
+        <h2>{{ 'pages.installation.step4' | translate }}</h2>
+        <p class="section-description">{{ 'pages.installation.step4Description' | translate }}</p>
+        <app-code-block 
+          [title]="'pages.installation.step4Title' | translate"
+          [examples]="step4Examples">
+        </app-code-block>
+      </section>
+    </div>
+  </div>
+</div>

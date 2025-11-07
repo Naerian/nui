@@ -1,0 +1,95 @@
+{
+  "header": {
+    "title": "NUI Component Library",
+    "preset": "Preset",
+    "theme": "Theme",
+    "language": "Language",
+    "version": "Version",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "sidebar": {
+    "gettingStarted": "Getting Started",
+    "installation": "Installation",
+    "configuration": "Configuration",
+    "theming": "Theming",
+    "components": "Components",
+    "examples": "Examples",
+    "playground": "Playground"
+  },
+  "presets": {
+    "aura": "Aura",
+    "warm": "Warm",
+    "neon": "Neon",
+    "dopamine": "Dopamine",
+    "corporate": "Corporate",
+    "minimal": "Minimal"
+  },
+  "footer": {
+    "license": "Includes icons from Remix Icon (MIT License)",
+    "copyright": "© 2025 NUI. All rights reserved."
+  },
+  "codeBlock": {
+    "copy": "Copy",
+    "copied": "Copied!",
+    "copyCode": "Copy code"
+  },
+  "pages": {
+    "home": {
+      "title": "Welcome to NUI",
+      "subtitle": "A modern, customizable Angular component library",
+      "description": "Build beautiful applications with our comprehensive set of UI components"
+    },
+    "installation": {
+      "title": "Installation",
+      "subtitle": "Get started with NUI in your Angular project",
+      "step1": "Install the package",
+      "step1Description": "Use npm or yarn to install the NUI package in your project.",
+      "step2": "Import NUI module",
+      "step2Description": "Configure NUI in your application config file. Define the preset you want to use and the theme mode.",
+      "step2Title": "Configure NUI Provider",
+      "step3": "Import styles",
+      "step3Description": "You can import NUI styles in three different ways: in your global styles.scss file, in angular.json, or in project.json if you're using Nx.",
+      "step3Title": "Import NUI Styles",
+      "step4": "Start using components",
+      "step4Description": "You can now use any NUI component in your HTML templates.",
+      "step4Title": "Use NUI Components"
+    },
+    "configuration": {
+      "title": "Configuration",
+      "subtitle": "Configure NUI to match your needs",
+      "presetConfig": "Preset Configuration",
+      "presetConfigDescription": "Presets define your application's color palette. NUI includes 6 pre-built presets: aura, warm, neon, dopamine, corporate, and minimal.",
+      "presetConfigTitle": "Preset Configuration",
+      "darkModeConfig": "Dark Mode Configuration",
+      "darkModeConfigDescription": "Control how dark mode is applied in your application. Available options are: 'manual' (controlled by code), 'auto' (based on time of day), or 'system' (according to OS preferences).",
+      "darkModeConfigTitle": "Dark Mode Configuration",
+      "customPresetConfig": "Custom Preset",
+      "customPresetConfigDescription": "Create your own preset by defining custom colors for light and dark modes. Each preset must include: primary, secondary, accent, success, info, warning, and danger.",
+      "customPresetConfigTitle": "Create Custom Preset"
+    },
+    "theming": {
+      "title": "Theming & Presets",
+      "subtitle": "Customize the look and feel of your application",
+      "description": "NUI comes with multiple pre-built presets. Each preset defines a unique color palette that can be applied to all components.",
+      "selectPreset": "Select a preset to preview",
+      "currentPreset": "Current Preset",
+      "colorPalette": "Color Palette",
+      "primary": "Primary",
+      "secondary": "Secondary",
+      "accent": "Accent",
+      "success": "Success",
+      "info": "Info",
+      "warning": "Warning",
+      "danger": "Danger",
+      "presetDescriptions": {
+        "aura": "Default modern and elegant palette with teal and purple tones",
+        "warm": "Energetic palette with warm coral and golden tones, perfect for e-commerce",
+        "neon": "Futuristic cyberpunk palette with electric cyan and neon colors, ideal for gaming",
+        "dopamine": "Optimistic and cheerful palette with bright lime and pink tones",
+        "corporate": "Professional blue palette, perfect for business and enterprise applications",
+        "minimal": "Refined minimalist palette with subtle colors and elegant purple accent"
+      }
+    }
+  }
+}

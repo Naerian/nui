@@ -1,0 +1,49 @@
+<div class="home-page">
+  <div class="container-fluid">
+    <div class="hero-section">
+      <div class="hero-icon">
+        <i class="ri-palette-line"></i>
+      </div>
+      <h1 class="hero-title">{{ 'pages.home.title' | translate }}</h1>
+      <p class="hero-subtitle">{{ 'pages.home.subtitle' | translate }}</p>
+      <p class="hero-description">{{ 'pages.home.description' | translate }}</p>
+      
+      <div class="hero-actions">
+        <a routerLink="/getting-started/installation" class="btn-hero btn-primary">
+          <i class="ri-rocket-line"></i>
+          {{ 'sidebar.gettingStarted' | translate }}
+        </a>
+        <a routerLink="/theming" class="btn-hero btn-secondary">
+          <i class="ri-palette-line"></i>
+          {{ 'sidebar.theming' | translate }}
+        </a>
+      </div>
+    </div>
+
+    <div class="features-section">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="feature-card">
+            <i class="ri-paint-brush-line feature-icon"></i>
+            <h3 class="feature-title">Multiple Presets</h3>
+            <p class="feature-description">6 beautiful pre-built themes with light and dark mode support</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <i class="ri-moon-line feature-icon"></i>
+            <h3 class="feature-title">Dark Mode</h3>
+            <p class="feature-description">Automatic, manual, or system-based dark mode detection</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <i class="ri-settings-3-line feature-icon"></i>
+            <h3 class="feature-title">Fully Customizable</h3>
+            <p class="feature-description">Create your own presets with custom color palettes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

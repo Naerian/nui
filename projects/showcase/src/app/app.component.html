@@ -1,1 +1,11 @@
-<router-outlet></router-outlet>
+<div class="showcase-container">
+  <app-header></app-header>
+  
+  <div class="showcase-main" [class.sidebar-collapsed]="isSidebarCollapsed">
+    <app-sidebar></app-sidebar>
+    
+    <main class="showcase-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

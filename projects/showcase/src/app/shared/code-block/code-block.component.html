@@ -1,0 +1,45 @@
+<div class="code-block-container">
+  <!-- Header with title and copy button -->
+  <div class="code-block-header" *ngIf="title || examples">
+    <div class="code-block-title" *ngIf="title">
+      <i class="ri-code-box-line"></i>
+      <span>{{ title }}</span>
+    </div>
+
+    <!-- Tabs for multiple examples -->
+    <div class="code-block-tabs" *ngIf="examples && examples.length > 1">
+      <button
+        *ngFor="let example of examples; let i = index"
+        class="tab-button"
+        [class.active]="selectedTab() === i"
+        (click)="selectTab(i)">
+        <i [class]="getLanguageIcon(example.language)"></i>
+        <span>{{ example.label || getLanguageLabel(example.language) }}</span>
+      </button>
+    </div>
+
+    <div class="code-block-actions">
+      <button 
+        class="btn-copy"
+        (click)="copyCode()"
+        [class.success]="copySuccess()"
+        [attr.aria-label]="(copySuccess() ? 'codeBlock.copied' : 'codeBlock.copy') | translate">
+        <i [class]="copySuccess() ? 'ri-check-line' : 'ri-file-copy-line'"></i>
+        <span>{{ (copySuccess() ? 'codeBlock.copied' : 'codeBlock.copy') | translate }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Simple copy button for single code blocks without title -->
+  <button 
+    *ngIf="!title && !examples"
+    class="btn-copy-simple"
+    (click)="copyCode()"
+    [class.success]="copySuccess()"
+    [attr.aria-label]="(copySuccess() ? 'codeBlock.copied' : 'codeBlock.copy') | translate">
+    <i [class]="copySuccess() ? 'ri-check-line' : 'ri-file-copy-line'"></i>
+  </button>
+
+  <!-- Code display -->
+  <pre class="code-block-pre" [attr.data-language]="currentLanguage"><code>{{ currentCode }}</code></pre>
+</div>
