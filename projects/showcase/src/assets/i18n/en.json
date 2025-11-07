@@ -23,7 +23,9 @@
     "neon": "Neon",
     "dopamine": "Dopamine",
     "corporate": "Corporate",
-    "minimal": "Minimal"
+    "minimal": "Minimal",
+    "sunset": "Sunset",
+    "ocean": "Ocean"
   },
   "footer": {
     "license": "Includes icons from Remix Icon (MIT License)",
@@ -59,7 +61,7 @@
       "title": "Configuration",
       "subtitle": "Configure NUI to match your needs",
       "presetConfig": "Preset Configuration",
-      "presetConfigDescription": "Presets define your application's color palette. NUI includes 6 pre-built presets: aura, warm, neon, dopamine, corporate, and minimal.",
+      "presetConfigDescription": "Presets define your application's color palette. NUI includes 8 pre-built presets: aura, warm, neon, dopamine, corporate, minimal, sunset, and ocean.",
       "presetConfigTitle": "Preset Configuration",
       "darkModeConfig": "Dark Mode Configuration",
       "darkModeConfigDescription": "Control how dark mode is applied in your application. Available options are: 'manual' (controlled by code), 'auto' (based on time of day), or 'system' (according to OS preferences).",
@@ -88,7 +90,9 @@
         "neon": "Futuristic cyberpunk palette with electric cyan and neon colors, ideal for gaming",
         "dopamine": "Optimistic and cheerful palette with bright lime and pink tones",
         "corporate": "Professional blue palette, perfect for business and enterprise applications",
-        "minimal": "Refined minimalist palette with subtle colors and elegant purple accent"
+        "minimal": "Refined minimalist palette with subtle colors and elegant purple accent",
+        "sunset": "Warm and vibrant palette with rose, pink and orange tones, perfect for creative apps",
+        "ocean": "Calm and professional palette with deep blues and aqua tones, ideal for productivity"
       }
     }
   }

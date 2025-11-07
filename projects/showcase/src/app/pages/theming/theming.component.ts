@@ -94,6 +94,34 @@ export class ThemingComponent {
         warning: '#78350f',
         danger: '#7f1d1d'
       }
+    },
+    {
+      name: 'sunset',
+      translationKey: 'presets.sunset',
+      descriptionKey: 'pages.theming.presetDescriptions.sunset',
+      colors: {
+        primary: '#f43f5e',
+        secondary: '#f472b6',
+        accent: '#fb923c',
+        success: '#059669',
+        info: '#0ea5e9',
+        warning: '#f59e0b',
+        danger: '#dc2626'
+      }
+    },
+    {
+      name: 'ocean',
+      translationKey: 'presets.ocean',
+      descriptionKey: 'pages.theming.presetDescriptions.ocean',
+      colors: {
+        primary: '#0077be',
+        secondary: '#0284c7',
+        accent: '#00bcd4',
+        success: '#059669',
+        info: '#0ea5e9',
+        warning: '#f59e0b',
+        danger: '#dc2626'
+      }
     }
   ];
 

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { OverlayModule, CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { ThemeService } from 'nui';
-import { aura, warm, neon, dopamine, corporate, minimal } from 'nui';
+import { aura, warm, neon, dopamine, corporate, minimal, sunset, ocean } from 'nui';
 import { ShowcaseConfigService } from '../../../core/services/showcase-config.service';
 
 interface PresetOption {
@@ -70,6 +70,20 @@ export class PresetSelectorComponent implements OnInit {
       translationKey: 'presets.minimal',
       primaryColor: '#8b5cf6',
       colors: ['#8b5cf6', '#6366f1', '#a78bfa']
+    },
+    { 
+      name: 'sunset', 
+      value: sunset, 
+      translationKey: 'presets.sunset',
+      primaryColor: '#f43f5e',
+      colors: ['#f43f5e', '#fb923c', '#f472b6']
+    },
+    { 
+      name: 'ocean', 
+      value: ocean, 
+      translationKey: 'presets.ocean',
+      primaryColor: '#0077be',
+      colors: ['#0077be', '#00bcd4', '#29b6f6']
     }
   ];
 

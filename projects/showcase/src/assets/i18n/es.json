@@ -23,7 +23,9 @@
     "neon": "Neón",
     "dopamine": "Dopamina",
     "corporate": "Corporativo",
-    "minimal": "Minimalista"
+    "minimal": "Minimalista",
+    "sunset": "Atardecer",
+    "ocean": "Océano"
   },
   "footer": {
     "license": "Incluye iconos de Remix Icon (Licencia MIT)",
@@ -59,7 +61,7 @@
       "title": "Configuración",
       "subtitle": "Configura NUI según tus necesidades",
       "presetConfig": "Configuración de Preset",
-      "presetConfigDescription": "Los presets definen la paleta de colores de tu aplicación. NUI incluye 6 presets predefinidos: aura, warm, neon, dopamine, corporate y minimal.",
+      "presetConfigDescription": "Los presets definen la paleta de colores de tu aplicación. NUI incluye 8 presets predefinidos: aura, warm, neon, dopamine, corporate, minimal, sunset y ocean.",
       "presetConfigTitle": "Configuración de Preset",
       "darkModeConfig": "Configuración de Modo Oscuro",
       "darkModeConfigDescription": "Controla cómo se aplica el modo oscuro en tu aplicación. Las opciones disponibles son: 'manual' (controlado por código), 'auto' (basado en hora del día), o 'system' (según las preferencias del sistema operativo).",
@@ -88,7 +90,9 @@
         "neon": "Paleta cyberpunk futurista con colores cyan eléctrico y neón, ideal para gaming",
         "dopamine": "Paleta optimista y alegre con tonos lime brillante y rosa",
         "corporate": "Paleta azul profesional, perfecta para aplicaciones empresariales",
-        "minimal": "Paleta minimalista refinada con colores sutiles y acento púrpura elegante"
+        "minimal": "Paleta minimalista refinada con colores sutiles y acento púrpura elegante",
+        "sunset": "Paleta cálida y vibrante con tonos rosa, naranja y coral, perfecta para apps creativas",
+        "ocean": "Paleta tranquila y profesional con azules profundos y tonos aqua, ideal para productividad"
       }
     }
   }

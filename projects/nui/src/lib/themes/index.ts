@@ -8,3 +8,4 @@ export { neon } from './presets/neon';
 export { warm } from './presets/warm';
 export { sunset } from './presets/sunset';
 export { twilight } from './presets/twilight';
+export { ocean } from './presets/ocean';
