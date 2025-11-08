@@ -1,9 +1,13 @@
 <div class="code-block-container">
   <!-- Header with title and copy button -->
   <div class="code-block-header" *ngIf="title || examples">
-    <div class="code-block-title" *ngIf="title">
+    <!-- Single example title or general title -->
+    <div class="code-block-title" *ngIf="title || (examples && examples.length === 1 && examples[0].title)">
       <i class="ri-code-box-line"></i>
-      <span>{{ title }}</span>
+      <span *ngIf="title">{{ title }}</span>
+      <span *ngIf="!title && examples && examples.length === 1 && examples[0].title">
+        {{ examples[0].title | translate }}
+      </span>
     </div>
 
     <!-- Tabs for multiple examples -->
@@ -14,7 +18,7 @@
         [class.active]="selectedTab() === i"
         (click)="selectTab(i)">
         <i [class]="getLanguageIcon(example.language)"></i>
-        <span>{{ example.label || getLanguageLabel(example.language) }}</span>
+        <span>{{ (example.title || getLanguageLabel(example.language)) | translate }}</span>
       </button>
     </div>
 

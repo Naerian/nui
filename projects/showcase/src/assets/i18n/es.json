@@ -103,43 +103,59 @@
       "subtitle": "Componente de botón versátil con múltiples variantes, tamaños y estados",
       "basic": {
         "title": "Botón Básico",
-        "description": "La forma más simple de un botón con estilos predeterminados."
+        "description": "La forma más simple de un botón con estilos predeterminados.",
+        "codeTitle": "HTML"
       },
       "variants": {
         "title": "Variantes",
-        "description": "Los botones vienen en tres variantes: solid (predeterminado), outline y ghost."
+        "description": "Los botones vienen en tres variantes: solid (predeterminado), outline y ghost.",
+        "codeTitle": "Variantes de Botón"
       },
       "colors": {
         "title": "Colores",
-        "description": "Los botones soportan todos los colores del tema: primary, secondary, accent, success, info, warning y danger."
+        "description": "Los botones soportan todos los colores del tema: primary, secondary, accent, success, info, warning y danger.",
+        "codeTitle": "Colores de Botón"
       },
       "sizes": {
         "title": "Tamaños",
-        "description": "Cinco opciones de tamaño disponibles: xs, sm, md (predeterminado), lg y xl."
+        "description": "Cinco opciones de tamaño disponibles: xs, sm, md (predeterminado), lg y xl.",
+        "codeTitle": "Tamaños de Botón"
       },
       "icons": {
         "title": "Con Iconos",
-        "description": "Agrega iconos a los botones al inicio o al final. Los botones con solo un icono se renderizan como botones circulares de icono."
+        "description": "Agrega iconos a los botones al inicio o al final. Los botones con solo un icono se renderizan como botones circulares de icono.",
+        "note": "Posición del icono: 'start' muestra el icono antes del texto, 'end' lo muestra después. Los botones de solo icono requieren el atributo aria-label para accesibilidad.",
+        "codeTitle": "Botones con Iconos"
       },
       "loading": {
         "title": "Estado de Carga",
-        "description": "Muestra un spinner de carga en tres posiciones: inicio, final o centro (que reemplaza el contenido)."
+        "description": "Muestra un spinner de carga en tres posiciones: inicio, final o centro (que reemplaza el contenido).",
+        "note": "Posiciones de carga: 'start' muestra el spinner antes del texto, 'end' lo muestra después, 'center' reemplaza completamente el contenido con un spinner centrado.",
+        "htmlTitle": "Plantilla (HTML)",
+        "tsTitle": "Lógica del Componente (TypeScript)"
       },
       "width": {
         "title": "Ancho",
-        "description": "Controla el ancho del botón: auto (predeterminado), full (100%) o fit (ajustado al contenido)."
+        "description": "Controla el ancho del botón: auto (predeterminado), full (100%) o fit (ajustado al contenido).",
+        "note": "Opciones de ancho: 'auto' se adapta al contenido con padding estándar, 'full' se estira al 100% del contenedor, 'fit' usa el espacio mínimo necesario.",
+        "codeTitle": "Opciones de Ancho"
       },
       "disabled": {
         "title": "Estado Deshabilitado",
-        "description": "Los botones deshabilitados evitan la interacción del usuario y muestran una apariencia atenuada."
+        "description": "Los botones deshabilitados evitan la interacción del usuario y muestran una apariencia atenuada.",
+        "codeTitle": "Botones Deshabilitados"
       },
       "events": {
         "title": "Eventos",
-        "description": "Maneja eventos de clic con el output onClick. Soporta tipos de botón: button, submit y reset."
+        "description": "Maneja eventos de clic con el output onClick. Soporta tipos de botón: button, submit y reset.",
+        "consoleNote": "Abre las DevTools (F12) y revisa la pestaña Console para ver los eventos registrados cuando haces clic en los botones.",
+        "htmlTitle": "Plantilla (HTML)",
+        "tsTitle": "Lógica del Componente (TypeScript)"
       },
       "advanced": {
         "title": "Combinaciones Avanzadas",
-        "description": "Combina múltiples propiedades para crear variaciones complejas de botones para casos de uso específicos."
+        "description": "Combina múltiples propiedades para crear variaciones complejas de botones para casos de uso específicos.",
+        "codeTitle": "Ejemplos Complejos"
       }
     }
   }

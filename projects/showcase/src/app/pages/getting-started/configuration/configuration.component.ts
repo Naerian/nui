@@ -35,7 +35,7 @@ provideNUI({
   customPresetExamples: CodeExample[] = [
     {
       language: 'typescript',
-      label: 'TypeScript',
+      title: 'TypeScript',
       code: `import { ThemePreset } from 'nui';
 
 const myPreset: ThemePreset = {

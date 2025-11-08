@@ -103,43 +103,59 @@
       "subtitle": "Versatile button component with multiple variants, sizes, and states",
       "basic": {
         "title": "Basic Button",
-        "description": "The simplest form of a button with default styling."
+        "description": "The simplest form of a button with default styling.",
+        "codeTitle": "HTML"
       },
       "variants": {
         "title": "Variants",
-        "description": "Buttons come in three variants: solid (default), outline, and ghost."
+        "description": "Buttons come in three variants: solid (default), outline, and ghost.",
+        "codeTitle": "Button Variants"
       },
       "colors": {
         "title": "Colors",
-        "description": "Buttons support all theme colors: primary, secondary, accent, success, info, warning, and danger."
+        "description": "Buttons support all theme colors: primary, secondary, accent, success, info, warning, and danger.",
+        "codeTitle": "Button Colors"
       },
       "sizes": {
         "title": "Sizes",
-        "description": "Five size options available: xs, sm, md (default), lg, and xl."
+        "description": "Five size options available: xs, sm, md (default), lg, and xl.",
+        "codeTitle": "Button Sizes"
       },
       "icons": {
         "title": "With Icons",
-        "description": "Add icons to buttons at the start or end position. Buttons with only an icon are rendered as circular icon buttons."
+        "description": "Add icons to buttons at the start or end position. Buttons with only an icon are rendered as circular icon buttons.",
+        "note": "Icon position: 'start' displays the icon before text, 'end' displays it after. Icon-only buttons require the aria-label attribute for accessibility.",
+        "codeTitle": "Buttons with Icons"
       },
       "loading": {
         "title": "Loading State",
-        "description": "Display a loading spinner in three positions: start, end, or center (which replaces the content)."
+        "description": "Display a loading spinner in three positions: start, end, or center (which replaces the content).",
+        "note": "Loading positions: 'start' shows spinner before text, 'end' shows it after, 'center' replaces content entirely with centered spinner.",
+        "htmlTitle": "Template (HTML)",
+        "tsTitle": "Component Logic (TypeScript)"
       },
       "width": {
         "title": "Width",
-        "description": "Control button width: auto (default), full (100%), or fit (fit-content)."
+        "description": "Control button width: auto (default), full (100%), or fit (fit-content).",
+        "note": "Width options: 'auto' adapts to content with standard padding, 'full' stretches to 100% of container, 'fit' uses minimum space needed.",
+        "codeTitle": "Button Width Options"
       },
       "disabled": {
         "title": "Disabled State",
-        "description": "Disabled buttons prevent user interaction and display a dimmed appearance."
+        "description": "Disabled buttons prevent user interaction and display a dimmed appearance.",
+        "codeTitle": "Disabled Buttons"
       },
       "events": {
         "title": "Events",
-        "description": "Handle click events with the onClick output. Supports button types: button, submit, and reset."
+        "description": "Handle click events with the onClick output. Supports button types: button, submit, and reset.",
+        "consoleNote": "Open DevTools (F12) and check the Console tab to see the events being logged when you click the buttons.",
+        "htmlTitle": "Template (HTML)",
+        "tsTitle": "Component Logic (TypeScript)"
       },
       "advanced": {
         "title": "Advanced Combinations",
-        "description": "Combine multiple properties to create complex button variations for specific use cases."
+        "description": "Combine multiple properties to create complex button variations for specific use cases.",
+        "codeTitle": "Complex Examples"
       }
     }
   }

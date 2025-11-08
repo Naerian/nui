@@ -34,6 +34,34 @@
     margin-bottom: 1.5rem;
     line-height: 1.6;
   }
+
+  .section-note {
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    background-color: var(--nui-bg-secondary);
+    border-left: 4px solid var(--nui-border-primary);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.875rem;
+    line-height: 1.5;
+
+    &.info {
+      border-left-color: var(--nui-color-info);
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+
+      i {
+        font-size: 1.25rem;
+        color: var(--nui-color-info);
+        flex-shrink: 0;
+        margin-top: 0.125rem;
+      }
+    }
+
+    p {
+      margin: 0;
+    }
+  }
 }
 
 .example-preview {

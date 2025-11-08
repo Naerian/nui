@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export interface CodeExample {
   language: string;
   code: string;
-  label?: string;
+  title?: string;
 }
 
 @Component({

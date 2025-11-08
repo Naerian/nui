@@ -14,7 +14,7 @@ export class InstallationComponent {
   step2Examples: CodeExample[] = [
     {
       language: 'typescript',
-      label: 'app.config.ts',
+      title: 'app.config.ts',
       code: `import { ApplicationConfig } from '@angular/core';
 import { provideNUI, aura } from 'nui';
 
@@ -32,13 +32,13 @@ export const appConfig: ApplicationConfig = {
   step3Examples: CodeExample[] = [
     {
       language: 'scss',
-      label: 'styles.scss',
+      title: 'styles.scss',
       code: `// Import NUI styles in your global styles.scss
 @import 'nui/styles/nui.scss';`
     },
     {
       language: 'json',
-      label: 'angular.json',
+      title: 'angular.json',
       code: `{
   "projects": {
     "your-app": {
@@ -58,7 +58,7 @@ export const appConfig: ApplicationConfig = {
     },
     {
       language: 'json',
-      label: 'project.json (Nx)',
+      title: 'project.json (Nx)',
       code: `{
   "targets": {
     "build": {
@@ -77,7 +77,7 @@ export const appConfig: ApplicationConfig = {
   step4Examples: CodeExample[] = [
     {
       language: 'html',
-      label: 'component.html',
+      title: 'component.html',
       code: `<!-- Use NUI components in your templates -->
 <nui-button color="primary">Click me</nui-button>`
     }
