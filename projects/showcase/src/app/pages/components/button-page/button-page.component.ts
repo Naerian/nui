@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { ButtonComponent } from 'nui';
+import { ButtonComponent, ButtonDirective } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 
 interface CodeExample {
@@ -13,7 +13,7 @@ interface CodeExample {
 @Component({
   selector: 'app-button-page',
   standalone: true,
-  imports: [CommonModule, TranslateModule, ButtonComponent, CodeBlockComponent],
+  imports: [CommonModule, TranslateModule, ButtonComponent, ButtonDirective, CodeBlockComponent],
   templateUrl: './button-page.component.html',
   styleUrls: ['./button-page.component.scss'],
 })
@@ -38,17 +38,36 @@ export class ButtonPageComponent {
     },
   ];
 
-  // 3. Colores
+  // 3. Colores (mostrando las 3 variantes)
   colorExamples: CodeExample[] = [
     {
       title: 'components.button.colors.codeTitle',
-      code: `<nui-button color="primary">Primary</nui-button>
+      code: `<!-- Solid (default) -->
+<nui-button color="primary">Primary</nui-button>
 <nui-button color="secondary">Secondary</nui-button>
 <nui-button color="accent">Accent</nui-button>
 <nui-button color="success">Success</nui-button>
 <nui-button color="info">Info</nui-button>
 <nui-button color="warning">Warning</nui-button>
-<nui-button color="danger">Danger</nui-button>`,
+<nui-button color="danger">Danger</nui-button>
+
+<!-- Outline -->
+<nui-button variant="outline" color="primary">Primary</nui-button>
+<nui-button variant="outline" color="secondary">Secondary</nui-button>
+<nui-button variant="outline" color="accent">Accent</nui-button>
+<nui-button variant="outline" color="success">Success</nui-button>
+<nui-button variant="outline" color="info">Info</nui-button>
+<nui-button variant="outline" color="warning">Warning</nui-button>
+<nui-button variant="outline" color="danger">Danger</nui-button>
+
+<!-- Ghost -->
+<nui-button variant="ghost" color="primary">Primary</nui-button>
+<nui-button variant="ghost" color="secondary">Secondary</nui-button>
+<nui-button variant="ghost" color="accent">Accent</nui-button>
+<nui-button variant="ghost" color="success">Success</nui-button>
+<nui-button variant="ghost" color="info">Info</nui-button>
+<nui-button variant="ghost" color="warning">Warning</nui-button>
+<nui-button variant="ghost" color="danger">Danger</nui-button>`,
       language: 'html',
     },
   ];
@@ -157,34 +176,25 @@ export class ButtonPageComponent {
     },
   ];
 
-  // 10. Combinaciones avanzadas
-  advancedExamples: CodeExample[] = [
+  // 10. Usando directiva
+  directiveExamples: CodeExample[] = [
     {
-      title: 'components.button.advanced.codeTitle',
-      code: `<nui-button 
-  color="primary" 
-  size="lg" 
-  icon="ri-save-line"
-  width="full"
-  (onClick)="save()">
-  Save Changes
-</nui-button>
+      title: 'components.button.directive.codeTitle',
+      code: `<!-- Usando la directiva nuiButton en elementos HTML nativos -->
+<button nuiButton>Native Button</button>
+<button nuiButton variant="outline" color="primary">Primary Outline</button>
+<button nuiButton variant="ghost" color="danger">Ghost Danger</button>
 
-<nui-button 
-  color="danger" 
-  variant="outline"
-  icon="ri-delete-bin-line"
-  [disabled]="!canDelete"
-  (onClick)="confirmDelete()">
-  Delete
-</nui-button>
+<!-- Con iconos -->
+<button nuiButton icon="ri-save-line">Save</button>
+<button nuiButton icon="ri-download-line" iconPosition="end">Download</button>
 
-<nui-button 
-  color="accent" 
-  size="xl"
-  icon="ri-add-line"
-  aria-label="Add new item">
-</nui-button>`,
+<!-- Con loading -->
+<button nuiButton [loading]="isLoading">Submit</button>
+
+<!-- Elementos <a> con aspecto de botón -->
+<a nuiButton href="/profile" icon="ri-user-line">View Profile</a>
+<a nuiButton variant="outline" color="accent" href="/settings">Settings</a>`,
       language: 'html',
     },
   ];

@@ -152,10 +152,10 @@
         "htmlTitle": "Plantilla (HTML)",
         "tsTitle": "Lógica del Componente (TypeScript)"
       },
-      "advanced": {
-        "title": "Combinaciones Avanzadas",
-        "description": "Combina múltiples propiedades para crear variaciones complejas de botones para casos de uso específicos.",
-        "codeTitle": "Ejemplos Complejos"
+      "directive": {
+        "title": "Usando Directiva",
+        "description": "Aplica estilos de botón a elementos HTML nativos usando la directiva nuiButton. Funciona con elementos <code>&lt;button&gt;</code> y <code>&lt;a&gt;</code>.",
+        "codeTitle": "Directiva de Botón"
       }
     }
   }

@@ -152,10 +152,10 @@
         "htmlTitle": "Template (HTML)",
         "tsTitle": "Component Logic (TypeScript)"
       },
-      "advanced": {
-        "title": "Advanced Combinations",
-        "description": "Combine multiple properties to create complex button variations for specific use cases.",
-        "codeTitle": "Complex Examples"
+      "directive": {
+        "title": "Using Directive",
+        "description": "Apply button styling to native HTML elements using the nuiButton directive. Works with <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> elements.",
+        "codeTitle": "Button Directive"
       }
     }
   }

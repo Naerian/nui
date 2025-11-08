@@ -36,13 +36,38 @@
     <p class="section-description">{{ 'components.button.colors.description' | translate }}</p>
     
     <div class="example-preview">
-      <nui-button color="primary">Primary</nui-button>
-      <nui-button color="secondary">Secondary</nui-button>
-      <nui-button color="accent">Accent</nui-button>
-      <nui-button color="success">Success</nui-button>
-      <nui-button color="info">Info</nui-button>
-      <nui-button color="warning">Warning</nui-button>
-      <nui-button color="danger">Danger</nui-button>
+      <!-- Solid -->
+      <div class="button-row">
+        <nui-button color="primary">Primary</nui-button>
+        <nui-button color="secondary">Secondary</nui-button>
+        <nui-button color="accent">Accent</nui-button>
+        <nui-button color="success">Success</nui-button>
+        <nui-button color="info">Info</nui-button>
+        <nui-button color="warning">Warning</nui-button>
+        <nui-button color="danger">Danger</nui-button>
+      </div>
+      
+      <!-- Outline -->
+      <div class="button-row">
+        <nui-button variant="outline" color="primary">Primary</nui-button>
+        <nui-button variant="outline" color="secondary">Secondary</nui-button>
+        <nui-button variant="outline" color="accent">Accent</nui-button>
+        <nui-button variant="outline" color="success">Success</nui-button>
+        <nui-button variant="outline" color="info">Info</nui-button>
+        <nui-button variant="outline" color="warning">Warning</nui-button>
+        <nui-button variant="outline" color="danger">Danger</nui-button>
+      </div>
+      
+      <!-- Ghost -->
+      <div class="button-row">
+        <nui-button variant="ghost" color="primary">Primary</nui-button>
+        <nui-button variant="ghost" color="secondary">Secondary</nui-button>
+        <nui-button variant="ghost" color="accent">Accent</nui-button>
+        <nui-button variant="ghost" color="success">Success</nui-button>
+        <nui-button variant="ghost" color="info">Info</nui-button>
+        <nui-button variant="ghost" color="warning">Warning</nui-button>
+        <nui-button variant="ghost" color="danger">Danger</nui-button>
+      </div>
     </div>
 
     <app-code-block [examples]="colorExamples"></app-code-block>
@@ -151,37 +176,19 @@
     <app-code-block [examples]="eventExamples"></app-code-block>
   </section>
 
-  <!-- 10. Combinaciones Avanzadas -->
+  <!-- 10. Usando Directiva -->
   <section class="section">
-    <h2>{{ 'components.button.advanced.title' | translate }}</h2>
-    <p class="section-description">{{ 'components.button.advanced.description' | translate }}</p>
+    <h2>{{ 'components.button.directive.title' | translate }}</h2>
+    <p class="section-description">{{ 'components.button.directive.description' | translate }}</p>
     
-    <div class="example-preview flex-column">
-      <nui-button 
-        color="primary" 
-        size="lg" 
-        icon="ri-save-line"
-        width="full"
-        (onClick)="handleClick()">
-        Save Changes
-      </nui-button>
-
-      <nui-button 
-        color="danger" 
-        variant="outline"
-        icon="ri-delete-bin-line"
-        (onClick)="handleClick()">
-        Delete
-      </nui-button>
-
-      <nui-button 
-        color="accent" 
-        size="xl"
-        icon="ri-add-line"
-        aria-label="Add new item">
-      </nui-button>
+    <div class="example-preview">
+      <button nuiButton>Native Button</button>
+      <button nuiButton variant="outline" color="primary">Primary Outline</button>
+      <button nuiButton variant="ghost" color="danger">Ghost Danger</button>
+      <button nuiButton icon="ri-save-line">Save</button>
+      <button nuiButton icon="ri-download-line" iconPosition="end">Download</button>
     </div>
 
-    <app-code-block [examples]="advancedExamples"></app-code-block>
+    <app-code-block [examples]="directiveExamples"></app-code-block>
   </section>
 </div>
