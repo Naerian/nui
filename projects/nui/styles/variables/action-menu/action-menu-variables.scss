@@ -7,13 +7,32 @@
 // CSS variables para el componente Action Menu.
 // Se incluyen a través del mixin nui-action-menu-vars.
 //
+// NOTA: Las variables de color para estados hover y selected se generan 
+// dinámicamente por ThemeService y están disponibles como:
+// - --nui-action-menu-{color}-item-hover-bg
+// - --nui-action-menu-{color}-item-hover-color
+// - --nui-action-menu-{color}-item-hover-icon-color
+// - --nui-action-menu-{color}-item-hover-border-color
+// - --nui-action-menu-{color}-item-hover-subtitle-color
+// - --nui-action-menu-{color}-item-check-color
+// - --nui-action-menu-{color}-item-selected-bg
+// - --nui-action-menu-{color}-item-selected-color
+// - --nui-action-menu-{color}-item-selected-icon-color
+// - --nui-action-menu-{color}-item-selected-subtitle-color
+// - --nui-action-menu-{color}-item-selected-hover-bg
+// - --nui-action-menu-{color}-item-selected-hover-color
+// - --nui-action-menu-{color}-item-selected-hover-icon-color
+// - --nui-action-menu-{color}-item-selected-hover-subtitle-color
+//
+// Donde {color} puede ser: primary, secondary, success, warning, danger, info
+//
 // Uso:
 // ```scss
 // :root {
 //   @include nui-action-menu-vars;
 // }
 // ```
-// ========================================// ========================================
+// ========================================
 
 @mixin nui-action-menu-vars {
   // Dimensiones
@@ -31,7 +50,7 @@
   --nui-action-menu-padding: #{tokens.$action-menu-padding};
   --nui-action-menu-item-border-radius: #{tokens.$action-menu-item-border-radius};
 
-  // Colores
+  // Colores base
   --nui-action-menu-bg: #{tokens.$action-menu-bg};
   --nui-action-menu-item-bg: #{tokens.$action-menu-item-bg};
   --nui-action-menu-item-color: #{tokens.$action-menu-item-color};
@@ -49,9 +68,14 @@
   --nui-action-menu-shadow: #{tokens.$action-menu-shadow};
   --nui-action-menu-static-shadow: #{tokens.$action-menu-static-shadow};
 
-  // Estados hover/active
-  --nui-action-menu-item-hover-bg: #{tokens.$action-menu-item-hover-bg};
-  --nui-action-menu-item-hover-color: #{tokens.$action-menu-item-hover-color};
-  --nui-action-menu-item-hover-icon-color: #{tokens.$action-menu-item-hover-icon-color};
-  --nui-action-menu-item-hover-border-color: #{tokens.$action-menu-item-hover-border-color};
+  // Subtitle
+  --nui-action-menu-item-subtitle-font-size: #{tokens.$action-menu-item-subtitle-font-size};
+  --nui-action-menu-item-subtitle-color: #{tokens.$action-menu-item-subtitle-color};
+
+  // Separator
+  --nui-action-menu-separator-color: #{tokens.$action-menu-separator-color};
+  --nui-action-menu-separator-padding: #{tokens.$action-menu-separator-padding};
+  --nui-action-menu-separator-font-size: #{tokens.$action-menu-separator-font-size};
+  --nui-action-menu-separator-font-weight: #{tokens.$action-menu-separator-font-weight};
+  --nui-action-menu-separator-label-color: #{tokens.$action-menu-separator-label-color};
 }

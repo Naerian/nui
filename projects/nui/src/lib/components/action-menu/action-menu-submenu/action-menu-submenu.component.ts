@@ -7,7 +7,7 @@ import {
   HostListener,
 } from '@angular/core';
 import { ActionMenuItem } from '../models/action-menu.model';
-import { NUISize, DEFAULT_SIZE } from '../../../configs';
+import { NUISize, NUIColor, DEFAULT_SIZE, DEFAULT_COLOR } from '../../../configs';
 import { CommonModule } from '@angular/common';
 import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import { ActionMenuItemComponent } from '../action-menu-item/action-menu-item.component';
@@ -44,6 +44,12 @@ export class ActionMenuSubmenuComponent {
    * Se utiliza para definir el tamaño del botón que abre el menú.
    */
   @Input() size: NUISize = DEFAULT_SIZE;
+
+  /**
+   * Color del submenú.
+   * Se utiliza para definir el color de los items del submenú.
+   */
+  @Input() color: NUIColor = DEFAULT_COLOR;
 
   /**
    * Evento que se emite cuando se hace clic en un item del submenú.

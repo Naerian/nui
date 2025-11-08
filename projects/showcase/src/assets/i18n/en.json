@@ -15,6 +15,7 @@
     "theming": "Theming",
     "components": "Components",
     "button": "Button",
+    "actionMenu": "Action Menu",
     "examples": "Examples",
     "playground": "Playground"
   },
@@ -156,6 +157,64 @@
         "title": "Using Directive",
         "description": "Apply button styling to native HTML elements using the nuiButton directive. Works with <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> elements.",
         "codeTitle": "Button Directive"
+      }
+    },
+    "actionMenu": {
+      "title": "Action Menu",
+      "subtitle": "Dropdown menu component with support for static, dynamic items and submenus",
+      "basic": {
+        "title": "Basic Usage",
+        "description": "Simple action menu with items array. Each item can have a label, icon, and action.",
+        "note": "Here we see an example of using both <code>type='static'</code> and <code>type='dynamic'</code>.",
+        "consoleNote": "Open DevTools (F12) and check the Console tab to see the actions being logged when you click menu items.",
+        "htmlTitle": "Template (HTML)",
+        "tsTitle": "Component Logic (TypeScript)"
+      },
+      "separators": {
+        "title": "With Separators",
+        "description": "Group related actions using visual separators. Use <code>separator: true</code> for simple separators, or add a <code>label</code> for labeled separators.",
+        "codeTitle": "Menu with Separators"
+      },
+      "submenu": {
+        "title": "With Submenus",
+        "description": "Create nested menus using the <code>children</code> property. Submenus can be nested multiple levels deep.",
+        "note": "Use the <code>children</code> property to define submenu items. Each child can also have its own children for deeper nesting.",
+        "codeTitle": "Nested Menus"
+      },
+      "variants": {
+        "title": "Button Variants",
+        "description": "The menu button supports three variants: <code>'ghost'</code> (default), <code>'solid'</code>, and <code>'outline'</code>.",
+        "codeTitle": "Variant Examples"
+      },
+      "sizes": {
+        "title": "Sizes",
+        "description": "Five size options for the menu button: <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code> (default), <code>'lg'</code>, and <code>'xl'</code>.",
+        "codeTitle": "Size Options"
+      },
+      "label": {
+        "title": "With Label",
+        "description": "Add text to the menu button. Can be combined with icons and supports full width mode.",
+        "codeTitle": "Button with Text"
+      },
+      "disabled": {
+        "title": "Disabled State",
+        "description": "Disable individual menu items or the entire menu. Disabled items are shown but not clickable.",
+        "codeTitle": "Disabled States"
+      },
+      "withSubtitle": {
+        "title": "With Subtitle",
+        "description": "Add secondary text below the main label. Useful for displaying additional information like emails, descriptions, or shortcuts.",
+        "codeTitle": "Subtitle Examples"
+      },
+      "selected": {
+        "title": "Selected State",
+        "description": "Mark items as selected to show the current choice. A check icon appears automatically. Perfect for selectors, filters, or settings.",
+        "codeTitle": "Selected Items"
+      },
+      "colors": {
+        "title": "Descriptive Icons",
+        "description": "Use meaningful icons and labels to communicate the purpose of each action. Icons help users quickly identify actions.",
+        "codeTitle": "Icon Usage"
       }
     }
   }

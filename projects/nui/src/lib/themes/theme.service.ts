@@ -235,6 +235,7 @@ export class ThemeService {
       css += this.generateProgressBarVariables(name, baseColor);
       css += this.generatePaginatorVariables(name, baseColor);
       css += this.generateAvatarVariables(name, baseColor);
+      css += this.generateActionMenuVariables(name, baseColor);
     });
     css += '}\n';
     return css;
@@ -539,6 +540,40 @@ export class ThemeService {
 `;
   }
 
+  private generateActionMenuVariables(name: string, color: string): string {
+    const hoverBg = this.isDark ? this.withAlpha(color, 0.15) : this.tint(color, 95);
+    const hoverColor = this.isDark ? this.tint(color, 60) : color;
+    const hoverIconColor = this.isDark ? this.tint(color, 50) : color;
+    const hoverBorderColor = this.isDark ? this.tint(color, 35) : this.tint(color, 65);
+    const hoverSubtitleColor = this.isDark ? this.tint(color, 40) : this.tint(color, 40);
+    const checkColor = this.isDark ? this.tint(color, 50) : color;
+    const selectedBg = this.isDark ? this.withAlpha(color, 0.15) : this.tint(color, 95);
+    const selectedColor = this.isDark ? this.tint(color, 60) : color;
+    const selectedIconColor = this.isDark ? this.tint(color, 50) : color;
+    const selectedSubtitleColor = this.isDark ? this.tint(color, 40) : this.tint(color, 40);
+    const selectedHoverBg = this.isDark ? this.withAlpha(color, 0.2) : this.tint(color, 90);
+    const selectedHoverColor = this.isDark ? this.tint(color, 65) : color;
+    const selectedHoverIconColor = this.isDark ? this.tint(color, 55) : color;
+    const selectedHoverSubtitleColor = this.isDark ? this.tint(color, 45) : this.tint(color, 35);
+    
+    return `
+  --nui-action-menu-${name}-item-hover-bg: ${hoverBg};
+  --nui-action-menu-${name}-item-hover-color: ${hoverColor};
+  --nui-action-menu-${name}-item-hover-icon-color: ${hoverIconColor};
+  --nui-action-menu-${name}-item-hover-border-color: ${hoverBorderColor};
+  --nui-action-menu-${name}-item-hover-subtitle-color: ${hoverSubtitleColor};
+  --nui-action-menu-${name}-item-check-color: ${checkColor};
+  --nui-action-menu-${name}-item-selected-bg: ${selectedBg};
+  --nui-action-menu-${name}-item-selected-color: ${selectedColor};
+  --nui-action-menu-${name}-item-selected-icon-color: ${selectedIconColor};
+  --nui-action-menu-${name}-item-selected-subtitle-color: ${selectedSubtitleColor};
+  --nui-action-menu-${name}-item-selected-hover-bg: ${selectedHoverBg};
+  --nui-action-menu-${name}-item-selected-hover-color: ${selectedHoverColor};
+  --nui-action-menu-${name}-item-selected-hover-icon-color: ${selectedHoverIconColor};
+  --nui-action-menu-${name}-item-selected-hover-subtitle-color: ${selectedHoverSubtitleColor};
+`;
+  }
+
   private hexToRgb(hex: string): { r: number; g: number; b: number } {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) } : { r: 0, g: 0, b: 0 };
@@ -551,13 +586,19 @@ export class ThemeService {
   private shade(color: string, percent: number): string {
     const rgb = this.hexToRgb(color);
     const factor = 1 - percent / 100;
-    return this.rgbToHex(rgb.r * factor, rgb.g * factor, rgb.b * factor);
+    const r = Math.max(0, Math.min(255, Math.round(rgb.r * factor)));
+    const g = Math.max(0, Math.min(255, Math.round(rgb.g * factor)));
+    const b = Math.max(0, Math.min(255, Math.round(rgb.b * factor)));
+    return this.rgbToHex(r, g, b);
   }
 
   private tint(color: string, percent: number): string {
     const rgb = this.hexToRgb(color);
     const factor = percent / 100;
-    return this.rgbToHex(rgb.r + (255 - rgb.r) * factor, rgb.g + (255 - rgb.g) * factor, rgb.b + (255 - rgb.b) * factor);
+    const r = Math.max(0, Math.min(255, Math.round(rgb.r + (255 - rgb.r) * factor)));
+    const g = Math.max(0, Math.min(255, Math.round(rgb.g + (255 - rgb.g) * factor)));
+    const b = Math.max(0, Math.min(255, Math.round(rgb.b + (255 - rgb.b) * factor)));
+    return this.rgbToHex(r, g, b);
   }
 
   private withAlpha(color: string, alpha: number): string {

@@ -1,0 +1,80 @@
+@use "../config";
+
+// ============================================================================
+// Estilos globales para action-menu por color
+// ============================================================================
+// Estos estilos se aplican a los action-menu según su color.
+// Generan clases .nui-action-menu--{color} que usan las variables
+// generadas dinámicamente por ThemeService.
+// ============================================================================
+
+$colors: primary, secondary, success, info, warning, danger, accent;
+
+@each $color in $colors {
+  .nui-action-menu--#{$color},
+  .nui-action-menu-submenu--#{$color} {
+    // El borde usa el mismo color que el hover background para coherencia visual
+    border-color: var(--nui-action-menu-#{$color}-item-hover-bg);
+
+    .nui-action-menu__item,
+    .nui-action-menu-submenu__item {
+      &__check {
+        color: var(--nui-action-menu-#{$color}-item-check-color);
+      }
+
+      &:focus:not(&--disabled),
+      &:active:not(&--disabled),
+      &:hover:not(&--disabled) {
+        background-color: var(--nui-action-menu-#{$color}-item-hover-bg);
+        color: var(--nui-action-menu-#{$color}-item-hover-color);
+        outline: none;
+
+        .nui-action-menu__item__icon,
+        .nui-action-menu__item__shortcut,
+        .nui-action-menu__item__arrow,
+        .nui-action-menu__item__check {
+          color: var(--nui-action-menu-#{$color}-item-hover-icon-color);
+        }
+
+        .nui-action-menu__item__shortcut {
+          border-color: var(--nui-action-menu-#{$color}-item-hover-border-color);
+        }
+
+        .nui-action-menu__item__subtitle {
+          color: var(--nui-action-menu-#{$color}-item-hover-subtitle-color);
+        }
+      }
+
+      // Estado seleccionado
+      &--selected {
+        background-color: var(--nui-action-menu-#{$color}-item-selected-bg);
+        color: var(--nui-action-menu-#{$color}-item-selected-color);
+
+        .nui-action-menu__item__icon,
+        .nui-action-menu__item__check {
+          color: var(--nui-action-menu-#{$color}-item-selected-icon-color);
+        }
+
+        .nui-action-menu__item__subtitle {
+          color: var(--nui-action-menu-#{$color}-item-selected-subtitle-color);
+        }
+
+        &:focus,
+        &:active,
+        &:hover {
+          background-color: var(--nui-action-menu-#{$color}-item-selected-hover-bg);
+          color: var(--nui-action-menu-#{$color}-item-selected-hover-color);
+
+          .nui-action-menu__item__icon,
+          .nui-action-menu__item__check {
+            color: var(--nui-action-menu-#{$color}-item-selected-hover-icon-color);
+          }
+
+          .nui-action-menu__item__subtitle {
+            color: var(--nui-action-menu-#{$color}-item-selected-hover-subtitle-color);
+          }
+        }
+      }
+    }
+  }
+}

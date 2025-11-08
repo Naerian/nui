@@ -43,6 +43,10 @@ export const routes: Routes = [
       {
         path: 'button',
         loadComponent: () => import('./pages/components/button-page/button-page.component').then(m => m.ButtonPageComponent)
+      },
+      {
+        path: 'action-menu',
+        loadComponent: () => import('./pages/components/action-menu-page/action-menu-page.component').then(m => m.ActionMenuPageComponent)
       }
     ]
   },

@@ -15,6 +15,7 @@
     "theming": "Temas",
     "components": "Componentes",
     "button": "Botón",
+    "actionMenu": "Menú de Acciones",
     "examples": "Ejemplos",
     "playground": "Playground"
   },
@@ -156,6 +157,64 @@
         "title": "Usando Directiva",
         "description": "Aplica estilos de botón a elementos HTML nativos usando la directiva nuiButton. Funciona con elementos <code>&lt;button&gt;</code> y <code>&lt;a&gt;</code>.",
         "codeTitle": "Directiva de Botón"
+      }
+    },
+    "actionMenu": {
+      "title": "Menú de Acciones",
+      "subtitle": "Componente de menú desplegable con soporte para items estáticos, dinámicos y submenús",
+      "basic": {
+        "title": "Uso Básico",
+        "description": "Menú de acciones simple con array de items. Cada item puede tener una etiqueta, icono y acción.",
+        "note": "Aquí vemos un ejemplo de uso de ambos <code>type='static'</code> y <code>type='dynamic'</code>.",
+        "consoleNote": "Abre las DevTools (F12) y revisa la pestaña Console para ver las acciones registradas cuando haces clic en los items del menú.",
+        "htmlTitle": "Plantilla (HTML)",
+        "tsTitle": "Lógica del Componente (TypeScript)"
+      },
+      "separators": {
+        "title": "Con Separadores",
+        "description": "Agrupa acciones relacionadas usando separadores visuales. Usa <code>separator: true</code> para separadores simples, o agrega un <code>label</code> para separadores etiquetados.",
+        "codeTitle": "Menú con Separadores"
+      },
+      "submenu": {
+        "title": "Con Submenús",
+        "description": "Crea menús anidados usando la propiedad <code>children</code>. Los submenús pueden anidarse múltiples niveles.",
+        "note": "Usa la propiedad <code>children</code> para definir items de submenú. Cada hijo puede tener sus propios hijos para mayor anidación.",
+        "codeTitle": "Menús Anidados"
+      },
+      "variants": {
+        "title": "Variantes del Botón",
+        "description": "El botón del menú soporta tres variantes: <code>'ghost'</code> (predeterminado), <code>'solid'</code> y <code>'outline'</code>.",
+        "codeTitle": "Ejemplos de Variantes"
+      },
+      "sizes": {
+        "title": "Tamaños",
+        "description": "Cinco opciones de tamaño para el botón del menú: <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code> (predeterminado), <code>'lg'</code> y <code>'xl'</code>.",
+        "codeTitle": "Opciones de Tamaño"
+      },
+      "label": {
+        "title": "Con Etiqueta",
+        "description": "Agrega texto al botón del menú. Puede combinarse con iconos y soporta modo de ancho completo.",
+        "codeTitle": "Botón con Texto"
+      },
+      "disabled": {
+        "title": "Estado Deshabilitado",
+        "description": "Deshabilita items individuales del menú o el menú completo. Los items deshabilitados se muestran pero no son clicables.",
+        "codeTitle": "Estados Deshabilitados"
+      },
+      "withSubtitle": {
+        "title": "Con Subtítulo",
+        "description": "Agrega texto secundario debajo de la etiqueta principal. Útil para mostrar información adicional como correos, descripciones o atajos.",
+        "codeTitle": "Ejemplos de Subtítulo"
+      },
+      "selected": {
+        "title": "Estado Seleccionado",
+        "description": "Marca items como seleccionados para mostrar la elección actual. Un icono de check aparece automáticamente. Perfecto para selectores, filtros o configuraciones.",
+        "codeTitle": "Items Seleccionados"
+      },
+      "colors": {
+        "title": "Iconos Descriptivos",
+        "description": "Usa iconos y etiquetas significativas para comunicar el propósito de cada acción. Los iconos ayudan a los usuarios a identificar rápidamente las acciones.",
+        "codeTitle": "Uso de Iconos"
       }
     }
   }

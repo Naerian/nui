@@ -689,34 +689,6 @@
 // ACTION MENU MIXINS
 // ========================================
 
-/// Mixin para generar temas de Action Menu
-/// Similar al breadcrumb-theme para mantener consistencia
-/// @param {String} $color - Color del tema (primary, secondary, accent, etc.)
-@mixin action-menu-theme($color) {
-  &--#{$color} {
-    border-color: var(--nui-color-#{$color}-tint-95);
-
-    .nui-action-menu__item,
-    .nui-action-menu-submenu__item {
-      &:hover:not(&--disabled),
-      &:active:not(&--disabled),
-      &:focus:not(&--disabled),
-      &:active:not(&--disabled) {
-        background-color: var(--nui-color-#{$color}-tint-95);
-        color: var(--nui-color-#{$color});
-        outline: none;
-
-        .nui-action-menu__item__icon,
-        .nui-action-menu__item__shortcut,
-        .nui-action-menu__item__arrow {
-          color: var(--nui-color-#{$color});
-          border-color: var(--nui-color-#{$color}-tint-65);
-        }
-      }
-    }
-  }
-}
-
 /// Mixin para responsive breakpoints de Breadcrumb
 /// @param {String} $breakpoint - Breakpoint (tablet, mobile)
 /// @param {Map} $config - Configuración específica del breakpoint

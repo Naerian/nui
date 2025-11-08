@@ -13,7 +13,7 @@
   border-radius: var(--nui-action-menu-border-radius);
   padding: var(--nui-action-menu-padding);
   box-shadow: var(--nui-action-menu-shadow);
-  gap: var(--nui-action-menu-item-gap);
+  gap: var(--nui-action-menu-padding); // Coherencia con el padding
 
   &--fullWidth {
     width: 100%;
@@ -21,6 +21,41 @@
 
   &--static {
     box-shadow: var(--nui-action-menu-static-shadow);
+  }
+
+  // Separador
+  &__separator {
+    width: 100%;
+    height: 1px;
+    background-color: var(--nui-action-menu-separator-color);
+    margin: 8px 0; // Más aire arriba y abajo
+
+    &--labeled {
+      height: auto;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      padding: 0;
+      gap: 12px; // Espacio entre línea y texto
+
+      &::before,
+      &::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background-color: var(--nui-action-menu-separator-color);
+      }
+    }
+
+    &__label {
+      font-size: 0.75rem; // Texto más pequeño (12px)
+      font-weight: var(--nui-action-menu-separator-font-weight);
+      color: var(--nui-action-menu-separator-label-color);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      flex-shrink: 0; // No se encoge, mantiene su tamaño
+    }
   }
 
   &__item {
@@ -48,19 +83,40 @@
       min-width: 0;
     }
 
+    &__text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px; // Reducido de 2px a 4px para menos espacio entre title y subtitle
+      flex: 1;
+      min-width: 0;
+    }
+
     &__label {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       display: block;
-      flex: 1;
-      min-width: 0;
       margin-right: var(--nui-action-menu-item-label-margin-right);
+    }
+
+    &__subtitle {
+      font-size: var(--nui-action-menu-item-subtitle-font-size);
+      color: var(--nui-action-menu-item-subtitle-color);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
     }
 
     &__icon {
       font-size: inherit;
       flex-shrink: 0;
+    }
+
+    &__check {
+      font-size: 1.25em;
+      flex-shrink: 0;
+      margin-left: auto;
     }
 
     &__shortcut {
@@ -87,17 +143,11 @@
     &:active:not(&--disabled),
     &:hover:not(&--disabled),
     &:active:not(&--disabled) {
-      background-color: var(--nui-action-menu-item-hover-bg);
-      color: var(--nui-action-menu-item-hover-color);
       outline: none;
-
-      .nui-action-menu__item__icon,
-      .nui-action-menu__item__shortcut,
-      .nui-action-menu__item__arrow {
-        color: var(--nui-action-menu-item-hover-icon-color);
-        border-color: var(--nui-action-menu-item-hover-border-color);
-      }
     }
+
+    // Nota: Los estilos de hover y selected se definen en styles/components/_action-menu.scss
+    // según el color del componente (--primary, --secondary, etc.)
 
     &[disabled],
     &:disabled,
@@ -115,13 +165,7 @@
     line-height: var(--nui-action-menu-shortcut-font-size);
   }
 
-  // ====================
-  // TEMAS - Generación automática usando mixins
-  // ====================
-  $colors: primary, secondary, success, info, warning, danger, accent;
-  @each $color in $colors {
-    @include mixins.action-menu-theme($color);
-  }
+  // Nota: Los estilos de color por tema se generan en styles/components/_action-menu.scss
 }
 
 // ====================
@@ -145,8 +189,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
       display: block;
-      flex: 1;
-      min-width: 0;
     }
 
     &__shortcut {
@@ -161,5 +203,7 @@
       border: var(--nui-action-menu-shortcut-border-width) solid var(--nui-action-menu-shortcut-border-color);
       margin-left: auto;
     }
+
+    // Nota: Los estilos de selected en submenu se definen en styles/components/_action-menu.scss
   }
 }

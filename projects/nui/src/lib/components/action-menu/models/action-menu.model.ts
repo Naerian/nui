@@ -30,6 +30,7 @@ export type ActionMenuType = 'static' | 'dynamic';
  * @property {string} [action] - Identificador único de la acción (ej: 'delete', 'edit', 'share').
  *                                Útil para identificar qué acción ejecutar en el handler.
  * @property {string} [label] - Texto visible del item (ej: "Eliminar", "Editar", "Compartir").
+ * @property {string} [subtitle] - Texto secundario mostrado debajo del label en tamaño menor.
  * @property {string} [title] - Texto para el atributo title (tooltip). Mejora la accesibilidad.
  * @property {string} [icon] - Clase del icono RemixIcon (ej: 'ri-delete-bin-line', 'ri-edit-line').
  * @property {string} [shortcut] - Atajo de teclado mostrado visualmente (ej: 'Ctrl+D', '⌘+E').
@@ -38,6 +39,8 @@ export type ActionMenuType = 'static' | 'dynamic';
  * @property {string} [id] - ID único del item para tracking o referencias.
  * @property {ActionMenuItem[]} [children] - Array de items hijos para crear submenús anidados.
  * @property {boolean} [disabled] - Si está deshabilitado (visual y funcionalmente).
+ * @property {boolean} [selected] - Si está seleccionado (para uso como selector).
+ * @property {boolean} [separator] - Si es un separador visual. Si tiene label, se muestra como separador con texto.
  * @property {Function} [onAction] - Callback ejecutado al hacer clic en el item.
  * 
  * @example
@@ -81,6 +84,32 @@ export type ActionMenuType = 'static' | 'dynamic';
  *   title: 'Esta función estará disponible pronto'
  * };
  * 
+ * // Item con subtitle
+ * const userItem: ActionMenuItem = {
+ *   action: 'user',
+ *   label: 'Juan Pérez',
+ *   subtitle: 'juan@example.com',
+ *   icon: 'ri-user-line'
+ * };
+ * 
+ * // Item seleccionado
+ * const selectedItem: ActionMenuItem = {
+ *   action: 'option1',
+ *   label: 'Opción 1',
+ *   selected: true
+ * };
+ * 
+ * // Separador simple
+ * const separator: ActionMenuItem = {
+ *   separator: true
+ * };
+ * 
+ * // Separador con label
+ * const labeledSeparator: ActionMenuItem = {
+ *   separator: true,
+ *   label: 'Acciones peligrosas'
+ * };
+ * 
  * // Item con template personalizado
  * const customItem: ActionMenuItem = {
  *   action: 'custom',
@@ -93,6 +122,7 @@ export type ActionMenuType = 'static' | 'dynamic';
 export interface ActionMenuItem {
   action?: string;
   label?: string;
+  subtitle?: string;
   title?: string;
   icon?: string;
   shortcut?: string;
@@ -100,5 +130,7 @@ export interface ActionMenuItem {
   id?: string;
   children?: ActionMenuItem[];
   disabled?: boolean;
+  selected?: boolean;
+  separator?: boolean;
   onAction?: () => void;
 }

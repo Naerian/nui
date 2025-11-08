@@ -1,0 +1,290 @@
+<div class="docs-page">
+  <div class="page-header">
+    <h1>{{ "components.actionMenu.title" | translate }}</h1>
+    <p class="subtitle">{{ "components.actionMenu.subtitle" | translate }}</p>
+  </div>
+
+  <!-- 1. Básico -->
+  <section class="section">
+    <h2>{{ "components.actionMenu.basic.title" | translate }}</h2>
+    <p class="section-description">
+      {{ "components.actionMenu.basic.description" | translate }}
+    </p>
+    <div class="section-note">
+      <p [innerHTML]="'components.actionMenu.basic.note' | translate"></p>
+    </div>
+
+    <div class="section-note info">
+      <i class="ri-information-line"></i>
+      <p
+        [innerHTML]="'components.actionMenu.basic.consoleNote' | translate"
+      ></p>
+    </div>
+
+    <div class="example-preview">
+      <nui-action-menu
+        type="static"
+        variant="ghost"
+        icon="ri-more-line"
+        [items]="basicMenuItems"
+        (onItemAction)="handleAction($event)"
+      >
+      </nui-action-menu>
+      <nui-action-menu
+        icon="ri-more-line"
+        [items]="basicMenuItems"
+        (onItemAction)="handleAction($event)"
+      >
+      </nui-action-menu>
+    </div>
+
+    <app-code-block [examples]="basicExamples"></app-code-block>
+  </section>
+
+  <!-- 2. Con Separadores -->
+  <section class="section">
+    <h2>{{ "components.actionMenu.separators.title" | translate }}</h2>
+    <p class="section-description">
+      {{ "components.actionMenu.separators.description" | translate }}
+    </p>
+
+    <div class="example-preview">
+      <nui-action-menu
+        icon="ri-more-line"
+        [items]="menuWithSeparators"
+        (onItemAction)="handleAction($event)"
+      >
+      </nui-action-menu>
+    </div>
+
+    <app-code-block [examples]="separatorExamples"></app-code-block>
+  </section>
+
+  <!-- 3. Con Submenús -->
+  <section class="section">
+    <h2>{{ "components.actionMenu.submenu.title" | translate }}</h2>
+    <p class="section-description">
+      {{ "components.actionMenu.submenu.description" | translate }}
+    </p>
+
+    <div class="section-note">
+      <p [innerHTML]="'components.actionMenu.submenu.note' | translate"></p>
+    </div>
+
+    <div class="example-preview">
+      <nui-action-menu
+        icon="ri-more-2-line"
+        [items]="menuWithSubmenu"
+        (onItemAction)="handleAction($event)"
+      >
+      </nui-action-menu>
+    </div>
+
+    <app-code-block [examples]="submenuExamples"></app-code-block>
+  </section>
+
+  <!-- 4. Variantes de Botón -->
+  <section class="section">
+    <h2>{{ "components.actionMenu.variants.title" | translate }}</h2>
+    <p class="section-description">
+      {{ "components.actionMenu.variants.description" | translate }}
+    </p>
+
+    <div class="example-preview">
+      <nui-action-menu
+        icon="ri-more-line"
+        variant="ghost"
+        [items]="basicMenuItems"
+        (onItemAction)="handleAction($event)"
+      >
+      </nui-action-menu>
+
+      <nui-action-menu
+        icon="ri-more-line"
+        variant="solid"
+        color="primary"
+        [items]="basicMenuItems"
+        (onItemAction)="handleAction($event)"
+      >
+      </nui-action-menu>
+
+      <nui-action-menu
+        icon="ri-more-line"
+        variant="outline"
+        color="accent"
+        [items]="basicMenuItems"
+        (onItemAction)="handleAction($event)"
+      >
+      </nui-action-menu>
+    </div>
+
+    <app-code-block [examples]="variantExamples"></app-code-block>
+  </section>
+
+  <!-- 5. Tamaños -->
+  <section class="section">
+    <h2>{{ "components.actionMenu.sizes.title" | translate }}</h2>
+    <p class="section-description">
+      {{ "components.actionMenu.sizes.description" | translate }}
+    </p>
+
+    <div class="example-preview">
+      <nui-action-menu
+        size="xs"
+        icon="ri-more-line"
+        [items]="basicMenuItems"
+        (onItemAction)="handleAction($event)"
+      ></nui-action-menu>
+      <nui-action-menu
+        size="sm"
+        icon="ri-more-line"
+        [items]="basicMenuItems"
+        (onItemAction)="handleAction($event)"
+      ></nui-action-menu>
+      <nui-action-menu
+        size="md"
+        icon="ri-more-line"
+        [items]="basicMenuItems"
+        (onItemAction)="handleAction($event)"
+      ></nui-action-menu>
+      <nui-action-menu
+        size="lg"
+        icon="ri-more-line"
+        [items]="basicMenuItems"
+        (onItemAction)="handleAction($event)"
+      ></nui-action-menu>
+      <nui-action-menu
+        size="xl"
+        icon="ri-more-line"
+        [items]="basicMenuItems"
+        (onItemAction)="handleAction($event)"
+      ></nui-action-menu>
+    </div>
+
+    <app-code-block [examples]="sizeExamples"></app-code-block>
+  </section>
+
+  <!-- 6. Con Texto -->
+  <section class="section">
+    <h2>{{ "components.actionMenu.label.title" | translate }}</h2>
+    <p class="section-description">
+      {{ "components.actionMenu.label.description" | translate }}
+    </p>
+
+    <div class="example-preview flex-column">
+      <nui-action-menu
+        label="Actions"
+        icon="ri-more-2-line"
+        color="primary"
+        variant="solid"
+        [items]="basicMenuItems"
+        (onItemAction)="handleAction($event)"
+      >
+      </nui-action-menu>
+
+      <nui-action-menu
+        label="Options"
+        variant="outline"
+        [items]="basicMenuItems"
+        (onItemAction)="handleAction($event)"
+      >
+      </nui-action-menu>
+
+      <nui-action-menu
+        label="Menu"
+        width="full"
+        [items]="basicMenuItems"
+        (onItemAction)="handleAction($event)"
+      >
+      </nui-action-menu>
+    </div>
+
+    <app-code-block [examples]="labelExamples"></app-code-block>
+  </section>
+
+  <!-- 7. Items Deshabilitados -->
+  <section class="section">
+    <h2>{{ "components.actionMenu.disabled.title" | translate }}</h2>
+    <p class="section-description">
+      {{ "components.actionMenu.disabled.description" | translate }}
+    </p>
+
+    <div class="example-preview">
+      <nui-action-menu
+        icon="ri-more-line"
+        [items]="menuWithDisabled"
+        (onItemAction)="handleAction($event)"
+      >
+      </nui-action-menu>
+
+      <nui-action-menu
+        [disabled]="true"
+        icon="ri-more-line"
+        [items]="basicMenuItems"
+      >
+      </nui-action-menu>
+    </div>
+
+    <app-code-block [examples]="disabledExamples"></app-code-block>
+  </section>
+
+  <!-- 8. Con Subtitle -->
+  <section class="section">
+    <h2>{{ "components.actionMenu.withSubtitle.title" | translate }}</h2>
+    <p class="section-description">
+      {{ "components.actionMenu.withSubtitle.description" | translate }}
+    </p>
+
+    <div class="example-preview">
+      <nui-action-menu
+        type="static"
+        icon="ri-user-line"
+        label="Users"
+        [items]="menuWithSubtitle"
+        (onItemAction)="handleAction($event)"
+      >
+      </nui-action-menu>
+    </div>
+
+    <app-code-block [examples]="subtitleExamples"></app-code-block>
+  </section>
+
+  <!-- 9. Con Selected -->
+  <section class="section">
+    <h2>{{ "components.actionMenu.selected.title" | translate }}</h2>
+    <p class="section-description">
+      {{ "components.actionMenu.selected.description" | translate }}
+    </p>
+
+    <div class="example-preview">
+      <nui-action-menu
+        icon="ri-global-line"
+        label="Language"
+        [items]="menuWithSelected"
+        (onItemAction)="handleAction($event)"
+      >
+      </nui-action-menu>
+    </div>
+
+    <app-code-block [examples]="selectedExamples"></app-code-block>
+  </section>
+
+  <!-- 10. Iconos Descriptivos -->
+  <section class="section">
+    <h2>{{ "components.actionMenu.colors.title" | translate }}</h2>
+    <p class="section-description">
+      {{ "components.actionMenu.colors.description" | translate }}
+    </p>
+
+    <div class="example-preview">
+      <nui-action-menu
+        icon="ri-more-line"
+        [items]="coloredMenuItems"
+        (onItemAction)="handleAction($event)"
+      >
+      </nui-action-menu>
+    </div>
+
+    <app-code-block [examples]="colorExamples"></app-code-block>
+  </section>
+</div>

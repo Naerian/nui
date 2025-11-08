@@ -28,7 +28,7 @@
     class="
       nui-action-menu 
       nui-action-menu--{{ effectiveVariant }} 
-      nui-action-menu--{{ color }}
+      nui-action-menu--{{ effectiveColor }}
     "
     [class.nui-action-menu--static]="type === 'static'"
     [class.nui-action-menu--dynamic]="type === 'dynamic'"
@@ -38,13 +38,27 @@
     [attr.aria-orientation]="'vertical'"
   >
     @for (item of mergedItems; track item.id) {
-      @if (!item.children) {
+      <!-- Separador -->
+      @if (item.separator) {
+        @if (item.label) {
+          <div class="nui-action-menu__separator nui-action-menu__separator--labeled" role="separator">
+            <span class="nui-action-menu__separator__label">{{ item.label }}</span>
+          </div>
+        } @else {
+          <div class="nui-action-menu__separator" role="separator"></div>
+        }
+      }
+      
+      <!-- Item normal -->
+      @if (!item.children && !item.separator) {
         <button
           class="nui-action-menu__item nui-action-menu__item--action"
+          [class.nui-action-menu__item--selected]="item.selected"
           cdkMenuItem
           [disabled]="item.disabled"
           (cdkMenuItemTriggered)="onItemClick(item)"
           [attr.aria-label]="item.title || item.label"
+          [attr.aria-current]="item.selected ? 'true' : null"
           role="menuitem"
           type="button"
         >
@@ -58,7 +72,12 @@
             @if (item.templateRef && !item.label) {
               <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
             } @else {
-              <span class="nui-action-menu__item__label">{{ item.label }}</span>
+              <div class="nui-action-menu__item__text">
+                <span class="nui-action-menu__item__label">{{ item.label }}</span>
+                @if (item.subtitle) {
+                  <span class="nui-action-menu__item__subtitle">{{ item.subtitle }}</span>
+                }
+              </div>
             }
           </div>
           @if (item.shortcut) {
@@ -66,10 +85,13 @@
               item.shortcut
             }}</span>
           }
+          @if (item.selected) {
+            <i class="ri-check-line nui-action-menu__item__check"></i>
+          }
         </button>
       }
 
-      @if (item.children) {
+      @if (item.children && !item.separator) {
         <button
           class="nui-action-menu__item nui-action-menu__item--submenu"
           [cdkMenuTriggerFor]="subMenuTemplate"
@@ -92,7 +114,12 @@
             @if (item.templateRef && !item.label) {
               <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
             } @else {
-              <span class="nui-action-menu__item__label">{{ item.label }}</span>
+              <div class="nui-action-menu__item__text">
+                <span class="nui-action-menu__item__label">{{ item.label }}</span>
+                @if (item.subtitle) {
+                  <span class="nui-action-menu__item__subtitle">{{ item.subtitle }}</span>
+                }
+              </div>
             }
           </div>
           <span class="nui-action-menu__item__arrow">
@@ -109,5 +136,6 @@
     (onItemAction)="onItemClick($event)"
     [iconSubmenu]="iconSubmenu"
     [items]="item.children"
+    [color]="effectiveColor"
   ></nui-action-menu-submenu>
 </ng-template>

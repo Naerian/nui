@@ -5,6 +5,10 @@
 // Variables SCSS centralizadas para personalizar el componente Action Menu.
 // Todas las variables usan !default para permitir sobrescritura.
 //
+// NOTA: Los colores de hover y estados seleccionados se generan dinámicamente 
+// por ThemeService basados en el tema activo (light/dark) y el color del componente.
+// Ver theme.service.ts -> generateActionMenuVariables()
+//
 // Cómo personalizar:
 // ------------------
 // 1. Define tus propias variables ANTES de importar este archivo
@@ -38,7 +42,7 @@ $action-menu-border-radius: var(--border-radius-md) !default;
 $action-menu-padding: var(--spacing-xs) !default;
 $action-menu-item-border-radius: var(--border-radius-md) !default;
 
-// ===== COLORES =====
+// ===== COLORES BASE =====
 $action-menu-bg: var(--nui-bg-primary) !default;
 $action-menu-item-bg: transparent !default;
 $action-menu-item-color: var(--nui-text-primary) !default;
@@ -56,8 +60,14 @@ $action-menu-shortcut-font-size: var(--component-font-size-xs) !default;
 $action-menu-shadow: var(--nui-shadow-elevated) !default;
 $action-menu-static-shadow: var(--nui-shadow-container) !default;
 
-// ===== ESTADOS HOVER/ACTIVE =====
-$action-menu-item-hover-bg: var(--nui-color-primary-tint-95) !default;
-$action-menu-item-hover-color: var(--nui-color-primary) !default;
-$action-menu-item-hover-icon-color: var(--nui-color-primary) !default;
-$action-menu-item-hover-border-color: var(--nui-color-primary-tint-65) !default;
+// ===== SUBTITLE =====
+$action-menu-item-subtitle-font-size: var(--component-font-size-xs) !default;
+$action-menu-item-subtitle-color: var(--nui-text-secondary) !default;
+
+// ===== SEPARATOR =====
+$action-menu-separator-color: var(--nui-border-primary) !default;
+$action-menu-separator-padding: var(--spacing-xs) 0 !default;
+$action-menu-separator-font-size: var(--component-font-size-2xs) !default;
+$action-menu-separator-font-weight: 600 !default;
+$action-menu-separator-label-color: var(--nui-text-tertiary) !default;
+
