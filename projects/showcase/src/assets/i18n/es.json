@@ -124,20 +124,20 @@
       "icons": {
         "title": "Con Iconos",
         "description": "Agrega iconos a los botones al inicio o al final. Los botones con solo un icono se renderizan como botones circulares de icono.",
-        "note": "Posición del icono: 'start' muestra el icono antes del texto, 'end' lo muestra después. Los botones de solo icono requieren el atributo aria-label para accesibilidad.",
+        "note": "Posición del icono: <code>'start'</code> muestra el icono antes del texto, <code>'end'</code> lo muestra después. Los botones de solo icono requieren el atributo <code>aria-label</code> para accesibilidad.",
         "codeTitle": "Botones con Iconos"
       },
       "loading": {
         "title": "Estado de Carga",
         "description": "Muestra un spinner de carga en tres posiciones: inicio, final o centro (que reemplaza el contenido).",
-        "note": "Posiciones de carga: 'start' muestra el spinner antes del texto, 'end' lo muestra después, 'center' reemplaza completamente el contenido con un spinner centrado.",
+        "note": "Posiciones de carga: <code>'start'</code> muestra el spinner antes del texto, <code>'end'</code> lo muestra después, <code>'center'</code> reemplaza completamente el contenido con un spinner centrado.",
         "htmlTitle": "Plantilla (HTML)",
         "tsTitle": "Lógica del Componente (TypeScript)"
       },
       "width": {
         "title": "Ancho",
         "description": "Controla el ancho del botón: auto (predeterminado), full (100%) o fit (ajustado al contenido).",
-        "note": "Opciones de ancho: 'auto' se adapta al contenido con padding estándar, 'full' se estira al 100% del contenedor, 'fit' usa el espacio mínimo necesario.",
+        "note": "Opciones de ancho: <code>'auto'</code> se adapta al contenido con padding estándar, <code>'full'</code> se estira al 100% del contenedor, <code>'fit'</code> usa el espacio mínimo necesario.",
         "codeTitle": "Opciones de Ancho"
       },
       "disabled": {

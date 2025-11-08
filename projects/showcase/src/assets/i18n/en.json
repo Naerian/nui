@@ -124,20 +124,20 @@
       "icons": {
         "title": "With Icons",
         "description": "Add icons to buttons at the start or end position. Buttons with only an icon are rendered as circular icon buttons.",
-        "note": "Icon position: 'start' displays the icon before text, 'end' displays it after. Icon-only buttons require the aria-label attribute for accessibility.",
+        "note": "Icon position: <code>'start'</code> displays the icon before text, <code>'end'</code> displays it after. Icon-only buttons require the <code>aria-label</code> attribute for accessibility.",
         "codeTitle": "Buttons with Icons"
       },
       "loading": {
         "title": "Loading State",
         "description": "Display a loading spinner in three positions: start, end, or center (which replaces the content).",
-        "note": "Loading positions: 'start' shows spinner before text, 'end' shows it after, 'center' replaces content entirely with centered spinner.",
+        "note": "Loading positions: <code>'start'</code> shows spinner before text, <code>'end'</code> shows it after, <code>'center'</code> replaces content entirely with centered spinner.",
         "htmlTitle": "Template (HTML)",
         "tsTitle": "Component Logic (TypeScript)"
       },
       "width": {
         "title": "Width",
         "description": "Control button width: auto (default), full (100%), or fit (fit-content).",
-        "note": "Width options: 'auto' adapts to content with standard padding, 'full' stretches to 100% of container, 'fit' uses minimum space needed.",
+        "note": "Width options: <code>'auto'</code> adapts to content with standard padding, <code>'full'</code> stretches to 100% of container, <code>'fit'</code> uses minimum space needed.",
         "codeTitle": "Button Width Options"
       },
       "disabled": {
