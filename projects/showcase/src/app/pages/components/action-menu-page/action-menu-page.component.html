@@ -287,4 +287,71 @@
 
     <app-code-block [examples]="colorExamples"></app-code-block>
   </section>
+
+  <!-- 11. Con Template Personalizado -->
+  <section class="section">
+    <h2>{{ "components.actionMenu.template.title" | translate }}</h2>
+    <p class="section-description">
+      {{ "components.actionMenu.template.description" | translate }}
+    </p>
+
+    <div class="section-note info">
+      <i class="ri-information-line"></i>
+      <p
+        [innerHTML]="'components.actionMenu.template.note' | translate"
+      ></p>
+    </div>
+
+    <div class="example-preview">
+      <nui-action-menu
+      type="static"
+        icon="ri-user-line" 
+        label="Mi Cuenta"
+        variant="solid"
+        color="primary"
+        [items]="menuWithBadges"
+        (onItemAction)="handleAction($event)">
+        
+        <!-- Header con información del usuario (nueva sintaxis sin ng-template) -->
+        <div menu-header class="menu-user-header">
+          <div class="user-avatar">
+            <i class="ri-user-fill"></i>
+          </div>
+          <div class="user-info">
+            <span class="user-name">John Doe</span>
+            <span class="user-email">john&#64;example.com</span>
+          </div>
+        </div>
+        
+        <!-- Template personalizado para cada item -->
+        <ng-template #item let-item>
+          <div class="menu-item-custom">
+            <div class="menu-item-main">
+              <i [class]="item.icon"></i>
+              <div class="menu-item-text">
+                <span class="menu-item-label">{{ item.label }}</span>
+                @if (item.subtitle) {
+                  <span class="menu-item-subtitle">{{ item.subtitle }}</span>
+                }
+              </div>
+            </div>
+            @if (item.badge) {
+              <span class="menu-item-badge">{{ item.badge }}</span>
+            }
+            @if (item.shortcut) {
+              <span class="menu-item-shortcut">{{ item.shortcut }}</span>
+            }
+          </div>
+        </ng-template>
+        
+        <!-- Footer con acción de logout (nueva sintaxis sin ng-template) -->
+        <button menu-footer class="menu-footer-logout">
+          <i class="ri-logout-box-line"></i>
+          <span>Cerrar Sesión</span>
+        </button>
+      </nui-action-menu>
+    </div>
+
+    <app-code-block [examples]="templateExamples"></app-code-block>
+  </section>
 </div>

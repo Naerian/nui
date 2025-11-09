@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { ActionMenuComponent, ActionMenuItem } from 'nui';
+import { 
+  ActionMenuComponent, 
+  ActionMenuItem, 
+  MenuHeaderDirective, 
+  MenuFooterDirective 
+} from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 
 interface CodeExample {
@@ -13,7 +18,14 @@ interface CodeExample {
 @Component({
   selector: 'app-action-menu-page',
   standalone: true,
-  imports: [CommonModule, TranslateModule, ActionMenuComponent, CodeBlockComponent],
+  imports: [
+    CommonModule, 
+    TranslateModule, 
+    ActionMenuComponent, 
+    MenuHeaderDirective, 
+    MenuFooterDirective, 
+    CodeBlockComponent
+  ],
   templateUrl: './action-menu-page.component.html',
   styleUrls: ['./action-menu-page.component.scss'],
 })
@@ -271,6 +283,159 @@ menuItems: ActionMenuItem[] = [
     },
   ];
 
+  // 11. Con Template Personalizado
+  templateExamples: CodeExample[] = [
+    {
+      title: 'components.actionMenu.template.htmlTitle',
+      code: `<!-- Nueva sintaxis: sin ng-template para header y footer -->
+<nui-action-menu 
+  icon="ri-user-line" 
+  label="Mi Cuenta"
+  variant="solid"
+  color="primary"
+  [items]="menuWithBadges"
+  (onItemAction)="handleAction($event)">
+  
+  <!-- Header: usa la directiva menu-header directamente -->
+  <div menu-header class="menu-user-header">
+    <div class="user-avatar">
+      <i class="ri-user-fill"></i>
+    </div>
+    <div class="user-info">
+      <span class="user-name">John Doe</span>
+      <span class="user-email">john@example.com</span>
+    </div>
+  </div>
+  
+  <!-- Items: template personalizado con let-item -->
+  <ng-template #item let-item>
+    <div class="menu-item-custom">
+      <div class="menu-item-main">
+        <i [class]="item.icon"></i>
+        <div class="menu-item-text">
+          <span class="menu-item-label">{{ item.label }}</span>
+          @if (item.subtitle) {
+            <span class="menu-item-subtitle">{{ item.subtitle }}</span>
+          }
+        </div>
+      </div>
+      @if (item.badge) {
+        <span class="menu-item-badge">{{ item.badge }}</span>
+      }
+      @if (item.shortcut) {
+        <span class="menu-item-shortcut">{{ item.shortcut }}</span>
+      }
+    </div>
+  </ng-template>
+  
+  <!-- Footer: usa la directiva menu-footer directamente -->
+  <button menu-footer class="menu-footer-logout">
+    <i class="ri-logout-box-line"></i>
+    <span>Cerrar Sesión</span>
+  </button>
+</nui-action-menu>`,
+      language: 'html',
+    },
+    {
+      title: 'components.actionMenu.template.tsTitle',
+      code: `menuWithBadges: ActionMenuItem[] = [
+  { 
+    label: 'Mensajes', 
+    subtitle: 'Nuevos mensajes recibidos',
+    icon: 'ri-message-line', 
+    action: 'messages',
+    badge: '3'
+  },
+  { 
+    label: 'Tareas', 
+    subtitle: 'Tareas pendientes',
+    icon: 'ri-task-line', 
+    action: 'tasks',
+    badge: '7'
+  },
+  { separator: true },
+  { 
+    label: 'Configuración', 
+    icon: 'ri-settings-line', 
+    action: 'settings',
+    shortcut: '⌘+S'
+  }
+];`,
+      language: 'typescript',
+    },
+    {
+      title: 'components.actionMenu.template.cssTitle',
+      code: `.menu-user-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+
+  .user-avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    i {
+      font-size: 1.5rem;
+      color: white;
+    }
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    
+    .user-name {
+      font-weight: 600;
+      font-size: 0.9375rem;
+    }
+    
+    .user-email {
+      font-size: 0.8125rem;
+      opacity: 0.7;
+    }
+  }
+}
+
+.menu-item-custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.75rem;
+  
+  .menu-item-badge {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+  }
+}
+
+.menu-footer-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  color: #dc2626;
+  font-weight: 500;
+  
+  &:hover {
+    background-color: rgba(239, 68, 68, 0.08);
+  }
+}`,
+      language: 'scss',
+    },
+  ];
+
   // Datos para ejemplos interactivos
   basicMenuItems: ActionMenuItem[] = [
     { label: 'Edit', icon: 'ri-edit-line', action: 'edit' },
@@ -362,6 +527,30 @@ menuItems: ActionMenuItem[] = [
     { label: 'Warning', icon: 'ri-error-warning-line', action: 'warning' },
     { separator: true },
     { label: 'Delete', icon: 'ri-close-circle-line', action: 'delete' },
+  ];
+
+  menuWithBadges: ActionMenuItem[] = [
+    { 
+      label: 'Mensajes', 
+      subtitle: 'Nuevos mensajes recibidos',
+      icon: 'ri-message-line', 
+      action: 'messages',
+      badge: '3'
+    },
+    { 
+      label: 'Tareas', 
+      subtitle: 'Tareas pendientes',
+      icon: 'ri-task-line', 
+      action: 'tasks',
+      badge: '7'
+    },
+    { separator: true },
+    { 
+      label: 'Configuración', 
+      icon: 'ri-settings-line', 
+      action: 'settings',
+      shortcut: '⌘+S'
+    }
   ];
 
   handleAction(item: ActionMenuItem) {

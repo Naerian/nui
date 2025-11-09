@@ -37,6 +37,16 @@
     role="menu"
     [attr.aria-orientation]="'vertical'"
   >
+    <!-- Header: Proyecta contenido con directivas menu-header/nuiMenuHeader O templates #start -->
+    @if (startTemplate) {
+      <div class="nui-action-menu__start">
+        <ng-container *ngTemplateOutlet="startTemplate"></ng-container>
+      </div>
+    }
+    <div class="nui-action-menu__start nui-action-menu__start--projected">
+      <ng-content select="[menu-header], [nuiMenuHeader]"></ng-content>
+    </div>
+
     @for (item of mergedItems; track item.id) {
       <!-- Separador -->
       @if (item.separator) {
@@ -54,6 +64,7 @@
         <button
           class="nui-action-menu__item nui-action-menu__item--action"
           [class.nui-action-menu__item--selected]="item.selected"
+          [class.nui-action-menu__item--custom-template]="itemTemplate"
           cdkMenuItem
           [disabled]="item.disabled"
           (cdkMenuItemTriggered)="onItemClick(item)"
@@ -62,31 +73,37 @@
           role="menuitem"
           type="button"
         >
-          <div
-            class="nui-action-menu__item__container"
-            [class.nui-action-menu__item__container--icon]="item.icon"
-          >
-            @if (item.icon) {
-              <i [class]="item.icon" class="nui-action-menu__item__icon"></i>
+          @if (itemTemplate) {
+            <!-- Custom template provided by user -->
+            <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
+          } @else {
+            <!-- Default rendering -->
+            <div
+              class="nui-action-menu__item__container"
+              [class.nui-action-menu__item__container--icon]="item.icon"
+            >
+              @if (item.icon) {
+                <i [class]="item.icon" class="nui-action-menu__item__icon"></i>
+              }
+              @if (item.templateRef && !item.label) {
+                <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
+              } @else {
+                <div class="nui-action-menu__item__text">
+                  <span class="nui-action-menu__item__label">{{ item.label }}</span>
+                  @if (item.subtitle) {
+                    <span class="nui-action-menu__item__subtitle">{{ item.subtitle }}</span>
+                  }
+                </div>
+              }
+            </div>
+            @if (item.shortcut) {
+              <span class="nui-action-menu__item__shortcut">{{
+                item.shortcut
+              }}</span>
             }
-            @if (item.templateRef && !item.label) {
-              <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
-            } @else {
-              <div class="nui-action-menu__item__text">
-                <span class="nui-action-menu__item__label">{{ item.label }}</span>
-                @if (item.subtitle) {
-                  <span class="nui-action-menu__item__subtitle">{{ item.subtitle }}</span>
-                }
-              </div>
+            @if (item.selected) {
+              <i class="ri-check-line nui-action-menu__item__check"></i>
             }
-          </div>
-          @if (item.shortcut) {
-            <span class="nui-action-menu__item__shortcut">{{
-              item.shortcut
-            }}</span>
-          }
-          @if (item.selected) {
-            <i class="ri-check-line nui-action-menu__item__check"></i>
           }
         </button>
       }
@@ -94,6 +111,7 @@
       @if (item.children && !item.separator) {
         <button
           class="nui-action-menu__item nui-action-menu__item--submenu"
+          [class.nui-action-menu__item--custom-template]="itemTemplate"
           [cdkMenuTriggerFor]="subMenuTemplate"
           [cdkMenuTriggerData]="{ item: item }"
           cdkMenuItem
@@ -104,30 +122,46 @@
           role="menuitem"
           type="button"
         >
-          <div
-            class="nui-action-menu__item__container"
-            [class.nui-action-menu__item__container--icon]="item.icon"
-          >
-            @if (item.icon) {
-              <i [class]="item.icon" class="nui-action-menu__item__icon"></i>
-            }
-            @if (item.templateRef && !item.label) {
-              <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
-            } @else {
-              <div class="nui-action-menu__item__text">
-                <span class="nui-action-menu__item__label">{{ item.label }}</span>
-                @if (item.subtitle) {
-                  <span class="nui-action-menu__item__subtitle">{{ item.subtitle }}</span>
-                }
-              </div>
-            }
-          </div>
+          @if (itemTemplate) {
+            <!-- Custom template provided by user -->
+            <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
+          } @else {
+            <!-- Default rendering -->
+            <div
+              class="nui-action-menu__item__container"
+              [class.nui-action-menu__item__container--icon]="item.icon"
+            >
+              @if (item.icon) {
+                <i [class]="item.icon" class="nui-action-menu__item__icon"></i>
+              }
+              @if (item.templateRef && !item.label) {
+                <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
+              } @else {
+                <div class="nui-action-menu__item__text">
+                  <span class="nui-action-menu__item__label">{{ item.label }}</span>
+                  @if (item.subtitle) {
+                    <span class="nui-action-menu__item__subtitle">{{ item.subtitle }}</span>
+                  }
+                </div>
+              }
+            </div>
+          }
           <span class="nui-action-menu__item__arrow">
             <i [class]="iconSubmenu"></i>
           </span>
         </button>
       }
     }
+
+    <!-- Footer: Proyecta contenido con directivas menu-footer/nuiMenuFooter O templates #end -->
+    @if (endTemplate) {
+      <div class="nui-action-menu__end">
+        <ng-container *ngTemplateOutlet="endTemplate"></ng-container>
+      </div>
+    }
+    <div class="nui-action-menu__end nui-action-menu__end--projected">
+      <ng-content select="[menu-footer], [nuiMenuFooter]"></ng-content>
+    </div>
   </div>
 </ng-template>
 

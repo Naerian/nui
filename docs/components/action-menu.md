@@ -32,6 +32,21 @@ import { ActionMenuModule } from '@shared/components/action-menu';
 | `iconSubmenu` | `string` | `'ri-arrow-right-s-line'` | Icono para indicar submenús |
 | `label` | `string` | - | Texto del botón |
 
+### Templates
+
+| Nombre | Contexto | Descripción |
+|--------|----------|-------------|
+| `#item` | `{ $implicit: ActionMenuItem }` | Template personalizado para renderizar cada item del menú. Permite personalizar completamente el contenido de cada item |
+
+### Directivas
+
+| Directiva | Descripción |
+|-----------|-------------|
+| `menu-header` o `nuiMenuHeader` | Marca contenido que debe aparecer en el header del menú. Más simple que usar `ng-template`, permite agregar componentes directamente |
+| `menu-footer` o `nuiMenuFooter` | Marca contenido que debe aparecer en el footer del menú. Más simple que usar `ng-template`, permite agregar componentes directamente |
+
+**Nota:** Las directivas `menu-header` y `menu-footer` son la forma recomendada de agregar contenido al inicio y final del menú. Los templates `#start` y `#end` están deprecados pero se mantienen por compatibilidad.
+
 ### Outputs
 
 | Evento | Tipo | Descripción |
@@ -44,12 +59,18 @@ import { ActionMenuModule } from '@shared/components/action-menu';
 ```typescript
 interface ActionMenuItem {
   label?: string;
+  subtitle?: string;
   icon?: string;
-  action?: string | ((item: ActionMenuItem) => void);
-  variant?: NUIColor;
+  action?: string;
   disabled?: boolean;
-  type?: 'item' | 'separator';
-  submenu?: ActionMenuItem[];
+  selected?: boolean;
+  separator?: boolean;
+  children?: ActionMenuItem[];
+  shortcut?: string;
+  templateRef?: TemplateRef<any>;
+  badge?: string;
+  data?: any;
+  onAction?: () => void;
 }
 
 type ActionMenuType = 'static' | 'dynamic';
@@ -301,6 +322,89 @@ handleUserAction(item: ActionMenuItem, user: User) {
 <nui-action-menu size="lg" [items]="menu">Large</nui-action-menu>
 <nui-action-menu size="xl" [items]="menu">Extra Large</nui-action-menu>
 ```
+
+### Template Personalizado
+
+Puedes personalizar completamente cómo se renderiza el menú usando templates y directivas. A diferencia de PrimeNG, nuestra API usa directivas simples para header y footer, evitando `ng-template` innecesarios:
+
+```html
+<nui-action-menu 
+  icon="ri-user-line" 
+  label="Mi Cuenta"
+  [items]="menuItems"
+  (onItemAction)="handleAction($event)">
+  
+  <!-- Header con directiva (sin ng-template) -->
+  <div menu-header class="user-header">
+    <img src="avatar.jpg" class="avatar" />
+    <div>
+      <span class="name">John Doe</span>
+      <span class="email">john@example.com</span>
+    </div>
+  </div>
+  
+  <!-- Template personalizado para cada item -->
+  <ng-template #item let-item>
+    <div class="custom-item">
+      <i [class]="item.icon"></i>
+      <div class="item-content">
+        <span class="label">{{ item.label }}</span>
+        @if (item.subtitle) {
+          <span class="subtitle">{{ item.subtitle }}</span>
+        }
+      </div>
+      @if (item.badge) {
+        <span class="badge">{{ item.badge }}</span>
+      }
+    </div>
+  </ng-template>
+  
+  <!-- Footer con directiva (sin ng-template) -->
+  <button menu-footer class="logout-button" (click)="logout()">
+    <i class="ri-logout-box-line"></i>
+    <span>Cerrar Sesión</span>
+  </button>
+</nui-action-menu>
+```
+
+```typescript
+menuItems: ActionMenuItem[] = [
+  { 
+    label: 'Messages', 
+    subtitle: 'New messages received',
+    icon: 'ri-message-line', 
+    action: 'messages',
+    badge: '3'
+  },
+  { 
+    label: 'Tasks', 
+    subtitle: 'Pending tasks',
+    icon: 'ri-task-line', 
+    action: 'tasks',
+    badge: '7'
+  },
+  { separator: true },
+  { 
+    label: 'Settings', 
+    icon: 'ri-settings-line', 
+    action: 'settings',
+    shortcut: '⌘+S'
+  }
+];
+```
+
+**Ventajas sobre PrimeNG:**
+- **Más simple:** Usa `menu-header` y `menu-footer` directamente en el HTML, sin necesidad de envolver en `ng-template`
+- **Más claro:** Los nombres `menu-header` y `menu-footer` son más descriptivos que `#start` y `#end`
+- **Más flexible:** Puedes usar componentes Angular directamente sin wrappers adicionales
+- **Type-safe:** TypeScript completo en toda la API
+
+**Características:**
+- El template `#item` recibe el item completo como contexto a través de `let-item`
+- Las directivas `menu-header` y `menu-footer` se renderizan antes y después de los items
+- Puedes acceder a todas las propiedades del item incluyendo `badge`, `data`, y cualquier propiedad personalizada
+- Todos los templates son completamente opcionales - si no se proporcionan, se usa el renderizado por defecto
+- Compatibilidad con `#start` y `#end` mantenida (deprecados)
 
 ## ♿ Accesibilidad
 

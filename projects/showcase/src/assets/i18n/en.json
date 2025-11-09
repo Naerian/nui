@@ -215,6 +215,14 @@
         "title": "Descriptive Icons",
         "description": "Use meaningful icons and labels to communicate the purpose of each action. Icons help users quickly identify actions.",
         "codeTitle": "Icon Usage"
+      },
+      "template": {
+        "title": "Custom Template",
+        "description": "Fully customize menu rendering using templates and directives. Use <code>menu-header</code> and <code>menu-footer</code> to add content at the start and end without needing ng-template.",
+        "note": "The <code>#item</code> template receives the full item as context (<code>let-item</code>). The <code>menu-header</code> and <code>menu-footer</code> directives provide a simpler and clearer syntax than PrimeNG, avoiding unnecessary ng-templates.",
+        "htmlTitle": "HTML Template",
+        "tsTitle": "Component Data",
+        "cssTitle": "CSS Styles"
       }
     }
   }

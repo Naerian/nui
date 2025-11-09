@@ -1,6 +1,7 @@
 import {
   Component,
   ContentChildren,
+  ContentChild,
   QueryList,
   Input,
   Output,
@@ -9,6 +10,7 @@ import {
   ViewChild,
   HostListener,
   inject,
+  TemplateRef,
 } from '@angular/core';
 import { ActionMenuType, ActionMenuItem } from './models/action-menu.model';
 import { ActionMenuItemComponent } from './action-menu-item/action-menu-item.component';
@@ -27,6 +29,7 @@ import {
 import { ActionMenuSubmenuComponent } from './action-menu-submenu/action-menu-submenu.component';
 import { CommonModule } from '@angular/common';
 import { ButtonDirective } from '../button';
+import { MenuHeaderDirective, MenuFooterDirective } from './directives';
 
 @Component({
   selector: 'nui-action-menu',
@@ -45,6 +48,8 @@ import { ButtonDirective } from '../button';
     ActionMenuItemComponent,
     ActionMenuSubmenuComponent,
     ButtonDirective,
+    MenuHeaderDirective,
+    MenuFooterDirective,
   ],
   animations: [FADE_IN_OUT_SCALE],
   encapsulation: ViewEncapsulation.None,
@@ -153,6 +158,66 @@ export class ActionMenuComponent {
    * Atributo aria-label para el botón del menú (opcional)
    */
   @Input() ariaLabel?: string;
+
+  /**
+   * Template personalizado para renderizar cada item del menú.
+   * Similar a PrimeNG, permite personalizar completamente el contenido de cada item.
+   * Recibe el item como contexto ($implicit).
+   * 
+   * @example
+   * ```html
+   * <nui-action-menu [items]="menuItems">
+   *   <ng-template #item let-item>
+   *     <div class="custom-item">
+   *       <i [class]="item.icon"></i>
+   *       <span>{{ item.label }}</span>
+   *       <span class="badge">{{ item.badge }}</span>
+   *     </div>
+   *   </ng-template>
+   * </nui-action-menu>
+   * ```
+   */
+  @ContentChild('item') itemTemplate?: TemplateRef<any>;
+
+  /**
+   * Template para renderizar contenido al inicio del menú (header).
+   * Útil para mostrar información de usuario, título, etc.
+   * Similar al template "start" de PrimeNG.
+   * 
+   * @deprecated Use la directiva menu-header en su lugar para una sintaxis más clara
+   * @example
+   * ```html
+   * <nui-action-menu [items]="menuItems">
+   *   <ng-template #start>
+   *     <div class="user-header">
+   *       <img src="avatar.jpg" />
+   *       <span>John Doe</span>
+   *     </div>
+   *   </ng-template>
+   * </nui-action-menu>
+   * ```
+   */
+  @ContentChild('start') startTemplate?: TemplateRef<any>;
+
+  /**
+   * Template para renderizar contenido al final del menú (footer).
+   * Útil para mostrar acciones extras como logout, configuración, etc.
+   * Similar al template "end" de PrimeNG.
+   * 
+   * @deprecated Use la directiva menu-footer en su lugar para una sintaxis más clara
+   * @example
+   * ```html
+   * <nui-action-menu [items]="menuItems">
+   *   <ng-template #end>
+   *     <button class="logout-btn">
+   *       <i class="ri-logout-box-line"></i>
+   *       Cerrar Sesión
+   *     </button>
+   *   </ng-template>
+   * </nui-action-menu>
+   * ```
+   */
+  @ContentChild('end') endTemplate?: TemplateRef<any>;
 
   /**
    * Evento que se emite cuando se hace clic en un item del menú.

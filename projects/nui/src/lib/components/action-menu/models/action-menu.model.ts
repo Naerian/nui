@@ -42,6 +42,10 @@ export type ActionMenuType = 'static' | 'dynamic';
  * @property {boolean} [selected] - Si está seleccionado (para uso como selector).
  * @property {boolean} [separator] - Si es un separador visual. Si tiene label, se muestra como separador con texto.
  * @property {Function} [onAction] - Callback ejecutado al hacer clic en el item.
+ * @property {any} [data] - Datos adicionales personalizados para pasar al template o usar en callbacks.
+ *                          Útil cuando se usa un template personalizado que necesita datos extra.
+ * @property {string} [badge] - Badge o contador para mostrar en el item (ej: "2", "New").
+ *                              Útil para mostrar notificaciones o estados.
  * 
  * @example
  * ```typescript
@@ -115,6 +119,25 @@ export type ActionMenuType = 'static' | 'dynamic';
  *   action: 'custom',
  *   templateRef: myCustomTemplate
  * };
+ * 
+ * // Item con badge
+ * const messageItem: ActionMenuItem = {
+ *   action: 'messages',
+ *   label: 'Mensajes',
+ *   icon: 'ri-message-line',
+ *   badge: '3'
+ * };
+ * 
+ * // Item con datos personalizados para template
+ * const customDataItem: ActionMenuItem = {
+ *   action: 'custom',
+ *   label: 'Item Personalizado',
+ *   data: {
+ *     color: 'red',
+ *     priority: 'high',
+ *     metadata: { ... }
+ *   }
+ * };
  * ```
  * 
  * @see {@link ActionMenuType} para tipos de renderizado del menú
@@ -133,4 +156,6 @@ export interface ActionMenuItem {
   selected?: boolean;
   separator?: boolean;
   onAction?: () => void;
+  data?: any;
+  badge?: string;
 }

@@ -24,6 +24,37 @@
     box-shadow: var(--nui-action-menu-static-shadow);
   }
 
+  // Templates start y end (header y footer)
+  &__start,
+  &__end {
+    width: 100%;
+    padding: var(--nui-action-menu-padding);
+  }
+
+  &__start {
+    margin-bottom: var(--nui-action-menu-padding);
+    border-bottom: 1px solid var(--nui-action-menu-separator-color);
+
+    // Ocultar si está vacío (solo para contenido proyectado con ng-content)
+    &--projected:empty {
+      display: none;
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+  }
+
+  &__end {
+    margin-top: var(--nui-action-menu-padding);
+    border-top: 1px solid var(--nui-action-menu-separator-color);
+
+    // Ocultar si está vacío (solo para contenido proyectado con ng-content)
+    &--projected:empty {
+      display: none;
+      margin-top: 0;
+      border-top: none;
+    }
+  }
+
   // Separador
   &__separator {
     width: 100%;
@@ -149,26 +180,34 @@
       outline: none;
     }
 
-    // Nota: Los estilos de hover y selected se definen en styles/components/_action-menu.scss
-    // según el color del componente (--primary, --secondary, etc.)
-
     &[disabled],
     &:disabled,
     &--disabled {
       @include mixins.disabled;
+    }
+
+    // Cuando se usa template personalizado, asegurar padding y estructura
+    &--custom-template {
+      padding: var(--nui-action-menu-item-padding-y)
+        var(--nui-action-menu-item-padding-x);
+
+      // El contenido del template debe tener display flex para facilitar layouts
+      > * {
+        width: 100%;
+      }
     }
   }
 
   .nui-action-menu__item,
   .nui-action-menu-submenu__item {
     @include mixins.component-size(md);
+    padding: var(--nui-action-menu-item-padding-y)
+      var(--nui-action-menu-item-padding-x);
   }
   .nui-action-menu__item__shortcut {
     font-size: var(--nui-action-menu-shortcut-font-size);
     line-height: var(--nui-action-menu-shortcut-font-size);
   }
-
-  // Nota: Los estilos de color por tema se generan en styles/components/_action-menu.scss
 }
 
 // ====================
