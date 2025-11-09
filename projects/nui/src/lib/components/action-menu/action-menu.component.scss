@@ -8,7 +8,8 @@
   align-items: flex-start;
   min-width: var(--nui-action-menu-min-width);
   max-width: var(--nui-action-menu-max-width);
-  border: var(--nui-action-menu-border-width) solid var(--nui-action-menu-border-color);
+  border: var(--nui-action-menu-border-width) solid
+    var(--nui-action-menu-border-color);
   background-color: var(--nui-action-menu-bg);
   border-radius: var(--nui-action-menu-border-radius);
   padding: var(--nui-action-menu-padding);
@@ -28,7 +29,7 @@
     width: 100%;
     height: 1px;
     background-color: var(--nui-action-menu-separator-color);
-    margin: 8px 0; // Más aire arriba y abajo
+    margin: var(--nui-action-menu-padding) 0;
 
     &--labeled {
       height: auto;
@@ -36,11 +37,11 @@
       display: flex;
       align-items: center;
       padding: 0;
-      gap: 12px; // Espacio entre línea y texto
+      gap: var(--nui-action-menu-separator-label-spacing);
 
       &::before,
       &::after {
-        content: '';
+        content: "";
         flex: 1;
         height: 1px;
         background-color: var(--nui-action-menu-separator-color);
@@ -48,7 +49,7 @@
     }
 
     &__label {
-      font-size: 0.75rem; // Texto más pequeño (12px)
+      font-size: 0.75rem;
       font-weight: var(--nui-action-menu-separator-font-weight);
       color: var(--nui-action-menu-separator-label-color);
       text-transform: uppercase;
@@ -97,6 +98,7 @@
       text-overflow: ellipsis;
       display: block;
       margin-right: var(--nui-action-menu-item-label-margin-right);
+      line-height: 1;
     }
 
     &__subtitle {
@@ -128,7 +130,8 @@
       color: var(--nui-action-menu-shortcut-color);
       padding: var(--nui-action-menu-shortcut-padding);
       border-radius: var(--nui-action-menu-shortcut-border-radius);
-      border: var(--nui-action-menu-shortcut-border-width) solid var(--nui-action-menu-shortcut-border-color);
+      border: var(--nui-action-menu-shortcut-border-width) solid
+        var(--nui-action-menu-shortcut-border-color);
     }
 
     &__arrow {
@@ -200,7 +203,8 @@
       color: var(--nui-action-menu-shortcut-color);
       padding: var(--nui-action-menu-shortcut-padding);
       border-radius: var(--nui-action-menu-shortcut-border-radius);
-      border: var(--nui-action-menu-shortcut-border-width) solid var(--nui-action-menu-shortcut-border-color);
+      border: var(--nui-action-menu-shortcut-border-width) solid
+        var(--nui-action-menu-shortcut-border-color);
       margin-left: auto;
     }
 

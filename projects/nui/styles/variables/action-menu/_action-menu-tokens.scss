@@ -61,7 +61,7 @@ $action-menu-shadow: var(--nui-shadow-elevated) !default;
 $action-menu-static-shadow: var(--nui-shadow-container) !default;
 
 // ===== SUBTITLE =====
-$action-menu-item-subtitle-font-size: var(--component-font-size-xs) !default;
+$action-menu-item-subtitle-font-size: 0.688rem !default;
 $action-menu-item-subtitle-color: var(--nui-text-secondary) !default;
 
 // ===== SEPARATOR =====
@@ -70,4 +70,5 @@ $action-menu-separator-padding: var(--spacing-xs) 0 !default;
 $action-menu-separator-font-size: var(--component-font-size-2xs) !default;
 $action-menu-separator-font-weight: 600 !default;
 $action-menu-separator-label-color: var(--nui-text-tertiary) !default;
+$action-menu-separator-label-spacing: var(--spacing-xs) !default;
 
