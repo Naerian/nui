@@ -180,46 +180,6 @@ export class ActionMenuComponent {
   @ContentChild('item') itemTemplate?: TemplateRef<any>;
 
   /**
-   * Template para renderizar contenido al inicio del menú (header).
-   * Útil para mostrar información de usuario, título, etc.
-   * Similar al template "start" de PrimeNG.
-   * 
-   * @deprecated Use la directiva menu-header en su lugar para una sintaxis más clara
-   * @example
-   * ```html
-   * <nui-action-menu [items]="menuItems">
-   *   <ng-template #start>
-   *     <div class="user-header">
-   *       <img src="avatar.jpg" />
-   *       <span>John Doe</span>
-   *     </div>
-   *   </ng-template>
-   * </nui-action-menu>
-   * ```
-   */
-  @ContentChild('start') startTemplate?: TemplateRef<any>;
-
-  /**
-   * Template para renderizar contenido al final del menú (footer).
-   * Útil para mostrar acciones extras como logout, configuración, etc.
-   * Similar al template "end" de PrimeNG.
-   * 
-   * @deprecated Use la directiva menu-footer en su lugar para una sintaxis más clara
-   * @example
-   * ```html
-   * <nui-action-menu [items]="menuItems">
-   *   <ng-template #end>
-   *     <button class="logout-btn">
-   *       <i class="ri-logout-box-line"></i>
-   *       Cerrar Sesión
-   *     </button>
-   *   </ng-template>
-   * </nui-action-menu>
-   * ```
-   */
-  @ContentChild('end') endTemplate?: TemplateRef<any>;
-
-  /**
    * Evento que se emite cuando se hace clic en un item del menú.
    * El item clicado se pasa como parámetro.
    */

@@ -293,8 +293,7 @@ menuItems: ActionMenuItem[] = [
   label="Mi Cuenta"
   variant="solid"
   color="primary"
-  [items]="menuWithBadges"
-  (onItemAction)="handleAction($event)">
+  [items]="menuWithBadges">
   
   <!-- Header: usa la directiva menu-header directamente -->
   <div menu-header class="menu-user-header">
@@ -308,8 +307,9 @@ menuItems: ActionMenuItem[] = [
   </div>
   
   <!-- Items: template personalizado con let-item -->
+  <!-- IMPORTANTE: debes manejar el click manualmente -->
   <ng-template #item let-item>
-    <div class="menu-item-custom">
+    <div class="menu-item-custom" (click)="handleAction(item)">
       <div class="menu-item-main">
         <i [class]="item.icon"></i>
         <div class="menu-item-text">
@@ -554,6 +554,8 @@ menuItems: ActionMenuItem[] = [
   ];
 
   handleAction(item: ActionMenuItem) {
-    console.log('Action:', item.action);
+    console.log('🎯 Item seleccionado:', item.label);
+    console.log('📋 Action:', item.action);
+    console.log('📦 Item completo:', item);
   }
 }

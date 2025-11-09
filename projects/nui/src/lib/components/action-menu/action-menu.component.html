@@ -37,13 +37,8 @@
     role="menu"
     [attr.aria-orientation]="'vertical'"
   >
-    <!-- Header: Proyecta contenido con directivas menu-header/nuiMenuHeader O templates #start -->
-    @if (startTemplate) {
-      <div class="nui-action-menu__start">
-        <ng-container *ngTemplateOutlet="startTemplate"></ng-container>
-      </div>
-    }
-    <div class="nui-action-menu__start nui-action-menu__start--projected">
+    <!-- Header: Proyecta contenido con directivas menu-header/nuiMenuHeader -->
+    <div class="nui-action-menu__start">
       <ng-content select="[menu-header], [nuiMenuHeader]"></ng-content>
     </div>
 
@@ -153,13 +148,8 @@
       }
     }
 
-    <!-- Footer: Proyecta contenido con directivas menu-footer/nuiMenuFooter O templates #end -->
-    @if (endTemplate) {
-      <div class="nui-action-menu__end">
-        <ng-container *ngTemplateOutlet="endTemplate"></ng-container>
-      </div>
-    }
-    <div class="nui-action-menu__end nui-action-menu__end--projected">
+    <!-- Footer: Proyecta contenido con directivas menu-footer/nuiMenuFooter -->
+    <div class="nui-action-menu__end">
       <ng-content select="[menu-footer], [nuiMenuFooter]"></ng-content>
     </div>
   </div>

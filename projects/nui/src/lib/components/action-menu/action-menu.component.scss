@@ -24,35 +24,26 @@
     box-shadow: var(--nui-action-menu-static-shadow);
   }
 
-  // Templates start y end (header y footer)
+  // Header y footer con ng-content
   &__start,
   &__end {
     width: 100%;
     padding: var(--nui-action-menu-padding);
+
+    // Ocultar si está vacío
+    &:empty {
+      display: none;
+    }
   }
 
-  &__start {
+  &__start:not(:empty) {
     margin-bottom: var(--nui-action-menu-padding);
     border-bottom: 1px solid var(--nui-action-menu-separator-color);
-
-    // Ocultar si está vacío (solo para contenido proyectado con ng-content)
-    &--projected:empty {
-      display: none;
-      margin-bottom: 0;
-      border-bottom: none;
-    }
   }
 
-  &__end {
+  &__end:not(:empty) {
     margin-top: var(--nui-action-menu-padding);
     border-top: 1px solid var(--nui-action-menu-separator-color);
-
-    // Ocultar si está vacío (solo para contenido proyectado con ng-content)
-    &--projected:empty {
-      display: none;
-      margin-top: 0;
-      border-top: none;
-    }
   }
 
   // Separador
@@ -129,7 +120,7 @@
       text-overflow: ellipsis;
       display: block;
       margin-right: var(--nui-action-menu-item-label-margin-right);
-      line-height: 1;
+      line-height: 1.2;
     }
 
     &__subtitle {

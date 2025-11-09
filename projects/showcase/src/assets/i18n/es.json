@@ -220,6 +220,7 @@
         "title": "Template Personalizado",
         "description": "Personaliza completamente el renderizado del menú usando templates y directivas. Usa <code>menu-header</code> y <code>menu-footer</code> para agregar contenido al inicio y final sin necesidad de ng-template.",
         "note": "El template <code>#item</code> recibe el item completo como contexto (<code>let-item</code>). Las directivas <code>menu-header</code> y <code>menu-footer</code> permiten una sintaxis más simple y clara que PrimeNG, evitando ng-template innecesarios.",
+        "clickNote": "<strong>Importante:</strong> Al usar templates personalizados, debes manejar el evento click manualmente con <code>(click)=\"handleAction(item)\"</code>. El evento <code>onItemAction</code> solo se emite automáticamente con items por defecto.",
         "htmlTitle": "Template HTML",
         "tsTitle": "Datos del Componente",
         "cssTitle": "Estilos CSS"

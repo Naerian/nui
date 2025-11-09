@@ -297,21 +297,22 @@
 
     <div class="section-note info">
       <i class="ri-information-line"></i>
-      <p
-        [innerHTML]="'components.actionMenu.template.note' | translate"
-      ></p>
+      <p [innerHTML]="'components.actionMenu.template.note' | translate"></p>
+    </div>
+
+    <div class="section-note warning">
+      <i class="ri-error-warning-line"></i>
+      <p [innerHTML]="'components.actionMenu.template.clickNote' | translate"></p>
     </div>
 
     <div class="example-preview">
       <nui-action-menu
-      type="static"
-        icon="ri-user-line" 
+        icon="ri-user-line"
         label="Mi Cuenta"
         variant="solid"
         color="primary"
         [items]="menuWithBadges"
-        (onItemAction)="handleAction($event)">
-        
+      >
         <!-- Header con información del usuario (nueva sintaxis sin ng-template) -->
         <div menu-header class="menu-user-header">
           <div class="user-avatar">
@@ -322,28 +323,27 @@
             <span class="user-email">john&#64;example.com</span>
           </div>
         </div>
-        
+
         <!-- Template personalizado para cada item -->
         <ng-template #item let-item>
-          <div class="menu-item-custom">
+          <div class="menu-item-custom" (click)="handleAction(item)">
             <div class="menu-item-main">
               <i [class]="item.icon"></i>
               <div class="menu-item-text">
                 <span class="menu-item-label">{{ item.label }}</span>
                 @if (item.subtitle) {
-                  <span class="menu-item-subtitle">{{ item.subtitle }}</span>
+                <span class="menu-item-subtitle">{{ item.subtitle }}</span>
                 }
               </div>
             </div>
             @if (item.badge) {
-              <span class="menu-item-badge">{{ item.badge }}</span>
-            }
-            @if (item.shortcut) {
-              <span class="menu-item-shortcut">{{ item.shortcut }}</span>
+            <span class="menu-item-badge">{{ item.badge }}</span>
+            } @if (item.shortcut) {
+            <span class="menu-item-shortcut">{{ item.shortcut }}</span>
             }
           </div>
         </ng-template>
-        
+
         <!-- Footer con acción de logout (nueva sintaxis sin ng-template) -->
         <button menu-footer class="menu-footer-logout">
           <i class="ri-logout-box-line"></i>
