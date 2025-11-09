@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonComponent, ButtonDirective } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
+import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
 
 interface CodeExample {
   title: string;
@@ -13,7 +14,14 @@ interface CodeExample {
 @Component({
   selector: 'app-button-page',
   standalone: true,
-  imports: [CommonModule, TranslateModule, ButtonComponent, ButtonDirective, CodeBlockComponent],
+  imports: [
+    CommonModule, 
+    TranslateModule, 
+    ButtonComponent, 
+    ButtonDirective, 
+    CodeBlockComponent,
+    SectionTitleComponent
+  ],
   templateUrl: './button-page.component.html',
   styleUrls: ['./button-page.component.scss'],
 })

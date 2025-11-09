@@ -8,6 +8,7 @@ import {
   MenuFooterDirective 
 } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
+import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
 
 interface CodeExample {
   title: string;
@@ -24,7 +25,8 @@ interface CodeExample {
     ActionMenuComponent, 
     MenuHeaderDirective, 
     MenuFooterDirective, 
-    CodeBlockComponent
+    CodeBlockComponent,
+    SectionTitleComponent
   ],
   templateUrl: './action-menu-page.component.html',
   styleUrls: ['./action-menu-page.component.scss'],
