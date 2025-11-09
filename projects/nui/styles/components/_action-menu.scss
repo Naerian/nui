@@ -10,6 +10,22 @@
 
 $colors: primary, secondary, success, info, warning, danger, accent;
 
+// Estilos base para el indicador de hijo seleccionado (funciona sin clase de color)
+.nui-action-menu__item--has-selected,
+.nui-action-menu-submenu__item--has-selected {
+  // Agregamos un punto sutil después de la flecha del submenu
+  .nui-action-menu__item__arrow::after {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--nui-color-primary);
+    margin-left: 8px;
+    opacity: 0.8;
+  }
+}
+
 @each $color in $colors {
   .nui-action-menu--#{$color},
   .nui-action-menu-submenu--#{$color} {
@@ -22,8 +38,6 @@ $colors: primary, secondary, success, info, warning, danger, accent;
         color: var(--nui-action-menu-#{$color}-item-check-color);
       }
 
-      &:focus:not(&--disabled),
-      &:active:not(&--disabled),
       &:hover:not(&--disabled) {
         background-color: var(--nui-action-menu-#{$color}-item-hover-bg);
         color: var(--nui-action-menu-#{$color}-item-hover-color);
@@ -37,7 +51,9 @@ $colors: primary, secondary, success, info, warning, danger, accent;
         }
 
         .nui-action-menu__item__shortcut {
-          border-color: var(--nui-action-menu-#{$color}-item-hover-border-color);
+          border-color: var(
+            --nui-action-menu-#{$color}-item-hover-border-color
+          );
         }
 
         .nui-action-menu__item__subtitle {
@@ -45,35 +61,57 @@ $colors: primary, secondary, success, info, warning, danger, accent;
         }
       }
 
-      // Estado seleccionado
-      &--selected {
-        background-color: var(--nui-action-menu-#{$color}-item-selected-bg);
-        color: var(--nui-action-menu-#{$color}-item-selected-color);
+      // Focus visible con teclado
+      &:focus-visible:not(&--disabled) {
+        background-color: var(--nui-action-menu-#{$color}-item-hover-bg);
+        color: var(--nui-action-menu-#{$color}-item-hover-color);
+        outline: none;
 
         .nui-action-menu__item__icon,
+        .nui-action-menu__item__shortcut,
+        .nui-action-menu__item__arrow,
+        .nui-action-menu__item__check {
+          color: var(--nui-action-menu-#{$color}-item-hover-icon-color);
+        }
+
+        .nui-action-menu__item__subtitle {
+          color: var(--nui-action-menu-#{$color}-item-hover-subtitle-color);
+        }
+      }
+
+      &:focus:not(&--disabled) {
+        outline: none;
+      }
+
+      // Estado seleccionado - sin background para evitar confusión con active
+      &--selected {
+        // Solo usamos el check icon como indicador
         .nui-action-menu__item__check {
           color: var(--nui-action-menu-#{$color}-item-selected-icon-color);
         }
 
-        .nui-action-menu__item__subtitle {
-          color: var(--nui-action-menu-#{$color}-item-selected-subtitle-color);
-        }
-
-        &:focus,
-        &:active,
-        &:hover {
-          background-color: var(--nui-action-menu-#{$color}-item-selected-hover-bg);
-          color: var(--nui-action-menu-#{$color}-item-selected-hover-color);
+        // El hover/focus-visible en selected items sigue funcionando normalmente
+        &:hover,
+        &:focus-visible {
+          background-color: var(--nui-action-menu-#{$color}-item-hover-bg);
+          color: var(--nui-action-menu-#{$color}-item-hover-color);
 
           .nui-action-menu__item__icon,
-          .nui-action-menu__item__check {
-            color: var(--nui-action-menu-#{$color}-item-selected-hover-icon-color);
+          .nui-action-menu__item__check,
+          .nui-action-menu__item__shortcut,
+          .nui-action-menu__item__arrow {
+            color: var(--nui-action-menu-#{$color}-item-hover-icon-color);
           }
 
           .nui-action-menu__item__subtitle {
-            color: var(--nui-action-menu-#{$color}-item-selected-hover-subtitle-color);
+            color: var(--nui-action-menu-#{$color}-item-hover-subtitle-color);
           }
         }
+      }
+
+      // Override del indicador con el color específico del menú
+      &--has-selected::after {
+        background-color: var(--nui-action-menu-#{$color}-item-selected-bg);
       }
     }
   }

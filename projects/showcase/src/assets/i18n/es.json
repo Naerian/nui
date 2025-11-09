@@ -178,7 +178,7 @@
       "submenu": {
         "title": "Con Submenús",
         "description": "Crea menús anidados usando la propiedad <code>children</code>. Los submenús pueden anidarse múltiples niveles.",
-        "note": "Usa la propiedad <code>children</code> para definir items de submenú. Cada hijo puede tener sus propios hijos para mayor anidación.",
+        "note": "Usa la propiedad <code>children</code> para definir items de submenú. Cada hijo puede tener sus propios hijos para mayor anidación. <strong>Nota:</strong> Si un hijo tiene <code>selected: true</code>, el item padre mostrará un indicador visual (línea vertical a la izquierda) para facilitar la navegación.",
         "codeTitle": "Menús Anidados"
       },
       "variants": {

@@ -256,14 +256,28 @@
       {{ "components.actionMenu.selected.description" | translate }}
     </p>
 
-    <div class="example-preview">
-      <nui-action-menu
-        icon="ri-global-line"
-        label="Language"
-        [items]="menuWithSelected"
-        (onItemAction)="handleAction($event)"
-      >
-      </nui-action-menu>
+    <div class="example-preview" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <div>
+        <p style="margin-bottom: 0.5rem; font-weight: 500;">Selection Mode (with selected items):</p>
+        <nui-action-menu
+          icon="ri-global-line"
+          label="Language"
+          [items]="menuWithSelected"
+          (onSelectionChange)="handleSelectionChange($event)"
+        >
+        </nui-action-menu>
+      </div>
+
+      <div>
+        <p style="margin-bottom: 0.5rem; font-weight: 500;">Action Mode (no selection):</p>
+        <nui-action-menu
+          icon="ri-more-2-line"
+          label="Options"
+          [items]="menuActionOnly"
+          (onItemAction)="handleAction($event)"
+        >
+        </nui-action-menu>
+      </div>
     </div>
 
     <app-code-block [examples]="selectedExamples"></app-code-block>

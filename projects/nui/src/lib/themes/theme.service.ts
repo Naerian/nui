@@ -555,6 +555,7 @@ export class ThemeService {
     const selectedHoverColor = this.isDark ? this.tint(color, 65) : color;
     const selectedHoverIconColor = this.isDark ? this.tint(color, 55) : color;
     const selectedHoverSubtitleColor = this.isDark ? this.tint(color, 45) : this.tint(color, 35);
+    const focusColor = this.isDark ? this.withAlpha(color, 0.15) : this.tint(color, 95);
     
     return `
   --nui-action-menu-${name}-item-hover-bg: ${hoverBg};
@@ -571,6 +572,7 @@ export class ThemeService {
   --nui-action-menu-${name}-item-selected-hover-color: ${selectedHoverColor};
   --nui-action-menu-${name}-item-selected-hover-icon-color: ${selectedHoverIconColor};
   --nui-action-menu-${name}-item-selected-hover-subtitle-color: ${selectedHoverSubtitleColor};
+  --nui-action-menu-${name}-item-focus-color: ${focusColor};
 `;
   }
 

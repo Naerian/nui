@@ -41,6 +41,8 @@ $action-menu-border-color: var(--nui-border-primary) !default;
 $action-menu-border-radius: var(--border-radius-md) !default;
 $action-menu-padding: var(--spacing-xs) !default;
 $action-menu-item-border-radius: var(--border-radius-md) !default;
+$action-menu-focus-outline-width: 2px !default;
+$action-menu-focus-outline-offset: -1px !default;
 
 // ===== COLORES BASE =====
 $action-menu-bg: var(--nui-bg-primary) !default;

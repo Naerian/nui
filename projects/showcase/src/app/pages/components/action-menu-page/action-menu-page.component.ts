@@ -95,7 +95,7 @@ export class ActionMenuPageComponent {
     icon: 'ri-download-line',
     children: [
       { label: 'PDF', action: 'export-pdf', icon: 'ri-file-pdf-line' },
-      { label: 'Excel', action: 'export-excel', icon: 'ri-file-excel-line' },
+      { label: 'Excel', action: 'export-excel', icon: 'ri-file-excel-line', selected: true }, // ← Hijo seleccionado
       { label: 'CSV', action: 'export-csv', icon: 'ri-file-text-line' }
     ]
   },
@@ -105,11 +105,22 @@ export class ActionMenuPageComponent {
     icon: 'ri-share-line',
     children: [
       { label: 'Email', action: 'share-email', icon: 'ri-mail-line' },
-      { label: 'Link', action: 'share-link', icon: 'ri-link' },
-      { label: 'Social', action: 'share-social', icon: 'ri-share-box-line' }
+      { 
+        label: 'Social Media', 
+        icon: 'ri-share-box-line',
+        children: [
+          { label: 'Facebook', action: 'share-facebook', icon: 'ri-facebook-line' },
+          { label: 'Twitter', action: 'share-twitter', icon: 'ri-twitter-line' },
+          { label: 'LinkedIn', action: 'share-linkedin', icon: 'ri-linkedin-line' }
+        ]
+      },
+      { label: 'Copy Link', action: 'share-link', icon: 'ri-link' }
     ]
   }
-];`,
+];
+
+// El item padre "Export" mostrará un indicador visual (línea vertical a la izquierda)
+// porque tiene el hijo "Excel" seleccionado`,
       language: 'typescript',
     },
   ];
@@ -460,7 +471,7 @@ menuItems: ActionMenuItem[] = [
       icon: 'ri-download-line',
       children: [
         { label: 'PDF', action: 'export-pdf', icon: 'ri-file-pdf-line' },
-        { label: 'Excel', action: 'export-excel', icon: 'ri-file-excel-line' },
+        { label: 'Excel', action: 'export-excel', icon: 'ri-file-excel-line', selected: true },
         { label: 'CSV', action: 'export-csv', icon: 'ri-file-text-line' },
       ],
     },
@@ -470,8 +481,17 @@ menuItems: ActionMenuItem[] = [
       icon: 'ri-share-line',
       children: [
         { label: 'Email', action: 'share-email', icon: 'ri-mail-line' },
-        { label: 'Link', action: 'share-link', icon: 'ri-link' },
-        { label: 'Social', action: 'share-social', icon: 'ri-share-box-line' },
+        { 
+          label: 'Social Media', 
+          action: 'share-social-media', 
+          icon: 'ri-share-box-line',
+          children: [
+            { label: 'Facebook', action: 'share-facebook', icon: 'ri-facebook-line' },
+            { label: 'Twitter', action: 'share-twitter', icon: 'ri-twitter-line' },
+            { label: 'LinkedIn', action: 'share-linkedin', icon: 'ri-linkedin-line' },
+          ]
+        },
+        { label: 'Copy Link', action: 'share-link', icon: 'ri-link' },
       ],
     },
   ];
@@ -555,9 +575,39 @@ menuItems: ActionMenuItem[] = [
     }
   ];
 
+  menuActionOnly: ActionMenuItem[] = [
+    { 
+      label: 'Export PDF', 
+      icon: 'ri-file-pdf-line',
+      action: 'export-pdf'
+    },
+    { 
+      label: 'Export Excel', 
+      icon: 'ri-file-excel-line',
+      action: 'export-excel'
+    },
+    { separator: true },
+    { 
+      label: 'Share', 
+      icon: 'ri-share-line',
+      action: 'share'
+    },
+    { 
+      label: 'Print', 
+      icon: 'ri-printer-line',
+      action: 'print'
+    }
+  ];
+
   handleAction(item: ActionMenuItem) {
     console.log('🎯 Item seleccionado:', item.label);
     console.log('📋 Action:', item.action);
     console.log('📦 Item completo:', item);
+  }
+
+  handleSelectionChange(item: ActionMenuItem) {
+    console.log('✅ Selección cambiada:', item.label);
+    console.log('📋 Action:', item.action);
+    console.log('📦 Item seleccionado:', item);
   }
 }

@@ -107,6 +107,7 @@
         <button
           class="nui-action-menu__item nui-action-menu__item--submenu"
           [class.nui-action-menu__item--custom-template]="itemTemplate"
+          [class.nui-action-menu__item--has-selected]="hasSelectedChild(item)"
           [cdkMenuTriggerFor]="subMenuTemplate"
           [cdkMenuTriggerData]="{ item: item }"
           cdkMenuItem

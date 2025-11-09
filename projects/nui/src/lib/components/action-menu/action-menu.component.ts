@@ -186,6 +186,13 @@ export class ActionMenuComponent {
   @Output() onItemAction = new EventEmitter<ActionMenuItem>();
 
   /**
+   * Evento que se emite cuando cambia la selección de un item.
+   * Solo se emite si el menú tiene items con la propiedad `selected`.
+   * Útil para menús tipo selector (idioma, preset, etc.)
+   */
+  @Output() onSelectionChange = new EventEmitter<ActionMenuItem>();
+
+  /**
    * Evento que se emite cuando el menú se abre.
    */
   @Output() menuOpen = new EventEmitter<void>();
@@ -213,6 +220,11 @@ export class ActionMenuComponent {
   mergedItems: ActionMenuItem[] = [];
 
   private readonly ngUnsubscribe$ = new Subject<void>();
+  
+  /**
+   * Indica si el menú está en modo selección (tiene al menos un item con selected: true)
+   */
+  private isSelectionMode = false;
 
   ngOnInit() {
     // Si no se ha definido ni label ni icono, asignamos un icono por defecto
@@ -221,6 +233,9 @@ export class ActionMenuComponent {
 
   ngAfterContentInit() {
     this.updateMenuItems(); // Llama a la fusión inicial
+    
+    // Detectar si hay algún item seleccionado para activar modo selección
+    this.isSelectionMode = this.hasAnySelected(this.mergedItems);
 
     // Suscribirse a los cambios si los elementos proyectados pueden cambiar dinámicamente
     this.staticItems.changes
@@ -305,10 +320,63 @@ export class ActionMenuComponent {
   }
 
   /**
+   * Verifica recursivamente si un item o cualquiera de sus hijos tiene selected: true
+   * @param {ActionMenuItem} item - Item a verificar
+   * @returns {boolean} - true si el item o algún hijo está seleccionado
+   */
+  hasSelectedChild(item: ActionMenuItem): boolean {
+    if (item.selected) {
+      return true;
+    }
+    if (item.children && item.children.length > 0) {
+      return item.children.some(child => this.hasSelectedChild(child));
+    }
+    return false;
+  }
+
+  /**
+   * Verifica recursivamente si hay algún item seleccionado en la jerarquía
+   * @param {ActionMenuItem[]} items - Items a verificar
+   * @returns {boolean} - true si hay al menos un item seleccionado
+   */
+  private hasAnySelected(items: ActionMenuItem[]): boolean {
+    return items.some(item => {
+      if (item.selected) return true;
+      if (item.children?.length) return this.hasAnySelected(item.children);
+      return false;
+    });
+  }
+
+  /**
+   * Deselecciona todos los items recursivamente
+   * @param {ActionMenuItem[]} items - Items a deseleccionar
+   */
+  private deselectAll(items: ActionMenuItem[]): void {
+    items.forEach(item => {
+      item.selected = false;
+      if (item.children?.length) {
+        this.deselectAll(item.children);
+      }
+    });
+  }
+
+  /**
    * Método que se ejecuta cuando se hace clic en un item del menú.
    * @param {ActionMenuItem} item - El item del menú que se ha clicado.
    */
   onItemClick(item: ActionMenuItem) {
+    // Si está en modo selección y el item no tiene hijos (es seleccionable)
+    if (this.isSelectionMode && !item.children && !item.separator) {
+      // Deseleccionar todos los items
+      this.deselectAll(this.mergedItems);
+      
+      // Seleccionar el item actual
+      item.selected = true;
+      
+      // Emitir evento de cambio de selección
+      this.onSelectionChange.emit(item);
+    }
+
     if (item.onAction) {
       item.onAction();
     }

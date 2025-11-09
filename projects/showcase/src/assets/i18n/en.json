@@ -178,7 +178,7 @@
       "submenu": {
         "title": "With Submenus",
         "description": "Create nested menus using the <code>children</code> property. Submenus can be nested multiple levels deep.",
-        "note": "Use the <code>children</code> property to define submenu items. Each child can also have its own children for deeper nesting.",
+        "note": "Use the <code>children</code> property to define submenu items. Each child can also have its own children for deeper nesting. <strong>Note:</strong> If a child has <code>selected: true</code>, the parent item will show a visual indicator (vertical line on the left) to aid navigation.",
         "codeTitle": "Nested Menus"
       },
       "variants": {

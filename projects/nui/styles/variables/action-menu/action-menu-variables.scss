@@ -49,6 +49,8 @@
   --nui-action-menu-border-radius: #{tokens.$action-menu-border-radius};
   --nui-action-menu-padding: #{tokens.$action-menu-padding};
   --nui-action-menu-item-border-radius: #{tokens.$action-menu-item-border-radius};
+  --nui-action-menu-focus-outline-width: #{tokens.$action-menu-focus-outline-width};
+  --nui-action-menu-focus-outline-offset: #{tokens.$action-menu-focus-outline-offset};
 
   // Colores base
   --nui-action-menu-bg: #{tokens.$action-menu-bg};
