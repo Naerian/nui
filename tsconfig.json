@@ -14,19 +14,14 @@
     "declaration": false,
     "experimentalDecorators": true,
     "paths": {
-      "nui": [
-        "./dist/nui"
-      ]
+      "nui": ["./projects/nui/src/public-api.ts"]
     },
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "lib": ["ES2022", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
