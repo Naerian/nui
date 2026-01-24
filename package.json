@@ -2,13 +2,13 @@
   "name": "nui-workspace",
   "version": "0.0.0",
   "scripts": {
-    "start": "ng serve showcase",
-    "build:nui": "ng build nui && npm run build:styles",
+    "start": "nx serve showcase",
+    "build:nui": "nx build nui && npm run build:styles",
     "build:styles": "npm run build:styles:nui && npm run build:styles:bundle",
     "build:styles:nui": "sass projects/nui/styles/nui.scss dist/nui/styles/nui.css --style=compressed --no-source-map",
     "build:styles:bundle": "sass projects/nui/styles/nui-bundle.scss dist/nui/styles/nui-bundle.css --style=compressed --no-source-map",
-    "build:play": "ng build showcase",
-    "test:nui": "ng test nui"
+    "build:play": "nx build showcase",
+    "test:nui": "nx test nui"
   },
   "workspaces": [
     "projects/nui"
@@ -26,6 +26,7 @@
     "@angular/router": "^17.3.0",
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
+    "@nx/angular": "21.1.3",
     "nui": "file:dist/nui",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -33,8 +34,13 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.17",
+    "@angular-devkit/core": "^17.3.17",
+    "@angular-devkit/schematics": "^17.3.17",
     "@angular/cli": "^17.3.17",
     "@angular/compiler-cli": "^17.3.0",
+    "@nx/angular": "21.1.3",
+    "@nx/workspace": "21.1.3",
+    "@schematics/angular": "^17.3.17",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
@@ -43,6 +49,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^17.3.0",
+    "nx": "22.4.1",
     "sass": "^1.80.0",
     "typescript": "~5.4.2"
   }

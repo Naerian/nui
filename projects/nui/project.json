@@ -1,0 +1,37 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "nui",
+  "projectType": "library",
+  "sourceRoot": "projects/nui/src",
+  "prefix": "nui",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:ng-packagr",
+      "options": {
+        "project": "projects/nui/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "projects/nui/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "projects/nui/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production",
+      "outputs": [
+        "{workspaceRoot}/dist/nui"
+      ]
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "tsConfig": "projects/nui/tsconfig.spec.json",
+        "polyfills": [
+          "zone.js",
+          "zone.js/testing"
+        ]
+      }
+    }
+  }
+}
