@@ -488,7 +488,7 @@
 
       // Estilos de focus
       &:focus-visible {
-        outline: 2px solid var(--nui-color-#{$color}-tint-65);
+        outline: 2px solid var(--nui-color-#{$color}-tint-60);
         outline-offset: -2px;
       }
     }
@@ -534,7 +534,7 @@
 
       // Estilos de focus
       &:focus-visible {
-        outline: 2px solid var(--nui-color-#{$color}-tint-65);
+        outline: 2px solid var(--nui-color-#{$color}-tint-60);
         outline-offset: -2px;
       }
     }
@@ -578,7 +578,7 @@
 
     &:focus-visible {
       .nui-switch__track-wrapper .nui-switch__track {
-        outline: 2px solid var(--nui-color-#{$color}-tint-65);
+        outline: 2px solid var(--nui-color-#{$color}-tint-60);
         outline-offset: -2px;
       }
     }
@@ -629,7 +629,7 @@
 
     &:focus-visible {
       .nui-switch__button {
-        outline: 2px solid var(--nui-color-#{$color}-tint-65);
+        outline: 2px solid var(--nui-color-#{$color}-tint-60);
         outline-offset: -2px;
       }
     }
@@ -750,38 +750,38 @@
   &.nui-paginator-container--#{$variant}.nui-paginator-container--#{$color} {
     .nui-paginator__page-jump-button,
     .nui-paginator__load-more-button {
-      color: var(--nui-paginator--#{$color}-#{$variant}-text);
-      background-color: var(--nui-paginator--#{$color}-#{$variant}-bg);
-      border-color: var(--nui-paginator--#{$color}-#{$variant}-border);
+      color: var(--nui-paginator-#{$color}-#{$variant}-text);
+      background-color: var(--nui-paginator-#{$color}-#{$variant}-bg);
+      border-color: var(--nui-paginator-#{$color}-#{$variant}-border);
 
       &:focus,
       &:hover {
-        background-color: var(--nui-paginator--#{$color}-#{$variant}-hover-bg);
-        color: var(--nui-paginator--#{$color}-#{$variant}-text);
-        border-color: var(--nui-paginator--#{$color}-#{$variant}-border);
+        background-color: var(--nui-paginator-#{$color}-#{$variant}-hover-bg);
+        color: var(--nui-paginator-#{$color}-#{$variant}-text);
+        border-color: var(--nui-paginator-#{$color}-#{$variant}-hover-border);
       }
 
       &:active {
-        background-color: var(--nui-paginator--#{$color}-#{$variant}-active-bg);
+        background-color: var(--nui-paginator-#{$color}-#{$variant}-active-bg);
       }
 
       // Estilos de focus
       &:focus-visible {
-        outline: 2px solid var(--nui-color-#{$color}-tint-65);
+        outline: 2px solid var(--nui-color-#{$color}-tint-60);
         outline-offset: -2px;
       }
     }
 
     .nui-paginator__page-jump-input {
       &:hover:not(&--disabled) {
-        border-color: var(--nui-color-#{$color}-tint-65);
+        border-color: var(--nui-color-#{$color}-tint-60);
       }
     }
 
     .nui-paginator__button {
-      color: var(--nui-paginator--#{$color}-#{$variant}-inactive-text);
-      background-color: var(--nui-paginator--#{$color}-#{$variant}-inactive-bg);
-      border-color: var(--nui-paginator--#{$color}-#{$variant}-inactive-border);
+      color: var(--nui-paginator-#{$color}-#{$variant}-inactive-text);
+      background-color: var(--nui-paginator-#{$color}-#{$variant}-inactive-bg);
+      border-color: var(--nui-paginator-#{$color}-#{$variant}-inactive-border);
 
       // Estados hover en modo "inactive" (no disabled, no active)
       &:not(.nui-paginator__button--disabled):not(
@@ -791,16 +791,16 @@
           .nui-paginator__button--active
         ):focus {
         background-color: var(
-          --nui-paginator--#{$color}-#{$variant}-inactive-hover-bg
+          --nui-paginator-#{$color}-#{$variant}-inactive-hover-bg
         );
-        color: var(--nui-paginator--#{$color}-#{$variant}-inactive-text);
-        border-color: var(--nui-paginator--#{$color}-#{$variant}-inactive-border);
+        color: var(--nui-paginator-#{$color}-#{$variant}-inactive-text);
+        border-color: var(--nui-paginator-#{$color}-#{$variant}-inactive-border);
       }
 
       &.nui-paginator__button--active:not(
           .nui-paginator__button--disabled
         ):active {
-        background-color: var(--nui-paginator--#{$color}-#{$variant}-active-bg);
+        background-color: var(--nui-paginator-#{$color}-#{$variant}-active-bg);
       }
     }
 
@@ -810,21 +810,21 @@
     .nui-paginator__load-more-button {
       // Estilos de focus
       &:focus-visible {
-        outline: 2px solid var(--nui-color-#{$color}-tint-65);
+        outline: 2px solid var(--nui-color-#{$color}-tint-60);
         outline-offset: -2px;
       }
     }
 
     .nui-paginator__button--active {
-      background-color: var(--nui-paginator--#{$color}-#{$variant}-bg);
-      color: var(--nui-paginator--#{$color}-#{$variant}-text);
-      border-color: var(--nui-paginator--#{$color}-#{$variant}-border);
+      background-color: var(--nui-paginator-#{$color}-#{$variant}-bg);
+      color: var(--nui-paginator-#{$color}-#{$variant}-text);
+      border-color: var(--nui-paginator-#{$color}-#{$variant}-border);
 
       // Estados hover en modo "active" (no disabled)
       &:hover:not(.nui-paginator__button--disabled) {
-        background-color: var(--nui-paginator--#{$color}-#{$variant}-hover-bg);
-        color: var(--nui-paginator--#{$color}-#{$variant}-text);
-        border-color: var(--nui-paginator--#{$color}-#{$variant}-border);
+        background-color: var(--nui-paginator-#{$color}-#{$variant}-hover-bg);
+        color: var(--nui-paginator-#{$color}-#{$variant}-text);
+        border-color: var(--nui-paginator-#{$color}-#{$variant}-hover-border);
       }
     }
   }
@@ -845,7 +845,7 @@
     padding: 0;
 
     i {
-      font-size: var(--nui-paginator--icon-size-#{$size});
+      font-size: var(--nui-paginator-icon-size-#{$size});
     }
   }
 
@@ -947,7 +947,7 @@
     }
 
     &:focus-visible {
-      outline: 2px solid var(--nui-color-#{$color}-tint-65);
+      outline: 2px solid var(--nui-color-#{$color}-tint-60);
       outline-offset: -2px;
     }
   }
@@ -956,7 +956,7 @@
   .nui-tabs__panel {
     &:focus-visible,
     &:focus {
-      outline: 2px solid var(--nui-color-#{$color}-tint-65);
+      outline: 2px solid var(--nui-color-#{$color}-tint-60);
       outline-offset: -2px;
     }
   }

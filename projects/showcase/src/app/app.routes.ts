@@ -4,11 +4,11 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: '/home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'home',
-    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
+    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
   },
   {
     path: 'getting-started',
@@ -16,21 +16,27 @@ export const routes: Routes = [
       {
         path: '',
         redirectTo: 'installation',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'installation',
-        loadComponent: () => import('./pages/getting-started/installation/installation.component').then(m => m.InstallationComponent)
+        loadComponent: () =>
+          import('./pages/getting-started/installation/installation.component').then(
+            m => m.InstallationComponent
+          ),
       },
       {
         path: 'configuration',
-        loadComponent: () => import('./pages/getting-started/configuration/configuration.component').then(m => m.ConfigurationComponent)
-      }
-    ]
+        loadComponent: () =>
+          import('./pages/getting-started/configuration/configuration.component').then(
+            m => m.ConfigurationComponent
+          ),
+      },
+    ],
   },
   {
     path: 'theming',
-    loadComponent: () => import('./pages/theming/theming.component').then(m => m.ThemingComponent)
+    loadComponent: () => import('./pages/theming/theming.component').then(m => m.ThemingComponent),
   },
   {
     path: 'components',
@@ -38,28 +44,55 @@ export const routes: Routes = [
       {
         path: '',
         redirectTo: 'button',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'button',
-        loadComponent: () => import('./pages/components/button-page/button-page.component').then(m => m.ButtonPageComponent)
+        loadComponent: () =>
+          import('./pages/components/button-page/button-page.component').then(
+            m => m.ButtonPageComponent
+          ),
       },
       {
         path: 'action-menu',
-        loadComponent: () => import('./pages/components/action-menu-page/action-menu-page.component').then(m => m.ActionMenuPageComponent)
-      }
-    ]
+        loadComponent: () =>
+          import('./pages/components/action-menu-page/action-menu-page.component').then(
+            m => m.ActionMenuPageComponent
+          ),
+      },
+      {
+        path: 'avatar',
+        loadComponent: () =>
+          import('./pages/components/avatar-page/avatar-page.component').then(
+            m => m.AvatarPageComponent
+          ),
+      },
+      {
+        path: 'button-group',
+        loadComponent: () =>
+          import('./pages/components/button-group-page/button-group-page.component').then(
+            m => m.ButtonGroupPageComponent
+          ),
+      },
+      {
+        path: 'paginator',
+        loadComponent: () =>
+          import('./pages/components/paginator-page/paginator-page.component').then(
+            m => m.PaginatorPageComponent
+          ),
+      },
+    ],
   },
   {
     path: 'examples',
-    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent) // Placeholder
+    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent), // Placeholder
   },
   {
     path: 'playground',
-    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent) // Placeholder
+    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent), // Placeholder
   },
   {
     path: '**',
-    redirectTo: '/home'
-  }
+    redirectTo: '/home',
+  },
 ];

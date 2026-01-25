@@ -1,15 +1,51 @@
-@use "../../../../styles/config";
-@use "../../../../styles/mixins";
-@use "../../../../styles/variables/paginator/paginator-variables.scss";
+@use '../../../../styles/config';
+@use '../../../../styles/mixins';
+@use '../../../../styles/variables/paginator/paginator-variables.scss';
 
 // =======================
 // PAGINATOR CONTAINER
 // =======================
+:host {
+  display: block;
+  width: 100%;
+}
+
 .nui-paginator-container {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   gap: var(--spacing-md);
+
+  // Por defecto: horizontal con wrap (para layouts simples sin áreas)
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  // CUSTOM LAYOUT: Sistema vertical que apila áreas horizontales
+  &--custom-layout {
+    flex-direction: column; // Apila top → horizontal-areas → bottom
+    align-items: stretch; // Cada área ocupa todo el ancho
+    flex-wrap: nowrap;
+    gap: 1rem; // Separación vertical entre áreas
+
+    // Área izquierda
+    .nui-paginator__area--left {
+      flex: 0 1 auto; // Ocupar solo lo necesario
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+
+      // CONTAINER QUERY: Usamos el nombre del contenedor de la fila
+      @container paginator-row (max-width: 1024px) {
+        flex: 1 1 100%; // Ocupar todo el ancho
+        justify-content: space-between; // Espacio entre elementos
+      }
+    }
+  }
+
+  // LAYOUT COLUMN: Forzar apilamiento vertical completo
+  &--layout-column {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
 
 // =======================
@@ -21,7 +57,7 @@
 
   &-text {
     font-size: var(--font-size-sm);
-    color: var(--nui-text-primary-secondary);
+    color: var(--nui-text-secondary);
     font-weight: var(--font-weight-medium);
   }
 }
@@ -31,13 +67,27 @@
 // =======================
 .nui-paginator__page-size {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--spacing-xs);
   flex-wrap: wrap;
+  flex-direction: column;
+
+  .nui-paginator__page-size-label {
+    font-size: var(--font-size-sm);
+  }
+
+  @media (orientation: portrait) and (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .nui-paginator__page-size-label {
+      margin-bottom: 0.25rem;
+    }
+  }
 
   &-label {
     font-size: var(--font-size-sm);
-    color: var(--nui-text-primary-secondary);
+    color: var(--nui-text-secondary);
     font-weight: var(--font-weight-medium);
     white-space: nowrap;
   }
@@ -53,7 +103,7 @@
 
   &-label {
     font-size: var(--font-size-sm);
-    color: var(--nui-text-primary-secondary);
+    color: var(--nui-text-secondary);
     font-weight: var(--font-weight-medium);
     white-space: nowrap;
   }
@@ -65,7 +115,7 @@
     font-weight: var(--font-weight-medium);
     color: var(--nui-text-primary);
     background-color: var(--nui-bg-primary);
-    border: var(--nui-paginator-input-border-width) solid var(--nui-color-border);
+    border: var(--nui-paginator-input-border-width) solid var(--nui-border-primary);
     border-radius: var(--border-radius-md);
     text-align: center;
     transition: all var(--nui-paginator-transition-duration) var(--nui-paginator-transition-timing);
@@ -171,7 +221,7 @@
   align-items: center;
   justify-content: center;
   padding: 0 0.25rem;
-  color: var(--nui-text-primary-secondary);
+  color: var(--nui-text-secondary);
   font-weight: var(--font-weight-medium);
   user-select: none;
 }
@@ -191,9 +241,9 @@
 // =======================
 @each $color in (primary, secondary, success, info, warning, danger, accent) {
   .nui-paginator-container {
-    @include mixins.paginator-colors("solid", $color);
-    @include mixins.paginator-colors("outline", $color);
-    @include mixins.paginator-colors("ghost", $color);
+    @include mixins.paginator-colors('solid', $color);
+    @include mixins.paginator-colors('outline', $color);
+    @include mixins.paginator-colors('ghost', $color);
   }
 }
 
@@ -217,13 +267,13 @@
   align-items: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
-  background-color: var(--nui-color-background-overlay);
+  background-color: var(--nui-bg-secondary);
   border-radius: var(--border-radius-md);
-  border: 1px solid var(--nui-color-border);
+  border: 1px solid var(--nui-border-primary);
 
   &-text {
     font-size: var(--font-size-sm);
-    color: var(--nui-text-primary-secondary);
+    color: var(--nui-text-secondary);
     font-weight: var(--font-weight-medium);
   }
 }
@@ -245,7 +295,7 @@
 
     &-text {
       font-size: var(--font-size-sm);
-      color: var(--nui-text-primary-secondary);
+      color: var(--nui-text-secondary);
       font-weight: var(--font-weight-medium);
       text-align: center;
     }
@@ -259,7 +309,7 @@
 
     &-text {
       font-size: var(--font-size-sm);
-      color: var(--nui-text-primary-disabled);
+      color: var(--nui-text-disabled);
       font-style: italic;
     }
   }
@@ -316,85 +366,193 @@
 .nui-paginator-container--custom-layout {
   display: flex;
 
-  // El contenedor principal usa el layout configurado
-  // Las propiedades flex-direction, justify-content y gap se configuran inline desde el template
-
-  // Área individual
+  // Cada área es una fila horizontal independiente
   .nui-paginator__area {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: 1rem; // Espaciado horizontal entre elementos
 
-    // Áreas específicas
+    // Distribución horizontal inteligente
     &--top,
     &--bottom {
-      width: 100%;
-      justify-content: center;
+      flex-direction: row; // SIEMPRE horizontal (los elementos van en fila)
+      flex-wrap: wrap; // Permite wrap si es necesario
+
+      // DISTRIBUCIÓN SEGÚN CANTIDAD DE ELEMENTOS Y ALINEACIÓN
+
+      // Default: si está centrado
+      &.nui-paginator__area--centered {
+        justify-content: center;
+      }
+
+      // Si no es centrado explícito, usar lógica inteligente:
+      &:not(.nui-paginator__area--centered) {
+        // 1 elemento: Alineado a la izquierda
+        &.nui-paginator__area--single {
+          justify-content: flex-start;
+        }
+
+        // 2 elementos: Separados en extremos (sin hueco en medio)
+        &.nui-paginator__area--double {
+          justify-content: space-between;
+        }
+
+        // 3+ elementos: Distribuidos al inicio con gap consistente
+        &.nui-paginator__area--triple {
+          justify-content: flex-start;
+          gap: 1rem;
+        }
+      }
     }
 
+    // ÁREA LEFT: Alineada al inicio
     &--left {
       justify-content: flex-start;
-      margin-right: auto;
+      flex: 0 1 auto; // Puede encogerse pero no crecer más de su contenido
     }
 
+    // ÁREA CENTER: Ocupa el espacio central
     &--center {
       justify-content: center;
-      flex: 1; // Ocupa el espacio disponible
+      flex: 0 1 auto; // Flexible pero contenido
+      min-width: 0; // Permite shrink si es necesario
+      flex-wrap: wrap; // Permite wrap en botones de navegación
+
+      // Si no hay left/right, center se expande para llenar
+      &:only-child {
+        flex: 1 1 auto;
+      }
     }
 
+    // ÁREA RIGHT: Alineada al final
     &--right {
       justify-content: flex-end;
-      margin-left: auto;
+      flex: 0 1 auto; // Puede encogerse pero no crecer más de su contenido
     }
   }
 
-  // Contenedor horizontal para left, center y right
+  // CONTENEDOR HORIZONTAL: Para áreas left/center/right
   .nui-paginator__horizontal-areas {
+    container-type: inline-size;
+    container-name: paginator-row;
+
     display: flex;
     align-items: center;
     width: 100%;
-    gap: var(--spacing-md);
-    flex-wrap: wrap;
+    gap: 1rem;
+    flex-wrap: wrap; // Permite wrap en pantallas pequeñas
+
+    // Por defecto: distribución horizontal con espacio entre áreas
+    flex-direction: row;
+
+    // CONTAINER QUERY: Cuando el ancho < 1024px, reorganizamos las áreas
+    @container paginator-row (max-width: 800px) {
+      // Forzar wrap de las áreas
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+
+      // Cada área se adapta según su contenido
+      .nui-paginator__area {
+        &--left,
+        &--center,
+        &--right {
+          // Si el área tiene elementos, ocupar todo el ancho y distribuir con space-between
+          &:not(:empty) {
+            flex: 1 1 100%; // Ocupar todo el ancho
+            width: 100%;
+            justify-content: space-between; // Distribuir elementos
+            gap: var(--spacing-sm);
+
+            // Si solo hay 1 elemento, alinearlo según su área original
+            &.nui-paginator__area--single-item {
+              justify-content: flex-start;
+            }
+          }
+        }
+
+        // Left sigue alineado al inicio cuando tiene 1 elemento
+        &--left:not(:empty) {
+          justify-content: flex-start;
+
+          // Pero si tiene múltiples elementos, space-between
+          &:has(> *:nth-child(2)) {
+            justify-content: space-between;
+          }
+        }
+
+        // Center debe centrarse si es único, sino space-between
+        &--center:not(:empty) {
+          justify-content: center;
+
+          // Si tiene múltiples elementos, space-between
+          &:has(> *:nth-child(2)) {
+            justify-content: space-between;
+          }
+        }
+
+        // Right alineado al final si 1 elemento, space-between si varios
+        &--right:not(:empty) {
+          justify-content: flex-end;
+
+          &:has(> *:nth-child(2)) {
+            justify-content: space-between;
+          }
+        }
+      }
+    }
   }
 }
 
-// Si el contenedor principal es column, las áreas horizontales se apilan verticalmente
+// OVERRIDE: Si el layout principal es column, NO afectar horizontal-areas
+// (Ya está en column por --custom-layout, no necesitamos este override)
 .nui-paginator-container--layout-column {
+  // Las áreas top/center/bottom ya se apilan verticalmente por --custom-layout
+  // Solo aseguramos que horizontal-areas mantenga su dirección horizontal
   .nui-paginator__horizontal-areas {
-    flex-direction: column;
+    flex-direction: row; // Mantener horizontal SIEMPRE
   }
 }
 
-// Responsive: en móviles, todas las áreas se apilan verticalmente
-// Solo si NO hay layout inline personalizado (el TS ya maneja la lógica de layouts)
+// =======================
+// RESPONSIVE MÓVIL
+// =======================
 @media (max-width: 768px) {
-  .nui-paginator-container--custom-layout:not([style*="flex-direction"]) {
-    flex-direction: column;
+  .nui-paginator-container--custom-layout {
+    // Container ya es column por defecto
 
+    // Áreas horizontales se convierten en verticales en móvil
     .nui-paginator__horizontal-areas {
       flex-direction: column;
+      align-items: stretch;
     }
-  }
 
-  .nui-paginator__area {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap; // Permitir que los elementos se envuelvan
-    gap: var(--spacing-xs);
-
-    // El área center (navegación) debe permitir wrap para los botones de página
-    &--center {
+    // Áreas individuales también verticales en móvil si hay muchos elementos
+    .nui-paginator__area {
+      width: 100%;
+      justify-content: center;
       flex-wrap: wrap;
-      justify-content: center;
-    }
+      gap: var(--spacing-xs);
 
-    &--bottom,
-    &--top {
-      margin: 0;
-      justify-content: center;
-      .nui-paginator__page-size,
-      .nui-paginator__info {
+      &--center {
+        flex-wrap: wrap;
         justify-content: center;
+      }
+
+      &--bottom,
+      &--top {
+        margin: 0;
+        justify-content: center;
+
+        .nui-paginator__page-size,
+        .nui-paginator__info {
+          justify-content: center;
+        }
+
+        // Áreas con muchos elementos: apilar verticalmente
+        &.nui-paginator__area--triple {
+          flex-direction: column;
+          align-items: stretch;
+        }
       }
     }
   }
@@ -410,9 +568,52 @@
     }
   }
 
-  // Permitir que los elementos se envuelvan en móviles (sin !important para respetar layouts personalizados)
+  // Permitir que los elementos se envuelvan en móviles
   .nui-paginator {
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  // =======================
+  // TOUCH TARGETS MÓVIL (44px mínimo)
+  // =======================
+
+  // Aumentar área táctil en botones para cumplir estándares iOS/Android
+  .nui-paginator__button,
+  .nui-paginator__page-jump-button {
+    min-width: 44px; // Mínimo recomendado por Apple/Google
+    min-height: 44px;
+    padding: 0.75rem; // Más espacio interno
+  }
+
+  // Input de salto de página touch-friendly
+  .nui-paginator__page-jump-input {
+    min-height: 44px;
+    font-size: 16px; // Evitar zoom automático en iOS
+    padding: 0.75rem;
+  }
+
+  // Gap aumentado en móvil para mejor separación
+  .nui-paginator {
+    gap: var(--spacing-md); // 16px en lugar de 8px
+  }
+
+  .nui-paginator-container {
+    gap: var(--spacing-md); // Consistente con el gap interno
+  }
+
+  // Área top: elementos apilados verticalmente en móvil muy estrecho
+  @media (max-width: 480px) {
+    .nui-paginator__area--top {
+      flex-direction: column;
+      width: 100%;
+
+      .nui-paginator__info,
+      .nui-paginator__page-size,
+      .nui-paginator__page-jump {
+        width: 100%;
+        justify-content: center;
+      }
+    }
   }
 }

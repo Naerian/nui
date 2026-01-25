@@ -50,7 +50,7 @@ export class ThemeService {
   private darkModeStrategy: 'auto' | 'manual' | 'system' = 'manual';
   private darkModeClass: string = 'dark-mode';
   private mediaQuery?: MediaQueryList;
-  
+
   // Observable para notificar cambios de preset
   private currentPresetSubject: BehaviorSubject<ThemePreset>;
   public currentPreset$: Observable<ThemePreset>;
@@ -62,17 +62,33 @@ export class ThemeService {
     this.currentPreset = config?.preset || {
       name: 'aura',
       colors: {
-        light: { primary: '#0d9488', secondary: '#64748b', accent: '#9333ea', success: '#059669', info: '#0e7490', warning: '#d97706', danger: '#dc2626' },
-        dark: { primary: '#14b8a6', secondary: '#94a3b8', accent: '#a855f7', success: '#10b981', info: '#06b6d4', warning: '#f59e0b', danger: '#ef4444' }
-      }
+        light: {
+          primary: '#0d9488',
+          secondary: '#64748b',
+          accent: '#9333ea',
+          success: '#059669',
+          info: '#0e7490',
+          warning: '#d97706',
+          danger: '#dc2626',
+        },
+        dark: {
+          primary: '#14b8a6',
+          secondary: '#94a3b8',
+          accent: '#a855f7',
+          success: '#10b981',
+          info: '#06b6d4',
+          warning: '#f59e0b',
+          danger: '#ef4444',
+        },
+      },
     };
-    
+
     this.currentPresetSubject = new BehaviorSubject<ThemePreset>(this.currentPreset);
     this.currentPreset$ = this.currentPresetSubject.asObservable();
-    
+
     this.darkModeStrategy = config?.darkMode || 'manual';
     this.darkModeClass = config?.darkModeClass || 'dark-mode';
-    
+
     this.init();
   }
 
@@ -83,22 +99,22 @@ export class ThemeService {
       this.styleElement.id = 'nui-theme-colors';
       this.document.head.appendChild(this.styleElement);
     }
-    
+
     // Initialize dark mode based on strategy
     if (this.darkModeStrategy === 'auto' || this.darkModeStrategy === 'system') {
       this.setupSystemDarkMode();
     }
-    
+
     this.updateColors();
   }
 
   private setupSystemDarkMode(): void {
     if (typeof window === 'undefined') return;
-    
+
     this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     this.isDark = this.mediaQuery.matches;
     this.updateDarkModeClass();
-    
+
     // Only listen for changes if strategy is 'auto'
     if (this.darkModeStrategy === 'auto') {
       this.mediaQuery.addEventListener('change', this.handleSystemDarkModeChange.bind(this));
@@ -120,7 +136,7 @@ export class ThemeService {
   }
 
   /**
-   * Manually toggle dark mode. 
+   * Manually toggle dark mode.
    * Only works when darkMode strategy is 'manual' or not set.
    */
   toggleDarkMode(): void {
@@ -128,14 +144,14 @@ export class ThemeService {
       console.warn('toggleDarkMode() only works when darkMode strategy is "manual"');
       return;
     }
-    
+
     this.isDark = !this.isDark;
     this.updateDarkModeClass();
     this.updateColors();
   }
 
   /**
-   * Manually set dark mode. 
+   * Manually set dark mode.
    * Only works when darkMode strategy is 'manual' or not set.
    */
   setDarkMode(enabled: boolean): void {
@@ -143,7 +159,7 @@ export class ThemeService {
       console.warn('setDarkMode() only works when darkMode strategy is "manual"');
       return;
     }
-    
+
     this.isDark = enabled;
     this.updateDarkModeClass();
     this.updateColors();
@@ -184,20 +200,20 @@ export class ThemeService {
   private generateComponentVariables(): string {
     const colors = this.isDark ? this.currentPreset.colors.dark : this.currentPreset.colors.light;
     const grays = this.currentPreset.grays || this.getDefaultGrays();
-    
+
     let css = ':root {\n';
-    
+
     // Structural variables (grays, text, bg, borders, shadows, focus, overlay, backdrop, spinner, switch)
     css += this.generateStructuralVariables(grays);
-    
+
     // Modal gradient (uses warning and danger from preset)
     css += `  --nui-color-modal-gradient: linear-gradient(90deg, ${colors.warning}, ${colors.danger});\n`;
-    
+
     // Generate base color variables and their tints/shades
     Object.entries(colors).forEach(([name, baseColor]) => {
       // Base color
       css += `  --nui-color-${name}: ${baseColor};\n`;
-      
+
       // Generate tints (lighter versions): 95, 90, 80, 70, 60, 50
       css += `  --nui-color-${name}-tint-95: ${this.tint(baseColor, 95)};\n`;
       css += `  --nui-color-${name}-tint-90: ${this.tint(baseColor, 90)};\n`;
@@ -205,14 +221,14 @@ export class ThemeService {
       css += `  --nui-color-${name}-tint-70: ${this.tint(baseColor, 70)};\n`;
       css += `  --nui-color-${name}-tint-60: ${this.tint(baseColor, 60)};\n`;
       css += `  --nui-color-${name}-tint-50: ${this.tint(baseColor, 50)};\n`;
-      
+
       // Generate shades (darker versions): 10, 20, 30, 40, 50
       css += `  --nui-color-${name}-shade-10: ${this.shade(baseColor, 10)};\n`;
       css += `  --nui-color-${name}-shade-20: ${this.shade(baseColor, 20)};\n`;
       css += `  --nui-color-${name}-shade-30: ${this.shade(baseColor, 30)};\n`;
       css += `  --nui-color-${name}-shade-40: ${this.shade(baseColor, 40)};\n`;
       css += `  --nui-color-${name}-shade-50: ${this.shade(baseColor, 50)};\n`;
-      
+
       // Generate alpha variants: 10, 20, 30, 40, 50, 60, 70, 80, 90
       css += `  --nui-color-${name}-alpha-10: ${this.withAlpha(baseColor, 0.1)};\n`;
       css += `  --nui-color-${name}-alpha-20: ${this.withAlpha(baseColor, 0.2)};\n`;
@@ -223,7 +239,7 @@ export class ThemeService {
       css += `  --nui-color-${name}-alpha-70: ${this.withAlpha(baseColor, 0.7)};\n`;
       css += `  --nui-color-${name}-alpha-80: ${this.withAlpha(baseColor, 0.8)};\n`;
       css += `  --nui-color-${name}-alpha-90: ${this.withAlpha(baseColor, 0.9)};\n`;
-      
+
       // Component-specific variables
       css += this.generateButtonVariables(name, baseColor);
       css += this.generateFabButtonVariables(name, baseColor);
@@ -252,7 +268,7 @@ export class ThemeService {
       600: '#4b5563',
       700: '#374151',
       800: '#1f2937',
-      900: '#111827'
+      900: '#111827',
     };
   }
 
@@ -393,12 +409,13 @@ export class ThemeService {
   private generateButtonGroupVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
     const hoverBg = this.withAlpha(color, 0.05);
-    const inactiveBorder = this.isDark ? '#27272a' : '#e4e4e7';
+    const inactiveBorder = this.isDark ? '#0f0f10' : '#e4e4e7';
     const inactiveBg = this.isDark ? '#18181b' : '#ffffff';
     return `
   --nui-button-group-${name}-solid-bg: ${color};
   --nui-button-group-${name}-solid-text: ${this.isDark ? '#0d1117' : '#ffffff'};
   --nui-button-group-${name}-solid-border: ${color};
+  --nui-button-group-${name}-solid-box-border: ${inactiveBg};
   --nui-button-group-${name}-solid-hover-bg: ${hoverColor};
   --nui-button-group-${name}-solid-inactive-text: ${color};
   --nui-button-group-${name}-solid-inactive-bg: ${inactiveBg};
@@ -409,6 +426,8 @@ export class ThemeService {
   --nui-button-group-${name}-outline-border: ${color};
   --nui-button-group-${name}-outline-hover-bg: ${this.withAlpha(color, 0.2)};
   --nui-button-group-${name}-outline-inactive-bg: transparent;
+  --nui-button-group-${name}-outline-inactive-hover-bg: ${this.withAlpha(color, 0.2)};
+  --nui-button-group-${name}-outline-inactive-text: ${color};
   --nui-button-group-${name}-outline-inactive-border: ${inactiveBorder};
   --nui-button-group-${name}-ghost-bg: ${this.withAlpha(color, 0.1)};
   --nui-button-group-${name}-ghost-text: ${color};
@@ -506,34 +525,52 @@ export class ThemeService {
     const hoverColor = this.shade(color, 10);
     const activeColor = this.shade(color, 20);
     const hoverBg = this.withAlpha(color, 0.05);
-    const inactiveBorder = this.isDark ? '#27272a' : '#e4e4e7';
+    const inactiveBorder = this.isDark ? '#0f0f10' : '#e4e4e7';
     const inactiveBg = this.isDark ? '#18181b' : '#ffffff';
+    const inactiveHoverBg = this.withAlpha(color, 0.08);
     const ghostActive = this.isDark ? this.shade(color, 80) : this.tint(color, 90);
+    const ghostInactiveBg = this.isDark ? this.shade(color, 85) : this.tint(color, 95);
+    const ghostInactiveHoverBg = this.withAlpha(color, 0.12);
+    const textOnColor = this.isDark ? '#0d1117' : '#ffffff';
+    
     return `
-  --nui-paginator--${name}-solid-bg: ${color};
-  --nui-paginator--${name}-solid-text: ${this.isDark ? '#0d1117' : '#ffffff'};
-  --nui-paginator--${name}-solid-hover-bg: ${hoverColor};
-  --nui-paginator--${name}-solid-active-bg: ${activeColor};
-  --nui-paginator--${name}-solid-inactive-text: ${color};
-  --nui-paginator--${name}-solid-inactive-bg: ${inactiveBg};
-  --nui-paginator--${name}-solid-inactive-border: ${inactiveBorder};
-  --nui-paginator--${name}-solid-inactive-hover-bg: ${hoverBg};
-  --nui-paginator--${name}-outline-bg: transparent;
-  --nui-paginator--${name}-outline-text: ${color};
-  --nui-paginator--${name}-outline-hover-bg: ${this.withAlpha(color, 0.1)};
-  --nui-paginator--${name}-outline-active-bg: ${ghostActive};
-  --nui-paginator--${name}-outline-inactive-bg: transparent;
-  --nui-paginator--${name}-ghost-bg: ${this.isDark ? this.shade(color, 80) : this.tint(color, 90)};
-  --nui-paginator--${name}-ghost-text: ${color};
-  --nui-paginator--${name}-ghost-hover-bg: ${this.withAlpha(color, 0.1)};
-  --nui-paginator--${name}-ghost-active-bg: ${ghostActive};
+  --nui-paginator-${name}-solid-bg: ${color};
+  --nui-paginator-${name}-solid-text: ${textOnColor};
+  --nui-paginator-${name}-solid-border: ${color};
+  --nui-paginator-${name}-solid-hover-bg: ${hoverColor};
+  --nui-paginator-${name}-solid-hover-border: ${hoverColor};
+  --nui-paginator-${name}-solid-active-bg: ${activeColor};
+  --nui-paginator-${name}-solid-inactive-text: ${color};
+  --nui-paginator-${name}-solid-inactive-bg: ${inactiveBg};
+  --nui-paginator-${name}-solid-inactive-border: ${inactiveBorder};
+  --nui-paginator-${name}-solid-inactive-hover-bg: ${hoverBg};
+  --nui-paginator-${name}-outline-bg: transparent;
+  --nui-paginator-${name}-outline-text: ${color};
+  --nui-paginator-${name}-outline-border: ${color};
+  --nui-paginator-${name}-outline-hover-bg: ${this.withAlpha(color, 0.1)};
+  --nui-paginator-${name}-outline-hover-border: ${hoverColor};
+  --nui-paginator-${name}-outline-active-bg: ${ghostActive};
+  --nui-paginator-${name}-outline-inactive-text: ${color};
+  --nui-paginator-${name}-outline-inactive-bg: transparent;
+  --nui-paginator-${name}-outline-inactive-border: ${inactiveBorder};
+  --nui-paginator-${name}-outline-inactive-hover-bg: ${inactiveHoverBg};
+  --nui-paginator-${name}-ghost-bg: ${this.isDark ? this.shade(color, 80) : this.tint(color, 90)};
+  --nui-paginator-${name}-ghost-text: ${color};
+  --nui-paginator-${name}-ghost-border: transparent;
+  --nui-paginator-${name}-ghost-hover-bg: ${this.withAlpha(color, 0.1)};
+  --nui-paginator-${name}-ghost-hover-border: transparent;
+  --nui-paginator-${name}-ghost-active-bg: ${ghostActive};
+  --nui-paginator-${name}-ghost-inactive-text: ${color};
+  --nui-paginator-${name}-ghost-inactive-bg: ${ghostInactiveBg};
+  --nui-paginator-${name}-ghost-inactive-border: transparent;
+  --nui-paginator-${name}-ghost-inactive-hover-bg: ${ghostInactiveHoverBg};
 `;
   }
 
   private generateAvatarVariables(name: string, color: string): string {
     const shadeColor = this.isDark ? this.shade(color, 10) : color;
     const textOnColor = this.isDark ? '#0d1117' : '#ffffff';
-    
+
     return `
   --nui-avatar-${name}-bg: ${shadeColor};
   --nui-avatar-${name}-color: ${textOnColor};
@@ -556,7 +593,7 @@ export class ThemeService {
     const selectedHoverIconColor = this.isDark ? this.tint(color, 55) : color;
     const selectedHoverSubtitleColor = this.isDark ? this.tint(color, 45) : this.tint(color, 35);
     const focusColor = this.isDark ? this.withAlpha(color, 0.15) : this.tint(color, 95);
-    
+
     return `
   --nui-action-menu-${name}-item-hover-bg: ${hoverBg};
   --nui-action-menu-${name}-item-hover-color: ${hoverColor};
@@ -578,11 +615,21 @@ export class ThemeService {
 
   private hexToRgb(hex: string): { r: number; g: number; b: number } {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) } : { r: 0, g: 0, b: 0 };
+    return result
+      ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) }
+      : { r: 0, g: 0, b: 0 };
   }
 
   private rgbToHex(r: number, g: number, b: number): string {
-    return '#' + [r, g, b].map(x => { const hex = Math.round(x).toString(16); return hex.length === 1 ? '0' + hex : hex; }).join('');
+    return (
+      '#' +
+      [r, g, b]
+        .map(x => {
+          const hex = Math.round(x).toString(16);
+          return hex.length === 1 ? '0' + hex : hex;
+        })
+        .join('')
+    );
   }
 
   private shade(color: string, percent: number): string {

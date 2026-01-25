@@ -1,35 +1,51 @@
-@use "../../../../styles/components/button";
+@use '../../../../styles/components/button';
 
+// ============================================================================
+// HOST: Configuración del Web Component
+// ============================================================================
 :host {
   display: inline-block;
+  vertical-align: middle;
   cursor: pointer;
-  transition: opacity 0.2s ease-in-out;
 
-  // Aplicar width al host cuando se usan los modificadores
   &.full-width {
     display: block;
     width: 100%;
   }
-
   &.fit-width {
     display: inline-block;
     width: fit-content;
   }
+
+  &.disabled {
+    pointer-events: none;
+  }
 }
 
 // ============================================================================
-// Estilos del botón interno
+// BOTÓN INTERNO
 // ============================================================================
-// Reutiliza el mixin compartido para mantener consistencia con la directiva
-// ============================================================================
-
 .nui-btn {
   @include button.button-base-styles;
+  align-items: center;
 
-  // ====================================================================
-  // Contenido vacío - ocultar sin ocupar espacio
-  // ====================================================================
-  &__content--empty {
-    display: none;
+  &__content--hidden {
+    position: static;
+  }
+
+  &__content,
+  &__spinner,
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+    line-height: 1.5;
+  }
+
+  &__spinner--center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 }

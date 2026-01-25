@@ -222,7 +222,7 @@
         "note": "The <code>#item</code> template receives the full item as context (<code>let-item</code>). The <code>menu-header</code> and <code>menu-footer</code> directives provide a simpler and clearer syntax than PrimeNG, avoiding unnecessary ng-templates.",
         "clickNote": "<strong>Important:</strong> When using custom templates, you must handle the click event manually with <code>(click)=\"handleAction(item)\"</code>. The <code>onItemAction</code> event is only automatically emitted with default items.",
         "htmlTitle": "HTML Template",
-        "tsTitle": "Component Data",
+        "tsTitle": "Component Logic (TypeScript)",
         "cssTitle": "CSS Styles"
       }
     }

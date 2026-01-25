@@ -49,7 +49,7 @@
   // Separador
   &__separator {
     width: 100%;
-    height: 1px;
+    height: 0.063rem;
     background-color: var(--nui-action-menu-separator-color);
     margin: var(--nui-action-menu-padding) 0;
 
@@ -65,7 +65,7 @@
       &::after {
         content: "";
         flex: 1;
-        height: 1px;
+        height: 0.063rem;
         background-color: var(--nui-action-menu-separator-color);
       }
     }
@@ -109,7 +109,6 @@
     &__text {
       display: flex;
       flex-direction: column;
-      gap: 4px; // Reducido de 2px a 4px para menos espacio entre title y subtitle
       flex: 1;
       min-width: 0;
     }
@@ -120,7 +119,7 @@
       text-overflow: ellipsis;
       display: block;
       margin-right: var(--nui-action-menu-item-label-margin-right);
-      line-height: 1.2;
+      line-height: 1.5;
     }
 
     &__subtitle {

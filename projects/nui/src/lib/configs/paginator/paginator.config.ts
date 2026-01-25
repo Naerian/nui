@@ -11,9 +11,9 @@ export function createDefaultPaginatorConfig(): PaginatorGlobalConfig {
   return {
     config: {
       maxVisiblePages: 7,
-      showFirstLast: true,
+      showFirstLast: false,
       showPageSizeSelector: false,
-      showItemRange: true,
+      showItemRange: false,
       showPageJump: false,
       pageSizeOptions: [10, 25, 50, 100],
       autoScroll: false,

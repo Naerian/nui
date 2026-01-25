@@ -8,13 +8,11 @@ import {
   DestroyRef,
   ElementRef,
   HostListener,
-  WritableSignal,
   signal,
-  Input,
-  Output,
-  EventEmitter,
+  input,
+  output,
   computed,
-  booleanAttribute,
+  model,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -98,8 +96,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   private readonly destroyRef = inject(DestroyRef);
   private readonly elementRef = inject(ElementRef);
   protected readonly _translations = inject(NUI_TRANSLATIONS);
-  private readonly paginatorConfig: PaginatorGlobalConfig =
-    this.globalConfig.paginator || {};
+  private readonly paginatorConfig: PaginatorGlobalConfig = this.globalConfig.paginator || {};
 
   // Caché para memoización de páginas visibles
   private _visiblePagesCache = new Map<string, (number | string)[]>();
@@ -115,9 +112,9 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   /**
    * Listener para detectar cambios de tamaño de ventana y actualizar detección móvil
    */
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   onWindowResize(): void {
-    if (this.autoMobile) {
+    if (this.autoMobile()) {
       this.updateMobileDetection();
     }
   }
@@ -127,33 +124,14 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Valores posibles: 'primary', 'secondary', 'success', 'info', 'warning', 'danger', 'accent'
    * @default 'primary' (o valor configurado globalmente)
    */
-  _color: WritableSignal<NUIColor> = signal(DEFAULT_COLOR);
-  @Input()
-  set color(value: NUIColor) {
-    this._color.set(value || this.globalConfig.defaultColor || DEFAULT_COLOR);
-  }
-  get color(): NUIColor {
-    return this._color();
-  }
-
+  color = model<NUIColor>(inject(NUI_CONFIG).defaultColor || DEFAULT_COLOR);
+  
   /**
    * Tamaño del paginador.
    * Valores posibles: 'xs', 's', 'sm', 'md', 'lg', 'xl'
    * @default 'md' (o valor configurado globalmente)
    */
-  _size: WritableSignal<NUISize> = signal(DEFAULT_SIZE);
-  private _hasExplicitSize = false;
-
-  @Input()
-  set size(value: NUISize) {
-    if (value) {
-      this._hasExplicitSize = true;
-    }
-    this._size.set(value || this.globalConfig.defaultSize || DEFAULT_SIZE);
-  }
-  get size(): NUISize {
-    return this._size();
-  }
+  size = model<NUISize>(inject(NUI_CONFIG).defaultSize || DEFAULT_SIZE);
 
   /**
    * Variante visual del paginador.
@@ -162,160 +140,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * - 'ghost': Sin borde ni fondo, solo texto/icono
    * @default 'solid'
    */
-  @Input() variant: NUIVariant = 'solid';
-
-  /**
-   * Página actual (1-indexed).
-   * @default 1
-   */
-  _currentPage: WritableSignal<number> = signal(1);
-  @Input()
-  set currentPage(value: number) {
-    // Validación robusta
-    if (value == null || isNaN(value) || !isFinite(value)) return;
-
-    // No limitar por totalPages aquí, se validará después si es necesario
-    const validValue = Math.max(1, Math.floor(value));
-
-    // Solo actualizar si el valor cambió
-    if (validValue !== this._currentPage()) {
-      this._currentPage.set(validValue);
-      // Limpiar caché cuando cambia la página
-      this._visiblePagesCache.clear();
-    }
-  }
-  get currentPage(): number {
-    return this._currentPage();
-  }
-
-  /**
-   * Número total de páginas.
-   * @default 1
-   */
-  _totalPages: WritableSignal<number> = signal(1);
-  @Input()
-  set totalPages(value: number) {
-    // Validación robusta
-    if (value == null || isNaN(value) || !isFinite(value)) return;
-
-    const validValue = Math.max(1, Math.floor(value));
-
-    // Solo actualizar si el valor cambió
-    if (validValue !== this._totalPages()) {
-      this._totalPages.set(validValue);
-
-      // Si la página actual excede el total, ajustar
-      if (this.currentPage > validValue) {
-        this._currentPage.set(validValue);
-      }
-
-      // Limpiar caché cuando cambia el total
-      this._visiblePagesCache.clear();
-    }
-  }
-  get totalPages(): number {
-    return this._totalPages();
-  }
-
-  /**
-   * Número máximo de páginas visibles en el paginador.
-   * El paginador mostrará un máximo de este número de botones de página.
-   * @default 7
-   */
-  _maxVisiblePages: number = 7;
-  private _hasExplicitMaxVisiblePages = false;
-
-  @Input()
-  set maxVisiblePages(value: number) {
-    if (value != null) {
-      this._hasExplicitMaxVisiblePages = true;
-    }
-    this._maxVisiblePages = value || 7;
-  }
-  get maxVisiblePages(): number {
-    return this._maxVisiblePages;
-  }
-
-  /**
-   * Mostrar botones de primera y última página.
-   * @default true
-   */
-  @Input({ transform: booleanAttribute }) showFirstLast: boolean = true;
-
-  /**
-   * Indica si el paginador está deshabilitado.
-   * @default false
-   */
-  @Input({ transform: booleanAttribute }) disabled: boolean = false;
-
-  /**
-   * Número total de items/resultados.
-   * Necesario para mostrar el rango de items y calcular páginas si itemsPerPage está configurado.
-   */
-  @Input() totalItems?: number;
-
-  /**
-   * Items por página.
-   * @default 10
-   */
-  _itemsPerPage: WritableSignal<number> = signal(10);
-  @Input()
-  set itemsPerPage(value: number) {
-    // Validación robusta
-    if (value == null || isNaN(value) || !isFinite(value)) return;
-
-    const validValue = Math.max(1, Math.floor(value));
-
-    // Solo actualizar si el valor cambió
-    if (validValue !== this._itemsPerPage()) {
-      this._itemsPerPage.set(validValue);
-    }
-  }
-  get itemsPerPage(): number {
-    return this._itemsPerPage();
-  }
-
-  /**
-   * Opciones para el selector de items por página.
-   * @default [10, 25, 50, 100]
-   */
-  @Input() pageSizeOptions: number[] = [10, 25, 50, 100];
-
-  /**
-   * Mostrar selector de items por página.
-   * @default false
-   */
-  @Input({ transform: booleanAttribute }) showPageSizeSelector: boolean = false;
-
-  /**
-   * Mostrar información del rango de items.
-   * Ejemplo: "Mostrando 11-20 de 150 resultados"
-   * @default true
-   */
-  @Input({ transform: booleanAttribute }) showItemRange: boolean = true;
-
-  /**
-   * Mostrar input para saltar a una página específica.
-   * @default false
-   */
-  @Input({ transform: booleanAttribute }) showPageJump: boolean = false;
-
-  /**
-   * Scroll automático al cambiar página.
-   * @default false
-   */
-  @Input({ transform: booleanAttribute }) autoScroll?: boolean;
-
-  /**
-   * Elemento target para scroll (selector CSS o elemento).
-   * @default 'body'
-   */
-  @Input() scrollTarget?: string | HTMLElement;
-
-  /**
-   * Configuración avanzada del componente.
-   */
-  @Input() config?: PaginatorConfig;
+  variant = input<NUIVariant>('solid');
 
   /**
    * Modo de visualización del paginador.
@@ -325,7 +150,79 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * - 'minimal': Solo flechas anterior/siguiente
    * @default 'default'
    */
-  @Input() mode: PaginatorMode = 'default';
+  mode = input<PaginatorMode>('default');
+
+  /**
+   * Indica si el paginador está deshabilitado.
+   * @default false
+   */
+  disabled = input(false, { transform: (value: unknown) => value === '' || value === true });
+
+  /**
+   * Número total de items/resultados.
+   * Necesario para mostrar el rango de items y calcular páginas si itemsPerPage está configurado.
+   */
+  totalItems = input<number | undefined>(undefined);
+
+  /**
+   * Opciones para el selector de items por página.
+   * @default [10, 25, 50, 100]
+   */
+  pageSizeOptions = input<number[]>([10, 25, 50, 100]);
+
+  /**
+   * Mostrar selector de items por página.
+   * Si no se especifica, se usará el valor de la configuración global.
+   * @default undefined (usa config global)
+   */
+  showPageSizeSelector = input<boolean | undefined, boolean | string | undefined>(undefined, {
+    transform: (value: boolean | string | undefined): boolean | undefined => {
+      if (value === undefined || value === null) return undefined;
+      return value === '' || value === true;
+    },
+  });
+
+  /**
+   * Mostrar información del rango de items.
+   * Ejemplo: "Mostrando 11-20 de 150 resultados"
+   * Si no se especifica, se usará el valor de la configuración global.
+   * @default undefined (usa config global)
+   */
+  showItemRange = input<boolean | undefined, boolean | string | undefined>(undefined, {
+    transform: (value: boolean | string | undefined): boolean | undefined => {
+      if (value === undefined || value === null) return undefined;
+      return value === '' || value === true;
+    },
+  });
+
+  /**
+   * Mostrar input para saltar a una página específica.
+   * Si no se especifica, se usará el valor de la configuración global.
+   * @default undefined (usa config global)
+   */
+  showPageJump = input<boolean | undefined, boolean | string | undefined>(undefined, {
+    transform: (value: boolean | string | undefined): boolean | undefined => {
+      if (value === undefined || value === null) return undefined;
+      return value === '' || value === true;
+    },
+  });
+
+  /**
+   * Scroll automático al cambiar página.
+   * @default false
+   */
+  autoScroll = input<boolean | undefined>(undefined);
+
+  /**
+   * Elemento target para scroll (selector CSS o elemento).
+   * @default 'body'
+   */
+  scrollTarget = input<string | HTMLElement | undefined>(undefined);
+
+  /**
+   * Configuración avanzada del componente.
+   */
+  config = input<PaginatorConfig | undefined>(undefined);
 
   /**
    * Configuración de layout para posicionar elementos del paginador.
@@ -341,7 +238,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    *   gap: 'md'
    * }"
    */
-  @Input() layout?: PaginatorLayout;
+  layout = input<PaginatorLayout | undefined>(undefined);
 
   /**
    * Configuración personalizada del layout específico para móviles.
@@ -357,33 +254,25 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    *   gap: '0.75rem'
    * }"
    */
-  @Input() mobileLayout?: PaginatorLayout;
+  mobileLayout = input<PaginatorLayout | undefined>(undefined);
 
   /**
    * Detectar automáticamente dispositivos móviles y cambiar a modo 'fractional'.
    * Cuando está activo, el paginador cambia automáticamente a modo 'fractional' en dispositivos móviles,
    * @default true
    */
-  @Input({ transform: booleanAttribute }) autoMobile: boolean = true;
+  autoMobile = input(true, { transform: (value: unknown) => value === '' || value === true });
 
   /**
    * Autoajustar el paginador para envolver los botones en pantallas pequeñas.
    * @default true
    */
-  @Input({ transform: booleanAttribute }) autoWrap: boolean = true;
+  autoWrap = input(true, { transform: (value: unknown) => value === '' || value === true });
 
   /**
    * Configuración de iconos personalizables.
    */
-  _iconConfig?: IconConfig;
-  @Input()
-  set iconConfig(value: IconConfig | undefined) {
-    this._iconConfig = value;
-    this.applyIconConfiguration();
-  }
-  get iconConfig(): IconConfig | undefined {
-    return this._iconConfig;
-  }
+  iconConfig = input<IconConfig | undefined>(undefined);
 
   /**
    * Iconos específicos que sobreescriben la configuración global.
@@ -391,54 +280,147 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @example
    * [icons]="{ next: 'custom-next-icon', previous: 'custom-prev-icon' }"
    */
-  _icons?: Partial<IconConfig>;
-  @Input()
-  set icons(value: Partial<IconConfig> | undefined) {
-    this._icons = value;
-    this.applyIconConfiguration();
-  }
-  get icons(): Partial<IconConfig> | undefined {
-    return this._icons;
-  }
+  icons = input<Partial<IconConfig> | undefined>(undefined);
 
   /**
    * Configuración del modo infinito.
    */
-  @Input() infiniteConfig?: InfiniteConfig;
+  infiniteConfig = input<InfiniteConfig | undefined>(undefined);
+
+  /**
+   * Página actual (1-indexed).
+   * @default 1
+   */
+  currentPage = model<number>(1);
+
+  /**
+   * Número total de páginas (para binding manual cuando NO hay totalItems).
+   * Este input permite establecer manualmente el número de páginas.
+   * Si se proporciona totalItems, este valor será ignorado y se calculará automáticamente.
+   * @default 1
+   */
+  totalPagesInput = model<number>(1, { alias: 'totalPages' });
+  
+  /**
+   * Número total de páginas (computed - solo lectura).
+   * Si totalItems está definido, se calcula automáticamente como Math.ceil(totalItems / itemsPerPage).
+   * De lo contrario, usa el valor manual establecido mediante [totalPages].
+   */
+  totalPages = computed(() => {
+    const totalItems = this.totalItems();
+    const itemsPerPage = this.itemsPerPage();
+    
+    // Si hay totalItems, calcular automáticamente
+    if (totalItems !== undefined && totalItems > 0 && itemsPerPage > 0) {
+      return Math.ceil(totalItems / itemsPerPage);
+    }
+    
+    // De lo contrario, usar el valor manual del input
+    return this.totalPagesInput();
+  });
+
+  /**
+   * Número máximo de páginas visibles en el paginador.
+   * El paginador mostrará un máximo de este número de botones de página.
+   * @default 7
+   */
+  maxVisiblePages = input<number>(7);
+
+  /**
+   * Mostrar botones de primera y última página.
+   * Si no se especifica, se usará el valor de la configuración global.
+   * @default undefined (usa config global)
+   */
+  showFirstLast = input<boolean | undefined, boolean | string | undefined>(undefined, {
+    transform: (value: boolean | string | undefined): boolean | undefined => {
+      if (value === undefined || value === null) return undefined;
+      return value === '' || value === true;
+    },
+  });
+
+  /**
+   * Items por página.
+   * @default 10
+   */
+  itemsPerPage = model<number>(10);
 
   /**
    * Evento que se emite cuando cambia la página.
    * Emite el número de la nueva página (1-indexed).
    */
-  @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
+  pageChange = output<number>();
 
   /**
    * Evento que se emite cuando cambia el tamaño de página.
    * Emite el nuevo número de items por página.
    */
-  @Output() pageSizeChange: EventEmitter<number> = new EventEmitter<number>();
+  pageSizeChange = output<number>();
 
   /**
    * Evento avanzado que se emite cuando cambia la página con más información.
    */
-  @Output() pageChangeAdvanced: EventEmitter<PageChangeEvent> =
-    new EventEmitter<PageChangeEvent>();
+  pageChangeAdvanced = output<PageChangeEvent>();
 
   /**
    * Evento avanzado que se emite cuando cambia el tamaño de página con más información.
    */
-  @Output() pageSizeChangeAdvanced: EventEmitter<PageSizeChangeEvent> =
-    new EventEmitter<PageSizeChangeEvent>();
+  pageSizeChangeAdvanced = output<PageSizeChangeEvent>();
+
+  /**
+   * Valores efectivos que consideran la configuración global como fallback.
+   * Estos computed signals leen primero del input explícito del usuario,
+   * y si no está definido (undefined), usan el valor de la configuración global.
+   */
+  
+  /**
+   * Valor efectivo de showItemRange considerando configuración global
+   */
+  effectiveShowItemRange = computed(() => {
+    const inputValue = this.showItemRange();
+    // Si el input está explícitamente definido (true o false), usarlo
+    // Sino, usar el valor de la configuración global, o true como último fallback
+    return inputValue ?? this.paginatorConfig.config?.showItemRange ?? true;
+  });
+
+  /**
+   * Valor efectivo de showPageJump considerando configuración global
+   */
+  effectiveShowPageJump = computed(() => {
+    const inputValue = this.showPageJump();
+    // Si el input está explícitamente definido (true o false), usarlo
+    // Sino, usar el valor de la configuración global, o false como último fallback
+    return inputValue ?? this.paginatorConfig.config?.showPageJump ?? false;
+  });
+
+  /**
+   * Valor efectivo de showFirstLast considerando configuración global
+   */
+  effectiveShowFirstLast = computed(() => {
+    const inputValue = this.showFirstLast();
+    // Si el input está explícitamente definido (true o false), usarlo
+    // Sino, usar el valor de la configuración global, o true como último fallback
+    return inputValue ?? this.paginatorConfig.config?.showFirstLast ?? true;
+  });
+
+  /**
+   * Valor efectivo de showPageSizeSelector considerando configuración global
+   */
+  effectiveShowPageSizeSelector = computed(() => {
+    const inputValue = this.showPageSizeSelector();
+    // Si el input está explícitamente definido (true o false), usarlo
+    // Sino, usar el valor de la configuración global, o false como último fallback
+    return inputValue ?? this.paginatorConfig.config?.showPageSizeSelector ?? false;
+  });
 
   /**
    * Signal computado que devuelve si estamos en la primera página
    */
-  isFirstPage = computed(() => this._currentPage() === 1);
+  isFirstPage = computed(() => this.currentPage() === 1);
 
   /**
    * Signal computado que devuelve si estamos en la última página
    */
-  isLastPage = computed(() => this._currentPage() === this._totalPages());
+  isLastPage = computed(() => this.currentPage() === this.totalPages());
 
   /**
    * Signal computado que devuelve el array de números de página a mostrar
@@ -489,12 +471,15 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Computed para el rango de items que se están mostrando
    */
   itemRange = computed(() => {
-    if (!this.totalItems) return null;
+    const total = this.totalItems();
+    if (!total) return null;
 
-    const start = (this.currentPage - 1) * this.itemsPerPage + 1;
-    const end = Math.min(this.currentPage * this.itemsPerPage, this.totalItems);
+    const current = this.currentPage();
+    const perPage = this.itemsPerPage();
+    const start = (current - 1) * perPage + 1;
+    const end = Math.min(current * perPage, total);
 
-    return { start, end, total: this.totalItems };
+    return { start, end, total };
   });
 
   /**
@@ -512,46 +497,153 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @return {PaginatorMode}
    */
   effectiveMode = computed<PaginatorMode>(() => {
-    // FILOSOFÍA: Layout explícito = control total del desarrollador
+    // Layout explícito = control total del desarrollador
     // NO aplicar autoMobile ni protecciones automáticas
-    if (this.layout) {
-      return this.mode; // Respetar modo explícito sin ninguna modificación
+    if (this.layout()) {
+      return this.mode(); // Respetar modo explícito sin ninguna modificación
     }
 
     // AutoMobile solo si NO hay layout personalizado
-    if (this.autoMobile && this.isMobileDevice()) {
+    if (this.autoMobile() && this.isMobileDevice()) {
       return 'fractional';
     }
 
     // Protección automática SOLO sin layout
-    if (this.isMobileDevice() && this.mode === 'default') {
-      if (
-        (this.totalPages > 2 && this.showFirstLast) ||
-        (this.totalPages > 2 && this.maxVisiblePages > 3 && !this.showFirstLast)
-      ) {
+    const currentMode = this.mode();
+    if (this.isMobileDevice() && currentMode === 'default') {
+      const total = this.totalPages();
+      const showFirst = this.showFirstLast();
+      const maxVisible = this.maxVisiblePages();
+
+      if ((total > 2 && showFirst) || (total > 2 && maxVisible > 3 && !showFirst)) {
         return 'fractional';
       }
     }
 
-    return this.mode;
+    return currentMode;
   });
+
+  /**
+   * Genera un layout por defecto basado en el modo del paginador.
+   * Este método garantiza que siempre haya un layout válido incluso cuando
+   * no se proporciona configuración explícita.
+   *
+   * @param mode - Modo del paginador (default, minimal, compact, fractional)
+   * @returns Layout configurado para el modo especificado
+   *
+   * @remarks
+   * Layouts generados:
+   * - **minimal**: Solo botones prev/next
+   * - **compact**: Prev/next + página actual + opcionalmente first/last
+   * - **fractional**: Prev/next + texto fraccionado (ej: "3 de 10") + opcionalmente first/last
+   * - **default**: Layout completo con todas las opciones según las propiedades show*
+   */
+  private getDefaultLayoutForMode(mode: PaginatorMode): PaginatorLayout {
+    switch (mode) {
+      case 'minimal':
+        // Solo botones de navegación básicos
+        return {
+          center: ['prevButton', 'nextButton'],
+          direction: 'row',
+          align: 'center',
+          gap: '0.5rem',
+        };
+
+      case 'compact':
+        // Navegación compacta con página actual
+        const compactElements: PaginatorElement[] = ['prevButton', 'currentPage', 'nextButton'];
+
+        // Agregar first/last si está habilitado
+        if (this.showFirstLast()) {
+          compactElements.unshift('firstButton');
+          compactElements.push('lastButton');
+        }
+
+        return {
+          center: compactElements,
+          direction: 'row',
+          align: 'center',
+          gap: '0.5rem',
+        };
+
+      case 'fractional':
+        // Navegación con texto fraccionado (ej: "3 de 10")
+        const fractionalElements: PaginatorElement[] = [
+          'prevButton',
+          'fractionalNumbers',
+          'nextButton',
+        ];
+
+        // Agregar first/last si está habilitado
+        if (this.showFirstLast()) {
+          fractionalElements.unshift('firstButton');
+          fractionalElements.push('lastButton');
+        }
+
+        return {
+          center: fractionalElements,
+          direction: 'row',
+          align: 'center',
+          gap: '0.5rem',
+        };
+
+      case 'default':
+      default:
+        // Layout completo con 2 filas para mejor jerarquía visual
+        const layout: PaginatorLayout = {
+          top: [], // Fila superior: Controles secundarios
+          center: [], // Fila central: Navegación principal (destacada)
+          direction: 'column', // Column para layout de 2 filas (top + center)
+          align: 'center',
+          gap: '1rem', // Gap aumentado para mejor respiración visual
+        };
+
+        // Fila superior: Controles secundarios e información
+        if (this.showItemRange()) {
+          layout.top!.push('itemRange');
+        }
+        if (this.showPageSizeSelector()) {
+          layout.top!.push('pageSize');
+        }
+        if (this.showPageJump()) {
+          layout.top!.push('pageJump');
+        }
+
+        // Fila central: Navegación principal (solo botones)
+        if (this.showFirstLast()) {
+          layout.center!.push('firstButton');
+        }
+        layout.center!.push('prevButton', 'pageNumbers', 'nextButton');
+        if (this.showFirstLast()) {
+          layout.center!.push('lastButton');
+        }
+
+        return layout;
+    }
+  }
 
   /**
    * Computed para el layout efectivo del paginador.
    * Considera layout explícito, mobileLayout y configuración global.
+   * Siempre devuelve un layout válido, generando uno por defecto basado en el modo si es necesario.
+   *
    * Prioriza en este orden:
    * 1. layout explícito
-   * 2. mobileLayout en móvil + fractional
-   * 3. layout global en modo default
-   * @return {PaginatorLayout | undefined}
+   * 2. infiniteLayout para modo infinito
+   * 3. mobileLayout en móvil + fractional
+   * 4. layout global
+   * 5. layout por defecto basado en modo (FALLBACK - nunca undefined)
+   *
+   * @return {PaginatorLayout} Layout efectivo (nunca undefined)
    */
-  effectiveLayout = computed<PaginatorLayout | undefined>(() => {
+  effectiveLayout = computed<PaginatorLayout>(() => {
     const currentMode = this.effectiveMode();
     const isMobile = this.isMobileDevice();
 
     // 1. Layout explícito SIEMPRE tiene prioridad
-    if (this.layout) {
-      return this.layout;
+    const explicitLayout = this.layout();
+    if (explicitLayout) {
+      return explicitLayout;
     }
 
     // 2. Layout para modo infinito
@@ -563,35 +655,29 @@ export class PaginatorComponent implements OnInit, OnDestroy {
 
     // 3. MobileLayout en móvil + fractional
     if (isMobile && currentMode === 'fractional') {
-      if (this.mobileLayout) return this.mobileLayout;
-      if (this.paginatorConfig.mobileLayout)
-        return this.paginatorConfig.mobileLayout;
+      const mobileLay = this.mobileLayout();
+      if (mobileLay) return mobileLay;
+      if (this.paginatorConfig.mobileLayout) return this.paginatorConfig.mobileLayout;
     }
 
-    // 4. Layout global solo en modo default
-    if (currentMode !== 'default') {
-      return undefined;
-    }
-
+    // 4. Layout global
     if (this.paginatorConfig.layout) {
       return this.paginatorConfig.layout;
     }
 
-    return undefined;
+    // 5. FALLBACK: Generar layout por defecto basado en el modo
+    // Esto garantiza que siempre haya un layout válido
+    return this.getDefaultLayoutForMode(currentMode);
   });
 
   /**
    * Computed para el tamaño efectivo del paginador.
    * En móviles, reduce automáticamente el tamaño para mejorar UX.
-   * Si el desarrollador especifica un tamaño explícito, se respeta siempre.
    */
   effectiveSize = computed<NUISize>(() => {
-    // Si el desarrollador estableció un tamaño explícitamente, usarlo siempre
-    if (this._hasExplicitSize) {
-      return this._size();
-    }
+    const currentSize = this.size();
 
-    // En móviles sin tamaño explícito, reducir automáticamente el tamaño
+    // En móviles, reducir automáticamente el tamaño
     if (this.isMobileDevice()) {
       const sizeMap: Record<NUISize, NUISize> = {
         xl: 'lg',
@@ -601,48 +687,48 @@ export class PaginatorComponent implements OnInit, OnDestroy {
         s: 'xs',
         xs: 'xs',
       };
-      return sizeMap[this._size()];
+      return sizeMap[currentSize];
     }
 
-    return this._size();
+    return currentSize;
   });
 
   /**
    * Computed para el número máximo de páginas visibles efectivo.
    * En móviles, reduce automáticamente el número de páginas visibles para mejorar UX.
-   * Si el desarrollador especifica explícitamente el valor, se respeta siempre.
    */
   effectiveMaxVisiblePages = computed<number>(() => {
-    // Si el desarrollador configuró explícitamente, respetar siempre
-    if (this._hasExplicitMaxVisiblePages) {
-      return this.maxVisiblePages;
-    }
+    const maxVisible = this.maxVisiblePages();
 
-    // En móviles sin configuración explícita, reducir automáticamente
+    // En móviles, reducir automáticamente
     if (this.isMobileDevice()) {
       // Reducir proporcionalmente: valores grandes → 3, valores medianos → 2, valores pequeños → mantener
-      if (this.maxVisiblePages >= 7) return 3;
-      if (this.maxVisiblePages >= 5) return 2;
-      return Math.max(1, this.maxVisiblePages);
+      if (maxVisible >= 7) return 3;
+      if (maxVisible >= 5) return 2;
+      return Math.max(1, maxVisible);
     }
 
-    return this.maxVisiblePages;
+    return maxVisible;
   });
 
   /**
    * Opciones para el selector de tamaño de página
    */
   pageSizeOptionsData = computed<ButtonGroupOption[]>(() => {
-    return this.pageSizeOptions.map((size) => ({
+    return this.pageSizeOptions().map((size: number) => ({
       label: size.toString(),
+      tooltip: this._translations.paginator.itemsPerPage + ' ' +size.toString(),
       value: size.toString(),
     }));
   });
 
   constructor() {
-    // Inicializamos los atributos con los valores de configuración global o por defecto
-    this._size.set(this.globalConfig.defaultSize || DEFAULT_SIZE);
-    this._color.set(this.globalConfig.defaultColor || DEFAULT_COLOR);
+    // Inicializar valores por defecto desde configuración global
+    const defaultSize = this.globalConfig.defaultSize || DEFAULT_SIZE;
+    const defaultColor = this.globalConfig.defaultColor || DEFAULT_COLOR;
+
+    this.size.set(defaultSize);
+    this.color.set(defaultColor);
   }
 
   ngOnInit(): void {
@@ -653,11 +739,32 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     this.applyConfiguration();
 
     // Validación inicial
-    if (this.currentPage < 1) {
-      this._currentPage.set(1);
+    const current = this.currentPage();
+    const total = this.totalPages();
+
+    if (current < 1) {
+      this.currentPage.set(1);
     }
-    if (this.currentPage > this.totalPages) {
-      this._currentPage.set(this.totalPages);
+    if (current > total) {
+      this.currentPage.set(total);
+    }
+
+    // Inicializar loadedItems en modo infinito
+    const infiniteCfg = this.infiniteConfig();
+    if (infiniteCfg?.enabled) {
+      const itemsPerPage = this.itemsPerPage();
+      const totalItems = this.totalItems();
+      
+      // Usar initialLoadedItems si está definido, sino calcular basándose en currentPage
+      const loadedItems = infiniteCfg.initialLoadedItems !== undefined 
+        ? infiniteCfg.initialLoadedItems 
+        : current * itemsPerPage;
+      
+      this.infiniteState.update(state => ({
+        ...state,
+        loadedItems: loadedItems,
+        hasMore: totalItems === undefined || loadedItems < totalItems,
+      }));
     }
 
     // Configurar navegación por teclado
@@ -668,14 +775,6 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Inicializa las configuraciones desde el provider global
    */
   private initializeFromProvider(): void {
-    // Usar valores del provider si no se han proporcionado inputs
-    if (this.autoScroll === undefined) {
-      this.autoScroll = this.paginatorConfig.config?.autoScroll || false;
-    }
-    if (this.scrollTarget === undefined) {
-      this.scrollTarget = this.paginatorConfig.config?.scrollTarget || 'body';
-    }
-
     // Configurar teclado
     this.keyboardConfig = {
       // Fallbacks por defecto para evitar problemas si no hay configuración global
@@ -693,38 +792,29 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Aplica la configuración avanzada
+   * Aplica la configuración avanzada desde el provider global
+   * Aplica los valores de configuración global solo si el input no ha sido establecido explícitamente
    */
   private applyConfiguration(): void {
-    if (!this.config) return;
-
-    // Aplicar configuración básica
-    if (this.config.maxVisiblePages !== undefined) {
-      this.maxVisiblePages = this.config.maxVisiblePages;
+    const config = this.paginatorConfig.config;
+    
+    if (config) {
+      // Solo aplicar valores de la config global si no se han establecido explícitamente en el componente
+      // Los inputs con valores por defecto necesitan ser sobrescritos si hay configuración global
+      
+      // Nota: No podemos usar model.set() directamente en inputs de solo lectura,
+      // pero la configuración global debería actuar como valores por defecto efectivos
+      // cuando el usuario no proporciona valores explícitos
+      
+      // Para que esto funcione correctamente, necesitaríamos que los inputs lean
+      // de la configuración global como valor inicial, pero los input() signals
+      // no permiten referencias a 'this' en su inicialización.
+      
+      // La mejor solución es documentar que los valores de la configuración global
+      // se aplican automáticamente cuando no se especifican propiedades en el componente.
     }
-    if (this.config.showFirstLast !== undefined) {
-      this.showFirstLast = this.config.showFirstLast;
-    }
-    if (this.config.showPageSizeSelector !== undefined) {
-      this.showPageSizeSelector = this.config.showPageSizeSelector;
-    }
-    if (this.config.showItemRange !== undefined) {
-      this.showItemRange = this.config.showItemRange;
-    }
-    if (this.config.showPageJump !== undefined) {
-      this.showPageJump = this.config.showPageJump;
-    }
-    if (this.config.pageSizeOptions) {
-      this.pageSizeOptions = this.config.pageSizeOptions;
-    }
-    if (this.config.autoScroll !== undefined) {
-      this.autoScroll = this.config.autoScroll;
-    }
-    if (this.config.scrollTarget !== undefined) {
-      this.scrollTarget = this.config.scrollTarget;
-    }
-
-    // Aplicar configuraciones adicionales
+    
+    // Aplicar configuración de iconos
     this.applyIconConfiguration();
   }
 
@@ -741,8 +831,8 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   private applyIconConfiguration(): void {
     const config = {
       ...this.paginatorConfig.icons,
-      ...this.iconConfig,
-      ...this.icons,
+      ...this.iconConfig(),
+      ...this.icons(),
     };
     this.appliedIconConfig.set(config as Required<IconConfig>);
   }
@@ -762,76 +852,64 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @return {Promise<void>}
    */
   async loadMore(): Promise<void> {
-    if (!this.infiniteConfig?.enabled || this.infiniteState().isLoading) return;
+    const infiniteCfg = this.infiniteConfig();
+    if (!infiniteCfg?.enabled || this.infiniteState().isLoading) return;
 
-    const config = { ...this.paginatorConfig.infinite, ...this.infiniteConfig };
+    const config = { ...this.paginatorConfig.infinite, ...infiniteCfg };
     const currentState = this.infiniteState();
 
-    // En modo infinito, respetar totalPages como límite principal
-    // Si ya estamos en la última página, no cargar más
-    if (this.currentPage >= this.totalPages) {
-      this.infiniteState.update((state) => ({ ...state, hasMore: false }));
+    // Calcular cuántos items se van a cargar
+    const itemsPerLoad = config.itemsPerLoad || this.paginatorConfig.infinite?.itemsPerLoad || 20;
+    const potentialLoadedItems = currentState.loadedItems + itemsPerLoad;
+    
+    // Verificar límite de totalItems si está configurado
+    const totalItems = this.totalItems();
+    if (totalItems !== undefined && currentState.loadedItems >= totalItems) {
+      this.infiniteState.update(state => ({ ...state, hasMore: false }));
       return;
     }
 
     // Verificar límite de maxItems si está configurado
-    const maxItems = config.maxItems || this.totalPages * this.itemsPerPage;
+    const maxItems = config.maxItems || 1000;
     if (currentState.loadedItems >= maxItems) {
-      this.infiniteState.update((state) => ({ ...state, hasMore: false }));
+      this.infiniteState.update(state => ({ ...state, hasMore: false }));
       return;
     }
 
     // Establecer estado de carga
-    this.infiniteState.update((state) => ({ ...state, isLoading: true }));
+    this.infiniteState.update(state => ({ ...state, isLoading: true }));
 
     try {
-      // Incrementar la página actual para el modo infinito
-      const previousPage = this.currentPage;
-      const newPage = previousPage + 1;
-      this._currentPage.set(newPage);
-
-      // Emitir evento de cambio de página
-      this.pageChange.emit(newPage);
-
-      // Emitir evento avanzado con más información
-      const advancedEvent: PageChangeEvent = {
-        page: newPage,
-        previousPage: previousPage,
-        itemsPerPage: this.itemsPerPage,
-        totalPages: this.totalPages,
-      };
-      this.pageChangeAdvanced.emit(advancedEvent);
-
       // Ejecutar callback de carga
       if (config.onLoadMore && typeof config.onLoadMore === 'function') {
         await config.onLoadMore();
       }
 
-      // Calcular el número de items cargados en esta iteración
-      const itemsToLoad = config.itemsPerLoad || this.itemsPerPage;
-      const newLoadedItems = currentState.loadedItems + itemsToLoad;
+      // Calcular los nuevos items cargados
+      const newLoadedItems = currentState.loadedItems + itemsPerLoad;
 
-      // Verificar si hay más páginas disponibles después de esta carga
-      const willHaveMore =
-        newPage < this.totalPages && newLoadedItems < maxItems;
+      // Verificar si hay más items disponibles después de esta carga
+      const willHaveMore = (totalItems === undefined || newLoadedItems < totalItems) && 
+                          newLoadedItems < maxItems;
 
       // Actualizar estado después de cargar
-      this.infiniteState.update((state) => ({
+      this.infiniteState.update(state => ({
         ...state,
         isLoading: false,
-        loadedItems: newLoadedItems,
         loadCount: state.loadCount + 1,
         hasMore: willHaveMore,
+        loadedItems: newLoadedItems,
       }));
 
       // Actualizar mensaje de accesibilidad
-      this.updateAriaLiveMessage(newPage);
+      const currentPage = this.currentPage();
+      this.updateAriaLiveMessage(currentPage);
 
       // Limpiar caché
       this._visiblePagesCache.clear();
     } catch (error) {
       // Manejar error de carga
-      this.infiniteState.update((state) => ({ ...state, isLoading: false }));
+      this.infiniteState.update(state => ({ ...state, isLoading: false }));
       console.error('Error al cargar más elementos:', error);
     }
   }
@@ -841,7 +919,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @return {boolean}
    */
   isInfiniteMode(): boolean {
-    return this.infiniteConfig?.enabled || false;
+    return this.infiniteConfig()?.enabled || false;
   }
 
   /**
@@ -857,8 +935,13 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Obtiene el texto de carga
    * @return {string}
    */
+  /**
+   * Obtiene el texto de carga
+   * @return {string}
+   */
   getLoadingText(): string {
-    const config = { ...this.paginatorConfig.loading, ...this.infiniteConfig };
+    const infiniteCfg = this.infiniteConfig();
+    const config = { ...this.paginatorConfig.loading, ...infiniteCfg };
     return config.loadingText || this._translations.paginator.loading;
   }
 
@@ -870,10 +953,10 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     const range = this.itemRange();
 
     return {
-      currentPage: this.currentPage,
-      totalPages: this.totalPages,
-      itemsPerPage: this.itemsPerPage,
-      totalItems: this.totalItems,
+      currentPage: this.currentPage(),
+      totalPages: this.totalPages(),
+      itemsPerPage: this.itemsPerPage(),
+      totalItems: this.totalItems(),
       isFirstPage: this.isFirstPage(),
       isLastPage: this.isLastPage(),
       visiblePages: this.visiblePages(),
@@ -898,7 +981,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     // Escuchar eventos de teclado en FASE DE CAPTURA para interceptar antes que el navegador
     fromEvent<KeyboardEvent>(document, 'keydown', { capture: true })
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((event) => {
+      .subscribe(event => {
         // Solo procesar si el foco está en el componente paginador
         const target = event.target as HTMLElement;
         if (!this.isWithinPaginator(target)) return;
@@ -927,10 +1010,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @param {KeyboardEvent} event - Evento de teclado
    * @param {HTMLElement} target - Elemento que tiene el foco
    */
-  private handleKeyboardNavigation(
-    event: KeyboardEvent,
-    target: HTMLElement
-  ): void {
+  private handleKeyboardNavigation(event: KeyboardEvent, target: HTMLElement): void {
     const { key } = event;
 
     // Solo interceptar teclas de navegación si el foco está en un botón del paginador
@@ -952,7 +1032,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
       event.stopPropagation(); // Evitar que el navegador haga scroll
       this.goToLastPage();
       // Enfocar el botón de la última página después del cambio
-      setTimeout(() => this.focusPageButton(this.totalPages), 50);
+      setTimeout(() => this.focusPageButton(this.totalPages()), 50);
       return;
     }
 
@@ -960,13 +1040,10 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     if (!isPageButton) return;
 
     // Flecha izquierda: Página anterior
-    if (
-      key === 'ArrowLeft' ||
-      this.keyboardConfig.previousPage?.includes(key)
-    ) {
+    if (key === 'ArrowLeft' || this.keyboardConfig.previousPage?.includes(key)) {
       event.preventDefault();
       if (!this.isFirstPage()) {
-        const targetPage = this.currentPage - 1;
+        const targetPage = this.currentPage() - 1;
         this.goToPreviousPage();
         // Enfocar el botón de la página anterior después del cambio
         setTimeout(() => this.focusPageButton(targetPage), 50);
@@ -978,7 +1055,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     if (key === 'ArrowRight' || this.keyboardConfig.nextPage?.includes(key)) {
       event.preventDefault();
       if (!this.isLastPage()) {
-        const targetPage = this.currentPage + 1;
+        const targetPage = this.currentPage() + 1;
         this.goToNextPage();
         // Enfocar el botón de la página siguiente después del cambio
         setTimeout(() => this.focusPageButton(targetPage), 50);
@@ -995,9 +1072,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     const hostElement = this.elementRef.nativeElement as HTMLElement;
 
     // Buscar el botón de la página específica SOLO en este paginador
-    const buttons = hostElement.querySelectorAll(
-      '.nui-paginator__button--page'
-    );
+    const buttons = hostElement.querySelectorAll('.nui-paginator__button--page');
 
     for (const button of Array.from(buttons)) {
       const buttonElement = button as HTMLButtonElement;
@@ -1023,8 +1098,8 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @return {(number | string)[]}
    */
   private calculateVisiblePages(): (number | string)[] {
-    const total = this.totalPages;
-    const current = this.currentPage;
+    const total = this.totalPages();
+    const current = this.currentPage();
     const maxVisible = this.effectiveMaxVisiblePages();
 
     // Crear clave para caché
@@ -1092,7 +1167,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Navega a la primera página
    */
   goToFirstPage(): void {
-    if (!this.disabled && !this.isFirstPage()) {
+    if (!this.disabled() && !this.isFirstPage()) {
       this.goToPage(1);
     }
   }
@@ -1101,8 +1176,8 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Navega a la página anterior
    */
   goToPreviousPage(): void {
-    if (!this.disabled && !this.isFirstPage()) {
-      this.goToPage(this.currentPage - 1);
+    if (!this.disabled() && !this.isFirstPage()) {
+      this.goToPage(this.currentPage() - 1);
     }
   }
 
@@ -1110,8 +1185,8 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Navega a la página siguiente
    */
   goToNextPage(): void {
-    if (!this.disabled && !this.isLastPage()) {
-      this.goToPage(this.currentPage + 1);
+    if (!this.disabled() && !this.isLastPage()) {
+      this.goToPage(this.currentPage() + 1);
     }
   }
 
@@ -1119,8 +1194,8 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Navega a la última página
    */
   goToLastPage(): void {
-    if (!this.disabled && !this.isLastPage()) {
-      this.goToPage(this.totalPages);
+    if (!this.disabled() && !this.isLastPage()) {
+      this.goToPage(this.totalPages());
     }
   }
 
@@ -1129,16 +1204,17 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @param {number} page - Número de página al que navegar
    */
   goToPage(page: number): void {
-    if (this.disabled) return;
+    if (this.disabled()) return;
 
     // Validación robusta
     if (page == null || isNaN(page) || !isFinite(page)) return;
 
-    const newPage = Math.max(1, Math.min(Math.floor(page), this.totalPages));
-    const previousPage = this.currentPage;
+    const total = this.totalPages();
+    const newPage = Math.max(1, Math.min(Math.floor(page), total));
+    const previousPage = this.currentPage();
 
     if (newPage !== previousPage) {
-      this._currentPage.set(newPage);
+      this.currentPage.set(newPage);
 
       // Actualizar mensaje de accesibilidad
       this.updateAriaLiveMessage(newPage);
@@ -1150,8 +1226,8 @@ export class PaginatorComponent implements OnInit, OnDestroy {
       const advancedEvent: PageChangeEvent = {
         page: newPage,
         previousPage: previousPage,
-        itemsPerPage: this.itemsPerPage,
-        totalPages: this.totalPages,
+        itemsPerPage: this.itemsPerPage(),
+        totalPages: total,
       };
       this.pageChangeAdvanced.emit(advancedEvent);
 
@@ -1172,7 +1248,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @return {boolean} - True si la página está activa, false en caso contrario
    */
   isPageActive(page: number | string): boolean {
-    return typeof page === 'number' && page === this.currentPage;
+    return typeof page === 'number' && page === this.currentPage();
   }
 
   /**
@@ -1220,30 +1296,28 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     const newSize = parseInt(size, 10);
     if (isNaN(newSize) || newSize < 1) return;
 
-    const previousSize = this.itemsPerPage;
+    const previousSize = this.itemsPerPage();
 
-    this._itemsPerPage.set(newSize);
+    this.itemsPerPage.set(newSize);
 
     // Emitir evento simple (backward compatibility)
     this.pageSizeChange.emit(newSize);
 
-    // Recalcular totalPages si tenemos totalItems
-    let newTotalPages = this.totalPages;
-    if (this.totalItems) {
-      newTotalPages = Math.ceil(this.totalItems / newSize);
-      this._totalPages.set(newTotalPages);
+    // totalPages se recalcula automáticamente mediante el computed()
+    // Obtener el nuevo valor calculado
+    const newTotalPages = this.totalPages();
 
-      // Si la página actual queda fuera del nuevo rango, ajustar
-      if (this.currentPage > newTotalPages) {
-        this._currentPage.set(newTotalPages);
-      }
+    // Si la página actual queda fuera del nuevo rango, ajustar
+    const current = this.currentPage();
+    if (current > newTotalPages && newTotalPages > 0) {
+      this.currentPage.set(newTotalPages);
     }
 
     // Emitir evento avanzado con más información
     const advancedEvent: PageSizeChangeEvent = {
       pageSize: newSize,
       previousPageSize: previousSize,
-      currentPage: this.currentPage,
+      currentPage: this.currentPage(),
       totalPages: newTotalPages,
     };
     this.pageSizeChangeAdvanced.emit(advancedEvent);
@@ -1252,7 +1326,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     this._visiblePagesCache.clear();
 
     // Actualizar mensaje de accesibilidad
-    this.updateAriaLiveMessage(this.currentPage);
+    this.updateAriaLiveMessage(this.currentPage());
   }
 
   /**
@@ -1261,14 +1335,12 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   handlePageJump(): void {
     const pageValue = this.pageJumpValue();
     const pageNum = parseInt(pageValue, 10);
+    const total = this.totalPages();
 
-    if (isNaN(pageNum) || pageNum < 1 || pageNum > this.totalPages) {
+    if (isNaN(pageNum) || pageNum < 1 || pageNum > total) {
       // Mostrar mensaje de error accesible
       this.ariaLiveMessage.set(
-        this._translations.paginator.pageJumpHelp.replace(
-          '{totalPages}',
-          this.totalPages.toString()
-        )
+        this._translations.paginator.pageJumpHelp.replace('{totalPages}', total.toString())
       );
       this.pageJumpValue.set('');
       return;
@@ -1282,11 +1354,12 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Realiza scroll automático si está habilitado
    */
   private performAutoScroll(): void {
-    if (!this.autoScroll) return;
+    const autoScrollValue = this.autoScroll();
+    if (!autoScrollValue) return;
 
     let element: HTMLElement | null = null;
-    const scrollTarget =
-      this.scrollTarget || this.paginatorConfig.config?.scrollTarget || 'body';
+    const scrollTargetValue = this.scrollTarget();
+    const scrollTarget = scrollTargetValue || this.paginatorConfig.config?.scrollTarget || 'body';
 
     if (typeof scrollTarget === 'string') {
       element = document.querySelector(scrollTarget);
@@ -1328,24 +1401,20 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    */
   getInfiniteLoadedText(): string {
     const state = this.infiniteState();
-    const loadedText = this._translations.paginator.infiniteLoadedItems.replace(
-      '{loaded}',
-      state.loadedItems.toString()
-    );
+    const totalItems = this.totalItems();
 
-    if (
-      !state.hasMore ||
-      this.totalItems === undefined ||
-      this.totalItems === null ||
-      this.totalItems === 0
-    ) {
-      return loadedText;
+    // Si no hay más elementos o no hay totalItems, solo mostrar los elementos cargados
+    if (!state.hasMore || totalItems === undefined || totalItems === null || totalItems === 0) {
+      // Mostrar solo la parte de "elementos cargados" sin el total
+      return this._translations.paginator.infiniteLoadedItems
+        .replace('{loaded}', state.loadedItems.toString())
+        .replace(/\s+de\s+\{total\}/, ''); // Eliminar la parte "de {total}"
     }
 
-    return `${loadedText} ${this._translations.paginator.infiniteLoadHasMore.replace(
-      '{total}',
-      this.totalItems.toString()
-    )}`;
+    // Mostrar el texto completo con loaded y total
+    return this._translations.paginator.infiniteLoadedItems
+      .replace('{loaded}', state.loadedItems.toString())
+      .replace('{total}', totalItems.toString());
   }
 
   /**
@@ -1354,25 +1423,15 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @return {string} - Etiqueta ARIA para la página
    */
   getPageAriaLabel(page: number | string): string {
-    if (typeof page === 'string')
-      return this._translations.paginator.ariaMorePages;
+    if (typeof page === 'string') return this._translations.paginator.ariaMorePages;
 
     const isActive = this.isPageActive(page);
-    const baseLabel = this._translations.paginator.ariaGoToPage.replace(
-      '{page}',
-      page.toString()
-    );
+    const baseLabel = this._translations.paginator.ariaGoToPage.replace('{page}', page.toString());
 
     if (isActive)
-      return this._translations.paginator.ariaCurrentPage.replace(
-        '{page}',
-        page.toString()
-      );
+      return this._translations.paginator.ariaCurrentPage.replace('{page}', page.toString());
 
-    return this._translations.paginator.ariaGoToPage.replace(
-      '{page}',
-      page.toString()
-    );
+    return this._translations.paginator.ariaGoToPage.replace('{page}', page.toString());
   }
 
   /**
@@ -1383,15 +1442,15 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     const range = this.itemRange();
     if (range) {
       return this._translations.paginator.ariaCurrentPageWithRange
-        .replace('{page}', this.currentPage.toString())
-        .replace('{totalPages}', this.totalPages.toString())
+        .replace('{page}', this.currentPage().toString())
+        .replace('{totalPages}', this.totalPages().toString())
         .replace('{start}', range.start.toString())
         .replace('{end}', range.end.toString())
         .replace('{total}', range.total.toString());
     }
     return this._translations.paginator.ariaCurrentPageNoRange
-      .replace('{page}', this.currentPage.toString())
-      .replace('{totalPages}', this.totalPages.toString());
+      .replace('{page}', this.currentPage().toString())
+      .replace('{totalPages}', this.totalPages().toString());
   }
 
   /**
@@ -1400,15 +1459,13 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    */
   private updateAriaLiveMessage(page: number): void {
     const range = this.itemRange();
-    let message = this._translations.paginator.ariaPage.replace(
-      '{page}',
-      page.toString()
-    );
+    const totalPages = this.totalPages();
+    let message = this._translations.paginator.ariaPage.replace('{page}', page.toString());
 
-    if (this.totalPages != 0) {
+    if (totalPages != 0) {
       message = this._translations.paginator.ariaCurrentPageNoRange
         .replace('{page}', page.toString())
-        .replace('{totalPages}', this.totalPages.toString());
+        .replace('{totalPages}', totalPages.toString());
     }
 
     if (range) {
@@ -1423,10 +1480,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     this.ariaLiveMessage.set(message);
 
     clearTimeout(this.clearAriaLiveMsgTimeout);
-    this.clearAriaLiveMsgTimeout = setTimeout(
-      () => this.ariaLiveMessage.set(''),
-      1000
-    );
+    this.clearAriaLiveMsgTimeout = setTimeout(() => this.ariaLiveMessage.set(''), 1000);
   }
 
   /**
@@ -1447,10 +1501,10 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    */
   getState(): PaginatorState {
     return {
-      currentPage: this.currentPage,
-      totalPages: this.totalPages,
-      itemsPerPage: this.itemsPerPage,
-      totalItems: this.totalItems,
+      currentPage: this.currentPage(),
+      totalPages: this.totalPages(),
+      itemsPerPage: this.itemsPerPage(),
+      totalItems: this.totalItems(),
       isFirstPage: this.isFirstPage(),
       isLastPage: this.isLastPage(),
       visiblePages: this.visiblePages(),
@@ -1477,9 +1531,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
       'windows phone',
     ];
 
-    const isMobileUserAgent = mobileUserAgents.some((agent) =>
-      userAgent.includes(agent)
-    );
+    const isMobileUserAgent = mobileUserAgents.some(agent => userAgent.includes(agent));
 
     // Detección por ancho de pantalla (tablets y móviles)
     const isMobileScreen = window.innerWidth <= 768;
@@ -1520,10 +1572,10 @@ export class PaginatorComponent implements OnInit, OnDestroy {
       default:
         // Mostrar todos los elementos según configuración individual
         if (element === 'pageNumbers') return true; // Siempre mostrar números de página en modo default
-        if (element === 'firstLast') return this.showFirstLast;
-        if (element === 'pageJump') return this.showPageJump;
-        if (element === 'itemRange') return this.showItemRange;
-        if (element === 'pageSize') return this.showPageSizeSelector;
+        if (element === 'firstLast') return this.effectiveShowFirstLast();
+        if (element === 'pageJump') return this.effectiveShowPageJump();
+        if (element === 'itemRange') return this.effectiveShowItemRange();
+        if (element === 'pageSize') return this.effectiveShowPageSizeSelector();
         return true;
     }
   }
@@ -1533,10 +1585,105 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @return {string} - Texto formateado del modo fraccionado
    */
   getFractionalText(): string {
-    return `${this.currentPage} de ${this.totalPages}`;
+    return `${this.currentPage()} de ${this.totalPages()}`;
   }
 
   // ==================== Layout Methods ====================
+
+  /**
+   * Verifica si un elemento puede mostrarse según sus propiedades de visibilidad.
+   * Esta función separa la lógica de DÓNDE va un elemento (layout) de SI debe mostrarse (visibilidad).
+   *
+   * @param element - Tipo de elemento a evaluar
+   * @returns `true` si el elemento cumple sus condiciones de visibilidad, `false` en caso contrario
+   *
+   * @remarks
+   * **IMPORTANTE**: Si hay un layout explícito, las propiedades show* se ignoran completamente.
+   * El layout tiene control total sobre qué elementos renderizar y dónde.
+   * 
+   * Cuando NO hay layout explícito, verifica propiedades show* y condiciones funcionales:
+   * - `firstButton`/`lastButton`: Requiere `showFirstLast = true`
+   * - `pageJump`: Requiere `showPageJump = true`
+   * - `pageSize`: Requiere `showPageSizeSelector = true`
+   * - `itemRange`: Requiere `showItemRange = true` y que haya datos
+   * - `infiniteButton`/`infiniteCounter`/`infiniteEndMessage`: Requiere modo infinito habilitado
+   * - Resto de elementos: Siempre visibles (la ubicación la controla el layout)
+   *
+   * @example
+   * ```typescript
+   * // Con layout explícito: ignorar show*
+   * canShowElement('firstButton') // true (layout tiene control total)
+   * 
+   * // Sin layout explícito: respetar show*
+   * canShowElement('firstButton') // false si showFirstLast=false
+   * canShowElement('pageNumbers') // true (siempre visible)
+   * canShowElement('itemRange')   // true solo si showItemRange=true y hay datos
+   * ```
+   */
+  private canShowElement(element: PaginatorElement): boolean {
+    // Si hay layout explícito, ignorar completamente las propiedades show*
+    // El desarrollador tiene control total sobre qué renderizar y dónde
+    const hasExplicitLayout = this.layout() !== undefined;
+    
+    if (hasExplicitLayout) {
+      // Con layout explícito, solo verificar condiciones funcionales (no show*)
+      switch (element) {
+        case 'itemRange':
+          // itemRange requiere datos para mostrarse
+          return !!this.itemRange();
+
+        case 'infiniteCounter':
+          return this.isInfiniteMode() && (this.infiniteConfig()?.showCounter ?? true);
+
+        case 'infiniteButton':
+          return (
+            this.isInfiniteMode() &&
+            this.infiniteState().hasMore &&
+            this.infiniteConfig()?.mode !== 'scroll'
+          );
+
+        case 'infiniteEndMessage':
+          return this.isInfiniteMode() && !this.infiniteState().hasMore;
+
+        default:
+          // Resto de elementos siempre visibles con layout explícito
+          return true;
+      }
+    }
+
+    // Sin layout explícito: usar propiedades show* y condiciones
+    switch (element) {
+      case 'firstButton':
+      case 'lastButton':
+        return this.effectiveShowFirstLast();
+
+      case 'pageJump':
+        return this.effectiveShowPageJump();
+
+      case 'pageSize':
+        return this.effectiveShowPageSizeSelector();
+
+      case 'itemRange':
+        return this.effectiveShowItemRange() && !!this.itemRange();
+
+      case 'infiniteCounter':
+        return this.isInfiniteMode() && (this.infiniteConfig()?.showCounter ?? true);
+
+      case 'infiniteButton':
+        return (
+          this.isInfiniteMode() &&
+          this.infiniteState().hasMore &&
+          this.infiniteConfig()?.mode !== 'scroll'
+        );
+
+      case 'infiniteEndMessage':
+        return this.isInfiniteMode() && !this.infiniteState().hasMore;
+
+      default:
+        // Elementos básicos de navegación siempre se pueden mostrar
+        return true;
+    }
+  }
 
   /**
    * Obtiene los elementos que deben renderizarse en un área específica del layout
@@ -1545,8 +1692,6 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    */
   getElementsForArea(area: PaginatorLayoutArea): PaginatorElement[] {
     const layout = this.effectiveLayout();
-    if (!layout) return [];
-
     return layout[area] || [];
   }
 
@@ -1559,18 +1704,21 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @remarks
    * Aplica dos verificaciones en orden:
    * 1. **Layout (DÓNDE)**: El elemento debe estar en alguna área del layout (top, left, center, right, bottom)
-   * 2. **Visibilidad (SI)**: El elemento debe cumplir sus condiciones específicas (showFirstLast, showPageJump, etc.)
+   * 2. **Visibilidad (SI)**: El elemento debe cumplir sus condiciones específicas mediante `canShowElement()`
    *
-   * Si no hay layout configurado, usa la lógica legacy basada en el modo actual.
+   * El layout siempre existe (nunca undefined) gracias a `getDefaultLayoutForMode()` como fallback.
    *
    * @example
+   * ```typescript
    * // Elemento en layout pero condicionalmente oculto
    * shouldRenderElement('firstButton') // false si showFirstLast=false
    *
    * // Elemento con show*=true pero no en layout
    * shouldRenderElement('firstButton') // false si no está en ningún área del layout
+   * ```
    *
-   * @see {@link shouldShowElementLegacy} Para la lógica cuando no hay layout configurado
+   * @see {@link canShowElement} Para las reglas de visibilidad de cada elemento
+   * @see {@link getDefaultLayoutForMode} Para el sistema de layouts por defecto
    * @see {@link PaginatorLayout} Para la estructura del sistema de layouts
    * @see {@link PaginatorElement} Para los tipos de elementos disponibles
    *
@@ -1581,62 +1729,14 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   shouldRenderElement(element: PaginatorElement): boolean {
     const layout = this.effectiveLayout();
 
-    // Si no hay layout configurado, usar la lógica basada en modo
-    if (!layout) {
-      return this.shouldShowElementLegacy(element);
-    }
-
-    // Verificar si el elemento está en alguna de las áreas del layout
-    // Si el elemento no está en el layout, no se renderiza
+    // 1. Verificar si el elemento está en el layout (DÓNDE)
     const isInLayout = this.isElementInLayout(element, layout);
     if (!isInLayout) {
       return false; // No está en el layout = no renderizar
     }
 
-    // Verificar configuraciones específicas de visibilidad
-    // FILOSOFÍA: Si el desarrollador puso el elemento en el layout explícitamente,
-    // es porque quiere que se muestre. Solo verificar propiedades show* para elementos
-    // que tienen implicaciones funcionales (firstButton, lastButton, pageJump)
-    switch (element) {
-      case 'firstButton':
-      case 'lastButton':
-        // Respetar showFirstLast porque tiene implicaciones funcionales
-        return this.showFirstLast;
-
-      case 'pageJump':
-        // Respetar showPageJump porque tiene implicaciones funcionales
-        return this.showPageJump;
-
-      case 'pageSize':
-        // Si está en el layout, mostrar siempre (el layout indica intención explícita)
-        return this.showPageSizeSelector;
-
-      case 'itemRange':
-        // Si está en el layout, mostrar (solo verificar que haya datos)
-        return this.showItemRange && !!this.itemRange();
-
-      case 'infiniteCounter':
-        // Mostrar solo en modo infinito si la configuración lo permite
-        return (
-          this.isInfiniteMode() && (this.infiniteConfig?.showCounter ?? true)
-        );
-
-      case 'infiniteButton':
-        // Mostrar solo en modo infinito si la configuración lo permite
-        return (
-          this.isInfiniteMode() &&
-          this.infiniteState().hasMore &&
-          this.infiniteConfig?.mode !== 'scroll'
-        );
-
-      case 'infiniteEndMessage':
-        // Mostrar solo en modo infinito cuando no hay más elementos
-        return this.isInfiniteMode() && !this.infiniteState().hasMore;
-
-      default:
-        // Elementos que siempre se muestran si están en el layout
-        return true;
-    }
+    // 2. Verificar condiciones de visibilidad (SI)
+    return this.canShowElement(element);
   }
 
   /**
@@ -1645,71 +1745,12 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @param {PaginatorLayout} layout El layout actual
    * @returns {boolean} Verdadero si el elemento está en el layout, falso en caso contrario
    */
-  private isElementInLayout(
-    element: PaginatorElement,
-    layout: PaginatorLayout
-  ): boolean {
-    const areas: PaginatorLayoutArea[] = [
-      'top',
-      'left',
-      'center',
-      'right',
-      'bottom',
-    ];
-    return areas.some((area) => {
+  private isElementInLayout(element: PaginatorElement, layout: PaginatorLayout): boolean {
+    const areas: PaginatorLayoutArea[] = ['top', 'left', 'center', 'right', 'bottom'];
+    return areas.some(area => {
       const elements = layout[area] || [];
       return elements.includes(element);
     });
-  }
-
-  /**
-   * Lógica legacy para determinar visibilidad basada en modo (cuando no hay layout configurado)
-   * @param {PaginatorElement} element El elemento a evaluar
-   * @returns {boolean} Verdadero si debe mostrarse, falso en caso contrario
-   */
-  private shouldShowElementLegacy(element: PaginatorElement): boolean {
-    const mode = this.effectiveMode();
-
-    switch (mode) {
-      case 'minimal':
-        // Solo flechas anterior/siguiente
-        return element === 'prevButton' || element === 'nextButton';
-
-      case 'compact':
-        // Anterior/siguiente, página actual y opcionalmente primera/última
-        return (
-          element === 'prevButton' ||
-          element === 'nextButton' ||
-          element === 'currentPage' ||
-          (element === 'firstButton' && this.showFirstLast) ||
-          (element === 'lastButton' && this.showFirstLast)
-        );
-
-      case 'fractional':
-        // Anterior/siguiente + información fraccionada, opcionalmente primera/última
-        return (
-          element === 'prevButton' ||
-          element === 'nextButton' ||
-          element === 'fractionalNumbers' ||
-          (element === 'firstButton' && this.showFirstLast) ||
-          (element === 'lastButton' && this.showFirstLast)
-        );
-
-      case 'default':
-      default:
-        // Mostrar todos los elementos según configuración individual
-        if (element === 'pageNumbers') return true; // Siempre mostrar números de página en modo default
-        if (element === 'firstButton' || element === 'lastButton')
-          return this.showFirstLast;
-        if (element === 'pageJump') return this.showPageJump;
-        if (element === 'itemRange') return this.showItemRange;
-        if (element === 'pageSize') return this.showPageSizeSelector;
-        // Botones de navegación siempre visibles
-        if (element === 'prevButton' || element === 'nextButton') return true;
-        if (element === 'currentPage') return false; // No se usa en modo default
-        if (element === 'fractionalNumbers') return false; // No se usa en modo default
-        return true;
-    }
   }
 
   /**

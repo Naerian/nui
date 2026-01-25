@@ -1,12 +1,12 @@
 import {
   Component,
-  Input,
-  Output,
-  EventEmitter,
   TemplateRef,
-  ContentChildren,
-  QueryList,
-  ViewChild,
+  input,
+  output,
+  contentChildren,
+  viewChild,
+  booleanAttribute,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { ActionMenuItem } from '../models/action-menu.model';
 
@@ -14,57 +14,104 @@ import { ActionMenuItem } from '../models/action-menu.model';
   selector: 'nui-action-menu-item',
   standalone: true,
   templateUrl: './action-menu-item.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ActionMenuItemComponent {
-  @Input() action?: string; // Nombre o identificador de la acción a ejecutar
-  @Input() label?: string; // Texto que se muestra en el item del menú
-  @Input() title?: string; // Título para accesibilidad
-  @Input() icon?: string; // Icono asociado al item (puede ser una clase de icono)
-  @Input() shortcut?: string; // Atajo de teclado para el item (visual, no funcional)
-  @Input() id?: string; // ID único para el item
-  @Input() disabled = false; // Indica si el item está deshabilitado
+  // ========================================================================
+  // INPUTS (Signals)
+  // ========================================================================
 
-  @Output() onAction = new EventEmitter<void>();
+  /** Nombre o identificador de la acción. */
+  readonly action = input<string>();
 
-  // Capturamos solo los hijos directos (<action-menu-item> dentro de este)
-  @ContentChildren(ActionMenuItemComponent, { descendants: false })
-  childrenComponents!: QueryList<ActionMenuItemComponent>;
+  /** Texto visible. */
+  readonly label = input<string>();
 
-  // Para renderizar contenido personalizado si no usan [label]
-  @ViewChild('contentTpl', { read: TemplateRef, static: true })
-  contentTpl!: TemplateRef<any>;
+  /** Título accesible. */
+  readonly title = input<string>();
+
+  /** Clase del icono. */
+  readonly icon = input<string>();
+
+  /** Atajo visual (ej: 'Ctrl+C'). */
+  readonly shortcut = input<string>();
+
+  /** ID único (opcional, se genera si falta). */
+  readonly id = input<string>();
+
+  /** Estado deshabilitado. */
+  readonly disabled = input(false, { transform: booleanAttribute });
+
+  /** * Indica si es un separador.
+   * Útil si alguien quiere usar el componente para pintar una línea.
+   */
+  readonly separator = input(false, { transform: booleanAttribute });
+
+  // ========================================================================
+  // OUTPUTS
+  // ========================================================================
+
+  readonly onAction = output<void>();
+
+  // ========================================================================
+  // QUERIES (Signals)
+  // ========================================================================
+
+  /** * Capturamos hijos directos para soportar anidación declarativa
+   * <nui-action-menu-item>
+   * <nui-action-menu-item>...</nui-action-menu-item>
+   * </nui-action-menu-item>
+   */
+  readonly childrenComponents = contentChildren(ActionMenuItemComponent, {
+    descendants: false,
+  });
+
+  /** Referencia al template interno para proyección de contenido custom */
+  readonly contentTpl = viewChild.required<TemplateRef<any>>('contentTpl');
+
+  // ========================================================================
+  // PUBLIC API (Used by Parent)
+  // ========================================================================
 
   /**
-   * Función para crear un ID único para cada item del menú.
-   * Se utiliza para identificar los items en el menú.
+   * Convierte este componente (declarativo) en un objeto de datos (ActionMenuItem).
+   * El componente padre (ActionMenu) llama a esto para construir su modelo.
    */
-  createItemId(): string {
-    return `menu-item-${crypto.randomUUID()}`;
-  }
-
-  // Método para convertir este componente a un MenuItem
-  // Esto es útil para convertir componentes hijos en items del menú
-  toMenuItem(): ActionMenuItem {
-    const children = this.childrenComponents
+  toMenuItem(): ActionMenuItem | null {
+    // 1. Convertir hijos recursivamente
+    const children = this.childrenComponents()
       .map((c) => c.toMenuItem())
-      .filter(Boolean);
+      .filter((item): item is ActionMenuItem => !!item);
 
-    // Creamos el objeto
+    // 2. Determinar si usamos el template custom
+    // Si no hay label, asumimos que el contenido proyectado es lo que se debe mostrar
+    const hasCustomContent = !this.label() && !this.separator();
+    const templateRef = hasCustomContent ? this.contentTpl() : undefined;
+
+    // 3. Generar ID si no existe
+    const finalId = this.id() || `menu-item-${crypto.randomUUID()}`;
+
+    // 4. Construir objeto
     const menuItem: ActionMenuItem = {
-      action: this.action || '',
-      label: this.label || '',
-      icon: this.icon,
-      shortcut: this.shortcut,
-      templateRef: !this.label ? this.contentTpl : null,
-      id: this.id || this.createItemId(),
+      id: finalId,
+      action: this.action(),
+      label: this.label(),
+      title: this.title() || this.label() || '',
+      icon: this.icon(),
+      shortcut: this.shortcut(),
+      disabled: this.disabled(),
+      separator: this.separator(),
+      templateRef: templateRef,
       children: children.length ? children : undefined,
-      disabled: this.disabled,
+
+      // La función onAction debe capturar el emit del output
       onAction: () => this.onAction.emit(),
-      title: this.title || this.label || '',
     };
 
-    // Si no tiene label ni templateRef, no lo incluimos
-    if (!menuItem.label && !menuItem.templateRef) return null as any;
+    // Validación básica: Si no es separador y no tiene label ni template, es inválido
+    if (!menuItem.separator && !menuItem.label && !menuItem.templateRef) {
+      return null;
+    }
 
     return menuItem;
   }

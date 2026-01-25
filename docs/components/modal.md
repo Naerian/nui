@@ -892,7 +892,7 @@ Usa: https://webaim.org/resources/contrastchecker/
 ```css
 /* Modal Container */
 --surface-primary: #ffffff; /* Fondo del modal */
---surface-secondary: #f8fafc; /* Hover bot�n close */
+--nui-bg-secondary: #f8fafc; /* Hover bot�n close */
 --text-primary: #0f172a; /* Texto principal */
 --text-secondary: #64748b; /* Texto secundario */
 
@@ -1517,7 +1517,7 @@ export class HeaderExampleComponent {
       
       .progress-bar {
         height: 8px;
-        background: var(--surface-secondary);
+        background: var(--nui-bg-secondary);
         border-radius: 4px;
         overflow: hidden;
         margin-bottom: 0.5rem;
@@ -1669,7 +1669,7 @@ export class FormModalComponent {
       transition: all 0.2s;
       
       &:hover {
-        background: var(--surface-secondary);
+        background: var(--nui-bg-secondary);
       }
       
       &.selected {

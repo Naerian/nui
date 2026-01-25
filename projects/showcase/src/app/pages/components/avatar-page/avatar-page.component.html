@@ -1,0 +1,135 @@
+<div class="docs-page">
+  <div class="page-header">
+    <h1>{{ 'components.avatar.title' | translate }}</h1>
+    <p class="subtitle">{{ 'components.avatar.subtitle' | translate }}</p>
+  </div>
+
+  <section class="section">
+    <app-section-title
+      [title]="'components.avatar.basic.title' | translate"
+      anchor="basico"
+    ></app-section-title>
+    <p class="section-description">{{ 'components.avatar.basic.description' | translate }}</p>
+
+    <div class="example-preview">
+      <nui-avatar [src]="avatarUrl1" alt="John Doe"></nui-avatar>
+    </div>
+
+    <app-code-block [examples]="basicExamples"></app-code-block>
+  </section>
+
+  <section class="section">
+    <app-section-title
+      [title]="'components.avatar.types.title' | translate"
+      anchor="tipos"
+    ></app-section-title>
+    <p class="section-description">{{ 'components.avatar.types.description' | translate }}</p>
+
+    <div class="section-note info">
+      <i class="ri-information-line"></i>
+      <p [innerHTML]="'components.avatar.types.note' | translate"></p>
+    </div>
+
+    <div class="example-preview">
+      <nui-avatar [src]="avatarUrl2" alt="User Image"></nui-avatar>
+      <nui-avatar initials="JD" color="primary"></nui-avatar>
+      <nui-avatar icon="ri-user-star-line" color="secondary"></nui-avatar>
+      <nui-avatar alt="Alan Turing" color="accent"></nui-avatar>
+      <nui-avatar></nui-avatar>
+    </div>
+
+    <app-code-block [examples]="contentTypeExamples"></app-code-block>
+  </section>
+
+  <section class="section">
+    <app-section-title
+      [title]="'components.avatar.variants.title' | translate"
+      anchor="variantes"
+    ></app-section-title>
+    <p class="section-description">{{ 'components.avatar.variants.description' | translate }}</p>
+
+    <div class="example-preview">
+      <nui-avatar [src]="avatarUrl3" variant="circular"></nui-avatar>
+      <nui-avatar [src]="avatarUrl3" variant="rounded"></nui-avatar>
+      <nui-avatar [src]="avatarUrl3" variant="square"></nui-avatar>
+    </div>
+
+    <app-code-block [examples]="variantExamples"></app-code-block>
+  </section>
+
+  <section class="section">
+    <app-section-title
+      [title]="'components.avatar.sizes.title' | translate"
+      anchor="tamanos"
+    ></app-section-title>
+    <p class="section-description">{{ 'components.avatar.sizes.description' | translate }}</p>
+
+    <div class="example-preview align-bottom">
+      <nui-avatar size="xs" initials="XS"></nui-avatar>
+      <nui-avatar size="sm" initials="SM"></nui-avatar>
+      <nui-avatar size="md" initials="MD"></nui-avatar>
+      <nui-avatar size="lg" initials="LG"></nui-avatar>
+      <nui-avatar size="xl" initials="XL"></nui-avatar>
+    </div>
+
+    <app-code-block [examples]="sizeExamples"></app-code-block>
+  </section>
+
+  <section class="section">
+    <app-section-title
+      [title]="'components.avatar.colors.title' | translate"
+      anchor="colores"
+    ></app-section-title>
+    <p class="section-description">{{ 'components.avatar.colors.description' | translate }}</p>
+
+    <div class="example-preview">
+      <nui-avatar initials="P" color="primary"></nui-avatar>
+      <nui-avatar initials="S" color="secondary"></nui-avatar>
+      <nui-avatar initials="A" color="accent"></nui-avatar>
+      <nui-avatar initials="S" color="success"></nui-avatar>
+      <nui-avatar initials="I" color="info"></nui-avatar>
+      <nui-avatar initials="W" color="warning"></nui-avatar>
+      <nui-avatar initials="D" color="danger"></nui-avatar>
+    </div>
+
+    <app-code-block [examples]="colorExamples"></app-code-block>
+  </section>
+
+  <section class="section">
+    <app-section-title
+      [title]="'components.avatar.customSize.title' | translate"
+      anchor="custom-size"
+    ></app-section-title>
+    <p class="section-description">{{ 'components.avatar.customSize.description' | translate }}</p>
+
+    <div class="section-note">
+      <p [innerHTML]="'components.avatar.customSize.note' | translate"></p>
+    </div>
+
+    <div class="example-preview">
+      <nui-avatar [customSize]="120" [src]="avatarUrl1" variant="rounded"></nui-avatar>
+      <nui-avatar [customSize]="80" initials="CS" color="primary"></nui-avatar>
+    </div>
+
+    <app-code-block [examples]="customSizeExamples"></app-code-block>
+  </section>
+
+  <section class="section">
+    <app-section-title
+      [title]="'components.avatar.error.title' | translate"
+      anchor="error"
+    ></app-section-title>
+    <p class="section-description">{{ 'components.avatar.error.description' | translate }}</p>
+
+    <div class="example-preview">
+      <nui-avatar
+        src="https://invalid-url-example.com/fail.jpg"
+        initials="ER"
+        color="danger"
+        alt="Error Fallback"
+      ></nui-avatar>
+    </div>
+
+    <app-code-block [examples]="errorExamples"></app-code-block>
+  </section>
+</div>

@@ -1,66 +1,56 @@
 <button
-  #btnContent
-  class="nui-btn
-         nui-btn--{{ effectiveSize }}
-         nui-btn--{{ effectiveColor }}
-         nui-btn--{{ effectiveVariant }}
-         "
-  [disabled]="disabled || loading"
-  [class.nui-btn--icon]="isIconOnly"
-  [class.nui-btn--outline]="effectiveVariant === 'outline'"
-  [class.nui-btn--ghost]="effectiveVariant === 'ghost'"
-  [class.nui-btn--disabled]="disabled"
-  [class.nui-btn--loading]="loading"
-  [class.nui-btn--full]="width === 'full'"
-  [class.nui-btn--fit]="width === 'fit'"
-  [title]="_title()"
-  [attr.aria-disabled]="disabled || loading"
-  [attr.aria-busy]="loading"
-  [attr.aria-label]="computedAriaLabel"
-  [attr.type]="type"
-  (click)="clickOnButton($event)"
+  #btnNative
+  class="nui-btn"
+  [class.nui-btn--xs]="effectiveSize() === 'xs'"
+  [class.nui-btn--sm]="effectiveSize() === 'sm'"
+  [class.nui-btn--md]="effectiveSize() === 'md'"
+  [class.nui-btn--lg]="effectiveSize() === 'lg'"
+  [class.nui-btn--xl]="effectiveSize() === 'xl'"
+  class="nui-btn--{{ effectiveColor() }}"
+  [class.nui-btn--solid]="effectiveVariant() === 'solid'"
+  [class.nui-btn--outline]="effectiveVariant() === 'outline'"
+  [class.nui-btn--ghost]="effectiveVariant() === 'ghost'"
+  [class.nui-btn--icon]="isIconOnly()"
+  [class.nui-btn--loading]="loading()"
+  [class.nui-btn--disabled]="disabled()"
+  [class.nui-btn--full]="width() === 'full'"
+  [class.nui-btn--fit]="width() === 'fit'"
+  [disabled]="disabled() || loading()"
+  [attr.type]="type()"
+  [attr.aria-label]="computedAriaLabel()"
+  [attr.aria-busy]="loading()"
+  [title]="title()"
+  (click)="handleClick($event)"
 >
-  <!-- Spinner de carga - posición start -->
-  @if (loading && loadingPosition === 'start') {
+  @if (loading() && loadingPosition() === 'start') {
     <span class="nui-btn__spinner nui-btn__spinner--start" aria-hidden="true">
       <i class="ri-loader-4-line"></i>
     </span>
   }
-
-  <!-- Icono inicial (si existe y está en posición start) -->
-  @if (icon && iconPosition === 'start' && (!loading || loadingPosition !== 'center')) {
-    <i [class]="icon" class="nui-btn__icon nui-btn__icon--start" aria-hidden="true"></i>
+  @if (icon() && iconPosition() === 'start' && (!loading() || loadingPosition() !== 'start')) {
+    <i [class]="icon()" class="nui-btn__icon nui-btn__icon--start" aria-hidden="true"></i>
   }
 
-  <!-- Contenido del botón - Siempre se renderiza, CSS maneja visibilidad -->
-  @if (loading && loadingPosition === 'center') {
-    <!-- Contenido oculto cuando el spinner está en center -->
-    <span class="nui-btn__content nui-btn__content--hidden">
-      <ng-content></ng-content>
-      {{ label }}
-    </span>
-  } @else {
-    <!-- Contenido visible normalmente -->
-    <span class="nui-btn__content" [class.nui-btn__content--empty]="!hasVisibleContent">
-      <ng-content></ng-content>
-      {{ label }}
-    </span>
-  }
+  <span
+    class="nui-btn__content"
+    [class.nui-btn__content--hidden]="loading() && loadingPosition() === 'center'"
+    [class.nui-btn__content--empty]="!hasVisibleContent()"
+  >
+    <ng-content></ng-content>
+    @if (label()) {
+      <span>{{ label() }}</span>
+    }
+  </span>
 
-  <!-- Spinner de carga - posición center (reemplaza contenido) -->
-  @if (loading && loadingPosition === 'center') {
+  @if (loading() && loadingPosition() === 'center') {
     <span class="nui-btn__spinner nui-btn__spinner--center" aria-hidden="true">
       <i class="ri-loader-4-line"></i>
     </span>
   }
-
-  <!-- Icono final (si existe y está en posición end) -->
-  @if (icon && iconPosition === 'end' && (!loading || loadingPosition !== 'center')) {
-    <i [class]="icon" class="nui-btn__icon nui-btn__icon--end" aria-hidden="true"></i>
+  @if (icon() && iconPosition() === 'end' && (!loading() || loadingPosition() !== 'end')) {
+    <i [class]="icon()" class="nui-btn__icon nui-btn__icon--end" aria-hidden="true"></i>
   }
-
-  <!-- Spinner de carga - posición end -->
-  @if (loading && loadingPosition === 'end') {
+  @if (loading() && loadingPosition() === 'end') {
     <span class="nui-btn__spinner nui-btn__spinner--end" aria-hidden="true">
       <i class="ri-loader-4-line"></i>
     </span>

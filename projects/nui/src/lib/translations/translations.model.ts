@@ -356,8 +356,7 @@ export interface NUITranslations {
     loadMore: string; // "Cargar más"
     loading: string; // "Cargando..."
     pageJumpHelp: string; // "Página inválida. Ingrese un número entre 1 y {totalPages}."
-    infiniteLoadedItems: string; // "{loaded} elementos cargados"
-    infiniteLoadHasMore: string; // "de {total} totales"
+    infiniteLoadedItems: string; // "{loaded} elementos cargados de {total}"
     infiniteLoadEnd: string; // "No hay más elementos que mostrar"
     // ARIA labels
     ariaPagination: string; // "Paginación"

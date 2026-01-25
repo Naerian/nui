@@ -1,22 +1,21 @@
-@use "../../../../styles/variables/avatar/avatar-variables";
+@use '../../../../styles/variables/avatar/avatar-variables';
 
+// ============================================================================
+// HOST & BASE
+// ============================================================================
 .nui-avatar {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
-  user-select: none;
   vertical-align: middle;
-
-  // Color por defecto
+  flex-shrink: 0; // Evita que se aplaste en flex containers
+  overflow: hidden;
+  user-select: none;
   background-color: var(--nui-avatar-default-bg);
   color: var(--nui-avatar-default-color);
   font-weight: var(--nui-avatar-font-weight);
-  line-height: var(--nui-avatar-line-height);
-
-  // Transición suave
+  line-height: 1; // Base sólida para evitar saltos
   transition: var(--nui-avatar-transition);
 
   // ===== VARIANTES DE FORMA =====
@@ -27,14 +26,13 @@
     }
   }
 
-  // ===== TAMAÑOS =====
+  // ===== TAMAÑOS (Standard) =====
   $sizes: xs, sm, md, lg, xl;
   @each $size in $sizes {
     &--#{$size} {
       width: var(--nui-avatar-size-#{$size});
       height: var(--nui-avatar-size-#{$size});
       font-size: var(--nui-avatar-font-size-#{$size});
-      line-height: var(--nui-avatar-font-size-#{$size});
 
       .nui-avatar__icon {
         font-size: var(--nui-avatar-icon-size-#{$size});
@@ -52,8 +50,11 @@
   }
 }
 
-// ===== ELEMENTOS INTERNOS =====
+// ============================================================================
+// ELEMENTOS INTERNOS
+// ============================================================================
 
+// IMAGEN
 .nui-avatar__image {
   width: 100%;
   height: 100%;
@@ -63,14 +64,18 @@
 
 .nui-avatar__initials,
 .nui-avatar__fallback {
-  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-transform: var(--nui-avatar-text-transform, uppercase);
-  line-height: var(--nui-avatar-line-height);
 }
 
 .nui-avatar__icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  line-height: var(--nui-avatar-line-height);
+  font-size: 1em;
+  line-height: 1;
 }

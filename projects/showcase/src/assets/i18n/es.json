@@ -15,6 +15,9 @@
     "theming": "Temas",
     "components": "Componentes",
     "button": "Botón",
+    "avatar": "Avatar",
+    "buttonGroup": "Button Group",
+    "paginator": "Paginador",
     "actionMenu": "Menú de Acciones",
     "examples": "Ejemplos",
     "playground": "Playground"
@@ -222,8 +225,121 @@
         "note": "El template <code>#item</code> recibe el item completo como contexto (<code>let-item</code>). Las directivas <code>menu-header</code> y <code>menu-footer</code> permiten una sintaxis más simple y clara que PrimeNG, evitando ng-template innecesarios.",
         "clickNote": "<strong>Importante:</strong> Al usar templates personalizados, debes manejar el evento click manualmente con <code>(click)=\"handleAction(item)\"</code>. El evento <code>onItemAction</code> solo se emite automáticamente con items por defecto.",
         "htmlTitle": "Template HTML",
-        "tsTitle": "Datos del Componente",
+        "tsTitle": "Lógica del Componente (TypeScript)",
         "cssTitle": "Estilos CSS"
+      }
+    },
+    "avatar": {
+      "title": "Avatar",
+      "subtitle": "Componente gráfico para representar usuarios, entidades o marcas mediante imágenes, letras o iconos",
+      "basic": {
+        "title": "Uso Básico",
+        "description": "Muestra un avatar simple cargando una imagen externa. Es la forma más común de representación de usuario.",
+        "codeTitle": "Avatar con Imagen"
+      },
+      "types": {
+        "title": "Tipos de Contenido y Prioridad",
+        "description": "El componente decide inteligentemente qué mostrar basándose en los datos disponibles. Esta lógica asegura que siempre se muestre algo significativo.",
+        "note": "<strong>Prioridad de renderizado:</strong> 1. Imagen (si carga) &gt; 2. Iniciales &gt; 3. Icono &gt; 4. Fallback (Letra del Alt) &gt; 5. Icono por defecto.",
+        "codeTitle": "Jerarquía de Contenido"
+      },
+      "variants": {
+        "title": "Variantes de Forma",
+        "description": "El avatar soporta tres formas geométricas para adaptarse a diferentes contextos de diseño: <code>circular</code> (predeterminado), <code>rounded</code> y <code>square</code>.",
+        "codeTitle": "Formas Disponibles"
+      },
+      "sizes": {
+        "title": "Tamaños",
+        "description": "Cinco tamaños predefinidos que escalan armoniosamente el contenedor, la tipografía y los iconos: <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code> y <code>xl</code>.",
+        "codeTitle": "Escala de Tamaños"
+      },
+      "colors": {
+        "title": "Colores",
+        "description": "Personaliza el fondo y el color del texto utilizando la paleta del sistema. Ideal para diferenciar usuarios o estados cuando no hay imagen.",
+        "codeTitle": "Paleta de Colores"
+      },
+      "customSize": {
+        "title": "Tamaño Personalizado",
+        "description": "Define dimensiones exactas en píxeles cuando los tamaños estándar no encajen. El tamaño de la fuente y los iconos se calcula proporcionalmente de forma automática.",
+        "note": "El input <code>customSize</code> anula el input <code>size</code>. El cálculo interno mantiene la legibilidad de las iniciales.",
+        "codeTitle": "Dimensiones en Píxeles"
+      },
+      "error": {
+        "title": "Manejo de Errores (Fallback)",
+        "description": "Sistema de recuperación automática. Si la URL de la imagen falla (error 404), el componente cambia instantáneamente a mostrar las iniciales o el icono de respaldo sin romper el diseño.",
+        "codeTitle": "Ejemplo de Error de Carga"
+      }
+    },
+    "buttonGroup": {
+      "title": "Button Group",
+      "subtitle": "Conjunto de botones agrupados para selección única (Radio) o múltiple (Checkbox)",
+      "basic": {
+        "title": "Uso Básico",
+        "description": "El caso más simple acepta un array de strings. Por defecto, actúa como un selector de opción única (Radio).",
+        "codeTitle": "Ejemplo con Strings"
+      },
+      "modes": {
+        "title": "Modos de Selección",
+        "description": "Permite cambiar el tipo de selección del botón entre radiobutton y checkbox",
+        "note": "Cambia a <code>mode='checkbox'</code> para permitir seleccionar múltiples opciones a la vez. El valor devuelto será un Array.",
+        "codeTitle": "Modo Multiselección"
+      },
+      "segmented": {
+        "title": "Variante Segmented",
+        "description": "Estilo visual tipo 'iOS Segmented Control'. Ideal para conmutadores de vistas (ej: Mes/Año, Lista/Mapa).",
+        "codeTitle": "Estilo Segmentado"
+      },
+      "complex": {
+        "title": "Objetos Complejos",
+        "note": "Mapea propiedades de objetos arbitrarios usando <code>labelBy</code>, <code>valueBy</code> y <code>disabledBy</code>.",
+        "codeTitle": "Mapeo de Datos"
+      },
+      "icons": {
+        "title": "Con Iconos",
+        "note": "Soporte para iconos Remix Icon. Usa <code>iconOnly='true'</code> para una botonera compacta tipo barra de herramientas.",
+        "codeTitle": "Toolbar de Iconos"
+      },
+      "styles": {
+        "title": "Estilos y Tamaños",
+        "description": "Compatible con todo el sistema de variantes (Solid, Outline), colores y tamaños de NUI.",
+        "codeTitle": "Personalización"
+      },
+      "width": {
+        "title": "Ancho Completo",
+        "note": "Usa <code>width='full'</code> para que los botones se expandan y ocupen todo el espacio disponible equitativamente.",
+        "codeTitle": "Botones Expansibles"
+      }
+    },
+    "paginator": {
+      "title": "Paginator",
+      "subtitle": "Componente avanzado para navegación de datos con soporte para layouts flexibles y carga infinita",
+      "basic": {
+        "title": "Uso Básico",
+        "description": "Configuración estándar con navegación numérica. Soporta binding bidireccional de página y tamaño.",
+        "codeTitle": "Ejemplo Estándar"
+      },
+      "styles": {
+        "title": "Estilos y Variantes",
+        "description": "Soporta todos los colores del sistema, variantes (Solid, Outline, Ghost) y modos predefinidos como 'Minimal'.",
+        "codeTitle": "Personalización Visual"
+      },
+      "layout": {
+        "title": "Layout Personalizado",
+        "description": "La característica más potente. Define exactamente dónde va cada elemento (top, left, center, right, bottom) usando un objeto de configuración.",
+        "note": "<strong>Sistema de Áreas:</strong> Puedes mover el selector de tamaño a la izquierda, poner el resumen de items arriba, o crear cualquier composición que necesite tu diseño. Cuando se establece un layout, los atributos como <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> y <code>showPageJump</code> se ignoran porque el layout personalizado tiene control total sobre qué mostrar y dónde.",
+        "tsTitle": "Lógica del Componente (TypeScript)",
+        "htmlTitle": "Plantilla (HTML)"
+      },
+      "infinite": {
+        "title": "Carga Infinita / Ver Más",
+        "description": "Transforma el paginador en un botón 'Cargar Más' con estado de loading integrado. Ideal para listas móviles o feeds.",
+        "codeTitle": "Modo Button Load More"
+      },
+      "sizes": {
+        "title": "Opciones de Tamaño de Página",
+        "description": "Define un conjunto personalizado de opciones para el tamaño de página.",
+        "note": "Usando el input <code>size</code> podrás ofrecer a los usuarios un conjunto específico de tamaños de página para elegir.",
+        "codeTitle": "Tamaños Personalizados"
       }
     }
   }

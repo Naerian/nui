@@ -1,14 +1,14 @@
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  signal,
   ChangeDetectionStrategy,
-  forwardRef,
+  Component,
   ElementRef,
+  computed,
+  forwardRef,
   inject,
-  booleanAttribute,
+  input,
+  output,
+  signal,
+  viewChildren,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -17,48 +17,27 @@ import {
   ButtonGroupOption,
   ButtonGroupVisualVariant,
 } from './models/button-group.model';
-import { NUI_CONFIG, NUISize, NUIColor, NUIVariant, DEFAULT_COLOR, DEFAULT_SIZE, DEFAULT_VARIANT } from '../../configs';
+import {
+  NUI_CONFIG,
+  NUISize,
+  NUIColor,
+  NUIVariant,
+  DEFAULT_COLOR,
+  DEFAULT_SIZE,
+  DEFAULT_VARIANT,
+} from '../../configs';
 import { ButtonWidth } from '../button/models/button.model';
 
-/**
- * ButtonGroupComponent
- *
- * Componente de grupo de botones con selección tipo radio o checkbox.
- * Similar a toggle-button pero con soporte para multiselección.
- *
- * @example
- * // Modo radio (selección única)
- * <nui-button-group
- *   [options]="viewOptions"
- *   mode="radio"
- *   [(value)]="selectedView"
- * />
- *
- * @example
- * // Modo checkbox (multiselección)
- * <nui-button-group
- *   [options]="formatOptions"
- *   mode="checkbox"
- *   [(value)]="selectedFormats"
- * />
- *
- * @example
- * // Estilo segmented (iOS)
- * <nui-button-group
- *   [options]="periodOptions"
- *   mode="radio"
- *   visualVariant="segmented"
- *   [(value)]="selectedPeriod"
- * />
- *
- * @example
- * // Con iconos
- * <nui-button-group
- *   [options]="alignOptions"
- *   [iconOnly]="true"
- *   color="primary"
- * />
- */
+// Interfaz interna normalizada para el template
+interface NormalizedOption {
+  label: string;
+  value: any;
+  tooltip?: string;
+  icon?: string;
+  disabled: boolean;
+  original: any; // Referencia al objeto original por si acaso
+}
+
 @Component({
   selector: 'nui-button-group',
   standalone: true,
@@ -76,232 +55,165 @@ import { ButtonWidth } from '../button/models/button.model';
 })
 export class ButtonGroupComponent implements ControlValueAccessor {
   private readonly _nuiConfig = inject(NUI_CONFIG);
+  private readonly _el = inject(ElementRef);
 
-  // ==================
+  // ========================================================================
   // INPUTS
-  // ==================
+  // ========================================================================
 
-  /**
-   * Opciones disponibles
-   */
-  @Input({ required: true }) options: ButtonGroupOption[] | any[] = [];
+  /** Opciones disponibles (Objetos o Primitivos) */
+  readonly options = input.required<any[]>();
 
-  /**
-   * Modo de selección
-   * - 'radio': Selección única (default)
-   * - 'checkbox': Multiselección
-   */
-  @Input() mode: ButtonGroupMode = 'radio';
+  /** Modo de selección: 'radio' | 'checkbox' */
+  readonly mode = input<ButtonGroupMode>('radio');
 
-  /**
-   * Variante visual
-   * - 'grouped': Botones separados con espacios (default)
-   * - 'segmented': Botones unidos sin espacios, estilo iOS
-   */
-  @Input() visualVariant: ButtonGroupVisualVariant = 'grouped';
+  /** Estilo visual: 'grouped' (separados) | 'segmented' (iOS style) */
+  readonly visualVariant = input<ButtonGroupVisualVariant>('grouped');
 
-  /**
-   * Nombre de la propiedad para el label
-   */
-  @Input() labelBy = 'label';
+  // Mappers para objetos complejos
+  readonly labelBy = input('label');
+  readonly valueBy = input('value');
+  readonly tooltipBy = input('tooltip');
+  readonly iconBy = input('icon');
+  readonly disabledBy = input('disabled');
 
-  /**
-   * Nombre de la propiedad para el value
-   */
-  @Input() valueBy = 'value';
+  /** Configuración visual */
+  readonly size = input<NUISize>();
+  readonly color = input<NUIColor>();
+  readonly variant = input<NUIVariant>();
+  readonly width = input<ButtonWidth>('auto');
 
-  /**
-   * Nombre de la propiedad para el icon
-   */
-  @Input() iconBy = 'icon';
+  /** Estados globales */
+  readonly disabled = input(false);
+  readonly iconOnly = input(false);
 
-  /**
-   * Nombre de la propiedad para disabled
-   */
-  @Input() disabledBy = 'disabled';
-
-  /**
-   * Tamaño de los botones
-   * @default 'md' (o valor configurado globalmente)
-   */
-  @Input() size?: NUISize;
-
-  /**
-   * Color de los botones
-   * @default 'primary' (o valor configurado globalmente)
-   */
-  @Input() color?: NUIColor;
-
-  /**
-   * Variante visual
-   * @default 'solid' (o valor configurado globalmente)
-   */
-  @Input() variant?: NUIVariant;
-
-  /**
-   * Obtiene el color con fallback: Personalizado > Global > Por defecto
-   */
-  protected get effectiveColor(): NUIColor {
-    return this.color ?? this._nuiConfig?.defaultColor ?? DEFAULT_COLOR;
-  }
-
-  /**
-   * Obtiene el tamaño con fallback: Personalizado > Global > Por defecto
-   */
-  protected get effectiveSize(): NUISize {
-    return this.size ?? this._nuiConfig?.defaultSize ?? DEFAULT_SIZE;
-  }
-
-  /**
-   * Obtiene la variante con fallback: Personalizado > Global > Por defecto
-   */
-  protected get effectiveVariant(): NUIVariant {
-    return this.variant ?? this._nuiConfig?.defaultVariant ?? DEFAULT_VARIANT;
-  }
-
-  /**
-   * Si el componente está deshabilitado
-   */
-  @Input({ transform: booleanAttribute }) disabled = false;
-
-  /**
-   * Si muestra solo iconos (sin texto)
-   */
-  @Input({ transform: booleanAttribute }) iconOnly = false;
-
-  /**
-   * Ancho del botón.
-   * - 'auto': Ancho automático basado en el contenido (default)
-   * - 'full': Ocupa todo el ancho del contenedor (100%)
-   * - 'fit': Se ajusta exactamente al contenido (fit-content)
-   * @default 'auto'
-   */
-  @Input() width: ButtonWidth = 'auto';
-
-  /**
-   * Valor seleccionado
-   */
-  @Input() set value(val: any) {
-    this.writeValue(val);
-  }
-  get value(): any {
-    return this.selectedValue();
-  }
-
-  // ==================
+  // ========================================================================
   // OUTPUTS
-  // ==================
+  // ========================================================================
+
+  readonly valueChange = output<any>();
+
+  // ========================================================================
+  // STATE & COMPUTED
+  // ========================================================================
+
+  /** Valor interno controlado por CVA */
+  protected readonly innerValue = signal<any>(null);
+
+  /** Referencia a los botones del DOM para gestión de foco */
+  private readonly buttonElements = viewChildren<ElementRef<HTMLButtonElement>>('btnOption');
 
   /**
-   * Emite cuando cambia el valor
+   * Normalizamos las opciones una sola vez.
+   * El template itera sobre esto, que ya tiene formato { label, value, icon, disabled }
    */
-  @Output() valueChange = new EventEmitter<any>();
+  protected readonly normalizedOptions = computed<NormalizedOption[]>(() => {
+    const rawOptions = this.options();
+    if (!rawOptions) return [];
 
-  // ==================
-  // SIGNALS
-  // ==================
+    const labelKey = this.labelBy();
+    const valueKey = this.valueBy();
+    const tooltipKey = this.tooltipBy();
+    const iconKey = this.iconBy();
+    const disabledKey = this.disabledBy();
 
-  /**
-   * Valor(es) seleccionado(s)
-   */
-  selectedValue = signal<any>(null);
+    const options = rawOptions.map(opt => {
+      // Soporte para array de primitivos o de objetos
+      const isObject = typeof opt === 'object' && opt !== null;
 
-  /**
-   * Índice del elemento con foco actual para navegación por teclado
-   */
-  private focusedIndex = signal<number>(-1);
+      const option = {
+        label: isObject ? opt[labelKey] : String(opt),
+        value: isObject ? opt[valueKey] : opt,
+        tooltip: isObject ? opt[tooltipKey] : String(opt),
+        icon: isObject ? opt[iconKey] : undefined,
+        disabled: isObject ? !!opt[disabledKey] : false,
+        original: opt,
+      };
 
-  /**
-   * Referencia al elemento host del componente
-   */
-  private hostElement = inject(ElementRef<HTMLElement>);
+      return option;
+    });
 
-  // ==================
+    return options;
+  });
+
+  /** Configuración efectiva (Global vs Local) */
+  protected readonly effectiveSize = computed(
+    () => this.size() ?? this._nuiConfig?.defaultSize ?? DEFAULT_SIZE
+  );
+  protected readonly effectiveColor = computed(
+    () => this.color() ?? this._nuiConfig?.defaultColor ?? DEFAULT_COLOR
+  );
+  protected readonly effectiveVariant = computed(
+    () => this.variant() ?? this._nuiConfig?.defaultVariant ?? DEFAULT_VARIANT
+  );
+
+  /** Clases CSS del contenedor principal */
+  protected readonly containerClasses = computed(() => {
+    const classes = [
+      'nui-button-group',
+      `nui-button-group--${this.effectiveSize()}`,
+      `nui-button-group--${this.effectiveVariant()}`,
+      `nui-button-group--${this.effectiveColor()}`,
+    ];
+
+    if (this.disabled()) classes.push('nui-button-group--disabled');
+    if (this.iconOnly()) classes.push('nui-button-group--icon-only');
+    if (this.visualVariant() === 'segmented') classes.push('nui-button-group--segmented');
+
+    // Clases de ancho
+    if (this.width() === 'full') classes.push('nui-button-group--full');
+    if (this.width() === 'fit') classes.push('nui-button-group--fit');
+    if (this.width() === 'auto') classes.push('nui-button-group--auto');
+
+    return classes.join(' ');
+  });
+
+  // ========================================================================
   // CONTROL VALUE ACCESSOR
-  // ==================
+  // ========================================================================
 
-  private onChange: (value: any) => void = () => {};
-  private onTouched: () => void = () => {};
+  private onChange = (_: any) => {};
+  private onTouched = () => {};
 
   writeValue(value: any): void {
-    if (this.mode === 'checkbox') {
-      this.selectedValue.set(Array.isArray(value) ? value : []);
+    if (this.mode() === 'checkbox') {
+      this.innerValue.set(Array.isArray(value) ? value : []);
     } else {
-      this.selectedValue.set(value);
+      this.innerValue.set(value);
     }
   }
 
-  registerOnChange(fn: (value: any) => void): void {
+  registerOnChange(fn: any): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
+  registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
+  // ========================================================================
+  // PUBLIC METHODS (Used by Template)
+  // ========================================================================
 
-  // ==================
-  // MÉTODOS PÚBLICOS
-  // ==================
+  /** Sirve para comprobar si un botón está seleccionado */
+  isSelected(optionValue: any): boolean {
+    const selected = this.innerValue();
 
-  /**
-   * Obtiene el label de una opción
-   */
-  getOptionLabel(option: any): string {
-    return option[this.labelBy] ?? '';
-  }
-
-  /**
-   * Obtiene el value de una opción
-   */
-  getOptionValue(option: any): any {
-    return option[this.valueBy];
-  }
-
-  /**
-   * Obtiene el icon de una opción
-   */
-  getOptionIcon(option: any): string | undefined {
-    return option[this.iconBy];
-  }
-
-  /**
-   * Obtiene si una opción está disabled
-   */
-  getOptionDisabled(option: any): boolean {
-    return option[this.disabledBy] ?? false;
-  }
-
-  /**
-   * Verifica si una opción está seleccionada
-   */
-  isSelected(option: any): boolean {
-    const value = this.getOptionValue(option);
-    const selected = this.selectedValue();
-
-    if (this.mode === 'checkbox') {
-      return Array.isArray(selected) && selected.includes(value);
-    } else {
-      return selected === value;
+    if (this.mode() === 'checkbox') {
+      return Array.isArray(selected) && selected.includes(optionValue);
     }
+    return selected === optionValue;
   }
 
-  /**
-   * Selecciona/Deselecciona una opción
-   */
-  toggleOption(option: any): void {
-    if (this.disabled || this.getOptionDisabled(option)) return;
+  /** Permite alternar entre marcado y desmarcado */
+  toggleOption(option: NormalizedOption): void {
+    if (this.disabled() || option.disabled) return;
 
-    const value = this.getOptionValue(option);
+    const value = option.value;
     let newValue: any;
 
-    if (this.mode === 'checkbox') {
-      const current = Array.isArray(this.selectedValue())
-        ? [...this.selectedValue()]
-        : [];
+    if (this.mode() === 'checkbox') {
+      const current = Array.isArray(this.innerValue()) ? [...this.innerValue()] : [];
       const index = current.indexOf(value);
 
       if (index > -1) {
@@ -309,217 +221,104 @@ export class ButtonGroupComponent implements ControlValueAccessor {
       } else {
         current.push(value);
       }
-
       newValue = current;
     } else {
-      // En modo radio, siempre se selecciona (no se puede deseleccionar)
+      // Radio mode: siempre selecciona
       newValue = value;
     }
 
-    this.selectedValue.set(newValue);
+    this.innerValue.set(newValue);
     this.onChange(newValue);
     this.valueChange.emit(newValue);
     this.onTouched();
   }
 
-  /**
-   * Obtiene las clases CSS para el contenedor
-   */
-  getContainerClasses(): string {
-    const classes = [
-      'nui-button-group',
-      `nui-button-group--${this.effectiveSize}`,
-      `nui-button-group--${this.effectiveVariant}`,
-      `nui-button-group--${this.effectiveColor}`,
-    ];
-
-    if (this.disabled) {
-      classes.push('nui-button-group--disabled');
-    }
-
-    if (this.iconOnly) {
-      classes.push('nui-button-group--icon-only');
-    }
-
-    if (this.visualVariant === 'segmented') {
-      classes.push('nui-button-group--segmented');
-    }
-
-    return classes.join(' ');
-  }
-
-  /**
-   * Obtiene las clases CSS para una opción
-   */
-  getOptionClasses(option: any): string {
-    const classes = ['nui-button-group__option'];
-
-    if (this.isSelected(option)) {
-      classes.push('nui-button-group__option--selected');
-    }
-
-    if (this.getOptionDisabled(option)) {
-      classes.push('nui-button-group__option--disabled');
-    }
-
-    return classes.join(' ');
-  }
-
-  // ==================
+  // ========================================================================
   // KEYBOARD NAVIGATION
-  // ==================
+  // ========================================================================
 
-  /**
-   * Maneja la navegación por teclado
-   */
-  onKeydown(event: KeyboardEvent, optionIndex: number): void {
-    if (this.disabled) return;
+  onKeydown(event: KeyboardEvent, currentIndex: number): void {
+    if (this.disabled()) return;
 
     const key = event.key;
-    const isRadioMode = this.mode === 'radio';
+    const isRadio = this.mode() === 'radio';
+    const options = this.normalizedOptions();
 
-    // Teclas de navegación
-    if (
-      [
-        'ArrowLeft',
-        'ArrowRight',
-        'ArrowUp',
-        'ArrowDown',
-        'Home',
-        'End',
-      ].includes(key)
-    ) {
+    // Navegación
+    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(key)) {
       event.preventDefault();
-      this.handleNavigation(key, optionIndex, isRadioMode);
+
+      let newIndex = currentIndex;
+
+      if (key === 'Home') newIndex = this.findNextEnabled(options, -1, 1);
+      else if (key === 'End') newIndex = this.findNextEnabled(options, options.length, -1);
+      else if (key === 'ArrowLeft' || key === 'ArrowUp')
+        newIndex = this.findNextEnabled(options, currentIndex, -1);
+      else if (key === 'ArrowRight' || key === 'ArrowDown')
+        newIndex = this.findNextEnabled(options, currentIndex, 1);
+
+      if (newIndex !== -1 && newIndex !== currentIndex) {
+        this.focusOption(newIndex);
+        if (isRadio) {
+          this.toggleOption(options[newIndex]);
+        }
+      }
     }
-    // Space para checkbox mode
-    else if (key === ' ' && !isRadioMode) {
+    // Selección con Espacio en Checkbox
+    else if (key === ' ' && !isRadio) {
       event.preventDefault();
-      this.toggleOption(this.options[optionIndex]);
+      this.toggleOption(options[currentIndex]);
     }
   }
 
-  /**
-   * Maneja la navegación entre opciones
-   */
-  private handleNavigation(
-    key: string,
-    currentIndex: number,
-    isRadioMode: boolean,
-  ): void {
-    let newIndex = currentIndex;
+  /** Lógica simplificada de búsqueda circular */
+  private findNextEnabled(
+    options: NormalizedOption[],
+    startIndex: number,
+    direction: 1 | -1
+  ): number {
+    let i = startIndex + direction;
+    const len = options.length;
 
-    switch (key) {
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        newIndex = this.getPreviousEnabledIndex(currentIndex);
-        break;
-      case 'ArrowRight':
-      case 'ArrowDown':
-        newIndex = this.getNextEnabledIndex(currentIndex);
-        break;
-      case 'Home':
-        newIndex = this.getFirstEnabledIndex();
-        break;
-      case 'End':
-        newIndex = this.getLastEnabledIndex();
-        break;
+    // Loop de seguridad para evitar bucles infinitos si todos están disabled
+    let attempts = 0;
+    while (attempts < len) {
+      // Wrap around logic
+      if (i < 0) i = len - 1;
+      if (i >= len) i = 0;
+
+      if (!options[i].disabled) return i;
+
+      i += direction;
+      attempts++;
     }
-
-    if (newIndex !== -1) {
-      this.focusedIndex.set(newIndex);
-      this.focusOption(newIndex);
-
-      // En modo radio, navegar también selecciona
-      if (isRadioMode) {
-        this.toggleOption(this.options[newIndex]);
-      }
-    }
+    return -1; // Nada habilitado
   }
 
-  /**
-   * Obtiene el índice de la opción anterior habilitada
-   */
-  private getPreviousEnabledIndex(currentIndex: number): number {
-    for (let i = currentIndex - 1; i >= 0; i--) {
-      if (!this.getOptionDisabled(this.options[i])) {
-        return i;
-      }
-    }
-    // Circular: volver al final
-    return this.getLastEnabledIndex();
-  }
-
-  /**
-   * Obtiene el índice de la opción siguiente habilitada
-   */
-  private getNextEnabledIndex(currentIndex: number): number {
-    for (let i = currentIndex + 1; i < this.options.length; i++) {
-      if (!this.getOptionDisabled(this.options[i])) {
-        return i;
-      }
-    }
-    // Circular: volver al inicio
-    return this.getFirstEnabledIndex();
-  }
-
-  /**
-   * Obtiene el índice de la primera opción habilitada
-   */
-  private getFirstEnabledIndex(): number {
-    for (let i = 0; i < this.options.length; i++) {
-      if (!this.getOptionDisabled(this.options[i])) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
-  /**
-   * Obtiene el índice de la última opción habilitada
-   */
-  private getLastEnabledIndex(): number {
-    for (let i = this.options.length - 1; i >= 0; i--) {
-      if (!this.getOptionDisabled(this.options[i])) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
-  /**
-   * Enfoca la opción en el índice especificado
-   */
   private focusOption(index: number): void {
-    setTimeout(() => {
-      // Buscar solo dentro de esta instancia del componente
-      const buttons = this.hostElement.nativeElement.querySelectorAll(
-        '.nui-button-group__option',
-      );
-      const targetButton = buttons[index] as HTMLElement;
-      if (targetButton) {
-        targetButton.focus();
-      }
-    }, 0);
+    const buttons = this.buttonElements();
+    buttons[index]?.nativeElement.focus();
   }
 
-  /**
-   * Obtiene el tabindex para una opción (roving tabindex pattern)
-   */
-  getTabIndex(option: any, index: number): number {
-    if (this.disabled || this.getOptionDisabled(option)) return -1;
+  /** Devuelve el índice del botón (pestaña) */
+  getTabIndex(option: NormalizedOption, index: number): number {
+    if (this.disabled() || option.disabled) return -1;
 
-    if (this.mode === 'radio') {
-      // En modo radio, solo el seleccionado (o el primero si no hay selección) es tabulable
-      const isSelected = this.isSelected(option);
-      const isFirstEnabled = index === this.getFirstEnabledIndex();
-      const hasSelection =
-        this.selectedValue() !== null && this.selectedValue() !== undefined;
+    // Checkbox: Todos tabulables
+    if (this.mode() !== 'radio') return 0;
 
-      return isSelected || (!hasSelection && isFirstEnabled) ? 0 : -1;
-    } else {
-      // En modo checkbox, todos los botones habilitados son tabulables
-      return 0;
+    // Radio: Roving Tabindex
+    const isSelected = this.isSelected(option.value);
+    const hasSelection = this.innerValue() != null;
+
+    // Si está seleccionado -> 0
+    // Si NO hay nada seleccionado en todo el grupo y es el primero habilitado -> 0
+    if (isSelected) return 0;
+    if (!hasSelection) {
+      const firstEnabled = this.findNextEnabled(this.normalizedOptions(), -1, 1);
+      if (index === firstEnabled) return 0;
     }
+
+    return -1;
   }
 }

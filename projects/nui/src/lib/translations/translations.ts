@@ -399,8 +399,7 @@ export const NUI_DEFAULT_I18N: NUITranslations = {
     loadMore: 'Cargar más',
     loading: 'Cargando...',
     pageJumpHelp: 'Ingrese un número entre 1 y {totalPages}.',
-    infiniteLoadedItems: '{loaded} elementos cargados',
-    infiniteLoadHasMore: 'de {total} totales',
+    infiniteLoadedItems: '{loaded} elementos cargados de {total}',
     infiniteLoadEnd: 'No hay más elementos que mostrar',
     // Textos ARIA
     ariaPagination: 'Paginación',

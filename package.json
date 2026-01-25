@@ -50,6 +50,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^17.3.0",
     "nx": "22.4.1",
+    "prettier": "^3.8.1",
     "sass": "^1.80.0",
     "typescript": "~5.4.2"
   }

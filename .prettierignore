@@ -1,0 +1,10 @@
+# Build y dependencias
+dist
+node_modules
+coverage
+.angular
+.vscode
+
+# Archivos generados o de bloqueo
+package-lock.json
+yarn.lock

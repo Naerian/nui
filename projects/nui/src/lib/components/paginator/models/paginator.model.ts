@@ -213,6 +213,8 @@ export interface InfiniteConfig {
   maxItems?: number;
   /** Mostrar contador de items cargados */
   showCounter?: boolean;
+  /** Número de items ya cargados inicialmente (para sincronizar el contador) */
+  initialLoadedItems?: number;
   /** Callback cuando se necesitan más datos */
   onLoadMore?: () => void | Promise<void>;
 }

@@ -1,0 +1,203 @@
+<div class="docs-page">
+  <div class="page-header">
+    <h1>{{ 'components.buttonGroup.title' | translate }}</h1>
+    <p class="subtitle">{{ 'components.buttonGroup.subtitle' | translate }}</p>
+  </div>
+
+  <section class="section">
+    <app-section-title
+      [title]="'components.buttonGroup.basic.title' | translate"
+      anchor="basico"
+    ></app-section-title>
+    <p class="section-description">{{ 'components.buttonGroup.basic.description' | translate }}</p>
+
+    <div class="example-preview flex-column">
+      <nui-button-group
+        [options]="cities"
+        [ngModel]="selectedCity()"
+        (ngModelChange)="selectedCity.set($event)"
+      ></nui-button-group>
+
+      <div class="value-display">
+        Selected:
+        <strong>{{ selectedCity() }}</strong>
+      </div>
+    </div>
+
+    <app-code-block [examples]="basicExample"></app-code-block>
+  </section>
+
+  <section class="section">
+    <app-section-title
+      [title]="'components.buttonGroup.modes.title' | translate"
+      anchor="modos"
+    ></app-section-title>
+    <p class="section-description">{{ 'components.buttonGroup.modes.description' | translate }}</p>
+    <div class="section-note info">
+      <i class="ri-information-line"></i>
+      <p [innerHTML]="'components.buttonGroup.modes.note' | translate"></p>
+    </div>
+
+    <div class="example-preview flex-column">
+      <nui-button-group
+        mode="checkbox"
+        [options]="textFormats"
+        labelBy="label"
+        valueBy="id"
+        [ngModel]="selectedFormats()"
+        (ngModelChange)="selectedFormats.set($event)"
+      ></nui-button-group>
+
+      <div class="value-display">
+        Format:
+        <strong>{{ selectedFormats() | json }}</strong>
+      </div>
+    </div>
+
+    <app-code-block [examples]="modeExample"></app-code-block>
+  </section>
+
+  <section class="section">
+    <app-section-title
+      [title]="'components.buttonGroup.segmented.title' | translate"
+      anchor="segmented"
+    ></app-section-title>
+    <p class="section-description">
+      {{ 'components.buttonGroup.segmented.description' | translate }}
+    </p>
+
+    <div class="example-preview flex-column">
+      <nui-button-group
+        visualVariant="segmented"
+        [options]="periods"
+        [ngModel]="selectedPeriod()"
+        (ngModelChange)="selectedPeriod.set($event)"
+      ></nui-button-group>
+
+      <div class="value-display">
+        Period:
+        <strong>{{ selectedPeriod() }}</strong>
+      </div>
+    </div>
+
+    <app-code-block [examples]="segmentedExample"></app-code-block>
+  </section>
+
+  <section class="section">
+    <app-section-title
+      [title]="'components.buttonGroup.complex.title' | translate"
+      anchor="complex"
+    ></app-section-title>
+    <div class="section-note info">
+      <i class="ri-information-line"></i>
+      <p [innerHTML]="'components.buttonGroup.complex.note' | translate"></p>
+    </div>
+
+    <div class="example-preview flex-column">
+      <nui-button-group
+        [options]="users"
+        labelBy="name"
+        valueBy="id"
+        disabledBy="disabled"
+        [ngModel]="selectedUser()"
+        (ngModelChange)="selectedUser.set($event)"
+      ></nui-button-group>
+
+      <div class="value-display">
+        User ID:
+        <strong>{{ selectedUser() }}</strong>
+      </div>
+    </div>
+
+    <app-code-block [examples]="complexExample"></app-code-block>
+  </section>
+
+  <section class="section">
+    <app-section-title
+      [title]="'components.buttonGroup.icons.title' | translate"
+      anchor="icons"
+    ></app-section-title>
+    <div class="section-note info">
+      <i class="ri-information-line"></i>
+      <p [innerHTML]="'components.buttonGroup.icons.note' | translate"></p>
+    </div>
+
+    <div class="example-preview">
+      <nui-button-group
+        [options]="textFormats"
+        iconBy="icon"
+        [iconOnly]="true"
+        mode="checkbox"
+        [ngModel]="selectedFormats()"
+        (ngModelChange)="selectedFormats.set($event)"
+      ></nui-button-group>
+
+      <nui-button-group
+        [options]="textFormats"
+        iconBy="icon"
+        labelBy="label"
+        valueBy="id"
+        variant="outline"
+        mode="checkbox"
+        [ngModel]="selectedFormats()"
+        (ngModelChange)="selectedFormats.set($event)"
+      ></nui-button-group>
+    </div>
+
+    <app-code-block [examples]="iconExample"></app-code-block>
+  </section>
+
+  <section class="section">
+    <app-section-title
+      [title]="'components.buttonGroup.styles.title' | translate"
+      anchor="styles"
+    ></app-section-title>
+    <p class="section-description">{{ 'components.buttonGroup.styles.description' | translate }}</p>
+
+    <div class="example-preview flex-column gap-4">
+      <div class="d-flex gap-2">
+        <nui-button-group [options]="['Yes', 'No']" color="success"></nui-button-group>
+        <nui-button-group
+          [options]="['High', 'Med', 'Low']"
+          color="danger"
+          variant="outline"
+        ></nui-button-group>
+      </div>
+
+      <div class="d-flex gap-2 align-items-center">
+        <nui-button-group
+          [options]="['S', 'M', 'L']"
+          size="sm"
+          visualVariant="segmented"
+        ></nui-button-group>
+        <nui-button-group
+          [options]="['Month', 'Year']"
+          size="lg"
+          visualVariant="segmented"
+          color="accent"
+        ></nui-button-group>
+      </div>
+    </div>
+
+    <app-code-block [examples]="styleExample"></app-code-block>
+  </section>
+
+  <section class="section">
+    <app-section-title
+      [title]="'components.buttonGroup.width.title' | translate"
+      anchor="width"
+    ></app-section-title>
+    <div class="section-note info">
+      <i class="ri-information-line"></i>
+      <p [innerHTML]="'components.buttonGroup.width.note' | translate"></p>
+    </div>
+
+    <div class="example-preview">
+      <div style="width: 100%; max-width: 400px">
+        <nui-button-group width="full" [options]="['Log In', 'Sign Up']"></nui-button-group>
+      </div>
+    </div>
+
+    <app-code-block [examples]="widthExample"></app-code-block>
+  </section>
+</div>

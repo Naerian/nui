@@ -824,12 +824,69 @@ describe('PaginatorComponent', () => {
   });
 
   describe('Layout System', () => {
-    it('should return empty array when no layout is configured', () => {
+    it('should always return a valid layout (never undefined)', () => {
+      // Sin configuración explícita, debe generar layout por defecto
       component.layout = undefined;
       
-      const elements = component.getElementsForArea('center');
+      const layout = component.effectiveLayout();
       
-      expect(elements).toEqual([]);
+      expect(layout).toBeDefined();
+      expect(layout).not.toBeNull();
+    });
+
+    it('should generate default layout for "default" mode', () => {
+      component.mode = 'default';
+      component.layout = undefined;
+      component.showFirstLast = true;
+      component.showItemRange = true;
+      component.showPageSizeSelector = true;
+      
+      const layout = component.effectiveLayout();
+      
+      expect(layout.center).toContain('prevButton');
+      expect(layout.center).toContain('pageNumbers');
+      expect(layout.center).toContain('nextButton');
+      expect(layout.center).toContain('firstButton');
+      expect(layout.center).toContain('lastButton');
+      expect(layout.left).toContain('itemRange');
+      expect(layout.right).toContain('pageSize');
+    });
+
+    it('should generate minimal layout for "minimal" mode', () => {
+      component.mode = 'minimal';
+      component.layout = undefined;
+      
+      const layout = component.effectiveLayout();
+      
+      expect(layout.center).toEqual(['prevButton', 'nextButton']);
+      expect(layout.center?.length).toBe(2);
+    });
+
+    it('should generate compact layout for "compact" mode', () => {
+      component.mode = 'compact';
+      component.layout = undefined;
+      component.showFirstLast = false;
+      
+      const layout = component.effectiveLayout();
+      
+      expect(layout.center).toContain('prevButton');
+      expect(layout.center).toContain('currentPage');
+      expect(layout.center).toContain('nextButton');
+      expect(layout.center).not.toContain('firstButton');
+    });
+
+    it('should generate fractional layout for "fractional" mode', () => {
+      component.mode = 'fractional';
+      component.layout = undefined;
+      component.showFirstLast = true;
+      
+      const layout = component.effectiveLayout();
+      
+      expect(layout.center).toContain('prevButton');
+      expect(layout.center).toContain('fractionalNumbers');
+      expect(layout.center).toContain('nextButton');
+      expect(layout.center).toContain('firstButton');
+      expect(layout.center).toContain('lastButton');
     });
 
     it('should return elements for a specific area', () => {
@@ -845,14 +902,49 @@ describe('PaginatorComponent', () => {
       expect(leftElements).toEqual(['itemRange']);
     });
 
-    it('should check if element should be rendered based on layout', () => {
+    it('should return empty array for areas without elements', () => {
       component.layout = {
-        center: ['prevButton', 'pageNumbers', 'nextButton']
+        center: ['prevButton', 'nextButton']
       };
+      
+      const topElements = component.getElementsForArea('top');
+      const bottomElements = component.getElementsForArea('bottom');
+      
+      expect(topElements).toEqual([]);
+      expect(bottomElements).toEqual([]);
+    });
+
+    it('should check if element should be rendered based on layout and visibility', () => {
+      component.layout = {
+        center: ['prevButton', 'pageNumbers', 'nextButton', 'firstButton']
+      };
+      component.showFirstLast = true;
       
       expect(component.shouldRenderElement('prevButton')).toBe(true);
       expect(component.shouldRenderElement('pageNumbers')).toBe(true);
-      expect(component.shouldRenderElement('itemRange')).toBe(false);
+      expect(component.shouldRenderElement('firstButton')).toBe(true);
+      expect(component.shouldRenderElement('itemRange')).toBe(false); // No está en layout
+    });
+
+    it('should not render element if not in layout even if show property is true', () => {
+      component.layout = {
+        center: ['prevButton', 'nextButton']
+      };
+      component.showFirstLast = true; // Habilitado pero no en layout
+      
+      expect(component.shouldRenderElement('firstButton')).toBe(false);
+      expect(component.shouldRenderElement('lastButton')).toBe(false);
+    });
+
+    it('should not render element if in layout but show property is false', () => {
+      component.layout = {
+        center: ['firstButton', 'prevButton', 'nextButton', 'lastButton']
+      };
+      component.showFirstLast = false; // En layout pero deshabilitado
+      
+      expect(component.shouldRenderElement('firstButton')).toBe(false);
+      expect(component.shouldRenderElement('lastButton')).toBe(false);
+      expect(component.shouldRenderElement('prevButton')).toBe(true); // Siempre visible
     });
 
     it('should get layout direction from configuration', () => {
@@ -862,7 +954,7 @@ describe('PaginatorComponent', () => {
     });
 
     it('should use default direction when not configured', () => {
-      component.layout = {};
+      component.layout = { direction: 'row' };
       
       expect(component.getLayoutDirection()).toBe('row');
     });
@@ -876,6 +968,20 @@ describe('PaginatorComponent', () => {
       expect(component.hasElementsInArea('center')).toBe(true);
       expect(component.hasElementsInArea('left')).toBe(false);
       expect(component.hasElementsInArea('top')).toBe(false);
+    });
+
+    it('should prioritize explicit layout over mode-based layout', () => {
+      component.mode = 'minimal';
+      component.layout = {
+        center: ['firstButton', 'prevButton', 'pageNumbers', 'nextButton', 'lastButton']
+      };
+      
+      const layout = component.effectiveLayout();
+      
+      // Debe usar el layout explícito, no el minimal
+      expect(layout.center).toContain('pageNumbers');
+      expect(layout.center).toContain('firstButton');
+      expect(layout.center?.length).toBeGreaterThan(2);
     });
   });
 

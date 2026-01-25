@@ -1208,10 +1208,10 @@ El switch usa variables del sistema de diseño en `_theme.scss`:
 --switch-track-border: var(--field-border-color);
 --switch-track-hover-border: var(--field-border-hover-color);
 --switch-thumb-bg: var(--field-bg);
---switch-button-inactive-bg: var(--surface-secondary);
+--switch-button-inactive-bg: var(--nui-bg-secondary);
 --switch-button-inactive-text: var(--text-secondary);
 --switch-button-inactive-border: var(--border-primary);
---switch-button-inactive-hover-bg: var(--surface-tertiary);
+--switch-button-inactive-hover-bg: var(--nui-bg-tertiary);
 ```
 
 ### Personalización

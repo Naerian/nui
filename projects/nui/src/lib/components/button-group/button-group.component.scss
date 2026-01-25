@@ -1,8 +1,8 @@
-@use "sass:map";
-@use "../../../../styles/config";
-@use "../../../../styles/mixins";
-@use "../../../../styles/variables/button-group/button-group-tokens" as button-group-tokens;
-@use "../../../../styles/variables/button-group/button-group-variables.scss" as button-group-vars;
+@use 'sass:map';
+@use '../../../../styles/config';
+@use '../../../../styles/mixins';
+@use '../../../../styles/variables/button-group/button-group-tokens' as button-group-tokens;
+@use '../../../../styles/variables/button-group/button-group-variables.scss' as button-group-vars;
 
 .nui-button-group {
   display: inline-flex;
@@ -40,8 +40,7 @@
     font-family: var(--font-family);
     font-weight: var(--font-weight-medium);
     cursor: pointer;
-    transition: all var(--transition-duration-fast)
-      var(--transition-timing-function-ease);
+    transition: all var(--transition-duration-fast) var(--transition-timing-function-ease);
     white-space: nowrap;
     position: relative;
     z-index: var(--nui-button-group-z-index-base);
@@ -64,7 +63,7 @@
     }
 
     &:hover:not(&--disabled):not(&--selected) {
-      background-color: var(--surface-secondary);
+      background-color: var(--nui-bg-secondary);
       color: var(--nui-text-primary);
       z-index: var(--nui-button-group-z-index-hover);
     }
@@ -141,18 +140,9 @@
 @each $size-key, $size-config in button-group-tokens.$button-group-sizes {
   .nui-button-group--#{$size-key} {
     .nui-button-group__option {
-      height: var(
-        --component-height-#{$size-key},
-        #{map.get($size-config, height)}
-      );
-      padding: var(
-        --component-padding-#{$size-key},
-        #{map.get($size-config, padding)}
-      );
-      font-size: var(
-        --component-font-size-#{$size-key},
-        #{map.get($size-config, font-size)}
-      );
+      height: var(--component-height-#{$size-key}, #{map.get($size-config, height)});
+      padding: var(--component-padding-#{$size-key}, #{map.get($size-config, padding)});
+      font-size: var(--component-font-size-#{$size-key}, #{map.get($size-config, font-size)});
       gap: map.get($size-config, gap);
     }
 
@@ -172,7 +162,7 @@
 
 .nui-button-group--segmented {
   gap: var(--nui-button-group-segmented-gap);
-  background-color: var(--surface-secondary);
+  background-color: var(--nui-bg-secondary);
   padding: var(--nui-button-group-segmented-padding);
   border: var(--border-width-xs) solid var(--nui-border-primary);
   border-radius: var(--border-radius-md);
@@ -182,14 +172,12 @@
     border-width: var(--border-width-xs);
     border-style: solid;
     border-color: var(--nui-border-primary);
-    border-radius: calc(
-      var(--border-radius-md) - var(--nui-button-group-segmented-padding)
-    );
+    border-radius: calc(var(--border-radius-md) - var(--nui-button-group-segmented-padding));
     margin: 0;
 
     // Hover más sutil en modo segmented
     &:hover:not(&--disabled):not(&--selected) {
-      background-color: var(--surface-tertiary);
+      background-color: var(--nui-bg-tertiary);
       color: var(--nui-text-primary);
     }
 
@@ -204,9 +192,7 @@
     // No hay bordes redondeados especiales en primer/último
     &:first-child,
     &:last-child {
-      border-radius: calc(
-        var(--border-radius-md) - var(--nui-button-group-segmented-padding)
-      );
+      border-radius: calc(var(--border-radius-md) - var(--nui-button-group-segmented-padding));
     }
   }
 

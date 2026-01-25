@@ -1,22 +1,22 @@
-@if (type === "dynamic") {
+@if (type() === 'dynamic') {
   <button
     nuiButton
     [cdkMenuTriggerFor]="actionMenu"
-    (cdkMenuOpened)="onMenuOpened()"
-    (cdkMenuClosed)="onMenuClosed()"
-    [icon]="icon"
-    [iconPosition]="iconPosition"
-    [width]="width"
-    [color]="effectiveColor"
-    [size]="effectiveSize"
-    [variant]="effectiveVariant"
-    [disabled]="disabled"
-    [title]="title || label || ''"
-    [attr.aria-label]="ariaLabel || label || title || ''"
+    (cdkMenuOpened)="onCdkMenuOpened()"
+    (cdkMenuClosed)="onCdkMenuClosed()"
+    [icon]="effectiveIcon()"
+    [iconPosition]="iconPosition()"
+    [width]="width()"
+    [color]="effectiveColor()"
+    [size]="effectiveSize()"
+    [variant]="effectiveVariant()"
+    [disabled]="disabled()"
+    [title]="title() || label() || ''"
+    [attr.aria-label]="ariaLabel() || label() || title() || ''"
     type="button"
   >
-    @if (label) {
-      {{ label }}
+    @if (label()) {
+      {{ label() }}
     }
   </button>
 } @else {
@@ -25,41 +25,37 @@
 
 <ng-template #actionMenu>
   <div
-    class="
-      nui-action-menu 
-      nui-action-menu--{{ effectiveVariant }} 
-      nui-action-menu--{{ effectiveColor }}
-    "
-    [class.nui-action-menu--static]="type === 'static'"
-    [class.nui-action-menu--dynamic]="type === 'dynamic'"
+    class="nui-action-menu"
+    [class.nui-action-menu--static]="type() === 'static'"
+    [class.nui-action-menu--dynamic]="type() === 'dynamic'"
+    class="nui-action-menu--{{ effectiveVariant() }}"
+    class="nui-action-menu--{{ effectiveColor() }}"
     cdkMenu
     [@fadeInOutScale]
     role="menu"
     [attr.aria-orientation]="'vertical'"
   >
-    <!-- Header: Proyecta contenido con directivas menu-header/nuiMenuHeader -->
     <div class="nui-action-menu__start">
       <ng-content select="[menu-header], [nuiMenuHeader]"></ng-content>
     </div>
 
-    @for (item of mergedItems; track item.id) {
-      <!-- Separador -->
+    @for (item of mergedItems(); track item.id) {
       @if (item.separator) {
-        @if (item.label) {
-          <div class="nui-action-menu__separator nui-action-menu__separator--labeled" role="separator">
+        <div
+          class="nui-action-menu__separator"
+          [class.nui-action-menu__separator--labeled]="item.label"
+          role="separator"
+        >
+          @if (item.label) {
             <span class="nui-action-menu__separator__label">{{ item.label }}</span>
-          </div>
-        } @else {
-          <div class="nui-action-menu__separator" role="separator"></div>
-        }
+          }
+        </div>
       }
-      
-      <!-- Item normal -->
       @if (!item.children && !item.separator) {
         <button
           class="nui-action-menu__item nui-action-menu__item--action"
           [class.nui-action-menu__item--selected]="item.selected"
-          [class.nui-action-menu__item--custom-template]="itemTemplate"
+          [class.nui-action-menu__item--custom-template]="effectiveItemTemplate()"
           cdkMenuItem
           [disabled]="item.disabled"
           (cdkMenuItemTriggered)="onItemClick(item)"
@@ -68,45 +64,19 @@
           role="menuitem"
           type="button"
         >
-          @if (itemTemplate) {
-            <!-- Custom template provided by user -->
-            <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
-          } @else {
-            <!-- Default rendering -->
-            <div
-              class="nui-action-menu__item__container"
-              [class.nui-action-menu__item__container--icon]="item.icon"
-            >
-              @if (item.icon) {
-                <i [class]="item.icon" class="nui-action-menu__item__icon"></i>
-              }
-              @if (item.templateRef && !item.label) {
-                <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
-              } @else {
-                <div class="nui-action-menu__item__text">
-                  <span class="nui-action-menu__item__label">{{ item.label }}</span>
-                  @if (item.subtitle) {
-                    <span class="nui-action-menu__item__subtitle">{{ item.subtitle }}</span>
-                  }
-                </div>
-              }
-            </div>
-            @if (item.shortcut) {
-              <span class="nui-action-menu__item__shortcut">{{
-                item.shortcut
-              }}</span>
-            }
-            @if (item.selected) {
-              <i class="ri-check-line nui-action-menu__item__check"></i>
-            }
+          <ng-container
+            *ngTemplateOutlet="contentRender; context: { $implicit: item }"
+          ></ng-container>
+
+          @if (item.selected) {
+            <i class="ri-check-line nui-action-menu__item__check"></i>
           }
         </button>
       }
-
       @if (item.children && !item.separator) {
         <button
           class="nui-action-menu__item nui-action-menu__item--submenu"
-          [class.nui-action-menu__item--custom-template]="itemTemplate"
+          [class.nui-action-menu__item--custom-template]="effectiveItemTemplate()"
           [class.nui-action-menu__item--has-selected]="hasSelectedChild(item)"
           [cdkMenuTriggerFor]="subMenuTemplate"
           [cdkMenuTriggerData]="{ item: item }"
@@ -118,49 +88,59 @@
           role="menuitem"
           type="button"
         >
-          @if (itemTemplate) {
-            <!-- Custom template provided by user -->
-            <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
-          } @else {
-            <!-- Default rendering -->
-            <div
-              class="nui-action-menu__item__container"
-              [class.nui-action-menu__item__container--icon]="item.icon"
-            >
-              @if (item.icon) {
-                <i [class]="item.icon" class="nui-action-menu__item__icon"></i>
-              }
-              @if (item.templateRef && !item.label) {
-                <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
-              } @else {
-                <div class="nui-action-menu__item__text">
-                  <span class="nui-action-menu__item__label">{{ item.label }}</span>
-                  @if (item.subtitle) {
-                    <span class="nui-action-menu__item__subtitle">{{ item.subtitle }}</span>
-                  }
-                </div>
-              }
-            </div>
-          }
+          <ng-container
+            *ngTemplateOutlet="contentRender; context: { $implicit: item }"
+          ></ng-container>
+
           <span class="nui-action-menu__item__arrow">
-            <i [class]="iconSubmenu"></i>
+            <i [class]="iconSubmenu()"></i>
           </span>
         </button>
       }
     }
 
-    <!-- Footer: Proyecta contenido con directivas menu-footer/nuiMenuFooter -->
     <div class="nui-action-menu__end">
       <ng-content select="[menu-footer], [nuiMenuFooter]"></ng-content>
     </div>
   </div>
 </ng-template>
 
+<ng-template #contentRender let-item>
+  @if (effectiveItemTemplate()) {
+    <ng-container
+      *ngTemplateOutlet="effectiveItemTemplate()!; context: { $implicit: item }"
+    ></ng-container>
+  } @else {
+    <div
+      class="nui-action-menu__item__container"
+      [class.nui-action-menu__item__container--icon]="item.icon"
+    >
+      @if (item.icon) {
+        <i [class]="item.icon" class="nui-action-menu__item__icon"></i>
+      }
+      @if (item.templateRef && !item.label) {
+        <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
+      } @else {
+        <div class="nui-action-menu__item__text">
+          <span class="nui-action-menu__item__label">{{ item.label }}</span>
+          @if (item.subtitle) {
+            <span class="nui-action-menu__item__subtitle">{{ item.subtitle }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    @if (item.shortcut) {
+      <span class="nui-action-menu__item__shortcut">{{ item.shortcut }}</span>
+    }
+  }
+</ng-template>
+
 <ng-template #subMenuTemplate let-item="item">
   <nui-action-menu-submenu
     (onItemAction)="onItemClick($event)"
-    [iconSubmenu]="iconSubmenu"
+    [iconSubmenu]="iconSubmenu()"
     [items]="item.children"
-    [color]="effectiveColor"
+    [color]="effectiveColor()"
   ></nui-action-menu-submenu>
 </ng-template>

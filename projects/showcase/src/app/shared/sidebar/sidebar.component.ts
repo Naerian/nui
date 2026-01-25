@@ -18,7 +18,7 @@ interface MenuItem {
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule],
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
   private showcaseConfig = inject(ShowcaseConfigService);
@@ -38,21 +38,21 @@ export class SidebarComponent implements OnInit {
           label: 'Installation',
           translationKey: 'sidebar.installation',
           route: '/getting-started/installation',
-          icon: 'ri-download-line'
+          icon: 'ri-download-line',
         },
         {
           label: 'Configuration',
           translationKey: 'sidebar.configuration',
           route: '/getting-started/configuration',
-          icon: 'ri-settings-3-line'
-        }
-      ]
+          icon: 'ri-settings-3-line',
+        },
+      ],
     },
     {
       label: 'Theming',
       translationKey: 'sidebar.theming',
       route: '/theming',
-      icon: 'ri-palette-line'
+      icon: 'ri-palette-line',
     },
     {
       label: 'Components',
@@ -64,28 +64,46 @@ export class SidebarComponent implements OnInit {
           label: 'Button',
           translationKey: 'sidebar.button',
           route: '/components/button',
-          icon: 'ri-checkbox-blank-line'
+          icon: 'ri-checkbox-blank-line',
         },
         {
           label: 'Action Menu',
           translationKey: 'sidebar.actionMenu',
           route: '/components/action-menu',
-          icon: 'ri-menu-line'
-        }
-      ]
+          icon: 'ri-menu-line',
+        },
+        {
+          label: 'Avatar',
+          translationKey: 'sidebar.avatar',
+          route: '/components/avatar',
+          icon: 'ri-user-line',
+        },
+        {
+          label: 'Button Group',
+          translationKey: 'sidebar.buttonGroup',
+          route: '/components/button-group',
+          icon: 'ri-layout-grid-line',
+        },
+        {
+          label: 'Paginator',
+          translationKey: 'sidebar.paginator',
+          route: '/components/paginator',
+          icon: 'ri-pages-line',
+        },
+      ],
     },
     {
       label: 'Examples',
       translationKey: 'sidebar.examples',
       route: '/examples',
-      icon: 'ri-code-box-line'
+      icon: 'ri-code-box-line',
     },
     {
       label: 'Playground',
       translationKey: 'sidebar.playground',
       route: '/playground',
-      icon: 'ri-flask-line'
-    }
+      icon: 'ri-flask-line',
+    },
   ];
 
   ngOnInit(): void {
@@ -99,7 +117,7 @@ export class SidebarComponent implements OnInit {
     // Listen to route changes to update expanded sections
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
-      .subscribe((event) => {
+      .subscribe(event => {
         this.updateExpandedSections(event.urlAfterRedirects);
       });
   }

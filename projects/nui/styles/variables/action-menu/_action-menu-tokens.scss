@@ -5,7 +5,7 @@
 // Variables SCSS centralizadas para personalizar el componente Action Menu.
 // Todas las variables usan !default para permitir sobrescritura.
 //
-// NOTA: Los colores de hover y estados seleccionados se generan dinámicamente 
+// NOTA: Los colores de hover y estados seleccionados se generan dinámicamente
 // por ThemeService basados en el tema activo (light/dark) y el color del componente.
 // Ver theme.service.ts -> generateActionMenuVariables()
 //
@@ -40,7 +40,9 @@ $action-menu-border-width: var(--border-width-xs) !default;
 $action-menu-border-color: var(--nui-border-primary) !default;
 $action-menu-border-radius: var(--border-radius-md) !default;
 $action-menu-padding: var(--spacing-xs) !default;
-$action-menu-item-border-radius: var(--border-radius-md) !default;
+$action-menu-item-border-radius: calc(
+  #{$action-menu-border-radius} - #{$action-menu-padding}
+) !default;
 $action-menu-focus-outline-width: 2px !default;
 $action-menu-focus-outline-offset: -1px !default;
 
@@ -50,7 +52,7 @@ $action-menu-item-bg: transparent !default;
 $action-menu-item-color: var(--nui-text-primary) !default;
 
 // ===== SHORTCUT =====
-$action-menu-shortcut-bg: var(--surface-tertiary) !default;
+$action-menu-shortcut-bg: var(--nui-bg-tertiary) !default;
 $action-menu-shortcut-color: var(--nui-text-secondary) !default;
 $action-menu-shortcut-padding: var(--spacing-xs) !default;
 $action-menu-shortcut-border-width: var(--border-width-xs) !default;
@@ -77,4 +79,3 @@ $action-menu-separator-label-spacing: var(--spacing-xs) !default;
 // ===== SPACING =====
 $action-menu-item-padding-y: var(--spacing-xs) !default;
 $action-menu-item-padding-x: var(--spacing-sm) !default;
-
