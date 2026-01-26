@@ -19,12 +19,15 @@ $popover-line-height: var(--line-height-md) !default;
 
 // ===== BORDES Y RADIOS =====
 $popover-border-radius: var(--border-radius-md) !default;
-$popover-border: var(--border-container) !default;
+$popover-border: var(--border-width-xs) solid !default;
 
 // ===== COLORES =====
-// Los colores se manejan por tema en theme-config
-$popover-bg: var(--popover-bg) !default;
-$popover-text: var(--popover-text) !default;
+// Los colores dependen del tema (light/dark) y usan variables base del tema
+// En lugar de definir valores estáticos, usamos las variables del tema que se
+// actualizan automáticamente cuando cambia el tema
+$popover-bg: var(--nui-bg-primary) !default; // Fondo principal del tema
+$popover-text: var(--nui-text-primary) !default; // Texto principal del tema
+$popover-border-color: var(--nui-border-primary) !default; // Borde principal del tema
 
 // ===== SOMBRAS =====
 $popover-shadow: var(--nui-shadow-elevated) !default;

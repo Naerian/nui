@@ -38,7 +38,7 @@
       </nui-action-menu>
     </div>
 
-    <app-code-block [examples]="basicExamples"></app-code-block>
+    <app-code-block [examples]="getSection('basic')?.examples || []"></app-code-block>
   </section>
 
   <!-- 2. Con Separadores -->
@@ -57,7 +57,7 @@
       </nui-action-menu>
     </div>
 
-    <app-code-block [examples]="separatorExamples"></app-code-block>
+    <app-code-block [examples]="getSection('separators')?.examples || []"></app-code-block>
   </section>
 
   <!-- 3. Con Submenús -->
@@ -80,7 +80,7 @@
       </nui-action-menu>
     </div>
 
-    <app-code-block [examples]="submenuExamples"></app-code-block>
+    <app-code-block [examples]="getSection('submenu')?.examples || []"></app-code-block>
   </section>
 
   <!-- 4. Variantes de Botón -->
@@ -118,7 +118,7 @@
       </nui-action-menu>
     </div>
 
-    <app-code-block [examples]="variantExamples"></app-code-block>
+    <app-code-block [examples]="getSection('variants')?.examples || []"></app-code-block>
   </section>
 
   <!-- 5. Tamaños -->
@@ -161,10 +161,10 @@
       ></nui-action-menu>
     </div>
 
-    <app-code-block [examples]="sizeExamples"></app-code-block>
+    <app-code-block [examples]="getSection('sizes')?.examples || []"></app-code-block>
   </section>
 
-  <!-- 6. Con Texto -->
+  <!-- 6. Con Label -->
   <section class="section">
     <app-section-title [title]="'components.actionMenu.label.title' | translate" anchor="con-texto"></app-section-title>
     <p class="section-description">
@@ -199,7 +199,7 @@
       </nui-action-menu>
     </div>
 
-    <app-code-block [examples]="labelExamples"></app-code-block>
+    <app-code-block [examples]="getSection('label')?.examples || []"></app-code-block>
   </section>
 
   <!-- 7. Items Deshabilitados -->
@@ -225,7 +225,7 @@
       </nui-action-menu>
     </div>
 
-    <app-code-block [examples]="disabledExamples"></app-code-block>
+    <app-code-block [examples]="getSection('disabled')?.examples || []"></app-code-block>
   </section>
 
   <!-- 8. Con Subtitle -->
@@ -246,7 +246,7 @@
       </nui-action-menu>
     </div>
 
-    <app-code-block [examples]="subtitleExamples"></app-code-block>
+    <app-code-block [examples]="getSection('withSubtitle')?.examples || []"></app-code-block>
   </section>
 
   <!-- 9. Con Selected -->
@@ -280,7 +280,7 @@
       </div>
     </div>
 
-    <app-code-block [examples]="selectedExamples"></app-code-block>
+    <app-code-block [examples]="getSection('selected')?.examples || []"></app-code-block>
   </section>
 
   <!-- 10. Iconos Descriptivos -->
@@ -299,10 +299,10 @@
       </nui-action-menu>
     </div>
 
-    <app-code-block [examples]="colorExamples"></app-code-block>
+    <app-code-block [examples]="getSection('colors')?.examples || []"></app-code-block>
   </section>
 
-  <!-- 11. Con Template Personalizado -->
+  <!-- 11. Template Personalizado -->
   <section class="section">
     <app-section-title [title]="'components.actionMenu.template.title' | translate" anchor="template-personalizado"></app-section-title>
     <p class="section-description">
@@ -366,6 +366,6 @@
       </nui-action-menu>
     </div>
 
-    <app-code-block [examples]="templateExamples"></app-code-block>
+    <app-code-block [examples]="getSection('template')?.examples || []"></app-code-block>
   </section>
 </div>

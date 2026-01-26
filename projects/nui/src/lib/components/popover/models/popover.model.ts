@@ -18,7 +18,7 @@ export type PopoverPosition = 'top' | 'bottom' | 'left' | 'right';
 /**
  * Eventos que pueden disparar el popover
  */
-export type PopoverEvent = 'hover' | 'click' | 'focus' | 'manual';
+export type PopoverEvent = 'hover' | 'click' | 'focus';
 
 /**
  * Configuración del popover

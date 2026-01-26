@@ -18,6 +18,7 @@
     "avatar": "Avatar",
     "buttonGroup": "Button Group",
     "paginator": "Paginador",
+    "popover": "Popover",
     "actionMenu": "Menú de Acciones",
     "examples": "Ejemplos",
     "playground": "Playground"
@@ -342,6 +343,65 @@
         "description": "Define un conjunto personalizado de opciones para el tamaño de página.",
         "note": "Usando el input <code>size</code> podrás ofrecer a los usuarios un conjunto específico de tamaños de página para elegir.",
         "codeTitle": "Tamaños Personalizados"
+      }
+    },
+    "popover": {
+      "title": "Popover",
+      "subtitle": "Componente de contenido flotante interactivo con soporte para texto, templates y componentes dinámicos",
+      "basic": {
+        "title": "Uso Básico",
+        "description": "Popover simple con contenido de texto. El popover se muestra al hacer click en el elemento (comportamiento predeterminado).",
+        "codeTitle": "Popover con Texto"
+      },
+      "positions": {
+        "title": "Posiciones",
+        "description": "Controla la posición preferida del popover: top, bottom, left o right. El popover se reposiciona automáticamente si no hay espacio suficiente.",
+        "codeTitle": "Posiciones Disponibles"
+      },
+      "events": {
+        "title": "Eventos de Activación",
+        "description": "Define cómo se activa el popover: click (predeterminado), hover, focus o manual. El modo manual permite control programático completo.",
+        "codeTitle": "Tipos de Eventos"
+      },
+      "template": {
+        "title": "Template Personalizado",
+        "description": "Usa templates de Angular para contenido rico e interactivo. El contexto del template proporciona una función <code>close</code> para cerrar el popover.",
+        "htmlTitle": "HTML",
+        "scssTitle": "SCSS",
+        "tsTitle": "TypeScript"
+      },
+      "component": {
+        "title": "Componente Dinámico",
+        "description": "Renderiza componentes completos de Angular dentro del popover. Ideal para formularios, listas o contenido complejo.",
+        "parentHtmlTitle": "Componente Padre (HTML)",
+        "parentTsTitle": "Componente Padre (TS)",
+        "childTitle": "Componente Hijo"
+      },
+      "delays": {
+        "title": "Delays de Mostrar/Ocultar",
+        "description": "Configura retrasos en milisegundos antes de mostrar u ocultar el popover. Útil para mejorar la experiencia de usuario en modo hover.",
+        "codeTitle": "Configuración de Delays"
+      },
+      "customization": {
+        "title": "Personalización",
+        "description": "Personaliza la apariencia del popover: sin flecha, ancho personalizado, clases CSS propias o mayor offset de separación.",
+        "codeTitle": "Opciones de Personalización"
+      },
+      "closeOptions": {
+        "title": "Opciones de Cierre",
+        "description": "Controla cómo se puede cerrar el popover: click fuera, tecla Escape, o permitir múltiples popovers abiertos simultáneamente.",
+        "codeTitle": "Control de Cierre"
+      },
+      "backdrop": {
+        "title": "Con Backdrop",
+        "description": "Agrega un fondo oscuro detrás del popover para crear una experiencia modal. Puedes controlar si el click en el backdrop cierra o no el popover.",
+        "codeTitle": "Popover Modal"
+      },
+      "disabled": {
+        "title": "Estado Deshabilitado",
+        "description": "Controla dinámicamente si el popover está habilitado o deshabilitado usando la propiedad <code>popoverDisabled</code>.",
+        "htmlTitle": "HTML",
+        "tsTitle": "TypeScript"
       }
     }
   }

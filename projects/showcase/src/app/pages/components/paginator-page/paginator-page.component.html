@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <app-code-block [examples]="basicExample"></app-code-block>
+    <app-code-block [examples]="getSection('basic')?.examples || []"></app-code-block>
   </section>
 
   <section class="section">
@@ -66,7 +66,7 @@
       ></nui-paginator>
     </div>
 
-    <app-code-block [examples]="styleExample"></app-code-block>
+    <app-code-block [examples]="getSection('styles')?.examples || []"></app-code-block>
   </section>
 
   <section class="section">
@@ -88,7 +88,7 @@
       <nui-paginator [currentPage]="1" [totalPages]="5" size="xl"></nui-paginator>
     </div>
 
-    <app-code-block [examples]="sizeExample"></app-code-block>
+    <app-code-block [examples]="getSection('sizes')?.examples || []"></app-code-block>
   </section>
 
   <section class="section">
@@ -112,7 +112,7 @@
       ></nui-paginator>
     </div>
 
-    <app-code-block [examples]="layoutExample"></app-code-block>
+    <app-code-block [examples]="getSection('layout')?.examples || []"></app-code-block>
   </section>
 
   <section class="section">
@@ -141,6 +141,6 @@
       ></nui-paginator>
     </div>
 
-    <app-code-block [examples]="infiniteExample"></app-code-block>
+    <app-code-block [examples]="getSection('infinite')?.examples || []"></app-code-block>
   </section>
 </div>

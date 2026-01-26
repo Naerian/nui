@@ -2,7 +2,7 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewEncapsulation,
-  Input,
+  input,
   TemplateRef,
   Type,
   ViewContainerRef,
@@ -10,11 +10,12 @@ import {
   OnInit,
   ComponentRef,
   Injector,
-  booleanAttribute,
+  computed,
+  model,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { PopoverContext, POPOVER_DATA, POPOVER_CLOSE } from './models/popover.model';
+import { PopoverContext, POPOVER_DATA, POPOVER_CLOSE, PopoverPosition } from './models/popover.model';
 
 /**
  * @name
@@ -33,23 +34,23 @@ import { PopoverContext, POPOVER_DATA, POPOVER_CLOSE } from './models/popover.mo
     class: 'nui-popover',
     role: 'dialog',
     '[@fadeIn]': 'true',
-    '[attr.data-position]': 'position',
-    '[attr.id]': 'popoverId',
-    '[class]': 'popoverClass',
-    '[style.max-width]': 'maxWidth',
-    '[style.min-width]': 'minWidth',
+    '[attr.data-position]': 'position()',
+    '[attr.id]': 'popoverId()',
+    '[class]': 'popoverClass()',
+    '[style.max-width]': 'maxWidth()',
+    '[style.min-width]': 'minWidth()',
   },
   template: `
-    @if (showArrow) {
+    @if (showArrow()) {
       <div class="nui-popover__arrow"></div>
     }
     <div class="nui-popover__content">
-      @if (isTemplate) {
-        <ng-container *ngTemplateOutlet="$any(content); context: context"></ng-container>
-      } @else if (isComponent) {
+      @if (isTemplate()) {
+        <ng-container *ngTemplateOutlet="$any(content()); context: context()"></ng-container>
+      } @else if (isComponent()) {
         <ng-container #dynamicComponent></ng-container>
       } @else {
-        <div [innerHTML]="content"></div>
+        <div [innerHTML]="content()"></div>
       }
     </div>
   `,
@@ -73,68 +74,64 @@ export class PopoverComponent implements OnInit {
   /**
    * Contenido del popover (string, TemplateRef o Component)
    */
-  @Input() content: string | TemplateRef<PopoverContext> | Type<any> = '';
+  readonly content = input<string | TemplateRef<PopoverContext> | Type<any>>('');
 
   /**
    * Posición del popover
    */
-  @Input() position = 'top';
+  readonly position = model<PopoverPosition>('top');
 
   /**
    * Mostrar flecha
    */
-  @Input({ transform: booleanAttribute }) showArrow = true;
+  readonly showArrow = input(true);
 
   /**
    * ID único para accesibilidad
    */
-  @Input() popoverId = '';
+  readonly popoverId = input('');
 
   /**
    * Clase CSS personalizada
    */
-  @Input() popoverClass?: string;
+  readonly popoverClass = input<string | undefined>(undefined);
 
   /**
    * Ancho máximo
    */
-  @Input() maxWidth = '300px';
+  readonly maxWidth = input('300px');
 
   /**
    * Ancho mínimo
    */
-  @Input() minWidth?: string;
+  readonly minWidth = input<string | undefined>(undefined);
 
   /**
    * Contexto para el template
    */
-  @Input() context?: PopoverContext;
+  readonly context = input<PopoverContext | undefined>(undefined);
 
   /**
    * Injector para componentes dinámicos
    */
-  @Input() injector?: Injector;
+  readonly injector = input<Injector | undefined>(undefined);
 
   /**
    * Indica si el contenido es un template
    */
-  get isTemplate(): boolean {
-    return this.content instanceof TemplateRef;
-  }
+  readonly isTemplate = computed(() => this.content() instanceof TemplateRef);
 
   /**
    * Indica si el contenido es un componente
    */
-  get isComponent(): boolean {
-    return typeof this.content === 'function';
-  }
+  readonly isComponent = computed(() => typeof this.content() === 'function');
 
   private dynamicComponentRef?: ComponentRef<any>;
   private destroyed = false;
 
   ngOnInit(): void {
     // Si es un componente, renderizarlo dinámicamente después de la vista
-    if (this.isComponent) {
+    if (this.isComponent()) {
       queueMicrotask(() => {
         if (!this.destroyed) {
           this.loadComponent();
@@ -147,16 +144,17 @@ export class PopoverComponent implements OnInit {
    * Crea un injector hijo con tokens específicos para el popover
    */
   private createPopoverInjector(): Injector {
+    const contextValue = this.context();
     return Injector.create({
-      parent: this.injector,
+      parent: this.injector(),
       providers: [
         { 
           provide: POPOVER_DATA, 
-          useValue: this.context?.data 
+          useValue: contextValue?.data 
         },
         { 
           provide: POPOVER_CLOSE, 
-          useValue: this.context?.close ?? (() => {}) 
+          useValue: contextValue?.close ?? (() => {}) 
         }
       ]
     });
@@ -166,11 +164,11 @@ export class PopoverComponent implements OnInit {
    * Carga un componente dinámicamente
    */
   private loadComponent(): void {
-    if (!this.dynamicComponentContainer || !this.isComponent) return;
+    if (!this.dynamicComponentContainer || !this.isComponent()) return;
 
     this.dynamicComponentContainer.clear();
     
-    const componentType = this.content as Type<any>;
+    const componentType = this.content() as Type<any>;
     const popoverInjector = this.createPopoverInjector();
     
     this.dynamicComponentRef = this.dynamicComponentContainer.createComponent(
@@ -180,15 +178,16 @@ export class PopoverComponent implements OnInit {
 
     // Pasar los datos del contexto al componente (backward compatibility)
     // Los componentes pueden usar inyección de tokens O propiedades directas
-    if (this.context) {
+    const contextValue = this.context();
+    if (contextValue) {
       const instance = this.dynamicComponentRef.instance;
       
       // Asignar close directamente (todos los PopoverContentComponent deben tenerlo)
-      instance.close = this.context.close;
+      instance.close = contextValue.close;
       
       // Asignar data directamente (puede o no existir en el componente)
       // La asignación funcionará incluso si la propiedad se declara con `!` o `?`
-      instance.data = this.context.data;
+      instance.data = contextValue.data;
     }
     
     // Detectar cambios

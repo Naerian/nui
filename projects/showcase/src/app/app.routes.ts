@@ -107,6 +107,13 @@ export const routes: Routes = [
             m => m.PaginatorPageComponent
           ),
       },
+      {
+        path: 'popover',
+        loadComponent: () =>
+          import('./pages/components/popover-page/popover-page.component').then(
+            m => m.PopoverPageComponent
+          ),
+      },
     ],
   },
 

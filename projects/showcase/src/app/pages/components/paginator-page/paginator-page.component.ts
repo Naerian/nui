@@ -2,10 +2,11 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { PaginatorComponent, ButtonGroupComponent, PaginatorLayout } from 'nui'; // Asegúrate de exportarlos en tu public-api
+import { PaginatorComponent, ButtonGroupComponent, PaginatorLayout } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
-import { CodeExample } from '../../../core/models';
+import { BaseComponentPage } from '../../../core/base/base-component-page';
+import { PAGINATOR_PAGE_CONFIG } from './paginator-page.config';
 
 @Component({
   selector: 'app-paginator-page',
@@ -21,7 +22,9 @@ import { CodeExample } from '../../../core/models';
   templateUrl: './paginator-page.component.html',
   styleUrls: ['./paginator-page.component.scss'],
 })
-export class PaginatorPageComponent {
+export class PaginatorPageComponent extends BaseComponentPage {
+  pageConfig = PAGINATOR_PAGE_CONFIG;
+
   // ==========================================
   // ESTADO DE EJEMPLOS
   // ==========================================
@@ -88,88 +91,4 @@ export class PaginatorPageComponent {
     this.infiniteItems.update(items => [...items, ...newItems]);
     this.infiniteLoading.set(false);
   }
-
-  // ==========================================
-  // EJEMPLOS DE CÓDIGO
-  // ==========================================
-
-  basicExample: CodeExample[] = [
-    {
-      title: 'components.paginator.basic.codeTitle',
-      code: `<nui-paginator
-  [currentPage]="currentPage"
-  [totalItems]="150"
-  [itemsPerPage]="10"
-  (pageChange)="onPageChange($event)"
-></nui-paginator>`,
-      language: 'html',
-    },
-  ];
-
-  layoutExample: CodeExample[] = [
-    {
-      title: 'components.paginator.layout.tsTitle',
-      code: `
-myLayout: PaginatorLayout = {
-  top: ['itemRange'],
-  left: ['pageSize'],
-  center: ['firstButton', 'prevButton', 'pageNumbers', 'nextButton', 'lastButton'],
-  right: ['pageJump'],
-  bottom: ['itemRange'], // Repetimos info abajo
-  direction: 'column',
-  gap: '1rem',
-};
-`,
-      language: 'typescript',
-    },
-    {
-      title: 'components.paginator.layout.htmlTitle',
-      code: `<nui-paginator
-  [layout]="myLayout"
-  [totalItems]="500"
-  ...
-></nui-paginator>`,
-      language: 'html',
-    },
-  ];
-
-  styleExample: CodeExample[] = [
-    {
-      title: 'components.paginator.styles.codeTitle',
-      code: `<nui-paginator color="secondary" variant="outline" ... />
-<nui-paginator size="sm" color="success" ... />`,
-      language: 'html',
-    },
-  ];
-
-  sizeExample: CodeExample[] = [
-    {
-      title: 'components.paginator.sizes.codeTitle',
-      code: `<nui-paginator size="xs" ... />
-<nui-paginator size="s" ... />
-<nui-paginator size="sm" ... />
-<nui-paginator size="md" ... />
-<nui-paginator size="lg" ... />
-<nui-paginator size="xl" ... />`,
-      language: 'html',
-    },
-  ];
-
-  infiniteExample: CodeExample[] = [
-    {
-      title: 'components.paginator.infinite.codeTitle',
-      code: `<nui-paginator
-  [infiniteConfig]="{ 
-    enabled: true, 
-    mode: 'button',
-    showCounter: true,
-    initialLoadedItems: 20, // Items ya cargados inicialmente
-    // itemsPerLoad: 20 (valor por defecto, no es necesario especificarlo)
-    onLoadMore: loadMoreData // Tu función async
-  }"
-  [totalItems]="100"
-></nui-paginator>`,
-      language: 'html',
-    },
-  ];
 }

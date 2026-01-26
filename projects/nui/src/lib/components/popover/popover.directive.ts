@@ -1,8 +1,7 @@
 import {
   Directive,
-  Input,
-  Output,
-  EventEmitter,
+  input,
+  output,
   ElementRef,
   inject,
   OnDestroy,
@@ -17,7 +16,7 @@ import {
   Type,
   Injector,
   untracked,
-  booleanAttribute,
+  computed,
 } from '@angular/core';
 import {
   Overlay,
@@ -102,31 +101,32 @@ export class PopoverDirective implements OnInit, OnDestroy {
   private showTimeoutId?: ReturnType<typeof setTimeout>;
   private hideTimeoutId?: ReturnType<typeof setTimeout>;
   private currentPosition: PopoverPosition = 'top';
-  private popoverId = `nui-popover-${Math.random().toString(36).substring(2, 11)}`;
+  readonly popoverId = `nui-popover-${Math.random().toString(36).substring(2, 11)}`;
   private hoverSubscriptions: { unsubscribe: () => void }[] = [];
 
   /**
    * Contenido del popover (texto, template o componente)
    */
-  @Input('nuiPopover') content: string | TemplateRef<PopoverContext> | Type<any> = '';
+  readonly content = input.required<string | TemplateRef<PopoverContext> | Type<any>>({ alias: 'nuiPopover' });
 
   /**
    * Posición del popover
    * @default 'top' (o valor global configurado)
    */
-  @Input() popoverPosition?: PopoverPosition;
+  readonly popoverPosition = input<PopoverPosition | undefined>(undefined);
 
   /**
    * Evento que dispara el popover
+   * Opciones: 'hover', 'click', 'focus'
    * @default 'click' (o valor global configurado)
    */
-  @Input() popoverEvent?: PopoverEvent;
+  readonly popoverEvent = input<PopoverEvent | undefined>(undefined);
 
   /**
    * Delay antes de mostrar el popover (ms)
    * @default 0 (o valor global configurado)
    */
-  @Input() popoverShowDelay?: number;
+  readonly popoverShowDelay = input<number | undefined>(undefined);
 
   /**
    * Delay antes de ocultar el popover (ms)
@@ -139,58 +139,58 @@ export class PopoverDirective implements OnInit, OnDestroy {
    * 
    * @default 0 (o valor global configurado)
    */
-  @Input() popoverHideDelay?: number;
+  readonly popoverHideDelay = input<number | undefined>(undefined);
 
   /**
    * Desactiva el popover
    * @default false
    */
-  @Input({ transform: booleanAttribute }) popoverDisabled = false;
+  readonly popoverDisabled = input(false);
 
   /**
    * Clase CSS personalizada para el popover
    */
-  @Input() popoverClass?: string;
+  readonly popoverClass = input<string | undefined>(undefined);
 
   /**
    * Muestra una flecha apuntando al elemento
    * @default true (o valor global configurado)
    */
-  @Input() popoverShowArrow?: boolean;
+  readonly popoverShowArrow = input<boolean | undefined>(undefined);
 
   /**
    * Cierra el popover al hacer click fuera
    * @default true (o valor global configurado)
    */
-  @Input({ transform: booleanAttribute }) popoverCloseOnClickOutside?: boolean;
+  readonly popoverCloseOnClickOutside = input<boolean | undefined>(undefined);
 
   /**
    * Cierra el popover al presionar Escape
    * @default true (o valor global configurado)
    */
-  @Input({ transform: booleanAttribute }) popoverCloseOnEscape?: boolean;
+  readonly popoverCloseOnEscape = input<boolean | undefined>(undefined);
 
   /**
    * Ancho máximo del popover
    * @default '300px' (o valor global configurado)
    */
-  @Input() popoverMaxWidth?: string;
+  readonly popoverMaxWidth = input<string | undefined>(undefined);
 
   /**
    * Ancho mínimo del popover
    */
-  @Input() popoverMinWidth?: string;
+  readonly popoverMinWidth = input<string | undefined>(undefined);
 
   /**
    * Offset (separación) del popover respecto al elemento trigger en píxeles
    * @default 8
    */
-  @Input() popoverOffset?: number;
+  readonly popoverOffset = input<number | undefined>(undefined);
 
   /**
    * Datos para pasar al componente dinámico o template
    */
-  @Input() popoverData?: any;
+  readonly popoverData = input<any>(undefined);
 
   /**
    * Permite múltiples popovers abiertos simultáneamente
@@ -202,120 +202,108 @@ export class PopoverDirective implements OnInit, OnDestroy {
    * 
    * @default false para click/focus/manual, true para hover (o valor global configurado)
    */
-  @Input({ transform: booleanAttribute }) popoverAllowMultiple?: boolean;
+  readonly popoverAllowMultiple = input<boolean | undefined>(undefined);
 
   /**
    * Muestra un backdrop (fondo oscuro) detrás del popover
    * @default false
    */
-  @Input({ transform: booleanAttribute }) popoverBackdrop = false;
+  readonly popoverBackdrop = input(false);
 
   /**
    * Cierra el popover al hacer click en el backdrop
    * Solo tiene efecto si popoverBackdrop=true
    * @default true
    */
-  @Input({ transform: booleanAttribute }) backdropClose = true;
+  readonly backdropClose = input(true);
 
   /**
    * Z-index del popover (útil para controlar el orden de apilamiento)
    * @default 1000
    */
-  @Input() popoverZIndex = 1000;
-
-  /**
-   * Visibilidad manual del popover (solo para event='manual')
-   */
-  @Input() 
-  set popoverVisible(value: boolean | undefined) {
-    this._popoverVisible.set(value);
-  }
-  get popoverVisible(): boolean | undefined {
-    return this._popoverVisible();
-  }
+  readonly popoverZIndex = input(1000);
 
   /**
    * Evento que se emite cuando el popover se muestra
    */
-  @Output() popoverShow = new EventEmitter<void>();
+  readonly popoverShow = output<void>();
 
   /**
    * Evento que se emite cuando el popover se oculta
    */
-  @Output() popoverHide = new EventEmitter<void>();
+  readonly popoverHide = output<void>();
 
-  private _popoverVisible = signal<boolean | undefined>(undefined);
-  private isVisible = signal(false);
+  readonly isVisible = signal(false);
 
-  // Getters para valores con fallback a configuración global
-  private get position(): PopoverPosition {
-    return this.popoverPosition ?? this.globalConfig.popover?.position ?? 'top';
-  }
+  // Computed signals para valores con fallback a configuración global
+  private readonly position = computed<PopoverPosition>(() => 
+    this.popoverPosition() ?? this.globalConfig.popover?.position ?? 'top'
+  );
 
-  private get event(): PopoverEvent {
-    return this.popoverEvent ?? this.globalConfig.popover?.event ?? 'click';
-  }
+  private readonly event = computed<PopoverEvent>(() => 
+    this.popoverEvent() ?? this.globalConfig.popover?.event ?? 'click'
+  );
 
-  private get showDelay(): number {
-    return this.popoverShowDelay ?? this.globalConfig.popover?.showDelay ?? 0;
-  }
+  private readonly showDelay = computed(() => 
+    this.popoverShowDelay() ?? this.globalConfig.popover?.showDelay ?? 0
+  );
 
-  private get hideDelay(): number {
-    return this.popoverHideDelay ?? this.globalConfig.popover?.hideDelay ?? 0;
-  }
+  private readonly hideDelay = computed(() => 
+    this.popoverHideDelay() ?? this.globalConfig.popover?.hideDelay ?? 0
+  );
 
-  private get showArrow(): boolean {
-    return this.popoverShowArrow ?? this.globalConfig.popover?.showArrow ?? true;
-  }
+  private readonly showArrow = computed(() => 
+    this.popoverShowArrow() ?? this.globalConfig.popover?.showArrow ?? true
+  );
 
-  private get closeOnClickOutside(): boolean {
-    return this.popoverCloseOnClickOutside ?? this.globalConfig.popover?.closeOnClickOutside ?? true;
-  }
+  private readonly closeOnClickOutside = computed(() => 
+    this.popoverCloseOnClickOutside() ?? this.globalConfig.popover?.closeOnClickOutside ?? true
+  );
 
-  private get closeOnEscape(): boolean {
-    return this.popoverCloseOnEscape ?? this.globalConfig.popover?.closeOnEscape ?? true;
-  }
+  private readonly closeOnEscape = computed(() => 
+    this.popoverCloseOnEscape() ?? this.globalConfig.popover?.closeOnEscape ?? true
+  );
 
-  private get maxWidth(): string {
-    return this.popoverMaxWidth ?? this.globalConfig.popover?.maxWidth ?? '300px';
-  }
+  private readonly maxWidth = computed(() => 
+    this.popoverMaxWidth() ?? this.globalConfig.popover?.maxWidth ?? '300px'
+  );
 
-  private get minWidth(): string | undefined {
-    return this.popoverMinWidth ?? this.globalConfig.popover?.minWidth;
-  }
+  private readonly minWidth = computed<string | undefined>(() => 
+    this.popoverMinWidth() ?? this.globalConfig.popover?.minWidth
+  );
 
   /**
    * Obtiene el delay efectivo para ocultar el popover.
    * Para modo hover sin hideDelay configurado, aplica 100ms mínimo
    * para permitir mover el mouse al popover.
    */
-  private get effectiveHideDelay(): number {
-    if (this.event === 'hover' && this.popoverHideDelay === undefined) {
+  private readonly effectiveHideDelay = computed(() => {
+    if (this.event() === 'hover' && this.popoverHideDelay() === undefined) {
       // Si no se configuró explícitamente, usar 100ms mínimo para hover
-      return Math.max(100, this.hideDelay);
+      return Math.max(100, this.hideDelay());
     }
-    return this.hideDelay;
-  }
+    return this.hideDelay();
+  });
 
   /**
    * Obtiene si se permiten múltiples popovers abiertos.
    * Los popovers con event="hover" permiten múltiples por defecto
    * para mejor experiencia de usuario.
    */
-  private get allowMultiple(): boolean {
+  private readonly allowMultiple = computed(() => {
     // Si se configuró explícitamente, usar ese valor
-    if (this.popoverAllowMultiple !== undefined) {
-      return this.popoverAllowMultiple;
+    if (this.popoverAllowMultiple() !== undefined) {
+      return this.popoverAllowMultiple()!;
     }
     
     // Si es hover, permitir múltiples por defecto
-    if (this.event === 'hover') {
+    if (this.event() === 'hover') {
       return true;
     }
     
     // Fallback a configuración global o false
     return this.globalConfig.popover?.allowMultiple ?? false;
-  }
+  });
 
   constructor() {
     // Escuchar cuando otros popovers se abren
@@ -339,24 +327,6 @@ export class PopoverDirective implements OnInit, OnDestroy {
       });
     });
 
-    // Effect para modo manual con verificación de estado
-    effect(() => {
-      const visible = this._popoverVisible();
-      
-      if (this.event === 'manual' && visible !== undefined) {
-        const shouldShow = visible;
-        const isCurrentlyVisible = this.isVisible();
-
-        // Solo cambiar si el estado es diferente
-        // Usar untracked para permitir escritura de signals
-        if (shouldShow && !isCurrentlyVisible) {
-          untracked(() => this.show());
-        } else if (!shouldShow && isCurrentlyVisible) {
-          untracked(() => this.hide());
-        }
-      }
-    });
-
     // Cleanup automático al destruir
     this.destroyRef.onDestroy(() => {
       this.clearTimeouts();
@@ -368,14 +338,14 @@ export class PopoverDirective implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Si el evento es focus, asegurar que el elemento sea focusable
-    if (this.event === 'focus' && !this.isNaturallyFocusable()) {
+    if (this.event() === 'focus' && !this.isNaturallyFocusable()) {
       this.elementRef.nativeElement.setAttribute('tabindex', '0');
     }
 
     // Configurar listeners según el evento
-    if (this.event === 'hover') {
+    if (this.event() === 'hover') {
       // Para hover, manejamos manualmente
-    } else if (this.event === 'focus') {
+    } else if (this.event() === 'focus') {
       // Focus se maneja con HostListener
     }
     // Click se maneja con HostListener
@@ -390,9 +360,9 @@ export class PopoverDirective implements OnInit, OnDestroy {
    */
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent): void {
-    if (this.popoverDisabled || !this.content) return;
+    if (this.popoverDisabled() || !this.content()) return;
 
-    if (this.event === 'click') {
+    if (this.event() === 'click') {
       event.stopPropagation();
       this.toggle();
     }
@@ -403,9 +373,9 @@ export class PopoverDirective implements OnInit, OnDestroy {
    */
   @HostListener('mouseenter')
   onMouseEnter(): void {
-    if (this.popoverDisabled || !this.content) return;
+    if (this.popoverDisabled() || !this.content()) return;
 
-    if (this.event === 'hover') {
+    if (this.event() === 'hover') {
       this.clearTimeouts();
       this.show();
     }
@@ -416,7 +386,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
    */
   @HostListener('mouseleave')
   onMouseLeave(): void {
-    if (this.event === 'hover') {
+    if (this.event() === 'hover') {
       // Usar hideDelay para dar tiempo a mover el mouse al popover
       this.hide();
     }
@@ -430,7 +400,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
    * Configura el comportamiento hover para permitir interacción con el popover
    */
   private setupHoverBehavior(): void {
-    if (this.event !== 'hover' || !this.overlayRef) return;
+    if (this.event() !== 'hover' || !this.overlayRef) return;
 
     // Limpiar suscripciones anteriores para evitar memory leaks
     this.cleanupHoverSubscriptions();
@@ -466,9 +436,9 @@ export class PopoverDirective implements OnInit, OnDestroy {
    */
   @HostListener('focus')
   onFocus(): void {
-    if (this.popoverDisabled || !this.content) return;
+    if (this.popoverDisabled() || !this.content()) return;
 
-    if (this.event === 'focus') {
+    if (this.event() === 'focus') {
       this.show();
     }
   }
@@ -478,7 +448,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
    */
   @HostListener('blur')
   onBlur(): void {
-    if (this.event === 'focus') {
+    if (this.event() === 'focus') {
       this.hide();
     }
   }
@@ -488,14 +458,14 @@ export class PopoverDirective implements OnInit, OnDestroy {
    * @returns true si se inició el proceso de mostrar, false si no se pudo
    */
   show(): boolean {
-    if (this.popoverDisabled || !this.content || this.isVisible()) {
+    if (this.popoverDisabled() || !this.content() || this.isVisible()) {
       return false;
     }
 
     this.clearTimeouts();
 
-    if (this.showDelay > 0) {
-      this.showTimeoutId = setTimeout(() => this.displayPopover(), this.showDelay);
+    if (this.showDelay() > 0) {
+      this.showTimeoutId = setTimeout(() => this.displayPopover(), this.showDelay());
     } else {
       this.displayPopover();
     }
@@ -515,8 +485,8 @@ export class PopoverDirective implements OnInit, OnDestroy {
     this.clearTimeouts();
 
     // Usar el delay efectivo calculado (considera hover sin configuración explícita)
-    if (this.effectiveHideDelay > 0) {
-      this.hideTimeoutId = setTimeout(() => this.hidePopover(), this.effectiveHideDelay);
+    if (this.effectiveHideDelay() > 0) {
+      this.hideTimeoutId = setTimeout(() => this.hidePopover(), this.effectiveHideDelay());
     } else {
       this.hidePopover();
     }
@@ -553,25 +523,25 @@ export class PopoverDirective implements OnInit, OnDestroy {
 
     if (this.overlayRef && !this.overlayRef.hasAttached()) {
       // Registrar en el manager (cierra otros si allowMultiple es false)
-      this.popoverManager.register(this.popoverId, !this.allowMultiple);
+      this.popoverManager.register(this.popoverId, !this.allowMultiple());
 
       const portal = new ComponentPortal(PopoverComponent, this.viewContainerRef);
       this.componentRef = this.overlayRef.attach(portal);
 
-      // Configurar el componente
-      this.componentRef.instance.content = this.content;
-      this.componentRef.instance.showArrow = this.showArrow;
-      this.componentRef.instance.position = this.currentPosition;
-      this.componentRef.instance.popoverClass = this.popoverClass;
-      this.componentRef.instance.maxWidth = this.maxWidth;
-      this.componentRef.instance.minWidth = this.minWidth;
-      this.componentRef.instance.popoverId = this.popoverId;
+      // Configurar el componente usando signals
+      this.componentRef.setInput('content', this.content());
+      this.componentRef.setInput('showArrow', this.showArrow());
+      this.componentRef.setInput('position', this.currentPosition);
+      this.componentRef.setInput('popoverClass', this.popoverClass());
+      this.componentRef.setInput('maxWidth', this.maxWidth());
+      this.componentRef.setInput('minWidth', this.minWidth());
+      this.componentRef.setInput('popoverId', this.popoverId);
 
       // Pasar contexto con función close y datos
-      this.componentRef.instance.context = {
+      this.componentRef.setInput('context', {
         close: () => this.hide(),
-        data: this.popoverData,
-      };
+        data: this.popoverData(),
+      });
 
       this.componentRef.changeDetectorRef.detectChanges();
 
@@ -583,11 +553,11 @@ export class PopoverDirective implements OnInit, OnDestroy {
       // Configurar listeners para cerrar
       // NOTA: No configurar clickOutsideListener cuando hay backdrop,
       // ya que el backdrop maneja sus propios clicks
-      if (this.closeOnClickOutside && !this.popoverBackdrop) {
+      if (this.closeOnClickOutside() && !this.popoverBackdrop()) {
         this.setupClickOutsideListener();
       }
 
-      if (this.closeOnEscape) {
+      if (this.closeOnEscape()) {
         this.setupEscapeListener();
       }
 
@@ -626,21 +596,27 @@ export class PopoverDirective implements OnInit, OnDestroy {
     // Usar reposition en lugar de close para controlar manualmente el cierre
     const scrollStrategy = this.overlay.scrollStrategies.reposition();
 
+    // Combinar clases del panel: clase base + clase personalizada (si existe)
+    const panelClasses = ['nui-popover-overlay-pane'];
+    if (this.popoverClass()) {
+      panelClasses.push(this.popoverClass()!);
+    }
+
     this.overlayRef = this.overlay.create({
       positionStrategy,
       scrollStrategy,
-      hasBackdrop: this.popoverBackdrop,
-      backdropClass: this.popoverBackdrop ? 'nui-popover-backdrop' : undefined,
-      panelClass: 'nui-popover-overlay-pane',
+      hasBackdrop: this.popoverBackdrop(),
+      backdropClass: this.popoverBackdrop() ? 'nui-popover-backdrop' : undefined,
+      panelClass: panelClasses,
     });
 
     // Aplicar z-index personalizado
     if (this.overlayRef.overlayElement) {
-      this.overlayRef.overlayElement.style.zIndex = this.popoverZIndex.toString();
+      this.overlayRef.overlayElement.style.zIndex = this.popoverZIndex().toString();
     }
 
     // Listener para clicks en el backdrop (si está habilitado)
-    if (this.popoverBackdrop && this.backdropClose) {
+    if (this.popoverBackdrop() && this.backdropClose()) {
       this.overlayRef.backdropClick()
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(() => {
@@ -670,7 +646,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
         if (this.componentRef) {
           const position = this.getPositionFromConnectionPair(change.connectionPair);
           this.currentPosition = position;
-          this.componentRef.instance.position = position;
+          this.componentRef.instance.position.set(position);
           this.componentRef.changeDetectorRef.detectChanges();
         }
       });
@@ -695,10 +671,10 @@ export class PopoverDirective implements OnInit, OnDestroy {
    */
   private getPositions(): ConnectedPosition[] {
     const positions: ConnectedPosition[] = [];
-    const offset = this.popoverOffset ?? 8;
+    const offset = this.popoverOffset() ?? 8;
 
     // Posición preferida
-    switch (this.position) {
+    switch (this.position()) {
       case 'top':
         positions.push(
           { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom', offsetY: -offset },

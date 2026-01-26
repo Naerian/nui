@@ -61,12 +61,20 @@
     p {
       margin: 0;
     }
+
+    code {
+      background-color: var(--nui-bg-tertiary);
+      padding: 0.125rem 0.375rem;
+      border-radius: var(--border-radius-xs);
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+      font-size: 0.8125rem;
+    }
   }
 }
 
 .example-preview {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
   align-items: center;
   padding: 1.5rem;
@@ -78,32 +86,78 @@
 
   &.flex-column {
     flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .gap-4 {
-    gap: 1.5rem;
-  }
-  .d-flex {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .align-items-center {
-    align-items: center;
+    align-items: stretch;
   }
 }
 
-// Estilo para mostrar el valor seleccionado
-.value-display {
-  margin-top: 1rem;
-  padding: 0.5rem 0.75rem;
-  background-color: var(--nui-bg-tertiary);
-  border-radius: var(--border-radius-sm);
-  font-family: monospace;
-  font-size: 0.875rem;
-  color: var(--nui-text-secondary);
+.events-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+}
 
-  strong {
-    color: var(--nui-color-primary);
+.example-input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--nui-border-primary);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--nui-bg-primary);
+  color: var(--nui-text-primary);
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+  min-width: 250px;
+
+  &:focus {
+    outline: none;
+    border-color: var(--nui-color-primary);
+  }
+
+  &::placeholder {
+    color: var(--nui-text-tertiary);
+  }
+}
+
+// Estilos para el template personalizado del popover
+.nui-custom-popover {
+  min-width: 250px;
+
+  &__title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--nui-text-primary);
+  }
+
+  &__text {
+    margin: 0 0 1rem 0;
+    font-size: 0.875rem;
+    color: var(--nui-text-secondary);
+    line-height: 1.5;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
+}
+
+// Estilos para el popover modal con backdrop
+.nui-modal-popover {
+
+  &__title {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--nui-text-primary);
+  }
+
+  &__text {
+    margin: 0 0 1.25rem 0;
+    font-size: 0.9375rem;
+    color: var(--nui-text-secondary);
+    line-height: 1.6;
   }
 }

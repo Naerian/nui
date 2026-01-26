@@ -5,7 +5,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ButtonGroupComponent } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
-import { CodeExample } from '../../../core/models';
+import { BaseComponentPage } from '../../../core/base/base-component-page';
+import { BUTTON_GROUP_PAGE_CONFIG } from './button-group-page.config';
 
 @Component({
   selector: 'app-button-group-page',
@@ -21,7 +22,9 @@ import { CodeExample } from '../../../core/models';
   templateUrl: './button-group-page.component.html',
   styleUrls: ['./button-group-page.component.scss'],
 })
-export class ButtonGroupPageComponent {
+export class ButtonGroupPageComponent extends BaseComponentPage {
+  pageConfig = BUTTON_GROUP_PAGE_CONFIG;
+
   // ==========================================
   // DATOS DE EJEMPLO
   // ==========================================
@@ -59,101 +62,4 @@ export class ButtonGroupPageComponent {
   selectedPeriod = signal<string>('weekly');
   selectedFormats = signal<string[]>(['bold']); // Array para checkbox mode
   selectedUser = signal<number>(102); // Guardamos el ID
-
-  // ==========================================
-  // EJEMPLOS DE CÓDIGO
-  // ==========================================
-
-  // 1. Básico
-  basicExample: CodeExample[] = [
-    {
-      title: 'components.buttonGroup.basic.codeTitle',
-      code: `<nui-button-group 
-  [options]="['Madrid', 'Barcelona', 'Valencia', 'Sevilla']" 
-  [(ngModel)]="selectedCity">
-</nui-button-group>
-
-<p>Seleccionado: {{ selectedCity() }}</p>`,
-      language: 'html',
-    },
-  ];
-
-  // 2. Modos (Radio vs Checkbox)
-  modeExample: CodeExample[] = [
-    {
-      title: 'components.buttonGroup.modes.codeTitle',
-      code: `<nui-button-group 
-  mode="checkbox"
-  [options]="formats" 
-  labelBy="label"
-  valueBy="id"
-  [(ngModel)]="selectedFormats">
-</nui-button-group>`,
-      language: 'html',
-    },
-  ];
-
-  // 3. Segmented (iOS Style)
-  segmentedExample: CodeExample[] = [
-    {
-      title: 'components.buttonGroup.segmented.codeTitle',
-      code: `<nui-button-group 
-  visualVariant="segmented"
-  [options]="periods"
-  [(ngModel)]="selectedPeriod">
-</nui-button-group>`,
-      language: 'html',
-    },
-  ];
-
-  // 4. Objetos Complejos
-  complexExample: CodeExample[] = [
-    {
-      title: 'components.buttonGroup.complex.codeTitle',
-      code: `<nui-button-group 
-  [options]="users"
-  labelBy="name"    
-  valueBy="id"      
-  disabledBy="disabled" 
-  [(ngModel)]="selectedUserId">
-</nui-button-group>`,
-      language: 'html',
-    },
-  ];
-
-  // 5. Iconos
-  iconExample: CodeExample[] = [
-    {
-      title: 'components.buttonGroup.icons.codeTitle',
-      code: `<nui-button-group 
-  [options]="textFormats" 
-  iconBy="icon"
-  [iconOnly]="true" 
-  mode="checkbox">
-</nui-button-group>`,
-      language: 'html',
-    },
-  ];
-
-  // 6. Colores y Tamaños
-  styleExample: CodeExample[] = [
-    {
-      title: 'components.buttonGroup.styles.codeTitle',
-      code: `<nui-button-group color="primary" variant="solid" ... />
-<nui-button-group color="danger" variant="ghost" ... />
-<nui-button-group color="danger" variant="outline" ... />
-<nui-button-group size="xs" visualVariant="segmented" ... />
-<nui-button-group size="sm" visualVariant="segmented" ... />`,
-      language: 'html',
-    },
-  ];
-
-  // 7. Width
-  widthExample: CodeExample[] = [
-    {
-      title: 'components.buttonGroup.width.codeTitle',
-      code: `<nui-button-group width="full" [options]="..." />`,
-      language: 'html',
-    },
-  ];
 }

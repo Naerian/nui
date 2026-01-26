@@ -79,6 +79,12 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
         route: '/components/paginator',
         icon: 'ri-pages-line',
       },
+      {
+        label: 'Popover',
+        translationKey: 'sidebar.popover',
+        route: '/components/popover',
+        icon: 'ri-chat-4-line',
+      },
     ],
   },
   {

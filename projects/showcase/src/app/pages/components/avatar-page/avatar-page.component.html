@@ -15,7 +15,7 @@
       <nui-avatar [src]="avatarUrl1" alt="John Doe"></nui-avatar>
     </div>
 
-    <app-code-block [examples]="basicExamples"></app-code-block>
+    <app-code-block [examples]="getSection('basic')?.examples || []"></app-code-block>
   </section>
 
   <section class="section">
@@ -38,7 +38,7 @@
       <nui-avatar></nui-avatar>
     </div>
 
-    <app-code-block [examples]="contentTypeExamples"></app-code-block>
+    <app-code-block [examples]="getSection('types')?.examples || []"></app-code-block>
   </section>
 
   <section class="section">
@@ -54,7 +54,7 @@
       <nui-avatar [src]="avatarUrl3" variant="square"></nui-avatar>
     </div>
 
-    <app-code-block [examples]="variantExamples"></app-code-block>
+    <app-code-block [examples]="getSection('variants')?.examples || []"></app-code-block>
   </section>
 
   <section class="section">
@@ -72,7 +72,7 @@
       <nui-avatar size="xl" initials="XL"></nui-avatar>
     </div>
 
-    <app-code-block [examples]="sizeExamples"></app-code-block>
+    <app-code-block [examples]="getSection('sizes')?.examples || []"></app-code-block>
   </section>
 
   <section class="section">
@@ -92,32 +92,28 @@
       <nui-avatar initials="D" color="danger"></nui-avatar>
     </div>
 
-    <app-code-block [examples]="colorExamples"></app-code-block>
+    <app-code-block [examples]="getSection('colors')?.examples || []"></app-code-block>
   </section>
 
   <section class="section">
     <app-section-title
       [title]="'components.avatar.customSize.title' | translate"
-      anchor="custom-size"
+      anchor="tamano-custom"
     ></app-section-title>
     <p class="section-description">{{ 'components.avatar.customSize.description' | translate }}</p>
-
-    <div class="section-note">
-      <p [innerHTML]="'components.avatar.customSize.note' | translate"></p>
-    </div>
 
     <div class="example-preview">
       <nui-avatar [customSize]="120" [src]="avatarUrl1" variant="rounded"></nui-avatar>
       <nui-avatar [customSize]="80" initials="CS" color="primary"></nui-avatar>
     </div>
 
-    <app-code-block [examples]="customSizeExamples"></app-code-block>
+    <app-code-block [examples]="getSection('customSize')?.examples || []"></app-code-block>
   </section>
 
   <section class="section">
     <app-section-title
       [title]="'components.avatar.error.title' | translate"
-      anchor="error"
+      anchor="manejo-errores"
     ></app-section-title>
     <p class="section-description">{{ 'components.avatar.error.description' | translate }}</p>
 
@@ -130,6 +126,6 @@
       ></nui-avatar>
     </div>
 
-    <app-code-block [examples]="errorExamples"></app-code-block>
+    <app-code-block [examples]="getSection('error')?.examples || []"></app-code-block>
   </section>
 </div>

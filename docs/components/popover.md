@@ -78,7 +78,7 @@ export class ExampleComponent {
 |-----------|------|---------|-------------|
 | `nuiPopover` | `string \| TemplateRef \| Component` | - | Contenido del popover |
 | `popoverPosition` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` | Posición preferida |
-| `popoverEvent` | `'hover' \| 'click' \| 'focus' \| 'manual'` | `'click'` | Evento que dispara el popover |
+| `popoverEvent` | `'hover' \| 'click' \| 'focus'` | `'click'` | Evento que dispara el popover |
 | `popoverShowDelay` | `number` | `0` | Delay antes de mostrar (ms) |
 | `popoverHideDelay` | `number` | `0` | Delay antes de ocultar (ms). No aplica al scroll (cierre inmediato) |
 | `popoverDisabled` | `boolean` | `false` | Deshabilita el popover |
@@ -90,7 +90,6 @@ export class ExampleComponent {
 | `popoverMinWidth` | `string` | - | Ancho mínimo del popover |
 | `popoverOffset` | `number` | `8` | Separación en píxeles del elemento trigger |
 | `popoverData` | `any` | - | Datos para pasar al componente dinámico o template |
-| `popoverVisible` | `boolean` | - | Control de visibilidad para modo manual (`popoverEvent="manual"`) |
 | `popoverAllowMultiple` | `boolean` | `false` | Permite múltiples popovers abiertos simultáneamente |
 | `popoverBackdrop` | `boolean` | `false` | Muestra un backdrop (fondo oscuro) detrás del popover |
 | `backdropClose` | `boolean` | `true` | Cierra el popover al hacer click en el backdrop (solo si `popoverBackdrop=true`) |

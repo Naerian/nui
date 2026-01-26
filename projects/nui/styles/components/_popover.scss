@@ -14,7 +14,12 @@
 // Clase del panel overlay del CDK
 .nui-popover-overlay-pane {
   z-index: 1060 !important; // Más alto que modales (1050)
-  pointer-events: auto;
+  pointer-events: none; // El pane no captura clicks, solo el contenido
+  
+  // El popover dentro sí captura clicks
+  .nui-popover {
+    pointer-events: auto;
+  }
 }
 
 .nui-popover-overlay {
@@ -46,9 +51,9 @@
     font-weight: var(--popover-font-weight);
     line-height: var(--popover-line-height);
     
-    // Permitir scroll solo en el contenido si es necesario
-    overflow: auto;
-    max-height: calc(100vh - 4rem);
+    // Por defecto sin scroll - el contenido se ajusta naturalmente
+    // Si necesitas scroll, agrega la clase .nui-popover--scrollable al popover
+    overflow: visible;
     
     // Por si el popover contiene HTML
     p {
@@ -113,6 +118,12 @@
       border: none;
       border-top: var(--popover-border);
     }
+  }
+  
+  // Modificador: Popover con scroll
+  &--scrollable &__content {
+    overflow: auto;
+    max-height: 60vh; // Limitar altura cuando necesite scroll
   }
 
   // Flecha del popover
