@@ -33,10 +33,13 @@
       anchor="modos"
     ></app-section-title>
     <p class="section-description">{{ 'components.buttonGroup.modes.description' | translate }}</p>
-    <div class="section-note info">
-      <i class="ri-information-line"></i>
-      <p [innerHTML]="'components.buttonGroup.modes.note' | translate"></p>
-    </div>
+
+    @if (getSection('modes')?.note; as note) {
+      <div class="section-note" [ngClass]="note.type">
+        <i [class]="getSectionNoteIcon(note)"></i>
+        <p [innerHTML]="note.content | translate"></p>
+      </div>
+    }
 
     <div class="example-preview flex-column">
       <nui-button-group
@@ -65,10 +68,13 @@
     <p class="section-description">
       {{ 'components.buttonGroup.segmented.description' | translate }}
     </p>
-    <div class="section-note info">
-      <i class="ri-information-line"></i>
-      <p [innerHTML]="'components.buttonGroup.segmented.note' | translate"></p>
-    </div>
+
+    @if (getSection('segmented')?.note; as note) {
+      <div class="section-note" [ngClass]="note.type">
+        <i [class]="getSectionNoteIcon(note)"></i>
+        <p [innerHTML]="note.content | translate"></p>
+      </div>
+    }
 
     <div class="example-preview flex-column">
       <nui-button-group
@@ -92,10 +98,13 @@
       [title]="'components.buttonGroup.complex.title' | translate"
       anchor="complex"
     ></app-section-title>
-    <div class="section-note info">
-      <i class="ri-information-line"></i>
-      <p [innerHTML]="'components.buttonGroup.complex.note' | translate"></p>
-    </div>
+
+    @if (getSection('complex')?.note; as note) {
+      <div class="section-note" [ngClass]="note.type">
+        <i [class]="getSectionNoteIcon(note)"></i>
+        <p [innerHTML]="note.content | translate"></p>
+      </div>
+    }
 
     <div class="example-preview flex-column">
       <nui-button-group
@@ -121,10 +130,13 @@
       [title]="'components.buttonGroup.icons.title' | translate"
       anchor="icons"
     ></app-section-title>
-    <div class="section-note info">
-      <i class="ri-information-line"></i>
-      <p [innerHTML]="'components.buttonGroup.icons.note' | translate"></p>
-    </div>
+
+    @if (getSection('icons')?.note; as note) {
+      <div class="section-note" [ngClass]="note.type">
+        <i [class]="getSectionNoteIcon(note)"></i>
+        <p [innerHTML]="note.content | translate"></p>
+      </div>
+    }
 
     <div class="example-preview flex-column">
       <div class="d-flex gap-4">
@@ -154,10 +166,13 @@
       anchor="styles"
     ></app-section-title>
     <p class="section-description">{{ 'components.buttonGroup.styles.description' | translate }}</p>
-    <div class="section-note info">
-      <i class="ri-information-line"></i>
-      <p [innerHTML]="'components.buttonGroup.styles.note' | translate"></p>
-    </div>
+
+    @if (getSection('styles')?.note; as note) {
+      <div class="section-note" [ngClass]="note.type">
+        <i [class]="getSectionNoteIcon(note)"></i>
+        <p [innerHTML]="note.content | translate"></p>
+      </div>
+    }
 
     <div class="example-preview flex-column gap-4">
       <div class="d-flex gap-2">
@@ -203,10 +218,13 @@
       [title]="'components.buttonGroup.width.title' | translate"
       anchor="width"
     ></app-section-title>
-    <div class="section-note info">
-      <i class="ri-information-line"></i>
-      <p [innerHTML]="'components.buttonGroup.width.note' | translate"></p>
-    </div>
+
+    @if (getSection('width')?.note; as note) {
+      <div class="section-note" [ngClass]="note.type">
+        <i [class]="getSectionNoteIcon(note)"></i>
+        <p [innerHTML]="note.content | translate"></p>
+      </div>
+    }
 
     <div class="example-preview">
       <div style="width: 100%; max-width: 400px">

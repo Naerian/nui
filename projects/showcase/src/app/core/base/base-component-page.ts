@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { ComponentPageConfig, ComponentSection, CodeExample } from '../models';
+import { ComponentPageConfig, ComponentSection, CodeExample, SectionNote } from '../models';
 
 /**
  * Clase base abstracta para páginas de documentación de componentes.
@@ -64,5 +64,23 @@ export abstract class BaseComponentPage {
    */
   trackByExampleTitle(index: number, example: CodeExample): string {
     return example.title;
+  }
+
+  /**
+   * Obtiene el icono para una nota de sección
+   * @param note - Nota de la sección
+   * @returns Clase del icono
+   */
+  getSectionNoteIcon(note: SectionNote): string {
+    if (note.icon) return note.icon;
+
+    const defaultIcons: Record<string, string> = {
+      info: 'ri-information-line',
+      warning: 'ri-error-warning-line',
+      danger: 'ri-alert-line',
+      success: 'ri-checkbox-circle-line'
+    };
+
+    return defaultIcons[note.type] || 'ri-information-line';
   }
 }

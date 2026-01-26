@@ -75,10 +75,14 @@
       anchor="sizes"
     ></app-section-title>
     <p class="section-description">{{ 'components.paginator.sizes.description' | translate }}</p>
-    <div class="section-note info">
-      <i class="ri-information-line"></i>
-      <p [innerHTML]="'components.paginator.sizes.note' | translate"></p>
-    </div>
+
+    @if (getSection('sizes')?.note; as note) {
+      <div class="section-note" [ngClass]="note.type">
+        <i [class]="getSectionNoteIcon(note)"></i>
+        <p [innerHTML]="note.content | translate"></p>
+      </div>
+    }
+
     <div class="example-preview flex-column gap-4">
       <nui-paginator [currentPage]="1" [totalPages]="5" size="xs"></nui-paginator>
       <nui-paginator [currentPage]="1" [totalPages]="5" size="s"></nui-paginator>

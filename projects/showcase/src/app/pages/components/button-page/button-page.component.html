@@ -94,10 +94,12 @@
     <app-section-title [title]="'components.button.icons.title' | translate" anchor="iconos"></app-section-title>
     <p class="section-description">{{ 'components.button.icons.description' | translate }}</p>
     
-    <div class="section-note info">
-      <i class="ri-information-line"></i>
-      <p [innerHTML]="'components.button.icons.note' | translate"></p>
-    </div>
+    @if (getSection('icons')?.note; as note) {
+      <div class="section-note" [ngClass]="note.type">
+        <i [class]="getSectionNoteIcon(note)"></i>
+        <p [innerHTML]="note.content | translate"></p>
+      </div>
+    }
     
     <div class="example-preview">
       <nui-button icon="ri-user-line">Profile</nui-button>
@@ -113,10 +115,12 @@
     <app-section-title [title]="'components.button.loading.title' | translate" anchor="loading"></app-section-title>
     <p class="section-description">{{ 'components.button.loading.description' | translate }}</p>
     
-    <div class="section-note warning">
-      <i class="ri-error-warning-line"></i>
-      <p [innerHTML]="'components.button.loading.note' | translate"></p>
-    </div>
+    @if (getSection('loading')?.note; as note) {
+      <div class="section-note" [ngClass]="note.type">
+        <i [class]="getSectionNoteIcon(note)"></i>
+        <p [innerHTML]="note.content | translate"></p>
+      </div>
+    }
     
     <div class="example-preview">
       <nui-button [loading]="isLoading()" loadingPosition="start" (onClick)="simulateLoading()">
@@ -134,10 +138,12 @@
     <app-section-title [title]="'components.button.width.title' | translate" anchor="ancho"></app-section-title>
     <p class="section-description">{{ 'components.button.width.description' | translate }}</p>
     
-    <div class="section-note info">
-      <i class="ri-information-line"></i>
-      <p [innerHTML]="'components.button.width.note' | translate"></p>
-    </div>
+    @if (getSection('width')?.note; as note) {
+      <div class="section-note" [ngClass]="note.type">
+        <i [class]="getSectionNoteIcon(note)"></i>
+        <p [innerHTML]="note.content | translate"></p>
+      </div>
+    }
     
     <div class="example-preview flex-column">
       <nui-button width="auto">Auto Width</nui-button>
@@ -166,10 +172,12 @@
     <app-section-title [title]="'components.button.events.title' | translate" anchor="eventos"></app-section-title>
     <p class="section-description">{{ 'components.button.events.description' | translate }}</p>
     
-    <div class="section-note info">
-      <i class="ri-information-line"></i>
-      <p [innerHTML]="'components.button.events.consoleNote' | translate"></p>
-    </div>
+    @if (getSection('events')?.note; as note) {
+      <div class="section-note" [ngClass]="note.type">
+        <i [class]="getSectionNoteIcon(note)"></i>
+        <p [innerHTML]="note.content | translate"></p>
+      </div>
+    }
     
     <div class="example-preview">
       <nui-button (onClick)="onButtonClick($event)">Click Event</nui-button>

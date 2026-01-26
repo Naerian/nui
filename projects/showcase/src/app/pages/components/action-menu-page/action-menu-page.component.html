@@ -10,16 +10,13 @@
     <p class="section-description">
       {{ "components.actionMenu.basic.description" | translate }}
     </p>
-    <div class="section-note">
-      <p [innerHTML]="'components.actionMenu.basic.note' | translate"></p>
-    </div>
 
-    <div class="section-note info">
-      <i class="ri-information-line"></i>
-      <p
-        [innerHTML]="'components.actionMenu.basic.consoleNote' | translate"
-      ></p>
-    </div>
+    @if (getSection('basic')?.note; as note) {
+      <div class="section-note" [ngClass]="note.type">
+        <i [class]="getSectionNoteIcon(note)"></i>
+        <p [innerHTML]="note.content | translate"></p>
+      </div>
+    }
 
     <div class="example-preview">
       <nui-action-menu
@@ -67,9 +64,12 @@
       {{ "components.actionMenu.submenu.description" | translate }}
     </p>
 
-    <div class="section-note">
-      <p [innerHTML]="'components.actionMenu.submenu.note' | translate"></p>
-    </div>
+    @if (getSection('submenu')?.note; as note) {
+      <div class="section-note" [ngClass]="note.type">
+        <i [class]="getSectionNoteIcon(note)"></i>
+        <p [innerHTML]="note.content | translate"></p>
+      </div>
+    }
 
     <div class="example-preview">
       <nui-action-menu
@@ -309,15 +309,12 @@
       {{ "components.actionMenu.template.description" | translate }}
     </p>
 
-    <div class="section-note info">
-      <i class="ri-information-line"></i>
-      <p [innerHTML]="'components.actionMenu.template.note' | translate"></p>
-    </div>
-
-    <div class="section-note warning">
-      <i class="ri-error-warning-line"></i>
-      <p [innerHTML]="'components.actionMenu.template.clickNote' | translate"></p>
-    </div>
+    @if (getSection('template')?.note; as note) {
+      <div class="section-note" [ngClass]="note.type">
+        <i [class]="getSectionNoteIcon(note)"></i>
+        <p [innerHTML]="note.content | translate"></p>
+      </div>
+    }
 
     <div class="example-preview">
       <nui-action-menu

@@ -25,10 +25,12 @@
     ></app-section-title>
     <p class="section-description">{{ 'components.avatar.types.description' | translate }}</p>
 
-    <div class="section-note info">
-      <i class="ri-information-line"></i>
-      <p [innerHTML]="'components.avatar.types.note' | translate"></p>
-    </div>
+    @if (getSection('types')?.note; as note) {
+      <div class="section-note" [ngClass]="note.type">
+        <i [class]="getSectionNoteIcon(note)"></i>
+        <p [innerHTML]="note.content | translate"></p>
+      </div>
+    }
 
     <div class="example-preview">
       <nui-avatar [src]="avatarUrl2" alt="User Image"></nui-avatar>
