@@ -55,6 +55,10 @@ export class ThemeService {
   private currentPresetSubject: BehaviorSubject<ThemePreset>;
   public currentPreset$: Observable<ThemePreset>;
 
+  // Observable para notificar cambios de dark mode
+  private darkModeSubject: BehaviorSubject<boolean>;
+  public darkMode$: Observable<boolean>;
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     @Optional() @Inject(NUI_THEME_CONFIG) config?: ThemeConfig
@@ -85,6 +89,9 @@ export class ThemeService {
 
     this.currentPresetSubject = new BehaviorSubject<ThemePreset>(this.currentPreset);
     this.currentPreset$ = this.currentPresetSubject.asObservable();
+
+    this.darkModeSubject = new BehaviorSubject<boolean>(this.isDark);
+    this.darkMode$ = this.darkModeSubject.asObservable();
 
     this.darkModeStrategy = config?.darkMode || 'manual';
     this.darkModeClass = config?.darkModeClass || 'dark-mode';
@@ -133,6 +140,7 @@ export class ThemeService {
     } else {
       this.document.documentElement.classList.remove(this.darkModeClass);
     }
+    this.darkModeSubject.next(this.isDark);
   }
 
   /**
@@ -253,6 +261,11 @@ export class ThemeService {
       css += this.generateAvatarVariables(name, baseColor);
       css += this.generateActionMenuVariables(name, baseColor);
     });
+
+    // Generar variables de Tooltip y Popover (no dependen de colores semánticos)
+    css += this.generateTooltipVariables();
+    css += this.generatePopoverVariables();
+
     css += '}\n';
     return css;
   }
@@ -619,6 +632,46 @@ export class ThemeService {
   --nui-action-menu-${name}-item-selected-hover-subtitle-color: ${selectedHoverSubtitleColor};
   --nui-action-menu-${name}-item-focus-color: ${focusColor};
 `;
+  }
+
+  /**
+   * Genera variables de color para Tooltip según el tema.
+   * El tooltip usa colores inversos al tema para mejor contraste.
+   */
+  private generateTooltipVariables(): string {
+    if (this.isDark) {
+      // En tema oscuro: tooltip con fondo similar al popover para consistencia
+      return `
+  --tooltip-bg: #27272a;
+  --tooltip-text: #f4f4f5;
+`;
+    } else {
+      // En tema claro: tooltip con fondo gris oscuro
+      return `
+  --tooltip-bg: #27272a;
+  --tooltip-text: #ffffff;
+`;
+    }
+  }
+
+  /**
+   * Genera variables de color para Popover según el tema.
+   * El popover usa los colores del tema con un fondo ligeramente elevado.
+   */
+  private generatePopoverVariables(): string {
+    if (this.isDark) {
+      return `
+  --popover-bg: #1c1c1e;
+  --popover-text: #e5e7eb;
+  --popover-border: #374151;
+`;
+    } else {
+      return `
+  --popover-bg: #ffffff;
+  --popover-text: #111827;
+  --popover-border: #e5e7eb;
+`;
+    }
   }
 
   private hexToRgb(hex: string): { r: number; g: number; b: number } {
