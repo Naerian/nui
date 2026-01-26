@@ -277,7 +277,7 @@ export class ThemeService {
   }
 
   private generateStructuralVariables(grays: ThemeGrays): string {
-    const isDark = this.isDark;
+    const isDark = this._isDarkMode();
     return `
   /* Gray scale */
   --nui-gray-50: ${grays[50]};
@@ -347,7 +347,7 @@ export class ThemeService {
   private generateButtonVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
     const activeColor = this.shade(color, 20);
-    const textOnColor = this.isDark ? '#0d1117' : '#ffffff';
+    const textOnColor = this._isDarkMode() ? '#0d1117' : '#ffffff';
     return `
   --nui-button-${name}-solid-bg: ${color};
   --nui-button-${name}-solid-text: ${textOnColor};
@@ -371,7 +371,7 @@ export class ThemeService {
   --nui-button-${name}-ghost-hover-bg: ${this.withAlpha(color, 0.1)};
   --nui-button-${name}-ghost-hover-text: ${hoverColor};
   --nui-button-${name}-ghost-hover-border: transparent;
-  --nui-button-${name}-ghost-active-bg: ${this.isDark ? this.shade(color, 80) : this.tint(color, 90)};
+  --nui-button-${name}-ghost-active-bg: ${this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 90)};
   --nui-button-${name}-ghost-active-border: transparent;
   --nui-button-${name}-focus-color: ${this.tint(color, 60)};
 `;
@@ -380,7 +380,7 @@ export class ThemeService {
   private generateFabButtonVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
     const activeColor = this.shade(color, 20);
-    const textOnColor = this.isDark ? '#0d1117' : '#ffffff';
+    const textOnColor = this._isDarkMode() ? '#0d1117' : '#ffffff';
     return `
   --nui-fab-button-${name}-solid-bg: ${color};
   --nui-fab-button-${name}-solid-text: ${textOnColor};
@@ -404,7 +404,7 @@ export class ThemeService {
   --nui-fab-button-${name}-ghost-hover-bg: ${this.withAlpha(color, 0.2)};
   --nui-fab-button-${name}-ghost-hover-text: ${hoverColor};
   --nui-fab-button-${name}-ghost-hover-border: transparent;
-  --nui-fab-button-${name}-ghost-active-bg: ${this.isDark ? this.shade(color, 80) : this.tint(color, 90)};
+  --nui-fab-button-${name}-ghost-active-bg: ${this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 90)};
   --nui-fab-button-${name}-ghost-active-border: transparent;
   --nui-fab-button-${name}-focus-color: ${this.tint(color, 60)};
 `;
@@ -413,9 +413,9 @@ export class ThemeService {
   private generateButtonGroupVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
     const hoverBg = this.withAlpha(color, 0.05);
-    const inactiveBorder = this.isDark ? '#0f0f10' : '#e4e4e7';
-    const inactiveBg = this.isDark ? '#18181b' : '#ffffff';
-    const textOnColor = this.isDark ? '#0d1117' : '#ffffff';
+    const inactiveBorder = this._isDarkMode() ? '#0f0f10' : '#e4e4e7';
+    const inactiveBg = this._isDarkMode() ? '#18181b' : '#ffffff';
+    const textOnColor = this._isDarkMode() ? '#0d1117' : '#ffffff';
     
     return `
   --nui-button-group-${name}-solid-bg: ${color};
@@ -450,8 +450,8 @@ export class ThemeService {
 
   private generateChipVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
-    const selectedBg = this.isDark ? this.shade(color, 15) : this.shade(color, 10);
-    const textOnColor = this.isDark ? '#0d1117' : '#ffffff';
+    const selectedBg = this._isDarkMode() ? this.shade(color, 15) : this.shade(color, 10);
+    const textOnColor = this._isDarkMode() ? '#0d1117' : '#ffffff';
     return `
   --nui-chip-${name}-solid-bg: ${color};
   --nui-chip-${name}-solid-text: ${textOnColor};
@@ -464,10 +464,10 @@ export class ThemeService {
   --nui-chip-${name}-outline-hover-bg: ${this.withAlpha(color, 0.1)};
   --nui-chip-${name}-outline-selected-bg: ${selectedBg};
   --nui-chip-${name}-outline-selected-text: ${textOnColor};
-  --nui-chip-${name}-ghost-bg: ${this.isDark ? this.shade(color, 80) : this.tint(color, 90)};
+  --nui-chip-${name}-ghost-bg: ${this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 90)};
   --nui-chip-${name}-ghost-text: ${color};
   --nui-chip-${name}-ghost-hover-bg: ${this.withAlpha(color, 0.2)};
-  --nui-chip-${name}-ghost-selected-bg: ${this.isDark ? this.shade(color, 60) : this.tint(color, 80)};
+  --nui-chip-${name}-ghost-selected-bg: ${this._isDarkMode() ? this.shade(color, 60) : this.tint(color, 80)};
   --nui-chip-${name}-ghost-selected-text: ${textOnColor};
   --nui-chip-${name}-focus-color: ${this.tint(color, 60)};
 `;
@@ -479,7 +479,7 @@ export class ThemeService {
   --nui-switch-${name}-color: ${color};
   --nui-switch-${name}-color-hover: ${hoverColor};
   --nui-switch-${name}-button-solid-bg: ${color};
-  --nui-switch-${name}-button-solid-text: ${this.isDark ? '#0d1117' : '#ffffff'};
+  --nui-switch-${name}-button-solid-text: ${this._isDarkMode() ? '#0d1117' : '#ffffff'};
   --nui-switch-${name}-button-solid-hover-bg: ${hoverColor};
   --nui-switch-${name}-button-solid-inactive-bg: ${this.withAlpha(color, 0.2)};
   --nui-switch-${name}-button-solid-inactive-text: ${color};
@@ -501,13 +501,13 @@ export class ThemeService {
   }
 
   private generateToastVariables(name: string, color: string): string {
-    const bgColor = this.isDark ? this.shade(color, 85) : this.tint(color, 96);
-    const bgColorHover = this.isDark ? this.shade(color, 80) : this.tint(color, 94);
-    const borderColor = this.isDark ? this.shade(color, 70) : this.tint(color, 80);
-    const textColor = this.isDark ? this.tint(color, 75) : this.shade(color, 25);
-    const titleColor = this.isDark ? this.tint(color, 65) : this.shade(color, 30);
-    const iconColor = this.isDark ? this.tint(color, 40) : color;
-    const progressColor = this.isDark ? this.tint(color, 50) : color;
+    const bgColor = this._isDarkMode() ? this.shade(color, 85) : this.tint(color, 96);
+    const bgColorHover = this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 94);
+    const borderColor = this._isDarkMode() ? this.shade(color, 70) : this.tint(color, 80);
+    const textColor = this._isDarkMode() ? this.tint(color, 75) : this.shade(color, 25);
+    const titleColor = this._isDarkMode() ? this.tint(color, 65) : this.shade(color, 30);
+    const iconColor = this._isDarkMode() ? this.tint(color, 40) : color;
+    const progressColor = this._isDarkMode() ? this.tint(color, 50) : color;
     return `
   --nui-toast-${name}-bg: ${bgColor};
   --nui-toast-${name}-bg-hover: ${bgColorHover};
@@ -515,7 +515,7 @@ export class ThemeService {
   --nui-toast-${name}-color: ${textColor};
   --nui-toast-${name}-title-color: ${titleColor};
   --nui-toast-${name}-icon-color: ${iconColor};
-  --nui-toast-${name}-icon-bg: ${this.withAlpha(color, this.isDark ? 0.2 : 0.1)};
+  --nui-toast-${name}-icon-bg: ${this.withAlpha(color, this._isDarkMode() ? 0.2 : 0.1)};
   --nui-toast-${name}-progress-bg: ${progressColor};
   --nui-toast-${name}-close-color: ${color};
   --nui-toast-${name}-close-hover: ${color};
@@ -526,9 +526,9 @@ export class ThemeService {
     return `
   --nui-progress-bar-${name}-fill-bg: ${color};
   --nui-progress-bar-${name}-fill-hover-bg: ${this.shade(color, 10)};
-  --nui-progress-bar-${name}-track-bg: ${this.isDark ? this.shade(color, 80) : this.tint(color, 90)};
-  --nui-progress-bar-${name}-track-border: ${this.isDark ? this.shade(color, 70) : this.tint(color, 80)};
-  --nui-progress-bar-${name}-text: ${this.isDark ? '#0d1117' : '#ffffff'};
+  --nui-progress-bar-${name}-track-bg: ${this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 90)};
+  --nui-progress-bar-${name}-track-border: ${this._isDarkMode() ? this.shade(color, 70) : this.tint(color, 80)};
+  --nui-progress-bar-${name}-text: ${this._isDarkMode() ? '#0d1117' : '#ffffff'};
   --nui-progress-bar-${name}-value-text: ${color};
 `;
   }
@@ -537,13 +537,13 @@ export class ThemeService {
     const hoverColor = this.shade(color, 10);
     const activeColor = this.shade(color, 20);
     const hoverBg = this.withAlpha(color, 0.05);
-    const inactiveBorder = this.isDark ? '#0f0f10' : '#e4e4e7';
-    const inactiveBg = this.isDark ? '#18181b' : '#ffffff';
+    const inactiveBorder = this._isDarkMode() ? '#0f0f10' : '#e4e4e7';
+    const inactiveBg = this._isDarkMode() ? '#18181b' : '#ffffff';
     const inactiveHoverBg = this.withAlpha(color, 0.08);
-    const ghostActive = this.isDark ? this.shade(color, 80) : this.tint(color, 90);
-    const ghostInactiveBg = this.isDark ? this.shade(color, 85) : this.tint(color, 95);
+    const ghostActive = this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 90);
+    const ghostInactiveBg = this._isDarkMode() ? this.shade(color, 85) : this.tint(color, 95);
     const ghostInactiveHoverBg = this.withAlpha(color, 0.12);
-    const textOnColor = this.isDark ? '#0d1117' : '#ffffff';
+    const textOnColor = this._isDarkMode() ? '#0d1117' : '#ffffff';
     
     return `
   --nui-paginator-${name}-solid-bg: ${color};
@@ -566,7 +566,7 @@ export class ThemeService {
   --nui-paginator-${name}-outline-inactive-bg: transparent;
   --nui-paginator-${name}-outline-inactive-border: ${inactiveBorder};
   --nui-paginator-${name}-outline-inactive-hover-bg: ${inactiveHoverBg};
-  --nui-paginator-${name}-ghost-bg: ${this.isDark ? this.shade(color, 80) : this.tint(color, 90)};
+  --nui-paginator-${name}-ghost-bg: ${this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 90)};
   --nui-paginator-${name}-ghost-text: ${color};
   --nui-paginator-${name}-ghost-border: transparent;
   --nui-paginator-${name}-ghost-hover-bg: ${this.withAlpha(color, 0.1)};
@@ -580,8 +580,8 @@ export class ThemeService {
   }
 
   private generateAvatarVariables(name: string, color: string): string {
-    const shadeColor = this.isDark ? this.shade(color, 10) : color;
-    const textOnColor = this.isDark ? '#0d1117' : '#ffffff';
+    const shadeColor = this._isDarkMode() ? this.shade(color, 10) : color;
+    const textOnColor = this._isDarkMode() ? '#0d1117' : '#ffffff';
 
     return `
   --nui-avatar-${name}-bg: ${shadeColor};
@@ -590,21 +590,21 @@ export class ThemeService {
   }
 
   private generateActionMenuVariables(name: string, color: string): string {
-    const hoverBg = this.isDark ? this.withAlpha(color, 0.15) : this.tint(color, 95);
-    const hoverColor = this.isDark ? this.tint(color, 60) : color;
-    const hoverIconColor = this.isDark ? this.tint(color, 50) : color;
-    const hoverBorderColor = this.isDark ? this.tint(color, 35) : this.tint(color, 65);
-    const hoverSubtitleColor = this.isDark ? this.tint(color, 40) : this.tint(color, 40);
-    const checkColor = this.isDark ? this.tint(color, 50) : color;
-    const selectedBg = this.isDark ? this.withAlpha(color, 0.15) : this.tint(color, 95);
-    const selectedColor = this.isDark ? this.tint(color, 60) : color;
-    const selectedIconColor = this.isDark ? this.tint(color, 50) : color;
-    const selectedSubtitleColor = this.isDark ? this.tint(color, 40) : this.tint(color, 40);
-    const selectedHoverBg = this.isDark ? this.withAlpha(color, 0.2) : this.tint(color, 90);
-    const selectedHoverColor = this.isDark ? this.tint(color, 65) : color;
-    const selectedHoverIconColor = this.isDark ? this.tint(color, 55) : color;
-    const selectedHoverSubtitleColor = this.isDark ? this.tint(color, 45) : this.tint(color, 35);
-    const focusColor = this.isDark ? this.withAlpha(color, 0.15) : this.tint(color, 95);
+    const hoverBg = this._isDarkMode() ? this.withAlpha(color, 0.15) : this.tint(color, 95);
+    const hoverColor = this._isDarkMode() ? this.tint(color, 60) : color;
+    const hoverIconColor = this._isDarkMode() ? this.tint(color, 50) : color;
+    const hoverBorderColor = this._isDarkMode() ? this.tint(color, 35) : this.tint(color, 65);
+    const hoverSubtitleColor = this._isDarkMode() ? this.tint(color, 40) : this.tint(color, 40);
+    const checkColor = this._isDarkMode() ? this.tint(color, 50) : color;
+    const selectedBg = this._isDarkMode() ? this.withAlpha(color, 0.15) : this.tint(color, 95);
+    const selectedColor = this._isDarkMode() ? this.tint(color, 60) : color;
+    const selectedIconColor = this._isDarkMode() ? this.tint(color, 50) : color;
+    const selectedSubtitleColor = this._isDarkMode() ? this.tint(color, 40) : this.tint(color, 40);
+    const selectedHoverBg = this._isDarkMode() ? this.withAlpha(color, 0.2) : this.tint(color, 90);
+    const selectedHoverColor = this._isDarkMode() ? this.tint(color, 65) : color;
+    const selectedHoverIconColor = this._isDarkMode() ? this.tint(color, 55) : color;
+    const selectedHoverSubtitleColor = this._isDarkMode() ? this.tint(color, 45) : this.tint(color, 35);
+    const focusColor = this._isDarkMode() ? this.withAlpha(color, 0.15) : this.tint(color, 95);
 
     return `
   --nui-action-menu-${name}-item-hover-bg: ${hoverBg};
@@ -630,7 +630,7 @@ export class ThemeService {
    * El tooltip usa colores inversos al tema para mejor contraste.
    */
   private generateTooltipVariables(): string {
-    if (this.isDark) {
+    if (this._isDarkMode()) {
       // En tema oscuro: tooltip con fondo similar al popover para consistencia
       return `
   --tooltip-bg: #27272a;
@@ -650,7 +650,7 @@ export class ThemeService {
    * El popover usa los colores del tema con un fondo ligeramente elevado.
    */
   private generatePopoverVariables(): string {
-    if (this.isDark) {
+    if (this._isDarkMode()) {
       return `
   --popover-bg: #1c1c1e;
   --popover-text: #e5e7eb;
