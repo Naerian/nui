@@ -1,8 +1,7 @@
 import {
   Component,
-  Input,
-  Output,
-  EventEmitter,
+  input,
+  output,
   HostListener,
   OnInit,
   OnDestroy,
@@ -34,25 +33,36 @@ import { ButtonDirective } from '../button/button.directive';
     class: 'nui-toast',
     '[class]': 'hostClasses()',
     '[@toastAnimation]': 'animationState()',
-    '[@.disabled]': '!config.animationDuration',
+    '[@.disabled]': '!config().animationDuration',
   },
 })
 export class ToastComponent implements OnInit, OnDestroy {
-  @Input({ required: true }) toastRef!: ToastRef;
-  @Output() closed = new EventEmitter<void>();
-  @Output() actionClicked = new EventEmitter<ToastAction>();
+  /**
+   * Referencia al ToastRef que contiene la configuración y estado del toast
+   */
+  readonly toastRef = input.required<ToastRef>();
+  
+  /**
+   * Evento emitido cuando el toast se cierra
+   */
+  readonly closed = output<void>();
+  
+  /**
+   * Evento emitido cuando se hace click en una acción del toast
+   */
+  readonly actionClicked = output<ToastAction>();
 
   // Señales para estado reactivo
   protected readonly isExpanded = signal(false);
   protected readonly swipeDistance = signal(0);
 
   // Computed values
-  protected readonly config = computed(() => this.toastRef.config);
-  protected readonly state = computed(() => this.toastRef.state());
+  protected readonly config = computed(() => this.toastRef().config());
+  protected readonly state = computed(() => this.toastRef().state());
   protected readonly timeRemaining = computed(() =>
-    this.toastRef.timeRemaining(),
+    this.toastRef().timeRemaining(),
   );
-  protected readonly isPaused = computed(() => this.toastRef.isPaused());
+  protected readonly isPaused = computed(() => this.toastRef().isPaused());
 
   // Computed: Determina si se debe mostrar el contenido estándar
   protected readonly showStandardContent = computed(() => {
@@ -222,30 +232,30 @@ export class ToastComponent implements OnInit, OnDestroy {
     // Marcar como mostrado después de la animación de entrada
     const duration = this.config().animationDuration || 300;
     setTimeout(() => {
-      this.toastRef.markAsShown();
+      this.toastRef().markAsShown();
     }, duration);
 
     // Suscribirse al cierre
-    this.toastRef.afterClosed().subscribe(() => {
+    this.toastRef().afterClosed().subscribe(() => {
       this.closed.emit();
     });
   }
 
   ngOnDestroy(): void {
-    this.toastRef.dispose();
+    this.toastRef().dispose();
   }
 
   @HostListener('mouseenter')
   onMouseEnter(): void {
     if (this.config().pauseOnHover) {
-      this.toastRef.pause();
+      this.toastRef().pause();
     }
   }
 
   @HostListener('mouseleave')
   onMouseLeave(): void {
     if (this.config().pauseOnHover) {
-      this.toastRef.resume();
+      this.toastRef().resume();
     }
   }
 
@@ -314,7 +324,7 @@ export class ToastComponent implements OnInit, OnDestroy {
   }
 
   close(): void {
-    this.toastRef.close();
+    this.toastRef().close();
   }
 
   onActionClick(action: ToastAction, event: Event): void {

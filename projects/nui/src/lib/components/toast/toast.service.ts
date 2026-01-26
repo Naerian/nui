@@ -204,14 +204,14 @@ export class ToastService {
 
     // 2. Verificar límite por posición específica
     const currentCountInPosition = this._activeToasts().filter(
-      t => (t.config.position || this.globalConfig.position) === position
+      t => (t.config().position || this.globalConfig.position) === position
     ).length;
     
     const maxPerPosition = this.globalConfig.maxToastsPerPosition || this.globalConfig.maxToasts;
     if (currentCountInPosition >= maxPerPosition) {
       // Eliminar el toast más antiguo de esa posición
       const oldestInPosition = this._activeToasts()
-        .filter(t => (t.config.position || this.globalConfig.position) === position)
+        .filter(t => (t.config().position || this.globalConfig.position) === position)
         .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime())[0];
       
       if (oldestInPosition) {
@@ -284,7 +284,7 @@ export class ToastService {
    * Obtiene toasts de un grupo
    */
   getGroup(group: string): ToastRef[] {
-    return this._activeToasts().filter(toast => toast.config.group === group);
+    return this._activeToasts().filter(toast => toast.config().group === group);
   }
 
   /**
@@ -384,7 +384,7 @@ export class ToastService {
 
       case 'replace-lowest-priority':
         const sorted = [...this._activeToasts()].sort(
-          (a, b) => (a.config.priority || 0) - (b.config.priority || 0)
+          (a, b) => (a.config().priority || 0) - (b.config().priority || 0)
         );
         const lowest = sorted[0];
         if (lowest) {
@@ -501,11 +501,12 @@ export class ToastService {
    * Persiste un toast en localStorage
    */
   private persistToast(toastRef: ToastRef): void {
-    if (typeof localStorage === 'undefined' || !toastRef.config.persistentId) {
+    const config = toastRef.config();
+    if (typeof localStorage === 'undefined' || !config.persistentId) {
       return;
     }
 
-    const key = `nui-toast-${toastRef.config.persistentId}`;
+    const key = `nui-toast-${config.persistentId}`;
     const state = toastRef.getState();
 
     try {

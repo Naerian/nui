@@ -85,6 +85,12 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
         route: '/components/popover',
         icon: 'ri-chat-4-line',
       },
+      {
+        label: 'Toast',
+        translationKey: 'sidebar.toast',
+        route: '/components/toast',
+        icon: 'ri-notification-line',
+      },
     ],
   },
   {

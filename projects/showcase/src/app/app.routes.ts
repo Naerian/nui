@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 /**
  * Configuración de rutas de la aplicación Showcase
- * 
+ *
  * Organización:
  * - Home
  * - Getting Started (Installation, Configuration)
@@ -112,6 +112,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/components/popover-page/popover-page.component').then(
             m => m.PopoverPageComponent
+          ),
+      },
+      {
+        path: 'toast',
+        loadComponent: () =>
+          import('./pages/components/toast-page/toast-page.component').then(
+            m => m.ToastPageComponent
           ),
       },
     ],

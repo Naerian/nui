@@ -1,0 +1,103 @@
+﻿<div class="docs-page">
+  <div class="page-header">
+    <h1>{{ pageConfig.title | translate }}</h1>
+    <p class="subtitle">{{ pageConfig.subtitle | translate }}</p>
+  </div>
+
+  <!-- Toasts Básicos -->
+  <section class="section">
+    <app-section-title
+      [title]="getSection('basic')?.title || '' | translate "
+      anchor="basico"
+    ></app-section-title>
+    <p class="section-description">{{ getSection('basic')?.description | translate }}</p>
+
+    <div class="example-preview">
+      <nui-button nuiColor="success" (click)="showSuccess()">Éxito</nui-button>
+      <nui-button nuiColor="danger" (click)="showError()">Error</nui-button>
+      <nui-button nuiColor="warning" (click)="showWarning()">Advertencia</nui-button>
+      <nui-button nuiColor="info" (click)="showInfo()">Info</nui-button>
+    </div>
+
+    <app-code-block [examples]="getSection('basic')?.examples || []"></app-code-block>
+  </section>
+
+  <!-- Toasts con Título -->
+  <section class="section">
+    <app-section-title
+      [title]="getSection('with-title')?.title || '' | translate "
+      anchor="con-titulo"
+    ></app-section-title>
+    <p class="section-description">{{ getSection('with-title')?.description | translate }}</p>
+
+    <div class="example-preview">
+      <nui-button nuiColor="success" (click)="showSuccessWithTitle()">Éxito con Título</nui-button>
+      <nui-button nuiColor="danger" (click)="showErrorWithTitle()">Error con Título</nui-button>
+    </div>
+
+    <app-code-block [examples]="getSection('with-title')?.examples || []"></app-code-block>
+  </section>
+
+  <!-- Toasts con Acciones -->
+  <section class="section">
+    <app-section-title
+      [title]="getSection('with-actions')?.title || '' | translate "
+      anchor="con-acciones"
+    ></app-section-title>
+    <p class="section-description">{{ getSection('with-actions')?.description | translate }}</p>
+
+    <div class="example-preview">
+      <nui-button nuiColor="primary" (click)="showWithActions()">Con Acción Deshacer</nui-button>
+    </div>
+
+    <app-code-block [examples]="getSection('with-actions')?.examples || []"></app-code-block>
+  </section>
+
+  <!-- Posiciones -->
+  <section class="section">
+    <app-section-title
+      [title]="getSection('positions')?.title || '' | translate "
+      anchor="posiciones"
+    ></app-section-title>
+    <p class="section-description">{{ getSection('positions')?.description | translate }}</p>
+
+    <div class="example-preview">
+      <nui-button (click)="showTopPositions()">Posiciones Superiores</nui-button>
+      <nui-button (click)="showBottomPositions()">Posiciones Inferiores</nui-button>
+    </div>
+
+    <app-code-block [examples]="getSection('positions')?.examples || []"></app-code-block>
+  </section>
+
+  <!-- Duración -->
+  <section class="section">
+    <app-section-title
+      [title]="getSection('duration')?.title || '' | translate"
+      anchor="duracion"
+    ></app-section-title>
+    <p class="section-description">{{ getSection('duration')?.description | translate }}</p>
+
+    <div class="example-preview">
+      <nui-button (click)="showQuickToast()">Toast Rápido (2s)</nui-button>
+      <nui-button (click)="showLongToast()">Toast Largo (10s)</nui-button>
+      <nui-button (click)="showPersistentToast()">Toast Persistente</nui-button>
+    </div>
+
+    <app-code-block [examples]="getSection('duration')?.examples || []"></app-code-block>
+  </section>
+
+  <!-- Loading -->
+  <section class="section">
+    <app-section-title
+      [title]="getSection('loading')?.title || '' | translate "
+      anchor="carga"
+    ></app-section-title>
+    <p class="section-description">{{ getSection('loading')?.description | translate }}</p>
+
+    <div class="example-preview">
+      <nui-button (click)="showLoading()">Mostrar Loading</nui-button>
+    </div>
+
+    <app-code-block [examples]="getSection('loading')?.examples || []"></app-code-block>
+  </section>
+</div>

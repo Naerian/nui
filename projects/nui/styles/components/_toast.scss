@@ -287,6 +287,13 @@
 .nui-toast__container {
   position: relative;
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--nui-toast-padding);
+}
+
+.nui-toast__body {
+  display: flex;
   align-items: flex-start;
   gap: var(--nui-toast-gap);
   width: 100%;
@@ -344,7 +351,8 @@
   color: inherit;
 }
 
-.nui-toast__html {
+.nui-toast__html,
+.nui-toast__template {
   font-size: var(--nui-toast-message-size);
   line-height: var(--nui-toast-message-line-height);
 
@@ -376,6 +384,15 @@
 }
 
 // ===== BOTONES DE CONTROL =====
+
+.nui-toast__controls {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  gap: 0.25rem;
+  z-index: 1;
+}
 
 .nui-toast__close-button,
 .nui-toast__expand-button {

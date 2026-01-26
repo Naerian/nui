@@ -19,6 +19,7 @@
     "buttonGroup": "Button Group",
     "paginator": "Paginador",
     "popover": "Popover",
+    "toast": "Toast",
     "actionMenu": "Menú de Acciones",
     "examples": "Ejemplos",
     "playground": "Playground"
@@ -402,6 +403,40 @@
         "description": "Controla dinámicamente si el popover está habilitado o deshabilitado usando la propiedad <code>popoverDisabled</code>.",
         "htmlTitle": "HTML",
         "tsTitle": "TypeScript"
+      }
+    },
+    "toast": {
+      "title": "Toast",
+      "subtitle": "Notificaciones temporales no intrusivas para feedback del usuario",
+      "basic": {
+        "title": "Toasts Básicos",
+        "description": "Muestra notificaciones simples con diferentes tipos: success, error, warning e info.",
+        "codeTitle": "Tipos de Toast"
+      },
+      "withTitle": {
+        "title": "Toasts con Título",
+        "description": "Agrega un título para dar más contexto a la notificación.",
+        "codeTitle": "Toast con Título"
+      },
+      "withActions": {
+        "title": "Toasts con Acciones",
+        "description": "Incluye botones de acción para que el usuario pueda interactuar con la notificación.",
+        "codeTitle": "Toast con Acciones"
+      },
+      "positions": {
+        "title": "Posiciones",
+        "description": "Controla dónde aparecen los toasts en la pantalla: top-left, top-center, top-right, bottom-left, bottom-center, bottom-right.",
+        "codeTitle": "Posiciones del Toast"
+      },
+      "duration": {
+        "title": "Duración",
+        "description": "Configura cuánto tiempo permanece visible el toast antes de desaparecer. Usa 0 para toasts que no se cierran automáticamente.",
+        "codeTitle": "Configuración de Duración"
+      },
+      "loading": {
+        "title": "Toast de Carga",
+        "description": "Muestra un toast con estado de carga que puede actualizarse dinámicamente cuando la operación completa.",
+        "codeTitle": "Toast de Loading"
       }
     }
   }

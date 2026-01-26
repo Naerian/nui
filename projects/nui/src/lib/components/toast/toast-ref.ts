@@ -18,9 +18,11 @@ export class ToastRef {
   readonly type: ToastType;
 
   /**
-   * Configuración del toast
+   * Signal con la configuración del toast
+   * Se expone como Signal para que los computed puedan rastrear cambios
    */
-  readonly config: ToastConfig;
+  readonly config: Signal<ToastConfig>;
+  private readonly _config: ReturnType<typeof signal<ToastConfig>>;
 
   /**
    * Signal con el estado actual del toast
@@ -89,7 +91,11 @@ export class ToastRef {
   constructor(id: string, type: ToastType, config: ToastConfig) {
     this.id = id;
     this.type = type;
-    this.config = config;
+    
+    // Inicializar el signal writable y el readonly
+    this._config = signal(config);
+    this.config = this._config.asReadonly();
+    
     this.createdAt = new Date();
 
     // Inicializar tiempo restante si hay timeout
@@ -138,12 +144,13 @@ export class ToastRef {
     this.clearTimeout();
 
     // Ejecutar callback onClosed si existe
-    if (this.config.onClosed) {
-      this.config.onClosed();
+    const config = this.config();
+    if (config.onClosed) {
+      config.onClosed();
     }
 
     // Esperar a que termine la animación de salida antes de completar
-    const duration = this.config.animationDuration || 300;
+    const duration = config.animationDuration || 300;
     setTimeout(() => {
       this.markAsHidden();
       this._afterClosed$.next();
@@ -155,8 +162,9 @@ export class ToastRef {
    * Actualiza el toast con nuevas opciones
    */
   update(options: Partial<ToastConfig>): void {
-    // Actualizar configuración
-    Object.assign(this.config, options);
+    // Actualizar configuración creando un nuevo objeto para que el signal detecte el cambio
+    const updatedConfig = { ...this._config(), ...options };
+    this._config.set(updatedConfig);
 
     // Si se actualiza el timeout, resetear el temporizador
     if (options.timeout !== undefined) {
@@ -168,7 +176,8 @@ export class ToastRef {
    * Pausa el timeout
    */
   pause(): void {
-    if (this._isPaused() || !this.config.timeout || this.config.timeout === 0) {
+    const config = this.config();
+    if (this._isPaused() || !config.timeout || config.timeout === 0) {
       return;
     }
 
@@ -187,8 +196,8 @@ export class ToastRef {
     this._timeRemaining.set(currentRemaining);
 
     // Ejecutar callback onPause si existe
-    if (this.config.onPause) {
-      this.config.onPause();
+    if (config.onPause) {
+      config.onPause();
     }
 
     this._onPause$.next();
@@ -198,7 +207,8 @@ export class ToastRef {
    * Reanuda el timeout
    */
   resume(): void {
-    if (!this._isPaused() || !this.config.timeout || this.config.timeout === 0) {
+    const config = this.config();
+    if (!this._isPaused() || !config.timeout || config.timeout === 0) {
       return;
     }
 
@@ -216,8 +226,8 @@ export class ToastRef {
     }
 
     // Ejecutar callback onResume si existe
-    if (this.config.onResume) {
-      this.config.onResume();
+    if (config.onResume) {
+      config.onResume();
     }
 
     this._onResume$.next();
@@ -231,9 +241,10 @@ export class ToastRef {
     this.pausedTime = 0;
     this.pausedAt = undefined;
 
-    if (this.config.timeout && this.config.timeout > 0) {
-      this._timeRemaining.set(this.config.timeout);
-      this.startTimeout(this.config.timeout);
+    const config = this.config();
+    if (config.timeout && config.timeout > 0) {
+      this._timeRemaining.set(config.timeout);
+      this.startTimeout(config.timeout);
     }
   }
 
@@ -246,14 +257,15 @@ export class ToastRef {
     this._afterShown$.next();
     this._afterShown$.complete();
 
+    const config = this.config();
     // Ejecutar callback onShown si existe
-    if (this.config.onShown) {
-      this.config.onShown();
+    if (config.onShown) {
+      config.onShown();
     }
 
     // Iniciar timeout si está configurado
-    if (this.config.timeout && this.config.timeout > 0) {
-      this.startTimeout(this.config.timeout);
+    if (config.timeout && config.timeout > 0) {
+      this.startTimeout(config.timeout);
     }
   }
 
@@ -269,7 +281,8 @@ export class ToastRef {
    * Alterna el estado expandido
    */
   toggleExpanded(): void {
-    if (!this.config.expandable) {
+    const config = this.config();
+    if (!config.expandable) {
       return;
     }
     this._isExpanded.set(!this._isExpanded());
@@ -282,7 +295,7 @@ export class ToastRef {
     return {
       id: this.id,
       type: this.type,
-      config: this.config,
+      config: this.config(),
       state: this._state(),
       timeRemaining: this._timeRemaining(),
       isPaused: this._isPaused(),
@@ -338,8 +351,9 @@ export class ToastRef {
    */
   private onTimeoutExpired(): void {
     // Ejecutar callback onTimeout si existe
-    if (this.config.onTimeout) {
-      this.config.onTimeout();
+    const config = this.config();
+    if (config.onTimeout) {
+      config.onTimeout();
     }
 
     this.close();
