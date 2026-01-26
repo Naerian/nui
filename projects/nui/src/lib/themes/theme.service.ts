@@ -1,6 +1,7 @@
-import { Injectable, Inject, Optional } from '@angular/core';
+import { Injectable, Inject, Optional, signal, computed, Signal } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 export interface ThemeColors {
   primary: string;
@@ -45,53 +46,59 @@ export const NUI_THEME_CONFIG = Symbol('NUI_THEME_CONFIG');
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
   private styleElement: HTMLStyleElement | null = null;
-  private currentPreset: ThemePreset;
-  private isDark = false;
   private darkModeStrategy: 'auto' | 'manual' | 'system' = 'manual';
   private darkModeClass: string = 'dark-mode';
   private mediaQuery?: MediaQueryList;
 
-  // Observable para notificar cambios de preset
-  private currentPresetSubject: BehaviorSubject<ThemePreset>;
-  public currentPreset$: Observable<ThemePreset>;
+  // Signals (API principal)
+  private _isDarkMode = signal(false);
+  private _currentPreset = signal<ThemePreset>({
+    name: 'aura',
+    colors: {
+      light: {
+        primary: '#0d9488',
+        secondary: '#64748b',
+        accent: '#9333ea',
+        success: '#059669',
+        info: '#0e7490',
+        warning: '#d97706',
+        danger: '#dc2626',
+      },
+      dark: {
+        primary: '#14b8a6',
+        secondary: '#94a3b8',
+        accent: '#a855f7',
+        success: '#10b981',
+        info: '#06b6d4',
+        warning: '#f59e0b',
+        danger: '#ef4444',
+      },
+    },
+  });
 
-  // Observable para notificar cambios de dark mode
-  private darkModeSubject: BehaviorSubject<boolean>;
-  public darkMode$: Observable<boolean>;
+  // Públicos: ReadonlySignals
+  readonly isDarkMode: Signal<boolean> = this._isDarkMode.asReadonly();
+  readonly currentPreset: Signal<ThemePreset> = this._currentPreset.asReadonly();
+
+  // Computed signals
+  readonly colors = computed(() =>
+    this._isDarkMode()
+      ? this._currentPreset().colors.dark
+      : this._currentPreset().colors.light
+  );
+
+  // Interoperabilidad: Observables para usuarios que necesiten RxJS
+  readonly isDarkMode$: Observable<boolean> = toObservable(this._isDarkMode);
+  readonly currentPreset$: Observable<ThemePreset> = toObservable(this._currentPreset);
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
     @Optional() @Inject(NUI_THEME_CONFIG) config?: ThemeConfig
   ) {
-    this.currentPreset = config?.preset || {
-      name: 'aura',
-      colors: {
-        light: {
-          primary: '#0d9488',
-          secondary: '#64748b',
-          accent: '#9333ea',
-          success: '#059669',
-          info: '#0e7490',
-          warning: '#d97706',
-          danger: '#dc2626',
-        },
-        dark: {
-          primary: '#14b8a6',
-          secondary: '#94a3b8',
-          accent: '#a855f7',
-          success: '#10b981',
-          info: '#06b6d4',
-          warning: '#f59e0b',
-          danger: '#ef4444',
-        },
-      },
-    };
-
-    this.currentPresetSubject = new BehaviorSubject<ThemePreset>(this.currentPreset);
-    this.currentPreset$ = this.currentPresetSubject.asObservable();
-
-    this.darkModeSubject = new BehaviorSubject<boolean>(this.isDark);
-    this.darkMode$ = this.darkModeSubject.asObservable();
+    // Inicializar preset desde config si existe
+    if (config?.preset) {
+      this._currentPreset.set(config.preset);
+    }
 
     this.darkModeStrategy = config?.darkMode || 'manual';
     this.darkModeClass = config?.darkModeClass || 'dark-mode';
@@ -119,7 +126,7 @@ export class ThemeService {
     if (typeof window === 'undefined') return;
 
     this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    this.isDark = this.mediaQuery.matches;
+    this._isDarkMode.set(this.mediaQuery.matches);
     this.updateDarkModeClass();
 
     // Only listen for changes if strategy is 'auto'
@@ -129,18 +136,17 @@ export class ThemeService {
   }
 
   private handleSystemDarkModeChange(e: MediaQueryListEvent): void {
-    this.isDark = e.matches;
+    this._isDarkMode.set(e.matches);
     this.updateDarkModeClass();
     this.updateColors();
   }
 
   private updateDarkModeClass(): void {
-    if (this.isDark) {
+    if (this._isDarkMode()) {
       this.document.documentElement.classList.add(this.darkModeClass);
     } else {
       this.document.documentElement.classList.remove(this.darkModeClass);
     }
-    this.darkModeSubject.next(this.isDark);
   }
 
   /**
@@ -153,7 +159,7 @@ export class ThemeService {
       return;
     }
 
-    this.isDark = !this.isDark;
+    this._isDarkMode.update(current => !current);
     this.updateDarkModeClass();
     this.updateColors();
   }
@@ -168,16 +174,9 @@ export class ThemeService {
       return;
     }
 
-    this.isDark = enabled;
+    this._isDarkMode.set(enabled);
     this.updateDarkModeClass();
     this.updateColors();
-  }
-
-  /**
-   * Get current dark mode state
-   */
-  isDarkMode(): boolean {
-    return this.isDark;
   }
 
   /**
@@ -188,16 +187,8 @@ export class ThemeService {
   }
 
   usePreset(preset: ThemePreset): void {
-    this.currentPreset = preset;
-    this.currentPresetSubject.next(preset);
+    this._currentPreset.set(preset);
     this.updateColors();
-  }
-
-  /**
-   * Get current preset
-   */
-  getCurrentPreset(): ThemePreset {
-    return this.currentPreset;
   }
 
   updateColors(): void {
@@ -206,8 +197,8 @@ export class ThemeService {
   }
 
   private generateComponentVariables(): string {
-    const colors = this.isDark ? this.currentPreset.colors.dark : this.currentPreset.colors.light;
-    const grays = this.currentPreset.grays || this.getDefaultGrays();
+    const colors = this._isDarkMode() ? this._currentPreset().colors.dark : this._currentPreset().colors.light;
+    const grays = this._currentPreset().grays || this.getDefaultGrays();
 
     let css = ':root {\n';
 

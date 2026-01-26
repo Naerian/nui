@@ -379,7 +379,183 @@ Esto detecta:
 
 ## API del ThemeService
 
-### Métodos de Dark Mode
+NUI usa **Signals** como API principal para un mejor rendimiento y experiencia de desarrollo. También ofrece Observables para casos avanzados que requieran operadores de RxJS.
+
+### 🔥 Signals (API Principal - Recomendado)
+
+#### `isDarkMode: Signal<boolean>`
+Signal que contiene el estado actual del dark mode. Funciona con todas las estrategias.
+
+```typescript
+import { Component, inject, computed } from '@angular/core';
+import { ThemeService } from 'nui';
+
+@Component({
+  selector: 'app-theme-status',
+  template: `
+    <div class="status">
+      <p>Modo: {{ isDark() ? 'Oscuro' : 'Claro' }}</p>
+      <i [class]="iconClass()"></i>
+    </div>
+  `,
+  standalone: true
+})
+export class ThemeStatusComponent {
+  private themeService = inject(ThemeService);
+  
+  // Acceso directo al signal
+  isDark = this.themeService.isDarkMode;
+  
+  // Computed signals derivados
+  iconClass = computed(() => 
+    this.isDark() ? 'ri-moon-line' : 'ri-sun-line'
+  );
+}
+```
+
+#### `currentPreset: Signal<ThemePreset>`
+Signal que contiene el preset actual.
+
+```typescript
+import { Component, inject } from '@angular/core';
+import { ThemeService } from 'nui';
+
+@Component({
+  selector: 'app-theme-display',
+  template: `
+    <div class="theme-info">
+      <p>Tema actual: {{ preset().name }}</p>
+      <p>Color primario: {{ preset().colors.light.primary }}</p>
+    </div>
+  `,
+  standalone: true
+})
+export class ThemeDisplayComponent {
+  private themeService = inject(ThemeService);
+  preset = this.themeService.currentPreset;
+}
+```
+
+#### `colors: Signal<ThemeColors>`
+Computed signal que retorna los colores activos según el modo (light/dark).
+
+```typescript
+import { Component, inject } from '@angular/core';
+import { ThemeService } from 'nui';
+
+@Component({
+  selector: 'app-color-palette',
+  template: `
+    <div class="palette">
+      <div [style.background]="colors().primary">Primary</div>
+      <div [style.background]="colors().secondary">Secondary</div>
+      <div [style.background]="colors().accent">Accent</div>
+    </div>
+  `,
+  standalone: true
+})
+export class ColorPaletteComponent {
+  private themeService = inject(ThemeService);
+  colors = this.themeService.colors;
+}
+```
+
+#### Usando `effect()` para Side Effects
+
+```typescript
+import { Component, inject, effect } from '@angular/core';
+import { ThemeService } from 'nui';
+
+@Component({
+  selector: 'app-theme-logger',
+  standalone: true
+})
+export class ThemeLoggerComponent {
+  private themeService = inject(ThemeService);
+  
+  constructor() {
+    // Reaccionar a cambios de dark mode
+    effect(() => {
+      const isDark = this.themeService.isDarkMode();
+      console.log('Dark mode cambió:', isDark);
+      
+      // Guardar preferencia en localStorage
+      localStorage.setItem('darkMode', isDark.toString());
+      
+      // Analytics, etc.
+      this.trackThemeChange(isDark);
+    });
+    
+    // Reaccionar a cambios de preset
+    effect(() => {
+      const preset = this.themeService.currentPreset();
+      console.log('Preset cambió:', preset.name);
+      document.title = `Mi App - ${preset.name}`;
+    });
+  }
+  
+  private trackThemeChange(isDark: boolean) {
+    // Tu código de analytics
+  }
+}
+```
+
+### 📡 Observables (Interoperabilidad con RxJS)
+
+Para casos avanzados donde necesites operadores de RxJS, NUI expone Observables generados automáticamente desde los Signals.
+
+#### `isDarkMode$: Observable<boolean>`
+Observable que emite cada vez que el estado de dark mode cambia.
+
+```typescript
+import { Component, inject } from '@angular/core';
+import { ThemeService } from 'nui';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+
+@Component({
+  selector: 'app-my-component',
+  template: `
+    <p>Modo: {{ (isDark$ | async) ? 'Oscuro' : 'Claro' }}</p>
+  `,
+  standalone: true,
+  imports: [AsyncPipe]
+})
+export class MyComponent {
+  private themeService = inject(ThemeService);
+  
+  // Usar Observable con operadores RxJS
+  isDark$ = this.themeService.isDarkMode$.pipe(
+    debounceTime(300),
+    distinctUntilChanged()
+  );
+}
+```
+
+#### `currentPreset$: Observable<ThemePreset>`
+Observable que emite cada vez que el preset cambia.
+
+```typescript
+import { Component, inject } from '@angular/core';
+import { ThemeService } from 'nui';
+import { map } from 'rxjs';
+
+@Component({
+  selector: 'app-preset-name',
+  template: `<p>{{ presetName$ | async }}</p>`,
+  standalone: true,
+  imports: [AsyncPipe]
+})
+export class PresetNameComponent {
+  private themeService = inject(ThemeService);
+  
+  presetName$ = this.themeService.currentPreset$.pipe(
+    map(preset => preset.name.toUpperCase())
+  );
+}
+```
+
+### Métodos de Control
 
 #### `toggleDarkMode(): void`
 Alterna entre modo claro y oscuro. Solo funciona con estrategia `'manual'`.
@@ -396,104 +572,6 @@ themeService.setDarkMode(true);  // Activar dark mode
 themeService.setDarkMode(false); // Desactivar dark mode
 ```
 
-#### `isDarkMode(): boolean`
-Retorna `true` si el dark mode está activo (funciona con todas las estrategias).
-
-```typescript
-const isDark = themeService.isDarkMode();
-console.log('Dark mode activo:', isDark);
-```
-
-#### `getDarkModeStrategy(): 'auto' | 'manual' | 'system'`
-Retorna la estrategia actual configurada.
-
-```typescript
-const strategy = themeService.getDarkModeStrategy();
-console.log('Estrategia:', strategy);
-```
-
-#### `darkMode$: Observable<boolean>`
-Observable que emite cada vez que el estado de dark mode cambia. Funciona con todas las estrategias.
-
-```typescript
-import { Component, inject } from '@angular/core';
-import { ThemeService } from 'nui';
-import { AsyncPipe } from '@angular/common';
-
-@Component({
-  selector: 'app-my-component',
-  template: `
-    <div class="status">
-      @if (isDark$ | async; as isDark) {
-        <p>Modo actual: {{ isDark ? 'Oscuro' : 'Claro' }}</p>
-        <i [class]="isDark ? 'ri-moon-line' : 'ri-sun-line'"></i>
-      }
-    </div>
-  `,
-  standalone: true,
-  imports: [AsyncPipe]
-})
-export class MyComponent {
-  private themeService = inject(ThemeService);
-  isDark$ = this.themeService.darkMode$;
-}
-```
-
-También puedes suscribirte manualmente:
-
-```typescript
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
-import { ThemeService } from 'nui';
-import { Subscription } from 'rxjs';
-
-@Component({
-  selector: 'app-my-component',
-  template: `<p>Modo: {{ isDark ? 'Oscuro' : 'Claro' }}</p>`,
-  standalone: true
-})
-export class MyComponent implements OnInit, OnDestroy {
-  private themeService = inject(ThemeService);
-  isDark = false;
-  private subscription?: Subscription;
-  
-  ngOnInit() {
-    this.subscription = this.themeService.darkMode$.subscribe(isDark => {
-      this.isDark = isDark;
-      console.log('Dark mode cambió a:', isDark);
-    });
-  }
-  
-  ngOnDestroy() {
-    this.subscription?.unsubscribe();
-  }
-}
-```
-
-### Observables de Tema
-
-#### `currentPreset$: Observable<ThemePreset>`
-Observable que emite cada vez que el preset actual cambia.
-
-```typescript
-import { Component, inject } from '@angular/core';
-import { ThemeService } from 'nui';
-
-@Component({
-  selector: 'app-theme-watcher',
-  template: `
-    <p>Preset actual: {{ (currentPreset$ | async)?.name }}</p>
-  `,
-  standalone: true,
-  imports: [AsyncPipe]
-})
-export class ThemeWatcherComponent {
-  private themeService = inject(ThemeService);
-  currentPreset$ = this.themeService.currentPreset$;
-}
-```
-
-### Métodos de Tema
-
 #### `usePreset(preset: ThemePreset): void`
 Cambia el preset de tema en tiempo de ejecución.
 
@@ -506,7 +584,7 @@ themeService.usePreset(aura);
 
 ---
 
-## Ejemplo Completo: Toggle Manual con localStorage
+## Ejemplo Completo: Toggle Manual con localStorage + Signals
 
 ```typescript
 // app.config.ts
@@ -523,14 +601,14 @@ export const appConfig: ApplicationConfig = {
 };
 
 // theme-toggle.component.ts
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, effect, computed } from '@angular/core';
 import { ThemeService } from 'nui';
 
 @Component({
   selector: 'app-theme-toggle',
   template: `
     <button (click)="toggle()" class="theme-toggle">
-      @if (isDark) {
+      @if (isDark()) {
         <i class="ri-sun-line"></i>
         <span>Modo Claro</span>
       } @else {
@@ -544,8 +622,15 @@ import { ThemeService } from 'nui';
 export class ThemeToggleComponent implements OnInit {
   private themeService = inject(ThemeService);
   
-  get isDark() {
-    return this.themeService.isDarkMode();
+  // Signal directamente del servicio
+  isDark = this.themeService.isDarkMode;
+  
+  constructor() {
+    // Guardar automáticamente cada cambio
+    effect(() => {
+      const isDark = this.isDark();
+      localStorage.setItem('darkMode', isDark.toString());
+    });
   }
   
   ngOnInit() {
@@ -558,17 +643,14 @@ export class ThemeToggleComponent implements OnInit {
   
   toggle() {
     this.themeService.toggleDarkMode();
-    
-    // Guardar preferencia
-    const isDark = this.themeService.isDarkMode();
-    localStorage.setItem('darkMode', isDark.toString());
+    // No necesitas guardar aquí, el effect() lo hace automáticamente
   }
 }
 ```
 
 ---
 
-## Ejemplo Completo: Detección Automática
+## Ejemplo Completo: Detección Automática con Signals
 
 ```typescript
 // app.config.ts
@@ -584,16 +666,17 @@ export const appConfig: ApplicationConfig = {
   ]
 };
 
-// En cualquier componente puedes verificar el estado:
-import { Component, inject } from '@angular/core';
+// En cualquier componente puedes verificar el estado usando signals:
+import { Component, inject, computed } from '@angular/core';
 import { ThemeService } from 'nui';
 
 @Component({
   selector: 'app-my-component',
   template: `
     <div class="status">
-      <p>Modo actual: {{ isDark ? 'Oscuro' : 'Claro' }}</p>
-      <p>Estrategia: {{ strategy }}</p>
+      <p>Modo actual: {{ modeText() }}</p>
+      <p>Estrategia: {{ strategy() }}</p>
+      <p>Color primario: {{ primaryColor() }}</p>
     </div>
   `,
   standalone: true
@@ -601,13 +684,23 @@ import { ThemeService } from 'nui';
 export class MyComponent {
   private themeService = inject(ThemeService);
   
-  get isDark() {
-    return this.themeService.isDarkMode();
-  }
+  // Signals del servicio
+  isDark = this.themeService.isDarkMode;
+  preset = this.themeService.currentPreset;
+  colors = this.themeService.colors;
   
-  get strategy() {
-    return this.themeService.getDarkModeStrategy();
-  }
+  // Computed signals derivados
+  modeText = computed(() => 
+    this.isDark() ? 'Oscuro' : 'Claro'
+  );
+  
+  strategy = computed(() => 
+    this.themeService.getDarkModeStrategy()
+  );
+  
+  primaryColor = computed(() => 
+    this.colors().primary
+  );
 }
 ```
 
@@ -687,8 +780,7 @@ Estos sobreescriben los colores por defecto de `nui.css` cuando se aplica un pre
 **Type-safe** - Soporte completo de TypeScript  
 **Tree-shakeable** - Solo importar presets que uses  
 **Bundle pequeño** - Solo ~200 líneas de código en runtime  
-**Dark mode automático** - Tres estrategias de detección  
-**Presets listos** - 9 temas predefinidos para empezar (aura, dopamine, corporate, minimal, neon, warm, sunset, ocean, twilight)  
+**Dark mode automático** - Tres estrategias de detección  ✅ **Signals-first** - API moderna con Angular Signals (compatibilidad con Observables)  **Presets listos** - 9 temas predefinidos para empezar (aura, dopamine, corporate, minimal, neon, warm, sunset, ocean, twilight)  
 
 ---
 
@@ -701,8 +793,31 @@ No, la estrategia se define en el provider y no puede cambiar después. Esto es 
 Se mostrará un warning en consola y no hará nada. La estrategia `'auto'` es 100% automática.
 
 ### ¿Cómo detecto cambios de dark mode?
-Usa el Observable `darkMode$` del ThemeService:
 
+**⭐ Opción 1: Signals (Recomendado)**
+```typescript
+import { Component, inject, effect } from '@angular/core';
+import { ThemeService } from 'nui';
+
+@Component({
+  selector: 'app-my-component',
+  template: `<p>Modo: {{ isDark() ? 'Oscuro' : 'Claro' }}</p>`,
+  standalone: true
+})
+export class MyComponent {
+  private themeService = inject(ThemeService);
+  isDark = this.themeService.isDarkMode;
+  
+  constructor() {
+    // Reaccionar a cambios
+    effect(() => {
+      console.log('Dark mode:', this.isDark());
+    });
+  }
+}
+```
+
+**Opción 2: Observables (Para RxJS avanzado)**
 ```typescript
 import { Component, inject } from '@angular/core';
 import { ThemeService } from 'nui';
@@ -710,19 +825,17 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-my-component',
-  template: `
-    <p>Modo: {{ (darkMode$ | async) ? 'Oscuro' : 'Claro' }}</p>
-  `,
+  template: `<p>Modo: {{ (darkMode$ | async) ? 'Oscuro' : 'Claro' }}</p>`,
   standalone: true,
   imports: [AsyncPipe]
 })
 export class MyComponent {
   private themeService = inject(ThemeService);
-  darkMode$ = this.themeService.darkMode$;
+  darkMode$ = this.themeService.isDarkMode$;
 }
 ```
 
-El Observable emite cada vez que el dark mode cambia, funciona con todas las estrategias ('auto', 'manual', 'system').
+Ambas opciones funcionan con todas las estrategias ('auto', 'manual', 'system').
 
 ### ¿El dark mode afecta todos los componentes?
 Sí, cuando el dark mode está activo, **todos** los componentes de NUI usan automáticamente sus variantes dark definidas en los presets.
