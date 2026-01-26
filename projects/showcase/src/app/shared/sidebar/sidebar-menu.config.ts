@@ -91,6 +91,12 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
         route: '/components/toast',
         icon: 'ri-notification-line',
       },
+      {
+        label: 'Tooltip',
+        translationKey: 'sidebar.tooltip',
+        route: '/components/tooltip',
+        icon: 'ri-question-line',
+      },
     ],
   },
   {

@@ -95,6 +95,10 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       title: 'components.button.icons.title',
       description: 'components.button.icons.description',
       anchor: 'iconos',
+      note: {
+        type: 'info',
+        content: 'components.button.icons.note',
+      },
       examples: [
         {
           title: 'components.button.icons.codeTitle',
@@ -110,6 +114,10 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       title: 'components.button.loading.title',
       description: 'components.button.loading.description',
       anchor: 'loading',
+      note: {
+        type: 'info',
+        content: 'components.button.loading.note',
+      },
       examples: [
         {
           title: 'components.button.loading.htmlTitle',
@@ -149,6 +157,10 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       title: 'components.button.width.title',
       description: 'components.button.width.description',
       anchor: 'ancho',
+      note: {
+        type: 'info',
+        content: 'components.button.width.note',
+      },
       examples: [
         {
           title: 'components.button.width.codeTitle',
@@ -178,6 +190,10 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       title: 'components.button.events.title',
       description: 'components.button.events.description',
       anchor: 'eventos',
+      note: {
+        type: 'info',
+        content: 'components.button.events.consoleNote',
+      },
       examples: [
         {
           title: 'components.button.events.htmlTitle',

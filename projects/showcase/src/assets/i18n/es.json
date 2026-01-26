@@ -20,6 +20,7 @@
     "paginator": "Paginador",
     "popover": "Popover",
     "toast": "Toast",
+    "tooltip": "Tooltip",
     "actionMenu": "Menú de Acciones",
     "examples": "Ejemplos",
     "playground": "Playground"
@@ -437,6 +438,49 @@
         "title": "Toast de Carga",
         "description": "Muestra un toast con estado de carga que puede actualizarse dinámicamente cuando la operación completa.",
         "codeTitle": "Toast de Loading"
+      }
+    },
+    "tooltip": {
+      "title": "Tooltip",
+      "subtitle": "Tooltips informativos con soporte para texto y templates personalizados",
+      "basic": {
+        "title": "Tooltips Básicos",
+        "description": "Muestra tooltips simples con texto al hacer hover.",
+        "note": "Puedes desactivar la flecha con <code>tooltipShowArrow</code>.",
+        "codeTitle": "Tooltip Básico"
+      },
+      "positions": {
+        "title": "Posiciones",
+        "description": "Controla la posición del tooltip respecto al elemento: top (predeterminado), bottom, left, right.",
+        "codeTitle": "Posiciones del Tooltip"
+      },
+      "events": {
+        "title": "Eventos",
+        "description": "Define qué evento dispara el tooltip: hover (predeterminado), click, focus, o manual para control programático.",
+        "codeTitle": "Eventos del Tooltip"
+      },
+      "delays": {
+        "title": "Delays",
+        "description": "Configura los retrasos antes de mostrar y ocultar el tooltip.",
+        "note": "Usa las propiedades <code>tooltipShowDelay</code> y <code>tooltipHideDelay</code> para ajustar los tiempos de espera.",
+        "codeTitle": "Configuración de Delays"
+      },
+      "templates": {
+        "title": "Templates Personalizados",
+        "description": "Usa templates de Angular para mostrar contenido HTML enriquecido en el tooltip.",
+        "codeTitle": "Tooltip con Template"
+      },
+      "interactive": {
+        "title": "Tooltips Interactivos",
+        "description": "Permite interactuar con el contenido del tooltip. Útil para incluir botones o enlaces.",
+        "note": "Habilita la propiedad <code>tooltipInteractive</code> para permitir interacción dentro del tooltip sin que se cierre automáticamente al mover el cursor.",
+        "codeTitle": "Tooltip Interactivo"
+      },
+      "disabled": {
+        "title": "Estado Deshabilitado",
+        "description": "Controla dinámicamente si el tooltip está habilitado o deshabilitado.",
+        "note": "Usa la propiedad <code>tooltipDisabled</code> para activar o desactivar el tooltip según sea necesario.",
+        "codeTitle": "Tooltip Deshabilitado"
       }
     }
   }

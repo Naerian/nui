@@ -1,150 +1,122 @@
 <div class="docs-page">
   <div class="page-header">
-    <h1>{{ 'components.paginator.title' | translate }}</h1>
-    <p class="subtitle">{{ 'components.paginator.subtitle' | translate }}</p>
+    <h1>{{ pageConfig.title | translate }}</h1>
+    <p class="subtitle">{{ pageConfig.subtitle | translate }}</p>
   </div>
 
-  <section class="section">
-    <app-section-title
-      [title]="'components.paginator.basic.title' | translate"
-      anchor="basico"
-    ></app-section-title>
-    <p class="section-description">{{ 'components.paginator.basic.description' | translate }}</p>
+  @for (section of pageConfig.sections; track section.id) {
+    <section class="section">
+      <app-section-title
+        [title]="section.title | translate"
+        [anchor]="section.anchor">
+      </app-section-title>
+      
+      <p class="section-description">
+        {{ section.description | translate }}
+      </p>
 
-    <div class="example-preview flex-column">
-      <nui-paginator
-        [currentPage]="currentPage()"
-        [totalItems]="totalItems"
-        [itemsPerPage]="pageSize()"
-        [showPageSizeSelector]="true"
-        [showFirstLast]="true"
-        (pageChange)="onPageChange($event)"
-        (pageSizeChange)="onPageSizeChange($event)"
-      ></nui-paginator>
+      @if (section.note; as note) {
+        <div class="section-note" [ngClass]="note.type">
+          <i [class]="getSectionNoteIcon(note)"></i>
+          <p [innerHTML]="note.content | translate"></p>
+        </div>
+      }
 
-      <div class="value-display">
-        Page:
-        <strong>{{ currentPage() }}</strong>
-        | Size:
-        <strong>{{ pageSize() }}</strong>
-        | Total:
-        <strong>{{ totalItems }}</strong>
-      </div>
-    </div>
+      @switch (section.id) {
+        @case ('basic') {
+          <div class="example-preview flex-column">
+            <nui-paginator
+              [currentPage]="currentPage()"
+              [totalItems]="totalItems"
+              [itemsPerPage]="pageSize()"
+              [showPageSizeSelector]="true"
+              [showFirstLast]="true"
+              (pageChange)="onPageChange($event)"
+              (pageSizeChange)="onPageSizeChange($event)">
+            </nui-paginator>
 
-    <app-code-block [examples]="getSection('basic')?.examples || []"></app-code-block>
-  </section>
-
-  <section class="section">
-    <app-section-title
-      [title]="'components.paginator.styles.title' | translate"
-      anchor="styles"
-    ></app-section-title>
-    <p class="section-description">{{ 'components.paginator.styles.description' | translate }}</p>
-
-    <div class="example-preview flex-column gap-4">
-      <nui-paginator
-        [currentPage]="1"
-        [totalPages]="10"
-        variant="outline"
-        color="secondary"
-      ></nui-paginator>
-
-      <nui-paginator
-        [currentPage]="5"
-        [totalPages]="10"
-        size="sm"
-        variant="ghost"
-        color="success"
-      ></nui-paginator>
-
-      <nui-paginator
-        [currentPage]="2"
-        [totalPages]="5"
-        mode="minimal"
-        color="danger"
-      ></nui-paginator>
-    </div>
-
-    <app-code-block [examples]="getSection('styles')?.examples || []"></app-code-block>
-  </section>
-
-  <section class="section">
-    <app-section-title
-      [title]="'components.paginator.sizes.title' | translate"
-      anchor="sizes"
-    ></app-section-title>
-    <p class="section-description">{{ 'components.paginator.sizes.description' | translate }}</p>
-
-    @if (getSection('sizes')?.note; as note) {
-      <div class="section-note" [ngClass]="note.type">
-        <i [class]="getSectionNoteIcon(note)"></i>
-        <p [innerHTML]="note.content | translate"></p>
-      </div>
-    }
-
-    <div class="example-preview flex-column gap-4">
-      <nui-paginator [currentPage]="1" [totalPages]="5" size="xs"></nui-paginator>
-      <nui-paginator [currentPage]="1" [totalPages]="5" size="s"></nui-paginator>
-      <nui-paginator [currentPage]="1" [totalPages]="5" size="sm"></nui-paginator>
-      <nui-paginator [currentPage]="1" [totalPages]="5" size="md"></nui-paginator>
-      <nui-paginator [currentPage]="1" [totalPages]="5" size="lg"></nui-paginator>
-      <nui-paginator [currentPage]="1" [totalPages]="5" size="xl"></nui-paginator>
-    </div>
-
-    <app-code-block [examples]="getSection('sizes')?.examples || []"></app-code-block>
-  </section>
-
-  <section class="section">
-    <app-section-title
-      [title]="'components.paginator.layout.title' | translate"
-      anchor="layout"
-    ></app-section-title>
-    <p class="section-description">{{ 'components.paginator.layout.description' | translate }}</p>
-
-    <div class="section-note info">
-      <i class="ri-information-line"></i>
-      <p [innerHTML]="'components.paginator.layout.note' | translate"></p>
-    </div>
-
-    <div class="example-preview">
-      <nui-paginator
-        [currentPage]="customLayoutPage()"
-        [totalItems]="500"
-        [layout]="complexLayout"
-        (pageChange)="customLayoutPage.set($event)"
-      ></nui-paginator>
-    </div>
-
-    <app-code-block [examples]="getSection('layout')?.examples || []"></app-code-block>
-  </section>
-
-  <section class="section">
-    <app-section-title
-      [title]="'components.paginator.infinite.title' | translate"
-      anchor="infinite"
-    ></app-section-title>
-    <p class="section-description">{{ 'components.paginator.infinite.description' | translate }}</p>
-
-    <div class="example-preview flex-column">
-      <div class="infinite-list">
-        @for (item of infiniteItems(); track item) {
-          <div class="infinite-item">{{ item }}</div>
+            <div class="value-display">
+              Page:
+              <strong>{{ currentPage() }}</strong>
+              | Size:
+              <strong>{{ pageSize() }}</strong>
+              | Total:
+              <strong>{{ totalItems }}</strong>
+            </div>
+          </div>
         }
-      </div>
+        
+        @case ('styles') {
+          <div class="example-preview flex-column gap-4">
+            <nui-paginator
+              [currentPage]="1"
+              [totalPages]="10"
+              variant="outline"
+              color="secondary">
+            </nui-paginator>
 
-      <nui-paginator
-        [totalItems]="100"
-        [infiniteConfig]="{
-          enabled: true,
-          mode: 'button',
-          showCounter: true,
-          initialLoadedItems: 20,
-          onLoadMore: loadMoreData.bind(this),
-        }"
-      ></nui-paginator>
-    </div>
+            <nui-paginator
+              [currentPage]="5"
+              [totalPages]="10"
+              size="sm"
+              variant="ghost"
+              color="success">
+            </nui-paginator>
 
-    <app-code-block [examples]="getSection('infinite')?.examples || []"></app-code-block>
-  </section>
+            <nui-paginator
+              [currentPage]="2"
+              [totalPages]="5"
+              mode="minimal"
+              color="danger">
+            </nui-paginator>
+          </div>
+        }
+        
+        @case ('sizes') {
+          <div class="example-preview flex-column gap-4">
+            <nui-paginator [currentPage]="1" [totalPages]="5" size="xs"></nui-paginator>
+            <nui-paginator [currentPage]="1" [totalPages]="5" size="s"></nui-paginator>
+            <nui-paginator [currentPage]="1" [totalPages]="5" size="sm"></nui-paginator>
+            <nui-paginator [currentPage]="1" [totalPages]="5" size="md"></nui-paginator>
+            <nui-paginator [currentPage]="1" [totalPages]="5" size="lg"></nui-paginator>
+            <nui-paginator [currentPage]="1" [totalPages]="5" size="xl"></nui-paginator>
+          </div>
+        }
+        
+        @case ('layout') {
+          <div class="example-preview">
+            <nui-paginator
+              [currentPage]="customLayoutPage()"
+              [totalItems]="500"
+              [layout]="complexLayout"
+              (pageChange)="customLayoutPage.set($event)">
+            </nui-paginator>
+          </div>
+        }
+        
+        @case ('infinite') {
+          <div class="example-preview flex-column">
+            <div class="infinite-list">
+              @for (item of infiniteItems(); track item) {
+                <div class="infinite-item">{{ item }}</div>
+              }
+            </div>
+
+            <nui-paginator
+              [totalItems]="100"
+              [infiniteConfig]="{
+                enabled: true,
+                mode: 'button',
+                showCounter: true,
+                initialLoadedItems: 20,
+                onLoadMore: loadMoreData.bind(this),
+              }">
+            </nui-paginator>
+          </div>
+        }
+      }
+
+      <app-code-block [examples]="section.examples || []"></app-code-block>
+    </section>
+  }
 </div>

@@ -111,6 +111,10 @@ export const AVATAR_PAGE_CONFIG: ComponentPageConfig = {
       title: 'components.avatar.customSize.title',
       description: 'components.avatar.customSize.description',
       anchor: 'tamano-custom',
+      note: {
+        type: 'info',
+        content: 'components.avatar.customSize.note',
+      },
       examples: [
         {
           title: 'components.avatar.customSize.codeTitle',

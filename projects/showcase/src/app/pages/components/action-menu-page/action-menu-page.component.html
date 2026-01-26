@@ -1,368 +1,267 @@
 <div class="docs-page">
   <div class="page-header">
-    <h1>{{ "components.actionMenu.title" | translate }}</h1>
-    <p class="subtitle">{{ "components.actionMenu.subtitle" | translate }}</p>
+    <h1>{{ pageConfig.title | translate }}</h1>
+    <p class="subtitle">{{ pageConfig.subtitle | translate }}</p>
   </div>
 
-  <!-- 1. Básico -->
-  <section class="section">
-    <app-section-title [title]="'components.actionMenu.basic.title' | translate" anchor="basico"></app-section-title>
-    <p class="section-description">
-      {{ "components.actionMenu.basic.description" | translate }}
-    </p>
+  @for (section of pageConfig.sections; track section.id) {
+    <section class="section">
+      <app-section-title 
+        [title]="section.title | translate" 
+        [anchor]="section.anchor">
+      </app-section-title>
+      
+      <p class="section-description">
+        {{ section.description | translate }}
+      </p>
 
-    @if (getSection('basic')?.note; as note) {
-      <div class="section-note" [ngClass]="note.type">
-        <i [class]="getSectionNoteIcon(note)"></i>
-        <p [innerHTML]="note.content | translate"></p>
-      </div>
-    }
-
-    <div class="example-preview">
-      <nui-action-menu
-        type="static"
-        variant="ghost"
-        icon="ri-more-line"
-        [items]="basicMenuItems"
-        (onItemAction)="handleAction($event)"
-      >
-      </nui-action-menu>
-      <nui-action-menu
-        icon="ri-more-line"
-        [items]="basicMenuItems"
-        (onItemAction)="handleAction($event)"
-      >
-      </nui-action-menu>
-    </div>
-
-    <app-code-block [examples]="getSection('basic')?.examples || []"></app-code-block>
-  </section>
-
-  <!-- 2. Con Separadores -->
-  <section class="section">
-    <app-section-title [title]="'components.actionMenu.separators.title' | translate" anchor="separadores"></app-section-title>
-    <p class="section-description">
-      {{ "components.actionMenu.separators.description" | translate }}
-    </p>
-
-    <div class="example-preview">
-      <nui-action-menu
-        icon="ri-more-line"
-        [items]="menuWithSeparators"
-        (onItemAction)="handleAction($event)"
-      >
-      </nui-action-menu>
-    </div>
-
-    <app-code-block [examples]="getSection('separators')?.examples || []"></app-code-block>
-  </section>
-
-  <!-- 3. Con Submenús -->
-  <section class="section">
-    <app-section-title [title]="'components.actionMenu.submenu.title' | translate" anchor="submenus"></app-section-title>
-    <p class="section-description">
-      {{ "components.actionMenu.submenu.description" | translate }}
-    </p>
-
-    @if (getSection('submenu')?.note; as note) {
-      <div class="section-note" [ngClass]="note.type">
-        <i [class]="getSectionNoteIcon(note)"></i>
-        <p [innerHTML]="note.content | translate"></p>
-      </div>
-    }
-
-    <div class="example-preview">
-      <nui-action-menu
-        icon="ri-more-2-line"
-        [items]="menuWithSubmenu"
-        (onItemAction)="handleAction($event)"
-      >
-      </nui-action-menu>
-    </div>
-
-    <app-code-block [examples]="getSection('submenu')?.examples || []"></app-code-block>
-  </section>
-
-  <!-- 4. Variantes de Botón -->
-  <section class="section">
-    <app-section-title [title]="'components.actionMenu.variants.title' | translate" anchor="variantes"></app-section-title>
-    <p class="section-description">
-      {{ "components.actionMenu.variants.description" | translate }}
-    </p>
-
-    <div class="example-preview">
-      <nui-action-menu
-        icon="ri-more-line"
-        variant="ghost"
-        [items]="basicMenuItems"
-        (onItemAction)="handleAction($event)"
-      >
-      </nui-action-menu>
-
-      <nui-action-menu
-        icon="ri-more-line"
-        variant="solid"
-        color="primary"
-        [items]="basicMenuItems"
-        (onItemAction)="handleAction($event)"
-      >
-      </nui-action-menu>
-
-      <nui-action-menu
-        icon="ri-more-line"
-        variant="outline"
-        color="accent"
-        [items]="basicMenuItems"
-        (onItemAction)="handleAction($event)"
-      >
-      </nui-action-menu>
-    </div>
-
-    <app-code-block [examples]="getSection('variants')?.examples || []"></app-code-block>
-  </section>
-
-  <!-- 5. Tamaños -->
-  <section class="section">
-    <app-section-title [title]="'components.actionMenu.sizes.title' | translate" anchor="tamanos"></app-section-title>
-    <p class="section-description">
-      {{ "components.actionMenu.sizes.description" | translate }}
-    </p>
-
-    <div class="example-preview">
-      <nui-action-menu
-        size="xs"
-        icon="ri-more-line"
-        [items]="basicMenuItems"
-        (onItemAction)="handleAction($event)"
-      ></nui-action-menu>
-      <nui-action-menu
-        size="sm"
-        icon="ri-more-line"
-        [items]="basicMenuItems"
-        (onItemAction)="handleAction($event)"
-      ></nui-action-menu>
-      <nui-action-menu
-        size="md"
-        icon="ri-more-line"
-        [items]="basicMenuItems"
-        (onItemAction)="handleAction($event)"
-      ></nui-action-menu>
-      <nui-action-menu
-        size="lg"
-        icon="ri-more-line"
-        [items]="basicMenuItems"
-        (onItemAction)="handleAction($event)"
-      ></nui-action-menu>
-      <nui-action-menu
-        size="xl"
-        icon="ri-more-line"
-        [items]="basicMenuItems"
-        (onItemAction)="handleAction($event)"
-      ></nui-action-menu>
-    </div>
-
-    <app-code-block [examples]="getSection('sizes')?.examples || []"></app-code-block>
-  </section>
-
-  <!-- 6. Con Label -->
-  <section class="section">
-    <app-section-title [title]="'components.actionMenu.label.title' | translate" anchor="con-texto"></app-section-title>
-    <p class="section-description">
-      {{ "components.actionMenu.label.description" | translate }}
-    </p>
-
-    <div class="example-preview flex-column">
-      <nui-action-menu
-        label="Actions"
-        icon="ri-more-2-line"
-        color="primary"
-        variant="solid"
-        [items]="basicMenuItems"
-        (onItemAction)="handleAction($event)"
-      >
-      </nui-action-menu>
-
-      <nui-action-menu
-        label="Options"
-        variant="outline"
-        [items]="basicMenuItems"
-        (onItemAction)="handleAction($event)"
-      >
-      </nui-action-menu>
-
-      <nui-action-menu
-        label="Menu"
-        width="full"
-        [items]="basicMenuItems"
-        (onItemAction)="handleAction($event)"
-      >
-      </nui-action-menu>
-    </div>
-
-    <app-code-block [examples]="getSection('label')?.examples || []"></app-code-block>
-  </section>
-
-  <!-- 7. Items Deshabilitados -->
-  <section class="section">
-    <app-section-title [title]="'components.actionMenu.disabled.title' | translate" anchor="deshabilitado"></app-section-title>
-    <p class="section-description">
-      {{ "components.actionMenu.disabled.description" | translate }}
-    </p>
-
-    <div class="example-preview">
-      <nui-action-menu
-        icon="ri-more-line"
-        [items]="menuWithDisabled"
-        (onItemAction)="handleAction($event)"
-      >
-      </nui-action-menu>
-
-      <nui-action-menu
-        [disabled]="true"
-        icon="ri-more-line"
-        [items]="basicMenuItems"
-      >
-      </nui-action-menu>
-    </div>
-
-    <app-code-block [examples]="getSection('disabled')?.examples || []"></app-code-block>
-  </section>
-
-  <!-- 8. Con Subtitle -->
-  <section class="section">
-    <app-section-title [title]="'components.actionMenu.withSubtitle.title' | translate" anchor="con-subtitulo"></app-section-title>
-    <p class="section-description">
-      {{ "components.actionMenu.withSubtitle.description" | translate }}
-    </p>
-
-    <div class="example-preview">
-      <nui-action-menu
-        type="static"
-        icon="ri-user-line"
-        label="Users"
-        [items]="menuWithSubtitle"
-        (onItemAction)="handleAction($event)"
-      >
-      </nui-action-menu>
-    </div>
-
-    <app-code-block [examples]="getSection('withSubtitle')?.examples || []"></app-code-block>
-  </section>
-
-  <!-- 9. Con Selected -->
-  <section class="section">
-    <app-section-title [title]="'components.actionMenu.selected.title' | translate" anchor="seleccionado"></app-section-title>
-    <p class="section-description">
-      {{ "components.actionMenu.selected.description" | translate }}
-    </p>
-
-    <div class="example-preview" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-      <div>
-        <p style="margin-bottom: 0.5rem; font-weight: 500;">Selection Mode (with selected items):</p>
-        <nui-action-menu
-          icon="ri-global-line"
-          label="Language"
-          [items]="menuWithSelected"
-          (onSelectionChange)="handleSelectionChange($event)"
-        >
-        </nui-action-menu>
-      </div>
-
-      <div>
-        <p style="margin-bottom: 0.5rem; font-weight: 500;">Action Mode (no selection):</p>
-        <nui-action-menu
-          icon="ri-more-2-line"
-          label="Options"
-          [items]="menuActionOnly"
-          (onItemAction)="handleAction($event)"
-        >
-        </nui-action-menu>
-      </div>
-    </div>
-
-    <app-code-block [examples]="getSection('selected')?.examples || []"></app-code-block>
-  </section>
-
-  <!-- 10. Iconos Descriptivos -->
-  <section class="section">
-    <app-section-title [title]="'components.actionMenu.colors.title' | translate" anchor="colores"></app-section-title>
-    <p class="section-description">
-      {{ "components.actionMenu.colors.description" | translate }}
-    </p>
-
-    <div class="example-preview">
-      <nui-action-menu
-        icon="ri-more-line"
-        [items]="coloredMenuItems"
-        (onItemAction)="handleAction($event)"
-      >
-      </nui-action-menu>
-    </div>
-
-    <app-code-block [examples]="getSection('colors')?.examples || []"></app-code-block>
-  </section>
-
-  <!-- 11. Template Personalizado -->
-  <section class="section">
-    <app-section-title [title]="'components.actionMenu.template.title' | translate" anchor="template-personalizado"></app-section-title>
-    <p class="section-description">
-      {{ "components.actionMenu.template.description" | translate }}
-    </p>
-
-    @if (getSection('template')?.note; as note) {
-      <div class="section-note" [ngClass]="note.type">
-        <i [class]="getSectionNoteIcon(note)"></i>
-        <p [innerHTML]="note.content | translate"></p>
-      </div>
-    }
-
-    <div class="example-preview">
-      <nui-action-menu
-        icon="ri-user-line"
-        label="Mi Cuenta"
-        variant="solid"
-        color="primary"
-        [items]="menuWithBadges"
-      >
-        <!-- Header con información del usuario (nueva sintaxis sin ng-template) -->
-        <div menu-header class="menu-user-header">
-          <div class="user-avatar">
-            <i class="ri-user-fill"></i>
-          </div>
-          <div class="user-info">
-            <span class="user-name">John Doe</span>
-            <span class="user-email">john&#64;example.com</span>
-          </div>
+      @if (section.note; as note) {
+        <div class="section-note" [ngClass]="note.type">
+          <i [class]="getSectionNoteIcon(note)"></i>
+          <p [innerHTML]="note.content | translate"></p>
         </div>
+      }
 
-        <!-- Template personalizado para cada item -->
-        <ng-template #item let-item>
-          <div class="menu-item-custom" (click)="handleAction(item)">
-            <div class="menu-item-main">
-              <i [class]="item.icon"></i>
-              <div class="menu-item-text">
-                <span class="menu-item-label">{{ item.label }}</span>
-                @if (item.subtitle) {
-                <span class="menu-item-subtitle">{{ item.subtitle }}</span>
-                }
-              </div>
-            </div>
-            @if (item.badge) {
-            <span class="menu-item-badge">{{ item.badge }}</span>
-            } @if (item.shortcut) {
-            <span class="menu-item-shortcut">{{ item.shortcut }}</span>
-            }
+      @switch (section.id) {
+        @case ('basic') {
+          <div class="example-preview">
+            <nui-action-menu
+              type="static"
+              variant="ghost"
+              icon="ri-more-line"
+              [items]="basicMenuItems"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
+            <nui-action-menu
+              icon="ri-more-line"
+              [items]="basicMenuItems"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
           </div>
-        </ng-template>
+        }
+        
+        @case ('separators') {
+          <div class="example-preview">
+            <nui-action-menu
+              icon="ri-more-line"
+              [items]="menuWithSeparators"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
+          </div>
+        }
+        
+        @case ('submenu') {
+          <div class="example-preview">
+            <nui-action-menu
+              icon="ri-more-2-line"
+              [items]="menuWithSubmenu"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
+          </div>
+        }
+        
+        @case ('variants') {
+          <div class="example-preview">
+            <nui-action-menu
+              icon="ri-more-line"
+              variant="ghost"
+              [items]="basicMenuItems"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
 
-        <!-- Footer con acción de logout (nueva sintaxis sin ng-template) -->
-        <button menu-footer class="menu-footer-logout">
-          <i class="ri-logout-box-line"></i>
-          <span>Cerrar Sesión</span>
-        </button>
-      </nui-action-menu>
-    </div>
+            <nui-action-menu
+              icon="ri-more-line"
+              variant="solid"
+              color="primary"
+              [items]="basicMenuItems"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
 
-    <app-code-block [examples]="getSection('template')?.examples || []"></app-code-block>
-  </section>
+            <nui-action-menu
+              icon="ri-more-line"
+              variant="outline"
+              color="accent"
+              [items]="basicMenuItems"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
+          </div>
+        }
+        
+        @case ('sizes') {
+          <div class="example-preview">
+            <nui-action-menu
+              size="xs"
+              icon="ri-more-line"
+              [items]="basicMenuItems"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
+            <nui-action-menu
+              size="sm"
+              icon="ri-more-line"
+              [items]="basicMenuItems"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
+            <nui-action-menu
+              size="md"
+              icon="ri-more-line"
+              [items]="basicMenuItems"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
+            <nui-action-menu
+              size="lg"
+              icon="ri-more-line"
+              [items]="basicMenuItems"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
+            <nui-action-menu
+              size="xl"
+              icon="ri-more-line"
+              [items]="basicMenuItems"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
+          </div>
+        }
+        
+        @case ('label') {
+          <div class="example-preview flex-column">
+            <nui-action-menu
+              label="Actions"
+              icon="ri-more-2-line"
+              color="primary"
+              variant="solid"
+              [items]="basicMenuItems"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
+
+            <nui-action-menu
+              label="Options"
+              variant="outline"
+              [items]="basicMenuItems"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
+
+            <nui-action-menu
+              label="Menu"
+              width="full"
+              [items]="basicMenuItems"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
+          </div>
+        }
+        
+        @case ('disabled') {
+          <div class="example-preview">
+            <nui-action-menu
+              icon="ri-more-line"
+              [items]="menuWithDisabled"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
+
+            <nui-action-menu
+              [disabled]="true"
+              icon="ri-more-line"
+              [items]="basicMenuItems">
+            </nui-action-menu>
+          </div>
+        }
+        
+        @case ('withSubtitle') {
+          <div class="example-preview">
+            <nui-action-menu
+              type="static"
+              icon="ri-user-line"
+              label="Users"
+              [items]="menuWithSubtitle"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
+          </div>
+        }
+        
+        @case ('selected') {
+          <div class="example-preview" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <div>
+              <p style="margin-bottom: 0.5rem; font-weight: 500;">Selection Mode (with selected items):</p>
+              <nui-action-menu
+                icon="ri-global-line"
+                label="Language"
+                [items]="menuWithSelected"
+                (onSelectionChange)="handleSelectionChange($event)">
+              </nui-action-menu>
+            </div>
+
+            <div>
+              <p style="margin-bottom: 0.5rem; font-weight: 500;">Action Mode (no selection):</p>
+              <nui-action-menu
+                icon="ri-more-2-line"
+                label="Options"
+                [items]="menuActionOnly"
+                (onItemAction)="handleAction($event)">
+              </nui-action-menu>
+            </div>
+          </div>
+        }
+        
+        @case ('colors') {
+          <div class="example-preview">
+            <nui-action-menu
+              icon="ri-more-line"
+              [items]="coloredMenuItems"
+              (onItemAction)="handleAction($event)">
+            </nui-action-menu>
+          </div>
+        }
+        
+        @case ('template') {
+          <div class="example-preview">
+            <nui-action-menu
+              icon="ri-user-line"
+              label="Mi Cuenta"
+              variant="solid"
+              color="primary"
+              [items]="menuWithBadges">
+              <!-- Header con información del usuario -->
+              <div menu-header class="menu-user-header">
+                <div class="user-avatar">
+                  <i class="ri-user-fill"></i>
+                </div>
+                <div class="user-info">
+                  <span class="user-name">John Doe</span>
+                  <span class="user-email">john&#64;example.com</span>
+                </div>
+              </div>
+
+              <!-- Template personalizado para cada item -->
+              <ng-template #item let-item>
+                <div class="menu-item-custom" (click)="handleAction(item)">
+                  <div class="menu-item-main">
+                    <i [class]="item.icon"></i>
+                    <div class="menu-item-text">
+                      <span class="menu-item-label">{{ item.label }}</span>
+                      @if (item.subtitle) {
+                        <span class="menu-item-subtitle">{{ item.subtitle }}</span>
+                      }
+                    </div>
+                  </div>
+                  @if (item.badge) {
+                    <span class="menu-item-badge">{{ item.badge }}</span>
+                  }
+                  @if (item.shortcut) {
+                    <span class="menu-item-shortcut">{{ item.shortcut }}</span>
+                  }
+                </div>
+              </ng-template>
+
+              <!-- Footer con acción de logout -->
+              <button menu-footer class="menu-footer-logout">
+                <i class="ri-logout-box-line"></i>
+                <span>Cerrar Sesión</span>
+              </button>
+            </nui-action-menu>
+          </div>
+        }
+      }
+
+      <app-code-block [examples]="section.examples || []"></app-code-block>
+    </section>
+  }
 </div>

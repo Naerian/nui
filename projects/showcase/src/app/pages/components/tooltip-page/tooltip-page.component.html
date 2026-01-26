@@ -1,0 +1,116 @@
+﻿<div class="docs-page">
+  <div class="page-header">
+    <h1>{{ pageConfig.title | translate }}</h1>
+    <p class="subtitle">{{ pageConfig.subtitle | translate }}</p>
+  </div>
+
+  @for (section of pageConfig.sections; track section.id) {
+    <section class="section">
+      <app-section-title
+        [title]="section.title | translate"
+        [anchor]="section.anchor">
+      </app-section-title>
+      
+      <p class="section-description">
+        {{ section.description | translate }}
+      </p>
+
+      @if (section.note; as note) {
+        <div class="section-note" [ngClass]="note.type">
+          <i [class]="getSectionNoteIcon(note)"></i>
+          <p [innerHTML]="note.content | translate"></p>
+        </div>
+      }
+
+      @switch (section.id) {
+        @case ('basic') {
+          <div class="example-preview">
+            <button nuiButton nuiTooltip="Guardar cambios">Guardar</button>
+            <button nuiButton nuiTooltip="Sin flecha" [tooltipShowArrow]="false">Sin Flecha</button>
+          </div>
+        }
+        
+        @case ('positions') {
+          <div class="example-preview">
+            <button nuiButton nuiTooltip="Tooltip arriba" tooltipPosition="top">Top</button>
+            <button nuiButton nuiTooltip="Tooltip abajo" tooltipPosition="bottom">Bottom</button>
+            <button nuiButton nuiTooltip="Tooltip izquierda" tooltipPosition="left">Left</button>
+            <button nuiButton nuiTooltip="Tooltip derecha" tooltipPosition="right">Right</button>
+          </div>
+        }
+        
+        @case ('events') {
+          <div class="example-preview">
+            <button nuiButton nuiTooltip="Tooltip al hacer hover">Hover</button>
+            <button nuiButton nuiTooltip="Tooltip al hacer click" tooltipEvent="click">Click</button>
+            <input
+              type="text"
+              placeholder="Enfoca para ver tooltip"
+              nuiTooltip="Tooltip al enfocar"
+              tooltipEvent="focus"
+              class="example-input"
+            />
+          </div>
+        }
+        
+        @case ('delays') {
+          <div class="example-preview">
+            <button nuiButton nuiTooltip="Aparece después de 500ms" [tooltipShowDelay]="500">
+              Delay Entrada
+            </button>
+            <button nuiButton nuiTooltip="Desaparece después de 1s" [tooltipHideDelay]="1000">
+              Delay Salida
+            </button>
+            <button nuiButton nuiTooltip="Sin delays" [tooltipShowDelay]="0" [tooltipHideDelay]="0">
+              Sin Delay
+            </button>
+          </div>
+        }
+        
+        @case ('templates') {
+          <div class="example-preview">
+            <button nuiButton [nuiTooltip]="tooltipTemplate">Ver Info</button>
+          </div>
+
+          <ng-template #tooltipTemplate>
+            <div class="custom-tooltip">
+              <strong>Información Importante</strong>
+              <p>Este es un tooltip con contenido personalizado</p>
+              <ul>
+                <li>Punto 1</li>
+                <li>Punto 2</li>
+              </ul>
+            </div>
+          </ng-template>
+        }
+        
+        @case ('interactive') {
+          <div class="example-preview">
+            <button nuiButton [nuiTooltip]="interactiveTemplate" [tooltipInteractive]="true">
+              Tooltip Interactivo
+            </button>
+          </div>
+
+          <ng-template #interactiveTemplate>
+            <div class="interactive-tooltip">
+              <h4>Acciones Disponibles</h4>
+              <button nuiButton size="sm" (click)="doAction()">Ejecutar Acción</button>
+            </div>
+          </ng-template>
+        }
+        
+        @case ('disabled') {
+          <div class="example-preview">
+            <button nuiButton nuiTooltip="No se mostrará" [tooltipDisabled]="true">Deshabilitado</button>
+            <button nuiButton nuiTooltip="Tooltip condicional" [tooltipDisabled]="isDisabled()">
+              Condicional
+            </button>
+            <button nuiButton (click)="toggleDisabled()">Toggle (Status: {{ !isDisabled() }})</button>
+          </div>
+        }
+      }
+
+      <app-code-block [examples]="section?.examples ?? []"></app-code-block>
+    </section>
+  }
+</div>

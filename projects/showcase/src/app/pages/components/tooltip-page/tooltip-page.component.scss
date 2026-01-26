@@ -1,0 +1,107 @@
+﻿.docs-page {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.125rem;
+    opacity: 0.8;
+    margin: 0;
+  }
+}
+
+.section {
+  margin-bottom: 3rem;
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-description {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+}
+
+.example-preview {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: var(--nui-bg-secondary);
+  border-radius: var(--border-radius-md);
+  margin-bottom: 1rem;
+  border: var(--border-width-xs) solid var(--nui-border-primary);
+  box-shadow: var(--box-shadow-xs);
+
+  &.flex-column {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.example-input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--nui-border-primary);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--nui-bg-primary);
+  color: var(--nui-text-primary);
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+  min-width: 250px;
+
+  &:focus {
+    outline: none;
+    border-color: var(--nui-color-primary);
+  }
+
+  &::placeholder {
+    color: var(--nui-text-tertiary);
+  }
+}
+
+.custom-tooltip {
+  padding: 0.5rem;
+
+  strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--nui-color-primary);
+  }
+
+  p {
+    margin: 0.5rem 0;
+    font-size: 0.875rem;
+  }
+
+  ul {
+    margin: 0.5rem 0 0 0;
+    padding-left: 1.25rem;
+    font-size: 0.875rem;
+  }
+}
+
+.interactive-tooltip {
+  padding: 0.75rem;
+
+  h4 {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.9375rem;
+    color: var(--nui-color-primary);
+  }
+}

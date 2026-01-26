@@ -61,6 +61,10 @@ export const BUTTON_GROUP_PAGE_CONFIG: ComponentPageConfig = {
       title: 'components.buttonGroup.segmented.title',
       description: 'components.buttonGroup.segmented.description',
       anchor: 'segmented',
+      note: {
+        type: 'info',
+        content: 'components.buttonGroup.segmented.note',
+      },
       examples: [
         {
           title: 'components.buttonGroup.segmented.codeTitle',
@@ -78,6 +82,10 @@ export const BUTTON_GROUP_PAGE_CONFIG: ComponentPageConfig = {
       title: 'components.buttonGroup.complex.title',
       description: 'components.buttonGroup.complex.description',
       anchor: 'objetos-complejos',
+      note: {
+        type: 'info',
+        content: 'components.buttonGroup.complex.note',
+      },
       examples: [
         {
           title: 'components.buttonGroup.complex.codeTitle',
