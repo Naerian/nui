@@ -4,14 +4,7 @@ import { Router, RouterModule, NavigationEnd } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ShowcaseConfigService } from '../../core/services/showcase-config.service';
 import { filter } from 'rxjs/operators';
-
-interface MenuItem {
-  label: string;
-  translationKey: string;
-  route: string;
-  icon: string;
-  children?: MenuItem[];
-}
+import { SIDEBAR_MENU_CONFIG, MenuItem } from './sidebar-menu.config';
 
 @Component({
   selector: 'app-sidebar',
@@ -27,84 +20,8 @@ export class SidebarComponent implements OnInit {
   isCollapsed = false;
   expandedSections: { [key: string]: boolean } = {};
 
-  menuItems: MenuItem[] = [
-    {
-      label: 'Getting Started',
-      translationKey: 'sidebar.gettingStarted',
-      route: '/getting-started',
-      icon: 'ri-rocket-line',
-      children: [
-        {
-          label: 'Installation',
-          translationKey: 'sidebar.installation',
-          route: '/getting-started/installation',
-          icon: 'ri-download-line',
-        },
-        {
-          label: 'Configuration',
-          translationKey: 'sidebar.configuration',
-          route: '/getting-started/configuration',
-          icon: 'ri-settings-3-line',
-        },
-      ],
-    },
-    {
-      label: 'Theming',
-      translationKey: 'sidebar.theming',
-      route: '/theming',
-      icon: 'ri-palette-line',
-    },
-    {
-      label: 'Components',
-      translationKey: 'sidebar.components',
-      route: '/components',
-      icon: 'ri-layout-grid-line',
-      children: [
-        {
-          label: 'Button',
-          translationKey: 'sidebar.button',
-          route: '/components/button',
-          icon: 'ri-rectangle-fill',
-        },
-        {
-          label: 'Action Menu',
-          translationKey: 'sidebar.actionMenu',
-          route: '/components/action-menu',
-          icon: 'ri-menu-line',
-        },
-        {
-          label: 'Avatar',
-          translationKey: 'sidebar.avatar',
-          route: '/components/avatar',
-          icon: 'ri-user-line',
-        },
-        {
-          label: 'Button Group',
-          translationKey: 'sidebar.buttonGroup',
-          route: '/components/button-group',
-          icon: 'ri-layout-grid-line',
-        },
-        {
-          label: 'Paginator',
-          translationKey: 'sidebar.paginator',
-          route: '/components/paginator',
-          icon: 'ri-pages-line',
-        },
-      ],
-    },
-    {
-      label: 'Examples',
-      translationKey: 'sidebar.examples',
-      route: '/examples',
-      icon: 'ri-code-box-line',
-    },
-    {
-      label: 'Playground',
-      translationKey: 'sidebar.playground',
-      route: '/playground',
-      icon: 'ri-flask-line',
-    },
-  ];
+  // Configuración del menú importada desde archivo externo
+  menuItems: MenuItem[] = SIDEBAR_MENU_CONFIG;
 
   ngOnInit(): void {
     this.showcaseConfig.config$.subscribe(config => {

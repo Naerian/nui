@@ -1,6 +1,20 @@
 import { Routes } from '@angular/router';
 
+/**
+ * Configuración de rutas de la aplicación Showcase
+ * 
+ * Organización:
+ * - Home
+ * - Getting Started (Installation, Configuration)
+ * - Theming
+ * - Components (Button, Avatar, Paginator, etc.)
+ * - Examples
+ * - Playground
+ */
 export const routes: Routes = [
+  // ============================================
+  // HOME
+  // ============================================
   {
     path: '',
     redirectTo: '/home',
@@ -10,6 +24,10 @@ export const routes: Routes = [
     path: 'home',
     loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
   },
+
+  // ============================================
+  // GETTING STARTED
+  // ============================================
   {
     path: 'getting-started',
     children: [
@@ -34,10 +52,18 @@ export const routes: Routes = [
       },
     ],
   },
+
+  // ============================================
+  // THEMING
+  // ============================================
   {
     path: 'theming',
     loadComponent: () => import('./pages/theming/theming.component').then(m => m.ThemingComponent),
   },
+
+  // ============================================
+  // COMPONENTS
+  // ============================================
   {
     path: 'components',
     children: [
@@ -83,14 +109,22 @@ export const routes: Routes = [
       },
     ],
   },
+
+  // ============================================
+  // EXAMPLES & PLAYGROUND
+  // ============================================
   {
     path: 'examples',
-    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent), // Placeholder
+    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent), // TODO: Create examples page
   },
   {
     path: 'playground',
-    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent), // Placeholder
+    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent), // TODO: Create playground page
   },
+
+  // ============================================
+  // FALLBACK
+  // ============================================
   {
     path: '**',
     redirectTo: '/home',
