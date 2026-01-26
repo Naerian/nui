@@ -21,8 +21,14 @@
   --nui-button-gap: #{tokens.$button-gap};
 
   // Bordes
-  --nui-button-border-radius: #{tokens.$button-border-radius};
   --nui-button-border-width: #{tokens.$button-border-width};
+  --nui-button-radius-xs: #{tokens.$button-border-radius-xs};
+  --nui-button-radius-s: #{tokens.$button-border-radius-s};
+  --nui-button-radius-sm: #{tokens.$button-border-radius-sm};
+  --nui-button-radius-md: #{tokens.$button-border-radius-md};
+  --nui-button-radius-lg: #{tokens.$button-border-radius-lg};
+  --nui-button-radius-xl: #{tokens.$button-border-radius-xl};
+
 
   // Tipografía
   --nui-button-font-weight: #{tokens.$button-font-weight};

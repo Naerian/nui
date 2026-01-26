@@ -5,12 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ButtonGroupComponent } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
-
-interface CodeExample {
-  title: string;
-  code: string;
-  language: string;
-}
+import { CodeExample } from '../../../core/models';
 
 @Component({
   selector: 'app-button-group-page',
@@ -145,7 +140,9 @@ export class ButtonGroupPageComponent {
     {
       title: 'components.buttonGroup.styles.codeTitle',
       code: `<nui-button-group color="primary" variant="solid" ... />
+<nui-button-group color="danger" variant="ghost" ... />
 <nui-button-group color="danger" variant="outline" ... />
+<nui-button-group size="xs" visualVariant="segmented" ... />
 <nui-button-group size="sm" visualVariant="segmented" ... />`,
       language: 'html',
     },

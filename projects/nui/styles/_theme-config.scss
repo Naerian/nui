@@ -69,6 +69,7 @@
   // =======================
 
   // Border radius - Escala completa
+  --border-radius-none: #{config.$border-radius-none};
   --border-radius-xs: #{config.$border-radius-xs};
   --border-radius-s: #{config.$border-radius-s};
   --border-radius-sm: #{config.$border-radius-sm};

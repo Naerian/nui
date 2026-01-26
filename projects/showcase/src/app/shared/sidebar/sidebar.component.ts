@@ -64,7 +64,7 @@ export class SidebarComponent implements OnInit {
           label: 'Button',
           translationKey: 'sidebar.button',
           route: '/components/button',
-          icon: 'ri-checkbox-blank-line',
+          icon: 'ri-rectangle-fill',
         },
         {
           label: 'Action Menu',

@@ -16,7 +16,106 @@ Componente de paginación robusto y altamente configurable que permite navegar e
 🚀 **Auto-scroll** al cambiar de página  
 ♾️ **Soporte para scroll infinito** (infinite mode)
 
-## 📦 Importación
+## � Configuración Global
+
+El paginador soporta configuración global a través del sistema de configuración de NUI. Esto te permite establecer valores por defecto para toda tu aplicación sin tener que repetirlos en cada instancia del componente.
+
+### Configurar Valores Globales
+
+```typescript
+// app.config.ts o main.ts
+import { ApplicationConfig } from '@angular/core';
+import { provideNuiConfig } from 'nui';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideNuiConfig({
+      paginator: {
+        config: {
+          maxVisiblePages: 7,
+          showFirstLast: true,
+          showPageSizeSelector: true,
+          showItemRange: true,
+          showPageJump: true,  // ← Configuración global
+          pageSizeOptions: [10, 25, 50, 100],
+          autoScroll: false,
+          scrollTarget: 'body',
+        },
+        layout: {
+          // Layout por defecto para toda la app
+          left: ['itemRange', 'pageSize'],
+          center: ['firstButton', 'prevButton', 'pageNumbers', 'nextButton', 'lastButton'],
+          right: ['pageJump'],
+          direction: 'row',
+          align: 'center',
+          gap: '0.5rem',
+        },
+        mobileLayout: {
+          // Layout optimizado para móviles
+          top: ['itemRange'],
+          center: ['firstButton', 'prevButton', 'fractionalNumbers', 'nextButton', 'lastButton'],
+          bottom: ['pageSize'],
+          direction: 'column',
+          align: 'center',
+          gap: '0.5rem',
+        },
+        infinite: {
+          enabled: false,
+          mode: 'button',
+          itemsPerLoad: 20,  // ← Cuántos items cargar en modo infinito
+          scrollOffset: 100,
+          maxItems: 1000,
+          showCounter: true,
+        }
+      }
+    })
+  ]
+};
+```
+
+### Prioridad de Configuración
+
+El sistema sigue esta jerarquía (de mayor a menor prioridad):
+
+1. **Valores explícitos en el componente**: `[showPageJump]="false"`
+2. **Configuración global**: `config.showPageJump: true`
+3. **Valores por defecto del componente**
+
+```html
+<!-- Usa configuración global (showPageJump: true) -->
+<nui-paginator [currentPage]="1" [totalPages]="10" />
+
+<!-- Sobrescribe configuración global -->
+<nui-paginator 
+  [currentPage]="1" 
+  [totalPages]="10"
+  [showPageJump]="false" />
+```
+
+### ⚠️ Layout Explícito Ignora show\* Properties
+
+**IMPORTANTE**: Cuando se proporciona un `layout` explícito, las propiedades `show*` son completamente ignoradas. El layout tiene control total sobre qué elementos renderizar y dónde.
+
+```typescript
+// ❌ ESTO NO FUNCIONARÁ COMO ESPERAS
+<nui-paginator 
+  [showPageJump]="false"  // ← Ignorado cuando hay layout
+  [layout]="{
+    center: ['pageNumbers'],
+    right: ['pageJump']   // ← pageJump se renderizará
+  }" />
+
+// ✅ CORRECTO: El layout controla todo
+<nui-paginator 
+  [layout]="{
+    center: ['pageNumbers']
+    // pageJump NO está en el layout, no se renderizará
+  }" />
+```
+
+**Razón**: El layout es una API de más bajo nivel que te da control completo. Si especificas un layout personalizado, se asume que sabes exactamente qué quieres mostrar.
+
+## �📦 Importación
 
 ```typescript
 import { PaginatorComponent } from '@shared/components/paginator/paginator.component';
@@ -55,6 +154,42 @@ onPageChange(newPage: number) {
 }
 ```
 
+### ✨ Cálculo Automático de totalPages
+
+Si proporcionas `totalItems` y `itemsPerPage`, `totalPages` se calcula automáticamente:
+
+```html
+<nui-paginator 
+  [currentPage]="currentPage()"
+  [totalItems]="150"          <!-- Total de items -->
+  [itemsPerPage]="10"          <!-- Items por página -->
+  (pageChange)="onPageChange($event)">
+</nui-paginator>
+<!-- totalPages se calcula automáticamente como 15 (150 / 10) -->
+```
+
+```typescript
+// Component
+currentPage = signal(1);
+totalItems = signal(150);
+itemsPerPage = signal(10);
+
+// totalPages se calcula reactivamente
+totalPages = computed(() => 
+  Math.ceil(this.totalItems() / this.itemsPerPage())
+);
+
+onPageChange(newPage: number) {
+  this.currentPage.set(newPage);
+  this.loadData(newPage, this.itemsPerPage());
+}
+```
+
+**Ventajas**:
+- ✅ Menos props manuales
+- ✅ Sincronización automática
+- ✅ Reactivo a cambios de `totalItems` o `itemsPerPage`
+
 ## 📋 API
 
 ### @Input Properties
@@ -64,23 +199,23 @@ onPageChange(newPage: number) {
 | `variant` | `NUIVariant` | `'solid'` | Variante visual: `'solid'`, `'outline'`, `'ghost'` |
 | `color` | `NUIColor` | `'primary'` | Color del theme |
 | `size` | `NUISize` | `'md'` | Tamaño: `'xs'`, `'s'`, `'sm'`, `'md'`, `'lg'`, `'xl'` |
-| `currentPage` | `number` | `1` | Página actual (1-indexed) |
-| `totalPages` | `number` | `1` | Número total de páginas |
+| `currentPage` | `number` | `1` | Página actual (1-indexed) - Signal bidireccional con `model()` |
+| `totalPages` | `number` | `1` | Número total de páginas (computed automático si se proporciona `totalItems`) |
 | `maxVisiblePages` | `number` | `7` | Máximo de botones de página visibles |
 | `disabled` | `boolean` | `false` | Deshabilita todo el paginador |
-| `showFirstLast` | `boolean` | `true` | Muestra botones de primera/última página |
+| `showFirstLast` | `boolean \| undefined` | `undefined` | Muestra botones de primera/última página (usa config global si no se especifica) |
 | `mode` | `PaginatorMode` | `'default'` | Modo de visualización |
-| `totalItems` | `number` | - | Total de items/resultados (para calcular rango) |
-| `itemsPerPage` | `number` | `10` | Items por página |
+| `totalItems` | `number` | - | Total de items/resultados (para calcular rango y totalPages automáticamente) |
+| `itemsPerPage` | `number` | `10` | Items por página - Signal bidireccional con `model()` |
 | `pageSizeOptions` | `number[]` | `[10, 25, 50, 100]` | Opciones para selector de tamaño de página |
-| `showPageSizeSelector` | `boolean` | `false` | Muestra selector de items por página |
-| `showItemRange` | `boolean` | `true` | Muestra rango de items (ej: "11-20 de 150") |
-| `showPageJump` | `boolean` | `false` | Muestra input para saltar a página |
+| `showPageSizeSelector` | `boolean \| undefined` | `undefined` | Muestra selector de items por página (usa config global si no se especifica) |
+| `showItemRange` | `boolean \| undefined` | `undefined` | Muestra rango de items (usa config global si no se especifica) |
+| `showPageJump` | `boolean \| undefined` | `undefined` | Muestra input para saltar a página (usa config global si no se especifica) |
 | `autoScroll` | `boolean` | `false` | Hace scroll automático al cambiar página |
 | `scrollTarget` | `string \| HTMLElement` | `'body'` | Elemento target para auto-scroll |
 | `autoMobile` | `boolean` | `true` | Detecta móviles y cambia a modo fractional |
 | `autoWrap` | `boolean` | `true` | Permite wrap en pantallas pequeñas |
-| `layout` | `PaginatorLayout` | - | Configuración personalizada de layout |
+| `layout` | `PaginatorLayout` | - | Configuración personalizada de layout (**ignora propiedades show\* cuando está definido**) |
 | `mobileLayout` | `PaginatorLayout` | - | Layout específico para móviles |
 | `iconConfig` | `IconConfig` | - | Configuración de iconos |
 | `icons` | `Partial<IconConfig>` | - | Iconos específicos a sobreescribir |
@@ -488,6 +623,66 @@ Cambia los iconos de navegación:
   }">
 </nui-paginator>
 ```
+
+### 8. ♾️ Modo Infinito (Infinite Scroll)
+
+Carga progresiva de datos con scroll infinito o botón "Cargar más":
+
+```html
+<div class="content-list">
+  @for (item of items(); track item.id) {
+    <div class="item">{{ item.name }}</div>
+  }
+</div>
+
+<nui-paginator 
+  [totalItems]="totalItems()"
+  [infiniteConfig]="{
+    enabled: true,
+    mode: 'button',              // 'button' o 'scroll'
+    showCounter: true,
+    initialLoadedItems: 20,      // Items ya cargados inicialmente
+    itemsPerLoad: 20,            // Cuántos items cargar cada vez
+    onLoadMore: loadMoreData.bind(this)
+  }">
+</nui-paginator>
+```
+
+```typescript
+// Component
+items = signal<Item[]>([]);
+totalItems = signal(100);
+
+async loadMoreData() {
+  // Simular carga de API
+  await this.apiService.loadMore();
+  
+  // Los items nuevos se agregan a la lista
+  const newItems = await this.apiService.getNextBatch();
+  this.items.update(current => [...current, ...newItems]);
+}
+```
+
+#### InfiniteConfig Interface
+
+```typescript
+interface InfiniteConfig {
+  enabled: boolean;                    // Activar modo infinito
+  mode: 'button' | 'scroll';          // Botón o scroll automático
+  showCounter: boolean;               // Mostrar contador de items cargados
+  initialLoadedItems?: number;        // Items pre-cargados (para el contador)
+  itemsPerLoad: number;               // Cuántos items cargar por vez (default: 20)
+  scrollOffset: number;               // Offset de px para trigger de scroll
+  maxItems: number;                   // Límite máximo de items
+  onLoadMore: () => Promise<void>;    // Callback cuando se solicita más datos
+}
+```
+
+**Diferencias clave con paginación normal**:
+- ❌ No usa `itemsPerPage` (usa `itemsPerLoad` en su lugar)
+- ❌ No usa `currentPage` (carga es incremental)
+- ✅ Usa `initialLoadedItems` para sincronizar el contador
+- ✅ Completamente independiente del sistema de páginas
 
 ## 📡 Eventos
 
@@ -976,36 +1171,202 @@ export class BlogPostsComponent {
 
 ### Los botones de primera/última no aparecen
 
-Verifica que `[showFirstLast]="true"` está configurado (es el default).
+**Posibles causas:**
+
+1. **Configuración Global**: La configuración global tiene `showFirstLast: false`
+   ```typescript
+   // ❌ Global config deshabilitándolo
+   provideNuiConfig({ paginator: { config: { showFirstLast: false } } })
+   ```
+   
+2. **Layout Explícito**: Usas un layout personalizado sin incluir el elemento `first-last`
+   ```html
+   <!-- ❌ Layout sin first-last -->
+   <nui-paginator [layout]="['prev-next', 'pages']">
+   ```
+
+**Soluciones:**
+- Habilítalo explícitamente: `[showFirstLast]="true"`
+- O ajusta la configuración global si aplica a todos los paginadores
+- O incluye `first-last` en el layout personalizado
+
+---
 
 ### El rango de items no se muestra correctamente
 
-Asegúrate de configurar:
-- `[totalItems]="..."` con el total real
-- `[itemsPerPage]="..."` con el tamaño de página
-- `[showItemRange]="true"`
+**Asegúrate de configurar:**
+- `[totalItems]="..."` con el total real de items
+- `[itemsPerPage]="..."` con el tamaño de página actual
+- `[showItemRange]="true"` (o habilitado en config global)
+
+**Problema común:**
+```typescript
+// ❌ totalPages calculado manualmente incorrectamente
+totalPages = signal(10);
+
+// ✅ Deja que el componente lo calcule
+totalPages = computed(() => Math.ceil(this.totalItems() / this.itemsPerPage()));
+```
+
+---
 
 ### El selector de tamaño de página no aparece
 
-Verifica:
-- `[showPageSizeSelector]="true"`
-- `[pageSizeOptions]="[...]"` con las opciones deseadas
+**Verifica:**
+1. Que `showPageSizeSelector` esté habilitado (explícitamente o via config global)
+2. Que `pageSizeOptions` tenga valores válidos:
+   ```typescript
+   // ✅ Bueno
+   [pageSizeOptions]="[10, 20, 50, 100]"
+   
+   // ❌ Malo (array vacío)
+   [pageSizeOptions]="[]"
+   ```
+3. Si usas layout personalizado, incluye el elemento `page-size`:
+   ```html
+   <nui-paginator [layout]="['first-last', 'prev-next', 'pages', 'page-size']">
+   ```
+
+---
+
+### Configuré show* properties pero no se aplican
+
+**Problema**: Usas un `layout` explícito y esperas que las propiedades `show*` lo afecten.
+
+```html
+<!-- ❌ El layout ignora showFirstLast -->
+<nui-paginator 
+  [showFirstLast]="true"
+  [showPageJump]="true"
+  [layout]="['pages']">
+</nui-paginator>
+<!-- Resultado: solo muestra páginas, ignora first-last y page-jump -->
+```
+
+**Explicación**: Cuando defines `layout`, tienes control total sobre qué elementos se muestran. Las propiedades `show*` **NO tienen efecto**.
+
+**Soluciones:**
+
+1. **Remover el layout** y dejar que `show*` controle:
+   ```html
+   <nui-paginator 
+     [showFirstLast]="true"
+     [showPageJump]="true">
+   </nui-paginator>
+   ```
+
+2. **O incluir explícitamente** los elementos en el layout:
+   ```html
+   <nui-paginator 
+     [layout]="['first-last', 'pages', 'page-jump']">
+   </nui-paginator>
+   ```
+
+---
+
+### La configuración global no se aplica
+
+**Verifica que:**
+
+1. Hayas registrado la config en el provider:
+   ```typescript
+   // app.config.ts
+   export const appConfig: ApplicationConfig = {
+     providers: [
+       provideNuiConfig({
+         paginator: {
+           config: { /* ... */ },
+           layout: { /* ... */ }
+         }
+       })
+     ]
+   };
+   ```
+
+2. Que no haya un input explícito sobreescribiéndola:
+   ```html
+   <!-- ❌ El input [showFirstLast] sobreescribe la config global -->
+   <nui-paginator [showFirstLast]="false">
+   ```
+
+**Prioridad de configuración**: `Input explícito > Config global > Default del componente`
+
+---
 
 ### El layout personalizado no se aplica
 
-Recuerda que:
-- El layout debe incluir al menos un área con elementos
-- Los elementos solo aparecen si sus propiedades asociadas están habilitadas
-- El `mobileLayout` solo se aplica si `autoMobile="true"` y es dispositivo móvil
+**Recuerda que:**
+- El layout debe incluir al menos un área con elementos válidos
+- Los elementos solo se muestran si son válidos: `first-last`, `prev-next`, `pages`, `page-size`, `page-jump`, `item-range`
+- El `mobileLayout` solo se aplica si:
+  - `autoMobile="true"` (default)
+  - Y el dispositivo es móvil (width < 768px)
+  - Y `mobileLayout` está definido
+
+**Ejemplo de layout no válido:**
+```typescript
+// ❌ Elementos inválidos
+layout = ['first', 'last', 'previous']; // No existen como elementos individuales
+
+// ✅ Válido
+layout = ['first-last', 'prev-next', 'pages'];
+```
+
+---
 
 ### El paginador no responde al cambio de página
 
-Asegúrate de:
-- Escuchar el evento `(pageChange)` o `(pageChangeAdvanced)`
-- Actualizar `currentPage` en el handler
-- Cargar los nuevos datos
+**Asegúrate de:**
+
+1. **Usar el binding bidireccional con model()**:
+   ```typescript
+   currentPage = model(1); // ✅ Signal bidireccional
+   ```
+
+2. **O escuchar el evento manualmente**:
+   ```html
+   <nui-paginator 
+     [currentPage]="currentPage()"
+     (pageChange)="currentPage.set($event)">
+   </nui-paginator>
+   ```
+
+3. **Cargar datos cuando cambie la página**:
+   ```typescript
+   effect(() => {
+     const page = this.currentPage();
+     this.loadData(page);
+   });
+   ```
+
+---
+
+### En modo infinito, el contador no refleja los items cargados
+
+**Problema**: Cargas 20 items inicialmente, pero el contador dice "0 / 100".
+
+**Causa**: No configuraste `initialLoadedItems`.
+
+```typescript
+// ❌ Sin initialLoadedItems
+infiniteConfig = {
+  enabled: true,
+  itemsPerLoad: 20,
+  // ...
+}
+
+// ✅ Con initialLoadedItems
+infiniteConfig = {
+  enabled: true,
+  itemsPerLoad: 20,
+  initialLoadedItems: 20, // Items pre-cargados
+  // ...
+}
+```
+
+El paginador necesita saber cuántos items ya tienes cargados para sincronizar el contador.
 
 ---
 
 **Versión**: 2.0.0  
-**Última actualización**: Octubre 2025
+**Última actualización**: Diciembre 2024

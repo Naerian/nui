@@ -1,12 +1,7 @@
 import { Component, Input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-
-export interface CodeExample {
-  language: string;
-  code: string;
-  title?: string;
-}
+import { CodeExample } from '../../core/models';
 
 @Component({
   selector: 'app-code-block',

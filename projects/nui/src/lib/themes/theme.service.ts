@@ -411,9 +411,11 @@ export class ThemeService {
     const hoverBg = this.withAlpha(color, 0.05);
     const inactiveBorder = this.isDark ? '#0f0f10' : '#e4e4e7';
     const inactiveBg = this.isDark ? '#18181b' : '#ffffff';
+    const textOnColor = this.isDark ? '#0d1117' : '#ffffff';
+    
     return `
   --nui-button-group-${name}-solid-bg: ${color};
-  --nui-button-group-${name}-solid-text: ${this.isDark ? '#0d1117' : '#ffffff'};
+  --nui-button-group-${name}-solid-text: ${textOnColor};
   --nui-button-group-${name}-solid-border: ${color};
   --nui-button-group-${name}-solid-box-border: ${inactiveBg};
   --nui-button-group-${name}-solid-hover-bg: ${hoverColor};
@@ -431,8 +433,14 @@ export class ThemeService {
   --nui-button-group-${name}-outline-inactive-border: ${inactiveBorder};
   --nui-button-group-${name}-ghost-bg: ${this.withAlpha(color, 0.1)};
   --nui-button-group-${name}-ghost-text: ${color};
+  --nui-button-group-${name}-ghost-border: transparent;
   --nui-button-group-${name}-ghost-hover-bg: ${this.withAlpha(color, 0.2)};
+  --nui-button-group-${name}-ghost-hover-text: ${hoverColor};
+  --nui-button-group-${name}-ghost-hover-border: transparent;
   --nui-button-group-${name}-ghost-inactive-bg: transparent;
+  --nui-button-group-${name}-ghost-inactive-text: ${color};
+  --nui-button-group-${name}-ghost-inactive-border: transparent;
+  --nui-button-group-${name}-ghost-inactive-hover-bg: ${this.withAlpha(color, 0.08)};
 `;
   }
 

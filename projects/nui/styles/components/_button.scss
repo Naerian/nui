@@ -1,5 +1,5 @@
-@use "../config";
-@use "../mixins";
+@use '../config';
+@use '../mixins';
 
 // Estilos base del botón (compartidos entre componente y directiva)
 @mixin button-base-styles {
@@ -8,20 +8,11 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border-radius: var(--nui-button-border-radius);
   font-weight: var(--nui-button-font-weight);
   text-decoration: none;
   font-family: var(--font-family);
   border-width: var(--nui-button-border-width);
   border-style: solid;
-  transition: background-color var(--nui-button-transition-duration)
-      var(--nui-button-transition-timing),
-    color var(--nui-button-transition-duration)
-      var(--nui-button-transition-timing),
-    border-color var(--nui-button-transition-duration)
-      var(--nui-button-transition-timing),
-    box-shadow var(--nui-button-transition-duration)
-      var(--nui-button-transition-timing);
 
   &:focus:not(:disabled),
   &:active:not(:disabled) {
@@ -39,7 +30,12 @@
   $sizes: xs, s, sm, md, lg, xl;
   @each $size in $sizes {
     &--#{$size} {
+      // Altura, padding, etc
       @include mixins.component-size($size);
+
+      // Radio proporcional
+      @include mixins.apply-proportional-radius('button', $size);
+
       i {
         font-size: var(--component-font-size-#{$size});
       }
@@ -119,9 +115,7 @@
     }
 
     // Variant por defecto es solid (cuando no se especifica)
-    &--#{$color}:not(.nui-btn--solid):not(.nui-btn--outline):not(
-        .nui-btn--ghost
-      ) {
+    &--#{$color}:not(.nui-btn--solid):not(.nui-btn--outline):not(.nui-btn--ghost) {
       background-color: var(--nui-button-#{$color}-solid-bg);
       color: var(--nui-button-#{$color}-solid-text);
       border-color: var(--nui-button-#{$color}-solid-border);

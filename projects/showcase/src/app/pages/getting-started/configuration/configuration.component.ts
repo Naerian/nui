@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { CodeBlockComponent, CodeExample } from '../../../shared/code-block/code-block.component';
+import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
+import { CodeExample } from '../../../core/models';
 
 @Component({
   selector: 'app-configuration',
@@ -13,6 +14,7 @@ import { CodeBlockComponent, CodeExample } from '../../../shared/code-block/code
 export class ConfigurationComponent {
   presetConfigExamples: CodeExample[] = [
     {
+      title: 'app.config.ts',
       language: 'typescript',
       code: `import { provideNUI, dopamine } from 'nui';
 
@@ -24,6 +26,7 @@ provideNUI({
 
   darkModeConfigExamples: CodeExample[] = [
     {
+      title: 'app.config.ts',
       language: 'typescript',
       code: `provideNUI({ 
   preset: aura,

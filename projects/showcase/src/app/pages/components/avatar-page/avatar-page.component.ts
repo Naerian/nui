@@ -4,12 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AvatarComponent } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
-
-interface CodeExample {
-  title: string;
-  code: string;
-  language: string;
-}
+import { CodeExample } from '../../../core/models';
 
 @Component({
   selector: 'app-avatar-page',

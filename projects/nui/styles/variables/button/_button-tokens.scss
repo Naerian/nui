@@ -30,8 +30,14 @@
 $button-gap: 0.5rem !default;
 
 // ===== BORDES Y RADIOS =====
-$button-border-radius: var(--border-radius-md) !default;
+// $button-border-radius: var(--border-radius-md) !default;
 $button-border-width: var(--border-width-xs) !default;
+$button-border-radius-xs: var(--border-radius-xs) !default;
+$button-border-radius-s: var(--border-radius-s) !default;
+$button-border-radius-sm: var(--border-radius-s) !default;
+$button-border-radius-md: var(--border-radius-md) !default;
+$button-border-radius-lg: var(--border-radius-lg) !default;
+$button-border-radius-xl: var(--border-radius-xl) !default;
 
 // ===== TIPOGRAFÍA =====
 $button-font-weight: var(--font-weight-medium) !default;

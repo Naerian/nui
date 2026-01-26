@@ -1,7 +1,7 @@
-@use "config";
+@use 'config';
 
-@use "sass:list";
-@use "sass:map";
+@use 'sass:list';
+@use 'sass:map';
 // ========================================
 // TYPOGRAPHY MIXINS
 // ========================================
@@ -14,67 +14,34 @@
 @mixin heading($level) {
   font-size: var(--font-size-#{$level});
   line-height: var(--line-height-#{$level});
-  font-weight: var(
-    --font-weight-#{if(list.index((h1, h2, h3), $level), "bold", "semibold")}
-  );
+  font-weight: var(--font-weight-#{if(list.index((h1, h2, h3), $level), 'bold', 'semibold')});
 }
 
 // ========================================
 // COMPONENT SIZE MIXINS
 // ========================================
 
-/// Mixin genérico para generar todas las variantes de tamaño de un componente
-/// @param {String} $component - Nombre del componente
-/// @param {List} $sizes - Lista de tamaños (default: xs, s, sm, md, lg, xl)
-@mixin generate-component-sizes($component, $sizes: (xs, s, sm, md, lg, xl)) {
-  @each $size in $sizes {
-    &.#{$component}--#{$size} {
-      @include component-size($size);
-    }
-  }
-}
-
 /// Mixin para definir tamaños de componentes
 /// @param {String} $size - Tamaño del componente (xs, s, md, lg, xl)
 @mixin component-size($size) {
-  height: var(
-    --component-height-#{$size},
-    #{map.get(config.$component-heights, $size)}
-  );
-  min-height: var(
-    --component-height-#{$size},
-    #{map.get(config.$component-heights, $size)}
-  );
-  padding: var(
-    --component-padding-#{$size},
-    #{map.get(config.$component-paddings, $size)}
-  );
-  font-size: var(
-    --component-font-size-#{$size},
-    #{map.get(config.$component-font-sizes, $size)}
-  );
+  height: var(--component-height-#{$size}, #{map.get(config.$component-heights, $size)});
+  min-height: var(--component-height-#{$size}, #{map.get(config.$component-heights, $size)});
+  padding: var(--component-padding-#{$size}, #{map.get(config.$component-paddings, $size)});
+  font-size: var(--component-font-size-#{$size}, #{map.get(config.$component-font-sizes, $size)});
+  line-height: var(--line-height-md); // Line-height fijo para todos los tamaños de componente
 }
 
 /// Mixin para definir tamaños de componentes de textarea
 /// @param {String} $size - Tamaño del textarea (xs, s, md, lg, xl)
 @mixin component-textarea-size($size) {
-  padding: var(
-    --component-padding-#{$size},
-    #{map.get(config.$component-paddings, $size)}
-  );
-  font-size: var(
-    --component-font-size-#{$size},
-    #{map.get(config.$component-font-sizes, $size)}
-  );
+  padding: var(--component-padding-#{$size}, #{map.get(config.$component-paddings, $size)});
+  font-size: var(--component-font-size-#{$size}, #{map.get(config.$component-font-sizes, $size)});
 }
 
 /// Mixin para aplicar tamaño de fuente según el tamaño del componente
 /// @param {String} $size - Tamaño del componente (xs, s, md, lg, xl)
 @mixin component-font-size($size) {
-  font-size: var(
-    --component-font-size-#{$size},
-    #{map.get(config.$component-font-sizes, $size)}
-  );
+  font-size: var(--component-font-size-#{$size}, #{map.get(config.$component-font-sizes, $size)});
 }
 
 /// Mixin para aplicar line-height según el tamaño del componente
@@ -89,32 +56,24 @@
 /// Mixin para aplicar tamaño de fuente a los iconos de los componentes
 /// @param {String} $size - Tamaño del icono (xs, s, md, lg, xl)
 @mixin component-icon-size($size) {
-  height: var(
-    --component-height-#{$size},
-    #{map.get(config.$component-heights, $size)}
-  );
-  min-height: var(
-    --component-height-#{$size},
-    #{map.get(config.$component-heights, $size)}
-  );
-  padding: var(
-    --component-padding-#{$size},
-    #{map.get(config.$component-paddings, $size)}
-  );
+  height: var(--component-height-#{$size}, #{map.get(config.$component-heights, $size)});
+  min-height: var(--component-height-#{$size}, #{map.get(config.$component-heights, $size)});
+  padding: var(--component-padding-#{$size}, #{map.get(config.$component-paddings, $size)});
   font-size: calc(
-    var(
-        --component-font-size-#{$size},
-        #{map.get(config.$component-font-sizes, $size)}
-      ) *
-      1.2
+    var(--component-font-size-#{$size}, #{map.get(config.$component-font-sizes, $size)}) * 1.2
   );
   line-height: calc(
-    var(
-        --component-font-size-#{$size},
-        #{map.get(config.$component-font-sizes, $size)}
-      ) *
-      1.2
+    var(--component-font-size-#{$size}, #{map.get(config.$component-font-sizes, $size)}) * 1.2
   );
+}
+
+/// Mixin para aplicar el radio de borde proporcional al tamaño del componente
+/// @param {String} $component - Nombre del componente (button, input, card)
+/// @param {String} $size - Tamaño (xs, s, md, lg, xl)
+@mixin apply-proportional-radius($component, $size) {
+  // Buscamos la variable específica del componente y tamaño,
+  // si no existe, cae al token global de ese tamaño.
+  border-radius: var(--nui-#{$component}-radius-#{$size});
 }
 
 /// Mixin para aplicar tamaño al spinner
@@ -123,10 +82,7 @@
   .nui-spinner-circle--#{$size} {
     width: var(--spinner-size-#{$size}, #{map.get($spinner-sizes, $size)});
     height: var(--spinner-size-#{$size}, #{map.get($spinner-sizes, $size)});
-    border-width: var(
-      --spinner-border-width-#{$size},
-      #{map.get($spinner-border-widths, $size)}
-    );
+    border-width: var(--spinner-border-width-#{$size}, #{map.get($spinner-border-widths, $size)});
   }
 
   .nui-spinner-wrapper--#{$size} {
@@ -144,36 +100,21 @@
 /// Mixin para definir la altura de las barras de progreso
 /// @param {String} $size - Tamaño de la barra (xs, s, sm, md, lg, xl)
 @mixin progress-bar-height($size) {
-  height: var(
-    --nui-progress-bar-height-#{$size},
-    #{map.get($progress-bar-heights, $size)}
-  );
+  height: var(--nui-progress-bar-height-#{$size}, #{map.get($progress-bar-heights, $size)});
 }
 
 /// Mixin para aplicar tamaño al switch (type="switch")
 /// @param {String} $size - Tamaño del switch (xs, s, sm, md, lg, xl)
 @mixin switch-track-size($size) {
-  width: var(
-    --nui-switch-track-width-#{$size},
-    #{map.get($switch-track-widths, $size)}
-  );
-  height: var(
-    --nui-switch-track-height-#{$size},
-    #{map.get($switch-track-heights, $size)}
-  );
+  width: var(--nui-switch-track-width-#{$size}, #{map.get($switch-track-widths, $size)});
+  height: var(--nui-switch-track-height-#{$size}, #{map.get($switch-track-heights, $size)});
 }
 
 /// Mixin para aplicar tamaño al thumb del switch (type="switch")
 /// @param {String} $size - Tamaño del thumb (xs, s, sm, md, lg, xl)
 @mixin switch-thumb-size($size) {
-  width: var(
-    --nui-switch-thumb-size-#{$size},
-    #{map.get($switch-thumb-sizes, $size)}
-  );
-  height: var(
-    --nui-switch-thumb-size-#{$size},
-    #{map.get($switch-thumb-sizes, $size)}
-  );
+  width: var(--nui-switch-thumb-size-#{$size}, #{map.get($switch-thumb-sizes, $size)});
+  height: var(--nui-switch-thumb-size-#{$size}, #{map.get($switch-thumb-sizes, $size)});
 }
 
 /// Mixin completo para generar un switch size con posicionamiento y transform calculados
@@ -184,16 +125,11 @@
 @mixin switch-size($size) {
   $track-width: map.get($switch-track-widths, $size);
   $thumb-size: map.get($switch-thumb-sizes, $size);
-  $offset: if(
-    $size == xs,
-    $switch-thumb-offset-xs,
-    $switch-thumb-offset-default
-  );
+  $offset: if($size == xs, $switch-thumb-offset-xs, $switch-thumb-offset-default);
 
   // Calcular el translateX: ancho del track - tamaño del thumb - (2 * offset) - border-width * 2
   $translate-x: calc(
-    #{$track-width} - #{$thumb-size} - (2 * #{$offset}) -
-      (2 * #{$switch-track-border-width})
+    #{$track-width} - #{$thumb-size} - (2 * #{$offset}) - (2 * #{$switch-track-border-width})
   );
 
   .nui-switch__track {
@@ -404,11 +340,11 @@
     padding-inline: calc(var(--nui-chip-padding-x-#{$size}) / 2);
 
     &.nui-chip--image-align-left {
-      @include chip-restore-padding-for-remove("end");
+      @include chip-restore-padding-for-remove('end');
     }
 
     &.nui-chip--image-align-right {
-      @include chip-restore-padding-for-remove("start");
+      @include chip-restore-padding-for-remove('start');
     }
   }
 }
@@ -466,9 +402,7 @@
 /// @param {String} $variant - Variante del grupo (solid, outline, ghost)
 /// @param {String} $color - Color base (primary, success, etc.)
 @mixin button-group-colors($variant, $color) {
-  &.nui-button-group--#{$variant}.nui-button-group--#{$color}:not(
-      .nui-button-group--segmented
-    ) {
+  &.nui-button-group--#{$variant}.nui-button-group--#{$color}:not(.nui-button-group--segmented) {
     border-color: var(--nui-button-group-#{$color}-#{$variant}-box-border);
     .nui-button-group__option {
       color: var(--nui-button-group-#{$color}-#{$variant}-inactive-text);
@@ -476,12 +410,8 @@
       border-color: var(--nui-button-group-#{$color}-#{$variant}-inactive-border);
 
       // Estados hover en modo "inactive" (no disabled, no selected)
-      &:not(.nui-button-group__option--disabled):not(
-          .nui-button-group__option--selected
-        ):hover {
-        background-color: var(
-          --nui-button-group-#{$color}-#{$variant}-inactive-hover-bg
-        );
+      &:not(.nui-button-group__option--disabled):not(.nui-button-group__option--selected):hover {
+        background-color: var(--nui-button-group-#{$color}-#{$variant}-inactive-hover-bg);
         color: var(--nui-button-group-#{$color}-#{$variant}-inactive-text);
         border-color: var(--nui-button-group-#{$color}-#{$variant}-inactive-border);
       }
@@ -522,12 +452,8 @@
       border-color: var(--nui-button-group-#{$color}-#{$variant}-inactive-border);
 
       // Estados hover en modo "inactive" (no disabled, no selected)
-      &:not(.nui-button-group__option--disabled):not(
-          .nui-button-group__option--selected
-        ):hover {
-        background-color: var(
-          --nui-button-group-#{$color}-#{$variant}-inactive-hover-bg
-        );
+      &:not(.nui-button-group__option--disabled):not(.nui-button-group__option--selected):hover {
+        background-color: var(--nui-button-group-#{$color}-#{$variant}-inactive-hover-bg);
         color: var(--nui-button-group-#{$color}-#{$variant}-inactive-text);
         border-color: var(--nui-button-group-#{$color}-#{$variant}-inactive-border);
       }
@@ -600,13 +526,9 @@
     // Estados hover en modo "inactive" (no disabled, no checked)
     &:not(.nui-switch--disabled, .nui-switch--checked):hover {
       .nui-switch__button {
-        background-color: var(
-          --nui-switch-#{$color}-button-#{$variant}-inactive-hover-bg
-        );
+        background-color: var(--nui-switch-#{$color}-button-#{$variant}-inactive-hover-bg);
         color: var(--nui-switch-#{$color}-button-#{$variant}-inactive-text);
-        border-color: var(
-          --nui-switch-#{$color}-button-#{$variant}-inactive-border
-        );
+        border-color: var(--nui-switch-#{$color}-button-#{$variant}-inactive-border);
       }
     }
     // Estados checked
@@ -695,8 +617,7 @@
 @mixin breadcrumb-responsive($breakpoint, $config: ()) {
   $gap: map.get($config, gap) or var(--spacing-xs);
   $min-height: map.get($config, min-height) or var(--component-height-xs);
-  $separator-margin: map.get($config, separator-margin) or
-    calc(var(--spacing-xs) / 2);
+  $separator-margin: map.get($config, separator-margin) or calc(var(--spacing-xs) / 2);
   $separator-font-size: map.get($config, separator-font-size) or 0.9em;
   $item-padding: map.get($config, item-padding) or var(--spacing-xs);
   $collapsed-min-width: map.get($config, collapsed-min-width) or 32px;
@@ -784,22 +705,14 @@
       border-color: var(--nui-paginator-#{$color}-#{$variant}-inactive-border);
 
       // Estados hover en modo "inactive" (no disabled, no active)
-      &:not(.nui-paginator__button--disabled):not(
-          .nui-paginator__button--active
-        ):hover,
-      &:not(.nui-paginator__button--disabled):not(
-          .nui-paginator__button--active
-        ):focus {
-        background-color: var(
-          --nui-paginator-#{$color}-#{$variant}-inactive-hover-bg
-        );
+      &:not(.nui-paginator__button--disabled):not(.nui-paginator__button--active):hover,
+      &:not(.nui-paginator__button--disabled):not(.nui-paginator__button--active):focus {
+        background-color: var(--nui-paginator-#{$color}-#{$variant}-inactive-hover-bg);
         color: var(--nui-paginator-#{$color}-#{$variant}-inactive-text);
         border-color: var(--nui-paginator-#{$color}-#{$variant}-inactive-border);
       }
 
-      &.nui-paginator__button--active:not(
-          .nui-paginator__button--disabled
-        ):active {
+      &.nui-paginator__button--active:not(.nui-paginator__button--disabled):active {
         background-color: var(--nui-paginator-#{$color}-#{$variant}-active-bg);
       }
     }
@@ -968,9 +881,7 @@
 
     .nui-tabs__tab {
       &:hover:not(&--disabled):not(&--active) {
-        border-bottom-color: var(
-          --tabs-#{$color}-underline-inactive-hover-border
-        );
+        border-bottom-color: var(--tabs-#{$color}-underline-inactive-hover-border);
       }
 
       &--active {
@@ -978,9 +889,7 @@
         color: var(--nui-color-#{$color});
 
         &:hover:not(&--disabled) {
-          border-bottom-color: var(
-            --tabs-#{$color}-underline-active-hover-border
-          );
+          border-bottom-color: var(--tabs-#{$color}-underline-active-hover-border);
           color: var(--tabs-#{$color}-underline-active-hover-text);
         }
       }
@@ -1178,10 +1087,7 @@
 
     // Hover mejorado
     &:hover {
-      background-color: var(
-        --nui-toast-#{$color}-bg-hover,
-        var(--nui-toast-#{$color}-bg)
-      );
+      background-color: var(--nui-toast-#{$color}-bg-hover, var(--nui-toast-#{$color}-bg));
     }
 
     .nui-toast__icon {

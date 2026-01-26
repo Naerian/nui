@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { CodeBlockComponent, CodeExample } from '../../../shared/code-block/code-block.component';
+import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
+import { CodeExample } from '../../../core/models';
 
 @Component({
   selector: 'app-installation',

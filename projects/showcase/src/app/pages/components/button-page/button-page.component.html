@@ -13,7 +13,7 @@
       <nui-button>Click me</nui-button>
     </div>
 
-    <app-code-block [examples]="basicButtonExamples"></app-code-block>
+    <app-code-block [examples]="getSection('basic')?.examples || []"></app-code-block>
   </section>
 
   <!-- 2. Variantes -->
@@ -27,7 +27,7 @@
       <nui-button variant="ghost">Ghost Button</nui-button>
     </div>
 
-    <app-code-block [examples]="variantExamples"></app-code-block>
+    <app-code-block [examples]="getSection('variants')?.examples || []"></app-code-block>
   </section>
 
   <!-- 3. Colores -->
@@ -70,7 +70,7 @@
       </div>
     </div>
 
-    <app-code-block [examples]="colorExamples"></app-code-block>
+    <app-code-block [examples]="getSection('colors')?.examples || []"></app-code-block>
   </section>
 
   <!-- 4. Tamaños -->
@@ -86,7 +86,7 @@
       <nui-button size="xl">Extra Large</nui-button>
     </div>
 
-    <app-code-block [examples]="sizeExamples"></app-code-block>
+    <app-code-block [examples]="getSection('sizes')?.examples || []"></app-code-block>
   </section>
 
   <!-- 5. Con Iconos -->
@@ -94,7 +94,8 @@
     <app-section-title [title]="'components.button.icons.title' | translate" anchor="iconos"></app-section-title>
     <p class="section-description">{{ 'components.button.icons.description' | translate }}</p>
     
-    <div class="section-note">
+    <div class="section-note info">
+      <i class="ri-information-line"></i>
       <p [innerHTML]="'components.button.icons.note' | translate"></p>
     </div>
     
@@ -104,7 +105,7 @@
       <nui-button icon="ri-settings-line" aria-label="Settings"></nui-button>
     </div>
 
-    <app-code-block [examples]="iconExamples"></app-code-block>
+    <app-code-block [examples]="getSection('icons')?.examples || []"></app-code-block>
   </section>
 
   <!-- 6. Estado Loading -->
@@ -112,19 +113,20 @@
     <app-section-title [title]="'components.button.loading.title' | translate" anchor="loading"></app-section-title>
     <p class="section-description">{{ 'components.button.loading.description' | translate }}</p>
     
-    <div class="section-note">
+    <div class="section-note warning">
+      <i class="ri-error-warning-line"></i>
       <p [innerHTML]="'components.button.loading.note' | translate"></p>
     </div>
     
     <div class="example-preview">
-      <nui-button [loading]="isLoading" loadingPosition="start" (onClick)="simulateLoading()">
-        {{ isLoading ? 'Loading...' : 'Click to Load' }}
+      <nui-button [loading]="isLoading()" loadingPosition="start" (onClick)="simulateLoading()">
+        {{ isLoading() ? 'Loading...' : 'Click to Load' }}
       </nui-button>
-      <nui-button [loading]="true" loadingPosition="end">Loading...</nui-button>
-      <nui-button [loading]="true" loadingPosition="center">Loading...</nui-button>
+      <nui-button [loading]="isLoading()" loadingPosition="end">Loading...</nui-button>
+      <nui-button [loading]="isLoading()" loadingPosition="center">Loading...</nui-button>
     </div>
 
-    <app-code-block [examples]="loadingExamples"></app-code-block>
+    <app-code-block [examples]="getSection('loading')?.examples || []"></app-code-block>
   </section>
 
   <!-- 7. Ancho -->
@@ -132,7 +134,8 @@
     <app-section-title [title]="'components.button.width.title' | translate" anchor="ancho"></app-section-title>
     <p class="section-description">{{ 'components.button.width.description' | translate }}</p>
     
-    <div class="section-note">
+    <div class="section-note info">
+      <i class="ri-information-line"></i>
       <p [innerHTML]="'components.button.width.note' | translate"></p>
     </div>
     
@@ -142,7 +145,7 @@
       <nui-button width="fit">Fit Content</nui-button>
     </div>
 
-    <app-code-block [examples]="widthExamples"></app-code-block>
+    <app-code-block [examples]="getSection('width')?.examples || []"></app-code-block>
   </section>
 
   <!-- 8. Estado Deshabilitado -->
@@ -155,7 +158,7 @@
       <nui-button variant="outline" [disabled]="true">Disabled Outline</nui-button>
     </div>
 
-    <app-code-block [examples]="disabledExamples"></app-code-block>
+    <app-code-block [examples]="getSection('disabled')?.examples || []"></app-code-block>
   </section>
 
   <!-- 9. Eventos -->
@@ -169,11 +172,11 @@
     </div>
     
     <div class="example-preview">
-      <nui-button (onClick)="handleClick()">Click Event</nui-button>
-      <nui-button type="submit" (onClick)="handleClick()">Submit Form</nui-button>
+      <nui-button (onClick)="onButtonClick($event)">Click Event</nui-button>
+      <nui-button type="submit" (onClick)="onButtonClick($event)">Submit Form</nui-button>
     </div>
 
-    <app-code-block [examples]="eventExamples"></app-code-block>
+    <app-code-block [examples]="getSection('events')?.examples || []"></app-code-block>
   </section>
 
   <!-- 10. Usando Directiva -->
@@ -189,6 +192,6 @@
       <button nuiButton icon="ri-download-line" iconPosition="end">Download</button>
     </div>
 
-    <app-code-block [examples]="directiveExamples"></app-code-block>
+    <app-code-block [examples]="getSection('directive')?.examples || []"></app-code-block>
   </section>
 </div>

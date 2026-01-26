@@ -42,6 +42,10 @@
     line-height: 1.5;
   }
 
+  &__content--empty {
+    display: none !important;
+  }
+
   &__spinner--center {
     position: absolute;
     left: 50%;

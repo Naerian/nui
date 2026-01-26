@@ -135,8 +135,8 @@
         "title": "Estado de Carga",
         "description": "Muestra un spinner de carga en tres posiciones: inicio, final o centro (que reemplaza el contenido).",
         "note": "Posiciones de carga: <code>'start'</code> muestra el spinner antes del texto, <code>'end'</code> lo muestra después, <code>'center'</code> reemplaza completamente el contenido con un spinner centrado.",
-        "htmlTitle": "Plantilla (HTML)",
-        "tsTitle": "Lógica del Componente (TypeScript)"
+        "htmlTitle": "HTML",
+        "tsTitle": "TypeScript"
       },
       "width": {
         "title": "Ancho",
@@ -153,8 +153,8 @@
         "title": "Eventos",
         "description": "Maneja eventos de clic con el output onClick. Soporta tipos de botón: button, submit y reset.",
         "consoleNote": "Abre las DevTools (F12) y revisa la pestaña Console para ver los eventos registrados cuando haces clic en los botones.",
-        "htmlTitle": "Plantilla (HTML)",
-        "tsTitle": "Lógica del Componente (TypeScript)"
+        "htmlTitle": "HTML",
+        "tsTitle": "TypeScript"
       },
       "directive": {
         "title": "Usando Directiva",
@@ -170,8 +170,8 @@
         "description": "Menú de acciones simple con array de items. Cada item puede tener una etiqueta, icono y acción.",
         "note": "Aquí vemos un ejemplo de uso de ambos <code>type='static'</code> y <code>type='dynamic'</code>.",
         "consoleNote": "Abre las DevTools (F12) y revisa la pestaña Console para ver las acciones registradas cuando haces clic en los items del menú.",
-        "htmlTitle": "Plantilla (HTML)",
-        "tsTitle": "Lógica del Componente (TypeScript)"
+        "htmlTitle": "HTML",
+        "tsTitle": "TypeScript"
       },
       "separators": {
         "title": "Con Separadores",
@@ -225,7 +225,7 @@
         "note": "El template <code>#item</code> recibe el item completo como contexto (<code>let-item</code>). Las directivas <code>menu-header</code> y <code>menu-footer</code> permiten una sintaxis más simple y clara que PrimeNG, evitando ng-template innecesarios.",
         "clickNote": "<strong>Importante:</strong> Al usar templates personalizados, debes manejar el evento click manualmente con <code>(click)=\"handleAction(item)\"</code>. El evento <code>onItemAction</code> solo se emite automáticamente con items por defecto.",
         "htmlTitle": "Template HTML",
-        "tsTitle": "Lógica del Componente (TypeScript)",
+        "tsTitle": "TypeScript",
         "cssTitle": "Estilos CSS"
       }
     },
@@ -287,6 +287,7 @@
       "segmented": {
         "title": "Variante Segmented",
         "description": "Estilo visual tipo 'iOS Segmented Control'. Ideal para conmutadores de vistas (ej: Mes/Año, Lista/Mapa).",
+        "note": "Usa <code>visualVariant='segmented'</code> para aplicar este estilo único.",
         "codeTitle": "Estilo Segmentado"
       },
       "complex": {
@@ -301,7 +302,8 @@
       },
       "styles": {
         "title": "Estilos y Tamaños",
-        "description": "Compatible con todo el sistema de variantes (Solid, Outline), colores y tamaños de NUI.",
+        "description": "Compatible con todo el sistema de variantes (Solid, Outline, Ghost), colores y tamaños de NUI (xs, sm, md, lg, xl).",
+        "note": "Combina <code>color</code>, <code>variant</code> y <code>size</code> para personalizar la apariencia según tus necesidades.",
         "codeTitle": "Personalización"
       },
       "width": {
@@ -327,8 +329,8 @@
         "title": "Layout Personalizado",
         "description": "La característica más potente. Define exactamente dónde va cada elemento (top, left, center, right, bottom) usando un objeto de configuración.",
         "note": "<strong>Sistema de Áreas:</strong> Puedes mover el selector de tamaño a la izquierda, poner el resumen de items arriba, o crear cualquier composición que necesite tu diseño. Cuando se establece un layout, los atributos como <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> y <code>showPageJump</code> se ignoran porque el layout personalizado tiene control total sobre qué mostrar y dónde.",
-        "tsTitle": "Lógica del Componente (TypeScript)",
-        "htmlTitle": "Plantilla (HTML)"
+        "tsTitle": "TypeScript",
+        "htmlTitle": "HTML"
       },
       "infinite": {
         "title": "Carga Infinita / Ver Más",
