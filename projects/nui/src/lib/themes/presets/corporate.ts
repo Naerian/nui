@@ -1,4 +1,4 @@
-import { ThemePreset } from '../theme.service';
+import { ThemePreset } from '../models/theme.model';
 
 /**
  * Corporate Preset - Professional business theme

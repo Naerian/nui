@@ -231,7 +231,7 @@ export class TooltipDirective implements OnInit, OnDestroy {
 
   @HostListener('mouseenter')
   onMouseEnter(): void {
-    if (this.event === 'hover' || this.event === 'focus') {
+    if (this.event === 'hover') {
       if (this.interactive) {
         this.isMouseOverHost = true;
       }
@@ -241,7 +241,7 @@ export class TooltipDirective implements OnInit, OnDestroy {
 
   @HostListener('mouseleave')
   onMouseLeave(): void {
-    if (this.event === 'hover' || this.event === 'focus') {
+    if (this.event === 'hover') {
       if (this.interactive) {
         this.isMouseOverHost = false;
       }

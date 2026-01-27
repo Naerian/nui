@@ -1,4 +1,4 @@
-import { ThemePreset } from '../theme.service';
+import { ThemePreset } from '../models/theme.model';
 
 /**
  * Ocean preset - Deep blues and aqua tones inspired by the sea

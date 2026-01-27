@@ -1,5 +1,12 @@
-import { Provider, EnvironmentProviders, makeEnvironmentProviders, APP_INITIALIZER } from '@angular/core';
-import { ThemeService, ThemeConfig, NUI_THEME_CONFIG } from './theme.service';
+import {
+  Provider,
+  EnvironmentProviders,
+  makeEnvironmentProviders,
+  APP_INITIALIZER,
+} from '@angular/core';
+import { ThemeService } from './theme.service';
+import { NUI_THEME_CONFIG } from './models/theme.config';
+import { ThemeConfig } from './models/theme.model';
 
 export function provideNUI(config?: ThemeConfig): EnvironmentProviders {
   const providers: Provider[] = [ThemeService];
@@ -7,7 +14,7 @@ export function provideNUI(config?: ThemeConfig): EnvironmentProviders {
   if (config) {
     providers.push({
       provide: NUI_THEME_CONFIG,
-      useValue: config
+      useValue: config,
     });
   }
 
@@ -21,7 +28,7 @@ export function provideNUI(config?: ThemeConfig): EnvironmentProviders {
       return Promise.resolve();
     },
     deps: [ThemeService],
-    multi: true
+    multi: true,
   });
 
   return makeEnvironmentProviders(providers);

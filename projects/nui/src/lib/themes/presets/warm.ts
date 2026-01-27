@@ -1,4 +1,4 @@
-import { ThemePreset } from '../theme.service';
+import { ThemePreset } from '../models/theme.model';
 
 /**
  * Warm Preset - Cozy, inviting theme

@@ -1,4 +1,4 @@
-import { ThemePreset } from '../theme.service';
+import { ThemePreset } from '../models/theme.model';
 
 /**
  * Minimal Preset - Clean, understated theme

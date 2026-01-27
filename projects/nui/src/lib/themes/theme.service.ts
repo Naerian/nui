@@ -2,46 +2,8 @@ import { Injectable, Inject, Optional, signal, computed, Signal } from '@angular
 import { DOCUMENT } from '@angular/common';
 import { Observable } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
-
-export interface ThemeColors {
-  primary: string;
-  secondary: string;
-  accent: string;
-  success: string;
-  info: string;
-  warning: string;
-  danger: string;
-}
-
-export interface ThemeGrays {
-  50: string;
-  100: string;
-  200: string;
-  300: string;
-  400: string;
-  500: string;
-  600: string;
-  700: string;
-  800: string;
-  900: string;
-}
-
-export interface ThemePreset {
-  name: string;
-  colors: {
-    light: ThemeColors;
-    dark: ThemeColors;
-  };
-  grays?: ThemeGrays; // Optional, falls back to default neutral grays
-}
-
-export interface ThemeConfig {
-  preset?: ThemePreset;
-  darkMode?: 'auto' | 'manual' | 'system';
-  darkModeClass?: string;
-}
-
-export const NUI_THEME_CONFIG = Symbol('NUI_THEME_CONFIG');
+import { ThemeGrays, ThemePreset, ThemeConfig } from './models/theme.model';
+import { PURE_COLORS, DEFAULT_GRAYS, DEFAULT_PRESET, NUI_THEME_CONFIG } from './models/theme.config';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
@@ -52,29 +14,7 @@ export class ThemeService {
 
   // Signals (API principal)
   private _isDarkMode = signal(false);
-  private _currentPreset = signal<ThemePreset>({
-    name: 'aura',
-    colors: {
-      light: {
-        primary: '#0d9488',
-        secondary: '#64748b',
-        accent: '#9333ea',
-        success: '#059669',
-        info: '#0e7490',
-        warning: '#d97706',
-        danger: '#dc2626',
-      },
-      dark: {
-        primary: '#14b8a6',
-        secondary: '#94a3b8',
-        accent: '#a855f7',
-        success: '#10b981',
-        info: '#06b6d4',
-        warning: '#f59e0b',
-        danger: '#ef4444',
-      },
-    },
-  });
+  private _currentPreset = signal<ThemePreset>(DEFAULT_PRESET);
 
   // Públicos: ReadonlySignals
   readonly isDarkMode: Signal<boolean> = this._isDarkMode.asReadonly();
@@ -262,18 +202,7 @@ export class ThemeService {
   }
 
   private getDefaultGrays(): ThemeGrays {
-    return {
-      50: '#f9fafb',
-      100: '#f3f4f6',
-      200: '#e5e7eb',
-      300: '#d1d5db',
-      400: '#9ca3af',
-      500: '#6b7280',
-      600: '#4b5563',
-      700: '#374151',
-      800: '#1f2937',
-      900: '#111827',
-    };
+    return DEFAULT_GRAYS;
   }
 
   private generateStructuralVariables(grays: ThemeGrays): string {
@@ -292,7 +221,7 @@ export class ThemeService {
   --nui-gray-900: ${grays[900]};
 
   /* Background colors */
-  --nui-bg-primary: ${isDark ? grays[900] : '#ffffff'};
+  --nui-bg-primary: ${isDark ? grays[900] : PURE_COLORS.WHITE};
   --nui-bg-secondary: ${isDark ? grays[800] : grays[50]};
   --nui-bg-tertiary: ${isDark ? grays[700] : grays[100]};
 
@@ -332,12 +261,12 @@ export class ThemeService {
   --nui-color-switch-track-bg: ${isDark ? grays[700] : grays[200]};
   --nui-color-switch-track-border: ${isDark ? grays[600] : grays[300]};
   --nui-color-switch-track-hover-border: ${isDark ? grays[500] : grays[400]};
-  --nui-color-switch-thumb-bg: ${isDark ? '#ffffff' : '#ffffff'};
+  --nui-color-switch-thumb-bg: ${isDark ? PURE_COLORS.WHITE : PURE_COLORS.WHITE};
 
   /* Avatar */
   --nui-avatar-default-bg: ${isDark ? 'var(--nui-color-secondary-shade-20)' : 'var(--nui-color-secondary)'};
-  --nui-avatar-default-color: ${isDark ? '#0d1117' : '#ffffff'};
-  --nui-avatar-group-border-color: ${isDark ? '#f8fafc' : '#ffffff'};
+  --nui-avatar-default-color: ${isDark ? PURE_COLORS.BLACK : PURE_COLORS.WHITE};
+  --nui-avatar-group-border-color: ${isDark ? grays[50] : PURE_COLORS.WHITE};
   --nui-avatar-excess-bg: ${isDark ? grays[700] : grays[300]};
   --nui-avatar-excess-color: ${isDark ? grays[200] : grays[700]};
   --nui-avatar-excess-hover-bg: ${isDark ? grays[600] : grays[400]};
@@ -347,7 +276,7 @@ export class ThemeService {
   private generateButtonVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
     const activeColor = this.shade(color, 20);
-    const textOnColor = this._isDarkMode() ? '#0d1117' : '#ffffff';
+    const textOnColor = this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
     return `
   --nui-button-${name}-solid-bg: ${color};
   --nui-button-${name}-solid-text: ${textOnColor};
@@ -380,7 +309,7 @@ export class ThemeService {
   private generateFabButtonVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
     const activeColor = this.shade(color, 20);
-    const textOnColor = this._isDarkMode() ? '#0d1117' : '#ffffff';
+    const textOnColor = this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
     return `
   --nui-fab-button-${name}-solid-bg: ${color};
   --nui-fab-button-${name}-solid-text: ${textOnColor};
@@ -413,9 +342,9 @@ export class ThemeService {
   private generateButtonGroupVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
     const hoverBg = this.withAlpha(color, 0.05);
-    const inactiveBorder = this._isDarkMode() ? '#0f0f10' : '#e4e4e7';
-    const inactiveBg = this._isDarkMode() ? '#18181b' : '#ffffff';
-    const textOnColor = this._isDarkMode() ? '#0d1117' : '#ffffff';
+    const inactiveBorder = this._isDarkMode() ? DEFAULT_GRAYS[900] : DEFAULT_GRAYS[200];
+    const inactiveBg = this._isDarkMode() ? DEFAULT_GRAYS[900] : PURE_COLORS.WHITE;
+    const textOnColor = this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
     
     return `
   --nui-button-group-${name}-solid-bg: ${color};
@@ -451,7 +380,7 @@ export class ThemeService {
   private generateChipVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
     const selectedBg = this._isDarkMode() ? this.shade(color, 15) : this.shade(color, 10);
-    const textOnColor = this._isDarkMode() ? '#0d1117' : '#ffffff';
+    const textOnColor = this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
     return `
   --nui-chip-${name}-solid-bg: ${color};
   --nui-chip-${name}-solid-text: ${textOnColor};
@@ -479,7 +408,7 @@ export class ThemeService {
   --nui-switch-${name}-color: ${color};
   --nui-switch-${name}-color-hover: ${hoverColor};
   --nui-switch-${name}-button-solid-bg: ${color};
-  --nui-switch-${name}-button-solid-text: ${this._isDarkMode() ? '#0d1117' : '#ffffff'};
+  --nui-switch-${name}-button-solid-text: ${this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE};
   --nui-switch-${name}-button-solid-hover-bg: ${hoverColor};
   --nui-switch-${name}-button-solid-inactive-bg: ${this.withAlpha(color, 0.2)};
   --nui-switch-${name}-button-solid-inactive-text: ${color};
@@ -528,7 +457,7 @@ export class ThemeService {
   --nui-progress-bar-${name}-fill-hover-bg: ${this.shade(color, 10)};
   --nui-progress-bar-${name}-track-bg: ${this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 90)};
   --nui-progress-bar-${name}-track-border: ${this._isDarkMode() ? this.shade(color, 70) : this.tint(color, 80)};
-  --nui-progress-bar-${name}-text: ${this._isDarkMode() ? '#0d1117' : '#ffffff'};
+  --nui-progress-bar-${name}-text: ${this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE};
   --nui-progress-bar-${name}-value-text: ${color};
 `;
   }
@@ -537,13 +466,13 @@ export class ThemeService {
     const hoverColor = this.shade(color, 10);
     const activeColor = this.shade(color, 20);
     const hoverBg = this.withAlpha(color, 0.05);
-    const inactiveBorder = this._isDarkMode() ? '#0f0f10' : '#e4e4e7';
-    const inactiveBg = this._isDarkMode() ? '#18181b' : '#ffffff';
+    const inactiveBorder = this._isDarkMode() ? DEFAULT_GRAYS[900] : DEFAULT_GRAYS[200];
+    const inactiveBg = this._isDarkMode() ? DEFAULT_GRAYS[900] : PURE_COLORS.WHITE;
     const inactiveHoverBg = this.withAlpha(color, 0.08);
     const ghostActive = this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 90);
     const ghostInactiveBg = this._isDarkMode() ? this.shade(color, 85) : this.tint(color, 95);
     const ghostInactiveHoverBg = this.withAlpha(color, 0.12);
-    const textOnColor = this._isDarkMode() ? '#0d1117' : '#ffffff';
+    const textOnColor = this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
     
     return `
   --nui-paginator-${name}-solid-bg: ${color};
@@ -581,7 +510,7 @@ export class ThemeService {
 
   private generateAvatarVariables(name: string, color: string): string {
     const shadeColor = this._isDarkMode() ? this.shade(color, 10) : color;
-    const textOnColor = this._isDarkMode() ? '#0d1117' : '#ffffff';
+    const textOnColor = this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
 
     return `
   --nui-avatar-${name}-bg: ${shadeColor};
@@ -633,14 +562,14 @@ export class ThemeService {
     if (this._isDarkMode()) {
       // En tema oscuro: tooltip con fondo similar al popover para consistencia
       return `
-  --tooltip-bg: #27272a;
-  --tooltip-text: #f4f4f5;
+  --tooltip-bg: ${DEFAULT_GRAYS[800]};
+  --tooltip-text: ${DEFAULT_GRAYS[50]};
 `;
     } else {
       // En tema claro: tooltip con fondo gris oscuro
       return `
-  --tooltip-bg: #27272a;
-  --tooltip-text: #ffffff;
+  --tooltip-bg: ${DEFAULT_GRAYS[800]};
+  --tooltip-text: ${PURE_COLORS.WHITE};
 `;
     }
   }
@@ -652,15 +581,15 @@ export class ThemeService {
   private generatePopoverVariables(): string {
     if (this._isDarkMode()) {
       return `
-  --popover-bg: #1c1c1e;
-  --popover-text: #e5e7eb;
-  --popover-border: #374151;
+  --popover-bg: ${DEFAULT_GRAYS[900]};
+  --popover-text: ${DEFAULT_GRAYS[200]};
+  --popover-border: ${DEFAULT_GRAYS[700]};
 `;
     } else {
       return `
-  --popover-bg: #ffffff;
-  --popover-text: #111827;
-  --popover-border: #e5e7eb;
+  --popover-bg: ${PURE_COLORS.WHITE};
+  --popover-text: ${DEFAULT_GRAYS[900]};
+  --popover-border: ${DEFAULT_GRAYS[200]};
 `;
     }
   }

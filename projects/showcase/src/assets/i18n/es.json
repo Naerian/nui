@@ -21,9 +21,7 @@
     "popover": "Popover",
     "toast": "Toast",
     "tooltip": "Tooltip",
-    "actionMenu": "Menú de Acciones",
-    "examples": "Ejemplos",
-    "playground": "Playground"
+    "actionMenu": "Menú de Acciones"
   },
   "presets": {
     "aura": "Aura",

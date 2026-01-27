@@ -98,17 +98,5 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
         icon: 'ri-question-line',
       },
     ],
-  },
-  {
-    label: 'Examples',
-    translationKey: 'sidebar.examples',
-    route: '/examples',
-    icon: 'ri-code-box-line',
-  },
-  {
-    label: 'Playground',
-    translationKey: 'sidebar.playground',
-    route: '/playground',
-    icon: 'ri-flask-line',
-  },
+  }
 ];
