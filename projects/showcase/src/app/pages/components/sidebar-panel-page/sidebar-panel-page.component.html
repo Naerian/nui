@@ -31,8 +31,10 @@
 
         @case ('defaults') {
           <div class="example-preview">
-            <nui-button [color]="'primary'" (click)="openPanelWithDefaults()">
-              <i class="ri-settings-3-line"></i>
+            <nui-button
+              [color]="'primary'"
+              (click)="openPanelWithDefaults()"
+            >
               Abrir Panel con Defaults
             </nui-button>
           </div>
@@ -67,6 +69,7 @@
         @case ('minimizable') {
           <div class="example-preview">
             <nui-button (click)="openMinimizablePanel()">Abrir Panel Minimizable</nui-button>
+            <nui-button (click)="openMinimizablePanel2()">Abrir Otro Panel Minimizable</nui-button>
           </div>
         }
 
@@ -88,7 +91,6 @@
           <div class="example-preview">
             <nui-button
               [color]="'primary'"
-              [icon]="'ri-brush-line'"
               (click)="openPanelWithCustomBackdrop()"
             >
               Abrir Panel con Backdrop Personalizado
@@ -100,7 +102,6 @@
           <div class="example-preview">
             <nui-button
               [color]="'primary'"
-              [icon]="'ri-notification-3-line'"
               (click)="openPanelWithEvents()"
             >
               Abrir Panel con Eventos

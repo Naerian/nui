@@ -11,7 +11,7 @@ import { SidebarPanelEventExampleComponent } from './components/sidebar-panel-ev
 
 /**
  * Página de documentación del componente Sidebar Panel
- * 
+ *
  * Muestra ejemplos de uso del componente con diferentes configuraciones:
  * - Uso básico
  * - Diferentes tamaños (xs, sm, md, lg, xl, full)
@@ -51,8 +51,8 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       position: 'right',
       size: 'md',
       data: {
-        message: 'Este es un ejemplo básico del componente Sidebar Panel'
-      }
+        message: 'Este es un ejemplo básico del componente Sidebar Panel',
+      },
     });
   }
 
@@ -65,11 +65,12 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
     this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
       title: 'Panel con Defaults',
       data: {
-        message: 'Este panel usa los valores por defecto de la configuración global. ' +
-                 'Si cambias provideNUIConfig({ sidebarPanel: {...} }), este panel ' +
-                 'reflejará esos cambios automáticamente.',
-        showConfigInfo: true
-      }
+        message:
+          'Este panel usa los valores por defecto de la configuración global. ' +
+          'Si cambias provideNUIConfig({ sidebarPanel: {...} }), este panel ' +
+          'reflejará esos cambios automáticamente.',
+        showConfigInfo: true,
+      },
     });
   }
 
@@ -91,8 +92,8 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       size,
       position: 'right',
       data: {
-        message: `Panel con tamaño ${sizeLabels[size]}`
-      }
+        message: `Panel con tamaño ${sizeLabels[size]}`,
+      },
     });
   }
 
@@ -112,8 +113,8 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       position,
       size: 'md',
       data: {
-        message: `Este panel se desliza desde la ${positionLabels[position].toLowerCase()}`
-      }
+        message: `Este panel se desliza desde la ${positionLabels[position].toLowerCase()}`,
+      },
     });
   }
 
@@ -127,8 +128,8 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       size: 'md',
       data: {
         message: 'Este componente recibe datos dinámicamente mediante inyección de tokens',
-        showActions: true
-      }
+        showActions: true,
+      },
     });
   }
 
@@ -142,9 +143,26 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       position: 'right',
       size: 'md',
       data: {
-        message: 'Este panel puede minimizarse a una pestaña lateral. Haz clic en el botón "-" del header.',
-        showActions: false
-      }
+        message:
+          'Este panel puede minimizarse a una pestaña lateral. Haz clic en el botón "-" del header.',
+        showActions: false,
+      },
+    });
+  }
+
+  /**
+   * Abre otro panel minimizable desde la izquierda
+   */
+  openMinimizablePanel2(): void {
+    this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
+      title: 'Otro Panel Minimizable',
+      minimizable: true,
+      position: 'right',
+      size: 'sm',
+      data: {
+        message: 'Este es otro panel minimizable abierto desde la izquierda.',
+        showActions: false,
+      },
     });
   }
 
@@ -158,9 +176,10 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       position: 'right',
       size: 'md',
       data: {
-        message: 'Este panel no tiene botón de cerrar en el header. Usa el botón de abajo para cerrar.',
-        showCloseAction: true
-      }
+        message:
+          'Este panel no tiene botón de cerrar en el header. Usa el botón de abajo para cerrar.',
+        showCloseAction: true,
+      },
     });
   }
 
@@ -174,8 +193,9 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       position: 'right',
       size: 'sm',
       data: {
-        message: 'Este panel no tiene fondo oscuro (backdrop). Puedes interactuar con el contenido detrás.'
-      }
+        message:
+          'Este panel no tiene fondo oscuro (backdrop). Puedes interactuar con el contenido detrás.',
+      },
     });
   }
 
@@ -190,8 +210,8 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       position: 'right',
       size: 'md',
       data: {
-        message: 'Este panel tiene un backdrop personalizado con efecto blur y color custom.'
-      }
+        message: 'Este panel tiene un backdrop personalizado con efecto blur y color custom.',
+      },
     });
   }
 
@@ -205,8 +225,8 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       size: 'sm',
       allowMultiple: true,
       data: {
-        message: 'Primer panel abierto desde la derecha'
-      }
+        message: 'Primer panel abierto desde la derecha',
+      },
     });
 
     setTimeout(() => {
@@ -216,8 +236,8 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         size: 'sm',
         allowMultiple: true,
         data: {
-          message: 'Segundo panel abierto desde la izquierda'
-        }
+          message: 'Segundo panel abierto desde la izquierda',
+        },
       });
     }, 300);
   }
@@ -241,8 +261,8 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       size: 'md',
       data: {
         initialValue: 'Test data',
-        message: 'Este panel demuestra la captura de eventos'
-      }
+        message: 'Este panel demuestra la captura de eventos',
+      },
     });
 
     // CLAVE: Acceder a componentInstance para suscribirse a los eventos @Output()
@@ -277,13 +297,13 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
     // También podemos capturar el resultado final con afterClosed()
     panelRef.afterClosed().subscribe((result: any) => {
       console.log('🏁 [PADRE] Panel cerrado con resultado:', result);
-      
+
       if (result) {
         alert(
           `Panel cerrado!\n\n` +
-          `Acción: ${result.action}\n` +
-          `Timestamp: ${result.timestamp}\n` +
-          `Data: ${JSON.stringify(result.data || {}, null, 2)}`
+            `Acción: ${result.action}\n` +
+            `Timestamp: ${result.timestamp}\n` +
+            `Data: ${JSON.stringify(result.data || {}, null, 2)}`
         );
       }
     });

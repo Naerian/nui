@@ -79,28 +79,6 @@ openPanel() {
 }`,
           language: 'typescript',
         },
-        {
-          title: 'Componente de Contenido - Leer Config',
-          code: `// my-content.component.ts
-import { Component, inject } from '@angular/core';
-import { SIDEBAR_PANEL_CONFIG } from 'nui';
-
-@Component({
-  selector: 'app-my-content',
-  template: \`
-    <div>
-      <h3>Configuración Actual</h3>
-      <p>Position: {{ config.position }}</p>
-      <p>Size: {{ config.size }}</p>
-      <p>Animation: {{ config.animationDuration }}ms</p>
-    </div>
-  \`
-})
-export class MyContentComponent {
-  readonly config = inject(SIDEBAR_PANEL_CONFIG);
-}`,
-          language: 'typescript',
-        },
       ],
     },
     {

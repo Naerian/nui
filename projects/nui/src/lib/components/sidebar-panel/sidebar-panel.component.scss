@@ -7,11 +7,10 @@
   overflow: hidden;
   
   // Optimizaciones de rendering para animaciones fluidas
-  will-change: transform; // Avisa al navegador que transform va a cambiar
+  // REMOVIDO: will-change: transform - causaba renderizado borroso del contenido
   transform: translateZ(0); // Fuerza aceleraciÃ³n GPU
   backface-visibility: hidden; // Previene flickering
   -webkit-font-smoothing: antialiased; // Mejora renderizado de texto durante animaciÃ³n
-  contain: layout style paint; // AÃ­sla el rendering de este elemento
   
   // REMOVIDO: transition: all 0.3s ease
   // Las animaciones ahora se manejan completamente por Angular Animations
@@ -84,15 +83,15 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--nui-sidebar-panel-header-padding);
-  border-bottom: var(--nui-sidebar-panel-header-border);
-  background: var(--nui-sidebar-panel-header-bg);
+  border-bottom: 1px solid var(--nui-sidebar-panel-border);
+  background: var(--nui-sidebar-panel-bg);
   flex-shrink: 0;
 
   .nui-sidebar-panel-title {
     margin: 0;
     font-size: var(--nui-sidebar-panel-title-size);
     font-weight: var(--nui-sidebar-panel-title-weight);
-    color: var(--nui-sidebar-panel-text-color);
+    color: var(--nui-sidebar-panel-text);
   }
 
   .nui-sidebar-panel-header-actions {
@@ -108,7 +107,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding: var(--nui-sidebar-panel-content-padding);
-  background: var(--nui-sidebar-panel-content-bg);
+  background: var(--nui-sidebar-panel-bg);
 
   // Scrollbar personalizado
   ::-webkit-scrollbar {
@@ -131,9 +130,9 @@
 }
 
 .nui-sidebar-panel-footer {
-  padding: var(--nui-sidebar-panel-footer-padding);
-  border-top: var(--nui-sidebar-panel-footer-border);
-  background: var(--nui-sidebar-panel-footer-bg);
+  padding: var(--nui-sidebar-panel-header-padding);
+  border-top: 1px solid var(--nui-sidebar-panel-border);
+  background: var(--nui-sidebar-panel-bg);
   flex-shrink: 0;
 
   &-actions {

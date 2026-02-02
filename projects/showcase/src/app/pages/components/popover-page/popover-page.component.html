@@ -67,12 +67,12 @@
             <nui-button [nuiPopover]="popoverTemplate">Ver detalles</nui-button>
 
             <ng-template #popoverTemplate let-close="close">
-              <div class="custom-popover">
-                <h3 class="custom-popover__title">Título del Popover</h3>
-                <p class="custom-popover__text">
+              <div class="nui-custom-popover">
+                <h3 class="nui-custom-popover__title">Título del Popover</h3>
+                <p class="nui-custom-popover__text">
                   Este es el contenido del popover con un template personalizado.
                 </p>
-                <div class="custom-popover__actions">
+                <div class="nui-custom-popover__actions">
                   <nui-button size="sm" variant="outline" (onClick)="close()">Cancelar</nui-button>
                   <nui-button size="sm" (onClick)="handleAction(); close()">Aceptar</nui-button>
                 </div>
