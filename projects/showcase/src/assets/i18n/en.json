@@ -16,6 +16,7 @@
     "components": "Components",
     "button": "Button",
     "actionMenu": "Action Menu",
+    "slidepanel": "Slidepanel",
     "examples": "Examples",
     "playground": "Playground"
   },
@@ -224,6 +225,48 @@
         "htmlTitle": "HTML Template",
         "tsTitle": "Component Logic (TypeScript)",
         "cssTitle": "CSS Styles"
+      }
+    },
+    "slidepanel": {
+      "title": "Slidepanel",
+      "subtitle": "Sliding side panels for displaying dynamic content",
+      "basic": {
+        "title": "Basic Usage",
+        "description": "Open a side panel from the SlidepanelService. The panel slides in from the screen edge with smooth animation.",
+        "codeTitle": "TypeScript - Open Panel",
+        "htmlCodeTitle": "HTML - Trigger Button"
+      },
+      "sizes": {
+        "title": "Sizes",
+        "description": "The Slidepanel component supports four predefined sizes: small (380px), medium (550px - default), large (780px), and xlarge (900px).",
+        "codeTitle": "Size Configuration"
+      },
+      "positions": {
+        "title": "Positions",
+        "description": "Control which side of the screen the panel slides from: left or right (default).",
+        "codeTitle": "Position Configuration"
+      },
+      "dynamicComponent": {
+        "title": "Dynamic Component",
+        "description": "Load any Angular component inside the panel and pass data through the inputs property.",
+        "componentCodeTitle": "Component Definition",
+        "usageCodeTitle": "Usage with Dynamic Inputs"
+      },
+      "closeButton": {
+        "title": "Close Button",
+        "description": "Control the visibility of the close button in the panel header.",
+        "codeTitle": "Hide Close Button"
+      },
+      "api": {
+        "title": "API",
+        "description": "Available interfaces and methods of the Slidepanel component.",
+        "entityCodeTitle": "SlidepanelEntity Interface",
+        "serviceCodeTitle": "SlidepanelService API"
+      },
+      "styling": {
+        "title": "Styling and Customization",
+        "description": "Customize the panel appearance through CSS variables. You can override these variables in your custom theme.",
+        "codeTitle": "Available CSS Variables"
       }
     }
   }

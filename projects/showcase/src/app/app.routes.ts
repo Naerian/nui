@@ -128,6 +128,13 @@ export const routes: Routes = [
             m => m.TooltipPageComponent
           ),
       },
+      {
+        path: 'sidebar-panel',
+        loadComponent: () =>
+          import('./pages/components/sidebar-panel-page/sidebar-panel-page.component').then(
+            m => m.SidebarPanelPageComponent
+          ),
+      },
     ],
   },
 

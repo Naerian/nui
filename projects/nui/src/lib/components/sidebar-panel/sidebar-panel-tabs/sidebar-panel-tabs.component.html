@@ -1,0 +1,68 @@
+﻿<!-- PestaÃ±as para posiciÃ³n RIGHT (lado derecho) -->
+@if (tabsByPosition().right.length > 0) {
+  <div class="sidebar-panel-tabs-container sidebar-panel-tabs-right">
+    @for (tab of tabsByPosition().right; track tab.id) {
+      <button 
+        class="sidebar-panel-tab-button sidebar-panel-tab-vertical"
+        (click)="restorePanel(tab.id)"
+        [attr.aria-label]="'Restore ' + tab.title"
+        [attr.data-sidebar-panel-id]="tab.id"
+        [attr.title]="tab.title"
+      >
+        <i class="ri-arrow-left-s-line"></i>
+      </button>
+    }
+  </div>
+}
+
+<!-- PestaÃ±as para posiciÃ³n LEFT (lado izquierdo) -->
+@if (tabsByPosition().left.length > 0) {
+  <div class="sidebar-panel-tabs-container sidebar-panel-tabs-left">
+    @for (tab of tabsByPosition().left; track tab.id) {
+      <button 
+        class="sidebar-panel-tab-button sidebar-panel-tab-vertical"
+        (click)="restorePanel(tab.id)"
+        [attr.aria-label]="'Restore ' + tab.title"
+        [attr.data-sidebar-panel-id]="tab.id"
+        [attr.title]="tab.title"
+      >
+        <i class="ri-arrow-right-s-line"></i>
+      </button>
+    }
+  </div>
+}
+
+<!-- PestaÃ±as para posiciÃ³n TOP (parte superior) -->
+@if (tabsByPosition().top.length > 0) {
+  <div class="sidebar-panel-tabs-container sidebar-panel-tabs-top">
+    @for (tab of tabsByPosition().top; track tab.id) {
+      <button 
+        class="sidebar-panel-tab-button sidebar-panel-tab-horizontal"
+        (click)="restorePanel(tab.id)"
+        [attr.aria-label]="'Restore ' + tab.title"
+        [attr.data-sidebar-panel-id]="tab.id"
+        [attr.title]="tab.title"
+      >
+        <i class="ri-arrow-down-s-line"></i>
+      </button>
+    }
+  </div>
+}
+
+<!-- PestaÃ±as para posiciÃ³n BOTTOM (parte inferior) -->
+@if (tabsByPosition().bottom.length > 0) {
+  <div class="sidebar-panel-tabs-container sidebar-panel-tabs-bottom">
+    @for (tab of tabsByPosition().bottom; track tab.id) {
+      <button 
+        class="sidebar-panel-tab-button sidebar-panel-tab-horizontal"
+        (click)="restorePanel(tab.id)"
+        [attr.aria-label]="'Restore ' + tab.title"
+        [attr.data-sidebar-panel-id]="tab.id"
+        [attr.title]="tab.title"
+      >
+        <i class="ri-arrow-up-s-line"></i>
+      </button>
+    }
+  </div>
+}
+

@@ -1,0 +1,91 @@
+.panel-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+
+  &__message {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--nui-color-surface-variant);
+    border-radius: var(--nui-radius-md);
+    
+    i {
+      font-size: 1.25rem;
+      color: var(--nui-color-primary);
+      flex-shrink: 0;
+    }
+
+    p {
+      margin: 0;
+      color: var(--nui-color-on-surface-variant);
+      line-height: 1.5;
+    }
+  }
+
+  &__details {
+    h3 {
+      font-size: 0.875rem;
+      font-weight: var(--font-weight-semibold);
+      margin: 0 0 0.75rem;
+      color: var(--nui-color-on-surface);
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.25rem;
+      list-style: disc;
+
+      li {
+        margin-bottom: 0.5rem;
+        color: var(--nui-color-on-surface-variant);
+        line-height: 1.5;
+
+        strong {
+          color: var(--nui-color-on-surface);
+          font-weight: var(--font-weight-semibold);
+        }
+      }
+    }
+  }
+
+  &__actions,
+  &__close-action {
+    h3 {
+      font-size: 0.875rem;
+      font-weight: var(--font-weight-semibold);
+      margin: 0 0 0.75rem;
+      color: var(--nui-color-on-surface);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+  }
+
+  &__footer {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--nui-color-outline-variant);
+
+    .text-muted {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin: 0;
+      font-size: 0.8125rem;
+      color: var(--nui-color-on-surface-variant);
+      line-height: 1.5;
+
+      i {
+        font-size: 1rem;
+        flex-shrink: 0;
+        margin-top: 0.125rem;
+      }
+    }
+  }
+}

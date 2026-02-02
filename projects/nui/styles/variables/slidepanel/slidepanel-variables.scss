@@ -1,15 +1,73 @@
 @use "../../config";
+@use "slidepanel-tokens" as tokens;
 
 // =======================
 // SLIDE PANEL - CSS Custom Properties Mixin
 // =======================
 
 @mixin nui-slidepanel-vars {
-  --slidepanel-header-padding: #{config.$spacing-md};
-  --slidepanel-title-size: #{config.$font-size-lg};
-  --slidepanel-title-weight: #{config.$font-weight-semibold};
+  // Fondo y superficie (se usan las variables globales del theme)
+  --nui-slidepanel-bg: var(--nui-bg-primary);
+  --nui-slidepanel-text: var(--nui-text-primary);
+  --nui-slidepanel-border: var(--nui-border-primary);
 
-  --slidepanel-content-padding: #{config.$spacing-md};
+  // Sombras
+  --nui-slidepanel-shadow: #{tokens.$nui-slidepanel-shadow};
 
-  --slidepanel-footer-padding: #{config.$spacing-md};
+  // Z-index
+  --nui-slidepanel-z-index: #{tokens.$nui-slidepanel-z-index};
+  --nui-slidepanel-overlay-z-index: #{tokens.$nui-slidepanel-overlay-z-index};
+
+  // Overlay/Backdrop
+  --nui-slidepanel-overlay-bg: #{tokens.$nui-slidepanel-overlay-bg};
+
+  // Header
+  --nui-slidepanel-header-padding: #{tokens.$nui-slidepanel-header-padding};
+  --nui-slidepanel-header-height: #{tokens.$nui-slidepanel-header-height};
+  --nui-slidepanel-title-size: #{tokens.$nui-slidepanel-title-size};
+  --nui-slidepanel-title-weight: #{tokens.$nui-slidepanel-title-weight};
+  --nui-slidepanel-close-size: #{tokens.$nui-slidepanel-close-size};
+
+  // Contenido
+  --nui-slidepanel-content-padding: #{tokens.$nui-slidepanel-content-padding};
+
+  // Tamaños - Small
+  --nui-slidepanel-size-s-width: #{tokens.$nui-slidepanel-size-s-width};
+  --nui-slidepanel-size-s-width-tablet: #{tokens.$nui-slidepanel-size-s-width-tablet};
+  --nui-slidepanel-size-s-width-desktop: #{tokens.$nui-slidepanel-size-s-width-desktop};
+  --nui-slidepanel-size-s-width-mobile: #{tokens.$nui-slidepanel-size-s-width-mobile};
+
+  // Tamaños - Medium
+  --nui-slidepanel-size-m-width: #{tokens.$nui-slidepanel-size-m-width};
+  --nui-slidepanel-size-m-width-tablet: #{tokens.$nui-slidepanel-size-m-width-tablet};
+  --nui-slidepanel-size-m-width-desktop: #{tokens.$nui-slidepanel-size-m-width-desktop};
+  --nui-slidepanel-size-m-width-mobile: #{tokens.$nui-slidepanel-size-m-width-mobile};
+
+  // Tamaños - Large
+  --nui-slidepanel-size-l-width: #{tokens.$nui-slidepanel-size-l-width};
+  --nui-slidepanel-size-l-width-tablet: #{tokens.$nui-slidepanel-size-l-width-tablet};
+  --nui-slidepanel-size-l-width-desktop: #{tokens.$nui-slidepanel-size-l-width-desktop};
+  --nui-slidepanel-size-l-width-mobile: #{tokens.$nui-slidepanel-size-l-width-mobile};
+
+  // Tamaños - Extra Large
+  --nui-slidepanel-size-xl-width: #{tokens.$nui-slidepanel-size-xl-width};
+
+  // Breakpoints
+  --nui-slidepanel-breakpoint-mobile: #{tokens.$nui-slidepanel-breakpoint-mobile};
+  --nui-slidepanel-breakpoint-tablet: #{tokens.$nui-slidepanel-breakpoint-tablet};
+  --nui-slidepanel-breakpoint-desktop: #{tokens.$nui-slidepanel-breakpoint-desktop};
+
+  // Host (Contenedor interno)
+  --nui-slidepanel-host-bg: #{tokens.$nui-slidepanel-host-bg};
+  --nui-slidepanel-host-shadow: #{tokens.$nui-slidepanel-host-shadow};
+  --nui-slidepanel-host-border: #{tokens.$nui-slidepanel-host-border};
+  --nui-slidepanel-host-border-radius: #{tokens.$nui-slidepanel-host-border-radius};
+
+  // Espaciado interno
+  --nui-slidepanel-box-padding: #{tokens.$nui-slidepanel-box-padding};
+  --nui-slidepanel-box-gap: #{tokens.$nui-slidepanel-box-gap};
+
+  // Botones de acción
+  --nui-slidepanel-action-buttons-height: #{tokens.$nui-slidepanel-action-buttons-height};
+  --nui-slidepanel-action-buttons-gap: #{tokens.$nui-slidepanel-action-buttons-gap};
 }

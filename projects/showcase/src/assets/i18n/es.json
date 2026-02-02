@@ -21,6 +21,7 @@
     "popover": "Popover",
     "toast": "Toast",
     "tooltip": "Tooltip",
+    "slidepanel": "Slidepanel",
     "actionMenu": "Menú de Acciones"
   },
   "presets": {
@@ -436,6 +437,48 @@
         "title": "Toast de Carga",
         "description": "Muestra un toast con estado de carga que puede actualizarse dinámicamente cuando la operación completa.",
         "codeTitle": "Toast de Loading"
+      }
+    },
+    "slidepanel": {
+      "title": "Slidepanel",
+      "subtitle": "Paneles deslizantes laterales para mostrar contenido dinámico",
+      "basic": {
+        "title": "Uso Básico",
+        "description": "Abre un panel lateral desde el servicio SlidepanelService. El panel se desliza desde el borde de la pantalla con una animación suave.",
+        "codeTitle": "TypeScript - Abrir Panel",
+        "htmlCodeTitle": "HTML - Botón Trigger"
+      },
+      "sizes": {
+        "title": "Tamaños",
+        "description": "El componente Slidepanel admite cuatro tamaños predefinidos: small (380px), medium (550px - predeterminado), large (780px) y xlarge (900px).",
+        "codeTitle": "Configuración de Tamaños"
+      },
+      "positions": {
+        "title": "Posiciones",
+        "description": "Controla desde qué lado de la pantalla se desliza el panel: left (izquierda) o right (derecha - predeterminado).",
+        "codeTitle": "Configuración de Posiciones"
+      },
+      "dynamicComponent": {
+        "title": "Componente Dinámico",
+        "description": "Carga cualquier componente Angular dentro del panel y pasa datos mediante la propiedad inputs.",
+        "componentCodeTitle": "Definición del Componente",
+        "usageCodeTitle": "Uso con Inputs Dinámicos"
+      },
+      "closeButton": {
+        "title": "Botón de Cerrar",
+        "description": "Controla la visibilidad del botón de cerrar en el header del panel.",
+        "codeTitle": "Ocultar Botón de Cerrar"
+      },
+      "api": {
+        "title": "API",
+        "description": "Interfaces y métodos disponibles del componente Slidepanel.",
+        "entityCodeTitle": "SlidepanelEntity Interface",
+        "serviceCodeTitle": "SlidepanelService API"
+      },
+      "styling": {
+        "title": "Estilos y Personalización",
+        "description": "Personaliza la apariencia del panel mediante variables CSS. Puedes sobrescribir estas variables en tu tema personalizado.",
+        "codeTitle": "Variables CSS Disponibles"
       }
     },
     "tooltip": {

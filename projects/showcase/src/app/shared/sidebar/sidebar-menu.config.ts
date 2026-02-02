@@ -97,6 +97,12 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
         route: '/components/tooltip',
         icon: 'ri-question-line',
       },
+      {
+        label: 'Slidepanel',
+        translationKey: 'sidebar.slidepanel',
+        route: '/components/sidebar-panel',
+        icon: 'ri-side-bar-fill',
+      }
     ],
   }
 ];

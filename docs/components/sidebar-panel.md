@@ -601,7 +601,7 @@ El componente usa variables CSS para theming:
   --slidepanel-bg: var(--surface-primary);
   --slidepanel-header-bg: var(--surface-primary);
   --slidepanel-content-bg: var(--surface-primary);
-  --slidepanel-footer-bg: var(--nui-bg-secondary);
+  --slidepanel-footer-bg: var(--surface-secondary);
   
   /* Espaciado */
   --slidepanel-header-padding: 1.5rem;

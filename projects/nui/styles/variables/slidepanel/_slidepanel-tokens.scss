@@ -1,0 +1,87 @@
+// ========================================
+// SLIDEPANEL - Tokens (SCSS Variables)
+// ========================================
+//
+// Variables SCSS centralizadas para personalizar el componente Slidepanel.
+// Todas las variables usan !default para permitir sobrescritura.
+//
+// Cómo personalizar:
+// ------------------
+// 1. Define tus propias variables ANTES de importar este archivo
+// 2. Las variables SCSS ($slidepanel-*) afectan todos los slidepanels
+//
+// Ejemplo de personalización:
+// ```scss
+// // En tu archivo custom-variables.scss
+// $slidepanel-bg: var(--nui-color-surface);
+// $slidepanel-shadow: var(--nui-shadow-lg);
+//
+// @import "variables/slidepanel/slidepanel-tokens";
+// ```
+//
+// ========================================
+
+// ===== FONDO Y SUPERFICIE =====
+// Nota: Los colores de fondo y texto se toman directamente de las variables del theme
+// No se definen aquí porque se generan dinámicamente en theme.service.ts
+
+// ===== SOMBRAS =====
+$nui-slidepanel-shadow: var(--nui-shadow-lg) !default;
+
+// ===== Z-INDEX =====
+$nui-slidepanel-z-index: 1040 !default;
+$nui-slidepanel-overlay-z-index: 1039 !default;
+
+// ===== OVERLAY/BACKDROP =====
+$nui-slidepanel-overlay-bg: var(--nui-overlay-bg) !default;
+
+// ===== HEADER =====
+$nui-slidepanel-header-padding: 1.2rem !default;
+$nui-slidepanel-header-height: 40px !default;
+$nui-slidepanel-title-size: 0.875rem !default; // 14px
+$nui-slidepanel-title-weight: var(--font-weight-semibold) !default;
+$nui-slidepanel-close-size: 0.9375rem !default; // 15px
+
+// ===== CONTENIDO =====
+$nui-slidepanel-content-padding: 1.2rem !default;
+
+// ===== TAMAÑOS =====
+// Small
+$nui-slidepanel-size-s-width: 35% !default;
+$nui-slidepanel-size-s-width-tablet: 50% !default;
+$nui-slidepanel-size-s-width-desktop: 25% !default;
+$nui-slidepanel-size-s-width-mobile: 100% !default;
+
+// Medium
+$nui-slidepanel-size-m-width: 50% !default;
+$nui-slidepanel-size-m-width-tablet: 65% !default;
+$nui-slidepanel-size-m-width-desktop: 40% !default;
+$nui-slidepanel-size-m-width-mobile: 100% !default;
+
+// Large
+$nui-slidepanel-size-l-width: 80% !default;
+$nui-slidepanel-size-l-width-tablet: 85% !default;
+$nui-slidepanel-size-l-width-desktop: 70% !default;
+$nui-slidepanel-size-l-width-mobile: 100% !default;
+
+// Extra Large
+$nui-slidepanel-size-xl-width: 100% !default;
+
+// ===== BREAKPOINTS =====
+$nui-slidepanel-breakpoint-mobile: 576px !default;
+$nui-slidepanel-breakpoint-tablet: 1024px !default;
+$nui-slidepanel-breakpoint-desktop: 1440px !default;
+
+// ===== HOST (Contenedor interno) =====
+$nui-slidepanel-host-bg: var(--nui-bg-secondary) !default;
+$nui-slidepanel-host-shadow: var(--nui-shadow-sm) !default;
+$nui-slidepanel-host-border: 1px solid var(--nui-border-primary) !default;
+$nui-slidepanel-host-border-radius: 0.3125rem !default; // 5px
+
+// ===== ESPACIADO INTERNO =====
+$nui-slidepanel-box-padding: 1.2rem !default;
+$nui-slidepanel-box-gap: 0.9375rem !default; // 15px
+
+// ===== BOTONES DE ACCIÓN =====
+$nui-slidepanel-action-buttons-height: 45px !default;
+$nui-slidepanel-action-buttons-gap: 0.625rem !default; // 10px

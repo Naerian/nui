@@ -1,0 +1,147 @@
+﻿:host {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background: var(--nui-slidepanel-bg);
+  box-shadow: var(--nui-slidepanel-shadow);
+  overflow: hidden;
+  
+  // Optimizaciones de rendering para animaciones fluidas
+  will-change: transform; // Avisa al navegador que transform va a cambiar
+  transform: translateZ(0); // Fuerza aceleraciÃ³n GPU
+  backface-visibility: hidden; // Previene flickering
+  -webkit-font-smoothing: antialiased; // Mejora renderizado de texto durante animaciÃ³n
+  contain: layout style paint; // AÃ­sla el rendering de este elemento
+  
+  // REMOVIDO: transition: all 0.3s ease
+  // Las animaciones ahora se manejan completamente por Angular Animations
+  // para evitar conflictos y mejorar performance
+
+  // Posiciones - Solo posicionamiento, el tamaÃ±o se controla desde hostStyles
+  &.nui-slidepanel-position-right {
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &.nui-slidepanel-position-left {
+    top: 0;
+    left: 0;
+    bottom: 0;
+  }
+
+  &.nui-slidepanel-position-top {
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &.nui-slidepanel-position-bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  // Mobile fullscreen
+  &.nui-slidepanel-mobile-fullscreen {
+    @media (max-width: 768px) {
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: 100vw !important;
+      max-height: 100vh !important;
+    }
+  }
+
+  // Accessibility: Focus visible
+  &:focus-visible {
+    outline: var(--nui-slidepanel-outline-focus);
+    outline-offset: -2px;
+  }
+
+  // Print
+  @media print {
+    display: none;
+  }
+}
+
+/**
+ * Contenedor del panel en el overlay
+ * Permite que el panel capture eventos del mouse
+ */
+.nui-slidepanel-pane {
+  pointer-events: auto;
+}
+
+.nui-slidepanel-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.nui-slidepanel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--nui-slidepanel-header-padding);
+  border-bottom: var(--nui-slidepanel-header-border);
+  background: var(--nui-slidepanel-header-bg);
+  flex-shrink: 0;
+
+  .nui-slidepanel-title {
+    margin: 0;
+    font-size: var(--nui-slidepanel-title-size);
+    font-weight: var(--nui-slidepanel-title-weight);
+    color: var(--nui-slidepanel-text-color);
+  }
+
+  .nui-slidepanel-header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+}
+
+.nui-slidepanel-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--nui-slidepanel-content-padding);
+  background: var(--nui-slidepanel-content-bg);
+
+  // Scrollbar personalizado
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--scroll-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--scroll-thumb-bg);
+    border-radius: 4px;
+
+    &:hover {
+      background: var(--color-gray-500);
+    }
+  }
+}
+
+.nui-slidepanel-footer {
+  padding: var(--nui-slidepanel-footer-padding);
+  border-top: var(--nui-slidepanel-footer-border);
+  background: var(--nui-slidepanel-footer-bg);
+  flex-shrink: 0;
+
+  &-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+}
+
+

@@ -1,0 +1,114 @@
+﻿<div
+  class="nui-slidepanel-wrapper"
+  [attr.role]="'dialog'"
+  [attr.aria-label]="config.ariaLabel || 'Slide Panel'"
+  [attr.aria-labelledby]="title ? 'nui-slidepanel-title' : null"
+  [attr.aria-describedby]="config.ariaDescribedBy"
+  [attr.aria-modal]="true"
+>
+  <!-- Header -->
+  @if (showHeader && !panelRef.isMinimized) {
+    <div class="nui-slidepanel-header">
+      <!-- Template custom -->
+      @if (config.headerTemplate) {
+        <ng-container *ngTemplateOutlet="config.headerTemplate"></ng-container>
+      }
+
+      <!-- Header por defecto -->
+      @if (!config.headerTemplate) {
+        @if (title) {
+          <h2 id="nui-slidepanel-title" class="nui-slidepanel-title">{{ title }}</h2>
+        }
+        <div class="nui-slidepanel-header-actions">
+          @if (config.minimizable) {
+            <nui-button
+              [icon]="'ri-subtract-line'"
+              [color]="'secondary'"
+              [variant]="'ghost'"
+              (onClick)="minimize()"
+              [attr.aria-label]="translations.minimize || 'Minimize panel'"
+              [title]="translations.minimize || 'Minimize panel'"
+              class="nui-slidepanel-minimize-btn"
+            ></nui-button>
+          }
+          @if (showCloseButton) {
+            <nui-button
+              [icon]="'ri-close-large-line'"
+              [color]="'secondary'"
+              [variant]="'ghost'"
+              (click)="requestClose()"
+              [attr.aria-label]="translations.close || 'Close panel'"
+              [title]="translations.close || 'Close panel'"
+            ></nui-button>
+          }
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Content -->
+  <div class="nui-slidepanel-content" #dynamicComponentContainer>
+    <!-- El componente dinámico se inserta aquí por el servicio -->
+  </div>
+
+  <!-- Footer -->
+  <!-- Precedencia: customButtons > directiva > servicio > template config -->
+  @if (config.customButtons && config.customButtons.length > 0) {
+    <!-- Footer con customButtons (mÃ¡xima prioridad) -->
+    <div class="nui-slidepanel-footer">
+      <div class="nui-slidepanel-footer-actions">
+        @for (action of footerActions; track $index) {
+          <nui-button
+            [icon]="action.icon"
+            [color]="action.color ?? 'secondary'"
+            [variant]="action.variant ?? 'solid'"
+            [size]="action.size ?? 'md'"
+            [disabled]="action.disabled ?? false"
+            [loading]="action.loading ?? false"
+            [class]="action.class ?? ''"
+            (onClick)="action.handler()"
+          >
+            {{ action.label }}
+          </nui-button>
+        }
+      </div>
+    </div>
+  } @else if (footerTemplate) {
+    <!-- Footer con directiva personalizada (segunda prioridad) -->
+    <div class="nui-slidepanel-footer">
+      <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+    </div>
+  } @else if (footerActions.length > 0) {
+    <!-- Footer con acciones registradas del servicio (tercera prioridad) -->
+    <div class="nui-slidepanel-footer">
+      <div class="nui-slidepanel-footer-actions">
+        @for (action of footerActions; track $index) {
+          <nui-button
+            [icon]="action.icon"
+            [color]="action.color ?? 'secondary'"
+            [variant]="action.variant ?? 'solid'"
+            [size]="action.size ?? 'md'"
+            [disabled]="action.disabled ?? false"
+            [loading]="action.loading ?? false"
+            [class]="action.class ?? ''"
+            (onClick)="action.handler()"
+          >
+            {{ action.label }}
+          </nui-button>
+        }
+      </div>
+    </div>
+  } @else if (config.footerTemplate) {
+    <!-- Footer con template de configuraciÃ³n (Ãºltima prioridad) -->
+    <div class="nui-slidepanel-footer">
+      <ng-container
+        *ngTemplateOutlet="
+          config.footerTemplate;
+          context: { componentInstance: componentInstance }
+        "
+      ></ng-container>
+    </div>
+  }
+</div>
+
+
