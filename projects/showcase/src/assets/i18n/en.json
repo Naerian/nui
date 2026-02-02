@@ -15,8 +15,14 @@
     "theming": "Theming",
     "components": "Components",
     "button": "Button",
-    "actionMenu": "Action Menu",
+    "avatar": "Avatar",
+    "buttonGroup": "Button Group",
+    "paginator": "Paginator",
+    "popover": "Popover",
+    "toast": "Toast",
+    "tooltip": "Tooltip",
     "slidepanel": "Slidepanel",
+    "actionMenu": "Action Menu",
     "examples": "Examples",
     "playground": "Playground"
   },
@@ -225,6 +231,250 @@
         "htmlTitle": "HTML Template",
         "tsTitle": "Component Logic (TypeScript)",
         "cssTitle": "CSS Styles"
+      }
+    },
+    "avatar": {
+      "title": "Avatar",
+      "subtitle": "Graphic component to represent users, entities or brands through images, letters or icons",
+      "basic": {
+        "title": "Basic Usage",
+        "description": "Display a simple avatar by loading an external image. This is the most common way to represent a user.",
+        "codeTitle": "Avatar with Image"
+      },
+      "types": {
+        "title": "Content Types and Priority",
+        "description": "The component intelligently decides what to show based on available data. This logic ensures something meaningful is always displayed.",
+        "note": "<strong>Rendering priority:</strong> 1. Image (if loads) &gt; 2. Initials &gt; 3. Icon &gt; 4. Fallback (Alt Letter) &gt; 5. Default icon.",
+        "codeTitle": "Content Hierarchy"
+      },
+      "variants": {
+        "title": "Shape Variants",
+        "description": "Avatar supports three geometric shapes to adapt to different design contexts: <code>circular</code> (default), <code>rounded</code>, and <code>square</code>.",
+        "codeTitle": "Available Shapes"
+      },
+      "sizes": {
+        "title": "Sizes",
+        "description": "Five predefined sizes that harmoniously scale the container, typography, and icons: <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>.",
+        "codeTitle": "Size Scale"
+      },
+      "colors": {
+        "title": "Colors",
+        "description": "Customize background and text color using the system palette. Ideal for differentiating users or states when there's no image.",
+        "codeTitle": "Color Palette"
+      },
+      "customSize": {
+        "title": "Custom Size",
+        "description": "Define exact dimensions in pixels when standard sizes don't fit. Font size and icons are calculated proportionally automatically.",
+        "note": "The <code>customSize</code> input overrides the <code>size</code> input. Internal calculation maintains initials readability.",
+        "codeTitle": "Pixel Dimensions"
+      },
+      "error": {
+        "title": "Error Handling (Fallback)",
+        "description": "Automatic recovery system. If the image URL fails (404 error), the component instantly switches to showing initials or fallback icon without breaking the design.",
+        "codeTitle": "Load Error Example"
+      }
+    },
+    "buttonGroup": {
+      "title": "Button Group",
+      "subtitle": "Set of grouped buttons for single (Radio) or multiple (Checkbox) selection",
+      "basic": {
+        "title": "Basic Usage",
+        "description": "The simplest case accepts an array of strings. By default, acts as a single option selector (Radio).",
+        "codeTitle": "Example with Strings"
+      },
+      "modes": {
+        "title": "Selection Modes",
+        "description": "Allows changing the button selection type between radiobutton and checkbox",
+        "note": "Switch to <code>mode='checkbox'</code> to allow selecting multiple options at once. The returned value will be an Array.",
+        "codeTitle": "Multi-selection Mode"
+      },
+      "segmented": {
+        "title": "Segmented Variant",
+        "description": "Visual style like 'iOS Segmented Control'. Ideal for view switchers (e.g., Month/Year, List/Map).",
+        "note": "Use <code>visualVariant='segmented'</code> to apply this unique style.",
+        "codeTitle": "Segmented Style"
+      },
+      "complex": {
+        "title": "Complex Objects",
+        "note": "Map properties of arbitrary objects using <code>labelBy</code>, <code>valueBy</code>, and <code>disabledBy</code>.",
+        "codeTitle": "Data Mapping"
+      },
+      "icons": {
+        "title": "With Icons",
+        "note": "Support for Remix Icon icons. Use <code>iconOnly='true'</code> for a compact toolbar-style button bar.",
+        "codeTitle": "Icon Toolbar"
+      },
+      "styles": {
+        "title": "Styles and Sizes",
+        "description": "Compatible with NUI's entire variant system (Solid, Outline, Ghost), colors, and sizes (xs, sm, md, lg, xl).",
+        "note": "Combine <code>color</code>, <code>variant</code>, and <code>size</code> to customize appearance according to your needs.",
+        "codeTitle": "Customization"
+      },
+      "width": {
+        "title": "Full Width",
+        "note": "Use <code>width='full'</code> to make buttons expand and occupy all available space evenly.",
+        "codeTitle": "Expandable Buttons"
+      }
+    },
+    "paginator": {
+      "title": "Paginator",
+      "subtitle": "Advanced component for data navigation with support for flexible layouts and infinite loading",
+      "basic": {
+        "title": "Basic Usage",
+        "description": "Standard configuration with numeric navigation. Supports bidirectional binding of page and size.",
+        "codeTitle": "Standard Example"
+      },
+      "styles": {
+        "title": "Styles and Variants",
+        "description": "Supports all system colors, variants (Solid, Outline, Ghost), and predefined modes like 'Minimal'.",
+        "codeTitle": "Visual Customization"
+      },
+      "layout": {
+        "title": "Custom Layout",
+        "description": "The most powerful feature. Define exactly where each element goes (top, left, center, right, bottom) using a configuration object.",
+        "note": "<strong>Area System:</strong> You can move the size selector to the left, put the item summary on top, or create any composition your design needs. When a layout is set, attributes like <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code>, and <code>showPageJump</code> are ignored because the custom layout has full control over what to show and where.",
+        "tsTitle": "TypeScript",
+        "htmlTitle": "HTML"
+      },
+      "infinite": {
+        "title": "Infinite Load / Load More",
+        "description": "Transform the paginator into a 'Load More' button with integrated loading state. Ideal for mobile lists or feeds.",
+        "codeTitle": "Button Load More Mode"
+      },
+      "sizes": {
+        "title": "Page Size Options",
+        "description": "Define a custom set of options for page size.",
+        "note": "Using the <code>size</code> input you can offer users a specific set of page sizes to choose from.",
+        "codeTitle": "Custom Sizes"
+      }
+    },
+    "popover": {
+      "title": "Popover",
+      "subtitle": "Interactive floating content component with support for text, templates, and dynamic components",
+      "basic": {
+        "title": "Basic Usage",
+        "description": "Simple popover with text content. The popover displays on clicking the element (default behavior).",
+        "codeTitle": "Popover with Text"
+      },
+      "positions": {
+        "title": "Positions",
+        "description": "Control the preferred popover position: top, bottom, left, or right. The popover automatically repositions if there's insufficient space.",
+        "codeTitle": "Available Positions"
+      },
+      "events": {
+        "title": "Trigger Events",
+        "description": "Define how the popover activates: click (default), hover, focus, or manual. Manual mode allows complete programmatic control.",
+        "codeTitle": "Event Types"
+      },
+      "template": {
+        "title": "Custom Template",
+        "description": "Use Angular templates for rich, interactive content. The template context provides a <code>close</code> function to close the popover.",
+        "htmlTitle": "HTML",
+        "scssTitle": "SCSS",
+        "tsTitle": "TypeScript"
+      },
+      "component": {
+        "title": "Dynamic Component",
+        "description": "Render complete Angular components inside the popover. Ideal for forms, lists, or complex content.",
+        "parentHtmlTitle": "Parent Component (HTML)",
+        "parentTsTitle": "Parent Component (TS)",
+        "childTitle": "Child Component"
+      },
+      "delays": {
+        "title": "Show/Hide Delays",
+        "description": "Configure delays in milliseconds before showing or hiding the popover. Useful for improving user experience in hover mode.",
+        "codeTitle": "Delay Configuration"
+      },
+      "customization": {
+        "title": "Customization",
+        "description": "Customize popover appearance: no arrow, custom width, own CSS classes, or greater separation offset.",
+        "codeTitle": "Customization Options"
+      },
+      "closeOptions": {
+        "title": "Close Options",
+        "description": "Control how the popover can be closed: click outside, Escape key, or allow multiple simultaneous popovers.",
+        "codeTitle": "Close Control"
+      },
+      "backdrop": {
+        "title": "With Backdrop",
+        "description": "Add a dark background behind the popover to create a modal experience. You can control whether clicking the backdrop closes the popover or not.",
+        "codeTitle": "Modal Popover"
+      },
+      "disabled": {
+        "title": "Disabled State",
+        "description": "Dynamically control whether the popover is enabled or disabled using the <code>popoverDisabled</code> property.",
+        "htmlTitle": "HTML",
+        "tsTitle": "TypeScript"
+      }
+    },
+    "toast": {
+      "title": "Toast",
+      "subtitle": "Non-intrusive temporary notifications for user feedback",
+      "basic": {
+        "title": "Basic Toasts",
+        "description": "Display simple notifications with different types: success, error, warning, and info.",
+        "codeTitle": "Toast Types"
+      },
+      "withTitle": {
+        "title": "Toasts with Title",
+        "description": "Add a title to give more context to the notification.",
+        "codeTitle": "Toast with Title"
+      },
+      "withActions": {
+        "title": "Toasts with Actions",
+        "description": "Include action buttons so users can interact with the notification.",
+        "codeTitle": "Toast with Actions"
+      },
+      "positions": {
+        "title": "Positions",
+        "description": "Control where toasts appear on screen: top-left, top-center, top-right, bottom-left, bottom-center, bottom-right.",
+        "codeTitle": "Toast Positions"
+      },
+      "duration": {
+        "title": "Duration",
+        "description": "Configure how long the toast remains visible before disappearing. Use 0 for toasts that don't close automatically.",
+        "codeTitle": "Duration Configuration"
+      },
+      "loading": {
+        "title": "Loading Toast",
+        "description": "Display a toast with loading state that can be dynamically updated when the operation completes.",
+        "codeTitle": "Loading Toast"
+      }
+    },
+    "tooltip": {
+      "title": "Tooltip",
+      "subtitle": "Informative tooltips with support for text and custom templates",
+      "basic": {
+        "title": "Basic Tooltips",
+        "description": "Display simple tooltips with text on hover.",
+        "note": "You can disable the arrow with <code>tooltipShowArrow</code>.",
+        "codeTitle": "Basic Tooltip"
+      },
+      "positions": {
+        "title": "Positions",
+        "description": "Control tooltip position relative to the element: top (default), bottom, left, right.",
+        "codeTitle": "Tooltip Positions"
+      },
+      "events": {
+        "title": "Events",
+        "description": "Define which event triggers the tooltip: hover (default), click, focus, or manual for programmatic control.",
+        "codeTitle": "Event Types"
+      },
+      "template": {
+        "title": "Custom Template",
+        "description": "Use Angular templates for rich content with HTML formatting, icons, and styling.",
+        "htmlTitle": "HTML",
+        "scssTitle": "SCSS"
+      },
+      "delays": {
+        "title": "Show/Hide Delays",
+        "description": "Configure delays in milliseconds before showing or hiding the tooltip. Useful to prevent unwanted tooltips on quick hovers.",
+        "codeTitle": "Delay Configuration"
+      },
+      "customization": {
+        "title": "Customization",
+        "description": "Customize tooltip appearance: no arrow, custom width, own CSS classes, or maximum width.",
+        "codeTitle": "Customization Options"
       }
     },
     "slidepanel": {
