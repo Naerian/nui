@@ -30,19 +30,19 @@ export const POPOVER_PAGE_CONFIG: ComponentPageConfig = {
       examples: [
         {
           title: 'components.popover.positions.codeTitle',
-          code: `<nui-button nuiPopover="Popover arriba" popoverPosition="top">
+          code: `<nui-button nuiPopover="Popover arriba" nuiPopoverPosition="top">
   Top
 </nui-button>
 
-<nui-button nuiPopover="Popover abajo" popoverPosition="bottom">
+<nui-button nuiPopover="Popover abajo" nuiPopoverPosition="bottom">
   Bottom
 </nui-button>
 
-<nui-button nuiPopover="Popover izquierda" popoverPosition="left">
+<nui-button nuiPopover="Popover izquierda" nuiPopoverPosition="left">
   Left
 </nui-button>
 
-<nui-button nuiPopover="Popover derecha" popoverPosition="right">
+<nui-button nuiPopover="Popover derecha" nuiPopoverPosition="right">
   Right
 </nui-button>`,
           language: 'html',
@@ -58,12 +58,12 @@ export const POPOVER_PAGE_CONFIG: ComponentPageConfig = {
         {
           title: 'components.popover.events.codeTitle',
           code: `<!-- Click (default) -->
-<nui-button nuiPopover="Popover con click" popoverEvent="click">
+<nui-button nuiPopover="Popover con click" nuiPopoverEvent="click">
   Click Event
 </nui-button>
 
 <!-- Hover -->
-<nui-button nuiPopover="Popover con hover" popoverEvent="hover">
+<nui-button nuiPopover="Popover con hover" nuiPopoverEvent="hover">
   Hover Event
 </nui-button>
 
@@ -71,7 +71,7 @@ export const POPOVER_PAGE_CONFIG: ComponentPageConfig = {
 <input 
   type="text" 
   nuiPopover="Ayuda para este campo" 
-  popoverEvent="focus"
+  nuiPopoverEvent="focus"
   placeholder="Enfoca para ver ayuda"
 />`,
           language: 'html',
@@ -154,7 +154,7 @@ export const POPOVER_PAGE_CONFIG: ComponentPageConfig = {
           title: 'components.popover.component.parentHtmlTitle',
           code: `<nui-button 
   [nuiPopover]="UserProfilePopoverComponent"
-  [popoverData]="{ userId: 123, userName: 'Juan Pérez' }">
+  [nuiPopoverData]="{ userId: 123, userName: 'Juan Pérez' }">
   Ver perfil
 </nui-button>`,
           language: 'html',
@@ -203,24 +203,24 @@ export class UserProfilePopoverComponent {
           code: `<!-- Delay al mostrar (500ms) -->
 <nui-button 
   nuiPopover="Aparece después de 500ms" 
-  [popoverShowDelay]="500">
+  [nuiPopoverShowDelay]="500">
   Show Delay
 </nui-button>
 
 <!-- Delay al ocultar (1000ms) -->
 <nui-button 
   nuiPopover="Se oculta después de 1s" 
-  popoverEvent="hover"
-  [popoverHideDelay]="1000">
+  nuiPopoverEvent="hover"
+  [nuiPopoverHideDelay]="1000">
   Hide Delay
 </nui-button>
 
 <!-- Ambos delays -->
 <nui-button 
   nuiPopover="Delays combinados" 
-  popoverEvent="hover"
-  [popoverShowDelay]="300"
-  [popoverHideDelay]="500">
+  nuiPopoverEvent="hover"
+  [nuiPopoverShowDelay]="300"
+  [nuiPopoverHideDelay]="500">
   Both Delays
 </nui-button>`,
           language: 'html',
@@ -238,28 +238,28 @@ export class UserProfilePopoverComponent {
           code: `<!-- Sin flecha -->
 <nui-button 
   nuiPopover="Popover sin flecha" 
-  [popoverShowArrow]="false">
+  [nuiPopoverShowArrow]="false">
   Sin flecha
 </nui-button>
 
 <!-- Ancho personalizado -->
 <nui-button 
   nuiPopover="Popover con ancho personalizado de 400px" 
-  popoverMaxWidth="400px">
+  nuiPopoverMaxWidth="400px">
   Ancho custom
 </nui-button>
 
 <!-- Clase CSS personalizada -->
 <nui-button 
   nuiPopover="Popover con estilo custom" 
-  popoverClass="my-custom-popover">
+  nuiPopoverClass="my-custom-popover">
   Clase custom
 </nui-button>
 
 <!-- Offset personalizado -->
 <nui-button 
   nuiPopover="Mayor separación del trigger" 
-  [popoverOffset]="20">
+  [nuiPopoverOffset]="20">
   Offset 20px
 </nui-button>`,
           language: 'html',
@@ -277,27 +277,27 @@ export class UserProfilePopoverComponent {
           code: `<!-- No cerrar al hacer click fuera -->
 <nui-button 
   nuiPopover="No se cierra al hacer click fuera" 
-  [popoverCloseOnClickOutside]="false">
+  [nuiPopoverCloseOnClickOutside]="false">
   Click Outside OFF
 </nui-button>
 
 <!-- No cerrar con Escape -->
 <nui-button 
   nuiPopover="No se cierra con la tecla Escape" 
-  [popoverCloseOnEscape]="false">
+  [nuiPopoverCloseOnEscape]="false">
   Escape OFF
 </nui-button>
 
 <!-- Múltiples popovers abiertos -->
 <nui-button 
   nuiPopover="Permite múltiples popovers abiertos" 
-  [popoverAllowMultiple]="true">
+  [nuiPopoverAllowMultiple]="true">
   Multiple 1
 </nui-button>
 
 <nui-button 
   nuiPopover="Otro popover que puede estar abierto simultáneamente" 
-  [popoverAllowMultiple]="true">
+  [nuiPopoverAllowMultiple]="true">
   Multiple 2
 </nui-button>`,
           language: 'html',
@@ -315,15 +315,15 @@ export class UserProfilePopoverComponent {
           code: `<!-- Con backdrop (fondo oscuro) -->
 <nui-button 
   [nuiPopover]="modalTemplate" 
-  [popoverBackdrop]="true">
+  [nuiPopoverBackdrop]="true">
   Con Backdrop
 </nui-button>
 
 <!-- Backdrop sin cerrar al hacer click -->
 <nui-button 
   [nuiPopover]="modalTemplate" 
-  [popoverBackdrop]="true"
-  [backdropClose]="false">
+  [nuiPopoverBackdrop]="true"
+  [nuiBackdropClose]="false">
   Backdrop sin cierre
 </nui-button>
 
@@ -348,7 +348,7 @@ export class UserProfilePopoverComponent {
           title: 'components.popover.disabled.htmlTitle',
           code: `<nui-button 
   nuiPopover="Este popover está deshabilitado" 
-  [popoverDisabled]="isDisabled">
+  [nuiPopoverDisabled]="isDisabled">
   Popover condicional
 </nui-button>
 
@@ -376,25 +376,25 @@ export class UserProfilePopoverComponent {
           title: 'components.popover.api.directiveCodeTitle',
           code: `// Inputs de la directiva nuiPopover
 @Input() nuiPopover: string | TemplateRef<any> | Type<any>; // Contenido del popover
-@Input() popoverPosition: PopoverPosition = 'top'; // Posición: 'top' | 'bottom' | 'left' | 'right'
-@Input() popoverEvent: 'click' | 'hover' | 'focus' | 'manual' = 'click'; // Evento de activación
-@Input() popoverData?: any;                        // Datos para componentes dinámicos
-@Input() popoverShowArrow = true;                  // Mostrar flecha
-@Input() popoverMaxWidth = '300px';                // Ancho máximo del popover
-@Input() popoverClass?: string;                    // Clase CSS personalizada
-@Input() popoverOffset = 8;                        // Distancia desde el trigger (px)
-@Input() popoverShowDelay = 0;                     // Delay al mostrar (ms)
-@Input() popoverHideDelay = 0;                     // Delay al ocultar (ms)
-@Input() popoverCloseOnClickOutside = true;        // Cerrar al hacer click fuera
-@Input() popoverCloseOnEscape = true;              // Cerrar con tecla Escape
-@Input() popoverAllowMultiple = false;             // Permitir múltiples popovers abiertos
-@Input() popoverBackdrop = false;                  // Mostrar backdrop
-@Input() backdropClose = true;                     // Cerrar al hacer click en backdrop
-@Input() popoverDisabled = false;                  // Deshabilitar popover
+@Input() nuiPopoverPosition: PopoverPosition = 'top'; // Posición: 'top' | 'bottom' | 'left' | 'right'
+@Input() nuiPopoverEvent: 'click' | 'hover' | 'focus' | 'manual' = 'click'; // Evento de activación
+@Input() nuiPopoverData?: any;                        // Datos para componentes dinámicos
+@Input() nuiPopoverShowArrow = true;                  // Mostrar flecha
+@Input() nuiPopoverMaxWidth = '300px';                // Ancho máximo del popover
+@Input() nuiPopoverClass?: string;                    // Clase CSS personalizada
+@Input() nuiPopoverOffset = 8;                        // Distancia desde el trigger (px)
+@Input() nuiPopoverShowDelay = 0;                     // Delay al mostrar (ms)
+@Input() nuiPopoverHideDelay = 0;                     // Delay al ocultar (ms)
+@Input() nuiPopoverCloseOnClickOutside = true;        // Cerrar al hacer click fuera
+@Input() nuiPopoverCloseOnEscape = true;              // Cerrar con tecla Escape
+@Input() nuiPopoverAllowMultiple = false;             // Permitir múltiples popovers abiertos
+@Input() nuiPopoverBackdrop = false;                  // Mostrar backdrop
+@Input() nuiBackdropClose = true;                     // Cerrar al hacer click en backdrop
+@Input() nuiPopoverDisabled = false;                  // Deshabilitar popover
 
 // Outputs de la directiva
-@Output() popoverOpened = new EventEmitter<void>(); // Se emite al abrir
-@Output() popoverClosed = new EventEmitter<void>(); // Se emite al cerrar`,
+@Output() nuiPopoverShow = new EventEmitter<void>(); // Se emite al abrir
+@Output() nuiPopoverHide = new EventEmitter<void>(); // Se emite al cerrar`,
           language: 'typescript',
         },
         {
@@ -432,21 +432,21 @@ import { MyPopoverComponent } from './my-popover.component';
     <!-- Con texto simple -->
     <button
       nuiPopover="Información del elemento"
-      popoverPosition="top"
-      popoverEvent="hover"
-      [popoverShowDelay]="300"
-      [popoverHideDelay]="100"
-      (popoverOpened)="onOpen()"
-      (popoverClosed)="onClose()">
+      nuiPopoverPosition="top"
+      nuiPopoverEvent="hover"
+      [nuiPopoverShowDelay]="300"
+      [nuiPopoverHideDelay]="100"
+      (nuiPopoverShow)="onOpen()"
+      (nuiPopoverHide)="onClose()">
       Texto
     </button>
     
     <!-- Con template -->
     <button
       [nuiPopover]="myTemplate"
-      popoverPosition="bottom"
-      popoverMaxWidth="400px"
-      popoverClass="custom-popover">
+      nuiPopoverPosition="bottom"
+      nuiPopoverMaxWidth="400px"
+      nuiPopoverClass="custom-popover">
       Template
     </button>
     
@@ -461,9 +461,9 @@ import { MyPopoverComponent } from './my-popover.component';
     <!-- Con componente dinámico -->
     <button
       [nuiPopover]="MyPopoverComponent"
-      [popoverData]="{ userId: 123, userName: 'John' }"
-      [popoverBackdrop]="true"
-      [backdropClose]="false">
+      [nuiPopoverData]="{ userId: 123, userName: 'John' }"
+      [nuiPopoverBackdrop]="true"
+      [nuiBackdropClose]="false">
       Componente
     </button>
   \`

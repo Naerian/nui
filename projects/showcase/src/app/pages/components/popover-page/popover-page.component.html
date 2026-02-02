@@ -31,21 +31,21 @@
 
         @case ('positions') {
           <div class="example-preview">
-            <nui-button nuiPopover="Popover arriba" popoverPosition="top">Top</nui-button>
-            <nui-button nuiPopover="Popover abajo" popoverPosition="bottom">Bottom</nui-button>
-            <nui-button nuiPopover="Popover izquierda" popoverPosition="left">Left</nui-button>
-            <nui-button nuiPopover="Popover derecha" popoverPosition="right">Right</nui-button>
+            <nui-button nuiPopover="Popover arriba" nuiPopoverPosition="top">Top</nui-button>
+            <nui-button nuiPopover="Popover abajo" nuiPopoverPosition="bottom">Bottom</nui-button>
+            <nui-button nuiPopover="Popover izquierda" nuiPopoverPosition="left">Left</nui-button>
+            <nui-button nuiPopover="Popover derecha" nuiPopoverPosition="right">Right</nui-button>
           </div>
         }
 
         @case ('events') {
           <div class="example-preview flex-column">
             <div class="events-row">
-              <nui-button nuiPopover="Popover con click (default)" popoverEvent="click">
+              <nui-button nuiPopover="Popover con click (default)" nuiPopoverEvent="click">
                 Click Event
               </nui-button>
 
-              <nui-button nuiPopover="Popover con hover" popoverEvent="hover">
+              <nui-button nuiPopover="Popover con hover" nuiPopoverEvent="hover">
                 Hover Event
               </nui-button>
             </div>
@@ -54,7 +54,7 @@
               <input
                 type="text"
                 nuiPopover="Ayuda para este campo"
-                popoverEvent="focus"
+                nuiPopoverEvent="focus"
                 placeholder="Enfoca para ver ayuda"
                 class="example-input"
               />
@@ -85,8 +85,8 @@
           <div class="example-preview">
             <nui-button
               [nuiPopover]="UserProfilePopoverComponent"
-              [popoverData]="{ userId: 123, userName: 'Juan Pérez' }"
-              popoverPosition="bottom"
+              [nuiPopoverData]="{ userId: 123, userName: 'Juan Pérez' }"
+              nuiPopoverPosition="bottom"
             >
               Ver perfil de usuario
             </nui-button>
@@ -95,23 +95,23 @@
 
         @case ('delays') {
           <div class="example-preview">
-            <nui-button nuiPopover="Aparece después de 500ms" [popoverShowDelay]="500">
+            <nui-button nuiPopover="Aparece después de 500ms" [nuiPopoverShowDelay]="500">
               Show Delay (500ms)
             </nui-button>
 
             <nui-button
               nuiPopover="Se oculta después de 1s"
-              popoverEvent="hover"
-              [popoverHideDelay]="1000"
+              nuiPopoverEvent="hover"
+              [nuiPopoverHideDelay]="1000"
             >
               Hide Delay (1000ms)
             </nui-button>
 
             <nui-button
               nuiPopover="Delays combinados"
-              popoverEvent="hover"
-              [popoverShowDelay]="300"
-              [popoverHideDelay]="500"
+              nuiPopoverEvent="hover"
+              [nuiPopoverShowDelay]="300"
+              [nuiPopoverHideDelay]="500"
             >
               Both Delays
             </nui-button>
@@ -120,26 +120,26 @@
 
         @case ('customization') {
           <div class="example-preview">
-            <nui-button nuiPopover="Popover sin flecha" [popoverShowArrow]="false">
+            <nui-button nuiPopover="Popover sin flecha" [nuiPopoverShowArrow]="false">
               Sin flecha
             </nui-button>
 
             <nui-button
               nuiPopover="Popover con ancho personalizado de 400px para mostrar más contenido en una línea"
-              popoverMaxWidth="400px"
+              nuiPopoverMaxWidth="400px"
             >
               Ancho custom (400px)
             </nui-button>
 
             <nui-button
               nuiPopover="Popover con estilo custom: fondo degradado, borde y sombra personalizada"
-              popoverClass="my-custom-popover"
-              popoverPosition="top"
+              nuiPopoverClass="my-custom-popover"
+              nuiPopoverPosition="top"
             >
               Clase custom
             </nui-button>
 
-            <nui-button nuiPopover="Mayor separación del trigger" [popoverOffset]="20">
+            <nui-button nuiPopover="Mayor separación del trigger" [nuiPopoverOffset]="20">
               Offset 20px
             </nui-button>
           </div>
@@ -150,25 +150,25 @@
             <div class="events-row">
               <nui-button
                 nuiPopover="No se cierra al hacer click fuera. Usa Escape o click en el botón."
-                [popoverCloseOnClickOutside]="false"
+                [nuiPopoverCloseOnClickOutside]="false"
               >
                 Click Outside OFF
               </nui-button>
 
               <nui-button
                 nuiPopover="No se cierra con la tecla Escape. Haz click fuera para cerrar."
-                [popoverCloseOnEscape]="false"
+                [nuiPopoverCloseOnEscape]="false"
               >
                 Escape OFF
               </nui-button>
             </div>
 
             <div class="events-row">
-              <nui-button nuiPopover="Popover múltiple 1" [popoverAllowMultiple]="true">
+              <nui-button nuiPopover="Popover múltiple 1" [nuiPopoverAllowMultiple]="true">
                 Multiple 1
               </nui-button>
 
-              <nui-button nuiPopover="Popover múltiple 2" [popoverAllowMultiple]="true">
+              <nui-button nuiPopover="Popover múltiple 2" [nuiPopoverAllowMultiple]="true">
                 Multiple 2
               </nui-button>
             </div>
@@ -177,14 +177,14 @@
 
         @case ('backdrop') {
           <div class="example-preview">
-            <nui-button [nuiPopover]="backdropTemplate" [popoverBackdrop]="true">
+            <nui-button [nuiPopover]="backdropTemplate" [nuiPopoverBackdrop]="true">
               Con Backdrop
             </nui-button>
 
             <nui-button
               [nuiPopover]="backdropNoCloseTemplate"
-              [popoverBackdrop]="true"
-              [backdropClose]="false"
+              [nuiPopoverBackdrop]="true"
+              [nuiBackdropClose]="false"
             >
               Backdrop sin cierre
             </nui-button>
@@ -215,7 +215,7 @@
           <div class="example-preview">
             <nui-button
               nuiPopover="Popover condicional según el estado del botón"
-              [popoverDisabled]="isDisabled()"
+              [nuiPopoverDisabled]="isDisabled()"
             >
               Popover condicional
             </nui-button>
