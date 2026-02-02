@@ -26,28 +26,28 @@
         @case ('basic') {
           <div class="example-preview">
             <button nuiButton nuiTooltip="Guardar cambios">Guardar</button>
-            <button nuiButton nuiTooltip="Sin flecha" [tooltipShowArrow]="false">Sin Flecha</button>
+            <button nuiButton nuiTooltip="Sin flecha" [nuiTooltipShowArrow]="false">Sin Flecha</button>
           </div>
         }
         
         @case ('positions') {
           <div class="example-preview">
-            <button nuiButton nuiTooltip="Tooltip arriba" tooltipPosition="top">Top</button>
-            <button nuiButton nuiTooltip="Tooltip abajo" tooltipPosition="bottom">Bottom</button>
-            <button nuiButton nuiTooltip="Tooltip izquierda" tooltipPosition="left">Left</button>
-            <button nuiButton nuiTooltip="Tooltip derecha" tooltipPosition="right">Right</button>
+            <button nuiButton nuiTooltip="Tooltip arriba" nuiTooltipPosition="top">Top</button>
+            <button nuiButton nuiTooltip="Tooltip abajo" nuiTooltipPosition="bottom">Bottom</button>
+            <button nuiButton nuiTooltip="Tooltip izquierda" nuiTooltipPosition="left">Left</button>
+            <button nuiButton nuiTooltip="Tooltip derecha" nuiTooltipPosition="right">Right</button>
           </div>
         }
         
         @case ('events') {
           <div class="example-preview">
             <button nuiButton nuiTooltip="Tooltip al hacer hover">Hover</button>
-            <button nuiButton nuiTooltip="Tooltip al hacer click" tooltipEvent="click">Click</button>
+            <button nuiButton nuiTooltip="Tooltip al hacer click" nuiTooltipEvent="click">Click</button>
             <input
               type="text"
               placeholder="Enfoca para ver tooltip"
               nuiTooltip="Tooltip al enfocar"
-              tooltipEvent="focus"
+              nuiTooltipEvent="focus"
               class="example-input"
             />
           </div>
@@ -55,13 +55,13 @@
         
         @case ('delays') {
           <div class="example-preview">
-            <button nuiButton nuiTooltip="Aparece después de 500ms" [tooltipShowDelay]="500">
+            <button nuiButton nuiTooltip="Aparece después de 500ms" [nuiTooltipShowDelay]="500">
               Delay Entrada
             </button>
-            <button nuiButton nuiTooltip="Desaparece después de 1s" [tooltipHideDelay]="1000">
+            <button nuiButton nuiTooltip="Desaparece después de 1s" [nuiTooltipHideDelay]="1000">
               Delay Salida
             </button>
-            <button nuiButton nuiTooltip="Sin delays" [tooltipShowDelay]="0" [tooltipHideDelay]="0">
+            <button nuiButton nuiTooltip="Sin delays" [nuiTooltipShowDelay]="0" [nuiTooltipHideDelay]="0">
               Sin Delay
             </button>
           </div>
@@ -86,7 +86,7 @@
         
         @case ('interactive') {
           <div class="example-preview">
-            <button nuiButton [nuiTooltip]="interactiveTemplate" [tooltipInteractive]="true">
+            <button nuiButton [nuiTooltip]="interactiveTemplate" [nuiTooltipInteractive]="true">
               Tooltip Interactivo
             </button>
           </div>
@@ -101,8 +101,8 @@
         
         @case ('disabled') {
           <div class="example-preview">
-            <button nuiButton nuiTooltip="No se mostrará" [tooltipDisabled]="true">Deshabilitado</button>
-            <button nuiButton nuiTooltip="Tooltip condicional" [tooltipDisabled]="isDisabled()">
+            <button nuiButton nuiTooltip="No se mostrará" [nuiTooltipDisabled]="true">Deshabilitado</button>
+            <button nuiButton nuiTooltip="Tooltip condicional" [nuiTooltipDisabled]="isDisabled()">
               Condicional
             </button>
             <button nuiButton (click)="toggleDisabled()">Toggle (Status: {{ !isDisabled() }})</button>

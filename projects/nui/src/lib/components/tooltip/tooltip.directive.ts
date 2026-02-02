@@ -40,7 +40,7 @@ import { NUI_CONFIG } from '../../configs';
  * 
  * @example
  * // Tooltip con posición específica
- * <button nuiTooltip="Eliminar" tooltipPosition="bottom">Eliminar</button>
+ * <button nuiTooltip="Eliminar" nuiTooltipPosition="bottom">Eliminar</button>
  * 
  * @example
  * // Tooltip con template personalizado
@@ -56,8 +56,8 @@ import { NUI_CONFIG } from '../../configs';
  * // Tooltip con configuración de delays
  * <button 
  *   nuiTooltip="Texto del tooltip" 
- *   [tooltipShowDelay]="500"
- *   [tooltipHideDelay]="200">
+ *   [nuiTooltipShowDelay]="500"
+ *   [nuiTooltipHideDelay]="200">
  *   Hover me
  * </button>
  * 
@@ -65,7 +65,7 @@ import { NUI_CONFIG } from '../../configs';
  * // Tooltip deshabilitado condicionalmente
  * <button 
  *   nuiTooltip="Este tooltip está deshabilitado" 
- *   [tooltipDisabled]="true">
+ *   [nuiTooltipDisabled]="true">
  *   No tooltip
  * </button>
  * 
@@ -73,7 +73,7 @@ import { NUI_CONFIG } from '../../configs';
  * // Tooltip con clase personalizada
  * <button 
  *   nuiTooltip="Tooltip con estilo" 
- *   tooltipClass="custom-tooltip-style">
+ *   nuiTooltipClass="custom-tooltip-style">
  *   Custom style
  * </button>
  */
@@ -105,48 +105,48 @@ export class TooltipDirective implements OnInit, OnDestroy {
    * Posición del tooltip
    * @default 'top' (o valor global configurado)
    */
-  @Input() tooltipPosition?: TooltipPosition;
+  @Input() nuiTooltipPosition?: TooltipPosition;
 
   /**
    * Evento que dispara el tooltip
    * @default 'hover' (o valor global configurado)
    */
-  @Input() tooltipEvent?: TooltipEvent;
+  @Input() nuiTooltipEvent?: TooltipEvent;
 
   /**
    * Delay antes de mostrar el tooltip (ms)
    * @default 300 (o valor global configurado)
    */
-  @Input() tooltipShowDelay?: number;
+  @Input() nuiTooltipShowDelay?: number;
 
   /**
    * Delay antes de ocultar el tooltip (ms)
    * @default 0 (o valor global configurado)
    */
-  @Input() tooltipHideDelay?: number;
+  @Input() nuiTooltipHideDelay?: number;
 
   /**
    * Desactiva el tooltip
    * @default false
    */
-  @Input({ transform: booleanAttribute }) tooltipDisabled = false;
+  @Input({ transform: booleanAttribute }) nuiTooltipDisabled = false;
 
   /**
    * Clase CSS personalizada para el tooltip
    */
-  @Input() tooltipClass?: string;
+  @Input() nuiTooltipClass?: string;
 
   /**
    * Muestra una flecha apuntando al elemento
    * @default true (o valor global configurado)
    */
-  @Input({ transform: booleanAttribute }) tooltipShowArrow?: boolean;
+  @Input({ transform: booleanAttribute }) nuiTooltipShowArrow?: boolean;
 
   /**
    * Permite interactuar con el contenido del tooltip (hover sobre el tooltip)
    * @default false (o valor global configurado)
    */
-  @Input({ transform: booleanAttribute }) tooltipInteractive?: boolean;
+  @Input({ transform: booleanAttribute }) nuiTooltipInteractive?: boolean;
 
   private isVisible = signal(false);
   private isMouseOverHost = false;
@@ -154,27 +154,27 @@ export class TooltipDirective implements OnInit, OnDestroy {
 
   // Getters para valores con fallback a configuración global
   private get position(): TooltipPosition {
-    return this.tooltipPosition ?? this.globalConfig.tooltip?.position ?? 'top';
+    return this.nuiTooltipPosition ?? this.globalConfig.tooltip?.position ?? 'top';
   }
 
   private get event(): TooltipEvent {
-    return this.tooltipEvent ?? this.globalConfig.tooltip?.event ?? 'hover';
+    return this.nuiTooltipEvent ?? this.globalConfig.tooltip?.event ?? 'hover';
   }
 
   private get showDelay(): number {
-    return this.tooltipShowDelay ?? this.globalConfig.tooltip?.showDelay ?? 300;
+    return this.nuiTooltipShowDelay ?? this.globalConfig.tooltip?.showDelay ?? 300;
   }
 
   private get hideDelay(): number {
-    return this.tooltipHideDelay ?? this.globalConfig.tooltip?.hideDelay ?? 0;
+    return this.nuiTooltipHideDelay ?? this.globalConfig.tooltip?.hideDelay ?? 0;
   }
 
   private get showArrow(): boolean {
-    return this.tooltipShowArrow ?? this.globalConfig.tooltip?.showArrow ?? true;
+    return this.nuiTooltipShowArrow ?? this.globalConfig.tooltip?.showArrow ?? true;
   }
 
   private get interactive(): boolean {
-    return this.tooltipInteractive ?? this.globalConfig.tooltip?.interactive ?? false;
+    return this.nuiTooltipInteractive ?? this.globalConfig.tooltip?.interactive ?? false;
   }
 
   constructor() {
@@ -286,7 +286,7 @@ export class TooltipDirective implements OnInit, OnDestroy {
    * Muestra el tooltip
    */
   show(): void {
-    if (this.tooltipDisabled || !this.content) {
+    if (this.nuiTooltipDisabled || !this.content) {
       return;
     }
 
@@ -350,8 +350,8 @@ export class TooltipDirective implements OnInit, OnDestroy {
     const positionStrategy = this.getPositionStrategy();
 
     const panelClasses = ['nui-tooltip-overlay'];
-    if (this.tooltipClass) {
-      panelClasses.push(this.tooltipClass);
+    if (this.nuiTooltipClass) {
+      panelClasses.push(this.nuiTooltipClass);
     }
     if (this.interactive) {
       panelClasses.push('nui-tooltip-interactive');

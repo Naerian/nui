@@ -1,6 +1,5 @@
 import {
   Component,
-  ElementRef,
   ViewEncapsulation,
   ChangeDetectionStrategy,
   HostListener,
@@ -32,7 +31,6 @@ import {
   NUIVariant,
 } from '../../configs';
 import { ButtonDirective } from '../button';
-import { MenuHeaderDirective, MenuFooterDirective } from './directives';
 
 @Component({
   selector: 'nui-action-menu',

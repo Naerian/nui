@@ -16,7 +16,7 @@ export const TOOLTIP_PAGE_CONFIG: ComponentPageConfig = {
 <button nuiTooltip="Guardar cambios">Guardar</button>
 
 // Con flecha desactivada
-<button nuiTooltip="Sin flecha" [tooltipShowArrow]="false">
+<button nuiTooltip="Sin flecha" [nuiTooltipShowArrow]="false">
   Sin Flecha
 </button>`,
           language: 'html',
@@ -32,22 +32,22 @@ export const TOOLTIP_PAGE_CONFIG: ComponentPageConfig = {
         {
           title: 'components.tooltip.positions.codeTitle',
           code: `// Tooltip arriba (default)
-<button nuiTooltip="Tooltip arriba" tooltipPosition="top">
+<button nuiTooltip="Tooltip arriba" nuiTooltipPosition="top">
   Top
 </button>
 
 // Tooltip abajo
-<button nuiTooltip="Tooltip abajo" tooltipPosition="bottom">
+<button nuiTooltip="Tooltip abajo" nuiTooltipPosition="bottom">
   Bottom
 </button>
 
 // Tooltip izquierda
-<button nuiTooltip="Tooltip izquierda" tooltipPosition="left">
+<button nuiTooltip="Tooltip izquierda" nuiTooltipPosition="left">
   Left
 </button>
 
 // Tooltip derecha
-<button nuiTooltip="Tooltip derecha" tooltipPosition="right">
+<button nuiTooltip="Tooltip derecha" nuiTooltipPosition="right">
   Right
 </button>`,
           language: 'html',
@@ -66,12 +66,12 @@ export const TOOLTIP_PAGE_CONFIG: ComponentPageConfig = {
 <button nuiTooltip="Tooltip al hacer hover">Hover</button>
 
 // Click
-<button nuiTooltip="Tooltip al hacer click" tooltipEvent="click">
+<button nuiTooltip="Tooltip al hacer click" nuiTooltipEvent="click">
   Click
 </button>
 
 // Focus
-<input nuiTooltip="Tooltip al enfocar" tooltipEvent="focus" />`,
+<input nuiTooltip="Tooltip al enfocar" nuiTooltipEvent="focus" />`,
           language: 'html',
         },
       ],
@@ -91,22 +91,22 @@ export const TOOLTIP_PAGE_CONFIG: ComponentPageConfig = {
           code: `// Delay de entrada (500ms)
 <button 
   nuiTooltip="Aparece después de 500ms" 
-  [tooltipShowDelay]="500">
+  [nuiTooltipShowDelay]="500">
   Delay Entrada
 </button>
 
 // Delay de salida (1000ms)
 <button 
   nuiTooltip="Desaparece después de 1s" 
-  [tooltipHideDelay]="1000">
+  [nuiTooltipHideDelay]="1000">
   Delay Salida
 </button>
 
 // Sin delay
 <button 
   nuiTooltip="Sin delays" 
-  [tooltipShowDelay]="0"
-  [tooltipHideDelay]="0">
+  [nuiTooltipShowDelay]="0"
+  [nuiTooltipHideDelay]="0">
   Sin Delay
 </button>`,
           language: 'html',
@@ -147,7 +147,7 @@ export const TOOLTIP_PAGE_CONFIG: ComponentPageConfig = {
           title: 'components.tooltip.interactive.codeTitle',
           code: `<button 
   [nuiTooltip]="interactiveTemplate" 
-  [tooltipInteractive]="true">
+  [nuiTooltipInteractive]="true">
   Tooltip Interactivo
 </button>
 
@@ -176,14 +176,14 @@ export const TOOLTIP_PAGE_CONFIG: ComponentPageConfig = {
           code: `// Tooltip deshabilitado
 <button 
   nuiTooltip="No se mostrará" 
-  [tooltipDisabled]="true">
+  [nuiTooltipDisabled]="true">
   Deshabilitado
 </button>
 
 // Deshabilitado condicionalmente
 <button 
   nuiTooltip="Tooltip condicional" 
-  [tooltipDisabled]="isDisabled">
+  [nuiTooltipDisabled]="isDisabled">
   Condicional
 </button>`,
           language: 'html',
@@ -200,16 +200,16 @@ export const TOOLTIP_PAGE_CONFIG: ComponentPageConfig = {
           title: 'components.tooltip.api.directiveCodeTitle',
           code: `// Inputs de la directiva nuiTooltip
 @Input() nuiTooltip: string | TemplateRef<any>; // Contenido del tooltip
-@Input() tooltipPosition: TooltipPosition = 'top'; // Posición: 'top' | 'bottom' | 'left' | 'right'
-@Input() tooltipEvent: 'hover' | 'click' | 'focus' = 'hover'; // Evento de activación
-@Input() tooltipShowArrow = true;              // Mostrar flecha
-@Input() tooltipShowDelay = 0;                 // Delay al mostrar (ms)
-@Input() tooltipHideDelay = 0;                 // Delay al ocultar (ms)
-@Input() tooltipMaxWidth = '200px';            // Ancho máximo
-@Input() tooltipClass?: string;                // Clase CSS personalizada
-@Input() tooltipOffset = 8;                    // Distancia desde el elemento (px)
-@Input() tooltipInteractive = false;           // Permitir interacción con el tooltip
-@Input() tooltipDisabled = false;              // Deshabilitar tooltip
+@Input() nuiTooltipPosition: TooltipPosition = 'top'; // Posición: 'top' | 'bottom' | 'left' | 'right'
+@Input() nuiTooltipEvent: 'hover' | 'click' | 'focus' = 'hover'; // Evento de activación
+@Input() nuiTooltipShowArrow = true;              // Mostrar flecha
+@Input() nuiTooltipShowDelay = 0;                 // Delay al mostrar (ms)
+@Input() nuiTooltipHideDelay = 0;                 // Delay al ocultar (ms)
+@Input() nuiTooltipMaxWidth = '200px';            // Ancho máximo
+@Input() nuiTooltipClass?: string;                // Clase CSS personalizada
+@Input() nuiTooltipOffset = 8;                    // Distancia desde el elemento (px)
+@Input() nuiTooltipInteractive = false;           // Permitir interacción con el tooltip
+@Input() nuiTooltipDisabled = false;              // Deshabilitar tooltip
 
 // Outputs de la directiva
 @Output() tooltipShown = new EventEmitter<void>();   // Se emite al mostrar
@@ -227,8 +227,8 @@ import { Component, TemplateRef, signal } from '@angular/core';
     <!-- Tooltip con texto simple -->
     <button
       nuiTooltip="Guardar cambios"
-      tooltipPosition="top"
-      [tooltipShowDelay]="500"
+      nuiTooltipPosition="top"
+      [nuiTooltipShowDelay]="500"
       (tooltipShown)="onTooltipShown()"
       (tooltipHidden)="onTooltipHidden()">
       Guardar
@@ -237,9 +237,9 @@ import { Component, TemplateRef, signal } from '@angular/core';
     <!-- Tooltip con template -->
     <button
       [nuiTooltip]="tooltipTemplate"
-      tooltipPosition="bottom"
-      tooltipMaxWidth="300px"
-      tooltipClass="custom-tooltip">
+      nuiTooltipPosition="bottom"
+      nuiTooltipMaxWidth="300px"
+      nuiTooltipClass="custom-tooltip">
       Ver Info
     </button>
     
@@ -253,9 +253,9 @@ import { Component, TemplateRef, signal } from '@angular/core';
     <!-- Tooltip interactivo -->
     <button
       [nuiTooltip]="interactiveTemplate"
-      [tooltipInteractive]="true"
-      tooltipEvent="click"
-      tooltipPosition="right">
+      [nuiTooltipInteractive]="true"
+      nuiTooltipEvent="click"
+      nuiTooltipPosition="right">
       Acciones
     </button>
     
@@ -272,8 +272,8 @@ import { Component, TemplateRef, signal } from '@angular/core';
     <!-- Tooltip condicional -->
     <button
       nuiTooltip="Este tooltip puede deshabilitarse"
-      [tooltipDisabled]="isDisabled()"
-      tooltipPosition="left">
+      [nuiTooltipDisabled]="isDisabled()"
+      nuiTooltipPosition="left">
       Condicional
     </button>
     
@@ -281,8 +281,8 @@ import { Component, TemplateRef, signal } from '@angular/core';
     <input
       type="email"
       nuiTooltip="Ingresa un email válido"
-      tooltipEvent="focus"
-      tooltipPosition="top"
+      nuiTooltipEvent="focus"
+      nuiTooltipPosition="top"
       placeholder="Email"
     />
   \`
