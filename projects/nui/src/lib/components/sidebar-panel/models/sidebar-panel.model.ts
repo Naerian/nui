@@ -3,29 +3,27 @@ import { NUIColor, NUISize, NUIVariant } from '../../../configs/common/types';
 import { Observable } from 'rxjs';
 
 /**
- * Token de inyecciÃ³n para la configuraciÃ³n del sidebar-panel
+ * Token de inyección para la configuración global del sidebar-panel
  */
-export const SIDEBAR_PANEL_CONFIG = new InjectionToken<SidebarPanelConfig>(
-  'SIDEBAR_PANEL_CONFIG',
-);
+export const SIDEBAR_PANEL_CONFIG = new InjectionToken<SidebarPanelConfig>('SIDEBAR_PANEL_CONFIG');
 
 /**
- * PosiciÃ³n del sidebar-panel en la pantalla
+ * Posición del sidebar-panel en la pantalla
  */
 export type SidebarPanelPosition = 'left' | 'right' | 'top' | 'bottom';
 
 /**
- * TamaÃ±o predefinido del sidebar-panel
+ * Tamaño predefinido del sidebar-panel
  */
 export type SidebarPanelSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
 /**
- * Estrategia de scroll del body cuando el panel estÃ¡ abierto
+ * Estrategia de scroll del body cuando el panel está abierto
  */
 export type ScrollStrategy = 'block' | 'reposition' | 'close';
 
 /**
- * Mapa de tamaÃ±os a dimensiones
+ * Mapa de tamaños a dimensiones
  */
 export const SIDEBAR_PANEL_SIZE_MAP: Record<SidebarPanelSize, string> = {
   xs: '300px',
@@ -37,24 +35,34 @@ export const SIDEBAR_PANEL_SIZE_MAP: Record<SidebarPanelSize, string> = {
 };
 
 /**
- * Datos que se pueden pasar al componente dinÃ¡mico
+ * Modelo de una pestaña minimizada
+ */
+export interface MinimizedTab {
+  id: string;
+  title: string;
+  position: SidebarPanelPosition;
+  restoreCallback: () => void;
+}
+
+/**
+ * Datos que se pueden pasar al componente dinámico
  */
 export interface SidebarPanelData {
   [key: string]: any;
 }
 
 /**
- * ConfiguraciÃ³n completa del sidebar-panel
+ * Configuración completa del sidebar-panel
  */
 export interface SidebarPanelConfig<D = any> {
   /**
-   * PosiciÃ³n del panel en la pantalla
+   * Posición del panel en la pantalla
    * @default 'right'
    */
   position?: SidebarPanelPosition;
 
   /**
-   * TamaÃ±o predefinido del panel
+   * Tamaño predefinido del panel
    * @default 'md'
    */
   size?: SidebarPanelSize;
@@ -72,29 +80,29 @@ export interface SidebarPanelConfig<D = any> {
   height?: string;
 
   /**
-   * Ancho mÃ¡ximo del panel
-   * Ãštil para evitar panels demasiado anchos en pantallas grandes
+   * Ancho máximo del panel
+   * Útil para evitar panels demasiado anchos en pantallas grandes
    */
   maxWidth?: string;
 
   /**
-   * Alto mÃ¡ximo del panel
-   * Ãštil para evitar panels demasiado altos
+   * Alto máximo del panel
+   * Útil para evitar panels demasiado altos
    */
   maxHeight?: string;
 
   /**
-   * Datos que se pasarÃ¡n al componente dinÃ¡mico
+   * Datos que se pasarán al componente dinámico
    */
   data?: D;
 
   /**
-   * ID Ãºnico del panel (Ãºtil para controlar mÃºltiples panels)
+   * ID único del panel (útil para controlar múltiples panels)
    */
   id?: string;
 
   /**
-   * TÃ­tulo del panel (se muestra en el header)
+   * Título del panel (se muestra en el header)
    */
   title?: string;
 
@@ -105,7 +113,7 @@ export interface SidebarPanelConfig<D = any> {
   showHeader?: boolean;
 
   /**
-   * Si se muestra el botÃ³n de cerrar en el header
+   * Si se muestra el botón de cerrar en el header
    * @default true
    */
   showCloseButton?: boolean;
@@ -145,15 +153,15 @@ export interface SidebarPanelConfig<D = any> {
   closeOnEscape?: boolean;
 
   /**
-   * Si se cierra automÃ¡ticamente al cambiar de ruta
+   * Si se cierra automáticamente al cambiar de ruta
    * @default false
    */
   closeOnRouteChange?: boolean;
 
   /**
-   * FunciÃ³n que se ejecuta antes de cerrar
+   * Función que se ejecuta antes de cerrar
    * Si retorna false o Promise<false>, previene el cierre
-   * Ãštil para confirmar si hay cambios sin guardar
+   * Útil para confirmar si hay cambios sin guardar
    */
   preventClose?: () => boolean | Promise<boolean>;
 
@@ -167,13 +175,13 @@ export interface SidebarPanelConfig<D = any> {
   autoFocus?: boolean | string;
 
   /**
-   * Si el panel ocupa toda la pantalla en mÃ³vil
+   * Si el panel ocupa toda la pantalla en móvil
    * @default false
    */
   mobileFullScreen?: boolean;
 
   /**
-   * Breakpoint (en px) para cambiar a fullscreen en mÃ³vil
+   * Breakpoint (en px) para cambiar a fullscreen en móvil
    * Solo aplica si mobileFullScreen es true
    * @default 768
    */
@@ -204,7 +212,7 @@ export interface SidebarPanelConfig<D = any> {
   ariaDescribedBy?: string;
 
   /**
-   * DuraciÃ³n de la animaciÃ³n de entrada/salida (en ms)
+   * Duración de la animación de entrada/salida (en ms)
    * @default 300
    */
   animationDuration?: number;
@@ -222,7 +230,7 @@ export interface SidebarPanelConfig<D = any> {
   zIndex?: number;
 
   /**
-   * Si se permite tener mÃºltiples panels abiertos simultÃ¡neamente
+   * Si se permite tener múltiples panels abiertos simultáneamente
    * Si es false, cierra el anterior al abrir uno nuevo
    * @default false
    */
@@ -236,15 +244,15 @@ export interface SidebarPanelConfig<D = any> {
 
   /**
    * Botones personalizados para el footer
-   * Permite pasar acciones programÃ¡ticamente al abrir el panel
+   * Permite pasar acciones programáticamente al abrir el panel
    * Similar al sistema de customButtons de Modal
-   * Tiene precedencia sobre otros mÃ©todos de footer
+   * Tiene precedencia sobre otros métodos de footer
    */
   customButtons?: SidebarPanelCustomButton[];
 }
 
 /**
- * ConfiguraciÃ³n por defecto del sidebar-panel
+ * Configuración por defecto del sidebar-panel
  */
 export const DEFAULT_SIDEBAR_PANEL_CONFIG: Required<
   Omit<
@@ -290,12 +298,12 @@ export const DEFAULT_SIDEBAR_PANEL_CONFIG: Required<
  */
 export interface SidebarPanelEvents {
   /**
-   * Se emite despuÃ©s de que el panel se ha abierto completamente
+   * Se emite después de que el panel se ha abierto completamente
    */
   afterOpened: Observable<void>;
 
   /**
-   * Se emite despuÃ©s de que el panel se ha cerrado completamente
+   * Se emite después de que el panel se ha cerrado completamente
    * Incluye el resultado pasado a close()
    */
   afterClosed: Observable<any>;
@@ -319,12 +327,7 @@ export interface SidebarPanelEvents {
 /**
  * Estado del sidebar-panel
  */
-export type SidebarPanelState =
-  | 'opening'
-  | 'open'
-  | 'closing'
-  | 'closed'
-  | 'minimized';
+export type SidebarPanelState = 'opening' | 'open' | 'closing' | 'closed' | 'minimized';
 
 /**
  * Datos del panel en el stack
@@ -340,11 +343,11 @@ export interface SidebarPanelStackItem {
 }
 
 /**
- * Representa una acciÃ³n individual del footer
+ * Representa una acción individual del footer
  */
 export interface SidebarPanelAction {
   /**
-   * Etiqueta visible del botÃ³n
+   * Etiqueta visible del botón
    */
   label: string;
 
@@ -355,30 +358,30 @@ export interface SidebarPanelAction {
   icon?: string;
 
   /**
-   * Tipo de botÃ³n que determina el estilo visual
+   * Tipo de botón que determina el estilo visual
    * @default 'secondary'
    */
   color?: NUIColor;
 
   /**
-   * Variante del botÃ³n que determina el estilo de fondo
+   * Variante del botón que determina el estilo de fondo
    * @default 'solid'
    */
   variant?: NUIVariant;
 
   /**
-   * TamaÃ±o del botÃ³n
+   * Tamaño del botón
    * @default 'md'
    */
   size?: NUISize;
 
   /**
-   * FunciÃ³n que se ejecuta al hacer click
+   * Función que se ejecuta al hacer click
    */
   handler: () => void | Promise<void>;
 
   /**
-   * Si el botÃ³n estÃ¡ deshabilitado
+   * Si el botón está deshabilitado
    * @default false
    */
   disabled?: boolean;
@@ -396,12 +399,12 @@ export interface SidebarPanelAction {
 }
 
 /**
- * Representa un botÃ³n personalizado del footer cuando se pasa desde la configuraciÃ³n
+ * Representa un botón personalizado del footer cuando se pasa desde la configuración
  * Similar a SidebarPanelAction pero con callback que recibe la referencia del panel
  */
 export interface SidebarPanelCustomButton {
   /**
-   * Texto visible del botÃ³n
+   * Texto visible del botón
    */
   text: string;
 
@@ -412,31 +415,31 @@ export interface SidebarPanelCustomButton {
   icon?: string;
 
   /**
-   * Tipo de botÃ³n que determina el estilo visual
+   * Tipo de botón que determina el estilo visual
    * @default 'secondary'
    */
   color?: NUIColor;
 
   /**
-   * Variante del botÃ³n que determina el estilo de fondo
+   * Variante del botón que determina el estilo de fondo
    * @default 'solid'
    */
   variant?: NUIVariant;
 
   /**
-   * TamaÃ±o del botÃ³n
+   * Tamaño del botón
    * @default 'md'
    */
   size?: NUISize;
 
   /**
-   * FunciÃ³n que se ejecuta al hacer click
+   * Función que se ejecuta al hacer click
    * Recibe la referencia del panel para poder cerrarlo o actualizarlo
    */
   callback: (panelRef: any) => void | Promise<void>;
 
   /**
-   * Si el botÃ³n estÃ¡ deshabilitado
+   * Si el botón está deshabilitado
    * @default false
    */
   disabled?: boolean;
@@ -456,16 +459,16 @@ export interface SidebarPanelCustomButton {
 // ===== UTILITY TYPES =====
 
 /**
- * Tipo utilitario para configuraciÃ³n con campos requeridos especÃ­ficos
+ * Tipo utilitario para configuración con campos requeridos específicos
  *
- * Ãštil para escenarios donde se necesitan ciertos campos obligatorios
- * mÃ¡s allÃ¡ de la configuraciÃ³n base.
+ * Útil para escenarios donde se necesitan ciertos campos obligatorios
+ * más allá de la configuración base.
  *
  * @template K - Claves que deben ser requeridas
  *
  * @example
  * ```typescript
- * // ConfiguraciÃ³n que requiere tÃ­tulo y datos
+ * // Configuración que requiere título y datos
  * const config: RequiredSidebarPanelConfig<'title' | 'data'> = {
  *   title: 'Mi Panel',
  *   data: { userId: 123 }
@@ -476,15 +479,15 @@ export type RequiredSidebarPanelConfig<K extends keyof SidebarPanelConfig = neve
   SidebarPanelConfig & Required<Pick<SidebarPanelConfig, K>>;
 
 /**
- * Tipo utilitario para configuraciÃ³n completamente resuelta con valores por defecto
+ * Tipo utilitario para configuración completamente resuelta con valores por defecto
  *
- * Representa la configuraciÃ³n despuÃ©s de aplicar todos los valores por defecto.
- * Todos los campos opcionales estÃ¡n presentes con sus valores finales.
+ * Representa la configuración después de aplicar todos los valores por defecto.
+ * Todos los campos opcionales están presentes con sus valores finales.
  *
  * @example
  * ```typescript
  * function processConfig(config: ResolvedSidebarPanelConfig): void {
- *   // Todos los campos estÃ¡n garantizados como definidos (excepto los explÃ­citamente opcionales)
+ *   // Todos los campos están garantizados como definidos (excepto los explícitamente opcionales)
  *   console.log(config.position); // Siempre existe: 'left' | 'right' | 'top' | 'bottom'
  *   console.log(config.size); // Siempre existe: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
  * }
@@ -493,7 +496,7 @@ export type RequiredSidebarPanelConfig<K extends keyof SidebarPanelConfig = neve
 export type ResolvedSidebarPanelConfig<D = any> = Required<
   Omit<
     SidebarPanelConfig<D>,
-    // Campos que legÃ­timamente pueden ser undefined incluso despuÃ©s de defaults
+    // Campos que legítimamente pueden ser undefined incluso después de defaults
     | 'data'
     | 'id'
     | 'title'
@@ -525,6 +528,3 @@ export type ResolvedSidebarPanelConfig<D = any> = Required<
     | 'backdropClass'
     | 'panelClass'
   >;
-
-
-

@@ -579,7 +579,7 @@ export class SidebarPanelService {
       });
 
       // Attach al contenedor
-      const contentElement = containerRef.location.nativeElement.querySelector('.nui-slidepanel-content');
+      const contentElement = containerRef.location.nativeElement.querySelector('.nui-sidebar-panel-content');
       
       if (!contentElement) {
         componentRef.destroy();

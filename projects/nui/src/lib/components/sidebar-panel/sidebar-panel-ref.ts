@@ -9,12 +9,12 @@ import { SidebarPanelConfig, SidebarPanelState } from './models/sidebar-panel.mo
  */
 export class SidebarPanelRef<T = any, R = any> {
   /**
-   * ID Ãºnico del panel
+   * ID único del panel
    */
   readonly id: string;
 
   /**
-   * Instancia del componente cargado dinÃ¡micamente
+   * Instancia del componente cargado dinámicamente
    */
   componentInstance: T | null = null;
 
@@ -49,7 +49,7 @@ export class SidebarPanelRef<T = any, R = any> {
   private readonly _stateHistory: SidebarPanelState[] = [];
 
   /**
-   * Mapa de transiciones vÃ¡lidas entre estados
+   * Mapa de transiciones válidas entre estados
    */
   private readonly _validTransitions: Record<SidebarPanelState, SidebarPanelState[]> = {
     opening: ['open', 'closing', 'minimized'],
@@ -72,7 +72,7 @@ export class SidebarPanelRef<T = any, R = any> {
       this._overlayRef.backdropClick().subscribe((event) => {
         this._backdropClick.next(event);
         
-        // Si el panel estÃ¡ minimizado, restaurarlo en lugar de cerrarlo
+        // Si el panel está minimizado, restaurarlo en lugar de cerrarlo
         if (this._state === 'minimized') {
           this.restore();
         } else {
@@ -104,35 +104,35 @@ export class SidebarPanelRef<T = any, R = any> {
   }
 
   /**
-   * Indica si el panel estÃ¡ abierto
+   * Indica si el panel está abierto
    */
   get isOpen(): boolean {
     return this._state === 'open' || this._state === 'opening';
   }
 
   /**
-   * Indica si el panel estÃ¡ cerrado
+   * Indica si el panel está cerrado
    */
   get isClosed(): boolean {
     return this._state === 'closed' || this._state === 'closing';
   }
 
   /**
-   * Indica si el panel estÃ¡ minimizado
+   * Indica si el panel está minimizado
    */
   get isMinimized(): boolean {
     return this._state === 'minimized';
   }
 
   /**
-   * Observable que se emite despuÃ©s de que el panel se abre completamente
+   * Observable que se emite después de que el panel se abre completamente
    */
   afterOpened(): Observable<void> {
     return this._afterOpened.asObservable();
   }
 
   /**
-   * Observable que se emite despuÃ©s de que el panel se cierra completamente
+   * Observable que se emite después de que el panel se cierra completamente
    * Incluye el resultado pasado a close()
    */
   afterClosed(): Observable<R | undefined> {
@@ -188,17 +188,17 @@ export class SidebarPanelRef<T = any, R = any> {
     this._closed = true;
     this._setState('closing');
 
-    // Disparar la animaciÃ³n del componente contenedor si existe
+    // Disparar la animación del componente contenedor si existe
     if (this._containerComponentRef?.instance?.close) {
       this._containerComponentRef.instance.close();
     }
 
-    // Esperar la duraciÃ³n de la animaciÃ³n antes de destruir
+    // Esperar la duración de la animación antes de destruir
     // 225ms matches Material Design standard and DEFAULT_SIDEBAR_PANEL_CONFIG
     const duration = this.config.animationDuration ?? 225;
     await this._delay(duration);
 
-    // Limpiar (esto tambiÃ©n elimina el backdrop)
+    // Limpiar (esto también elimina el backdrop)
     this._overlayRef.dispose();
     this._componentRef?.destroy();
     this._containerComponentRef?.destroy();
@@ -216,7 +216,7 @@ export class SidebarPanelRef<T = any, R = any> {
 
   /**
    * Minimiza el panel
-   * Solo si minimizable estÃ¡ habilitado
+   * Solo si minimizable está habilitado
    */
   minimize(): void {
     if (!this.config.minimizable) {
@@ -241,7 +241,7 @@ export class SidebarPanelRef<T = any, R = any> {
     if (this._state === 'minimized') {
       this._setState('open');
       
-      // Restaurar opacity y pointer-events para transiciÃ³n fluida
+      // Restaurar opacity y pointer-events para transición fluida
       if (this._overlayRef.backdropElement) {
         this._overlayRef.backdropElement.style.opacity = '';
         this._overlayRef.backdropElement.style.pointerEvents = '';
@@ -250,8 +250,8 @@ export class SidebarPanelRef<T = any, R = any> {
   }
 
   /**
-   * Actualiza el tÃ­tulo del panel
-   * @param title Nuevo tÃ­tulo
+   * Actualiza el título del panel
+   * @param title Nuevo título
    */
   updateTitle(title: string): void {
     if (this.config) {
@@ -291,7 +291,7 @@ export class SidebarPanelRef<T = any, R = any> {
   /**
    * @internal
    * Cierra el panel forzosamente sin ejecutar preventClose ni animaciones
-   * Solo se usa en caso de error durante la creaciÃ³n del componente
+   * Solo se usa en caso de error durante la creación del componente
    */
   _forceClose(): void {
     this._setState('closing');
@@ -322,7 +322,7 @@ export class SidebarPanelRef<T = any, R = any> {
    * Verifica si se puede transicionar al nuevo estado
    * 
    * @param newState - Estado al que se quiere transicionar
-   * @returns `true` si la transiciÃ³n es vÃ¡lida, `false` en caso contrario
+   * @returns `true` si la transición es válida, `false` en caso contrario
    * 
    * @example
    * ```typescript
@@ -351,10 +351,10 @@ export class SidebarPanelRef<T = any, R = any> {
 
   /**
    * Actualiza el estado y emite el evento
-   * TambiÃ©n registra el cambio en el historial de estados
+   * También registra el cambio en el historial de estados
    */
   private _setState(state: SidebarPanelState): void {
-    // Validar transiciÃ³n si no es el estado inicial
+    // Validar transición si no es el estado inicial
     if (this._state && !this.canTransitionTo(state)) {
       console.warn(
         `[sidebar-panel] Invalid state transition from "${this._state}" to "${state}". ` +
@@ -369,14 +369,15 @@ export class SidebarPanelRef<T = any, R = any> {
   }
 
   /**
-   * Genera un ID Ãºnico para el panel
+   * Genera un ID único para el panel
    */
   private _generateId(): string {
     return `sidebar-panel-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
   }
 
   /**
-   * Delay helper
+   * Simula un retardo (delay) usando Promesas
+   * @param ms Milisegundos a esperar
    */
   private _delay(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms));

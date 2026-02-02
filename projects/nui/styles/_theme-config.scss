@@ -21,7 +21,7 @@
 @use "variables/panel/panel-variables";
 @use "variables/modal-dialog/modal-dialog-variables";
 @use "variables/paginator/paginator-variables";
-@use "variables/slidepanel/slidepanel-variables";
+@use "variables/sidebar-panel/sidebar-panel-variables";
 @use "variables/tab/tab-variables";
 @use "variables/time-picker/time-picker-variables";
 
@@ -203,7 +203,7 @@
   @include panel-variables.nui-panel-vars;
   @include modal-dialog-variables.nui-modal-dialog-vars;
   @include paginator-variables.nui-paginator-vars;
-  @include slidepanel-variables.nui-slidepanel-vars;
+  @include sidebar-panel-variables.nui-sidebar-panel-vars;
   @include tab-variables.nui-tab-vars;
   @include time-picker-variables.nui-time-picker-vars;
 }

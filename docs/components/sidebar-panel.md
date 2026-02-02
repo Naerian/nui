@@ -365,14 +365,14 @@ const panelRef = slidePanelService.open(ChatComponent, {
 
 **Arquitectura de Pestañas (Automática):**
 - ✨ **Sin configuración manual**: El componente de pestañas se crea automáticamente cuando minimizas el primer panel
-- 🎯 **Inyección dinámica**: `SlidePanelTabsService` crea el componente `<nui-slidepanel-tabs>` dinámicamente
+- 🎯 **Inyección dinámica**: `SlidePanelTabsService` crea el componente `<nui-sidebar-panel-tabs>` dinámicamente
 - 🧹 **Auto-destrucción**: El componente se destruye automáticamente cuando no hay pestañas minimizadas
 - 📍 **Sistema centralizado**: `SlidePanelTabsService` gestiona todas las pestañas globalmente
 - 🎨 **Agrupación automática**: Las pestañas se agrupan por posición (right, left, top, bottom)
 - 💡 **Zero-config**: No necesitas añadir nada en tu HTML - todo funciona automáticamente
 
 **Importante:**
-> ⚠️ **NO es necesario** instanciar `<nui-slidepanel-tabs />` en tu `app.component.html`.
+> ⚠️ **NO es necesario** instanciar `<nui-sidebar-panel-tabs />` en tu `app.component.html`.
 > El componente se crea dinámicamente cuando es necesario y se destruye cuando no hay pestañas.
 
 **Diseño de Pestañas:**

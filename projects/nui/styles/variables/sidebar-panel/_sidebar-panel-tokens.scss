@@ -1,0 +1,86 @@
+// ========================================
+// SIDEBAR PANEL - Tokens (SCSS Variables)
+// ========================================
+//
+// Variables SCSS centralizadas para personalizar el componente Sidebar Panel.
+// Todas las variables usan !default para permitir sobrescritura.
+//
+// Cómo personalizar:
+// ------------------
+// 1. Define tus propias variables ANTES de importar este archivo
+// 2. Las variables SCSS ($nui-sidebar-panel-*) afectan todos los paneles
+//
+// Ejemplo de personalización:
+// ```scss
+// // En tu archivo custom-variables.scss
+// $nui-sidebar-panel-shadow: var(--nui-shadow-xl);
+// $nui-sidebar-panel-size-md-width: 700px;
+//
+// @import "variables/sidebar-panel/sidebar-panel-tokens";
+// ```
+//
+// ========================================
+
+// ===== FONDO Y SUPERFICIE =====
+// Nota: Los colores de fondo y texto se toman directamente de las variables del theme
+// No se definen aquí porque se generan dinámicamente en theme.service.ts
+
+// ===== SOMBRAS =====
+$nui-sidebar-panel-shadow: var(--nui-shadow-lg) !default;
+
+// ===== Z-INDEX =====
+$nui-sidebar-panel-z-index: 1040 !default;
+$nui-sidebar-panel-overlay-z-index: 1039 !default;
+
+// ===== OVERLAY/BACKDROP =====
+$nui-sidebar-panel-overlay-bg: var(--nui-overlay-bg) !default;
+
+// ===== HEADER =====
+$nui-sidebar-panel-header-padding: 1.2rem !default;
+$nui-sidebar-panel-header-height: 40px !default;
+$nui-sidebar-panel-title-size: 0.875rem !default; // 14px
+$nui-sidebar-panel-title-weight: var(--font-weight-semibold) !default;
+$nui-sidebar-panel-close-size: 0.9375rem !default; // 15px
+
+// ===== CONTENIDO =====
+$nui-sidebar-panel-content-padding: 1.2rem !default;
+
+// ===== TAMAÑOS =====
+// Nota: Los tamaños coinciden con el enum SidebarPanelSize y SIDEBAR_PANEL_SIZE_MAP
+
+// Extra Small (xs: 300px)
+$nui-sidebar-panel-size-xs-width: 300px !default;
+
+// Small (sm: 400px)
+$nui-sidebar-panel-size-sm-width: 400px !default;
+
+// Medium (md: 600px - default)
+$nui-sidebar-panel-size-md-width: 600px !default;
+
+// Large (lg: 800px)
+$nui-sidebar-panel-size-lg-width: 800px !default;
+
+// Extra Large (xl: 1000px)
+$nui-sidebar-panel-size-xl-width: 1000px !default;
+
+// Full (full: 100%)
+$nui-sidebar-panel-size-full-width: 100% !default;
+
+// ===== BREAKPOINTS =====
+$nui-sidebar-panel-breakpoint-mobile: 576px !default;
+$nui-sidebar-panel-breakpoint-tablet: 1024px !default;
+$nui-sidebar-panel-breakpoint-desktop: 1440px !default;
+
+// ===== HOST (Contenedor interno) =====
+$nui-sidebar-panel-host-bg: var(--nui-bg-secondary) !default;
+$nui-sidebar-panel-host-shadow: var(--nui-shadow-sm) !default;
+$nui-sidebar-panel-host-border: 1px solid var(--nui-border-primary) !default;
+$nui-sidebar-panel-host-border-radius: 0.3125rem !default; // 5px
+
+// ===== ESPACIADO INTERNO =====
+$nui-sidebar-panel-box-padding: 1.2rem !default;
+$nui-sidebar-panel-box-gap: 0.9375rem !default; // 15px
+
+// ===== BOTONES DE ACCIÓN =====
+$nui-sidebar-panel-action-buttons-height: 45px !default;
+$nui-sidebar-panel-action-buttons-gap: 0.625rem !default; // 10px

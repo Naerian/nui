@@ -343,36 +343,36 @@ class SidebarPanelRef<T, R> {
           code: `// Personalización de variables CSS
 :root {
   /* Colores */
-  --nui-slidepanel-bg: var(--nui-bg-primary);
-  --nui-slidepanel-text: var(--nui-text-primary);
-  --nui-slidepanel-border: var(--nui-border-primary);
+  --nui-sidebar-panel-bg: var(--nui-bg-primary);
+  --nui-sidebar-panel-text: var(--nui-text-primary);
+  --nui-sidebar-panel-border: var(--nui-border-primary);
   
   /* Sombras y elevación */
-  --nui-slidepanel-shadow: var(--nui-shadow-lg);
-  --nui-slidepanel-z-index: 1040;
-  --nui-slidepanel-overlay-bg: var(--nui-overlay-bg);
+  --nui-sidebar-panel-shadow: var(--nui-shadow-lg);
+  --nui-sidebar-panel-z-index: 1040;
+  --nui-sidebar-panel-overlay-bg: var(--nui-overlay-bg);
   
   /* Header */
-  --nui-slidepanel-header-padding: var(--spacing-md);
-  --nui-slidepanel-header-bg: var(--nui-bg-secondary);
-  --nui-slidepanel-title-size: var(--font-size-md);
-  --nui-slidepanel-title-weight: var(--font-weight-semibold);
+  --nui-sidebar-panel-header-padding: var(--spacing-md);
+  --nui-sidebar-panel-header-bg: var(--nui-bg-secondary);
+  --nui-sidebar-panel-title-size: var(--font-size-md);
+  --nui-sidebar-panel-title-weight: var(--font-weight-semibold);
   
   /* Contenido */
-  --nui-slidepanel-content-padding: var(--spacing-md);
+  --nui-sidebar-panel-content-padding: var(--spacing-md);
   
   /* Tamaños predefinidos */
-  --nui-slidepanel-size-xs: 300px;
-  --nui-slidepanel-size-sm: 400px;
-  --nui-slidepanel-size-md: 600px;
-  --nui-slidepanel-size-lg: 800px;
-  --nui-slidepanel-size-xl: 1000px;
-  --nui-slidepanel-size-full: 100%;
+  --nui-sidebar-panel-size-xs: 300px;
+  --nui-sidebar-panel-size-sm: 400px;
+  --nui-sidebar-panel-size-md: 600px;
+  --nui-sidebar-panel-size-lg: 800px;
+  --nui-sidebar-panel-size-xl: 1000px;
+  --nui-sidebar-panel-size-full: 100%;
 }
 
 // Clases personalizadas
 .my-custom-panel {
-  .nui-slidepanel {
+  .nui-sidebar-panel {
     border-left: 4px solid var(--primary-color);
   }
 }`,

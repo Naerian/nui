@@ -4,23 +4,23 @@
  * AnimaciÃ³n de deslizamiento para el panel
  * 
  * Inspirada en Material-UI Drawer con optimizaciones para fluidez:
- * - Usa translate3d para aceleraciÃ³n GPU
- * - Timing functions optimizadas para sensaciÃ³n natural
- * - DuraciÃ³n ajustada segÃºn el estÃ¡ndar de Material Design
+ * - Usa translate3d para aceleración GPU
+ * - Timing functions optimizadas para sensación natural
+ * - Duración ajustada según el estándar de Material Design
  * 
  * Estados:
- * - `void`: Estado inicial antes de que el componente estÃ© en el DOM
- * - `visible`: Panel completamente visible en su posiciÃ³n final
+ * - `void`: Estado inicial antes de que el componente esté en el DOM
+ * - `visible`: Panel completamente visible en su posición final
  * - `hidden`: Panel oculto (fuera de la pantalla)
  * 
- * ParÃ¡metros:
- * - `transform`: TransformaciÃ³n CSS para la posiciÃ³n inicial/final (ej: 'translate3d(100%, 0, 0)')
- * - `duration`: DuraciÃ³n de la animaciÃ³n en milisegundos (por defecto: 225)
+ * Parámetros:
+ * - `transform`: Transformación CSS para la posición inicial/final (ej: 'translate3d(100%, 0, 0)')
+ * - `duration`: Duración de la animación en milisegundos (por defecto: 225)
  * 
  * Curvas de timing:
  * - Entrada: cubic-bezier(0.0, 0, 0.2, 1) - "easeOut" - Decelera al final
  * - Salida: cubic-bezier(0.4, 0, 0.6, 1) - "easeIn" - Acelera al final
- * - Sharp: cubic-bezier(0.4, 0, 0.6, 1) - Para transiciones rÃ¡pidas
+ * - Sharp: cubic-bezier(0.4, 0, 0.6, 1) - Para transiciones rápidas
  * 
  * @see https://mui.com/material-ui/react-drawer/
  * @see https://m3.material.io/styles/motion/easing-and-duration/tokens-specs
@@ -63,23 +63,23 @@ export const sidebarPanelAnimation: AnimationTriggerMetadata = trigger('sidebar-
     { params: { transform: 'translate3d(100%, 0, 0)' } }
   ),
   
-  // TransiciÃ³n de entrada: void => visible
-  // Usa easeOut para decelerar suavemente al llegar a su posiciÃ³n
+  // Transición de entrada: void => visible
+  // Usa easeOut para decelerar suavemente al llegar a su posición
   transition(
     'void => visible',
     animate('{{ duration }}ms cubic-bezier(0.0, 0, 0.2, 1)'),
     { params: { duration: 225 } }
   ),
   
-  // TransiciÃ³n de salida: visible => hidden
-  // Usa sharp para una salida mÃ¡s rÃ¡pida y decidida
+  // Transición de salida: visible => hidden
+  // Usa sharp para una salida más rápida y decidida
   transition(
     'visible => hidden',
     animate('{{ duration }}ms cubic-bezier(0.4, 0, 0.6, 1)'),
     { params: { duration: 195 } }
   ),
   
-  // TransiciÃ³n para restaurar desde minimizado: hidden => visible
+  // Transición para restaurar desde minimizado: hidden => visible
   // Misma curva que la entrada inicial
   transition(
     'hidden => visible',
@@ -89,12 +89,12 @@ export const sidebarPanelAnimation: AnimationTriggerMetadata = trigger('sidebar-
 ]);
 
 /**
- * AnimaciÃ³n de fade para el backdrop
+ * Animación de fade para el backdrop
  * 
- * Proporciona una transiciÃ³n suave de opacidad para el fondo oscuro
- * detrÃ¡s del panel, sincronizada con la animaciÃ³n del panel.
+ * Proporciona una transición suave de opacidad para el fondo oscuro
+ * detrás del panel, sincronizada con la animación del panel.
  * 
- * Usa la misma duraciÃ³n que Material-UI (225ms entrada, 195ms salida)
+ * Usa la misma duración que Material-UI (225ms entrada, 195ms salida)
  * para mantener consistencia visual.
  * 
  * Estados:

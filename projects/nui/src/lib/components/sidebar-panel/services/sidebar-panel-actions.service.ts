@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { SidebarPanelAction } from '../models/sidebar-panel.model';
 
 /**
- * Servicio para registrar acciones de footer desde componentes dinÃ¡micos
+ * Servicio para registrar acciones de footer desde componentes cargados en el sidebar-panel.
  * 
  * Permite que los componentes cargados en el sidebar-panel registren sus propias
  * acciones de footer (botones) sin necesidad de templates complejos. Las acciones
@@ -32,7 +32,7 @@ import { SidebarPanelAction } from '../models/sidebar-panel.model';
  *   }
  * 
  *   save() {
- *     // LÃ³gica de guardado
+ *     // Lógica de guardado
  *   }
  * 
  *   cancel() {
@@ -43,7 +43,7 @@ import { SidebarPanelAction } from '../models/sidebar-panel.model';
  * 
  * @example
  * ```typescript
- * // Con estados dinÃ¡micos
+ * // Con estados dinámicos
  * export class MyFormComponent implements OnInit {
  *   private actions = inject(SidebarPanelActionsService);
  *   isLoading = false;
@@ -71,21 +71,21 @@ import { SidebarPanelAction } from '../models/sidebar-panel.model';
  * @usageNotes
  * ### Ventajas
  * - **Simple**: Solo defines un array de acciones
- * - **Consistente**: Estilos automÃ¡ticos segÃºn el tipo
+ * - **Consistente**: Estilos automáticos según el tipo
  * - **Reactivo**: Soporta estados disabled/loading
  * - **Clean**: No necesitas crear templates
  * 
- * ### CuÃ¡ndo Usar
- * - Footers con botones estÃ¡ndar (Guardar, Cancelar, etc.)
- * - Cuando no necesitas diseÃ±o personalizado
- * - Formularios simples con acciones bÃ¡sicas
- * - RÃ¡pido prototipado
+ * ### Cuándo Usar
+ * - Footers con botones estándar (Guardar, Cancelar, etc.)
+ * - Cuando no necesitas diseño personalizado
+ * - Formularios simples con acciones básicas
+ * - Rápido prototipado
  * 
- * ### CuÃ¡ndo NO Usar
+ * ### Cuándo NO Usar
  * - Footers con layouts complejos
  * - Elementos del footer que no sean botones
- * - Necesitas control total sobre el diseÃ±o
- * â†’ En estos casos, usa `SidebarPanelFooterDirective`
+ * - Necesitas control total sobre el diseño
+ * → En estos casos, usa `SidebarPanelFooterDirective`
  * 
  * @publicApi
  */
@@ -131,7 +131,7 @@ export class SidebarPanelActionsService {
   /**
    * Registra un conjunto de acciones
    * 
-   * Reemplaza las acciones existentes con las nuevas. TÃ­picamente se llama
+   * Reemplaza las acciones existentes con las nuevas. Típicamente se llama
    * en `ngOnInit()` del componente.
    * 
    * @param actions - Array de acciones a registrar
@@ -151,9 +151,9 @@ export class SidebarPanelActionsService {
   }
 
   /**
-   * Agrega una acciÃ³n al conjunto existente
+   * Agrega una acción al conjunto existente
    * 
-   * @param action - AcciÃ³n a agregar
+   * @param action - Acción a agregar
    * 
    * @example
    * ```typescript
@@ -169,14 +169,14 @@ export class SidebarPanelActionsService {
   }
 
   /**
-   * Actualiza una acciÃ³n existente
+   * Actualiza una acción existente
    * 
-   * @param index - Ãndice de la acciÃ³n a actualizar
-   * @param updates - Actualizaciones parciales de la acciÃ³n
+   * @param index - Índice de la acción a actualizar
+   * @param updates - Actualizaciones parciales de la acción
    * 
    * @example
    * ```typescript
-   * // Deshabilitar el botÃ³n de guardar
+   * // Deshabilitar el botón de guardar
    * this.actions.update(1, { disabled: true });
    * 
    * // Mostrar loading
@@ -206,9 +206,9 @@ export class SidebarPanelActionsService {
   }
 
   /**
-   * Habilita o deshabilita una acciÃ³n por Ã­ndice
+   * Habilita o deshabilita una acción por índice
    * 
-   * @param index - Ãndice de la acciÃ³n
+   * @param index - Índice de la acción
    * @param disabled - Si debe estar deshabilitada
    */
   setDisabled(index: number, disabled: boolean): void {
@@ -216,9 +216,9 @@ export class SidebarPanelActionsService {
   }
 
   /**
-   * Muestra u oculta el loading de una acciÃ³n
+   * Muestra u oculta el loading de una acción
    * 
-   * @param index - Ãndice de la acciÃ³n
+   * @param index - Índice de la acción
    * @param loading - Si debe mostrar loading
    */
   setLoading(index: number, loading: boolean): void {

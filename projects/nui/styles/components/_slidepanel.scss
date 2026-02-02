@@ -1,30 +1,30 @@
 @use "../config";
 @use "../mixins";
-// NOTA: No importar theme ni theme-config aquí, ya están incluidos globalmente en nui.scss
+// NOTA: No importar theme ni theme-config aqu�, ya est�n incluidos globalmente en nui.scss
 
 // ==========================================
-// SLIDEPANEL - Estilos globales
+// SIDEBAR PANEL - Estilos globales
 // ==========================================
-// Estilos para el componente slidepanel.
+// Estilos para el componente sidebar-panel.
 // Los estilos son globales porque el panel se renderiza con ViewEncapsulation.None
 // ==========================================
 
-// Overlay/Backdrop del slidepanel
-.nui-slidepanel-overlay {
+// Overlay/Backdrop del sidebar-panel
+.nui-sidebar-panel-overlay {
   @include mixins.overlay-backdrop();
-  z-index: var(--nui-slidepanel-overlay-z-index);
-  background-color: var(--nui-slidepanel-overlay-bg);
+  z-index: var(--nui-sidebar-panel-overlay-z-index);
+  background-color: var(--nui-sidebar-panel-overlay-bg);
 }
 
 // Host component del panel
 .sidebar-panel-container {
   position: fixed;
   overflow: hidden;
-  z-index: var(--nui-slidepanel-z-index);
+  z-index: var(--nui-sidebar-panel-z-index);
   height: 100vh;
-  background-color: var(--nui-slidepanel-bg);
-  box-shadow: var(--nui-slidepanel-shadow);
-  color: var(--nui-slidepanel-text);
+  background-color: var(--nui-sidebar-panel-bg);
+  box-shadow: var(--nui-sidebar-panel-shadow);
+  color: var(--nui-sidebar-panel-text);
   display: flex;
   flex-direction: column;
 
@@ -53,14 +53,14 @@
 }
 
 // Panel principal (mantener para compatibilidad)
-.nui-slidepanel {
+.nui-sidebar-panel {
   position: fixed;
   overflow: hidden;
-  z-index: var(--nui-slidepanel-z-index);
+  z-index: var(--nui-sidebar-panel-z-index);
   height: 100vh;
-  background-color: var(--nui-slidepanel-bg);
-  box-shadow: var(--nui-slidepanel-shadow);
-  color: var(--nui-slidepanel-text);
+  background-color: var(--nui-sidebar-panel-bg);
+  box-shadow: var(--nui-sidebar-panel-shadow);
+  color: var(--nui-sidebar-panel-text);
 
   // ===== POSICIONES =====
 
@@ -98,58 +98,31 @@
     width: 100%;
   }
 
-  // ===== TAMAÑOS =====
+  // ===== TAMA�OS =====
+  // Tama�os coinciden con SidebarPanelSize: xs | sm | md | lg | xl | full
 
-  &--size-s {
-    width: var(--nui-slidepanel-size-s-width);
-
-    @media (max-width: #{config.$breakpoint-lg}) {
-      width: var(--nui-slidepanel-size-s-width-tablet);
-    }
-
-    @media (min-width: #{config.$breakpoint-xl}) {
-      width: var(--nui-slidepanel-size-s-width-desktop);
-    }
-
-    @media (max-width: #{config.$breakpoint-sm}) {
-      width: var(--nui-slidepanel-size-s-width-mobile);
-    }
+  &--size-xs {
+    width: var(--nui-sidebar-panel-size-xs-width);
   }
 
-  &--size-m {
-    width: var(--nui-slidepanel-size-m-width);
-
-    @media (max-width: #{config.$breakpoint-lg}) {
-      width: var(--nui-slidepanel-size-m-width-tablet);
-    }
-
-    @media (min-width: #{config.$breakpoint-xl}) {
-      width: var(--nui-slidepanel-size-m-width-desktop);
-    }
-
-    @media (max-width: #{config.$breakpoint-sm}) {
-      width: var(--nui-slidepanel-size-m-width-mobile);
-    }
+  &--size-sm {
+    width: var(--nui-sidebar-panel-size-sm-width);
   }
 
-  &--size-l {
-    width: var(--nui-slidepanel-size-l-width);
+  &--size-md {
+    width: var(--nui-sidebar-panel-size-md-width);
+  }
 
-    @media (max-width: #{config.$breakpoint-lg}) {
-      width: var(--nui-slidepanel-size-l-width-tablet);
-    }
-
-    @media (min-width: #{config.$breakpoint-xl}) {
-      width: var(--nui-slidepanel-size-l-width-desktop);
-    }
-
-    @media (max-width: #{config.$breakpoint-sm}) {
-      width: var(--nui-slidepanel-size-l-width-mobile);
-    }
+  &--size-lg {
+    width: var(--nui-sidebar-panel-size-lg-width);
   }
 
   &--size-xl {
-    width: var(--nui-slidepanel-size-xl-width);
+    width: var(--nui-sidebar-panel-size-xl-width);
+  }
+
+  &--size-full {
+    width: var(--nui-sidebar-panel-size-full-width);
   }
 
   // ===== HEADER =====
@@ -157,15 +130,15 @@
   &__header {
     position: absolute;
     width: 100%;
-    padding: var(--nui-slidepanel-header-padding);
+    padding: var(--nui-sidebar-panel-header-padding);
     padding-bottom: 0;
 
     &__close {
       cursor: pointer;
       border: none;
       background: transparent;
-      font-size: var(--nui-slidepanel-close-size);
-      color: var(--nui-slidepanel-text);
+      font-size: var(--nui-sidebar-panel-close-size);
+      color: var(--nui-sidebar-panel-text);
       transition: opacity 0.2s ease;
 
       &:hover {
@@ -182,7 +155,7 @@
     &__wrapper {
       padding: 0 0.3125rem; // 5px
       padding-bottom: 0;
-      height: var(--nui-slidepanel-header-height);
+      height: var(--nui-sidebar-panel-header-height);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -193,8 +166,8 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: var(--nui-slidepanel-title-size);
-        font-weight: var(--nui-slidepanel-title-weight);
+        font-size: var(--nui-sidebar-panel-title-size);
+        font-weight: var(--nui-sidebar-panel-title-weight);
         display: flex;
         flex-direction: row;
         align-items: stretch;
@@ -211,22 +184,22 @@
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    padding: var(--nui-slidepanel-content-padding);
-    height: calc(100% - var(--nui-slidepanel-header-height));
+    padding: var(--nui-sidebar-panel-content-padding);
+    height: calc(100% - var(--nui-sidebar-panel-header-height));
     overflow-y: auto;
-    margin-top: var(--nui-slidepanel-header-height);
+    margin-top: var(--nui-sidebar-panel-header-height);
   }
 
-  // ===== HOST (Contenedor del componente dinámico) =====
+  // ===== HOST (Contenedor del componente din�mico) =====
 
   &__host {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    border-radius: var(--nui-slidepanel-host-border-radius);
-    background-color: var(--nui-slidepanel-host-bg);
-    box-shadow: var(--nui-slidepanel-host-shadow);
-    border: var(--nui-slidepanel-host-border);
+    border-radius: var(--nui-sidebar-panel-host-border-radius);
+    background-color: var(--nui-sidebar-panel-host-bg);
+    box-shadow: var(--nui-sidebar-panel-host-shadow);
+    border: var(--nui-sidebar-panel-host-border);
     position: relative;
     width: 100%;
     height: 100%;
@@ -239,11 +212,11 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
-    gap: var(--nui-slidepanel-box-gap);
-    padding: var(--nui-slidepanel-box-padding);
+    gap: var(--nui-sidebar-panel-box-gap);
+    padding: var(--nui-sidebar-panel-box-padding);
   }
 
-  // ===== CONTENT (Área de contenido scrollable) =====
+  // ===== CONTENT (�rea de contenido scrollable) =====
 
   &__content {
     height: 100%;
@@ -253,7 +226,7 @@
     padding-left: 0.3125rem; // 5px
   }
 
-  // ===== ACTION BUTTONS (Botones de acción) =====
+  // ===== ACTION BUTTONS (Botones de acci�n) =====
 
   &__action-buttons {
     display: flex;
@@ -261,8 +234,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: var(--nui-slidepanel-action-buttons-height);
-    gap: var(--nui-slidepanel-action-buttons-gap);
+    height: var(--nui-sidebar-panel-action-buttons-height);
+    gap: var(--nui-sidebar-panel-action-buttons-gap);
   }
 }
-

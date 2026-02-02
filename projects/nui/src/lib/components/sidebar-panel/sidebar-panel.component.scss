@@ -2,8 +2,8 @@
   position: fixed;
   display: flex;
   flex-direction: column;
-  background: var(--nui-slidepanel-bg);
-  box-shadow: var(--nui-slidepanel-shadow);
+  background: var(--nui-sidebar-panel-bg);
+  box-shadow: var(--nui-sidebar-panel-shadow);
   overflow: hidden;
   
   // Optimizaciones de rendering para animaciones fluidas
@@ -18,32 +18,32 @@
   // para evitar conflictos y mejorar performance
 
   // Posiciones - Solo posicionamiento, el tamaÃ±o se controla desde hostStyles
-  &.nui-slidepanel-position-right {
+  &.nui-sidebar-panel-position-right {
     top: 0;
     right: 0;
     bottom: 0;
   }
 
-  &.nui-slidepanel-position-left {
+  &.nui-sidebar-panel-position-left {
     top: 0;
     left: 0;
     bottom: 0;
   }
 
-  &.nui-slidepanel-position-top {
+  &.nui-sidebar-panel-position-top {
     top: 0;
     left: 0;
     right: 0;
   }
 
-  &.nui-slidepanel-position-bottom {
+  &.nui-sidebar-panel-position-bottom {
     bottom: 0;
     left: 0;
     right: 0;
   }
 
   // Mobile fullscreen
-  &.nui-slidepanel-mobile-fullscreen {
+  &.nui-sidebar-panel-mobile-fullscreen {
     @media (max-width: 768px) {
       width: 100vw !important;
       height: 100vh !important;
@@ -54,7 +54,7 @@
 
   // Accessibility: Focus visible
   &:focus-visible {
-    outline: var(--nui-slidepanel-outline-focus);
+    outline: var(--nui-sidebar-panel-outline-focus);
     outline-offset: -2px;
   }
 
@@ -68,34 +68,34 @@
  * Contenedor del panel en el overlay
  * Permite que el panel capture eventos del mouse
  */
-.nui-slidepanel-pane {
+.nui-sidebar-panel-pane {
   pointer-events: auto;
 }
 
-.nui-slidepanel-wrapper {
+.nui-sidebar-panel-wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
 }
 
-.nui-slidepanel-header {
+.nui-sidebar-panel-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--nui-slidepanel-header-padding);
-  border-bottom: var(--nui-slidepanel-header-border);
-  background: var(--nui-slidepanel-header-bg);
+  padding: var(--nui-sidebar-panel-header-padding);
+  border-bottom: var(--nui-sidebar-panel-header-border);
+  background: var(--nui-sidebar-panel-header-bg);
   flex-shrink: 0;
 
-  .nui-slidepanel-title {
+  .nui-sidebar-panel-title {
     margin: 0;
-    font-size: var(--nui-slidepanel-title-size);
-    font-weight: var(--nui-slidepanel-title-weight);
-    color: var(--nui-slidepanel-text-color);
+    font-size: var(--nui-sidebar-panel-title-size);
+    font-weight: var(--nui-sidebar-panel-title-weight);
+    color: var(--nui-sidebar-panel-text-color);
   }
 
-  .nui-slidepanel-header-actions {
+  .nui-sidebar-panel-header-actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -103,12 +103,12 @@
   }
 }
 
-.nui-slidepanel-content {
+.nui-sidebar-panel-content {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: var(--nui-slidepanel-content-padding);
-  background: var(--nui-slidepanel-content-bg);
+  padding: var(--nui-sidebar-panel-content-padding);
+  background: var(--nui-sidebar-panel-content-bg);
 
   // Scrollbar personalizado
   ::-webkit-scrollbar {
@@ -130,10 +130,10 @@
   }
 }
 
-.nui-slidepanel-footer {
-  padding: var(--nui-slidepanel-footer-padding);
-  border-top: var(--nui-slidepanel-footer-border);
-  background: var(--nui-slidepanel-footer-bg);
+.nui-sidebar-panel-footer {
+  padding: var(--nui-sidebar-panel-footer-padding);
+  border-top: var(--nui-sidebar-panel-footer-border);
+  background: var(--nui-sidebar-panel-footer-bg);
   flex-shrink: 0;
 
   &-actions {

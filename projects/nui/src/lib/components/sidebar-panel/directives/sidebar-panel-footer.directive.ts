@@ -6,7 +6,7 @@ import { SidebarPanelActionsService } from '../services/sidebar-panel-actions.se
  * 
  * Permite que el componente hijo defina su propio footer sin necesidad
  * de pasar templates desde el componente padre. El footer se proyecta
- * automÃ¡ticamente al panel.
+ * automáticamente al panel.
  * 
  * @example
  * ```html
@@ -25,32 +25,32 @@ import { SidebarPanelActionsService } from '../services/sidebar-panel-actions.se
  * 
  * @example
  * ```typescript
- * // El componente es dueÃ±o de su footer
+ * // El componente es dueño de su footer
  * export class MyFormComponent {
  *   @ViewChild(SidebarPanelFooterDirective) 
  *   footerTemplate?: SidebarPanelFooterDirective;
  * 
  *   save() {
- *     // LÃ³gica de guardado
+ *     // Lógica de guardado
  *   }
  * 
  *   cancel() {
- *     // LÃ³gica de cancelaciÃ³n
+ *     // Lógica de cancelación
  *   }
  * }
  * ```
  * 
  * @usageNotes
  * ### Ventajas
- * - **Responsabilidad Ãºnica**: El componente maneja sus propias acciones
+ * - **Responsabilidad única**: El componente maneja sus propias acciones
  * - **Reutilizable**: El componente funciona dentro o fuera del panel
- * - **Flexible**: Control total sobre el diseÃ±o del footer
+ * - **Flexible**: Control total sobre el diseño del footer
  * - **Testeable**: El componente se puede probar independientemente
  * 
- * ### CuÃ¡ndo Usar
- * - Footers con diseÃ±o personalizado
- * - Footers con estado dinÃ¡mico (loading, validaciones, etc.)
- * - Footers con mÃºltiples botones o elementos complejos
+ * ### Cuándo Usar
+ * - Footers con diseño personalizado
+ * - Footers con estado dinámico (loading, validaciones, etc.)
+ * - Footers con múltiples botones o elementos complejos
  * - Cuando necesitas control total sobre el layout
  * 
  * @publicApi
@@ -68,7 +68,7 @@ export class SidebarPanelFooterDirective implements OnInit, OnDestroy {
    * @param templateRef - Referencia al template que contiene la directiva
    * 
    * @internal
-   * El TemplateRef se inyecta automÃ¡ticamente por Angular cuando la directiva
+   * El TemplateRef se inyecta automáticamente por Angular cuando la directiva
    * se aplica a un elemento `<ng-template>`.
    */
   constructor(public templateRef: TemplateRef<any>) {}

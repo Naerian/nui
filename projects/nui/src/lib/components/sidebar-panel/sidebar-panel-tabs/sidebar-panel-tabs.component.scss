@@ -50,8 +50,8 @@
   align-items: center;
   justify-content: center;
   padding: var(--spacing-sm);
-  background: var(--nui-slidepanel-header-bg, var(--nui-bg-secondary));
-  border: 1px solid var(--nui-slidepanel-border, var(--nui-border-primary));
+  background: var(--nui-sidebar-panel-header-bg, var(--nui-bg-secondary));
+  border: 1px solid var(--nui-sidebar-panel-border, var(--nui-border-primary));
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: var(--box-shadow-sm);

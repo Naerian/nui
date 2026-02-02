@@ -8,17 +8,8 @@
   ComponentRef,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { SidebarPanelPosition } from '../models/sidebar-panel.model';
+import { MinimizedTab, SidebarPanelPosition } from '../models/sidebar-panel.model';
 
-/**
- * InformaciÃ³n de una pestaÃ±a minimizada
- */
-export interface MinimizedTab {
-  id: string;
-  title: string;
-  position: SidebarPanelPosition;
-  restoreCallback: () => void;
-}
 
 /**
  * Servicio global para gestionar las pestaÃ±as de panels minimizados
@@ -38,32 +29,32 @@ export class SidebarPanelTabsService {
   private readonly document = inject(DOCUMENT);
 
   /**
-   * Signal con todas las pestaÃ±as minimizadas
+   * Signal con todas las pestañas minimizadas
    */
   private readonly _tabs = signal<MinimizedTab[]>([]);
 
   /**
-   * Referencia al componente de pestaÃ±as (se crea dinÃ¡micamente)
+   * Referencia al componente de pestañas (se crea dinámicamente)
    */
   private tabsComponentRef?: ComponentRef<any>;
 
   /**
-   * Obtiene todas las pestaÃ±as minimizadas
+   * Obtiene todas las pestañas minimizadas
    */
   readonly tabs = this._tabs.asReadonly();
 
   /**
-   * Crea dinÃ¡micamente el componente de pestaÃ±as si no existe
+   * Crea dinámicamente el componente de pestañas si no existe
    * 
-   * Este mÃ©todo se llama automÃ¡ticamente cuando se minimiza el primer panel.
-   * El componente se inyecta dinÃ¡micamente en el DOM (al final del body) sin
+   * Este método se llama automáticamente cuando se minimiza el primer panel.
+   * El componente se inyecta dinámicamente en el DOM (al final del body) sin
    * necesidad de instanciarlo manualmente en el HTML.
    * 
-   * **Ventajas de la inyecciÃ³n dinÃ¡mica:**
-   * - âœ… No contamina el HTML de la aplicaciÃ³n
-   * - âœ… Se crea solo cuando es necesario (lazy)
-   * - âœ… Se destruye automÃ¡ticamente cuando no hay pestaÃ±as
-   * - âœ… Zero-config para el desarrollador
+   * **Ventajas de la inyección dinámica:**
+   * - ✓ No contamina el HTML de la aplicación
+   * - ✓ Se crea solo cuando es necesario (lazy)
+   * - ✓ Se destruye automáticamente cuando no hay pestañas
+   * - ✓ Zero-config para el desarrollador
    * 
    * @private
    */
@@ -72,7 +63,7 @@ export class SidebarPanelTabsService {
       return; // Ya existe
     }
 
-    // Importar el componente dinÃ¡micamente para evitar dependencias circulares
+    // Importar el componente dinámicamente para evitar dependencias circulares
     import('../sidebar-panel-tabs/sidebar-panel-tabs.component').then(
       ({ SidebarPanelTabsComponent }) => {
         // Crear el componente usando createComponent de Angular
@@ -80,7 +71,7 @@ export class SidebarPanelTabsService {
           environmentInjector: this.injector,
         });
 
-        // Adjuntar a la aplicaciÃ³n
+        // Adjuntar a la aplicación
         this.appRef.attachView(this.tabsComponentRef.hostView);
 
         // Insertar en el DOM (al final del body)
@@ -92,13 +83,13 @@ export class SidebarPanelTabsService {
   }
 
   /**
-   * Destruye el componente de pestaÃ±as si no hay tabs
+   * Destruye el componente de pestañas si no hay tabs
    * 
-   * Este mÃ©todo se llama automÃ¡ticamente cuando se cierra/restaura la Ãºltima pestaÃ±a.
+   * Este método se llama automáticamente cuando se cierra/restaura la última pestaña.
    * Limpia completamente el componente del DOM para no dejar rastros innecesarios.
    * 
    * **Proceso de limpieza:**
-   * 1. Desadjunta la vista de la aplicaciÃ³n Angular
+   * 1. Desadjunta la vista de la aplicación Angular
    * 2. Destruye el componente (limpia subscripciones, listeners, etc.)
    * 3. Elimina la referencia para liberar memoria
    * 
@@ -113,9 +104,9 @@ export class SidebarPanelTabsService {
   }
 
   /**
-   * Agrega una nueva pestaÃ±a minimizada
+   * Agrega una nueva pestaña minimizada
    * 
-   * Si es la primera pestaÃ±a, crea automÃ¡ticamente el componente global.
+   * Si es la primera pestaña, crea automáticamente el componente global.
    */
   addTab(tab: MinimizedTab): void {
     // Verificar que no exista ya
@@ -123,20 +114,20 @@ export class SidebarPanelTabsService {
     if (!exists) {
       this._tabs.update(tabs => [...tabs, tab]);
       
-      // Asegurar que el componente de pestaÃ±as existe
+      // Asegurar que el componente de pestañas existe
       this.ensureTabsComponent();
     }
   }
 
   /**
-   * Remueve una pestaÃ±a minimizada
+   * Remueve una pestaña minimizada
    * 
-   * Si era la Ãºltima pestaÃ±a, destruye automÃ¡ticamente el componente global.
+   * Si era la última pestaña, destruye automáticamente el componente global.
    */
   removeTab(id: string): void {
     this._tabs.update(tabs => tabs.filter(t => t.id !== id));
     
-    // Destruir el componente si ya no hay pestaÃ±as
+    // Destruir el componente si ya no hay pestañas
     this.destroyTabsComponentIfEmpty();
   }
 
@@ -152,14 +143,14 @@ export class SidebarPanelTabsService {
   }
 
   /**
-   * Obtiene pestaÃ±as agrupadas por posiciÃ³n
+   * Obtiene pestañas agrupadas por posición
    */
   getTabsByPosition(position: SidebarPanelPosition): MinimizedTab[] {
     return this._tabs().filter(t => t.position === position);
   }
 
   /**
-   * Limpia todas las pestaÃ±as
+   * Limpia todas las pestañas
    */
   clearAll(): void {
     this._tabs.set([]);

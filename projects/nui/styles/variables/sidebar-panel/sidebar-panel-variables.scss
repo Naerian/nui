@@ -1,0 +1,60 @@
+@use "../../config";
+@use "sidebar-panel-tokens" as tokens;
+
+// =======================
+// SIDEBAR PANEL - CSS Custom Properties Mixin
+// =======================
+
+@mixin nui-sidebar-panel-vars {
+  // Fondo y superficie (se usan las variables globales del theme)
+  --nui-sidebar-panel-bg: var(--nui-bg-primary);
+  --nui-sidebar-panel-text: var(--nui-text-primary);
+  --nui-sidebar-panel-border: var(--nui-border-primary);
+
+  // Sombras
+  --nui-sidebar-panel-shadow: #{tokens.$nui-sidebar-panel-shadow};
+
+  // Z-index
+  --nui-sidebar-panel-z-index: #{tokens.$nui-sidebar-panel-z-index};
+  --nui-sidebar-panel-overlay-z-index: #{tokens.$nui-sidebar-panel-overlay-z-index};
+
+  // Overlay/Backdrop
+  --nui-sidebar-panel-overlay-bg: #{tokens.$nui-sidebar-panel-overlay-bg};
+
+  // Header
+  --nui-sidebar-panel-header-padding: #{tokens.$nui-sidebar-panel-header-padding};
+  --nui-sidebar-panel-header-height: #{tokens.$nui-sidebar-panel-header-height};
+  --nui-sidebar-panel-title-size: #{tokens.$nui-sidebar-panel-title-size};
+  --nui-sidebar-panel-title-weight: #{tokens.$nui-sidebar-panel-title-weight};
+  --nui-sidebar-panel-close-size: #{tokens.$nui-sidebar-panel-close-size};
+
+  // Contenido
+  --nui-sidebar-panel-content-padding: #{tokens.$nui-sidebar-panel-content-padding};
+
+  // Tamaños (coinciden con SidebarPanelSize: xs | sm | md | lg | xl | full)
+  --nui-sidebar-panel-size-xs-width: #{tokens.$nui-sidebar-panel-size-xs-width};
+  --nui-sidebar-panel-size-sm-width: #{tokens.$nui-sidebar-panel-size-sm-width};
+  --nui-sidebar-panel-size-md-width: #{tokens.$nui-sidebar-panel-size-md-width};
+  --nui-sidebar-panel-size-lg-width: #{tokens.$nui-sidebar-panel-size-lg-width};
+  --nui-sidebar-panel-size-xl-width: #{tokens.$nui-sidebar-panel-size-xl-width};
+  --nui-sidebar-panel-size-full-width: #{tokens.$nui-sidebar-panel-size-full-width};
+
+  // Breakpoints
+  --nui-sidebar-panel-breakpoint-mobile: #{tokens.$nui-sidebar-panel-breakpoint-mobile};
+  --nui-sidebar-panel-breakpoint-tablet: #{tokens.$nui-sidebar-panel-breakpoint-tablet};
+  --nui-sidebar-panel-breakpoint-desktop: #{tokens.$nui-sidebar-panel-breakpoint-desktop};
+
+  // Host (Contenedor interno)
+  --nui-sidebar-panel-host-bg: #{tokens.$nui-sidebar-panel-host-bg};
+  --nui-sidebar-panel-host-shadow: #{tokens.$nui-sidebar-panel-host-shadow};
+  --nui-sidebar-panel-host-border: #{tokens.$nui-sidebar-panel-host-border};
+  --nui-sidebar-panel-host-border-radius: #{tokens.$nui-sidebar-panel-host-border-radius};
+
+  // Espaciado interno
+  --nui-sidebar-panel-box-padding: #{tokens.$nui-sidebar-panel-box-padding};
+  --nui-sidebar-panel-box-gap: #{tokens.$nui-sidebar-panel-box-gap};
+
+  // Botones de acción
+  --nui-sidebar-panel-action-buttons-height: #{tokens.$nui-sidebar-panel-action-buttons-height};
+  --nui-sidebar-panel-action-buttons-gap: #{tokens.$nui-sidebar-panel-action-buttons-gap};
+}
