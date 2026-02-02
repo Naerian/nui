@@ -30,6 +30,15 @@
             </nui-button>
           </div>
         }
+
+        @case ('defaults') {
+          <div class="example-preview">
+            <nui-button [color]="'primary'" (click)="openPanelWithDefaults()">
+              <i class="ri-settings-3-line"></i>
+              Abrir Panel con Defaults
+            </nui-button>
+          </div>
+        }
         
         @case ('sizes') {
           <div class="example-preview example-preview--spaced">
@@ -107,6 +116,15 @@
           <div class="example-preview">
             <nui-button (click)="openPanelWithoutBackdrop()">
               Abrir Panel sin Backdrop
+            </nui-button>
+          </div>
+        }
+        
+        @case ('events') {
+          <div class="example-preview">
+            <nui-button [color]="'primary'" (click)="openPanelWithEvents()">
+              <i class="ri-notification-3-line"></i>
+              Abrir Panel con Eventos
             </nui-button>
           </div>
         }

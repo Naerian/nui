@@ -22,6 +22,10 @@ configs/
 │   ├── modal.config.ts       # Factory function con defaults
 │   └── index.ts              # Barrel export
 │
+├── sidebar-panel/             # Configuración de Sidebar Panel
+│   ├── sidebar-panel.config.ts  # Factory function con defaults
+│   └── index.ts              # Barrel export
+│
 ├── nui.model.ts              # Interface principal NUIConfig
 ├── nui.config.ts             # Provider y tokens de inyección
 ├── nui.consts.ts             # Constantes globales
@@ -51,6 +55,11 @@ Toda la configuración relacionada con modales:
 - **Model**: Interfaces para configuración de modales, status bar, timeout, gestures, analytics, verificación, loading
 - **Config**: Factory `createDefaultModalConfig()` con valores por defecto para todos los aspectos de los modales
 
+### sidebar-panel/
+Toda la configuración relacionada con sidebar panels:
+- **Config**: Factory `createDefaultSidebarPanelConfig()` con valores por defecto (posición, tamaño, animaciones, backdrop, accesibilidad, z-index, etc.)
+- Permite centralizar el comportamiento de todos los panels en la aplicación
+
 ### nui.model.ts
 Interface principal que agrupa toda la configuración:
 ```typescript
@@ -62,6 +71,7 @@ export interface NUIConfig {
   paginator?: PaginatorGlobalConfig;
   tabs?: TabsConfig;
   modal?: ModalConfig;
+  sidebarPanel?: SidebarPanelConfig;
 }
 ```
 
@@ -128,6 +138,18 @@ export const appConfig: ApplicationConfig = {
           position: 'top',
           thickness: 4
         }
+      },
+      sidebarPanel: {
+        position: 'right',
+        size: 'md',
+        showCloseButton: true,
+        hasBackdrop: true,
+        closeOnBackdropClick: true,
+        closeOnEscape: true,
+        animationDuration: 225,
+        zIndex: 1000,
+        mobileFullScreen: false,
+        breakpoint: 768
       }
     })
   ]

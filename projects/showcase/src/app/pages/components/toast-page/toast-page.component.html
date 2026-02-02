@@ -25,23 +25,23 @@
       @switch (section.id) {
         @case ('basic') {
           <div class="example-preview">
-            <nui-button nuiColor="success" (click)="showSuccess()">Éxito</nui-button>
-            <nui-button nuiColor="danger" (click)="showError()">Error</nui-button>
-            <nui-button nuiColor="warning" (click)="showWarning()">Advertencia</nui-button>
-            <nui-button nuiColor="info" (click)="showInfo()">Info</nui-button>
+            <nui-button [color]="'success'" (click)="showSuccess()">Éxito</nui-button>
+            <nui-button [color]="'danger'" (click)="showError()">Error</nui-button>
+            <nui-button [color]="'warning'" (click)="showWarning()">Advertencia</nui-button>
+            <nui-button [color]="'info'" (click)="showInfo()">Info</nui-button>
           </div>
         }
         
         @case ('with-title') {
           <div class="example-preview">
-            <nui-button nuiColor="success" (click)="showSuccessWithTitle()">Éxito con Título</nui-button>
-            <nui-button nuiColor="danger" (click)="showErrorWithTitle()">Error con Título</nui-button>
+            <nui-button [color]="'success'" (click)="showSuccessWithTitle()">Éxito con Título</nui-button>
+            <nui-button [color]="'danger'" (click)="showErrorWithTitle()">Error con Título</nui-button>
           </div>
         }
         
         @case ('with-actions') {
           <div class="example-preview">
-            <nui-button nuiColor="primary" (click)="showWithActions()">Con Acción Deshacer</nui-button>
+            <nui-button [color]="'primary'" (click)="showWithActions()">Con Acción Deshacer</nui-button>
           </div>
         }
         

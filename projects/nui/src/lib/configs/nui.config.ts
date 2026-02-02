@@ -5,6 +5,7 @@ import { createDefaultToastConfig } from './toast';
 import { createDefaultTooltipConfig } from './tooltip';
 import { createDefaultPopoverConfig } from './popover';
 import { createDefaultFabButtonConfig } from './fab-button/fab-button.config';
+import { createDefaultSidebarPanelConfig } from './sidebar-panel';
 import { DEFAULT_VARIANT, DEFAULT_COLOR, DEFAULT_SIZE } from './nui.consts';
 import { NUI_TRANSLATIONS } from '../translations';
 
@@ -19,6 +20,7 @@ function createDefaultNUIConfig(): Partial<NUIConfig> {
     tooltip: createDefaultTooltipConfig(),
     popover: createDefaultPopoverConfig(),
     fabButton: createDefaultFabButtonConfig(),
+    sidebarPanel: createDefaultSidebarPanelConfig(),
   };
 }
 
@@ -138,6 +140,14 @@ function mergeNUIConfigs(
     merged.fabButton = {
       ...defaultConfig.fabButton,
       ...customConfig.fabButton,
+    };
+  }
+
+  // Fusión para la configuración del sidebar panel
+  if (defaultConfig.sidebarPanel || customConfig.sidebarPanel) {
+    merged.sidebarPanel = {
+      ...defaultConfig.sidebarPanel,
+      ...customConfig.sidebarPanel,
     };
   }
 

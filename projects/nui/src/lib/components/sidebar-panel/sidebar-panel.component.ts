@@ -25,6 +25,7 @@ import {
   SIDEBAR_PANEL_CONFIG,
   SidebarPanelPosition,
   SidebarPanelAction,
+  FOCUS_TRAP_DELAY,
 } from './models/sidebar-panel.model';
 import { SidebarPanelRef } from './sidebar-panel-ref';
 import {
@@ -35,11 +36,6 @@ import { NUI_TRANSLATIONS } from '../../translations/translations.token';
 import { ButtonComponent } from '../button/button.component';
 import { SidebarPanelActionsService } from './services/sidebar-panel-actions.service';
 import { SidebarPanelTabsService } from './services/sidebar-panel-tabs.service';
-
-/**
- * Constante para el delay del focus trap
- */
-const FOCUS_TRAP_DELAY = 100;
 
 /**
  * Componente contenedor del sidebar-panel
@@ -200,7 +196,7 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
   private _previousScrollPosition?: { x: number; y: number };
 
   /**
-   * Obtiene las clases CSS para el elemento host del componente
+   * Obtiene las clases CSS que se aplican al host del componente
    *
    * Las clases incluyen:
    * - Clase base del contenedor

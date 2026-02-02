@@ -41,6 +41,67 @@ openPanel() {
       ],
     },
     {
+      id: 'defaults',
+      title: 'Configuración por Defecto',
+      description: 'Prueba el panel usando SOLO valores por defecto de la configuración global. Ideal para verificar que los cambios en provideNUIConfig() se aplican correctamente.',
+      anchor: 'defaults',
+      note: {
+        type: 'info',
+        content: 'Este panel no recibe configuración específica, por lo que usa los valores definidos en <code>provideNUIConfig({ sidebarPanel: {...} })</code> en <code>app.config.ts</code>. Si no hay configuración global, usa los defaults del componente.'
+      },
+      examples: [
+        {
+          title: 'TypeScript - Panel con Defaults',
+          code: `// app.config.ts - Configurar defaults globales
+import { provideNUIConfig } from 'nui';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideNUIConfig({
+      sidebarPanel: {
+        position: 'left',        // ← Todos los panels se abrirán a la izquierda
+        size: 'lg',              // ← Todos serán grandes por defecto
+        animationDuration: 300,  // ← Animación más lenta
+        mobileFullScreen: true   // ← Fullscreen en mobile
+      }
+    })
+  ]
+};
+
+// component.ts - Abrir panel SIN config específica
+openPanel() {
+  this.sidebarPanelService.open(MyContentComponent, {
+    title: 'Panel con Defaults'
+    // No pasamos position, size, etc. → usa globals
+  });
+}`,
+          language: 'typescript',
+        },
+        {
+          title: 'Componente de Contenido - Leer Config',
+          code: `// my-content.component.ts
+import { Component, inject } from '@angular/core';
+import { SIDEBAR_PANEL_CONFIG } from 'nui';
+
+@Component({
+  selector: 'app-my-content',
+  template: \`
+    <div>
+      <h3>Configuración Actual</h3>
+      <p>Position: {{ config.position }}</p>
+      <p>Size: {{ config.size }}</p>
+      <p>Animation: {{ config.animationDuration }}ms</p>
+    </div>
+  \`
+})
+export class MyContentComponent {
+  readonly config = inject(SIDEBAR_PANEL_CONFIG);
+}`,
+          language: 'typescript',
+        },
+      ],
+    },
+    {
       id: 'sizes',
       title: 'components.sidebar-panel.sizes.title',
       description: 'components.sidebar-panel.sizes.description',
@@ -377,6 +438,101 @@ class SidebarPanelRef<T, R> {
   }
 }`,
           language: 'scss',
+        },
+      ],
+    },
+    {
+      id: 'events',
+      title: 'Comunicación con Eventos',
+      description: 'Demuestra cómo capturar eventos @Output() emitidos desde un componente dinámico cargado dentro del panel. Los eventos se capturan a través de panelRef.componentInstance.',
+      anchor: 'eventos',
+      note: {
+        type: 'info',
+        content: 'Los eventos @Output() del componente dinámico funcionan exactamente igual que en cualquier componente Angular. Accede a ellos mediante <code>panelRef.componentInstance</code>.'
+      },
+      examples: [
+        {
+          title: 'TypeScript - Captura de Eventos',
+          code: `// Abrir panel con componente que emite eventos
+openPanelWithEvents() {
+  const panelRef = this.sidebarPanelService.open(EventExampleComponent, {
+    title: 'Panel con Eventos',
+    position: 'right',
+    size: 'md'
+  });
+
+  // Obtener instancia del componente dinámico
+  const instance = panelRef.componentInstance;
+
+  if (instance) {
+    // Suscribirse a eventos @Output()
+    instance.dataChanged.subscribe((data) => {
+      console.log('Datos cambiados:', data);
+      alert(\`Nuevo valor: \${data.value}\`);
+    });
+
+    instance.statusChanged.subscribe((status) => {
+      console.log('Estado:', status);
+    });
+
+    instance.beforeClose.subscribe((result) => {
+      console.log('Se va a cerrar con:', result);
+    });
+  }
+
+  // Capturar resultado final al cerrar
+  panelRef.afterClosed().subscribe((result) => {
+    console.log('Panel cerrado. Resultado:', result);
+  });
+}`,
+          language: 'typescript',
+        },
+        {
+          title: 'Componente Dinámico - Definir Eventos',
+          code: `// event-example.component.ts
+import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { SIDEBAR_PANEL_REF } from 'nui';
+
+interface DataPayload {
+  value: string;
+  timestamp: Date;
+}
+
+@Component({
+  selector: 'app-event-example',
+  template: \`
+    <div>
+      <button (click)="emitDataChanged()">
+        Emitir Evento
+      </button>
+      
+      <button (click)="closeWithResult()">
+        Cerrar Panel
+      </button>
+    </div>
+  \`
+})
+export class EventExampleComponent {
+  private readonly panelRef = inject(SIDEBAR_PANEL_REF);
+
+  // Definir eventos @Output()
+  @Output() dataChanged = new EventEmitter<DataPayload>();
+  @Output() statusChanged = new EventEmitter<string>();
+  @Output() beforeClose = new EventEmitter<any>();
+
+  emitDataChanged(): void {
+    this.dataChanged.emit({
+      value: 'New data',
+      timestamp: new Date()
+    });
+  }
+
+  closeWithResult(): void {
+    this.beforeClose.emit({ action: 'saved' });
+    this.panelRef.close({ success: true });
+  }
+}`,
+          language: 'typescript',
         },
       ],
     },

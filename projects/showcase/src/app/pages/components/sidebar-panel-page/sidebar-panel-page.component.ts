@@ -7,6 +7,7 @@ import { SectionTitleComponent } from '../../../shared/components/section-title/
 import { BaseComponentPage } from '../../../core/base/base-component-page';
 import { SIDEBAR_PANEL_PAGE_CONFIG } from './sidebar-panel-page.config';
 import { SidebarPanelExampleContentComponent } from './components/sidebar-panel-example-content/sidebar-panel-example-content.component';
+import { SidebarPanelEventExampleComponent } from './components/sidebar-panel-event-example/sidebar-panel-event-example.component';
 
 /**
  * Página de documentación del componente Sidebar Panel
@@ -51,6 +52,23 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       size: 'md',
       data: {
         message: 'Este es un ejemplo básico del componente Sidebar Panel'
+      }
+    });
+  }
+
+  /**
+   * Abre un panel usando SOLO valores por defecto
+   * No pasa ninguna configuración específica, usa defaults globales de NUI_CONFIG
+   * Útil para probar la configuración global
+   */
+  openPanelWithDefaults(): void {
+    this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
+      title: 'Panel con Defaults',
+      data: {
+        message: 'Este panel usa los valores por defecto de la configuración global. ' +
+                 'Si cambias provideNUIConfig({ sidebarPanel: {...} }), este panel ' +
+                 'reflejará esos cambios automáticamente.',
+        showConfigInfo: true
       }
     });
   }
@@ -193,5 +211,65 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
    */
   closeAllPanels(): void {
     this.sidebarPanelService.closeAll();
+  }
+
+  /**
+   * Abre un panel con eventos Output
+   * Demuestra cómo capturar eventos emitidos desde el componente dinámico
+   */
+  openPanelWithEvents(): void {
+    // Abrir el panel
+    const panelRef = this.sidebarPanelService.open(SidebarPanelEventExampleComponent, {
+      title: 'Panel con Eventos Output',
+      position: 'right',
+      size: 'md',
+      data: {
+        initialValue: 'Test data',
+        message: 'Este panel demuestra la captura de eventos'
+      }
+    });
+
+    // CLAVE: Acceder a componentInstance para suscribirse a los eventos @Output()
+    const componentInstance = panelRef.componentInstance;
+
+    if (componentInstance) {
+      // Capturar evento dataChanged
+      componentInstance.dataChanged.subscribe((data: any) => {
+        console.log('🔵 [PADRE] dataChanged capturado:', data);
+        alert(`Evento dataChanged capturado!\nValue: ${data.value}`);
+      });
+
+      // Capturar evento statusChanged
+      componentInstance.statusChanged.subscribe((data: any) => {
+        console.log('🟢 [PADRE] statusChanged capturado:', data);
+        alert(`Evento statusChanged capturado!\nStatus: ${data.status}\nMessage: ${data.message}`);
+      });
+
+      // Capturar evento customEvent
+      componentInstance.customEvent.subscribe((data: any) => {
+        console.log('🟡 [PADRE] customEvent capturado:', data);
+        alert(`Evento customEvent capturado!\n${JSON.stringify(data, null, 2)}`);
+      });
+
+      // Capturar evento beforeClose
+      componentInstance.beforeClose.subscribe((result: any) => {
+        console.log('🔴 [PADRE] beforeClose capturado:', result);
+        console.log(`Panel se va a cerrar con acción: ${result.action}`);
+      });
+    }
+
+    // También podemos capturar el resultado final con afterClosed()
+    panelRef.afterClosed().subscribe((result: any) => {
+      console.log('🏁 [PADRE] Panel cerrado con resultado:', result);
+      
+      if (result) {
+        alert(
+          `Panel cerrado!\n\n` +
+          `Acción: ${result.action}\n` +
+          `Timestamp: ${result.timestamp}\n` +
+          `Data: ${JSON.stringify(result.data || {}, null, 2)}`
+        );
+      }
+    });
   }
 }

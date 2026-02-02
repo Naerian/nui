@@ -7,20 +7,87 @@
   <div class="panel-content__details">
     <h3>Información del Panel</h3>
     <ul>
-      <li><strong>Componente:</strong> SlidepanelExampleContentComponent</li>
-      <li><strong>Estado:</strong> Cargado dinámicamente</li>
-      <li><strong>Inputs:</strong> Recibidos correctamente</li>
+      <li>
+        <strong>Componente:</strong>
+        SlidepanelExampleContentComponent
+      </li>
+      <li>
+        <strong>Estado:</strong>
+        Cargado dinámicamente
+      </li>
+      <li>
+        <strong>Inputs:</strong>
+        Recibidos correctamente
+      </li>
     </ul>
   </div>
+
+  @if (showConfigInfo) {
+    <div class="panel-content__config">
+      <h3>Configuración Actual (después del merge)</h3>
+      <ul>
+        <li>
+          <strong>Position:</strong>
+          {{ config.position }}
+        </li>
+        <li>
+          <strong>Size:</strong>
+          {{ config.size }}
+        </li>
+        <li>
+          <strong>Show Header:</strong>
+          {{ config.showHeader }}
+        </li>
+        <li>
+          <strong>Show Close Button:</strong>
+          {{ config.showCloseButton }}
+        </li>
+        <li>
+          <strong>Has Backdrop:</strong>
+          {{ config.hasBackdrop }}
+        </li>
+        <li>
+          <strong>Close on Backdrop Click:</strong>
+          {{ config.closeOnBackdropClick }}
+        </li>
+        <li>
+          <strong>Close on Escape:</strong>
+          {{ config.closeOnEscape }}
+        </li>
+        <li>
+          <strong>Animation Duration:</strong>
+          {{ config.animationDuration }}ms
+        </li>
+        <li>
+          <strong>Z-Index:</strong>
+          {{ config.zIndex }}
+        </li>
+        <li>
+          <strong>Mobile Full Screen:</strong>
+          {{ config.mobileFullScreen }}
+        </li>
+        <li>
+          <strong>Breakpoint:</strong>
+          {{ config.breakpoint }}px
+        </li>
+      </ul>
+      <p class="config-note">
+        <i class="ri-information-line"></i>
+        <strong>Nota:</strong>
+        Estos valores son el resultado del merge entre: DEFAULT_SIDEBAR_PANEL_CONFIG →
+        NUI_CONFIG.sidebarPanel → config específica
+      </p>
+    </div>
+  }
 
   @if (showActions) {
     <div class="panel-content__actions">
       <h3>Acciones Disponibles</h3>
       <div class="button-group">
-        <nui-button color="primary" (click)="handleAction()">
+        <nui-button [color]="'primary'" (click)="handleAction()">
           Ejecutar Acción
         </nui-button>
-        <nui-button color="secondary" (click)="close()">
+        <nui-button [color]="'secondary'" (click)="close()">
           Cancelar
         </nui-button>
       </div>
@@ -29,7 +96,7 @@
 
   @if (showCloseAction) {
     <div class="panel-content__close-action">
-      <nui-button color="primary" (click)="close()">
+      <nui-button [color]="'primary'" (click)="close()">
         Cerrar Panel
       </nui-button>
     </div>
@@ -38,7 +105,8 @@
   <div class="panel-content__footer">
     <p class="text-muted">
       <i class="ri-lightbulb-line"></i>
-      Este es un componente de ejemplo. Puedes crear tus propios componentes con cualquier contenido.
+      Este es un componente de ejemplo. Puedes crear tus propios componentes con cualquier
+      contenido.
     </p>
   </div>
 </div>

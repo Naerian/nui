@@ -13,6 +13,7 @@ export {
   SIDEBAR_PANEL_SIZE_MAP,
   DEFAULT_SIDEBAR_PANEL_CONFIG,
   SIDEBAR_PANEL_CONFIG,
+  FOCUS_TRAP_DELAY,
   RequiredSidebarPanelConfig,
   ResolvedSidebarPanelConfig,
   SidebarPanelAction,

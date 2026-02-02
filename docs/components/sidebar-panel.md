@@ -294,6 +294,229 @@ panelRef.afterClosed().subscribe(result => {
 });
 ```
 
+### Comunicación con Eventos @Output()
+
+Los componentes dinámicos pueden emitir eventos `@Output()` que son capturados directamente a través de `panelRef.componentInstance`. Esto permite **comunicación bidireccional en tiempo real** entre el panel y el componente padre.
+
+#### Flujo de Comunicación
+
+```
+PADRE → service.open() → SERVICIO → crea componente → COMPONENTE DINÁMICO
+  ↑                                                            ↓
+  └─── componentInstance.event.subscribe() ←─── @Output() emite
+```
+
+#### Implementación Básica
+
+**1. Componente Dinámico (dentro del panel):**
+
+```typescript
+import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { SLIDEPANEL_REF } from '@shared/components/slidepanel';
+
+@Component({
+  selector: 'app-form-panel',
+  template: `
+    <div class="form-content">
+      <input [(ngModel)]="value" (ngModelChange)="onValueChange($event)" />
+      <button (click)="save()">Guardar</button>
+    </div>
+  `
+})
+export class FormPanelComponent {
+  private readonly panelRef = inject(SLIDEPANEL_REF);
+  
+  value = '';
+  
+  // Eventos @Output() que pueden ser capturados
+  @Output() formChanged = new EventEmitter<string>();
+  @Output() beforeSave = new EventEmitter<string>();
+  
+  onValueChange(newValue: string): void {
+    // Emite eventos en tiempo real
+    this.formChanged.emit(newValue);
+  }
+  
+  save(): void {
+    this.beforeSave.emit(this.value);
+    this.panelRef.close({ saved: true, value: this.value });
+  }
+}
+```
+
+**2. Componente Padre (captura eventos):**
+
+```typescript
+openFormPanel(): void {
+  const panelRef = this.slidePanelService.open(FormPanelComponent, {
+    title: 'Editar Formulario',
+    position: 'right',
+    size: 'md'
+  });
+  
+  // Acceder a la instancia del componente dinámico
+  const instance = panelRef.componentInstance;
+  
+  if (instance) {
+    // Suscribirse a eventos @Output() en tiempo real
+    instance.formChanged.subscribe(value => {
+      console.log('Valor cambió:', value);
+      this.updatePreview(value); // Actualizar preview externo
+    });
+    
+    instance.beforeSave.subscribe(value => {
+      console.log('A punto de guardar:', value);
+      this.validateBeforeSave(value);
+    });
+  }
+  
+  // Capturar resultado final al cerrar
+  panelRef.afterClosed().subscribe(result => {
+    if (result?.saved) {
+      console.log('Guardado exitoso:', result.value);
+    }
+  });
+}
+```
+
+#### Patrones Comunes
+
+**Patrón 1: Feedback en Tiempo Real**
+
+```typescript
+// Componente dinámico
+@Output() statusChanged = new EventEmitter<{ status: string; message: string }>();
+
+updateStatus(status: string): void {
+  this.statusChanged.emit({ 
+    status, 
+    message: `Estado actualizado a ${status}` 
+  });
+}
+
+// Padre
+instance.statusChanged.subscribe(({ status, message }) => {
+  this.notificationService.show(message);
+  this.updateStatusIndicator(status);
+});
+```
+
+**Patrón 2: Progreso de Operaciones**
+
+```typescript
+// Componente dinámico
+@Output() progressChanged = new EventEmitter<number>();
+
+async uploadFiles(): Promise<void> {
+  for (let i = 0; i <= 100; i += 10) {
+    await this.processChunk(i);
+    this.progressChanged.emit(i);
+  }
+}
+
+// Padre
+instance.progressChanged.subscribe(progress => {
+  this.progressBar.value = progress;
+  console.log(`Progreso: ${progress}%`);
+});
+```
+
+**Patrón 3: Validación Previa al Cierre**
+
+```typescript
+// Componente dinámico
+@Output() beforeClose = new EventEmitter<boolean>();
+
+async requestClose(): Promise<void> {
+  const canClose = await this.checkUnsavedChanges();
+  this.beforeClose.emit(canClose);
+  
+  if (canClose) {
+    this.panelRef.close();
+  }
+}
+
+// Padre
+instance.beforeClose.subscribe(canClose => {
+  if (!canClose) {
+    this.showUnsavedChangesWarning();
+  }
+});
+```
+
+#### Características Clave
+
+**✅ componentInstance siempre disponible**
+
+```typescript
+const panelRef = service.open(MyComponent);
+console.log(panelRef.componentInstance); // Instancia de MyComponent
+```
+
+**✅ Múltiples eventos simultáneos**
+
+```typescript
+if (instance) {
+  instance.dataChanged.subscribe(data => { /* ... */ });
+  instance.statusChanged.subscribe(status => { /* ... */ });
+  instance.progressChanged.subscribe(progress => { /* ... */ });
+}
+```
+
+**✅ TypeScript Type Safety**
+
+```typescript
+const panelRef = service.open<FormPanelComponent, any, SaveResult>(
+  FormPanelComponent,
+  { /* config */ }
+);
+
+// componentInstance tiene el tipo correcto
+panelRef.componentInstance?.formChanged.subscribe(/* ... */);
+//                        ^? FormPanelComponent | null
+```
+
+**✅ Combinación con afterClosed()**
+
+```typescript
+// Eventos en tiempo real durante la vida del panel
+instance.formChanged.subscribe(data => {
+  console.log('Cambio inmediato:', data);
+});
+
+// Resultado final al cerrar
+panelRef.afterClosed().subscribe(result => {
+  console.log('Resultado final:', result);
+});
+```
+
+#### Consideraciones
+
+| Aspecto | @Output() Events | afterClosed() |
+|---------|------------------|---------------|
+| **Momento** | Durante la vida del panel | Solo al cerrar |
+| **Frecuencia** | Múltiples veces | Una vez |
+| **Uso típico** | Feedback en tiempo real | Resultado final |
+| **Ejemplo** | formChanged, progressChanged | saveResult, userAction |
+
+**Nota sobre limpieza**: Las suscripciones a eventos `@Output()` se limpian automáticamente cuando el componente se destruye. Si necesitas control manual:
+
+```typescript
+const subscription = instance.myEvent.subscribe(/* ... */);
+
+panelRef.afterClosed().subscribe(() => {
+  subscription.unsubscribe(); // Limpieza manual si es necesario
+});
+```
+
+#### Casos de Uso Ideales
+
+- ✅ **Formularios con preview**: Actualizar vista previa mientras el usuario escribe
+- ✅ **Estados de progreso**: Mostrar barra de progreso de operaciones largas
+- ✅ **Validaciones en tiempo real**: Validar datos conforme se ingresan
+- ✅ **Confirmaciones dinámicas**: Solicitar confirmación antes de cerrar
+- ✅ **Sincronización de estados**: Mantener estado sincronizado entre panel y padre
+
 ### Prevenir Cierre
 
 ```typescript

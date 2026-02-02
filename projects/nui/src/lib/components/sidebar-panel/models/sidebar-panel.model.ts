@@ -8,6 +8,13 @@ import { Observable } from 'rxjs';
 export const SIDEBAR_PANEL_CONFIG = new InjectionToken<SidebarPanelConfig>('SIDEBAR_PANEL_CONFIG');
 
 /**
+ * Delay en milisegundos para activar el focus trap
+ * Permite que el DOM se estabilice antes de configurar el foco
+ * @constant
+ */
+export const FOCUS_TRAP_DELAY = 100;
+
+/**
  * Posición del sidebar-panel en la pantalla
  */
 export type SidebarPanelPosition = 'left' | 'right' | 'top' | 'bottom';
