@@ -98,8 +98,8 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
         icon: 'ri-question-line',
       },
       {
-        label: 'Slidepanel',
-        translationKey: 'sidebar.slidepanel',
+        label: 'Sidebar Panel',
+        translationKey: 'sidebar.sidebarPanel',
         route: '/components/sidebar-panel',
         icon: 'ri-side-bar-fill',
       }

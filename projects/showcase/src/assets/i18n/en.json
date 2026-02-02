@@ -22,6 +22,7 @@
     "toast": "Toast",
     "tooltip": "Tooltip",
     "slidepanel": "Slidepanel",
+    "sidebarPanel": "Sidebar Panel",
     "actionMenu": "Action Menu",
     "examples": "Examples",
     "playground": "Playground"
@@ -477,41 +478,56 @@
         "codeTitle": "Customization Options"
       }
     },
-    "slidepanel": {
-      "title": "Slidepanel",
-      "subtitle": "Sliding side panels for displaying dynamic content",
+    "sidebar-panel": {
+      "title": "Sidebar Panel",
+      "subtitle": "Sliding side panels with CDK Overlay for displaying dynamic content",
       "basic": {
         "title": "Basic Usage",
-        "description": "Open a side panel from the SlidepanelService. The panel slides in from the screen edge with smooth animation.",
+        "description": "Open a side panel from the SidebarPanelService. The panel slides in from the screen edge with smooth animation.",
         "codeTitle": "TypeScript - Open Panel",
         "htmlCodeTitle": "HTML - Trigger Button"
       },
       "sizes": {
         "title": "Sizes",
-        "description": "The Slidepanel component supports four predefined sizes: small (380px), medium (550px - default), large (780px), and xlarge (900px).",
+        "description": "The Sidebar Panel component supports six predefined sizes: xs (300px), sm (400px), md (600px - default), lg (800px), xl (1000px), and full (100%).",
         "codeTitle": "Size Configuration"
       },
       "positions": {
         "title": "Positions",
-        "description": "Control which side of the screen the panel slides from: left or right (default).",
+        "description": "Control which side of the screen the panel slides from: right (default), left, top, or bottom.",
         "codeTitle": "Position Configuration"
       },
       "dynamicComponent": {
         "title": "Dynamic Component",
-        "description": "Load any Angular component inside the panel and pass data through the inputs property.",
+        "description": "Load any Angular component inside the panel and pass data through dependency injection using SIDEBAR_PANEL_DATA token.",
         "componentCodeTitle": "Component Definition",
-        "usageCodeTitle": "Usage with Dynamic Inputs"
+        "usageCodeTitle": "Usage with Data Injection"
+      },
+      "minimizable": {
+        "title": "Minimizable Panel",
+        "description": "Panels can be minimized to a side tab to free up screen space while preserving state. Click the minimize button in the header or use programmatic control.",
+        "codeTitle": "Minimizable Configuration"
       },
       "closeButton": {
         "title": "Close Button",
         "description": "Control the visibility of the close button in the panel header.",
         "codeTitle": "Hide Close Button"
       },
+      "noBackdrop": {
+        "title": "Without Backdrop",
+        "description": "Open panels without the dark overlay background. Useful for non-modal panels that allow interaction with the page.",
+        "codeTitle": "No Backdrop Configuration"
+      },
+      "multiple": {
+        "title": "Multiple Panels",
+        "description": "Open multiple panels simultaneously from different sides. Control z-index stacking and close all at once.",
+        "codeTitle": "Multiple Panels Example"
+      },
       "api": {
         "title": "API",
-        "description": "Available interfaces and methods of the Slidepanel component.",
-        "entityCodeTitle": "SlidepanelEntity Interface",
-        "serviceCodeTitle": "SlidepanelService API"
+        "description": "Available interfaces and methods of the SidebarPanel component.",
+        "serviceCodeTitle": "SidebarPanelService API",
+        "refCodeTitle": "SidebarPanelRef API"
       },
       "styling": {
         "title": "Styling and Customization",

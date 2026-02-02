@@ -22,6 +22,7 @@
     "toast": "Toast",
     "tooltip": "Tooltip",
     "slidepanel": "Slidepanel",
+    "sidebarPanel": "Sidebar Panel",
     "actionMenu": "Menú de Acciones"
   },
   "presets": {
@@ -439,41 +440,56 @@
         "codeTitle": "Toast de Loading"
       }
     },
-    "slidepanel": {
-      "title": "Slidepanel",
-      "subtitle": "Paneles deslizantes laterales para mostrar contenido dinámico",
+    "sidebar-panel": {
+      "title": "Sidebar Panel",
+      "subtitle": "Paneles laterales deslizantes con CDK Overlay para mostrar contenido dinámico",
       "basic": {
         "title": "Uso Básico",
-        "description": "Abre un panel lateral desde el servicio SlidepanelService. El panel se desliza desde el borde de la pantalla con una animación suave.",
+        "description": "Abre un panel lateral desde el servicio SidebarPanelService. El panel se desliza desde el borde de la pantalla con una animación suave.",
         "codeTitle": "TypeScript - Abrir Panel",
         "htmlCodeTitle": "HTML - Botón Trigger"
       },
       "sizes": {
         "title": "Tamaños",
-        "description": "El componente Slidepanel admite cuatro tamaños predefinidos: small (380px), medium (550px - predeterminado), large (780px) y xlarge (900px).",
+        "description": "El componente Sidebar Panel admite seis tamaños predefinidos: xs (300px), sm (400px), md (600px - predeterminado), lg (800px), xl (1000px) y full (100%).",
         "codeTitle": "Configuración de Tamaños"
       },
       "positions": {
         "title": "Posiciones",
-        "description": "Controla desde qué lado de la pantalla se desliza el panel: left (izquierda) o right (derecha - predeterminado).",
+        "description": "Controla desde qué lado de la pantalla se desliza el panel: right (derecha - predeterminado), left (izquierda), top (arriba) o bottom (abajo).",
         "codeTitle": "Configuración de Posiciones"
       },
       "dynamicComponent": {
         "title": "Componente Dinámico",
-        "description": "Carga cualquier componente Angular dentro del panel y pasa datos mediante la propiedad inputs.",
+        "description": "Carga cualquier componente Angular dentro del panel y pasa datos mediante inyección de dependencias usando el token SIDEBAR_PANEL_DATA.",
         "componentCodeTitle": "Definición del Componente",
-        "usageCodeTitle": "Uso con Inputs Dinámicos"
+        "usageCodeTitle": "Uso con Inyección de Datos"
+      },
+      "minimizable": {
+        "title": "Panel Minimizable",
+        "description": "Los paneles pueden minimizarse a una pestaña lateral para liberar espacio en pantalla mientras se preserva el estado. Haz clic en el botón minimizar del header o usa control programático.",
+        "codeTitle": "Configuración Minimizable"
       },
       "closeButton": {
         "title": "Botón de Cerrar",
         "description": "Controla la visibilidad del botón de cerrar en el header del panel.",
         "codeTitle": "Ocultar Botón de Cerrar"
       },
+      "noBackdrop": {
+        "title": "Sin Backdrop",
+        "description": "Abre paneles sin el fondo oscuro superpuesto. Útil para paneles no modales que permiten interacción con la página.",
+        "codeTitle": "Configuración Sin Backdrop"
+      },
+      "multiple": {
+        "title": "Múltiples Paneles",
+        "description": "Abre múltiples paneles simultáneamente desde diferentes lados. Controla el apilamiento con z-index y cierra todos a la vez.",
+        "codeTitle": "Ejemplo de Múltiples Paneles"
+      },
       "api": {
         "title": "API",
-        "description": "Interfaces y métodos disponibles del componente Slidepanel.",
-        "entityCodeTitle": "SlidepanelEntity Interface",
-        "serviceCodeTitle": "SlidepanelService API"
+        "description": "Interfaces y métodos disponibles del componente SidebarPanel.",
+        "serviceCodeTitle": "API de SidebarPanelService",
+        "refCodeTitle": "API de SidebarPanelRef"
       },
       "styling": {
         "title": "Estilos y Personalización",
