@@ -163,6 +163,17 @@
         "title": "Usando Directiva",
         "description": "Aplica estilos de botón a elementos HTML nativos usando la directiva nuiButton. Funciona con elementos <code>&lt;button&gt;</code> y <code>&lt;a&gt;</code>.",
         "codeTitle": "Directiva de Botón"
+      },
+      "api": {
+        "title": "API y Referencia",
+        "description": "Documentación completa de inputs y outputs del componente Button para integrar en tus proyectos.",
+        "componentCodeTitle": "Inputs y Outputs del Componente",
+        "usageCodeTitle": "Ejemplo de Uso Completo"
+      },
+      "styling": {
+        "title": "Estilos y Personalización",
+        "description": "Personaliza la apariencia del botón mediante variables CSS. Controla tamaños, tipografía, colores y más.",
+        "codeTitle": "Variables CSS Disponibles"
       }
     },
     "actionMenu": {
@@ -230,6 +241,18 @@
         "htmlTitle": "Template HTML",
         "tsTitle": "TypeScript",
         "cssTitle": "Estilos CSS"
+      },
+      "api": {
+        "title": "API y Referencia",
+        "description": "Documentación completa de inputs, outputs y la interfaz ActionMenuItem para integrar el componente en tus proyectos.",
+        "componentCodeTitle": "Inputs y Outputs del Componente",
+        "itemInterfaceCodeTitle": "Interface ActionMenuItem",
+        "usageCodeTitle": "Ejemplo de Uso Completo"
+      },
+      "styling": {
+        "title": "Estilos y Personalización",
+        "description": "Personaliza la apariencia del menú mediante variables CSS. Controla colores, espaciado, tipografía y más.",
+        "codeTitle": "Variables CSS Disponibles"
       }
     },
     "avatar": {
@@ -271,6 +294,17 @@
         "title": "Manejo de Errores (Fallback)",
         "description": "Sistema de recuperación automática. Si la URL de la imagen falla (error 404), el componente cambia instantáneamente a mostrar las iniciales o el icono de respaldo sin romper el diseño.",
         "codeTitle": "Ejemplo de Error de Carga"
+      },
+      "api": {
+        "title": "API y Referencia",
+        "description": "Documentación completa de inputs y outputs del componente Avatar para integrar en tus proyectos.",
+        "inputsCodeTitle": "Inputs y Outputs del Componente",
+        "usageCodeTitle": "Ejemplo de Uso Completo"
+      },
+      "styling": {
+        "title": "Estilos y Personalización",
+        "description": "Personaliza la apariencia del avatar mediante variables CSS. Controla tamaños, colores, bordes y más.",
+        "codeTitle": "Variables CSS Disponibles"
       }
     },
     "buttonGroup": {
@@ -313,6 +347,17 @@
         "title": "Ancho Completo",
         "note": "Usa <code>width='full'</code> para que los botones se expandan y ocupen todo el espacio disponible equitativamente.",
         "codeTitle": "Botones Expansibles"
+      },
+      "api": {
+        "title": "API y Referencia",
+        "description": "Documentación completa de inputs, outputs y uso avanzado del componente Button Group.",
+        "inputsCodeTitle": "Inputs y Outputs del Componente",
+        "usageCodeTitle": "Ejemplo de Uso Completo con Objetos"
+      },
+      "styling": {
+        "title": "Estilos y Personalización",
+        "description": "Personaliza la apariencia del grupo de botones mediante variables CSS. Controla espaciado, colores, sombras y más.",
+        "codeTitle": "Variables CSS Disponibles"
       }
     },
     "paginator": {
@@ -345,6 +390,18 @@
         "description": "Define un conjunto personalizado de opciones para el tamaño de página.",
         "note": "Usando el input <code>size</code> podrás ofrecer a los usuarios un conjunto específico de tamaños de página para elegir.",
         "codeTitle": "Tamaños Personalizados"
+      },
+      "api": {
+        "title": "API y Referencia",
+        "description": "Documentación completa de inputs, outputs e interfaces del componente Paginator para integración avanzada.",
+        "inputsCodeTitle": "Inputs y Outputs del Componente",
+        "interfacesCodeTitle": "Interfaces PaginatorLayout e InfiniteScrollConfig",
+        "usageCodeTitle": "Ejemplo de Uso Completo"
+      },
+      "styling": {
+        "title": "Estilos y Personalización",
+        "description": "Personaliza la apariencia del paginador mediante variables CSS. Controla layout, botones, números de página y más.",
+        "codeTitle": "Variables CSS Disponibles"
       }
     },
     "popover": {
@@ -404,6 +461,18 @@
         "description": "Controla dinámicamente si el popover está habilitado o deshabilitado usando la propiedad <code>popoverDisabled</code>.",
         "htmlTitle": "HTML",
         "tsTitle": "TypeScript"
+      },
+      "api": {
+        "title": "API y Referencia",
+        "description": "Documentación completa de la directiva nuiPopover, tokens de inyección y uso avanzado.",
+        "directiveCodeTitle": "Inputs y Outputs de la Directiva",
+        "tokensCodeTitle": "Tokens de Inyección para Componentes",
+        "usageCodeTitle": "Ejemplo de Uso Completo"
+      },
+      "styling": {
+        "title": "Estilos y Personalización",
+        "description": "Personaliza la apariencia del popover mediante variables CSS. Controla colores, tamaño, sombras y animaciones.",
+        "codeTitle": "Variables CSS Disponibles"
       }
     },
     "toast": {
@@ -438,6 +507,18 @@
         "title": "Toast de Carga",
         "description": "Muestra un toast con estado de carga que puede actualizarse dinámicamente cuando la operación completa.",
         "codeTitle": "Toast de Loading"
+      },
+      "api": {
+        "title": "API y Referencia",
+        "description": "Documentación completa del ToastService, interfaces y uso avanzado del sistema de notificaciones.",
+        "serviceCodeTitle": "Métodos del ToastService",
+        "interfacesCodeTitle": "Interfaces ToastOptions, ToastAction y ToastRef",
+        "usageCodeTitle": "Ejemplo de Uso Completo"
+      },
+      "styling": {
+        "title": "Estilos y Personalización",
+        "description": "Personaliza la apariencia de los toasts mediante variables CSS. Controla colores, tamaño, animaciones y más.",
+        "codeTitle": "Variables CSS Disponibles"
       }
     },
     "sidebar-panel": {
@@ -479,6 +560,11 @@
         "title": "Sin Backdrop",
         "description": "Abre paneles sin el fondo oscuro superpuesto. Útil para paneles no modales que permiten interacción con la página.",
         "codeTitle": "Configuración Sin Backdrop"
+      },
+      "customBackdrop": {
+        "title": "Backdrop Personalizado",
+        "description": "Personaliza el backdrop con clases CSS custom. Puedes aplicar efectos como blur, colores personalizados y transiciones.",
+        "codeTitle": "Backdrop con Estilos Custom"
       },
       "multiple": {
         "title": "Múltiples Paneles",
@@ -538,6 +624,17 @@
         "description": "Controla dinámicamente si el tooltip está habilitado o deshabilitado.",
         "note": "Usa la propiedad <code>tooltipDisabled</code> para activar o desactivar el tooltip según sea necesario.",
         "codeTitle": "Tooltip Deshabilitado"
+      },
+      "api": {
+        "title": "API y Referencia",
+        "description": "Documentación completa de la directiva nuiTooltip con todos sus inputs, outputs y ejemplos de uso.",
+        "directiveCodeTitle": "Inputs y Outputs de la Directiva",
+        "usageCodeTitle": "Ejemplo de Uso Completo"
+      },
+      "styling": {
+        "title": "Estilos y Personalización",
+        "description": "Personaliza la apariencia del tooltip mediante variables CSS. Controla colores, tamaño, animaciones y más.",
+        "codeTitle": "Variables CSS Disponibles"
       }
     }
   }

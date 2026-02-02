@@ -43,11 +43,13 @@ openPanel() {
     {
       id: 'defaults',
       title: 'Configuración por Defecto',
-      description: 'Prueba el panel usando SOLO valores por defecto de la configuración global. Ideal para verificar que los cambios en provideNUIConfig() se aplican correctamente.',
+      description:
+        'Prueba el panel usando SOLO valores por defecto de la configuración global. Ideal para verificar que los cambios en provideNUIConfig() se aplican correctamente.',
       anchor: 'defaults',
       note: {
         type: 'info',
-        content: 'Este panel no recibe configuración específica, por lo que usa los valores definidos en <code>provideNUIConfig({ sidebarPanel: {...} })</code> en <code>app.config.ts</code>. Si no hay configuración global, usa los defaults del componente.'
+        content:
+          'Este panel no recibe configuración específica, por lo que usa los valores definidos en <code>provideNUIConfig({ sidebarPanel: {...} })</code> en <code>app.config.ts</code>. Si no hay configuración global, usa los defaults del componente.',
       },
       examples: [
         {
@@ -302,6 +304,35 @@ this.sidebarPanelService.open(MyContentComponent, {
       ],
     },
     {
+      id: 'custom-backdrop',
+      title: 'components.sidebar-panel.customBackdrop.title',
+      description: 'components.sidebar-panel.customBackdrop.description',
+      anchor: 'backdrop-personalizado',
+      examples: [
+        {
+          title: 'components.sidebar-panel.customBackdrop.codeTitle',
+          code: `// Backdrop personalizado con clase CSS custom
+this.sidebarPanelService.open(MyContentComponent, {
+  title: 'Panel con Backdrop Custom',
+  backdropClass: 'custom-backdrop-blur'
+});
+
+// CSS para el backdrop personalizado
+::ng-deep .custom-backdrop-blur {
+  backdrop-filter: blur(8px);
+  background-color: rgba(59, 130, 246, 0.25) !important;
+  transition: opacity 300ms ease-in-out;
+}
+
+// También puedes usar múltiples clases
+this.sidebarPanelService.open(MyContentComponent, {
+  backdropClass: ['custom-backdrop', 'with-animation']
+});`,
+          language: 'typescript',
+        },
+      ],
+    },
+    {
       id: 'multiple',
       title: 'components.sidebar-panel.multiple.title',
       description: 'components.sidebar-panel.multiple.description',
@@ -326,6 +357,103 @@ this.sidebarPanelService.open(Panel2Component, {
 
 // Cerrar todos los panels
 this.sidebarPanelService.closeAll();`,
+          language: 'typescript',
+        },
+      ],
+    },
+    {
+      id: 'events',
+      title: 'Comunicación con Eventos',
+      description:
+        'Demuestra cómo capturar eventos @Output() emitidos desde un componente dinámico cargado dentro del panel. Los eventos se capturan a través de panelRef.componentInstance.',
+      anchor: 'eventos',
+      note: {
+        type: 'info',
+        content:
+          'Los eventos @Output() del componente dinámico funcionan exactamente igual que en cualquier componente Angular. Accede a ellos mediante <code>panelRef.componentInstance</code>.',
+      },
+      examples: [
+        {
+          title: 'TypeScript - Captura de Eventos',
+          code: `// Abrir panel con componente que emite eventos
+openPanelWithEvents() {
+  const panelRef = this.sidebarPanelService.open(EventExampleComponent, {
+    title: 'Panel con Eventos',
+    position: 'right',
+    size: 'md'
+  });
+
+  // Obtener instancia del componente dinámico
+  const instance = panelRef.componentInstance;
+
+  if (instance) {
+    // Suscribirse a eventos @Output()
+    instance.dataChanged.subscribe((data) => {
+      console.log('Datos cambiados:', data);
+      alert(\`Nuevo valor: \${data.value}\`);
+    });
+
+    instance.statusChanged.subscribe((status) => {
+      console.log('Estado:', status);
+    });
+
+    instance.beforeClose.subscribe((result) => {
+      console.log('Se va a cerrar con:', result);
+    });
+  }
+
+  // Capturar resultado final al cerrar
+  panelRef.afterClosed().subscribe((result) => {
+    console.log('Panel cerrado. Resultado:', result);
+  });
+}`,
+          language: 'typescript',
+        },
+        {
+          title: 'Componente Dinámico - Definir Eventos',
+          code: `// event-example.component.ts
+import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { SIDEBAR_PANEL_REF } from 'nui';
+
+interface DataPayload {
+  value: string;
+  timestamp: Date;
+}
+
+@Component({
+  selector: 'app-event-example',
+  template: \`
+    <div>
+      <button (click)="emitDataChanged()">
+        Emitir Evento
+      </button>
+      
+      <button (click)="closeWithResult()">
+        Cerrar Panel
+      </button>
+    </div>
+  \`
+})
+export class EventExampleComponent {
+  private readonly panelRef = inject(SIDEBAR_PANEL_REF);
+
+  // Definir eventos @Output()
+  @Output() dataChanged = new EventEmitter<DataPayload>();
+  @Output() statusChanged = new EventEmitter<string>();
+  @Output() beforeClose = new EventEmitter<any>();
+
+  emitDataChanged(): void {
+    this.dataChanged.emit({
+      value: 'New data',
+      timestamp: new Date()
+    });
+  }
+
+  closeWithResult(): void {
+    this.beforeClose.emit({ action: 'saved' });
+    this.panelRef.close({ success: true });
+  }
+}`,
           language: 'typescript',
         },
       ],
@@ -438,101 +566,6 @@ class SidebarPanelRef<T, R> {
   }
 }`,
           language: 'scss',
-        },
-      ],
-    },
-    {
-      id: 'events',
-      title: 'Comunicación con Eventos',
-      description: 'Demuestra cómo capturar eventos @Output() emitidos desde un componente dinámico cargado dentro del panel. Los eventos se capturan a través de panelRef.componentInstance.',
-      anchor: 'eventos',
-      note: {
-        type: 'info',
-        content: 'Los eventos @Output() del componente dinámico funcionan exactamente igual que en cualquier componente Angular. Accede a ellos mediante <code>panelRef.componentInstance</code>.'
-      },
-      examples: [
-        {
-          title: 'TypeScript - Captura de Eventos',
-          code: `// Abrir panel con componente que emite eventos
-openPanelWithEvents() {
-  const panelRef = this.sidebarPanelService.open(EventExampleComponent, {
-    title: 'Panel con Eventos',
-    position: 'right',
-    size: 'md'
-  });
-
-  // Obtener instancia del componente dinámico
-  const instance = panelRef.componentInstance;
-
-  if (instance) {
-    // Suscribirse a eventos @Output()
-    instance.dataChanged.subscribe((data) => {
-      console.log('Datos cambiados:', data);
-      alert(\`Nuevo valor: \${data.value}\`);
-    });
-
-    instance.statusChanged.subscribe((status) => {
-      console.log('Estado:', status);
-    });
-
-    instance.beforeClose.subscribe((result) => {
-      console.log('Se va a cerrar con:', result);
-    });
-  }
-
-  // Capturar resultado final al cerrar
-  panelRef.afterClosed().subscribe((result) => {
-    console.log('Panel cerrado. Resultado:', result);
-  });
-}`,
-          language: 'typescript',
-        },
-        {
-          title: 'Componente Dinámico - Definir Eventos',
-          code: `// event-example.component.ts
-import { Component, EventEmitter, Output, inject } from '@angular/core';
-import { SIDEBAR_PANEL_REF } from 'nui';
-
-interface DataPayload {
-  value: string;
-  timestamp: Date;
-}
-
-@Component({
-  selector: 'app-event-example',
-  template: \`
-    <div>
-      <button (click)="emitDataChanged()">
-        Emitir Evento
-      </button>
-      
-      <button (click)="closeWithResult()">
-        Cerrar Panel
-      </button>
-    </div>
-  \`
-})
-export class EventExampleComponent {
-  private readonly panelRef = inject(SIDEBAR_PANEL_REF);
-
-  // Definir eventos @Output()
-  @Output() dataChanged = new EventEmitter<DataPayload>();
-  @Output() statusChanged = new EventEmitter<string>();
-  @Output() beforeClose = new EventEmitter<any>();
-
-  emitDataChanged(): void {
-    this.dataChanged.emit({
-      value: 'New data',
-      timestamp: new Date()
-    });
-  }
-
-  closeWithResult(): void {
-    this.beforeClose.emit({ action: 'saved' });
-    this.panelRef.close({ success: true });
-  }
-}`,
-          language: 'typescript',
         },
       ],
     },

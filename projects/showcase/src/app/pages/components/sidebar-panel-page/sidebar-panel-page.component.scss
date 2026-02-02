@@ -114,3 +114,21 @@
     flex-wrap: wrap;
   }
 }
+
+// ==========================================
+// BACKDROP PERSONALIZADO
+// ==========================================
+// Ejemplo de backdrop custom con blur y color personalizado
+// Se aplica usando backdropClass: 'custom-backdrop-blur'
+
+::ng-deep .custom-backdrop-blur {
+  // Efecto blur para desenfocar el contenido de fondo
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  
+  // Color personalizado (azul semi-transparente)
+  background-color: rgba(59, 130, 246, 0.25) !important;
+  
+  // Transición suave al aparecer/desaparecer
+  transition: opacity 300ms ease-in-out, backdrop-filter 300ms ease-in-out;
+}

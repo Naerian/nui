@@ -366,5 +366,206 @@ export class UserProfilePopoverComponent {
         },
       ],
     },
+    {
+      id: 'api',
+      title: 'components.popover.api.title',
+      description: 'components.popover.api.description',
+      anchor: 'api',
+      examples: [
+        {
+          title: 'components.popover.api.directiveCodeTitle',
+          code: `// Inputs de la directiva nuiPopover
+@Input() nuiPopover: string | TemplateRef<any> | Type<any>; // Contenido del popover
+@Input() popoverPosition: PopoverPosition = 'top'; // Posición: 'top' | 'bottom' | 'left' | 'right'
+@Input() popoverEvent: 'click' | 'hover' | 'focus' | 'manual' = 'click'; // Evento de activación
+@Input() popoverData?: any;                        // Datos para componentes dinámicos
+@Input() popoverShowArrow = true;                  // Mostrar flecha
+@Input() popoverMaxWidth = '300px';                // Ancho máximo del popover
+@Input() popoverClass?: string;                    // Clase CSS personalizada
+@Input() popoverOffset = 8;                        // Distancia desde el trigger (px)
+@Input() popoverShowDelay = 0;                     // Delay al mostrar (ms)
+@Input() popoverHideDelay = 0;                     // Delay al ocultar (ms)
+@Input() popoverCloseOnClickOutside = true;        // Cerrar al hacer click fuera
+@Input() popoverCloseOnEscape = true;              // Cerrar con tecla Escape
+@Input() popoverAllowMultiple = false;             // Permitir múltiples popovers abiertos
+@Input() popoverBackdrop = false;                  // Mostrar backdrop
+@Input() backdropClose = true;                     // Cerrar al hacer click en backdrop
+@Input() popoverDisabled = false;                  // Deshabilitar popover
+
+// Outputs de la directiva
+@Output() popoverOpened = new EventEmitter<void>(); // Se emite al abrir
+@Output() popoverClosed = new EventEmitter<void>(); // Se emite al cerrar`,
+          language: 'typescript',
+        },
+        {
+          title: 'components.popover.api.tokensCodeTitle',
+          code: `// Tokens de inyección para componentes dinámicos
+import { POPOVER_DATA, POPOVER_CLOSE } from 'nui';
+
+@Component({
+  selector: 'app-my-popover',
+  template: \`
+    <div>
+      <p>{{ data.message }}</p>
+      <button (click)="close()">Cerrar</button>
+    </div>
+  \`
+})
+export class MyPopoverComponent {
+  // Inyectar datos pasados al popover
+  data = inject(POPOVER_DATA);
+  
+  // Inyectar función para cerrar el popover
+  close = inject(POPOVER_CLOSE);
+}`,
+          language: 'typescript',
+        },
+        {
+          title: 'components.popover.api.usageCodeTitle',
+          code: `// Ejemplo completo de uso
+import { Component, TemplateRef, signal } from '@angular/core';
+import { MyPopoverComponent } from './my-popover.component';
+
+@Component({
+  selector: 'app-example',
+  template: \`
+    <!-- Con texto simple -->
+    <button
+      nuiPopover="Información del elemento"
+      popoverPosition="top"
+      popoverEvent="hover"
+      [popoverShowDelay]="300"
+      [popoverHideDelay]="100"
+      (popoverOpened)="onOpen()"
+      (popoverClosed)="onClose()">
+      Texto
+    </button>
+    
+    <!-- Con template -->
+    <button
+      [nuiPopover]="myTemplate"
+      popoverPosition="bottom"
+      popoverMaxWidth="400px"
+      popoverClass="custom-popover">
+      Template
+    </button>
+    
+    <ng-template #myTemplate let-close="close">
+      <div class="rich-content">
+        <h3>Título</h3>
+        <p>Contenido personalizado</p>
+        <button (click)="handleAction(); close()">Aceptar</button>
+      </div>
+    </ng-template>
+    
+    <!-- Con componente dinámico -->
+    <button
+      [nuiPopover]="MyPopoverComponent"
+      [popoverData]="{ userId: 123, userName: 'John' }"
+      [popoverBackdrop]="true"
+      [backdropClose]="false">
+      Componente
+    </button>
+  \`
+})
+export class ExampleComponent {
+  MyPopoverComponent = MyPopoverComponent;
+  
+  onOpen(): void {
+    console.log('Popover abierto');
+  }
+  
+  onClose(): void {
+    console.log('Popover cerrado');
+  }
+  
+  handleAction(): void {
+    console.log('Acción ejecutada');
+  }
+}`,
+          language: 'typescript',
+        },
+      ],
+    },
+    {
+      id: 'styling',
+      title: 'components.popover.styling.title',
+      description: 'components.popover.styling.description',
+      anchor: 'estilos',
+      examples: [
+        {
+          title: 'components.popover.styling.codeTitle',
+          code: `// Personalización de variables CSS
+:root {
+  /* Contenedor del popover */
+  --nui-popover-bg: var(--nui-bg-primary);
+  --nui-popover-text: var(--nui-text-primary);
+  --nui-popover-border: var(--nui-border-primary);
+  --nui-popover-border-radius: var(--border-radius-md);
+  --nui-popover-shadow: var(--nui-shadow-lg);
+  --nui-popover-padding: var(--spacing-md);
+  --nui-popover-max-width: 300px;
+  --nui-popover-min-width: 100px;
+  
+  /* Z-index */
+  --nui-popover-z-index: 1050;
+  
+  /* Flecha */
+  --nui-popover-arrow-size: 8px;
+  --nui-popover-arrow-bg: var(--nui-bg-primary);
+  --nui-popover-arrow-border: var(--nui-border-primary);
+  
+  /* Backdrop */
+  --nui-popover-backdrop-bg: rgba(0, 0, 0, 0.5);
+  --nui-popover-backdrop-z-index: 1049;
+  
+  /* Animaciones */
+  --nui-popover-animation-duration: 200ms;
+  --nui-popover-animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Estados */
+  --nui-popover-focus-ring: 2px solid var(--primary-color);
+  --nui-popover-focus-ring-offset: 2px;
+}
+
+// Ejemplo de popover con estilo custom
+.my-custom-popover {
+  --nui-popover-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --nui-popover-text: white;
+  --nui-popover-border: transparent;
+  --nui-popover-border-radius: 12px;
+  --nui-popover-padding: 1.5rem;
+  --nui-popover-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  --nui-popover-arrow-bg: #667eea;
+}
+
+// Ejemplo de popover minimalista
+.minimal-popover {
+  --nui-popover-bg: white;
+  --nui-popover-border: 1px solid #e0e0e0;
+  --nui-popover-border-radius: 4px;
+  --nui-popover-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --nui-popover-padding: 0.75rem 1rem;
+}
+
+// Ejemplo con animación personalizada
+.animated-popover {
+  animation: popoverSlideIn var(--nui-popover-animation-duration) var(--nui-popover-animation-timing);
+}
+
+@keyframes popoverSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}`,
+          language: 'scss',
+        },
+      ],
+    },
   ],
 };

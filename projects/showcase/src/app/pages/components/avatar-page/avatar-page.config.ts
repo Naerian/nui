@@ -146,5 +146,119 @@ export const AVATAR_PAGE_CONFIG: ComponentPageConfig = {
         },
       ],
     },
+    {
+      id: 'api',
+      title: 'components.avatar.api.title',
+      description: 'components.avatar.api.description',
+      anchor: 'api',
+      examples: [
+        {
+          title: 'components.avatar.api.inputsCodeTitle',
+          code: `// Inputs del componente
+@Input() src?: string;                          // URL de la imagen
+@Input() alt?: string;                          // Texto alternativo
+@Input() initials?: string;                     // Iniciales a mostrar
+@Input() icon?: string;                         // Icono (Remix Icon)
+@Input() size: AvatarSize = 'md';              // Tamaño: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+@Input() customSize?: number;                  // Tamaño personalizado en píxeles
+@Input() variant: AvatarVariant = 'circular';  // Forma: 'circular' | 'rounded' | 'square'
+@Input() color?: ThemeColor;                   // Color de fondo cuando no hay imagen
+@Input() textColor?: string;                   // Color del texto/icono
+
+// Outputs del componente
+@Output() imageError = new EventEmitter<Event>(); // Se emite cuando falla la carga de imagen`,
+          language: 'typescript',
+        },
+        {
+          title: 'components.avatar.api.usageCodeTitle',
+          code: `// Ejemplo completo de uso
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-example',
+  template: \`
+    <nui-avatar
+      [src]="userImage"
+      [alt]="userName"
+      [initials]="userInitials"
+      size="lg"
+      variant="rounded"
+      color="primary"
+      (imageError)="onImageError($event)">
+    </nui-avatar>
+  \`
+})
+export class ExampleComponent {
+  userImage = 'https://example.com/user.jpg';
+  userName = 'John Doe';
+  userInitials = 'JD';
+
+  onImageError(event: Event): void {
+    console.log('Error loading image:', event);
+    // El componente automáticamente muestra el fallback
+  }
+}`,
+          language: 'typescript',
+        },
+      ],
+    },
+    {
+      id: 'styling',
+      title: 'components.avatar.styling.title',
+      description: 'components.avatar.styling.description',
+      anchor: 'estilos',
+      examples: [
+        {
+          title: 'components.avatar.styling.codeTitle',
+          code: `// Personalización de variables CSS
+:root {
+  /* Tamaños predefinidos */
+  --nui-avatar-size-xs: 24px;
+  --nui-avatar-size-sm: 32px;
+  --nui-avatar-size-md: 40px;
+  --nui-avatar-size-lg: 48px;
+  --nui-avatar-size-xl: 64px;
+  
+  /* Tipografía y escalado */
+  --nui-avatar-font-size-xs: 10px;
+  --nui-avatar-font-size-sm: 12px;
+  --nui-avatar-font-size-md: 14px;
+  --nui-avatar-font-size-lg: 16px;
+  --nui-avatar-font-size-xl: 20px;
+  --nui-avatar-font-weight: var(--font-weight-semibold);
+  
+  /* Tamaño de iconos */
+  --nui-avatar-icon-size-xs: 14px;
+  --nui-avatar-icon-size-sm: 16px;
+  --nui-avatar-icon-size-md: 20px;
+  --nui-avatar-icon-size-lg: 24px;
+  --nui-avatar-icon-size-xl: 32px;
+  
+  /* Bordes redondeados */
+  --nui-avatar-border-radius-circular: 50%;
+  --nui-avatar-border-radius-rounded: var(--border-radius-md);
+  --nui-avatar-border-radius-square: 0;
+  
+  /* Colores por defecto */
+  --nui-avatar-bg-default: var(--nui-bg-tertiary);
+  --nui-avatar-text-default: var(--nui-text-secondary);
+  
+  /* Borde opcional */
+  --nui-avatar-border-width: 0;
+  --nui-avatar-border-color: transparent;
+}
+
+// Ejemplo de customización
+.my-custom-avatar {
+  --nui-avatar-size-md: 56px;
+  --nui-avatar-font-size-md: 18px;
+  --nui-avatar-border-radius-rounded: 12px;
+  --nui-avatar-border-width: 2px;
+  --nui-avatar-border-color: var(--primary-color);
+}`,
+          language: 'scss',
+        },
+      ],
+    },
   ],
 };

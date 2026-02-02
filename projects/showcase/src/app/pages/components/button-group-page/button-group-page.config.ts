@@ -186,5 +186,147 @@ textFormats = [
         },
       ],
     },
+    {
+      id: 'api',
+      title: 'components.buttonGroup.api.title',
+      description: 'components.buttonGroup.api.description',
+      anchor: 'api',
+      examples: [
+        {
+          title: 'components.buttonGroup.api.inputsCodeTitle',
+          code: `// Inputs del componente
+@Input() options: T[] = [];                    // Array de opciones (strings o objetos)
+@Input() mode: 'radio' | 'checkbox' = 'radio'; // Tipo de selección
+@Input() labelBy?: keyof T;                    // Propiedad para el label (objetos)
+@Input() valueBy?: keyof T;                    // Propiedad para el value (objetos)
+@Input() iconBy?: keyof T;                     // Propiedad para el icono (objetos)
+@Input() disabledBy?: keyof T;                 // Propiedad para estado disabled (objetos)
+@Input() iconOnly = false;                     // Mostrar solo iconos sin texto
+@Input() visualVariant: 'default' | 'segmented' = 'default'; // Estilo visual
+@Input() variant: ButtonVariant = 'outline';   // Variante del botón
+@Input() color?: ButtonColor;                  // Color del tema
+@Input() size: ButtonSize = 'md';              // Tamaño: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+@Input() width: 'auto' | 'full' = 'auto';      // Ancho del grupo
+@Input() disabled = false;                     // Deshabilitar todo el grupo
+
+// Outputs del componente
+@Output() valueChange = new EventEmitter<T | T[]>(); // Cambio de valor`,
+          language: 'typescript',
+        },
+        {
+          title: 'components.buttonGroup.api.usageCodeTitle',
+          code: `// Ejemplo completo con objetos complejos
+import { Component, signal } from '@angular/core';
+
+interface Filter {
+  id: string;
+  label: string;
+  icon: string;
+  disabled?: boolean;
+}
+
+@Component({
+  selector: 'app-example',
+  template: \`
+    <nui-button-group
+      mode="checkbox"
+      visualVariant="segmented"
+      [options]="filters"
+      labelBy="label"
+      valueBy="id"
+      iconBy="icon"
+      disabledBy="disabled"
+      color="primary"
+      size="md"
+      [(ngModel)]="selectedFilters"
+      (valueChange)="onFilterChange($event)">
+    </nui-button-group>
+    
+    <p>Filtros activos: {{ selectedFilters().join(', ') }}</p>
+  \`
+})
+export class ExampleComponent {
+  filters: Filter[] = [
+    { id: 'active', label: 'Activos', icon: 'ri-checkbox-circle-line' },
+    { id: 'pending', label: 'Pendientes', icon: 'ri-time-line' },
+    { id: 'completed', label: 'Completados', icon: 'ri-check-line' },
+    { id: 'archived', label: 'Archivados', icon: 'ri-archive-line', disabled: true }
+  ];
+  
+  selectedFilters = signal<string[]>(['active']);
+  
+  onFilterChange(filters: string[]): void {
+    console.log('Filtros seleccionados:', filters);
+  }
+}`,
+          language: 'typescript',
+        },
+      ],
+    },
+    {
+      id: 'styling',
+      title: 'components.buttonGroup.styling.title',
+      description: 'components.buttonGroup.styling.description',
+      anchor: 'estilos',
+      examples: [
+        {
+          title: 'components.buttonGroup.styling.codeTitle',
+          code: `// Personalización de variables CSS
+:root {
+  /* Espaciado entre botones */
+  --nui-button-group-gap: 0;
+  --nui-button-group-segmented-gap: var(--spacing-xxs);
+  
+  /* Variante Segmented - Contenedor */
+  --nui-button-group-segmented-bg: var(--nui-bg-secondary);
+  --nui-button-group-segmented-padding: var(--spacing-xxs);
+  --nui-button-group-segmented-border-radius: var(--border-radius-md);
+  --nui-button-group-segmented-border: 1px solid var(--nui-border-primary);
+  
+  /* Variante Segmented - Botón seleccionado */
+  --nui-button-group-segmented-selected-bg: var(--nui-bg-primary);
+  --nui-button-group-segmented-selected-shadow: var(--nui-shadow-sm);
+  --nui-button-group-segmented-selected-border: 1px solid var(--nui-border-primary);
+  
+  /* Variante Segmented - Botón no seleccionado */
+  --nui-button-group-segmented-unselected-bg: transparent;
+  --nui-button-group-segmented-unselected-text: var(--nui-text-secondary);
+  
+  /* Variante Segmented - Hover */
+  --nui-button-group-segmented-hover-bg: var(--nui-bg-hover);
+  
+  /* Transiciones */
+  --nui-button-group-transition: all 0.2s ease;
+}
+
+// Ejemplo de customización para tema iOS
+.ios-style-group {
+  --nui-button-group-segmented-bg: #f2f2f7;
+  --nui-button-group-segmented-selected-bg: #ffffff;
+  --nui-button-group-segmented-border-radius: 9px;
+  --nui-button-group-segmented-padding: 2px;
+  --nui-button-group-segmented-selected-shadow: 0 3px 8px rgba(0, 0, 0, 0.12),
+                                                0 3px 1px rgba(0, 0, 0, 0.04);
+}
+
+// Ejemplo de grupo compacto
+.compact-group {
+  --nui-button-group-gap: -1px; // Solapar bordes
+  
+  ::ng-deep .nui-button-group {
+    button:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    button:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+}`,
+          language: 'scss',
+        },
+      ],
+    },
   ],
 };

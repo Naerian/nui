@@ -165,6 +165,17 @@
         "title": "Using Directive",
         "description": "Apply button styling to native HTML elements using the nuiButton directive. Works with <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> elements.",
         "codeTitle": "Button Directive"
+      },
+      "api": {
+        "title": "API Reference",
+        "description": "Complete documentation of Button component inputs and outputs for integration into your projects.",
+        "componentCodeTitle": "Component Inputs and Outputs",
+        "usageCodeTitle": "Complete Usage Example"
+      },
+      "styling": {
+        "title": "Styling and Customization",
+        "description": "Customize the button appearance using CSS variables. Control sizes, typography, colors, and more.",
+        "codeTitle": "Available CSS Variables"
       }
     },
     "actionMenu": {
@@ -232,6 +243,18 @@
         "htmlTitle": "HTML Template",
         "tsTitle": "Component Logic (TypeScript)",
         "cssTitle": "CSS Styles"
+      },
+      "api": {
+        "title": "API Reference",
+        "description": "Complete documentation of inputs, outputs, and the ActionMenuItem interface for integrating the component into your projects.",
+        "componentCodeTitle": "Component Inputs and Outputs",
+        "itemInterfaceCodeTitle": "ActionMenuItem Interface",
+        "usageCodeTitle": "Complete Usage Example"
+      },
+      "styling": {
+        "title": "Styling and Customization",
+        "description": "Customize the menu appearance using CSS variables. Control colors, spacing, typography, and more.",
+        "codeTitle": "Available CSS Variables"
       }
     },
     "avatar": {
@@ -272,8 +295,17 @@
       "error": {
         "title": "Error Handling (Fallback)",
         "description": "Automatic recovery system. If the image URL fails (404 error), the component instantly switches to showing initials or fallback icon without breaking the design.",
-        "codeTitle": "Load Error Example"
-      }
+        "codeTitle": "Load Error Example"      },
+      "api": {
+        "title": "API Reference",
+        "description": "Complete documentation of Avatar component inputs and outputs for integration into your projects.",
+        "inputsCodeTitle": "Component Inputs and Outputs",
+        "usageCodeTitle": "Complete Usage Example"
+      },
+      "styling": {
+        "title": "Styling and Customization",
+        "description": "Customize the avatar appearance using CSS variables. Control sizes, colors, borders, and more.",
+        "codeTitle": "Available CSS Variables"      }
     },
     "buttonGroup": {
       "title": "Button Group",
@@ -315,6 +347,17 @@
         "title": "Full Width",
         "note": "Use <code>width='full'</code> to make buttons expand and occupy all available space evenly.",
         "codeTitle": "Expandable Buttons"
+      },
+      "api": {
+        "title": "API Reference",
+        "description": "Complete documentation of inputs, outputs, and advanced usage of the Button Group component.",
+        "inputsCodeTitle": "Component Inputs and Outputs",
+        "usageCodeTitle": "Complete Usage Example with Objects"
+      },
+      "styling": {
+        "title": "Styling and Customization",
+        "description": "Customize the button group appearance using CSS variables. Control spacing, colors, shadows, and more.",
+        "codeTitle": "Available CSS Variables"
       }
     },
     "paginator": {
@@ -347,6 +390,18 @@
         "description": "Define a custom set of options for page size.",
         "note": "Using the <code>size</code> input you can offer users a specific set of page sizes to choose from.",
         "codeTitle": "Custom Sizes"
+      },
+      "api": {
+        "title": "API Reference",
+        "description": "Complete documentation of Paginator component inputs, outputs, and interfaces for advanced integration.",
+        "inputsCodeTitle": "Component Inputs and Outputs",
+        "interfacesCodeTitle": "PaginatorLayout and InfiniteScrollConfig Interfaces",
+        "usageCodeTitle": "Complete Usage Example"
+      },
+      "styling": {
+        "title": "Styling and Customization",
+        "description": "Customize the paginator appearance using CSS variables. Control layout, buttons, page numbers, and more.",
+        "codeTitle": "Available CSS Variables"
       }
     },
     "popover": {
@@ -406,6 +461,18 @@
         "description": "Dynamically control whether the popover is enabled or disabled using the <code>popoverDisabled</code> property.",
         "htmlTitle": "HTML",
         "tsTitle": "TypeScript"
+      },
+      "api": {
+        "title": "API Reference",
+        "description": "Complete documentation of the nuiPopover directive, injection tokens, and advanced usage.",
+        "directiveCodeTitle": "Directive Inputs and Outputs",
+        "tokensCodeTitle": "Injection Tokens for Components",
+        "usageCodeTitle": "Complete Usage Example"
+      },
+      "styling": {
+        "title": "Styling and Customization",
+        "description": "Customize the popover appearance using CSS variables. Control colors, size, shadows, and animations.",
+        "codeTitle": "Available CSS Variables"
       }
     },
     "toast": {
@@ -440,6 +507,18 @@
         "title": "Loading Toast",
         "description": "Display a toast with loading state that can be dynamically updated when the operation completes.",
         "codeTitle": "Loading Toast"
+      },
+      "api": {
+        "title": "API Reference",
+        "description": "Complete documentation of ToastService, interfaces, and advanced usage of the notification system.",
+        "serviceCodeTitle": "ToastService Methods",
+        "interfacesCodeTitle": "ToastOptions, ToastAction, and ToastRef Interfaces",
+        "usageCodeTitle": "Complete Usage Example"
+      },
+      "styling": {
+        "title": "Styling and Customization",
+        "description": "Customize the toast appearance using CSS variables. Control colors, size, animations, and more.",
+        "codeTitle": "Available CSS Variables"
       }
     },
     "tooltip": {
@@ -476,6 +555,17 @@
         "title": "Customization",
         "description": "Customize tooltip appearance: no arrow, custom width, own CSS classes, or maximum width.",
         "codeTitle": "Customization Options"
+      },
+      "api": {
+        "title": "API Reference",
+        "description": "Complete documentation of the nuiTooltip directive with all available inputs and outputs.",
+        "directiveCodeTitle": "Directive Inputs and Outputs",
+        "usageCodeTitle": "Complete Usage Example"
+      },
+      "styling": {
+        "title": "Styling and Customization",
+        "description": "Customize the tooltip appearance using CSS variables. Override these variables in your global styles or component styles.",
+        "codeTitle": "Available CSS Variables"
       }
     },
     "sidebar-panel": {
@@ -517,6 +607,11 @@
         "title": "Without Backdrop",
         "description": "Open panels without the dark overlay background. Useful for non-modal panels that allow interaction with the page.",
         "codeTitle": "No Backdrop Configuration"
+      },
+      "customBackdrop": {
+        "title": "Custom Backdrop",
+        "description": "Customize the backdrop with custom CSS classes. You can apply effects like blur, custom colors, and transitions.",
+        "codeTitle": "Backdrop with Custom Styles"
       },
       "multiple": {
         "title": "Multiple Panels",

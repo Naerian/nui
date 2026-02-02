@@ -232,7 +232,7 @@ export interface SidebarPanelConfig<D = any> {
 
   /**
    * Z-index base del panel
-   * @default 1000
+   * @default 1040
    */
   zIndex?: number;
 
@@ -295,7 +295,7 @@ export const DEFAULT_SIDEBAR_PANEL_CONFIG: Required<
   ariaLabel: 'Slide Panel',
   animationDuration: 225, // Matching Material-UI Drawer (225ms entrada, 195ms salida)
   minimizable: false,
-  zIndex: 1000,
+  zIndex: 1040, // Debe ser mayor que overlay-z-index (1039)
   allowMultiple: false,
   lazyLoad: true,
 };

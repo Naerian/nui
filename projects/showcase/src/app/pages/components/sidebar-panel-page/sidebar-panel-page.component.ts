@@ -180,6 +180,22 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
   }
 
   /**
+   * Abre un panel con backdrop personalizado
+   * Demuestra cómo aplicar estilos custom al backdrop usando backdropClass
+   */
+  openPanelWithCustomBackdrop(): void {
+    this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
+      title: 'Panel con Backdrop Custom',
+      backdropClass: 'custom-backdrop-blur',
+      position: 'right',
+      size: 'md',
+      data: {
+        message: 'Este panel tiene un backdrop personalizado con efecto blur y color custom.'
+      }
+    });
+  }
+
+  /**
    * Abre múltiples panels
    */
   openMultiplePanels(): void {

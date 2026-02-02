@@ -482,7 +482,7 @@ export class SidebarPanelService {
    * @returns Array de clases CSS
    */
   private _getBackdropClasses(config: SidebarPanelConfig): string[] {
-    const classes = ['sidebar-panel-backdrop'];
+    const classes = ['nui-sidebar-panel-backdrop'];
 
     if (config.backdropClass) {
       if (Array.isArray(config.backdropClass)) {

@@ -244,5 +244,203 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
         },
       ],
     },
+    {
+      id: 'api',
+      title: 'components.button.api.title',
+      description: 'components.button.api.description',
+      anchor: 'api',
+      examples: [
+        {
+          title: 'components.button.api.componentCodeTitle',
+          code: `// Inputs del componente y directiva
+@Input() variant: ButtonVariant = 'solid';     // Variante: 'solid' | 'outline' | 'ghost'
+@Input() color?: ButtonColor;                  // Color: 'primary' | 'secondary' | 'accent' | 'success' | 'info' | 'warning' | 'danger'
+@Input() size: ButtonSize = 'md';              // Tamaño: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+@Input() icon?: string;                        // Icono (Remix Icon)
+@Input() iconPosition: 'start' | 'end' = 'start'; // Posición del icono
+@Input() loading = false;                      // Estado de carga
+@Input() loadingPosition: 'start' | 'center' | 'end' = 'start'; // Posición del spinner
+@Input() width: 'auto' | 'full' | 'fit' = 'auto'; // Ancho del botón
+@Input() disabled = false;                     // Estado deshabilitado
+@Input() type: 'button' | 'submit' | 'reset' = 'button'; // Tipo de botón
+@Input() ariaLabel?: string;                   // Label de accesibilidad
+
+// Outputs del componente
+@Output() onClick = new EventEmitter<Event>(); // Evento de click`,
+          language: 'typescript',
+        },
+        {
+          title: 'components.button.api.usageCodeTitle',
+          code: `// Ejemplo completo de uso
+import { Component, signal } from '@angular/core';
+
+@Component({
+  selector: 'app-example',
+  template: \`
+    <nui-button
+      variant="solid"
+      color="primary"
+      size="lg"
+      icon="ri-save-line"
+      iconPosition="start"
+      [loading]="isSaving()"
+      loadingPosition="center"
+      width="full"
+      [disabled]="!isFormValid()"
+      type="submit"
+      (onClick)="handleSave()">
+      Guardar Cambios
+    </nui-button>
+    
+    <!-- Usando directiva en botón nativo -->
+    <button
+      nuiButton
+      variant="outline"
+      color="danger"
+      icon="ri-delete-bin-line"
+      [loading]="isDeleting()"
+      (click)="handleDelete()">
+      Eliminar
+    </button>
+    
+    <!-- Link con aspecto de botón -->
+    <a
+      nuiButton
+      variant="ghost"
+      color="accent"
+      icon="ri-external-link-line"
+      iconPosition="end"
+      href="/docs"
+      target="_blank">
+      Ver Documentación
+    </a>
+  \`
+})
+export class ExampleComponent {
+  isSaving = signal(false);
+  isDeleting = signal(false);
+  isFormValid = signal(true);
+  
+  async handleSave(): Promise<void> {
+    if (!this.isFormValid()) return;
+    
+    this.isSaving.set(true);
+    try {
+      await this.apiService.save();
+      console.log('Guardado exitosamente');
+    } catch (error) {
+      console.error('Error al guardar:', error);
+    } finally {
+      this.isSaving.set(false);
+    }
+  }
+  
+  async handleDelete(): Promise<void> {
+    this.isDeleting.set(true);
+    try {
+      await this.apiService.delete();
+      console.log('Eliminado exitosamente');
+    } finally {
+      this.isDeleting.set(false);
+    }
+  }
+}`,
+          language: 'typescript',
+        },
+      ],
+    },
+    {
+      id: 'styling',
+      title: 'components.button.styling.title',
+      description: 'components.button.styling.description',
+      anchor: 'estilos',
+      examples: [
+        {
+          title: 'components.button.styling.codeTitle',
+          code: `// Personalización de variables CSS
+:root {
+  /* Tamaños */
+  --nui-button-height-xs: 24px;
+  --nui-button-height-sm: 32px;
+  --nui-button-height-md: 40px;
+  --nui-button-height-lg: 48px;
+  --nui-button-height-xl: 56px;
+  
+  --nui-button-padding-x-xs: var(--spacing-sm);
+  --nui-button-padding-x-sm: var(--spacing-md);
+  --nui-button-padding-x-md: var(--spacing-lg);
+  --nui-button-padding-x-lg: var(--spacing-xl);
+  --nui-button-padding-x-xl: var(--spacing-2xl);
+  
+  /* Tipografía */
+  --nui-button-font-size-xs: var(--font-size-xs);
+  --nui-button-font-size-sm: var(--font-size-sm);
+  --nui-button-font-size-md: var(--font-size-md);
+  --nui-button-font-size-lg: var(--font-size-lg);
+  --nui-button-font-size-xl: var(--font-size-xl);
+  --nui-button-font-weight: var(--font-weight-medium);
+  
+  /* Bordes y forma */
+  --nui-button-border-radius: var(--border-radius-md);
+  --nui-button-border-width: 1px;
+  
+  /* Espaciado interno */
+  --nui-button-icon-gap: var(--spacing-sm);
+  --nui-button-icon-only-padding: var(--spacing-sm);
+  
+  /* Transiciones */
+  --nui-button-transition: all 0.2s ease;
+  
+  /* Estados - se generan dinámicamente por color */
+  /* Solid variant */
+  --nui-button-solid-bg: var(--primary-color);
+  --nui-button-solid-text: var(--nui-text-on-primary);
+  --nui-button-solid-hover-bg: var(--primary-hover);
+  --nui-button-solid-active-bg: var(--primary-active);
+  
+  /* Outline variant */
+  --nui-button-outline-border: var(--primary-color);
+  --nui-button-outline-text: var(--primary-color);
+  --nui-button-outline-hover-bg: var(--primary-bg-subtle);
+  
+  /* Ghost variant */
+  --nui-button-ghost-text: var(--primary-color);
+  --nui-button-ghost-hover-bg: var(--primary-bg-subtle);
+  
+  /* Disabled */
+  --nui-button-disabled-opacity: 0.5;
+  --nui-button-disabled-cursor: not-allowed;
+  
+  /* Loading */
+  --nui-button-loading-spinner-size: 16px;
+  --nui-button-loading-opacity: 0.7;
+}
+
+// Ejemplo de customización
+.my-custom-button {
+  --nui-button-border-radius: 20px;
+  --nui-button-font-weight: var(--font-weight-bold);
+  --nui-button-height-md: 44px;
+  --nui-button-padding-x-md: 24px;
+  
+  // Sombras personalizadas
+  &.nui-button--solid {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    
+    &:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      transform: translateY(-1px);
+    }
+    
+    &:active {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      transform: translateY(0);
+    }
+  }
+}`,
+          language: 'scss',
+        },
+      ],
+    },
   ],
 };

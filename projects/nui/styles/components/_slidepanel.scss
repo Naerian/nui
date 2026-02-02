@@ -1,5 +1,5 @@
-@use "../config";
-@use "../mixins";
+@use '../config';
+@use '../mixins';
 // NOTA: No importar theme ni theme-config aqu�, ya est�n incluidos globalmente en nui.scss
 
 // ==========================================
@@ -10,17 +10,30 @@
 // ==========================================
 
 // Overlay/Backdrop del sidebar-panel
-.nui-sidebar-panel-overlay {
+// Nota: Incluimos ambos selectores para compatibilidad (overlay es legacy, backdrop es actual)
+.nui-sidebar-panel-overlay,
+.nui-sidebar-panel-backdrop {
   @include mixins.overlay-backdrop();
-  z-index: var(--nui-sidebar-panel-overlay-z-index);
-  background-color: var(--nui-sidebar-panel-overlay-bg);
+  z-index: var(--nui-sidebar-panel-overlay-z-index) !important;
+  background-color: var(--nui-sidebar-panel-overlay-bg) !important;
+}
+
+// Wrapper de CDK cuando está junto al backdrop del sidebar-panel (selector de hermanos adyacentes)
+// Solo afecta al wrapper que sigue inmediatamente al backdrop del sidebar-panel
+.nui-sidebar-panel-backdrop + .cdk-global-overlay-wrapper {
+  z-index: var(--nui-sidebar-panel-z-index) !important;
+}
+
+// Contenedor específico del sidebar-panel
+.cdk-overlay-pane.sidebar-panel-pane {
+  z-index: var(--nui-sidebar-panel-z-index) !important;
 }
 
 // Host component del panel
 .sidebar-panel-container {
   position: fixed;
   overflow: hidden;
-  z-index: var(--nui-sidebar-panel-z-index);
+  z-index: var(--nui-sidebar-panel-z-index) !important;
   height: 100vh;
   background-color: var(--nui-sidebar-panel-bg);
   box-shadow: var(--nui-sidebar-panel-shadow);
@@ -56,7 +69,7 @@
 .nui-sidebar-panel {
   position: fixed;
   overflow: hidden;
-  z-index: var(--nui-sidebar-panel-z-index);
+  z-index: var(--nui-sidebar-panel-z-index) !important;
   height: 100vh;
   background-color: var(--nui-sidebar-panel-bg);
   box-shadow: var(--nui-sidebar-panel-shadow);
