@@ -216,6 +216,10 @@ panelRef.afterClosed().subscribe(result => {
       id: 'minimizable',
       title: 'components.sidebar-panel.minimizable.title',
       description: 'components.sidebar-panel.minimizable.description',
+      note: {
+        type: 'info',
+        content: 'components.sidebar-panel.minimizable.note',
+      },
       anchor: 'minimizable',
       examples: [
         {
@@ -223,16 +227,17 @@ panelRef.afterClosed().subscribe(result => {
           code: `// Panel que puede minimizarse a una pestaña
 const panelRef = this.sidebarPanelService.open(ChatComponent, {
   title: 'Chat de Soporte',
+  id: 'support-chat-panel',
   minimizable: true,
   position: 'right',
   size: 'md'
 });
 
-// Control programático
+// Control programático (opcional)
 panelRef.minimize(); // Minimizar a pestaña
 panelRef.restore();  // Restaurar desde pestaña
 
-// Verificar estado
+// Verificar estado (opcional)
 if (panelRef.isMinimized) {
   console.log('El panel está minimizado');
 }`,

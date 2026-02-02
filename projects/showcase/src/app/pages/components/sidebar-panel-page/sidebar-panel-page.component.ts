@@ -139,6 +139,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
   openMinimizablePanel(): void {
     this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
       title: 'Panel Minimizable',
+      id: 'minimizable-panel-1',
       minimizable: true,
       position: 'right',
       size: 'md',
@@ -156,6 +157,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
   openMinimizablePanel2(): void {
     this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
       title: 'Otro Panel Minimizable',
+      id: 'minimizable-panel-2',
       minimizable: true,
       position: 'right',
       size: 'sm',
@@ -223,7 +225,6 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       title: 'Panel 1 (Derecha)',
       position: 'right',
       size: 'sm',
-      allowMultiple: true,
       data: {
         message: 'Primer panel abierto desde la derecha',
       },
@@ -234,7 +235,6 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         title: 'Panel 2 (Izquierda)',
         position: 'left',
         size: 'sm',
-        allowMultiple: true,
         data: {
           message: 'Segundo panel abierto desde la izquierda',
         },

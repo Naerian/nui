@@ -124,36 +124,52 @@ export class SidebarPanelService {
   }
 
   /**
-   * Busca un panel minimizado del componente especificado con la misma posición
+   * Busca un panel minimizado del componente especificado en la misma posición
+   * 
+   * Si se proporciona un ID específico, busca ese panel exacto.
+   * Si no se proporciona ID, solo devuelve un panel si hay exactamente UNO minimizado.
+   * 
    * @param component - Tipo del componente a buscar
    * @param position - Posición del panel a buscar
-   * @returns Referencia al panel minimizado o undefined si no existe
+   * @param id - ID específico del panel a buscar (opcional)
+   * @returns Referencia al panel minimizado o undefined si no se encuentra o hay ambigüedad
    * @private
    */
-  private _findMinimizedPanel<T>(component: Type<T>, position: SidebarPanelPosition): SidebarPanelRef | undefined {
-    // Obtener todas las pestañas minimizadas en esa posición
-    const tabsInPosition = this._tabsService.getTabsByPosition(position);
-    
-    if (tabsInPosition.length === 0) {
+  private _findMinimizedPanel<T>(
+    component: Type<T>, 
+    position: SidebarPanelPosition,
+    id?: string
+  ): SidebarPanelRef | undefined {
+    // Si se proporciona un ID específico, buscar ese panel exacto
+    if (id) {
+      const stackItem = this._openPanels.get(id);
+      if (
+        stackItem &&
+        stackItem.componentType === component &&
+        stackItem.state === 'minimized' &&
+        stackItem.config.position === position
+      ) {
+        return stackItem.panelRef;
+      }
       return undefined;
     }
+
+    // Si no hay ID, buscar todos los panels minimizados del mismo tipo y posición
+    const minimizedPanels: SidebarPanelRef[] = [];
     
-    // Buscar en el mapa de paneles abiertos uno que coincida con el componente y esté minimizado
     for (const stackItem of this._openPanels.values()) {
       if (
         stackItem.componentType === component && 
         stackItem.state === 'minimized' &&
         stackItem.config.position === position
       ) {
-        // Verificar que realmente existe en el servicio de tabs
-        const tabExists = tabsInPosition.some(tab => tab.id === stackItem.panelRef.id);
-        if (tabExists) {
-          return stackItem.panelRef;
-        }
+        minimizedPanels.push(stackItem.panelRef);
       }
     }
-    
-    return undefined;
+
+    // Solo restaurar automáticamente si hay exactamente uno
+    // Si hay 0 o múltiples, devolver undefined (creará uno nuevo)
+    return minimizedPanels.length === 1 ? minimizedPanels[0] : undefined;
   }
 
   /**
@@ -192,17 +208,15 @@ export class SidebarPanelService {
    *   data: { formData: {...} }
    * });
    * 
-   * // Múltiples panels
+   * // Múltiples panels (usando minimizable para permitir stack)
    * this.SidebarPanelService.open(Panel1Component, {
    *   position: 'right',
-   *   allowMultiple: true,
-   *   zIndex: 1000
+   *   minimizable: true
    * });
    * 
    * this.SidebarPanelService.open(Panel2Component, {
    *   position: 'left',
-   *   allowMultiple: true,
-   *   zIndex: 1001
+   *   minimizable: true
    * });
    * ```
    */
@@ -216,22 +230,30 @@ export class SidebarPanelService {
     }
 
     // Merge con configuración por defecto y configuración global
-    const mergedConfig: SidebarPanelConfig<D> = {
+    const mergedConfig = {
       ...DEFAULT_SIDEBAR_PANEL_CONFIG,
       ...this._nuiConfig.sidebarPanel,
       ...config,
-    };
+    } as SidebarPanelConfig<D>;
 
-    // Buscar si ya existe un panel minimizado del mismo componente y posición
-    // Si existe, restaurarlo en lugar de crear uno nuevo
-    const minimizedPanel = this._findMinimizedPanel(component, mergedConfig.position ?? 'right');
-    if (minimizedPanel) {
-      minimizedPanel.restore();
-      return minimizedPanel as SidebarPanelRef<T, R>;
+    // Si el panel es minimizable, buscar si ya existe uno minimizado del mismo tipo y posición
+    // Si se pasa un ID específico, buscar ese panel exacto
+    // Si no se pasa ID, solo restaurar si hay exactamente uno minimizado (evita ambigüedad)
+    if (mergedConfig.minimizable) {
+      const minimizedPanel = this._findMinimizedPanel(
+        component, 
+        mergedConfig.position ?? 'right',
+        mergedConfig.id
+      );
+      if (minimizedPanel) {
+        minimizedPanel.restore();
+        return minimizedPanel as SidebarPanelRef<T, R>;
+      }
     }
 
-    // Verificar si se permiten múltiples panels
-    if (!mergedConfig.allowMultiple && this._openPanels.size > 0) {
+    // Si el panel NO es minimizable, cerrar todos los panels abiertos
+    // Si ES minimizable pero no hay ninguno minimizado, permite crear múltiples panels (stack)
+    if (!mergedConfig.minimizable && this._openPanels.size > 0) {
       this.closeAll();
     }
 

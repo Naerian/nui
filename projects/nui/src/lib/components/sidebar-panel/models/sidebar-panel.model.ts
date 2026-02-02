@@ -59,9 +59,10 @@ export interface SidebarPanelData {
 }
 
 /**
- * Configuración completa del sidebar-panel
+ * Configuración base del sidebar-panel
+ * @internal
  */
-export interface SidebarPanelConfig<D = any> {
+interface SidebarPanelConfigBase<D = any> {
   /**
    * Posición del panel en la pantalla
    * @default 'right'
@@ -102,11 +103,6 @@ export interface SidebarPanelConfig<D = any> {
    * Datos que se pasarán al componente dinámico
    */
   data?: D;
-
-  /**
-   * ID único del panel (útil para controlar múltiples panels)
-   */
-  id?: string;
 
   /**
    * Título del panel (se muestra en el header)
@@ -225,12 +221,6 @@ export interface SidebarPanelConfig<D = any> {
   animationDuration?: number;
 
   /**
-   * Si se minimiza el panel en lugar de cerrarlo
-   * @default false
-   */
-  minimizable?: boolean;
-
-  /**
    * Z-index base del panel
    * @default 1040
    */
@@ -259,13 +249,43 @@ export interface SidebarPanelConfig<D = any> {
 }
 
 /**
+ * Configuración del sidebar-panel
+ * 
+ * **Tipos condicionales:**
+ * - Si `minimizable` es `true`, `id` es **OBLIGATORIO**
+ * - Si `minimizable` es `false` o `undefined`, `id` es **opcional**
+ * 
+ * @example
+ * ```typescript
+ * // Válido - minimizable: true con id
+ * const config: SidebarPanelConfig = {
+ *   minimizable: true,
+ *   id: 'mi-panel'
+ * };
+ * 
+ * // Error de compilación - minimizable: true sin id
+ * const config: SidebarPanelConfig = {
+ *   minimizable: true
+ *   // Error: Property 'id' is missing
+ * };
+ * 
+ * // Válido - sin minimizable, id opcional
+ * const config: SidebarPanelConfig = {
+ *   position: 'right'
+ * };
+ * ```
+ */
+export type SidebarPanelConfig<D = any> =
+  | (SidebarPanelConfigBase<D> & { minimizable: true; id: string })
+  | (SidebarPanelConfigBase<D> & { minimizable?: false; id?: string });
+
+/**
  * Configuración por defecto del sidebar-panel
  */
 export const DEFAULT_SIDEBAR_PANEL_CONFIG: Required<
   Omit<
-    SidebarPanelConfig,
+    SidebarPanelConfigBase,
     | 'data'
-    | 'id'
     | 'headerTemplate'
     | 'footerTemplate'
     | 'preventClose'
@@ -279,7 +299,7 @@ export const DEFAULT_SIDEBAR_PANEL_CONFIG: Required<
     | 'panelClass'
     | 'customButtons'
   >
-> = {
+> & { minimizable: false } = {
   position: 'right',
   size: 'md',
   showHeader: true,

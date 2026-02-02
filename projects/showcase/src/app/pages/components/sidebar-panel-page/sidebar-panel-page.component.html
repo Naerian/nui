@@ -117,13 +117,7 @@
         }
       }
 
-      @for (example of section.examples; track example.title) {
-        <app-code-block
-          [title]="example.title | translate"
-          [code]="example.code"
-          [language]="example.language"
-        ></app-code-block>
-      }
+      <app-code-block [examples]="section.examples || []"></app-code-block>
     </section>
   }
 </div>

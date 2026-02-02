@@ -61,6 +61,11 @@
   @media print {
     display: none;
   }
+
+  // Estado minimizado - ocultar completamente el panel
+  &.sidebar-panel-minimized {
+    display: none !important;
+  }
 }
 
 /**

@@ -16,7 +16,7 @@ Panel deslizante que se abre desde los bordes de la pantalla usando Angular CDK 
 - ✅ **Eventos**: Observables para opened, closed, backdrop click, keyboard
 - ✅ **Templates**: Header y footer personalizables
 - ✅ **Minimizable**: Reduce el panel a una pestaña lateral para liberar espacio
-- ✅ **Restauración Inteligente**: Al abrir el mismo panel minimizado, se restaura automáticamente
+- ✅ **Restauración Inteligente**: Comportamiento singleton con ID obligatorio para panels minimizables
 
 ## Instalación
 
@@ -147,7 +147,8 @@ Configuración completa del panel:
 | `ariaLabel` | `string` | `'Slide Panel'` | Label ARIA |
 | `ariaDescribedBy` | `string` | - | ID del elemento descripción |
 | `animationDuration` | `number` | `300` | Duración animación (ms) |
-| `minimizable` | `boolean` | `false` | Panel minimizable con botón en header |
+| `minimizable` | `boolean` | `false` | Panel minimizable con botón en header. **Requiere `id` obligatorio** |
+| `id` | `string` | Auto | ID único del panel. **Obligatorio si `minimizable: true`** |
 | `customButtons` | `SlidePanelCustomButton[]` | - | Botones programáticos para el footer |
 | `zIndex` | `number` | `1000` | Z-index base |
 | `allowMultiple` | `boolean` | `false` | Permitir múltiples panels |
@@ -566,15 +567,79 @@ slidePanelService.open(MyComponent, {
 
 ### Panel Minimizable
 
-Permite minimizar el panel a una pestaña lateral para liberar espacio en pantalla sin perder el contexto:
+Permite minimizar el panel a una pestaña lateral para liberar espacio en pantalla sin perder el contexto.
+
+**⚠️ Requisito importante:** Cuando `minimizable: true`, el `id` es **OBLIGATORIO**. Esto garantiza que cada panel minimizable tenga una identidad única y permite el comportamiento de restauración inteligente.
 
 ```typescript
+// ✅ CORRECTO - Con ID obligatorio
 const panelRef = slidePanelService.open(ChatComponent, {
+  id: 'chat-support',        // ID único OBLIGATORIO
   title: 'Chat de Soporte',
   position: 'right',
   size: 'md',
-  minimizable: true // Muestra botón de minimizar en el header
+  minimizable: true
 });
+
+// ❌ ERROR - TypeScript no compilará
+const panelRef = slidePanelService.open(ChatComponent, {
+  title: 'Chat de Soporte',
+  minimizable: true  // Error: Property 'id' is required when minimizable is true
+});
+```
+
+**Comportamiento Singleton:**
+
+Cada `id` actúa como identificador único del panel. Si intentas abrir un panel con el mismo `id` que ya está minimizado, **se restaurará el existente** en lugar de crear uno nuevo:
+
+```typescript
+// Primera vez: crea el panel
+slidePanelService.open(ChatComponent, {
+  id: 'chat-support',
+  minimizable: true,
+  title: 'Chat'
+});
+
+// Usuario minimiza el panel...
+
+// Segunda vez con el mismo ID: restaura el panel existente
+slidePanelService.open(ChatComponent, {
+  id: 'chat-support',  // Mismo ID → restaura en lugar de crear nuevo
+  minimizable: true,
+  title: 'Chat'
+});
+```
+
+**Cuándo usar cada estrategia:**
+
+```typescript
+// Caso 1: Panel único reutilizable (RECOMENDADO para minimizables)
+slidePanelService.open(UserProfileComponent, {
+  id: 'user-profile',        // Siempre el mismo panel
+  minimizable: true,
+  title: 'Perfil de Usuario'
+});
+// → Comportamiento: Si ya está minimizado, lo restaura
+// → Ideal para: Chat, Perfil, Configuración, Notificaciones
+
+// Caso 2: Múltiples instancias del mismo tipo
+slidePanelService.open(ProductDetailComponent, {
+  id: `product-${productId}`, // ID dinámico basado en datos
+  minimizable: true,
+  title: `Producto ${productName}`,
+  data: { productId }
+});
+// → Comportamiento: Cada producto tiene su propio panel
+// → Ideal para: Detalles de entidades, Múltiples documentos
+
+// Caso 3: Panel no minimizable (ID opcional)
+slidePanelService.open(QuickActionsComponent, {
+  // Sin id necesario
+  minimizable: false,
+  title: 'Acciones Rápidas'
+});
+// → Comportamiento: Cierra el anterior si ya hay uno abierto
+// → Ideal para: Formularios simples, Confirmaciones
 ```
 
 **Comportamiento:**
@@ -603,13 +668,6 @@ const panelRef = slidePanelService.open(ChatComponent, {
 - Posicionamiento inteligente: Centradas en el borde correspondiente
 - Estilos sutiles: `opacity: 0.8` por defecto, `opacity: 1` al hover
 - Animaciones suaves al aparecer/desaparecer
-
-**Restauración Inteligente:**
-```typescript
-// Si abres el mismo componente minimizado, se restaura automáticamente
-slidePanelService.open(ChatComponent, { position: 'right' });
-// Si ya hay un ChatComponent minimizado en 'right', se restaura en lugar de crear uno nuevo
-```
 
 **Control programático:**
 
@@ -669,21 +727,55 @@ slidePanelService.open(AssistantComponent, {
 
 ### Múltiples Panels
 
+**Con Minimizable (Recomendado):**
+
+Para permitir múltiples panels que pueden apilarse y minimizarse, usa `minimizable: true` con IDs únicos:
+
 ```typescript
-// Abrir múltiples panels
+// Panel 1
+slidePanelService.open(ChatComponent, {
+  id: 'chat-support',
+  position: 'right',
+  minimizable: true,
+  title: 'Chat de Soporte'
+});
+
+// Panel 2 - Se abre simultáneamente porque minimizable permite stack
+slidePanelService.open(NotificationsComponent, {
+  id: 'notifications',
+  position: 'right',
+  minimizable: true,
+  title: 'Notificaciones'
+});
+
+// Ambos pueden existir simultáneamente
+// Ambos pueden minimizarse independientemente
+// Las pestañas se apilan una al lado de la otra
+```
+
+**Sin Minimizable (Comportamiento Clásico):**
+
+Si `minimizable: false`, abrir un nuevo panel cierra automáticamente el anterior:
+
+```typescript
+// Panel 1
 slidePanelService.open(Panel1Component, {
   position: 'right',
-  allowMultiple: true,
-  zIndex: 1000
+  minimizable: false  // O simplemente omitir
 });
 
+// Panel 2 - Cierra automáticamente Panel 1
 slidePanelService.open(Panel2Component, {
-  position: 'left',
-  allowMultiple: true,
-  zIndex: 1001
+  position: 'right',
+  minimizable: false
 });
+// Solo Panel 2 estará visible
+```
 
-// Cerrar todos
+**Cerrar todos los panels:**
+
+```typescript
+// Cierra todos los panels abiertos (incluyendo minimizados)
 slidePanelService.closeAll();
 ```
 
