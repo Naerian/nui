@@ -1,4 +1,4 @@
-@use "popover-tokens" as tokens;
+@use 'popover-tokens' as tokens;
 
 // ========================================
 // POPOVER - Variables (CSS Custom Properties)
@@ -22,12 +22,7 @@
 
   // Bordes y radios
   --popover-border-radius: #{tokens.$popover-border-radius};
-  --popover-border: #{tokens.$popover-border};
-  --popover-border-color: #{tokens.$popover-border-color};
-
-  // Colores
-  --popover-bg: #{tokens.$popover-bg};
-  --popover-text: #{tokens.$popover-text};
+  --popover-border-width: #{tokens.$popover-border-width};
 
   // Sombra
   --popover-shadow: #{tokens.$popover-shadow};
@@ -37,8 +32,6 @@
 
   // Flecha
   --popover-arrow-size: #{tokens.$popover-arrow-size};
-  --popover-arrow-border-width: #{tokens.$popover-arrow-border-width};
-  --popover-arrow-offset: #{tokens.$popover-arrow-offset};
 
   // Animación
   --popover-transition-duration: #{tokens.$popover-transition-duration};

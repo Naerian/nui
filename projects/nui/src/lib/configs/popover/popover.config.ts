@@ -13,7 +13,7 @@ export function createDefaultPopoverConfig(): PopoverConfig {
     showArrow: true,
     closeOnClickOutside: true,
     closeOnEscape: true,
-    maxWidth: '300px',
+    maxWidth: 'auto',
   };
 }
 

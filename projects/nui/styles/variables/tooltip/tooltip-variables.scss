@@ -29,6 +29,8 @@
 
   // Bordes
   --tooltip-border-radius: #{tokens.$tooltip-border-radius};
+  --tooltip-border-width: #{tokens.$tooltip-border-width};
+  --tooltip-border-color: #{tokens.$tooltip-border-color};
 
   // Z-index
   --tooltip-z-index: #{tokens.$tooltip-z-index};

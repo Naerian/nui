@@ -3,7 +3,12 @@ import { DOCUMENT } from '@angular/common';
 import { Observable } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ThemeGrays, ThemePreset, ThemeConfig } from './models/theme.model';
-import { PURE_COLORS, DEFAULT_GRAYS, DEFAULT_PRESET, NUI_THEME_CONFIG } from './models/theme.config';
+import {
+  PURE_COLORS,
+  DEFAULT_GRAYS,
+  DEFAULT_PRESET,
+  NUI_THEME_CONFIG,
+} from './models/theme.config';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
@@ -22,9 +27,7 @@ export class ThemeService {
 
   // Computed signals
   readonly colors = computed(() =>
-    this._isDarkMode()
-      ? this._currentPreset().colors.dark
-      : this._currentPreset().colors.light
+    this._isDarkMode() ? this._currentPreset().colors.dark : this._currentPreset().colors.light
   );
 
   // Interoperabilidad: Observables para usuarios que necesiten RxJS
@@ -137,7 +140,9 @@ export class ThemeService {
   }
 
   private generateComponentVariables(): string {
-    const colors = this._isDarkMode() ? this._currentPreset().colors.dark : this._currentPreset().colors.light;
+    const colors = this._isDarkMode()
+      ? this._currentPreset().colors.dark
+      : this._currentPreset().colors.light;
     const grays = this._currentPreset().grays || this.getDefaultGrays();
 
     let css = ':root {\n';
@@ -345,7 +350,7 @@ export class ThemeService {
     const inactiveBorder = this._isDarkMode() ? DEFAULT_GRAYS[900] : DEFAULT_GRAYS[200];
     const inactiveBg = this._isDarkMode() ? DEFAULT_GRAYS[900] : PURE_COLORS.WHITE;
     const textOnColor = this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
-    
+
     return `
   --nui-button-group-${name}-solid-bg: ${color};
   --nui-button-group-${name}-solid-text: ${textOnColor};
@@ -473,7 +478,7 @@ export class ThemeService {
     const ghostInactiveBg = this._isDarkMode() ? this.shade(color, 85) : this.tint(color, 95);
     const ghostInactiveHoverBg = this.withAlpha(color, 0.12);
     const textOnColor = this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
-    
+
     return `
   --nui-paginator-${name}-solid-bg: ${color};
   --nui-paginator-${name}-solid-text: ${textOnColor};
@@ -532,7 +537,9 @@ export class ThemeService {
     const selectedHoverBg = this._isDarkMode() ? this.withAlpha(color, 0.2) : this.tint(color, 90);
     const selectedHoverColor = this._isDarkMode() ? this.tint(color, 65) : color;
     const selectedHoverIconColor = this._isDarkMode() ? this.tint(color, 55) : color;
-    const selectedHoverSubtitleColor = this._isDarkMode() ? this.tint(color, 45) : this.tint(color, 35);
+    const selectedHoverSubtitleColor = this._isDarkMode()
+      ? this.tint(color, 45)
+      : this.tint(color, 35);
     const focusColor = this._isDarkMode() ? this.withAlpha(color, 0.15) : this.tint(color, 95);
 
     return `
@@ -559,19 +566,11 @@ export class ThemeService {
    * El tooltip usa colores inversos al tema para mejor contraste.
    */
   private generateTooltipVariables(): string {
-    if (this._isDarkMode()) {
-      // En tema oscuro: tooltip con fondo similar al popover para consistencia
-      return `
-  --tooltip-bg: ${DEFAULT_GRAYS[800]};
-  --tooltip-text: ${DEFAULT_GRAYS[50]};
+    // Tooltip usa el mismo fondo que popover (bg-primary) para consistencia
+    return `
+  --tooltip-bg: var(--nui-bg-primary);
+  --tooltip-text: var(--nui-text-primary);
 `;
-    } else {
-      // En tema claro: tooltip con fondo gris oscuro
-      return `
-  --tooltip-bg: ${DEFAULT_GRAYS[800]};
-  --tooltip-text: ${PURE_COLORS.WHITE};
-`;
-    }
   }
 
   /**
@@ -581,15 +580,15 @@ export class ThemeService {
   private generatePopoverVariables(): string {
     if (this._isDarkMode()) {
       return `
-  --popover-bg: ${DEFAULT_GRAYS[900]};
-  --popover-text: ${DEFAULT_GRAYS[200]};
-  --popover-border: ${DEFAULT_GRAYS[700]};
+  --popover-bg: var(--nui-bg-primary);
+  --popover-text: var(--nui-text-primary);
+  --popover-border-color: var(--nui-gray-600);
 `;
     } else {
       return `
-  --popover-bg: ${PURE_COLORS.WHITE};
-  --popover-text: ${DEFAULT_GRAYS[900]};
-  --popover-border: ${DEFAULT_GRAYS[200]};
+  --popover-bg: var(--nui-bg-primary);
+  --popover-text: var(--nui-text-primary);
+  --popover-border-color: var(--nui-gray-200);
 `;
     }
   }

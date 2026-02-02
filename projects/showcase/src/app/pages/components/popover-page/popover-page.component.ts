@@ -6,6 +6,7 @@ import { CodeBlockComponent } from '../../../shared/code-block/code-block.compon
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
 import { BaseComponentPage } from '../../../core/base/base-component-page';
 import { POPOVER_PAGE_CONFIG } from './popover-page.config';
+import { UserProfilePopoverComponent } from './components/user-profile-popover.component';
 
 /**
  * Página de documentación del componente Popover
@@ -38,6 +39,7 @@ import { POPOVER_PAGE_CONFIG } from './popover-page.config';
 })
 export class PopoverPageComponent extends BaseComponentPage {
   pageConfig = POPOVER_PAGE_CONFIG;
+  UserProfilePopoverComponent = UserProfilePopoverComponent;
 
   // Estado para ejemplos interactivos
   isDisabled = signal(false);

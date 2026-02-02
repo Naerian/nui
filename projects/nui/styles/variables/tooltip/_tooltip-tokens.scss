@@ -34,6 +34,9 @@ $tooltip-line-height: var(--line-height-sm) !default;
 
 // ===== BORDES Y RADIOS =====
 $tooltip-border-radius: var(--border-radius-sm) !default;
+$tooltip-border-width: 1px !default;
+// Borde con mejor contraste: en dark mode usa gray-600 (más visible), en light mode usa gray-200 (sutil)
+$tooltip-border-color: var(--nui-gray-600) !default;
 
 // ===== SOMBRAS =====
 $tooltip-shadow: var(--nui-shadow-elevated) !default;

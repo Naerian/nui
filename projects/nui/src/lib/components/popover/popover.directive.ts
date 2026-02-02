@@ -93,7 +93,6 @@ export class PopoverDirective implements OnInit, OnDestroy {
   private viewContainerRef = inject(ViewContainerRef);
   private destroyRef = inject(DestroyRef);
   private globalConfig = inject(NUI_CONFIG);
-  private injector = inject(Injector);
   private popoverManager = inject(PopoverManagerService);
 
   private overlayRef?: OverlayRef;

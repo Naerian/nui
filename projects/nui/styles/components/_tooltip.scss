@@ -22,6 +22,7 @@
   max-width: var(--tooltip-max-width);
   background-color: var(--tooltip-bg);
   color: var(--tooltip-text);
+  border: var(--tooltip-border-width) solid var(--tooltip-border-color);
   border-radius: var(--tooltip-border-radius);
   box-shadow: var(--tooltip-shadow);
   transition:
@@ -55,39 +56,49 @@
     }
   }
 
-  // Flecha del tooltip
+  // Flecha del tooltip (sistema de triángulos con borders)
   &__arrow {
     position: absolute;
-    width: var(--tooltip-arrow-size);
-    height: var(--tooltip-arrow-size);
-    background-color: var(--tooltip-bg);
-    transform: rotate(45deg);
-    z-index: -1;
+    width: 0;
+    height: 0;
+    border-style: solid;
   }
 
-  // Posicionamiento de la flecha según la posición del tooltip
+  // Posicionamiento y forma de la flecha según la posición del tooltip
   &[data-position="top"] &__arrow {
-    bottom: calc(var(--tooltip-arrow-size) / -2);
+    bottom: -6px;
     left: 50%;
-    transform: translateX(-50%) rotate(45deg);
+    transform: translateX(-50%);
+    border-width: 6px 6px 0 6px;
+    border-color: var(--tooltip-bg) transparent transparent transparent;
+    filter: drop-shadow(0 1px 0 var(--tooltip-border-color));
   }
 
   &[data-position="bottom"] &__arrow {
-    top: calc(var(--tooltip-arrow-size) / -2);
+    top: -6px;
     left: 50%;
-    transform: translateX(-50%) rotate(45deg);
+    transform: translateX(-50%);
+    border-width: 0 6px 6px 6px;
+    border-color: transparent transparent var(--tooltip-bg) transparent;
+    filter: drop-shadow(0 -1px 0 var(--tooltip-border-color));
   }
 
   &[data-position="left"] &__arrow {
-    right: calc(var(--tooltip-arrow-size) / -2);
+    right: -6px;
     top: 50%;
-    transform: translateY(-50%) rotate(45deg);
+    transform: translateY(-50%);
+    border-width: 6px 0 6px 6px;
+    border-color: transparent transparent transparent var(--tooltip-bg);
+    filter: drop-shadow(1px 0 0 var(--tooltip-border-color));
   }
 
   &[data-position="right"] &__arrow {
-    left: calc(var(--tooltip-arrow-size) / -2);
+    left: -6px;
     top: 50%;
-    transform: translateY(-50%) rotate(45deg);
+    transform: translateY(-50%);
+    border-width: 6px 6px 6px 0;
+    border-color: transparent var(--tooltip-bg) transparent transparent;
+    filter: drop-shadow(-1px 0 0 var(--tooltip-border-color));
   }
 
   // Para templates personalizados que necesiten alineación diferente
