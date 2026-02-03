@@ -255,7 +255,19 @@ this.sidebarPanelService.open(ChatComponent, {
   minimizedTabCustomization: {
     icon: 'ri-customer-service-line',  // Icono personalizado
     label: 'Soporte',                  // Texto del botón
-    cssClass: 'floating-chat-button'   // Clase CSS custom
+    cssClass: 'floating-chat-button',  // Clase CSS custom
+    standalone: true  // 🔑 Permite posicionamiento libre (bottom-right)
+  }
+});
+
+// Sin standalone (agrupada en el borde)
+this.sidebarPanelService.open(NotificationsComponent, {
+  id: 'notifications',
+  minimizable: true,
+  minimizedTabCustomization: {
+    icon: 'ri-notification-3-line',
+    label: 'Notificaciones'
+    // Sin standalone: se agrupa con otras pestañas en el borde
   }
 });`,
           language: 'typescript',

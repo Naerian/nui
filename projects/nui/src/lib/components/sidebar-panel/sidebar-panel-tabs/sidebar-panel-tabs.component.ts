@@ -35,17 +35,27 @@ export class SidebarPanelTabsComponent {
   protected readonly tabs = this._tabsService.tabs;
 
   /**
-   * PestaÃ±as agrupadas por posiciÃ³n para facilitar el renderizado
+   * Pestañas agrupadas por posición (excluye standalone)
    */
   protected readonly tabsByPosition = computed(() => {
     const allTabs = this.tabs();
     
+    // Filtrar solo las pestañas NO standalone
+    const groupedTabs = allTabs.filter(t => !t.customization?.standalone);
+    
     return {
-      right: allTabs.filter(t => t.position === 'right'),
-      left: allTabs.filter(t => t.position === 'left'),
-      top: allTabs.filter(t => t.position === 'top'),
-      bottom: allTabs.filter(t => t.position === 'bottom'),
+      right: groupedTabs.filter(t => t.position === 'right'),
+      left: groupedTabs.filter(t => t.position === 'left'),
+      top: groupedTabs.filter(t => t.position === 'top'),
+      bottom: groupedTabs.filter(t => t.position === 'bottom'),
     };
+  });
+
+  /**
+   * Pestañas standalone (renderizadas independientemente)
+   */
+  protected readonly standaloneTabs = computed(() => {
+    return this.tabs().filter(t => t.customization?.standalone === true);
   });
 
   /**

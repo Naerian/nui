@@ -90,6 +90,55 @@ export interface MinimizedTabCustomization {
    * (icon, label, cssClass se ignoran)
    */
   template?: TemplateRef<any>;
+
+  /**
+   * Modo standalone: renderiza la pestaña fuera del contenedor agrupado
+   * 
+   * **Por defecto (false):** Las pestañas se agrupan en contenedores fijos:
+   * - Right: Agrupadas verticalmente en el borde derecho, centradas
+   * - Left: Agrupadas verticalmente en el borde izquierdo, centradas
+   * - Top: Agrupadas horizontalmente en el borde superior, centradas
+   * - Bottom: Agrupadas horizontalmente en el borde inferior, centradas
+   * 
+   * **Con standalone: true:**
+   * - La pestaña se renderiza en un contenedor independiente
+   * - No tiene restricciones de posicionamiento del contenedor padre
+   * - Permite usar `position: fixed` con coordenadas libres en CSS
+   * - Ideal para botones flotantes (chat, ayuda, soporte)
+   * - El `cssClass` controla completamente la posición y estilo
+   * 
+   * **¿Por qué es necesario?**
+   * 
+   * Sin standalone, las pestañas están dentro de contenedores con
+   * `transform: translateY(-50%)` o `translateX(-50%)`, lo que crea
+   * un nuevo **stacking context**. Esto hace que el `position: fixed`
+   * del hijo se comporte relativamente al padre transformado, no al viewport.
+   * 
+   * Con standalone: true, la pestaña escapa de estas restricciones.
+   * 
+   * @default false
+   * 
+   * @example
+   * ```typescript
+   * // Botón flotante bottom-right (requiere standalone)
+   * minimizedTabCustomization: {
+   *   icon: 'ri-chat-3-line',
+   *   label: 'Chat',
+   *   cssClass: 'floating-chat-button',
+   *   standalone: true  // 🔑 Permite posicionamiento libre
+   * }
+   * 
+   * // CSS correspondiente
+   * ::ng-deep .floating-chat-button {
+   *   position: fixed !important;
+   *   bottom: 24px !important;
+   *   right: 24px !important;
+   *   width: auto !important;
+   *   border-radius: 50px !important;
+   * }
+   * ```
+   */
+  standalone?: boolean;
 }
 
 /**

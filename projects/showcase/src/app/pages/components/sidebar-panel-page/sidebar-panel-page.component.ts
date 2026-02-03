@@ -170,7 +170,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
 
   /**
    * Abre un panel de chat con pestaña personalizada
-   * Demuestra customización completa: icono, label y CSS class para botón flotante
+   * Demuestra customización completa: icono, label, CSS class y standalone para botón flotante
    */
   openChatSupportPanel(): void {
     this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
@@ -183,10 +183,11 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         icon: 'ri-customer-service-line', // Icono de soporte
         label: 'Soporte', // Texto del botón
         cssClass: 'floating-chat-button', // Clase CSS para posición flotante
+        standalone: true, // 🔑 Permite posicionamiento libre (bottom-right)
       },
       data: {
         message:
-          'Panel de chat con pestaña personalizada. Minimiza este panel para ver el botón flotante personalizado en la esquina inferior derecha.',
+          'Panel de chat con pestaña personalizada. Minimiza este panel para ver el botón flotante personalizado en la esquina inferior derecha. El modo standalone permite posicionamiento CSS libre sin restricciones.',
         showActions: false,
       },
     });

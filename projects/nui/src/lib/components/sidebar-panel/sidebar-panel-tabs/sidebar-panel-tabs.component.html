@@ -91,7 +91,7 @@
   </div>
 }
 
-<!-- PestaÃ±as para posiciÃ³n BOTTOM (parte inferior) -->
+<!-- Pestañas para posición BOTTOM (parte inferior) -->
 @if (tabsByPosition().bottom.length > 0) {
   <div class="sidebar-panel-tabs-container sidebar-panel-tabs-bottom">
     @for (tab of tabsByPosition().bottom; track tab.id) {
@@ -122,3 +122,29 @@
   </div>
 }
 
+<!-- Pestañas STANDALONE (independientes, sin agrupación) -->
+@for (tab of standaloneTabs(); track tab.id) {
+  <div class="sidebar-panel-tabs-standalone">
+    <button 
+      class="sidebar-panel-tab-button sidebar-panel-tab-standalone"
+      [class]="tab.customization?.cssClass || ''"
+      (click)="restorePanel(tab.id)"
+      [attr.aria-label]="'Restore ' + tab.title"
+      [attr.data-sidebar-panel-id]="tab.id"
+      [attr.title]="tab.title"
+    >
+      @if (tab.customization?.template) {
+        <!-- Template completamente custom -->
+        <ng-container [ngTemplateOutlet]="tab.customization!.template!"></ng-container>
+      } @else {
+        <!-- Renderizado por defecto con customización -->
+        @if (tab.customization?.icon) {
+          <i [class]="tab.customization!.icon"></i>
+        }
+        @if (tab.customization?.label) {
+          <span class="sidebar-panel-tab-label">{{ tab.customization!.label }}</span>
+        }
+      }
+    </button>
+  </div>
+}

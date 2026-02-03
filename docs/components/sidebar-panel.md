@@ -725,6 +725,282 @@ slidePanelService.open(AssistantComponent, {
 }
 ```
 
+### Customización de Pestañas Minimizadas
+
+Personaliza completamente la apariencia de las pestañas minimizadas mediante la propiedad `minimizedTabCustomization`. Puedes cambiar el icono, agregar texto, aplicar CSS personalizado o incluso usar un template completamente custom.
+
+#### Interface MinimizedTabCustomization
+
+```typescript
+interface MinimizedTabCustomization {
+  /**
+   * Icono personalizado (clase de Remix Icon)
+   * Reemplaza el icono de flecha por defecto
+   * @example 'ri-phone-line', 'ri-chat-3-line', 'ri-customer-service-line'
+   */
+  icon?: string;
+
+  /**
+   * Texto personalizado para mostrar junto al icono
+   * Si no se proporciona, solo muestra el icono
+   */
+  label?: string;
+
+  /**
+   * Clase(s) CSS para personalizar el botón
+   * Permite posicionamiento y estilos custom
+   * @example 'floating-chat', 'bottom-right-button', ['custom', 'rounded']
+   */
+  cssClass?: string | string[];
+
+  /**
+   * Template completamente personalizado
+   * Si se proporciona, sobrescribe todo el contenido
+   * (icon, label y cssClass se ignoran)
+   */
+  template?: TemplateRef<any>;
+
+  /**
+   * Modo standalone: renderiza fuera del contenedor agrupado
+   * 
+   * Por defecto (false), las pestañas se agrupan en contenedores fijos:
+   * - Right: Agrupadas verticalmente en el borde derecho
+   * - Left: Agrupadas verticalmente en el borde izquierdo
+   * - Top: Agrupadas horizontalmente en el borde superior
+   * - Bottom: Agrupadas horizontalmente en el borde inferior
+   * 
+   * Con standalone: true:
+   * - La pestaña se renderiza en un contenedor independiente
+   * - Permite posicionamiento CSS completamente libre
+   * - Ideal para botones flotantes (chat, ayuda, soporte)
+   * - No está limitada por el transform del contenedor padre
+   * 
+   * @default false
+   */
+  standalone?: boolean;
+}
+```
+
+#### Ejemplo 1: Icono y Label Personalizados
+
+Cambia el icono de flecha por uno más descriptivo y agrega texto:
+
+```typescript
+slidePanelService.open(ChatComponent, {
+  id: 'chat-support',
+  title: 'Chat de Soporte',
+  minimizable: true,
+  minimizedTabCustomization: {
+    icon: 'ri-customer-service-line', // Icono de headset
+    label: 'Soporte'                  // Texto junto al icono
+  }
+});
+```
+
+**Resultado:** Pestaña con icono de headset y texto "Soporte" al lado.
+
+#### Ejemplo 2: Botón Flotante Bottom-Right
+
+Crea un botón flotante tipo chat en la esquina inferior derecha usando `standalone: true`:
+
+```typescript
+slidePanelService.open(ChatComponent, {
+  id: 'floating-chat',
+  title: 'Chat en Vivo',
+  minimizable: true,
+  position: 'right',
+  minimizedTabCustomization: {
+    icon: 'ri-question-answer-line',
+    label: 'Chat',
+    cssClass: 'floating-chat-button',
+    standalone: true  // 🔑 Clave: permite posicionamiento libre
+  }
+});
+```
+
+**CSS para botón flotante:**
+
+```scss
+// Estilos globales en tu styles.scss
+::ng-deep .floating-chat-button {
+  // Posicionamiento libre (gracias a standalone: true)
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  
+  // Dimensiones automáticas (contenido + padding)
+  width: auto !important;
+  height: auto !important;
+  padding: 14px 20px !important;
+  
+  // Forma pill
+  border-radius: 50px !important;
+  
+  // Elevación con sombras multicapa
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  
+  // Color primario con texto blanco
+  background: var(--nui-color-primary) !important;
+  color: white !important;
+  border: none !important;
+  
+  // Efectos de hover
+  &:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 
+      0 8px 24px rgba(0, 0, 0, 0.2),
+      0 4px 8px rgba(0, 0, 0, 0.15) !important;
+  }
+  
+  // Efecto de click
+  &:active {
+    transform: translateY(0) !important;
+  }
+  
+  // Icono y label juntos
+  i {
+    margin-right: 8px;
+    font-size: 20px;
+  }
+  
+  // Responsive: ajustar en móvil
+  @media (max-width: 768px) {
+    bottom: 16px !important;
+    right: 16px !important;
+    padding: 12px 16px !important;
+  }
+}
+```
+
+**¿Por qué standalone: true es necesario?**
+
+Sin `standalone: true`, el botón estaría dentro de un contenedor con `transform: translateY(-50%)`, lo que crea un nuevo **stacking context**. Esto hace que el `position: fixed` del hijo se comporte de forma relativa al padre transformado, no al viewport.
+
+Con `standalone: true`:
+- ✅ El botón se renderiza en su propio contenedor independiente
+- ✅ No tiene restricciones de posicionamiento del contenedor padre
+- ✅ Puedes usar `bottom: 24px; right: 24px` y funcionará correctamente
+- ✅ Ideal para botones flotantes que necesitan posicionamiento libre
+
+#### Ejemplo 3: Múltiples Estilos de Pestañas
+
+Combina pestañas agrupadas normales con botones flotantes independientes:
+
+```typescript
+// Chat flotante (standalone)
+slidePanelService.open(ChatComponent, {
+  id: 'chat',
+  minimizable: true,
+  minimizedTabCustomization: {
+    icon: 'ri-chat-3-line',
+    label: 'Chat',
+    cssClass: 'floating-chat-button',
+    standalone: true  // Botón flotante independiente
+  }
+});
+
+// Notificaciones agrupadas (normal)
+slidePanelService.open(NotificationsComponent, {
+  id: 'notifications',
+  minimizable: true,
+  minimizedTabCustomization: {
+    icon: 'ri-notification-3-line',
+    label: 'Notificaciones'
+    // Sin standalone: se agrupa con otras pestañas en el borde
+  }
+});
+
+// Configuración agrupada (normal)
+slidePanelService.open(SettingsComponent, {
+  id: 'settings',
+  minimizable: true,
+  minimizedTabCustomization: {
+    icon: 'ri-settings-3-line',
+    label: 'Ajustes'
+    // Sin standalone: se agrupa junto a notificaciones
+  }
+});
+```
+
+**Resultado:**
+- **Chat**: Botón flotante en bottom-right (independiente, posición libre)
+- **Notificaciones y Ajustes**: Pestañas agrupadas verticalmente en el borde derecho
+
+#### Ejemplo 4: Template Completamente Custom
+
+Para control total sobre el renderizado, usa un template personalizado:
+
+```html
+<ng-template #customTab>
+  <div class="custom-tab-content">
+    <div class="badge">3</div>
+    <i class="ri-mail-line"></i>
+    <span>Mensajes</span>
+  </div>
+</ng-template>
+
+<button (click)="openWithCustomTemplate()">Abrir</button>
+```
+
+```typescript
+@ViewChild('customTab') customTabTemplate!: TemplateRef<any>;
+
+openWithCustomTemplate(): void {
+  this.slidePanelService.open(MessagesComponent, {
+    id: 'messages',
+    minimizable: true,
+    minimizedTabCustomization: {
+      template: this.customTabTemplate,
+      standalone: true  // Para posicionamiento libre
+    }
+  });
+}
+```
+
+#### Cuándo usar cada opción
+
+| Opción | Uso recomendado | Ejemplo |
+|--------|----------------|---------|
+| **Solo icon** | Cambiar icono de flecha por uno más descriptivo | Soporte, Help, Favoritos |
+| **icon + label** | Agregar contexto visual con texto | "Chat", "Soporte", "Ayuda" |
+| **cssClass (sin standalone)** | Estilos visuales manteniendo agrupación | Colores, tamaños, sombras |
+| **cssClass + standalone** | Botones flotantes con posición libre | Chat flotante, FAB, Ayuda contextual |
+| **template** | Control total del renderizado | Badges, avatares, contenido complejo |
+
+#### Comparativa: Agrupado vs Standalone
+
+**Pestañas Agrupadas (standalone: false - default):**
+```typescript
+minimizedTabCustomization: {
+  icon: 'ri-notification-line',
+  label: 'Notificaciones'
+  // Sin standalone: se agrupa con otras en el borde
+}
+```
+- ✅ Pestañas apiladas en el mismo borde (right, left, top, bottom)
+- ✅ Posicionamiento automático centrado
+- ✅ Ideal para múltiples panels relacionados
+- ❌ Limitado al borde especificado por `position`
+- ❌ No puede moverse libremente por la pantalla
+
+**Pestañas Standalone (standalone: true):**
+```typescript
+minimizedTabCustomization: {
+  icon: 'ri-chat-line',
+  label: 'Chat',
+  cssClass: 'floating-chat-button',
+  standalone: true
+}
+```
+- ✅ Posicionamiento CSS completamente libre
+- ✅ Ideal para botones flotantes (bottom-right, etc.)
+- ✅ No afectado por otros panels
+- ✅ Puede usar position: fixed sin restricciones
+- ❌ No se agrupa con otras pestañas
+- ❌ Requiere CSS manual para posicionamiento
+
 ### Múltiples Panels
 
 **Con Minimizable (Recomendado):**

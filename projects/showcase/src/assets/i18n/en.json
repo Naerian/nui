@@ -596,7 +596,7 @@
       "minimizable": {
         "title": "Minimizable Panel",
         "description": "Panels can be minimized to a sidebar tab to free up screen space while preserving their state. Click the minimize button in the header or use programmatic control. You can also restore the panel by clicking the minimized tab, depending on the Sidebar's position, or by clicking the element that created the panel.",
-        "note": "Use the SidebarPanel's <code>minimize()</code> method to minimize the panel programmatically. The panel shrinks to a side tab that can be expanded again by clicking. If <code>minimizable</code> is enabled, the <code>id</code> attribute is required to identify the minimized panel.",
+        "note": "Use the <code>minimize()</code> method of the SidebarPanel to minimize the panel programmatically. The panel shrinks to a sidebar tab that can be expanded again by clicking. If <code>minimizable</code> is enabled, the <code>id</code> attribute is required to identify the minimized panel.<br><br><strong>Tab customization:</strong> You can customize the icon, add text, apply custom CSS, or use a completely custom template via <code>minimizedTabCustomization</code>. For floating buttons with free positioning (e.g., chat bottom-right), use <code>standalone: true</code> to render outside the grouped container and avoid positioning constraints.",
         "codeTitle": "Minimizable Configuration",
         "customizationCodeTitle": "Custom Tab Button",
         "cssCodeTitle": "Floating Button CSS Styles"

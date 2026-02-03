@@ -135,3 +135,39 @@
   border-bottom: none;
 }
 
+/**
+ * Pestañas STANDALONE (independientes)
+ * Sin restricciones de posicionamiento - totalmente controladas por CSS custom
+ */
+.sidebar-panel-tabs-standalone {
+  // Contenedor limpio sin posicionamiento ni transformaciones
+  // Esto permite que el botón hijo use position: fixed libremente
+  position: relative;
+  z-index: 999;
+  
+  // Sin transform para evitar crear stacking context restrictivo
+  // El cssClass del botón controla completamente su posición
+}
+
+.sidebar-panel-tab-standalone {
+  // Estilos base mínimos
+  // El cssClass puede sobrescribir todo con !important
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  
+  // Sin posicionamiento por defecto - lo controla cssClass
+  // Sin dimensiones fijas - automático según contenido
+  
+  i {
+    font-size: 1.25rem;
+    color: var(--nui-text-primary);
+  }
+  
+  .sidebar-panel-tab-label {
+    margin-left: 0; // Sin margen, usa gap del flex parent
+  }
+}
+

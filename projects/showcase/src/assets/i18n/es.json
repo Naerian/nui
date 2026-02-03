@@ -549,7 +549,7 @@
       "minimizable": {
         "title": "Panel Minimizable",
         "description": "Los paneles pueden minimizarse a una pestaña lateral para liberar espacio en pantalla mientras se preserva el estado. Haz clic en el botón minimizar del header o usa control programático. Además, podrás restaurar el panel haciendo clic en la pestaña minimizada, según la posición del Sidebar o haciendo clic en el elemento que creó dicho panel.",
-        "note": "Usa el método <code>minimize()</code> del SidebarPanel para minimizar el panel programáticamente. El panel se reduce a una pestaña lateral que puede expandirse nuevamente al hacer clic. Si <code>minimizable</code> está habilitado, el atributo <code>id</code> es obligatorio para identificar el panel minimizado.",
+        "note": "Usa el método <code>minimize()</code> del SidebarPanel para minimizar el panel programáticamente. El panel se reduce a una pestaña lateral que puede expandirse nuevamente al hacer clic. Si <code>minimizable</code> está habilitado, el atributo <code>id</code> es obligatorio para identificar el panel minimizado.<br><br><strong>Customización de pestañas:</strong> Puedes personalizar el icono, agregar texto, aplicar CSS personalizado o usar un template completamente custom mediante <code>minimizedTabCustomization</code>. Para botones flotantes con posicionamiento libre (ej: chat bottom-right), usa <code>standalone: true</code> para renderizar fuera del contenedor agrupado y evitar restricciones de posicionamiento.",
         "codeTitle": "Configuración Minimizable",
         "customizationCodeTitle": "Pestaña Personalizada",
         "cssCodeTitle": "Estilos CSS del Botón Flotante"
