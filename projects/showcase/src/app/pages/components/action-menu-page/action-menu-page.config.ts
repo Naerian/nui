@@ -11,7 +11,7 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
       id: 'basic',
       title: 'components.actionMenu.basic.title',
       description: 'components.actionMenu.basic.description',
-      anchor: 'basico',
+      anchor: 'basic',
       note: {
         type: 'info',
         content: 'components.actionMenu.basic.note',
@@ -55,7 +55,7 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
       id: 'separators',
       title: 'components.actionMenu.separators.title',
       description: 'components.actionMenu.separators.description',
-      anchor: 'separadores',
+      anchor: 'separators',
       examples: [
         {
           title: 'components.actionMenu.separators.codeTitle',
@@ -121,30 +121,31 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
       id: 'variants',
       title: 'components.actionMenu.variants.title',
       description: 'components.actionMenu.variants.description',
-      anchor: 'variantes',
+      anchor: 'variants',
       examples: [
         {
-          title: 'components.actionMenu.variants.codeTitle',
-          code: `<!-- Ghost (default) -->
-<nui-action-menu 
+          title: 'Ghost',
+          code: `<nui-action-menu 
   icon="ri-more-line"
   variant="ghost"
   [items]="menuItems">
-</nui-action-menu>
-
-<!-- Solid -->
-<nui-action-menu 
-  icon="ri-more-line"
-  variant="solid"
-  color="primary"
-  [items]="menuItems">
-</nui-action-menu>
-
-<!-- Outline -->
-<nui-action-menu 
+</nui-action-menu>`,
+          language: 'html',
+        },
+        {
+          title: 'Outline',
+          code: `<nui-action-menu 
   icon="ri-more-line"
   variant="outline"
-  color="accent"
+  [items]="menuItems">
+</nui-action-menu>`,
+          language: 'html',
+        },
+        {
+          title: 'Solid',
+          code: `<nui-action-menu 
+  icon="ri-more-line"
+  variant="solid"
   [items]="menuItems">
 </nui-action-menu>`,
           language: 'html',
@@ -155,10 +156,10 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
       id: 'sizes',
       title: 'components.actionMenu.sizes.title',
       description: 'components.actionMenu.sizes.description',
-      anchor: 'tamanos',
+      anchor: 'sizes',
       examples: [
         {
-          title: 'components.actionMenu.sizes.codeTitle',
+          title: 'components.actionMenu.sizes.htmlTitle',
           code: `<nui-action-menu size="xs" icon="ri-more-line" [items]="menuItems"></nui-action-menu>
 <nui-action-menu size="sm" icon="ri-more-line" [items]="menuItems"></nui-action-menu>
 <nui-action-menu size="md" icon="ri-more-line" [items]="menuItems"></nui-action-menu>
@@ -172,28 +173,32 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
       id: 'label',
       title: 'components.actionMenu.label.title',
       description: 'components.actionMenu.label.description',
-      anchor: 'etiqueta',
+      anchor: 'label',
       examples: [
         {
-          title: 'components.actionMenu.label.codeTitle',
-          code: `<!-- Con icono y texto -->
-<nui-action-menu 
+          title: 'components.actionMenu.label.codeTitle1',
+          code: `<nui-action-menu 
   label="Actions"
   icon="ri-more-2-line"
   color="primary"
   variant="solid"
   [items]="menuItems">
-</nui-action-menu>
-
-<!-- Solo texto -->
-<nui-action-menu 
+</nui-action-menu>`,
+          language: 'html',
+        },
+        {
+          title: 'components.actionMenu.label.codeTitle2',
+          code: `<nui-action-menu 
   label="Options"
+  color="secondary"
   variant="outline"
   [items]="menuItems">
-</nui-action-menu>
-
-<!-- Ancho completo -->
-<nui-action-menu 
+</nui-action-menu>`,
+          language: 'html',
+        },
+        {
+          title: 'components.actionMenu.label.codeTitle3',
+          code: `<nui-action-menu 
   label="Menu"
   width="full"
   [items]="menuItems">
@@ -206,7 +211,7 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
       id: 'disabled',
       title: 'components.actionMenu.disabled.title',
       description: 'components.actionMenu.disabled.description',
-      anchor: 'deshabilitado',
+      anchor: 'disabled',
       examples: [
         {
           title: 'components.actionMenu.disabled.codeTitle',
@@ -219,15 +224,16 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
     disabled: true
   },
   { label: 'Share', icon: 'ri-share-line', action: 'share' }
-];
-
-<!-- Menú completamente deshabilitado -->
-<nui-action-menu 
-  [disabled]="true"
-  icon="ri-more-line"
+];`,
+          language: 'typescript',
+        },
+        {
+          title: 'components.actionMenu.disabled.htmlTitle',
+          code: `<nui-action-menu 
+  icon="ri-more-line" 
   [items]="menuItems">
 </nui-action-menu>`,
-          language: 'typescript',
+          language: 'html',
         },
       ],
     },

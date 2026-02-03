@@ -183,7 +183,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         icon: 'ri-customer-service-line', // Icono de soporte
         label: 'Soporte', // Texto del botón
         cssClass: 'floating-chat-button', // Clase CSS para posición flotante
-        standalone: true, // 🔑 Permite posicionamiento libre (bottom-right)
+        standalone: true, // Permite posicionamiento libre (bottom-right)
       },
       data: {
         message:

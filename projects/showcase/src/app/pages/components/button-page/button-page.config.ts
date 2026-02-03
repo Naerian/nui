@@ -11,7 +11,7 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       id: 'basic',
       title: 'components.button.basic.title',
       description: 'components.button.basic.description',
-      anchor: 'basico',
+      anchor: 'basic',
       examples: [
         {
           title: 'components.button.basic.codeTitle',
@@ -21,48 +21,36 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       ],
     },
     {
-      id: 'variants',
-      title: 'components.button.variants.title',
-      description: 'components.button.variants.description',
-      anchor: 'variantes',
+      id: 'variants-colors',
+      title: 'components.button.variants-colors.title',
+      description: 'components.button.variants-colors.description',
+      anchor: 'variants-colors',
       examples: [
         {
-          title: 'components.button.variants.codeTitle',
-          code: `<nui-button variant="solid">Solid Button</nui-button>
-<nui-button variant="outline">Outline Button</nui-button>
-<nui-button variant="ghost">Ghost Button</nui-button>`,
-          language: 'html',
-        },
-      ],
-    },
-    {
-      id: 'colors',
-      title: 'components.button.colors.title',
-      description: 'components.button.colors.description',
-      anchor: 'colores',
-      examples: [
-        {
-          title: 'components.button.colors.codeTitle',
-          code: `<!-- Solid (default) -->
-<nui-button color="primary">Primary</nui-button>
+          title: 'Solid',
+          code: `<nui-button color="primary">Primary</nui-button>
 <nui-button color="secondary">Secondary</nui-button>
 <nui-button color="accent">Accent</nui-button>
 <nui-button color="success">Success</nui-button>
 <nui-button color="info">Info</nui-button>
 <nui-button color="warning">Warning</nui-button>
-<nui-button color="danger">Danger</nui-button>
-
-<!-- Outline -->
-<nui-button variant="outline" color="primary">Primary</nui-button>
+<nui-button color="danger">Danger</nui-button>`,
+          language: 'html',
+        },
+        {
+          title: 'Outline',
+          code: `<nui-button variant="outline" color="primary">Primary</nui-button>
 <nui-button variant="outline" color="secondary">Secondary</nui-button>
 <nui-button variant="outline" color="accent">Accent</nui-button>
 <nui-button variant="outline" color="success">Success</nui-button>
 <nui-button variant="outline" color="info">Info</nui-button>
 <nui-button variant="outline" color="warning">Warning</nui-button>
-<nui-button variant="outline" color="danger">Danger</nui-button>
-
-<!-- Ghost -->
-<nui-button variant="ghost" color="primary">Primary</nui-button>
+<nui-button variant="outline" color="danger">Danger</nui-button>`,
+          language: 'html',
+        },
+        {
+          title: 'Ghost',
+          code: `<nui-button variant="ghost" color="primary">Primary</nui-button>
 <nui-button variant="ghost" color="secondary">Secondary</nui-button>
 <nui-button variant="ghost" color="accent">Accent</nui-button>
 <nui-button variant="ghost" color="success">Success</nui-button>
@@ -77,7 +65,7 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       id: 'sizes',
       title: 'components.button.sizes.title',
       description: 'components.button.sizes.description',
-      anchor: 'tamanos',
+      anchor: 'sizes',
       examples: [
         {
           title: 'components.button.sizes.codeTitle',
@@ -94,7 +82,7 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       id: 'icons',
       title: 'components.button.icons.title',
       description: 'components.button.icons.description',
-      anchor: 'iconos',
+      anchor: 'icons',
       note: {
         type: 'info',
         content: 'components.button.icons.note',
@@ -156,7 +144,7 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       id: 'width',
       title: 'components.button.width.title',
       description: 'components.button.width.description',
-      anchor: 'ancho',
+      anchor: 'width',
       note: {
         type: 'info',
         content: 'components.button.width.note',
@@ -175,7 +163,7 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       id: 'disabled',
       title: 'components.button.disabled.title',
       description: 'components.button.disabled.description',
-      anchor: 'deshabilitado',
+      anchor: 'disabled',
       examples: [
         {
           title: 'components.button.disabled.codeTitle',
@@ -189,7 +177,7 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       id: 'events',
       title: 'components.button.events.title',
       description: 'components.button.events.description',
-      anchor: 'eventos',
+      anchor: 'events',
       note: {
         type: 'info',
         content: 'components.button.events.consoleNote',
@@ -221,23 +209,23 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       id: 'directive',
       title: 'components.button.directive.title',
       description: 'components.button.directive.description',
-      anchor: 'directiva',
+      anchor: 'directive',
       examples: [
         {
           title: 'components.button.directive.codeTitle',
-          code: `<!-- Usando la directiva nuiButton en elementos HTML nativos -->
+          code: `<!-- Using the nuiButton directive in native HTML elements -->
 <button nuiButton>Native Button</button>
 <button nuiButton variant="outline" color="primary">Primary Outline</button>
 <button nuiButton variant="ghost" color="danger">Ghost Danger</button>
 
-<!-- Con iconos -->
+<!-- With icons -->
 <button nuiButton icon="ri-save-line">Save</button>
 <button nuiButton icon="ri-download-line" iconPosition="end">Download</button>
 
-<!-- Con loading -->
+<!-- With loading -->
 <button nuiButton [loading]="isLoading">Submit</button>
 
-<!-- Elementos <a> con aspecto de botón -->
+<!-- <a> elements with button appearance -->
 <a nuiButton href="/profile" icon="ri-user-line">View Profile</a>
 <a nuiButton variant="outline" color="accent" href="/settings">Settings</a>`,
           language: 'html',
@@ -252,26 +240,26 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       examples: [
         {
           title: 'components.button.api.componentCodeTitle',
-          code: `// Inputs del componente y directiva
-@Input() variant: ButtonVariant = 'solid';     // Variante: 'solid' | 'outline' | 'ghost'
+          code: `// Component inputs and directive
+@Input() variant: ButtonVariant = 'solid';     // Variant: 'solid' | 'outline' | 'ghost'
 @Input() color?: ButtonColor;                  // Color: 'primary' | 'secondary' | 'accent' | 'success' | 'info' | 'warning' | 'danger'
-@Input() size: ButtonSize = 'md';              // Tamaño: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-@Input() icon?: string;                        // Icono (Remix Icon)
-@Input() iconPosition: 'start' | 'end' = 'start'; // Posición del icono
-@Input() loading = false;                      // Estado de carga
-@Input() loadingPosition: 'start' | 'center' | 'end' = 'start'; // Posición del spinner
-@Input() width: 'auto' | 'full' | 'fit' = 'auto'; // Ancho del botón
-@Input() disabled = false;                     // Estado deshabilitado
-@Input() type: 'button' | 'submit' | 'reset' = 'button'; // Tipo de botón
-@Input() ariaLabel?: string;                   // Label de accesibilidad
+@Input() size: ButtonSize = 'md';              // Size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+@Input() icon?: string;                        // Icon (Remix Icon)
+@Input() iconPosition: 'start' | 'end' = 'start'; // Icon position
+@Input() loading = false;                      // Loading state
+@Input() loadingPosition: 'start' | 'center' | 'end' = 'start'; // Spinner position
+@Input() width: 'auto' | 'full' | 'fit' = 'auto'; // Button width
+@Input() disabled = false;                     // Disabled state
+@Input() type: 'button' | 'submit' | 'reset' = 'button'; // Button type
+@Input() ariaLabel?: string;                   // Accessibility label
 
-// Outputs del componente
-@Output() onClick = new EventEmitter<Event>(); // Evento de click`,
+// Component outputs
+@Output() onClick = new EventEmitter<Event>(); // Click event`,
           language: 'typescript',
         },
         {
           title: 'components.button.api.usageCodeTitle',
-          code: `// Ejemplo completo de uso
+          code: `// Complete usage example
 import { Component, signal } from '@angular/core';
 
 @Component({
@@ -292,7 +280,7 @@ import { Component, signal } from '@angular/core';
       Guardar Cambios
     </nui-button>
     
-    <!-- Usando directiva en botón nativo -->
+    <!-- Using a directive on a native button -->
     <button
       nuiButton
       variant="outline"
@@ -303,7 +291,7 @@ import { Component, signal } from '@angular/core';
       Eliminar
     </button>
     
-    <!-- Link con aspecto de botón -->
+    <!-- Link with button appearance -->
     <a
       nuiButton
       variant="ghost"
@@ -353,13 +341,13 @@ export class ExampleComponent {
       id: 'styling',
       title: 'components.button.styling.title',
       description: 'components.button.styling.description',
-      anchor: 'estilos',
+      anchor: 'styles',
       examples: [
         {
           title: 'components.button.styling.codeTitle',
-          code: `// Personalización de variables CSS
+          code: `// Customization of CSS variables
 :root {
-  /* Tamaños */
+  /* Sizes */
   --nui-button-height-xs: 24px;
   --nui-button-height-sm: 32px;
   --nui-button-height-md: 40px;
@@ -372,7 +360,7 @@ export class ExampleComponent {
   --nui-button-padding-x-lg: var(--spacing-xl);
   --nui-button-padding-x-xl: var(--spacing-2xl);
   
-  /* Tipografía */
+  /* Typography */
   --nui-button-font-size-xs: var(--font-size-xs);
   --nui-button-font-size-sm: var(--font-size-sm);
   --nui-button-font-size-md: var(--font-size-md);
@@ -380,18 +368,18 @@ export class ExampleComponent {
   --nui-button-font-size-xl: var(--font-size-xl);
   --nui-button-font-weight: var(--font-weight-medium);
   
-  /* Bordes y forma */
+  /* Borders and shape */
   --nui-button-border-radius: var(--border-radius-md);
   --nui-button-border-width: 1px;
   
-  /* Espaciado interno */
+  /* Internal spacing */
   --nui-button-icon-gap: var(--spacing-sm);
   --nui-button-icon-only-padding: var(--spacing-sm);
   
-  /* Transiciones */
+  /* Transitions */
   --nui-button-transition: all 0.2s ease;
   
-  /* Estados - se generan dinámicamente por color */
+  /* States - generated dynamically by color */
   /* Solid variant */
   --nui-button-solid-bg: var(--primary-color);
   --nui-button-solid-text: var(--nui-text-on-primary);
@@ -416,14 +404,14 @@ export class ExampleComponent {
   --nui-button-loading-opacity: 0.7;
 }
 
-// Ejemplo de customización
+// Customization example
 .my-custom-button {
   --nui-button-border-radius: 20px;
   --nui-button-font-weight: var(--font-weight-bold);
   --nui-button-height-md: 44px;
   --nui-button-padding-x-md: 24px;
   
-  // Sombras personalizadas
+  // Custom shadows
   &.nui-button--solid {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     

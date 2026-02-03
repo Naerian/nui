@@ -46,6 +46,30 @@
     "copied": "Copied!",
     "copyCode": "Copy code"
   },
+  "codeExamples": {
+    "html": "HTML",
+    "typescript": "TypeScript",
+    "css": "CSS",
+    "scss": "SCSS",
+    "component": "Component",
+    "usage": "Usage",
+    "definition": "Definition",
+    "configuration": "Configuration",
+    "customization": "Customization",
+    "styles": "Styles",
+    "example": "Example",
+    "componentCode": "Component Inputs and Outputs",
+    "usageCode": "Complete Usage Example",
+    "itemInterface": "Interface",
+    "parent": "Parent Component",
+    "child": "Child Component",
+    "directiveCode": "Directive Inputs and Outputs",
+    "tokensCode": "Injection Tokens for Components",
+    "serviceCode": "Service Methods",
+    "interfacesCode": "Interfaces",
+    "apiReference": "API Reference",
+    "cssVariables": "Available CSS Variables"
+  },
   "pages": {
     "home": {
       "title": "Welcome to NUI",
@@ -112,18 +136,12 @@
       "subtitle": "Versatile button component with multiple variants, sizes, and states",
       "basic": {
         "title": "Basic Button",
-        "description": "The simplest form of a button with default styling.",
-        "codeTitle": "HTML"
+        "description": "The simplest form of a button with default styling."
       },
-      "variants": {
-        "title": "Variants",
-        "description": "Buttons come in three variants: solid (default), outline, and ghost.",
-        "codeTitle": "Button Variants"
-      },
-      "colors": {
-        "title": "Colors",
-        "description": "Buttons support all theme colors: primary, secondary, accent, success, info, warning, and danger.",
-        "codeTitle": "Button Colors"
+      "variants-colors": {
+        "title": "Variants & Colors",
+        "description": "Buttons come in three variants: solid (default), outline, and ghost, and support all theme colors: primary, secondary, accent, success, info, warning, and danger.",
+        "codeTitle": "Button Variants & Colors"
       },
       "sizes": {
         "title": "Sizes",
@@ -139,9 +157,7 @@
       "loading": {
         "title": "Loading State",
         "description": "Display a loading spinner in three positions: start, end, or center (which replaces the content).",
-        "note": "Loading positions: <code>'start'</code> shows spinner before text, <code>'end'</code> shows it after, <code>'center'</code> replaces content entirely with centered spinner.",
-        "htmlTitle": "Template (HTML)",
-        "tsTitle": "Component Logic (TypeScript)"
+        "note": "Loading positions: <code>'start'</code> shows spinner before text, <code>'end'</code> shows it after, <code>'center'</code> replaces content entirely with centered spinner."
       },
       "width": {
         "title": "Width",
@@ -157,9 +173,7 @@
       "events": {
         "title": "Events",
         "description": "Handle click events with the onClick output. Supports button types: button, submit, and reset.",
-        "consoleNote": "Open DevTools (F12) and check the Console tab to see the events being logged when you click the buttons.",
-        "htmlTitle": "Template (HTML)",
-        "tsTitle": "Component Logic (TypeScript)"
+        "consoleNote": "Open DevTools (F12) and check the Console tab to see the events being logged when you click the buttons."
       },
       "directive": {
         "title": "Using Directive",
@@ -174,8 +188,7 @@
       },
       "styling": {
         "title": "Styling and Customization",
-        "description": "Customize the button appearance using CSS variables. Control sizes, typography, colors, and more.",
-        "codeTitle": "Available CSS Variables"
+        "description": "Customize the button appearance using CSS variables. Control sizes, typography, colors, and more."
       }
     },
     "actionMenu": {
@@ -185,9 +198,7 @@
         "title": "Basic Usage",
         "description": "Simple action menu with items array. Each item can have a label, icon, and action.",
         "note": "Here we see an example of using both <code>type='static'</code> and <code>type='dynamic'</code>.",
-        "consoleNote": "Open DevTools (F12) and check the Console tab to see the actions being logged when you click menu items.",
-        "htmlTitle": "Template (HTML)",
-        "tsTitle": "Component Logic (TypeScript)"
+        "consoleNote": "Open DevTools (F12) and check the Console tab to see the actions being logged when you click menu items."
       },
       "separators": {
         "title": "With Separators",
@@ -213,7 +224,9 @@
       "label": {
         "title": "With Label",
         "description": "Add text to the menu button. Can be combined with icons and supports full width mode.",
-        "codeTitle": "Button with Text"
+        "codeTitle1": "Text and Icon",
+        "codeTitle2": "Text Only",
+        "codeTitle3": "Full Width"
       },
       "disabled": {
         "title": "Disabled State",
@@ -240,21 +253,17 @@
         "description": "Fully customize menu rendering using templates and directives. Use <code>menu-header</code> and <code>menu-footer</code> to add content at the start and end without needing ng-template.",
         "note": "The <code>#item</code> template receives the full item as context (<code>let-item</code>). The <code>menu-header</code> and <code>menu-footer</code> directives provide a simpler and clearer syntax than PrimeNG, avoiding unnecessary ng-templates.",
         "clickNote": "<strong>Important:</strong> When using custom templates, you must handle the click event manually with <code>(click)=\"handleAction(item)\"</code>. The <code>onItemAction</code> event is only automatically emitted with default items.",
-        "htmlTitle": "HTML Template",
-        "tsTitle": "Component Logic (TypeScript)",
-        "cssTitle": "CSS Styles"
+        "htmlTitle": "HTML Template"
       },
       "api": {
         "title": "API Reference",
         "description": "Complete documentation of inputs, outputs, and the ActionMenuItem interface for integrating the component into your projects.",
         "componentCodeTitle": "Component Inputs and Outputs",
-        "itemInterfaceCodeTitle": "ActionMenuItem Interface",
         "usageCodeTitle": "Complete Usage Example"
       },
       "styling": {
         "title": "Styling and Customization",
-        "description": "Customize the menu appearance using CSS variables. Control colors, spacing, typography, and more.",
-        "codeTitle": "Available CSS Variables"
+        "description": "Customize the menu appearance using CSS variables. Control colors, spacing, typography, and more."
       }
     },
     "avatar": {
@@ -295,17 +304,17 @@
       "error": {
         "title": "Error Handling (Fallback)",
         "description": "Automatic recovery system. If the image URL fails (404 error), the component instantly switches to showing initials or fallback icon without breaking the design.",
-        "codeTitle": "Load Error Example"      },
+        "codeTitle": "Load Error Example"
+      },
       "api": {
         "title": "API Reference",
         "description": "Complete documentation of Avatar component inputs and outputs for integration into your projects.",
-        "inputsCodeTitle": "Component Inputs and Outputs",
         "usageCodeTitle": "Complete Usage Example"
       },
       "styling": {
         "title": "Styling and Customization",
-        "description": "Customize the avatar appearance using CSS variables. Control sizes, colors, borders, and more.",
-        "codeTitle": "Available CSS Variables"      }
+        "description": "Customize the avatar appearance using CSS variables. Control sizes, colors, borders, and more."
+      }
     },
     "buttonGroup": {
       "title": "Button Group",
@@ -351,13 +360,11 @@
       "api": {
         "title": "API Reference",
         "description": "Complete documentation of inputs, outputs, and advanced usage of the Button Group component.",
-        "inputsCodeTitle": "Component Inputs and Outputs",
         "usageCodeTitle": "Complete Usage Example with Objects"
       },
       "styling": {
         "title": "Styling and Customization",
-        "description": "Customize the button group appearance using CSS variables. Control spacing, colors, shadows, and more.",
-        "codeTitle": "Available CSS Variables"
+        "description": "Customize the button group appearance using CSS variables. Control spacing, colors, shadows, and more."
       }
     },
     "paginator": {
@@ -376,9 +383,7 @@
       "layout": {
         "title": "Custom Layout",
         "description": "The most powerful feature. Define exactly where each element goes (top, left, center, right, bottom) using a configuration object.",
-        "note": "<strong>Area System:</strong> You can move the size selector to the left, put the item summary on top, or create any composition your design needs. When a layout is set, attributes like <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code>, and <code>showPageJump</code> are ignored because the custom layout has full control over what to show and where.",
-        "tsTitle": "TypeScript",
-        "htmlTitle": "HTML"
+        "note": "<strong>Area System:</strong> You can move the size selector to the left, put the item summary on top, or create any composition your design needs. When a layout is set, attributes like <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code>, and <code>showPageJump</code> are ignored because the custom layout has full control over what to show and where."
       },
       "infinite": {
         "title": "Infinite Load / Load More",
@@ -394,14 +399,11 @@
       "api": {
         "title": "API Reference",
         "description": "Complete documentation of Paginator component inputs, outputs, and interfaces for advanced integration.",
-        "inputsCodeTitle": "Component Inputs and Outputs",
-        "interfacesCodeTitle": "PaginatorLayout and InfiniteScrollConfig Interfaces",
         "usageCodeTitle": "Complete Usage Example"
       },
       "styling": {
         "title": "Styling and Customization",
-        "description": "Customize the paginator appearance using CSS variables. Control layout, buttons, page numbers, and more.",
-        "codeTitle": "Available CSS Variables"
+        "description": "Customize the paginator appearance using CSS variables. Control layout, buttons, page numbers, and more."
       }
     },
     "popover": {
@@ -424,17 +426,11 @@
       },
       "template": {
         "title": "Custom Template",
-        "description": "Use Angular templates for rich, interactive content. The template context provides a <code>close</code> function to close the popover.",
-        "htmlTitle": "HTML",
-        "scssTitle": "SCSS",
-        "tsTitle": "TypeScript"
+        "description": "Use Angular templates for rich, interactive content. The template context provides a <code>close</code> function to close the popover."
       },
       "component": {
         "title": "Dynamic Component",
-        "description": "Render complete Angular components inside the popover. Ideal for forms, lists, or complex content.",
-        "parentHtmlTitle": "Parent Component (HTML)",
-        "parentTsTitle": "Parent Component (TS)",
-        "childTitle": "Child Component"
+        "description": "Render complete Angular components inside the popover. Ideal for forms, lists, or complex content."
       },
       "delays": {
         "title": "Show/Hide Delays",
@@ -458,21 +454,16 @@
       },
       "disabled": {
         "title": "Disabled State",
-        "description": "Dynamically control whether the popover is enabled or disabled using the <code>popoverDisabled</code> property.",
-        "htmlTitle": "HTML",
-        "tsTitle": "TypeScript"
+        "description": "Dynamically control whether the popover is enabled or disabled using the <code>popoverDisabled</code> property."
       },
       "api": {
         "title": "API Reference",
         "description": "Complete documentation of the nuiPopover directive, injection tokens, and advanced usage.",
-        "directiveCodeTitle": "Directive Inputs and Outputs",
-        "tokensCodeTitle": "Injection Tokens for Components",
         "usageCodeTitle": "Complete Usage Example"
       },
       "styling": {
         "title": "Styling and Customization",
-        "description": "Customize the popover appearance using CSS variables. Control colors, size, shadows, and animations.",
-        "codeTitle": "Available CSS Variables"
+        "description": "Customize the popover appearance using CSS variables. Control colors, size, shadows, and animations."
       }
     },
     "toast": {
@@ -511,14 +502,11 @@
       "api": {
         "title": "API Reference",
         "description": "Complete documentation of ToastService, interfaces, and advanced usage of the notification system.",
-        "serviceCodeTitle": "ToastService Methods",
-        "interfacesCodeTitle": "ToastOptions, ToastAction, and ToastRef Interfaces",
         "usageCodeTitle": "Complete Usage Example"
       },
       "styling": {
         "title": "Styling and Customization",
-        "description": "Customize the toast appearance using CSS variables. Control colors, size, animations, and more.",
-        "codeTitle": "Available CSS Variables"
+        "description": "Customize the toast appearance using CSS variables. Control colors, size, animations, and more."
       }
     },
     "tooltip": {
@@ -542,9 +530,7 @@
       },
       "template": {
         "title": "Custom Template",
-        "description": "Use Angular templates for rich content with HTML formatting, icons, and styling.",
-        "htmlTitle": "HTML",
-        "scssTitle": "SCSS"
+        "description": "Use Angular templates for rich content with HTML formatting, icons, and styling."
       },
       "delays": {
         "title": "Show/Hide Delays",
@@ -559,13 +545,11 @@
       "api": {
         "title": "API Reference",
         "description": "Complete documentation of the nuiTooltip directive with all available inputs and outputs.",
-        "directiveCodeTitle": "Directive Inputs and Outputs",
         "usageCodeTitle": "Complete Usage Example"
       },
       "styling": {
         "title": "Styling and Customization",
-        "description": "Customize the tooltip appearance using CSS variables. Override these variables in your global styles or component styles.",
-        "codeTitle": "Available CSS Variables"
+        "description": "Customize the tooltip appearance using CSS variables. Override these variables in your global styles or component styles."
       }
     },
     "sidebar-panel": {
@@ -574,8 +558,7 @@
       "basic": {
         "title": "Basic Usage",
         "description": "Open a side panel from the SidebarPanelService. The panel slides in from the screen edge with smooth animation.",
-        "codeTitle": "TypeScript - Open Panel",
-        "htmlCodeTitle": "HTML - Trigger Button"
+        "codeTitle": "TypeScript - Open Panel"
       },
       "sizes": {
         "title": "Sizes",
@@ -589,17 +572,13 @@
       },
       "dynamicComponent": {
         "title": "Dynamic Component",
-        "description": "Load any Angular component inside the panel and pass data through dependency injection using SIDEBAR_PANEL_DATA token.",
-        "componentCodeTitle": "Component Definition",
-        "usageCodeTitle": "Usage with Data Injection"
+        "description": "Load any Angular component inside the panel and pass data through dependency injection using SIDEBAR_PANEL_DATA token."
       },
       "minimizable": {
         "title": "Minimizable Panel",
         "description": "Panels can be minimized to a sidebar tab to free up screen space while preserving their state. Click the minimize button in the header or use programmatic control. You can also restore the panel by clicking the minimized tab, depending on the Sidebar's position, or by clicking the element that created the panel.",
         "note": "Use the <code>minimize()</code> method of the SidebarPanel to minimize the panel programmatically. The panel shrinks to a sidebar tab that can be expanded again by clicking. If <code>minimizable</code> is enabled, the <code>id</code> attribute is required to identify the minimized panel.<br><br><strong>Tab customization:</strong> You can customize the icon, add text, apply custom CSS, or use a completely custom template via <code>minimizedTabCustomization</code>. For floating buttons with free positioning (e.g., chat bottom-right), use <code>standalone: true</code> to render outside the grouped container and avoid positioning constraints.",
-        "codeTitle": "Minimizable Configuration",
-        "customizationCodeTitle": "Custom Tab Button",
-        "cssCodeTitle": "Floating Button CSS Styles"
+        "codeTitle": "Minimizable Configuration"
       },
       "closeButton": {
         "title": "Close Button",
@@ -623,14 +602,11 @@
       },
       "api": {
         "title": "API",
-        "description": "Available interfaces and methods of the SidebarPanel component.",
-        "serviceCodeTitle": "SidebarPanelService API",
-        "refCodeTitle": "SidebarPanelRef API"
+        "description": "Available interfaces and methods of the SidebarPanel component."
       },
       "styling": {
         "title": "Styling and Customization",
-        "description": "Customize the panel appearance through CSS variables. You can override these variables in your custom theme.",
-        "codeTitle": "Available CSS Variables"
+        "description": "Customize the panel appearance through CSS variables. You can override these variables in your custom theme."
       }
     }
   }

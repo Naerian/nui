@@ -44,6 +44,30 @@
     "copied": "¡Copiado!",
     "copyCode": "Copiar código"
   },
+  "codeExamples": {
+    "html": "HTML",
+    "typescript": "TypeScript",
+    "css": "CSS",
+    "scss": "SCSS",
+    "component": "Componente",
+    "usage": "Uso",
+    "definition": "Definición",
+    "configuration": "Configuración",
+    "customization": "Personalización",
+    "styles": "Estilos",
+    "example": "Ejemplo",
+    "componentCode": "Inputs y Outputs del Componente",
+    "usageCode": "Ejemplo de Uso Completo",
+    "itemInterface": "Interface",
+    "parent": "Componente Padre",
+    "child": "Componente Hijo",
+    "directiveCode": "Inputs y Outputs de la Directiva",
+    "tokensCode": "Tokens de Inyección para Componentes",
+    "serviceCode": "Métodos del Servicio",
+    "interfacesCode": "Interfaces",
+    "apiReference": "API de",
+    "cssVariables": "Variables CSS Disponibles"
+  },
   "pages": {
     "home": {
       "title": "Bienvenido a NUI",
@@ -110,18 +134,12 @@
       "subtitle": "Componente de botón versátil con múltiples variantes, tamaños y estados",
       "basic": {
         "title": "Botón Básico",
-        "description": "La forma más simple de un botón con estilos predeterminados.",
-        "codeTitle": "HTML"
+        "description": "La forma más simple de un botón con estilos predeterminados."
       },
-      "variants": {
-        "title": "Variantes",
-        "description": "Los botones vienen en tres variantes: solid (predeterminado), outline y ghost.",
-        "codeTitle": "Variantes de Botón"
-      },
-      "colors": {
-        "title": "Colores",
-        "description": "Los botones soportan todos los colores del tema: primary, secondary, accent, success, info, warning y danger.",
-        "codeTitle": "Colores de Botón"
+      "variants-colors": {
+        "title": "Variantes y Colores",
+        "description": "Los botones vienen en tres variantes: solid (predeterminado), outline y ghost, y soportan todos los colores del tema: primary, secondary, accent, success, info, warning y danger.",
+        "codeTitle": "Variantes y Colores de Botón"
       },
       "sizes": {
         "title": "Tamaños",
@@ -137,9 +155,7 @@
       "loading": {
         "title": "Estado de Carga",
         "description": "Muestra un spinner de carga en tres posiciones: inicio, final o centro (que reemplaza el contenido).",
-        "note": "Posiciones de carga: <code>'start'</code> muestra el spinner antes del texto, <code>'end'</code> lo muestra después, <code>'center'</code> reemplaza completamente el contenido con un spinner centrado.",
-        "htmlTitle": "HTML",
-        "tsTitle": "TypeScript"
+        "note": "Posiciones de carga: <code>'start'</code> muestra el spinner antes del texto, <code>'end'</code> lo muestra después, <code>'center'</code> reemplaza completamente el contenido con un spinner centrado."
       },
       "width": {
         "title": "Ancho",
@@ -155,9 +171,7 @@
       "events": {
         "title": "Eventos",
         "description": "Maneja eventos de clic con el output onClick. Soporta tipos de botón: button, submit y reset.",
-        "consoleNote": "Abre las DevTools (F12) y revisa la pestaña Console para ver los eventos registrados cuando haces clic en los botones.",
-        "htmlTitle": "HTML",
-        "tsTitle": "TypeScript"
+        "consoleNote": "Abre las DevTools (F12) y revisa la pestaña Console para ver los eventos registrados cuando haces clic en los botones."
       },
       "directive": {
         "title": "Usando Directiva",
@@ -172,8 +186,7 @@
       },
       "styling": {
         "title": "Estilos y Personalización",
-        "description": "Personaliza la apariencia del botón mediante variables CSS. Controla tamaños, tipografía, colores y más.",
-        "codeTitle": "Variables CSS Disponibles"
+        "description": "Personaliza la apariencia del botón mediante variables CSS. Controla tamaños, tipografía, colores y más."
       }
     },
     "actionMenu": {
@@ -183,35 +196,31 @@
         "title": "Uso Básico",
         "description": "Menú de acciones simple con array de items. Cada item puede tener una etiqueta, icono y acción.",
         "note": "Aquí vemos un ejemplo de uso de ambos <code>type='static'</code> y <code>type='dynamic'</code>.",
-        "consoleNote": "Abre las DevTools (F12) y revisa la pestaña Console para ver las acciones registradas cuando haces clic en los items del menú.",
-        "htmlTitle": "HTML",
-        "tsTitle": "TypeScript"
+        "consoleNote": "Abre las DevTools (F12) y revisa la pestaña Console para ver las acciones registradas cuando haces clic en los items del menú."
       },
       "separators": {
         "title": "Con Separadores",
-        "description": "Agrupa acciones relacionadas usando separadores visuales. Usa <code>separator: true</code> para separadores simples, o agrega un <code>label</code> para separadores etiquetados.",
-        "codeTitle": "Menú con Separadores"
+        "description": "Agrupa acciones relacionadas usando separadores visuales. Usa <code>separator: true</code> para separadores simples, o agrega un <code>label</code> para separadores etiquetados."
       },
       "submenu": {
         "title": "Con Submenús",
         "description": "Crea menús anidados usando la propiedad <code>children</code>. Los submenús pueden anidarse múltiples niveles.",
-        "note": "Usa la propiedad <code>children</code> para definir items de submenú. Cada hijo puede tener sus propios hijos para mayor anidación. <strong>Nota:</strong> Si un hijo tiene <code>selected: true</code>, el item padre mostrará un indicador visual (línea vertical a la izquierda) para facilitar la navegación.",
-        "codeTitle": "Menús Anidados"
+        "note": "Usa la propiedad <code>children</code> para definir items de submenú. Cada hijo puede tener sus propios hijos para mayor anidación. <strong>Nota:</strong> Si un hijo tiene <code>selected: true</code>, el item padre mostrará un indicador visual (línea vertical a la izquierda) para facilitar la navegación."
       },
       "variants": {
         "title": "Variantes del Botón",
-        "description": "El botón del menú soporta tres variantes: <code>'ghost'</code> (predeterminado), <code>'solid'</code> y <code>'outline'</code>.",
-        "codeTitle": "Ejemplos de Variantes"
+        "description": "El botón del menú soporta tres variantes: <code>'ghost'</code> (predeterminado), <code>'solid'</code> y <code>'outline'</code>."
       },
       "sizes": {
         "title": "Tamaños",
-        "description": "Cinco opciones de tamaño para el botón del menú: <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code> (predeterminado), <code>'lg'</code> y <code>'xl'</code>.",
-        "codeTitle": "Opciones de Tamaño"
+        "description": "Cinco opciones de tamaño para el botón del menú: <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code> (predeterminado), <code>'lg'</code> y <code>'xl'</code>."
       },
       "label": {
         "title": "Con Etiqueta",
         "description": "Agrega texto al botón del menú. Puede combinarse con iconos y soporta modo de ancho completo.",
-        "codeTitle": "Botón con Texto"
+        "codeTitle1": "Texto e Icono",
+        "codeTitle2": "Solo Texto",
+        "codeTitle3": "Ancho Completo"
       },
       "disabled": {
         "title": "Estado Deshabilitado",
@@ -237,22 +246,17 @@
         "title": "Template Personalizado",
         "description": "Personaliza completamente el renderizado del menú usando templates y directivas. Usa <code>menu-header</code> y <code>menu-footer</code> para agregar contenido al inicio y final sin necesidad de ng-template.",
         "note": "El template <code>#item</code> recibe el item completo como contexto (<code>let-item</code>). Las directivas <code>menu-header</code> y <code>menu-footer</code> permiten una sintaxis más simple y clara que PrimeNG, evitando ng-template innecesarios.",
-        "clickNote": "<strong>Importante:</strong> Al usar templates personalizados, debes manejar el evento click manualmente con <code>(click)=\"handleAction(item)\"</code>. El evento <code>onItemAction</code> solo se emite automáticamente con items por defecto.",
-        "htmlTitle": "Template HTML",
-        "tsTitle": "TypeScript",
-        "cssTitle": "Estilos CSS"
+        "clickNote": "<strong>Importante:</strong> Al usar templates personalizados, debes manejar el evento click manualmente con <code>(click)=\"handleAction(item)\"</code>. El evento <code>onItemAction</code> solo se emite automáticamente con items por defecto."
       },
       "api": {
         "title": "API y Referencia",
         "description": "Documentación completa de inputs, outputs y la interfaz ActionMenuItem para integrar el componente en tus proyectos.",
         "componentCodeTitle": "Inputs y Outputs del Componente",
-        "itemInterfaceCodeTitle": "Interface ActionMenuItem",
         "usageCodeTitle": "Ejemplo de Uso Completo"
       },
       "styling": {
         "title": "Estilos y Personalización",
-        "description": "Personaliza la apariencia del menú mediante variables CSS. Controla colores, espaciado, tipografía y más.",
-        "codeTitle": "Variables CSS Disponibles"
+        "description": "Personaliza la apariencia del menú mediante variables CSS. Controla colores, espaciado, tipografía y más."
       }
     },
     "avatar": {
@@ -298,13 +302,11 @@
       "api": {
         "title": "API y Referencia",
         "description": "Documentación completa de inputs y outputs del componente Avatar para integrar en tus proyectos.",
-        "inputsCodeTitle": "Inputs y Outputs del Componente",
         "usageCodeTitle": "Ejemplo de Uso Completo"
       },
       "styling": {
         "title": "Estilos y Personalización",
-        "description": "Personaliza la apariencia del avatar mediante variables CSS. Controla tamaños, colores, bordes y más.",
-        "codeTitle": "Variables CSS Disponibles"
+        "description": "Personaliza la apariencia del avatar mediante variables CSS. Controla tamaños, colores, bordes y más."
       }
     },
     "buttonGroup": {
@@ -351,13 +353,11 @@
       "api": {
         "title": "API y Referencia",
         "description": "Documentación completa de inputs, outputs y uso avanzado del componente Button Group.",
-        "inputsCodeTitle": "Inputs y Outputs del Componente",
         "usageCodeTitle": "Ejemplo de Uso Completo con Objetos"
       },
       "styling": {
         "title": "Estilos y Personalización",
-        "description": "Personaliza la apariencia del grupo de botones mediante variables CSS. Controla espaciado, colores, sombras y más.",
-        "codeTitle": "Variables CSS Disponibles"
+        "description": "Personaliza la apariencia del grupo de botones mediante variables CSS. Controla espaciado, colores, sombras y más."
       }
     },
     "paginator": {
@@ -376,9 +376,7 @@
       "layout": {
         "title": "Layout Personalizado",
         "description": "La característica más potente. Define exactamente dónde va cada elemento (top, left, center, right, bottom) usando un objeto de configuración.",
-        "note": "<strong>Sistema de Áreas:</strong> Puedes mover el selector de tamaño a la izquierda, poner el resumen de items arriba, o crear cualquier composición que necesite tu diseño. Cuando se establece un layout, los atributos como <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> y <code>showPageJump</code> se ignoran porque el layout personalizado tiene control total sobre qué mostrar y dónde.",
-        "tsTitle": "TypeScript",
-        "htmlTitle": "HTML"
+        "note": "<strong>Sistema de Áreas:</strong> Puedes mover el selector de tamaño a la izquierda, poner el resumen de items arriba, o crear cualquier composición que necesite tu diseño. Cuando se establece un layout, los atributos como <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> y <code>showPageJump</code> se ignoran porque el layout personalizado tiene control total sobre qué mostrar y dónde."
       },
       "infinite": {
         "title": "Carga Infinita / Ver Más",
@@ -394,14 +392,11 @@
       "api": {
         "title": "API y Referencia",
         "description": "Documentación completa de inputs, outputs e interfaces del componente Paginator para integración avanzada.",
-        "inputsCodeTitle": "Inputs y Outputs del Componente",
-        "interfacesCodeTitle": "Interfaces PaginatorLayout e InfiniteScrollConfig",
         "usageCodeTitle": "Ejemplo de Uso Completo"
       },
       "styling": {
         "title": "Estilos y Personalización",
-        "description": "Personaliza la apariencia del paginador mediante variables CSS. Controla layout, botones, números de página y más.",
-        "codeTitle": "Variables CSS Disponibles"
+        "description": "Personaliza la apariencia del paginador mediante variables CSS. Controla layout, botones, números de página y más."
       }
     },
     "popover": {
@@ -424,17 +419,11 @@
       },
       "template": {
         "title": "Template Personalizado",
-        "description": "Usa templates de Angular para contenido rico e interactivo. El contexto del template proporciona una función <code>close</code> para cerrar el popover.",
-        "htmlTitle": "HTML",
-        "scssTitle": "SCSS",
-        "tsTitle": "TypeScript"
+        "description": "Usa templates de Angular para contenido rico e interactivo. El contexto del template proporciona una función <code>close</code> para cerrar el popover."
       },
       "component": {
         "title": "Componente Dinámico",
-        "description": "Renderiza componentes completos de Angular dentro del popover. Ideal para formularios, listas o contenido complejo.",
-        "parentHtmlTitle": "Componente Padre (HTML)",
-        "parentTsTitle": "Componente Padre (TS)",
-        "childTitle": "Componente Hijo"
+        "description": "Renderiza componentes completos de Angular dentro del popover. Ideal para formularios, listas o contenido complejo."
       },
       "delays": {
         "title": "Delays de Mostrar/Ocultar",
@@ -458,21 +447,16 @@
       },
       "disabled": {
         "title": "Estado Deshabilitado",
-        "description": "Controla dinámicamente si el popover está habilitado o deshabilitado usando la propiedad <code>popoverDisabled</code>.",
-        "htmlTitle": "HTML",
-        "tsTitle": "TypeScript"
+        "description": "Controla dinámicamente si el popover está habilitado o deshabilitado usando la propiedad <code>popoverDisabled</code>."
       },
       "api": {
         "title": "API y Referencia",
         "description": "Documentación completa de la directiva nuiPopover, tokens de inyección y uso avanzado.",
-        "directiveCodeTitle": "Inputs y Outputs de la Directiva",
-        "tokensCodeTitle": "Tokens de Inyección para Componentes",
         "usageCodeTitle": "Ejemplo de Uso Completo"
       },
       "styling": {
         "title": "Estilos y Personalización",
-        "description": "Personaliza la apariencia del popover mediante variables CSS. Controla colores, tamaño, sombras y animaciones.",
-        "codeTitle": "Variables CSS Disponibles"
+        "description": "Personaliza la apariencia del popover mediante variables CSS. Controla colores, tamaño, sombras y animaciones."
       }
     },
     "toast": {
@@ -511,14 +495,11 @@
       "api": {
         "title": "API y Referencia",
         "description": "Documentación completa del ToastService, interfaces y uso avanzado del sistema de notificaciones.",
-        "serviceCodeTitle": "Métodos del ToastService",
-        "interfacesCodeTitle": "Interfaces ToastOptions, ToastAction y ToastRef",
         "usageCodeTitle": "Ejemplo de Uso Completo"
       },
       "styling": {
         "title": "Estilos y Personalización",
-        "description": "Personaliza la apariencia de los toasts mediante variables CSS. Controla colores, tamaño, animaciones y más.",
-        "codeTitle": "Variables CSS Disponibles"
+        "description": "Personaliza la apariencia de los toasts mediante variables CSS. Controla colores, tamaño, animaciones y más."
       }
     },
     "sidebar-panel": {
@@ -527,8 +508,7 @@
       "basic": {
         "title": "Uso Básico",
         "description": "Abre un panel lateral desde el servicio SidebarPanelService. El panel se desliza desde el borde de la pantalla con una animación suave.",
-        "codeTitle": "TypeScript - Abrir Panel",
-        "htmlCodeTitle": "HTML - Botón Trigger"
+        "codeTitle": "TypeScript - Abrir Panel"
       },
       "sizes": {
         "title": "Tamaños",
@@ -542,17 +522,13 @@
       },
       "dynamicComponent": {
         "title": "Componente Dinámico",
-        "description": "Carga cualquier componente Angular dentro del panel y pasa datos mediante inyección de dependencias usando el token SIDEBAR_PANEL_DATA.",
-        "componentCodeTitle": "Definición del Componente",
-        "usageCodeTitle": "Uso con Inyección de Datos"
+        "description": "Carga cualquier componente Angular dentro del panel y pasa datos mediante inyección de dependencias usando el token SIDEBAR_PANEL_DATA."
       },
       "minimizable": {
         "title": "Panel Minimizable",
         "description": "Los paneles pueden minimizarse a una pestaña lateral para liberar espacio en pantalla mientras se preserva el estado. Haz clic en el botón minimizar del header o usa control programático. Además, podrás restaurar el panel haciendo clic en la pestaña minimizada, según la posición del Sidebar o haciendo clic en el elemento que creó dicho panel.",
         "note": "Usa el método <code>minimize()</code> del SidebarPanel para minimizar el panel programáticamente. El panel se reduce a una pestaña lateral que puede expandirse nuevamente al hacer clic. Si <code>minimizable</code> está habilitado, el atributo <code>id</code> es obligatorio para identificar el panel minimizado.<br><br><strong>Customización de pestañas:</strong> Puedes personalizar el icono, agregar texto, aplicar CSS personalizado o usar un template completamente custom mediante <code>minimizedTabCustomization</code>. Para botones flotantes con posicionamiento libre (ej: chat bottom-right), usa <code>standalone: true</code> para renderizar fuera del contenedor agrupado y evitar restricciones de posicionamiento.",
-        "codeTitle": "Configuración Minimizable",
-        "customizationCodeTitle": "Pestaña Personalizada",
-        "cssCodeTitle": "Estilos CSS del Botón Flotante"
+        "codeTitle": "Configuración Minimizable"
       },
       "closeButton": {
         "title": "Botón de Cerrar",
@@ -576,14 +552,11 @@
       },
       "api": {
         "title": "API",
-        "description": "Interfaces y métodos disponibles del componente SidebarPanel.",
-        "serviceCodeTitle": "API de SidebarPanelService",
-        "refCodeTitle": "API de SidebarPanelRef"
+        "description": "Interfaces y métodos disponibles del componente SidebarPanel."
       },
       "styling": {
         "title": "Estilos y Personalización",
-        "description": "Personaliza la apariencia del panel mediante variables CSS. Puedes sobrescribir estas variables en tu tema personalizado.",
-        "codeTitle": "Variables CSS Disponibles"
+        "description": "Personaliza la apariencia del panel mediante variables CSS. Puedes sobrescribir estas variables en tu tema personalizado."
       }
     },
     "tooltip": {
@@ -631,13 +604,11 @@
       "api": {
         "title": "API y Referencia",
         "description": "Documentación completa de la directiva nuiTooltip con todos sus inputs, outputs y ejemplos de uso.",
-        "directiveCodeTitle": "Inputs y Outputs de la Directiva",
         "usageCodeTitle": "Ejemplo de Uso Completo"
       },
       "styling": {
         "title": "Estilos y Personalización",
-        "description": "Personaliza la apariencia del tooltip mediante variables CSS. Controla colores, tamaño, animaciones y más.",
-        "codeTitle": "Variables CSS Disponibles"
+        "description": "Personaliza la apariencia del tooltip mediante variables CSS. Controla colores, tamaño, animaciones y más."
       }
     }
   }
