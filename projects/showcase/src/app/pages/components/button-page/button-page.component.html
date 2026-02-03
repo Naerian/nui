@@ -1,19 +1,17 @@
 <div class="docs-page">
   <div class="page-header">
     <h1>{{ pageConfig.title | translate }}</h1>
-    <p class="subtitle">{{ pageConfig.subtitle | translate }}</p>
+    <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
   </div>
 
   @for (section of pageConfig.sections; track section.id) {
     <section class="section">
-      <app-section-title 
-        [title]="section.title | translate" 
-        [anchor]="section.anchor">
-      </app-section-title>
-      
-      <p class="section-description">
-        {{ section.description | translate }}
-      </p>
+      <app-section-title
+        [title]="section.title | translate"
+        [anchor]="section.anchor"
+      ></app-section-title>
+
+      <p class="section-description" [innerHTML]="section.description | translate"></p>
 
       @if (section.note; as note) {
         <div class="section-note" [ngClass]="note.type">
@@ -28,7 +26,7 @@
             <nui-button>Click me</nui-button>
           </div>
         }
-        
+
         @case ('variants-colors') {
           <div class="example-preview">
             <!-- Solid -->
@@ -41,7 +39,7 @@
               <nui-button color="warning">Warning</nui-button>
               <nui-button color="danger">Danger</nui-button>
             </div>
-            
+
             <!-- Outline -->
             <div class="button-row">
               <nui-button variant="outline" color="primary">Primary</nui-button>
@@ -52,7 +50,7 @@
               <nui-button variant="outline" color="warning">Warning</nui-button>
               <nui-button variant="outline" color="danger">Danger</nui-button>
             </div>
-            
+
             <!-- Ghost -->
             <div class="button-row">
               <nui-button variant="ghost" color="primary">Primary</nui-button>
@@ -65,7 +63,7 @@
             </div>
           </div>
         }
-        
+
         @case ('sizes') {
           <div class="example-preview">
             <nui-button size="xs">Extra Small</nui-button>
@@ -75,7 +73,7 @@
             <nui-button size="xl">Extra Large</nui-button>
           </div>
         }
-        
+
         @case ('icons') {
           <div class="example-preview">
             <nui-button icon="ri-user-line">Profile</nui-button>
@@ -83,17 +81,21 @@
             <nui-button icon="ri-settings-line" aria-label="Settings"></nui-button>
           </div>
         }
-        
+
         @case ('loading') {
           <div class="example-preview">
-            <nui-button [loading]="isLoading()" loadingPosition="start" (onClick)="simulateLoading()">
+            <nui-button
+              [loading]="isLoading()"
+              loadingPosition="start"
+              (onClick)="simulateLoading()"
+            >
               {{ isLoading() ? 'Loading...' : 'Click to Load' }}
             </nui-button>
             <nui-button [loading]="isLoading()" loadingPosition="end">Loading...</nui-button>
             <nui-button [loading]="isLoading()" loadingPosition="center">Loading...</nui-button>
           </div>
         }
-        
+
         @case ('width') {
           <div class="example-preview flex-column">
             <nui-button width="auto">Auto Width</nui-button>
@@ -101,26 +103,34 @@
             <nui-button width="fit">Fit Content</nui-button>
           </div>
         }
-        
+
         @case ('disabled') {
           <div class="example-preview">
             <nui-button [disabled]="true">Disabled Button</nui-button>
             <nui-button variant="outline" [disabled]="true">Disabled Outline</nui-button>
           </div>
         }
-        
+
         @case ('events') {
           <div class="example-preview">
             <nui-button (onClick)="onButtonClick($event)">Click Event</nui-button>
             <nui-button type="submit" (onClick)="onButtonClick($event)">Submit Form</nui-button>
           </div>
         }
-        
+
         @case ('directive') {
           <div class="example-preview">
             <button nuiButton>Native Button</button>
             <button nuiButton variant="outline" color="primary">Primary Outline</button>
             <button nuiButton variant="ghost" color="danger">Ghost Danger</button>
+            <button
+              nuiButton
+              [loading]="isLoading()"
+              loadingPosition="start"
+              (onClick)="simulateLoading()"
+            >
+              {{ isLoading() ? 'Loading...' : 'Click to Load' }}
+            </button>
             <button nuiButton icon="ri-save-line">Save</button>
             <button nuiButton icon="ri-download-line" iconPosition="end">Download</button>
           </div>

@@ -18,7 +18,7 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
       },
       examples: [
         {
-          title: 'components.actionMenu.basic.htmlTitle',
+          title: 'codeExamples.html',
           code: `<nui-action-menu 
   icon="ri-more-line" 
   [items]="menuItems"
@@ -27,7 +27,7 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
           language: 'html',
         },
         {
-          title: 'components.actionMenu.basic.tsTitle',
+          title: 'codeExamples.typescript',
           code: `export class MyComponent {
   menuItems: ActionMenuItem[] = [
     { 
@@ -55,16 +55,20 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
       id: 'separators',
       title: 'components.actionMenu.separators.title',
       description: 'components.actionMenu.separators.description',
+      note: {
+        type: 'info',
+        content: 'components.actionMenu.separators.note',
+      },
       anchor: 'separators',
       examples: [
         {
-          title: 'components.actionMenu.separators.codeTitle',
+          title: 'codeExamples.typescript',
           code: `menuItems: ActionMenuItem[] = [
   { label: 'Edit', icon: 'ri-edit-line', action: 'edit' },
   { label: 'Duplicate', icon: 'ri-file-copy-line', action: 'duplicate' },
   { separator: true }, // Simple separator
   { label: 'Export', icon: 'ri-download-line', action: 'export' },
-  { separator: true, label: 'Danger Zone' }, // Separator with label
+  { separator: true, label: 'Danger Zone' }, // <----- Separator with label
   { label: 'Delete', icon: 'ri-delete-bin-line', action: 'delete' }
 ];`,
           language: 'typescript',
@@ -82,7 +86,7 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
       },
       examples: [
         {
-          title: 'components.actionMenu.submenu.codeTitle',
+          title: 'codeExamples.typescript',
           code: `menuWithSubmenu: ActionMenuItem[] = [
   { label: 'New', icon: 'ri-add-line', action: 'new' },
   { 
@@ -121,6 +125,10 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
       id: 'variants',
       title: 'components.actionMenu.variants.title',
       description: 'components.actionMenu.variants.description',
+      note: {
+        type: 'info',
+        content: 'components.actionMenu.variants.note',
+      },
       anchor: 'variants',
       examples: [
         {
@@ -156,10 +164,14 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
       id: 'sizes',
       title: 'components.actionMenu.sizes.title',
       description: 'components.actionMenu.sizes.description',
+      note: {
+        type: 'info',
+        content: 'components.actionMenu.sizes.note',
+      },
       anchor: 'sizes',
       examples: [
         {
-          title: 'components.actionMenu.sizes.htmlTitle',
+          title: 'codeExamples.html',
           code: `<nui-action-menu size="xs" icon="ri-more-line" [items]="menuItems"></nui-action-menu>
 <nui-action-menu size="sm" icon="ri-more-line" [items]="menuItems"></nui-action-menu>
 <nui-action-menu size="md" icon="ri-more-line" [items]="menuItems"></nui-action-menu>
@@ -173,6 +185,10 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
       id: 'label',
       title: 'components.actionMenu.label.title',
       description: 'components.actionMenu.label.description',
+      note: {
+        type: 'info',
+        content: 'components.actionMenu.label.note',
+      },
       anchor: 'label',
       examples: [
         {
@@ -214,7 +230,7 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
       anchor: 'disabled',
       examples: [
         {
-          title: 'components.actionMenu.disabled.codeTitle',
+          title: 'codeExamples.typescript',
           code: `menuItems: ActionMenuItem[] = [
   { label: 'Save', icon: 'ri-save-line', action: 'save' },
   { 
@@ -228,7 +244,7 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
           language: 'typescript',
         },
         {
-          title: 'components.actionMenu.disabled.htmlTitle',
+          title: 'codeExamples.html',
           code: `<nui-action-menu 
   icon="ri-more-line" 
   [items]="menuItems">
@@ -241,10 +257,10 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
       id: 'withSubtitle',
       title: 'components.actionMenu.withSubtitle.title',
       description: 'components.actionMenu.withSubtitle.description',
-      anchor: 'subtitulo',
+      anchor: 'withSubtitle',
       examples: [
         {
-          title: 'components.actionMenu.withSubtitle.codeTitle',
+          title: 'codeExamples.typescript',
           code: `menuItems: ActionMenuItem[] = [
   { 
     label: 'John Doe', 
@@ -274,12 +290,11 @@ export const ACTION_MENU_PAGE_CONFIG: ComponentPageConfig = {
       id: 'selected',
       title: 'components.actionMenu.selected.title',
       description: 'components.actionMenu.selected.description',
-      anchor: 'seleccionado',
+      anchor: 'selected',
       examples: [
         {
-          title: 'components.actionMenu.selected.codeTitle',
-          code: `// Útil para selectores o filtros
-menuItems: ActionMenuItem[] = [
+          title: 'codeExamples.typescript',
+          code: `menuItems: ActionMenuItem[] = [
   { 
     label: 'English', 
     icon: 'ri-global-line',
@@ -302,13 +317,17 @@ menuItems: ActionMenuItem[] = [
       ],
     },
     {
-      id: 'colors',
-      title: 'components.actionMenu.colors.title',
-      description: 'components.actionMenu.colors.description',
-      anchor: 'colores',
+      id: 'icons',
+      title: 'components.actionMenu.icons.title',
+      description: 'components.actionMenu.icons.description',
+      note: {
+        type: 'info',
+        content: 'components.actionMenu.icons.note',
+      },
+      anchor: 'icons',
       examples: [
         {
-          title: 'components.actionMenu.colors.codeTitle',
+          title: 'codeExamples.typescript',
           code: `menuItems: ActionMenuItem[] = [
   { label: 'Info', icon: 'ri-information-line', action: 'info' },
   { label: 'Success', icon: 'ri-checkbox-circle-line', action: 'success' },
@@ -324,10 +343,14 @@ menuItems: ActionMenuItem[] = [
       id: 'template',
       title: 'components.actionMenu.template.title',
       description: 'components.actionMenu.template.description',
+      note: {
+        type: 'info',
+        content: 'components.actionMenu.template.note',
+      },
       anchor: 'template',
       examples: [
         {
-          title: 'components.actionMenu.template.htmlTitle',
+          title: 'codeExamples.html',
           code: `<nui-action-menu 
   icon="ri-user-line" 
   label="Mi Cuenta"
@@ -335,7 +358,7 @@ menuItems: ActionMenuItem[] = [
   color="primary"
   [items]="menuWithBadges">
   
-  <!-- Header: usa la directiva menu-header directamente -->
+  <!-- Header: Use the menu-header directive directly -->
   <div menu-header class="menu-user-header">
     <div class="user-avatar">
       <i class="ri-user-fill"></i>
@@ -346,7 +369,7 @@ menuItems: ActionMenuItem[] = [
     </div>
   </div>
   
-  <!-- Items: template personalizado con let-item -->
+  <!-- Items: custom template with let-item -->
   <ng-template #item let-item>
     <div class="menu-item-custom" (click)="handleAction(item)">
       <div class="menu-item-main">
@@ -367,7 +390,7 @@ menuItems: ActionMenuItem[] = [
     </div>
   </ng-template>
   
-  <!-- Footer: usa la directiva menu-footer directamente -->
+  <!-- Footer: use the menu-footer directive directly -->
   <button menu-footer class="menu-footer-logout">
     <i class="ri-logout-box-line"></i>
     <span>Cerrar Sesión</span>
@@ -376,30 +399,37 @@ menuItems: ActionMenuItem[] = [
           language: 'html',
         },
         {
-          title: 'components.actionMenu.template.tsTitle',
+          title: 'codeExamples.typescript',
           code: `menuWithBadges: ActionMenuItem[] = [
   { 
     label: 'Mensajes', 
-    subtitle: 'Nuevos mensajes recibidos',
+    subtitle: 'New messages received',
     icon: 'ri-message-line', 
     action: 'messages',
     badge: '3'
   },
   { 
     label: 'Tareas', 
-    subtitle: 'Tareas pendientes',
+    subtitle: 'Pending tasks',
     icon: 'ri-task-line', 
     action: 'tasks',
     badge: '7'
   },
   { separator: true },
   { 
-    label: 'Configuración', 
+    label: 'Settings', 
     icon: 'ri-settings-line', 
     action: 'settings',
     shortcut: '⌘+S'
   }
-];`,
+];
+
+...
+
+handleAction(item: ActionMenuItem) {
+  console.log('Action:', item.action, 'Data:', item.data);
+}
+`,
           language: 'typescript',
         },
       ],
@@ -411,48 +441,44 @@ menuItems: ActionMenuItem[] = [
       anchor: 'api',
       examples: [
         {
-          title: 'components.actionMenu.api.componentCodeTitle',
-          code: `// Inputs del componente
-@Input() items: ActionMenuItem[] = [];        // Items del menú
-@Input() icon?: string;                       // Icono del botón trigger
-@Input() label?: string;                      // Texto del botón trigger
-@Input() variant: ButtonVariant = 'ghost';    // Variante del botón
-@Input() color?: ButtonColor;                 // Color del botón
-@Input() size: ButtonSize = 'md';             // Tamaño del botón
-@Input() width?: 'auto' | 'full' = 'auto';    // Ancho del botón
-@Input() disabled = false;                    // Estado deshabilitado
-@Input() position: PopoverPosition = 'bottom-start'; // Posición del menú
-@Input() menuWidth: string = '200px';         // Ancho del menú desplegable
+          title: 'codeExamples.componentCode',
+          code: `@Input() items: ActionMenuItem[] = [];        // Menu items
+@Input() icon?: string;                       // Icon of the trigger button
+@Input() label?: string;                      // Text of the trigger button
+@Input() variant: ButtonVariant = 'ghost';    // Button variant
+@Input() color?: ButtonColor;                 // Button color
+@Input() size: ButtonSize = 'md';             // Button size
+@Input() width?: 'auto' | 'full' = 'auto';    // Button width
+@Input() disabled = false;                    // Disabled state
+@Input() position: PopoverPosition = 'bottom-start'; // Menu position
+@Input() menuWidth: string = '200px';         // Dropdown menu width
 
-// Outputs del componente
-@Output() onItemAction = new EventEmitter<ActionMenuItem>(); // Click en item
-@Output() onMenuOpen = new EventEmitter<void>();             // Menú abierto
-@Output() onMenuClose = new EventEmitter<void>();            // Menú cerrado`,
+@Output() onItemAction = new EventEmitter<ActionMenuItem>(); // Click on item
+@Output() onMenuOpen = new EventEmitter<void>();             // Menu opened
+@Output() onMenuClose = new EventEmitter<void>();            // Menu closed`,
           language: 'typescript',
         },
         {
-          title: 'components.actionMenu.api.itemInterfaceCodeTitle',
-          code: `// Interface ActionMenuItem
-interface ActionMenuItem {
-  label?: string;           // Texto del item
-  subtitle?: string;        // Texto secundario
-  icon?: string;            // Icono (Remix Icon)
-  action?: string;          // Identificador de acción
-  badge?: string;           // Badge con texto/número
-  shortcut?: string;        // Atajo de teclado (⌘+S)
-  selected?: boolean;       // Muestra check icon
-  disabled?: boolean;       // Estado deshabilitado
-  separator?: boolean;      // Renderiza como separador
-  variant?: 'default' | 'danger'; // Variante visual
+          title: 'codeExamples.interfacesCode',
+          code: `interface ActionMenuItem {
+  label?: string;           // Text of the item
+  subtitle?: string;        // Secondary text
+  icon?: string;            // Icon (Remix Icon)
+  action?: string;          // Action identifier
+  badge?: string;           // Badge with text/number
+  shortcut?: string;        // Keyboard shortcut (⌘+S)
+  selected?: boolean;       // Shows check icon
+  disabled?: boolean;       // Disabled state
+  separator?: boolean;      // Renders as separator
+  variant?: 'default' | 'danger'; // Visual variant
   children?: ActionMenuItem[]; // Submenu items
-  data?: any;               // Datos personalizados
+  data?: any;               // Custom data
 }`,
           language: 'typescript',
         },
         {
-          title: 'components.actionMenu.api.usageCodeTitle',
-          code: `// Ejemplo completo de uso
-import { Component } from '@angular/core';
+          title: 'codeExamples.usageCode',
+          code: `import { Component } from '@angular/core';
 import { ActionMenuItem } from 'nui';
 
 @Component({
@@ -498,12 +524,11 @@ export class ExampleComponent {
       id: 'styling',
       title: 'components.actionMenu.styling.title',
       description: 'components.actionMenu.styling.description',
-      anchor: 'estilos',
+      anchor: 'styling',
       examples: [
         {
-          title: 'components.actionMenu.styling.codeTitle',
-          code: `// Personalización de variables CSS
-:root {
+          title: 'codeExamples.cssVariables',
+          code: `:root {
   /* Menu Container */
   --nui-action-menu-bg: var(--nui-bg-primary);
   --nui-action-menu-border: var(--nui-border-primary);
@@ -564,7 +589,7 @@ export class ExampleComponent {
   --nui-action-menu-footer-border: var(--nui-border-primary);
 }
 
-// Ejemplo de customización
+// Example of customization
 .my-custom-action-menu {
   ::ng-deep .nui-action-menu {
     --nui-action-menu-bg: #1a1a2e;

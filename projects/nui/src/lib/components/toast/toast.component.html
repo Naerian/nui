@@ -6,9 +6,7 @@
   [style.transform]="isSwiping ? 'translateX(' + swipeDistance() + 'px)' : null"
 >
   <!-- Barra de progreso en el borde SUPERIOR -->
-  @if (
-    config().progressBar && config().timeout && (config().timeout || 0) > 0
-  ) {
+  @if (config().progressBar && config().timeout && (config().timeout || 0) > 0) {
     <div
       class="nui-toast__progress-bar"
       [style.width]="progressBarStyle().width"
@@ -35,20 +33,21 @@
         type="button"
         class="nui-toast__expand-button"
         (click)="toggleExpanded(); $event.stopPropagation()"
-        [attr.aria-label]="
-          isExpanded() ? translation.collapse : translation.expand
-        "
+        [attr.aria-label]="isExpanded() ? translation.collapse : translation.expand"
         [attr.aria-expanded]="isExpanded()"
       >
-        <i
-          [class]="isExpanded() ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"
-        ></i>
+        <i [class]="isExpanded() ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"></i>
       </button>
     }
   </div>
 
   <!-- Contenedor principal del contenido -->
-  <div class="nui-toast__body">
+  <div
+    class="nui-toast__body"
+    [class.nui-toast__body--single-content]="
+      !shouldShowMessage() || (!shouldShowTitle() && !shouldShowHtml())
+    "
+  >
     <!-- Icono (solo si showStandardContent es true) -->
     @if (shouldShowIcon()) {
       <div class="nui-toast__icon">

@@ -1,7 +1,7 @@
 <div class="docs-page">
   <div class="page-header">
     <h1>{{ pageConfig.title | translate }}</h1>
-    <p class="subtitle">{{ pageConfig.subtitle | translate }}</p>
+    <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
   </div>
 
   @for (section of pageConfig.sections; track section.id) {
@@ -11,9 +11,7 @@
         [anchor]="section.anchor"
       ></app-section-title>
 
-      <p class="section-description">
-        {{ section.description | translate }}
-      </p>
+      <p class="section-description" [innerHTML]="section.description | translate"></p>
 
       @if (section.note; as note) {
         <div class="section-note" [ngClass]="note.type">
@@ -25,17 +23,14 @@
       @switch (section.id) {
         @case ('basic') {
           <div class="example-preview">
-            <nui-button (click)="openBasicPanel()">Abrir Panel</nui-button>
+            <nui-button (click)="openBasicPanel()">Open Panel</nui-button>
           </div>
         }
 
         @case ('defaults') {
           <div class="example-preview">
-            <nui-button
-              [color]="'primary'"
-              (click)="openPanelWithDefaults()"
-            >
-              Abrir Panel con Defaults
+            <nui-button [color]="'primary'" (click)="openPanelWithDefaults()">
+              Open Panel with Defaults
             </nui-button>
           </div>
         }
@@ -53,28 +48,35 @@
 
         @case ('positions') {
           <div class="example-preview example-preview--spaced">
-            <nui-button (click)="openPanelWithPosition('left')">Desde Izquierda</nui-button>
-            <nui-button (click)="openPanelWithPosition('right')">Desde Derecha</nui-button>
-            <nui-button (click)="openPanelWithPosition('top')">Desde Arriba</nui-button>
-            <nui-button (click)="openPanelWithPosition('bottom')">Desde Abajo</nui-button>
+            <nui-button (click)="openPanelWithPosition('left')">From Left</nui-button>
+            <nui-button (click)="openPanelWithPosition('right')">From Right</nui-button>
+            <nui-button (click)="openPanelWithPosition('top')">From Top</nui-button>
+            <nui-button (click)="openPanelWithPosition('bottom')">From Bottom</nui-button>
           </div>
         }
 
         @case ('dynamic-component') {
           <div class="example-preview">
-            <nui-button (click)="openDynamicPanel()">Abrir Panel con Datos Dinámicos</nui-button>
+            <nui-button (click)="openDynamicPanel()">Open Panel with Dynamic Data</nui-button>
+          </div>
+        }
+
+        @case ('dynamic-component-events') {
+          <div class="example-preview">
+            <nui-button [color]="'primary'" (click)="openPanelWithEvents()">
+              Open Panel with Events
+            </nui-button>
           </div>
         }
 
         @case ('minimizable') {
           <div class="example-preview example-preview--spaced">
-            <nui-button (click)="openMinimizablePanel()">Abrir Panel Minimizable</nui-button>
-            <nui-button (click)="openMinimizablePanel2()">Abrir Otro Panel Minimizable</nui-button>
-            <nui-button 
-              [color]="'primary'"
-              (click)="openChatSupportPanel()"
-            >
-              Chat Support (Botón Flotante)
+            <nui-button (click)="openMinimizablePanel()">Open Minimizable Panel</nui-button>
+            <nui-button (click)="openMinimizablePanel2()">
+              Open Another Minimizable Panel
+            </nui-button>
+            <nui-button [color]="'primary'" (click)="openChatSupportPanel()">
+              Chat Support (Floating Button)
             </nui-button>
           </div>
         }
@@ -82,43 +84,31 @@
         @case ('close-button') {
           <div class="example-preview">
             <nui-button (click)="openPanelWithoutCloseButton()">
-              Abrir Panel sin Botón Cerrar
+              Open Panel without Close Button
             </nui-button>
           </div>
         }
 
-        @case ('no-backdrop') {
+        @case ('backdrop') {
           <div class="example-preview">
-            <nui-button (click)="openPanelWithoutBackdrop()">Abrir Panel sin Backdrop</nui-button>
+            <nui-button (click)="openPanelWithoutBackdrop()">
+              Open Panel without Backdrop
+            </nui-button>
           </div>
         }
 
         @case ('custom-backdrop') {
           <div class="example-preview">
-            <nui-button
-              [color]="'primary'"
-              (click)="openPanelWithCustomBackdrop()"
-            >
-              Abrir Panel con Backdrop Personalizado
-            </nui-button>
-          </div>
-        }
-
-        @case ('events') {
-          <div class="example-preview">
-            <nui-button
-              [color]="'primary'"
-              (click)="openPanelWithEvents()"
-            >
-              Abrir Panel con Eventos
+            <nui-button [color]="'primary'" (click)="openPanelWithCustomBackdrop()">
+              Open Panel with Custom Backdrop
             </nui-button>
           </div>
         }
 
         @case ('multiple') {
           <div class="example-preview example-preview--spaced">
-            <nui-button (click)="openMultiplePanels()">Abrir Múltiples Panels</nui-button>
-            <nui-button color="secondary" (click)="closeAllPanels()">Cerrar Todos</nui-button>
+            <nui-button (click)="openMultiplePanels()">Open Multiple Panels</nui-button>
+            <nui-button color="secondary" (click)="closeAllPanels()">Close All</nui-button>
           </div>
         }
       }

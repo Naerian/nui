@@ -958,7 +958,7 @@ export const appConfig: ApplicationConfig = {
       toast: {
         // ===== POSICIÓN Y LÍMITES =====
         position: 'top-right',              // Posición por defecto
-        maxToasts: 5,                       // Máximo de toasts globales
+        maxToasts: 6,                       // Máximo de toasts globales
         maxToastsPerPosition: 3,            // Máximo por posición
 
         // ===== TIEMPO =====
@@ -1209,7 +1209,7 @@ queue.add(() => this.toastService.warning('Mensaje 3'));
 
 **Soluciones**:
 1. Llamar a `closeAll()` al destruir componentes
-2. Limitar `maxToasts` a un número razonable (5-10)
+2. Limitar `maxToasts` a un número razonable (6-10)
 3. No crear toasts en loops sin control
 
 ### ❌ Templates no se actualizan

@@ -1,5 +1,5 @@
-@use "../mixins";
-@use "../variables/toast/toast-variables.scss";
+@use '../mixins';
+@use '../variables/toast/toast-variables.scss';
 
 // ===== CONTENEDOR GLOBAL =====
 .nui-toast-container {
@@ -84,8 +84,7 @@
         translateY(var(--nui-toast-stack-translate-y-1));
       opacity: var(--nui-toast-stack-opacity-1);
       filter: blur(var(--nui-toast-stack-blur-1));
-      transition: all var(--nui-toast-transition-duration)
-        var(--nui-toast-transition-easing);
+      transition: all var(--nui-toast-transition-duration) var(--nui-toast-transition-easing);
 
       &:hover {
         transform: scale(1) translateY(0);
@@ -120,8 +119,7 @@
         translateY(var(--nui-toast-stack-translate-y-1));
       opacity: var(--nui-toast-stack-opacity-1);
       filter: blur(var(--nui-toast-stack-blur-1));
-      transition: all var(--nui-toast-transition-duration)
-        var(--nui-toast-transition-easing);
+      transition: all var(--nui-toast-transition-duration) var(--nui-toast-transition-easing);
 
       &:hover {
         transform: scale(1) translateY(0);
@@ -155,8 +153,7 @@
         translateY(var(--nui-toast-stack-translate-y-1));
       opacity: var(--nui-toast-stack-opacity-1);
       filter: blur(var(--nui-toast-stack-blur-1));
-      transition: all var(--nui-toast-transition-duration)
-        var(--nui-toast-transition-easing);
+      transition: all var(--nui-toast-transition-duration) var(--nui-toast-transition-easing);
 
       &:hover {
         transform: scale(1) translateY(0);
@@ -231,18 +228,15 @@
   overflow: hidden;
 
   // Transiciones suaves
-  transition: transform var(--nui-toast-transition-duration)
-      var(--nui-toast-transition-easing),
-    opacity var(--nui-toast-transition-duration)
-      var(--nui-toast-transition-easing),
-    box-shadow var(--nui-toast-transition-duration)
-      var(--nui-toast-transition-easing),
-    filter var(--nui-toast-transition-duration)
-      var(--nui-toast-transition-easing);
+  transition:
+    transform var(--nui-toast-transition-duration) var(--nui-toast-transition-easing),
+    opacity var(--nui-toast-transition-duration) var(--nui-toast-transition-easing),
+    box-shadow var(--nui-toast-transition-duration) var(--nui-toast-transition-easing),
+    filter var(--nui-toast-transition-duration) var(--nui-toast-transition-easing);
 
   // Borde interno sutil con pseudo-elemento
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -256,7 +250,8 @@
       rgba(255, 255, 255, 0.08) 50%,
       rgba(255, 255, 255, 0.02) 100%
     );
-    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -297,6 +292,10 @@
   align-items: flex-start;
   gap: var(--nui-toast-gap);
   width: 100%;
+
+  &--single-content {
+    align-items: center;
+  }
 }
 
 .nui-toast__icon {
@@ -308,7 +307,7 @@
   line-height: 1;
   width: var(--nui-toast-icon-bg-size);
   height: var(--nui-toast-icon-bg-size);
-  border-radius: 0.5rem;
+  border-radius: var(--nui-toast-icon-radius);
   transition: all 0.3s var(--nui-toast-transition-easing);
 
   i {
@@ -453,18 +452,13 @@
   will-change: width;
 
   // Gradiente sutil en la progress bar
-  background: linear-gradient(
-    90deg,
-    currentColor 0%,
-    currentColor 85%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg, currentColor 0%, currentColor 85%, transparent 100%);
 
   // Animación de brillo sutil
   overflow: hidden;
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: -100%;
@@ -513,11 +507,16 @@
     gap: 0.75rem;
   }
 
+  .nui-toast__body {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--nui-toast-icon-gap);
+  }
+
   .nui-toast__icon {
     font-size: var(--nui-toast-icon-size-top);
-    width: 3rem;
-    height: 3rem;
-    margin-bottom: 0.25rem;
+    width: var(--nui-toast-icon-bg-size);
+    height: var(--nui-toast-icon-bg-size);
   }
 
   .nui-toast__content {

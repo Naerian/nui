@@ -11,10 +11,10 @@ export const AVATAR_PAGE_CONFIG: ComponentPageConfig = {
       id: 'basic',
       title: 'components.avatar.basic.title',
       description: 'components.avatar.basic.description',
-      anchor: 'basico',
+      anchor: 'basic',
       examples: [
         {
-          title: 'components.avatar.basic.codeTitle',
+          title: 'codeExamples.html',
           code: `<nui-avatar src="https://i.pravatar.cc/150?img=12" alt="John Doe"></nui-avatar>`,
           language: 'html',
         },
@@ -24,27 +24,27 @@ export const AVATAR_PAGE_CONFIG: ComponentPageConfig = {
       id: 'types',
       title: 'components.avatar.types.title',
       description: 'components.avatar.types.description',
-      anchor: 'tipos',
+      anchor: 'types',
       note: {
         type: 'info',
         content: 'components.avatar.types.note',
       },
       examples: [
         {
-          title: 'components.avatar.types.codeTitle',
-          code: `<!-- 1. Imagen (prioridad más alta) -->
+          title: 'codeExamples.html',
+          code: `<!-- 1. Image (highest priority) -->
 <nui-avatar src="https://i.pravatar.cc/150?img=5" alt="User"></nui-avatar>
 
-<!-- 2. Iniciales (si no hay imagen) -->
+<!-- 2. Initials (if no image) -->
 <nui-avatar initials="JD" color="primary"></nui-avatar>
 
-<!-- 3. Icono (si no hay imagen ni iniciales) -->
+<!-- 3. Icon (if no image or initials) -->
 <nui-avatar icon="ri-user-star-line" color="secondary"></nui-avatar>
 
-<!-- 4. Iniciales desde alt (si no hay nada más) -->
+<!-- 4. Initials from alt (if nothing else) -->
 <nui-avatar alt="Alan Turing" color="accent"></nui-avatar>
 
-<!-- 5. Icono por defecto (fallback final) -->
+<!-- 5. Default icon (final fallback) -->
 <nui-avatar></nui-avatar>`,
           language: 'html',
         },
@@ -54,17 +54,21 @@ export const AVATAR_PAGE_CONFIG: ComponentPageConfig = {
       id: 'variants',
       title: 'components.avatar.variants.title',
       description: 'components.avatar.variants.description',
-      anchor: 'variantes',
+      note: {
+        type: 'info',
+        content: 'components.avatar.variants.note',
+      },
+      anchor: 'variants',
       examples: [
         {
-          title: 'components.avatar.variants.codeTitle',
+          title: 'codeExamples.html',
           code: `<!-- Circular (default) -->
 <nui-avatar src="..." variant="circular"></nui-avatar>
 
-<!-- Rounded (bordes redondeados) -->
+<!-- Rounded (rounded corners) -->
 <nui-avatar src="..." variant="rounded"></nui-avatar>
 
-<!-- Square (rectangular) -->
+<!-- Square (square corners) -->
 <nui-avatar src="..." variant="square"></nui-avatar>`,
           language: 'html',
         },
@@ -74,10 +78,14 @@ export const AVATAR_PAGE_CONFIG: ComponentPageConfig = {
       id: 'sizes',
       title: 'components.avatar.sizes.title',
       description: 'components.avatar.sizes.description',
-      anchor: 'tamanos',
+      note: {
+        type: 'info',
+        content: 'components.avatar.sizes.note',
+      },
+      anchor: 'sizes',
       examples: [
         {
-          title: 'components.avatar.sizes.codeTitle',
+          title: 'codeExamples.html',
           code: `<nui-avatar size="xs" initials="XS"></nui-avatar>
 <nui-avatar size="sm" initials="SM"></nui-avatar>
 <nui-avatar size="md" initials="MD"></nui-avatar>
@@ -91,10 +99,10 @@ export const AVATAR_PAGE_CONFIG: ComponentPageConfig = {
       id: 'colors',
       title: 'components.avatar.colors.title',
       description: 'components.avatar.colors.description',
-      anchor: 'colores',
+      anchor: 'colors',
       examples: [
         {
-          title: 'components.avatar.colors.codeTitle',
+          title: 'codeExamples.html',
           code: `<nui-avatar initials="P" color="primary"></nui-avatar>
 <nui-avatar initials="S" color="secondary"></nui-avatar>
 <nui-avatar initials="A" color="accent"></nui-avatar>
@@ -110,18 +118,18 @@ export const AVATAR_PAGE_CONFIG: ComponentPageConfig = {
       id: 'customSize',
       title: 'components.avatar.customSize.title',
       description: 'components.avatar.customSize.description',
-      anchor: 'tamano-custom',
+      anchor: 'custom-size',
       note: {
         type: 'info',
         content: 'components.avatar.customSize.note',
       },
       examples: [
         {
-          title: 'components.avatar.customSize.codeTitle',
-          code: `<!-- Avatar de 120px -->
+          title: 'codeExamples.html',
+          code: `<!-- 120px avatar -->
 <nui-avatar [customSize]="120" src="..." variant="rounded"></nui-avatar>
 
-<!-- Avatar de 80px con iniciales -->
+<!-- 80px avatar with initials -->
 <nui-avatar [customSize]="80" initials="CS" color="primary"></nui-avatar>`,
           language: 'html',
         },
@@ -131,12 +139,11 @@ export const AVATAR_PAGE_CONFIG: ComponentPageConfig = {
       id: 'error',
       title: 'components.avatar.error.title',
       description: 'components.avatar.error.description',
-      anchor: 'manejo-errores',
+      anchor: 'error-handling',
       examples: [
         {
-          title: 'components.avatar.error.codeTitle',
-          code: `<!-- Si la imagen falla, automáticamente usa las iniciales o icono -->
-<nui-avatar 
+          title: 'codeExamples.html',
+          code: `<nui-avatar 
   src="invalid-url.jpg" 
   initials="ER" 
   color="danger"
@@ -153,26 +160,23 @@ export const AVATAR_PAGE_CONFIG: ComponentPageConfig = {
       anchor: 'api',
       examples: [
         {
-          title: 'components.avatar.api.inputsCodeTitle',
-          code: `// Inputs del componente
-@Input() src?: string;                          // URL de la imagen
-@Input() alt?: string;                          // Texto alternativo
-@Input() initials?: string;                     // Iniciales a mostrar
-@Input() icon?: string;                         // Icono (Remix Icon)
-@Input() size: AvatarSize = 'md';              // Tamaño: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-@Input() customSize?: number;                  // Tamaño personalizado en píxeles
-@Input() variant: AvatarVariant = 'circular';  // Forma: 'circular' | 'rounded' | 'square'
-@Input() color?: ThemeColor;                   // Color de fondo cuando no hay imagen
-@Input() textColor?: string;                   // Color del texto/icono
+          title: 'codeExamples.componentCode',
+          code: `@Input() src?: string;                          // Image URL
+@Input() alt?: string;                          // Alternative text
+@Input() initials?: string;                     // Initials to display
+@Input() icon?: string;                         // Icon (Remix Icon)
+@Input() size: AvatarSize = 'md';              // Size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+@Input() customSize?: number;                  // Custom size in pixels
+@Input() variant: AvatarVariant = 'circular';  // Shape: 'circular' | 'rounded' | 'square'
+@Input() color?: ThemeColor;                   // Background color when no image
+@Input() textColor?: string;                   // Text/icon color
 
-// Outputs del componente
-@Output() imageError = new EventEmitter<Event>(); // Se emite cuando falla la carga de imagen`,
+@Output() imageError = new EventEmitter<Event>(); // Emitted when image loading fails`,
           language: 'typescript',
         },
         {
-          title: 'components.avatar.api.usageCodeTitle',
-          code: `// Ejemplo completo de uso
-import { Component } from '@angular/core';
+          title: 'codeExamples.usageCode',
+          code: `import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-example',
@@ -195,7 +199,7 @@ export class ExampleComponent {
 
   onImageError(event: Event): void {
     console.log('Error loading image:', event);
-    // El componente automáticamente muestra el fallback
+    // The component automatically shows the fallback
   }
 }`,
           language: 'typescript',
@@ -206,20 +210,19 @@ export class ExampleComponent {
       id: 'styling',
       title: 'components.avatar.styling.title',
       description: 'components.avatar.styling.description',
-      anchor: 'estilos',
+      anchor: 'styling',
       examples: [
         {
-          title: 'components.avatar.styling.codeTitle',
-          code: `// Personalización de variables CSS
-:root {
-  /* Tamaños predefinidos */
+          title: 'codeExamples.cssVariables',
+          code: `:root {
+  /* Predefined sizes */
   --nui-avatar-size-xs: 24px;
   --nui-avatar-size-sm: 32px;
   --nui-avatar-size-md: 40px;
   --nui-avatar-size-lg: 48px;
   --nui-avatar-size-xl: 64px;
   
-  /* Tipografía y escalado */
+  /* Typography and scaling */
   --nui-avatar-font-size-xs: 10px;
   --nui-avatar-font-size-sm: 12px;
   --nui-avatar-font-size-md: 14px;
@@ -227,28 +230,28 @@ export class ExampleComponent {
   --nui-avatar-font-size-xl: 20px;
   --nui-avatar-font-weight: var(--font-weight-semibold);
   
-  /* Tamaño de iconos */
+  /* Icon size */
   --nui-avatar-icon-size-xs: 14px;
   --nui-avatar-icon-size-sm: 16px;
   --nui-avatar-icon-size-md: 20px;
   --nui-avatar-icon-size-lg: 24px;
   --nui-avatar-icon-size-xl: 32px;
   
-  /* Bordes redondeados */
+  /* Border radius */
   --nui-avatar-border-radius-circular: 50%;
   --nui-avatar-border-radius-rounded: var(--border-radius-md);
   --nui-avatar-border-radius-square: 0;
   
-  /* Colores por defecto */
+  /* Default colors */
   --nui-avatar-bg-default: var(--nui-bg-tertiary);
   --nui-avatar-text-default: var(--nui-text-secondary);
   
-  /* Borde opcional */
+  /* Optional border */
   --nui-avatar-border-width: 0;
   --nui-avatar-border-color: transparent;
 }
 
-// Ejemplo de customización
+// Example of customizing the avatar styles
 .my-custom-avatar {
   --nui-avatar-size-md: 56px;
   --nui-avatar-font-size-md: 18px;

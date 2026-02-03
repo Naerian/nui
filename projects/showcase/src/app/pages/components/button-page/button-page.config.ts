@@ -14,7 +14,7 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       anchor: 'basic',
       examples: [
         {
-          title: 'components.button.basic.codeTitle',
+          title: 'codeExamples.html',
           code: `<nui-button>Click me</nui-button>`,
           language: 'html',
         },
@@ -24,6 +24,10 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       id: 'variants-colors',
       title: 'components.button.variants-colors.title',
       description: 'components.button.variants-colors.description',
+      note: {
+        type: 'info',
+        content: 'components.button.variants-colors.note',
+      },
       anchor: 'variants-colors',
       examples: [
         {
@@ -65,6 +69,10 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       id: 'sizes',
       title: 'components.button.sizes.title',
       description: 'components.button.sizes.description',
+      note: {
+        type: 'info',
+        content: 'components.button.sizes.note',
+      },
       anchor: 'sizes',
       examples: [
         {
@@ -89,7 +97,7 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       },
       examples: [
         {
-          title: 'components.button.icons.codeTitle',
+          title: 'codeExamples.html',
           code: `<nui-button icon="ri-user-line">Profile</nui-button>
 <nui-button icon="ri-arrow-right-line" iconPosition="end">Next</nui-button>
 <nui-button icon="ri-settings-line" aria-label="Settings"></nui-button>`,
@@ -108,7 +116,7 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       },
       examples: [
         {
-          title: 'components.button.loading.htmlTitle',
+          title: 'codeExamples.html',
           code: `<nui-button [loading]="isLoading" loadingPosition="start">
   Loading...
 </nui-button>
@@ -123,7 +131,7 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
           language: 'html',
         },
         {
-          title: 'components.button.loading.tsTitle',
+          title: 'codeExamples.typescript',
           code: `export class MyComponent {
   isLoading = false;
 
@@ -151,7 +159,7 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       },
       examples: [
         {
-          title: 'components.button.width.codeTitle',
+          title: 'codeExamples.html',
           code: `<nui-button width="auto">Auto Width</nui-button>
 <nui-button width="full">Full Width</nui-button>
 <nui-button width="fit">Fit Content</nui-button>`,
@@ -166,7 +174,7 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       anchor: 'disabled',
       examples: [
         {
-          title: 'components.button.disabled.codeTitle',
+          title: 'codeExamples.html',
           code: `<nui-button [disabled]="true">Disabled Button</nui-button>
 <nui-button variant="outline" [disabled]="true">Disabled Outline</nui-button>`,
           language: 'html',
@@ -184,13 +192,13 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       },
       examples: [
         {
-          title: 'components.button.events.htmlTitle',
+          title: 'codeExamples.html',
           code: `<nui-button (onClick)="handleClick()">Click Event</nui-button>
 <nui-button type="submit" (onClick)="handleSubmit($event)">Submit Form</nui-button>`,
           language: 'html',
         },
         {
-          title: 'components.button.events.tsTitle',
+          title: 'codeExamples.typescript',
           code: `export class MyComponent {
   handleClick() {
     console.log('Button clicked!');
@@ -209,10 +217,14 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       id: 'directive',
       title: 'components.button.directive.title',
       description: 'components.button.directive.description',
+      note: {
+        type: 'info',
+        content: 'components.button.directive.note',
+      },
       anchor: 'directive',
       examples: [
         {
-          title: 'components.button.directive.codeTitle',
+          title: 'codeExamples.html',
           code: `<!-- Using the nuiButton directive in native HTML elements -->
 <button nuiButton>Native Button</button>
 <button nuiButton variant="outline" color="primary">Primary Outline</button>
@@ -239,9 +251,26 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       anchor: 'api',
       examples: [
         {
-          title: 'components.button.api.componentCodeTitle',
-          code: `// Component inputs and directive
-@Input() variant: ButtonVariant = 'solid';     // Variant: 'solid' | 'outline' | 'ghost'
+          title: 'codeExamples.componentCode',
+          code: `@Input() variant: ButtonVariant = 'solid';     // Variant: 'solid' | 'outline' | 'ghost'
+@Input() color?: ButtonColor;                  // Color: 'primary' | 'secondary' | 'accent' | 'success' | 'info' | 'warning' | 'danger'
+@Input() size: ButtonSize = 'md';              // Size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+@Input() icon?: string;                        // Icon (Remix Icon)
+@Input() iconPosition: 'start' | 'end' = 'start'; // Icon position
+@Input() loading = false;                      // Loading state
+@Input() loadingPosition: 'start' | 'center' | 'end' = 'start'; // Spinner position
+@Input() width: 'auto' | 'full' | 'fit' = 'auto'; // Button width
+@Input() disabled = false;                     // Disabled state
+@Input() type: 'button' | 'submit' | 'reset' = 'button'; // Button type
+@Input() ariaLabel?: string;                   // Accessibility label
+
+// Component outputs
+@Output() onClick = new EventEmitter<Event>(); // Click event`,
+          language: 'typescript',
+        },
+        {
+          title: 'codeExamples.directiveCode',
+          code: `@Input() variant: ButtonVariant = 'solid';     // Variant: 'solid' | 'outline' | 'ghost'
 @Input() color?: ButtonColor;                  // Color: 'primary' | 'secondary' | 'accent' | 'success' | 'info' | 'warning' | 'danger'
 @Input() size: ButtonSize = 'md';              // Size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 @Input() icon?: string;                        // Icon (Remix Icon)
@@ -315,9 +344,9 @@ export class ExampleComponent {
     this.isSaving.set(true);
     try {
       await this.apiService.save();
-      console.log('Guardado exitosamente');
+      console.log('Saved successfully');
     } catch (error) {
-      console.error('Error al guardar:', error);
+      console.error('Error saving:', error);
     } finally {
       this.isSaving.set(false);
     }
@@ -327,7 +356,7 @@ export class ExampleComponent {
     this.isDeleting.set(true);
     try {
       await this.apiService.delete();
-      console.log('Eliminado exitosamente');
+      console.log('Deleted successfully');
     } finally {
       this.isDeleting.set(false);
     }
@@ -344,9 +373,8 @@ export class ExampleComponent {
       anchor: 'styles',
       examples: [
         {
-          title: 'components.button.styling.codeTitle',
-          code: `// Customization of CSS variables
-:root {
+          title: 'codeExamples.cssVariables',
+          code: `:root {
   /* Sizes */
   --nui-button-height-xs: 24px;
   --nui-button-height-sm: 32px;
@@ -411,7 +439,7 @@ export class ExampleComponent {
   --nui-button-height-md: 44px;
   --nui-button-padding-x-md: 24px;
   
-  // Custom shadows
+  /* Custom shadows */
   &.nui-button--solid {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     

@@ -529,7 +529,7 @@ export class ToastService {
       progressBar: true,
       closeOnTouch: true,
       closeButton: true,
-      maxToasts: 5,
+      maxToasts: 6,
       maxToastsPerPosition: 3,
       animationIn: 'slide',
       animationOut: 'fade',

@@ -11,10 +11,10 @@ export const PAGINATOR_PAGE_CONFIG: ComponentPageConfig = {
       id: 'basic',
       title: 'components.paginator.basic.title',
       description: 'components.paginator.basic.description',
-      anchor: 'basico',
+      anchor: 'basic',
       examples: [
         {
-          title: 'components.paginator.basic.codeTitle',
+          title: 'codeExamples.html',
           code: `<nui-paginator
   [currentPage]="currentPage"
   [totalItems]="150"
@@ -26,22 +26,44 @@ export const PAGINATOR_PAGE_CONFIG: ComponentPageConfig = {
       ],
     },
     {
-      id: 'styles',
-      title: 'components.paginator.styles.title',
-      description: 'components.paginator.styles.description',
-      anchor: 'estilos',
+      id: 'colors',
+      title: 'components.paginator.colors.title',
+      description: 'components.paginator.colors.description',
+      note: {
+        type: 'info',
+        content: 'components.paginator.colors.note',
+      },
+      anchor: 'colors',
       examples: [
         {
-          title: 'components.paginator.styles.codeTitle',
-          code: `<!-- Colores y variantes -->
+          title: 'codeExamples.html',
+          code: `<nui-paginator color="primary" variant="ghost" [totalItems]="100"></nui-paginator>
 <nui-paginator color="secondary" variant="outline" [totalItems]="100"></nui-paginator>
 <nui-paginator color="success" variant="solid" [totalItems]="100"></nui-paginator>
-<nui-paginator color="primary" variant="ghost" [totalItems]="100"></nui-paginator>
-
-<!-- Tamaños -->
-<nui-paginator size="sm" color="success" [totalItems]="100"></nui-paginator>
-<nui-paginator size="md" [totalItems]="100"></nui-paginator>
-<nui-paginator size="lg" [totalItems]="100"></nui-paginator>`,
+<nui-paginator color="danger" [totalItems]="100"></nui-paginator>
+<nui-paginator color="warning" variant="outline" [totalItems]="100"></nui-paginator>`,
+          language: 'html',
+        },
+      ],
+    },
+    {
+      id: 'sizes',
+      title: 'components.paginator.sizes.title',
+      description: 'components.paginator.sizes.description',
+      note: {
+        type: 'info',
+        content: 'components.paginator.sizes.note',
+      },
+      anchor: 'sizes',
+      examples: [
+        {
+          title: 'codeExamples.html',
+          code: `<nui-paginator [currentPage]="1" [totalPages]="5" size="xs"></nui-paginator>
+<nui-paginator [currentPage]="1" [totalPages]="5" size="s"></nui-paginator>
+<nui-paginator [currentPage]="1" [totalPages]="5" size="sm"></nui-paginator>
+<nui-paginator [currentPage]="1" [totalPages]="5" size="md"></nui-paginator>
+<nui-paginator [currentPage]="1" [totalPages]="5" size="lg"></nui-paginator>
+<nui-paginator [currentPage]="1" [totalPages]="5" size="xl"></nui-paginator>`,
           language: 'html',
         },
       ],
@@ -57,7 +79,17 @@ export const PAGINATOR_PAGE_CONFIG: ComponentPageConfig = {
       },
       examples: [
         {
-          title: 'components.paginator.layout.tsTitle',
+          title: 'codeExamples.html',
+          code: `<nui-paginator
+  [layout]="myLayout"
+  [currentPage]="1"
+  [totalItems]="500"
+  [itemsPerPage]="20"
+></nui-paginator>`,
+          language: 'html',
+        },
+        {
+          title: 'codeExamples.typescript',
           code: `import { PaginatorLayout } from 'nui';
 
 myLayout: PaginatorLayout = {
@@ -72,14 +104,33 @@ myLayout: PaginatorLayout = {
           language: 'typescript',
         },
         {
-          title: 'components.paginator.layout.htmlTitle',
-          code: `<nui-paginator
-  [layout]="myLayout"
-  [currentPage]="1"
-  [totalItems]="500"
-  [itemsPerPage]="20"
-></nui-paginator>`,
-          language: 'html',
+          title: 'codeExamples.itemInterface',
+          code: `// Elements that can be used in the layout
+interface PaginatorLayout {
+  top?: PaginatorElement[];     // Elements at the top
+  left?: PaginatorElement[];    // Elements on the left
+  center?: PaginatorElement[];  // Elements at the center
+  right?: PaginatorElement[];   // Elements on the right
+  bottom?: PaginatorElement[];  // Elements at the bottom
+  direction?: 'row' | 'column'; // Layout direction
+  gap?: string;                 // Gap between elements
+  align?: 'start' | 'center' | 'end' | 'space-between'; // Alignment
+
+}
+
+// Possible elements in the layout
+type PaginatorElement =
+  | 'firstButton'     // Button to go to the first page
+  | 'prevButton'      // Button to go to the previous page
+  | 'pageNumbers'     // Page number buttons
+  | 'currentPage'     // Current page display
+  | 'nextButton'      // Button to go to the next page
+  | 'lastButton'      // Button to go to the last page
+  | 'itemRange'       // Display of item range (e.g., "1-10 of 100")
+  | 'pageSize'        // Page size selector
+  | 'pageJump';       // Page jump input
+`,
+          language: 'typescript',
         },
       ],
     },
@@ -87,10 +138,14 @@ myLayout: PaginatorLayout = {
       id: 'infinite',
       title: 'components.paginator.infinite.title',
       description: 'components.paginator.infinite.description',
-      anchor: 'carga-infinita',
+      note: {
+        type: 'info',
+        content: 'components.paginator.layout.note',
+      },
+      anchor: 'infinite',
       examples: [
         {
-          title: 'components.paginator.infinite.codeTitle',
+          title: 'codeExamples.html',
           code: `<nui-paginator
   [infiniteConfig]="{ 
     enabled: true, 
@@ -100,13 +155,15 @@ myLayout: PaginatorLayout = {
     onLoadMore: loadMoreData
   }"
   [totalItems]="100"
-></nui-paginator>
-
-// TypeScript
-async loadMoreData() {
+></nui-paginator>`,
+          language: 'html',
+        },
+        {
+          title: 'codeExamples.typescript',
+          code: `async loadMoreData() {
   this.loading.set(true);
   
-  // Simular llamada a API
+  // Simulate data loading
   await new Promise(resolve => setTimeout(resolve, 1500));
   
   const currentLength = this.items().length;
@@ -118,30 +175,21 @@ async loadMoreData() {
   this.items.update(items => [...items, ...newItems]);
   this.loading.set(false);
 }`,
-          language: 'html',
+          language: 'typescript',
         },
-      ],
-    },
-    {
-      id: 'sizes',
-      title: 'components.paginator.sizes.title',
-      description: 'components.paginator.sizes.description',
-      anchor: 'tamanos-pagina',
-      note: {
-        type: 'info',
-        content: 'components.paginator.sizes.note',
-      },
-      examples: [
         {
-          title: 'components.paginator.sizes.codeTitle',
-          code: `<nui-paginator
-  [currentPage]="1"
-  [totalItems]="200"
-  [itemsPerPage]="pageSize"
-  [pageSizeOptions]="[5, 10, 25, 50, 100]"
-  (pageSizeChange)="onPageSizeChange($event)"
-></nui-paginator>`,
-          language: 'html',
+          title: 'codeExamples.interfacesCode',
+          code: `interface InfiniteScrollConfig {
+  enabled: boolean;              // Enable infinite mode
+  mode: 'button' | 'auto';       // Mode: button or automatic
+  showCounter?: boolean;         // Show loaded items counter
+  initialLoadedItems?: number;   // Initially loaded items
+  onLoadMore: () => void | Promise<void>; // Callback to load more
+  loadingText?: string;          // Loading text
+  buttonText?: string;           // Button text
+  endText?: string;              // Text when no more items
+}`,
+          language: 'typescript',
         },
       ],
     },
@@ -152,76 +200,75 @@ async loadMoreData() {
       anchor: 'api',
       examples: [
         {
-          title: 'components.paginator.api.inputsCodeTitle',
-          code: `// Inputs del componente
-@Input() currentPage = 1;                      // Página actual
-@Input() totalItems = 0;                       // Total de items
-@Input() itemsPerPage = 10;                    // Items por página
-@Input() pageSizeOptions: number[] = [10, 25, 50, 100]; // Opciones de tamaño
-@Input() maxPages = 7;                         // Máximo de páginas visibles
-@Input() showFirstLast = true;                 // Mostrar botones primera/última
-@Input() showPrevNext = true;                  // Mostrar botones anterior/siguiente
-@Input() showPageNumbers = true;               // Mostrar números de página
-@Input() showPageSizeSelector = true;          // Mostrar selector de tamaño
-@Input() showItemRange = true;                 // Mostrar rango de items
-@Input() showPageJump = false;                 // Mostrar salto a página
-@Input() color?: ButtonColor;                  // Color de los botones
-@Input() variant: ButtonVariant = 'outline';   // Variante de los botones
-@Input() size: ButtonSize = 'md';              // Tamaño de los botones
-@Input() layout?: PaginatorLayout;             // Layout personalizado
-@Input() infiniteConfig?: InfiniteScrollConfig; // Configuración de carga infinita
+          title: 'codeExamples.componentCode',
+          code: `@Input() currentPage = 1;                      // Current page
+@Input() totalItems = 0;                       // Total items
+@Input() itemsPerPage = 10;                    // Items per page
+@Input() pageSizeOptions: number[] = [10, 25, 50, 100]; // Page size options
+@Input() maxPages = 7;                         // Maximum visible pages
+@Input() showFirstLast = true;                 // Show first/last buttons
+@Input() showPrevNext = true;                  // Show previous/next buttons
+@Input() showPageNumbers = true;               // Show page numbers
+@Input() showPageSizeSelector = true;          // Show page size selector
+@Input() showItemRange = true;                 // Show item range
+@Input() showPageJump = false;                 // Show page jump
+@Input() color?: ButtonColor;                  // Button color
+@Input() variant: ButtonVariant = 'outline';   // Button variant
+@Input() size: ButtonSize = 'md';              // Button size
+@Input() layout?: PaginatorLayout;             // Custom layout
+@Input() infiniteConfig?: InfiniteScrollConfig; // Infinite scroll configuration
 
-// Outputs del componente
-@Output() pageChange = new EventEmitter<number>();     // Cambio de página
-@Output() pageSizeChange = new EventEmitter<number>(); // Cambio de tamaño`,
+@Output() pageChange = new EventEmitter<number>();     // Page change
+@Output() pageSizeChange = new EventEmitter<number>(); // Page size change`,
           language: 'typescript',
         },
         {
-          title: 'components.paginator.api.interfacesCodeTitle',
-          code: `// Interface PaginatorLayout
+          title: 'codeExamples.interfacesCode',
+          code: `// Interface to configure the layout
 interface PaginatorLayout {
-  top?: PaginatorElement[];      // Elementos en la parte superior
-  left?: PaginatorElement[];     // Elementos a la izquierda
-  center?: PaginatorElement[];   // Elementos en el centro
-  right?: PaginatorElement[];    // Elementos a la derecha
-  bottom?: PaginatorElement[];   // Elementos en la parte inferior
-  direction?: 'row' | 'column';  // Dirección del layout
-  gap?: string;                  // Espacio entre áreas
+  top?: PaginatorElement[];      // Elements at the top
+  left?: PaginatorElement[];     // Elements on the left
+  center?: PaginatorElement[];   // Elements in the center
+  right?: PaginatorElement[];    // Elements on the right
+  bottom?: PaginatorElement[];   // Elements at the bottom
+  direction?: 'row' | 'column';  // Layout direction
+  gap?: string;                  // Gap between areas
 }
 
+// Possible elements in the layout
 type PaginatorElement = 
-  | 'firstButton'    // Botón primera página
-  | 'prevButton'     // Botón anterior
-  | 'pageNumbers'    // Números de página
-  | 'nextButton'     // Botón siguiente
-  | 'lastButton'     // Botón última página
-  | 'pageSize'       // Selector de tamaño
-  | 'itemRange'      // Rango de items (ej: "1-10 de 100")
-  | 'pageJump';      // Salto a página
+  | 'firstButton'    // First page button
+  | 'prevButton'     // Previous page button
+  | 'pageNumbers'    // Page numbers
+  | 'nextButton'     // Next page button
+  | 'lastButton'     // Last page button
+  | 'pageSize'       // Page size selector
+  | 'itemRange'      // Item range (e.g., "1-10 of 100")
+  | 'pageJump';      // Page jump
 
-// Interface InfiniteScrollConfig
+
+// Interface to configure infinite scroll
 interface InfiniteScrollConfig {
-  enabled: boolean;              // Activar modo infinito
-  mode: 'button' | 'auto';       // Modo: botón o automático
-  showCounter?: boolean;         // Mostrar contador de items cargados
-  initialLoadedItems?: number;   // Items cargados inicialmente
-  onLoadMore: () => void | Promise<void>; // Callback para cargar más
-  loadingText?: string;          // Texto durante la carga
-  buttonText?: string;           // Texto del botón
-  endText?: string;              // Texto cuando no hay más items
+  enabled: boolean;              // Enable infinite mode
+  mode: 'button' | 'auto';       // Mode: button or automatic
+  showCounter?: boolean;         // Show loaded items counter
+  initialLoadedItems?: number;   // Initially loaded items
+  onLoadMore: () => void | Promise<void>; // Callback to load more
+  loadingText?: string;          // Loading text
+  buttonText?: string;           // Button text
+  endText?: string;              // Text when no more items
 }`,
           language: 'typescript',
         },
         {
-          title: 'components.paginator.api.usageCodeTitle',
-          code: `// Ejemplo completo con layout personalizado e infinito
-import { Component, signal } from '@angular/core';
+          title: 'codeExamples.usageCode',
+          code: `import { Component, signal } from '@angular/core';
 import { PaginatorLayout, InfiniteScrollConfig } from 'nui';
 
 @Component({
   selector: 'app-example',
   template: \`
-    <!-- Paginador estándar con layout personalizado -->
+    <!-- Standard paginator with custom layout -->
     <nui-paginator
       [currentPage]="currentPage()"
       [totalItems]="totalItems()"
@@ -235,7 +282,7 @@ import { PaginatorLayout, InfiniteScrollConfig } from 'nui';
       (pageSizeChange)="onPageSizeChange($event)">
     </nui-paginator>
     
-    <!-- Paginador con carga infinita -->
+    <!-- Paginator with infinite scroll -->
     <nui-paginator
       [infiniteConfig]="infiniteConfig"
       [totalItems]="totalItems()">
@@ -249,7 +296,7 @@ export class ExampleComponent {
   items = signal<string[]>([]);
   loading = signal(false);
   
-  // Layout personalizado
+  // Custom layout
   customLayout: PaginatorLayout = {
     top: ['itemRange'],
     center: ['firstButton', 'prevButton', 'pageNumbers', 'nextButton', 'lastButton'],
@@ -258,36 +305,36 @@ export class ExampleComponent {
     gap: '1rem'
   };
   
-  // Configuración de carga infinita
+  // Infinite scroll configuration
   infiniteConfig: InfiniteScrollConfig = {
     enabled: true,
     mode: 'button',
     showCounter: true,
     initialLoadedItems: 20,
     onLoadMore: () => this.loadMore(),
-    loadingText: 'Cargando más items...',
-    buttonText: 'Cargar más',
-    endText: 'No hay más items'
+    loadingText: 'Loading more items...',
+    buttonText: 'Load More',
+    endText: 'No more items'
   };
   
   onPageChange(page: number): void {
     this.currentPage.set(page);
-    console.log('Página cambiada a:', page);
+    console.log('Page changed to:', page);
     this.loadData();
   }
   
   onPageSizeChange(size: number): void {
     this.pageSize.set(size);
-    this.currentPage.set(1); // Resetear a primera página
-    console.log('Tamaño de página cambiado a:', size);
+    this.currentPage.set(1); // Reset to first page
+    console.log('Page size changed to:', size);
     this.loadData();
   }
   
   async loadData(): Promise<void> {
-    // Cargar datos para la página actual
+    // Load data for the current page
     const start = (this.currentPage() - 1) * this.pageSize();
     const end = start + this.pageSize();
-    // ... lógica de carga
+    // ... loading logic
   }
   
   async loadMore(): Promise<void> {
@@ -295,7 +342,7 @@ export class ExampleComponent {
     
     this.loading.set(true);
     try {
-      // Simular carga de datos
+      // Simulate data loading
       await new Promise(resolve => setTimeout(resolve, 1000));
       const currentLength = this.items().length;
       const newItems = Array.from(
@@ -316,27 +363,26 @@ export class ExampleComponent {
       id: 'styling',
       title: 'components.paginator.styling.title',
       description: 'components.paginator.styling.description',
-      anchor: 'estilos',
+      anchor: 'styling',
       examples: [
         {
-          title: 'components.paginator.styling.codeTitle',
-          code: `// Personalización de variables CSS
-:root {
+          title: 'codeExamples.cssVariables',
+          code: `:root {
   /* Layout */
   --nui-paginator-gap: var(--spacing-sm);
   --nui-paginator-align-items: center;
   --nui-paginator-justify-content: space-between;
   
-  /* Botones de navegación */
+  /* Navigation buttons */
   --nui-paginator-button-min-width: 40px;
   --nui-paginator-button-gap: var(--spacing-xs);
   
-  /* Números de página */
+  /* Page numbers */
   --nui-paginator-page-number-min-width: 36px;
   --nui-paginator-page-number-height: 36px;
   --nui-paginator-page-number-gap: 4px;
   
-  /* Página activa */
+  /* Active page */
   --nui-paginator-active-bg: var(--primary-color);
   --nui-paginator-active-text: var(--nui-text-on-primary);
   --nui-paginator-active-border: var(--primary-color);
@@ -345,33 +391,33 @@ export class ExampleComponent {
   --nui-paginator-ellipsis-color: var(--nui-text-tertiary);
   --nui-paginator-ellipsis-padding: var(--spacing-xs);
   
-  /* Selector de tamaño */
+  /* Size selector */
   --nui-paginator-size-selector-min-width: 80px;
   --nui-paginator-size-selector-gap: var(--spacing-sm);
   
-  /* Rango de items */
+  /* Item range */
   --nui-paginator-item-range-color: var(--nui-text-secondary);
   --nui-paginator-item-range-font-size: var(--font-size-sm);
   
-  /* Salto a página */
+  /* Page jump */
   --nui-paginator-page-jump-input-width: 60px;
   --nui-paginator-page-jump-gap: var(--spacing-sm);
   
-  /* Carga infinita - Botón */
+  /* Infinite scroll - Button */
   --nui-paginator-infinite-button-padding: var(--spacing-md) var(--spacing-xl);
   --nui-paginator-infinite-button-margin: var(--spacing-lg) 0;
   
-  /* Carga infinita - Contador */
+  /* Infinite scroll - Counter */
   --nui-paginator-infinite-counter-color: var(--nui-text-secondary);
   --nui-paginator-infinite-counter-font-size: var(--font-size-sm);
   --nui-paginator-infinite-counter-margin: var(--spacing-xs) 0;
   
-  /* Carga infinita - Mensaje final */
+  /* Infinite scroll - End message */
   --nui-paginator-infinite-end-color: var(--nui-text-tertiary);
   --nui-paginator-infinite-end-font-size: var(--font-size-sm);
 }
 
-// Ejemplo de paginador compacto
+// Example of a compact paginator
 .compact-paginator {
   --nui-paginator-gap: var(--spacing-xs);
   --nui-paginator-button-min-width: 32px;
@@ -380,7 +426,7 @@ export class ExampleComponent {
   --nui-paginator-page-number-gap: 2px;
 }
 
-// Ejemplo de paginador con bordes redondeados
+// Example of a paginator with rounded borders
 .rounded-paginator {
   ::ng-deep .nui-paginator {
     button {
@@ -389,7 +435,7 @@ export class ExampleComponent {
   }
 }
 
-// Ejemplo de paginador estilo minimal
+// Example of a minimal style paginator
 .minimal-paginator {
   --nui-paginator-button-gap: 0;
   --nui-paginator-page-number-gap: 0;

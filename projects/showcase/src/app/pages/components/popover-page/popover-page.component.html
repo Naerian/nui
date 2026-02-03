@@ -1,7 +1,7 @@
 <div class="docs-page">
   <div class="page-header">
     <h1>{{ pageConfig.title | translate }}</h1>
-    <p class="subtitle">{{ pageConfig.subtitle | translate }}</p>
+    <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
   </div>
 
   @for (section of pageConfig.sections; track section.id) {
@@ -11,9 +11,7 @@
         [anchor]="section.anchor"
       ></app-section-title>
 
-      <p class="section-description">
-        {{ section.description | translate }}
-      </p>
+      <p class="section-description" [innerHTML]="section.description | translate"></p>
 
       @if (section.note; as note) {
         <div class="section-note" [ngClass]="note.type">
@@ -25,27 +23,29 @@
       @switch (section.id) {
         @case ('basic') {
           <div class="example-preview">
-            <nui-button nuiPopover="Información adicional del elemento">Ver información</nui-button>
+            <nui-button nuiPopover="Additional information about the item">
+              View information
+            </nui-button>
           </div>
         }
 
         @case ('positions') {
           <div class="example-preview">
-            <nui-button nuiPopover="Popover arriba" nuiPopoverPosition="top">Top</nui-button>
-            <nui-button nuiPopover="Popover abajo" nuiPopoverPosition="bottom">Bottom</nui-button>
-            <nui-button nuiPopover="Popover izquierda" nuiPopoverPosition="left">Left</nui-button>
-            <nui-button nuiPopover="Popover derecha" nuiPopoverPosition="right">Right</nui-button>
+            <nui-button nuiPopover="Popover Top" nuiPopoverPosition="top">Top</nui-button>
+            <nui-button nuiPopover="Popover Bottom" nuiPopoverPosition="bottom">Bottom</nui-button>
+            <nui-button nuiPopover="Popover Left" nuiPopoverPosition="left">Left</nui-button>
+            <nui-button nuiPopover="Popover Right" nuiPopoverPosition="right">Right</nui-button>
           </div>
         }
 
         @case ('events') {
           <div class="example-preview flex-column">
             <div class="events-row">
-              <nui-button nuiPopover="Popover con click (default)" nuiPopoverEvent="click">
+              <nui-button nuiPopover="Popover with click (default)" nuiPopoverEvent="click">
                 Click Event
               </nui-button>
 
-              <nui-button nuiPopover="Popover con hover" nuiPopoverEvent="hover">
+              <nui-button nuiPopover="Popover with hover" nuiPopoverEvent="hover">
                 Hover Event
               </nui-button>
             </div>
@@ -53,9 +53,9 @@
             <div class="events-row">
               <input
                 type="text"
-                nuiPopover="Ayuda para este campo"
+                nuiPopover="Help for this field"
                 nuiPopoverEvent="focus"
-                placeholder="Enfoca para ver ayuda"
+                placeholder="Focus to see help"
                 class="example-input"
               />
             </div>
@@ -64,17 +64,17 @@
 
         @case ('template') {
           <div class="example-preview">
-            <nui-button [nuiPopover]="popoverTemplate">Ver detalles</nui-button>
+            <nui-button [nuiPopover]="popoverTemplate">View details</nui-button>
 
             <ng-template #popoverTemplate let-close="close">
               <div class="nui-custom-popover">
-                <h3 class="nui-custom-popover__title">Título del Popover</h3>
+                <h3 class="nui-custom-popover__title">Popover Titler</h3>
                 <p class="nui-custom-popover__text">
-                  Este es el contenido del popover con un template personalizado.
+                  This is the content of the popover with a custom template.
                 </p>
                 <div class="nui-custom-popover__actions">
-                  <nui-button size="sm" variant="outline" (onClick)="close()">Cancelar</nui-button>
-                  <nui-button size="sm" (onClick)="handleAction(); close()">Aceptar</nui-button>
+                  <nui-button size="sm" variant="outline" (onClick)="close()">Cancela</nui-button>
+                  <nui-button size="sm" (onClick)="handleAction(); close()">Accept</nui-button>
                 </div>
               </div>
             </ng-template>
@@ -88,19 +88,19 @@
               [nuiPopoverData]="{ userId: 123, userName: 'Juan Pérez' }"
               nuiPopoverPosition="bottom"
             >
-              Ver perfil de usuario
+              View user profile
             </nui-button>
           </div>
         }
 
         @case ('delays') {
           <div class="example-preview">
-            <nui-button nuiPopover="Aparece después de 500ms" [nuiPopoverShowDelay]="500">
+            <nui-button nuiPopover="Appears after 500ms" [nuiPopoverShowDelay]="500">
               Show Delay (500ms)
             </nui-button>
 
             <nui-button
-              nuiPopover="Se oculta después de 1s"
+              nuiPopover="Hides after 1s"
               nuiPopoverEvent="hover"
               [nuiPopoverHideDelay]="1000"
             >
@@ -108,7 +108,7 @@
             </nui-button>
 
             <nui-button
-              nuiPopover="Delays combinados"
+              nuiPopover="Both Delays"
               nuiPopoverEvent="hover"
               [nuiPopoverShowDelay]="300"
               [nuiPopoverHideDelay]="500"
@@ -120,26 +120,26 @@
 
         @case ('customization') {
           <div class="example-preview">
-            <nui-button nuiPopover="Popover sin flecha" [nuiPopoverShowArrow]="false">
-              Sin flecha
+            <nui-button nuiPopover="Popover without arrow" [nuiPopoverShowArrow]="false">
+              Without arrow
             </nui-button>
 
             <nui-button
-              nuiPopover="Popover con ancho personalizado de 400px para mostrar más contenido en una línea"
+              nuiPopover="Popover with custom width of 400px to show more content in one line"
               nuiPopoverMaxWidth="400px"
             >
-              Ancho custom (400px)
+              Custom width (400px)
             </nui-button>
 
             <nui-button
-              nuiPopover="Popover con estilo custom: fondo degradado, borde y sombra personalizada"
+              nuiPopover="Popover with custom style: gradient background, border, and custom shadow"
               nuiPopoverClass="my-custom-popover"
               nuiPopoverPosition="top"
             >
-              Clase custom
+              Custom class
             </nui-button>
 
-            <nui-button nuiPopover="Mayor separación del trigger" [nuiPopoverOffset]="20">
+            <nui-button nuiPopover="Greater offset from the trigger" [nuiPopoverOffset]="20">
               Offset 20px
             </nui-button>
           </div>
@@ -149,14 +149,14 @@
           <div class="example-preview flex-column">
             <div class="events-row">
               <nui-button
-                nuiPopover="No se cierra al hacer click fuera. Usa Escape o click en el botón."
+                nuiPopover="Does not close when clicking outside. Use Escape or click the button."
                 [nuiPopoverCloseOnClickOutside]="false"
               >
                 Click Outside OFF
               </nui-button>
 
               <nui-button
-                nuiPopover="No se cierra con la tecla Escape. Haz click fuera para cerrar."
+                nuiPopover="Does not close with the Escape key. Click outside to close."
                 [nuiPopoverCloseOnEscape]="false"
               >
                 Escape OFF
@@ -164,11 +164,11 @@
             </div>
 
             <div class="events-row">
-              <nui-button nuiPopover="Popover múltiple 1" [nuiPopoverAllowMultiple]="true">
+              <nui-button nuiPopover="Multiple Popover 1" [nuiPopoverAllowMultiple]="true">
                 Multiple 1
               </nui-button>
 
-              <nui-button nuiPopover="Popover múltiple 2" [nuiPopoverAllowMultiple]="true">
+              <nui-button nuiPopover="Multiple Popover 2" [nuiPopoverAllowMultiple]="true">
                 Multiple 2
               </nui-button>
             </div>
@@ -178,7 +178,7 @@
         @case ('backdrop') {
           <div class="example-preview">
             <nui-button [nuiPopover]="backdropTemplate" [nuiPopoverBackdrop]="true">
-              Con Backdrop
+              With Backdrop
             </nui-button>
 
             <nui-button
@@ -186,16 +186,16 @@
               [nuiPopoverBackdrop]="true"
               [nuiBackdropClose]="false"
             >
-              Backdrop sin cierre
+              Backdrop without close
             </nui-button>
 
             <ng-template #backdropTemplate let-close="close">
               <div class="nui-modal-popover">
                 <h3 class="nui-modal-popover__title">Popover Modal</h3>
                 <p class="nui-modal-popover__text">
-                  Este popover tiene un backdrop oscuro detrás. Haz click fuera para cerrar.
+                  This popover has a dark backdrop behind it. Click outside to close.
                 </p>
-                <nui-button (onClick)="close()">Cerrar</nui-button>
+                <nui-button (onClick)="close()">Close</nui-button>
               </div>
             </ng-template>
 
@@ -203,9 +203,10 @@
               <div class="nui-modal-popover">
                 <h3 class="nui-modal-popover__title">Popover Modal</h3>
                 <p class="nui-modal-popover__text">
-                  Este popover no se cierra al hacer click en el backdrop. Usa el botón para cerrar.
+                  This popover does not close when clicking on the backdrop. Use the button to
+                  close.
                 </p>
-                <nui-button (onClick)="close()">Cerrar</nui-button>
+                <nui-button (onClick)="close()">Close</nui-button>
               </div>
             </ng-template>
           </div>
@@ -217,7 +218,7 @@
               nuiPopover="Popover condicional según el estado del botón"
               [nuiPopoverDisabled]="isDisabled()"
             >
-              Popover condicional
+              Conditional Popover
             </nui-button>
 
             <nui-button variant="outline" (onClick)="toggleDisabled()">

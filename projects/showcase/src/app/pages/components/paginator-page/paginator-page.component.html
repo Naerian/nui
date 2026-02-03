@@ -1,19 +1,17 @@
 <div class="docs-page">
   <div class="page-header">
     <h1>{{ pageConfig.title | translate }}</h1>
-    <p class="subtitle">{{ pageConfig.subtitle | translate }}</p>
+    <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
   </div>
 
   @for (section of pageConfig.sections; track section.id) {
     <section class="section">
       <app-section-title
         [title]="section.title | translate"
-        [anchor]="section.anchor">
-      </app-section-title>
-      
-      <p class="section-description">
-        {{ section.description | translate }}
-      </p>
+        [anchor]="section.anchor"
+      ></app-section-title>
+
+      <p class="section-description" [innerHTML]="section.description | translate"></p>
 
       @if (section.note; as note) {
         <div class="section-note" [ngClass]="note.type">
@@ -32,8 +30,8 @@
               [showPageSizeSelector]="true"
               [showFirstLast]="true"
               (pageChange)="onPageChange($event)"
-              (pageSizeChange)="onPageSizeChange($event)">
-            </nui-paginator>
+              (pageSizeChange)="onPageSizeChange($event)"
+            ></nui-paginator>
 
             <div class="value-display">
               Page:
@@ -45,33 +43,17 @@
             </div>
           </div>
         }
-        
-        @case ('styles') {
+
+        @case ('colors') {
           <div class="example-preview flex-column gap-4">
-            <nui-paginator
-              [currentPage]="1"
-              [totalPages]="10"
-              variant="outline"
-              color="secondary">
-            </nui-paginator>
-
-            <nui-paginator
-              [currentPage]="5"
-              [totalPages]="10"
-              size="sm"
-              variant="ghost"
-              color="success">
-            </nui-paginator>
-
-            <nui-paginator
-              [currentPage]="2"
-              [totalPages]="5"
-              mode="minimal"
-              color="danger">
-            </nui-paginator>
+            <nui-paginator color="primary" variant="ghost" [totalItems]="100"></nui-paginator>
+            <nui-paginator color="secondary" variant="outline" [totalItems]="100"></nui-paginator>
+            <nui-paginator color="success" variant="solid" [totalItems]="100"></nui-paginator>
+            <nui-paginator color="danger" [totalItems]="100"></nui-paginator>
+            <nui-paginator color="warning" variant="outline" [totalItems]="100"></nui-paginator>
           </div>
         }
-        
+
         @case ('sizes') {
           <div class="example-preview flex-column gap-4">
             <nui-paginator [currentPage]="1" [totalPages]="5" size="xs"></nui-paginator>
@@ -82,18 +64,18 @@
             <nui-paginator [currentPage]="1" [totalPages]="5" size="xl"></nui-paginator>
           </div>
         }
-        
+
         @case ('layout') {
           <div class="example-preview">
             <nui-paginator
               [currentPage]="customLayoutPage()"
               [totalItems]="500"
               [layout]="complexLayout"
-              (pageChange)="customLayoutPage.set($event)">
-            </nui-paginator>
+              (pageChange)="customLayoutPage.set($event)"
+            ></nui-paginator>
           </div>
         }
-        
+
         @case ('infinite') {
           <div class="example-preview flex-column">
             <div class="infinite-list">
@@ -110,8 +92,8 @@
                 showCounter: true,
                 initialLoadedItems: 20,
                 onLoadMore: loadMoreData.bind(this),
-              }">
-            </nui-paginator>
+              }"
+            ></nui-paginator>
           </div>
         }
       }

@@ -10,7 +10,7 @@ export type ButtonGroupMode = 'radio' | 'checkbox';
  * - 'grouped': Botones separados con espacios (por defecto)
  * - 'segmented': Botones unidos sin espacios, bordes compartidos (estilo iOS)
  */
-export type ButtonGroupVisualVariant = 'grouped' | 'segmented';
+export type ButtonGroupLayout = 'grouped' | 'segmented';
 
 /**
  * Opciones para el button-group

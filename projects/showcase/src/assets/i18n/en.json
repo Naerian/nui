@@ -23,9 +23,7 @@
     "tooltip": "Tooltip",
     "slidepanel": "Slidepanel",
     "sidebarPanel": "Sidebar Panel",
-    "actionMenu": "Action Menu",
-    "examples": "Examples",
-    "playground": "Playground"
+    "actionMenu": "Action Menu"
   },
   "presets": {
     "aura": "Aura",
@@ -56,61 +54,60 @@
     "definition": "Definition",
     "configuration": "Configuration",
     "customization": "Customization",
-    "styles": "Styles",
     "example": "Example",
     "componentCode": "Component Inputs and Outputs",
-    "usageCode": "Complete Usage Example",
+    "usageCode": "Complete usage example",
     "itemInterface": "Interface",
-    "parent": "Parent Component",
-    "child": "Child Component",
+    "parent": "Parent component",
+    "child": "Child component",
     "directiveCode": "Directive Inputs and Outputs",
-    "tokensCode": "Injection Tokens for Components",
-    "serviceCode": "Service Methods",
+    "tokensCode": "Injection tokens for components",
+    "serviceCode": "Service methods",
+    "refCode": "Component reference",
     "interfacesCode": "Interfaces",
-    "apiReference": "API Reference",
-    "cssVariables": "Available CSS Variables"
+    "cssVariables": "Available CSS variables"
   },
   "pages": {
     "home": {
       "title": "Welcome to NUI",
-      "subtitle": "A modern, customizable Angular component library",
-      "description": "Build beautiful applications with our comprehensive set of UI components"
+      "subtitle": "A modern and customizable Angular component library",
+      "description": "Build beautiful applications with our complete set of UI components"
     },
     "installation": {
       "title": "Installation",
       "subtitle": "Get started with NUI in your Angular project",
       "step1": "Install the package",
       "step1Description": "Use npm or yarn to install the NUI package in your project.",
-      "step2": "Import NUI module",
-      "step2Description": "Configure NUI in your application config file. Define the preset you want to use and the theme mode.",
-      "step2Title": "Configure NUI Provider",
-      "step3": "Import styles",
+      "step2": "Import the NUI module",
+      "step2Description": "Configure NUI in your application configuration file. Define the preset you want to use and the theme mode.",
+      "step2Title": "Configure the NUI provider",
+      "step3": "Import the styles",
       "step3Description": "You can import NUI styles in three different ways: in your global styles.scss file, in angular.json, or in project.json if you're using Nx.",
-      "step3Title": "Import NUI Styles",
+      "step3Title": "Import NUI styles",
       "step4": "Start using components",
       "step4Description": "You can now use any NUI component in your HTML templates.",
-      "step4Title": "Use NUI Components"
+      "step4Title": "Use NUI components"
     },
     "configuration": {
       "title": "Configuration",
-      "subtitle": "Configure NUI to match your needs",
-      "presetConfig": "Preset Configuration",
-      "presetConfigDescription": "Presets define your application's color palette. NUI includes 8 pre-built presets: aura, warm, neon, dopamine, corporate, minimal, sunset, and ocean.",
-      "presetConfigTitle": "Preset Configuration",
+      "subtitle": "Configure NUI according to your needs",
+      "presetConfig": "Preset configuration",
+      "presetConfigDescription": "Presets define your application's color palette. NUI includes 8 predefined presets: aura, warm, neon, dopamine, corporate, minimal, sunset and ocean.",
+      "presetConfigTitle": "Preset configuration",
       "darkModeConfig": "Dark Mode Configuration",
-      "darkModeConfigDescription": "Control how dark mode is applied in your application. Available options are: 'manual' (controlled by code), 'auto' (based on time of day), or 'system' (according to OS preferences).",
+      "darkModeConfigDescription": "Control how dark mode is applied in your application. Available options are: 'manual' (controlled by code), 'auto' (based on time of day), or 'system' (according to operating system preferences).",
       "darkModeConfigTitle": "Dark Mode Configuration",
-      "customPresetConfig": "Custom Preset",
-      "customPresetConfigDescription": "Create your own preset by defining custom colors for light and dark modes. Each preset must include: primary, secondary, accent, success, info, warning, and danger.",
-      "customPresetConfigTitle": "Create Custom Preset"
+      "customPresetConfig": "Custom preset",
+      "customPresetConfigDescription": "Create your own preset by defining custom colors for light and dark modes. Each preset must include: primary, secondary, accent, success, info, warning and danger.",
+      "customPresetConfigTitle": "Create custom preset"
     },
     "theming": {
-      "title": "Theming & Presets",
-      "subtitle": "Customize the look and feel of your application",
-      "description": "NUI comes with multiple pre-built presets. Each preset defines a unique color palette that can be applied to all components.",
-      "selectPreset": "Select a preset to preview",
-      "currentPreset": "Current Preset",
-      "colorPalette": "Color Palette",
+      "title": "Themes and presets",
+      "subtitle": "Customize your application's appearance",
+      "description": "NUI includes multiple predefined presets. Each preset defines a unique color palette that applies to all components.",
+      "selectPreset": "Select a preset to preview it",
+      "currentPreset": "Current preset",
+      "colorPalette": "Color palette",
       "primary": "Primary",
       "secondary": "Secondary",
       "accent": "Accent",
@@ -119,13 +116,13 @@
       "warning": "Warning",
       "danger": "Danger",
       "presetDescriptions": {
-        "aura": "Default modern and elegant palette with teal and purple tones",
+        "aura": "Modern and elegant default palette with teal and purple tones",
         "warm": "Energetic palette with warm coral and golden tones, perfect for e-commerce",
         "neon": "Futuristic cyberpunk palette with electric cyan and neon colors, ideal for gaming",
         "dopamine": "Optimistic and cheerful palette with bright lime and pink tones",
-        "corporate": "Professional blue palette, perfect for business and enterprise applications",
+        "corporate": "Professional blue palette, perfect for enterprise applications",
         "minimal": "Refined minimalist palette with subtle colors and elegant purple accent",
-        "sunset": "Warm and vibrant palette with rose, pink and orange tones, perfect for creative apps",
+        "sunset": "Warm and vibrant palette with pink, orange and coral tones, perfect for creative apps",
         "ocean": "Calm and professional palette with deep blues and aqua tones, ideal for productivity"
       }
     }
@@ -133,472 +130,419 @@
   "components": {
     "button": {
       "title": "Button",
-      "subtitle": "Versatile button component with multiple variants, sizes, and states",
+      "subtitle": "Versatile button component with multiple variants, sizes and states",
       "basic": {
-        "title": "Basic Button",
-        "description": "The simplest form of a button with default styling."
+        "title": "Basic button",
+        "description": "The simplest form of a button with default styles."
       },
       "variants-colors": {
-        "title": "Variants & Colors",
-        "description": "Buttons come in three variants: solid (default), outline, and ghost, and support all theme colors: primary, secondary, accent, success, info, warning, and danger.",
-        "codeTitle": "Button Variants & Colors"
+        "title": "Variants and colors",
+        "description": "Supports different variants (Solid, Outline, Ghost) and NUI system colors.",
+        "note": "Combine <code>color</code> and <code>variant</code> to customize the button's appearance according to your needs."
       },
       "sizes": {
         "title": "Sizes",
-        "description": "Five size options available: xs, sm, md (default), lg, and xl.",
-        "codeTitle": "Button Sizes"
+        "description": "Five size options available in NUI.",
+        "note": "Sizes affect the button's height, horizontal padding and font size. Use <code>size</code> with values <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> and <code>'xl'</code>."
       },
       "icons": {
-        "title": "With Icons",
-        "description": "Add icons to buttons at the start or end position. Buttons with only an icon are rendered as circular icon buttons.",
-        "note": "Icon position: <code>'start'</code> displays the icon before text, <code>'end'</code> displays it after. Icon-only buttons require the <code>aria-label</code> attribute for accessibility.",
-        "codeTitle": "Buttons with Icons"
+        "title": "Icons",
+        "description": "Add icons to buttons at the start or end. Buttons with only an icon are rendered as circular icon buttons.",
+        "note": "Icon position: <code>'start'</code> shows the icon before the text, <code>'end'</code> shows it after. Icon-only buttons require the <code>aria-label</code> attribute for accessibility."
       },
       "loading": {
-        "title": "Loading State",
-        "description": "Display a loading spinner in three positions: start, end, or center (which replaces the content).",
-        "note": "Loading positions: <code>'start'</code> shows spinner before text, <code>'end'</code> shows it after, <code>'center'</code> replaces content entirely with centered spinner."
+        "title": "Loading state",
+        "description": "Shows a loading spinner in three positions: start, end or center (which replaces the content).",
+        "note": "Loading positions: <code>'start'</code> shows the spinner before the text, <code>'end'</code> shows it after, <code>'center'</code> completely replaces the content with a centered spinner."
       },
       "width": {
         "title": "Width",
-        "description": "Control button width: auto (default), full (100%), or fit (fit-content).",
-        "note": "Width options: <code>'auto'</code> adapts to content with standard padding, <code>'full'</code> stretches to 100% of container, <code>'fit'</code> uses minimum space needed.",
-        "codeTitle": "Button Width Options"
+        "description": "Control the button's width: auto (default), full (100%) or fit (adjusted to content).",
+        "note": "Width options: <code>'auto'</code> adapts to content with standard padding, <code>'full'</code> stretches to 100% of the container, <code>'fit'</code> uses the minimum necessary space."
       },
       "disabled": {
-        "title": "Disabled State",
-        "description": "Disabled buttons prevent user interaction and display a dimmed appearance.",
-        "codeTitle": "Disabled Buttons"
+        "title": "Disabled state",
+        "description": "Disabled buttons prevent user interaction and show a dimmed appearance."
       },
       "events": {
         "title": "Events",
-        "description": "Handle click events with the onClick output. Supports button types: button, submit, and reset.",
-        "consoleNote": "Open DevTools (F12) and check the Console tab to see the events being logged when you click the buttons."
+        "description": "Handle click events with the onClick output. Supports button types: button, submit and reset.",
+        "consoleNote": "Open the <strong>DevTools (F12)</strong> and check the <strong>Console</strong> tab to see the logged events when you click the buttons."
       },
       "directive": {
-        "title": "Using Directive",
-        "description": "Apply button styling to native HTML elements using the nuiButton directive. Works with <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> elements.",
-        "codeTitle": "Button Directive"
+        "title": "Using directive",
+        "description": "Apply button styles to native HTML elements using the nuiButton directive.",
+        "note": "You can use the <code>nuiButton</code> directive on any native HTML element like <code>&lt;button&gt;</code>, <code>&lt;a&gt;</code> or <code>&lt;div&gt;</code> to apply NUI button styles and behaviors."
       },
       "api": {
-        "title": "API Reference",
-        "description": "Complete documentation of Button component inputs and outputs for integration into your projects.",
-        "componentCodeTitle": "Component Inputs and Outputs",
-        "usageCodeTitle": "Complete Usage Example"
+        "title": "API and reference",
+        "description": "Complete documentation of Button component inputs and outputs for integration in your projects."
       },
       "styling": {
-        "title": "Styling and Customization",
-        "description": "Customize the button appearance using CSS variables. Control sizes, typography, colors, and more."
+        "title": "Styling and customization",
+        "description": "Customize the button's appearance using CSS variables. Control sizes, typography, colors and more."
       }
     },
     "actionMenu": {
       "title": "Action Menu",
       "subtitle": "Dropdown menu component with support for static, dynamic items and submenus",
       "basic": {
-        "title": "Basic Usage",
-        "description": "Simple action menu with items array. Each item can have a label, icon, and action.",
+        "title": "Basic usage",
+        "description": "Simple action menu with item array. Each item can have a label, icon and action.",
         "note": "Here we see an example of using both <code>type='static'</code> and <code>type='dynamic'</code>.",
-        "consoleNote": "Open DevTools (F12) and check the Console tab to see the actions being logged when you click menu items."
+        "consoleNote": "Open DevTools (F12) and check the Console tab to see the logged actions when you click the menu items."
       },
       "separators": {
-        "title": "With Separators",
-        "description": "Group related actions using visual separators. Use <code>separator: true</code> for simple separators, or add a <code>label</code> for labeled separators.",
-        "codeTitle": "Menu with Separators"
+        "title": "Separators",
+        "description": "Group related actions using visual separators.",
+        "note": "Use items with the <code>separator: true</code> property to add dividing lines between action groups. You can add an optional label to the separator using the <code>label</code> property."
       },
       "submenu": {
-        "title": "With Submenus",
-        "description": "Create nested menus using the <code>children</code> property. Submenus can be nested multiple levels deep.",
-        "note": "Use the <code>children</code> property to define submenu items. Each child can also have its own children for deeper nesting. <strong>Note:</strong> If a child has <code>selected: true</code>, the parent item will show a visual indicator (vertical line on the left) to aid navigation.",
-        "codeTitle": "Nested Menus"
+        "title": "Submenus",
+        "description": "Create nested menus using the <code>children</code> property. Submenus can be nested multiple levels.",
+        "note": "Use the <code>children</code> property to define submenu items. Each child can have its own children for further nesting. <strong>Note:</strong> If a child has <code>selected: true</code>, the parent item will show a visual indicator (vertical line on the left) to facilitate navigation."
       },
       "variants": {
-        "title": "Button Variants",
-        "description": "The menu button supports three variants: <code>'ghost'</code> (default), <code>'solid'</code>, and <code>'outline'</code>.",
-        "codeTitle": "Variant Examples"
+        "title": "Button variants",
+        "description": "The button supports different variants and NUI system colors. The variant will affect the button, but the color affects the color and the content.",
+        "note": "Combine <code>color</code> and <code>variant</code> to customize the menu button's appearance according to your needs."
       },
       "sizes": {
         "title": "Sizes",
-        "description": "Five size options for the menu button: <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code> (default), <code>'lg'</code>, and <code>'xl'</code>.",
-        "codeTitle": "Size Options"
+        "description": "Make use of the five predefined NUI sizes. The size affects the button, but the content will remain the same.",
+        "note": "Use the <code>size</code> input to adjust the menu button size and its content using sizes <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code> and <code>xl</code>."
       },
       "label": {
-        "title": "With Label",
+        "title": "Button content",
         "description": "Add text to the menu button. Can be combined with icons and supports full width mode.",
-        "codeTitle1": "Text and Icon",
-        "codeTitle2": "Text Only",
-        "codeTitle3": "Full Width"
+        "note": "Use <code>icon</code> along with <code>label</code> to display both on the button. Use <code>width='full'</code> to make the button occupy the full available width. If you only use <code>label</code> without icon, the button renders as a simple text button.",
+        "codeTitle1": "Text and icon",
+        "codeTitle2": "Text only",
+        "codeTitle3": "Full width"
       },
       "disabled": {
-        "title": "Disabled State",
-        "description": "Disable individual menu items or the entire menu. Disabled items are shown but not clickable.",
-        "codeTitle": "Disabled States"
+        "title": "Disabled state",
+        "description": "Disable individual menu items or the entire menu. Disabled items are shown but not clickable."
       },
       "withSubtitle": {
-        "title": "With Subtitle",
-        "description": "Add secondary text below the main label. Useful for displaying additional information like emails, descriptions, or shortcuts.",
-        "codeTitle": "Subtitle Examples"
+        "title": "Item subtitle",
+        "description": "Add secondary text below the main label. Useful for displaying additional information like emails, descriptions or shortcuts."
       },
       "selected": {
-        "title": "Selected State",
-        "description": "Mark items as selected to show the current choice. A check icon appears automatically. Perfect for selectors, filters, or settings.",
-        "codeTitle": "Selected Items"
+        "title": "Selected state",
+        "description": "Mark items as selected to show the current choice. A check icon appears automatically. Perfect for selectors, filters or settings."
       },
-      "colors": {
-        "title": "Descriptive Icons",
+      "icons": {
+        "title": "Descriptive icons",
         "description": "Use meaningful icons and labels to communicate the purpose of each action. Icons help users quickly identify actions.",
-        "codeTitle": "Icon Usage"
+        "note": "Use relevant icons from the <strong>Remix Icon</strong> library to improve the visual understanding of menu actions."
       },
       "template": {
-        "title": "Custom Template",
-        "description": "Fully customize menu rendering using templates and directives. Use <code>menu-header</code> and <code>menu-footer</code> to add content at the start and end without needing ng-template.",
-        "note": "The <code>#item</code> template receives the full item as context (<code>let-item</code>). The <code>menu-header</code> and <code>menu-footer</code> directives provide a simpler and clearer syntax than PrimeNG, avoiding unnecessary ng-templates.",
-        "clickNote": "<strong>Important:</strong> When using custom templates, you must handle the click event manually with <code>(click)=\"handleAction(item)\"</code>. The <code>onItemAction</code> event is only automatically emitted with default items.",
-        "htmlTitle": "HTML Template"
+        "title": "Custom template",
+        "description": "Fully customize the menu rendering using templates and directives.",
+        "note": "The <code>#item</code> template receives the complete item as context (<code>let-item</code>). The <code>menu-header</code> and <code>menu-footer</code> directives allow simple and clear syntax, avoiding unnecessary ng-template. <br/><br/> <strong>Important:</strong> When using custom templates, you must handle the click event manually with <code>(click)=\"handleAction(item)\"</code>. The <code>onItemAction</code> event is only emitted automatically with default items."
       },
       "api": {
-        "title": "API Reference",
-        "description": "Complete documentation of inputs, outputs, and the ActionMenuItem interface for integrating the component into your projects.",
-        "componentCodeTitle": "Component Inputs and Outputs",
-        "usageCodeTitle": "Complete Usage Example"
+        "title": "API and reference",
+        "description": "Complete documentation of inputs, outputs and the ActionMenuItem interface for integrating the component in your projects."
       },
       "styling": {
-        "title": "Styling and Customization",
-        "description": "Customize the menu appearance using CSS variables. Control colors, spacing, typography, and more."
+        "title": "Styling and customization",
+        "description": "Customize the menu's appearance using CSS variables. Control colors, spacing, typography and more."
       }
     },
     "avatar": {
       "title": "Avatar",
-      "subtitle": "Graphic component to represent users, entities or brands through images, letters or icons",
+      "subtitle": "Graphic component to represent users, entities or brands using images, letters or icons",
       "basic": {
-        "title": "Basic Usage",
-        "description": "Display a simple avatar by loading an external image. This is the most common way to represent a user.",
-        "codeTitle": "Avatar with Image"
+        "title": "Basic usage",
+        "description": "Shows a simple avatar loading an external image. This is the most common way of user representation."
       },
       "types": {
-        "title": "Content Types and Priority",
-        "description": "The component intelligently decides what to show based on available data. This logic ensures something meaningful is always displayed.",
-        "note": "<strong>Rendering priority:</strong> 1. Image (if loads) &gt; 2. Initials &gt; 3. Icon &gt; 4. Fallback (Alt Letter) &gt; 5. Default icon.",
-        "codeTitle": "Content Hierarchy"
+        "title": "Content types and priority",
+        "description": "The component intelligently decides what to show based on available data. This logic ensures something meaningful is always shown.",
+        "note": "<strong>Rendering priority:</strong> 1. Image (if loads) &gt; 2. Initials &gt; 3. Icon &gt; 4. Fallback (Alt Letter) &gt; 5. Default icon."
       },
       "variants": {
-        "title": "Shape Variants",
-        "description": "Avatar supports three geometric shapes to adapt to different design contexts: <code>circular</code> (default), <code>rounded</code>, and <code>square</code>.",
-        "codeTitle": "Available Shapes"
+        "title": "Shape variants",
+        "description": "The avatar supports three geometric shapes to adapt to different design contexts.",
+        "note": "Use the <code>variant</code> input with values <code>'circular'</code>, <code>'rounded'</code> and <code>'square'</code> to change the avatar's shape."
       },
       "sizes": {
         "title": "Sizes",
-        "description": "Five predefined sizes that harmoniously scale the container, typography, and icons: <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code>.",
-        "codeTitle": "Size Scale"
+        "description": "Five predefined sizes that harmoniously scale the container, typography and icons.",
+        "note": "Sizes affect the avatar's dimension, font size for initials and icon size. Use <code>size</code> with values <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> and <code>'xl'</code>."
       },
       "colors": {
         "title": "Colors",
-        "description": "Customize background and text color using the system palette. Ideal for differentiating users or states when there's no image.",
-        "codeTitle": "Color Palette"
+        "description": "Customize the background and text color using the system palette. Ideal for differentiating users or states when there's no image.",
+        "note": "Use the <code>color</code> input with values like <code>'primary'</code>, <code>'secondary'</code>, <code>'accent'</code>, <code>'success'</code>, <code>'info'</code>, <code>'warning'</code> and <code>'danger'</code> to change the avatar's colors."
       },
       "customSize": {
-        "title": "Custom Size",
+        "title": "Custom size",
         "description": "Define exact dimensions in pixels when standard sizes don't fit. Font size and icons are calculated proportionally automatically.",
-        "note": "The <code>customSize</code> input overrides the <code>size</code> input. Internal calculation maintains initials readability.",
-        "codeTitle": "Pixel Dimensions"
+        "note": "The <code>customSize</code> input overrides the <code>size</code> input. The internal calculation maintains the legibility of initials."
       },
       "error": {
-        "title": "Error Handling (Fallback)",
-        "description": "Automatic recovery system. If the image URL fails (404 error), the component instantly switches to showing initials or fallback icon without breaking the design.",
-        "codeTitle": "Load Error Example"
+        "title": "Error handling (Fallback)",
+        "description": "Automatic recovery system. If the image URL fails (404 error), the component instantly switches to showing initials or the fallback icon without breaking the design."
       },
       "api": {
-        "title": "API Reference",
-        "description": "Complete documentation of Avatar component inputs and outputs for integration into your projects.",
-        "usageCodeTitle": "Complete Usage Example"
+        "title": "API and reference",
+        "description": "Complete documentation of Avatar component inputs and outputs for integration in your projects."
       },
       "styling": {
-        "title": "Styling and Customization",
-        "description": "Customize the avatar appearance using CSS variables. Control sizes, colors, borders, and more."
+        "title": "Styling and customization",
+        "description": "Customize the avatar's appearance using CSS variables. Control sizes, colors, borders and more."
       }
     },
     "buttonGroup": {
       "title": "Button Group",
       "subtitle": "Set of grouped buttons for single (Radio) or multiple (Checkbox) selection",
       "basic": {
-        "title": "Basic Usage",
-        "description": "The simplest case accepts an array of strings. By default, acts as a single option selector (Radio).",
-        "codeTitle": "Example with Strings"
+        "title": "Basic usage",
+        "description": "The simplest case accepts a string array. By default, it acts as a single option selector (Radio)."
       },
       "modes": {
-        "title": "Selection Modes",
+        "title": "Selection modes",
         "description": "Allows changing the button selection type between radiobutton and checkbox",
-        "note": "Switch to <code>mode='checkbox'</code> to allow selecting multiple options at once. The returned value will be an Array.",
-        "codeTitle": "Multi-selection Mode"
+        "note": "Change to <code>mode='checkbox'</code> to allow selecting multiple options at once. The returned value will be an Array."
       },
       "segmented": {
-        "title": "Segmented Variant",
-        "description": "Visual style like 'iOS Segmented Control'. Ideal for view switchers (e.g., Month/Year, List/Map).",
-        "note": "Use <code>visualVariant='segmented'</code> to apply this unique style.",
-        "codeTitle": "Segmented Style"
+        "title": "Segmented variant",
+        "description": "Visual style like 'iOS Segmented Control'. Ideal for view switchers (e.g.: Month/Year, List/Map).",
+        "note": "Use <code>layout='segmented'</code> to apply this unique style."
       },
       "complex": {
-        "title": "Complex Objects",
-        "note": "Map properties of arbitrary objects using <code>labelBy</code>, <code>valueBy</code>, and <code>disabledBy</code>.",
-        "codeTitle": "Data Mapping"
+        "title": "Complex objects",
+        "description": "Supports arrays of objects with custom properties for label, value and disabled state.",
+        "note": "Map arbitrary object properties using <code>labelBy</code>, <code>valueBy</code>, <code>iconBy</code> and <code>disabledBy</code>."
       },
       "icons": {
-        "title": "With Icons",
-        "note": "Support for Remix Icon icons. Use <code>iconOnly='true'</code> for a compact toolbar-style button bar.",
-        "codeTitle": "Icon Toolbar"
+        "title": "Icons",
+        "description": "Supports icon-only buttons for a compact toolbar-like button bar.",
+        "note": "Support for Remix Icon icons. Use <code>iconOnly='true'</code> for a compact toolbar-like button bar. If it's an <strong>object</strong>, you can map the icon property using <code>iconBy</code>."
       },
-      "styles": {
-        "title": "Styles and Sizes",
-        "description": "Compatible with NUI's entire variant system (Solid, Outline, Ghost), colors, and sizes (xs, sm, md, lg, xl).",
-        "note": "Combine <code>color</code>, <code>variant</code>, and <code>size</code> to customize appearance according to your needs.",
-        "codeTitle": "Customization"
+      "colors": {
+        "title": "Colors and variants",
+        "description": "Compatible with the entire NUI variant system (Solid, Outline, Ghost) and colors.",
+        "note": "Combine <code>color</code> and <code>variant</code>."
+      },
+      "sizes": {
+        "title": "Sizes",
+        "description": "Five predefined sizes that harmoniously scale the container, typography and icons.",
+        "note": "Use <code>size</code> with values <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> and <code>'xl'</code>."
       },
       "width": {
-        "title": "Full Width",
-        "note": "Use <code>width='full'</code> to make buttons expand and occupy all available space evenly.",
-        "codeTitle": "Expandable Buttons"
+        "title": "Full width",
+        "description": "Expands the buttons to occupy all available space equally.",
+        "note": "Use <code>width='full'</code> to make each button expand and occupy equal width within the container."
       },
       "api": {
-        "title": "API Reference",
-        "description": "Complete documentation of inputs, outputs, and advanced usage of the Button Group component.",
-        "usageCodeTitle": "Complete Usage Example with Objects"
+        "title": "API and reference",
+        "description": "Complete documentation of inputs, outputs and advanced usage of the Button Group component."
       },
       "styling": {
-        "title": "Styling and Customization",
-        "description": "Customize the button group appearance using CSS variables. Control spacing, colors, shadows, and more."
+        "title": "Styling and customization",
+        "description": "Customize the button group's appearance using CSS variables. Control spacing, colors, shadows and more."
       }
     },
     "paginator": {
       "title": "Paginator",
       "subtitle": "Advanced component for data navigation with support for flexible layouts and infinite loading",
       "basic": {
-        "title": "Basic Usage",
-        "description": "Standard configuration with numeric navigation. Supports bidirectional binding of page and size.",
-        "codeTitle": "Standard Example"
+        "title": "Basic usage",
+        "description": "Standard configuration with numeric navigation. Supports two-way binding of page and size."
       },
-      "styles": {
-        "title": "Styles and Variants",
-        "description": "Supports all system colors, variants (Solid, Outline, Ghost), and predefined modes like 'Minimal'.",
-        "codeTitle": "Visual Customization"
-      },
-      "layout": {
-        "title": "Custom Layout",
-        "description": "The most powerful feature. Define exactly where each element goes (top, left, center, right, bottom) using a configuration object.",
-        "note": "<strong>Area System:</strong> You can move the size selector to the left, put the item summary on top, or create any composition your design needs. When a layout is set, attributes like <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code>, and <code>showPageJump</code> are ignored because the custom layout has full control over what to show and where."
-      },
-      "infinite": {
-        "title": "Infinite Load / Load More",
-        "description": "Transform the paginator into a 'Load More' button with integrated loading state. Ideal for mobile lists or feeds.",
-        "codeTitle": "Button Load More Mode"
+      "colors": {
+        "title": "Colors and variants",
+        "description": "Supports all NUI colors and variants (Solid, Outline, Ghost).",
+        "note": "Combine <code>color</code> and <code>variant</code> to customize the paginator's appearance according to your needs."
       },
       "sizes": {
-        "title": "Page Size Options",
+        "title": "Page size options",
         "description": "Define a custom set of options for page size.",
-        "note": "Using the <code>size</code> input you can offer users a specific set of page sizes to choose from.",
-        "codeTitle": "Custom Sizes"
+        "note": "Using the <code>size</code> input you can offer users a specific set of page sizes to choose from."
+      },
+      "layout": {
+        "title": "Custom layout",
+        "description": "The most powerful feature. Define exactly where each element goes (top, left, center, right, bottom) using a configuration object.",
+        "note": "<strong>Area system:</strong> You can move the size selector to the left, put the item summary on top, or create any composition your design needs. When a layout is set, attributes like <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> and <code>showPageJump</code> are ignored because the custom layout has full control over what to show and where."
+      },
+      "infinite": {
+        "title": "Infinite loading",
+        "description": "Transforms the paginator into a <strong>Load more</strong> button with integrated loading state. Ideal for mobile lists or feeds.",
+        "note": "Activate infinite loading mode with <code>infiniteConfig</code>. The paginator becomes a button that loads more items on click. Use the <code>onLoadMore</code> output inside <code>infiniteConfig</code> to handle data loading logic."
       },
       "api": {
-        "title": "API Reference",
-        "description": "Complete documentation of Paginator component inputs, outputs, and interfaces for advanced integration.",
-        "usageCodeTitle": "Complete Usage Example"
+        "title": "API and reference",
+        "description": "Complete documentation of Paginator component inputs, outputs and interfaces for advanced integration."
       },
       "styling": {
-        "title": "Styling and Customization",
-        "description": "Customize the paginator appearance using CSS variables. Control layout, buttons, page numbers, and more."
+        "title": "Styling and customization",
+        "description": "Customize the paginator's appearance using CSS variables. Control layout, buttons, page numbers and more."
       }
     },
     "popover": {
       "title": "Popover",
-      "subtitle": "Interactive floating content component with support for text, templates, and dynamic components",
+      "subtitle": "Interactive floating content component with support for text, templates and dynamic components. Unlike <code>Tooltip</code>, popover can contain interactive elements like buttons, forms or lists.",
       "basic": {
-        "title": "Basic Usage",
-        "description": "Simple popover with text content. The popover displays on clicking the element (default behavior).",
-        "codeTitle": "Popover with Text"
+        "title": "Basic usage",
+        "description": "Simple popover with text content. The popover is shown on click on the element (default behavior)."
       },
       "positions": {
         "title": "Positions",
-        "description": "Control the preferred popover position: top, bottom, left, or right. The popover automatically repositions if there's insufficient space.",
-        "codeTitle": "Available Positions"
+        "description": "Control the popover's preferred position: top, bottom, left or right. The popover automatically repositions if there's not enough space."
       },
       "events": {
-        "title": "Trigger Events",
-        "description": "Define how the popover activates: click (default), hover, focus, or manual. Manual mode allows complete programmatic control.",
-        "codeTitle": "Event Types"
+        "title": "Trigger events",
+        "description": "Define how the popover is activated: click (default), hover, focus or manual. Manual mode allows complete programmatic control.",
+        "note": "When using <code>nuiPopoverEvent</code> we have three modes: <code>'click'</code> (show/hide on click), <code>'hover'</code> (show on mouse over and hide on leave) and <code>'focus'</code> (show on focus and hide on blur)."
       },
       "template": {
-        "title": "Custom Template",
-        "description": "Use Angular templates for rich, interactive content. The template context provides a <code>close</code> function to close the popover."
+        "title": "Custom template",
+        "description": "Use Angular templates for rich and interactive content. The template context provides a <code>close</code> function to close the popover.",
+        "note": "The <code>#popoverTemplate</code> template receives a context with the <code>close()</code> function that you can use to close the popover from within the template."
       },
       "component": {
-        "title": "Dynamic Component",
-        "description": "Render complete Angular components inside the popover. Ideal for forms, lists, or complex content."
+        "title": "Dynamic component",
+        "description": "Render complete Angular components inside the popover. Ideal for forms, lists or complex content."
       },
       "delays": {
-        "title": "Show/Hide Delays",
-        "description": "Configure delays in milliseconds before showing or hiding the popover. Useful for improving user experience in hover mode.",
-        "codeTitle": "Delay Configuration"
+        "title": "Show / hide delays",
+        "description": "Configure delays in milliseconds before showing or hiding the popover. Useful for improving user experience in hover mode."
       },
       "customization": {
         "title": "Customization",
-        "description": "Customize popover appearance: no arrow, custom width, own CSS classes, or greater separation offset.",
-        "codeTitle": "Customization Options"
+        "description": "Customize the popover's appearance: no arrow, custom width, own CSS classes or greater separation offset.",
+        "note": "You can use <code>nuiPopoverShowArrow</code> to hide/show the arrow, <code>nuiPopoverMaxWidth</code> to define a maximum width, <code>nuiPopoverMinWidth</code> to define a minimum width, <code>nuiPopoverClass</code> to add custom CSS classes, and <code>nuiPopoverOffset</code> to adjust the distance between the popover and the target element."
       },
       "closeOptions": {
-        "title": "Close Options",
-        "description": "Control how the popover can be closed: click outside, Escape key, or allow multiple simultaneous popovers.",
-        "codeTitle": "Close Control"
+        "title": "Close options",
+        "description": "Control how the popover can be closed: click outside, Escape key, or allow multiple popovers open simultaneously.",
+        "note": "Use <code>nuiPopoverCloseOnClickOutside</code> to close on outside click, <code>nuiPopoverCloseOnEscape</code> to close with Escape, and <code>nuiPopoverAllowMultiple</code> to allow multiple popovers open at once."
       },
       "backdrop": {
-        "title": "With Backdrop",
+        "title": "Backdrop",
         "description": "Add a dark background behind the popover to create a modal experience. You can control whether clicking the backdrop closes the popover or not.",
-        "codeTitle": "Modal Popover"
+        "note": "Use <code>nuiPopoverBackdrop</code> to enable/disable the backdrop and <code>nuiBackdropClose</code> to control whether clicking the backdrop closes the popover."
       },
       "disabled": {
-        "title": "Disabled State",
-        "description": "Dynamically control whether the popover is enabled or disabled using the <code>popoverDisabled</code> property."
+        "title": "Disabled state",
+        "description": "Dynamically control whether the popover is enabled or disabled.",
+        "note": "When <code>nuiPopoverDisabled</code> is <code>true</code>, the popover will not show or respond to events."
       },
       "api": {
-        "title": "API Reference",
-        "description": "Complete documentation of the nuiPopover directive, injection tokens, and advanced usage.",
-        "usageCodeTitle": "Complete Usage Example"
+        "title": "API and reference",
+        "description": "Complete documentation of the nuiPopover directive, injection tokens and advanced usage."
       },
       "styling": {
-        "title": "Styling and Customization",
-        "description": "Customize the popover appearance using CSS variables. Control colors, size, shadows, and animations."
+        "title": "Styling and customization",
+        "description": "Customize the popover's appearance using CSS variables. Control colors, size, shadows and animations."
       }
     },
     "toast": {
       "title": "Toast",
-      "subtitle": "Non-intrusive temporary notifications for user feedback",
+      "subtitle": "Temporary non-intrusive notifications for user feedback",
       "basic": {
-        "title": "Basic Toasts",
-        "description": "Display simple notifications with different types: success, error, warning, and info.",
-        "codeTitle": "Toast Types"
+        "title": "Basic toasts",
+        "description": "Show simple notifications with different types: success, error, warning and info."
       },
       "withTitle": {
-        "title": "Toasts with Title",
-        "description": "Add a title to give more context to the notification.",
-        "codeTitle": "Toast with Title"
+        "title": "Toasts with title",
+        "description": "Add a title to give more context to the notification."
       },
       "withActions": {
-        "title": "Toasts with Actions",
-        "description": "Include action buttons so users can interact with the notification.",
-        "codeTitle": "Toast with Actions"
+        "title": "Toasts with actions",
+        "description": "Include action buttons so the user can interact with the notification."
       },
       "positions": {
         "title": "Positions",
-        "description": "Control where toasts appear on screen: top-left, top-center, top-right, bottom-left, bottom-center, bottom-right.",
-        "codeTitle": "Toast Positions"
+        "description": "Control where toasts appear on screen: top-left, top-center, top-right, bottom-left, bottom-center, bottom-right."
+      },
+      "iconTop": {
+        "title": "Icon at the top",
+        "description": "Shows the toast icon centered at the top for a more prominent design.",
+        "note": "Use the <code>iconPosition='top'</code> property to center the icon at the top of the toast. This is especially useful for toasts with titles and actions, as it improves visual hierarchy and makes the icon more prominent."
+      },
+      "icons": {
+        "title": "Custom icons",
+        "description": "You can show default icons according to toast type or use custom icons. You can even hide the icon if you wish.",
+        "note": "Use the <code>icon</code> property. If you use the value <code>false</code> the icon will be hidden. If you use <code>string</code> you can specify a custom <strong>Remix Icon</strong> icon. By default icons are shown according to toast type with <code>icon</code> value <code>true</code>."
       },
       "duration": {
         "title": "Duration",
-        "description": "Configure how long the toast remains visible before disappearing. Use 0 for toasts that don't close automatically.",
-        "codeTitle": "Duration Configuration"
+        "description": "Configure how long the toast remains visible before disappearing. Use 0 for toasts that don't auto-close."
       },
       "loading": {
-        "title": "Loading Toast",
-        "description": "Display a toast with loading state that can be dynamically updated when the operation completes.",
-        "codeTitle": "Loading Toast"
+        "title": "Loading toast",
+        "description": "Show a toast with loading state that can be dynamically updated when the operation completes."
       },
       "api": {
-        "title": "API Reference",
-        "description": "Complete documentation of ToastService, interfaces, and advanced usage of the notification system.",
-        "usageCodeTitle": "Complete Usage Example"
+        "title": "API and reference",
+        "description": "Complete documentation of ToastService, interfaces and advanced usage of the notification system."
       },
       "styling": {
-        "title": "Styling and Customization",
-        "description": "Customize the toast appearance using CSS variables. Control colors, size, animations, and more."
-      }
-    },
-    "tooltip": {
-      "title": "Tooltip",
-      "subtitle": "Informative tooltips with support for text and custom templates",
-      "basic": {
-        "title": "Basic Tooltips",
-        "description": "Display simple tooltips with text on hover.",
-        "note": "You can disable the arrow with <code>tooltipShowArrow</code>.",
-        "codeTitle": "Basic Tooltip"
-      },
-      "positions": {
-        "title": "Positions",
-        "description": "Control tooltip position relative to the element: top (default), bottom, left, right.",
-        "codeTitle": "Tooltip Positions"
-      },
-      "events": {
-        "title": "Events",
-        "description": "Define which event triggers the tooltip: hover (default), click, focus, or manual for programmatic control.",
-        "codeTitle": "Event Types"
-      },
-      "template": {
-        "title": "Custom Template",
-        "description": "Use Angular templates for rich content with HTML formatting, icons, and styling."
-      },
-      "delays": {
-        "title": "Show/Hide Delays",
-        "description": "Configure delays in milliseconds before showing or hiding the tooltip. Useful to prevent unwanted tooltips on quick hovers.",
-        "codeTitle": "Delay Configuration"
-      },
-      "customization": {
-        "title": "Customization",
-        "description": "Customize tooltip appearance: no arrow, custom width, own CSS classes, or maximum width.",
-        "codeTitle": "Customization Options"
-      },
-      "api": {
-        "title": "API Reference",
-        "description": "Complete documentation of the nuiTooltip directive with all available inputs and outputs.",
-        "usageCodeTitle": "Complete Usage Example"
-      },
-      "styling": {
-        "title": "Styling and Customization",
-        "description": "Customize the tooltip appearance using CSS variables. Override these variables in your global styles or component styles."
+        "title": "Styling and customization",
+        "description": "Customize the toasts' appearance using CSS variables. Control colors, size, animations and more."
       }
     },
     "sidebar-panel": {
       "title": "Sidebar Panel",
-      "subtitle": "Sliding side panels with CDK Overlay for displaying dynamic content",
+      "subtitle": "Sliding side panels with CDK Overlay to show dynamic content",
       "basic": {
-        "title": "Basic Usage",
-        "description": "Open a side panel from the SidebarPanelService. The panel slides in from the screen edge with smooth animation.",
-        "codeTitle": "TypeScript - Open Panel"
+        "title": "Basic usage",
+        "description": "Open a side panel from the SidebarPanelService service. The panel slides from the edge of the screen with a smooth animation."
+      },
+      "default": {
+        "title": "Default configuration",
+        "description": "The panel will open using the global default values configured.",
+        "note": "If no options are provided when opening the panel, the global default values defined in the NUI configuration of <code>provideNUIConfig({ sidebarPanel: {...} })</code> will be used."
       },
       "sizes": {
         "title": "Sizes",
-        "description": "The Sidebar Panel component supports six predefined sizes: xs (300px), sm (400px), md (600px - default), lg (800px), xl (1000px), and full (100%).",
-        "codeTitle": "Size Configuration"
+        "description": "Allows defining the size with which the panel will open.",
+        "note": "You can use predefined values like <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> and <code>'full'</code>."
       },
       "positions": {
         "title": "Positions",
-        "description": "Control which side of the screen the panel slides from: right (default), left, top, or bottom.",
-        "codeTitle": "Position Configuration"
+        "description": "Control from which side of the screen the panel slides.",
+        "note": "Use the <code>position</code> property to define the side from which the panel will open using <code>'right'</code>, <code>'left'</code>, <code>'top'</code> or <code>'bottom'</code> as values."
       },
       "dynamicComponent": {
-        "title": "Dynamic Component",
-        "description": "Load any Angular component inside the panel and pass data through dependency injection using SIDEBAR_PANEL_DATA token."
+        "title": "Dynamic component",
+        "description": "Load any Angular component inside the panel and pass data through dependency injection",
+        "note": "Use the <code>data</code> property to pass data to the dynamically loaded component. This data is injected using the <code>SIDEBAR_PANEL_DATA</code> token. If we also want to reference the panel itself from the loaded component, we can inject <code>SIDEBAR_PANEL_REF</code>."
+      },
+      "events": {
+        "title": "@Output events from dynamic components",
+        "description": "Listen to events emitted by the component loaded inside the panel to handle interactions and close the panel when necessary.",
+        "note": "You can subscribe to outputs from the dynamically loaded component. Use <code>panelRef.componentInstance</code> to access the child component instance and subscribe to its <code>@Output()</code>."
       },
       "minimizable": {
-        "title": "Minimizable Panel",
-        "description": "Panels can be minimized to a sidebar tab to free up screen space while preserving their state. Click the minimize button in the header or use programmatic control. You can also restore the panel by clicking the minimized tab, depending on the Sidebar's position, or by clicking the element that created the panel.",
-        "note": "Use the <code>minimize()</code> method of the SidebarPanel to minimize the panel programmatically. The panel shrinks to a sidebar tab that can be expanded again by clicking. If <code>minimizable</code> is enabled, the <code>id</code> attribute is required to identify the minimized panel.<br><br><strong>Tab customization:</strong> You can customize the icon, add text, apply custom CSS, or use a completely custom template via <code>minimizedTabCustomization</code>. For floating buttons with free positioning (e.g., chat bottom-right), use <code>standalone: true</code> to render outside the grouped container and avoid positioning constraints.",
-        "codeTitle": "Minimizable Configuration"
+        "title": "Minimizable panel",
+        "description": "Panels can be minimized to a tab that <strong>will be located at the place from which the Sidebar opens</strong> to free up screen space while preserving the state, being able to restore it when desired.",
+        "note": "Use the <code>minimizable</code> attribute to make the Sidebar minimizable. Additionally, you can use the <code>minimize()</code> method of the SidebarPanel to minimize the panel programmatically and <code>restore()</code> to restore it. If <code>minimizable</code> is enabled, the <code>id</code> attribute is required to identify the minimized panel. You can also check if the Sidebar is minimized using <code>isMinimized</code>.<br><br><strong>Tab customization:</strong> You can customize the icon, add text, apply custom CSS or use a completely custom template through <code>minimizedTabCustomization</code>. For floating buttons with free positioning (e.g.: chat bottom-right), use <code>standalone: true</code> to render outside the grouped container and avoid positioning restrictions."
       },
       "closeButton": {
-        "title": "Close Button",
+        "title": "Close button",
         "description": "Control the visibility of the close button in the panel header.",
-        "codeTitle": "Hide Close Button"
+        "note": "Use the <code>showCloseButton</code> property to show or hide the close button in the panel header."
       },
-      "noBackdrop": {
-        "title": "Without Backdrop",
-        "description": "Open panels without the dark overlay background. Useful for non-modal panels that allow interaction with the page.",
-        "codeTitle": "No Backdrop Configuration"
+      "backdrop": {
+        "title": "Backdrop",
+        "description": "Add a dark background behind the panel to create a modal experience. Control whether clicking the backdrop closes the panel or not.",
+        "note": "Use the <code>hasBackdrop</code> property to enable/disable the backdrop (default <code>true</code>) and <code>closeOnBackdropClick</code> to control whether clicking the backdrop closes the panel."
       },
       "customBackdrop": {
-        "title": "Custom Backdrop",
-        "description": "Customize the backdrop with custom CSS classes. You can apply effects like blur, custom colors, and transitions.",
-        "codeTitle": "Backdrop with Custom Styles"
+        "title": "Custom backdrop",
+        "description": "Customize the backdrop with custom CSS classes. You can apply effects like blur, custom colors and transitions.",
+        "note": "Use the <code>backdropClass</code> property to add custom CSS classes to the panel backdrop. You can add a single class or an <code>array</code> of classes."
       },
       "multiple": {
-        "title": "Multiple Panels",
-        "description": "Open multiple panels simultaneously from different sides. Control z-index stacking and close all at once.",
-        "codeTitle": "Multiple Panels Example"
+        "title": "Multiple panels",
+        "description": "Open multiple panels simultaneously from different sides. Control stacking with z-index and close all at once.",
+        "note": "Each open panel is independent and can have its own configuration. Use the <code>closeAll()</code> method of the <code>SidebarPanelService</code> service to programmatically close all open panels simultaneously."
       },
       "api": {
         "title": "API",
@@ -606,7 +550,51 @@
       },
       "styling": {
         "title": "Styling and Customization",
-        "description": "Customize the panel appearance through CSS variables. You can override these variables in your custom theme."
+        "description": "Customize the panel's appearance using CSS variables. You can override these variables in your custom theme."
+      }
+    },
+    "tooltip": {
+      "title": "Tooltip",
+      "subtitle": "Informative tooltips with support for text and custom templates",
+      "basic": {
+        "title": "Basic tooltips",
+        "description": "Shows simple tooltips with text on hover.",
+        "note": "You can disable the arrow with <code>tooltipShowArrow</code>."
+      },
+      "positions": {
+        "title": "Positions",
+        "description": "Control the tooltip position relative to the element: top (default), bottom, left, right."
+      },
+      "events": {
+        "title": "Events",
+        "description": "Define which event triggers the tooltip: hover (default), click, focus, or manual for programmatic control."
+      },
+      "delays": {
+        "title": "Delays",
+        "description": "Configure delays before showing and hiding the tooltip.",
+        "note": "Use the <code>tooltipShowDelay</code> and <code>tooltipHideDelay</code> properties to adjust wait times."
+      },
+      "templates": {
+        "title": "Custom templates",
+        "description": "Use Angular templates to show enriched HTML content in the tooltip."
+      },
+      "interactive": {
+        "title": "Interactive tooltips",
+        "description": "Allow interaction with tooltip content. Useful for including buttons or links.",
+        "note": "Enable the <code>tooltipInteractive</code> property to allow interaction within the tooltip without it automatically closing when moving the cursor."
+      },
+      "disabled": {
+        "title": "Disabled state",
+        "description": "Dynamically control whether the tooltip is enabled or disabled.",
+        "note": "Use the <code>tooltipDisabled</code> property to activate or deactivate the tooltip as needed."
+      },
+      "api": {
+        "title": "API and reference",
+        "description": "Complete documentation of the nuiTooltip directive with all its inputs, outputs and usage examples."
+      },
+      "styling": {
+        "title": "Styling and customization",
+        "description": "Customize the tooltip's appearance using CSS variables. Control colors, size, animations and more."
       }
     }
   }

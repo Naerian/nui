@@ -19,27 +19,28 @@ $toast-content-gap: 0.25rem !default;
 
 // ===== BORDES Y RADIOS =====
 $toast-border-radius: 0.5rem !default;
-$toast-border-width: 1px !default;
+$toast-icon-radius: 0.25rem !default;
+$toast-border-width: 0.063rem !default;
 $toast-action-radius: 0.25rem !default;
-$toast-button-radius: 0.5rem !default;
+$toast-button-radius: 0.25rem !default;
 
 // ===== BOTÓN DE CERRAR Y EXPANDIR =====
 $toast-close-button-size: 1.5rem !default;
 $toast-close-text-size: 0.875rem !default;
 
 // ===== ICONOS =====
-$toast-icon-size: 1.5rem !default;
-$toast-icon-size-top: 2rem !default;
+$toast-icon-size: 1.125rem !default; // 18px
+$toast-icon-size-top: 1.125rem !default; // 20px
 $toast-icon-gap: 0.75rem !default;
-$toast-icon-bg-size: 2.25rem !default;
+$toast-icon-bg-size: 1.5rem !default; // 24px
 
 // ===== TIPOGRAFÍA =====
-$toast-title-size: 0.9375rem !default; // 15px
-$toast-title-weight: 600 !default;
-$toast-title-line-height: 1.4 !default;
+$toast-title-size: 0.938rem !default; // 15px
+$toast-title-weight: 600 !default; // Semi-bold
+$toast-title-line-height: 1.5 !default;
 
 $toast-message-size: 0.875rem !default; // 14px
-$toast-message-weight: 400 !default;
+$toast-message-weight: 400 !default; // Normal
 $toast-message-line-height: 1.5 !default;
 
 $toast-content-size: 0.75rem !default; // 12px

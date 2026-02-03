@@ -54,19 +54,18 @@
     "definition": "Definición",
     "configuration": "Configuración",
     "customization": "Personalización",
-    "styles": "Estilos",
     "example": "Ejemplo",
-    "componentCode": "Inputs y Outputs del Componente",
-    "usageCode": "Ejemplo de Uso Completo",
+    "componentCode": "Inputs y Outputs del componente",
+    "usageCode": "Ejemplo de uso completo",
     "itemInterface": "Interface",
-    "parent": "Componente Padre",
-    "child": "Componente Hijo",
-    "directiveCode": "Inputs y Outputs de la Directiva",
-    "tokensCode": "Tokens de Inyección para Componentes",
-    "serviceCode": "Métodos del Servicio",
+    "parent": "Componente padre",
+    "child": "Componente hijo",
+    "directiveCode": "Inputs y Outputs de la directiva",
+    "tokensCode": "Tokens de inyección para componentes",
+    "serviceCode": "Métodos del servicio",
+    "refCode": "Referencia del componente",
     "interfacesCode": "Interfaces",
-    "apiReference": "API de",
-    "cssVariables": "Variables CSS Disponibles"
+    "cssVariables": "Variables CSS disponibles"
   },
   "pages": {
     "home": {
@@ -92,23 +91,23 @@
     "configuration": {
       "title": "Configuración",
       "subtitle": "Configura NUI según tus necesidades",
-      "presetConfig": "Configuración de Preset",
+      "presetConfig": "Configuración de preset",
       "presetConfigDescription": "Los presets definen la paleta de colores de tu aplicación. NUI incluye 8 presets predefinidos: aura, warm, neon, dopamine, corporate, minimal, sunset y ocean.",
-      "presetConfigTitle": "Configuración de Preset",
+      "presetConfigTitle": "Configuración de preset",
       "darkModeConfig": "Configuración de Modo Oscuro",
       "darkModeConfigDescription": "Controla cómo se aplica el modo oscuro en tu aplicación. Las opciones disponibles son: 'manual' (controlado por código), 'auto' (basado en hora del día), o 'system' (según las preferencias del sistema operativo).",
       "darkModeConfigTitle": "Configuración de Modo Oscuro",
-      "customPresetConfig": "Preset Personalizado",
+      "customPresetConfig": "Preset personalizado",
       "customPresetConfigDescription": "Crea tu propio preset definiendo colores personalizados para los modos claro y oscuro. Cada preset debe incluir: primary, secondary, accent, success, info, warning y danger.",
-      "customPresetConfigTitle": "Crear Preset Personalizado"
+      "customPresetConfigTitle": "Crear preset personalizado"
     },
     "theming": {
-      "title": "Temas y Presets",
+      "title": "Temas y presets",
       "subtitle": "Personaliza la apariencia de tu aplicación",
       "description": "NUI incluye múltiples presets predefinidos. Cada preset define una paleta de colores única que se aplica a todos los componentes.",
       "selectPreset": "Selecciona un preset para previsualizarlo",
-      "currentPreset": "Preset Actual",
-      "colorPalette": "Paleta de Colores",
+      "currentPreset": "Preset actual",
+      "colorPalette": "Paleta de colores",
       "primary": "Primario",
       "secondary": "Secundario",
       "accent": "Acento",
@@ -133,129 +132,122 @@
       "title": "Botón",
       "subtitle": "Componente de botón versátil con múltiples variantes, tamaños y estados",
       "basic": {
-        "title": "Botón Básico",
+        "title": "Botón básico",
         "description": "La forma más simple de un botón con estilos predeterminados."
       },
       "variants-colors": {
-        "title": "Variantes y Colores",
-        "description": "Los botones vienen en tres variantes: solid (predeterminado), outline y ghost, y soportan todos los colores del tema: primary, secondary, accent, success, info, warning y danger.",
-        "codeTitle": "Variantes y Colores de Botón"
+        "title": "Variantes y colores",
+        "description": "Soporta diferentes variantes (Solid, Outline, Ghost) y colores del sistema NUI.",
+        "note": "Combina <code>color</code> y <code>variant</code> para personalizar la apariencia del botón según tus necesidades."
       },
       "sizes": {
         "title": "Tamaños",
-        "description": "Cinco opciones de tamaño disponibles: xs, sm, md (predeterminado), lg y xl.",
-        "codeTitle": "Tamaños de Botón"
+        "description": "Cinco opciones de tamaño disponibles en NUI.",
+        "note": "Los tamaños afectan la altura del botón, el padding horizontal y el tamaño de la fuente. Utiliza <code>size</code> con valores <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> y <code>'xl'</code>."
       },
       "icons": {
-        "title": "Con Iconos",
+        "title": "Iconos",
         "description": "Agrega iconos a los botones al inicio o al final. Los botones con solo un icono se renderizan como botones circulares de icono.",
-        "note": "Posición del icono: <code>'start'</code> muestra el icono antes del texto, <code>'end'</code> lo muestra después. Los botones de solo icono requieren el atributo <code>aria-label</code> para accesibilidad.",
-        "codeTitle": "Botones con Iconos"
+        "note": "Posición del icono: <code>'start'</code> muestra el icono antes del texto, <code>'end'</code> lo muestra después. Los botones de solo icono requieren el atributo <code>aria-label</code> para accesibilidad."
       },
       "loading": {
-        "title": "Estado de Carga",
+        "title": "Estado de carga",
         "description": "Muestra un spinner de carga en tres posiciones: inicio, final o centro (que reemplaza el contenido).",
         "note": "Posiciones de carga: <code>'start'</code> muestra el spinner antes del texto, <code>'end'</code> lo muestra después, <code>'center'</code> reemplaza completamente el contenido con un spinner centrado."
       },
       "width": {
         "title": "Ancho",
         "description": "Controla el ancho del botón: auto (predeterminado), full (100%) o fit (ajustado al contenido).",
-        "note": "Opciones de ancho: <code>'auto'</code> se adapta al contenido con padding estándar, <code>'full'</code> se estira al 100% del contenedor, <code>'fit'</code> usa el espacio mínimo necesario.",
-        "codeTitle": "Opciones de Ancho"
+        "note": "Opciones de ancho: <code>'auto'</code> se adapta al contenido con padding estándar, <code>'full'</code> se estira al 100% del contenedor, <code>'fit'</code> usa el espacio mínimo necesario."
       },
       "disabled": {
-        "title": "Estado Deshabilitado",
-        "description": "Los botones deshabilitados evitan la interacción del usuario y muestran una apariencia atenuada.",
-        "codeTitle": "Botones Deshabilitados"
+        "title": "Estado deshabilitado",
+        "description": "Los botones deshabilitados evitan la interacción del usuario y muestran una apariencia atenuada."
       },
       "events": {
         "title": "Eventos",
         "description": "Maneja eventos de clic con el output onClick. Soporta tipos de botón: button, submit y reset.",
-        "consoleNote": "Abre las DevTools (F12) y revisa la pestaña Console para ver los eventos registrados cuando haces clic en los botones."
+        "consoleNote": "Abre las <strong>DevTools (F12)</strong> y revisa la pestaña <strong>Console</strong> para ver los eventos registrados cuando haces clic en los botones."
       },
       "directive": {
-        "title": "Usando Directiva",
-        "description": "Aplica estilos de botón a elementos HTML nativos usando la directiva nuiButton. Funciona con elementos <code>&lt;button&gt;</code> y <code>&lt;a&gt;</code>.",
-        "codeTitle": "Directiva de Botón"
+        "title": "Usando directiva",
+        "description": "Aplica estilos de botón a elementos HTML nativos usando la directiva nuiButton.",
+        "note": "Puedes usar la directiva <code>nuiButton</code> en cualquier elemento HTML nativo como <code>&lt;button&gt;</code>, <code>&lt;a&gt;</code> o <code>&lt;div&gt;</code> para aplicar los estilos y comportamientos del botón NUI."
       },
       "api": {
-        "title": "API y Referencia",
-        "description": "Documentación completa de inputs y outputs del componente Button para integrar en tus proyectos.",
-        "componentCodeTitle": "Inputs y Outputs del Componente",
-        "usageCodeTitle": "Ejemplo de Uso Completo"
+        "title": "API y referencia",
+        "description": "Documentación completa de inputs y outputs del componente Button para integrar en tus proyectos."
       },
       "styling": {
-        "title": "Estilos y Personalización",
+        "title": "Estilos y personalización",
         "description": "Personaliza la apariencia del botón mediante variables CSS. Controla tamaños, tipografía, colores y más."
       }
     },
     "actionMenu": {
-      "title": "Menú de Acciones",
+      "title": "Menú de acciones",
       "subtitle": "Componente de menú desplegable con soporte para items estáticos, dinámicos y submenús",
       "basic": {
-        "title": "Uso Básico",
+        "title": "Uso básico",
         "description": "Menú de acciones simple con array de items. Cada item puede tener una etiqueta, icono y acción.",
         "note": "Aquí vemos un ejemplo de uso de ambos <code>type='static'</code> y <code>type='dynamic'</code>.",
         "consoleNote": "Abre las DevTools (F12) y revisa la pestaña Console para ver las acciones registradas cuando haces clic en los items del menú."
       },
       "separators": {
-        "title": "Con Separadores",
-        "description": "Agrupa acciones relacionadas usando separadores visuales. Usa <code>separator: true</code> para separadores simples, o agrega un <code>label</code> para separadores etiquetados."
+        "title": "Separadores",
+        "description": "Agrupa acciones relacionadas usando separadores visuales.",
+        "note": "Usa items con la propiedad <code>separator: true</code> para agregar líneas divisorias entre grupos de acciones. Puedes añadir una etiqueta opcional al separador usando la propiedad <code>label</code>."
       },
       "submenu": {
-        "title": "Con Submenús",
+        "title": "Submenús",
         "description": "Crea menús anidados usando la propiedad <code>children</code>. Los submenús pueden anidarse múltiples niveles.",
         "note": "Usa la propiedad <code>children</code> para definir items de submenú. Cada hijo puede tener sus propios hijos para mayor anidación. <strong>Nota:</strong> Si un hijo tiene <code>selected: true</code>, el item padre mostrará un indicador visual (línea vertical a la izquierda) para facilitar la navegación."
       },
       "variants": {
-        "title": "Variantes del Botón",
-        "description": "El botón del menú soporta tres variantes: <code>'ghost'</code> (predeterminado), <code>'solid'</code> y <code>'outline'</code>."
+        "title": "Variantes del botón",
+        "description": "El botón soporta diferentes variantes y colores del sistema NUI. La variante afectará al botón, pero el color afecta al color y al contenido.",
+        "note": "Combina <code>color</code> y <code>variant</code> para personalizar la apariencia del botón del menú según tus necesidades."
       },
       "sizes": {
         "title": "Tamaños",
-        "description": "Cinco opciones de tamaño para el botón del menú: <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code> (predeterminado), <code>'lg'</code> y <code>'xl'</code>."
+        "description": "Haz uso de los cinco tamaños predefinidos de NUI. El tamaño afecta al botón, pero el contenido seguirá siendo el mismo.",
+        "note": "Utiliza el input <code>size</code> para ajustar el tamaño del botón del menú y su contenido haciendo uso de los tamaños <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code> y <code>xl</code>."
       },
       "label": {
-        "title": "Con Etiqueta",
+        "title": "Contenido del botón",
         "description": "Agrega texto al botón del menú. Puede combinarse con iconos y soporta modo de ancho completo.",
-        "codeTitle1": "Texto e Icono",
-        "codeTitle2": "Solo Texto",
-        "codeTitle3": "Ancho Completo"
+        "note": "Usa <code>icon</code> junto con <code>label</code> para mostrar ambos en el botón. Usa <code>width='full'</code> para que el botón ocupe todo el ancho disponible. Si únicamente usas <code>label</code> sin icono, el botón se renderiza como un botón de texto simple.",
+        "codeTitle1": "Texto e icono",
+        "codeTitle2": "Solo texto",
+        "codeTitle3": "Ancho completo"
       },
       "disabled": {
-        "title": "Estado Deshabilitado",
-        "description": "Deshabilita items individuales del menú o el menú completo. Los items deshabilitados se muestran pero no son clicables.",
-        "codeTitle": "Estados Deshabilitados"
+        "title": "Estado deshabilitado",
+        "description": "Deshabilita items individuales del menú o el menú completo. Los items deshabilitados se muestran pero no son clicables."
       },
       "withSubtitle": {
-        "title": "Con Subtítulo",
-        "description": "Agrega texto secundario debajo de la etiqueta principal. Útil para mostrar información adicional como correos, descripciones o atajos.",
-        "codeTitle": "Ejemplos de Subtítulo"
+        "title": "Subtítulo de elementos",
+        "description": "Agrega texto secundario debajo de la etiqueta principal. Útil para mostrar información adicional como correos, descripciones o atajos."
       },
       "selected": {
-        "title": "Estado Seleccionado",
-        "description": "Marca items como seleccionados para mostrar la elección actual. Un icono de check aparece automáticamente. Perfecto para selectores, filtros o configuraciones.",
-        "codeTitle": "Items Seleccionados"
+        "title": "Estado seleccionado",
+        "description": "Marca items como seleccionados para mostrar la elección actual. Un icono de check aparece automáticamente. Perfecto para selectores, filtros o configuraciones."
       },
-      "colors": {
-        "title": "Iconos Descriptivos",
+      "icons": {
+        "title": "Iconos descriptivos",
         "description": "Usa iconos y etiquetas significativas para comunicar el propósito de cada acción. Los iconos ayudan a los usuarios a identificar rápidamente las acciones.",
-        "codeTitle": "Uso de Iconos"
+        "note": "Utiliza iconos relevantes de la biblioteca <strong>Remix Icon</strong> para mejorar la comprensión visual de las acciones del menú."
       },
       "template": {
-        "title": "Template Personalizado",
-        "description": "Personaliza completamente el renderizado del menú usando templates y directivas. Usa <code>menu-header</code> y <code>menu-footer</code> para agregar contenido al inicio y final sin necesidad de ng-template.",
-        "note": "El template <code>#item</code> recibe el item completo como contexto (<code>let-item</code>). Las directivas <code>menu-header</code> y <code>menu-footer</code> permiten una sintaxis más simple y clara que PrimeNG, evitando ng-template innecesarios.",
-        "clickNote": "<strong>Importante:</strong> Al usar templates personalizados, debes manejar el evento click manualmente con <code>(click)=\"handleAction(item)\"</code>. El evento <code>onItemAction</code> solo se emite automáticamente con items por defecto."
+        "title": "Template personalizado",
+        "description": "Personaliza completamente el renderizado del menú usando templates y directivas.",
+        "note": "El template <code>#item</code> recibe el item completo como contexto (<code>let-item</code>). Las directivas <code>menu-header</code> y <code>menu-footer</code> permiten una sintaxis simple y clara, evitando ng-template innecesarios. <br/><br/> <strong>Importante:</strong> Al usar templates personalizados, debes manejar el evento click manualmente con <code>(click)=\"handleAction(item)\"</code>. El evento <code>onItemAction</code> solo se emite automáticamente con items por defecto."
       },
       "api": {
-        "title": "API y Referencia",
-        "description": "Documentación completa de inputs, outputs y la interfaz ActionMenuItem para integrar el componente en tus proyectos.",
-        "componentCodeTitle": "Inputs y Outputs del Componente",
-        "usageCodeTitle": "Ejemplo de Uso Completo"
+        "title": "API y referencia",
+        "description": "Documentación completa de inputs, outputs y la interfaz ActionMenuItem para integrar el componente en tus proyectos."
       },
       "styling": {
-        "title": "Estilos y Personalización",
+        "title": "Estilos y personalización",
         "description": "Personaliza la apariencia del menú mediante variables CSS. Controla colores, espaciado, tipografía y más."
       }
     },
@@ -263,49 +255,44 @@
       "title": "Avatar",
       "subtitle": "Componente gráfico para representar usuarios, entidades o marcas mediante imágenes, letras o iconos",
       "basic": {
-        "title": "Uso Básico",
-        "description": "Muestra un avatar simple cargando una imagen externa. Es la forma más común de representación de usuario.",
-        "codeTitle": "Avatar con Imagen"
+        "title": "Uso básico",
+        "description": "Muestra un avatar simple cargando una imagen externa. Es la forma más común de representación de usuario."
       },
       "types": {
-        "title": "Tipos de Contenido y Prioridad",
+        "title": "Tipos de contenido y prioridad",
         "description": "El componente decide inteligentemente qué mostrar basándose en los datos disponibles. Esta lógica asegura que siempre se muestre algo significativo.",
-        "note": "<strong>Prioridad de renderizado:</strong> 1. Imagen (si carga) &gt; 2. Iniciales &gt; 3. Icono &gt; 4. Fallback (Letra del Alt) &gt; 5. Icono por defecto.",
-        "codeTitle": "Jerarquía de Contenido"
+        "note": "<strong>Prioridad de renderizado:</strong> 1. Imagen (si carga) &gt; 2. Iniciales &gt; 3. Icono &gt; 4. Fallback (Letra del Alt) &gt; 5. Icono por defecto."
       },
       "variants": {
-        "title": "Variantes de Forma",
-        "description": "El avatar soporta tres formas geométricas para adaptarse a diferentes contextos de diseño: <code>circular</code> (predeterminado), <code>rounded</code> y <code>square</code>.",
-        "codeTitle": "Formas Disponibles"
+        "title": "Variantes de forma",
+        "description": "El avatar soporta tres formas geométricas para adaptarse a diferentes contextos de diseño.",
+        "note": "Usa el input <code>variant</code> con valores <code>'circular'</code>, <code>'rounded'</code> y <code>'square'</code> para cambiar la forma del avatar."
       },
       "sizes": {
         "title": "Tamaños",
-        "description": "Cinco tamaños predefinidos que escalan armoniosamente el contenedor, la tipografía y los iconos: <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code> y <code>xl</code>.",
-        "codeTitle": "Escala de Tamaños"
+        "description": "Cinco tamaños predefinidos que escalan armoniosamente el contenedor, la tipografía y los iconos.",
+        "note": "Los tamaños afectan la dimensión del avatar, el tamaño de la fuente para iniciales y el tamaño del icono. Utiliza <code>size</code> con valores <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> y <code>'xl'</code>."
       },
       "colors": {
         "title": "Colores",
         "description": "Personaliza el fondo y el color del texto utilizando la paleta del sistema. Ideal para diferenciar usuarios o estados cuando no hay imagen.",
-        "codeTitle": "Paleta de Colores"
+        "note": "Usa el input <code>color</code> con valores como <code>'primary'</code>, <code>'secondary'</code>, <code>'accent'</code>, <code>'success'</code>, <code>'info'</code>, <code>'warning'</code> y <code>'danger'</code> para cambiar los colores del avatar."
       },
       "customSize": {
-        "title": "Tamaño Personalizado",
+        "title": "Tamaño personalizado",
         "description": "Define dimensiones exactas en píxeles cuando los tamaños estándar no encajen. El tamaño de la fuente y los iconos se calcula proporcionalmente de forma automática.",
-        "note": "El input <code>customSize</code> anula el input <code>size</code>. El cálculo interno mantiene la legibilidad de las iniciales.",
-        "codeTitle": "Dimensiones en Píxeles"
+        "note": "El input <code>customSize</code> anula el input <code>size</code>. El cálculo interno mantiene la legibilidad de las iniciales."
       },
       "error": {
-        "title": "Manejo de Errores (Fallback)",
-        "description": "Sistema de recuperación automática. Si la URL de la imagen falla (error 404), el componente cambia instantáneamente a mostrar las iniciales o el icono de respaldo sin romper el diseño.",
-        "codeTitle": "Ejemplo de Error de Carga"
+        "title": "Manejo de errores (Fallback)",
+        "description": "Sistema de recuperación automática. Si la URL de la imagen falla (error 404), el componente cambia instantáneamente a mostrar las iniciales o el icono de respaldo sin romper el diseño."
       },
       "api": {
-        "title": "API y Referencia",
-        "description": "Documentación completa de inputs y outputs del componente Avatar para integrar en tus proyectos.",
-        "usageCodeTitle": "Ejemplo de Uso Completo"
+        "title": "API y referencia",
+        "description": "Documentación completa de inputs y outputs del componente Avatar para integrar en tus proyectos."
       },
       "styling": {
-        "title": "Estilos y Personalización",
+        "title": "Estilos y personalización",
         "description": "Personaliza la apariencia del avatar mediante variables CSS. Controla tamaños, colores, bordes y más."
       }
     },
@@ -313,50 +300,50 @@
       "title": "Button Group",
       "subtitle": "Conjunto de botones agrupados para selección única (Radio) o múltiple (Checkbox)",
       "basic": {
-        "title": "Uso Básico",
-        "description": "El caso más simple acepta un array de strings. Por defecto, actúa como un selector de opción única (Radio).",
-        "codeTitle": "Ejemplo con Strings"
+        "title": "Uso básico",
+        "description": "El caso más simple acepta un array de strings. Por defecto, actúa como un selector de opción única (Radio)."
       },
       "modes": {
-        "title": "Modos de Selección",
+        "title": "Modos de selección",
         "description": "Permite cambiar el tipo de selección del botón entre radiobutton y checkbox",
-        "note": "Cambia a <code>mode='checkbox'</code> para permitir seleccionar múltiples opciones a la vez. El valor devuelto será un Array.",
-        "codeTitle": "Modo Multiselección"
+        "note": "Cambia a <code>mode='checkbox'</code> para permitir seleccionar múltiples opciones a la vez. El valor devuelto será un Array."
       },
       "segmented": {
-        "title": "Variante Segmented",
+        "title": "Variante segmented",
         "description": "Estilo visual tipo 'iOS Segmented Control'. Ideal para conmutadores de vistas (ej: Mes/Año, Lista/Mapa).",
-        "note": "Usa <code>visualVariant='segmented'</code> para aplicar este estilo único.",
-        "codeTitle": "Estilo Segmentado"
+        "note": "Usa <code>layout='segmented'</code> para aplicar este estilo único."
       },
       "complex": {
-        "title": "Objetos Complejos",
-        "note": "Mapea propiedades de objetos arbitrarios usando <code>labelBy</code>, <code>valueBy</code> y <code>disabledBy</code>.",
-        "codeTitle": "Mapeo de Datos"
+        "title": "Objetos complejos",
+        "description": "Soporta arrays de objetos con propiedades personalizadas para etiqueta, valor y estado deshabilitado.",
+        "note": "Mapea propiedades de objetos arbitrarios usando <code>labelBy</code>, <code>valueBy</code>, <code>iconBy</code> y <code>disabledBy</code>."
       },
       "icons": {
-        "title": "Con Iconos",
-        "note": "Soporte para iconos Remix Icon. Usa <code>iconOnly='true'</code> para una botonera compacta tipo barra de herramientas.",
-        "codeTitle": "Toolbar de Iconos"
+        "title": "Iconos",
+        "description": "Soporta botones de solo icono para una botonera compacta tipo barra de herramientas.",
+        "note": "Soporte para iconos Remix Icon. Usa <code>iconOnly='true'</code> para una botonera compacta tipo barra de herramientas. Si es un <strong>objeto</strong>, puedes mapear la propiedad del icono usando <code>iconBy</code>."
       },
-      "styles": {
-        "title": "Estilos y Tamaños",
-        "description": "Compatible con todo el sistema de variantes (Solid, Outline, Ghost), colores y tamaños de NUI (xs, sm, md, lg, xl).",
-        "note": "Combina <code>color</code>, <code>variant</code> y <code>size</code> para personalizar la apariencia según tus necesidades.",
-        "codeTitle": "Personalización"
+      "colors": {
+        "title": "Colores y variantes",
+        "description": "Compatible con todo el sistema de variantes (Solid, Outline, Ghost) y colores de NUI.",
+        "note": "Combina <code>color</code> y <code>variant</code>."
+      },
+      "sizes": {
+        "title": "Tamaños",
+        "description": "Cinco tamaños predefinidos que escalan armoniosamente el contenedor, la tipografía y los iconos.",
+        "note": "Utiliza <code>size</code> con valores <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> y <code>'xl'</code>."
       },
       "width": {
-        "title": "Ancho Completo",
-        "note": "Usa <code>width='full'</code> para que los botones se expandan y ocupen todo el espacio disponible equitativamente.",
-        "codeTitle": "Botones Expansibles"
+        "title": "Ancho completo",
+        "description": "Expande los botones para que ocupen todo el espacio disponible equitativamente.",
+        "note": "Usa <code>width='full'</code> para que cada botón se expanda y ocupe un ancho igual dentro del contenedor."
       },
       "api": {
-        "title": "API y Referencia",
-        "description": "Documentación completa de inputs, outputs y uso avanzado del componente Button Group.",
-        "usageCodeTitle": "Ejemplo de Uso Completo con Objetos"
+        "title": "API y referencia",
+        "description": "Documentación completa de inputs, outputs y uso avanzado del componente Button Group."
       },
       "styling": {
-        "title": "Estilos y Personalización",
+        "title": "Estilos y personalización",
         "description": "Personaliza la apariencia del grupo de botones mediante variables CSS. Controla espaciado, colores, sombras y más."
       }
     },
@@ -364,98 +351,93 @@
       "title": "Paginator",
       "subtitle": "Componente avanzado para navegación de datos con soporte para layouts flexibles y carga infinita",
       "basic": {
-        "title": "Uso Básico",
-        "description": "Configuración estándar con navegación numérica. Soporta binding bidireccional de página y tamaño.",
-        "codeTitle": "Ejemplo Estándar"
+        "title": "Uso básico",
+        "description": "Configuración estándar con navegación numérica. Soporta binding bidireccional de página y tamaño."
       },
-      "styles": {
-        "title": "Estilos y Variantes",
-        "description": "Soporta todos los colores del sistema, variantes (Solid, Outline, Ghost) y modos predefinidos como 'Minimal'.",
-        "codeTitle": "Personalización Visual"
-      },
-      "layout": {
-        "title": "Layout Personalizado",
-        "description": "La característica más potente. Define exactamente dónde va cada elemento (top, left, center, right, bottom) usando un objeto de configuración.",
-        "note": "<strong>Sistema de Áreas:</strong> Puedes mover el selector de tamaño a la izquierda, poner el resumen de items arriba, o crear cualquier composición que necesite tu diseño. Cuando se establece un layout, los atributos como <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> y <code>showPageJump</code> se ignoran porque el layout personalizado tiene control total sobre qué mostrar y dónde."
-      },
-      "infinite": {
-        "title": "Carga Infinita / Ver Más",
-        "description": "Transforma el paginador en un botón 'Cargar Más' con estado de loading integrado. Ideal para listas móviles o feeds.",
-        "codeTitle": "Modo Button Load More"
+      "colors": {
+        "title": "Colores y variantes",
+        "description": "Soporta todos los colores y variantes (Solid, Outline, Ghost) de NUI.",
+        "note": "Combina <code>color</code> y <code>variant</code> para personalizar la apariencia del paginador según tus necesidades."
       },
       "sizes": {
-        "title": "Opciones de Tamaño de Página",
+        "title": "Opciones de tamaño de página",
         "description": "Define un conjunto personalizado de opciones para el tamaño de página.",
-        "note": "Usando el input <code>size</code> podrás ofrecer a los usuarios un conjunto específico de tamaños de página para elegir.",
-        "codeTitle": "Tamaños Personalizados"
+        "note": "Usando el input <code>size</code> podrás ofrecer a los usuarios un conjunto específico de tamaños de página para elegir."
+      },
+      "layout": {
+        "title": "Layout personalizado",
+        "description": "La característica más potente. Define exactamente dónde va cada elemento (top, left, center, right, bottom) usando un objeto de configuración.",
+        "note": "<strong>Sistema de áreas:</strong> Puedes mover el selector de tamaño a la izquierda, poner el resumen de items arriba, o crear cualquier composición que necesite tu diseño. Cuando se establece un layout, los atributos como <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> y <code>showPageJump</code> se ignoran porque el layout personalizado tiene control total sobre qué mostrar y dónde."
+      },
+      "infinite": {
+        "title": "Carga infinita",
+        "description": "Transforma el paginador en un botón <strong>Cargar más</strong> con estado de loading integrado. Ideal para listas móviles o feeds.",
+        "note": "Activa el modo de carga infinita con <code>infiniteConfig</code>. El paginador se convierte en un botón que carga más items al hacer clic. Usa el output <code>onLoadMore</code> que hay en el interior de <code>infiniteConfig</code> para manejar la lógica de carga de datos."
       },
       "api": {
-        "title": "API y Referencia",
-        "description": "Documentación completa de inputs, outputs e interfaces del componente Paginator para integración avanzada.",
-        "usageCodeTitle": "Ejemplo de Uso Completo"
+        "title": "API y referencia",
+        "description": "Documentación completa de inputs, outputs e interfaces del componente Paginator para integración avanzada."
       },
       "styling": {
-        "title": "Estilos y Personalización",
+        "title": "Estilos y personalización",
         "description": "Personaliza la apariencia del paginador mediante variables CSS. Controla layout, botones, números de página y más."
       }
     },
     "popover": {
       "title": "Popover",
-      "subtitle": "Componente de contenido flotante interactivo con soporte para texto, templates y componentes dinámicos",
+      "subtitle": "Componente de contenido flotante interactivo con soporte para texto, templates y componentes dinámicos. Al contrario que <code>Tooltip</code>, el popover puede contener elementos interactivos como botones, formularios o listas.",
       "basic": {
-        "title": "Uso Básico",
-        "description": "Popover simple con contenido de texto. El popover se muestra al hacer click en el elemento (comportamiento predeterminado).",
-        "codeTitle": "Popover con Texto"
+        "title": "Uso básico",
+        "description": "Popover simple con contenido de texto. El popover se muestra al hacer click en el elemento (comportamiento predeterminado)."
       },
       "positions": {
         "title": "Posiciones",
-        "description": "Controla la posición preferida del popover: top, bottom, left o right. El popover se reposiciona automáticamente si no hay espacio suficiente.",
-        "codeTitle": "Posiciones Disponibles"
+        "description": "Controla la posición preferida del popover: top, bottom, left o right. El popover se reposiciona automáticamente si no hay espacio suficiente."
       },
       "events": {
-        "title": "Eventos de Activación",
+        "title": "Eventos de activación",
         "description": "Define cómo se activa el popover: click (predeterminado), hover, focus o manual. El modo manual permite control programático completo.",
-        "codeTitle": "Tipos de Eventos"
+        "note": "Al usar <code>nuiPopoverEvent</code> disponemos de tres modos: <code>'click'</code> (mostrar/ocultar al hacer click), <code>'hover'</code> (mostrar al pasar el ratón y ocultar al salir) y <code>'focus'</code> (mostrar al enfocar y ocultar al perder el foco)."
       },
       "template": {
-        "title": "Template Personalizado",
-        "description": "Usa templates de Angular para contenido rico e interactivo. El contexto del template proporciona una función <code>close</code> para cerrar el popover."
+        "title": "Template personalizado",
+        "description": "Usa templates de Angular para contenido rico e interactivo. El contexto del template proporciona una función <code>close</code> para cerrar el popover.",
+        "note": "El template <code>#popoverTemplate</code> recibe un contexto con la función <code>close()</code> que puedes usar para cerrar el popover desde dentro del template."
       },
       "component": {
-        "title": "Componente Dinámico",
+        "title": "Componente dinámico",
         "description": "Renderiza componentes completos de Angular dentro del popover. Ideal para formularios, listas o contenido complejo."
       },
       "delays": {
-        "title": "Delays de Mostrar/Ocultar",
-        "description": "Configura retrasos en milisegundos antes de mostrar u ocultar el popover. Útil para mejorar la experiencia de usuario en modo hover.",
-        "codeTitle": "Configuración de Delays"
+        "title": "Delays de mostrar / ocultar",
+        "description": "Configura retrasos en milisegundos antes de mostrar u ocultar el popover. Útil para mejorar la experiencia de usuario en modo hover."
       },
       "customization": {
         "title": "Personalización",
         "description": "Personaliza la apariencia del popover: sin flecha, ancho personalizado, clases CSS propias o mayor offset de separación.",
-        "codeTitle": "Opciones de Personalización"
+        "note": "Puedes usar <code>nuiPopoverShowArrow</code> para ocultar / mostrar la flecha, <code>nuiPopoverMaxWidth</code> para definir un ancho máximo, <code>nuiPopoverMinWidth</code> para definir un ancho mínimo, <code>nuiPopoverClass</code> para agregar clases CSS personalizadas, y <code>nuiPopoverOffset</code> para ajustar la distancia entre el popover y el elemento objetivo."
       },
       "closeOptions": {
-        "title": "Opciones de Cierre",
+        "title": "Opciones de cierre",
         "description": "Controla cómo se puede cerrar el popover: click fuera, tecla Escape, o permitir múltiples popovers abiertos simultáneamente.",
-        "codeTitle": "Control de Cierre"
+        "note": "Utiliza <code>nuiPopoverCloseOnClickOutside</code> para cerrar al hacer click fuera, <code>nuiPopoverCloseOnEscape</code> para cerrar con Escape, y <code>nuiPopoverAllowMultiple</code> para permitir múltiples popovers abiertos a la vez."
       },
       "backdrop": {
-        "title": "Con Backdrop",
+        "title": "Backdrop",
         "description": "Agrega un fondo oscuro detrás del popover para crear una experiencia modal. Puedes controlar si el click en el backdrop cierra o no el popover.",
-        "codeTitle": "Popover Modal"
+        "note": "Usa <code>nuiPopoverBackdrop</code> para habilitar / deshabilitar el backdrop y <code>nuiBackdropClose</code> para controlar si el click en el backdrop cierra el popover."
       },
       "disabled": {
-        "title": "Estado Deshabilitado",
-        "description": "Controla dinámicamente si el popover está habilitado o deshabilitado usando la propiedad <code>popoverDisabled</code>."
+        "title": "Estado deshabilitado",
+        "description": "Controla dinámicamente si el popover está habilitado o deshabilitado.",
+        "note": "Cuando <code>nuiPopoverDisabled</code> está en <code>true</code>, el popover no se mostrará ni responderá a eventos."
       },
       "api": {
-        "title": "API y Referencia",
-        "description": "Documentación completa de la directiva nuiPopover, tokens de inyección y uso avanzado.",
-        "usageCodeTitle": "Ejemplo de Uso Completo"
+        "title": "API y referencia",
+        "description": "Documentación completa de la directiva nuiPopover, tokens de inyección y uso avanzado."
       },
       "styling": {
-        "title": "Estilos y Personalización",
+        "title": "Estilos y personalización",
         "description": "Personaliza la apariencia del popover mediante variables CSS. Controla colores, tamaño, sombras y animaciones."
       }
     },
@@ -463,42 +445,45 @@
       "title": "Toast",
       "subtitle": "Notificaciones temporales no intrusivas para feedback del usuario",
       "basic": {
-        "title": "Toasts Básicos",
-        "description": "Muestra notificaciones simples con diferentes tipos: success, error, warning e info.",
-        "codeTitle": "Tipos de Toast"
+        "title": "Toasts básicos",
+        "description": "Muestra notificaciones simples con diferentes tipos: success, error, warning e info."
       },
       "withTitle": {
-        "title": "Toasts con Título",
-        "description": "Agrega un título para dar más contexto a la notificación.",
-        "codeTitle": "Toast con Título"
+        "title": "Toasts con título",
+        "description": "Agrega un título para dar más contexto a la notificación."
       },
       "withActions": {
-        "title": "Toasts con Acciones",
-        "description": "Incluye botones de acción para que el usuario pueda interactuar con la notificación.",
-        "codeTitle": "Toast con Acciones"
+        "title": "Toasts con acciones",
+        "description": "Incluye botones de acción para que el usuario pueda interactuar con la notificación."
       },
       "positions": {
         "title": "Posiciones",
-        "description": "Controla dónde aparecen los toasts en la pantalla: top-left, top-center, top-right, bottom-left, bottom-center, bottom-right.",
-        "codeTitle": "Posiciones del Toast"
+        "description": "Controla dónde aparecen los toasts en la pantalla: top-left, top-center, top-right, bottom-left, bottom-center, bottom-right."
+      },
+      "iconTop": {
+        "title": "Icono en la parte superior",
+        "description": "Muestra el icono del toast centrado en la parte superior para un diseño más destacado.",
+        "note": "Usa la propiedad <code>iconPosition='top'</code> para centrar el icono en la parte superior del toast. Esto es especialmente útil para toasts con títulos y acciones, ya que mejora la jerarquía visual y hace que el icono sea más prominente."
+      },
+      "icons": {
+        "title": "Iconos personalizados",
+        "description": "Pues mostrar los iconos por defecto según el tipo de toast o usar iconos personalizados. Incluso puedes ocultar el icono si lo deseas.",
+        "note": "Usa la propiedad <code>icon</code>. Si usas el valor <code>false</code> se ocultará el icono. Si usas <code>string</code> puedes especificar un icono personalizado de <strong>Remix Icon</strong>. Por defecto se muestran iconos según el tipo de toast con <code>icon</code> con valor <code>true</code>."
       },
       "duration": {
         "title": "Duración",
-        "description": "Configura cuánto tiempo permanece visible el toast antes de desaparecer. Usa 0 para toasts que no se cierran automáticamente.",
-        "codeTitle": "Configuración de Duración"
+        "description": "Configura cuánto tiempo permanece visible el toast antes de desaparecer. Usa 0 para toasts que no se cierran automáticamente."
       },
       "loading": {
-        "title": "Toast de Carga",
-        "description": "Muestra un toast con estado de carga que puede actualizarse dinámicamente cuando la operación completa.",
-        "codeTitle": "Toast de Loading"
+        "title": "Toast de carga",
+        "description": "Muestra un toast con estado de carga que puede actualizarse dinámicamente cuando la operación completa."
       },
       "api": {
-        "title": "API y Referencia",
-        "description": "Documentación completa del ToastService, interfaces y uso avanzado del sistema de notificaciones.",
-        "usageCodeTitle": "Ejemplo de Uso Completo"
+        "title": "API y referencia",
+        "description": "Documentación completa del ToastService, interfaces y uso avanzado del sistema de notificaciones."
       },
       "styling": {
-        "title": "Estilos y Personalización",
+        "title": "Estilos y personalización",
         "description": "Personaliza la apariencia de los toasts mediante variables CSS. Controla colores, tamaño, animaciones y más."
       }
     },
@@ -506,49 +491,58 @@
       "title": "Sidebar Panel",
       "subtitle": "Paneles laterales deslizantes con CDK Overlay para mostrar contenido dinámico",
       "basic": {
-        "title": "Uso Básico",
-        "description": "Abre un panel lateral desde el servicio SidebarPanelService. El panel se desliza desde el borde de la pantalla con una animación suave.",
-        "codeTitle": "TypeScript - Abrir Panel"
+        "title": "Uso básico",
+        "description": "Abre un panel lateral desde el servicio SidebarPanelService. El panel se desliza desde el borde de la pantalla con una animación suave."
+      },
+      "default": {
+        "title": "Configuración predeterminada",
+        "description": "El panel se abrirá utilizando los valores predeterminados globales configurados.",
+        "note": "Si no se proporcionan opciones al abrir el panel, se usarán los valores predeterminados globales definidos en la configuración de NUI de <code>provideNUIConfig({ sidebarPanel: {...} })</code>."
       },
       "sizes": {
         "title": "Tamaños",
-        "description": "El componente Sidebar Panel admite seis tamaños predefinidos: xs (300px), sm (400px), md (600px - predeterminado), lg (800px), xl (1000px) y full (100%).",
-        "codeTitle": "Configuración de Tamaños"
+        "description": "Permite definir el tamaño con el que se abrirá el panel.",
+        "note": "Puedes usar valores predefinidos como <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> y <code>'full'</code>."
       },
       "positions": {
         "title": "Posiciones",
-        "description": "Controla desde qué lado de la pantalla se desliza el panel: right (derecha - predeterminado), left (izquierda), top (arriba) o bottom (abajo).",
-        "codeTitle": "Configuración de Posiciones"
+        "description": "Controla desde qué lado de la pantalla se desliza el panel.",
+        "note": "Usa la propiedad <code>position</code> para definir el lado desde el que se abrirá el panel usando <code>'right'</code>, <code>'left'</code>, <code>'top'</code> o <code>'bottom'</code> como valores."
       },
       "dynamicComponent": {
-        "title": "Componente Dinámico",
-        "description": "Carga cualquier componente Angular dentro del panel y pasa datos mediante inyección de dependencias usando el token SIDEBAR_PANEL_DATA."
+        "title": "Componente dinámico",
+        "description": "Carga cualquier componente Angular dentro del panel y pasa datos mediante inyección de dependencias",
+        "note": "Usa la propiedad <code>data</code> para pasar datos al componente cargado dinámicamente. Estos datos se inyectan usando el token <code>SIDEBAR_PANEL_DATA</code>. Si además queremos hacer referencia al propio panel desde el componente cargado, podemos inyectar <code>SIDEBAR_PANEL_REF</code>."
+      },
+      "events": {
+        "title": "Eventos @Outputs de componentes dinámicos",
+        "description": "Escucha eventos emitidos por el componente cargado dentro del panel para manejar interacciones y cerrar el panel cuando sea necesario.",
+        "note": "Puedes suscribirte a los outputs del componente cargado dinámicamente. Usa <code>panelRef.componentInstance</code> para acceder a la instancia del componente hijo y suscribirte a sus <code>@Output()</code>."
       },
       "minimizable": {
-        "title": "Panel Minimizable",
-        "description": "Los paneles pueden minimizarse a una pestaña lateral para liberar espacio en pantalla mientras se preserva el estado. Haz clic en el botón minimizar del header o usa control programático. Además, podrás restaurar el panel haciendo clic en la pestaña minimizada, según la posición del Sidebar o haciendo clic en el elemento que creó dicho panel.",
-        "note": "Usa el método <code>minimize()</code> del SidebarPanel para minimizar el panel programáticamente. El panel se reduce a una pestaña lateral que puede expandirse nuevamente al hacer clic. Si <code>minimizable</code> está habilitado, el atributo <code>id</code> es obligatorio para identificar el panel minimizado.<br><br><strong>Customización de pestañas:</strong> Puedes personalizar el icono, agregar texto, aplicar CSS personalizado o usar un template completamente custom mediante <code>minimizedTabCustomization</code>. Para botones flotantes con posicionamiento libre (ej: chat bottom-right), usa <code>standalone: true</code> para renderizar fuera del contenedor agrupado y evitar restricciones de posicionamiento.",
-        "codeTitle": "Configuración Minimizable"
+        "title": "Panel minimizable",
+        "description": "Los paneles pueden minimizarse a una pestaña que <strong>quedará ubicada en el lugar desde el que se abre el Sidebar</strong> para liberar espacio en pantalla mientras se preserva el estado, pudiendo restaurarlo cuando se desee.",
+        "note": "Utiliza el atributo <code>minimizable</code> para convertir el Sidebar en minimizable. Además, podrás usar el método <code>minimize()</code> del SidebarPanel para minimizar el panel programáticamente y <code>restore()</code> para restaurarlo. Si <code>minimizable</code> está habilitado, el atributo <code>id</code> es obligatorio para identificar el panel minimizado. También puedes comprobar si el Sidebar está minimizado mediante <code>isMinimized</code>.<br><br><strong>Customización de pestañas:</strong> Puedes personalizar el icono, agregar texto, aplicar CSS personalizado o usar un template completamente custom mediante <code>minimizedTabCustomization</code>. Para botones flotantes con posicionamiento libre (ej: chat bottom-right), usa <code>standalone: true</code> para renderizar fuera del contenedor agrupado y evitar restricciones de posicionamiento."
       },
       "closeButton": {
-        "title": "Botón de Cerrar",
+        "title": "Botón de cerrar",
         "description": "Controla la visibilidad del botón de cerrar en el header del panel.",
-        "codeTitle": "Ocultar Botón de Cerrar"
+        "note": "Usa la propiedad <code>showCloseButton</code> para mostrar u ocultar el botón de cerrar en el header del panel."
       },
-      "noBackdrop": {
-        "title": "Sin Backdrop",
-        "description": "Abre paneles sin el fondo oscuro superpuesto. Útil para paneles no modales que permiten interacción con la página.",
-        "codeTitle": "Configuración Sin Backdrop"
+      "backdrop": {
+        "title": "Backdrop",
+        "description": "Agrega un fondo oscuro detrás del panel para crear una experiencia modal. Controla si el click en el backdrop cierra o no el panel.",
+        "note": "Usa la propiedad <code>hasBackdrop</code> para habilitar / deshabilitar el backdrop (por defecto <code>true</code>) y <code>closeOnBackdropClick</code> para controlar si el click en el backdrop cierra el panel."
       },
       "customBackdrop": {
-        "title": "Backdrop Personalizado",
+        "title": "Backdrop personalizado",
         "description": "Personaliza el backdrop con clases CSS custom. Puedes aplicar efectos como blur, colores personalizados y transiciones.",
-        "codeTitle": "Backdrop con Estilos Custom"
+        "note": "Usa la propiedad <code>backdropClass</code> para agregar clases CSS personalizadas al backdrop del panel. Puedes añadir una única clase o un <code>array</code> de clases."
       },
       "multiple": {
-        "title": "Múltiples Paneles",
+        "title": "Múltiples paneles",
         "description": "Abre múltiples paneles simultáneamente desde diferentes lados. Controla el apilamiento con z-index y cierra todos a la vez.",
-        "codeTitle": "Ejemplo de Múltiples Paneles"
+        "note": "Cada panel abierto es independiente y puede tener su propia configuración. Usa el método <code>closeAll()</code> del servicio <code>SidebarPanelService</code> para cerrar todos los paneles abiertos programáticamente de forma simultánea."
       },
       "api": {
         "title": "API",
@@ -563,51 +557,43 @@
       "title": "Tooltip",
       "subtitle": "Tooltips informativos con soporte para texto y templates personalizados",
       "basic": {
-        "title": "Tooltips Básicos",
+        "title": "Tooltips básicos",
         "description": "Muestra tooltips simples con texto al hacer hover.",
-        "note": "Puedes desactivar la flecha con <code>tooltipShowArrow</code>.",
-        "codeTitle": "Tooltip Básico"
+        "note": "Puedes desactivar la flecha con <code>tooltipShowArrow</code>."
       },
       "positions": {
         "title": "Posiciones",
-        "description": "Controla la posición del tooltip respecto al elemento: top (predeterminado), bottom, left, right.",
-        "codeTitle": "Posiciones del Tooltip"
+        "description": "Controla la posición del tooltip respecto al elemento: top (predeterminado), bottom, left, right."
       },
       "events": {
         "title": "Eventos",
-        "description": "Define qué evento dispara el tooltip: hover (predeterminado), click, focus, o manual para control programático.",
-        "codeTitle": "Eventos del Tooltip"
+        "description": "Define qué evento dispara el tooltip: hover (predeterminado), click, focus, o manual para control programático."
       },
       "delays": {
         "title": "Delays",
         "description": "Configura los retrasos antes de mostrar y ocultar el tooltip.",
-        "note": "Usa las propiedades <code>tooltipShowDelay</code> y <code>tooltipHideDelay</code> para ajustar los tiempos de espera.",
-        "codeTitle": "Configuración de Delays"
+        "note": "Usa las propiedades <code>tooltipShowDelay</code> y <code>tooltipHideDelay</code> para ajustar los tiempos de espera."
       },
       "templates": {
-        "title": "Templates Personalizados",
-        "description": "Usa templates de Angular para mostrar contenido HTML enriquecido en el tooltip.",
-        "codeTitle": "Tooltip con Template"
+        "title": "Templates personalizados",
+        "description": "Usa templates de Angular para mostrar contenido HTML enriquecido en el tooltip."
       },
       "interactive": {
-        "title": "Tooltips Interactivos",
+        "title": "Tooltips interactivos",
         "description": "Permite interactuar con el contenido del tooltip. Útil para incluir botones o enlaces.",
-        "note": "Habilita la propiedad <code>tooltipInteractive</code> para permitir interacción dentro del tooltip sin que se cierre automáticamente al mover el cursor.",
-        "codeTitle": "Tooltip Interactivo"
+        "note": "Habilita la propiedad <code>tooltipInteractive</code> para permitir interacción dentro del tooltip sin que se cierre automáticamente al mover el cursor."
       },
       "disabled": {
-        "title": "Estado Deshabilitado",
+        "title": "Estado deshabilitado",
         "description": "Controla dinámicamente si el tooltip está habilitado o deshabilitado.",
-        "note": "Usa la propiedad <code>tooltipDisabled</code> para activar o desactivar el tooltip según sea necesario.",
-        "codeTitle": "Tooltip Deshabilitado"
+        "note": "Usa la propiedad <code>tooltipDisabled</code> para activar o desactivar el tooltip según sea necesario."
       },
       "api": {
-        "title": "API y Referencia",
-        "description": "Documentación completa de la directiva nuiTooltip con todos sus inputs, outputs y ejemplos de uso.",
-        "usageCodeTitle": "Ejemplo de Uso Completo"
+        "title": "API y referencia",
+        "description": "Documentación completa de la directiva nuiTooltip con todos sus inputs, outputs y ejemplos de uso."
       },
       "styling": {
-        "title": "Estilos y Personalización",
+        "title": "Estilos y personalización",
         "description": "Personaliza la apariencia del tooltip mediante variables CSS. Controla colores, tamaño, animaciones y más."
       }
     }

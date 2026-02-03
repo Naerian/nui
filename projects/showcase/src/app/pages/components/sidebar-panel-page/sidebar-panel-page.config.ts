@@ -11,18 +11,13 @@ export const SIDEBAR_PANEL_PAGE_CONFIG: ComponentPageConfig = {
       id: 'basic',
       title: 'components.sidebar-panel.basic.title',
       description: 'components.sidebar-panel.basic.description',
-      anchor: 'basico',
+      anchor: 'basic',
       examples: [
         {
-          title: 'components.sidebar-panel.basic.codeTitle',
-          code: `// TypeScript
-import { SidebarPanelService } from 'nui';
-
-constructor(private sidebarPanelService: SidebarPanelService) {}
-
-openPanel() {
+          title: 'codeExamples.typescript',
+          code: `openPanel() {
   this.sidebarPanelService.open(MyContentComponent, {
-    title: 'Mi Panel',
+    title: 'My Panel',
     position: 'right',
     size: 'md'
   });
@@ -31,10 +26,9 @@ openPanel() {
           language: 'typescript',
         },
         {
-          title: 'components.sidebar-panel.basic.htmlCodeTitle',
-          code: `<!-- HTML -->
-<nui-button (click)="openPanel()">
-  Abrir Panel
+          title: 'codeExamples.html',
+          code: `<nui-button (click)="openPanel()">
+  Open Panel
 </nui-button>`,
           language: 'html',
         },
@@ -42,39 +36,35 @@ openPanel() {
     },
     {
       id: 'defaults',
-      title: 'Configuración por Defecto',
-      description:
-        'Prueba el panel usando SOLO valores por defecto de la configuración global. Ideal para verificar que los cambios en provideNUIConfig() se aplican correctamente.',
+      title: 'components.sidebar-panel.default.title',
+      description: 'components.sidebar-panel.default.description',
       anchor: 'defaults',
       note: {
         type: 'info',
-        content:
-          'Este panel no recibe configuración específica, por lo que usa los valores definidos en <code>provideNUIConfig({ sidebarPanel: {...} })</code> en <code>app.config.ts</code>. Si no hay configuración global, usa los defaults del componente.',
+        content: 'components.sidebar-panel.default.note',
       },
       examples: [
         {
-          title: 'TypeScript - Panel con Defaults',
-          code: `// app.config.ts - Configurar defaults globales
-import { provideNUIConfig } from 'nui';
-
+          title: 'codeExamples.typescript',
+          code: `// Default NUI Configuration for Sidebar Panels
 export const appConfig: ApplicationConfig = {
   providers: [
     provideNUIConfig({
       sidebarPanel: {
-        position: 'left',        // ← Todos los panels se abrirán a la izquierda
-        size: 'lg',              // ← Todos serán grandes por defecto
-        animationDuration: 300,  // ← Animación más lenta
-        mobileFullScreen: true   // ← Fullscreen en mobile
+        position: 'left',        // All panels will open to the left
+        size: 'lg',              // All will be large by default
+        animationDuration: 300,  // Slower animation
+        mobileFullScreen: true   // Fullscreen on mobile
       }
     })
   ]
 };
 
-// component.ts - Abrir panel SIN config específica
+// Using the global defaults when opening a panel
 openPanel() {
   this.sidebarPanelService.open(MyContentComponent, {
-    title: 'Panel con Defaults'
-    // No pasamos position, size, etc. → usa globals
+    title: 'Sample Panel'
+    // No need to specify position, size, etc. Will use global defaults
   });
 }`,
           language: 'typescript',
@@ -85,39 +75,48 @@ openPanel() {
       id: 'sizes',
       title: 'components.sidebar-panel.sizes.title',
       description: 'components.sidebar-panel.sizes.description',
-      anchor: 'tamanos',
+      note: {
+        type: 'info',
+        content: 'components.sidebar-panel.sizes.note',
+      },
+      anchor: 'sizes',
       examples: [
         {
           title: 'components.sidebar-panel.sizes.codeTitle',
-          code: `// Tamaños predefinidos
+          code: `// Predefined sizes (XS: 300px)
 this.sidebarPanelService.open(MyContentComponent, {
   title: 'Panel XSmall',
-  size: 'xs' // 300px
+  size: 'xs'
 });
 
+// Predefined sizes (SM: 400px)
 this.sidebarPanelService.open(MyContentComponent, {
   title: 'Panel Small',
-  size: 'sm' // 400px
+  size: 'sm'
 });
 
+// Predefined sizes (MD: 600px - Default)
 this.sidebarPanelService.open(MyContentComponent, {
   title: 'Panel Medium',
-  size: 'md' // 600px (por defecto)
+  size: 'md'
 });
 
+// Predefined sizes (LG: 800px)
 this.sidebarPanelService.open(MyContentComponent, {
   title: 'Panel Large',
-  size: 'lg' // 800px
+  size: 'lg'
 });
 
+// Predefined sizes (XL: 1000px)
 this.sidebarPanelService.open(MyContentComponent, {
   title: 'Panel XLarge',
-  size: 'xl' // 1000px
+  size: 'xl'
 });
 
+// Predefined sizes (FULL: 100%)
 this.sidebarPanelService.open(MyContentComponent, {
   title: 'Panel Full',
-  size: 'full' // 100%
+  size: 'full'
 });`,
           language: 'typescript',
         },
@@ -127,31 +126,35 @@ this.sidebarPanelService.open(MyContentComponent, {
       id: 'positions',
       title: 'components.sidebar-panel.positions.title',
       description: 'components.sidebar-panel.positions.description',
-      anchor: 'posiciones',
+      note: {
+        type: 'info',
+        content: 'components.sidebar-panel.positions.note',
+      },
+      anchor: 'positions',
       examples: [
         {
           title: 'components.sidebar-panel.positions.codeTitle',
-          code: `// Panel desde la derecha (por defecto)
+          code: `// Panel from the right edge (default)
 this.sidebarPanelService.open(MyContentComponent, {
-  title: 'Panel Derecha',
+  title: 'Panel Right',
   position: 'right'
 });
 
-// Panel desde la izquierda
+// Panel from the left edge
 this.sidebarPanelService.open(MyContentComponent, {
-  title: 'Panel Izquierda',
+  title: 'Panel Left',
   position: 'left'
 });
 
-// Panel desde arriba
+// Panel from the top edge
 this.sidebarPanelService.open(MyContentComponent, {
-  title: 'Panel Superior',
+  title: 'Panel Top',
   position: 'top'
 });
 
-// Panel desde abajo
+// Panel from the bottom edge
 this.sidebarPanelService.open(MyContentComponent, {
-  title: 'Panel Inferior',
+  title: 'Panel Bottom',
   position: 'bottom'
 });`,
           language: 'typescript',
@@ -162,12 +165,34 @@ this.sidebarPanelService.open(MyContentComponent, {
       id: 'dynamic-component',
       title: 'components.sidebar-panel.dynamicComponent.title',
       description: 'components.sidebar-panel.dynamicComponent.description',
-      anchor: 'componente-dinamico',
+      note: {
+        type: 'info',
+        content: 'components.sidebar-panel.dynamicComponent.note',
+      },
+      anchor: 'dynamic-component',
       examples: [
         {
-          title: 'components.sidebar-panel.dynamicComponent.componentCodeTitle',
-          code: `// content.component.ts
-import { Component, inject } from '@angular/core';
+          title: 'codeExamples.typescript',
+          code: `// Open panel with injected data
+const panelRef = this.sidebarPanelService.open(PanelContentComponent, {
+  title: 'Edit Information',
+  data: {
+    title: 'My Title',
+    description: 'A full description of the content goes here.'
+  }
+});
+
+// Receive result on close
+panelRef.afterClosed().subscribe(result => {
+  if (result?.saved) {
+    console.log('Data saved successfully');
+  }
+});`,
+          language: 'typescript',
+        },
+        {
+          title: 'codeExamples.child',
+          code: `import { Component, inject } from '@angular/core';
 import { SIDEBAR_PANEL_DATA, SIDEBAR_PANEL_REF } from 'nui';
 
 @Component({
@@ -176,38 +201,121 @@ import { SIDEBAR_PANEL_DATA, SIDEBAR_PANEL_REF } from 'nui';
     <div>
       <h3>{{ data.title }}</h3>
       <p>{{ data.description }}</p>
-      <nui-button (click)="save()">Guardar</nui-button>
+      <nui-button (click)="save()">Save</nui-button>
     </div>
   \`
 })
 export class PanelContentComponent {
+
+  // Injected data and panel reference
   readonly data = inject(SIDEBAR_PANEL_DATA);
   private readonly panelRef = inject(SIDEBAR_PANEL_REF);
   
   save() {
-    console.log('Guardando datos...');
+    console.log('Saving data...');
     this.panelRef.close({ saved: true });
   }
 }`,
           language: 'typescript',
         },
+      ],
+    },
+    {
+      id: 'dynamic-component-events',
+      title: 'components.sidebar-panel.events.title',
+      description: 'components.sidebar-panel.events.description',
+      note: {
+        type: 'info',
+        content: 'components.sidebar-panel.events.note',
+      },
+      anchor: 'dynamic-component-events',
+      examples: [
         {
-          title: 'components.sidebar-panel.dynamicComponent.usageCodeTitle',
-          code: `// Abrir panel con datos inyectados
-const panelRef = this.sidebarPanelService.open(PanelContentComponent, {
-  title: 'Editar Información',
-  data: {
-    title: 'Mi título',
-    description: 'Una descripción completa'
-  }
-});
+          title: 'codeExamples.typescript',
+          code: `openPanelWithEvents() {
 
-// Recibir resultado al cerrar
-panelRef.afterClosed().subscribe(result => {
-  if (result?.saved) {
-    console.log('Datos guardados exitosamente');
+  // Open panel with dynamic component inside
+  const panelRef = this.sidebarPanelService.open(EventExampleComponent, {
+    title: 'Panel with Events',
+    position: 'right',
+    size: 'md'
+  });
+
+  // Get instance of the dynamic component
+  const instance = panelRef.componentInstance;
+
+  if (instance) {
+
+    // Subscribe to @Output() event "dataChanged"
+    instance.dataChanged.subscribe((data) => {
+      console.log('Data changed:', data);
+      alert(\`New value: \${data.value}\`);
+    });
+
+    // Subscribe to @Output() event "statusChanged"
+    instance.statusChanged.subscribe((status) => {
+      console.log('Status:', status);
+    });
+
+    // Subscribe to @Output() event "beforeClose"
+    instance.beforeClose.subscribe((result) => {
+      console.log('Before close with:', result);
+    });
   }
-});`,
+
+  // Capture final result on close
+  panelRef.afterClosed().subscribe((result) => {
+    console.log('Panel closed. Result:', result);
+  });
+}`,
+          language: 'typescript',
+        },
+        {
+          title: 'codeExamples.child',
+          code: `import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { SIDEBAR_PANEL_REF } from 'nui';
+
+interface DataPayload {
+  value: string;
+  timestamp: Date;
+}
+
+@Component({
+  selector: 'app-event-example',
+  template: \`
+    <div>
+      <button (click)="emitDataChanged()">
+        Emit Data Changed
+      </button>
+      
+      <button (click)="closeWithResult()">
+        Close Panel with Result
+      </button>
+    </div>
+  \`
+})
+export class EventExampleComponent {
+  private readonly panelRef = inject(SIDEBAR_PANEL_REF);
+
+  // Ouputs events to emit to parent
+  @Output() dataChanged = new EventEmitter<DataPayload>();
+  @Output() statusChanged = new EventEmitter<string>();
+  @Output() beforeClose = new EventEmitter<any>();
+
+  // Emit data changed event
+  emitDataChanged(): void {
+    this.dataChanged.emit({
+      value: 'New data',
+      timestamp: new Date()
+    });
+  }
+
+  // Emit before close event and close panel with result
+  closeWithResult(): void {
+    this.beforeClose.emit({ action: 'saved' });
+    this.panelRef.close({ success: true });
+  }
+}`,
           language: 'typescript',
         },
       ],
@@ -223,80 +331,80 @@ panelRef.afterClosed().subscribe(result => {
       anchor: 'minimizable',
       examples: [
         {
-          title: 'components.sidebar-panel.minimizable.codeTitle',
-          code: `// Panel que puede minimizarse a una pestaña
+          title: 'codeExamples.typescript',
+          code: `// Open a minimizable sidebar panel
 const panelRef = this.sidebarPanelService.open(ChatComponent, {
-  title: 'Chat de Soporte',
+  title: 'Support Chat',
   id: 'support-chat-panel',
   minimizable: true,
   position: 'right',
   size: 'md'
 });
 
-// Control programático (opcional)
-panelRef.minimize(); // Minimizar a pestaña
-panelRef.restore();  // Restaurar desde pestaña
+// Programmatically minimize and restore (optional)
+panelRef.minimize(); // Minimize to tab
+panelRef.restore();  // Restore from tab
 
-// Verificar estado (opcional)
+// Check if panel is minimized
 if (panelRef.isMinimized) {
-  console.log('El panel está minimizado');
+  console.log('The panel is minimized');
 }`,
           language: 'typescript',
         },
         {
-          title: 'components.sidebar-panel.minimizable.customizationCodeTitle',
-          code: `// Pestaña minimizada con customización completa
+          title: 'codeExamples.typescript',
+          code: `// Open a minimizable sidebar panel
 this.sidebarPanelService.open(ChatComponent, {
-  title: 'Chat de Soporte',
+  title: 'Support Chat',
   id: 'chat-support',
   minimizable: true,
   position: 'right',
   size: 'md',
   minimizedTabCustomization: {
-    icon: 'ri-customer-service-line',  // Icono personalizado
-    label: 'Soporte',                  // Texto del botón
-    cssClass: 'floating-chat-button',  // Clase CSS custom
-    standalone: true  // 🔑 Permite posicionamiento libre (bottom-right)
+    icon: 'ri-customer-service-line',  // Custom icon
+    label: 'Support',                  // Button text
+    cssClass: 'floating-chat-button',  // Custom CSS class
+    standalone: true  // Allows free positioning (bottom-right)
   }
 });
 
-// Sin standalone (agrupada en el borde)
+// Without standalone (grouped at the edge)
 this.sidebarPanelService.open(NotificationsComponent, {
   id: 'notifications',
   minimizable: true,
   minimizedTabCustomization: {
     icon: 'ri-notification-3-line',
-    label: 'Notificaciones'
-    // Sin standalone: se agrupa con otras pestañas en el borde
+    label: 'Notifications'
+    // Without standalone: grouped with other tabs at the edge
   }
 });`,
           language: 'typescript',
         },
         {
-          title: 'components.sidebar-panel.minimizable.cssCodeTitle',
-          code: `// Estilos CSS para botón flotante personalizado
+          title: 'codeExamples.scss',
+          code: `// Custom floating button CSS styles
 ::ng-deep .floating-chat-button {
-  // Posición flotante en esquina inferior derecha
+  // Floating position at bottom right corner
   position: fixed !important;
   bottom: 24px;
   right: 24px;
   
-  // Dimensiones y padding
+  // Dimensions and padding
   width: auto !important;
   height: auto !important;
   padding: 14px 20px !important;
   
-  // Estilo redondeado (píldora)
+  // Rounded style (pill)
   border-radius: 50px !important;
   
-  // Sombra elevada
+  // Elevated shadow
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   
-  // Colores
+  // Colors
   background: var(--nui-color-primary) !important;
   color: white !important;
   
-  // Efectos hover
+  // Hover effects
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
@@ -310,6 +418,10 @@ this.sidebarPanelService.open(NotificationsComponent, {
       id: 'close-button',
       title: 'components.sidebar-panel.closeButton.title',
       description: 'components.sidebar-panel.closeButton.description',
+      note: {
+        type: 'info',
+        content: 'components.sidebar-panel.closeButton.note',
+      },
       anchor: 'boton-cerrar',
       examples: [
         {
@@ -324,22 +436,24 @@ this.sidebarPanelService.open(MyContentComponent, {
       ],
     },
     {
-      id: 'no-backdrop',
+      id: 'backdrop',
       title: 'components.sidebar-panel.noBackdrop.title',
       description: 'components.sidebar-panel.noBackdrop.description',
-      anchor: 'sin-backdrop',
+      note: {
+        type: 'info',
+        content: 'components.sidebar-panel.noBackdrop.note',
+      },
+      anchor: 'sbackdrop',
       examples: [
         {
-          title: 'components.sidebar-panel.noBackdrop.codeTitle',
-          code: `// Panel sin fondo oscuro (backdrop)
-this.sidebarPanelService.open(MyContentComponent, {
-  title: 'Panel sin Backdrop',
+          title: 'codeExamples.typescript',
+          code: `this.sidebarPanelService.open(MyContentComponent, {
+  title: 'Panel without Backdrop',
   hasBackdrop: false
 });
 
-// Con backdrop pero sin cerrar al hacer click
 this.sidebarPanelService.open(MyContentComponent, {
-  title: 'Panel',
+  title: 'Panel with Backdrop but No Close on Click',
   hasBackdrop: true,
   closeOnBackdropClick: false
 });`,
@@ -351,28 +465,34 @@ this.sidebarPanelService.open(MyContentComponent, {
       id: 'custom-backdrop',
       title: 'components.sidebar-panel.customBackdrop.title',
       description: 'components.sidebar-panel.customBackdrop.description',
-      anchor: 'backdrop-personalizado',
+      note: {
+        type: 'info',
+        content: 'components.sidebar-panel.customBackdrop.note',
+      },
+      anchor: 'custom-backdrop',
       examples: [
         {
-          title: 'components.sidebar-panel.customBackdrop.codeTitle',
-          code: `// Backdrop personalizado con clase CSS custom
+          title: 'codeExamples.typescript',
+          code: `// Adding a custom class to the backdrop
 this.sidebarPanelService.open(MyContentComponent, {
-  title: 'Panel con Backdrop Custom',
+  title: 'Panel with Custom Backdrop',
   backdropClass: 'custom-backdrop-blur'
 });
 
-// CSS para el backdrop personalizado
-::ng-deep .custom-backdrop-blur {
-  backdrop-filter: blur(8px);
-  background-color: rgba(59, 130, 246, 0.25) !important;
-  transition: opacity 300ms ease-in-out;
-}
-
-// También puedes usar múltiples clases
+// Adding multiple classes to backdrop
 this.sidebarPanelService.open(MyContentComponent, {
   backdropClass: ['custom-backdrop', 'with-animation']
 });`,
           language: 'typescript',
+        },
+        {
+          title: 'codeExamples.scss',
+          code: `::ng-deep .custom-backdrop-blur {
+  backdrop-filter: blur(8px);
+  background-color: rgba(59, 130, 246, 0.25) !important;
+  transition: opacity 300ms ease-in-out;
+}`,
+          language: 'scss',
         },
       ],
     },
@@ -380,12 +500,15 @@ this.sidebarPanelService.open(MyContentComponent, {
       id: 'multiple',
       title: 'components.sidebar-panel.multiple.title',
       description: 'components.sidebar-panel.multiple.description',
-      anchor: 'multiples',
+      note: {
+        type: 'info',
+        content: 'components.sidebar-panel.multiple.note',
+      },
+      anchor: 'multiple',
       examples: [
         {
           title: 'components.sidebar-panel.multiple.codeTitle',
-          code: `// Abrir múltiples panels simultáneamente
-this.sidebarPanelService.open(Panel1Component, {
+          code: `this.sidebarPanelService.open(Panel1Component, {
   title: 'Panel 1',
   position: 'right',
   allowMultiple: true,
@@ -399,105 +522,8 @@ this.sidebarPanelService.open(Panel2Component, {
   zIndex: 1001
 });
 
-// Cerrar todos los panels
+// Close all open panels
 this.sidebarPanelService.closeAll();`,
-          language: 'typescript',
-        },
-      ],
-    },
-    {
-      id: 'events',
-      title: 'Comunicación con Eventos',
-      description:
-        'Demuestra cómo capturar eventos @Output() emitidos desde un componente dinámico cargado dentro del panel. Los eventos se capturan a través de panelRef.componentInstance.',
-      anchor: 'eventos',
-      note: {
-        type: 'info',
-        content:
-          'Los eventos @Output() del componente dinámico funcionan exactamente igual que en cualquier componente Angular. Accede a ellos mediante <code>panelRef.componentInstance</code>.',
-      },
-      examples: [
-        {
-          title: 'TypeScript - Captura de Eventos',
-          code: `// Abrir panel con componente que emite eventos
-openPanelWithEvents() {
-  const panelRef = this.sidebarPanelService.open(EventExampleComponent, {
-    title: 'Panel con Eventos',
-    position: 'right',
-    size: 'md'
-  });
-
-  // Obtener instancia del componente dinámico
-  const instance = panelRef.componentInstance;
-
-  if (instance) {
-    // Suscribirse a eventos @Output()
-    instance.dataChanged.subscribe((data) => {
-      console.log('Datos cambiados:', data);
-      alert(\`Nuevo valor: \${data.value}\`);
-    });
-
-    instance.statusChanged.subscribe((status) => {
-      console.log('Estado:', status);
-    });
-
-    instance.beforeClose.subscribe((result) => {
-      console.log('Se va a cerrar con:', result);
-    });
-  }
-
-  // Capturar resultado final al cerrar
-  panelRef.afterClosed().subscribe((result) => {
-    console.log('Panel cerrado. Resultado:', result);
-  });
-}`,
-          language: 'typescript',
-        },
-        {
-          title: 'Componente Dinámico - Definir Eventos',
-          code: `// event-example.component.ts
-import { Component, EventEmitter, Output, inject } from '@angular/core';
-import { SIDEBAR_PANEL_REF } from 'nui';
-
-interface DataPayload {
-  value: string;
-  timestamp: Date;
-}
-
-@Component({
-  selector: 'app-event-example',
-  template: \`
-    <div>
-      <button (click)="emitDataChanged()">
-        Emitir Evento
-      </button>
-      
-      <button (click)="closeWithResult()">
-        Cerrar Panel
-      </button>
-    </div>
-  \`
-})
-export class EventExampleComponent {
-  private readonly panelRef = inject(SIDEBAR_PANEL_REF);
-
-  // Definir eventos @Output()
-  @Output() dataChanged = new EventEmitter<DataPayload>();
-  @Output() statusChanged = new EventEmitter<string>();
-  @Output() beforeClose = new EventEmitter<any>();
-
-  emitDataChanged(): void {
-    this.dataChanged.emit({
-      value: 'New data',
-      timestamp: new Date()
-    });
-  }
-
-  closeWithResult(): void {
-    this.beforeClose.emit({ action: 'saved' });
-    this.panelRef.close({ success: true });
-  }
-}`,
           language: 'typescript',
         },
       ],
@@ -509,37 +535,35 @@ export class EventExampleComponent {
       anchor: 'api',
       examples: [
         {
-          title: 'components.sidebar-panel.api.serviceCodeTitle',
-          code: `// SidebarPanelService
-class SidebarPanelService {
-  // Abrir panel
+          title: 'codeExamples.serviceCode',
+          code: `class SidebarPanelService {
+  // Open panel with dynamic component
   open<T, D, R>(
     component: Type<T>,
     config?: SidebarPanelConfig<D>
   ): SidebarPanelRef<T, R>
   
-  // Cerrar panel específico
+  // Close specific panel
   close(id: string): void
   
-  // Cerrar todos los panels
+  // Close all panels
   closeAll(): void
   
-  // Obtener panel por ID
+  // Get panel by ID
   getPanel(id: string): SidebarPanelStackItem | undefined
   
-  // Obtener todos los panels
+  // Get all panels
   getAllPanels(): SidebarPanelStackItem[]
   
-  // Número de panels abiertos
+  // Number of open panels
   get openPanelsCount(): number
 }`,
           language: 'typescript',
         },
         {
-          title: 'components.sidebar-panel.api.refCodeTitle',
-          code: `// SidebarPanelRef
-class SidebarPanelRef<T, R> {
-  // Propiedades
+          title: 'codeExamples.refCode',
+          code: `class SidebarPanelRef<T, R> {
+  // Properties
   id: string
   componentInstance: T
   config: SidebarPanelConfig
@@ -548,7 +572,7 @@ class SidebarPanelRef<T, R> {
   isClosed: boolean
   isMinimized: boolean
   
-  // Métodos
+  // Methods
   close(result?: R): Promise<void>
   minimize(): void
   restore(): void
@@ -563,24 +587,110 @@ class SidebarPanelRef<T, R> {
 }`,
           language: 'typescript',
         },
+        {
+          title: 'codeExamples.interfacesCode',
+          code: `// Base configuration for a sidebar panel
+interface SidebarPanelConfigBase<D = any> {
+  position?: SidebarPanelPosition;     // Panel screen position
+  size?: SidebarPanelSize;             // Preset panel size
+
+  width?: string;                      // Custom width (left/right)
+  height?: string;                     // Custom height (top/bottom)
+
+  maxWidth?: string;                   // Max panel width
+  maxHeight?: string;                  // Max panel height
+
+  data?: D;                            // Data passed to component
+
+  title?: string;                     // Panel title (header)
+  showHeader?: boolean;                // Show header
+  showCloseButton?: boolean;           // Show close button
+
+  headerTemplate?: TemplateRef<any>;   // Custom header template
+  footerTemplate?: TemplateRef<any>;   // Custom footer template
+
+  hasBackdrop?: boolean;               // Show backdrop
+  backdropClass?: string | string[];   // Backdrop CSS class
+
+  closeOnBackdropClick?: boolean;      // Close on backdrop click
+  closeOnEscape?: boolean;             // Close on Escape key
+  closeOnRouteChange?: boolean;        // Close on route change
+
+  preventClose?: () => boolean | Promise<boolean>; // Guard before close
+
+  autoFocus?: boolean | string;        // Auto-focus behavior
+
+  mobileFullScreen?: boolean;          // Fullscreen on mobile
+  breakpoint?: number;                 // Mobile breakpoint (px)
+
+  panelClass?: string | string[];      // Extra panel CSS class
+
+  scrollStrategy?: ScrollStrategy;     // Body scroll strategy
+
+  ariaLabel?: string;                  // ARIA label
+  ariaDescribedBy?: string;            // ARIA describedBy ID
+
+  animationDuration?: number;          // Animation duration (ms)
+  zIndex?: number;                     // Base z-index
+
+  allowMultiple?: boolean;             // Allow multiple panels
+  lazyLoad?: boolean;                  // Lazy load content
+
+  customButtons?: SidebarPanelCustomButton[]; // Custom footer buttons
+
+  minimizedTabCustomization?: MinimizedTabCustomization; // Minimized tab UI
+}
+
+// Custom button configuration for sidebar panel
+export interface SidebarPanelCustomButton {
+  text: string;                         // Button label
+  icon?: string;                         // Optional icon (Remix Icon)
+  color?: NUIColor;                      // Button color/type
+  variant?: NUIVariant;                  // Button variant/style
+  size?: NUISize;                        // Button size
+  callback: (panelRef: any) => void | Promise<void>; // Click handler
+  disabled?: boolean;                    // Disabled state
+  loading?: boolean;                     // Show loading spinner
+  class?: string;                        // Extra CSS classes
+}
+
+// Visual customization for minimized panel tab
+export interface MinimizedTabCustomization {
+  icon?: string;                       // Custom tab icon (Remix Icon)
+  label?: string;                      // Custom tab label
+  cssClass?: string | string[];        // Extra tab CSS classes
+  template?: TemplateRef<any>;         // Fully custom tab template
+  standalone?: boolean;                // Render tab outside grouped container
+}
+  
+// Sidebar panel lifecycle events
+export interface SidebarPanelEvents {
+  afterOpened: Observable<void>;        // Emitted after panel is fully opened
+  afterClosed: Observable<any>;         // Emitted after panel is fully closed
+  backdropClick: Observable<MouseEvent>; // Emitted on backdrop click
+  keydownEvents: Observable<KeyboardEvent>; // Emitted on keydown inside panel
+  closePrevented: Observable<void>;     // Emitted when close is prevented
+}
+`,
+          language: 'typescript',
+        },
       ],
     },
     {
       id: 'styling',
       title: 'components.sidebar-panel.styling.title',
       description: 'components.sidebar-panel.styling.description',
-      anchor: 'estilos',
+      anchor: 'styling',
       examples: [
         {
-          title: 'components.sidebar-panel.styling.codeTitle',
-          code: `// Personalización de variables CSS
-:root {
-  /* Colores */
+          title: 'codeExamples.variablesCss',
+          code: `:root {
+  /* Colors */
   --nui-sidebar-panel-bg: var(--nui-bg-primary);
   --nui-sidebar-panel-text: var(--nui-text-primary);
   --nui-sidebar-panel-border: var(--nui-border-primary);
   
-  /* Sombras y elevación */
+  /* Shadows and elevation */
   --nui-sidebar-panel-shadow: var(--nui-shadow-lg);
   --nui-sidebar-panel-z-index: 1040;
   --nui-sidebar-panel-overlay-bg: var(--nui-overlay-bg);
@@ -591,10 +701,10 @@ class SidebarPanelRef<T, R> {
   --nui-sidebar-panel-title-size: var(--font-size-md);
   --nui-sidebar-panel-title-weight: var(--font-weight-semibold);
   
-  /* Contenido */
+  /* Content */
   --nui-sidebar-panel-content-padding: var(--spacing-md);
   
-  /* Tamaños predefinidos */
+  /* Predefined sizes */
   --nui-sidebar-panel-size-xs: 300px;
   --nui-sidebar-panel-size-sm: 400px;
   --nui-sidebar-panel-size-md: 600px;
@@ -603,7 +713,7 @@ class SidebarPanelRef<T, R> {
   --nui-sidebar-panel-size-full: 100%;
 }
 
-// Clases personalizadas
+// Custom classes
 .my-custom-panel {
   .nui-sidebar-panel {
     border-left: 4px solid var(--primary-color);

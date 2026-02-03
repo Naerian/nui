@@ -14,8 +14,7 @@ import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
   ButtonGroupMode,
-  ButtonGroupOption,
-  ButtonGroupVisualVariant,
+  ButtonGroupLayout,
 } from './models/button-group.model';
 import {
   NUI_CONFIG,
@@ -68,7 +67,7 @@ export class ButtonGroupComponent implements ControlValueAccessor {
   readonly mode = input<ButtonGroupMode>('radio');
 
   /** Estilo visual: 'grouped' (separados) | 'segmented' (iOS style) */
-  readonly visualVariant = input<ButtonGroupVisualVariant>('grouped');
+  readonly layout = input<ButtonGroupLayout>('grouped');
 
   // Mappers para objetos complejos
   readonly labelBy = input('label');
@@ -158,7 +157,7 @@ export class ButtonGroupComponent implements ControlValueAccessor {
 
     if (this.disabled()) classes.push('nui-button-group--disabled');
     if (this.iconOnly()) classes.push('nui-button-group--icon-only');
-    if (this.visualVariant() === 'segmented') classes.push('nui-button-group--segmented');
+    if (this.layout() === 'segmented') classes.push('nui-button-group--segmented');
 
     // Clases de ancho
     if (this.width() === 'full') classes.push('nui-button-group--full');
