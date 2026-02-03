@@ -550,7 +550,9 @@
         "title": "Panel Minimizable",
         "description": "Los paneles pueden minimizarse a una pestaña lateral para liberar espacio en pantalla mientras se preserva el estado. Haz clic en el botón minimizar del header o usa control programático. Además, podrás restaurar el panel haciendo clic en la pestaña minimizada, según la posición del Sidebar o haciendo clic en el elemento que creó dicho panel.",
         "note": "Usa el método <code>minimize()</code> del SidebarPanel para minimizar el panel programáticamente. El panel se reduce a una pestaña lateral que puede expandirse nuevamente al hacer clic. Si <code>minimizable</code> está habilitado, el atributo <code>id</code> es obligatorio para identificar el panel minimizado.",
-        "codeTitle": "Configuración Minimizable"
+        "codeTitle": "Configuración Minimizable",
+        "customizationCodeTitle": "Pestaña Personalizada",
+        "cssCodeTitle": "Estilos CSS del Botón Flotante"
       },
       "closeButton": {
         "title": "Botón de Cerrar",

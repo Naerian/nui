@@ -597,7 +597,9 @@
         "title": "Minimizable Panel",
         "description": "Panels can be minimized to a sidebar tab to free up screen space while preserving their state. Click the minimize button in the header or use programmatic control. You can also restore the panel by clicking the minimized tab, depending on the Sidebar's position, or by clicking the element that created the panel.",
         "note": "Use the SidebarPanel's <code>minimize()</code> method to minimize the panel programmatically. The panel shrinks to a side tab that can be expanded again by clicking. If <code>minimizable</code> is enabled, the <code>id</code> attribute is required to identify the minimized panel.",
-        "codeTitle": "Minimizable Configuration"
+        "codeTitle": "Minimizable Configuration",
+        "customizationCodeTitle": "Custom Tab Button",
+        "cssCodeTitle": "Floating Button CSS Styles"
       },
       "closeButton": {
         "title": "Close Button",

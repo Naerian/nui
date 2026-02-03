@@ -522,6 +522,7 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
           title: this.title || 'Panel',
           position: this.config.position ?? 'right',
           restoreCallback: () => this.restore(),
+          customization: this.config.minimizedTabCustomization, // Pasar customización
         });
 
         this._cdr.detectChanges();

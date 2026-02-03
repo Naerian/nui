@@ -67,9 +67,15 @@
         }
 
         @case ('minimizable') {
-          <div class="example-preview">
+          <div class="example-preview example-preview--spaced">
             <nui-button (click)="openMinimizablePanel()">Abrir Panel Minimizable</nui-button>
             <nui-button (click)="openMinimizablePanel2()">Abrir Otro Panel Minimizable</nui-button>
+            <nui-button 
+              [color]="'primary'"
+              (click)="openChatSupportPanel()"
+            >
+              Chat Support (Botón Flotante)
+            </nui-button>
           </div>
         }
 

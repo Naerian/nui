@@ -4,12 +4,26 @@
     @for (tab of tabsByPosition().right; track tab.id) {
       <button 
         class="sidebar-panel-tab-button sidebar-panel-tab-vertical"
+        [class]="tab.customization?.cssClass || ''"
         (click)="restorePanel(tab.id)"
         [attr.aria-label]="'Restore ' + tab.title"
         [attr.data-sidebar-panel-id]="tab.id"
         [attr.title]="tab.title"
       >
-        <i class="ri-arrow-left-s-line"></i>
+        @if (tab.customization?.template) {
+          <!-- Template completamente custom -->
+          <ng-container [ngTemplateOutlet]="tab.customization!.template!"></ng-container>
+        } @else {
+          <!-- Renderizado por defecto con customización -->
+          @if (tab.customization?.icon) {
+            <i [class]="tab.customization!.icon"></i>
+          } @else {
+            <i class="ri-arrow-left-s-line"></i>
+          }
+          @if (tab.customization?.label) {
+            <span class="sidebar-panel-tab-label">{{ tab.customization!.label }}</span>
+          }
+        }
       </button>
     }
   </div>
@@ -21,12 +35,26 @@
     @for (tab of tabsByPosition().left; track tab.id) {
       <button 
         class="sidebar-panel-tab-button sidebar-panel-tab-vertical"
+        [class]="tab.customization?.cssClass || ''"
         (click)="restorePanel(tab.id)"
         [attr.aria-label]="'Restore ' + tab.title"
         [attr.data-sidebar-panel-id]="tab.id"
         [attr.title]="tab.title"
       >
-        <i class="ri-arrow-right-s-line"></i>
+        @if (tab.customization?.template) {
+          <!-- Template completamente custom -->
+          <ng-container [ngTemplateOutlet]="tab.customization!.template!"></ng-container>
+        } @else {
+          <!-- Renderizado por defecto con customización -->
+          @if (tab.customization?.icon) {
+            <i [class]="tab.customization!.icon"></i>
+          } @else {
+            <i class="ri-arrow-right-s-line"></i>
+          }
+          @if (tab.customization?.label) {
+            <span class="sidebar-panel-tab-label">{{ tab.customization!.label }}</span>
+          }
+        }
       </button>
     }
   </div>
@@ -38,12 +66,26 @@
     @for (tab of tabsByPosition().top; track tab.id) {
       <button 
         class="sidebar-panel-tab-button sidebar-panel-tab-horizontal"
+        [class]="tab.customization?.cssClass || ''"
         (click)="restorePanel(tab.id)"
         [attr.aria-label]="'Restore ' + tab.title"
         [attr.data-sidebar-panel-id]="tab.id"
         [attr.title]="tab.title"
       >
-        <i class="ri-arrow-down-s-line"></i>
+        @if (tab.customization?.template) {
+          <!-- Template completamente custom -->
+          <ng-container [ngTemplateOutlet]="tab.customization!.template!"></ng-container>
+        } @else {
+          <!-- Renderizado por defecto con customización -->
+          @if (tab.customization?.icon) {
+            <i [class]="tab.customization!.icon"></i>
+          } @else {
+            <i class="ri-arrow-down-s-line"></i>
+          }
+          @if (tab.customization?.label) {
+            <span class="sidebar-panel-tab-label">{{ tab.customization!.label }}</span>
+          }
+        }
       </button>
     }
   </div>
@@ -55,12 +97,26 @@
     @for (tab of tabsByPosition().bottom; track tab.id) {
       <button 
         class="sidebar-panel-tab-button sidebar-panel-tab-horizontal"
+        [class]="tab.customization?.cssClass || ''"
         (click)="restorePanel(tab.id)"
         [attr.aria-label]="'Restore ' + tab.title"
         [attr.data-sidebar-panel-id]="tab.id"
         [attr.title]="tab.title"
       >
-        <i class="ri-arrow-up-s-line"></i>
+        @if (tab.customization?.template) {
+          <!-- Template completamente custom -->
+          <ng-container [ngTemplateOutlet]="tab.customization!.template!"></ng-container>
+        } @else {
+          <!-- Renderizado por defecto con customización -->
+          @if (tab.customization?.icon) {
+            <i [class]="tab.customization!.icon"></i>
+          } @else {
+            <i class="ri-arrow-up-s-line"></i>
+          }
+          @if (tab.customization?.label) {
+            <span class="sidebar-panel-tab-label">{{ tab.customization!.label }}</span>
+          }
+        }
       </button>
     }
   </div>

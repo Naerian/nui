@@ -42,6 +42,57 @@ export const SIDEBAR_PANEL_SIZE_MAP: Record<SidebarPanelSize, string> = {
 };
 
 /**
+ * Customización visual de la pestaña minimizada
+ * 
+ * Permite personalizar completamente el aspecto del botón que aparece
+ * cuando un panel se minimiza. Útil para crear botones flotantes de chat,
+ * soporte, notificaciones, etc.
+ * 
+ * @example
+ * ```typescript
+ * // Chat flotante con icono personalizado
+ * const customization: MinimizedTabCustomization = {
+ *   icon: 'ri-phone-line',
+ *   label: 'Soporte',
+ *   cssClass: 'floating-chat-button'
+ * };
+ * 
+ * // Template completamente custom
+ * const customization: MinimizedTabCustomization = {
+ *   template: myCustomTemplate
+ * };
+ * ```
+ */
+export interface MinimizedTabCustomization {
+  /**
+   * Icono personalizado para la pestaña (Remix Icon class)
+   * Si no se proporciona, usa el icono por defecto
+   * @example 'ri-phone-line', 'ri-chat-3-line', 'ri-customer-service-line'
+   */
+  icon?: string;
+
+  /**
+   * Texto personalizado para la pestaña
+   * Si no se proporciona, usa el título del panel
+   */
+  label?: string;
+
+  /**
+   * Clase(s) CSS adicionales para la pestaña
+   * Útil para posicionamiento custom, estilos especiales, etc.
+   * @example 'floating-chat', 'bottom-right-button', ['custom-tab', 'rounded']
+   */
+  cssClass?: string | string[];
+
+  /**
+   * Template completamente personalizado para la pestaña
+   * Si se proporciona, sobrescribe toda la renderización por defecto
+   * (icon, label, cssClass se ignoran)
+   */
+  template?: TemplateRef<any>;
+}
+
+/**
  * Modelo de una pestaña minimizada
  */
 export interface MinimizedTab {
@@ -49,6 +100,7 @@ export interface MinimizedTab {
   title: string;
   position: SidebarPanelPosition;
   restoreCallback: () => void;
+  customization?: MinimizedTabCustomization;
 }
 
 /**
@@ -246,6 +298,24 @@ interface SidebarPanelConfigBase<D = any> {
    * Tiene precedencia sobre otros métodos de footer
    */
   customButtons?: SidebarPanelCustomButton[];
+
+  /**
+   * Customización visual de la pestaña minimizada
+   * 
+   * Solo aplica cuando `minimizable: true`. Permite personalizar el aspecto
+   * del botón que aparece cuando el panel se minimiza.
+   * 
+   * @example
+   * ```typescript
+   * // Chat flotante personalizado
+   * minimizedTabCustomization: {
+   *   icon: 'ri-phone-line',
+   *   label: 'Soporte',
+   *   cssClass: 'floating-chat-button'
+   * }
+   * ```
+   */
+  minimizedTabCustomization?: MinimizedTabCustomization;
 }
 
 /**
@@ -298,6 +368,7 @@ export const DEFAULT_SIDEBAR_PANEL_CONFIG: Required<
     | 'backdropClass'
     | 'panelClass'
     | 'customButtons'
+    | 'minimizedTabCustomization'
   >
 > & { minimizable: false } = {
   position: 'right',

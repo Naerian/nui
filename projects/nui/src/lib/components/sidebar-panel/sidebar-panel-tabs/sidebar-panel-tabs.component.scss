@@ -77,6 +77,15 @@
     align-items: center;
     justify-content: center;
   }
+
+  // Soporte para label personalizado
+  .sidebar-panel-tab-label {
+    margin-left: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--nui-text-primary);
+    white-space: nowrap;
+  }
 }
 
 /**

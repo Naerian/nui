@@ -132,3 +132,88 @@
   // Transición suave al aparecer/desaparecer
   transition: opacity 300ms ease-in-out, backdrop-filter 300ms ease-in-out;
 }
+
+// ==========================================
+// BOTÓN FLOTANTE PERSONALIZADO
+// ==========================================
+// Ejemplo de pestaña minimizada con estilo de botón flotante
+// Se aplica usando minimizedTabCustomization: { cssClass: 'floating-chat-button' }
+
+::ng-deep .floating-chat-button {
+  // Posición flotante en la esquina inferior derecha
+  position: fixed !important;
+  bottom: 24px;
+  right: 24px;
+  
+  // Ancho y alto del botón
+  width: auto !important;
+  height: auto !important;
+  
+  // Padding más amplio para acomodar icono + texto
+  padding: 14px 20px !important;
+  
+  // Bordes redondeados (píldora)
+  border-radius: 50px !important;
+  
+  // Sombra elevada para efecto flotante
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  
+  // Color de fondo (puede cambiar según tu preset)
+  background: var(--nui-color-primary) !important;
+  border-color: var(--nui-color-primary) !important;
+  
+  // Color de texto e icono
+  color: white !important;
+  
+  // Opacidad completa por defecto
+  opacity: 1 !important;
+  
+  // Animación al hover
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  
+  // Flex para alinear icono + texto
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  
+  // Estilos del icono
+  i {
+    font-size: 1.25rem !important;
+    color: white !important;
+  }
+  
+  // Estilos del label
+  .sidebar-panel-tab-label {
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: 0.9375rem !important;
+  }
+  
+  // Hover effect
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.15) !important;
+    opacity: 1 !important;
+  }
+  
+  // Active effect
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  }
+  
+  // Ajustes para mobile
+  @media (max-width: 768px) {
+    bottom: 16px;
+    right: 16px;
+    padding: 12px 18px !important;
+    
+    i {
+      font-size: 1.125rem !important;
+    }
+    
+    .sidebar-panel-tab-label {
+      font-size: 0.875rem !important;
+    }
+  }
+}

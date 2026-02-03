@@ -243,6 +243,55 @@ if (panelRef.isMinimized) {
 }`,
           language: 'typescript',
         },
+        {
+          title: 'components.sidebar-panel.minimizable.customizationCodeTitle',
+          code: `// Pestaña minimizada con customización completa
+this.sidebarPanelService.open(ChatComponent, {
+  title: 'Chat de Soporte',
+  id: 'chat-support',
+  minimizable: true,
+  position: 'right',
+  size: 'md',
+  minimizedTabCustomization: {
+    icon: 'ri-customer-service-line',  // Icono personalizado
+    label: 'Soporte',                  // Texto del botón
+    cssClass: 'floating-chat-button'   // Clase CSS custom
+  }
+});`,
+          language: 'typescript',
+        },
+        {
+          title: 'components.sidebar-panel.minimizable.cssCodeTitle',
+          code: `// Estilos CSS para botón flotante personalizado
+::ng-deep .floating-chat-button {
+  // Posición flotante en esquina inferior derecha
+  position: fixed !important;
+  bottom: 24px;
+  right: 24px;
+  
+  // Dimensiones y padding
+  width: auto !important;
+  height: auto !important;
+  padding: 14px 20px !important;
+  
+  // Estilo redondeado (píldora)
+  border-radius: 50px !important;
+  
+  // Sombra elevada
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  
+  // Colores
+  background: var(--nui-color-primary) !important;
+  color: white !important;
+  
+  // Efectos hover
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
+  }
+}`,
+          language: 'scss',
+        },
       ],
     },
     {
