@@ -7,6 +7,7 @@ Panel deslizante que se abre desde los bordes de la pantalla usando Angular CDK 
 - ✅ **Posiciones**: Derecha, izquierda, arriba, abajo
 - ✅ **Tamaños**: Predefinidos (xs, sm, md, lg, xl, full) o custom
 - ✅ **Componentes Dinámicos**: Carga cualquier componente con inyección de datos
+- ✅ **Contenido Flexible**: HTML strings o Angular templates sin componente
 - ✅ **Backdrop**: Configurable con click para cerrar
 - ✅ **Accesibilidad**: Focus trap, ARIA labels, restauración de focus
 - ✅ **Animaciones**: Transiciones suaves con Angular Animations
@@ -103,6 +104,7 @@ export class MyPanelComponent {
 | Método | Descripción | Retorno |
 |--------|-------------|---------|
 | `open<T>(component, config?)` | Abre un panel con el componente especificado | `SlidePanelRef<T>` |
+| `open<D, R>(config)` | Abre un panel con contenido flexible (HTML o template) | `SlidePanelRef<any, R>` |
 | `close(id)` | Cierra el panel con el ID especificado | `void` |
 | `closeAll()` | Cierra todos los panels abiertos | `void` |
 | `getPanel(id)` | Obtiene el stack item de un panel | `SlidePanelStackItem \| undefined` |
@@ -150,6 +152,9 @@ Configuración completa del panel:
 | `minimizable` | `boolean` | `false` | Panel minimizable con botón en header. **Requiere `id` obligatorio** |
 | `id` | `string` | Auto | ID único del panel. **Obligatorio si `minimizable: true`** |
 | `customButtons` | `SlidePanelCustomButton[]` | - | Botones programáticos para el footer |
+| `contentTemplate` | `TemplateRef<any>` | - | Template de Angular para contenido flexible |
+| `htmlContent` | `string` | - | HTML string para contenido simple |
+| `templateContext` | `any` | - | Contexto de datos para el template |
 | `zIndex` | `number` | `1000` | Z-index base |
 | `allowMultiple` | `boolean` | `false` | Permitir múltiples panels |
 | `lazyLoad` | `boolean` | `true` | Carga lazy del componente |
@@ -201,6 +206,142 @@ Referencia al panel abierto:
 | `stateChanged()` | Observable de cambios de estado | `Observable<SlidePanelState>` |
 
 ## Ejemplos
+
+### Contenido Flexible (Sin Componente)
+
+El SidebarPanel soporta tres formas de mostrar contenido:
+
+#### 1. Con Componente (Tradicional)
+
+```typescript
+const ref = this.sidebarPanelService.open(MyComponent, {
+  title: 'My Panel',
+  data: { userId: 123 }
+});
+```
+
+#### 2. Con HTML String
+
+Ideal para notificaciones simples o contenido estático:
+
+```typescript
+this.sidebarPanelService.open({
+  title: 'Operation Successful',
+  position: 'right',
+  size: 'sm',
+  htmlContent: `
+    <div style="padding: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <i class="ri-check-circle-fill" style="font-size: 2rem; color: green;"></i>
+        <div>
+          <h3>Success!</h3>
+          <p>Your changes have been saved.</p>
+        </div>
+      </div>
+    </div>
+  `
+});
+```
+
+**Generación Dinámica:**
+
+```typescript
+const items = [
+  { id: 1, name: 'Task Alpha', status: 'Completed' },
+  { id: 2, name: 'Task Beta', status: 'In Progress' }
+];
+
+const htmlContent = `
+  <div style="padding: 1rem;">
+    <h3>Task Report</h3>
+    <table style="width: 100%;">
+      ${items.map(item => `
+        <tr>
+          <td>${item.id}</td>
+          <td>${item.name}</td>
+          <td>${item.status}</td>
+        </tr>
+      `).join('')}
+    </table>
+  </div>
+`;
+
+this.sidebarPanelService.open({
+  title: 'Report',
+  htmlContent
+});
+```
+
+#### 3. Con Angular Template
+
+Ideal para contenido dinámico con datos y funciones:
+
+```typescript
+import { Component, ViewChild, TemplateRef } from '@angular/core';
+
+@Component({
+  selector: 'app-my-component',
+  template: `
+    <!-- Define template con let-variables -->
+    <ng-template #userDetailsTemplate 
+      let-user="user" 
+      let-onRefresh="onRefresh"
+      let-onLogout="onLogout">
+      <div style="padding: 1.5rem;">
+        <h3>{{ user.name }}</h3>
+        <p>{{ user.email }}</p>
+        <p>Role: {{ user.role }}</p>
+        <button (click)="onRefresh()">Refresh</button>
+        <button (click)="onLogout()">Logout</button>
+      </div>
+    </ng-template>
+
+    <button (click)="openPanel()">Open Panel</button>
+  `
+})
+export class MyComponent {
+  @ViewChild('userDetailsTemplate') 
+  userDetailsTemplate!: TemplateRef<any>;
+
+  currentUser = {
+    name: 'John Doe',
+    email: 'john@example.com',
+    role: 'Administrator'
+  };
+
+  openPanel() {
+    this.sidebarPanelService.open({
+      title: 'User Profile',
+      position: 'right',
+      size: 'md',
+      contentTemplate: this.userDetailsTemplate,
+      templateContext: {
+        user: this.currentUser,
+        onRefresh: () => this.refreshUser(),
+        onLogout: () => this.logout()
+      }
+    });
+  }
+
+  refreshUser() {
+    console.log('Refreshing user data...');
+    // Actualizar datos
+  }
+
+  logout() {
+    console.log('Logging out...');
+    // Cerrar sesión
+  }
+}
+```
+
+**Comparación de Métodos:**
+
+| Método | Cuándo Usar | Ventajas | Limitaciones |
+|--------|-------------|----------|--------------|
+| **Componente** | Funcionalidad compleja, lógica de negocio | Completo, tipado, testeable | Requiere crear archivo |
+| **htmlContent** | Notificaciones, mensajes simples | Rápido, directo, sin archivos | Estático, sin interactividad |
+| **contentTemplate** | Contenido dinámico, interacción moderada | Reactivo, reutilizable, datos variables | Requiere acceso al TemplateRef |
 
 ### Diferentes Posiciones
 

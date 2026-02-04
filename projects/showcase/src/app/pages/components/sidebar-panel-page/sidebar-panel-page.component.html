@@ -61,6 +61,23 @@
           </div>
         }
 
+        @case ('html-content') {
+          <div class="example-preview example-preview--spaced">
+            <nui-button (click)="openHtmlNotificationPanel()">Simple HTML Notification</nui-button>
+            <nui-button [color]="'primary'" (click)="openDynamicHtmlPanel()">
+              Dynamic HTML Report
+            </nui-button>
+          </div>
+        }
+
+        @case ('template-content') {
+          <div class="example-preview">
+            <nui-button [color]="'primary'" (click)="openTemplatePanel()">
+              Open Template Panel
+            </nui-button>
+          </div>
+        }
+
         @case ('dynamic-component-events') {
           <div class="example-preview">
             <nui-button [color]="'primary'" (click)="openPanelWithEvents()">
@@ -117,3 +134,109 @@
     </section>
   }
 </div>
+
+<!-- Template para el ejemplo de contenido flexible -->
+<ng-template #userDetailsTemplate let-user="user" let-onRefresh="onRefresh" let-onLogout="onLogout">
+  <div style="padding: 1.5rem">
+    <!-- User Avatar & Name -->
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--nui-divider);
+      "
+    >
+      <img
+        [src]="user.avatar"
+        alt="User Avatar"
+        style="
+          width: 64px;
+          height: 64px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 2px solid var(--nui-primary-main);
+        "
+      />
+      <div>
+        <h3 style="margin: 0; font-size: 1.25rem; font-weight: 600">{{ user.name }}</h3>
+        <p style="margin: 0.25rem 0 0 0; color: var(--nui-text-secondary); font-size: 0.875rem">
+          {{ user.role }}
+        </p>
+      </div>
+    </div>
+
+    <!-- User Details -->
+    <div style="margin-bottom: 1.5rem">
+      <div style="margin-bottom: 1rem">
+        <label
+          style="
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--nui-text-secondary);
+            margin-bottom: 0.25rem;
+          "
+        >
+          Email
+        </label>
+        <p style="margin: 0; font-size: 0.875rem">{{ user.email }}</p>
+      </div>
+
+      <div style="margin-bottom: 1rem">
+        <label
+          style="
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--nui-text-secondary);
+            margin-bottom: 0.25rem;
+          "
+        >
+          Role
+        </label>
+        <span
+          style="
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--nui-primary-light);
+            color: var(--nui-primary-dark);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+          "
+        >
+          {{ user.role }}
+        </span>
+      </div>
+
+      <div>
+        <label
+          style="
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--nui-text-secondary);
+            margin-bottom: 0.25rem;
+          "
+        >
+          Last Login
+        </label>
+        <p style="margin: 0; font-size: 0.875rem">{{ user.lastLogin | date: 'medium' }}</p>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div style="display: flex; gap: 0.75rem">
+      <nui-button (onClick)="onRefresh()" [icon]="'ri-refresh-line'">Refresh</nui-button>
+      <nui-button (onClick)="onLogout()" [color]="'secondary'" [icon]="'ri-logout-box-line'">
+        Logout
+      </nui-button>
+    </div>
+  </div>
+</ng-template>

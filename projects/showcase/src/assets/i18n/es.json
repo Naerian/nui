@@ -514,6 +514,16 @@
         "description": "Carga cualquier componente Angular dentro del panel y pasa datos mediante inyección de dependencias",
         "note": "Usa la propiedad <code>data</code> para pasar datos al componente cargado dinámicamente. Estos datos se inyectan usando el token <code>SIDEBAR_PANEL_DATA</code>. Si además queremos hacer referencia al propio panel desde el componente cargado, podemos inyectar <code>SIDEBAR_PANEL_REF</code>."
       },
+      "htmlContent": {
+        "title": "Contenido HTML personalizado",
+        "description": "Renderiza contenido HTML arbitrario dentro del panel usando templates de Angular.",
+        "note": "Usa la propiedad <code>htmlContent</code> para pasar una cadena HTML. Puedes generar el HTML dinámicamente o concatenarlo con tus datos. Esta opción no requiere crear un componente Angular completo."
+      },
+      "templateContent": {
+        "title": "Contenido de plantilla personalizada (TemplateRef)",
+        "description": "Usa templates de Angular con datos de contexto y funciones sin necesidad de un componente completo. Ideal para contenido reutilizable con datos dinámicos.",
+        "note": "Usa la propiedad <code>contentTemplate</code> para pasar un <code>TemplateRef</code> y <code>templateContext</code> para pasar datos y funciones. El template recibe el contexto mediante variables <code>let-varname</code>. Esto permite interactividad sin crear un componente."
+      },
       "events": {
         "title": "Eventos @Outputs de componentes dinámicos",
         "description": "Escucha eventos emitidos por el componente cargado dentro del panel para manejar interacciones y cerrar el panel cuando sea necesario.",

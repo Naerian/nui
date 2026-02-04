@@ -162,6 +162,149 @@ this.sidebarPanelService.open(MyContentComponent, {
       ],
     },
     {
+      id: 'html-content',
+      title: 'components.sidebar-panel.htmlContent.title',
+      description: 'components.sidebar-panel.htmlContent.description',
+      note: {
+        type: 'info',
+        content: 'components.sidebar-panel.htmlContent.note',
+      },
+      anchor: 'html-content',
+      examples: [
+        {
+          title: 'codeExamples.typescript',
+          code: `// Simple HTML notification
+openHtmlNotification() {
+  this.sidebarPanelService.open({
+    title: 'Operation Successful',
+    position: 'right',
+    size: 'sm',
+    htmlContent: \`
+      <div style="padding: 1rem;">
+        <h3>Success!</h3>
+        <p>Your changes have been saved.</p>
+      </div>
+    \`
+  });
+}
+
+// Dynamic HTML generation
+openDynamicReport() {
+  const items = [
+    { id: 1, name: 'Task Alpha', status: 'Completed' },
+    { id: 2, name: 'Task Beta', status: 'In Progress' }
+  ];
+
+  const htmlContent = \`
+    <div style="padding: 1rem;">
+      <h3>Task Report</h3>
+      <table>
+        \${items.map(item => \`
+          <tr>
+            <td>\${item.id}</td>
+            <td>\${item.name}</td>
+            <td>\${item.status}</td>
+          </tr>
+        \`).join('')}
+      </table>
+    </div>
+  \`;
+
+  this.sidebarPanelService.open({
+    title: 'Task Report',
+    position: 'right',
+    size: 'lg',
+    htmlContent
+  });
+}`,
+          language: 'typescript',
+        },
+      ],
+    },
+    {
+      id: 'template-content',
+      title: 'components.sidebar-panel.templateContent.title',
+      description: 'components.sidebar-panel.templateContent.description',
+      note: {
+        type: 'info',
+        content: 'components.sidebar-panel.templateContent.note',
+      },
+      anchor: 'template-content',
+      examples: [
+        {
+          title: 'codeExamples.typescript',
+          code: `import { Component, ViewChild, TemplateRef } from '@angular/core';
+
+@Component({
+  selector: 'app-my-component',
+  template: \`
+    <!-- Template definition -->
+    <ng-template #userDetailsTemplate 
+      let-user="user" 
+      let-onRefresh="onRefresh"
+      let-onLogout="onLogout">
+      <div>
+        <h3>{{ user.name }}</h3>
+        <p>{{ user.email }}</p>
+        <button (click)="onRefresh()">Refresh</button>
+        <button (click)="onLogout()">Logout</button>
+      </div>
+    </ng-template>
+
+    <button (click)="openPanel()">Open Panel</button>
+  \`
+})
+export class MyComponent {
+  @ViewChild('userDetailsTemplate') 
+  userDetailsTemplate!: TemplateRef<any>;
+
+  currentUser = {
+    name: 'John Doe',
+    email: 'john@example.com'
+  };
+
+  openPanel() {
+    this.sidebarPanelService.open({
+      title: 'User Profile',
+      position: 'right',
+      size: 'md',
+      contentTemplate: this.userDetailsTemplate,
+      templateContext: {
+        user: this.currentUser,
+        onRefresh: () => this.refreshUser(),
+        onLogout: () => this.logout()
+      }
+    });
+  }
+
+  refreshUser() {
+    console.log('Refreshing user data...');
+  }
+
+  logout() {
+    console.log('Logging out...');
+  }
+}`,
+          language: 'typescript',
+        },
+        {
+          title: 'codeExamples.html',
+          code: `<!-- Template with context variables -->
+<ng-template #myTemplate 
+  let-data="data" 
+  let-onSave="onSave"
+  let-onCancel="onCancel">
+  <div class="template-content">
+    <p>{{ data.message }}</p>
+    <button (click)="onSave(data)">Save</button>
+    <button (click)="onCancel()">Cancel</button>
+  </div>
+</ng-template>`,
+          language: 'html',
+        },
+      ],
+    },
+    {
       id: 'dynamic-component',
       title: 'components.sidebar-panel.dynamicComponent.title',
       description: 'components.sidebar-panel.dynamicComponent.description',

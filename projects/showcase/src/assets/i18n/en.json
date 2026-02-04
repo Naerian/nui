@@ -514,6 +514,16 @@
         "description": "Load any Angular component inside the panel and pass data through dependency injection",
         "note": "Use the <code>data</code> property to pass data to the dynamically loaded component. This data is injected using the <code>SIDEBAR_PANEL_DATA</code> token. If we also want to reference the panel itself from the loaded component, we can inject <code>SIDEBAR_PANEL_REF</code>."
       },
+      "htmlContent": {
+        "title": "HTML content",
+        "description": "You can open panels with HTML content without creating a component. Ideal for simple notifications, messages or dynamically generated content.",
+        "note": "Use the <code>htmlContent</code> property to pass an HTML string. You can generate the HTML dynamically or concatenate it with your data. This option does not require creating a full Angular component."
+      },
+      "templateContent": {
+        "title": "Template content",
+        "description": "Use Angular templates with context data and functions without needing a full component. Ideal for reusable content with dynamic data.",
+        "note": "Use the <code>contentTemplate</code> property to pass a <code>TemplateRef</code> and <code>templateContext</code> to pass data and functions. The template receives the context through <code>let-varname</code> variables. This allows for interactivity without creating a component."
+      },
       "events": {
         "title": "@Output events from dynamic components",
         "description": "Listen to events emitted by the component loaded inside the panel to handle interactions and close the panel when necessary.",

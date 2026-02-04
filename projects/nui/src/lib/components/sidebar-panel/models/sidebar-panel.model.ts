@@ -365,6 +365,79 @@ interface SidebarPanelConfigBase<D = any> {
    * ```
    */
   minimizedTabCustomization?: MinimizedTabCustomization;
+
+  /**
+   * Template de Angular para renderizar contenido personalizado
+   * 
+   * Si se proporciona, se renderiza en lugar del componente dinámico.
+   * Tiene prioridad sobre `htmlContent`.
+   * 
+   * Útil para contenido dinámico con bindings, eventos y lógica de Angular
+   * sin necesidad de crear un componente completo.
+   * 
+   * @example
+   * ```typescript
+   * // En el componente
+   * ＠ViewChild('userTemplate') userTemplate!: TemplateRef<any>;
+   * 
+   * // Abrir sidebar
+   * this.sidebarService.open({
+   *   title: 'Usuario',
+   *   contentTemplate: this.userTemplate,
+   *   templateContext: { 
+   *     user: this.currentUser,
+   *     onEdit: () => console.log('Edit')
+   *   }
+   * });
+   * ```
+   */
+  contentTemplate?: TemplateRef<any>;
+
+  /**
+   * Contenido HTML como string para casos simples
+   * 
+   * Se renderiza usando `[innerHTML]`. Solo se usa si no se proporciona
+   * `contentTemplate` ni un componente.
+   * 
+   * Útil para notificaciones, mensajes de confirmación, o contenido
+   * estático que no requiere lógica compleja.
+   * 
+   * @example
+   * ```typescript
+   * this.sidebarService.open({
+   *   title: 'Notificación',
+   *   htmlContent: '<p>Tu operación fue <strong>exitosa</strong></p>',
+   *   size: 'sm'
+   * });
+   * ```
+   */
+  htmlContent?: string;
+
+  /**
+   * Contexto para pasar datos al template
+   * 
+   * Solo aplica cuando se usa `contentTemplate`. Los datos se pasan
+   * al template como variables de contexto.
+   * 
+   * @example
+   * ```typescript
+   * // Template en el componente
+   * <ng-template #myTemplate let-user="user" let-onSave="onSave">
+   *   <p>{{ user.name }}</p>
+   *   <button (click)="onSave()">Guardar</button>
+   * </ng-template>
+   * 
+   * // Abrir sidebar
+   * this.sidebarService.open({
+   *   contentTemplate: this.myTemplate,
+   *   templateContext: { 
+   *     user: { name: 'Juan' },
+   *     onSave: () => console.log('Saving...')
+   *   }
+   * });
+   * ```
+   */
+  templateContext?: any;
 }
 
 /**
@@ -418,6 +491,9 @@ export const DEFAULT_SIDEBAR_PANEL_CONFIG: Required<
     | 'panelClass'
     | 'customButtons'
     | 'minimizedTabCustomization'
+    | 'contentTemplate'
+    | 'htmlContent'
+    | 'templateContext'
   >
 > & { minimizable: false } = {
   position: 'right',

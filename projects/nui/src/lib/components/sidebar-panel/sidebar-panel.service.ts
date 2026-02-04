@@ -1,4 +1,4 @@
-﻿import { Injectable, Injector, Type, ComponentRef, inject, EnvironmentInjector, createComponent, InjectionToken, ApplicationRef } from '@angular/core';
+﻿import { Injectable, Injector, Type, ComponentRef, inject, EnvironmentInjector, createComponent, InjectionToken, ApplicationRef, TemplateRef } from '@angular/core';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { SidebarPanelComponent } from './sidebar-panel.component';
 import { SidebarPanelActionsService } from './services/sidebar-panel-actions.service';
 import { SidebarPanelTabsService } from './services/sidebar-panel-tabs.service';
 import { NUI_CONFIG } from '../../configs';
+import { SimpleContentComponent } from './simple-content.component';
 
 /**
  * Token de inyección para los datos del componente dinámico
@@ -173,35 +174,46 @@ export class SidebarPanelService {
   }
 
   /**
-   * Abre un nuevo slide panel con el componente especificado
+   * Abre un nuevo sidebar panel con el componente y configuración especificados
    * 
-   * Crea dinámicamente un panel lateral que contiene el componente proporcionado.
-   * El componente puede inyectar `SIDEBAR_PANEL_DATA` y `SIDEBAR_PANEL_REF` para
-   * acceder a sus datos y controlar el panel.
+   * Este método es el punto de entrada principal para crear panels.
+   * Gestiona todo el ciclo de vida:
+   * - Merge de configuración por defecto y personalizada
+   * - Creación del overlay y componente contenedor
+   * - Inyección de dependencias
+   * - Registro en el stack
+   * - Gestión del ciclo de vida
+   * - Cierre automático en navegación
    * 
-   * @template T - Tipo del componente dinámico
-   * @template D - Tipo de los datos que se pasan al componente
-   * @template R - Tipo del resultado que devuelve el panel al cerrarse
+   * **Comportamiento de stack:**
+   * - Si `minimizable: false` (default): Cierra todos los panels existentes antes de abrir uno nuevo
+   * - Si `minimizable: true`: Permite múltiples panels abiertos simultáneamente
    * 
-   * @param component - Componente standalone a cargar en el panel
-   * @param config - Configuración opcional del panel (posición, tamaño, datos, etc.)
+   * **Restauración de panels minimizados:**
+   * - Si un panel con el mismo tipo de componente y posición ya existe minimizado, lo restaura
+   * - Si se pasa un `id` específico, busca y restaura ese panel exacto
    * 
-   * @returns Referencia al panel con métodos para controlarlo y observables para su ciclo de vida
+   * @typeParam T - Tipo del componente que se cargará en el panel
+   * @typeParam D - Tipo de los datos que se inyectarán en el componente (via `data` config)
+   * @typeParam R - Tipo del resultado que devolverá el panel al cerrarse
    * 
-   * @throws Error si component es null o undefined
+   * @param component - Componente a cargar dentro del panel
+   * @param config - Configuración del panel (opcional, usa defaults)
+   * @returns Referencia al panel creado para control programático
+   * 
+   * @throws Error si el componente es null o undefined
    * 
    * @example
    * ```typescript
-   * // Panel simple
-   * const ref = this.SidebarPanelService.open(UserProfileComponent, {
+   * // Ejemplo básico con componente
+   * const ref = this.sidebarPanelService.open(UserDetailsComponent, {
    *   position: 'right',
    *   size: 'md',
-   *   title: 'Perfil de Usuario',
    *   data: { userId: 123 }
    * });
    * 
    * // Panel con formulario y prevención de cierre
-   * const ref = this.SidebarPanelService.open(EditFormComponent, {
+   * const ref = this.sidebarPanelService.open(EditFormComponent, {
    *   position: 'right',
    *   size: 'lg',
    *   preventClose: () => confirm('¿Descartar cambios?'),
@@ -209,12 +221,12 @@ export class SidebarPanelService {
    * });
    * 
    * // Múltiples panels (usando minimizable para permitir stack)
-   * this.SidebarPanelService.open(Panel1Component, {
+   * this.sidebarPanelService.open(Panel1Component, {
    *   position: 'right',
    *   minimizable: true
    * });
    * 
-   * this.SidebarPanelService.open(Panel2Component, {
+   * this.sidebarPanelService.open(Panel2Component, {
    *   position: 'left',
    *   minimizable: true
    * });
@@ -223,18 +235,101 @@ export class SidebarPanelService {
   open<T extends object = any, D = unknown, R = unknown>(
     component: Type<T>,
     config?: SidebarPanelConfig<D>
-  ): SidebarPanelRef<T, R> {
-    // ValidaciÃ³n del componente
-    if (!component) {
-      throw new Error('[sidebar-panel] Component is required and cannot be null or undefined');
-    }
+  ): SidebarPanelRef<T, R>;
 
-    // Merge con configuración por defecto y configuración global
-    const mergedConfig = {
-      ...DEFAULT_SIDEBAR_PANEL_CONFIG,
-      ...this._nuiConfig.sidebarPanel,
-      ...config,
-    } as SidebarPanelConfig<D>;
+  /**
+   * Abre un nuevo sidebar panel con contenido flexible (HTML o template)
+   * 
+   * Esta sobrecarga permite abrir un panel sin necesidad de crear un componente.
+   * Puedes pasar directamente:
+   * - Una cadena HTML para contenido estático
+   * - Un TemplateRef de Angular para contenido dinámico
+   * - Contexto para pasar datos al template
+   * 
+   * **Casos de uso:**
+   * - Notificaciones o mensajes simples
+   * - Contenido HTML generado dinámicamente
+   * - Templates reutilizables con datos variables
+   * - Previsualizaciones de contenido
+   * 
+   * @typeParam D - Tipo de los datos de contexto del template
+   * @typeParam R - Tipo del resultado que devolverá el panel al cerrarse
+   * 
+   * @param config - Configuración con contenido flexible (htmlContent o contentTemplate)
+   * @returns Referencia al panel creado para control programático
+   * 
+   * @throws Error si no se proporciona ni htmlContent ni contentTemplate
+   * 
+   * @example
+   * ```typescript
+   * // Notificación con HTML
+   * const ref = this.sidebarPanelService.open({
+   *   title: 'Notification',
+   *   position: 'right',
+   *   size: 'sm',
+   *   htmlContent: '<p>Operation completed successfully!</p>'
+   * });
+   * 
+   * // Template con contexto
+   * const ref = this.sidebarPanelService.open({
+   *   title: 'User Details',
+   *   position: 'right',
+   *   contentTemplate: this.userTemplate,
+   *   templateContext: { 
+   *     user: this.currentUser,
+   *     onSave: (data) => this.saveUser(data)
+   *   }
+   * });
+   * ```
+   */
+  open<D = unknown, R = unknown>(
+    config: SidebarPanelConfig<D> & { 
+      contentTemplate?: TemplateRef<any>; 
+      htmlContent?: string;
+      templateContext?: any;
+    }
+  ): SidebarPanelRef<any, R>;
+
+  /**
+   * Implementación del método open que maneja ambas sobrecargas
+   * @internal
+   */
+  open<T extends object = any, D = unknown, R = unknown>(
+    componentOrConfig: Type<T> | SidebarPanelConfig<D>,
+    config?: SidebarPanelConfig<D>
+  ): SidebarPanelRef<T, R> {
+    // Detectar si el primer parámetro es una configuración en lugar de un componente
+    let component: Type<T>;
+    let mergedConfig: SidebarPanelConfig<D>;
+
+    if (this._isConfig(componentOrConfig)) {
+      // Caso: open({ htmlContent: '...', title: '...' })
+      // Validar que tenga contenido
+      if (!componentOrConfig.htmlContent && !componentOrConfig.contentTemplate) {
+        throw new Error('[sidebar-panel] Either htmlContent or contentTemplate is required when opening without a component');
+      }
+
+      component = SimpleContentComponent as Type<T>;
+      mergedConfig = {
+        ...DEFAULT_SIDEBAR_PANEL_CONFIG,
+        ...this._nuiConfig.sidebarPanel,
+        ...componentOrConfig,
+      } as SidebarPanelConfig<D>;
+    } else {
+      // Caso: open(Component, { ... })
+      component = componentOrConfig;
+
+      // Validación del componente
+      if (!component) {
+        throw new Error('[sidebar-panel] Component is required and cannot be null or undefined');
+      }
+
+      mergedConfig = {
+        ...DEFAULT_SIDEBAR_PANEL_CONFIG,
+        ...this._nuiConfig.sidebarPanel,
+        ...config,
+      } as SidebarPanelConfig<D>;
+    }
 
     // Si el panel es minimizable, buscar si ya existe uno minimizado del mismo tipo y posición
     // Si se pasa un ID específico, buscar ese panel exacto
@@ -543,6 +638,25 @@ export class SidebarPanelService {
    * 
    * Proporciona los tokens necesarios para que el componente dinámico
    * pueda inyectar su configuración, datos y referencia al panel.
+   * 
+   * @private
+   * @template D - Tipo de los datos
+   * @param config - Configuración del panel
+   * @param overlayRef - Referencia al overlay de CDK
+   * @param panelRef - Referencia al panel (puede ser null durante la creación inicial)
+   * @param actionsService - Instancia compartida del servicio de acciones
+   * @returns Injector configurado
+   */
+  private _isConfig(value: any): value is SidebarPanelConfig {
+    return value && typeof value === 'object' && !value.prototype && 
+           (value.htmlContent !== undefined || 
+            value.contentTemplate !== undefined ||
+            value.title !== undefined ||
+            value.position !== undefined);
+  }
+
+  /**
+   * Crea el injector necesario para el panel y sus componentes
    * 
    * @private
    * @template D - Tipo de los datos
