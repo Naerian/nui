@@ -1,0 +1,45 @@
+@use '../../styles/config' as config;
+
+// ========================================
+// BUTTON - Variables & Tokens
+// ========================================
+
+// TOKENS
+$button-gap: 0.5rem !default;
+$button-spin-duration: 1s !default;
+$button-transition:
+  background-color 0.2s ease,
+  border-color 0.2s ease,
+  color 0.2s ease,
+  box-shadow 0.2s ease !default;
+$button-focus-width: 2px !default;
+$button-focus-offset: 2px !default;
+
+// MIXINS
+@mixin nui-button-vars {
+  // Structure
+  --nui-button-gap: #{$button-gap};
+  --nui-button-spin-duration: #{$button-spin-duration};
+  --nui-button-transition: #{$button-transition};
+
+  // Focus
+  --nui-button-focus-width: #{$button-focus-width};
+  --nui-button-focus-offset: #{$button-focus-offset};
+
+  // Border-radius
+  --nui-button-radius-xs: var(--nui-border-radius-xs);
+  --nui-button-radius-sm: var(--nui-border-radius-sm);
+  --nui-button-radius-md: var(--nui-border-radius-md);
+  --nui-button-radius-lg: var(--nui-border-radius-lg);
+  --nui-button-radius-xl: var(--nui-border-radius-xl);
+
+  // Border width
+  --nui-button-border-width: var(--nui-border-width-xs);
+
+  // Font weight
+  --nui-button-font-weight: var(--nui-font-weight-semibold);
+
+  // Transition
+  --nui-button-transition: var(--nui-transition-duration-normal)
+    var(--nui-transition-timing-function-ease);
+}

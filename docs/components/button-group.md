@@ -773,7 +773,7 @@ describe('ButtonGroup Accessibility', () => {
   
   // Bordes
   --btn-group-border-width: 1px;
-  --border-radius-md: 0.375rem;
+  --nui-border-radius-md: 0.375rem;
 }
 ```
 

@@ -839,13 +839,13 @@ export interface SidebarPanelEvents {
   --nui-sidebar-panel-overlay-bg: var(--nui-overlay-bg);
   
   /* Header */
-  --nui-sidebar-panel-header-padding: var(--spacing-md);
+  --nui-sidebar-panel-header-padding: var(--nui-spacing-md);
   --nui-sidebar-panel-header-bg: var(--nui-bg-secondary);
-  --nui-sidebar-panel-title-size: var(--font-size-md);
-  --nui-sidebar-panel-title-weight: var(--font-weight-semibold);
+  --nui-sidebar-panel-title-size: var(--nui-font-size-md);
+  --nui-sidebar-panel-title-weight: var(--nui-font-weight-semibold);
   
   /* Content */
-  --nui-sidebar-panel-content-padding: var(--spacing-md);
+  --nui-sidebar-panel-content-padding: var(--nui-spacing-md);
   
   /* Predefined sizes */
   --nui-sidebar-panel-size-xs: 300px;

@@ -6,7 +6,7 @@
   position: fixed;
   z-index: 999; // Justo debajo del overlay del sidebar-panel (1000)
   display: flex;
-  gap: var(--spacing-xs);
+  gap: var(--nui-spacing-xs);
   pointer-events: auto;
 }
 
@@ -49,19 +49,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-sm);
+  padding: var(--nui-spacing-sm);
   background: var(--nui-sidebar-panel-header-bg, var(--nui-bg-secondary));
   border: 1px solid var(--nui-sidebar-panel-border, var(--nui-border-primary));
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: var(--box-shadow-sm);
+  box-shadow: var(--nui-box-shadow--sm);
   font-family: inherit;
   opacity: 0.8;
 
   &:hover {
     opacity: 1;
     background: var(--nui-bg-tertiary);
-    box-shadow: var(--box-shadow-md);
+    box-shadow: var(--nui-box-shadow--md);
   }
 
   &:focus-visible {
@@ -80,9 +80,9 @@
 
   // Soporte para label personalizado
   .sidebar-panel-tab-label {
-    margin-left: var(--spacing-xs);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
+    margin-left: var(--nui-spacing-xs);
+    font-size: var(--nui-font-size-sm);
+    font-weight: var(--nui-font-weight-medium);
     color: var(--nui-text-primary);
     white-space: nowrap;
   }
@@ -96,7 +96,7 @@
   height: 2.5rem;
 
   i {
-    font-size: var(--font-size-sm);
+    font-size: var(--nui-font-size-sm);
   }
 }
 
@@ -116,22 +116,22 @@
  * Bordes redondeados segÃºn posiciÃ³n
  */
 .sidebar-panel-tabs-right .sidebar-panel-tab-button {
-  border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
+  border-radius: var(--nui-border-radius-md) 0 0 var(--nui-border-radius-md);
   border-right: none;
 }
 
 .sidebar-panel-tabs-left .sidebar-panel-tab-button {
-  border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+  border-radius: 0 var(--nui-border-radius-md) var(--nui-border-radius-md) 0;
   border-left: none;
 }
 
 .sidebar-panel-tabs-top .sidebar-panel-tab-button {
-  border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+  border-radius: 0 0 var(--nui-border-radius-md) var(--nui-border-radius-md);
   border-top: none;
 }
 
 .sidebar-panel-tabs-bottom .sidebar-panel-tab-button {
-  border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+  border-radius: var(--nui-border-radius-md) var(--nui-border-radius-md) 0 0;
   border-bottom: none;
 }
 
@@ -156,7 +156,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-xs);
+  gap: var(--nui-spacing-xs);
   
   // Sin posicionamiento por defecto - lo controla cssClass
   // Sin dimensiones fijas - automático según contenido

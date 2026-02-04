@@ -6,7 +6,7 @@
   [class.nui-btn--md]="effectiveSize() === 'md'"
   [class.nui-btn--lg]="effectiveSize() === 'lg'"
   [class.nui-btn--xl]="effectiveSize() === 'xl'"
-  class="nui-btn--{{ effectiveColor() }}"
+  [class]="'nui-btn nui-btn--' + effectiveColor()"
   [class.nui-btn--solid]="effectiveVariant() === 'solid'"
   [class.nui-btn--outline]="effectiveVariant() === 'outline'"
   [class.nui-btn--ghost]="effectiveVariant() === 'ghost'"
@@ -23,18 +23,16 @@
   (click)="handleClick($event)"
 >
   @if (loading() && loadingPosition() === 'start') {
-    <span class="nui-btn__spinner nui-btn__spinner--start" aria-hidden="true">
-      <i class="ri-loader-4-line"></i>
-    </span>
+    <span class="nui-btn__spinner nui-btn__spinner--start" aria-hidden="true"></span>
   }
-  @if (icon() && iconPosition() === 'start' && (!loading() || loadingPosition() !== 'start')) {
+
+  @if (icon() && iconPosition() === 'start' && !loading()) {
     <i [class]="icon()" class="nui-btn__icon nui-btn__icon--start" aria-hidden="true"></i>
   }
 
   <span
     class="nui-btn__content"
     [class.nui-btn__content--hidden]="loading() && loadingPosition() === 'center'"
-    [class.nui-btn__content--empty]="!hasVisibleContent()"
   >
     <ng-content></ng-content>
     @if (label()) {
@@ -43,16 +41,12 @@
   </span>
 
   @if (loading() && loadingPosition() === 'center') {
-    <span class="nui-btn__spinner nui-btn__spinner--center" aria-hidden="true">
-      <i class="ri-loader-4-line"></i>
-    </span>
+    <span class="nui-btn__spinner nui-btn__spinner--center" aria-hidden="true"></span>
   }
-  @if (icon() && iconPosition() === 'end' && (!loading() || loadingPosition() !== 'end')) {
+  @if (icon() && iconPosition() === 'end' && !loading()) {
     <i [class]="icon()" class="nui-btn__icon nui-btn__icon--end" aria-hidden="true"></i>
   }
   @if (loading() && loadingPosition() === 'end') {
-    <span class="nui-btn__spinner nui-btn__spinner--end" aria-hidden="true">
-      <i class="ri-loader-4-line"></i>
-    </span>
+    <span class="nui-btn__spinner nui-btn__spinner--end" aria-hidden="true"></span>
   }
 </button>

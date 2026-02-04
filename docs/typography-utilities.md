@@ -438,11 +438,11 @@ html,
 
 ### **Antes** (67 líneas)
 ```scss
-html, :host { font-family: var(--font-family); }
-h1, h2, h3, h4, h5, h6 { font-family: var(--font-family); }
-small { font-family: var(--font-family); }
-p { font-family: var(--font-family); }
-a { font-family: var(--font-family); }
+html, :host { font-family: var(--nui-font-family); }
+h1, h2, h3, h4, h5, h6 { font-family: var(--nui-font-family); }
+small { font-family: var(--nui-font-family); }
+p { font-family: var(--nui-font-family); }
+a { font-family: var(--nui-font-family); }
 ```
 ❌ **5 repeticiones de font-family**
 
@@ -450,7 +450,7 @@ a { font-family: var(--font-family); }
 ```scss
 html,
 :host {
-  font-family: var(--font-family);
+  font-family: var(--nui-font-family);
   // Mejoras de renderizado
 }
 

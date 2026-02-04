@@ -22,11 +22,11 @@
 // ========================================
 
 // ===== TAMAÑOS =====
-$avatar-size-xs: 24px !default;
-$avatar-size-sm: 32px !default;
-$avatar-size-md: 40px !default;
-$avatar-size-lg: 56px !default;
-$avatar-size-xl: 80px !default;
+$avatar-size-xs: 1.5rem !default; // 24px
+$avatar-size-sm: 2rem !default; // 32px
+$avatar-size-md: 2.5rem !default; // 40px
+$avatar-size-lg: 3.5rem !default; // 56px
+$avatar-size-xl: 5rem !default; // 80px
 
 // ===== FONT SIZES POR TAMAÑO =====
 $avatar-font-size-xs: 0.625rem !default; // 10px
@@ -36,14 +36,13 @@ $avatar-font-size-lg: 1.25rem !default; // 20px
 $avatar-font-size-xl: 1.5rem !default; // 24px
 
 // ===== ICON SIZES POR TAMAÑO =====
-$avatar-icon-size-xs: 14px !default;
-$avatar-icon-size-sm: 16px !default;
-$avatar-icon-size-md: 20px !default;
-$avatar-icon-size-lg: 28px !default;
-$avatar-icon-size-xl: 40px !default;
-
+$avatar-icon-size-xs: 0.875rem !default; // 14px
+$avatar-icon-size-sm: 1rem !default; // 16px
+$avatar-icon-size-md: 1.25rem !default; // 20px
+$avatar-icon-size-lg: 1.75rem !default; // 28px
+$avatar-icon-size-xl: 2.5rem !default; // 40px
 // ===== BORDES Y RADIOS =====
-$avatar-border-radius-rounded: 8px !default;
+$avatar-border-radius-rounded: 0.5rem !default;
 $avatar-border-radius-circular: 50% !default;
 $avatar-border-radius-square: 0 !default;
 
@@ -53,8 +52,8 @@ $avatar-line-height: 1 !default;
 $avatar-text-transform: uppercase !default;
 
 // ===== AVATAR GROUP =====
-$avatar-group-spacing: -8px !default;
-$avatar-group-border-width: 2px !default;
+$avatar-group-spacing: -0.5rem !default;
+$avatar-group-border-width: 0.063rem !default;
 $avatar-group-hover-scale: 1.1 !default;
 $avatar-group-z-index-hover: 10 !default;
 

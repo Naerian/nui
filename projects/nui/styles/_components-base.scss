@@ -1,0 +1,41 @@
+@use 'config';
+@use 'sass:map';
+
+// ========================================
+// COMPONENT SIZE MIXINS
+// ========================================
+
+/// Applies size properties to components
+@mixin component-size($size) {
+  height: var(--nui-height-#{$size}, #{map.get(config.$heights, $size)});
+  min-height: var(--nui-height-#{$size}, #{map.get(config.$heights, $size)});
+  padding: var(--nui-padding-#{$size}, #{map.get(config.$paddings, $size)});
+  font-size: var(--nui-font-size-#{$size}, #{map.get(config.$font-sizes, $size)});
+  line-height: var(--nui-line-height-md); // Fixed line-height for all component sizes
+}
+
+/// Sets padding according to component size
+@mixin component-textarea-size($size) {
+  padding: var(--nui-padding-#{$size}, #{map.get(config.$paddings, $size)});
+  font-size: var(--nui-font-size-#{$size}, #{map.get(config.$font-sizes, $size)});
+}
+
+/// Sets font-size according to component size
+@mixin component-font-size($size) {
+  font-size: var(--nui-font-size-#{$size}, #{map.get(config.$font-sizes, $size)});
+}
+
+/// Sets line-height according to component size
+@mixin component-line-height($size) {
+  line-height: var(--nui-line-height-#{$size}, #{map.get(config.$line-heights, $size)});
+}
+
+/// Sets icon size properties within components
+/// Increases font-size and line-height slightly for icons}
+@mixin component-icon-size($size) {
+  height: var(--nui-height-#{$size}, #{map.get(config.$heights, $size)});
+  min-height: var(--nui-height-#{$size}, #{map.get(config.$heights, $size)});
+  padding: var(--nui-padding-#{$size}, #{map.get(config.$paddings, $size)});
+  font-size: calc(var(--nui-font-size-#{$size}, #{map.get(config.$font-sizes, $size)}) * 1.2);
+  line-height: calc(var(--nui-font-size-#{$size}, #{map.get(config.$font-sizes, $size)}) * 1.2);
+}

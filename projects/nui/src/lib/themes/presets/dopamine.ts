@@ -4,22 +4,22 @@ export const dopamine: ThemePreset = {
   name: 'dopamine',
   colors: {
     light: {
-      primary: '#84cc16',
-      secondary: '#ec4899',
-      accent: '#f59e0b',
-      success: '#22c55e',
-      info: '#3b82f6',
-      warning: '#eab308',
-      danger: '#ef4444',
+      primary: '#65a30d',
+      secondary: '#db2777',
+      accent: '#d97706',
+      success: '#16a34a',
+      info: '#2563eb',
+      warning: '#ca8a04',
+      danger: '#dc2626',
     },
     dark: {
-      primary: '#a3e635',
-      secondary: '#f472b6',
-      accent: '#fbbf24',
-      success: '#4ade80',
-      info: '#60a5fa',
-      warning: '#facc15',
-      danger: '#f87171',
-    }
-  }
+      primary: '#4d7c0f',
+      secondary: '#9d174d',
+      accent: '#b45309',
+      success: '#15803d',
+      info: '#156eed',
+      warning: '#b36d08',
+      danger: '#972323',
+    },
+  },
 };

@@ -321,9 +321,9 @@ export class ExampleComponent {
   /* Tooltip container */
   --nui-tooltip-bg: var(--nui-bg-inverse);
   --nui-tooltip-text: var(--nui-text-inverse);
-  --nui-tooltip-border-radius: var(--border-radius-sm);
-  --nui-tooltip-padding: var(--spacing-xs) var(--spacing-sm);
-  --nui-tooltip-font-size: var(--font-size-xs);
+  --nui-tooltip-border-radius: var(--nui-border-radius-sm);
+  --nui-tooltip-padding: var(--nui-spacing-xs) var(--nui-spacing-sm);
+  --nui-tooltip-font-size: var(--nui-font-size-xs);
   --nui-tooltip-line-height: 1.4;
   --nui-tooltip-max-width: 200px;
   --nui-tooltip-shadow: var(--nui-shadow-md);
@@ -366,10 +366,10 @@ export class ExampleComponent {
 
 // Example of a large tooltip
 .large-tooltip {
-  --nui-tooltip-padding: var(--spacing-sm) var(--spacing-md);
-  --nui-tooltip-font-size: var(--font-size-sm);
+  --nui-tooltip-padding: var(--nui-spacing-sm) var(--nui-spacing-md);
+  --nui-tooltip-font-size: var(--nui-font-size-sm);
   --nui-tooltip-max-width: 400px;
-  --nui-tooltip-border-radius: var(--border-radius-md);
+  --nui-tooltip-border-radius: var(--nui-border-radius-md);
 }
 
 // Example with custom animation

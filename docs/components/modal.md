@@ -897,13 +897,13 @@ Usa: https://webaim.org/resources/contrastchecker/
 --text-secondary: #64748b; /* Texto secundario */
 
 /* Spacing */
---spacing-md: 1.2rem; /* Padding general */
---spacing-xs: 0.625rem; /* Gap entre elementos */
---spacing-2xs: 0.25rem; /* Padding bot�n close */
+--nui-spacing-md: 1.2rem; /* Padding general */
+--nui-spacing-xs: 0.625rem; /* Gap entre elementos */
+--nui-spacing-2xs: 0.25rem; /* Padding bot�n close */
 
 /* Border Radius */
---border-radius-md: 0.5rem; /* Modal box */
---border-radius-sm: 0.25rem; /* Bot�n close */
+--nui-border-radius-md: 0.5rem; /* Modal box */
+--nui-border-radius-sm: 0.25rem; /* Bot�n close */
 
 /* Focus */
 --color-focus-ring: #0d9488; /* Outline de focus */
@@ -927,7 +927,7 @@ Sobrescribe variables en tu tema:
   --modal-backdrop-color: rgba(255, 0, 0, 0.3); // Backdrop rojo
   
   // Bordes
-  --border-radius-md: 16px; // Bordes m�s redondeados
+  --nui-border-radius-md: 16px; // Bordes m�s redondeados
 }
 ```
 

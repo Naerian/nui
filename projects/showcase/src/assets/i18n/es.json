@@ -21,7 +21,6 @@
     "popover": "Popover",
     "toast": "Toast",
     "tooltip": "Tooltip",
-    "slidepanel": "Slidepanel",
     "sidebarPanel": "Sidebar Panel",
     "actionMenu": "Menú de Acciones"
   },
@@ -33,6 +32,7 @@
     "corporate": "Corporativo",
     "minimal": "Minimalista",
     "sunset": "Atardecer",
+    "twilight": "Crepúsculo",
     "ocean": "Océano"
   },
   "footer": {
@@ -123,6 +123,7 @@
         "corporate": "Paleta azul profesional, perfecta para aplicaciones empresariales",
         "minimal": "Paleta minimalista refinada con colores sutiles y acento púrpura elegante",
         "sunset": "Paleta cálida y vibrante con tonos rosa, naranja y coral, perfecta para apps creativas",
+        "twilight": "Paleta suave y relajante con tonos lavanda y azul grisáceo, ideal para bienestar",
         "ocean": "Paleta tranquila y profesional con azules profundos y tonos aqua, ideal para productividad"
       }
     }
@@ -153,7 +154,7 @@
       "loading": {
         "title": "Estado de carga",
         "description": "Muestra un spinner de carga en tres posiciones: inicio, final o centro (que reemplaza el contenido).",
-        "note": "Posiciones de carga: <code>'start'</code> muestra el spinner antes del texto, <code>'end'</code> lo muestra después, <code>'center'</code> reemplaza completamente el contenido con un spinner centrado."
+        "note": "Posiciones de carga: <code>'start'</code> muestra el spinner antes del texto, <code>'end'</code> lo muestra después, <code>'center'</code> reemplaza completamente el contenido con un spinner centrado. Si el botón solo contiene un <code>icon</code> el contenido también se susitituye por el spinner mientras esté cargando."
       },
       "width": {
         "title": "Ancho",
@@ -282,6 +283,11 @@
         "title": "Tamaño personalizado",
         "description": "Define dimensiones exactas en píxeles cuando los tamaños estándar no encajen. El tamaño de la fuente y los iconos se calcula proporcionalmente de forma automática.",
         "note": "El input <code>customSize</code> anula el input <code>size</code>. El cálculo interno mantiene la legibilidad de las iniciales."
+      },
+      "grouped": {
+        "title": "Avatares agrupados",
+        "description": "Muestra múltiples avatares en un solo componente con solapamiento y límite de visualización.",
+        "note": "Usa el componente <code>nui-avatar-group</code> para agrupar varios avatares. Controla el número máximo visible con <code>max</code>. Los avatares adicionales se representan como un contador '+X'."
       },
       "error": {
         "title": "Manejo de errores (Fallback)",

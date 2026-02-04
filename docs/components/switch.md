@@ -1210,7 +1210,7 @@ El switch usa variables del sistema de diseño en `_theme.scss`:
 --switch-thumb-bg: var(--field-bg);
 --switch-button-inactive-bg: var(--nui-bg-secondary);
 --switch-button-inactive-text: var(--text-secondary);
---switch-button-inactive-border: var(--border-primary);
+--switch-button-inactive-border: var(--nui-border-primary);
 --switch-button-inactive-hover-bg: var(--nui-bg-tertiary);
 ```
 

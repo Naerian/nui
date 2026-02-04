@@ -21,7 +21,6 @@
     "popover": "Popover",
     "toast": "Toast",
     "tooltip": "Tooltip",
-    "slidepanel": "Slidepanel",
     "sidebarPanel": "Sidebar Panel",
     "actionMenu": "Action Menu"
   },
@@ -33,6 +32,7 @@
     "corporate": "Corporate",
     "minimal": "Minimal",
     "sunset": "Sunset",
+    "twilight": "Twilight",
     "ocean": "Ocean"
   },
   "footer": {
@@ -153,7 +153,7 @@
       "loading": {
         "title": "Loading state",
         "description": "Shows a loading spinner in three positions: start, end or center (which replaces the content).",
-        "note": "Loading positions: <code>'start'</code> shows the spinner before the text, <code>'end'</code> shows it after, <code>'center'</code> completely replaces the content with a centered spinner."
+        "note": "Loading positions: <code>'start'</code> shows the spinner before the text, <code>'end'</code> shows it after, <code>'center'</code> completely replaces the content with a centered spinner. If the button only contains an <code>icon</code> the content is also replaced by the spinner while loading."
       },
       "width": {
         "title": "Width",
@@ -282,6 +282,11 @@
         "title": "Custom size",
         "description": "Define exact dimensions in pixels when standard sizes don't fit. Font size and icons are calculated proportionally automatically.",
         "note": "The <code>customSize</code> input overrides the <code>size</code> input. The internal calculation maintains the legibility of initials."
+      },
+      "grouped": {
+        "title": "Grouped avatars",
+        "description": "Display multiple avatars in a single component with overlapping and display limit.",
+        "note": "Use the <code>nui-avatar-group</code> component to group multiple avatars. Control the maximum visible number with <code>max</code>. Additional avatars are rendered as a '+X' counter."
       },
       "error": {
         "title": "Error handling (Fallback)",

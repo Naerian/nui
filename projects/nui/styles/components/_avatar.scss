@@ -1,0 +1,238 @@
+@use '../variables/avatar/avatar-variables';
+
+// ============================================================================
+// AVATAR BASE STYLES (global - ViewEncapsulation.None)
+// ============================================================================
+
+.nui-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  vertical-align: middle;
+  flex-shrink: 0; // Evita que se aplaste en flex containers
+  overflow: hidden;
+  user-select: none;
+  background-color: var(--nui-avatar-default-bg);
+  color: var(--nui-avatar-default-color);
+  font-weight: var(--nui-avatar-font-weight);
+  line-height: 1; // Base sólida para evitar saltos
+  transition: var(--nui-avatar-transition);
+
+  // ===== VARIANTES DE FORMA =====
+  $variants: rounded, circular, square;
+  @each $variant in $variants {
+    &--#{$variant} {
+      border-radius: var(--nui-avatar-border-radius-#{$variant});
+    }
+  }
+
+  // ===== TAMAÑOS (Standard) =====
+  $sizes: xs, sm, md, lg, xl;
+  @each $size in $sizes {
+    &--#{$size} {
+      width: var(--nui-avatar-size-#{$size});
+      height: var(--nui-avatar-size-#{$size});
+      font-size: var(--nui-avatar-font-size-#{$size});
+
+      .nui-avatar__icon {
+        font-size: var(--nui-avatar-icon-size-#{$size});
+      }
+    }
+  }
+
+  // ===== COLORES =====
+  $colors: primary, secondary, success, info, warning, danger, accent;
+  @each $color in $colors {
+    &--#{$color} {
+      background-color: var(--nui-avatar-#{$color}-bg);
+      color: var(--nui-avatar-#{$color}-color);
+    }
+  }
+
+  // ===== ESTRUCTURA INTERNA =====
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__text {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+  }
+
+  // ===== BADGE (Status Dot) =====
+
+  &__badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: var(--nui-avatar-badge-default-bg);
+    border: var(--nui-avatar-badge-border-width) solid var(--nui-avatar-badge-border-color);
+    border-radius: 50%;
+    z-index: var(--nui-avatar-badge-z-index);
+
+    // Variantes de posición
+    &--top-left {
+      top: 0;
+      left: 0;
+    }
+    &--top-right {
+      top: 0;
+      right: 0;
+    }
+    &--bottom-left {
+      bottom: 0;
+      left: 0;
+    }
+    &--bottom-right {
+      bottom: 0;
+      right: 0;
+    }
+
+    // Variantes de tamaño
+    $badge-sizes: xs, sm, md, lg, xl;
+    @each $size in $badge-sizes {
+      &--#{$size} {
+        width: var(--nui-avatar-badge-size-#{$size});
+        height: var(--nui-avatar-badge-size-#{$size});
+      }
+    }
+
+    // Variantes de color
+    $badge-colors: success, warning, danger, info, primary, secondary, accent;
+    @each $color in $badge-colors {
+      &--#{$color} {
+        background-color: var(--nui-avatar-badge-#{$color}-bg);
+      }
+    }
+  }
+
+  // ===== ESTADOS =====
+
+  &--clickable {
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(var(--nui-avatar-hover-scale));
+    }
+  }
+}
+
+// ============================================================================
+// AVATAR GROUP BASE STYLES (global - ViewEncapsulation.None)
+// ============================================================================
+
+.nui-avatar-group {
+  &__list {
+    display: flex;
+    align-items: center;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  // ===== AVATARES INDIVIDUALES =====
+
+  &__avatar {
+    position: relative;
+    transition: var(--nui-avatar-transition);
+    z-index: var(--nui-avatar-z-index-base, 0);
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:hover {
+      z-index: var(--nui-avatar-group-z-index-hover);
+      transform: scale(var(--nui-avatar-group-hover-scale));
+    }
+  }
+
+  // ===== INDICADOR DE EXCEDENTE "+N" =====
+
+  &__excess {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+    user-select: none;
+    background-color: var(--nui-avatar-excess-bg);
+    color: var(--nui-avatar-excess-color);
+    font-weight: var(--nui-avatar-excess-font-weight);
+    cursor: default;
+    transition: var(--nui-avatar-transition);
+    z-index: var(--nui-avatar-z-index-base);
+    line-height: 1.5;
+
+    &:hover {
+      z-index: var(--nui-avatar-group-z-index-hover);
+      transform: scale(var(--nui-avatar-group-hover-scale));
+      background-color: var(--nui-avatar-excess-hover-bg);
+    }
+
+    // Tamaños para excedente
+    @each $size-key in (xs, s, sm, md, lg, xl) {
+      &--#{$size-key} {
+        width: var(--nui-avatar-excess-size-#{$size-key});
+        height: var(--nui-avatar-excess-size-#{$size-key});
+        font-size: var(--nui-avatar-excess-font-size-#{$size-key});
+        font-weight: var(--nui-avatar-excess-font-weight);
+      }
+    }
+  }
+
+  &__list--stacked {
+    flex-direction: column;
+    .nui-avatar-group__avatar,
+    .nui-avatar-group__excess {
+      margin-left: 0;
+      margin-top: var(--nui-avatar-group-spacing);
+    }
+  }
+
+  &__list--inline {
+    .nui-avatar-group__avatar,
+    .nui-avatar-group__excess {
+      margin-left: var(--nui-avatar-group-spacing);
+      margin-top: 0;
+    }
+  }
+
+  // Variantes de forma para excedente
+
+  &__excess--circular {
+    border-radius: var(--nui-avatar-border-radius-circular);
+  }
+
+  &__excess--rounded {
+    border-radius: var(--nui-avatar-border-radius-rounded);
+  }
+
+  &__excess--square {
+    border-radius: var(--nui-avatar-border-radius-square);
+  }
+
+  // ===== BORDES =====
+
+  &--bordered {
+    .nui-avatar-group__avatar,
+    .nui-avatar-group__excess {
+      border: var(--nui-avatar-group-border-width) solid
+        var(--nui-avatar-group-border-color);
+      box-shadow: 0 0 0 1px var(--nui-avatar-group-border-color);
+    }
+  }
+}

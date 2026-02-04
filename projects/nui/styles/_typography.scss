@@ -1,14 +1,15 @@
-@use "mixins";
-@use "theme-config";
+@use 'mixins';
+@use 'global-tokens';
 
 // ========================================
 // BASE TYPOGRAPHY
 // ========================================
 
 html,
-:host {
-  font-family: var(--font-family);
-  // Mejora la calidad de renderizado de texto
+body {
+  font-family: var(--nui-font-family);
+
+  // Improve text rendering quality
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -18,38 +19,22 @@ html,
 // HEADINGS
 // ========================================
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: 0;
-  margin-bottom: var(--spacing-md);
-  line-height: 1.2;
-  color: var(--nui-text-primary-heading);
-}
-
+// Apply heading-specific font size, line-height, and weight via mixins
 h1 {
   @include mixins.heading(h1);
 }
-
 h2 {
   @include mixins.heading(h2);
 }
-
 h3 {
   @include mixins.heading(h3);
 }
-
 h4 {
   @include mixins.heading(h4);
 }
-
 h5 {
   @include mixins.heading(h5);
 }
-
 h6 {
   @include mixins.heading(h6);
 }
@@ -59,13 +44,13 @@ h6 {
 // ========================================
 
 small {
-  font-size: var(--font-size-s); // 12px
-  color: var(--nui-text-primary-muted);
+  font-size: var(--nui-font-size-s); // Small text
+  color: var(--nui-text-tertiary);
 }
 
 p {
   margin-top: 0;
-  margin-bottom: var(--spacing-s);
+  margin-bottom: var(--nui-spacing-s); // Space between paragraphs
 }
 
 a {
@@ -76,13 +61,9 @@ a {
     text-decoration 0.2s ease;
 
   &:hover {
-    text-decoration: underline;
+    text-decoration: underline; // Visual feedback on hover
   }
 
-  // Accesibilidad: focus visible para navegación por teclado
-  &:focus-visible {
-    outline: 2px solid var(--nui-focus-ring-color);
-    outline-offset: 2px;
-    border-radius: 2px;
-  }
+  // Accessibility: visible focus ring for keyboard navigation
+  @include mixins.focus-ring;
 }

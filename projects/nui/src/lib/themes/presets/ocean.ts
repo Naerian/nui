@@ -8,22 +8,22 @@ export const ocean: ThemePreset = {
   name: 'ocean',
   colors: {
     light: {
-      primary: '#0077be',      // Deep ocean blue
-      secondary: '#4a90a4',    // Slate blue
-      accent: '#00bcd4',       // Cyan
-      success: '#26a69a',      // Teal
-      info: '#039be5',         // Light blue
-      warning: '#ffa726',      // Amber
-      danger: '#ef5350',       // Red
+      primary: '#0077be', 
+      secondary: '#4a90a4',
+      accent: '#5ca5af',
+      success: '#26a69a',
+      info: '#039be5', 
+      warning: '#ef9050',
+      danger: '#ef5350',
     },
     dark: {
-      primary: '#29b6f6',      // Light ocean blue
-      secondary: '#78909c',    // Blue grey
-      accent: '#4dd0e1',       // Light cyan
-      success: '#4db6ac',      // Light teal
-      info: '#42a5f5',         // Sky blue
-      warning: '#ffb74d',      // Light amber
-      danger: '#ff5252',       // Light red
+      primary: '#00a4ff',
+      secondary: '#78909c',
+      accent: '#3fb5c5',
+      success: '#4db6ac',
+      info: '#42a5f5',
+      warning: '#ff8852',
+      danger: '#ff5252',
     }
   }
 };

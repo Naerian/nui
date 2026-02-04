@@ -537,9 +537,9 @@ export class ExampleComponent {
   --nui-popover-bg: var(--nui-bg-primary);
   --nui-popover-text: var(--nui-text-primary);
   --nui-popover-border: var(--nui-border-primary);
-  --nui-popover-border-radius: var(--border-radius-md);
+  --nui-popover-border-radius: var(--nui-border-radius-md);
   --nui-popover-shadow: var(--nui-shadow-lg);
-  --nui-popover-padding: var(--spacing-md);
+  --nui-popover-padding: var(--nui-spacing-md);
   --nui-popover-max-width: 300px;
   --nui-popover-min-width: 100px;
   

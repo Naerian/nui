@@ -942,19 +942,19 @@ El componente usa CSS custom properties del theme:
 
 ```scss
 // Variables de espaciado
---spacing-xs, --spacing-s, --spacing-sm, --spacing-md, --spacing-lg, --spacing-xl
+--nui-spacing-xs, --nui-spacing-s, --nui-spacing-sm, --nui-spacing-md, --nui-spacing-lg, --nui-spacing-xl
 
 // Variables de borde
---border-width-xs, --border-width-s
---border-radius-sm, --border-radius-md, --border-radius-pill
+--nui-border-width-xs, --nui-border-width-s
+--nui-border-radius-sm, --nui-border-radius-md, --nui-border-radius-pill
 
 // Variables de tipografía
---font-size-xs, --font-size-sm, --font-size-md, --font-size-lg
---font-weight-medium, --font-weight-semibold
+--nui-font-size-xs, --nui-font-size-sm, --nui-font-size-md, --nui-font-size-lg
+--nui-font-weight-medium, --nui-font-weight-semibold
 
 // Variables de transición
---transition-duration-normal
---transition-timing-function
+--nui-transition-duration-normal
+--nui-transition-timing-function
 
 // Variables generadas por color y variante
 --tabs-{color}-{variant}-active-bg

@@ -1,105 +1,235 @@
-@use "../config";
+@use '../mixins' as global;
+@use '../components-base' as base;
+@use '../variables/action-menu-vars' as vars;
 
-// ============================================================================
-// Estilos globales para action-menu por color
-// ============================================================================
-// Estos estilos se aplican a los action-menu según su color.
-// Generan clases .nui-action-menu--{color} que usan las variables
-// generadas dinámicamente por ThemeService.
-// ============================================================================
+@mixin nui-action-menu-styles {
+  .nui-action-menu,
+  .nui-action-menu-submenu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: var(--nui-action-menu-min-width);
+    max-width: var(--nui-action-menu-max-width);
+    border: var(--nui-action-menu-border-width) solid var(--nui-action-menu-border-color);
+    background-color: var(--nui-action-menu-bg);
+    border-radius: var(--nui-action-menu-border-radius);
+    padding: var(--nui-action-menu-padding);
+    box-shadow: var(--nui-action-menu-shadow);
+    gap: var(--nui-action-menu-padding);
+    list-style: none;
+    margin: 0;
+    transition: var(--nui-action-menu-transition);
 
-$colors: primary, secondary, success, info, warning, danger, accent;
+    &--fullWidth {
+      width: 100%;
+    }
 
-// Estilos base para el indicador de hijo seleccionado (funciona sin clase de color)
-.nui-action-menu__item--has-selected,
-.nui-action-menu-submenu__item--has-selected {
-  // Agregamos un punto sutil después de la flecha del submenu
-  .nui-action-menu__item__arrow::after {
-    content: "";
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: var(--nui-color-primary);
-    margin-left: 8px;
-    opacity: 0.8;
-  }
-}
+    &--static {
+      box-shadow: var(--nui-action-menu-static-shadow);
+      animation: none !important;
+      transform: none !important;
+      transition: none !important;
+      position: relative;
+      display: flex;
+    }
 
-@each $color in $colors {
-  .nui-action-menu--#{$color},
-  .nui-action-menu-submenu--#{$color} {
-    // El borde usa el mismo color que el hover background para coherencia visual
-    border-color: var(--nui-action-menu-#{$color}-item-hover-bg);
+    $colors: primary, secondary, success, info, warning, danger, accent;
+    @each $color in $colors {
+      &--#{$color} {
+        @include action-menu-theme($color);
+        border-color: var(--nui-action-menu-item-hover-bg);
+      }
+    }
 
-    .nui-action-menu__item,
-    .nui-action-menu-submenu__item {
+    &__start,
+    &__end {
+      width: 100%;
+      padding: var(--nui-action-menu-padding);
+      &:empty {
+        display: none;
+      }
+    }
+
+    &__start:not(:empty) {
+      margin-bottom: var(--nui-action-menu-padding);
+      border-bottom: 1px solid var(--nui-action-menu-separator-color);
+      padding-bottom: calc(var(--nui-action-menu-padding) * 2);
+    }
+
+    &__end:not(:empty) {
+      margin-top: var(--nui-action-menu-padding);
+      border-top: 1px solid var(--nui-action-menu-separator-color);
+      padding-top: calc(var(--nui-action-menu-padding) * 2);
+    }
+
+    &__separator {
+      width: 100%;
+      height: 1px;
+      background-color: var(--nui-action-menu-separator-color);
+      margin: var(--nui-action-menu-separator-padding);
+
+      &--labeled {
+        height: auto;
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        gap: var(--nui-action-menu-separator-label-spacing);
+        &::before,
+        &::after {
+          content: '';
+          flex: 1;
+          height: 1px;
+          background-color: var(--nui-action-menu-separator-color);
+        }
+      }
+
+      &__label {
+        font-size: var(--nui-action-menu-separator-font-size);
+        font-weight: var(--nui-action-menu-separator-font-weight);
+        color: var(--nui-action-menu-separator-label-color);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+    }
+
+    &__item {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      overflow: hidden;
+      background-color: var(--nui-action-menu-item-bg);
+      border: var(--nui-action-menu-item-border);
+      color: var(--nui-action-menu-item-color);
+      border-radius: var(--nui-action-menu-item-border-radius);
+      padding: var(--nui-action-menu-item-padding-y) var(--nui-action-menu-item-padding-x);
+      gap: var(--nui-action-menu-item-gap);
+      user-select: none;
+      cursor: pointer;
+      outline: none;
+
+      &__container {
+        display: flex;
+        align-items: center;
+        gap: var(--nui-action-menu-item-gap);
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+
+      &__text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        flex: 1;
+        min-width: 0;
+      }
+
+      &__label {
+        font-weight: var(--nui-action-menu-item-label-weight);
+        font-size: var(--nui-action-menu-item-label-font-size);
+        @include global.text-truncate;
+      }
+
+      &__subtitle {
+        font-size: var(--nui-action-menu-item-subtitle-font-size);
+        color: var(--nui-action-menu-item-subtitle-color);
+        @include global.text-truncate;
+      }
+
+      &__icon {
+        font-size: 1.1em;
+        flex-shrink: 0;
+      }
+
       &__check {
-        color: var(--nui-action-menu-#{$color}-item-check-color);
+        font-size: 1.25em;
+        flex-shrink: 0;
+        margin-left: auto;
+        color: var(--nui-action-menu-item-check-color);
+      }
+
+      &__shortcut {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--nui-action-menu-shortcut-bg);
+        color: var(--nui-action-menu-shortcut-color);
+        padding: var(--nui-action-menu-shortcut-padding);
+        border-radius: var(--nui-action-menu-shortcut-border-radius);
+        border: var(--nui-action-menu-shortcut-border-width) solid
+          var(--nui-action-menu-shortcut-border-color);
+        font-size: var(--nui-action-menu-shortcut-font-size);
+      }
+
+      &__arrow {
+        flex-shrink: 0;
+        margin-left: auto;
+        padding-left: var(--nui-action-menu-arrow-padding-left);
+        display: flex;
+        align-items: center;
       }
 
       &:hover:not(&--disabled),
-      &:focus-visible:not(&--disabled),
-      &:focus:not(&--disabled),
-      &.cdk-focused:not(&--disabled),
-      &.cdk-program-focused:not(&--disabled),
-      &.cdk-keyboard-focused:not(&--disabled) {
-        background-color: var(--nui-action-menu-#{$color}-item-hover-bg);
-        color: var(--nui-action-menu-#{$color}-item-hover-color);
-        outline: none;
+      &:focus-visible:not(&--disabled) {
+        background-color: var(--nui-action-menu-item-hover-bg);
+        color: var(--nui-action-menu-item-hover-color);
 
         .nui-action-menu__item__icon,
+        .nui-action-menu__item__subtitle,
         .nui-action-menu__item__shortcut,
         .nui-action-menu__item__arrow,
         .nui-action-menu__item__check {
-          color: var(--nui-action-menu-#{$color}-item-hover-icon-color);
+          color: var(--nui-action-menu-item-hover-icon-color);
         }
 
         .nui-action-menu__item__shortcut {
-          border-color: var(
-            --nui-action-menu-#{$color}-item-hover-border-color
-          );
-        }
-
-        .nui-action-menu__item__subtitle {
-          color: var(--nui-action-menu-#{$color}-item-hover-subtitle-color);
+          border-color: var(--nui-action-menu-item-hover-border-color);
         }
       }
 
-      &:focus:not(&--disabled) {
-        outline: none;
-      }
-
-      // Estado seleccionado - sin background para evitar confusión con active
       &--selected {
-        // Solo usamos el check icon como indicador
         .nui-action-menu__item__check {
-          color: var(--nui-action-menu-#{$color}-item-selected-icon-color);
-        }
-
-        // El hover/focus-visible en selected items sigue funcionando normalmente
-        &:hover,
-        &:focus-visible {
-          background-color: var(--nui-action-menu-#{$color}-item-hover-bg);
-          color: var(--nui-action-menu-#{$color}-item-hover-color);
-
-          .nui-action-menu__item__icon,
-          .nui-action-menu__item__check,
-          .nui-action-menu__item__shortcut,
-          .nui-action-menu__item__arrow {
-            color: var(--nui-action-menu-#{$color}-item-hover-icon-color);
-          }
-
-          .nui-action-menu__item__subtitle {
-            color: var(--nui-action-menu-#{$color}-item-hover-subtitle-color);
-          }
+          color: var(--nui-action-menu-item-selected-icon-color);
         }
       }
 
-      // Override del indicador con el color específico del menú
-      &--has-selected::after {
-        background-color: var(--nui-action-menu-#{$color}-item-selected-bg);
+      &--has-selected {
+        .nui-action-menu__item__arrow::before {
+          content: '';
+          display: inline-block;
+          width: var(--nui-action-menu-item-notify-selected-size);
+          height: var(--nui-action-menu-item-notify-selected-size);
+          border-radius: var(--nui-action-menu-item-notify-selected-radius);
+          background-color: var(--nui-action-menu-item-notify-selected);
+          margin-right: 8px;
+          opacity: 0.8;
+        }
+      }
+
+      &[disabled],
+      &:disabled,
+      &--disabled {
+        @include global.disabled;
       }
     }
   }
+}
+
+@mixin action-menu-theme($color) {
+  --nui-action-menu-item-hover-bg: var(--nui-action-menu-#{$color}-item-hover-bg);
+  --nui-action-menu-item-hover-color: var(--nui-action-menu-#{$color}-item-hover-color);
+  --nui-action-menu-item-hover-icon-color: var(--nui-action-menu-#{$color}-item-hover-icon-color);
+  --nui-action-menu-item-hover-border-color: var(
+    --nui-action-menu-#{$color}-item-hover-border-color
+  );
+  --nui-action-menu-item-hover-subtitle-color: var(
+    --nui-action-menu-#{$color}-item-hover-subtitle-color
+  );
+  --nui-action-menu-item-check-color: var(--nui-action-menu-#{$color}-item-check-color);
+  --nui-action-menu-item-selected-icon-color: var(
+    --nui-action-menu-#{$color}-item-selected-icon-color
+  );
+  --nui-action-menu-item-selected-bg: var(--nui-action-menu-#{$color}-item-selected-bg);
 }

@@ -1,0 +1,80 @@
+@use '../../styles/config' as config;
+
+// ========================================
+// ACTION MENU - Variables & Tokens
+// ========================================
+
+// TOKENS
+$action-menu-min-width: 12rem !default;
+$action-menu-max-width: 20rem !default;
+$action-menu-arrow-padding-left: 0.5rem !default;
+$action-menu-focus-outline-width: 2px !default;
+$action-menu-focus-outline-offset: -1px !default;
+$action-menu-separator-padding: var(--nui-spacing-xs) 0 !default;
+$action-menu-item-notify-selected-size: 0.375rem !default;
+$action-menu-item-notify-selected-radius: 50% !default;
+$action-menu-transition:
+  background-color 0.2s ease,
+  border-color 0.2s ease,
+  color 0.2s ease,
+  box-shadow 0.2s ease !default;
+
+// MIXIN
+@mixin nui-action-menu-vars {
+  // Structure
+  --nui-action-menu-min-width: #{$action-menu-min-width};
+  --nui-action-menu-max-width: #{$action-menu-max-width};
+  --nui-action-menu-item-gap: var(--nui-spacing-sm);
+  --nui-action-menu-item-border: none;
+  --nui-action-menu-arrow-padding-left: #{$action-menu-arrow-padding-left};
+  --nui-action-menu-item-label-margin-right: var(--nui-spacing-md);
+
+  // Border & Padding
+  --nui-action-menu-border-width: var(--nui-border-width-xs);
+  --nui-action-menu-border-color: var(--nui-border-primary);
+  --nui-action-menu-border-radius: var(--nui-border-radius-md);
+  --nui-action-menu-padding: var(--nui-spacing-xs);
+  --nui-action-menu-item-border-radius: var(--nui-border-radius-sm);
+  --nui-action-menu-focus-outline-width: #{$action-menu-focus-outline-width};
+  --nui-action-menu-focus-outline-offset: #{$action-menu-focus-outline-offset};
+
+  // Notify selected parent
+  --nui-action-menu-item-notify-selected-size: #{$action-menu-item-notify-selected-size};
+  --nui-action-menu-item-notify-selected-radius: #{$action-menu-item-notify-selected-radius};
+
+  // Shortcut
+  --nui-action-menu-shortcut-bg: var(--nui-bg-tertiary);
+  --nui-action-menu-shortcut-color: var(--nui-text-secondary);
+  --nui-action-menu-shortcut-padding: var(--nui-spacing-xs);
+  --nui-action-menu-shortcut-border-width: var(--nui-border-width-xs);
+  --nui-action-menu-shortcut-border-color: var(--nui-border-primary);
+  --nui-action-menu-shortcut-border-radius: var(--nui-border-radius-md);
+  --nui-action-menu-shortcut-font-size: var(--nui-font-size-xs);
+
+  // Shadow
+  --nui-action-menu-shadow: var(--nui-shadow-elevated);
+  --nui-action-menu-static-shadow: var(--nui-shadow-container);
+
+  // Subtitle
+  --nui-action-menu-item-subtitle-color: var(--nui-text-secondary);
+
+  // Font
+  --nui-action-menu-item-subtitle-font-size: var(--nui-font-size-xs);
+  --nui-action-menu-item-label-weight: var(--nui-font-weight-medium);
+  --nui-action-menu-item-label-font-size: var(--nui-font-size-sm);
+  --nui-action-menu-separator-font-size: var(--nui-font-size-xs);
+  --nui-action-menu-separator-font-weight: var(--nui-font-weight-semibold);
+
+  // Separator
+  --nui-action-menu-separator-color: var(--nui-border-primary);
+  --nui-action-menu-separator-padding: #{$action-menu-separator-padding};
+  --nui-action-menu-separator-label-color: var(--nui-text-tertiary);
+  --nui-action-menu-separator-label-spacing: var(--nui-spacing-xs);
+
+  // Transitions
+  --nui-action-menu-transition: #{$action-menu-transition};
+
+  // Spacing
+  --nui-action-menu-item-padding-y: var(--nui-spacing-xs);
+  --nui-action-menu-item-padding-x: var(--nui-spacing-sm);
+}

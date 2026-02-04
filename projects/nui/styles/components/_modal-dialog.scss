@@ -1,13 +1,12 @@
 @use "../config";
 @use "../mixins";
-// NOTA: No importar theme ni theme-config aquí, ya están incluidos globalmente en nui.scss
 @use "../variables/modal-dialog/modal-dialog-variables.scss";
 
 .modal-box {
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: var(--nui-modal-padding, var(--spacing-md, 1.2rem));
+  padding: var(--nui-modal-padding, var(--nui-spacing-md, 1.2rem));
   align-items: flex-start;
   justify-content: center;
   gap: var(--nui-modal-gap);
@@ -102,7 +101,7 @@
     }
 
     strong {
-      font-weight: var(--font-weight-semibold);
+      font-weight: var(--nui-font-weight-semibold);
     }
   }
 
@@ -134,7 +133,7 @@
     // Responsive: columna en móviles
     @media (max-width: 480px) {
       flex-direction: column;
-      gap: var(--nui-modal-footer-gap-mobile, var(--spacing-sm, 0.75rem));
+      gap: var(--nui-modal-footer-gap-mobile, var(--nui-spacing-sm, 0.75rem));
 
       button[nuiButton] {
         width: 100%;

@@ -302,12 +302,12 @@ export class ExampleComponent {
           code: `:root {
   /* Espaciado entre botones */
   --nui-button-group-gap: 0;
-  --nui-button-group-segmented-gap: var(--spacing-xxs);
+  --nui-button-group-segmented-gap: var(--nui-spacing-xxs);
   
   /* Segmented variant - Container */
   --nui-button-group-segmented-bg: var(--nui-bg-secondary);
-  --nui-button-group-segmented-padding: var(--spacing-xxs);
-  --nui-button-group-segmented-border-radius: var(--border-radius-md);
+  --nui-button-group-segmented-padding: var(--nui-spacing-xxs);
+  --nui-button-group-segmented-border-radius: var(--nui-border-radius-md);
   --nui-button-group-segmented-border: 1px solid var(--nui-border-primary);
   
   /* Segmented variant - Selected button */

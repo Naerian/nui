@@ -1,23 +1,15 @@
 // Import NUI complete bundle
 @import '../../nui/styles/nui-bundle.scss';
 
-// Global reset
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 html, body {
   height: 100%;
-  overflow: hidden;
+  margin: 0;
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: var(--nui-font-family); 
   background-color: var(--nui-bg-secondary);
   color: var(--nui-text-primary);
-  line-height: 1.6;
 }
 
 // Custom scrollbar
@@ -127,7 +119,7 @@ code {
   font-family: 'Courier New', 'Consolas', monospace;
   background-color: var(--nui-bg-tertiary);
   padding: 0.2em 0.4em;
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--nui-border-radius-sm);
   font-size: 0.9em;
   color: var(--nui-color-accent);
 }

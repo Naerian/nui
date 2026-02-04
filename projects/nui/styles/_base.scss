@@ -1,15 +1,8 @@
 // ==========================================
-// BOX SIZING (FUNDAMENTAL)
-// ==========================================
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-// ==========================================
 // HTML
 // ==========================================
 html {
-  font-family: var(--font-family);
+  font-family: var(--nui-font-family);
   font-size: 100%;
   -webkit-text-size-adjust: 100%;
   -moz-tab-size: 4;
@@ -28,25 +21,20 @@ html {
 // ==========================================
 body {
   margin: 0;
-  font-family: var(--font-family);
+  font-family: var(--nui-font-family);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 // ==========================================
-// HEADINGS
-// ==========================================
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  font-weight: var(--font-weight-semibold);
-  line-height: 1.2;
-}
-
-// ==========================================
 // FORM ELEMENTS
 // ==========================================
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
   font-family: inherit;
   font-feature-settings: inherit;
   font-variation-settings: inherit;
@@ -74,14 +62,6 @@ a {
 }
 
 // ==========================================
-// FOCUS STATES
-// ==========================================
-:focus-visible {
-  outline: 2px solid var(--nui-focus-ring-color);
-  outline-offset: 2px;
-}
-
-// ==========================================
 // SELECTION
 // ==========================================
 ::selection {
@@ -98,11 +78,11 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--scroll-bg);
+  background: var(--nui-bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--scroll-thumb-bg);
+  background: var(--nui-border-primary);
   border-radius: 4px;
 
   &:hover {
@@ -116,7 +96,7 @@ a {
 mark.highlight {
   background-color: var(--nui-color-highlight);
   color: inherit;
-  font-weight: var(--font-weight-semibold);
-  border-radius: var(--border-radius-sm);
+  font-weight: var(--nui-font-weight-semibold);
+  border-radius: var(--nui-border-radius-sm);
   padding: 0 0.25rem;
 }

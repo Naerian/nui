@@ -1,55 +1,9 @@
-@use '../../../../styles/components/button';
-
-// ============================================================================
-// HOST: Configuración del Web Component
-// ============================================================================
 :host {
-  display: inline-block;
+  display: inline-block; // Para que el componente respete el flujo del texto
   vertical-align: middle;
-  cursor: pointer;
 
-  &.full-width {
+  &[width='full'] {
     display: block;
     width: 100%;
-  }
-  &.fit-width {
-    display: inline-block;
-    width: fit-content;
-  }
-
-  &.disabled {
-    pointer-events: none;
-  }
-}
-
-// ============================================================================
-// BOTÓN INTERNO
-// ============================================================================
-.nui-btn {
-  @include button.button-base-styles;
-  align-items: center;
-
-  &__content--hidden {
-    position: static;
-  }
-
-  &__content,
-  &__spinner,
-  &__icon {
-    display: inline-flex;
-    align-items: center;
-    line-height: 1;
-    line-height: 1.5;
-  }
-
-  &__content--empty {
-    display: none !important;
-  }
-
-  &__spinner--center {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
   }
 }

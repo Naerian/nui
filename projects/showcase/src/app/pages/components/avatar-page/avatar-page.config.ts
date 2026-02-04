@@ -136,6 +136,35 @@ export const AVATAR_PAGE_CONFIG: ComponentPageConfig = {
       ],
     },
     {
+      id: 'grouped',
+      title: 'components.avatar.grouped.title',
+      description: 'components.avatar.grouped.description',
+      note: {
+        type: 'info',
+        content: 'components.avatar.grouped.note',
+      },
+      anchor: 'grouped',
+      examples: [
+        {
+          title: 'codeExamples.html',
+          code: `<nui-avatar-group [max]="3" [avatars]="avatars" />`,
+          language: 'html',
+        },
+        {
+          title: 'codeExamples.typescript',
+          code: `avatars: AvatarGroupItem[] = [
+              { src: this.avatarUrl1, alt: 'John Doe' },
+              { initials: 'JD', color: 'primary' },
+              { src: this.avatarUrl2, alt: 'User Image' },
+              { icon: 'ri-user-star-line', color: 'secondary' },
+              { initials: 'AT', color: 'accent' },
+              { alt: 'Alan Turing', color: 'success' },
+            ];`,
+          language: 'typescript',
+        },
+      ],
+    },
+    {
       id: 'error',
       title: 'components.avatar.error.title',
       description: 'components.avatar.error.description',
@@ -228,7 +257,7 @@ export class ExampleComponent {
   --nui-avatar-font-size-md: 14px;
   --nui-avatar-font-size-lg: 16px;
   --nui-avatar-font-size-xl: 20px;
-  --nui-avatar-font-weight: var(--font-weight-semibold);
+  --nui-avatar-font-weight: var(--nui-font-weight-semibold);
   
   /* Icon size */
   --nui-avatar-icon-size-xs: 14px;
@@ -239,7 +268,7 @@ export class ExampleComponent {
   
   /* Border radius */
   --nui-avatar-border-radius-circular: 50%;
-  --nui-avatar-border-radius-rounded: var(--border-radius-md);
+  --nui-avatar-border-radius-rounded: var(--nui-border-radius-md);
   --nui-avatar-border-radius-square: 0;
   
   /* Default colors */

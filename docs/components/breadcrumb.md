@@ -372,7 +372,7 @@ nui-breadcrumb {
   --text-secondary: #666;
   --surface-primary: #fff;
   --nui-bg-secondary: #f5f5f5;
-  --border-primary: 1px solid #e0e0e0;
+  --nui-border-primary: 1px solid #e0e0e0;
 }
 ```
 

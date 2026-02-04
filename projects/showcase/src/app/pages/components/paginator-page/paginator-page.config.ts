@@ -369,13 +369,13 @@ export class ExampleComponent {
           title: 'codeExamples.cssVariables',
           code: `:root {
   /* Layout */
-  --nui-paginator-gap: var(--spacing-sm);
+  --nui-paginator-gap: var(--nui-spacing-sm);
   --nui-paginator-align-items: center;
   --nui-paginator-justify-content: space-between;
   
   /* Navigation buttons */
   --nui-paginator-button-min-width: 40px;
-  --nui-paginator-button-gap: var(--spacing-xs);
+  --nui-paginator-button-gap: var(--nui-spacing-xs);
   
   /* Page numbers */
   --nui-paginator-page-number-min-width: 36px;
@@ -389,37 +389,37 @@ export class ExampleComponent {
   
   /* Ellipsis */
   --nui-paginator-ellipsis-color: var(--nui-text-tertiary);
-  --nui-paginator-ellipsis-padding: var(--spacing-xs);
+  --nui-paginator-ellipsis-padding: var(--nui-spacing-xs);
   
   /* Size selector */
   --nui-paginator-size-selector-min-width: 80px;
-  --nui-paginator-size-selector-gap: var(--spacing-sm);
+  --nui-paginator-size-selector-gap: var(--nui-spacing-sm);
   
   /* Item range */
   --nui-paginator-item-range-color: var(--nui-text-secondary);
-  --nui-paginator-item-range-font-size: var(--font-size-sm);
+  --nui-paginator-item-range-font-size: var(--nui-font-size-sm);
   
   /* Page jump */
   --nui-paginator-page-jump-input-width: 60px;
-  --nui-paginator-page-jump-gap: var(--spacing-sm);
+  --nui-paginator-page-jump-gap: var(--nui-spacing-sm);
   
   /* Infinite scroll - Button */
-  --nui-paginator-infinite-button-padding: var(--spacing-md) var(--spacing-xl);
-  --nui-paginator-infinite-button-margin: var(--spacing-lg) 0;
+  --nui-paginator-infinite-button-padding: var(--nui-spacing-md) var(--nui-spacing-xl);
+  --nui-paginator-infinite-button-margin: var(--nui-spacing-lg) 0;
   
   /* Infinite scroll - Counter */
   --nui-paginator-infinite-counter-color: var(--nui-text-secondary);
-  --nui-paginator-infinite-counter-font-size: var(--font-size-sm);
-  --nui-paginator-infinite-counter-margin: var(--spacing-xs) 0;
+  --nui-paginator-infinite-counter-font-size: var(--nui-font-size-sm);
+  --nui-paginator-infinite-counter-margin: var(--nui-spacing-xs) 0;
   
   /* Infinite scroll - End message */
   --nui-paginator-infinite-end-color: var(--nui-text-tertiary);
-  --nui-paginator-infinite-end-font-size: var(--font-size-sm);
+  --nui-paginator-infinite-end-font-size: var(--nui-font-size-sm);
 }
 
 // Example of a compact paginator
 .compact-paginator {
-  --nui-paginator-gap: var(--spacing-xs);
+  --nui-paginator-gap: var(--nui-spacing-xs);
   --nui-paginator-button-min-width: 32px;
   --nui-paginator-page-number-min-width: 32px;
   --nui-paginator-page-number-height: 32px;
@@ -452,7 +452,7 @@ export class ExampleComponent {
       &.active {
         background: transparent;
         color: var(--primary-color);
-        font-weight: var(--font-weight-bold);
+        font-weight: var(--nui-font-weight-bold);
         border-bottom: 2px solid var(--primary-color);
       }
     }

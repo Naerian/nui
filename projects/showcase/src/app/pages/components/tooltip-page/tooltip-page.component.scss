@@ -40,7 +40,7 @@
     margin-bottom: 1.5rem;
     background-color: var(--nui-bg-secondary);
     border-left: 4px solid var(--nui-border-primary);
-    border-radius: var(--border-radius-sm);
+    border-radius: var(--nui-border-radius-sm);
     font-size: 0.875rem;
     line-height: 1.5;
 
@@ -65,7 +65,7 @@
     code {
       background-color: var(--nui-bg-tertiary);
       padding: 0.125rem 0.375rem;
-      border-radius: var(--border-radius-xs);
+      border-radius: var(--nui-border-radius-xs);
       font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
       font-size: 0.8125rem;
     }
@@ -79,10 +79,10 @@
   align-items: center;
   padding: 1.5rem;
   background-color: var(--nui-bg-secondary);
-  border-radius: var(--border-radius-md);
+  border-radius: var(--nui-border-radius-md);
   margin-bottom: 1rem;
-  border: var(--border-width-xs) solid var(--nui-border-primary);
-  box-shadow: var(--box-shadow-xs);
+  border: var(--nui-border-width-xs) solid var(--nui-border-primary);
+  box-shadow: var(--nui-box-shadow--xs);
 
   &.flex-column {
     flex-direction: column;
@@ -93,7 +93,7 @@
 .example-input {
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--nui-border-primary);
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--nui-border-radius-sm);
   background-color: var(--nui-bg-primary);
   color: var(--nui-text-primary);
   font-size: 0.875rem;

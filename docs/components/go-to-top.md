@@ -130,10 +130,6 @@ Botón flotante que aparece al hacer scroll y permite volver rápidamente al ini
 
 El componente usa `requestAnimationFrame` con easing `ease-out-cubic` para una animación suave y natural.
 
-### Z-Index
-
-El botón usa `var(--z-index-floating)` para asegurar que aparezca sobre el contenido pero debajo de modales y notificaciones.
-
 ### Responsive
 
 En móviles, todas las posiciones se convierten en `bottom-right` con offset reducido para mejorar la experiencia táctil.

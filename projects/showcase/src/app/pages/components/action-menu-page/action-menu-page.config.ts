@@ -532,16 +532,16 @@ export class ExampleComponent {
   /* Menu Container */
   --nui-action-menu-bg: var(--nui-bg-primary);
   --nui-action-menu-border: var(--nui-border-primary);
-  --nui-action-menu-border-radius: var(--border-radius-md);
+  --nui-action-menu-border-radius: var(--nui-border-radius-md);
   --nui-action-menu-shadow: var(--nui-shadow-lg);
-  --nui-action-menu-padding: var(--spacing-xs);
+  --nui-action-menu-padding: var(--nui-spacing-xs);
   --nui-action-menu-min-width: 180px;
   --nui-action-menu-max-width: 320px;
 
   /* Menu Items */
-  --nui-action-menu-item-padding: var(--spacing-sm) var(--spacing-md);
-  --nui-action-menu-item-gap: var(--spacing-sm);
-  --nui-action-menu-item-border-radius: var(--border-radius-sm);
+  --nui-action-menu-item-padding: var(--nui-spacing-sm) var(--nui-spacing-md);
+  --nui-action-menu-item-gap: var(--nui-spacing-sm);
+  --nui-action-menu-item-border-radius: var(--nui-border-radius-sm);
   --nui-action-menu-item-text-color: var(--nui-text-primary);
   --nui-action-menu-item-icon-size: 18px;
   
@@ -556,36 +556,36 @@ export class ExampleComponent {
   
   /* Subtitle */
   --nui-action-menu-subtitle-color: var(--nui-text-secondary);
-  --nui-action-menu-subtitle-size: var(--font-size-xs);
+  --nui-action-menu-subtitle-size: var(--nui-font-size-xs);
   
   /* Badge */
   --nui-action-menu-badge-bg: var(--primary-color);
   --nui-action-menu-badge-color: var(--nui-text-on-primary);
-  --nui-action-menu-badge-size: var(--font-size-xs);
+  --nui-action-menu-badge-size: var(--nui-font-size-xs);
   --nui-action-menu-badge-padding: 2px 6px;
-  --nui-action-menu-badge-radius: var(--border-radius-full);
+  --nui-action-menu-badge-radius: var(--nui-border-radius-full);
   
   /* Shortcut */
   --nui-action-menu-shortcut-color: var(--nui-text-tertiary);
   --nui-action-menu-shortcut-bg: var(--nui-bg-tertiary);
-  --nui-action-menu-shortcut-size: var(--font-size-xs);
+  --nui-action-menu-shortcut-size: var(--nui-font-size-xs);
   --nui-action-menu-shortcut-padding: 2px 6px;
-  --nui-action-menu-shortcut-radius: var(--border-radius-xs);
+  --nui-action-menu-shortcut-radius: var(--nui-border-radius-xs);
   
   /* Separator */
   --nui-action-menu-separator-color: var(--nui-border-primary);
-  --nui-action-menu-separator-margin: var(--spacing-xs) 0;
+  --nui-action-menu-separator-margin: var(--nui-spacing-xs) 0;
   --nui-action-menu-separator-label-color: var(--nui-text-tertiary);
-  --nui-action-menu-separator-label-size: var(--font-size-xs);
+  --nui-action-menu-separator-label-size: var(--nui-font-size-xs);
   
   /* Submenu */
   --nui-action-menu-submenu-icon-size: 16px;
   --nui-action-menu-submenu-icon-color: var(--nui-text-tertiary);
   
   /* Header & Footer */
-  --nui-action-menu-header-padding: var(--spacing-md);
+  --nui-action-menu-header-padding: var(--nui-spacing-md);
   --nui-action-menu-header-border: var(--nui-border-primary);
-  --nui-action-menu-footer-padding: var(--spacing-md);
+  --nui-action-menu-footer-padding: var(--nui-spacing-md);
   --nui-action-menu-footer-border: var(--nui-border-primary);
 }
 

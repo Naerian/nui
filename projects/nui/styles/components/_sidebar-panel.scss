@@ -1,16 +1,105 @@
 @use '../config';
 @use '../mixins';
-// NOTA: No importar theme ni theme-config aqu�, ya est�n incluidos globalmente en nui.scss
 
 // ==========================================
-// SIDEBAR PANEL - Estilos globales
+// SIDEBAR PANEL - Global Styles
 // ==========================================
-// Estilos para el componente sidebar-panel.
-// Los estilos son globales porque el panel se renderiza con ViewEncapsulation.None
+// Styles for the sidebar-panel component.
+// Styles are global because the panel is rendered with ViewEncapsulation.None
 // ==========================================
 
-// Overlay/Backdrop del sidebar-panel
-// Nota: Incluimos ambos selectores para compatibilidad (overlay es legacy, backdrop es actual)
+// ============================================================================
+// SIDEBAR PANEL HOST STYLES
+// ============================================================================
+// Note: These styles are applied directly to :host in the component
+// but defined here for consistency with other global components
+// ============================================================================
+
+// ============================================================================
+// PANEL INTERNAL STRUCTURE
+// ============================================================================
+
+.nui-sidebar-panel-pane {
+  pointer-events: auto;
+}
+
+.nui-sidebar-panel-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.nui-sidebar-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--nui-sidebar-panel-header-padding);
+  border-bottom: 1px solid var(--nui-sidebar-panel-border);
+  background: var(--nui-sidebar-panel-bg);
+  flex-shrink: 0;
+
+  .nui-sidebar-panel-title {
+    margin: 0;
+    font-size: var(--nui-sidebar-panel-title-size);
+    font-weight: var(--nui-sidebar-panel-title-weight);
+    color: var(--nui-sidebar-panel-text);
+  }
+
+  .nui-sidebar-panel-header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--nui-spacing-xs);
+  }
+}
+
+.nui-sidebar-panel-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--nui-sidebar-panel-content-padding);
+  background: var(--nui-sidebar-panel-bg);
+
+  // Custom scrollbar
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--scroll-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--scroll-thumb-bg);
+    border-radius: 4px;
+
+    &:hover {
+      background: var(--color-gray-500);
+    }
+  }
+}
+
+.nui-sidebar-panel-footer {
+  padding: var(--nui-sidebar-panel-header-padding);
+  border-top: 1px solid var(--nui-sidebar-panel-border);
+  background: var(--nui-sidebar-panel-bg);
+  flex-shrink: 0;
+
+  &-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: var(--nui-spacing-sm);
+  }
+}
+
+// ============================================================================
+// CDK OVERLAY GLOBAL STYLES
+// ============================================================================
+// Overlay/Backdrop for sidebar-panel
+// Note: We include both selectors for compatibility (overlay is legacy, backdrop is current)
 .nui-sidebar-panel-overlay,
 .nui-sidebar-panel-backdrop {
   @include mixins.overlay-backdrop();
@@ -18,18 +107,18 @@
   background-color: var(--nui-sidebar-panel-overlay-bg) !important;
 }
 
-// Wrapper de CDK cuando está junto al backdrop del sidebar-panel (selector de hermanos adyacentes)
-// Solo afecta al wrapper que sigue inmediatamente al backdrop del sidebar-panel
+// CDK wrapper when adjacent to sidebar-panel backdrop (adjacent sibling selector)
+// Only affects the wrapper that immediately follows the sidebar-panel backdrop
 .nui-sidebar-panel-backdrop + .cdk-global-overlay-wrapper {
   z-index: var(--nui-sidebar-panel-z-index) !important;
 }
 
-// Contenedor específico del sidebar-panel
+// Specific container for sidebar-panel
 .cdk-overlay-pane.sidebar-panel-pane {
   z-index: var(--nui-sidebar-panel-z-index) !important;
 }
 
-// Host component del panel
+// Panel host component
 .sidebar-panel-container {
   position: fixed;
   overflow: hidden;
@@ -41,7 +130,7 @@
   display: flex;
   flex-direction: column;
 
-  // Posiciones
+  // Positions
   &.sidebar-panel-position-right {
     top: 0;
     right: 0;
@@ -65,7 +154,7 @@
   }
 }
 
-// Panel principal (mantener para compatibilidad)
+// Main panel (keep for compatibility)
 .nui-sidebar-panel {
   position: fixed;
   overflow: hidden;
@@ -75,9 +164,9 @@
   box-shadow: var(--nui-sidebar-panel-shadow);
   color: var(--nui-sidebar-panel-text);
 
-  // ===== POSICIONES =====
+  // ===== POSITIONS =====
 
-  // Slide de derecha a izquierda
+  // Slide from right to left
   &--right {
     top: 0;
     right: 0;
@@ -85,7 +174,7 @@
     bottom: auto;
   }
 
-  // Slide de izquierda a derecha
+  // Slide from left to right
   &--left {
     top: 0;
     left: 0;
@@ -93,7 +182,7 @@
     bottom: auto;
   }
 
-  // Slide de arriba hacia abajo
+  // Slide from top to bottom
   &--top {
     top: 0;
     left: 0;
@@ -102,7 +191,7 @@
     width: 100%;
   }
 
-  // Slide de abajo hacia arriba
+  // Slide from bottom to top
   &--bottom {
     bottom: 0;
     left: 0;
@@ -111,8 +200,8 @@
     width: 100%;
   }
 
-  // ===== TAMA�OS =====
-  // Tama�os coinciden con SidebarPanelSize: xs | sm | md | lg | xl | full
+  // ===== SIZES =====
+  // Sizes match SidebarPanelSize: xs | sm | md | lg | xl | full
 
   &--size-xs {
     width: var(--nui-sidebar-panel-size-xs-width);
@@ -161,7 +250,7 @@
       &:focus-visible {
         outline: 2px solid var(--nui-color-primary);
         outline-offset: 2px;
-        border-radius: var(--border-radius-xs);
+        border-radius: var(--nui-border-radius-xs);
       }
     }
 
@@ -190,7 +279,7 @@
     }
   }
 
-  // ===== CONTENIDO =====
+  // ===== CONTENT =====
 
   &__wrapper {
     display: flex;
@@ -203,7 +292,7 @@
     margin-top: var(--nui-sidebar-panel-header-height);
   }
 
-  // ===== HOST (Contenedor del componente din�mico) =====
+  // ===== HOST =====
 
   &__host {
     display: flex;
@@ -218,7 +307,7 @@
     height: 100%;
   }
 
-  // ===== BOX (Contenedor interno del host) =====
+  // ===== BOX (Internal container of the host) =====
 
   &__box {
     display: flex;
@@ -229,7 +318,7 @@
     padding: var(--nui-sidebar-panel-box-padding);
   }
 
-  // ===== CONTENT (�rea de contenido scrollable) =====
+  // ===== CONTENT =====
 
   &__content {
     height: 100%;
@@ -239,7 +328,7 @@
     padding-left: 0.3125rem; // 5px
   }
 
-  // ===== ACTION BUTTONS (Botones de acci�n) =====
+  // ===== ACTION BUTTONS =====
 
   &__action-buttons {
     display: flex;

@@ -38,7 +38,7 @@
     margin-bottom: 1.5rem;
     background-color: var(--nui-bg-secondary);
     border-left: 4px solid var(--nui-border-primary);
-    border-radius: var(--border-radius-sm);
+    border-radius: var(--nui-border-radius-sm);
     font-size: 0.875rem;
     line-height: 1.5;
 
@@ -78,9 +78,9 @@
   align-items: center; // Centrado vertical por defecto
   padding: 1.5rem;
   background-color: var(--nui-bg-secondary);
-  border-radius: var(--border-radius-md);
+  border-radius: var(--nui-border-radius-md);
   margin-bottom: 1rem;
-  border: var(--border-width-xs) solid var(--nui-border-primary);
+  border: var(--nui-border-width-xs) solid var(--nui-border-primary);
   box-shadow: var(--nui-shadow-sm);
 
   // Modificador para apilar elementos (Paginador arriba, info abajo)
@@ -104,7 +104,7 @@
   margin-top: 0.5rem;
   padding: 0.75rem 1rem;
   background-color: var(--nui-bg-tertiary, #f5f5f5); // Fallback color
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--nui-border-radius-sm);
   font-family: 'SF Mono', 'Roboto Mono', monospace; // Fuente monoespaciada
   font-size: 0.875rem;
   color: var(--nui-text-secondary);
@@ -139,7 +139,7 @@
   padding: 1rem;
   background: var(--nui-bg-primary);
   border: 1px solid var(--nui-border-primary);
-  border-radius: var(--border-radius-md);
+  border-radius: var(--nui-border-radius-md);
   margin-bottom: 1rem;
 
   // Scrollbar estilizado (opcional)
@@ -164,7 +164,7 @@
   background: var(--nui-bg-secondary);
   color: var(--nui-text-primary);
   border: 1px solid var(--nui-border-primary);
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--nui-border-radius-sm);
   font-size: 0.875rem;
   font-weight: 500;
   transition: all 0.2s ease;

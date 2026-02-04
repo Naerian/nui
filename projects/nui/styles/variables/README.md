@@ -19,7 +19,7 @@ variables/
 // 1. _button-tokens.scss - Base values (customizable)
 $button-gap: 0.5rem !default;
 $button-border-radius: 0.375rem !default;
-$button-border-width: 1px !default;
+$button-border-width: 0.063rem !default;
 
 // 2. button-variables.scss - Converts to CSS vars
 @mixin nui-button-vars {
@@ -131,7 +131,7 @@ Components with variables defined:
 - `panel/` - Panel container
 - `popover/` - Popover/dropdown
 - `progress-bar/` - Progress indicator
-- `slidepanel/` - Slide-in panel
+- `sidebar-panel/` - Sidebar panel
 - `spinner/` - Loading spinner
 - `switch/` - Toggle switch
 - `tab/` - Tab navigation
@@ -173,7 +173,7 @@ Adding new components follows the same pattern:
 ## 💡 Best Practices
 
 1. **Never hardcode colors** in component SCSS - use CSS variables
-2. **Use semantic names** for variables (e.g., `--nui-button-gap` not `--spacing-1`)
+2. **Use semantic names** for variables (e.g., `--nui-button-gap` not `--nui-spacing-1`)
 3. **Group related variables** by component in separate folders
 4. **Document magic numbers** with comments explaining the rationale
 5. **Use `!default`** for all SCSS variables to allow customization

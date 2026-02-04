@@ -1,0 +1,533 @@
+@use '../config';
+@use '../mixins';
+
+// ============================================================================
+// PAGINATOR BASE STYLES (global - ViewEncapsulation.None)
+// ============================================================================
+
+.nui-paginator-container {
+  // PAGINATOR CONTAINER
+  display: flex;
+  align-items: center;
+  gap: var(--nui-spacing-md);
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  // CUSTOM LAYOUT: Sistema vertical que apila áreas horizontales
+  &--custom-layout {
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    gap: 1rem;
+
+    .nui-paginator__area--left {
+      flex: 0 1 auto;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+
+      @container paginator-row (max-width: 1024px) {
+        flex: 1 1 100%;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  // LAYOUT COLUMN: Forzar apilamiento vertical completo
+  &--layout-column {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  // ITEM RANGE INFO
+  .nui-paginator__info {
+    display: flex;
+    align-items: center;
+
+    &-text {
+      font-size: var(--nui-font-size-sm);
+      color: var(--nui-text-secondary);
+      font-weight: var(--nui-font-weight-medium);
+    }
+  }
+
+  // PAGE SIZE SELECTOR
+  .nui-paginator__page-size {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--nui-spacing-xs);
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    .nui-paginator__page-size-label {
+      font-size: var(--nui-font-size-sm);
+    }
+
+    @media (orientation: portrait) and (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .nui-paginator__page-size-label {
+        margin-bottom: 0.25rem;
+      }
+    }
+
+    &-label {
+      font-size: var(--nui-font-size-sm);
+      color: var(--nui-text-secondary);
+      font-weight: var(--nui-font-weight-medium);
+      white-space: nowrap;
+    }
+  }
+
+  // PAGE JUMP INPUT
+  .nui-paginator__page-jump {
+    display: flex;
+    align-items: center;
+    gap: var(--nui-spacing-sm);
+
+    &-label {
+      font-size: var(--nui-font-size-sm);
+      color: var(--nui-text-secondary);
+      font-weight: var(--nui-font-weight-medium);
+      white-space: nowrap;
+    }
+
+    &-input {
+      width: var(--nui-paginator-page-jump-input-width);
+      padding: var(--nui-spacing-xs) var(--nui-spacing-sm);
+      font-size: var(--nui-font-size-sm);
+      font-weight: var(--nui-font-weight-medium);
+      color: var(--nui-text-primary);
+      background-color: var(--nui-bg-primary);
+      border: var(--nui-paginator-input-border-width) solid var(--nui-border-primary);
+      border-radius: var(--nui-border-radius-md);
+      text-align: center;
+      transition: all var(--nui-paginator-transition-duration)
+        var(--nui-paginator-transition-timing);
+
+      &--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      // Remove spinner arrows
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+
+    &-button {
+      font-weight: var(--nui-font-weight-semibold);
+      border-radius: var(--nui-border-radius-md);
+      cursor: pointer;
+      transition: all var(--nui-paginator-transition-duration)
+        var(--nui-paginator-transition-timing);
+      white-space: nowrap;
+    }
+  }
+
+  // PAGINATOR BASE
+  .nui-paginator {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--nui-paginator-gap);
+    user-select: none;
+
+    &--disabled {
+      opacity: var(--nui-paginator-disabled-opacity);
+      pointer-events: none;
+    }
+  }
+
+  // BOTONES DE PAGINACIÓN
+  .nui-paginator__button,
+  .nui-paginator__page-jump-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: var(--nui-paginator-button-border-width) solid transparent;
+    border-radius: var(--nui-border-radius-md);
+    font-weight: var(--nui-font-weight-medium);
+    cursor: pointer;
+    transition: all var(--nui-paginator-transition-duration) var(--nui-paginator-transition-timing);
+    position: relative;
+    z-index: var(--nui-paginator-z-index-base);
+    user-select: none;
+    -webkit-user-select: none;
+
+    &:hover:not(&--disabled) {
+      z-index: var(--nui-paginator-z-index-hover);
+      transform: scale(var(--nui-paginator-animation-scale-to));
+    }
+
+    &:active:not(&--disabled) {
+      z-index: var(--nui-paginator-z-index-active);
+      transform: scale(var(--nui-paginator-animation-scale-from));
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: var(--nui-paginator-focus-outline-width) solid currentColor;
+      outline-offset: var(--nui-paginator-focus-outline-offset);
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+      opacity: var(--nui-paginator-disabled-opacity);
+    }
+
+    i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+  }
+
+  // ELLIPSIS (...)
+  .nui-paginator__ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.25rem;
+    color: var(--nui-text-secondary);
+    font-weight: var(--nui-font-weight-medium);
+    user-select: none;
+  }
+
+  // TAMAÑOS
+  @each $size-key in (xs, s, sm, md, lg, xl) {
+    &--#{$size-key} {
+      @include mixins.paginator-size(#{$size-key});
+    }
+  }
+
+  // COLORES Y VARIANTES
+  @each $color in (primary, secondary, success, info, warning, danger, accent) {
+    @include mixins.paginator-colors('solid', $color);
+    @include mixins.paginator-colors('outline', $color);
+    @include mixins.paginator-colors('ghost', $color);
+  }
+
+  // ACCESSIBILITY & LOADING
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .nui-paginator__loading {
+    display: flex;
+    align-items: center;
+    gap: var(--nui-spacing-sm);
+    padding: var(--nui-spacing-sm) var(--nui-spacing-md);
+    background-color: var(--nui-bg-secondary);
+    border-radius: var(--nui-border-radius-md);
+    border: 1px solid var(--nui-border-primary);
+
+    &-text {
+      font-size: var(--nui-font-size-sm);
+      color: var(--nui-text-secondary);
+      font-weight: var(--nui-font-weight-medium);
+    }
+  }
+
+  // MODO INFINITO
+  .nui-paginator__infinite {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--nui-spacing-md);
+    width: 100%;
+
+    &-counter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &-text {
+        font-size: var(--nui-font-size-sm);
+        color: var(--nui-text-secondary);
+        font-weight: var(--nui-font-weight-medium);
+        text-align: center;
+      }
+    }
+
+    &-end {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--nui-spacing-md);
+
+      &-text {
+        font-size: var(--nui-font-size-sm);
+        color: var(--nui-text-disabled);
+        font-style: italic;
+      }
+    }
+  }
+
+  .nui-paginator__load-more-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--nui-spacing-xs);
+    border: 1px solid transparent;
+    border-radius: var(--nui-border-radius-md);
+    font-weight: var(--nui-font-weight-medium);
+    cursor: pointer;
+    transition: all var(--nui-transition-duration-fast) var(--nui-transition-easing);
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: var(--opacity-disabled);
+    }
+
+    &--loading {
+      .nui-paginator__loading-icon {
+        animation: spin 1s linear infinite;
+      }
+    }
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  // MODO COMPACTO
+  &--fractional,
+  &--compact {
+    .nui-paginator__current-page,
+    .nui-paginator__fractional-info {
+      display: flex;
+      align-items: center;
+      margin: 0 var(--nui-paginator-compact-spacing);
+    }
+  }
+
+  // CUSTOM LAYOUT SYSTEM
+  &--custom-layout {
+    .nui-paginator__area {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      &--top,
+      &--bottom {
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        &.nui-paginator__area--centered {
+          justify-content: center;
+        }
+
+        &:not(.nui-paginator__area--centered) {
+          &.nui-paginator__area--single {
+            justify-content: flex-start;
+          }
+
+          &.nui-paginator__area--double {
+            justify-content: space-between;
+          }
+
+          &.nui-paginator__area--triple {
+            justify-content: flex-start;
+            gap: 1rem;
+          }
+        }
+      }
+
+      &--left {
+        justify-content: flex-start;
+        flex: 0 1 auto;
+      }
+
+      &--center {
+        justify-content: center;
+        flex: 0 1 auto;
+        min-width: 0;
+        flex-wrap: wrap;
+
+        &:only-child {
+          flex: 1 1 auto;
+        }
+      }
+
+      &--right {
+        justify-content: flex-end;
+        flex: 0 1 auto;
+      }
+    }
+
+    .nui-paginator__horizontal-areas {
+      container-type: inline-size;
+      container-name: paginator-row;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 1rem;
+      flex-wrap: wrap;
+      flex-direction: row;
+
+      @container paginator-row (max-width: 800px) {
+        flex-wrap: wrap;
+        gap: var(--nui-spacing-md);
+
+        .nui-paginator__area {
+          &--left,
+          &--center,
+          &--right {
+            &:not(:empty) {
+              flex: 1 1 100%;
+              width: 100%;
+              justify-content: space-between;
+              gap: var(--nui-spacing-sm);
+
+              &.nui-paginator__area--single-item {
+                justify-content: flex-start;
+              }
+            }
+          }
+
+          &--left:not(:empty) {
+            justify-content: flex-start;
+
+            &:has(> *:nth-child(2)) {
+              justify-content: space-between;
+            }
+          }
+
+          &--center:not(:empty) {
+            justify-content: center;
+
+            &:has(> *:nth-child(2)) {
+              justify-content: space-between;
+            }
+          }
+
+          &--right:not(:empty) {
+            justify-content: flex-end;
+
+            &:has(> *:nth-child(2)) {
+              justify-content: space-between;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // OVERRIDE: Layout column
+  &--layout-column {
+    .nui-paginator__horizontal-areas {
+      flex-direction: row;
+    }
+  }
+
+  // RESPONSIVE MÓVIL
+  @media (max-width: 768px) {
+    &--custom-layout {
+      .nui-paginator__horizontal-areas {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nui-paginator__area {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: var(--nui-spacing-xs);
+
+        &--center {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        &--bottom,
+        &--top {
+          margin: 0;
+          justify-content: center;
+
+          .nui-paginator__page-size,
+          .nui-paginator__info {
+            justify-content: center;
+          }
+
+          &.nui-paginator__area--triple {
+            flex-direction: column;
+            align-items: stretch;
+          }
+        }
+      }
+    }
+
+    .nui-paginator__page-jump {
+      gap: var(--nui-spacing-xs);
+    }
+
+    &--wrap {
+      .nui-paginator {
+        flex-wrap: wrap;
+        gap: var(--nui-spacing-xs);
+      }
+    }
+
+    .nui-paginator {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    // TOUCH TARGETS MÓVIL (44px mínimo)
+    .nui-paginator__button,
+    .nui-paginator__page-jump-button {
+      min-width: 44px;
+      min-height: 44px;
+      padding: 0.75rem;
+    }
+
+    .nui-paginator__page-jump-input {
+      min-height: 44px;
+      font-size: 16px;
+      padding: 0.75rem;
+    }
+
+    .nui-paginator {
+      gap: var(--nui-spacing-md);
+    }
+
+    .nui-paginator-container {
+      gap: var(--nui-spacing-md);
+    }
+
+    @media (max-width: 480px) {
+      .nui-paginator__area--top {
+        flex-direction: column;
+        width: 100%;
+
+        .nui-paginator__info,
+        .nui-paginator__page-size,
+        .nui-paginator__page-jump {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}

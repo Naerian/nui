@@ -1,6 +1,5 @@
 @use "../config";
 @use "../mixins";
-// NOTA: No importar theme ni theme-config aquí, ya están incluidos globalmente en nui.scss
 @use "../variables/fab-button/fab-button-variables.scss";
 
 // ===== CONTENEDOR DE ITEMS =====
@@ -234,7 +233,7 @@ $variants: solid, outline, ghost;
   background: var(--nui-fab-button-label-bg);
   color: var(--nui-fab-button-label-text);
   padding: var(--nui-fab-button-label-padding);
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--nui-border-radius-sm);
   font-weight: var(--nui-fab-button-font-weight);
   font-family: var(--nui-fab-button-font-family);
   white-space: nowrap;

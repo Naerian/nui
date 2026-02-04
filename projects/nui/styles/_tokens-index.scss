@@ -1,0 +1,9 @@
+@use 'global-tokens';
+@use 'variables/button-vars';
+@use 'variables/action-menu-vars';
+
+// Inject variables as CSS custom properties
+:root {
+  @include button-vars.nui-button-vars;
+  @include action-menu-vars.nui-action-menu-vars;
+}

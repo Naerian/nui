@@ -7,7 +7,7 @@
     </div>
 
     <div class="presets-grid">
-      <div *ngFor="let preset of presets" class="preset-card">
+      <div *ngFor="let preset of presets()" class="preset-card">
         <div class="preset-header">
           <h3 class="preset-name">{{ preset.translationKey | translate }}</h3>
           <p class="preset-description">{{ preset.descriptionKey | translate }}</p>

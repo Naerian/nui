@@ -17,6 +17,7 @@ import {
   ViewChild,
   ViewContainerRef,
   TemplateRef,
+  ViewEncapsulation,
 } from '@angular/core';
 import { NgTemplateOutlet, CommonModule } from '@angular/common';
 import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
@@ -76,6 +77,7 @@ import { SidebarPanelTabsService } from './services/sidebar-panel-tabs.service';
   templateUrl: './sidebar-panel.component.html',
   styleUrls: ['./sidebar-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   animations: [sidebarPanelAnimation, fadeBackdropAnimation],
 })
 export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {

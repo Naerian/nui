@@ -1,6 +1,5 @@
 @use '../config';
 @use '../mixins';
-// NOTA: No importar theme ni theme-config aquí, ya están incluidos globalmente en nui.scss
 @use '../variables/popover/popover-variables.scss';
 
 // ========================================
@@ -64,7 +63,7 @@
 
     strong,
     b {
-      font-weight: var(--font-weight-semibold);
+      font-weight: var(--nui-font-weight-semibold);
     }
 
     // Encabezados en el popover
@@ -75,21 +74,21 @@
     h5,
     h6 {
       margin: 0 0 0.5rem 0;
-      font-weight: var(--font-weight-semibold);
+      font-weight: var(--nui-font-weight-semibold);
       color: var(--popover-text);
     }
 
     h1 {
-      font-size: var(--font-size-lg);
+      font-size: var(--nui-font-size-lg);
     }
     h2 {
-      font-size: var(--font-size-md);
+      font-size: var(--nui-font-size-md);
     }
     h3,
     h4,
     h5,
     h6 {
-      font-size: var(--font-size-sm);
+      font-size: var(--nui-font-size-sm);
     }
 
     // Listas en el popover
@@ -222,7 +221,7 @@
   // Variante compacta para popovers pequeños
   &.nui-popover-compact &__content {
     padding: calc(var(--popover-padding) / 2);
-    font-size: var(--font-size-xs);
+    font-size: var(--nui-font-size-xs);
   }
 
   // Variante amplia para popovers con mucho contenido

@@ -40,13 +40,13 @@ Esta es la forma más sencilla, similar a PrimeNG. No requiere `@import` en tu `
 ```
 
 **Ventajas:**
-- ✅ Más simple, no requiere `@import`
-- ✅ Más rápido de compilar
-- ✅ Funciona como PrimeNG y otras librerías populares
+- Más simple, no requiere `@import`
+- Más rápido de compilar
+- Funciona como PrimeNG y otras librerías populares
 
 **Desventajas:**
-- ❌ No puedes usar variables SCSS de NUI
-- ❌ Solo puedes sobrescribir CSS custom properties
+- No puedes usar variables SCSS de NUI
+- Solo puedes sobrescribir CSS custom properties
 
 ---
 
@@ -71,13 +71,13 @@ $color-primary: #custom-color;
 ```
 
 **Ventajas:**
-- ✅ Control total sobre variables SCSS
-- ✅ Acceso a mixins y funciones de NUI
-- ✅ Puedes personalizar antes de compilar
+- Control total sobre variables SCSS
+- Acceso a mixins y funciones de NUI
+- Puedes personalizar antes de compilar
 
 **Desventajas:**
-- ❌ Compilación más lenta
-- ❌ Requiere `@import` explícito
+- Compilación más lenta
+- Requiere `@import` explícito
 
 ---
 
@@ -115,11 +115,11 @@ Usa el CSS pre-compilado pero importa solo las partes que necesitas personalizar
 ```
 
 **Ventajas:**
-- ✅ Balance entre simplicidad y flexibilidad
-- ✅ Acceso a mixins sin compilar todo
+- Balance entre simplicidad y flexibilidad
+- Acceso a mixins sin compilar todo
 
 **Desventajas:**
-- ❌ Más complejo que la Opción 1
+- Más complejo que la Opción 1
 
 ---
 

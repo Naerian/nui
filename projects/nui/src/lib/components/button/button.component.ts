@@ -35,13 +35,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class.disabled]': 'disabled()',
-    '[class.full-width]': 'width() === "full"',
-    '[class.fit-width]': 'width() === "fit"',
-    '[class.outline]': 'effectiveVariant() === "outline"',
-    '[class.ghost]': 'effectiveVariant() === "ghost"',
-    '[class.icon-only]': 'isIconOnly()',
-    // Propagamos atributos de accesibilidad al host nativo
+    class: 'nui-button-host',
     '[attr.role]': '"button"',
     '[attr.aria-disabled]': 'disabled() || loading()',
   },
@@ -123,7 +117,7 @@ export class ButtonComponent implements AfterContentInit {
   // ========================================================================
 
   /** Signal interna para saber si el ng-content tiene nodos reales */
-  private readonly _hasProjectedContent = signal(false);
+  private readonly _hasProjectedContent = signal(true);
 
   /** Determina si mostramos contenido (Label Input O Proyección HTML) */
   readonly hasVisibleContent = computed(() => this._hasProjectedContent() || !!this.label());
@@ -168,30 +162,23 @@ export class ButtonComponent implements AfterContentInit {
    */
   private checkProjectedContent(): void {
     // Usamos setTimeout(0) para asegurar que el DOM se ha renderizado inicialmente
-    setTimeout(() => {
-      const element = this.elementRef.nativeElement as HTMLElement;
-      const contentSpan = element.querySelector('.nui-btn__content');
+    const element = this.elementRef.nativeElement as HTMLElement;
+    const contentSpan = element.querySelector('.nui-btn__content');
 
-      if (!contentSpan) {
-        this._hasProjectedContent.set(false);
-        return;
-      }
+    if (!contentSpan) {
+      this._hasProjectedContent.set(false);
+      return;
+    }
 
-      // Verificamos si hay nodos de texto con longitud > 0 o elementos HTML
-      const hasContent = Array.from(contentSpan.childNodes).some(node => {
-        if (node.nodeType === Node.TEXT_NODE) {
-          return (node.textContent?.trim().length ?? 0) > 0;
-        }
-        if (node.nodeType === Node.ELEMENT_NODE) {
-          // Ignoramos comentarios o bindings internos de Angular
-          const el = node as HTMLElement;
-          // Filtramos nuestro propio span del label si existiera
-          return el.tagName !== 'SPAN' || !el.hasAttribute('ng-reflect-style-display');
-        }
-        return false;
-      });
+    // Verificamos si hay nodos de texto con longitud > 0 o elementos HTML
+    const hasContent = Array.from(contentSpan.childNodes).some(node => {
+      // Si es nodo de texto, verificamos longitud
+      if (node.nodeType === Node.TEXT_NODE) return (node.textContent?.trim().length ?? 0) > 0;
+      // Si hay etiquetas, hay contenido
+      if (node.nodeType === Node.ELEMENT_NODE) return true;
+      return false;
+    });
 
-      this._hasProjectedContent.set(hasContent);
-    }, 0);
+    this._hasProjectedContent.set(hasContent);
   }
 }

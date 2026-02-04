@@ -13,12 +13,12 @@ $popover-max-width: 20rem !default;
 $popover-min-width: 10rem !default;
 
 // ===== TIPOGRAFÍA =====
-$popover-font-size: var(--font-size-sm) !default;
-$popover-font-weight: var(--font-weight-regular) !default;
-$popover-line-height: var(--line-height-md) !default;
+$popover-font-size: var(--nui-font-size-sm) !default;
+$popover-font-weight: var(--nui-font-weight-regular) !default;
+$popover-line-height: var(--nui-line-height-md) !default;
 
 // ===== BORDES Y RADIOS =====
-$popover-border-radius: var(--border-radius-sm) !default;
+$popover-border-radius: var(--nui-border-radius-sm) !default;
 $popover-border-width: 1px !default;
 
 // ===== SOMBRAS =====

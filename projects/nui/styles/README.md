@@ -141,14 +141,14 @@ $button-border-radius: 4px;
 ### Variables Globales
 ```scss
 // Sistema de espaciado
---spacing-xs, --spacing-sm, --spacing-md, --spacing-lg, --spacing-xl
+--nui-spacing-xs, --nui-spacing-sm, --nui-spacing-md, --nui-spacing-lg, --nui-spacing-xl
 
 // Sistema de tamaños
---font-size-xs, --font-size-sm, --font-size-md, --font-size-lg
+--nui-font-size-xs, --nui-font-size-sm, --nui-font-size-md, --nui-font-size-lg
 
 // Sistema de bordes
---border-radius-sm, --border-radius-md, --border-radius-lg
---border-width-s, --border-width-m, --border-width-l
+--nui-border-radius-sm, --nui-border-radius-md, --nui-border-radius-lg
+--nui-border-width-s, --nui-border-width-m, --nui-border-width-l
 ```
 
 ---
@@ -159,8 +159,8 @@ $button-border-radius: 4px;
 ```scss
 // src/lib/components/card/card.component.scss
 .nui-card {
-  padding: var(--spacing-md);
-  border-radius: var(--border-radius-md);
+  padding: var(--nui-spacing-md);
+  border-radius: var(--nui-border-radius-md);
   background: var(--nui-color-primary);
   box-shadow: var(--shadow-md);
 }
@@ -173,8 +173,8 @@ $button-border-radius: 4px;
 
 @mixin nuevo-componente-base {
   @include mixins.component-size(md);
-  border-radius: var(--border-radius-md);
-  transition: all var(--transition-duration-normal);
+  border-radius: var(--nui-border-radius-md);
+  transition: all var(--nui-transition-duration-normal);
 }
 ```
 

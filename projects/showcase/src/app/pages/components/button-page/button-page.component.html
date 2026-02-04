@@ -86,13 +86,20 @@
           <div class="example-preview">
             <nui-button
               [loading]="isLoading()"
+              [size]="'xl'"
               loadingPosition="start"
               (onClick)="simulateLoading()"
             >
               {{ isLoading() ? 'Loading...' : 'Click to Load' }}
             </nui-button>
-            <nui-button [loading]="isLoading()" loadingPosition="end">Loading...</nui-button>
-            <nui-button [loading]="isLoading()" loadingPosition="center">Loading...</nui-button>
+            <nui-button
+              [loading]="isLoading()"
+              loadingPosition="end"
+              [icon]="'ri-loader-line'"
+            ></nui-button>
+            <nui-button [loading]="isLoading()" [size]="'xs'" loadingPosition="center">
+              Loading...
+            </nui-button>
           </div>
         }
 

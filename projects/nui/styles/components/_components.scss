@@ -1,9 +1,5 @@
-@use "action-menu";
-@use "button";
-@use "fab-button";
-@use "modal-dialog";
-@use "modal-overlay";
-@use "popover";
-@use "slidepanel";
-@use "toast";
-@use "tooltip";
+@use 'button';
+@use 'action-menu';
+
+@include button.nui-button-styles;
+@include action-menu.nui-action-menu-styles;

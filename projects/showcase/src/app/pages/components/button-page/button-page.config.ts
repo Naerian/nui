@@ -117,15 +117,25 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       examples: [
         {
           title: 'codeExamples.html',
-          code: `<nui-button [loading]="isLoading" loadingPosition="start">
-  Loading...
+          code: `<!-- Spinner in start position with content -->
+<nui-button
+  [loading]="isLoading()"
+  [size]="'xl'"
+  loadingPosition="start"
+  (onClick)="simulateLoading()"
+>
+  {{ isLoading() ? 'Loading...' : 'Click to Load' }}
 </nui-button>
 
-<nui-button [loading]="true" loadingPosition="end">
-  Loading...
-</nui-button>
+<!-- Spinner in end position, but content is replaced because only icon is present -->
+<nui-button
+  [loading]="isLoading()"
+  loadingPosition="end"
+  [icon]="'ri-loader-line'"
+/>
 
-<nui-button [loading]="true" loadingPosition="center">
+<!-- Spinner in center position replaces content -->
+<nui-button [loading]="isLoading()" [size]="'xs'" loadingPosition="center">
   Loading...
 </nui-button>`,
           language: 'html',
@@ -375,84 +385,54 @@ export class ExampleComponent {
         {
           title: 'codeExamples.cssVariables',
           code: `:root {
-  /* Sizes */
-  --nui-button-height-xs: 24px;
-  --nui-button-height-sm: 32px;
-  --nui-button-height-md: 40px;
-  --nui-button-height-lg: 48px;
-  --nui-button-height-xl: 56px;
-  
-  --nui-button-padding-x-xs: var(--spacing-sm);
-  --nui-button-padding-x-sm: var(--spacing-md);
-  --nui-button-padding-x-md: var(--spacing-lg);
-  --nui-button-padding-x-lg: var(--spacing-xl);
-  --nui-button-padding-x-xl: var(--spacing-2xl);
-  
-  /* Typography */
-  --nui-button-font-size-xs: var(--font-size-xs);
-  --nui-button-font-size-sm: var(--font-size-sm);
-  --nui-button-font-size-md: var(--font-size-md);
-  --nui-button-font-size-lg: var(--font-size-lg);
-  --nui-button-font-size-xl: var(--font-size-xl);
-  --nui-button-font-weight: var(--font-weight-medium);
-  
-  /* Borders and shape */
-  --nui-button-border-radius: var(--border-radius-md);
-  --nui-button-border-width: 1px;
-  
-  /* Internal spacing */
-  --nui-button-icon-gap: var(--spacing-sm);
-  --nui-button-icon-only-padding: var(--spacing-sm);
-  
-  /* Transitions */
-  --nui-button-transition: all 0.2s ease;
-  
-  /* States - generated dynamically by color */
-  /* Solid variant */
-  --nui-button-solid-bg: var(--primary-color);
-  --nui-button-solid-text: var(--nui-text-on-primary);
-  --nui-button-solid-hover-bg: var(--primary-hover);
-  --nui-button-solid-active-bg: var(--primary-active);
-  
-  /* Outline variant */
-  --nui-button-outline-border: var(--primary-color);
-  --nui-button-outline-text: var(--primary-color);
-  --nui-button-outline-hover-bg: var(--primary-bg-subtle);
-  
-  /* Ghost variant */
-  --nui-button-ghost-text: var(--primary-color);
-  --nui-button-ghost-hover-bg: var(--primary-bg-subtle);
-  
-  /* Disabled */
-  --nui-button-disabled-opacity: 0.5;
-  --nui-button-disabled-cursor: not-allowed;
-  
-  /* Loading */
-  --nui-button-loading-spinner-size: 16px;
-  --nui-button-loading-opacity: 0.7;
-}
+  // Structural Variables
+  --nui-button-gap
+  --nui-button-transition
+  --nui-button-spin-duration
+  --nui-button-focus-width
+  --nui-button-focus-offset
 
-// Customization example
-.my-custom-button {
-  --nui-button-border-radius: 20px;
-  --nui-button-font-weight: var(--font-weight-bold);
-  --nui-button-height-md: 44px;
-  --nui-button-padding-x-md: 24px;
-  
-  /* Custom shadows */
-  &.nui-button--solid {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    
-    &:hover {
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-      transform: translateY(-1px);
-    }
-    
-    &:active {
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-      transform: translateY(0);
-    }
+  // Size Variables
+  --nui-button-radius-xs
+  --nui-button-radius-s
+  --nui-button-radius-md
+  --nui-button-radius-lg
+  --nui-button-radius-xl
+
+  // Example: Custom Theme Override
+  .my-custom-class {
+    --button-bg: #1a1a1a;
+    --button-hover-bg: #000000;
+    --button-text: gold;
   }
+
+  // Variant and Color Variables. 
+  // Using 'primary', 'secondary', 'accent', 'success', 'info', 'warning', 'danger' as color
+  --nui-button-\${color\}-solid-bg
+  --nui-button-\${color\}-solid-text
+  --nui-button-\${color\}-solid-border
+  --nui-button-\${color\}-solid-hover-bg
+  --nui-button-\${color\}-solid-hover-text
+  --nui-button-\${color\}-solid-hover-border
+  --nui-button-\${color\}-solid-active-bg
+  --nui-button-\${color\}-solid-active-border
+  --nui-button-\${color\}-outline-bg
+  --nui-button-\${color\}-outline-text
+  --nui-button-\${color\}-outline-border
+  --nui-button-\${color\}-outline-hover-bg
+  --nui-button-\${color\}-outline-hover-text
+  --nui-button-\${color\}-outline-hover-border
+  --nui-button-\${color\}-outline-active-bg
+  --nui-button-\${color\}-outline-active-border
+  --nui-button-\${color\}-ghost-bg
+  --nui-button-\${color\}-ghost-text
+  --nui-button-\${color\}-ghost-border
+  --nui-button-\${color\}-ghost-hover-bg
+  --nui-button-\${color\}-ghost-hover-text
+  --nui-button-\${color\}-ghost-hover-border
+  --nui-button-\${color\}-ghost-active-bg
+  --nui-button-\${color\}-ghost-active-border
+  --nui-button-\${color\}-focus-color
 }`,
           language: 'scss',
         },

@@ -1,4 +1,12 @@
-﻿:host {
+﻿// ============================================================================
+// Sidebar Panel Component Styles
+// ============================================================================
+// This component uses ViewEncapsulation.None
+// All styles are compiled globally from styles/components/_sidebar-panel.scss
+// This file contains :host styles that are dynamically applied
+// ============================================================================
+
+:host {
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -6,17 +14,12 @@
   box-shadow: var(--nui-sidebar-panel-shadow);
   overflow: hidden;
   
-  // Optimizaciones de rendering para animaciones fluidas
-  // REMOVIDO: will-change: transform - causaba renderizado borroso del contenido
-  transform: translateZ(0); // Fuerza aceleraciÃ³n GPU
-  backface-visibility: hidden; // Previene flickering
-  -webkit-font-smoothing: antialiased; // Mejora renderizado de texto durante animaciÃ³n
-  
-  // REMOVIDO: transition: all 0.3s ease
-  // Las animaciones ahora se manejan completamente por Angular Animations
-  // para evitar conflictos y mejorar performance
+  // Rendering optimizations for smooth animations
+  transform: translateZ(0); // Force GPU acceleration
+  backface-visibility: hidden; // Prevent flickering
+  -webkit-font-smoothing: antialiased; // Improve text rendering during animation
 
-  // Posiciones - Solo posicionamiento, el tamaÃ±o se controla desde hostStyles
+  // Positions - Only positioning, size is controlled from hostStyles
   &.nui-sidebar-panel-position-right {
     top: 0;
     right: 0;
@@ -62,89 +65,9 @@
     display: none;
   }
 
-  // Estado minimizado - ocultar completamente el panel
+  // Minimized state - hide panel completely
   &.sidebar-panel-minimized {
     display: none !important;
-  }
-}
-
-/**
- * Contenedor del panel en el overlay
- * Permite que el panel capture eventos del mouse
- */
-.nui-sidebar-panel-pane {
-  pointer-events: auto;
-}
-
-.nui-sidebar-panel-wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-}
-
-.nui-sidebar-panel-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--nui-sidebar-panel-header-padding);
-  border-bottom: 1px solid var(--nui-sidebar-panel-border);
-  background: var(--nui-sidebar-panel-bg);
-  flex-shrink: 0;
-
-  .nui-sidebar-panel-title {
-    margin: 0;
-    font-size: var(--nui-sidebar-panel-title-size);
-    font-weight: var(--nui-sidebar-panel-title-weight);
-    color: var(--nui-sidebar-panel-text);
-  }
-
-  .nui-sidebar-panel-header-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--spacing-xs);
-  }
-}
-
-.nui-sidebar-panel-content {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: var(--nui-sidebar-panel-content-padding);
-  background: var(--nui-sidebar-panel-bg);
-
-  // Scrollbar personalizado
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--scroll-bg);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--scroll-thumb-bg);
-    border-radius: 4px;
-
-    &:hover {
-      background: var(--color-gray-500);
-    }
-  }
-}
-
-.nui-sidebar-panel-footer {
-  padding: var(--nui-sidebar-panel-header-padding);
-  border-top: 1px solid var(--nui-sidebar-panel-border);
-  background: var(--nui-sidebar-panel-bg);
-  flex-shrink: 0;
-
-  &-actions {
-    display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
   }
 }
 

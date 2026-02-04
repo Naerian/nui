@@ -8,6 +8,7 @@ import {
   DEFAULT_GRAYS,
   DEFAULT_PRESET,
   NUI_THEME_CONFIG,
+  LUMINANCE_UMBRAL,
 } from './models/theme.config';
 
 @Injectable({ providedIn: 'root' })
@@ -139,6 +140,23 @@ export class ThemeService {
     this.styleElement.textContent = this.generateComponentVariables();
   }
 
+  private getContrastColor(hexColor: string): string {
+    const rgb = this.hexToRgb(hexColor);
+
+    // Fórmula de luminancia relativa (estándar WCAG)
+    const getLuminance = (r: number, g: number, b: number) => {
+      const a = [r, g, b].map(v => {
+        v /= 255;
+        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+      });
+      return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+    };
+
+    const lum = getLuminance(rgb.r, rgb.g, rgb.b);
+    // Si la luminancia es alta (color claro), texto negro. Si es baja (oscuro), texto blanco.
+    return lum > LUMINANCE_UMBRAL ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
+  }
+
   private generateComponentVariables(): string {
     const colors = this._isDarkMode()
       ? this._currentPreset().colors.dark
@@ -212,6 +230,7 @@ export class ThemeService {
 
   private generateStructuralVariables(grays: ThemeGrays): string {
     const isDark = this._isDarkMode();
+    const currentColors = this.colors();
     return `
   /* Gray scale */
   --nui-gray-50: ${grays[50]};
@@ -240,16 +259,20 @@ export class ThemeService {
   --nui-border-primary: ${isDark ? grays[700] : grays[200]};
   --nui-border-secondary: ${isDark ? grays[800] : grays[100]};
 
-  /* Shadow colors */
-  --nui-shadow-sm: ${isDark ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.1)'};
-  --nui-shadow-md: ${isDark ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0.15)'};
-  --nui-shadow-lg: ${isDark ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.2)'};
-  --nui-shadow-xl: ${isDark ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.25)'};
+  /* Eliminamos las sombras terminadas y enviamos solo opacidades */
+  --nui-shadow-opacity-sm: ${isDark ? '0.5' : '0.1'};
+  --nui-shadow-opacity-md: ${isDark ? '0.6' : '0.15'};
+  --nui-shadow-opacity-lg: ${isDark ? '0.7' : '0.2'};
+  --nui-shadow-opacity-xl: ${isDark ? '0.8' : '0.25'};
+
+  /* Shadow base (RGB para poder usarlo en rgba() de SCSS) */
+  --nui-shadow-base-rgb: ${isDark ? '0, 0, 0' : '0, 0, 0'}; 
+
+  /* Multiplicador para hacer las sombras más densas en Dark Mode si se desea */
+  --nui-shadow-opacity-scale: ${isDark ? '2.5' : '1'};
 
   /* Focus ring */
-  --nui-focus-ring-color: ${isDark ? 'rgba(96, 165, 250, 0.5)' : 'rgba(59, 130, 246, 0.5)'};
-  --nui-focus-ring-width: 2px;
-  --nui-focus-ring-offset: 2px;
+  --nui-focus-ring-color: ${this.withAlpha(currentColors.primary, 0.5)};
 
   /* Text selection */
   --nui-color-selection-bg: ${isDark ? grays[500] : grays[200]};
@@ -271,7 +294,7 @@ export class ThemeService {
   /* Avatar */
   --nui-avatar-default-bg: ${isDark ? 'var(--nui-color-secondary-shade-20)' : 'var(--nui-color-secondary)'};
   --nui-avatar-default-color: ${isDark ? PURE_COLORS.BLACK : PURE_COLORS.WHITE};
-  --nui-avatar-group-border-color: ${isDark ? grays[50] : PURE_COLORS.WHITE};
+  --nui-avatar-group-border-color: ${isDark ? grays[500] : PURE_COLORS.WHITE};
   --nui-avatar-excess-bg: ${isDark ? grays[700] : grays[300]};
   --nui-avatar-excess-color: ${isDark ? grays[200] : grays[700]};
   --nui-avatar-excess-hover-bg: ${isDark ? grays[600] : grays[400]};
@@ -281,13 +304,14 @@ export class ThemeService {
   private generateButtonVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
     const activeColor = this.shade(color, 20);
-    const textOnColor = this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
+    const contrastText = this.getContrastColor(color);
+
     return `
   --nui-button-${name}-solid-bg: ${color};
-  --nui-button-${name}-solid-text: ${textOnColor};
-  --nui-button-${name}-solid-border: ${color};
+  --nui-button-${name}-solid-text: ${contrastText};
+  --nui-button-${name}-solid-border: transparent;
   --nui-button-${name}-solid-hover-bg: ${hoverColor};
-  --nui-button-${name}-solid-hover-text: ${textOnColor};
+  --nui-button-${name}-solid-hover-text: ${contrastText};
   --nui-button-${name}-solid-hover-border: ${hoverColor};
   --nui-button-${name}-solid-active-bg: ${activeColor};
   --nui-button-${name}-solid-active-border: ${activeColor};
@@ -314,13 +338,14 @@ export class ThemeService {
   private generateFabButtonVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
     const activeColor = this.shade(color, 20);
-    const textOnColor = this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
+    const contrastText = this.getContrastColor(color);
+
     return `
   --nui-fab-button-${name}-solid-bg: ${color};
-  --nui-fab-button-${name}-solid-text: ${textOnColor};
+  --nui-fab-button-${name}-solid-text: ${contrastText};
   --nui-fab-button-${name}-solid-border: ${color};
   --nui-fab-button-${name}-solid-hover-bg: ${hoverColor};
-  --nui-fab-button-${name}-solid-hover-text: ${textOnColor};
+  --nui-fab-button-${name}-solid-hover-text: ${contrastText};
   --nui-fab-button-${name}-solid-hover-border: ${hoverColor};
   --nui-fab-button-${name}-solid-active-bg: ${activeColor};
   --nui-fab-button-${name}-solid-active-border: ${activeColor};
@@ -349,11 +374,11 @@ export class ThemeService {
     const hoverBg = this.withAlpha(color, 0.05);
     const inactiveBorder = this._isDarkMode() ? DEFAULT_GRAYS[900] : DEFAULT_GRAYS[200];
     const inactiveBg = this._isDarkMode() ? DEFAULT_GRAYS[900] : PURE_COLORS.WHITE;
-    const textOnColor = this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
+    const contrastText = this.getContrastColor(color);
 
     return `
   --nui-button-group-${name}-solid-bg: ${color};
-  --nui-button-group-${name}-solid-text: ${textOnColor};
+  --nui-button-group-${name}-solid-text: ${contrastText};
   --nui-button-group-${name}-solid-border: ${color};
   --nui-button-group-${name}-solid-box-border: ${inactiveBg};
   --nui-button-group-${name}-solid-hover-bg: ${hoverColor};
@@ -385,10 +410,11 @@ export class ThemeService {
   private generateChipVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
     const selectedBg = this._isDarkMode() ? this.shade(color, 15) : this.shade(color, 10);
-    const textOnColor = this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
+    const contrastText = this.getContrastColor(color);
+
     return `
   --nui-chip-${name}-solid-bg: ${color};
-  --nui-chip-${name}-solid-text: ${textOnColor};
+  --nui-chip-${name}-solid-text: ${contrastText};
   --nui-chip-${name}-solid-border: ${color};
   --nui-chip-${name}-solid-hover-bg: ${hoverColor};
   --nui-chip-${name}-solid-selected-bg: ${selectedBg};
@@ -397,12 +423,12 @@ export class ThemeService {
   --nui-chip-${name}-outline-border: ${color};
   --nui-chip-${name}-outline-hover-bg: ${this.withAlpha(color, 0.1)};
   --nui-chip-${name}-outline-selected-bg: ${selectedBg};
-  --nui-chip-${name}-outline-selected-text: ${textOnColor};
+  --nui-chip-${name}-outline-selected-text: ${contrastText};
   --nui-chip-${name}-ghost-bg: ${this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 90)};
   --nui-chip-${name}-ghost-text: ${color};
   --nui-chip-${name}-ghost-hover-bg: ${this.withAlpha(color, 0.2)};
   --nui-chip-${name}-ghost-selected-bg: ${this._isDarkMode() ? this.shade(color, 60) : this.tint(color, 80)};
-  --nui-chip-${name}-ghost-selected-text: ${textOnColor};
+  --nui-chip-${name}-ghost-selected-text: ${contrastText};
   --nui-chip-${name}-focus-color: ${this.tint(color, 60)};
 `;
   }
@@ -477,11 +503,11 @@ export class ThemeService {
     const ghostActive = this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 90);
     const ghostInactiveBg = this._isDarkMode() ? this.shade(color, 85) : this.tint(color, 95);
     const ghostInactiveHoverBg = this.withAlpha(color, 0.12);
-    const textOnColor = this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
+    const contrastText = this.getContrastColor(color);
 
     return `
   --nui-paginator-${name}-solid-bg: ${color};
-  --nui-paginator-${name}-solid-text: ${textOnColor};
+  --nui-paginator-${name}-solid-text: ${contrastText};
   --nui-paginator-${name}-solid-border: ${color};
   --nui-paginator-${name}-solid-hover-bg: ${hoverColor};
   --nui-paginator-${name}-solid-hover-border: ${hoverColor};
@@ -515,11 +541,11 @@ export class ThemeService {
 
   private generateAvatarVariables(name: string, color: string): string {
     const shadeColor = this._isDarkMode() ? this.shade(color, 10) : color;
-    const textOnColor = this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
+    const contrastText = this.getContrastColor(color);
 
     return `
   --nui-avatar-${name}-bg: ${shadeColor};
-  --nui-avatar-${name}-color: ${textOnColor};
+  --nui-avatar-${name}-color: ${contrastText};
 `;
   }
 
@@ -543,6 +569,12 @@ export class ThemeService {
     const focusColor = this._isDarkMode() ? this.withAlpha(color, 0.15) : this.tint(color, 95);
 
     return `
+  --nui-action-menu-bg: var(--nui-bg-primary);
+  
+  --nui-action-menu-item-bg: transparent;
+  --nui-action-menu-item-color: var(--nui-text-primary);
+  --nui-action-menu-item-notify-selected: var(--nui-color-primary);
+
   --nui-action-menu-${name}-item-hover-bg: ${hoverBg};
   --nui-action-menu-${name}-item-hover-color: ${hoverColor};
   --nui-action-menu-${name}-item-hover-icon-color: ${hoverIconColor};

@@ -29,7 +29,7 @@
   &__config {
     h3 {
       font-size: 0.875rem;
-      font-weight: var(--font-weight-semibold);
+      font-weight: var(--nui-font-weight-semibold);
       margin: 0 0 0.75rem;
       color: var(--nui-text-primary);
     }
@@ -46,7 +46,7 @@
 
         strong {
           color: var(--nui-text-primary);
-          font-weight: var(--font-weight-semibold);
+          font-weight: var(--nui-font-weight-semibold);
         }
       }
     }
@@ -95,7 +95,7 @@
       }
 
       strong {
-        font-weight: var(--font-weight-semibold);
+        font-weight: var(--nui-font-weight-semibold);
       }
     }
   }
@@ -104,7 +104,7 @@
   &__close-action {
     h3 {
       font-size: 0.875rem;
-      font-weight: var(--font-weight-semibold);
+      font-weight: var(--nui-font-weight-semibold);
       margin: 0 0 0.75rem;
       color: var(--nui-text-primary);
     }

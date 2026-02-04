@@ -1,38 +1,44 @@
-@use "sass:color";
-@use "sass:list";
-@use "sass:map";
-@use "sass:math";
+@use 'sass:color';
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+
 // ========================================
 // COLOR FUNCTIONS
 // ========================================
 
-/// Función para aclarar un color mezclándolo con blanco
-/// @param {Color} $color - Color base a aclarar
-/// @param {Number} $percentage - Porcentaje de blanco a mezclar (0-100)
-/// @return {Color} Color aclarado
+/// Lightens a color by mixing it with white
+/// @group Color
+/// @access public
+/// @param {Color} $color - Base color to lighten
+/// @param {Number} $percentage - Percentage of white to mix (0–100)
+/// @return {Color} Lightened color
 /// @example
-///   tint(#14b8a6, 50%) // Mezcla 50% blanco con teal
+///   tint(#14b8a6, 50%)
 @function tint($color, $percentage) {
   @return color.mix(white, $color, $percentage);
 }
 
-/// Función para oscurecer un color mezclándolo con negro
-/// @param {Color} $color - Color base a oscurecer
-/// @param {Number} $percentage - Porcentaje de negro a mezclar (0-100)
-/// @return {Color} Color oscurecido
+/// Darkens a color by mixing it with black
+/// @group Color
+/// @access public
+/// @param {Color} $color - Base color to darken
+/// @param {Number} $percentage - Percentage of black to mix (0–100)
+/// @return {Color} Darkened color
 /// @example
-///   shade(#14b8a6, 50%) // Mezcla 50% negro con teal
+///   shade(#14b8a6, 50%)
 @function shade($color, $percentage) {
   @return color.mix(black, $color, $percentage);
 }
 
-/// Función para crear un color con transparencia (alpha)
-/// Wrapper semántico sobre rgba() para mejor legibilidad
-/// @param {Color} $color - Color base
-/// @param {Number} $alpha - Valor de transparencia (0-1)
-/// @return {Color} Color con transparencia
+/// Creates a color with alpha transparency
+/// @group Color
+/// @access public
+/// @param {Color} $color - Base color
+/// @param {Number} $alpha - Alpha value (0–1)
+/// @return {Color} Color with transparency
 /// @example
-///   with-alpha(#14b8a6, 0.5) // Teal con 50% transparencia
+///   with-alpha(#14b8a6, 0.5)
 @function with-alpha($color, $alpha) {
   @return rgba($color, $alpha);
 }
@@ -41,43 +47,43 @@
 // SPACING & SIZE FUNCTIONS
 // ========================================
 
-/// Función para remover unidades de un valor
-/// Útil para cálculos matemáticos con valores CSS
-/// @param {Number} $value - Valor con unidad (px, rem, em, etc.)
-/// @return {Number} Valor sin unidad
+/// Removes the unit from a numeric value
+/// @group Spacing
+/// @access public
+/// @param {Number} $value - Value with unit (px, rem, em, etc.)
+/// @return {Number} Unitless value
 /// @example
 ///   strip-unit(16px) // 16
-///   strip-unit(1.5rem) // 1.5
 @function strip-unit($value) {
   @return calc($value / ($value * 0 + 1));
 }
 
-/// Función para convertir px a rem
-/// Asume base de 16px por defecto (configurable)
-/// @param {Number} $px - Valor en píxeles
-/// @param {Number} $base [16px] - Tamaño base de fuente
-/// @return {Number} Valor en rem
+/// Converts px values to rem
+/// @group Spacing
+/// @access public
+/// @param {Number} $px - Value in pixels
+/// @param {Number} $base [16px] - Base font size
+/// @return {Number} Value in rem
 /// @example
 ///   px-to-rem(24px) // 1.5rem
-///   px-to-rem(24px, 14px) // 1.714rem
 @function px-to-rem($px, $base: 16px) {
   @if math.unit($px) != 'px' {
-    @error "px-to-rem() espera un valor en px, recibió: #{$px}";
+    @error "px-to-rem() expects a value in px, received: #{$px}";
   }
   @return calc(strip-unit($px) / strip-unit($base)) * 1rem;
 }
 
-/// Función para convertir rem a px
-/// Asume base de 16px por defecto (configurable)
-/// @param {Number} $rem - Valor en rem
-/// @param {Number} $base [16px] - Tamaño base de fuente
-/// @return {Number} Valor en píxeles
+/// Converts rem values to px
+/// @group Spacing
+/// @access public
+/// @param {Number} $rem - Value in rem
+/// @param {Number} $base [16px] - Base font size
+/// @return {Number} Value in pixels
 /// @example
 ///   rem-to-px(1.5rem) // 24px
-///   rem-to-px(1.5rem, 14px) // 21px
 @function rem-to-px($rem, $base: 16px) {
   @if math.unit($rem) != 'rem' {
-    @error "rem-to-px() espera un valor en rem, recibió: #{$rem}";
+    @error "rem-to-px() expects a value in rem, received: #{$rem}";
   }
   @return calc(strip-unit($rem) * strip-unit($base)) * 1px;
 }
@@ -86,28 +92,32 @@
 // SHADOW FUNCTIONS
 // ========================================
 
-/// Función para crear sombras con opacidad variable
-/// Útil para adaptar sombras entre temas light/dark
-/// @param {String} $shadow-base - Valores de sombra sin color (offset, blur, spread)
-/// @param {Number} $opacity - Opacidad de la sombra (0-1)
-/// @param {Color} $color [black] - Color base de la sombra
-/// @return {String} Box-shadow completo con opacidad
+/// Generates box-shadow with dynamic opacity
+/// @group Shadow
+/// @access public
+/// @param {String} $shadow-base - Shadow offsets, blur, and spread
+/// @param {Number} $opacity - Shadow opacity (0–1)
+/// @param {Color} $color [null] - Optional shadow color
+/// @return {String} Box-shadow declaration
 /// @example
-///   shadow(0 2px 4px, 0.1) // 0 2px 4px rgba(0, 0, 0, 0.1)
-///   shadow(0 4px 8px, 0.2, #14b8a6) // 0 4px 8px rgba(20, 184, 166, 0.2)
-@function shadow($shadow-base, $opacity, $color: black) {
-  @return #{$shadow-base} rgba($color, $opacity);
+///   shadow(0 2px 4px, 0.1)
+@function shadow($shadow-base, $opacity, $color: null) {
+  $final-color: if(
+    $color,
+    $color,
+    rgba(var(--nui-shadow-base-rgb), calc(#{$opacity} * var(--nui-shadow-opacity-scale)))
+  );
+  @return #{$shadow-base} #{$final-color};
 }
 
-/// Función helper para crear múltiples capas de sombra
-/// @param {List} $layers - Lista de capas (base, opacity, color)
-/// @return {String} Box-shadow multicapa
+/// Generates multi-layer shadows
+/// @group Shadow
+/// @access public
+/// @param {List} $layers - List of layers: (base, opacity, optional color)
+/// @return {String} Combined multi-layer box-shadow
 /// @example
-///   $layers: (
-///     (0 1px 3px, 0.12),
-///     (0 1px 2px, 0.24)
-///   );
-///   shadow-layers($layers) // Sombra multicapa combinada
+///   $layers: ((0 1px 3px, 0.12), (0 1px 2px, 0.24))
+///   shadow-layers($layers)
 @function shadow-layers($layers) {
   $result: ();
   @each $layer in $layers {
@@ -123,14 +133,15 @@
 // MAP UTILITY FUNCTIONS
 // ========================================
 
-/// Función para obtener un valor de map con fallback
-/// Más seguro que map-get() nativo
-/// @param {Map} $map - Mapa SCSS
-/// @param {String} $key - Clave a buscar
-/// @param {*} $fallback [null] - Valor por defecto si no existe
-/// @return {*} Valor del map o fallback
+/// Retrieves a value from a map with fallback
+/// @group Map
+/// @access public
+/// @param {Map} $map - SCSS map
+/// @param {String} $key - Key to retrieve
+/// @param {*} $fallback [null] - Default value
+/// @return {*} Map value or fallback
 /// @example
-///   map-get-default($component-heights, md, 2.5rem) // Valor de md o 2.5rem
+///   map-get-default($heights, md, 2.5rem)
 @function map-get-default($map, $key, $fallback: null) {
   @if map.has-key($map, $key) {
     @return map.get($map, $key);
@@ -142,19 +153,18 @@
 // CONTRAST & ACCESSIBILITY FUNCTIONS
 // ========================================
 
-/// Función para calcular luminancia relativa de un color
-/// Basado en WCAG 2.0 - https://www.w3.org/TR/WCAG20-TECHS/G17.html
-/// @param {Color} $color - Color a analizar
-/// @return {Number} Luminancia entre 0 (negro) y 1 (blanco)
+/// Calculates relative luminance of a color
+/// @group Accessibility
+/// @access public
+/// @param {Color} $color - Color to analyze
+/// @return {Number} Luminance (0–1)
 /// @example
 ///   luminance(#ffffff) // 1
-///   luminance(#000000) // 0
 @function luminance($color) {
   $red: color.red($color) / 255;
   $green: color.green($color) / 255;
   $blue: color.blue($color) / 255;
 
-  // Convertir a espacio sRGB
   @if $red <= 0.03928 {
     $red: calc($red / 12.92);
   } @else {
@@ -176,14 +186,14 @@
   @return $red * 0.2126 + $green * 0.7152 + $blue * 0.0722;
 }
 
-/// Función para calcular ratio de contraste entre dos colores
-/// Basado en WCAG 2.0
-/// @param {Color} $foreground - Color del texto/foreground
-/// @param {Color} $background - Color del fondo
-/// @return {Number} Ratio de contraste (1-21)
+/// Calculates contrast ratio between two colors
+/// @group Accessibility
+/// @access public
+/// @param {Color} $foreground - Text color
+/// @param {Color} $background - Background color
+/// @return {Number} Contrast ratio (1–21)
 /// @example
-///   contrast-ratio(#000000, #ffffff) // 21 (máximo contraste)
-///   contrast-ratio(#14b8a6, #ffffff) // ~3.5
+///   contrast-ratio(#000000, #ffffff)
 @function contrast-ratio($foreground, $background) {
   $lum1: luminance($foreground);
   $lum2: luminance($background);
@@ -195,14 +205,15 @@
   }
 }
 
-/// Función para elegir automáticamente color de texto (blanco o negro)
-/// según el contraste con el fondo
-/// @param {Color} $background - Color del fondo
-/// @param {Color} $light [white] - Color para fondos oscuros
-/// @param {Color} $dark [black] - Color para fondos claros
-/// @return {Color} Color de texto con mejor contraste
+/// Selects the best text color (light or dark) based on contrast
+/// @group Accessibility
+/// @access public
+/// @param {Color} $background - Background color
+/// @param {Color} $light [white] - Text for dark backgrounds
+/// @param {Color} $dark [black] - Text for light backgrounds
+/// @return {Color} Color with higher contrast
 /// @example
-///   contrast-color(#14b8a6) // white o black según contraste
+///   contrast-color(#14b8a6)
 @function contrast-color($background, $light: white, $dark: black) {
   $light-contrast: contrast-ratio($light, $background);
   $dark-contrast: contrast-ratio($dark, $background);

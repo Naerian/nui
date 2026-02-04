@@ -383,10 +383,10 @@ onPanelChange(event: PanelCollapseEvent, panelName: string) {
 | Variable | Default | Descripción |
 |----------|---------|-------------|
 | `--panel-bg` | `var(--surface-primary)` | Color de fondo |
-| `--panel-border` | `var(--border-container)` | Borde del panel |
-| `--panel-border-radius` | `var(--border-radius-md)` | Radio de esquinas |
+| `--panel-border` | `var(--nui-border-container)` | Borde del panel |
+| `--panel-border-radius` | `var(--nui-border-radius-md)` | Radio de esquinas |
 | `--panel-shadow` | `none` | Sombra del panel |
-| `--panel-spacing` | `var(--spacing-md)` | Espaciado general |
+| `--panel-spacing` | `var(--nui-spacing-md)` | Espaciado general |
 | `--panel-header-bg` | `transparent` | Fondo del header |
 | `--panel-title-color` | `var(--text-primary)` | Color del título |
 | `--panel-subtitle-color` | `var(--text-secondary)` | Color del subtítulo |

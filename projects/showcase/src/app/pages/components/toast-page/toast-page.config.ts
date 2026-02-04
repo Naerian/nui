@@ -514,9 +514,9 @@ export class ExampleComponent {
   --nui-toast-bg: var(--nui-bg-primary);
   --nui-toast-text: var(--nui-text-primary);
   --nui-toast-border: var(--nui-border-primary);
-  --nui-toast-border-radius: var(--border-radius-lg);
+  --nui-toast-border-radius: var(--nui-border-radius-lg);
   --nui-toast-shadow: var(--nui-shadow-xl);
-  --nui-toast-padding: var(--spacing-md);
+  --nui-toast-padding: var(--nui-spacing-md);
   --nui-toast-min-width: 300px;
   --nui-toast-max-width: 500px;
   
@@ -524,22 +524,22 @@ export class ExampleComponent {
   --nui-toast-z-index: 9999;
   
   /* Spacing between toasts */
-  --nui-toast-gap: var(--spacing-sm);
+  --nui-toast-gap: var(--nui-spacing-sm);
   
   /* Title */
-  --nui-toast-title-font-size: var(--font-size-md);
-  --nui-toast-title-font-weight: var(--font-weight-semibold);
+  --nui-toast-title-font-size: var(--nui-font-size-md);
+  --nui-toast-title-font-weight: var(--nui-font-weight-semibold);
   --nui-toast-title-color: var(--nui-text-primary);
-  --nui-toast-title-margin-bottom: var(--spacing-xs);
+  --nui-toast-title-margin-bottom: var(--nui-spacing-xs);
   
   /* Message */
-  --nui-toast-message-font-size: var(--font-size-sm);
+  --nui-toast-message-font-size: var(--nui-font-size-sm);
   --nui-toast-message-color: var(--nui-text-secondary);
   --nui-toast-message-line-height: 1.5;
   
   /* Icon */
   --nui-toast-icon-size: 20px;
-  --nui-toast-icon-margin-right: var(--spacing-sm);
+  --nui-toast-icon-margin-right: var(--nui-spacing-sm);
   
   /* Close button */
   --nui-toast-close-button-size: 20px;
@@ -586,10 +586,10 @@ export class ExampleComponent {
 
 // Example of a compact toast
 .compact-toast {
-  --nui-toast-padding: var(--spacing-sm) var(--spacing-md);
+  --nui-toast-padding: var(--nui-spacing-sm) var(--nui-spacing-md);
   --nui-toast-min-width: 200px;
-  --nui-toast-title-font-size: var(--font-size-sm);
-  --nui-toast-message-font-size: var(--font-size-xs);
+  --nui-toast-title-font-size: var(--nui-font-size-sm);
+  --nui-toast-message-font-size: var(--nui-font-size-xs);
   --nui-toast-icon-size: 16px;
 }
 

@@ -15,7 +15,7 @@
 // // En tu archivo custom-variables.scss
 // $tooltip-padding-y: 0.5rem;
 // $tooltip-padding-x: 0.75rem;
-// $tooltip-font-size: var(--font-size-s);
+// $tooltip-font-size: var(--nui-font-size-s);
 //
 // @import "variables/tooltip/tooltip-tokens";
 // ```
@@ -28,12 +28,12 @@ $tooltip-padding-x: 0.625rem !default;
 $tooltip-max-width: 15rem !default;
 
 // ===== TIPOGRAFÍA =====
-$tooltip-font-size: var(--font-size-xs) !default;
-$tooltip-font-weight: var(--font-weight-medium) !default;
-$tooltip-line-height: var(--line-height-sm) !default;
+$tooltip-font-size: var(--nui-font-size-xs) !default;
+$tooltip-font-weight: var(--nui-font-weight-medium) !default;
+$tooltip-line-height: var(--nui-line-height-sm) !default;
 
 // ===== BORDES Y RADIOS =====
-$tooltip-border-radius: var(--border-radius-sm) !default;
+$tooltip-border-radius: var(--nui-border-radius-sm) !default;
 $tooltip-border-width: 1px !default;
 // Borde con mejor contraste: en dark mode usa gray-600 (más visible), en light mode usa gray-200 (sutil)
 $tooltip-border-color: var(--nui-gray-600) !default;

@@ -1,4 +1,4 @@
-# SlidePanel Component
+# SidebarPanel Component
 
 Panel deslizante que se abre desde los bordes de la pantalla usando Angular CDK Overlay. Ideal para mostrar formularios, información adicional, o cualquier contenido sin abandonar el contexto actual.
 
@@ -33,7 +33,7 @@ npm install @angular/cdk
 
 ```typescript
 import { Component, inject } from '@angular/core';
-import { SlidePanelService } from '@shared/components/slidepanel/slidepanel.service';
+import { SidebarPanelService } from '@shared/components/sidebar-panel/sidebar-panel.service';
 import { MyPanelComponent } from './my-panel.component';
 
 @Component({
@@ -43,10 +43,10 @@ import { MyPanelComponent } from './my-panel.component';
   `
 })
 export class MyFeatureComponent {
-  private slidePanelService = inject(SlidePanelService);
+  private sidebarPanelService = inject(SidebarPanelService);
 
   openPanel(): void {
-    const panelRef = this.slidePanelService.open(MyPanelComponent, {
+    const panelRef = this.sidebarPanelService.open(MyPanelComponent, {
       position: 'right',
       size: 'md',
       title: 'Mi Panel'
@@ -63,8 +63,8 @@ export class MyFeatureComponent {
 
 ```typescript
 import { Component, inject } from '@angular/core';
-import { SLIDEPANEL_DATA, SLIDEPANEL_REF } from '@shared/components/slidepanel/slidepanel.service';
-import { SlidePanelRef } from '@shared/components/slidepanel/slidepanel-ref';
+import { SIDEBAR_PANEL_DATA, SIDEBAR_PANEL_REF } from '@shared/components/sidebar-panel/sidebar-panel.service';
+import { SidebarPanelRef } from '@shared/components/sidebar-panel/sidebar-panel-ref';
 
 @Component({
   selector: 'app-my-panel',
@@ -82,8 +82,8 @@ import { SlidePanelRef } from '@shared/components/slidepanel/slidepanel-ref';
   `
 })
 export class MyPanelComponent {
-  readonly data = inject(SLIDEPANEL_DATA);
-  readonly panelRef = inject<SlidePanelRef>(SLIDEPANEL_REF);
+  readonly data = inject(SIDEBAR_PANEL_DATA);
+  readonly panelRef = inject<SidebarPanelRef>(SIDEBAR_PANEL_REF);
 
   confirm(): void {
     this.panelRef.close({ confirmed: true });
@@ -97,18 +97,18 @@ export class MyPanelComponent {
 
 ## API
 
-### SlidePanelService
+### SidebarPanelService
 
 #### Métodos
 
 | Método | Descripción | Retorno |
 |--------|-------------|---------|
-| `open<T>(component, config?)` | Abre un panel con el componente especificado | `SlidePanelRef<T>` |
-| `open<D, R>(config)` | Abre un panel con contenido flexible (HTML o template) | `SlidePanelRef<any, R>` |
+| `open<T>(component, config?)` | Abre un panel con el componente especificado | `SidebarPanelRef<T>` |
+| `open<D, R>(config)` | Abre un panel con contenido flexible (HTML o template) | `SidebarPanelRef<any, R>` |
 | `close(id)` | Cierra el panel con el ID especificado | `void` |
 | `closeAll()` | Cierra todos los panels abiertos | `void` |
-| `getPanel(id)` | Obtiene el stack item de un panel | `SlidePanelStackItem \| undefined` |
-| `getAllPanels()` | Obtiene todos los panels abiertos | `SlidePanelStackItem[]` |
+| `getPanel(id)` | Obtiene el stack item de un panel | `SidebarPanelStackItem \| undefined` |
+| `getAllPanels()` | Obtiene todos los panels abiertos | `SidebarPanelStackItem[]` |
 
 #### Propiedades
 
@@ -116,7 +116,7 @@ export class MyPanelComponent {
 |-----------|------|-------------|
 | `openPanelsCount` | `number` | Número de panels abiertos actualmente |
 
-### SlidePanelConfig
+### SidebarPanelConfig
 
 Configuración completa del panel:
 
@@ -151,7 +151,7 @@ Configuración completa del panel:
 | `animationDuration` | `number` | `300` | Duración animación (ms) |
 | `minimizable` | `boolean` | `false` | Panel minimizable con botón en header. **Requiere `id` obligatorio** |
 | `id` | `string` | Auto | ID único del panel. **Obligatorio si `minimizable: true`** |
-| `customButtons` | `SlidePanelCustomButton[]` | - | Botones programáticos para el footer |
+| `customButtons` | `SidebarPanelCustomButton[]` | - | Botones programáticos para el footer |
 | `contentTemplate` | `TemplateRef<any>` | - | Template de Angular para contenido flexible |
 | `htmlContent` | `string` | - | HTML string para contenido simple |
 | `templateContext` | `any` | - | Contexto de datos para el template |
@@ -162,7 +162,7 @@ Configuración completa del panel:
 ### Tamaños Predefinidos
 
 ```typescript
-const SLIDEPANEL_SIZE_MAP = {
+const SIDEBAR_PANEL_MAP = {
   xs: '300px',
   sm: '400px',
   md: '600px',
@@ -172,7 +172,7 @@ const SLIDEPANEL_SIZE_MAP = {
 };
 ```
 
-### SlidePanelRef
+### SidebarPanelRef
 
 Referencia al panel abierto:
 
@@ -182,8 +182,8 @@ Referencia al panel abierto:
 |-----------|------|-------------|
 | `id` | `string` | ID único del panel |
 | `componentInstance` | `T` | Instancia del componente cargado |
-| `config` | `SlidePanelConfig` | Configuración del panel |
-| `state` | `SlidePanelState` | Estado actual |
+| `config` | `SidebarPanelConfig` | Configuración del panel |
+| `state` | `SidebarPanelState` | Estado actual |
 | `isOpen` | `boolean` | Si está abierto |
 | `isClosed` | `boolean` | Si está cerrado |
 | `isMinimized` | `boolean` | Si está minimizado |
@@ -203,7 +203,7 @@ Referencia al panel abierto:
 | `backdropClick()` | Observable de clicks en backdrop | `Observable<MouseEvent>` |
 | `keydownEvents()` | Observable de eventos de teclado | `Observable<KeyboardEvent>` |
 | `closePrevented()` | Observable cuando se previene el cierre | `Observable<void>` |
-| `stateChanged()` | Observable de cambios de estado | `Observable<SlidePanelState>` |
+| `stateChanged()` | Observable de cambios de estado | `Observable<SidebarPanelState>` |
 
 ## Ejemplos
 
@@ -347,22 +347,22 @@ export class MyComponent {
 
 ```typescript
 // Derecha (default)
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   position: 'right'
 });
 
 // Izquierda
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   position: 'left'
 });
 
 // Arriba
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   position: 'top'
 });
 
 // Abajo
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   position: 'bottom'
 });
 ```
@@ -371,24 +371,24 @@ slidePanelService.open(MyComponent, {
 
 ```typescript
 // Tamaño predefinido
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   size: 'lg'
 });
 
 // Ancho custom
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   position: 'right',
   width: '500px'
 });
 
 // Alto custom
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   position: 'bottom',
   height: '400px'
 });
 
 // Con máximos
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   width: '80%',
   maxWidth: '1200px'
 });
@@ -398,7 +398,7 @@ slidePanelService.open(MyComponent, {
 
 ```typescript
 // En el componente que abre el panel
-slidePanelService.open(UserFormComponent, {
+sidebarPanelService.open(UserFormComponent, {
   data: {
     userId: 123,
     name: 'Juan',
@@ -409,7 +409,7 @@ slidePanelService.open(UserFormComponent, {
 
 // En UserFormComponent
 export class UserFormComponent {
-  readonly data = inject(SLIDEPANEL_DATA);
+  readonly data = inject(SIDEBAR_PANEL_DATA);
 
   ngOnInit(): void {
     console.log(this.data.userId); // 123
@@ -421,7 +421,7 @@ export class UserFormComponent {
 ### Manejar Resultados
 
 ```typescript
-const panelRef = slidePanelService.open(ConfirmDialogComponent, {
+const panelRef = sidebarPanelService.open(ConfirmDialogComponent, {
   title: 'Confirmar Acción',
   data: { message: '¿Estás seguro?' }
 });
@@ -454,7 +454,7 @@ PADRE → service.open() → SERVICIO → crea componente → COMPONENTE DINÁMI
 
 ```typescript
 import { Component, EventEmitter, Output, inject } from '@angular/core';
-import { SLIDEPANEL_REF } from '@shared/components/slidepanel';
+import { SIDEBAR_PANEL_REF } from '@shared/components/sidebar-panel';
 
 @Component({
   selector: 'app-form-panel',
@@ -466,7 +466,7 @@ import { SLIDEPANEL_REF } from '@shared/components/slidepanel';
   `
 })
 export class FormPanelComponent {
-  private readonly panelRef = inject(SLIDEPANEL_REF);
+  private readonly panelRef = inject(SIDEBAR_PANEL_REF);
   
   value = '';
   
@@ -490,7 +490,7 @@ export class FormPanelComponent {
 
 ```typescript
 openFormPanel(): void {
-  const panelRef = this.slidePanelService.open(FormPanelComponent, {
+  const panelRef = this.sidebarPanelService.open(FormPanelComponent, {
     title: 'Editar Formulario',
     position: 'right',
     size: 'md'
@@ -662,7 +662,7 @@ panelRef.afterClosed().subscribe(() => {
 ### Prevenir Cierre
 
 ```typescript
-slidePanelService.open(FormComponent, {
+sidebarPanelService.open(FormComponent, {
   preventClose: () => {
     if (formHasUnsavedChanges()) {
       return confirm('Tienes cambios sin guardar. ¿Cerrar de todos modos?');
@@ -672,7 +672,7 @@ slidePanelService.open(FormComponent, {
 });
 
 // Con async
-slidePanelService.open(FormComponent, {
+sidebarPanelService.open(FormComponent, {
   preventClose: async () => {
     const response = await showConfirmDialog();
     return response.confirmed;
@@ -683,7 +683,7 @@ slidePanelService.open(FormComponent, {
 ### Sin Backdrop
 
 ```typescript
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   hasBackdrop: false
 });
 ```
@@ -691,7 +691,7 @@ slidePanelService.open(MyComponent, {
 ### Backdrop sin Cerrar
 
 ```typescript
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   hasBackdrop: true,
   closeOnBackdropClick: false
 });
@@ -700,7 +700,7 @@ slidePanelService.open(MyComponent, {
 ### Mobile Fullscreen
 
 ```typescript
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   mobileFullScreen: true,
   breakpoint: 768 // En pantallas < 768px será fullscreen
 });
@@ -714,7 +714,7 @@ Permite minimizar el panel a una pestaña lateral para liberar espacio en pantal
 
 ```typescript
 // ✅ CORRECTO - Con ID obligatorio
-const panelRef = slidePanelService.open(ChatComponent, {
+const panelRef = sidebarPanelService.open(ChatComponent, {
   id: 'chat-support',        // ID único OBLIGATORIO
   title: 'Chat de Soporte',
   position: 'right',
@@ -723,7 +723,7 @@ const panelRef = slidePanelService.open(ChatComponent, {
 });
 
 // ❌ ERROR - TypeScript no compilará
-const panelRef = slidePanelService.open(ChatComponent, {
+const panelRef = sidebarPanelService.open(ChatComponent, {
   title: 'Chat de Soporte',
   minimizable: true  // Error: Property 'id' is required when minimizable is true
 });
@@ -735,7 +735,7 @@ Cada `id` actúa como identificador único del panel. Si intentas abrir un panel
 
 ```typescript
 // Primera vez: crea el panel
-slidePanelService.open(ChatComponent, {
+sidebarPanelService.open(ChatComponent, {
   id: 'chat-support',
   minimizable: true,
   title: 'Chat'
@@ -744,7 +744,7 @@ slidePanelService.open(ChatComponent, {
 // Usuario minimiza el panel...
 
 // Segunda vez con el mismo ID: restaura el panel existente
-slidePanelService.open(ChatComponent, {
+sidebarPanelService.open(ChatComponent, {
   id: 'chat-support',  // Mismo ID → restaura en lugar de crear nuevo
   minimizable: true,
   title: 'Chat'
@@ -755,7 +755,7 @@ slidePanelService.open(ChatComponent, {
 
 ```typescript
 // Caso 1: Panel único reutilizable (RECOMENDADO para minimizables)
-slidePanelService.open(UserProfileComponent, {
+sidebarPanelService.open(UserProfileComponent, {
   id: 'user-profile',        // Siempre el mismo panel
   minimizable: true,
   title: 'Perfil de Usuario'
@@ -764,7 +764,7 @@ slidePanelService.open(UserProfileComponent, {
 // → Ideal para: Chat, Perfil, Configuración, Notificaciones
 
 // Caso 2: Múltiples instancias del mismo tipo
-slidePanelService.open(ProductDetailComponent, {
+sidebarPanelService.open(ProductDetailComponent, {
   id: `product-${productId}`, // ID dinámico basado en datos
   minimizable: true,
   title: `Producto ${productName}`,
@@ -774,7 +774,7 @@ slidePanelService.open(ProductDetailComponent, {
 // → Ideal para: Detalles de entidades, Múltiples documentos
 
 // Caso 3: Panel no minimizable (ID opcional)
-slidePanelService.open(QuickActionsComponent, {
+sidebarPanelService.open(QuickActionsComponent, {
   // Sin id necesario
   minimizable: false,
   title: 'Acciones Rápidas'
@@ -794,9 +794,9 @@ slidePanelService.open(QuickActionsComponent, {
 
 **Arquitectura de Pestañas (Automática):**
 - ✨ **Sin configuración manual**: El componente de pestañas se crea automáticamente cuando minimizas el primer panel
-- 🎯 **Inyección dinámica**: `SlidePanelTabsService` crea el componente `<nui-sidebar-panel-tabs>` dinámicamente
+- 🎯 **Inyección dinámica**: `SidebarPanelTabsService` crea el componente `<nui-sidebar-panel-tabs>` dinámicamente
 - 🧹 **Auto-destrucción**: El componente se destruye automáticamente cuando no hay pestañas minimizadas
-- 📍 **Sistema centralizado**: `SlidePanelTabsService` gestiona todas las pestañas globalmente
+- 📍 **Sistema centralizado**: `SidebarPanelTabsService` gestiona todas las pestañas globalmente
 - 🎨 **Agrupación automática**: Las pestañas se agrupan por posición (right, left, top, bottom)
 - 💡 **Zero-config**: No necesitas añadir nada en tu HTML - todo funciona automáticamente
 
@@ -833,7 +833,7 @@ panelRef.stateChanged().subscribe(state => {
 **Caso de uso típico:**
 ```typescript
 // Chat o asistente que el usuario puede minimizar para seguir trabajando
-slidePanelService.open(AssistantComponent, {
+sidebarPanelService.open(AssistantComponent, {
   title: 'Asistente IA',
   position: 'right',
   size: 'sm',
@@ -851,17 +851,17 @@ slidePanelService.open(AssistantComponent, {
 
 **Estilos de Pestañas:**
 ```scss
-.slidepanel-tab-button {
-  padding: var(--spacing-sm);
+.sidebar-panel-tab-button {
+  padding: var(--nui-spacing-sm);
   background: var(--surface-primary);
-  border: 1px solid var(--border-primary);
-  box-shadow: var(--box-shadow-sm);
+  border: 1px solid var(--nui-border-primary);
+  box-shadow: var(--nui-box-shadow--sm);
   opacity: 0.8;
   transition: all 0.2s ease;
   
   &:hover {
     opacity: 1;
-    box-shadow: var(--box-shadow-md);
+    box-shadow: var(--nui-box-shadow--md);
   }
 }
 ```
@@ -927,7 +927,7 @@ interface MinimizedTabCustomization {
 Cambia el icono de flecha por uno más descriptivo y agrega texto:
 
 ```typescript
-slidePanelService.open(ChatComponent, {
+sidebarPanelService.open(ChatComponent, {
   id: 'chat-support',
   title: 'Chat de Soporte',
   minimizable: true,
@@ -945,7 +945,7 @@ slidePanelService.open(ChatComponent, {
 Crea un botón flotante tipo chat en la esquina inferior derecha usando `standalone: true`:
 
 ```typescript
-slidePanelService.open(ChatComponent, {
+sidebarPanelService.open(ChatComponent, {
   id: 'floating-chat',
   title: 'Chat en Vivo',
   minimizable: true,
@@ -1031,7 +1031,7 @@ Combina pestañas agrupadas normales con botones flotantes independientes:
 
 ```typescript
 // Chat flotante (standalone)
-slidePanelService.open(ChatComponent, {
+sidebarPanelService.open(ChatComponent, {
   id: 'chat',
   minimizable: true,
   minimizedTabCustomization: {
@@ -1043,7 +1043,7 @@ slidePanelService.open(ChatComponent, {
 });
 
 // Notificaciones agrupadas (normal)
-slidePanelService.open(NotificationsComponent, {
+sidebarPanelService.open(NotificationsComponent, {
   id: 'notifications',
   minimizable: true,
   minimizedTabCustomization: {
@@ -1054,7 +1054,7 @@ slidePanelService.open(NotificationsComponent, {
 });
 
 // Configuración agrupada (normal)
-slidePanelService.open(SettingsComponent, {
+sidebarPanelService.open(SettingsComponent, {
   id: 'settings',
   minimizable: true,
   minimizedTabCustomization: {
@@ -1089,7 +1089,7 @@ Para control total sobre el renderizado, usa un template personalizado:
 @ViewChild('customTab') customTabTemplate!: TemplateRef<any>;
 
 openWithCustomTemplate(): void {
-  this.slidePanelService.open(MessagesComponent, {
+  this.sidebarPanelService.open(MessagesComponent, {
     id: 'messages',
     minimizable: true,
     minimizedTabCustomization: {
@@ -1150,7 +1150,7 @@ Para permitir múltiples panels que pueden apilarse y minimizarse, usa `minimiza
 
 ```typescript
 // Panel 1
-slidePanelService.open(ChatComponent, {
+sidebarPanelService.open(ChatComponent, {
   id: 'chat-support',
   position: 'right',
   minimizable: true,
@@ -1158,7 +1158,7 @@ slidePanelService.open(ChatComponent, {
 });
 
 // Panel 2 - Se abre simultáneamente porque minimizable permite stack
-slidePanelService.open(NotificationsComponent, {
+sidebarPanelService.open(NotificationsComponent, {
   id: 'notifications',
   position: 'right',
   minimizable: true,
@@ -1176,13 +1176,13 @@ Si `minimizable: false`, abrir un nuevo panel cierra automáticamente el anterio
 
 ```typescript
 // Panel 1
-slidePanelService.open(Panel1Component, {
+sidebarPanelService.open(Panel1Component, {
   position: 'right',
   minimizable: false  // O simplemente omitir
 });
 
 // Panel 2 - Cierra automáticamente Panel 1
-slidePanelService.open(Panel2Component, {
+sidebarPanelService.open(Panel2Component, {
   position: 'right',
   minimizable: false
 });
@@ -1193,7 +1193,7 @@ slidePanelService.open(Panel2Component, {
 
 ```typescript
 // Cierra todos los panels abiertos (incluyendo minimizados)
-slidePanelService.closeAll();
+sidebarPanelService.closeAll();
 ```
 
 ### Templates Personalizados
@@ -1223,7 +1223,7 @@ slidePanelService.closeAll();
 @ViewChild('customFooter') customFooter!: TemplateRef<any>;
 
 openWithTemplates(): void {
-  this.slidePanelService.open(MyComponent, {
+  this.sidebarPanelService.open(MyComponent, {
     headerTemplate: this.customHeader,
     footerTemplate: this.customFooter
   });
@@ -1234,17 +1234,17 @@ openWithTemplates(): void {
 
 ```typescript
 // Auto-focus al primer elemento
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   autoFocus: true
 });
 
 // Sin auto-focus
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   autoFocus: false
 });
 
 // Focus en elemento específico
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   autoFocus: '#username-input' // Selector CSS
 });
 ```
@@ -1252,7 +1252,7 @@ slidePanelService.open(MyComponent, {
 ### Escuchar Eventos
 
 ```typescript
-const panelRef = slidePanelService.open(MyComponent);
+const panelRef = sidebarPanelService.open(MyComponent);
 
 // Después de abrir
 panelRef.afterOpened().subscribe(() => {
@@ -1288,7 +1288,7 @@ panelRef.stateChanged().subscribe(state => {
 ### Minimizar/Restaurar
 
 ```typescript
-const panelRef = slidePanelService.open(MyComponent, {
+const panelRef = sidebarPanelService.open(MyComponent, {
   minimizable: true
 });
 
@@ -1305,7 +1305,7 @@ console.log(panelRef.isMinimized); // true/false
 ### Cerrar al Cambiar de Ruta
 
 ```typescript
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   closeOnRouteChange: true
 });
 ```
@@ -1314,13 +1314,13 @@ slidePanelService.open(MyComponent, {
 
 ```typescript
 // Obtener panel por ID
-const panelItem = slidePanelService.getPanel('my-panel-id');
+const panelItem = sidebarPanelService.getPanel('my-panel-id');
 
 // Obtener todos los panels
-const allPanels = slidePanelService.getAllPanels();
+const allPanels = sidebarPanelService.getAllPanels();
 
 // Número de panels abiertos
-const count = slidePanelService.openPanelsCount;
+const count = sidebarPanelService.openPanelsCount;
 ```
 
 ## Estilos y Theming
@@ -1330,29 +1330,29 @@ El componente usa variables CSS para theming:
 ```css
 :root {
   /* Colores */
-  --slidepanel-bg: var(--surface-primary);
-  --slidepanel-header-bg: var(--surface-primary);
-  --slidepanel-content-bg: var(--surface-primary);
-  --slidepanel-footer-bg: var(--surface-secondary);
+  --sidebar-panel-bg: var(--surface-primary);
+  --sidebar-panel-header-bg: var(--surface-primary);
+  --sidebar-panel-content-bg: var(--surface-primary);
+  --sidebar-panel-footer-bg: var(--surface-secondary);
   
   /* Espaciado */
-  --slidepanel-header-padding: 1.5rem;
-  --slidepanel-content-padding: 1.5rem;
-  --slidepanel-footer-padding: 1.5rem;
+  --sidebar-panel-header-padding: 1.5rem;
+  --sidebar-panel-content-padding: 1.5rem;
+  --sidebar-panel-footer-padding: 1.5rem;
   
   /* Tipografía */
-  --slidepanel-title-size: 1.25rem;
-  --slidepanel-title-weight: 600;
+  --sidebar-panel-title-size: 1.25rem;
+  --sidebar-panel-title-weight: 600;
   
   /* Sombras */
-  --slidepanel-shadow: 0 8px 32px rgba(0, 0, 0, 0.16);
+  --sidebar-panel-shadow: 0 8px 32px rgba(0, 0, 0, 0.16);
 }
 ```
 
 ### Clases Custom
 
 ```typescript
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   panelClass: 'my-custom-panel',
   backdropClass: 'my-custom-backdrop'
 });
@@ -1379,7 +1379,7 @@ El componente implementa:
 - **Screen Readers**: Anuncia la apertura del panel
 
 ```typescript
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   ariaLabel: 'Diálogo de configuración',
   ariaDescribedBy: 'config-description'
 });
@@ -1404,20 +1404,20 @@ slidePanelService.open(MyComponent, {
 
 ## Content Directive
 
-La directiva `SlidePanelContentDirective` permite marcar templates como contenido específico para SlidePanels:
+La directiva `SidebarPanelContentDirective` permite marcar templates como contenido específico para SidebarPanels:
 
 ### Uso Básico
 
 ```html
 <!-- Marcar un template para identificarlo -->
-<ng-template nuiSlidePanelContent>
+<ng-template nuiSidebarPanelContent>
   <div class="panel-content">
     <p>Contenido del panel</p>
   </div>
 </ng-template>
 
 <!-- Con nombre para identificación -->
-<ng-template nuiSlidePanelContent="userForm">
+<ng-template nuiSidebarPanelContent="userForm">
   <form>...</form>
 </ng-template>
 ```
@@ -1426,11 +1426,11 @@ La directiva `SlidePanelContentDirective` permite marcar templates como contenid
 
 ```typescript
 import { Component, ViewChild, TemplateRef } from '@angular/core';
-import { SlidePanelContentDirective } from '@shared/components/slidepanel';
+import { SidebarPanelContentDirective } from '@shared/components/sidebar-panel';
 
 @Component({
   template: `
-    <ng-template nuiSlidePanelContent #panelContent>
+    <ng-template nuiSidebarPanelContent #panelContent>
       <div>Contenido dinámico: {{ data }}</div>
     </ng-template>
     
@@ -1438,7 +1438,7 @@ import { SlidePanelContentDirective } from '@shared/components/slidepanel';
   `
 })
 export class MyComponent {
-  @ViewChild(SlidePanelContentDirective, { read: TemplateRef })
+  @ViewChild(SidebarPanelContentDirective, { read: TemplateRef })
   panelTemplate!: TemplateRef<any>;
   
   data = 'Hola desde el template';
@@ -1468,15 +1468,15 @@ export class MyComponent {
 ## Testing
 
 ```typescript
-describe('SlidePanelService', () => {
-  let service: SlidePanelService;
+describe('SidebarPanelService', () => {
+  let service: SidebarPanelService;
   
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [OverlayModule],
-      providers: [SlidePanelService]
+      providers: [SidebarPanelService]
     });
-    service = TestBed.inject(SlidePanelService);
+    service = TestBed.inject(SidebarPanelService);
   });
 
   it('should open a panel', () => {
@@ -1499,7 +1499,7 @@ describe('SlidePanelService', () => {
 - **CDK Overlay**: Usa `@angular/cdk/overlay` para gestión del overlay
 - **CDK A11y**: Usa `@angular/cdk/a11y` para focus trap
 - **Portal Pattern**: Componentes dinámicos con `ComponentPortal`
-- **Injection Tokens**: `SLIDEPANEL_DATA` y `SLIDEPANEL_REF` para inyección
+- **Injection Tokens**: `SIDEBAR_PANEL_DATA` y `SIDEBAR_PANEL_REF` para inyección
 - **RxJS**: Observables para todos los eventos
 - **Animations**: Angular Animations API con transforms
 - **Signals**: Computed signals para optimización de performance
@@ -1507,7 +1507,7 @@ describe('SlidePanelService', () => {
 
 ## Footers
 
-El SlidePanel ofrece **tres formas** de agregar footers a tus panels, cada una con diferentes niveles de flexibilidad y control. Esta sección te ayudará a elegir el método más adecuado para tu caso de uso.
+El SidebarPanel ofrece **tres formas** de agregar footers a tus panels, cada una con diferentes niveles de flexibilidad y control. Esta sección te ayudará a elegir el método más adecuado para tu caso de uso.
 
 ### Tabla de Contenidos - Footers
 
@@ -1547,13 +1547,13 @@ El componente **padre** define botones programáticamente en la configuración. 
 #### Interfaces
 
 ```typescript
-interface SlidePanelCustomButton {
+interface SidebarPanelCustomButton {
   text: string;                     // Texto del botón
   icon?: string;                    // Icono (Remix Icons: 'ri-save-line')
   color?: NUIColor;                 // Color del botón
   variant?: NUIVariant;             // Variante: 'solid' | 'outline' | 'ghost' | 'link'
   size?: NUISize;                   // Tamaño: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-  callback: (panelRef: SlidePanelRef) => void | Promise<void>; // Función al hacer click
+  callback: (panelRef: SidebarPanelRef) => void | Promise<void>; // Función al hacer click
   disabled?: boolean;               // Estado deshabilitado
   loading?: boolean;                // Mostrar spinner de carga
   class?: string;                   // Clases CSS adicionales
@@ -1564,7 +1564,7 @@ interface SlidePanelCustomButton {
 
 ```typescript
 openPanel() {
-  const panelRef = this.slidePanelService.open(UserFormComponent, {
+  const panelRef = this.sidebarPanelService.open(UserFormComponent, {
     title: 'Editar Usuario',
     data: { userId: 123 },
     customButtons: [
@@ -1630,7 +1630,7 @@ customButtons: [
 
 ```typescript
 openPanel() {
-  const buttons: SlidePanelCustomButton[] = [
+  const buttons: SidebarPanelCustomButton[] = [
     {
       text: 'Cancelar',
       variant: 'outline',
@@ -1657,7 +1657,7 @@ openPanel() {
     }
   ];
 
-  this.slidePanelService.open(FormComponent, {
+  this.sidebarPanelService.open(FormComponent, {
     title: 'Formulario',
     customButtons: buttons
   });
@@ -1693,7 +1693,7 @@ El componente **padre** pasa un template de footer al abrir el panel.
 
 ```typescript
 import { Component, inject } from '@angular/core';
-import { SLIDEPANEL_REF, SlidePanelRef } from '@shared/components/slidepanel';
+import { SIDEBAR_PANEL_REF, SidebarPanelRef } from '@shared/components/sidebar-panel';
 
 @Component({
   selector: 'app-form-panel',
@@ -1706,7 +1706,7 @@ import { SLIDEPANEL_REF, SlidePanelRef } from '@shared/components/slidepanel';
   `
 })
 export class FormPanelComponent {
-  private panelRef = inject<SlidePanelRef>(SLIDEPANEL_REF);
+  private panelRef = inject<SidebarPanelRef>(SIDEBAR_PANEL_REF);
   name = '';
   
   // Métodos públicos llamados desde el footer template
@@ -1741,7 +1741,7 @@ export class ParentComponent {
   @ViewChild('footer') footerTemplate!: TemplateRef<any>;
   
   openPanel() {
-    this.slidePanelService.open(FormPanelComponent, {
+    this.sidebarPanelService.open(FormPanelComponent, {
       footerTemplate: this.footerTemplate
     });
   }
@@ -1773,7 +1773,7 @@ El componente **hijo** registra acciones (botones) programáticamente. **Este es
 #### Interfaz
 
 ```typescript
-interface SlidePanelAction {
+interface SidebarPanelAction {
   label: string;                    // Texto del botón
   icon?: string;                    // Icono (Remix Icons: 'ri-save-line')
   color?: NUIColor;                 // Color del botón
@@ -1790,13 +1790,13 @@ interface SlidePanelAction {
 
 ```typescript
 // Registrar todas las acciones (reemplaza existentes)
-register(actions: SlidePanelAction[]): void
+register(actions: SidebarPanelAction[]): void
 
 // Agregar una acción individual
-add(action: SlidePanelAction): void
+add(action: SidebarPanelAction): void
 
 // Actualizar una acción por índice
-update(index: number, partial: Partial<SlidePanelAction>): void
+update(index: number, partial: Partial<SidebarPanelAction>): void
 
 // Limpiar todas las acciones
 clear(): void
@@ -1811,7 +1811,7 @@ setLoading(index: number, loading: boolean): void
 
 ```typescript
 import { Component, OnInit, inject } from '@angular/core';
-import { SlidePanelActionsService, SLIDEPANEL_REF, SlidePanelRef } from '@shared/components/slidepanel';
+import { SidebarPanelActionsService, SIDEBAR_PANEL_REF, SidebarPanelRef } from '@shared/components/sidebar-panel';
 
 @Component({
   selector: 'app-user-form',
@@ -1829,8 +1829,8 @@ import { SlidePanelActionsService, SLIDEPANEL_REF, SlidePanelRef } from '@shared
   `
 })
 export class UserFormComponent implements OnInit {
-  private actionsService = inject(SlidePanelActionsService);
-  private panelRef = inject<SlidePanelRef>(SLIDEPANEL_REF);
+  private actionsService = inject(SidebarPanelActionsService);
+  private panelRef = inject<SidebarPanelRef>(SIDEBAR_PANEL_REF);
   
   name = '';
   email = '';
@@ -1922,7 +1922,7 @@ ngOnInit() {
 
 ```typescript
 openUserForm() {
-  const ref = this.slidePanelService.open(UserFormComponent, {
+  const ref = this.sidebarPanelService.open(UserFormComponent, {
     title: 'Nuevo Usuario'
   });
   
@@ -1952,8 +1952,8 @@ openUserForm() {
   `
 })
 export class WizardComponent implements OnInit {
-  private actionsService = inject(SlidePanelActionsService);
-  private panelRef = inject<SlidePanelRef>(SLIDEPANEL_REF);
+  private actionsService = inject(SidebarPanelActionsService);
+  private panelRef = inject<SidebarPanelRef>(SIDEBAR_PANEL_REF);
   
   step = 1;
   wizardData = { step1: {}, step2: {}, step3: {} };
@@ -1963,7 +1963,7 @@ export class WizardComponent implements OnInit {
   }
   
   updateActions() {
-    const actions: SlidePanelAction[] = [];
+    const actions: SidebarPanelAction[] = [];
     
     // Botón "Anterior" (solo si no es el primer paso)
     if (this.step > 1) {
@@ -2032,7 +2032,7 @@ export class WizardComponent implements OnInit {
 
 ### 3. Footer Directive (Control Total)
 
-El componente **hijo** define su propio template de footer usando la directiva `nuiSlidePanelFooter`.
+El componente **hijo** define su propio template de footer usando la directiva `nuiSidebarPanelFooter`.
 
 #### 🎯 Cuándo usar
 - Footers con layouts complejos o personalizados
@@ -2045,13 +2045,13 @@ El componente **hijo** define su propio template de footer usando la directiva `
 
 ```typescript
 import { Component, inject } from '@angular/core';
-import { SlidePanelFooterDirective, SLIDEPANEL_REF, SlidePanelRef } from '@shared/components/slidepanel';
+import { SidebarPanelFooterDirective, SIDEBAR_PANEL_REF, SidebarPanelRef } from '@shared/components/sidebar-panel';
 import { ButtonComponent } from '@shared/components/button/button.component';
 
 @Component({
   selector: 'app-settings-panel',
   standalone: true,
-  imports: [SlidePanelFooterDirective, ButtonComponent],
+  imports: [SidebarPanelFooterDirective, ButtonComponent],
   template: `
     <div class="settings-content">
       <h3>Configuración</h3>
@@ -2073,7 +2073,7 @@ import { ButtonComponent } from '@shared/components/button/button.component';
     </div>
 
     <!-- Footer personalizado con la directiva -->
-    <ng-template nuiSlidePanelFooter>
+    <ng-template nuiSidebarPanelFooter>
       <div class="custom-footer">
         <!-- Sección de información -->
         <div class="footer-info">
@@ -2161,7 +2161,7 @@ import { ButtonComponent } from '@shared/components/button/button.component';
   `]
 })
 export class SettingsPanelComponent {
-  private panelRef = inject<SlidePanelRef>(SLIDEPANEL_REF);
+  private panelRef = inject<SidebarPanelRef>(SIDEBAR_PANEL_REF);
   
   option1 = false;
   option2 = false;
@@ -2205,7 +2205,7 @@ export class SettingsPanelComponent {
 
 ```typescript
 openSettings() {
-  this.slidePanelService.open(SettingsPanelComponent, {
+  this.sidebarPanelService.open(SettingsPanelComponent, {
     title: 'Configuración'
   });
 }
@@ -2227,16 +2227,16 @@ openSettings() {
 
 ### Precedencia de Footers
 
-Cuando se usan múltiples métodos simultáneamente, el SlidePanel aplica la siguiente **precedencia** (de mayor a menor prioridad):
+Cuando se usan múltiples métodos simultáneamente, el SidebarPanel aplica la siguiente **precedencia** (de mayor a menor prioridad):
 
 1. **`customButtons`** (configuración) - Se renderiza primero si está presente
-2. **Footer Directive** (`nuiSlidePanelFooter`) - Template del hijo
-3. **Actions Service** (`SlidePanelActionsService`) - Acciones del hijo
+2. **Footer Directive** (`nuiSidebarPanelFooter`) - Template del hijo
+3. **Actions Service** (`SidebarPanelActionsService`) - Acciones del hijo
 4. **`footerTemplate`** (configuración) - Template del padre
 
 ```typescript
 // Ejemplo: Si abres un panel con customButtons, se ignoran los otros métodos
-slidePanelService.open(MyComponent, {
+sidebarPanelService.open(MyComponent, {
   customButtons: [/* ... */],      // ✅ Esto se usa
   footerTemplate: myTemplate       // ❌ Esto se ignora
 });
@@ -2379,7 +2379,7 @@ El footer siempre es sticky automáticamente. Si tienes contenido largo:
     </div>
     
     <!-- El footer siempre visible -->
-    <ng-template nuiSlidePanelFooter>
+    <ng-template nuiSidebarPanelFooter>
       <div>Footer siempre visible</div>
     </ng-template>
   `
@@ -2413,7 +2413,7 @@ this.actionsService.register([
 
 **4 métodos disponibles** con precedencia (de mayor a menor):
 1. **customButtons** (config) - Botones programáticos desde padre
-2. **nuiSlidePanelFooter** (directiva) - Template personalizado del hijo
+2. **nuiSidebarPanelFooter** (directiva) - Template personalizado del hijo
 3. **Actions Service** - Acciones programáticas del hijo
 4. **footerTemplate** (config) - Template desde padre
 

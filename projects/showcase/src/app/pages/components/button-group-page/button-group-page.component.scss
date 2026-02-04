@@ -40,7 +40,7 @@
     margin-bottom: 1.5rem;
     background-color: var(--nui-bg-secondary);
     border-left: 4px solid var(--nui-border-primary);
-    border-radius: var(--border-radius-sm);
+    border-radius: var(--nui-border-radius-sm);
     font-size: 0.875rem;
     line-height: 1.5;
 
@@ -70,10 +70,10 @@
   align-items: center;
   padding: 1.5rem;
   background-color: var(--nui-bg-secondary);
-  border-radius: var(--border-radius-md);
+  border-radius: var(--nui-border-radius-md);
   margin-bottom: 1rem;
-  border: var(--border-width-xs) solid var(--nui-border-primary);
-  box-shadow: var(--box-shadow-xs);
+  border: var(--nui-border-width-xs) solid var(--nui-border-primary);
+  box-shadow: var(--nui-box-shadow--xs);
 
   &.flex-column {
     flex-direction: column;
@@ -94,7 +94,7 @@
   margin-top: 1rem;
   padding: 0.5rem 0.75rem;
   background-color: var(--nui-bg-tertiary);
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--nui-border-radius-sm);
   font-family: monospace;
   font-size: 0.875rem;
   color: var(--nui-text-secondary);

@@ -1,6 +1,5 @@
 @use "../config";
 @use "../mixins";
-// NOTA: No importar theme ni theme-config aquí, ya están incluidos globalmente en nui.scss
 
 // ==========================================
 // MODAL OVERLAY & BACKDROP STYLES
@@ -97,6 +96,6 @@
 // Responsive
 @media (max-width: 768px) {
   .nui-modal-panel {
-    padding: var(--spacing-md, 1.2rem);
+    padding: var(--nui-spacing-md, 1.2rem);
   }
 }

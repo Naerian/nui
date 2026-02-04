@@ -1,0 +1,132 @@
+@use 'sass:map';
+@use 'config';
+
+/// Global CSS design tokens exposed as custom properties
+/// @group Tokens
+:root {
+  /// =======================
+  /// TYPOGRAPHY
+  /// =======================
+  /// @group Typography
+
+  --nui-font-family: #{config.$font-family};
+
+  --nui-font-size-xs: #{config.$font-size-xs};
+  --nui-font-size-sm: #{config.$font-size-sm};
+  --nui-font-size-md: #{config.$font-size-md};
+  --nui-font-size-lg: #{config.$font-size-lg};
+  --nui-font-size-xl: #{config.$font-size-xl};
+
+  --nui-font-size-h1: #{config.$font-size-h1};
+  --nui-font-size-h2: #{config.$font-size-h2};
+  --nui-font-size-h3: #{config.$font-size-h3};
+  --nui-font-size-h4: #{config.$font-size-h4};
+  --nui-font-size-h5: #{config.$font-size-h5};
+  --nui-font-size-h6: #{config.$font-size-h6};
+
+  --nui-font-weight-regular: #{config.$font-weight-regular};
+  --nui-font-weight-medium: #{config.$font-weight-medium};
+  --nui-font-weight-semibold: #{config.$font-weight-semibold};
+  --nui-font-weight-bold: #{config.$font-weight-bold};
+
+  --nui-line-height-h1: #{config.$line-height-h1};
+  --nui-line-height-h2: #{config.$line-height-h2};
+  --nui-line-height-h3: #{config.$line-height-h3};
+  --nui-line-height-h4: #{config.$line-height-h4};
+  --nui-line-height-h5: #{config.$line-height-h5};
+  --nui-line-height-h6: #{config.$line-height-h6};
+
+  --nui-line-height-xs: #{config.$line-height-xs};
+  --nui-line-height-sm: #{config.$line-height-sm};
+  --nui-line-height-md: #{config.$line-height-md};
+  --nui-line-height-lg: #{config.$line-height-lg};
+  --nui-line-height-xl: #{config.$line-height-xl};
+
+  /// =======================
+  /// BORDERS & RADIUS
+  /// =======================
+  /// @group Borders
+
+  --nui-border-radius-none: #{config.$border-radius-none};
+
+  --nui-border-radius-xs: #{config.$border-radius-xs};
+  --nui-border-radius-sm: #{config.$border-radius-sm};
+  --nui-border-radius-md: #{config.$border-radius-md};
+  --nui-border-radius-lg: #{config.$border-radius-lg};
+  --nui-border-radius-xl: #{config.$border-radius-xl};
+
+  --nui-border-radius-circle: #{config.$border-radius-circle};
+  --nui-border-radius-pill: #{config.$border-radius-pill};
+
+  --nui-border-width-xs: #{config.$border-width-xs};
+  --nui-border-width-sm: #{config.$border-width-sm};
+  --nui-border-width-md: #{config.$border-width-md};
+  --nui-border-width-lg: #{config.$border-width-lg};
+  --nui-border-width-xl: #{config.$border-width-xl};
+
+  /// =======================
+  /// SPACING
+  /// =======================
+  /// @group Spacing
+
+  --nui-spacing-xs: #{config.$padding-xs};
+  --nui-spacing-sm: #{config.$padding-sm};
+  --nui-spacing-md: #{config.$padding-md};
+  --nui-spacing-lg: #{config.$padding-lg};
+  --nui-spacing-xl: #{config.$padding-xl};
+
+  /// =======================
+  /// SHADOWS
+  /// =======================
+  /// @group Shadows
+
+  --nui-box-shadow--xs: #{config.$box-shadow-xs};
+  --nui-box-shadow--sm: #{config.$box-shadow-sm};
+  --nui-box-shadow--md: #{config.$box-shadow-md};
+  --nui-box-shadow--lg: #{config.$box-shadow-lg};
+  --nui-box-shadow--xl: #{config.$box-shadow-xl};
+  --nui-box-shadow--button-hover: #{config.$box-shadow-button-hover};
+
+  --nui-shadow-container: var(--nui-box-shadow--sm);
+  --nui-shadow-elevated: var(--nui-box-shadow--md);
+  --nui-shadow-interactive: var(--nui-box-shadow--sm);
+  --nui-shadow-field: var(--nui-box-shadow--xs);
+  --nui-shadow-none: none;
+
+  /// =======================
+  /// TRANSITIONS
+  /// =======================
+  /// @group Transitions
+
+  --nui-transition-duration-fast: #{config.$transition-duration-fast};
+  --nui-transition-duration-normal: #{config.$transition-duration-normal};
+  --nui-transition-duration-slow: #{config.$transition-duration-slow};
+  --nui-transition-duration-base: #{config.$transition-duration-base};
+  --nui-transition-timing-function-ease: #{config.$transition-timing-function-ease};
+
+  /// =======================
+  /// COMPONENT TOKENS
+  /// =======================
+  /// @group Components
+
+  --nui-height-xs: #{map.get(config.$heights, xs)};
+  --nui-height-sm: #{map.get(config.$heights, sm)};
+  --nui-height-md: #{map.get(config.$heights, md)};
+  --nui-height-lg: #{map.get(config.$heights, lg)};
+  --nui-height-xl: #{map.get(config.$heights, xl)};
+
+  --nui-padding-xs: #{map.get(config.$paddings, xs)};
+  --nui-padding-sm: #{map.get(config.$paddings, sm)};
+  --nui-padding-md: #{map.get(config.$paddings, md)};
+  --nui-padding-lg: #{map.get(config.$paddings, lg)};
+  --nui-padding-xl: #{map.get(config.$paddings, xl)};
+
+  /// =======================
+  /// FOCUS RING
+  /// =======================
+  /// @group Accessibility
+
+  --nui-focus-ring-width: #{config.$focus-ring-width};
+  --nui-focus-ring-offset: #{config.$focus-ring-offset};
+  --nui-focus-ring-radius: #{config.$focus-ring-radius};
+}

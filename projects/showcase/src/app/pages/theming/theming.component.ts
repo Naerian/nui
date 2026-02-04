@@ -1,129 +1,89 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import {
+  aura,
+  corporate,
+  dopamine,
+  minimal,
+  neon,
+  ocean,
+  sunset,
+  ThemeService,
+  twilight,
+  warm,
+} from 'nui';
 
 @Component({
   selector: 'app-theming',
   standalone: true,
   imports: [CommonModule, TranslateModule],
   templateUrl: './theming.component.html',
-  styleUrls: ['./theming.component.scss']
+  styleUrls: ['./theming.component.scss'],
 })
 export class ThemingComponent {
-  presets = [
-    {
-      name: 'aura',
-      translationKey: 'presets.aura',
-      descriptionKey: 'pages.theming.presetDescriptions.aura',
-      colors: {
-        primary: '#0d9488',
-        secondary: '#64748b',
-        accent: '#9333ea',
-        success: '#059669',
-        info: '#0e7490',
-        warning: '#d97706',
-        danger: '#dc2626'
-      }
-    },
-    {
-      name: 'warm',
-      translationKey: 'presets.warm',
-      descriptionKey: 'pages.theming.presetDescriptions.warm',
-      colors: {
-        primary: '#ea580c',
-        secondary: '#92400e',
-        accent: '#dc2626',
-        success: '#65a30d',
-        info: '#0891b2',
-        warning: '#d97706',
-        danger: '#b91c1c'
-      }
-    },
-    {
-      name: 'neon',
-      translationKey: 'presets.neon',
-      descriptionKey: 'pages.theming.presetDescriptions.neon',
-      colors: {
-        primary: '#06b6d4',
-        secondary: '#d946ef',
-        accent: '#8b5cf6',
-        success: '#10b981',
-        info: '#0ea5e9',
-        warning: '#f59e0b',
-        danger: '#ef4444'
-      }
-    },
-    {
-      name: 'dopamine',
-      translationKey: 'presets.dopamine',
-      descriptionKey: 'pages.theming.presetDescriptions.dopamine',
-      colors: {
-        primary: '#84cc16',
-        secondary: '#ec4899',
-        accent: '#f59e0b',
-        success: '#22c55e',
-        info: '#3b82f6',
-        warning: '#eab308',
-        danger: '#ef4444'
-      }
-    },
-    {
-      name: 'corporate',
-      translationKey: 'presets.corporate',
-      descriptionKey: 'pages.theming.presetDescriptions.corporate',
-      colors: {
-        primary: '#1e40af',
-        secondary: '#475569',
-        accent: '#0891b2',
-        success: '#16a34a',
-        info: '#2563eb',
-        warning: '#ca8a04',
-        danger: '#dc2626'
-      }
-    },
-    {
-      name: 'minimal',
-      translationKey: 'presets.minimal',
-      descriptionKey: 'pages.theming.presetDescriptions.minimal',
-      colors: {
-        primary: '#18181b',
-        secondary: '#71717a',
-        accent: '#3f3f46',
-        success: '#14532d',
-        info: '#1e3a8a',
-        warning: '#78350f',
-        danger: '#7f1d1d'
-      }
-    },
-    {
-      name: 'sunset',
-      translationKey: 'presets.sunset',
-      descriptionKey: 'pages.theming.presetDescriptions.sunset',
-      colors: {
-        primary: '#f43f5e',
-        secondary: '#f472b6',
-        accent: '#fb923c',
-        success: '#059669',
-        info: '#0ea5e9',
-        warning: '#f59e0b',
-        danger: '#dc2626'
-      }
-    },
-    {
-      name: 'ocean',
-      translationKey: 'presets.ocean',
-      descriptionKey: 'pages.theming.presetDescriptions.ocean',
-      colors: {
-        primary: '#0077be',
-        secondary: '#0284c7',
-        accent: '#00bcd4',
-        success: '#059669',
-        info: '#0ea5e9',
-        warning: '#f59e0b',
-        danger: '#dc2626'
-      }
-    }
-  ];
+  private themeService = inject(ThemeService);
+
+  // Computed signal to get the list of presets based on the current theme mode
+  presets = computed(() => {
+    const dark = this.themeService.isDarkMode();
+    return [
+      {
+        name: 'aura',
+        translationKey: 'presets.aura',
+        descriptionKey: 'pages.theming.presetDescriptions.aura',
+        colors: dark ? aura.colors.dark : aura.colors.light,
+      },
+      {
+        name: 'warm',
+        translationKey: 'presets.warm',
+        descriptionKey: 'pages.theming.presetDescriptions.warm',
+        colors: dark ? warm.colors.dark : warm.colors.light,
+      },
+      {
+        name: 'neon',
+        translationKey: 'presets.neon',
+        descriptionKey: 'pages.theming.presetDescriptions.neon',
+        colors: dark ? neon.colors.dark : neon.colors.light,
+      },
+      {
+        name: 'dopamine',
+        translationKey: 'presets.dopamine',
+        descriptionKey: 'pages.theming.presetDescriptions.dopamine',
+        colors: dark ? dopamine.colors.dark : dopamine.colors.light,
+      },
+      {
+        name: 'corporate',
+        translationKey: 'presets.corporate',
+        descriptionKey: 'pages.theming.presetDescriptions.corporate',
+        colors: dark ? corporate.colors.dark : corporate.colors.light,
+      },
+      {
+        name: 'minimal',
+        translationKey: 'presets.minimal',
+        descriptionKey: 'pages.theming.presetDescriptions.minimal',
+        colors: dark ? minimal.colors.dark : minimal.colors.light,
+      },
+      {
+        name: 'sunset',
+        translationKey: 'presets.sunset',
+        descriptionKey: 'pages.theming.presetDescriptions.sunset',
+        colors: dark ? sunset.colors.dark : sunset.colors.light,
+      },
+      {
+        name: 'twilight',
+        translationKey: 'presets.twilight',
+        descriptionKey: 'pages.theming.presetDescriptions.twilight',
+        colors: dark ? twilight.colors.dark : twilight.colors.light,
+      },
+      {
+        name: 'ocean',
+        translationKey: 'presets.ocean',
+        descriptionKey: 'pages.theming.presetDescriptions.ocean',
+        colors: dark ? ocean.colors.dark : ocean.colors.light,
+      },
+    ];
+  });
 
   colorTypes = [
     { key: 'primary', translationKey: 'pages.theming.primary' },
@@ -132,7 +92,7 @@ export class ThemingComponent {
     { key: 'success', translationKey: 'pages.theming.success' },
     { key: 'info', translationKey: 'pages.theming.info' },
     { key: 'warning', translationKey: 'pages.theming.warning' },
-    { key: 'danger', translationKey: 'pages.theming.danger' }
+    { key: 'danger', translationKey: 'pages.theming.danger' },
   ];
 
   getColor(preset: any, colorKey: string): string {

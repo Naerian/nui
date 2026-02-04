@@ -8,22 +8,22 @@ export const warm: ThemePreset = {
   name: 'warm',
   colors: {
     light: {
-      primary: '#ea580c',     // orange-600
-      secondary: '#92400e',   // amber-800
-      accent: '#dc2626',      // red-600
-      success: '#65a30d',     // lime-600
-      info: '#0891b2',        // cyan-600
-      warning: '#d97706',     // amber-600
-      danger: '#b91c1c',      // red-700
+      primary: '#ea580c',
+      secondary: '#92400e',
+      accent: '#dc2626',
+      success: '#65a30d',
+      info: '#0891b2',
+      warning: '#d97706',
+      danger: '#b91c1c',
     },
     dark: {
-      primary: '#fb923c',     // orange-400
-      secondary: '#fbbf24',   // amber-400
-      accent: '#f87171',      // red-400
-      success: '#a3e635',     // lime-400
-      info: '#22d3ee',        // cyan-400
-      warning: '#fbbf24',     // amber-400
-      danger: '#fca5a5',      // red-300
-    }
-  }
+      primary: '#c2410c',
+      secondary: '#8b4924',
+      accent: '#991b1b',
+      success: '#4e761a',
+      info: '#187593',
+      warning: '#af5620',
+      danger: '#a52a2a',
+    },
+  },
 };

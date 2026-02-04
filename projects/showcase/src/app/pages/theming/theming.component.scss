@@ -39,7 +39,7 @@
   .preset-card {
     background-color: var(--nui-bg-secondary);
     border: 1px solid var(--nui-border-primary);
-    border-radius: var(--border-radius-lg);
+    border-radius: var(--nui-border-radius-lg);
     padding: 1.5rem;
     transition: all 0.3s ease;
 
@@ -82,7 +82,7 @@
     .color-swatch {
       width: 48px;
       height: 48px;
-      border-radius: var(--border-radius-md);
+      border-radius: var(--nui-border-radius-md);
       border: 2px solid var(--nui-border-primary);
       flex-shrink: 0;
       box-shadow: 0 2px 4px var(--nui-shadow-sm);

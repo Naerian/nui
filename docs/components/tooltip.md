@@ -279,7 +279,7 @@ Perfecto para tooltips con enlaces, botones o contenido seleccionable.
     background-color: var(--color-primary);
     color: white;
     padding: 1rem;
-    border-radius: var(--border-radius-lg);
+    border-radius: var(--nui-border-radius-lg);
   }
 }
 ```
@@ -299,11 +299,11 @@ $tooltip-padding-x: 0.75rem;
 $tooltip-max-width: 20rem;
 
 // Tipografía
-$tooltip-font-size: var(--font-size-s);
-$tooltip-font-weight: var(--font-weight-semibold);
+$tooltip-font-size: var(--nui-font-size-s);
+$tooltip-font-weight: var(--nui-font-weight-semibold);
 
 // Bordes
-$tooltip-border-radius: var(--border-radius-md);
+$tooltip-border-radius: var(--nui-border-radius-md);
 
 // Animación
 $tooltip-transition-duration: 200ms;

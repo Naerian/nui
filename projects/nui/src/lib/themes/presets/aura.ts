@@ -5,21 +5,21 @@ export const aura: ThemePreset = {
   colors: {
     light: {
       primary: '#0d9488',
-      secondary: '#64748b',
-      accent: '#9333ea',
-      success: '#059669',
-      info: '#0e7490',
-      warning: '#d97706',
-      danger: '#dc2626',
+      secondary: '#475569',
+      accent: '#7c3aed',
+      success: '#16a34a',
+      info: '#0891b2',
+      warning: '#ca8a04',
+      danger: '#b91c1c',
     },
     dark: {
-      primary: '#14b8a6',
-      secondary: '#94a3b8',
-      accent: '#bf8bf0',
-      success: '#10b981',
-      info: '#06b6d4',
-      warning: '#f59e0b',
-      danger: '#ef4444',
-    }
-  }
+      primary: '#129d92',
+      secondary: '#5c6776',
+      accent: '#ae7aff',
+      success: '#15803d',
+      info: '#0369a1',
+      warning: '#b45309',
+      danger: '#991b1b',
+    },
+  },
 };

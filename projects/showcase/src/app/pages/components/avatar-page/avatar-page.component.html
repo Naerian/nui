@@ -8,9 +8,9 @@
     <section class="section">
       <app-section-title
         [title]="section.title | translate"
-        [anchor]="section.anchor">
-      </app-section-title>
-      
+        [anchor]="section.anchor"
+      ></app-section-title>
+
       <p class="section-description" [innerHTML]="section.description | translate"></p>
 
       @if (section.note; as note) {
@@ -26,7 +26,7 @@
             <nui-avatar [src]="avatarUrl1" alt="John Doe"></nui-avatar>
           </div>
         }
-        
+
         @case ('types') {
           <div class="example-preview">
             <nui-avatar [src]="avatarUrl2" alt="User Image"></nui-avatar>
@@ -36,7 +36,7 @@
             <nui-avatar></nui-avatar>
           </div>
         }
-        
+
         @case ('variants') {
           <div class="example-preview">
             <nui-avatar [src]="avatarUrl3" variant="circular"></nui-avatar>
@@ -44,7 +44,7 @@
             <nui-avatar [src]="avatarUrl3" variant="square"></nui-avatar>
           </div>
         }
-        
+
         @case ('sizes') {
           <div class="example-preview align-bottom">
             <nui-avatar size="xs" initials="XS"></nui-avatar>
@@ -54,7 +54,7 @@
             <nui-avatar size="xl" initials="XL"></nui-avatar>
           </div>
         }
-        
+
         @case ('colors') {
           <div class="example-preview">
             <nui-avatar initials="P" color="primary"></nui-avatar>
@@ -66,22 +66,28 @@
             <nui-avatar initials="D" color="danger"></nui-avatar>
           </div>
         }
-        
+
         @case ('customSize') {
           <div class="example-preview">
             <nui-avatar [customSize]="120" [src]="avatarUrl1" variant="rounded"></nui-avatar>
             <nui-avatar [customSize]="80" initials="CS" color="primary"></nui-avatar>
           </div>
         }
-        
+
+        @case ('grouped') {
+          <div class="example-preview">
+            <nui-avatar-group [max]="3" [avatars]="avatars" [variant]="'rounded'" />
+          </div>
+        }
+
         @case ('error') {
           <div class="example-preview">
             <nui-avatar
               src="https://invalid-url-example.com/fail.jpg"
               initials="ER"
               color="danger"
-              alt="Error Fallback">
-            </nui-avatar>
+              alt="Error Fallback"
+            ></nui-avatar>
           </div>
         }
       }
