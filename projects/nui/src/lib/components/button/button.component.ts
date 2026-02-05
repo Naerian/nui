@@ -38,6 +38,9 @@ import {
     class: 'nui-button-host',
     '[attr.role]': '"button"',
     '[attr.aria-disabled]': 'disabled() || loading()',
+    '[class.nui-btn-full]': 'width() === "full"',
+    '[style.display]': 'width() === "full" ? "flex" : "inline-flex"',
+    '[style.width]': 'width() === "full" ? "100%" : "auto"',
   },
 })
 export class ButtonComponent implements AfterContentInit {

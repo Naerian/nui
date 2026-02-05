@@ -12,11 +12,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import {
-  ButtonGroupMode,
-  ButtonGroupLayout,
-  NormalizedOption,
-} from './models/button-group.model';
+import { ButtonGroupMode, ButtonGroupLayout, NormalizedOption } from './models/button-group.model';
 import {
   NUI_CONFIG,
   NUISize,
@@ -35,6 +31,10 @@ import { ButtonWidth } from '../button/models/button.model';
   templateUrl: './button-group.component.html',
   styleUrls: ['./button-group.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[style.width]': 'width() === "full" ? "100%" : "auto"',
+    '[style.display]': 'width() === "full" ? "flex" : "inline-flex"',
+  },
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

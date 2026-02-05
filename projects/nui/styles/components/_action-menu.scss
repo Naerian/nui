@@ -2,30 +2,57 @@
 @use '../mixins-base' as base;
 @use '../variables/action-menu-vars' as vars;
 
+@mixin action-menu-theme($color-name) {
+  // Mapeo de los core tokens del ThemeService
+  $bg: var(--nui-am-#{$color-name}-base-bg);
+  $color: var(--nui-am-#{$color-name}-base-color);
+  $border: var(--nui-am-#{$color-name}-border);
+  $check: var(--nui-am-#{$color-name}-check);
+  $active-bg: var(--nui-am-#{$color-name}-active-bg);
+
+  // Variables locales del ítem para este preset
+  --nui-am-item-hover-bg: #{$bg};
+  --nui-am-item-hover-color: #{$color};
+  --nui-am-item-hover-icon-color: #{$check};
+  --nui-am-item-hover-border-color: #{$border};
+  --nui-am-item-check-color: #{$check};
+
+  // Reutilizamos el mismo esquema para Selected
+  --nui-am-item-selected-bg: #{$bg};
+  --nui-am-item-selected-color: #{$color};
+  --nui-am-item-selected-icon-color: #{$check};
+
+  // Hover sobre seleccionado (un poco más intenso)
+  --nui-am-item-selected-hover-bg: #{$active-bg};
+
+  // Subtítulos (usamos opacidad sobre el color base para no necesitar más variables)
+  --nui-am-item-subtitle-color: color-mix(in srgb, #{$color}, transparent 40%);
+}
+
 @mixin nui-action-menu-styles {
   .nui-action-menu,
   .nui-action-menu-submenu {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    min-width: var(--nui-action-menu-min-width);
-    max-width: var(--nui-action-menu-max-width);
-    border: var(--nui-action-menu-border-width) solid var(--nui-action-menu-border-color);
-    background-color: var(--nui-action-menu-bg);
-    border-radius: var(--nui-action-menu-border-radius);
-    padding: var(--nui-action-menu-padding);
-    box-shadow: var(--nui-action-menu-shadow);
-    gap: var(--nui-action-menu-padding);
+    min-width: var(--nui-am-min-width);
+    max-width: var(--nui-am-max-width);
+    border: var(--nui-am-border-width) solid var(--nui-am-border-color);
+    background-color: var(--nui-bg-primary);
+    border-radius: var(--nui-am-border-radius);
+    padding: var(--nui-am-padding);
+    box-shadow: var(--nui-am-shadow);
+    gap: var(--nui-am-padding);
     list-style: none;
     margin: 0;
-    transition: var(--nui-action-menu-transition);
+    transition: var(--nui-am-transition);
 
     &--fullWidth {
       width: 100%;
     }
 
     &--static {
-      box-shadow: var(--nui-action-menu-static-shadow);
+      box-shadow: var(--nui-am-static-shadow);
       animation: none !important;
       transform: none !important;
       transition: none !important;
@@ -37,56 +64,56 @@
     @each $color in $colors {
       &--#{$color} {
         @include action-menu-theme($color);
-        border-color: var(--nui-action-menu-item-hover-bg);
+        border-color: var(--nui-am-item-hover-bg);
       }
     }
 
     &__start,
     &__end {
       width: 100%;
-      padding: var(--nui-action-menu-padding);
+      padding: var(--nui-am-padding);
       &:empty {
         display: none;
       }
     }
 
     &__start:not(:empty) {
-      margin-bottom: var(--nui-action-menu-padding);
-      border-bottom: 1px solid var(--nui-action-menu-separator-color);
-      padding-bottom: calc(var(--nui-action-menu-padding) * 2);
+      margin-bottom: var(--nui-am-padding);
+      border-bottom: 1px solid var(--nui-am-separator-color);
+      padding-bottom: calc(var(--nui-am-padding) * 2);
     }
 
     &__end:not(:empty) {
-      margin-top: var(--nui-action-menu-padding);
-      border-top: 1px solid var(--nui-action-menu-separator-color);
-      padding-top: calc(var(--nui-action-menu-padding) * 2);
+      margin-top: var(--nui-am-padding);
+      border-top: 1px solid var(--nui-am-separator-color);
+      padding-top: calc(var(--nui-am-padding) * 2);
     }
 
     &__separator {
       width: 100%;
       height: 1px;
-      background-color: var(--nui-action-menu-separator-color);
-      margin: var(--nui-action-menu-separator-padding);
+      background-color: var(--nui-am-separator-color);
+      margin: var(--nui-am-separator-padding);
 
       &--labeled {
         height: auto;
         background-color: transparent;
         display: flex;
         align-items: center;
-        gap: var(--nui-action-menu-separator-label-spacing);
+        gap: var(--nui-am-separator-label-spacing);
         &::before,
         &::after {
           content: '';
           flex: 1;
           height: 1px;
-          background-color: var(--nui-action-menu-separator-color);
+          background-color: var(--nui-am-separator-color);
         }
       }
 
       &__label {
-        font-size: var(--nui-action-menu-separator-font-size);
-        font-weight: var(--nui-action-menu-separator-font-weight);
-        color: var(--nui-action-menu-separator-label-color);
+        font-size: var(--nui-am-separator-font-size);
+        font-weight: var(--nui-am-separator-font-weight);
+        color: var(--nui-am-separator-label-color);
         text-transform: uppercase;
         letter-spacing: 0.05em;
       }
@@ -100,12 +127,12 @@
       align-items: center;
       text-align: left;
       overflow: hidden;
-      background-color: var(--nui-action-menu-item-bg);
-      border: var(--nui-action-menu-item-border);
-      color: var(--nui-action-menu-item-color);
-      border-radius: var(--nui-action-menu-item-border-radius);
-      padding: var(--nui-action-menu-item-padding-y) var(--nui-action-menu-item-padding-x);
-      gap: var(--nui-action-menu-item-gap);
+      background-color: var(--nui-am-item-bg);
+      border: var(--nui-am-item-border);
+      color: var(--nui-am-item-color);
+      border-radius: var(--nui-am-item-border-radius);
+      padding: var(--nui-am-item-padding-y) var(--nui-am-item-padding-x);
+      gap: var(--nui-am-item-gap);
       user-select: none;
       cursor: pointer;
       outline: none;
@@ -113,7 +140,7 @@
       &__container {
         display: flex;
         align-items: center;
-        gap: var(--nui-action-menu-item-gap);
+        gap: var(--nui-am-item-gap);
         flex: 1 1 auto;
         min-width: 0;
       }
@@ -127,19 +154,19 @@
       }
 
       &__label {
-        font-weight: var(--nui-action-menu-item-label-weight);
-        font-size: var(--nui-action-menu-item-label-font-size);
+        font-weight: var(--nui-am-item-label-weight);
+        font-size: var(--nui-am-item-label-font-size);
         @include global.text-truncate;
       }
 
       &__subtitle {
-        font-size: var(--nui-action-menu-item-subtitle-font-size);
-        color: var(--nui-action-menu-item-subtitle-color);
+        font-size: var(--nui-am-item-subtitle-font-size);
+        color: var(--nui-am-item-subtitle-color);
         @include global.text-truncate;
       }
 
       &__icon {
-        font-size: 1.1em;
+        font-size: 1em;
         flex-shrink: 0;
       }
 
@@ -147,51 +174,50 @@
         font-size: 1.25em;
         flex-shrink: 0;
         margin-left: auto;
-        color: var(--nui-action-menu-item-check-color);
+        color: var(--nui-am-item-check-color);
       }
 
       &__shortcut {
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--nui-action-menu-shortcut-bg);
-        color: var(--nui-action-menu-shortcut-color);
-        padding: var(--nui-action-menu-shortcut-padding);
-        border-radius: var(--nui-action-menu-shortcut-border-radius);
-        border: var(--nui-action-menu-shortcut-border-width) solid
-          var(--nui-action-menu-shortcut-border-color);
-        font-size: var(--nui-action-menu-shortcut-font-size);
+        background-color: var(--nui-am-shortcut-bg);
+        color: var(--nui-am-shortcut-color);
+        padding: var(--nui-am-shortcut-padding);
+        border-radius: var(--nui-am-shortcut-border-radius);
+        border: var(--nui-am-shortcut-border-width) solid var(--nui-am-shortcut-border-color);
+        font-size: var(--nui-am-shortcut-font-size);
       }
 
       &__arrow {
         flex-shrink: 0;
         margin-left: auto;
-        padding-left: var(--nui-action-menu-arrow-padding-left);
+        padding-left: var(--nui-am-arrow-padding-left);
         display: flex;
         align-items: center;
       }
 
       &:hover:not(&--disabled),
       &:focus-visible:not(&--disabled) {
-        background-color: var(--nui-action-menu-item-hover-bg);
-        color: var(--nui-action-menu-item-hover-color);
+        background-color: var(--nui-am-item-hover-bg);
+        color: var(--nui-am-item-hover-color);
 
         .nui-action-menu__item__icon,
         .nui-action-menu__item__subtitle,
         .nui-action-menu__item__shortcut,
         .nui-action-menu__item__arrow,
         .nui-action-menu__item__check {
-          color: var(--nui-action-menu-item-hover-icon-color);
+          color: var(--nui-am-item-hover-icon-color);
         }
 
         .nui-action-menu__item__shortcut {
-          border-color: var(--nui-action-menu-item-hover-border-color);
+          border-color: var(--nui-am-item-hover-border-color);
         }
       }
 
       &--selected {
         .nui-action-menu__item__check {
-          color: var(--nui-action-menu-item-selected-icon-color);
+          color: var(--nui-color-primary);
         }
       }
 
@@ -199,10 +225,10 @@
         .nui-action-menu__item__arrow::before {
           content: '';
           display: inline-block;
-          width: var(--nui-action-menu-item-notify-selected-size);
-          height: var(--nui-action-menu-item-notify-selected-size);
-          border-radius: var(--nui-action-menu-item-notify-selected-radius);
-          background-color: var(--nui-action-menu-item-notify-selected);
+          width: var(--nui-am-item-notify-selected-size);
+          height: var(--nui-am-item-notify-selected-size);
+          border-radius: var(--nui-am-item-notify-selected-radius);
+          background-color: var(--nui-color-primary);
           margin-right: 8px;
           opacity: 0.8;
         }
@@ -215,21 +241,4 @@
       }
     }
   }
-}
-
-@mixin action-menu-theme($color) {
-  --nui-action-menu-item-hover-bg: var(--nui-action-menu-#{$color}-item-hover-bg);
-  --nui-action-menu-item-hover-color: var(--nui-action-menu-#{$color}-item-hover-color);
-  --nui-action-menu-item-hover-icon-color: var(--nui-action-menu-#{$color}-item-hover-icon-color);
-  --nui-action-menu-item-hover-border-color: var(
-    --nui-action-menu-#{$color}-item-hover-border-color
-  );
-  --nui-action-menu-item-hover-subtitle-color: var(
-    --nui-action-menu-#{$color}-item-hover-subtitle-color
-  );
-  --nui-action-menu-item-check-color: var(--nui-action-menu-#{$color}-item-check-color);
-  --nui-action-menu-item-selected-icon-color: var(
-    --nui-action-menu-#{$color}-item-selected-icon-color
-  );
-  --nui-action-menu-item-selected-bg: var(--nui-action-menu-#{$color}-item-selected-bg);
 }

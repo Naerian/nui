@@ -530,73 +530,73 @@ export class ExampleComponent {
           title: 'codeExamples.cssVariables',
           code: `:root {
   /* Menu Container */
-  --nui-action-menu-bg: var(--nui-bg-primary);
-  --nui-action-menu-border: var(--nui-border-primary);
-  --nui-action-menu-border-radius: var(--nui-border-radius-md);
-  --nui-action-menu-shadow: var(--nui-shadow-lg);
-  --nui-action-menu-padding: var(--nui-spacing-xs);
-  --nui-action-menu-min-width: 180px;
-  --nui-action-menu-max-width: 320px;
+  --nui-am-bg: var(--nui-bg-primary);
+  --nui-am-border: var(--nui-border-primary);
+  --nui-am-border-radius: var(--nui-border-radius-md);
+  --nui-am-shadow: var(--nui-shadow-lg);
+  --nui-am-padding: var(--nui-spacing-xs);
+  --nui-am-min-width: 180px;
+  --nui-am-max-width: 320px;
 
   /* Menu Items */
-  --nui-action-menu-item-padding: var(--nui-spacing-sm) var(--nui-spacing-md);
-  --nui-action-menu-item-gap: var(--nui-spacing-sm);
-  --nui-action-menu-item-border-radius: var(--nui-border-radius-sm);
-  --nui-action-menu-item-text-color: var(--nui-text-primary);
-  --nui-action-menu-item-icon-size: 18px;
+  --nui-am-item-padding: var(--nui-spacing-sm) var(--nui-spacing-md);
+  --nui-am-item-gap: var(--nui-spacing-sm);
+  --nui-am-item-border-radius: var(--nui-border-radius-sm);
+  --nui-am-item-text-color: var(--nui-text-primary);
+  --nui-am-item-icon-size: 18px;
   
   /* Item States */
-  --nui-action-menu-item-hover-bg: var(--nui-bg-hover);
-  --nui-action-menu-item-active-bg: var(--nui-bg-active);
-  --nui-action-menu-item-disabled-opacity: 0.5;
+  --nui-am-item-hover-bg: var(--nui-bg-hover);
+  --nui-am-item-active-bg: var(--nui-bg-active);
+  --nui-am-item-disabled-opacity: 0.5;
   
   /* Selected Item */
-  --nui-action-menu-item-selected-color: var(--primary-color);
-  --nui-action-menu-item-selected-bg: var(--primary-bg-subtle);
+  --nui-am-item-selected-color: var(--primary-color);
+  --nui-am-item-selected-bg: var(--primary-bg-subtle);
   
   /* Subtitle */
-  --nui-action-menu-subtitle-color: var(--nui-text-secondary);
-  --nui-action-menu-subtitle-size: var(--nui-font-size-xs);
+  --nui-am-subtitle-color: var(--nui-text-secondary);
+  --nui-am-subtitle-size: var(--nui-font-size-xs);
   
   /* Badge */
-  --nui-action-menu-badge-bg: var(--primary-color);
-  --nui-action-menu-badge-color: var(--nui-text-on-primary);
-  --nui-action-menu-badge-size: var(--nui-font-size-xs);
-  --nui-action-menu-badge-padding: 2px 6px;
-  --nui-action-menu-badge-radius: var(--nui-border-radius-full);
+  --nui-am-badge-bg: var(--primary-color);
+  --nui-am-badge-color: var(--nui-text-on-primary);
+  --nui-am-badge-size: var(--nui-font-size-xs);
+  --nui-am-badge-padding: 2px 6px;
+  --nui-am-badge-radius: var(--nui-border-radius-full);
   
   /* Shortcut */
-  --nui-action-menu-shortcut-color: var(--nui-text-tertiary);
-  --nui-action-menu-shortcut-bg: var(--nui-bg-tertiary);
-  --nui-action-menu-shortcut-size: var(--nui-font-size-xs);
-  --nui-action-menu-shortcut-padding: 2px 6px;
-  --nui-action-menu-shortcut-radius: var(--nui-border-radius-xs);
+  --nui-am-shortcut-color: var(--nui-text-tertiary);
+  --nui-am-shortcut-bg: var(--nui-bg-tertiary);
+  --nui-am-shortcut-size: var(--nui-font-size-xs);
+  --nui-am-shortcut-padding: 2px 6px;
+  --nui-am-shortcut-radius: var(--nui-border-radius-xs);
   
   /* Separator */
-  --nui-action-menu-separator-color: var(--nui-border-primary);
-  --nui-action-menu-separator-margin: var(--nui-spacing-xs) 0;
-  --nui-action-menu-separator-label-color: var(--nui-text-tertiary);
-  --nui-action-menu-separator-label-size: var(--nui-font-size-xs);
+  --nui-am-separator-color: var(--nui-border-primary);
+  --nui-am-separator-margin: var(--nui-spacing-xs) 0;
+  --nui-am-separator-label-color: var(--nui-text-tertiary);
+  --nui-am-separator-label-size: var(--nui-font-size-xs);
   
   /* Submenu */
-  --nui-action-menu-submenu-icon-size: 16px;
-  --nui-action-menu-submenu-icon-color: var(--nui-text-tertiary);
+  --nui-am-submenu-icon-size: 16px;
+  --nui-am-submenu-icon-color: var(--nui-text-tertiary);
   
   /* Header & Footer */
-  --nui-action-menu-header-padding: var(--nui-spacing-md);
-  --nui-action-menu-header-border: var(--nui-border-primary);
-  --nui-action-menu-footer-padding: var(--nui-spacing-md);
-  --nui-action-menu-footer-border: var(--nui-border-primary);
+  --nui-am-header-padding: var(--nui-spacing-md);
+  --nui-am-header-border: var(--nui-border-primary);
+  --nui-am-footer-padding: var(--nui-spacing-md);
+  --nui-am-footer-border: var(--nui-border-primary);
 }
 
 // Example of customization
 .my-custom-action-menu {
   ::ng-deep .nui-action-menu {
-    --nui-action-menu-bg: #1a1a2e;
-    --nui-action-menu-item-text-color: #e0e0e0;
-    --nui-action-menu-item-hover-bg: #16213e;
-    --nui-action-menu-border-radius: 12px;
-    --nui-action-menu-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    --nui-am-bg: #1a1a2e;
+    --nui-am-item-text-color: #e0e0e0;
+    --nui-am-item-hover-bg: #16213e;
+    --nui-am-border-radius: 12px;
+    --nui-am-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   }
 }`,
           language: 'scss',

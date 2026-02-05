@@ -30,6 +30,11 @@ import { NUI_TRANSLATIONS } from '../../translations';
   templateUrl: './avatar-group.component.html',
   styleUrl: './avatar-group.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[style.display]': '"inline-flex"',
+    '[style.width]': 'effectiveSize()', // p.ej. "40px"
+    '[style.height]': 'effectiveSize()', // p.ej. "40px"
+  },
 })
 export class AvatarGroupComponent {
   // ===== DEPENDENCIES =====

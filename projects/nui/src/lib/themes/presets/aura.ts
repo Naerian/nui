@@ -18,8 +18,8 @@ export const aura: ThemePreset = {
       accent: '#ae7aff',
       success: '#15803d',
       info: '#0369a1',
-      warning: '#b45309',
-      danger: '#991b1b',
+      warning: '#c7651a',
+      danger: '#b32525',
     },
   },
 };

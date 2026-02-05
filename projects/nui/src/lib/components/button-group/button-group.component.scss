@@ -1,11 +1,176 @@
-// ============================================================================
-// Button Group Component Styles
-// ============================================================================
-// This component uses ViewEncapsulation.None
-// All styles are compiled globally from styles/components/_button-group.scss
-// This file only contains host-specific styles
-// ============================================================================
+@use './../../../../styles/variables/button-group-vars';
 
 :host {
-  display: block;
+  @include button-group-vars.nui-button-group-vars;
+}
+
+@mixin apply-color-preset($variant, $color-name) {
+  $base: var(--nui-btn-group-#{$color-name}-color);
+  $contrast: var(--nui-btn-group-#{$color-name}-contrast);
+  $hover: var(--nui-btn-group-#{$color-name}-hover);
+  $alpha10: var(--nui-btn-group-#{$color-name}-alpha-10);
+  $alpha20: var(--nui-btn-group-#{$color-name}-alpha-20);
+
+  &.nui-button-group--#{$variant} {
+    .nui-button-group__option {
+      @if $variant == 'solid' {
+        color: $base;
+        &--selected {
+          background-color: $base;
+          border-color: $base;
+          color: $contrast;
+          &:hover {
+            background-color: $hover;
+            border-color: $hover;
+          }
+        }
+        &:hover:not(.nui-button-group__option--selected) {
+          background-color: $alpha10;
+        }
+      }
+
+      @if $variant == 'outline' {
+        border-color: $base;
+        color: $base;
+        &--selected {
+          background-color: $base;
+          color: $contrast;
+        }
+        &:hover:not(.nui-button-group__option--selected) {
+          background-color: $alpha10;
+        }
+      }
+
+      @if $variant == 'ghost' {
+        border-color: transparent;
+        background-color: transparent;
+        color: $base;
+        &--selected {
+          background-color: $alpha20;
+          color: $base;
+        }
+        &:hover:not(.nui-button-group__option--selected) {
+          background-color: $alpha10;
+        }
+      }
+    }
+  }
+}
+
+.nui-button-group {
+  display: inline-flex;
+  align-items: stretch;
+  position: relative;
+  border-radius: var(--nui-button-group-radius);
+  user-select: none;
+  isolation: isolate;
+  transition: var(--nui-button-group-transition);
+
+  &--full {
+    display: flex;
+    width: 100%;
+    .nui-button-group__option {
+      flex: 1;
+    }
+  }
+
+  &--fit {
+    width: fit-content;
+  }
+  &--auto {
+    width: auto;
+  }
+
+  &__option {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    white-space: nowrap;
+    cursor: pointer;
+    background: var(--nui-bg-primary);
+    border: var(--nui-border-width-xs) solid var(--nui-border-primary);
+    color: var(--nui-text-secondary);
+    font-family: var(--nui-font-family);
+    font-weight: var(--nui-font-weight-medium);
+    transition: all var(--nui-transition-duration-fast) var(--nui-transition-timing-function-ease);
+    z-index: var(--nui-button-group-z-index-base);
+
+    &:not(:first-child) {
+      margin-left: var(--nui-button-group-overlap);
+    }
+
+    &:first-child {
+      border-top-left-radius: inherit;
+      border-bottom-left-radius: inherit;
+    }
+
+    &:last-child {
+      border-top-right-radius: inherit;
+      border-bottom-right-radius: inherit;
+    }
+
+    &--disabled {
+      opacity: var(--nui-button-group-disabled-opacity);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    line-height: 1;
+  }
+
+  $sizes: xs, sm, md, lg, xl;
+  @each $size in $sizes {
+    &--#{$size} {
+      .nui-button-group__option {
+        height: var(--nui-height-#{$size});
+        padding: var(--nui-padding-#{$size});
+        font-size: var(--nui-font-size-#{$size});
+        gap: var(--nui-spacing-xs);
+      }
+      .nui-button-group__icon {
+        font-size: var(--nui-button-group-icon-size-#{$size});
+      }
+    }
+  }
+
+  $colors: primary, secondary, success, info, warning, danger, accent;
+  @each $color in $colors {
+    &--#{$color} {
+      @include apply-color-preset(solid, $color);
+      @include apply-color-preset(outline, $color);
+      @include apply-color-preset(ghost, $color);
+    }
+  }
+
+  &--segmented {
+    gap: var(--nui-button-group-segmented-gap);
+    background-color: var(--nui-bg-secondary);
+    padding: var(--nui-button-group-segmented-padding);
+    border: var(--nui-border-width-xs) solid var(--nui-border-primary);
+
+    .nui-button-group__option {
+      margin: 0 !important;
+      background: transparent;
+      border-color: transparent;
+      border-radius: calc(
+        var(--nui-button-group-radius) - var(--nui-button-group-segmented-padding)
+      );
+
+      &--selected {
+        background-color: var(--nui-bg-primary);
+        color: var(--nui-text-primary);
+        box-shadow: var(--nui-box-shadow--sm);
+      }
+    }
+  }
 }

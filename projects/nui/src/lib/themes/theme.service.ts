@@ -375,37 +375,42 @@ export class ThemeService {
    */
 
   private generateButtonVariables(name: string, color: string): string {
-    const hoverColor = this.shade(color, 10);
-    const activeColor = this.shade(color, 20);
     const contrastText = this.getContrastColor(color);
+    const alpha10 = this.withAlpha(color, 0.1);
+    const alpha20 = this.withAlpha(color, 0.2);
+    const alpha40 = this.withAlpha(color, 0.4);
+    const alpha50 = this.withAlpha(color, 0.5);
+    const alpha80 = this.withAlpha(color, 0.8);
+    const alpha90 = this.withAlpha(color, 0.9);
 
     return `
-  --nui-button-${name}-solid-bg: ${color};
-  --nui-button-${name}-solid-text: ${contrastText};
-  --nui-button-${name}-solid-border: transparent;
-  --nui-button-${name}-solid-hover-bg: ${hoverColor};
-  --nui-button-${name}-solid-hover-text: ${contrastText};
-  --nui-button-${name}-solid-hover-border: ${hoverColor};
-  --nui-button-${name}-solid-active-bg: ${activeColor};
-  --nui-button-${name}-solid-active-border: ${activeColor};
-  --nui-button-${name}-outline-bg: transparent;
-  --nui-button-${name}-outline-text: ${color};
-  --nui-button-${name}-outline-border: ${color};
-  --nui-button-${name}-outline-hover-bg: ${this.withAlpha(color, 0.1)};
-  --nui-button-${name}-outline-hover-text: ${hoverColor};
-  --nui-button-${name}-outline-hover-border: ${hoverColor};
-  --nui-button-${name}-outline-active-bg: ${this.withAlpha(color, 0.2)};
-  --nui-button-${name}-outline-active-border: ${activeColor};
-  --nui-button-${name}-ghost-bg: transparent;
-  --nui-button-${name}-ghost-text: ${color};
-  --nui-button-${name}-ghost-border: transparent;
-  --nui-button-${name}-ghost-hover-bg: ${this.withAlpha(color, 0.1)};
-  --nui-button-${name}-ghost-hover-text: ${hoverColor};
-  --nui-button-${name}-ghost-hover-border: transparent;
-  --nui-button-${name}-ghost-active-bg: ${this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 90)};
-  --nui-button-${name}-ghost-active-border: transparent;
-  --nui-button-${name}-focus-color: ${this.tint(color, 60)};
-`;
+      --nui-btn-${name}-color: ${color};
+      --nui-btn-${name}-hover: ${alpha80};
+      --nui-btn-${name}-active: ${alpha90};
+      --nui-btn-${name}-contrast: ${contrastText};
+      
+      /* Solid States */
+      --nui-btn-${name}-solid-bg: ${color};
+      --nui-btn-${name}-solid-text: ${contrastText};
+      --nui-btn-${name}-solid-hover-bg: ${alpha80};
+      --nui-btn-${name}-solid-active-bg: ${alpha90};
+      
+      /* Outline States */
+      --nui-btn-${name}-outline-border: ${alpha40};
+      --nui-btn-${name}-outline-text: ${color};
+      --nui-btn-${name}-outline-hover-bg: ${alpha10};
+      --nui-btn-${name}-outline-hover-border: ${alpha50};
+      --nui-btn-${name}-outline-active-bg: ${alpha20};
+      --nui-btn-${name}-outline-active-border: ${alpha40};
+      
+      /* Ghost States */
+      --nui-btn-${name}-ghost-text: ${color};
+      --nui-btn-${name}-ghost-hover-bg: ${alpha10};
+      --nui-btn-${name}-ghost-active-bg: ${alpha20};
+
+      /* Focus Ring */
+      --nui-btn-${name}-focus-ring: ${this.withAlpha(color, 0.4)};
+    `;
   }
 
   private generateFabButtonVariables(name: string, color: string): string {
@@ -443,41 +448,26 @@ export class ThemeService {
   }
 
   private generateButtonGroupVariables(name: string, color: string): string {
-    const hoverColor = this.shade(color, 10);
-    const hoverBg = this.withAlpha(color, 0.05);
-    const inactiveBorder = this._isDarkMode() ? DEFAULT_GRAYS[900] : DEFAULT_GRAYS[200];
-    const inactiveBg = this._isDarkMode() ? DEFAULT_GRAYS[900] : PURE_COLORS.WHITE;
     const contrastText = this.getContrastColor(color);
+    const alpha10 = this.withAlpha(color, 0.1);
+    const alpha20 = this.withAlpha(color, 0.2);
+    const alpha80 = this.withAlpha(color, 0.8);
 
+    // Colores base de superficie según modo
+    const inactiveBorder = this._isDarkMode()
+      ? 'var(--nui-border-primary)'
+      : 'var(--nui-border-secondary)';
+    const inactiveBg = this._isDarkMode() ? 'var(--nui-bg-secondary)' : 'var(--nui-bg-primary)';
+    
     return `
-  --nui-button-group-${name}-solid-bg: ${color};
-  --nui-button-group-${name}-solid-text: ${contrastText};
-  --nui-button-group-${name}-solid-border: ${color};
-  --nui-button-group-${name}-solid-box-border: ${inactiveBg};
-  --nui-button-group-${name}-solid-hover-bg: ${hoverColor};
-  --nui-button-group-${name}-solid-inactive-text: ${color};
-  --nui-button-group-${name}-solid-inactive-bg: ${inactiveBg};
-  --nui-button-group-${name}-solid-inactive-border: ${inactiveBorder};
-  --nui-button-group-${name}-solid-inactive-hover-bg: ${hoverBg};
-  --nui-button-group-${name}-outline-bg: ${this.withAlpha(color, 0.1)};
-  --nui-button-group-${name}-outline-text: ${color};
-  --nui-button-group-${name}-outline-border: ${color};
-  --nui-button-group-${name}-outline-hover-bg: ${this.withAlpha(color, 0.2)};
-  --nui-button-group-${name}-outline-inactive-bg: transparent;
-  --nui-button-group-${name}-outline-inactive-hover-bg: ${this.withAlpha(color, 0.2)};
-  --nui-button-group-${name}-outline-inactive-text: ${color};
-  --nui-button-group-${name}-outline-inactive-border: ${inactiveBorder};
-  --nui-button-group-${name}-ghost-bg: ${this.withAlpha(color, 0.1)};
-  --nui-button-group-${name}-ghost-text: ${color};
-  --nui-button-group-${name}-ghost-border: transparent;
-  --nui-button-group-${name}-ghost-hover-bg: ${this.withAlpha(color, 0.2)};
-  --nui-button-group-${name}-ghost-hover-text: ${hoverColor};
-  --nui-button-group-${name}-ghost-hover-border: transparent;
-  --nui-button-group-${name}-ghost-inactive-bg: transparent;
-  --nui-button-group-${name}-ghost-inactive-text: ${color};
-  --nui-button-group-${name}-ghost-inactive-border: transparent;
-  --nui-button-group-${name}-ghost-inactive-hover-bg: ${this.withAlpha(color, 0.08)};
-`;
+      --nui-btn-group-${name}-color: ${color};
+      --nui-btn-group-${name}-hover: ${alpha80};
+      --nui-btn-group-${name}-contrast: ${contrastText};
+      --nui-btn-group-${name}-alpha-10: ${alpha10};
+      --nui-btn-group-${name}-alpha-20: ${alpha20};
+      --nui-btn-group-${name}-in-bg: ${inactiveBg};
+      --nui-btn-group-${name}-in-border: ${inactiveBorder};
+    `;
   }
 
   private generateChipVariables(name: string, color: string): string {
@@ -613,67 +603,42 @@ export class ThemeService {
   }
 
   private generateAvatarVariables(name: string, color: string): string {
-    const shadeColor = this._isDarkMode() ? this.shade(color, 10) : color;
-    const hoverColor = this.shade(color, 10);
+    const isDark = this._isDarkMode();
+    const hoverColor = this.shade(color, 15);
     const contrastText = this.getContrastColor(color);
-    const borderInsetShadow = this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
-    const borderShadow = `inset 0 0 1px 0px ${borderInsetShadow}, 0 0 1px 0px ${borderInsetShadow}`;
 
+    // Solo inyectamos lo que cambia por cada preset de color
     return `
-  --nui-avatar-default-bg: ${this._isDarkMode() ? 'var(--nui-color-secondary-shade-20)' : 'var(--nui-color-secondary)'};
-  --nui-avatar-default-color: ${this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE};
-  --nui-avatar-${name}-excess-bg: ${color};
-  --nui-avatar-${name}-excess-color: ${contrastText};
-  --nui-avatar-${name}-excess-hover-bg: ${hoverColor};
-  --nui-avatar-border-color: var(--nui-color-secondary);
-  --nui-avatar-border-shadow: ${borderShadow};
-  --nui-avatar-${name}-bg: ${shadeColor};
-  --nui-avatar-${name}-color: ${contrastText};
-`;
+      --nui-avatar-${name}-bg: ${isDark ? this.shade(color, 10) : color};
+      --nui-avatar-${name}-color: ${contrastText};
+      --nui-avatar-${name}-hover: ${hoverColor};
+
+      /*Generic variables for avatars without a specific color, using the preset color as a base */
+      --nui-avatar-default-bg: ${isDark ? 'var(--nui-bg-tertiary)' : 'var(--nui-bg-secondary)'};
+      --nui-avatar-default-color: ${isDark ? 'var(--nui-text-primary)' : 'var(--nui-text-secondary)'};
+      --nui-avatar-border-inset: ${isDark ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)'};
+    `;
   }
 
   private generateActionMenuVariables(name: string, color: string): string {
-    const hoverBg = this._isDarkMode() ? this.withAlpha(color, 0.15) : this.tint(color, 95);
-    const hoverColor = this._isDarkMode() ? this.tint(color, 60) : color;
-    const hoverIconColor = this._isDarkMode() ? this.tint(color, 50) : color;
-    const hoverBorderColor = this._isDarkMode() ? this.tint(color, 35) : this.tint(color, 65);
-    const hoverSubtitleColor = this._isDarkMode() ? this.tint(color, 40) : this.tint(color, 40);
-    const checkColor = this._isDarkMode() ? this.tint(color, 50) : color;
-    const selectedBg = this._isDarkMode() ? this.withAlpha(color, 0.15) : this.tint(color, 95);
-    const selectedColor = this._isDarkMode() ? this.tint(color, 60) : color;
-    const selectedIconColor = this._isDarkMode() ? this.tint(color, 50) : color;
-    const selectedSubtitleColor = this._isDarkMode() ? this.tint(color, 40) : this.tint(color, 40);
-    const selectedHoverBg = this._isDarkMode() ? this.withAlpha(color, 0.2) : this.tint(color, 90);
-    const selectedHoverColor = this._isDarkMode() ? this.tint(color, 65) : color;
-    const selectedHoverIconColor = this._isDarkMode() ? this.tint(color, 55) : color;
-    const selectedHoverSubtitleColor = this._isDarkMode()
-      ? this.tint(color, 45)
-      : this.tint(color, 35);
-    const focusColor = this._isDarkMode() ? this.withAlpha(color, 0.15) : this.tint(color, 95);
+    const isDark = this._isDarkMode();
+
+    // Tokens base de interacción
+    const baseInteractiveBg = isDark ? this.withAlpha(color, 0.15) : this.tint(color, 95);
+    const baseInteractiveColor = isDark ? this.tint(color, 60) : color;
+
+    // Variables de contraste y refinamiento
+    const borderTint = isDark ? this.tint(color, 35) : this.tint(color, 65);
 
     return `
-  --nui-action-menu-bg: var(--nui-bg-primary);
-  
-  --nui-action-menu-item-bg: transparent;
-  --nui-action-menu-item-color: var(--nui-text-primary);
-  --nui-action-menu-item-notify-selected: var(--nui-color-primary);
-
-  --nui-action-menu-${name}-item-hover-bg: ${hoverBg};
-  --nui-action-menu-${name}-item-hover-color: ${hoverColor};
-  --nui-action-menu-${name}-item-hover-icon-color: ${hoverIconColor};
-  --nui-action-menu-${name}-item-hover-border-color: ${hoverBorderColor};
-  --nui-action-menu-${name}-item-hover-subtitle-color: ${hoverSubtitleColor};
-  --nui-action-menu-${name}-item-check-color: ${checkColor};
-  --nui-action-menu-${name}-item-selected-bg: ${selectedBg};
-  --nui-action-menu-${name}-item-selected-color: ${selectedColor};
-  --nui-action-menu-${name}-item-selected-icon-color: ${selectedIconColor};
-  --nui-action-menu-${name}-item-selected-subtitle-color: ${selectedSubtitleColor};
-  --nui-action-menu-${name}-item-selected-hover-bg: ${selectedHoverBg};
-  --nui-action-menu-${name}-item-selected-hover-color: ${selectedHoverColor};
-  --nui-action-menu-${name}-item-selected-hover-icon-color: ${selectedHoverIconColor};
-  --nui-action-menu-${name}-item-selected-hover-subtitle-color: ${selectedHoverSubtitleColor};
-  --nui-action-menu-${name}-item-focus-color: ${focusColor};
-`;
+      --nui-am-${name}-base-bg: ${baseInteractiveBg};
+      --nui-am-${name}-base-color: ${baseInteractiveColor};
+      --nui-am-${name}-border: ${borderTint};
+      --nui-am-${name}-check: ${isDark ? this.tint(color, 50) : color};
+      
+      /* For strong selection states or hovering over selected */
+      --nui-am-${name}-active-bg: ${isDark ? this.withAlpha(color, 0.25) : this.tint(color, 90)};
+    `;
   }
 
   /**

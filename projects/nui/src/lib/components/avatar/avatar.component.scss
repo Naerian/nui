@@ -6,18 +6,38 @@
   vertical-align: middle;
 }
 
+@mixin apply-avatar-color($color-name) {
+  &.nui-avatar--#{$color-name} {
+    background-color: var(--nui-avatar-#{$color-name}-bg);
+    color: var(--nui-avatar-#{$color-name}-color);
+    box-shadow: inset 0 0 0 1px var(--nui-avatar-border-inset);
+  }
+}
+
+@mixin apply-excess-color($color-name) {
+  &.nui-avatar-group__excess--#{$color-name} {
+    background-color: var(--nui-avatar-#{$color-name}-bg);
+    color: var(--nui-avatar-#{$color-name}-color);
+
+    &:hover {
+      background-color: var(--nui-avatar-#{$color-name}-hover);
+    }
+  }
+}
+
 .nui-avatar {
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   position: relative;
   flex-shrink: 0;
   overflow: hidden;
   user-select: none;
-  background-color: var(--nui-color-primary);
-  color: var(--nui-text-primary);
-  font-weight: var(--nui-avatar-font-weight);
+  background-color: var(--nui-avatar-default-bg);
+  color: var(--nui-avatar-default-color);
+  font-weight: var(--nui-font-weight-medium);
   line-height: var(--nui-avatar-line-height);
   transition: var(--nui-avatar-transition);
-  box-shadow: var(--nui-avatar-border-shadow);
 
   $variants: rounded, circular, square;
   @each $variant in $variants {
@@ -30,23 +50,14 @@
   }
 
   &--bordered {
-    border: var(--nui-avatar-border-width, 0) solid
-      var(--nui-avatar-border-color, transparent);
+    border: var(--nui-avatar-border-width, 0) solid var(--nui-avatar-border-color, transparent);
   }
 
-  &__initials,
-  &__fallback,
-  &__icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    line-height: 1;
-    text-align: center;
-    text-transform: var(--nui-avatar-text-transform);
-    font-weight: var(--nui-avatar-font-weight);
-    padding: 2px;
+  $colors: primary, secondary, success, info, warning, danger, accent;
+  @each $color in $colors {
+    &--#{$color} {
+      @include apply-avatar-color($color);
+    }
   }
 
   $sizes: xs, sm, md, lg, xl;
@@ -69,12 +80,19 @@
     }
   }
 
-  $colors: primary, secondary, success, info, warning, danger, accent;
-  @each $color in $colors {
-    &--#{$color} {
-      background-color: var(--nui-avatar-#{$color}-bg);
-      color: var(--nui-avatar-#{$color}-color);
-    }
+  &__initials,
+  &__fallback,
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    line-height: 1;
+    text-align: center;
+    text-transform: var(--nui-avatar-text-transform);
+    font-weight: var(--nui-avatar-font-weight);
+    padding: 2px;
   }
 
   &__image {

@@ -2,6 +2,34 @@
 @use '../mixins-base' as base;
 @use '../variables/button-vars' as vars;
 
+@mixin button-theme($color, $variant: 'solid') {
+  // Mapeo dinámico de las variables generadas por el ThemeService
+  --button-bg: var(--nui-btn-#{$color}-#{$variant}-bg);
+  --button-text: var(--nui-btn-#{$color}-#{$variant}-text);
+  --button-border: var(--nui-btn-#{$color}-#{$variant}-border, transparent);
+
+  // Hover
+  --button-hover-bg: var(
+    --nui-btn-#{$color}-#{$variant}-hover-bg,
+    var(--nui-btn-#{$color}-#{$variant}-hover)
+  );
+  --button-hover-text: var(
+    --nui-btn-#{$color}-#{$variant}-hover-text,
+    var(--nui-btn-#{$color}-#{$variant}-text)
+  );
+  --button-hover-border: var(--nui-btn-#{$color}-#{$variant}-hover-border, transparent);
+
+  // Active
+  --button-active-bg: var(
+    --nui-btn-#{$color}-#{$variant}-active-bg,
+    var(--nui-btn-#{$color}-active)
+  );
+  --button-active-border: var(--nui-btn-#{$color}-#{$variant}-active-border, transparent);
+
+  // Focus
+  --nui-focus-ring-color: var(--nui-btn-#{$color}-focus-ring);
+}
+
 @mixin nui-button-styles {
   .nui-btn {
     display: inline-flex;
@@ -23,6 +51,7 @@
 
     @each $color in $colors {
       &--#{$color} {
+        // By default, apply the solid variant styles for the color preset
         @include button-theme($color, 'solid');
 
         @each $variant in $variants {
@@ -31,6 +60,21 @@
           }
         }
       }
+    }
+
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border-color: var(--button-border);
+
+    &:hover:not(:disabled) {
+      background-color: var(--button-hover-bg);
+      color: var(--button-hover-text);
+      border-color: var(--button-hover-border);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--button-active-bg);
+      border-color: var(--button-active-border);
     }
 
     @include global.focus-ring;
@@ -153,17 +197,6 @@
       }
     }
   }
-}
-
-@mixin button-theme($color, $variant: 'solid') {
-  --button-bg: var(--nui-button-#{$color}-#{$variant}-bg);
-  --button-text: var(--nui-button-#{$color}-#{$variant}-text);
-  --button-border: var(--nui-button-#{$color}-#{$variant}-border);
-  --button-hover-bg: var(--nui-button-#{$color}-#{$variant}-hover-bg);
-  --button-hover-text: var(--nui-button-#{$color}-#{$variant}-hover-text);
-  --button-hover-border: var(--nui-button-#{$color}-#{$variant}-hover-border);
-  --button-active-bg: var(--nui-button-#{$color}-#{$variant}-active-bg);
-  --button-active-border: var(--nui-button-#{$color}-#{$variant}-active-border);
 }
 
 @keyframes nui-spin {

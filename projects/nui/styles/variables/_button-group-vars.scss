@@ -1,0 +1,67 @@
+@use '../../styles/config' as config;
+
+// ========================================
+// BUTTON GROUP - Tokens & Variables
+// ========================================
+
+// TOKENS
+// ----------------------------------------
+$button-group-z-index-base: 0 !default;
+$button-group-z-index-hover: 1 !default;
+$button-group-z-index-selected: 1 !default;
+$button-group-z-index-focus: 2 !default;
+
+$button-group-disabled-opacity: 0.4 !default;
+$button-group-container-disabled-opacity: 0.6 !default;
+
+$button-group-segmented-gap: 0.313rem !default; // 5px
+$button-group-segmented-padding: 0.125rem !default; // 2px
+
+$button-group-transition-duration: var(--nui-transition-duration-normal) !default;
+$button-group-transition-timing: var(--nui-transition-timing-function-ease) !default;
+
+// MIXIN
+// ----------------------------------------
+@mixin nui-button-group-vars {
+  // Z-index layers
+  --nui-button-group-z-index-base: #{$button-group-z-index-base};
+  --nui-button-group-z-index-hover: #{$button-group-z-index-hover};
+  --nui-button-group-z-index-selected: #{$button-group-z-index-selected};
+  --nui-button-group-z-index-focus: #{$button-group-z-index-focus};
+
+  // Opacities
+  --nui-button-group-disabled-opacity: #{$button-group-disabled-opacity};
+  --nui-button-group-container-disabled-opacity: #{$button-group-container-disabled-opacity};
+
+  // Layout & spacing
+  --nui-button-group-border-width: var(--nui-border-width-xs);
+  --nui-button-group-overlap: calc(var(--nui-button-group-border-width) * -1);
+  --nui-button-group-segmented-gap: #{$button-group-segmented-gap};
+  --nui-button-group-segmented-padding: #{$button-group-segmented-padding};
+
+  // Transitions
+  --nui-button-group-transition: all #{$button-group-transition-duration}
+    #{$button-group-transition-timing};
+
+  // Scale factor: 1.1 means the icon is 10% larger than the text
+  --nui-button-group-icon-scale: 1.1;
+
+  --nui-button-group-icon-size-xs: calc(
+    var(--nui-font-size-xs) * var(--nui-button-group-icon-scale)
+  );
+  --nui-button-group-icon-size-sm: calc(
+    var(--nui-font-size-sm) * var(--nui-button-group-icon-scale)
+  );
+  --nui-button-group-icon-size-md: calc(
+    var(--nui-font-size-md) * var(--nui-button-group-icon-scale)
+  );
+  --nui-button-group-icon-size-lg: calc(
+    var(--nui-font-size-lg) * var(--nui-button-group-icon-scale)
+  );
+  --nui-button-group-icon-size-xl: calc(
+    var(--nui-font-size-xl) * var(--nui-button-group-icon-scale)
+  );
+
+  // Border Radius base (inherited from the system)
+  --nui-button-group-radius: var(--nui-border-radius-md);
+}

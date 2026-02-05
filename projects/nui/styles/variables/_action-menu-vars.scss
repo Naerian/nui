@@ -22,59 +22,59 @@ $action-menu-transition:
 // MIXIN
 @mixin nui-action-menu-vars {
   // Structure
-  --nui-action-menu-min-width: #{$action-menu-min-width};
-  --nui-action-menu-max-width: #{$action-menu-max-width};
-  --nui-action-menu-item-gap: var(--nui-spacing-sm);
-  --nui-action-menu-item-border: none;
-  --nui-action-menu-arrow-padding-left: #{$action-menu-arrow-padding-left};
-  --nui-action-menu-item-label-margin-right: var(--nui-spacing-md);
+  --nui-am-min-width: #{$action-menu-min-width};
+  --nui-am-max-width: #{$action-menu-max-width};
+  --nui-am-item-gap: var(--nui-spacing-sm);
+  --nui-am-item-border: none;
+  --nui-am-arrow-padding-left: #{$action-menu-arrow-padding-left};
+  --nui-am-item-label-margin-right: var(--nui-spacing-md);
 
   // Border & Padding
-  --nui-action-menu-border-width: var(--nui-border-width-xs);
-  --nui-action-menu-border-color: var(--nui-border-primary);
-  --nui-action-menu-border-radius: var(--nui-border-radius-md);
-  --nui-action-menu-padding: var(--nui-spacing-xs);
-  --nui-action-menu-item-border-radius: var(--nui-border-radius-sm);
-  --nui-action-menu-focus-outline-width: #{$action-menu-focus-outline-width};
-  --nui-action-menu-focus-outline-offset: #{$action-menu-focus-outline-offset};
+  --nui-am-border-width: var(--nui-border-width-xs);
+  --nui-am-border-color: var(--nui-border-primary);
+  --nui-am-border-radius: var(--nui-border-radius-md);
+  --nui-am-padding: var(--nui-spacing-xs);
+  --nui-am-item-border-radius: var(--nui-border-radius-sm);
+  --nui-am-focus-outline-width: #{$action-menu-focus-outline-width};
+  --nui-am-focus-outline-offset: #{$action-menu-focus-outline-offset};
 
   // Notify selected parent
-  --nui-action-menu-item-notify-selected-size: #{$action-menu-item-notify-selected-size};
-  --nui-action-menu-item-notify-selected-radius: #{$action-menu-item-notify-selected-radius};
+  --nui-am-item-notify-selected-size: #{$action-menu-item-notify-selected-size};
+  --nui-am-item-notify-selected-radius: #{$action-menu-item-notify-selected-radius};
 
   // Shortcut
-  --nui-action-menu-shortcut-bg: var(--nui-bg-tertiary);
-  --nui-action-menu-shortcut-color: var(--nui-text-secondary);
-  --nui-action-menu-shortcut-padding: var(--nui-spacing-xs);
-  --nui-action-menu-shortcut-border-width: var(--nui-border-width-xs);
-  --nui-action-menu-shortcut-border-color: var(--nui-border-primary);
-  --nui-action-menu-shortcut-border-radius: var(--nui-border-radius-md);
-  --nui-action-menu-shortcut-font-size: var(--nui-font-size-xs);
+  --nui-am-shortcut-bg: var(--nui-bg-tertiary);
+  --nui-am-shortcut-color: var(--nui-text-secondary);
+  --nui-am-shortcut-padding: var(--nui-spacing-xs);
+  --nui-am-shortcut-border-width: var(--nui-border-width-xs);
+  --nui-am-shortcut-border-color: var(--nui-border-primary);
+  --nui-am-shortcut-border-radius: var(--nui-border-radius-md);
+  --nui-am-shortcut-font-size: var(--nui-font-size-xs);
 
   // Shadow
-  --nui-action-menu-shadow: var(--nui-shadow-elevated);
-  --nui-action-menu-static-shadow: var(--nui-shadow-container);
+  --nui-am-shadow: var(--nui-shadow-elevated);
+  --nui-am-static-shadow: var(--nui-shadow-container);
 
   // Subtitle
-  --nui-action-menu-item-subtitle-color: var(--nui-text-secondary);
+  --nui-am-item-subtitle-color: var(--nui-text-secondary);
 
   // Font
-  --nui-action-menu-item-subtitle-font-size: var(--nui-font-size-xs);
-  --nui-action-menu-item-label-weight: var(--nui-font-weight-medium);
-  --nui-action-menu-item-label-font-size: var(--nui-font-size-sm);
-  --nui-action-menu-separator-font-size: var(--nui-font-size-xs);
-  --nui-action-menu-separator-font-weight: var(--nui-font-weight-semibold);
+  --nui-am-item-subtitle-font-size: var(--nui-font-size-xs);
+  --nui-am-item-label-weight: var(--nui-font-weight-medium);
+  --nui-am-item-label-font-size: var(--nui-font-size-sm);
+  --nui-am-separator-font-size: var(--nui-font-size-xs);
+  --nui-am-separator-font-weight: var(--nui-font-weight-semibold);
 
   // Separator
-  --nui-action-menu-separator-color: var(--nui-border-primary);
-  --nui-action-menu-separator-padding: #{$action-menu-separator-padding};
-  --nui-action-menu-separator-label-color: var(--nui-text-tertiary);
-  --nui-action-menu-separator-label-spacing: var(--nui-spacing-xs);
+  --nui-am-separator-color: var(--nui-border-primary);
+  --nui-am-separator-padding: #{$action-menu-separator-padding};
+  --nui-am-separator-label-color: var(--nui-text-tertiary);
+  --nui-am-separator-label-spacing: var(--nui-spacing-xs);
 
   // Transitions
-  --nui-action-menu-transition: #{$action-menu-transition};
+  --nui-am-transition: #{$action-menu-transition};
 
   // Spacing
-  --nui-action-menu-item-padding-y: var(--nui-spacing-xs);
-  --nui-action-menu-item-padding-x: var(--nui-spacing-sm);
+  --nui-am-item-padding-y: var(--nui-spacing-xs);
+  --nui-am-item-padding-x: var(--nui-spacing-sm);
 }
