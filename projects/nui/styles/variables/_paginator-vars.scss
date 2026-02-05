@@ -1,0 +1,46 @@
+@use '../../styles/config' as config;
+
+// ========================================
+// PAGINATOR - Tokens & Variables
+// ========================================
+
+// TOKENS (Sass)
+$paginator-z-index-base: 0 !default;
+$paginator-z-index-hover: 1 !default;
+$paginator-z-index-active: 1 !default;
+$paginator-z-index-focus: 2 !default;
+
+$paginator-gap: 0.25rem !default;
+$paginator-page-jump-input-width: 4rem !default;
+
+// MIXIN (CSS Custom Properties)
+@mixin nui-paginator-vars {
+  // Z-index
+  --nui-pg-z-index-base: #{$paginator-z-index-base};
+  --nui-pg-z-index-hover: #{$paginator-z-index-hover};
+  --nui-pg-z-index-active: #{$paginator-z-index-active};
+  --nui-pg-z-index-focus: #{$paginator-z-index-focus};
+
+  // Layout
+  --nui-pg-gap: #{$paginator-gap};
+  --nui-pg-page-jump-input-width: #{$paginator-page-jump-input-width};
+  --nui-pg-disabled-opacity: 0.4;
+
+  // Border-radius
+  --nui-pg-radius-xs: var(--nui-border-radius-xs);
+  --nui-pg-radius-sm: var(--nui-border-radius-sm);
+  --nui-pg-radius-md: var(--nui-border-radius-md);
+  --nui-pg-radius-lg: var(--nui-border-radius-lg);
+  --nui-pg-radius-xl: var(--nui-border-radius-xl);
+
+  // Transitions
+  --nui-pg-transition: all var(--nui-transition-duration-normal)
+    var(--nui-transition-timing-function-ease);
+
+  // Sizes (Pagination buttons and icons)
+  $sizes: xs, sm, md, lg, xl;
+  @each $size in $sizes {
+    --nui-pg-button-size-#{$size}: var(--nui-height-#{$size});
+    --nui-pg-icon-size-#{$size}: var(--nui-font-size-#{$size});
+  }
+}

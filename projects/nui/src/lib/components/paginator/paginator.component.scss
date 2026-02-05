@@ -1,12 +1,371 @@
+@use '../../../../styles/variables/paginator-vars';
+
+@mixin paginator-theme($color, $variant: 'solid') {
+  // Base styles for the paginator based on color and variant
+  --pg-bg: var(--nui-pg-#{$color}-#{$variant}-bg, transparent);
+  --pg-text: var(--nui-pg-#{$color}-#{$variant}-text);
+  --pg-border: var(--nui-pg-#{$color}-#{$variant}-border, transparent);
+
+  // Hover
+  --pg-hover-bg: var(--nui-pg-#{$color}-#{$variant}-hover-bg, transparent);
+  --pg-hover-border: var(--nui-pg-#{$color}-#{$variant}-hover-border, transparent);
+  // A veces el texto cambia en hover (ej: botón outline)
+  --pg-hover-text: var(--nui-pg-#{$color}-#{$variant}-text);
+
+  // Active
+  --pg-active-bg: var(--nui-pg-#{$color}-#{$variant}-active-bg);
+  --pg-active-border: var(--nui-pg-#{$color}-#{$variant}-active-border, transparent);
+  --pg-active-text: var(--nui-pg-#{$color}-contrast);
+
+  // If variant is not solid, we might want to change the active text color to ensure contrast
+  @if $variant != 'solid' {
+    --pg-active-text: var(--nui-pg-#{$color}-#{$variant}-text);
+  }
+
+  // Focus Ring
+  --pg-focus-ring: var(--nui-pg-#{$color}-focus-ring);
+}
+
 // ============================================================================
-// Paginator Component Styles
-// ============================================================================
-// This component uses ViewEncapsulation.None
-// All styles are compiled globally from styles/components/_paginator.scss
-// This file only contains host-specific styles
+// HOST & LAYOUT STRUCTURE
 // ============================================================================
 
 :host {
-  display: block;
+  @include paginator-vars.nui-paginator-vars;
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  gap: var(--nui-spacing-sm);
+  container-type: inline-size;
+  container-name: paginator-host;
+}
+
+:host.nui-paginator-container {
+  display: contents;
+
+  // --- COLORS (Automatic Generation) ---
+  $colors: primary, secondary, success, info, warning, danger, accent;
+  $variants: solid, outline, ghost;
+
+  @each $color in $colors {
+    &--#{$color} {
+      // By default, apply the solid variant styles for the color preset
+      @include paginator-theme($color, 'solid');
+
+      @each $variant in $variants {
+        &.nui-paginator-container--#{$variant} {
+          @include paginator-theme($color, $variant);
+        }
+      }
+
+      .nui-paginator__ellipsis {
+        color: var(--nui-pg-#{$color}-ellipsis-color, var(--nui-text-secondary));
+      }
+    }
+  }
+
+  // --- GENERIC AREAS ---
+  .nui-paginator__area {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--nui-spacing-md);
+  }
+
+  // --- TOP AND BOTTOM ROWS ---
+  .nui-paginator__area--top,
+  .nui-paginator__area--bottom {
+    width: 100%;
+    justify-content: flex-start;
+
+    // Automatic distribution logic (Intelligent Fallback)
+    // If you have 2 elements and you haven't forced alignment, they will be separated
+    &.nui-paginator__area--double:not([class*='--align-']) {
+      justify-content: space-between;
+    }
+    &.nui-paginator__area--triple:not([class*='--align-']) {
+      justify-content: space-between;
+      > *:not(:first-child):not(:last-child) {
+        margin-inline: auto;
+      }
+    }
+
+    // --- ALIGNMENT MODIFIERS (Explicit) ---
+    // Generate: --align-start, --align-center, --align-end, etc.
+    $aligns: start, center, end, space-between, space-around;
+
+    @each $align in $aligns {
+      &.nui-paginator__area--align-#{$align} {
+        // Map 'start' and 'end' to flex syntax, the rest remain the same
+        @if $align == 'start' {
+          justify-content: flex-start;
+        } @else if $align == 'end' {
+          justify-content: flex-end;
+        } @else {
+          justify-content: $align;
+        }
+      }
+    }
+  }
+
+  // --- CENTRAL AREA (Horizontal Wrapper) ---
+  .nui-paginator__horizontal-areas {
+    display: flex;
+    width: 100%;
+    gap: var(--nui-spacing-md);
+    justify-content: space-between;
+    width: 100%;
+    gap: var(--nui-spacing-md);
+
+    // Vertical alignment for horizontal areas (left, center, right)
+    &--items-start {
+      align-items: flex-start;
+    }
+    &--items-center {
+      align-items: center;
+    }
+    &--items-end {
+      align-items: flex-end;
+    }
+    &--items-stretch {
+      align-items: stretch;
+    }
+
+    // AREAS: (Left, Center, Right)
+    .nui-paginator__area--left {
+      justify-content: flex-start;
+      flex: 0 1 auto;
+    }
+    .nui-paginator__area--center {
+      justify-content: center;
+      flex: 1;
+    }
+    .nui-paginator__area--right {
+      justify-content: flex-end;
+      flex: 0 1 auto;
+    }
+
+    // Vertical (align-self): El hijo decide su posición vertical respecto al padre
+    .nui-paginator__area--self-start {
+      align-self: flex-start;
+    }
+    .nui-paginator__area--self-center {
+      align-self: center;
+    }
+    .nui-paginator__area--self-end {
+      align-self: flex-end;
+    }
+
+    // Horizontal (justify-content): Cómo se distribuyen los elementos DENTRO del área
+    .nui-paginator__area--justify-start {
+      justify-content: flex-start;
+      text-align: left;
+    }
+    .nui-paginator__area--justify-center {
+      justify-content: center;
+      text-align: center;
+    }
+    .nui-paginator__area--justify-end {
+      justify-content: flex-end;
+      text-align: right;
+    }
+  }
+
+  // --- CONTAINER QUERIES (Responsive Local) ---
+  @container paginator-host (max-width: 650px) {
+    .nui-paginator__horizontal-areas {
+      flex-direction: column;
+      gap: var(--nui-spacing-md);
+      align-items: center;
+
+      .nui-paginator__area--left,
+      .nui-paginator__area--center,
+      .nui-paginator__area--right {
+        width: 100%;
+        justify-content: center;
+        flex: 0 0 auto;
+      }
+    }
+
+    .nui-paginator__area--top,
+    .nui-paginator__area--bottom {
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--nui-spacing-xs);
+    }
+
+    // Enforce minimum touch target size on mobile
+    .nui-paginator__button {
+      min-width: 44px !important;
+      min-height: 44px !important;
+    }
+  }
+}
+
+// ============================================================================
+// VISUAL STYLING (Buttons, Inputs, Texts)
+// ============================================================================
+
+.nui-paginator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--nui-pg-gap);
+  user-select: none;
+
+  // --- BASE BUTTON ---
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    border-radius: var(--nui-border-radius-md);
+    font-family: var(--nui-font-family);
+    font-weight: var(--nui-font-weight-medium);
+    background-color: var(--pg-bg);
+    color: var(--pg-text);
+    border: 1px solid var(--pg-border);
+    transition: var(--nui-pg-transition);
+
+    &:hover:not(&--active):not(&--disabled) {
+      background-color: var(--pg-hover-bg);
+      border-color: var(--pg-hover-border);
+      color: var(--pg-hover-text);
+    }
+
+    &--disabled {
+      opacity: var(--nui-pg-disabled-opacity);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    &--active {
+      background-color: var(--pg-active-bg);
+      border-color: var(--pg-active-border);
+      color: var(--pg-active-text);
+      cursor: default;
+    }
+
+    // ESTADO: Focus
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px var(--pg-focus-ring);
+    }
+  }
+
+  &__ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.25rem;
+  }
+
+  &__info-text,
+  &__fractional-info,
+  &__current-page {
+    font-size: var(--nui-font-size-sm);
+    color: var(--nui-text-secondary);
+    font-weight: var(--nui-font-weight-medium);
+    white-space: nowrap;
+  }
+}
+
+// --- INPUT PAGE JUMP ---
+.nui-paginator__page-jump {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  &-input {
+    text-align: center;
+    border-radius: var(--nui-border-radius-md);
+    border: 1px solid var(--nui-border-primary);
+    background-color: var(--nui-bg-primary);
+    color: var(--nui-text-primary);
+    transition: var(--nui-pg-transition);
+    appearance: textfield;
+    &::-webkit-inner-spin-button {
+      display: none;
+    }
+
+    &:focus {
+      border-color: var(--pg-focus-ring);
+      box-shadow: 0 0 0 2px var(--pg-focus-ring);
+      outline: none;
+    }
+  }
+}
+
+// --- LOADING INDICATOR ---
+.nui-paginator__loading {
+  display: flex;
+  align-items: center;
+  gap: var(--nui-spacing-xs);
+  color: var(--nui-text-secondary);
+  font-size: var(--nui-font-size-sm);
+}
+
+// ============================================================================
+// SIZE & COLOR PRESETS
+// ============================================================================
+
+:host.nui-paginator-container {
+  // --- TAMAÑOS ---
+  $sizes: xs, sm, md, lg, xl;
+  @each $size in $sizes {
+    &--#{$size} {
+      .nui-paginator__button,
+      .nui-paginator__page-jump-input {
+        min-width: var(--nui-pg-button-size-#{$size});
+        height: var(--nui-pg-button-size-#{$size});
+        font-size: var(--nui-font-size-#{$size});
+        border-radius: var(--nui-button-radius-#{$size});
+
+        i {
+          font-size: var(--nui-pg-icon-size-#{$size});
+        }
+      }
+
+      .nui-paginator__page-jump-input {
+        width: var(--nui-pg-page-jump-input-width);
+      }
+    }
+  }
+
+  .nui-paginator__area--self-start {
+    align-self: flex-start;
+  }
+  .nui-paginator__area--self-center {
+    align-self: center;
+  }
+  .nui-paginator__area--self-end {
+    align-self: flex-end;
+  }
+
+  .nui-paginator__area--justify-start {
+    justify-content: flex-start;
+    text-align: left;
+  }
+  .nui-paginator__area--justify-center {
+    justify-content: center;
+    text-align: center;
+  }
+  .nui-paginator__area--justify-space-between {
+    justify-content: space-between;
+  }
+  .nui-paginator__area--justify-end {
+    justify-content: flex-end;
+    text-align: right;
+  }
+}
+
+// Accessibility Helper
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }

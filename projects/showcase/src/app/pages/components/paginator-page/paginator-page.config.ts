@@ -37,11 +37,11 @@ export const PAGINATOR_PAGE_CONFIG: ComponentPageConfig = {
       examples: [
         {
           title: 'codeExamples.html',
-          code: `<nui-paginator color="primary" variant="ghost" [totalItems]="100"></nui-paginator>
-<nui-paginator color="secondary" variant="outline" [totalItems]="100"></nui-paginator>
-<nui-paginator color="success" variant="solid" [totalItems]="100"></nui-paginator>
-<nui-paginator color="danger" [totalItems]="100"></nui-paginator>
-<nui-paginator color="warning" variant="outline" [totalItems]="100"></nui-paginator>`,
+          code: `<nui-paginator color="primary" variant="ghost" [totalItems]="100" [showPageSizeSelector]="true"></nui-paginator>
+<nui-paginator color="secondary" variant="outline" [totalItems]="100" [showPageSizeSelector]="true"></nui-paginator>
+<nui-paginator color="success" variant="solid" [totalItems]="100" [showPageSizeSelector]="true"></nui-paginator>
+<nui-paginator color="danger" [totalItems]="100" [showPageSizeSelector]="true"></nui-paginator>
+<nui-paginator color="warning" variant="outline" [totalItems]="100" [showPageSizeSelector]="true"></nui-paginator>`,
           language: 'html',
         },
       ],
@@ -59,7 +59,6 @@ export const PAGINATOR_PAGE_CONFIG: ComponentPageConfig = {
         {
           title: 'codeExamples.html',
           code: `<nui-paginator [currentPage]="1" [totalPages]="5" size="xs"></nui-paginator>
-<nui-paginator [currentPage]="1" [totalPages]="5" size="s"></nui-paginator>
 <nui-paginator [currentPage]="1" [totalPages]="5" size="sm"></nui-paginator>
 <nui-paginator [currentPage]="1" [totalPages]="5" size="md"></nui-paginator>
 <nui-paginator [currentPage]="1" [totalPages]="5" size="lg"></nui-paginator>
@@ -81,7 +80,7 @@ export const PAGINATOR_PAGE_CONFIG: ComponentPageConfig = {
         {
           title: 'codeExamples.html',
           code: `<nui-paginator
-  [layout]="myLayout"
+  [layout]="idealLayout"
   [currentPage]="1"
   [totalItems]="500"
   [itemsPerPage]="20"
@@ -92,12 +91,49 @@ export const PAGINATOR_PAGE_CONFIG: ComponentPageConfig = {
           title: 'codeExamples.typescript',
           code: `import { PaginatorLayout } from 'nui';
 
-myLayout: PaginatorLayout = {
-  top: ['itemRange'],
-  left: ['pageSize'],
-  center: ['firstButton', 'prevButton', 'pageNumbers', 'nextButton', 'lastButton'],
-  right: ['pageJump'],
+idealLayout: PaginatorLayout = {
+  // Clean top/bottom rows to save vertical height
+  top: [],
   bottom: ['itemRange'],
+
+  // LEFT: Informational context
+  // Users read left to right: first they see how much data there is.
+  left: [],
+
+  // CENTER: Pure navigation
+  // The most important elements in the center, easy to reach with mouse/finger.
+  center: ['firstButton', 'prevButton', 'pageNumbers', 'nextButton', 'lastButton'],
+
+  // RIGHT: Configuration tools
+  // Changing page size or jumping to a page are secondary actions.
+  right: ['pageSize', 'pageJump'],
+
+  // Area-specific alignments (optional)
+  leftConfig: {
+    vertical: 'center', // Text stays nicely vertically centered
+  },
+
+  // The bottom area is centered both vertically and horizontally to highlight
+  // the item range, which is important information but less interactive than
+  // the central navigation.
+  bottomConfig: {
+    vertical: 'center',   // Pagination stays vertically centered
+    horizontal: 'center', // Pagination stays horizontally centered
+  },
+
+  // The center keeps the default alignment (center), which is ideal for navigation
+  centerConfig: {
+    vertical: 'center', // Buttons remain centered
+  },
+
+  // The right area sticks to the top (start) to differentiate it from the center,
+  // and is aligned to the right (end)
+  rightConfig: {
+    vertical: 'start',   // <--- HERE! The right area sticks to the top
+    horizontal: 'end',   // And aligns to the right
+  },
+
+  // Settings
   direction: 'column',
   gap: '1rem',
 };`,
@@ -107,15 +143,24 @@ myLayout: PaginatorLayout = {
           title: 'codeExamples.itemInterface',
           code: `// Elements that can be used in the layout
 interface PaginatorLayout {
-  top?: PaginatorElement[];     // Elements at the top
-  left?: PaginatorElement[];    // Elements on the left
-  center?: PaginatorElement[];  // Elements at the center
-  right?: PaginatorElement[];   // Elements on the right
-  bottom?: PaginatorElement[];  // Elements at the bottom
-  direction?: 'row' | 'column'; // Layout direction
-  gap?: string;                 // Gap between elements
-  align?: 'start' | 'center' | 'end' | 'space-between'; // Alignment
+  top?: PaginatorElement[]; // Elements in the top area
+  left?: PaginatorElement[]; // Elements in the left area
+  center?: PaginatorElement[]; // Elements in the center area
+  right?: PaginatorElement[]; // Elements in the right area
+  bottom?: PaginatorElement[]; // Elements in the bottom area
 
+  direction?: PLayoutDirection; // Main layout direction: 'row' (horizontal) or 'column' (vertical)
+  align?: PLayoutAlign; // Elements alignment: 'start', 'center', 'end', 'space-between', 'space-around'
+
+  topConfig?: { vertical?: PVerticalAlign; horizontal?: PLayoutAlign }; // Alignment config for the top area
+  bottomConfig?: { vertical?: PVerticalAlign; horizontal?: PLayoutAlign }; // Alignment config for the bottom area
+
+  leftConfig?: { vertical?: PVerticalAlign; horizontal?: PLayoutAlign }; // Alignment config for the left area
+  centerConfig?: { vertical?: PVerticalAlign; horizontal?: PLayoutAlign }; // Alignment config for the center area
+  rightConfig?: { vertical?: PVerticalAlign; horizontal?: PLayoutAlign }; // Alignment config for the right area
+
+  verticalAlign?: PVerticalAlign; // General vertical alignment (if not specified per area)
+  gap?: string; // Gap between elements (in rem or px)
 }
 
 // Possible elements in the layout
@@ -369,61 +414,61 @@ export class ExampleComponent {
           title: 'codeExamples.cssVariables',
           code: `:root {
   /* Layout */
-  --nui-paginator-gap: var(--nui-spacing-sm);
-  --nui-paginator-align-items: center;
-  --nui-paginator-justify-content: space-between;
+  --nui-pg-gap: var(--nui-spacing-sm);
+  --nui-pg-align-items: center;
+  --nui-pg-justify-content: space-between;
   
   /* Navigation buttons */
-  --nui-paginator-button-min-width: 40px;
-  --nui-paginator-button-gap: var(--nui-spacing-xs);
+  --nui-pg-button-min-width: 40px;
+  --nui-pg-button-gap: var(--nui-spacing-xs);
   
   /* Page numbers */
-  --nui-paginator-page-number-min-width: 36px;
-  --nui-paginator-page-number-height: 36px;
-  --nui-paginator-page-number-gap: 4px;
+  --nui-pg-page-number-min-width: 36px;
+  --nui-pg-page-number-height: 36px;
+  --nui-pg-page-number-gap: 4px;
   
   /* Active page */
-  --nui-paginator-active-bg: var(--primary-color);
-  --nui-paginator-active-text: var(--nui-text-on-primary);
-  --nui-paginator-active-border: var(--primary-color);
+  --nui-pg-active-bg: var(--primary-color);
+  --nui-pg-active-text: var(--nui-text-on-primary);
+  --nui-pg-active-border: var(--primary-color);
   
   /* Ellipsis */
-  --nui-paginator-ellipsis-color: var(--nui-text-tertiary);
-  --nui-paginator-ellipsis-padding: var(--nui-spacing-xs);
+  --nui-pg-ellipsis-color: var(--nui-text-tertiary);
+  --nui-pg-ellipsis-padding: var(--nui-spacing-xs);
   
   /* Size selector */
-  --nui-paginator-size-selector-min-width: 80px;
-  --nui-paginator-size-selector-gap: var(--nui-spacing-sm);
+  --nui-pg-size-selector-min-width: 80px;
+  --nui-pg-size-selector-gap: var(--nui-spacing-sm);
   
   /* Item range */
-  --nui-paginator-item-range-color: var(--nui-text-secondary);
-  --nui-paginator-item-range-font-size: var(--nui-font-size-sm);
+  --nui-pg-item-range-color: var(--nui-text-secondary);
+  --nui-pg-item-range-font-size: var(--nui-font-size-sm);
   
   /* Page jump */
-  --nui-paginator-page-jump-input-width: 60px;
-  --nui-paginator-page-jump-gap: var(--nui-spacing-sm);
+  --nui-pg-page-jump-input-width: 60px;
+  --nui-pg-page-jump-gap: var(--nui-spacing-sm);
   
   /* Infinite scroll - Button */
-  --nui-paginator-infinite-button-padding: var(--nui-spacing-md) var(--nui-spacing-xl);
-  --nui-paginator-infinite-button-margin: var(--nui-spacing-lg) 0;
+  --nui-pg-infinite-button-padding: var(--nui-spacing-md) var(--nui-spacing-xl);
+  --nui-pg-infinite-button-margin: var(--nui-spacing-lg) 0;
   
   /* Infinite scroll - Counter */
-  --nui-paginator-infinite-counter-color: var(--nui-text-secondary);
-  --nui-paginator-infinite-counter-font-size: var(--nui-font-size-sm);
-  --nui-paginator-infinite-counter-margin: var(--nui-spacing-xs) 0;
+  --nui-pg-infinite-counter-color: var(--nui-text-secondary);
+  --nui-pg-infinite-counter-font-size: var(--nui-font-size-sm);
+  --nui-pg-infinite-counter-margin: var(--nui-spacing-xs) 0;
   
   /* Infinite scroll - End message */
-  --nui-paginator-infinite-end-color: var(--nui-text-tertiary);
-  --nui-paginator-infinite-end-font-size: var(--nui-font-size-sm);
+  --nui-pg-infinite-end-color: var(--nui-text-tertiary);
+  --nui-pg-infinite-end-font-size: var(--nui-font-size-sm);
 }
 
 // Example of a compact paginator
 .compact-paginator {
-  --nui-paginator-gap: var(--nui-spacing-xs);
-  --nui-paginator-button-min-width: 32px;
-  --nui-paginator-page-number-min-width: 32px;
-  --nui-paginator-page-number-height: 32px;
-  --nui-paginator-page-number-gap: 2px;
+  --nui-pg-gap: var(--nui-spacing-xs);
+  --nui-pg-button-min-width: 32px;
+  --nui-pg-page-number-min-width: 32px;
+  --nui-pg-page-number-height: 32px;
+  --nui-pg-page-number-gap: 2px;
 }
 
 // Example of a paginator with rounded borders
@@ -437,8 +482,8 @@ export class ExampleComponent {
 
 // Example of a minimal style paginator
 .minimal-paginator {
-  --nui-paginator-button-gap: 0;
-  --nui-paginator-page-number-gap: 0;
+  --nui-pg-button-gap: 0;
+  --nui-pg-page-number-gap: 0;
   
   ::ng-deep .nui-paginator {
     button {

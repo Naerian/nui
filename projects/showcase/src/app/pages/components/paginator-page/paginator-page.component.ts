@@ -46,12 +46,45 @@ export class PaginatorPageComponent extends BaseComponentPage {
   // ==========================================
 
   // Layout complejo: Paginación arriba y abajo, selector de tamaño a la izquierda
-  complexLayout: PaginatorLayout = {
-    top: ['itemRange'],
-    left: ['pageSize'],
+  idealLayout: PaginatorLayout = {
+    // Filas superior/inferior limpias para ahorrar altura vertical
+    top: [],
+    bottom: ['itemRange'],
+
+    // IZQUIERDA: Contexto Informativo
+    // El usuario lee de izq a der: Primero ve cuántos datos hay.
+    left: [],
+
+    // CENTRO: Navegación Pura
+    // Lo más importante en el centro, fácil de alcanzar con el mouse/dedo.
     center: ['firstButton', 'prevButton', 'pageNumbers', 'nextButton', 'lastButton'],
-    right: ['pageJump'],
-    bottom: ['itemRange'], // Repetimos info abajo
+
+    // DERECHA: Herramientas de Configuración
+    // Cambiar tamaño o saltar página son acciones secundarias.
+    right: ['pageSize', 'pageJump'],
+
+    // Alineaciones específicas por área (opcional)
+    leftConfig: {
+      vertical: 'center', // El texto se queda centrado verticalmente bonito
+    },
+
+    // La parte inferior se queda centrada tanto vertical como horizontalmente para destacar el rango de items, que es información importante pero no tan interactiva como la navegación central.
+    bottomConfig: {
+      vertical: 'center', // La paginación se queda centrada verticalmente
+      horizontal: 'center', // La paginación se queda centrada horizontalmente
+    },
+
+    // El centro se queda con la alineación por defecto (center), que es ideal para la navegación
+    centerConfig: {
+      vertical: 'center', // Los botones se quedan centrados
+    },
+
+    // La derecha se pega al techo (start) para diferenciarse del centro, y se alinea a la derecha (end)
+    rightConfig: {
+      vertical: 'start', // <--- ¡AQUI! La derecha se pega al techo
+      horizontal: 'end', // Y se alinea a la derecha
+    },
+    // Ajustes
     direction: 'column',
     gap: '1rem',
   };
@@ -79,7 +112,7 @@ export class PaginatorPageComponent extends BaseComponentPage {
     await new Promise(resolve => setTimeout(resolve, 1500));
 
     const currentLength = this.infiniteItems().length;
-    
+
     // Si ya llegamos a 100, no cargamos más (para simular el fin)
     if (currentLength >= 100) {
       this.infiniteLoading.set(false);

@@ -1,5 +1,10 @@
 import { NUIColor, NUISize, NUIVariant } from '../../../configs';
 
+export const DEFAULT_PAGE_SIZE_OPTIONS = [10, 20, 50, 100];
+export const DEFAULT_MAX_VISIBLE_PAGES = 5;
+export const DEFAULT_ITEMS_PER_PAGE = 10;
+export const DEFAULT_GAP = '0.5rem';
+
 /**
  * Configuración del componente Paginator
  */
@@ -113,6 +118,22 @@ export type PaginatorElement =
   | 'infiniteCounter'
   | 'infiniteEndMessage';
 
+export enum PaginatorElementEnum {
+  FIRST_BUTTON = 'firstButton',
+  PREV_BUTTON = 'prevButton',
+  PAGE_NUMBERS = 'pageNumbers',
+  FRACTIONAL_NUMBERS = 'fractionalNumbers',
+  NEXT_BUTTON = 'nextButton',
+  LAST_BUTTON = 'lastButton',
+  PAGE_SIZE = 'pageSize',
+  ITEM_RANGE = 'itemRange',
+  PAGE_JUMP = 'pageJump',
+  CURRENT_PAGE = 'currentPage',
+  INFINITE_BUTTON = 'infiniteButton',
+  INFINITE_COUNTER = 'infiniteCounter',
+  INFINITE_END_MESSAGE = 'infiniteEndMessage',
+}
+
 /**
  * Modos de visualización disponibles para el paginador
  * - 'default': Modo estándar con todos los elementos visibles
@@ -121,6 +142,13 @@ export type PaginatorElement =
  * - 'minimal': Solo flechas anterior/siguiente
  */
 export type PaginatorMode = 'default' | 'compact' | 'fractional' | 'minimal';
+export enum PaginatorModeEnum {
+  DEFAULT = 'default',
+  COMPACT = 'compact',
+  FRACTIONAL = 'fractional',
+  MINIMAL = 'minimal',
+}
+export const DEFAULT_PAGINATOR_MODE: PaginatorMode = PaginatorModeEnum.DEFAULT;
 
 /**
  * Configuración de áreas del layout del paginador
@@ -130,27 +158,48 @@ export type PaginatorMode = 'default' | 'compact' | 'fractional' | 'minimal';
  * - 'right': Área derecha de la navegación principal
  * - 'bottom': Área inferior
  */
-export type PaginatorLayoutArea =
-  | 'top'
-  | 'left'
-  | 'center'
-  | 'right'
-  | 'bottom';
+export const PAGINATOR_LAYOUT_AREAS: PaginatorLayoutArea[] = [
+  'top',
+  'left',
+  'center',
+  'right',
+  'bottom',
+];
+export type PaginatorLayoutArea = 'top' | 'left' | 'center' | 'right' | 'bottom';
+export enum PaginatorLayoutAreaEnum {
+  TOP = 'top',
+  LEFT = 'left',
+  CENTER = 'center',
+  RIGHT = 'right',
+  BOTTOM = 'bottom',
+}
 
 /**
  * Dirección del layout: fila (horizontal) o columna (vertical)
  */
-export type PaginatorLayoutDirection = 'row' | 'column';
+export type PLayoutDirection = 'row' | 'column';
+export enum PLayoutDirectionEnum {
+  ROW = 'row',
+  COLUMN = 'column',
+}
 
 /**
  * Alineación de los elementos dentro de cada área del layout
  */
-export type PaginatorLayoutAlign =
-  | 'start'
-  | 'center'
-  | 'end'
-  | 'space-between'
-  | 'space-around';
+export type PLayoutAlign = 'start' | 'center' | 'end' | 'space-between' | 'space-around';
+export enum PLayoutAlignEnum {
+  START = 'start',
+  CENTER = 'center',
+  END = 'end',
+  SPACE_BETWEEN = 'space-between',
+  SPACE_AROUND = 'space-around',
+}
+export type PVerticalAlign = 'start' | 'center' | 'end';
+export enum PVerticalAlignEnum {
+  START = 'start',
+  CENTER = 'center',
+  END = 'end',
+}
 
 /**
  * Configuración del layout personalizado del paginator
@@ -168,12 +217,51 @@ export interface PaginatorLayout {
   /** Elementos en el área inferior */
   bottom?: PaginatorElement[];
   /** Dirección del layout principal: 'row' (horizontal) o 'column' (vertical) */
-  direction?: PaginatorLayoutDirection;
+  direction?: PLayoutDirection;
   /** Alineación de los elementos: 'start', 'center', 'end', 'space-between', 'space-around' */
-  align?: PaginatorLayoutAlign;
+  align?: PLayoutAlign;
+  /** Configuración de alineación para el área superior */
+  topConfig?: { vertical?: PVerticalAlign; horizontal?: PLayoutAlign };
+  /** Configuración de alineación para el área inferior */
+  bottomConfig?: { vertical?: PVerticalAlign; horizontal?: PLayoutAlign };
+  /** Alineación vertical de los elementos: 'start', 'center', 'end', 'space-between', 'space-around' */
+  leftConfig?: { vertical?: PVerticalAlign; horizontal?: PLayoutAlign };
+  /** Configuración de alineación para el área central */
+  centerConfig?: { vertical?: PVerticalAlign; horizontal?: PLayoutAlign };
+  /** Configuración de alineación para el área derecha */
+  rightConfig?: { vertical?: PVerticalAlign; horizontal?: PLayoutAlign };
+  /** Alineación vertical general (si no se especifica en áreas individuales) */
+  verticalAlign?: PVerticalAlign;
   /** Gap entre elementos (en rem o px) */
   gap?: string;
 }
+
+export const DEFAULT_PAGINATOR_LAYOUT: PaginatorLayout = {
+  top: [],
+  center: [],
+  direction: 'column',
+  align: 'center',
+  gap: '1rem',
+};
+
+export const DEFAULT_MINIMAL_LAYOUT: PaginatorLayout = {
+  center: ['prevButton', 'nextButton'],
+  direction: 'row',
+  align: 'center',
+  gap: '0.5rem',
+};
+
+export const DEFAULT_COMPACT_LAYOUT: PaginatorLayout = {
+  direction: 'row',
+  align: 'center',
+  gap: '0.5rem',
+};
+
+export const DEFAULT_FRACTIONAL_LAYOUT: PaginatorLayout = {
+  direction: 'row',
+  align: 'center',
+  gap: '0.5rem',
+};
 
 /**
  * Configuración de iconos personalizables
@@ -194,6 +282,19 @@ export interface IconConfig {
   /** Prefijo de clases de iconos (ej: 'ri-', 'fa-') */
   prefix?: string;
 }
+
+/**
+ * Configuración de iconos aplicada, con valores por defecto
+ */
+export const DEFAULT_ICON_CONFIG: Required<IconConfig> = {
+  first: 'ri-arrow-left-double-line',
+  previous: 'ri-arrow-left-s-line',
+  next: 'ri-arrow-right-s-line',
+  last: 'ri-arrow-right-double-line',
+  loadMore: 'ri-add-line',
+  loading: 'ri-loader-4-line',
+  prefix: 'ri-',
+};
 
 /**
  * Configuración del modo infinito
@@ -318,3 +419,10 @@ export interface InfiniteState {
   /** Número de cargas realizadas */
   loadCount: number;
 }
+
+export const DEFAULT_INFINITE_STATE: InfiniteState = {
+  isLoading: false,
+  hasMore: true,
+  loadedItems: 0,
+  loadCount: 0,
+};

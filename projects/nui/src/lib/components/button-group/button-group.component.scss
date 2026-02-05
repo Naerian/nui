@@ -10,6 +10,8 @@
   $hover: var(--nui-btn-group-#{$color-name}-hover);
   $alpha10: var(--nui-btn-group-#{$color-name}-alpha-10);
   $alpha20: var(--nui-btn-group-#{$color-name}-alpha-20);
+  $alpha30: var(--nui-btn-group-#{$color-name}-alpha-30);
+  $alpha40: var(--nui-btn-group-#{$color-name}-alpha-40);
 
   &.nui-button-group--#{$variant} {
     .nui-button-group__option {
@@ -30,11 +32,12 @@
       }
 
       @if $variant == 'outline' {
-        border-color: $base;
+        border-color: $alpha40;
         color: $base;
+        background-color: transparent;
         &--selected {
-          background-color: $base;
-          color: $contrast;
+          background-color: $alpha20;
+          color: $base;
         }
         &:hover:not(.nui-button-group__option--selected) {
           background-color: $alpha10;

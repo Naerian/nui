@@ -353,6 +353,7 @@ export interface NUITranslations {
     previousPage: string; // "Página anterior"
     nextPage: string; // "Página siguiente"
     pageLabel: string; // "Página {page}"
+    morePages: string; // "Más páginas"
     loadMore: string; // "Cargar más"
     loading: string; // "Cargando..."
     pageJumpHelp: string; // "Página inválida. Ingrese un número entre 1 y {totalPages}."

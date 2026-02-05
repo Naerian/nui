@@ -46,18 +46,41 @@
 
         @case ('colors') {
           <div class="example-preview flex-column gap-4">
-            <nui-paginator color="primary" variant="ghost" [totalItems]="100"></nui-paginator>
-            <nui-paginator color="secondary" variant="outline" [totalItems]="100"></nui-paginator>
-            <nui-paginator color="success" variant="solid" [totalItems]="100"></nui-paginator>
-            <nui-paginator color="danger" [totalItems]="100"></nui-paginator>
-            <nui-paginator color="warning" variant="outline" [totalItems]="100"></nui-paginator>
+            <nui-paginator
+              color="primary"
+              variant="ghost"
+              [totalItems]="100"
+              [showPageSizeSelector]="true"
+            ></nui-paginator>
+            <nui-paginator
+              color="secondary"
+              variant="outline"
+              [totalItems]="100"
+              [showPageSizeSelector]="true"
+            ></nui-paginator>
+            <nui-paginator
+              color="success"
+              variant="solid"
+              [totalItems]="100"
+              [showPageSizeSelector]="true"
+            ></nui-paginator>
+            <nui-paginator
+              color="danger"
+              [totalItems]="100"
+              [showPageSizeSelector]="true"
+            ></nui-paginator>
+            <nui-paginator
+              color="warning"
+              variant="outline"
+              [totalItems]="100"
+              [showPageSizeSelector]="true"
+            ></nui-paginator>
           </div>
         }
 
         @case ('sizes') {
           <div class="example-preview flex-column gap-4">
             <nui-paginator [currentPage]="1" [totalPages]="5" size="xs"></nui-paginator>
-            <nui-paginator [currentPage]="1" [totalPages]="5" size="s"></nui-paginator>
             <nui-paginator [currentPage]="1" [totalPages]="5" size="sm"></nui-paginator>
             <nui-paginator [currentPage]="1" [totalPages]="5" size="md"></nui-paginator>
             <nui-paginator [currentPage]="1" [totalPages]="5" size="lg"></nui-paginator>
@@ -70,7 +93,7 @@
             <nui-paginator
               [currentPage]="customLayoutPage()"
               [totalItems]="500"
-              [layout]="complexLayout"
+              [layout]="idealLayout"
               (pageChange)="customLayoutPage.set($event)"
             ></nui-paginator>
           </div>

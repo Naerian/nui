@@ -51,15 +51,7 @@ export const NUI_DEFAULT_I18N: NUITranslations = {
   // Textos del componente Calendar
   calendar: {
     weekDaysShort: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá', 'Do'],
-    weekDays: [
-      'Lunes',
-      'Martes',
-      'Miércoles',
-      'Jueves',
-      'Viernes',
-      'Sábado',
-      'Domingo',
-    ],
+    weekDays: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
     selectDay: 'Seleccionar día',
     months: [
       'Enero',
@@ -385,7 +377,7 @@ export const NUI_DEFAULT_I18N: NUITranslations = {
   // Textos del componente Paginator
   paginator: {
     itemsPerPage: 'Elementos por página:',
-    showingItems: 'Mostrando {start}-{end} de {total} resultados',
+    showingItems: '{start}-{end} de {total}',
     page: 'Página',
     of: 'de',
     goToPage: 'Ir a página',
@@ -396,6 +388,7 @@ export const NUI_DEFAULT_I18N: NUITranslations = {
     previousPage: 'Página anterior',
     nextPage: 'Página siguiente',
     pageLabel: 'Página {page}',
+    morePages: 'Más páginas',
     loadMore: 'Cargar más',
     loading: 'Cargando...',
     pageJumpHelp: 'Ingrese un número entre 1 y {totalPages}.',

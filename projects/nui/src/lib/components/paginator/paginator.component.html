@@ -1,43 +1,37 @@
-<div
-  class="nui-paginator-container nui-paginator-container--{{
-    effectiveSize()
-  }} nui-paginator-container--{{ color() }} nui-paginator-container--{{
-    variant()
-  }} nui-paginator-container--{{ effectiveMode() }}"
-  [attr.aria-description]="getAriaDescription()"
-  [class.nui-paginator-container--mobile]="isMobileDevice()"
-  [class.nui-paginator-container--wrap]="autoWrap()"
-  [class.nui-paginator-container--custom-layout]="effectiveLayout()"
-  [class.nui-paginator-container--layout-column]="getLayoutDirection() === 'column'"
->
-  <!-- Aria-live para anuncios de cambios -->
-  <div
-    aria-live="assertive"
-    aria-atomic="true"
-    class="sr-only"
-    [attr.aria-label]="ariaLiveMessage()"
-  >
-    {{ ariaLiveMessage() }}
+<div aria-live="assertive" aria-atomic="true" class="sr-only">
+  {{ ariaLiveMessage() }}
+</div>
+
+@if (isLoading()) {
+  <div class="nui-paginator__loading" role="status" aria-live="polite">
+    <span class="nui-paginator__loading-text">{{ getLoadingText() }}</span>
   </div>
+}
 
-  <!-- Loading indicator -->
-  @if (isLoading()) {
-    <div class="nui-paginator__loading" role="status" aria-live="polite">
-      <span class="nui-paginator__loading-text">Cargando...</span>
-    </div>
-  }
+@if (hasElementsInArea('top')) {
+  <div
+    class="nui-paginator__area nui-paginator__area--top"
+    [class.nui-paginator__area--single]="getElementsForArea('top').length === 1"
+    [class.nui-paginator__area--double]="getElementsForArea('top').length === 2"
+    [class.nui-paginator__area--triple]="getElementsForArea('top').length >= 3"
+    [ngClass]="getAreaClasses('top')"
+  >
+    @for (element of getElementsForArea('top'); track element) {
+      <ng-container
+        [ngTemplateOutlet]="elementRenderer"
+        [ngTemplateOutletContext]="{ element: element }"
+      ></ng-container>
+    }
+  </div>
+}
 
-  <!-- Layout basado en áreas -->
-  <!-- Área superior -->
-  @if (hasElementsInArea('top')) {
-    <div
-      class="nui-paginator__area nui-paginator__area--top"
-      [class.nui-paginator__area--single]="getElementsForArea('top').length === 1"
-      [class.nui-paginator__area--double]="getElementsForArea('top').length === 2"
-      [class.nui-paginator__area--triple]="getElementsForArea('top').length >= 3"
-      [class.nui-paginator__area--centered]="getLayoutAlign() === 'center'"
-    >
-      @for (element of getElementsForArea('top'); track element) {
+<div
+  class="nui-paginator__horizontal-areas"
+  [ngClass]="'nui-paginator__horizontal-areas--items-' + getLayoutVerticalAlign()"
+>
+  @if (hasElementsInArea('left')) {
+    <div class="nui-paginator__area nui-paginator__area--left" [ngClass]="getAreaClasses('left')">
+      @for (element of getElementsForArea('left'); track element) {
         <ng-container
           [ngTemplateOutlet]="elementRenderer"
           [ngTemplateOutletContext]="{ element: element }"
@@ -46,62 +40,30 @@
     </div>
   }
 
-  <!-- Contenedor de áreas horizontales (left, center, right) -->
-  <div class="nui-paginator__horizontal-areas">
-    <!-- Área izquierda -->
-    @if (hasElementsInArea('left')) {
-      <div class="nui-paginator__area nui-paginator__area--left">
-        @for (element of getElementsForArea('left'); track element) {
-          <ng-container
-            [ngTemplateOutlet]="elementRenderer"
-            [ngTemplateOutletContext]="{ element: element }"
-          ></ng-container>
-        }
-      </div>
-    }
-
-    <!-- Área central -->
-    @if (hasElementsInArea('center')) {
-      <div class="nui-paginator__area nui-paginator__area--center">
-        <nav
-          class="nui-paginator nui-paginator--{{ effectiveSize() }} nui-paginator--{{
-            color()
-          }} nui-paginator--{{ variant() }} nui-paginator--{{ effectiveMode() }}"
-          [class.nui-paginator--disabled]="disabled()"
-          role="navigation"
-          [attr.aria-label]="_translations.paginator.ariaPagination"
-          data-paginator="true"
-        >
-          @for (element of getElementsForArea('center'); track element) {
-            <ng-container
-              [ngTemplateOutlet]="elementRenderer"
-              [ngTemplateOutletContext]="{ element: element }"
-            ></ng-container>
-          }
-        </nav>
-      </div>
-    }
-
-    <!-- Área derecha -->
-    @if (hasElementsInArea('right')) {
-      <div class="nui-paginator__area nui-paginator__area--right">
-        @for (element of getElementsForArea('right'); track element) {
-          <ng-container
-            [ngTemplateOutlet]="elementRenderer"
-            [ngTemplateOutletContext]="{ element: element }"
-          ></ng-container>
-        }
-      </div>
-    }
-  </div>
-
-  <!-- Área inferior -->
-  @if (hasElementsInArea('bottom')) {
+  @if (hasElementsInArea('center')) {
     <div
-      class="nui-paginator__area nui-paginator__area--bottom"
-      [class.nui-paginator__area--centered]="getLayoutAlign() === 'center'"
+      class="nui-paginator__area nui-paginator__area--center"
+      [ngClass]="getAreaClasses('center')"
     >
-      @for (element of getElementsForArea('bottom'); track element) {
+      <nav
+        class="nui-paginator"
+        [class.nui-paginator--disabled]="disabled()"
+        role="navigation"
+        [attr.aria-label]="_translations.paginator.ariaPagination"
+      >
+        @for (element of getElementsForArea('center'); track element) {
+          <ng-container
+            [ngTemplateOutlet]="elementRenderer"
+            [ngTemplateOutletContext]="{ element: element }"
+          ></ng-container>
+        }
+      </nav>
+    </div>
+  }
+
+  @if (hasElementsInArea('right')) {
+    <div class="nui-paginator__area nui-paginator__area--right" [ngClass]="getAreaClasses('right')">
+      @for (element of getElementsForArea('right'); track element) {
         <ng-container
           [ngTemplateOutlet]="elementRenderer"
           [ngTemplateOutletContext]="{ element: element }"
@@ -111,236 +73,168 @@
   }
 </div>
 
-<!-- Template para renderizar cada elemento según su tipo -->
+@if (hasElementsInArea('bottom')) {
+  <div class="nui-paginator__area nui-paginator__area--bottom" [ngClass]="getAreaClasses('bottom')">
+    @for (element of getElementsForArea('bottom'); track element) {
+      <ng-container
+        [ngTemplateOutlet]="elementRenderer"
+        [ngTemplateOutletContext]="{ element: element }"
+      ></ng-container>
+    }
+  </div>
+}
+
 <ng-template #elementRenderer let-element="element">
   @switch (element) {
-    <!-- Rango de items -->
     @case ('itemRange') {
-      @if (shouldRenderElement('itemRange')) {
+      @if (canShowElement('itemRange')) {
         <div class="nui-paginator__info">
           <span class="nui-paginator__info-text">{{ getItemRangeText() }}</span>
         </div>
       }
     }
 
-    <!-- Selector de tamaño de página -->
     @case ('pageSize') {
-      @if (shouldRenderElement('pageSize')) {
+      @if (canShowElement('pageSize')) {
         <div class="nui-paginator__page-size">
           <nui-button-group
             [options]="pageSizeOptionsData()"
             [ngModel]="itemsPerPage().toString()"
             [size]="effectiveSize()"
             [color]="color()"
-            [size]="'s'"
-            variant="outline"
+            [variant]="variant()"
             (valueChange)="onPageSizeChange($event)"
           />
         </div>
       }
     }
 
-    <!-- Botón Primera Página -->
     @case ('firstButton') {
-      @if (shouldRenderElement('firstButton')) {
-        <button
-          type="button"
-          class="nui-paginator__button nui-paginator__button--first"
-          [class.nui-paginator__button--disabled]="disabled() || isFirstPage()"
-          [disabled]="disabled() || isFirstPage()"
-          [attr.aria-label]="'Primera página'"
-          data-paginator-button
-          (click)="goToFirstPage()"
-        >
-          <i [class]="getIcon('first')" aria-hidden="true"></i>
-        </button>
-      }
-    }
-
-    <!-- Botón Página Anterior -->
-    @case ('prevButton') {
-      @if (shouldRenderElement('prevButton')) {
-        <button
-          type="button"
-          class="nui-paginator__button nui-paginator__button--prev"
-          [class.nui-paginator__button--disabled]="disabled() || isFirstPage()"
-          [disabled]="disabled() || isFirstPage()"
-          [attr.aria-label]="'Página anterior'"
-          data-paginator-button
-          (click)="goToPreviousPage()"
-        >
-          <i [class]="getIcon('previous')" aria-hidden="true"></i>
-        </button>
-      }
-    }
-
-    <!-- Números de Página -->
-    @case ('pageNumbers') {
-      <div
-        class="nui-paginator nui-paginator--{{ effectiveSize() }} nui-paginator--{{
-          color()
-        }} nui-paginator--{{ variant() }} nui-paginator--{{ effectiveMode() }}"
-        [class.nui-paginator--disabled]="disabled()"
-        data-paginator="true"
+      <button
+        type="button"
+        class="nui-paginator__button"
+        [disabled]="disabled() || isFirstPage()"
+        (click)="goToFirstPage()"
+        [attr.aria-label]="_translations.paginator.firstPage"
+        data-paginator-button
       >
-        @if (shouldRenderElement('pageNumbers')) {
-          @for (page of visiblePages(); track page) {
-            @if (isEllipsis(page)) {
-              <span
-                class="nui-paginator__ellipsis"
-                [attr.data-ellipsis]="page"
-                [attr.aria-label]="getEllipsisAriaLabel($any(page))"
-                role="separator"
-              >
-                {{ getEllipsisText($any(page)) }}
-              </span>
-            } @else {
-              <button
-                type="button"
-                class="nui-paginator__button nui-paginator__button--page"
-                [class.nui-paginator__button--active]="isPageActive(page)"
-                [class.nui-paginator__button--disabled]="disabled()"
-                [disabled]="disabled()"
-                [attr.aria-label]="getPageAriaLabel(page)"
-                [attr.aria-current]="isPageActive(page) ? 'page' : null"
-                [attr.aria-pressed]="isPageActive(page)"
-                data-paginator-button
-                (click)="goToPage($any(page))"
-              >
-                {{ page }}
-              </button>
-            }
+        <i [class]="getIcon('first')"></i>
+      </button>
+    }
+
+    @case ('prevButton') {
+      <button
+        type="button"
+        class="nui-paginator__button"
+        [disabled]="disabled() || isFirstPage()"
+        (click)="goToPreviousPage()"
+        [attr.aria-label]="_translations.paginator.previousPage"
+        data-paginator-button
+      >
+        <i [class]="getIcon('previous')"></i>
+      </button>
+    }
+
+    @case ('nextButton') {
+      <button
+        type="button"
+        class="nui-paginator__button"
+        [disabled]="disabled() || isLastPage()"
+        (click)="goToNextPage()"
+        [attr.aria-label]="_translations.paginator.nextPage"
+        data-paginator-button
+      >
+        <i [class]="getIcon('next')"></i>
+      </button>
+    }
+
+    @case ('lastButton') {
+      <button
+        type="button"
+        class="nui-paginator__button"
+        [disabled]="disabled() || isLastPage()"
+        (click)="goToLastPage()"
+        [attr.aria-label]="_translations.paginator.lastPage"
+        data-paginator-button
+      >
+        <i [class]="getIcon('last')"></i>
+      </button>
+    }
+
+    @case ('pageNumbers') {
+      <div class="nui-paginator">
+        @for (page of visiblePages(); track $index) {
+          @if (isEllipsis(page)) {
+            <span class="nui-paginator__ellipsis" role="presentation">
+              {{ getEllipsisText($any(page)) }}
+            </span>
+          } @else {
+            <button
+              type="button"
+              class="nui-paginator__button"
+              [class.nui-paginator__button--active]="isPageActive(page)"
+              [disabled]="disabled()"
+              (click)="goToPage($any(page))"
+              [attr.aria-current]="isPageActive(page) ? 'page' : null"
+              [attr.aria-pressed]="isPageActive(page)"
+              [attr.aria-label]="getPageAriaLabel(page)"
+              data-paginator-button
+            >
+              {{ page }}
+            </button>
           }
         }
       </div>
     }
 
-    <!-- Página Actual (modo compacto) -->
-    @case ('currentPage') {
-      @if (shouldRenderElement('currentPage')) {
-        <span class="nui-paginator__current-page">{{ currentPage() }}</span>
-      }
-    }
-
-    <!-- Información Fraccionada -->
-    @case ('fractionalNumbers') {
-      @if (shouldRenderElement('fractionalNumbers')) {
-        <span class="nui-paginator__fractional-info">{{ getFractionalText() }}</span>
-      }
-    }
-
-    <!-- Botón Página Siguiente -->
-    @case ('nextButton') {
-      @if (shouldRenderElement('nextButton')) {
-        <button
-          type="button"
-          class="nui-paginator__button nui-paginator__button--next"
-          [class.nui-paginator__button--disabled]="disabled() || isLastPage()"
-          [disabled]="disabled() || isLastPage()"
-          [attr.aria-label]="'Página siguiente'"
-          data-paginator-button
-          (click)="goToNextPage()"
-        >
-          <i [class]="getIcon('next')" aria-hidden="true"></i>
-        </button>
-      }
-    }
-
-    <!-- Botón Última Página -->
-    @case ('lastButton') {
-      @if (shouldRenderElement('lastButton')) {
-        <button
-          type="button"
-          class="nui-paginator__button nui-paginator__button--last"
-          [class.nui-paginator__button--disabled]="disabled() || isLastPage()"
-          [disabled]="disabled() || isLastPage()"
-          [attr.aria-label]="'Última página'"
-          data-paginator-button
-          (click)="goToLastPage()"
-        >
-          <i [class]="getIcon('last')" aria-hidden="true"></i>
-        </button>
-      }
-    }
-
-    <!-- Input para saltar a página -->
     @case ('pageJump') {
-      @if (shouldRenderElement('pageJump')) {
-        <div class="nui-paginator__page-jump" data-paginator="true">
-          <input
-            id="pageJumpInput"
-            type="number"
-            class="nui-paginator__page-jump-input"
-            [class.nui-paginator__page-jump-input--disabled]="disabled()"
-            [disabled]="disabled()"
-            [min]="1"
-            [max]="totalPages()"
-            [(ngModel)]="pageJumpValue"
-            (keydown.enter)="handlePageJump()"
-            [attr.aria-label]="_translations.paginator.goToPage"
-            [attr.aria-describedby]="'pageJumpHelp'"
-            autocomplete="off"
-            placeholder="{{ currentPage() }}"
-            data-paginator="true"
-          />
-          <div id="pageJumpHelp" class="sr-only">{{ ariaLiveMessage() }}</div>
-          <button
-            type="button"
-            class="nui-paginator__page-jump-button"
-            [class.nui-paginator__button--disabled]="disabled()"
-            [disabled]="disabled()"
-            (click)="handlePageJump()"
-            [attr.aria-label]="_translations.paginator.goToPage"
-            [title]="_translations.paginator.goToPage"
-            data-paginator="true"
-          >
-            {{ _translations.paginator.go }}
-          </button>
-        </div>
-      }
-    }
+      <div class="nui-paginator__page-jump">
+        <input
+          type="number"
+          class="nui-paginator__page-jump-input"
+          [disabled]="disabled()"
+          [min]="1"
+          [max]="totalPages()"
+          [(ngModel)]="pageJumpValue"
+          (keydown.enter)="handlePageJump()"
+          [placeholder]="currentPage()"
+          [attr.aria-label]="_translations.paginator.goToPage"
+        />
 
-    <!-- Contador de elementos cargados (modo infinito) -->
-    @case ('infiniteCounter') {
-      @if (shouldRenderElement('infiniteCounter')) {
-        <div class="nui-paginator__infinite-counter">
-          <span class="nui-paginator__infinite-counter-text">
-            {{ getInfiniteLoadedText() }}
-          </span>
-        </div>
-      }
-    }
-
-    <!-- Botón Cargar más (modo infinito) -->
-    @case ('infiniteButton') {
-      @if (shouldRenderElement('infiniteButton')) {
         <button
-          type="button"
-          class="nui-paginator__load-more-button"
-          [class.nui-paginator__load-more-button--loading]="infiniteState().isLoading"
-          [disabled]="infiniteState().isLoading"
-          (click)="loadMore()"
-          [attr.aria-label]="getLoadMoreText()"
+          nuiButton
+          [disabled]="disabled()"
+          [color]="color()"
+          [variant]="variant()"
+          [size]="effectiveSize()"
+          (click)="handlePageJump()"
+          [attr.aria-label]="_translations.paginator.go"
+          [title]="_translations.paginator.go"
         >
-          @if (infiniteState().isLoading) {
-            <i [class]="getIcon('loading') + ' nui-paginator__loading-icon'" aria-hidden="true"></i>
-            <span>{{ getLoadingText() }}</span>
-          } @else {
-            <i [class]="getIcon('loadMore')" aria-hidden="true"></i>
-            <span>{{ getLoadMoreText() }}</span>
-          }
+          {{ _translations.paginator.go }}
         </button>
-      }
+      </div>
     }
 
-    <!-- Mensaje de fin (modo infinito) -->
-    @case ('infiniteEndMessage') {
-      @if (shouldRenderElement('infiniteEndMessage')) {
-        <div class="nui-paginator__infinite-end">
-          <span class="nui-paginator__infinite-end-text">
-            {{ _translations.paginator.infiniteLoadEnd }}
-          </span>
-        </div>
+    @case ('currentPage') {
+      <span class="nui-paginator__current-page">{{ currentPage() }} / {{ totalPages() }}</span>
+    }
+
+    @case ('fractionalNumbers') {
+      <span class="nui-paginator__fractional-info">{{ getFractionalText() }}</span>
+    }
+
+    @case ('infiniteButton') {
+      @if (canShowElement('infiniteButton')) {
+        <button
+          nuiButton
+          [color]="color()"
+          [loading]="infiniteState().isLoading"
+          loadingPosition="start"
+          (click)="loadMore()"
+        >
+          {{ getLoadMoreText() }}
+        </button>
       }
     }
   }

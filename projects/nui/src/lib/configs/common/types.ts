@@ -1,7 +1,7 @@
 /**
  * Tipos de tamaños disponibles para los componentes
  */
-export const NUI_SIZES = ['xs', 's', 'sm', 'md', 'lg', 'xl'] as const;
+export const NUI_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 export type NUISize = (typeof NUI_SIZES)[number];
 
 /**

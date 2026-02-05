@@ -3,7 +3,7 @@
 @use '../variables/button-vars' as vars;
 
 @mixin button-theme($color, $variant: 'solid') {
-  // Mapeo dinámico de las variables generadas por el ThemeService
+  // Dynamic CSS variables based on color and variant
   --button-bg: var(--nui-btn-#{$color}-#{$variant}-bg);
   --button-text: var(--nui-btn-#{$color}-#{$variant}-text);
   --button-border: var(--nui-btn-#{$color}-#{$variant}-border, transparent);

@@ -62,6 +62,7 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
   @Input() variant: NUIVariant = 'solid';
   @Input() disabled = false;
   @Input() loading = false;
+  @Input() loadingPosition: ButtonLoadingPosition = 'center';
   @Input() label?: string;
   @Input() icon?: string;
   @Input() iconPosition: ButtonIconPosition = 'start';
@@ -71,6 +72,7 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
   private mutationObserver?: MutationObserver;
   private iconElement?: HTMLElement;
   private labelTextNode?: Text;
+  private spinnerElement?: HTMLElement;
   private isInitialRender = true; // Control de renderizado inicial
 
   get isButton(): boolean {
@@ -107,18 +109,26 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
       this.updateClasses();
     }
 
-    if (changes['icon'] || changes['label'] || changes['iconPosition']) {
+    if (
+      changes['icon'] ||
+      changes['label'] ||
+      changes['iconPosition'] ||
+      changes['loading'] ||
+      changes['loadingPosition']
+    ) {
       this.buildButtonContent();
     }
   }
 
   /**
-   * Orquestador de contenido: Maneja Icono y Label de forma atómica
+   * Orquestador de contenido: Maneja Spinner, Icono y Label de forma atómica
    */
   private buildButtonContent(): void {
-    // 1. Renderizar Label (si aplica)
+    // 1. Renderizar Spinner (si loading está activo)
+    this.renderSpinner();
+    // 2. Renderizar Label (si aplica)
     this.renderLabelIfNeeded();
-    // 2. Renderizar Icono y aplicar clase nui-btn--icon si es necesario
+    // 3. Renderizar Icono y aplicar clase nui-btn--icon si es necesario
     this.handleIconAndLayout();
   }
 
@@ -128,10 +138,16 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
       const isExternalChange = mutations.some(
         mutation =>
           Array.from(mutation.addedNodes).some(
-            node => node !== this.iconElement && node !== this.labelTextNode
+            node =>
+              node !== this.iconElement &&
+              node !== this.labelTextNode &&
+              node !== this.spinnerElement
           ) ||
           Array.from(mutation.removedNodes).some(
-            node => node !== this.iconElement && node !== this.labelTextNode
+            node =>
+              node !== this.iconElement &&
+              node !== this.labelTextNode &&
+              node !== this.spinnerElement
           )
       );
 
@@ -168,7 +184,8 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
   private renderIconElement(): void {
     const element = this.el.nativeElement;
 
-    if (!this.icon) {
+    // Si está en loading, no renderizar el icono (igual que en el componente)
+    if (!this.icon || this.loading) {
       this.iconElement?.remove();
       this.iconElement = undefined;
       return;
@@ -194,6 +211,66 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
         this.renderer.appendChild(element, this.iconElement);
       }
     }
+  }
+
+  /**
+   * Renderiza el spinner según loadingPosition
+   */
+  private renderSpinner(): void {
+    const element = this.el.nativeElement;
+
+    if (!this.loading) {
+      this.spinnerElement?.remove();
+      this.spinnerElement = undefined;
+      return;
+    }
+
+    if (!this.spinnerElement) {
+      this.spinnerElement = this.renderer.createElement('span');
+      this.renderer.setAttribute(this.spinnerElement, 'aria-hidden', 'true');
+    }
+
+    // Actualización de clases según posición
+    if (this.spinnerElement) {
+      this.spinnerElement.className = `nui-btn__spinner nui-btn__spinner--${this.loadingPosition}`;
+    }
+
+    // Posicionamiento según loadingPosition
+    if (this.loadingPosition === 'start') {
+      // Al inicio, antes de todo
+      if (element.firstChild !== this.spinnerElement) {
+        this.renderer.insertBefore(element, this.spinnerElement, element.firstChild);
+      }
+    } else if (this.loadingPosition === 'center') {
+      // En el centro, lo posicionamos después del contenido (label/texto)
+      // Para que esté en el centro visualmente necesitamos CSS, pero lo insertamos después del texto
+      const middlePosition = this.findMiddlePosition(element);
+      if (middlePosition) {
+        this.renderer.insertBefore(element, this.spinnerElement, middlePosition);
+      } else {
+        this.renderer.appendChild(element, this.spinnerElement);
+      }
+    } else {
+      // Al final (end)
+      if (element.lastChild !== this.spinnerElement) {
+        this.renderer.appendChild(element, this.spinnerElement);
+      }
+    }
+  }
+
+  /**
+   * Encuentra la posición del medio del contenido para insertar el spinner center
+   */
+  private findMiddlePosition(element: HTMLElement): Node | null {
+    const nodes = Array.from(element.childNodes);
+    // Buscar el último nodo de texto o el label
+    for (let i = nodes.length - 1; i >= 0; i--) {
+      const node = nodes[i];
+      if (node === this.labelTextNode || node.nodeType === Node.TEXT_NODE) {
+        return nodes[i + 1] || null;
+      }
+    }
+    return null;
   }
 
   private renderLabelIfNeeded(): void {
@@ -227,8 +304,11 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
     const nodes = Array.from(element.childNodes);
 
     const hasVisibleContent = nodes.some((node: any) => {
-      // 1. Ignorar el icono que la propia directiva ha insertado
+      // 1. Ignorar elementos que la propia directiva ha insertado
       if (this.iconElement && node === this.iconElement) {
+        return false;
+      }
+      if (this.spinnerElement && node === this.spinnerElement) {
         return false;
       }
 
@@ -241,9 +321,11 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
       // 3. Si es un elemento HTML
       if (node.nodeType === 1) {
         // 1 es Node.ELEMENT_NODE
-        // Ignorar si es un icono <i> (asumimos que los <i> son decorativos)
-        // Pero si es cualquier otra etiqueta (span, strong, etc), cuenta como texto/contenido
-        return (node as HTMLElement).tagName !== 'I';
+        // Ignorar si es un icono <i> o un span.nui-btn__spinner
+        const el = node as HTMLElement;
+        if (el.tagName === 'I') return false;
+        if (el.tagName === 'SPAN' && el.classList.contains('nui-btn__spinner')) return false;
+        return true;
       }
 
       return false;

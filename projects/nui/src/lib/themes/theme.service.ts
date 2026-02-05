@@ -380,20 +380,20 @@ export class ThemeService {
     const alpha20 = this.withAlpha(color, 0.2);
     const alpha40 = this.withAlpha(color, 0.4);
     const alpha50 = this.withAlpha(color, 0.5);
+    const alpha70 = this.withAlpha(color, 0.7);
     const alpha80 = this.withAlpha(color, 0.8);
-    const alpha90 = this.withAlpha(color, 0.9);
 
     return `
       --nui-btn-${name}-color: ${color};
-      --nui-btn-${name}-hover: ${alpha80};
-      --nui-btn-${name}-active: ${alpha90};
+      --nui-btn-${name}-hover: ${alpha70};
+      --nui-btn-${name}-active: ${alpha80};
       --nui-btn-${name}-contrast: ${contrastText};
       
       /* Solid States */
       --nui-btn-${name}-solid-bg: ${color};
       --nui-btn-${name}-solid-text: ${contrastText};
-      --nui-btn-${name}-solid-hover-bg: ${alpha80};
-      --nui-btn-${name}-solid-active-bg: ${alpha90};
+      --nui-btn-${name}-solid-hover-bg: ${alpha70};
+      --nui-btn-${name}-solid-active-bg: ${alpha80};
       
       /* Outline States */
       --nui-btn-${name}-outline-border: ${alpha40};
@@ -451,6 +451,8 @@ export class ThemeService {
     const contrastText = this.getContrastColor(color);
     const alpha10 = this.withAlpha(color, 0.1);
     const alpha20 = this.withAlpha(color, 0.2);
+    const alpha30 = this.withAlpha(color, 0.3);
+    const alpha40 = this.withAlpha(color, 0.4);
     const alpha80 = this.withAlpha(color, 0.8);
 
     // Colores base de superficie según modo
@@ -458,13 +460,15 @@ export class ThemeService {
       ? 'var(--nui-border-primary)'
       : 'var(--nui-border-secondary)';
     const inactiveBg = this._isDarkMode() ? 'var(--nui-bg-secondary)' : 'var(--nui-bg-primary)';
-    
+
     return `
       --nui-btn-group-${name}-color: ${color};
       --nui-btn-group-${name}-hover: ${alpha80};
       --nui-btn-group-${name}-contrast: ${contrastText};
       --nui-btn-group-${name}-alpha-10: ${alpha10};
       --nui-btn-group-${name}-alpha-20: ${alpha20};
+      --nui-btn-group-${name}-alpha-30: ${alpha30};
+      --nui-btn-group-${name}-alpha-40: ${alpha40};
       --nui-btn-group-${name}-in-bg: ${inactiveBg};
       --nui-btn-group-${name}-in-border: ${inactiveBorder};
     `;
@@ -557,49 +561,46 @@ export class ThemeService {
   }
 
   private generatePaginatorVariables(name: string, color: string): string {
-    const hoverColor = this.shade(color, 10);
-    const activeColor = this.shade(color, 20);
-    const hoverBg = this.withAlpha(color, 0.05);
-    const inactiveBorder = this._isDarkMode() ? DEFAULT_GRAYS[900] : DEFAULT_GRAYS[200];
-    const inactiveBg = this._isDarkMode() ? DEFAULT_GRAYS[900] : PURE_COLORS.WHITE;
-    const inactiveHoverBg = this.withAlpha(color, 0.08);
-    const ghostActive = this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 90);
-    const ghostInactiveBg = this._isDarkMode() ? this.shade(color, 85) : this.tint(color, 95);
-    const ghostInactiveHoverBg = this.withAlpha(color, 0.12);
     const contrastText = this.getContrastColor(color);
+    const isDark = this._isDarkMode();
+    const alpha10 = this.withAlpha(color, 0.1);
+    const alpha20 = this.withAlpha(color, 0.2);
+    const alpha30 = this.withAlpha(color, 0.3);
+    const alpha40 = this.withAlpha(color, 0.4);
+    const alpha50 = this.withAlpha(color, 0.5);
+    const alpha70 = this.withAlpha(color, 0.7);
 
-    return `
-  --nui-paginator-${name}-solid-bg: ${color};
-  --nui-paginator-${name}-solid-text: ${contrastText};
-  --nui-paginator-${name}-solid-border: ${color};
-  --nui-paginator-${name}-solid-hover-bg: ${hoverColor};
-  --nui-paginator-${name}-solid-hover-border: ${hoverColor};
-  --nui-paginator-${name}-solid-active-bg: ${activeColor};
-  --nui-paginator-${name}-solid-inactive-text: ${color};
-  --nui-paginator-${name}-solid-inactive-bg: ${inactiveBg};
-  --nui-paginator-${name}-solid-inactive-border: ${inactiveBorder};
-  --nui-paginator-${name}-solid-inactive-hover-bg: ${hoverBg};
-  --nui-paginator-${name}-outline-bg: transparent;
-  --nui-paginator-${name}-outline-text: ${color};
-  --nui-paginator-${name}-outline-border: ${color};
-  --nui-paginator-${name}-outline-hover-bg: ${this.withAlpha(color, 0.1)};
-  --nui-paginator-${name}-outline-hover-border: ${hoverColor};
-  --nui-paginator-${name}-outline-active-bg: ${ghostActive};
-  --nui-paginator-${name}-outline-inactive-text: ${color};
-  --nui-paginator-${name}-outline-inactive-bg: transparent;
-  --nui-paginator-${name}-outline-inactive-border: ${inactiveBorder};
-  --nui-paginator-${name}-outline-inactive-hover-bg: ${inactiveHoverBg};
-  --nui-paginator-${name}-ghost-bg: ${this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 90)};
-  --nui-paginator-${name}-ghost-text: ${color};
-  --nui-paginator-${name}-ghost-border: transparent;
-  --nui-paginator-${name}-ghost-hover-bg: ${this.withAlpha(color, 0.1)};
-  --nui-paginator-${name}-ghost-hover-border: transparent;
-  --nui-paginator-${name}-ghost-active-bg: ${ghostActive};
-  --nui-paginator-${name}-ghost-inactive-text: ${color};
-  --nui-paginator-${name}-ghost-inactive-bg: ${ghostInactiveBg};
-  --nui-paginator-${name}-ghost-inactive-border: transparent;
-  --nui-paginator-${name}-ghost-inactive-hover-bg: ${ghostInactiveHoverBg};
-`;
+    return `      
+      /* Base Colors */
+      --nui-pg-${name}-color: ${color};
+      --nui-pg-${name}-contrast: ${contrastText};
+      
+      /* Solid States (Para página activa en modo solid) */
+      --nui-pg-${name}-solid-bg: ${color};
+      --nui-pg-${name}-solid-text: ${contrastText};
+      --nui-pg-${name}-solid-hover-bg: ${alpha70};
+      --nui-pg-${name}-solid-active-bg: ${isDark ? alpha40 : alpha50};
+      --nui-pg-${name}-solid-active-border: ${alpha30};
+      
+      /* Outline States (Para página activa en modo outline) */
+      --nui-pg-${name}-outline-border: ${alpha40};
+      --nui-pg-${name}-outline-text: ${color};
+      --nui-pg-${name}-outline-hover-bg: ${alpha10};
+      --nui-pg-${name}-outline-hover-border: ${alpha50};
+      --nui-pg-${name}-outline-active-bg: ${alpha20};
+      --nui-pg-${name}-outline-active-border: ${alpha40};
+      
+      /* Ghost States (Para página activa en modo ghost y hovers generales) */
+      --nui-pg-${name}-ghost-text: ${color};
+      --nui-pg-${name}-ghost-hover-bg: ${alpha10};
+      --nui-pg-${name}-ghost-active-bg: ${alpha20};
+
+      /* Ellipsis */
+      --nui-pg-${name}-ellipsis-color: ${color};
+
+      /* Focus Ring */
+      --nui-pg-${name}-focus-ring: ${this.withAlpha(color, 0.4)};
+    `;
   }
 
   private generateAvatarVariables(name: string, color: string): string {
