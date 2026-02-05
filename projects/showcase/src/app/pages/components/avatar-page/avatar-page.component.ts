@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { AvatarComponent, AvatarGroupComponent, AvatarGroupItem } from 'nui';
+import { AvatarComponent, AvatarConfig, AvatarGroupComponent } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
 import { BaseComponentPage } from '../../../core/base/base-component-page';
@@ -30,12 +30,19 @@ export class AvatarPageComponent extends BaseComponentPage {
   avatarUrl3 = 'https://i.pravatar.cc/150?img=3';
 
   // Grupo de avatares
-  avatars: AvatarGroupItem[] = [
+  avatars: AvatarConfig[] = [
     { src: this.avatarUrl1, alt: 'John Doe' },
     { initials: 'JD', color: 'primary' },
     { src: this.avatarUrl2, alt: 'User Image' },
     { icon: 'ri-user-star-line', color: 'secondary' },
     { initials: 'AT', color: 'accent' },
     { alt: 'Alan Turing', color: 'success' },
-  ]
+    { alt: 'Alan Turing', color: 'success' },
+    { alt: 'Alan Turing', color: 'success' },
+    { alt: 'Alan Turing', color: 'success' },
+    { alt: 'Alan Turing', color: 'success' },
+    { alt: 'Alan Turing', color: 'success' },
+    { alt: 'Alan Turing', color: 'success' },
+    { alt: 'Alan Turing', color: 'success' },
+  ];
 }

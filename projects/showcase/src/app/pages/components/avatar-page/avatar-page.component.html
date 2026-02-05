@@ -64,6 +64,7 @@
             <nui-avatar initials="I" color="info"></nui-avatar>
             <nui-avatar initials="W" color="warning"></nui-avatar>
             <nui-avatar initials="D" color="danger"></nui-avatar>
+            <nui-avatar initials="Z" color="white"></nui-avatar>
           </div>
         }
 
@@ -75,8 +76,23 @@
         }
 
         @case ('grouped') {
-          <div class="example-preview">
+          <div class="example-preview gap-4">
             <nui-avatar-group [max]="3" [avatars]="avatars" [variant]="'rounded'" />
+            <nui-avatar-group [max]="3" [avatars]="avatars" [variant]="'circular'" />
+            <nui-avatar-group [max]="3" [avatars]="avatars" [variant]="'square'" />
+            <nui-avatar-group
+              [max]="3"
+              [avatars]="avatars"
+              [variant]="'circular'"
+              [bordered]="false"
+            />
+            <nui-avatar-group
+              [max]="3"
+              [avatars]="avatars"
+              [variant]="'circular'"
+              [bordered]="false"
+              [size]="'xs'"
+            />
           </div>
         }
 

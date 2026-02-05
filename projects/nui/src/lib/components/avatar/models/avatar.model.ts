@@ -1,4 +1,4 @@
-import { NUISize, NUIColor } from "../../../configs";
+import { NUISize, NUIColor } from '../../../configs';
 
 /**
  * Variantes de forma del avatar
@@ -55,6 +55,17 @@ export interface AvatarConfig {
    * Tamaño personalizado (sobrescribe size predefinido)
    */
   customSize?: number;
+
+  /**
+   * Mostrar borde alrededor de cada avatar
+   * @default true
+   */
+  bordered?: boolean;
+
+  /**
+   * Tooltip al hacer hover
+   */
+  tooltip?: string;
 }
 
 /**
@@ -86,42 +97,13 @@ export interface AvatarGroupConfig {
   variant?: AvatarVariant;
 
   /**
+   * Mostrar borde alrededor de cada avatar
+   * @default true
+   */
+  bordered?: boolean;
+
+  /**
    * Clases CSS adicionales para el grupo
    */
   class?: string | string[];
-}
-
-/**
- * Item individual del AvatarGroup
- */
-export interface AvatarGroupItem {
-  /**
-   * URL de la imagen
-   */
-  src?: string;
-
-  /**
-   * Texto alternativo
-   */
-  alt?: string;
-
-  /**
-   * Iniciales
-   */
-  initials?: string;
-
-  /**
-   * Icono
-   */
-  icon?: string;
-
-  /**
-   * Color de fondo
-   */
-  color?: NUIColor;
-
-  /**
-   * Tooltip al hacer hover
-   */
-  tooltip?: string;
 }

@@ -276,7 +276,7 @@
       "colors": {
         "title": "Colors",
         "description": "Customize the background and text color using the system palette. Ideal for differentiating users or states when there's no image.",
-        "note": "Use the <code>color</code> input with values like <code>'primary'</code>, <code>'secondary'</code>, <code>'accent'</code>, <code>'success'</code>, <code>'info'</code>, <code>'warning'</code> and <code>'danger'</code> to change the avatar's colors."
+        "note": "Use the <code>color</code> input with values like <code>'primary'</code>, <code>'secondary'</code>, <code>'accent'</code>, <code>'success'</code>, <code>'info'</code>, <code>'warning'</code> and <code>'danger'</code> to change the avatar's colors. You can also use custom colors in <code>rgb</code>, <code>hexadecimal</code> or <code>keyword</code> format for total control over the avatar's appearance. If you use a custom color, the component will automatically calculate a contrasting text color to ensure the legibility of initials or the icon."
       },
       "customSize": {
         "title": "Custom size",
@@ -286,7 +286,7 @@
       "grouped": {
         "title": "Grouped avatars",
         "description": "Display multiple avatars in a single component with overlapping and display limit.",
-        "note": "Use the <code>nui-avatar-group</code> component to group multiple avatars. Control the maximum visible number with <code>max</code>. Additional avatars are rendered as a '+X' counter."
+        "note": "Use the <code>nui-avatar-group</code> component to group multiple avatars. Control the maximum visible number with <code>max</code>. Additional avatars are rendered as a '+X' counter. You can use <code>bordered</code> to see a clear separation between each avatar."
       },
       "error": {
         "title": "Error handling (Fallback)",

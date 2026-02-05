@@ -2,7 +2,14 @@ import { Injectable, Inject, Optional, signal, computed, Signal } from '@angular
 import { DOCUMENT } from '@angular/common';
 import { Observable } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { ThemeGrays, ThemePreset, ThemeConfig } from './models/theme.model';
+import {
+  ThemeGrays,
+  ThemePreset,
+  ThemeConfig,
+  DarkModeStrategy,
+  DARK_MODE_CLASS,
+  DarkModeStrategyEnum,
+} from './models/theme.model';
 import {
   PURE_COLORS,
   DEFAULT_GRAYS,
@@ -13,16 +20,17 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
+  // Internal variables
   private styleElement: HTMLStyleElement | null = null;
-  private darkModeStrategy: 'auto' | 'manual' | 'system' = 'manual';
-  private darkModeClass: string = 'dark-mode';
+  private darkModeStrategy: DarkModeStrategy = DarkModeStrategyEnum.MANUAL;
+  private darkModeClass: string = DARK_MODE_CLASS;
   private mediaQuery?: MediaQueryList;
 
-  // Signals (API principal)
+  // Signals
   private _isDarkMode = signal(false);
   private _currentPreset = signal<ThemePreset>(DEFAULT_PRESET);
 
-  // Públicos: ReadonlySignals
+  // ReadonlySignals
   readonly isDarkMode: Signal<boolean> = this._isDarkMode.asReadonly();
   readonly currentPreset: Signal<ThemePreset> = this._currentPreset.asReadonly();
 
@@ -31,7 +39,7 @@ export class ThemeService {
     this._isDarkMode() ? this._currentPreset().colors.dark : this._currentPreset().colors.light
   );
 
-  // Interoperabilidad: Observables para usuarios que necesiten RxJS
+  // Observables for users who need RxJS interoperability
   readonly isDarkMode$: Observable<boolean> = toObservable(this._isDarkMode);
   readonly currentPreset$: Observable<ThemePreset> = toObservable(this._currentPreset);
 
@@ -44,12 +52,16 @@ export class ThemeService {
       this._currentPreset.set(config.preset);
     }
 
-    this.darkModeStrategy = config?.darkMode || 'manual';
-    this.darkModeClass = config?.darkModeClass || 'dark-mode';
+    this.darkModeStrategy = config?.darkMode || DarkModeStrategyEnum.MANUAL;
+    this.darkModeClass = config?.darkModeClass || DARK_MODE_CLASS;
 
     this.init();
   }
 
+  /**
+   * Initialize theme by creating the style element and setting up dark mode if needed.
+   * This method creates a <style> element in the head of the document to dynamically inject CSS variables.
+   */
   private init(): void {
     this.styleElement = this.document.getElementById('nui-theme-colors') as HTMLStyleElement;
     if (!this.styleElement) {
@@ -66,6 +78,10 @@ export class ThemeService {
     this.updateColors();
   }
 
+  /**
+   * Set up system dark mode detection using the 'prefers-color-scheme' media query.
+   * This method listens for changes in the user's system dark mode preference and updates the theme accordingly.
+   */
   private setupSystemDarkMode(): void {
     if (typeof window === 'undefined') return;
 
@@ -79,12 +95,22 @@ export class ThemeService {
     }
   }
 
+  /**
+   * Handle changes in system dark mode preference.
+   * This method is called whenever the 'prefers-color-scheme' media query changes,
+   * allowing the theme to react to system-level dark mode changes in real-time.
+   */
   private handleSystemDarkModeChange(e: MediaQueryListEvent): void {
     this._isDarkMode.set(e.matches);
     this.updateDarkModeClass();
     this.updateColors();
   }
 
+  /**
+   * Update the document's class list to reflect the current dark mode state.
+   * This method adds or removes the specified dark mode class on the document's root
+   * element based on the current value of the isDarkMode signal.
+   */
   private updateDarkModeClass(): void {
     if (this._isDarkMode()) {
       this.document.documentElement.classList.add(this.darkModeClass);
@@ -98,7 +124,7 @@ export class ThemeService {
    * Only works when darkMode strategy is 'manual' or not set.
    */
   toggleDarkMode(): void {
-    if (this.darkModeStrategy !== 'manual') {
+    if (this.darkModeStrategy !== DarkModeStrategyEnum.MANUAL) {
       console.warn('toggleDarkMode() only works when darkMode strategy is "manual"');
       return;
     }
@@ -113,7 +139,7 @@ export class ThemeService {
    * Only works when darkMode strategy is 'manual' or not set.
    */
   setDarkMode(enabled: boolean): void {
-    if (this.darkModeStrategy !== 'manual') {
+    if (this.darkModeStrategy !== DarkModeStrategyEnum.MANUAL) {
       console.warn('setDarkMode() only works when darkMode strategy is "manual"');
       return;
     }
@@ -125,25 +151,53 @@ export class ThemeService {
 
   /**
    * Get current dark mode strategy
+   * This method returns the current dark mode strategy being used by the theme service, which can be 'auto', 'manual', or 'system'.
+   * @returns {DarkModeStrategy} The current dark mode strategy.
    */
-  getDarkModeStrategy(): 'auto' | 'manual' | 'system' {
+  getDarkModeStrategy(): DarkModeStrategy {
     return this.darkModeStrategy;
   }
 
+  /**
+   * Use a specific theme preset.
+   * This method allows users to switch between different theme presets at runtime
+   * by providing a ThemePreset object.
+   */
   usePreset(preset: ThemePreset): void {
     this._currentPreset.set(preset);
     this.updateColors();
   }
 
+  /**
+   * Update CSS variables based on the current theme preset and dark mode state.
+   * This method generates the necessary CSS variable definitions and injects them into
+   * the style element in the document head,
+   */
   updateColors(): void {
     if (!this.styleElement) return;
     this.styleElement.textContent = this.generateComponentVariables();
   }
 
-  private getContrastColor(hexColor: string): string {
-    const rgb = this.hexToRgb(hexColor);
+  /**
+   * Calculate a contrasting color (black or white) based on the luminance of the input color.
+   * This method is used to ensure that text or icons placed on top of a background color have sufficient
+   * contrast for readability.
+   * @param {string} hexColor - The input color in hexadecimal format (e.g., '#ff0000').
+   * @returns {string} - Returns '#000000' for light colors and '#ffffff' for dark colors to ensure contrast.
+   */
+  public getContrastColor(hexColor: string): string {
+    let rgb: { r: number; g: number; b: number } = { r: 0, g: 0, b: 0 }; // Valor por defecto
 
-    // Fórmula de luminancia relativa (estándar WCAG)
+    const isCssKeyword = this.isCSSColorKeyword(hexColor);
+
+    if (!isCssKeyword) {
+      rgb = this.hexToRgb(hexColor);
+    } else {
+      const hex = this.cssKeywordToHex(hexColor);
+      rgb = this.hexToRgb(hex);
+    }
+
+    // Relative luminance formula (WCAG standard)
     const getLuminance = (r: number, g: number, b: number) => {
       const a = [r, g, b].map(v => {
         v /= 255;
@@ -153,10 +207,15 @@ export class ThemeService {
     };
 
     const lum = getLuminance(rgb.r, rgb.g, rgb.b);
-    // Si la luminancia es alta (color claro), texto negro. Si es baja (oscuro), texto blanco.
+    // If luminance is high (light color), use black text. If low (dark), use white text.
     return lum > LUMINANCE_UMBRAL ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
   }
 
+  /**
+   * Generate CSS variable definitions for all components based on the current theme preset and dark mode state.
+   * This method creates a string of CSS variable definitions that includes
+   * base colors, tints, shades, alpha variants,
+   */
   private generateComponentVariables(): string {
     const colors = this._isDarkMode()
       ? this._currentPreset().colors.dark
@@ -224,10 +283,22 @@ export class ThemeService {
     return css;
   }
 
+  /**
+   * Get default gray scale colors.
+   * This method returns a default set of gray colors that are used for structural elements like backgrounds, borders, and text when a custom preset does not provide its own grays.
+   * @return {ThemeGrays} An object containing the default gray scale colors.
+   */
   private getDefaultGrays(): ThemeGrays {
     return DEFAULT_GRAYS;
   }
 
+  /**
+   * Generate CSS variable definitions for structural colors and elements based on the provided gray scale.
+   * This method creates CSS variable definitions for grays, background colors, text colors, border colors, shadow opacities, focus ring color, text selection color, overlay/backdrop colors, spinner colors, and switch colors.
+   * The generated variables adapt based on whether the current theme is in dark mode or light mode, ensuring appropriate contrast and aesthetics for each mode.
+   * @param {ThemeGrays} grays - An object containing the gray scale colors to be used in the theme.
+   * @return {string} A string containing the CSS variable definitions for structural colors and elements.
+   */
   private generateStructuralVariables(grays: ThemeGrays): string {
     const isDark = this._isDarkMode();
     const currentColors = this.colors();
@@ -291,15 +362,17 @@ export class ThemeService {
   --nui-color-switch-track-hover-border: ${isDark ? grays[500] : grays[400]};
   --nui-color-switch-thumb-bg: ${isDark ? PURE_COLORS.WHITE : PURE_COLORS.WHITE};
 
-  /* Avatar */
-  --nui-avatar-default-bg: ${isDark ? 'var(--nui-color-secondary-shade-20)' : 'var(--nui-color-secondary)'};
-  --nui-avatar-default-color: ${isDark ? PURE_COLORS.BLACK : PURE_COLORS.WHITE};
-  --nui-avatar-group-border-color: ${isDark ? grays[500] : PURE_COLORS.WHITE};
-  --nui-avatar-excess-bg: ${isDark ? grays[700] : grays[300]};
-  --nui-avatar-excess-color: ${isDark ? grays[200] : grays[700]};
-  --nui-avatar-excess-hover-bg: ${isDark ? grays[600] : grays[400]};
 `;
   }
+
+  /**
+   * =====================================================================
+   * Methods to generate component-specific CSS variables (buttons, chips, modals, etc.) based on the theme colors.
+   * Each method generates a set of CSS variable definitions for a specific component, using the provided color as a base.
+   * The generated variables include styles for different states (default, hover, active) and variants (solid, outline, ghost).
+   * These methods ensure that all components have consistent styling that adapts to the current theme preset and dark mode state.
+   * =====================================================================
+   */
 
   private generateButtonVariables(name: string, color: string): string {
     const hoverColor = this.shade(color, 10);
@@ -541,9 +614,19 @@ export class ThemeService {
 
   private generateAvatarVariables(name: string, color: string): string {
     const shadeColor = this._isDarkMode() ? this.shade(color, 10) : color;
+    const hoverColor = this.shade(color, 10);
     const contrastText = this.getContrastColor(color);
+    const borderInsetShadow = this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
+    const borderShadow = `inset 0 0 1px 0px ${borderInsetShadow}, 0 0 1px 0px ${borderInsetShadow}`;
 
     return `
+  --nui-avatar-default-bg: ${this._isDarkMode() ? 'var(--nui-color-secondary-shade-20)' : 'var(--nui-color-secondary)'};
+  --nui-avatar-default-color: ${this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE};
+  --nui-avatar-${name}-excess-bg: ${color};
+  --nui-avatar-${name}-excess-color: ${contrastText};
+  --nui-avatar-${name}-excess-hover-bg: ${hoverColor};
+  --nui-avatar-border-color: var(--nui-color-secondary);
+  --nui-avatar-border-shadow: ${borderShadow};
   --nui-avatar-${name}-bg: ${shadeColor};
   --nui-avatar-${name}-color: ${contrastText};
 `;
@@ -625,6 +708,66 @@ export class ThemeService {
     }
   }
 
+  /**
+   * ======================================================================
+   * Utility methods for color manipulation and validation.
+   * These methods include checking if a value is a valid CSS color keyword, converting CSS color
+   * keywords to hex format, converting between hex and RGB color formats, and generating shaded,
+   * tinted, and alpha variants of colors.
+   * These utilities are essential for generating the various color variants needed for the theme
+   * based on the base colors defined in the presets.
+   *  =====================================================================
+   */
+
+  /**
+   * Checks if a given value is a valid CSS color keyword.
+   * This method creates a temporary DOM element and attempts to set its color style to the provided value.
+   * If the browser recognizes the value as a valid color, it will be reflected in the computed style of the element.
+   * @param {unknown} value - The value to check for being a valid CSS color keyword.
+   * @return {boolean} True if the value is a valid CSS color keyword, false otherwise.
+   */
+  private isCSSColorKeyword(value: unknown): boolean {
+    if (typeof value !== 'string') return false;
+
+    const s = new Option().style;
+    s.color = '';
+    s.color = value;
+
+    return s.color !== '';
+  }
+
+  /**
+   * Converts a CSS color keyword to its hexadecimal color code representation.
+   * This method creates a temporary DOM element, sets its color style to the provided
+   * CSS keyword, and then retrieves the computed color value.
+   * If the conversion fails for any reason, the method returns a default black color in hexadecimal format.
+   * @param {string} color - The CSS color keyword to convert to hexadecimal format.
+   * @return {string} The hexadecimal color code representation of the provided CSS color keyword, or '#000000' if conversion fails.
+   */
+  private cssKeywordToHex(color: string): string {
+    const el = document.createElement('div');
+    el.style.color = color;
+    document.body.appendChild(el);
+
+    const computed = getComputedStyle(el).color;
+    document.body.removeChild(el);
+
+    // computed será algo como: "rgb(255, 255, 255)"
+    const match = computed.match(/\d+/g);
+
+    // Si no se pudo convertir a RGB, devolvemos el color negro por defecto
+    if (!match || match.length < 3) return '#000000';
+
+    const [r, g, b] = match.map(Number);
+
+    return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
+  }
+
+  /**
+   * Converts a hexadecimal color code to its RGB representation.
+   * @param {string} hex - The hexadecimal color code to convert.
+   * @return {{ r: number; g: number; b: number }} An object representing the RGB components of the color.
+   */
   private hexToRgb(hex: string): { r: number; g: number; b: number } {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
@@ -632,6 +775,13 @@ export class ThemeService {
       : { r: 0, g: 0, b: 0 };
   }
 
+  /**
+   * Converts RGB color values to a hexadecimal color code.
+   * @param {number} r - The red component of the color.
+   * @param {number} g - The green component of the color.
+   * @param {number} b - The blue component of the color.
+   * @return {string} The hexadecimal color code representation of the RGB color.
+   */
   private rgbToHex(r: number, g: number, b: number): string {
     return (
       '#' +
@@ -644,6 +794,12 @@ export class ThemeService {
     );
   }
 
+  /**
+   * Generates a shaded version of the given color by darkening it by a specified percentage.
+   * @param {string} color - The base color in hexadecimal format to shade.
+   * @param {number} percent - The percentage by which to darken the color (0-100).
+   * @return {string} The shaded color in hexadecimal format.
+   */
   private shade(color: string, percent: number): string {
     const rgb = this.hexToRgb(color);
     const factor = 1 - percent / 100;
@@ -653,6 +809,12 @@ export class ThemeService {
     return this.rgbToHex(r, g, b);
   }
 
+  /**
+   * Generates a tinted version of the given color by lightening it by a specified percentage.
+   * @param {string} color - The base color in hexadecimal format to tint.
+   * @param {number} percent - The percentage by which to lighten the color (0-100).
+   * @return {string} The tinted color in hexadecimal format.
+   */
   private tint(color: string, percent: number): string {
     const rgb = this.hexToRgb(color);
     const factor = percent / 100;
@@ -662,6 +824,12 @@ export class ThemeService {
     return this.rgbToHex(r, g, b);
   }
 
+  /**
+   * Generates an RGBA color string by applying the specified alpha transparency to the given base color.
+   * @param {string} color - The base color in hexadecimal format to which the alpha transparency will be applied.
+   * @param {number} alpha - The alpha transparency value to apply to the color (0-1).
+   * @return {string} The resulting RGBA color string with the applied alpha transparency.
+   */
   private withAlpha(color: string, alpha: number): string {
     const rgb = this.hexToRgb(color);
     return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha})`;

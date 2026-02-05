@@ -1,17 +1,26 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  ViewEncapsulation,
   input,
   signal,
   computed,
   effect,
   untracked,
   numberAttribute,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AvatarVariant } from './models/avatar.model';
-import { NUIColor, NUISize } from '../../configs';
+import {
+  DEFAULT_COLOR,
+  DEFAULT_SIZE,
+  DEFAULT_VARIANT,
+  NUI_COLORS,
+  NUI_CONFIG,
+  NUIColor,
+  NUISize,
+} from '../../configs';
+import { ThemeService } from 'nui';
 
 @Component({
   selector: 'nui-avatar',
@@ -22,6 +31,9 @@ import { NUIColor, NUISize } from '../../configs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvatarComponent {
+  private readonly globalConfig = inject(NUI_CONFIG, { optional: true });
+  private readonly themeService = inject(ThemeService);
+
   // ========================================================================
   // INPUTS (Signals)
   // ========================================================================
@@ -33,7 +45,7 @@ export class AvatarComponent {
   readonly size = input<NUISize>('md');
 
   /** Color del fondo (opcional, usa default del CSS si no se pasa) */
-  readonly color = input<NUIColor>();
+  readonly color = input<NUIColor | string>();
 
   /** URL de la imagen */
   readonly src = input<string>();
@@ -47,10 +59,16 @@ export class AvatarComponent {
   /** Icono explícito (clase CSS) */
   readonly icon = input<string>();
 
+  /** Indica si el avatar tiene borde (usado para grupos) */
+  readonly bordered = input<boolean>(false);
+
   /** Tamaño personalizado en PX (sobrescribe 'size') */
   readonly customSize = input<number | undefined, unknown>(undefined, {
     transform: numberAttribute,
   });
+
+  /** Tooltip del avatar */
+  readonly tooltip = input<string>();
 
   // ========================================================================
   // INTERNAL STATE
@@ -83,6 +101,44 @@ export class AvatarComponent {
   // ========================================================================
 
   /**
+   * Resolución reactiva del color final.
+   * Prioridad: Input > Global Config > Default Constant
+   */
+  readonly effectiveColor = computed(
+    () => this.color() ?? this.globalConfig?.defaultColor ?? DEFAULT_COLOR
+  );
+
+  readonly effectiveSize = computed(
+    () => this.size() ?? this.globalConfig?.defaultSize ?? DEFAULT_SIZE
+  );
+
+  readonly effectiveVariant = computed(
+    () => this.variant() ?? this.globalConfig?.defaultVariant ?? DEFAULT_VARIANT
+  );
+
+  /**
+   * Detecta si el color es custom (no está en los predefinidos) para aplicar estilos específicos.
+   */
+  readonly customColor = computed(() => {
+    const color = this.color();
+    return NUI_COLORS.includes(color as NUIColor) ? null : color;
+  });
+
+  /**
+   * Calcula un color de texto contrastante si se usa un color custom, para asegurar legibilidad.
+   */
+  readonly customTextColor = computed(() => {
+    const bgColor = this.customColor();
+    if (!bgColor) {
+      return null; // Usar color por defecto del CSS
+    }
+
+    // Si el color es custom, calculamos un color de texto contrastante con el fondo
+    const contrastColor = this.themeService.getContrastColor(bgColor);
+    return contrastColor;
+  });
+
+  /**
    * Genera las clases CSS de modificadores (size y color)
    */
   protected readonly mainClasses = computed(() => {
@@ -90,11 +146,19 @@ export class AvatarComponent {
 
     // Solo añadimos clase de tamaño si NO hay tamaño custom
     if (!this.customSize()) {
-      classes.push(`nui-avatar--${this.size()}`);
+      classes.push(`nui-avatar--${this.effectiveSize()}`);
     }
 
-    if (this.color()) {
-      classes.push(`nui-avatar--${this.color()}`);
+    if (this.effectiveColor() && !this.customColor()) {
+      classes.push(`nui-avatar--${this.effectiveColor()}`);
+    }
+
+    if (this.effectiveVariant()) {
+      classes.push(`nui-avatar--${this.effectiveVariant()}`);
+    }
+
+    if (this.bordered()) {
+      classes.push(`nui-avatar--bordered`);
     }
 
     return classes.join(' ');

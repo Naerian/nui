@@ -1,11 +1,7 @@
-<div
-  class="nui-avatar-group"
-  [style.--nui-avatar-spacing]="spacingValue()"
->
+<div class="nui-avatar-group" [style.--nui-avatar-spacing]="spacingValue()">
   <div
     class="nui-avatar-group__list"
-    [class.nui-avatar-group__list--stacked]="layout === 'stacked'"
-    [class.nui-avatar-group__list--inline]="layout === 'inline'"
+    [class]="listClasses()"
   >
     <!-- Avatares visibles -->
     @for (avatar of visibleAvatars(); track avatar) {
@@ -15,19 +11,20 @@
         [alt]="avatar.alt"
         [initials]="avatar.initials"
         [icon]="avatar.icon"
-        [color]="avatar.color"
-        [size]="size"
-        [variant]="variant"
-        [title]="avatar.tooltip || avatar.alt"
+        [color]="effectiveColor() || avatar.color"
+        [customSize]="effectiveSize() || avatar?.customSize"
+        [size]="effectiveSize() || avatar.size"
+        [variant]="effectiveVariant() || avatar.variant"
+        [bordered]="bordered()"
+        [tooltip]="avatar.tooltip || avatar.alt || ''"
       />
     }
 
     <!-- Indicador de excedente "+N" -->
     @if (hasHidden()) {
       <div
-        class="nui-avatar-group__excess {{ 'nui-avatar-group__excess--' + size }} {{
-          'nui-avatar-group__excess--' + variant
-        }}"
+        class="nui-avatar-group__excess"
+        [class]="excessClasses()"
         [title]="excessTooltip()"
         [attr.aria-label]="excessTooltip()"
       >

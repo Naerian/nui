@@ -1,5 +1,5 @@
 @use '../mixins' as global;
-@use '../components-base' as base;
+@use '../mixins-base' as base;
 @use '../variables/action-menu-vars' as vars;
 
 @mixin nui-action-menu-styles {

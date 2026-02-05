@@ -277,7 +277,7 @@
       "colors": {
         "title": "Colores",
         "description": "Personaliza el fondo y el color del texto utilizando la paleta del sistema. Ideal para diferenciar usuarios o estados cuando no hay imagen.",
-        "note": "Usa el input <code>color</code> con valores como <code>'primary'</code>, <code>'secondary'</code>, <code>'accent'</code>, <code>'success'</code>, <code>'info'</code>, <code>'warning'</code> y <code>'danger'</code> para cambiar los colores del avatar."
+        "note": "Usa el input <code>color</code> con valores como <code>'primary'</code>, <code>'secondary'</code>, <code>'accent'</code>, <code>'success'</code>, <code>'info'</code>, <code>'warning'</code> y <code>'danger'</code> para cambiar los colores del avatar. También puedes usar colores personalizados en formato <code>rgb</code>, <code>hexadecimal</code> o <code>keyword</code> para un control total sobre la apariencia del avatar. Si usas un color personalizado, el componente calculará automáticamente un color de texto contrastante para garantizar la legibilidad de las iniciales o el icono."
       },
       "customSize": {
         "title": "Tamaño personalizado",
@@ -287,7 +287,7 @@
       "grouped": {
         "title": "Avatares agrupados",
         "description": "Muestra múltiples avatares en un solo componente con solapamiento y límite de visualización.",
-        "note": "Usa el componente <code>nui-avatar-group</code> para agrupar varios avatares. Controla el número máximo visible con <code>max</code>. Los avatares adicionales se representan como un contador '+X'."
+        "note": "Usa el componente <code>nui-avatar-group</code> para agrupar varios avatares. Controla el número máximo visible con <code>max</code>. Los avatares adicionales se representan como un contador '+X'. Puedes usar <code>bordered</code> para ver una separación clara entre cada avatar."
       },
       "error": {
         "title": "Manejo de errores (Fallback)",

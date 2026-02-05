@@ -15,7 +15,7 @@ export const twilight: ThemePreset = {
     dark: {
       primary: '#904fff',
       secondary: '#8d2bdb',
-      accent: '#981dc3',
+      accent: '#cc38ff',
       success: '#1f8165',
       info: '#1383c1',
       warning: '#b77313',

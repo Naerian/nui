@@ -26,13 +26,13 @@ $avatar-icon-size-xl: 2.5rem !default; // 40px
 $avatar-border-radius-rounded: 0.5rem !default;
 $avatar-border-radius-circular: 50% !default;
 $avatar-border-radius-square: 0 !default;
+$avatar-border-width: 0.063rem !default;
 
 $avatar-font-weight: 500 !default;
 $avatar-line-height: 1 !default;
 $avatar-text-transform: uppercase !default;
 
 $avatar-group-spacing: -0.5rem !default;
-$avatar-group-border-width: 0.063rem !default;
 $avatar-group-hover-scale: 1.1 !default;
 $avatar-group-z-index-hover: 10 !default;
 
@@ -86,6 +86,7 @@ $avatar-z-index-hover: 10 !default;
   --nui-avatar-border-radius-rounded: #{$avatar-border-radius-rounded};
   --nui-avatar-border-radius-circular: #{$avatar-border-radius-circular};
   --nui-avatar-border-radius-square: #{$avatar-border-radius-square};
+  --nui-avatar-border-width: #{$avatar-border-width};
 
   // Typography
   --nui-avatar-font-weight: #{$avatar-font-weight};
@@ -98,7 +99,6 @@ $avatar-z-index-hover: 10 !default;
 
   // Avatar Group
   --nui-avatar-group-spacing: #{$avatar-group-spacing};
-  --nui-avatar-group-border-width: #{$avatar-group-border-width};
   --nui-avatar-group-hover-scale: #{$avatar-group-hover-scale};
   --nui-avatar-group-z-index-hover: #{$avatar-group-z-index-hover};
 

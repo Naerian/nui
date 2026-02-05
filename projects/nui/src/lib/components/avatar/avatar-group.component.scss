@@ -55,15 +55,12 @@
       transform: scale(var(--nui-avatar-group-hover-scale));
     }
   }
-
   &__excess {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     user-select: none;
-    background-color: var(--nui-avatar-excess-bg, var(--nui-bg-tertiary));
-    color: var(--nui-avatar-excess-color, var(--nui-text-secondary));
     font-weight: var(--nui-avatar-excess-font-weight);
     line-height: 1;
     cursor: default;
@@ -86,6 +83,14 @@
         height: calc(var(--nui-avatar-size-#{$size}) * 0.6);
         font-size: var(--nui-avatar-excess-font-size-#{$size});
         margin-left: calc(var(--nui-avatar-spacing, var(--nui-avatar-group-spacing)) + 4px);
+      }
+    }
+
+    $colors: primary, secondary, success, info, warning, danger, accent;
+    @each $color in $colors {
+      &--#{$color} {
+        background-color: var(--nui-avatar-#{$color}-bg);
+        color: var(--nui-avatar-#{$color}-color);
       }
     }
   }

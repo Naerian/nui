@@ -4,9 +4,10 @@
   [style.width.px]="customSize()"
   [style.height.px]="customSize()"
   [style.font-size.px]="customFontSize()"
-  [class.nui-avatar--circular]="variant() === 'circular'"
-  [class.nui-avatar--rounded]="variant() === 'rounded'"
-  [class.nui-avatar--square]="variant() === 'square'"
+  [title]="tooltip() || alt() || ''"
+  [attr.aria-label]="tooltip() || alt() || 'avatar'"
+  [style.background-color]="customColor()"
+  [style.color]="customTextColor()"
 >
   @switch (contentType()) {
     @case ('image') {

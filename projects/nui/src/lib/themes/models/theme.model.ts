@@ -32,6 +32,16 @@ export interface ThemePreset {
 
 export interface ThemeConfig {
   preset?: ThemePreset;
-  darkMode?: 'auto' | 'manual' | 'system';
+  darkMode?: DarkModeStrategy;
   darkModeClass?: string;
 }
+
+export const DARK_MODE_STRATEGIES = ['auto', 'manual', 'system'] as const;
+export type DarkModeStrategy = (typeof DARK_MODE_STRATEGIES)[number];
+export enum DarkModeStrategyEnum {
+  AUTO = 'auto',
+  MANUAL = 'manual',
+  SYSTEM = 'system',
+}
+
+export const DARK_MODE_CLASS = 'dark-mode';

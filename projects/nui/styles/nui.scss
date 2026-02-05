@@ -2,19 +2,19 @@
 @use 'functions';
 @use 'config';
 @use 'mixins';
-@use 'components-base';
+@use 'mixins-base';
 
 // 2. Tokens Layer (Generates the :root block)
-@use 'tokens-index';
+@use 'global-vars';
 
 // 3. Reset & Base Layer (Generates global CSS)
 @use 'reset'; // Reset first to clear default styles
 @use 'base'; // Base tag styles (body, a, etc.)
 @use 'typography'; // Semantic typography
 
-// 4. Iconography
+// 4. Iconography (Remix Icon https://remixicon.com/)
 @use 'icons/remixicon';
 
 // 5. Components Layer
-// This is where global classes are injected (.nui-btn, .nui-card, etc.)
-@use 'components/components';
+// This is where global classes are injected (.nui-btn, .nui-action-button, etc.)
+@use 'global-components'

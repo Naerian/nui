@@ -1,18 +1,18 @@
 // ============================================================================
 // NUI Complete Bundle
 // ============================================================================
-// Este archivo incluye TODOS los estilos necesarios para NUI, incluyendo
-// las dependencias del Angular CDK Overlay.
+// This file includes ALL the styles required for NUI, including
+// Angular CDK Overlay dependencies.
 //
-// Uso recomendado:
+// Recommended usage:
 // @import 'nui/styles/nui-bundle';
 //
-// O en angular.json:
+// Or in angular.json:
 // "styles": ["node_modules/nui/styles/nui-bundle.css"]
 // ============================================================================
 
-// Estilos base de NUI
+// NUI base styles
 @use './nui';
 
-// Angular CDK Overlay (requerido para overlays, menus, tooltips, etc.)
+// Angular CDK Overlay (required for overlays, menus, tooltips, etc.)
 @import '@angular/cdk/overlay-prebuilt.css';

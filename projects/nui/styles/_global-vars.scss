@@ -1,0 +1,11 @@
+@use 'global-tokens';
+@use 'variables/button-vars';
+@use 'variables/action-menu-vars';
+
+// Inject variables as CSS custom GLOBAL properties
+// These "includes" are intended to be used in components that use "ViewEncapsulation.None" 
+// or that generate HTML outside the Body (overlay, button.component, action-menu.component, etc...)
+:root {
+  @include button-vars.nui-button-vars;
+  @include action-menu-vars.nui-action-menu-vars;
+}

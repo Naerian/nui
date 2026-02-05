@@ -99,17 +99,26 @@ export const AVATAR_PAGE_CONFIG: ComponentPageConfig = {
       id: 'colors',
       title: 'components.avatar.colors.title',
       description: 'components.avatar.colors.description',
+      note: {
+        type: 'info',
+        content: 'components.avatar.colors.note',
+      },
       anchor: 'colors',
       examples: [
         {
           title: 'codeExamples.html',
-          code: `<nui-avatar initials="P" color="primary"></nui-avatar>
+          code: `
+<!-- Using predefined theme colors -->
+<nui-avatar initials="P" color="primary"></nui-avatar>
 <nui-avatar initials="S" color="secondary"></nui-avatar>
 <nui-avatar initials="A" color="accent"></nui-avatar>
 <nui-avatar initials="S" color="success"></nui-avatar>
 <nui-avatar initials="I" color="info"></nui-avatar>
 <nui-avatar initials="W" color="warning"></nui-avatar>
-<nui-avatar initials="D" color="danger"></nui-avatar>`,
+<nui-avatar initials="D" color="danger"></nui-avatar>
+
+<!-- Custom color (not in theme) -->
+<nui-avatar initials="Z" color="white"></nui-avatar>`,
           language: 'html',
         },
       ],
@@ -147,7 +156,20 @@ export const AVATAR_PAGE_CONFIG: ComponentPageConfig = {
       examples: [
         {
           title: 'codeExamples.html',
-          code: `<nui-avatar-group [max]="3" [avatars]="avatars" />`,
+          code: `<!-- Avatar group with max 3 visible avatars and rounded variant -->
+<nui-avatar-group [max]="3" [avatars]="avatars" [variant]="'rounded'" />
+
+<!-- Avatar group with max 3 visible avatars and circular variant -->
+<nui-avatar-group [max]="3" [avatars]="avatars" [variant]="'circular'" />
+
+<!-- Avatar group with max 3 visible avatars and square variant -->
+<nui-avatar-group [max]="3" [avatars]="avatars" [variant]="'square'" />
+
+<!-- Avatar group with max 3 visible avatars, circular variant and no borders -->
+<nui-avatar-group [max]="3" [avatars]="avatars" [variant]="'circular'" [bordered]="false" />
+
+<!-- Avatar group with max 3 visible avatars, circular variant, no borders and xs size -->
+<nui-avatar-group [max]="3" [avatars]="avatars" [variant]="'circular'" [bordered]="false" [size]="'xs'" />`,
           language: 'html',
         },
         {

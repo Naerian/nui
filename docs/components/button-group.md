@@ -772,7 +772,7 @@ describe('ButtonGroup Accessibility', () => {
   --btn-group-font-size: 0.875rem;
   
   // Bordes
-  --btn-group-border-width: 1px;
+  --btn-border-width: 1px;
   --nui-border-radius-md: 0.375rem;
 }
 ```

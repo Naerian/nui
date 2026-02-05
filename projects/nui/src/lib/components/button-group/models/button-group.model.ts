@@ -36,3 +36,15 @@ export interface ButtonGroupOption {
    */
   disabled?: boolean;
 }
+
+/**
+ * Interfaz interna normalizada para el template
+ */
+export interface NormalizedOption {
+  label: string;
+  value: any;
+  tooltip?: string;
+  icon?: string;
+  disabled: boolean;
+  original: any;
+}

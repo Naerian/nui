@@ -393,7 +393,7 @@ menuItems: ActionMenuItem[] = [
 ];
 ```
 
-**Ventajas sobre PrimeNG:**
+**Ventajas:**
 - **Más simple:** Usa `menu-header` y `menu-footer` directamente en el HTML, sin necesidad de envolver en `ng-template`
 - **Más claro:** Los nombres `menu-header` y `menu-footer` son más descriptivos que `#start` y `#end`
 - **Más flexible:** Puedes usar componentes Angular directamente sin wrappers adicionales

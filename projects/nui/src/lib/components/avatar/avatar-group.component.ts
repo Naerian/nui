@@ -1,30 +1,27 @@
 import {
   Component,
-  Input,
   ChangeDetectionStrategy,
   computed,
-  signal,
   ViewEncapsulation,
   inject,
+  input,
+  numberAttribute, // Importamos la función input de signals
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AvatarComponent } from './avatar.component';
-import { AvatarGroupItem, AvatarVariant } from './models/avatar.model';
-import { NUISize } from '../../configs';
+import { AvatarConfig, AvatarVariant } from './models/avatar.model';
+import {
+  DEFAULT_COLOR,
+  DEFAULT_SIZE,
+  DEFAULT_VARIANT,
+  NUI_CONFIG,
+  NUIColor,
+  NUISize,
+} from '../../configs';
 import { NUI_TRANSLATIONS } from '../../translations';
 
 /**
  * Componente para agrupar múltiples avatares con superposición
- *
- * Características:
- * - Apila avatares con superposición configurable
- * - Límite de avatares visibles con indicador "+N"
- * - Bordes opcionales para separar visualmente
- * - Tamaño y variante unificados para todos los avatares
- * - Tooltips opcionales en cada avatar
- *
- * @example
- * <nui-avatar-group [avatars]="users" [max]="3" />
  */
 @Component({
   selector: 'nui-avatar-group',
@@ -35,116 +32,138 @@ import { NUI_TRANSLATIONS } from '../../translations';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvatarGroupComponent {
-  // ===== INPUTS =====
-
-  /**
-   * Lista de avatares a mostrar
-   */
-  @Input() set avatars(value: AvatarGroupItem[]) {
-    this._avatars.set(value || []);
-  }
-  private readonly _avatars = signal<AvatarGroupItem[]>([]);
-
-  /**
-   * Número máximo de avatares visibles, validando que el valor sea positivo
-   * El resto se muestra como "+N"
-   */
-  @Input() set max(value: number | undefined) {
-    this._max = value && value > 0 ? value : undefined;
-  }
-  private _max?: number;
-  get max() {
-    return this._max;
-  }
-
-  /**
-   * Espaciado entre avatares (en píxeles negativos para superposición)
-   * @default -8
-   */
-  @Input() spacing: number = -8;
-
-  /**
-   * Layout del grupo de avatares
-   * @default 'stacked'
-   */
-  @Input() layout: 'stacked' | 'inline' = 'inline';
-
-  /**
-   * Tamaño de todos los avatares
-   * @default 'md'
-   */
-  @Input() size: NUISize = 'md';
-
-  /**
-   * Variante de forma para todos los avatares
-   * @default 'circular'
-   */
-  @Input() variant: AvatarVariant = 'circular';
-
   // ===== DEPENDENCIES =====
   protected readonly translation = inject(NUI_TRANSLATIONS);
+  private readonly globalConfig = inject(NUI_CONFIG, { optional: true });
+
+  // ===== SIGNAL INPUTS =====
+
+  /** Lista de avatares a mostrar */
+  readonly avatars = input<AvatarConfig[]>([]);
+
+  /** Número máximo de avatares visibles */
+  readonly max = input<number | undefined, unknown>(undefined, {
+    transform: value => {
+      const num = Number(value);
+      return num && num > 0 ? num : undefined;
+    },
+  });
+
+  /** Espaciado entre avatares (píxeles negativos) */
+  readonly spacing = input<number>(-8);
+
+  /** Layout del grupo de avatares */
+  readonly layout = input<'stacked' | 'inline'>('inline');
+
+  /** Tamaño de todos los avatares */
+  readonly size = input<NUISize>();
+
+  /** Variante de forma */
+  readonly variant = input<AvatarVariant>('circular');
+
+  /** Color del fondo */
+  readonly color = input<NUIColor>();
+
+  /** Mostrar borde alrededor de cada avatar */
+  readonly bordered = input<boolean>(true);
+
+  /** Tamaño personalizado en PX (sobrescribe 'size') */
+  readonly customSize = input<number | undefined, unknown>(undefined, {
+    transform: numberAttribute,
+  });
 
   // ===== COMPUTED =====
 
   /**
-   * Avatares visibles (respetando el límite max)
+   * Resolución reactiva del color final.
+   * Prioridad: Input > Global Config > Default Constant
    */
+  readonly effectiveColor = computed(
+    () => this.color() ?? this.globalConfig?.defaultColor ?? DEFAULT_COLOR
+  );
+
+  readonly effectiveSize = computed(
+    () => this.size() ?? this.globalConfig?.defaultSize ?? DEFAULT_SIZE
+  );
+
+  readonly effectiveVariant = computed(
+    () => this.variant() ?? this.globalConfig?.defaultVariant ?? DEFAULT_VARIANT
+  );
+
+  /**
+   * Genera las clases CSS de modificadores (size y color)
+   */
+  protected readonly listClasses = computed(() => {
+    const classes: string[] = [];
+
+    if (this.layout()) {
+      classes.push(`nui-avatar-group__list--${this.layout()}`);
+    }
+    return classes.join(' ');
+  });
+
+  /**
+   * Genera las clases CSS de modificadores (size y color)
+   */
+  protected readonly excessClasses = computed(() => {
+    const classes: string[] = [];
+
+    // Solo añadimos clase de tamaño si NO hay tamaño custom
+    if (this.effectiveSize()) {
+      classes.push(`nui-avatar-group__excess--${this.effectiveSize()}`);
+    }
+
+    if (this.effectiveColor()) {
+      classes.push(`nui-avatar-group__excess--${this.effectiveColor()}`);
+    }
+
+    if (this.effectiveVariant()) {
+      classes.push(`nui-avatar-group__excess--${this.effectiveVariant()}`);
+    }
+
+    return classes.join(' ');
+  });
+
+  /** Avatares visibles (respetando el límite max) */
   protected readonly visibleAvatars = computed(() => {
-    const avatars = this._avatars();
-    if (!this.max || avatars.length <= this.max) {
-      return avatars;
+    const avatarsList = this.avatars();
+    const maxVal = this.max();
+
+    if (!maxVal || avatarsList.length <= maxVal) {
+      return avatarsList;
     }
-    return avatars.slice(0, this.max);
+    return avatarsList.slice(0, maxVal);
   });
 
-  /**
-   * Número de avatares ocultos (excedente)
-   */
+  /** Número de avatares ocultos (excedente) */
   protected readonly hiddenCount = computed(() => {
-    const avatars = this._avatars();
-    if (!this.max || avatars.length <= this.max) {
-      return 0;
-    }
-    return avatars.length - this.max;
+    const total = this.avatars().length;
+    const maxVal = this.max();
+
+    if (!maxVal || total <= maxVal) return 0;
+    return total - maxVal;
   });
 
-  /**
-   * Indica si hay avatares ocultos
-   */
+  /** Indica si hay avatares ocultos */
   protected readonly hasHidden = computed(() => this.hiddenCount() > 0);
 
-  /**
-   * Valor de espaciado como string CSS
-   */
-  protected readonly spacingValue = computed(() => `${this.spacing}px`);
+  /** Valor de espaciado como string CSS */
+  protected readonly spacingValue = computed(() => `${this.spacing()}px`);
 
-  /**
-   * Texto del indicador "+N"
-   */
+  /** Texto del indicador "+N" */
   protected readonly excessText = computed(() => {
     const count = this.hiddenCount();
     return count > 0 ? `+${count}` : '';
   });
 
-  /**
-   * Tooltip para el indicador "+N"
-   */
+  /** Tooltip para el indicador "+N" */
   protected readonly excessTooltip = computed(() => {
     const count = this.hiddenCount();
-    if (count === 0) return '';
+    const maxVal = this.max();
 
-    const hidden = this._avatars().slice(this.max);
-    const names = hidden
-      .map((a) => a.alt || a.tooltip)
-      .filter(Boolean)
-      .slice(0, 3)
-      .join(', ');
+    if (count === 0 || maxVal === undefined) return '';
 
-    return names
-      ? `${names}${count > 5 ? ` +${count - 3} más` : ''}`
-      : this.translation.avatar.moreProfiles.replace(
-          '{count}',
-          count.toString(),
-        );
+    // Usamos la traducción con pluralización
+    return this.translation.avatar.moreProfiles.replace('{count}', count.toString());
   });
 }

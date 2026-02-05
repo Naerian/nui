@@ -15,6 +15,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
   ButtonGroupMode,
   ButtonGroupLayout,
+  NormalizedOption,
 } from './models/button-group.model';
 import {
   NUI_CONFIG,
@@ -26,16 +27,6 @@ import {
   DEFAULT_VARIANT,
 } from '../../configs';
 import { ButtonWidth } from '../button/models/button.model';
-
-// Interfaz interna normalizada para el template
-interface NormalizedOption {
-  label: string;
-  value: any;
-  tooltip?: string;
-  icon?: string;
-  disabled: boolean;
-  original: any; // Referencia al objeto original por si acaso
-}
 
 @Component({
   selector: 'nui-button-group',
@@ -54,7 +45,6 @@ interface NormalizedOption {
 })
 export class ButtonGroupComponent implements ControlValueAccessor {
   private readonly _nuiConfig = inject(NUI_CONFIG);
-  private readonly _el = inject(ElementRef);
 
   // ========================================================================
   // INPUTS
