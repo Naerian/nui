@@ -1,33 +1,38 @@
 <div
-  class="nui-avatar-group__list"
-  [class.nui-avatar-group__list--stacked]="layout === 'stacked'"
-  [class.nui-avatar-group__list--inline]="layout === 'inline'"
+  class="nui-avatar-group"
+  [style.--nui-avatar-spacing]="spacingValue()"
 >
-  <!-- Avatares visibles -->
-  @for (avatar of visibleAvatars(); track avatar) {
-    <nui-avatar
-      class="nui-avatar-group__avatar"
-      [src]="avatar.src"
-      [alt]="avatar.alt"
-      [initials]="avatar.initials"
-      [icon]="avatar.icon"
-      [color]="avatar.color"
-      [size]="size"
-      [variant]="variant"
-      [title]="avatar.tooltip || avatar.alt"
-    />
-  }
+  <div
+    class="nui-avatar-group__list"
+    [class.nui-avatar-group__list--stacked]="layout === 'stacked'"
+    [class.nui-avatar-group__list--inline]="layout === 'inline'"
+  >
+    <!-- Avatares visibles -->
+    @for (avatar of visibleAvatars(); track avatar) {
+      <nui-avatar
+        class="nui-avatar-group__avatar"
+        [src]="avatar.src"
+        [alt]="avatar.alt"
+        [initials]="avatar.initials"
+        [icon]="avatar.icon"
+        [color]="avatar.color"
+        [size]="size"
+        [variant]="variant"
+        [title]="avatar.tooltip || avatar.alt"
+      />
+    }
 
-  <!-- Indicador de excedente "+N" -->
-  @if (hasHidden()) {
-    <div
-      class="nui-avatar-group__excess {{
-        'nui-avatar-group__excess--' + size
-      }} {{ 'nui-avatar-group__excess--' + variant }}"
-      [title]="excessTooltip()"
-      [attr.aria-label]="excessTooltip()"
-    >
-      {{ excessText() }}
-    </div>
-  }
+    <!-- Indicador de excedente "+N" -->
+    @if (hasHidden()) {
+      <div
+        class="nui-avatar-group__excess {{ 'nui-avatar-group__excess--' + size }} {{
+          'nui-avatar-group__excess--' + variant
+        }}"
+        [title]="excessTooltip()"
+        [attr.aria-label]="excessTooltip()"
+      >
+        {{ excessText() }}
+      </div>
+    }
+  </div>
 </div>

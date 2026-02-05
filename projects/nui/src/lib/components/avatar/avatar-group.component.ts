@@ -33,12 +33,6 @@ import { NUI_TRANSLATIONS } from '../../translations';
   templateUrl: './avatar-group.component.html',
   styleUrl: './avatar-group.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  host: {
-    '[class.nui-avatar-group]': 'true',
-    '[class.nui-avatar-group--bordered]': 'bordered',
-    '[style.--nui-avatar-spacing]': 'spacingValue()',
-  },
 })
 export class AvatarGroupComponent {
   // ===== INPUTS =====
@@ -86,12 +80,6 @@ export class AvatarGroupComponent {
    * @default 'circular'
    */
   @Input() variant: AvatarVariant = 'circular';
-
-  /**
-   * Mostrar borde alrededor de cada avatar
-   * @default true
-   */
-  @Input() bordered: boolean = true;
 
   // ===== DEPENDENCIES =====
   protected readonly translation = inject(NUI_TRANSLATIONS);

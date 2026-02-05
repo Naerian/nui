@@ -1,11 +1,131 @@
-// ============================================================================
-// Avatar Component Styles
-// ============================================================================
-// This component uses ViewEncapsulation.None
-// All styles are compiled globally from styles/components/_avatar.scss
-// This file only contains host-specific styles
-// ============================================================================
+@use './../../../../styles/variables/avatar-vars';
 
 :host {
-  display: inline-block;
+  @include avatar-vars.nui-avatar-vars;
+
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.nui-avatar {
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  user-select: none;
+  background-color: var(--nui-color-primary);
+  color: var(--nui-text-primary);
+  font-weight: var(--nui-avatar-font-weight);
+  line-height: var(--nui-avatar-line-height);
+  transition: var(--nui-avatar-transition);
+  border: var(--nui-avatar-group-border-width, 0) solid
+    var(--nui-avatar-group-border-color, transparent);
+
+  $variants: rounded, circular, square;
+  @each $variant in $variants {
+    &--#{$variant} {
+      border-radius: var(--nui-avatar-border-radius-#{$variant});
+      .nui-avatar__image {
+        border-radius: inherit;
+      }
+    }
+  }
+
+  &__initials,
+  &__fallback,
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    line-height: 1;
+    text-align: center;
+    text-transform: var(--nui-avatar-text-transform);
+    font-weight: var(--nui-avatar-font-weight);
+    padding: 2px;
+  }
+
+  $sizes: xs, sm, md, lg, xl;
+  @each $size in $sizes {
+    &--#{$size} {
+      width: var(--nui-avatar-size-#{$size});
+      height: var(--nui-avatar-size-#{$size});
+      font-size: var(--nui-avatar-font-size-#{$size});
+
+      .nui-avatar__icon {
+        font-size: var(--nui-avatar-icon-size-#{$size});
+      }
+
+      .nui-avatar__badge {
+        width: calc(var(--nui-avatar-size-#{$size}) / 3.5);
+        height: calc(var(--nui-avatar-size-#{$size}) / 3.5);
+        min-width: 8px;
+        min-height: 8px;
+      }
+    }
+  }
+
+  $colors: primary, secondary, success, info, warning, danger, accent;
+  @each $color in $colors {
+    &--#{$color} {
+      background-color: var(--nui-avatar-#{$color}-bg);
+      color: var(--nui-avatar-#{$color}-color);
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__text {
+    text-transform: var(--nui-avatar-text-transform);
+    font-weight: var(--nui-avatar-font-weight);
+  }
+
+  &__badge {
+    position: absolute;
+    border: 2px solid var(--nui-bg-primary);
+    border-radius: 50%;
+    z-index: 2;
+
+    &--top-left {
+      top: 0;
+      left: 0;
+      transform: translate(-10%, -10%);
+    }
+    &--top-right {
+      top: 0;
+      right: 0;
+      transform: translate(10%, -10%);
+    }
+    &--bottom-left {
+      bottom: 0;
+      left: 0;
+      transform: translate(-10%, 10%);
+    }
+    &--bottom-right {
+      bottom: 0;
+      right: 0;
+      transform: translate(10%, 10%);
+    }
+
+    @each $color in $colors {
+      &--#{$color} {
+        background-color: var(--nui-#{$color});
+      }
+    }
+  }
+
+  &--clickable {
+    cursor: pointer;
+    &:hover {
+      filter: brightness(1.1);
+      transform: scale(1.05);
+    }
+  }
 }

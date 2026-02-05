@@ -1,12 +1,92 @@
-// ============================================================================
-// Avatar Group Component Styles
-// ============================================================================
-// This component uses ViewEncapsulation.None
-// All styles are compiled globally from styles/components/_avatar.scss
-// This file only contains host-specific styles
-// ============================================================================
+@use './../../../../styles/variables/avatar-vars';
 
 :host {
-  display: inline-flex;
-  align-items: center;
+  @include avatar-vars.nui-avatar-vars;
+  display: block;
+}
+
+.nui-avatar-group {
+  &__list {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    &--stacked {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .nui-avatar-group__avatar,
+      .nui-avatar-group__excess {
+        margin-left: 0;
+        margin-top: var(--nui-avatar-spacing, var(--nui-avatar-group-spacing));
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+
+    &--inline {
+      flex-direction: row;
+
+      .nui-avatar-group__avatar,
+      .nui-avatar-group__excess {
+        margin-left: var(--nui-avatar-spacing, var(--nui-avatar-group-spacing));
+        margin-top: 0;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  &__avatar,
+  &__excess {
+    position: relative;
+    transition: var(--nui-avatar-transition);
+    z-index: var(--nui-avatar-z-index-base);
+    box-sizing: content-box;
+
+    &:hover {
+      z-index: var(--nui-avatar-group-z-index-hover) !important;
+      transform: scale(var(--nui-avatar-group-hover-scale));
+    }
+  }
+
+  &__excess {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    user-select: none;
+    background-color: var(--nui-avatar-excess-bg, var(--nui-bg-tertiary));
+    color: var(--nui-avatar-excess-color, var(--nui-text-secondary));
+    font-weight: var(--nui-avatar-excess-font-weight);
+    line-height: 1;
+    cursor: default;
+
+    $shapes: (
+      circular: circular,
+      rounded: rounded,
+      square: square,
+    );
+    @each $name, $var in $shapes {
+      &--#{$name} {
+        border-radius: var(--nui-avatar-border-radius-#{$var});
+      }
+    }
+
+    $sizes: xs, sm, md, lg, xl;
+    @each $size in $sizes {
+      &--#{$size} {
+        width: calc(var(--nui-avatar-size-#{$size}) * 0.6);
+        height: calc(var(--nui-avatar-size-#{$size}) * 0.6);
+        font-size: var(--nui-avatar-excess-font-size-#{$size});
+        margin-left: calc(var(--nui-avatar-spacing, var(--nui-avatar-group-spacing)) + 4px);
+      }
+    }
+  }
 }

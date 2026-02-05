@@ -1,23 +1,34 @@
-@switch (contentType()) {
-  @case ('image') {
-    <img
-      class="nui-avatar__image"
-      [src]="src()"
-      [alt]="alt() || 'avatar'"
-      (error)="onImageError()"
-    />
+<div
+  class="nui-avatar"
+  [class]="mainClasses()"
+  [style.width.px]="customSize()"
+  [style.height.px]="customSize()"
+  [style.font-size.px]="customFontSize()"
+  [class.nui-avatar--circular]="variant() === 'circular'"
+  [class.nui-avatar--rounded]="variant() === 'rounded'"
+  [class.nui-avatar--square]="variant() === 'square'"
+>
+  @switch (contentType()) {
+    @case ('image') {
+      <img
+        class="nui-avatar__image"
+        [src]="src()"
+        [alt]="alt() || 'avatar'"
+        (error)="onImageError()"
+      />
+    }
+    @case ('initials') {
+      <span class="nui-avatar__initials">
+        {{ initials() }}
+      </span>
+    }
+    @case ('icon') {
+      <i class="nui-avatar__icon" [class]="displayIcon()"></i>
+    }
+    @case ('fallback') {
+      <span class="nui-avatar__fallback">
+        {{ firstLetter() }}
+      </span>
+    }
   }
-  @case ('initials') {
-    <span class="nui-avatar__initials">
-      {{ initials() }}
-    </span>
-  }
-  @case ('icon') {
-    <i class="nui-avatar__icon" [class]="displayIcon()"></i>
-  }
-  @case ('fallback') {
-    <span class="nui-avatar__fallback">
-      {{ firstLetter() }}
-    </span>
-  }
-}
+</div>

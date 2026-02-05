@@ -204,7 +204,6 @@ import { AvatarGroupItem } from '@shared/components/avatar/models/avatar.model';
       [avatars]="teamMembers"
       [max]="5"
       [spacing]="-8"
-      [bordered]="true"
       size="md"
       variant="circular"
     />
@@ -256,16 +255,6 @@ export class TeamComponent {
 <nui-avatar-group [avatars]="users" [spacing]="4" />
 ```
 
-#### Bordes
-
-```html
-<!-- Con bordes (recomendado en fondos claros) -->
-<nui-avatar-group [avatars]="users" [bordered]="true" />
-
-<!-- Sin bordes -->
-<nui-avatar-group [avatars]="users" [bordered]="false" />
-```
-
 #### Tamaño y Variante Unificados
 
 ```html
@@ -303,7 +292,6 @@ export class TeamComponent {
 | `spacing` | `number \| string` | `'-8px'` | Espaciado entre avatares (valores negativos = superposición) |
 | `size` | `NUISize` | `'md'` | Tamaño para todos los avatares del grupo |
 | `variant` | `AvatarVariant` | `'circular'` | Variante para todos los avatares |
-| `bordered` | `boolean` | `false` | Añade bordes a los avatares |
 
 ### Tamaños Predefinidos
 
@@ -739,7 +727,6 @@ import { AvatarGroupItem } from '@shared/components/avatar/models/avatar.model';
       <nui-avatar-group
         [avatars]="teamMembers"
         [max]="5"
-        [bordered]="true"
         size="md"
         variant="circular"
       />
@@ -1055,9 +1042,6 @@ class AvatarGroupComponent {
   
   /** Variante para todos los avatares */
   @Input() variant: AvatarVariant = 'circular';
-  
-  /** Añade bordes */
-  @Input() bordered: boolean = false;
 }
 ```
 
@@ -1114,7 +1098,6 @@ interface AvatarGroupConfig {
   spacing?: number | string;
   size?: NUISize;
   variant?: AvatarVariant;
-  bordered?: boolean;
 }
 ```
 

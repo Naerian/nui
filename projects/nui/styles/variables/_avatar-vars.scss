@@ -1,0 +1,115 @@
+@use '../../styles/config' as config;
+
+// ========================================
+// AVATAR - Variables & Tokens
+// ========================================
+
+// TOKENS
+$avatar-size-xs: 1.5rem !default; // 24px
+$avatar-size-sm: 2rem !default; // 32px
+$avatar-size-md: 2.5rem !default; // 40px
+$avatar-size-lg: 3.5rem !default; // 56px
+$avatar-size-xl: 5rem !default; // 80px
+
+$avatar-font-size-xs: 0.625rem !default; // 10px
+$avatar-font-size-sm: 0.75rem !default; // 12px
+$avatar-font-size-md: 0.875rem !default; // 14px
+$avatar-font-size-lg: 1.25rem !default; // 20px
+$avatar-font-size-xl: 1.5rem !default; // 24px
+
+$avatar-icon-size-xs: 0.875rem !default; // 14px
+$avatar-icon-size-sm: 1rem !default; // 16px
+$avatar-icon-size-md: 1.25rem !default; // 20px
+$avatar-icon-size-lg: 1.75rem !default; // 28px
+$avatar-icon-size-xl: 2.5rem !default; // 40px
+
+$avatar-border-radius-rounded: 0.5rem !default;
+$avatar-border-radius-circular: 50% !default;
+$avatar-border-radius-square: 0 !default;
+
+$avatar-font-weight: 500 !default;
+$avatar-line-height: 1 !default;
+$avatar-text-transform: uppercase !default;
+
+$avatar-group-spacing: -0.5rem !default;
+$avatar-group-border-width: 0.063rem !default;
+$avatar-group-hover-scale: 1.1 !default;
+$avatar-group-z-index-hover: 10 !default;
+
+// ===== EXCESO ("+N") =====
+$avatar-excess-font-size-xs: 0.375rem !default; // 6px
+$avatar-excess-font-size-sm: 0.5rem !default; // 8px
+$avatar-excess-font-size-md: 0.625rem !default; // 10px
+$avatar-excess-font-size-lg: 0.75rem !default; // 12px
+$avatar-excess-font-size-xl: 0.875rem !default; // 14px
+$avatar-excess-font-weight: 600 !default;
+
+// ===== TRANSICIONES =====
+$avatar-transition-duration: 0.2s !default;
+$avatar-transition-timing: ease !default;
+
+// ===== Z-INDEX =====
+$avatar-z-index-base: 0 !default;
+$avatar-z-index-hover: 10 !default;
+
+// MIXIN
+@mixin nui-avatar-vars {
+  // Sizes
+  --nui-avatar-size-xs: #{$avatar-size-xs};
+  --nui-avatar-size-sm: #{$avatar-size-sm};
+  --nui-avatar-size-md: #{$avatar-size-md};
+  --nui-avatar-size-lg: #{$avatar-size-lg};
+  --nui-avatar-size-xl: #{$avatar-size-xl};
+
+  // Excess sizes
+  --nui-avatar-excess-size-xs: calc(#{$avatar-size-xs} / 2);
+  --nui-avatar-excess-size-sm: calc(#{$avatar-size-sm} / 2);
+  --nui-avatar-excess-size-md: calc(#{$avatar-size-md} / 2);
+  --nui-avatar-excess-size-lg: calc(#{$avatar-size-lg} / 2);
+  --nui-avatar-excess-size-xl: calc(#{$avatar-size-xl} / 2);
+
+  // Font sizes
+  --nui-avatar-font-size-xs: #{$avatar-font-size-xs};
+  --nui-avatar-font-size-sm: #{$avatar-font-size-sm};
+  --nui-avatar-font-size-md: #{$avatar-font-size-md};
+  --nui-avatar-font-size-lg: #{$avatar-font-size-lg};
+  --nui-avatar-font-size-xl: #{$avatar-font-size-xl};
+
+  // Icon sizes
+  --nui-avatar-icon-size-xs: #{$avatar-icon-size-xs};
+  --nui-avatar-icon-size-sm: #{$avatar-icon-size-sm};
+  --nui-avatar-icon-size-md: #{$avatar-icon-size-md};
+  --nui-avatar-icon-size-lg: #{$avatar-icon-size-lg};
+  --nui-avatar-icon-size-xl: #{$avatar-icon-size-xl};
+
+  // Border & Radius
+  --nui-avatar-border-radius-rounded: #{$avatar-border-radius-rounded};
+  --nui-avatar-border-radius-circular: #{$avatar-border-radius-circular};
+  --nui-avatar-border-radius-square: #{$avatar-border-radius-square};
+
+  // Typography
+  --nui-avatar-font-weight: #{$avatar-font-weight};
+  --nui-avatar-line-height: #{$avatar-line-height};
+  --nui-avatar-text-transform: #{$avatar-text-transform};
+
+  // Z-index
+  --nui-avatar-z-index-base: #{$avatar-z-index-base};
+  --nui-avatar-z-index-hover: #{$avatar-z-index-hover};
+
+  // Avatar Group
+  --nui-avatar-group-spacing: #{$avatar-group-spacing};
+  --nui-avatar-group-border-width: #{$avatar-group-border-width};
+  --nui-avatar-group-hover-scale: #{$avatar-group-hover-scale};
+  --nui-avatar-group-z-index-hover: #{$avatar-group-z-index-hover};
+
+  // Excess
+  --nui-avatar-excess-font-size-xs: #{$avatar-excess-font-size-xs};
+  --nui-avatar-excess-font-size-sm: #{$avatar-excess-font-size-sm};
+  --nui-avatar-excess-font-size-md: #{$avatar-excess-font-size-md};
+  --nui-avatar-excess-font-size-lg: #{$avatar-excess-font-size-lg};
+  --nui-avatar-excess-font-size-xl: #{$avatar-excess-font-size-xl};
+  --nui-avatar-excess-font-weight: #{$avatar-excess-font-weight};
+
+  // Transitions
+  --nui-avatar-transition: all #{$avatar-transition-duration} #{$avatar-transition-timing};
+}

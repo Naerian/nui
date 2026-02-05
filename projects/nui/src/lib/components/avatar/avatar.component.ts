@@ -20,20 +20,6 @@ import { NUIColor, NUISize } from '../../configs';
   templateUrl: './avatar.component.html',
   styleUrl: './avatar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  host: {
-    class: 'nui-avatar',
-    // Clases de variante
-    '[class.nui-avatar--circular]': 'variant() === "circular"',
-    '[class.nui-avatar--rounded]': 'variant() === "rounded"',
-    '[class.nui-avatar--square]': 'variant() === "square"',
-    // Clases dinámicas compuestas (size + color)
-    '[class]': 'hostClasses()',
-    // Estilos inline para tamaño custom
-    '[style.width.px]': 'customSize()',
-    '[style.height.px]': 'customSize()',
-    '[style.font-size.px]': 'customFontSize()',
-  },
 })
 export class AvatarComponent {
   // ========================================================================
@@ -99,7 +85,7 @@ export class AvatarComponent {
   /**
    * Genera las clases CSS de modificadores (size y color)
    */
-  protected readonly hostClasses = computed(() => {
+  protected readonly mainClasses = computed(() => {
     const classes: string[] = [];
 
     // Solo añadimos clase de tamaño si NO hay tamaño custom

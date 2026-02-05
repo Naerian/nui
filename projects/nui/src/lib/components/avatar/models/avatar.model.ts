@@ -86,12 +86,6 @@ export interface AvatarGroupConfig {
   variant?: AvatarVariant;
 
   /**
-   * Mostrar borde alrededor de cada avatar
-   * @default true
-   */
-  bordered?: boolean;
-
-  /**
    * Clases CSS adicionales para el grupo
    */
   class?: string | string[];
