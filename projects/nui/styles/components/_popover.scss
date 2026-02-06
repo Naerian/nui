@@ -296,7 +296,7 @@
   }
 
   // Responsive mode (popover should never exceed viewport width on mobile)
-  @media (max-width: 480px) {
+  @include global.media-xs {
     .nui-popover,
     .nui-popover.nui-popover-wide {
       max-width: calc(100vw - 2rem);

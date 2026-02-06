@@ -24,37 +24,6 @@
 }
 
 /// =======================================
-/// LAYOUT MIXINS
-/// =======================================
-
-/// Configurable flexbox layout helper
-/// Consolidates common flexbox patterns into a single API
-/// @group Layout
-/// @access public
-/// @since 1.0.0
-/// @param {String} $direction [row] - Flex direction (`row`, `column`)
-/// @param {String} $align [stretch] - Cross-axis alignment
-/// @param {String} $justify [flex-start] - Main-axis alignment
-/// @example scss
-///   @include flex(row, center, space-between);
-///   @include flex(column, flex-start, center);
-@mixin flex($direction: row, $align: stretch, $justify: flex-start) {
-  display: flex;
-
-  @if $direction != row {
-    flex-direction: $direction;
-  }
-
-  @if $align != stretch {
-    align-items: $align;
-  }
-
-  @if $justify != flex-start {
-    justify-content: $justify;
-  }
-}
-
-/// =======================================
 /// STATE MIXINS
 /// =======================================
 
@@ -110,22 +79,6 @@
   text-overflow: ellipsis;
 }
 
-/// Applies a simple outline-based focus style
-/// Intended for lightweight focus states
-/// @group Utilities
-/// @access public
-/// @since 1.0.0
-/// @param {Color} $color [var(--outline-color)] - Outline color
-/// @example scss
-///   @include outline-focus;
-///   @include outline-focus(#14b8a6);
-@mixin outline-focus($color: var(--outline-color)) {
-  outline-color: $color;
-  outline-style: solid;
-  outline-width: var(--nui-border-width-xs);
-  box-shadow: 0 0 2px var(--nui-border-width-xs) var(--nui-focus-ring-color);
-}
-
 /// Applies an accessible focus ring using `:focus-visible`
 /// Conforms to design-system accessibility guidelines
 /// @group Utilities
@@ -143,26 +96,6 @@
       0 0 0 calc(var(--nui-focus-ring-width) + 1px) var(--nui-bg-primary),
       0 0 0 calc(var(--nui-focus-ring-width) + 2px) #{$color};
   }
-}
-
-/// Applies an error outline to form fields
-/// @group Utilities
-/// @access public
-/// @since 1.0.0
-/// @example scss
-///   @include outline-field-error;
-@mixin outline-field-error {
-  box-shadow: 0 0 2px var(--nui-border-width-xs) var(--nui-color-danger);
-}
-
-/// Applies an error border to form fields
-/// @group Utilities
-/// @access public
-/// @since 1.0.0
-/// @example scss
-///   @include field-error;
-@mixin field-error {
-  border: var(--nui-border-width-xs) solid var(--nui-color-danger);
 }
 
 /// =======================================
