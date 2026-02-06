@@ -1,190 +1,183 @@
-@use "../config";
-@use "../mixins";
-@use "../variables/tooltip/tooltip-variables.scss";
+@use '../config';
+@use '../mixins';
+@use '../variables/tooltip-vars';
 
-// ========================================
-// TOOLTIP - Estilos globales
-// ========================================
-// Estilos para el componente tooltip usando CDK Overlay.
-// Los estilos deben ser globales porque el tooltip se renderiza
-// en un overlay fuera del componente host.
-// ========================================
+@mixin nui-tooltip-styles {
+  .nui-tooltip-overlay {
+    z-index: var(--tooltip-z-index);
+    pointer-events: none;
+  }
 
-.nui-tooltip-overlay {
-  z-index: var(--tooltip-z-index);
-  pointer-events: none;
-}
+  .nui-tooltip {
+    position: relative;
+    display: block;
+    max-width: var(--tooltip-max-width);
+    padding: 0;
+    background-color: var(--tooltip-bg);
+    color: var(--tooltip-text);
+    border: var(--tooltip-border-width) solid var(--tooltip-border-color);
+    border-radius: var(--tooltip-border-radius);
+    box-shadow: var(--tooltip-shadow);
+    transition:
+      opacity var(--tooltip-transition-duration) var(--tooltip-transition-timing),
+      transform var(--tooltip-transition-duration) var(--tooltip-transition-timing);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+    -webkit-font-smoothing: subpixel-antialiased;
 
-.nui-tooltip {
-  position: relative;
-  display: block;
-  max-width: var(--tooltip-max-width);
-  background-color: var(--tooltip-bg);
-  color: var(--tooltip-text);
-  border: var(--tooltip-border-width) solid var(--tooltip-border-color);
-  border-radius: var(--tooltip-border-radius);
-  box-shadow: var(--tooltip-shadow);
-  transition:
-    opacity var(--tooltip-transition-duration) var(--tooltip-transition-timing),
-    transform var(--tooltip-transition-duration)
-      var(--tooltip-transition-timing);
+    &__content {
+      padding: var(--tooltip-padding-y) var(--tooltip-padding-x);
+      font-size: var(--tooltip-font-size);
+      font-weight: var(--tooltip-font-weight);
+      line-height: var(--tooltip-line-height);
+      text-align: center;
+      word-wrap: break-word;
 
-  // Contenido del tooltip
-  &__content {
-    padding: var(--tooltip-padding-y) var(--tooltip-padding-x);
+      p {
+        margin: 0;
+        &:not(:last-child) {
+          margin-bottom: 0.5em;
+        }
+      }
 
-    // Tipografía
-    font-size: var(--tooltip-font-size);
-    font-weight: var(--tooltip-font-weight);
-    line-height: var(--tooltip-line-height);
-    text-align: center;
-    word-wrap: break-word;
-
-    // Por si el tooltip contiene HTML
-    p {
-      margin: 0;
-
-      &:not(:last-child) {
-        margin-bottom: 0.25rem;
+      strong,
+      b {
+        font-weight: var(--nui-font-weight-semibold);
       }
     }
 
-    strong,
-    b {
-      font-weight: var(--nui-font-weight-semibold);
+    &__arrow {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+
+    &[data-position='top'] {
+      margin-bottom: var(--tooltip-arrow-size);
+
+      .nui-tooltip__arrow {
+        bottom: calc((var(--tooltip-arrow-size) * -1) + var(--tooltip-border-width));
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: var(--tooltip-arrow-size) var(--tooltip-arrow-size) 0
+          var(--tooltip-arrow-size);
+        border-color: var(--tooltip-bg) transparent transparent transparent;
+        filter: drop-shadow(0 1px 0 var(--tooltip-border-color));
+      }
+    }
+
+    &[data-position='bottom'] {
+      margin-top: var(--tooltip-arrow-size);
+
+      .nui-tooltip__arrow {
+        top: calc((var(--tooltip-arrow-size) * -1) + var(--tooltip-border-width));
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 0 var(--tooltip-arrow-size) var(--tooltip-arrow-size)
+          var(--tooltip-arrow-size);
+        border-color: transparent transparent var(--tooltip-bg) transparent;
+        filter: drop-shadow(0 -1px 0 var(--tooltip-border-color));
+      }
+    }
+
+    &[data-position='left'] {
+      margin-right: var(--tooltip-arrow-size);
+
+      .nui-tooltip__arrow {
+        right: calc((var(--tooltip-arrow-size) * -1) + var(--tooltip-border-width));
+        top: 50%;
+        transform: translateY(-50%);
+        border-width: var(--tooltip-arrow-size) 0 var(--tooltip-arrow-size)
+          var(--tooltip-arrow-size);
+        border-color: transparent transparent transparent var(--tooltip-bg);
+        filter: drop-shadow(1px 0 0 var(--tooltip-border-color));
+      }
+    }
+
+    &[data-position='right'] {
+      margin-left: var(--tooltip-arrow-size);
+
+      .nui-tooltip__arrow {
+        left: calc((var(--tooltip-arrow-size) * -1) + var(--tooltip-border-width));
+        top: 50%;
+        transform: translateY(-50%);
+        border-width: var(--tooltip-arrow-size) var(--tooltip-arrow-size) var(--tooltip-arrow-size)
+          0;
+        border-color: transparent var(--tooltip-bg) transparent transparent;
+        filter: drop-shadow(-1px 0 0 var(--tooltip-border-color));
+      }
+    }
+
+    &.nui-tooltip-left &__content {
+      text-align: left;
+    }
+    &.nui-tooltip-right &__content {
+      text-align: right;
     }
   }
 
-  // Flecha del tooltip (sistema de triángulos con borders)
-  &__arrow {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
+  .nui-tooltip-overlay.nui-tooltip-interactive {
+    pointer-events: auto;
   }
 
-  // Posicionamiento y forma de la flecha según la posición del tooltip
-  &[data-position="top"] &__arrow {
-    bottom: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 6px 6px 0 6px;
-    border-color: var(--tooltip-bg) transparent transparent transparent;
-    filter: drop-shadow(0 1px 0 var(--tooltip-border-color));
-  }
+  .nui-tooltip-interactive .nui-tooltip {
+    user-select: text;
+    cursor: auto;
 
-  &[data-position="bottom"] &__arrow {
-    top: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 0 6px 6px 6px;
-    border-color: transparent transparent var(--tooltip-bg) transparent;
-    filter: drop-shadow(0 -1px 0 var(--tooltip-border-color));
-  }
+    &__content {
+      text-align: left;
 
-  &[data-position="left"] &__arrow {
-    right: -6px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-width: 6px 0 6px 6px;
-    border-color: transparent transparent transparent var(--tooltip-bg);
-    filter: drop-shadow(1px 0 0 var(--tooltip-border-color));
-  }
-
-  &[data-position="right"] &__arrow {
-    left: -6px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-width: 6px 6px 6px 0;
-    border-color: transparent var(--tooltip-bg) transparent transparent;
-    filter: drop-shadow(-1px 0 0 var(--tooltip-border-color));
-  }
-
-  // Para templates personalizados que necesiten alineación diferente
-  &.nui-tooltip-left &__content {
-    text-align: left;
-  }
-
-  &.nui-tooltip-right &__content {
-    text-align: right;
-  }
-}
-
-// ========================================
-// TOOLTIP INTERACTIVO
-// ========================================
-// Estilos adicionales para tooltips que permiten interacción
-
-.nui-tooltip-overlay.nui-tooltip-interactive {
-  // Permitir interacción con el tooltip
-  pointer-events: auto;
-}
-
-.nui-tooltip-interactive .nui-tooltip {
-  // Permitir selección de texto en tooltips interactivos
-  user-select: text;
-  cursor: default;
-
-  &__content {
-    // Mejor alineación para contenido interactivo
-    text-align: left;
-
-    // Estilos para enlaces dentro del tooltip
-    a {
-      color: var(--nui-color-primary);
-      text-decoration: underline;
-      font-weight: var(--nui-font-weight-medium);
-      transition: color 0.2s ease;
-
-      &:hover {
-        color: var(--nui-color-primary-hover);
+      a {
+        color: var(--nui-color-primary);
         text-decoration: none;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: var(--nui-color-primary);
+          opacity: 0.8;
+        }
       }
 
-      &:focus-visible {
-        outline: 2px solid var(--nui-color-primary);
-        outline-offset: 2px;
-        border-radius: 2px;
+      button {
+        margin-top: 0.5rem;
+        font-size: 0.75rem;
       }
-    }
-
-    // Estilos para botones dentro del tooltip
-    button {
-      margin-top: 0.5rem;
-      font-size: var(--nui-font-size-sm);
-    }
-
-    // Estilos para código inline dentro del tooltip
-    code {
-      background-color: rgba(0, 0, 0, 0.1);
-      padding: 0.125rem 0.375rem;
-      border-radius: 0.25rem;
-      font-family: var(--nui-font-family-monospace, "Courier New", monospace);
-      font-size: 0.875em;
-    }
-
-    // Estilos para bloques de código
-    pre {
-      margin: 0.5rem 0;
-      padding: 0.5rem;
-      background-color: rgba(0, 0, 0, 0.1);
-      border-radius: 0.25rem;
-      overflow-x: auto;
 
       code {
-        background-color: transparent;
-        padding: 0;
+        background-color: rgba(255, 255, 255, 0.15);
+        color: inherit;
+        padding: 0.125rem 0.25rem;
+        border-radius: 0.25rem;
+        font-family: var(--nui-font-family-mono, monospace);
+        font-size: 0.85em;
+        border: 1px solid rgba(255, 255, 255, 0.1);
       }
-    }
 
-    // Estilos para listas
-    ul,
-    ol {
-      margin: 0.5rem 0;
-      padding-left: 1.5rem;
+      pre {
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 0.25rem;
+        overflow-x: auto;
+        border: 1px solid rgba(255, 255, 255, 0.1);
 
-      li {
-        margin-bottom: 0.25rem;
+        code {
+          background-color: transparent;
+          padding: 0;
+          border: none;
+          color: var(--tooltip-text);
+        }
+      }
+
+      ul,
+      ol {
+        margin: 0.5rem 0;
+        padding-left: 1.25rem;
+        li {
+          margin-bottom: 0.25rem;
+        }
       }
     }
   }

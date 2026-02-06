@@ -1,13 +1,14 @@
 // Import NUI complete bundle
 @import '../../nui/styles/nui-bundle.scss';
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }
 
 body {
-  font-family: var(--nui-font-family); 
+  font-family: var(--nui-font-family);
   background-color: var(--nui-bg-secondary);
   color: var(--nui-text-primary);
 }
@@ -25,7 +26,7 @@ body {
 ::-webkit-scrollbar-thumb {
   background: var(--nui-border-primary);
   border-radius: 5px;
-  
+
   &:hover {
     background: var(--nui-text-tertiary);
   }
@@ -116,16 +117,17 @@ a {
 
 // Code blocks
 code {
-  font-family: 'Courier New', 'Consolas', monospace;
-  background-color: var(--nui-bg-tertiary);
-  padding: 0.2em 0.4em;
-  border-radius: var(--nui-border-radius-sm);
-  font-size: 0.9em;
   color: var(--nui-color-accent);
+  background: color-mix(in srgb, var(--nui-color-accent) 10%, transparent);
+  border-radius: 0.25rem;
+  padding: 0.15rem 0.35rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
 }
 
 pre code {
   background-color: transparent;
+  border: none;
   padding: 0;
 }
 

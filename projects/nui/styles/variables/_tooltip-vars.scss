@@ -1,0 +1,73 @@
+// ========================================
+// TOOLTIP - Variables & Config
+// ========================================
+
+// 1. CONFIGURACIÓN (SCSS Defaults)
+// ----------------------------------------
+
+// Colores (Estilo "Inverse" por defecto: fondo oscuro, texto blanco)
+$tooltip-bg: var(--nui-gray-900) !default;
+$tooltip-text: #ffffff !default;
+
+// Bordes
+$tooltip-border-radius: var(--nui-border-radius-sm) !default;
+$tooltip-border-width: 1px !default;
+// Un borde blanco semitransparente (10%) ayuda mucho en Dark Mode
+$tooltip-border-color: rgba(255, 255, 255, 0.1) !default;
+
+// Espaciado y Tamaño
+$tooltip-padding-y: 0.25rem !default; // 4px (Compacto)
+$tooltip-padding-x: 0.75rem !default; // 12px
+$tooltip-max-width: 14rem !default;
+
+// Tipografía
+$tooltip-font-size: var(--nui-font-size-xs) !default;
+$tooltip-font-weight: var(--nui-font-weight-medium) !default;
+$tooltip-line-height: 1.3 !default;
+
+// Elevación
+// Usamos 'md' (media) en lugar de 'elevated' (lg) porque el tooltip es pequeño
+$tooltip-shadow: var(--nui-shadow-md) !default;
+
+// Comportamiento
+$tooltip-z-index: 1000 !default;
+$tooltip-transition-duration: 150ms !default;
+$tooltip-transition-timing: ease-out !default;
+
+// Flecha
+$tooltip-arrow-size: 0.4rem !default;
+
+// 2. MAPEO CSS (Custom Properties)
+// ----------------------------------------
+
+@mixin nui-tooltip-vars {
+  // Colores
+  --tooltip-bg: #{$tooltip-bg};
+  --tooltip-text: #{$tooltip-text};
+
+  // Layout
+  --tooltip-padding-y: #{$tooltip-padding-y};
+  --tooltip-padding-x: #{$tooltip-padding-x};
+  --tooltip-max-width: #{$tooltip-max-width};
+
+  // Tipografía
+  --tooltip-font-size: #{$tooltip-font-size};
+  --tooltip-font-weight: #{$tooltip-font-weight};
+  --tooltip-line-height: #{$tooltip-line-height};
+
+  // Bordes
+  --tooltip-border-radius: #{$tooltip-border-radius};
+  --tooltip-border-width: #{$tooltip-border-width};
+  --tooltip-border-color: #{$tooltip-border-color};
+
+  // Sombra y Z-Index
+  --tooltip-shadow: #{$tooltip-shadow};
+  --tooltip-z-index: #{$tooltip-z-index};
+
+  // Animación
+  --tooltip-transition-duration: #{$tooltip-transition-duration};
+  --tooltip-transition-timing: #{$tooltip-transition-timing};
+
+  // Flecha
+  --tooltip-arrow-size: #{$tooltip-arrow-size};
+}

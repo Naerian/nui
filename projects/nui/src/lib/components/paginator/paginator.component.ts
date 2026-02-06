@@ -63,7 +63,7 @@ import {
   PaginatorLayoutAreaEnum,
 } from './models/paginator.model';
 import { ButtonGroupComponent } from '../button-group/button-group.component';
-import { ButtonGroupOption } from '../button-group/models/button-group.model';
+import { BtnGroupOption } from '../button-group/models/button-group.model';
 import { ButtonDirective } from 'nui';
 
 /**
@@ -716,7 +716,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   /**
    * Opciones para el selector de tamaño de página
    */
-  pageSizeOptionsData = computed<ButtonGroupOption[]>(() => {
+  pageSizeOptionsData = computed<BtnGroupOption[]>(() => {
     return this.pageSizeOptions().map((size: number) => ({
       label: size.toString(),
       tooltip: this._translations.paginator.itemsPerPage + ' ' + size.toString(),

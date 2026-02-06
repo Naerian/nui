@@ -516,29 +516,59 @@ export class ThemeService {
 
   private generateButtonGroupVariables(name: string, color: string): string {
     const contrastText = this.getContrastColor(color);
+
+    // Opacidades
     const alpha10 = this.withAlpha(color, 0.1);
     const alpha20 = this.withAlpha(color, 0.2);
-    const alpha30 = this.withAlpha(color, 0.3);
     const alpha40 = this.withAlpha(color, 0.4);
-    const alpha80 = this.withAlpha(color, 0.8);
 
-    // Colores base de superficie según modo
-    const inactiveBorder = this._isDarkMode()
+    // Variables de superficie (para el estado 'base' de la variante Solid)
+    const sysBg = 'var(--nui-bg-primary)';
+    const sysBgSecondary = 'var(--nui-bg-secondary)';
+    const sysBorder = this._isDarkMode()
       ? 'var(--nui-border-primary)'
       : 'var(--nui-border-secondary)';
-    const inactiveBg = this._isDarkMode() ? 'var(--nui-bg-secondary)' : 'var(--nui-bg-primary)';
+    const sysTextSec = 'var(--nui-text-secondary)';
 
     return `
-      --nui-btn-group-${name}-color: ${color};
-      --nui-btn-group-${name}-hover: ${alpha80};
-      --nui-btn-group-${name}-contrast: ${contrastText};
-      --nui-btn-group-${name}-alpha-10: ${alpha10};
-      --nui-btn-group-${name}-alpha-20: ${alpha20};
-      --nui-btn-group-${name}-alpha-30: ${alpha30};
-      --nui-btn-group-${name}-alpha-40: ${alpha40};
-      --nui-btn-group-${name}-in-bg: ${inactiveBg};
-      --nui-btn-group-${name}-in-border: ${inactiveBorder};
-    `;
+    /* === VARIANT: SOLID === */
+    --nui-btn-group-${name}-solid-base-bg: ${sysBg};
+    --nui-btn-group-${name}-solid-base-text: ${sysTextSec};
+    --nui-btn-group-${name}-solid-base-border: ${sysBorder};
+    --nui-btn-group-${name}-solid-sel-bg: ${color};
+    --nui-btn-group-${name}-solid-sel-text: ${contrastText};
+    --nui-btn-group-${name}-solid-sel-border: ${color};
+    --nui-btn-group-${name}-solid-hover-bg: ${alpha10};
+
+    /* === VARIANT: OUTLINE === */
+    --nui-btn-group-${name}-outline-base-bg: transparent;
+    --nui-btn-group-${name}-outline-base-text: ${color};
+    --nui-btn-group-${name}-outline-base-border: ${alpha40};
+    --nui-btn-group-${name}-outline-sel-bg: ${alpha20};
+    --nui-btn-group-${name}-outline-sel-text: ${color};
+    --nui-btn-group-${name}-outline-sel-border: ${color};
+    --nui-btn-group-${name}-outline-hover-bg: ${alpha10};
+
+    /* === VARIANT: GHOST === */
+    --nui-btn-group-${name}-ghost-base-bg: transparent;
+    --nui-btn-group-${name}-ghost-base-text: ${color};
+    --nui-btn-group-${name}-ghost-base-border: transparent;
+    --nui-btn-group-${name}-ghost-sel-bg: ${alpha20};
+    --nui-btn-group-${name}-ghost-sel-text: ${color};
+    --nui-btn-group-${name}-ghost-sel-border: transparent;
+    --nui-btn-group-${name}-ghost-hover-bg: ${alpha10};
+
+    /* === VARIANT: SEGMENTED === */
+    --nui-btn-group-${name}-segmented-track-bg: ${sysBgSecondary};
+    --nui-btn-group-${name}-segmented-track-border: ${sysBorder};
+    --nui-btn-group-${name}-segmented-base-bg: transparent;
+    --nui-btn-group-${name}-segmented-base-text: var(--nui-text-secondary);
+    --nui-btn-group-${name}-segmented-base-border: transparent;
+    --nui-btn-group-${name}-segmented-sel-bg: ${color};
+    --nui-btn-group-${name}-segmented-sel-text: ${contrastText};
+    --nui-btn-group-${name}-segmented-sel-border: transparent; /* Generalmente sin borde */
+    --nui-btn-group-${name}-segmented-hover-bg: ${alpha10};
+  `;
   }
 
   private generatePaginatorVariables(name: string, color: string): string {
@@ -628,10 +658,17 @@ export class ThemeService {
    * El tooltip usa colores inversos al tema para mejor contraste.
    */
   private generateTooltipVariables(): string {
+    const isDark = this._isDarkMode();
+    const grays = this._currentPreset().grays || this.getDefaultGrays();
+    const bg = isDark ? grays[700] : grays[900];
+    const text = PURE_COLORS.WHITE;
+    const border = isDark ? 'var(--nui-border-weak)' : 'transparent';
+
     return `
-  --tooltip-bg: var(--nui-bg-primary);
-  --tooltip-text: var(--nui-text-primary);
-`;
+      --tooltip-bg: ${bg};
+      --tooltip-text: ${text};
+      --tooltip-border-color: ${border};
+    `;
   }
 
   /**
@@ -640,33 +677,38 @@ export class ThemeService {
    */
   private generatePopoverVariables(name: string, color: string): string {
     const contrastText = this.getContrastColor(color);
-    const alpha80 = this.withAlpha(color, 0.7);
-    const alpha40 = this.withAlpha(color, 0.4);
+    const grays = this._currentPreset().grays || this.getDefaultGrays();
 
-    // Usamos las variables base del sistema para asegurar consistencia
+    // Variables auxiliares
+    const alpha80 = this.withAlpha(color, 0.7); // Para Ghost/Glass BG
+    const alpha40 = this.withAlpha(color, 0.4); // Para Outline Border
+
+    // Colores base de superficie según modo
     const surfaceBg = this._isDarkMode() ? 'var(--nui-bg-secondary)' : 'var(--nui-bg-primary)';
     const surfaceText = 'var(--nui-text-primary)';
+    const surfaceBorder = this._isDarkMode() ? grays[700] : grays[200];
 
-    // Aquí respetamos tus grays específicos para el borde si lo prefieres,
-    // o usamos las variables semánticas de borde.
-    const surfaceBorder = this._isDarkMode() ? 'var(--nui-gray-700)' : 'var(--nui-gray-200)';
+    return `
+    /* === BASE SURFACE COLORS === */
+    --nui-popover-surface-bg: ${surfaceBg};
+    --nui-popover-surface-text: ${surfaceText};
+    --nui-popover-surface-border: ${surfaceBorder};
 
-    return `      
-      /* Opción 1: Colored (Todo del color, ej: tooltip error) */
-      --nui-popover-${name}-bg: ${color};
-      --nui-popover-${name}-text: ${contrastText};
-      --nui-popover-${name}-border: ${color}; 
+    /* === VARIANT: SOLID (Default) === */
+    --nui-popover-${name}-solid-bg: ${color};
+    --nui-popover-${name}-solid-text: ${contrastText};
+    --nui-popover-${name}-solid-border: ${color};
 
-      --nui-popover-${name}-outline-border: ${alpha40};
+    /* === VARIANT: OUTLINE === */
+    --nui-popover-${name}-outline-bg: ${surfaceBg};
+    --nui-popover-${name}-outline-text: ${color};
+    --nui-popover-${name}-outline-border: ${alpha40};
 
-      --nui-popover-${name}-ghost-bg: ${alpha80};
-      --nui-popover-${name}-ghost-text: ${contrastText};
-
-      /* Opción 2: Surface (Estándar) */
-      --nui-popover-surface-bg: ${surfaceBg};
-      --nui-popover-surface-text: ${surfaceText};
-      --nui-popover-surface-border: ${surfaceBorder};
-    `;
+    /* === VARIANT: GHOST === */
+    --nui-popover-${name}-ghost-bg: ${alpha80};
+    --nui-popover-${name}-ghost-text: ${contrastText};
+    --nui-popover-${name}-ghost-border: transparent;
+  `;
   }
 
   /**

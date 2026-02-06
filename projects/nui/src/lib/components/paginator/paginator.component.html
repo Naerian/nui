@@ -97,7 +97,7 @@
     @case ('pageSize') {
       @if (canShowElement('pageSize')) {
         <div class="nui-paginator__page-size">
-          <nui-button-group
+          <nui-btn-group
             [options]="pageSizeOptionsData()"
             [ngModel]="itemsPerPage().toString()"
             [size]="effectiveSize()"

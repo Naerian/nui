@@ -3,34 +3,37 @@
 @use '../variables/popover-vars' as vars;
 
 @mixin popover-theme($color: null, $variant: 'solid') {
-  @if $color {
-    // === IT HAS A DEFINED COLOR (Primary, Danger, etc.) ===
-    @if $variant == 'solid' {
-      --popover-bg: var(--nui-popover-#{$color}-bg);
-      --popover-text: var(--nui-popover-#{$color}-text);
-      --popover-border-color: var(--nui-popover-#{$color}-border);
-      --popover-arrow-filter: none;
-    }
-
-    @if $variant == 'outline' {
-      --popover-bg: var(--nui-popover-surface-bg);
-      --popover-text: var(--nui-popover-#{$color}-bg);
-      --popover-border-color: var(--nui-popover-#{$color}-outline-border);
-      --popover-shadow: var(--nui-popover-shadow);
-    }
-
-    @if $variant == 'ghost' {
-      --popover-bg: var(--nui-popover-#{$color}-ghost-bg);
-      --popover-text: var(--nui-popover-#{$color}-ghost-text);
-      --popover-border-color: transparent;
-      --popover-shadow: var(--nui-popover-shadow);
-    }
-  } @else {
-    // === NO COLOR (Surface Default) ===
+  // Option A: If there is no color, we use the "Surface" fallback (hardcoded or global variable)
+  @if $color == null {
     --popover-bg: var(--nui-popover-surface-bg);
     --popover-text: var(--nui-popover-surface-text);
     --popover-border-color: var(--nui-popover-surface-border);
     --popover-shadow: var(--nui-popover-shadow);
+  }
+
+  // Option B: If there is a color, it is DYNAMIC
+  @else {
+    // We interpolate the variant name.
+    // If you pass 'solid', it looks for '...-solid-bg'.
+    // If you pass 'ghost', it looks for '...-ghost-bg'.
+    // If you pass 'outline', it would look for '...-outline-bg' (without touching this SCSS).
+
+    --popover-bg: var(--nui-popover-#{$color}-#{$variant}-bg);
+    --popover-text: var(--nui-popover-#{$color}-#{$variant}-text);
+    --popover-border-color: var(--nui-popover-#{$color}-#{$variant}-border);
+
+    // Shadow: We can do the same or leave the default
+    --popover-shadow: var(--nui-popover-shadow);
+
+    // Specific adjustment for Solid (Arrow Filter)
+    // This is the only thing that might require a small helper,
+    // or you can handle it with a CSS variable as well (--popover-arrow-opacity)
+    @if $variant == 'solid' {
+      --popover-arrow-filter: none;
+    } @else {
+      // Reset just in case
+      --popover-arrow-filter: drop-shadow(0 1px 0 var(--popover-border-color));
+    }
   }
 }
 
@@ -65,6 +68,10 @@
     transition:
       opacity var(--nui-popover-transition-duration) var(--nui-popover-transition-timing),
       transform var(--nui-popover-transition-duration) var(--nui-popover-transition-timing);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+    -webkit-font-smoothing: subpixel-antialiased;
 
     &__content {
       font-size: var(--nui-popover-font-size);

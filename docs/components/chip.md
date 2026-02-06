@@ -504,7 +504,7 @@ form = new FormGroup({
 | Componente | Uso | Aspecto |
 |------------|-----|---------|
 | **nui-chip-*** | Tags, filtros, categorías, selección | Redondeado, separado, removible |
-| **nui-button-group** | Radio/checkbox, configuraciones | Botones unidos, toggle |
+| **nui-btn-group** | Radio/checkbox, configuraciones | Botones unidos, toggle |
 | **nui-button** | Acciones, navegación | Rectangular, acciones |
 
 ---

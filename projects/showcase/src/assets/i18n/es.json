@@ -315,11 +315,6 @@
         "description": "Permite cambiar el tipo de selección del botón entre radiobutton y checkbox",
         "note": "Cambia a <code>mode='checkbox'</code> para permitir seleccionar múltiples opciones a la vez. El valor devuelto será un Array."
       },
-      "segmented": {
-        "title": "Variante segmented",
-        "description": "Estilo visual tipo 'iOS Segmented Control'. Ideal para conmutadores de vistas (ej: Mes/Año, Lista/Mapa).",
-        "note": "Usa <code>layout='segmented'</code> para aplicar este estilo único."
-      },
       "complex": {
         "title": "Objetos complejos",
         "description": "Soporta arrays de objetos con propiedades personalizadas para etiqueta, valor y estado deshabilitado.",
@@ -334,6 +329,11 @@
         "title": "Colores y variantes",
         "description": "Compatible con todo el sistema de variantes (Solid, Outline, Ghost) y colores de NUI.",
         "note": "Combina <code>color</code> y <code>variant</code>."
+      },
+      "segmented": {
+        "title": "Variante segmented (Estilo iOS)",
+        "description": "Estilo visual tipo <strong>iOS Segmented Control</strong>, espcial y sumado a los tipos de variantes básicos de NUI. Ideal para conmutadores de vistas (ej: Mes / Año, Lista / Mapa).",
+        "note": "Usa <code>variant='segmented'</code> para aplicar esta variante única."
       },
       "sizes": {
         "title": "Tamaños",

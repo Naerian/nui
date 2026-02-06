@@ -23,11 +23,11 @@
       @switch (section.id) {
         @case ('basic') {
           <div class="example-preview flex-column">
-            <nui-button-group
+            <nui-btn-group
               [options]="cities"
               [ngModel]="selectedCity()"
               (ngModelChange)="selectedCity.set($event)"
-            ></nui-button-group>
+            ></nui-btn-group>
 
             <div class="value-display">
               Selected:
@@ -39,7 +39,7 @@
         @case ('modes') {
           <div class="example-preview flex-row gap-4">
             <div class="flex-column gap-4">
-              <nui-button-group
+              <nui-btn-group
                 mode="radio"
                 [options]="textFormats"
                 labelBy="label"
@@ -47,7 +47,7 @@
                 iconBy="icon"
                 [ngModel]="selectedFormatsRadio()"
                 (ngModelChange)="selectedFormatsRadio.set($event)"
-              ></nui-button-group>
+              ></nui-btn-group>
 
               <div class="value-display">
                 Format:
@@ -56,7 +56,7 @@
             </div>
 
             <div class="flex-column gap-4">
-              <nui-button-group
+              <nui-btn-group
                 mode="checkbox"
                 [options]="textFormats"
                 labelBy="label"
@@ -64,7 +64,7 @@
                 iconBy="icon"
                 [ngModel]="selectedFormats()"
                 (ngModelChange)="selectedFormats.set($event)"
-              ></nui-button-group>
+              ></nui-btn-group>
 
               <div class="value-display">
                 Format:
@@ -74,32 +74,16 @@
           </div>
         }
 
-        @case ('segmented') {
-          <div class="example-preview flex-column">
-            <nui-button-group
-              layout="segmented"
-              [options]="periods"
-              [ngModel]="selectedPeriod()"
-              (ngModelChange)="selectedPeriod.set($event)"
-            ></nui-button-group>
-
-            <div class="value-display">
-              Period:
-              <strong>{{ selectedPeriod() }}</strong>
-            </div>
-          </div>
-        }
-
         @case ('complex') {
           <div class="example-preview flex-column">
-            <nui-button-group
+            <nui-btn-group
               [options]="users"
               labelBy="name"
               valueBy="id"
               disabledBy="disabled"
               [ngModel]="selectedUser()"
               (ngModelChange)="selectedUser.set($event)"
-            ></nui-button-group>
+            ></nui-btn-group>
 
             <div class="value-display">
               User ID:
@@ -111,7 +95,7 @@
         @case ('icons') {
           <div class="example-preview flex-column">
             <div class="d-flex gap-4">
-              <nui-button-group
+              <nui-btn-group
                 [options]="textFormats"
                 iconBy="icon"
                 valueBy="id"
@@ -119,7 +103,7 @@
                 mode="checkbox"
                 [ngModel]="selectedFormats()"
                 (ngModelChange)="selectedFormats.set($event)"
-              ></nui-button-group>
+              ></nui-btn-group>
             </div>
 
             <div class="value-display">
@@ -131,46 +115,59 @@
 
         @case ('colors') {
           <div class="example-preview flex-row gap-4">
-            <nui-button-group [options]="['Yes', 'No']" color="success"></nui-button-group>
-            <nui-button-group
+            <nui-btn-group [options]="['Yes', 'No']" color="success"></nui-btn-group>
+            <nui-btn-group
               [options]="['High', 'Med', 'Low']"
               color="danger"
               variant="outline"
-            ></nui-button-group>
-            <nui-button-group
+            ></nui-btn-group>
+            <nui-btn-group
               [options]="['On', 'Off']"
               color="warning"
               variant="ghost"
-            ></nui-button-group>
+            ></nui-btn-group>
+          </div>
+        }
+
+        @case ('segmented') {
+          <div class="example-preview flex-column">
+            <nui-btn-group
+              [variant]="'segmented'"
+              [color]="'warning'"
+              [options]="periods"
+              [ngModel]="selectedPeriod()"
+              (ngModelChange)="selectedPeriod.set($event)"
+            ></nui-btn-group>
+
+            <div class="value-display">
+              Period:
+              <strong>{{ selectedPeriod() }}</strong>
+            </div>
           </div>
         }
 
         @case ('sizes') {
           <div class="example-preview flex-row gap-4">
-            <nui-button-group
-              [options]="['S', 'M', 'L']"
-              size="xs"
-              layout="segmented"
-            ></nui-button-group>
-            <nui-button-group
+            <nui-btn-group [options]="['S', 'M', 'L']" size="xs" layout="segmented"></nui-btn-group>
+            <nui-btn-group
               [options]="['Red', 'Green', 'Blue']"
               size="md"
               layout="segmented"
               color="secondary"
-            ></nui-button-group>
-            <nui-button-group
+            ></nui-btn-group>
+            <nui-btn-group
               [options]="['Month', 'Year']"
               size="xl"
               layout="segmented"
               color="accent"
-            ></nui-button-group>
+            ></nui-btn-group>
           </div>
         }
 
         @case ('width') {
           <div class="example-preview">
             <div style="width: 100%; max-width: 400px">
-              <nui-button-group width="full" [options]="['Log In', 'Sign Up']"></nui-button-group>
+              <nui-btn-group width="full" [options]="['Log In', 'Sign Up']"></nui-btn-group>
             </div>
           </div>
         }

@@ -1,78 +1,37 @@
 @use './../../../../styles/variables/button-group-vars';
 
 :host {
-  @include button-group-vars.nui-button-group-vars;
+  @include button-group-vars.nui-btn-group-vars;
 }
 
-@mixin apply-color-preset($variant, $color-name) {
-  $base: var(--nui-btn-group-#{$color-name}-color);
-  $contrast: var(--nui-btn-group-#{$color-name}-contrast);
-  $hover: var(--nui-btn-group-#{$color-name}-hover);
-  $alpha10: var(--nui-btn-group-#{$color-name}-alpha-10);
-  $alpha20: var(--nui-btn-group-#{$color-name}-alpha-20);
-  $alpha30: var(--nui-btn-group-#{$color-name}-alpha-30);
-  $alpha40: var(--nui-btn-group-#{$color-name}-alpha-40);
+@mixin button-group-theme($variant, $color-name) {
+  --grp-track-bg: var(--nui-btn-group-#{$color-name}-#{$variant}-track-bg, transparent);
+  --grp-track-border: var(--nui-btn-group-#{$color-name}-#{$variant}-track-border, transparent);
 
-  &.nui-button-group--#{$variant} {
-    .nui-button-group__option {
-      @if $variant == 'solid' {
-        color: $base;
-        &--selected {
-          background-color: $base;
-          border-color: $base;
-          color: $contrast;
-          &:hover {
-            background-color: $hover;
-            border-color: $hover;
-          }
-        }
-        &:hover:not(.nui-button-group__option--selected) {
-          background-color: $alpha10;
-        }
-      }
+  --grp-base-bg: var(--nui-btn-group-#{$color-name}-#{$variant}-base-bg);
+  --grp-base-text: var(--nui-btn-group-#{$color-name}-#{$variant}-base-text);
+  --grp-base-border: var(--nui-btn-group-#{$color-name}-#{$variant}-base-border);
+  --grp-hover-bg: var(--nui-btn-group-#{$color-name}-#{$variant}-hover-bg);
 
-      @if $variant == 'outline' {
-        border-color: $alpha40;
-        color: $base;
-        background-color: transparent;
-        &--selected {
-          background-color: $alpha20;
-          color: $base;
-        }
-        &:hover:not(.nui-button-group__option--selected) {
-          background-color: $alpha10;
-        }
-      }
-
-      @if $variant == 'ghost' {
-        border-color: transparent;
-        background-color: transparent;
-        color: $base;
-        &--selected {
-          background-color: $alpha20;
-          color: $base;
-        }
-        &:hover:not(.nui-button-group__option--selected) {
-          background-color: $alpha10;
-        }
-      }
-    }
-  }
+  --grp-sel-bg: var(--nui-btn-group-#{$color-name}-#{$variant}-sel-bg);
+  --grp-sel-text: var(--nui-btn-group-#{$color-name}-#{$variant}-sel-text);
+  --grp-sel-border: var(--nui-btn-group-#{$color-name}-#{$variant}-sel-border);
 }
 
-.nui-button-group {
+.nui-btn-group {
   display: inline-flex;
   align-items: stretch;
   position: relative;
-  border-radius: var(--nui-button-group-radius);
+  border-radius: var(--nui-btn-group-radius);
   user-select: none;
   isolation: isolate;
-  transition: var(--nui-button-group-transition);
+  transition: var(--nui-btn-group-transition);
+  border: 1px solid var(--grp-track-border);
 
   &--full {
     display: flex;
     width: 100%;
-    .nui-button-group__option {
+    .nui-btn-group__option {
       flex: 1;
     }
   }
@@ -84,6 +43,9 @@
     width: auto;
   }
 
+  // ==================================================
+  // OPTION STYLES
+  // ==================================================
   &__option {
     display: inline-flex;
     align-items: center;
@@ -91,16 +53,16 @@
     position: relative;
     white-space: nowrap;
     cursor: pointer;
-    background: var(--nui-bg-primary);
-    border: var(--nui-border-width-xs) solid var(--nui-border-primary);
-    color: var(--nui-text-secondary);
+    background-color: var(--grp-base-bg);
+    color: var(--grp-base-text);
+    border: var(--nui-border-width-xs) solid var(--grp-base-border);
     font-family: var(--nui-font-family);
     font-weight: var(--nui-font-weight-medium);
     transition: all var(--nui-transition-duration-fast) var(--nui-transition-timing-function-ease);
-    z-index: var(--nui-button-group-z-index-base);
+    z-index: var(--nui-btn-group-z-index-base);
 
     &:not(:first-child) {
-      margin-left: var(--nui-button-group-overlap);
+      margin-left: var(--nui-btn-group-overlap, -1px);
     }
 
     &:first-child {
@@ -113,8 +75,20 @@
       border-bottom-right-radius: inherit;
     }
 
+    &:hover:not(&--selected):not(&--disabled) {
+      background-color: var(--grp-hover-bg);
+      z-index: 2;
+    }
+
+    &--selected {
+      background-color: var(--grp-sel-bg);
+      color: var(--grp-sel-text);
+      border-color: var(--grp-sel-border);
+      z-index: 3;
+    }
+
     &--disabled {
-      opacity: var(--nui-button-group-disabled-opacity);
+      opacity: var(--nui-btn-group-disabled-opacity);
       cursor: not-allowed;
       pointer-events: none;
     }
@@ -131,47 +105,52 @@
     line-height: 1;
   }
 
+  // ==================================================
+  // SIZES
+  // ==================================================
   $sizes: xs, sm, md, lg, xl;
   @each $size in $sizes {
     &--#{$size} {
-      .nui-button-group__option {
+      .nui-btn-group__option {
         height: var(--nui-height-#{$size});
         padding: var(--nui-padding-#{$size});
         font-size: var(--nui-font-size-#{$size});
         gap: var(--nui-spacing-xs);
       }
-      .nui-button-group__icon {
-        font-size: var(--nui-button-group-icon-size-#{$size});
+      .nui-btn-group__icon {
+        font-size: var(--nui-btn-group-icon-size-#{$size});
       }
     }
   }
 
+  // ==================================================
+  // VARIANTS & COLORS
+  // ==================================================
+  $variants: solid, outline, ghost, segmented;
   $colors: primary, secondary, success, info, warning, danger, accent, neutral;
   @each $color in $colors {
     &--#{$color} {
-      @include apply-color-preset(solid, $color);
-      @include apply-color-preset(outline, $color);
-      @include apply-color-preset(ghost, $color);
+      @each $variant in $variants {
+        &.nui-btn-group--#{$variant} {
+          @include button-group-theme($variant, $color);
+        }
+      }
     }
   }
 
+  // ==================================================
+  // SEGMENTED (Special variant with unique styles)
+  // ==================================================
   &--segmented {
-    gap: var(--nui-button-group-segmented-gap);
+    gap: var(--nui-btn-group-segmented-gap);
     background-color: var(--nui-bg-secondary);
-    padding: var(--nui-button-group-segmented-padding);
-    border: var(--nui-border-width-xs) solid var(--nui-border-primary);
+    padding: var(--nui-btn-group-segmented-padding);
 
-    .nui-button-group__option {
+    .nui-btn-group__option {
       margin: 0 !important;
-      background: transparent;
-      border-color: transparent;
-      border-radius: calc(
-        var(--nui-button-group-radius) - var(--nui-button-group-segmented-padding)
-      );
+      border-radius: calc(var(--nui-btn-group-radius) - var(--nui-btn-group-segmented-padding));
 
       &--selected {
-        background-color: var(--nui-bg-primary);
-        color: var(--nui-text-primary);
         box-shadow: var(--nui-box-shadow--sm);
       }
     }

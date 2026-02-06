@@ -22,46 +22,46 @@ $button-group-transition-timing: var(--nui-transition-timing-function-ease) !def
 
 // MIXIN
 // ----------------------------------------
-@mixin nui-button-group-vars {
+@mixin nui-btn-group-vars {
   // Z-index layers
-  --nui-button-group-z-index-base: #{$button-group-z-index-base};
-  --nui-button-group-z-index-hover: #{$button-group-z-index-hover};
-  --nui-button-group-z-index-selected: #{$button-group-z-index-selected};
-  --nui-button-group-z-index-focus: #{$button-group-z-index-focus};
+  --nui-btn-group-z-index-base: #{$button-group-z-index-base};
+  --nui-btn-group-z-index-hover: #{$button-group-z-index-hover};
+  --nui-btn-group-z-index-selected: #{$button-group-z-index-selected};
+  --nui-btn-group-z-index-focus: #{$button-group-z-index-focus};
 
   // Opacities
-  --nui-button-group-disabled-opacity: #{$button-group-disabled-opacity};
-  --nui-button-group-container-disabled-opacity: #{$button-group-container-disabled-opacity};
+  --nui-btn-group-disabled-opacity: #{$button-group-disabled-opacity};
+  --nui-btn-group-container-disabled-opacity: #{$button-group-container-disabled-opacity};
 
   // Layout & spacing
-  --nui-button-group-border-width: var(--nui-border-width-xs);
-  --nui-button-group-overlap: calc(var(--nui-button-group-border-width) * -1);
-  --nui-button-group-segmented-gap: #{$button-group-segmented-gap};
-  --nui-button-group-segmented-padding: #{$button-group-segmented-padding};
+  --nui-btn-group-border-width: var(--nui-border-width-xs);
+  --nui-btn-group-overlap: calc(var(--nui-btn-group-border-width) * -1);
+  --nui-btn-group-segmented-gap: #{$button-group-segmented-gap};
+  --nui-btn-group-segmented-padding: #{$button-group-segmented-padding};
 
   // Transitions
-  --nui-button-group-transition: all #{$button-group-transition-duration}
+  --nui-btn-group-transition: all #{$button-group-transition-duration}
     #{$button-group-transition-timing};
 
   // Scale factor: 1.1 means the icon is 10% larger than the text
-  --nui-button-group-icon-scale: 1.1;
+  --nui-btn-group-icon-scale: 1.1;
 
-  --nui-button-group-icon-size-xs: calc(
-    var(--nui-font-size-xs) * var(--nui-button-group-icon-scale)
+  --nui-btn-group-icon-size-xs: calc(
+    var(--nui-font-size-xs) * var(--nui-btn-group-icon-scale)
   );
-  --nui-button-group-icon-size-sm: calc(
-    var(--nui-font-size-sm) * var(--nui-button-group-icon-scale)
+  --nui-btn-group-icon-size-sm: calc(
+    var(--nui-font-size-sm) * var(--nui-btn-group-icon-scale)
   );
-  --nui-button-group-icon-size-md: calc(
-    var(--nui-font-size-md) * var(--nui-button-group-icon-scale)
+  --nui-btn-group-icon-size-md: calc(
+    var(--nui-font-size-md) * var(--nui-btn-group-icon-scale)
   );
-  --nui-button-group-icon-size-lg: calc(
-    var(--nui-font-size-lg) * var(--nui-button-group-icon-scale)
+  --nui-btn-group-icon-size-lg: calc(
+    var(--nui-font-size-lg) * var(--nui-btn-group-icon-scale)
   );
-  --nui-button-group-icon-size-xl: calc(
-    var(--nui-font-size-xl) * var(--nui-button-group-icon-scale)
+  --nui-btn-group-icon-size-xl: calc(
+    var(--nui-font-size-xl) * var(--nui-btn-group-icon-scale)
   );
 
   // Border Radius base (inherited from the system)
-  --nui-button-group-radius: var(--nui-border-radius-md);
+  --nui-btn-group-radius: var(--nui-border-radius-md);
 }

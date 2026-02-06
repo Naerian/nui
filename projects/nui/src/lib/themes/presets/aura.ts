@@ -17,7 +17,7 @@ export const aura: ThemePreset = {
     dark: {
       primary: '#129d92',
       secondary: COOL_GRAYS[300],
-      accent: '#ae7aff',
+      accent: '#d853e5',
       success: '#15803d',
       info: '#0369a1',
       warning: '#c7651a',

@@ -1,5 +1,6 @@
-@use '../mixins';
-@use '../variables/toast/toast-variables.scss';
+@use '../mixins' as global;
+@use '../mixins-base' as base;
+@use '../variables/tooltip-vars' as vars;
 
 // ===== CONTENEDOR GLOBAL =====
 .nui-toast-container {

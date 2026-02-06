@@ -6,6 +6,11 @@
  * @default 'button'
  */
 export type ButtonType = 'submit' | 'reset' | 'button';
+export enum ButtonTypeEnum {
+  SUBMIT = 'submit',
+  RESET = 'reset',
+  BUTTON = 'button',
+}
 
 /**
  * Posición del icono en el botón.
@@ -15,16 +20,20 @@ export type ButtonType = 'submit' | 'reset' | 'button';
  * @default 'start'
  */
 export type ButtonIconPosition = 'start' | 'end';
+export enum ButtonIconPositionEnum {
+  START = 'start',
+  END = 'end',
+}
 
 /**
  * Posición del spinner de carga en el botón.
- * 
+ *
  * - **'start'**: Spinner a la izquierda del texto
  * - **'end'**: Spinner a la derecha del texto
  * - **'center'**: Spinner centrado, reemplaza el contenido
- * 
+ *
  * @default 'start'
- * 
+ *
  * @example
  * ```html
  * <nui-button [loading]="isLoading" loadingPosition="start">
@@ -33,6 +42,11 @@ export type ButtonIconPosition = 'start' | 'end';
  * ```
  */
 export type ButtonLoadingPosition = 'start' | 'end' | 'center';
+export enum ButtonLoadingPositionEnum {
+  START = 'start',
+  END = 'end',
+  CENTER = 'center',
+}
 
 /**
  * Tipo para el ancho del botón
@@ -42,3 +56,8 @@ export type ButtonLoadingPosition = 'start' | 'end' | 'center';
  * @default 'auto'
  */
 export type ButtonWidth = 'auto' | 'full' | 'fit';
+export enum ButtonWidthEnum {
+  AUTO = 'auto',
+  FULL = 'full',
+  FIT = 'fit',
+}

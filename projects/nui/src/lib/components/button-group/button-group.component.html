@@ -3,13 +3,13 @@
   [attr.role]="mode() === 'checkbox' ? 'group' : 'radiogroup'"
   [attr.aria-disabled]="disabled()"
 >
-  @for (option of normalizedOptions(); track option.value; let i = $index) {
+  @for (option of BtnNormalizedOptions(); track option.value; let i = $index) {
     <button
       #btnOption
       type="button"
-      class="nui-button-group__option"
-      [class.nui-button-group__option--selected]="isSelected(option.value)"
-      [class.nui-button-group__option--disabled]="disabled() || option.disabled"
+      class="nui-btn-group__option"
+      [class.nui-btn-group__option--selected]="isSelected(option.value)"
+      [class.nui-btn-group__option--disabled]="disabled() || option.disabled"
       [disabled]="disabled() || option.disabled"
       [attr.aria-checked]="mode() === 'checkbox' ? null : isSelected(option.value)"
       [attr.aria-pressed]="mode() === 'checkbox' ? isSelected(option.value) : null"
@@ -21,11 +21,11 @@
       (keydown)="onKeydown($event, i)"
     >
       @if (option.icon) {
-        <i [class]="option.icon" class="nui-button-group__icon" aria-hidden="true"></i>
+        <i [class]="option.icon" class="nui-btn-group__icon" aria-hidden="true"></i>
       }
 
       @if (!iconOnly() || !option.icon) {
-        <span class="nui-button-group__label">
+        <span class="nui-btn-group__label">
           {{ option.label }}
         </span>
       }

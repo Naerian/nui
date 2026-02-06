@@ -7,7 +7,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TOOLTIP_ANIMATIONS } from './animations/tooltip.animations';
+import { tooltipAnimation } from './animations/tooltip.animations';
 
 /**
  * @name
@@ -22,17 +22,10 @@ import { TOOLTIP_ANIMATIONS } from './animations/tooltip.animations';
   selector: 'nui-tooltip',
   standalone: true,
   imports: [CommonModule],
-  host: {
-    class: 'nui-tooltip',
-    role: 'tooltip',
-    '[@fadeIn]': 'true',
-    '[attr.data-position]': 'position()',
-    '[attr.id]': 'tooltipId()',
-  },
   templateUrl: './tooltip.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: TOOLTIP_ANIMATIONS,
+  animations: [tooltipAnimation],
 })
 export class TooltipComponent {
   /**

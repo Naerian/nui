@@ -15,10 +15,10 @@ export const BUTTON_GROUP_PAGE_CONFIG: ComponentPageConfig = {
       examples: [
         {
           title: 'codeExamples.html',
-          code: `<nui-button-group 
+          code: `<nui-btn-group 
   [options]="['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix']" 
   [(ngModel)]="selectedCity">
-</nui-button-group>
+</nui-btn-group>
 
 <p>Seleccionado: {{ selectedCity() }}</p>`,
           language: 'html',
@@ -37,26 +37,26 @@ export const BUTTON_GROUP_PAGE_CONFIG: ComponentPageConfig = {
       examples: [
         {
           title: 'Radio',
-          code: `<nui-button-group 
+          code: `<nui-btn-group 
   mode="radio"
   [options]="options" 
   labelBy="label"
   iconBy="icon"
   valueBy="id"
   [(ngModel)]="selected">
-</nui-button-group>`,
+</nui-btn-group>`,
           language: 'html',
         },
         {
           title: 'Checkbox',
-          code: `<nui-button-group 
+          code: `<nui-btn-group 
   mode="checkbox"
   [options]="formats" 
   labelBy="label"
   iconBy="icon"
   valueBy="id"
   [(ngModel)]="selectedFormats">
-</nui-button-group>`,
+</nui-btn-group>`,
           language: 'html',
         },
         {
@@ -67,27 +67,6 @@ export const BUTTON_GROUP_PAGE_CONFIG: ComponentPageConfig = {
     { id: 'underline', icon: 'ri-underline', label: 'Underline' },
   ]`,
           language: 'typescript',
-        },
-      ],
-    },
-    {
-      id: 'segmented',
-      title: 'components.buttonGroup.segmented.title',
-      description: 'components.buttonGroup.segmented.description',
-      anchor: 'segmented',
-      note: {
-        type: 'info',
-        content: 'components.buttonGroup.segmented.note',
-      },
-      examples: [
-        {
-          title: 'codeExamples.html',
-          code: `<nui-button-group 
-  layout="segmented"
-  [options]="periods"
-  [(ngModel)]="selectedPeriod">
-</nui-button-group>`,
-          language: 'html',
         },
       ],
     },
@@ -103,13 +82,13 @@ export const BUTTON_GROUP_PAGE_CONFIG: ComponentPageConfig = {
       examples: [
         {
           title: 'codeExamples.html',
-          code: `<nui-button-group 
+          code: `<nui-btn-group 
   [options]="users"
   labelBy="name"    
   valueBy="id"      
   disabledBy="disabled" 
   [(ngModel)]="selectedUserId">
-</nui-button-group>
+</nui-btn-group>
 `,
           language: 'html',
         },
@@ -136,13 +115,13 @@ export const BUTTON_GROUP_PAGE_CONFIG: ComponentPageConfig = {
       examples: [
         {
           title: 'codeExamples.html',
-          code: `<nui-button-group 
+          code: `<nui-btn-group 
   [options]="textFormats" 
   iconBy="icon"
   [iconOnly]="true" 
   mode="checkbox"
   valueBy="id">
-</nui-button-group>
+</nui-btn-group>
 `,
           language: 'html',
         },
@@ -169,10 +148,31 @@ export const BUTTON_GROUP_PAGE_CONFIG: ComponentPageConfig = {
       examples: [
         {
           title: 'codeExamples.html',
-          code: `<nui-button-group color="primary" variant="solid" [options]="..."></nui-button-group>
-<nui-button-group color="danger" variant="ghost" [options]="..."></nui-button-group>
-<nui-button-group color="success" variant="outline" [options]="..."></nui-button-group>
+          code: `<nui-btn-group color="primary" variant="solid" [options]="..."></nui-btn-group>
+<nui-btn-group color="danger" variant="ghost" [options]="..."></nui-btn-group>
+<nui-btn-group color="success" variant="outline" [options]="..."></nui-btn-group>
 `,
+          language: 'html',
+        },
+      ],
+    },
+    {
+      id: 'segmented',
+      title: 'components.buttonGroup.segmented.title',
+      description: 'components.buttonGroup.segmented.description',
+      anchor: 'segmented',
+      note: {
+        type: 'info',
+        content: 'components.buttonGroup.segmented.note',
+      },
+      examples: [
+        {
+          title: 'codeExamples.html',
+          code: `<nui-btn-group 
+  layout="segmented"
+  [options]="periods"
+  [(ngModel)]="selectedPeriod">
+</nui-btn-group>`,
           language: 'html',
         },
       ],
@@ -189,11 +189,11 @@ export const BUTTON_GROUP_PAGE_CONFIG: ComponentPageConfig = {
       examples: [
         {
           title: 'codeExamples.html',
-          code: `<nui-button-group size="xs" layout="segmented" [options]="..."></nui-button-group>
-<nui-button-group size="sm" layout="segmented" [options]="..."></nui-button-group>
-<nui-button-group size="md" layout="segmented" [options]="..."></nui-button-group>
-<nui-button-group size="lg" layout="segmented" [options]="..."></nui-button-group>
-<nui-button-group size="xl" layout="segmented" [options]="..."></nui-button-group>`,
+          code: `<nui-btn-group size="xs" layout="segmented" [options]="..."></nui-btn-group>
+<nui-btn-group size="sm" layout="segmented" [options]="..."></nui-btn-group>
+<nui-btn-group size="md" layout="segmented" [options]="..."></nui-btn-group>
+<nui-btn-group size="lg" layout="segmented" [options]="..."></nui-btn-group>
+<nui-btn-group size="xl" layout="segmented" [options]="..."></nui-btn-group>`,
           language: 'html',
         },
       ],
@@ -211,7 +211,7 @@ export const BUTTON_GROUP_PAGE_CONFIG: ComponentPageConfig = {
         {
           title: 'codeExamples.html',
           code: `<div style="width: 100%; max-width: 400px">
-  <nui-button-group width="full" [options]="['Log In', 'Sign Up']"></nui-button-group>
+  <nui-btn-group width="full" [options]="['Log In', 'Sign Up']"></nui-btn-group>
 </div>`,
           language: 'html',
         },
@@ -256,7 +256,7 @@ interface Filter {
 @Component({
   selector: 'app-example',
   template: \`
-    <nui-button-group
+    <nui-btn-group
       mode="checkbox"
       layout="segmented"
       [options]="filters"
@@ -268,7 +268,7 @@ interface Filter {
       size="md"
       [(ngModel)]="selectedFilters"
       (valueChange)="onFilterChange($event)">
-    </nui-button-group>
+    </nui-btn-group>
     
     <p>Filtros activos: {{ selectedFilters().join(', ') }}</p>
   \`
@@ -301,46 +301,46 @@ export class ExampleComponent {
           title: 'codeExamples.cssVariables',
           code: `:root {
   /* Espaciado entre botones */
-  --nui-button-group-gap: 0;
-  --nui-button-group-segmented-gap: var(--nui-spacing-xxs);
+  --nui-btn-group-gap: 0;
+  --nui-btn-group-segmented-gap: var(--nui-spacing-xxs);
   
   /* Segmented variant - Container */
-  --nui-button-group-segmented-bg: var(--nui-bg-secondary);
-  --nui-button-group-segmented-padding: var(--nui-spacing-xxs);
-  --nui-button-group-segmented-border-radius: var(--nui-border-radius-md);
-  --nui-button-group-segmented-border: 1px solid var(--nui-border-primary);
+  --nui-btn-group-segmented-bg: var(--nui-bg-secondary);
+  --nui-btn-group-segmented-padding: var(--nui-spacing-xxs);
+  --nui-btn-group-segmented-border-radius: var(--nui-border-radius-md);
+  --nui-btn-group-segmented-border: 1px solid var(--nui-border-primary);
   
   /* Segmented variant - Selected button */
-  --nui-button-group-segmented-selected-bg: var(--nui-bg-primary);
-  --nui-button-group-segmented-selected-shadow: var(--nui-shadow-sm);
-  --nui-button-group-segmented-selected-border: 1px solid var(--nui-border-primary);
+  --nui-btn-group-segmented-selected-bg: var(--nui-bg-primary);
+  --nui-btn-group-segmented-selected-shadow: var(--nui-shadow-sm);
+  --nui-btn-group-segmented-selected-border: 1px solid var(--nui-border-primary);
   
   /* Segmented variant - Unselected button */
-  --nui-button-group-segmented-unselected-bg: transparent;
-  --nui-button-group-segmented-unselected-text: var(--nui-text-secondary);
+  --nui-btn-group-segmented-unselected-bg: transparent;
+  --nui-btn-group-segmented-unselected-text: var(--nui-text-secondary);
   
   /* Segmented variant - Hover */
-  --nui-button-group-segmented-hover-bg: var(--nui-bg-hover);
+  --nui-btn-group-segmented-hover-bg: var(--nui-bg-hover);
   
   /* Transitions */
-  --nui-button-group-transition: all 0.2s ease;
+  --nui-btn-group-transition: all 0.2s ease;
 }
 
 // Example of customization for an iOS theme
 .ios-style-group {
-  --nui-button-group-segmented-bg: #f2f2f7;
-  --nui-button-group-segmented-selected-bg: #ffffff;
-  --nui-button-group-segmented-border-radius: 9px;
-  --nui-button-group-segmented-padding: 2px;
-  --nui-button-group-segmented-selected-shadow: 0 3px 8px rgba(0, 0, 0, 0.12),
+  --nui-btn-group-segmented-bg: #f2f2f7;
+  --nui-btn-group-segmented-selected-bg: #ffffff;
+  --nui-btn-group-segmented-border-radius: 9px;
+  --nui-btn-group-segmented-padding: 2px;
+  --nui-btn-group-segmented-selected-shadow: 0 3px 8px rgba(0, 0, 0, 0.12),
                                                 0 3px 1px rgba(0, 0, 0, 0.04);
 }
 
 // Example of a compact group
 .compact-group {
-  --nui-button-group-gap: -1px; // Solapar bordes
+  --nui-btn-group-gap: -1px; // Solapar bordes
   
-  ::ng-deep .nui-button-group {
+  ::ng-deep .nui-btn-group {
     button:not(:first-child) {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;

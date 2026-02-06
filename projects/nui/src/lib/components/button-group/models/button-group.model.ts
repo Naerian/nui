@@ -1,21 +1,27 @@
+import { NUIVariant } from '../../../configs';
+
 /**
  * Modo de selección del button-group
  * - 'radio': Selección única
  * - 'checkbox': Multiselección
  */
-export type ButtonGroupMode = 'radio' | 'checkbox';
+export type BtnGroupMode = 'radio' | 'checkbox';
+export enum BtnGroupModeEnum {
+  RADIO = 'radio',
+  CHECKBOX = 'checkbox',
+}
 
 /**
  * Variante visual del button-group
- * - 'grouped': Botones separados con espacios (por defecto)
- * - 'segmented': Botones unidos sin espacios, bordes compartidos (estilo iOS)
+ * - 'solid', 'outline', 'ghost' (heredados de Button)
+ * - 'segmented' (estilo iOS, con botones unidos sin espacios)
  */
-export type ButtonGroupLayout = 'grouped' | 'segmented';
+export type BtnGroupVariant = NUIVariant | 'segmented';
 
 /**
  * Opciones para el button-group
  */
-export interface ButtonGroupOption {
+export interface BtnGroupOption {
   /**
    * Etiqueta visible del botón
    */
@@ -40,7 +46,7 @@ export interface ButtonGroupOption {
 /**
  * Interfaz interna normalizada para el template
  */
-export interface NormalizedOption {
+export interface BtnNormalizedOption {
   label: string;
   value: any;
   tooltip?: string;
