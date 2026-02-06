@@ -14,6 +14,14 @@ import {
   warm,
 } from 'nui';
 
+interface PresetOption {
+  name: string;
+  value: any;
+  translationKey: string;
+  primaryColor: string;
+  colors: string[];
+}
+
 @Component({
   selector: 'app-theming',
   standalone: true,
@@ -85,6 +93,23 @@ export class ThemingComponent {
     ];
   });
 
+  currentPreset = computed<PresetOption>(() => {
+    const current = this.themeService.currentPreset();
+    const dark = this.themeService.isDarkMode();
+    console.log('Current preset:', current.name, 'Dark mode:', dark);
+    return {
+      name: current.name,
+      value: current,
+      translationKey: `presets.${current.name}`,
+      primaryColor: dark ? current.colors.dark.primary : current.colors.light.primary,
+      colors: [
+        dark ? current.colors.dark.primary : current.colors.light.primary,
+        dark ? current.colors.dark.secondary : current.colors.light.secondary,
+        dark ? current.colors.dark.accent : current.colors.light.accent,
+      ],
+    };
+  });
+
   colorTypes = [
     { key: 'primary', translationKey: 'pages.theming.primary' },
     { key: 'secondary', translationKey: 'pages.theming.secondary' },
@@ -93,6 +118,7 @@ export class ThemingComponent {
     { key: 'info', translationKey: 'pages.theming.info' },
     { key: 'warning', translationKey: 'pages.theming.warning' },
     { key: 'danger', translationKey: 'pages.theming.danger' },
+    { key: 'neutral', translationKey: 'pages.theming.neutral' },
   ];
 
   getColor(preset: any, colorKey: string): string {

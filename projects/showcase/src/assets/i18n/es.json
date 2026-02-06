@@ -98,7 +98,7 @@
       "darkModeConfigDescription": "Controla cómo se aplica el modo oscuro en tu aplicación. Las opciones disponibles son: 'manual' (controlado por código), 'auto' (basado en hora del día), o 'system' (según las preferencias del sistema operativo).",
       "darkModeConfigTitle": "Configuración de Modo Oscuro",
       "customPresetConfig": "Preset personalizado",
-      "customPresetConfigDescription": "Crea tu propio preset definiendo colores personalizados para los modos claro y oscuro. Cada preset debe incluir: primary, secondary, accent, success, info, warning y danger.",
+      "customPresetConfigDescription": "Crea tu propio preset definiendo colores personalizados para los modos claro y oscuro. Cada preset debe incluir: primary, secondary, accent, success, info, warning, danger y neutral.",
       "customPresetConfigTitle": "Crear preset personalizado"
     },
     "theming": {
@@ -115,6 +115,7 @@
       "info": "Información",
       "warning": "Advertencia",
       "danger": "Peligro",
+      "neutral": "Neutral",
       "presetDescriptions": {
         "aura": "Paleta moderna y elegante por defecto con tonos teal y púrpura",
         "warm": "Paleta energética con tonos coral y dorado cálidos, perfecta para e-commerce",

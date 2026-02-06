@@ -53,7 +53,7 @@
     border: var(--nui-avatar-border-width, 0) solid var(--nui-avatar-border-color, transparent);
   }
 
-  $colors: primary, secondary, success, info, warning, danger, accent;
+  $colors: primary, secondary, success, info, warning, danger, accent, neutral;
   @each $color in $colors {
     &--#{$color} {
       @include apply-avatar-color($color);

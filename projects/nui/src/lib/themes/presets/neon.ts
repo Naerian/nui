@@ -1,3 +1,4 @@
+import { ZINC_GRAYS } from '../models/theme.config';
 import { ThemePreset } from '../models/theme.model';
 
 /**
@@ -13,8 +14,9 @@ export const neon: ThemePreset = {
       accent: '#7c3aed',
       success: '#059669',
       info: '#0284c7',
-      warning: '#d97706',
-      danger: '#dc2626',
+      warning: '#df8e15',
+      danger: '#ef4444',
+      neutral: ZINC_GRAYS[500],
     },
     dark: {
       primary: '#0e7490',
@@ -24,6 +26,7 @@ export const neon: ThemePreset = {
       info: '#1178b1',
       warning: '#b45309',
       danger: '#a32121',
+      neutral: ZINC_GRAYS[400],
     },
   },
 };

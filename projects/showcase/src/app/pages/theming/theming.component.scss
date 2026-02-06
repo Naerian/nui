@@ -24,6 +24,26 @@
       max-width: 700px;
       margin: 0 auto;
     }
+
+    .page-current-preset {
+      margin-top: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 1rem;
+      background-color: var(--nui-bg-secondary);
+      border: 1px solid var(--nui-border-primary);
+      border-radius: var(--nui-border-radius-md);
+      font-size: 0.875rem;
+      color: var(--nui-text-primary);
+
+      .preset-color-box {
+        width: 30px;
+        height: 30px;
+        border-radius: var(--nui-border-radius-sm);
+        border: 1px solid var(--nui-border-primary);
+      }
+    }
   }
 
   .presets-grid {
@@ -45,6 +65,11 @@
 
     &:hover {
       box-shadow: 0 4px 12px var(--nui-shadow-md);
+      transform: translateY(-2px);
+    }
+
+    &.active {
+      box-shadow: 3px 3px 20px 0px var(--nui-primary-alpha-50);
       transform: translateY(-2px);
     }
 

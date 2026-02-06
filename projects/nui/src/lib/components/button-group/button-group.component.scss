@@ -146,7 +146,7 @@
     }
   }
 
-  $colors: primary, secondary, success, info, warning, danger, accent;
+  $colors: primary, secondary, success, info, warning, danger, accent, neutral;
   @each $color in $colors {
     &--#{$color} {
       @include apply-color-preset(solid, $color);

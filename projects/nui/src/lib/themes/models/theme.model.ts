@@ -6,6 +6,7 @@ export interface ThemeColors {
   info: string;
   warning: string;
   danger: string;
+  neutral: string;
 }
 
 export interface ThemeGrays {

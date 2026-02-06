@@ -12,7 +12,7 @@ import {
 } from './models/theme.model';
 import {
   PURE_COLORS,
-  DEFAULT_GRAYS,
+  COOL_GRAYS,
   DEFAULT_PRESET,
   NUI_THEME_CONFIG,
   LUMINANCE_UMBRAL,
@@ -227,6 +227,9 @@ export class ThemeService {
     // Structural variables (grays, text, bg, borders, shadows, focus, overlay, backdrop, spinner, switch)
     css += this.generateStructuralVariables(grays);
 
+    // Semantic color variables + contrast text colors
+    css += this.generateSemanticVariables();
+
     // Shadow variables
     css += this.generateShadowVariables();
 
@@ -286,7 +289,7 @@ export class ThemeService {
    * @return {ThemeGrays} An object containing the default gray scale colors.
    */
   private getDefaultGrays(): ThemeGrays {
-    return DEFAULT_GRAYS;
+    return COOL_GRAYS;
   }
 
   /**
@@ -315,17 +318,23 @@ export class ThemeService {
   /* Background colors */
   --nui-bg-primary: ${isDark ? grays[900] : PURE_COLORS.WHITE};
   --nui-bg-secondary: ${isDark ? grays[800] : grays[50]};
-  --nui-bg-tertiary: ${isDark ? grays[700] : grays[100]};
+  --nui-bg-tertiary: ${isDark ? grays[600] : grays[100]};
+  --nui-bg-neutral: ${isDark ? grays[800] : grays[100]};
 
   /* Text colors */
   --nui-text-primary: ${isDark ? grays[50] : grays[900]};
   --nui-text-secondary: ${isDark ? grays[300] : grays[600]};
   --nui-text-tertiary: ${isDark ? grays[400] : grays[500]};
+  --nui-text-neutral: ${isDark ? grays[400] : grays[600]};
+  --nui-text-inverted: ${isDark ? grays[900] : PURE_COLORS.WHITE};
   --nui-text-disabled: ${isDark ? grays[600] : grays[400]};
 
   /* Border colors */
   --nui-border-primary: ${isDark ? grays[700] : grays[200]};
   --nui-border-secondary: ${isDark ? grays[800] : grays[100]};
+  --nui-border-neutral: ${isDark ? grays[700] : grays[200]};
+  --nui-border-strong: ${isDark ? grays[600] : grays[300]};
+  --nui-border-weak: ${isDark ? grays[800] : grays[100]};
 
   /* Shadow base (RGB para poder usarlo en rgba() de SCSS) */
   --nui-shadow-base-rgb: ${isDark ? '0, 0, 0' : '0, 0, 0'}; 
@@ -343,6 +352,51 @@ export class ThemeService {
   --nui-overlay-bg: ${isDark ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.5)'};
   --nui-color-backdrop: ${isDark ? 'rgba(0, 0, 0, 0.75)' : 'rgba(0, 0, 0, 0.5)'};
 `;
+  }
+
+  /**
+   * Generate CSS variable definitions for semantic color aliases and their contrasting text colors based
+   * on the current theme preset and dark mode state.
+   * This method creates CSS variable definitions for semantic color aliases
+   * (primary, secondary, accent, success, info, warning, danger, neutral) and their corresponding
+   * contrasting text colors.
+   * The contrasting text colors are calculated using the getContrastColor method to ensure sufficient
+   * contrast against the background color for readability.
+   * @return {string} A string containing the CSS variable definitions for semantic color aliases and their contrasting text colors.
+   */
+  generateSemanticVariables(): string {
+    const colors = this.colors();
+    return `
+      /* Semantic color aliases */
+      --nui-primary: ${colors.primary};
+      --nui-secondary: ${colors.secondary};
+      --nui-accent: ${colors.accent};
+      --nui-success: ${colors.success};
+      --nui-info: ${colors.info};
+      --nui-warning: ${colors.warning};
+      --nui-danger: ${colors.danger};
+      --nui-neutral: ${colors.neutral};
+
+      /* Contrasting text colors for semantic colors */
+      --nui-primary-contrast: ${this.getContrastColor(colors.primary)};
+      --nui-secondary-contrast: ${this.getContrastColor(colors.secondary)};
+      --nui-accent-contrast: ${this.getContrastColor(colors.accent)};
+      --nui-success-contrast: ${this.getContrastColor(colors.success)};
+      --nui-info-contrast: ${this.getContrastColor(colors.info)};
+      --nui-warning-contrast: ${this.getContrastColor(colors.warning)};
+      --nui-danger-contrast: ${this.getContrastColor(colors.danger)};
+      --nui-neutral-contrast: ${this.getContrastColor(colors.neutral)};
+
+      /* Alpha values for semantic colors */
+      --nui-primary-alpha-50: ${this.withAlpha(colors.primary, 0.5)};
+      --nui-secondary-alpha-50: ${this.withAlpha(colors.secondary, 0.5)};
+      --nui-accent-alpha-50: ${this.withAlpha(colors.accent, 0.5)};
+      --nui-success-alpha-50: ${this.withAlpha(colors.success, 0.5)};
+      --nui-info-alpha-50: ${this.withAlpha(colors.info, 0.5)};
+      --nui-warning-alpha-50: ${this.withAlpha(colors.warning, 0.5)};
+      --nui-danger-alpha-50: ${this.withAlpha(colors.danger, 0.5)};
+      --nui-neutral-alpha-50: ${this.withAlpha(colors.neutral, 0.5)};      
+    `;
   }
 
   /**

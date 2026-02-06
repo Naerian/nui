@@ -24,6 +24,9 @@ export const NUI_COLORS = [
   'warning',
   'danger',
   'info',
+  'light',
+  'dark',
+  'neutral',
 ] as const;
 export type NUIColor = (typeof NUI_COLORS)[number];
 

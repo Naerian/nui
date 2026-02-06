@@ -1,3 +1,4 @@
+import { STONE_GRAYS } from '../models/theme.config';
 import { ThemePreset } from '../models/theme.model';
 
 export const sunset: ThemePreset = {
@@ -11,6 +12,7 @@ export const sunset: ThemePreset = {
       info: '#0284c7',
       warning: '#d97706',
       danger: '#dc2626',
+      neutral: STONE_GRAYS[600],
     },
     dark: {
       primary: '#e51e4e',
@@ -20,6 +22,7 @@ export const sunset: ThemePreset = {
       info: '#0369a1',
       warning: '#b45309',
       danger: '#991b1b',
+      neutral: STONE_GRAYS[500]
     },
   },
 };

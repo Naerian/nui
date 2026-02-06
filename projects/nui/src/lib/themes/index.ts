@@ -12,7 +12,7 @@ export { ocean } from './presets/ocean';
 export { ThemeColors, ThemeGrays, ThemePreset, ThemeConfig } from './models/theme.model';
 export {
   PURE_COLORS,
-  DEFAULT_GRAYS,
+  COOL_GRAYS,
   DEFAULT_PRESET,
   NUI_THEME_CONFIG,
 } from './models/theme.config';

@@ -1,3 +1,4 @@
+import { ZINC_GRAYS } from '../models/theme.config';
 import { ThemePreset } from '../models/theme.model';
 
 /**
@@ -8,13 +9,14 @@ export const minimal: ThemePreset = {
   name: 'minimal',
   colors: {
     light: {
-      primary: '#18181b', 
-      secondary: '#71717a',
-      accent: '#3f3f46',
+      primary: '#18181b',
+      secondary: '#707070',
+      accent: '#3c3c41',
       success: '#14532d',
       info: '#1e3a8a',
-      warning: '#78350f',
-      danger: '#7f1d1d',
+      warning: '#9c4615',
+      danger: '#992323',
+      neutral: ZINC_GRAYS[600],
     },
     dark: {
       primary: '#fafafa',
@@ -24,6 +26,7 @@ export const minimal: ThemePreset = {
       info: '#bfdbfe',
       warning: '#fde68a',
       danger: '#fecaca',
-    }
-  }
+      neutral: ZINC_GRAYS[200],
+    },
+  },
 };

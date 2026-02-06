@@ -46,7 +46,7 @@
     vertical-align: middle;
     isolation: isolate;
 
-    $colors: primary, secondary, success, info, warning, danger, accent;
+    $colors: primary, secondary, success, info, warning, danger, accent, neutral;
     $variants: solid, outline, ghost;
 
     @each $color in $colors {

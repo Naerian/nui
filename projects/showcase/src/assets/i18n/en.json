@@ -98,7 +98,7 @@
       "darkModeConfigDescription": "Control how dark mode is applied in your application. Available options are: 'manual' (controlled by code), 'auto' (based on time of day), or 'system' (according to operating system preferences).",
       "darkModeConfigTitle": "Dark Mode Configuration",
       "customPresetConfig": "Custom preset",
-      "customPresetConfigDescription": "Create your own preset by defining custom colors for light and dark modes. Each preset must include: primary, secondary, accent, success, info, warning and danger.",
+      "customPresetConfigDescription": "Create your own preset by defining custom colors for light and dark modes. Each preset must include: primary, secondary, accent, success, info, warning, danger and neutral.",
       "customPresetConfigTitle": "Create custom preset"
     },
     "theming": {
@@ -115,6 +115,7 @@
       "info": "Info",
       "warning": "Warning",
       "danger": "Danger",
+      "neutral": "Neutral",
       "presetDescriptions": {
         "aura": "Modern and elegant default palette with teal and purple tones",
         "warm": "Energetic palette with warm coral and golden tones, perfect for e-commerce",

@@ -60,7 +60,7 @@
       display: flex;
     }
 
-    $colors: primary, secondary, success, info, warning, danger, accent;
+    $colors: primary, secondary, success, info, warning, danger, accent, neutral;
     @each $color in $colors {
       &--#{$color} {
         @include action-menu-theme($color);

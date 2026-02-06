@@ -1,3 +1,4 @@
+import { COOL_GRAYS } from 'nui';
 import { ThemePreset } from '../models/theme.model';
 
 export const dopamine: ThemePreset = {
@@ -6,20 +7,22 @@ export const dopamine: ThemePreset = {
     light: {
       primary: '#65a30d',
       secondary: '#db2777',
-      accent: '#d97706',
+      accent: '#05a0bb',
       success: '#16a34a',
       info: '#2563eb',
-      warning: '#ca8a04',
+      warning: '#f97316',
       danger: '#dc2626',
+      neutral: COOL_GRAYS[600],
     },
     dark: {
-      primary: '#4d7c0f',
+      primary: '#66ab0c',
       secondary: '#9d174d',
-      accent: '#b45309',
+      accent: '#03afce',
       success: '#15803d',
       info: '#156eed',
       warning: '#b36d08',
       danger: '#d13e3e',
+      neutral: COOL_GRAYS[500],
     },
   },
 };
