@@ -1,0 +1,23 @@
+<div
+  class="nui-popover"
+  [class]="mainClasses()"
+  role="dialog"
+  [@fadeIn]="'true'"
+  [attr.data-position]="position()"
+  [attr.id]="popoverId()"
+  [style.max-width]="maxWidth()"
+  [style.min-width]="minWidth()"
+>
+  @if (showArrow()) {
+    <div class="nui-popover__arrow"></div>
+  }
+  <div class="nui-popover__content">
+    @if (isTemplate()) {
+      <ng-container *ngTemplateOutlet="$any(content()); context: context()"></ng-container>
+    } @else if (isComponent()) {
+      <ng-container #dynamicComponent></ng-container>
+    } @else {
+      <div [innerHTML]="content()"></div>
+    }
+  </div>
+</div>

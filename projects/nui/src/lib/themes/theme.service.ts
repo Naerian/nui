@@ -227,6 +227,9 @@ export class ThemeService {
     // Structural variables (grays, text, bg, borders, shadows, focus, overlay, backdrop, spinner, switch)
     css += this.generateStructuralVariables(grays);
 
+    // Shadow variables
+    css += this.generateShadowVariables();
+
     // Modal gradient (uses warning and danger from preset)
     css += `  --nui-color-modal-gradient: linear-gradient(90deg, ${colors.warning}, ${colors.danger});\n`;
 
@@ -263,21 +266,15 @@ export class ThemeService {
 
       // Component-specific variables
       css += this.generateButtonVariables(name, baseColor);
-      css += this.generateFabButtonVariables(name, baseColor);
       css += this.generateButtonGroupVariables(name, baseColor);
-      css += this.generateChipVariables(name, baseColor);
-      css += this.generateSwitchButtonVariables(name, baseColor);
-      css += this.generateModalVariables(name, baseColor);
-      css += this.generateToastVariables(name, baseColor);
-      css += this.generateProgressBarVariables(name, baseColor);
       css += this.generatePaginatorVariables(name, baseColor);
       css += this.generateAvatarVariables(name, baseColor);
       css += this.generateActionMenuVariables(name, baseColor);
+      css += this.generatePopoverVariables(name, baseColor);
     });
 
-    // Generar variables de Tooltip y Popover (no dependen de colores semánticos)
+    // Generar variables de Tooltip (no depende de colores semánticos)
     css += this.generateTooltipVariables();
-    css += this.generatePopoverVariables();
 
     css += '}\n';
     return css;
@@ -330,12 +327,6 @@ export class ThemeService {
   --nui-border-primary: ${isDark ? grays[700] : grays[200]};
   --nui-border-secondary: ${isDark ? grays[800] : grays[100]};
 
-  /* Eliminamos las sombras terminadas y enviamos solo opacidades */
-  --nui-shadow-opacity-sm: ${isDark ? '0.5' : '0.1'};
-  --nui-shadow-opacity-md: ${isDark ? '0.6' : '0.15'};
-  --nui-shadow-opacity-lg: ${isDark ? '0.7' : '0.2'};
-  --nui-shadow-opacity-xl: ${isDark ? '0.8' : '0.25'};
-
   /* Shadow base (RGB para poder usarlo en rgba() de SCSS) */
   --nui-shadow-base-rgb: ${isDark ? '0, 0, 0' : '0, 0, 0'}; 
 
@@ -351,18 +342,74 @@ export class ThemeService {
   /* Overlay & Backdrop */
   --nui-overlay-bg: ${isDark ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.5)'};
   --nui-color-backdrop: ${isDark ? 'rgba(0, 0, 0, 0.75)' : 'rgba(0, 0, 0, 0.5)'};
-
-  /* Spinner */
-  --nui-color-spinner-border: ${isDark ? grays[700] : grays[200]};
-  --nui-color-spinner-backdrop: ${isDark ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)'};
-
-  /* Switch */
-  --nui-color-switch-track-bg: ${isDark ? grays[700] : grays[200]};
-  --nui-color-switch-track-border: ${isDark ? grays[600] : grays[300]};
-  --nui-color-switch-track-hover-border: ${isDark ? grays[500] : grays[400]};
-  --nui-color-switch-thumb-bg: ${isDark ? PURE_COLORS.WHITE : PURE_COLORS.WHITE};
-
 `;
+  }
+
+  /**
+   * Generate CSS variable definitions for shadow styles based on the current theme preset and dark mode state.
+   * This method creates CSS variable definitions for different shadow levels (xs, sm, md, lg, xl) and a
+   * specific shadow for button hover states.
+   * The shadow definitions adapt based on whether the current theme is in dark mode or light mode, ensuring that shadows are appropriately visible and aesthetically pleasing in both modes.
+   * In dark mode, shadows are typically more pronounced to provide better contrast against dark backgrounds, while in light mode, shadows are subtler.
+   * Additionally, in dark mode, a faint white border is added to help define the edges of components where shadows might not be as visible.
+   * @return {string} A string containing the CSS variable definitions for shadow styles.
+   */
+  private generateShadowVariables(): string {
+    const isDark = this._isDarkMode();
+
+    // Base color of the shadow (RGB)
+    const shadowColor = '0, 0, 0';
+
+    // Opacities: In dark mode we need much more opacity for it to be visible
+    const o = isDark
+      ? { xs: 0, sm: 0.3, md: 0.4, lg: 0.5, xl: 0.6, hover: 0.25 } // Dark
+      : { xs: 0, sm: 0.05, md: 0.1, lg: 0.15, xl: 0.25, hover: 0.1 }; // Light
+
+    // In dark mode, we add a 1px white border at 5% opacity.
+    // This defines the component's border when the black shadow is lost against the black background.
+    const ring = isDark ? '0 0 0 1px rgba(255, 255, 255, 0.05), ' : '';
+
+    // We build the shadows: [Optional Ring] + [Main Shadow]
+    // XS: Only for inputs (field), very subtle
+    const shadowXs = isDark
+      ? '0 0 0 1px rgba(255, 255, 255, 0.1)' // En dark, un borde sutil
+      : '0 1px 2px 0 rgba(0, 0, 0, 0.05)';
+
+    const shadowSm = `${ring}0 1px 2px 0 rgba(${shadowColor}, ${o.sm})`;
+    const shadowMd = `${ring}0 4px 6px -1px rgba(${shadowColor}, ${o.md}), 0 2px 4px -1px rgba(${shadowColor}, 0.06)`;
+    const shadowLg = `${ring}0 10px 15px -3px rgba(${shadowColor}, ${o.lg}), 0 4px 6px -2px rgba(${shadowColor}, 0.05)`;
+    const shadowXl = `${ring}0 20px 25px -5px rgba(${shadowColor}, ${o.xl}), 0 10px 10px -5px rgba(${shadowColor}, 0.04)`;
+
+    // Specific shadow for button hover (Medium elevation)
+    const shadowBtnHover = `${ring}0 4px 12px 0 rgba(${shadowColor}, ${o.hover})`;
+
+    return `
+    /* === SHADOW PRIMITIVES === */
+    --nui-box-shadow--xs: ${shadowXs};
+    --nui-box-shadow--sm: ${shadowSm};
+    --nui-box-shadow--md: ${shadowMd};
+    --nui-box-shadow--lg: ${shadowLg};
+    --nui-box-shadow--xl: ${shadowXl};
+    
+    --nui-box-shadow--button-hover: ${shadowBtnHover};
+
+    /* === SEMANTIC ALIASES === */
+    /* We map use cases to primitives */
+    
+    --nui-shadow-none: none;
+    
+    /* Containers (Cards, Side Panels) */
+    --nui-shadow-container: var(--nui-box-shadow--sm);
+    
+    /* Floating Elements (Popovers, Dropdowns, Menus, Modals) */
+    --nui-shadow-elevated: var(--nui-box-shadow--lg);
+    
+    /* Interactive Elements (Buttons, Clickable Chips) */
+    --nui-shadow-interactive: var(--nui-box-shadow--sm);
+    
+    /* Form Fields (Inputs, Selects) */
+    --nui-shadow-field: var(--nui-box-shadow--xs);
+  `;
   }
 
   /**
@@ -413,40 +460,6 @@ export class ThemeService {
     `;
   }
 
-  private generateFabButtonVariables(name: string, color: string): string {
-    const hoverColor = this.shade(color, 10);
-    const activeColor = this.shade(color, 20);
-    const contrastText = this.getContrastColor(color);
-
-    return `
-  --nui-fab-button-${name}-solid-bg: ${color};
-  --nui-fab-button-${name}-solid-text: ${contrastText};
-  --nui-fab-button-${name}-solid-border: ${color};
-  --nui-fab-button-${name}-solid-hover-bg: ${hoverColor};
-  --nui-fab-button-${name}-solid-hover-text: ${contrastText};
-  --nui-fab-button-${name}-solid-hover-border: ${hoverColor};
-  --nui-fab-button-${name}-solid-active-bg: ${activeColor};
-  --nui-fab-button-${name}-solid-active-border: ${activeColor};
-  --nui-fab-button-${name}-outline-bg: transparent;
-  --nui-fab-button-${name}-outline-text: ${color};
-  --nui-fab-button-${name}-outline-border: ${color};
-  --nui-fab-button-${name}-outline-hover-bg: ${this.withAlpha(color, 0.1)};
-  --nui-fab-button-${name}-outline-hover-text: ${hoverColor};
-  --nui-fab-button-${name}-outline-hover-border: ${hoverColor};
-  --nui-fab-button-${name}-outline-active-bg: ${activeColor};
-  --nui-fab-button-${name}-outline-active-border: ${activeColor};
-  --nui-fab-button-${name}-ghost-bg: ${this.withAlpha(color, 0.1)};
-  --nui-fab-button-${name}-ghost-text: ${color};
-  --nui-fab-button-${name}-ghost-border: transparent;
-  --nui-fab-button-${name}-ghost-hover-bg: ${this.withAlpha(color, 0.2)};
-  --nui-fab-button-${name}-ghost-hover-text: ${hoverColor};
-  --nui-fab-button-${name}-ghost-hover-border: transparent;
-  --nui-fab-button-${name}-ghost-active-bg: ${this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 90)};
-  --nui-fab-button-${name}-ghost-active-border: transparent;
-  --nui-fab-button-${name}-focus-color: ${this.tint(color, 60)};
-`;
-  }
-
   private generateButtonGroupVariables(name: string, color: string): string {
     const contrastText = this.getContrastColor(color);
     const alpha10 = this.withAlpha(color, 0.1);
@@ -472,92 +485,6 @@ export class ThemeService {
       --nui-btn-group-${name}-in-bg: ${inactiveBg};
       --nui-btn-group-${name}-in-border: ${inactiveBorder};
     `;
-  }
-
-  private generateChipVariables(name: string, color: string): string {
-    const hoverColor = this.shade(color, 10);
-    const selectedBg = this._isDarkMode() ? this.shade(color, 15) : this.shade(color, 10);
-    const contrastText = this.getContrastColor(color);
-
-    return `
-  --nui-chip-${name}-solid-bg: ${color};
-  --nui-chip-${name}-solid-text: ${contrastText};
-  --nui-chip-${name}-solid-border: ${color};
-  --nui-chip-${name}-solid-hover-bg: ${hoverColor};
-  --nui-chip-${name}-solid-selected-bg: ${selectedBg};
-  --nui-chip-${name}-outline-bg: transparent;
-  --nui-chip-${name}-outline-text: ${color};
-  --nui-chip-${name}-outline-border: ${color};
-  --nui-chip-${name}-outline-hover-bg: ${this.withAlpha(color, 0.1)};
-  --nui-chip-${name}-outline-selected-bg: ${selectedBg};
-  --nui-chip-${name}-outline-selected-text: ${contrastText};
-  --nui-chip-${name}-ghost-bg: ${this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 90)};
-  --nui-chip-${name}-ghost-text: ${color};
-  --nui-chip-${name}-ghost-hover-bg: ${this.withAlpha(color, 0.2)};
-  --nui-chip-${name}-ghost-selected-bg: ${this._isDarkMode() ? this.shade(color, 60) : this.tint(color, 80)};
-  --nui-chip-${name}-ghost-selected-text: ${contrastText};
-  --nui-chip-${name}-focus-color: ${this.tint(color, 60)};
-`;
-  }
-
-  private generateSwitchButtonVariables(name: string, color: string): string {
-    const hoverColor = this.shade(color, 10);
-    return `
-  --nui-switch-${name}-color: ${color};
-  --nui-switch-${name}-color-hover: ${hoverColor};
-  --nui-switch-${name}-button-solid-bg: ${color};
-  --nui-switch-${name}-button-solid-text: ${this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE};
-  --nui-switch-${name}-button-solid-hover-bg: ${hoverColor};
-  --nui-switch-${name}-button-solid-inactive-bg: ${this.withAlpha(color, 0.2)};
-  --nui-switch-${name}-button-solid-inactive-text: ${color};
-  --nui-switch-${name}-button-outline-bg: ${this.withAlpha(color, 0.1)};
-  --nui-switch-${name}-button-outline-text: ${color};
-  --nui-switch-${name}-button-outline-hover-bg: ${this.withAlpha(color, 0.2)};
-  --nui-switch-${name}-button-ghost-bg: ${this.withAlpha(color, 0.1)};
-  --nui-switch-${name}-button-ghost-text: ${color};
-  --nui-switch-${name}-button-ghost-hover-bg: ${this.withAlpha(color, 0.2)};
-`;
-  }
-
-  private generateModalVariables(name: string, color: string): string {
-    return `
-  --nui-modal-${name}-icon-color: ${color};
-  --nui-modal-${name}-text-color: ${color};
-  --nui-modal-${name}-border-color: ${color};
-`;
-  }
-
-  private generateToastVariables(name: string, color: string): string {
-    const bgColor = this._isDarkMode() ? this.shade(color, 85) : this.tint(color, 96);
-    const bgColorHover = this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 94);
-    const borderColor = this._isDarkMode() ? this.shade(color, 70) : this.tint(color, 80);
-    const textColor = this._isDarkMode() ? this.tint(color, 75) : this.shade(color, 25);
-    const titleColor = this._isDarkMode() ? this.tint(color, 65) : this.shade(color, 30);
-    const iconColor = this._isDarkMode() ? this.tint(color, 40) : color;
-    const progressColor = this._isDarkMode() ? this.tint(color, 50) : color;
-    return `
-  --nui-toast-${name}-bg: ${bgColor};
-  --nui-toast-${name}-bg-hover: ${bgColorHover};
-  --nui-toast-${name}-border: ${borderColor};
-  --nui-toast-${name}-color: ${textColor};
-  --nui-toast-${name}-title-color: ${titleColor};
-  --nui-toast-${name}-icon-color: ${iconColor};
-  --nui-toast-${name}-icon-bg: ${this.withAlpha(color, this._isDarkMode() ? 0.2 : 0.1)};
-  --nui-toast-${name}-progress-bg: ${progressColor};
-  --nui-toast-${name}-close-color: ${color};
-  --nui-toast-${name}-close-hover: ${color};
-`;
-  }
-
-  private generateProgressBarVariables(name: string, color: string): string {
-    return `
-  --nui-progress-bar-${name}-fill-bg: ${color};
-  --nui-progress-bar-${name}-fill-hover-bg: ${this.shade(color, 10)};
-  --nui-progress-bar-${name}-track-bg: ${this._isDarkMode() ? this.shade(color, 80) : this.tint(color, 90)};
-  --nui-progress-bar-${name}-track-border: ${this._isDarkMode() ? this.shade(color, 70) : this.tint(color, 80)};
-  --nui-progress-bar-${name}-text: ${this._isDarkMode() ? PURE_COLORS.BLACK : PURE_COLORS.WHITE};
-  --nui-progress-bar-${name}-value-text: ${color};
-`;
   }
 
   private generatePaginatorVariables(name: string, color: string): string {
@@ -647,7 +574,6 @@ export class ThemeService {
    * El tooltip usa colores inversos al tema para mejor contraste.
    */
   private generateTooltipVariables(): string {
-    // Tooltip usa el mismo fondo que popover (bg-primary) para consistencia
     return `
   --tooltip-bg: var(--nui-bg-primary);
   --tooltip-text: var(--nui-text-primary);
@@ -658,20 +584,35 @@ export class ThemeService {
    * Genera variables de color para Popover según el tema.
    * El popover usa los colores del tema con un fondo ligeramente elevado.
    */
-  private generatePopoverVariables(): string {
-    if (this._isDarkMode()) {
-      return `
-  --popover-bg: var(--nui-bg-primary);
-  --popover-text: var(--nui-text-primary);
-  --popover-border-color: var(--nui-gray-600);
-`;
-    } else {
-      return `
-  --popover-bg: var(--nui-bg-primary);
-  --popover-text: var(--nui-text-primary);
-  --popover-border-color: var(--nui-gray-200);
-`;
-    }
+  private generatePopoverVariables(name: string, color: string): string {
+    const contrastText = this.getContrastColor(color);
+    const alpha80 = this.withAlpha(color, 0.7);
+    const alpha40 = this.withAlpha(color, 0.4);
+
+    // Usamos las variables base del sistema para asegurar consistencia
+    const surfaceBg = this._isDarkMode() ? 'var(--nui-bg-secondary)' : 'var(--nui-bg-primary)';
+    const surfaceText = 'var(--nui-text-primary)';
+
+    // Aquí respetamos tus grays específicos para el borde si lo prefieres,
+    // o usamos las variables semánticas de borde.
+    const surfaceBorder = this._isDarkMode() ? 'var(--nui-gray-700)' : 'var(--nui-gray-200)';
+
+    return `      
+      /* Opción 1: Colored (Todo del color, ej: tooltip error) */
+      --nui-popover-${name}-bg: ${color};
+      --nui-popover-${name}-text: ${contrastText};
+      --nui-popover-${name}-border: ${color}; 
+
+      --nui-popover-${name}-outline-border: ${alpha40};
+
+      --nui-popover-${name}-ghost-bg: ${alpha80};
+      --nui-popover-${name}-ghost-text: ${contrastText};
+
+      /* Opción 2: Surface (Estándar) */
+      --nui-popover-surface-bg: ${surfaceBg};
+      --nui-popover-surface-text: ${surfaceText};
+      --nui-popover-surface-border: ${surfaceBorder};
+    `;
   }
 
   /**

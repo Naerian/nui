@@ -1,6 +1,8 @@
 @use 'components/button';
 @use 'components/action-menu';
+@use 'components/popover';
 
 // Global styles for global components
 @include button.nui-button-styles;
 @include action-menu.nui-action-menu-styles;
+@include popover.nui-popover-styles;

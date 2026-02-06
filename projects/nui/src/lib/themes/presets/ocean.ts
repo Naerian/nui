@@ -20,7 +20,7 @@ export const ocean: ThemePreset = {
       primary: '#00a4ff',
       secondary: '#78909c',
       accent: '#3fb5c5',
-      success: '#4db6ac',
+      success: '#3bb573',
       info: '#42a5f5',
       warning: '#ff8852',
       danger: '#ff5252',

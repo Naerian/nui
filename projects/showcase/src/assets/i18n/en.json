@@ -395,6 +395,11 @@
         "title": "Basic usage",
         "description": "Simple popover with text content. The popover is shown on click on the element (default behavior)."
       },
+      "colors": {
+        "title": "Colors and variants",
+        "description": "Supports all NUI colors and variants (Solid, Outline, Ghost).",
+        "note": "Combine <code>color</code> and <code>variant</code> to customize the popover's appearance according to your needs."
+      },
       "positions": {
         "title": "Positions",
         "description": "Control the popover's preferred position: top, bottom, left or right. The popover automatically repositions if there's not enough space."

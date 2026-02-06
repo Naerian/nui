@@ -29,6 +29,32 @@
           </div>
         }
 
+        @case ('colors') {
+          <div class="example-preview">
+            <nui-button
+              nuiPopover="Warning ghost popover with custom color and variant"
+              [nuiPopoverColor]="'warning'"
+              [nuiPopoverVariant]="'ghost'"
+            >
+              Warning Ghost Popover
+            </nui-button>
+            <nui-button
+              nuiPopover="Error outline popover with custom color and variant"
+              [nuiPopoverColor]="'danger'"
+              [nuiPopoverVariant]="'outline'"
+            >
+              Error Outline Popover
+            </nui-button>
+
+            <nui-button
+              nuiPopover="Success popover with custom color and default variant"
+              [nuiPopoverColor]="'success'"
+            >
+              Success Popover
+            </nui-button>
+          </div>
+        }
+
         @case ('positions') {
           <div class="example-preview">
             <nui-button nuiPopover="Popover Top" nuiPopoverPosition="top">Top</nui-button>

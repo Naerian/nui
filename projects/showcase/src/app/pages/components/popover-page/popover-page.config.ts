@@ -23,6 +23,47 @@ export const POPOVER_PAGE_CONFIG: ComponentPageConfig = {
       ],
     },
     {
+      id: 'colors',
+      title: 'components.popover.colors.title',
+      description: 'components.popover.colors.description',
+      note: {
+        type: 'info',
+        content: 'components.popover.colors.note',
+      },
+      anchor: 'colors',
+      examples: [
+        {
+          title: 'codeExamples.html',
+          code: `<!-- Popover with warning color and ghost variant -->
+<nui-button
+  nuiPopover="Warning ghost popover with custom color and variant"
+  [nuiPopoverColor]="'warning'"
+  [nuiPopoverVariant]="'ghost'"
+>
+  Warning Ghost Popover
+</nui-button>
+
+<!-- Popover with danger color and outline variant -->
+<nui-button
+  nuiPopover="Error outline popover with custom color and variant"
+  [nuiPopoverColor]="'danger'"
+  [nuiPopoverVariant]="'outline'"
+>
+  Error Outline Popover
+</nui-button>
+
+<!-- Popover with success color and default variant -->
+<nui-button
+  nuiPopover="Success popover with custom color and default variant"
+  [nuiPopoverColor]="'success'"
+>
+  Success Popover
+</nui-button>`,
+          language: 'html',
+        },
+      ],
+    },
+    {
       id: 'positions',
       title: 'components.popover.positions.title',
       description: 'components.popover.positions.description',

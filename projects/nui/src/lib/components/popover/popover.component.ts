@@ -15,7 +15,14 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { PopoverContext, POPOVER_DATA, POPOVER_CLOSE, PopoverPosition } from './models/popover.model';
+import {
+  PopoverContext,
+  POPOVER_DATA,
+  POPOVER_CLOSE,
+  PopoverPosition,
+} from './models/popover.model';
+import { popoverAnimation } from './animations/popover.animations';
+import { NUIColor, NUIVariant } from 'nui';
 
 /**
  * @name
@@ -23,53 +30,21 @@ import { PopoverContext, POPOVER_DATA, POPOVER_CLOSE, PopoverPosition } from './
  * @description
  * Componente interno que renderiza el contenido del popover.
  * No debe ser usado directamente. Usa la directiva `nuiPopover` en su lugar.
- * 
+ *
  * @internal
  */
 @Component({
   selector: 'nui-popover',
   standalone: true,
   imports: [CommonModule],
-  host: {
-    class: 'nui-popover',
-    role: 'dialog',
-    '[@fadeIn]': 'true',
-    '[attr.data-position]': 'position()',
-    '[attr.id]': 'popoverId()',
-    '[class]': 'popoverClass()',
-    '[style.max-width]': 'maxWidth()',
-    '[style.min-width]': 'minWidth()',
-  },
-  template: `
-    @if (showArrow()) {
-      <div class="nui-popover__arrow"></div>
-    }
-    <div class="nui-popover__content">
-      @if (isTemplate()) {
-        <ng-container *ngTemplateOutlet="$any(content()); context: context()"></ng-container>
-      } @else if (isComponent()) {
-        <ng-container #dynamicComponent></ng-container>
-      } @else {
-        <div [innerHTML]="content()"></div>
-      }
-    </div>
-  `,
+  templateUrl: './popover.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('fadeIn', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'scale(0.95) translateY(-4px)' }),
-        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'scale(1) translateY(0)' })),
-      ]),
-      transition(':leave', [
-        animate('150ms cubic-bezier(0.4, 0, 1, 1)', style({ opacity: 0, transform: 'scale(0.95) translateY(-4px)' })),
-      ]),
-    ]),
-  ],
+  animations: [popoverAnimation],
 })
 export class PopoverComponent implements OnInit {
-  @ViewChild('dynamicComponent', { read: ViewContainerRef }) dynamicComponentContainer?: ViewContainerRef;
+  @ViewChild('dynamicComponent', { read: ViewContainerRef })
+  dynamicComponentContainer?: ViewContainerRef;
 
   /**
    * Contenido del popover (string, TemplateRef o Component)
@@ -85,6 +60,16 @@ export class PopoverComponent implements OnInit {
    * Mostrar flecha
    */
   readonly showArrow = input(true);
+
+  /**
+   * Color del popover (usa la paleta de NUI)
+   */
+  readonly color = input<NUIColor | null | undefined>(null);
+
+  /**
+   * Variante  del popover (usa las variantes de NUI)
+   */
+  readonly variant = input<NUIVariant | null | undefined>(null);
 
   /**
    * ID único para accesibilidad
@@ -126,6 +111,31 @@ export class PopoverComponent implements OnInit {
    */
   readonly isComponent = computed(() => typeof this.content() === 'function');
 
+  /**
+   * Clases CSS dinámicas para el host, basadas en color y variante
+   */
+  protected readonly mainClasses = computed(() => {
+    const classes = [];
+
+    // Clase de color (ej: nui-popover--primary)
+    if (this.color()) {
+      classes.push(`nui-popover--${this.color()}`);
+    }
+
+    // Clase de variante (ej: nui-popover--outline)
+    // Solo aplicamos variante si hay color, o si queremos soportar variantes en surface
+    if (this.variant()) {
+      classes.push(`nui-popover--${this.variant()}`);
+    }
+
+    // Si el usuario pasó una clase personalizada, también la incluimos
+    if (this.popoverClass()) {
+      classes.push(this.popoverClass()!);
+    }
+
+    return classes.join(' ');
+  });
+
   private dynamicComponentRef?: ComponentRef<any>;
   private destroyed = false;
 
@@ -140,6 +150,13 @@ export class PopoverComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this.destroyed = true;
+    if (this.dynamicComponentRef) {
+      this.dynamicComponentRef.destroy();
+    }
+  }
+
   /**
    * Crea un injector hijo con tokens específicos para el popover
    */
@@ -148,15 +165,15 @@ export class PopoverComponent implements OnInit {
     return Injector.create({
       parent: this.injector(),
       providers: [
-        { 
-          provide: POPOVER_DATA, 
-          useValue: contextValue?.data 
+        {
+          provide: POPOVER_DATA,
+          useValue: contextValue?.data,
         },
-        { 
-          provide: POPOVER_CLOSE, 
-          useValue: contextValue?.close ?? (() => {}) 
-        }
-      ]
+        {
+          provide: POPOVER_CLOSE,
+          useValue: contextValue?.close ?? (() => {}),
+        },
+      ],
     });
   }
 
@@ -167,37 +184,29 @@ export class PopoverComponent implements OnInit {
     if (!this.dynamicComponentContainer || !this.isComponent()) return;
 
     this.dynamicComponentContainer.clear();
-    
+
     const componentType = this.content() as Type<any>;
     const popoverInjector = this.createPopoverInjector();
-    
-    this.dynamicComponentRef = this.dynamicComponentContainer.createComponent(
-      componentType,
-      { injector: popoverInjector }
-    );
+
+    this.dynamicComponentRef = this.dynamicComponentContainer.createComponent(componentType, {
+      injector: popoverInjector,
+    });
 
     // Pasar los datos del contexto al componente (backward compatibility)
     // Los componentes pueden usar inyección de tokens O propiedades directas
     const contextValue = this.context();
     if (contextValue) {
       const instance = this.dynamicComponentRef.instance;
-      
+
       // Asignar close directamente (todos los PopoverContentComponent deben tenerlo)
       instance.close = contextValue.close;
-      
+
       // Asignar data directamente (puede o no existir en el componente)
       // La asignación funcionará incluso si la propiedad se declara con `!` o `?`
       instance.data = contextValue.data;
     }
-    
+
     // Detectar cambios
     this.dynamicComponentRef.changeDetectorRef.detectChanges();
-  }
-
-  ngOnDestroy(): void {
-    this.destroyed = true;
-    if (this.dynamicComponentRef) {
-      this.dynamicComponentRef.destroy();
-    }
   }
 }

@@ -1,0 +1,51 @@
+@use '../../styles/config' as config;
+
+// ========================================
+// POPOVER - Variables & Tokens
+// ========================================
+
+// Tokens
+$popover-padding: 1rem !default;
+$popover-max-width: 20rem !default;
+$popover-min-width: 5rem !default;
+$popover-border-width: 1px !default;
+$popover-arrow-size: 0.5rem !default;
+$popover-z-index: 1000 !default;
+
+// Animation Tokens
+$popover-transition-duration: 200ms !default;
+$popover-transition-timing: cubic-bezier(0.4, 0, 0.2, 1) !default;
+
+// Distance from the trigger element to the popover (used in positioning)
+$popover-distance: 0.313rem !default;
+
+// MIXIN
+@mixin nui-popover-vars {
+  // Spacing & Dimensions
+  --nui-popover-padding: #{$popover-padding};
+  --nui-popover-max-width: #{$popover-max-width};
+  --nui-popover-min-width: #{$popover-min-width};
+  --nui-popover-arrow-size: #{$popover-arrow-size};
+
+  // Z-Index
+  --nui-popover-z-index: #{$popover-z-index};
+
+  // Typography
+  --nui-popover-font-size: var(--nui-font-size-sm);
+  --nui-popover-font-weight: var(--nui-font-weight-regular);
+  --nui-popover-line-height: var(--nui-line-height-md);
+
+  // Borders & Radius
+  --nui-popover-border-width: #{$popover-border-width};
+  --nui-popover-border-radius: var(--nui-border-radius-sm);
+
+  // Distance
+  --nui-popover-distance: #{$popover-distance};
+
+  // Shadows
+  --nui-popover-shadow: var(--nui-shadow-elevated);
+
+  // Animation
+  --nui-popover-transition-duration: #{$popover-transition-duration};
+  --nui-popover-transition-timing: #{$popover-transition-timing};
+}

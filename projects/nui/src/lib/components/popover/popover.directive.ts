@@ -14,7 +14,6 @@ import {
   DestroyRef,
   ComponentRef,
   Type,
-  Injector,
   untracked,
   computed,
 } from '@angular/core';
@@ -32,7 +31,7 @@ import { fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { PopoverManagerService } from './services/popover-manager.service';
 import { PopoverComponent } from './popover.component';
-import { NUI_CONFIG } from '../../configs';
+import { NUI_CONFIG, NUIColor, NUIVariant } from '../../configs';
 
 /**
  * @name
@@ -41,15 +40,15 @@ import { NUI_CONFIG } from '../../configs';
  * Directiva para mostrar popovers interactivos con soporte para texto, templates y componentes dinámicos.
  * Utiliza Angular CDK Overlay para un posicionamiento preciso y responsive.
  * A diferencia del tooltip, el popover permite interacción completa con el contenido.
- * 
+ *
  * @example
  * // Popover básico con texto
  * <button nuiPopover="Información adicional">Ver info</button>
- * 
+ *
  * @example
  * // Popover con posición específica
  * <button nuiPopover="Contenido" nuiPopoverPosition="bottom">Mostrar</button>
- * 
+ *
  * @example
  * // Popover con template personalizado
  * <button [nuiPopover]="popoverTemplate">Ver detalles</button>
@@ -60,15 +59,15 @@ import { NUI_CONFIG } from '../../configs';
  *     <button (click)="close()">Cerrar</button>
  *   </div>
  * </ng-template>
- * 
+ *
  * @example
  * // Popover con componente dinámico
  * <button [nuiPopover]="MyCustomComponent">Abrir</button>
- * 
+ *
  * @example
  * // Popover con configuración personalizada
- * <button 
- *   nuiPopover="Contenido" 
+ * <button
+ *   nuiPopover="Contenido"
  *   nuiPopoverPosition="right"
  *   [nuiPopoverShowDelay]="200"
  *   [nuiPopoverMaxWidth]="'400px'"
@@ -106,7 +105,9 @@ export class PopoverDirective implements OnInit, OnDestroy {
   /**
    * Contenido del popover (texto, template o componente)
    */
-  readonly content = input.required<string | TemplateRef<PopoverContext> | Type<any>>({ alias: 'nuiPopover' });
+  readonly content = input.required<string | TemplateRef<PopoverContext> | Type<any>>({
+    alias: 'nuiPopover',
+  });
 
   /**
    * Posición del popover
@@ -122,6 +123,18 @@ export class PopoverDirective implements OnInit, OnDestroy {
   readonly nuiPopoverEvent = input<PopoverEvent | undefined>(undefined);
 
   /**
+   * Color del popover (primary, danger, etc.)
+   * @default null (usa color de fondo por defecto, o valor global configurado)
+   */
+  readonly nuiPopoverColor = input<NUIColor | undefined>(undefined);
+
+  /**
+   * Variante del popover (elevated, outlined, etc.)
+   * @default null (usa variante por defecto, o valor global configurado)
+   */
+  readonly nuiPopoverVariant = input<NUIVariant | undefined>(undefined);
+
+  /**
    * Delay antes de mostrar el popover (ms)
    * @default 0 (o valor global configurado)
    */
@@ -129,13 +142,13 @@ export class PopoverDirective implements OnInit, OnDestroy {
 
   /**
    * Delay antes de ocultar el popover (ms)
-   * 
+   *
    * NOTAS IMPORTANTES:
    * - El hideDelay NO se aplica al hacer scroll (cierre inmediato para mejor UX)
-   * - Para popovers con event="hover" sin hideDelay configurado, se aplica 
+   * - Para popovers con event="hover" sin hideDelay configurado, se aplica
    *   automáticamente un delay mínimo de 100ms para permitir mover el mouse al popover
    * - Si configuras explícitamente hideDelay=0 en modo hover, se respetará el 0
-   * 
+   *
    * @default 0 (o valor global configurado)
    */
   readonly nuiPopoverHideDelay = input<number | undefined>(undefined);
@@ -194,11 +207,11 @@ export class PopoverDirective implements OnInit, OnDestroy {
   /**
    * Permite múltiples popovers abiertos simultáneamente
    * Si es false, al abrir un popover se cierran todos los demás
-   * 
+   *
    * NOTA: Los popovers con event="hover" permiten múltiples abiertos por defecto
    * (allowMultiple=true automático) para mejor experiencia de usuario.
    * Puedes forzar el comportamiento estableciendo explícitamente este valor.
-   * 
+   *
    * @default false para click/focus/manual, true para hover (o valor global configurado)
    */
   readonly nuiPopoverAllowMultiple = input<boolean | undefined>(undefined);
@@ -235,40 +248,41 @@ export class PopoverDirective implements OnInit, OnDestroy {
   readonly isVisible = signal(false);
 
   // Computed signals para valores con fallback a configuración global
-  private readonly position = computed<PopoverPosition>(() => 
-    this.nuiPopoverPosition() ?? this.globalConfig.popover?.position ?? 'top'
+  private readonly position = computed<PopoverPosition>(
+    () => this.nuiPopoverPosition() ?? this.globalConfig.popover?.position ?? 'top'
   );
 
-  private readonly event = computed<PopoverEvent>(() => 
-    this.nuiPopoverEvent() ?? this.globalConfig.popover?.event ?? 'click'
+  private readonly event = computed<PopoverEvent>(
+    () => this.nuiPopoverEvent() ?? this.globalConfig.popover?.event ?? 'click'
   );
 
-  private readonly showDelay = computed(() => 
-    this.nuiPopoverShowDelay() ?? this.globalConfig.popover?.showDelay ?? 0
+  private readonly showDelay = computed(
+    () => this.nuiPopoverShowDelay() ?? this.globalConfig.popover?.showDelay ?? 0
   );
 
-  private readonly hideDelay = computed(() => 
-    this.nuiPopoverHideDelay() ?? this.globalConfig.popover?.hideDelay ?? 0
+  private readonly hideDelay = computed(
+    () => this.nuiPopoverHideDelay() ?? this.globalConfig.popover?.hideDelay ?? 0
   );
 
-  private readonly showArrow = computed(() => 
-    this.nuiPopoverShowArrow() ?? this.globalConfig.popover?.showArrow ?? true
+  private readonly showArrow = computed(
+    () => this.nuiPopoverShowArrow() ?? this.globalConfig.popover?.showArrow ?? true
   );
 
-  private readonly closeOnClickOutside = computed(() => 
-    this.nuiPopoverCloseOnClickOutside() ?? this.globalConfig.popover?.closeOnClickOutside ?? true
+  private readonly closeOnClickOutside = computed(
+    () =>
+      this.nuiPopoverCloseOnClickOutside() ?? this.globalConfig.popover?.closeOnClickOutside ?? true
   );
 
-  private readonly closeOnEscape = computed(() => 
-    this.nuiPopoverCloseOnEscape() ?? this.globalConfig.popover?.closeOnEscape ?? true
+  private readonly closeOnEscape = computed(
+    () => this.nuiPopoverCloseOnEscape() ?? this.globalConfig.popover?.closeOnEscape ?? true
   );
 
-  private readonly maxWidth = computed(() => 
-    this.nuiPopoverMaxWidth() ?? this.globalConfig.popover?.maxWidth ?? '300px'
+  private readonly maxWidth = computed(
+    () => this.nuiPopoverMaxWidth() ?? this.globalConfig.popover?.maxWidth ?? '300px'
   );
 
-  private readonly minWidth = computed<string | undefined>(() => 
-    this.nuiPopoverMinWidth() ?? this.globalConfig.popover?.minWidth
+  private readonly minWidth = computed<string | undefined>(
+    () => this.nuiPopoverMinWidth() ?? this.globalConfig.popover?.minWidth
   );
 
   /**
@@ -294,12 +308,12 @@ export class PopoverDirective implements OnInit, OnDestroy {
     if (this.nuiPopoverAllowMultiple() !== undefined) {
       return this.nuiPopoverAllowMultiple()!;
     }
-    
+
     // Si es hover, permitir múltiples por defecto
     if (this.event() === 'hover') {
       return true;
     }
-    
+
     // Fallback a configuración global o false
     return this.globalConfig.popover?.allowMultiple ?? false;
   });
@@ -308,7 +322,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
     // Escuchar cuando otros popovers se abren
     this.popoverManager.onCloseOthers$
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((openingPopoverId) => {
+      .subscribe(openingPopoverId => {
         // Si no es este popover y está visible, cerrarlo
         if (openingPopoverId !== this.popoverId && this.isVisible()) {
           untracked(() => this.hide());
@@ -316,7 +330,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
       });
 
     // Effect para gestionar la visibilidad
-    effect((onCleanup) => {
+    effect(onCleanup => {
       if (!this.isVisible() && this.overlayRef) {
         this.detach();
       }
@@ -468,7 +482,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
     } else {
       this.displayPopover();
     }
-    
+
     return true;
   }
 
@@ -489,7 +503,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
     } else {
       this.hidePopover();
     }
-    
+
     return true;
   }
 
@@ -535,6 +549,8 @@ export class PopoverDirective implements OnInit, OnDestroy {
       this.componentRef.setInput('maxWidth', this.maxWidth());
       this.componentRef.setInput('minWidth', this.minWidth());
       this.componentRef.setInput('popoverId', this.popoverId);
+      this.componentRef.setInput('color', this.nuiPopoverColor());
+      this.componentRef.setInput('variant', this.nuiPopoverVariant());
 
       // Pasar contexto con función close y datos
       this.componentRef.setInput('context', {
@@ -571,7 +587,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
   private hidePopover(): void {
     this.isVisible.set(false);
     this.popoverManager.unregister(this.popoverId); // Desregistrar del manager
-    
+
     // Emitir evento de ocultar
     this.nuiPopoverHide.emit();
   }
@@ -616,7 +632,8 @@ export class PopoverDirective implements OnInit, OnDestroy {
 
     // Listener para clicks en el backdrop (si está habilitado)
     if (this.nuiPopoverBackdrop() && this.nuiBackdropClose()) {
-      this.overlayRef.backdropClick()
+      this.overlayRef
+        .backdropClick()
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(() => {
           this.hide();
@@ -627,7 +644,8 @@ export class PopoverDirective implements OnInit, OnDestroy {
     this.setupScrollListener();
 
     // Listener para actualizar estado cuando el overlay se detach
-    this.overlayRef.detachments()
+    this.overlayRef
+      .detachments()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         // Actualizar el estado cuando el overlay se cierra automáticamente
@@ -639,16 +657,14 @@ export class PopoverDirective implements OnInit, OnDestroy {
       });
 
     // Listener para actualizar la posición cuando cambia
-    positionStrategy.positionChanges
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((change) => {
-        if (this.componentRef) {
-          const position = this.getPositionFromConnectionPair(change.connectionPair);
-          this.currentPosition = position;
-          this.componentRef.instance.position.set(position);
-          this.componentRef.changeDetectorRef.detectChanges();
-        }
-      });
+    positionStrategy.positionChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(change => {
+      if (this.componentRef) {
+        const position = this.getPositionFromConnectionPair(change.connectionPair);
+        this.currentPosition = position;
+        this.componentRef.instance.position.set(position);
+        this.componentRef.changeDetectorRef.detectChanges();
+      }
+    });
   }
 
   /**
@@ -676,37 +692,133 @@ export class PopoverDirective implements OnInit, OnDestroy {
     switch (this.position()) {
       case 'top':
         positions.push(
-          { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom', offsetY: -offset },
-          { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top', offsetY: offset },
-          { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: offset },
-          { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: -offset }
+          {
+            originX: 'center',
+            originY: 'top',
+            overlayX: 'center',
+            overlayY: 'bottom',
+            offsetY: -offset,
+          },
+          {
+            originX: 'center',
+            originY: 'bottom',
+            overlayX: 'center',
+            overlayY: 'top',
+            offsetY: offset,
+          },
+          {
+            originX: 'end',
+            originY: 'center',
+            overlayX: 'start',
+            overlayY: 'center',
+            offsetX: offset,
+          },
+          {
+            originX: 'start',
+            originY: 'center',
+            overlayX: 'end',
+            overlayY: 'center',
+            offsetX: -offset,
+          }
         );
         break;
 
       case 'bottom':
         positions.push(
-          { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top', offsetY: offset },
-          { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom', offsetY: -offset },
-          { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: offset },
-          { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: -offset }
+          {
+            originX: 'center',
+            originY: 'bottom',
+            overlayX: 'center',
+            overlayY: 'top',
+            offsetY: offset,
+          },
+          {
+            originX: 'center',
+            originY: 'top',
+            overlayX: 'center',
+            overlayY: 'bottom',
+            offsetY: -offset,
+          },
+          {
+            originX: 'end',
+            originY: 'center',
+            overlayX: 'start',
+            overlayY: 'center',
+            offsetX: offset,
+          },
+          {
+            originX: 'start',
+            originY: 'center',
+            overlayX: 'end',
+            overlayY: 'center',
+            offsetX: -offset,
+          }
         );
         break;
 
       case 'left':
         positions.push(
-          { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: -offset },
-          { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: offset },
-          { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom', offsetY: -offset },
-          { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top', offsetY: offset }
+          {
+            originX: 'start',
+            originY: 'center',
+            overlayX: 'end',
+            overlayY: 'center',
+            offsetX: -offset,
+          },
+          {
+            originX: 'end',
+            originY: 'center',
+            overlayX: 'start',
+            overlayY: 'center',
+            offsetX: offset,
+          },
+          {
+            originX: 'center',
+            originY: 'top',
+            overlayX: 'center',
+            overlayY: 'bottom',
+            offsetY: -offset,
+          },
+          {
+            originX: 'center',
+            originY: 'bottom',
+            overlayX: 'center',
+            overlayY: 'top',
+            offsetY: offset,
+          }
         );
         break;
 
       case 'right':
         positions.push(
-          { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: offset },
-          { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: -offset },
-          { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom', offsetY: -offset },
-          { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top', offsetY: offset }
+          {
+            originX: 'end',
+            originY: 'center',
+            overlayX: 'start',
+            overlayY: 'center',
+            offsetX: offset,
+          },
+          {
+            originX: 'start',
+            originY: 'center',
+            overlayX: 'end',
+            overlayY: 'center',
+            offsetX: -offset,
+          },
+          {
+            originX: 'center',
+            originY: 'top',
+            overlayX: 'center',
+            overlayY: 'bottom',
+            offsetY: -offset,
+          },
+          {
+            originX: 'center',
+            originY: 'bottom',
+            overlayX: 'center',
+            overlayY: 'top',
+            offsetY: offset,
+          }
         );
         break;
     }
@@ -737,7 +849,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
 
     fromEvent<MouseEvent>(document, 'click')
       .pipe(
-        filter((event) => {
+        filter(event => {
           const clickTarget = event.target as HTMLElement;
           const hostElement = this.elementRef.nativeElement;
           const popoverElement = this.overlayRef?.overlayElement;
@@ -759,7 +871,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
   private setupEscapeListener(): void {
     fromEvent<KeyboardEvent>(document, 'keydown')
       .pipe(
-        filter((event) => event.key === 'Escape' && this.isVisible()),
+        filter(event => event.key === 'Escape' && this.isVisible()),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(() => this.hide());
@@ -784,7 +896,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
     const element = this.elementRef.nativeElement;
     const tagName = element.tagName.toLowerCase();
     const focusableTags = ['input', 'button', 'select', 'textarea', 'a'];
-    
+
     return focusableTags.includes(tagName) || element.hasAttribute('tabindex');
   }
 
@@ -803,4 +915,3 @@ export class PopoverDirective implements OnInit, OnDestroy {
     }
   }
 }
-

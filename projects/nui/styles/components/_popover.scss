@@ -1,211 +1,157 @@
-@use '../config';
-@use '../mixins';
-@use '../variables/popover/popover-variables.scss';
+@use '../mixins' as global;
+@use '../mixins-base' as base;
+@use '../variables/popover-vars' as vars;
 
-// ========================================
-// POPOVER - Estilos globales
-// ========================================
-// Estilos para el componente popover usando CDK Overlay.
-// Los estilos deben ser globales porque el popover se renderiza
-// en un overlay fuera del componente host.
-// ========================================
+@mixin popover-theme($color: null, $variant: 'solid') {
+  @if $color {
+    // === IT HAS A DEFINED COLOR (Primary, Danger, etc.) ===
+    @if $variant == 'solid' {
+      --popover-bg: var(--nui-popover-#{$color}-bg);
+      --popover-text: var(--nui-popover-#{$color}-text);
+      --popover-border-color: var(--nui-popover-#{$color}-border);
+      --popover-arrow-filter: none;
+    }
 
-// Clase del panel overlay del CDK
-.nui-popover-overlay-pane {
-  z-index: 1060 !important; // Más alto que modales (1050)
-  pointer-events: none; // El pane no captura clicks, solo el contenido
+    @if $variant == 'outline' {
+      --popover-bg: var(--nui-popover-surface-bg);
+      --popover-text: var(--nui-popover-#{$color}-bg);
+      --popover-border-color: var(--nui-popover-#{$color}-outline-border);
+      --popover-shadow: var(--nui-popover-shadow);
+    }
 
-  // El popover dentro sí captura clicks
+    @if $variant == 'ghost' {
+      --popover-bg: var(--nui-popover-#{$color}-ghost-bg);
+      --popover-text: var(--nui-popover-#{$color}-ghost-text);
+      --popover-border-color: transparent;
+      --popover-shadow: var(--nui-popover-shadow);
+    }
+  } @else {
+    // === NO COLOR (Surface Default) ===
+    --popover-bg: var(--nui-popover-surface-bg);
+    --popover-text: var(--nui-popover-surface-text);
+    --popover-border-color: var(--nui-popover-surface-border);
+    --popover-shadow: var(--nui-popover-shadow);
+  }
+}
+
+@mixin nui-popover-styles {
+  .nui-popover-overlay-pane {
+    z-index: 1060 !important;
+    pointer-events: none;
+
+    .nui-popover {
+      pointer-events: auto;
+    }
+  }
+
+  .nui-popover-overlay {
+    z-index: var(--nui-popover-z-index);
+  }
+
   .nui-popover {
-    pointer-events: auto;
-  }
-}
+    @include popover-theme(null);
 
-.nui-popover-overlay {
-  z-index: var(--popover-z-index);
-  pointer-events: auto; // A diferencia del tooltip, el popover es interactivo
-}
+    position: relative;
+    display: block;
+    max-width: var(--nui-popover-max-width);
+    min-width: var(--nui-popover-min-width);
+    padding: var(--nui-popover-padding);
+    background-color: var(--popover-bg);
+    color: var(--popover-text);
+    border: var(--nui-popover-border-width) solid var(--popover-border-color);
+    border-radius: var(--nui-popover-border-radius);
+    box-shadow: var(--nui-popover-shadow);
+    transform-origin: center center;
+    transition:
+      opacity var(--nui-popover-transition-duration) var(--nui-popover-transition-timing),
+      transform var(--nui-popover-transition-duration) var(--nui-popover-transition-timing);
 
-.nui-popover {
-  position: relative;
-  display: block;
-  max-width: var(--popover-max-width);
-  background-color: var(--popover-bg);
-  color: var(--popover-text);
-  border: var(--popover-border-width) solid var(--popover-border-color);
-  border-radius: var(--popover-border-radius);
-  box-shadow: var(--popover-shadow);
-  transition:
-    opacity var(--popover-transition-duration) var(--popover-transition-timing),
-    transform var(--popover-transition-duration) var(--popover-transition-timing);
-
-  // Contenido del popover
-  &__content {
-    padding: var(--popover-padding);
-
-    // Tipografía
-    font-size: var(--popover-font-size);
-    font-weight: var(--popover-font-weight);
-    line-height: var(--popover-line-height);
-
-    // Por defecto sin scroll - el contenido se ajusta naturalmente
-    // Si necesitas scroll, agrega la clase .nui-popover--scrollable al popover
-    overflow: visible;
-
-    // Por si el popover contiene HTML
-    p {
-      margin: 0;
-
-      &:not(:last-child) {
-        margin-bottom: 0.5rem;
-      }
-    }
-
-    strong,
-    b {
-      font-weight: var(--nui-font-weight-semibold);
-    }
-
-    // Encabezados en el popover
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      margin: 0 0 0.5rem 0;
-      font-weight: var(--nui-font-weight-semibold);
-      color: var(--popover-text);
-    }
-
-    h1 {
-      font-size: var(--nui-font-size-lg);
-    }
-    h2 {
-      font-size: var(--nui-font-size-md);
-    }
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-size: var(--nui-font-size-sm);
-    }
-
-    // Listas en el popover
-    ul,
-    ol {
-      margin: 0;
-      padding-left: 1.5rem;
-
-      &:not(:last-child) {
-        margin-bottom: 0.5rem;
-      }
-
-      li {
-        margin-bottom: 0.25rem;
-      }
-    }
-
-    // Botones en el popover
-    button,
-    .nui-button {
-      margin-top: 0.5rem;
-
-      &:not(:last-child) {
-        margin-right: 0.5rem;
-      }
-    }
-
-    // Enlaces en el popover
-    a {
-      color: var(--nui-color-primary);
-      text-decoration: underline;
-
-      &:hover {
-        color: var(--nui-color-primary-hover);
-      }
-    }
-
-    // Divisores
-    hr {
-      margin: 0.75rem 0;
-      border: none;
-      border-top: var(--popover-border);
-    }
-  }
-
-  // Modificador: Popover con scroll
-  &--scrollable &__content {
-    overflow: auto;
-    max-height: 60vh; // Limitar altura cuando necesite scroll
-  }
-
-  // Flecha del popover (sistema de triángulos con borders)
-  &__arrow {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
-  }
-
-  // Posicionamiento y forma de la flecha según la posición del popover
-  &[data-position='top'] &__arrow {
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 8px 8px 0 8px;
-    border-color: var(--popover-bg) transparent transparent transparent;
-    filter: drop-shadow(0 1px 0 var(--popover-border-color));
-  }
-
-  &[data-position='bottom'] &__arrow {
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 0 8px 8px 8px;
-    border-color: transparent transparent var(--popover-bg) transparent;
-    filter: drop-shadow(0 -1px 0 var(--popover-border-color));
-  }
-
-  &[data-position='left'] &__arrow {
-    right: -8px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-width: 8px 0 8px 8px;
-    border-color: transparent transparent transparent var(--popover-bg);
-    filter: drop-shadow(1px 0 0 var(--popover-border-color));
-  }
-
-  &[data-position='right'] &__arrow {
-    left: -8px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-width: 8px 8px 8px 0;
-    border-color: transparent var(--popover-bg) transparent transparent;
-    filter: drop-shadow(-1px 0 0 var(--popover-border-color));
-  }
-
-  // Clases de utilidad para alineación de contenido
-  &.nui-popover-left &__content {
-    text-align: left;
-  }
-
-  &.nui-popover-center &__content {
-    text-align: center;
-  }
-
-  &.nui-popover-right &__content {
-    text-align: right;
-  }
-
-  // Estado de carga (si el popover está cargando contenido dinámico)
-  &.nui-popover-loading {
     &__content {
+      font-size: var(--nui-popover-font-size);
+      font-weight: var(--nui-popover-font-weight);
+      line-height: var(--nui-popover-line-height);
+      overflow: visible;
+
+      p {
+        margin: 0;
+        &:not(:last-child) {
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      strong,
+      b {
+        font-weight: var(--nui-font-weight-semibold);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 0 0 0.5rem 0;
+        font-weight: var(--nui-font-weight-semibold);
+        color: var(--popover-text);
+      }
+      h1 {
+        font-size: var(--nui-font-size-lg);
+      }
+      h2 {
+        font-size: var(--nui-font-size-md);
+      }
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-size: var(--nui-font-size-sm);
+      }
+
+      ul,
+      ol {
+        margin: 0;
+        padding-left: 1.5rem;
+        &:not(:last-child) {
+          margin-bottom: 0.5rem;
+        }
+        li {
+          margin-bottom: 0.25rem;
+        }
+      }
+
+      button,
+      .nui-button {
+        margin-top: 0.5rem;
+        &:not(:last-child) {
+          margin-right: 0.5rem;
+        }
+      }
+
+      a {
+        color: var(--nui-color-primary);
+        text-decoration: underline;
+        &:hover {
+          color: var(--nui-color-primary-hover);
+        }
+      }
+
+      hr {
+        margin: 0.75rem 0;
+        border: none;
+        border-top: 1px solid var(--popover-border-color);
+      }
+    }
+
+    &--scrollable &__content {
+      overflow: auto;
+      max-height: 60vh;
+    }
+
+    &.nui-popover-loading &__content {
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 3rem;
-
       &::after {
         content: '';
         width: 1.5rem;
@@ -216,44 +162,143 @@
         animation: spin 0.8s linear infinite;
       }
     }
-  }
 
-  // Variante compacta para popovers pequeños
-  &.nui-popover-compact &__content {
-    padding: calc(var(--popover-padding) / 2);
-    font-size: var(--nui-font-size-xs);
-  }
-
-  // Variante amplia para popovers con mucho contenido
-  &.nui-popover-wide {
-    max-width: 30rem;
-  }
-}
-
-// Animación de spinner
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-// Estados interactivos (focus visible para accesibilidad)
-.nui-popover:focus-visible {
-  outline: 2px solid var(--nui-color-primary);
-  outline-offset: 2px;
-}
-
-// Backdrop para popovers con popoverBackdrop=true
-.nui-popover-backdrop {
-  @include mixins.overlay-backdrop();
-}
-
-// Media queries para responsive
-@media (max-width: 480px) {
-  .nui-popover {
-    max-width: calc(100vw - 2rem);
-
+    &.nui-popover-compact &__content {
+      padding: calc(var(--nui-popover-padding) / 2);
+      font-size: var(--nui-font-size-xs);
+    }
     &.nui-popover-wide {
+      max-width: 30rem;
+    }
+
+    &.nui-popover-left &__content {
+      text-align: left;
+    }
+    &.nui-popover-center &__content {
+      text-align: center;
+    }
+    &.nui-popover-right &__content {
+      text-align: right;
+    }
+
+    &__arrow {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+
+    // Positioning based on data-position attribute (top, bottom, left, right)
+    &[data-position='top'] {
+      margin-bottom: var(--nui-popover-distance);
+      transform-origin: bottom center;
+    }
+
+    &[data-position='bottom'] {
+      margin-top: var(--nui-popover-distance);
+      transform-origin: top center;
+    }
+
+    &[data-position='left'] {
+      margin-right: var(--nui-popover-distance);
+      transform-origin: center right;
+    }
+
+    &[data-position='right'] {
+      margin-left: var(--nui-popover-distance);
+      transform-origin: center left;
+    }
+
+    // Arrow positioning based on data-position attribute (top, bottom, left, right)
+    &[data-position='top'] &__arrow {
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 8px 8px 0 8px;
+      border-color: var(--popover-bg) transparent transparent transparent;
+      filter: drop-shadow(0 1px 0 var(--popover-border-color));
+    }
+
+    &[data-position='bottom'] &__arrow {
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 0 8px 8px 8px;
+      border-color: transparent transparent var(--popover-bg) transparent;
+      filter: drop-shadow(0 -1px 0 var(--popover-border-color));
+    }
+
+    &[data-position='left'] &__arrow {
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-width: 8px 0 8px 8px;
+      border-color: transparent transparent transparent var(--popover-bg);
+      filter: drop-shadow(1px 0 0 var(--popover-border-color));
+    }
+
+    &[data-position='right'] &__arrow {
+      left: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-width: 8px 8px 8px 0;
+      border-color: transparent var(--popover-bg) transparent transparent;
+      filter: drop-shadow(-1px 0 0 var(--popover-border-color));
+    }
+
+    // --- GENERATION OF COLOR & VARIANTS ---
+    $colors: primary, secondary, success, info, warning, danger, accent;
+    $variants: solid, outline, ghost;
+    @each $color in $colors {
+      &--#{$color} {
+        @include popover-theme($color);
+
+        @each $variant in $variants {
+          &.nui-popover--#{$variant} {
+            @include popover-theme($color, $variant);
+
+            // If variant is solid or ghost, remove arrow filter to make it the same color as the background/text
+            @if $variant == 'solid' {
+              .nui-popover__arrow {
+                filter: none;
+              }
+            }
+
+            // For ghost variant, we also remove the filter but keep the shadow for better
+            // visibility since the background is transparent
+            @if $variant == 'ghost' {
+              backdrop-filter: blur(2px);
+              -webkit-backdrop-filter: blur(2px);
+              .nui-popover__arrow {
+                filter: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Utils
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .nui-popover:focus-visible {
+    outline: 2px solid var(--nui-color-primary);
+    outline-offset: 2px;
+  }
+
+  .nui-popover-backdrop {
+    @include global.overlay-backdrop();
+  }
+
+  // Responsive mode (popover should never exceed viewport width on mobile)
+  @media (max-width: 480px) {
+    .nui-popover,
+    .nui-popover.nui-popover-wide {
       max-width: calc(100vw - 2rem);
     }
   }

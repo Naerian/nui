@@ -19,7 +19,7 @@ export const dopamine: ThemePreset = {
       success: '#15803d',
       info: '#156eed',
       warning: '#b36d08',
-      danger: '#972323',
+      danger: '#d13e3e',
     },
   },
 };

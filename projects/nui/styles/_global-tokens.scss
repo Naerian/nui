@@ -76,24 +76,6 @@
   --nui-spacing-xl: #{config.$padding-xl};
 
   /// =======================
-  /// SHADOWS
-  /// =======================
-  /// @group Shadows
-
-  --nui-box-shadow--xs: #{config.$box-shadow-xs};
-  --nui-box-shadow--sm: #{config.$box-shadow-sm};
-  --nui-box-shadow--md: #{config.$box-shadow-md};
-  --nui-box-shadow--lg: #{config.$box-shadow-lg};
-  --nui-box-shadow--xl: #{config.$box-shadow-xl};
-  --nui-box-shadow--button-hover: #{config.$box-shadow-button-hover};
-
-  --nui-shadow-container: var(--nui-box-shadow--sm);
-  --nui-shadow-elevated: var(--nui-box-shadow--md);
-  --nui-shadow-interactive: var(--nui-box-shadow--sm);
-  --nui-shadow-field: var(--nui-box-shadow--xs);
-  --nui-shadow-none: none;
-
-  /// =======================
   /// TRANSITIONS
   /// =======================
   /// @group Transitions

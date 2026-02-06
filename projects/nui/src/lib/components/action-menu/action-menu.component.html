@@ -28,8 +28,8 @@
     class="nui-action-menu"
     [class.nui-action-menu--static]="type() === 'static'"
     [class.nui-action-menu--dynamic]="type() === 'dynamic'"
-    class="nui-action-menu--{{ effectiveVariant() }}"
-    class="nui-action-menu--{{ effectiveColor() }}"
+    [class]="'nui-action-menu--' + effectiveVariant()"
+    [class]="'nui-action-menu--' + effectiveColor()"
     cdkMenu
     [@fadeInOutScale]
     role="menu"
