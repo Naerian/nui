@@ -1,6 +1,8 @@
 import { TemplateRef } from '@angular/core';
 import { NUIColor, NUISize, NUIVariant } from '../../../configs';
 
+export const TOAST_LOADING_CLASS = 'nui-toast--loading';
+
 /**
  * Tipos de toast predefinidos
  */

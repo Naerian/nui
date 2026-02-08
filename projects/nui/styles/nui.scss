@@ -1,8 +1,5 @@
-// 1. Logic Layer (Does not generate CSS)
-@use 'functions';
+// 1. Config Layer (Defines breakpoints, colors, fonts, etc.)
 @use 'config';
-@use 'mixins';
-@use 'mixins-base';
 
 // 2. Tokens Layer (Generates the :root block)
 @use 'global-vars';
@@ -15,6 +12,12 @@
 // 4. Iconography (Remix Icon https://remixicon.com/)
 @use 'icons/remixicon';
 
-// 5. Components Layer
+// 5. Abstracs styles
+@use 'abstracts/functions';
+@use 'abstracts/mixins';
+@use 'abstracts/mixins-base';
+@use 'abstracts/animations';
+
+// 6. Components Layer
 // This is where global classes are injected (.nui-btn, .nui-action-button, etc.)
 @use 'global-components'

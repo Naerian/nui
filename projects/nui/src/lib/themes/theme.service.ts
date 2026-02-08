@@ -271,6 +271,7 @@ export class ThemeService {
       css += this.generateButtonVariables(name, baseColor);
       css += this.generateButtonGroupVariables(name, baseColor);
       css += this.generatePaginatorVariables(name, baseColor);
+      css += this.generateToastVariables(name, baseColor);
       css += this.generateAvatarVariables(name, baseColor);
       css += this.generateActionMenuVariables(name, baseColor);
       css += this.generatePopoverVariables(name, baseColor);
@@ -571,6 +572,28 @@ export class ThemeService {
   `;
   }
 
+  private generateToastVariables(name: string, color: string): string {
+    const isDark = this._isDarkMode();
+    const bg = isDark ? this.shade(color, 85) : this.tint(color, 95);
+    const bgAlpha = isDark ? this.withAlpha(bg, 0.6) : this.withAlpha(bg, 0.8);
+    const bgHover = isDark ? this.shade(color, 80) : this.tint(color, 85);
+    const bgAlphaHover = isDark ? this.withAlpha(bgHover, 0.6) : this.withAlpha(bgHover, 0.8);
+    const border = isDark ? this.withAlpha(color, 0.5) : this.withAlpha(color, 0.15);
+    const header = isDark ? this.tint(color, 70) : this.shade(color, 20);
+    const contrast = isDark ? PURE_COLORS.WHITE : PURE_COLORS.BLACK;
+    const progress = color;
+
+    return `
+      --nui-toast-${name}-bg: ${bgAlpha};
+      --nui-toast-${name}-hover-bg: ${bgAlphaHover};
+      --nui-toast-${name}-border: ${border};
+      --nui-toast-${name}-title: ${header};
+      --nui-toast-${name}-icon: ${header};
+      --nui-toast-${name}-text: ${contrast};
+      --nui-toast-${name}-progress: ${progress};
+    `;
+  }
+
   private generatePaginatorVariables(name: string, color: string): string {
     const contrastText = this.getContrastColor(color);
     const isDark = this._isDarkMode();
@@ -582,18 +605,17 @@ export class ThemeService {
     const alpha70 = this.withAlpha(color, 0.7);
 
     return `      
-      /* Base Colors */
       --nui-pg-${name}-color: ${color};
       --nui-pg-${name}-contrast: ${contrastText};
       
-      /* Solid States (Para página activa en modo solid) */
+      /* VARIANT: SOLID */
       --nui-pg-${name}-solid-bg: ${color};
       --nui-pg-${name}-solid-text: ${contrastText};
       --nui-pg-${name}-solid-hover-bg: ${alpha70};
       --nui-pg-${name}-solid-active-bg: ${isDark ? alpha40 : alpha50};
       --nui-pg-${name}-solid-active-border: ${alpha30};
       
-      /* Outline States (Para página activa en modo outline) */
+      /* VARIANT: OUTLINE */
       --nui-pg-${name}-outline-border: ${alpha40};
       --nui-pg-${name}-outline-text: ${color};
       --nui-pg-${name}-outline-hover-bg: ${alpha10};
@@ -601,7 +623,7 @@ export class ThemeService {
       --nui-pg-${name}-outline-active-bg: ${alpha20};
       --nui-pg-${name}-outline-active-border: ${alpha40};
       
-      /* Ghost States (Para página activa en modo ghost y hovers generales) */
+      /* VARIANT: GHOST */
       --nui-pg-${name}-ghost-text: ${color};
       --nui-pg-${name}-ghost-hover-bg: ${alpha10};
       --nui-pg-${name}-ghost-active-bg: ${alpha20};
@@ -795,6 +817,77 @@ export class ThemeService {
         })
         .join('')
     );
+  }
+
+  /**
+   * Converts RGB color values to HSL (Hue, Saturation, Lightness) format.
+   * This method takes RGB values as input and calculates the corresponding HSL values,
+   * which can be useful for generating color variants such as shades and tints.
+   * @param {number} r - The red component of the color (0-255).
+   * @param {number} g - The green component of the color (0-255).
+   * @param {number} b - The blue component of the color (0-255).
+   * @return {{ h: number; s: number; l: number }} An object representing the HSL components of the color, where h is the hue (0-360), s is the saturation (0-100), and l is the lightness (0-100).
+   */
+  rgbToHsl(r: number, g: number, b: number): { h: number; s: number; l: number } {
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    let h = 0,
+      s = 0,
+      l = (max + min) / 2;
+    if (max !== min) {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r:
+          h = (g - b) / d + (g < b ? 6 : 0);
+          break;
+        case g:
+          h = (b - r) / d + 2;
+          break;
+        case b:
+          h = (r - g) / d + 4;
+          break;
+      }
+      h /= 6;
+    }
+    return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
+  }
+
+  /**
+   * Converts HSL (Hue, Saturation, Lightness) color values to RGB format.
+   * This method takes HSL values as input and calculates the corresponding RGB values,
+   * which can be useful for applying color transformations such as shading and tinting.
+   * @param {number} h - The hue component of the color (0-360).
+   * @param {number} s - The saturation component of the color (0-100).
+   * @param {number} l - The lightness component of the color (0-100).
+   * @return {{ r: number; g: number; b: number }} An object representing the RGB components of the color, where r is the red component (0-255), g is the green component (0-255), and b is the blue component (0-255).
+   */
+  hslToRgb(h: number, s: number, l: number): { r: number; g: number; b: number } {
+    let r: number, g: number, b: number;
+    h /= 360;
+    s /= 100;
+    l /= 100;
+    if (s === 0) {
+      r = g = b = l; // achromatic (gray)
+    } else {
+      const hue2rgb = (p: number, q: number, t: number): number => {
+        if (t < 0) t += 1;
+        if (t > 1) t -= 1;
+        if (t < 1 / 6) return p + 6 * (q - p) * t;
+        if (t < 1 / 2) return q;
+        if (t < 2 / 3) return p + 6 * (q - p) * (2 / 3 - t);
+        return p;
+      };
+      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      const p = 2 * l - q;
+      r = hue2rgb(p, q, h + 1 / 3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1 / 3);
+    }
+    return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) };
   }
 
   /**

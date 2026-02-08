@@ -1,5 +1,5 @@
-@use '../mixins' as global;
-@use '../mixins-base' as base;
+@use '../abstracts/mixins' as global;
+@use '../abstracts/mixins-base' as base;
 @use '../variables/popover-vars' as vars;
 
 @mixin popover-theme($color: null, $variant: 'solid') {

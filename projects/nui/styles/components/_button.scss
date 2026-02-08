@@ -1,5 +1,5 @@
-@use '../mixins' as global;
-@use '../mixins-base' as base;
+@use '../abstracts/mixins' as global;
+@use '../abstracts/mixins-base' as base;
 @use '../variables/button-vars' as vars;
 
 @mixin button-theme($color, $variant: 'solid') {
@@ -196,14 +196,5 @@
         opacity: 0;
       }
     }
-  }
-}
-
-@keyframes nui-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
   }
 }

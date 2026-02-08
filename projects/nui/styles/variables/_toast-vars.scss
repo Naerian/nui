@@ -1,0 +1,57 @@
+// ========================================
+// TOAST - Variables & Config
+// ========================================
+
+// Tokens
+$toast-width: 24rem !default;
+$toast-width-mobile: calc(100vw - 1.5rem) !default;
+$toast-min-height: 3.5rem !default;
+$toast-max-width: 32rem !default;
+$toast-padding: 1rem !default;
+$toast-padding-compact: 0.75rem !default;
+$toast-gap: 0.75rem !default;
+$toast-radius: var(--nui-border-radius-md) !default;
+$toast-border-width: 1px !default;
+$toast-title-size: 0.938rem !default;
+$toast-title-weight: 600 !default;
+$toast-message-size: 0.875rem !default;
+$toast-message-weight: 400 !default;
+$toast-z-index: 9999 !default;
+$toast-shadow: var(--nui-box-shadow--xl) !default;
+$toast-transition-duration: 300ms !default;
+$toast-transition-easing: cubic-bezier(0.4, 0, 0.2, 1) !default;
+
+// Mixin
+@mixin nui-toast-vars {
+  // Layout
+  --toast-width: #{$toast-width};
+  --toast-width-mobile: #{$toast-width-mobile};
+  --toast-min-height: #{$toast-min-height};
+  --toast-max-width: #{$toast-max-width};
+  --toast-padding: #{$toast-padding};
+  --toast-padding-compact: #{$toast-padding-compact};
+  --toast-gap: #{$toast-gap};
+
+  // Border & Shadow
+  --toast-radius: #{$toast-radius};
+  --toast-border-width: #{$toast-border-width};
+  --toast-shadow: #{$toast-shadow};
+  --toast-z-index: #{$toast-z-index};
+
+  // Typography
+  --toast-title-size: #{$toast-title-size};
+  --toast-title-weight: #{$toast-title-weight};
+  --toast-message-size: #{$toast-message-size};
+  --toast-message-weight: #{$toast-message-weight};
+
+  // Animations
+  --toast-duration: #{$toast-transition-duration};
+  --toast-easing: #{$toast-transition-easing};
+
+  // Stacking
+  --toast-stack-gap: 0.75rem;
+  --toast-stack-scale-1: 0.96;
+  --toast-stack-scale-2: 0.92;
+  --toast-stack-y-1: -0.5rem;
+  --toast-stack-y-2: -1rem;
+}

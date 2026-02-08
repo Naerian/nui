@@ -12,7 +12,13 @@ import {
 import { DOCUMENT } from '@angular/common';
 import { ToastContainerComponent } from './toast-container/toast-container.component';
 import { ToastRef } from './toast-ref';
-import { ToastConfig, ToastType, ToastGlobalConfig, ToastPosition } from './models/toast.model';
+import {
+  ToastConfig,
+  ToastType,
+  ToastGlobalConfig,
+  ToastPosition,
+  TOAST_LOADING_CLASS,
+} from './models/toast.model';
 import { NUI_CONFIG } from '../../configs/nui.config';
 
 let toastIdCounter = 0;
@@ -45,16 +51,12 @@ export class ToastService {
   /**
    * Computed: hay toasts de error
    */
-  readonly hasErrors = computed(() =>
-    this._activeToasts().some(t => t.type === 'danger')
-  );
+  readonly hasErrors = computed(() => this._activeToasts().some(t => t.type === 'danger'));
 
   /**
    * Computed: hay toasts de advertencia
    */
-  readonly hasWarnings = computed(() =>
-    this._activeToasts().some(t => t.type === 'warning')
-  );
+  readonly hasWarnings = computed(() => this._activeToasts().some(t => t.type === 'warning'));
 
   // Configuración global
   private readonly globalConfig: ToastGlobalConfig;
@@ -128,6 +130,14 @@ export class ToastService {
       timeout: 0,
       closeButton: false,
       progressBar: false,
+      toastClass: [
+        TOAST_LOADING_CLASS,
+        ...(config?.toastClass
+          ? Array.isArray(config.toastClass)
+            ? config.toastClass
+            : [config.toastClass]
+          : []),
+      ],
     });
   }
 
@@ -206,14 +216,14 @@ export class ToastService {
     const currentCountInPosition = this._activeToasts().filter(
       t => (t.config().position || this.globalConfig.position) === position
     ).length;
-    
+
     const maxPerPosition = this.globalConfig.maxToastsPerPosition || this.globalConfig.maxToasts;
     if (currentCountInPosition >= maxPerPosition) {
       // Eliminar el toast más antiguo de esa posición
       const oldestInPosition = this._activeToasts()
         .filter(t => (t.config().position || this.globalConfig.position) === position)
         .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime())[0];
-      
+
       if (oldestInPosition) {
         oldestInPosition.close();
       }
@@ -228,9 +238,7 @@ export class ToastService {
    */
   update(id: string, options: Partial<ToastConfig>): void {
     const toast = this.get(id);
-    if (toast) {
-      toast.update(options);
-    }
+    if (toast) toast.update(options);
   }
 
   /**
@@ -471,7 +479,7 @@ export class ToastService {
   private ensureContainer(position: ToastPosition): ComponentRef<ToastContainerComponent> {
     // Verificar si ya existe un contenedor para esta posición
     let containerRef = this.containers.get(position);
-    
+
     if (containerRef) {
       return containerRef;
     }
@@ -490,10 +498,10 @@ export class ToastService {
 
     // Configurar posición
     containerRef.instance.updatePosition(position);
-    
+
     // Guardar en el mapa
     this.containers.set(position, containerRef);
-    
+
     return containerRef;
   }
 

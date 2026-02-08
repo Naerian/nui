@@ -1,8 +1,9 @@
 @use '../config';
-@use '../mixins';
+@use '../abstracts/mixins';
 @use '../variables/tooltip-vars';
 
 @mixin nui-tooltip-styles {
+
   .nui-tooltip-overlay {
     z-index: var(--tooltip-z-index);
     pointer-events: none;

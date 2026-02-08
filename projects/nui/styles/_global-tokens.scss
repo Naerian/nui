@@ -111,4 +111,10 @@
   --nui-focus-ring-width: #{config.$focus-ring-width};
   --nui-focus-ring-offset: #{config.$focus-ring-offset};
   --nui-focus-ring-radius: #{config.$focus-ring-radius};
+
+  /// =======================
+  /// ANIMATIONS
+  /// =======================
+  /// @group Animations+
+  --nui-spin-duration: #{config.$spin-duration};
 }

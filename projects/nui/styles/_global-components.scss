@@ -2,9 +2,11 @@
 @use 'components/action-menu';
 @use 'components/popover';
 @use 'components/tooltip';
+@use 'components/toast';
 
 // Global styles for global components
 @include button.nui-button-styles;
 @include action-menu.nui-action-menu-styles;
 @include popover.nui-popover-styles;
 @include tooltip.nui-tooltip-styles;
+@include toast.nui-toast-styles;

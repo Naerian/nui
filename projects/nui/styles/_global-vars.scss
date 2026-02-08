@@ -3,6 +3,7 @@
 @use 'variables/action-menu-vars';
 @use 'variables/popover-vars';
 @use 'variables/tooltip-vars';
+@use 'variables/toast-vars';
 
 // Inject variables as CSS custom GLOBAL properties
 // These "includes" are intended to be used in components that use "ViewEncapsulation.None"
@@ -12,4 +13,5 @@
   @include action-menu-vars.nui-action-menu-vars;
   @include popover-vars.nui-popover-vars;
   @include tooltip-vars.nui-tooltip-vars;
+  @include toast-vars.nui-toast-vars;
 }

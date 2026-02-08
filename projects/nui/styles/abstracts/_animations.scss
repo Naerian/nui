@@ -1,0 +1,24 @@
+/** 
+ * Animations
+ * ==========
+ * This file contains keyframe animations and related mixins for the NUI design system.
+ * It defines common animations that can be reused across various components.
+ */
+
+/** Spin Animation */
+@keyframes nui-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.nui-spin {
+  animation-name: nui-spin;
+  animation-duration: var(--nui-spin-duration, 1s);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}

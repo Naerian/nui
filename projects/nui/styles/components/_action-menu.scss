@@ -1,5 +1,5 @@
-@use '../mixins' as global;
-@use '../mixins-base' as base;
+@use '../abstracts/mixins' as global;
+@use '../abstracts/mixins-base' as base;
 @use '../variables/action-menu-vars' as vars;
 
 @mixin action-menu-theme($color-name) {

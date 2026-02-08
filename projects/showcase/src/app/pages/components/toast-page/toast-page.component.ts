@@ -60,6 +60,7 @@ export class ToastPageComponent extends BaseComponentPage {
     const toastRef = this.toastService.success('Item deleted', {
       title: 'Deleted',
       timeout: 0, // Persistent until user action
+      buttonsVariant: 'solid',
       actions: [
         {
           label: 'Undo',
