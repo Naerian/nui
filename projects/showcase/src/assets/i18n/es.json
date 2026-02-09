@@ -285,7 +285,7 @@
         }
       },
       "cssVars": {
-        "title": "Explorador de Variables CSS",
+        "title": "Explorador de variables CSS",
         "subtitle": "Explora y busca todas las 200+ variables CSS generadas por el sistema de temas",
         "filters": {
           "search": "Buscar",
@@ -330,12 +330,12 @@
         "steps": {
           "step1": {
             "title": "Define tu preset personalizado",
-            "description": "Crea un objeto ThemePreset con colores para los modos claro y oscuro. Cada modo requiere 8 colores semánticos.",
+            "description": "Crea un objeto <code>ThemePreset</code> con colores para los modos <code>claro</code> y <code>oscuro</code>. Cada modo requiere 8 colores semánticos.",
             "code": "import { ThemePreset } from '@nui/core';\n\nexport const myCustomPreset: ThemePreset = {\n  name: 'custom',\n  label: 'Custom Theme',\n  colors: {\n    light: {\n      primary: '#6366f1',\n      secondary: '#8b5cf6',\n      accent: '#ec4899',\n      success: '#10b981',\n      info: '#3b82f6',\n      warning: '#f59e0b',\n      danger: '#ef4444',\n      neutral: '#6b7280'\n    },\n    dark: {\n      primary: '#818cf8',\n      secondary: '#a78bfa',\n      accent: '#f472b6',\n      success: '#34d399',\n      info: '#60a5fa',\n      warning: '#fbbf24',\n      danger: '#f87171',\n      neutral: '#9ca3af'\n    }\n  }\n};"
           },
           "step2": {
             "title": "Registra tu tema",
-            "description": "Agrega tu preset personalizado a la configuración de NUI en tu app.config.ts o main.ts:",
+            "description": "Agrega tu preset personalizado a la configuración de NUI en tu <code>app.config.ts</code> o <code>main.ts</code>:",
             "code": "import { provideNUIConfig } from '@nui/core';\nimport { myCustomPreset } from './themes/custom';\n\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    provideNUIConfig({\n      theme: {\n        preset: 'custom',\n        customPresets: [myCustomPreset],\n        darkMode: {\n          strategy: 'manual'\n        }\n      }\n    })\n  ]\n};"
           },
           "step3": {
@@ -373,7 +373,7 @@
         },
         "example": {
           "title": "Ejemplo completo",
-          "description": "Aquí tienes un ejemplo completo de un tema personalizado 'Bosque' con modo oscuro manual:",
+          "description": "Aquí tienes un ejemplo completo de un tema personalizado <code>Forest</code> con modo oscuro manual:",
           "code": "import { ThemePreset } from '@nui/core';\n\nexport const forestPreset: ThemePreset = {\n  name: 'forest',\n  label: 'Forest',\n  colors: {\n    light: {\n      primary: '#059669',    // Emerald\n      secondary: '#0891b2',  // Cyan\n      accent: '#7c3aed',     // Violet\n      success: '#16a34a',    // Green\n      info: '#0284c7',       // Sky\n      warning: '#ca8a04',    // Yellow\n      danger: '#dc2626',     // Red\n      neutral: '#52525b'     // Zinc\n    },\n    dark: {\n      primary: '#34d399',\n      secondary: '#22d3ee',\n      accent: '#a78bfa',\n      success: '#4ade80',\n      info: '#38bdf8',\n      warning: '#facc15',\n      danger: '#f87171',\n      neutral: '#a1a1aa'\n    }\n  },\n  grays: {\n    light: {\n      50: '#fafafa',\n      100: '#f4f4f5',\n      200: '#e4e4e7',\n      300: '#d4d4d8',\n      400: '#a1a1aa',\n      500: '#71717a',\n      600: '#52525b',\n      700: '#3f3f46',\n      800: '#27272a',\n      900: '#18181b'\n    },\n    dark: {\n      50: '#18181b',\n      100: '#27272a',\n      200: '#3f3f46',\n      300: '#52525b',\n      400: '#71717a',\n      500: '#a1a1aa',\n      600: '#d4d4d8',\n      700: '#e4e4e7',\n      800: '#f4f4f5',\n      900: '#fafafa'\n    }\n  }\n};"
         }
       }

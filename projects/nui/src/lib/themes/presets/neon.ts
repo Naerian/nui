@@ -1,4 +1,4 @@
-import { ZINC_GRAYS } from '../models/theme.config';
+import { ZINC_GRAYS } from '../models/theme-grays';
 import { ThemePreset } from '../models/theme.model';
 
 /**

@@ -248,6 +248,15 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
+   * Z-index dinámico para stackear múltiples panels correctamente
+   * Cada panel minimizable obtiene un z-index incremental basado en el orden de creación
+   * Esto asegura que el último panel abierto aparezca sobre los anteriores
+   */
+  @HostBinding('style.z-index') get styleZIndex(): number | null {
+    return this.config.zIndex ?? null;
+  }
+
+  /**
    * Obtiene los estilos CSS dinámicos para el elemento host
    *
    * Los estilos se calculan según la configuración del panel:

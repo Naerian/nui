@@ -1,4 +1,4 @@
-import { STONE_GRAYS } from '../models/theme.config';
+import { STONE_GRAYS } from '../models/theme-grays';
 import { ThemePreset } from '../models/theme.model';
 
 export const sunset: ThemePreset = {

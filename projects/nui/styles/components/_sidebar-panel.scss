@@ -106,10 +106,6 @@
     @include mixins.overlay-backdrop();
   }
 
-  .nui-sidebar-panel-backdrop + .cdk-global-overlay-wrapper {
-    z-index: var(--nui-sidebar-panel-z-index) !important;
-  }
-
   .cdk-overlay-pane.sidebar-panel-pane {
     z-index: var(--nui-sidebar-panel-z-index) !important;
   }

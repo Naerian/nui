@@ -1,119 +1,5 @@
-.docs-page {
-  max-width: 1024px;
-  margin: 0 auto;
-}
-
-.page-header {
-  margin-bottom: 2rem;
-
-  h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-  }
-
-  .subtitle {
-    font-size: 1.125rem;
-    opacity: 0.8;
-    margin: 0;
-  }
-}
-
-.section {
-  margin-bottom: 3rem;
-
-  h2 {
-    font-size: 1.75rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-  }
-
-  .section-description {
-    font-size: 1rem;
-    opacity: 0.8;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-  }
-
-  .section-note {
-    padding: 1rem 1.25rem;
-    margin-bottom: 1.5rem;
-    background-color: var(--nui-bg-secondary);
-    border-left: 4px solid var(--nui-border-primary);
-    border-radius: var(--nui-border-radius-sm);
-    font-size: 0.875rem;
-    line-height: 1.5;
-    display: flex;
-    gap: 0.75rem;
-    align-items: flex-start;
-
-    i {
-      font-size: 1.25rem;
-      flex-shrink: 0;
-      margin-top: 0.125rem;
-    }
-
-    &.info {
-      border-left-color: var(--nui-color-info);
-
-      i {
-        color: var(--nui-color-info);
-      }
-    }
-
-    &.warning {
-      border-left-color: var(--nui-color-warning);
-
-      i {
-        color: var(--nui-color-warning);
-      }
-    }
-
-    &.danger {
-      border-left-color: var(--nui-color-danger);
-
-      i {
-        color: var(--nui-color-danger);
-      }
-    }
-
-    &.success {
-      border-left-color: var(--nui-color-success);
-
-      i {
-        color: var(--nui-color-success);
-      }
-    }
-
-    p {
-      margin: 0;
-    }
-  }
-}
-
-.example-preview {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  align-items: center;
-  padding: 1.5rem;
-  background-color: var(--nui-bg-secondary);
-  border-radius: var(--nui-border-radius-md);
-  margin-bottom: 1rem;
-  border: var(--nui-border-width-xs) solid var(--nui-border-primary);
-  box-shadow: var(--nui-box-shadow-xs);
-
-  &.flex-column {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .button-row {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-}
+// Common styles are defined globally in src/styles.scss
+// Only component-specific styles are kept here
 
 // ==========================================
 // BACKDROP PERSONALIZADO
@@ -125,12 +11,14 @@
   // Efecto blur para desenfocar el contenido de fondo
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  
+
   // Color personalizado (azul semi-transparente)
   background-color: rgba(59, 130, 246, 0.25) !important;
-  
+
   // Transición suave al aparecer/desaparecer
-  transition: opacity 300ms ease-in-out, backdrop-filter 300ms ease-in-out;
+  transition:
+    opacity 300ms ease-in-out,
+    backdrop-filter 300ms ease-in-out;
 }
 
 // ==========================================
@@ -144,74 +32,78 @@
   position: fixed !important;
   bottom: 24px;
   right: 24px;
-  
+
   // Ancho y alto del botón
   width: auto !important;
   height: auto !important;
-  
+
   // Padding más amplio para acomodar icono + texto
   padding: 14px 20px !important;
-  
+
   // Bordes redondeados (píldora)
   border-radius: 50px !important;
-  
+
   // Sombra elevada para efecto flotante
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-  
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.1) !important;
+
   // Color de fondo (puede cambiar según tu preset)
   background: var(--nui-color-primary) !important;
   border-color: var(--nui-color-primary) !important;
-  
+
   // Color de texto e icono
   color: white !important;
-  
+
   // Opacidad completa por defecto
   opacity: 1 !important;
-  
+
   // Animación al hover
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  
+
   // Flex para alinear icono + texto
   display: flex !important;
   align-items: center;
   gap: 8px;
-  
+
   // Estilos del icono
   i {
     font-size: 1.25rem !important;
     color: white !important;
   }
-  
+
   // Estilos del label
   .sidebar-panel-tab-label {
     color: white !important;
     font-weight: 600 !important;
     font-size: 0.9375rem !important;
   }
-  
+
   // Hover effect
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.15) !important;
+    box-shadow:
+      0 6px 16px rgba(0, 0, 0, 0.2),
+      0 3px 6px rgba(0, 0, 0, 0.15) !important;
     opacity: 1 !important;
   }
-  
+
   // Active effect
   &:active {
     transform: translateY(0);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
   }
-  
+
   // Ajustes para mobile
   @media (max-width: 768px) {
     bottom: 16px;
     right: 16px;
     padding: 12px 18px !important;
-    
+
     i {
       font-size: 1.125rem !important;
     }
-    
+
     .sidebar-panel-tab-label {
       font-size: 0.875rem !important;
     }

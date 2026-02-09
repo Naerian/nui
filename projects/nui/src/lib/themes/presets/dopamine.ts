@@ -1,4 +1,4 @@
-import { COOL_GRAYS } from '../models/theme.config';
+import { COOL_GRAYS } from '../models/theme-grays';
 import { ThemePreset } from '../models/theme.model';
 
 export const dopamine: ThemePreset = {

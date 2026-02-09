@@ -494,6 +494,7 @@ export const DEFAULT_SIDEBAR_PANEL_CONFIG: Required<
     | 'contentTemplate'
     | 'htmlContent'
     | 'templateContext'
+    | 'zIndex'
   >
 > & { minimizable: false } = {
   position: 'right',
@@ -511,7 +512,6 @@ export const DEFAULT_SIDEBAR_PANEL_CONFIG: Required<
   ariaLabel: 'Slide Panel',
   animationDuration: 225, // Matching Material-UI Drawer (225ms entrada, 195ms salida)
   minimizable: false,
-  zIndex: 1040, // Debe ser mayor que overlay-z-index (1039)
   allowMultiple: false,
   lazyLoad: true,
 };

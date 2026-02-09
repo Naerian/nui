@@ -12,11 +12,12 @@ import {
 } from './models/theme.model';
 import {
   PURE_COLORS,
-  COOL_GRAYS,
   DEFAULT_PRESET,
   NUI_THEME_CONFIG,
   LUMINANCE_UMBRAL,
 } from './models/theme.config';
+import { NUI_PRESETS } from './models/theme-presets';
+import { COOL_GRAYS } from './models/theme-grays';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
@@ -76,6 +77,15 @@ export class ThemeService {
     }
 
     this.updateColors();
+  }
+
+  /**
+   * Get the list of available NUI theme presets.
+   * This method returns an array of ThemePreset objects that are 
+   * defined in the theme presets configuration.
+   */
+  getNuiPresets(): ThemePreset[] {
+    return NUI_PRESETS;
   }
 
   /**
@@ -320,7 +330,7 @@ export class ThemeService {
   /* Background colors */
   --nui-bg-primary: ${isDark ? grays[900] : PURE_COLORS.WHITE};
   --nui-bg-secondary: ${isDark ? grays[800] : grays[50]};
-  --nui-bg-tertiary: ${isDark ? grays[600] : grays[100]};
+  --nui-bg-tertiary: ${isDark ? grays[700] : grays[100]};
   --nui-bg-neutral: ${isDark ? grays[800] : grays[100]};
 
   /* Text colors */

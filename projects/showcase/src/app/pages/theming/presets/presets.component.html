@@ -1,43 +1,45 @@
-<div class="theming-page">
+<div class="docs-page">
   <div class="container-fluid">
     <div class="page-header">
       <h1 class="page-title">{{ 'pages.theming.title' | translate }}</h1>
       <p class="page-subtitle">{{ 'pages.theming.subtitle' | translate }}</p>
-      <p class="page-description">{{ 'pages.theming.description' | translate }}</p>
-      <br />
-      <div class="page-current-preset">
+    </div>
+
+    <div class="docs-content">
+      <p class="presets-description">{{ 'pages.theming.description' | translate }}</p>
+      <div class="preset-current">
         <p class="current-preset-label">
           <strong>{{ 'pages.theming.currentPreset' | translate }}:</strong>
           {{ currentPreset().translationKey | translate }}
         </p>
         <div
-          class="preset-color-box"
+          class="preset-current-color-box"
           [style.background]="'linear-gradient(135deg, ' + currentPreset().colors.join(', ') + ')'"
         ></div>
       </div>
-    </div>
+      <div class="presets-grid">
+        <div
+          *ngFor="let preset of presets()"
+          class="preset-card"
+          [class.active]="preset.name === currentPreset().name"
+          (click)="selectPreset(preset.name)"
+        >
+          <div class="preset-header">
+            <h3 class="preset-name">{{ preset.translationKey | translate }}</h3>
+            <p class="preset-description">{{ preset.descriptionKey | translate }}</p>
+          </div>
 
-    <div class="presets-grid">
-      <div
-        *ngFor="let preset of presets()"
-        class="preset-card"
-        [class.active]="preset.name === currentPreset().name"
-      >
-        <div class="preset-header">
-          <h3 class="preset-name">{{ preset.translationKey | translate }}</h3>
-          <p class="preset-description">{{ preset.descriptionKey | translate }}</p>
-        </div>
-
-        <div class="color-palette">
-          <div *ngFor="let colorType of colorTypes" class="color-item">
-            <div
-              class="color-swatch"
-              [style.background-color]="getColor(preset, colorType.key)"
-              [attr.title]="getColor(preset, colorType.key)"
-            ></div>
-            <div class="color-info">
-              <span class="color-label">{{ colorType.translationKey | translate }}</span>
-              <span class="color-value">{{ getColor(preset, colorType.key) }}</span>
+          <div class="color-palette">
+            <div *ngFor="let colorType of colorTypes()" class="color-item">
+              <div
+                class="color-swatch"
+                [style.background-color]="getColor(preset, colorType.key)"
+                [attr.title]="getColor(preset, colorType.key)"
+              ></div>
+              <div class="color-info">
+                <span class="color-label">{{ colorType.translationKey | translate }}</span>
+                <span class="color-value">{{ getColor(preset, colorType.key) }}</span>
+              </div>
             </div>
           </div>
         </div>

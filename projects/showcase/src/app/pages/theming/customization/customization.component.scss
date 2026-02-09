@@ -1,31 +1,12 @@
-.customization-page {
-  .page-header {
-    margin-bottom: 3rem;
-  }
+// Common styles are defined globally in src/styles.scss
+// This file contains only page-specific styles
 
-  .custom-section {
-    margin-bottom: 4rem;
-
-    h2 {
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: var(--nui-text-primary);
-    }
-
-    .section-description {
-      font-size: 1.125rem;
-      color: var(--nui-text-secondary);
-      margin-bottom: 2rem;
-      line-height: 1.6;
-    }
-  }
-
+.docs-page {
   .intro-box {
     display: flex;
     align-items: flex-start;
     gap: 1.5rem;
-    padding: 2rem;
+    padding: 1rem;
     background: linear-gradient(135deg, var(--nui-primary-alpha-50), var(--nui-accent-alpha-50));
     border-radius: 12px;
     border: 1px solid var(--nui-border-primary);

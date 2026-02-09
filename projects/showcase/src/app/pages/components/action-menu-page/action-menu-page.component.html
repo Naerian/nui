@@ -1,10 +1,12 @@
 <div class="docs-page">
-  <div class="page-header">
-    <h1>{{ pageConfig.title | translate }}</h1>
-    <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
-  </div>
+  <div class="container-fluid">
+    <div class="page-header">
+      <h1>{{ pageConfig.title | translate }}</h1>
+      <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
+    </div>
 
-  @for (section of pageConfig.sections; track section.id) {
+    <div class="docs-content">
+      @for (section of pageConfig.sections; track section.id) {
     <section class="section">
       <app-section-title 
         [title]="section.title | translate" 
@@ -261,5 +263,7 @@
 
       <app-code-block [examples]="section.examples || []"></app-code-block>
     </section>
-  }
+      }
+    </div>
+  </div>
 </div>

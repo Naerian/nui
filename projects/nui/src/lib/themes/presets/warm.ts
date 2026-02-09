@@ -1,4 +1,4 @@
-import { NEUTRAL_GRAYS, STONE_GRAYS } from '../models/theme.config';
+import { NEUTRAL_GRAYS, STONE_GRAYS } from '../models/theme-grays';
 import { ThemePreset } from '../models/theme.model';
 
 /**

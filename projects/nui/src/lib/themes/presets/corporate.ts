@@ -1,4 +1,4 @@
-import { SLATE_GRAYS } from '../models/theme.config';
+import { SLATE_GRAYS } from '../models/theme-grays';
 import { ThemePreset } from '../models/theme.model';
 
 /**

@@ -34,7 +34,10 @@ themes/
 ├── theme.service.ts           # Core theme management service
 ├── models/
 │   ├── theme.model.ts         # TypeScript interfaces and types
-│   └── theme.config.ts        # Constants and default configurations
+│   └── theme.config.ts        # Constants and default 
+│   └── theme.grays.ts         # Gray scales
+│   └── theme.presets.ts       # Array of available theme presets.
+configurations
 └── presets/
     ├── aura.ts                # Default preset (teal/purple)
     ├── corporate.ts           # Professional business theme
@@ -63,9 +66,22 @@ Contains constant definitions:
 
 - **`LUMINANCE_UMBRAL`**: Threshold (0.4) for determining black vs white contrast text
 - **`PURE_COLORS`**: Absolute black (`#0d1117`) and white (`#ffffff`) values
-- **`Gray Scale Presets`**: Five curated gray palettes (`SLATE`, `COOL`, `ZINC`, `NEUTRAL`, `STONE`)
 - **`DEFAULT_PRESET`**: References the `aura` preset as the library default
 - **`NUI_THEME_CONFIG`**: Injection token for providing theme configuration
+
+#### `models/theme-presets.ts`
+Contains a array of NUI presets:
+- **`NUI_PRESETS`**: Array of available NUI presets to use (aura, warm, minimal...)
+
+#### `models/theme-grays.ts`
+It contains the different grayscales available in NUI:
+- **`SLATE`**: A neutral gray with a subtle blue undertone. Ideal for modern interfaces and dashboards, providing a clean and contemporary look without feeling cold.
+- **`COOL`**: A cool-toned gray with a noticeable blue bias. Works especially well in dark mode and professional digital products where clarity and precision are key.
+- **`ZINC`**: A balanced, slightly muted gray with no strong color dominance. An excellent neutral base for minimalist interfaces where content should take visual priority.
+- **`NEUTRAL`**: A truly neutral gray with no warm or cool undertones. Perfect for versatile and accessible design systems, as it does not interfere with primary or accent colors.
+- **`STONE`**: A warm gray with subtle earthy undertones. Adds a more organic and human feel, making it suitable for editorial, lifestyle, or nature-inspired interfaces.
+
+
 
 #### `theme.service.ts`
 The core runtime engine (956 lines). Key responsibilities:
@@ -81,7 +97,7 @@ The core runtime engine (956 lines). Key responsibilities:
 Exports the `provideNUI(config?: ThemeConfig)` function for Angular DI setup. Uses `APP_INITIALIZER` to ensure the theme is applied before the first render, preventing flash-of-unstyled-content (FOUC).
 
 #### `presets/*.ts`
-Nine pre-built theme configurations. Each defines:
+Pre-built theme configurations. Each defines:
 
 - Light and dark mode color mappings
 - Optional custom gray scale (falls back to `COOL_GRAYS` if omitted)

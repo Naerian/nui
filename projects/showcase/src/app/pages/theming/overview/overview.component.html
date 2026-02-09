@@ -1,47 +1,49 @@
-<div class="overview-page">
+<div class="docs-page">
   <div class="container-fluid">
     <div class="page-header">
       <h1 class="page-title">{{ 'pages.theming.overview.title' | translate }}</h1>
       <p class="page-subtitle">{{ 'pages.theming.overview.subtitle' | translate }}</p>
     </div>
 
-    <section class="overview-section">
-      <h2>{{ 'pages.theming.overview.whatItSolves.title' | translate }}</h2>
-      <p class="section-description">{{ 'pages.theming.overview.whatItSolves.description' | translate }}</p>
-      
-      <div class="features-grid">
-        <div *ngFor="let feature of features" class="feature-card">
-          <div class="feature-icon">
-            <i [class]="feature.icon"></i>
+    <div class="docs-content">
+      <section class="docs-section">
+        <h2>{{ 'pages.theming.overview.whatItSolves.title' | translate }}</h2>
+        <p class="section-description">{{ 'pages.theming.overview.whatItSolves.description' | translate }}</p>
+        
+        <div class="features-grid">
+          <div *ngFor="let feature of features" class="feature-card">
+            <div class="feature-icon">
+              <i [class]="feature.icon"></i>
+            </div>
+            <h3 class="feature-title">{{ feature.titleKey | translate }}</h3>
+            <p class="feature-description">{{ feature.descriptionKey | translate }}</p>
           </div>
-          <h3 class="feature-title">{{ feature.titleKey | translate }}</h3>
-          <p class="feature-description">{{ feature.descriptionKey | translate }}</p>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="overview-section">
-      <h2>{{ 'pages.theming.overview.integration.title' | translate }}</h2>
-      <p class="section-description">{{ 'pages.theming.overview.integration.description' | translate }}</p>
-      <ul class="integration-list">
-        <li *ngFor="let point of integrationPoints">
-          <i class="ri-check-line"></i>
-          <span [innerHTML]="point | translate"></span>
-        </li>
-      </ul>
-    </section>
-
-    <section class="overview-section">
-      <h2>{{ 'pages.theming.overview.keyFeatures.title' | translate }}</h2>
-      <div class="highlight-box">
-        <ul class="key-features-list">
-          <li><strong>200+</strong> {{ 'pages.theming.overview.keyFeatures.feat1' | translate }}</li>
-          <li><strong>{{ 'pages.theming.overview.keyFeatures.feat2Label' | translate }}</strong> {{ 'pages.theming.overview.keyFeatures.feat2' | translate }}</li>
-          <li><strong>{{ 'pages.theming.overview.keyFeatures.feat3Label' | translate }}</strong> {{ 'pages.theming.overview.keyFeatures.feat3' | translate }}</li>
-          <li><strong>{{ 'pages.theming.overview.keyFeatures.feat4Label' | translate }}</strong> {{ 'pages.theming.overview.keyFeatures.feat4' | translate }}</li>
-          <li><strong>{{ 'pages.theming.overview.keyFeatures.feat5Label' | translate }}</strong> {{ 'pages.theming.overview.keyFeatures.feat5' | translate }}</li>
+      <section class="docs-section">
+        <h2>{{ 'pages.theming.overview.integration.title' | translate }}</h2>
+        <p class="section-description">{{ 'pages.theming.overview.integration.description' | translate }}</p>
+        <ul class="integration-list">
+          <li *ngFor="let point of integrationPoints">
+            <i class="ri-check-line"></i>
+            <span [innerHTML]="point | translate"></span>
+          </li>
         </ul>
-      </div>
-    </section>
+      </section>
+
+      <section class="docs-section">
+        <h2>{{ 'pages.theming.overview.keyFeatures.title' | translate }}</h2>
+        <div class="highlight-box">
+          <ul class="key-features-list">
+            <li><strong>200+</strong> {{ 'pages.theming.overview.keyFeatures.feat1' | translate }}</li>
+            <li><strong>{{ 'pages.theming.overview.keyFeatures.feat2Label' | translate }}</strong> {{ 'pages.theming.overview.keyFeatures.feat2' | translate }}</li>
+            <li><strong>{{ 'pages.theming.overview.keyFeatures.feat3Label' | translate }}</strong> {{ 'pages.theming.overview.keyFeatures.feat3' | translate }}</li>
+            <li><strong>{{ 'pages.theming.overview.keyFeatures.feat4Label' | translate }}</strong> {{ 'pages.theming.overview.keyFeatures.feat4' | translate }}</li>
+            <li><strong>{{ 'pages.theming.overview.keyFeatures.feat5Label' | translate }}</strong> {{ 'pages.theming.overview.keyFeatures.feat5' | translate }}</li>
+          </ul>
+        </div>
+      </section>
+    </div>
   </div>
 </div>

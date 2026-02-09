@@ -1,42 +1,16 @@
-.architecture-page {
-  .page-header {
-    margin-bottom: 3rem;
-  }
+// Common styles are defined globally in src/styles.scss
+// This file contains only page-specific styles
 
-  .arch-section {
-    margin-bottom: 4rem;
-
-    h2 {
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: var(--nui-text-primary);
-    }
-
-    h3 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-      color: var(--nui-text-primary);
-    }
-
-    .section-description {
-      font-size: 1.125rem;
-      color: var(--nui-text-secondary);
-      margin-bottom: 2rem;
-      line-height: 1.6;
-    }
-  }
-
+.docs-page {
   .semantic-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1rem;
   }
 
   .semantic-card {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
     padding: 1rem;
     border-radius: 8px;

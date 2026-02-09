@@ -101,9 +101,10 @@ export class SidebarPanelService {
   /**
    * Z-index base para todos los panels
    * El z-index real se calcula dinámicamente basándose en el stack actual
+   * Debe ser mayor que el overlay-z-index de CDK (1000)
    * @private
    */
-  private readonly _baseZIndex = 1000;
+  private readonly _baseZIndex = 1040;
 
   /**
    * Calcula el siguiente z-index disponible
@@ -346,17 +347,29 @@ export class SidebarPanelService {
       }
     }
 
-    // Si el panel NO es minimizable, cerrar todos los panels abiertos
-    // Si ES minimizable pero no hay ninguno minimizado, permite crear múltiples panels (stack)
-    if (!mergedConfig.minimizable && this._openPanels.size > 0) {
+    // Cerrar panels existentes solo si no se permite múltiples panels
+    // allowMultiple: true → permite múltiples panels sin capacidad de minimizar
+    // minimizable: true → permite múltiples panels CON capacidad de minimizar
+    if (!mergedConfig.minimizable && !mergedConfig.allowMultiple && this._openPanels.size > 0) {
       this.closeAll();
     }
 
     // Crear UNA instancia del servicio de acciones para este panel
     const actionsService = new SidebarPanelActionsService();
 
+    // Calcular z-index dinámicamente basado en el stack actual
+    const zIndex = mergedConfig.zIndex ?? this._getNextZIndex();
+    
+    // Actualizar la configuración con el z-index calculado para que se aplique al host
+    mergedConfig.zIndex = zIndex;
+
     // Crear overlay
     const overlayRef = this._createOverlay(mergedConfig);
+
+    // Aplicar z-index al backdrop (debe estar justo debajo del panel)
+    if (overlayRef.backdropElement) {
+      overlayRef.backdropElement.style.zIndex = (zIndex - 1).toString();
+    }
 
     // Crear el componente contenedor (SidebarPanelComponent)
     const containerPortal = new ComponentPortal(
@@ -383,9 +396,6 @@ export class SidebarPanelService {
     containerRef.instance.componentInstance = componentRef.instance;
     containerRef.instance.componentType = component;
     containerRef.instance.panelRef = panelRef;
-
-    // Calcular z-index dinámicamente basado en el stack actual
-    const zIndex = mergedConfig.zIndex ?? this._getNextZIndex();
 
     // Agregar al stack
     this._openPanels.set(panelRef.id, {
@@ -452,9 +462,8 @@ export class SidebarPanelService {
    */
   close(id: string): void {
     const panelItem = this._openPanels.get(id);
-    if (panelItem) {
-      // El panel se encarga de remover del map a través del afterClosed
-      // Aquí solo necesitamos disparar el close
+    if (panelItem && panelItem.panelRef) {
+      panelItem.panelRef.close();
     }
   }
 

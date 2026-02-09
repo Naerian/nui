@@ -46,7 +46,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
     email: 'john.doe@example.com',
     role: 'Administrator',
     lastLogin: new Date(2024, 0, 15, 10, 30),
-    avatar: 'https://i.pravatar.cc/150?img=12'
+    avatar: 'https://i.pravatar.cc/150?img=12',
   };
 
   constructor(private sidebarPanelService: SidebarPanelService) {
@@ -170,7 +170,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
             <li>Privacy settings adjusted</li>
           </ul>
         </div>
-      `
+      `,
     });
   }
 
@@ -193,8 +193,8 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         onLogout: () => {
           console.log('Logging out...');
           alert('User logged out!');
-        }
-      }
+        },
+      },
     });
   }
 
@@ -222,7 +222,9 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
             </tr>
           </thead>
           <tbody>
-            ${items.map(item => `
+            ${items
+              .map(
+                item => `
               <tr>
                 <td style="padding: 0.5rem; border: 1px solid var(--nui-divider);">${item.id}</td>
                 <td style="padding: 0.5rem; border: 1px solid var(--nui-divider);">${item.name}</td>
@@ -231,17 +233,27 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
                     padding: 0.25rem 0.5rem;
                     border-radius: 4px;
                     font-size: 0.75rem;
-                    background: ${item.status === 'Completed' ? 'var(--nui-success-light)' : 
-                                item.status === 'In Progress' ? 'var(--nui-warning-light)' : 
-                                'var(--nui-grey-200)'};
-                    color: ${item.status === 'Completed' ? 'var(--nui-success-dark)' : 
-                            item.status === 'In Progress' ? 'var(--nui-warning-dark)' : 
-                            'var(--nui-text-secondary)'};
+                    background: ${
+                      item.status === 'Completed'
+                        ? 'var(--nui-success-light)'
+                        : item.status === 'In Progress'
+                          ? 'var(--nui-warning-light)'
+                          : 'var(--nui-grey-200)'
+                    };
+                    color: ${
+                      item.status === 'Completed'
+                        ? 'var(--nui-success-dark)'
+                        : item.status === 'In Progress'
+                          ? 'var(--nui-warning-dark)'
+                          : 'var(--nui-text-secondary)'
+                    };
                   ">${item.status}</span>
                 </td>
                 <td style="padding: 0.5rem; border: 1px solid var(--nui-divider);">${item.priority}</td>
               </tr>
-            `).join('')}
+            `
+              )
+              .join('')}
           </tbody>
         </table>
       </div>
@@ -251,7 +263,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       title: 'Task Report',
       position: 'right',
       size: 'lg',
-      htmlContent
+      htmlContent,
     });
   }
 
@@ -372,6 +384,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       title: 'Panel 1 (Derecha)',
       position: 'right',
       size: 'sm',
+      allowMultiple: true,
       data: {
         message: 'Primer panel abierto desde la derecha',
       },
@@ -382,18 +395,12 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         title: 'Panel 2 (Izquierda)',
         position: 'left',
         size: 'sm',
+        allowMultiple: true,
         data: {
           message: 'Segundo panel abierto desde la izquierda',
         },
       });
     }, 300);
-  }
-
-  /**
-   * Cierra todos los panels
-   */
-  closeAllPanels(): void {
-    this.sidebarPanelService.closeAll();
   }
 
   /**

@@ -1,69 +1,71 @@
-.css-vars-page {
-  .page-header {
-    margin-bottom: 3rem;
-  }
+// Common styles are defined globally in src/styles.scss
+// This file contains only page-specific styles
 
-  .filters-section {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
+.docs-page {
+  .docs-content {
+    .filters-section {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
 
-    .filter-group {
-      flex: 1;
-      min-width: 250px;
+      .filter-group {
+        flex: 1;
+        min-width: 250px;
 
-      label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-        color: var(--nui-text-secondary);
-        font-size: 0.875rem;
-      }
+        label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: 500;
+          color: var(--nui-text-secondary);
+          font-size: 0.875rem;
+        }
 
-      .search-input,
-      .category-select {
-        width: 100%;
-        padding: 0.75rem 1rem;
-        border: 1px solid var(--nui-border-primary);
-        border-radius: 8px;
-        background: var(--nui-bg-primary);
-        color: var(--nui-text-primary);
-        font-size: 1rem;
-        transition: all 0.2s ease;
+        .search-input,
+        .category-select {
+          width: 100%;
+          padding: 0.75rem 1rem;
+          border: 1px solid var(--nui-border-primary);
+          border-radius: 8px;
+          background: var(--nui-bg-primary);
+          color: var(--nui-text-primary);
+          font-size: 1rem;
+          transition: all 0.2s ease;
 
-        &:focus {
-          outline: none;
-          border-color: var(--nui-primary);
-          box-shadow: 0 0 0 3px var(--nui-primary-alpha-50);
+          &:focus {
+            outline: none;
+            border-color: var(--nui-primary);
+            box-shadow: 0 0 0 3px var(--nui-primary-alpha-50);
+          }
         }
       }
     }
-  }
 
-  .variables-section {
-    .no-results {
-      text-align: center;
-      padding: 3rem;
-      color: var(--nui-text-tertiary);
+    .variables-section {
+      .no-results {
+        text-align: center;
+        padding: 3rem;
+        color: var(--nui-text-tertiary);
 
-      i {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-        display: block;
+        i {
+          font-size: 3rem;
+          margin-bottom: 1rem;
+          display: block;
+        }
       }
     }
-  }
 
-  .variable-group {
-    margin-bottom: 3rem;
+    .variable-group {
+      margin-bottom: 3rem;
 
-    h2 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      color: var(--nui-text-primary);
+      h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: var(--nui-text-primary);
+      }
     }
+
   }
 
   .variables-list {
@@ -149,41 +151,21 @@
     }
   }
 
-  .usage-section {
-    margin-top: 4rem;
-    padding-top: 3rem;
-    border-top: 1px solid var(--nui-border-primary);
+  .code-example {
+    background: var(--nui-bg-secondary);
+    border: 1px solid var(--nui-border-primary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow-x: auto;
 
-    h2 {
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: var(--nui-text-primary);
-    }
+    pre {
+      margin: 0;
+      font-size: 0.875rem;
 
-    .section-description {
-      font-size: 1.125rem;
-      color: var(--nui-text-secondary);
-      margin-bottom: 2rem;
-      line-height: 1.6;
-    }
-
-    .code-example {
-      background: var(--nui-bg-secondary);
-      border: 1px solid var(--nui-border-primary);
-      border-radius: 8px;
-      padding: 1.5rem;
-      overflow-x: auto;
-
-      pre {
-        margin: 0;
-        font-size: 0.875rem;
-
-        code {
-          color: var(--nui-text-primary);
-          font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-          white-space: pre;
-        }
+      code {
+        color: var(--nui-text-primary);
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        white-space: pre;
       }
     }
   }

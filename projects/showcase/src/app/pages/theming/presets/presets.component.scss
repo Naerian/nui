@@ -1,58 +1,45 @@
-.theming-page {
+// Common styles are defined globally in src/styles.scss
+// This file contains only page-specific styles
+
+.docs-page {
   padding: 2rem 0;
 
-  .page-header {
-    margin-bottom: 3rem;
-    text-align: center;
+  .docs-content {
+    .presets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
 
-    .page-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--nui-text-primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .page-subtitle {
-      font-size: 1.25rem;
-      color: var(--nui-text-secondary);
-      margin-bottom: 1rem;
-    }
-
-    .page-description {
-      font-size: 1rem;
-      color: var(--nui-text-tertiary);
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .page-current-preset {
-      margin-top: 1.5rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.5rem 1rem;
-      background-color: var(--nui-bg-secondary);
-      border: 1px solid var(--nui-border-primary);
-      border-radius: var(--nui-border-radius-md);
-      font-size: 0.875rem;
-      color: var(--nui-text-primary);
-
-      .preset-color-box {
-        width: 30px;
-        height: 30px;
-        border-radius: var(--nui-border-radius-sm);
-        border: 1px solid var(--nui-border-primary);
+      @media (max-width: 767px) {
+        grid-template-columns: 1fr;
       }
     }
   }
 
-  .presets-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2rem;
+  .presets-description {
+    font-size: 1.125rem;
+    color: var(--nui-text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
 
-    @media (max-width: 767px) {
-      grid-template-columns: 1fr;
+  .preset-current {
+    margin: 1rem 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--nui-bg-secondary);
+    border: 1px solid var(--nui-border-primary);
+    border-radius: var(--nui-border-radius-md);
+    font-size: 0.875rem;
+    color: var(--nui-text-primary);
+
+    .preset-current-color-box {
+      width: 30px;
+      height: 30px;
+      border-radius: var(--nui-border-radius-sm);
+      border: 1px solid var(--nui-border-primary);
     }
   }
 
@@ -70,7 +57,8 @@
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: var(--nui-shadow-elevated);
+      box-shadow: 0 0 0 3px var(--nui-primary-alpha-50);
+      cursor: pointer;
     }
 
     .preset-header {

@@ -329,12 +329,12 @@
         "steps": {
           "step1": {
             "title": "Define Your Theme Preset",
-            "description": "Create a ThemePreset object with colors for both light and dark modes. Each mode requires 8 semantic colors.",
+            "description": "Create a <code>ThemePreset</code> object with colors for both <code>light</code> and <code>dark</code> modes. Each mode requires 8 semantic colors.",
             "code": "import { ThemePreset } from '@nui/core';\n\nexport const myCustomPreset: ThemePreset = {\n  name: 'custom',\n  label: 'Custom Theme',\n  colors: {\n    light: {\n      primary: '#6366f1',\n      secondary: '#8b5cf6',\n      accent: '#ec4899',\n      success: '#10b981',\n      info: '#3b82f6',\n      warning: '#f59e0b',\n      danger: '#ef4444',\n      neutral: '#6b7280'\n    },\n    dark: {\n      primary: '#818cf8',\n      secondary: '#a78bfa',\n      accent: '#f472b6',\n      success: '#34d399',\n      info: '#60a5fa',\n      warning: '#fbbf24',\n      danger: '#f87171',\n      neutral: '#9ca3af'\n    }\n  }\n};"
           },
           "step2": {
             "title": "Register Your Theme",
-            "description": "Add your custom preset to the NUI configuration in your app.config.ts or main.ts:",
+            "description": "Add your custom preset to the NUI configuration in your <code>app.config.ts</code> or <code>main.ts</code>:",
             "code": "import { provideNUIConfig } from '@nui/core';\nimport { myCustomPreset } from './themes/custom';\n\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    provideNUIConfig({\n      theme: {\n        preset: 'custom',\n        customPresets: [myCustomPreset],\n        darkMode: {\n          strategy: 'manual'\n        }\n      }\n    })\n  ]\n};"
           },
           "step3": {

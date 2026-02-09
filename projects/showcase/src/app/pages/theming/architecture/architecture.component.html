@@ -1,98 +1,112 @@
-<div class="architecture-page">
+<div class="docs-page">
   <div class="container-fluid">
     <div class="page-header">
       <h1 class="page-title">{{ 'pages.theming.architecture.title' | translate }}</h1>
       <p class="page-subtitle">{{ 'pages.theming.architecture.subtitle' | translate }}</p>
     </div>
 
-    <!-- Semantic Color System -->
-    <section class="arch-section">
-      <h2>{{ 'pages.theming.architecture.semantic.title' | translate }}</h2>
-      <p class="section-description">{{ 'pages.theming.architecture.semantic.description' | translate }}</p>
+    <div class="docs-content">
+      <!-- Semantic Color System -->
+      <section class="docs-section">
+        <h2>{{ 'pages.theming.architecture.semantic.title' | translate }}</h2>
+        <p class="section-description">
+          {{ 'pages.theming.architecture.semantic.description' | translate }}
+        </p>
 
-      <div class="semantic-grid">
-        <div *ngFor="let color of semanticColors" class="semantic-card">
-          <div class="color-preview" [style.background-color]="getColorValue(color.key)"></div>
-          <div class="color-details">
-            <h4 class="color-name">{{ color.key }}</h4>
-            <p class="color-purpose">{{ color.purpose | translate }}</p>
-            <code class="color-value">{{ getColorValue(color.key) }}</code>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Variant Generation -->
-    <section class="arch-section">
-      <h2>{{ 'pages.theming.architecture.variants.title' | translate }}</h2>
-      <p class="section-description">{{ 'pages.theming.architecture.variants.description' | translate }}</p>
-
-      <div class="variants-container">
-        <div *ngFor="let variantType of variantTypes" class="variant-card">
-          <h3>{{ variantType.titleKey | translate }}</h3>
-          <p class="variant-description">{{ variantType.descriptionKey | translate }}</p>
-          
-          <div class="variant-examples">
-            <div *ngFor="let example of variantType.examples" class="variant-item">
-              <div 
-                class="variant-swatch" 
-                [style.background-color]="getVariantExample('primary', example)"
-              ></div>
-              <code class="variant-code">{{ example }}</code>
+        <div class="semantic-grid">
+          <div *ngFor="let color of semanticColors" class="semantic-card">
+            <div class="color-preview" [style.background-color]="getColorValue(color.key)"></div>
+            <div class="color-details">
+              <h4 class="color-name">{{ color.key }}</h4>
+              <p class="color-purpose">{{ color.purpose | translate }}</p>
+              <code class="color-value">{{ getColorValue(color.key) }}</code>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Structural Variables -->
-    <section class="arch-section">
-      <h2>{{ 'pages.theming.architecture.structural.title' | translate }}</h2>
-      <p class="section-description">{{ 'pages.theming.architecture.structural.description' | translate }}</p>
+      <!-- Variant Generation -->
+      <section class="docs-section">
+        <h2>{{ 'pages.theming.architecture.variants.title' | translate }}</h2>
+        <p class="section-description">
+          {{ 'pages.theming.architecture.variants.description' | translate }}
+        </p>
 
-      <div class="structural-grid">
-        <div *ngFor="let group of structuralVariables" class="structural-group">
-          <h3>{{ group.category | translate }}</h3>
-          <div class="var-list">
-            <div *ngFor="let varName of group.vars" class="var-item">
-              <code class="var-name">{{ varName }}</code>
-              <div 
-                class="var-preview" 
-                [style.background-color]="getCSSVariableValue(varName)"
-                [style.box-shadow]="varName.includes('shadow') ? getCSSVariableValue(varName) : 'none'"
-              ></div>
+        <div class="variants-container">
+          <div *ngFor="let variantType of variantTypes" class="variant-card">
+            <h3>{{ variantType.titleKey | translate }}</h3>
+            <p class="variant-description">{{ variantType.descriptionKey | translate }}</p>
+
+            <div class="variant-examples">
+              <div *ngFor="let example of variantType.examples" class="variant-item">
+                <div
+                  class="variant-swatch"
+                  [style.background-color]="getVariantExample('primary', example)"
+                ></div>
+                <code class="variant-code">{{ example }}</code>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Component-Specific Variables -->
-    <section class="arch-section">
-      <h2>{{ 'pages.theming.architecture.components.title' | translate }}</h2>
-      <p class="section-description">{{ 'pages.theming.architecture.components.description' | translate }}</p>
+      <!-- Structural Variables -->
+      <section class="docs-section">
+        <h2>{{ 'pages.theming.architecture.structural.title' | translate }}</h2>
+        <p class="section-description">
+          {{ 'pages.theming.architecture.structural.description' | translate }}
+        </p>
 
-      <div class="components-container">
-        <div *ngFor="let comp of componentSpecificExamples" class="component-card">
-          <h3>{{ comp.component }}</h3>
-          <p>{{ comp.variablesKey | translate }}</p>
-          <ul class="component-vars">
-            <li *ngFor="let example of comp.examples">
-              <code>{{ example }}</code>
-            </li>
-          </ul>
+        <div class="structural-grid">
+          <div *ngFor="let group of structuralVariables" class="structural-group">
+            <h3>{{ group.category | translate }}</h3>
+            <div class="var-list">
+              <div *ngFor="let varName of group.vars" class="var-item">
+                <code class="var-name">{{ varName }}</code>
+                <div
+                  class="var-preview"
+                  [style.background-color]="getCSSVariableValue(varName)"
+                  [style.box-shadow]="
+                    varName.includes('shadow') ? getCSSVariableValue(varName) : 'none'
+                  "
+                ></div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Naming Convention -->
-    <section class="arch-section">
-      <h2>{{ 'pages.theming.architecture.naming.title' | translate }}</h2>
-      <p class="section-description">{{ 'pages.theming.architecture.naming.description' | translate }}</p>
+      <!-- Component-Specific Variables -->
+      <section class="docs-section">
+        <h2>{{ 'pages.theming.architecture.components.title' | translate }}</h2>
+        <p class="section-description">
+          {{ 'pages.theming.architecture.components.description' | translate }}
+        </p>
 
-      <div class="code-block">
-        <pre><code>{{ 'pages.theming.architecture.naming.pattern' | translate }}</code></pre>
-      </div>
-    </section>
+        <div class="components-container">
+          <div *ngFor="let comp of componentSpecificExamples" class="component-card">
+            <h3>{{ comp.component }}</h3>
+            <p>{{ comp.variablesKey | translate }}</p>
+            <ul class="component-vars">
+              <li *ngFor="let example of comp.examples">
+                <code>{{ example }}</code>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Naming Convention -->
+      <section class="docs-section">
+        <h2>{{ 'pages.theming.architecture.naming.title' | translate }}</h2>
+        <p class="section-description">
+          {{ 'pages.theming.architecture.naming.description' | translate }}
+        </p>
+
+        <div class="code-block">
+          <pre><code>{{ 'pages.theming.architecture.naming.pattern' | translate }}</code></pre>
+        </div>
+      </section>
+    </div>
   </div>
 </div>
