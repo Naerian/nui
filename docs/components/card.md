@@ -407,7 +407,7 @@ Las cards usan variables CSS para fácil personalización:
 .my-custom-card {
   --card-bg: var(--surface-primary);
   --card-border: 1px solid var(--nui-border-primary);
-  --card-shadow: var(--nui-box-shadow--lg);
+  --card-shadow: var(--nui-box-shadow-lg);
   --card-footer-bg: var(--nui-bg-secondary);
 }
 ```

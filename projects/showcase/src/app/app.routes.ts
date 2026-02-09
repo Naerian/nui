@@ -58,7 +58,55 @@ export const routes: Routes = [
   // ============================================
   {
     path: 'theming',
-    loadComponent: () => import('./pages/theming/theming.component').then(m => m.ThemingComponent),
+    children: [
+      {
+        path: '',
+        redirectTo: 'overview',
+        pathMatch: 'full',
+      },
+      {
+        path: 'overview',
+        loadComponent: () =>
+          import('./pages/theming/overview/overview.component').then(
+            m => m.ThemeOverviewComponent
+          ),
+      },
+      {
+        path: 'presets',
+        loadComponent: () =>
+          import('./pages/theming/presets/presets.component').then(
+            m => m.PresetsComponent
+          ),
+      },
+      {
+        path: 'architecture',
+        loadComponent: () =>
+          import('./pages/theming/architecture/architecture.component').then(
+            m => m.ThemeArchitectureComponent
+          ),
+      },
+      {
+        path: 'dark-mode',
+        loadComponent: () =>
+          import('./pages/theming/dark-mode/dark-mode.component').then(
+            m => m.DarkModeComponent
+          ),
+      },
+      {
+        path: 'css-variables',
+        loadComponent: () =>
+          import('./pages/theming/css-variables/css-variables.component').then(
+            m => m.CssVariablesComponent
+          ),
+      },
+      {
+        path: 'customization',
+        loadComponent: () =>
+          import('./pages/theming/customization/customization.component').then(
+            m => m.CustomizationComponent
+          ),
+      },
+    ],
   },
 
   // ============================================

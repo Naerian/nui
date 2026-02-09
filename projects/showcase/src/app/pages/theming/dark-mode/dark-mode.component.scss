@@ -1,0 +1,219 @@
+.dark-mode-page {
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .dm-section {
+    margin-bottom: 4rem;
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--nui-text-primary);
+    }
+
+    .section-description {
+      font-size: 1.125rem;
+      color: var(--nui-text-secondary);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+  }
+
+  .current-strategy-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: var(--nui-bg-secondary);
+    border: 1px solid var(--nui-border-primary);
+    border-radius: 12px;
+    gap: 2rem;
+    flex-wrap: wrap;
+
+    .strategy-info,
+    .dark-mode-status {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .label {
+      font-size: 1rem;
+      color: var(--nui-text-secondary);
+    }
+
+    .strategy-value {
+      font-size: 1rem;
+      font-weight: 600;
+      background: var(--nui-bg-primary);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      color: var(--nui-primary);
+    }
+
+    .mode-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--nui-color-warning-tint-90);
+      color: var(--nui-warning);
+      border-radius: 6px;
+      font-weight: 600;
+
+      &.dark {
+        background: var(--nui-color-info-tint-90);
+        color: var(--nui-info);
+      }
+
+      i {
+        font-size: 1.125rem;
+      }
+    }
+  }
+
+  .strategies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .strategy-card {
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: var(--nui-bg-secondary);
+    border: 2px solid var(--nui-border-primary);
+    transition: all 0.2s ease;
+
+    &.active {
+      border-color: var(--nui-primary);
+      box-shadow: 0 0 0 3px var(--nui-primary-alpha-50);
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--nui-shadow-elevated);
+    }
+  }
+
+  .strategy-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    .strategy-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--nui-primary-alpha-50);
+      color: var(--nui-primary);
+      border-radius: 10px;
+      font-size: 1.5rem;
+    }
+
+    .strategy-title-box {
+      flex: 1;
+
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: var(--nui-text-primary);
+      }
+
+      .strategy-value {
+        font-size: 0.875rem;
+        color: var(--nui-text-tertiary);
+        font-family: monospace;
+      }
+    }
+  }
+
+  .strategy-description {
+    font-size: 0.875rem;
+    color: var(--nui-text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .strategy-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+      font-size: 0.875rem;
+      color: var(--nui-text-primary);
+
+      i {
+        color: var(--nui-success);
+        font-size: 1rem;
+        flex-shrink: 0;
+        margin-top: 0.125rem;
+      }
+    }
+  }
+
+  .code-example {
+    background: var(--nui-bg-primary);
+    border: 1px solid var(--nui-border-primary);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+
+    pre {
+      margin: 0;
+      font-size: 0.8125rem;
+
+      code {
+        color: var(--nui-text-primary);
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        white-space: pre;
+      }
+    }
+  }
+
+  .demo-controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .demo-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--nui-primary);
+    color: var(--nui-primary-contrast);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    i {
+      font-size: 1.125rem;
+    }
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--nui-shadow-elevated);
+      opacity: 0.9;
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}

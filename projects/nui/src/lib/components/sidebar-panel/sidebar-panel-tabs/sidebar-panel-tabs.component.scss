@@ -54,14 +54,14 @@
   border: 1px solid var(--nui-sidebar-panel-border, var(--nui-border-primary));
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: var(--nui-box-shadow--sm);
+  box-shadow: var(--nui-box-shadow-sm);
   font-family: inherit;
   opacity: 0.8;
 
   &:hover {
     opacity: 1;
     background: var(--nui-bg-tertiary);
-    box-shadow: var(--nui-box-shadow--md);
+    box-shadow: var(--nui-box-shadow-md);
   }
 
   &:focus-visible {

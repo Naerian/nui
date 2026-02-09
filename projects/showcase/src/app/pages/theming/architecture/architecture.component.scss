@@ -1,0 +1,228 @@
+.architecture-page {
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .arch-section {
+    margin-bottom: 4rem;
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--nui-text-primary);
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--nui-text-primary);
+    }
+
+    .section-description {
+      font-size: 1.125rem;
+      color: var(--nui-text-secondary);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+  }
+
+  .semantic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .semantic-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background: var(--nui-bg-secondary);
+    border: 1px solid var(--nui-border-primary);
+
+    .color-preview {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      box-shadow: var(--nui-shadow-interactive);
+    }
+
+    .color-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .color-name {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: var(--nui-text-primary);
+      text-transform: capitalize;
+    }
+
+    .color-purpose {
+      font-size: 0.875rem;
+      color: var(--nui-text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .color-value {
+      font-size: 0.75rem;
+      background: var(--nui-bg-primary);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      color: var(--nui-text-tertiary);
+    }
+  }
+
+  .variants-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .variant-card {
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: var(--nui-bg-secondary);
+    border: 1px solid var(--nui-border-primary);
+
+    .variant-description {
+      font-size: 0.875rem;
+      color: var(--nui-text-secondary);
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .variant-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .variant-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .variant-swatch {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      border: 1px solid var(--nui-border-primary);
+    }
+
+    .variant-code {
+      font-size: 0.875rem;
+      background: var(--nui-bg-primary);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      color: var(--nui-text-secondary);
+    }
+  }
+
+  .structural-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .structural-group {
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: var(--nui-bg-secondary);
+    border: 1px solid var(--nui-border-primary);
+  }
+
+  .var-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .var-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    background: var(--nui-bg-primary);
+    border-radius: 6px;
+
+    .var-name {
+      font-size: 0.75rem;
+      color: var(--nui-text-secondary);
+    }
+
+    .var-preview {
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      border: 1px solid var(--nui-border-primary);
+    }
+  }
+
+  .components-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .component-card {
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: var(--nui-bg-secondary);
+    border: 1px solid var(--nui-border-primary);
+
+    h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 0.875rem;
+      color: var(--nui-text-secondary);
+      margin-bottom: 1rem;
+    }
+  }
+
+  .component-vars {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    li {
+      code {
+        font-size: 0.75rem;
+        background: var(--nui-bg-primary);
+        padding: 0.5rem;
+        border-radius: 4px;
+        display: block;
+        color: var(--nui-text-secondary);
+      }
+    }
+  }
+
+  .code-block {
+    background: var(--nui-bg-secondary);
+    border: 1px solid var(--nui-border-primary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow-x: auto;
+
+    pre {
+      margin: 0;
+      font-size: 0.875rem;
+
+      code {
+        color: var(--nui-text-primary);
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      }
+    }
+  }
+}

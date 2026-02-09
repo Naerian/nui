@@ -441,13 +441,13 @@ export class ThemeService {
 
     return `
     /* === SHADOW PRIMITIVES === */
-    --nui-box-shadow--xs: ${shadowXs};
-    --nui-box-shadow--sm: ${shadowSm};
-    --nui-box-shadow--md: ${shadowMd};
-    --nui-box-shadow--lg: ${shadowLg};
-    --nui-box-shadow--xl: ${shadowXl};
+    --nui-box-shadow-xs: ${shadowXs};
+    --nui-box-shadow-sm: ${shadowSm};
+    --nui-box-shadow-md: ${shadowMd};
+    --nui-box-shadow-lg: ${shadowLg};
+    --nui-box-shadow-xl: ${shadowXl};
     
-    --nui-box-shadow--button-hover: ${shadowBtnHover};
+    --nui-box-shadow-button-hover: ${shadowBtnHover};
 
     /* === SEMANTIC ALIASES === */
     /* We map use cases to primitives */
@@ -455,16 +455,16 @@ export class ThemeService {
     --nui-shadow-none: none;
     
     /* Containers (Cards, Side Panels) */
-    --nui-shadow-container: var(--nui-box-shadow--sm);
+    --nui-shadow-container: var(--nui-box-shadow-sm);
     
     /* Floating Elements (Popovers, Dropdowns, Menus, Modals) */
-    --nui-shadow-elevated: var(--nui-box-shadow--lg);
+    --nui-shadow-elevated: var(--nui-box-shadow-lg);
     
     /* Interactive Elements (Buttons, Clickable Chips) */
-    --nui-shadow-interactive: var(--nui-box-shadow--sm);
+    --nui-shadow-interactive: var(--nui-box-shadow-sm);
     
     /* Form Fields (Inputs, Selects) */
-    --nui-shadow-field: var(--nui-box-shadow--xs);
+    --nui-shadow-field: var(--nui-box-shadow-xs);
   `;
   }
 

@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "NUI Component Library",
+    "title": "NUI",
     "preset": "Preset",
     "theme": "Theme",
     "language": "Language",
@@ -13,6 +13,12 @@
     "installation": "Installation",
     "configuration": "Configuration",
     "theming": "Theming",
+    "themingOverview": "Overview",
+    "themingPresets": "Presets",
+    "themingArchitecture": "Architecture",
+    "themingDarkMode": "Dark Mode",
+    "themingCssVariables": "CSS Variables",
+    "themingCustomization": "Customization",
     "components": "Components",
     "button": "Button",
     "avatar": "Avatar",
@@ -125,6 +131,250 @@
         "minimal": "Refined minimalist palette with subtle colors and elegant purple accent",
         "sunset": "Warm and vibrant palette with pink, orange and coral tones, perfect for creative apps",
         "ocean": "Calm and professional palette with deep blues and aqua tones, ideal for productivity"
+      },
+      "overview": {
+        "title": "Theming System Overview",
+        "subtitle": "A powerful, runtime-configurable theming solution for Angular applications",
+        "whatItSolves": {
+          "title": "What Problem Does It Solve?",
+          "description": "NUI's theming system eliminates the need for manual CSS configuration, theme rebuilds, or complex SCSS variable management. It provides a unified, type-safe way to customize your application's appearance at runtime."
+        },
+        "features": {
+          "runtimeSwitching": {
+            "title": "Runtime Theme Switching",
+            "description": "Change themes instantly without page reload or rebuild. Perfect for user preferences and A/B testing."
+          },
+          "darkMode": {
+            "title": "Automatic Dark Mode",
+            "description": "Built-in dark mode support with automatic color adjustments and multiple activation strategies."
+          },
+          "tokenGeneration": {
+            "title": "200+ CSS Variables",
+            "description": "Comprehensive variable system covering colors, shades, tints, alpha values, and component-specific tokens."
+          },
+          "componentSpecific": {
+            "title": "Component-Specific Variables",
+            "description": "Each component has its own customizable CSS variables that inherit from the global theme."
+          },
+          "typeSafety": {
+            "title": "Type-Safe Configuration",
+            "description": "Full TypeScript support with interfaces that ensure your custom themes are correctly configured."
+          },
+          "zeroScss": {
+            "title": "Zero Build Overhead",
+            "description": "Themes are generated in browser at runtime. No need to rebuild your application when changing themes."
+          }
+        },
+        "integration": {
+          "title": "How It Integrates",
+          "description": "The theming system is deeply integrated into NUI and works seamlessly across all components:",
+          "point1": "<strong>Single Configuration Point</strong>: Define your theme once in <code>provideNUIConfig()</code>",
+          "point2": "<strong>Automatic Propagation</strong>: All NUI components automatically consume theme variables",
+          "point3": "<strong>Custom Components</strong>: Your own components can use NUI CSS variables for consistent styling",
+          "point4": "<strong>Runtime Control</strong>: Switch themes or toggle dark mode programmatically via <code>ThemeService</code>",
+          "point5": "<strong>Framework Agnostic CSS</strong>: Variables work in any HTML/CSS, not just Angular components"
+        },
+        "keyFeatures": {
+          "title": "Key Technical Features",
+          "feat1": "CSS variables dynamically generated from TypeScript configuration",
+          "feat2Label": "8 semantic colors",
+          "feat2": "(primary, secondary, accent, success, info, warning, danger, neutral)",
+          "feat3Label": "10-step gray scale",
+          "feat3": "for consistent neutrals across light and dark modes",
+          "feat4Label": "Automatic variants",
+          "feat4": "(shades, tints, alpha values) generated for each color",
+          "feat5Label": "Smart dark mode",
+          "feat5": "with manual, system, and time-based strategies"
+        }
+      },
+      "architecture": {
+        "title": "Theme Architecture",
+        "subtitle": "Deep dive into how NUI generates and structures CSS variables",
+        "semantic": {
+          "title": "Semantic Color System",
+          "description": "NUI uses 8 semantic colors that convey meaning and intent. Each color generates multiple CSS variables for different use cases.",
+          "primary": "Main brand color, used for primary actions and key UI elements",
+          "secondary": "Supporting color for secondary actions and complementary elements",
+          "accent": "Highlight color for emphasis, links, and interactive elements",
+          "success": "Positive feedback, confirmations, and successful operations",
+          "info": "Informational messages, neutral notifications, and helper text",
+          "warning": "Cautions, alerts that require attention but aren't critical",
+          "danger": "Errors, destructive actions, and critical alerts",
+          "neutral": "Backgrounds, borders, disabled states, and neutral UI elements"
+        },
+        "variants": {
+          "title": "Automatic Variant Generation",
+          "description": "For each semantic color, NUI automatically generates variants to ensure visual hierarchy and accessibility:",
+          "tints": {
+            "title": "Tints",
+            "description": "Lighter versions of the base color, ideal for backgrounds and hover states."
+          },
+          "shades": {
+            "title": "Shades",
+            "description": "Darker versions of the base color, perfect for active states and emphasis."
+          },
+          "alpha": {
+            "title": "Alpha Variants",
+            "description": "Transparent versions of the base color for overlays, borders, and subtle effects."
+          }
+        },
+        "structural": {
+          "title": "Structural Variables",
+          "description": "Beyond colors, NUI provides structural variables that define the visual foundation of your application:",
+          "backgrounds": "Backgrounds",
+          "text": "Text Colors",
+          "foregrounds": "Foreground Colors",
+          "borders": "Borders",
+          "shadows": "Shadows",
+          "states": "Interactive States"
+        },
+        "components": {
+          "title": "Component-Specific Variables",
+          "description": "Each NUI component can define its own CSS variables that inherit from the theme system but allow fine-grained customization.",
+          "button": "Button variables control padding, heights, shadows, and state colors",
+          "avatar": "Avatar variables define sizes, background colors and text colors for different states",
+          "toast": "Toast variables define icon sizes, spacing, and type-specific colors"
+        },
+        "naming": {
+          "title": "Naming Convention",
+          "description": "All CSS variables follow a predictable naming pattern:",
+          "pattern": "--nui-[category]-[name]-[variant]\n\nExamples:\n--nui-color-primary          // Base primary color\n--nui-color-primary-shade-50 // Darker primary\n--nui-color-primary-tint-100 // Lighter primary\n--nui-color-primary-alpha-20 // 20% transparent primary\n--nui-bg-primary             // Primary background\n--nui-text-primary           // Primary text color"
+        }
+      },
+      "darkMode": {
+        "title": "Dark Mode Strategies",
+        "subtitle": "Multiple ways to handle dark mode in your application",
+        "currentStrategy": "Current strategy",
+        "currentMode": "Current mode",
+        "dark": "Dark",
+        "light": "Light",
+        "strategiesTitle": "Available Strategies",
+        "strategiesDescription": "NUI provides three different strategies for managing dark mode, each suited for different use cases:",
+        "strategies": {
+          "manual": {
+            "title": "Manual",
+            "description": "Full programmatic control. Dark mode is toggled explicitly via ThemeService.",
+            "feat1": "Complete control in your application code",
+            "feat2": "User preference saved in localStorage",
+            "feat3": "Perfect for apps with theme switcher UI"
+          },
+          "system": {
+            "title": "System",
+            "description": "Automatically follows the user's operating system preference using prefers-color-scheme media query.",
+            "feat1": "Respects OS-level dark mode setting",
+            "feat2": "Updates automatically when user changes OS preference"
+          },
+          "auto": {
+            "title": "Auto",
+            "description": "Intelligent time-based switching. Dark mode activates during evening hours (8 PM - 6 AM local time).",
+            "feat1": "Activates dark mode from 8 PM to 6 AM",
+            "feat2": "Reduces eye strain during night usage"
+          }
+        },
+        "demo": {
+          "title": "Try It Out",
+          "description": "The showcase is configured with 'manual' strategy, you can control dark mode programmatically:",
+          "toggle": "Toggle Dark Mode",
+          "enableDark": "Enable Dark",
+          "enableLight": "Enable Light"
+        },
+        "customClass": {
+          "title": "Custom Dark Mode Class",
+          "description": "By default, NUI adds the 'dark-mode' class to <html> when dark mode is active. You can customize this class name:"
+        }
+      },
+      "cssVars": {
+        "title": "CSS Variables Explorer",
+        "subtitle": "Browse and search all 200+ CSS variables generated by the theme system",
+        "filters": {
+          "search": "Search",
+          "searchPlaceholder": "Search variables...",
+          "category": "Category"
+        },
+        "categories": {
+          "all": "All Variables",
+          "semantic": "Semantic Colors",
+          "structural": "Structural Variables",
+          "button": "Button",
+          "avatar": "Avatar",
+          "toast": "Toast",
+          "paginator": "Paginator",
+          "shadows": "Shadows"
+        },
+        "noResults": "No variables found matching your search",
+        "copy": "Copy to clipboard",
+        "groups": {
+          "semantic": "Semantic Colors",
+          "structural": "Structural Variables",
+          "button": "Button Variables",
+          "avatar": "Avatar Variables",
+          "toast": "Toast Variables",
+          "paginator": "Paginator Variables",
+          "shadows": "Shadow Variables"
+        },
+        "usage": {
+          "title": "How to Use CSS Variables",
+          "description": "You can use any NUI CSS variable in your components' stylesheets:",
+          "example": ".my-component {\n  background: var(--nui-bg-primary);\n  color: var(--nui-text-primary);\n  border: 1px solid var(--nui-border-color);\n  box-shadow: var(--nui-shadow-md);\n}\n\n.my-button {\n  background: var(--nui-color-primary);\n  \n  &:hover {\n    background: var(--nui-color-primary-shade-50);\n  }\n}"
+        }
+      },
+      "customization": {
+        "title": "Creating Custom Themes",
+        "subtitle": "Build your own theme presets with custom colors",
+        "intro": {
+          "title": "Why Create Custom Themes?",
+          "description": "Custom themes allow you to match your brand identity, create unique user experiences, or offer multiple theme options to your users. NUI makes it easy with a type-safe configuration system."
+        },
+        "stepsTitle": "Steps to Create a Custom Theme",
+        "steps": {
+          "step1": {
+            "title": "Define Your Theme Preset",
+            "description": "Create a ThemePreset object with colors for both light and dark modes. Each mode requires 8 semantic colors.",
+            "code": "import { ThemePreset } from '@nui/core';\n\nexport const myCustomPreset: ThemePreset = {\n  name: 'custom',\n  label: 'Custom Theme',\n  colors: {\n    light: {\n      primary: '#6366f1',\n      secondary: '#8b5cf6',\n      accent: '#ec4899',\n      success: '#10b981',\n      info: '#3b82f6',\n      warning: '#f59e0b',\n      danger: '#ef4444',\n      neutral: '#6b7280'\n    },\n    dark: {\n      primary: '#818cf8',\n      secondary: '#a78bfa',\n      accent: '#f472b6',\n      success: '#34d399',\n      info: '#60a5fa',\n      warning: '#fbbf24',\n      danger: '#f87171',\n      neutral: '#9ca3af'\n    }\n  }\n};"
+          },
+          "step2": {
+            "title": "Register Your Theme",
+            "description": "Add your custom preset to the NUI configuration in your app.config.ts or main.ts:",
+            "code": "import { provideNUIConfig } from '@nui/core';\nimport { myCustomPreset } from './themes/custom';\n\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    provideNUIConfig({\n      theme: {\n        preset: 'custom',\n        customPresets: [myCustomPreset],\n        darkMode: {\n          strategy: 'manual'\n        }\n      }\n    })\n  ]\n};"
+          },
+          "step3": {
+            "title": "Use Your Theme",
+            "description": "Your custom theme is now active! You can also switch between themes at runtime:",
+            "code": "import { ThemeService } from '@nui/core';\n\nexport class MyComponent {\n  constructor(private themeService: ThemeService) {}\n\n  switchToCustomTheme() {\n    this.themeService.setPreset('custom');\n  }\n\n  switchToAura() {\n    this.themeService.setPreset('aura');\n  }\n}"
+          }
+        },
+        "grayScale": {
+          "title": "Custom Gray Scale (Optional)",
+          "description": "You can also define a custom 10-step gray scale for even more control over neutral colors. If omitted, NUI generates one automatically."
+        },
+        "bestPractices": {
+          "title": "Best Practices",
+          "practice1": "<strong>Use hex colors</strong> for best compatibility and performance",
+          "practice2": "<strong>Test in both light and dark modes</strong> to ensure readability and contrast",
+          "practice3": "<strong>Keep semantic meaning consistent</strong> (e.g., danger should always mean error/destructive)",
+          "practice4": "<strong>Use color contrast checkers</strong> to meet WCAG accessibility standards",
+          "practice5": "<strong>Consider color blindness</strong> - don't rely solely on color to convey information"
+        },
+        "advanced": {
+          "title": "Advanced Customization",
+          "tip1": {
+            "title": "Multiple Custom Presets",
+            "description": "You can register multiple custom presets and let users choose between them at runtime."
+          },
+          "tip2": {
+            "title": "Preset Inheritance",
+            "description": "Start from an existing preset and override only specific colors to create variations."
+          },
+          "tip3": {
+            "title": "Dynamic Theme Generation",
+            "description": "Generate themes programmatically based on user input, brand colors, or API data."
+          }
+        },
+        "example": {
+          "title": "Complete Example",
+          "description": "Here's a full example of a custom 'Forest' theme with manual dark mode:",
+          "code": "import { ThemePreset } from '@nui/core';\n\nexport const forestPreset: ThemePreset = {\n  name: 'forest',\n  label: 'Forest',\n  colors: {\n    light: {\n      primary: '#059669',    // Emerald\n      secondary: '#0891b2',  // Cyan\n      accent: '#7c3aed',     // Violet\n      success: '#16a34a',    // Green\n      info: '#0284c7',       // Sky\n      warning: '#ca8a04',    // Yellow\n      danger: '#dc2626',     // Red\n      neutral: '#52525b'     // Zinc\n    },\n    dark: {\n      primary: '#34d399',\n      secondary: '#22d3ee',\n      accent: '#a78bfa',\n      success: '#4ade80',\n      info: '#38bdf8',\n      warning: '#facc15',\n      danger: '#f87171',\n      neutral: '#a1a1aa'\n    }\n  },\n  grays: {\n    light: {\n      50: '#fafafa',\n      100: '#f4f4f5',\n      200: '#e4e4e7',\n      300: '#d4d4d8',\n      400: '#a1a1aa',\n      500: '#71717a',\n      600: '#52525b',\n      700: '#3f3f46',\n      800: '#27272a',\n      900: '#18181b'\n    },\n    dark: {\n      50: '#18181b',\n      100: '#27272a',\n      200: '#3f3f46',\n      300: '#52525b',\n      400: '#71717a',\n      500: '#a1a1aa',\n      600: '#d4d4d8',\n      700: '#e4e4e7',\n      800: '#f4f4f5',\n      900: '#fafafa'\n    }\n  }\n};"
+        }
       }
     }
   },

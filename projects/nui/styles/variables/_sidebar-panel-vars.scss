@@ -18,7 +18,7 @@ $panel-title-weight: 600 !default;
 $panel-z-index: 1040 !default;
 $panel-overlay-z-index: 1039 !default;
 
-$panel-shadow: var(--nui-box-shadow--xl) !default;
+$panel-shadow: var(--nui-box-shadow-xl) !default;
 
 // MIXIN (CSS Custom Properties)
 @mixin nui-sidebar-panel-vars {

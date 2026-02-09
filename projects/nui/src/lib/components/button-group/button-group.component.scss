@@ -151,7 +151,7 @@
       border-radius: calc(var(--nui-btn-group-radius) - var(--nui-btn-group-segmented-padding));
 
       &--selected {
-        box-shadow: var(--nui-box-shadow--sm);
+        box-shadow: var(--nui-box-shadow-sm);
       }
     }
   }

@@ -1,0 +1,208 @@
+.customization-page {
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .custom-section {
+    margin-bottom: 4rem;
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--nui-text-primary);
+    }
+
+    .section-description {
+      font-size: 1.125rem;
+      color: var(--nui-text-secondary);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+  }
+
+  .intro-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--nui-primary-alpha-50), var(--nui-accent-alpha-50));
+    border-radius: 12px;
+    border: 1px solid var(--nui-border-primary);
+
+    i {
+      font-size: 3rem;
+      color: var(--nui-primary);
+      flex-shrink: 0;
+    }
+
+    .intro-content {
+      flex: 1;
+
+      h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: var(--nui-text-primary);
+      }
+
+      p {
+        font-size: 1rem;
+        color: var(--nui-text-secondary);
+        line-height: 1.6;
+      }
+    }
+  }
+
+  .steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .step-card {
+    padding: 2rem;
+    background: var(--nui-bg-secondary);
+    border: 1px solid var(--nui-border-primary);
+    border-radius: 12px;
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+
+      .step-number {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--nui-primary);
+        color: var(--nui-primary-contrast);
+        border-radius: 50%;
+        font-size: 1.5rem;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0;
+        color: var(--nui-text-primary);
+      }
+    }
+
+    .step-description {
+      font-size: 1rem;
+      color: var(--nui-text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+  }
+
+  .code-block {
+    background: var(--nui-bg-primary);
+    border: 1px solid var(--nui-border-primary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow-x: auto;
+
+    &.large {
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    pre {
+      margin: 0;
+      font-size: 0.875rem;
+
+      code {
+        color: var(--nui-text-primary);
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        white-space: pre;
+        line-height: 1.6;
+      }
+    }
+  }
+
+  .best-practices-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--nui-bg-secondary);
+      border-left: 3px solid var(--nui-success);
+      border-radius: 6px;
+      font-size: 1rem;
+      line-height: 1.6;
+
+      i {
+        color: var(--nui-success);
+        font-size: 1.25rem;
+        flex-shrink: 0;
+        margin-top: 0.125rem;
+      }
+
+      span {
+        color: var(--nui-text-primary);
+        flex: 1;
+      }
+    }
+  }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .tip-card {
+    padding: 1.5rem;
+    background: var(--nui-bg-secondary);
+    border: 1px solid var(--nui-border-primary);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--nui-shadow-elevated);
+    }
+
+    .tip-icon {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--nui-accent-alpha-50);
+      color: var(--nui-accent);
+      border-radius: 12px;
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--nui-text-primary);
+    }
+
+    p {
+      font-size: 0.875rem;
+      color: var(--nui-text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+}

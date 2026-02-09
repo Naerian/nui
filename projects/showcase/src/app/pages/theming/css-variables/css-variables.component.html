@@ -1,0 +1,77 @@
+<div class="css-vars-page">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h1 class="page-title">{{ 'pages.theming.cssVars.title' | translate }}</h1>
+      <p class="page-subtitle">{{ 'pages.theming.cssVars.subtitle' | translate }}</p>
+    </div>
+
+    <!-- Filters -->
+    <section class="filters-section">
+      <div class="filter-group">
+        <label>{{ 'pages.theming.cssVars.filters.search' | translate }}</label>
+        <input 
+          type="text" 
+          class="search-input"
+          [placeholder]="'pages.theming.cssVars.filters.searchPlaceholder' | translate"
+          [(ngModel)]="searchTerm"
+        />
+      </div>
+
+      <div class="filter-group">
+        <label>{{ 'pages.theming.cssVars.filters.category' | translate }}</label>
+        <select class="category-select" [(ngModel)]="selectedCategory">
+          <option *ngFor="let cat of categories" [value]="cat.value">
+            {{ cat.labelKey | translate }}
+          </option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Variables Display -->
+    <section class="variables-section">
+      <div *ngIf="filteredGroups().length === 0" class="no-results">
+        <i class="ri-search-line"></i>
+        <p>{{ 'pages.theming.cssVars.noResults' | translate }}</p>
+      </div>
+
+      <div *ngFor="let group of filteredGroups()" class="variable-group">
+        <h2>{{ group.titleKey | translate }}</h2>
+        
+        <div class="variables-list">
+          <div *ngFor="let varName of group.variables" class="variable-item">
+            <div class="variable-info">
+              <code class="variable-name">{{ varName }}</code>
+              <button 
+                class="copy-btn" 
+                (click)="copyToClipboard('var(' + varName + ')')"
+                [title]="'pages.theming.cssVars.copy' | translate"
+              >
+                <i class="ri-file-copy-line"></i>
+              </button>
+            </div>
+            
+            <div class="variable-value">
+              <div 
+                *ngIf="isColorVariable(varName)" 
+                class="color-preview" 
+                [style.background]="getCSSVariableValue(varName)"
+                [style.box-shadow]="varName.includes('shadow') ? getCSSVariableValue(varName) : 'none'"
+              ></div>
+              <code class="value-text">{{ getCSSVariableValue(varName) }}</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usage Example -->
+    <section class="usage-section">
+      <h2>{{ 'pages.theming.cssVars.usage.title' | translate }}</h2>
+      <p class="section-description">{{ 'pages.theming.cssVars.usage.description' | translate }}</p>
+
+      <div class="code-example">
+        <pre><code>{{ 'pages.theming.cssVars.usage.example' | translate }}</code></pre>
+      </div>
+    </section>
+  </div>
+</div>

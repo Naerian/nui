@@ -57,20 +57,20 @@
   }
 
   .preset-card {
-    background-color: var(--nui-bg-secondary);
-    border: 1px solid var(--nui-border-primary);
-    border-radius: var(--nui-border-radius-lg);
     padding: 1.5rem;
-    transition: all 0.3s ease;
-
-    &:hover {
-      box-shadow: 0 4px 12px var(--nui-shadow-md);
-      transform: translateY(-2px);
-    }
+    border-radius: 12px;
+    background: var(--nui-bg-secondary);
+    border: 2px solid var(--nui-border-primary);
+    transition: all 0.2s ease;
 
     &.active {
-      box-shadow: 3px 3px 20px 0px var(--nui-primary-alpha-50);
+      border-color: var(--nui-primary);
+      box-shadow: 0 0 0 3px var(--nui-primary-alpha-50);
+    }
+
+    &:hover {
       transform: translateY(-2px);
+      box-shadow: var(--nui-shadow-elevated);
     }
 
     .preset-header {
@@ -110,7 +110,7 @@
       border-radius: var(--nui-border-radius-md);
       border: 2px solid var(--nui-border-primary);
       flex-shrink: 0;
-      box-shadow: 0 2px 4px var(--nui-box-shadow--sm);
+      box-shadow: 0 2px 4px var(--nui-box-shadow-sm);
     }
 
     .color-info {

@@ -23,13 +23,13 @@ interface PresetOption {
 }
 
 @Component({
-  selector: 'app-theming',
+  selector: 'app-presets',
   standalone: true,
   imports: [CommonModule, TranslateModule],
-  templateUrl: './theming.component.html',
-  styleUrls: ['./theming.component.scss'],
+  templateUrl: './presets.component.html',
+  styleUrls: ['./presets.component.scss'],
 })
-export class ThemingComponent {
+export class PresetsComponent {
   private themeService = inject(ThemeService);
 
   // Computed signal to get the list of presets based on the current theme mode

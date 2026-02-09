@@ -42,6 +42,44 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
     translationKey: 'sidebar.theming',
     route: '/theming',
     icon: 'ri-palette-line',
+    children: [
+      {
+        label: 'Overview',
+        translationKey: 'sidebar.themingOverview',
+        route: '/theming/overview',
+        icon: 'ri-information-line',
+      },
+      {
+        label: 'Presets',
+        translationKey: 'sidebar.themingPresets',
+        route: '/theming/presets',
+        icon: 'ri-palette-fill',
+      },
+      {
+        label: 'Architecture',
+        translationKey: 'sidebar.themingArchitecture',
+        route: '/theming/architecture',
+        icon: 'ri-building-line',
+      },
+      {
+        label: 'Dark Mode',
+        translationKey: 'sidebar.themingDarkMode',
+        route: '/theming/dark-mode',
+        icon: 'ri-moon-line',
+      },
+      {
+        label: 'CSS Variables',
+        translationKey: 'sidebar.themingCssVariables',
+        route: '/theming/css-variables',
+        icon: 'ri-code-line',
+      },
+      {
+        label: 'Customization',
+        translationKey: 'sidebar.themingCustomization',
+        route: '/theming/customization',
+        icon: 'ri-tools-line',
+      },
+    ],
   },
   {
     label: 'Components',

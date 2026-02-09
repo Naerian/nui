@@ -14,7 +14,7 @@ interface Version {
   standalone: true,
   imports: [CommonModule, TranslateModule, OverlayModule],
   templateUrl: './version-selector.component.html',
-  styleUrls: ['./version-selector.component.scss']
+  styleUrls: ['./version-selector.component.scss'],
 })
 export class VersionSelectorComponent implements OnInit {
   private showcaseConfig = inject(ShowcaseConfigService);
@@ -22,9 +22,7 @@ export class VersionSelectorComponent implements OnInit {
   isOpen = false;
   currentVersion = this.showcaseConfig.currentConfig.version;
 
-  versions: Version[] = [
-    { value: '1.0.0', label: 'v1.0.0 (Latest)' }
-  ];
+  versions: Version[] = [{ value: '0.0.1', label: 'v0.0.1 (Latest)' }];
 
   ngOnInit(): void {
     this.showcaseConfig.config$.subscribe(config => {

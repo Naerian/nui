@@ -1,0 +1,86 @@
+<div class="customization-page">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h1 class="page-title">{{ 'pages.theming.customization.title' | translate }}</h1>
+      <p class="page-subtitle">{{ 'pages.theming.customization.subtitle' | translate }}</p>
+    </div>
+
+    <!-- Introduction -->
+    <section class="custom-section">
+      <div class="intro-box">
+        <i class="ri-paintbrush-line"></i>
+        <div class="intro-content">
+          <h3>{{ 'pages.theming.customization.intro.title' | translate }}</h3>
+          <p>{{ 'pages.theming.customization.intro.description' | translate }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Steps -->
+    <section class="custom-section">
+      <h2>{{ 'pages.theming.customization.stepsTitle' | translate }}</h2>
+      
+      <div class="steps-container">
+        <div *ngFor="let step of steps" class="step-card">
+          <div class="step-header">
+            <div class="step-number">{{ step.number }}</div>
+            <h3>{{ step.titleKey | translate }}</h3>
+          </div>
+          
+          <p class="step-description">{{ step.descriptionKey | translate }}</p>
+          
+          <div class="code-block">
+            <pre><code>{{ step.codeKey | translate }}</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Custom Gray Scale -->
+    <section class="custom-section">
+      <h2>{{ 'pages.theming.customization.grayScale.title' | translate }}</h2>
+      <p class="section-description">{{ 'pages.theming.customization.grayScale.description' | translate }}</p>
+
+      <div class="code-block">
+        <pre><code>{{ grayScaleExample }}</code></pre>
+      </div>
+    </section>
+
+    <!-- Best Practices -->
+    <section class="custom-section">
+      <h2>{{ 'pages.theming.customization.bestPractices.title' | translate }}</h2>
+      
+      <ul class="best-practices-list">
+        <li *ngFor="let practice of bestPractices">
+          <i class="ri-checkbox-circle-line"></i>
+          <span [innerHTML]="practice | translate"></span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Advanced Tips -->
+    <section class="custom-section">
+      <h2>{{ 'pages.theming.customization.advanced.title' | translate }}</h2>
+      
+      <div class="tips-grid">
+        <div *ngFor="let tip of advancedTips" class="tip-card">
+          <div class="tip-icon">
+            <i [class]="tip.icon"></i>
+          </div>
+          <h3>{{ tip.titleKey | translate }}</h3>
+          <p>{{ tip.descriptionKey | translate }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Example Theme -->
+    <section class="custom-section">
+      <h2>{{ 'pages.theming.customization.example.title' | translate }}</h2>
+      <p class="section-description">{{ 'pages.theming.customization.example.description' | translate }}</p>
+
+      <div class="code-block large">
+        <pre><code>{{ 'pages.theming.customization.example.code' | translate }}</code></pre>
+      </div>
+    </section>
+  </div>
+</div>
