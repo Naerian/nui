@@ -5,11 +5,13 @@
   "scripts": {
     "start": "nx serve showcase",
     "build:nui": "nx build nui && npm run build:styles",
-    "build:nui:pro": "nx build nui --configuration=production && npm run build:styles",
+    "build:showcase": "npx nx build showcase",
+    "build:showcase:pro": "npx nx build showcase --configuration=production",
+    "build:nui:pro": "npx nx build nui --configuration=production && npm run build:styles",
+    "build:all": "npm run build:nui:pro && npm run build:showcase:pro",
     "build:styles": "npm run build:styles:nui && npm run build:styles:bundle",
     "build:styles:nui": "sass projects/nui/styles/nui.scss dist/nui/styles/nui.css --style=compressed --no-source-map",
     "build:styles:bundle": "sass projects/nui/styles/nui-bundle.scss dist/nui/styles/nui-bundle.css --style=compressed --no-source-map",
-    "build:play": "nx build showcase",
     "test:nui": "nx test nui"
   },
   "workspaces": [
