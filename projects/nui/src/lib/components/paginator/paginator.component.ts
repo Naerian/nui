@@ -64,7 +64,7 @@ import {
 } from './models/paginator.model';
 import { ButtonGroupComponent } from '../button-group/button-group.component';
 import { BtnGroupOption } from '../button-group/models/button-group.model';
-import { ButtonDirective } from 'nui';
+import { ButtonDirective } from '../button/button.directive';
 
 /**
  * @name

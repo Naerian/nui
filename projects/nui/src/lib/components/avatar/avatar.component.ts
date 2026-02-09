@@ -20,7 +20,7 @@ import {
   NUIColor,
   NUISize,
 } from '../../configs';
-import { ThemeService } from 'nui';
+import { ThemeService } from '../../themes/theme.service';
 
 @Component({
   selector: 'nui-avatar',

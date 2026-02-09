@@ -1,4 +1,4 @@
-import { COOL_GRAYS } from 'nui';
+import { COOL_GRAYS } from '../models/theme.config';
 import { ThemePreset } from '../models/theme.model';
 
 export const dopamine: ThemePreset = {

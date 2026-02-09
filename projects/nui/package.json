@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "style": "styles/nui-bundle.css",
   "exports": {
-    ".": {
-      "default": "./fesm2022/nui.mjs"
-    },
     "./styles/nui.css": "./styles/nui.css",
     "./styles/nui-bundle.css": "./styles/nui-bundle.css",
     "./styles/*": "./styles/*"

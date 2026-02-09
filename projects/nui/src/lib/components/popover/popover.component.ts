@@ -22,7 +22,7 @@ import {
   PopoverPosition,
 } from './models/popover.model';
 import { popoverAnimation } from './animations/popover.animations';
-import { NUIColor, NUIVariant } from 'nui';
+import { NUIColor, NUIVariant } from '../../configs/common/types';
 
 /**
  * @name
