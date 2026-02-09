@@ -9,7 +9,7 @@
             <stop offset="1" stop-color="#E353A0" />
         </linearGradient>
         <bx:export>
-            <bx:file format="svg" path="Sin título.svg" />
+            <bx:file format="svg" path="NUI-logo.svg" />
         </bx:export>
     </defs>
     <path fill="url(#gradient_0)"
