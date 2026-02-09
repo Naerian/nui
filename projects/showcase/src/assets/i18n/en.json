@@ -40,7 +40,10 @@
     "minimal": "Minimal",
     "sunset": "Sunset",
     "twilight": "Twilight",
-    "ocean": "Ocean"
+    "ocean": "Ocean",
+    "emerald": "Emerald",
+    "coffee": "Coffee",
+    "velvet": "Velvet"
   },
   "footer": {
     "license": "Includes icons from Remix Icon (MIT License)",
@@ -131,7 +134,10 @@
         "corporate": "Professional blue palette, perfect for enterprise applications",
         "minimal": "Refined minimalist palette with subtle colors and elegant purple accent",
         "sunset": "Warm and vibrant palette with pink, orange and coral tones, perfect for creative apps",
-        "ocean": "Calm and professional palette with deep blues and aqua tones, ideal for productivity"
+        "ocean": "Calm and professional palette with deep blues and aqua tones, ideal for productivity",
+        "emerald": "Fresh and natural palette with emerald greens and turquoise accents, perfect for health and nature apps",
+        "coffee": "Warm and cozy palette with brown tones and cream accents, ideal for lifestyle and food apps",
+        "velvet": "Rich and luxurious palette with burgundy tones and pink accents, perfect for elegant and sophisticated apps"
       },
       "overview": {
         "title": "Theming System Overview",

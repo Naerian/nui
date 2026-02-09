@@ -40,7 +40,10 @@
     "minimal": "Minimalista",
     "sunset": "Atardecer",
     "twilight": "Crepúsculo",
-    "ocean": "Océano"
+    "ocean": "Océano",
+    "emerald": "Esmeralda",
+    "coffee": "Café",
+    "velvet": "Terciopelo"
   },
   "footer": {
     "license": "Incluye iconos de Remix Icon (Licencia MIT)",
@@ -132,7 +135,10 @@
         "minimal": "Paleta minimalista refinada con colores sutiles y elegante acento púrpura",
         "sunset": "Paleta cálida y vibrante con tonos rosa, naranja y coral, perfecta para apps creativas",
         "twilight": "Paleta suave y relajante con tonos lavanda y azul grisáceo, ideal para bienestar",
-        "ocean": "Paleta calmada y profesional con azules profundos y tonos agua, ideal para productividad"
+        "ocean": "Paleta calmada y profesional con azules profundos y tonos agua, ideal para productividad",
+        "emerald": "Paleta fresca y natural con verdes esmeralda y acentos turquesa, perfecta para apps de salud y naturaleza",
+        "coffee": "Paleta cálida y acogedora con tonos marrones y acentos crema, ideal para apps de estilo de vida y comida",
+        "velvet": "Paleta rica y lujosa con tonos burdeos y acentos rosados, perfecta para apps elegantes y sofisticadas"
       },
       "overview": {
         "title": "Sistema de Temas",

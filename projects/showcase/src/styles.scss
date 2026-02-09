@@ -430,14 +430,18 @@ pre code {
     max-width: 800px;
     margin: 0 auto;
 
-    .hero-icon {
-      font-size: 5rem;
-      color: var(--nui-color-primary);
+    .hero-logo {
       margin-bottom: 1.5rem;
       animation: float 3s ease-in-out infinite;
 
-      i {
-        display: inline-block;
+      svg {
+        width: 80px;
+        height: 80px;
+        color: var(--nui-color-primary);
+
+        path {
+          fill: currentColor;
+        }
       }
     }
 

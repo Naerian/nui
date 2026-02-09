@@ -1,12 +1,15 @@
 import {
   aura,
+  coffee,
   corporate,
   dopamine,
+  emerald,
   minimal,
   neon,
   ocean,
   sunset,
   twilight,
+  velvet,
   warm,
 } from '../presets';
 import { ThemePreset } from './theme.model';
@@ -25,4 +28,7 @@ export const NUI_PRESETS: ThemePreset[] = [
   sunset,
   twilight,
   warm,
+  emerald,
+  coffee,
+  velvet,
 ];
