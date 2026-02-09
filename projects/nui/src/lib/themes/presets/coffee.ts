@@ -1,4 +1,4 @@
-import { ThemePreset } from '../models';
+import { STONE_GRAYS, ThemePreset } from 'nui';
 
 export const coffee: ThemePreset = {
   name: 'coffee',
@@ -11,16 +11,16 @@ export const coffee: ThemePreset = {
       info: '#451a03',
       warning: '#b45309',
       danger: '#991b1b',
-      neutral: '#57534e',
+      neutral: STONE_GRAYS[700],
     },
     dark: {
-      primary: '#b45309',
-      secondary: '#573d1f',
-      accent: '#a55000',
+      primary: '#d97706',
+      secondary: '#78716c',
+      accent: '#d97706',
       success: '#65a30d',
-      info: '#78350f',
-      warning: '#be7404',
-      danger: '#f87171',
+      info: '#b45309',
+      warning: '#ea580c',
+      danger: '#dc2626',
       neutral: '#a8a29e',
     },
   },

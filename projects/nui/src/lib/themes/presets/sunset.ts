@@ -15,14 +15,14 @@ export const sunset: ThemePreset = {
       neutral: STONE_GRAYS[600],
     },
     dark: {
-      primary: '#e51e4e',
-      secondary: '#b7225e',
-      accent: '#cf3c00',
-      success: '#0a7648',
-      info: '#0369a1',
-      warning: '#b45309',
-      danger: '#991b1b',
-      neutral: STONE_GRAYS[500]
+      primary: '#fb7185',
+      secondary: '#f472b6',
+      accent: '#fb923c',
+      success: '#10b981',
+      info: '#0ea5e9',
+      warning: '#f59e0b',
+      danger: '#ef4444',
+      neutral: STONE_GRAYS[400],
     },
   },
 };

@@ -20,15 +20,15 @@ import { ThemePreset } from './theme.model';
  */
 export const NUI_PRESETS: ThemePreset[] = [
   aura,
+  coffee,
   corporate,
   dopamine,
+  emerald,
   minimal,
   neon,
   ocean,
   sunset,
   twilight,
-  warm,
-  emerald,
-  coffee,
   velvet,
+  warm,
 ];

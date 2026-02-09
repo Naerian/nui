@@ -1,17 +1,17 @@
 import { Component, OnInit, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { ThemePreset, ThemeService } from 'nui';
+import { ThemeService } from 'nui';
 import { ShowcaseConfigService } from '../../../core/services/showcase-config.service';
+import { ThemePreset } from '../../../../../../../dist/nui';
 
 interface PresetOption {
   name: string;
-  value: any;
+  value: ThemePreset;
   translationKey: string;
   primaryColor: string;
   colors: string[];
-  preset: ThemePreset;
 }
 
 @Component({
@@ -24,6 +24,7 @@ interface PresetOption {
 export class PresetSelectorComponent implements OnInit {
   private themeService = inject(ThemeService);
   private showcaseConfig = inject(ShowcaseConfigService);
+  private translateService = inject(TranslateService);
 
   isOpen = false;
   currentPreset = this.showcaseConfig.currentConfig.currentPreset;
@@ -42,7 +43,6 @@ export class PresetSelectorComponent implements OnInit {
         dark ? preset.colors.dark.secondary : preset.colors.light.secondary,
         dark ? preset.colors.dark.accent : preset.colors.light.accent,
       ],
-      preset,
     }));
   });
 

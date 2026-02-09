@@ -326,7 +326,7 @@ export class ExampleComponent {
   --nui-tooltip-font-size: var(--nui-font-size-xs);
   --nui-tooltip-line-height: 1.4;
   --nui-tooltip-max-width: 200px;
-  --nui-tooltip-shadow: var(--nui-shadow-md);
+  --nui-tooltip-shadow: var(--nui-box-shadow-md);
   
   /* Z-index */
   --nui-tooltip-z-index: 1060;

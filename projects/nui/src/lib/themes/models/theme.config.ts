@@ -4,7 +4,7 @@ import { ThemeGrays, ThemePreset } from './theme.model';
 /**
  * UMBRAL PARA DEFINIR EL CONTRASTE ENTRE NEGRO Y BLANCO SOBRE UN COLOR
  */
-export const LUMINANCE_UMBRAL = 0.4;
+export const LUMINANCE_UMBRAL = 0.45;
 
 /**
  * Colores puros extremos (negro y blanco)

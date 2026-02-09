@@ -27,7 +27,7 @@ $tooltip-line-height: 1.3 !default;
 
 // Elevación
 // Usamos 'md' (media) en lugar de 'elevated' (lg) porque el tooltip es pequeño
-$tooltip-shadow: var(--nui-shadow-md) !default;
+$tooltip-shadow: var(--nui-box-shadow-md) !default;
 
 // Comportamiento
 $tooltip-z-index: 1000 !default;

@@ -10,7 +10,7 @@ export const corporate: ThemePreset = {
   colors: {
     light: {
       primary: '#1e40af',
-      secondary: '#637fa5',
+      secondary: '#64748b',
       accent: '#0891b2',
       success: '#16a34a',
       info: '#2563eb',
@@ -19,14 +19,14 @@ export const corporate: ThemePreset = {
       neutral: SLATE_GRAYS[600],
     },
     dark: {
-      primary: '#4171ff',
-      secondary: '#6580a5',
-      accent: '#1d89a7',
-      success: '#15803d',
-      info: '#3964dd',
-      warning: '#b45309',
-      danger: '#ad2b2b',
-      neutral: SLATE_GRAYS[500],
+      primary: '#60a5fa',
+      secondary: '#64748b',
+      accent: '#0891b2',
+      success: '#16a34a',
+      info: '#3b82f6',
+      warning: '#d97706',
+      danger: '#dc2626',
+      neutral: SLATE_GRAYS[400],
     },
   },
 };

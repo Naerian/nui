@@ -10,7 +10,7 @@ export const warm: ThemePreset = {
   colors: {
     light: {
       primary: '#ea580c',
-      secondary: NEUTRAL_GRAYS[500],
+      secondary: '#78350f',
       accent: '#dc2626',
       success: '#65a30d',
       info: '#0891b2',
@@ -19,14 +19,14 @@ export const warm: ThemePreset = {
       neutral: STONE_GRAYS[600],
     },
     dark: {
-      primary: '#c2410c',
-      secondary: NEUTRAL_GRAYS[300],
-      accent: '#991b1b',
-      success: '#4e761a',
-      info: '#187593',
-      warning: '#af5620',
-      danger: '#a52a2a',
-      neutral: STONE_GRAYS[700]
+      primary: '#ea580c',
+      secondary: '#d97706',
+      accent: '#dc2626',
+      success: '#65a30d',
+      info: '#0891b2',
+      warning: '#f59e0b',
+      danger: '#ef4444',
+      neutral: STONE_GRAYS[500],
     },
   },
 };

@@ -322,7 +322,7 @@
         "usage": {
           "title": "How to Use CSS Variables",
           "description": "You can use any NUI CSS variable in your components' stylesheets:",
-          "example": ".my-component {\n  background: var(--nui-bg-primary);\n  color: var(--nui-text-primary);\n  border: 1px solid var(--nui-border-color);\n  box-shadow: var(--nui-shadow-md);\n}\n\n.my-button {\n  background: var(--nui-color-primary);\n  \n  &:hover {\n    background: var(--nui-color-primary-shade-50);\n  }\n}"
+          "example": ".my-component {\n  background: var(--nui-bg-primary);\n  color: var(--nui-text-primary);\n  border: 1px solid var(--nui-border-color);\n  box-shadow: var(--nui-box-shadow-md);\n}\n\n.my-button {\n  background: var(--nui-color-primary);\n  \n  &:hover {\n    background: var(--nui-color-primary-shade-50);\n  }\n}"
         }
       },
       "customization": {
@@ -395,7 +395,7 @@
       },
       "variants-colors": {
         "title": "Variants and colors",
-        "description": "Supports different variants (Solid, Outline, Ghost) and NUI system colors.",
+        "description": "Supports different variants and NUI system colors.",
         "note": "Combine <code>color</code> and <code>variant</code> to customize the button's appearance according to your needs."
       },
       "sizes": {
