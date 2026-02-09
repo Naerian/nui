@@ -90,6 +90,11 @@ a {
   }
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--nui-border-primary) transparent;
+}
+
 // ==========================================
 // UTILITY CLASSES
 // ==========================================

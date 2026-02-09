@@ -4,21 +4,19 @@
       <li *ngFor="let item of menuItems" class="nav-item">
         <!-- Item with children -->
         <div *ngIf="item.children" class="nav-item-expandable">
-          <button 
+          <button
             class="nav-link"
             (click)="toggleSection(item.route)"
-            [class.expanded]="isSectionExpanded(item.route)">
+            [class.expanded]="isSectionExpanded(item.route)"
+          >
             <i [class]="item.icon"></i>
             <span class="nav-label">{{ item.translationKey | translate }}</span>
             <i class="nav-arrow ri-arrow-down-s-line"></i>
           </button>
-          
+
           <ul class="nav-sublist" *ngIf="isSectionExpanded(item.route)">
             <li *ngFor="let child of item.children" class="nav-subitem">
-              <a 
-                [routerLink]="child.route"
-                routerLinkActive="active"
-                class="nav-sublink">
+              <a [routerLink]="child.route" routerLinkActive="active" class="nav-sublink">
                 <i [class]="child.icon"></i>
                 <span class="nav-label">{{ child.translationKey | translate }}</span>
               </a>
@@ -27,11 +25,12 @@
         </div>
 
         <!-- Item without children -->
-        <a 
+        <a
           *ngIf="!item.children"
           [routerLink]="item.route"
           routerLinkActive="active"
-          class="nav-link">
+          class="nav-link"
+        >
           <i [class]="item.icon"></i>
           <span class="nav-label">{{ item.translationKey | translate }}</span>
         </a>
@@ -44,6 +43,10 @@
     <p class="footer-text">
       <i class="ri-information-line"></i>
       <span>{{ 'footer.license' | translate }}</span>
+    </p>
+    <p class="footer-text">
+      <i class="ri-copyright-line"></i>
+      <span>{{ 'footer.copyright' | translate }}</span>
     </p>
   </div>
 </aside>

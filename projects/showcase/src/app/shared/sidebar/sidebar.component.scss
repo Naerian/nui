@@ -4,7 +4,9 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  transition: width 0.3s ease, transform 0.3s ease;
+  transition:
+    width 0.3s ease,
+    transform 0.3s ease;
   width: 280px;
   position: sticky;
   top: 0;
@@ -141,9 +143,12 @@
     padding: 1rem 1.5rem;
     border-top: 1px solid var(--nui-border-primary);
     background-color: var(--nui-bg-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 
     .footer-text {
-      font-size: 0.75rem;
+      font-size: 0.625rem;
       color: var(--nui-text-tertiary);
       margin: 0;
       display: flex;
