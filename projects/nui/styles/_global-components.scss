@@ -3,6 +3,7 @@
 @use 'components/popover';
 @use 'components/tooltip';
 @use 'components/toast';
+@use 'components/sidebar-panel';
 
 // Global styles for global components
 @include button.nui-button-styles;
@@ -10,3 +11,4 @@
 @include popover.nui-popover-styles;
 @include tooltip.nui-tooltip-styles;
 @include toast.nui-toast-styles;
+@include sidebar-panel.nui-sidebar-panel-styles;

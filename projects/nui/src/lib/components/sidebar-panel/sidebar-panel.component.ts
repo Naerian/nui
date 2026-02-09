@@ -75,7 +75,6 @@ import { SidebarPanelTabsService } from './services/sidebar-panel-tabs.service';
   standalone: true,
   imports: [NgTemplateOutlet, ButtonComponent, CommonModule],
   templateUrl: './sidebar-panel.component.html',
-  styleUrls: ['./sidebar-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   animations: [sidebarPanelAnimation, fadeBackdropAnimation],

@@ -1,342 +1,190 @@
-@use '../config';
-@use '../abstracts/mixins';
+@use '../abstracts/mixins' as mixins;
 
-// ==========================================
-// SIDEBAR PANEL - Global Styles
-// ==========================================
-// Styles for the sidebar-panel component.
-// Styles are global because the panel is rendered with ViewEncapsulation.None
-// ==========================================
+@mixin nui-sidebar-panel-styles {
+  // ============================================================================
+  // BASIC STRUCTURE & LAYOUT
+  // ============================================================================
 
-// ============================================================================
-// SIDEBAR PANEL HOST STYLES
-// ============================================================================
-// Note: These styles are applied directly to :host in the component
-// but defined here for consistency with other global components
-// ============================================================================
-
-// ============================================================================
-// PANEL INTERNAL STRUCTURE
-// ============================================================================
-
-.nui-sidebar-panel-pane {
-  pointer-events: auto;
-}
-
-.nui-sidebar-panel-wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-}
-
-.nui-sidebar-panel-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--nui-sidebar-panel-header-padding);
-  border-bottom: 1px solid var(--nui-sidebar-panel-border);
-  background: var(--nui-sidebar-panel-bg);
-  flex-shrink: 0;
-
-  .nui-sidebar-panel-title {
-    margin: 0;
-    font-size: var(--nui-sidebar-panel-title-size);
-    font-weight: var(--nui-sidebar-panel-title-weight);
-    color: var(--nui-sidebar-panel-text);
+  .nui-sidebar-panel-pane {
+    pointer-events: auto;
+    height: 100%; // Required to fill the CDK container
+    display: flex; // Ensures the child wrapper fills the space
+    max-width: 100vw; // Prevents horizontal overflow on mobile
   }
 
-  .nui-sidebar-panel-header-actions {
+  .nui-sidebar-panel-wrapper {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background: var(--nui-sidebar-panel-bg);
+  }
+
+  // HEADER (Fixed at top)
+  .nui-sidebar-panel-header {
+    display: flex;
     align-items: center;
-    gap: var(--nui-spacing-xs);
-  }
-}
+    justify-content: space-between;
+    padding: var(--nui-sidebar-panel-header-padding);
+    padding-top: calc(
+      var(--nui-sidebar-panel-header-padding) + env(safe-area-inset-top)
+    ); // Notch support on mobile (iOS)
+    border-bottom: 1px solid var(--nui-sidebar-panel-border);
+    background: var(--nui-sidebar-panel-bg);
+    flex-shrink: 0; // Crucial: Never shrink
 
-.nui-sidebar-panel-content {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: var(--nui-sidebar-panel-content-padding);
-  background: var(--nui-sidebar-panel-bg);
+    .nui-sidebar-panel-title {
+      margin: 0;
+      font-size: var(--nui-sidebar-panel-title-size);
+      font-weight: var(--nui-sidebar-panel-title-weight);
+      color: var(--nui-sidebar-panel-text);
+    }
 
-  // Custom scrollbar
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--scroll-bg);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--scroll-thumb-bg);
-    border-radius: 4px;
-
-    &:hover {
-      background: var(--color-gray-500);
+    .nui-sidebar-panel-header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem; // var(--nui-spacing-xs)
     }
   }
-}
 
-.nui-sidebar-panel-footer {
-  padding: var(--nui-sidebar-panel-header-padding);
-  border-top: 1px solid var(--nui-sidebar-panel-border);
-  background: var(--nui-sidebar-panel-bg);
-  flex-shrink: 0;
+  // CONTENT (Scrolls if overflow)
+  .nui-sidebar-panel-content {
+    flex: 1; // CRUCIAL: Occupies all remaining space
+    overflow-y: auto; // Vertical scroll
+    overflow-x: hidden;
+    padding: var(--nui-sidebar-panel-content-padding);
+    background: var(--nui-sidebar-panel-bg);
 
-  &-actions {
-    display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    gap: var(--nui-spacing-sm);
-  }
-}
+    // Custom scrollbar (Tu código original)
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
 
-// ============================================================================
-// CDK OVERLAY GLOBAL STYLES
-// ============================================================================
-// Overlay/Backdrop for sidebar-panel
-// Note: We include both selectors for compatibility (overlay is legacy, backdrop is current)
-.nui-sidebar-panel-overlay,
-.nui-sidebar-panel-backdrop {
-  @include mixins.overlay-backdrop();
-  z-index: var(--nui-sidebar-panel-overlay-z-index) !important;
-  background-color: var(--nui-sidebar-panel-overlay-bg) !important;
-}
+    &::-webkit-scrollbar-track {
+      background: var(--nui-sidebar-panel-scroll-bg);
+    }
 
-// CDK wrapper when adjacent to sidebar-panel backdrop (adjacent sibling selector)
-// Only affects the wrapper that immediately follows the sidebar-panel backdrop
-.nui-sidebar-panel-backdrop + .cdk-global-overlay-wrapper {
-  z-index: var(--nui-sidebar-panel-z-index) !important;
-}
-
-// Specific container for sidebar-panel
-.cdk-overlay-pane.sidebar-panel-pane {
-  z-index: var(--nui-sidebar-panel-z-index) !important;
-}
-
-// Panel host component
-.sidebar-panel-container {
-  position: fixed;
-  overflow: hidden;
-  z-index: var(--nui-sidebar-panel-z-index) !important;
-  height: 100vh;
-  background-color: var(--nui-sidebar-panel-bg);
-  box-shadow: var(--nui-sidebar-panel-shadow);
-  color: var(--nui-sidebar-panel-text);
-  display: flex;
-  flex-direction: column;
-
-  // Positions
-  &.sidebar-panel-position-right {
-    top: 0;
-    right: 0;
-  }
-
-  &.sidebar-panel-position-left {
-    top: 0;
-    left: 0;
-  }
-
-  &.sidebar-panel-position-top {
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
-
-  &.sidebar-panel-position-bottom {
-    bottom: 0;
-    left: 0;
-    width: 100%;
-  }
-}
-
-// Main panel (keep for compatibility)
-.nui-sidebar-panel {
-  position: fixed;
-  overflow: hidden;
-  z-index: var(--nui-sidebar-panel-z-index) !important;
-  height: 100vh;
-  background-color: var(--nui-sidebar-panel-bg);
-  box-shadow: var(--nui-sidebar-panel-shadow);
-  color: var(--nui-sidebar-panel-text);
-
-  // ===== POSITIONS =====
-
-  // Slide from right to left
-  &--right {
-    top: 0;
-    right: 0;
-    left: auto;
-    bottom: auto;
-  }
-
-  // Slide from left to right
-  &--left {
-    top: 0;
-    left: 0;
-    right: auto;
-    bottom: auto;
-  }
-
-  // Slide from top to bottom
-  &--top {
-    top: 0;
-    left: 0;
-    right: auto;
-    bottom: auto;
-    width: 100%;
-  }
-
-  // Slide from bottom to top
-  &--bottom {
-    bottom: 0;
-    left: 0;
-    right: auto;
-    top: auto;
-    width: 100%;
-  }
-
-  // ===== SIZES =====
-  // Sizes match SidebarPanelSize: xs | sm | md | lg | xl | full
-
-  &--size-xs {
-    width: var(--nui-sidebar-panel-size-xs-width);
-  }
-
-  &--size-sm {
-    width: var(--nui-sidebar-panel-size-sm-width);
-  }
-
-  &--size-md {
-    width: var(--nui-sidebar-panel-size-md-width);
-  }
-
-  &--size-lg {
-    width: var(--nui-sidebar-panel-size-lg-width);
-  }
-
-  &--size-xl {
-    width: var(--nui-sidebar-panel-size-xl-width);
-  }
-
-  &--size-full {
-    width: var(--nui-sidebar-panel-size-full-width);
-  }
-
-  // ===== HEADER =====
-
-  &__header {
-    position: absolute;
-    width: 100%;
-    padding: var(--nui-sidebar-panel-header-padding);
-    padding-bottom: 0;
-
-    &__close {
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      font-size: var(--nui-sidebar-panel-close-size);
-      color: var(--nui-sidebar-panel-text);
-      transition: opacity 0.2s ease;
+    &::-webkit-scrollbar-thumb {
+      background: var(--nui-sidebar-panel-scroll-thumb-bg);
+      border-radius: 4px;
 
       &:hover {
-        opacity: 0.7;
-      }
-
-      &:focus-visible {
-        outline: 2px solid var(--nui-color-primary);
-        outline-offset: 2px;
-        border-radius: var(--nui-border-radius-xs);
+        background: var(--nui-sidebar-panel-scroll-thumb-hover-bg);
       }
     }
 
-    &__wrapper {
-      padding: 0 0.3125rem; // 5px
-      padding-bottom: 0;
-      height: var(--nui-sidebar-panel-header-height);
+    scrollbar-width: thin;
+    scrollbar-color: var(--nui-sidebar-panel-scroll-thumb-bg) transparent;
+  }
+
+  // FOOTER (Fixed at bottom)
+  .nui-sidebar-panel-footer {
+    padding: var(--nui-sidebar-panel-header-padding); // Using same padding as header
+    padding: var(--nui-sidebar-panel-header-padding);
+    padding-bottom: calc(
+      var(--nui-sidebar-panel-header-padding) + env(safe-area-inset-bottom)
+    ); // Notch support on mobile (iOS)
+    background: var(--nui-sidebar-panel-bg);
+    flex-shrink: 0; // Crucial: Never shrink
+
+    &-actions {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-direction: row;
-
-      h1 {
-        margin: 0;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: var(--nui-sidebar-panel-title-size);
-        font-weight: var(--nui-sidebar-panel-title-weight);
-        display: flex;
-        flex-direction: row;
-        align-items: stretch;
-        justify-content: center;
-        gap: 0.3125rem; // 5px
-      }
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: var(--nui-spacing-sm);
     }
   }
 
-  // ===== CONTENT =====
+  // ============================================================================
+  // CDK OVERLAY & POSITIONING
+  // ============================================================================
 
-  &__wrapper {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-direction: column;
-    padding: var(--nui-sidebar-panel-content-padding);
-    height: calc(100% - var(--nui-sidebar-panel-header-height));
-    overflow-y: auto;
-    margin-top: var(--nui-sidebar-panel-header-height);
+  .nui-sidebar-panel-overlay,
+  .nui-sidebar-panel-backdrop {
+    @include mixins.overlay-backdrop();
   }
 
-  // ===== HOST =====
-
-  &__host {
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    border-radius: var(--nui-sidebar-panel-host-border-radius);
-    background-color: var(--nui-sidebar-panel-host-bg);
-    box-shadow: var(--nui-sidebar-panel-host-shadow);
-    border: var(--nui-sidebar-panel-host-border);
-    position: relative;
-    width: 100%;
-    height: 100%;
+  .nui-sidebar-panel-backdrop + .cdk-global-overlay-wrapper {
+    z-index: var(--nui-sidebar-panel-z-index) !important;
   }
 
-  // ===== BOX (Internal container of the host) =====
+  .cdk-overlay-pane.sidebar-panel-pane {
+    z-index: var(--nui-sidebar-panel-z-index) !important;
+  }
 
-  &__box {
+  // Panel Host Container (The container that moves the CDK)
+  .sidebar-panel-container {
+    position: fixed; // The CDK manages it, but this ensures
+    overflow: hidden;
+    z-index: var(--nui-sidebar-panel-z-index) !important;
+    height: 100vh; // Always full height
+    background-color: var(--nui-sidebar-panel-bg);
+    box-shadow: var(--nui-sidebar-panel-shadow);
+    color: var(--nui-sidebar-panel-text);
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
-    gap: var(--nui-sidebar-panel-box-gap);
-    padding: var(--nui-sidebar-panel-box-padding);
-  }
+    outline: none; // Visual accessibility
 
-  // ===== CONTENT =====
+    // ===== POSITIONS =====
+    // These classes should be added to the panelClass in your service
 
-  &__content {
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding-right: 0.3125rem; // 5px
-    padding-left: 0.3125rem; // 5px
-  }
+    &.sidebar-panel-position-right {
+      top: 0;
+      right: 0;
+      left: auto;
+      bottom: 0;
+      border-left: 1px solid var(--nui-sidebar-panel-border);
+    }
 
-  // ===== ACTION BUTTONS =====
+    &.sidebar-panel-position-left {
+      top: 0;
+      left: 0;
+      right: auto;
+      bottom: 0;
+      border-right: 1px solid var(--nui-sidebar-panel-border);
+    }
 
-  &__action-buttons {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: var(--nui-sidebar-panel-action-buttons-height);
-    gap: var(--nui-sidebar-panel-action-buttons-gap);
+    &.sidebar-panel-position-top {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: auto;
+      width: 100%;
+      height: auto;
+      max-height: 50vh; // Top height limit
+      border-bottom: 1px solid var(--nui-sidebar-panel-border);
+    }
+
+    &.sidebar-panel-position-bottom {
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: auto;
+      width: 100%;
+      height: auto;
+      max-height: 85vh; // Bottom sheet height limit
+      border-top: 1px solid var(--nui-sidebar-panel-border);
+    }
+
+    // ===== SIZES =====
+    $sizes: xs, sm, md, lg, xl, full;
+    @each $size in $sizes {
+      &--size-#{$size} {
+        width: var(--nui-sidebar-panel-size-#{$size}-width);
+      }
+    }
+
+    &--size-full {
+      border: none;
+    }
+
+    // Mobile: Always full
+    @media (max-width: 768px) {
+      width: 100vw !important;
+      border: none !important;
+      border-radius: 0 !important;
+    }
   }
 }

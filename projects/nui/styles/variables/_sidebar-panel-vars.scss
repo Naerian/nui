@@ -1,0 +1,47 @@
+// ========================================
+// SIDEBAR PANEL - Tokens & Variables
+// ========================================
+
+// TOKENS (Sass)
+$panel-width-xs: 320px !default;
+$panel-width-sm: 400px !default;
+$panel-width-md: 600px !default;
+$panel-width-lg: 800px !default;
+$panel-width-xl: 1000px !default;
+
+$panel-header-padding: 1.125rem !default;
+$panel-content-padding: 1.125rem !default;
+
+$panel-title-size: 1.125rem !default;
+$panel-title-weight: 600 !default;
+
+$panel-z-index: 1040 !default;
+$panel-overlay-z-index: 1039 !default;
+
+$panel-shadow: var(--nui-box-shadow--xl) !default;
+
+// MIXIN (CSS Custom Properties)
+@mixin nui-sidebar-panel-vars {
+  // Sizes
+  --nui-sidebar-panel-size-xs-width: #{$panel-width-xs};
+  --nui-sidebar-panel-size-sm-width: #{$panel-width-sm};
+  --nui-sidebar-panel-size-md-width: #{$panel-width-md};
+  --nui-sidebar-panel-size-lg-width: #{$panel-width-lg};
+  --nui-sidebar-panel-size-xl-width: #{$panel-width-xl};
+  --nui-sidebar-panel-size-full-width: 100vw;
+
+  // Paddings
+  --nui-sidebar-panel-header-padding: #{$panel-header-padding};
+  --nui-sidebar-panel-content-padding: #{$panel-content-padding};
+
+  // Titles
+  --nui-sidebar-panel-title-size: #{$panel-title-size};
+  --nui-sidebar-panel-title-weight: #{$panel-title-weight};
+
+  // Layers
+  --nui-sidebar-panel-z-index: #{$panel-z-index};
+  --nui-sidebar-panel-overlay-z-index: #{$panel-overlay-z-index};
+
+  // Base Appearance
+  --nui-sidebar-panel-shadow: #{$panel-shadow};
+}

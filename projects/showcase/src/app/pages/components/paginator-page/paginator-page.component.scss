@@ -81,7 +81,6 @@
   border-radius: var(--nui-border-radius-md);
   margin-bottom: 1rem;
   border: var(--nui-border-width-xs) solid var(--nui-border-primary);
-  box-shadow: var(--nui-shadow-sm);
 
   // Modificador para apilar elementos (Paginador arriba, info abajo)
   &.flex-column {
@@ -177,7 +176,6 @@
     border-color: var(--nui-color-primary);
     color: var(--nui-color-primary);
     background: var(--nui-bg-primary);
-    box-shadow: var(--nui-shadow-sm);
   }
 }
 

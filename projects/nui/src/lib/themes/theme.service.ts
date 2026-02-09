@@ -279,6 +279,7 @@ export class ThemeService {
 
     // Generar variables de Tooltip (no depende de colores semánticos)
     css += this.generateTooltipVariables();
+    css += this.generateSidebarPanelVariables();
 
     css += '}\n';
     return css;
@@ -690,6 +691,27 @@ export class ThemeService {
       --tooltip-bg: ${bg};
       --tooltip-text: ${text};
       --tooltip-border-color: ${border};
+    `;
+  }
+
+  private generateSidebarPanelVariables(): string {
+    const isDark = this._isDarkMode();
+
+    const bg = isDark ? 'var(--nui-bg-secondary)' : 'var(--nui-bg-primary)';
+    const text = 'var(--nui-text-primary)';
+    const border = isDark ? 'var(--nui-border-primary)' : 'var(--nui-border-secondary)';
+
+    const overlayBg = 'var(--nui-overlay-bg)';
+
+    return `
+      --nui-sidebar-panel-bg: ${bg};
+      --nui-sidebar-panel-text: ${text};
+      --nui-sidebar-panel-border: ${border};
+      --nui-sidebar-panel-overlay-bg: ${overlayBg};
+      
+      --nui-sidebar-panel-scroll-bg: var(--nui-bg-secondary);
+      --nui-sidebar-panel-scroll-thumb-bg: var(--nui-border-primary);
+      --nui-sidebar-panel-scroll-thumb-hover-bg: var(--nui-border-primary);
     `;
   }
 

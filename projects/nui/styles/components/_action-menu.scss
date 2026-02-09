@@ -16,6 +16,8 @@
   --nui-am-item-hover-icon-color: #{$check};
   --nui-am-item-hover-border-color: #{$border};
   --nui-am-item-check-color: #{$check};
+  --nui-am-item-bg: inherit;
+  --nui-am-item-color: inherit;
 
   // Reutilizamos el mismo esquema para Selected
   --nui-am-item-selected-bg: #{$bg};

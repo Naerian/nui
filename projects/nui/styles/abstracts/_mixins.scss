@@ -197,4 +197,6 @@
   backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
   contain: strict;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
