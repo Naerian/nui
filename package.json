@@ -5,6 +5,7 @@
   "scripts": {
     "start": "nx serve showcase",
     "build:nui": "nx build nui && npm run build:styles",
+    "build:nui:pro": "nx build nui --configuration=production && npm run build:styles",
     "build:styles": "npm run build:styles:nui && npm run build:styles:bundle",
     "build:styles:nui": "sass projects/nui/styles/nui.scss dist/nui/styles/nui.css --style=compressed --no-source-map",
     "build:styles:bundle": "sass projects/nui/styles/nui-bundle.scss dist/nui/styles/nui-bundle.css --style=compressed --no-source-map",

@@ -1,4 +1,4 @@
-import { STONE_GRAYS, ThemePreset } from 'nui';
+import { STONE_GRAYS, ThemePreset } from '../models';
 
 export const coffee: ThemePreset = {
   name: 'coffee',

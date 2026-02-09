@@ -2,9 +2,8 @@ import { Component, OnInit, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { ThemeService } from 'nui';
+import { ThemePreset, ThemeService } from 'nui';
 import { ShowcaseConfigService } from '../../../core/services/showcase-config.service';
-import { ThemePreset } from '../../../../../../../dist/nui';
 
 interface PresetOption {
   name: string;
