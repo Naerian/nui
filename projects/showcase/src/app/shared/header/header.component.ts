@@ -6,6 +6,7 @@ import { PresetSelectorComponent } from './preset-selector/preset-selector.compo
 import { LanguageSelectorComponent } from './language-selector/language-selector.component';
 import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
 import { VersionSelectorComponent } from './version-selector/version-selector.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,8 @@ import { VersionSelectorComponent } from './version-selector/version-selector.co
     PresetSelectorComponent,
     LanguageSelectorComponent,
     ThemeToggleComponent,
-    VersionSelectorComponent
+    VersionSelectorComponent,
+    RouterLink
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']

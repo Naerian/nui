@@ -1,6 +1,7 @@
 {
   "header": {
     "title": "NUI",
+    "arialLabel": "NUI - Modern Angular Component Library",
     "preset": "Preset",
     "theme": "Theme",
     "language": "Language",
