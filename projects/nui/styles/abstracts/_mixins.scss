@@ -19,7 +19,14 @@
   margin-bottom: var(--nui-spacing-md);
   font-size: var(--nui-font-size-#{$level});
   line-height: var(--nui-line-height-#{$level});
-  font-weight: var(--nui-font-weight-#{if(list.index((h1, h2, h3), $level), 'bold', 'semibold')});
+
+  $weight: 'semibold';
+
+  @if list.index((h1, h2, h3), $level) {
+    $weight: 'bold';
+  }
+
+  font-weight: var(--nui-font-weight-#{$weight});
   color: var(--nui-text-primary);
 }
 

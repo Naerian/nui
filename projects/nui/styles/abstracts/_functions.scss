@@ -102,11 +102,15 @@
 /// @example
 ///   shadow(0 2px 4px, 0.1)
 @function shadow($shadow-base, $opacity, $color: null) {
-  $final-color: if(
-    $color,
-    $color,
-    rgba(var(--nui-shadow-base-rgb), calc(#{$opacity} * var(--nui-shadow-opacity-scale)))
+  $final-color: rgba(
+    var(--nui-shadow-base-rgb),
+    calc(#{$opacity} * var(--nui-shadow-opacity-scale))
   );
+
+  @if $color != null {
+    $final-color: $color;
+  }
+
   @return #{$shadow-base} #{$final-color};
 }
 
@@ -120,12 +124,19 @@
 ///   shadow-layers($layers)
 @function shadow-layers($layers) {
   $result: ();
+
   @each $layer in $layers {
     $base: list.nth($layer, 1);
     $opacity: list.nth($layer, 2);
-    $color: if(list.length($layer) > 2, list.nth($layer, 3), black);
+    $color: black;
+
+    @if list.length($layer) > 2 {
+      $color: list.nth($layer, 3);
+    }
+
     $result: list.append($result, shadow($base, $opacity, $color), comma);
   }
+
   @return $result;
 }
 
