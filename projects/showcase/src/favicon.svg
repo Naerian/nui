@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024"
     xmlns:bx="https://boxy-svg.com">
+    <style>
+        
+    </style>
     <defs>
         <linearGradient id="gradient_0" gradientUnits="userSpaceOnUse" x1="504.30115" y1="766.31183"
             x2="514.95416" y2="443.72403"

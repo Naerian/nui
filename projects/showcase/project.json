@@ -20,7 +20,7 @@
         "tsConfig": "projects/showcase/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "projects/showcase/src/favicon.ico",
+          "projects/showcase/src/favicon.svg",
           "projects/showcase/src/assets",
           {
             "glob": "**/*",
@@ -79,7 +79,7 @@
         "polyfills": ["zone.js", "zone.js/testing"],
         "tsConfig": "projects/showcase/tsconfig.spec.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["projects/showcase/src/favicon.ico", "projects/showcase/src/assets"],
+        "assets": ["projects/showcase/src/favicon.svg", "projects/showcase/src/assets"],
         "styles": ["projects/showcase/src/styles.scss"],
         "scripts": []
       }
