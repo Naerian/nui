@@ -80,11 +80,11 @@ $font-sizes: (
 /// Border radius scale with md as the standard value
 $border-radius-none: 0 !default;
 
-$border-radius-xs: 0.125rem !default;
+$border-radius-xs: 0.25rem !default;
 $border-radius-sm: 0.375rem !default;
-$border-radius-md: 0.5rem !default;
-$border-radius-lg: 0.75rem !default;
-$border-radius-xl: 1rem !default;
+$border-radius-md: 0.375rem !default;
+$border-radius-lg: 0.5rem !default;
+$border-radius-xl: 0.625rem !default;
 
 /// Fully rounded shapes
 $border-radius-circle: 50% !default;
