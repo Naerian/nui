@@ -17,10 +17,10 @@ export const aura: ThemePreset = {
     dark: {
       primary: '#14b8a6',
       secondary: '#8b5cf6',
-      accent: '#c026d3',
-      success: '#22c55e',
+      accent: '#d946ef',
+      success: '#16a34a',
       info: '#0891b2',
-      warning: '#f59e0b',
+      warning: '#ec8815',
       danger: '#ef4444',
       neutral: SLATE_GRAYS[400],
     },

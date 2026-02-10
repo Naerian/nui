@@ -62,7 +62,7 @@ export class ThemeArchitectureComponent {
     },
     {
       category: 'pages.theming.architecture.structural.shadows',
-      vars: ['--nui-box-shadow--xs', '--nui-box-shadow--sm', '--nui-box-shadow--md', '--nui-box-shadow--lg', '--nui-box-shadow--xl'],
+      vars: ['--nui-box-shadow-xs', '--nui-box-shadow-sm', '--nui-box-shadow-md', '--nui-box-shadow-lg', '--nui-box-shadow-xl'],
     },
   ];
 

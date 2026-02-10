@@ -10,8 +10,8 @@ $button-transition:
   border-color 0.2s ease,
   color 0.2s ease,
   box-shadow 0.2s ease !default;
-$button-focus-width: 2px !default;
-$button-focus-offset: 2px !default;
+$button-focus-width: 0.125rem !default;
+$button-focus-offset: 0.125rem !default;
 
 // MIXINS
 @mixin nui-button-vars {
@@ -32,7 +32,7 @@ $button-focus-offset: 2px !default;
   --nui-button-radius-xl: var(--nui-border-radius-xl);
 
   // Border width
-  --nui-button-border-width: var(--nui-border-width-xs);
+  --nui-button-border-width: var(--nui-border-width-sm);
 
   // Font weight
   --nui-button-font-weight: var(--nui-font-weight-semibold);

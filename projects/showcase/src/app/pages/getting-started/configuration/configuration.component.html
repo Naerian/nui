@@ -8,29 +8,38 @@
     <div class="docs-content">
       <section class="docs-section">
         <h2>{{ 'pages.configuration.presetConfig' | translate }}</h2>
-        <p class="section-description">{{ 'pages.configuration.presetConfigDescription' | translate }}</p>
-        <app-code-block 
+        <p
+          class="section-description"
+          [innerHTML]="'pages.configuration.presetConfigDescription' | translate"
+        ></p>
+        <app-code-block
           [title]="'pages.configuration.presetConfigTitle' | translate"
-          [examples]="presetConfigExamples">
-        </app-code-block>
+          [examples]="presetConfigExamples"
+        ></app-code-block>
       </section>
 
       <section class="docs-section">
         <h2>{{ 'pages.configuration.darkModeConfig' | translate }}</h2>
-        <p class="section-description">{{ 'pages.configuration.darkModeConfigDescription' | translate }}</p>
-        <app-code-block 
+        <p
+          class="section-description"
+          [innerHTML]="'pages.configuration.darkModeConfigDescription' | translate"
+        ></p>
+        <app-code-block
           [title]="'pages.configuration.darkModeConfigTitle' | translate"
-          [examples]="darkModeConfigExamples">
-        </app-code-block>
+          [examples]="darkModeConfigExamples"
+        ></app-code-block>
       </section>
 
       <section class="docs-section">
         <h2>{{ 'pages.configuration.customPresetConfig' | translate }}</h2>
-        <p class="section-description">{{ 'pages.configuration.customPresetConfigDescription' | translate }}</p>
-        <app-code-block 
+        <p
+          class="section-description"
+          [innerHTML]="'pages.configuration.customPresetConfigDescription' | translate"
+        ></p>
+        <app-code-block
           [title]="'pages.configuration.customPresetConfigTitle' | translate"
-          [examples]="customPresetExamples">
-        </app-code-block>
+          [examples]="customPresetExamples"
+        ></app-code-block>
       </section>
     </div>
   </div>

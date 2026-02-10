@@ -81,7 +81,19 @@
     "home": {
       "title": "Welcome to NUI",
       "subtitle": "A modern and customizable Angular component library",
-      "description": "Build beautiful applications with our complete set of UI components"
+      "description": "Build beautiful applications with our complete set of UI components",
+      "multitheme": {
+        "title": "Multiple themes included",
+        "description": "Choose from 8+ predefined themes or create your own custom theme with our powerful theming system."
+      },
+      "darkMode": {
+        "title": "Built-in dark mode",
+        "description": "Easily toggle between light and dark modes with automatic color adjustments for a consistent look in any theme."
+      },
+      "components": {
+        "title": "Rich component library",
+        "description": "A wide range of components for all your UI needs, from buttons and forms to complex interactive elements."
+      }
     },
     "installation": {
       "title": "Installation",
@@ -102,13 +114,13 @@
       "title": "Configuration",
       "subtitle": "Configure NUI according to your needs",
       "presetConfig": "Preset configuration",
-      "presetConfigDescription": "Presets define your application's color palette. NUI includes 8 predefined presets: aura, warm, neon, dopamine, corporate, minimal, sunset and ocean.",
+      "presetConfigDescription": "Presets define your application's color palette. NUI includes 12 predefined presets: <code>aura</code>, <code>warm</code>, <code>neon</code>, <code>dopamine</code>, <code>corporate</code>, <code>minimal</code>, <code>sunset</code>, <code>twilight</code>, <code>ocean</code>, <code>velvet</code>, <code>coffee</code>, <code>emerald</code>.",
       "presetConfigTitle": "Preset configuration",
       "darkModeConfig": "Dark Mode Configuration",
-      "darkModeConfigDescription": "Control how dark mode is applied in your application. Available options are: 'manual' (controlled by code), 'auto' (based on time of day), or 'system' (according to operating system preferences).",
+      "darkModeConfigDescription": "Control how dark mode is applied in your application. Available options are: <code>manual</code> (controlled by code), <code>auto</code> (based on time of day), or <code>system</code> (according to operating system preferences).",
       "darkModeConfigTitle": "Dark Mode Configuration",
       "customPresetConfig": "Custom preset",
-      "customPresetConfigDescription": "Create your own preset by defining custom colors for light and dark modes. Each preset must include: primary, secondary, accent, success, info, warning, danger and neutral.",
+      "customPresetConfigDescription": "Create your own preset by defining custom colors for <code>light</code> and <code>dark</code> modes. Each preset must include: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code> and <code>neutral</code>.",
       "customPresetConfigTitle": "Create custom preset"
     },
     "theming": {

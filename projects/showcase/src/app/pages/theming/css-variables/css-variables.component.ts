@@ -83,8 +83,8 @@ export class CssVariablesComponent {
       category: 'shadows',
       titleKey: 'pages.theming.cssVars.groups.shadows',
       variables: [
-        '--nui-box-shadow--xs', '--nui-box-shadow--sm', '--nui-box-shadow--md',
-        '--nui-box-shadow--lg', '--nui-box-shadow--xl', '--nui-shadow-container',
+        '--nui-box-shadow-xs', '--nui-box-shadow-sm', '--nui-box-shadow-md',
+        '--nui-box-shadow-lg', '--nui-box-shadow-xl', '--nui-shadow-container',
         '--nui-shadow-elevated', '--nui-shadow-interactive',
       ],
     },
