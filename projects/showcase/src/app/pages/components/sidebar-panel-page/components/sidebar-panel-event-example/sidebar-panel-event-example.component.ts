@@ -169,13 +169,13 @@ export interface SidebarPanelEventExampleResult {
         display: flex;
         gap: 1rem;
         padding: 1rem;
-        background: rgba(var(--primary-rgb), 0.1);
+        background: var(--nui-bg-tertiary);
         border-radius: 0.5rem;
-        border-left: 3px solid var(--primary-color);
+        border-left: 3px solid var(--nui-primary);
 
         i {
           font-size: 1.5rem;
-          color: var(--primary-color);
+          color: var(--nui-primary);
           flex-shrink: 0;
         }
 
