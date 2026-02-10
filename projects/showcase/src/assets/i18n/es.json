@@ -820,6 +820,11 @@
         "description": "Controla la visibilidad del botón de cerrar en el header del panel.",
         "note": "Usa la propiedad <code>showCloseButton</code> para mostrar u ocultar el botón de cerrar en el header del panel."
       },
+      "noBackdrop": {
+        "title": "Sin backdrop",
+        "description": "Abre el panel sin un fondo oscuro detrás. Útil para paneles menos intrusivos o cuando el contexto visual es importante.",
+        "note": "Usa la propiedad <code>hasBackdrop</code> y configúrala en <code>false</code> para abrir el panel sin backdrop."
+      },
       "backdrop": {
         "title": "Backdrop",
         "description": "Agrega un fondo oscuro detrás del panel para crear una experiencia modal. Controla si el click en el backdrop cierra o no el panel.",
@@ -834,6 +839,11 @@
         "title": "Múltiples paneles",
         "description": "Abre múltiples paneles simultáneamente desde diferentes lados. Controla el apilamiento con z-index y cierra todos a la vez.",
         "note": "Cada panel abierto es independiente y puede tener su propia configuración. Usa el método <code>closeAll()</code> del servicio <code>SidebarPanelService</code> para cerrar todos los paneles abiertos programáticamente de forma simultánea."
+      },
+      "footer-actions": {
+        "title": "Acciones en el footer",
+        "description": "Agrega botones de acción en el footer del panel.",
+        "note": "Usa <code>customButtons</code> para acciones simples o <code>footerTemplate</code> para layouts completamente personalizados. Puedes combinar múltiples botones con las diferentes variantes y colores de NUI."
       },
       "api": {
         "title": "API",

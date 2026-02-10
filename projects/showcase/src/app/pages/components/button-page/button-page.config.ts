@@ -76,7 +76,7 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
       anchor: 'sizes',
       examples: [
         {
-          title: 'components.button.sizes.codeTitle',
+          title: 'codeExamples.html',
           code: `<nui-button size="xs">Extra Small</nui-button>
 <nui-button size="sm">Small</nui-button>
 <nui-button size="md">Medium</nui-button>
@@ -297,7 +297,7 @@ export const BUTTON_PAGE_CONFIG: ComponentPageConfig = {
           language: 'typescript',
         },
         {
-          title: 'components.button.api.usageCodeTitle',
+          title: 'codeExamples.usageCode',
           code: `// Complete usage example
 import { Component, signal } from '@angular/core';
 

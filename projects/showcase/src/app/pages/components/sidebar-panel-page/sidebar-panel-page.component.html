@@ -7,132 +7,157 @@
 
     <div class="docs-content">
       @for (section of pageConfig.sections; track section.id) {
-    <section class="section">
-      <app-section-title
-        [title]="section.title | translate"
-        [anchor]="section.anchor"
-      ></app-section-title>
+        <section class="section">
+          <app-section-title
+            [title]="section.title | translate"
+            [anchor]="section.anchor"
+          ></app-section-title>
 
-      <p class="section-description" [innerHTML]="section.description | translate"></p>
+          <p class="section-description" [innerHTML]="section.description | translate"></p>
 
-      @if (section.note; as note) {
-        <div class="section-note" [ngClass]="note.type">
-          <i [class]="getSectionNoteIcon(note)"></i>
-          <p [innerHTML]="note.content | translate"></p>
-        </div>
-      }
+          @if (section.note; as note) {
+            <div class="section-note" [ngClass]="note.type">
+              <i [class]="getSectionNoteIcon(note)"></i>
+              <p [innerHTML]="note.content | translate"></p>
+            </div>
+          }
 
-      @switch (section.id) {
-        @case ('basic') {
-          <div class="example-preview">
-            <nui-button (click)="openBasicPanel()">Open Panel</nui-button>
-          </div>
-        }
+          @switch (section.id) {
+            @case ('basic') {
+              <div class="example-preview">
+                <nui-button (click)="openBasicPanel()">Open Panel</nui-button>
+              </div>
+            }
 
-        @case ('defaults') {
-          <div class="example-preview">
-            <nui-button [color]="'primary'" (click)="openPanelWithDefaults()">
-              Open Panel with Defaults
-            </nui-button>
-          </div>
-        }
+            @case ('defaults') {
+              <div class="example-preview">
+                <nui-button [color]="'primary'" (click)="openPanelWithDefaults()">
+                  Open Panel with Defaults
+                </nui-button>
+              </div>
+            }
 
-        @case ('sizes') {
-          <div class="example-preview example-preview--spaced">
-            <nui-button (click)="openPanelWithSize('xs')">XSmall (300px)</nui-button>
-            <nui-button (click)="openPanelWithSize('sm')">Small (400px)</nui-button>
-            <nui-button (click)="openPanelWithSize('md')">Medium (600px)</nui-button>
-            <nui-button (click)="openPanelWithSize('lg')">Large (800px)</nui-button>
-            <nui-button (click)="openPanelWithSize('xl')">XLarge (1000px)</nui-button>
-            <nui-button (click)="openPanelWithSize('full')">Full (100%)</nui-button>
-          </div>
-        }
+            @case ('sizes') {
+              <div class="example-preview example-preview--spaced">
+                <nui-button (click)="openPanelWithSize('xs')">XSmall (300px)</nui-button>
+                <nui-button (click)="openPanelWithSize('sm')">Small (400px)</nui-button>
+                <nui-button (click)="openPanelWithSize('md')">Medium (600px)</nui-button>
+                <nui-button (click)="openPanelWithSize('lg')">Large (800px)</nui-button>
+                <nui-button (click)="openPanelWithSize('xl')">XLarge (1000px)</nui-button>
+                <nui-button (click)="openPanelWithSize('full')">Full (100%)</nui-button>
+              </div>
+            }
 
-        @case ('positions') {
-          <div class="example-preview example-preview--spaced">
-            <nui-button (click)="openPanelWithPosition('left')">From Left</nui-button>
-            <nui-button (click)="openPanelWithPosition('right')">From Right</nui-button>
-            <nui-button (click)="openPanelWithPosition('top')">From Top</nui-button>
-            <nui-button (click)="openPanelWithPosition('bottom')">From Bottom</nui-button>
-          </div>
-        }
+            @case ('positions') {
+              <div class="example-preview example-preview--spaced">
+                <nui-button (click)="openPanelWithPosition('left')">From Left</nui-button>
+                <nui-button (click)="openPanelWithPosition('right')">From Right</nui-button>
+                <nui-button (click)="openPanelWithPosition('top')">From Top</nui-button>
+                <nui-button (click)="openPanelWithPosition('bottom')">From Bottom</nui-button>
+              </div>
+            }
 
-        @case ('dynamic-component') {
-          <div class="example-preview">
-            <nui-button (click)="openDynamicPanel()">Open Panel with Dynamic Data</nui-button>
-          </div>
-        }
+            @case ('dynamic-component') {
+              <div class="example-preview">
+                <nui-button (click)="openDynamicPanel()">Open Panel with Dynamic Data</nui-button>
+              </div>
+            }
 
-        @case ('html-content') {
-          <div class="example-preview example-preview--spaced">
-            <nui-button (click)="openHtmlNotificationPanel()">Simple HTML Notification</nui-button>
-            <nui-button [color]="'primary'" (click)="openDynamicHtmlPanel()">
-              Dynamic HTML Report
-            </nui-button>
-          </div>
-        }
+            @case ('html-content') {
+              <div class="example-preview example-preview--spaced">
+                <nui-button (click)="openHtmlNotificationPanel()">
+                  Simple HTML Notification
+                </nui-button>
+                <nui-button [color]="'primary'" (click)="openDynamicHtmlPanel()">
+                  Dynamic HTML Report
+                </nui-button>
+              </div>
+            }
 
-        @case ('template-content') {
-          <div class="example-preview">
-            <nui-button [color]="'primary'" (click)="openTemplatePanel()">
-              Open Template Panel
-            </nui-button>
-          </div>
-        }
+            @case ('template-content') {
+              <div class="example-preview">
+                <nui-button [color]="'primary'" (click)="openTemplatePanel()">
+                  Open Template Panel
+                </nui-button>
+              </div>
+            }
 
-        @case ('dynamic-component-events') {
-          <div class="example-preview">
-            <nui-button [color]="'primary'" (click)="openPanelWithEvents()">
-              Open Panel with Events
-            </nui-button>
-          </div>
-        }
+            @case ('dynamic-component-events') {
+              <div class="example-preview">
+                <nui-button [color]="'primary'" (click)="openPanelWithEvents()">
+                  Open Panel with Events
+                </nui-button>
+              </div>
+            }
 
-        @case ('minimizable') {
-          <div class="example-preview example-preview--spaced">
-            <nui-button (click)="openMinimizablePanel()">Open Minimizable Panel</nui-button>
-            <nui-button (click)="openMinimizablePanel2()">
-              Open Another Minimizable Panel
-            </nui-button>
-            <nui-button [color]="'primary'" (click)="openChatSupportPanel()">
-              Chat Support (Floating Button)
-            </nui-button>
-          </div>
-        }
+            @case ('minimizable') {
+              <div class="example-preview example-preview--spaced">
+                <nui-button (click)="openMinimizablePanel()">Open Minimizable Panel</nui-button>
+                <nui-button (click)="openMinimizablePanel2()">
+                  Open Another Minimizable Panel
+                </nui-button>
+                <nui-button [color]="'primary'" (click)="openChatSupportPanel()">
+                  Chat Support (Floating Button)
+                </nui-button>
+              </div>
+            }
 
-        @case ('close-button') {
-          <div class="example-preview">
-            <nui-button (click)="openPanelWithoutCloseButton()">
-              Open Panel without Close Button
-            </nui-button>
-          </div>
-        }
+            @case ('close-button') {
+              <div class="example-preview">
+                <nui-button (click)="openPanelWithoutCloseButton()">
+                  Open Panel without Close Button
+                </nui-button>
+              </div>
+            }
 
-        @case ('backdrop') {
-          <div class="example-preview">
-            <nui-button (click)="openPanelWithoutBackdrop()">
-              Open Panel without Backdrop
-            </nui-button>
-          </div>
-        }
+            @case ('backdrop') {
+              <div class="example-preview">
+                <nui-button (click)="openPanelWithoutBackdrop()">
+                  Open Panel without Backdrop
+                </nui-button>
+              </div>
+            }
 
-        @case ('custom-backdrop') {
-          <div class="example-preview">
-            <nui-button [color]="'primary'" (click)="openPanelWithCustomBackdrop()">
-              Open Panel with Custom Backdrop
-            </nui-button>
-          </div>
-        }
+            @case ('custom-backdrop') {
+              <div class="example-preview">
+                <nui-button [color]="'primary'" (click)="openPanelWithCustomBackdrop()">
+                  Open Panel with Custom Backdrop
+                </nui-button>
+              </div>
+            }
 
-        @case ('multiple') {
-          <div class="example-preview example-preview--spaced">
-            <nui-button (click)="openMultiplePanels()">Open Multiple Panels</nui-button>
-          </div>
-        }
-      }
+            @case ('multiple') {
+              <div class="example-preview example-preview--spaced">
+                <nui-button (click)="openMultiplePanels()">Open Multiple Panels</nui-button>
+              </div>
+            }
 
-      <app-code-block [examples]="section.examples || []"></app-code-block>
-    </section>
+            @case ('footer-actions') {
+              <div class="example-preview example-preview--spaced">
+                <nui-button [color]="'primary'" (click)="openPanelWithFooterActions()">
+                  Básico (Cancelar/Guardar)
+                </nui-button>
+                <nui-button [color]="'primary'" (click)="openPanelWithVariedActions()">
+                  Diferentes Estilos
+                </nui-button>
+                <nui-button [color]="'primary'" (click)="openPanelWithLoadingActions()">
+                  Loading States
+                </nui-button>
+                <nui-button [color]="'primary'" (click)="openPanelWithConditionalActions()">
+                  Botones Condicionales
+                </nui-button>
+                <nui-button [color]="'primary'" (click)="openPanelWithCustomFooterTemplate()">
+                  Template Custom
+                </nui-button>
+                <nui-button [color]="'primary'" (click)="openPanelWithComplexActions()">
+                  Caso Complejo (4 Actions)
+                </nui-button>
+              </div>
+            }
+          }
+
+          <app-code-block [examples]="section.examples || []"></app-code-block>
+        </section>
       }
     </div>
   </div>
@@ -241,5 +266,69 @@
         Logout
       </nui-button>
     </div>
+  </div>
+</ng-template>
+
+<!-- Template para footer personalizado -->
+<ng-template #customFooterTemplate>
+  <div>
+    <!-- Info section -->
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        background: var(--nui-warning-light);
+        border-radius: 4px;
+        color: var(--nui-warning-dark);
+        font-size: 0.875rem;
+      "
+    >
+      <i class="ri-information-line" style="font-size: 1.25rem"></i>
+      <span>Los cambios sin guardar se perderán</span>
+    </div>
+
+    <!-- Action buttons -->
+    <div style="display: flex; gap: 0.5rem; justify-content: flex-end">
+      <nui-button [color]="'secondary'" [variant]="'ghost'" [icon]="'ri-close-line'">
+        Cancelar
+      </nui-button>
+      <nui-button [color]="'info'" [variant]="'outline'" [icon]="'ri-file-copy-line'">
+        Duplicar
+      </nui-button>
+      <nui-button [color]="'success'" [variant]="'solid'" [icon]="'ri-check-line'">
+        Confirmar
+      </nui-button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Template para footer con loading states reactivos -->
+<ng-template #loadingActionsTemplate>
+  <div
+    style="
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-end;
+    "
+  >
+    <nui-button
+      [color]="'secondary'"
+      [variant]="'outline'"
+      [disabled]="isProcessing()"
+      (click)="cancelLoadingPanel()"
+    >
+      Cancelar
+    </nui-button>
+    <nui-button
+      [color]="'primary'"
+      [icon]="'ri-refresh-line'"
+      [disabled]="isProcessing()"
+      [loading]="isProcessing()"
+      (click)="processLoadingAction()"
+    >
+      Procesar
+    </nui-button>
   </div>
 </ng-template>

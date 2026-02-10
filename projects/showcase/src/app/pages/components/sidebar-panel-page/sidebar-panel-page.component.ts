@@ -1,4 +1,4 @@
-import { Component, ViewChild, TemplateRef } from '@angular/core';
+import { Component, ViewChild, TemplateRef, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonComponent, SidebarPanelService, SidebarPanelSize, SidebarPanelPosition } from 'nui';
@@ -39,6 +39,12 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
   pageConfig = SIDEBAR_PANEL_PAGE_CONFIG;
 
   @ViewChild('userDetailsTemplate', { read: TemplateRef }) userDetailsTemplate!: TemplateRef<any>;
+  @ViewChild('customFooterTemplate', { read: TemplateRef }) customFooterTemplate!: TemplateRef<any>;
+  @ViewChild('loadingActionsTemplate', { read: TemplateRef }) loadingActionsTemplate!: TemplateRef<any>;
+
+  // Signal para controlar el estado de loading del footer
+  isProcessing = signal(false);
+  currentPanelRef: any = null;
 
   // Datos de ejemplo para el template
   currentUser = {
@@ -460,6 +466,270 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
             `Data: ${JSON.stringify(result.data || {}, null, 2)}`
         );
       }
+    });
+  }
+
+  /**
+   * Abre un panel con botones de acción en el footer (básico)
+   * Demuestra el uso de customButtons con acciones simples
+   */
+  openPanelWithFooterActions(): void {
+    this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
+      title: 'Panel con Footer Actions',
+      position: 'right',
+      size: 'md',
+      data: {
+        message: 'Este panel tiene botones de acción en el footer configurados mediante customButtons',
+      },
+      customButtons: [
+        {
+          text: 'Cancelar',
+          color: 'secondary',
+          variant: 'outline',
+          callback: (panelRef) => {
+            console.log('Cancelar clicked');
+            panelRef.close({ action: 'cancel' });
+          },
+        },
+        {
+          text: 'Guardar',
+          icon: 'ri-save-line',
+          color: 'primary',
+          variant: 'solid',
+          callback: (panelRef) => {
+            console.log('Guardar clicked');
+            alert('Datos guardados correctamente!');
+            panelRef.close({ action: 'save', saved: true });
+          },
+        },
+      ],
+    });
+  }
+
+  /**
+   * Abre un panel con múltiples botones y variantes
+   * Demuestra diferentes estilos y colores de botones
+   */
+  openPanelWithVariedActions(): void {
+    this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
+      title: 'Actions con Diferentes Estilos',
+      position: 'right',
+      size: 'md',
+      data: {
+        message: 'Este panel muestra diferentes variantes de botones: solid, outline y ghost',
+      },
+      customButtons: [
+        {
+          text: 'Eliminar',
+          icon: 'ri-delete-bin-line',
+          color: 'danger',
+          variant: 'ghost',
+          callback: async (panelRef) => {
+            const confirmed = confirm('¿Estás seguro de eliminar?');
+            if (confirmed) {
+              alert('Elemento eliminado');
+              panelRef.close({ action: 'delete' });
+            }
+          },
+        },
+        {
+          text: 'Editar',
+          icon: 'ri-edit-line',
+          color: 'info',
+          variant: 'outline',
+          callback: (panelRef) => {
+            alert('Modo edición activado');
+          },
+        },
+        {
+          text: 'Compartir',
+          icon: 'ri-share-line',
+          color: 'accent',
+          variant: 'solid',
+          callback: (panelRef) => {
+            alert('Panel compartido');
+            panelRef.close({ action: 'share' });
+          },
+        },
+      ],
+    });
+  }
+
+  /**
+   * Abre un panel con botones de acción que cambian estado (loading)
+   * Demuestra el uso de estados disabled y loading reactivos con Signals
+   */
+  openPanelWithLoadingActions(): void {
+    // Reset del estado de loading
+    this.isProcessing.set(false);
+
+    this.currentPanelRef = this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
+      title: 'Panel con Loading States',
+      position: 'right',
+      size: 'md',
+      data: {
+        message: 'Este panel demuestra botones con estados de loading reactivos usando Angular Signals',
+      },
+      footerTemplate: this.loadingActionsTemplate,
+    });
+  }
+
+  /**
+   * Cancela la operación y cierra el panel de loading
+   */
+  cancelLoadingPanel(): void {
+    if (this.currentPanelRef) {
+      this.currentPanelRef.close({ action: 'cancel' });
+    }
+  }
+
+  /**
+   * Procesa la operación asíncrona con estados de loading
+   */
+  async processLoadingAction(): Promise<void> {
+    if (this.isProcessing()) return;
+    
+    this.isProcessing.set(true);
+    console.log('Iniciando proceso...');
+    
+    try {
+      // Simular operación asíncrona
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      this.isProcessing.set(false);
+      alert('Proceso completado exitosamente!');
+      
+      if (this.currentPanelRef) {
+        this.currentPanelRef.close({ action: 'process', success: true });
+      }
+    } catch (error) {
+      this.isProcessing.set(false);
+      console.error('Error en el proceso:', error);
+    }
+  }
+
+  /**
+   * Abre un panel con botones condicionales (disabled)
+   * Demuestra el uso de botones deshabilitados según condiciones
+   */
+  openPanelWithConditionalActions(): void {
+    let hasChanges = false;
+
+    this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
+      title: 'Panel con Botones Condicionales',
+      position: 'right',
+      size: 'md',
+      data: {
+        message: 'Los botones del footer pueden estar deshabilitados según condiciones. Simula hacer cambios para habilitar los botones.',
+      },
+      customButtons: [
+        {
+          text: 'Descartar',
+          color: 'secondary',
+          variant: 'ghost',
+          disabled: !hasChanges,
+          callback: (panelRef) => {
+            const confirmed = confirm('¿Descartar todos los cambios?');
+            if (confirmed) {
+              hasChanges = false;
+              panelRef.close({ action: 'discard' });
+            }
+          },
+        },
+        {
+          text: 'Guardar Cambios',
+          icon: 'ri-save-line',
+          color: 'primary',
+          variant: 'solid',
+          disabled: !hasChanges,
+          callback: (panelRef) => {
+            alert('Cambios guardados!');
+            hasChanges = false;
+            panelRef.close({ action: 'save', saved: true });
+          },
+        },
+      ],
+    });
+  }
+
+  /**
+   * Abre un panel con footer template personalizado
+   * Demuestra el uso de footerTemplate para layouts completamente custom
+   */
+  openPanelWithCustomFooterTemplate(): void {
+    this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
+      title: 'Panel con Footer Template Custom',
+      position: 'right',
+      size: 'md',
+      data: {
+        message: 'Este panel usa un template completamente personalizado en el footer',
+      },
+      footerTemplate: this.customFooterTemplate,
+    });
+  }
+
+  /**
+   * Abre un panel con múltiples acciones complejas
+   * Demuestra un caso de uso real con validación y flujo complejo
+   */
+  openPanelWithComplexActions(): void {
+    this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
+      title: 'Formulario de Usuario',
+      position: 'right',
+      size: 'lg',
+      data: {
+        message: 'Panel con múltiples acciones y flujo de validación complejo',
+        showActions: false,
+      },
+      customButtons: [
+        {
+          text: 'Restablecer',
+          icon: 'ri-restart-line',
+          color: 'secondary',
+          variant: 'ghost',
+          callback: (panelRef) => {
+            const confirmed = confirm('¿Restablecer formulario a valores por defecto?');
+            if (confirmed) {
+              alert('Formulario restablecido');
+            }
+          },
+        },
+        {
+          text: 'Vista Previa',
+          icon: 'ri-eye-line',
+          color: 'info',
+          variant: 'outline',
+          callback: (panelRef) => {
+            alert('Abriendo vista previa...');
+          },
+        },
+        {
+          text: 'Guardar Borrador',
+          icon: 'ri-draft-line',
+          color: 'secondary',
+          variant: 'solid',
+          callback: async (panelRef) => {
+            console.log('Guardando borrador...');
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            alert('Borrador guardado');
+          },
+        },
+        {
+          text: 'Publicar',
+          icon: 'ri-send-plane-fill',
+          color: 'success',
+          variant: 'solid',
+          callback: async (panelRef) => {
+            const confirmed = confirm('¿Publicar cambios?');
+            if (confirmed) {
+              console.log('Publicando...');
+              await new Promise(resolve => setTimeout(resolve, 1500));
+              alert('Publicado exitosamente!');
+              panelRef.close({ action: 'publish', published: true });
+            }
+          },
+        },
+      ],
     });
   }
 }

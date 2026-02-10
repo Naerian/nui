@@ -824,6 +824,11 @@
         "description": "Add a dark background behind the panel to create a modal experience. Control whether clicking the backdrop closes the panel or not.",
         "note": "Use the <code>hasBackdrop</code> property to enable/disable the backdrop (default <code>true</code>) and <code>closeOnBackdropClick</code> to control whether clicking the backdrop closes the panel."
       },
+      "noBackdrop": {
+        "title": "No backdrop",
+        "description": "Open the panel without a backdrop for a less intrusive experience. Ideal for side panels that complement the main content without blocking it.",
+        "note": "Set <code>hasBackdrop</code> to <code>false</code> to open the panel without a backdrop. This allows users to interact with the main content while the panel is open, creating a more seamless and less intrusive experience."
+      },
       "customBackdrop": {
         "title": "Custom backdrop",
         "description": "Customize the backdrop with custom CSS classes. You can apply effects like blur, custom colors and transitions.",
@@ -833,6 +838,11 @@
         "title": "Multiple panels",
         "description": "Open multiple panels simultaneously from different sides. Control stacking with z-index and close all at once.",
         "note": "Each open panel is independent and can have its own configuration. Use the <code>closeAll()</code> method of the <code>SidebarPanelService</code> service to programmatically close all open panels simultaneously."
+      },
+      "footer-actions": {
+        "title": "Footer Actions",
+        "description": "Add action buttons in the panel footer.",
+        "note": "Use <code>customButtons</code> for simple actions or <code>footerTemplate</code> for fully customized layouts. You can combine multiple buttons with the different variants and colors of NUI."
       },
       "api": {
         "title": "API",

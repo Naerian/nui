@@ -82,7 +82,7 @@ openPanel() {
       anchor: 'sizes',
       examples: [
         {
-          title: 'components.sidebar-panel.sizes.codeTitle',
+          title: 'codeExamples.typescript',
           code: `// Predefined sizes (XS: 300px)
 this.sidebarPanelService.open(MyContentComponent, {
   title: 'Panel XSmall',
@@ -133,7 +133,7 @@ this.sidebarPanelService.open(MyContentComponent, {
       anchor: 'positions',
       examples: [
         {
-          title: 'components.sidebar-panel.positions.codeTitle',
+          title: 'codeExamples.typescript',
           code: `// Panel from the right edge (default)
 this.sidebarPanelService.open(MyContentComponent, {
   title: 'Panel Right',
@@ -568,7 +568,7 @@ this.sidebarPanelService.open(NotificationsComponent, {
       anchor: 'boton-cerrar',
       examples: [
         {
-          title: 'components.sidebar-panel.closeButton.codeTitle',
+          title: 'codeExamples.typescript',
           code: `// Ocultar el botón de cerrar del header
 this.sidebarPanelService.open(MyContentComponent, {
   title: 'Panel sin botón cerrar',
@@ -650,7 +650,7 @@ this.sidebarPanelService.open(MyContentComponent, {
       anchor: 'multiple',
       examples: [
         {
-          title: 'components.sidebar-panel.multiple.codeTitle',
+          title: 'codeExamples.typescript',
           code: `this.sidebarPanelService.open(Panel1Component, {
   title: 'Panel 1',
   position: 'right',
@@ -667,6 +667,280 @@ this.sidebarPanelService.open(Panel2Component, {
 
 // Close all open panels
 this.sidebarPanelService.closeAll();`,
+          language: 'typescript',
+        },
+      ],
+    },
+    {
+      id: 'footer-actions',
+      title: 'components.sidebar-panel.footer-actions.title',
+      description: 'components.sidebar-panel.footer-actions.description',
+      anchor: 'footer-actions',
+      note: {
+        type: 'info',
+        content: 'components.sidebar-panel.footer-actions.note',
+      },
+      examples: [
+        {
+          title: 'Basic',
+          code: `this.sidebarPanelService.open(MyContentComponent, {
+  title: 'Panel with Footer Actions',
+  position: 'right',
+  size: 'md',
+  customButtons: [
+    {
+      text: 'Cancel',
+      color: 'secondary',
+      variant: 'outline',
+      callback: (panelRef) => {
+        panelRef.close({ action: 'cancel' });
+      }
+    },
+    {
+      text: 'Save',
+      icon: 'ri-save-line',
+      color: 'primary',
+      variant: 'solid',
+      callback: (panelRef) => {
+        alert('Data saved successfully!');
+        panelRef.close({ action: 'save', saved: true });
+      }
+    }
+  ]
+});`,
+          language: 'typescript',
+        },
+        {
+          title: 'Variants',
+          code: `this.sidebarPanelService.open(MyContentComponent, {
+  title: 'Actions with Different Styles',
+  customButtons: [
+    {
+      text: 'Delete',
+      icon: 'ri-delete-bin-line',
+      color: 'danger',
+      variant: 'ghost',
+      callback: (panelRef) => {
+        if (confirm('Are you sure?')) {
+          panelRef.close({ action: 'delete' });
+        }
+      }
+    },
+    {
+      text: 'Edit',
+      icon: 'ri-edit-line',
+      color: 'info',
+      variant: 'outline',
+      callback: () => alert('Edit mode activated')
+    },
+    {
+      text: 'Share',
+      icon: 'ri-share-line',
+      color: 'accent',
+      variant: 'solid',
+      callback: (panelRef) => {
+        alert('Panel shared successfully!');
+        panelRef.close({ action: 'share' });
+      }
+    }
+  ]
+});`,
+          language: 'typescript',
+        },
+        {
+          title: 'Loading States',
+          code: `<!-- Template con loading states reactivos -->
+<ng-template #loadingActionsTemplate>
+  <div style="
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    justify-content: flex-end;
+    border-top: 1px solid var(--nui-divider);
+  ">
+    <nui-button
+      [color]="'secondary'"
+      [variant]="'outline'"
+      [disabled]="isProcessing()"
+      (click)="cancelPanel()">
+      Cancelar
+    </nui-button>
+    <nui-button
+      [color]="'primary'"
+      [icon]="'ri-refresh-line'"
+      [disabled]="isProcessing()"
+      [loading]="isProcessing()"
+      (click)="processAction()">
+      Procesar
+    </nui-button>
+  </div>
+</ng-template>
+          
+
+// In the component class
+import { Component, ViewChild, TemplateRef, signal } from '@angular/core';
+
+@Component({
+  selector: 'app-my-component',
+  templateUrl: './my-component.html'
+})
+export class MyComponent {
+  @ViewChild('loadingActionsTemplate') loadingActionsTemplate!: TemplateRef<any>;
+
+  // Signal to control the loading state (instance property)
+  isProcessing = signal(false);
+  currentPanelRef: any = null;
+
+  openPanelWithLoadingActions() {
+    // Reset the state when opening the panel
+    this.isProcessing.set(false);
+
+    this.currentPanelRef = this.sidebarPanelService.open(MyContentComponent, {
+      title: 'Panel with Loading States',
+      position: 'right',
+      size: 'md',
+      footerTemplate: this.loadingActionsTemplate
+    });
+  }
+
+  cancelPanel() {
+    if (this.currentPanelRef) {
+      this.currentPanelRef.close({ action: 'cancel' });
+    }
+  }
+
+  async processAction() {
+    if (this.isProcessing()) return;
+    
+    this.isProcessing.set(true);
+    
+    try {
+      // Simulate asynchronous operation (API call, etc)
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      this.isProcessing.set(false);
+      alert('Process completed!');
+      
+      if (this.currentPanelRef) {
+        this.currentPanelRef.close({ action: 'process', success: true });
+      }
+    } catch (error) {
+      this.isProcessing.set(false);
+      console.error('Error:', error);
+    }
+  }
+}`,
+          language: 'typescript',
+        },
+        {
+          title: 'Conditionals',
+          code: `openPanel() {
+  let hasChanges = false;
+
+  this.sidebarPanelService.open(MyContentComponent, {
+    title: 'Panel with Conditional Buttons',
+    customButtons: [
+      {
+        text: 'Discard',
+        color: 'secondary',
+        variant: 'ghost',
+        disabled: !hasChanges,
+        callback: (panelRef) => {
+          if (confirm('Discard changes?')) {
+            hasChanges = false;
+            panelRef.close({ action: 'discard' });
+          }
+        }
+      },
+      {
+        text: 'Save Changes',
+        icon: 'ri-save-line',
+        color: 'primary',
+        variant: 'solid',
+        disabled: !hasChanges,
+        callback: (panelRef) => {
+          alert('Changes saved!');
+          hasChanges = false;
+          panelRef.close({ action: 'save', saved: true });
+        }
+      }
+    ]
+  });
+}`,
+          language: 'typescript',
+        },
+        {
+          title: 'Template',
+          code: `@ViewChild('customFooterTemplate') customFooterTemplate!: TemplateRef<any>;
+
+openPanel() {
+  this.sidebarPanelService.open(MyContentComponent, {
+    title: 'Panel with Custom Footer Template',
+    footerTemplate: this.customFooterTemplate
+  });
+}
+
+// In the template:
+<ng-template #customFooterTemplate>
+  <div style="padding: 1rem; background: var(--nui-surface-variant);">
+    <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+      <nui-button [color]="'secondary'" [variant]="'ghost'">Cancel</nui-button>
+      <nui-button [color]="'success'" [icon]="'ri-check-line'">Confirm</nui-button>
+    </div>
+  </div>
+</ng-template>`,
+          language: 'typescript',
+        },
+        {
+          title: 'Advanced',
+          code: `this.sidebarPanelService.open(MyFormComponent, {
+  title: 'User Form',
+  position: 'right',
+  size: 'lg',
+  customButtons: [
+    {
+      text: 'Reset Form',
+      icon: 'ri-restart-line',
+      color: 'secondary',
+      variant: 'ghost',
+      callback: (panelRef) => {
+        if (confirm('Reset form?')) {
+          alert('Form reset successfully!');
+        }
+      }
+    },
+    {
+      text: 'Preview',
+      icon: 'ri-eye-line',
+      color: 'info',
+      variant: 'outline',
+      callback: () => alert('Opening preview...')
+    },
+    {
+      text: 'Save Draft',
+      icon: 'ri-draft-line',
+      color: 'secondary',
+      variant: 'solid',
+      callback: async (panelRef) => {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        alert('Draft saved successfully!');
+      }
+    },
+    {
+      text: 'Publish',
+      icon: 'ri-send-plane-fill',
+      color: 'success',
+      variant: 'solid',
+      callback: async (panelRef) => {
+        if (confirm('Publish changes?')) {
+          await new Promise(resolve => setTimeout(resolve, 1500));
+          alert('Published successfully!');
+          panelRef.close({ action: 'publish', published: true });
+        }
+      }
+    }
+  ]
+});`,
           language: 'typescript',
         },
       ],
