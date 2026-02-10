@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
     <div class="section-title-wrapper" [id]="anchor">
       <h2 class="section-title">
         {{ title }}
-        <a [href]="'#' + anchor" class="section-anchor" [attr.aria-label]="'Enlace a ' + title" (click)="onAnchorClick($event)">
+        <a [href]="'#' + fullAnchor" class="section-anchor" [attr.aria-label]="'Enlace a ' + title" (click)="onAnchorClick($event)">
           <i class="ri-link"></i>
         </a>
       </h2>
@@ -76,6 +76,21 @@ export class SectionTitleComponent {
    */
   @Input() anchor?: string;
 
+  /**
+   * ID del tab activo (opcional). Si se proporciona, genera #tabId.anchor
+   */
+  @Input() tabId?: string;
+
+  /**
+   * Ancla completa en formato tab.anchor o solo anchor
+   */
+  get fullAnchor(): string {
+    if (this.tabId && this.anchor) {
+      return `${this.tabId}.${this.anchor}`;
+    }
+    return this.anchor || '';
+  }
+
   ngOnInit() {
     // Si no se proporciona un ancla, generarla desde el título
     if (!this.anchor) {
@@ -87,7 +102,11 @@ export class SectionTitleComponent {
     // Comprobar si la URL tiene un hash que coincide con este ancla
     // Esto permite que funcione al recargar la página con F5
     const hash = window.location.hash.substring(1); // Elimina el #
-    if (hash === this.anchor) {
+    
+    // Soporta formato tab.anchor o solo anchor
+    const anchorToCheck = hash.includes('.') ? hash.split('.')[1] : hash;
+    
+    if (anchorToCheck === this.anchor) {
       // Usar setTimeout para asegurar que el DOM esté completamente renderizado
       setTimeout(() => {
         const element = document.getElementById(this.anchor!);
@@ -104,7 +123,7 @@ export class SectionTitleComponent {
   onAnchorClick(event: Event) {
     event.preventDefault();
     const currentPath = window.location.pathname;
-    const newUrl = `${currentPath}#${this.anchor}`;
+    const newUrl = `${currentPath}#${this.fullAnchor}`;
     window.history.pushState({}, '', newUrl);
     
     // Scroll suave al elemento

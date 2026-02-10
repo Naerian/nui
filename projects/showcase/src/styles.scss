@@ -149,8 +149,9 @@ pre code {
     padding-bottom: 1.5rem;
     border-bottom: 2px solid var(--nui-border-primary);
 
-    .page-title {
-      font-size: 2.125rem;
+    .page-title,
+    h1 {
+      font-size: 1.5rem;
       font-weight: 700;
       color: var(--nui-text-primary);
       margin-bottom: 0.5rem;
@@ -162,13 +163,6 @@ pre code {
       margin: 0;
     }
 
-    h1 {
-      font-size: 2.125rem;
-      font-weight: 700;
-      color: var(--nui-text-primary);
-      margin-bottom: 0.5rem;
-    }
-
     .subtitle {
       font-size: 1.125rem;
       color: var(--nui-text-secondary);
@@ -176,20 +170,19 @@ pre code {
     }
   }
 
-  .docs-content {
+  .docs-content,
+  .nui-component-tabs__content {
     .docs-section,
     .section {
-      margin-bottom: 2.5rem;
-
       h2 {
-        font-size: 1.75rem;
+        font-size: 1.125rem;
         font-weight: 600;
         color: var(--nui-text-primary);
         margin-bottom: 1rem;
       }
 
       h3 {
-        font-size: 1.375rem;
+        font-size: 1rem;
         font-weight: 600;
         color: var(--nui-text-primary);
         margin-bottom: 0.75rem;
@@ -560,5 +553,98 @@ pre code {
   }
   50% {
     transform: translateY(-10px);
+  }
+}
+
+// ====================================
+// API & Theming Tables
+// ====================================
+
+.api-table {
+  margin: 0;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  border: 1px solid var(--nui-border-primary);
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    background-color: var(--nui-bg-primary);
+
+    thead {
+      background-color: var(--nui-bg-secondary);
+      border-bottom: 2px solid var(--nui-border-primary);
+
+      tr {
+        th {
+          padding: 0.875rem 1rem;
+          text-align: left;
+          font-weight: 600;
+          color: var(--nui-text-primary);
+          white-space: nowrap;
+
+          &:first-child {
+            border-radius: 0.5rem 0 0 0;
+          }
+
+          &:last-child {
+            border-radius: 0 0.5rem 0 0;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid var(--nui-border-secondary);
+        transition: background-color 0.2s ease;
+
+        &:hover {
+          background-color: var(--nui-bg-hover);
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        td {
+          padding: 0.875rem 1rem;
+          color: var(--nui-text-secondary);
+          vertical-align: top;
+
+          &:first-child {
+            font-weight: 500;
+            color: var(--nui-color-accent);
+            font-family: 'Courier New', monospace;
+            white-space: nowrap;
+          }
+
+          &:nth-child(2) {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--nui-text-tertiary);
+          }
+
+          &:nth-child(3) {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--nui-color-info);
+          }
+        }
+      }
+    }
+  }
+
+  // Responsive
+  @media (max-width: 768px) {
+    table {
+      font-size: 0.8rem;
+
+      thead th,
+      tbody td {
+        padding: 0.625rem 0.75rem;
+      }
+    }
   }
 }

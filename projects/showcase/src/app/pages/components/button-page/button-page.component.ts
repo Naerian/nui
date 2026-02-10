@@ -4,6 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ButtonComponent, ButtonDirective } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
+import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';
 import { BaseComponentPage } from '../../../core/base/base-component-page';
 import { BUTTON_PAGE_CONFIG } from './button-page.config';
 
@@ -11,12 +12,13 @@ import { BUTTON_PAGE_CONFIG } from './button-page.config';
   selector: 'app-button-page',
   standalone: true,
   imports: [
-    CommonModule, 
-    TranslateModule, 
-    ButtonComponent, 
-    ButtonDirective, 
+    CommonModule,
+    TranslateModule,
+    ButtonComponent,
+    ButtonDirective,
     CodeBlockComponent,
-    SectionTitleComponent
+    SectionTitleComponent,
+    ComponentTabsComponent,
   ],
   templateUrl: './button-page.component.html',
   styleUrls: ['./button-page.component.scss'],
@@ -24,6 +26,38 @@ import { BUTTON_PAGE_CONFIG } from './button-page.config';
 export class ButtonPageComponent extends BaseComponentPage {
   // Configuration from external file
   override pageConfig = BUTTON_PAGE_CONFIG;
+
+  // Tabs configuration
+  tabs: ComponentTab[] = [
+    {
+      id: 'examples',
+      label: 'common.tabs.examples',
+      icon: 'ri-code-s-slash-line',
+      sections: [
+        'basic',
+        'variants-colors',
+        'sizes',
+        'icons',
+        'loading',
+        'width',
+        'disabled',
+        'events',
+        'directive',
+      ],
+    },
+    {
+      id: 'api',
+      label: 'common.tabs.api',
+      icon: 'ri-braces-line',
+      sections: ['api-inputs', 'api-outputs', 'api-computed', 'api-methods', 'api-models'],
+    },
+    {
+      id: 'theming',
+      label: 'common.tabs.theming',
+      icon: 'ri-palette-line',
+      sections: ['theming-colors', 'theming-structure'],
+    },
+  ];
 
   // Interactive demo state (only logic that needs to be in component)
   isLoading = signal(false);

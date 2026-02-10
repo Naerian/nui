@@ -5,153 +5,183 @@
       <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
     </div>
 
-    <div class="docs-content">
-      @for (section of pageConfig.sections; track section.id) {
-    <section class="section">
-      <app-section-title
-        [title]="section.title | translate"
-        [anchor]="section.anchor"
-      ></app-section-title>
+    <app-component-tabs [tabs]="tabs" [sections]="pageConfig.sections" #tabsComp>
+      @if (tabsComp.activeSections(); as activeSections) {
+        @for (section of activeSections; track section.id) {
+          <div class="section">
+            <!-- Título de sección -->
+            <app-section-title
+              [anchor]="section.anchor"
+              [title]="section.title | translate"
+              [tabId]="tabsComp.activeTabId()"
+            ></app-section-title>
 
-      <p class="section-description" [innerHTML]="section.description | translate"></p>
+            @if (section.description) {
+              <p class="section-description" [innerHTML]="section.description | translate"></p>
+            }
 
-      @if (section.note; as note) {
-        <div class="section-note" [ngClass]="note.type">
-          <i [class]="getSectionNoteIcon(note)"></i>
-          <p [innerHTML]="note.content | translate"></p>
-        </div>
+            @if (section.note) {
+              <div class="section-note" [ngClass]="section.note.type">
+                @if (section.note.icon) {
+                  <i [class]="section.note.icon"></i>
+                }
+                <p [innerHTML]="section.note.content | translate"></p>
+              </div>
+            }
+
+            <!-- Contenido específico de cada sección -->
+            @switch (section.id) {
+              @case ('basic') {
+                <div class="example-preview">
+                  <nui-button>Click me</nui-button>
+                </div>
+              }
+              @case ('variants-colors') {
+                <div class="example-preview">
+                  <!-- Solid -->
+                  <div class="button-row">
+                    <nui-button color="primary">Primary</nui-button>
+                    <nui-button color="secondary">Secondary</nui-button>
+                    <nui-button color="accent">Accent</nui-button>
+                    <nui-button color="success">Success</nui-button>
+                    <nui-button color="info">Info</nui-button>
+                    <nui-button color="warning">Warning</nui-button>
+                    <nui-button color="danger">Danger</nui-button>
+                    <nui-button color="neutral">Neutral</nui-button>
+                  </div>
+
+                  <!-- Outline -->
+                  <div class="button-row">
+                    <nui-button variant="outline" color="primary">Primary</nui-button>
+                    <nui-button variant="outline" color="secondary">Secondary</nui-button>
+                    <nui-button variant="outline" color="accent">Accent</nui-button>
+                    <nui-button variant="outline" color="success">Success</nui-button>
+                    <nui-button variant="outline" color="info">Info</nui-button>
+                    <nui-button variant="outline" color="warning">Warning</nui-button>
+                    <nui-button variant="outline" color="danger">Danger</nui-button>
+                    <nui-button variant="outline" color="neutral">Neutral</nui-button>
+                  </div>
+
+                  <!-- Ghost -->
+                  <div class="button-row">
+                    <nui-button variant="ghost" color="primary">Primary</nui-button>
+                    <nui-button variant="ghost" color="secondary">Secondary</nui-button>
+                    <nui-button variant="ghost" color="accent">Accent</nui-button>
+                    <nui-button variant="ghost" color="success">Success</nui-button>
+                    <nui-button variant="ghost" color="info">Info</nui-button>
+                    <nui-button variant="ghost" color="warning">Warning</nui-button>
+                    <nui-button variant="ghost" color="danger">Danger</nui-button>
+                    <nui-button variant="ghost" color="neutral">Neutral</nui-button>
+                  </div>
+                </div>
+              }
+              @case ('sizes') {
+                <div class="example-preview">
+                  <nui-button size="xs">Extra Small</nui-button>
+                  <nui-button size="sm">Small</nui-button>
+                  <nui-button size="md">Medium</nui-button>
+                  <nui-button size="lg">Large</nui-button>
+                  <nui-button size="xl">Extra Large</nui-button>
+                </div>
+              }
+              @case ('icons') {
+                <div class="example-preview">
+                  <nui-button icon="ri-user-line">Profile</nui-button>
+                  <nui-button icon="ri-arrow-right-line" iconPosition="end">Next</nui-button>
+                  <nui-button icon="ri-settings-line" aria-label="Settings"></nui-button>
+                </div>
+              }
+              @case ('loading') {
+                <div class="example-preview">
+                  <nui-button
+                    [loading]="isLoading()"
+                    [size]="'xl'"
+                    loadingPosition="start"
+                    (onClick)="simulateLoading()"
+                  >
+                    {{ isLoading() ? 'Loading...' : 'Click to Load' }}
+                  </nui-button>
+                  <nui-button
+                    [loading]="isLoading()"
+                    loadingPosition="end"
+                    [icon]="'ri-loader-line'"
+                  ></nui-button>
+                  <nui-button [loading]="isLoading()" [size]="'xs'" loadingPosition="center">
+                    Loading...
+                  </nui-button>
+                </div>
+              }
+              @case ('width') {
+                <div class="example-preview flex-column">
+                  <nui-button width="auto">Auto Width</nui-button>
+                  <nui-button width="full">Full Width</nui-button>
+                  <nui-button width="fit">Fit Content</nui-button>
+                </div>
+              }
+              @case ('disabled') {
+                <div class="example-preview">
+                  <nui-button [disabled]="true">Disabled Button</nui-button>
+                  <nui-button variant="outline" [disabled]="true">Disabled Outline</nui-button>
+                </div>
+              }
+              @case ('events') {
+                <div class="example-preview">
+                  <nui-button (onClick)="onButtonClick($event)">Click Event</nui-button>
+                  <nui-button type="submit" (onClick)="onButtonClick($event)">
+                    Submit Form
+                  </nui-button>
+                </div>
+              }
+              @case ('directive') {
+                <div class="example-preview">
+                  <button nuiButton>Native Button</button>
+                  <button nuiButton variant="outline" color="primary">Primary Outline</button>
+                  <button nuiButton variant="ghost" color="danger">Ghost Danger</button>
+                  <button
+                    nuiButton
+                    [loading]="isLoading()"
+                    loadingPosition="start"
+                    (onClick)="simulateLoading()"
+                  >
+                    {{ isLoading() ? 'Loading...' : 'Click to Load' }}
+                  </button>
+                  <button nuiButton icon="ri-save-line">Save</button>
+                  <button nuiButton icon="ri-download-line" iconPosition="end">Download</button>
+                </div>
+              }
+            }
+
+            <!-- Tabla de datos (para API o Theming) -->
+            @if (section.table) {
+              <div class="api-table">
+                <table>
+                  <thead>
+                    <tr>
+                      @for (header of section.table.headers; track $index) {
+                        <th>{{ header | translate }}</th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of section.table.rows; track $index) {
+                      <tr>
+                        @for (cell of row; track $index) {
+                          <td>{{ cell | translate }}</td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+
+            <!-- Code blocks asociados a esta sección -->
+            @if (section.examples && section.examples.length > 0) {
+              <app-code-block [examples]="section.examples"></app-code-block>
+            }
+          </div>
+        }
       }
-
-      @switch (section.id) {
-        @case ('basic') {
-          <div class="example-preview">
-            <nui-button>Click me</nui-button>
-          </div>
-        }
-
-        @case ('variants-colors') {
-          <div class="example-preview">
-            <!-- Solid -->
-            <div class="button-row">
-              <nui-button color="primary">Primary</nui-button>
-              <nui-button color="secondary">Secondary</nui-button>
-              <nui-button color="accent">Accent</nui-button>
-              <nui-button color="success">Success</nui-button>
-              <nui-button color="info">Info</nui-button>
-              <nui-button color="warning">Warning</nui-button>
-              <nui-button color="danger">Danger</nui-button>
-              <nui-button color="neutral">Neutral</nui-button>
-            </div>
-
-            <!-- Outline -->
-            <div class="button-row">
-              <nui-button variant="outline" color="primary">Primary</nui-button>
-              <nui-button variant="outline" color="secondary">Secondary</nui-button>
-              <nui-button variant="outline" color="accent">Accent</nui-button>
-              <nui-button variant="outline" color="success">Success</nui-button>
-              <nui-button variant="outline" color="info">Info</nui-button>
-              <nui-button variant="outline" color="warning">Warning</nui-button>
-              <nui-button variant="outline" color="danger">Danger</nui-button>
-              <nui-button variant="outline" color="neutral">Neutral</nui-button>
-            </div>
-
-            <!-- Ghost -->
-            <div class="button-row">
-              <nui-button variant="ghost" color="primary">Primary</nui-button>
-              <nui-button variant="ghost" color="secondary">Secondary</nui-button>
-              <nui-button variant="ghost" color="accent">Accent</nui-button>
-              <nui-button variant="ghost" color="success">Success</nui-button>
-              <nui-button variant="ghost" color="info">Info</nui-button>
-              <nui-button variant="ghost" color="warning">Warning</nui-button>
-              <nui-button variant="ghost" color="danger">Danger</nui-button>
-              <nui-button variant="ghost" color="neutral">Neutral</nui-button>
-            </div>
-          </div>
-        }
-
-        @case ('sizes') {
-          <div class="example-preview">
-            <nui-button size="xs">Extra Small</nui-button>
-            <nui-button size="sm">Small</nui-button>
-            <nui-button size="md">Medium</nui-button>
-            <nui-button size="lg">Large</nui-button>
-            <nui-button size="xl">Extra Large</nui-button>
-          </div>
-        }
-
-        @case ('icons') {
-          <div class="example-preview">
-            <nui-button icon="ri-user-line">Profile</nui-button>
-            <nui-button icon="ri-arrow-right-line" iconPosition="end">Next</nui-button>
-            <nui-button icon="ri-settings-line" aria-label="Settings"></nui-button>
-          </div>
-        }
-
-        @case ('loading') {
-          <div class="example-preview">
-            <nui-button
-              [loading]="isLoading()"
-              [size]="'xl'"
-              loadingPosition="start"
-              (onClick)="simulateLoading()"
-            >
-              {{ isLoading() ? 'Loading...' : 'Click to Load' }}
-            </nui-button>
-            <nui-button
-              [loading]="isLoading()"
-              loadingPosition="end"
-              [icon]="'ri-loader-line'"
-            ></nui-button>
-            <nui-button [loading]="isLoading()" [size]="'xs'" loadingPosition="center">
-              Loading...
-            </nui-button>
-          </div>
-        }
-
-        @case ('width') {
-          <div class="example-preview flex-column">
-            <nui-button width="auto">Auto Width</nui-button>
-            <nui-button width="full">Full Width</nui-button>
-            <nui-button width="fit">Fit Content</nui-button>
-          </div>
-        }
-
-        @case ('disabled') {
-          <div class="example-preview">
-            <nui-button [disabled]="true">Disabled Button</nui-button>
-            <nui-button variant="outline" [disabled]="true">Disabled Outline</nui-button>
-          </div>
-        }
-
-        @case ('events') {
-          <div class="example-preview">
-            <nui-button (onClick)="onButtonClick($event)">Click Event</nui-button>
-            <nui-button type="submit" (onClick)="onButtonClick($event)">Submit Form</nui-button>
-          </div>
-        }
-
-        @case ('directive') {
-          <div class="example-preview">
-            <button nuiButton>Native Button</button>
-            <button nuiButton variant="outline" color="primary">Primary Outline</button>
-            <button nuiButton variant="ghost" color="danger">Ghost Danger</button>
-            <button
-              nuiButton
-              [loading]="isLoading()"
-              loadingPosition="start"
-              (onClick)="simulateLoading()"
-            >
-              {{ isLoading() ? 'Loading...' : 'Click to Load' }}
-            </button>
-            <button nuiButton icon="ri-save-line">Save</button>
-            <button nuiButton icon="ri-download-line" iconPosition="end">Download</button>
-          </div>
-        }
-      }
-
-      <app-code-block [examples]="section.examples || []"></app-code-block>
-    </section>
-  }
-    </div>
+    </app-component-tabs>
   </div>
 </div>

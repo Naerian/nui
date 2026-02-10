@@ -49,6 +49,27 @@
     "license": "Incluye iconos de Remix Icon (Licencia MIT)",
     "copyright": "© 2025 NUI. Todos los derechos reservados (MIT)."
   },
+  "common": {
+    "tabs": {
+      "examples": "Ejemplos",
+      "api": "API",
+      "theming": "Theming"
+    },
+    "tables": {
+      "cssVariable": "Variable CSS",
+      "description": "Descripción",
+      "default": "Valor por defecto",
+      "variants": "Variantes",
+      "property": "Propiedad",
+      "type": "Tipo",
+      "info": "Información",
+      "event": "Evento",
+      "method": "Método",
+      "argument": "Argumento",
+      "returns": "Retorno",
+      "parameters": "Parámetros"
+    }
+  },
   "codeBlock": {
     "copy": "Copiar",
     "copied": "¡Copiado!",
@@ -446,12 +467,33 @@
         "note": "Puedes usar la directiva <code>nuiButton</code> en cualquier elemento HTML nativo como <code>&lt;button&gt;</code>, <code>&lt;a&gt;</code> o <code>&lt;div&gt;</code> para aplicar los estilos y comportamientos del botón NUI."
       },
       "api": {
-        "title": "API y referencia",
-        "description": "Documentación completa de inputs y outputs del componente Button para integrar en tus proyectos."
+        "inputs": {
+          "title": "Inputs",
+          "description": "Propiedades de entrada para configurar el comportamiento y apariencia del botón."
+        },
+        "outputs": {
+          "title": "Outputs",
+          "description": "Eventos que emite el componente Button."
+        },
+        "computed": {
+          "title": "Computed Properties",
+          "description": "Propiedades computadas reactivas (Signals) del componente."
+        },
+        "models": {
+          "title": "Modelos",
+          "description": "Modelos de datos relacionados con el componente Button."
+        }
       },
-      "styling": {
-        "title": "Estilos y personalización",
-        "description": "Personaliza la apariencia del botón mediante variables CSS. Controla tamaños, tipografía, colores y más."
+      "theming": {
+        "colors": {
+          "title": "Variables de color",
+          "description": "Variables CSS para personalizar colores por variante (solid, outline, ghost) y color (primary, secondary, etc.).",
+          "note": "Reemplaza <code>{color}</code> con cualquier color del sistema: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>."
+        },
+        "structure": {
+          "title": "Variables estructurales",
+          "description": "Variables CSS para espaciado, tamaños, tipografía y efectos visuales."
+        }
       }
     },
     "actionMenu": {

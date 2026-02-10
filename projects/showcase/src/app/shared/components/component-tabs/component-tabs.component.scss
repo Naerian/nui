@@ -1,0 +1,120 @@
+.nui-component-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  // ========================================
+  // Tabs Navigation
+  // ========================================
+  &__nav {
+    display: flex;
+    gap: 0.2rem;
+    border-bottom: 2px solid var(--nui-border-primary);
+  }
+
+  &__tab {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.25rem;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: var(--nui-button-radius-md);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: -2px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--nui-text-secondary);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    outline: none;
+
+    // Hover state
+    &:hover:not(&--active) {
+      color: var(--nui-text-primary);
+      background: transparent;
+      border-bottom-color: var(--nui-color-primary-alpha-80);
+    }
+
+    // Active state
+    &--active {
+      color: var(--nui-color-primary-alpha-80);
+      border-bottom-color: var(--nui-color-primary-alpha-80);
+      background-color: transparent;
+
+      i {
+        color: var(--nui-color-primary-alpha-80);
+      }
+    }
+
+    // Focus state (accesibilidad)
+    &:focus-visible {
+      outline: 2px solid var(--nui-primary);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    // Disabled state
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  // ========================================
+  // Tab Content
+  // ========================================
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    animation: fadeIn 0.3s ease-in-out;
+
+    // Secciones dentro del tab
+    .section {
+      scroll-margin-top: 100px; // Offset para sticky headers
+    }
+  }
+}
+
+// ========================================
+// Animations
+// ========================================
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ========================================
+// Responsive
+// ========================================
+@media (max-width: 768px) {
+  .nui-component-tabs {
+    &__nav {
+      padding: 0 0.25rem;
+    }
+
+    &__tab {
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+
+      i {
+        font-size: 1rem;
+      }
+    }
+
+    &__content {
+      gap: 2rem;
+    }
+  }
+}
