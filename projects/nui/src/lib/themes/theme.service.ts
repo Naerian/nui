@@ -661,7 +661,7 @@ export class ThemeService {
       /*Generic variables for avatars without a specific color, using the preset color as a base */
       --nui-avatar-default-bg: ${isDark ? 'var(--nui-bg-tertiary)' : 'var(--nui-bg-secondary)'};
       --nui-avatar-default-color: ${isDark ? 'var(--nui-text-primary)' : 'var(--nui-text-secondary)'};
-      --nui-avatar-border-inset: ${isDark ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)'};
+      --nui-avatar-border-outset: var(--nui-bg-secondary);
     `;
   }
 

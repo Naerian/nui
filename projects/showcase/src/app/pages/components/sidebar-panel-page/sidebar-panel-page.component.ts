@@ -4,6 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ButtonComponent, SidebarPanelService, SidebarPanelSize, SidebarPanelPosition } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
+import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';
 import { BaseComponentPage } from '../../../core/base/base-component-page';
 import { SIDEBAR_PANEL_PAGE_CONFIG } from './sidebar-panel-page.config';
 import { SidebarPanelExampleContentComponent } from './components/sidebar-panel-example-content/sidebar-panel-example-content.component';
@@ -31,12 +32,56 @@ import { SidebarPanelEventExampleComponent } from './components/sidebar-panel-ev
     ButtonComponent,
     SectionTitleComponent,
     CodeBlockComponent,
+    ComponentTabsComponent,
   ],
   templateUrl: './sidebar-panel-page.component.html',
   styleUrl: './sidebar-panel-page.component.scss',
 })
 export class SidebarPanelPageComponent extends BaseComponentPage {
-  pageConfig = SIDEBAR_PANEL_PAGE_CONFIG;
+  override pageConfig = SIDEBAR_PANEL_PAGE_CONFIG;
+
+  tabs: ComponentTab[] = [
+    {
+      id: 'examples',
+      label: 'common.tabs.examples',
+      icon: 'ri-code-s-slash-line',
+      sections: [
+        'basic',
+        'defaults',
+        'sizes',
+        'positions',
+        'html-content',
+        'template-content',
+        'dynamic-component',
+        'dynamic-component-events',
+        'minimizable',
+        'close-button',
+        'backdrop',
+        'custom-backdrop',
+        'multiple',
+        'footer-actions',
+      ],
+    },
+    {
+      id: 'api',
+      label: 'common.tabs.api',
+      icon: 'ri-braces-line',
+      sections: [
+        'api-service',
+        'api-ref-properties',
+        'api-ref-methods',
+        'api-config',
+        'api-custom-button',
+        'api-minimized-tab',
+      ],
+    },
+    {
+      id: 'theming',
+      label: 'common.tabs.theming',
+      icon: 'ri-palette-line',
+      sections: ['theming-colors', 'theming-layout', 'theming-typography', 'theming-elevation', 'theming-scrollbar', 'theming-examples'],
+    },
+  ];
 
   @ViewChild('userDetailsTemplate', { read: TemplateRef }) userDetailsTemplate!: TemplateRef<any>;
   @ViewChild('customFooterTemplate', { read: TemplateRef }) customFooterTemplate!: TemplateRef<any>;

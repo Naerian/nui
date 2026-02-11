@@ -85,6 +85,7 @@ $avatar-z-index-hover: 10 !default;
   --nui-avatar-border-radius-circular: #{$avatar-border-radius-circular};
   --nui-avatar-border-radius-square: #{$avatar-border-radius-square};
   --nui-avatar-border-width: #{$avatar-border-width};
+  --nui-avatar-border-width-bordered: calc(#{$avatar-border-width} * 2);
 
   // Typography
   --nui-avatar-font-weight: #{$avatar-font-weight};

@@ -161,6 +161,11 @@ export class AvatarComponent {
       classes.push(`nui-avatar--bordered`);
     }
 
+    // Si no tiene SRC o es FALLBACK, añadimos clase para centrar el contenido (iniciales o icono)
+    if (this.contentType() !== 'image') {
+      classes.push('nui-avatar--no-image');
+    }
+
     return classes.join(' ');
   });
 

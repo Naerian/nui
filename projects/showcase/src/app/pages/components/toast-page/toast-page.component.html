@@ -5,97 +5,135 @@
       <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
     </div>
 
-    <div class="docs-content">
-      @for (section of pageConfig.sections; track section.id) {
-    <section class="section">
-      <app-section-title
-        [title]="section.title | translate"
-        [anchor]="section.anchor"
-      ></app-section-title>
+    <app-component-tabs [tabs]="tabs" [sections]="pageConfig.sections" #tabsComp>
+      @if (tabsComp.activeSections(); as activeSections) {
+        @for (section of activeSections; track section.id) {
+          <div class="section">
+            <!-- Título de sección -->
+            <app-section-title
+              [anchor]="section.anchor"
+              [title]="section.title | translate"
+              [tabId]="tabsComp.activeTabId()"
+            ></app-section-title>
 
-      <p class="section-description" [innerHTML]="section.description | translate"></p>
+            @if (section.description) {
+              <p class="section-description" [innerHTML]="section.description | translate"></p>
+            }
 
-      @if (section.note; as note) {
-        <div class="section-note" [ngClass]="note.type">
-          <i [class]="getSectionNoteIcon(note)"></i>
-          <p [innerHTML]="note.content | translate"></p>
-        </div>
+            @if (section.note) {
+              <div class="section-note" [ngClass]="section.note.type">
+                @if (section.note.icon) {
+                  <i [class]="section.note.icon"></i>
+                }
+                <p [innerHTML]="section.note.content | translate"></p>
+              </div>
+            }
+
+            <!-- Contenido específico de cada sección -->
+            @switch (section.id) {
+              @case ('basic') {
+                <div class="example-preview">
+                  <nui-button [color]="'success'" (click)="showSuccess()">Success</nui-button>
+                  <nui-button [color]="'danger'" (click)="showError()">Error</nui-button>
+                  <nui-button [color]="'warning'" (click)="showWarning()">Warning</nui-button>
+                  <nui-button [color]="'info'" (click)="showInfo()">Info</nui-button>
+                </div>
+              }
+
+              @case ('with-title') {
+                <div class="example-preview">
+                  <nui-button [color]="'success'" (click)="showSuccessWithTitle()">
+                    Success with Title
+                  </nui-button>
+                  <nui-button [color]="'danger'" (click)="showErrorWithTitle()">
+                    Error with Title
+                  </nui-button>
+                </div>
+              }
+
+              @case ('with-actions') {
+                <div class="example-preview">
+                  <nui-button [color]="'primary'" (click)="showWithActions()">
+                    With Undo Action
+                  </nui-button>
+                </div>
+              }
+
+              @case ('positions') {
+                <div class="example-preview">
+                  <nui-button (click)="showTopPositions()">Top Positions</nui-button>
+                  <nui-button (click)="showBottomPositions()">Bottom Positions</nui-button>
+                  <nui-button (click)="showMiddlePositions()">Middle Positions</nui-button>
+                </div>
+              }
+
+              @case ('icon-top') {
+                <div class="example-preview">
+                  <nui-button (click)="showIconTopToast()">Show Toast with Top Icon</nui-button>
+                  <nui-button (click)="showIconTopWithTitle()">
+                    Show Toast with Top Icon and Title
+                  </nui-button>
+                  <nui-button (click)="showIconTopWithActions()">
+                    Show Toast with Top Icon and Actions
+                  </nui-button>
+                </div>
+              }
+
+              @case ('custom-icons') {
+                <div class="example-preview">
+                  <nui-button (click)="showWithoutIconToast()">Show Toast without Icon</nui-button>
+                  <nui-button (click)="showCustomIconToast()">
+                    Show Toast with Custom Icon
+                  </nui-button>
+                </div>
+              }
+
+              @case ('duration') {
+                <div class="example-preview">
+                  <nui-button (click)="showQuickToast()">Quick Toast (2s)</nui-button>
+                  <nui-button (click)="showLongToast()">Long Toast (10s)</nui-button>
+                  <nui-button (click)="showPersistentToast()">Persistent Toast</nui-button>
+                </div>
+              }
+
+              @case ('loading') {
+                <div class="example-preview">
+                  <nui-button (click)="showLoading()">Show Loading</nui-button>
+                </div>
+              }
+            }
+
+            <!-- Tabla de datos (para API o Theming) -->
+            @if (section.table) {
+              <div class="api-table">
+                <table>
+                  <thead>
+                    <tr>
+                      @for (header of section.table.headers; track $index) {
+                        <th [innerHTML]="header | translate"></th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of section.table.rows; track $index) {
+                      <tr>
+                        @for (cell of row; track $index) {
+                          <td [innerHTML]="cell | translate"></td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+
+            <!-- Code blocks asociados a esta sección -->
+            @if (section.examples && section.examples.length > 0) {
+              <app-code-block [examples]="section.examples"></app-code-block>
+            }
+          </div>
+        }
       }
-
-      @switch (section.id) {
-        @case ('basic') {
-          <div class="example-preview">
-            <nui-button [color]="'success'" (click)="showSuccess()">Success</nui-button>
-            <nui-button [color]="'danger'" (click)="showError()">Error</nui-button>
-            <nui-button [color]="'warning'" (click)="showWarning()">Warning</nui-button>
-            <nui-button [color]="'info'" (click)="showInfo()">Info</nui-button>
-          </div>
-        }
-
-        @case ('with-title') {
-          <div class="example-preview">
-            <nui-button [color]="'success'" (click)="showSuccessWithTitle()">
-              Success with Title
-            </nui-button>
-            <nui-button [color]="'danger'" (click)="showErrorWithTitle()">
-              Error with Title
-            </nui-button>
-          </div>
-        }
-
-        @case ('with-actions') {
-          <div class="example-preview">
-            <nui-button [color]="'primary'" (click)="showWithActions()">
-              With Undo Action
-            </nui-button>
-          </div>
-        }
-
-        @case ('positions') {
-          <div class="example-preview">
-            <nui-button (click)="showTopPositions()">Top Positions</nui-button>
-            <nui-button (click)="showBottomPositions()">Bottom Positions</nui-button>
-            <nui-button (click)="showMiddlePositions()">Middle Positions</nui-button>
-          </div>
-        }
-
-        @case ('icon-top') {
-          <div class="example-preview">
-            <nui-button (click)="showIconTopToast()">Show Toast with Top Icon</nui-button>
-            <nui-button (click)="showIconTopWithTitle()">
-              Show Toast with Top Icon and Title
-            </nui-button>
-            <nui-button (click)="showIconTopWithActions()">
-              Show Toast with Top Icon and Actions
-            </nui-button>
-          </div>
-        }
-
-        @case ('custom-icons') {
-          <div class="example-preview">
-            <nui-button (click)="showWithoutIconToast()">Show Toast without Icon</nui-button>
-            <nui-button (click)="showCustomIconToast()">Show Toast with Custom Icon</nui-button>
-          </div>
-        }
-
-        @case ('duration') {
-          <div class="example-preview">
-            <nui-button (click)="showQuickToast()">Quick Toast (2s)</nui-button>
-            <nui-button (click)="showLongToast()">Long Toast (10s)</nui-button>
-            <nui-button (click)="showPersistentToast()">Persistent Toast</nui-button>
-          </div>
-        }
-
-        @case ('loading') {
-          <div class="example-preview">
-            <nui-button (click)="showLoading()">Show Loading</nui-button>
-          </div>
-        }
-      }
-
-      <app-code-block [examples]="section.examples || []"></app-code-block>
-    </section>
-      }
-    </div>
+    </app-component-tabs>
   </div>
 </div>

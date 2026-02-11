@@ -5,121 +5,157 @@
       <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
     </div>
 
-    <div class="docs-content">
-      @for (section of pageConfig.sections; track section.id) {
-    <section class="section">
-      <app-section-title
-        [title]="section.title | translate"
-        [anchor]="section.anchor"
-      ></app-section-title>
+    <app-component-tabs [tabs]="tabs" [sections]="pageConfig.sections" #tabsComp>
+      @if (tabsComp.activeSections(); as activeSections) {
+        @for (section of activeSections; track section.id) {
+          <div class="section">
+            <!-- Título de sección -->
+            <app-section-title
+              [anchor]="section.anchor"
+              [title]="section.title | translate"
+              [tabId]="tabsComp.activeTabId()"
+            ></app-section-title>
 
-      <p class="section-description" [innerHTML]="section.description | translate"></p>
+            @if (section.description) {
+              <p class="section-description" [innerHTML]="section.description | translate"></p>
+            }
 
-      @if (section.note; as note) {
-        <div class="section-note" [ngClass]="note.type">
-          <i [class]="getSectionNoteIcon(note)"></i>
-          <p [innerHTML]="note.content | translate"></p>
-        </div>
+            @if (section.note) {
+              <div class="section-note" [ngClass]="section.note.type">
+                @if (section.note.icon) {
+                  <i [class]="section.note.icon"></i>
+                }
+                <p [innerHTML]="section.note.content | translate"></p>
+              </div>
+            }
+
+            <!-- Contenido específico de cada sección -->
+            @switch (section.id) {
+              @case ('basic') {
+                <div class="example-preview">
+                  <button nuiButton nuiTooltip="Save changes">Save</button>
+                  <button nuiButton nuiTooltip="No arrow" [nuiTooltipShowArrow]="false">No Arrow</button>
+                </div>
+              }
+
+              @case ('positions') {
+                <div class="example-preview">
+                  <button nuiButton nuiTooltip="Tooltip top" nuiTooltipPosition="top">Top</button>
+                  <button nuiButton nuiTooltip="Tooltip bottom" nuiTooltipPosition="bottom">
+                    Bottom
+                  </button>
+                  <button nuiButton nuiTooltip="Tooltip left" nuiTooltipPosition="left">Left</button>
+                  <button nuiButton nuiTooltip="Tooltip right" nuiTooltipPosition="right">Right</button>
+                </div>
+              }
+
+              @case ('events') {
+                <div class="example-preview">
+                  <button nuiButton nuiTooltip="Tooltip on hover">Hover</button>
+                  <button nuiButton nuiTooltip="Tooltip on click" nuiTooltipEvent="click">Click</button>
+                  <input
+                    type="text"
+                    placeholder="Focus to see tooltip"
+                    nuiTooltip="Tooltip on focus"
+                    nuiTooltipEvent="focus"
+                    class="example-input"
+                  />
+                </div>
+              }
+
+              @case ('delays') {
+                <div class="example-preview">
+                  <button nuiButton nuiTooltip="Appears after 500ms" [nuiTooltipShowDelay]="500">
+                    Input Delay
+                  </button>
+                  <button nuiButton nuiTooltip="Disappears after 1s" [nuiTooltipHideDelay]="1000">
+                    Output Delay
+                  </button>
+                  <button
+                    nuiButton
+                    nuiTooltip="No delays"
+                    [nuiTooltipShowDelay]="0"
+                    [nuiTooltipHideDelay]="0"
+                  >
+                    No Delays
+                  </button>
+                </div>
+              }
+
+              @case ('templates') {
+                <div class="example-preview">
+                  <button nuiButton [nuiTooltip]="tooltipTemplate">View Info</button>
+                </div>
+
+                <ng-template #tooltipTemplate>
+                  <div class="custom-tooltip">
+                    <strong>Important Information</strong>
+                    <p>Custom content</p>
+                  </div>
+                </ng-template>
+              }
+
+              @case ('interactive') {
+                <div class="example-preview">
+                  <button nuiButton [nuiTooltip]="interactiveTemplate" [nuiTooltipInteractive]="true">
+                    Interactive Tooltip
+                  </button>
+                </div>
+
+                <ng-template #interactiveTemplate>
+                  <div class="interactive-tooltip">
+                    <h4>Available Actions</h4>
+                    <button nuiButton size="sm" (click)="doAction()">Execute Action</button>
+                  </div>
+                </ng-template>
+              }
+
+              @case ('disabled') {
+                <div class="example-preview">
+                  <button nuiButton nuiTooltip="Will not show" [nuiTooltipDisabled]="true">
+                    Disabled
+                  </button>
+                  <button nuiButton nuiTooltip="Conditional tooltip" [nuiTooltipDisabled]="isDisabled()">
+                    Conditional
+                  </button>
+                  <button nuiButton (click)="toggleDisabled()">
+                    Toggle (Status: {{ !isDisabled() }})
+                  </button>
+                </div>
+              }
+            }
+
+            <!-- Tabla de datos (para API o Theming) -->
+            @if (section.table) {
+              <div class="api-table">
+                <table>
+                  <thead>
+                    <tr>
+                      @for (header of section.table.headers; track $index) {
+                        <th>{{ header | translate }}</th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of section.table.rows; track $index) {
+                      <tr>
+                        @for (cell of row; track $index) {
+                          <td [innerHTML]="cell | translate"></td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+
+            <!-- Code blocks asociados a esta sección -->
+            @if (section.examples && section.examples.length > 0) {
+              <app-code-block [examples]="section.examples"></app-code-block>
+            }
+          </div>
+        }
       }
-
-      @switch (section.id) {
-        @case ('basic') {
-          <div class="example-preview">
-            <button nuiButton nuiTooltip="Save changes">Save</button>
-            <button nuiButton nuiTooltip="No arrow" [nuiTooltipShowArrow]="false">No Arrow</button>
-          </div>
-        }
-
-        @case ('positions') {
-          <div class="example-preview">
-            <button nuiButton nuiTooltip="Tooltip top" nuiTooltipPosition="top">Top</button>
-            <button nuiButton nuiTooltip="Tooltip bottom" nuiTooltipPosition="bottom">
-              Bottom
-            </button>
-            <button nuiButton nuiTooltip="Tooltip left" nuiTooltipPosition="left">Left</button>
-            <button nuiButton nuiTooltip="Tooltip right" nuiTooltipPosition="right">Right</button>
-          </div>
-        }
-
-        @case ('events') {
-          <div class="example-preview">
-            <button nuiButton nuiTooltip="Tooltip on hover">Hover</button>
-            <button nuiButton nuiTooltip="Tooltip on click" nuiTooltipEvent="click">Click</button>
-            <input
-              type="text"
-              placeholder="Focus to see tooltip"
-              nuiTooltip="Tooltip on focus"
-              nuiTooltipEvent="focus"
-              class="example-input"
-            />
-          </div>
-        }
-
-        @case ('delays') {
-          <div class="example-preview">
-            <button nuiButton nuiTooltip="Appears after 500ms" [nuiTooltipShowDelay]="500">
-              Input Delay
-            </button>
-            <button nuiButton nuiTooltip="Disappears after 1s" [nuiTooltipHideDelay]="1000">
-              Output Delay
-            </button>
-            <button
-              nuiButton
-              nuiTooltip="No delays"
-              [nuiTooltipShowDelay]="0"
-              [nuiTooltipHideDelay]="0"
-            >
-              No Delays
-            </button>
-          </div>
-        }
-
-        @case ('templates') {
-          <div class="example-preview">
-            <button nuiButton [nuiTooltip]="tooltipTemplate">View Info</button>
-          </div>
-
-          <ng-template #tooltipTemplate>
-            <div class="custom-tooltip">
-              <strong>Important Information</strong>
-              <p>Custom content</p>
-            </div>
-          </ng-template>
-        }
-
-        @case ('interactive') {
-          <div class="example-preview">
-            <button nuiButton [nuiTooltip]="interactiveTemplate" [nuiTooltipInteractive]="true">
-              Interactive Tooltip
-            </button>
-          </div>
-
-          <ng-template #interactiveTemplate>
-            <div class="interactive-tooltip">
-              <h4>Available Actions</h4>
-              <button nuiButton size="sm" (click)="doAction()">Execute Action</button>
-            </div>
-          </ng-template>
-        }
-
-        @case ('disabled') {
-          <div class="example-preview">
-            <button nuiButton nuiTooltip="Will not show" [nuiTooltipDisabled]="true">
-              Disabled
-            </button>
-            <button nuiButton nuiTooltip="Conditional tooltip" [nuiTooltipDisabled]="isDisabled()">
-              Conditional
-            </button>
-            <button nuiButton (click)="toggleDisabled()">
-              Toggle (Status: {{ !isDisabled() }})
-            </button>
-          </div>
-        }
-      }
-
-      <app-code-block [examples]="section?.examples ?? []"></app-code-block>
-    </section>
-      }
-    </div>
+    </app-component-tabs>
   </div>
 </div>

@@ -118,7 +118,7 @@
                   <thead>
                     <tr>
                       @for (header of section.table.headers; track $index) {
-                        <th>{{ header | translate }}</th>
+                        <th [innerHTML]="header | translate"></th>
                       }
                     </tr>
                   </thead>
@@ -126,7 +126,7 @@
                     @for (row of section.table.rows; track $index) {
                       <tr>
                         @for (cell of row; track $index) {
-                          <td>{{ cell | translate }}</td>
+                          <td [innerHTML]="cell | translate"></td>
                         }
                       </tr>
                     }

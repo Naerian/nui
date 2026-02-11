@@ -928,177 +928,294 @@
     "toast": {
       "title": "Toast",
       "subtitle": "Notificaciones temporales no intrusivas para feedback del usuario",
-      "basic": {
-        "title": "Toasts básicos",
-        "description": "Muestra notificaciones simples con diferentes tipos: success, error, warning e info."
-      },
-      "withTitle": {
-        "title": "Toasts con título",
-        "description": "Agrega un título para dar más contexto a la notificación."
-      },
-      "withActions": {
-        "title": "Toasts con acciones",
-        "description": "Incluye botones de acción para que el usuario pueda interactuar con la notificación."
-      },
-      "positions": {
-        "title": "Posiciones",
-        "description": "Controla dónde aparecen los toasts en la pantalla: top-left, top-center, top-right, bottom-left, bottom-center, bottom-right."
-      },
-      "iconTop": {
-        "title": "Icono en la parte superior",
-        "description": "Muestra el icono del toast centrado en la parte superior para un diseño más destacado.",
-        "note": "Usa la propiedad <code>iconPosition='top'</code> para centrar el icono en la parte superior del toast. Esto es especialmente útil para toasts con títulos y acciones, ya que mejora la jerarquía visual y hace que el icono sea más prominente."
-      },
-      "icons": {
-        "title": "Iconos personalizados",
-        "description": "Pues mostrar los iconos por defecto según el tipo de toast o usar iconos personalizados. Incluso puedes ocultar el icono si lo deseas.",
-        "note": "Usa la propiedad <code>icon</code>. Si usas el valor <code>false</code> se ocultará el icono. Si usas <code>string</code> puedes especificar un icono personalizado de <strong>Remix Icon</strong>. Por defecto se muestran iconos según el tipo de toast con <code>icon</code> con valor <code>true</code>."
-      },
-      "duration": {
-        "title": "Duración",
-        "description": "Configura cuánto tiempo permanece visible el toast antes de desaparecer. Usa 0 para toasts que no se cierran automáticamente."
-      },
-      "loading": {
-        "title": "Toast de carga",
-        "description": "Muestra un toast con estado de carga que puede actualizarse dinámicamente cuando la operación completa."
+      "examples": {
+        "basic": {
+          "title": "Toasts básicos",
+          "description": "Muestra notificaciones simples con diferentes tipos: success, error, warning e info."
+        },
+        "withTitle": {
+          "title": "Toasts con título",
+          "description": "Agrega un título para dar más contexto a la notificación."
+        },
+        "withActions": {
+          "title": "Toasts con acciones",
+          "description": "Incluye botones de acción para que el usuario pueda interactuar con la notificación."
+        },
+        "positions": {
+          "title": "Posiciones",
+          "description": "Controla dónde aparecen los toasts en la pantalla: top-left, top-center, top-right, bottom-left, bottom-center, bottom-right."
+        },
+        "iconTop": {
+          "title": "Icono en la parte superior",
+          "description": "Muestra el icono del toast centrado en la parte superior para un diseño más destacado.",
+          "note": "Usa la propiedad <code>iconPosition='top'</code> para centrar el icono en la parte superior del toast. Esto es especialmente útil para toasts con títulos y acciones, ya que mejora la jerarquía visual y hace que el icono sea más prominente."
+        },
+        "icons": {
+          "title": "Iconos personalizados",
+          "description": "Pues mostrar los iconos por defecto según el tipo de toast o usar iconos personalizados. Incluso puedes ocultar el icono si lo deseas.",
+          "note": "Usa la propiedad <code>icon</code>. Si usas el valor <code>false</code> se ocultará el icono. Si usas <code>string</code> puedes especificar un icono personalizado de <strong>Remix Icon</strong>. Por defecto se muestran iconos según el tipo de toast con <code>icon</code> con valor <code>true</code>."
+        },
+        "duration": {
+          "title": "Duración",
+          "description": "Configura cuánto tiempo permanece visible el toast antes de desaparecer. Usa 0 para toasts que no se cierran automáticamente."
+        },
+        "loading": {
+          "title": "Toast de carga",
+          "description": "Muestra un toast con estado de carga que puede actualizarse dinámicamente cuando la operación completa."
+        }
       },
       "api": {
-        "title": "API y referencia",
-        "description": "Documentación completa del ToastService, interfaces y uso avanzado del sistema de notificaciones."
+        "service": {
+          "title": "ToastService",
+          "description": "Servicio principal para mostrar notificaciones toast. Proporciona métodos para crear, actualizar y cerrar toasts."
+        },
+        "config": {
+          "title": "ToastConfig",
+          "description": "Interfaz de configuración individual por toast. Permite sobrescribir la configuración global para toasts específicos."
+        },
+        "global": {
+          "title": "Configuración global",
+          "description": "Configuración global del sistema de toasts. Se puede establecer durante la inicialización de la aplicación."
+        },
+        "types": {
+          "title": "Tipos e interfaces",
+          "description": "Definiciones de tipos TypeScript para el sistema de toasts: ToastType, ToastPosition, ToastAction, ToastRef."
+        },
+        "usage": {
+          "title": "Ejemplo de uso completo",
+          "description": "Ejemplo completo integrando ToastService en un componente con diferentes escenarios de uso."
+        }
       },
-      "styling": {
-        "title": "Estilos y personalización",
-        "description": "Personaliza la apariencia de los toasts mediante variables CSS. Controla colores, tamaño, animaciones y más."
+      "theming": {
+        "container": {
+          "title": "Variables del contenedor",
+          "description": "Variables CSS para personalizar el contenedor general de los toasts (fondo, borde, sombra, espaciado)."
+        },
+        "typography": {
+          "title": "Variables de tipografía",
+          "description": "Variables CSS para personalizar el texto de los toasts (título, mensaje, tamaño de fuente, peso)."
+        },
+        "icon": {
+          "title": "Variables del icono",
+          "description": "Variables CSS para personalizar el icono del toast (tamaño, color, espaciado)."
+        },
+        "close": {
+          "title": "Variables del botón de cerrar",
+          "description": "Variables CSS para personalizar el botón de cerrar (tamaño, color, hover)."
+        },
+        "progress": {
+          "title": "Variables de barra de progreso",
+          "description": "Variables CSS para personalizar la barra de progreso automática (color, altura, animación)."
+        },
+        "types": {
+          "title": "Variables por tipo",
+          "description": "Variables CSS específicas para cada tipo de toast (success, error, warning, info, loading)."
+        },
+        "animations": {
+          "title": "Variables de animación",
+          "description": "Variables CSS para personalizar las animaciones de entrada/salida de los toasts."
+        },
+        "examples": {
+          "title": "Ejemplo de personalización",
+          "description": "Ejemplo completo de personalización de toasts con variables CSS para crear un tema oscuro."
+        }
       }
     },
     "sidebar-panel": {
       "title": "Sidebar Panel",
       "subtitle": "Paneles laterales deslizantes con CDK Overlay para mostrar contenido dinámico",
-      "basic": {
-        "title": "Uso básico",
-        "description": "Abre un panel lateral desde el servicio SidebarPanelService. El panel se desliza desde el borde de la pantalla con una animación suave."
-      },
-      "default": {
-        "title": "Configuración predeterminada",
-        "description": "El panel se abrirá utilizando los valores predeterminados globales configurados.",
-        "note": "Si no se proporcionan opciones al abrir el panel, se usarán los valores predeterminados globales definidos en la configuración de NUI de <code>provideNUIConfig({ sidebarPanel: {...} })</code>."
-      },
-      "sizes": {
-        "title": "Tamaños",
-        "description": "Permite definir el tamaño con el que se abrirá el panel.",
-        "note": "Puedes usar valores predefinidos como <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> y <code>'full'</code>."
-      },
-      "positions": {
-        "title": "Posiciones",
-        "description": "Controla desde qué lado de la pantalla se desliza el panel.",
-        "note": "Usa la propiedad <code>position</code> para definir el lado desde el que se abrirá el panel usando <code>'right'</code>, <code>'left'</code>, <code>'top'</code> o <code>'bottom'</code> como valores."
-      },
-      "dynamicComponent": {
-        "title": "Componente dinámico",
-        "description": "Carga cualquier componente Angular dentro del panel y pasa datos mediante inyección de dependencias",
-        "note": "Usa la propiedad <code>data</code> para pasar datos al componente cargado dinámicamente. Estos datos se inyectan usando el token <code>SIDEBAR_PANEL_DATA</code>. Si además queremos hacer referencia al propio panel desde el componente cargado, podemos inyectar <code>SIDEBAR_PANEL_REF</code>."
-      },
-      "htmlContent": {
-        "title": "Contenido HTML personalizado",
-        "description": "Renderiza contenido HTML arbitrario dentro del panel usando templates de Angular.",
-        "note": "Usa la propiedad <code>htmlContent</code> para pasar una cadena HTML. Puedes generar el HTML dinámicamente o concatenarlo con tus datos. Esta opción no requiere crear un componente Angular completo."
-      },
-      "templateContent": {
-        "title": "Contenido de plantilla personalizada (TemplateRef)",
-        "description": "Usa templates de Angular con datos de contexto y funciones sin necesidad de un componente completo. Ideal para contenido reutilizable con datos dinámicos.",
-        "note": "Usa la propiedad <code>contentTemplate</code> para pasar un <code>TemplateRef</code> y <code>templateContext</code> para pasar datos y funciones. El template recibe el contexto mediante variables <code>let-varname</code>. Esto permite interactividad sin crear un componente."
-      },
-      "events": {
-        "title": "Eventos @Outputs de componentes dinámicos",
-        "description": "Escucha eventos emitidos por el componente cargado dentro del panel para manejar interacciones y cerrar el panel cuando sea necesario.",
-        "note": "Puedes suscribirte a los outputs del componente cargado dinámicamente. Usa <code>panelRef.componentInstance</code> para acceder a la instancia del componente hijo y suscribirte a sus <code>@Output()</code>."
-      },
-      "minimizable": {
-        "title": "Panel minimizable",
-        "description": "Los paneles pueden minimizarse a una pestaña que <strong>quedará ubicada en el lugar desde el que se abre el Sidebar</strong> para liberar espacio en pantalla mientras se preserva el estado, pudiendo restaurarlo cuando se desee.",
-        "note": "Utiliza el atributo <code>minimizable</code> para convertir el Sidebar en minimizable. Además, podrás usar el método <code>minimize()</code> del SidebarPanel para minimizar el panel programáticamente y <code>restore()</code> para restaurarlo. Si <code>minimizable</code> está habilitado, el atributo <code>id</code> es obligatorio para identificar el panel minimizado. También puedes comprobar si el Sidebar está minimizado mediante <code>isMinimized</code>.<br><br><strong>Customización de pestañas:</strong> Puedes personalizar el icono, agregar texto, aplicar CSS personalizado o usar un template completamente custom mediante <code>minimizedTabCustomization</code>. Para botones flotantes con posicionamiento libre (ej: chat bottom-right), usa <code>standalone: true</code> para renderizar fuera del contenedor agrupado y evitar restricciones de posicionamiento."
-      },
-      "closeButton": {
-        "title": "Botón de cerrar",
-        "description": "Controla la visibilidad del botón de cerrar en el header del panel.",
-        "note": "Usa la propiedad <code>showCloseButton</code> para mostrar u ocultar el botón de cerrar en el header del panel."
-      },
-      "noBackdrop": {
-        "title": "Sin backdrop",
-        "description": "Abre el panel sin un fondo oscuro detrás. Útil para paneles menos intrusivos o cuando el contexto visual es importante.",
-        "note": "Usa la propiedad <code>hasBackdrop</code> y configúrala en <code>false</code> para abrir el panel sin backdrop."
-      },
-      "backdrop": {
-        "title": "Backdrop",
-        "description": "Agrega un fondo oscuro detrás del panel para crear una experiencia modal. Controla si el click en el backdrop cierra o no el panel.",
-        "note": "Usa la propiedad <code>hasBackdrop</code> para habilitar / deshabilitar el backdrop (por defecto <code>true</code>) y <code>closeOnBackdropClick</code> para controlar si el click en el backdrop cierra el panel."
-      },
-      "customBackdrop": {
-        "title": "Backdrop personalizado",
-        "description": "Personaliza el backdrop con clases CSS custom. Puedes aplicar efectos como blur, colores personalizados y transiciones.",
-        "note": "Usa la propiedad <code>backdropClass</code> para agregar clases CSS personalizadas al backdrop del panel. Puedes añadir una única clase o un <code>array</code> de clases."
-      },
-      "multiple": {
-        "title": "Múltiples paneles",
-        "description": "Abre múltiples paneles simultáneamente desde diferentes lados. Controla el apilamiento con z-index y cierra todos a la vez.",
-        "note": "Cada panel abierto es independiente y puede tener su propia configuración. Usa el método <code>closeAll()</code> del servicio <code>SidebarPanelService</code> para cerrar todos los paneles abiertos programáticamente de forma simultánea."
-      },
-      "footer-actions": {
-        "title": "Acciones en el footer",
-        "description": "Agrega botones de acción en el footer del panel.",
-        "note": "Usa <code>customButtons</code> para acciones simples o <code>footerTemplate</code> para layouts completamente personalizados. Puedes combinar múltiples botones con las diferentes variantes y colores de NUI."
+      "examples": {
+        "basic": {
+          "title": "Uso básico",
+          "description": "Abre un panel lateral desde el servicio SidebarPanelService. El panel se desliza desde el borde de la pantalla con una animación suave."
+        },
+        "defaults": {
+          "title": "Configuración predeterminada",
+          "description": "El panel se abrirá utilizando los valores predeterminados globales configurados.",
+          "note": "Si no se proporcionan opciones al abrir el panel, se usarán los valores predeterminados globales definidos en la configuración de NUI de <code>provideNUIConfig({ sidebarPanel: {...} })</code>."
+        },
+        "sizes": {
+          "title": "Tamaños",
+          "description": "Permite definir el tamaño con el que se abrirá el panel.",
+          "note": "Puedes usar valores predefinidos como <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> y <code>'full'</code>."
+        },
+        "positions": {
+          "title": "Posiciones",
+          "description": "Controla desde qué lado de la pantalla se desliza el panel.",
+          "note": "Usa la propiedad <code>position</code> para definir el lado desde el que se abrirá el panel usando <code>'right'</code>, <code>'left'</code>, <code>'top'</code> o <code>'bottom'</code> como valores."
+        },
+        "html-content": {
+          "title": "Contenido HTML personalizado",
+          "description": "Renderiza contenido HTML arbitrario dentro del panel usando templates de Angular.",
+          "note": "Usa la propiedad <code>htmlContent</code> para pasar una cadena HTML. Puedes generar el HTML dinámicamente o concatenarlo con tus datos. Esta opción no requiere crear un componente Angular completo."
+        },
+        "template-content": {
+          "title": "Contenido de plantilla personalizada (TemplateRef)",
+          "description": "Usa templates de Angular con datos de contexto y funciones sin necesidad de un componente completo. Ideal para contenido reutilizable con datos dinámicos.",
+          "note": "Usa la propiedad <code>contentTemplate</code> para pasar un <code>TemplateRef</code> y <code>templateContext</code> para pasar datos y funciones. El template recibe el contexto mediante variables <code>let-varname</code>. Esto permite interactividad sin crear un componente."
+        },
+        "dynamic-component": {
+          "title": "Componente dinámico",
+          "description": "Carga cualquier componente Angular dentro del panel y pasa datos mediante inyección de dependencias",
+          "note": "Usa la propiedad <code>data</code> para pasar datos al componente cargado dinámicamente. Estos datos se inyectan usando el token <code>SIDEBAR_PANEL_DATA</code>. Si además queremos hacer referencia al propio panel desde el componente cargado, podemos inyectar <code>SIDEBAR_PANEL_REF</code>."
+        },
+        "dynamic-component-events": {
+          "title": "Eventos @Outputs de componentes dinámicos",
+          "description": "Escucha eventos emitidos por el componente cargado dentro del panel para manejar interacciones y cerrar el panel cuando sea necesario.",
+          "note": "Puedes suscribirte a los outputs del componente cargado dinámicamente. Usa <code>panelRef.componentInstance</code> para acceder a la instancia del componente hijo y suscribirte a sus <code>@Output()</code>."
+        },
+        "minimizable": {
+          "title": "Panel minimizable",
+          "description": "Los paneles pueden minimizarse a una pestaña que <strong>quedará ubicada en el lugar desde el que se abre el Sidebar</strong> para liberar espacio en pantalla mientras se preserva el estado, pudiendo restaurarlo cuando se desee.",
+          "note": "Utiliza el atributo <code>minimizable</code> para convertir el Sidebar en minimizable. Además, podrás usar el método <code>minimize()</code> del SidebarPanel para minimizar el panel programáticamente y <code>restore()</code> para restaurarlo. Si <code>minimizable</code> está habilitado, el atributo <code>id</code> es obligatorio para identificar el panel minimizado. También puedes comprobar si el Sidebar está minimizado mediante <code>isMinimized</code>.<br><br><strong>Customización de pestañas:</strong> Puedes personalizar el icono, agregar texto, aplicar CSS personalizado o usar un template completamente custom mediante <code>minimizedTabCustomization</code>. Para botones flotantes con posicionamiento libre (ej: chat bottom-right), usa <code>standalone: true</code> para renderizar fuera del contenedor agrupado y evitar restricciones de posicionamiento."
+        },
+        "close-button": {
+          "title": "Botón de cerrar",
+          "description": "Controla la visibilidad del botón de cerrar en el header del panel.",
+          "note": "Usa la propiedad <code>showCloseButton</code> para mostrar u ocultar el botón de cerrar en el header del panel."
+        },
+        "backdrop": {
+          "title": "Backdrop",
+          "description": "Agrega un fondo oscuro detrás del panel para crear una experiencia modal. Controla si el click en el backdrop cierra o no el panel.",
+          "note": "Usa la propiedad <code>hasBackdrop</code> para habilitar / deshabilitar el backdrop (por defecto <code>true</code>) y <code>closeOnBackdropClick</code> para controlar si el click en el backdrop cierra el panel."
+        },
+        "custom-backdrop": {
+          "title": "Backdrop personalizado",
+          "description": "Personaliza el backdrop con clases CSS custom. Puedes aplicar efectos como blur, colores personalizados y transiciones.",
+          "note": "Usa la propiedad <code>backdropClass</code> para agregar clases CSS personalizadas al backdrop del panel. Puedes añadir una única clase o un <code>array</code> de clases."
+        },
+        "multiple": {
+          "title": "Múltiples paneles",
+          "description": "Abre múltiples paneles simultáneamente desde diferentes lados. Controla el apilamiento con z-index y cierra todos a la vez.",
+          "note": "Cada panel abierto es independiente y puede tener su propia configuración. Usa el método <code>closeAll()</code> del servicio <code>SidebarPanelService</code> para cerrar todos los paneles abiertos programáticamente de forma simultánea."
+        },
+        "footer-actions": {
+          "title": "Acciones en el footer",
+          "description": "Agrega botones de acción en el footer del panel.",
+          "note": "Usa <code>customButtons</code> para acciones simples o <code>footerTemplate</code> para layouts completamente personalizados. Puedes combinar múltiples botones con las diferentes variantes y colores de NUI."
+        }
       },
       "api": {
-        "title": "API",
-        "description": "Interfaces y métodos disponibles del componente SidebarPanel."
+        "service": {
+          "title": "SidebarPanelService",
+          "description": "Métodos del servicio para gestionar paneles laterales"
+        },
+        "ref-properties": {
+          "title": "SidebarPanelRef (Propiedades)",
+          "description": "Propiedades de la referencia del panel lateral"
+        },
+        "ref-methods": {
+          "title": "SidebarPanelRef (Métodos)",
+          "description": "Métodos de la referencia del panel lateral para control y eventos"
+        },
+        "config": {
+          "title": "SidebarPanelConfig",
+          "description": "Configuración completa del panel lateral"
+        },
+        "custom-button": {
+          "title": "SidebarPanelCustomButton",
+          "description": "Configuración de botones personalizados del footer"
+        },
+        "minimized-tab": {
+          "title": "MinimizedTabCustomization",
+          "description": "Customización de la pestaña cuando el panel está minimizado"
+        }
       },
-      "styling": {
-        "title": "Estilos y Personalización",
-        "description": "Personaliza la apariencia del panel mediante variables CSS. Puedes sobrescribir estas variables en tu tema personalizado."
+      "theming": {
+        "colors": {
+          "title": "Variables de color",
+          "description": "Variables CSS para controlar los colores del panel lateral: fondo, texto, bordes y overlay. Estas variables se adaptan automáticamente al modo claro/oscuro del tema activo."
+        },
+        "layout": {
+          "title": "Variables de layout",
+          "description": "Variables CSS para controlar el tamaño y espaciado del panel lateral: presets de tamaño predefinidos (xs a full) y padding del header y contenido"
+        },
+        "typography": {
+          "title": "Variables de tipografía",
+          "description": "Variables CSS para controlar la tipografía del título del panel lateral"
+        },
+        "elevation": {
+          "title": "Variables de elevación",
+          "description": "Variables CSS para controlar la sombra y z-index del panel lateral y del overlay"
+        },
+        "scrollbar": {
+          "title": "Variables de scrollbar",
+          "description": "Variables CSS para controlar la apariencia de la barra de desplazamiento del panel lateral"
+        },
+        "examples": {
+          "title": "Ejemplos de personalización",
+          "description": "Ejemplos SCSS para personalizar los estilos del panel lateral en tu aplicación"
+        }
       }
     },
     "tooltip": {
       "title": "Tooltip",
       "subtitle": "Tooltips informativos con soporte para texto y templates personalizados",
-      "basic": {
-        "title": "Tooltips básicos",
-        "description": "Muestra tooltips simples con texto al hacer hover.",
-        "note": "Puedes desactivar la flecha con <code>tooltipShowArrow</code>."
-      },
-      "positions": {
-        "title": "Posiciones",
-        "description": "Controla la posición del tooltip respecto al elemento: top (predeterminado), bottom, left, right."
-      },
-      "events": {
-        "title": "Eventos",
-        "description": "Define qué evento dispara el tooltip: hover (predeterminado), click, focus, o manual para control programático."
-      },
-      "delays": {
-        "title": "Delays",
-        "description": "Configura los retrasos antes de mostrar y ocultar el tooltip.",
-        "note": "Usa las propiedades <code>tooltipShowDelay</code> y <code>tooltipHideDelay</code> para ajustar los tiempos de espera."
-      },
-      "templates": {
-        "title": "Templates personalizados",
-        "description": "Usa templates de Angular para mostrar contenido HTML enriquecido en el tooltip."
-      },
-      "interactive": {
-        "title": "Tooltips interactivos",
-        "description": "Permite interactuar con el contenido del tooltip. Útil para incluir botones o enlaces.",
-        "note": "Habilita la propiedad <code>tooltipInteractive</code> para permitir interacción dentro del tooltip sin que se cierre automáticamente al mover el cursor."
-      },
-      "disabled": {
-        "title": "Estado deshabilitado",
-        "description": "Controla dinámicamente si el tooltip está habilitado o deshabilitado.",
-        "note": "Usa la propiedad <code>tooltipDisabled</code> para activar o desactivar el tooltip según sea necesario."
+      "examples": {
+        "basic": {
+          "title": "Tooltips básicos",
+          "description": "Muestra tooltips simples con texto al hacer hover.",
+          "note": "Puedes desactivar la flecha con <code>nuiTooltipShowArrow</code>."
+        },
+        "positions": {
+          "title": "Posiciones",
+          "description": "Controla la posición del tooltip respecto al elemento: top (predeterminado), bottom, left, right."
+        },
+        "events": {
+          "title": "Eventos",
+          "description": "Define qué evento dispara el tooltip: hover (predeterminado), click, focus, o manual para control programático."
+        },
+        "delays": {
+          "title": "Delays",
+          "description": "Configura los retrasos antes de mostrar y ocultar el tooltip.",
+          "note": "Usa las propiedades <code>nuiTooltipShowDelay</code> y <code>nuiTooltipHideDelay</code> para ajustar los tiempos de espera."
+        },
+        "templates": {
+          "title": "Templates personalizados",
+          "description": "Usa templates de Angular para mostrar contenido HTML enriquecido en el tooltip."
+        },
+        "interactive": {
+          "title": "Tooltips interactivos",
+          "description": "Permite interactuar con el contenido del tooltip. Útil para incluir botones o enlaces.",
+          "note": "Habilita la propiedad <code>nuiTooltipInteractive</code> para permitir interacción dentro del tooltip sin que se cierre automáticamente al mover el cursor."
+        },
+        "disabled": {
+          "title": "Estado deshabilitado",
+          "description": "Controla dinámicamente si el tooltip está habilitado o deshabilitado.",
+          "note": "Usa la propiedad <code>nuiTooltipDisabled</code> para activar o desactivar el tooltip según sea necesario."
+        }
       },
       "api": {
-        "title": "API y referencia",
-        "description": "Documentación completa de la directiva nuiTooltip con todos sus inputs, outputs y ejemplos de uso."
+        "inputs": {
+          "title": "Inputs",
+          "description": "Propiedades de entrada de la directiva <code>nuiTooltip</code>"
+        },
+        "outputs": {
+          "title": "Outputs",
+          "description": "Eventos emitidos por la directiva <code>nuiTooltip</code>"
+        },
+        "usage": {
+          "title": "Ejemplos de uso",
+          "description": "Ejemplos completos de uso de la directiva <code>nuiTooltip</code> en componentes Angular"
+        }
       },
-      "styling": {
-        "title": "Estilos y personalización",
-        "description": "Personaliza la apariencia del tooltip mediante variables CSS. Controla colores, tamaño, animaciones y más."
+      "theming": {
+        "container": {
+          "title": "Contenedor del tooltip",
+          "description": "Variables CSS para controlar la apariencia del contenedor del tooltip: colores, dimensiones, padding, fuente, bordes, sombra y z-index"
+        },
+        "arrow": {
+          "title": "Flecha del tooltip",
+          "description": "Variable CSS para controlar el tamaño de la flecha del tooltip"
+        },
+        "animation": {
+          "title": "Animaciones",
+          "description": "Variables CSS para controlar la duración y timing de las animaciones de entrada y salida del tooltip"
+        },
+        "examples": {
+          "title": "Ejemplos de personalización",
+          "description": "Ejemplos SCSS para personalizar los estilos del tooltip en tu aplicación"
+        }
       }
     }
   }

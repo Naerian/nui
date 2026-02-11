@@ -724,177 +724,294 @@
     "toast": {
       "title": "Toast",
       "subtitle": "Temporary non-intrusive notifications for user feedback",
-      "basic": {
-        "title": "Basic toasts",
-        "description": "Show simple notifications with different types: success, error, warning and info."
-      },
-      "withTitle": {
-        "title": "Toasts with title",
-        "description": "Add a title to give more context to the notification."
-      },
-      "withActions": {
-        "title": "Toasts with actions",
-        "description": "Include action buttons so the user can interact with the notification."
-      },
-      "positions": {
-        "title": "Positions",
-        "description": "Control where toasts appear on screen: top-left, top-center, top-right, bottom-left, bottom-center, bottom-right."
-      },
-      "iconTop": {
-        "title": "Icon at the top",
-        "description": "Shows the toast icon centered at the top for a more prominent design.",
-        "note": "Use the <code>iconPosition='top'</code> property to center the icon at the top of the toast. This is especially useful for toasts with titles and actions, as it improves visual hierarchy and makes the icon more prominent."
-      },
-      "icons": {
-        "title": "Custom icons",
-        "description": "You can show default icons according to toast type or use custom icons. You can even hide the icon if you wish.",
-        "note": "Use the <code>icon</code> property. If you use the value <code>false</code> the icon will be hidden. If you use <code>string</code> you can specify a custom <strong>Remix Icon</strong> icon. By default icons are shown according to toast type with <code>icon</code> value <code>true</code>."
-      },
-      "duration": {
-        "title": "Duration",
-        "description": "Configure how long the toast remains visible before disappearing. Use 0 for toasts that don't auto-close."
-      },
-      "loading": {
-        "title": "Loading toast",
-        "description": "Show a toast with loading state that can be dynamically updated when the operation completes."
+      "examples": {
+        "basic": {
+          "title": "Basic toasts",
+          "description": "Show simple notifications with different types: success, error, warning and info."
+        },
+        "withTitle": {
+          "title": "Toasts with title",
+          "description": "Add a title to give more context to the notification."
+        },
+        "withActions": {
+          "title": "Toasts with actions",
+          "description": "Include action buttons so the user can interact with the notification."
+        },
+        "positions": {
+          "title": "Positions",
+          "description": "Control where toasts appear on screen: top-left, top-center, top-right, bottom-left, bottom-center, bottom-right."
+        },
+        "iconTop": {
+          "title": "Icon at the top",
+          "description": "Shows the toast icon centered at the top for a more prominent design.",
+          "note": "Use the <code>iconPosition='top'</code> property to center the icon at the top of the toast. This is especially useful for toasts with titles and actions, as it improves visual hierarchy and makes the icon more prominent."
+        },
+        "icons": {
+          "title": "Custom icons",
+          "description": "You can show default icons according to toast type or use custom icons. You can even hide the icon if you wish.",
+          "note": "Use the <code>icon</code> property. If you use the value <code>false</code> the icon will be hidden. If you use <code>string</code> you can specify a custom <strong>Remix Icon</strong> icon. By default icons are shown according to toast type with <code>icon</code> value <code>true</code>."
+        },
+        "duration": {
+          "title": "Duration",
+          "description": "Configure how long the toast remains visible before disappearing. Use 0 for toasts that don't auto-close."
+        },
+        "loading": {
+          "title": "Loading toast",
+          "description": "Show a toast with loading state that can be dynamically updated when the operation completes."
+        }
       },
       "api": {
-        "title": "API and reference",
-        "description": "Complete documentation of ToastService, interfaces and advanced usage of the notification system."
+        "service": {
+          "title": "ToastService",
+          "description": "Main service for displaying toast notifications. Provides methods to create, update and close toasts."
+        },
+        "config": {
+          "title": "ToastConfig",
+          "description": "Individual toast configuration interface. Allows overriding global configuration for specific toasts."
+        },
+        "global": {
+          "title": "Global configuration",
+          "description": "Global toast system configuration. Can be set during application initialization."
+        },
+        "types": {
+          "title": "Types and interfaces",
+          "description": "TypeScript type definitions for toast system: ToastType, ToastPosition, ToastAction, ToastRef."
+        },
+        "usage": {
+          "title": "Complete usage example",
+          "description": "Complete example integrating ToastService in a component with different usage scenarios."
+        }
       },
-      "styling": {
-        "title": "Styling and customization",
-        "description": "Customize the toasts' appearance using CSS variables. Control colors, size, animations and more."
+      "theming": {
+        "container": {
+          "title": "Container variables",
+          "description": "CSS variables to customize the general toast container (background, border, shadow, spacing)."
+        },
+        "typography": {
+          "title": "Typography variables",
+          "description": "CSS variables to customize toast text (title, message, font size, weight)."
+        },
+        "icon": {
+          "title": "Icon variables",
+          "description": "CSS variables to customize toast icon (size, color, spacing)."
+        },
+        "close": {
+          "title": "Close button variables",
+          "description": "CSS variables to customize the close button (size, color, hover)."
+        },
+        "progress": {
+          "title": "Progress bar variables",
+          "description": "CSS variables to customize the automatic progress bar (color, height, animation)."
+        },
+        "types": {
+          "title": "Type-specific variables",
+          "description": "Specific CSS variables for each toast type (success, error, warning, info, loading)."
+        },
+        "animations": {
+          "title": "Animation variables",
+          "description": "CSS variables to customize toast entrance/exit animations."
+        },
+        "examples": {
+          "title": "Customization example",
+          "description": "Complete example of toast customization with CSS variables to create a dark theme."
+        }
       }
     },
     "sidebar-panel": {
       "title": "Sidebar Panel",
       "subtitle": "Sliding side panels with CDK Overlay to show dynamic content",
-      "basic": {
-        "title": "Basic usage",
-        "description": "Open a side panel from the SidebarPanelService service. The panel slides from the edge of the screen with a smooth animation."
-      },
-      "default": {
-        "title": "Default configuration",
-        "description": "The panel will open using the global default values configured.",
-        "note": "If no options are provided when opening the panel, the global default values defined in the NUI configuration of <code>provideNUIConfig({ sidebarPanel: {...} })</code> will be used."
-      },
-      "sizes": {
-        "title": "Sizes",
-        "description": "Allows defining the size with which the panel will open.",
-        "note": "You can use predefined values like <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> and <code>'full'</code>."
-      },
-      "positions": {
-        "title": "Positions",
-        "description": "Control from which side of the screen the panel slides.",
-        "note": "Use the <code>position</code> property to define the side from which the panel will open using <code>'right'</code>, <code>'left'</code>, <code>'top'</code> or <code>'bottom'</code> as values."
-      },
-      "dynamicComponent": {
-        "title": "Dynamic component",
-        "description": "Load any Angular component inside the panel and pass data through dependency injection",
-        "note": "Use the <code>data</code> property to pass data to the dynamically loaded component. This data is injected using the <code>SIDEBAR_PANEL_DATA</code> token. If we also want to reference the panel itself from the loaded component, we can inject <code>SIDEBAR_PANEL_REF</code>."
-      },
-      "htmlContent": {
-        "title": "HTML content",
-        "description": "You can open panels with HTML content without creating a component. Ideal for simple notifications, messages or dynamically generated content.",
-        "note": "Use the <code>htmlContent</code> property to pass an HTML string. You can generate the HTML dynamically or concatenate it with your data. This option does not require creating a full Angular component."
-      },
-      "templateContent": {
-        "title": "Template content",
-        "description": "Use Angular templates with context data and functions without needing a full component. Ideal for reusable content with dynamic data.",
-        "note": "Use the <code>contentTemplate</code> property to pass a <code>TemplateRef</code> and <code>templateContext</code> to pass data and functions. The template receives the context through <code>let-varname</code> variables. This allows for interactivity without creating a component."
-      },
-      "events": {
-        "title": "@Output events from dynamic components",
-        "description": "Listen to events emitted by the component loaded inside the panel to handle interactions and close the panel when necessary.",
-        "note": "You can subscribe to outputs from the dynamically loaded component. Use <code>panelRef.componentInstance</code> to access the child component instance and subscribe to its <code>@Output()</code>."
-      },
-      "minimizable": {
-        "title": "Minimizable panel",
-        "description": "Panels can be minimized to a tab that <strong>will be located at the place from which the Sidebar opens</strong> to free up screen space while preserving the state, being able to restore it when desired.",
-        "note": "Use the <code>minimizable</code> attribute to make the Sidebar minimizable. Additionally, you can use the <code>minimize()</code> method of the SidebarPanel to minimize the panel programmatically and <code>restore()</code> to restore it. If <code>minimizable</code> is enabled, the <code>id</code> attribute is required to identify the minimized panel. You can also check if the Sidebar is minimized using <code>isMinimized</code>.<br><br><strong>Tab customization:</strong> You can customize the icon, add text, apply custom CSS or use a completely custom template through <code>minimizedTabCustomization</code>. For floating buttons with free positioning (e.g.: chat bottom-right), use <code>standalone: true</code> to render outside the grouped container and avoid positioning restrictions."
-      },
-      "closeButton": {
-        "title": "Close button",
-        "description": "Control the visibility of the close button in the panel header.",
-        "note": "Use the <code>showCloseButton</code> property to show or hide the close button in the panel header."
-      },
-      "backdrop": {
-        "title": "Backdrop",
-        "description": "Add a dark background behind the panel to create a modal experience. Control whether clicking the backdrop closes the panel or not.",
-        "note": "Use the <code>hasBackdrop</code> property to enable/disable the backdrop (default <code>true</code>) and <code>closeOnBackdropClick</code> to control whether clicking the backdrop closes the panel."
-      },
-      "noBackdrop": {
-        "title": "No backdrop",
-        "description": "Open the panel without a backdrop for a less intrusive experience. Ideal for side panels that complement the main content without blocking it.",
-        "note": "Set <code>hasBackdrop</code> to <code>false</code> to open the panel without a backdrop. This allows users to interact with the main content while the panel is open, creating a more seamless and less intrusive experience."
-      },
-      "customBackdrop": {
-        "title": "Custom backdrop",
-        "description": "Customize the backdrop with custom CSS classes. You can apply effects like blur, custom colors and transitions.",
-        "note": "Use the <code>backdropClass</code> property to add custom CSS classes to the panel backdrop. You can add a single class or an <code>array</code> of classes."
-      },
-      "multiple": {
-        "title": "Multiple panels",
-        "description": "Open multiple panels simultaneously from different sides. Control stacking with z-index and close all at once.",
-        "note": "Each open panel is independent and can have its own configuration. Use the <code>closeAll()</code> method of the <code>SidebarPanelService</code> service to programmatically close all open panels simultaneously."
-      },
-      "footer-actions": {
-        "title": "Footer Actions",
-        "description": "Add action buttons in the panel footer.",
-        "note": "Use <code>customButtons</code> for simple actions or <code>footerTemplate</code> for fully customized layouts. You can combine multiple buttons with the different variants and colors of NUI."
+      "examples": {
+        "basic": {
+          "title": "Basic usage",
+          "description": "Open a side panel from the SidebarPanelService service. The panel slides from the edge of the screen with a smooth animation."
+        },
+        "defaults": {
+          "title": "Default configuration",
+          "description": "The panel will open using the global default values configured.",
+          "note": "If no options are provided when opening the panel, the global default values defined in the NUI configuration of <code>provideNUIConfig({ sidebarPanel: {...} })</code> will be used."
+        },
+        "sizes": {
+          "title": "Sizes",
+          "description": "Allows defining the size with which the panel will open.",
+          "note": "You can use predefined values like <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> and <code>'full'</code>."
+        },
+        "positions": {
+          "title": "Positions",
+          "description": "Control from which side of the screen the panel slides.",
+          "note": "Use the <code>position</code> property to define the side from which the panel will open using <code>'right'</code>, <code>'left'</code>, <code>'top'</code> or <code>'bottom'</code> as values."
+        },
+        "html-content": {
+          "title": "HTML content",
+          "description": "You can open panels with HTML content without creating a component. Ideal for simple notifications, messages or dynamically generated content.",
+          "note": "Use the <code>htmlContent</code> property to pass an HTML string. You can generate the HTML dynamically or concatenate it with your data. This option does not require creating a full Angular component."
+        },
+        "template-content": {
+          "title": "Template content",
+          "description": "Use Angular templates with context data and functions without needing a full component. Ideal for reusable content with dynamic data.",
+          "note": "Use the <code>contentTemplate</code> property to pass a <code>TemplateRef</code> and <code>templateContext</code> to pass data and functions. The template receives the context through <code>let-varname</code> variables. This allows for interactivity without creating a component."
+        },
+        "dynamic-component": {
+          "title": "Dynamic component",
+          "description": "Load any Angular component inside the panel and pass data through dependency injection",
+          "note": "Use the <code>data</code> property to pass data to the dynamically loaded component. This data is injected using the <code>SIDEBAR_PANEL_DATA</code> token. If we also want to reference the panel itself from the loaded component, we can inject <code>SIDEBAR_PANEL_REF</code>."
+        },
+        "dynamic-component-events": {
+          "title": "@Output events from dynamic components",
+          "description": "Listen to events emitted by the component loaded inside the panel to handle interactions and close the panel when necessary.",
+          "note": "You can subscribe to outputs from the dynamically loaded component. Use <code>panelRef.componentInstance</code> to access the child component instance and subscribe to its <code>@Output()</code>."
+        },
+        "minimizable": {
+          "title": "Minimizable panel",
+          "description": "Panels can be minimized to a tab that <strong>will be located at the place from which the Sidebar opens</strong> to free up screen space while preserving the state, being able to restore it when desired.",
+          "note": "Use the <code>minimizable</code> attribute to make the Sidebar minimizable. Additionally, you can use the <code>minimize()</code> method of the SidebarPanel to minimize the panel programmatically and <code>restore()</code> to restore it. If <code>minimizable</code> is enabled, the <code>id</code> attribute is required to identify the minimized panel. You can also check if the Sidebar is minimized using <code>isMinimized</code>.<br><br><strong>Tab customization:</strong> You can customize the icon, add text, apply custom CSS or use a completely custom template through <code>minimizedTabCustomization</code>. For floating buttons with free positioning (e.g.: chat bottom-right), use <code>standalone: true</code> to render outside the grouped container and avoid positioning restrictions."
+        },
+        "close-button": {
+          "title": "Close button",
+          "description": "Control the visibility of the close button in the panel header.",
+          "note": "Use the <code>showCloseButton</code> property to show or hide the close button in the panel header."
+        },
+        "backdrop": {
+          "title": "Backdrop",
+          "description": "Add a dark background behind the panel to create a modal experience. Control whether clicking the backdrop closes the panel or not.",
+          "note": "Use the <code>hasBackdrop</code> property to enable/disable the backdrop (default <code>true</code>) and <code>closeOnBackdropClick</code> to control whether clicking the backdrop closes the panel."
+        },
+        "custom-backdrop": {
+          "title": "Custom backdrop",
+          "description": "Customize the backdrop with custom CSS classes. You can apply effects like blur, custom colors and transitions.",
+          "note": "Use the <code>backdropClass</code> property to add custom CSS classes to the panel backdrop. You can add a single class or an <code>array</code> of classes."
+        },
+        "multiple": {
+          "title": "Multiple panels",
+          "description": "Open multiple panels simultaneously from different sides. Control stacking with z-index and close all at once.",
+          "note": "Each open panel is independent and can have its own configuration. Use the <code>closeAll()</code> method of the <code>SidebarPanelService</code> service to programmatically close all open panels simultaneously."
+        },
+        "footer-actions": {
+          "title": "Footer Actions",
+          "description": "Add action buttons in the panel footer.",
+          "note": "Use <code>customButtons</code> for simple actions or <code>footerTemplate</code> for fully customized layouts. You can combine multiple buttons with the different variants and colors of NUI."
+        }
       },
       "api": {
-        "title": "API",
-        "description": "Available interfaces and methods of the SidebarPanel component."
+        "service": {
+          "title": "SidebarPanelService",
+          "description": "Service methods for managing sidebar panels"
+        },
+        "ref-properties": {
+          "title": "SidebarPanelRef - Properties",
+          "description": "Properties of the sidebar panel reference"
+        },
+        "ref-methods": {
+          "title": "SidebarPanelRef - Methods",
+          "description": "Methods of the sidebar panel reference for control and events"
+        },
+        "config": {
+          "title": "SidebarPanelConfig",
+          "description": "Complete sidebar panel configuration"
+        },
+        "custom-button": {
+          "title": "SidebarPanelCustomButton",
+          "description": "Custom footer button configuration"
+        },
+        "minimized-tab": {
+          "title": "MinimizedTabCustomization",
+          "description": "Customization of the tab when the panel is minimized"
+        }
       },
-      "styling": {
-        "title": "Styling and Customization",
-        "description": "Customize the panel's appearance using CSS variables. You can override these variables in your custom theme."
+      "theming": {
+        "colors": {
+          "title": "Color variables",
+          "description": "CSS variables to control the sidebar panel colors: background, text, borders and overlay. These variables automatically adapt to the light/dark mode of the active theme."
+        },
+        "layout": {
+          "title": "Layout variables",
+          "description": "CSS variables to control the sidebar panel size and spacing: predefined size presets (xs to full) and header and content padding"
+        },
+        "typography": {
+          "title": "Typography variables",
+          "description": "CSS variables to control the sidebar panel title typography"
+        },
+        "elevation": {
+          "title": "Elevation variables",
+          "description": "CSS variables to control the sidebar panel shadow and z-index of the panel and overlay"
+        },
+        "scrollbar": {
+          "title": "Scrollbar variables",
+          "description": "CSS variables to control the appearance of the sidebar panel scrollbar"
+        },
+        "examples": {
+          "title": "Customization examples",
+          "description": "SCSS examples to customize sidebar panel styles in your application"
+        }
       }
     },
     "tooltip": {
       "title": "Tooltip",
       "subtitle": "Informative tooltips with support for text and custom templates",
-      "basic": {
-        "title": "Basic tooltips",
-        "description": "Shows simple tooltips with text on hover.",
-        "note": "You can disable the arrow with <code>tooltipShowArrow</code>."
-      },
-      "positions": {
-        "title": "Positions",
-        "description": "Control the tooltip position relative to the element: top (default), bottom, left, right."
-      },
-      "events": {
-        "title": "Events",
-        "description": "Define which event triggers the tooltip: hover (default), click, focus, or manual for programmatic control."
-      },
-      "delays": {
-        "title": "Delays",
-        "description": "Configure delays before showing and hiding the tooltip.",
-        "note": "Use the <code>tooltipShowDelay</code> and <code>tooltipHideDelay</code> properties to adjust wait times."
-      },
-      "templates": {
-        "title": "Custom templates",
-        "description": "Use Angular templates to show enriched HTML content in the tooltip."
-      },
-      "interactive": {
-        "title": "Interactive tooltips",
-        "description": "Allow interaction with tooltip content. Useful for including buttons or links.",
-        "note": "Enable the <code>tooltipInteractive</code> property to allow interaction within the tooltip without it automatically closing when moving the cursor."
-      },
-      "disabled": {
-        "title": "Disabled state",
-        "description": "Dynamically control whether the tooltip is enabled or disabled.",
-        "note": "Use the <code>tooltipDisabled</code> property to activate or deactivate the tooltip as needed."
+      "examples": {
+        "basic": {
+          "title": "Basic tooltips",
+          "description": "Shows simple tooltips with text on hover.",
+          "note": "You can disable the arrow with <code>nuiTooltipShowArrow</code>."
+        },
+        "positions": {
+          "title": "Positions",
+          "description": "Control the tooltip position relative to the element: top (default), bottom, left, right."
+        },
+        "events": {
+          "title": "Events",
+          "description": "Define which event triggers the tooltip: hover (default), click, focus, or manual for programmatic control."
+        },
+        "delays": {
+          "title": "Delays",
+          "description": "Configure delays before showing and hiding the tooltip.",
+          "note": "Use the <code>nuiTooltipShowDelay</code> and <code>nuiTooltipHideDelay</code> properties to adjust wait times."
+        },
+        "templates": {
+          "title": "Custom templates",
+          "description": "Use Angular templates to show enriched HTML content in the tooltip."
+        },
+        "interactive": {
+          "title": "Interactive tooltips",
+          "description": "Allow interaction with tooltip content. Useful for including buttons or links.",
+          "note": "Enable the <code>nuiTooltipInteractive</code> property to allow interaction within the tooltip without it automatically closing when moving the cursor."
+        },
+        "disabled": {
+          "title": "Disabled state",
+          "description": "Dynamically control whether the tooltip is enabled or disabled.",
+          "note": "Use the <code>nuiTooltipDisabled</code> property to activate or deactivate the tooltip as needed."
+        }
       },
       "api": {
-        "title": "API and reference",
-        "description": "Complete documentation of the nuiTooltip directive with all its inputs, outputs and usage examples."
+        "inputs": {
+          "title": "Inputs",
+          "description": "Input properties of the <code>nuiTooltip</code> directive"
+        },
+        "outputs": {
+          "title": "Outputs",
+          "description": "Events emitted by the <code>nuiTooltip</code> directive"
+        },
+        "usage": {
+          "title": "Usage examples",
+          "description": "Complete examples of using the <code>nuiTooltip</code> directive in Angular components"
+        }
       },
-      "styling": {
-        "title": "Styling and customization",
-        "description": "Customize the tooltip's appearance using CSS variables. Control colors, size, animations and more."
+      "theming": {
+        "container": {
+          "title": "Tooltip container",
+          "description": "CSS variables to control the tooltip container appearance: colors, dimensions, padding, font, borders, shadow and z-index"
+        },
+        "arrow": {
+          "title": "Tooltip arrow",
+          "description": "CSS variable to control the size of the tooltip arrow"
+        },
+        "animation": {
+          "title": "Animations",
+          "description": "CSS variables to control the duration and timing of the tooltip entry and exit animations"
+        },
+        "examples": {
+          "title": "Customization examples",
+          "description": "SCSS examples to customize tooltip styles in your application"
+        }
       }
     }
   }
