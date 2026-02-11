@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ButtonGroupComponent } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
+import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';
 import { BaseComponentPage } from '../../../core/base/base-component-page';
 import { BUTTON_GROUP_PAGE_CONFIG } from './button-group-page.config';
 
@@ -18,24 +19,45 @@ import { BUTTON_GROUP_PAGE_CONFIG } from './button-group-page.config';
     ButtonGroupComponent,
     CodeBlockComponent,
     SectionTitleComponent,
+    ComponentTabsComponent,
   ],
   templateUrl: './button-group-page.component.html',
   styleUrls: ['./button-group-page.component.scss'],
 })
 export class ButtonGroupPageComponent extends BaseComponentPage {
-  pageConfig = BUTTON_GROUP_PAGE_CONFIG;
+  override pageConfig = BUTTON_GROUP_PAGE_CONFIG;
+
+  tabs: ComponentTab[] = [
+    {
+      id: 'examples',
+      label: 'common.tabs.examples',
+      icon: 'ri-code-s-slash-line',
+      sections: ['basic', 'modes', 'complex', 'icons', 'colors', 'segmented', 'sizes', 'width'],
+    },
+    {
+      id: 'api',
+      label: 'common.tabs.api',
+      icon: 'ri-braces-line',
+      sections: ['api-inputs', 'api-outputs'],
+    },
+    {
+      id: 'theming',
+      label: 'common.tabs.theming',
+      icon: 'ri-palette-line',
+      sections: ['theming-general', 'theming-segmented'],
+    },
+  ];
 
   // ==========================================
   // DATOS DE EJEMPLO
   // ==========================================
 
   // Strings simples
-  cities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix'];
+  cities = ['New York', 'Los Angeles'];
 
   // Objetos para segmented
   periods = [
     { label: 'Daily', value: 'daily' },
-    { label: 'Weekly', value: 'weekly' },
     { label: 'Monthly', value: 'monthly' },
     { label: 'Yearly', value: 'yearly' },
   ];
@@ -49,8 +71,7 @@ export class ButtonGroupPageComponent extends BaseComponentPage {
 
   // Objetos Complejos (Usuarios)
   users = [
-    { id: 101, name: 'Ana García', role: 'Admin', status: 'active' },
-    { id: 102, name: 'Carlos Ruíz', role: 'Editor', status: 'busy' },
+    { id: 101, name: 'Ana G.', role: 'Admin', status: 'active' },
     { id: 103, name: 'Lucía M.', role: 'Viewer', status: 'offline', disabled: true },
   ];
 

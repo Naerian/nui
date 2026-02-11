@@ -151,6 +151,7 @@ export class TooltipDirective implements OnInit, OnDestroy {
   private isVisible = signal(false);
   private isMouseOverHost = false;
   private isMouseOverTooltip = false;
+  private scrollListenerCleanup?: () => void;
 
   // Getters para valores con fallback a configuración global
   private get position(): TooltipPosition {
@@ -225,6 +226,9 @@ export class TooltipDirective implements OnInit, OnDestroy {
       this.removeInteractiveListeners();
     }
     
+    // Limpiar scroll listener si existe
+    this.removeScrollListener();
+    
     // El cleanup adicional ahora se maneja en el constructor con DestroyRef
     // Este método se mantiene para compatibilidad pero el trabajo se hace automáticamente
   }
@@ -246,6 +250,28 @@ export class TooltipDirective implements OnInit, OnDestroy {
         this.isMouseOverHost = false;
       }
       this.hide();
+    }
+  }
+
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent): void {
+    // En mobile, el touch puede activar el tooltip dependiendo del evento configurado
+    if (this.event === 'click') {
+      event.preventDefault(); // Prevenir el click que vendría después
+      this.toggle();
+    } else if (this.event === 'hover') {
+      if (this.interactive) {
+        this.isMouseOverHost = true;
+      }
+      this.show();
+    }
+  }
+
+  @HostListener('touchend')
+  onTouchEnd(): void {
+    // Para hover en mobile, ocultar después de un pequeño delay
+    if (this.event === 'hover' && !this.interactive) {
+      setTimeout(() => this.hide(), 1500); // Mantener visible 1.5s después del touch
     }
   }
 
@@ -301,6 +327,11 @@ export class TooltipDirective implements OnInit, OnDestroy {
     this.showTimeoutId = setTimeout(() => {
       this.attach();
       this.isVisible.set(true);
+      
+      // Para eventos no-hover (click, focus), añadir listener de scroll para cerrar
+      if (this.event !== 'hover') {
+        this.setupScrollListener();
+      }
     }, this.showDelay);
   }
 
@@ -332,6 +363,9 @@ export class TooltipDirective implements OnInit, OnDestroy {
         return;
       }
       this.isVisible.set(false);
+      
+      // Limpiar scroll listener cuando se oculta
+      this.removeScrollListener();
     }, delay);
   }
 
@@ -564,6 +598,9 @@ export class TooltipDirective implements OnInit, OnDestroy {
         this.removeInteractiveListeners();
       }
       
+      // Limpiar scroll listener
+      this.removeScrollListener();
+      
       this.overlayRef.detach();
       this.componentRef = undefined;
       
@@ -581,6 +618,38 @@ export class TooltipDirective implements OnInit, OnDestroy {
     if (this.hideTimeoutId) {
       clearTimeout(this.hideTimeoutId);
       this.hideTimeoutId = undefined;
+    }
+  }
+
+  /**
+   * Configura un listener de scroll para cerrar el tooltip cuando se hace scroll
+   * Solo se usa para eventos no-hover (click, focus)
+   */
+  private setupScrollListener(): void {
+    // Limpiar listener anterior si existe
+    this.removeScrollListener();
+
+    const scrollHandler = () => {
+      // Cerrar el tooltip inmediatamente al hacer scroll
+      this.hide();
+    };
+
+    // Escuchar scroll en la ventana y en todos los ancestros scrollables
+    window.addEventListener('scroll', scrollHandler, true);
+
+    // Guardar función de cleanup
+    this.scrollListenerCleanup = () => {
+      window.removeEventListener('scroll', scrollHandler, true);
+    };
+  }
+
+  /**
+   * Remueve el listener de scroll
+   */
+  private removeScrollListener(): void {
+    if (this.scrollListenerCleanup) {
+      this.scrollListenerCleanup();
+      this.scrollListenerCleanup = undefined;
     }
   }
 }

@@ -9,6 +9,7 @@ import {
 } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
+import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';
 import { BaseComponentPage } from '../../../core/base/base-component-page';
 import { ACTION_MENU_PAGE_CONFIG } from './action-menu-page.config';
 
@@ -22,13 +23,36 @@ import { ACTION_MENU_PAGE_CONFIG } from './action-menu-page.config';
     MenuHeaderDirective, 
     MenuFooterDirective, 
     CodeBlockComponent,
-    SectionTitleComponent
+    SectionTitleComponent,
+    ComponentTabsComponent
   ],
   templateUrl: './action-menu-page.component.html',
   styleUrls: ['./action-menu-page.component.scss'],
 })
 export class ActionMenuPageComponent extends BaseComponentPage {
-  pageConfig = ACTION_MENU_PAGE_CONFIG;
+  override pageConfig = ACTION_MENU_PAGE_CONFIG;
+
+  // Tabs configuration
+  tabs: ComponentTab[] = [
+    {
+      id: 'examples',
+      label: 'common.tabs.examples',
+      icon: 'ri-code-s-slash-line',
+      sections: ['basic', 'separators', 'submenu', 'variants', 'sizes', 'label', 'disabled', 'withSubtitle', 'selected', 'icons', 'template'],
+    },
+    {
+      id: 'api',
+      label: 'common.tabs.api',
+      icon: 'ri-braces-line',
+      sections: ['api-inputs', 'api-outputs', 'api-interface'],
+    },
+    {
+      id: 'theming',
+      label: 'common.tabs.theming',
+      icon: 'ri-palette-line',
+      sections: ['theming-structure', 'theming-items', 'theming-colors'],
+    },
+  ];
 
   // Datos para ejemplos interactivos
   basicMenuItems: ActionMenuItem[] = [

@@ -117,12 +117,19 @@ a {
 
 // Code blocks
 code {
-  color: var(--nui-color-accent);
-  background: color-mix(in srgb, var(--nui-color-accent) 10%, transparent);
+  color: var(--nui-primary);
+  background: color-mix(in srgb, var(--nui-primary) 15%, transparent);
   border-radius: 0.25rem;
   padding: 0.15rem 0.35rem;
-  font-size: 0.75rem;
+  margin: 0 0.35rem;
+  font-size: 0.875rem;
+  font-weight: var(--nui-font-weight-medium);
   line-height: 1.5;
+
+  &.neutral {
+    color: var(--nui-color-neutral);
+    background: color-mix(in srgb, var(--nui-color-neutral) 15%, transparent);
+  }
 }
 
 pre code {
@@ -280,7 +287,7 @@ pre code {
         line-height: 1.6;
 
         code {
-          color: var(--nui-text-primary);
+          color: var(--nui-primary);
           display: block;
           white-space: pre;
         }
@@ -568,8 +575,9 @@ pre code {
 
   table {
     width: 100%;
-    border-collapse: collapse;
+    min-width: 800px;
     font-size: 0.9rem;
+    border-collapse: collapse;
     background-color: var(--nui-bg-primary);
 
     thead {

@@ -24,6 +24,12 @@ $font-size-md: 1rem !default;
 $font-size-lg: 1.125rem !default;
 $font-size-xl: 1.25rem !default;
 
+$font-size-mobile-xs: 0.625rem !default;
+$font-size-mobile-sm: 0.875rem !default;
+$font-size-mobile-md: 1rem !default;
+$font-size-mobile-lg: 1.125rem !default;
+$font-size-mobile-xl: 1.25rem !default;
+
 /// Heading font sizes based on a 1.25 modular scale
 $font-size-h6: 1rem !default;
 $font-size-h5: 1.25rem !default;
@@ -31,6 +37,13 @@ $font-size-h4: 1.5rem !default;
 $font-size-h3: 1.875rem !default;
 $font-size-h2: 2.25rem !default;
 $font-size-h1: 3rem !default;
+
+$font-size-mobile-h6: 0.875rem !default;
+$font-size-mobile-h5: 1.125rem !default;
+$font-size-mobile-h4: 1.5rem !default;
+$font-size-mobile-h3: 1.875rem !default;
+$font-size-mobile-h2: 2.25rem !default;
+$font-size-mobile-h1: 2.75rem !default;
 
 /// Font weight scale aligned with modern variable fonts
 $font-weight-regular: 400 !default;
@@ -72,6 +85,14 @@ $font-sizes: (
   xl: $font-size-xl,
 ) !default;
 
+$font-sizes-mobile: (
+  xs: $font-size-mobile-xs,
+  sm: $font-size-mobile-sm,
+  md: $font-size-mobile-md,
+  lg: $font-size-mobile-lg,
+  xl: $font-size-mobile-xl,
+) !default;
+
 /// =======================================
 /// BORDERS & RADII
 /// =======================================
@@ -109,6 +130,12 @@ $padding-md: 1rem !default;
 $padding-lg: 1.5rem !default;
 $padding-xl: 2rem !default;
 
+$padding-mobile-xs: 0.25rem !default;
+$padding-mobile-sm: 0.5rem !default;
+$padding-mobile-md: 0.75rem !default;
+$padding-mobile-lg: 1rem !default;
+$padding-mobile-xl: 1.5rem !default;
+
 /// =======================================
 /// COMPONENT TOKENS
 /// =======================================
@@ -120,6 +147,12 @@ $height-md: 2.75rem !default;
 $height-lg: 3rem !default;
 $height-xl: 3.5rem !default;
 
+$height-mobile-xs: 1.75rem !default;
+$height-mobile-sm: 2.25rem !default;
+$height-mobile-md: 2.5rem !default;
+$height-mobile-lg: 2.75rem !default;
+$height-mobile-xl: 3rem !default;
+
 /// Height scale for interactive components
 $heights: (
   xs: $height-xs,
@@ -129,6 +162,14 @@ $heights: (
   xl: $height-xl,
 ) !default;
 
+$heights-mobile: (
+  xs: $height-mobile-xs,
+  sm: $height-mobile-sm,
+  md: $height-mobile-md,
+  lg: $height-mobile-lg,
+  xl: $height-mobile-xl,
+) !default;
+
 /// Padding scale for components (vertical horizontal)
 $paddings: (
   xs: $padding-xs $padding-sm,
@@ -136,6 +177,14 @@ $paddings: (
   md: $padding-sm $padding-md,
   lg: $padding-md $padding-lg,
   xl: $padding-sm $padding-xl,
+) !default;
+
+$paddings-mobile: (
+  xs: $padding-mobile-xs $padding-mobile-sm,
+  sm: $padding-mobile-sm $padding-mobile-sm,
+  md: $padding-mobile-sm $padding-mobile-md,
+  lg: $padding-mobile-md $padding-mobile-lg,
+  xl: $padding-mobile-sm $padding-mobile-xl,
 ) !default;
 
 /// =======================================

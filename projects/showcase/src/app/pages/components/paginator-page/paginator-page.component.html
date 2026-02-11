@@ -5,127 +5,164 @@
       <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
     </div>
 
-    <div class="docs-content">
-      @for (section of pageConfig.sections; track section.id) {
-    <section class="section">
-      <app-section-title
-        [title]="section.title | translate"
-        [anchor]="section.anchor"
-      ></app-section-title>
+    <app-component-tabs [tabs]="tabs" [sections]="pageConfig.sections" #tabsComp>
+      @if (tabsComp.activeSections(); as activeSections) {
+        @for (section of activeSections; track section.id) {
+          <div class="section">
+            <!-- Título de sección -->
+            <app-section-title
+              [anchor]="section.anchor"
+              [title]="section.title | translate"
+              [tabId]="tabsComp.activeTabId()"
+            ></app-section-title>
 
-      <p class="section-description" [innerHTML]="section.description | translate"></p>
+            @if (section.description) {
+              <p class="section-description" [innerHTML]="section.description | translate"></p>
+            }
 
-      @if (section.note; as note) {
-        <div class="section-note" [ngClass]="note.type">
-          <i [class]="getSectionNoteIcon(note)"></i>
-          <p [innerHTML]="note.content | translate"></p>
-        </div>
-      }
+            @if (section.note) {
+              <div class="section-note" [ngClass]="section.note.type">
+                @if (section.note.icon) {
+                  <i [class]="section.note.icon"></i>
+                }
+                <p [innerHTML]="section.note.content | translate"></p>
+              </div>
+            }
 
-      @switch (section.id) {
-        @case ('basic') {
-          <div class="example-preview flex-column">
-            <nui-paginator
-              [currentPage]="currentPage()"
-              [totalItems]="totalItems"
-              [itemsPerPage]="pageSize()"
-              [showPageSizeSelector]="true"
-              [showFirstLast]="true"
-              (pageChange)="onPageChange($event)"
-              (pageSizeChange)="onPageSizeChange($event)"
-            ></nui-paginator>
+            <!-- Contenido específico de cada sección -->
+            @switch (section.id) {
+              @case ('basic') {
+                <div class="example-preview flex-column align-items-center">
+                  <nui-paginator
+                    [currentPage]="currentPage()"
+                    [totalItems]="totalItems"
+                    [itemsPerPage]="pageSize()"
+                    [showPageSizeSelector]="true"
+                    [showFirstLast]="true"
+                    (pageChange)="onPageChange($event)"
+                    (pageSizeChange)="onPageSizeChange($event)"
+                  ></nui-paginator>
 
-            <div class="value-display">
-              Page:
-              <strong>{{ currentPage() }}</strong>
-              | Size:
-              <strong>{{ pageSize() }}</strong>
-              | Total:
-              <strong>{{ totalItems }}</strong>
-            </div>
-          </div>
-        }
-
-        @case ('colors') {
-          <div class="example-preview flex-column gap-4">
-            <nui-paginator
-              color="primary"
-              variant="ghost"
-              [totalItems]="100"
-              [showPageSizeSelector]="true"
-            ></nui-paginator>
-            <nui-paginator
-              color="secondary"
-              variant="outline"
-              [totalItems]="100"
-              [showPageSizeSelector]="true"
-            ></nui-paginator>
-            <nui-paginator
-              color="success"
-              variant="solid"
-              [totalItems]="100"
-              [showPageSizeSelector]="true"
-            ></nui-paginator>
-            <nui-paginator
-              color="danger"
-              [totalItems]="100"
-              [showPageSizeSelector]="true"
-            ></nui-paginator>
-            <nui-paginator
-              color="warning"
-              variant="outline"
-              [totalItems]="100"
-              [showPageSizeSelector]="true"
-            ></nui-paginator>
-          </div>
-        }
-
-        @case ('sizes') {
-          <div class="example-preview flex-column gap-4">
-            <nui-paginator [currentPage]="1" [totalPages]="5" size="xs"></nui-paginator>
-            <nui-paginator [currentPage]="1" [totalPages]="5" size="sm"></nui-paginator>
-            <nui-paginator [currentPage]="1" [totalPages]="5" size="md"></nui-paginator>
-            <nui-paginator [currentPage]="1" [totalPages]="5" size="lg"></nui-paginator>
-            <nui-paginator [currentPage]="1" [totalPages]="5" size="xl"></nui-paginator>
-          </div>
-        }
-
-        @case ('layout') {
-          <div class="example-preview">
-            <nui-paginator
-              [currentPage]="customLayoutPage()"
-              [totalItems]="500"
-              [layout]="idealLayout"
-              (pageChange)="customLayoutPage.set($event)"
-            ></nui-paginator>
-          </div>
-        }
-
-        @case ('infinite') {
-          <div class="example-preview flex-column">
-            <div class="infinite-list">
-              @for (item of infiniteItems(); track item) {
-                <div class="infinite-item">{{ item }}</div>
+                  <div class="value-display">
+                    Page:
+                    <strong>{{ currentPage() }}</strong>
+                    | Size:
+                    <strong>{{ pageSize() }}</strong>
+                    | Total:
+                    <strong>{{ totalItems }}</strong>
+                  </div>
+                </div>
               }
-            </div>
 
-            <nui-paginator
-              [totalItems]="100"
-              [infiniteConfig]="{
-                enabled: true,
-                mode: 'button',
-                showCounter: true,
-                initialLoadedItems: 20,
-                onLoadMore: loadMoreData.bind(this),
-              }"
-            ></nui-paginator>
+              @case ('colors') {
+                <div class="example-preview flex-column align-items-center gap-4">
+                  <nui-paginator
+                    color="primary"
+                    variant="ghost"
+                    [totalItems]="100"
+                    [showPageSizeSelector]="true"
+                  ></nui-paginator>
+                  <nui-paginator
+                    color="secondary"
+                    variant="outline"
+                    [totalItems]="100"
+                    [showPageSizeSelector]="true"
+                  ></nui-paginator>
+                  <nui-paginator
+                    color="success"
+                    variant="solid"
+                    [totalItems]="100"
+                    [showPageSizeSelector]="true"
+                  ></nui-paginator>
+                  <nui-paginator
+                    color="danger"
+                    [totalItems]="100"
+                    [showPageSizeSelector]="true"
+                  ></nui-paginator>
+                  <nui-paginator
+                    color="warning"
+                    variant="outline"
+                    [totalItems]="100"
+                    [showPageSizeSelector]="true"
+                  ></nui-paginator>
+                </div>
+              }
+
+              @case ('sizes') {
+                <div class="example-preview flex-column align-items-center gap-4">
+                  <nui-paginator [currentPage]="1" [totalPages]="5" size="xs"></nui-paginator>
+                  <nui-paginator [currentPage]="1" [totalPages]="5" size="sm"></nui-paginator>
+                  <nui-paginator [currentPage]="1" [totalPages]="5" size="md"></nui-paginator>
+                  <nui-paginator [currentPage]="1" [totalPages]="5" size="lg"></nui-paginator>
+                  <nui-paginator [currentPage]="1" [totalPages]="5" size="xl"></nui-paginator>
+                </div>
+              }
+
+              @case ('layout') {
+                <div class="example-preview">
+                  <nui-paginator
+                    [currentPage]="customLayoutPage()"
+                    [totalItems]="500"
+                    [layout]="idealLayout"
+                    [mobileLayout]="idealMobileLayout"
+                    (pageChange)="customLayoutPage.set($event)"
+                  ></nui-paginator>
+                </div>
+              }
+
+              @case ('infinite') {
+                <div class="example-preview flex-column align-items-center">
+                  <div class="infinite-list">
+                    @for (item of infiniteItems(); track item) {
+                      <div class="infinite-item">{{ item }}</div>
+                    }
+                  </div>
+
+                  <nui-paginator
+                    [totalItems]="100"
+                    [infiniteConfig]="{
+                      enabled: true,
+                      mode: 'button',
+                      showCounter: true,
+                      initialLoadedItems: 20,
+                      onLoadMore: loadMoreData.bind(this),
+                    }"
+                  ></nui-paginator>
+                </div>
+              }
+            }
+
+            <!-- Tabla de datos (para API o Theming) -->
+            @if (section.table) {
+              <div class="api-table">
+                <table>
+                  <thead>
+                    <tr>
+                      @for (header of section.table.headers; track $index) {
+                        <th [innerHTML]="header | translate"></th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of section.table.rows; track $index) {
+                      <tr>
+                        @for (cell of row; track $index) {
+                          <td [innerHTML]="cell | translate"></td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+
+            <!-- Code blocks asociados a esta sección -->
+            @if (section.examples && section.examples.length > 0) {
+              <app-code-block [examples]="section.examples"></app-code-block>
+            }
           </div>
         }
       }
-
-      <app-code-block [examples]="section.examples || []"></app-code-block>
-    </section>
-      }
-    </div>
+    </app-component-tabs>
   </div>
 </div>

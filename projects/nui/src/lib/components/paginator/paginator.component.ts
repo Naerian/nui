@@ -504,9 +504,10 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Computed para el modo efectivo del paginador.
    * Prioriza en este orden:
    * 1. Si hay layout explícito → NO aplicar autoMobile ni protecciones (control total del desarrollador)
-   * 2. autoMobile → detectar móvil y cambiar a fractional automáticamente
-   * 3. protección automática en móvil → evitar configuraciones problemáticas
-   * 4. modo explícito o default
+   * 2. Si modo infinito está activo → respetar el modo sin cambios (no aplicar autoMobile)
+   * 3. autoMobile → detectar móvil y cambiar a fractional automáticamente
+   * 4. protección automática en móvil → evitar configuraciones problemáticas
+   * 5. modo explícito o default
    * @return {PaginatorMode}
    */
   effectiveMode = computed<PaginatorMode>(() => {
@@ -516,12 +517,18 @@ export class PaginatorComponent implements OnInit, OnDestroy {
       return this.mode(); // Respetar modo explícito sin ninguna modificación
     }
 
-    // AutoMobile solo si NO hay layout personalizado
+    // Si modo infinito está activo, NO aplicar autoMobile
+    // El modo infinito tiene su propio layout y comportamiento específico
+    if (this.isInfiniteMode()) {
+      return this.mode(); // Respetar el modo sin cambios
+    }
+
+    // AutoMobile solo si NO hay layout personalizado NI modo infinito
     if (this.autoMobile() && this.isMobileDevice()) {
       return PaginatorModeEnum.FRACTIONAL; // Cambiar automáticamente a modo fractional en móviles
     }
 
-    // Protección automática SOLO sin layout
+    // Protección automática SOLO sin layout ni infinito
     const currentMode = this.mode();
     if (this.isMobileDevice() && currentMode === PaginatorModeEnum.DEFAULT) {
       const total = this.totalPages();
@@ -630,9 +637,9 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Siempre devuelve un layout válido, generando uno por defecto basado en el modo si es necesario.
    *
    * Prioriza en este orden:
-   * 1. layout explícito
-   * 2. infiniteLayout para modo infinito
-   * 3. mobileLayout en móvil + fractional
+   * 1. infiniteLayout para modo infinito - MÁXIMA PRIORIDAD CUANDO ESTÁ ACTIVO
+   * 2. mobileLayout en móvil (si está definido) - PRIORIDAD EN MÓVIL
+   * 3. layout explícito
    * 4. layout global
    * 5. layout por defecto basado en modo (FALLBACK - nunca undefined)
    *
@@ -642,24 +649,31 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     const currentMode = this.effectiveMode();
     const isMobile = this.isMobileDevice();
 
-    // 1. Layout explícito SIEMPRE tiene prioridad
-    const explicitLayout = this.layout();
-    if (explicitLayout) {
-      return explicitLayout;
-    }
-
-    // 2. Layout para modo infinito
+    // 1. MÁXIMA PRIORIDAD: Si modo infinito está activo, usar infiniteLayout
+    // Esto asegura que el modo infinito funcione correctamente incluso en móvil
     if (this.isInfiniteMode()) {
       if (this.paginatorConfig.infiniteLayout) {
         return this.paginatorConfig.infiniteLayout;
       }
     }
 
-    // 3. MobileLayout en móvil + fractional
-    if (isMobile && currentMode === PaginatorModeEnum.FRACTIONAL) {
+    // 2. Si es móvil Y hay mobileLayout explícito, usarlo
+    // Esto permite que el desarrollador defina un layout específico para móvil
+    // que sobreescribe el layout de desktop (pero NO el infiniteLayout)
+    if (isMobile) {
       const mobileLay = this.mobileLayout();
       if (mobileLay) return mobileLay;
-      if (this.paginatorConfig.mobileLayout) return this.paginatorConfig.mobileLayout;
+      
+      // Fallback a mobileLayout global si existe
+      if (this.paginatorConfig.mobileLayout) {
+        return this.paginatorConfig.mobileLayout;
+      }
+    }
+
+    // 3. Layout explícito (desktop o cuando no hay mobileLayout definido)
+    const explicitLayout = this.layout();
+    if (explicitLayout) {
+      return explicitLayout;
     }
 
     // 4. Layout global

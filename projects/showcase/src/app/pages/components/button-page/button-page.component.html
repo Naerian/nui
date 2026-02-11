@@ -112,7 +112,7 @@
                 </div>
               }
               @case ('width') {
-                <div class="example-preview flex-column">
+                <div class="example-preview flex-column align-items-center">
                   <nui-button width="auto">Auto Width</nui-button>
                   <nui-button width="full">Full Width</nui-button>
                   <nui-button width="fit">Fit Content</nui-button>
@@ -158,7 +158,7 @@
                   <thead>
                     <tr>
                       @for (header of section.table.headers; track $index) {
-                        <th>{{ header | translate }}</th>
+                        <th [innerHTML]="header | translate"></th>
                       }
                     </tr>
                   </thead>
@@ -166,7 +166,7 @@
                     @for (row of section.table.rows; track $index) {
                       <tr>
                         @for (cell of row; track $index) {
-                          <td>{{ cell | translate }}</td>
+                          <td [innerHTML]="cell | translate"></td>
                         }
                       </tr>
                     }

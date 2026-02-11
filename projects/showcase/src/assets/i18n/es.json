@@ -556,8 +556,33 @@
         "note": "El template <code>#item</code> recibe el item completo como contexto (<code>let-item</code>). Las directivas <code>menu-header</code> y <code>menu-footer</code> permiten una sintaxis simple y clara, evitando ng-template innecesarios. <br/><br/> <strong>Importante:</strong> Al usar templates personalizados, debes manejar el evento click manualmente con <code>(click)=\"handleAction(item)\"</code>. El evento <code>onItemAction</code> solo se emite automáticamente con items por defecto."
       },
       "api": {
-        "title": "API y referencia",
-        "description": "Documentación completa de inputs, outputs y la interfaz ActionMenuItem para integrar el componente en tus proyectos."
+        "inputs": {
+          "title": "Inputs del componente",
+          "description": "Propiedades de entrada que modifican el comportamiento y apariencia del menú de acciones."
+        },
+        "outputs": {
+          "title": "Outputs del componente",
+          "description": "Eventos emitidos por el componente que puedes escuchar para reaccionar a interacciones del usuario."
+        },
+        "interface": {
+          "title": "Interface ActionMenuItem",
+          "description": "Estructura completa de un item del menú con todas sus propiedades disponibles."
+        }
+      },
+      "theming": {
+        "structure": {
+          "title": "Variables estructurales",
+          "description": "Variables CSS que controlan dimensiones, espaciado, bordes y sombras del menú."
+        },
+        "items": {
+          "title": "Variables de items",
+          "description": "Variables CSS para personalizar la apariencia de los items, separadores, shortcuts y elementos internos."
+        },
+        "colors": {
+          "title": "Variables de color",
+          "description": "Patrón de variables CSS para personalizar los colores de los items del menú según el estado.",
+          "note": "Reemplaza <code>{color}</code> con cualquier color semántico de NUI (<code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>) para personalizar la apariencia de los items en diferentes estados."
+        }
       },
       "styling": {
         "title": "Estilos y personalización",
@@ -606,8 +631,24 @@
         "description": "Sistema de recuperación automática. Si la URL de la imagen falla (error 404), el componente cambia instantáneamente a mostrar las iniciales o el icono de respaldo sin romper el diseño."
       },
       "api": {
-        "title": "API y referencia",
-        "description": "Documentación completa de inputs y outputs del componente Avatar para integrar en tus proyectos."
+        "inputs": {
+          "title": "Inputs del componente",
+          "description": "Propiedades de entrada que modifican el comportamiento y apariencia del avatar."
+        },
+        "outputs": {
+          "title": "Outputs del componente",
+          "description": "Eventos emitidos por el componente que puedes escuchar para reaccionar a errores de carga de imagen."
+        }
+      },
+      "theming": {
+        "sizes": {
+          "title": "Variables de tamaños",
+          "description": "Variables CSS que controlan las dimensiones del avatar, tamaños de fuente y tamaños de iconos."
+        },
+        "styles": {
+          "title": "Variables de estilos",
+          "description": "Variables CSS para personalizar bordes, colores por defecto y tipografía del avatar."
+        }
       },
       "styling": {
         "title": "Estilos y personalización",
@@ -658,11 +699,27 @@
       },
       "api": {
         "title": "API y referencia",
-        "description": "Documentación completa de inputs, outputs y uso avanzado del componente Button Group."
+        "description": "Documentación completa de inputs, outputs y uso avanzado del componente Button Group.",
+        "inputs": {
+          "title": "Inputs",
+          "description": "Propiedades del componente que controlan su comportamiento y apariencia."
+        },
+        "outputs": {
+          "title": "Outputs",
+          "description": "Eventos emitidos por el componente durante su ciclo de vida."
+        }
       },
-      "styling": {
+      "theming": {
         "title": "Estilos y personalización",
-        "description": "Personaliza la apariencia del grupo de botones mediante variables CSS. Controla espaciado, colores, sombras y más."
+        "description": "Personaliza la apariencia del grupo de botones mediante variables CSS. Controla espaciado, colores, sombras y más.",
+        "general": {
+          "title": "Variables generales",
+          "description": "Variables CSS para personalizar el estilo general del Button Group (layout default)."
+        },
+        "segmented": {
+          "title": "Variables del layout segmented",
+          "description": "Variables CSS específicas para el estilo segmented (iOS-like). Controla el contenedor, estados seleccionado/no seleccionado y efectos hover."
+        }
       }
     },
     "paginator": {
@@ -685,7 +742,7 @@
       "layout": {
         "title": "Layout personalizado",
         "description": "La característica más potente. Define exactamente dónde va cada elemento (top, left, center, right, bottom) usando un objeto de configuración.",
-        "note": "<strong>Sistema de áreas:</strong> Puedes mover el selector de tamaño a la izquierda, poner el resumen de items arriba, o crear cualquier composición que necesite tu diseño. Cuando se establece un layout, los atributos como <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> y <code>showPageJump</code> se ignoran porque el layout personalizado tiene control total sobre qué mostrar y dónde."
+        "note": "<strong>⚠️ Importante para móvil:</strong> Los layouts complejos diseñados para desktop pueden desbordarse en pantallas pequeñas. Siempre proporciona un <code>mobileLayout</code> optimizado que reorganice los elementos verticalmente y priorice la navegación esencial. Esto previene problemas de UX en dispositivos móviles. <br/><br/><strong>Sistema de áreas:</strong> Cuando se establece un layout, los atributos como <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> y <code>showPageJump</code> se ignoran porque el layout personalizado tiene control total sobre qué mostrar y dónde."
       },
       "infinite": {
         "title": "Carga infinita",
@@ -694,74 +751,178 @@
       },
       "api": {
         "title": "API y referencia",
-        "description": "Documentación completa de inputs, outputs e interfaces del componente Paginator para integración avanzada."
+        "description": "Documentación completa de inputs, outputs e interfaces del componente Paginator para integración avanzada.",
+        "inputs": {
+          "title": "Inputs",
+          "description": "Propiedades de entrada del componente Paginator"
+        },
+        "outputs": {
+          "title": "Outputs",
+          "description": "Eventos emitidos por el componente Paginator"
+        },
+        "config": {
+          "title": "PaginatorConfig",
+          "description": "Interface para configuración avanzada del componente"
+        },
+        "texts": {
+          "title": "PaginatorTexts",
+          "description": "Interface para textos personalizables del paginador"
+        },
+        "keyboard": {
+          "title": "KeyboardConfig",
+          "description": "Interface para configuración de navegación por teclado"
+        },
+        "loading": {
+          "title": "LoadingConfig",
+          "description": "Interface para configuración de estados de loading"
+        },
+        "responsive": {
+          "title": "ResponsiveConfig",
+          "description": "Interface para configuración responsiva por breakpoints"
+        },
+        "layout": {
+          "title": "PaginatorLayout",
+          "description": "Interface para layout personalizado: organiza elementos en áreas (top, left, center, right, bottom)"
+        },
+        "icons": {
+          "title": "IconConfig",
+          "description": "Interface para configuración de iconos personalizables"
+        },
+        "infinite": {
+          "title": "InfiniteConfig",
+          "description": "Interface para configuración del modo de scroll infinito"
+        }
       },
       "styling": {
         "title": "Estilos y personalización",
         "description": "Personaliza la apariencia del paginador mediante variables CSS. Controla layout, botones, números de página y más."
+      },
+      "theming": {
+        "layout": {
+          "title": "Layout",
+          "description": "Variables CSS para el diseño general del paginador"
+        },
+        "buttons": {
+          "title": "Botones",
+          "description": "Variables CSS para los botones de navegación y números de página"
+        },
+        "active": {
+          "title": "Página activa",
+          "description": "Variables CSS para el estado activo de la página actual"
+        },
+        "controls": {
+          "title": "Controles",
+          "description": "Variables CSS para el selector de tamaño, rango de elementos y salto de página"
+        },
+        "infinite": {
+          "title": "Scroll infinito",
+          "description": "Variables CSS para el modo de carga infinita"
+        }
       }
     },
     "popover": {
       "title": "Popover",
       "subtitle": "Componente de contenido flotante interactivo con soporte para texto, templates y componentes dinámicos. Al contrario que <code>Tooltip</code>, el popover puede contener elementos interactivos como botones, formularios o listas.",
-      "basic": {
-        "title": "Uso básico",
-        "description": "Popover simple con contenido de texto. El popover se muestra al hacer click en el elemento (comportamiento predeterminado)."
-      },
-      "colors": {
-        "title": "Colores y variantes",
-        "description": "Soporta todos los colores y variantes (Solid, Outline, Ghost) de NUI para personalizar la apariencia del popover.",
-        "note": "Combina <code>color</code> y <code>variant</code> para adaptar el estilo del popover a tu diseño."
-      },
-      "positions": {
-        "title": "Posiciones",
-        "description": "Controla la posición preferida del popover: top, bottom, left o right. El popover se reposiciona automáticamente si no hay espacio suficiente."
-      },
-      "events": {
-        "title": "Eventos de activación",
-        "description": "Define cómo se activa el popover: click (predeterminado), hover, focus o manual. El modo manual permite control programático completo.",
-        "note": "Al usar <code>nuiPopoverEvent</code> disponemos de tres modos: <code>'click'</code> (mostrar/ocultar al hacer click), <code>'hover'</code> (mostrar al pasar el ratón y ocultar al salir) y <code>'focus'</code> (mostrar al enfocar y ocultar al perder el foco)."
-      },
-      "template": {
-        "title": "Template personalizado",
-        "description": "Usa templates de Angular para contenido rico e interactivo. El contexto del template proporciona una función <code>close</code> para cerrar el popover.",
-        "note": "El template <code>#popoverTemplate</code> recibe un contexto con la función <code>close()</code> que puedes usar para cerrar el popover desde dentro del template."
-      },
-      "component": {
-        "title": "Componente dinámico",
-        "description": "Renderiza componentes completos de Angular dentro del popover. Ideal para formularios, listas o contenido complejo."
-      },
-      "delays": {
-        "title": "Delays de mostrar / ocultar",
-        "description": "Configura retrasos en milisegundos antes de mostrar u ocultar el popover. Útil para mejorar la experiencia de usuario en modo hover."
-      },
-      "customization": {
-        "title": "Personalización",
-        "description": "Personaliza la apariencia del popover: sin flecha, ancho personalizado, clases CSS propias o mayor offset de separación.",
-        "note": "Puedes usar <code>nuiPopoverShowArrow</code> para ocultar / mostrar la flecha, <code>nuiPopoverMaxWidth</code> para definir un ancho máximo, <code>nuiPopoverMinWidth</code> para definir un ancho mínimo, <code>nuiPopoverClass</code> para agregar clases CSS personalizadas, y <code>nuiPopoverOffset</code> para ajustar la distancia entre el popover y el elemento objetivo."
-      },
-      "closeOptions": {
-        "title": "Opciones de cierre",
-        "description": "Controla cómo se puede cerrar el popover: click fuera, tecla Escape, o permitir múltiples popovers abiertos simultáneamente.",
-        "note": "Utiliza <code>nuiPopoverCloseOnClickOutside</code> para cerrar al hacer click fuera, <code>nuiPopoverCloseOnEscape</code> para cerrar con Escape, y <code>nuiPopoverAllowMultiple</code> para permitir múltiples popovers abiertos a la vez."
-      },
-      "backdrop": {
-        "title": "Backdrop",
-        "description": "Agrega un fondo oscuro detrás del popover para crear una experiencia modal. Puedes controlar si el click en el backdrop cierra o no el popover.",
-        "note": "Usa <code>nuiPopoverBackdrop</code> para habilitar / deshabilitar el backdrop y <code>nuiBackdropClose</code> para controlar si el click en el backdrop cierra el popover."
-      },
-      "disabled": {
-        "title": "Estado deshabilitado",
-        "description": "Controla dinámicamente si el popover está habilitado o deshabilitado.",
-        "note": "Cuando <code>nuiPopoverDisabled</code> está en <code>true</code>, el popover no se mostrará ni responderá a eventos."
+      "examples": {
+        "basic": {
+          "title": "Uso básico",
+          "description": "Popover simple con contenido de texto. El popover se muestra al hacer click en el elemento (comportamiento predeterminado)."
+        },
+        "colors": {
+          "title": "Colores y variantes",
+          "description": "Soporta todos los colores y variantes (Solid, Outline, Ghost) de NUI para personalizar la apariencia del popover.",
+          "note": "Combina <code>color</code> y <code>variant</code> para adaptar el estilo del popover a tu diseño."
+        },
+        "positions": {
+          "title": "Posiciones",
+          "description": "Controla la posición preferida del popover: top, bottom, left o right. El popover se reposiciona automáticamente si no hay espacio suficiente."
+        },
+        "events": {
+          "title": "Eventos de activación",
+          "description": "Define cómo se activa el popover: click (predeterminado), hover, focus o manual. El modo manual permite control programático completo.",
+          "note": "Al usar <code>nuiPopoverEvent</code> disponemos de tres modos: <code>'click'</code> (mostrar/ocultar al hacer click), <code>'hover'</code> (mostrar al pasar el ratón y ocultar al salir) y <code>'focus'</code> (mostrar al enfocar y ocultar al perder el foco)."
+        },
+        "template": {
+          "title": "Template personalizado",
+          "description": "Usa templates de Angular para contenido rico e interactivo. El contexto del template proporciona una función <code>close</code> para cerrar el popover.",
+          "note": "El template <code>#popoverTemplate</code> recibe un contexto con la función <code>close()</code> que puedes usar para cerrar el popover desde dentro del template."
+        },
+        "component": {
+          "title": "Componente dinámico",
+          "description": "Renderiza componentes completos de Angular dentro del popover. Ideal para formularios, listas o contenido complejo."
+        },
+        "delays": {
+          "title": "Delays de mostrar / ocultar",
+          "description": "Configura retrasos en milisegundos antes de mostrar u ocultar el popover. Útil para mejorar la experiencia de usuario en modo hover."
+        },
+        "customization": {
+          "title": "Personalización",
+          "description": "Personaliza la apariencia del popover: sin flecha, ancho personalizado, clases CSS propias o mayor offset de separación.",
+          "note": "Puedes usar <code>nuiPopoverShowArrow</code> para ocultar / mostrar la flecha, <code>nuiPopoverMaxWidth</code> para definir un ancho máximo, <code>nuiPopoverMinWidth</code> para definir un ancho mínimo, <code>nuiPopoverClass</code> para agregar clases CSS personalizadas, y <code>nuiPopoverOffset</code> para ajustar la distancia entre el popover y el elemento objetivo."
+        },
+        "closeOptions": {
+          "title": "Opciones de cierre",
+          "description": "Controla cómo se puede cerrar el popover: click fuera, tecla Escape, o permitir múltiples popovers abiertos simultáneamente.",
+          "note": "Utiliza <code>nuiPopoverCloseOnClickOutside</code> para cerrar al hacer click fuera, <code>nuiPopoverCloseOnEscape</code> para cerrar con Escape, y <code>nuiPopoverAllowMultiple</code> para permitir múltiples popovers abiertos a la vez."
+        },
+        "backdrop": {
+          "title": "Backdrop",
+          "description": "Agrega un fondo oscuro detrás del popover para crear una experiencia modal. Puedes controlar si el click en el backdrop cierra o no el popover.",
+          "note": "Usa <code>nuiPopoverBackdrop</code> para habilitar / deshabilitar el backdrop y <code>nuiBackdropClose</code> para controlar si el click en el backdrop cierra el popover."
+        },
+        "disabled": {
+          "title": "Estado deshabilitado",
+          "description": "Controla dinámicamente si el popover está habilitado o deshabilitado.",
+          "note": "Cuando <code>nuiPopoverDisabled</code> está en <code>true</code>, el popover no se mostrará ni responderá a eventos."
+        }
       },
       "api": {
-        "title": "API y referencia",
-        "description": "Documentación completa de la directiva nuiPopover, tokens de inyección y uso avanzado."
+        "inputs": {
+          "title": "Inputs",
+          "description": "Propiedades de entrada de la directiva <code>nuiPopover</code>"
+        },
+        "outputs": {
+          "title": "Outputs",
+          "description": "Eventos emitidos por la directiva <code>nuiPopover</code>"
+        },
+        "config": {
+          "title": "PopoverConfig",
+          "description": "Interface para configuración global del popover mediante <code>provideNUIConfig({ popover: {...} })</code>"
+        },
+        "context": {
+          "title": "PopoverContext",
+          "description": "Interface del contexto disponible en templates del popover mediante <code>let-close=\"close\"</code> y <code>let-data=\"data\"</code>"
+        },
+        "tokens": {
+          "title": "Tokens de inyección",
+          "description": "Tokens para inyectar datos y funciones en componentes dinámicos del popover"
+        }
       },
-      "styling": {
-        "title": "Estilos y personalización",
-        "description": "Personaliza la apariencia del popover mediante variables CSS. Controla colores, tamaño, sombras y animaciones."
+      "theming": {
+        "spacing": {
+          "title": "Espaciado y dimensiones",
+          "description": "Variables CSS para controlar el tamaño, padding y espaciado del popover"
+        },
+        "typography": {
+          "title": "Tipografía",
+          "description": "Variables CSS para controlar la fuente del contenido del popover"
+        },
+        "borders": {
+          "title": "Bordes",
+          "description": "Variables CSS para controlar los bordes y radio del popover"
+        },
+        "shadow": {
+          "title": "Sombra",
+          "description": "Variable CSS para controlar la sombra del popover"
+        },
+        "zindex": {
+          "title": "Z-index",
+          "description": "Variable CSS para controlar el orden de apilamiento del popover"
+        },
+        "animation": {
+          "title": "Animación",
+          "description": "Variables CSS para controlar las transiciones y animaciones del popover"
+        }
       }
     },
     "toast": {

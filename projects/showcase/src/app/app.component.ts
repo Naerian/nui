@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './shared/header/header.component';
@@ -7,6 +7,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ShowcaseConfigService } from './core/services/showcase-config.service';
 import { ThemeService } from 'nui';
 import { aura, warm, neon, dopamine, corporate, minimal } from 'nui';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
   private translate = inject(TranslateService);
   private showcaseConfig = inject(ShowcaseConfigService);
   private themeService = inject(ThemeService);
+  private router = inject(Router);
 
   isSidebarCollapsed = false;
 
@@ -60,6 +62,13 @@ export class AppComponent implements OnInit {
     this.showcaseConfig.config$.subscribe(config => {
       this.isSidebarCollapsed = config.sidebarCollapsed;
     });
+
+    // Scroll to top on route changes
+    this.router.events
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      });
   }
 
   closeSidebarOnMobile(): void {

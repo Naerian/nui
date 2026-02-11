@@ -20,6 +20,10 @@
   font-size: var(--nui-font-size-#{$level});
   line-height: var(--nui-line-height-#{$level});
 
+  @media (max-width: 768px) {
+    font-size: var(--nui-font-size-mobile-#{$level});
+  }
+
   $weight: 'semibold';
 
   @if list.index((h1, h2, h3), $level) {

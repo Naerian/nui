@@ -1,4 +1,4 @@
-import { COOL_GRAYS, SLATE_GRAYS } from '../models/theme-grays';
+import { SLATE_GRAYS } from '../models/theme-grays';
 import { ThemePreset } from '../models/theme.model';
 
 export const aura: ThemePreset = {

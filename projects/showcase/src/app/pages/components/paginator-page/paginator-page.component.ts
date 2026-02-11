@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { PaginatorComponent, ButtonGroupComponent, PaginatorLayout } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
+import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';
 import { BaseComponentPage } from '../../../core/base/base-component-page';
 import { PAGINATOR_PAGE_CONFIG } from './paginator-page.config';
 
@@ -18,12 +19,52 @@ import { PAGINATOR_PAGE_CONFIG } from './paginator-page.config';
     PaginatorComponent,
     CodeBlockComponent,
     SectionTitleComponent,
+    ComponentTabsComponent,
   ],
   templateUrl: './paginator-page.component.html',
   styleUrls: ['./paginator-page.component.scss'],
 })
 export class PaginatorPageComponent extends BaseComponentPage {
-  pageConfig = PAGINATOR_PAGE_CONFIG;
+  override pageConfig = PAGINATOR_PAGE_CONFIG;
+
+  tabs: ComponentTab[] = [
+    {
+      id: 'examples',
+      label: 'common.tabs.examples',
+      icon: 'ri-code-s-slash-line',
+      sections: ['basic', 'colors', 'sizes', 'layout', 'infinite'],
+    },
+    {
+      id: 'api',
+      label: 'common.tabs.api',
+      icon: 'ri-braces-line',
+      sections: [
+        'api-inputs',
+        'api-outputs',
+        'api-config',
+        'api-texts',
+        'api-keyboard',
+        'api-loading',
+        'api-responsive',
+        'api-layout',
+        'api-icons',
+        'api-infinite',
+      ],
+    },
+    {
+      id: 'theming',
+      label: 'common.tabs.theming',
+      icon: 'ri-palette-line',
+      sections: [
+        'theming-layout',
+        'theming-buttons',
+        'theming-active',
+        'theming-controls',
+        'theming-infinite',
+        'theming-examples',
+      ],
+    },
+  ];
 
   // ==========================================
   // ESTADO DE EJEMPLOS
@@ -87,6 +128,36 @@ export class PaginatorPageComponent extends BaseComponentPage {
     // Ajustes
     direction: 'column',
     gap: '1rem',
+  };
+
+  // Layout optimizado para móvil: Evita desbordamiento reorganizando elementos verticalmente
+  idealMobileLayout: PaginatorLayout = {
+    // TOP: Información contextual (cuántos items hay)
+    top: ['itemRange'],
+
+    // CENTER: Solo navegación esencial (botones más compactos)
+    center: ['prevButton', 'currentPage', 'nextButton'],
+
+    // BOTTOM: Controles de configuración apilados
+    bottom: ['pageSize', 'pageJump'],
+
+    // Configuración de áreas
+    topConfig: {
+      horizontal: 'center',
+      vertical: 'center',
+    },
+    centerConfig: {
+      horizontal: 'center',
+      vertical: 'center',
+    },
+    bottomConfig: {
+      horizontal: 'center',
+      vertical: 'center',
+    },
+
+    // Layout vertical para apilar elementos
+    direction: 'column',
+    gap: '0.75rem',
   };
 
   // ==========================================

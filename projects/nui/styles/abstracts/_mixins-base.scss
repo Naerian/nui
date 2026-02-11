@@ -11,4 +11,10 @@
   padding: var(--nui-padding-#{$size}, #{map.get(config.$paddings, $size)});
   font-size: var(--nui-font-size-#{$size}, #{map.get(config.$font-sizes, $size)});
   line-height: var(--nui-line-height-md); // Fixed line-height for all component sizes
+
+  @media (max-width: 768px) {
+    height: var(--nui-height-mobile-#{$size}, #{map.get(config.$heights-mobile, $size)});
+    padding: var(--nui-padding-mobile-#{$size}, #{map.get(config.$paddings-mobile, $size)});
+    font-size: var(--nui-font-size-mobile-#{$size}, #{map.get(config.$font-sizes-mobile, $size)});
+  }
 }

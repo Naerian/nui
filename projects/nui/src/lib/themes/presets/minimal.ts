@@ -11,7 +11,7 @@ export const minimal: ThemePreset = {
     light: {
       primary: '#18181b',
       secondary: '#707070',
-      accent: '#3c3c41',
+      accent: '#8473b8',
       success: '#14532d',
       info: '#1e3a8a',
       warning: '#9c4615',
@@ -21,7 +21,7 @@ export const minimal: ThemePreset = {
     dark: {
       primary: '#a1a1aa',
       secondary: '#5b5b66',
-      accent: '#71717a',
+      accent: '#8473b8',
       success: '#15803d',
       info: '#3b82f6',
       warning: '#f59e0b',

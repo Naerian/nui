@@ -24,6 +24,21 @@
   --nui-font-size-h5: #{config.$font-size-h5};
   --nui-font-size-h6: #{config.$font-size-h6};
 
+  @media (max-width: 768px) {
+    --nui-font-size-xs: #{config.$font-size-mobile-xs};
+    --nui-font-size-sm: #{config.$font-size-mobile-sm};
+    --nui-font-size-md: #{config.$font-size-mobile-md};
+    --nui-font-size-lg: #{config.$font-size-mobile-lg};
+    --nui-font-size-xl: #{config.$font-size-mobile-xl};
+
+    --nui-font-size-h1: #{config.$font-size-mobile-h1};
+    --nui-font-size-h2: #{config.$font-size-mobile-h2};
+    --nui-font-size-h3: #{config.$font-size-mobile-h3};
+    --nui-font-size-h4: #{config.$font-size-mobile-h4};
+    --nui-font-size-h5: #{config.$font-size-mobile-h5};
+    --nui-font-size-h6: #{config.$font-size-mobile-h6};
+  }
+
   --nui-font-weight-regular: #{config.$font-weight-regular};
   --nui-font-weight-medium: #{config.$font-weight-medium};
   --nui-font-weight-semibold: #{config.$font-weight-semibold};
@@ -75,6 +90,14 @@
   --nui-spacing-lg: #{config.$padding-lg};
   --nui-spacing-xl: #{config.$padding-xl};
 
+  @media (max-width: 768px) {
+    --nui-spacing-xs: #{config.$padding-mobile-xs};
+    --nui-spacing-sm: #{config.$padding-mobile-sm};
+    --nui-spacing-md: #{config.$padding-mobile-md};
+    --nui-spacing-lg: #{config.$padding-mobile-lg};
+    --nui-spacing-xl: #{config.$padding-mobile-xl};
+  }
+
   /// =======================
   /// TRANSITIONS
   /// =======================
@@ -102,6 +125,20 @@
   --nui-padding-md: #{map.get(config.$paddings, md)};
   --nui-padding-lg: #{map.get(config.$paddings, lg)};
   --nui-padding-xl: #{map.get(config.$paddings, xl)};
+
+  @media (max-width: 768px) {
+    --nui-height-xs: #{map.get(config.$heights-mobile, xs)};
+    --nui-height-sm: #{map.get(config.$heights-mobile, sm)};
+    --nui-height-md: #{map.get(config.$heights-mobile, md)};
+    --nui-height-lg: #{map.get(config.$heights-mobile, lg)};
+    --nui-height-xl: #{map.get(config.$heights-mobile, xl)};
+
+    --nui-padding-xs: #{map.get(config.$paddings-mobile, xs)};
+    --nui-padding-sm: #{map.get(config.$paddings-mobile, sm)};
+    --nui-padding-md: #{map.get(config.$paddings-mobile, md)};
+    --nui-padding-lg: #{map.get(config.$paddings-mobile, lg)};
+    --nui-padding-xl: #{map.get(config.$paddings-mobile, xl)};
+  }
 
   /// =======================
   /// FOCUS RING
