@@ -141,29 +141,23 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'api-calendar-value',
-    title: 'components.calendar.api.calendarValue.title',
-    description: 'components.calendar.api.calendarValue.description',
+    title: 'components.calendar.api.calendar-value.title',
+    description: 'components.calendar.api.calendar-value.description',
     anchor: 'api-calendar-value',
     note: {
       type: 'info',
       icon: 'ri-information-line',
-      content: 'components.calendar.api.calendarValue.note',
+      content: 'components.calendar.api.calendar-value.note',
     },
-    examples: [
-      {
-        title: 'Definición de CalendarValue',
-        code: `type CalendarValue = 
-  | { type: 'DAY'; date: Date; time?: TimeValue }
-  | { type: 'WEEK'; dates: Date[]; week: WeekRange; time?: { start?: TimeValue; end?: TimeValue } }
-  | { type: 'RANGE'; dates: Date[]; range: { start: Date | null; end: Date | null }; time?: { start?: TimeValue; end?: TimeValue } }`,
-        language: 'typescript',
-      },
-    ],
+    table: {
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
+      rows: [['<code>type</code>', 'CalendarType', 'Tipo de selección (DAY, WEEK, RANGE)']],
+    },
   },
   {
     id: 'api-calendar-type',
-    title: 'components.calendar.api.calendarType.title',
-    description: 'components.calendar.api.calendarType.description',
+    title: 'components.calendar.api.calendar-type.title',
+    description: 'components.calendar.api.calendar-type.description',
     anchor: 'api-calendar-type',
     table: {
       headers: ['common.tables.value', 'common.tables.description'],
@@ -176,16 +170,13 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'api-calendar-width',
-    title: 'components.calendar.api.calendarWidth.title',
-    description: 'components.calendar.api.calendarWidth.description',
+    title: 'components.calendar.api.calendar-width.title',
+    description: 'components.calendar.api.calendar-width.description',
     anchor: 'api-calendar-width',
     table: {
       headers: ['common.tables.value', 'common.tables.description'],
       rows: [
-        [
-          '<code>compact</code>',
-          'Ancho fijo según el tamaño (size). No se adapta al contenedor.',
-        ],
+        ['<code>compact</code>', 'Ancho fijo según el tamaño (size). No se adapta al contenedor.'],
         [
           '<code>full</code>',
           'Ancho 100% del contenedor. Usa Container Queries para adaptar tipografía y espaciado.',
@@ -195,8 +186,8 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'api-view-mode',
-    title: 'components.calendar.api.viewMode.title',
-    description: 'components.calendar.api.viewMode.description',
+    title: 'components.calendar.api.view-mode.title',
+    description: 'components.calendar.api.view-mode.description',
     anchor: 'api-view-mode',
     table: {
       headers: ['common.tables.value', 'common.tables.description'],
@@ -209,7 +200,7 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
     note: {
       type: 'info',
       icon: 'ri-information-line',
-      content: 'components.calendar.api.viewMode.note',
+      content: 'components.calendar.api.view-mode.note',
     },
   },
   {
@@ -217,17 +208,18 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
     title: 'components.calendar.api.preset.title',
     description: 'components.calendar.api.preset.description',
     anchor: 'api-preset',
+    table: {
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
+      rows: [
+        ['<code>label</code>', 'string', 'Texto que se muestra en el botón'],
+        ['<code>start</code>', 'Date', 'Fecha de inicio del rango'],
+        ['<code>end</code>', 'Date', 'Fecha de fin del rango'],
+      ],
+    },
     examples: [
       {
         title: 'Interface DateRangePreset',
-        code: `interface DateRangePreset {
-  label: string;      // Texto que se muestra en el botón
-  start: Date;        // Fecha de inicio del rango
-  end: Date;          // Fecha de fin del rango
-}
-
-// Ejemplo de uso
-customPresets: DateRangePreset[] = [
+        code: `customPresets: DateRangePreset[] = [
   {
     label: 'Últimos 7 días',
     start: subDays(new Date(), 7),

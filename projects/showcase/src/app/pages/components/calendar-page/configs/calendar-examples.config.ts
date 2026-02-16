@@ -100,8 +100,8 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'range-selection',
-    title: 'components.calendar.rangeSelection.title',
-    description: 'components.calendar.rangeSelection.description',
+    title: 'components.calendar.range-selection.title',
+    description: 'components.calendar.range-selection.description',
     anchor: 'range-selection',
     examples: [
       {

@@ -403,6 +403,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     const minDateObj = this.parseDate(this.minDate());
     const viewMode = this.viewMode();
     const currentYear = this.displayedYear();
+    const currentMonth = this.displayedMonthIndex();
 
     if (viewMode === ViewMode.YEAR) {
       const firstYear = this.years()[0];
@@ -411,8 +412,13 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       // En vista de meses, verificar si se puede navegar al año anterior
       return currentYear > minDateObj.getFullYear();
     } else {
-      // En vista de días, verificar si el mes anterior es navegable
-      return this.calendarService.dateAdapter.isAfter(this.currentDate(), minDateObj);
+      // En vista de días, verificar si el mes anterior tiene algún día válido
+      // Calcular el último día del mes anterior
+      const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+      const previousYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+      const lastDayOfPreviousMonth = new Date(previousYear, previousMonth + 1, 0);
+      
+      return lastDayOfPreviousMonth >= minDateObj;
     }
   });
 
@@ -422,6 +428,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     const maxDateObj = this.parseDate(this.maxDate());
     const viewMode = this.viewMode();
     const currentYear = this.displayedYear();
+    const currentMonth = this.displayedMonthIndex();
 
     if (viewMode === ViewMode.YEAR) {
       const lastYear = this.years()[this.years().length - 1];
@@ -430,8 +437,13 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       // En vista de meses, verificar si se puede navegar al año siguiente
       return currentYear < maxDateObj.getFullYear();
     } else {
-      // En vista de días, verificar si el mes siguiente es navegable
-      return this.calendarService.dateAdapter.isBefore(this.currentDate(), maxDateObj);
+      // En vista de días, verificar si el mes siguiente tiene algún día válido
+      // Calcular el primer día del mes siguiente
+      const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
+      const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear;
+      const firstDayOfNextMonth = new Date(nextYear, nextMonth, 1);
+      
+      return firstDayOfNextMonth <= maxDateObj;
     }
   });
 
