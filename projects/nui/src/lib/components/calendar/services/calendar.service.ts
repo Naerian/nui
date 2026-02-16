@@ -155,6 +155,7 @@ export class CalendarService {
       maxDate?: Date | string;
       selectedDate?: Date | null;
       selectedRange?: { start: Date | null; end: Date | null };
+      selectedWeek?: { start: Date; end: Date } | null;
       hoveredDate?: Date | null;
     }
   ): CalendarDay[] {
@@ -176,6 +177,7 @@ export class CalendarService {
     const disabledDates = options?.disabledDates || [];
     const selectedDate = options?.selectedDate || null;
     const selectedRange = options?.selectedRange || { start: null, end: null };
+    const selectedWeek = options?.selectedWeek || null;
     const hoveredDate = options?.hoveredDate || null;
 
     return calendarDaysRaw.map(date => ({
@@ -184,7 +186,7 @@ export class CalendarService {
       isCurrentMonth: this.isSameMonth(date, currentDate),
       isToday: this.isToday(date),
       isSelected: this.isDateSelected(date, selectedDate, selectedRange),
-      isInRange: this.isDateInRange(date, selectedRange, hoveredDate),
+      isInRange: this.isDateInRange(date, selectedRange, selectedWeek, hoveredDate),
       isDisabled: this.isDateUnselectable(date, disabledDates, minDateObj, maxDateObj),
       isHovered: hoveredDate ? this.isSameDay(date, hoveredDate) : false,
     }));
@@ -220,14 +222,20 @@ export class CalendarService {
   }
 
   /**
-   * Verifica si una fecha está dentro del rango (para preview en RANGE mode)
+   * Verifica si una fecha está dentro del rango (para preview en RANGE mode o WEEK mode)
    * @private
    */
   private isDateInRange(
     date: Date,
     selectedRange: { start: Date | null; end: Date | null },
+    selectedWeek: { start: Date; end: Date } | null,
     hoveredDate: Date | null
   ): boolean {
+    // Modo WEEK: verificar si está dentro de la semana seleccionada
+    if (selectedWeek) {
+      return this.isWithinRange(date, selectedWeek.start, selectedWeek.end);
+    }
+
     // Si no hay rango, no está in-range
     if (!selectedRange.start) return false;
 

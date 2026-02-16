@@ -9,25 +9,25 @@ $calendar-widths: (
   sm: 320px,
   md: 360px,
   lg: 400px,
-  xl: 440px,
+  xl: 480px,
 ) !default;
 
 // Gaps entre días
 $calendar-gaps: (
-  xs: 2px,
-  sm: 4px,
-  md: 5px,
-  lg: 6px,
-  xl: 8px,
+  xs: 0.25rem,   // 4px - más espaciado que antes
+  sm: 0.375rem,  // 6px
+  md: 0.5rem,    // 8px
+  lg: 0.625rem,  // 10px
+  xl: 0.75rem,   // 12px
 ) !default;
 
 // Paddings del contenedor calendario
 $calendar-paddings: (
-  xs: 0.25rem,
-  sm: 0.5rem,
-  md: 0.75rem,
-  lg: 1rem,
-  xl: 1.25rem,
+  xs: 0.5rem,    // 8px - más espacioso
+  sm: 0.75rem,   // 12px
+  md: 1rem,      // 16px
+  lg: 1.25rem,   // 20px
+  xl: 1.5rem,    // 24px
 ) !default;
 
 // Font sizes para los días del calendario
@@ -97,21 +97,16 @@ $calendar-focus-outline-offset: 2px !default;
 // MIXIN (CSS Custom Properties)
 @mixin nui-calendar-vars {
   // Full width mode
-  --calendar-full-min-width: #{$calendar-full-min-width};
+  --nui-calendar-full-min-width: #{$calendar-full-min-width};
 
   // Borders
-  --calendar-tabs-border-width: #{$calendar-tabs-border-width};
-  --calendar-preset-border-width: #{$calendar-preset-border-width};
-  --calendar-day-border-width: #{$calendar-day-border-width};
+  --nui-calendar-tabs-border-width: #{$calendar-tabs-border-width};
+  --nui-calendar-preset-border-width: #{$calendar-preset-border-width};
+  --nui-calendar-day-border-width: #{$calendar-day-border-width};
 
   // Opacities
-  --calendar-day-other-month-opacity: #{$calendar-day-other-month-opacity};
+  --nui-calendar-day-other-month-opacity: #{$calendar-day-other-month-opacity};
 
   // Transforms
-  --calendar-preset-hover-translateY: #{$calendar-preset-hover-translateY};
-  --calendar-preset-active-translateY: #{$calendar-preset-active-translateY};
-
-  // Outline (focus states)
-  --calendar-focus-outline-width: #{$calendar-focus-outline-width};
-  --calendar-focus-outline-offset: #{$calendar-focus-outline-offset};
+  --nui-calendar-preset-hover-translateY: #{$calendar-preset-hover-translateY};
 }

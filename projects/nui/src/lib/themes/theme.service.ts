@@ -753,22 +753,46 @@ export class ThemeService {
   private generateCalendarVariables(): string {
     const isDark = this._isDarkMode();
     const grays = this._currentPreset().grays || this.getDefaultGrays();
+    const colors = this._isDarkMode()
+      ? this._currentPreset().colors.dark
+      : this._currentPreset().colors.light;
     
-    // El calendario usa principalmente las CSS variables del tema
-    // Pero añadimos algunas propiedades específicas si es necesario
-    const tabsBorder = isDark ? grays[700] : grays[200];
-    const presetBorder = isDark ? grays[700] : grays[300];
+    // Colores de fondo y texto para días del calendario
+    const dayBg = 'transparent';
+    const dayText = isDark ? grays[400] : grays[600];
+    
+    // Hover states
+    const dayHoverBg = isDark ? grays[800] : grays[100];
+    const dayHoverText = isDark ? grays[50] : grays[900];
+    
+    // Selected states
+    const daySelectedBg = colors.primary;
+    const daySelectedText = this.getContrastColor(colors.primary);
+    const daySelectedHoverBg = isDark 
+      ? this.shade(colors.primary, 15) 
+      : this.shade(colors.primary, 10);
+    
+    // In-range states (para rangos de fechas)
+    const dayRangeBg = this.withAlpha(colors.primary, 0.1);
+    const dayRangeText = isDark ? grays[50] : grays[900];
     
     return `
-      --calendar-tabs-border-width: 1px;
-      --calendar-day-border-width: 1px;
-      --calendar-day-other-month-opacity: 0.4;
-      --calendar-preset-border-width: 1px;
-      --calendar-preset-hover-translateY: -2px;
-      --calendar-preset-active-translateY: -4px;
-      --calendar-focus-outline-width: 2px;
-      --calendar-focus-outline-offset: 2px;
-      --calendar-full-min-width: 280px;
+      /* Calendar Day States */
+      --nui-calendar-day-bg: ${dayBg};
+      --nui-calendar-day-text: ${dayText};
+      
+      --nui-calendar-day-hover-bg: ${dayHoverBg};
+      --nui-calendar-day-hover-text: ${dayHoverText};
+      
+      --nui-calendar-day-selected-bg: ${daySelectedBg};
+      --nui-calendar-day-selected-text: ${daySelectedText};
+      --nui-calendar-day-selected-border: ${daySelectedBg};
+      
+      --nui-calendar-day-selected-hover-bg: ${daySelectedHoverBg};
+      --nui-calendar-day-selected-hover-border: ${daySelectedHoverBg};
+      
+      --nui-calendar-day-range-bg: ${dayRangeBg};
+      --nui-calendar-day-range-text: ${dayRangeText};
     `;
   }
 

@@ -74,8 +74,8 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'week-selection',
-    title: 'components.calendar.weekSelection.title',
-    description: 'components.calendar.weekSelection.description',
+    title: 'components.calendar.week-selection.title',
+    description: 'components.calendar.week-selection.description',
     anchor: 'week-selection',
     examples: [
       {
@@ -172,8 +172,8 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'time-picker',
-    title: 'components.calendar.timePicker.title',
-    description: 'components.calendar.timePicker.description',
+    title: 'components.calendar.time-picker.title',
+    description: 'components.calendar.time-picker.description',
     anchor: 'time-picker',
     examples: [
       {
@@ -204,8 +204,8 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'disabled-dates',
-    title: 'components.calendar.disabledDates.title',
-    description: 'components.calendar.disabledDates.description',
+    title: 'components.calendar.disabled-dates.title',
+    description: 'components.calendar.disabled-dates.description',
     anchor: 'disabled-dates',
     examples: [
       {
@@ -228,8 +228,8 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'min-max-dates',
-    title: 'components.calendar.minMaxDates.title',
-    description: 'components.calendar.minMaxDates.description',
+    title: 'components.calendar.min-max-dates.title',
+    description: 'components.calendar.min-max-dates.description',
     anchor: 'min-max-dates',
     examples: [
       {
@@ -250,8 +250,8 @@ maxDate = new Date(2024, 11, 31);`,
   },
   {
     id: 'reactive-forms',
-    title: 'components.calendar.reactiveForms.title',
-    description: 'components.calendar.reactiveForms.description',
+    title: 'components.calendar.reactive-forms.title',
+    description: 'components.calendar.reactive-forms.description',
     anchor: 'reactive-forms',
     examples: [
       {

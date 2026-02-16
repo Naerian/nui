@@ -40,7 +40,8 @@
 
                   @if (selectedDateString()) {
                     <div class="value-display">
-                      Fecha seleccionada: <strong>{{ selectedDateString() }}</strong>
+                      Fecha seleccionada:
+                      <strong>{{ selectedDateString() }}</strong>
                     </div>
                   }
                 </div>
@@ -77,14 +78,20 @@
 
               @case ('widths') {
                 <div class="example-preview flex-column gap-4">
-                  <div class="example-item" style="max-width: 600px;">
+                  <div class="example-item" style="max-width: 600px">
                     <p class="mb-2"><strong>Compact (ancho fijo)</strong></p>
                     <nui-calendar width="compact"></nui-calendar>
                   </div>
 
-                  <div class="example-item">
+                  <div class="example-item" [style.width.%]="100">
                     <p class="mb-2"><strong>Full (100% con Container Queries)</strong></p>
-                    <div style="max-width: 800px; border: 2px dashed var(--nui-border-primary); padding: 1rem;">
+                    <div
+                      style="
+                        max-width: 800px;
+                        border: 2px dashed var(--nui-border-primary);
+                        padding: 1rem;
+                      "
+                    >
                       <nui-calendar width="full"></nui-calendar>
                     </div>
                   </div>
@@ -100,7 +107,8 @@
 
                   @if (selectedWeekRange()) {
                     <div class="value-display">
-                      Semana seleccionada: <strong>{{ selectedWeekRange() }}</strong>
+                      Semana seleccionada:
+                      <strong>{{ selectedWeekRange() }}</strong>
                     </div>
                   }
                 </div>
@@ -115,7 +123,8 @@
 
                   @if (selectedRangeDisplay()) {
                     <div class="value-display">
-                      Rango seleccionado: <strong>{{ selectedRangeDisplay() }}</strong>
+                      Rango seleccionado:
+                      <strong>{{ selectedRangeDisplay() }}</strong>
                     </div>
                   }
                 </div>
@@ -131,7 +140,8 @@
 
                   @if (selectedRangeDisplay()) {
                     <div class="value-display">
-                      Rango seleccionado: <strong>{{ selectedRangeDisplay() }}</strong>
+                      Rango seleccionado:
+                      <strong>{{ selectedRangeDisplay() }}</strong>
                     </div>
                   }
                 </div>
@@ -141,7 +151,7 @@
                 <div class="example-preview flex-column gap-4">
                   <div class="example-item">
                     <h4 class="mb-3">Fecha con hora de inicio</h4>
-                    <div style="max-width: 400px;">
+                    <div style="max-width: 400px">
                       <nui-calendar
                         [type]="CalendarType.DAY"
                         [showTimePicker]="true"
@@ -151,9 +161,12 @@
                     @if (selectedDateWithTime(); as value) {
                       <div class="value-display mt-3">
                         @if (value.type === CalendarType.DAY) {
-                          <strong>Fecha:</strong> {{ value.date.toLocaleDateString() }}<br />
+                          <strong>Fecha:</strong>
+                          {{ value.date.toLocaleDateString() }}
+                          <br />
                           @if (value.time) {
-                            <strong>Hora:</strong> {{ value.time.hour }}:{{ value.time.minute }}
+                            <strong>Hora:</strong>
+                            {{ value.time.hour }}:{{ value.time.minute }}
                           }
                         }
                       </div>
@@ -162,7 +175,7 @@
 
                   <div class="example-item">
                     <h4 class="mb-3">Rango con hora de inicio y fin</h4>
-                    <div style="max-width: 400px;">
+                    <div style="max-width: 400px">
                       <nui-calendar
                         [type]="CalendarType.RANGE"
                         showTimePicker="both"
@@ -172,14 +185,16 @@
                     @if (selectedRangeWithTime(); as value) {
                       <div class="value-display mt-3">
                         @if (value.type === CalendarType.RANGE) {
-                          <strong>Desde:</strong> {{ value.range.start.toLocaleDateString() }}
+                          <strong>Desde:</strong>
+                          {{ value.range.start.toLocaleDateString() }}
                           @if (value.time; as vtime) {
                             @if (vtime.start) {
                               a las {{ vtime.start.hour }}:{{ vtime.start.minute }}
                             }
                           }
                           <br />
-                          <strong>Hasta:</strong> {{ value.range.end.toLocaleDateString() }}
+                          <strong>Hasta:</strong>
+                          {{ value.range.end.toLocaleDateString() }}
                           @if (value.time; as vtime) {
                             @if (vtime.end) {
                               a las {{ vtime.end.hour }}:{{ vtime.end.minute }}
@@ -228,7 +243,7 @@
                 <div class="example-preview flex-column gap-4">
                   <div class="example-item">
                     <h4 class="mb-3">Selección de fecha con FormControl</h4>
-                    <div style="max-width: 400px;">
+                    <div style="max-width: 400px">
                       <nui-calendar
                         [type]="CalendarType.DAY"
                         [formControl]="dateControl"
@@ -236,13 +251,17 @@
                     </div>
                     <div class="value-display mt-3">
                       <strong>Valor del FormControl:</strong>
-                      {{ dateControl.value?.toLocaleDateString() || 'Sin selección' }}
+                      @if (dateControl.value) {
+                        {{ dateControl.value.toLocaleDateString() }}
+                      } @else {
+                        Sin selección
+                      }
                     </div>
                   </div>
 
                   <div class="example-item">
                     <h4 class="mb-3">Selección de rango con FormControl</h4>
-                    <div style="max-width: 400px;">
+                    <div style="max-width: 400px">
                       <nui-calendar
                         [type]="CalendarType.RANGE"
                         [formControl]="rangeControl"
@@ -250,9 +269,11 @@
                     </div>
                     <div class="value-display mt-3">
                       <strong>Valor del FormControl:</strong>
-                      @if (rangeControl.value && rangeControl.value.length === 2) {
+                      @if (rangeControl.value && rangeControl.value.length >= 2) {
                         {{ rangeControl.value[0].toLocaleDateString() }} -
                         {{ rangeControl.value[1].toLocaleDateString() }}
+                      } @else if (rangeControl.value && rangeControl.value.length === 1) {
+                        {{ rangeControl.value[0].toLocaleDateString() }} (seleccione fin de rango)
                       } @else {
                         Sin selección
                       }

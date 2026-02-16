@@ -47,34 +47,34 @@
 
           <div class="nui-calendar__title">
             @if (viewMode() === ViewMode.DAY) {
-              <button
-                type="button"
-                class="nui-calendar__title-button"
+              <nui-button
+                [size]="size()"
+                variant="ghost"
                 data-calendar-nav
-                (click)="switchToMonthView()"
                 [attr.aria-label]="_translations.calendar.changeMonth"
+                (onClick)="switchToMonthView()"
               >
                 {{ displayedMonth() }}
-              </button>
-              <button
-                type="button"
-                class="nui-calendar__title-button"
+              </nui-button>
+              <nui-button
+                [size]="size()"
+                variant="ghost"
                 data-calendar-nav
-                (click)="switchToYearView()"
                 [attr.aria-label]="_translations.calendar.changeYear"
+                (onClick)="switchToYearView()"
               >
                 {{ displayedYear() }}
-              </button>
+              </nui-button>
             } @else if (viewMode() === ViewMode.MONTH) {
-              <button
-                type="button"
-                class="nui-calendar__title-button"
+              <nui-button
+                [size]="size()"
+                variant="ghost"
                 data-calendar-nav
-                (click)="switchToYearView()"
                 [attr.aria-label]="_translations.calendar.changeYear"
+                (onClick)="switchToYearView()"
               >
                 {{ displayedYear() }}
-              </button>
+              </nui-button>
             } @else {
               <span class="nui-calendar__title-text">{{ _translations.calendar.changeYear }}</span>
             }
@@ -144,8 +144,11 @@
                 class="nui-calendar__month"
                 data-calendar-item="month"
                 [class.nui-calendar__month--selected]="i === displayedMonthIndex()"
+                [class.nui-calendar__month--disabled]="isMonthDisabled(i)"
                 [attr.aria-label]="month"
                 [attr.aria-selected]="i === displayedMonthIndex()"
+                [attr.aria-disabled]="isMonthDisabled(i)"
+                [disabled]="isMonthDisabled(i)"
                 (click)="selectMonth(i)"
               >
                 {{ month }}
@@ -164,8 +167,11 @@
                 class="nui-calendar__year"
                 data-calendar-item="year"
                 [class.nui-calendar__year--selected]="year === selectedYear()"
+                [class.nui-calendar__year--disabled]="isYearDisabled(year)"
                 [attr.aria-label]="year.toString()"
                 [attr.aria-selected]="year === selectedYear()"
+                [attr.aria-disabled]="isYearDisabled(year)"
+                [disabled]="isYearDisabled(year)"
                 (click)="selectYear(year)"
               >
                 {{ year }}

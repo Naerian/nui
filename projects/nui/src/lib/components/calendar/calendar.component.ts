@@ -289,6 +289,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         maxDate: this.maxDate() ?? undefined,
         selectedDate: this.selectedDate(),
         selectedRange: this.selectedRange(),
+        selectedWeek: this.selectedWeek(),
         hoveredDate: this.hoveredDate(),
       }
     );
@@ -298,6 +299,63 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     const currentYear = this.displayedYear();
     return Array.from({ length: COUNT_BLOCK_YEARS }, (_, i) => currentYear - 5 + i);
   });
+
+  // Verificar si un mes está deshabilitado (fuera del rango min/max)
+  isMonthDisabled = (monthIndex: number): boolean => {
+    const minDateValue = this.minDate();
+    const maxDateValue = this.maxDate();
+    const currentYear = this.displayedYear();
+
+    // Crear fecha del primer y último día del mes a verificar
+    const monthStart = new Date(currentYear, monthIndex, 1);
+    const monthEnd = new Date(currentYear, monthIndex + 1, 0); // Último día del mes
+
+    // Si hay minDate, verificar que el último día del mes no sea anterior
+    if (minDateValue) {
+      const minDate = this.calendarService.convertToDate(minDateValue);
+      if (minDate && monthEnd < minDate) {
+        return true;
+      }
+    }
+
+    // Si hay maxDate, verificar que el primer día del mes no sea posterior
+    if (maxDateValue) {
+      const maxDate = this.calendarService.convertToDate(maxDateValue);
+      if (maxDate && monthStart > maxDate) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  // Verificar si un año está deshabilitado (fuera del rango min/max)
+  isYearDisabled = (year: number): boolean => {
+    const minDateValue = this.minDate();
+    const maxDateValue = this.maxDate();
+
+    // Crear fecha del primer y último día del año a verificar
+    const yearStart = new Date(year, 0, 1);
+    const yearEnd = new Date(year, 11, 31);
+
+    // Si hay minDate, verificar que el último día del año no sea anterior
+    if (minDateValue) {
+      const minDate = this.calendarService.convertToDate(minDateValue);
+      if (minDate && yearEnd < minDate) {
+        return true;
+      }
+    }
+
+    // Si hay maxDate, verificar que el primer día del año no sea posterior
+    if (maxDateValue) {
+      const maxDate = this.calendarService.convertToDate(maxDateValue);
+      if (maxDate && yearStart > maxDate) {
+        return true;
+      }
+    }
+
+    return false;
+  };
 
   // D?as de la semana ordenados seg?n firstDayOfWeek
   // Rota el array de traducciones para que coincida con el orden visual del calendario
@@ -344,11 +402,16 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     if (!this.minDate()) return true;
     const minDateObj = this.parseDate(this.minDate());
     const viewMode = this.viewMode();
+    const currentYear = this.displayedYear();
 
     if (viewMode === ViewMode.YEAR) {
       const firstYear = this.years()[0];
       return firstYear > minDateObj.getFullYear();
+    } else if (viewMode === ViewMode.MONTH) {
+      // En vista de meses, verificar si se puede navegar al año anterior
+      return currentYear > minDateObj.getFullYear();
     } else {
+      // En vista de días, verificar si el mes anterior es navegable
       return this.calendarService.dateAdapter.isAfter(this.currentDate(), minDateObj);
     }
   });
@@ -358,11 +421,16 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     if (!this.maxDate()) return true;
     const maxDateObj = this.parseDate(this.maxDate());
     const viewMode = this.viewMode();
+    const currentYear = this.displayedYear();
 
     if (viewMode === ViewMode.YEAR) {
       const lastYear = this.years()[this.years().length - 1];
       return lastYear < maxDateObj.getFullYear();
+    } else if (viewMode === ViewMode.MONTH) {
+      // En vista de meses, verificar si se puede navegar al año siguiente
+      return currentYear < maxDateObj.getFullYear();
     } else {
+      // En vista de días, verificar si el mes siguiente es navegable
       return this.calendarService.dateAdapter.isBefore(this.currentDate(), maxDateObj);
     }
   });
@@ -1068,6 +1136,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     const viewMode = this.viewMode();
     if (viewMode === ViewMode.YEAR) {
       this.previousYearBlock();
+    } else if (viewMode === ViewMode.MONTH) {
+      this.previousYear();
     } else {
       this.previousMonth();
     }
@@ -1080,6 +1150,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     const viewMode = this.viewMode();
     if (viewMode === ViewMode.YEAR) {
       this.nextYearBlock();
+    } else if (viewMode === ViewMode.MONTH) {
+      this.nextYear();
     } else {
       this.nextMonth();
     }
@@ -1121,6 +1193,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   }
 
   selectYear(year: number): void {
+    // No permitir seleccionar años deshabilitados
+    if (this.isYearDisabled(year)) {
+      return;
+    }
+    
     const newDate = this.calendarService.setYear(this.currentDate(), year);
     this.currentDate.set(newDate);
     this.selectedYear.set(year); // Actualizar a?o seleccionado
@@ -1128,6 +1205,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   }
 
   selectMonth(monthIndex: number): void {
+    // No permitir seleccionar meses deshabilitados
+    if (this.isMonthDisabled(monthIndex)) {
+      return;
+    }
+    
     const newDate = this.calendarService.setMonth(this.currentDate(), monthIndex);
     this.currentDate.set(newDate);
     this.switchToDayView();
@@ -1497,14 +1579,33 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
   private emitSelection(calendarValue: CalendarValue): void {
     // ------------------------------------------------------------------------------
-    // EMITIR VALORES (CalendarValue ya viene construido)
+    // EMITIR VALORES
     // ------------------------------------------------------------------------------
 
-    // 1. Emitir evento valueChange (CalendarValue completo)
+    // 1. Emitir evento valueChange (CalendarValue completo - para uso avanzado)
     this.valueChange.emit(calendarValue);
 
-    // 2. Notificar a ngModel / FormControl (MISMO formato CalendarValue)
-    this.onChange(calendarValue);
+    // 2. Notificar a ngModel / FormControl (valor simplificado - para formularios reactivos)
+    // Se emite un formato más simple según el tipo para facilitar el uso con FormControl
+    let formValue: Date | Date[] | null = null;
+
+    switch (calendarValue.type) {
+      case CalendarType.DAY:
+        formValue = calendarValue.date;
+        break;
+      case CalendarType.WEEK:
+        formValue = calendarValue.dates;
+        break;
+      case CalendarType.RANGE:
+        if (calendarValue.range.start && calendarValue.range.end) {
+          formValue = [calendarValue.range.start, calendarValue.range.end];
+        } else if (calendarValue.range.start) {
+          formValue = [calendarValue.range.start];
+        }
+        break;
+    }
+
+    this.onChange(formValue);
     this.onTouched();
   }
 
