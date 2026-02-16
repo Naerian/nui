@@ -1,0 +1,579 @@
+﻿@use '../../../../styles/variables/time-picker-vars';
+
+// ============================================================================
+// HOST & STRUCTURE
+// ============================================================================
+
+:host {
+  @include time-picker-vars.nui-time-picker-vars;
+  display: block;
+  width: 100%;
+}
+
+// ============================================================================
+// ACCESSIBILITY UTILITIES
+// ============================================================================
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ============================================================================
+// BASE STYLES
+// ============================================================================
+
+.nui-time-picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nui-spacing-sm);
+  padding: var(--time-picker-padding);
+  background-color: var(--nui-bg-primary);
+  border-radius: var(--nui-border-radius-md);
+  border: 1px solid var(--nui-border-primary);
+  box-shadow: var(--nui-shadow-sm);
+  min-width: var(--time-picker-min-width);
+  width: 100%;
+
+  &--with-seconds {
+    min-width: var(--time-picker-min-width-with-seconds);
+  }
+
+  // ============================================================================
+  // HEADER
+  // ============================================================================
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nui-spacing-sm);
+    padding-bottom: var(--time-picker-padding);
+    border-bottom: var(--time-picker-header-border-width) solid var(--nui-border-primary);
+  }
+
+  &__normalized {
+    color: var(--nui-color-warning);
+    background: var(--nui-bg-warning);
+    border: var(--time-picker-header-border-width) solid var(--nui-border-warning);
+    border-radius: var(--time-picker-item-radius);
+    text-align: center;
+    line-height: 1.5;
+    font-size: var(--time-picker-normalized-font-size);
+    padding: calc(var(--time-picker-padding) / 2);
+  }
+
+  &__display {
+    font-family: var(--nui-font-family);
+    font-weight: var(--nui-font-weight-semibold);
+    color: var(--nui-text-primary);
+    text-align: center;
+    font-size: var(--time-picker-display-font-size);
+
+    &--duration {
+      font-size: var(--time-picker-font-size);
+      font-weight: var(--nui-font-weight-semibold);
+    }
+  }
+
+  // ============================================================================
+  // RANGE INDICATOR
+  // ============================================================================
+
+  &__range-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--nui-spacing-xs);
+    padding: var(--nui-spacing-sm);
+    background: var(--nui-bg-secondary);
+    border-radius: var(--time-picker-item-radius);
+    font-size: 0.85em;
+  }
+
+  &__range-label {
+    color: var(--nui-text-tertiary);
+    font-weight: var(--nui-font-weight-medium);
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__range-values {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--nui-spacing-sm);
+    color: var(--nui-text-secondary);
+    font-weight: var(--nui-font-weight-semibold);
+  }
+
+  &__range-start,
+  &__range-end {
+    color: var(--nui-color-primary);
+  }
+
+  &__range-separator {
+    color: var(--nui-text-tertiary);
+  }
+
+  // ============================================================================
+  // SELECTORS
+  // ============================================================================
+
+  &__selectors {
+    display: flex;
+    align-items: stretch;
+    padding: var(--nui-spacing-sm);
+    gap: var(--nui-spacing-sm);
+
+    &--duration {
+      gap: var(--nui-spacing-lg);
+    }
+  }
+
+  &__separator {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: var(--time-picker-separator-padding-top);
+    padding-left: var(--nui-spacing-xs);
+    padding-right: var(--nui-spacing-xs);
+    min-width: var(--time-picker-separator-width);
+
+    &-line {
+      width: var(--time-picker-separator-line-width);
+      height: var(--time-picker-separator-line-height);
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--nui-border-primary) 20%,
+        var(--nui-border-primary) 80%,
+        transparent 100%
+      );
+      border-radius: var(--time-picker-separator-border-radius);
+    }
+
+    &-text {
+      font-weight: var(--nui-font-weight-bold);
+      font-size: 1.5em;
+      color: var(--nui-text-primary);
+      margin: var(--nui-spacing-xs) 0;
+      line-height: 1;
+      text-shadow: var(--time-picker-separator-text-shadow);
+    }
+  }
+
+  // ============================================================================
+  // COLUMNS
+  // ============================================================================
+
+  &__column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    border-radius: var(--time-picker-item-radius);
+
+    &--duration-hours,
+    &--duration-minutes,
+    &--duration-seconds {
+      flex: 1;
+    }
+
+    &:focus-visible {
+      outline: var(--time-picker-focus-outline-width) solid var(--nui-color-primary);
+      outline-offset: var(--time-picker-focus-outline-offset);
+      background-color: var(--nui-bg-secondary);
+    }
+  }
+
+  &__column-label {
+    text-align: center;
+    font-size: calc(var(--time-picker-font-size) * 0.85);
+    font-weight: var(--nui-font-weight-medium);
+    color: var(--nui-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--nui-spacing-xs);
+    margin-right: calc(var(--time-picker-items-padding) + var(--nui-scrollbar-width));
+  }
+
+  &__column-items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--time-picker-items-gap);
+    overflow-y: auto;
+    max-height: var(--time-picker-max-height);
+    min-height: var(--time-picker-min-height);
+    padding: var(--time-picker-items-padding);
+    position: relative;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
+
+  // ============================================================================
+  // ITEMS
+  // ============================================================================
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--nui-spacing-xs);
+    background: var(--nui-bg-primary);
+    border: var(--time-picker-item-border-width) solid transparent;
+    border-radius: var(--time-picker-item-radius);
+    color: var(--nui-text-secondary);
+    font-family: var(--nui-font-family);
+    font-weight: var(--nui-font-weight-regular);
+    cursor: pointer;
+    height: var(--time-picker-item-height);
+    font-size: var(--time-picker-font-size);
+    transition: all var(--nui-transition-duration-fast) var(--nui-transition-timing-function-ease);
+    margin-right: 0.313rem; // 5px to compensate for 1px border and prevent layout shift on selection
+
+    &:hover:not(:disabled):not(&--selected) {
+      background-color: var(--nui-bg-secondary);
+      color: var(--nui-text-primary);
+      opacity: 1;
+    }
+
+    &--selected {
+      background: var(--nui-color-primary);
+      border-color: var(--nui-color-primary);
+      color: var(--nui-color-primary-contrast);
+      font-weight: var(--nui-font-weight-semibold);
+    }
+
+    &--focused {
+      outline: var(--time-picker-focus-outline-width) solid var(--nui-color-primary-tint-65);
+      outline-offset: var(--time-picker-item-focus-outline-offset);
+      z-index: 2;
+    }
+
+    &:focus-visible {
+      outline: var(--time-picker-focus-outline-width) solid var(--nui-color-primary-tint-65);
+      outline-offset: var(--time-picker-item-focus-outline-offset);
+      z-index: 2;
+    }
+
+    &--selected:focus-visible {
+      outline-color: var(--nui-color-primary-tint-65);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    // Duration mode variant
+    &--duration {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: var(--nui-spacing-xs);
+      padding: var(--nui-spacing-xs) var(--nui-spacing-sm);
+      min-height: var(--time-picker-item-height);
+      height: var(--time-picker-item-height);
+      font-size: var(--time-picker-font-size);
+      cursor: pointer;
+      transition: all var(--nui-transition-duration-fast) var(--nui-transition-timing-function-ease);
+      border-radius: var(--time-picker-item-radius);
+      background: var(--nui-bg-primary);
+      border: 1px solid transparent;
+      color: var(--nui-text-secondary);
+      font-family: var(--nui-font-family);
+      font-weight: var(--nui-font-weight-regular);
+
+      &:hover:not(:disabled):not(.nui-time-picker__item--selected) {
+        background-color: var(--nui-bg-secondary);
+        color: var(--nui-text-primary);
+        opacity: 1;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.4;
+      }
+
+      &.nui-time-picker__item--selected {
+        background: var(--nui-color-primary);
+        border-color: var(--nui-color-primary);
+        font-weight: var(--nui-font-weight-semibold);
+
+        .nui-time-picker__duration-value {
+          color: var(--nui-color-primary-contrast);
+          font-weight: var(--nui-font-weight-semibold);
+        }
+
+        .nui-time-picker__duration-unit {
+          color: var(--nui-color-primary-contrast);
+          font-weight: var(--nui-font-weight-medium);
+          opacity: 0.9;
+        }
+      }
+
+      &--focused {
+        outline: 2px solid var(--nui-color-primary-tint-65);
+        outline-offset: -1px;
+        z-index: 2;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--nui-color-primary-tint-65);
+        outline-offset: -1px;
+        z-index: 2;
+      }
+
+      &.nui-time-picker__item--selected:focus-visible {
+        outline-color: var(--nui-color-primary-tint-65);
+      }
+    }
+  }
+
+  &__duration-value {
+    font-size: 1em;
+    line-height: 1;
+    color: inherit;
+  }
+
+  &__duration-unit {
+    font-size: 0.85em;
+    line-height: 1;
+    text-transform: lowercase;
+    color: inherit;
+    opacity: 0.7;
+  }
+
+  // ============================================================================
+  // PERIOD SELECTOR (AM/PM)
+  // ============================================================================
+
+  &__period {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding-bottom: var(--nui-spacing-sm);
+    border-radius: var(--time-picker-item-radius);
+
+    &:focus-within {
+      outline: var(--time-picker-focus-outline-width) solid var(--nui-color-primary);
+      outline-offset: var(--time-picker-focus-outline-offset);
+      background-color: var(--nui-bg-secondary);
+    }
+
+    &-label {
+      text-align: center;
+      font-size: var(--time-picker-font-size);
+      font-weight: var(--nui-font-weight-medium);
+      color: var(--nui-text-tertiary);
+      text-transform: uppercase;
+      margin-bottom: var(--nui-spacing-xs);
+    }
+
+    &-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  // ============================================================================
+  // FOOTER
+  // ============================================================================
+
+  &__footer {
+    display: flex;
+    border-top: 1px solid var(--nui-border-primary);
+    min-height: var(--time-picker-option-min-height);
+    padding-top: var(--nui-spacing-sm);
+    gap: var(--nui-spacing-sm);
+  }
+
+  // ============================================================================
+  // TABS SYSTEM
+  // ============================================================================
+
+  &__tabs {
+    display: flex;
+    justify-content: center;
+    padding-bottom: var(--nui-spacing-sm);
+    border-bottom: 1px solid var(--nui-border-primary);
+
+    &-toggle {
+      width: 100%;
+      max-width: 400px;
+    }
+  }
+
+  // ============================================================================
+  // VIEWS
+  // ============================================================================
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__duration-view {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__presets-view {
+    display: flex;
+    flex-direction: column;
+    padding: var(--nui-spacing-md);
+  }
+
+  &__presets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: var(--nui-spacing-sm);
+  }
+
+  &__preset-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--nui-spacing-xs);
+    background: var(--nui-bg-primary);
+    border: var(--time-picker-item-border-width) solid transparent;
+    border-radius: var(--time-picker-item-radius);
+    color: var(--nui-text-secondary);
+    font-family: var(--nui-font-family);
+    font-weight: var(--nui-font-weight-regular);
+    cursor: pointer;
+    height: var(--time-picker-item-height);
+    font-size: var(--time-picker-font-size);
+    transition: all var(--nui-transition-duration-fast) var(--nui-transition-timing-function-ease);
+    gap: var(--nui-spacing-xs);
+
+    &:hover:not(:disabled):not(&--selected) {
+      background-color: var(--nui-bg-secondary);
+      color: var(--nui-text-primary);
+      opacity: 1;
+    }
+
+    &:focus-visible {
+      outline: var(--time-picker-focus-outline-width) solid var(--nui-color-primary-tint-65);
+      outline-offset: var(--time-picker-item-focus-outline-offset);
+      z-index: 2;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    i {
+      font-size: var(--time-picker-font-size);
+      color: var(--nui-color-primary);
+    }
+  }
+
+  // ============================================================================
+  // MODIFIERS
+  // ============================================================================
+
+  &--disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &--from-calendar {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    gap: var(--time-picker-actions-gap);
+    padding: 0;
+
+    .nui-time-picker__selectors,
+    .nui-time-picker__footer {
+      padding: 0;
+    }
+
+    .nui-time-picker__footer {
+      padding-top: 1rem;
+    }
+  }
+
+  &--compact {
+    padding: var(--nui-spacing-sm);
+
+    .nui-time-picker__header {
+      padding-bottom: var(--time-picker-padding);
+    }
+
+    .nui-time-picker__display {
+      font-size: 0.9em;
+    }
+
+    .nui-time-picker__selectors {
+      padding: var(--nui-spacing-xs);
+      gap: var(--nui-spacing-xs);
+    }
+
+    .nui-time-picker__column-label {
+      display: none;
+    }
+
+    .nui-time-picker__item {
+      padding: var(--nui-spacing-xs);
+      font-size: 0.85em;
+    }
+
+    .nui-time-picker__footer {
+      gap: var(--nui-spacing-xs);
+    }
+  }
+
+  &--duration {
+    .nui-time-picker__display {
+      font-family: var(--nui-font-family);
+    }
+  }
+}
+
+// ============================================================================
+// SIZE VARIANTS
+// ============================================================================
+
+$sizes: xs, sm, md, lg, xl;
+@each $size in $sizes {
+  .nui-time-picker--#{$size} {
+    --time-picker-item-height: var(--time-picker-item-height-#{$size});
+    --time-picker-item-radius: calc(var(--time-picker-item-radius-#{$size}) - 0.125rem);
+    --time-picker-font-size: var(--nui-font-size-#{$size});
+    --time-picker-padding: var(--time-picker-padding-#{$size});
+    --time-picker-max-height: var(--time-picker-max-height-#{$size});
+    --time-picker-min-height: var(--time-picker-min-height-#{$size});
+  }
+}
+
+// ============================================================================
+// ANIMATIONS
+// ============================================================================
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

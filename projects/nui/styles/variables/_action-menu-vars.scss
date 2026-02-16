@@ -32,7 +32,7 @@ $action-menu-transition:
   --nui-am-border-color: var(--nui-border-primary);
   --nui-am-border-radius: var(--nui-border-radius-md);
   --nui-am-padding: var(--nui-spacing-xs);
-  --nui-am-item-border-radius: var(--nui-border-radius-sm);
+  --nui-am-item-border-radius: calc(var(--nui-border-radius-md) - 0.125rem);
   --nui-am-focus-outline-width: #{$action-menu-focus-outline-width};
   --nui-am-focus-outline-offset: #{$action-menu-focus-outline-offset};
 

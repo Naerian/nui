@@ -1,0 +1,239 @@
+<div class="docs-page">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h1>{{ pageConfig.title | translate }}</h1>
+      <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
+    </div>
+
+    <app-component-tabs [tabs]="tabs" [sections]="pageConfig.sections" #tabsComp>
+      @if (tabsComp.activeSections(); as activeSections) {
+        @for (section of activeSections; track section.id) {
+          <div class="section">
+            <!-- Título de sección -->
+            <app-section-title
+              [anchor]="section.anchor"
+              [title]="section.title | translate"
+              [tabId]="tabsComp.activeTabId()"
+            ></app-section-title>
+
+            @if (section.description) {
+              <p class="section-description" [innerHTML]="section.description | translate"></p>
+            }
+
+            @if (section.note) {
+              <div class="section-note" [ngClass]="section.note.type">
+                @if (section.note.icon) {
+                  <i [class]="section.note.icon"></i>
+                }
+                <p [innerHTML]="section.note.content | translate"></p>
+              </div>
+            }
+
+            <!-- Contenido específico de cada sección -->
+            @switch (section.id) {
+              @case ('basic') {
+                <div class="example-preview">
+                  <nui-time-picker></nui-time-picker>
+                </div>
+              }
+
+              @case ('modes') {
+                <div class="example-preview flex-row align-items-start gap-4">
+                  <div class="example-item">
+                    <h4>HOUR_24</h4>
+                    <nui-time-picker mode="HOUR_24"></nui-time-picker>
+                  </div>
+
+                  <div class="example-item">
+                    <h4>HOUR_12 (AM/PM)</h4>
+                    <nui-time-picker mode="HOUR_12"></nui-time-picker>
+                  </div>
+
+                  <div class="example-item">
+                    <h4>HOUR_MINUTE_24 (24h)</h4>
+                    <nui-time-picker mode="HOUR_MINUTE_24"></nui-time-picker>
+                  </div>
+
+                  <div class="example-item">
+                    <h4>HOUR_MINUTE_12 (12h AM/PM)</h4>
+                    <nui-time-picker mode="HOUR_MINUTE_12"></nui-time-picker>
+                  </div>
+
+                  <div class="example-item">
+                    <h4>DURATION</h4>
+                    <nui-time-picker mode="DURATION"></nui-time-picker>
+                  </div>
+                </div>
+              }
+
+              @case ('sizes') {
+                <div class="example-preview flex-row gap-3 align-items-start">
+                  <div class="example-item">
+                    <p class="mb-2"><strong>XS</strong></p>
+                    <nui-time-picker size="xs"></nui-time-picker>
+                  </div>
+
+                  <div class="example-item">
+                    <p class="mb-2"><strong>SM</strong></p>
+                    <nui-time-picker size="sm"></nui-time-picker>
+                  </div>
+
+                  <div class="example-item">
+                    <p class="mb-2"><strong>MD</strong></p>
+                    <nui-time-picker size="md"></nui-time-picker>
+                  </div>
+
+                  <div class="example-item">
+                    <p class="mb-2"><strong>LG</strong></p>
+                    <nui-time-picker size="lg"></nui-time-picker>
+                  </div>
+
+                  <div class="example-item">
+                    <p class="mb-2"><strong>XL</strong></p>
+                    <nui-time-picker size="xl"></nui-time-picker>
+                  </div>
+                </div>
+              }
+
+              @case ('presets') {
+                <div class="example-preview flex-column gap-3">
+                  <nui-time-picker
+                    [config]="configWithPresets"
+                    (valueChange)="onTimeWithPresetsChange($event)"
+                  ></nui-time-picker>
+
+                  <div class="value-display">
+                    Selected time:
+                    <strong>{{ selectedTimeWithPresets() | json }}</strong>
+                  </div>
+                </div>
+              }
+
+              @case ('steps') {
+                <div class="example-preview flex-column gap-3">
+                  <p class="mb-2"><em>hourStep: 2, minuteStep: 15</em></p>
+                  <nui-time-picker [config]="configWithSteps"></nui-time-picker>
+                </div>
+              }
+
+              @case ('time-range') {
+                <div class="example-preview flex-column gap-3">
+                  <p class="mb-2"><em>minTime: 09:00, maxTime: 18:00</em></p>
+                  <nui-time-picker [config]="configWithRange"></nui-time-picker>
+                </div>
+              }
+
+              @case ('disabled-times') {
+                <div class="example-preview flex-column gap-3">
+                  <p class="mb-2">
+                    <em>disabledHours: [12, 13, 14], disabledMinutes: [15, 45]</em>
+                  </p>
+                  <nui-time-picker [config]="configWithDisabled"></nui-time-picker>
+                </div>
+              }
+
+              @case ('duration-mode') {
+                <div class="example-preview flex-column gap-3">
+                  <p class="mb-2"><em>maxHours: 8, showSeconds: true</em></p>
+                  <nui-time-picker mode="DURATION" [config]="configDuration"></nui-time-picker>
+                </div>
+              }
+
+              @case ('default-strategies') {
+                <div class="example-preview flex-row gap-3 align-items-start">
+                  <div class="example-item">
+                    <h4>Strategy: now</h4>
+                    <p class="mb-2"><em>Inicia con la hora actual</em></p>
+                    <nui-time-picker defaultStrategy="now"></nui-time-picker>
+                  </div>
+
+                  <div class="example-item">
+                    <h4>Strategy: smart</h4>
+                    <p class="mb-2"><em>Hora actual + 30 min redondeado</em></p>
+                    <nui-time-picker defaultStrategy="smart" [smartOffset]="30"></nui-time-picker>
+                  </div>
+
+                  <div class="example-item">
+                    <h4>Strategy: custom</h4>
+                    <p class="mb-2"><em>Valor personalizado: 09:00</em></p>
+                    <nui-time-picker
+                      defaultStrategy="custom"
+                      [defaultValue]="{ hour: 9, minute: 0 }"
+                    ></nui-time-picker>
+                  </div>
+                </div>
+              }
+
+              @case ('disabled') {
+                <div class="example-preview">
+                  <nui-time-picker [disabled]="true"></nui-time-picker>
+                </div>
+              }
+
+              @case ('reactive-forms') {
+                <div class="example-preview flex-column gap-3">
+                  <nui-time-picker [formControl]="timeControl"></nui-time-picker>
+
+                  <div class="value-display">
+                    Form value:
+                    <strong>{{ timeControl.value | json }}</strong>
+                  </div>
+
+                  <div class="button-row">
+                    <button
+                      class="btn btn-sm btn-outline-secondary"
+                      (click)="timeControl.setValue({ hour: 10, minute: 30 })"
+                    >
+                      Set to 10:30
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary" (click)="timeControl.reset()">
+                      Reset
+                    </button>
+                    <button
+                      class="btn btn-sm btn-outline-secondary"
+                      (click)="timeControl.disable()"
+                    >
+                      Disable
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary" (click)="timeControl.enable()">
+                      Enable
+                    </button>
+                  </div>
+                </div>
+              }
+            }
+
+            <!-- Tabla de datos (para API o Theming) -->
+            @if (section.table) {
+              <div class="api-table">
+                <table>
+                  <thead>
+                    <tr>
+                      @for (header of section.table.headers; track $index) {
+                        <th [innerHTML]="header | translate"></th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of section.table.rows; track $index) {
+                      <tr>
+                        @for (cell of row; track $index) {
+                          <td [innerHTML]="cell | translate"></td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+
+            <!-- Code blocks asociados a esta sección -->
+            @if (section.examples && section.examples.length > 0) {
+              <app-code-block [examples]="section.examples"></app-code-block>
+            }
+          </div>
+        }
+      }
+    </app-component-tabs>
+  </div>
+</div>

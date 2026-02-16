@@ -73,8 +73,7 @@ a {
 // SCROLLBAR (Webkit browsers)
 // ==========================================
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: var(--nui-scrollbar-width);
 }
 
 ::-webkit-scrollbar-track {
@@ -92,7 +91,7 @@ a {
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--nui-border-primary) transparent;
+  scrollbar-color: var(--nui-border-primary) var(--nui-bg-secondary);
 }
 
 // ==========================================

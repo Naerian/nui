@@ -183,6 +183,13 @@ export const routes: Routes = [
             m => m.SidebarPanelPageComponent
           ),
       },
+      {
+        path: 'time-picker',
+        loadComponent: () =>
+          import('./pages/components/time-picker-page/time-picker-page.component').then(
+            m => m.TimePickerPageComponent
+          ),
+      },
     ],
   },
 

@@ -58,8 +58,7 @@
 
     // Custom scrollbar (Tu código original)
     &::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
+      width: var(--nui-scrollbar-width);
     }
 
     &::-webkit-scrollbar-track {
@@ -76,7 +75,7 @@
     }
 
     scrollbar-width: thin;
-    scrollbar-color: var(--nui-sidebar-panel-scroll-thumb-bg) transparent;
+    scrollbar-color: var(--nui-sidebar-panel-scroll-thumb-bg) var(--nui-sidebar-panel-scroll-bg);
   }
 
   // FOOTER (Fixed at bottom)

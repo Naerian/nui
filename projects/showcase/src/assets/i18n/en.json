@@ -29,7 +29,8 @@
     "toast": "Toast",
     "tooltip": "Tooltip",
     "sidebarPanel": "Sidebar Panel",
-    "actionMenu": "Action Menu"
+    "actionMenu": "Action Menu",
+    "timePicker": "Time Picker"
   },
   "presets": {
     "aura": "Aura",
@@ -1011,6 +1012,107 @@
         "examples": {
           "title": "Customization examples",
           "description": "SCSS examples to customize tooltip styles in your application"
+        }
+      }
+    },
+    "timePicker": {
+      "title": "Time Picker",
+      "subtitle": "Component for selecting time with multiple modes, sizes and advanced configurations",
+      "basic": {
+        "title": "Basic usage",
+        "description": "Simple time picker with default settings. Select hours and minutes in 24-hour format."
+      },
+      "modes": {
+        "title": "Time modes",
+        "description": "Five available modes: only hours (12h/24h), hours and minutes (12h/24h), and duration mode.",
+        "note": "Use <code>mode</code> with values: <code>'HOUR_12'</code>, <code>'HOUR_24'</code>, <code>'HOUR_MINUTE_12'</code>, <code>'HOUR_MINUTE_24'</code> and <code>'DURATION'</code>. Duration mode is special, useful for selecting time intervals."
+      },
+      "sizes": {
+        "title": "Sizes",
+        "description": "Five size options that harmoniously scale the component and its internal elements.",
+        "note": "Sizes affect the picker's height, padding and font size. Use <code>size</code> with values <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> and <code>'xl'</code>."
+      },
+      "presets": {
+        "title": "Quick presets",
+        "description": "Add preset buttons for frequent times like 'Now', 'Breakfast', 'Lunch'. Can include custom icons.",
+        "note": "Provide an array of <code>TimePreset</code> objects in the <code>config</code>. Each preset has a <code>label</code>, <code>time</code> and optional <code>icon</code>. Supports Remix Icon icons."
+      },
+      "steps": {
+        "title": "Hour and minute steps",
+        "description": "Control the increment intervals for hours and minutes to limit selectable options.",
+        "note": "Use <code>hourStep</code> and <code>minuteStep</code> in the <code>config</code>. For example, <code>hourStep: 2</code> shows only even hours, and <code>minuteStep: 15</code> shows quarters (00, 15, 30, 45)."
+      },
+      "timeRange": {
+        "title": "Time range",
+        "description": "Restrict the selectable time range using minimum and maximum values. Optionally display a visual indicator.",
+        "note": "Configure <code>minTime</code> and <code>maxTime</code> in the <code>config</code>. Times outside this range are disabled. Use <code>showRangeIndicator: true</code> to visually highlight the valid range."
+      },
+      "disabledTimes": {
+        "title": "Disabled times",
+        "description": "Block specific hours or minutes, preventing their selection. Useful for unavailable time slots.",
+        "note": "Use <code>disabledHours</code> and <code>disabledMinutes</code> in the <code>config</code> to specify arrays of disabled values. Disabled items show a distinct dimmed style."
+      },
+      "durationMode": {
+        "title": "Duration mode",
+        "description": "Special mode for selecting time intervals. Can display seconds and set a maximum duration.",
+        "note": "Set <code>mode='DURATION'</code> and configure with <code>duration: { maxHours: 8, showSeconds: true }</code> in the <code>config</code>. Useful for shift selection, time tracking, etc."
+      },
+      "defaultStrategies": {
+        "title": "Default strategies",
+        "description": "Control the initial time when no value is provided: now, smart (current + offset), empty or custom.",
+        "note": "Use <code>defaultStrategy</code> with values <code>'now'</code>, <code>'smart'</code>, <code>'empty'</code> or <code>'custom'</code>. For 'smart', configure <code>smartOffset</code> in minutes. For 'custom', use <code>defaultValue</code>."
+      },
+      "disabled": {
+        "title": "Disabled state",
+        "description": "Disable the entire picker, preventing user interaction and showing a dimmed appearance."
+      },
+      "reactiveForms": {
+        "title": "Reactive forms",
+        "description": "Full integration with Angular reactive forms. Implements ControlValueAccessor.",
+        "note": "Use <code>formControl</code> or <code>formControlName</code> to integrate with Angular forms. The component handles synchronization, validation and state automatically."
+      },
+      "api": {
+        "inputs": {
+          "title": "Inputs",
+          "description": "Input properties to configure the time picker behavior, appearance and restrictions"
+        },
+        "outputs": {
+          "title": "Outputs",
+          "description": "Events emitted by the time picker when the user interacts with it"
+        },
+        "config": {
+          "title": "TimePickerConfig",
+          "description": "Configuration interface with all available options: steps, ranges, disabled times, presets and duration settings"
+        },
+        "durationConfig": {
+          "title": "DurationConfig",
+          "description": "Specific configuration for DURATION mode: hour limits, seconds display, steps and quick duration presets"
+        },
+        "models": {
+          "title": "Type Definitions",
+          "description": "Interfaces and type definitions for values, configuration and presets"
+        },
+        "methods": {
+          "title": "Methods",
+          "description": "The component implements ControlValueAccessor for seamless integration with Angular forms"
+        }
+      },
+      "theming": {
+        "colors": {
+          "title": "Colors",
+          "description": "Color CSS variables generated by the ThemeService for each semantic color. Each color generates 9 specific variables for different picker states: item backgrounds (default, hover, selected), text colors, disabled states, accents and focus ring."
+        },
+        "sizes": {
+          "title": "Sizes",
+          "description": "Size-specific CSS variables controlling item heights, paddings and container dimensions. Five size variants available: xs, sm, md (default), lg and xl."
+        },
+        "structure": {
+          "title": "Structure",
+          "description": "Structural CSS variables to control dimensions, spacing, typography and visual appearance. Includes separator styling, scrollbar customization, borders, fonts and focus states."
+        },
+        "customization": {
+          "title": "Customization",
+          "description": "Examples of how to customize time picker styles in your application. You can override CSS variables globally or scoped to specific instances. ThemeService integration allows generating color variables for your custom semantic colors."
         }
       }
     }

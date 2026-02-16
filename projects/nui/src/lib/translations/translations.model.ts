@@ -71,9 +71,6 @@ export interface NUITranslations {
     today: string;
     showTime: string;
     hideTime: string;
-    timePicker: string;
-    timePickerStart: string;
-    timePickerEnd: string;
     presets: {
       shortcuts: string;
       today: string;
@@ -116,6 +113,14 @@ export interface NUITranslations {
     tabs: {
       selector: string;
       presets: string;
+    };
+    presets: {
+      now: string;
+      noon: string;
+      midnight: string;
+      minutes: string; // '{{value}} min'
+      hour: string; // '{{value}} hora'
+      hours: string; // '{{value}} horas'
     };
   };
 

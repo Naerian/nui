@@ -81,7 +81,7 @@ export class ThemeService {
 
   /**
    * Get the list of available NUI theme presets.
-   * This method returns an array of ThemePreset objects that are 
+   * This method returns an array of ThemePreset objects that are
    * defined in the theme presets configuration.
    */
   getNuiPresets(): ThemePreset[] {
@@ -285,6 +285,7 @@ export class ThemeService {
       css += this.generateAvatarVariables(name, baseColor);
       css += this.generateActionMenuVariables(name, baseColor);
       css += this.generatePopoverVariables(name, baseColor);
+      css += this.generateTimePickerVariables(name, baseColor);
     });
 
     // Generar variables de Tooltip (no depende de colores semánticos)
@@ -315,6 +316,12 @@ export class ThemeService {
     const isDark = this._isDarkMode();
     const currentColors = this.colors();
     return `
+
+  /* Base colors */
+  --nui-primary: ${currentColors.primary};
+  --nui-secondary: ${currentColors.secondary};
+  --nui-neutral: ${currentColors.neutral};
+
   /* Gray scale */
   --nui-gray-50: ${grays[50]};
   --nui-gray-100: ${grays[100]};
@@ -332,6 +339,16 @@ export class ThemeService {
   --nui-bg-secondary: ${isDark ? grays[800] : grays[50]};
   --nui-bg-tertiary: ${isDark ? grays[700] : grays[100]};
   --nui-bg-neutral: ${isDark ? grays[800] : grays[100]};
+
+  /* Contrasting text colors for primary and secondary colors */
+  --nui-primary-contrast: ${this.getContrastColor(currentColors.primary)};
+  --nui-secondary-contrast: ${this.getContrastColor(currentColors.secondary)};
+  --nui-neutral-contrast: ${this.getContrastColor(currentColors.neutral)};
+
+  /* Alpha variants for primary, secondary, and neutral colors */
+  --nui-primary-alpha-50: ${this.withAlpha(currentColors.primary, 0.5)};
+  --nui-secondary-alpha-50: ${this.withAlpha(currentColors.secondary, 0.5)};
+  --nui-neutral-alpha-50: ${this.withAlpha(currentColors.neutral, 0.5)};
 
   /* Text colors */
   --nui-text-primary: ${isDark ? grays[50] : grays[900]};
@@ -380,34 +397,37 @@ export class ThemeService {
     const colors = this.colors();
     return `
       /* Semantic color aliases */
-      --nui-primary: ${colors.primary};
-      --nui-secondary: ${colors.secondary};
       --nui-accent: ${colors.accent};
       --nui-success: ${colors.success};
       --nui-info: ${colors.info};
       --nui-warning: ${colors.warning};
       --nui-danger: ${colors.danger};
-      --nui-neutral: ${colors.neutral};
+
+      --nui-bg-accent: ${this.withAlpha(colors.accent, 0.1)};
+      --nui-bg-success: ${this.withAlpha(colors.success, 0.1)};
+      --nui-bg-info: ${this.withAlpha(colors.info, 0.1)};
+      --nui-bg-warning: ${this.withAlpha(colors.warning, 0.1)};
+      --nui-bg-danger: ${this.withAlpha(colors.danger, 0.1)};
+
+      --nui-border-accent: ${this.withAlpha(colors.accent, 0.5)};
+      --nui-border-success: ${this.withAlpha(colors.success, 0.5)};
+      --nui-border-info: ${this.withAlpha(colors.info, 0.5)};
+      --nui-border-warning: ${this.withAlpha(colors.warning, 0.5)};
+      --nui-border-danger: ${this.withAlpha(colors.danger, 0.5)};
 
       /* Contrasting text colors for semantic colors */
-      --nui-primary-contrast: ${this.getContrastColor(colors.primary)};
-      --nui-secondary-contrast: ${this.getContrastColor(colors.secondary)};
       --nui-accent-contrast: ${this.getContrastColor(colors.accent)};
       --nui-success-contrast: ${this.getContrastColor(colors.success)};
       --nui-info-contrast: ${this.getContrastColor(colors.info)};
       --nui-warning-contrast: ${this.getContrastColor(colors.warning)};
       --nui-danger-contrast: ${this.getContrastColor(colors.danger)};
-      --nui-neutral-contrast: ${this.getContrastColor(colors.neutral)};
 
       /* Alpha values for semantic colors */
-      --nui-primary-alpha-50: ${this.withAlpha(colors.primary, 0.5)};
-      --nui-secondary-alpha-50: ${this.withAlpha(colors.secondary, 0.5)};
       --nui-accent-alpha-50: ${this.withAlpha(colors.accent, 0.5)};
       --nui-success-alpha-50: ${this.withAlpha(colors.success, 0.5)};
       --nui-info-alpha-50: ${this.withAlpha(colors.info, 0.5)};
       --nui-warning-alpha-50: ${this.withAlpha(colors.warning, 0.5)};
       --nui-danger-alpha-50: ${this.withAlpha(colors.danger, 0.5)};
-      --nui-neutral-alpha-50: ${this.withAlpha(colors.neutral, 0.5)};      
     `;
   }
 
@@ -961,5 +981,30 @@ export class ThemeService {
   private withAlpha(color: string, alpha: number): string {
     const rgb = this.hexToRgb(color);
     return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha})`;
+  }
+
+  /**
+   * Genera variables CSS para el componente Time Picker
+   */
+  private generateTimePickerVariables(name: string, color: string): string {
+    const alpha10 = this.withAlpha(color, 0.1);
+    const alpha20 = this.withAlpha(color, 0.2);
+    const selectedBg = this._isDarkMode() ? this.shade(color, 15) : color;
+    const selectedText = this.getContrastColor(selectedBg);
+
+    return `
+      --time-picker-${name}-item-bg: transparent;
+      --time-picker-${name}-item-text: var(--nui-text-primary);
+      --time-picker-${name}-item-hover-bg: ${alpha10};
+      --time-picker-${name}-item-hover-text: ${color};
+      --time-picker-${name}-item-selected-bg: ${selectedBg};
+      --time-picker-${name}-item-selected-text: ${selectedText};
+      --time-picker-${name}-item-selected-hover-bg: ${this._isDarkMode() ? this.shade(color, 20) : this.tint(color, 10)};
+      --time-picker-${name}-item-disabled-bg: transparent;
+      --time-picker-${name}-item-disabled-text: var(--nui-text-disabled);
+      --time-picker-${name}-accent: ${color};
+      --time-picker-${name}-accent-hover: ${alpha20};
+      --time-picker-${name}-focus-ring: ${this.withAlpha(color, 0.4)};
+    `;
   }
 }

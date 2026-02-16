@@ -29,7 +29,8 @@
     "toast": "Toast",
     "tooltip": "Tooltip",
     "sidebarPanel": "Panel lateral",
-    "actionMenu": "Menú de acciones"
+    "actionMenu": "Menú de acciones",
+    "timePicker": "Selector de tiempo"
   },
   "presets": {
     "aura": "Aura",
@@ -1215,6 +1216,107 @@
         "examples": {
           "title": "Ejemplos de personalización",
           "description": "Ejemplos SCSS para personalizar los estilos del tooltip en tu aplicación"
+        }
+      }
+    },
+    "timePicker": {
+      "title": "Selector de tiempo",
+      "subtitle": "Componente para seleccionar tiempo con múltiples modos, tamaños y configuraciones avanzadas",
+      "basic": {
+        "title": "Uso básico",
+        "description": "Selector de tiempo simple con configuración predeterminada. Selecciona horas y minutos en formato de 24 horas."
+      },
+      "modes": {
+        "title": "Modos de tiempo",
+        "description": "Cinco modos disponibles: solo horas (12h/24h), horas y minutos (12h/24h), y modo duración.",
+        "note": "Usa <code>mode</code> con los valores: <code>'HOUR_12'</code>, <code>'HOUR_24'</code>, <code>'HOUR_MINUTE_12'</code>, <code>'HOUR_MINUTE_24'</code> y <code>'DURATION'</code>. El modo duración es especial, útil para seleccionar intervalos de tiempo."
+      },
+      "sizes": {
+        "title": "Tamaños",
+        "description": "Cinco opciones de tamaño que escalan armoniosamente el componente y sus elementos internos.",
+        "note": "Los tamaños afectan la altura, padding y tamaño de fuente del selector. Usa <code>size</code> con los valores <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> y <code>'xl'</code>."
+      },
+      "presets": {
+        "title": "Presets rápidos",
+        "description": "Agrega botones de preset para tiempos frecuentes como 'Ahora', 'Desayuno', 'Comida'. Puede incluir iconos personalizados.",
+        "note": "Proporciona un array de objetos <code>TimePreset</code> en la <code>config</code>. Cada preset tiene un <code>label</code>, <code>time</code> e <code>icon</code> opcional. Soporta íconos Remix Icon."
+      },
+      "steps": {
+        "title": "Pasos de hora y minuto",
+        "description": "Controla los intervalos de incremento para horas y minutos para limitar las opciones seleccionables.",
+        "note": "Usa <code>hourStep</code> y <code>minuteStep</code> en la <code>config</code>. Por ejemplo, <code>hourStep: 2</code> muestra solo horas pares, y <code>minuteStep: 15</code> muestra cuartos (00, 15, 30, 45)."
+      },
+      "timeRange": {
+        "title": "Rango de tiempo",
+        "description": "Restringe el rango de tiempo seleccionable usando valores mínimo y máximo. Opcionalmente muestra un indicador visual.",
+        "note": "Configura <code>minTime</code> y <code>maxTime</code> en la <code>config</code>. Los tiempos fuera de este rango quedan deshabilitados. Usa <code>showRangeIndicator: true</code> para resaltar visualmente el rango válido."
+      },
+      "disabledTimes": {
+        "title": "Tiempos deshabilitados",
+        "description": "Bloquea horas o minutos específicos, evitando su selección. Útil para franjas horarias no disponibles.",
+        "note": "Usa <code>disabledHours</code> y <code>disabledMinutes</code> en la <code>config</code> para especificar arrays de valores deshabilitados. Los items deshabilitados muestran un estilo atenuado distintivo."
+      },
+      "durationMode": {
+        "title": "Modo duración",
+        "description": "Modo especial para seleccionar intervalos de tiempo. Puede mostrar segundos y establecer una duración máxima.",
+        "note": "Establece <code>mode='DURATION'</code> y configura con <code>duration: { maxHours: 8, showSeconds: true }</code> en la <code>config</code>. Útil para selección de turnos, seguimiento de tiempo, etc."
+      },
+      "defaultStrategies": {
+        "title": "Estrategias predeterminadas",
+        "description": "Controla el tiempo inicial cuando no se proporciona ningún valor: ahora, inteligente (actual + offset), vacío o personalizado.",
+        "note": "Usa <code>defaultStrategy</code> con los valores <code>'now'</code>, <code>'smart'</code>, <code>'empty'</code> o <code>'custom'</code>. Para 'smart', configura <code>smartOffset</code> en minutos. Para 'custom', usa <code>defaultValue</code>."
+      },
+      "disabled": {
+        "title": "Estado deshabilitado",
+        "description": "Deshabilita todo el selector, evitando la interacción del usuario y mostrando una apariencia atenuada."
+      },
+      "reactiveForms": {
+        "title": "Formularios reactivos",
+        "description": "Integración completa con formularios reactivos de Angular. Implementa ControlValueAccessor.",
+        "note": "Usa <code>formControl</code> o <code>formControlName</code> para integrar con formularios de Angular. El componente maneja la sincronización, validación y estado automáticamente."
+      },
+      "api": {
+        "inputs": {
+          "title": "Inputs",
+          "description": "Propiedades de entrada para configurar el comportamiento, apariencia y restricciones del selector de tiempo"
+        },
+        "outputs": {
+          "title": "Outputs",
+          "description": "Eventos emitidos por el selector de tiempo cuando el usuario interactúa con él"
+        },
+        "config": {
+          "title": "TimePickerConfig",
+          "description": "Interfaz de configuración con todas las opciones disponibles: pasos, rangos, tiempos deshabilitados, presets y configuración de duración"
+        },
+        "durationConfig": {
+          "title": "DurationConfig",
+          "description": "Configuración específica para modo DURATION: límites de horas, mostrar segundos, pasos y presets de duración rápidos"
+        },
+        "models": {
+          "title": "Definiciones de tipos",
+          "description": "Interfaces y definiciones de tipos para valores, configuración y presets"
+        },
+        "methods": {
+          "title": "Métodos",
+          "description": "El componente implementa ControlValueAccessor para integración perfecta con formularios de Angular"
+        }
+      },
+      "theming": {
+        "colors": {
+          "title": "Colores",
+          "description": "Variables CSS de color generadas por el ThemeService para cada color semántico. Cada color genera 9 variables específicas para diferentes estados del picker: fondos de items (normal, hover, seleccionado), colores de texto, estados deshabilitados, acentos y anillo de foco."
+        },
+        "sizes": {
+          "title": "Tamaños",
+          "description": "Variables CSS específicas por tamaño que controlan alturas de items, paddings y dimensiones del contenedor. Cinco variantes de tamaño disponibles: xs, sm, md (predeterminado), lg y xl."
+        },
+        "structure": {
+          "title": "Estructura",
+          "description": "Variables CSS estructurales para controlar dimensiones, espaciado, tipografía y apariencia visual. Incluye estilo de separador, personalización de scrollbar, bordes, fuentes y estados de foco."
+        },
+        "customization": {
+          "title": "Personalización",
+          "description": "Ejemplos de cómo personalizar los estilos del selector de tiempo en tu aplicación. Puedes sobrescribir variables CSS globalmente o específicas a instancias. La integración con ThemeService permite generar variables de color para tus colores semánticos personalizados."
         }
       }
     }

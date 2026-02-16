@@ -1,0 +1,117 @@
+// ========================================
+// CALENDAR - Variables & Tokens
+// ========================================
+
+// TOKENS (Sass)
+// Anchos del contenedor calendario
+$calendar-widths: (
+  xs: 240px,
+  sm: 320px,
+  md: 360px,
+  lg: 400px,
+  xl: 440px,
+) !default;
+
+// Gaps entre días
+$calendar-gaps: (
+  xs: 2px,
+  sm: 4px,
+  md: 5px,
+  lg: 6px,
+  xl: 8px,
+) !default;
+
+// Paddings del contenedor calendario
+$calendar-paddings: (
+  xs: 0.25rem,
+  sm: 0.5rem,
+  md: 0.75rem,
+  lg: 1rem,
+  xl: 1.25rem,
+) !default;
+
+// Font sizes para los días del calendario
+$calendar-day-fonts: (
+  xs: 0.6875rem,
+  sm: 0.8125rem,
+  md: 0.875rem,
+  lg: 1rem,
+  xl: 1.125rem,
+) !default;
+
+// Font sizes para los títulos (mes/año)
+$calendar-title-fonts: (
+  xs: 0.75rem,
+  sm: 0.875rem,
+  md: 1rem,
+  lg: 1.125rem,
+  xl: 1.25rem,
+) !default;
+
+// Font sizes para los weekdays
+$calendar-weekday-fonts: (
+  xs: 0.5625rem,
+  sm: 0.6875rem,
+  md: 0.75rem,
+  lg: 0.8125rem,
+  xl: 0.875rem,
+) !default;
+
+// Min heights para weekdays
+$calendar-weekday-heights: (
+  xs: 1rem,
+  sm: 1.25rem,
+  md: 1.5rem,
+  lg: 1.75rem,
+  xl: 2rem,
+) !default;
+
+// Tamaños mínimos para los botones de día
+$calendar-day-sizes: (
+  xs: 1.5rem,
+  sm: 2rem,
+  md: 2.25rem,
+  lg: 2.5rem,
+  xl: 3rem,
+) !default;
+
+// Full width mode
+$calendar-full-min-width: 280px !default;
+
+// Borders
+$calendar-tabs-border-width: 1px !default;
+$calendar-preset-border-width: 1px !default;
+$calendar-day-border-width: 1px !default;
+
+// Opacities
+$calendar-day-other-month-opacity: 0.4 !default;
+
+// Transforms
+$calendar-preset-hover-translateY: -1px !default;
+$calendar-preset-active-translateY: -5px !default;
+
+// Outline (focus states)
+$calendar-focus-outline-width: 2px !default;
+$calendar-focus-outline-offset: 2px !default;
+
+// MIXIN (CSS Custom Properties)
+@mixin nui-calendar-vars {
+  // Full width mode
+  --calendar-full-min-width: #{$calendar-full-min-width};
+
+  // Borders
+  --calendar-tabs-border-width: #{$calendar-tabs-border-width};
+  --calendar-preset-border-width: #{$calendar-preset-border-width};
+  --calendar-day-border-width: #{$calendar-day-border-width};
+
+  // Opacities
+  --calendar-day-other-month-opacity: #{$calendar-day-other-month-opacity};
+
+  // Transforms
+  --calendar-preset-hover-translateY: #{$calendar-preset-hover-translateY};
+  --calendar-preset-active-translateY: #{$calendar-preset-active-translateY};
+
+  // Outline (focus states)
+  --calendar-focus-outline-width: #{$calendar-focus-outline-width};
+  --calendar-focus-outline-offset: #{$calendar-focus-outline-offset};
+}

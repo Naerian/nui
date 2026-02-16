@@ -154,4 +154,10 @@
   /// =======================
   /// @group Animations+
   --nui-spin-duration: #{config.$spin-duration};
+
+  /// =======================
+  /// SCROLLBAR SIZE
+  /// =======================
+  /// @group Scrollbar
+  --nui-scrollbar-width: #{config.$scrollbar-width};
 }

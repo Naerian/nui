@@ -1,6 +1,6 @@
 /**
  * Configuración del menú lateral de navegación
- * 
+ *
  * Este archivo centraliza toda la estructura del menú para facilitar
  * el mantenimiento y la adición de nuevos componentes.
  */
@@ -140,7 +140,13 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
         translationKey: 'sidebar.sidebarPanel',
         route: '/components/sidebar-panel',
         icon: 'ri-side-bar-fill',
-      }
+      },
+      {
+        label: 'Time Picker',
+        translationKey: 'sidebar.timePicker',
+        route: '/components/time-picker',
+        icon: 'ri-time-line',
+      },
     ],
-  }
+  },
 ];

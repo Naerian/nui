@@ -95,9 +95,6 @@ export const NUI_DEFAULT_I18N: NUITranslations = {
     today: 'Hoy',
     showTime: 'Mostrar selector de hora',
     hideTime: 'Ocultar selector de hora',
-    timePicker: 'Seleccionar hora',
-    timePickerStart: 'Hora de inicio',
-    timePickerEnd: 'Hora de fin',
     presets: {
       shortcuts: 'Acc. rápidos',
       today: 'Hoy',
@@ -116,7 +113,7 @@ export const NUI_DEFAULT_I18N: NUITranslations = {
 
   // Textos del timepicker
   timePicker: {
-    setToCurrentTime: 'Hora actual',
+    setToCurrentTime: 'Actual',
     selectTime: 'Seleccionar hora',
     clear: 'Limpiar',
     hour: 'Hora',
@@ -140,6 +137,14 @@ export const NUI_DEFAULT_I18N: NUITranslations = {
     tabs: {
       selector: 'Selector',
       presets: 'Acc. rápidos',
+    },
+    presets: {
+      now: 'Ahora',
+      noon: 'Mediodía',
+      midnight: 'Medianoche',
+      minutes: '{{value}} min',
+      hour: '{{value}} hora',
+      hours: '{{value}} horas',
     },
   },
 
