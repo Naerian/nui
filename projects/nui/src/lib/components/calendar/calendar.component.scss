@@ -8,7 +8,10 @@
 :host {
   @include calendar-vars.nui-calendar-vars;
   display: block;
-  width: 100%;
+  &[width='full'] {
+    display: block;
+    width: 100%;
+  }
 }
 
 // ============================================================================
@@ -65,7 +68,7 @@
     container-type: inline-size;
     container-name: calendar;
 
-    // Días y elementos se adaptan al ancho disponible  
+    // Días y elementos se adaptan al ancho disponible
     .nui-calendar__day {
       font-size: clamp(0.6875rem, 3cqw, 1.5rem);
     }
@@ -249,7 +252,7 @@
     &--today {
       position: relative;
       font-weight: var(--nui-font-weight-bold);
-      
+
       &::after {
         content: '';
         position: absolute;

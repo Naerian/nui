@@ -71,6 +71,12 @@ import { BtnGroupOption } from '../button-group';
       multi: true,
     },
   ],
+  host: {
+    class: 'nui-calendar-host',
+    '[class.nui-calendar-full]': 'width() === "full"',
+    '[style.display]': 'width() === "full" ? "flex" : "inline-flex"',
+    '[style.width]': 'width() === "full" ? "100%" : "auto"',
+  },
 })
 export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAccessor {
   // ============================================================================
@@ -128,7 +134,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   private keyboardNavService = inject(CalendarKeyboardNavigationService);
   protected readonly _translations = inject(NUI_TRANSLATIONS);
   private readonly globalConfig = inject(NUI_CONFIG);
-  private readonly calendarConfig: Partial<CalendarGlobalConfig> = this.globalConfig?.calendar || {};
+  private readonly calendarConfig: Partial<CalendarGlobalConfig> =
+    this.globalConfig?.calendar || {};
 
   // Signals para estado reactivo
   viewMode = signal<ViewMode>(ViewMode.DAY);
@@ -417,7 +424,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
       const previousYear = currentMonth === 0 ? currentYear - 1 : currentYear;
       const lastDayOfPreviousMonth = new Date(previousYear, previousMonth + 1, 0);
-      
+
       return lastDayOfPreviousMonth >= minDateObj;
     }
   });
@@ -442,7 +449,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
       const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear;
       const firstDayOfNextMonth = new Date(nextYear, nextMonth, 1);
-      
+
       return firstDayOfNextMonth <= maxDateObj;
     }
   });
@@ -822,10 +829,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     }
   }
 
-
-
-
-
   // ?? HELPER: Parsear fecha de string o Date
   private parseDate(date: Date | string | null | undefined): Date {
     if (!date) return new Date();
@@ -885,7 +888,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
     return dates.filter(date => {
       // Verificar si está deshabilitado por disabledDates
-      if (disabledDates.length > 0 && this.calendarService.isDateDisabled(date, disabledDates as Date[])) {
+      if (
+        disabledDates.length > 0 &&
+        this.calendarService.isDateDisabled(date, disabledDates as Date[])
+      ) {
         return false;
       }
 
@@ -1027,10 +1033,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     } else if (currentType === CalendarType.RANGE) {
       const range = this.selectedRange();
       if (range.start && range.end) {
-        const rangeDates = this.calendarService.dateAdapter.getDateRange(
-          range.start,
-          range.end
-        );
+        const rangeDates = this.calendarService.dateAdapter.getDateRange(range.start, range.end);
         const filteredDates = this.filterDisabledDates(rangeDates);
 
         calendarValue = {
@@ -1209,7 +1212,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     if (this.isYearDisabled(year)) {
       return;
     }
-    
+
     const newDate = this.calendarService.setYear(this.currentDate(), year);
     this.currentDate.set(newDate);
     this.selectedYear.set(year); // Actualizar a?o seleccionado
@@ -1221,7 +1224,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     if (this.isMonthDisabled(monthIndex)) {
       return;
     }
-    
+
     const newDate = this.calendarService.setMonth(this.currentDate(), monthIndex);
     this.currentDate.set(newDate);
     this.switchToDayView();
