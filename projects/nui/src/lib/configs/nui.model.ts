@@ -1,4 +1,5 @@
 import { NUIColor, NUIDateFormat, NUISize, NUIVariant } from './common';
+import { CalendarGlobalConfig } from '../components/calendar';
 import { FabButtonConfig } from './fab-button/fab-button.config';
 import { TooltipConfig } from '../components/tooltip';
 import { ToastGlobalConfig } from '../components/toast';
@@ -17,6 +18,8 @@ export interface NUIConfig {
   defaultSize?: NUISize;
   defaultColor?: NUIColor;
   dropdownItemSize?: NUISize;
+  /** Configuración global del calendar */
+  calendar?: Partial<CalendarGlobalConfig>;
   /** Configuración global del paginator */
   paginator?: PaginatorGlobalConfig;
   /** Configuración global de toasts */

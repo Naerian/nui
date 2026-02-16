@@ -24,6 +24,7 @@
     "button": "Botón",
     "avatar": "Avatar",
     "buttonGroup": "Grupo de botones",
+    "calendar": "Calendario",
     "paginator": "Paginador",
     "popover": "Popover",
     "toast": "Toast",
@@ -720,6 +721,110 @@
         "segmented": {
           "title": "Variables del layout segmented",
           "description": "Variables CSS específicas para el estilo segmented (iOS-like). Controla el contenedor, estados seleccionado/no seleccionado y efectos hover."
+        }
+      }
+    },
+    "calendar": {
+      "title": "Calendar",
+      "subtitle": "Componente para seleccionar fechas con múltiples modos (día, semana, rango), tamaños y width strategies",
+      "basic": {
+        "title": "Uso básico",
+        "description": "Calendario simple para selección de una fecha. Muestra el mes actual y permite navegar entre meses y años."
+      },
+      "sizes": {
+        "title": "Tamaños",
+        "description": "Cinco opciones de tamaño (xs, sm, md, lg, xl) y una sexta opción auto que se adapta al contenedor. Los tamaños escalan armoniosamente todos los elementos internos.",
+        "note": "Los tamaños afectan el ancho, altura de las celdas, padding y tamaño de fuente del calendario. Usa <code>size</code> con los valores <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> o <code>'auto'</code>."
+      },
+      "widths": {
+        "title": "Width strategies",
+        "description": "Dos estrategias de ancho: <strong>compact</strong> (ancho fijo según el tamaño) y <strong>full</strong> (ocupa el 100% del contenedor). El modo full usa Container Queries para ajustar la tipografía.",
+        "note": "Usa <code>width='compact'</code> para un calendario de ancho fijo ideal para popovers. Usa <code>width='full'</code> para un calendario que ocupa todo el espacio disponible, ideal para formularios o áreas de contenido."
+      },
+      "week-selection": {
+        "title": "Selección de semana",
+        "description": "Modo especial para seleccionar una semana completa (7 días consecutivos). Útil para planificación semanal.",
+        "note": "Establece <code>type='WEEK'</code> para activar este modo. El calendario resaltará la semana completa al hacer hover y devolverá un objeto con las fechas de inicio y fin de la semana."
+      },
+      "range-selection": {
+        "title": "Selección de rango",
+        "description": "Permite seleccionar un rango de fechas con inicio y fin. Muestra visualmente las fechas intermedias del rango.",
+        "note": "Establece <code>type='RANGE'</code> para activar este modo. El calendario esperará dos clicks: uno para inicio y otro para fin del rango. El output devolverá un objeto <code>{ start: Date, end: Date }</code>."
+      },
+      "presets": {
+        "title": "Presets de rango rápido",
+        "description": "Agrega botones de preset para rangos frecuentes como 'Última semana', 'Último mes', 'Último año'. Permite incluir iconos Remix Icon.",
+        "note": "Esta característica solo está disponible cuando <code>type='RANGE'</code>. Proporciona un array de objetos <code>DateRangePreset</code> en <code>customPresets</code>. Cada preset tiene un <code>label</code>, <code>range</code> (con start/end) e <code>icon</code> opcional."
+      },
+      "time-picker": {
+        "title": "Integración con Time Picker",
+        "description": "Combina selección de fecha con selección de hora. Soporta hora de inicio, hora de fin o ambas según el tipo de calendario.",
+        "note": "Usa <code>showTimePicker='true'</code> y configura <code>timeMode</code> con <code>'start'</code>, <code>'end'</code> o <code>'both'</code>. Puedes personalizar el time picker con <code>timeConfig</code> (pasos, rango, presets, etc.)."
+      },
+      "disabled-dates": {
+        "title": "Fechas deshabilitadas",
+        "description": "Bloquea fechas específicas evitando su selección. Útil para días festivos, fines de semana o fechas no disponibles.",
+        "note": "Usa <code>disabledDates</code> para especificar un array de fechas deshabilitadas. Las fechas deshabilitadas muestran un estilo atenuado distintivo y no son seleccionables. Puedes combinar con <code>blockDisabledRanges</code> para evitar rangos que incluyan fechas deshabilitadas."
+      },
+      "min-max-dates": {
+        "title": "Rango mínimo y máximo",
+        "description": "Restringe el rango de fechas seleccionables usando valores mínimo y máximo. Las fechas fuera del rango quedan deshabilitadas.",
+        "note": "Configura <code>minDate</code> y <code>maxDate</code> para establecer los límites. Los usuarios no podrán navegar más allá de estos límites ni seleccionar fechas fuera del rango."
+      },
+      "reactive-forms": {
+        "title": "Formularios reactivos",
+        "description": "Integración completa con formularios reactivos de Angular. Implementa ControlValueAccessor para sincronización automática.",
+        "note": "Usa <code>formControl</code> o <code>formControlName</code> para integrar con formularios de Angular. El componente maneja la sincronización, validación y estado automáticamente. Soporta todos los tipos (DAY, WEEK, RANGE) en formularios."
+      },
+      "api": {
+        "inputs": {
+          "title": "Inputs",
+          "description": "Propiedades de entrada para configurar el comportamiento, apariencia y restricciones del calendario"
+        },
+        "outputs": {
+          "title": "Outputs",
+          "description": "Eventos emitidos por el calendario cuando el usuario selecciona una fecha o rango"
+        },
+        "calendar-value": {
+          "title": "CalendarValue",
+          "description": "Unión de tipos que representa todos los posibles valores del calendario según el tipo seleccionado",
+          "note": "El tipo de valor devuelto depende del <code>type</code>: <strong>DAY</strong> devuelve <code>Date | null</code>, <strong>WEEK</strong> devuelve <code>{ start: Date, end: Date } | null</code>, y <strong>RANGE</strong> devuelve <code>{ start: Date, end: Date } | null</code>."
+        },
+        "calendar-type": {
+          "title": "CalendarType",
+          "description": "Enum que define el modo de selección del calendario"
+        },
+        "calendar-width": {
+          "title": "CalendarWidth",
+          "description": "Enum que define la estrategia de ancho del calendario"
+        },
+        "view-mode": {
+          "title": "ViewMode",
+          "description": "Enum que define el modo de vista actual (días, meses o años). Principalmente para uso interno del componente.",
+          "note": "Este enum es utilizado internamente por el componente para gestionar la navegación entre vistas. No es necesario configurarlo directamente en la mayoría de los casos."
+        },
+        "preset": {
+          "title": "DateRangePreset",
+          "description": "Interface para definir presets de rango rápido con etiqueta, rango de fechas e icono opcional"
+        }
+      },
+      "theming": {
+        "colors": {
+          "title": "Colores",
+          "description": "El calendario usa principalmente las variables del tema global. Los días seleccionados, hover y estados activos usan el color primario del tema activo.",
+          "note": "El componente se integra completamente con el sistema de temas de NUI. Los colores primarios, de fondo, texto y bordes se heredan automáticamente del preset de tema seleccionado."
+        },
+        "sizes": {
+          "title": "Tamaños",
+          "description": "Variables CSS específicas por tamaño que controlan ancho, padding, espaciado, tamaño de celdas y tipografía. Cinco variantes de tamaño disponibles: xs, sm, md (predeterminado), lg y xl."
+        },
+        "structure": {
+          "title": "Estructura",
+          "description": "Variables CSS estructurales para controlar bordes, opacidades, animaciones y dimensiones. Incluye personalización de pestañas, días de otros meses, presets y estados de foco."
+        },
+        "customization": {
+          "title": "Personalización",
+          "description": "Ejemplos de cómo personalizar los estilos del calendario en tu aplicación. Puedes sobrescribir variables CSS globalmente o específicas a instancias."
         }
       }
     },

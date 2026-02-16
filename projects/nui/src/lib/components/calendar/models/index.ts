@@ -1,0 +1,19 @@
+export {
+  CalendarType,
+  SelectionType,
+  COUNT_BLOCK_YEARS,
+  ViewMode,
+  CalendarDay,
+  WeekRange,
+  CalendarValue,
+  DateRangePreset,
+  DEFAULT_FORMAT,
+  FirstDayOfWeek,
+  CalendarTimePickerMode,
+  CalendarTimePickerModeEnum,
+  CalendarTabType,
+  CalendarWidth,
+  CalendarWidthEnum,
+  CalendarGlobalConfig,
+} from './calendar.model';
+// Nota: TimeValue se importa de time-picker, no se re-exporta desde aquí

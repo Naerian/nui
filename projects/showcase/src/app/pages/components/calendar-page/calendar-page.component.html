@@ -1,0 +1,298 @@
+<div class="docs-page">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h1>{{ pageConfig.title | translate }}</h1>
+      <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
+    </div>
+
+    <app-component-tabs [tabs]="tabs" [sections]="pageConfig.sections" #tabsComp>
+      @if (tabsComp.activeSections(); as activeSections) {
+        @for (section of activeSections; track section.id) {
+          <div class="section">
+            <!-- Título de sección -->
+            <app-section-title
+              [anchor]="section.anchor"
+              [title]="section.title | translate"
+              [tabId]="tabsComp.activeTabId()"
+            ></app-section-title>
+
+            @if (section.description) {
+              <p class="section-description" [innerHTML]="section.description | translate"></p>
+            }
+
+            @if (section.note) {
+              <div class="section-note" [ngClass]="section.note.type">
+                @if (section.note.icon) {
+                  <i [class]="section.note.icon"></i>
+                }
+                <p [innerHTML]="section.note.content | translate"></p>
+              </div>
+            }
+
+            <!-- Contenido específico de cada sección -->
+            @switch (section.id) {
+              @case ('basic') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-calendar
+                    [type]="CalendarType.DAY"
+                    (valueChange)="onDateChange($event)"
+                  ></nui-calendar>
+
+                  @if (selectedDateString()) {
+                    <div class="value-display">
+                      Fecha seleccionada: <strong>{{ selectedDateString() }}</strong>
+                    </div>
+                  }
+                </div>
+              }
+
+              @case ('sizes') {
+                <div class="example-preview flex-row gap-4 align-items-start flex-wrap">
+                  <div class="example-item">
+                    <p class="mb-2"><strong>XS</strong></p>
+                    <nui-calendar size="xs"></nui-calendar>
+                  </div>
+
+                  <div class="example-item">
+                    <p class="mb-2"><strong>SM</strong></p>
+                    <nui-calendar size="sm"></nui-calendar>
+                  </div>
+
+                  <div class="example-item">
+                    <p class="mb-2"><strong>MD</strong></p>
+                    <nui-calendar size="md"></nui-calendar>
+                  </div>
+
+                  <div class="example-item">
+                    <p class="mb-2"><strong>LG</strong></p>
+                    <nui-calendar size="lg"></nui-calendar>
+                  </div>
+
+                  <div class="example-item">
+                    <p class="mb-2"><strong>XL</strong></p>
+                    <nui-calendar size="xl"></nui-calendar>
+                  </div>
+                </div>
+              }
+
+              @case ('widths') {
+                <div class="example-preview flex-column gap-4">
+                  <div class="example-item" style="max-width: 600px;">
+                    <p class="mb-2"><strong>Compact (ancho fijo)</strong></p>
+                    <nui-calendar width="compact"></nui-calendar>
+                  </div>
+
+                  <div class="example-item">
+                    <p class="mb-2"><strong>Full (100% con Container Queries)</strong></p>
+                    <div style="max-width: 800px; border: 2px dashed var(--nui-border-primary); padding: 1rem;">
+                      <nui-calendar width="full"></nui-calendar>
+                    </div>
+                  </div>
+                </div>
+              }
+
+              @case ('week-selection') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-calendar
+                    [type]="CalendarType.WEEK"
+                    (valueChange)="onWeekChange($event)"
+                  ></nui-calendar>
+
+                  @if (selectedWeekRange()) {
+                    <div class="value-display">
+                      Semana seleccionada: <strong>{{ selectedWeekRange() }}</strong>
+                    </div>
+                  }
+                </div>
+              }
+
+              @case ('range-selection') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-calendar
+                    [type]="CalendarType.RANGE"
+                    (valueChange)="onRangeChange($event)"
+                  ></nui-calendar>
+
+                  @if (selectedRangeDisplay()) {
+                    <div class="value-display">
+                      Rango seleccionado: <strong>{{ selectedRangeDisplay() }}</strong>
+                    </div>
+                  }
+                </div>
+              }
+
+              @case ('presets') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-calendar
+                    [type]="CalendarType.RANGE"
+                    [showPresets]="true"
+                    (valueChange)="onRangeChange($event)"
+                  ></nui-calendar>
+
+                  @if (selectedRangeDisplay()) {
+                    <div class="value-display">
+                      Rango seleccionado: <strong>{{ selectedRangeDisplay() }}</strong>
+                    </div>
+                  }
+                </div>
+              }
+
+              @case ('time-picker') {
+                <div class="example-preview flex-column gap-4">
+                  <div class="example-item">
+                    <h4 class="mb-3">Fecha con hora de inicio</h4>
+                    <div style="max-width: 400px;">
+                      <nui-calendar
+                        [type]="CalendarType.DAY"
+                        [showTimePicker]="true"
+                        (valueChange)="onDateWithTimeChange($event)"
+                      ></nui-calendar>
+                    </div>
+                    @if (selectedDateWithTime(); as value) {
+                      <div class="value-display mt-3">
+                        @if (value.type === CalendarType.DAY) {
+                          <strong>Fecha:</strong> {{ value.date.toLocaleDateString() }}<br />
+                          @if (value.time) {
+                            <strong>Hora:</strong> {{ value.time.hour }}:{{ value.time.minute }}
+                          }
+                        }
+                      </div>
+                    }
+                  </div>
+
+                  <div class="example-item">
+                    <h4 class="mb-3">Rango con hora de inicio y fin</h4>
+                    <div style="max-width: 400px;">
+                      <nui-calendar
+                        [type]="CalendarType.RANGE"
+                        showTimePicker="both"
+                        (valueChange)="onRangeWithTimeChange($event)"
+                      ></nui-calendar>
+                    </div>
+                    @if (selectedRangeWithTime(); as value) {
+                      <div class="value-display mt-3">
+                        @if (value.type === CalendarType.RANGE) {
+                          <strong>Desde:</strong> {{ value.range.start.toLocaleDateString() }}
+                          @if (value.time; as vtime) {
+                            @if (vtime.start) {
+                              a las {{ vtime.start.hour }}:{{ vtime.start.minute }}
+                            }
+                          }
+                          <br />
+                          <strong>Hasta:</strong> {{ value.range.end.toLocaleDateString() }}
+                          @if (value.time; as vtime) {
+                            @if (vtime.end) {
+                              a las {{ vtime.end.hour }}:{{ vtime.end.minute }}
+                            }
+                          }
+                        }
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+
+              @case ('disabled-dates') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-calendar
+                    [type]="CalendarType.DAY"
+                    [disabledDates]="disabledDates"
+                    (valueChange)="onDateChange($event)"
+                  ></nui-calendar>
+
+                  <div class="value-display">
+                    <p>Fechas deshabilitadas: 15, 20 y 25 de enero</p>
+                  </div>
+                </div>
+              }
+
+              @case ('min-max-dates') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-calendar
+                    [type]="CalendarType.DAY"
+                    [minDate]="minDate"
+                    [maxDate]="maxDate"
+                    (valueChange)="onDateChange($event)"
+                  ></nui-calendar>
+
+                  <div class="value-display">
+                    <p>
+                      Rango permitido: {{ minDate.toLocaleDateString() }} -
+                      {{ maxDate.toLocaleDateString() }}
+                    </p>
+                  </div>
+                </div>
+              }
+
+              @case ('reactive-forms') {
+                <div class="example-preview flex-column gap-4">
+                  <div class="example-item">
+                    <h4 class="mb-3">Selección de fecha con FormControl</h4>
+                    <div style="max-width: 400px;">
+                      <nui-calendar
+                        [type]="CalendarType.DAY"
+                        [formControl]="dateControl"
+                      ></nui-calendar>
+                    </div>
+                    <div class="value-display mt-3">
+                      <strong>Valor del FormControl:</strong>
+                      {{ dateControl.value?.toLocaleDateString() || 'Sin selección' }}
+                    </div>
+                  </div>
+
+                  <div class="example-item">
+                    <h4 class="mb-3">Selección de rango con FormControl</h4>
+                    <div style="max-width: 400px;">
+                      <nui-calendar
+                        [type]="CalendarType.RANGE"
+                        [formControl]="rangeControl"
+                      ></nui-calendar>
+                    </div>
+                    <div class="value-display mt-3">
+                      <strong>Valor del FormControl:</strong>
+                      @if (rangeControl.value && rangeControl.value.length === 2) {
+                        {{ rangeControl.value[0].toLocaleDateString() }} -
+                        {{ rangeControl.value[1].toLocaleDateString() }}
+                      } @else {
+                        Sin selección
+                      }
+                    </div>
+                  </div>
+                </div>
+              }
+            }
+
+            <!-- Tabla de datos (para API o Theming) -->
+            @if (section.table) {
+              <div class="api-table">
+                <table>
+                  <thead>
+                    <tr>
+                      @for (header of section.table.headers; track $index) {
+                        <th [innerHTML]="header | translate"></th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of section.table.rows; track $index) {
+                      <tr>
+                        @for (cell of row; track $index) {
+                          <td [innerHTML]="cell | translate"></td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+
+            <!-- Code blocks asociados a esta sección -->
+            @if (section.examples && section.examples.length > 0) {
+              <app-code-block [examples]="section.examples"></app-code-block>
+            }
+          </div>
+        }
+      }
+    </app-component-tabs>
+  </div>
+</div>

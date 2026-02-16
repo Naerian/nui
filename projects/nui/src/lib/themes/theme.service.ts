@@ -291,6 +291,7 @@ export class ThemeService {
     // Generar variables de Tooltip (no depende de colores semánticos)
     css += this.generateTooltipVariables();
     css += this.generateSidebarPanelVariables();
+    css += this.generateCalendarVariables();
 
     css += '}\n';
     return css;
@@ -742,6 +743,32 @@ export class ThemeService {
       --nui-sidebar-panel-scroll-bg: var(--nui-bg-secondary);
       --nui-sidebar-panel-scroll-thumb-bg: var(--nui-border-primary);
       --nui-sidebar-panel-scroll-thumb-hover-bg: var(--nui-border-primary);
+    `;
+  }
+
+  /**
+   * Genera variables de color para Calendar según el tema.
+   * El calendario usa colores del tema principal para interacciones.
+   */
+  private generateCalendarVariables(): string {
+    const isDark = this._isDarkMode();
+    const grays = this._currentPreset().grays || this.getDefaultGrays();
+    
+    // El calendario usa principalmente las CSS variables del tema
+    // Pero añadimos algunas propiedades específicas si es necesario
+    const tabsBorder = isDark ? grays[700] : grays[200];
+    const presetBorder = isDark ? grays[700] : grays[300];
+    
+    return `
+      --calendar-tabs-border-width: 1px;
+      --calendar-day-border-width: 1px;
+      --calendar-day-other-month-opacity: 0.4;
+      --calendar-preset-border-width: 1px;
+      --calendar-preset-hover-translateY: -2px;
+      --calendar-preset-active-translateY: -4px;
+      --calendar-focus-outline-width: 2px;
+      --calendar-focus-outline-offset: 2px;
+      --calendar-full-min-width: 280px;
     `;
   }
 

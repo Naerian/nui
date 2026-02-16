@@ -1,5 +1,6 @@
 import { InjectionToken, Provider, inject } from '@angular/core';
 import { NUIConfig } from './nui.model';
+import { createDefaultCalendarConfig } from './calendar';
 import { createDefaultPaginatorConfig } from './paginator';
 import { createDefaultToastConfig } from './toast';
 import { createDefaultTooltipConfig } from './tooltip';
@@ -15,6 +16,7 @@ function createDefaultNUIConfig(): Partial<NUIConfig> {
     defaultSize: DEFAULT_SIZE, // Tamaño por defecto para los componentes
     defaultColor: DEFAULT_COLOR, // Color por defecto para los componentes
     defaultVariant: DEFAULT_VARIANT, // Valor por defecto para los botones
+    calendar: createDefaultCalendarConfig(),
     paginator: createDefaultPaginatorConfig(),
     toast: createDefaultToastConfig(),
     tooltip: createDefaultTooltipConfig(),
@@ -49,6 +51,19 @@ export const NUI_CONFIG = new InjectionToken<Partial<NUIConfig>>('NUIConfig', {
  *       dropdownItemSize: 'sm',     // Todos los items de los dropdowns usarán 'sm' por defecto
  *       defaultDateFormat: {        // Configuración por defecto para pipes de fecha
  *         diffTimeFormat: 'DD/MM/YYYY'    // Pipes como DiffTimePipe usarán 'DD/MM/YYYY' por defecto
+ *       },
+ *       calendar: {                 // Configuración global del calendar
+ *         firstDayOfWeek: 1,        // Semana empieza lunes (ISO 8601)
+ *         format: 'yyyy-MM-dd',     // Formato ISO para APIs
+ *         locale: 'es',             // Español
+ *         showTodayButton: true,
+ *         timeMode: '24h',
+ *         customPresets: [
+ *           {
+ *             label: 'Trimestre Q1',
+ *             getValue: () => ({ start: new Date(2024, 0, 1), end: new Date(2024, 2, 31) })
+ *           }
+ *         ]
  *       },
  *       paginator: {               // Configuración global del paginator
  *         config: {
@@ -86,6 +101,14 @@ function mergeNUIConfigs(
   customConfig: Partial<NUIConfig>,
 ): Partial<NUIConfig> {
   const merged = { ...defaultConfig, ...customConfig };
+
+  // Fusión profunda para la configuración del calendar
+  if (defaultConfig.calendar || customConfig.calendar) {
+    merged.calendar = {
+      ...defaultConfig.calendar,
+      ...customConfig.calendar,
+    };
+  }
 
   // Fusión profunda para la configuración del paginator
   if (defaultConfig.paginator || customConfig.paginator) {

@@ -95,6 +95,10 @@ export const NUI_DEFAULT_I18N: NUITranslations = {
     today: 'Hoy',
     showTime: 'Mostrar selector de hora',
     hideTime: 'Ocultar selector de hora',
+    timePicker: {
+      start: 'Hora de inicio',
+      end: 'Hora de fin',
+    },
     presets: {
       shortcuts: 'Acc. rápidos',
       today: 'Hoy',

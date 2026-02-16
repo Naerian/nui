@@ -142,6 +142,12 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
         icon: 'ri-side-bar-fill',
       },
       {
+        label: 'Calendar',
+        translationKey: 'sidebar.calendar',
+        route: '/components/calendar',
+        icon: 'ri-calendar-line',
+      },
+      {
         label: 'Time Picker',
         translationKey: 'sidebar.timePicker',
         route: '/components/time-picker',

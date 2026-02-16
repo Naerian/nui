@@ -24,6 +24,7 @@
     "button": "Button",
     "avatar": "Avatar",
     "buttonGroup": "Button Group",
+    "calendar": "Calendar",
     "paginator": "Paginator",
     "popover": "Popover",
     "toast": "Toast",
@@ -621,6 +622,110 @@
       "styling": {
         "title": "Styling and customization",
         "description": "Customize the button group's appearance using CSS variables. Control spacing, colors, shadows and more."
+      }
+    },
+    "calendar": {
+      "title": "Calendar",
+      "subtitle": "Component for selecting dates with multiple modes (day, week, range), sizes and width strategies",
+      "basic": {
+        "title": "Basic usage",
+        "description": "Simple calendar for selecting a single date. Shows the current month and allows navigating between months and years."
+      },
+      "sizes": {
+        "title": "Sizes",
+        "description": "Five size options (xs, sm, md, lg, xl) and a sixth auto option that adapts to the container. Sizes harmoniously scale all internal elements.",
+        "note": "Sizes affect the calendar's width, cell height, padding and font size. Use <code>size</code> with values <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> or <code>'auto'</code>."
+      },
+      "widths": {
+        "title": "Width strategies",
+        "description": "Two width strategies: <strong>compact</strong> (fixed width based on size) and <strong>full</strong> (occupies 100% of the container). Full mode uses Container Queries to adjust typography.",
+        "note": "Use <code>width='compact'</code> for a fixed-width calendar ideal for popovers. Use <code>width='full'</code> for a calendar that occupies all available space, ideal for forms or content areas."
+      },
+      "week-selection": {
+        "title": "Week selection",
+        "description": "Special mode for selecting a complete week (7 consecutive days). Useful for weekly planning.",
+        "note": "Set <code>type='WEEK'</code> to activate this mode. The calendar will highlight the complete week on hover and return an object with the week's start and end dates."
+      },
+      "range-selection": {
+        "title": "Range selection",
+        "description": "Allows selecting a date range with start and end. Visually displays intermediate dates in the range.",
+        "note": "Set <code>type='RANGE'</code> to activate this mode. The calendar will expect two clicks: one for the start and another for the end of the range. The output will return an object <code>{ start: Date, end: Date }</code>."
+      },
+      "presets": {
+        "title": "Quick range presets",
+        "description": "Add preset buttons for frequent ranges like 'Last week', 'Last month', 'Last year'. Allows including Remix Icon icons.",
+        "note": "This feature is only available when <code>type='RANGE'</code>. Provide an array of <code>DateRangePreset</code> objects in <code>customPresets</code>. Each preset has a <code>label</code>, <code>range</code> (with start/end) and optional <code>icon</code>."
+      },
+      "time-picker": {
+        "title": "Time Picker integration",
+        "description": "Combines date selection with time selection. Supports start time, end time or both depending on calendar type.",
+        "note": "Use <code>showTimePicker='true'</code> and configure <code>timeMode</code> with <code>'start'</code>, <code>'end'</code> or <code>'both'</code>. You can customize the time picker with <code>timeConfig</code> (steps, range, presets, etc.)."
+      },
+      "disabled-dates": {
+        "title": "Disabled dates",
+        "description": "Blocks specific dates preventing their selection. Useful for holidays, weekends or unavailable dates.",
+        "note": "Use <code>disabledDates</code> to specify an array of disabled dates. Disabled dates show a distinctive dimmed style and are not selectable. You can combine with <code>blockDisabledRanges</code> to prevent ranges that include disabled dates."
+      },
+      "min-max-dates": {
+        "title": "Minimum and maximum range",
+        "description": "Restricts the range of selectable dates using minimum and maximum values. Dates outside the range are disabled.",
+        "note": "Configure <code>minDate</code> and <code>maxDate</code> to set the limits. Users won't be able to navigate beyond these limits or select dates outside the range."
+      },
+      "reactive-forms": {
+        "title": "Reactive forms",
+        "description": "Full integration with Angular reactive forms. Implements ControlValueAccessor for automatic synchronization.",
+        "note": "Use <code>formControl</code> or <code>formControlName</code> to integrate with Angular forms. The component handles synchronization, validation and state automatically. Supports all types (DAY, WEEK, RANGE) in forms."
+      },
+      "api": {
+        "inputs": {
+          "title": "Inputs",
+          "description": "Input properties to configure the calendar's behavior, appearance and constraints"
+        },
+        "outputs": {
+          "title": "Outputs",
+          "description": "Events emitted by the calendar when the user selects a date or range"
+        },
+        "calendar-value": {
+          "title": "CalendarValue",
+          "description": "Union type representing all possible calendar values based on the selected type",
+          "note": "The returned value type depends on the <code>type</code>: <strong>DAY</strong> returns <code>Date | null</code>, <strong>WEEK</strong> returns <code>{ start: Date, end: Date } | null</code>, and <strong>RANGE</strong> returns <code>{ start: Date, end: Date } | null</code>."
+        },
+        "calendar-type": {
+          "title": "CalendarType",
+          "description": "Enum defining the calendar selection mode"
+        },
+        "calendar-width": {
+          "title": "CalendarWidth",
+          "description": "Enum defining the calendar width strategy"
+        },
+        "view-mode": {
+          "title": "ViewMode",
+          "description": "Enum defining the current view mode (days, months or years). Mainly for internal component use.",
+          "note": "This enum is used internally by the component to manage navigation between views. It's not necessary to configure it directly in most cases."
+        },
+        "preset": {
+          "title": "DateRangePreset",
+          "description": "Interface for defining quick range presets with label, date range and optional icon"
+        }
+      },
+      "theming": {
+        "colors": {
+          "title": "Colors",
+          "description": "The calendar mainly uses global theme variables. Selected days, hover and active states use the active theme's primary color.",
+          "note": "The component fully integrates with the NUI theming system. Primary colors, background, text and borders are automatically inherited from the selected theme preset."
+        },
+        "sizes": {
+          "title": "Sizes",
+          "description": "Size-specific CSS variables controlling width, padding, spacing, cell size and typography. Five size variants available: xs, sm, md (default), lg and xl."
+        },
+        "structure": {
+          "title": "Structure",
+          "description": "Structural CSS variables to control borders, opacities, animations and dimensions. Includes customization of tabs, days from other months, presets and focus states."
+        },
+        "customization": {
+          "title": "Customization",
+          "description": "Examples of how to customize calendar styles in your application. You can override CSS variables globally or specific to instances."
+        }
       }
     },
     "paginator": {

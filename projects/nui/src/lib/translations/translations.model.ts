@@ -71,6 +71,10 @@ export interface NUITranslations {
     today: string;
     showTime: string;
     hideTime: string;
+    timePicker: {
+      start: string;
+      end: string;
+    };
     presets: {
       shortcuts: string;
       today: string;

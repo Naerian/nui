@@ -1,0 +1,288 @@
+<div
+  class="nui-calendar"
+  [class.nui-calendar--xs]="size() === 'xs'"
+  [class.nui-calendar--sm]="size() === 'sm'"
+  [class.nui-calendar--md]="size() === 'md'"
+  [class.nui-calendar--lg]="size() === 'lg'"
+  [class.nui-calendar--xl]="size() === 'xl'"
+  [class.nui-calendar--full]="width() === 'full'"
+  [class.nui-calendar--compact]="width() === 'compact'"
+  [class.nui-calendar--with-tabs]="shouldShowTabs()"
+>
+  <!-- SISTEMA DE PESTAÑAS (cuando hay presets o timepicker) -->
+  @if (shouldShowTabs() && viewMode() === ViewMode.DAY) {
+    <div class="nui-calendar__tabs">
+      <nui-btn-group
+        [width]="'full'"
+        [options]="tabOptions()"
+        [ngModel]="activeTab()"
+        (ngModelChange)="onTabChange($event)"
+        mode="radio"
+        visualVariant="segmented"
+        size="sm"
+        class="nui-calendar__tabs-toggle"
+      />
+    </div>
+  }
+
+  <!-- PESTAÑA DE CALENDARIO -->
+  @if (!shouldShowTabs() || activeTab() === 'calendar') {
+    <div class="nui-calendar__main">
+      <!-- Header con controles de navegación -->
+      <div class="nui-calendar__header">
+        <div class="nui-calendar__nav">
+          <nui-button
+            [size]="size()"
+            icon="ri-arrow-left-s-line"
+            variant="ghost"
+            data-calendar-nav
+            [disabled]="!canNavigateBack()"
+            [attr.aria-label]="
+              viewMode() === ViewMode.YEAR
+                ? _translations.calendar.prevYears
+                : _translations.calendar.prevMonth
+            "
+            (onClick)="handlePreviousNavigation()"
+          />
+
+          <div class="nui-calendar__title">
+            @if (viewMode() === ViewMode.DAY) {
+              <button
+                type="button"
+                class="nui-calendar__title-button"
+                data-calendar-nav
+                (click)="switchToMonthView()"
+                [attr.aria-label]="_translations.calendar.changeMonth"
+              >
+                {{ displayedMonth() }}
+              </button>
+              <button
+                type="button"
+                class="nui-calendar__title-button"
+                data-calendar-nav
+                (click)="switchToYearView()"
+                [attr.aria-label]="_translations.calendar.changeYear"
+              >
+                {{ displayedYear() }}
+              </button>
+            } @else if (viewMode() === ViewMode.MONTH) {
+              <button
+                type="button"
+                class="nui-calendar__title-button"
+                data-calendar-nav
+                (click)="switchToYearView()"
+                [attr.aria-label]="_translations.calendar.changeYear"
+              >
+                {{ displayedYear() }}
+              </button>
+            } @else {
+              <span class="nui-calendar__title-text">{{ _translations.calendar.changeYear }}</span>
+            }
+          </div>
+
+          <nui-button
+            [size]="size()"
+            icon="ri-arrow-right-s-line"
+            variant="ghost"
+            data-calendar-nav
+            [disabled]="!canNavigateForward()"
+            [attr.aria-label]="
+              viewMode() === ViewMode.YEAR
+                ? _translations.calendar.nextYears
+                : _translations.calendar.nextMonth
+            "
+            (onClick)="handleNextNavigation()"
+          />
+        </div>
+      </div>
+
+      <!-- Contenido del calendario -->
+      <div class="nui-calendar__body">
+        <!-- Vista de d�as -->
+        @if (viewMode() === ViewMode.DAY) {
+          <div class="nui-calendar__weekdays">
+            @for (day of orderedWeekDays(); track day) {
+              <div class="nui-calendar__weekday">{{ day }}</div>
+            }
+          </div>
+
+          <div class="nui-calendar__days">
+            @for (day of calendarDays(); track day.date.getTime(); let i = $index) {
+              <button
+                #dayButton
+                type="button"
+                class="nui-calendar__day"
+                data-calendar-item="day"
+                [class.nui-calendar__day--current-month]="day.isCurrentMonth"
+                [class.nui-calendar__day--today]="day.isToday"
+                [class.nui-calendar__day--selected]="day.isSelected"
+                [class.nui-calendar__day--in-range]="day.isInRange"
+                [class.nui-calendar__day--disabled]="day.isDisabled"
+                [class.nui-calendar__day--hovered]="day.isHovered"
+                [class.nui-calendar__day--focused]="focusedDayIndex() === i"
+                [attr.aria-label]="getDayAriaLabel(day)"
+                [attr.aria-selected]="day.isSelected"
+                [attr.aria-disabled]="day.isDisabled"
+                [disabled]="day.isDisabled"
+                (click)="onDayClick(day)"
+                (mouseenter)="onDayHover(day)"
+                (mouseleave)="onDayHoverEnd()"
+              >
+                {{ day.dayNumber }}
+              </button>
+            }
+          </div>
+        }
+
+        <!-- Vista de meses -->
+        @if (viewMode() === ViewMode.MONTH) {
+          <div class="nui-calendar__months" data-calendar-view="months">
+            @for (month of _translations.calendar.months; track month; let i = $index) {
+              <button
+                #monthButton
+                type="button"
+                class="nui-calendar__month"
+                data-calendar-item="month"
+                [class.nui-calendar__month--selected]="i === displayedMonthIndex()"
+                [attr.aria-label]="month"
+                [attr.aria-selected]="i === displayedMonthIndex()"
+                (click)="selectMonth(i)"
+              >
+                {{ month }}
+              </button>
+            }
+          </div>
+        }
+
+        <!-- Vista de a�os -->
+        @if (viewMode() === ViewMode.YEAR) {
+          <div class="nui-calendar__years" data-calendar-view="years">
+            @for (year of years(); track year) {
+              <button
+                #yearButton
+                type="button"
+                class="nui-calendar__year"
+                data-calendar-item="year"
+                [class.nui-calendar__year--selected]="year === selectedYear()"
+                [attr.aria-label]="year.toString()"
+                [attr.aria-selected]="year === selectedYear()"
+                (click)="selectYear(year)"
+              >
+                {{ year }}
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- FOOTER con botón Today (solo si no hay tabs) -->
+      @if (
+        !shouldShowTabs() &&
+        viewMode() === ViewMode.DAY &&
+        showTodayButton() &&
+        !isTodaySelected() &&
+        type() === CalendarType.DAY
+      ) {
+        <div class="nui-calendar__footer">
+          <div class="nui-calendar__footer-center">
+            <nui-button
+              [size]="size()"
+              variant="ghost"
+              (onClick)="goToToday()"
+              class="nui-calendar__footer-button"
+            >
+              {{ _translations.calendar.today }}
+            </nui-button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- PESTAÑA DE PRESETS -->
+  @if (
+    shouldShowTabs() &&
+    activeTab() === 'presets' &&
+    showPresets() &&
+    type() === CalendarType.RANGE &&
+    viewMode() === ViewMode.DAY
+  ) {
+    <div class="nui-calendar__presets-panel">
+      <div class="nui-calendar__presets-list">
+        @for (preset of presets(); track preset.label) {
+          <button type="button" class="nui-calendar__preset-button" (click)="applyPreset(preset)">
+            {{ preset.label }}
+          </button>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- PESTAÑA DE TIME PICKER -->
+  @if (
+    shouldShowTabs() && activeTab() === 'time' && showTimePicker() && viewMode() === ViewMode.DAY
+  ) {
+    <div class="nui-calendar__time-picker-panel" [attr.data-mode]="showTimePicker()">
+      <!-- TIME PICKER DE INICIO (o único) -->
+      @if (showStartTimePicker()) {
+        <div class="nui-calendar__time-picker">
+          <!-- Header con toggle para modo 'both' -->
+          @if (showTimePicker() === 'both') {
+            <div class="nui-calendar__time-picker-header">
+              <nui-btn-group
+                [width]="'full'"
+                [options]="timePickerToggleOptions()"
+                [ngModel]="timePickerToggleValue()"
+                (ngModelChange)="onTimePickerToggleChange($event)"
+                mode="radio"
+                visualVariant="segmented"
+                size="xs"
+                class="nui-calendar__time-picker-toggle"
+              />
+            </div>
+          }
+
+          <!-- Time Picker (cambia según toggle en modo 'both') -->
+          @if (showTimePicker() !== 'both' || !showingEndTime()) {
+            <nui-time-picker
+              [fromCalendar]="true"
+              [mode]="timeMode()"
+              [config]="timeConfig()"
+              [size]="size()"
+              [ngModel]="selectedStartTime() || selectedTime()"
+              (ngModelChange)="onTimeChange($event, false)"
+            />
+          }
+
+          @if (showTimePicker() === 'both' && showingEndTime()) {
+            <nui-time-picker
+              [fromCalendar]="true"
+              [mode]="timeMode()"
+              [config]="timeConfig()"
+              [size]="size()"
+              [ngModel]="selectedEndTime()"
+              (ngModelChange)="onTimeChange($event, true)"
+            />
+          }
+        </div>
+      }
+
+      <!-- TIME PICKER DE FIN (solo para modo 'end' sin toggle) -->
+      @if (showTimePicker() === 'end' && showEndTimePicker()) {
+        <div class="nui-calendar__time-picker">
+          <div class="nui-calendar__time-picker-header">
+            {{ _translations.calendar.timePicker.end }}
+          </div>
+          <nui-time-picker
+            [fromCalendar]="true"
+            [mode]="timeMode()"
+            [config]="timeConfig()"
+            [size]="size()"
+            [ngModel]="selectedEndTime()"
+            (ngModelChange)="onTimeChange($event, true)"
+          />
+        </div>
+      }
+    </div>
+  }
+</div>

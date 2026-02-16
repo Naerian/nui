@@ -1,0 +1,548 @@
+@use '../../../../styles/variables/calendar-vars';
+
+// ============================================================================
+// HOST & STRUCTURE
+// ============================================================================
+
+:host {
+  @include calendar-vars.nui-calendar-vars;
+  display: block;
+  width: 100%;
+}
+
+// ============================================================================
+// ACCESSIBILITY UTILITIES
+// ============================================================================
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ============================================================================
+// BASE STYLES
+// ============================================================================
+
+.nui-calendar {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--nui-bg-primary);
+  border-radius: var(--nui-border-radius-md);
+  border: 1px solid var(--nui-border-primary);
+  box-shadow: var(--nui-shadow-md);
+  user-select: none;
+  width: var(--calendar-width);
+  padding: var(--calendar-padding);
+  gap: var(--calendar-gap);
+
+  // ============================================================================
+  // SIZE VARIANTS
+  // ============================================================================
+
+  $sizes: xs, sm, md, lg, xl;
+  @each $size in $sizes {
+    &--#{$size} {
+      --calendar-width: var(--calendar-width-#{$size});
+      --calendar-padding: var(--calendar-padding-#{$size});
+      --calendar-gap: var(--calendar-gap-#{$size});
+      --calendar-day-size: var(--calendar-day-size-#{$size});
+      --calendar-day-font-size: var(--calendar-day-font-size-#{$size});
+      --calendar-title-font-size: var(--calendar-title-font-size-#{$size});
+      --calendar-weekday-font-size: var(--calendar-weekday-font-size-#{$size});
+      --calendar-weekday-height: var(--calendar-weekday-height-#{$size});
+    }
+  }
+
+  // ============================================================================
+  // WIDTH STRATEGIES
+  // ============================================================================
+
+  &--full {
+    width: 100%;
+    max-width: 100%;
+    min-width: var(--calendar-full-min-width);
+    container-type: inline-size;
+    container-name: calendar;
+
+    // Días y elementos se adaptan al ancho disponible  
+    .nui-calendar__day {
+      font-size: clamp(0.6875rem, 3cqw, 1.5rem);
+    }
+
+    .nui-calendar__weekday {
+      font-size: clamp(0.5625rem, 2.5cqw, 1rem);
+    }
+
+    .nui-calendar__title-button,
+    .nui-calendar__title-text {
+      font-size: clamp(0.75rem, 3.5cqw, 1.25rem);
+    }
+  }
+
+  &--compact {
+    width: var(--calendar-width);
+  }
+
+  // ============================================================================
+  // WITH TABS VARIANT
+  // ============================================================================
+
+  &--with-tabs {
+    .nui-calendar__main {
+      padding-top: 0;
+    }
+  }
+
+  // ============================================================================
+  // MAIN CONTAINER
+  // ============================================================================
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--calendar-gap);
+    flex: 1;
+    min-width: 0;
+  }
+
+  // ============================================================================
+  // TABS SYSTEM
+  // ============================================================================
+
+  &__tabs {
+    display: flex;
+    justify-content: center;
+    padding-bottom: var(--nui-spacing-sm);
+    border-bottom: var(--calendar-tabs-border-width) solid var(--nui-border-primary);
+    margin-bottom: var(--calendar-gap);
+  }
+
+  // ============================================================================
+  // HEADER WITH NAVIGATION
+  // ============================================================================
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--calendar-gap);
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--nui-spacing-xs);
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: var(--nui-spacing-xs);
+    flex: 1;
+    justify-content: center;
+    font-size: var(--calendar-title-font-size);
+  }
+
+  &__title-button {
+    background: transparent;
+    border: none;
+    border-radius: var(--nui-border-radius-sm);
+    font-weight: var(--nui-font-weight-semibold);
+    font-size: var(--calendar-title-font-size);
+    color: var(--nui-text-primary);
+    cursor: pointer;
+    padding: var(--nui-spacing-xs) var(--nui-spacing-sm);
+    transition: all var(--nui-transition-fast);
+
+    &:hover {
+      background: var(--nui-bg-secondary);
+      color: var(--nui-text-primary);
+    }
+
+    &:focus-visible {
+      outline: var(--calendar-focus-outline-width) solid var(--nui-border-focus);
+      outline-offset: var(--calendar-focus-outline-offset);
+    }
+  }
+
+  &__title-text {
+    font-weight: var(--nui-font-weight-semibold);
+    font-size: var(--calendar-title-font-size);
+    color: var(--nui-text-primary);
+  }
+
+  // ============================================================================
+  // BODY (DAYS/MONTHS/YEARS CONTAINER)
+  // ============================================================================
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--calendar-gap);
+  }
+
+  // ============================================================================
+  // WEEKDAYS HEADER
+  // ============================================================================
+
+  &__weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--calendar-gap);
+    padding-bottom: var(--nui-spacing-xs);
+    border-bottom: var(--calendar-tabs-border-width) solid var(--nui-border-primary);
+  }
+
+  &__weekday {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--nui-font-weight-semibold);
+    font-size: var(--calendar-weekday-font-size);
+    color: var(--nui-text-secondary);
+    text-transform: uppercase;
+    padding: var(--nui-spacing-xs) 0;
+    min-height: var(--calendar-weekday-height);
+  }
+
+  // ============================================================================
+  // DAYS GRID
+  // ============================================================================
+
+  &__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--calendar-gap);
+  }
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    min-width: var(--calendar-day-size);
+    min-height: var(--calendar-day-size);
+    padding: 0;
+    background: transparent;
+    border: var(--calendar-day-border-width) solid transparent;
+    border-radius: var(--nui-border-radius-full);
+    font-weight: var(--nui-font-weight-medium);
+    font-size: var(--calendar-day-font-size);
+    color: var(--nui-text-disabled);
+    opacity: var(--calendar-day-other-month-opacity);
+    cursor: pointer;
+    transition: all var(--nui-transition-fast);
+    position: relative;
+    line-height: 1;
+
+    &:hover:not(&--disabled) {
+      background: var(--nui-bg-secondary);
+      color: var(--nui-text-primary);
+      opacity: 1;
+    }
+
+    &:focus-visible {
+      outline: var(--calendar-focus-outline-width) solid var(--nui-border-focus);
+      outline-offset: var(--calendar-focus-outline-offset);
+      z-index: 1;
+    }
+
+    &--current-month {
+      color: var(--nui-text-primary);
+      opacity: 1;
+    }
+
+    &--today {
+      position: relative;
+      font-weight: var(--nui-font-weight-bold);
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 4px;
+        border-radius: var(--nui-border-radius-full);
+        background: var(--nui-color-primary);
+      }
+    }
+
+    &--selected {
+      background: var(--nui-color-primary);
+      color: var(--nui-color-primary-contrast);
+      border-color: var(--nui-color-primary);
+      opacity: 1;
+
+      &:hover {
+        background: var(--nui-color-primary-hover);
+        border-color: var(--nui-color-primary-hover);
+      }
+    }
+
+    &--in-range {
+      background: var(--nui-bg-primary-alpha);
+      color: var(--nui-text-primary);
+      opacity: 1;
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+      opacity: 0.3;
+      
+      &:hover {
+        background: transparent;
+        color: var(--nui-text-disabled);
+      }
+    }
+
+    &--focused {
+      outline: var(--calendar-focus-outline-width) solid var(--nui-border-focus);
+      outline-offset: var(--calendar-focus-outline-offset);
+      z-index: 1;
+    }
+  }
+
+  // ============================================================================
+  // MONTHS GRID
+  // ============================================================================
+
+  &__months {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--calendar-gap);
+  }
+
+  &__month {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 2 / 1;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--nui-border-radius-sm);
+    font-weight: var(--nui-font-weight-medium);
+    font-size: var(--calendar-day-font-size);
+    color: var(--nui-text-primary);
+    cursor: pointer;
+    transition: all var(--nui-transition-fast);
+    padding: var(--nui-spacing-sm);
+
+    &:hover:not(&--disabled) {
+      background: var(--nui-bg-secondary);
+      border-color: var(--nui-border-primary);
+    }
+
+    &:focus-visible {
+      outline: var(--calendar-focus-outline-width) solid var(--nui-border-focus);
+      outline-offset: var(--calendar-focus-outline-offset);
+    }
+
+    &--current {
+      font-weight: var(--nui-font-weight-bold);
+      color: var(--nui-color-primary);
+    }
+
+    &--selected {
+      background: var(--nui-color-primary);
+      color: var(--nui-color-primary-contrast);
+      border-color: var(--nui-color-primary);
+
+      &:hover {
+        background: var(--nui-color-primary-hover);
+      }
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+      opacity: 0.3;
+      
+      &:hover {
+        background: transparent;
+        border-color: transparent;
+      }
+    }
+  }
+
+  // ============================================================================
+  // YEARS GRID
+  // ============================================================================
+
+  &__years {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--calendar-gap);
+  }
+
+  &__year {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 2 / 1;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--nui-border-radius-sm);
+    font-weight: var(--nui-font-weight-medium);
+    font-size: var(--calendar-day-font-size);
+    color: var(--nui-text-primary);
+    cursor: pointer;
+    transition: all var(--nui-transition-fast);
+    padding: var(--nui-spacing-sm);
+
+    &:hover:not(&--disabled) {
+      background: var(--nui-bg-secondary);
+      border-color: var(--nui-border-primary);
+    }
+
+    &:focus-visible {
+      outline: var(--calendar-focus-outline-width) solid var(--nui-border-focus);
+      outline-offset: var(--calendar-focus-outline-offset);
+    }
+
+    &--current {
+      font-weight: var(--nui-font-weight-bold);
+      color: var(--nui-color-primary);
+    }
+
+    &--selected {
+      background: var(--nui-color-primary);
+      color: var(--nui-color-primary-contrast);
+      border-color: var(--nui-color-primary);
+
+      &:hover {
+        background: var(--nui-color-primary-hover);
+      }
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+      opacity: 0.3;
+      
+      &:hover {
+        background: transparent;
+        border-color: transparent;
+      }
+    }
+  }
+
+  // ============================================================================
+  // PRESETS PANEL
+  // ============================================================================
+
+  &__presets-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--calendar-gap);
+    animation: fadeIn var(--nui-transition-fast) ease-out;
+  }
+
+  &__presets-list {
+    display: grid;
+    gap: var(--nui-spacing-xs);
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &__preset-button {
+    padding: var(--nui-spacing-sm) var(--nui-spacing-md);
+    background: var(--nui-bg-secondary);
+    border: var(--calendar-preset-border-width) solid var(--nui-border-primary);
+    border-radius: var(--nui-border-radius-sm);
+    font-size: var(--nui-font-size-sm);
+    font-weight: var(--nui-font-weight-medium);
+    color: var(--nui-text-primary);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--nui-transition-fast);
+
+    &:hover {
+      background: var(--nui-bg-tertiary);
+      border-color: var(--nui-border-secondary);
+      transform: translateY(var(--calendar-preset-hover-translateY));
+      box-shadow: var(--nui-shadow-sm);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &:focus-visible {
+      outline: var(--calendar-focus-outline-width) solid var(--nui-border-focus);
+      outline-offset: var(--calendar-focus-outline-offset);
+    }
+  }
+
+  // ============================================================================
+  // TIME PICKER PANEL
+  // ============================================================================
+
+  &__time-picker-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--calendar-gap);
+    animation: fadeIn var(--nui-transition-fast) ease-out;
+  }
+
+  &__time-picker {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nui-spacing-sm);
+  }
+
+  &__time-picker-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nui-spacing-sm);
+    font-weight: var(--nui-font-weight-semibold);
+    color: var(--nui-text-secondary);
+    font-size: var(--nui-font-size-sm);
+    text-align: center;
+    padding-bottom: var(--nui-spacing-sm);
+    border-bottom: var(--calendar-tabs-border-width) solid var(--nui-border-primary);
+  }
+
+  // ============================================================================
+  // FOOTER
+  // ============================================================================
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--nui-spacing-sm);
+    padding-top: var(--calendar-gap);
+    border-top: var(--calendar-tabs-border-width) solid var(--nui-border-primary);
+  }
+
+  &__footer-center {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+  }
+
+  &__footer-button {
+    flex: 1;
+  }
+
+  // ============================================================================
+  // ANIMATIONS
+  // ============================================================================
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

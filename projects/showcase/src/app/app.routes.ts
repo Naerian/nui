@@ -149,6 +149,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'calendar',
+        loadComponent: () =>
+          import('./pages/components/calendar-page/calendar-page.component').then(
+            m => m.CalendarPageComponent
+          ),
+      },
+      {
         path: 'paginator',
         loadComponent: () =>
           import('./pages/components/paginator-page/paginator-page.component').then(

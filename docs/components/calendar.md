@@ -1,11 +1,11 @@
 # Calendar Component
 
-Componente de calendario avanzado con selección de fechas individuales, semanas o rangos, integración con TimePicker y soporte para fechas deshabilitadas.
+Componente de calendario avanzado con selección de fechas individuales, semanas o rangos, integración con TimePicker y soporte para fechas deshabilitadas. Utiliza **Signals API** de Angular 18+ y un patrón de **Adapter Pattern** para encapsular la lógica de manipulación de fechas.
 
 ## 📦 Importación
 
 ```typescript
-import { CalendarComponent } from '@shared/components/calendar/calendar.component';
+import { CalendarComponent } from '@nui/components';
 ```
 
 ## 🎯 Selector
@@ -14,96 +14,443 @@ import { CalendarComponent } from '@shared/components/calendar/calendar.componen
 <nui-calendar></nui-calendar>
 ```
 
-## 📋 API
+---
 
-### Inputs
+## 🏗️ Arquitectura Interna
 
-| Propiedad | Tipo | Default | Descripción |
-|-----------|------|---------|-------------|
-| `type` | `CalendarType` | `'DAY'` | Tipo de selección (`'DAY' \| 'WEEK' \| 'RANGE'`) |
-| `date` | `Date \| Date[] \| string \| null` | - | Fecha inicial seleccionada (signal) |
-| `size` | `NUISize` | `'md'` | Tamaño del calendario (`'xs' \| 's' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| 'auto'`) |
-| `width` | `'compact' \| 'full'` | `'compact'` | Ancho: compact (fijo) o full (100% contenedor con fuentes proporcionales) |
-| `firstDayOfWeek` | `0 \| 1` | `1` | Primer día de la semana (0 = Domingo, 1 = Lunes) |
-| `showTimePicker` | `boolean \| 'start' \| 'end' \| 'both'` | `false` | Mostrar selector de hora integrado |
-| `timeMode` | `TimePickerMode` | `'HOUR_MINUTE_24'` | Modo del time picker (`'HOUR_MINUTE_12' \| 'HOUR_MINUTE_24' \| 'HOUR_MINUTE_SECOND_12' \| 'HOUR_MINUTE_SECOND_24'`) |
-| `timeConfig` | `TimePickerConfig` | `{}` | Configuración del time picker (steps, min/max, etc.) |
-| `startTime` | `TimeValue \| Date \| string \| null` | `null` | Hora de inicio inicial |
-| `endTime` | `TimeValue \| Date \| string \| null` | `null` | Hora de fin inicial |
-| `minDate` | `Date \| string \| null` | - | Fecha mínima seleccionable |
-| `maxDate` | `Date \| string \| null` | - | Fecha máxima seleccionable |
-| `disabledDates` | `(Date \| string)[]` | - | Array de fechas deshabilitadas |
-| `blockDisabledRanges` | `boolean` | `false` | Bloquear selección de rangos con fechas deshabilitadas |
-| `showTodayButton` | `boolean` | `true` | Mostrar botón "Hoy" |
-| `showPresets` | `boolean` | `false` | Mostrar panel de presets |
-| `customPresets` | `DateRangePreset[]` | - | Presets personalizados de rangos |
-| `isOpenedByOverlay` | `boolean` | `false` | Indica si se abrió desde un overlay (DatePicker) |
+El componente utiliza una arquitectura de **tres capas** que encapsula completamente la dependencia de `date-fns`:
+
+### 1. **NuiDateAdapter** (Capa de Abstracción)
+
+Interface que define 40+ métodos para todas las operaciones con fechas. **ÚNICO lugar donde se importa date-fns** en toda la librería.
+
+**🎯 Propósito:**  
+El `NuiDateAdapter` está diseñado específicamente para **desacoplar la librería de fechas** de los componentes. Si en el futuro decides cambiar de `date-fns` a otra librería (Day.js, Luxon, Moment, etc.) o implementar tu propio sistema de fechas, **solo necesitas crear un nuevo adapter** sin tocar ningún componente.
+
+```typescript
+// src/lib/adapters/nui-date-adapter.ts
+export interface NuiDateAdapter {
+  // Operaciones de formato
+  format(date: Date, format: string, locale?: string): string;
+  parse(dateString: string, format: string, locale?: string): Date;
+  
+  // Navegación
+  addDays(date: Date, days: number): Date;
+  addMonths(date: Date, months: number): Date;
+  addYears(date: Date, years: number): Date;
+  
+  // Comparación
+  isBefore(date: Date, compare: Date): boolean;
+  isAfter(date: Date, compare: Date): boolean;
+  isSameDay(date: Date, compare: Date): boolean;
+  
+  // Rango y validación
+  isWithinInterval(date: Date, start: Date, end: Date): boolean;
+  getWeekOfYear(date: Date, locale?: string): number;
+  getDaysInMonth(date: Date): number;
+  
+  // Y muchas más (40+ métodos totales)
+}
+```
+
+**Beneficios:**
+- ✅ **Sin cambios en componentes** si cambias la librería de fechas
+- ✅ **Implementación única**: `NuiDateFnsAdapter` (providedIn: root)
+- ✅ **Facilita testing** y mocking de operaciones de fechas
+- ✅ **Centraliza imports** de librerías externas en un solo lugar
+
+#### Ejemplo: Cambiar a Day.js
+
+Si decides migrar a **Day.js**, solo creas un nuevo adapter:
+
+```typescript
+// src/lib/adapters/nui-dayjs-adapter.ts
+import { Injectable } from '@angular/core';
+import { NuiDateAdapter } from './nui-date-adapter';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import weekOfYear from 'dayjs/plugin/weekOfYear';
+
+dayjs.extend(customParseFormat);
+dayjs.extend(weekOfYear);
+
+@Injectable({ providedIn: 'root' })
+export class NuiDayjsAdapter implements NuiDateAdapter {
+  format(date: Date, format: string, locale?: string): string {
+    return dayjs(date).locale(locale || 'es').format(format);
+  }
+
+  parse(dateString: string, format: string, locale?: string): Date {
+    return dayjs(dateString, format).locale(locale || 'es').toDate();
+  }
+
+  addDays(date: Date, days: number): Date {
+    return dayjs(date).add(days, 'day').toDate();
+  }
+
+  addMonths(date: Date, months: number): Date {
+    return dayjs(date).add(months, 'month').toDate();
+  }
+
+  isBefore(date: Date, compare: Date): boolean {
+    return dayjs(date).isBefore(dayjs(compare));
+  }
+
+  isSameDay(date: Date, compare: Date): boolean {
+    return dayjs(date).isSame(dayjs(compare), 'day');
+  }
+
+  // ... implementar los 40+ métodos restantes
+}
+```
+
+**Activar el nuevo adapter:**
+
+```typescript
+// En app.config.ts
+import { NUI_DATE_ADAPTER } from '@nui/components';
+import { NuiDayjsAdapter } from './adapters/nui-dayjs-adapter';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    {
+      provide: NUI_DATE_ADAPTER,
+      useClass: NuiDayjsAdapter  // ✅ Ahora usa Day.js
+    }
+  ]
+};
+```
+
+**Resultado:** Todos los componentes (Calendar, DatePicker, TimePicker, etc.) ahora usan Day.js sin cambiar una sola línea de código en ellos. 🎉
+
+#### Ejemplo: Adapter Personalizado
+
+También puedes crear tu propio sistema de fechas:
+
+```typescript
+// src/lib/adapters/custom-date-adapter.ts
+import { Injectable } from '@angular/core';
+import { NuiDateAdapter } from './nui-date-adapter';
+
+@Injectable({ providedIn: 'root' })
+export class CustomDateAdapter implements NuiDateAdapter {
+  private readonly MONTHS = [
+    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+  ];
+
+  format(date: Date, format: string, locale?: string): string {
+    // Tu lógica personalizada
+    if (format === 'MMMM yyyy') {
+      return `${this.MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+    }
+    // ... más formatos personalizados
+    return date.toLocaleDateString(locale);
+  }
+
+  addDays(date: Date, days: number): Date {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+
+  // ... implementar métodos según tus necesidades
+}
+```
+
+**Ventajas del patrón:**
+- 🔄 **Migración sin riesgo**: Cambia de librería gradualmente
+- 🧪 **Testing simplificado**: Mockea el adapter en tests
+- 📦 **Bundle size optimizado**: Usa solo la librería que necesites
+- 🛡️ **Protección ante breaking changes**: Si la librería cambia, solo ajustas el adapter
+
+### 2. **CalendarService** (Capa de Negocio)
+Servicio que orquesta toda la lógica de negocio sin conocimiento directo de `date-fns`. Mantiene estado de meses activos y calcula estados de días.
+
+```typescript
+// Método clave: getDaysViewModel()
+public getDaysViewModel(options: {
+  currentDate: Date;
+  weekStartsOn: FirstDayOfWeek;
+  disabledDates?: (Date | string)[];
+  minDate?: Date | string;
+  maxDate?: Date | string;
+  selectedDate?: Date;
+  selectedRange?: [Date, Date];
+  hoveredDate?: Date;
+}): CalendarDay[]
+```
+
+**Responsabilidades:**
+- ✅ Generar matriz de días del mes con estados calculados
+- ✅ Validar rangos de fechas seleccionables
+- ✅ Calcular días deshabilitados según reglas
+- ✅ Mantener semanas activas para navegación por teclado
+
+**Estados calculados por día:**
+- `isToday`, `isOutOfMonth`, `isCurrentMonth`
+- `isDisabled`, `isSelected`, `isInRange`
+- `isRangeStart`, `isRangeEnd`, `isHovered`
+
+### 3. **CalendarComponent** (Capa de Presentación)
+Componente puramente de presentación. **Cero imports de date-fns**. Todo delegado al servicio.
+
+**Responsabilidades:**
+- ✅ Gestión de eventos UI (clicks, teclado, mouse hover)
+- ✅ Inyección de configuración global desde `NUI_CONFIG`
+- ✅ Emit de valores seleccionados con formato `CalendarValue`
+- ✅ Integración con TimePicker
+- ✅ Sistema de tabs (Calendar/Presets/Time)
+
+---
+
+## ⚙️ Configuración Global
+
+El Calendar soporta **configuración global** a través del token `NUI_CONFIG`. Esto permite establecer valores por defecto para toda la aplicación sin necesidad de pasarlos en cada instancia.
+
+### Interface CalendarGlobalConfig
+
+```typescript
+interface CalendarGlobalConfig {
+  // 🌍 Localization (3 propiedades)
+  firstDayOfWeek?: FirstDayOfWeek;    // Default: 1 (Lunes)
+  format?: string;                     // Default: 'yyyy-MM-dd'
+  locale?: string;                     // Default: 'es'
+
+  // 🎯 Behavior (5 propiedades)
+  showTodayButton?: boolean;           // Default: true
+  blockDisabledRanges?: boolean;       // Default: false
+  initialViewMode?: ViewMode;          // Default: ViewMode.DAY
+  autoClose?: boolean;                 // Default: true
+  displayCount?: number;               // Default: 1
+
+  // 🎨 Visual (3 propiedades)
+  size?: 'sm' | 'md' | 'lg';          // Default: 'md'
+  width?: CalendarWidth;               // Default: 'compact'
+  timeMode?: '12h' | '24h';           // Default: '24h'
+
+  // 📅 Presets (1 propiedad)
+  customPresets?: DateRangePreset[];   // Default: undefined
+}
+```
+
+### Configurar Globalmente
+
+Establece la configuración en tu `app.config.ts`:
+
+```typescript
+import { NUI_CONFIG } from '@nui/components';
+import { ApplicationConfig } from '@angular/core';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    {
+      provide: NUI_CONFIG,
+      useValue: {
+        calendar: {
+          locale: 'es',
+          firstDayOfWeek: 1,          // Lunes
+          showTodayButton: true,
+          size: 'md',
+          width: 'compact',
+          blockDisabledRanges: false,
+          customPresets: [
+            { label: 'Hoy', value: new Date(), icon: 'ri-calendar-today-line' },
+            { label: 'Próximos 7 días', value: [new Date(), addDays(new Date(), 7)] }
+          ]
+        }
+      }
+    }
+  ]
+};
+```
+
+### Jerarquía de Resolución de Valores
+
+El componente resuelve valores en este orden de prioridad:
+
+```
+1. Input local (🥇 Mayor prioridad)
+2. Configuración global (🥈 Prioridad media)
+3. Default del componente (🥉 Fallback)
+```
+
+**Ejemplo práctico:**
+```typescript
+// Configuración global
+{ calendar: { size: 'lg' } }
+
+// Componente A: usa global
+<nui-calendar type="DAY"></nui-calendar>  // → size='lg'
+
+// Componente B: sobreescribe global
+<nui-calendar type="DAY" size="md"></nui-calendar>  // → size='md'
+
+// Componente C: sin global config
+<nui-calendar type="DAY"></nui-calendar>  // → size='md' (default)
+```
+
+---
+
+## 📋 API del Componente
+
+### Inputs (Signals API)
+
+| Propiedad | Tipo | Default | Global | Descripción |
+|-----------|------|---------|--------|-------------|
+| `type` | `CalendarType` | `'DAY'` | ❌ | Tipo de selección (`'DAY' \| 'WEEK' \| 'RANGE'`) |
+| `date` | `Date \| Date[] \| string \| null` | `null` | ❌ | Fecha inicial seleccionada |
+| `size` | `NUISize` | `'md'` | ✅ | Tamaño del calendario (`'xs' \| 's' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| 'auto'`) |
+| `width` | `CalendarWidth` | `'compact'` | ✅ | Ancho: `compact` (fijo) o `full` (100% contenedor) |
+| `firstDayOfWeek` | `FirstDayOfWeek` | `1` | ✅ | Primer día de la semana (`0`=Domingo, `1`=Lunes) |
+| `showTimePicker` | `CalendarTimePickerMode` | `false` | ❌ | Mostrar selector de hora (`true \| 'start' \| 'end' \| 'both'`) |
+| `timeMode` | `TimePickerMode` | `'HOUR_MINUTE_24'` | ❌ | Modo del time picker (`'HOUR_MINUTE_12' \| 'HOUR_MINUTE_24' \| 'HOUR_MINUTE_SECOND_12' \| 'HOUR_MINUTE_SECOND_24'`) |
+| `timeConfig` | `TimePickerConfig` | `{}` | ❌ | Config del time picker (steps, min/max, disabled hours/minutes) |
+| `startTime` | `TimeValue \| Date \| string \| null` | `null` | ❌ | Hora de inicio inicial (para RANGE con timepicker) |
+| `endTime` | `TimeValue \| Date \| string \| null` | `null` | ❌ | Hora de fin inicial (para RANGE con timepicker) |
+| `minDate` | `Date \| string \| null` | `null` | ❌ | Fecha mínima seleccionable |
+| `maxDate` | `Date \| string \| null` | `null` | ❌ | Fecha máxima seleccionable |
+| `disabledDates` | `(Date \| string)[]` | `[]` | ❌ | Array de fechas deshabilitadas |
+| `blockDisabledRanges` | `boolean` | `false` | ✅ | Bloquear selección de rangos con fechas deshabilitadas |
+| `showTodayButton` | `boolean` | `true` | ✅ | Mostrar botón "Hoy" |
+| `showPresets` | `boolean` | `false` | ❌ | Mostrar panel de presets (solo RANGE) |
+| `customPresets` | `DateRangePreset[]` | `[]` | ✅ | Presets personalizados de rangos |
+| `isOpenedByOverlay` | `boolean` | `false` | ❌ | ¿Se abrió desde overlay? (uso interno DatePicker) |
+| `initialViewMode` | `ViewMode` | `ViewMode.DAY` | ✅ | Vista inicial (`DAY \| MONTH \| YEAR`) |
+| `autoClose` | `boolean` | `true` | ✅ | Cerrar calendar automáticamente al seleccionar |
+| `displayCount` | `number` | `1` | ✅ | Número de calendarios a mostrar simultáneamente |
 
 ### Outputs
 
 | Evento | Tipo | Descripción |
 |--------|------|-------------|
-| `valueChange` | `EventEmitter<CalendarValue>` | Emite el valor seleccionado con toda la información (fecha, rango, tiempo) |
+| `valueChange` | `EventEmitter<CalendarValue>` | Emite cuando se selecciona fecha/rango/semana con toda la info |
 
 ### ControlValueAccessor
 
-El componente implementa `ControlValueAccessor` y puede usarse con `FormControl`:
+El componente implementa `ControlValueAccessor` y puede usarse directamente con reactive forms:
 
 ```typescript
-// Valor del control según el tipo:
-// - DAY: Date
-// - WEEK: Date[] (7 fechas)
-// - RANGE: Date[] (2 fechas: inicio y fin)
+// En FormBuilder
+this.form = this.fb.group({
+  birthDate: [new Date(), Validators.required],
+  dateRange: [null, Validators.required]
+});
 ```
 
-### Tipos
+**Valores según el tipo:**
+- **DAY**: Single `Date` object
+- **WEEK**: Array de 7 `Date` objects (lunes a domingo de esa semana)
+- **RANGE**: Array de 2+ `Date` objects `[startDate, endDate]`
+
+---
+
+## 📝 Tipos e Interfaces
+
+### Enums y Types
 
 ```typescript
+// Tipo de selección
 type CalendarType = 'DAY' | 'WEEK' | 'RANGE';
 
-type FirstDayOfWeek = 0 | 1; // 0 = Domingo, 1 = Lunes
+// Primera día de la semana
+type FirstDayOfWeek = 0 | 1;  // 0 = Domingo, 1 = Lunes
 
+// Mostrar time picker
 type CalendarTimePickerMode = boolean | 'start' | 'end' | 'both';
 
+// Ancho del calendario
+type CalendarWidth = 'compact' | 'full';
+
+// NUI Sizes
+type NUISize = 'xs' | 's' | 'sm' | 'md' | 'lg' | 'xl' | 'auto';
+
+// Modo de vista
+enum ViewMode {
+  DAY = 'DAY',
+  MONTH = 'MONTH',
+  YEAR = 'YEAR'
+}
+```
+
+### Interfaces
+
+```typescript
+// Preset para selección rápida de rangos
 interface DateRangePreset {
-  label: string;
-  value: Date | Date[];
-  icon?: string;
+  label: string;                    // Ej: "Últimos 7 días"
+  value: Date | Date[];             // Fecha o rango
+  icon?: string;                    // Ej: 'ri-calendar-line' (RemixIcon)
 }
 
+// Valor emitido por el componente
 interface CalendarValue {
   type: CalendarType;
-  date?: Date;              // Para DAY
-  dates?: Date[];           // Para WEEK y RANGE
-  week?: WeekRange;         // Para WEEK
-  range?: DateRange;        // Para RANGE
-  time?: TimeValue;         // Para DAY con timepicker
-  startTime?: TimeValue;    // Para WEEK/RANGE con 'start' o 'both'
-  endTime?: TimeValue;      // Para WEEK/RANGE con 'end' o 'both'
+  
+  // DAY
+  date?: Date;
+  
+  // WEEK y RANGE
+  dates?: Date[];
+  week?: WeekRange;                 // Solo WEEK
+  range?: DateRange;                // Solo RANGE
+  
+  // Con TimePicker
+  time?: TimeValue;                 // DAY + time
+  startTime?: TimeValue;            // RANGE + time='start'|'both'
+  endTime?: TimeValue;              // RANGE + time='end'|'both'
+}
+
+interface WeekRange {
+  start: Date;  // Lunes de la semana
+  end: Date;    // Domingo de la semana
+}
+
+interface DateRange {
+  start: Date;  // Fecha de inicio
+  end: Date;    // Fecha de fin
 }
 
 interface TimeValue {
   hour: number;
   minute: number;
   second?: number;
-  period?: 'AM' | 'PM';  // Solo en formato 12h
+  period?: 'AM' | 'PM';  // Solo formato 12h
 }
 
 interface TimePickerConfig {
-  hourStep?: number;
-  minuteStep?: number;
-  secondStep?: number;
-  minTime?: TimeValue;
-  maxTime?: TimeValue;
-  disabledHours?: number[];
-  disabledMinutes?: number[];
-  disabledSeconds?: number[];
+  hourStep?: number;                // Incremento de horas
+  minuteStep?: number;              // Incremento de minutos
+  secondStep?: number;              // Incremento de segundos
+  minTime?: TimeValue;              // Hora mínima permitida
+  maxTime?: TimeValue;              // Hora máxima permitida
+  disabledHours?: number[];         // Horas deshabilitadas
+  disabledMinutes?: number[];       // Minutos deshabilitados
+  disabledSeconds?: number[];       // Segundos deshabilitados
+}
+
+interface CalendarDay {
+  date: Date;
+  dayOfMonth: number;
+  
+  // Estados
+  isOutOfMonth: boolean;            // Pertenece a otro mes
+  isToday: boolean;                 // Es hoy
+  isDisabled: boolean;              // No puede seleccionarse
+  isSelected: boolean;              // Está seleccionado
+  isInRange: boolean;               // Está dentro de rango seleccionado
+  isRangeStart: boolean;            // Es el inicio de rango
+  isRangeEnd: boolean;              // Es el fin de rango
+  isHovered: boolean;               // Es la fecha hover (al arrastrar)
+  isRangeHovered: boolean;          // Está en rango hover
 }
 ```
 
+---
+
 ## 💡 Ejemplos de Uso
 
-### Selección de Día Simple
+### 1. Selección de Día Simple
 
 ```html
 <nui-calendar 
@@ -114,7 +461,7 @@ interface TimePickerConfig {
 
 ```typescript
 import { Component } from '@angular/core';
-import { CalendarValue } from '@shared/components/calendar/models/calendar.model';
+import { CalendarValue } from '@nui/components';
 
 @Component({
   selector: 'app-example',
@@ -123,42 +470,53 @@ import { CalendarValue } from '@shared/components/calendar/models/calendar.model
 export class ExampleComponent {
   onDateSelect(value: CalendarValue) {
     console.log('Fecha seleccionada:', value.date);
-    // value.type === 'DAY'
-    // value.date contiene la fecha seleccionada
+    // value.date = Date object
   }
 }
 ```
 
-### Con FormControl
+### 2. Con FormControl
 
 ```html
 <form [formGroup]="myForm">
   <nui-calendar 
     formControlName="birthDate"
-    type="DAY">
+    type="DAY"
+    [minDate]="'1900-01-01'"
+    [maxDate]="today">
   </nui-calendar>
+  
+  <button [disabled]="myForm.invalid">Enviar</button>
 </form>
 ```
 
 ```typescript
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
 
-export class ExampleComponent {
+@Component({
+  selector: 'app-form-example',
+  template: `...`
+})
+export class FormExampleComponent {
+  today = new Date();
   myForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.myForm = this.fb.group({
-      birthDate: [new Date(), Validators.required]
+      birthDate: [new Date(1990, 0, 1), Validators.required]
     });
   }
 
   onSubmit() {
-    console.log('Fecha:', this.myForm.value.birthDate);
+    if (this.myForm.valid) {
+      console.log('Fecha:', this.myForm.value.birthDate);
+    }
   }
 }
 ```
 
-### Selección de Semana
+### 3. Selección de Semana
 
 ```html
 <nui-calendar 
@@ -169,39 +527,43 @@ export class ExampleComponent {
 
 ```typescript
 onWeekSelect(value: CalendarValue) {
-  console.log('Semana seleccionada:', value.dates);
-  // value.type === 'WEEK'
-  // value.dates es un array de 7 fechas
-  // value.week contiene { start: Date, end: Date }
-  const startDate = value.week?.start;
-  const endDate = value.week?.end;
+  if (value.type === 'WEEK' && value.week) {
+    console.log('Semana:', {
+      inicio: value.week.start,  // Lunes
+      fin: value.week.end,       // Domingo
+      todasLasFechas: value.dates  // 7 fechas de lunes a domingo
+    });
+  }
 }
 ```
 
-### Selección de Rango
+### 4. Selección de Rango
 
 ```html
 <nui-calendar 
   type="RANGE"
+  [showPresets]="true"
+  [customPresets]="rangePresets"
   (valueChange)="onRangeSelect($event)">
 </nui-calendar>
 ```
 
 ```typescript
 onRangeSelect(value: CalendarValue) {
-  console.log('Rango seleccionado:', value.dates);
-  // value.type === 'RANGE'
-  // value.dates es un array con las fechas
-  // value.range contiene { start: Date, end: Date }
-  const startDate = value.range?.start;
-  const endDate = value.range?.end;
+  if (value.type === 'RANGE' && value.range) {
+    console.log('Rango seleccionado:', {
+      inicio: value.range.start,
+      fin: value.range.end,
+      diasTotales: value.dates?.length
+    });
+  }
 }
 ```
 
-### Con TimePicker
+### 5. Con TimePicker Integrado
 
 ```html
-<!-- DAY con hora -->
+<!-- Seleccionar fecha y hora (DAY) -->
 <nui-calendar 
   type="DAY"
   [showTimePicker]="true"
@@ -209,7 +571,7 @@ onRangeSelect(value: CalendarValue) {
   (valueChange)="onDateTimeSelect($event)">
 </nui-calendar>
 
-<!-- RANGE con hora de inicio y fin -->
+<!-- Rango con hora de inicio y fin -->
 <nui-calendar 
   type="RANGE"
   [showTimePicker]="'both'"
@@ -221,99 +583,135 @@ onRangeSelect(value: CalendarValue) {
 
 ```typescript
 onDateTimeSelect(value: CalendarValue) {
-  console.log('Fecha:', value.date);
-  console.log('Hora:', value.time); // { hour: 14, minute: 30, period: 'PM' }
+  console.log({
+    fecha: value.date,
+    hora: value.time // { hour: 14, minute: 30, period: 'PM' }
+  });
 }
 
 onRangeWithTimeSelect(value: CalendarValue) {
-  console.log('Rango:', value.range);
-  console.log('Hora inicio:', value.startTime);
-  console.log('Hora fin:', value.endTime);
+  console.log({
+    rango: value.range,
+    horaInicio: value.startTime,
+    horaFin: value.endTime
+  });
 }
 ```
 
-### Tamaños del Calendar
+### 6. Con Configuración Global
+
+Después de configurar `NUI_CONFIG` en `app.config.ts`:
 
 ```html
-<!-- Extra pequeño -->
+<!-- Hereda de configuración global -->
+<nui-calendar type="DAY"></nui-calendar>
+
+<!-- Sobreescribe configuración global -->
+<nui-calendar 
+  type="DAY"
+  size="lg"
+  [firstDayOfWeek]="0">
+</nui-calendar>
+```
+
+```typescript
+// En app.config.ts
+import { NUI_CONFIG } from '@nui/components';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    {
+      provide: NUI_CONFIG,
+      useValue: {
+        calendar: {
+          locale: 'es',                    // Aplicado a todos los calendarios
+          firstDayOfWeek: 1,               // Lunes por defecto
+          size: 'md',                      // Size por defecto
+          showTodayButton: true,           // Botón "Hoy" por defecto
+          customPresets: [                 // Presets globales
+            { 
+              label: 'Hoy', 
+              value: new Date(),
+              icon: 'ri-calendar-today-line'
+            },
+            {
+              label: 'Últimos 7 días',
+              value: [
+                new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+                new Date()
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+};
+```
+
+### 7. Tamaños del Calendar
+
+```html
+<!-- Extra pequeño: 240px (móviles) -->
 <nui-calendar size="xs"></nui-calendar>
 
-<!-- Pequeño -->
+<!-- Pequeño: 280px (móviles) -->
 <nui-calendar size="s"></nui-calendar>
 
-<!-- Pequeño-mediano -->
+<!-- Pequeño-mediano: 300px (tablets) -->
 <nui-calendar size="sm"></nui-calendar>
 
-<!-- Mediano (por defecto) -->
+<!-- Mediano: 320px (por defecto) -->
 <nui-calendar size="md"></nui-calendar>
 
-<!-- Grande -->
+<!-- Grande: 360px (desktop) -->
 <nui-calendar size="lg"></nui-calendar>
 
-<!-- Extra grande -->
+<!-- Extra grande: 440px (pantallas grandes) -->
 <nui-calendar size="xl"></nui-calendar>
 
-<!-- Auto-responsive (xs → sm → md según viewport) -->
+<!-- Auto-responsive según viewport -->
 <nui-calendar size="auto"></nui-calendar>
 ```
 
-### Ancho: Compact vs Full
+### 8. Ancho: Compact vs Full
 
 ```html
-<!-- Compact: Ancho fijo según tamaño (por defecto) -->
+<!-- COMPACT: Ancho fijo según size (por defecto) -->
 <nui-calendar width="compact" size="md"></nui-calendar>
 
-<!-- Full: Ocupa 100% del contenedor con fuentes proporcionales -->
-<div style="width: 800px">
+<!-- FULL: Ocupa 100% del contenedor -->
+<div style="width: 100%; max-width: 900px">
   <nui-calendar width="full" size="md"></nui-calendar>
 </div>
 ```
 
-> **💡 Nota sobre width="full":**
-> - Ocupa el 100% del ancho del contenedor
-> - Usa CSS Container Queries para escalar fuentes proporcionalmente
-> - Las fuentes de los días crecen con `clamp(0.6875rem, 3cqw, 1.5rem)`
-> - Ideal para dashboards, modales grandes o pantallas anchas
+> **💡 Nota:** 
+> - En modo `width="full"`, el calendario ocupa 100% del contenedor
+> - Las fuentes de los días escalan con **CSS Container Queries**
+> - Formula: `clamp(0.6875rem, 3cqw, 1.5rem)` se adapta al ancho
+> - Ideal para dashboards, modales grandes o diseños responsive
 
-### Fechas Mínima y Máxima
+### 9. Fechas Mínima y Máxima
 
 ```html
 <nui-calendar 
-  [minDate]="minDate"
-  [maxDate]="maxDate">
+  type="RANGE"
+  [minDate]="'2024-01-01'"
+  [maxDate]="'2024-12-31'">
 </nui-calendar>
 ```
 
 ```typescript
 export class ExampleComponent {
-  minDate = new Date(2024, 0, 1);  // 1 enero 2024
-  maxDate = new Date(2024, 11, 31); // 31 diciembre 2024
+  minDate = new Date(2024, 0, 1);    // 1 enero 2024
+  maxDate = new Date(2024, 11, 31);  // 31 diciembre 2024
 }
 ```
 
-### Deshabilitar Fechas Específicas
+### 10. Deshabilitar Fechas Específicas
 
 ```html
-<nui-calendar 
-  [disabledDates]="disabledDates">
-</nui-calendar>
-```
-
-```typescript
-export class ExampleComponent {
-  disabledDates = [
-    new Date(2024, 11, 25), // 25 diciembre
-    new Date(2024, 0, 1),   // 1 enero
-    new Date(2024, 6, 4),   // 4 julio
-    '2024-12-31'            // También acepta strings ISO
-  ];
-}
-```
-
-### Bloquear Rangos con Fechas Deshabilitadas
-
-```html
-<!-- En modo RANGE, impide seleccionar rangos que contengan fechas deshabilitadas -->
 <nui-calendar 
   type="RANGE"
   [disabledDates]="holidays"
@@ -321,35 +719,39 @@ export class ExampleComponent {
 </nui-calendar>
 ```
 
-### Botón "Hoy"
-
-```html
-<!-- Mostrar botón "Hoy" (por defecto) -->
-<nui-calendar [showTodayButton]="true"></nui-calendar>
-
-<!-- Ocultar botón "Hoy" -->
-<nui-calendar [showTodayButton]="false"></nui-calendar>
+```typescript
+export class ExampleComponent {
+  holidays = [
+    new Date(2024, 11, 25),  // 25 diciembre
+    new Date(2024, 0, 1),    // 1 enero
+    '2024-12-31',            // También acepta strings ISO
+    '2024-07-04'
+  ];
+}
 ```
 
-### Con Presets de Rango
+**`blockDisabledRanges: true`** previene que selecciones rangos que contengan fechas deshabilitadas.
+
+### 11. Presets Personalizados
 
 ```html
 <nui-calendar 
   type="RANGE"
   [showPresets]="true"
-  [customPresets]="datePresets">
+  [customPresets]="myPresets"
+  (valueChange)="onRangeSelect($event)">
 </nui-calendar>
 ```
 
 ```typescript
-import { DateRangePreset } from '@shared/components/calendar/models/calendar.model';
+import { DateRangePreset } from '@nui/components';
 
 export class ExampleComponent {
-  datePresets: DateRangePreset[] = [
+  myPresets: DateRangePreset[] = [
     {
       label: 'Hoy',
       value: new Date(),
-      icon: 'ri-calendar-line'
+      icon: 'ri-calendar-today-line'
     },
     {
       label: 'Últimos 7 días',
@@ -360,13 +762,6 @@ export class ExampleComponent {
       icon: 'ri-calendar-2-line'
     },
     {
-      label: 'Últimos 30 días',
-      value: [
-        new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
-        new Date()
-      ]
-    },
-    {
       label: 'Este mes',
       value: [
         new Date(new Date().getFullYear(), new Date().getMonth(), 1),
@@ -374,291 +769,242 @@ export class ExampleComponent {
       ]
     },
     {
-      label: 'Mes anterior',
+      label: 'Último mes completo',
       value: this.getLastMonthRange()
     }
   ];
 
-  private getLastMonthRange(): Date[] {
+  private getLastMonthRange(): [Date, Date] {
     const now = new Date();
-    const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-    const lastDayOfLastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-    return [lastMonth, lastDayOfLastMonth];
+    const firstDay = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    const lastDay = new Date(now.getFullYear(), now.getMonth(), 0);
+    return [firstDay, lastDay];
   }
 }
 ```
 
-### Configuración de TimeConfig
+### 12. Validación con Reserva de Hotel
 
 ```html
-<nui-calendar 
-  type="DAY"
-  [showTimePicker]="true"
-  [timeConfig]="{
-    hourStep: 1,
-    minuteStep: 15,
-    minTime: { hour: 8, minute: 0 },
-    maxTime: { hour: 18, minute: 0 }
-  }">
-</nui-calendar>
-```
-
-```typescript
-import { TimePickerConfig, TimeValue } from '@shared/components/time-picker/models/time-picker.model';
-
-export class ExampleComponent {
-  // Horario de oficina
-  officeHoursConfig: TimePickerConfig = {
-    hourStep: 1,
-    minuteStep: 30,
-    minTime: { hour: 9, minute: 0 },
-    maxTime: { hour: 17, minute: 0 },
-    disabledHours: [12, 13] // Hora de comida
-  };
-}
-```
-
-### Primer Día de la Semana
-
-```html
-<!-- Comenzar el domingo -->
-<nui-calendar [firstDayOfWeek]="0"></nui-calendar>
-
-<!-- Comenzar el lunes (por defecto) -->
-<nui-calendar [firstDayOfWeek]="1"></nui-calendar>
-```
-
-### Calendario con Validación
-
-```html
-<form [formGroup]="bookingForm">
+<form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+  <label>Check-in:</label>
   <nui-calendar 
+    type="DAY"
     formControlName="checkIn"
     [minDate]="today"
-    (dateSelect)="updateCheckOutMin($event)">
+    (valueChange)="updateCheckOutMin()">
   </nui-calendar>
   
+  <label>Check-out:</label>
   <nui-calendar 
+    type="DAY"
     formControlName="checkOut"
     [minDate]="checkOutMinDate">
   </nui-calendar>
   
-  <button 
-    type="submit" 
-    [disabled]="bookingForm.invalid">
+  <button type="submit" [disabled]="bookingForm.invalid">
     Reservar
   </button>
 </form>
 ```
 
 ```typescript
-export class BookingComponent {
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-booking',
+  template: `...`
+})
+export class BookingComponent implements OnInit {
   today = new Date();
   checkOutMinDate = new Date();
-
-  bookingForm = this.fb.group({
-    checkIn: [null, Validators.required],
-    checkOut: [null, Validators.required]
-  });
+  bookingForm!: FormGroup;
 
   constructor(private fb: FormBuilder) {}
 
-  updateCheckOutMin(checkInDate: Date) {
-    // Check-out mínimo: 1 día después del check-in
-    const nextDay = new Date(checkInDate);
-    nextDay.setDate(nextDay.getDate() + 1);
-    this.checkOutMinDate = nextDay;
-    
-    // Resetear check-out si es anterior al nuevo mínimo
-    const checkOut = this.bookingForm.get('checkOut')?.value;
-    if (checkOut && checkOut < this.checkOutMinDate) {
-      this.bookingForm.patchValue({ checkOut: null });
+  ngOnInit() {
+    this.bookingForm = this.fb.group({
+      checkIn: [null, Validators.required],
+      checkOut: [null, Validators.required]
+    });
+  }
+
+  updateCheckOutMin() {
+    const checkIn = this.bookingForm.get('checkIn')?.value;
+    if (checkIn) {
+      // Check-out mínimo: 1 día después del check-in
+      const nextDay = new Date(checkIn);
+      nextDay.setDate(nextDay.getDate() + 1);
+      this.checkOutMinDate = nextDay;
+      
+      // Resetear check-out si es anterior
+      const checkOut = this.bookingForm.get('checkOut')?.value;
+      if (checkOut && checkOut < this.checkOutMinDate) {
+        this.bookingForm.patchValue({ checkOut: null });
+      }
+    }
+  }
+  
+  onSubmit() {
+    if (this.bookingForm.valid) {
+      console.log('Reserva:', this.bookingForm.value);
     }
   }
 }
 ```
 
-### Calendario en Modal
+### 13. En Modal
 
 ```html
 <nui-button 
   label="Seleccionar fecha" 
-  (onClick)="openCalendar()">
+  (click)="showCalendarModal = true">
 </nui-button>
 
-<nui-modal [(visible)]="showCalendar" title="Selecciona una fecha">
+<nui-modal 
+  [(visible)]="showCalendarModal" 
+  title="Selecciona un rango">
   <nui-calendar 
     type="RANGE"
-    [presets]="presets"
-    (dateSelect)="onDateSelected($event)">
+    [showPresets]="true"
+    [customPresets]="rangePresets"
+    (valueChange)="onRangeSelected($event)">
   </nui-calendar>
 </nui-modal>
 ```
 
 ```typescript
-export class ExampleComponent {
-  showCalendar = false;
-  selectedRange: Date[] = [];
-
-  openCalendar() {
-    this.showCalendar = true;
-  }
-
-  onDateSelected(dates: Date[]) {
-    this.selectedRange = dates;
-    this.showCalendar = false;
-    console.log('Rango seleccionado:', dates);
-  }
-}
-```
-
-### Calendario Inline con TimePicker
-
-```html
-<div class="date-time-picker">
-  <nui-calendar 
-    type="DAY"
-    [showTimePicker]="true"
-    formControlName="appointmentDate">
-  </nui-calendar>
-</div>
-```
-
-### Calendario de Eventos
-
-```html
-<nui-calendar 
-  [highlightedDates]="eventDates"
-  (dateSelect)="showEventsForDate($event)">
-</nui-calendar>
-
-<div *ngIf="selectedDateEvents.length">
-  <h3>Eventos para {{ selectedDate | date:'longDate' }}</h3>
-  <ul>
-    <li *ngFor="let event of selectedDateEvents">
-      {{ event.title }} - {{ event.time }}
-    </li>
-  </ul>
-</div>
-```
-
-```typescript
-export class EventsComponent {
-  eventDates: Date[] = [];
-  selectedDate: Date;
-  selectedDateEvents: any[] = [];
+export class ModalExampleComponent {
+  showCalendarModal = false;
+  selectedRange: [Date, Date] | null = null;
   
-  events = [
-    { date: new Date(2024, 11, 15), title: 'Reunión', time: '10:00' },
-    { date: new Date(2024, 11, 20), title: 'Presentación', time: '14:00' }
+  rangePresets: DateRangePreset[] = [
+    { label: 'Últimos 7 días', value: [...] },
+    { label: 'Este mes', value: [...] }
   ];
 
-  ngOnInit() {
-    this.eventDates = this.events.map(e => e.date);
-  }
-
-  showEventsForDate(date: Date) {
-    this.selectedDate = date;
-    this.selectedDateEvents = this.events.filter(e => 
-      e.date.toDateString() === date.toDateString()
-    );
+  onRangeSelected(value: CalendarValue) {
+    if (value.type === 'RANGE' && value.range) {
+      this.selectedRange = [value.range.start, value.range.end];
+      this.showCalendarModal = false;
+    }
   }
 }
 ```
 
-### Sistema de Tabs (Calendar, Presets, Time)
+### 14. Con Multiple Calendarios
 
 ```html
-<!-- Calendar con tabs para presets y timepicker -->
 <nui-calendar 
   type="RANGE"
-  [showPresets]="true"
-  [showTimePicker]="'both'"
-  [customPresets]="presets">
+  [displayCount]="2"
+  (valueChange)="onRangeSelect($event)">
 </nui-calendar>
 ```
 
-> **💡 Nota:** El sistema de tabs se muestra automáticamente cuando:
-> - `showPresets` es `true` (solo para tipo RANGE)
-> - `showTimePicker` no es `false`
+Muestra 2 calendarios lado a lado para seleccionar rangos más fácilmente.
 
-Las tabs permiten cambiar entre:
-- **Calendar**: Vista principal del calendario
-- **Presets**: Rangos predefinidos (solo RANGE)
-- **Time**: Selector de hora integrado
+### 15. Primer Día de la Semana
 
-## 🎨 Personalización y Temas
+```html
+<!-- Lunes como primer día (Europa) -->
+<nui-calendar [firstDayOfWeek]="1"></nui-calendar>
 
-El Calendar utiliza **CSS Custom Properties** del sistema de temas NUI. Los estilos se adaptan automáticamente según el tema activo (light/dark) y el preset seleccionado.
+<!-- Domingo como primer día (USA) -->
+<nui-calendar [firstDayOfWeek]="0"></nui-calendar>
+```
 
-### Variables de Tema
+O configura globalmente:
+
+```typescript
+// En app.config.ts
+{
+  provide: NUI_CONFIG,
+  useValue: {
+    calendar: {
+      locale: 'en',
+      firstDayOfWeek: 0  // Domingo para USA
+    }
+  }
+}
+```
+
+---
+
+## 🎨 Temas y Personalización
+
+El Calendar utiliza **CSS Custom Properties** del sistema de temas NUI. Los estilos se adaptan automáticamente según el tema activo (light/dark) y el preset de color seleccionado.
+
+### Variables CSS Heredadas
 
 ```scss
-// Las siguientes variables se heredan del tema global
 .nui-calendar {
-  // Colores base (heredados del tema)
+  // Colores primarios (heredados del tema global)
   --nui-primary-600: /* Color primario */
   --nui-primary-100: /* Color primario claro */
-  --nui-primary-contrast: /* Texto sobre primario */
+  --nui-primary-contrast: /* Color de texto sobre primario */
   
-  // Backgrounds y borders (heredados del tema)
+  // Backgrounds y bordes
   --nui-bg-base: /* Background principal */
   --nui-bg-raised: /* Background elevado */
   --nui-border-base: /* Color de bordes */
   
-  // Estados (heredados del tema)
-  --nui-hover-bg: /* Background hover */
-  --nui-selected-bg: /* Background seleccionado */
+  // Estados interactivos
+  --nui-hover-bg: /* Fondo hover */
+  --nui-active-bg: /* Fondo activo */
+  --nui-disabled-bg: /* Fondo deshabilitado */
+  --nui-transition: /* Duración de transiciones */
 }
 ```
 
-### Tamaños Responsivos
+### Personalización CSS
 
-El Calendar usa un sistema de tamaños con valores predefinidos:
-
-| Tamaño | Ancho | Uso |
-|--------|-------|-----|
-| `xs` | 240px | Móviles pequeños, widgets compactos |
-| `s` | 280px | Móviles estándar |
-| `sm` | 300px | Tablets pequeñas |
-| `md` | 320px | Default, tablets y desktop |
-| `lg` | 360px | Desktop amplio |
-| `xl` | 440px | Pantallas grandes, modales |
-| `auto` | Responsive | xs→sm→md según viewport |
-
-### Width Modes
-
-```html
-<!-- Compact: Ancho fijo según size -->
-<nui-calendar width="compact" size="md"></nui-calendar>
-
-<!-- Full: 100% del contenedor con scaling proporcional -->
-<div style="width: 600px">
-  <nui-calendar width="full"></nui-calendar>
-</div>
-```
-
-### Personalización Avanzada
-
-Si necesitas personalizar colores específicos, puedes crear un preset personalizado o usar CSS custom properties localmente:
+Para personalizar estilos específicos en tu componente:
 
 ```scss
-// Estilo personalizado en tu componente
+// my-calendar.component.scss
 .my-calendar {
   ::ng-deep {
+    // Día seleccionado
     .nui-calendar__day--selected {
       background-color: #ff6b6b;
       color: white;
+      font-weight: 600;
     }
     
-    .nui-calendar__day--today {
-      &::after {
-        background-color: #ff6b6b;
-      }
+    // Indicador "Hoy"
+    .nui-calendar__day--today::after {
+      background-color: #ff6b6b;
+    }
+    
+    // Rango seleccionado
+    .nui-calendar__day--in-range {
+      background-color: rgba(255, 107, 107, 0.2);
+    }
+    
+    // Días deshabilitados
+    .nui-calendar__day--disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
   }
 }
 ```
+
+### Tamaños Predefinidos
+
+| Tamaño | Ancho Fijo | Casos de Uso |
+|--------|-----------|--------------|
+| `xs` | 240px | Mobiles pequeños, widgets compactos |
+| `s` | 280px | Teléfonos estándar |
+| `sm` | 300px | Tablets pequeños |
+| `md` | 320px | Default, tablets y desktop |
+| `lg` | 360px | Desktop amplio |
+| `xl` | 440px | Pantallas grandes, modales anchos |
+| `auto` | Responsive | Adapta xs→sm→md según viewport |
+
+---
 
 ## ♿ Accesibilidad
 
@@ -666,128 +1012,389 @@ Si necesitas personalizar colores específicos, puedes crear un preset personali
 
 | Tecla | Acción |
 |-------|--------|
-| `Tab` / `Shift+Tab` | Navegar entre elementos interactivos |
-| `↑` `↓` `←` `→` | Navegar entre días del mes |
-| `Enter` / `Space` | Seleccionar día actual |
-| `Escape` | Cerrar calendario (si es overlay) |
-| `Home` | Ir al primer día del mes |
-| `End` | Ir al último día del mes |
-| `PageUp` | Mes anterior |
-| `PageDown` | Mes siguiente |
-| `Shift+PageUp` | Año anterior |
-| `Shift+PageDown` | Año siguiente |
+| `Tab` / `Shift+Tab` | Navega entre elementos interactivos (botones, días) |
+| `↑` `↓` `←` `→` | Navega entre días del mes |
+| `Enter` / `Space` | Selecciona el día en foco |
+| `Escape` | Cierra el calendario (si se abrió desde overlay) |
+| `Home` | Va al primer día del mes actual |
+| `End` | Va al último día del mes actual |
+| `PageUp` | Navega al mes anterior |
+| `PageDown` | Navega al mes siguiente |
+| `Shift+PageUp` | Navega al año anterior |
+| `Shift+PageDown` | Navega al año siguiente |
 
-### Características ARIA
+### Atributos ARIA
 
-- ✅ Roles ARIA apropiados (`grid`, `gridcell`, `button`)
-- ✅ Estados anunciados (`aria-selected`, `aria-disabled`, `aria-current`)
-- ✅ Labels descriptivos para lectores de pantalla
-- ✅ Navegación completa sin mouse
-- ✅ Focus visible en todos los elementos interactivos
-- ✅ Anuncios de cambio de mes/año
+El componente implementa automáticamente:
 
-### Cumplimiento WCAG
+- ✅ **Roles ARIA**: `grid`, `gridcell`, `button`, `presentation`
+- ✅ **Estados**: `aria-selected`, `aria-disabled`, `aria-current="date"`
+- ✅ **Propiedades**: `aria-label`, `aria-describedby`, `aria-labelledby`
+- ✅ **Live regions**: Anuncios de cambios de mes/año para lectores de pantalla
+- ✅ **Focus management**: Indicadores claros de foco
 
-- ✅ **WCAG 2.1 AA** - Contraste de colores adecuado
-- ✅ **Keyboard accessible** - Navegación completa por teclado
-- ✅ **Screen reader friendly** - Etiquetas y anuncios apropiados
-- ✅ **Focus visible** - Indicadores claros de foco
+### Cumplimiento WCAG 2.1
 
-## 📱 Responsive
+- ✅ **Nivel AA** - Contraste de colores conforme
+- ✅ **Navegación completa por teclado** - Sin requerir ratón
+- ✅ **Screen reader friendly** - Etiquetas descriptivas
+- ✅ **Focus visible** - Indicadores de foco claramente visibles
+- ✅ **Color no es la única medio** - Indicadores visuales adicionales
 
-### Size "auto"
+### Ejemplo de Uso Accesible
+
+```html
+<fieldset>
+  <legend>Selecciona un rango de fechas</legend>
+  <nui-calendar 
+    type="RANGE"
+    [showPresets]="true">
+  </nui-calendar>
+</fieldset>
+```
+
+---
+
+## 📱 Responsive Design
+
+### Size Auto
 
 El tamaño `auto` se adapta automáticamente al viewport:
 
-- **Mobile** (< 576px): Usa tamaño `xs` (240px)
-- **Tablet** (576px - 768px): Usa tamaño `sm` (300px)
-- **Desktop** (> 768px): Usa tamaño `md` (320px)
+```typescript
+// Breakpoints internos
+Mobile    (< 576px):  Size → xs (240px)
+Tablet    (576-768px): Size → sm (300px)  
+Desktop   (> 768px):  Size → md (320px)
+```
 
 ```html
 <nui-calendar size="auto"></nui-calendar>
 ```
 
-### Width "full" con Container Queries
+### Width Full con Container Queries
 
-En modo `width="full"`, el calendario usa **CSS Container Queries** para escalar proporcionalmente:
+En modo `width="full"`, el Calendar utiliza **CSS Container Queries** para escalar proporcionalmente:
 
 ```html
-<div style="width: 100%; max-width: 800px">
+<div class="calendar-container" style="width: 100%; max-width: 900px">
   <nui-calendar width="full" size="md"></nui-calendar>
 </div>
 ```
 
-Las fuentes de los días escalan con `clamp(0.6875rem, 3cqw, 1.5rem)` basándose en el ancho del contenedor.
-
-## 💡 Buenas Prácticas
-
-1. **Usa size="auto"** - Para aplicaciones responsive que se adaptan al viewport
-2. **Usa width="full"** - Para modales grandes, sidebars o dashboards donde el calendario debe llenar el espacio
-3. **Usa presets para rangos comunes** - Facilita la UX con `[showPresets]="true"` y `customPresets`
-4. **Valida fechas en el servidor** - No confíes solo en validación client-side
-5. **Configura minDate/maxDate** - Previene selecciones inválidas desde el inicio
-6. **Usa blockDisabledRanges** - En modo RANGE para evitar rangos con fechas deshabilitadas
-7. **Configura timeConfig apropiadamente** - Define steps y restricciones según tu caso de uso
-8. **Sistema de tabs** - Aprovecha las tabs automáticas cuando combines presets + timepicker
-9. **Maneja timezones correctamente** - Considera zonas horarias en aplicaciones multi-región
-10. **FirstDayOfWeek** - Configura según la región (0=Domingo para US, 1=Lunes para Europa)
-
-## � Nuevas Características (Octubre 2025)
-
-### Width Modes con Container Queries
-
-El calendario ahora soporta dos modos de ancho:
-
-1. **Compact** (default): Ancho fijo basado en el tamaño
-2. **Full**: Ocupa 100% del contenedor con escalado proporcional de fuentes
-
-```html
-<nui-calendar width="full"></nui-calendar>
+**Fórmula de escalado:**
+```css
+font-size: clamp(0.6875rem, 3cqw, 1.5rem);
 ```
 
-Cuando `width="full"`, las fuentes de los días escalan proporcionalmente usando:
-- **CSS Container Queries** (`container-type: inline-size`)
-- **Fluid typography** con `clamp(min, 3cqw, max)`
+- **0.6875rem** - Mínimo (tamaño base pequeño)
+- **3cqw** - Fluido (3% del ancho del contenedor)
+- **1.5rem** - Máximo (escala máxima)
 
-### Sistema de Tabs Mejorado
-
-Navegación por tabs cuando hay múltiples funcionalidades:
-
-```html
-<nui-calendar 
-  type="RANGE"
-  [showPresets]="true"
-  [showTimePicker]="'both'">
-</nui-calendar>
-```
-
-Muestra automáticamente tabs para:
-- 📅 **Calendar**: Vista principal
-- ⚡ **Presets**: Rangos rápidos
-- 🕐 **Time**: Selector de hora
-
-### Refactorización de Estilos
-
-- ✅ **85% menos código** - Uso de mixins `calendar-size()`
-- ✅ **Mejor mantenibilidad** - Cambios centralizados
-- ✅ **Compilación optimizada** - Reduce bundle size
-
-## 🔗 Ver También
-
-- [TimePicker Component](./time-picker.md)
-- [Button Component](./button.md)
-- [Button Group Component](./button-group.md)
-- [Modal Component](./modal.md)
-
-## 📚 Referencias Técnicas
-
-- **date-fns**: Librería de manipulación de fechas
-- **Angular Signals**: Sistema de reactividad (Angular 17+)
-- **CSS Container Queries**: Responsive design moderno
-- **ControlValueAccessor**: Integración con Angular Forms
+**Beneficios:**
+- ✅ Fuentes se adaptan automáticamente al contenedor
+- ✅ No requiere media queries
+- ✅ Escalado fluido y natural
+- ✅ Ideal para dashboards y layouts complejos
 
 ---
 
-**Última actualización:** 21 Octubre 2025  
-**Versión:** Angular 18+  
-**Estado:** ✅ Production Ready
+## 💡 Mejores Prácticas
+
+### 1. Configuración Global
+
+Centraliza la configuración en `app.config.ts`:
+
+```typescript
+// ✅ BIEN: Configuración centralizada
+export const appConfig: ApplicationConfig = {
+  providers: [
+    {
+      provide: NUI_CONFIG,
+      useValue: {
+        calendar: {
+          locale: 'es',
+          firstDayOfWeek: 1,
+          customPresets: [...],
+          size: 'md'
+        }
+      }
+    }
+  ]
+};
+
+// En tus componentes: Solo usa los calendarios
+<nui-calendar type="DAY"></nui-calendar>
+```
+
+```typescript
+// ❌ EVITA: Configuración repetida en cada componente
+<nui-calendar 
+  type="DAY"
+  locale="es"
+  [firstDayOfWeek]="1"
+  [customPresets]="[...]"
+  size="md">
+</nui-calendar>
+```
+
+### 2. Usa Size Responsivo
+
+```typescript
+// ✅ BIEN: Auto-responsive
+<nui-calendar size="auto"></nui-calendar>
+
+// ❌ EVITA: Size fijo en móviles
+<nui-calendar size="lg"></nui-calendar>
+```
+
+### 3. Mode Full para Dashboards
+
+```typescript
+// ✅ BIEN: Full width con Container Queries
+<div style="width: 100%">
+  <nui-calendar width="full"></nui-calendar>
+</div>
+
+// ❌ EVITA: Ancho fijo en pantallas grandes
+<nui-calendar width="compact" size="lg"></nui-calendar>
+```
+
+### 4. Presets para Rangos Comunes
+
+```typescript
+// ✅ BIEN: Presets útiles
+<nui-calendar 
+  type="RANGE"
+  [showPresets]="true"
+  [customPresets]="commonRanges">
+</nui-calendar>
+
+// ❌ EVITA: Dejar que usuarios escriban rangos manualmente
+<nui-calendar type="RANGE"></nui-calendar>
+```
+
+### 5. Validación de Fechas
+
+```typescript
+// ✅ BIEN: Validar en servidor
+if (bookingForm.valid) {
+  this.api.submitBooking(formValue)
+    .subscribe(/* ... */);
+}
+
+// ❌ EVITA: Solo validar en cliente
+if (startDate < endDate) {
+  // Esto puede ser modificado en DevTools
+}
+```
+
+### 6. Restringe Rango Seleccionable
+
+```typescript
+// ✅ BIEN: Limitar fechas disponibles
+<nui-calendar 
+  [minDate]="today"
+  [maxDate]="nextYear">
+</nui-calendar>
+
+// ❌ EVITA: Permitir cualquier fecha
+<nui-calendar></nui-calendar>
+```
+
+### 7. Bloquea Rangos Inválidos
+
+```typescript
+// ✅ BIEN: Prevenir rangos con fechas deshabilitadas
+<nui-calendar 
+  type="RANGE"
+  [disabledDates]="holidays"
+  [blockDisabledRanges]="true">
+</nui-calendar>
+
+// ❌ EVITA: Permitir rangos inválidos
+<nui-calendar 
+  type="RANGE"
+  [disabledDates]="holidays"
+  [blockDisabledRanges]="false">
+</nui-calendar>
+```
+
+### 8. TimeConfig Apropiado
+
+```typescript
+// ✅ BIEN: Configurar según caso de uso
+<nui-calendar 
+  type="DAY"
+  [showTimePicker]="true"
+  [timeConfig]="{
+    hourStep: 1,
+    minuteStep: 15,
+    minTime: { hour: 9 },
+    maxTime: { hour: 18 },
+    disabledHours: [12, 13]  // Pausa de almuerzo
+  }">
+</nui-calendar>
+
+// ❌ EVITA: Time picker sin restricciones
+<nui-calendar 
+  type="DAY"
+  [showTimePicker]="true">
+</nui-calendar>
+```
+
+### 9. Manejo de Timezones
+
+```typescript
+// ✅ BIEN: Usar UTC en API, mostrar local
+const selectedDate = new Date(value.date?.getTime()); // Date objeto local
+const isoString = selectedDate.toISOString(); // Enviar a API
+
+// ❌ EVITA: Asumir timezone del navegador
+const date = value.date; // puede variar según navegador
+```
+
+### 10. Locale según Región
+
+```typescript
+// ✅ BIEN: Configurar según idioma del navegador
+{
+  provide: NUI_CONFIG,
+  useValue: {
+    calendar: {
+      locale: navigator.language || 'es',
+      firstDayOfWeek: navigator.language.startsWith('en') ? 0 : 1
+    }
+  }
+}
+
+// ❌ EVITA: Hardcodear locale
+{
+  provide: NUI_CONFIG,
+  useValue: {
+    calendar: { locale: 'es' }  // ¿Y si el usuario es de USA?
+  }
+}
+```
+
+---
+
+## 🔧 Troubleshooting
+
+### Problema: Las fechas deshabilitadas no funcionan
+
+**Causa:** El formato de fecha no coincide.
+
+**Solución:**
+```typescript
+// ✅ Asegúrate de usar Date objects o strings ISO válidos
+disabledDates = [
+  new Date(2024, 11, 25),   // ✅ Date object
+  '2024-12-25',             // ✅ ISO string
+  new Date('2024-12-25')    // ✅ Date from string
+];
+
+// ❌ EVITA: Formatos inconsistentes
+disabledDates = [
+  '25/12/2024',             // ❌ Formato no estándar
+  '2024-12-25 12:00:00'     // ❌ Incluye hora
+];
+```
+
+### Problema: El calendario no respeta la configuración global
+
+**Causa:** `NUI_CONFIG` no está correctamente inyectado.
+
+**Solución:**
+```typescript
+// En app.config.ts
+import { NUI_CONFIG } from '@nui/components';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    {
+      provide: NUI_CONFIG,  // ✅ Token correcto
+      useValue: {
+        calendar: { /* ... */ }
+      }
+    }
+  ]
+};
+```
+
+### Problema: Width="full" no escala correctamente
+
+**Causa:** Contenedor padre no tiene ancho definido.
+
+**Solución:**
+```html
+<!-- ✅ BIEN: Contenedor con ancho definido -->
+<div style="width: 600px; max-width: 100%">
+  <nui-calendar width="full"></nui-calendar>
+</div>
+
+<!-- ❌ EVITA: Contenedor sin ancho -->
+<div>
+  <nui-calendar width="full"></nui-calendar>
+</div>
+```
+
+### Problema: ControlValueAccessor no actualiza form
+
+**Causa:** No estás usando `formControlName` correctamente.
+
+**Solución:**
+```typescript
+// ✅ BIEN: Usa formControlName
+<nui-calendar 
+  formControlName="date"
+  (valueChange)="onDateChange($event)">
+</nui-calendar>
+
+onDateChange(value: CalendarValue) {
+  // El formulario se actualiza automáticamente
+  // gracias a ControlValueAccessor
+}
+```
+
+---
+
+## 🔗 Componentes Relacionados
+
+- [TimePicker Component](./time-picker.md) - Selector de hora complementario
+- [DatePicker Component](./date-picker.md) - Wrapper con input de fecha
+- [Button Component](./button.md) - Para controles adicionales
+- [Modal Component](./modal.md) - Para calendarios en modal
+
+---
+
+## 📚 Referencias Técnicas
+
+| Concepto | Descripción |
+|----------|-------------|
+| **date-fns** | Librería de manipulación de fechas (encapsulada en NuiDateAdapter) |
+| **Angular Signals** | API reactiva (input, output, signal, computed, effect) |
+| **CSS Container Queries** | Para responsive design basado en contenedor |
+| **ControlValueAccessor** | Integración con Angular Reactive Forms |
+| **Adapter Pattern** | Abstracción de librería de fechas (tres capas) |
+| **WCAG 2.1 AA** | Estándar de accesibilidad web |
+
+---
+
+## 📋 Changelog
+
+### v2.0.0 (Febrero 2026)
+- ✨ **Nuevo**: Configuración global con `CalendarGlobalConfig`
+- ✨ **Nuevo**: Patrón de tres capas con `NuiDateAdapter`
+- ✨ **Nuevo**: Signals de efectivos (`effectiveSize`, `effectiveShowTodayButton`, etc.)
+- 🔧 **Mejorado**: Sincronización con configuración global
+- 📚 **Mejorado**: Documentación completa de arquitectura
+
+### v1.5.0 (Octubre 2025)
+- ✨ **Nuevo**: Width modes (compact/full) con Container Queries
+- ✨ **Nuevo**: Sistema de tabs para presets + timepicker
+- 🔧 **Mejorado**: Escalado fluido de fuentes en full mode
+- 📦 **Mejorado**: 85% menos código CSS con mixins
+
+### v1.0.0 (2025)
+- ✨ Initial release con Angular 17+ Signals API
