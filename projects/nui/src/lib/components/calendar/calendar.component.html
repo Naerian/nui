@@ -5,8 +5,8 @@
   [class.nui-calendar--md]="size() === 'md'"
   [class.nui-calendar--lg]="size() === 'lg'"
   [class.nui-calendar--xl]="size() === 'xl'"
-  [class.nui-calendar--full]="width() === 'full'"
-  [class.nui-calendar--compact]="width() === 'compact'"
+  [class.nui-calendar--full]="effectiveWidth() === 'full'"
+  [class.nui-calendar--compact]="effectiveWidth() === 'compact'"
   [class.nui-calendar--with-tabs]="shouldShowTabs()"
 >
   <!-- SISTEMA DE PESTAÑAS (cuando hay presets o timepicker) -->

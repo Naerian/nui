@@ -1,5 +1,6 @@
 @use '../../../../styles/variables/calendar-vars';
 @use '../../../../styles/abstracts/mixins' as global;
+@use '../../../../styles/config' as config;
 
 // ============================================================================
 // HOST & STRUCTURE
@@ -42,18 +43,21 @@
   border: 1px solid var(--nui-border-primary);
   box-shadow: var(--nui-shadow-md);
   user-select: none;
-  width: var(--nui-calendar-width);
   padding: var(--nui-calendar-padding);
   gap: var(--nui-calendar-gap);
+  max-width: var(--nui-calendar-width);
+  width: 100%;
 
   // ============================================================================
-  // SIZE VARIANTS (usa mixin global para eliminar duplicación)
+  // SIZE VARIANTS (solo aplican cuando NO es full)
   // ============================================================================
 
-  $sizes: xs, sm, md, lg, xl;
-  @each $size in $sizes {
-    &--#{$size} {
-      @include global.calendar-size($size);
+  &:not(&--full) {
+    $sizes: xs, sm, md, lg, xl;
+    @each $size in $sizes {
+      &.nui-calendar--#{$size} {
+        @include global.calendar-size($size);
+      }
     }
   }
 
@@ -64,12 +68,19 @@
   &--full {
     width: 100%;
     max-width: 100%;
-    min-width: var(--nui-calendar-full-min-width);
+    min-width: 240px;
     container-type: inline-size;
     container-name: calendar;
+    
+    // Padding y gap también se adaptan con clamp
+    padding: clamp(0.5rem, 3cqw, 1rem);
+    gap: clamp(0.25rem, 1.5cqw, 0.5rem);
 
-    // Días y elementos se adaptan al ancho disponible
+    // En modo full, los días NO deben tener min-width fijo
+    // El grid 1fr se encarga de distribuir el espacio
     .nui-calendar__day {
+      min-width: 0;
+      min-height: 0;
       font-size: clamp(0.6875rem, 3cqw, 1.5rem);
     }
 
@@ -81,10 +92,29 @@
     .nui-calendar__title-text {
       font-size: clamp(0.75rem, 3.5cqw, 1.25rem);
     }
+    
+    // Gap del grid de días y weekdays también se adapta
+    .nui-calendar__days,
+    .nui-calendar__weekdays {
+      gap: clamp(0.25rem, 1.5cqw, 0.5rem);
+    }
+    
+    // Meses y años también se adaptan
+    .nui-calendar__months,
+    .nui-calendar__years {
+      gap: clamp(0.25rem, 1.5cqw, 0.5rem);
+    }
+    
+    .nui-calendar__month,
+    .nui-calendar__year {
+      font-size: clamp(0.6875rem, 2.5cqw, 1rem);
+      padding: clamp(0.25rem, 1.5cqw, 0.5rem);
+    }
   }
 
   &--compact {
-    width: var(--nui-calendar-width);
+    max-width: var(--nui-calendar-width);
+    width: 100%;
   }
 
   // ============================================================================

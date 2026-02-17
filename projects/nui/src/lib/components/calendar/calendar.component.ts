@@ -77,9 +77,9 @@ import { BtnGroupOption } from '../button-group';
   ],
   host: {
     class: 'nui-calendar-host',
-    '[class.nui-calendar-full]': 'width() === "full"',
-    '[style.display]': 'width() === "full" ? "flex" : "inline-flex"',
-    '[style.width]': 'width() === "full" ? "100%" : "auto"',
+    '[class.nui-calendar-full]': 'effectiveWidth() === "full"',
+    '[style.display]': 'effectiveWidth() === "full" ? "flex" : "inline-flex"',
+    '[style.width]': 'effectiveWidth() === "full" ? "100%" : "auto"',
   },
 })
 export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAccessor {
@@ -213,6 +213,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   timePickerVisible = signal<boolean>(false); // Control de visibilidad del time picker
   showingEndTime = signal<boolean>(false); // Toggle entre inicio/fin en modo 'both'
   activeTab = signal<CalendarTabType>('calendar'); // Pesta?a activa en el sistema de tabs
+  isMobile = signal<boolean>(false); // Detecta si es dispositivo móvil (< 768px)
   selectedTime = signal<TimeValue | null>(null); // Hora seleccionada (para DAY y compatibilidad)
   selectedStartTime = signal<TimeValue | null>(null); // Hora de inicio (para WEEK/RANGE con 'start' o 'both')
   selectedEndTime = signal<TimeValue | null>(null); // Hora de fin (para RANGE con 'end' o 'both')
@@ -321,11 +322,17 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   });
 
   /**
-   * Valor efectivo de width considerando configuración global
+   * Valor efectivo de width considerando configuración global y modo móvil.
+   * En móviles (< 768px) siempre devuelve 'full' para asegurar que quepa en el contenedor.
    */
   effectiveWidth = computed(() => {
+    // Si es móvil, forzar modo full
+    if (this.isMobile()) {
+      return CalendarWidthEnum.FULL;
+    }
+    
     const inputValue = this.width();
-    return inputValue ?? this.calendarConfig.width ?? 'full';
+    return inputValue ?? this.calendarConfig.width ?? CalendarWidthEnum.FULL;
   });
 
   /**
@@ -689,6 +696,30 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         untracked(() => this.focusCurrentYear());
       }
     });
+    
+    // Inicializar detección de móvil
+    this.checkIfMobile();
+  }
+
+  // ===========================
+  // Mobile detection
+  // ===========================
+  
+  /**
+   * Verifica si el viewport es móvil (< 768px) y actualiza el signal
+   */
+  private checkIfMobile(): void {
+    if (typeof window !== 'undefined') {
+      this.isMobile.set(window.innerWidth < 768);
+    }
+  }
+  
+  /**
+   * Escucha cambios en el tamaño de ventana para actualizar modo móvil
+   */
+  @HostListener('window:resize')
+  onWindowResize(): void {
+    this.checkIfMobile();
   }
 
   // ===========================
