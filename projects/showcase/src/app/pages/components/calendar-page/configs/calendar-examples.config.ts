@@ -381,4 +381,92 @@ private getAvailability(date: Date): number {
       },
     ],
   },
+  {
+    id: 'selection-modes',
+    title: 'components.calendar.selection-modes.title',
+    description: 'components.calendar.selection-modes.description',
+    anchor: 'selection-modes',
+    note: {
+      type: 'info',
+      icon: 'ri-calendar-line',
+      content: 'components.calendar.selection-modes.note',
+    },
+    examples: [
+      {
+        title: 'Day (normal)',
+        code: `<nui-calendar
+  type="day"
+  (valueChange)="onDaySelected($event)"
+></nui-calendar>`,
+        language: 'html',
+      },
+      {
+        title: 'Month picker',
+        code: `<nui-calendar
+  type="month"
+  [closeOnSelect]="true"
+  (valueChange)="onMonthSelected($event)"
+></nui-calendar>`,
+        language: 'html',
+      },
+      {
+        title: 'Year picker',
+        code: `<nui-calendar
+  type="year"
+  [closeOnSelect]="true"
+  (valueChange)="onYearSelected($event)"
+></nui-calendar>`,
+        language: 'html',
+      },
+      {
+        title: 'codeExamples.typescript',
+        code: `onMonthSelected(value: CalendarValue): void {
+  if (value.type === 'month') {
+    console.log('Mes:', value.month.month); // 0-11
+    console.log('Año:', value.month.year);  // YYYY
+    console.log('Fecha:', value.date);      // 1er día del mes
+  }
+}
+
+onYearSelected(value: CalendarValue): void {
+  if (value.type === 'year') {
+    console.log('Año:', value.year);        // YYYY
+    console.log('Fecha:', value.date);      // 1 de enero del año
+  }
+}`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
+    id: 'multiple-selection',
+    title: 'components.calendar.multiple-selection.title',
+    description: 'components.calendar.multiple-selection.description',
+    anchor: 'multiple-selection',
+    note: {
+      type: 'warning',
+      icon: 'ri-checkbox-multiple-line',
+      content: 'components.calendar.multiple-selection.note',
+    },
+    examples: [
+      {
+        title: 'codeExamples.html',
+        code: `<nui-calendar
+  type="multiple"
+  (valueChange)="onMultipleSelection($event)"
+></nui-calendar>`,
+        language: 'html',
+      },
+      {
+        title: 'codeExamples.typescript',
+        code: `onMultipleSelection(value: CalendarValue): void {
+  if (value.type === 'multiple') {
+    console.log('Fechas seleccionadas:', value.dates);
+    console.log('Total:', value.dates.length);
+  }
+}`,
+        language: 'typescript',
+      },
+    ],
+  },
 ];

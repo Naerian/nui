@@ -169,6 +169,7 @@ export class CalendarService {
       hoveredDate?: Date | null;
       dateStatusFn?: DateStatusFn;
       isDateEnabledFn?: IsDateEnabledFn;
+      selectedMultipleDates?: Date[];
     }
   ): CalendarDay[] {
     const calendarDaysRaw = this.getCalendarDays(currentDate, weekStartsOn);
@@ -193,13 +194,14 @@ export class CalendarService {
     const hoveredDate = options?.hoveredDate || null;
     const dateStatusFn = options?.dateStatusFn;
     const isDateEnabledFn = options?.isDateEnabledFn;
+    const selectedMultipleDates = options?.selectedMultipleDates || [];
 
     return calendarDaysRaw.map(date => {
       const dayOfWeek = date.getDay();
       const isWeekend = dayOfWeek === 0 || dayOfWeek === 6; // Domingo o Sábado
       const isCurrentMonth = this.isSameMonth(date, currentDate);
       const isToday = this.isToday(date);
-      const isSelected = this.isDateSelected(date, selectedDate, selectedRange);
+      const isSelected = this.isDateSelected(date, selectedDate, selectedRange, selectedMultipleDates);
       const isInRange = this.isDateInRange(date, selectedRange, selectedWeek, hoveredDate);
       const isDisabled = this.isDateUnselectable(
         date,
@@ -244,8 +246,14 @@ export class CalendarService {
   private isDateSelected(
     date: Date,
     selectedDate: Date | null,
-    selectedRange: { start: Date | null; end: Date | null }
+    selectedRange: { start: Date | null; end: Date | null },
+    selectedMultipleDates: Date[] = []
   ): boolean {
+    // Modo MULTIPLE: verificar si está en el array de fechas múltiples
+    if (selectedMultipleDates.length > 0) {
+      return selectedMultipleDates.some(d => this.isSameDay(date, d));
+    }
+
     // Modo DAY: solo si coincide con selectedDate
     if (selectedDate && this.isSameDay(date, selectedDate)) {
       return true;

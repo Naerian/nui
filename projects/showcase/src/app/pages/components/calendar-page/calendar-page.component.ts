@@ -47,6 +47,8 @@ export class CalendarPageComponent extends BaseComponentPage {
         'dynamic-disabled-dates',
         'min-max-dates',
         'date-status',
+        'selection-modes',
+        'multiple-selection',
         'reactive-forms',
       ],
     },
@@ -62,6 +64,7 @@ export class CalendarPageComponent extends BaseComponentPage {
         'api-calendar-width',
         'api-view-mode',
         'api-preset',
+        'api-smart-types',
       ],
     },
     {
@@ -87,6 +90,14 @@ export class CalendarPageComponent extends BaseComponentPage {
   // With time picker
   selectedDateWithTime = signal<CalendarValue | null>(null);
   selectedRangeWithTime = signal<CalendarValue | null>(null);
+
+  // Selection modes (month, year)
+  selectedMonth = signal<string>('');
+  selectedYear = signal<string>('');
+
+  // Multiple selection
+  selectedMultipleDates = signal<Date[]>([]);
+  selectedMultipleDisplay = signal<string>('');
 
   // Reactive Forms
   dateControl = new FormControl<Date | null>(null);
@@ -140,6 +151,43 @@ export class CalendarPageComponent extends BaseComponentPage {
   onRangeWithTimeChange(value: CalendarValue): void {
     console.log('Range with time changed:', value);
     this.selectedRangeWithTime.set(value);
+  }
+
+  onMonthSelected(value: CalendarValue): void {
+    console.log('Month selected:', value);
+    
+    if (value.type === CalendarType.MONTH) {
+      const monthNames = [
+        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+      ];
+      const monthName = monthNames[value.month.month];
+      this.selectedMonth.set(`${monthName} ${value.month.year}`);
+    }
+  }
+
+  onYearSelected(value: CalendarValue): void {
+    console.log('Year selected:', value);
+    
+    if (value.type === CalendarType.YEAR) {
+      this.selectedYear.set(value.year.toString());
+    }
+  }
+
+  onMultipleSelection(value: CalendarValue): void {
+    console.log('Multiple selection:', value);
+    
+    if (value.type === CalendarType.MULTIPLE) {
+      this.selectedMultipleDates.set(value.dates);
+      if (value.dates.length > 0) {
+        const datesStr = value.dates
+          .map(d => d.toLocaleDateString())
+          .join(', ');
+        this.selectedMultipleDisplay.set(datesStr);
+      } else {
+        this.selectedMultipleDisplay.set('');
+      }
+    }
   }
 
   // ========================================================================

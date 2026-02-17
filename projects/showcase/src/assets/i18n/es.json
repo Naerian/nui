@@ -787,6 +787,16 @@
         "description": "Asigna estados visuales a fechas para indicar información de negocio: disponibilidad, prioridad, eventos, etc.",
         "note": "Usa <code>dateStatusFn</code> para asignar uno de cuatro estados a cada fecha: <code>'success'</code> (verde), <code>'info'</code> (azul), <code>'warning'</code> (ámbar) o <code>'danger'</code> (rojo). Los estados se muestran como una línea de color sutil en la parte superior del día. Retorna <code>null</code> para días sin estado especial."
       },
+      "selection-modes": {
+        "title": "Modos de selección avanzados",
+        "description": "El calendario soporta tres modos de selección especializados: selección normal de día, selección de mes/año y selección solo de año.",
+        "note": "Cada modo está optimizado para un caso de uso específico: <code>type='day'</code> para selección de fecha completa, <code>type='month'</code> para seleccionar mes y año (ideal para filtros mensuales), y <code>type='year'</code> para seleccionar solo el año (ideal para reportes anuales). Los modos <code>month</code> y <code>year</code> inician directamente en la vista correspondiente y cierran automáticamente al seleccionar si <code>closeOnSelect</code> está activo."
+      },
+      "multiple-selection": {
+        "title": "Selección múltiple",
+        "description": "Permite seleccionar múltiples fechas no consecutivas con un simple clic. Ideal para seleccionar días laborables, festivos o eventos distribuidos.",
+        "note": "Activa el modo de selección múltiple con <code>type='multiple'</code>. Los usuarios pueden hacer clic en múltiples fechas para agregarlas/quitarlas de la selección. Este modo <strong>nunca cierra automáticamente</strong> el calendario, incluso si <code>closeOnSelect</code> está en <code>true</code>, para permitir la selección continua de fechas. El output devuelve un objeto <code>{ type: 'multiple', dates: Date[] }</code> con el array de fechas seleccionadas."
+      },
       "api": {
         "inputs": {
           "title": "Inputs",
@@ -817,6 +827,11 @@
         "preset": {
           "title": "DateRangePreset",
           "description": "Interface para definir presets de rango rápido con etiqueta, rango de fechas e icono opcional"
+        },
+        "smart-types": {
+          "title": "Tipos inteligentes (Smart Types)",
+          "description": "Tipos y funciones para lógica avanzada de validación y estados de fechas. Permiten aplicar reglas de negocio complejas y visualizaciones dinámicas.",
+          "note": "Estos tipos son fundamentales para implementar características avanzadas: <strong>DateStatusFn</strong> asigna estados visuales (success, warning, danger, info) a fechas según lógica de negocio, mientras que <strong>IsDateEnabledFn</strong> controla dinámicamente qué fechas están habilitadas o deshabilitadas. Ambas funciones reciben una fecha y permiten implementar validaciones complejas como calendarios corporativos, sistemas de reservas o reglas personalizadas de disponibilidad."
         }
       },
       "theming": {

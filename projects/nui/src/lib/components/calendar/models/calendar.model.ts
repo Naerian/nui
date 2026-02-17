@@ -4,6 +4,9 @@ export enum CalendarType {
   DAY = 'day',
   WEEK = 'week',
   RANGE = 'range',
+  MONTH = 'month',
+  YEAR = 'year',
+  MULTIPLE = 'multiple',
 }
 
 // Alias para retrocompatibilidad
@@ -183,6 +186,20 @@ export type CalendarValue =
       dates: Date[]; // Array de fechas VÁLIDAS del rango (excluye deshabilitadas)
       range: { start: Date; end: Date }; // Fecha de inicio y fin del rango
       time?: { start: TimeValue; end: TimeValue }; // Horas opcionales de inicio/fin
+    }
+  | {
+      type: CalendarType.MONTH;
+      date: Date; // Primer día del mes seleccionado (ej: 2024-01-01 para enero 2024)
+      month: { month: number; year: number }; // Mes (0-11) y año seleccionado
+    }
+  | {
+      type: CalendarType.YEAR;
+      date: Date; // Primer día del año seleccionado (ej: 2024-01-01)
+      year: number; // Año seleccionado
+    }
+  | {
+      type: CalendarType.MULTIPLE;
+      dates: Date[]; // Array de fechas seleccionadas (no consecutivas)
     };
 
 export interface DateRangePreset {

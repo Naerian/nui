@@ -22,7 +22,7 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
           '<code>type</code>',
           'CalendarType',
           '<code class="neutral">DAY</code>',
-          "Tipo de selección: 'DAY' (fecha única), 'WEEK' (semana completa), 'RANGE' (rango de fechas)",
+          "Tipo de selección: 'day' (fecha única), 'week' (semana), 'range' (rango), 'month' (mes/año), 'year' (año), 'multiple' (fechas múltiples)",
         ],
         [
           '<code>date</code>',
@@ -177,6 +177,9 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
         ['<code>DAY</code>', 'Selección de una fecha única'],
         ['<code>WEEK</code>', 'Selección de una semana completa (7 días consecutivos)'],
         ['<code>RANGE</code>', 'Selección de un rango de fechas (inicio y fin)'],
+        ['<code>MONTH</code>', 'Selección de mes y año (solo vista de meses)'],
+        ['<code>YEAR</code>', 'Selección de año (solo vista de años)'],
+        ['<code>MULTIPLE</code>', 'Selección múltiple de fechas no consecutivas'],
       ],
     },
   },
@@ -248,6 +251,58 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
     end: endOfMonth(subMonths(new Date(), 1)),
   },
 ];`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
+    id: 'api-smart-types',
+    title: 'components.calendar.api.smart-types.title',
+    description: 'components.calendar.api.smart-types.description',
+    anchor: 'api-smart-types',
+    note: {
+      type: 'info',
+      icon: 'ri-code-line',
+      content: 'components.calendar.api.smart-types.note',
+    },
+    table: {
+      headers: ['common.tables.type', 'common.tables.description'],
+      rows: [
+        ['<code>DateStatus</code>', "Estados visuales: 'success' | 'warning' | 'danger' | 'info'"],
+        [
+          '<code>DateStatusFn</code>',
+          '<code>(date: Date) => DateStatus | null</code> - Función que asigna estados visuales dinámicamente',
+        ],
+        [
+          '<code>IsDateEnabledFn</code>',
+          '<code>(date: Date) => boolean</code> - Función que valida si una fecha está habilitada (prevalece sobre disabledDates)',
+        ],
+      ],
+    },
+    examples: [
+      {
+        title: 'DateStatusFn (ejemplo)',
+        code: `dateStatusFn: DateStatusFn = (date) => {
+  const availability = getAvailability(date);
+  if (availability === 0) return 'danger';
+  if (availability < 5) return 'warning';
+  if (availability >= 10) return 'success';
+  return 'info';
+};`,
+        language: 'typescript',
+      },
+      {
+        title: 'IsDateEnabledFn (ejemplo)',
+        code: `isDateEnabledFn: IsDateEnabledFn = (date) => {
+  // No permitir fines de semana
+  const dayOfWeek = date.getDay();
+  if (dayOfWeek === 0 || dayOfWeek === 6) return false;
+  
+  // No permitir festivos
+  if (isHoliday(date)) return false;
+  
+  return true;
+};`,
         language: 'typescript',
       },
     ],
