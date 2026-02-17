@@ -1,14 +1,4 @@
-<div
-  class="nui-calendar"
-  [class.nui-calendar--xs]="size() === 'xs'"
-  [class.nui-calendar--sm]="size() === 'sm'"
-  [class.nui-calendar--md]="size() === 'md'"
-  [class.nui-calendar--lg]="size() === 'lg'"
-  [class.nui-calendar--xl]="size() === 'xl'"
-  [class.nui-calendar--full]="effectiveWidth() === 'full'"
-  [class.nui-calendar--compact]="effectiveWidth() === 'compact'"
-  [class.nui-calendar--with-tabs]="shouldShowTabs()"
->
+<div class="nui-calendar" [class.nui-calendar--with-tabs]="shouldShowTabs()">
   <!-- SISTEMA DE PESTAÑAS (cuando hay presets o timepicker) -->
   @if (shouldShowTabs() && viewMode() === ViewMode.DAY) {
     <div class="nui-calendar__tabs">
@@ -31,10 +21,9 @@
       <!-- Header con controles de navegación -->
       <div class="nui-calendar__header">
         <div class="nui-calendar__nav">
-          <nui-button
-            [size]="size()"
-            icon="ri-arrow-left-s-line"
-            variant="ghost"
+          <button
+            type="button"
+            class="nui-calendar__nav-btn nui-calendar__nav-btn--icon-only"
             data-calendar-nav
             [disabled]="!canNavigateBack()"
             [attr.aria-label]="
@@ -42,48 +31,49 @@
                 ? _translations.calendar.prevYears
                 : _translations.calendar.prevMonth
             "
-            (onClick)="handlePreviousNavigation()"
-          />
+            (click)="handlePreviousNavigation()"
+          >
+            <i class="ri-arrow-left-s-line"></i>
+          </button>
 
           <div class="nui-calendar__title">
             @if (viewMode() === ViewMode.DAY) {
-              <nui-button
-                [size]="size()"
-                variant="ghost"
+              <button
+                type="button"
+                class="nui-calendar__nav-btn"
                 data-calendar-nav
                 [attr.aria-label]="_translations.calendar.changeMonth"
-                (onClick)="switchToMonthView()"
+                (click)="switchToMonthView()"
               >
                 {{ displayedMonth() }}
-              </nui-button>
-              <nui-button
-                [size]="size()"
-                variant="ghost"
+              </button>
+              <button
+                type="button"
+                class="nui-calendar__nav-btn"
                 data-calendar-nav
                 [attr.aria-label]="_translations.calendar.changeYear"
-                (onClick)="switchToYearView()"
+                (click)="switchToYearView()"
               >
                 {{ displayedYear() }}
-              </nui-button>
+              </button>
             } @else if (viewMode() === ViewMode.MONTH) {
-              <nui-button
-                [size]="size()"
-                variant="ghost"
+              <button
+                type="button"
+                class="nui-calendar__nav-btn"
                 data-calendar-nav
                 [attr.aria-label]="_translations.calendar.changeYear"
-                (onClick)="switchToYearView()"
+                (click)="switchToYearView()"
               >
                 {{ displayedYear() }}
-              </nui-button>
+              </button>
             } @else {
               <span class="nui-calendar__title-text">{{ _translations.calendar.changeYear }}</span>
             }
           </div>
 
-          <nui-button
-            [size]="size()"
-            icon="ri-arrow-right-s-line"
-            variant="ghost"
+          <button
+            type="button"
+            class="nui-calendar__nav-btn nui-calendar__nav-btn--icon-only"
             data-calendar-nav
             [disabled]="!canNavigateForward()"
             [attr.aria-label]="
@@ -91,8 +81,10 @@
                 ? _translations.calendar.nextYears
                 : _translations.calendar.nextMonth
             "
-            (onClick)="handleNextNavigation()"
-          />
+            (click)="handleNextNavigation()"
+          >
+            <i class="ri-arrow-right-s-line"></i>
+          </button>
         </div>
       </div>
 
@@ -196,14 +188,13 @@
       ) {
         <div class="nui-calendar__footer">
           <div class="nui-calendar__footer-center">
-            <nui-button
-              [size]="size()"
-              variant="ghost"
-              (onClick)="goToToday()"
-              class="nui-calendar__footer-button"
+            <button
+              type="button"
+              class="nui-calendar__nav-btn nui-calendar__footer-button"
+              (click)="goToToday()"
             >
               {{ _translations.calendar.today }}
-            </nui-button>
+            </button>
           </div>
         </div>
       }
@@ -219,13 +210,11 @@
     viewMode() === ViewMode.DAY
   ) {
     <div class="nui-calendar__presets-panel">
-      <div class="nui-calendar__presets-list">
-        @for (preset of presets(); track preset.label) {
-          <button type="button" class="nui-calendar__preset-button" (click)="applyPreset(preset)">
-            {{ preset.label }}
-          </button>
-        }
-      </div>
+      @for (preset of presets(); track preset.label) {
+        <button type="button" class="nui-calendar__preset-button" (click)="applyPreset(preset)">
+          {{ preset.label }}
+        </button>
+      }
     </div>
   }
 
@@ -259,7 +248,6 @@
               [fromCalendar]="true"
               [mode]="timeMode()"
               [config]="timeConfig()"
-              [size]="size()"
               [ngModel]="selectedStartTime() || selectedTime()"
               (ngModelChange)="onTimeChange($event, false)"
             />
@@ -270,7 +258,6 @@
               [fromCalendar]="true"
               [mode]="timeMode()"
               [config]="timeConfig()"
-              [size]="size()"
               [ngModel]="selectedEndTime()"
               (ngModelChange)="onTimeChange($event, true)"
             />
@@ -288,7 +275,6 @@
             [fromCalendar]="true"
             [mode]="timeMode()"
             [config]="timeConfig()"
-            [size]="size()"
             [ngModel]="selectedEndTime()"
             (ngModelChange)="onTimeChange($event, true)"
           />

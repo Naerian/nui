@@ -37,18 +37,6 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
           'Fecha inicial o fechas seleccionadas',
         ],
         [
-          '<code>size</code>',
-          'NUISize',
-          '<code class="neutral">md</code>',
-          "Tamaño del calendario: 'xs', 'sm', 'md', 'lg', 'xl', 'auto'",
-        ],
-        [
-          '<code>width</code>',
-          'CalendarWidth',
-          '<code class="neutral">compact</code>',
-          "'compact' (ancho fijo) o 'full' (100% con container queries)",
-        ],
-        [
           '<code>disabledDates</code>',
           '(string | Date)[]',
           '<code class="neutral">undefined</code>',
@@ -185,22 +173,6 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
         ['<code>RANGE</code>', 'Selección de un rango de fechas (inicio y fin)'],
         ['<code>MONTH</code>', 'Selección de mes y año. Con selection="multiple" permite seleccionar múltiples meses'],
         ['<code>YEAR</code>', 'Selección de año. Con selection="multiple" permite seleccionar múltiples años'],
-      ],
-    },
-  },
-  {
-    id: 'api-calendar-width',
-    title: 'components.calendar.api.calendar-width.title',
-    description: 'components.calendar.api.calendar-width.description',
-    anchor: 'api-calendar-width',
-    table: {
-      headers: ['common.tables.value', 'common.tables.description'],
-      rows: [
-        ['<code>compact</code>', 'Ancho fijo según el tamaño (size). No se adapta al contenedor.'],
-        [
-          '<code>full</code>',
-          'Ancho 100% del contenedor. Usa Container Queries para adaptar tipografía y espaciado.',
-        ],
       ],
     },
   },

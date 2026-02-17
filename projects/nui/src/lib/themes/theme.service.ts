@@ -782,6 +782,22 @@ export class ThemeService {
     const statusWarning = colors.warning;
     const statusDanger = colors.danger;
     
+    // Calendar Navigation Button States (Ghost variant style)
+    const navBtnBg = 'transparent';
+    const navBtnText = isDark ? grays[200] : grays[700];
+    const navBtnBorder = 'transparent';
+    
+    const navBtnHoverBg = isDark ? grays[800] : grays[100];
+    const navBtnHoverText = isDark ? grays[50] : grays[900];
+    const navBtnHoverBorder = 'transparent';
+    
+    const navBtnActiveBg = isDark ? grays[700] : grays[200];
+    const navBtnActiveBorder = 'transparent';
+    
+    const navBtnDisabledBg = 'transparent';
+    const navBtnDisabledText = isDark ? grays[600] : grays[400];
+    const navBtnDisabledBorder = 'transparent';
+    
     return `
       /* Calendar Day States */
       --nui-calendar-day-bg: ${dayBg};
@@ -805,6 +821,22 @@ export class ThemeService {
       --nui-calendar-day-status-info: ${statusInfo};
       --nui-calendar-day-status-warning: ${statusWarning};
       --nui-calendar-day-status-danger: ${statusDanger};
+      
+      /* Calendar Navigation Buttons (customizable ghost-style buttons) */
+      --nui-calendar-nav-btn-bg: ${navBtnBg};
+      --nui-calendar-nav-btn-text: ${navBtnText};
+      --nui-calendar-nav-btn-border: ${navBtnBorder};
+      
+      --nui-calendar-nav-btn-hover-bg: ${navBtnHoverBg};
+      --nui-calendar-nav-btn-hover-text: ${navBtnHoverText};
+      --nui-calendar-nav-btn-hover-border: ${navBtnHoverBorder};
+      
+      --nui-calendar-nav-btn-active-bg: ${navBtnActiveBg};
+      --nui-calendar-nav-btn-active-border: ${navBtnActiveBorder};
+      
+      --nui-calendar-nav-btn-disabled-bg: ${navBtnDisabledBg};
+      --nui-calendar-nav-btn-disabled-text: ${navBtnDisabledText};
+      --nui-calendar-nav-btn-disabled-border: ${navBtnDisabledBorder};
     `;
   }
 

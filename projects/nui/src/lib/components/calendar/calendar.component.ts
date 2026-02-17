@@ -41,7 +41,6 @@ import {
 } from './models/calendar.model';
 import { CalendarService } from './services/calendar.service';
 import { CalendarKeyboardNavigationService } from './services/calendar-keyboard-navigation.service';
-import { ButtonComponent } from '../button/button.component';
 import { ButtonGroupComponent } from '../button-group/button-group.component';
 import {
   TimePickerConfig,
@@ -62,7 +61,6 @@ import { BtnGroupOption } from '../button-group';
   imports: [
     CommonModule,
     A11yModule,
-    ButtonComponent,
     ButtonGroupComponent,
     TimePickerComponent,
     FormsModule,
@@ -77,9 +75,6 @@ import { BtnGroupOption } from '../button-group';
   ],
   host: {
     class: 'nui-calendar-host',
-    '[class.nui-calendar-full]': 'effectiveWidth() === "full"',
-    '[style.display]': 'effectiveWidth() === "full" ? "flex" : "inline-flex"',
-    '[style.width]': 'effectiveWidth() === "full" ? "100%" : "auto"',
   },
 })
 export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAccessor {
@@ -134,8 +129,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
    */
   isDateEnabledFn = input<IsDateEnabledFn>();
 
-  size = input<NUISize>('md'); // Tamaño del calendario
-  width = input<CalendarWidth>(CalendarWidthEnum.COMPACT); // Ancho del calendario: compact (fijo) o full (100%)
   blockDisabledRanges = input<boolean>(false); // Bloquear rangos de fechas deshabilitadas
   isOpenedByOverlay = input<boolean>(false); // ¿Se abrió desde un overlay (datepicker)?
   minDate = input<Date | string | null>(); // Fecha mínima permitida
@@ -213,7 +206,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   timePickerVisible = signal<boolean>(false); // Control de visibilidad del time picker
   showingEndTime = signal<boolean>(false); // Toggle entre inicio/fin en modo 'both'
   activeTab = signal<CalendarTabType>('calendar'); // Pesta?a activa en el sistema de tabs
-  isMobile = signal<boolean>(false); // Detecta si es dispositivo móvil (< 768px)
   selectedTime = signal<TimeValue | null>(null); // Hora seleccionada (para DAY y compatibilidad)
   selectedStartTime = signal<TimeValue | null>(null); // Hora de inicio (para WEEK/RANGE con 'start' o 'both')
   selectedEndTime = signal<TimeValue | null>(null); // Hora de fin (para RANGE con 'end' o 'both')
@@ -311,28 +303,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   effectiveBlockDisabledRanges = computed(() => {
     const inputValue = this.blockDisabledRanges();
     return inputValue ?? this.calendarConfig.blockDisabledRanges ?? false;
-  });
-
-  /**
-   * Valor efectivo de size considerando configuración global
-   */
-  effectiveSize = computed(() => {
-    const inputValue = this.size();
-    return inputValue ?? this.calendarConfig.size ?? 'md';
-  });
-
-  /**
-   * Valor efectivo de width considerando configuración global y modo móvil.
-   * En móviles (< 768px) siempre devuelve 'full' para asegurar que quepa en el contenedor.
-   */
-  effectiveWidth = computed(() => {
-    // Si es móvil, forzar modo full
-    if (this.isMobile()) {
-      return CalendarWidthEnum.FULL;
-    }
-    
-    const inputValue = this.width();
-    return inputValue ?? this.calendarConfig.width ?? CalendarWidthEnum.FULL;
   });
 
   /**
@@ -671,7 +641,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     });
 
     // Effecto para manejar el enfoque del teclado en los botones de día/mes/año
+    // Solo se ejecuta si el calendario se abrió desde un overlay (datepicker)
     effect(() => {
+      if (!this.isOpenedByOverlay()) return;
+      
       const buttons = this.dayButtons();
       if (buttons.length > 0) {
         const focusedIndex = this.focusedDayIndex();
@@ -682,7 +655,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     });
 
     // Efectos para manejar el enfoque al cambiar de vista (mes/año)
+    // Solo se ejecuta si el calendario se abrió desde un overlay
     effect(() => {
+      if (!this.isOpenedByOverlay()) return;
+      
       const buttons = this.monthButtons();
       if (buttons.length > 0 && this.viewMode() === ViewMode.MONTH) {
         untracked(() => this.focusCurrentMonth());
@@ -690,36 +666,15 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     });
 
     // Efecto para enfocar el año seleccionado al entrar en vista de años
+    // Solo se ejecuta si el calendario se abrió desde un overlay
     effect(() => {
+      if (!this.isOpenedByOverlay()) return;
+      
       const buttons = this.yearButtons();
       if (buttons.length > 0 && this.viewMode() === ViewMode.YEAR) {
         untracked(() => this.focusCurrentYear());
       }
     });
-    
-    // Inicializar detección de móvil
-    this.checkIfMobile();
-  }
-
-  // ===========================
-  // Mobile detection
-  // ===========================
-  
-  /**
-   * Verifica si el viewport es móvil (< 768px) y actualiza el signal
-   */
-  private checkIfMobile(): void {
-    if (typeof window !== 'undefined') {
-      this.isMobile.set(window.innerWidth < 768);
-    }
-  }
-  
-  /**
-   * Escucha cambios en el tamaño de ventana para actualizar modo móvil
-   */
-  @HostListener('window:resize')
-  onWindowResize(): void {
-    this.checkIfMobile();
   }
 
   // ===========================

@@ -31,48 +31,6 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
     ],
   },
   {
-    id: 'sizes',
-    title: 'components.calendar.sizes.title',
-    description: 'components.calendar.sizes.description',
-    anchor: 'sizes',
-    examples: [
-      {
-        title: 'codeExamples.html',
-        code: `<nui-calendar size="xs"></nui-calendar>
-<nui-calendar size="sm"></nui-calendar>
-<nui-calendar size="md"></nui-calendar>
-<nui-calendar size="lg"></nui-calendar>
-<nui-calendar size="xl"></nui-calendar>`,
-        language: 'html',
-      },
-    ],
-  },
-  {
-    id: 'widths',
-    title: 'components.calendar.widths.title',
-    description: 'components.calendar.widths.description',
-    note: {
-      type: 'info',
-      icon: 'ri-information-line',
-      content: 'components.calendar.widths.note',
-    },
-    anchor: 'widths',
-    examples: [
-      {
-        title: 'Compact (ancho fijo)',
-        code: `<nui-calendar width="compact"></nui-calendar>`,
-        language: 'html',
-      },
-      {
-        title: 'Full (100% con Container Queries)',
-        code: `<div style="max-width: 800px;">
-  <nui-calendar width="full"></nui-calendar>
-</div>`,
-        language: 'html',
-      },
-    ],
-  },
-  {
     id: 'week-selection',
     title: 'components.calendar.week-selection.title',
     description: 'components.calendar.week-selection.description',

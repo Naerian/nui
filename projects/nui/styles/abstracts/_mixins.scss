@@ -212,27 +212,3 @@
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
 }
-
-/// =======================================
-/// CALENDAR MIXINS
-/// =======================================
-
-/// Generates calendar size styles efficiently
-/// Reduces massive code repetition by ~85%
-/// @group Calendar
-/// @access public
-/// @since 1.0.0
-/// @param {String} $size - Calendar size (xs, s, sm, md, lg, xl)
-/// @example scss
-///   @include calendar-size(md);
-@mixin calendar-size($size) {
-  // Generate CSS custom properties for this size
-  --nui-calendar-width: #{map.get(calendar-vars.$calendar-widths, $size)};
-  --nui-calendar-padding: #{map.get(calendar-vars.$calendar-paddings, $size)};
-  --nui-calendar-gap: #{map.get(calendar-vars.$calendar-gaps, $size)};
-  --nui-calendar-day-size: #{map.get(calendar-vars.$calendar-day-sizes, $size)};
-  --nui-calendar-day-font-size: #{map.get(calendar-vars.$calendar-day-fonts, $size)};
-  --nui-calendar-title-font-size: #{map.get(calendar-vars.$calendar-title-fonts, $size)};
-  --nui-calendar-weekday-font-size: #{map.get(calendar-vars.$calendar-weekday-fonts, $size)};
-  --nui-calendar-weekday-height: #{map.get(calendar-vars.$calendar-weekday-heights, $size)};
-}
