@@ -6,11 +6,21 @@ export enum CalendarType {
   RANGE = 'range',
   MONTH = 'month',
   YEAR = 'year',
-  MULTIPLE = 'multiple',
 }
 
 // Alias para retrocompatibilidad
 export type SelectionType = CalendarType | `${CalendarType}`;
+
+/**
+ * Modo de selección del calendario.
+ * Define si el usuario puede seleccionar uno o múltiples elementos.
+ */
+export enum CalendarSelection {
+  SINGLE = 'single',
+  MULTIPLE = 'multiple',
+}
+
+export type CalendarSelectionMode = CalendarSelection | `${CalendarSelection}`;
 
 // Cantidad de años visibles en el bloque de años
 export const COUNT_BLOCK_YEARS = 20;
@@ -165,15 +175,23 @@ export interface WeekRange {
  * Cada tipo tiene su estructura específica con toda la información relevante.
  *
  * IMPORTANTE:
- * - `dates` contiene solo fechas VÁLIDAS (excluye deshabilitadas y fuera de rango)
- * - Todas las fechas están en formato `Date` nativo de JavaScript
+ * - Soporta selección simple (date/month/year) y múltiple (dates/months/years)
+ * - La propiedad singular (date/month/year) existe solo en selección simple
+ * - La propiedad plural (dates/months/years) contiene solo valores VÁLIDOS (excluye deshabilitados)
  * - `type` usa CalendarType enum para type-safety completo
  */
 export type CalendarValue =
   | {
       type: CalendarType.DAY;
-      date: Date; // Fecha seleccionada
+      date: Date; // Fecha seleccionada (selección simple)
+      dates?: never; // No existe en selección simple
       time?: TimeValue; // Hora opcional
+    }
+  | {
+      type: CalendarType.DAY;
+      dates: Date[]; // Array de fechas seleccionadas (selección múltiple)
+      date?: never; // No existe en selección múltiple
+      time?: TimeValue; // Hora opcional aplicada a todas las fechas
     }
   | {
       type: CalendarType.WEEK;
@@ -190,16 +208,26 @@ export type CalendarValue =
   | {
       type: CalendarType.MONTH;
       date: Date; // Primer día del mes seleccionado (ej: 2024-01-01 para enero 2024)
-      month: { month: number; year: number }; // Mes (0-11) y año seleccionado
+      month: { month: number; year: number }; // Mes (0-11) y año seleccionado (selección simple)
+      months?: never; // No existe en selección simple
+    }
+  | {
+      type: CalendarType.MONTH;
+      dates: Date[]; // Primeros días de cada mes seleccionado
+      months: Array<{ month: number; year: number }>; // Array de meses seleccionados (selección múltiple)
+      month?: never; // No existe en selección múltiple
     }
   | {
       type: CalendarType.YEAR;
       date: Date; // Primer día del año seleccionado (ej: 2024-01-01)
-      year: number; // Año seleccionado
+      year: number; // Año seleccionado (selección simple)
+      years?: never; // No existe en selección simple
     }
   | {
-      type: CalendarType.MULTIPLE;
-      dates: Date[]; // Array de fechas seleccionadas (no consecutivas)
+      type: CalendarType.YEAR;
+      dates: Date[]; // Primeros días de cada año seleccionado
+      years: number[]; // Array de años seleccionados (selección múltiple)
+      year?: never; // No existe en selección múltiple
     };
 
 export interface DateRangePreset {

@@ -36,6 +36,8 @@ import {
   CalendarGlobalConfig,
   DateStatusFn,
   IsDateEnabledFn,
+  CalendarSelection,
+  CalendarSelectionMode,
 } from './models/calendar.model';
 import { CalendarService } from './services/calendar.service';
 import { CalendarKeyboardNavigationService } from './services/calendar-keyboard-navigation.service';
@@ -86,6 +88,15 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   // ============================================================================
 
   type = input<CalendarType | string>(CalendarType.DAY);
+
+  /**
+   * Modo de selección: single (uno) o multiple (varios).
+   * - type="day" + selection="multiple" ? Seleccionar múltiples días
+   * - type="month" + selection="multiple" ? Seleccionar múltiples meses
+   * - type="year" + selection="multiple" ? Seleccionar múltiples años
+   * - type="week" o "range" ? selection se ignora (siempre son multi-fecha por naturaleza)
+   */
+  selection = input<CalendarSelectionMode>(CalendarSelection.SINGLE);
 
   // Input date usando la nueva API de signals de Angular 17+
   // - Para DAY: single date
@@ -178,17 +189,26 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   viewMode = signal<ViewMode>(ViewMode.DAY);
   currentDate = signal<Date>(new Date());
   previousViewDate = signal<Date | null>(null); // Para cancelar con Escape
+  
+  // Selección simple (selection='single')
   selectedDate = signal<Date | null>(null);
+  selectedMonth = signal<{ month: number; year: number } | null>(null); // Mes y año seleccionado (para type='month')
+  selectedYear = signal<number | null>(null); // Año seleccionado independiente
+  
+  // Selección múltiple (selection='multiple')
+  selectedDates = signal<Date[]>([]); // Array de fechas seleccionadas (para type='day' + selection='multiple')
+  selectedMonths = signal<Array<{ month: number; year: number }>>([]); // Array de meses seleccionados
+  selectedYears = signal<number[]>([]); // Array de años seleccionados
+  
+  // Selección de rango y semana (siempre múltiple por naturaleza)
   selectedRange = signal<{ start: Date | null; end: Date | null }>({
     start: null,
     end: null,
   });
   selectedWeek = signal<{ start: Date; end: Date } | null>(null);
+  
   hoveredDate = signal<Date | null>(null);
   focusedDayIndex = signal<number>(-1);
-  selectedYear = signal<number | null>(null); // A?o seleccionado independiente
-  selectedMonth = signal<{ month: number; year: number } | null>(null); // Mes y a?o seleccionado (para type='month')
-  selectedMultipleDates = signal<Date[]>([]); // Array de fechas seleccionadas (para type='multiple')
   presetsVisible = signal<boolean>(false); // Control de visibilidad de presets
   timePickerVisible = signal<boolean>(false); // Control de visibilidad del time picker
   showingEndTime = signal<boolean>(false); // Toggle entre inicio/fin en modo 'both'
@@ -347,7 +367,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         hoveredDate: this.hoveredDate(),
         dateStatusFn: this.dateStatusFn(),
         isDateEnabledFn: this.isDateEnabledFn(),
-        selectedMultipleDates: this.selectedMultipleDates(),
+        selectedMultipleDates: this.selection() === CalendarSelection.MULTIPLE ? this.selectedDates() : undefined,
       }
     );
   });
@@ -417,13 +437,40 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   // Verificar si un mes está seleccionado
   isMonthSelected = (monthIndex: number): boolean => {
     if (this.type() === CalendarType.MONTH) {
-      // En modo MONTH, verificar si hay un mes seleccionado
-      const selected = this.selectedMonth();
-      if (!selected) return false;
-      return selected.month === monthIndex && selected.year === this.displayedYear();
+      // En modo MONTH, verificar según si es single o multiple
+      if (this.selection() === CalendarSelection.MULTIPLE) {
+        // Selección múltiple: buscar en el array
+        const selectedMonths = this.selectedMonths();
+        const currentYear = this.displayedYear();
+        return selectedMonths.some(m => m.month === monthIndex && m.year === currentYear);
+      } else {
+        // Selección simple: verificar el signal
+        const selected = this.selectedMonth();
+        if (!selected) return false;
+        return selected.month === monthIndex && selected.year === this.displayedYear();
+      }
     } else {
       // En modo navegación, marcar el mes actual mostrado
       return monthIndex === this.displayedMonthIndex();
+    }
+  };
+
+  // Verificar si un año está seleccionado
+  isYearSelected = (year: number): boolean => {
+    if (this.type() === CalendarType.YEAR) {
+      // En modo YEAR, verificar según si es single o multiple
+      if (this.selection() === CalendarSelection.MULTIPLE) {
+        // Selección múltiple: buscar en el array
+        const selectedYears = this.selectedYears();
+        return selectedYears.includes(year);
+      } else {
+        // Selección simple: verificar el signal
+        const selected = this.selectedYear();
+        return selected === year;
+      }
+    } else {
+      // En modo navegación, marcar el año actual mostrado
+      return year === this.selectedYear();
     }
   };
 
@@ -656,19 +703,15 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     // ACEPTA M?LTIPLES FORMATOS:
     // 1. CalendarValue (nuevo formato estructurado)
     // 2. Date (para DAY)
-    // 3. Date[] (para WEEK/RANGE/MULTIPLE)
+    // 3. Date[] (para WEEK/RANGE o DAY multiple)
     // 4. { start: Date, end: Date } (para WEEK/RANGE)
-    // 5. { month: number, year: number } (para MONTH)
-    // 6. number (para YEAR)
+    // 5. { month: number, year: number } (para MONTH) o array para MONTH multiple
+    // 6. number (para YEAR) o array para YEAR multiple
     // ------------------------------------------------------------------------------
 
     if (!value) {
-      // Si el valor es null/undefined, limpiar la selecci?n
-      this.selectedDate.set(null);
-      this.selectedWeek.set(null);
-      this.selectedRange.set({ start: null, end: null });
-      this.selectedMonth.set(null);
-      this.selectedMultipleDates.set([]);
+      // Si el valor es null/undefined, limpiar todas las selecciones
+      this.resetSelectionStates();
       this.selectedTime.set(null);
       this.selectedStartTime.set(null);
       this.selectedEndTime.set(null);
@@ -728,8 +771,19 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         this.viewMode.set(ViewMode.MONTH);
       }
     } else if (this.type() === CalendarType.YEAR) {
-      // Aceptar number (year) o Date
-      if (typeof value === 'number') {
+      // Aceptar number (year), Date, o array para multiple
+      if (Array.isArray(value)) {
+        // Array de years (number[]) o Date[]
+        const years = value.map(v => 
+          typeof v === 'number' ? v : v.getFullYear()
+        );
+        this.selectedYears.set(years);
+        if (years.length > 0) {
+          const yearDate = new Date(years[0], 0, 1);
+          this.currentDate.set(yearDate);
+        }
+        this.viewMode.set(ViewMode.YEAR);
+      } else if (typeof value === 'number') {
         this.selectedYear.set(value);
         const yearDate = new Date(value, 0, 1);
         this.currentDate.set(yearDate);
@@ -740,13 +794,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         this.currentDate.set(value);
         this.viewMode.set(ViewMode.YEAR);
       }
-    } else if (this.type() === CalendarType.MULTIPLE) {
-      // Aceptar Date[] (array de fechas)
-      if (Array.isArray(value)) {
-        this.selectedMultipleDates.set(value);
-        if (value.length > 0) {
-          this.currentDate.set(value[0]);
-        }
+    } else if (this.type() === CalendarType.DAY && Array.isArray(value)) {
+      // DAY con array: modo multiple
+      this.selectedDates.set(value);
+      if (value.length > 0) {
+        this.currentDate.set(value[0]);
       }
     }
   }
@@ -757,8 +809,18 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   private handleCalendarValueInput(value: CalendarValue): void {
     switch (value.type) {
       case CalendarType.DAY:
-        this.selectedDate.set(value.date);
-        this.currentDate.set(value.date);
+        // DAY: Single o Multiple
+        if ('dates' in value && value.dates) {
+          // Multiple days
+          this.selectedDates.set(value.dates);
+          if (value.dates.length > 0) {
+            this.currentDate.set(value.dates[0]);
+          }
+        } else if ('date' in value && value.date) {
+          // Single day
+          this.selectedDate.set(value.date);
+          this.currentDate.set(value.date);
+        }
         if (value.time) {
           this.selectedTime.set(value.time);
           this.selectedStartTime.set(value.time);
@@ -784,24 +846,39 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         break;
 
       case CalendarType.MONTH:
-        this.selectedMonth.set(value.month);
-        const monthDate = new Date(value.month.year, value.month.month, 1);
-        this.currentDate.set(monthDate);
+        // MONTH: Single o Multiple
+        if ('months' in value && value.months) {
+          // Multiple months
+          this.selectedMonths.set(value.months);
+          if (value.months.length > 0) {
+            const monthDate = new Date(value.months[0].year, value.months[0].month, 1);
+            this.currentDate.set(monthDate);
+          }
+        } else if ('month' in value && value.month) {
+          // Single month
+          this.selectedMonth.set(value.month);
+          const monthDate = new Date(value.month.year, value.month.month, 1);
+          this.currentDate.set(monthDate);
+        }
         this.viewMode.set(ViewMode.MONTH);
         break;
 
       case CalendarType.YEAR:
-        this.selectedYear.set(value.year);
-        const yearDate = new Date(value.year, 0, 1);
-        this.currentDate.set(yearDate);
-        this.viewMode.set(ViewMode.YEAR);
-        break;
-
-      case CalendarType.MULTIPLE:
-        this.selectedMultipleDates.set(value.dates);
-        if (value.dates.length > 0) {
-          this.currentDate.set(value.dates[0]);
+        // YEAR: Single o Multiple
+        if ('years' in value && value.years) {
+          // Multiple years
+          this.selectedYears.set(value.years);
+          if (value.years.length > 0) {
+            const yearDate = new Date(value.years[0], 0, 1);
+            this.currentDate.set(yearDate);
+          }
+        } else if ('year' in value && typeof value.year === 'number') {
+          // Single year
+          this.selectedYear.set(value.year);
+          const yearDate = new Date(value.year, 0, 1);
+          this.currentDate.set(yearDate);
         }
+        this.viewMode.set(ViewMode.YEAR);
         break;
     }
   }
@@ -871,11 +948,19 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
    * Resetea los estados de selecci?n del calendario
    */
   private resetSelectionStates(): void {
+    // Selección simple
     this.selectedDate.set(null);
+    this.selectedMonth.set(null);
+    this.selectedYear.set(null);
+    
+    // Selección múltiple
+    this.selectedDates.set([]);
+    this.selectedMonths.set([]);
+    this.selectedYears.set([]);
+    
+    // Rango y semana
     this.selectedWeek.set(null);
     this.selectedRange.set({ start: null, end: null });
-    this.selectedMonth.set(null);
-    this.selectedMultipleDates.set([]);
   }
 
   /**
@@ -912,12 +997,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   }
 
   /**
-   * Inicializa el calendario seg?n su tipo (DAY, WEEK, RANGE, MONTH, YEAR, MULTIPLE)
+   * Inicializa el calendario seg?n su tipo (DAY, WEEK, RANGE, MONTH, YEAR)
    */
   private initializeByType(dates: Date[], firstDate: Date, lastDate: Date): void {
     switch (this.type()) {
       case CalendarType.DAY:
-        this.initializeDayMode(firstDate);
+        this.initializeDayMode(dates, firstDate);
         break;
 
       case CalendarType.WEEK:
@@ -929,15 +1014,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         break;
 
       case CalendarType.MONTH:
-        this.initializeMonthMode(firstDate);
+        this.initializeMonthMode(dates, firstDate);
         break;
 
       case CalendarType.YEAR:
-        this.initializeYearMode(firstDate);
-        break;
-
-      case CalendarType.MULTIPLE:
-        this.initializeMultipleMode(dates);
+        this.initializeYearMode(dates, firstDate);
         break;
     }
   }
@@ -945,8 +1026,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   /**
    * Inicializa el calendario en modo DAY
    */
-  private initializeDayMode(date: Date): void {
-    this.selectedDate.set(date);
+  private initializeDayMode(dates: Date[], firstDate: Date): void {
+    if (this.selection() === CalendarSelection.MULTIPLE) {
+      // Selección múltiple: guardar todas las fechas
+      this.selectedDates.set(dates);
+    } else {
+      // Selección simple: solo la primera fecha
+      this.selectedDate.set(firstDate);
+    }
   }
 
   /**
@@ -977,27 +1064,34 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   /**
    * Inicializa el calendario en modo MONTH
    */
-  private initializeMonthMode(date: Date): void {
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    this.selectedMonth.set({ month, year });
+  private initializeMonthMode(dates: Date[], firstDate: Date): void {
+    if (this.selection() === CalendarSelection.MULTIPLE) {
+      // Selección múltiple: convertir todas las fechas a meses
+      const months = dates.map(d => ({ month: d.getMonth(), year: d.getFullYear() }));
+      this.selectedMonths.set(months);
+    } else {
+      // Selección simple: solo el primer mes
+      const month = firstDate.getMonth();
+      const year = firstDate.getFullYear();
+      this.selectedMonth.set({ month, year });
+    }
     this.viewMode.set(ViewMode.MONTH); // Iniciar en vista de meses
   }
 
   /**
    * Inicializa el calendario en modo YEAR
    */
-  private initializeYearMode(date: Date): void {
-    const year = date.getFullYear();
-    this.selectedYear.set(year);
+  private initializeYearMode(dates: Date[], firstDate: Date): void {
+    if (this.selection() === CalendarSelection.MULTIPLE) {
+      // Selección múltiple: convertir todas las fechas a años
+      const years = dates.map(d => d.getFullYear());
+      this.selectedYears.set(years);
+    } else {
+      // Selección simple: solo el primer año
+      const year = firstDate.getFullYear();
+      this.selectedYear.set(year);
+    }
     this.viewMode.set(ViewMode.YEAR); // Iniciar en vista de a?os
-  }
-
-  /**
-   * Inicializa el calendario en modo MULTIPLE
-   */
-  private initializeMultipleMode(dates: Date[]): void {
-    this.selectedMultipleDates.set(dates);
   }
 
   // ?? HELPER: Parsear fecha de string o Date
@@ -1178,13 +1272,25 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     const endTime = this.selectedEndTime();
 
     if (currentType === CalendarType.DAY) {
-      const selectedDate = this.selectedDate();
-      if (selectedDate) {
-        calendarValue = {
-          type: CalendarType.DAY,
-          date: selectedDate,
-          time: startTime || undefined,
-        };
+      // DAY: Verificar si es selecci?n m?ltiple
+      if (this.selection() === CalendarSelection.MULTIPLE) {
+        const selectedDates = this.selectedDates();
+        if (selectedDates.length > 0) {
+          calendarValue = {
+            type: CalendarType.DAY,
+            dates: selectedDates,
+            time: startTime || undefined,
+          } as CalendarValue;
+        }
+      } else {
+        const selectedDate = this.selectedDate();
+        if (selectedDate) {
+          calendarValue = {
+            type: CalendarType.DAY,
+            date: selectedDate,
+            time: startTime || undefined,
+          } as CalendarValue;
+        }
       }
     } else if (currentType === CalendarType.WEEK) {
       const selectedWeek = this.selectedWeek();
@@ -1222,32 +1328,54 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         };
       }
     } else if (currentType === CalendarType.MONTH) {
-      const selectedMonth = this.selectedMonth();
-      if (selectedMonth) {
-        const monthDate = new Date(selectedMonth.year, selectedMonth.month, 1);
-        calendarValue = {
-          type: CalendarType.MONTH,
-          date: monthDate,
-          month: selectedMonth,
-        };
+      // MONTH: Verificar si es selecci?n m?ltiple
+      if (this.selection() === CalendarSelection.MULTIPLE) {
+        const selectedMonths = this.selectedMonths();
+        if (selectedMonths.length > 0) {
+          // Convertir cada { month, year } a Date
+          const dates = selectedMonths.map(
+            (m) => new Date(m.year, m.month, 1)
+          );
+          calendarValue = {
+            type: CalendarType.MONTH,
+            dates,
+            months: selectedMonths,
+          } as CalendarValue;
+        }
+      } else {
+        const selectedMonth = this.selectedMonth();
+        if (selectedMonth) {
+          const monthDate = new Date(selectedMonth.year, selectedMonth.month, 1);
+          calendarValue = {
+            type: CalendarType.MONTH,
+            date: monthDate,
+            month: selectedMonth,
+          } as CalendarValue;
+        }
       }
     } else if (currentType === CalendarType.YEAR) {
-      const selectedYear = this.selectedYear();
-      if (selectedYear !== null) {
-        const yearDate = new Date(selectedYear, 0, 1);
-        calendarValue = {
-          type: CalendarType.YEAR,
-          date: yearDate,
-          year: selectedYear,
-        };
-      }
-    } else if (currentType === CalendarType.MULTIPLE) {
-      const selectedMultipleDates = this.selectedMultipleDates();
-      if (selectedMultipleDates.length > 0) {
-        calendarValue = {
-          type: CalendarType.MULTIPLE,
-          dates: selectedMultipleDates,
-        };
+      // YEAR: Verificar si es selecci?n m?ltiple
+      if (this.selection() === CalendarSelection.MULTIPLE) {
+        const selectedYears = this.selectedYears();
+        if (selectedYears.length > 0) {
+          // Convertir cada year a Date
+          const dates = selectedYears.map((y) => new Date(y, 0, 1));
+          calendarValue = {
+            type: CalendarType.YEAR,
+            dates,
+            years: selectedYears,
+          } as CalendarValue;
+        }
+      } else {
+        const selectedYear = this.selectedYear();
+        if (selectedYear !== null) {
+          const yearDate = new Date(selectedYear, 0, 1);
+          calendarValue = {
+            type: CalendarType.YEAR,
+            date: yearDate,
+            year: selectedYear,
+          } as CalendarValue;
+        }
       }
     }
 
@@ -1289,11 +1417,17 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     }
 
     if (this.type() === CalendarType.DAY) {
-      this.selectedDate.set(day.date);
-      const calendarValue = this.buildCalendarValue(CalendarType.DAY, {
-        date: day.date,
-      });
-      this.emitSelection(calendarValue);
+      if (this.selection() === CalendarSelection.MULTIPLE) {
+        // Selección múltiple: toggle fecha
+        this.handleMultipleDaySelection(day.date);
+      } else {
+        // Selección simple
+        this.selectedDate.set(day.date);
+        const calendarValue = this.buildCalendarValue(CalendarType.DAY, {
+          date: day.date,
+        });
+        this.emitSelection(calendarValue);
+      }
     } else if (this.type() === CalendarType.WEEK) {
       const week = this.calendarService.getWeekRange(day.date, this.firstDayOfWeek());
       this.selectedWeek.set(week);
@@ -1303,16 +1437,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       this.emitSelection(calendarValue);
     } else if (this.type() === CalendarType.RANGE) {
       this.handleRangeSelection(day.date);
-    } else if (this.type() === CalendarType.MULTIPLE) {
-      this.handleMultipleSelection(day.date);
     }
 
     // Si el calendario está abierto, verificar si se debe cerrar automáticamente
     this.checkAutoClose();
   }
 
-  private handleMultipleSelection(date: Date): void {
-    const currentDates = this.selectedMultipleDates();
+  private handleMultipleDaySelection(date: Date): void {
+    const currentDates = this.selectedDates();
     const dateIndex = currentDates.findIndex(d =>
       this.calendarService.isSameDay(d, date)
     );
@@ -1326,10 +1458,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       newDates = [...currentDates, date];
     }
 
-    this.selectedMultipleDates.set(newDates);
+    this.selectedDates.set(newDates);
 
     // Emitir el valor actualizado
-    const calendarValue = this.buildCalendarValue(CalendarType.MULTIPLE, {
+    const calendarValue = this.buildCalendarValue(CalendarType.DAY, {
       dates: newDates,
     });
     this.emitSelection(calendarValue);
@@ -1447,19 +1579,45 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
     const newDate = this.calendarService.setYear(this.currentDate(), year);
     this.currentDate.set(newDate);
-    this.selectedYear.set(year); // Actualizar a?o seleccionado
 
     // Si el tipo es YEAR, emitir el valor y cerrar
     if (this.type() === CalendarType.YEAR) {
-      const yearDate = new Date(year, 0, 1);
-      const calendarValue = this.buildCalendarValue(CalendarType.YEAR, {
-        year,
-        date: yearDate,
-      });
-      this.emitSelection(calendarValue);
-      this.checkAutoClose();
+      if (this.selection() === CalendarSelection.MULTIPLE) {
+        // Selección múltiple: toggle año
+        const currentYears = this.selectedYears();
+        const yearIndex = currentYears.indexOf(year);
+        
+        let newYears: number[];
+        if (yearIndex >= 0) {
+          // Deseleccionar
+          newYears = currentYears.filter((_, i) => i !== yearIndex);
+        } else {
+          // Seleccionar
+          newYears = [...currentYears, year];
+        }
+        
+        this.selectedYears.set(newYears);
+        const yearDates = newYears.map(y => new Date(y, 0, 1));
+        const calendarValue = this.buildCalendarValue(CalendarType.YEAR, {
+          years: newYears,
+          dates: yearDates,
+        });
+        this.emitSelection(calendarValue);
+        this.checkAutoClose();
+      } else {
+        // Selección simple
+        this.selectedYear.set(year);
+        const yearDate = new Date(year, 0, 1);
+        const calendarValue = this.buildCalendarValue(CalendarType.YEAR, {
+          year,
+          date: yearDate,
+        });
+        this.emitSelection(calendarValue);
+        this.checkAutoClose();
+      }
     } else {
       // Navegación normal: cambiar a vista de mes
+      this.selectedYear.set(year);
       this.switchToMonthView();
     }
   }
@@ -1476,14 +1634,43 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     // Si el tipo es MONTH, emitir el valor y cerrar
     if (this.type() === CalendarType.MONTH) {
       const year = this.displayedYear();
-      const monthDate = new Date(year, monthIndex, 1);
-      this.selectedMonth.set({ month: monthIndex, year });
-      const calendarValue = this.buildCalendarValue(CalendarType.MONTH, {
-        month: { month: monthIndex, year },
-        date: monthDate,
-      });
-      this.emitSelection(calendarValue);
-      this.checkAutoClose();
+      
+      if (this.selection() === CalendarSelection.MULTIPLE) {
+        // Selección múltiple: toggle mes
+        const currentMonths = this.selectedMonths();
+        const monthValue = { month: monthIndex, year };
+        const monthIndex_ = currentMonths.findIndex(
+          m => m.month === monthIndex && m.year === year
+        );
+        
+        let newMonths: Array<{ month: number; year: number }>;
+        if (monthIndex_ >= 0) {
+          // Deseleccionar
+          newMonths = currentMonths.filter((_, i) => i !== monthIndex_);
+        } else {
+          // Seleccionar
+          newMonths = [...currentMonths, monthValue];
+        }
+        
+        this.selectedMonths.set(newMonths);
+        const monthDates = newMonths.map(m => new Date(m.year, m.month, 1));
+        const calendarValue = this.buildCalendarValue(CalendarType.MONTH, {
+          months: newMonths,
+          dates: monthDates,
+        });
+        this.emitSelection(calendarValue);
+        this.checkAutoClose();
+      } else {
+        // Selección simple
+        const monthDate = new Date(year, monthIndex, 1);
+        this.selectedMonth.set({ month: monthIndex, year });
+        const calendarValue = this.buildCalendarValue(CalendarType.MONTH, {
+          month: { month: monthIndex, year },
+          date: monthDate,
+        });
+        this.emitSelection(calendarValue);
+        this.checkAutoClose();
+      }
     } else {
       // Navegación normal: cambiar a vista de día
       this.switchToDayView();
@@ -1866,16 +2053,41 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
     switch (calendarValue.type) {
       case CalendarType.DAY:
-        formValue = calendarValue.date;
+        // DAY: single o multiple
+        if ('dates' in calendarValue && calendarValue.dates) {
+          formValue = calendarValue.dates;
+        } else if ('date' in calendarValue && calendarValue.date) {
+          formValue = calendarValue.date;
+        }
         break;
+
       case CalendarType.WEEK:
         formValue = calendarValue.dates;
         break;
+
       case CalendarType.RANGE:
         if (calendarValue.range.start && calendarValue.range.end) {
           formValue = [calendarValue.range.start, calendarValue.range.end];
         } else if (calendarValue.range.start) {
           formValue = [calendarValue.range.start];
+        }
+        break;
+
+      case CalendarType.MONTH:
+        // MONTH: single o multiple
+        if ('dates' in calendarValue && calendarValue.dates) {
+          formValue = calendarValue.dates;
+        } else if ('date' in calendarValue && calendarValue.date) {
+          formValue = calendarValue.date;
+        }
+        break;
+
+      case CalendarType.YEAR:
+        // YEAR: single o multiple
+        if ('dates' in calendarValue && calendarValue.dates) {
+          formValue = calendarValue.dates;
+        } else if ('date' in calendarValue && calendarValue.date) {
+          formValue = calendarValue.date;
         }
         break;
     }
@@ -1891,23 +2103,38 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     type: CalendarType,
     data: {
       date?: Date;
+      dates?: Date[];
       week?: WeekRange;
       range?: { start: Date; end: Date };
       month?: { month: number; year: number };
+      months?: Array<{ month: number; year: number }>;
       year?: number;
-      dates?: Date[];
+      years?: number[];
     }
   ): CalendarValue {
     const startTime = this.selectedStartTime() || this.selectedTime();
     const endTime = this.selectedEndTime();
 
+    // DAY - Selección simple
     if (type === CalendarType.DAY && data.date) {
       return {
         type: CalendarType.DAY,
         date: data.date,
         time: startTime || undefined,
-      };
-    } else if (type === CalendarType.WEEK && data.week) {
+      } as CalendarValue;
+    }
+    
+    // DAY - Selección múltiple
+    if (type === CalendarType.DAY && data.dates) {
+      return {
+        type: CalendarType.DAY,
+        dates: data.dates,
+        time: startTime || undefined,
+      } as CalendarValue;
+    }
+    
+    // WEEK
+    if (type === CalendarType.WEEK && data.week) {
       const weekDates = this.calendarService.dateAdapter.getDateRange(
         data.week.start,
         data.week.end
@@ -1923,7 +2150,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
             ? { start: startTime || endTime!, end: endTime || startTime! }
             : undefined,
       };
-    } else if (type === CalendarType.RANGE && data.range) {
+    }
+    
+    // RANGE
+    if (type === CalendarType.RANGE && data.range) {
       const rangeDates = this.calendarService.dateAdapter.getDateRange(
         data.range.start,
         data.range.end
@@ -1939,23 +2169,42 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
             ? { start: startTime || endTime!, end: endTime || startTime! }
             : undefined,
       };
-    } else if (type === CalendarType.MONTH && data.month && data.date) {
+    }
+    
+    // MONTH - Selección simple
+    if (type === CalendarType.MONTH && data.month && data.date) {
       return {
         type: CalendarType.MONTH,
         date: data.date,
         month: data.month,
-      };
-    } else if (type === CalendarType.YEAR && data.year !== undefined && data.date) {
+      } as CalendarValue;
+    }
+    
+    // MONTH - Selección múltiple
+    if (type === CalendarType.MONTH && data.months && data.dates) {
+      return {
+        type: CalendarType.MONTH,
+        dates: data.dates,
+        months: data.months,
+      } as CalendarValue;
+    }
+    
+    // YEAR - Selección simple
+    if (type === CalendarType.YEAR && data.year !== undefined && data.date) {
       return {
         type: CalendarType.YEAR,
         date: data.date,
         year: data.year,
-      };
-    } else if (type === CalendarType.MULTIPLE && data.dates) {
+      } as CalendarValue;
+    }
+    
+    // YEAR - Selección múltiple
+    if (type === CalendarType.YEAR && data.years && data.dates) {
       return {
-        type: CalendarType.MULTIPLE,
+        type: CalendarType.YEAR,
         dates: data.dates,
-      };
+        years: data.years,
+      } as CalendarValue;
     }
 
     throw new Error(`Invalid calendar type or missing data for type: ${type}`);
@@ -1971,9 +2220,15 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       return;
     }
 
+    // 2. Si está en modo de selección múltiple, nunca cerrar automáticamente
+    //    (el usuario quiere seguir seleccionando)
+    if (this.selection() === CalendarSelection.MULTIPLE) {
+      return;
+    }
+
     const currentType = this.type();
 
-    // 2. Evaluamos según el tipo de selección
+    // 3. Evaluamos según el tipo de selección (solo en modo single)
     let shouldClose = false;
 
     switch (currentType) {
@@ -2002,15 +2257,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         // En modo año, se cierra al seleccionar el año
         shouldClose = !!this.selectedYear();
         break;
-
-      case CalendarType.MULTIPLE:
-        // En modo múltiple, nunca se cierra automáticamente
-        // (el usuario puede seguir seleccionando fechas)
-        shouldClose = false;
-        break;
     }
 
-    // 3. Si se cumple la condición, emitimos el output semántico
+    // 4. Si se cumple la condición, emitimos el output semántico
     if (shouldClose) {
       // Este es el evento que el Popover/Modal escuchará para cerrarse
       this.selectFinished.emit();

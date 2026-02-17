@@ -62,6 +62,7 @@ export class CalendarPageComponent extends BaseComponentPage {
         'api-calendar-value',
         'api-calendar-type',
         'api-calendar-width',
+        'api-calendar-selection',
         'api-view-mode',
         'api-preset',
         'api-smart-types',
@@ -98,6 +99,8 @@ export class CalendarPageComponent extends BaseComponentPage {
   // Multiple selection
   selectedMultipleDates = signal<Date[]>([]);
   selectedMultipleDisplay = signal<string>('');
+  selectedMultipleMonths = signal<Array<{ month: number; year: number }>>([]);
+  selectedMultipleMonthsDisplay = signal<string>('');
 
   // Reactive Forms
   dateControl = new FormControl<Date | null>(null);
@@ -113,7 +116,7 @@ export class CalendarPageComponent extends BaseComponentPage {
   onDateChange(value: CalendarValue): void {
     console.log('Date changed:', value);
     
-    if (value.type === CalendarType.DAY) {
+    if (value.type === CalendarType.DAY && 'date' in value && value.date) {
       this.selectedDate.set(value.date);
       this.selectedDateString.set(value.date.toLocaleDateString());
     }
@@ -156,7 +159,7 @@ export class CalendarPageComponent extends BaseComponentPage {
   onMonthSelected(value: CalendarValue): void {
     console.log('Month selected:', value);
     
-    if (value.type === CalendarType.MONTH) {
+    if (value.type === CalendarType.MONTH && 'month' in value && value.month) {
       const monthNames = [
         'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
         'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
@@ -169,7 +172,7 @@ export class CalendarPageComponent extends BaseComponentPage {
   onYearSelected(value: CalendarValue): void {
     console.log('Year selected:', value);
     
-    if (value.type === CalendarType.YEAR) {
+    if (value.type === CalendarType.YEAR && 'year' in value && typeof value.year === 'number') {
       this.selectedYear.set(value.year.toString());
     }
   }
@@ -177,7 +180,7 @@ export class CalendarPageComponent extends BaseComponentPage {
   onMultipleSelection(value: CalendarValue): void {
     console.log('Multiple selection:', value);
     
-    if (value.type === CalendarType.MULTIPLE) {
+    if (value.type === CalendarType.DAY && 'dates' in value && value.dates) {
       this.selectedMultipleDates.set(value.dates);
       if (value.dates.length > 0) {
         const datesStr = value.dates
@@ -186,6 +189,26 @@ export class CalendarPageComponent extends BaseComponentPage {
         this.selectedMultipleDisplay.set(datesStr);
       } else {
         this.selectedMultipleDisplay.set('');
+      }
+    }
+  }
+
+  onMultipleMonthsSelected(value: CalendarValue): void {
+    console.log('Multiple months selected:', value);
+    
+    if (value.type === CalendarType.MONTH && 'months' in value && value.months) {
+      this.selectedMultipleMonths.set(value.months);
+      if (value.months.length > 0) {
+        const monthNames = [
+          'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+          'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+        ];
+        const monthsStr = value.months
+          .map(m => `${monthNames[m.month]} ${m.year}`)
+          .join(', ');
+        this.selectedMultipleMonthsDisplay.set(monthsStr);
+      } else {
+        this.selectedMultipleMonthsDisplay.set('');
       }
     }
   }

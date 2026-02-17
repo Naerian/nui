@@ -22,7 +22,13 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
           '<code>type</code>',
           'CalendarType',
           '<code class="neutral">DAY</code>',
-          "Tipo de selección: 'day' (fecha única), 'week' (semana), 'range' (rango), 'month' (mes/año), 'year' (año), 'multiple' (fechas múltiples)",
+          "Tipo de selección: 'day' (fecha única), 'week' (semana), 'range' (rango), 'month' (mes/año), 'year' (año)",
+        ],
+        [
+          '<code>selection</code>',
+          'CalendarSelectionMode',
+          '<code class="neutral">single</code>',
+          "Modo de selección: 'single' (uno) o 'multiple' (varios). Aplica a DAY, MONTH y YEAR. Los usuarios pueden hacer clic en múltiples elementos para agregarlos/quitarlos (toggle)",
         ],
         [
           '<code>date</code>',
@@ -174,12 +180,11 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
     table: {
       headers: ['common.tables.value', 'common.tables.description'],
       rows: [
-        ['<code>DAY</code>', 'Selección de una fecha única'],
+        ['<code>DAY</code>', 'Selección de una fecha única. Con selection="multiple" permite seleccionar múltiples fechas'],
         ['<code>WEEK</code>', 'Selección de una semana completa (7 días consecutivos)'],
         ['<code>RANGE</code>', 'Selección de un rango de fechas (inicio y fin)'],
-        ['<code>MONTH</code>', 'Selección de mes y año (solo vista de meses)'],
-        ['<code>YEAR</code>', 'Selección de año (solo vista de años)'],
-        ['<code>MULTIPLE</code>', 'Selección múltiple de fechas no consecutivas'],
+        ['<code>MONTH</code>', 'Selección de mes y año. Con selection="multiple" permite seleccionar múltiples meses'],
+        ['<code>YEAR</code>', 'Selección de año. Con selection="multiple" permite seleccionar múltiples años'],
       ],
     },
   },
@@ -196,6 +201,19 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
           '<code>full</code>',
           'Ancho 100% del contenedor. Usa Container Queries para adaptar tipografía y espaciado.',
         ],
+      ],
+    },
+  },
+  {
+    id: 'api-calendar-selection',
+    title: 'components.calendar.api.calendar-selection.title',
+    description: 'components.calendar.api.calendar-selection.description',
+    anchor: 'api-calendar-selection',
+    table: {
+      headers: ['common.tables.value', 'common.tables.description'],
+      rows: [
+        ['<code>single</code>', 'Permite seleccionar un único elemento (día, mes o año según el tipo)'],
+        ['<code>multiple</code>', 'Permite seleccionar múltiples elementos con toggle al hacer clic. El calendario nunca se cierra automáticamente en este modo'],
       ],
     },
   },

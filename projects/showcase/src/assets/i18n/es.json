@@ -794,8 +794,8 @@
       },
       "multiple-selection": {
         "title": "Selección múltiple",
-        "description": "Permite seleccionar múltiples fechas no consecutivas con un simple clic. Ideal para seleccionar días laborables, festivos o eventos distribuidos.",
-        "note": "Activa el modo de selección múltiple con <code>type='multiple'</code>. Los usuarios pueden hacer clic en múltiples fechas para agregarlas/quitarlas de la selección. Este modo <strong>nunca cierra automáticamente</strong> el calendario, incluso si <code>closeOnSelect</code> está en <code>true</code>, para permitir la selección continua de fechas. El output devuelve un objeto <code>{ type: 'multiple', dates: Date[] }</code> con el array de fechas seleccionadas."
+        "description": "Permite seleccionar múltiples fechas, meses o años con un simple clic. Ideal para seleccionar días laborables, festivos o eventos distribuidos.",
+        "note": "Activa el modo de selección múltiple con <code>selection=\"multiple\"</code> combinado con <code>type='day'</code>, <code>type='month'</code> o <code>type='year'</code>. Los usuarios pueden hacer clic en múltiples elementos para agregarlos/quitarlos de la selección (toggle). Este modo <strong>nunca cierra automáticamente</strong> el calendario, incluso si <code>closeOnSelect</code> está en <code>true</code>, para permitir la selección continua. El output devuelve un objeto con <code>dates</code>, <code>months</code> o <code>years</code> según el tipo."
       },
       "api": {
         "inputs": {
@@ -818,6 +818,10 @@
         "calendar-width": {
           "title": "CalendarWidth",
           "description": "Enum que define la estrategia de ancho del calendario"
+        },
+        "calendar-selection": {
+          "title": "CalendarSelection",
+          "description": "Enum que define el modo de selección del calendario: simple o múltiple"
         },
         "view-mode": {
           "title": "ViewMode",

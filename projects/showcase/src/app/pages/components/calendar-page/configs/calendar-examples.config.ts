@@ -421,7 +421,7 @@ private getAvailability(date: Date): number {
       {
         title: 'codeExamples.typescript',
         code: `onMonthSelected(value: CalendarValue): void {
-  if (value.type === 'month') {
+  if (value.type === 'month' && 'month' in value && value.month) {
     console.log('Mes:', value.month.month); // 0-11
     console.log('Año:', value.month.year);  // YYYY
     console.log('Fecha:', value.date);      // 1er día del mes
@@ -429,7 +429,7 @@ private getAvailability(date: Date): number {
 }
 
 onYearSelected(value: CalendarValue): void {
-  if (value.type === 'year') {
+  if (value.type === 'year' && 'year' in value && typeof value.year === 'number') {
     console.log('Año:', value.year);        // YYYY
     console.log('Fecha:', value.date);      // 1 de enero del año
   }
@@ -450,21 +450,40 @@ onYearSelected(value: CalendarValue): void {
     },
     examples: [
       {
-        title: 'codeExamples.html',
+        title: 'Multiple days',
         code: `<nui-calendar
-  type="multiple"
+  type="day"
+  selection="multiple"
   (valueChange)="onMultipleSelection($event)"
+></nui-calendar>`,
+        language: 'html',
+      },
+      {
+        title: 'Multiple months',
+        code: `<nui-calendar
+  type="month"
+  selection="multiple"
+  (valueChange)="onMultipleMonthsSelected($event)"
 ></nui-calendar>`,
         language: 'html',
       },
       {
         title: 'codeExamples.typescript',
         code: `onMultipleSelection(value: CalendarValue): void {
-  if (value.type === 'multiple') {
+  if (value.type === 'day' && 'dates' in value) {
     console.log('Fechas seleccionadas:', value.dates);
     console.log('Total:', value.dates.length);
   }
-}`,
+}
+  
+onMultipleMonthsSelected(value: CalendarValue): void {
+  if (value.type === 'month' && 'months' in value && value.months) {
+    console.log('Meses seleccionados:', value.months);
+    console.log('Total:', value.months.length);
+    // value.months = [{ month: 0, year: 2026 }, { month: 3, year: 2026 }, ...]
+  }
+}
+`,
         language: 'typescript',
       },
     ],
