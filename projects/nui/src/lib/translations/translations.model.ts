@@ -89,6 +89,16 @@ export interface NUITranslations {
       presets: string;
       time: string;
     };
+    aria: {
+      today: string;
+      selected: string;
+      inRange: string;
+      disabled: string;
+      statusSuccess: string;
+      statusWarning: string;
+      statusDanger: string;
+      statusInfo: string;
+    };
   };
 
   // Textos del componente timepicker

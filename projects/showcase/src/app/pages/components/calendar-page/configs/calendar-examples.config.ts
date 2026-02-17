@@ -227,6 +227,59 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
     ],
   },
   {
+    id: 'dynamic-disabled-dates',
+    title: 'components.calendar.dynamic-disabled-dates.title',
+    description: 'components.calendar.dynamic-disabled-dates.description',
+    anchor: 'dynamic-disabled-dates',
+    note: {
+      type: 'info',
+      icon: 'ri-shield-check-line',
+      content: 'components.calendar.dynamic-disabled-dates.note',
+    },
+    examples: [
+      {
+        title: 'codeExamples.html',
+        code: `<nui-calendar
+  type="day"
+  [isDateEnabledFn]="isDateEnabledFn"
+></nui-calendar>`,
+        language: 'html',
+      },
+      {
+        title: 'codeExamples.typescript',
+        code: `import { IsDateEnabledFn } from 'nui';
+
+// Función de validación dinámica
+isDateEnabledFn: IsDateEnabledFn = (date) => {
+  // 1. No permitir fines de semana
+  const dayOfWeek = date.getDay();
+  if (dayOfWeek === 0 || dayOfWeek === 6) return false;
+  
+  // 2. No permitir festivos nacionales
+  if (this.isNationalHoliday(date)) return false;
+  
+  return true;
+};
+
+private isNationalHoliday(date: Date): boolean {
+  const holidays = [
+    '2026-01-01', // Año Nuevo
+    '2026-02-16', // Carnaval
+    '2026-02-17', // Carnaval
+    '2026-04-03', // Viernes Santo
+    '2026-05-01', // Día del Trabajo
+    '2026-12-25', // Navidad
+  ];
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return holidays.includes(\`\${year}-\${month}-\${day}\`);
+}`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
     id: 'min-max-dates',
     title: 'components.calendar.min-max-dates.title',
     description: 'components.calendar.min-max-dates.description',
@@ -271,6 +324,59 @@ maxDate = new Date(2024, 11, 31);`,
         title: 'codeExamples.typescript',
         code: `dateControl = new FormControl<Date | null>(null);
 rangeControl = new FormControl<Date[] | null>(null);`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
+    id: 'date-status',
+    title: 'components.calendar.date-status.title',
+    description: 'components.calendar.date-status.description',
+    anchor: 'date-status',
+    note: {
+      type: 'success',
+      icon: 'ri-palette-line',
+      content: 'components.calendar.date-status.note',
+    },
+    examples: [
+      {
+        title: 'codeExamples.html',
+        code: `<nui-calendar
+  type="day"
+  [dateStatusFn]="dateStatusFn"
+></nui-calendar>`,
+        language: 'html',
+      },
+      {
+        title: 'codeExamples.typescript',
+        code: `import { DateStatusFn } from 'nui';
+
+// Función de status (estados visuales de negocio)
+dateStatusFn: DateStatusFn = (date) => {
+  const availability = this.getAvailability(date);
+  
+  if (availability === 0) return 'danger';    // Sin habitaciones (rojo)
+  if (availability < 5) return 'warning';     // Pocas habitaciones (ámbar)
+  if (availability >= 10) return 'success';   // Buena disponibilidad (verde)
+  return 'info';                              // Disponibilidad normal (azul)
+};
+
+private availabilityMap = new Map<string, number>([
+  ['2026-02-18', 2],   // warning
+  ['2026-02-19', 0],   // danger
+  ['2026-02-20', 12],  // success
+  ['2026-02-21', 15],  // success
+  ['2026-02-22', 3],   // warning
+  ['2026-02-23', 8],   // info
+]);
+
+private getAvailability(date: Date): number {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const key = \`\${year}-\${month}-\${day}\`;
+  return this.availabilityMap.get(key) ?? 5;
+}`,
         language: 'typescript',
       },
     ],

@@ -51,6 +51,14 @@ export function createDefaultCalendarConfig(): CalendarGlobalConfig {
     firstDayOfWeek: 1,
 
     /**
+     * Cerrar automáticamente el calendario tras seleccionar una fecha.
+     * Esto es especialmente útil para calendarios de selección única (DAY/WEEK).
+     * Para RANGE, normalmente se deja false para permitir seleccionar inicio y fin sin cerrar.
+     * Aquí se establece el default global, pero cada Calendar puede sobrescribirlo.
+     */
+    closeOnSelect: true,
+
+    /**
      * Formato por defecto para serializar fechas.
      * Compatible con date-fns (usado internamente por el adapter).
      * Se usa para:

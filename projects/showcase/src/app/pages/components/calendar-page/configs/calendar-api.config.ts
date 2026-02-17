@@ -120,6 +120,18 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
           '<code class="neutral">null</code>',
           'Hora de fin inicial',
         ],
+        [
+          '<code>dateStatusFn</code>',
+          'DateStatusFn',
+          '<code class="neutral">undefined</code>',
+          "Función que asigna estados visuales a fechas ('success', 'warning', 'danger', 'info')",
+        ],
+        [
+          '<code>isDateEnabledFn</code>',
+          'IsDateEnabledFn',
+          '<code class="neutral">undefined</code>',
+          'Función que determina dinámicamente si una fecha está habilitada (prevalece sobre disabledDates)',
+        ],
       ],
     },
   },

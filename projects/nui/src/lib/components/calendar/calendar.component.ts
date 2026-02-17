@@ -34,6 +34,8 @@ import {
   CalendarWidthEnum,
   CalendarTimePickerModeEnum,
   CalendarGlobalConfig,
+  DateStatusFn,
+  IsDateEnabledFn,
 } from './models/calendar.model';
 import { CalendarService } from './services/calendar.service';
 import { CalendarKeyboardNavigationService } from './services/calendar-keyboard-navigation.service';
@@ -92,6 +94,35 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   date = input<string | Date | Date[] | null>();
 
   disabledDates = input<(string | Date)[]>(); // Fechas deshabilitadas
+
+  // ========================================================================
+  // PASO 1: Smart Service - Inputs para lógica de negocio avanzada
+  // ========================================================================
+
+  /**
+   * Función que determina el estado de negocio de una fecha.
+   * Permite asignar estados visuales dinámicamente: 'success', 'warning', 'danger', 'info'
+   * @example
+   * dateStatusFn = (date) => {
+   *   const availability = getAvailability(date);
+   *   if (availability === 0) return 'danger';
+   *   if (availability < 5) return 'warning';
+   *   return 'success';
+   * }
+   */
+  dateStatusFn = input<DateStatusFn>();
+
+  /**
+   * Predicado que determina dinámicamente si una fecha está habilitada.
+   * Prevalece sobre disabledDates para permitir lógica de validación compleja.
+   * @example
+   * isDateEnabledFn = (date) => {
+   *   if (date.getDay() === 0 || date.getDay() === 6) return false; // No fines de semana
+   *   return hasAvailability(date);
+   * }
+   */
+  isDateEnabledFn = input<IsDateEnabledFn>();
+
   size = input<NUISize>('md'); // Tamaño del calendario
   width = input<CalendarWidth>(CalendarWidthEnum.COMPACT); // Ancho del calendario: compact (fijo) o full (100%)
   blockDisabledRanges = input<boolean>(false); // Bloquear rangos de fechas deshabilitadas
@@ -121,6 +152,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
    * - Para RANGE: { type: 'RANGE', dates: Date[], range: {...}, time?: {...} }
    */
   valueChange = output<CalendarValue>();
+
+  /**
+   * Evento que se emite cuando se completa la selección y que va vinculado al cierre del
+   * calendario (si se usa dentro de un datepicker o con autoClose) mediante `closeOnSelect`.
+   */
+  selectFinished = output<void>();
 
   // ============================================================================
   // VIEW CHILDREN (Signals API)
@@ -157,6 +194,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   selectedTime = signal<TimeValue | null>(null); // Hora seleccionada (para DAY y compatibilidad)
   selectedStartTime = signal<TimeValue | null>(null); // Hora de inicio (para WEEK/RANGE con 'start' o 'both')
   selectedEndTime = signal<TimeValue | null>(null); // Hora de fin (para RANGE con 'end' o 'both')
+  closeOnSelect = input<boolean>(false); // Control de cierre automático al seleccionar (útil para RANGE)
+
+  // Computed values para inputs con fallback a configuración global y luego a default literal
+  effectiveCloseOnSelect = computed(() => {
+    const inputValue = this.closeOnSelect();
+    // Si el input es undefined, usar el valor global, si este también es undefined, usar false
+    return inputValue ?? this.calendarConfig.closeOnSelect ?? false;
+  });
 
   // Computed values para time picker
   showStartTimePicker = computed(() => {
@@ -298,6 +343,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         selectedRange: this.selectedRange(),
         selectedWeek: this.selectedWeek(),
         hoveredDate: this.hoveredDate(),
+        dateStatusFn: this.dateStatusFn(),
+        isDateEnabledFn: this.isDateEnabledFn(),
       }
     );
   });
@@ -942,6 +989,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       range,
     });
     this.emitSelection(calendarValue);
+
+    // Si el calendario está abierto, verificar si se debe cerrar automáticamente
+    this.checkAutoClose();
+
     this.activeTab.set('calendar');
   }
 
@@ -1101,6 +1152,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     } else if (this.type() === CalendarType.RANGE) {
       this.handleRangeSelection(day.date);
     }
+
+    // Si el calendario está abierto, verificar si se debe cerrar automáticamente
+    this.checkAutoClose();
   }
 
   private handleRangeSelection(date: Date): void {
@@ -1675,5 +1729,45 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     }
 
     throw new Error(`Invalid calendar type or missing data for type: ${type}`);
+  }
+
+  /**
+   * Verifica si se debe emitir el evento de cierre automático
+   * basado en la configuración y el estado actual de selección.
+   */
+  private checkAutoClose(): void {
+    // 1. Si la funcionalidad está desactivada, no hacemos nada
+    if (!this.closeOnSelect()) {
+      return;
+    }
+
+    const currentType = this.type();
+
+    // 2. Evaluamos según el tipo de selección
+    let shouldClose = false;
+
+    switch (currentType) {
+      case CalendarType.DAY:
+        // En modo día, cualquier selección válida dispara el cierre
+        shouldClose = !!this.selectedDate();
+        break;
+
+      case CalendarType.RANGE:
+        // En modo rango, solo cerramos cuando el intervalo está completo
+        const range = this.selectedRange();
+        shouldClose = !!(range.start && range.end);
+        break;
+
+      case CalendarType.WEEK:
+        // En modo semana, se cierra al seleccionar la semana
+        shouldClose = !!this.selectedWeek();
+        break;
+    }
+
+    // 3. Si se cumple la condición, emitimos el output semántico
+    if (shouldClose) {
+      // Este es el evento que el Popover/Modal escuchará para cerrarse
+      this.selectFinished.emit();
+    }
   }
 }

@@ -83,7 +83,7 @@
               @case ('widths') {
                 <div class="example-preview flex-column gap-4 align-items-center">
                   <div class="example-item" style="max-width: 600px">
-                    <p class="mb-2"><strong>Compact (ancho fijo)</strong></p>
+                    <p class="mb-2"><strong>Compact (fixed width)</strong></p>
                     <nui-calendar width="compact"></nui-calendar>
                   </div>
 
@@ -111,7 +111,7 @@
 
                   @if (selectedWeekRange()) {
                     <div class="value-display">
-                      Semana seleccionada:
+                      Selected week range:
                       <strong>{{ selectedWeekRange() }}</strong>
                     </div>
                   }
@@ -127,7 +127,7 @@
 
                   @if (selectedRangeDisplay()) {
                     <div class="value-display">
-                      Rango seleccionado:
+                      Selected range:
                       <strong>{{ selectedRangeDisplay() }}</strong>
                     </div>
                   }
@@ -144,7 +144,7 @@
 
                   @if (selectedRangeDisplay()) {
                     <div class="value-display">
-                      Rango seleccionado:
+                      Selected range:
                       <strong>{{ selectedRangeDisplay() }}</strong>
                     </div>
                   }
@@ -154,7 +154,7 @@
               @case ('time-picker') {
                 <div class="example-preview flex-row gap-4">
                   <div class="example-item">
-                    <h4 class="mb-3">Fecha con hora de inicio</h4>
+                    <h4 class="mb-3">Date with start time</h4>
                     <div style="max-width: 400px">
                       <nui-calendar
                         [type]="CalendarType.DAY"
@@ -165,11 +165,11 @@
                     @if (selectedDateWithTime(); as value) {
                       <div class="value-display mt-3">
                         @if (value.type === CalendarType.DAY) {
-                          <strong>Fecha:</strong>
+                          <strong>Date:</strong>
                           {{ value.date.toLocaleDateString() }}
                           <br />
                           @if (value.time) {
-                            <strong>Hora:</strong>
+                            <strong>Time:</strong>
                             {{ value.time.hour }}:{{ value.time.minute }}
                           }
                         }
@@ -220,8 +220,8 @@
                   ></nui-calendar>
 
                   <div class="value-display mt-3">
-                    <strong>Fechas deshabilitadas:</strong>
-                    15, 20 y 25 de enero
+                    <strong>Disabled dates:</strong>
+                    15, 20 and 25 of January
                   </div>
                 </div>
               }
@@ -236,7 +236,7 @@
                   ></nui-calendar>
 
                   <div class="value-display">
-                    <strong>Rango permitido:</strong>
+                    <strong>Allowed range:</strong>
                     {{ minDate.toLocaleDateString() }} -
                     {{ maxDate.toLocaleDateString() }}
                   </div>
@@ -246,7 +246,7 @@
               @case ('reactive-forms') {
                 <div class="example-preview flex-row gap-4">
                   <div class="example-item">
-                    <h4 class="mb-3">Selección de fecha con FormControl</h4>
+                    <h4 class="mb-3">Date selection with FormControl</h4>
                     <div style="max-width: 400px">
                       <nui-calendar
                         [type]="CalendarType.DAY"
@@ -254,17 +254,17 @@
                       ></nui-calendar>
                     </div>
                     <div class="value-display mt-3">
-                      <strong>Valor del FormControl:</strong>
+                      <strong>FormControl value:</strong>
                       @if (dateControl.value) {
                         {{ dateControl.value.toLocaleDateString() }}
                       } @else {
-                        Sin selección
+                        No selection
                       }
                     </div>
                   </div>
 
                   <div class="example-item">
-                    <h4 class="mb-3">Selección de rango con FormControl</h4>
+                    <h4 class="mb-3">Range selection with FormControl</h4>
                     <div style="max-width: 400px">
                       <nui-calendar
                         [type]="CalendarType.RANGE"
@@ -272,22 +272,64 @@
                       ></nui-calendar>
                     </div>
                     <div class="value-display mt-3">
-                      <strong>Valor del FormControl:</strong>
+                      <strong>FormControl value:</strong>
                       @if (rangeControl.value && rangeControl.value.length >= 2) {
                         {{ rangeControl.value[0].toLocaleDateString() }} -
                         {{ rangeControl.value[1].toLocaleDateString() }}
                       } @else if (rangeControl.value && rangeControl.value.length === 1) {
-                        {{ rangeControl.value[0].toLocaleDateString() }} (seleccione fin de rango)
+                        {{ rangeControl.value[0].toLocaleDateString() }} (select end of range)
                       } @else {
-                        Sin selección
+                        No selection
                       }
                     </div>
                   </div>
                 </div>
               }
+
+              @case ('dynamic-disabled-dates') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-calendar
+                    type="day"
+                    [isDateEnabledFn]="isDateEnabledFn"
+                  ></nui-calendar>
+                  <div class="mt-3 small text-muted" style="max-width: 450px">
+                    <p class="mb-1"><strong>Applied rules:</strong></p>
+                    <ul class="mb-2">
+                      <li>Weekends disabled (Saturdays and Sundays)</li>
+                      <li>National holidays disabled</li>
+                    </ul>
+                    <p class="mb-1"><strong>Example holidays (2026):</strong></p>
+                    <ul class="mb-0" style="font-size: 0.85em;">
+                      <li>1 Jan - New Year's Day</li>
+                      <li>25 Dec - Christmas</li>
+                    </ul>
+                  </div>
+                </div>
+              }
+
+              @case ('date-status') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-calendar
+                    type="day"
+                    [dateStatusFn]="dateStatusFn"
+                  ></nui-calendar>
+                  <div class="mt-3 small" style="max-width: 450px">
+                    <p class="mb-2"><strong>Status legend:</strong></p>
+                    <div class="d-flex gap-3 flex-wrap">
+                      <span><i class="ri-subtract-line text-success me-1"></i> ≥10 rooms (success)</span>
+                      <span><i class="ri-subtract-line text-info me-1"></i> 5-9 rooms (info)</span>
+                      <span><i class="ri-subtract-line text-warning me-1"></i> 1-4 rooms (warning)</span>
+                      <span><i class="ri-subtract-line text-danger me-1"></i> 0 rooms (danger)</span>
+                    </div>
+                    <p class="mb-0 mt-2 text-muted" style="font-size: 0.85em;">
+                      Availability observation: 18 Feb (2 rooms), 19 Feb (0 rooms), 20-21 Feb (12-15 rooms), 22 Feb (3 rooms), 23 Feb (8 rooms)
+                    </p>
+                  </div>
+                </div>
+              }
             }
 
-            <!-- Tabla de datos (para API o Theming) -->
+            <!-- Data table (for API or Theming) -->
             @if (section.table) {
               <div class="api-table">
                 <table>
@@ -311,7 +353,7 @@
               </div>
             }
 
-            <!-- Code blocks asociados a esta sección -->
+            <!-- Code blocks associated with this section -->
             @if (section.examples && section.examples.length > 0) {
               <app-code-block [examples]="section.examples"></app-code-block>
             }

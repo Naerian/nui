@@ -766,7 +766,7 @@ export class ThemeService {
     const dayHoverText = isDark ? grays[50] : grays[900];
     
     // Selected states
-    const daySelectedBg = colors.primary;
+    const daySelectedBg = this.withAlpha(colors.primary, 0.2);
     const daySelectedText = this.getContrastColor(colors.primary);
     const daySelectedHoverBg = isDark 
       ? this.shade(colors.primary, 15) 
@@ -775,6 +775,12 @@ export class ThemeService {
     // In-range states (para rangos de fechas)
     const dayRangeBg = this.withAlpha(colors.primary, 0.1);
     const dayRangeText = isDark ? grays[50] : grays[900];
+    
+    // PASO 1: Smart Service - Status indicators (usando colores semánticos)
+    const statusSuccess = colors.success;
+    const statusInfo = colors.info;
+    const statusWarning = colors.warning;
+    const statusDanger = colors.danger;
     
     return `
       /* Calendar Day States */
@@ -793,6 +799,12 @@ export class ThemeService {
       
       --nui-calendar-day-range-bg: ${dayRangeBg};
       --nui-calendar-day-range-text: ${dayRangeText};
+      
+      /* PASO 1: Smart Service - Status Indicators (subtle top border) */
+      --nui-calendar-day-status-success: ${statusSuccess};
+      --nui-calendar-day-status-info: ${statusInfo};
+      --nui-calendar-day-status-warning: ${statusWarning};
+      --nui-calendar-day-status-danger: ${statusDanger};
     `;
   }
 

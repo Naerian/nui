@@ -256,7 +256,7 @@
       &::after {
         content: '';
         position: absolute;
-        bottom: 3px;
+        bottom: 5px;
         left: 50%;
         transform: translateX(-50%);
         width: 4px;
@@ -292,6 +292,28 @@
       outline: var(--nui-focus-ring-width) solid var(--nui-focus-ring-color);
       outline-offset: var(--nui-focus-ring-offset);
       z-index: 1;
+    }
+
+    // ==========================================================================
+    // PASO 1: Smart Service - Status States (Indicadores sutiles con línea superior)
+    // ==========================================================================
+
+    &--status::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 25%;
+      height: 2px;
+      border-radius: 1px;
+    }
+
+    $statuses: success, info, warning, danger;
+    @each $status in $statuses {
+      &--status-#{$status}::before {
+        background: var(--nui-calendar-day-status-#{$status});
+      }
     }
   }
 

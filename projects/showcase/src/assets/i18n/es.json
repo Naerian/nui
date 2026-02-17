@@ -777,6 +777,16 @@
         "description": "Integración completa con formularios reactivos de Angular. Implementa ControlValueAccessor para sincronización automática.",
         "note": "Usa <code>formControl</code> o <code>formControlName</code> para integrar con formularios de Angular. El componente maneja la sincronización, validación y estado automáticamente. Soporta todos los tipos (DAY, WEEK, RANGE) en formularios."
       },
+      "dynamic-disabled-dates": {
+        "title": "Fechas deshabilitadas dinámicamente",
+        "description": "Deshabilita fechas según lógica de negocio compleja usando una función personalizada. Prevalece sobre el array estático <code>disabledDates</code>.",
+        "note": "Usa <code>isDateEnabledFn</code> para definir reglas dinámicas de habilitación. La función recibe una fecha y debe retornar <code>true</code> si está habilitada o <code>false</code> si debe deshabilitarse. Ideal para calendarios corporativos, sistemas de reservas o aplicaciones con lógica compleja de disponibilidad."
+      },
+      "date-status": {
+        "title": "Estados visuales (dateStatusFn)",
+        "description": "Asigna estados visuales a fechas para indicar información de negocio: disponibilidad, prioridad, eventos, etc.",
+        "note": "Usa <code>dateStatusFn</code> para asignar uno de cuatro estados a cada fecha: <code>'success'</code> (verde), <code>'info'</code> (azul), <code>'warning'</code> (ámbar) o <code>'danger'</code> (rojo). Los estados se muestran como una línea de color sutil en la parte superior del día. Retorna <code>null</code> para días sin estado especial."
+      },
       "api": {
         "inputs": {
           "title": "Inputs",

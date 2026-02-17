@@ -1,4 +1,4 @@
-import { TimePeriod, TimeValue } from "../../time-picker";
+import { TimePeriod, TimeValue } from '../../time-picker';
 
 export enum CalendarType {
   DAY = 'day',
@@ -18,17 +18,132 @@ export enum ViewMode {
   DAY = 'day',
 }
 
+// ============================================================================
+// SMART SERVICE - BUSINESS LOGIC TYPES (PASO 1)
+// ============================================================================
+
+/**
+ * Estado de negocio para un día específico del calendario.
+ * Permite marcar visualmente días con estados significativos para la aplicación.
+ *
+ * @example
+ * - 'success': Días con reservas confirmadas, pagos completados
+ * - 'warning': Días con reservas pendientes, validaciones requeridas
+ * - 'danger': Días con errores, reservas canceladas, límite excedido
+ * - 'info': Días con información adicional, eventos programados
+ */
+export type DateStatus = 'success' | 'warning' | 'danger' | 'info';
+
+/**
+ * Función que determina el estado de negocio de una fecha.
+ * Permite lógica dinámica basada en datos de la aplicación.
+ *
+ * @param date - Fecha a evaluar
+ * @returns El estado de negocio o null si no aplica
+ *
+ * @example
+ * const dateStatusFn: DateStatusFn = (date) => {
+ *   const reservations = getReservationsForDate(date);
+ *   if (reservations.some(r => r.status === 'confirmed')) return 'success';
+ *   if (reservations.some(r => r.status === 'pending')) return 'warning';
+ *   if (reservations.some(r => r.status === 'cancelled')) return 'danger';
+ *   return null;
+ * };
+ */
+export type DateStatusFn = (date: Date) => DateStatus | null;
+
+/**
+ * Predicado que determina si una fecha está habilitada.
+ * Permite lógica de validación dinámica que prevalece sobre disabledDates.
+ *
+ * @param date - Fecha a validar
+ * @returns true si la fecha está habilitada, false si debe deshabilitarse
+ *
+ * @example
+ * const isDateEnabledFn: IsDateEnabledFn = (date) => {
+ *   // Deshabilitar festivos
+ *   if (isHoliday(date)) return false;
+ *   // Deshabilitar días sin disponibilidad
+ *   return hasAvailability(date);
+ * };
+ */
+export type IsDateEnabledFn = (date: Date) => boolean;
+
+/**
+ * Modelo de datos para cada día del calendario (ViewModel).
+ * Contiene toda la información necesaria para renderizar y gestionar un día.
+ *
+ * BACKWARD COMPATIBILITY:
+ * - Nuevas propiedades son opcionales o tienen valores por defecto
+ * - Propiedades existentes mantienen su comportamiento
+ */
 export interface CalendarDay {
+  // ========================================================================
+  // DATOS BASE
+  // ========================================================================
+
+  /** Objeto Date nativo de JavaScript */
   date: Date;
+
+  /** Número del día del mes (1-31) */
   dayNumber: number;
+
+  // ========================================================================
+  // ESTADOS DE POSICIÓN Y CONTEXTO
+  // ========================================================================
+
+  /** Pertenece al mes actualmente mostrado (vs días del mes anterior/siguiente) */
   isCurrentMonth: boolean;
+
+  /** Es el día actual (hoy) */
   isToday: boolean;
-  isSelected: boolean;
-  isInRange: boolean;
-  isDisabled: boolean;
-  isHovered: boolean;
+
+  /** Es fin de semana (sábado o domingo) - Útil para destacar visualmente */
+  isWeekend: boolean;
+
+  /** Es el primer día de la semana (según firstDayOfWeek configurado) */
   isWeekStart?: boolean;
+
+  /** Es el último día de la semana */
   isWeekEnd?: boolean;
+
+  // ========================================================================
+  // ESTADOS DE SELECCIÓN
+  // ========================================================================
+
+  /** Es una fecha seleccionada (endpoint en DAY/RANGE, o punto de la semana en WEEK) */
+  isSelected: boolean;
+
+  /** Está dentro del rango seleccionado (WEEK o RANGE) o preview en hover */
+  isInRange: boolean;
+
+  /** No puede ser seleccionado (por disabledDates, minDate, maxDate, o isDateEnabledFn) */
+  isDisabled: boolean;
+
+  /** Está siendo actualmente señalado con el mouse (útil para previsualización) */
+  isHovered: boolean;
+
+  // ========================================================================
+  // BUSINESS LOGIC (PASO 1 - Smart Service)
+  // ========================================================================
+
+  /**
+   * Estado de negocio asignado dinámicamente mediante dateStatusFn.
+   * Permite marcar visualmente días con significado para la aplicación.
+   * @since PASO 1
+   */
+  status?: DateStatus;
+
+  // ========================================================================
+  // ACCESIBILIDAD
+  // ========================================================================
+
+  /**
+   * Etiqueta descriptiva para lectores de pantalla (ARIA).
+   * Generada automáticamente con formato: "Lunes 15 de enero de 2024, Hoy, Seleccionado, Deshabilitado"
+   * @since PASO 1
+   */
+  ariaLabel: string;
 }
 
 export interface WeekRange {
@@ -102,20 +217,29 @@ export enum CalendarWidthEnum {
 
 /**
  * Configuración global para el componente Calendar a nivel de aplicación.
- * Permite definir comportamientos, formatos, y estilos por defecto que se 
+ * Permite definir comportamientos, formatos, y estilos por defecto que se
  * aplicarán a todos los calendarios de la app, evitando discrepancias.
  */
 export interface CalendarGlobalConfig {
   // ========================================================================
   // 1. LOCALIZACIÓN Y FORMATEO
   // ========================================================================
-  
+
   /**
    * Primer día de la semana (0=Domingo, 1=Lunes, etc.)
    * Por defecto: 1 (Lunes) - Estándar internacional ISO 8601
    * @example 1 // Semana empieza en lunes
    */
   firstDayOfWeek?: FirstDayOfWeek;
+
+  /**
+   * Cerrar automáticamente el calendario tras seleccionar una fecha.
+   * Esto es especialmente útil para calendarios de selección única (DAY/WEEK).
+   * Para RANGE, normalmente se deja false para permitir seleccionar inicio y fin sin cerrar.
+   * Aquí se establece el default global, pero cada Calendar puede sobrescribirlo.
+   * Por defecto: true (para tipos DAY y WEEK), false (para RANGE)
+   */
+  closeOnSelect?: boolean;
 
   /**
    * Formato de fecha por defecto para la comunicación con APIs y usuarios.
@@ -206,7 +330,7 @@ export interface CalendarGlobalConfig {
    * Se inyectan globalmente en todos los calendarios con CalendarType.RANGE.
    * Útil para períodos recurrentes como trimestres fiscales, semana actual, etc.
    * Por defecto: undefined (sin presets adicionales)
-   * 
+   *
    * @example
    * [
    *   {

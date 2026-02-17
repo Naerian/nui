@@ -113,6 +113,16 @@ export const NUI_DEFAULT_I18N: NUITranslations = {
       presets: 'Acc. Rápidos',
       time: 'Hora',
     },
+    aria: {
+      today: 'Hoy',
+      selected: 'Seleccionado',
+      inRange: 'En rango',
+      disabled: 'Deshabilitado',
+      statusSuccess: 'Éxito',
+      statusWarning: 'Advertencia',
+      statusDanger: 'Peligro',
+      statusInfo: 'Información',
+    },
   },
 
   // Textos del timepicker

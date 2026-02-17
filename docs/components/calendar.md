@@ -311,7 +311,9 @@ El componente resuelve valores en este orden de prioridad:
 | `minDate` | `Date \| string \| null` | `null` | ❌ | Fecha mínima seleccionable |
 | `maxDate` | `Date \| string \| null` | `null` | ❌ | Fecha máxima seleccionable |
 | `disabledDates` | `(Date \| string)[]` | `[]` | ❌ | Array de fechas deshabilitadas |
+| `isDateEnabledFn` | `IsDateEnabledFn` | `undefined` | ❌ | Función de validación dinámica (prevalece sobre `disabledDates`) |
 | `blockDisabledRanges` | `boolean` | `false` | ✅ | Bloquear selección de rangos con fechas deshabilitadas |
+| `dateStatusFn` | `DateStatusFn` | `undefined` | ❌ | Función para asignar estados visuales a fechas |
 | `showTodayButton` | `boolean` | `true` | ✅ | Mostrar botón "Hoy" |
 | `showPresets` | `boolean` | `false` | ❌ | Mostrar panel de presets (solo RANGE) |
 | `customPresets` | `DateRangePreset[]` | `[]` | ✅ | Presets personalizados de rangos |
@@ -352,6 +354,11 @@ this.form = this.fb.group({
 ```typescript
 // Tipo de selección
 type CalendarType = 'DAY' | 'WEEK' | 'RANGE';
+
+// Lógica de negocio
+type DateStatus = 'success' | 'warning' | 'danger' | 'info';
+type DateStatusFn = (date: Date) => DateStatus | null;
+type IsDateEnabledFn = (date: Date) => boolean;
 
 // Primera día de la semana
 type FirstDayOfWeek = 0 | 1;  // 0 = Domingo, 1 = Lunes
@@ -443,6 +450,11 @@ interface CalendarDay {
   isRangeEnd: boolean;              // Es el fin de rango
   isHovered: boolean;               // Es la fecha hover (al arrastrar)
   isRangeHovered: boolean;          // Está en rango hover
+  
+  // Lógica de negocio (nuevas propiedades)
+  isWeekend: boolean;               // Es sábado o domingo
+  status?: DateStatus;              // Estado visual de negocio
+  ariaLabel: string;                // Etiqueta para accesibilidad
 }
 ```
 
@@ -932,7 +944,227 @@ O configura globalmente:
 
 ---
 
-## 🎨 Temas y Personalización
+## � Lógica de Negocio Avanzada
+
+### Estados Visuales con `dateStatusFn`
+
+Asigna estados visuales a fechas para mostrar información de negocio: disponibilidad, prioridad, eventos, etc.
+
+#### Tipos
+
+```typescript
+// Estados disponibles
+type DateStatus = 'success' | 'warning' | 'danger' | 'info';
+
+// Función de status
+type DateStatusFn = (date: Date) => DateStatus | null;
+```
+
+#### Ejemplo: Sistema de Reservas Hoteleras
+
+```typescript
+import { Component, signal } from '@angular/core';
+import { DateStatusFn } from 'nui';
+
+@Component({
+  selector: 'app-hotel-booking',
+  template: `
+    <nui-calendar
+      type="day"
+      [dateStatusFn]="dateStatusFn"
+    ></nui-calendar>
+    
+    <div class="legend">
+      <span class="success">≥10 habitaciones</span>
+      <span class="info">5-9 habitaciones</span>
+      <span class="warning">1-4 habitaciones</span>
+      <span class="danger">Sin disponibilidad</span>
+    </div>
+  `
+})
+export class HotelBookingComponent {
+  // Mapa de disponibilidad (normalmente viene de una API)
+  private availabilityMap = new Map<string, number>([
+    ['2026-02-18', 2],   // warning
+    ['2026-02-19', 0],   // danger
+    ['2026-02-20', 12],  // success
+    ['2026-02-21', 15],  // success
+    ['2026-02-22', 3],   // warning
+    ['2026-02-23', 8],   // info
+  ]);
+
+  // Función de status
+  dateStatusFn: DateStatusFn = (date) => {
+    const availability = this.getAvailability(date);
+    
+    if (availability === 0) return 'danger';    // Sin habitaciones
+    if (availability < 5) return 'warning';     // Pocas habitaciones
+    if (availability >= 10) return 'success';   // Buena disponibilidad
+    return 'info';                              // Disponibilidad normal
+  };
+
+  private getAvailability(date: Date): number {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const key = `${year}-${month}-${day}`;
+    return this.availabilityMap.get(key) ?? 5;
+  }
+}
+```
+
+#### Estilos de Estados
+
+Los estados se muestran como una **línea de color sutil** en la parte superior de cada día:
+
+- **success** (verde): Ideal para indicar disponibilidad alta, confirmaciones, días positivos
+- **info** (azul): Para información neutral, eventos programados, disponibilidad normal
+- **warning** (ámbar): Para advertencias, disponibilidad limitada, fechas próximas a vencer
+- **danger** (rojo): Para errores, sin disponibilidad, días críticos
+
+Los colores se adaptan automáticamente al tema activo (light/dark) y usan las variables semánticas del sistema de temas NUI.
+
+---
+
+### Validación Dinámica con `isDateEnabledFn`
+
+Deshabilita fechas según lógica de negocio compleja. **Prevalece sobre el array estático `disabledDates`**.
+
+#### Tipo
+
+```typescript
+type IsDateEnabledFn = (date: Date) => boolean;
+```
+
+#### Ejemplo: Calendario Corporativo
+
+```typescript
+import { Component } from '@angular/core';
+import { IsDateEnabledFn } from 'nui';
+
+@Component({
+  selector: 'app-corporate-calendar',
+  template: `
+    <nui-calendar
+      type="day"
+      [isDateEnabledFn]="isDateEnabledFn"
+    ></nui-calendar>
+    
+    <div class="rules">
+      <p><strong>Reglas aplicadas:</strong></p>
+      <ul>
+        <li>Solo días laborables (lunes a viernes)</li>
+        <li>Sin festivos nacionales</li>
+      </ul>
+    </div>
+  `
+})
+export class CorporateCalendarComponent {
+  // Función de validación
+  isDateEnabledFn: IsDateEnabledFn = (date) => {
+    // 1. No permitir fines de semana
+    const dayOfWeek = date.getDay();
+    if (dayOfWeek === 0 || dayOfWeek === 6) return false;
+    
+    // 2. No permitir festivos nacionales
+    if (this.isNationalHoliday(date)) return false;
+    
+    return true;
+  };
+
+  private isNationalHoliday(date: Date): boolean {
+    const holidays = [
+      '2026-01-01', // Año Nuevo
+      '2026-02-16', // Carnaval
+      '2026-02-17', // Carnaval
+      '2026-04-03', // Viernes Santo
+      '2026-05-01', // Día del Trabajo
+      '2026-12-25', // Navidad
+    ];
+    
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return holidays.includes(`${year}-${month}-${day}`);
+  }
+}
+```
+
+#### Validación Compleja por Zona
+
+```typescript
+export class DeliverySchedulerComponent {
+  deliveryZone = signal<string>('ZONE_A');
+  
+  isDateEnabledFn: IsDateEnabledFn = (date) => {
+    const zone = this.deliveryZone();
+    const dayOfWeek = date.getDay();
+    
+    // Zonas con días específicos de entrega
+    if (zone === 'ZONE_A' && ![1, 3, 5].includes(dayOfWeek)) {
+      return false; // Solo L-M-V
+    }
+    
+    if (zone === 'ZONE_B' && ![2, 4].includes(dayOfWeek)) {
+      return false; // Solo M-J
+    }
+    
+    // Validar capacidad de almacén
+    const capacity = this.getWarehouseCapacity(date);
+    const scheduled = this.getScheduledDeliveries(date).length;
+    
+    return scheduled < capacity;
+  };
+  
+  private getWarehouseCapacity(date: Date): number {
+    // Simular capacidad de 10 entregas por día
+    return 10;
+  }
+  
+  private getScheduledDeliveries(date: Date): any[] {
+    // Simular entregas programadas
+    return [];
+  }
+}
+```
+
+#### Combinando Ambas Funciones
+
+Puedes usar `dateStatusFn` e `isDateEnabledFn` simultáneamente:
+
+```html
+<nui-calendar
+  type="range"
+  [dateStatusFn]="statusFn"
+  [isDateEnabledFn]="validationFn"
+  [minDate]="today"
+  [maxDate]="maxDate"
+></nui-calendar>
+```
+
+```typescript
+// Estado visual basado en eventos
+statusFn: DateStatusFn = (date) => {
+  const events = this.getEventsForDate(date);
+  
+  if (events.some(e => e.priority === 'high')) return 'danger';
+  if (events.some(e => e.priority === 'medium')) return 'warning';
+  if (events.some(e => e.type === 'meeting')) return 'info';
+  if (events.some(e => e.type === 'holiday')) return 'success';
+  
+  return null; // Sin estado especial
+};
+
+// Validación compleja
+validationFn: IsDateEnabledFn = (date) => {
+  // Tu lógica de validación
+  return true;
+};
+```
+
+---
+
+## �🎨 Temas y Personalización
 
 El Calendar utiliza **CSS Custom Properties** del sistema de temas NUI. Los estilos se adaptan automáticamente según el tema activo (light/dark) y el preset de color seleccionado.
 
