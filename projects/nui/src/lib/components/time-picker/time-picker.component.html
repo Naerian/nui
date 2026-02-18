@@ -71,7 +71,7 @@
                 role="option"
                 [attr.aria-selected]="selectedDuration()?.hours === hour"
               >
-                <span class="nui-time-picker__duration-value">{{ hour }}</span>
+                <span class="nui-time-picker__duration-value">{{ hour.toString().padStart(2, '0') }}</span>
                 <span class="nui-time-picker__duration-unit">h</span>
               </button>
             }
@@ -109,7 +109,7 @@
                 role="option"
                 [attr.aria-selected]="selectedDuration()?.minutes === minute"
               >
-                <span class="nui-time-picker__duration-value">{{ minute }}</span>
+                <span class="nui-time-picker__duration-value">{{ minute.toString().padStart(2, '0') }}</span>
                 <span class="nui-time-picker__duration-unit">min</span>
               </button>
             }
@@ -149,7 +149,7 @@
                   role="option"
                   [attr.aria-selected]="selectedDuration()?.seconds === second"
                 >
-                  <span class="nui-time-picker__duration-value">{{ second }}</span>
+                  <span class="nui-time-picker__duration-value">{{ second.toString().padStart(2, '0') }}</span>
                   <span class="nui-time-picker__duration-unit">s</span>
                 </button>
               }

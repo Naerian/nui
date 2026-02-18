@@ -677,7 +677,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     if (!this.availableMinutes().includes(minute)) return;
 
     const current = this.selectedTime();
-    const isFirstSelection = !current;
     const currentPeriod = this.selectedPeriod();
 
     // Crear tiempo base
