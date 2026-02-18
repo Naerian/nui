@@ -105,9 +105,9 @@
               }
 
               @case ('time-picker') {
-                <div class="example-preview flex-row gap-4">
+                <div class="example-preview flex-row gap-3">
                   <div class="example-item">
-                    <h6 class="mb-3">Date with start time</h6>
+                    <h6 class="mb-0">Date with start time</h6>
                     <div style="max-width: 400px">
                       <nui-calendar
                         [type]="CalendarType.DAY"
@@ -116,7 +116,7 @@
                       ></nui-calendar>
                     </div>
                     @if (selectedDateWithTime(); as value) {
-                      <div class="value-display mt-3">
+                      <div class="value-display">
                         @if (value.type === CalendarType.DAY && value.date) {
                           <strong>Date:</strong>
                           {{ value.date.toLocaleDateString() }}
@@ -133,7 +133,7 @@
                   </div>
 
                   <div class="example-item">
-                    <h6 class="mb-3">Range with start and end time</h6>
+                    <h6 class="mb-0">Range with start and end time</h6>
                     <div style="max-width: 400px">
                       <nui-calendar
                         [type]="CalendarType.RANGE"
@@ -142,7 +142,7 @@
                       ></nui-calendar>
                     </div>
                     @if (selectedRangeWithTime(); as value) {
-                      <div class="value-display mt-3">
+                      <div class="value-display">
                         @if (value.type === CalendarType.RANGE) {
                           <strong>From:</strong>
                           {{ value.range.start.toLocaleDateString() }}
@@ -176,7 +176,7 @@
                     (valueChange)="onDateChange($event)"
                   ></nui-calendar>
 
-                  <div class="value-display mt-3">
+                  <div class="value-display">
                     <strong>Disabled dates:</strong>
                     @for (date of disabledDates; track $index) {
                       {{ date.toLocaleDateString() }}
@@ -206,44 +206,43 @@
               }
 
               @case ('reactive-forms') {
-                <div class="example-preview flex-row gap-4">
+                <div class="example-preview flex-row gap-3">
                   <div class="example-item d-flex flex-column align-items-center gap-3">
-                    <h6 class="mb-3">Date selection with FormControl</h6>
-                    <div style="max-width: 400px">
-                      <nui-calendar
-                        [type]="CalendarType.DAY"
-                        [formControl]="dateControl"
-                      ></nui-calendar>
-                    </div>
-                    <div class="value-display mt-3">
-                      <strong>FormControl value:</strong>
-                      @if (dateControl.value) {
+                    <h6 class="mb-0">Date selection with FormControl</h6>
+                    <nui-calendar
+                      [type]="CalendarType.DAY"
+                      [formControl]="dateControl"
+                    ></nui-calendar>
+                    @if (dateControl.value) {
+                      <div class="value-display">
+                        <strong>FormControl value:</strong>
                         {{ dateControl.value.toLocaleDateString() }}
-                      } @else {
-                        No selection
-                      }
-                    </div>
+                      </div>
+                    } @else {
+                      <div class="value-display">No selection</div>
+                    }
                   </div>
 
                   <div class="example-item d-flex flex-column align-items-center gap-3">
-                    <h6 class="mb-3">Range selection with FormControl</h6>
-                    <div style="max-width: 400px">
-                      <nui-calendar
-                        [type]="CalendarType.RANGE"
-                        [formControl]="rangeControl"
-                      ></nui-calendar>
-                    </div>
-                    <div class="value-display mt-3">
-                      <strong>FormControl value:</strong>
-                      @if (rangeControl.value && rangeControl.value.length >= 2) {
+                    <h6 class="mb-0">Range selection with FormControl</h6>
+                    <nui-calendar
+                      [type]="CalendarType.RANGE"
+                      [formControl]="rangeControl"
+                    ></nui-calendar>
+                    @if (rangeControl.value && rangeControl.value.length >= 2) {
+                      <div class="value-display">
+                        <strong>FormControl value:</strong>
                         {{ rangeControl.value[0].toLocaleDateString() }} -
                         {{ rangeControl.value[1].toLocaleDateString() }}
-                      } @else if (rangeControl.value && rangeControl.value.length === 1) {
+                      </div>
+                    } @else if (rangeControl.value && rangeControl.value.length === 1) {
+                      <div class="value-display">
+                        <strong>FormControl value:</strong>
                         {{ rangeControl.value[0].toLocaleDateString() }} (select end of range)
-                      } @else {
-                        No selection
-                      }
-                    </div>
+                      </div>
+                    } @else {
+                      <div class="value-display">No selection</div>
+                    }
                   </div>
                 </div>
               }
@@ -251,7 +250,7 @@
               @case ('dynamic-disabled-dates') {
                 <div class="example-preview flex-row align-items-start gap-3">
                   <nui-calendar type="day" [isDateEnabledFn]="isDateEnabledFn"></nui-calendar>
-                  <div class="mt-3 small text-muted" style="max-width: 450px">
+                  <div class="text-muted" style="max-width: 450px">
                     <p class="mb-1"><strong>Applied rules:</strong></p>
                     <ul class="mb-2">
                       <li>Weekends disabled (Saturdays and Sundays)</li>
@@ -269,7 +268,7 @@
               @case ('date-status') {
                 <div class="example-preview flex-row align-items-start gap-3">
                   <nui-calendar type="day" [dateStatusFn]="dateStatusFn"></nui-calendar>
-                  <div class="mt-3 small" style="max-width: 450px">
+                  <div class="text-muted" style="max-width: 450px">
                     <p class="mb-2"><strong>Status legend:</strong></p>
                     <div class="d-flex gap-3 flex-wrap">
                       <span>
@@ -298,12 +297,12 @@
               }
 
               @case ('selection-modes') {
-                <div class="example-preview flex-row gap-4 align-items-start flex-wrap">
-                  <div class="example-item">
-                    <h6 class="mb-3">Day (normal)</h6>
+                <div class="example-preview flex-row gap-3">
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">Day (normal)</h6>
                     <nui-calendar type="day" (valueChange)="onDateChange($event)"></nui-calendar>
                     @if (selectedDateString()) {
-                      <div class="value-display mt-3">
+                      <div class="value-display">
                         <strong>Selected:</strong>
                         {{ selectedDateString() }}
                       </div>
@@ -312,15 +311,15 @@
                     }
                   </div>
 
-                  <div class="example-item">
-                    <h6 class="mb-3">Month picker</h6>
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">Month picker</h6>
                     <nui-calendar
                       type="month"
                       [closeOnSelect]="true"
                       (valueChange)="onMonthSelected($event)"
                     ></nui-calendar>
                     @if (selectedMonth()) {
-                      <div class="value-display mt-3">
+                      <div class="value-display">
                         <strong>Selected:</strong>
                         {{ selectedMonth() }}
                       </div>
@@ -329,15 +328,15 @@
                     }
                   </div>
 
-                  <div class="example-item">
-                    <h6 class="mb-3">Year picker</h6>
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">Year picker</h6>
                     <nui-calendar
                       type="year"
                       [closeOnSelect]="true"
                       (valueChange)="onYearSelected($event)"
                     ></nui-calendar>
                     @if (selectedYear()) {
-                      <div class="value-display mt-3">
+                      <div class="value-display">
                         <strong>Selected:</strong>
                         {{ selectedYear() }}
                       </div>
@@ -349,42 +348,38 @@
               }
 
               @case ('multiple-selection') {
-                <div class="example-preview flex-row align-items-center gap-3">
-                  <div class="example-item">
-                    <h6 class="mb-3">Multiple days</h6>
+                <div class="example-preview flex-row gap-3">
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">Multiple days</h6>
                     <nui-calendar
                       type="day"
                       selection="multiple"
                       (valueChange)="onMultipleSelection($event)"
                     ></nui-calendar>
-                    <div class="value-display mt-3" style="max-width: 450px; text-align: center">
-                      @if (selectedMultipleDates().length > 0) {
-                        <p class="mb-2">
-                          <strong>Selected dates ({{ selectedMultipleDates().length }}):</strong>
-                        </p>
-                        <p class="small mb-0">{{ selectedMultipleDisplay() }}</p>
-                      } @else {
-                        <p class="mb-0 text-muted">Click on dates to select/deselect</p>
-                      }
-                    </div>
+                    @if (selectedMultipleDates().length > 0) {
+                      <div class="value-display">
+                        <strong>Selected dates ({{ selectedMultipleDates().length }}):</strong>
+                        {{ selectedMultipleDisplay() }}
+                      </div>
+                    } @else {
+                      <div class="value-display">No selection</div>
+                    }
                   </div>
 
-                  <div class="example-item">
-                    <h6 class="mb-3">Multiple months</h6>
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">Multiple months</h6>
                     <nui-calendar
                       type="month"
                       selection="multiple"
                       (valueChange)="onMultipleMonthsSelected($event)"
                     ></nui-calendar>
                     @if (selectedMultipleMonths().length > 0) {
-                      <div class="value-display mt-3">
-                        <p class="mb-1">
-                          <strong>Selected ({{ selectedMultipleMonths().length }}):</strong>
-                        </p>
-                        <p class="small mb-0">{{ selectedMultipleMonthsDisplay() }}</p>
+                      <div class="value-display">
+                        <strong>Selected ({{ selectedMultipleMonths().length }}):</strong>
+                        {{ selectedMultipleMonthsDisplay() }}
                       </div>
                     } @else {
-                      <div class="value-display">Click on months to select/deselect</div>
+                      <div class="value-display">No selection</div>
                     }
                   </div>
                 </div>

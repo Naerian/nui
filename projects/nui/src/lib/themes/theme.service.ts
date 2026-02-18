@@ -766,12 +766,16 @@ export class ThemeService {
     const dayHoverText = isDark ? grays[50] : grays[900];
 
     // Selected states
-    const daySelectedBg = this.withAlpha(colors.primary, 0.2);
+    const daySelectedBg = this.withAlpha(colors.primary, 0.8);
     const daySelectedText = this.getContrastColor(colors.primary);
     const daySelectedHoverBg = this.withAlpha(colors.primary, 0.5);
 
+    // Today state
+    const todayBg = colors.primary;
+    const todaySelectedBg = this.tint(colors.primary, 70);
+
     // In-range states (para rangos de fechas)
-    const dayRangeBg = this.withAlpha(colors.primary, 0.1);
+    const dayRangeBg = this.withAlpha(colors.primary, 0.2);
     const dayRangeText = isDark ? grays[50] : grays[900];
 
     // PASO 1: Smart Service - Status indicators (usando colores semánticos)
@@ -802,6 +806,8 @@ export class ThemeService {
 
       --nui-calendar-day-bg: ${dayBg};
       --nui-calendar-day-text: ${dayText};
+      --nui-calendar-day-current-month-text: ${dayText};
+      --nui-calendar-day-today-bg: ${todayBg};
       
       --nui-calendar-day-hover-bg: ${dayHoverBg};
       --nui-calendar-day-hover-text: ${dayHoverText};
@@ -809,6 +815,7 @@ export class ThemeService {
       --nui-calendar-day-selected-bg: ${daySelectedBg};
       --nui-calendar-day-selected-text: ${daySelectedText};
       --nui-calendar-day-selected-border: ${daySelectedBg};
+      --nui-calendar-day-selected-today-bg: ${todaySelectedBg};
       
       --nui-calendar-day-selected-hover-bg: ${daySelectedHoverBg};
       --nui-calendar-day-selected-hover-border: ${daySelectedHoverBg};
@@ -858,7 +865,7 @@ export class ThemeService {
     const timeHoverBg = isDark ? grays[800] : grays[100];
     const timeHoverText = isDark ? grays[50] : grays[900];
 
-    const timeSelectedBg = this.withAlpha(colors.primary, 0.2);
+    const timeSelectedBg = this.withAlpha(colors.primary, 0.8);
     const timeSelectedText = this.getContrastColor(colors.primary);
     const timeSelectedHoverBg = this.withAlpha(colors.primary, 0.5);
 

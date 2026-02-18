@@ -38,24 +38,24 @@
               }
 
               @case ('modes') {
-                <div class="example-preview flex-row align-items-start gap-4">
-                  <div class="example-item">
-                    <h6>HOUR_24</h6>
+                <div class="example-preview flex-row align-items-start gap-3">
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">HOUR_24</h6>
                     <nui-time-picker mode="HOUR_24"></nui-time-picker>
                   </div>
 
-                  <div class="example-item">
-                    <h6>HOUR_12 (AM/PM)</h6>
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">HOUR_12 (AM/PM)</h6>
                     <nui-time-picker mode="HOUR_12"></nui-time-picker>
                   </div>
 
-                  <div class="example-item">
-                    <h6>HOUR_MINUTE_24 (24h)</h6>
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">HOUR_MINUTE_24 (24h)</h6>
                     <nui-time-picker mode="HOUR_MINUTE_24"></nui-time-picker>
                   </div>
 
-                  <div class="example-item">
-                    <h6>HOUR_MINUTE_12 (12h AM/PM)</h6>
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">HOUR_MINUTE_12 (12h AM/PM)</h6>
                     <nui-time-picker mode="HOUR_MINUTE_12"></nui-time-picker>
                   </div>
                 </div>
@@ -77,51 +77,49 @@
 
               @case ('steps') {
                 <div class="example-preview flex-column align-items-center gap-3">
-                  <p class="mb-2"><em>hourStep: 2, minuteStep: 15</em></p>
+                  <h6 class="mb-0">hourStep: 2, minuteStep: 15</h6>
                   <nui-time-picker [config]="configWithSteps"></nui-time-picker>
                 </div>
               }
 
               @case ('time-range') {
                 <div class="example-preview flex-column align-items-center gap-3">
-                  <p class="mb-2"><em>minTime: 09:00, maxTime: 18:00</em></p>
+                  <h6 class="mb-0">minTime: 09:00, maxTime: 18:00</h6>
                   <nui-time-picker [config]="configWithRange"></nui-time-picker>
                 </div>
               }
 
               @case ('disabled-times') {
                 <div class="example-preview flex-column align-items-center gap-3">
-                  <p class="mb-2">
-                    <em>disabledHours: [12, 13, 14], disabledMinutes: [15, 45]</em>
-                  </p>
+                  <h6 class="mb-0">disabledHours: [12, 13, 14], disabledMinutes: [15, 45]</h6>
                   <nui-time-picker [config]="configWithDisabled"></nui-time-picker>
                 </div>
               }
 
               @case ('duration-mode') {
                 <div class="example-preview flex-column align-items-center gap-3">
-                  <p class="mb-2"><em>maxHours: 8, showSeconds: true</em></p>
+                  <h6 class="mb-0">maxHours: 8, showSeconds: true</h6>
                   <nui-time-picker mode="DURATION" [config]="configDuration"></nui-time-picker>
                 </div>
               }
 
               @case ('default-strategies') {
                 <div class="example-preview flex-row gap-3 align-items-start">
-                  <div class="example-item">
-                    <h6>Strategy: now</h6>
-                    <p class="mb-2"><em>Start with the current time</em></p>
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">Strategy: now</h6>
+                    <p class="mb-0"><em>Start with the current time</em></p>
                     <nui-time-picker defaultStrategy="now"></nui-time-picker>
                   </div>
 
-                  <div class="example-item">
-                    <h6>Strategy: smart</h6>
-                    <p class="mb-2"><em>Current time + 30 min rounded</em></p>
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">Strategy: smart</h6>
+                    <p class="mb-0"><em>Current time + 30 min rounded</em></p>
                     <nui-time-picker defaultStrategy="smart" [smartOffset]="30"></nui-time-picker>
                   </div>
 
-                  <div class="example-item">
-                    <h6>Strategy: custom</h6>
-                    <p class="mb-2"><em>Custom value: 09:00</em></p>
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">Strategy: custom</h6>
+                    <p class="mb-0"><em>Custom value: 09:00</em></p>
                     <nui-time-picker
                       defaultStrategy="custom"
                       [defaultValue]="{ hour: 9, minute: 0 }"

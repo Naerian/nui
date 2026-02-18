@@ -489,6 +489,7 @@
   &__duration-view {
     display: flex;
     flex-direction: column;
+    gap: var(--nui-time-picker-gap);
   }
 
   &__presets-view {

@@ -414,7 +414,7 @@ pre code {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   padding: 1.5rem;
   background-color: var(--nui-bg-secondary);
