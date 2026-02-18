@@ -5,18 +5,17 @@
 // TOKENS (Sass) - Single Standard Values
 $time-picker-width: 300px !default;
 $time-picker-item-height: 2.25rem !default;
-$time-picker-max-height: 12rem !default;
+$time-picker-max-height: 11rem !default;
 $time-picker-min-height: 8rem !default;
 $time-picker-padding: clamp(0.75rem, 2vw, 1rem) !default;
 $time-picker-gap: clamp(0.25rem, 1.5vw, 0.5rem) !default;
 
 // Configuración del separador
 $time-picker-separator-width: 2rem !default;
-$time-picker-separator-line-width: 2px !default;
+$time-picker-separator-line-width: 0.125rem !default;
 $time-picker-separator-line-height: 1.5rem !default;
-$time-picker-separator-border-radius: 1px !default;
+$time-picker-separator-border-radius: 0.063rem !default;
 $time-picker-separator-padding-top: 1.5rem !default;
-$time-picker-separator-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !default;
 
 // Configuración de la lista de items
 $time-picker-items-gap: 2px !default;
@@ -48,11 +47,6 @@ $time-picker-nav-btn-height: 2.5rem !default;
 $time-picker-nav-btn-padding: 0.5rem 0.75rem !default;
 $time-picker-nav-btn-font-size: clamp(0.75rem, 3.5cqw, 0.875rem) !default;
 
-// Outline (focus states)
-$time-picker-focus-outline-width: 2px !default;
-$time-picker-focus-outline-offset: 2px !default;
-$time-picker-item-focus-outline-offset: -1px !default;
-
 // MIXIN (CSS Custom Properties)
 @mixin nui-time-picker-vars {
   // Standard size
@@ -75,7 +69,6 @@ $time-picker-item-focus-outline-offset: -1px !default;
   --nui-time-picker-separator-line-height: #{$time-picker-separator-line-height};
   --nui-time-picker-separator-border-radius: #{$time-picker-separator-border-radius};
   --nui-time-picker-separator-padding-top: #{$time-picker-separator-padding-top};
-  --nui-time-picker-separator-text-shadow: #{$time-picker-separator-text-shadow};
 
   // Items
   --nui-time-picker-items-gap: #{$time-picker-items-gap};
@@ -105,9 +98,4 @@ $time-picker-item-focus-outline-offset: -1px !default;
   --nui-time-picker-nav-btn-height: #{$time-picker-nav-btn-height};
   --nui-time-picker-nav-btn-padding: #{$time-picker-nav-btn-padding};
   --nui-time-picker-nav-btn-font-size: #{$time-picker-nav-btn-font-size};
-
-  // Outline (focus states)
-  --nui-time-picker-focus-outline-width: #{$time-picker-focus-outline-width};
-  --nui-time-picker-focus-outline-offset: #{$time-picker-focus-outline-offset};
-  --nui-time-picker-item-focus-outline-offset: #{$time-picker-item-focus-outline-offset};
 }

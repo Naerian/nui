@@ -104,9 +104,6 @@
     outline: var(--nui-focus-ring-width) solid #{$color};
     outline-offset: var(--nui-focus-ring-offset);
     border-radius: var(--nui-focus-ring-radius);
-    box-shadow:
-      0 0 0 calc(var(--nui-focus-ring-width) + 1px) var(--nui-bg-primary),
-      0 0 0 calc(var(--nui-focus-ring-width) + 2px) #{$color};
   }
 }
 

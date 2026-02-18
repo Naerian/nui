@@ -240,7 +240,7 @@
     cursor: pointer;
     transition: all var(--nui-transition-duration-fast) ease;
     position: relative;
-    line-height: 1;
+    line-height: 1.5;
 
     &:hover:not(&--disabled):not(&--selected) {
       background: var(--nui-calendar-day-hover-bg);

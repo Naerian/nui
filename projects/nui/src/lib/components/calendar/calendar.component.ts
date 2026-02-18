@@ -1789,6 +1789,87 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     return `${dayName}, ${dayNumber} ${monthName} ${year}`;
   }
 
+  /**
+   * Handler para el evento focus en un bot?n de d?a.
+   * Sincroniza el ?ndice enfocado cuando se navega con Tab.
+   */
+  onDayFocus(index: number): void {
+    this.focusedDayIndex.set(index);
+  }
+
+  /**
+   * Handler para el evento keydown en un bot?n de d?a.
+   * Maneja Enter/Space para selecci?n directa y delega otras teclas al handler principal.
+   */
+  onDayKeyDown(event: KeyboardEvent, day: CalendarDay, index: number): void {
+    const key = event.key;
+
+    if (key === 'Enter' || key === ' ') {
+      // Seleccionar el d?a directamente
+      event.preventDefault();
+      event.stopPropagation();
+      if (!day.isDisabled) {
+        this.onDayClick(day);
+      }
+    }
+    // Para otras teclas (flechas, etc.), dejar que se propaguen al @HostListener
+  }
+
+  /**
+   * Handler para el evento focus en un bot?n de mes.
+   * No necesita sincronizaci?n porque usa el DOM directamente.
+   */
+  onMonthFocus(monthIndex: number): void {
+    // No hay estado interno que sincronizar para meses
+  }
+
+  /**
+   * Handler para el evento keydown en un bot?n de mes.
+   */
+  onMonthKeyDown(event: KeyboardEvent, monthIndex: number): void {
+    const key = event.key;
+
+    if (key === 'Enter' || key === ' ') {
+      event.preventDefault();
+      event.stopPropagation();
+      if (!this.isMonthDisabled(monthIndex)) {
+        this.selectMonth(monthIndex);
+      }
+    } else if (key === 'Escape') {
+      event.preventDefault();
+      event.stopPropagation();
+      this.cancelAndReturnToPreviousView();
+    }
+    // Para otras teclas (flechas, etc.), dejar que se propaguen al @HostListener
+  }
+
+  /**
+   * Handler para el evento focus en un bot?n de a?o.
+   */
+  onYearFocus(year: number): void {
+    // No hay estado interno que sincronizar para a?os
+  }
+
+  /**
+   * Handler para el evento keydown en un bot?n de a?o.
+   */
+  onYearKeyDown(event: KeyboardEvent, year: number): void {
+    const key = event.key;
+
+    if (key === 'Enter' || key === ' ') {
+      event.preventDefault();
+      event.stopPropagation();
+      if (!this.isYearDisabled(year)) {
+        this.selectYear(year);
+      }
+    } else if (key === 'Escape') {
+      event.preventDefault();
+      event.stopPropagation();
+      this.cancelAndReturnToPreviousView();
+    }
+    // Para otras teclas (flechas, etc.), dejar que se propaguen al @HostListener
+  }
+
   private handleDayNavigation(event: KeyboardEvent): void {
     const days = this.calendarDays();
     let currentIndex = this.focusedDayIndex();

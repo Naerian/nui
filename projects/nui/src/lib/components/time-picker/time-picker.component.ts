@@ -1051,6 +1051,53 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   }
 
   /**
+   * Maneja el focus cuando un item individual recibe el foco (via Tab)
+   */
+  onItemFocus(section: TimePickerSection, value: number): void {
+    this.focusedSection.set(section);
+  }
+
+  /**
+   * Maneja eventos de teclado en items individuales
+   * Esto permite que Enter/Space funcionen correctamente cuando se navega con Tab
+   */
+  onItemKeyDown(event: KeyboardEvent, section: TimePickerSection, value: number): void {
+    const key = event.key;
+
+    // Si presionan Enter o Space en un item individual, seleccionarlo
+    if (key === 'Enter' || key === ' ') {
+      event.preventDefault();
+      event.stopPropagation(); // Evitar que el evento llegue al contenedor
+
+      // Seleccionar el valor del item que tiene el foco
+      switch (section) {
+        case 'hour':
+          this.selectHour(value);
+          break;
+        case 'minute':
+          this.selectMinute(value);
+          break;
+        case 'duration-hours':
+          this.selectDurationHours(value);
+          break;
+        case 'duration-minutes':
+          this.selectDurationMinutes(value);
+          break;
+        case 'duration-seconds':
+          this.selectDurationSeconds(value);
+          break;
+      }
+    }
+    // Para todas las demás teclas (flechas, PageUp, etc.), 
+    // delegar al handler principal pero evitar duplicación
+    else {
+      // Importante: detener la propagación para evitar que se ejecute dos veces
+      event.stopPropagation();
+      this.onKeyDown(event, section);
+    }
+  }
+
+  /**
    * Enfoca visualmente el item actual en el DOM
    */
   private focusCurrentItem(section: TimePickerSection): void {

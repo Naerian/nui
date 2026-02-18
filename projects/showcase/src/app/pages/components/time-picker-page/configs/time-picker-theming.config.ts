@@ -107,11 +107,6 @@ export const TIME_PICKER_THEMING_SECTIONS: ComponentSection[] = [
           'Padding superior del separador',
           '1.5rem',
         ],
-        [
-          '<code>--time-picker-separator-text-shadow</code>',
-          'Sombra del texto del separador',
-          '0 1px 2px rgba(0, 0, 0, 0.1)',
-        ],
         ['<code>--time-picker-items-gap</code>', 'Espacio entre items de la lista', '2px'],
         ['<code>--time-picker-items-padding</code>', 'Padding de la lista de items', '2px'],
         ['<code>--time-picker-items-border-radius</code>', 'Radio de borde de la lista', '2px'],
@@ -124,14 +119,7 @@ export const TIME_PICKER_THEMING_SECTIONS: ComponentSection[] = [
           '<code>--time-picker-normalized-font-size</code>',
           'Tamaño de fuente del indicador de normalización',
           '0.75rem',
-        ],
-        ['<code>--time-picker-focus-outline-width</code>', 'Grosor del outline de foco', '2px'],
-        ['<code>--time-picker-focus-outline-offset</code>', 'Offset del outline de foco', '2px'],
-        [
-          '<code>--time-picker-item-focus-outline-offset</code>',
-          'Offset del outline de foco en items',
-          '-1px',
-        ],
+        ]
       ],
     },
   },

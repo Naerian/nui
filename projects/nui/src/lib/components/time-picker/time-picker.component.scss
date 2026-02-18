@@ -168,7 +168,6 @@
       color: var(--nui-text-primary);
       margin: var(--nui-spacing-xs) 0;
       line-height: 1;
-      text-shadow: var(--nui-time-picker-separator-text-shadow);
     }
   }
 
@@ -189,11 +188,7 @@
       flex: 1;
     }
 
-    &:focus-visible {
-      outline: var(--nui-time-picker-focus-outline-width) solid var(--nui-color-primary);
-      outline-offset: var(--nui-time-picker-focus-outline-offset);
-      background-color: var(--nui-bg-secondary);
-    }
+    @include global.focus-ring();
   }
 
   &__column-label {
@@ -260,21 +255,7 @@
       }
     }
 
-    &--focused {
-      outline: var(--nui-time-picker-focus-outline-width) solid var(--nui-color-primary-tint-65);
-      outline-offset: var(--nui-time-picker-item-focus-outline-offset);
-      z-index: 2;
-    }
-
-    &:focus-visible {
-      outline: var(--nui-time-picker-focus-outline-width) solid var(--nui-color-primary-tint-65);
-      outline-offset: var(--nui-time-picker-item-focus-outline-offset);
-      z-index: 2;
-    }
-
-    &--selected:focus-visible {
-      outline-color: var(--nui-color-primary-tint-65);
-    }
+    @include global.focus-ring();
 
     &:disabled {
       background-color: var(--nui-time-picker-item-disabled-bg);

@@ -64,10 +64,12 @@
                 "
                 [disabled]="isDisabled()"
                 [attr.data-duration-hours]="hour"
+                [attr.tabindex]="selectedDuration()?.hours === hour ? 0 : -1"
                 (click)="selectDurationHours(hour)"
+                (focus)="onItemFocus('duration-hours', hour)"
+                (keydown)="onItemKeyDown($event, 'duration-hours', hour)"
                 role="option"
                 [attr.aria-selected]="selectedDuration()?.hours === hour"
-                [attr.tabindex]="selectedDuration()?.hours === hour ? 0 : -1"
               >
                 <span class="nui-time-picker__duration-value">{{ hour }}</span>
                 <span class="nui-time-picker__duration-unit">h</span>
@@ -100,10 +102,12 @@
                 "
                 [disabled]="isDisabled()"
                 [attr.data-duration-minutes]="minute"
+                [attr.tabindex]="selectedDuration()?.minutes === minute ? 0 : -1"
                 (click)="selectDurationMinutes(minute)"
+                (focus)="onItemFocus('duration-minutes', minute)"
+                (keydown)="onItemKeyDown($event, 'duration-minutes', minute)"
                 role="option"
                 [attr.aria-selected]="selectedDuration()?.minutes === minute"
-                [attr.tabindex]="selectedDuration()?.minutes === minute ? 0 : -1"
               >
                 <span class="nui-time-picker__duration-value">{{ minute }}</span>
                 <span class="nui-time-picker__duration-unit">min</span>
@@ -138,10 +142,12 @@
                   "
                   [disabled]="isDisabled()"
                   [attr.data-duration-seconds]="second"
+                  [attr.tabindex]="selectedDuration()?.seconds === second ? 0 : -1"
                   (click)="selectDurationSeconds(second)"
+                  (focus)="onItemFocus('duration-seconds', second)"
+                  (keydown)="onItemKeyDown($event, 'duration-seconds', second)"
                   role="option"
                   [attr.aria-selected]="selectedDuration()?.seconds === second"
-                  [attr.tabindex]="selectedDuration()?.seconds === second ? 0 : -1"
                 >
                   <span class="nui-time-picker__duration-value">{{ second }}</span>
                   <span class="nui-time-picker__duration-unit">s</span>
@@ -258,7 +264,8 @@
                 [disabled]="isDisabled()"
                 [tabindex]="selectedTime()?.hour === hour ? 0 : -1"
                 (click)="selectHour(hour)"
-                (focus)="focusedSection.set('hour')"
+                (focus)="onItemFocus('hour', hour)"
+                (keydown)="onItemKeyDown($event, 'hour', hour)"
                 role="option"
                 [attr.aria-selected]="selectedTime()?.hour === hour"
                 [attr.data-hour]="hour"
@@ -320,7 +327,8 @@
                   [disabled]="isDisabled()"
                   [tabindex]="selectedTime()?.minute === minute ? 0 : -1"
                   (click)="selectMinute(minute)"
-                  (focus)="focusedSection.set('minute')"
+                  (focus)="onItemFocus('minute', minute)"
+                  (keydown)="onItemKeyDown($event, 'minute', minute)"
                   role="option"
                   [attr.aria-selected]="selectedTime()?.minute === minute"
                   [attr.data-minute]="minute"

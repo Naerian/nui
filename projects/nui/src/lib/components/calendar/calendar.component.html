@@ -122,6 +122,8 @@
                 [attr.aria-disabled]="day.isDisabled"
                 [disabled]="day.isDisabled"
                 (click)="onDayClick(day)"
+                (focus)="onDayFocus(i)"
+                (keydown)="onDayKeyDown($event, day, i)"
                 (mouseenter)="onDayHover(day)"
                 (mouseleave)="onDayHoverEnd()"
               >
@@ -147,6 +149,8 @@
                 [attr.aria-disabled]="isMonthDisabled(i)"
                 [disabled]="isMonthDisabled(i)"
                 (click)="selectMonth(i)"
+                (focus)="onMonthFocus(i)"
+                (keydown)="onMonthKeyDown($event, i)"
               >
                 {{ month }}
               </button>
@@ -170,6 +174,8 @@
                 [attr.aria-disabled]="isYearDisabled(year)"
                 [disabled]="isYearDisabled(year)"
                 (click)="selectYear(year)"
+                (focus)="onYearFocus(year)"
+                (keydown)="onYearKeyDown($event, year)"
               >
                 {{ year }}
               </button>
