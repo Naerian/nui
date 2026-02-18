@@ -23,7 +23,7 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
         title: 'codeExamples.typescript',
         code: `onDateChange(value: CalendarValue): void {
   if (value.type === 'DAY') {
-    console.log('Fecha seleccionada:', value.date);
+    console.log('Selected date:', value.date);
   }
 }`,
         language: 'typescript',
@@ -48,8 +48,8 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
         title: 'codeExamples.typescript',
         code: `onWeekChange(value: CalendarValue): void {
   if (value.type === 'WEEK') {
-    console.log('Semana:', value.week);
-    console.log('Fechas:', value.dates);
+    console.log('Week:', value.week);
+    console.log('Dates:', value.dates);
   }
 }`,
         language: 'typescript',
@@ -74,8 +74,8 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
         title: 'codeExamples.typescript',
         code: `onRangeChange(value: CalendarValue): void {
   if (value.type === 'RANGE') {
-    console.log('Inicio:', value.range.start);
-    console.log('Fin:', value.range.end);
+    console.log('Start:', value.range.start);
+    console.log('End:', value.range.end);
   }
 }`,
         language: 'typescript',
@@ -94,7 +94,7 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
     anchor: 'presets',
     examples: [
       {
-        title: 'Con presets predeterminados',
+        title: 'Default presets',
         code: `<nui-calendar
   [type]="CalendarType.RANGE"
   [showPresets]="true"
@@ -102,7 +102,7 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
         language: 'html',
       },
       {
-        title: 'Con presets personalizados',
+        title: 'Custom presets (HTML)',
         code: `<nui-calendar
   [type]="CalendarType.RANGE"
   [showPresets]="true"
@@ -111,15 +111,15 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
         language: 'html',
       },
       {
-        title: 'Definición de presets personalizados',
+        title: 'Custom presets (TypeScript)',
         code: `customPresets: DateRangePreset[] = [
   {
-    label: 'Última semana',
+    label: 'Last 7 days',
     start: subDays(new Date(), 7),
     end: new Date(),
   },
   {
-    label: 'Este mes',
+    label: 'This month',
     start: startOfMonth(new Date()),
     end: endOfMonth(new Date()),
   },
@@ -135,7 +135,7 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
     anchor: 'time-picker',
     examples: [
       {
-        title: 'Con hora de inicio (DAY)',
+        title: 'Start time (DAY)',
         code: `<nui-calendar
   [type]="CalendarType.DAY"
   [showTimePicker]="true"
@@ -143,7 +143,7 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
         language: 'html',
       },
       {
-        title: 'Con hora de inicio (RANGE)',
+        title: 'Start time (RANGE)',
         code: `<nui-calendar
   [type]="CalendarType.RANGE"
   showTimePicker="start"
@@ -151,7 +151,7 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
         language: 'html',
       },
       {
-        title: 'Con hora de inicio y fin (RANGE)',
+        title: 'Start and end time (RANGE)',
         code: `<nui-calendar
   [type]="CalendarType.RANGE"
   showTimePicker="both"
@@ -207,13 +207,13 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
         title: 'codeExamples.typescript',
         code: `import { IsDateEnabledFn } from 'nui';
 
-// Función de validación dinámica
+// Dynamic validation function
 isDateEnabledFn: IsDateEnabledFn = (date) => {
-  // 1. No permitir fines de semana
+  // 1. Do not allow weekends
   const dayOfWeek = date.getDay();
   if (dayOfWeek === 0 || dayOfWeek === 6) return false;
   
-  // 2. No permitir festivos nacionales
+  // 2. Do not allow national holidays
   if (this.isNationalHoliday(date)) return false;
   
   return true;
@@ -221,12 +221,8 @@ isDateEnabledFn: IsDateEnabledFn = (date) => {
 
 private isNationalHoliday(date: Date): boolean {
   const holidays = [
-    '2026-01-01', // Año Nuevo
-    '2026-02-16', // Carnaval
-    '2026-02-17', // Carnaval
-    '2026-04-03', // Viernes Santo
-    '2026-05-01', // Día del Trabajo
-    '2026-12-25', // Navidad
+    '2026-01-01', // New Year's Day
+    '2026-12-25', // Christmas
   ];
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -309,14 +305,14 @@ rangeControl = new FormControl<Date[] | null>(null);`,
         title: 'codeExamples.typescript',
         code: `import { DateStatusFn } from 'nui';
 
-// Función de status (estados visuales de negocio)
+// Status function (visual business states)
 dateStatusFn: DateStatusFn = (date) => {
   const availability = this.getAvailability(date);
   
-  if (availability === 0) return 'danger';    // Sin habitaciones (rojo)
-  if (availability < 5) return 'warning';     // Pocas habitaciones (ámbar)
-  if (availability >= 10) return 'success';   // Buena disponibilidad (verde)
-  return 'info';                              // Disponibilidad normal (azul)
+  if (availability === 0) return 'danger';    // No rooms (red)
+  if (availability < 5) return 'warning';     // Few rooms (amber)
+  if (availability >= 10) return 'success';   // Good availability (green)
+  return 'info';                              // Normal availability (blue)
 };
 
 private availabilityMap = new Map<string, number>([
@@ -380,16 +376,16 @@ private getAvailability(date: Date): number {
         title: 'codeExamples.typescript',
         code: `onMonthSelected(value: CalendarValue): void {
   if (value.type === 'month' && 'month' in value && value.month) {
-    console.log('Mes:', value.month.month); // 0-11
-    console.log('Año:', value.month.year);  // YYYY
-    console.log('Fecha:', value.date);      // 1er día del mes
+    console.log('Month:', value.month.month); // 0-11
+    console.log('Year:', value.month.year);  // YYYY
+    console.log('Date:', value.date);        // 1st day of the month
   }
 }
 
 onYearSelected(value: CalendarValue): void {
   if (value.type === 'year' && 'year' in value && typeof value.year === 'number') {
-    console.log('Año:', value.year);        // YYYY
-    console.log('Fecha:', value.date);      // 1 de enero del año
+    console.log('Year:', value.year);        // YYYY
+    console.log('Date:', value.date);        // 1st of January of the year
   }
 }`,
         language: 'typescript',
@@ -429,14 +425,14 @@ onYearSelected(value: CalendarValue): void {
         title: 'codeExamples.typescript',
         code: `onMultipleSelection(value: CalendarValue): void {
   if (value.type === 'day' && 'dates' in value) {
-    console.log('Fechas seleccionadas:', value.dates);
+    console.log('Selected dates:', value.dates);
     console.log('Total:', value.dates.length);
   }
 }
   
 onMultipleMonthsSelected(value: CalendarValue): void {
   if (value.type === 'month' && 'months' in value && value.months) {
-    console.log('Meses seleccionados:', value.months);
+    console.log('Selected months:', value.months);
     console.log('Total:', value.months.length);
     // value.months = [{ month: 0, year: 2026 }, { month: 3, year: 2026 }, ...]
   }

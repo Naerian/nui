@@ -29,22 +29,22 @@ export const TIME_PICKER_EXAMPLES_SECTIONS: ComponentSection[] = [
     anchor: 'modes',
     examples: [
       {
-        title: 'HOUR_24',
+        title: '23-hour format',
         code: `<nui-time-picker mode="HOUR_24"></nui-time-picker>`,
         language: 'html',
       },
       {
-        title: 'HOUR_12',
+        title: '12-hour format',
         code: `<nui-time-picker mode="HOUR_12"></nui-time-picker>`,
         language: 'html',
       },
       {
-        title: 'HOUR_MINUTE_24',
+        title: '24-hour format with minutes',
         code: `<nui-time-picker mode="HOUR_MINUTE_24"></nui-time-picker>`,
         language: 'html',
       },
       {
-        title: 'HOUR_MINUTE_12',
+        title: '12-hour format with minutes',
         code: `<nui-time-picker mode="HOUR_MINUTE_12"></nui-time-picker>`,
         language: 'html',
       },
@@ -63,10 +63,10 @@ export const TIME_PICKER_EXAMPLES_SECTIONS: ComponentSection[] = [
       {
         title: 'codeExamples.typescript',
         code: `presets: TimePreset[] = [
-  { label: 'Ahora', time: { hour: new Date().getHours(), minute: new Date().getMinutes() } },
-  { label: 'Desayuno', time: { hour: 8, minute: 0 }, icon: 'ri-cup-line' },
-  { label: 'Almuerzo', time: { hour: 14, minute: 0 }, icon: 'ri-restaurant-line' },
-  { label: 'Cena', time: { hour: 21, minute: 0 }, icon: 'ri-moon-line' },
+  { label: 'Now', time: { hour: new Date().getHours(), minute: new Date().getMinutes() } },
+  { label: 'Breakfast', time: { hour: 8, minute: 0 }, icon: 'ri-cup-line' },
+  { label: 'Lunch', time: { hour: 14, minute: 0 }, icon: 'ri-restaurant-line' },
+  { label: 'Dinner', time: { hour: 21, minute: 0 }, icon: 'ri-moon-line' },
 ];
 
 config: TimePickerConfig = {
@@ -94,8 +94,8 @@ config: TimePickerConfig = {
       {
         title: 'codeExamples.typescript',
         code: `config: TimePickerConfig = {
-  hourStep: 2,      // Saltos de 2 horas
-  minuteStep: 15,   // Saltos de 15 minutos
+  hourStep: 2,      // 2-hour increments
+  minuteStep: 15,   // 15-minute increments
 };`,
         language: 'typescript',
       },
@@ -145,8 +145,8 @@ config: TimePickerConfig = {
       {
         title: 'codeExamples.typescript',
         code: `config: TimePickerConfig = {
-  disabledHours: [12, 13, 14],  // Bloquear mediodía
-  disabledMinutes: [15, 45],     // Bloquear ciertos minutos
+  disabledHours: [12, 13, 14],  // Block noon
+  disabledMinutes: [15, 45],     // Block certain minutes
 };`,
         language: 'typescript',
       },
