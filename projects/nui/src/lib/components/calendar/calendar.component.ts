@@ -1179,6 +1179,17 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       });
       this.emitSelection(calendarValue);
     }
+
+    // Hacer focus en el día de hoy después de que el DOM se actualice
+    setTimeout(() => {
+      const days = this.calendarDays();
+      const todayIndex = days.findIndex(d => d.isToday);
+      
+      if (todayIndex !== -1) {
+        this.focusedDayIndex.set(todayIndex);
+        this.focusDayButton(todayIndex);
+      }
+    }, 0);
   }
 
   // Aplicar preset de rango
