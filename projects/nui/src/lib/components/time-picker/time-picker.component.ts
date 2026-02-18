@@ -26,7 +26,6 @@ import {
   TimePickerValue,
   TimePeriodEnum,
   TimePickerSection,
-  TimePickerVariant,
   TimePreset,
   DEFAULT_CONFIG,
   DEFAULT_DURATION_CONFIG,
@@ -34,16 +33,14 @@ import {
   TimePickerStrategyEnum,
   TimePickerModeEnum,
 } from './models/time-picker.model';
-import { ButtonComponent } from '../button';
 import { ButtonGroupComponent } from '../button-group';
 import type { BtnGroupOption } from '../button-group/models/button-group.model';
-import { NUISize } from '../../configs';
 import { NUI_TRANSLATIONS } from '../../translations';
 
 @Component({
   selector: 'nui-time-picker',
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonComponent, ButtonGroupComponent],
+  imports: [CommonModule, FormsModule, ButtonGroupComponent],
   templateUrl: './time-picker.component.html',
   styleUrls: ['./time-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -60,12 +57,9 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   // INPUTS
   // ==================
   mode = input<TimePickerMode>('HOUR_MINUTE_24');
-  size = input<NUISize>('md');
   disabled = input<boolean>(false);
   title = input<string>('');
-  fromCalendar = input<boolean>(false);
   showHeader = input<boolean>(true);
-  variant = input<TimePickerVariant>('default');
 
   // Internal disabled state from form (ControlValueAccessor)
   private _disabledByForm = signal<boolean>(false);

@@ -1,34 +1,14 @@
 // ========================================
-// TIME PICKER - Variables & Tokens
+// TIME PICKER - Variables & Tokens (Simplified - Single Standard Size)
 // ========================================
 
-// TOKENS (Sass)
-// Item heights por tamaño
-$time-picker-item-height-xs: 1.5rem !default;
-$time-picker-item-height-sm: 2rem !default;
-$time-picker-item-height-md: 2.25rem !default;
-$time-picker-item-height-lg: 2.5rem !default;
-$time-picker-item-height-xl: 2.75rem !default;
-
-// Alturas de contenedor de items (scrollable area)
-$time-picker-max-height-xs: 8rem !default;
-$time-picker-max-height-sm: 12rem !default;
-$time-picker-max-height-md: 12rem !default;
-$time-picker-max-height-lg: 14rem !default;
-$time-picker-max-height-xl: 16rem !default;
-
-$time-picker-min-height-xs: 6rem !default;
-$time-picker-min-height-sm: 8rem !default;
-$time-picker-min-height-md: 8rem !default;
-$time-picker-min-height-lg: 10rem !default;
-$time-picker-min-height-xl: 12rem !default;
-
-// Paddings por tamaño
-$time-picker-padding-xs: 0.25rem !default;
-$time-picker-padding-sm: 0.375rem !default;
-$time-picker-padding-md: 0.75rem !default;
-$time-picker-padding-lg: 1rem !default;
-$time-picker-padding-xl: 1.5rem !default;
+// TOKENS (Sass) - Single Standard Values
+$time-picker-width: 300px !default;
+$time-picker-item-height: 2.25rem !default;
+$time-picker-max-height: 12rem !default;
+$time-picker-min-height: 8rem !default;
+$time-picker-padding: clamp(0.75rem, 2vw, 1rem) !default;
+$time-picker-gap: clamp(0.25rem, 1.5vw, 0.5rem) !default;
 
 // Configuración del separador
 $time-picker-separator-width: 2rem !default;
@@ -58,8 +38,15 @@ $time-picker-header-border-width: 1px !default;
 $time-picker-item-border-width: 1px !default;
 
 // Font sizes
-$time-picker-display-font-size: 0.75rem !default;
-$time-picker-normalized-font-size: 0.75rem !default;
+$time-picker-font-size: clamp(0.75rem, 3.5cqw, 0.875rem) !default;
+$time-picker-display-font-size: clamp(0.75rem, 3.5cqw, 0.875rem) !default;
+$time-picker-normalized-font-size: clamp(0.75rem, 3.5cqw, 0.875rem) !default;
+$time-picker-preset-font-size: clamp(0.75rem, 3.5cqw, 0.875rem) !default;
+
+// Navigation button sizes
+$time-picker-nav-btn-height: 2.5rem !default;
+$time-picker-nav-btn-padding: 0.5rem 0.75rem !default;
+$time-picker-nav-btn-font-size: clamp(0.75rem, 3.5cqw, 0.875rem) !default;
 
 // Outline (focus states)
 $time-picker-focus-outline-width: 2px !default;
@@ -68,81 +55,59 @@ $time-picker-item-focus-outline-offset: -1px !default;
 
 // MIXIN (CSS Custom Properties)
 @mixin nui-time-picker-vars {
-  // Item heights por tamaño
-  --time-picker-item-height-xs: #{$time-picker-item-height-xs};
-  --time-picker-item-height-sm: #{$time-picker-item-height-sm};
-  --time-picker-item-height-md: #{$time-picker-item-height-md};
-  --time-picker-item-height-lg: #{$time-picker-item-height-lg};
-  --time-picker-item-height-xl: #{$time-picker-item-height-xl};
+  // Standard size
+  --nui-time-picker-width: #{$time-picker-width};
+  --nui-time-picker-item-height: #{$time-picker-item-height};
+  --nui-time-picker-padding: #{$time-picker-padding};
+  --nui-time-picker-max-height: #{$time-picker-max-height};
+  --nui-time-picker-min-height: #{$time-picker-min-height};
+  --nui-time-picker-gap: #{$time-picker-gap};
 
-  // Border-radius
-  --time-picker-item-radius-xs: var(--nui-border-radius-xs);
-  --time-picker-item-radius-sm: var(--nui-border-radius-sm);
-  --time-picker-item-radius-md: var(--nui-border-radius-md);
-  --time-picker-item-radius-lg: var(--nui-border-radius-lg);
-  --time-picker-item-radius-xl: var(--nui-border-radius-xl);
+  // Border-radius (usa el estándar md)
+  --nui-time-picker-item-radius: calc(var(--nui-border-radius-md) - 0.125rem);
 
-  // Paddings por tamaño
-  --time-picker-padding-xs: #{$time-picker-padding-xs};
-  --time-picker-padding-sm: #{$time-picker-padding-sm};
-  --time-picker-padding-md: #{$time-picker-padding-md};
-  --time-picker-padding-lg: #{$time-picker-padding-lg};
-  --time-picker-padding-xl: #{$time-picker-padding-xl};
-
-  // Max heights por tamaño
-  --time-picker-max-height-xs: #{$time-picker-max-height-xs};
-  --time-picker-max-height-sm: #{$time-picker-max-height-sm};
-  --time-picker-max-height-md: #{$time-picker-max-height-md};
-  --time-picker-max-height-lg: #{$time-picker-max-height-lg};
-  --time-picker-max-height-xl: #{$time-picker-max-height-xl};
-
-  // Min heights por tamaño
-  --time-picker-min-height-xs: #{$time-picker-min-height-xs};
-  --time-picker-min-height-sm: #{$time-picker-min-height-sm};
-  --time-picker-min-height-md: #{$time-picker-min-height-md};
-  --time-picker-min-height-lg: #{$time-picker-min-height-lg};
-  --time-picker-min-height-xl: #{$time-picker-min-height-xl};
+  // Font size (usa el estándar md)
+  --nui-time-picker-font-size: #{$time-picker-font-size};
 
   // Separador
-  --time-picker-separator-width: #{$time-picker-separator-width};
-  --time-picker-separator-line-width: #{$time-picker-separator-line-width};
-  --time-picker-separator-line-height: #{$time-picker-separator-line-height};
-  --time-picker-separator-border-radius: #{$time-picker-separator-border-radius};
-  --time-picker-separator-padding-top: #{$time-picker-separator-padding-top};
-  --time-picker-separator-text-shadow: #{$time-picker-separator-text-shadow};
+  --nui-time-picker-separator-width: #{$time-picker-separator-width};
+  --nui-time-picker-separator-line-width: #{$time-picker-separator-line-width};
+  --nui-time-picker-separator-line-height: #{$time-picker-separator-line-height};
+  --nui-time-picker-separator-border-radius: #{$time-picker-separator-border-radius};
+  --nui-time-picker-separator-padding-top: #{$time-picker-separator-padding-top};
+  --nui-time-picker-separator-text-shadow: #{$time-picker-separator-text-shadow};
 
   // Items
-  --time-picker-items-gap: #{$time-picker-items-gap};
-  --time-picker-items-padding: #{$time-picker-items-padding};
-  --time-picker-items-border-radius: #{$time-picker-items-border-radius};
+  --nui-time-picker-items-gap: #{$time-picker-items-gap};
+  --nui-time-picker-items-padding: #{$time-picker-items-padding};
+  --nui-time-picker-items-border-radius: #{$time-picker-items-border-radius};
 
   // Opciones
-  --time-picker-option-min-height: #{$time-picker-option-min-height};
+  --nui-time-picker-option-min-height: #{$time-picker-option-min-height};
 
   // Acciones
-  --time-picker-actions-gap: #{$time-picker-actions-gap};
+  --nui-time-picker-actions-gap: #{$time-picker-actions-gap};
 
   // Min widths
-  --time-picker-min-width: #{$time-picker-min-width};
-  --time-picker-min-width-with-seconds: #{$time-picker-min-width-with-seconds};
+  --nui-time-picker-min-width: #{$time-picker-min-width};
+  --nui-time-picker-min-width-with-seconds: #{$time-picker-min-width-with-seconds};
 
   // Borders
-  --time-picker-header-border-width: #{$time-picker-header-border-width};
-  --time-picker-item-border-width: #{$time-picker-item-border-width};
+  --nui-time-picker-header-border-width: #{$time-picker-header-border-width};
+  --nui-time-picker-item-border-width: #{$time-picker-item-border-width};
 
   // Font sizes
-  --time-picker-display-font-size: #{$time-picker-display-font-size};
-  --time-picker-normalized-font-size: #{$time-picker-normalized-font-size};
+  --nui-time-picker-display-font-size: #{$time-picker-display-font-size};
+  --nui-time-picker-normalized-font-size: #{$time-picker-normalized-font-size};
+  --nui-time-picker-preset-font-size: #{$time-picker-preset-font-size};
+
+  // Navigation button sizes
+  --nui-time-picker-nav-btn-height: #{$time-picker-nav-btn-height};
+  --nui-time-picker-nav-btn-padding: #{$time-picker-nav-btn-padding};
+  --nui-time-picker-nav-btn-font-size: #{$time-picker-nav-btn-font-size};
 
   // Outline (focus states)
-  --time-picker-focus-outline-width: #{$time-picker-focus-outline-width};
-  --time-picker-focus-outline-offset: #{$time-picker-focus-outline-offset};
-  --time-picker-item-focus-outline-offset: #{$time-picker-item-focus-outline-offset};
-
-  // Defaults (md size) - Valores activos por defecto
-  --time-picker-item-height: var(--time-picker-item-height-md);
-  --time-picker-font-size: var(--nui-font-size-md);
-  --time-picker-padding: var(--time-picker-padding-md);
-  --time-picker-max-height: var(--time-picker-max-height-md);
-  --time-picker-min-height: var(--time-picker-min-height-md);
+  --nui-time-picker-focus-outline-width: #{$time-picker-focus-outline-width};
+  --nui-time-picker-focus-outline-offset: #{$time-picker-focus-outline-offset};
+  --nui-time-picker-item-focus-outline-offset: #{$time-picker-item-focus-outline-offset};
 }

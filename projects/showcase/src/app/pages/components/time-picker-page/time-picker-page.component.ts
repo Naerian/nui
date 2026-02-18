@@ -37,7 +37,6 @@ export class TimePickerPageComponent extends BaseComponentPage {
       sections: [
         'basic',
         'modes',
-        'sizes',
         'presets',
         'steps',
         'time-range',

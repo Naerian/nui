@@ -24,8 +24,6 @@ export enum TimePickerStrategyEnum {
   CUSTOM = 'custom',
 }
 
-export type TimePickerVariant = 'default' | 'compact';
-
 export enum TimePeriodEnum {
   AM = 'AM',
   PM = 'PM',
@@ -99,7 +97,6 @@ export interface TimePickerConfig {
   disabledMinutes?: number[];
   presets?: TimePreset[]; // Presets de hora rápida
   showRangeIndicator?: boolean; // Mostrar indicador visual de rango
-  variant?: TimePickerVariant; // Variante de visualización
   duration?: DurationConfig; // Configuración para modo DURATION
 }
 
@@ -115,7 +112,6 @@ export interface ResolvedTimePickerConfig {
   disabledMinutes: number[];
   presets: TimePreset[];
   showRangeIndicator: boolean;
-  variant: TimePickerVariant;
   duration: DurationConfig;
 }
 
@@ -137,6 +133,5 @@ export const DEFAULT_CONFIG: ResolvedTimePickerConfig = {
   disabledMinutes: [],
   presets: [],
   showRangeIndicator: false,
-  variant: 'default',
   duration: DEFAULT_DURATION_CONFIG,
 };

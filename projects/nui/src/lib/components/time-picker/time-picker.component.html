@@ -1,18 +1,9 @@
 <div
   class="nui-time-picker"
-  [class.nui-time-picker--xs]="size() === 'xs'"
-  [class.nui-time-picker--sm]="size() === 'sm'"
-  [class.nui-time-picker--md]="size() === 'md'"
-  [class.nui-time-picker--lg]="size() === 'lg'"
-  [class.nui-time-picker--xl]="size() === 'xl'"
   [class.nui-time-picker--disabled]="isDisabled()"
-  [class.nui-time-picker--from-calendar]="fromCalendar()"
-  [class.nui-time-picker--compact]="variant() === 'compact'"
   [class.nui-time-picker--duration]="isDurationMode()"
   [class.nui-time-picker--with-tabs]="shouldShowTabs()"
-  [class.nui-time-picker--with-seconds]="
-    isDurationMode() && config.duration.showSeconds
-  "
+  [class.nui-time-picker--with-seconds]="isDurationMode() && config.duration.showSeconds"
   role="group"
   [attr.aria-label]="isDurationMode() ? 'Duration picker' : 'Time picker'"
 >
@@ -33,25 +24,22 @@
   }
 
   <!-- VISTA DE MODO DURATION -->
-  @if (isDurationMode() && (!shouldShowTabs() || activeTab() === "selector")) {
+  @if (isDurationMode() && (!shouldShowTabs() || activeTab() === 'selector')) {
     <div class="nui-time-picker__duration-view">
       <!-- Header: Display de duración -->
-      @if (!fromCalendar() && showHeader()) {
+      @if (showHeader()) {
         <div class="nui-time-picker__header">
           <div
             class="nui-time-picker__display nui-time-picker__display--duration"
             role="status"
             aria-live="polite"
             [innerHTML]="formattedTime()"
-          >
-          </div>
+          ></div>
         </div>
       }
 
       <!-- Selectores de duración -->
-      <div
-        class="nui-time-picker__selectors nui-time-picker__selectors--duration"
-      >
+      <div class="nui-time-picker__selectors nui-time-picker__selectors--duration">
         <!-- Columna de HORAS -->
         <div
           class="nui-time-picker__column nui-time-picker__column--duration-hours"
@@ -70,12 +58,9 @@
               <button
                 type="button"
                 class="nui-time-picker__item nui-time-picker__item--duration"
-                [class.nui-time-picker__item--selected]="
-                  selectedDuration()?.hours === hour
-                "
+                [class.nui-time-picker__item--selected]="selectedDuration()?.hours === hour"
                 [class.nui-time-picker__item--focused]="
-                  focusedSection() === 'duration-hours' &&
-                  selectedDuration()?.hours === hour
+                  focusedSection() === 'duration-hours' && selectedDuration()?.hours === hour
                 "
                 [disabled]="isDisabled()"
                 [attr.data-duration-hours]="hour"
@@ -109,25 +94,18 @@
               <button
                 type="button"
                 class="nui-time-picker__item nui-time-picker__item--duration"
-                [class.nui-time-picker__item--selected]="
-                  selectedDuration()?.minutes === minute
-                "
+                [class.nui-time-picker__item--selected]="selectedDuration()?.minutes === minute"
                 [class.nui-time-picker__item--focused]="
-                  focusedSection() === 'duration-minutes' &&
-                  selectedDuration()?.minutes === minute
+                  focusedSection() === 'duration-minutes' && selectedDuration()?.minutes === minute
                 "
                 [disabled]="isDisabled()"
                 [attr.data-duration-minutes]="minute"
                 (click)="selectDurationMinutes(minute)"
                 role="option"
                 [attr.aria-selected]="selectedDuration()?.minutes === minute"
-                [attr.tabindex]="
-                  selectedDuration()?.minutes === minute ? 0 : -1
-                "
+                [attr.tabindex]="selectedDuration()?.minutes === minute ? 0 : -1"
               >
-                <span class="nui-time-picker__duration-value">{{
-                  minute
-                }}</span>
+                <span class="nui-time-picker__duration-value">{{ minute }}</span>
                 <span class="nui-time-picker__duration-unit">min</span>
               </button>
             }
@@ -153,9 +131,7 @@
                 <button
                   type="button"
                   class="nui-time-picker__item nui-time-picker__item--duration"
-                  [class.nui-time-picker__item--selected]="
-                    selectedDuration()?.seconds === second
-                  "
+                  [class.nui-time-picker__item--selected]="selectedDuration()?.seconds === second"
                   [class.nui-time-picker__item--focused]="
                     focusedSection() === 'duration-seconds' &&
                     selectedDuration()?.seconds === second
@@ -165,13 +141,9 @@
                   (click)="selectDurationSeconds(second)"
                   role="option"
                   [attr.aria-selected]="selectedDuration()?.seconds === second"
-                  [attr.tabindex]="
-                    selectedDuration()?.seconds === second ? 0 : -1
-                  "
+                  [attr.tabindex]="selectedDuration()?.seconds === second ? 0 : -1"
                 >
-                  <span class="nui-time-picker__duration-value">{{
-                    second
-                  }}</span>
+                  <span class="nui-time-picker__duration-value">{{ second }}</span>
                   <span class="nui-time-picker__duration-unit">s</span>
                 </button>
               }
@@ -182,27 +154,24 @@
 
       <!-- Footer con controles -->
       <div class="nui-time-picker__footer">
-        <nui-button
+        <button
           type="button"
+          class="nui-time-picker__footer-btn"
           (click)="clear()"
           [disabled]="isDisabled() || !selectedDuration()"
           [attr.aria-label]="_translations.timePicker.clear"
-          [size]="size()"
-          [width]="'full'"
-          [variant]="'ghost'"
-          [color]="'secondary'"
         >
           {{ _translations.timePicker.clear }}
-        </nui-button>
+        </button>
       </div>
     </div>
   }
 
   <!-- PESTAÑA DEL SELECTOR (solo para modo NO-DURATION) -->
-  @if (!isDurationMode() && (!shouldShowTabs() || activeTab() === "selector")) {
+  @if (!isDurationMode() && (!shouldShowTabs() || activeTab() === 'selector')) {
     <div class="nui-time-picker__main">
       <!-- Header: Display actual -->
-      @if (!fromCalendar() && showHeader()) {
+      @if (showHeader()) {
         <div class="nui-time-picker__header">
           <!-- Indicador de normalización -->
           @if (normalizationInfo()) {
@@ -213,10 +182,7 @@
               [innerHTML]="
                 _translations.timePicker.normalizedTime
                   .replace('{ original }', normalizationInfo()?.original ?? '')
-                  .replace(
-                    '{ normalized }',
-                    normalizationInfo()?.normalized ?? ''
-                  )
+                  .replace('{ normalized }', normalizationInfo()?.normalized ?? '')
               "
             ></div>
           }
@@ -224,9 +190,9 @@
           <!-- Indicador de rango (si está habilitado) -->
           @if (config.showRangeIndicator && config.minTime && config.maxTime) {
             <div class="nui-time-picker__range-indicator">
-              <span class="nui-time-picker__range-label"
-                >{{ _translations.timePicker.rangeLabel }}:</span
-              >
+              <span class="nui-time-picker__range-label">
+                {{ _translations.timePicker.rangeLabel }}:
+              </span>
               <div class="nui-time-picker__range-values">
                 <span class="nui-time-picker__range-start">
                   {{ formatTimeValue(config.minTime) }}
@@ -244,8 +210,7 @@
             role="status"
             aria-live="polite"
             [innerHTML]="formattedTime()"
-          >
-          </div>
+          ></div>
         </div>
       }
 
@@ -256,9 +221,7 @@
           class="nui-time-picker__column"
           role="listbox"
           [attr.aria-label]="
-            is12HourFormat()
-              ? _translations.timePicker.hour12
-              : _translations.timePicker.hour24
+            is12HourFormat() ? _translations.timePicker.hour12 : _translations.timePicker.hour24
           "
           [attr.aria-activedescendant]="
             selectedTime()?.hour ? 'hour-' + selectedTime()?.hour : null
@@ -288,9 +251,7 @@
                 type="button"
                 [id]="'hour-' + hour"
                 class="nui-time-picker__item"
-                [class.nui-time-picker__item--selected]="
-                  selectedTime()?.hour === hour
-                "
+                [class.nui-time-picker__item--selected]="selectedTime()?.hour === hour"
                 [class.nui-time-picker__item--focused]="
                   focusedSection() === 'hour' && selectedTime()?.hour === hour
                 "
@@ -302,7 +263,7 @@
                 [attr.aria-selected]="selectedTime()?.hour === hour"
                 [attr.data-hour]="hour"
               >
-                {{ hour.toString().padStart(2, "0") }}
+                {{ hour.toString().padStart(2, '0') }}
               </button>
             }
           </div>
@@ -324,9 +285,7 @@
             role="listbox"
             [attr.aria-label]="_translations.timePicker.minutes"
             [attr.aria-activedescendant]="
-              selectedTime()?.minute !== undefined
-                ? 'minute-' + selectedTime()?.minute
-                : null
+              selectedTime()?.minute !== undefined ? 'minute-' + selectedTime()?.minute : null
             "
             [attr.aria-describedby]="'minute-help'"
             tabindex="0"
@@ -344,8 +303,8 @@
 
             <!-- Ayuda oculta para lectores de pantalla -->
             <div id="minute-help" class="sr-only">
-              Use arrow keys to navigate, Enter to select, Home/End for
-              first/last, PageUp/PageDown to skip 5 items
+              Use arrow keys to navigate, Enter to select, Home/End for first/last, PageUp/PageDown
+              to skip 5 items
             </div>
 
             <div class="nui-time-picker__column-items" #minutesColumn>
@@ -354,12 +313,9 @@
                   type="button"
                   [id]="'minute-' + minute"
                   class="nui-time-picker__item"
-                  [class.nui-time-picker__item--selected]="
-                    selectedTime()?.minute === minute
-                  "
+                  [class.nui-time-picker__item--selected]="selectedTime()?.minute === minute"
                   [class.nui-time-picker__item--focused]="
-                    focusedSection() === 'minute' &&
-                    selectedTime()?.minute === minute
+                    focusedSection() === 'minute' && selectedTime()?.minute === minute
                   "
                   [disabled]="isDisabled()"
                   [tabindex]="selectedTime()?.minute === minute ? 0 : -1"
@@ -369,7 +325,7 @@
                   [attr.aria-selected]="selectedTime()?.minute === minute"
                   [attr.data-minute]="minute"
                 >
-                  {{ minute.toString().padStart(2, "0") }}
+                  {{ minute.toString().padStart(2, '0') }}
                 </button>
               }
             </div>
@@ -384,8 +340,6 @@
           (keydown)="onKeyDown($event, 'period')"
           (focus)="onColumnFocus('period')"
         >
-          <div class="nui-time-picker__period-label">AM/PM</div>
-
           <!-- Ayuda oculta para lectores de pantalla -->
           <div id="period-help" class="sr-only">
             Use arrow keys or Tab to navigate, Enter to select
@@ -413,55 +367,48 @@
 
       <!-- Footer: Controles de acción -->
       <div class="nui-time-picker__footer">
-        <nui-button
+        <button
           type="button"
+          class="nui-time-picker__footer-btn"
           (click)="clear()"
           [disabled]="isDisabled() || !selectedTime()"
           [attr.aria-label]="_translations.timePicker.clear"
-          [size]="size()"
-          [width]="'full'"
-          [variant]="'ghost'"
-          [color]="'secondary'"
         >
           {{ _translations.timePicker.clear }}
-        </nui-button>
+        </button>
 
         @if (!isDurationMode()) {
           <!-- Si NO estamos en modo Duration, mostrar botón de "Ahora" -->
-          <nui-button
+          <button
             type="button"
+            class="nui-time-picker__footer-btn"
             (click)="setToNow()"
             [disabled]="isDisabled()"
             [attr.aria-label]="_translations.timePicker.setToCurrentTime"
-            [size]="size()"
-            [width]="'full'"
-            [variant]="'ghost'"
           >
             {{ _translations.timePicker.setToCurrentTime }}
-          </nui-button>
+          </button>
         }
       </div>
     </div>
   }
 
   <!-- PESTAÑA DE PRESETS -->
-  @if (shouldShowTabs() && activeTab() === "presets") {
+  @if (shouldShowTabs() && activeTab() === 'presets') {
     <div class="nui-time-picker__presets-view">
-      <div class="nui-time-picker__presets-grid">
-        @for (preset of effectivePresets(); track preset.label) {
-          <button
-            type="button"
-            class="nui-time-picker__preset-btn"
-            (click)="applyPreset(preset)"
-            [disabled]="isDisabled()"
-          >
-            @if (preset.icon) {
-              <i [class]="preset.icon"></i>
-            }
-            <span>{{ preset.label }}</span>
-          </button>
-        }
-      </div>
+      @for (preset of effectivePresets(); track preset.label) {
+        <button
+          type="button"
+          class="nui-time-picker__preset-btn"
+          (click)="applyPreset(preset)"
+          [disabled]="isDisabled()"
+        >
+          @if (preset.icon) {
+            <i [class]="preset.icon"></i>
+          }
+          <span>{{ preset.label }}</span>
+        </button>
+      }
     </div>
   }
 </div>

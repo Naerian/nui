@@ -36,8 +36,8 @@
   flex-direction: column;
   background-color: var(--nui-bg-primary);
   border-radius: var(--nui-border-radius-md);
-  border: 1px solid var(--nui-border-primary);
-  box-shadow: var(--nui-box-shadow-md);
+  border: 1px solid var(--nui-calendar-border);
+  box-shadow: var(--nui-calendar-box-shadow);
   user-select: none;
   padding: var(--nui-calendar-padding);
   gap: var(--nui-calendar-gap);
@@ -74,9 +74,6 @@
   &__tabs {
     display: flex;
     justify-content: center;
-    padding-bottom: var(--nui-spacing-sm);
-    border-bottom: var(--nui-calendar-tabs-border-width) solid var(--nui-border-primary);
-    margin-bottom: var(--nui-calendar-gap);
   }
 
   // ============================================================================
@@ -238,16 +235,16 @@
     border-radius: var(--nui-border-radius-circle);
     font-weight: var(--nui-font-weight-medium);
     font-size: var(--nui-calendar-day-font-size);
-    color: var(--nui-calendar-day-text, var(--nui-text-disabled));
+    color: var(--nui-calendar-day-text);
     opacity: var(--nui-calendar-day-other-month-opacity);
     cursor: pointer;
     transition: all var(--nui-transition-duration-fast) ease;
     position: relative;
     line-height: 1;
 
-    &:hover:not(&--disabled) {
-      background: var(--nui-calendar-day-hover-bg, var(--nui-bg-secondary));
-      color: var(--nui-calendar-day-hover-text, var(--nui-text-primary));
+    &:hover:not(&--disabled):not(&--selected) {
+      background: var(--nui-calendar-day-hover-bg);
+      color: var(--nui-calendar-day-hover-text);
       opacity: 1;
     }
 
@@ -451,11 +448,12 @@
     justify-content: center;
     aspect-ratio: 2 / 1;
     min-width: 0;
+    gap: var(--nui-spacing-xs);
     background: transparent;
     border: 1px solid transparent;
     border-radius: var(--nui-border-radius-sm);
     font-weight: var(--nui-font-weight-medium);
-    font-size: var(--nui-calendar-month-font-size);
+    font-size: var(--nui-calendar-preset-font-size);
     color: var(--nui-text-primary);
     cursor: pointer;
     transition: all var(--nui-transition-duration-fast) ease;
@@ -464,6 +462,11 @@
     &:hover {
       background: var(--nui-bg-secondary);
       border-color: var(--nui-border-primary);
+    }
+
+    i {
+      font-size: var(--time-picker-preset-font-size);
+      color: var(--nui-color-primary);
     }
 
     @include global.focus-ring();
@@ -483,19 +486,24 @@
   &__time-picker {
     display: flex;
     flex-direction: column;
-    gap: var(--nui-spacing-sm);
+    gap: var(--nui-calendar-gap);
+
+    // Style override to integrate the time-picker within the calendar
+    // without borders or padding, using variables specific to this case
+    nui-time-picker {
+      --nui-time-picker-padding: 0 !important;
+      --nui-time-picker-border: transparent !important;
+      --nui-time-picker-box-shadow: none !important;
+    }
   }
 
   &__time-picker-header {
     display: flex;
     flex-direction: column;
-    gap: var(--nui-spacing-sm);
-    font-weight: var(--nui-font-weight-semibold);
-    color: var(--nui-text-secondary);
-    font-size: var(--nui-font-size-sm);
-    text-align: center;
-    padding-bottom: var(--nui-spacing-sm);
+    padding-top: var(--nui-spacing-xs);
+    padding-bottom: var(--nui-spacing-xs);
     border-bottom: var(--nui-calendar-tabs-border-width) solid var(--nui-border-primary);
+    border-top: var(--nui-calendar-tabs-border-width) solid var(--nui-border-primary);
   }
 
   // ============================================================================

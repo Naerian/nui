@@ -25,12 +25,6 @@ export const TIME_PICKER_API_SECTIONS: ComponentSection[] = [
           "Modo de selección: 'HOUR_12', 'HOUR_24', 'HOUR_MINUTE_12', 'HOUR_MINUTE_24', 'DURATION'",
         ],
         [
-          '<code>size</code>',
-          'NUISize',
-          '<code class="neutral">md</code>',
-          "Tamaño del componente: 'xs', 'sm', 'md', 'lg', 'xl'",
-        ],
-        [
           '<code>disabled</code>',
           'boolean',
           '<code class="neutral">false</code>',
@@ -43,16 +37,10 @@ export const TIME_PICKER_API_SECTIONS: ComponentSection[] = [
           'Título personalizado que se muestra en el header',
         ],
         [
-          '<code>fromCalendar</code>',
+          '<code>showHeader</code>',
           'boolean',
-          '<code class="neutral">false</code>',
-          'Indica si se usa desde un calendario (oculta header y bordes)',
-        ],
-        [
-          '<code>variant</code>',
-          'TimePickerVariant',
-          '<code class="neutral">default</code>',
-          "Variante visual: 'default' o 'compact'",
+          '<code class="neutral">true</code>',
+          'Indica si se muestra el header del selector de tiempo',
         ],
         [
           '<code>config</code>',
@@ -163,12 +151,6 @@ export const TIME_PICKER_API_SECTIONS: ComponentSection[] = [
           'boolean',
           '<code class="neutral">false</code>',
           'Mostrar indicador visual del rango permitido',
-        ],
-        [
-          '<code>variant</code>',
-          'TimePickerVariant',
-          '<code class="neutral">default</code>',
-          'Variante de visualización del componente',
         ],
         [
           '<code>duration</code>',
@@ -405,25 +387,6 @@ export const TIME_PICKER_API_SECTIONS: ComponentSection[] = [
         [
           '<code>custom</code>',
           'Usa el valor proporcionado en defaultValue',
-        ],
-      ],
-    },
-  },
-  {
-    id: 'api-time-picker-variant',
-    title: 'TimePickerVariant',
-    description: 'Type con las variantes visuales disponibles',
-    anchor: 'api-time-picker-variant',
-    table: {
-      headers: ['common.tables.value', 'common.tables.description'],
-      rows: [
-        [
-          '<code>default</code>',
-          'Variante predeterminada con header y bordes completos',
-        ],
-        [
-          '<code>compact</code>',
-          'Variante compacta con espaciado reducido',
         ],
       ],
     },

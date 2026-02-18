@@ -285,13 +285,13 @@ export class ThemeService {
       css += this.generateAvatarVariables(name, baseColor);
       css += this.generateActionMenuVariables(name, baseColor);
       css += this.generatePopoverVariables(name, baseColor);
-      css += this.generateTimePickerVariables(name, baseColor);
     });
 
     // Generar variables de Tooltip (no depende de colores semánticos)
     css += this.generateTooltipVariables();
     css += this.generateSidebarPanelVariables();
     css += this.generateCalendarVariables();
+    css += this.generateTimePickerVariables();
 
     css += '}\n';
     return css;
@@ -756,50 +756,50 @@ export class ThemeService {
     const colors = this._isDarkMode()
       ? this._currentPreset().colors.dark
       : this._currentPreset().colors.light;
-    
+
     // Colores de fondo y texto para días del calendario
     const dayBg = 'transparent';
     const dayText = isDark ? grays[400] : grays[600];
-    
+
     // Hover states
     const dayHoverBg = isDark ? grays[800] : grays[100];
     const dayHoverText = isDark ? grays[50] : grays[900];
-    
+
     // Selected states
     const daySelectedBg = this.withAlpha(colors.primary, 0.2);
     const daySelectedText = this.getContrastColor(colors.primary);
-    const daySelectedHoverBg = isDark 
-      ? this.shade(colors.primary, 15) 
-      : this.shade(colors.primary, 10);
-    
+    const daySelectedHoverBg = this.withAlpha(colors.primary, 0.5);
+
     // In-range states (para rangos de fechas)
     const dayRangeBg = this.withAlpha(colors.primary, 0.1);
     const dayRangeText = isDark ? grays[50] : grays[900];
-    
+
     // PASO 1: Smart Service - Status indicators (usando colores semánticos)
     const statusSuccess = colors.success;
     const statusInfo = colors.info;
     const statusWarning = colors.warning;
     const statusDanger = colors.danger;
-    
+
     // Calendar Navigation Button States (Ghost variant style)
     const navBtnBg = 'transparent';
     const navBtnText = isDark ? grays[200] : grays[700];
     const navBtnBorder = 'transparent';
-    
+
     const navBtnHoverBg = isDark ? grays[800] : grays[100];
     const navBtnHoverText = isDark ? grays[50] : grays[900];
     const navBtnHoverBorder = 'transparent';
-    
+
     const navBtnActiveBg = isDark ? grays[700] : grays[200];
     const navBtnActiveBorder = 'transparent';
-    
+
     const navBtnDisabledBg = 'transparent';
     const navBtnDisabledText = isDark ? grays[600] : grays[400];
     const navBtnDisabledBorder = 'transparent';
-    
+
     return `
-      /* Calendar Day States */
+      --nui-calendar-border: var(--nui-bg-primary);
+      --nui-calendar-box-shadow: var(--nui-box-shadow-sm);
+
       --nui-calendar-day-bg: ${dayBg};
       --nui-calendar-day-text: ${dayText};
       
@@ -816,7 +816,7 @@ export class ThemeService {
       --nui-calendar-day-range-bg: ${dayRangeBg};
       --nui-calendar-day-range-text: ${dayRangeText};
       
-      /* PASO 1: Smart Service - Status Indicators (subtle top border) */
+      /* Smart Service - Status Indicators (subtle top border) */
       --nui-calendar-day-status-success: ${statusSuccess};
       --nui-calendar-day-status-info: ${statusInfo};
       --nui-calendar-day-status-warning: ${statusWarning};
@@ -837,6 +837,81 @@ export class ThemeService {
       --nui-calendar-nav-btn-disabled-bg: ${navBtnDisabledBg};
       --nui-calendar-nav-btn-disabled-text: ${navBtnDisabledText};
       --nui-calendar-nav-btn-disabled-border: ${navBtnDisabledBorder};
+    `;
+  }
+
+  /**
+   * Genera variables CSS para el componente Time Picker
+   */
+  private generateTimePickerVariables(): string {
+    const isDark = this._isDarkMode();
+    const grays = this._currentPreset().grays || this.getDefaultGrays();
+    const colors = this._isDarkMode()
+      ? this._currentPreset().colors.dark
+      : this._currentPreset().colors.light;
+
+    // Colores de fondo y texto para días del calendario
+    const timeBg = 'transparent';
+    const timeText = isDark ? grays[400] : grays[600];
+
+    // Hover states
+    const timeHoverBg = isDark ? grays[800] : grays[100];
+    const timeHoverText = isDark ? grays[50] : grays[900];
+
+    const timeSelectedBg = this.withAlpha(colors.primary, 0.2);
+    const timeSelectedText = this.getContrastColor(colors.primary);
+    const timeSelectedHoverBg = this.withAlpha(colors.primary, 0.5);
+
+    const navBtnBg = 'transparent';
+    const navBtnText = isDark ? grays[200] : grays[700];
+    const navBtnBorder = 'transparent';
+
+    const navBtnHoverBg = isDark ? grays[800] : grays[100];
+    const navBtnHoverText = isDark ? grays[50] : grays[900];
+    const navBtnHoverBorder = 'transparent';
+
+    const navBtnActiveBg = isDark ? grays[700] : grays[200];
+    const navBtnActiveBorder = 'transparent';
+
+    const navBtnDisabledBg = 'transparent';
+    const navBtnDisabledText = isDark ? grays[600] : grays[400];
+    const navBtnDisabledBorder = 'transparent';
+
+    return `
+      --nui-time-picker-border: var(--nui-bg-primary);
+      --nui-time-picker-box-shadow: var(--nui-box-shadow-sm);
+
+      --nui-time-picker-item-bg: ${timeBg};
+      --nui-time-picker-item-text: ${timeText};
+
+      --nui-time-picker-item-hover-bg: ${timeHoverBg};
+      --nui-time-picker-item-hover-text: ${timeHoverText};
+
+      --nui-time-picker-item-selected-bg: ${timeSelectedBg};
+      --nui-time-picker-item-selected-text: ${timeSelectedText};
+      --nui-time-picker-item-selected-border: ${timeSelectedBg};
+
+      --nui-time-picker-item-selected-hover-bg: ${timeSelectedHoverBg};
+      --nui-time-picker-item-selected-hover-border: ${timeSelectedHoverBg};
+
+      --nui-time-picker-item-disabled-bg: transparent;
+      --nui-time-picker-item-disabled-text: var(--nui-text-disabled);
+
+      /* Time Picker Footer Buttons (customizable ghost-style buttons) */
+      --nui-time-picker-nav-btn-bg: ${navBtnBg};
+      --nui-time-picker-nav-btn-text: ${navBtnText};
+      --nui-time-picker-nav-btn-border: ${navBtnBorder};
+      
+      --nui-time-picker-nav-btn-hover-bg: ${navBtnHoverBg};
+      --nui-time-picker-nav-btn-hover-text: ${navBtnHoverText};
+      --nui-time-picker-nav-btn-hover-border: ${navBtnHoverBorder};
+      
+      --nui-time-picker-nav-btn-active-bg: ${navBtnActiveBg};
+      --nui-time-picker-nav-btn-active-border: ${navBtnActiveBorder};
+      
+      --nui-time-picker-nav-btn-disabled-bg: ${navBtnDisabledBg};
+      --nui-time-picker-nav-btn-disabled-text: ${navBtnDisabledText};
+      --nui-time-picker-nav-btn-disabled-border: ${navBtnDisabledBorder};
     `;
   }
 
@@ -1076,30 +1151,5 @@ export class ThemeService {
   private withAlpha(color: string, alpha: number): string {
     const rgb = this.hexToRgb(color);
     return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha})`;
-  }
-
-  /**
-   * Genera variables CSS para el componente Time Picker
-   */
-  private generateTimePickerVariables(name: string, color: string): string {
-    const alpha10 = this.withAlpha(color, 0.1);
-    const alpha20 = this.withAlpha(color, 0.2);
-    const selectedBg = this._isDarkMode() ? this.shade(color, 15) : color;
-    const selectedText = this.getContrastColor(selectedBg);
-
-    return `
-      --time-picker-${name}-item-bg: transparent;
-      --time-picker-${name}-item-text: var(--nui-text-primary);
-      --time-picker-${name}-item-hover-bg: ${alpha10};
-      --time-picker-${name}-item-hover-text: ${color};
-      --time-picker-${name}-item-selected-bg: ${selectedBg};
-      --time-picker-${name}-item-selected-text: ${selectedText};
-      --time-picker-${name}-item-selected-hover-bg: ${this._isDarkMode() ? this.shade(color, 20) : this.tint(color, 10)};
-      --time-picker-${name}-item-disabled-bg: transparent;
-      --time-picker-${name}-item-disabled-text: var(--nui-text-disabled);
-      --time-picker-${name}-accent: ${color};
-      --time-picker-${name}-accent-hover: ${alpha20};
-      --time-picker-${name}-focus-ring: ${this.withAlpha(color, 0.4)};
-    `;
   }
 }

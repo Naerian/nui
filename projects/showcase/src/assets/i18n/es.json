@@ -1364,7 +1364,7 @@
       "modes": {
         "title": "Modos de tiempo",
         "description": "Cinco modos disponibles: solo horas (12h/24h), horas y minutos (12h/24h), y modo duración.",
-        "note": "Usa <code>mode</code> con los valores: <code>'HOUR_12'</code>, <code>'HOUR_24'</code>, <code>'HOUR_MINUTE_12'</code>, <code>'HOUR_MINUTE_24'</code> y <code>'DURATION'</code>. El modo duración es especial, útil para seleccionar intervalos de tiempo."
+        "note": "Usa <code>mode</code> con los valores: <code>'HOUR_12'</code>, <code>'HOUR_24'</code>, <code>'HOUR_MINUTE_12'</code> y <code>'HOUR_MINUTE_24'</code>."
       },
       "sizes": {
         "title": "Tamaños",
@@ -1387,7 +1387,7 @@
         "note": "Configura <code>minTime</code> y <code>maxTime</code> en la <code>config</code>. Los tiempos fuera de este rango quedan deshabilitados. Usa <code>showRangeIndicator: true</code> para resaltar visualmente el rango válido."
       },
       "disabledTimes": {
-        "title": "Tiempos deshabilitados",
+        "title": "Tiempo deshabilitado",
         "description": "Bloquea horas o minutos específicos, evitando su selección. Útil para franjas horarias no disponibles.",
         "note": "Usa <code>disabledHours</code> y <code>disabledMinutes</code> en la <code>config</code> para especificar arrays de valores deshabilitados. Los items deshabilitados muestran un estilo atenuado distintivo."
       },
@@ -1403,7 +1403,8 @@
       },
       "disabled": {
         "title": "Estado deshabilitado",
-        "description": "Deshabilita todo el selector, evitando la interacción del usuario y mostrando una apariencia atenuada."
+        "description": "Deshabilita todo el selector, evitando la interacción del usuario y mostrando una apariencia atenuada.",
+        "note": "Usa la propiedad <code>disabled</code> para controlar dinámicamente si el selector de tiempo está habilitado o deshabilitado."
       },
       "reactiveForms": {
         "title": "Formularios reactivos",

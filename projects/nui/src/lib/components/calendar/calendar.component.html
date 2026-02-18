@@ -9,7 +9,7 @@
         (ngModelChange)="onTabChange($event)"
         mode="radio"
         visualVariant="segmented"
-        size="sm"
+        size="xs"
         class="nui-calendar__tabs-toggle"
       />
     </div>
@@ -234,6 +234,7 @@
                 [options]="timePickerToggleOptions()"
                 [ngModel]="timePickerToggleValue()"
                 (ngModelChange)="onTimePickerToggleChange($event)"
+                variant="ghost"
                 mode="radio"
                 visualVariant="segmented"
                 size="xs"
@@ -245,7 +246,7 @@
           <!-- Time Picker (cambia según toggle en modo 'both') -->
           @if (showTimePicker() !== 'both' || !showingEndTime()) {
             <nui-time-picker
-              [fromCalendar]="true"
+              [showHeader]="false"
               [mode]="timeMode()"
               [config]="timeConfig()"
               [ngModel]="selectedStartTime() || selectedTime()"
@@ -255,7 +256,7 @@
 
           @if (showTimePicker() === 'both' && showingEndTime()) {
             <nui-time-picker
-              [fromCalendar]="true"
+              [showHeader]="false"
               [mode]="timeMode()"
               [config]="timeConfig()"
               [ngModel]="selectedEndTime()"
@@ -272,7 +273,7 @@
             {{ _translations.calendar.timePicker.end }}
           </div>
           <nui-time-picker
-            [fromCalendar]="true"
+            [showHeader]="false"
             [mode]="timeMode()"
             [config]="timeConfig()"
             [ngModel]="selectedEndTime()"

@@ -339,8 +339,6 @@ import { TimePickerComponent } from '@shared/components/time-picker/time-picker.
 | `size` | `NUISize` | `'md'` | Tamaño (`'xs' \| 's' \| 'sm' \| 'md' \| 'lg' \| 'xl'`) |
 | `disabled` | `boolean` | `false` | Deshabilitar el picker |
 | `title` | `string` | `''` | Título opcional del picker |
-| `fromCalendar` | `boolean` | `false` | Indica si se usa desde Calendar (ajusta estilos) |
-| `variant` | `TimePickerVariant` | `'default'` | Variante visual (`'default' \| 'compact'`) |
 | `config` | `TimePickerConfig` | `{}` | Configuración avanzada (steps, min/max, presets, etc.) |
 | `defaultStrategy` | `'now' \| 'smart' \| 'empty' \| 'custom'` | `'empty'` | Estrategia para valor por defecto |
 | `defaultValue` | `Date \| string \| TimeValue` | - | Valor custom cuando strategy='custom' |
@@ -383,8 +381,6 @@ type TimePickerMode =
   | 'HOUR_MINUTE_SECOND_12'    // 12h con segundos
   | 'HOUR_MINUTE_SECOND_24'    // 24h con segundos
   | 'DURATION';                // Duración (0-N horas)
-
-type TimePickerVariant = 'default' | 'compact';
 
 type TimePickerSection = 'hour' | 'minute' | 'second' | 'period';
 
@@ -1079,17 +1075,6 @@ El componente respeta el sistema de tamaños NUI:
 
 ```html
 <nui-time-picker size="md"></nui-time-picker>
-```
-
-### Integración con Calendar
-
-Cuando se usa dentro de un Calendar, el TimePicker ajusta automáticamente sus estilos:
-
-```html
-<nui-time-picker 
-  [fromCalendar]="true"
-  mode="HOUR_MINUTE_12">
-</nui-time-picker>
 ```
 
 ### Personalización Avanzada

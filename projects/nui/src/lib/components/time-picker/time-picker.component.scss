@@ -1,4 +1,5 @@
 ﻿@use '../../../../styles/variables/time-picker-vars';
+@use '../../../../styles/abstracts/mixins' as global;
 
 // ============================================================================
 // HOST & STRUCTURE
@@ -6,8 +7,8 @@
 
 :host {
   @include time-picker-vars.nui-time-picker-vars;
-  display: block;
-  width: 100%;
+  display: inline-flex;
+  width: auto;
 }
 
 // ============================================================================
@@ -33,17 +34,18 @@
 .nui-time-picker {
   display: flex;
   flex-direction: column;
-  gap: var(--nui-spacing-sm);
-  padding: var(--time-picker-padding);
+  padding: var(--nui-time-picker-padding);
   background-color: var(--nui-bg-primary);
   border-radius: var(--nui-border-radius-md);
-  border: 1px solid var(--nui-border-primary);
-  box-shadow: var(--nui-shadow-sm);
-  min-width: var(--time-picker-min-width);
-  width: 100%;
+  border: 1px solid var(--nui-time-picker-border);
+  box-shadow: var(--nui-time-picker-box-shadow);
+  min-width: var(--nui-time-picker-min-width);
+  gap: var(--nui-time-picker-gap);
+  width: var(--nui-time-picker-width);
+  max-width: 100%; // Responsive: se adapta si el contenedor es más pequeño
 
   &--with-seconds {
-    min-width: var(--time-picker-min-width-with-seconds);
+    min-width: var(--nui-time-picker-min-width-with-seconds);
   }
 
   // ============================================================================
@@ -54,19 +56,19 @@
     display: flex;
     flex-direction: column;
     gap: var(--nui-spacing-sm);
-    padding-bottom: var(--time-picker-padding);
-    border-bottom: var(--time-picker-header-border-width) solid var(--nui-border-primary);
+    padding-bottom: var(--nui-time-picker-padding);
+    border-bottom: var(--nui-time-picker-header-border-width) solid var(--nui-border-primary);
   }
 
   &__normalized {
     color: var(--nui-color-warning);
     background: var(--nui-bg-warning);
-    border: var(--time-picker-header-border-width) solid var(--nui-border-warning);
-    border-radius: var(--time-picker-item-radius);
+    border: var(--nui-time-picker-header-border-width) solid var(--nui-border-warning);
+    border-radius: var(--nui-time-picker-item-radius);
     text-align: center;
     line-height: 1.5;
-    font-size: var(--time-picker-normalized-font-size);
-    padding: calc(var(--time-picker-padding) / 2);
+    font-size: var(--nui-time-picker-normalized-font-size);
+    padding: calc(var(--nui-time-picker-padding) / 2);
   }
 
   &__display {
@@ -74,10 +76,10 @@
     font-weight: var(--nui-font-weight-semibold);
     color: var(--nui-text-primary);
     text-align: center;
-    font-size: var(--time-picker-display-font-size);
+    font-size: var(--nui-time-picker-display-font-size);
 
     &--duration {
-      font-size: var(--time-picker-font-size);
+      font-size: var(--nui-time-picker-font-size);
       font-weight: var(--nui-font-weight-semibold);
     }
   }
@@ -93,7 +95,7 @@
     gap: var(--nui-spacing-xs);
     padding: var(--nui-spacing-sm);
     background: var(--nui-bg-secondary);
-    border-radius: var(--time-picker-item-radius);
+    border-radius: var(--nui-time-picker-item-radius);
     font-size: 0.85em;
   }
 
@@ -130,11 +132,10 @@
   &__selectors {
     display: flex;
     align-items: stretch;
-    padding: var(--nui-spacing-sm);
-    gap: var(--nui-spacing-sm);
+    gap: var(--nui-time-picker-gap);
 
     &--duration {
-      gap: var(--nui-spacing-lg);
+      gap: var(--nui-time-picker-gap);
     }
   }
 
@@ -143,14 +144,14 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    padding-top: var(--time-picker-separator-padding-top);
+    padding-top: var(--nui-time-picker-separator-padding-top);
     padding-left: var(--nui-spacing-xs);
     padding-right: var(--nui-spacing-xs);
-    min-width: var(--time-picker-separator-width);
+    min-width: var(--nui-time-picker-separator-width);
 
     &-line {
-      width: var(--time-picker-separator-line-width);
-      height: var(--time-picker-separator-line-height);
+      width: var(--nui-time-picker-separator-line-width);
+      height: var(--nui-time-picker-separator-line-height);
       background: linear-gradient(
         to bottom,
         transparent 0%,
@@ -158,7 +159,7 @@
         var(--nui-border-primary) 80%,
         transparent 100%
       );
-      border-radius: var(--time-picker-separator-border-radius);
+      border-radius: var(--nui-time-picker-separator-border-radius);
     }
 
     &-text {
@@ -167,7 +168,7 @@
       color: var(--nui-text-primary);
       margin: var(--nui-spacing-xs) 0;
       line-height: 1;
-      text-shadow: var(--time-picker-separator-text-shadow);
+      text-shadow: var(--nui-time-picker-separator-text-shadow);
     }
   }
 
@@ -180,7 +181,7 @@
     display: flex;
     flex-direction: column;
     min-width: 0;
-    border-radius: var(--time-picker-item-radius);
+    border-radius: var(--nui-time-picker-item-radius);
 
     &--duration-hours,
     &--duration-minutes,
@@ -189,32 +190,32 @@
     }
 
     &:focus-visible {
-      outline: var(--time-picker-focus-outline-width) solid var(--nui-color-primary);
-      outline-offset: var(--time-picker-focus-outline-offset);
+      outline: var(--nui-time-picker-focus-outline-width) solid var(--nui-color-primary);
+      outline-offset: var(--nui-time-picker-focus-outline-offset);
       background-color: var(--nui-bg-secondary);
     }
   }
 
   &__column-label {
     text-align: center;
-    font-size: calc(var(--time-picker-font-size) * 0.85);
+    font-size: calc(var(--nui-time-picker-font-size) * 0.85);
     font-weight: var(--nui-font-weight-medium);
     color: var(--nui-text-tertiary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: var(--nui-spacing-xs);
-    margin-right: calc(var(--time-picker-items-padding) + var(--nui-scrollbar-width));
+    margin-right: calc(var(--nui-time-picker-items-padding) + var(--nui-scrollbar-width));
   }
 
   &__column-items {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: var(--time-picker-items-gap);
+    gap: var(--nui-time-picker-items-gap);
     overflow-y: auto;
-    max-height: var(--time-picker-max-height);
-    min-height: var(--time-picker-min-height);
-    padding: var(--time-picker-items-padding);
+    max-height: var(--nui-time-picker-max-height);
+    min-height: var(--nui-time-picker-min-height);
+    padding: var(--nui-time-picker-items-padding);
     position: relative;
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
@@ -229,40 +230,45 @@
     align-items: center;
     justify-content: center;
     padding: var(--nui-spacing-xs);
-    background: var(--nui-bg-primary);
-    border: var(--time-picker-item-border-width) solid transparent;
-    border-radius: var(--time-picker-item-radius);
-    color: var(--nui-text-secondary);
+    background: var(--nui-time-picker-item-bg);
+    border: var(--nui-time-picker-item-border-width) solid transparent;
+    border-radius: var(--nui-time-picker-item-radius);
+    color: var(--nui-time-picker-item-text);
     font-family: var(--nui-font-family);
     font-weight: var(--nui-font-weight-regular);
     cursor: pointer;
-    height: var(--time-picker-item-height);
-    font-size: var(--time-picker-font-size);
+    height: var(--nui-time-picker-item-height);
+    font-size: var(--nui-time-picker-font-size);
     transition: all var(--nui-transition-duration-fast) var(--nui-transition-timing-function-ease);
-    margin-right: 0.313rem; // 5px to compensate for 1px border and prevent layout shift on selection
+    margin-right: 0.313rem;
 
     &:hover:not(:disabled):not(&--selected) {
-      background-color: var(--nui-bg-secondary);
-      color: var(--nui-text-primary);
+      background-color: var(--nui-time-picker-item-hover-bg);
+      color: var(--nui-time-picker-item-hover-text);
       opacity: 1;
     }
 
     &--selected {
-      background: var(--nui-color-primary);
-      border-color: var(--nui-color-primary);
-      color: var(--nui-color-primary-contrast);
+      background: var(--nui-time-picker-item-selected-bg);
+      border-color: var(--nui-time-picker-item-selected-border);
+      color: var(--nui-time-picker-item-selected-text);
       font-weight: var(--nui-font-weight-semibold);
+
+      &:hover:not(:disabled) {
+        background: var(--nui-time-picker-item-selected-hover-bg);
+        border-color: var(--nui-time-picker-item-selected-hover-border);
+      }
     }
 
     &--focused {
-      outline: var(--time-picker-focus-outline-width) solid var(--nui-color-primary-tint-65);
-      outline-offset: var(--time-picker-item-focus-outline-offset);
+      outline: var(--nui-time-picker-focus-outline-width) solid var(--nui-color-primary-tint-65);
+      outline-offset: var(--nui-time-picker-item-focus-outline-offset);
       z-index: 2;
     }
 
     &:focus-visible {
-      outline: var(--time-picker-focus-outline-width) solid var(--nui-color-primary-tint-65);
-      outline-offset: var(--time-picker-item-focus-outline-offset);
+      outline: var(--nui-time-picker-focus-outline-width) solid var(--nui-color-primary-tint-65);
+      outline-offset: var(--nui-time-picker-item-focus-outline-offset);
       z-index: 2;
     }
 
@@ -271,6 +277,8 @@
     }
 
     &:disabled {
+      background-color: var(--nui-time-picker-item-disabled-bg);
+      color: var(--nui-time-picker-item-disabled-text);
       opacity: 0.4;
       cursor: not-allowed;
     }
@@ -283,41 +291,48 @@
       justify-content: center;
       gap: var(--nui-spacing-xs);
       padding: var(--nui-spacing-xs) var(--nui-spacing-sm);
-      min-height: var(--time-picker-item-height);
-      height: var(--time-picker-item-height);
-      font-size: var(--time-picker-font-size);
+      min-height: var(--nui-time-picker-item-height);
+      height: var(--nui-time-picker-item-height);
+      font-size: var(--nui-time-picker-font-size);
       cursor: pointer;
       transition: all var(--nui-transition-duration-fast) var(--nui-transition-timing-function-ease);
-      border-radius: var(--time-picker-item-radius);
-      background: var(--nui-bg-primary);
+      border-radius: var(--nui-time-picker-item-radius);
+      background: var(--nui-time-picker-item-bg);
       border: 1px solid transparent;
-      color: var(--nui-text-secondary);
+      color: var(--nui-time-picker-item-text);
       font-family: var(--nui-font-family);
       font-weight: var(--nui-font-weight-regular);
 
       &:hover:not(:disabled):not(.nui-time-picker__item--selected) {
-        background-color: var(--nui-bg-secondary);
-        color: var(--nui-text-primary);
+        background-color: var(--nui-time-picker-item-hover-bg);
+        color: var(--nui-time-picker-item-hover-text);
         opacity: 1;
       }
 
       &:disabled {
+        background-color: var(--nui-time-picker-item-disabled-bg);
+        color: var(--nui-time-picker-item-disabled-text);
         cursor: not-allowed;
         opacity: 0.4;
       }
 
       &.nui-time-picker__item--selected {
-        background: var(--nui-color-primary);
-        border-color: var(--nui-color-primary);
+        background: var(--nui-time-picker-item-selected-bg);
+        border-color: var(--nui-time-picker-item-selected-border);
         font-weight: var(--nui-font-weight-semibold);
 
+        &:hover:not(:disabled) {
+          background: var(--nui-time-picker-item-selected-hover-bg);
+          border-color: var(--nui-time-picker-item-selected-hover-border);
+        }
+
         .nui-time-picker__duration-value {
-          color: var(--nui-color-primary-contrast);
+          color: var(--nui-time-picker-item-selected-text);
           font-weight: var(--nui-font-weight-semibold);
         }
 
         .nui-time-picker__duration-unit {
-          color: var(--nui-color-primary-contrast);
+          color: var(--nui-time-picker-item-selected-text);
           font-weight: var(--nui-font-weight-medium);
           opacity: 0.9;
         }
@@ -365,17 +380,11 @@
     flex-direction: column;
     min-width: 0;
     padding-bottom: var(--nui-spacing-sm);
-    border-radius: var(--time-picker-item-radius);
-
-    &:focus-within {
-      outline: var(--time-picker-focus-outline-width) solid var(--nui-color-primary);
-      outline-offset: var(--time-picker-focus-outline-offset);
-      background-color: var(--nui-bg-secondary);
-    }
+    border-radius: var(--nui-time-picker-item-radius);
 
     &-label {
       text-align: center;
-      font-size: var(--time-picker-font-size);
+      font-size: var(--nui-time-picker-font-size);
       font-weight: var(--nui-font-weight-medium);
       color: var(--nui-text-tertiary);
       text-transform: uppercase;
@@ -395,10 +404,81 @@
 
   &__footer {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     border-top: 1px solid var(--nui-border-primary);
-    min-height: var(--time-picker-option-min-height);
+    min-height: var(--nui-time-picker-option-min-height);
     padding-top: var(--nui-spacing-sm);
     gap: var(--nui-spacing-sm);
+  }
+
+  // ============================================================================
+  // FOOTER BUTTONS (Native buttons styled like ghost variant)
+  // ============================================================================
+
+  &__footer-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-weight: var(--nui-font-weight-semibold);
+    font-family: var(--nui-font-family);
+    text-decoration: none;
+    border-width: 1px;
+    border-style: solid;
+    transition: all var(--nui-transition-duration-fast) ease;
+    line-height: 1.5;
+    height: var(--nui-time-picker-nav-btn-height);
+    padding: var(--nui-time-picker-nav-btn-padding);
+    font-size: var(--nui-time-picker-nav-btn-font-size);
+    border-radius: var(--nui-border-radius-sm);
+
+    // Theme colors (customizable via CSS variables)
+    background-color: var(--nui-time-picker-nav-btn-bg);
+    color: var(--nui-time-picker-nav-btn-text);
+    border-color: var(--nui-time-picker-nav-btn-border);
+
+    &:hover:not(:disabled) {
+      background-color: var(--nui-time-picker-nav-btn-hover-bg);
+      color: var(--nui-time-picker-nav-btn-hover-text);
+      border-color: var(--nui-time-picker-nav-btn-hover-border);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--nui-time-picker-nav-btn-active-bg);
+      border-color: var(--nui-time-picker-nav-btn-active-border);
+    }
+
+    &:disabled {
+      background-color: var(--nui-time-picker-nav-btn-disabled-bg);
+      color: var(--nui-time-picker-nav-btn-disabled-text);
+      border-color: var(--nui-time-picker-nav-btn-disabled-border);
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    @include global.focus-ring();
+
+    // Icon styles
+    i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1em;
+      height: 1em;
+      flex-shrink: 0;
+      line-height: 1;
+      vertical-align: middle;
+      font-size: var(--nui-time-picker-nav-btn-font-size);
+    }
+
+    // Icon-only buttons (square)
+    &--icon-only {
+      padding: 0;
+      width: var(--nui-time-picker-nav-btn-height);
+      min-width: var(--nui-time-picker-nav-btn-height);
+    }
   }
 
   // ============================================================================
@@ -408,8 +488,6 @@
   &__tabs {
     display: flex;
     justify-content: center;
-    padding-bottom: var(--nui-spacing-sm);
-    border-bottom: 1px solid var(--nui-border-primary);
 
     &-toggle {
       width: 100%;
@@ -424,6 +502,7 @@
   &__main {
     display: flex;
     flex-direction: column;
+    gap: var(--nui-time-picker-gap);
   }
 
   &__duration-view {
@@ -432,53 +511,37 @@
   }
 
   &__presets-view {
-    display: flex;
-    flex-direction: column;
-    padding: var(--nui-spacing-md);
-  }
-
-  &__presets-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: var(--nui-spacing-sm);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--nui-time-picker-gap);
   }
 
   &__preset-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--nui-spacing-xs);
-    background: var(--nui-bg-primary);
-    border: var(--time-picker-item-border-width) solid transparent;
-    border-radius: var(--time-picker-item-radius);
-    color: var(--nui-text-secondary);
-    font-family: var(--nui-font-family);
-    font-weight: var(--nui-font-weight-regular);
-    cursor: pointer;
-    height: var(--time-picker-item-height);
-    font-size: var(--time-picker-font-size);
-    transition: all var(--nui-transition-duration-fast) var(--nui-transition-timing-function-ease);
+    aspect-ratio: 2 / 1;
+    min-width: 0;
     gap: var(--nui-spacing-xs);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--nui-border-radius-sm);
+    font-weight: var(--nui-font-weight-medium);
+    font-size: var(--nui-time-picker-preset-font-size);
+    color: var(--nui-text-primary);
+    cursor: pointer;
+    transition: all var(--nui-transition-duration-fast) ease;
+    padding: var(--nui-spacing-sm);
 
-    &:hover:not(:disabled):not(&--selected) {
-      background-color: var(--nui-bg-secondary);
-      color: var(--nui-text-primary);
-      opacity: 1;
+    &:hover {
+      background: var(--nui-bg-secondary);
+      border-color: var(--nui-border-primary);
     }
 
-    &:focus-visible {
-      outline: var(--time-picker-focus-outline-width) solid var(--nui-color-primary-tint-65);
-      outline-offset: var(--time-picker-item-focus-outline-offset);
-      z-index: 2;
-    }
-
-    &:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
+    @include global.focus-ring();
 
     i {
-      font-size: var(--time-picker-font-size);
+      font-size: var(--nui-time-picker-preset-font-size);
       color: var(--nui-color-primary);
     }
   }
@@ -490,76 +553,6 @@
   &--disabled {
     opacity: 0.6;
     pointer-events: none;
-  }
-
-  &--from-calendar {
-    background: transparent;
-    border: 0;
-    border-radius: 0;
-    box-shadow: none;
-    gap: var(--time-picker-actions-gap);
-    padding: 0;
-
-    .nui-time-picker__selectors,
-    .nui-time-picker__footer {
-      padding: 0;
-    }
-
-    .nui-time-picker__footer {
-      padding-top: var(--nui-spacing-sm);
-    }
-  }
-
-  &--compact {
-    padding: var(--nui-spacing-sm);
-
-    .nui-time-picker__header {
-      padding-bottom: var(--time-picker-padding);
-    }
-
-    .nui-time-picker__display {
-      font-size: 0.9em;
-    }
-
-    .nui-time-picker__selectors {
-      padding: var(--nui-spacing-xs);
-      gap: var(--nui-spacing-xs);
-    }
-
-    .nui-time-picker__column-label {
-      display: none;
-    }
-
-    .nui-time-picker__item {
-      padding: var(--nui-spacing-xs);
-      font-size: 0.85em;
-    }
-
-    .nui-time-picker__footer {
-      gap: var(--nui-spacing-xs);
-    }
-  }
-
-  &--duration {
-    .nui-time-picker__display {
-      font-family: var(--nui-font-family);
-    }
-  }
-}
-
-// ============================================================================
-// SIZE VARIANTS
-// ============================================================================
-
-$sizes: xs, sm, md, lg, xl;
-@each $size in $sizes {
-  .nui-time-picker--#{$size} {
-    --time-picker-item-height: var(--time-picker-item-height-#{$size});
-    --time-picker-item-radius: calc(var(--time-picker-item-radius-#{$size}) - 0.125rem);
-    --time-picker-font-size: var(--nui-font-size-#{$size});
-    --time-picker-padding: var(--time-picker-padding-#{$size});
-    --time-picker-max-height: var(--time-picker-max-height-#{$size});
-    --time-picker-min-height: var(--time-picker-min-height-#{$size});
   }
 }
 

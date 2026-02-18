@@ -48,34 +48,16 @@ export const TIME_PICKER_EXAMPLES_SECTIONS: ComponentSection[] = [
         code: `<nui-time-picker mode="HOUR_MINUTE_12"></nui-time-picker>`,
         language: 'html',
       },
-      {
-        title: 'DURATION',
-        code: `<nui-time-picker mode="DURATION"></nui-time-picker>`,
-        language: 'html',
-      },
-    ],
-  },
-  {
-    id: 'sizes',
-    title: 'components.timePicker.sizes.title',
-    description: 'components.timePicker.sizes.description',
-    anchor: 'sizes',
-    examples: [
-      {
-        title: 'codeExamples.html',
-        code: `<nui-time-picker size="xs"></nui-time-picker>
-<nui-time-picker size="sm"></nui-time-picker>
-<nui-time-picker size="md"></nui-time-picker>
-<nui-time-picker size="lg"></nui-time-picker>
-<nui-time-picker size="xl"></nui-time-picker>`,
-        language: 'html',
-      },
     ],
   },
   {
     id: 'presets',
     title: 'components.timePicker.presets.title',
     description: 'components.timePicker.presets.description',
+    note: {
+      type: 'info',
+      content: 'components.timePicker.presets.note',
+    },
     anchor: 'presets',
     examples: [
       {
@@ -103,6 +85,10 @@ config: TimePickerConfig = {
     id: 'steps',
     title: 'components.timePicker.steps.title',
     description: 'components.timePicker.steps.description',
+    note: {
+      type: 'info',
+      content: 'components.timePicker.steps.note',
+    },
     anchor: 'steps',
     examples: [
       {
@@ -124,6 +110,10 @@ config: TimePickerConfig = {
     id: 'time-range',
     title: 'components.timePicker.timeRange.title',
     description: 'components.timePicker.timeRange.description',
+    note: {
+      type: 'info',
+      content: 'components.timePicker.timeRange.note',
+    },
     anchor: 'time-range',
     examples: [
       {
@@ -146,6 +136,10 @@ config: TimePickerConfig = {
     id: 'disabled-times',
     title: 'components.timePicker.disabledTimes.title',
     description: 'components.timePicker.disabledTimes.description',
+    note: {
+      type: 'info',
+      content: 'components.timePicker.disabledTimes.note',
+    },
     anchor: 'disabled-times',
     examples: [
       {
@@ -167,6 +161,10 @@ config: TimePickerConfig = {
     id: 'duration-mode',
     title: 'components.timePicker.durationMode.title',
     description: 'components.timePicker.durationMode.description',
+    note: {
+      type: 'info',
+      content: 'components.timePicker.durationMode.note',
+    },
     anchor: 'duration-mode',
     examples: [
       {
@@ -190,6 +188,10 @@ config: TimePickerConfig = {
     id: 'default-strategies',
     title: 'components.timePicker.defaultStrategies.title',
     description: 'components.timePicker.defaultStrategies.description',
+    note: {
+      type: 'info',
+      content: 'components.timePicker.defaultStrategies.note',
+    },
     anchor: 'default-strategies',
     examples: [
       {
@@ -219,6 +221,10 @@ config: TimePickerConfig = {
     id: 'disabled',
     title: 'components.timePicker.disabled.title',
     description: 'components.timePicker.disabled.description',
+    note: {
+      type: 'info',
+      content: 'components.timePicker.disabled.note',
+    },
     anchor: 'disabled',
     examples: [
       {
@@ -232,6 +238,10 @@ config: TimePickerConfig = {
     id: 'reactive-forms',
     title: 'components.timePicker.reactiveForms.title',
     description: 'components.timePicker.reactiveForms.description',
+    note: {
+      type: 'info',
+      content: 'components.timePicker.reactiveForms.note',
+    },
     anchor: 'reactive-forms',
     examples: [
       {
