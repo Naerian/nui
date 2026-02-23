@@ -56,13 +56,7 @@ import { BtnGroupOption } from '../button-group';
   styleUrls: ['./calendar.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    CommonModule,
-    A11yModule,
-    ButtonGroupComponent,
-    TimePickerComponent,
-    FormsModule,
-  ],
+  imports: [CommonModule, A11yModule, ButtonGroupComponent, TimePickerComponent, FormsModule],
   providers: [
     CalendarKeyboardNavigationService,
     {
@@ -97,6 +91,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   // - Para RANGE: array de N fechas (se usa first como start, last como end)
   date = input<string | Date | Date[] | null>();
 
+  // Fechas deshabilitadas (array de strings o Date)
   disabledDates = input<(string | Date)[]>(); // Fechas deshabilitadas
 
   // ========================================================================
@@ -132,6 +127,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   minDate = input<Date | string | null>(); // Fecha mínima permitida
   maxDate = input<Date | string | null>(); // Fecha máxima permitida
   showTodayButton = input<boolean>(true); // Mostrar botón "Hoy"
+  showWeekNumbers = input<boolean>(false); // Mostrar números de semana ISO en la columna izquierda
   showPresets = input<boolean>(false); // Mostrar panel de presets
   customPresets = input<DateRangePreset[]>(); // Presets personalizados
   firstDayOfWeek = input<FirstDayOfWeek>(1); // 0=Domingo, 1=Lunes (default)
@@ -180,30 +176,30 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   viewMode = signal<ViewMode>(ViewMode.DAY);
   currentDate = signal<Date>(new Date());
   previousViewDate = signal<Date | null>(null); // Para cancelar con Escape
-  
+
   // Selección simple (selection='single')
   selectedDate = signal<Date | null>(null);
   selectedMonth = signal<{ month: number; year: number } | null>(null); // Mes y año seleccionado (para type='month')
   selectedYear = signal<number | null>(null); // Año seleccionado independiente
-  
+
   // Selección múltiple (selection='multiple')
   selectedDates = signal<Date[]>([]); // Array de fechas seleccionadas (para type='day' + selection='multiple')
   selectedMonths = signal<Array<{ month: number; year: number }>>([]); // Array de meses seleccionados
   selectedYears = signal<number[]>([]); // Array de años seleccionados
-  
+
   // Selección de rango y semana (siempre múltiple por naturaleza)
   selectedRange = signal<{ start: Date | null; end: Date | null }>({
     start: null,
     end: null,
   });
   selectedWeek = signal<{ start: Date; end: Date } | null>(null);
-  
+
   hoveredDate = signal<Date | null>(null);
   focusedDayIndex = signal<number>(-1);
   presetsVisible = signal<boolean>(false); // Control de visibilidad de presets
   timePickerVisible = signal<boolean>(false); // Control de visibilidad del time picker
   showingEndTime = signal<boolean>(false); // Toggle entre inicio/fin en modo 'both'
-  activeTab = signal<CalendarTabType>('calendar'); // Pesta?a activa en el sistema de tabs
+  activeTab = signal<CalendarTabType>('calendar'); // Pestaña activa en el sistema de tabs
   selectedTime = signal<TimeValue | null>(null); // Hora seleccionada (para DAY y compatibilidad)
   selectedStartTime = signal<TimeValue | null>(null); // Hora de inicio (para WEEK/RANGE con 'start' o 'both')
   selectedEndTime = signal<TimeValue | null>(null); // Hora de fin (para RANGE con 'end' o 'both')
@@ -250,7 +246,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   );
 
   /**
-   * Indica si se debe mostrar el sistema de pesta?as
+   * Indica si se debe mostrar el sistema de pestañas
    * Solo si hay presets o timepicker disponibles
    */
   shouldShowTabs = computed(() => {
@@ -258,7 +254,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   });
 
   /**
-   * Opciones para las pesta?as del calendario
+   * Opciones para las pestañas del calendario
    */
   tabOptions = computed<BtnGroupOption[]>(() => {
     const options: BtnGroupOption[] = [
@@ -342,7 +338,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         hoveredDate: this.hoveredDate(),
         dateStatusFn: this.dateStatusFn(),
         isDateEnabledFn: this.isDateEnabledFn(),
-        selectedMultipleDates: this.selection() === CalendarSelection.MULTIPLE ? this.selectedDates() : undefined,
+        selectedMultipleDates:
+          this.selection() === CalendarSelection.MULTIPLE ? this.selectedDates() : undefined,
       }
     );
   });
@@ -351,6 +348,49 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     const currentYear = this.displayedYear();
     return Array.from({ length: COUNT_BLOCK_YEARS }, (_, i) => currentYear - 5 + i);
   });
+
+  /**
+   * Calcula los números de semana ISO-8601 para cada semana visible en el calendario.
+   * Retorna un array de números de semana correspondientes a cada fila de días.
+   */
+  weekNumbers = computed(() => {
+    if (!this.showWeekNumbers()) {
+      return [];
+    }
+
+    const days = this.calendarDays();
+    const weekNumbers: number[] = [];
+
+    // Agrupar días en semanas (7 días por semana)
+    for (let i = 0; i < days.length; i += 7) {
+      const firstDayOfWeek = days[i];
+      if (firstDayOfWeek) {
+        const weekNumber = this.getISOWeekNumber(firstDayOfWeek.date);
+        weekNumbers.push(weekNumber);
+      }
+    }
+
+    return weekNumbers;
+  });
+
+  /**
+   * Calcula el número de semana ISO-8601 para una fecha dada.
+   * ISO-8601: La semana comienza el lunes y la semana 1 es la primera con al menos 4 días del año.
+   */
+  private getISOWeekNumber(date: Date): number {
+    const tempDate = new Date(date.getTime());
+
+    // Establecer al jueves de la misma semana (ISO considera jueves como día clave)
+    tempDate.setDate(tempDate.getDate() + 4 - (tempDate.getDay() || 7));
+
+    // Obtener el primer día del año
+    const yearStart = new Date(tempDate.getFullYear(), 0, 1);
+
+    // Calcular el número de semana completa
+    const weekNumber = Math.ceil(((tempDate.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
+
+    return weekNumber;
+  }
 
   // Verificar si un mes está deshabilitado (fuera del rango min/max)
   isMonthDisabled = (monthIndex: number): boolean => {
@@ -518,11 +558,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       const convertedDisabledDates = disabledDatesValue
         .map(d => this.calendarService.convertToDate(d))
         .filter((d): d is Date => d !== null);
-      
+
       const isTodayDisabled = convertedDisabledDates.some(disabledDate =>
         this.calendarService.isSameDay(today, disabledDate)
       );
-      
+
       if (isTodayDisabled) {
         return false;
       }
@@ -645,6 +685,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
   // Constantes
   readonly CalendarType = CalendarType;
+  readonly CalendarSelection = CalendarSelection;
   readonly ViewMode = ViewMode;
 
   constructor() {
@@ -689,7 +730,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     // Solo se ejecuta si el calendario se abrió desde un overlay (datepicker)
     effect(() => {
       if (!this.isOpenedByOverlay()) return;
-      
+
       const buttons = this.dayButtons();
       if (buttons.length > 0) {
         const focusedIndex = this.focusedDayIndex();
@@ -703,7 +744,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     // Solo se ejecuta si el calendario se abrió desde un overlay
     effect(() => {
       if (!this.isOpenedByOverlay()) return;
-      
+
       const buttons = this.monthButtons();
       if (buttons.length > 0 && this.viewMode() === ViewMode.MONTH) {
         untracked(() => this.focusCurrentMonth());
@@ -714,7 +755,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     // Solo se ejecuta si el calendario se abrió desde un overlay
     effect(() => {
       if (!this.isOpenedByOverlay()) return;
-      
+
       const buttons = this.yearButtons();
       if (buttons.length > 0 && this.viewMode() === ViewMode.YEAR) {
         untracked(() => this.focusCurrentYear());
@@ -805,9 +846,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       // Aceptar number (year), Date, o array para multiple
       if (Array.isArray(value)) {
         // Array de years (number[]) o Date[]
-        const years = value.map(v => 
-          typeof v === 'number' ? v : v.getFullYear()
-        );
+        const years = value.map(v => (typeof v === 'number' ? v : v.getFullYear()));
         this.selectedYears.set(years);
         if (years.length > 0) {
           const yearDate = new Date(years[0], 0, 1);
@@ -983,12 +1022,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     this.selectedDate.set(null);
     this.selectedMonth.set(null);
     this.selectedYear.set(null);
-    
+
     // Selección múltiple
     this.selectedDates.set([]);
     this.selectedMonths.set([]);
     this.selectedYears.set([]);
-    
+
     // Rango y semana
     this.selectedWeek.set(null);
     this.selectedRange.set({ start: null, end: null });
@@ -1000,7 +1039,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   private initializeWithoutDate(today: Date): void {
     // No seleccionar ninguna fecha por defecto
     // El calendario mostrará el mes actual sin ninguna fecha seleccionada
-    
+
     // Establecer la vista inicial según el tipo de calendario
     if (this.type() === CalendarType.MONTH) {
       this.viewMode.set(ViewMode.MONTH);
@@ -1229,7 +1268,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     setTimeout(() => {
       const days = this.calendarDays();
       const todayIndex = days.findIndex(d => d.isToday);
-      
+
       if (todayIndex !== -1) {
         this.focusedDayIndex.set(todayIndex);
         this.focusDayButton(todayIndex);
@@ -1375,9 +1414,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         const selectedMonths = this.selectedMonths();
         if (selectedMonths.length > 0) {
           // Convertir cada { month, year } a Date
-          const dates = selectedMonths.map(
-            (m) => new Date(m.year, m.month, 1)
-          );
+          const dates = selectedMonths.map(m => new Date(m.year, m.month, 1));
           calendarValue = {
             type: CalendarType.MONTH,
             dates,
@@ -1401,7 +1438,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         const selectedYears = this.selectedYears();
         if (selectedYears.length > 0) {
           // Convertir cada year a Date
-          const dates = selectedYears.map((y) => new Date(y, 0, 1));
+          const dates = selectedYears.map(y => new Date(y, 0, 1));
           calendarValue = {
             type: CalendarType.YEAR,
             dates,
@@ -1485,11 +1522,73 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     this.checkAutoClose();
   }
 
+  /**
+   * Maneja el click en un número de semana.
+   * Selecciona toda la semana correspondiente.
+   * @param weekIndex Índice de la semana (fila) en el calendario
+   */
+  onWeekNumberClick(weekIndex: number): void {
+    // Solo funciona en modo WEEK o si queremos cambiar el comportamiento para DAY
+    const days = this.calendarDays();
+    const startIndex = weekIndex * 7;
+    const endIndex = startIndex + 7;
+    const weekDays = days.slice(startIndex, endIndex);
+
+    if (weekDays.length === 0) return;
+
+    // Obtener el primer día de la semana que no esté deshabilitado
+    const firstEnabledDay = weekDays.find(day => !day.isDisabled);
+    if (!firstEnabledDay) return; // Toda la semana está deshabilitada
+
+    // Si estamos en modo WEEK, seleccionar toda la semana
+    if (this.type() === CalendarType.WEEK) {
+      const week = this.calendarService.getWeekRange(firstEnabledDay.date, this.firstDayOfWeek());
+      this.selectedWeek.set(week);
+      const calendarValue = this.buildCalendarValue(CalendarType.WEEK, {
+        week,
+      });
+      this.emitSelection(calendarValue);
+      this.checkAutoClose();
+    }
+    // En modo DAY multiple, toggle de toda la semana (acumulativo)
+    else if (this.type() === CalendarType.DAY && this.selection() === CalendarSelection.MULTIPLE) {
+      // Obtener todos los días habilitados de la semana clickeada
+      const enabledDaysInWeek = weekDays.filter(day => !day.isDisabled).map(day => day.date);
+      const currentDates = this.selectedDates();
+
+      // Verificar si todos los días de la semana ya están seleccionados
+      const allSelected = enabledDaysInWeek.every(weekDay =>
+        currentDates.some(selectedDay => this.calendarService.isSameDay(selectedDay, weekDay))
+      );
+
+      let newDates: Date[];
+
+      if (allSelected) {
+        // Si todos están seleccionados, desmarcar toda la semana
+        newDates = currentDates.filter(
+          selectedDay =>
+            !enabledDaysInWeek.some(weekDay => this.calendarService.isSameDay(weekDay, selectedDay))
+        );
+      } else {
+        // Si no todos están seleccionados, agregar los días que faltan (acumulativo)
+        const datesToAdd = enabledDaysInWeek.filter(
+          weekDay => !currentDates.some(selectedDay => this.calendarService.isSameDay(selectedDay, weekDay))
+        );
+        newDates = [...currentDates, ...datesToAdd];
+      }
+
+      this.selectedDates.set(newDates);
+
+      const calendarValue = this.buildCalendarValue(CalendarType.DAY, {
+        dates: newDates,
+      });
+      this.emitSelection(calendarValue);
+    }
+  }
+
   private handleMultipleDaySelection(date: Date): void {
     const currentDates = this.selectedDates();
-    const dateIndex = currentDates.findIndex(d =>
-      this.calendarService.isSameDay(d, date)
-    );
+    const dateIndex = currentDates.findIndex(d => this.calendarService.isSameDay(d, date));
 
     let newDates: Date[];
     if (dateIndex >= 0) {
@@ -1628,7 +1727,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         // Selección múltiple: toggle año
         const currentYears = this.selectedYears();
         const yearIndex = currentYears.indexOf(year);
-        
+
         let newYears: number[];
         if (yearIndex >= 0) {
           // Deseleccionar
@@ -1637,7 +1736,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
           // Seleccionar
           newYears = [...currentYears, year];
         }
-        
+
         this.selectedYears.set(newYears);
         const yearDates = newYears.map(y => new Date(y, 0, 1));
         const calendarValue = this.buildCalendarValue(CalendarType.YEAR, {
@@ -1676,15 +1775,13 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     // Si el tipo es MONTH, emitir el valor y cerrar
     if (this.type() === CalendarType.MONTH) {
       const year = this.displayedYear();
-      
+
       if (this.selection() === CalendarSelection.MULTIPLE) {
         // Selección múltiple: toggle mes
         const currentMonths = this.selectedMonths();
         const monthValue = { month: monthIndex, year };
-        const monthIndex_ = currentMonths.findIndex(
-          m => m.month === monthIndex && m.year === year
-        );
-        
+        const monthIndex_ = currentMonths.findIndex(m => m.month === monthIndex && m.year === year);
+
         let newMonths: Array<{ month: number; year: number }>;
         if (monthIndex_ >= 0) {
           // Deseleccionar
@@ -1693,7 +1790,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
           // Seleccionar
           newMonths = [...currentMonths, monthValue];
         }
-        
+
         this.selectedMonths.set(newMonths);
         const monthDates = newMonths.map(m => new Date(m.year, m.month, 1));
         const calendarValue = this.buildCalendarValue(CalendarType.MONTH, {
@@ -2246,7 +2343,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         time: startTime || undefined,
       } as CalendarValue;
     }
-    
+
     // DAY - Selección múltiple
     if (type === CalendarType.DAY && data.dates) {
       return {
@@ -2255,7 +2352,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         time: startTime || undefined,
       } as CalendarValue;
     }
-    
+
     // WEEK
     if (type === CalendarType.WEEK && data.week) {
       const weekDates = this.calendarService.dateAdapter.getDateRange(
@@ -2274,7 +2371,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
             : undefined,
       };
     }
-    
+
     // RANGE
     if (type === CalendarType.RANGE && data.range) {
       const rangeDates = this.calendarService.dateAdapter.getDateRange(
@@ -2293,7 +2390,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
             : undefined,
       };
     }
-    
+
     // MONTH - Selección simple
     if (type === CalendarType.MONTH && data.month && data.date) {
       return {
@@ -2302,7 +2399,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         month: data.month,
       } as CalendarValue;
     }
-    
+
     // MONTH - Selección múltiple
     if (type === CalendarType.MONTH && data.months && data.dates) {
       return {
@@ -2311,7 +2408,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         months: data.months,
       } as CalendarValue;
     }
-    
+
     // YEAR - Selección simple
     if (type === CalendarType.YEAR && data.year !== undefined && data.date) {
       return {
@@ -2320,7 +2417,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         year: data.year,
       } as CalendarValue;
     }
-    
+
     // YEAR - Selección múltiple
     if (type === CalendarType.YEAR && data.years && data.dates) {
       return {
@@ -2387,5 +2484,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       // Este es el evento que el Popover/Modal escuchará para cerrarse
       this.selectFinished.emit();
     }
+  }
+
+  /**
+   * Genera una etiqueta aria-label para una semana, indicando el rango de fechas que abarca.
+   * @param week Número de semana o rango de fechas de la semana
+   * @returns Cadena formateada para aria-label, por ejemplo: "Semana del 6 al 12 octubre 2025"
+   */
+  getWeekAriaLabel(week: number): string {
+    return this._translations.calendar.week.replace('{week}', week.toString());
   }
 }

@@ -67,6 +67,61 @@
                 </div>
               }
 
+              @case ('week-numbers') {
+                <div class="example-preview flex-row gap-3">
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">Week type</h6>
+                    <div style="max-width: 400px">
+                      <nui-calendar
+                        [type]="CalendarType.WEEK"
+                        [showWeekNumbers]="true"
+                        (valueChange)="onWeekNumbersChange($event)"
+                      ></nui-calendar>
+                    </div>
+                    @if (seletedWeekNumbers()) {
+                      <div class="value-display">
+                        Selected week range:
+                        <strong>{{ selectedWeekRange() }}</strong>
+                      </div>
+                    } @else {
+                      <div class="value-display">No selection</div>
+                    }
+                  </div>
+
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">Day type (Multiple)</h6>
+                    <div style="max-width: 400px">
+                      <nui-calendar
+                        [type]="CalendarType.DAY"
+                        [showWeekNumbers]="true"
+                        [selection]="'multiple'"
+                        (valueChange)="onMultipleWeekNumbersSelected($event)"
+                      ></nui-calendar>
+                    </div>
+                    @if (selectedMultipleDatesWeekNumbers().length > 0) {
+                      <div class="value-display">
+                        <strong>
+                          Selected dates ({{ selectedMultipleWeekNumbersDisplay().length }}):
+                        </strong>
+                        {{ selectedMultipleWeekNumbersDisplay() }}
+                      </div>
+                    } @else {
+                      <div class="value-display">No selection</div>
+                    }
+                  </div>
+
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">Day type (Normal)</h6>
+                    <div style="max-width: 400px">
+                      <nui-calendar
+                        [type]="CalendarType.DAY"
+                        [showWeekNumbers]="true"
+                      ></nui-calendar>
+                    </div>
+                  </div>
+                </div>
+              }
+
               @case ('range-selection') {
                 <div class="example-preview flex-column align-items-center gap-3">
                   <nui-calendar
@@ -106,7 +161,7 @@
 
               @case ('time-picker') {
                 <div class="example-preview flex-row gap-3">
-                  <div class="example-item">
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
                     <h6 class="mb-0">Date with start time</h6>
                     <div style="max-width: 400px">
                       <nui-calendar
@@ -132,7 +187,7 @@
                     }
                   </div>
 
-                  <div class="example-item">
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
                     <h6 class="mb-0">Range with start and end time</h6>
                     <div style="max-width: 400px">
                       <nui-calendar

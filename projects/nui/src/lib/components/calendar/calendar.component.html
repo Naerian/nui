@@ -1,4 +1,8 @@
-<div class="nui-calendar" [class.nui-calendar--with-tabs]="shouldShowTabs()">
+<div
+  class="nui-calendar"
+  [class.nui-calendar--with-tabs]="shouldShowTabs()"
+  [class.nui-calendar--with-week-numbers]="showWeekNumbers()"
+>
   <!-- SISTEMA DE PESTAÑAS (cuando hay presets o timepicker) -->
   @if (shouldShowTabs() && viewMode() === ViewMode.DAY) {
     <div class="nui-calendar__tabs">
@@ -89,17 +93,42 @@
       </div>
 
       <!-- Contenido del calendario -->
-      <div class="nui-calendar__body">
-        <!-- Vista de d�as -->
+      <div
+        class="nui-calendar__body"
+        [class.nui-calendar__body--with-week-numbers]="showWeekNumbers()"
+      >
+        <!-- Vista de dias -->
         @if (viewMode() === ViewMode.DAY) {
           <div class="nui-calendar__weekdays">
+            <!-- Columna vacía para alinear con números de semana -->
+            @if (showWeekNumbers()) {
+              <div class="nui-calendar__week-number">
+                {{ _translations.calendar.weekNumbers }}
+              </div>
+            }
             @for (day of orderedWeekDays(); track day) {
               <div class="nui-calendar__weekday">{{ day }}</div>
             }
           </div>
 
-          <div class="nui-calendar__days">
+          <div class="nui-calendar__days-grid">
             @for (day of calendarDays(); track day.date.getTime(); let i = $index) {
+              <!-- Número de semana al inicio de cada fila (cada 7 días) -->
+              @if (showWeekNumbers() && i % 7 === 0) {
+                <button
+                  type="button"
+                  class="nui-calendar__week"
+                  [class.nui-calendar__week--clickable]="
+                    type() === CalendarType.WEEK ||
+                    (type() === CalendarType.DAY && selection() === CalendarSelection.MULTIPLE)
+                  "
+                  [attr.aria-label]="getWeekAriaLabel(i / 7)"
+                  (click)="onWeekNumberClick(i / 7)"
+                >
+                  {{ weekNumbers()[i / 7] }}
+                </button>
+              }
+
               <button
                 #dayButton
                 type="button"

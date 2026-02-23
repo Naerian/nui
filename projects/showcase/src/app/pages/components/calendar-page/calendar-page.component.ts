@@ -40,6 +40,7 @@ export class CalendarPageComponent extends BaseComponentPage {
         'sizes',
         'widths',
         'week-selection',
+        'week-numbers',
         'range-selection',
         'presets',
         'time-picker',
@@ -82,6 +83,7 @@ export class CalendarPageComponent extends BaseComponentPage {
 
   // Week selection
   selectedWeekDates = signal<Date[]>([]);
+  seletedWeekNumbers = signal<Date[]>([]);
   selectedWeekRange = signal<string>('');
 
   // Range selection
@@ -101,6 +103,8 @@ export class CalendarPageComponent extends BaseComponentPage {
   selectedMultipleDisplay = signal<string>('');
   selectedMultipleMonths = signal<Array<{ month: number; year: number }>>([]);
   selectedMultipleMonthsDisplay = signal<string>('');
+  selectedMultipleDatesWeekNumbers = signal<Date[]>([]);
+  selectedMultipleWeekNumbersDisplay = signal<string>('');
 
   // Reactive Forms
   dateControl = new FormControl<Date | null>(null);
@@ -115,7 +119,7 @@ export class CalendarPageComponent extends BaseComponentPage {
 
   onDateChange(value: CalendarValue): void {
     console.log('Date changed:', value);
-    
+
     if (value.type === CalendarType.DAY && 'date' in value && value.date) {
       this.selectedDate.set(value.date);
       this.selectedDateString.set(value.date.toLocaleDateString());
@@ -124,7 +128,7 @@ export class CalendarPageComponent extends BaseComponentPage {
 
   onWeekChange(value: CalendarValue): void {
     console.log('Week changed:', value);
-    
+
     if (value.type === CalendarType.WEEK) {
       this.selectedWeekDates.set(value.dates);
       const start = value.week.start.toLocaleDateString();
@@ -133,9 +137,20 @@ export class CalendarPageComponent extends BaseComponentPage {
     }
   }
 
+  onWeekNumbersChange(value: CalendarValue): void {
+    console.log('Week numbers changed:', value);
+
+    if (value.type === CalendarType.WEEK) {
+      this.seletedWeekNumbers.set(value.dates);
+      const start = value.week.start.toLocaleDateString();
+      const end = value.week.end.toLocaleDateString();
+      this.selectedWeekRange.set(`${start} - ${end}`);
+    }
+  }
+
   onRangeChange(value: CalendarValue): void {
     console.log('Range changed:', value);
-    
+
     if (value.type === CalendarType.RANGE) {
       this.selectedRangeDates.set(value.dates);
       if (value.range.start && value.range.end) {
@@ -158,11 +173,21 @@ export class CalendarPageComponent extends BaseComponentPage {
 
   onMonthSelected(value: CalendarValue): void {
     console.log('Month selected:', value);
-    
+
     if (value.type === CalendarType.MONTH && 'month' in value && value.month) {
       const monthNames = [
-        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre',
       ];
       const monthName = monthNames[value.month.month];
       this.selectedMonth.set(`${monthName} ${value.month.year}`);
@@ -171,7 +196,7 @@ export class CalendarPageComponent extends BaseComponentPage {
 
   onYearSelected(value: CalendarValue): void {
     console.log('Year selected:', value);
-    
+
     if (value.type === CalendarType.YEAR && 'year' in value && typeof value.year === 'number') {
       this.selectedYear.set(value.year.toString());
     }
@@ -179,13 +204,11 @@ export class CalendarPageComponent extends BaseComponentPage {
 
   onMultipleSelection(value: CalendarValue): void {
     console.log('Multiple selection:', value);
-    
+
     if (value.type === CalendarType.DAY && 'dates' in value && value.dates) {
       this.selectedMultipleDates.set(value.dates);
       if (value.dates.length > 0) {
-        const datesStr = value.dates
-          .map(d => d.toLocaleDateString())
-          .join(', ');
+        const datesStr = value.dates.map(d => d.toLocaleDateString()).join(', ');
         this.selectedMultipleDisplay.set(datesStr);
       } else {
         this.selectedMultipleDisplay.set('');
@@ -193,19 +216,41 @@ export class CalendarPageComponent extends BaseComponentPage {
     }
   }
 
+  onMultipleWeekNumbersSelected(value: CalendarValue): void {
+    console.log('Multiple week numbers selected:', value);
+
+    if ('dates' in value && value.dates) {
+      this.selectedMultipleDatesWeekNumbers.set(value.dates);
+      if (value.dates.length > 0) {
+        const datesStr = value.dates.map(d => d.toLocaleDateString()).join(', ');
+        this.selectedMultipleWeekNumbersDisplay.set(datesStr);
+      }
+    } else {
+      this.selectedMultipleWeekNumbersDisplay.set('');
+    }
+  }
+
   onMultipleMonthsSelected(value: CalendarValue): void {
     console.log('Multiple months selected:', value);
-    
+
     if (value.type === CalendarType.MONTH && 'months' in value && value.months) {
       this.selectedMultipleMonths.set(value.months);
       if (value.months.length > 0) {
         const monthNames = [
-          'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-          'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+          'Ene',
+          'Feb',
+          'Mar',
+          'Abr',
+          'May',
+          'Jun',
+          'Jul',
+          'Ago',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dic',
         ];
-        const monthsStr = value.months
-          .map(m => `${monthNames[m.month]} ${m.year}`)
-          .join(', ');
+        const monthsStr = value.months.map(m => `${monthNames[m.month]} ${m.year}`).join(', ');
         this.selectedMultipleMonthsDisplay.set(monthsStr);
       } else {
         this.selectedMultipleMonthsDisplay.set('');
@@ -218,11 +263,7 @@ export class CalendarPageComponent extends BaseComponentPage {
   // ========================================================================
 
   // Disabled dates for example
-  disabledDates: Date[] = [
-    new Date(2024, 0, 15),
-    new Date(2024, 0, 20),
-    new Date(2024, 0, 25),
-  ];
+  disabledDates: Date[] = [new Date(2024, 0, 15), new Date(2024, 0, 20), new Date(2024, 0, 25)];
 
   // Min and max dates
   minDate = new Date(2024, 0, 1);
@@ -239,62 +280,62 @@ export class CalendarPageComponent extends BaseComponentPage {
   // Mapa de disponibilidad simulado (normalmente vendría de una API)
   // Usar strings directamente para evitar problemas de inicialización
   private availabilityMap = new Map<string, number>([
-    ['2026-02-18', 2],   // Poca disponibilidad
-    ['2026-02-19', 0],   // Sin disponibilidad
-    ['2026-02-20', 12],  // Buena disponibilidad
-    ['2026-02-21', 15],  // Muy buena disponibilidad
-    ['2026-02-22', 3],   // Poca disponibilidad
-    ['2026-02-23', 8],   // Disponibilidad normal
+    ['2026-02-18', 2], // Poca disponibilidad
+    ['2026-02-19', 0], // Sin disponibilidad
+    ['2026-02-20', 12], // Buena disponibilidad
+    ['2026-02-21', 15], // Muy buena disponibilidad
+    ['2026-02-22', 3], // Poca disponibilidad
+    ['2026-02-23', 8], // Disponibilidad normal
   ]);
 
   // Ejemplo 1: Estados de negocio (Sistema de reservas hoteleras)
-  dateStatusFn: DateStatusFn = (date) => {
+  dateStatusFn: DateStatusFn = date => {
     const availability = this.getAvailability(date);
-    
-    if (availability === 0) return 'danger';    // Sin habitaciones
-    if (availability < 5) return 'warning';     // Pocas habitaciones
-    if (availability >= 10) return 'success';   // Buena disponibilidad
-    return 'info';                              // Disponibilidad normal
+
+    if (availability === 0) return 'danger'; // Sin habitaciones
+    if (availability < 5) return 'warning'; // Pocas habitaciones
+    if (availability >= 10) return 'success'; // Buena disponibilidad
+    return 'info'; // Disponibilidad normal
   };
 
   // Ejemplo 2: Validación dinámica (Calendario corporativo)
-  isDateEnabledFn: IsDateEnabledFn = (date) => {
+  isDateEnabledFn: IsDateEnabledFn = date => {
     // 1. No permitir fines de semana
     const dayOfWeek = date.getDay();
     if (dayOfWeek === 0 || dayOfWeek === 6) return false;
-    
+
     // 2. No permitir festivos nacionales (ejemplo)
     if (this.isNationalHoliday(date)) return false;
-    
+
     return true;
   };
 
   // Ejemplo 3: Status combinado con eventos
-  combinedStatusFn: DateStatusFn = (date) => {
+  combinedStatusFn: DateStatusFn = date => {
     const events = this.getEventsForDate(date);
-    
+
     if (events.some(e => e.priority === 'high')) return 'danger';
     if (events.some(e => e.priority === 'medium')) return 'warning';
     if (events.some(e => e.type === 'meeting')) return 'info';
     if (events.some(e => e.type === 'holiday')) return 'success';
-    
+
     return null;
   };
 
   // Ejemplo 4: Validación compleja por zona
-  combinedValidationFn: IsDateEnabledFn = (date) => {
+  combinedValidationFn: IsDateEnabledFn = date => {
     const zone = this.selectedZone();
     const dayOfWeek = date.getDay();
-    
+
     // Zonas con días específicos de entrega
     if (zone === 'ZONE_A' && ![1, 3, 5].includes(dayOfWeek)) {
       return false; // Solo L-M-V
     }
-    
+
     // Validar capacidad de almacén
     const capacity = this.getWarehouseCapacity(date);
     const scheduled = this.getScheduledDeliveries(date).length;
-    
+
     return scheduled < capacity;
   };
 

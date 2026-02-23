@@ -69,6 +69,8 @@ export interface NUITranslations {
     yearsAria: string;
     openCalendar: string;
     today: string;
+    week: string;
+    weekNumbers: string;
     showTime: string;
     hideTime: string;
     timePicker: {

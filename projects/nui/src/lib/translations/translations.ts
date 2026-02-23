@@ -93,6 +93,8 @@ export const NUI_DEFAULT_I18N: NUITranslations = {
     yearsAria: 'Vista de años',
     openCalendar: 'Abrir calendario',
     today: 'Hoy',
+    week: 'Semana {week}',
+    weekNumbers: 'S',
     showTime: 'Mostrar selector de hora',
     hideTime: 'Ocultar selector de hora',
     timePicker: {

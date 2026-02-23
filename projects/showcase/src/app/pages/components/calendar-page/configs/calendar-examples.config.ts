@@ -57,6 +57,53 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
     ],
   },
   {
+    id: 'week-numbers',
+    title: 'components.calendar.week-numbers.title',
+    description: 'components.calendar.week-numbers.description',
+    anchor: 'week-numbers',
+    examples: [
+      {
+        title: 'Week numbers (DAY)',
+        code: `<nui-calendar
+  type="day"
+  [showWeekNumbers]="true"
+></nui-calendar>`,
+        language: 'html',
+      },
+      {
+        title: 'Week numbers (WEEK)',
+        code: `<nui-calendar
+  type="week"
+  [showWeekNumbers]="true"
+></nui-calendar>`,
+        language: 'html',
+      },
+      {
+        title: 'Week numbers (RANGE)',
+        code: `<nui-calendar
+  type="range"
+  [showWeekNumbers]="true"
+></nui-calendar>`,
+        language: 'html',
+      },
+      {
+        title: 'Clickable week numbers (DAY multiple)',
+        code: `<nui-calendar
+  type="day"
+  selection="multiple"
+  [showWeekNumbers]="true"
+  (valueChange)="onWeekNumberClick($event)"
+></nui-calendar>`,
+        language: 'html',
+      },
+    ],
+    note: {
+      type: 'info',
+      icon: 'ri-calendar-line',
+      content: 'components.calendar.week-numbers.note',
+    },
+  },
+  {
     id: 'range-selection',
     title: 'components.calendar.range-selection.title',
     description: 'components.calendar.range-selection.description',

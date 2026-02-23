@@ -874,6 +874,11 @@
         "description": "Permite seleccionar múltiples fechas, meses o años con un simple clic. Ideal para seleccionar días laborables, festivos o eventos distribuidos.",
         "note": "Activa el modo de selección múltiple con <code>selection=\"multiple\"</code> combinado con <code>type='day'</code>, <code>type='month'</code> o <code>type='year'</code>. Los usuarios pueden hacer clic en múltiples elementos para agregarlos/quitarlos de la selección (toggle). Este modo <strong>nunca cierra automáticamente</strong> el calendario, incluso si <code>closeOnSelect</code> está en <code>true</code>, para permitir la selección continua. El output devuelve un objeto con <code>dates</code>, <code>months</code> o <code>years</code> según el tipo."
       },
+      "week-numbers": {
+        "title": "Números de semana ISO-8601",
+        "description": "Muestra los números de semana según el estándar ISO-8601 en una columna a la izquierda del calendario. Útil para empresas, logística y planificación.",
+        "note": "Activa los números de semana con <code>[showWeekNumbers]=\"true\"</code>. Los números de semana son clicables cuando <code>type='week'</code> o cuando <code>type='day'</code> y <code>selection='multiple'</code>, permitiendo seleccionar la semana completa con un solo clic. El estándar ISO-8601 define que la semana comienza en lunes y que la semana 1 del año es la primera semana que contiene al menos 4 días del nuevo año."
+      },
       "api": {
         "inputs": {
           "title": "Inputs",

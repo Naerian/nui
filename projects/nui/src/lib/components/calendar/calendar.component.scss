@@ -9,7 +9,7 @@
   @include calendar-vars.nui-calendar-vars;
   display: inline-flex;
   width: auto;
-  
+
   // Optimización: Limita el alcance de recálculos de estilo en cambios de tema
   contain: layout style paint;
   content-visibility: auto;
@@ -48,6 +48,10 @@
   width: var(--nui-calendar-width);
   max-width: 100%; // Responsive: se adapta si el contenedor es más pequeño
   min-width: 280px; // Evita que se encoja demasiado y pierda funcionalidad
+
+  &--with-week-numbers {
+    width: calc(var(--nui-calendar-width) + var(--nui-calendar-week-number-width, 2rem));
+  }
 
   // ============================================================================
   // WITH TABS VARIANT
@@ -203,7 +207,8 @@
     border-bottom: var(--nui-calendar-tabs-border-width) solid var(--nui-border-default);
   }
 
-  &__weekday {
+  &__weekday,
+  &__week-number {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -213,11 +218,76 @@
     text-transform: uppercase;
     padding: var(--nui-spacing-xs) 0;
     min-height: var(--nui-calendar-weekday-height);
+    line-height: 1.6;
+  }
+
+  &__week-number {
+    font-size: var(--nui-calendar-week-font-size);
+  }
+
+  // ============================================================================
+  // BODY WITH WEEK NUMBERS
+  // ============================================================================
+
+  &__body--with-week-numbers {
+    .nui-calendar__weekdays {
+      grid-template-columns: var(--nui-calendar-week-number-width, 2rem) repeat(7, minmax(0, 1fr));
+    }
+
+    .nui-calendar__days-grid {
+      grid-template-columns: var(--nui-calendar-week-number-width, 2rem) repeat(7, 1fr);
+    }
+  }
+
+  // ============================================================================
+  // WEEK NUMBERS
+  // ============================================================================
+
+  &__week {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1; // Mantiene forma cuadrada al encogerse
+    min-width: 0; // Permite que se encoja
+    min-height: 0;
+    padding: 0;
+    background: transparent;
+    border: var(--nui-calendar-day-border-width) solid transparent;
+    border-radius: var(--nui-border-radius-circle);
+    font-weight: var(--nui-font-weight-medium);
+    font-size: var(--nui-calendar-week-font-size);
+    color: var(--nui-calendar-day-text);
+    cursor: default;
+    opacity: 0.2;
+    position: relative;
+    line-height: 1.6;
+
+    &--clickable {
+      cursor: pointer;
+
+      &:hover {
+        background: var(--nui-calendar-day-hover-bg);
+        color: var(--nui-calendar-day-hover-text);
+        opacity: 0.5;
+      }
+
+      @include global.focus-ring();
+
+      &:focus-visible {
+        border-radius: var(--nui-border-radius-md);
+      }
+    }
   }
 
   // ============================================================================
   // DAYS GRID
   // ============================================================================
+
+  &__days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--nui-calendar-gap);
+  }
 
   &__days {
     display: grid;
@@ -236,13 +306,13 @@
     background: var(--nui-calendar-day-bg);
     border: var(--nui-calendar-day-border-width) solid transparent;
     border-radius: var(--nui-border-radius-circle);
-    font-weight: var(--nui-font-weight-medium);
+    font-weight: var(--nui-font-weight-regular);
     font-size: var(--nui-calendar-day-font-size);
     color: var(--nui-calendar-day-text);
     opacity: var(--nui-calendar-day-other-month-opacity);
     cursor: pointer;
     position: relative;
-    line-height: 1.5;
+    line-height: 1.6;
 
     &:hover:not(&--disabled):not(&--selected) {
       background: var(--nui-calendar-day-hover-bg);
@@ -262,7 +332,7 @@
 
     &--today {
       position: relative;
-      font-weight: var(--nui-font-weight-bold);
+      font-weight: var(--nui-font-weight-semibold);
 
       &::after {
         content: '';

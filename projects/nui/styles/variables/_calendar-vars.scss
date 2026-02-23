@@ -9,6 +9,7 @@ $calendar-padding: clamp(0.75rem, 2vw, 1rem) !default;
 
 // Font sizes (standard)
 $calendar-day-font-size: clamp(0.75rem, 3.5cqw, 0.813rem) !default;
+$calendar-week-font-size: clamp(0.625rem, 3.5cqw, 0.688rem) !default;
 $calendar-title-font-size: 1rem !default;
 $calendar-weekday-font-size: 0.75rem !default;
 $calendar-month-font-size: clamp(0.75rem, 3.5cqw, 0.813rem) !default;
@@ -52,6 +53,7 @@ $calendar-preset-hover-translateY: -1px !default;
   --nui-calendar-weekday-font-size: #{$calendar-weekday-font-size};
   --nui-calendar-month-font-size: #{$calendar-month-font-size};
   --nui-calendar-year-font-size: #{$calendar-year-font-size};
+  --nui-calendar-week-font-size: #{$calendar-week-font-size};
 
   // Weekday
   --nui-calendar-weekday-height: #{$calendar-weekday-height};

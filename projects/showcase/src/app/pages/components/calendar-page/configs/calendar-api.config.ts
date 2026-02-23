@@ -126,6 +126,12 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
           '<code class="neutral">undefined</code>',
           'Función que determina dinámicamente si una fecha está habilitada (prevalece sobre disabledDates)',
         ],
+        [
+          '<code>showWeekNumbers</code>',
+          'boolean',
+          '<code class="neutral">false</code>',
+          'Muestra números de semana ISO-8601 en una columna a la izquierda. Clicables en modo WEEK o DAY múltiple para seleccionar la semana completa',
+        ],
       ],
     },
   },
