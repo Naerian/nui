@@ -6,7 +6,7 @@ export * from './neon';
 export * from './ocean';
 export * from './sunset';
 export * from './twilight';
-export * from './warm';
+export * from './autumn';
 export * from './emerald';
 export * from './coffee';
 export * from './velvet';

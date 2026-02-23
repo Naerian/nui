@@ -1,28 +1,31 @@
-import { COOL_GRAYS } from '../models/theme-grays';
 import { ThemePreset } from '../models/theme.model';
 
+/**
+ * Dopamine Preset - Energetic, vibrant theme
+ * Bright, high-contrast color palette with stimulating tones
+ */
 export const dopamine: ThemePreset = {
   name: 'dopamine',
   colors: {
     light: {
-      primary: '#65a30d',
-      secondary: '#db2777',
-      accent: '#0891b2',
-      success: '#16a34a',
-      info: '#2563eb',
-      warning: '#f97316',
-      danger: '#dc2626',
-      neutral: COOL_GRAYS[600],
+      primary: '#7C3AED',
+      secondary: '#AD1457',
+      accent: '#0E7490',
+      success: '#15803D',
+      info: '#0369A1',
+      warning: '#B45309',
+      danger: '#C62828',
+      neutral: '#52525B',
     },
     dark: {
-      primary: '#a3e635',
-      secondary: '#f472b6',
-      accent: '#22d3ee',
-      success: '#4ade80',
-      info: '#60a5fa',
-      warning: '#fbbf24',
-      danger: '#f87171',
-      neutral: COOL_GRAYS[400],
+      primary: '#C4B5FD',
+      secondary: '#FDA4AF',
+      accent: '#67E8F9',
+      success: '#86EFAC',
+      info: '#7DD3FC',
+      warning: '#FCD34D',
+      danger: '#FCA5A5',
+      neutral: '#D4D4D8',
     },
   },
 };

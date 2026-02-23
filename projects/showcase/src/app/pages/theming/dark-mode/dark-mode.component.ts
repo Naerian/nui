@@ -1,19 +1,32 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { ThemeService } from 'nui';
+import { ButtonComponent, ThemeService } from 'nui';
 
 @Component({
   selector: 'app-dark-mode',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, ButtonComponent],
   templateUrl: './dark-mode.component.html',
   styleUrls: ['./dark-mode.component.scss'],
 })
 export class DarkModeComponent {
   themeService = inject(ThemeService);
-  
+
   currentStrategy = signal(this.themeService.getDarkModeStrategy());
+
+  currentStrategyIcon = computed(() => {
+    switch (this.currentStrategy()) {
+      case 'manual':
+        return 'ri-hand-coin-line';
+      case 'system':
+        return 'ri-computer-line';
+      case 'auto':
+        return 'ri-loop-left-line';
+      default:
+        return 'ri-question-line';
+    }
+  });
 
   strategies = [
     {
@@ -25,7 +38,7 @@ export class DarkModeComponent {
         'pages.theming.darkMode.strategies.manual.feat1',
         'pages.theming.darkMode.strategies.manual.feat2',
         'pages.theming.darkMode.strategies.manual.feat3',
-      ]
+      ],
     },
     {
       value: 'system',
@@ -35,7 +48,7 @@ export class DarkModeComponent {
       features: [
         'pages.theming.darkMode.strategies.system.feat1',
         'pages.theming.darkMode.strategies.system.feat2',
-      ]
+      ],
     },
     {
       value: 'auto',
@@ -45,7 +58,7 @@ export class DarkModeComponent {
       features: [
         'pages.theming.darkMode.strategies.auto.feat1',
         'pages.theming.darkMode.strategies.auto.feat2',
-      ]
+      ],
     },
   ];
 
@@ -59,7 +72,7 @@ export class DarkModeComponent {
 themeService.setDarkMode(true);
 themeService.toggleDarkMode();`,
     system: `provideNUI({
-  preset: aura,
+  preset: minimal,
   darkMode: 'system'
 });`,
     auto: `provideNUI({
@@ -70,7 +83,7 @@ themeService.toggleDarkMode();`,
   preset: corporate,
   darkMode: 'manual',
   darkModeClass: 'theme-dark'
-});`
+});`,
   };
 
   getCodeExample(key: string): string {

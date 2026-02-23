@@ -3,9 +3,9 @@
 }
 
 .language-trigger {
-  background-color: var(--nui-bg-secondary);
-  border: 1px solid var(--nui-border-primary);
-  color: var(--nui-text-primary);
+  background-color: var(--nui-surface-secondary);
+  border: 1px solid var(--nui-border-high);
+  color: var(--nui-on-surface-secondary);
   width: 40px;
   height: 40px;
   border-radius: var(--nui-border-radius-sm);
@@ -13,11 +13,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
 
   &:hover {
-    border-color: var(--nui-color-primary);
-    background-color: var(--nui-color-primary-alpha-10);
+    border-color: var(--nui-primary);
+    background-color: var(--nui-primary-alpha-10);
   }
 
   i {
@@ -26,8 +25,8 @@
 }
 
 .language-dropdown {
-  background-color: var(--nui-bg-primary);
-  border: 1px solid var(--nui-border-primary);
+  background-color: var(--nui-surface);
+  border: 1px solid var(--nui-border-high);
   border-radius: var(--nui-border-radius-md);
   box-shadow: var(--nui-box-shadow-md);
   min-width: 160px;
@@ -52,14 +51,13 @@
   padding: 0.75rem 1rem;
   background: none;
   border: none;
-  color: var(--nui-text-primary);
+  color: var(--nui-on-surface);
   font-size: 0.875rem;
   text-align: left;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  transition: all 0.2s ease;
   border-bottom: 1px solid var(--nui-border-secondary);
 
   &:last-child {
@@ -67,15 +65,15 @@
   }
 
   &:hover {
-    background-color: var(--nui-color-primary-alpha-10);
+    background-color: var(--nui-primary-alpha-10);
   }
 
   &.active {
-    background-color: var(--nui-color-primary-alpha-10);
+    background-color: var(--nui-primary-alpha-10);
     font-weight: 600;
 
     .language-name {
-      color: var(--nui-color-primary);
+      color: var(--nui-primary);
     }
   }
 }
@@ -90,6 +88,6 @@
 }
 
 .ri-check-line {
-  color: var(--nui-color-primary);
+  color: var(--nui-primary);
   font-size: 1.125rem;
 }

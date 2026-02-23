@@ -37,15 +37,14 @@ $time-picker-header-border-width: 1px !default;
 $time-picker-item-border-width: 1px !default;
 
 // Font sizes
-$time-picker-font-size: clamp(0.75rem, 3.5cqw, 0.875rem) !default;
-$time-picker-display-font-size: clamp(0.75rem, 3.5cqw, 0.875rem) !default;
-$time-picker-normalized-font-size: clamp(0.75rem, 3.5cqw, 0.875rem) !default;
-$time-picker-preset-font-size: clamp(0.75rem, 3.5cqw, 0.875rem) !default;
+$time-picker-font-size: clamp(0.75rem, 3.5cqw, 0.813rem) !default;
+$time-picker-display-font-size: clamp(0.75rem, 3.5cqw, 0.813rem) !default;
+$time-picker-normalized-font-size: clamp(0.75rem, 3.5cqw, 0.813rem) !default;
 
 // Navigation button sizes
 $time-picker-nav-btn-height: 2.5rem !default;
 $time-picker-nav-btn-padding: 0.5rem 0.75rem !default;
-$time-picker-nav-btn-font-size: clamp(0.75rem, 3.5cqw, 0.875rem) !default;
+$time-picker-nav-btn-font-size: clamp(0.75rem, 3.5cqw, 0.813rem) !default;
 
 // MIXIN (CSS Custom Properties)
 @mixin nui-time-picker-vars {
@@ -92,7 +91,6 @@ $time-picker-nav-btn-font-size: clamp(0.75rem, 3.5cqw, 0.875rem) !default;
   // Font sizes
   --nui-time-picker-display-font-size: #{$time-picker-display-font-size};
   --nui-time-picker-normalized-font-size: #{$time-picker-normalized-font-size};
-  --nui-time-picker-preset-font-size: #{$time-picker-preset-font-size};
 
   // Navigation button sizes
   --nui-time-picker-nav-btn-height: #{$time-picker-nav-btn-height};

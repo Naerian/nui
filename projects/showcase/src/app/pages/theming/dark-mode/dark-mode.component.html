@@ -11,13 +11,20 @@
         <div class="current-strategy-box">
           <div class="strategy-info">
             <span class="label">{{ 'pages.theming.darkMode.currentStrategy' | translate }}:</span>
-            <code class="strategy-value">{{ currentStrategy() }}</code>
+            <span class="strategy-badge">
+              <i [class]="currentStrategyIcon()"></i>
+              {{ currentStrategy() | titlecase }}
+            </span>
           </div>
           <div class="dark-mode-status">
             <span class="label">{{ 'pages.theming.darkMode.currentMode' | translate }}:</span>
-            <span class="mode-badge" [class.dark]="themeService.isDarkMode()">
+            <span class="mode-badge">
               <i [class]="themeService.isDarkMode() ? 'ri-moon-line' : 'ri-sun-line'"></i>
-              {{ themeService.isDarkMode() ? ('pages.theming.darkMode.dark' | translate) : ('pages.theming.darkMode.light' | translate) }}
+              {{
+                themeService.isDarkMode()
+                  ? ('pages.theming.darkMode.dark' | translate)
+                  : ('pages.theming.darkMode.light' | translate)
+              }}
             </span>
           </div>
         </div>
@@ -26,11 +33,13 @@
       <!-- Strategies -->
       <section class="docs-section">
         <h2>{{ 'pages.theming.darkMode.strategiesTitle' | translate }}</h2>
-        <p class="section-description">{{ 'pages.theming.darkMode.strategiesDescription' | translate }}</p>
+        <p class="section-description">
+          {{ 'pages.theming.darkMode.strategiesDescription' | translate }}
+        </p>
 
         <div class="strategies-grid">
-          <div 
-            *ngFor="let strategy of strategies" 
+          <div
+            *ngFor="let strategy of strategies"
             class="strategy-card"
             [class.active]="currentStrategy() === strategy.value"
           >
@@ -63,39 +72,31 @@
       <!-- Manual Control Demo -->
       <section class="docs-section" *ngIf="currentStrategy() === 'manual'">
         <h2>{{ 'pages.theming.darkMode.demo.title' | translate }}</h2>
-        <p class="section-description">{{ 'pages.theming.darkMode.demo.description' | translate }}</p>
+        <p class="section-description">
+          {{ 'pages.theming.darkMode.demo.description' | translate }}
+        </p>
 
         <div class="demo-controls">
-          <button 
-            class="demo-btn"
-            (click)="toggleDarkMode()"
-          >
-            <i class="ri-contrast-2-line"></i>
+          <nui-button (click)="toggleDarkMode()" [icon]="'ri-contrast-2-line'">
             {{ 'pages.theming.darkMode.demo.toggle' | translate }}
-          </button>
+          </nui-button>
 
-          <button 
-            class="demo-btn"
-            (click)="setDarkMode(true)"
-          >
-            <i class="ri-moon-line"></i>
+          <nui-button (click)="setDarkMode(true)" [icon]="'ri-moon-line'">
             {{ 'pages.theming.darkMode.demo.enableDark' | translate }}
-          </button>
+          </nui-button>
 
-          <button 
-            class="demo-btn"
-            (click)="setDarkMode(false)"
-          >
-            <i class="ri-sun-line"></i>
+          <nui-button (click)="setDarkMode(false)" [icon]="'ri-sun-line'">
             {{ 'pages.theming.darkMode.demo.enableLight' | translate }}
-          </button>
+          </nui-button>
         </div>
       </section>
 
       <!-- Custom Class -->
       <section class="docs-section">
         <h2>{{ 'pages.theming.darkMode.customClass.title' | translate }}</h2>
-        <p class="section-description">{{ 'pages.theming.darkMode.customClass.description' | translate }}</p>
+        <p class="section-description">
+          {{ 'pages.theming.darkMode.customClass.description' | translate }}
+        </p>
 
         <div class="code-example">
           <pre><code>{{ getCodeExample('customClass') }}</code></pre>

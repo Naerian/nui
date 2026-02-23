@@ -207,15 +207,15 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       htmlContent: `
         <div style="padding: 1rem;">
           <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
-            <i class="ri-check-circle-fill" style="font-size: 2.5rem; color: var(--nui-success-main);"></i>
+            <i class="ri-check-circle-fill" style="font-size: 2.5rem; color: var(--nui-success);"></i>
             <div>
               <h3 style="margin: 0; font-size: 1.125rem; font-weight: 600;">Success!</h3>
-              <p style="margin: 0.25rem 0 0 0; color: var(--nui-text-secondary); font-size: 0.875rem;">
+              <p style="margin: 0.25rem 0 0 0; color: var(--nui-on-surface-secondary); font-size: 0.875rem;">
                 Your changes have been saved.
               </p>
             </div>
           </div>
-          <ul style="margin: 0; padding-left: 1.25rem; color: var(--nui-text-secondary);">
+          <ul style="margin: 0; padding-left: 1.25rem; color: var(--nui-on-surface-secondary);">
             <li>Profile information updated</li>
             <li>Email notifications configured</li>
             <li>Privacy settings adjusted</li>
@@ -266,10 +266,10 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         <table style="width: 100%; border-collapse: collapse;">
           <thead>
             <tr style="background: var(--nui-surface-variant); text-align: left;">
-              <th style="padding: 0.5rem; border: 1px solid var(--nui-divider);">ID</th>
-              <th style="padding: 0.5rem; border: 1px solid var(--nui-divider);">Name</th>
-              <th style="padding: 0.5rem; border: 1px solid var(--nui-divider);">Status</th>
-              <th style="padding: 0.5rem; border: 1px solid var(--nui-divider);">Priority</th>
+              <th style="padding: 0.5rem; border: 1px solid var(--nui-border-high);">ID</th>
+              <th style="padding: 0.5rem; border: 1px solid var(--nui-border-high);">Name</th>
+              <th style="padding: 0.5rem; border: 1px solid var(--nui-border-high);">Status</th>
+              <th style="padding: 0.5rem; border: 1px solid var(--nui-border-high);">Priority</th>
             </tr>
           </thead>
           <tbody>
@@ -277,9 +277,9 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
               .map(
                 item => `
               <tr>
-                <td style="padding: 0.5rem; border: 1px solid var(--nui-divider);">${item.id}</td>
-                <td style="padding: 0.5rem; border: 1px solid var(--nui-divider);">${item.name}</td>
-                <td style="padding: 0.5rem; border: 1px solid var(--nui-divider);">
+                <td style="padding: 0.5rem; border: 1px solid var(--nui-border-high);">${item.id}</td>
+                <td style="padding: 0.5rem; border: 1px solid var(--nui-border-high);">${item.name}</td>
+                <td style="padding: 0.5rem; border: 1px solid var(--nui-border-high);">
                   <span style="
                     padding: 0.25rem 0.5rem;
                     border-radius: 4px;
@@ -300,7 +300,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
                     };
                   ">${item.status}</span>
                 </td>
-                <td style="padding: 0.5rem; border: 1px solid var(--nui-divider);">${item.priority}</td>
+                <td style="padding: 0.5rem; border: 1px solid var(--nui-border-high);">${item.priority}</td>
               </tr>
             `
               )

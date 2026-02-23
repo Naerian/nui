@@ -81,7 +81,7 @@ export const PAGINATOR_THEMING_SECTIONS: ComponentSection[] = [
         [
           '<code>--nui-pg-ellipsis-color</code>',
           'Color de los puntos suspensivos (…)',
-          'var(--nui-text-tertiary)',
+          'var(--nui-text-neutral)',
         ],
         [
           '<code>--nui-pg-ellipsis-padding</code>',
@@ -168,7 +168,7 @@ export const PAGINATOR_THEMING_SECTIONS: ComponentSection[] = [
         [
           '<code>--nui-pg-infinite-end-color</code>',
           'Color del mensaje de fin de datos',
-          'var(--nui-text-tertiary)',
+          'var(--nui-text-neutral)',
         ],
         [
           '<code>--nui-pg-infinite-end-font-size</code>',

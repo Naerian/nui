@@ -54,6 +54,13 @@ export interface TooltipConfig {
   showArrow?: boolean;
 
   /**
+   * Permitir HTML en el contenido del tooltip (solo si es string)
+   * ¡Usar con precaución! Asegúrate de sanitizar el contenido para evitar XSS.
+   * @default false
+   */
+  allowHtml?: boolean;
+
+  /**
    * Permite interactuar con el contenido del tooltip (hover sobre el tooltip)
    * Útil para tooltips con enlaces, botones o contenido seleccionable
    * @default false

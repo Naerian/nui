@@ -34,7 +34,7 @@
     .user-name {
       font-weight: 600;
       font-size: 0.9375rem;
-      color: var(--nui-text-primary);
+      color: var(--nui-on-surface);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -42,7 +42,7 @@
 
     .user-email {
       font-size: 0.8125rem;
-      color: var(--nui-text-secondary);
+      color: var(--nui-on-surface-secondary);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -67,7 +67,7 @@
     i {
       font-size: 1.125rem;
       flex-shrink: 0;
-      color: var(--nui-text-primary);
+      color: var(--nui-on-surface);
     }
 
     .menu-item-text {
@@ -80,7 +80,7 @@
       .menu-item-label {
         font-weight: 500;
         font-size: 0.875rem;
-        color: var(--nui-text-primary);
+        color: var(--nui-on-surface);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -89,7 +89,7 @@
 
       .menu-item-subtitle {
         font-size: 0.75rem;
-        color: var(--nui-text-secondary);
+        color: var(--nui-on-surface-secondary);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -116,12 +116,12 @@
 
   .menu-item-shortcut {
     font-size: 0.75rem;
-    color: var(--nui-text-tertiary);
-    border: 1px solid var(--nui-border-secondary);
+    color: var(--nui-on-surface);
+    border: 1px solid var(--nui-border-subtle);
     padding: 0.125rem 0.375rem;
     border-radius: var(--nui-border-radius-sm);
     flex-shrink: 0;
-    background-color: var(--nui-bg-tertiary);
+    background-color: var(--nui-surface-neutral);
     font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", monospace;
   }
 }
@@ -134,12 +134,11 @@
   padding: 0.625rem 0.75rem;
   background-color: transparent;
   border: none;
-  color: #dc2626;
+  color: var(--nui-danger);
   font-weight: 500;
   font-size: 0.875rem;
   border-radius: var(--nui-border-radius-sm);
   cursor: pointer;
-  transition: background-color 0.15s ease;
 
   i {
     font-size: 1.125rem;

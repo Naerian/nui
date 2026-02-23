@@ -1,27 +1,32 @@
-import { SLATE_GRAYS, ThemePreset } from '../models';
+import { ThemePreset } from '../models/theme.model';
 
+/**
+ * Velvet Preset - Luxurious, rich theme
+ * Deep reds and complementary tones for a sophisticated, opulent look
+ * Inspired by the rich textures and colors of velvet fabric, this preset exudes luxury and sophistication. The deep reds create a sense of warmth and opulence, while the complementary tones add depth and balance to the overall palette. Perfect for applications that want to convey elegance and refinement.
+ */
 export const velvet: ThemePreset = {
   name: 'velvet',
   colors: {
     light: {
-      primary: '#831843',
-      secondary: '#500724',
-      accent: '#be185d',
-      success: '#064e3b',
-      info: '#186ebe',
-      warning: '#b45309',
-      danger: '#9f1239',
-      neutral: SLATE_GRAYS[700],
+      primary: '#7F1D1D',
+      secondary: '#9F1239',
+      accent: '#BE185D',
+      success: '#166534',
+      info: '#155E75',
+      warning: '#B45309',
+      danger: '#991B1B',
+      neutral: '#57534E',
     },
     dark: {
-      primary: '#be185d',
-      secondary: '#9f1239',
-      accent: '#a21caf',
-      success: '#047857',
-      info: '#2576c2',
-      warning: '#b45309',
-      danger: '#e11d48',
-      neutral: SLATE_GRAYS[400],
+      primary: '#FCA5A5',
+      secondary: '#FDA4AF',
+      accent: '#F9A8D4',
+      success: '#86EFAC',
+      info: '#67E8F9',
+      warning: '#FCD34D',
+      danger: '#F87171',
+      neutral: '#D6D3D1',
     },
   },
 };

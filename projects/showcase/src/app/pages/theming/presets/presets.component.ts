@@ -9,6 +9,7 @@ interface PresetOption {
   translationKey: string;
   primaryColor: string;
   colors: string[];
+  grays?: string[];
 }
 
 @Component({
@@ -26,12 +27,14 @@ export class PresetsComponent {
   presets = computed(() => {
     const dark = this.themeService.isDarkMode();
     const nuiPresets = this.themeService.getNuiPresets();
+    const defaultGrays = this.themeService.getDefaultGrays();
 
     const presets = nuiPresets.map(preset => ({
       name: preset.name,
       translationKey: `presets.${preset.name}`,
       descriptionKey: `pages.theming.presetDescriptions.${preset.name}`,
       colors: dark ? preset.colors.dark : preset.colors.light,
+      grays: preset.grays ? Object.values(preset.grays) : Object.values(defaultGrays),
     }));
 
     return presets;
@@ -64,6 +67,10 @@ export class PresetsComponent {
 
   getColor(preset: any, colorKey: string): string {
     return preset.colors[colorKey];
+  }
+
+  getGrays(preset: any): string[] {
+    return preset.grays;
   }
 
   selectPreset(presetName: string): void {

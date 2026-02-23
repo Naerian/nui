@@ -6,17 +6,7 @@
     </div>
 
     <div class="docs-content">
-      <p class="presets-description">{{ 'pages.theming.description' | translate }}</p>
-      <div class="preset-current">
-        <p class="current-preset-label">
-          <strong>{{ 'pages.theming.currentPreset' | translate }}:</strong>
-          {{ currentPreset().translationKey | translate }}
-        </p>
-        <div
-          class="preset-current-color-box"
-          [style.background]="'linear-gradient(135deg, ' + currentPreset().colors.join(', ') + ')'"
-        ></div>
-      </div>
+      <p class="presets-description" [innerHTML]="'pages.theming.description' | translate"></p>
       <div class="presets-grid">
         <div
           *ngFor="let preset of presets()"
@@ -30,17 +20,24 @@
           </div>
 
           <div class="color-palette">
-            <div *ngFor="let colorType of colorTypes()" class="color-item">
-              <div
-                class="color-swatch"
-                [style.background-color]="getColor(preset, colorType.key)"
-                [attr.title]="getColor(preset, colorType.key)"
-              ></div>
-              <div class="color-info">
-                <span class="color-label">{{ colorType.translationKey | translate }}</span>
-                <span class="color-value">{{ getColor(preset, colorType.key) }}</span>
+            @for (colorType of colorTypes(); track colorType) {
+              <div class="color-item">
+                <div
+                  class="color-swatch"
+                  [style.background-color]="getColor(preset, colorType.key)"
+                  [attr.title]="getColor(preset, colorType.key)"
+                ></div>
+                <div class="color-info">
+                  <span class="color-label">{{ colorType.translationKey | translate }}</span>
+                  <span class="color-value">{{ getColor(preset, colorType.key) }}</span>
+                </div>
               </div>
-            </div>
+            }
+          </div>
+          <div class="gray-palette">
+            @for (gray of getGrays(preset); track gray) {
+              <div class="gray-swatch" [style.background-color]="gray" [attr.title]="gray"></div>
+            }
           </div>
         </div>
       </div>

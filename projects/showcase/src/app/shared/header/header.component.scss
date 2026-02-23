@@ -1,6 +1,6 @@
 .showcase-header {
-  background-color: var(--nui-bg-primary);
-  border-bottom: 1px solid var(--nui-border-primary);
+  background-color: var(--nui-surface);
+  border-bottom: 1px solid var(--nui-border-high);
   padding: 0.75rem 0;
   position: sticky;
   top: 0;
@@ -11,17 +11,16 @@
     background: none;
     border: none;
     font-size: 1.5rem;
-    color: var(--nui-text-primary);
+    color: var(--nui-on-surface);
     cursor: pointer;
     padding: 0.25rem 0.5rem;
     margin-right: 1rem;
-    transition: color 0.2s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
     &:hover {
-      color: var(--nui-color-primary);
+      color: var(--nui-primary);
     }
 
     i {
@@ -34,7 +33,7 @@
     font-weight: 800;
     letter-spacing: -0.05em;
     font-size: 1.5rem;
-    color: var(--nui-text-primary);
+    color: var(--nui-on-surface);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;

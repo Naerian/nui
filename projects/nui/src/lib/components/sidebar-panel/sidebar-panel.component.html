@@ -65,6 +65,9 @@
             [size]="action.size ?? 'md'"
             [disabled]="action.disabled ?? false"
             [loading]="action.loading ?? false"
+            [loadingPosition]="action.loadingPosition ?? 'center'"
+            [width]="action.width ?? 'auto'"
+            [iconPosition]="action.iconPosition ?? 'start'"
             [class]="action.class ?? ''"
             (onClick)="action.handler()"
           >
@@ -90,6 +93,9 @@
             [size]="action.size ?? 'md'"
             [disabled]="action.disabled ?? false"
             [loading]="action.loading ?? false"
+            [loadingPosition]="action.loadingPosition ?? 'start'"
+            [width]="action.width ?? 'auto'"
+            [iconPosition]="action.iconPosition ?? 'start'"
             [class]="action.class ?? ''"
             (onClick)="action.handler()"
           >
@@ -102,13 +108,8 @@
     <!-- Footer con template de configuraciÃ³n (Ãºltima prioridad) -->
     <div class="nui-sidebar-panel-footer">
       <ng-container
-        *ngTemplateOutlet="
-          config.footerTemplate;
-          context: { componentInstance: componentInstance }
-        "
+        *ngTemplateOutlet="config.footerTemplate; context: { componentInstance: componentInstance }"
       ></ng-container>
     </div>
   }
 </div>
-
-

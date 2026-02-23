@@ -47,7 +47,7 @@ configurations
     ├── ocean.ts               # Deep blues and aqua tones
     ├── sunset.ts              # Warm reds and oranges
     ├── twilight.ts            # Purple-based evening theme
-    └── warm.ts                # Earthy orange/brown tones
+    └── autumn.ts                # Earthy orange/brown tones
 ```
 
 ### File Purposes
@@ -64,14 +64,13 @@ Defines the core TypeScript interfaces:
 #### `models/theme.config.ts`
 Contains constant definitions:
 
-- **`LUMINANCE_UMBRAL`**: Threshold (0.4) for determining black vs white contrast text
 - **`PURE_COLORS`**: Absolute black (`#0d1117`) and white (`#ffffff`) values
 - **`DEFAULT_PRESET`**: References the `aura` preset as the library default
 - **`NUI_THEME_CONFIG`**: Injection token for providing theme configuration
 
 #### `models/theme-presets.ts`
 Contains a array of NUI presets:
-- **`NUI_PRESETS`**: Array of available NUI presets to use (aura, warm, minimal...)
+- **`NUI_PRESETS`**: Array of available NUI presets to use (aura, autumn, minimal...)
 
 #### `models/theme-grays.ts`
 It contains the different grayscales available in NUI:
@@ -163,19 +162,19 @@ The theme system generates structural tokens that adapt to light/dark modes:
 /* Background layers */
 --nui-bg-primary       // Main canvas (white in light, gray-900 in dark)
 --nui-bg-secondary     // Subtle elevation
---nui-bg-tertiary      // Higher elevation
+--nui-bg-neutral      // Higher elevation
 
 /* Text colors */
 --nui-text-primary     // High emphasis text
 --nui-text-secondary   // Medium emphasis
---nui-text-tertiary    // Low emphasis
+--nui-text-neutral    // Low emphasis
 --nui-text-disabled    // Disabled state
 
 /* Borders */
 --nui-border-primary
 --nui-border-secondary
---nui-border-strong
---nui-border-weak
+--nui-border-high
+--nui-border-subtle
 
 /* Shadows */
 --nui-box-shadow-xs
@@ -570,8 +569,6 @@ This eliminates the need for JavaScript-based style calculations in components.
 ### Known Limitations
 
 1. **SSR Consideration**: The service injects styles into `document.head`, which requires special handling for server-side rendering. Use `APP_INITIALIZER` carefully or defer theme application to browser-only execution.
-
-2. **No Gradient Support**: Semantic colors are solid colors only. Gradients must be defined manually (e.g., `--nui-color-modal-gradient`).
 
 3. **Fixed Variant Steps**: Tint/shade/alpha steps are hardcoded (cannot be customized without forking the service).
 

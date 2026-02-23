@@ -6,7 +6,6 @@ import { HeaderComponent } from './shared/header/header.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ShowcaseConfigService } from './core/services/showcase-config.service';
 import { ThemeService } from 'nui';
-import { aura, warm, neon, dopamine, corporate, minimal } from 'nui';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -23,22 +22,19 @@ export class AppComponent implements OnInit {
 
   isSidebarCollapsed = false;
 
-  private presetMap: { [key: string]: any } = {
-    'aura': aura,
-    'warm': warm,
-    'neon': neon,
-    'dopamine': dopamine,
-    'corporate': corporate,
-    'minimal': minimal
-  };
+  private presets = this.themeService.getNuiPresets();
+  private presetMap = this.presets.reduce((map, preset) => {
+    map[preset.name] = preset;
+    return map;
+  }, {} as Record<string, any>)
 
   ngOnInit(): void {
     // Set default language
-    this.translate.setDefaultLang('en');
-    
+    this.translate.setFallbackLang('en');
+
     // Load saved config
     const config = this.showcaseConfig.currentConfig;
-    
+
     // Initialize language
     if (config.language) {
       this.translate.use(config.language);

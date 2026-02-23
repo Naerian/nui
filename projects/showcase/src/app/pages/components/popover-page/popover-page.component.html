@@ -80,7 +80,7 @@
 
               @case ('events') {
                 <div class="example-preview flex-column align-items-center">
-                  <div class="events-row">
+                  <div class="d-flex flex-row gap-3">
                     <nui-button nuiPopover="Popover with click (default)" nuiPopoverEvent="click">
                       Click Event
                     </nui-button>
@@ -90,7 +90,7 @@
                     </nui-button>
                   </div>
 
-                  <div class="events-row">
+                  <div class="d-flex flex-row gap-3">
                     <input
                       type="text"
                       nuiPopover="Help for this field"
@@ -190,32 +190,28 @@
               }
 
               @case ('closeOptions') {
-                <div class="example-preview flex-column align-items-center">
-                  <div class="events-row">
-                    <nui-button
-                      nuiPopover="Does not close when clicking outside. Use Escape or click the button."
-                      [nuiPopoverCloseOnClickOutside]="false"
-                    >
-                      Click Outside OFF
-                    </nui-button>
+                <div class="example-preview flex-row align-items-center">
+                  <nui-button
+                    nuiPopover="Does not close when clicking outside. Use Escape or click the button."
+                    [nuiPopoverCloseOnClickOutside]="false"
+                  >
+                    Click Outside OFF
+                  </nui-button>
 
-                    <nui-button
-                      nuiPopover="Does not close with the Escape key. Click outside to close."
-                      [nuiPopoverCloseOnEscape]="false"
-                    >
-                      Escape OFF
-                    </nui-button>
-                  </div>
+                  <nui-button
+                    nuiPopover="Does not close with the Escape key. Click outside to close."
+                    [nuiPopoverCloseOnEscape]="false"
+                  >
+                    Escape OFF
+                  </nui-button>
 
-                  <div class="events-row">
-                    <nui-button nuiPopover="Multiple Popover 1" [nuiPopoverAllowMultiple]="true">
-                      Multiple 1
-                    </nui-button>
+                  <nui-button nuiPopover="Multiple Popover 1" [nuiPopoverAllowMultiple]="true">
+                    Multiple 1
+                  </nui-button>
 
-                    <nui-button nuiPopover="Multiple Popover 2" [nuiPopoverAllowMultiple]="true">
-                      Multiple 2
-                    </nui-button>
-                  </div>
+                  <nui-button nuiPopover="Multiple Popover 2" [nuiPopoverAllowMultiple]="true">
+                    Multiple 2
+                  </nui-button>
                 </div>
               }
 

@@ -326,11 +326,11 @@ export const ACTION_MENU_EXAMPLES_SECTIONS: ComponentSection[] = [
       {
         title: 'codeExamples.typescript',
         code: `menuItems: ActionMenuItem[] = [
-  { label: 'Info', icon: 'ri-information-line', action: 'info' },
-  { label: 'Success', icon: 'ri-checkbox-circle-line', action: 'success' },
-  { label: 'Warning', icon: 'ri-error-warning-line', action: 'warning' },
-  { separator: true },
-  { label: 'Delete', icon: 'ri-close-circle-line', action: 'delete' }
+    { label: 'Info', icon: 'ri-information-line', action: 'info', shortcut: '⌘+I' },
+    { label: 'Success', icon: 'ri-checkbox-circle-line', action: 'success', shortcut: '⌘+S' },
+    { label: 'Warning', icon: 'ri-error-warning-line', action: 'warning', shortcut: '⌘+W' },
+    { separator: true },
+    { label: 'Delete', icon: 'ri-close-circle-line', action: 'delete', shortcut: '⌘+D' },
 ];`,
         language: 'typescript',
       },

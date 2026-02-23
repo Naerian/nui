@@ -1,23 +1,24 @@
-import { aura } from '../presets/aura';
-import { ThemeGrays, ThemePreset } from './theme.model';
+import { minimal } from '../presets/minimal';
+import { ThemePreset } from './theme.model';
 
 /**
- * UMBRAL PARA DEFINIR EL CONTRASTE ENTRE NEGRO Y BLANCO SOBRE UN COLOR
+ * Configuración de luminancia para determinar si un token es claro u oscuro
+ * Basado en el estándar WCAG, pero ajustado para un umbral más alto
  */
-export const LUMINANCE_UMBRAL = 0.45;
+export const NUI_LUMINANCE_THRESHOLD = 0.18;
 
 /**
  * Colores puros extremos (negro y blanco)
  */
 export const PURE_COLORS = {
-  BLACK: '#0d1117', // Near-black (GitHub dark)
+  BLACK: '#1E1E1E', // Near-black
   WHITE: '#ffffff', // Pure white
 } as const;
 
 /**
- * Preset por defecto (Aura)
+ * Preset por defecto (Minimalista)
  */
-export const DEFAULT_PRESET: ThemePreset = aura;
+export const DEFAULT_PRESET: ThemePreset = minimal;
 
 /**
  * Token de inyección para la configuración del tema

@@ -11,6 +11,7 @@ export function createDefaultTooltipConfig(): TooltipConfig {
     showDelay: 300,
     hideDelay: 0,
     showArrow: true,
+    allowHtml: false,
     interactive: false,
   };
 }

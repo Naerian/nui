@@ -119,6 +119,9 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
         handler: () => btn.callback(this.panelRef),
         disabled: btn.disabled,
         loading: btn.loading,
+        loadingPosition: btn.loadingPosition,
+        width: btn.width,
+        iconPosition: btn.iconPosition,
         class: btn.class,
       }));
     }

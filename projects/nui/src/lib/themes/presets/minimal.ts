@@ -1,5 +1,5 @@
-import { ZINC_GRAYS } from '../models/theme-grays';
 import { ThemePreset } from '../models/theme.model';
+import { NEUTRAL_GRAYS } from '../models/theme-grays';
 
 /**
  * Minimal Preset - Clean, understated theme
@@ -9,24 +9,25 @@ export const minimal: ThemePreset = {
   name: 'minimal',
   colors: {
     light: {
-      primary: '#18181b',
-      secondary: '#707070',
-      accent: '#8473b8',
-      success: '#14532d',
-      info: '#1e3a8a',
-      warning: '#9c4615',
-      danger: '#992323',
-      neutral: ZINC_GRAYS[600],
+      primary: '#18181B',
+      secondary: '#3F3F46',
+      accent: '#4F46E5',
+      success: '#15803D',
+      info: '#0369A1',
+      warning: '#B45309',
+      danger: '#cc2828',
+      neutral: '#52525B',
     },
     dark: {
-      primary: '#a1a1aa',
-      secondary: '#5b5b66',
-      accent: '#8473b8',
-      success: '#15803d',
-      info: '#3b82f6',
-      warning: '#f59e0b',
-      danger: '#ef4444',
-      neutral: ZINC_GRAYS[400],
+      primary: '#F4F4F5',
+      secondary: '#A1A1AA',
+      accent: '#818CF8',
+      success: '#86EFAC',
+      info: '#7DD3FC',
+      warning: '#FCD34D',
+      danger: '#FCA5A5',
+      neutral: '#D4D4D8',
     },
   },
+  grays: NEUTRAL_GRAYS
 };

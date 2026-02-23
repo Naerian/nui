@@ -1,4 +1,4 @@
-import { ThemeGrays } from "./theme.model";
+import { ThemeGrays } from './theme.model';
 
 // SLATE GRAYS
 export const SLATE_GRAYS: ThemeGrays = {
@@ -68,4 +68,18 @@ export const STONE_GRAYS: ThemeGrays = {
   700: '#44403c',
   800: '#292524',
   900: '#1c1917',
+};
+
+// MAUVE GRAYS
+export const MAUVE_GRAYS: ThemeGrays = {
+  50: '#fdfaff',
+  100: '#f5f2f7',
+  200: '#ebe7ee',
+  300: '#d9d2df',
+  400: '#ad9fb6',
+  500: '#8c7a97',
+  600: '#6e5d7a',
+  700: '#55475e',
+  800: '#342a3a',
+  900: '#1d1920',
 };

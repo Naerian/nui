@@ -11,11 +11,7 @@
   // Efecto blur para desenfocar el contenido de fondo
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-
-  // Color personalizado (azul semi-transparente)
   background-color: rgba(59, 130, 246, 0.25) !important;
-
-  // Transición suave al aparecer/desaparecer
   transition:
     opacity 300ms ease-in-out,
     backdrop-filter 300ms ease-in-out;
@@ -49,11 +45,11 @@
     0 2px 4px rgba(0, 0, 0, 0.1) !important;
 
   // Color de fondo (puede cambiar según tu preset)
-  background: var(--nui-color-primary) !important;
-  border-color: var(--nui-color-primary) !important;
+  background: var(--nui-primary) !important;
+  border-color: var(--nui-primary) !important;
 
   // Color de texto e icono
-  color: white !important;
+  color: var(--nui-on-primary) !important;
 
   // Opacidad completa por defecto
   opacity: 1 !important;
@@ -69,12 +65,12 @@
   // Estilos del icono
   i {
     font-size: 1.25rem !important;
-    color: white !important;
+    color: var(--nui-on-primary) !important;
   }
 
   // Estilos del label
   .sidebar-panel-tab-label {
-    color: white !important;
+    color: var(--nui-on-primary) !important;
     font-weight: 600 !important;
     font-size: 0.9375rem !important;
   }

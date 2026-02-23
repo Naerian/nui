@@ -51,7 +51,7 @@ import { POPOVER_DATA, POPOVER_CLOSE, ButtonComponent } from 'nui';
         width: 48px;
         height: 48px;
         border-radius: 50%;
-        background: linear-gradient(135deg, var(--nui-color-primary), var(--nui-color-secondary));
+        background: linear-gradient(135deg, var(--nui-primary), var(--nui-secondary));
         display: flex;
         align-items: center;
         justify-content: center;
@@ -70,7 +70,7 @@ import { POPOVER_DATA, POPOVER_CLOSE, ButtonComponent } from 'nui';
         margin: 0;
         font-size: 1rem;
         font-weight: 600;
-        color: var(--nui-text-primary);
+        color: var(--nui-on-surface);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -79,7 +79,7 @@ import { POPOVER_DATA, POPOVER_CLOSE, ButtonComponent } from 'nui';
       &__id {
         margin: 0.25rem 0 0 0;
         font-size: 0.75rem;
-        color: var(--nui-text-tertiary);
+        color: var(--nui-on-surface-neutral);
       }
 
       &__body {
@@ -89,7 +89,7 @@ import { POPOVER_DATA, POPOVER_CLOSE, ButtonComponent } from 'nui';
       &__description {
         margin: 0;
         font-size: 0.875rem;
-        color: var(--nui-text-secondary);
+        color: var(--nui-on-surface-neutral);
         line-height: 1.5;
       }
 

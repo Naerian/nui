@@ -62,13 +62,13 @@ export const ACTION_MENU_THEMING_SECTIONS: ComponentSection[] = [
         // Separator
         ['<code>--nui-am-separator-color</code>', 'Color del separador', 'var(--nui-border-primary)'],
         ['<code>--nui-am-separator-padding</code>', 'Padding del separador', 'var(--nui-spacing-xs) 0'],
-        ['<code>--nui-am-separator-label-color</code>', 'Color del label del separador', 'var(--nui-text-tertiary)'],
+        ['<code>--nui-am-separator-label-color</code>', 'Color del label del separador', 'var(--nui-text-neutral)'],
         ['<code>--nui-am-separator-label-spacing</code>', 'Espaciado del label del separador', 'var(--nui-spacing-xs)'],
         ['<code>--nui-am-separator-font-size</code>', 'Tamaño de fuente del separador', 'var(--nui-font-size-xs)'],
         ['<code>--nui-am-separator-font-weight</code>', 'Peso de fuente del separador', 'var(--nui-font-weight-semibold)'],
         
         // Shortcut
-        ['<code>--nui-am-shortcut-bg</code>', 'Fondo del shortcut', 'var(--nui-bg-tertiary)'],
+        ['<code>--nui-am-shortcut-bg</code>', 'Fondo del shortcut', 'var(--nui-bg-neutral)'],
         ['<code>--nui-am-shortcut-color</code>', 'Color del texto del shortcut', 'var(--nui-text-secondary)'],
         ['<code>--nui-am-shortcut-padding</code>', 'Padding del shortcut', 'var(--nui-spacing-xs)'],
         ['<code>--nui-am-shortcut-border-width</code>', 'Grosor del borde del shortcut', 'var(--nui-border-width-xs)'],

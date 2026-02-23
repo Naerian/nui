@@ -6,28 +6,16 @@
   // Dynamic CSS variables based on color and variant
   --button-bg: var(--nui-btn-#{$color}-#{$variant}-bg);
   --button-text: var(--nui-btn-#{$color}-#{$variant}-text);
-  --button-border: var(--nui-btn-#{$color}-#{$variant}-border, transparent);
+  --button-border: var(--nui-btn-#{$color}-#{$variant}-border);
 
   // Hover
-  --button-hover-bg: var(
-    --nui-btn-#{$color}-#{$variant}-hover-bg,
-    var(--nui-btn-#{$color}-#{$variant}-hover)
-  );
-  --button-hover-text: var(
-    --nui-btn-#{$color}-#{$variant}-hover-text,
-    var(--nui-btn-#{$color}-#{$variant}-text)
-  );
-  --button-hover-border: var(--nui-btn-#{$color}-#{$variant}-hover-border, transparent);
+  --button-hover-bg: var(--nui-btn-#{$color}-#{$variant}-hover-bg);
+  --button-hover-text: var(--nui-btn-#{$color}-#{$variant}-hover-text);
+  --button-hover-border: var(--nui-btn-#{$color}-#{$variant}-hover-border);
 
   // Active
-  --button-active-bg: var(
-    --nui-btn-#{$color}-#{$variant}-active-bg,
-    var(--nui-btn-#{$color}-active)
-  );
-  --button-active-border: var(--nui-btn-#{$color}-#{$variant}-active-border, transparent);
-
-  // Focus
-  --nui-focus-ring-color: var(--nui-btn-#{$color}-focus-ring);
+  --button-active-bg: var(--nui-btn-#{$color}-#{$variant}-active-bg);
+  --button-active-border: var(--nui-btn-#{$color}-#{$variant}-active-border);
 }
 
 @mixin nui-button-styles {
@@ -42,7 +30,6 @@
     text-decoration: none !important;
     border-width: var(--nui-button-border-width);
     border-style: solid;
-    transition: var(--nui-button-transition);
     vertical-align: middle;
     isolation: isolate;
 

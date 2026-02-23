@@ -5,17 +5,20 @@
 }
 
 @mixin button-group-theme($variant, $color-name) {
-  --grp-track-bg: var(--nui-btn-group-#{$color-name}-#{$variant}-track-bg, transparent);
-  --grp-track-border: var(--nui-btn-group-#{$color-name}-#{$variant}-track-border, transparent);
+  --nui-btn-group-track-bg: var(--nui-btn-group-#{$color-name}-#{$variant}-track-bg, transparent);
+  --nui-btn-group-track-border: var(
+    --nui-btn-group-#{$color-name}-#{$variant}-track-border,
+    transparent
+  );
 
-  --grp-base-bg: var(--nui-btn-group-#{$color-name}-#{$variant}-base-bg);
-  --grp-base-text: var(--nui-btn-group-#{$color-name}-#{$variant}-base-text);
-  --grp-base-border: var(--nui-btn-group-#{$color-name}-#{$variant}-base-border);
-  --grp-hover-bg: var(--nui-btn-group-#{$color-name}-#{$variant}-hover-bg);
+  --nui-btn-group-base-bg: var(--nui-btn-group-#{$color-name}-#{$variant}-bg);
+  --nui-btn-group-base-text: var(--nui-btn-group-#{$color-name}-#{$variant}-text);
+  --nui-btn-group-base-border: var(--nui-btn-group-#{$color-name}-#{$variant}-border);
+  --nui-btn-group-hover-bg: var(--nui-btn-group-#{$color-name}-#{$variant}-hover-bg);
 
-  --grp-sel-bg: var(--nui-btn-group-#{$color-name}-#{$variant}-sel-bg);
-  --grp-sel-text: var(--nui-btn-group-#{$color-name}-#{$variant}-sel-text);
-  --grp-sel-border: var(--nui-btn-group-#{$color-name}-#{$variant}-sel-border);
+  --nui-btn-group-sel-bg: var(--nui-btn-group-#{$color-name}-#{$variant}-sel-bg);
+  --nui-btn-group-sel-text: var(--nui-btn-group-#{$color-name}-#{$variant}-sel-text);
+  --nui-btn-group-sel-border: var(--nui-btn-group-#{$color-name}-#{$variant}-sel-border);
 }
 
 .nui-btn-group {
@@ -25,8 +28,8 @@
   border-radius: var(--nui-btn-group-radius);
   user-select: none;
   isolation: isolate;
-  transition: var(--nui-btn-group-transition);
-  border: 1px solid var(--grp-track-border);
+  border: 1px solid var(--nui-btn-group-track-border);
+  background-color: var(--nui-btn-group-track-bg);
 
   &--full {
     display: flex;
@@ -53,12 +56,11 @@
     position: relative;
     white-space: nowrap;
     cursor: pointer;
-    background-color: var(--grp-base-bg);
-    color: var(--grp-base-text);
-    border: var(--nui-border-width-xs) solid var(--grp-base-border);
+    background-color: var(--nui-btn-group-base-bg);
+    color: var(--nui-btn-group-base-text);
+    border: var(--nui-border-width-xs) solid var(--nui-btn-group-base-border);
     font-family: var(--nui-font-family);
     font-weight: var(--nui-font-weight-medium);
-    transition: all var(--nui-transition-duration-fast) var(--nui-transition-timing-function-ease);
     z-index: var(--nui-btn-group-z-index-base);
 
     &:not(:first-child) {
@@ -76,14 +78,14 @@
     }
 
     &:hover:not(&--selected):not(&--disabled) {
-      background-color: var(--grp-hover-bg);
+      background-color: var(--nui-btn-group-hover-bg);
       z-index: 2;
     }
 
     &--selected {
-      background-color: var(--grp-sel-bg);
-      color: var(--grp-sel-text);
-      border-color: var(--grp-sel-border);
+      background-color: var(--nui-btn-group-sel-bg);
+      color: var(--nui-btn-group-sel-text);
+      border-color: var(--nui-btn-group-sel-border);
       z-index: 3;
     }
 
@@ -143,7 +145,6 @@
   // ==================================================
   &--segmented {
     gap: var(--nui-btn-group-segmented-gap);
-    background-color: var(--nui-bg-secondary);
     padding: var(--nui-btn-group-segmented-padding);
 
     .nui-btn-group__option {

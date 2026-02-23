@@ -42,10 +42,9 @@ import { CommonModule } from '@angular/common';
       justify-content: center;
       width: 1.5rem;
       height: 1.5rem;
-      color: var(--nui-color-text-tertiary);
+      color: var(--nui-color-text-neutral);
       text-decoration: none;
       opacity: 0;
-      transition: opacity 0.2s ease, color 0.2s ease;
       font-size: 1.25rem;
     }
 

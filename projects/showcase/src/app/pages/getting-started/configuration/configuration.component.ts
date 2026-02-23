@@ -29,7 +29,7 @@ provideNUI({
       title: 'app.config.ts',
       language: 'typescript',
       code: `provideNUI({ 
-  preset: aura,
+  preset: minimal,
   darkMode: 'manual' // 'auto' | 'manual' | 'system'
 })`
     }

@@ -68,12 +68,6 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
         icon: 'ri-moon-line',
       },
       {
-        label: 'CSS Variables',
-        translationKey: 'sidebar.themingCssVariables',
-        route: '/theming/css-variables',
-        icon: 'ri-code-line',
-      },
-      {
         label: 'Customization',
         translationKey: 'sidebar.themingCustomization',
         route: '/theming/customization',

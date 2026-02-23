@@ -49,6 +49,13 @@ export class TooltipComponent {
   tooltipId = input<string>('');
 
   /**
+   * Permitir HTML en el contenido (solo si es string)
+   * ¡Usar con precaución! Asegúrate de sanitizar el contenido para evitar XSS.
+   * Angular sanitiza automáticamente el HTML cuando se usa [innerHTML].
+   */
+  allowHtml = input<boolean>(false);
+
+  /**
    * Indica si el contenido es un template
    */
   isTemplate = signal(false);

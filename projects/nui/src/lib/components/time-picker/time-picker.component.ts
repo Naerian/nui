@@ -36,11 +36,11 @@ import {
 import { ButtonGroupComponent } from '../button-group';
 import type { BtnGroupOption } from '../button-group/models/button-group.model';
 import { NUI_TRANSLATIONS } from '../../translations';
-
+import { TooltipDirective } from '../tooltip';
 @Component({
   selector: 'nui-time-picker',
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonGroupComponent],
+  imports: [CommonModule, FormsModule, ButtonGroupComponent, TooltipDirective],
   templateUrl: './time-picker.component.html',
   styleUrls: ['./time-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -1087,7 +1087,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
           break;
       }
     }
-    // Para todas las demás teclas (flechas, PageUp, etc.), 
+    // Para todas las demás teclas (flechas, PageUp, etc.),
     // delegar al handler principal pero evitar duplicación
     else {
       // Importante: detener la propagación para evitar que se ejecute dos veces

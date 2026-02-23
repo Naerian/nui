@@ -71,7 +71,9 @@
                 role="option"
                 [attr.aria-selected]="selectedDuration()?.hours === hour"
               >
-                <span class="nui-time-picker__duration-value">{{ hour.toString().padStart(2, '0') }}</span>
+                <span class="nui-time-picker__duration-value">
+                  {{ hour.toString().padStart(2, '0') }}
+                </span>
                 <span class="nui-time-picker__duration-unit">h</span>
               </button>
             }
@@ -109,7 +111,9 @@
                 role="option"
                 [attr.aria-selected]="selectedDuration()?.minutes === minute"
               >
-                <span class="nui-time-picker__duration-value">{{ minute.toString().padStart(2, '0') }}</span>
+                <span class="nui-time-picker__duration-value">
+                  {{ minute.toString().padStart(2, '0') }}
+                </span>
                 <span class="nui-time-picker__duration-unit">min</span>
               </button>
             }
@@ -149,7 +153,9 @@
                   role="option"
                   [attr.aria-selected]="selectedDuration()?.seconds === second"
                 >
-                  <span class="nui-time-picker__duration-value">{{ second.toString().padStart(2, '0') }}</span>
+                  <span class="nui-time-picker__duration-value">
+                    {{ second.toString().padStart(2, '0') }}
+                  </span>
                   <span class="nui-time-picker__duration-unit">s</span>
                 </button>
               }
@@ -179,44 +185,43 @@
       <!-- Header: Display actual -->
       @if (showHeader()) {
         <div class="nui-time-picker__header">
-          <!-- Indicador de normalización -->
-          @if (normalizationInfo()) {
+          <div class="nui-time-picker__header-info">
+            <!-- Indicador de normalización -->
+            @if (normalizationInfo()) {
+              <i
+                class="ri-alert-line nui-time-picker__normalized"
+                role="alert"
+                aria-live="assertive"
+                [nuiTooltipAllowHtml]="true"
+                [nuiTooltip]="
+                  _translations.timePicker.normalizedTime
+                    .replace('{ original }', normalizationInfo()?.original ?? '')
+                    .replace('{ normalized }', normalizationInfo()?.normalized ?? '')
+                "
+              ></i>
+            }
+
+            <!-- Indicador de rango -->
+            @if (config.showRangeIndicator && config.minTime && config.maxTime) {
+              <i
+                class="ri-information-line nui-time-picker__info-indicator"
+                [nuiTooltipAllowHtml]="true"
+                [nuiTooltip]="
+                  _translations.timePicker.rangeLabel +
+                  '<br/>' +
+                  formatTimeValue(config.minTime) +
+                  ' — ' +
+                  formatTimeValue(config.maxTime)
+                "
+              ></i>
+            }
             <div
-              class="nui-time-picker__normalized"
-              role="alert"
-              aria-live="assertive"
-              [innerHTML]="
-                _translations.timePicker.normalizedTime
-                  .replace('{ original }', normalizationInfo()?.original ?? '')
-                  .replace('{ normalized }', normalizationInfo()?.normalized ?? '')
-              "
+              class="nui-time-picker__display"
+              role="status"
+              aria-live="polite"
+              [innerHTML]="formattedTime()"
             ></div>
-          }
-
-          <!-- Indicador de rango (si está habilitado) -->
-          @if (config.showRangeIndicator && config.minTime && config.maxTime) {
-            <div class="nui-time-picker__range-indicator">
-              <span class="nui-time-picker__range-label">
-                {{ _translations.timePicker.rangeLabel }}:
-              </span>
-              <div class="nui-time-picker__range-values">
-                <span class="nui-time-picker__range-start">
-                  {{ formatTimeValue(config.minTime) }}
-                </span>
-                <span class="nui-time-picker__range-separator">—</span>
-                <span class="nui-time-picker__range-end">
-                  {{ formatTimeValue(config.maxTime) }}
-                </span>
-              </div>
-            </div>
-          }
-
-          <div
-            class="nui-time-picker__display"
-            role="status"
-            aria-live="polite"
-            [innerHTML]="formattedTime()"
-          ></div>
+          </div>
         </div>
       }
 

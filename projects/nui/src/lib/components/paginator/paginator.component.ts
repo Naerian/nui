@@ -461,6 +461,27 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   pageJumpValue = signal<string>('');
 
   /**
+   * Computed que determina si el botón "Ir" del page jump debe estar habilitado.
+   * Solo se habilita si:
+   * 1. El valor es un número válido
+   * 2. Está dentro del rango (1 - totalPages)
+   * 3. No es la página actual (no tiene sentido navegar a la misma página)
+   */
+  isPageJumpButtonEnabled = computed(() => {
+    const value = this.pageJumpValue();
+    if (!value || value === '') return false;
+
+    const pageNum = parseInt(value, 10);
+    if (isNaN(pageNum)) return false;
+
+    const total = this.totalPages();
+    const current = this.currentPage();
+
+    // Debe estar en rango y no ser la página actual
+    return pageNum >= 1 && pageNum <= total && pageNum !== current;
+  });
+
+  /**
    * Estado de loading
    */
   isLoading = signal<boolean>(false);

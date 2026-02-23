@@ -14,10 +14,10 @@ import {
   PURE_COLORS,
   DEFAULT_PRESET,
   NUI_THEME_CONFIG,
-  LUMINANCE_UMBRAL,
+  NUI_LUMINANCE_THRESHOLD,
 } from './models/theme.config';
 import { NUI_PRESETS } from './models/theme-presets';
-import { COOL_GRAYS } from './models/theme-grays';
+import { ZINC_GRAYS } from './models/theme-grays';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
@@ -26,6 +26,13 @@ export class ThemeService {
   private darkModeStrategy: DarkModeStrategy = DarkModeStrategyEnum.MANUAL;
   private darkModeClass: string = DARK_MODE_CLASS;
   private mediaQuery?: MediaQueryList;
+
+  /**
+   * Caché de CSS generado por preset + modo dark/light.
+   * Key format: "presetName-isDarkMode"
+   * Esto evita regenerar TODO el CSS en cada cambio de tema, mejorando performance significativamente.
+   */
+  private cssCache = new Map<string, string>();
 
   // Signals
   private _isDarkMode = signal(false);
@@ -39,6 +46,9 @@ export class ThemeService {
   readonly colors = computed(() =>
     this._isDarkMode() ? this._currentPreset().colors.dark : this._currentPreset().colors.light
   );
+
+  // If the preset doesn't define its own grays, we fall back to the default grays
+  readonly grays = computed(() => this._currentPreset().grays || this.getDefaultGrays());
 
   // Observables for users who need RxJS interoperability
   readonly isDarkMode$: Observable<boolean> = toObservable(this._isDarkMode);
@@ -74,9 +84,56 @@ export class ThemeService {
     // Initialize dark mode based on strategy
     if (this.darkModeStrategy === 'auto' || this.darkModeStrategy === 'system') {
       this.setupSystemDarkMode();
+    } else if (this.darkModeStrategy === DarkModeStrategyEnum.MANUAL) {
+      // En modo manual, leer estado persistido de localStorage
+      this.loadDarkModeFromStorage();
     }
 
+    // Pre-generar ambos modos para hacer el primer toggle instantáneo
+    this.preGenerateBothModes();
+
     this.updateColors();
+  }
+
+  /**
+   * Pre-generar CSS para ambos modos (light y dark) al iniciar.
+   * Esto hace que el primer toggle entre modos sea instantáneo.
+   *
+   * Estrategia:
+   * 1. Genera inmediatamente el CSS del modo actual (se cachea)
+   * 2. Programa con requestIdleCallback generar el modo opuesto cuando el navegador esté idle
+   * 3. Así el primer toggle ya encuentra el CSS pre-generado en caché
+   */
+  private preGenerateBothModes(): void {
+    const currentMode = this._isDarkMode();
+    const presetName = this._currentPreset().name;
+
+    // Generar el modo actual inmediatamente
+    const currentKey = `${presetName}-${currentMode}`;
+    if (!this.cssCache.has(currentKey)) {
+      this.cssCache.set(currentKey, this.generateComponentVariables());
+    }
+
+    // Generar el modo opuesto cuando el navegador esté idle (no bloquea carga inicial)
+    const scheduleOppositeMode = () => {
+      // Temporalmente cambiar el modo para generar el CSS opuesto
+      this._isDarkMode.set(!currentMode);
+      const oppositeKey = `${presetName}-${!currentMode}`;
+
+      if (!this.cssCache.has(oppositeKey)) {
+        this.cssCache.set(oppositeKey, this.generateComponentVariables());
+      }
+
+      // Restaurar el modo original
+      this._isDarkMode.set(currentMode);
+    };
+
+    // Usar requestIdleCallback si está disponible, sino setTimeout como fallback
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(scheduleOppositeMode, { timeout: 2000 });
+    } else {
+      setTimeout(scheduleOppositeMode, 100);
+    }
   }
 
   /**
@@ -130,6 +187,33 @@ export class ThemeService {
   }
 
   /**
+   * Guarda el estado de dark mode en localStorage para persistirlo entre recargas.
+   */
+  private saveDarkModeToStorage(isDark: boolean): void {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('nui-dark-mode', JSON.stringify(isDark));
+    }
+  }
+
+  /**
+   * Lee el estado de dark mode desde localStorage.
+   */
+  private loadDarkModeFromStorage(): void {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const stored = localStorage.getItem('nui-dark-mode');
+      if (stored !== null) {
+        try {
+          const isDark = JSON.parse(stored);
+          this._isDarkMode.set(isDark);
+          this.updateDarkModeClass();
+        } catch (e) {
+          console.warn('Error parsing stored dark mode value:', e);
+        }
+      }
+    }
+  }
+
+  /**
    * Manually toggle dark mode.
    * Only works when darkMode strategy is 'manual' or not set.
    */
@@ -140,6 +224,7 @@ export class ThemeService {
     }
 
     this._isDarkMode.update(current => !current);
+    this.saveDarkModeToStorage(this._isDarkMode());
     this.updateDarkModeClass();
     this.updateColors();
   }
@@ -155,6 +240,7 @@ export class ThemeService {
     }
 
     this._isDarkMode.set(enabled);
+    this.saveDarkModeToStorage(enabled);
     this.updateDarkModeClass();
     this.updateColors();
   }
@@ -174,51 +260,85 @@ export class ThemeService {
    * by providing a ThemePreset object.
    */
   usePreset(preset: ThemePreset): void {
+    const previousPresetName = this._currentPreset().name;
     this._currentPreset.set(preset);
+
+    // Limpiar caché del preset anterior (ya que ahora es irrelevante)
+    if (previousPresetName !== preset.name) {
+      this.cssCache.delete(`${previousPresetName}-true`);
+      this.cssCache.delete(`${previousPresetName}-false`);
+    }
+
     this.updateColors();
   }
 
   /**
    * Update CSS variables based on the current theme preset and dark mode state.
    * This method generates the necessary CSS variable definitions and injects them into
-   * the style element in the document head,
+   * the style element in the document head.
+   *
+   * Optimizado con caché: Solo regenera CSS cuando es la primera vez que se usa
+   * una combinación de preset + isDarkMode. Esto hace que el cambio entre light/dark
+   * sea instantáneo después de la primera generación.
    */
   updateColors(): void {
     if (!this.styleElement) return;
-    this.styleElement.textContent = this.generateComponentVariables();
+
+    // Generar clave de caché basada en preset + modo dark
+    const cacheKey = `${this._currentPreset().name}-${this._isDarkMode()}`;
+
+    // Verificar si ya tenemos el CSS generado en caché
+    let css = this.cssCache.get(cacheKey);
+
+    // Si no está en caché, generarlo y guardarlo
+    if (!css) {
+      css = this.generateComponentVariables();
+      this.cssCache.set(cacheKey, css);
+    }
+
+    // Aplicar el CSS (instantáneo si estaba cacheado)
+    this.styleElement.textContent = css;
   }
 
   /**
-   * Calculate a contrasting color (black or white) based on the luminance of the input color.
-   * This method is used to ensure that text or icons placed on top of a background color have sufficient
-   * contrast for readability.
-   * @param {string} hexColor - The input color in hexadecimal format (e.g., '#ff0000').
-   * @returns {string} - Returns '#000000' for light colors and '#ffffff' for dark colors to ensure contrast.
+   * Calculate a contrasting text color (light or dark) based on the background color for accessibility.
+   * This method determines whether to use a light or dark text color based on the luminance of the provided background color. It supports various color formats (HEX, RGB/RGBA, CSS keywords) and uses the WCAG formula for relative luminance to ensure sufficient contrast for readability.
+   * @backgroundColor The background color for which to calculate the contrast text color. Can be in HEX, RGB/RGBA, or CSS keyword format.
+   * @lightToken The color to use for text if the background is dark (default: white).
+   * @darkToken The color to use for text if the background is light (default: a dark gray instead of pure black for better visual DX).
    */
-  public getContrastColor(hexColor: string): string {
-    let rgb: { r: number; g: number; b: number } = { r: 0, g: 0, b: 0 }; // Valor por defecto
+  public getContrastColor(
+    backgroundColor: string,
+    lightToken: string = 'var(--nui-text-light, #FFFFFF)',
+    darkToken: string = 'var(--nui-text-dark, #1A1A1A)'
+  ): string {
+    const rgb = this.isCSSColorKeyword(backgroundColor)
+      ? this.hexToRgb(this.cssKeywordToHex(backgroundColor))
+      : this.hexToRgb(backgroundColor);
 
-    const isCssKeyword = this.isCSSColorKeyword(hexColor);
+    if (!rgb) return darkToken;
 
-    if (!isCssKeyword) {
-      rgb = this.hexToRgb(hexColor);
-    } else {
-      const hex = this.cssKeywordToHex(hexColor);
-      rgb = this.hexToRgb(hex);
-    }
+    // Use the luminance to determine if we should return the light or dark token
+    const LUMINANCE = this.getLuminance(rgb.r, rgb.g, rgb.b);
 
-    // Relative luminance formula (WCAG standard)
-    const getLuminance = (r: number, g: number, b: number) => {
-      const a = [r, g, b].map(v => {
-        v /= 255;
-        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
-      });
-      return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
-    };
+    // The standard WCAG threshold for contrast is 0.179 on relative luminance
+    return LUMINANCE > NUI_LUMINANCE_THRESHOLD ? darkToken : lightToken;
+  }
 
-    const lum = getLuminance(rgb.r, rgb.g, rgb.b);
-    // If luminance is high (light color), use black text. If low (dark), use white text.
-    return lum > LUMINANCE_UMBRAL ? PURE_COLORS.BLACK : PURE_COLORS.WHITE;
+  /**
+   * Calculate the relative luminance of a color based on its RGB components.
+   * This method uses the WCAG formula for relative luminance, which accounts for human perception of brightness. It converts RGB values to a linear space and applies the appropriate coefficients to calculate the final luminance value, which is used to determine contrast and accessibility compliance.
+   * @param r The red component of the color (0-255).
+   * @param g The green component of the color (0-255).
+   * @param b The blue component of the color (0-255).
+   * @return The relative luminance of the color, a value between 0 (darkest) and 1 (lightest).
+   */
+  private getLuminance(r: number, g: number, b: number): number {
+    const [rs, gs, bs] = [r, g, b].map(v => {
+      v /= 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
   }
 
   /**
@@ -230,53 +350,29 @@ export class ThemeService {
     const colors = this._isDarkMode()
       ? this._currentPreset().colors.dark
       : this._currentPreset().colors.light;
-    const grays = this._currentPreset().grays || this.getDefaultGrays();
 
     let css = ':root {\n';
 
-    // Structural variables (grays, text, bg, borders, shadows, focus, overlay, backdrop, spinner, switch)
-    css += this.generateStructuralVariables(grays);
+    // Transitions to smoothly animate color changes when toggling dark mode or switching presets
+    css += ` 
+      transition:
+        background-color 150ms ease-out,
+        color 150ms ease-out,
+        border-color 150ms ease-out,
+        box-shadow 150ms ease-out;
+    `;
 
-    // Semantic color variables + contrast text colors
-    css += this.generateSemanticVariables();
+    // Structural variables (grays, text, bg, borders, shadows, focus, overlay, backdrop, spinner, switch)
+    css += this.generateStructuralVariables();
+
+    // Overlay variables (used for modals, popovers, action menus, etc.)
+    css += this.generateOverlayVariables();
 
     // Shadow variables
     css += this.generateShadowVariables();
 
-    // Modal gradient (uses warning and danger from preset)
-    css += `  --nui-color-modal-gradient: linear-gradient(90deg, ${colors.warning}, ${colors.danger});\n`;
-
     // Generate base color variables and their tints/shades
     Object.entries(colors).forEach(([name, baseColor]) => {
-      // Base color
-      css += `  --nui-color-${name}: ${baseColor};\n`;
-
-      // Generate tints (lighter versions): 95, 90, 80, 70, 60, 50
-      css += `  --nui-color-${name}-tint-95: ${this.tint(baseColor, 95)};\n`;
-      css += `  --nui-color-${name}-tint-90: ${this.tint(baseColor, 90)};\n`;
-      css += `  --nui-color-${name}-tint-80: ${this.tint(baseColor, 80)};\n`;
-      css += `  --nui-color-${name}-tint-70: ${this.tint(baseColor, 70)};\n`;
-      css += `  --nui-color-${name}-tint-60: ${this.tint(baseColor, 60)};\n`;
-      css += `  --nui-color-${name}-tint-50: ${this.tint(baseColor, 50)};\n`;
-
-      // Generate shades (darker versions): 10, 20, 30, 40, 50
-      css += `  --nui-color-${name}-shade-10: ${this.shade(baseColor, 10)};\n`;
-      css += `  --nui-color-${name}-shade-20: ${this.shade(baseColor, 20)};\n`;
-      css += `  --nui-color-${name}-shade-30: ${this.shade(baseColor, 30)};\n`;
-      css += `  --nui-color-${name}-shade-40: ${this.shade(baseColor, 40)};\n`;
-      css += `  --nui-color-${name}-shade-50: ${this.shade(baseColor, 50)};\n`;
-
-      // Generate alpha variants: 10, 20, 30, 40, 50, 60, 70, 80, 90
-      css += `  --nui-color-${name}-alpha-10: ${this.withAlpha(baseColor, 0.1)};\n`;
-      css += `  --nui-color-${name}-alpha-20: ${this.withAlpha(baseColor, 0.2)};\n`;
-      css += `  --nui-color-${name}-alpha-30: ${this.withAlpha(baseColor, 0.3)};\n`;
-      css += `  --nui-color-${name}-alpha-40: ${this.withAlpha(baseColor, 0.4)};\n`;
-      css += `  --nui-color-${name}-alpha-50: ${this.withAlpha(baseColor, 0.5)};\n`;
-      css += `  --nui-color-${name}-alpha-60: ${this.withAlpha(baseColor, 0.6)};\n`;
-      css += `  --nui-color-${name}-alpha-70: ${this.withAlpha(baseColor, 0.7)};\n`;
-      css += `  --nui-color-${name}-alpha-80: ${this.withAlpha(baseColor, 0.8)};\n`;
-      css += `  --nui-color-${name}-alpha-90: ${this.withAlpha(baseColor, 0.9)};\n`;
-
       // Component-specific variables
       css += this.generateButtonVariables(name, baseColor);
       css += this.generateButtonGroupVariables(name, baseColor);
@@ -302,133 +398,143 @@ export class ThemeService {
    * This method returns a default set of gray colors that are used for structural elements like backgrounds, borders, and text when a custom preset does not provide its own grays.
    * @return {ThemeGrays} An object containing the default gray scale colors.
    */
-  private getDefaultGrays(): ThemeGrays {
-    return COOL_GRAYS;
+  getDefaultGrays(): ThemeGrays {
+    return ZINC_GRAYS;
   }
 
   /**
    * Generate CSS variable definitions for structural colors and elements based on the provided gray scale.
    * This method creates CSS variable definitions for grays, background colors, text colors, border colors, shadow opacities, focus ring color, text selection color, overlay/backdrop colors, spinner colors, and switch colors.
    * The generated variables adapt based on whether the current theme is in dark mode or light mode, ensuring appropriate contrast and aesthetics for each mode.
-   * @param {ThemeGrays} grays - An object containing the gray scale colors to be used in the theme.
    * @return {string} A string containing the CSS variable definitions for structural colors and elements.
    */
-  private generateStructuralVariables(grays: ThemeGrays): string {
+  private generateStructuralVariables(): string {
     const isDark = this._isDarkMode();
-    const currentColors = this.colors();
-    return `
+    const colors = this.colors();
+    const grays = this.grays();
 
-  /* Base colors */
-  --nui-primary: ${currentColors.primary};
-  --nui-secondary: ${currentColors.secondary};
-  --nui-neutral: ${currentColors.neutral};
+    let css = '';
 
-  /* Gray scale */
-  --nui-gray-50: ${grays[50]};
-  --nui-gray-100: ${grays[100]};
-  --nui-gray-200: ${grays[200]};
-  --nui-gray-300: ${grays[300]};
-  --nui-gray-400: ${grays[400]};
-  --nui-gray-500: ${grays[500]};
-  --nui-gray-600: ${grays[600]};
-  --nui-gray-700: ${grays[700]};
-  --nui-gray-800: ${grays[800]};
-  --nui-gray-900: ${grays[900]};
+    // Base text colors (used for contrast calculations and as fallbacks)
+    css += ` 
+      --nui-text-primary: ${isDark ? grays[50] : grays[900]};
+      --nui-text-secondary: ${isDark ? grays[400] : grays[500]};
+      --nui-text-weak: ${isDark ? grays[500] : grays[400]};
+      --nui-text-disabled: ${isDark ? grays[600] : grays[400]};
 
-  /* Background colors */
-  --nui-bg-primary: ${isDark ? grays[900] : PURE_COLORS.WHITE};
-  --nui-bg-secondary: ${isDark ? grays[800] : grays[50]};
-  --nui-bg-tertiary: ${isDark ? grays[700] : grays[100]};
-  --nui-bg-neutral: ${isDark ? grays[800] : grays[100]};
+      --nui-text-light: ${PURE_COLORS.WHITE};
+      --nui-text-dark: ${PURE_COLORS.BLACK};
+      --nui-text-inverted: ${isDark ? grays[900] : PURE_COLORS.WHITE};
+      --nui-text-disabled: ${isDark ? grays[600] : grays[400]};
+      --nui-text-muted: ${isDark ? grays[500] : grays[300]};
+      
+      --nui-link: ${colors.primary};
+      --nui-link-hover: ${this.tint(colors.primary, 20)};
+      --nui-link-active: ${this.shade(colors.primary, 20)};
+      --nui-link-visited: ${this.shade(colors.primary, 40)};
+      --nui-link-disabled: ${isDark ? grays[600] : grays[400]};
 
-  /* Contrasting text colors for primary and secondary colors */
-  --nui-primary-contrast: ${this.getContrastColor(currentColors.primary)};
-  --nui-secondary-contrast: ${this.getContrastColor(currentColors.secondary)};
-  --nui-neutral-contrast: ${this.getContrastColor(currentColors.neutral)};
+      --nui-placeholder-text: ${isDark ? grays[600] : grays[400]};
 
-  /* Alpha variants for primary, secondary, and neutral colors */
-  --nui-primary-alpha-50: ${this.withAlpha(currentColors.primary, 0.5)};
-  --nui-secondary-alpha-50: ${this.withAlpha(currentColors.secondary, 0.5)};
-  --nui-neutral-alpha-50: ${this.withAlpha(currentColors.neutral, 0.5)};
+      --nui-focus-ring-color: ${this.withAlpha(colors.primary, 0.4)};
+    `;
 
-  /* Text colors */
-  --nui-text-primary: ${isDark ? grays[50] : grays[900]};
-  --nui-text-secondary: ${isDark ? grays[300] : grays[600]};
-  --nui-text-tertiary: ${isDark ? grays[400] : grays[500]};
-  --nui-text-neutral: ${isDark ? grays[400] : grays[600]};
-  --nui-text-inverted: ${isDark ? grays[900] : PURE_COLORS.WHITE};
-  --nui-text-disabled: ${isDark ? grays[600] : grays[400]};
+    // Selection color (used for text selection)
+    css += ` 
+      --nui-selection: ${isDark ? grays[500] : grays[200]};
+      --nui-on-selection: ${this.getContrastColor(isDark ? grays[500] : grays[200])};
+    `;
 
-  /* Border colors */
-  --nui-border-primary: ${isDark ? grays[700] : grays[200]};
-  --nui-border-secondary: ${isDark ? grays[800] : grays[100]};
-  --nui-border-neutral: ${isDark ? grays[700] : grays[200]};
-  --nui-border-strong: ${isDark ? grays[600] : grays[300]};
-  --nui-border-weak: ${isDark ? grays[800] : grays[100]};
+    // Border colors (used for borders and dividers)
+    css += `
+      --nui-border-high: ${isDark ? grays[600] : grays[300]};
+      --nui-border-default: ${isDark ? grays[700] : grays[200]};
+      --nui-border-subtle: ${isDark ? grays[800] : grays[100]};
+    `;
 
-  /* Shadow base (RGB para poder usarlo en rgba() de SCSS) */
-  --nui-shadow-base-rgb: ${isDark ? '0, 0, 0' : '0, 0, 0'}; 
+    // Surfaces (used for backgrounds of components like cards, modals, popovers)
+    css += `
+      --nui-surface: ${isDark ? grays[900] : PURE_COLORS.WHITE};
+      --nui-surface-secondary: ${isDark ? grays[800] : grays[50]};
+      --nui-surface-neutral: ${isDark ? grays[700] : grays[100]};
 
-  /* Multiplicador para hacer las sombras más densas en Dark Mode si se desea */
-  --nui-shadow-opacity-scale: ${isDark ? '2.5' : '1'};
+      --nui-on-surface: ${this.getContrastColor(isDark ? grays[900] : PURE_COLORS.WHITE)};
+      --nui-on-surface-secondary: ${this.getContrastColor(isDark ? grays[800] : grays[50])};
+      --nui-on-surface-neutral: ${this.getContrastColor(isDark ? grays[700] : grays[100])};
+    `;
 
-  /* Focus ring */
-  --nui-focus-ring-color: ${this.withAlpha(currentColors.primary, 0.5)};
+    // Generate gray variables
+    Object.entries(grays).forEach(([name, value]) => {
+      // Gray variables (used for structural elements like backgrounds, borders, text)
+      css += `  --nui-gray-${name}: ${value};\n`;
 
-  /* Text selection */
-  --nui-color-selection-bg: ${isDark ? grays[500] : grays[200]};
+      // Generate border color variants for grays (used for borders and dividers in components that use gray as background)
+      const borderTint = this.tint(value, 80);
+      css += `  --nui-border-gray-${name}: ${borderTint};\n`;
 
-  /* Overlay & Backdrop */
-  --nui-overlay-bg: ${isDark ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.5)'};
-  --nui-color-backdrop: ${isDark ? 'rgba(0, 0, 0, 0.75)' : 'rgba(0, 0, 0, 0.5)'};
-`;
+      // Generate contrast text colors for grays
+      css += `  --nui-on-gray-${name}: ${this.getContrastColor(value)};\n`;
+    });
+
+    // Generate base color variables and their tints / shades
+    Object.entries(colors).forEach(([name, baseColor]) => {
+      // Base color
+      css += `  --nui-${name}: ${baseColor};\n`;
+
+      // Generate tints (lighter versions): 95, 90, 80, 70, 60, 50
+      css += `  --nui-${name}-tint-95: ${this.tint(baseColor, 95)};\n`;
+      css += `  --nui-${name}-tint-90: ${this.tint(baseColor, 90)};\n`;
+      css += `  --nui-${name}-tint-80: ${this.tint(baseColor, 80)};\n`;
+      css += `  --nui-${name}-tint-70: ${this.tint(baseColor, 70)};\n`;
+      css += `  --nui-${name}-tint-60: ${this.tint(baseColor, 60)};\n`;
+      css += `  --nui-${name}-tint-50: ${this.tint(baseColor, 50)};\n`;
+
+      // Generate shades (darker versions): 10, 20, 30, 40, 50
+      css += `  --nui-${name}-shade-10: ${this.shade(baseColor, 10)};\n`;
+      css += `  --nui-${name}-shade-20: ${this.shade(baseColor, 20)};\n`;
+      css += `  --nui-${name}-shade-30: ${this.shade(baseColor, 30)};\n`;
+      css += `  --nui-${name}-shade-40: ${this.shade(baseColor, 40)};\n`;
+      css += `  --nui-${name}-shade-50: ${this.shade(baseColor, 50)};\n`;
+
+      // Generate alpha variants: 10, 20, 30, 40, 50, 60, 70, 80, 90
+      css += `  --nui-${name}-alpha-10: ${this.withAlpha(baseColor, 0.1)};\n`;
+      css += `  --nui-${name}-alpha-20: ${this.withAlpha(baseColor, 0.2)};\n`;
+      css += `  --nui-${name}-alpha-30: ${this.withAlpha(baseColor, 0.3)};\n`;
+      css += `  --nui-${name}-alpha-40: ${this.withAlpha(baseColor, 0.4)};\n`;
+      css += `  --nui-${name}-alpha-50: ${this.withAlpha(baseColor, 0.5)};\n`;
+      css += `  --nui-${name}-alpha-60: ${this.withAlpha(baseColor, 0.6)};\n`;
+      css += `  --nui-${name}-alpha-70: ${this.withAlpha(baseColor, 0.7)};\n`;
+      css += `  --nui-${name}-alpha-80: ${this.withAlpha(baseColor, 0.8)};\n`;
+      css += `  --nui-${name}-alpha-90: ${this.withAlpha(baseColor, 0.9)};\n`;
+
+      // Generate contrast text colors
+      css += `  --nui-on-${name}: ${this.getContrastColor(baseColor)};\n`;
+
+      // Border color variants (used for borders and dividers in components that use this color as background)
+      const borderTint = this.tint(baseColor, 80);
+      css += `  --nui-border-${name}: ${borderTint};\n`;
+
+      // Dark & light variants (used for hover/active states, backgrounds, etc.)
+      css += `  --nui-${name}-light: ${this.tint(baseColor, 40)};\n`;
+      css += `  --nui-${name}-dark: ${this.shade(baseColor, 40)};\n`;
+    });
+
+    return css;
   }
 
   /**
-   * Generate CSS variable definitions for semantic color aliases and their contrasting text colors based
-   * on the current theme preset and dark mode state.
-   * This method creates CSS variable definitions for semantic color aliases
-   * (primary, secondary, accent, success, info, warning, danger, neutral) and their corresponding
-   * contrasting text colors.
-   * The contrasting text colors are calculated using the getContrastColor method to ensure sufficient
-   * contrast against the background color for readability.
-   * @return {string} A string containing the CSS variable definitions for semantic color aliases and their contrasting text colors.
+   * Generate CSS variable definitions for overlay colors based on the current theme preset and dark mode state.
+   * This method creates CSS variable definitions for overlay backgrounds and backdrops that are used in components like modals, popovers, and action menus. The colors adapt based on whether the current theme is in dark mode or light mode, ensuring appropriate contrast and aesthetics for each mode.
+   * In dark mode, the overlay background is typically a darker, more opaque color to provide better contrast against the dark background, while in light mode, it is lighter and less opaque to maintain a softer appearance. The backdrop color also adjusts accordingly to ensure that it complements the overall theme and provides sufficient separation between the overlay content and the underlying page.
+   * @return {string} A string containing the CSS variable definitions for overlay colors.
    */
-  generateSemanticVariables(): string {
-    const colors = this.colors();
+  generateOverlayVariables(): string {
+    const isDark = this._isDarkMode();
+
     return `
-      /* Semantic color aliases */
-      --nui-accent: ${colors.accent};
-      --nui-success: ${colors.success};
-      --nui-info: ${colors.info};
-      --nui-warning: ${colors.warning};
-      --nui-danger: ${colors.danger};
-
-      --nui-bg-accent: ${this.withAlpha(colors.accent, 0.1)};
-      --nui-bg-success: ${this.withAlpha(colors.success, 0.1)};
-      --nui-bg-info: ${this.withAlpha(colors.info, 0.1)};
-      --nui-bg-warning: ${this.withAlpha(colors.warning, 0.1)};
-      --nui-bg-danger: ${this.withAlpha(colors.danger, 0.1)};
-
-      --nui-border-accent: ${this.withAlpha(colors.accent, 0.5)};
-      --nui-border-success: ${this.withAlpha(colors.success, 0.5)};
-      --nui-border-info: ${this.withAlpha(colors.info, 0.5)};
-      --nui-border-warning: ${this.withAlpha(colors.warning, 0.5)};
-      --nui-border-danger: ${this.withAlpha(colors.danger, 0.5)};
-
-      /* Contrasting text colors for semantic colors */
-      --nui-accent-contrast: ${this.getContrastColor(colors.accent)};
-      --nui-success-contrast: ${this.getContrastColor(colors.success)};
-      --nui-info-contrast: ${this.getContrastColor(colors.info)};
-      --nui-warning-contrast: ${this.getContrastColor(colors.warning)};
-      --nui-danger-contrast: ${this.getContrastColor(colors.danger)};
-
-      /* Alpha values for semantic colors */
-      --nui-accent-alpha-50: ${this.withAlpha(colors.accent, 0.5)};
-      --nui-success-alpha-50: ${this.withAlpha(colors.success, 0.5)};
-      --nui-info-alpha-50: ${this.withAlpha(colors.info, 0.5)};
-      --nui-warning-alpha-50: ${this.withAlpha(colors.warning, 0.5)};
-      --nui-danger-alpha-50: ${this.withAlpha(colors.danger, 0.5)};
+      /* Overlay colors */
+      --nui-overlay-bg: ${isDark ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.5)'};
+      --nui-color-backdrop: ${isDark ? 'rgba(0, 0, 0, 0.75)' : 'rgba(0, 0, 0, 0.5)'};
     `;
   }
 
@@ -477,12 +583,10 @@ export class ThemeService {
     --nui-box-shadow-md: ${shadowMd};
     --nui-box-shadow-lg: ${shadowLg};
     --nui-box-shadow-xl: ${shadowXl};
-    
-    --nui-box-shadow-button-hover: ${shadowBtnHover};
 
     /* === SEMANTIC ALIASES === */
+
     /* We map use cases to primitives */
-    
     --nui-shadow-none: none;
     
     /* Containers (Cards, Side Panels) */
@@ -496,6 +600,12 @@ export class ThemeService {
     
     /* Form Fields (Inputs, Selects) */
     --nui-shadow-field: var(--nui-box-shadow-xs);
+
+    /* Shadow base (RGB para poder usarlo en rgba() de SCSS) */
+    --nui-shadow-base-rgb: ${isDark ? '0, 0, 0' : '0, 0, 0'}; 
+
+    /* Multiplicador para hacer las sombras más densas en Dark Mode si se desea */
+    --nui-shadow-opacity-scale: ${isDark ? '2.5' : '1'};
   `;
   }
 
@@ -510,37 +620,50 @@ export class ThemeService {
 
   private generateButtonVariables(name: string, color: string): string {
     const contrastText = this.getContrastColor(color);
+    const isDark = this._isDarkMode();
+    const hoverBg = isDark ? this.shade(color, 10) : this.tint(color, 10);
+    const activeBg = isDark ? this.shade(color, 20) : this.tint(color, 20);
+
+    // Opacidades para outline y ghost
     const alpha10 = this.withAlpha(color, 0.1);
     const alpha20 = this.withAlpha(color, 0.2);
-    const alpha40 = this.withAlpha(color, 0.4);
     const alpha50 = this.withAlpha(color, 0.5);
-    const alpha70 = this.withAlpha(color, 0.7);
-    const alpha80 = this.withAlpha(color, 0.8);
 
     return `
+      /* Base color for the button (used for text in outline/ghost variants and background in solid variant) */
       --nui-btn-${name}-color: ${color};
-      --nui-btn-${name}-hover: ${alpha70};
-      --nui-btn-${name}-active: ${alpha80};
-      --nui-btn-${name}-contrast: ${contrastText};
+      --nui-btn-${name}-hover: ${hoverBg};
+      --nui-btn-${name}-active: ${activeBg};
       
       /* Solid States */
       --nui-btn-${name}-solid-bg: ${color};
+      --nui-btn-${name}-solid-border: ${color};
       --nui-btn-${name}-solid-text: ${contrastText};
-      --nui-btn-${name}-solid-hover-bg: ${alpha70};
-      --nui-btn-${name}-solid-active-bg: ${alpha80};
+      --nui-btn-${name}-solid-hover-bg: ${hoverBg};
+      --nui-btn-${name}-solid-hover-border: transparent;
+      --nui-btn-${name}-solid-hover-text: ${contrastText};
+      --nui-btn-${name}-solid-active-bg: ${activeBg};
+      --nui-btn-${name}-solid-active-border: transparent;
       
       /* Outline States */
-      --nui-btn-${name}-outline-border: ${alpha40};
+      --nui-btn-${name}-outline-bg: transparent;
+      --nui-btn-${name}-outline-border: ${alpha20};
       --nui-btn-${name}-outline-text: ${color};
       --nui-btn-${name}-outline-hover-bg: ${alpha10};
       --nui-btn-${name}-outline-hover-border: ${alpha50};
+      --nui-btn-${name}-outline-hover-text: ${color};
       --nui-btn-${name}-outline-active-bg: ${alpha20};
-      --nui-btn-${name}-outline-active-border: ${alpha40};
+      --nui-btn-${name}-outline-active-border: ${alpha20};
       
       /* Ghost States */
+      --nui-btn-${name}-ghost-bg: transparent;
+      --nui-btn-${name}-ghost-border: transparent;
       --nui-btn-${name}-ghost-text: ${color};
       --nui-btn-${name}-ghost-hover-bg: ${alpha10};
+      --nui-btn-${name}-ghost-hover-border: transparent;
+      --nui-btn-${name}-ghost-hover-text: ${color};
       --nui-btn-${name}-ghost-active-bg: ${alpha20};
+      --nui-btn-${name}-ghost-active-border: transparent;
 
       /* Focus Ring */
       --nui-btn-${name}-focus-ring: ${this.withAlpha(color, 0.4)};
@@ -550,56 +673,59 @@ export class ThemeService {
   private generateButtonGroupVariables(name: string, color: string): string {
     const contrastText = this.getContrastColor(color);
 
-    // Opacidades
+    // Opacidades para hover states
     const alpha10 = this.withAlpha(color, 0.1);
     const alpha20 = this.withAlpha(color, 0.2);
-    const alpha40 = this.withAlpha(color, 0.4);
 
     // Variables de superficie (para el estado 'base' de la variante Solid)
-    const sysBg = 'var(--nui-bg-primary)';
-    const sysBgSecondary = 'var(--nui-bg-secondary)';
-    const sysBorder = this._isDarkMode()
-      ? 'var(--nui-border-primary)'
-      : 'var(--nui-border-secondary)';
-    const sysTextSec = 'var(--nui-text-secondary)';
+    const sysBg = 'var(--nui-surface)';
+    const sysBgSecondary = 'var(--nui-surface-secondary)';
+    const sysBorder = 'var(--nui-border-subtle)';
+    const sysTextSec = 'var(--nui-on-surface-secondary)';
 
     return `
     /* === VARIANT: SOLID === */
-    --nui-btn-group-${name}-solid-base-bg: ${sysBg};
-    --nui-btn-group-${name}-solid-base-text: ${sysTextSec};
-    --nui-btn-group-${name}-solid-base-border: ${sysBorder};
+    --nui-btn-group-${name}-solid-bg: ${sysBg};
+    --nui-btn-group-${name}-solid-text: ${sysTextSec};
+    --nui-btn-group-${name}-solid-border: ${sysBorder};
     --nui-btn-group-${name}-solid-sel-bg: ${color};
     --nui-btn-group-${name}-solid-sel-text: ${contrastText};
-    --nui-btn-group-${name}-solid-sel-border: ${color};
+    --nui-btn-group-${name}-solid-sel-border: ${sysBg};
     --nui-btn-group-${name}-solid-hover-bg: ${alpha10};
+    --nui-btn-group-${name}-solid-hover-text: ${contrastText};
+    --nui-btn-group-${name}-solid-hover-border: ${alpha20};
 
     /* === VARIANT: OUTLINE === */
-    --nui-btn-group-${name}-outline-base-bg: transparent;
-    --nui-btn-group-${name}-outline-base-text: ${color};
-    --nui-btn-group-${name}-outline-base-border: ${alpha40};
+    --nui-btn-group-${name}-outline-bg: transparent;
+    --nui-btn-group-${name}-outline-text: ${color};
+    --nui-btn-group-${name}-outline-border: ${alpha20};
     --nui-btn-group-${name}-outline-sel-bg: ${alpha20};
     --nui-btn-group-${name}-outline-sel-text: ${color};
     --nui-btn-group-${name}-outline-sel-border: ${color};
     --nui-btn-group-${name}-outline-hover-bg: ${alpha10};
+    --nui-btn-group-${name}-outline-hover-text: ${color};
+    --nui-btn-group-${name}-outline-hover-border: ${alpha20};
 
     /* === VARIANT: GHOST === */
-    --nui-btn-group-${name}-ghost-base-bg: transparent;
-    --nui-btn-group-${name}-ghost-base-text: ${color};
-    --nui-btn-group-${name}-ghost-base-border: transparent;
+    --nui-btn-group-${name}-ghost-bg: transparent;
+    --nui-btn-group-${name}-ghost-text: ${color};
+    --nui-btn-group-${name}-ghost-border: transparent;
     --nui-btn-group-${name}-ghost-sel-bg: ${alpha20};
     --nui-btn-group-${name}-ghost-sel-text: ${color};
     --nui-btn-group-${name}-ghost-sel-border: transparent;
     --nui-btn-group-${name}-ghost-hover-bg: ${alpha10};
+    --nui-btn-group-${name}-ghost-hover-text: ${color};
+    --nui-btn-group-${name}-ghost-hover-border: transparent;
 
     /* === VARIANT: SEGMENTED === */
-    --nui-btn-group-${name}-segmented-track-bg: ${sysBgSecondary};
+    --nui-btn-group-${name}-segmented-track-bg: ${sysBg};
     --nui-btn-group-${name}-segmented-track-border: ${sysBorder};
-    --nui-btn-group-${name}-segmented-base-bg: transparent;
-    --nui-btn-group-${name}-segmented-base-text: var(--nui-text-secondary);
-    --nui-btn-group-${name}-segmented-base-border: transparent;
+    --nui-btn-group-${name}-segmented-bg: transparent;
+    --nui-btn-group-${name}-segmented-text: ${sysTextSec};
+    --nui-btn-group-${name}-segmented-border: transparent;
     --nui-btn-group-${name}-segmented-sel-bg: ${color};
     --nui-btn-group-${name}-segmented-sel-text: ${contrastText};
-    --nui-btn-group-${name}-segmented-sel-border: transparent; /* Generalmente sin borde */
+    --nui-btn-group-${name}-segmented-sel-border: transparent;
     --nui-btn-group-${name}-segmented-hover-bg: ${alpha10};
   `;
   }
@@ -626,45 +752,78 @@ export class ThemeService {
     `;
   }
 
+  /**
+   * Genera variables CSS para el Paginator con sistema "Shapeshifter".
+   *
+   * Arquitectura de variantes:
+   * - Botones inactivos: Siempre Ghost (transparente, solo texto)
+   * - Botón activo: Según variante elegida (Solid/Outline/Ghost)
+   * - Botones de navegación: Ghost o Outline para sobriedad
+   *
+   * Esta arquitectura evita interfaces "cargadas" y dirige la atención al botón activo.
+   */
   private generatePaginatorVariables(name: string, color: string): string {
-    const contrastText = this.getContrastColor(color);
     const isDark = this._isDarkMode();
+    const contrastText = this.getContrastColor(color);
+    const grays = this.grays();
+
+    // Alpha variants para efectos sutiles
     const alpha10 = this.withAlpha(color, 0.1);
-    const alpha20 = this.withAlpha(color, 0.2);
-    const alpha30 = this.withAlpha(color, 0.3);
-    const alpha40 = this.withAlpha(color, 0.4);
-    const alpha50 = this.withAlpha(color, 0.5);
-    const alpha70 = this.withAlpha(color, 0.7);
+    const alpha15 = this.withAlpha(color, 0.15);
+
+    // Color base y hover para modo dark/light
+    const hoverBg = this.withAlpha(color, 0.05);
 
     return `      
-      --nui-pg-${name}-color: ${color};
-      --nui-pg-${name}-contrast: ${contrastText};
-      
-      /* VARIANT: SOLID */
-      --nui-pg-${name}-solid-bg: ${color};
-      --nui-pg-${name}-solid-text: ${contrastText};
-      --nui-pg-${name}-solid-hover-bg: ${alpha70};
-      --nui-pg-${name}-solid-active-bg: ${isDark ? alpha40 : alpha50};
-      --nui-pg-${name}-solid-active-border: ${alpha30};
-      
-      /* VARIANT: OUTLINE */
-      --nui-pg-${name}-outline-border: ${alpha40};
-      --nui-pg-${name}-outline-text: ${color};
-      --nui-pg-${name}-outline-hover-bg: ${alpha10};
-      --nui-pg-${name}-outline-hover-border: ${alpha50};
-      --nui-pg-${name}-outline-active-bg: ${alpha20};
-      --nui-pg-${name}-outline-active-border: ${alpha40};
-      
-      /* VARIANT: GHOST */
-      --nui-pg-${name}-ghost-text: ${color};
-      --nui-pg-${name}-ghost-hover-bg: ${alpha10};
-      --nui-pg-${name}-ghost-active-bg: ${alpha20};
+      /* Inactive buttons - Always Ghost */
+      --nui-pg-${name}-ghost-bg: transparent;
+      --nui-pg-${name}-ghost-text: ${isDark ? grays[300] : grays[700]};
+      --nui-pg-${name}-ghost-border: transparent;
+      --nui-pg-${name}-ghost-hover-bg: ${hoverBg};
+      --nui-pg-${name}-ghost-hover-border: transparent;
 
-      /* Ellipsis */
-      --nui-pg-${name}-ellipsis-color: ${color};
+      /* Active button - Variant: Solid */
+      --nui-pg-${name}-solid-bg: transparent;
+      --nui-pg-${name}-solid-text: ${isDark ? grays[300] : grays[700]};
+      --nui-pg-${name}-solid-border: transparent;
+      --nui-pg-${name}-solid-hover-bg: ${hoverBg};
+      --nui-pg-${name}-solid-hover-border: transparent;
+      --nui-pg-${name}-solid-active-bg: ${color};
+      --nui-pg-${name}-solid-active-text: ${contrastText};
+      --nui-pg-${name}-solid-active-border: ${color};
 
-      /* Focus Ring */
+      /* Active button - Variant: Outline */
+      --nui-pg-${name}-outline-bg: transparent;
+      --nui-pg-${name}-outline-text: ${isDark ? grays[300] : grays[700]};
+      --nui-pg-${name}-outline-border: transparent;
+      --nui-pg-${name}-outline-hover-bg: ${hoverBg};
+      --nui-pg-${name}-outline-hover-border: transparent;
+      --nui-pg-${name}-outline-active-bg: ${alpha10};
+      --nui-pg-${name}-outline-active-text: ${color};
+      --nui-pg-${name}-outline-active-border: ${color};
+
+      /* Active button - Variant: Ghost */
+      --nui-pg-${name}-ghost-active-bg: ${alpha15};
+      --nui-pg-${name}-ghost-active-text: ${isDark ? this.tint(color, 30) : this.shade(color, 10)};
+      --nui-pg-${name}-ghost-active-border: transparent;
+
+      /* Navigation buttons (Prev/Next) - Always Ghost for subtlety */
+      --nui-pg-${name}-nav-bg: transparent;
+      --nui-pg-${name}-nav-text: ${isDark ? grays[400] : grays[600]};
+      --nui-pg-${name}-nav-border: transparent;
+      --nui-pg-${name}-nav-hover-bg: ${hoverBg};
+      --nui-pg-${name}-nav-hover-text: ${isDark ? grays[200] : grays[800]};
+      --nui-pg-${name}-nav-hover-border: transparent;
+
+      /* Ellipsis & focus ring */
+      --nui-pg-${name}-ellipsis-color: ${isDark ? grays[500] : grays[400]};
       --nui-pg-${name}-focus-ring: ${this.withAlpha(color, 0.4)};
+
+      /* Jump to page */
+      --nui-pg-jump-border: var(--nui-border-subtle);
+      --nui-pg-jump-separator: var(--nui-border-subtle);
+      --nui-pg-jump-hover-bg: ${hoverBg};
+
     `;
   }
 
@@ -680,9 +839,9 @@ export class ThemeService {
       --nui-avatar-${name}-hover: ${hoverColor};
 
       /*Generic variables for avatars without a specific color, using the preset color as a base */
-      --nui-avatar-default-bg: ${isDark ? 'var(--nui-bg-tertiary)' : 'var(--nui-bg-secondary)'};
-      --nui-avatar-default-color: ${isDark ? 'var(--nui-text-primary)' : 'var(--nui-text-secondary)'};
-      --nui-avatar-border-outset: var(--nui-bg-secondary);
+      --nui-avatar-default-bg: ${isDark ? 'var(--nui-surface-neutral)' : 'var(--nui-surface-secondary)'};
+      --nui-avatar-default-color: ${isDark ? 'var(--nui-on-surface-neutral)' : 'var(--nui-on-surface-secondary)'};
+      --nui-avatar-border-outset: var(--nui-surface);
     `;
   }
 
@@ -702,8 +861,18 @@ export class ThemeService {
       --nui-am-${name}-border: ${borderTint};
       --nui-am-${name}-check: ${isDark ? this.tint(color, 50) : color};
       
-      /* For strong selection states or hovering over selected */
       --nui-am-${name}-active-bg: ${isDark ? this.withAlpha(color, 0.25) : this.tint(color, 90)};
+
+      --nui-am-bg: var(--nui-surface);
+      --nui-am-color: var(--nui-on-surface);
+      --nui-am-border-color: var(--nui-border-high);
+
+      --nui-am-shortcut-bg: var(--nui-surface-neutral);
+      --nui-am-shortcut-color: var(--nui-on-surface-neutral);
+      --nui-am-shortcut-border-color: var(--nui-border-subtle);
+
+      --nui-am-separator-color: var(--nui-border-subtle);
+      --nui-am-separator-label-color: var(--nui-text-muted);
     `;
   }
 
@@ -716,7 +885,7 @@ export class ThemeService {
     const grays = this._currentPreset().grays || this.getDefaultGrays();
     const bg = isDark ? grays[700] : grays[900];
     const text = PURE_COLORS.WHITE;
-    const border = isDark ? 'var(--nui-border-weak)' : 'transparent';
+    const border = isDark ? 'var(--nui-border-subtle)' : 'transparent';
 
     return `
       --tooltip-bg: ${bg};
@@ -726,11 +895,9 @@ export class ThemeService {
   }
 
   private generateSidebarPanelVariables(): string {
-    const isDark = this._isDarkMode();
-
-    const bg = isDark ? 'var(--nui-bg-secondary)' : 'var(--nui-bg-primary)';
-    const text = 'var(--nui-text-primary)';
-    const border = isDark ? 'var(--nui-border-primary)' : 'var(--nui-border-secondary)';
+    const bg = 'var(--nui-surface-secondary)';
+    const text = 'var(--nui-on-surface-secondary)';
+    const border = 'var(--nui-border-subtle)';
 
     const overlayBg = 'var(--nui-overlay-bg)';
 
@@ -740,9 +907,20 @@ export class ThemeService {
       --nui-sidebar-panel-border: ${border};
       --nui-sidebar-panel-overlay-bg: ${overlayBg};
       
-      --nui-sidebar-panel-scroll-bg: var(--nui-bg-secondary);
-      --nui-sidebar-panel-scroll-thumb-bg: var(--nui-border-primary);
-      --nui-sidebar-panel-scroll-thumb-hover-bg: var(--nui-border-primary);
+      --nui-sidebar-panel-scroll-bg: var(--nui-surface-secondary);
+      --nui-sidebar-panel-scroll-thumb-bg: var(--nui-border-high);
+      --nui-sidebar-panel-scroll-thumb-hover-bg: var(--nui-border-high);
+
+      /* Tabs minimized state */
+      --nui-sidebar-panel-tab-minimized-bg: ${bg};
+      --nui-sidebar-panel-tab-minimized-indenty: var(--nui-primary);
+      --nui-sidebar-panel-tab-minimized-border: var(--nui-border-subtle);
+      --nui-sidebar-panel-tab-minimized-text: ${text};
+      --nui-sidebar-panel-tab-minimized-hover-bg: var(--nui-surface-neutral);
+      --nui-sidebar-panel-tab-minimized-hover-text: var(--nui-primary);
+      --nui-sidebar-panel-tab-minimized-hover-border: var(--nui-border-default);
+      --nui-sidebar-panel-tab-minimized-shadow: var(--nui-box-shadow-sm);
+      --nui-sidebar-panel-tab-minimized-hover-shadow: var(--nui-box-shadow-md);
     `;
   }
 
@@ -757,28 +935,38 @@ export class ThemeService {
       ? this._currentPreset().colors.dark
       : this._currentPreset().colors.light;
 
-    // Colores de fondo y texto para días del calendario
-    const dayBg = 'transparent';
-    const dayText = isDark ? grays[400] : grays[600];
+    // Calendar surface
+    const sysBg = 'var(--nui-surface)';
+    const sysBorder = 'var(--nui-border-subtle)';
+    const sysShadow = 'var(--nui-box-shadow-sm)';
 
-    // Hover states
-    const dayHoverBg = isDark ? grays[800] : grays[100];
-    const dayHoverText = isDark ? grays[50] : grays[900];
+    // Background and text for calendar days
+    const dayBg = 'transparent';
+    const dayText = 'var(--nui-on-surface)';
 
     // Selected states
-    const daySelectedBg = this.withAlpha(colors.primary, 0.8);
-    const daySelectedText = this.getContrastColor(colors.primary);
-    const daySelectedHoverBg = this.withAlpha(colors.primary, 0.5);
+    const daySelectedBg = this.withAlpha(colors.primary, 0.2);
+    const daySelectedBorder = colors.primary;
+    const daySelectedText = 'var(--nui-on-surface)';
+    const daySelectedHoverBg = this.withAlpha(colors.primary, 0.3);
+    const daySelectedHoverBorder = colors.primary;
 
-    // Today state
-    const todayBg = colors.primary;
-    const todaySelectedBg = this.tint(colors.primary, 70);
+    // Hover states
+    const dayHoverBg = this.withAlpha(colors.primary, 0.2);
+    const dayHoverText = 'var(--nui-on-surface)';
+
+    // Today state (dot)
+    const todayBg = isDark ? this.tint(colors.primary, 60) : this.shade(colors.primary, 20);
+    const todaySelectedBg = this.shade(todayBg, 20);
 
     // In-range states (para rangos de fechas)
-    const dayRangeBg = this.withAlpha(colors.primary, 0.2);
-    const dayRangeText = isDark ? grays[50] : grays[900];
+    const dayRangeBg = this.withAlpha(colors.primary, 0.1);
+    const dayRangeText = 'var(--nui-on-surface)';
+    const dayRangeBorder = this.withAlpha(colors.primary, 0.4);
+    const dayRangeHoverBg = this.withAlpha(colors.primary, 0.15);
+    const dayRangeHoverBorder = this.withAlpha(colors.primary, 0.5);
 
-    // PASO 1: Smart Service - Status indicators (usando colores semánticos)
+    // Smart Service - Status indicators (usando colores semánticos)
     const statusSuccess = colors.success;
     const statusInfo = colors.info;
     const statusWarning = colors.warning;
@@ -801,8 +989,10 @@ export class ThemeService {
     const navBtnDisabledBorder = 'transparent';
 
     return `
-      --nui-calendar-border: var(--nui-bg-primary);
-      --nui-calendar-box-shadow: var(--nui-box-shadow-sm);
+      --nui-calendar-bg: ${sysBg};
+
+      --nui-calendar-border: ${sysBorder};
+      --nui-calendar-box-shadow: ${sysShadow};
 
       --nui-calendar-day-bg: ${dayBg};
       --nui-calendar-day-text: ${dayText};
@@ -814,15 +1004,19 @@ export class ThemeService {
       
       --nui-calendar-day-selected-bg: ${daySelectedBg};
       --nui-calendar-day-selected-text: ${daySelectedText};
-      --nui-calendar-day-selected-border: ${daySelectedBg};
+      --nui-calendar-day-selected-border: ${daySelectedBorder};
       --nui-calendar-day-selected-today-bg: ${todaySelectedBg};
       
       --nui-calendar-day-selected-hover-bg: ${daySelectedHoverBg};
-      --nui-calendar-day-selected-hover-border: ${daySelectedHoverBg};
+      --nui-calendar-day-selected-hover-border: ${daySelectedHoverBorder};
       
       --nui-calendar-day-range-bg: ${dayRangeBg};
       --nui-calendar-day-range-text: ${dayRangeText};
-      
+      --nui-calendar-day-range-border: ${dayRangeBorder};
+
+      --nui-calendar-day-range-hover-bg: ${dayRangeHoverBg};
+      --nui-calendar-day-range-hover-border: ${dayRangeHoverBorder};
+
       /* Smart Service - Status Indicators (subtle top border) */
       --nui-calendar-day-status-success: ${statusSuccess};
       --nui-calendar-day-status-info: ${statusInfo};
@@ -857,18 +1051,27 @@ export class ThemeService {
       ? this._currentPreset().colors.dark
       : this._currentPreset().colors.light;
 
-    // Colores de fondo y texto para días del calendario
+    // Time Picker surface
+    const sysBg = 'var(--nui-surface)';
+    const sysBorder = 'var(--nui-border-subtle)';
+    const sysShadow = 'var(--nui-box-shadow-sm)';
+
+    // Background and text for time options
     const timeBg = 'transparent';
-    const timeText = isDark ? grays[400] : grays[600];
+    const timeText = 'var(--nui-on-surface)';
+
+    // Hover states for time options
+    const timeSelectedBg = this.withAlpha(colors.primary, 0.2);
+    const timeSelectedBorder = colors.primary;
+    const timeSelectedText = 'var(--nui-on-surface)';
+    const timeSelectedHoverBg = this.withAlpha(colors.primary, 0.3);
+    const timeSelectedHoverBorder = colors.primary;
 
     // Hover states
-    const timeHoverBg = isDark ? grays[800] : grays[100];
-    const timeHoverText = isDark ? grays[50] : grays[900];
+    const timeHoverBg = this.withAlpha(colors.primary, 0.2);
+    const timeHoverText = 'var(--nui-on-surface)';
 
-    const timeSelectedBg = this.withAlpha(colors.primary, 0.8);
-    const timeSelectedText = this.getContrastColor(colors.primary);
-    const timeSelectedHoverBg = this.withAlpha(colors.primary, 0.5);
-
+    // Navigation Button States (Ghost variant style)
     const navBtnBg = 'transparent';
     const navBtnText = isDark ? grays[200] : grays[700];
     const navBtnBorder = 'transparent';
@@ -885,8 +1088,10 @@ export class ThemeService {
     const navBtnDisabledBorder = 'transparent';
 
     return `
-      --nui-time-picker-border: var(--nui-bg-primary);
-      --nui-time-picker-box-shadow: var(--nui-box-shadow-sm);
+      --nui-time-picker-bg: ${sysBg};
+
+      --nui-time-picker-border: ${sysBorder};
+      --nui-time-picker-box-shadow: ${sysShadow};
 
       --nui-time-picker-item-bg: ${timeBg};
       --nui-time-picker-item-text: ${timeText};
@@ -895,11 +1100,12 @@ export class ThemeService {
       --nui-time-picker-item-hover-text: ${timeHoverText};
 
       --nui-time-picker-item-selected-bg: ${timeSelectedBg};
+      --nui-time-picker-item-selected-border: ${timeSelectedBorder};
       --nui-time-picker-item-selected-text: ${timeSelectedText};
       --nui-time-picker-item-selected-border: ${timeSelectedBg};
 
       --nui-time-picker-item-selected-hover-bg: ${timeSelectedHoverBg};
-      --nui-time-picker-item-selected-hover-border: ${timeSelectedHoverBg};
+      --nui-time-picker-item-selected-hover-border: ${timeSelectedHoverBorder};
 
       --nui-time-picker-item-disabled-bg: transparent;
       --nui-time-picker-item-disabled-text: var(--nui-text-disabled);
@@ -935,30 +1141,35 @@ export class ThemeService {
     const alpha40 = this.withAlpha(color, 0.4); // Para Outline Border
 
     // Colores base de superficie según modo
-    const surfaceBg = this._isDarkMode() ? 'var(--nui-bg-secondary)' : 'var(--nui-bg-primary)';
-    const surfaceText = 'var(--nui-text-primary)';
-    const surfaceBorder = this._isDarkMode() ? grays[700] : grays[200];
+    const surfaceBg = this._isDarkMode() ? 'var(--nui-surface-secondary)' : 'var(--nui-surface)';
+    const surfaceText = this._isDarkMode()
+      ? 'var(--nui-on-surface-secondary)'
+      : 'var(--nui-on-surface)';
+    const surfaceBorder = 'var(--nui-border-high)';
 
     return `
-    /* === BASE SURFACE COLORS === */
+    /* Base */
     --nui-popover-surface-bg: ${surfaceBg};
     --nui-popover-surface-text: ${surfaceText};
     --nui-popover-surface-border: ${surfaceBorder};
 
-    /* === VARIANT: SOLID (Default) === */
+    /* Variant: Solid */
     --nui-popover-${name}-solid-bg: ${color};
     --nui-popover-${name}-solid-text: ${contrastText};
     --nui-popover-${name}-solid-border: ${color};
 
-    /* === VARIANT: OUTLINE === */
+    /* Variant: Outline */
     --nui-popover-${name}-outline-bg: ${surfaceBg};
     --nui-popover-${name}-outline-text: ${color};
     --nui-popover-${name}-outline-border: ${alpha40};
 
-    /* === VARIANT: GHOST === */
+    /* Variant: Ghost */
     --nui-popover-${name}-ghost-bg: ${alpha80};
     --nui-popover-${name}-ghost-text: ${contrastText};
     --nui-popover-${name}-ghost-border: transparent;
+
+    /* Others */
+    --nui-popover-shadow: var(--nui-box-shadow-md);
   `;
   }
 
@@ -1023,9 +1234,27 @@ export class ThemeService {
    * @return {{ r: number; g: number; b: number }} An object representing the RGB components of the color.
    */
   private hexToRgb(hex: string): { r: number; g: number; b: number } {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    // Remove the leading '#' if present
+    hex = hex.replace(/^#/, '');
+
+    // If it's a short format (3 digits: F00), expand it to long format (6 digits: FF0000)
+    if (hex.length === 3) {
+      hex = hex
+        .split('')
+        .map(char => char + char)
+        .join('');
+    }
+
+    // Match the hexadecimal color code and extract the RGB components
+    const result = /^([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
+    // If the hex code is valid, convert the RGB components from hexadecimal to decimal and return them as an object.
     return result
-      ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) }
+      ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+        }
       : { r: 0, g: 0, b: 0 };
   }
 

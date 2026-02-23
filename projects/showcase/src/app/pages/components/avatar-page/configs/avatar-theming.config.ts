@@ -78,7 +78,7 @@ export const AVATAR_THEMING_SECTIONS: ComponentSection[] = [
         [
           '<code>--nui-avatar-default-bg</code>',
           'Color de fondo por defecto',
-          'var(--nui-bg-tertiary)',
+          'var(--nui-bg-neutral)',
         ],
         [
           '<code>--nui-avatar-default-color</code>',

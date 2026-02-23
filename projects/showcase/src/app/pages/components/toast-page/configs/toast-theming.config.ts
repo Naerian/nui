@@ -148,7 +148,7 @@ export const TOAST_THEMING_SECTIONS: ComponentSection[] = [
         [
           '<code>--nui-toast-close-button-color</code>',
           'Color del botón',
-          '<code>var(--nui-text-tertiary)</code>',
+          '<code>var(--nui-text-neutral)</code>',
         ],
         [
           '<code>--nui-toast-close-button-hover-color</code>',

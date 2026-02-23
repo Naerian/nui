@@ -10,7 +10,7 @@ import {
   sunset,
   twilight,
   velvet,
-  warm,
+  autumn,
 } from '../presets';
 import { ThemePreset } from './theme.model';
 
@@ -30,5 +30,5 @@ export const NUI_PRESETS: ThemePreset[] = [
   sunset,
   twilight,
   velvet,
-  warm,
+  autumn,
 ];

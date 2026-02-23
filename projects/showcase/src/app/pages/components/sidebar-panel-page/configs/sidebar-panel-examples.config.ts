@@ -160,11 +160,11 @@ this.sidebarPanelService.open(MyContentComponent, {
   },
   {
     id: 'html-content',
-    title: 'components.sidebar-panel.examples.htmlContent.title',
-    description: 'components.sidebar-panel.examples.htmlContent.description',
+    title: 'components.sidebar-panel.examples.html-content.title',
+    description: 'components.sidebar-panel.examples.html-content.description',
     note: {
       type: 'info',
-      content: 'components.sidebar-panel.examples.htmlContent.note',
+      content: 'components.sidebar-panel.examples.html-content.note',
     },
     anchor: 'html-content',
     examples: [
@@ -222,11 +222,11 @@ openDynamicReport() {
   },
   {
     id: 'template-content',
-    title: 'components.sidebar-panel.examples.templateContent.title',
-    description: 'components.sidebar-panel.examples.templateContent.description',
+    title: 'components.sidebar-panel.examples.template-content.title',
+    description: 'components.sidebar-panel.examples.template-content.description',
     note: {
       type: 'info',
-      content: 'components.sidebar-panel.examples.templateContent.note',
+      content: 'components.sidebar-panel.examples.template-content.note',
     },
     anchor: 'template-content',
     examples: [
@@ -305,11 +305,11 @@ export class MyComponent {
   },
   {
     id: 'dynamic-component',
-    title: 'components.sidebar-panel.examples.dynamicComponent.title',
-    description: 'components.sidebar-panel.examples.dynamicComponent.description',
+    title: 'components.sidebar-panel.examples.dynamic-component.title',
+    description: 'components.sidebar-panel.examples.dynamic-component.description',
     note: {
       type: 'info',
-      content: 'components.sidebar-panel.examples.dynamicComponent.note',
+      content: 'components.sidebar-panel.examples.dynamic-component.note',
     },
     anchor: 'dynamic-component',
     examples: [
@@ -364,11 +364,11 @@ export class PanelContentComponent {
   },
   {
     id: 'dynamic-component-events',
-    title: 'components.sidebar-panel.examples.events.title',
-    description: 'components.sidebar-panel.examples.events.description',
+    title: 'components.sidebar-panel.examples.dynamic-component-events.title',
+    description: 'components.sidebar-panel.examples.dynamic-component-events.description',
     note: {
       type: 'info',
-      content: 'components.sidebar-panel.examples.events.note',
+      content: 'components.sidebar-panel.examples.dynamic-component-events.note',
     },
     anchor: 'dynamic-component-events',
     examples: [
@@ -558,11 +558,11 @@ this.sidebarPanelService.open(NotificationsComponent, {
   },
   {
     id: 'close-button',
-    title: 'components.sidebar-panel.examples.closeButton.title',
-    description: 'components.sidebar-panel.examples.closeButton.description',
+    title: 'components.sidebar-panel.examples.close-button.title',
+    description: 'components.sidebar-panel.examples.close-button.description',
     note: {
       type: 'info',
-      content: 'components.sidebar-panel.examples.closeButton.note',
+      content: 'components.sidebar-panel.examples.close-button.note',
     },
     anchor: 'close-button',
     examples: [
@@ -672,12 +672,12 @@ this.sidebarPanelService.closeAll();`,
   },
   {
     id: 'footer-actions',
-    title: 'components.sidebar-panel.examples.footerActions.title',
-    description: 'components.sidebar-panel.examples.footerActions.description',
+    title: 'components.sidebar-panel.examples.footer-actions.title',
+    description: 'components.sidebar-panel.examples.footer-actions.description',
     anchor: 'footer-actions',
     note: {
       type: 'info',
-      content: 'components.sidebar-panel.examples.footerActions.note',
+      content: 'components.sidebar-panel.examples.footer-actions.note',
     },
     examples: [
       {
@@ -755,7 +755,7 @@ this.sidebarPanelService.closeAll();`,
     gap: 0.5rem;
     padding: 1rem 1.5rem;
     justify-content: flex-end;
-    border-top: 1px solid var(--nui-divider);
+    border-top: 1px solid var(--nui-border-high);
   ">
     <nui-button
       [color]="'secondary'"

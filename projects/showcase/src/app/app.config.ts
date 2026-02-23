@@ -4,7 +4,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { routes } from './app.routes';
-import { provideNUI, aura } from 'nui';
+import { provideNUI, minimal } from 'nui';
 import { Observable } from 'rxjs';
 
 // Simple custom loader for translations
@@ -36,7 +36,7 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideNUI({ 
-      preset: aura,
+      preset: minimal,
       darkMode: 'manual'
     }),
   ]

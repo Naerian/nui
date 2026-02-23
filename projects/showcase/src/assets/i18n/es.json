@@ -35,7 +35,7 @@
   },
   "presets": {
     "aura": "Aura",
-    "warm": "Cálido",
+    "autumn": "Otoño",
     "neon": "Neón",
     "dopamine": "Dopamina",
     "corporate": "Corporativo",
@@ -49,7 +49,7 @@
   },
   "footer": {
     "license": "Incluye iconos de Remix Icon (Licencia MIT)",
-    "copyright": "© 2025 NUI. Todos los derechos reservados (MIT)."
+    "copyright": "2025 NUI. Todos los derechos reservados (MIT)."
   },
   "common": {
     "tabs": {
@@ -138,7 +138,7 @@
       "title": "Configuración",
       "subtitle": "Configura NUI según tus necesidades",
       "presetConfig": "Configuración de preset",
-      "presetConfigDescription": "Los presets definen la paleta de colores de tu aplicación. NUI incluye 12 presets predefinidos: <code>aura</code>, <code>warm</code>, <code>neon</code>, <code>dopamine</code>, <code>corporate</code>, <code>minimal</code>, <code>sunset</code>, <code>twilight</code>, <code>ocean</code>, <code>velvet</code>, <code>coffee</code>, <code>emerald</code>.",
+      "presetConfigDescription": "Los presets definen la paleta de colores de tu aplicación. NUI incluye 12 presets predefinidos: <code>aura</code>, <code>autumn</code>, <code>neon</code>, <code>dopamine</code>, <code>corporate</code>, <code>minimal</code>, <code>sunset</code>, <code>twilight</code>, <code>ocean</code>, <code>velvet</code>, <code>coffee</code>, <code>emerald</code>.",
       "presetConfigTitle": "Configuración de preset",
       "darkModeConfig": "Configuración de Modo Oscuro",
       "darkModeConfigDescription": "Controla cómo se aplica el modo oscuro en tu aplicación. Las opciones disponibles son: <code>manual</code> (controlado por código), <code>auto</code> (basado en hora del día), o <code>system</code> (según las preferencias del sistema operativo).",
@@ -150,9 +150,8 @@
     "theming": {
       "title": "Temas y presets",
       "subtitle": "Personaliza la apariencia de tu aplicación",
-      "description": "NUI incluye múltiples presets predefinidos. Cada preset define una paleta de colores única que se aplica a todos los componentes.",
+      "description": "NUI incluye múltiples presets predefinidos. Cada preset define una paleta de colores única que se aplica a todos los componentes. Alterna entre presets en tiempo de ejecución para ver los cambios instantáneamente. Además si cambias entre modo <code>claro</code> y <code>oscuro</code>, los colores se ajustarán automáticamente para mantener el contraste y la legibilidad.",
       "selectPreset": "Selecciona un preset para previsualizarlo",
-      "currentPreset": "Preset actual",
       "colorPalette": "Paleta de colores",
       "primary": "Primario",
       "secondary": "Secundario",
@@ -164,7 +163,7 @@
       "neutral": "Neutral",
       "presetDescriptions": {
         "aura": "Paleta moderna y elegante por defecto con tonos turquesa y violeta",
-        "warm": "Paleta energética con tonos cálidos coral y dorados, perfecta para e-commerce",
+        "autumn": "Paleta acogedora e invitante con tonos cálidos coral y dorados, perfecta para e-commerce",
         "neon": "Paleta futurista cyberpunk con colores cyan eléctrico y neón, ideal para gaming",
         "dopamine": "Paleta optimista y alegre con tonos lima brillante y rosa",
         "corporate": "Paleta azul profesional, perfecta para aplicaciones empresariales",
@@ -177,7 +176,7 @@
         "velvet": "Paleta rica y lujosa con tonos burdeos y acentos rosados, perfecta para apps elegantes y sofisticadas"
       },
       "overview": {
-        "title": "Sistema de Temas",
+        "title": "Sistema de temas",
         "subtitle": "Una solución de tematización potente y configurable en tiempo de ejecución para aplicaciones Angular",
         "whatItSolves": {
           "title": "¿Qué problema resuelve?",
@@ -232,57 +231,135 @@
         }
       },
       "architecture": {
-        "title": "Arquitectura de Temas",
-        "subtitle": "Análisis profundo de cómo NUI genera y estructura las variables CSS",
-        "semantic": {
-          "title": "Sistema de colores semánticos",
-          "description": "NUI utiliza 8 colores semánticos que transmiten significado e intención. Cada color genera múltiples variables CSS para diferentes casos de uso.",
-          "primary": "Color principal de marca, usado para acciones primarias y elementos UI clave",
-          "secondary": "Color de apoyo para acciones secundarias y elementos complementarios",
-          "accent": "Color de resaltado para énfasis, enlaces y elementos interactivos",
-          "success": "Retroalimentación positiva, confirmaciones y operaciones exitosas",
-          "info": "Mensajes informativos, notificaciones neutrales y texto de ayuda",
-          "warning": "Precauciones, alertas que requieren atención pero no son críticas",
-          "danger": "Errores, acciones destructivas y alertas críticas",
-          "neutral": "Fondos, bordes, estados deshabilitados y elementos UI neutrales"
+        "title": "Arquitectura de temas",
+        "subtitle": "Sistema en capas para generación dinámica de variables CSS",
+        "overview": "El sistema de temas de NUI utiliza una arquitectura en capas que genera dinámicamente más de 1000 variables CSS desde la configuración del preset. Cada capa se construye sobre la anterior, creando un sistema cohesivo y escalable.",
+        
+        "layer1": {
+          "title": "Capa 1: Sistema de presets (colores semánticos)",
+          "description": "Cada preset define 8 colores semánticos que se aplican de forma consistente en toda la aplicación. Estos colores adaptan automáticamente su tonalidad entre modo claro y oscuro.",
+          "primary": "Color principal de marca, acciones primarias y elementos clave de navegación",
+          "secondary": "Color complementario para jerarquía visual y acciones secundarias",
+          "accent": "Color de énfasis para resaltados, enlaces y estados interactivos",
+          "success": "Confirmaciones positivas, operaciones exitosas y validación correcta",
+          "info": "Mensajes informativos, notificaciones neutrales y contenido de ayuda",
+          "warning": "Alertas de precaución que requieren atención pero no son críticas",
+          "danger": "Errores críticos, acciones destructivas y validación fallida",
+          "neutral": "Elementos neutrales, estados deshabilitados y backgrounds sutiles"
         },
-        "variants": {
-          "title": "Generación automática de variantes",
-          "description": "Para cada color semántico, NUI genera automáticamente variantes para asegurar jerarquía visual y accesibilidad:",
-          "tints": {
-            "title": "Tintes",
-            "description": "Variaciones más claras (+50, +100, +200) para fondos y acentos sutiles"
+        
+        "layer2": {
+          "title": "Capa 2: Variables estructurales",
+          "description": "Variables base que definen colores de texto, fondos, bordes y otros elementos estructurales. Se generan a partir de la escala de grises del preset y se adaptan al modo claro/oscuro.",
+          "surfaces": {
+            "title": "Superficies",
+            "surface": "Fondo principal para cards, modals y paneles",
+            "surfaceSecondary": "Fondo secundario para secciones anidadas",
+            "surfaceNeutral": "Fondo neutral para estados disabled o placeholders"
           },
-          "shades": {
-            "title": "Sombras",
-            "description": "Variaciones más oscuras (-50, -100, -200) para estados hover y profundidad"
+          "text": {
+            "title": "Texto",
+            "primary": "Texto principal con máximo contraste",
+            "secondary": "Texto secundario para metadatos y labels",
+            "weak": "Texto débil para contenido terciario",
+            "disabled": "Texto para elementos deshabilitados"
           },
-          "alpha": {
-            "title": "Variantes alpha",
-            "description": "Versiones semi-transparentes (10%, 20%, 30%) para overlays y efectos vidrio"
+          "borders": {
+            "title": "Bordes",
+            "high": "Bordes prominentes que requieren alto contraste",
+            "default": "Bordes estándar para separación visual",
+            "subtle": "Bordes sutiles para divisiones leves"
           }
         },
-        "structural": {
-          "title": "Variables estructurales",
-          "description": "Más allá de los colores, NUI proporciona variables estructurales que definen la base visual de tu aplicación:",
-          "backgrounds": "Fondos",
-          "text": "Textos",
-          "foregrounds": "Colores de primer plano",
-          "borders": "Bordes",
-          "shadows": "Sombras",
-          "states": "Estados interactivos"
+        
+        "layer3": {
+          "title": "Capa 3: Generación de variantes",
+          "description": "Para cada color semántico, el sistema genera automáticamente variantes de tintes, sombras y valores alpha. Esto permite jerarquía visual sin definir colores adicionales.",
+          "tints": {
+            "title": "Tintes (Lighter)",
+            "description": "Versiones aclaradas mezclando el color con blanco. Ideal para backgrounds suaves, estados hover y acentos sutiles."
+          },
+          "shades": {
+            "title": "Sombras (Darker)",
+            "description": "Versiones oscurecidas mezclando el color con negro. Usado para estados active, bordes y profundidad visual."
+          },
+          "alpha": {
+            "title": "Valores Alpha (Transparencia)",
+            "description": "Versiones semi-transparentes del color. Perfecto para overlays, efectos de vidrio y estados disabled."
+          }
         },
-        "components": {
-          "title": "Variables específicas de componentes",
-          "description": "Cada componente NUI puede definir sus propias variables CSS que heredan del sistema de temas pero permiten personalización detallada.",
-          "button": "Las variables de Button controlan padding, alturas, sombras y colores de estado",
-          "avatar": "Las variables de Avatar definen tamaños, colores de fondo y colores de texto para diferentes estados",
-          "toast": "Las variables de Toast definen tamaños de iconos, espaciado y colores específicos por tipo"
+        
+        "layer4": {
+          "title": "Capa 4: Sistema de sombras",
+          "description": "Sistema de sombras en dos niveles: primitivas (xs, sm, md, lg, xl) y aliases semánticos que mapean casos de uso a primitivas.",
+          "primitivesTitle": "Primitivas de sombra",
+          "aliasesTitle": "Aliases semánticos",
+          "mapsTo": "Mapea a",
+          "primitives": {
+            "xs": "Sombra mínima para inputs y campos de formulario",
+            "sm": "Sombra sutil para cards y contenedores",
+            "md": "Sombra media para elementos interactivos",
+            "lg": "Sombra elevada para popovers y dropdowns",
+            "xl": "Sombra máxima para modals y overlays"
+          },
+          "aliases": {
+            "field": "Campos de formulario (inputs, selects, textareas)",
+            "container": "Cards, panels, contenedores de contenido",
+            "interactive": "Botones, chips, elementos clicables",
+            "elevated": "Popovers, dropdowns, menús flotantes, modals"
+          }
         },
-        "naming": {
-          "title": "Convención de nomenclatura",
-          "description": "Todas las variables CSS siguen un patrón de nomenclatura predecible:",
-          "pattern": "--nui-[categoría]-[nombre]-[variante]\n\nEjemplos:\n--nui-color-primary          // Color primario base\n--nui-color-primary-shade-50 // Primario más oscuro\n--nui-color-primary-tint-100 // Primario más claro\n--nui-color-primary-alpha-20 // Primario 20% transparente\n--nui-bg-primary             // Fondo primario\n--nui-text-primary           // Color de texto primario"
+        
+        "layer5": {
+          "title": "Capa 5: Variables de componentes",
+          "description": "Cada componente tiene un conjunto de variables CSS generadas dinámicamente que derivan de los colores semánticos y se adaptan a las variantes (solid, outline, ghost).",
+          "button": {
+            "description": "Variables para 3 variantes (Solid, Outline, Ghost) × 8 colores × 4 estados (default, hover, active, disabled). Total: ~96 variables."
+          },
+          "toast": {
+            "description": "Variables específicas para 4 tipos de toast (success, info, warning, danger) incluyendo background, border, title, text, progress e icon."
+          },
+          "paginator": {
+            "description": "Sistema 'Shapeshifter' donde botones inactivos son ghost y el botón activo adopta la variante especificada. Botones de navegación siempre ghost."
+          }
+        },
+        
+        "performance": {
+          "title": "Optimización de performance",
+          "description": "El sistema de temas incluye optimizaciones para minimizar el impacto en performance del cambio de temas dinámico.",
+          "cache": {
+            "title": "Caché de CSS",
+            "description": "El CSS generado para cada combinación preset+modo se cachea en memoria. Cambios subsecuentes son instantáneos al reutilizar el CSS pre-generado."
+          },
+          "pregeneration": {
+            "title": "Pre-generación en Idle",
+            "description": "Al cargar la app, se pre-genera el CSS para ambos modos (light/dark) usando requestIdleCallback. El primer toggle ya es instantáneo."
+          },
+          "containment": {
+            "title": "CSS Containment",
+            "description": "Componentes pesados usan 'contain: layout style paint' para limitar el alcance de recálculos de estilo."
+          }
+        },
+        
+        "flow": {
+          "title": "Flujo de generación de variables",
+          "description": "Desde la selección del preset hasta la aplicación en el DOM, así funciona el proceso:",
+          "step1": {
+            "title": "Usuario selecciona preset o cambia modo dark",
+            "description": "Via UI o ThemeService.toggleDarkMode() / ThemeService.usePreset()"
+          },
+          "step2": {
+            "title": "ThemeService verifica caché CSS",
+            "description": "Se genera clave 'presetName-isDarkMode'. Si existe en caché, se reutiliza. Sino, se genera."
+          },
+          "step3": {
+            "title": "Generación de variables CSS",
+            "description": "Se ejecutan ~1000 cálculos de color (tints, shades, alphas, contrast) para crear el string CSS completo."
+          },
+          "step4": {
+            "title": "Inyección al DOM",
+            "description": "El CSS se inyecta en <style id='nui-theme-colors'>. El navegador recalcula estilos y re-renderiza componentes afectados."
+          }
         }
       },
       "darkMode": {
@@ -395,9 +472,9 @@
           "title": "Mejores prácticas",
           "practice1": "<strong>Usa colores hexadecimales</strong> para la mejor compatibilidad y rendimiento",
           "practice2": "<strong>Prueba en modos claro y oscuro</strong> para asegurar legibilidad y contraste",
-          "practice3": "<strong>Mantén el significado semántico consistente</strong> (por ejemplo, peligro siempre debe significar error/destructivo)",
+          "practice3": "<strong>Mantén el significado semántico consistente</strong> (por ejemplo, 'danger' siempre debe significar error / peligro)",
           "practice4": "<strong>Usa verificadores de contraste de color</strong> para cumplir con los estándares de accesibilidad WCAG",
-          "practice5": "<strong>Considera el daltonismo</strong> - no dependas únicamente del color para transmitir información"
+          "practice5": "<strong>Considera el daltonismo</strong> y no dependas únicamente del color para transmitir información"
         },
         "advanced": {
           "title": "Personalización avanzada",

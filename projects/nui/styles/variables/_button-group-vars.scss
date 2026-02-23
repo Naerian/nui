@@ -12,7 +12,7 @@ $button-group-z-index-focus: 2 !default;
 $button-group-disabled-opacity: 0.4 !default;
 $button-group-container-disabled-opacity: 0.6 !default;
 
-$button-group-segmented-gap: 0.313rem !default; // 5px
+$button-group-segmented-gap: 0.125rem !default; // 2px
 $button-group-segmented-padding: 0.125rem !default; // 2px
 
 $button-group-transition-duration: var(--nui-transition-duration-normal) !default;
@@ -36,10 +36,6 @@ $button-group-transition-timing: var(--nui-transition-timing-function-ease) !def
   --nui-btn-group-overlap: calc(var(--nui-btn-group-border-width) * -1);
   --nui-btn-group-segmented-gap: #{$button-group-segmented-gap};
   --nui-btn-group-segmented-padding: #{$button-group-segmented-padding};
-
-  // Transitions
-  --nui-btn-group-transition: all #{$button-group-transition-duration}
-    #{$button-group-transition-timing};
 
   // Scale factor: 1.1 means the icon is 10% larger than the text
   --nui-btn-group-icon-scale: 1.1;

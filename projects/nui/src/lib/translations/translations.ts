@@ -135,7 +135,7 @@ export const NUI_DEFAULT_I18N: NUITranslations = {
     hour12: 'Hora (1-12)',
     hour24: 'Hora (0-23)',
     period: 'Periodo (AM/PM)',
-    normalizedTime: 'Ajuste automático<br/>({ original } → { normalized })',
+    normalizedTime: 'Tiempo normalizado <br/> ({ original } → { normalized })',
     rangeLabel: 'Rango permitido',
     timeSelected: 'Hora seleccionada',
     duration: {

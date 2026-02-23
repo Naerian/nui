@@ -129,12 +129,12 @@
                   <nui-btn-group
                     [options]="['High', 'Med', 'Low']"
                     color="danger"
-                    variant="outline"
+                    variant="ghost"
                   ></nui-btn-group>
                   <nui-btn-group
                     [options]="['On', 'Off']"
                     color="warning"
-                    variant="ghost"
+                    variant="outline"
                   ></nui-btn-group>
                 </div>
               }
@@ -142,7 +142,7 @@
               @case ('segmented') {
                 <div class="example-preview flex-column align-items-center">
                   <nui-btn-group
-                    layout="segmented"
+                    variant="segmented"
                     [options]="periods"
                     [ngModel]="selectedPeriod()"
                     (ngModelChange)="selectedPeriod.set($event)"

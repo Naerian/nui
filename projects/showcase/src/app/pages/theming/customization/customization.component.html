@@ -9,7 +9,6 @@
       <!-- Introduction -->
       <section class="docs-section">
         <div class="intro-box">
-          <i class="ri-paintbrush-line"></i>
           <div class="intro-content">
             <h3>{{ 'pages.theming.customization.intro.title' | translate }}</h3>
             <p>{{ 'pages.theming.customization.intro.description' | translate }}</p>
@@ -20,16 +19,17 @@
       <!-- Steps -->
       <section class="docs-section">
         <h2>{{ 'pages.theming.customization.stepsTitle' | translate }}</h2>
-        
+
         <div class="steps-container">
           <div *ngFor="let step of steps" class="step-card">
             <div class="step-header">
               <div class="step-number">{{ step.number }}</div>
-              <h3>{{ step.titleKey | translate }}</h3>
+              <div class="step-info">
+                <h2>{{ step.titleKey | translate }}</h2>
+                <p class="step-description" [innerHTML]="step.descriptionKey | translate"></p>
+              </div>
             </div>
-            
-            <p class="step-description" [innerHTML]="step.descriptionKey | translate"></p>
-            
+
             <div class="code-block">
               <pre><code>{{ step.codeKey | translate }}</code></pre>
             </div>
@@ -40,7 +40,9 @@
       <!-- Custom Gray Scale -->
       <section class="docs-section">
         <h2>{{ 'pages.theming.customization.grayScale.title' | translate }}</h2>
-        <p class="section-description">{{ 'pages.theming.customization.grayScale.description' | translate }}</p>
+        <p class="section-description">
+          {{ 'pages.theming.customization.grayScale.description' | translate }}
+        </p>
 
         <div class="code-block">
           <pre><code>{{ grayScaleExample }}</code></pre>
@@ -50,7 +52,7 @@
       <!-- Best Practices -->
       <section class="docs-section">
         <h2>{{ 'pages.theming.customization.bestPractices.title' | translate }}</h2>
-        
+
         <ul class="best-practices-list">
           <li *ngFor="let practice of bestPractices">
             <i class="ri-checkbox-circle-line"></i>
@@ -62,7 +64,7 @@
       <!-- Advanced Tips -->
       <section class="docs-section">
         <h2>{{ 'pages.theming.customization.advanced.title' | translate }}</h2>
-        
+
         <div class="tips-grid">
           <div *ngFor="let tip of advancedTips" class="tip-card">
             <div class="tip-icon">
@@ -77,7 +79,10 @@
       <!-- Example Theme -->
       <section class="docs-section">
         <h2>{{ 'pages.theming.customization.example.title' | translate }}</h2>
-        <p class="section-description" [innerHTML]="'pages.theming.customization.example.description' | translate"></p>
+        <p
+          class="section-description"
+          [innerHTML]="'pages.theming.customization.example.description' | translate"
+        ></p>
 
         <div class="code-block large">
           <pre><code>{{ 'pages.theming.customization.example.code' | translate }}</code></pre>

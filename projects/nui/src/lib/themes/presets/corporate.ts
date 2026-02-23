@@ -1,4 +1,3 @@
-import { SLATE_GRAYS } from '../models/theme-grays';
 import { ThemePreset } from '../models/theme.model';
 
 /**
@@ -9,24 +8,24 @@ export const corporate: ThemePreset = {
   name: 'corporate',
   colors: {
     light: {
-      primary: '#1e40af',
-      secondary: '#64748b',
-      accent: '#0891b2',
-      success: '#16a34a',
-      info: '#2563eb',
-      warning: '#ca8a04',
-      danger: '#dc2626',
-      neutral: SLATE_GRAYS[600],
+      primary: '#1F3A8A', 
+      secondary: '#475569',
+      accent: '#2563EB',
+      success: '#166534',
+      info: '#0369A1',
+      warning: '#B45309',
+      danger: '#B91C1C',
+      neutral: '#52525B',
     },
     dark: {
-      primary: '#60a5fa',
-      secondary: '#64748b',
-      accent: '#0891b2',
-      success: '#16a34a',
-      info: '#3b82f6',
-      warning: '#d97706',
-      danger: '#dc2626',
-      neutral: SLATE_GRAYS[400],
+      primary: '#93C5FD',
+      secondary: '#CBD5E1',
+      accent: '#60A5FA',
+      success: '#86EFAC',
+      info: '#7DD3FC',
+      warning: '#FCD34D',
+      danger: '#FCA5A5',
+      neutral: '#D4D4D8',
     },
   },
 };

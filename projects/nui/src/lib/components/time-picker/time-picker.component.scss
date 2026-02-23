@@ -9,6 +9,10 @@
   @include time-picker-vars.nui-time-picker-vars;
   display: inline-flex;
   width: auto;
+  
+  // Optimización: Limita el alcance de recálculos de estilo en cambios de tema
+  contain: layout style paint;
+  content-visibility: auto;
 }
 
 // ============================================================================
@@ -35,7 +39,7 @@
   display: flex;
   flex-direction: column;
   padding: var(--nui-time-picker-padding);
-  background-color: var(--nui-bg-primary);
+  background-color: var(--nui-time-picker-bg);
   border-radius: var(--nui-border-radius-md);
   border: 1px solid var(--nui-time-picker-border);
   box-shadow: var(--nui-time-picker-box-shadow);
@@ -57,18 +61,22 @@
     flex-direction: column;
     gap: var(--nui-spacing-sm);
     padding-bottom: var(--nui-time-picker-padding);
-    border-bottom: var(--nui-time-picker-header-border-width) solid var(--nui-border-primary);
+    border-bottom: var(--nui-time-picker-header-border-width) solid var(--nui-border-subtle);
+
+    &-info {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: var(--nui-spacing-xs);
+    }
   }
 
   &__normalized {
-    color: var(--nui-color-warning);
-    background: var(--nui-bg-warning);
-    border: var(--nui-time-picker-header-border-width) solid var(--nui-border-warning);
-    border-radius: var(--nui-time-picker-item-radius);
-    text-align: center;
-    line-height: 1.5;
-    font-size: var(--nui-time-picker-normalized-font-size);
-    padding: calc(var(--nui-time-picker-padding) / 2);
+    color: var(--nui-warning);
+  }
+
+  &__info-indicator {
+    color: var(--nui-info);
   }
 
   &__display {
@@ -82,47 +90,6 @@
       font-size: var(--nui-time-picker-font-size);
       font-weight: var(--nui-font-weight-semibold);
     }
-  }
-
-  // ============================================================================
-  // RANGE INDICATOR
-  // ============================================================================
-
-  &__range-indicator {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--nui-spacing-xs);
-    padding: var(--nui-spacing-sm);
-    background: var(--nui-bg-secondary);
-    border-radius: var(--nui-time-picker-item-radius);
-    font-size: 0.85em;
-  }
-
-  &__range-label {
-    color: var(--nui-text-tertiary);
-    font-weight: var(--nui-font-weight-medium);
-    font-size: 0.9em;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  &__range-values {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--nui-spacing-sm);
-    color: var(--nui-text-secondary);
-    font-weight: var(--nui-font-weight-semibold);
-  }
-
-  &__range-start,
-  &__range-end {
-    color: var(--nui-color-primary);
-  }
-
-  &__range-separator {
-    color: var(--nui-text-tertiary);
   }
 
   // ============================================================================
@@ -155,8 +122,8 @@
       background: linear-gradient(
         to bottom,
         transparent 0%,
-        var(--nui-border-primary) 20%,
-        var(--nui-border-primary) 80%,
+        var(--nui-border-subtle) 20%,
+        var(--nui-border-subtle) 80%,
         transparent 100%
       );
       border-radius: var(--nui-time-picker-separator-border-radius);
@@ -195,7 +162,7 @@
     text-align: center;
     font-size: calc(var(--nui-time-picker-font-size) * 0.85);
     font-weight: var(--nui-font-weight-medium);
-    color: var(--nui-text-tertiary);
+    color: var(--nui-text-neutral);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: var(--nui-spacing-xs);
@@ -234,7 +201,6 @@
     cursor: pointer;
     height: var(--nui-time-picker-item-height);
     font-size: var(--nui-time-picker-font-size);
-    transition: all var(--nui-transition-duration-fast) var(--nui-transition-timing-function-ease);
     margin-right: 0.313rem;
 
     &:hover:not(:disabled):not(&--selected) {
@@ -242,6 +208,8 @@
       color: var(--nui-time-picker-item-hover-text);
       opacity: 1;
     }
+
+    @include global.focus-ring();
 
     &--selected {
       background: var(--nui-time-picker-item-selected-bg);
@@ -255,13 +223,14 @@
       }
     }
 
-    @include global.focus-ring();
+    &:disabled,
+    &--disabled {
+      @include global.disabled(0.3);
+    }
 
-    &:disabled {
-      background-color: var(--nui-time-picker-item-disabled-bg);
-      color: var(--nui-time-picker-item-disabled-text);
-      opacity: 0.4;
-      cursor: not-allowed;
+    &--focused {
+      outline: var(--nui-focus-ring-width) solid var(--nui-primary);
+      outline-offset: var(--nui-focus-ring-offset);
     }
 
     // Duration mode variant
@@ -276,7 +245,6 @@
       height: var(--nui-time-picker-item-height);
       font-size: var(--nui-time-picker-font-size);
       cursor: pointer;
-      transition: all var(--nui-transition-duration-fast) var(--nui-transition-timing-function-ease);
       border-radius: var(--nui-time-picker-item-radius);
       background: var(--nui-time-picker-item-bg);
       border: 1px solid transparent;
@@ -290,11 +258,9 @@
         opacity: 1;
       }
 
-      &:disabled {
-        background-color: var(--nui-time-picker-item-disabled-bg);
-        color: var(--nui-time-picker-item-disabled-text);
-        cursor: not-allowed;
-        opacity: 0.4;
+      &:disabled,
+      &--disabled {
+        @include global.disabled(0.3);
       }
 
       &.nui-time-picker__item--selected {
@@ -320,19 +286,8 @@
       }
 
       &--focused {
-        outline: 2px solid var(--nui-color-primary-tint-65);
-        outline-offset: -1px;
-        z-index: 2;
-      }
-
-      &:focus-visible {
-        outline: 2px solid var(--nui-color-primary-tint-65);
-        outline-offset: -1px;
-        z-index: 2;
-      }
-
-      &.nui-time-picker__item--selected:focus-visible {
-        outline-color: var(--nui-color-primary-tint-65);
+        outline: var(--nui-focus-ring-width) solid var(--nui-primary);
+        outline-offset: var(--nui-focus-ring-offset);
       }
     }
   }
@@ -367,7 +322,7 @@
       text-align: center;
       font-size: var(--nui-time-picker-font-size);
       font-weight: var(--nui-font-weight-medium);
-      color: var(--nui-text-tertiary);
+      color: var(--nui-text-neutral);
       text-transform: uppercase;
       margin-bottom: var(--nui-spacing-xs);
     }
@@ -387,7 +342,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid var(--nui-border-primary);
+    border-top: 1px solid var(--nui-border-subtle);
     min-height: var(--nui-time-picker-option-min-height);
     padding-top: var(--nui-spacing-sm);
     gap: var(--nui-spacing-sm);
@@ -408,7 +363,6 @@
     text-decoration: none;
     border-width: 1px;
     border-style: solid;
-    transition: all var(--nui-transition-duration-fast) ease;
     line-height: 1.5;
     height: var(--nui-time-picker-nav-btn-height);
     padding: var(--nui-time-picker-nav-btn-padding);
@@ -504,28 +458,28 @@
     justify-content: center;
     aspect-ratio: 2 / 1;
     min-width: 0;
-    gap: var(--nui-spacing-xs);
     background: transparent;
     border: 1px solid transparent;
     border-radius: var(--nui-border-radius-sm);
     font-weight: var(--nui-font-weight-medium);
-    font-size: var(--nui-time-picker-preset-font-size);
-    color: var(--nui-text-primary);
+    font-size: var(--nui-time-picker-font-size);
+    color: var(--nui-time-picker-item-text);
     cursor: pointer;
-    transition: all var(--nui-transition-duration-fast) ease;
     padding: var(--nui-spacing-sm);
-
-    &:hover {
-      background: var(--nui-bg-secondary);
-      border-color: var(--nui-border-primary);
-    }
-
-    @include global.focus-ring();
+    gap: var(--nui-spacing-xs);
 
     i {
       font-size: var(--nui-time-picker-preset-font-size);
       color: var(--nui-color-primary);
     }
+
+    &:hover {
+      background-color: var(--nui-time-picker-item-hover-bg);
+      color: var(--nui-time-picker-item-hover-text);
+      opacity: 1;
+    }
+
+    @include global.focus-ring();
   }
 
   // ============================================================================

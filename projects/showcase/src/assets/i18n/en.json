@@ -35,7 +35,7 @@
   },
   "presets": {
     "aura": "Aura",
-    "warm": "Warm",
+    "autumn": "Autumn",
     "neon": "Neon",
     "dopamine": "Dopamine",
     "corporate": "Corporate",
@@ -49,7 +49,7 @@
   },
   "footer": {
     "license": "Includes icons from Remix Icon (MIT License)",
-    "copyright": "© 2025 NUI. All rights reserved."
+    "copyright": "2025 NUI. All rights reserved."
   },
   "codeBlock": {
     "copy": "Copy",
@@ -116,7 +116,7 @@
       "title": "Configuration",
       "subtitle": "Configure NUI according to your needs",
       "presetConfig": "Preset configuration",
-      "presetConfigDescription": "Presets define your application's color palette. NUI includes 12 predefined presets: <code>aura</code>, <code>warm</code>, <code>neon</code>, <code>dopamine</code>, <code>corporate</code>, <code>minimal</code>, <code>sunset</code>, <code>twilight</code>, <code>ocean</code>, <code>velvet</code>, <code>coffee</code>, <code>emerald</code>.",
+      "presetConfigDescription": "Presets define your application's color palette. NUI includes 12 predefined presets: <code>aura</code>, <code>autumn</code>, <code>neon</code>, <code>dopamine</code>, <code>corporate</code>, <code>minimal</code>, <code>sunset</code>, <code>twilight</code>, <code>ocean</code>, <code>velvet</code>, <code>coffee</code>, <code>emerald</code>.",
       "presetConfigTitle": "Preset configuration",
       "darkModeConfig": "Dark Mode Configuration",
       "darkModeConfigDescription": "Control how dark mode is applied in your application. Available options are: <code>manual</code> (controlled by code), <code>auto</code> (based on time of day), or <code>system</code> (according to operating system preferences).",
@@ -142,7 +142,7 @@
       "neutral": "Neutral",
       "presetDescriptions": {
         "aura": "Modern and elegant default palette with teal and purple tones",
-        "warm": "Energetic palette with warm coral and golden tones, perfect for e-commerce",
+        "autumn": "Cozy, inviting palette with warm coral and golden tones, perfect for e-commerce",
         "neon": "Futuristic cyberpunk palette with electric cyan and neon colors, ideal for gaming",
         "dopamine": "Optimistic and cheerful palette with bright lime and pink tones",
         "corporate": "Professional blue palette, perfect for enterprise applications",
@@ -150,7 +150,7 @@
         "sunset": "Warm and vibrant palette with pink, orange and coral tones, perfect for creative apps",
         "ocean": "Calm and professional palette with deep blues and aqua tones, ideal for productivity",
         "emerald": "Fresh and natural palette with emerald greens and turquoise accents, perfect for health and nature apps",
-        "coffee": "Warm and cozy palette with brown tones and cream accents, ideal for lifestyle and food apps",
+        "coffee": "Warm and cozy palette with brown tonefs and cream accents, ideal for lifestyle and food apps",
         "velvet": "Rich and luxurious palette with burgundy tones and pink accents, perfect for elegant and sophisticated apps"
       },
       "overview": {

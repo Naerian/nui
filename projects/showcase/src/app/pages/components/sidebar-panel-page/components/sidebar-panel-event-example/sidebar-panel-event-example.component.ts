@@ -146,12 +146,12 @@ export interface SidebarPanelEventExampleResult {
         &__header {
           h3 {
             margin: 0 0 0.5rem;
-            color: var(--nui-color-on-surface);
+            color: var(--nui-color-on-surface-secondary);
           }
 
           p {
             margin: 0;
-            color: var(--nui-color-on-surface-variant);
+            color: var(--nui-color-on-surface-secondary);
             font-size: 0.875rem;
           }
         }
@@ -169,13 +169,13 @@ export interface SidebarPanelEventExampleResult {
         display: flex;
         gap: 1rem;
         padding: 1rem;
-        background: var(--nui-bg-tertiary);
+        background: var(--nui-surface-neutral);
         border-radius: 0.5rem;
-        border-left: 3px solid var(--nui-primary);
+        border-left: 3px solid var(--nui-info);
 
         i {
           font-size: 1.5rem;
-          color: var(--nui-primary);
+          color: var(--nui-info);
           flex-shrink: 0;
         }
 
@@ -201,7 +201,7 @@ export interface SidebarPanelEventExampleResult {
       }
 
       .event-log {
-        background: var(--surface-secondary);
+        background: var(--nui-surface-neutral);
         border-radius: 0.5rem;
         padding: 1rem;
 
@@ -209,6 +209,7 @@ export interface SidebarPanelEventExampleResult {
           margin: 0 0 0.75rem;
           font-size: 0.875rem;
           font-weight: 600;
+          color: var(--nui-on-surface-neutral);
         }
 
         &__items {
@@ -223,22 +224,22 @@ export interface SidebarPanelEventExampleResult {
           display: grid;
           grid-template-columns: auto auto 1fr;
           gap: 0.75rem;
-          background: var(--surface-primary);
+          background: var(--nui-surface-neutral);
           border-radius: 0.25rem;
           font-size: 0.8125rem;
           align-items: center;
 
           .event-type {
             padding: 0.25rem 0.5rem;
-            background: var(--primary-color);
-            color: white;
+            background: var(--nui-primary);
+            color: var(--nui-on-primary);
             border-radius: 0.25rem;
             font-weight: 600;
             font-size: 0.75rem;
           }
 
           .event-time {
-            color: var(--text-secondary);
+            color: var(--nui-on-surface-neutral);
             font-family: monospace;
           }
 
@@ -256,7 +257,7 @@ export interface SidebarPanelEventExampleResult {
           justify-content: center;
           gap: 0.5rem;
           padding: 2rem;
-          color: var(--text-secondary);
+          color: var(--nui-on-surface-neutral);
         }
       }
 
@@ -266,7 +267,7 @@ export interface SidebarPanelEventExampleResult {
           margin: 0 0 0.75rem;
           font-size: 0.875rem;
           font-weight: 600;
-          color: var(--nui-color-on-surface);
+          color: var(--nui-on-surface-neutral);
         }
       }
 

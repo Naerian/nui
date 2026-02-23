@@ -13,88 +13,214 @@ import { ThemeService } from 'nui';
 export class ThemeArchitectureComponent {
   private themeService = inject(ThemeService);
 
+  currentColors = computed(() => this.themeService.colors());
+  currentPreset = computed(() => this.themeService.currentPreset());
+  isDarkMode = computed(() => this.themeService.isDarkMode());
+
+  // Layer 1: Semantic Colors (from preset)
   semanticColors = [
-    { key: 'primary', purpose: 'pages.theming.architecture.semantic.primary' },
-    { key: 'secondary', purpose: 'pages.theming.architecture.semantic.secondary' },
-    { key: 'accent', purpose: 'pages.theming.architecture.semantic.accent' },
-    { key: 'success', purpose: 'pages.theming.architecture.semantic.success' },
-    { key: 'info', purpose: 'pages.theming.architecture.semantic.info' },
-    { key: 'warning', purpose: 'pages.theming.architecture.semantic.warning' },
-    { key: 'danger', purpose: 'pages.theming.architecture.semantic.danger' },
-    { key: 'neutral', purpose: 'pages.theming.architecture.semantic.neutral' },
+    {
+      key: 'primary',
+      icon: 'ri-fingerprint-line',
+      purpose: 'pages.theming.architecture.layer1.primary',
+    },
+    {
+      key: 'secondary',
+      icon: 'ri-contrast-2-line',
+      purpose: 'pages.theming.architecture.layer1.secondary',
+    },
+    { key: 'accent', icon: 'ri-star-line', purpose: 'pages.theming.architecture.layer1.accent' },
+    {
+      key: 'success',
+      icon: 'ri-checkbox-circle-line',
+      purpose: 'pages.theming.architecture.layer1.success',
+    },
+    { key: 'info', icon: 'ri-information-line', purpose: 'pages.theming.architecture.layer1.info' },
+    {
+      key: 'warning',
+      icon: 'ri-error-warning-line',
+      purpose: 'pages.theming.architecture.layer1.warning',
+    },
+    {
+      key: 'danger',
+      icon: 'ri-close-circle-line',
+      purpose: 'pages.theming.architecture.layer1.danger',
+    },
+    {
+      key: 'neutral',
+      icon: 'ri-gradienter-line',
+      purpose: 'pages.theming.architecture.layer1.neutral',
+    },
   ];
 
-  currentColors = computed(() => this.themeService.colors());
+  // Layer 2: Structural Variables
+  structuralGroups = [
+    {
+      title: 'pages.theming.architecture.layer2.surfaces.title',
+      icon: 'ri-layout-line',
+      vars: [
+        { name: '--nui-surface', desc: 'pages.theming.architecture.layer2.surfaces.surface' },
+        {
+          name: '--nui-surface-secondary',
+          desc: 'pages.theming.architecture.layer2.surfaces.surfaceSecondary',
+        },
+        {
+          name: '--nui-surface-neutral',
+          desc: 'pages.theming.architecture.layer2.surfaces.surfaceNeutral',
+        },
+      ],
+    },
+    {
+      title: 'pages.theming.architecture.layer2.text.title',
+      icon: 'ri-text',
+      vars: [
+        { name: '--nui-text-primary', desc: 'pages.theming.architecture.layer2.text.primary' },
+        { name: '--nui-text-secondary', desc: 'pages.theming.architecture.layer2.text.secondary' },
+        { name: '--nui-text-weak', desc: 'pages.theming.architecture.layer2.text.weak' },
+        { name: '--nui-text-disabled', desc: 'pages.theming.architecture.layer2.text.disabled' },
+      ],
+    },
+    {
+      title: 'pages.theming.architecture.layer2.borders.title',
+      icon: 'ri-border-outer',
+      vars: [
+        { name: '--nui-border-high', desc: 'pages.theming.architecture.layer2.borders.high' },
+        { name: '--nui-border-default', desc: 'pages.theming.architecture.layer2.borders.default' },
+        { name: '--nui-border-subtle', desc: 'pages.theming.architecture.layer2.borders.subtle' },
+      ],
+    },
+  ];
 
+  // Layer 3: Variant Generation
   variantTypes = [
     {
       type: 'tints',
-      titleKey: 'pages.theming.architecture.variants.tints.title',
-      descriptionKey: 'pages.theming.architecture.variants.tints.description',
+      icon: 'ri-sun-line',
+      title: 'pages.theming.architecture.layer3.tints.title',
+      description: 'pages.theming.architecture.layer3.tints.description',
       examples: ['tint-95', 'tint-90', 'tint-80', 'tint-70', 'tint-60', 'tint-50'],
     },
     {
       type: 'shades',
-      titleKey: 'pages.theming.architecture.variants.shades.title',
-      descriptionKey: 'pages.theming.architecture.variants.shades.description',
+      icon: 'ri-moon-line',
+      title: 'pages.theming.architecture.layer3.shades.title',
+      description: 'pages.theming.architecture.layer3.shades.description',
       examples: ['shade-10', 'shade-20', 'shade-30', 'shade-40', 'shade-50'],
     },
     {
       type: 'alpha',
-      titleKey: 'pages.theming.architecture.variants.alpha.title',
-      descriptionKey: 'pages.theming.architecture.variants.alpha.description',
+      icon: 'ri-contrast-drop-line',
+      title: 'pages.theming.architecture.layer3.alpha.title',
+      description: 'pages.theming.architecture.layer3.alpha.description',
       examples: ['alpha-10', 'alpha-30', 'alpha-50', 'alpha-70', 'alpha-90'],
     },
   ];
 
-  structuralVariables = [
+  // Layer 4: Shadow System
+  shadowPrimitives = [
     {
-      category: 'pages.theming.architecture.structural.backgrounds',
-      vars: ['--nui-bg-primary', '--nui-bg-secondary', '--nui-bg-tertiary'],
+      name: '--nui-box-shadow-xs',
+      level: 'XS',
+      usage: 'pages.theming.architecture.layer4.primitives.xs',
     },
     {
-      category: 'pages.theming.architecture.structural.text',
-      vars: ['--nui-text-primary', '--nui-text-secondary', '--nui-text-tertiary', '--nui-text-disabled'],
+      name: '--nui-box-shadow-sm',
+      level: 'SM',
+      usage: 'pages.theming.architecture.layer4.primitives.sm',
     },
     {
-      category: 'pages.theming.architecture.structural.borders',
-      vars: ['--nui-border-primary', '--nui-border-secondary', '--nui-border-strong', '--nui-border-weak'],
+      name: '--nui-box-shadow-md',
+      level: 'MD',
+      usage: 'pages.theming.architecture.layer4.primitives.md',
     },
     {
-      category: 'pages.theming.architecture.structural.shadows',
-      vars: ['--nui-box-shadow-xs', '--nui-box-shadow-sm', '--nui-box-shadow-md', '--nui-box-shadow-lg', '--nui-box-shadow-xl'],
+      name: '--nui-box-shadow-lg',
+      level: 'LG',
+      usage: 'pages.theming.architecture.layer4.primitives.lg',
+    },
+    {
+      name: '--nui-box-shadow-xl',
+      level: 'XL',
+      usage: 'pages.theming.architecture.layer4.primitives.xl',
     },
   ];
 
-  componentSpecificExamples = [
+  shadowAliases = [
     {
-      component: 'Button',
-      variablesKey: 'pages.theming.architecture.components.button',
-      examples: [
-        '--nui-btn-primary-solid-bg',
-        '--nui-btn-primary-solid-hover-bg',
-        '--nui-btn-primary-outline-border',
-        '--nui-btn-primary-ghost-hover-bg',
-      ],
+      name: '--nui-shadow-field',
+      maps: 'xs',
+      usage: 'pages.theming.architecture.layer4.aliases.field',
     },
     {
-      component: 'Avatar',
-      variablesKey: 'pages.theming.architecture.components.avatar',
-      examples: [
-        '--nui-avatar-primary-bg',
-        '--nui-avatar-primary-color',
-        '--nui-avatar-default-bg',
+      name: '--nui-shadow-container',
+      maps: 'sm',
+      usage: 'pages.theming.architecture.layer4.aliases.container',
+    },
+    {
+      name: '--nui-shadow-interactive',
+      maps: 'sm',
+      usage: 'pages.theming.architecture.layer4.aliases.interactive',
+    },
+    {
+      name: '--nui-shadow-elevated',
+      maps: 'lg',
+      usage: 'pages.theming.architecture.layer4.aliases.elevated',
+    },
+  ];
+
+  // Layer 5: Component Variables
+  componentExamples = [
+    {
+      component: 'Button',
+      icon: 'ri-checkbox-blank-circle-line',
+      description: 'pages.theming.architecture.layer5.button.description',
+      variants: [
+        { variant: 'Solid', vars: ['bg', 'hover-bg', 'active-bg', 'text'] },
+        { variant: 'Outline', vars: ['border', 'hover-bg', 'hover-border', 'text'] },
+        { variant: 'Ghost', vars: ['hover-bg', 'active-bg', 'text'] },
       ],
     },
     {
       component: 'Toast',
-      variablesKey: 'pages.theming.architecture.components.toast',
-      examples: [
-        '--nui-toast-success-bg',
-        '--nui-toast-success-border',
-        '--nui-toast-success-title',
-        '--nui-toast-success-progress',
+      icon: 'ri-notification-line',
+      description: 'pages.theming.architecture.layer5.toast.description',
+      variants: [
+        {
+          variant: 'Success / Info / Warning / Danger',
+          vars: ['bg', 'border', 'title', 'text', 'progress', 'icon'],
+        },
       ],
+    },
+    {
+      component: 'Paginator',
+      icon: 'ri-pages-line',
+      description: 'pages.theming.architecture.layer5.paginator.description',
+      variants: [
+        {
+          variant: 'Page Buttons (Shapeshifter)',
+          vars: ['inactive-bg', 'active-bg', 'active-border', 'active-text'],
+        },
+        { variant: 'Nav Buttons (Always Ghost)', vars: ['hover-bg', 'text'] },
+      ],
+    },
+  ];
+
+  // Performance Layer
+  performanceFeatures = [
+    {
+      icon: 'ri-flashlight-line',
+      title: 'pages.theming.architecture.performance.cache.title',
+      description: 'pages.theming.architecture.performance.cache.description',
+    },
+    {
+      icon: 'ri-time-line',
+      title: 'pages.theming.architecture.performance.pregeneration.title',
+      description: 'pages.theming.architecture.performance.pregeneration.description',
+    },
+    {
+      icon: 'ri-layout-masonry-line',
+      title: 'pages.theming.architecture.performance.containment.title',
+      description: 'pages.theming.architecture.performance.containment.description',
     },
   ];
 
@@ -102,14 +228,16 @@ export class ThemeArchitectureComponent {
     return (this.currentColors() as any)[colorKey] || '#000000';
   }
 
-  getVariantExample(colorKey: string, variant: string): string {
-    const varName = `--nui-color-${colorKey}-${variant}`;
-    const el = document.documentElement;
-    return getComputedStyle(el).getPropertyValue(varName).trim() || '#cccccc';
+  getVariantColor(colorKey: string, variant: string): string {
+    const varName = `--nui-${colorKey}-${variant}`;
+    return this.getCSSVar(varName);
   }
 
-  getCSSVariableValue(varName: string): string {
-    const el = document.documentElement;
-    return getComputedStyle(el).getPropertyValue(varName).trim();
+  getCSSVar(varName: string): string {
+    return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+  }
+
+  getContrastColor(bgColor: string): string {
+    return this.themeService.getContrastColor(bgColor);
   }
 }

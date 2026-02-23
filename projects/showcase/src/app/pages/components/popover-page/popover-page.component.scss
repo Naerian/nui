@@ -3,22 +3,21 @@
 
 .example-input {
   padding: 0.5rem 0.75rem;
-  border: 1px solid var(--nui-border-primary);
+  border: 1px solid var(--nui-border-high);
   border-radius: var(--nui-border-radius-sm);
-  background-color: var(--nui-bg-primary);
-  color: var(--nui-text-primary);
+  background-color: var(--nui-surface);
+  color: var(--nui-on-surface);
   font-size: 0.875rem;
   font-family: inherit;
-  transition: border-color 0.2s ease;
   min-width: 250px;
 
   &:focus {
     outline: none;
-    border-color: var(--nui-color-primary);
+    border-color: var(--nui-primary);
   }
 
   &::placeholder {
-    color: var(--nui-text-tertiary);
+    color: var(--nui-placeholder-text);
   }
 }
 
@@ -30,13 +29,13 @@
     margin: 0 0 0.5rem 0;
     font-size: 1.125rem;
     font-weight: 600;
-    color: var(--nui-text-primary);
+    color: var(--nui-on-surface);
   }
 
   &__text {
     margin: 0 0 1rem 0;
     font-size: 0.875rem;
-    color: var(--nui-text-secondary);
+    color: var(--nui-on-surface-neutral);
     line-height: 1.5;
   }
 
@@ -72,13 +71,13 @@
     margin: 0 0 0.75rem 0;
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--nui-text-primary);
+    color: var(--nui-on-surface);
   }
 
   &__text {
     margin: 0 0 1.25rem 0;
     font-size: 0.9375rem;
-    color: var(--nui-text-secondary);
+    color: var(--nui-on-surface-neutral);
     line-height: 1.6;
   }
 }

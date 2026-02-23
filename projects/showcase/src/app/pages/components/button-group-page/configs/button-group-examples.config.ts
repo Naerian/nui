@@ -165,7 +165,7 @@ export const BUTTON_GROUP_EXAMPLES_SECTIONS: ComponentSection[] = [
       {
         title: 'codeExamples.html',
         code: `<nui-btn-group 
-  layout="segmented"
+  variant="segmented"
   [options]="periods"
   [(ngModel)]="selectedPeriod">
 </nui-btn-group>`,

@@ -61,16 +61,10 @@ export const BUTTON_GROUP_API_SECTIONS: ComponentSection[] = [
           'Muestra solo iconos sin texto (botones compactos)',
         ],
         [
-          '<code>layout</code>',
-          "'default' | 'segmented'",
-          '<code class="neutral">default</code>',
-          'Estilo visual: default (botones separados) o segmented (iOS style)',
-        ],
-        [
           '<code>variant</code>',
-          'NUIVariant',
+          "NUIVariant | 'segmented'",
           '<code class="neutral">solid</code>',
-          "Variante del botón: 'solid', 'outline', 'ghost'",
+          "Variante del botón: 'solid', 'outline', 'ghost', 'segmented'",
         ],
         [
           '<code>color</code>',

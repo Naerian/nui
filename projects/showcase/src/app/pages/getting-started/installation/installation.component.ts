@@ -17,12 +17,12 @@ export class InstallationComponent {
       language: 'typescript',
       title: 'app.config.ts',
       code: `import { ApplicationConfig } from '@angular/core';
-import { provideNUI, aura } from 'nui';
+import { provideNUI, minimal } from 'nui';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideNUI({ 
-      preset: aura,
+      preset: minimal,
       darkMode: 'manual'
     })
   ]

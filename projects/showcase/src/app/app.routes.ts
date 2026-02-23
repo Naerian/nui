@@ -93,13 +93,6 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'css-variables',
-        loadComponent: () =>
-          import('./pages/theming/css-variables/css-variables.component').then(
-            m => m.CssVariablesComponent
-          ),
-      },
-      {
         path: 'customization',
         loadComponent: () =>
           import('./pages/theming/customization/customization.component').then(

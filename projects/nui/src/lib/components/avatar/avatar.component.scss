@@ -39,7 +39,6 @@
   color: var(--nui-avatar-default-color);
   font-weight: var(--nui-font-weight-medium);
   line-height: var(--nui-avatar-line-height);
-  transition: var(--nui-avatar-transition);
 
   $variants: rounded, circular, square;
   @each $variant in $variants {
@@ -107,7 +106,7 @@
 
   &__badge {
     position: absolute;
-    border: 2px solid var(--nui-bg-primary);
+    border: 2px solid var(--nui-surface);
     border-radius: 50%;
     z-index: 2;
 

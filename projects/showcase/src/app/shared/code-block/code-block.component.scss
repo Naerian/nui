@@ -1,9 +1,10 @@
 .code-block-container {
   position: relative;
   margin: 1rem 0;
-  border: 1px solid var(--nui-border-primary);
+  margin-bottom: 0;
+  border: 1px solid var(--nui-border-high);
   border-radius: var(--nui-border-radius-md);
-  background-color: var(--nui-bg-tertiary);
+  background-color: var(--nui-surface-neutral);
   overflow: hidden;
 
   .code-block-header {
@@ -11,8 +12,8 @@
     align-items: center;
     gap: 1rem;
     padding: 0.75rem 1rem;
-    background-color: var(--nui-bg-secondary);
-    border-bottom: 1px solid var(--nui-border-primary);
+    background-color: var(--nui-surface-secondary);
+    border-bottom: 1px solid var(--nui-border-high);
     flex-wrap: wrap;
 
     .code-block-title {
@@ -21,11 +22,11 @@
       gap: 0.5rem;
       font-size: 0.875rem;
       font-weight: 600;
-      color: var(--nui-text-primary);
+      color: var(--nui-on-surface-secondary);
 
       i {
         font-size: 1rem;
-        color: var(--nui-color-primary);
+        color: var(--nui-on-surface-secondary);
       }
     }
 
@@ -44,23 +45,22 @@
         border-radius: var(--nui-border-radius-sm);
         font-size: 0.8125rem;
         font-weight: 500;
-        color: var(--nui-text-secondary);
+        color: var(--nui-on-surface-secondary);
         cursor: pointer;
-        transition: all 0.2s ease;
 
         i {
           font-size: 0.875rem;
         }
 
         &:hover {
-          background-color: var(--nui-color-primary-alpha-10);
-          color: var(--nui-color-primary);
+          background-color: var(--nui-primary-alpha-10);
+          color: var(--nui-on-surface);
         }
 
         &.active {
-          background-color: var(--nui-bg-tertiary);
-          border-color: var(--nui-border-primary);
-          color: var(--nui-color-primary);
+          background-color: var(--nui-surface-neutral);
+          border-color: var(--nui-border-high);
+          color: var(--nui-on-surface-neutral);
           font-weight: 600;
         }
       }
@@ -77,32 +77,31 @@
     align-items: center;
     gap: 0.375rem;
     padding: 0.375rem 0.75rem;
-    background-color: var(--nui-bg-primary);
-    border: 1px solid var(--nui-border-primary);
+    background-color: var(--nui-surface);
+    border: 1px solid var(--nui-border-high);
     border-radius: var(--nui-border-radius-sm);
     font-size: 0.8125rem;
     font-weight: 500;
-    color: var(--nui-text-secondary);
+    color: var(--nui-on-surface);
     cursor: pointer;
-    transition: all 0.2s ease;
 
     i {
       font-size: 0.875rem;
     }
 
     &:hover {
-      background-color: var(--nui-color-primary-alpha-10);
-      border-color: var(--nui-color-primary);
-      color: var(--nui-color-primary);
+      background-color: var(--nui-primary-alpha-10);
+      border-color: var(--nui-primary);
+      color: var(--nui-primary);
     }
 
     &.success {
-      background-color: var(--nui-color-success-alpha-10);
-      border-color: var(--nui-color-success);
-      color: var(--nui-color-success);
+      background-color: var(--nui-success-alpha-10);
+      border-color: var(--nui-success);
+      color: var(--nui-success);
 
       &:hover {
-        background-color: var(--nui-color-success-alpha-20);
+        background-color: var(--nui-success-alpha-20);
       }
     }
   }
@@ -130,10 +129,10 @@
     font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
     font-size: 0.75rem;
     line-height: 1.5;
-    background-color: var(--nui-bg-tertiary);
+    background-color: var(--nui-surface-neutral);
 
     code {
-      color: var(--nui-text-primary);
+      color: var(--nui-on-surface-neutral);
       display: block;
       white-space: pre;
       background: none;
@@ -148,16 +147,16 @@
   }
 
   .code-block-pre::-webkit-scrollbar-track {
-    background: var(--nui-bg-secondary);
+    background: var(--nui-surface-secondary);
     border-radius: 4px;
   }
 
   .code-block-pre::-webkit-scrollbar-thumb {
-    background: var(--nui-border-primary);
+    background: var(--nui-border-high);
     border-radius: 4px;
 
     &:hover {
-      background: var(--nui-color-primary-alpha-50);
+      background: var(--nui-primary-alpha-50);
     }
   }
 }

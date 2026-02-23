@@ -1,27 +1,31 @@
-import { STONE_GRAYS, ThemePreset } from '../models';
+import { ThemePreset } from '../models/theme.model';
 
+/**
+ * Coffee Preset - Warm, comforting theme
+ * Brown-based color palette with rich, earthy tones
+ */
 export const coffee: ThemePreset = {
   name: 'coffee',
   colors: {
     light: {
-      primary: '#78350f',
-      secondary: '#4b381e',
-      accent: '#d97706',
-      success: '#3f6212',
-      info: '#0891b2',
-      warning: '#b45309',
-      danger: '#991b1b',
-      neutral: STONE_GRAYS[700],
+      primary: '#6F4E37',
+      secondary: '#7A6A58',
+      accent: '#8f5839',
+      success: '#386A20',
+      info: '#006874',
+      warning: '#974900',
+      danger: '#8C1D18',
+      neutral: '#605D5A',
     },
     dark: {
-      primary: '#d97706',
-      secondary: '#78716c',
-      accent: '#d97706',
-      success: '#65a30d',
-      info: '#0891b2',
-      warning: '#ea580c',
-      danger: '#dc2626',
-      neutral: '#a8a29e',
+      primary: '#E6BEA9',
+      secondary: '#D8C2B0',
+      accent: '#F2B8A0',
+      success: '#9FD67A',
+      info: '#4FD8EB',
+      warning: '#FFB77A',
+      danger: '#FFB4AB',
+      neutral: '#D0C4BC',
     },
   },
 };

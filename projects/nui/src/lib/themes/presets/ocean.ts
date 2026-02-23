@@ -1,4 +1,3 @@
-import { SLATE_GRAYS } from '../models/theme-grays';
 import { ThemePreset } from '../models/theme.model';
 
 /**
@@ -9,24 +8,24 @@ export const ocean: ThemePreset = {
   name: 'ocean',
   colors: {
     light: {
-      primary: '#0077be',
-      secondary: '#4a90a4',
-      accent: '#5ca5af',
-      success: '#26a69a',
-      info: '#039be5',
-      warning: '#ef9050',
-      danger: '#ef5350',
-      neutral: SLATE_GRAYS[600],
+      primary: '#0E7490',
+      secondary: '#155E75',
+      accent: '#0a77aa',
+      success: '#15803D',
+      info: '#056392',
+      warning: '#b45c09',
+      danger: '#B91C1C',
+      neutral: '#52525B',
     },
     dark: {
-      primary: '#0ea5e9',
-      secondary: '#64748b',
-      accent: '#06b6d4',
-      success: '#14b8a6',
-      info: '#3b82f6',
-      warning: '#f97316',
-      danger: '#ef4444',
-      neutral: SLATE_GRAYS[400],
+      primary: '#67E8F9',
+      secondary: '#22D3EE',
+      accent: '#A5F3FC',
+      success: '#86EFAC',
+      info: '#7DD3FC',
+      warning: '#FCD34D',
+      danger: '#FCA5A5',
+      neutral: '#D4D4D8',
     },
   },
 };
