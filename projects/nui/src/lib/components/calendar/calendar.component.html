@@ -190,13 +190,14 @@
         viewMode() === ViewMode.DAY &&
         showTodayButton() &&
         !isTodaySelected() &&
+        isTodayEnabled() &&
         type() === CalendarType.DAY
       ) {
         <div class="nui-calendar__footer">
           <div class="nui-calendar__footer-center">
             <button
               type="button"
-              class="nui-calendar__nav-btn nui-calendar__footer-button"
+              class="nui-calendar__nav-btn nui-calendar__nav-btn-today nui-calendar__footer-button"
               (click)="goToToday()"
             >
               {{ _translations.calendar.today }}

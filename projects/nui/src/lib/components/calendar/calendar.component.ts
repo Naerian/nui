@@ -30,8 +30,6 @@ import {
   CalendarValue,
   WeekRange,
   CalendarTabType,
-  CalendarWidth,
-  CalendarWidthEnum,
   CalendarTimePickerModeEnum,
   CalendarGlobalConfig,
   DateStatusFn,
@@ -48,7 +46,7 @@ import {
   TimeValue,
 } from '../time-picker/models/time-picker.model';
 import { TimePickerComponent } from '../time-picker/time-picker.component';
-import { NUISize, NUI_CONFIG } from '../../configs';
+import { NUI_CONFIG } from '../../configs';
 import { NUI_TRANSLATIONS } from '../../translations';
 import { BtnGroupOption } from '../button-group';
 
@@ -489,6 +487,53 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     return selected
       ? this.calendarService.isSameMonth(selected, today) && selected.getDate() === today.getDate()
       : false;
+  });
+
+  // Verificar si la fecha de hoy está habilitada según las restricciones
+  isTodayEnabled = computed(() => {
+    const today = new Date();
+    const minDateValue = this.minDate();
+    const maxDateValue = this.maxDate();
+    const disabledDatesValue = this.disabledDates();
+    const isDateEnabledFnValue = this.isDateEnabledFn();
+
+    // Verificar minDate
+    if (minDateValue) {
+      const minDateObj = this.parseDate(minDateValue);
+      if (this.calendarService.dateAdapter.isBefore(today, minDateObj)) {
+        return false;
+      }
+    }
+
+    // Verificar maxDate
+    if (maxDateValue) {
+      const maxDateObj = this.parseDate(maxDateValue);
+      if (this.calendarService.dateAdapter.isAfter(today, maxDateObj)) {
+        return false;
+      }
+    }
+
+    // Verificar disabledDates
+    if (disabledDatesValue && disabledDatesValue.length > 0) {
+      const convertedDisabledDates = disabledDatesValue
+        .map(d => this.calendarService.convertToDate(d))
+        .filter((d): d is Date => d !== null);
+      
+      const isTodayDisabled = convertedDisabledDates.some(disabledDate =>
+        this.calendarService.isSameDay(today, disabledDate)
+      );
+      
+      if (isTodayDisabled) {
+        return false;
+      }
+    }
+
+    // Verificar isDateEnabledFn
+    if (isDateEnabledFnValue) {
+      return isDateEnabledFnValue(today);
+    }
+
+    return true;
   });
 
   // Verificar si se puede navegar hacia atr?s (minDate)
