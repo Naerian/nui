@@ -59,6 +59,10 @@
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 1.5rem;
     margin-top: 1.5rem;
+
+    @media (max-width: 767px) {
+      grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    }
   }
 
   .strategy-card {

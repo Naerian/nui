@@ -66,6 +66,10 @@
     align-items: center;
     gap: 1rem;
     margin-bottom: 2rem;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
   }
 
   .layer-badge {
@@ -424,6 +428,11 @@
     border: 1px solid var(--nui-border-subtle);
     border-radius: var(--nui-border-radius-md);
 
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
     .alias-preview {
       min-width: 140px;
       padding: 1.5rem;
@@ -471,6 +480,10 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     gap: 1.5rem;
+
+    @media (max-width: 767px) {
+      grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    }
   }
 
   .component-card {

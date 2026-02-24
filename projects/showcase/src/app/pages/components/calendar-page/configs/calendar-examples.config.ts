@@ -63,15 +63,7 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
     anchor: 'week-numbers',
     examples: [
       {
-        title: 'Week numbers (DAY)',
-        code: `<nui-calendar
-  type="day"
-  [showWeekNumbers]="true"
-></nui-calendar>`,
-        language: 'html',
-      },
-      {
-        title: 'Week numbers (WEEK)',
+        title: 'WEEK',
         code: `<nui-calendar
   type="week"
   [showWeekNumbers]="true"
@@ -79,20 +71,20 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
         language: 'html',
       },
       {
-        title: 'Week numbers (RANGE)',
-        code: `<nui-calendar
-  type="range"
-  [showWeekNumbers]="true"
-></nui-calendar>`,
-        language: 'html',
-      },
-      {
-        title: 'Clickable week numbers (DAY multiple)',
+        title: 'DAY (Multiple)',
         code: `<nui-calendar
   type="day"
   selection="multiple"
   [showWeekNumbers]="true"
   (valueChange)="onWeekNumberClick($event)"
+></nui-calendar>`,
+        language: 'html',
+      },
+      {
+        title: 'DAY (Normal)',
+        code: `<nui-calendar
+  type="day"
+  [showWeekNumbers]="true"
 ></nui-calendar>`,
         language: 'html',
       },

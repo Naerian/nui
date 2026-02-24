@@ -82,7 +82,7 @@ export class ThemeArchitectureComponent {
     },
     {
       title: 'pages.theming.architecture.layer2.borders.title',
-      icon: 'ri-border-outer',
+      icon: 'ri-shape-fill',
       vars: [
         { name: '--nui-border-high', desc: 'pages.theming.architecture.layer2.borders.high' },
         { name: '--nui-border-default', desc: 'pages.theming.architecture.layer2.borders.default' },

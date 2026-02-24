@@ -53,7 +53,7 @@
     gap: 1.5rem;
 
     @media (max-width: 767px) {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
     }
   }
 
@@ -81,7 +81,9 @@
 
     &.active {
       border-color: var(--nui-primary);
-      box-shadow: 0 0 0 3px var(--nui-primary-alpha-30), var(--nui-shadow-elevated);
+      box-shadow:
+        0 0 0 3px var(--nui-primary-alpha-30),
+        var(--nui-shadow-elevated);
       transform: translateY(-2px);
 
       .preset-header .preset-name {

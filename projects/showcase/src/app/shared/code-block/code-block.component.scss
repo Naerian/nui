@@ -16,6 +16,11 @@
     border-bottom: 1px solid var(--nui-border-high);
     flex-wrap: wrap;
 
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
     .code-block-title {
       display: flex;
       align-items: center;
@@ -33,7 +38,12 @@
     .code-block-tabs {
       display: flex;
       gap: 0.25rem;
-      flex: 1;
+      flex-wrap: wrap;
+
+      @media (max-width: 767px) {
+        width: 100%;
+        justify-content: flex-start;
+      }
 
       .tab-button {
         display: flex;
@@ -47,6 +57,10 @@
         font-weight: 500;
         color: var(--nui-on-surface-secondary);
         cursor: pointer;
+
+        @media (max-width: 767px) {
+          width: 100%;
+        }
 
         i {
           font-size: 0.875rem;

@@ -77,6 +77,10 @@
       padding-bottom: 1rem;
       border-bottom: 1px solid var(--nui-border-subtle);
 
+      @media (max-width: 767px) {
+        flex-direction: column;
+      }
+
       .step-number {
         width: 48px;
         height: 48px;

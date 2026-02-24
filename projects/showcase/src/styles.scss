@@ -37,6 +37,26 @@ body {
   scrollbar-color: var(--nui-border-high) var(--nui-surface-secondary);
 }
 
+.example-input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--nui-border-high);
+  border-radius: var(--nui-border-radius-sm);
+  background-color: var(--nui-surface);
+  color: var(--nui-on-surface);
+  font-size: 0.875rem;
+  font-family: inherit;
+  min-width: 250px;
+
+  &:focus {
+    outline: none;
+    border-color: var(--nui-primary);
+  }
+
+  &::placeholder {
+    color: var(--nui-placeholder-text);
+  }
+}
+
 .value-display {
   margin-top: 0.5rem;
   padding: 0.75rem 1rem;
@@ -448,12 +468,12 @@ pre code {
 .home-page {
   .hero-section {
     text-align: center;
-    padding: 2rem 0 3rem;
+    padding: var(--nui-spacing-lg) 0 var(--nui-spacing-xl);
     max-width: 800px;
     margin: 0 auto;
 
     .hero-logo {
-      margin-bottom: 1.5rem;
+      margin-bottom: var(--nui-spacing-xl);
       animation: float 3s ease-in-out infinite;
 
       svg {
@@ -468,112 +488,84 @@ pre code {
     }
 
     .hero-title {
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--nui-on-primary);
-      margin-bottom: 1rem;
+      font-size: var(--nui-font-size-xl);
+      font-weight: var(--nui-font-weight-bold);
+      color: var(--nui-text-primary);
+      margin-bottom: var(--nui-spacing-md);
 
       @media (max-width: 767px) {
-        font-size: 2rem;
+        font-size: var(--nui-font-size-xl);
       }
     }
 
     .hero-subtitle {
-      font-size: 1.5rem;
-      color: var(--nui-on-secondary);
-      margin-bottom: 1rem;
+      font-size: var(--nui-font-size-lg);
+      font-weight: var(--nui-font-weight-semibold);
+      color: var(--nui-text-secondary);
+      margin-bottom: var(--nui-spacing-md);
 
       @media (max-width: 767px) {
-        font-size: 1.25rem;
+        font-size: var(--nui-font-size-lg);
       }
     }
 
     .hero-description {
-      font-size: 1.125rem;
-      color: var(--nui-on-neutral);
-      margin-bottom: 2rem;
+      font-size: var(--nui-font-size-lg);
+      color: var(--nui-text-tertiary);
+      margin-bottom: var(--nui-spacing-lg);
+      line-height: var(--nui-line-height-relaxed);
     }
 
     .hero-actions {
       display: flex;
-      gap: 1rem;
+      gap: var(--nui-spacing-md);
       justify-content: center;
       flex-wrap: wrap;
-    }
 
-    .btn-hero {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.875rem 1.75rem;
-      border-radius: var(--nui-border-radius-md);
-      font-size: 1rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      border: 2px solid transparent;
-
-      i {
-        font-size: 1.25rem;
-      }
-
-      &.btn-primary {
-        background-color: var(--nui-primary);
-        color: #ffffff;
-
-        &:hover {
-          background-color: var(--nui-primary-shade-10);
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px var(--nui-primary-alpha-30);
-        }
-      }
-
-      &.btn-secondary {
-        background-color: transparent;
-        color: var(--nui-primary);
-        border-color: var(--nui-primary);
-
-        &:hover {
-          background-color: var(--nui-primary-alpha-10);
-          transform: translateY(-2px);
+      nui-button {
+        i {
+          font-size: var(--nui-font-size-xl);
         }
       }
     }
   }
 
   .features-section {
-    padding: 3rem 0;
-    margin-top: 2rem;
-    border-top: 1px solid var(--nui-border-high);
+    padding: var(--nui-spacing-xl) 0;
+    margin-top: var(--nui-spacing-lg);
+    border-top: 1px solid var(--nui-border-default);
 
     .feature-card {
       text-align: center;
-      padding: 2rem 1rem;
-      transition: all 0.3s ease;
+      padding: var(--nui-spacing-lg) var(--nui-spacing-md);
+      border-radius: var(--nui-border-radius-lg);
+      transition: all var(--nui-transition-normal);
 
       &:hover {
         transform: translateY(-5px);
+        background: var(--nui-surface-secondary);
+        box-shadow: var(--nui-shadow-md);
       }
 
       .feature-icon {
         font-size: 3rem;
         color: var(--nui-primary);
-        margin-bottom: 1rem;
+        margin-bottom: var(--nui-spacing-md);
         display: flex;
         justify-content: center;
       }
 
       .feature-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--nui-on-primary);
-        margin-bottom: 0.75rem;
+        font-size: var(--nui-font-size-xl);
+        font-weight: var(--nui-font-weight-semibold);
+        color: var(--nui-text-primary);
+        margin-bottom: var(--nui-spacing-sm);
       }
 
       .feature-description {
-        font-size: 1rem;
-        color: var(--nui-on-secondary);
-        line-height: 1.6;
+        font-size: var(--nui-font-size-base);
+        color: var(--nui-text-secondary);
+        line-height: var(--nui-line-height-relaxed);
       }
     }
   }

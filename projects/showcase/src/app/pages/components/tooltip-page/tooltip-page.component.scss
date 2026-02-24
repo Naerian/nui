@@ -1,26 +1,6 @@
 ﻿// Common styles are defined globally in src/styles.scss
 // Only component-specific styles are kept here
 
-.example-input {
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--nui-border-primary);
-  border-radius: var(--nui-border-radius-sm);
-  background-color: var(--nui-bg-primary);
-  color: var(--nui-text-primary);
-  font-size: 0.875rem;
-  font-family: inherit;
-  min-width: 250px;
-
-  &:focus {
-    outline: none;
-    border-color: var(--nui-color-primary);
-  }
-
-  &::placeholder {
-    color: var(--nui-text-neutral);
-  }
-}
-
 .custom-tooltip {
   padding: 0.5rem;
 

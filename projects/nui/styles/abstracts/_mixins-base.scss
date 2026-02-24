@@ -7,7 +7,7 @@
 
 /// Applies size properties to components
 @mixin nui-component-size($size) {
-  height: var(--nui-height-#{$size}, #{map.get(config.$heights, $size)});
+  min-height: var(--nui-height-#{$size}, #{map.get(config.$heights, $size)});
   padding: var(--nui-padding-#{$size}, #{map.get(config.$paddings, $size)});
   font-size: var(--nui-font-size-#{$size}, #{map.get(config.$font-sizes, $size)});
   line-height: var(--nui-line-height-md); // Fixed line-height for all component sizes

@@ -196,29 +196,25 @@
               }
 
               @case ('selected') {
-                <div class="example-preview" style="display: flex; gap: 1rem; flex-wrap: wrap">
-                  <div>
-                    <p style="margin-bottom: 0.5rem; font-weight: 500">
-                      Selection Mode (with selected items):
-                    </p>
+                <div class="example-preview">
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <p class="mb-0">Selection Mode (with selected items):</p>
                     <nui-action-menu
                       icon="ri-global-line"
                       label="Language"
                       [items]="menuWithSelected"
                       (onSelectionChange)="handleSelectionChange($event)"
                     ></nui-action-menu>
-                  </div>
 
-                  <div>
-                    <p style="margin-bottom: 0.5rem; font-weight: 500">
-                      Action Mode (no selection):
-                    </p>
-                    <nui-action-menu
-                      icon="ri-more-2-line"
-                      label="Options"
-                      [items]="menuActionOnly"
-                      (onItemAction)="handleAction($event)"
-                    ></nui-action-menu>
+                    <div class="example-item d-flex flex-column align-items-center gap-3">
+                      <p class="mb-0">Action Mode (no selection):</p>
+                      <nui-action-menu
+                        icon="ri-more-2-line"
+                        label="Options"
+                        [items]="menuActionOnly"
+                        (onItemAction)="handleAction($event)"
+                      ></nui-action-menu>
+                    </div>
                   </div>
                 </div>
               }
