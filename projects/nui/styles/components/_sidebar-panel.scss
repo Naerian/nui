@@ -80,7 +80,6 @@
 
   // FOOTER (Fixed at bottom)
   .nui-sidebar-panel-footer {
-    padding: var(--nui-sidebar-panel-header-padding); // Using same padding as header
     padding: var(--nui-sidebar-panel-header-padding);
     padding-bottom: calc(
       var(--nui-sidebar-panel-header-padding) + env(safe-area-inset-bottom)
@@ -115,6 +114,9 @@
     overflow: hidden;
     z-index: var(--nui-sidebar-panel-z-index) !important;
     height: 100vh; // Always full height
+    height: 100dvh; // Dynamic viewport height (considers mobile browser bars)
+    max-height: 100vh; // Fallback for browsers without dvh support
+    max-height: 100dvh;
     background-color: var(--nui-sidebar-panel-bg);
     box-shadow: var(--nui-sidebar-panel-shadow);
     color: var(--nui-sidebar-panel-text);

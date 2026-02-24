@@ -82,13 +82,15 @@
       gap: 0.75rem;
       padding: 1rem 1.25rem;
       background: var(--nui-surface-secondary);
+      color: var(--nui-on-surface-secondary);
       border: 1px solid var(--nui-border-subtle);
       border-radius: var(--nui-border-radius-md);
       transition: all 0.2s ease;
 
       &:hover {
         border-color: var(--nui-border-default);
-        background: var(--nui-surface);
+        background: var(--nui-surface-neutral);
+        color: var(--nui-on-surface-neutral);
       }
 
       i {
@@ -132,7 +134,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.5rem 0;
+      padding: 0;
       font-size: 1rem;
       color: var(--nui-text-primary);
       line-height: 1.5;
