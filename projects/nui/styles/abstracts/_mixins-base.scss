@@ -6,9 +6,32 @@
 // ========================================
 
 /// Applies size properties to components
-@mixin nui-component-size($size) {
+@mixin nui-control-size($size, $withBorderRadius: true, $type: 'default') {
   min-height: var(--nui-height-#{$size}, #{map.get(config.$heights, $size)});
-  padding: var(--nui-padding-#{$size}, #{map.get(config.$paddings, $size)});
+  padding: if($type == 'input', var(--nui-padding-input-#{$size}), var(--nui-padding-#{$size}));
   font-size: var(--nui-font-size-#{$size}, #{map.get(config.$font-sizes, $size)});
-  line-height: var(--nui-line-height-md); // Fixed line-height for all component sizes
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--nui-spacing-xs);
+
+  @if $withBorderRadius {
+    border-radius: var(--nui-border-radius-#{$size}, #{map.get(config.$border-radius, $size)});
+  }
+
+  // Responsive adjustments for mobile
+  @media (max-width: config.$breakpoint-md) {
+    padding: map.get(config.$paddings-mobile, $size);
+
+    @if $size == 'xl' {
+      font-size: var(--nui-font-size-lg);
+    }
+  }
+
+  @if $type == 'input' {
+    @media (max-width: config.$breakpoint-mobile) {
+      font-size: 16px; // Avoid auto-zoom on iOS devices for input fields
+    }
+  }
 }

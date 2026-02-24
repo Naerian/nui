@@ -74,6 +74,7 @@ export interface SidebarPanelEventExampleResult {
             <nui-button
               [color]="'primary'"
               [icon]="'ri-pencil-line'"
+              [size]="'sm'"
               [iconPosition]="'start'"
               (click)="emitDataChanged()"
             >
@@ -84,6 +85,7 @@ export interface SidebarPanelEventExampleResult {
               [color]="'secondary'"
               [icon]="'ri-checkbox-circle-line'"
               [iconPosition]="'start'"
+              [size]="'sm'"
               (click)="emitStatusChanged()"
             >
               Emitir statusChanged
@@ -93,6 +95,7 @@ export interface SidebarPanelEventExampleResult {
               [color]="'accent'"
               [icon]="'ri-notification-line'"
               [iconPosition]="'start'"
+              [size]="'sm'"
               (click)="emitCustomEvent()"
             >
               Emitir customEvent
@@ -107,6 +110,7 @@ export interface SidebarPanelEventExampleResult {
               [color]="'success'"
               [icon]="'ri-save-line'"
               [iconPosition]="'start'"
+              [size]="'sm'"
               (click)="closeWithSave()"
             >
               Guardar y Cerrar
@@ -116,6 +120,7 @@ export interface SidebarPanelEventExampleResult {
               [color]="'danger'"
               [icon]="'ri-delete-bin-line'"
               [iconPosition]="'start'"
+              [size]="'sm'"
               (click)="closeWithDelete()"
             >
               Eliminar y Cerrar
@@ -125,6 +130,7 @@ export interface SidebarPanelEventExampleResult {
               [variant]="'outline'"
               [icon]="'ri-close-line'"
               [iconPosition]="'start'"
+              [size]="'sm'"
               (click)="closeWithCancel()"
             >
               Cancelar

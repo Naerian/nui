@@ -1,4 +1,5 @@
 @use '../../../../styles/variables/paginator-vars';
+@use '../../../../styles/abstracts/mixins-base' as mixins;
 
 /**
  * Sistema "Shapeshifter" para Paginator
@@ -445,10 +446,7 @@
   @each $size in $sizes {
     &--#{$size} {
       .nui-paginator__button {
-        min-width: var(--nui-pg-button-size-#{$size});
-        height: var(--nui-pg-button-size-#{$size});
-        font-size: var(--nui-font-size-#{$size});
-        border-radius: var(--nui-button-radius-#{$size});
+        @include mixins.nui-control-size($size, true);
 
         i {
           font-size: var(--nui-pg-icon-size-#{$size});

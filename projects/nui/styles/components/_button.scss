@@ -74,8 +74,7 @@
     $sizes: xs, s, sm, md, lg, xl;
     @each $size in $sizes {
       &.nui-btn--#{$size} {
-        @include base.nui-component-size($size);
-        border-radius: var(--nui-button-radius-#{$size});
+        @include base.nui-control-size($size, true);
 
         i {
           font-size: var(--nui-font-size-#{$size});

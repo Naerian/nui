@@ -90,7 +90,7 @@
   --nui-spacing-lg: #{config.$padding-lg};
   --nui-spacing-xl: #{config.$padding-xl};
 
-  @media (max-width: 768px) {
+  @media (max-width: config.$breakpoint-md) {
     --nui-spacing-xs: #{config.$padding-mobile-xs};
     --nui-spacing-sm: #{config.$padding-mobile-sm};
     --nui-spacing-md: #{config.$padding-mobile-md};
@@ -126,7 +126,7 @@
   --nui-padding-lg: #{map.get(config.$paddings, lg)};
   --nui-padding-xl: #{map.get(config.$paddings, xl)};
 
-  @media (max-width: 768px) {
+  @media (max-width: config.$breakpoint-md) {
     --nui-height-xs: #{map.get(config.$heights-mobile, xs)};
     --nui-height-sm: #{map.get(config.$heights-mobile, sm)};
     --nui-height-md: #{map.get(config.$heights-mobile, md)};

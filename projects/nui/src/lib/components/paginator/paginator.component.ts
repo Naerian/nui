@@ -38,7 +38,6 @@ import {
   PaginatorState,
   PaginatorElement,
   PaginatorLayout,
-  PLayoutAlign,
   PaginatorLayoutArea,
   PLayoutDirection,
   PaginatorMode,
