@@ -32,8 +32,8 @@ interface UserFormData {
         <p>Complete el formulario para {{ data.id ? 'editar' : 'crear' }} el usuario</p>
       </div>
 
-      @if (userForm()) {
-        <form [formGroup]="userForm()!" class="user-form">
+      @if (form) {
+        <form [formGroup]="form" class="user-form">
           <div class="form-group">
             <label for="name">Nombre *</label>
             <input
@@ -43,7 +43,7 @@ interface UserFormData {
               placeholder="Ingrese el nombre"
               class="form-control"
             />
-            @if (userForm()?.get('name')?.invalid && userForm()?.get('name')?.touched) {
+            @if (form.get('name')?.invalid && form.get('name')?.touched) {
               <span class="error-message">El nombre es requerido</span>
             }
           </div>
@@ -57,24 +57,15 @@ interface UserFormData {
               placeholder="correo@ejemplo.com"
               class="form-control"
             />
-            @if (userForm()?.get('email')?.invalid && userForm()?.get('email')?.touched) {
+            @if (form.get('email')?.invalid && form.get('email')?.touched) {
               <span class="error-message">
                 {{
-                  userForm()?.get('email')?.hasError('required')
+                  form.get('email')?.hasError('required')
                     ? 'El email es requerido'
                     : 'Email inválido'
                 }}
               </span>
             }
-          </div>
-
-          <div class="form-group">
-            <label for="role">Rol</label>
-            <select id="role" formControlName="role" class="form-control">
-              <option value="user">Usuario</option>
-              <option value="admin">Administrador</option>
-              <option value="moderator">Moderador</option>
-            </select>
           </div>
 
           <div class="form-info">
@@ -277,47 +268,40 @@ export class UserFormExampleComponent implements OnInit {
   private readonly actionsService = inject(SidebarPanelActionsService);
   private readonly fb = inject(FormBuilder);
 
-  userForm = signal<FormGroup | null>(null);
   isLoading = signal(false);
   saveStatus = signal<'success' | 'error' | null>(null);
 
-  // Creamos signals que sigan los cambios del formulario
-  // Usamos startWith para tener un valor inicial
-  private formStatus = computed(() => {
-    const form = this.userForm();
-    if (!form) return 'INVALID';
-    return toSignal(form.statusChanges, { initialValue: form.status })();
+  protected form = this.fb.group({
+    name: [this.data.name || '', Validators.required],
+    email: [this.data.email || '', [Validators.required, Validators.email]],
+    role: [this.data.role || 'user'],
   });
 
-  private formDirty = computed(() => {
-    const form = this.userForm();
-    if (!form) return false;
-    return toSignal(form.valueChanges.pipe(map(() => form.pristine)), { initialValue: true })();
+  // Creamos signals que sigan los cambios del formulario
+  // Usamos startWith para tener un valor inicial
+  private isInvalid = toSignal(this.form.statusChanges.pipe(map(status => status === 'INVALID')), {
+    initialValue: this.form.invalid,
+  });
+
+  private isDirty = toSignal(this.form.valueChanges.pipe(map(() => this.form.dirty)), {
+    initialValue: this.form.dirty,
   });
 
   constructor() {
     effect(() => {
-      const form = this.userForm();
       const loading = this.isLoading();
-
-      // Accedemos a las signals calculadas.
-      // Al ser signals, el effect se ejecutará cada vez que cambien.
-      const isInvalid = this.formStatus() === 'INVALID';
-      const isPristine = this.formDirty();
-
-      if (!form) return;
+      const invalid = this.isInvalid(); // Solo leemos el valor
+      const dirty = this.isDirty(); // Solo leemos el valor
 
       untracked(() => {
-        // Usamos untracked para evitar que el service registre dependencias innecesarias
-        // Cancelar: deshabilitar mientras carga
         this.actionsService.update(0, { disabled: loading });
 
-        // Resetear: deshabilitar si no hay cambios o está cargando
-        this.actionsService.update(1, { disabled: isPristine || loading });
+        // Resetear: deshabilitado si NO está sucio o si está cargando
+        this.actionsService.update(1, { disabled: !dirty || loading });
 
-        // Guardar: deshabilitar si es inválido o está cargando
+        // Guardar: deshabilitado si es inválido o está cargando
         this.actionsService.update(2, {
-          disabled: isInvalid || loading,
+          disabled: invalid || loading,
           loading: loading,
         });
       });
@@ -325,13 +309,6 @@ export class UserFormExampleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Inicializar formulario con datos existentes o vacío
-    const form = this.fb.group({
-      name: [this.data.name || '', Validators.required],
-      email: [this.data.email || '', [Validators.required, Validators.email]],
-      role: [this.data.role || 'user'],
-    });
-    this.userForm.set(form);
 
     // Registrar acciones del footer con estados iniciales correctos
     this.actionsService.register([
@@ -348,7 +325,7 @@ export class UserFormExampleComponent implements OnInit {
         color: 'secondary',
         icon: 'ri-restart-line',
         handler: () => this.reset(),
-        disabled: form.pristine,
+        disabled: this.form.pristine,
       },
       {
         label: this.data.id ? 'Actualizar' : 'Guardar',
@@ -356,20 +333,14 @@ export class UserFormExampleComponent implements OnInit {
         color: 'primary',
         icon: 'ri-save-line',
         handler: () => this.save(),
-        disabled: form.invalid,
+        disabled: this.form.invalid,
         loading: false,
       },
     ]);
-
-    this.userForm()?.valueChanges.subscribe(() => {
-      const form = this.userForm()!;
-      this.actionsService.update(1, { disabled: form.pristine || this.isLoading() });
-      this.actionsService.update(2, { disabled: form.invalid || this.isLoading() });
-    });
   }
 
   async save(): Promise<void> {
-    const form = this.userForm();
+    const form = this.form;
     if (!form || form.invalid) {
       // Marcar todos los campos como tocados para mostrar errores
       form?.markAllAsTouched();
@@ -403,7 +374,7 @@ export class UserFormExampleComponent implements OnInit {
   }
 
   reset(): void {
-    const form = this.userForm();
+    const form = this.form;
     form?.reset({
       name: this.data.name || '',
       email: this.data.email || '',
@@ -413,7 +384,7 @@ export class UserFormExampleComponent implements OnInit {
   }
 
   cancel(): void {
-    const form = this.userForm();
+    const form = this.form;
     // Verificar si hay cambios sin guardar
     if (form?.dirty) {
       const confirmed = confirm('¿Descartar cambios sin guardar?');

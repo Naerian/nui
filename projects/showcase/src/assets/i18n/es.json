@@ -1315,7 +1315,7 @@
         "child-footer-actions": {
           "title": "Acciones desde componente hijo",
           "description": "El componente hijo puede registrar sus propias acciones de footer usando SidebarPanelActionsService.",
-          "note": "Esta aproximación es ideal para formularios donde el hijo maneja toda la lógica (validación, guardado, estados). El componente hijo inyecta <code>SidebarPanelActionsService</code> y registra las acciones mediante <code>register()</code>. Las acciones pueden tener estados reactivos (disabled, loading) y ejecutar lógica compleja. Al momento de usar <code>SidebarPanelActionsService</code> se inyecta como provider para afectar solo a ese panel."
+          "note": "Esta aproximación es ideal para formularios donde el hijo maneja toda la lógica (validación, guardado, estados). El componente hijo inyecta <code>SidebarPanelActionsService</code> y registra las acciones mediante <code>register()</code>. Las acciones pueden tener estados reactivos (disabled, loading) y ejecutar lógica compleja."
         }
       },
       "api": {
