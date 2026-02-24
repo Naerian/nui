@@ -64,6 +64,46 @@ export const BUTTON_EXAMPLES_SECTIONS: ComponentSection[] = [
     ],
   },
   {
+    id: 'shapes',
+    title: 'components.button.shapes.title',
+    description: 'components.button.shapes.description',
+    anchor: 'shapes',
+    note: {
+      type: 'info',
+      content: 'components.button.shapes.note',
+    },
+    examples: [
+      {
+        title: 'codeExamples.html',
+        code: `<nui-button shape="rounded">Rounded</nui-button>
+<nui-button shape="square">Square</nui-button>
+<nui-button shape="pill">Pill</nui-button>`,
+        language: 'html',
+      },
+    ],
+  },
+  {
+    id: 'raised',
+    title: 'components.button.raised.title',
+    description: 'components.button.raised.description',
+    anchor: 'raised',
+    note: {
+      type: 'info',
+      content: 'components.button.raised.note',
+    },
+    examples: [
+      {
+        title: 'codeExamples.html',
+        code: `<nui-button raised>Raised Button</nui-button>
+<nui-button raised color="primary">Raised Primary</nui-button>
+<nui-button raised variant="outline" color="secondary">Raised Outline</nui-button>
+<nui-button raised variant="ghost" color="accent">Raised Ghost</nui-button>
+<button nuiButton [raised]="true" color="success">Raised Directive</button>`,
+        language: 'html',
+      },
+    ],
+  },
+  {
     id: 'sizes',
     title: 'components.button.sizes.title',
     description: 'components.button.sizes.description',

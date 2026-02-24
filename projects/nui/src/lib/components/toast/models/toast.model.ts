@@ -1,5 +1,5 @@
 import { TemplateRef } from '@angular/core';
-import { NUIColor, NUISize, NUIVariant } from '../../../configs';
+import { NUIColor, NUIShape, NUISize, NUIVariant } from '../../../configs';
 
 export const TOAST_LOADING_CLASS = 'nui-toast--loading';
 
@@ -306,6 +306,11 @@ export interface ToastConfig {
    * Variante de los botones de acción
    */
   buttonsVariant?: NUIVariant;
+
+  /**
+   * Forma de los botones de acción
+   */
+  buttonsShape?: NUIShape;
 }
 
 /**
@@ -411,11 +416,7 @@ export interface ToastGlobalConfig {
    * Comportamiento cuando se alcanza maxToasts
    * @default 'queue'
    */
-  stackingBehavior:
-    | 'queue'
-    | 'replace-oldest'
-    | 'replace-lowest-priority'
-    | 'ignore';
+  stackingBehavior: 'queue' | 'replace-oldest' | 'replace-lowest-priority' | 'ignore';
 
   /**
    * Dirección del stack (nuevos arriba o abajo)
@@ -519,7 +520,13 @@ export interface ToastGlobalConfig {
    * Variante de los botones de acción
    * @default 'ghost'
    */
-  buttonsVariant?: 'solid' | 'outline' | 'ghost' | 'link';
+  buttonsVariant?: NUIVariant | 'link';
+
+  /**
+   * Forma de los botones de acción
+   * @default 'rounded'
+   */
+  buttonsShape?: NUIShape;
 }
 
 /**

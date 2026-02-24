@@ -26,7 +26,9 @@ import { ButtonModule } from '@shared/components/button';
 | `color` | `NUIColor` | `'primary'` | Color del botón |
 | `size` | `NUISize` | `'md'` | Tamaño del botón (`'xs' \| 's' \| 'md' \| 'lg' \| 'xl'`) |
 | `variant` | `NUIVariant` | `'solid'` | Variante visual del botón (`'solid' \| 'outline' \| 'ghost'`) |
+| `shape` | `NUIShape` | `'rounded'` | Forma del botón (`'rounded' \| 'square' \| 'pill'`) |
 | `width` | `ButtonWidth` | `'auto'` | Ancho del botón (`'auto' \| 'fit' \| 'full'`) |
+| `raised` | `boolean` | `false` | Elevación con sombra para el botón |
 | `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Tipo HTML del botón |
 | `disabled` | `boolean` | `false` | Deshabilitar el botón |
 | `loading` | `boolean` | `false` | Mostrar estado de carga |
@@ -44,6 +46,7 @@ import { ButtonModule } from '@shared/components/button';
 
 ```typescript
 type NUIVariant = 'solid' | 'outline' | 'ghost';
+type NUIShape = 'rounded' | 'pill' | 'square';
 type ButtonWidth = 'auto' | 'fit' | 'full';
 type NUIColor = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'accent';
 type NUISize = 'xs' | 's' | 'md' | 'lg' | 'xl';

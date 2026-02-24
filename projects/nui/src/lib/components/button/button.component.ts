@@ -25,6 +25,8 @@ import {
   DEFAULT_COLOR,
   DEFAULT_SIZE,
   DEFAULT_VARIANT,
+  NUIShape,
+  DEFAULT_SHAPE,
 } from '../../configs';
 
 @Component({
@@ -59,6 +61,12 @@ export class ButtonComponent implements AfterContentInit {
 
   /** Variante visual (solid, outline, ghost). */
   readonly variant = input<NUIVariant>();
+
+  /** Forma del botón (rounded, square, pill). */
+  readonly shape = input<NUIShape>();
+
+  /** Si el botón tiene estilo "elevado" (sombra). */
+  readonly raised = input(false, { alias: 'raised', transform: booleanAttribute });
 
   /** Texto del botón (alternativa a ng-content). */
   readonly label = input<string>();
@@ -113,6 +121,10 @@ export class ButtonComponent implements AfterContentInit {
 
   readonly effectiveVariant = computed(
     () => this.variant() ?? this.globalConfig?.defaultVariant ?? DEFAULT_VARIANT
+  );
+
+  readonly effectiveShape = computed(
+    () => this.shape() ?? this.globalConfig?.defaultShape ?? DEFAULT_SHAPE
   );
 
   // ========================================================================

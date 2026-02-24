@@ -28,6 +28,7 @@ import {
   NUISize,
   DEFAULT_SIZE,
   NUIVariant,
+  NUIShape,
 } from '../../configs';
 
 @Directive({
@@ -60,6 +61,8 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
   }
 
   @Input() variant: NUIVariant = 'solid';
+  @Input() shape: NUIShape = 'rounded';
+  @Input() raised = false;
   @Input() disabled = false;
   @Input() loading = false;
   @Input() loadingPosition: ButtonLoadingPosition = 'center';
@@ -103,6 +106,8 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
       changes['color'] ||
       changes['size'] ||
       changes['variant'] ||
+      changes['shape'] ||
+      changes['raised'] ||
       changes['disabled'] ||
       changes['loading']
     ) {
@@ -362,6 +367,18 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
     // Variantes
     if (this.variant !== 'solid') {
       this.renderer.addClass(el, `nui-btn--${this.variant}`);
+    }
+
+    // Formas
+    if (this.shape !== 'rounded') {
+      this.renderer.addClass(el, `nui-btn--${this.shape}`);
+    }
+
+    // Raised
+    if (this.raised) {
+      this.renderer.addClass(el, 'nui-btn--raised');
+    } else {
+      this.renderer.removeClass(el, 'nui-btn--raised');
     }
 
     // Estados

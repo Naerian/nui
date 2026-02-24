@@ -17,7 +17,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ToastRef } from './toast-ref';
 import { ToastAction } from './models/toast.model';
 import { TOAST_ANIMATIONS } from './animations/toast.animations';
-import { NUIColor, NUIVariant } from '../../configs';
+import { NUIColor, NUIShape, NUIVariant } from '../../configs';
 import { NUI_TRANSLATIONS } from '../../translations/translations.token';
 import { ButtonDirective } from '../button/button.directive';
 
@@ -217,6 +217,11 @@ export class ToastComponent implements OnInit, OnDestroy {
     const config = this.config();
     const variant = config.buttonsVariant || 'ghost';
     return (variant as NUIVariant);
+  });
+
+  protected readonly buttonShape = computed((): NUIShape => {
+    const config = this.config();
+    return config.buttonsShape || 'rounded';
   });
 
   // Swipe handling

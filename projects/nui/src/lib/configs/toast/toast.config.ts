@@ -59,5 +59,6 @@ export function createDefaultToastConfig(): ToastGlobalConfig {
     // ===== BOTONES DE ACCIÓN =====
     buttonsSize: 'sm',
     buttonsVariant: 'ghost',
+    buttonsShape: 'rounded',
   };
 }

@@ -4,18 +4,18 @@
 
 @mixin button-theme($color, $variant: 'solid') {
   // Dynamic CSS variables based on color and variant
-  --button-bg: var(--nui-btn-#{$color}-#{$variant}-bg);
-  --button-text: var(--nui-btn-#{$color}-#{$variant}-text);
-  --button-border: var(--nui-btn-#{$color}-#{$variant}-border);
+  --nui-button-bg: var(--nui-btn-#{$color}-#{$variant}-bg);
+  --nui-button-text: var(--nui-btn-#{$color}-#{$variant}-text);
+  --nui-button-border: var(--nui-btn-#{$color}-#{$variant}-border);
 
   // Hover
-  --button-hover-bg: var(--nui-btn-#{$color}-#{$variant}-hover-bg);
-  --button-hover-text: var(--nui-btn-#{$color}-#{$variant}-hover-text);
-  --button-hover-border: var(--nui-btn-#{$color}-#{$variant}-hover-border);
+  --nui-button-hover-bg: var(--nui-btn-#{$color}-#{$variant}-hover-bg);
+  --nui-button-hover-text: var(--nui-btn-#{$color}-#{$variant}-hover-text);
+  --nui-button-hover-border: var(--nui-btn-#{$color}-#{$variant}-hover-border);
 
   // Active
-  --button-active-bg: var(--nui-btn-#{$color}-#{$variant}-active-bg);
-  --button-active-border: var(--nui-btn-#{$color}-#{$variant}-active-border);
+  --nui-button-active-bg: var(--nui-btn-#{$color}-#{$variant}-active-bg);
+  --nui-button-active-border: var(--nui-btn-#{$color}-#{$variant}-active-border);
 }
 
 @mixin nui-button-styles {
@@ -36,11 +36,11 @@
     $colors: primary, secondary, success, info, warning, danger, accent, neutral;
     $variants: solid, outline, ghost;
 
+    @include button-theme(primary, solid); // Default theme
+
     @each $color in $colors {
       &--#{$color} {
-        // By default, apply the solid variant styles for the color preset
-        @include button-theme($color, 'solid');
-
+        // Generate classes for each variant
         @each $variant in $variants {
           &.nui-btn--#{$variant} {
             @include button-theme($color, $variant);
@@ -49,19 +49,19 @@
       }
     }
 
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border-color: var(--button-border);
+    background-color: var(--nui-button-bg);
+    color: var(--nui-button-text);
+    border-color: var(--nui-button-border);
 
     &:hover:not(:disabled) {
-      background-color: var(--button-hover-bg);
-      color: var(--button-hover-text);
-      border-color: var(--button-hover-border);
+      background-color: var(--nui-button-hover-bg);
+      color: var(--nui-button-hover-text);
+      border-color: var(--nui-button-hover-border);
     }
 
     &:active:not(:disabled) {
-      background-color: var(--button-active-bg);
-      border-color: var(--button-active-border);
+      background-color: var(--nui-button-active-bg);
+      border-color: var(--nui-button-active-border);
     }
 
     @include global.focus-ring;
@@ -82,19 +82,40 @@
       }
     }
 
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border-color: var(--button-border);
+    // Generate classes for each shape
+    $shapes: square, pill; // Rounded is the default, so it doesn't need a class
+    @each $shape in $shapes {
+      &.nui-btn--#{$shape} {
+        border-radius: var(--nui-border-radius-#{$shape});
+      }
+    }
+
+    background-color: var(--nui-button-bg);
+    color: var(--nui-button-text);
+    border-color: var(--nui-button-border);
+
+    &.nui-btn--raised {
+      box-shadow: var(--nui-shadow-interactive-rest) !important;
+      transition: box-shadow 0.15s ease-in-out;
+
+      &:hover:not(:disabled) {
+        box-shadow: var(--nui-shadow-interactive-hover) !important;
+      }
+
+      &:active:not(:disabled) {
+        box-shadow: var(--nui-shadow-interactive-active) !important;
+      }
+    }
 
     &:hover:not(:disabled) {
-      background-color: var(--button-hover-bg);
-      color: var(--button-hover-text);
-      border-color: var(--button-hover-border);
+      background-color: var(--nui-button-hover-bg);
+      color: var(--nui-button-hover-text);
+      border-color: var(--nui-button-hover-border);
     }
 
     &:active:not(:disabled) {
-      background-color: var(--button-active-bg);
-      border-color: var(--button-active-border);
+      background-color: var(--nui-button-active-bg);
+      border-color: var(--nui-button-active-border);
     }
 
     &--full {

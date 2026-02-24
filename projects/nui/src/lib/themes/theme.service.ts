@@ -550,62 +550,49 @@ export class ThemeService {
   private generateShadowVariables(): string {
     const isDark = this._isDarkMode();
 
-    // Base color of the shadow (RGB)
-    const shadowColor = '0, 0, 0';
+    // 1. Shadow Color: Lo mantenemos negro para realismo físico,
+    // pero lo dejamos preparado para presets (ej: un dark mode azulado)
+    const shadowBase = '0, 0, 0';
 
-    // Opacities: In dark mode we need much more opacity for it to be visible
-    const o = isDark
-      ? { xs: 0, sm: 0.3, md: 0.4, lg: 0.5, xl: 0.6, hover: 0.25 } // Dark
-      : { xs: 0, sm: 0.05, md: 0.1, lg: 0.15, xl: 0.25, hover: 0.1 }; // Light
+    // 2. Ring: Vital para la separación en Dark Mode
+    const ring = isDark ? '0 0 0 1px rgba(255, 255, 255, 0.1), ' : '';
 
-    // In dark mode, we add a 1px white border at 5% opacity.
-    // This defines the component's border when the black shadow is lost against the black background.
-    const ring = isDark ? '0 0 0 1px rgba(255, 255, 255, 0.05), ' : '';
+    // 3. RAISED INTERACTIVE (Específicas para el botón "Raised")
+    // Rest: Ya tiene cuerpo. Offset de 2px y blur de 4px para que se despegue del suelo.
+    const interactiveRest = isDark
+      ? `${ring}0 4px 6px -1px rgba(${shadowBase}, 0.7), 0 2px 4px -2px rgba(${shadowBase}, 0.5)`
+      : `0 2px 4px 0 rgba(${shadowBase}, 0.14), 0 1px 10px 0 rgba(${shadowBase}, 0.12)`;
 
-    // We build the shadows: [Optional Ring] + [Main Shadow]
-    // XS: Only for inputs (field), very subtle
-    const shadowXs = isDark
-      ? '0 0 0 1px rgba(255, 255, 255, 0.1)' // En dark, un borde sutil
-      : '0 1px 2px 0 rgba(0, 0, 0, 0.05)';
+    // Hover: Elevación máxima (Tailwind shadow-lg/xl style)
+    const interactiveHover = isDark
+      ? `${ring}0 12px 20px -5px rgba(${shadowBase}, 0.8), 0 8px 10px -6px rgba(${shadowBase}, 0.7)`
+      : `0 10px 15px -3px rgba(${shadowBase}, 0.16), 0 4px 6px -2px rgba(${shadowBase}, 0.1)`;
 
-    const shadowSm = `${ring}0 1px 2px 0 rgba(${shadowColor}, ${o.sm})`;
-    const shadowMd = `${ring}0 4px 6px -1px rgba(${shadowColor}, ${o.md}), 0 2px 4px -1px rgba(${shadowColor}, 0.06)`;
-    const shadowLg = `${ring}0 10px 15px -3px rgba(${shadowColor}, ${o.lg}), 0 4px 6px -2px rgba(${shadowColor}, 0.05)`;
-    const shadowXl = `${ring}0 20px 25px -5px rgba(${shadowColor}, ${o.xl}), 0 10px 10px -5px rgba(${shadowColor}, 0.04)`;
-
-    // Specific shadow for button hover (Medium elevation)
-    const shadowBtnHover = `${ring}0 4px 12px 0 rgba(${shadowColor}, ${o.hover})`;
+    // Active: El botón toca el suelo
+    const interactiveActive = isDark
+      ? `${ring}0 1px 2px 0 rgba(${shadowBase}, 0.5)`
+      : `0 1px 2px 0 rgba(${shadowBase}, 0.1)`;
 
     return `
     /* === SHADOW PRIMITIVES === */
-    --nui-box-shadow-xs: ${shadowXs};
-    --nui-box-shadow-sm: ${shadowSm};
-    --nui-box-shadow-md: ${shadowMd};
-    --nui-box-shadow-lg: ${shadowLg};
-    --nui-box-shadow-xl: ${shadowXl};
+    --nui-box-shadow-xs: ${isDark ? '0 0 0 1px rgba(255,255,255,0.1)' : '0 1px 2px 0 rgba(0,0,0,0.05)'};
+    --nui-box-shadow-sm: ${ring}0 1px 3px 0 rgba(${shadowBase}, ${isDark ? 0.4 : 0.1});
+    --nui-box-shadow-md: ${ring}0 4px 6px -1px rgba(${shadowBase}, ${isDark ? 0.5 : 0.1});
+    --nui-box-shadow-lg: ${ring}0 10px 15px -3px rgba(${shadowBase}, ${isDark ? 0.6 : 0.15});
+
+    /* === INTERACTIVE RAISING SYSTEM === */
+    --nui-shadow-interactive-rest: ${interactiveRest};
+    --nui-shadow-interactive-hover: ${interactiveHover};
+    --nui-shadow-interactive-active: ${interactiveActive};
 
     /* === SEMANTIC ALIASES === */
-
-    /* We map use cases to primitives */
     --nui-shadow-none: none;
-    
-    /* Containers (Cards, Side Panels) */
     --nui-shadow-container: var(--nui-box-shadow-sm);
-    
-    /* Floating Elements (Popovers, Dropdowns, Menus, Modals) */
     --nui-shadow-elevated: var(--nui-box-shadow-lg);
-    
-    /* Interactive Elements (Buttons, Clickable Chips) */
-    --nui-shadow-interactive: var(--nui-box-shadow-sm);
-    
-    /* Form Fields (Inputs, Selects) */
     --nui-shadow-field: var(--nui-box-shadow-xs);
-
-    /* Shadow base (RGB para poder usarlo en rgba() de SCSS) */
-    --nui-shadow-base-rgb: ${isDark ? '0, 0, 0' : '0, 0, 0'}; 
-
-    /* Multiplicador para hacer las sombras más densas en Dark Mode si se desea */
-    --nui-shadow-opacity-scale: ${isDark ? '2.5' : '1'};
+    
+    /* El alias que usará el componente Raised Button */
+    --nui-shadow-interactive: var(--nui-shadow-interactive-rest);
   `;
   }
 

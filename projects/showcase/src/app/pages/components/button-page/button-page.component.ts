@@ -36,6 +36,8 @@ export class ButtonPageComponent extends BaseComponentPage {
       sections: [
         'basic',
         'variants-colors',
+        'shapes',
+        'raised',
         'sizes',
         'icons',
         'loading',

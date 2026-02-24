@@ -24,6 +24,13 @@ export const BUTTON_API_SECTIONS: ComponentSection[] = [
           '<code class="neutral">solid</code>',
           'Button visual variant',
         ],
+        ['<code>shape</code>', 'NUIShape', '<code class="neutral">rounded</code>', 'Button shape'],
+        [
+          '<code>raised</code>',
+          'boolean',
+          '<code class="neutral">false</code>',
+          'Applies elevated style with shadow',
+        ],
         [
           '<code>color</code>',
           'NUIColor',

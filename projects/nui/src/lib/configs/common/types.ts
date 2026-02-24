@@ -14,6 +14,15 @@ export const NUI_VARIANTS = ['solid', 'outline', 'ghost'] as const;
 export type NUIVariant = (typeof NUI_VARIANTS)[number];
 
 /**
+ * Formas disponibles para los componentes
+ * - 'rounded': Bordes redondeados (default)
+ * - 'square': Bordes cuadrados
+ * - 'pill': Bordes completamente redondeados
+ */
+export const NUI_SHAPES = ['rounded', 'square', 'pill'] as const;
+export type NUIShape = (typeof NUI_SHAPES)[number];
+
+/**
  * Colores disponibles para los componentes
  */
 export const NUI_COLORS = [

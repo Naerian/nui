@@ -1,4 +1,4 @@
-import { NUIColor, NUIDateFormat, NUISize, NUIVariant } from './common';
+import { NUIColor, NUIDateFormat, NUIShape, NUISize, NUIVariant } from './common';
 import { CalendarGlobalConfig } from '../components/calendar';
 import { FabButtonConfig } from './fab-button/fab-button.config';
 import { TooltipConfig } from '../components/tooltip';
@@ -16,6 +16,7 @@ export interface NUIConfig {
   };
   defaultVariant?: NUIVariant;
   defaultSize?: NUISize;
+  defaultShape?: NUIShape;
   defaultColor?: NUIColor;
   dropdownItemSize?: NUISize;
   /** Configuración global del calendar */

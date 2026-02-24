@@ -512,6 +512,16 @@
         "description": "Soporta diferentes variantes y colores del sistema NUI.",
         "note": "Combina <code>color</code> y <code>variant</code> para personalizar la apariencia del botón según tus necesidades."
       },
+      "shapes": {
+        "title": "Formas",
+        "description": "Controla la forma del botón con opciones de borde redondeado.",
+        "note": "Opciones de forma: <code>'rounded'</code> para bordes ligeramente redondeados, <code>'pill'</code> para bordes completamente redondeados, y <code>'square'</code> para bordes rectos."
+      },
+      "raised": {
+        "title": "Botones elevados",
+        "description": "Agrega profundidad visual a tus botones con una sombra sutil.",
+        "note": "Los botones elevados son ideales para acciones primarias que deseas destacar en tu interfaz. Para ello utiliza el atributo <code>raised</code> en tu componente Button."
+      },
       "sizes": {
         "title": "Tamaños",
         "description": "Cinco opciones de tamaño disponibles en NUI.",

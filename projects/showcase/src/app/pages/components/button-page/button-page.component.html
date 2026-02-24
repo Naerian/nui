@@ -75,6 +75,24 @@
                   </div>
                 </div>
               }
+              @case ('shapes') {
+                <div class="example-preview">
+                  <nui-button shape="rounded">Rounded</nui-button>
+                  <nui-button shape="square">Square</nui-button>
+                  <nui-button shape="pill">Pill</nui-button>
+                  <nui-button shape="square" color="danger" variant="ghost">Square</nui-button>
+                  <nui-button shape="pill" color="success" variant="outline">Pill</nui-button>
+                </div>
+              }
+              @case ('raised') {
+                <div class="example-preview">
+                  <nui-button raised>Raised Button</nui-button>
+                  <nui-button raised color="primary">Raised Primary</nui-button>
+                  <nui-button raised variant="outline" color="secondary">Raised Outline</nui-button>
+                  <nui-button raised variant="ghost" color="accent">Raised Ghost</nui-button>
+                  <button nuiButton [raised]="true" color="success">Raised Directive</button>
+                </div>
+              }
               @case ('sizes') {
                 <div class="example-preview">
                   <nui-button size="xs">Extra Small</nui-button>
