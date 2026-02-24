@@ -39,33 +39,6 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-## Project Structure
-
-```
-nui/
-├── projects/
-│   ├── nui/                    # Component library source
-│   │   ├── src/
-│   │   │   ├── lib/
-│   │   │   │   ├── components/ # UI components
-│   │   │   │   ├── themes/     # Hybrid theme system
-│   │   │   │   ├── configs/    # Configuration utilities
-│   │   │   │   └── translations/
-│   │   │   └── public-api.ts
-│   │   └── styles/             # SCSS source files
-│   │       ├── nui.scss        # Main stylesheet
-│   │       ├── themes/         # Theme mixins
-│   │       ├── components/     # Component styles
-│   │       └── variables/      # CSS variable definitions
-│   └── showcase/             # Development/testing app
-├── dist/
-│   └── nui/
-│       ├── styles/
-│       │   └── nui.css         # Compiled CSS (518KB)
-│       └── ...                 # Compiled library
-└── docs/                       # Documentation
-```
-
 ## Theming System
 
 NUI uses a **hybrid theming approach**:
@@ -82,15 +55,6 @@ NUI uses a **hybrid theming approach**:
 ✅ Small bundle - only ~200 lines of runtime code
 
 See [Theme System Documentation](./projects/nui/src/lib/themes/README.md) for details.
-
-## Available Components
-
-- **Button** - Flexible button component with variants
-- **ButtonGroup** - Group multiple buttons
-- **Toast** - Toast notifications
-- **Tooltip** - Contextual tooltips
-- **Paginator** - Pagination controls
-- **Popover** - Floating content panels
 
 ## Scripts
 

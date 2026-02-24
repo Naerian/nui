@@ -127,14 +127,14 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     // Si no hay customButtons, usar las acciones del servicio
-    return this.actionsService?.actions ?? [];
+    return this.actionsService?.actions() ?? [];
   }
 
   /**
    * Obtiene el template de footer personalizado si existe (de la directiva)
    */
   protected get footerTemplate(): TemplateRef<any> | null {
-    return this.actionsService?.footerTemplate ?? null;
+    return this.actionsService?.footerTemplate() ?? null;
   }
 
   /**

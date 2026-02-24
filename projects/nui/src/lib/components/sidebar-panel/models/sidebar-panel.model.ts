@@ -571,6 +571,12 @@ export interface SidebarPanelStackItem {
  */
 export interface SidebarPanelAction {
   /**
+   * Identificador único de la acción (opcional, útil para updates dinámicos)
+   * Si no se proporciona, se genera un ID interno.
+   */
+  id?: string;
+
+  /**
    * Etiqueta visible del botón
    */
   label: string;

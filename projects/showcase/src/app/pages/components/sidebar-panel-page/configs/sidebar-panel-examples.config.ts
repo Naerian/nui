@@ -944,4 +944,106 @@ openPanel() {
       },
     ],
   },
+  {
+    id: 'child-footer-actions',
+    title: 'components.sidebar-panel.examples.child-footer-actions.title',
+    description: 'components.sidebar-panel.examples.child-footer-actions.description',
+    anchor: 'child-footer-actions',
+    note: {
+      type: 'success',
+      icon: 'ri-lightbulb-line',
+      content: 'components.sidebar-panel.examples.child-footer-actions.note',
+    },
+    examples: [
+      {
+        title: 'Child Component',
+        code: `import { Component, inject, OnInit, signal, effect, computed, untracked } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
+import { SIDEBAR_PANEL_REF, SIDEBAR_PANEL_DATA, SidebarPanelActionsService } from 'nui';
+
+@Component({
+  selector: 'app-user-form-example',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  template: \`
+    <form [formGroup]="form" (submit)="save()">
+      <input formControlName="name" placeholder="Nombre" />
+      <input formControlName="email" placeholder="Email" />
+      @if (isLoading()) { <span>Guardando...</span> }
+    </form>
+  \`
+})
+export class UserFormExampleComponent implements OnInit {
+  private actions = inject(SidebarPanelActionsService);
+  private panelRef = inject(SIDEBAR_PANEL_REF);
+  private data = inject(SIDEBAR_PANEL_DATA);
+  
+  form = inject(FormBuilder).group({
+    name: [this.data?.name || '', Validators.required],
+    email: [this.data?.email || '', [Validators.required, Validators.email]]
+  });
+
+  isLoading = signal(false);
+
+  // Convertimos estados de Angular Forms a Signals para el effect
+  private isInvalid = toSignal(this.form.statusChanges.pipe(map(s => s === 'INVALID')), { initialValue: this.form.invalid });
+  private isPristine = toSignal(this.form.valueChanges.pipe(map(() => this.form.pristine)), { initialValue: true });
+
+  constructor() {
+    effect(() => {
+      const loading = this.isLoading();
+      const invalid = this.isInvalid();
+      const pristine = this.isPristine();
+
+      untracked(() => {
+        this.actions.update(0, { disabled: loading }); // Cancelar
+        this.actions.update(1, { disabled: pristine || loading }); // Resetear
+        this.actions.update(2, { disabled: invalid || loading, loading }); // Guardar
+      });
+    });
+  }
+
+  ngOnInit() {
+    this.actions.register([
+      { label: 'Cancelar', handler: () => this.panelRef.close() },
+      { label: 'Resetear', handler: () => this.form.reset() },
+      { label: 'Guardar', variant: 'solid', color: 'primary', handler: () => this.save() }
+    ]);
+  }
+
+  async save() {
+    if (this.form.invalid) return;
+    this.isLoading.set(true);
+    // Lógica de guardado...
+    this.panelRef.close({ saved: true, data: this.form.value });
+  }
+}`,
+        language: 'typescript',
+      },
+      {
+        title: 'Parent Component',
+        code: `// Abrir el panel (el hijo define los botones)
+const panelRef = this.sidebarPanelService.open(UserFormComponent, {
+  title: 'Editar Usuario',
+  position: 'right',
+  size: 'md',
+  data: {
+    name: 'Juan',
+    email: 'juan@example.com'
+  }
+});
+
+// Escuchar el resultado
+panelRef.afterClosed().subscribe(result => {
+  if (result?.saved) {
+    console.log('Usuario guardado:', result.data);
+    this.refreshUserList();
+  }
+});`,
+        language: 'typescript',
+      },
+    ],
+  },
 ];

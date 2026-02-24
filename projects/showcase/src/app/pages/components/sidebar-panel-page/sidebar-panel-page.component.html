@@ -158,6 +158,14 @@
                   </nui-button>
                 </div>
               }
+
+              @case ('child-footer-actions') {
+                <div class="example-preview example-preview--spaced">
+                  <nui-button [color]="'primary'" (click)="openUserFormPanel()">
+                    Formulario con acciones en el hijo
+                  </nui-button>
+                </div>
+              }
             }
 
             <!-- Tabla de datos (para API o Theming) -->
@@ -222,7 +230,9 @@
       />
       <div>
         <h3 style="margin: 0; font-size: 1.25rem; font-weight: 600">{{ user.name }}</h3>
-        <p style="margin: 0.25rem 0 0 0; color: var(--nui-on-surface-secondary); font-size: 0.875rem">
+        <p
+          style="margin: 0.25rem 0 0 0; color: var(--nui-on-surface-secondary); font-size: 0.875rem"
+        >
           {{ user.role }}
         </p>
       </div>

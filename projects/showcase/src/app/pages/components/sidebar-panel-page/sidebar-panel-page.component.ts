@@ -9,6 +9,7 @@ import { BaseComponentPage } from '../../../core/base/base-component-page';
 import { SIDEBAR_PANEL_PAGE_CONFIG } from './sidebar-panel-page.config';
 import { SidebarPanelExampleContentComponent } from './components/sidebar-panel-example-content/sidebar-panel-example-content.component';
 import { SidebarPanelEventExampleComponent } from './components/sidebar-panel-event-example/sidebar-panel-event-example.component';
+import { UserFormExampleComponent } from './components/user-form-example/user-form-example.component';
 
 /**
  * Página de documentación del componente Sidebar Panel
@@ -60,6 +61,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         'custom-backdrop',
         'multiple',
         'footer-actions',
+        'child-footer-actions',
       ],
     },
     {
@@ -73,6 +75,8 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         'api-config',
         'api-custom-button',
         'api-minimized-tab',
+        'api-footer-actions',
+        'api-footer-actions-service'
       ],
     },
     {
@@ -192,6 +196,36 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         message: 'Este componente recibe datos dinámicamente mediante inyección de tokens',
         showActions: true,
       },
+    });
+  }
+
+  /**
+   * Abre un panel con formulario que define sus propias acciones de footer
+   * Demuestra el uso de SidebarPanelActionsService desde el componente hijo
+   */
+  openUserFormPanel(userId?: number): void {
+    const panelRef = this.sidebarPanelService.open(UserFormExampleComponent, {
+      title: userId ? 'Editar Usuario' : 'Nuevo Usuario',
+      position: 'right',
+      size: 'md',
+      data: userId
+        ? {
+            id: userId,
+            name: 'Juan Pérez',
+            email: 'juan.perez@example.com',
+            role: 'admin',
+          }
+        : {},
+    });
+
+    // Escuchar el resultado cuando se cierra el panel
+    panelRef.afterClosed().subscribe((result: any) => {
+      if (result?.saved) {
+        console.log('Usuario guardado:', result.data);
+        alert(`Usuario guardado correctamente: ${result.data.name}`);
+      } else {
+        console.log('Operación cancelada');
+      }
     });
   }
 
@@ -476,32 +510,32 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
     if (componentInstance) {
       // Capturar evento dataChanged
       componentInstance.dataChanged.subscribe((data: any) => {
-        console.log('🔵 [PADRE] dataChanged capturado:', data);
+        console.log('[PADRE] dataChanged capturado:', data);
         alert(`Evento dataChanged capturado!\nValue: ${data.value}`);
       });
 
       // Capturar evento statusChanged
       componentInstance.statusChanged.subscribe((data: any) => {
-        console.log('🟢 [PADRE] statusChanged capturado:', data);
+        console.log('[PADRE] statusChanged capturado:', data);
         alert(`Evento statusChanged capturado!\nStatus: ${data.status}\nMessage: ${data.message}`);
       });
 
       // Capturar evento customEvent
       componentInstance.customEvent.subscribe((data: any) => {
-        console.log('🟡 [PADRE] customEvent capturado:', data);
+        console.log('[PADRE] customEvent capturado:', data);
         alert(`Evento customEvent capturado!\n${JSON.stringify(data, null, 2)}`);
       });
 
       // Capturar evento beforeClose
       componentInstance.beforeClose.subscribe((result: any) => {
-        console.log('🔴 [PADRE] beforeClose capturado:', result);
+        console.log('[PADRE] beforeClose capturado:', result);
         console.log(`Panel se va a cerrar con acción: ${result.action}`);
       });
     }
 
     // También podemos capturar el resultado final con afterClosed()
     panelRef.afterClosed().subscribe((result: any) => {
-      console.log('🏁 [PADRE] Panel cerrado con resultado:', result);
+      console.log('[PADRE] Panel cerrado con resultado:', result);
 
       if (result) {
         alert(
@@ -532,7 +566,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
           color: 'secondary',
           variant: 'outline',
           callback: (panelRef) => {
-            console.log('Cancelar clicked');
+            console.log('[PADRE] Cancelar clicked');
             panelRef.close({ action: 'cancel' });
           },
         },
@@ -542,7 +576,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
           color: 'primary',
           variant: 'solid',
           callback: (panelRef) => {
-            console.log('Guardar clicked');
+            console.log('[PADRE] Guardar clicked');
             alert('Datos guardados correctamente!');
             panelRef.close({ action: 'save', saved: true });
           },

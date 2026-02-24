@@ -234,7 +234,7 @@
         "title": "Arquitectura de temas",
         "subtitle": "Sistema en capas para generación dinámica de variables CSS",
         "overview": "El sistema de temas de NUI utiliza una arquitectura en capas que genera dinámicamente más de 1000 variables CSS desde la configuración del preset. Cada capa se construye sobre la anterior, creando un sistema cohesivo y escalable.",
-        
+
         "layer1": {
           "title": "Capa 1: Sistema de presets (colores semánticos)",
           "description": "Cada preset define 8 colores semánticos que se aplican de forma consistente en toda la aplicación. Estos colores adaptan automáticamente su tonalidad entre modo claro y oscuro.",
@@ -247,7 +247,7 @@
           "danger": "Errores críticos, acciones destructivas y validación fallida",
           "neutral": "Elementos neutrales, estados deshabilitados y backgrounds sutiles"
         },
-        
+
         "layer2": {
           "title": "Capa 2: Variables estructurales",
           "description": "Variables base que definen colores de texto, fondos, bordes y otros elementos estructurales. Se generan a partir de la escala de grises del preset y se adaptan al modo claro/oscuro.",
@@ -271,7 +271,7 @@
             "subtle": "Bordes sutiles para divisiones leves"
           }
         },
-        
+
         "layer3": {
           "title": "Capa 3: Generación de variantes",
           "description": "Para cada color semántico, el sistema genera automáticamente variantes de tintes, sombras y valores alpha. Esto permite jerarquía visual sin definir colores adicionales.",
@@ -288,7 +288,7 @@
             "description": "Versiones semi-transparentes del color. Perfecto para overlays, efectos de vidrio y estados disabled."
           }
         },
-        
+
         "layer4": {
           "title": "Capa 4: Sistema de sombras",
           "description": "Sistema de sombras en dos niveles: primitivas (xs, sm, md, lg, xl) y aliases semánticos que mapean casos de uso a primitivas.",
@@ -309,7 +309,7 @@
             "elevated": "Popovers, dropdowns, menús flotantes, modals"
           }
         },
-        
+
         "layer5": {
           "title": "Capa 5: Variables de componentes",
           "description": "Cada componente tiene un conjunto de variables CSS generadas dinámicamente que derivan de los colores semánticos y se adaptan a las variantes (solid, outline, ghost).",
@@ -323,7 +323,7 @@
             "description": "Sistema 'Shapeshifter' donde botones inactivos son ghost y el botón activo adopta la variante especificada. Botones de navegación siempre ghost."
           }
         },
-        
+
         "performance": {
           "title": "Optimización de performance",
           "description": "El sistema de temas incluye optimizaciones para minimizar el impacto en performance del cambio de temas dinámico.",
@@ -340,7 +340,7 @@
             "description": "Componentes pesados usan 'contain: layout style paint' para limitar el alcance de recálculos de estilo."
           }
         },
-        
+
         "flow": {
           "title": "Flujo de generación de variables",
           "description": "Desde la selección del preset hasta la aplicación en el DOM, así funciona el proceso:",
@@ -1311,6 +1311,11 @@
           "title": "Acciones en el footer",
           "description": "Agrega botones de acción en el footer del panel.",
           "note": "Usa <code>customButtons</code> para acciones simples o <code>footerTemplate</code> para layouts completamente personalizados. Puedes combinar múltiples botones con las diferentes variantes y colores de NUI."
+        },
+        "child-footer-actions": {
+          "title": "Acciones desde componente hijo",
+          "description": "El componente hijo puede registrar sus propias acciones de footer usando SidebarPanelActionsService.",
+          "note": "Esta aproximación es ideal para formularios donde el hijo maneja toda la lógica (validación, guardado, estados). El componente hijo inyecta <code>SidebarPanelActionsService</code> y registra las acciones mediante <code>register()</code>. Las acciones pueden tener estados reactivos (disabled, loading) y ejecutar lógica compleja. Al momento de usar <code>SidebarPanelActionsService</code> se inyecta como provider para afectar solo a ese panel."
         }
       },
       "api": {
@@ -1337,6 +1342,14 @@
         "minimized-tab": {
           "title": "MinimizedTabCustomization",
           "description": "Customización de la pestaña cuando el panel está minimizado"
+        },
+        "footer-actions": {
+          "title": "SidebarPanelAction",
+          "description": "Definición de acciones registradas desde componentes hijos para el footer del panel"
+        },
+        "footer-actions-service": {
+          "title": "SidebarPanelActionsService",
+          "description": "Servicio para que los componentes hijos puedan registrar acciones en el footer del panel"
         }
       },
       "theming": {
