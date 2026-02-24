@@ -37,8 +37,7 @@ import { NUI_TRANSLATIONS } from '../../translations';
  * };
  */
 export function createDefaultCalendarConfig(): CalendarGlobalConfig {
-  const translations = inject(NUI_TRANSLATIONS);
-
+  
   return {
     // ========================================================================
     // LOCALIZACIÓN Y FORMATEO

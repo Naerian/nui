@@ -6,7 +6,7 @@
   <!-- SISTEMA DE PESTAÑAS (cuando hay presets o timepicker) -->
   @if (shouldShowTabs() && viewMode() === ViewMode.DAY) {
     <div class="nui-calendar__tabs">
-      <nui-btn-group
+      <nui-select-btn
         [width]="'full'"
         [options]="tabOptions()"
         [ngModel]="activeTab()"
@@ -265,7 +265,7 @@
           <!-- Header con toggle para modo 'both' -->
           @if (showTimePicker() === 'both') {
             <div class="nui-calendar__time-picker-header">
-              <nui-btn-group
+              <nui-select-btn
                 [width]="'full'"
                 [options]="timePickerToggleOptions()"
                 [ngModel]="timePickerToggleValue()"

@@ -135,10 +135,10 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'button-group',
+        path: 'select-button',
         loadComponent: () =>
-          import('./pages/components/button-group-page/button-group-page.component').then(
-            m => m.ButtonGroupPageComponent
+          import('./pages/components/select-button-page/select-button-page.component').then(
+            m => m.SelectButtonPageComponent
           ),
       },
       {

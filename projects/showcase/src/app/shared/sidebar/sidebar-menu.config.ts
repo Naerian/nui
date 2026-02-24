@@ -100,9 +100,9 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
         icon: 'ri-user-line',
       },
       {
-        label: 'Button Group',
-        translationKey: 'sidebar.buttonGroup',
-        route: '/components/button-group',
+        label: 'Select Button',
+        translationKey: 'sidebar.selectButton',
+        route: '/components/select-button',
         icon: 'ri-layout-grid-line',
       },
       {

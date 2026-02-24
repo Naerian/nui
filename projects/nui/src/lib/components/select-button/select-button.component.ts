@@ -12,7 +12,12 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BtnGroupMode, BtnNormalizedOption, BtnGroupVariant, BtnGroupModeEnum } from './models/button-group.model';
+import {
+  SelectBtnMode,
+  SelectBtnNormalized,
+  SelectBtnVariant,
+  SelectBtnModeEnum,
+} from './models/select-button.model';
 import {
   NUI_CONFIG,
   NUISize,
@@ -24,11 +29,11 @@ import {
 import { ButtonWidth, ButtonWidthEnum } from '../button/models/button.model';
 
 @Component({
-  selector: 'nui-btn-group',
+  selector: 'nui-select-btn',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './button-group.component.html',
-  styleUrls: ['./button-group.component.scss'],
+  templateUrl: './select-button.component.html',
+  styleUrls: ['./select-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[style.width]': 'width() === "full" ? "100%" : "auto"',
@@ -37,12 +42,12 @@ import { ButtonWidth, ButtonWidthEnum } from '../button/models/button.model';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ButtonGroupComponent),
+      useExisting: forwardRef(() => SelectButtonComponent),
       multi: true,
     },
   ],
 })
-export class ButtonGroupComponent implements ControlValueAccessor {
+export class SelectButtonComponent implements ControlValueAccessor {
   private readonly _nuiConfig = inject(NUI_CONFIG);
 
   // ========================================================================
@@ -53,7 +58,7 @@ export class ButtonGroupComponent implements ControlValueAccessor {
   readonly options = input.required<any[]>();
 
   /** Modo de selección: 'radio' | 'checkbox' */
-  readonly mode = input<BtnGroupMode>(BtnGroupModeEnum.RADIO);
+  readonly mode = input<SelectBtnMode>(SelectBtnModeEnum.RADIO);
 
   // Mappers para objetos complejos
   readonly labelBy = input('label');
@@ -65,7 +70,7 @@ export class ButtonGroupComponent implements ControlValueAccessor {
   /** Configuración visual */
   readonly size = input<NUISize>();
   readonly color = input<NUIColor>();
-  readonly variant = input<BtnGroupVariant>();
+  readonly variant = input<SelectBtnVariant>();
   readonly width = input<ButtonWidth>(ButtonWidthEnum.AUTO);
 
   /** Estados globales */
@@ -92,7 +97,7 @@ export class ButtonGroupComponent implements ControlValueAccessor {
    * Normalizamos las opciones una sola vez.
    * El template itera sobre esto, que ya tiene formato { label, value, icon, disabled }
    */
-  protected readonly BtnNormalizedOptions = computed<BtnNormalizedOption[]>(() => {
+  protected readonly normalizedOptions = computed<SelectBtnNormalized[]>(() => {
     const rawOptions = this.options();
     if (!rawOptions) return [];
 
@@ -135,19 +140,19 @@ export class ButtonGroupComponent implements ControlValueAccessor {
   /** Clases CSS del contenedor principal */
   protected readonly containerClasses = computed(() => {
     const classes = [
-      'nui-btn-group',
-      `nui-btn-group--${this.effectiveSize()}`,
-      `nui-btn-group--${this.effectiveVariant()}`,
-      `nui-btn-group--${this.effectiveColor()}`,
+      'nui-select-btn',
+      `nui-select-btn--${this.effectiveSize()}`,
+      `nui-select-btn--${this.effectiveVariant()}`,
+      `nui-select-btn--${this.effectiveColor()}`,
     ];
 
-    if (this.disabled()) classes.push('nui-btn-group--disabled');
-    if (this.iconOnly()) classes.push('nui-btn-group--icon-only');
+    if (this.disabled()) classes.push('nui-select-btn--disabled');
+    if (this.iconOnly()) classes.push('nui-select-btn--icon-only');
 
     // Clases de ancho
-    if (this.width() === 'full') classes.push('nui-btn-group--full');
-    if (this.width() === 'fit') classes.push('nui-btn-group--fit');
-    if (this.width() === 'auto') classes.push('nui-btn-group--auto');
+    if (this.width() === 'full') classes.push('nui-select-btn--full');
+    if (this.width() === 'fit') classes.push('nui-select-btn--fit');
+    if (this.width() === 'auto') classes.push('nui-select-btn--auto');
 
     return classes.join(' ');
   });
@@ -160,7 +165,7 @@ export class ButtonGroupComponent implements ControlValueAccessor {
   private onTouched = () => {};
 
   writeValue(value: any): void {
-    if (this.mode() === BtnGroupModeEnum.CHECKBOX) {
+    if (this.mode() === SelectBtnModeEnum.CHECKBOX) {
       this.innerValue.set(Array.isArray(value) ? value : []);
     } else {
       this.innerValue.set(value);
@@ -183,20 +188,20 @@ export class ButtonGroupComponent implements ControlValueAccessor {
   isSelected(optionValue: any): boolean {
     const selected = this.innerValue();
 
-    if (this.mode() === BtnGroupModeEnum.CHECKBOX) {
+    if (this.mode() === SelectBtnModeEnum.CHECKBOX) {
       return Array.isArray(selected) && selected.includes(optionValue);
     }
     return selected === optionValue;
   }
 
   /** Permite alternar entre marcado y desmarcado */
-  toggleOption(option: BtnNormalizedOption): void {
+  toggleOption(option: SelectBtnNormalized): void {
     if (this.disabled() || option.disabled) return;
 
     const value = option.value;
     let newValue: any;
 
-    if (this.mode() === BtnGroupModeEnum.CHECKBOX) {
+    if (this.mode() === SelectBtnModeEnum.CHECKBOX) {
       const current = Array.isArray(this.innerValue()) ? [...this.innerValue()] : [];
       const index = current.indexOf(value);
 
@@ -225,8 +230,8 @@ export class ButtonGroupComponent implements ControlValueAccessor {
     if (this.disabled()) return;
 
     const key = event.key;
-    const isRadio = this.mode() === BtnGroupModeEnum.RADIO;
-    const options = this.BtnNormalizedOptions();
+    const isRadio = this.mode() === SelectBtnModeEnum.RADIO;
+    const options = this.normalizedOptions();
 
     // Navegación
     if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(key)) {
@@ -257,7 +262,7 @@ export class ButtonGroupComponent implements ControlValueAccessor {
 
   /** Lógica simplificada de búsqueda circular */
   private findNextEnabled(
-    options: BtnNormalizedOption[],
+    options: SelectBtnNormalized[],
     startIndex: number,
     direction: 1 | -1
   ): number {
@@ -285,11 +290,11 @@ export class ButtonGroupComponent implements ControlValueAccessor {
   }
 
   /** Devuelve el índice del botón (pestaña) */
-  getTabIndex(option: BtnNormalizedOption, index: number): number {
+  getTabIndex(option: SelectBtnNormalized, index: number): number {
     if (this.disabled() || option.disabled) return -1;
 
     // Checkbox: Todos tabulables
-    if (this.mode() !== BtnGroupModeEnum.RADIO) return 0;
+    if (this.mode() !== SelectBtnModeEnum.RADIO) return 0;
 
     // Radio: Roving Tabindex
     const isSelected = this.isSelected(option.value);
@@ -299,7 +304,7 @@ export class ButtonGroupComponent implements ControlValueAccessor {
     // Si NO hay nada seleccionado en todo el grupo y es el primero habilitado -> 0
     if (isSelected) return 0;
     if (!hasSelection) {
-      const firstEnabled = this.findNextEnabled(this.BtnNormalizedOptions(), -1, 1);
+      const firstEnabled = this.findNextEnabled(this.normalizedOptions(), -1, 1);
       if (index === firstEnabled) return 0;
     }
 

@@ -2,30 +2,30 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { ButtonGroupComponent } from 'nui';
+import { SelectButtonComponent } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
 import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';
 import { BaseComponentPage } from '../../../core/base/base-component-page';
-import { BUTTON_GROUP_PAGE_CONFIG } from './button-group-page.config';
+import { SELECT_BUTTON_PAGE_CONFIG } from './select-button-page.config';
 
 @Component({
-  selector: 'app-button-group-page',
+  selector: 'app-select-button-page',
   standalone: true,
   imports: [
     CommonModule,
     FormsModule, // Necesario para [(ngModel)]
     TranslateModule,
-    ButtonGroupComponent,
+    SelectButtonComponent,
     CodeBlockComponent,
     SectionTitleComponent,
     ComponentTabsComponent,
   ],
-  templateUrl: './button-group-page.component.html',
-  styleUrls: ['./button-group-page.component.scss'],
+  templateUrl: './select-button-page.component.html',
+  styleUrls: ['./select-button-page.component.scss'],
 })
-export class ButtonGroupPageComponent extends BaseComponentPage {
-  override pageConfig = BUTTON_GROUP_PAGE_CONFIG;
+export class SelectButtonPageComponent extends BaseComponentPage {
+  override pageConfig = SELECT_BUTTON_PAGE_CONFIG;
 
   tabs: ComponentTab[] = [
     {

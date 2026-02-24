@@ -39,7 +39,7 @@ import {
 } from './models/calendar.model';
 import { CalendarService } from './services/calendar.service';
 import { CalendarKeyboardNavigationService } from './services/calendar-keyboard-navigation.service';
-import { ButtonGroupComponent } from '../button-group/button-group.component';
+import { SelectButtonComponent } from '../select-button/select-button.component';
 import {
   TimePickerConfig,
   TimePickerMode,
@@ -48,7 +48,7 @@ import {
 import { TimePickerComponent } from '../time-picker/time-picker.component';
 import { NUI_CONFIG } from '../../configs';
 import { NUI_TRANSLATIONS } from '../../translations';
-import { BtnGroupOption } from '../button-group';
+import { SelectBtnOption } from '../select-button';
 
 @Component({
   selector: 'nui-calendar',
@@ -56,7 +56,7 @@ import { BtnGroupOption } from '../button-group';
   styleUrls: ['./calendar.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, A11yModule, ButtonGroupComponent, TimePickerComponent, FormsModule],
+  imports: [CommonModule, A11yModule, SelectButtonComponent, TimePickerComponent, FormsModule],
   providers: [
     CalendarKeyboardNavigationService,
     {
@@ -230,7 +230,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   /**
    * Opciones para el ButtonGroup de Start / End en modo 'both'
    */
-  timePickerToggleOptions = computed<BtnGroupOption[]>(() => [
+  timePickerToggleOptions = computed<SelectBtnOption[]>(() => [
     {
       label: this._translations.calendar.timePicker.start,
       value: CalendarTimePickerModeEnum.START,
@@ -256,8 +256,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   /**
    * Opciones para las pestañas del calendario
    */
-  tabOptions = computed<BtnGroupOption[]>(() => {
-    const options: BtnGroupOption[] = [
+  tabOptions = computed<SelectBtnOption[]>(() => {
+    const options: SelectBtnOption[] = [
       { label: this._translations.calendar.tabs.calendar, value: 'calendar' },
     ];
 

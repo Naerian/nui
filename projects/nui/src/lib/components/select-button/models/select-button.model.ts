@@ -5,8 +5,8 @@ import { NUIVariant } from '../../../configs';
  * - 'radio': Selección única
  * - 'checkbox': Multiselección
  */
-export type BtnGroupMode = 'radio' | 'checkbox';
-export enum BtnGroupModeEnum {
+export type SelectBtnMode = 'radio' | 'checkbox';
+export enum SelectBtnModeEnum {
   RADIO = 'radio',
   CHECKBOX = 'checkbox',
 }
@@ -16,12 +16,12 @@ export enum BtnGroupModeEnum {
  * - 'solid', 'outline', 'ghost' (heredados de Button)
  * - 'segmented' (estilo iOS, con botones unidos sin espacios)
  */
-export type BtnGroupVariant = NUIVariant | 'segmented';
+export type SelectBtnVariant = NUIVariant | 'segmented';
 
 /**
  * Opciones para el button-group
  */
-export interface BtnGroupOption {
+export interface SelectBtnOption {
   /**
    * Etiqueta visible del botón
    */
@@ -46,7 +46,7 @@ export interface BtnGroupOption {
 /**
  * Interfaz interna normalizada para el template
  */
-export interface BtnNormalizedOption {
+export interface SelectBtnNormalized {
   label: string;
   value: any;
   tooltip?: string;

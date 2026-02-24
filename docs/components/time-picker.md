@@ -1177,7 +1177,7 @@ Control fino sobre valores iniciales:
 
 - [Calendar Component](./calendar.md) - Integración perfecta con TimePicker
 - [Button Component](./button.md)
-- [Button Group Component](./button-group.md)
+- [Select Button Component](./select-button.md)
 
 ## 📚 Referencias Técnicas
 

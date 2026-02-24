@@ -55,14 +55,13 @@ import {
   DEFAULT_FRACTIONAL_LAYOUT,
   DEFAULT_PAGINATOR_LAYOUT,
   PaginatorElementEnum,
-  PLayoutAlignEnum,
   DEFAULT_GAP,
   PVerticalAlignEnum,
   PVerticalAlign,
   PaginatorLayoutAreaEnum,
 } from './models/paginator.model';
-import { ButtonGroupComponent } from '../button-group/button-group.component';
-import { BtnGroupOption } from '../button-group/models/button-group.model';
+import { SelectButtonComponent } from '../select-button/select-button.component';
+import { SelectBtnOption } from '../select-button/models/select-button.model';
 import { ButtonDirective } from '../button/button.directive';
 
 /**
@@ -107,7 +106,7 @@ import { ButtonDirective } from '../button/button.directive';
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonGroupComponent, ButtonDirective],
+  imports: [CommonModule, FormsModule, SelectButtonComponent, ButtonDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     // Clase base para que el SCSS la detecte
@@ -683,7 +682,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     if (isMobile) {
       const mobileLay = this.mobileLayout();
       if (mobileLay) return mobileLay;
-      
+
       // Fallback a mobileLayout global si existe
       if (this.paginatorConfig.mobileLayout) {
         return this.paginatorConfig.mobileLayout;
@@ -750,7 +749,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   /**
    * Opciones para el selector de tamaño de página
    */
-  pageSizeOptionsData = computed<BtnGroupOption[]>(() => {
+  pageSizeOptionsData = computed<SelectBtnOption[]>(() => {
     return this.pageSizeOptions().map((size: number) => ({
       label: size.toString(),
       tooltip: this._translations.paginator.itemsPerPage + ' ' + size.toString(),

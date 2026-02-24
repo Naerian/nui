@@ -1,14 +1,14 @@
 import { ComponentSection } from '../../../../core/models';
 
 /**
- * Configuración de las secciones de API del Button Group
+ * Configuración de las secciones de API del Select Button
  * Dividido en Inputs y Outputs para mejor organización
  */
-export const BUTTON_GROUP_API_SECTIONS: ComponentSection[] = [
+export const SELECT_BUTTON_API_SECTIONS: ComponentSection[] = [
   {
     id: 'api-inputs',
-    title: 'components.buttonGroup.api.inputs.title',
-    description: 'components.buttonGroup.api.inputs.description',
+    title: 'components.selectButton.api.inputs.title',
+    description: 'components.selectButton.api.inputs.description',
     anchor: 'api-inputs',
     table: {
       headers: [
@@ -95,8 +95,8 @@ export const BUTTON_GROUP_API_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'api-outputs',
-    title: 'components.buttonGroup.api.outputs.title',
-    description: 'components.buttonGroup.api.outputs.description',
+    title: 'components.selectButton.api.outputs.title',
+    description: 'components.selectButton.api.outputs.description',
     anchor: 'api-outputs',
     table: {
       headers: ['common.tables.event', 'common.tables.type', 'common.tables.description'],

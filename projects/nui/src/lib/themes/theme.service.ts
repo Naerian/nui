@@ -375,7 +375,7 @@ export class ThemeService {
     Object.entries(colors).forEach(([name, baseColor]) => {
       // Component-specific variables
       css += this.generateButtonVariables(name, baseColor);
-      css += this.generateButtonGroupVariables(name, baseColor);
+      css += this.generateSelectButtonVariables(name, baseColor);
       css += this.generatePaginatorVariables(name, baseColor);
       css += this.generateToastVariables(name, baseColor);
       css += this.generateAvatarVariables(name, baseColor);
@@ -657,7 +657,7 @@ export class ThemeService {
     `;
   }
 
-  private generateButtonGroupVariables(name: string, color: string): string {
+  private generateSelectButtonVariables(name: string, color: string): string {
     const contrastText = this.getContrastColor(color);
 
     // Opacidades para hover states
@@ -672,48 +672,48 @@ export class ThemeService {
 
     return `
     /* === VARIANT: SOLID === */
-    --nui-btn-group-${name}-solid-bg: ${sysBg};
-    --nui-btn-group-${name}-solid-text: ${sysTextSec};
-    --nui-btn-group-${name}-solid-border: ${sysBorder};
-    --nui-btn-group-${name}-solid-sel-bg: ${color};
-    --nui-btn-group-${name}-solid-sel-text: ${contrastText};
-    --nui-btn-group-${name}-solid-sel-border: ${sysBg};
-    --nui-btn-group-${name}-solid-hover-bg: ${alpha10};
-    --nui-btn-group-${name}-solid-hover-text: ${contrastText};
-    --nui-btn-group-${name}-solid-hover-border: ${alpha20};
+    --nui-slc-btn-${name}-solid-bg: ${sysBg};
+    --nui-slc-btn-${name}-solid-text: ${sysTextSec};
+    --nui-slc-btn-${name}-solid-border: ${sysBorder};
+    --nui-slc-btn-${name}-solid-sel-bg: ${color};
+    --nui-slc-btn-${name}-solid-sel-text: ${contrastText};
+    --nui-slc-btn-${name}-solid-sel-border: ${sysBg};
+    --nui-slc-btn-${name}-solid-hover-bg: ${alpha10};
+    --nui-slc-btn-${name}-solid-hover-text: ${contrastText};
+    --nui-slc-btn-${name}-solid-hover-border: ${alpha20};
 
     /* === VARIANT: OUTLINE === */
-    --nui-btn-group-${name}-outline-bg: transparent;
-    --nui-btn-group-${name}-outline-text: ${color};
-    --nui-btn-group-${name}-outline-border: ${alpha20};
-    --nui-btn-group-${name}-outline-sel-bg: ${alpha20};
-    --nui-btn-group-${name}-outline-sel-text: ${color};
-    --nui-btn-group-${name}-outline-sel-border: ${color};
-    --nui-btn-group-${name}-outline-hover-bg: ${alpha10};
-    --nui-btn-group-${name}-outline-hover-text: ${color};
-    --nui-btn-group-${name}-outline-hover-border: ${alpha20};
+    --nui-slc-btn-${name}-outline-bg: transparent;
+    --nui-slc-btn-${name}-outline-text: ${color};
+    --nui-slc-btn-${name}-outline-border: ${alpha20};
+    --nui-slc-btn-${name}-outline-sel-bg: ${alpha20};
+    --nui-slc-btn-${name}-outline-sel-text: ${color};
+    --nui-slc-btn-${name}-outline-sel-border: ${color};
+    --nui-slc-btn-${name}-outline-hover-bg: ${alpha10};
+    --nui-slc-btn-${name}-outline-hover-text: ${color};
+    --nui-slc-btn-${name}-outline-hover-border: ${alpha20};
 
     /* === VARIANT: GHOST === */
-    --nui-btn-group-${name}-ghost-bg: transparent;
-    --nui-btn-group-${name}-ghost-text: ${color};
-    --nui-btn-group-${name}-ghost-border: transparent;
-    --nui-btn-group-${name}-ghost-sel-bg: ${alpha20};
-    --nui-btn-group-${name}-ghost-sel-text: ${color};
-    --nui-btn-group-${name}-ghost-sel-border: transparent;
-    --nui-btn-group-${name}-ghost-hover-bg: ${alpha10};
-    --nui-btn-group-${name}-ghost-hover-text: ${color};
-    --nui-btn-group-${name}-ghost-hover-border: transparent;
+    --nui-slc-btn-${name}-ghost-bg: transparent;
+    --nui-slc-btn-${name}-ghost-text: ${color};
+    --nui-slc-btn-${name}-ghost-border: transparent;
+    --nui-slc-btn-${name}-ghost-sel-bg: ${alpha20};
+    --nui-slc-btn-${name}-ghost-sel-text: ${color};
+    --nui-slc-btn-${name}-ghost-sel-border: transparent;
+    --nui-slc-btn-${name}-ghost-hover-bg: ${alpha10};
+    --nui-slc-btn-${name}-ghost-hover-text: ${color};
+    --nui-slc-btn-${name}-ghost-hover-border: transparent;
 
     /* === VARIANT: SEGMENTED === */
-    --nui-btn-group-${name}-segmented-track-bg: ${sysBg};
-    --nui-btn-group-${name}-segmented-track-border: ${sysBorder};
-    --nui-btn-group-${name}-segmented-bg: transparent;
-    --nui-btn-group-${name}-segmented-text: ${sysTextSec};
-    --nui-btn-group-${name}-segmented-border: transparent;
-    --nui-btn-group-${name}-segmented-sel-bg: ${color};
-    --nui-btn-group-${name}-segmented-sel-text: ${contrastText};
-    --nui-btn-group-${name}-segmented-sel-border: transparent;
-    --nui-btn-group-${name}-segmented-hover-bg: ${alpha10};
+    --nui-slc-btn-${name}-segmented-track-bg: ${sysBg};
+    --nui-slc-btn-${name}-segmented-track-border: ${sysBorder};
+    --nui-slc-btn-${name}-segmented-bg: transparent;
+    --nui-slc-btn-${name}-segmented-text: ${sysTextSec};
+    --nui-slc-btn-${name}-segmented-border: transparent;
+    --nui-slc-btn-${name}-segmented-sel-bg: ${color};
+    --nui-slc-btn-${name}-segmented-sel-text: ${contrastText};
+    --nui-slc-btn-${name}-segmented-sel-border: transparent;
+    --nui-slc-btn-${name}-segmented-hover-bg: ${alpha10};
   `;
   }
 

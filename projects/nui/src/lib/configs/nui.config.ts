@@ -48,10 +48,6 @@ export const NUI_CONFIG = new InjectionToken<Partial<NUIConfig>>('NUIConfig', {
  *     provideNUIConfig({
  *       defaultSize: 'md',           // Todos los componentes usarán 'md' por defecto
  *       defaultColor: 'primary',    // Todos los componentes usarán 'primary' por defecto
- *       dropdownItemSize: 'sm',     // Todos los items de los dropdowns usarán 'sm' por defecto
- *       defaultDateFormat: {        // Configuración por defecto para pipes de fecha
- *         diffTimeFormat: 'DD/MM/YYYY'    // Pipes como DiffTimePipe usarán 'DD/MM/YYYY' por defecto
- *       },
  *       calendar: {                 // Configuración global del calendar
  *         firstDayOfWeek: 1,        // Semana empieza lunes (ISO 8601)
  *         format: 'yyyy-MM-dd',     // Formato ISO para APIs
@@ -107,6 +103,30 @@ function mergeNUIConfigs(
     merged.calendar = {
       ...defaultConfig.calendar,
       ...customConfig.calendar,
+    };
+  }
+
+  // Fusión profunda para la configuración del tooltip
+  if (defaultConfig.tooltip || customConfig.tooltip) {
+    merged.tooltip = {
+      ...defaultConfig.tooltip,
+      ...customConfig.tooltip,
+    };
+  }
+
+  // Fusión profunda para la configuración del popover
+  if (defaultConfig.popover || customConfig.popover) {
+    merged.popover = {
+      ...defaultConfig.popover,
+      ...customConfig.popover,
+    };
+  }
+
+  // Fusión profunda para la configuración del toast
+  if (defaultConfig.toast || customConfig.toast) {
+    merged.toast = {
+      ...defaultConfig.toast,
+      ...customConfig.toast,
     };
   }
 

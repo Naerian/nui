@@ -11,26 +11,23 @@ import { SidebarPanelConfig } from '../components/sidebar-panel';
  * Configuración global de la librería NUI (Narian UI).
  */
 export interface NUIConfig {
-  defaultDateFormat?: {
-    diffTimeFormat?: NUIDateFormat;
-  };
+  /** NUI Defaults */
   defaultVariant?: NUIVariant;
   defaultSize?: NUISize;
   defaultShape?: NUIShape;
   defaultColor?: NUIColor;
-  dropdownItemSize?: NUISize;
-  /** Configuración global del calendar */
+  /** Calendar global defaults */
   calendar?: Partial<CalendarGlobalConfig>;
-  /** Configuración global del paginator */
+  /** Paginator global defaults */
   paginator?: PaginatorGlobalConfig;
-  /** Configuración global de toasts */
+  /** Toast global defaults */
   toast?: Partial<ToastGlobalConfig>;
-  /** Configuración global de tooltips */
+  /** Tooltip global defaults */
   tooltip?: Partial<TooltipConfig>;
-  /** Configuración global de popovers */
+  /** Popover global defaults */
   popover?: Partial<PopoverConfig>;
-  /** Configuración global de fab button */
+  /** Fab button global defaults */
   fabButton?: Partial<FabButtonConfig>;
-  /** Configuración global de sidebar panels */
+  /** Sidebar panel global defaults */
   sidebarPanel?: Partial<SidebarPanelConfig>;
 }

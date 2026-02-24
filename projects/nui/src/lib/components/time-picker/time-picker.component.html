@@ -10,7 +10,7 @@
   <!-- SISTEMA DE PESTAÑAS (cuando hay presets personalizados) -->
   @if (shouldShowTabs()) {
     <div class="nui-time-picker__tabs">
-      <nui-btn-group
+      <nui-select-btn
         [width]="'full'"
         [options]="tabOptions()"
         [ngModel]="activeTab()"
@@ -364,7 +364,7 @@
             [attr.aria-label]="_translations.timePicker.period || 'AM/PM'"
             [attr.aria-describedby]="'period-help'"
           >
-            <nui-btn-group
+            <nui-select-btn
               #periodColumn
               [options]="periodOptions()"
               [ngModel]="selectedPeriod()"

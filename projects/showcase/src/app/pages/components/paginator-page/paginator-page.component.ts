@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { PaginatorComponent, ButtonGroupComponent, PaginatorLayout } from 'nui';
+import { PaginatorComponent, SelectButtonComponent, PaginatorLayout } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
 import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';

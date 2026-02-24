@@ -1,21 +1,21 @@
 import { ComponentSection } from '../../../../core/models';
 
 /**
- * Configuración de las secciones de ejemplos interactivos del Button Group
+ * Configuración de las secciones de ejemplos interactivos del Select Button
  */
-export const BUTTON_GROUP_EXAMPLES_SECTIONS: ComponentSection[] = [
+export const SELECT_BUTTON_EXAMPLES_SECTIONS: ComponentSection[] = [
   {
     id: 'basic',
-    title: 'components.buttonGroup.basic.title',
-    description: 'components.buttonGroup.basic.description',
+    title: 'components.selectButton.basic.title',
+    description: 'components.selectButton.basic.description',
     anchor: 'basic',
     examples: [
       {
         title: 'codeExamples.html',
-        code: `<nui-btn-group 
+        code: `<nui-select-btn 
   [options]="['New York', 'Los Angeles']" 
   [(ngModel)]="selectedCity">
-</nui-btn-group>
+</nui-select-btn>
 
 <p>Seleccionado: {{ selectedCity() }}</p>`,
         language: 'html',
@@ -24,36 +24,36 @@ export const BUTTON_GROUP_EXAMPLES_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'modes',
-    title: 'components.buttonGroup.modes.title',
-    description: 'components.buttonGroup.modes.description',
+    title: 'components.selectButton.modes.title',
+    description: 'components.selectButton.modes.description',
     anchor: 'modes',
     note: {
       type: 'info',
-      content: 'components.buttonGroup.modes.note',
+      content: 'components.selectButton.modes.note',
     },
     examples: [
       {
         title: 'Radio',
-        code: `<nui-btn-group 
+        code: `<nui-select-btn 
   mode="radio"
   [options]="options" 
   labelBy="label"
   iconBy="icon"
   valueBy="id"
   [(ngModel)]="selected">
-</nui-btn-group>`,
+</nui-select-btn>`,
         language: 'html',
       },
       {
         title: 'Checkbox',
-        code: `<nui-btn-group 
+        code: `<nui-select-btn 
   mode="checkbox"
   [options]="formats" 
   labelBy="label"
   iconBy="icon"
   valueBy="id"
   [(ngModel)]="selectedFormats">
-</nui-btn-group>`,
+</nui-select-btn>`,
         language: 'html',
       },
       {
@@ -69,23 +69,23 @@ export const BUTTON_GROUP_EXAMPLES_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'complex',
-    title: 'components.buttonGroup.complex.title',
-    description: 'components.buttonGroup.complex.description',
+    title: 'components.selectButton.complex.title',
+    description: 'components.selectButton.complex.description',
     anchor: 'complex',
     note: {
       type: 'info',
-      content: 'components.buttonGroup.complex.note',
+      content: 'components.selectButton.complex.note',
     },
     examples: [
       {
         title: 'codeExamples.html',
-        code: `<nui-btn-group 
+        code: `<nui-select-btn 
   [options]="users"
   labelBy="name"    
   valueBy="id"      
   disabledBy="disabled" 
   [(ngModel)]="selectedUserId">
-</nui-btn-group>
+</nui-select-btn>
 `,
         language: 'html',
       },
@@ -101,23 +101,23 @@ export const BUTTON_GROUP_EXAMPLES_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'icons',
-    title: 'components.buttonGroup.icons.title',
-    description: 'components.buttonGroup.icons.description',
+    title: 'components.selectButton.icons.title',
+    description: 'components.selectButton.icons.description',
     anchor: 'icons',
     note: {
       type: 'info',
-      content: 'components.buttonGroup.icons.note',
+      content: 'components.selectButton.icons.note',
     },
     examples: [
       {
         title: 'codeExamples.html',
-        code: `<nui-btn-group 
+        code: `<nui-select-btn 
   [options]="textFormats" 
   iconBy="icon"
   [iconOnly]="true" 
   mode="checkbox"
   valueBy="id">
-</nui-btn-group>
+</nui-select-btn>
 `,
         language: 'html',
       },
@@ -134,19 +134,19 @@ export const BUTTON_GROUP_EXAMPLES_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'colors',
-    title: 'components.buttonGroup.colors.title',
-    description: 'components.buttonGroup.colors.description',
+    title: 'components.selectButton.colors.title',
+    description: 'components.selectButton.colors.description',
     anchor: 'colors',
     note: {
       type: 'info',
-      content: 'components.buttonGroup.colors.note',
+      content: 'components.selectButton.colors.note',
     },
     examples: [
       {
         title: 'codeExamples.html',
-        code: `<nui-btn-group color="primary" variant="solid" [options]="..."></nui-btn-group>
-<nui-btn-group color="danger" variant="ghost" [options]="..."></nui-btn-group>
-<nui-btn-group color="success" variant="outline" [options]="..."></nui-btn-group>
+        code: `<nui-select-btn color="primary" variant="solid" [options]="..."></nui-select-btn>
+<nui-select-btn color="danger" variant="ghost" [options]="..."></nui-select-btn>
+<nui-select-btn color="success" variant="outline" [options]="..."></nui-select-btn>
 `,
         language: 'html',
       },
@@ -154,60 +154,60 @@ export const BUTTON_GROUP_EXAMPLES_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'segmented',
-    title: 'components.buttonGroup.segmented.title',
-    description: 'components.buttonGroup.segmented.description',
+    title: 'components.selectButton.segmented.title',
+    description: 'components.selectButton.segmented.description',
     anchor: 'segmented',
     note: {
       type: 'info',
-      content: 'components.buttonGroup.segmented.note',
+      content: 'components.selectButton.segmented.note',
     },
     examples: [
       {
         title: 'codeExamples.html',
-        code: `<nui-btn-group 
+        code: `<nui-select-btn 
   variant="segmented"
   [options]="periods"
   [(ngModel)]="selectedPeriod">
-</nui-btn-group>`,
+</nui-select-btn>`,
         language: 'html',
       },
     ],
   },
   {
     id: 'sizes',
-    title: 'components.buttonGroup.sizes.title',
-    description: 'components.buttonGroup.sizes.description',
+    title: 'components.selectButton.sizes.title',
+    description: 'components.selectButton.sizes.description',
     anchor: 'sizes',
     note: {
       type: 'info',
-      content: 'components.buttonGroup.sizes.note',
+      content: 'components.selectButton.sizes.note',
     },
     examples: [
       {
         title: 'codeExamples.html',
-        code: `<nui-btn-group size="xs" layout="segmented" [options]="..."></nui-btn-group>
-<nui-btn-group size="sm" layout="segmented" [options]="..."></nui-btn-group>
-<nui-btn-group size="md" layout="segmented" [options]="..."></nui-btn-group>
-<nui-btn-group size="lg" layout="segmented" [options]="..."></nui-btn-group>
-<nui-btn-group size="xl" layout="segmented" [options]="..."></nui-btn-group>`,
+        code: `<nui-select-btn size="xs" layout="segmented" [options]="..."></nui-select-btn>
+<nui-select-btn size="sm" layout="segmented" [options]="..."></nui-select-btn>
+<nui-select-btn size="md" layout="segmented" [options]="..."></nui-select-btn>
+<nui-select-btn size="lg" layout="segmented" [options]="..."></nui-select-btn>
+<nui-select-btn size="xl" layout="segmented" [options]="..."></nui-select-btn>`,
         language: 'html',
       },
     ],
   },
   {
     id: 'width',
-    title: 'components.buttonGroup.width.title',
-    description: 'components.buttonGroup.width.description',
+    title: 'components.selectButton.width.title',
+    description: 'components.selectButton.width.description',
     anchor: 'width',
     note: {
       type: 'info',
-      content: 'components.buttonGroup.width.note',
+      content: 'components.selectButton.width.note',
     },
     examples: [
       {
         title: 'codeExamples.html',
         code: `<div style="width: 100%; max-width: 400px">
-  <nui-btn-group width="full" [options]="['Log In', 'Sign Up']"></nui-btn-group>
+  <nui-select-btn width="full" [options]="['Log In', 'Sign Up']"></nui-select-btn>
 </div>`,
         language: 'html',
       },

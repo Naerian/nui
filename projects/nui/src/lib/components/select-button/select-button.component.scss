@@ -1,40 +1,40 @@
-@use './../../../../styles/variables/button-group-vars';
+@use './../../../../styles/variables/select-button-vars';
 
 :host {
-  @include button-group-vars.nui-btn-group-vars;
+  @include select-button-vars.nui-select-btn-vars;
 }
 
-@mixin button-group-theme($variant, $color-name) {
-  --nui-btn-group-track-bg: var(--nui-btn-group-#{$color-name}-#{$variant}-track-bg, transparent);
-  --nui-btn-group-track-border: var(
-    --nui-btn-group-#{$color-name}-#{$variant}-track-border,
+@mixin select-button-theme($variant, $color-name) {
+  --nui-slc-btn-track-bg: var(--nui-slc-btn-#{$color-name}-#{$variant}-track-bg, transparent);
+  --nui-slc-btn-track-border: var(
+    --nui-slc-btn-#{$color-name}-#{$variant}-track-border,
     transparent
   );
 
-  --nui-btn-group-base-bg: var(--nui-btn-group-#{$color-name}-#{$variant}-bg);
-  --nui-btn-group-base-text: var(--nui-btn-group-#{$color-name}-#{$variant}-text);
-  --nui-btn-group-base-border: var(--nui-btn-group-#{$color-name}-#{$variant}-border);
-  --nui-btn-group-hover-bg: var(--nui-btn-group-#{$color-name}-#{$variant}-hover-bg);
+  --nui-slc-btn-base-bg: var(--nui-slc-btn-#{$color-name}-#{$variant}-bg);
+  --nui-slc-btn-base-text: var(--nui-slc-btn-#{$color-name}-#{$variant}-text);
+  --nui-slc-btn-base-border: var(--nui-slc-btn-#{$color-name}-#{$variant}-border);
+  --nui-slc-btn-hover-bg: var(--nui-slc-btn-#{$color-name}-#{$variant}-hover-bg);
 
-  --nui-btn-group-sel-bg: var(--nui-btn-group-#{$color-name}-#{$variant}-sel-bg);
-  --nui-btn-group-sel-text: var(--nui-btn-group-#{$color-name}-#{$variant}-sel-text);
-  --nui-btn-group-sel-border: var(--nui-btn-group-#{$color-name}-#{$variant}-sel-border);
+  --nui-slc-btn-sel-bg: var(--nui-slc-btn-#{$color-name}-#{$variant}-sel-bg);
+  --nui-slc-btn-sel-text: var(--nui-slc-btn-#{$color-name}-#{$variant}-sel-text);
+  --nui-slc-btn-sel-border: var(--nui-slc-btn-#{$color-name}-#{$variant}-sel-border);
 }
 
-.nui-btn-group {
+.nui-select-btn {
   display: inline-flex;
   align-items: stretch;
   position: relative;
-  border-radius: var(--nui-btn-group-radius);
+  border-radius: var(--nui-slc-btn-radius);
   user-select: none;
   isolation: isolate;
-  border: 1px solid var(--nui-btn-group-track-border);
-  background-color: var(--nui-btn-group-track-bg);
+  border: 1px solid var(--nui-slc-btn-track-border);
+  background-color: var(--nui-slc-btn-track-bg);
 
   &--full {
     display: flex;
     width: 100%;
-    .nui-btn-group__option {
+    .nui-select-btn__option {
       flex: 1;
     }
   }
@@ -56,15 +56,15 @@
     position: relative;
     white-space: nowrap;
     cursor: pointer;
-    background-color: var(--nui-btn-group-base-bg);
-    color: var(--nui-btn-group-base-text);
-    border: var(--nui-border-width-xs) solid var(--nui-btn-group-base-border);
+    background-color: var(--nui-slc-btn-base-bg);
+    color: var(--nui-slc-btn-base-text);
+    border: var(--nui-border-width-xs) solid var(--nui-slc-btn-base-border);
     font-family: var(--nui-font-family);
     font-weight: var(--nui-font-weight-medium);
-    z-index: var(--nui-btn-group-z-index-base);
+    z-index: var(--nui-slc-btn-z-index-base);
 
     &:not(:first-child) {
-      margin-left: var(--nui-btn-group-overlap, -1px);
+      margin-left: var(--nui-slc-btn-overlap, -1px);
     }
 
     &:first-child {
@@ -78,19 +78,19 @@
     }
 
     &:hover:not(&--selected):not(&--disabled) {
-      background-color: var(--nui-btn-group-hover-bg);
+      background-color: var(--nui-slc-btn-hover-bg);
       z-index: 2;
     }
 
     &--selected {
-      background-color: var(--nui-btn-group-sel-bg);
-      color: var(--nui-btn-group-sel-text);
-      border-color: var(--nui-btn-group-sel-border);
+      background-color: var(--nui-slc-btn-sel-bg);
+      color: var(--nui-slc-btn-sel-text);
+      border-color: var(--nui-slc-btn-sel-border);
       z-index: 3;
     }
 
     &--disabled {
-      opacity: var(--nui-btn-group-disabled-opacity);
+      opacity: var(--nui-slc-btn-disabled-opacity);
       cursor: not-allowed;
       pointer-events: none;
     }
@@ -113,14 +113,14 @@
   $sizes: xs, sm, md, lg, xl;
   @each $size in $sizes {
     &--#{$size} {
-      .nui-btn-group__option {
+      .nui-select-btn__option {
         height: var(--nui-height-#{$size});
         padding: var(--nui-padding-#{$size});
         font-size: var(--nui-font-size-#{$size});
         gap: var(--nui-spacing-xs);
       }
-      .nui-btn-group__icon {
-        font-size: var(--nui-btn-group-icon-size-#{$size});
+      .nui-select-btn__icon {
+        font-size: var(--nui-slc-btn-icon-size-#{$size});
       }
     }
   }
@@ -133,8 +133,8 @@
   @each $color in $colors {
     &--#{$color} {
       @each $variant in $variants {
-        &.nui-btn-group--#{$variant} {
-          @include button-group-theme($variant, $color);
+        &.nui-select-btn--#{$variant} {
+          @include select-button-theme($variant, $color);
         }
       }
     }
@@ -144,12 +144,12 @@
   // SEGMENTED (Special variant with unique styles)
   // ==================================================
   &--segmented {
-    gap: var(--nui-btn-group-segmented-gap);
-    padding: var(--nui-btn-group-segmented-padding);
+    gap: var(--nui-slc-btn-segmented-gap);
+    padding: var(--nui-slc-btn-segmented-padding);
 
-    .nui-btn-group__option {
+    .nui-select-btn__option {
       margin: 0 !important;
-      border-radius: calc(var(--nui-btn-group-radius) - var(--nui-btn-group-segmented-padding));
+      border-radius: calc(var(--nui-slc-btn-radius) - var(--nui-slc-btn-segmented-padding));
 
       &--selected {
         box-shadow: var(--nui-box-shadow-sm);

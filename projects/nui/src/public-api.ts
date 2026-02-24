@@ -12,7 +12,7 @@ export * from './lib/animations';
 
 // Components
 export * from './lib/components/button';
-export * from './lib/components/button-group';
+export * from './lib/components/select-button';
 export * from './lib/components/calendar';
 export * from './lib/components/paginator';
 export * from './lib/components/popover';

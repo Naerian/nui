@@ -33,14 +33,14 @@ import {
   TimePickerStrategyEnum,
   TimePickerModeEnum,
 } from './models/time-picker.model';
-import { ButtonGroupComponent } from '../button-group';
-import type { BtnGroupOption } from '../button-group/models/button-group.model';
+import { SelectButtonComponent } from '../select-button';
+import type { SelectBtnOption } from '../select-button/models/select-button.model';
 import { NUI_TRANSLATIONS } from '../../translations';
 import { TooltipDirective } from '../tooltip';
 @Component({
   selector: 'nui-time-picker',
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonGroupComponent, TooltipDirective],
+  imports: [CommonModule, FormsModule, SelectButtonComponent, TooltipDirective],
   templateUrl: './time-picker.component.html',
   styleUrls: ['./time-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -246,8 +246,8 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   /**
    * Opciones para las pestañas del time picker
    */
-  tabOptions = computed<BtnGroupOption[]>(() => {
-    const options: BtnGroupOption[] = [
+  tabOptions = computed<SelectBtnOption[]>(() => {
+    const options: SelectBtnOption[] = [
       { label: this._translations.timePicker.tabs.selector, value: 'selector' },
     ];
 
@@ -264,7 +264,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   /**
    * Opciones para el ToggleButton de AM/PM
    */
-  periodOptions = computed<BtnGroupOption[]>(() => [
+  periodOptions = computed<SelectBtnOption[]>(() => [
     { label: TimePeriodEnum.AM, value: TimePeriodEnum.AM },
     { label: TimePeriodEnum.PM, value: TimePeriodEnum.PM },
   ]);

@@ -5,13 +5,13 @@ Componente de grupo de botones con selección tipo radio o checkbox. Similar a t
 ## 📦 Importación
 
 ```typescript
-import { ButtonGroupComponent } from '@shared/components/button-group';
+import { SelectButtonComponent } from '@shared/components/select-button';
 ```
 
 ## 🎯 Selector
 
 ```html
-<nui-btn-group></nui-btn-group>
+<nui-select-btn></nui-select-btn>
 ```
 
 ## 📋 API
@@ -20,8 +20,8 @@ import { ButtonGroupComponent } from '@shared/components/button-group';
 
 | Propiedad | Tipo | Default | Descripción |
 |-----------|------|---------|-------------|
-| `options` | `BtnGroupOption[] \| any[]` | `[]` | **Requerido**. Opciones disponibles |
-| `mode` | `BtnGroupMode` | `'radio'` | Modo de selección (`'radio' \| 'checkbox'`) |
+| `options` | `SelectBtnOption[] \| any[]` | `[]` | **Requerido**. Opciones disponibles |
+| `mode` | `SelectBtnMode` | `'radio'` | Modo de selección (`'radio' \| 'checkbox'`) |
 | `width` | `ButtonWidth` | `'auto'` | Ancho del componente (`'auto' \| 'fit' \| 'full'`) |
 | `labelBy` | `string` | `'label'` | Nombre de la propiedad para el label |
 | `valueBy` | `string` | `'value'` | Nombre de la propiedad para el value |
@@ -43,13 +43,13 @@ import { ButtonGroupComponent } from '@shared/components/button-group';
 ### Tipos
 
 ```typescript
-type BtnGroupMode = 'radio' | 'checkbox';
+type SelectBtnMode = 'radio' | 'checkbox';
 type NUIVariant = 'solid' | 'outline' | 'ghost';
 type ButtonWidth = 'auto' | 'fit' | 'full';
 type NUIColor = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'accent';
 type NUISize = 'xs' | 's' | 'md' | 'lg' | 'xl';
 
-interface BtnGroupOption {
+interface SelectBtnOption {
   label: string;
   value: any;
   icon?: string;
@@ -63,10 +63,10 @@ ButtonGroup implementa `ControlValueAccessor` para integración con Angular Form
 
 ```typescript
 // Template-driven
-<nui-btn-group [(ngModel)]="selectedView"></nui-btn-group>
+<nui-select-btn [(ngModel)]="selectedView"></nui-select-btn>
 
 // Reactive forms
-<nui-btn-group formControlName="view"></nui-btn-group>
+<nui-select-btn formControlName="view"></nui-select-btn>
 ```
 
 ## 💡 Ejemplos de Uso
@@ -75,7 +75,7 @@ ButtonGroup implementa `ControlValueAccessor` para integración con Angular Form
 
 ```typescript
 export class MyComponent {
-  viewOptions: BtnGroupOption[] = [
+  viewOptions: SelectBtnOption[] = [
     { label: 'Lista', value: 'list', icon: 'ri-list-check' },
     { label: 'Cuadrícula', value: 'grid', icon: 'ri-grid-line' },
     { label: 'Tablero', value: 'board', icon: 'ri-dashboard-line' }
@@ -91,19 +91,19 @@ export class MyComponent {
 
 ```html
 <!-- Selección única - solo un botón puede estar activo -->
-<nui-btn-group
+<nui-select-btn
   [options]="viewOptions"
   mode="radio"
   [(value)]="selectedView"
   (valueChange)="onViewChange($event)">
-</nui-btn-group>
+</nui-select-btn>
 ```
 
 ### Modo Checkbox (Multiselección)
 
 ```typescript
 export class MyComponent {
-  formatOptions: BtnGroupOption[] = [
+  formatOptions: SelectBtnOption[] = [
     { label: 'Negrita', value: 'bold', icon: 'ri-bold' },
     { label: 'Cursiva', value: 'italic', icon: 'ri-italic' },
     { label: 'Subrayado', value: 'underline', icon: 'ri-underline' }
@@ -115,12 +115,12 @@ export class MyComponent {
 
 ```html
 <!-- Multiselección - múltiples botones pueden estar activos -->
-<nui-btn-group
+<nui-select-btn
   [options]="formatOptions"
   mode="checkbox"
   [(value)]="selectedFormats"
   color="primary">
-</nui-btn-group>
+</nui-select-btn>
 
 <!-- selectedFormats puede ser: [], ['bold'], ['bold', 'italic'], etc. -->
 ```
@@ -129,7 +129,7 @@ export class MyComponent {
 
 ```typescript
 export class MyComponent {
-  alignOptions: BtnGroupOption[] = [
+  alignOptions: SelectBtnOption[] = [
     { label: 'Izquierda', value: 'left', icon: 'ri-align-left' },
     { label: 'Centro', value: 'center', icon: 'ri-align-center' },
     { label: 'Derecha', value: 'right', icon: 'ri-align-right' },
@@ -142,60 +142,60 @@ export class MyComponent {
 
 ```html
 <!-- Muestra solo los iconos, sin texto -->
-<nui-btn-group
+<nui-select-btn
   [options]="alignOptions"
   mode="radio"
   [(value)]="textAlign"
   [iconOnly]="true"
   color="accent">
-</nui-btn-group>
+</nui-select-btn>
 ```
 
 ### Variantes de Estilo
 
 ```html
 <!-- Solid (por defecto) - Botones con fondo completo -->
-<nui-btn-group
+<nui-select-btn
   [options]="options"
   variant="solid"
   color="primary">
-</nui-btn-group>
+</nui-select-btn>
 
 <!-- Outline - Botones con solo borde -->
-<nui-btn-group
+<nui-select-btn
   [options]="options"
   variant="outline"
   color="primary">
-</nui-btn-group>
+</nui-select-btn>
 
 <!-- Ghost - Botones con fondo suave -->
-<nui-btn-group
+<nui-select-btn
   [options]="options"
   variant="ghost"
   color="primary">
-</nui-btn-group>
+</nui-select-btn>
 ```
 
 ### Colores
 
 ```html
-<nui-btn-group [options]="options" color="primary"></nui-btn-group>
-<nui-btn-group [options]="options" color="secondary"></nui-btn-group>
-<nui-btn-group [options]="options" color="success"></nui-btn-group>
-<nui-btn-group [options]="options" color="info"></nui-btn-group>
-<nui-btn-group [options]="options" color="warning"></nui-btn-group>
-<nui-btn-group [options]="options" color="danger"></nui-btn-group>
-<nui-btn-group [options]="options" color="accent"></nui-btn-group>
+<nui-select-btn [options]="options" color="primary"></nui-select-btn>
+<nui-select-btn [options]="options" color="secondary"></nui-select-btn>
+<nui-select-btn [options]="options" color="success"></nui-select-btn>
+<nui-select-btn [options]="options" color="info"></nui-select-btn>
+<nui-select-btn [options]="options" color="warning"></nui-select-btn>
+<nui-select-btn [options]="options" color="danger"></nui-select-btn>
+<nui-select-btn [options]="options" color="accent"></nui-select-btn>
 ```
 
 ### Tamaños
 
 ```html
-<nui-btn-group [options]="options" size="xs"></nui-btn-group>
-<nui-btn-group [options]="options" size="s"></nui-btn-group>
-<nui-btn-group [options]="options" size="md"></nui-btn-group>
-<nui-btn-group [options]="options" size="lg"></nui-btn-group>
-<nui-btn-group [options]="options" size="xl"></nui-btn-group>
+<nui-select-btn [options]="options" size="xs"></nui-select-btn>
+<nui-select-btn [options]="options" size="s"></nui-select-btn>
+<nui-select-btn [options]="options" size="md"></nui-select-btn>
+<nui-select-btn [options]="options" size="lg"></nui-select-btn>
+<nui-select-btn [options]="options" size="xl"></nui-select-btn>
 ```
 
 ### Opciones con Objetos Personalizados
@@ -216,14 +216,14 @@ export class MyComponent {
 
 ```html
 <!-- Mapeo de propiedades personalizadas -->
-<nui-btn-group
+<nui-select-btn
   [options]="customOptions"
   mode="radio"
   [(value)]="selectedPeriod"
   labelBy="name"
   valueBy="id"
   disabledBy="inactive">
-</nui-btn-group>
+</nui-select-btn>
 ```
 
 ### Integración con Reactive Forms
@@ -234,7 +234,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class SettingsComponent {
   settingsForm: FormGroup;
   
-  themeOptions: BtnGroupOption[] = [
+  themeOptions: SelectBtnOption[] = [
     { label: 'Claro', value: 'light', icon: 'ri-sun-line' },
     { label: 'Oscuro', value: 'dark', icon: 'ri-moon-line' },
     { label: 'Auto', value: 'auto', icon: 'ri-contrast-line' }
@@ -255,12 +255,12 @@ export class SettingsComponent {
 
 ```html
 <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
-  <nui-btn-group
+  <nui-select-btn
     [options]="themeOptions"
     formControlName="theme"
     mode="radio"
     color="primary">
-  </nui-btn-group>
+  </nui-select-btn>
   
   <button type="submit">Guardar</button>
 </form>
@@ -270,7 +270,7 @@ export class SettingsComponent {
 
 ```typescript
 export class MyComponent {
-  options: BtnGroupOption[] = [
+  options: SelectBtnOption[] = [
     { label: 'Opción 1', value: 1 },
     { label: 'Opción 2', value: 2, disabled: true }, // Esta opción está deshabilitada
     { label: 'Opción 3', value: 3 }
@@ -283,13 +283,13 @@ export class MyComponent {
 
 ```html
 <!-- Opción individual deshabilitada -->
-<nui-btn-group [options]="options"></nui-btn-group>
+<nui-select-btn [options]="options"></nui-select-btn>
 
 <!-- Todo el componente deshabilitado -->
-<nui-btn-group 
+<nui-select-btn 
   [options]="options"
   [disabled]="isDisabled">
-</nui-btn-group>
+</nui-select-btn>
 ```
 
 ## 🎯 Casos de Uso
@@ -298,7 +298,7 @@ export class MyComponent {
 
 ```typescript
 export class DataViewComponent {
-  viewModes: BtnGroupOption[] = [
+  viewModes: SelectBtnOption[] = [
     { label: 'Lista', value: 'list', icon: 'ri-list-check' },
     { label: 'Cuadrícula', value: 'grid', icon: 'ri-grid-line' },
     { label: 'Kanban', value: 'kanban', icon: 'ri-trello-line' }
@@ -315,14 +315,14 @@ export class DataViewComponent {
 ```html
 <div class="toolbar">
   <h2>Proyectos</h2>
-  <nui-btn-group
+  <nui-select-btn
     [options]="viewModes"
     [(value)]="currentView"
     (valueChange)="onViewChange($event)"
     [iconOnly]="true"
     size="s"
     variant="outline">
-  </nui-btn-group>
+  </nui-select-btn>
 </div>
 ```
 
@@ -332,7 +332,7 @@ export class DataViewComponent {
 export class TextEditorComponent {
   textFormat: string[] = [];
   
-  formatOptions: BtnGroupOption[] = [
+  formatOptions: SelectBtnOption[] = [
     { label: 'B', value: 'bold', icon: 'ri-bold' },
     { label: 'I', value: 'italic', icon: 'ri-italic' },
     { label: 'U', value: 'underline', icon: 'ri-underline' },
@@ -348,7 +348,7 @@ export class TextEditorComponent {
 ```html
 <div class="editor-toolbar">
   <!-- Multiselección para formato de texto -->
-  <nui-btn-group
+  <nui-select-btn
     [options]="formatOptions"
     mode="checkbox"
     [(value)]="textFormat"
@@ -356,7 +356,7 @@ export class TextEditorComponent {
     [iconOnly]="true"
     size="s"
     color="accent">
-  </nui-btn-group>
+  </nui-select-btn>
 </div>
 ```
 
@@ -364,7 +364,7 @@ export class TextEditorComponent {
 
 ```typescript
 export class DashboardComponent {
-  periods: BtnGroupOption[] = [
+  periods: SelectBtnOption[] = [
     { label: 'Día', value: 'day' },
     { label: 'Semana', value: 'week' },
     { label: 'Mes', value: 'month' },
@@ -382,13 +382,13 @@ export class DashboardComponent {
 ```html
 <div class="dashboard-header">
   <h1>Analíticas</h1>
-  <nui-btn-group
+  <nui-select-btn
     [options]="periods"
     [(value)]="selectedPeriod"
     (valueChange)="onPeriodChange($event)"
     variant="solid"
     color="primary">
-  </nui-btn-group>
+  </nui-select-btn>
 </div>
 ```
 
@@ -396,7 +396,7 @@ export class DashboardComponent {
 
 ```typescript
 export class DocumentEditorComponent {
-  textAlignOptions: BtnGroupOption[] = [
+  textAlignOptions: SelectBtnOption[] = [
     { label: 'Izquierda', value: 'left', icon: 'ri-align-left' },
     { label: 'Centro', value: 'center', icon: 'ri-align-center' },
     { label: 'Derecha', value: 'right', icon: 'ri-align-right' },
@@ -408,21 +408,21 @@ export class DocumentEditorComponent {
 ```
 
 ```html
-<nui-btn-group
+<nui-select-btn
   [options]="textAlignOptions"
   [(value)]="alignment"
   [iconOnly]="true"
   mode="radio"
   size="s"
   variant="ghost">
-</nui-btn-group>
+</nui-select-btn>
 ```
 
 ### Selector de Idioma
 
 ```typescript
 export class HeaderComponent {
-  languages: BtnGroupOption[] = [
+  languages: SelectBtnOption[] = [
     { label: 'ES', value: 'es', icon: 'ri-translate' },
     { label: 'EN', value: 'en', icon: 'ri-translate' },
     { label: 'FR', value: 'fr', icon: 'ri-translate' }
@@ -437,7 +437,7 @@ export class HeaderComponent {
 ```
 
 ```html
-<nui-btn-group
+<nui-select-btn
   [options]="languages"
   [(value)]="currentLang"
   (valueChange)="changeLanguage($event)"
@@ -445,7 +445,7 @@ export class HeaderComponent {
   size="s"
   variant="outline"
   color="secondary">
-</nui-btn-group>
+</nui-select-btn>
 ```
 
 ## 🎨 Estados Visuales
@@ -459,12 +459,12 @@ Los botones seleccionados muestran indicadores visuales según la variante:
 - **Ghost**: Fondo suave del color cuando está seleccionado
 
 ```html
-<nui-btn-group
+<nui-select-btn
   [options]="options"
   [(value)]="selected"
   variant="solid">
   <!-- El botón seleccionado se resalta automáticamente -->
-</nui-btn-group>
+</nui-select-btn>
 ```
 
 ### Hover y Focus
@@ -477,18 +477,18 @@ Los botones seleccionados muestran indicadores visuales según la variante:
 
 ```html
 <!-- Componente completo deshabilitado -->
-<nui-btn-group
+<nui-select-btn
   [options]="options"
   [disabled]="true">
-</nui-btn-group>
+</nui-select-btn>
 
 <!-- Opción individual deshabilitada -->
-<nui-btn-group
+<nui-select-btn
   [options]="[
     { label: 'Activo', value: 1 },
     { label: 'Deshabilitado', value: 2, disabled: true }
   ]">
-</nui-btn-group>
+</nui-select-btn>
 ```
 
 ## 📐 Estructura Visual
@@ -591,21 +591,21 @@ ButtonGroup utiliza el sistema de focus del componente Button base:
 
 ```scss
 // Solid variant - Contraste alto
-.nui-btn-group--solid .nui-button:focus-visible {
+.nui-select-btn--solid .nui-button:focus-visible {
   outline: 2px solid var(--focus-ring-color);
   outline-offset: 2px;
   box-shadow: 0 0 0 4px var(--focus-ring-shadow);
 }
 
 // Outline variant - Ring más prominente
-.nui-btn-group--outline .nui-button:focus-visible {
+.nui-select-btn--outline .nui-button:focus-visible {
   outline: 3px solid var(--focus-ring-color);
   outline-offset: 1px;
   box-shadow: 0 0 0 1px var(--button-outline-border);
 }
 
 // Ghost variant - Background + ring
-.nui-btn-group--ghost .nui-button:focus-visible {
+.nui-select-btn--ghost .nui-button:focus-visible {
   background-color: var(--button-ghost-hover-bg);
   outline: 2px solid var(--focus-ring-color);
   outline-offset: 1px;
@@ -615,7 +615,7 @@ ButtonGroup utiliza el sistema de focus del componente Button base:
 #### Personalización de Variables de Foco
 
 ```scss
-.nui-btn-group {
+.nui-select-btn {
   // Variables base
   --focus-ring-color: rgb(59 130 246); // blue-500
   --focus-ring-shadow: rgb(59 130 246 / 0.5);
@@ -669,68 +669,6 @@ ButtonGroup utiliza el sistema de focus del componente Button base:
 - "Checkbox, [Opción], [checked/unchecked]"
 ```
 
-#### Configuración de Tests Automatizados
-
-```typescript
-// button-group-accessibility.spec.ts
-describe('ButtonGroup Accessibility', () => {
-  describe('ARIA Compliance', () => {
-    it('should have correct radiogroup structure in radio mode', () => {
-      const fixture = createComponent({ mode: 'radio' });
-      const group = fixture.debugElement.query(By.css('[role="radiogroup"]'));
-      const radios = fixture.debugElement.queryAll(By.css('[role="radio"]'));
-      
-      expect(group).toBeTruthy();
-      expect(radios.length).toBe(3);
-      expect(radios.every(r => r.attributes['aria-checked'])).toBeTruthy();
-    });
-
-    it('should manage tabindex correctly in radio mode', () => {
-      const fixture = createComponent({ 
-        mode: 'radio',
-        value: 'option2'
-      });
-      
-      const buttons = fixture.debugElement.queryAll(By.css('button'));
-      const tabindexes = buttons.map(b => b.attributes['tabindex']);
-      
-      expect(tabindexes).toEqual(['-1', '0', '-1']); // Solo el seleccionado
-    });
-  });
-
-  describe('Keyboard Navigation', () => {
-    it('should navigate with arrows in radio mode', fakeAsync(() => {
-      const fixture = createComponent({ mode: 'radio' });
-      const firstButton = fixture.debugElement.query(By.css('button'));
-      
-      firstButton.nativeElement.focus();
-      firstButton.triggerEventHandler('keydown', { 
-        key: 'ArrowRight', 
-        preventDefault: jasmine.createSpy() 
-      });
-      
-      tick();
-      fixture.detectChanges();
-      
-      expect(component.value).toBe('option2');
-    }));
-
-    it('should handle Home/End keys', fakeAsync(() => {
-      const fixture = createComponent({ mode: 'radio' });
-      const secondButton = fixture.debugElement.queryAll(By.css('button'))[1];
-      
-      secondButton.triggerEventHandler('keydown', { 
-        key: 'End',
-        preventDefault: jasmine.createSpy() 
-      });
-      
-      tick();
-      expect(component.value).toBe('option3'); // Última opción
-    }));
-  });
-});
-```
-
 ### 📋 Checklist de Implementación
 
 #### Cumplimiento WCAG 2.1 AA
@@ -760,7 +698,7 @@ describe('ButtonGroup Accessibility', () => {
 ### Variables CSS Disponibles
 
 ```scss
-.nui-btn-group {
+.nui-select-btn {
   // Colores se toman del tema
   --btn-group-bg-color: var(--button-primary-bg);
   --btn-group-text-color: var(--button-primary-text);

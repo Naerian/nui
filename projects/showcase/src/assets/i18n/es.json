@@ -21,17 +21,17 @@
     "themingCssVariables": "Variables CSS",
     "themingCustomization": "Personalización",
     "components": "Componentes",
-    "button": "Botón",
+    "button": "Button",
     "avatar": "Avatar",
-    "buttonGroup": "Grupo de botones",
-    "calendar": "Calendario",
-    "paginator": "Paginador",
+    "selectButton": "Select Button",
+    "calendar": "Calendar",
+    "paginator": "Pagintaor",
     "popover": "Popover",
     "toast": "Toast",
     "tooltip": "Tooltip",
-    "sidebarPanel": "Panel lateral",
-    "actionMenu": "Menú de acciones",
-    "timePicker": "Selector de tiempo"
+    "sidebarPanel": "Sidebar Panel",
+    "actionMenu": "Action Menu",
+    "timePicker": "Time Picker"
   },
   "presets": {
     "aura": "Aura",
@@ -745,8 +745,8 @@
         "description": "Personaliza la apariencia del avatar mediante variables CSS. Controla tamaños, colores, bordes y más."
       }
     },
-    "buttonGroup": {
-      "title": "Button Group",
+    "selectButton": {
+      "title": "Select Button",
       "subtitle": "Conjunto de botones agrupados para selección única (Radio) o múltiple (Checkbox)",
       "basic": {
         "title": "Uso básico",
@@ -789,7 +789,7 @@
       },
       "api": {
         "title": "API y referencia",
-        "description": "Documentación completa de inputs, outputs y uso avanzado del componente Button Group.",
+        "description": "Documentación completa de inputs, outputs y uso avanzado del componente Select Button.",
         "inputs": {
           "title": "Inputs",
           "description": "Propiedades del componente que controlan su comportamiento y apariencia."
@@ -801,10 +801,10 @@
       },
       "theming": {
         "title": "Estilos y personalización",
-        "description": "Personaliza la apariencia del grupo de botones mediante variables CSS. Controla espaciado, colores, sombras y más.",
+        "description": "Personaliza la apariencia del Select Button mediante variables CSS. Controla espaciado, colores, sombras y más.",
         "general": {
           "title": "Variables generales",
-          "description": "Variables CSS para personalizar el estilo general del Button Group (layout default)."
+          "description": "Variables CSS para personalizar el estilo general del Select Button (layout default)."
         },
         "segmented": {
           "title": "Variables del layout segmented",
