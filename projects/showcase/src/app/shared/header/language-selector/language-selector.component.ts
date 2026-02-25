@@ -7,7 +7,6 @@ import { ShowcaseConfigService } from '../../../core/services/showcase-config.se
 interface Language {
   code: string;
   label: string;
-  flag: string;
 }
 
 @Component({
@@ -15,7 +14,7 @@ interface Language {
   standalone: true,
   imports: [CommonModule, TranslateModule, OverlayModule],
   templateUrl: './language-selector.component.html',
-  styleUrls: ['./language-selector.component.scss']
+  styleUrls: ['./language-selector.component.scss'],
 })
 export class LanguageSelectorComponent implements OnInit {
   private translateService = inject(TranslateService);
@@ -25,8 +24,8 @@ export class LanguageSelectorComponent implements OnInit {
   currentLanguage = this.showcaseConfig.currentConfig.language || 'en';
 
   languages: Language[] = [
-    { code: 'en', label: 'English', flag: '🇬🇧' },
-    { code: 'es', label: 'Español', flag: '🇪🇸' }
+    { code: 'en', label: 'English' },
+    { code: 'es', label: 'Español' },
   ];
 
   ngOnInit(): void {
