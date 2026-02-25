@@ -473,51 +473,6 @@ export type SidebarPanelConfig<D = any> =
   | (SidebarPanelConfigBase<D> & { minimizable?: false; id?: string });
 
 /**
- * Configuración por defecto del sidebar-panel
- */
-export const DEFAULT_SIDEBAR_PANEL_CONFIG: Required<
-  Omit<
-    SidebarPanelConfigBase,
-    | 'data'
-    | 'headerTemplate'
-    | 'footerTemplate'
-    | 'preventClose'
-    | 'ariaDescribedBy'
-    | 'title'
-    | 'width'
-    | 'height'
-    | 'maxWidth'
-    | 'maxHeight'
-    | 'backdropClass'
-    | 'panelClass'
-    | 'customButtons'
-    | 'minimizedTabCustomization'
-    | 'contentTemplate'
-    | 'htmlContent'
-    | 'templateContext'
-    | 'zIndex'
-  >
-> & { minimizable: false } = {
-  position: 'right',
-  size: 'md',
-  showHeader: true,
-  showCloseButton: true,
-  hasBackdrop: true,
-  closeOnBackdropClick: true,
-  closeOnEscape: true,
-  closeOnRouteChange: false,
-  autoFocus: true,
-  mobileFullScreen: false,
-  breakpoint: 768,
-  scrollStrategy: 'block',
-  ariaLabel: 'Slide Panel',
-  animationDuration: 225, // Matching Material-UI Drawer (225ms entrada, 195ms salida)
-  minimizable: false,
-  allowMultiple: false,
-  lazyLoad: true,
-};
-
-/**
  * Eventos del sidebar-panel
  */
 export interface SidebarPanelEvents {

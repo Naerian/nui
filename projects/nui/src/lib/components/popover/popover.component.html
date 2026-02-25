@@ -3,12 +3,12 @@
   [class]="mainClasses()"
   role="dialog"
   [@fadeIn]="'true'"
-  [attr.data-position]="position()"
+  [attr.data-position]="effectiveConfig().position"
   [attr.id]="popoverId()"
-  [style.max-width]="maxWidth()"
-  [style.min-width]="minWidth()"
+  [style.max-width]="effectiveConfig().maxWidth"
+  [style.min-width]="effectiveConfig().minWidth"
 >
-  @if (showArrow()) {
+  @if (effectiveConfig().showArrow) {
     <div class="nui-popover__arrow"></div>
   }
   <div class="nui-popover__content">

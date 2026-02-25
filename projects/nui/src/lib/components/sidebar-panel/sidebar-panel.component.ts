@@ -23,10 +23,10 @@ import { NgTemplateOutlet, CommonModule } from '@angular/common';
 import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
 import {
   SIDEBAR_PANEL_SIZE_MAP,
-  SIDEBAR_PANEL_CONFIG,
   SidebarPanelPosition,
   SidebarPanelAction,
   FOCUS_TRAP_DELAY,
+  SIDEBAR_PANEL_CONFIG,
 } from './models/sidebar-panel.model';
 import { SidebarPanelRef } from './sidebar-panel-ref';
 import {
@@ -37,11 +37,12 @@ import { NUI_TRANSLATIONS } from '../../translations/translations.token';
 import { ButtonComponent } from '../button/button.component';
 import { SidebarPanelActionsService } from './services/sidebar-panel-actions.service';
 import { SidebarPanelTabsService } from './services/sidebar-panel-tabs.service';
+import { injectSidebarPanelConfig } from '../../configs';
 
 /**
  * Componente contenedor del sidebar-panel
  *
- * Este componente se crea dina a través del `SidebarPanelService` y actúa
+ * Este componente se crea dinámicamente a través del `SidebarPanelService` y actúa
  * como contenedor para el contenido dinámico que se carga dentro del panel.
  *
  * **Características principales:**
@@ -85,20 +86,16 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly _elementRef = inject(ElementRef);
   private readonly _tabsService = inject(SidebarPanelTabsService);
   protected readonly translations = inject(NUI_TRANSLATIONS);
+  protected readonly sidebarPanelConfig = inject(SIDEBAR_PANEL_CONFIG);
   protected readonly actionsService = inject(SidebarPanelActionsService, {
     optional: true,
   });
 
   /**
-   * ViewContainerRef para insertar el componente dinÃ¡mico
+   * ViewContainerRef para insertar el componente dinámico
    */
   @ViewChild('dynamicComponentContainer', { read: ViewContainerRef })
   dynamicComponentContainer?: ViewContainerRef;
-
-  /**
-   * Configuración del panel inyectada desde el servicio
-   */
-  readonly config = inject(SIDEBAR_PANEL_CONFIG);
 
   /**
    * Obtiene las acciones del footer según la precedencia:
@@ -109,8 +106,8 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   protected get footerActions(): SidebarPanelAction[] {
     // Si hay customButtons, convertirlos a acciones
-    if (this.config.customButtons && this.config.customButtons.length > 0) {
-      return this.config.customButtons.map(btn => ({
+    if (this.sidebarPanelConfig.customButtons && this.sidebarPanelConfig.customButtons.length > 0) {
+      return this.sidebarPanelConfig.customButtons.map(btn => ({
         label: btn.text,
         icon: btn.icon,
         color: btn.color,
@@ -143,7 +140,7 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   protected get shouldShowFooterActions(): boolean {
     return (
-      (this.config.customButtons && this.config.customButtons.length > 0) ||
+      (this.sidebarPanelConfig.customButtons && this.sidebarPanelConfig.customButtons.length > 0) ||
       (this.footerActions.length > 0 && !this.footerTemplate)
     );
   }
@@ -177,7 +174,7 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
    * Transform CSS para la animación según la posición del panel
    */
   get animationTransform(): string {
-    const position = this.config.position ?? 'right';
+    const position = this.sidebarPanelConfig.position ?? 'right';
     return this._getTransformByPosition(position);
   }
 
@@ -214,11 +211,11 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
   @HostBinding('class') get hostClasses(): string {
     const classes = [
       'sidebar-panel-container',
-      `sidebar-panel-position-${this.config.position ?? 'right'}`,
-      `sidebar-panel-size-${this.config.size ?? 'md'}`,
+      `sidebar-panel-position-${this.sidebarPanelConfig.position ?? 'right'}`,
+      `sidebar-panel-size-${this.sidebarPanelConfig.size ?? 'md'}`,
     ];
 
-    if (this.config.mobileFullScreen) {
+    if (this.sidebarPanelConfig.mobileFullScreen) {
       classes.push('sidebar-panel-mobile-fullscreen');
     }
 
@@ -233,7 +230,7 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
    * Atributo data-position para identificar la posición del panel
    */
   @HostBinding('attr.data-position') get dataPosition(): string {
-    return this.config.position ?? 'right';
+    return this.sidebarPanelConfig.position ?? 'right';
   }
 
   /**
@@ -256,7 +253,7 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
    * Esto asegura que el último panel abierto aparezca sobre los anteriores
    */
   @HostBinding('style.z-index') get styleZIndex(): number | null {
-    return this.config.zIndex ?? null;
+    return this.sidebarPanelConfig.zIndex ?? null;
   }
 
   /**
@@ -274,15 +271,15 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   @HostBinding('style') get hostStyles(): Record<string, string> {
     const styles: Record<string, string> = {};
-    const position = this.config.position ?? 'right';
-    const size = this.config.size ?? 'md';
+    const position = this.sidebarPanelConfig.position ?? 'right';
+    const size = this.sidebarPanelConfig.size ?? 'md';
 
     // Aplicar estilos de dimensiones
     Object.assign(styles, this._getDimensionStyles(position, size));
 
     // Z-index
-    if (this.config.zIndex) {
-      styles['z-index'] = this.config.zIndex.toString();
+    if (this.sidebarPanelConfig.zIndex) {
+      styles['z-index'] = this.sidebarPanelConfig.zIndex.toString();
     }
 
     return styles;
@@ -305,17 +302,19 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
     if (isHorizontal) {
       return {
         width:
-          this.config.width ?? SIDEBAR_PANEL_SIZE_MAP[size as keyof typeof SIDEBAR_PANEL_SIZE_MAP],
+          this.sidebarPanelConfig.width ??
+          SIDEBAR_PANEL_SIZE_MAP[size as keyof typeof SIDEBAR_PANEL_SIZE_MAP],
         height: '100vh',
-        ...(this.config.maxWidth && { 'max-width': this.config.maxWidth }),
+        ...(this.sidebarPanelConfig.maxWidth && { 'max-width': this.sidebarPanelConfig.maxWidth }),
       };
     }
 
     return {
       height:
-        this.config.height ?? SIDEBAR_PANEL_SIZE_MAP[size as keyof typeof SIDEBAR_PANEL_SIZE_MAP],
+        this.sidebarPanelConfig.height ??
+        SIDEBAR_PANEL_SIZE_MAP[size as keyof typeof SIDEBAR_PANEL_SIZE_MAP],
       width: '100vw',
-      ...(this.config.maxHeight && { 'max-height': this.config.maxHeight }),
+      ...(this.sidebarPanelConfig.maxHeight && { 'max-height': this.sidebarPanelConfig.maxHeight }),
     };
   }
 
@@ -331,14 +330,14 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
    * @returns Objeto con el estado actual y parámetros de animación
    */
   private readonly _animationParams = computed(() => {
-    const position = this.config.position ?? 'right';
+    const position = this.sidebarPanelConfig.position ?? 'right';
     const transform = this._getTransformByPosition(position);
 
     return {
       value: this.animationState(),
       params: {
         transform,
-        duration: this.config.animationDuration ?? 300,
+        duration: this.sidebarPanelConfig.animationDuration ?? 300,
       },
     };
   });
@@ -377,7 +376,7 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
    * @returns `true` si se debe mostrar, `false` en caso contrario (por defecto: `true`)
    */
   get showHeader(): boolean {
-    return this.config.showHeader ?? true;
+    return this.sidebarPanelConfig.showHeader ?? true;
   }
 
   /**
@@ -386,7 +385,7 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
    * @returns `true` si se debe mostrar, `false` en caso contrario (por defecto: `true`)
    */
   get showCloseButton(): boolean {
-    return this.config.showCloseButton ?? true;
+    return this.sidebarPanelConfig.showCloseButton ?? true;
   }
 
   /**
@@ -395,7 +394,7 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
    * @returns Título del panel o string vacío si no está definido
    */
   get title(): string {
-    return this.config.title ?? '';
+    return this.sidebarPanelConfig.title ?? '';
   }
 
   /**
@@ -452,7 +451,7 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     // Configurar focus trap
-    if (this.config.autoFocus !== false) {
+    if (this.sidebarPanelConfig.autoFocus !== false) {
       setTimeout(() => {
         this._setupFocusTrap();
       }, FOCUS_TRAP_DELAY);
@@ -533,9 +532,9 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
         this._tabsService.addTab({
           id: this.panelRef.id,
           title: this.title || 'Panel',
-          position: this.config.position ?? 'right',
+          position: this.sidebarPanelConfig.position ?? 'right',
           restoreCallback: () => this.restore(),
-          customization: this.config.minimizedTabCustomization, // Pasar customización
+          customization: this.sidebarPanelConfig.minimizedTabCustomization, // Pasar customización
         });
 
         this._cdr.detectChanges();
@@ -582,10 +581,12 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
       this._focusTrap = this._focusTrapFactory.create(element);
 
       // Auto-focus
-      if (this.config.autoFocus === true) {
+      if (this.sidebarPanelConfig.autoFocus === true) {
         this._focusTrap.focusInitialElementWhenReady();
-      } else if (typeof this.config.autoFocus === 'string') {
-        const targetElement = element.querySelector(this.config.autoFocus) as HTMLElement;
+      } else if (typeof this.sidebarPanelConfig.autoFocus === 'string') {
+        const targetElement = element.querySelector(
+          this.sidebarPanelConfig.autoFocus
+        ) as HTMLElement;
         if (targetElement) {
           targetElement.focus();
         } else {
@@ -605,7 +606,7 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
    * @private
    */
   private _handleScrollStrategy(): void {
-    const strategy = this.config.scrollStrategy ?? 'block';
+    const strategy = this.sidebarPanelConfig.scrollStrategy ?? 'block';
 
     if (strategy === 'block') {
       // Guardar posiciÃ³n actual de scroll
@@ -625,7 +626,7 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
    * @private
    */
   private _restoreScroll(): void {
-    const strategy = this.config.scrollStrategy ?? 'block';
+    const strategy = this.sidebarPanelConfig.scrollStrategy ?? 'block';
 
     if (strategy === 'block') {
       // Restaurar overflow del body

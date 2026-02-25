@@ -1,4 +1,4 @@
-import { TimePeriod, TimeValue } from '../../time-picker';
+import { TimePeriod, TimePickerConfig, TimePickerMode, TimeValue } from '../../time-picker';
 
 export enum CalendarType {
   DAY = 'day',
@@ -241,20 +241,14 @@ export const DEFAULT_FORMAT = 'yyyy-MM-dd';
 export type FirstDayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 // Time Picker display modes for Calendar integration
-export type CalendarTimePickerMode = true | 'start' | 'end' | 'both';
+export type CalendarTimePickerMode = 'both' | 'default' | 'none';
 export enum CalendarTimePickerModeEnum {
-  START = 'start',
-  END = 'end',
   BOTH = 'both',
+  DEFAULT = 'default',
+  NONE = 'none',
 }
 
 export type CalendarTabType = 'calendar' | 'presets' | 'time';
-
-export type CalendarWidth = 'compact' | 'full';
-export enum CalendarWidthEnum {
-  COMPACT = 'compact',
-  FULL = 'full',
-}
 
 // ============================================================================
 // CONFIGURACIÓN GLOBAL DEL CALENDARIO
@@ -286,22 +280,6 @@ export interface CalendarGlobalConfig {
    */
   closeOnSelect?: boolean;
 
-  /**
-   * Formato de fecha por defecto para la comunicación con APIs y usuarios.
-   * Acepta formato date-fns compatible (ej: 'yyyy-MM-dd', 'dd/MM/yyyy')
-   * Por defecto: 'yyyy-MM-dd'
-   * @example 'dd/MM/yyyy' // Formato español
-   */
-  format?: string;
-
-  /**
-   * Código de idioma/localidad (BCP 47)
-   * Usado por date-fns para traducciones de meses, días, etc.
-   * Por defecto: 'es' (Español)
-   * @example 'es', 'en', 'fr', 'de'
-   */
-  locale?: string;
-
   // ========================================================================
   // 2. COMPORTAMIENTO Y UX
   // ========================================================================
@@ -313,58 +291,38 @@ export interface CalendarGlobalConfig {
   showTodayButton?: boolean;
 
   /**
-   * Impedir que el usuario seleccione rangos que crucen fechas deshabilitadas.
-   * Si es true, al hacer hover sobre rangos, se detendrá en la fecha deshabilitada.
-   * Por defecto: false (permite cruzar)
+   * Formato de hora integrado para selección con time picker.
+   * Define el formato de hora que se usará cuando showTimePicker esté activo.
+   * Por defecto: TimePickerModeEnum.HOUR_MINUTE_24 (formato de 24 horas con horas y minutos)
+   * @example TimePickerModeEnum.HOUR_12 // Usar formato de 12 horas con AM/PM
+   * @example TimePickerModeEnum.HOUR_24 // Usar formato de 24 horas con solo horas (sin minutos)
+   * @example TimePickerModeEnum.HOUR_MINUTE_12 // Usar formato de 12 horas con horas y minutos
+   * @example TimePickerModeEnum.HOUR_MINUTE_24 // Usar formato de 24 horas con horas y minutos
+   * @example TimePickerModeEnum.DURATION // Usar formato de duración (horas y minutos sin AM/PM)
    */
-  blockDisabledRanges?: boolean;
+  timePickerMode?: TimePickerMode;
 
   /**
-   * Modo de vista inicial por defecto.
-   * Útil para calendarios que siempre deben empezar en vista anual.
-   * Por defecto: ViewMode.DAY
-   * @example ViewMode.MONTH // Empieza siempre en vista de mes
+   * Configuración adicional para el time picker integrado en el calendario.
+   * Permite personalizar el comportamiento del selector de hora (steps, rangos, presets, etc.)
+   * Esta configuración se aplicará a todos los calendarios que usen showTimePicker, pero cada calendario puede sobrescribirla.
+   * Por defecto: undefined (usar configuración por defecto del time picker)
+   * @example
+   * {
+   *    hourStep: 1, // Incrementos de hora de 1 en 1
+   *    minuteStep: 15, // Incrementos de minuto de 15 en 15
+   *    minTime: { hour: 8, minute: 0 }, // Hora mínima seleccionable (08:00)
+   *    maxTime: { hour: 18, minute: 0 }, // Hora máxima seleccionable (18:00)
+   *    disabledHours: [12, 13], // Deshabilitar horas de 12 a 13
+   *    presets: [
+   *          // Presets personalizados para el time picker
+   *          { label: 'Mañana', value: { hour: 9, minute: 0 } },
+   *          { label: 'Tarde', value: { hour: 15, minute: 0 } },
+   *          { label: 'Noche', value: { hour: 20, minute: 0 } },
+   *    ],
+   * }
    */
-  initialViewMode?: ViewMode;
-
-  /**
-   * Cerrar automáticamente el calendario tras seleccionar una fecha.
-   * Por defecto: true (para tipos DAY y WEEK), false (para RANGE)
-   */
-  autoClose?: boolean;
-
-  /**
-   * Número de meses/años a mostrar en vista simultánea.
-   * Por defecto: 1 (Un mes o año)
-   * @example 2 // Mostrar 2 meses lado a lado
-   */
-  displayCount?: number;
-
-  // ========================================================================
-  // 3. VISUAL Y UI (DESIGN SYSTEM)
-  // ========================================================================
-
-  /**
-   * Tamaño por defecto del calendario (sm, md, lg)
-   * Por defecto: 'md'
-   */
-  size?: 'sm' | 'md' | 'lg';
-
-  /**
-   * Ancho por defecto del calendario (compact, full)
-   * - 'compact': Ancho mínimo necesario
-   * - 'full': Ocupa el contenedor padre
-   * Por defecto: 'full'
-   */
-  width?: CalendarWidth;
-
-  /**
-   * Formato de hora integrado (12h o 24h).
-   * Mantiene consistencia si usas time zones o selección de rangos con horas.
-   * Por defecto: '24h'
-   * @example '12h' // Para aplicaciones en USA
-   */
-  timeMode?: '12h' | '24h';
+  timePickerConfig?: TimePickerConfig;
 
   // ========================================================================
   // 4. PRESETS DE RANGO
@@ -395,4 +353,43 @@ export interface CalendarGlobalConfig {
    * ]
    */
   customPresets?: DateRangePreset[];
+
+  /**
+   * Mostrar selector de hora integrado para fechas seleccionadas.
+   * Permite seleccionar horas junto con fechas sin necesidad de un time picker externo.
+   * - 'start': Mostrar selector de hora solo para la fecha de inicio (útil en RANGE)
+   * - 'end': Mostrar selector de hora solo para la fecha de fin (útil en RANGE)
+   * - 'both': Mostrar selector de hora para ambas fechas (inicio y fin)
+   * - 'default': Comportamiento inteligente según el tipo de selección (DAY/WEEK: mostrar, RANGE: mostrar ambos)
+   * - 'none': No mostrar selector de hora integrado
+   * Por defecto: 'none' (no mostrar time picker integrado)
+   */
+  showTimePicker?: CalendarTimePickerMode; // Mostrar selector de hora integrado: 'start'/'end'/'both'/'default'/'none'
+
+  /**
+   * Hora de inicio y fin inicial para selección con time picker integrado.
+   * Permite establecer un rango horario por defecto cuando se usa showTimePicker.
+   * Por ejemplo, para reservas de hotel, puedes establecer 14:00 - 12:00 del día siguiente.
+   * Estas horas se aplicarán inicialmente al seleccionar fechas, pero el usuario podrá modificarlas.
+   * Por defecto: null (sin hora inicial)
+   */
+  startTime?: TimeValue | Date | string | null; // Hora de inicio inicial para selección con time picker
+  endTime?: TimeValue | Date | string | null; // Hora de fin inicial para selección con time picker
+
+  /**
+   * Fecha o fechas que se muestran inicialmente al abrir el calendario, sin estar seleccionadas.
+   * Permite controlar el enfoque inicial del calendario (ej: mostrar mes actual, mes de cumpleaños, etc.)
+   * Puede ser:
+   * - string: Formato "yyyy-MM-dd" para una fecha específica, o "yyyy-MM" para un mes, o "yyyy" para un año, o rango tomando como referencia el primer día (ej: "2024-01" para enero 2024)
+   * - Date: Objeto Date para una fecha específica, mes, año o rango de semanas tomando como referencia el primer día de la semana en base a la fecha
+   * - Date[]: Array de fechas para rangos, selección múltiple, meses, años o rango de semanas (se usará la primera fecha para determinar el mes/año a mostrar)
+   * - null: Sin fecha inicial, mostrar mes actual por defecto
+   * Por defecto: null (sin fecha inicial, mostrar mes actual)
+   * @example "2024-01-15" // Mostrar enero 2024 con enfoque en el día 15
+   * @example "2024-01" // Mostrar enero 2024 sin enfoque específico
+   * @example "2024" // Mostrar año 2024 sin enfoque específico
+   * @example new Date(2024, 0, 15) // Mostrar enero 2024 con enfoque en el día 15
+   * @example [new Date(2024, 0, 15), new Date(2024, 0, 20)] // Mostrar enero 2024 con enfoque en la semana del día 15 al 20
+   */
+  defaultDate?: string | Date | Date[] | null; // Fecha que se muestra inicialmente al abrir el calendario (sin seleccionar)
 }

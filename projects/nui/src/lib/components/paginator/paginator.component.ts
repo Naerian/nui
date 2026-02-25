@@ -24,10 +24,10 @@ import {
   DEFAULT_SIZE,
   NUIVariant,
   NUI_SIZES,
+  injectPaginatorConfig,
 } from '../../configs';
 import { NUI_TRANSLATIONS } from '../../translations';
 import {
-  PaginatorGlobalConfig,
   KeyboardConfig,
   PaginatorConfig,
   IconConfig,
@@ -132,7 +132,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   private readonly destroyRef = inject(DestroyRef);
   private readonly elementRef = inject(ElementRef);
   protected readonly _translations = inject(NUI_TRANSLATIONS);
-  private readonly paginatorConfig: PaginatorGlobalConfig = this.globalConfig.paginator || {};
+  private readonly paginatorConfig = injectPaginatorConfig();
 
   // Caché para memoización de páginas visibles
   private _visiblePagesCache = new Map<string, (number | string)[]>();

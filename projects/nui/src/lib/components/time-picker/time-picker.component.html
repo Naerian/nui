@@ -16,8 +16,8 @@
         [ngModel]="activeTab()"
         (ngModelChange)="onTabChange($event)"
         mode="radio"
-        visualVariant="segmented"
-        size="sm"
+        [variant]="'segmented'"
+        size="xs"
         class="nui-time-picker__tabs-toggle"
       />
     </div>
@@ -371,7 +371,7 @@
               (ngModelChange)="onPeriodChange($event)"
               [disabled]="isDisabled()"
               mode="radio"
-              visualVariant="segmented"
+              [variant]="'segmented'"
               size="xs"
             />
           </div>

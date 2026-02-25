@@ -240,7 +240,7 @@ npm run test:keyboard-navigation
   template: `
     <nui-time-picker
       [(value)]="selectedTime"
-      [config]="timeConfig"
+      [config]="timePickerConfig"
       [disabled]="isDisabled"
       (valueChange)="onTimeChange($event)">
     </nui-time-picker>
@@ -249,7 +249,7 @@ npm run test:keyboard-navigation
 export class MyComponent {
   selectedTime: TimeValue = { hour: 9, minute: 30, period: 'AM' };
   
-  timeConfig: TimePickerConfig = {
+  timePickerConfig: TimePickerConfig = {
     format: '12h',
     hourStep: 1,
     minuteStep: 15
@@ -753,7 +753,7 @@ export class ExampleComponent {
   <nui-calendar 
     type="DAY"
     [showTimePicker]="true"
-    timeMode="HOUR_MINUTE_12"
+    timePickerMode="HOUR_MINUTE_12"
     formControlName="startDateTime">
   </nui-calendar>
   

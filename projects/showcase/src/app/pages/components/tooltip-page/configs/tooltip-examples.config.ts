@@ -156,7 +156,7 @@ export const TOOLTIP_EXAMPLES_SECTIONS: ComponentSection[] = [
 <ng-template #interactiveTemplate>
   <div class="interactive-tooltip">
     <h4>Available Actions</h4>
-    <button (click)="doAction()">Action</button>
+    <button nuiButton (click)="doAction()">Action</button>
   </div>
 </ng-template>`,
         language: 'html',

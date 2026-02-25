@@ -1,21 +1,37 @@
-﻿import { Injectable, Injector, Type, ComponentRef, inject, EnvironmentInjector, createComponent, InjectionToken, ApplicationRef, TemplateRef } from '@angular/core';
+﻿import {
+  Injectable,
+  Injector,
+  Type,
+  ComponentRef,
+  inject,
+  EnvironmentInjector,
+  createComponent,
+  InjectionToken,
+  ApplicationRef,
+  TemplateRef,
+} from '@angular/core';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Router } from '@angular/router';
 import { filter, takeUntil } from 'rxjs';
 import { SidebarPanelRef } from './sidebar-panel-ref';
-import { SidebarPanelConfig, DEFAULT_SIDEBAR_PANEL_CONFIG, SidebarPanelStackItem, SIDEBAR_PANEL_CONFIG, SidebarPanelPosition } from './models/sidebar-panel.model';
+import {
+  SidebarPanelConfig,
+  SidebarPanelStackItem,
+  SIDEBAR_PANEL_CONFIG,
+  SidebarPanelPosition,
+} from './models/sidebar-panel.model';
 import { SidebarPanelComponent } from './sidebar-panel.component';
 import { SidebarPanelActionsService } from './services/sidebar-panel-actions.service';
-import { SidebarPanelTabsService } from './services/sidebar-panel-tabs.service';
-import { NUI_CONFIG } from '../../configs';
+import { injectSidebarPanelConfig, NUI_CONFIG } from '../../configs';
 import { SimpleContentComponent } from './simple-content.component';
+import { deepMerge } from '../../utils';
 
 /**
  * Token de inyección para los datos del componente dinámico
- * 
+ *
  * Permite inyectar datos en el componente que se carga dentro del panel.
- * 
+ *
  * @example
  * ```typescript
  * // En el componente dinámico:
@@ -26,15 +42,15 @@ export const SIDEBAR_PANEL_DATA = new InjectionToken<any>('SIDEBAR_PANEL_DATA');
 
 /**
  * Token de inyección para la referencia del panel
- * 
+ *
  * Permite al componente dinámico acceder a la referencia del panel
  * para controlarlo (cerrar, minimizar, etc.).
- * 
+ *
  * @example
  * ```typescript
  * // En el componente dinámico:
  * readonly panelRef = inject<SidebarPanelRef>(SIDEBAR_PANEL_REF);
- * 
+ *
  * closePanel() {
  *   this.panelRef.close({ result: 'some data' });
  * }
@@ -44,13 +60,13 @@ export const SIDEBAR_PANEL_REF = new InjectionToken<SidebarPanelRef>('SIDEBAR_PA
 
 /**
  * Servicio para gestionar la creación y control de slide panels
- * 
+ *
  * Este servicio proporciona una API completa para:
  * - Abrir panels con componentes dinámicos
  * - Gestionar múltiples panels simultáneamente
  * - Controlar el ciclo de vida de los panels
  * - Mantener un stack de panels abiertos
- * 
+ *
  * **Características:**
  * - Soporte para 4 posiciones (right, left, top, bottom)
  * - 6 tamaños predefinidos (xs, sm, md, lg, xl, full)
@@ -60,7 +76,7 @@ export const SIDEBAR_PANEL_REF = new InjectionToken<SidebarPanelRef>('SIDEBAR_PA
  * - Gestión de foco y accesibilidad
  * - Cierre por ESC, backdrop o programático
  * - Soporte para múltiples panels
- * 
+ *
  * @example
  * ```typescript
  * // Uso básico
@@ -69,11 +85,11 @@ export const SIDEBAR_PANEL_REF = new InjectionToken<SidebarPanelRef>('SIDEBAR_PA
  *   size: 'md',
  *   data: { userId: 123 }
  * });
- * 
+ *
  * panelRef.afterClosed().subscribe(result => {
  *   console.log('Panel cerrado con resultado:', result);
  * });
- * 
+ *
  * // Cerrar programáticamente
  * panelRef.close({ saved: true });
  * ```
@@ -86,9 +102,8 @@ export class SidebarPanelService {
   private readonly _injector = inject(Injector);
   private readonly _router = inject(Router);
   private readonly _environmentInjector = inject(EnvironmentInjector);
-  private readonly _tabsService = inject(SidebarPanelTabsService);
-  private readonly _nuiConfig = inject(NUI_CONFIG);
   private readonly _applicationRef = inject(ApplicationRef);
+  private readonly _sidebarPanelConfig = injectSidebarPanelConfig();
 
   /**
    * Mapa de panels actualmente abiertos
@@ -118,7 +133,7 @@ export class SidebarPanelService {
     }
 
     const maxZIndex = Math.max(
-      ...Array.from(this._openPanels.values()).map((panel) => panel.zIndex),
+      ...Array.from(this._openPanels.values()).map(panel => panel.zIndex),
       this._baseZIndex
     );
 
@@ -127,10 +142,10 @@ export class SidebarPanelService {
 
   /**
    * Busca un panel minimizado del componente especificado en la misma posición
-   * 
+   *
    * Si se proporciona un ID específico, busca ese panel exacto.
    * Si no se proporciona ID, solo devuelve un panel si hay exactamente UNO minimizado.
-   * 
+   *
    * @param component - Tipo del componente a buscar
    * @param position - Posición del panel a buscar
    * @param id - ID específico del panel a buscar (opcional)
@@ -138,7 +153,7 @@ export class SidebarPanelService {
    * @private
    */
   private _findMinimizedPanel<T>(
-    component: Type<T>, 
+    component: Type<T>,
     position: SidebarPanelPosition,
     id?: string
   ): SidebarPanelRef | undefined {
@@ -158,10 +173,10 @@ export class SidebarPanelService {
 
     // Si no hay ID, buscar todos los panels minimizados del mismo tipo y posición
     const minimizedPanels: SidebarPanelRef[] = [];
-    
+
     for (const stackItem of this._openPanels.values()) {
       if (
-        stackItem.componentType === component && 
+        stackItem.componentType === component &&
         stackItem.state === 'minimized' &&
         stackItem.config.position === position
       ) {
@@ -176,7 +191,7 @@ export class SidebarPanelService {
 
   /**
    * Abre un nuevo sidebar panel con el componente y configuración especificados
-   * 
+   *
    * Este método es el punto de entrada principal para crear panels.
    * Gestiona todo el ciclo de vida:
    * - Merge de configuración por defecto y personalizada
@@ -185,25 +200,25 @@ export class SidebarPanelService {
    * - Registro en el stack
    * - Gestión del ciclo de vida
    * - Cierre automático en navegación
-   * 
+   *
    * **Comportamiento de stack:**
    * - Si `minimizable: false` (default): Cierra todos los panels existentes antes de abrir uno nuevo
    * - Si `minimizable: true`: Permite múltiples panels abiertos simultáneamente
-   * 
+   *
    * **Restauración de panels minimizados:**
    * - Si un panel con el mismo tipo de componente y posición ya existe minimizado, lo restaura
    * - Si se pasa un `id` específico, busca y restaura ese panel exacto
-   * 
+   *
    * @typeParam T - Tipo del componente que se cargará en el panel
    * @typeParam D - Tipo de los datos que se inyectarán en el componente (via `data` config)
    * @typeParam R - Tipo del resultado que devolverá el panel al cerrarse
-   * 
+   *
    * @param component - Componente a cargar dentro del panel
    * @param config - Configuración del panel (opcional, usa defaults)
    * @returns Referencia al panel creado para control programático
-   * 
+   *
    * @throws Error si el componente es null o undefined
-   * 
+   *
    * @example
    * ```typescript
    * // Ejemplo básico con componente
@@ -212,7 +227,7 @@ export class SidebarPanelService {
    *   size: 'md',
    *   data: { userId: 123 }
    * });
-   * 
+   *
    * // Panel con formulario y prevención de cierre
    * const ref = this.sidebarPanelService.open(EditFormComponent, {
    *   position: 'right',
@@ -220,13 +235,13 @@ export class SidebarPanelService {
    *   preventClose: () => confirm('¿Descartar cambios?'),
    *   data: { formData: {...} }
    * });
-   * 
+   *
    * // Múltiples panels (usando minimizable para permitir stack)
    * this.sidebarPanelService.open(Panel1Component, {
    *   position: 'right',
    *   minimizable: true
    * });
-   * 
+   *
    * this.sidebarPanelService.open(Panel2Component, {
    *   position: 'left',
    *   minimizable: true
@@ -240,27 +255,27 @@ export class SidebarPanelService {
 
   /**
    * Abre un nuevo sidebar panel con contenido flexible (HTML o template)
-   * 
+   *
    * Esta sobrecarga permite abrir un panel sin necesidad de crear un componente.
    * Puedes pasar directamente:
    * - Una cadena HTML para contenido estático
    * - Un TemplateRef de Angular para contenido dinámico
    * - Contexto para pasar datos al template
-   * 
+   *
    * **Casos de uso:**
    * - Notificaciones o mensajes simples
    * - Contenido HTML generado dinámicamente
    * - Templates reutilizables con datos variables
    * - Previsualizaciones de contenido
-   * 
+   *
    * @typeParam D - Tipo de los datos de contexto del template
    * @typeParam R - Tipo del resultado que devolverá el panel al cerrarse
-   * 
+   *
    * @param config - Configuración con contenido flexible (htmlContent o contentTemplate)
    * @returns Referencia al panel creado para control programático
-   * 
+   *
    * @throws Error si no se proporciona ni htmlContent ni contentTemplate
-   * 
+   *
    * @example
    * ```typescript
    * // Notificación con HTML
@@ -270,13 +285,13 @@ export class SidebarPanelService {
    *   size: 'sm',
    *   htmlContent: '<p>Operation completed successfully!</p>'
    * });
-   * 
+   *
    * // Template con contexto
    * const ref = this.sidebarPanelService.open({
    *   title: 'User Details',
    *   position: 'right',
    *   contentTemplate: this.userTemplate,
-   *   templateContext: { 
+   *   templateContext: {
    *     user: this.currentUser,
    *     onSave: (data) => this.saveUser(data)
    *   }
@@ -284,8 +299,8 @@ export class SidebarPanelService {
    * ```
    */
   open<D = unknown, R = unknown>(
-    config: SidebarPanelConfig<D> & { 
-      contentTemplate?: TemplateRef<any>; 
+    config: SidebarPanelConfig<D> & {
+      contentTemplate?: TemplateRef<any>;
       htmlContent?: string;
       templateContext?: any;
     }
@@ -307,15 +322,16 @@ export class SidebarPanelService {
       // Caso: open({ htmlContent: '...', title: '...' })
       // Validar que tenga contenido
       if (!componentOrConfig.htmlContent && !componentOrConfig.contentTemplate) {
-        throw new Error('[sidebar-panel] Either htmlContent or contentTemplate is required when opening without a component');
+        throw new Error(
+          '[sidebar-panel] Either htmlContent or contentTemplate is required when opening without a component'
+        );
       }
 
       component = SimpleContentComponent as Type<T>;
-      mergedConfig = {
-        ...DEFAULT_SIDEBAR_PANEL_CONFIG,
-        ...this._nuiConfig.sidebarPanel,
-        ...componentOrConfig,
-      } as SidebarPanelConfig<D>;
+      mergedConfig = deepMerge(
+        this._sidebarPanelConfig,
+        componentOrConfig
+      ) as SidebarPanelConfig<D>;
     } else {
       // Caso: open(Component, { ... })
       component = componentOrConfig;
@@ -325,11 +341,7 @@ export class SidebarPanelService {
         throw new Error('[sidebar-panel] Component is required and cannot be null or undefined');
       }
 
-      mergedConfig = {
-        ...DEFAULT_SIDEBAR_PANEL_CONFIG,
-        ...this._nuiConfig.sidebarPanel,
-        ...config,
-      } as SidebarPanelConfig<D>;
+      mergedConfig = deepMerge(this._sidebarPanelConfig, config);
     }
 
     // Si el panel es minimizable, buscar si ya existe uno minimizado del mismo tipo y posición
@@ -337,7 +349,7 @@ export class SidebarPanelService {
     // Si no se pasa ID, solo restaurar si hay exactamente uno minimizado (evita ambigüedad)
     if (mergedConfig.minimizable) {
       const minimizedPanel = this._findMinimizedPanel(
-        component, 
+        component,
         mergedConfig.position ?? 'right',
         mergedConfig.id
       );
@@ -359,7 +371,7 @@ export class SidebarPanelService {
 
     // Calcular z-index dinámicamente basado en el stack actual
     const zIndex = mergedConfig.zIndex ?? this._getNextZIndex();
-    
+
     // Actualizar la configuración con el z-index calculado para que se aplique al host
     mergedConfig.zIndex = zIndex;
 
@@ -386,7 +398,14 @@ export class SidebarPanelService {
     panelRef._setContainerComponentRef(containerRef);
 
     // Crear el componente dinámico con el panelRef ya disponible y la misma instancia del servicio
-    const componentRef = this._createDynamicComponent(component, mergedConfig, overlayRef, containerRef, panelRef, actionsService);
+    const componentRef = this._createDynamicComponent(
+      component,
+      mergedConfig,
+      overlayRef,
+      containerRef,
+      panelRef,
+      actionsService
+    );
 
     // Asignar el componentRef al panelRef
     (panelRef as any).componentInstance = componentRef.instance;
@@ -409,7 +428,7 @@ export class SidebarPanelService {
     });
 
     // Actualizar el estado en el stack cuando cambie
-    panelRef.stateChanged().subscribe((state) => {
+    panelRef.stateChanged().subscribe(state => {
       const stackItem = this._openPanels.get(panelRef.id);
       if (stackItem) {
         stackItem.state = state;
@@ -443,17 +462,17 @@ export class SidebarPanelService {
 
   /**
    * Cierra un panel específico por su ID
-   * 
+   *
    * @param id - ID único del panel a cerrar
-   * 
+   *
    * @remarks
    * El panel ejecutará su animación de salida antes de destruirse.
    * El evento `afterClosed()` se emitirá cuando el panel esté completamente cerrado.
-   * 
+   *
    * @example
    * ```typescript
    * const ref = this.SidebarPanelService.open(MyComponent);
-   * 
+   *
    * // Cerrar después de 5 segundos
    * setTimeout(() => {
    *   this.SidebarPanelService.close(ref.id);
@@ -469,14 +488,14 @@ export class SidebarPanelService {
 
   /**
    * Cierra todos los panels abiertos actualmente
-   * 
+   *
    * Útil para limpiar todos los panels, por ejemplo, al cerrar sesión
    * o al navegar a una ruta que requiere todos los panels cerrados.
-   * 
+   *
    * @remarks
    * Los panels se cierran secuencialmente, cada uno ejecutando su
    * animación de salida completa.
-   * 
+   *
    * @example
    * ```typescript
    * // Cerrar todos los panels antes de logout
@@ -489,20 +508,20 @@ export class SidebarPanelService {
   closeAll(): void {
     // Crear un array de IDs porque el map se modifica durante el cierre
     const panelIds = Array.from(this._openPanels.keys());
-    panelIds.forEach((id) => this.close(id));
+    panelIds.forEach(id => this.close(id));
   }
 
   /**
    * Obtiene la información de un panel específico del stack
-   * 
+   *
    * @param id - ID único del panel
    * @returns Información del panel en el stack o `undefined` si no existe
-   * 
+   *
    * @example
    * ```typescript
    * const ref = this.SidebarPanelService.open(MyComponent);
    * const panelInfo = this.SidebarPanelService.getPanel(ref.id);
-   * 
+   *
    * console.log(panelInfo?.state); // 'opening' | 'open' | 'closing' | 'closed'
    * console.log(panelInfo?.createdAt); // Timestamp de creación
    * ```
@@ -513,14 +532,14 @@ export class SidebarPanelService {
 
   /**
    * Obtiene un array con todos los panels actualmente abiertos
-   * 
+   *
    * @returns Array de información de todos los panels en el stack
-   * 
+   *
    * @example
    * ```typescript
    * const allPanels = this.SidebarPanelService.getAllPanels();
    * console.log(`Hay ${allPanels.length} panels abiertos`);
-   * 
+   *
    * allPanels.forEach(panel => {
    *   console.log(`Panel ${panel.id} en estado: ${panel.state}`);
    * });
@@ -532,15 +551,15 @@ export class SidebarPanelService {
 
   /**
    * Obtiene el número de panels actualmente abiertos
-   * 
+   *
    * @returns Cantidad de panels en el stack
-   * 
+   *
    * @example
    * ```typescript
    * if (this.SidebarPanelService.openPanelsCount > 0) {
    *   console.log('Hay panels abiertos');
    * }
-   * 
+   *
    * // En template
    * <div *ngIf="SidebarPanelService.openPanelsCount > 0">
    *   Hay {{ SidebarPanelService.openPanelsCount }} panel(es) abierto(s)
@@ -553,7 +572,7 @@ export class SidebarPanelService {
 
   /**
    * Crea un overlay de CDK con la configuración especificada
-   * 
+   *
    * @private
    * @param config - Configuración del panel
    * @returns Referencia al overlay creado
@@ -565,7 +584,7 @@ export class SidebarPanelService {
 
   /**
    * Configura el overlay de CDK para el panel
-   * 
+   *
    * @private
    * @param config - Configuración del panel
    * @returns Configuración del overlay
@@ -602,7 +621,7 @@ export class SidebarPanelService {
 
   /**
    * Obtiene las clases CSS para el backdrop
-   * 
+   *
    * @private
    * @param config - Configuración del panel
    * @returns Array de clases CSS
@@ -623,7 +642,7 @@ export class SidebarPanelService {
 
   /**
    * Obtiene las clases CSS para el contenedor del panel
-   * 
+   *
    * @private
    * @param config - Configuración del panel
    * @returns Array de clases CSS
@@ -644,10 +663,10 @@ export class SidebarPanelService {
 
   /**
    * Crea un injector personalizado para el componente dinámico
-   * 
+   *
    * Proporciona los tokens necesarios para que el componente dinámico
    * pueda inyectar su configuración, datos y referencia al panel.
-   * 
+   *
    * @private
    * @template D - Tipo de los datos
    * @param config - Configuración del panel
@@ -657,16 +676,20 @@ export class SidebarPanelService {
    * @returns Injector configurado
    */
   private _isConfig(value: any): value is SidebarPanelConfig {
-    return value && typeof value === 'object' && !value.prototype && 
-           (value.htmlContent !== undefined || 
-            value.contentTemplate !== undefined ||
-            value.title !== undefined ||
-            value.position !== undefined);
+    return (
+      value &&
+      typeof value === 'object' &&
+      !value.prototype &&
+      (value.htmlContent !== undefined ||
+        value.contentTemplate !== undefined ||
+        value.title !== undefined ||
+        value.position !== undefined)
+    );
   }
 
   /**
    * Crea el injector necesario para el panel y sus componentes
-   * 
+   *
    * @private
    * @template D - Tipo de los datos
    * @param config - Configuración del panel
@@ -695,10 +718,10 @@ export class SidebarPanelService {
 
   /**
    * Crea el componente dinámico y lo inserta en el contenedor del panel
-   * 
+   *
    * Utiliza la función `createComponent` de Angular para crear dinámicamente
    * el componente especificado y adjuntarlo al DOM del contenedor del panel.
-   * 
+   *
    * @private
    * @template T - Tipo del componente
    * @template D - Tipo de los datos
@@ -731,18 +754,20 @@ export class SidebarPanelService {
       this._applicationRef.attachView(componentRef.hostView);
 
       // Attach al contenedor
-      const contentElement = containerRef.location.nativeElement.querySelector('.nui-sidebar-panel-content');
-      
+      const contentElement = containerRef.location.nativeElement.querySelector(
+        '.nui-sidebar-panel-content'
+      );
+
       if (!contentElement) {
         componentRef.destroy();
         throw new Error('[sidebar-panel] Content container not found in panel DOM');
       }
 
       contentElement.appendChild(componentRef.location.nativeElement);
-      
+
       // Forzar detección de cambios inicial
       componentRef.changeDetectorRef.detectChanges();
-      
+
       // Forzar detección adicional con markForCheck para componentes OnPush
       // ButtonComponent y otros componentes con OnPush necesitan ser marcados explícitamente
       // El setTimeout asegura que se ejecute después del ngAfterContentInit de los hijos
@@ -756,21 +781,18 @@ export class SidebarPanelService {
     } catch (error) {
       // Cleanup en caso de error
       console.error('[sidebar-panel] Error creating dynamic component:', error);
-      
+
       // Cerrar el panel si ya existe
       if (panelRef) {
         panelRef._forceClose();
       }
-      
+
       // Destruir overlay
       if (overlayRef) {
         overlayRef.dispose();
       }
-      
+
       throw error;
     }
   }
 }
-
-
-

@@ -590,6 +590,7 @@ export class ThemeService {
     --nui-shadow-container: var(--nui-box-shadow-sm);
     --nui-shadow-elevated: var(--nui-box-shadow-lg);
     --nui-shadow-field: var(--nui-box-shadow-xs);
+    --nui-sidebar-panel-shadow: var(--nui-box-shadow-md);
     
     /* El alias que usará el componente Raised Button */
     --nui-shadow-interactive: var(--nui-shadow-interactive-rest);

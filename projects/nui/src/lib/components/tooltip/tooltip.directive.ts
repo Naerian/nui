@@ -25,7 +25,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { TooltipComponent } from './tooltip.component';
 import { TooltipPosition, TooltipEvent } from './models/tooltip.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NUI_CONFIG } from '../../configs';
+import { injectTooltipConfig } from '../../configs/tooltip/tooltip.config';
 
 /**
  * @name
@@ -87,7 +87,7 @@ export class TooltipDirective implements OnInit, OnDestroy {
   private positionBuilder = inject(OverlayPositionBuilder);
   private viewContainerRef = inject(ViewContainerRef);
   private destroyRef = inject(DestroyRef);
-  private globalConfig = inject(NUI_CONFIG);
+  private tooltipConfig = injectTooltipConfig();
 
   private overlayRef?: OverlayRef;
   private componentRef?: ComponentRef<TooltipComponent>;
@@ -162,31 +162,31 @@ export class TooltipDirective implements OnInit, OnDestroy {
 
   // Getters para valores con fallback a configuración global
   private get position(): TooltipPosition {
-    return this.nuiTooltipPosition ?? this.globalConfig.tooltip?.position ?? 'top';
+    return this.nuiTooltipPosition ?? this.tooltipConfig?.position ?? 'top';
   }
 
   private get event(): TooltipEvent {
-    return this.nuiTooltipEvent ?? this.globalConfig.tooltip?.event ?? 'hover';
+    return this.nuiTooltipEvent ?? this.tooltipConfig?.event ?? 'hover';
   }
 
   private get showDelay(): number {
-    return this.nuiTooltipShowDelay ?? this.globalConfig.tooltip?.showDelay ?? 300;
+    return this.nuiTooltipShowDelay ?? this.tooltipConfig?.showDelay ?? 300;
   }
 
   private get hideDelay(): number {
-    return this.nuiTooltipHideDelay ?? this.globalConfig.tooltip?.hideDelay ?? 0;
+    return this.nuiTooltipHideDelay ?? this.tooltipConfig?.hideDelay ?? 0;
   }
 
   private get showArrow(): boolean {
-    return this.nuiTooltipShowArrow ?? this.globalConfig.tooltip?.showArrow ?? true;
+    return this.nuiTooltipShowArrow ?? this.tooltipConfig?.showArrow ?? true;
   }
 
   private get allowHtml(): boolean {
-    return this.nuiTooltipAllowHtml ?? this.globalConfig.tooltip?.allowHtml ?? true;
+    return this.nuiTooltipAllowHtml ?? this.tooltipConfig?.allowHtml ?? true;
   }
 
   private get interactive(): boolean {
-    return this.nuiTooltipInteractive ?? this.globalConfig.tooltip?.interactive ?? false;
+    return this.nuiTooltipInteractive ?? this.tooltipConfig?.interactive ?? false;
   }
 
   constructor() {

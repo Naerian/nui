@@ -150,7 +150,7 @@
       width: 1em;
       height: 1em;
       flex-shrink: 0;
-      line-height: 1;
+      line-height: 1.2;
       vertical-align: middle;
     }
 
@@ -196,7 +196,11 @@
     &__content {
       display: inline-flex;
       align-items: center;
-      line-height: 1.5;
+      line-height: 1.2;
+
+      &:empty {
+        display: none;
+      }
 
       &--hidden {
         visibility: hidden;

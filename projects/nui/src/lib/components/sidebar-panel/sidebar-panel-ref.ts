@@ -194,7 +194,6 @@ export class SidebarPanelRef<T = any, R = any> {
     }
 
     // Esperar la duración de la animación antes de destruir
-    // 225ms matches Material Design standard and DEFAULT_SIDEBAR_PANEL_CONFIG
     const duration = this.config.animationDuration ?? 225;
     await this._delay(duration);
 

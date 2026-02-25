@@ -43,12 +43,6 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
           'Array de fechas deshabilitadas',
         ],
         [
-          '<code>blockDisabledRanges</code>',
-          'boolean',
-          '<code class="neutral">false</code>',
-          'Si true, bloquea rangos que contienen fechas deshabilitadas',
-        ],
-        [
           '<code>minDate</code>',
           'Date | string',
           '<code class="neutral">undefined</code>',
@@ -91,13 +85,13 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
           "Muestra selector de hora: true, 'start', 'end', 'both', false",
         ],
         [
-          '<code>timeMode</code>',
+          '<code>timePickerMode</code>',
           'TimePickerMode',
           '<code class="neutral">HOUR_MINUTE_24</code>',
           'Modo del selector de hora integrado',
         ],
         [
-          '<code>timeConfig</code>',
+          '<code>timePickerConfig</code>',
           'TimePickerConfig',
           '<code class="neutral">{}</code>',
           'Configuración del selector de hora (steps, rangos, etc.)',

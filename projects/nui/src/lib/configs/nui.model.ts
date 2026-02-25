@@ -1,4 +1,4 @@
-import { NUIColor, NUIDateFormat, NUIShape, NUISize, NUIVariant } from './common';
+import { NUIColor, NUIShape, NUISize, NUIVariant } from './common';
 import { CalendarGlobalConfig } from '../components/calendar';
 import { FabButtonConfig } from './fab-button/fab-button.config';
 import { TooltipConfig } from '../components/tooltip';

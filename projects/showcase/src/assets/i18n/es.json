@@ -847,12 +847,12 @@
       "time-picker": {
         "title": "Integración con Time Picker",
         "description": "Combina selección de fecha con selección de hora. Soporta hora de inicio, hora de fin o ambas según el tipo de calendario.",
-        "note": "Usa <code>showTimePicker='true'</code> y configura <code>timeMode</code> con <code>'start'</code>, <code>'end'</code> o <code>'both'</code>. Puedes personalizar el time picker con <code>timeConfig</code> (pasos, rango, presets, etc.)."
+        "note": "Usa <code>showTimePicker='true'</code> y configura <code>timePickerMode</code> con <code>'start'</code>, <code>'end'</code> o <code>'both'</code>. Puedes personalizar el time picker con <code>timePickerConfig</code> (pasos, rango, presets, etc.)."
       },
       "disabled-dates": {
         "title": "Fechas deshabilitadas",
         "description": "Bloquea fechas específicas evitando su selección. Útil para días festivos, fines de semana o fechas no disponibles.",
-        "note": "Usa <code>disabledDates</code> para especificar un array de fechas deshabilitadas. Las fechas deshabilitadas muestran un estilo atenuado distintivo y no son seleccionables. Puedes combinar con <code>blockDisabledRanges</code> para evitar rangos que incluyan fechas deshabilitadas."
+        "note": "Usa <code>disabledDates</code> para especificar un array de fechas deshabilitadas. Las fechas deshabilitadas muestran un estilo atenuado distintivo y no son seleccionables."
       },
       "min-max-dates": {
         "title": "Rango mínimo y máximo",

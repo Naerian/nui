@@ -8,6 +8,7 @@
 /// Applies size properties to components
 @mixin nui-control-size($size, $withBorderRadius: true, $type: 'default') {
   min-height: var(--nui-height-#{$size}, #{map.get(config.$heights, $size)});
+  min-width: var(--nui-height-#{$size}, #{map.get(config.$heights, $size)});
   padding: if($type == 'input', var(--nui-padding-input-#{$size}), var(--nui-padding-#{$size}));
   font-size: var(--nui-font-size-#{$size}, #{map.get(config.$font-sizes, $size)});
   line-height: 1.2;

@@ -68,7 +68,7 @@
     &__content {
       font-size: var(--nui-popover-font-size);
       font-weight: var(--nui-popover-font-weight);
-      line-height: var(--nui-popover-line-height);
+      line-height: 1.2;
       overflow: visible;
 
       p {

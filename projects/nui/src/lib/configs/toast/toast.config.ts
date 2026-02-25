@@ -1,64 +1,61 @@
-import { ToastGlobalConfig } from "../../components/toast";
+import { inject } from '@angular/core';
+import { ToastGlobalConfig } from '../../components/toast';
+import { NUI_CONFIG } from '../nui.config';
+import { deepMerge } from '../../utils/deep-merge';
 
 /**
- * Crea la configuración por defecto para toasts
- * @returns {ToastGlobalConfig} Configuración por defecto
+ * Configuración estática por defecto para los Toasts.
  */
-export function createDefaultToastConfig(): ToastGlobalConfig {
-  return {
-    // ===== BÁSICAS =====
-    timeout: 5000,
-    toastClass: [],
-    position: 'top-right',
-    preventDuplicates: true,
-    progressBar: true,
-    closeOnTouch: true,
-    closeButton: true,
-    maxToasts: 6,
-    maxToastsPerPosition: 3, // Límite por posición específica
+export const DEFAULT_TOAST_CONFIG: ToastGlobalConfig = {
+  timeout: 5000,
+  toastClass: [],
+  position: 'top-right',
+  preventDuplicates: true,
+  progressBar: true,
+  closeOnTouch: true,
+  closeButton: true,
+  maxToasts: 6,
+  maxToastsPerPosition: 3,
+  animationIn: 'slide',
+  animationOut: 'fade',
+  animationDuration: 300,
+  pauseOnHover: true,
+  pauseOnFocusLoss: true,
+  stackingBehavior: 'queue',
+  stackDirection: 'append',
+  icon: true,
+  iconPosition: 'left',
+  announceToScreenReader: true,
+  ariaRole: 'status',
+  ariaLive: 'polite',
+  sound: false,
+  expandable: false,
+  persistent: false,
+  swipeToDismiss: true,
+  swipeThreshold: 100,
+  templateMode: 'replace',
+  icons: {
+    success: 'ri-checkbox-circle-line',
+    danger: 'ri-error-warning-line',
+    warning: 'ri-alert-line',
+    info: 'ri-information-line',
+    loading: 'ri-loader-4-line',
+  },
 
-    // ===== ANIMACIONES =====
-    animationIn: 'slide',
-    animationOut: 'fade',
-    animationDuration: 300,
+  buttonsSize: 'sm',
+  buttonsVariant: 'ghost',
+  buttonsShape: 'rounded',
+};
 
-    // ===== COMPORTAMIENTO =====
-    pauseOnHover: true,
-    pauseOnFocusLoss: true,
-    stackingBehavior: 'queue',
-    stackDirection: 'append',
+/**
+ * Resolver de los Toasts.
+ * Combina la base estática con las configuraciones globales inyectadas a través de NUI_CONFIG.
+ *
+ * @returns {ToastGlobalConfig} Configuración final combinada
+ */
+export function injectToastConfig(): ToastGlobalConfig {
+  const globalConfig = inject(NUI_CONFIG, { optional: true });
+  const toastOverrides = globalConfig?.toast;
 
-    // ===== VISUAL =====
-    icon: true,
-    iconPosition: 'left',
-
-    // ===== ACCESIBILIDAD =====
-    announceToScreenReader: true,
-    ariaRole: 'status',
-    ariaLive: 'polite',
-
-    // ===== AVANZADO =====
-    sound: false,
-    expandable: false,
-    persistent: false,
-    swipeToDismiss: true,
-    swipeThreshold: 100,
-
-    // ==== TEMPLATES =====
-    templateMode: 'replace',
-
-    // ===== ÍCONOS POR DEFECTO =====
-    icons: {
-      success: 'ri-checkbox-circle-line',
-      danger: 'ri-error-warning-line',
-      warning: 'ri-alert-line',
-      info: 'ri-information-line',
-      loading: 'ri-loader-4-line',
-    },
-
-    // ===== BOTONES DE ACCIÓN =====
-    buttonsSize: 'sm',
-    buttonsVariant: 'ghost',
-    buttonsShape: 'rounded',
-  };
+  return deepMerge(DEFAULT_TOAST_CONFIG, toastOverrides);
 }
