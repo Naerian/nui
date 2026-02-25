@@ -1159,108 +1159,94 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
    * Inicializa el calendario según su tipo (DAY, WEEK, RANGE, MONTH, YEAR)
    */
   private initializeByType(dates: Date[], firstDate: Date, lastDate: Date): void {
+    let calendarValue: CalendarValue | null = null;
+
     switch (this.type()) {
       case CalendarType.DAY:
-        this.initializeDayMode(dates, firstDate);
+        if (this.selection() === CalendarSelection.MULTIPLE) {
+          this.selectedDates.set(dates);
+          calendarValue = this.buildCalendarValue(CalendarType.DAY, { dates });
+        } else {
+          this.selectedDate.set(firstDate);
+          calendarValue = this.buildCalendarValue(CalendarType.DAY, { date: firstDate });
+        }
         break;
 
       case CalendarType.WEEK:
-        this.initializeWeekMode(firstDate);
+        const week = this.calendarService.getWeekRange(firstDate, this.effectiveFirstDayOfWeek());
+        this.selectedWeek.set(week);
+        calendarValue = this.buildCalendarValue(CalendarType.WEEK, { week });
         break;
 
       case CalendarType.RANGE:
-        this.initializeRangeMode(dates, firstDate, lastDate);
+        if (dates.length > 1 && this.isValidDate(lastDate)) {
+          const range = { start: firstDate, end: lastDate };
+          this.selectedRange.set(range);
+          calendarValue = this.buildCalendarValue(CalendarType.RANGE, { range });
+        } else {
+          const range = { start: firstDate, end: null as any }; // null forzado para el inicio incompleto
+          this.selectedRange.set(range);
+          // NOTA: En este caso no se emite un valor completo porque falta la fecha de fin
+          calendarValue = null;
+        }
         break;
 
       case CalendarType.MONTH:
-        this.initializeMonthMode(dates, firstDate);
+        if (this.selection() === CalendarSelection.MULTIPLE) {
+          const months = dates.map(d => ({ month: d.getMonth(), year: d.getFullYear() }));
+          this.selectedMonths.set(months);
+          const monthDates = months.map(m => new Date(m.year, m.month, 1));
+          calendarValue = this.buildCalendarValue(CalendarType.MONTH, {
+            months,
+            dates: monthDates,
+          });
+        } else {
+          const month = firstDate.getMonth();
+          const year = firstDate.getFullYear();
+          this.selectedMonth.set({ month, year });
+          const monthDate = new Date(year, month, 1);
+          calendarValue = this.buildCalendarValue(CalendarType.MONTH, {
+            month: { month, year },
+            date: monthDate,
+          });
+        }
+        this.viewMode.set(ViewMode.MONTH);
         break;
 
       case CalendarType.YEAR:
-        this.initializeYearMode(dates, firstDate);
+        if (this.selection() === CalendarSelection.MULTIPLE) {
+          const years = dates.map(d => d.getFullYear());
+          this.selectedYears.set(years);
+          const yearDates = years.map(y => new Date(y, 0, 1));
+          calendarValue = this.buildCalendarValue(CalendarType.YEAR, { years, dates: yearDates });
+        } else {
+          const year = firstDate.getFullYear();
+          this.selectedYear.set(year);
+          const yearDate = new Date(year, 0, 1);
+          calendarValue = this.buildCalendarValue(CalendarType.YEAR, { year, date: yearDate });
+        }
+        this.viewMode.set(ViewMode.YEAR);
         break;
     }
-  }
 
-  /**
-   * Inicializa el calendario en modo DAY
-   */
-  private initializeDayMode(dates: Date[], firstDate: Date): void {
-    if (this.selection() === CalendarSelection.MULTIPLE) {
-      // Selección múltiple: guardar todas las fechas
-      this.selectedDates.set(dates);
-    } else {
-      // Selección simple: solo la primera fecha
-      this.selectedDate.set(firstDate);
-    }
-  }
-
-  /**
-   * Inicializa el calendario en modo WEEK
-   */
-  private initializeWeekMode(date: Date): void {
-    const week = this.calendarService.getWeekRange(date, this.effectiveFirstDayOfWeek());
-    this.selectedWeek.set(week);
-  }
-
-  /**
-   * Inicializa el calendario en modo RANGE
-   */
-  private initializeRangeMode(dates: Date[], firstDate: Date, lastDate: Date): void {
-    if (dates.length > 1 && this.isValidDate(lastDate)) {
-      this.selectedRange.set({
-        start: firstDate,
-        end: lastDate,
-      });
-    } else {
-      this.selectedRange.set({
-        start: firstDate,
-        end: null,
+    // Emitir el valor inicializado para que el ReactiveForm / Padre se enteren
+    if (calendarValue) {
+      // Usamos setTimeout para evitar el error "ExpressionChangedAfterItHasBeenCheckedError"
+      // si esto se dispara durante la fase inicial de renderizado de Angular.
+      setTimeout(() => {
+        this.emitSelection(calendarValue!);
       });
     }
   }
 
-  /**
-   * Inicializa el calendario en modo MONTH
-   */
-  private initializeMonthMode(dates: Date[], firstDate: Date): void {
-    if (this.selection() === CalendarSelection.MULTIPLE) {
-      // Selección múltiple: convertir todas las fechas a meses
-      const months = dates.map(d => ({ month: d.getMonth(), year: d.getFullYear() }));
-      this.selectedMonths.set(months);
-    } else {
-      // Selección simple: solo el primer mes
-      const month = firstDate.getMonth();
-      const year = firstDate.getFullYear();
-      this.selectedMonth.set({ month, year });
-    }
-    this.viewMode.set(ViewMode.MONTH); // Iniciar en vista de meses
-  }
-
-  /**
-   * Inicializa el calendario en modo YEAR
-   */
-  private initializeYearMode(dates: Date[], firstDate: Date): void {
-    if (this.selection() === CalendarSelection.MULTIPLE) {
-      // Selección múltiple: convertir todas las fechas a años
-      const years = dates.map(d => d.getFullYear());
-      this.selectedYears.set(years);
-    } else {
-      // Selección simple: solo el primer año
-      const year = firstDate.getFullYear();
-      this.selectedYear.set(year);
-    }
-    this.viewMode.set(ViewMode.YEAR); // Iniciar en vista de a?os
-  }
-
-  // ?? HELPER: Parsear fecha de string o Date
+  // HELPER: Parsear fecha de string o Date
   private parseDate(date: Date | string | null | undefined): Date {
     if (!date) return new Date();
     if (date instanceof Date) return date;
     return this.calendarService.convertToDate(date) || new Date();
   }
 
-  // ?? HELPER: Parsear hora de TimeValue, Date o string
+  // HELPER: Parsear hora de TimeValue, Date o string
   private parseTimeInput(time: TimeValue | Date | string | null): TimeValue | null {
     if (!time) return null;
 

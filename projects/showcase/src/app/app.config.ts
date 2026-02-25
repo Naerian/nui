@@ -40,7 +40,11 @@ export const appConfig: ApplicationConfig = {
       darkMode: 'manual',
     }),
     provideNUIConfig({
-      // Aquí se pueden agregar overrides globales para la configuración de NUI
+      calendar: {
+        showTimePicker: 'default',
+        timePickerMode: 'HOUR_MINUTE_24',
+        defaultDate: new Date(), // Puedes cambiar esto por cualquier fecha por defecto que quieras
+      },
     }),
   ],
 };

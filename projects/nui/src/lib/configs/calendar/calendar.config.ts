@@ -2,11 +2,10 @@ import { inject } from '@angular/core';
 import {
   CalendarGlobalConfig,
   CalendarTimePickerModeEnum,
-  ViewMode,
 } from '../../components/calendar';
 import { NUI_CONFIG } from '../nui.config';
 import { deepMerge } from '../../utils/deep-merge';
-import { TimePickerModeEnum } from '../../../../../../dist/nui';
+import { TimePickerModeEnum } from '../../components/time-picker/models/time-picker.model';
 
 /**
  * Constante pura con los defaults del Calendar.
