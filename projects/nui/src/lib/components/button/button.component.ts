@@ -16,6 +16,10 @@ import {
   ButtonType,
   ButtonWidth,
   ButtonLoadingPosition,
+  ButtonIconPositionEnum,
+  ButtonLoadingPositionEnum,
+  ButtonTypeEnum,
+  ButtonWidthEnum,
 } from './models/button.model';
 import {
   NUI_CONFIG,
@@ -28,6 +32,7 @@ import {
   NUIShape,
   DEFAULT_SHAPE,
 } from '../../configs';
+import { injectButtonConfig } from '../../configs/button';
 
 @Component({
   selector: 'nui-button',
@@ -47,7 +52,12 @@ import {
 })
 export class ButtonComponent implements AfterContentInit {
   private elementRef = inject(ElementRef);
-  private readonly globalConfig = inject(NUI_CONFIG, { optional: true });
+  private readonly globalConfig = injectButtonConfig();
+
+  protected ButtonIconPositionEnum = ButtonIconPositionEnum;
+  protected ButtonLoadingPositionEnum = ButtonLoadingPositionEnum;
+  protected ButtonTypeEnum = ButtonTypeEnum;
+  protected ButtonWidthEnum = ButtonWidthEnum;
 
   // ========================================================================
   // INPUTS (Signals)
@@ -112,19 +122,40 @@ export class ButtonComponent implements AfterContentInit {
    * Prioridad: Input > Global Config > Default Constant
    */
   readonly effectiveColor = computed(
-    () => this.color() ?? this.globalConfig?.defaultColor ?? DEFAULT_COLOR
+    () => this.color() ?? this.globalConfig?.color ?? DEFAULT_COLOR
   );
 
-  readonly effectiveSize = computed(
-    () => this.size() ?? this.globalConfig?.defaultSize ?? DEFAULT_SIZE
-  );
+  readonly effectiveSize = computed(() => this.size() ?? this.globalConfig?.size ?? DEFAULT_SIZE);
 
   readonly effectiveVariant = computed(
-    () => this.variant() ?? this.globalConfig?.defaultVariant ?? DEFAULT_VARIANT
+    () => this.variant() ?? this.globalConfig?.variant ?? DEFAULT_VARIANT
   );
 
   readonly effectiveShape = computed(
-    () => this.shape() ?? this.globalConfig?.defaultShape ?? DEFAULT_SHAPE
+    () => this.shape() ?? this.globalConfig?.shape ?? DEFAULT_SHAPE
+  );
+
+  readonly effectiveIconPosition = computed(
+    () => this.iconPosition() ?? this.globalConfig?.iconPosition ?? ButtonIconPositionEnum.START
+  );
+
+  readonly effectiveLoadingPosition = computed(
+    () =>
+      this.loadingPosition() ??
+      this.globalConfig?.loadingPosition ??
+      ButtonLoadingPositionEnum.START
+  );
+
+  readonly effectiveType = computed(
+    () => this.type() ?? this.globalConfig?.type ?? ButtonTypeEnum.BUTTON
+  );
+
+  readonly effectiveWidth = computed(
+    () => this.width() ?? this.globalConfig?.width ?? ButtonWidthEnum.AUTO
+  );
+
+  readonly effectiveRaised = computed(
+    () => this.raised() ?? this.globalConfig?.raised ?? false
   );
 
   // ========================================================================

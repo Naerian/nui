@@ -321,38 +321,6 @@ export interface InfiniteConfig {
 }
 
 /**
- * Configuración completa del Paginator
- */
-export interface PaginatorGlobalConfig {
-  /** Configuración básica */
-  config?: PaginatorConfig;
-  /** Textos personalizados */
-  texts?: PaginatorTexts;
-  /** Configuración de teclado */
-  keyboard?: KeyboardConfig;
-  /** Configuración de loading */
-  loading?: LoadingConfig;
-  /** Configuración responsiva */
-  responsive?: ResponsiveConfig;
-  /** Configuración de iconos */
-  icons?: IconConfig;
-  /** Configuración del modo infinito */
-  infinite?: InfiniteConfig;
-  /** Configuración del layout personalizado */
-  layout?: PaginatorLayout;
-  /** Configuración del layout para dispositivos móviles */
-  mobileLayout?: PaginatorLayout;
-  /** Configuración del layout para modo infinito */
-  infiniteLayout?: PaginatorLayout;
-  /** Apariencia */
-  appearance?: {
-    color?: NUIColor;
-    size?: NUISize;
-    variant?: NUIVariant;
-  };
-}
-
-/**
  * Estado interno del Paginator
  */
 export interface PaginatorState {

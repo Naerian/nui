@@ -34,7 +34,7 @@ export const DEFAULT_SIDEBAR_PANEL_CONFIG: SidebarPanelConfig = {
  * @returns {SidebarPanelConfig} Configuración final combinada
  */
 export function injectSidebarPanelConfig(): SidebarPanelConfig {
-  const globalConfig = inject(NUI_CONFIG, { optional: true });
+  const globalConfig = inject(NUI_CONFIG, { optional: true })?.config;
   const sidebarPanelOverrides = globalConfig?.sidebarPanel;
 
   return deepMerge(DEFAULT_SIDEBAR_PANEL_CONFIG, sidebarPanelOverrides);

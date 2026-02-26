@@ -13,11 +13,11 @@ import {
 import {
   PURE_COLORS,
   DEFAULT_PRESET,
-  NUI_THEME_CONFIG,
   NUI_LUMINANCE_THRESHOLD,
 } from './models/theme.config';
 import { NUI_PRESETS } from './models/theme-presets';
 import { ZINC_GRAYS } from './models/theme-grays';
+import { NUI_CONFIG } from '../configs';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
@@ -56,7 +56,7 @@ export class ThemeService {
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    @Optional() @Inject(NUI_THEME_CONFIG) config?: ThemeConfig
+    @Optional() @Inject(NUI_CONFIG) config?: ThemeConfig
   ) {
     // Inicializar preset desde config si existe
     if (config?.preset) {

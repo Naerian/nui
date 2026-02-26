@@ -133,7 +133,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       data: {
         message:
           'Este panel usa los valores por defecto de la configuración global. ' +
-          'Si cambias provideNUIConfig({ sidebarPanel: {...} }), este panel ' +
+          'Si cambias provideNUI({ sidebarPanel: {...} }), este panel ' +
           'reflejará esos cambios automáticamente.',
         showConfigInfo: true,
       },

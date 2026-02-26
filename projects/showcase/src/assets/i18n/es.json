@@ -145,7 +145,10 @@
       "darkModeConfigTitle": "Configuración de Modo Oscuro",
       "customPresetConfig": "Preset personalizado",
       "customPresetConfigDescription": "Crea tu propio preset definiendo colores personalizados para los modos <code>claro</code> y <code>oscuro</code>. Cada preset debe incluir: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code> y <code>neutral</code>.",
-      "customPresetConfigTitle": "Crear preset personalizado"
+      "customPresetConfigTitle": "Crear preset personalizado",
+      "customComponentConfig": "Configuración global de componentes",
+      "customComponentConfigDescription": "Personaliza la configuración global de los componentes de NUI para adaptarlos a las necesidades de tu aplicación. Puedes configurar opciones como tamaños, colores, variantes y más para cada componente. De esta forma, puedes establecer estilos y comportamientos predeterminados para todos los componentes de tu aplicación, asegurando una apariencia y experiencia de usuario coherente sin tener que configurar cada componente individualmente.",
+      "customComponentConfigTitle": "Configuración global de componentes"
     },
     "theming": {
       "title": "Temas y presets",
@@ -211,7 +214,7 @@
         "integration": {
           "title": "Cómo se integra",
           "description": "El sistema de temas está profundamente integrado en NUI y funciona perfectamente en todos los componentes:",
-          "point1": "<strong>Punto único de configuración</strong>: Define tu tema una vez en <code>provideNUIConfig()</code>",
+          "point1": "<strong>Punto único de configuración</strong>: Define tu tema una vez en <code>provideNUI()</code>",
           "point2": "<strong>Propagación automática</strong>: Todos los componentes NUI consumen automáticamente las variables del tema",
           "point3": "<strong>Componentes personalizados</strong>: Tus propios componentes pueden usar variables CSS de NUI para estilos consistentes",
           "point4": "<strong>Control en runtime</strong>: Cambia temas o activa modo oscuro programáticamente vía <code>ThemeService</code>",
@@ -456,7 +459,7 @@
           "step2": {
             "title": "Registra tu tema",
             "description": "Agrega tu preset personalizado a la configuración de NUI en tu <code>app.config.ts</code> o <code>main.ts</code>:",
-            "code": "import { provideNUIConfig } from '@nui/core';\nimport { myCustomPreset } from './themes/custom';\n\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    provideNUIConfig({\n      theme: {\n        preset: 'custom',\n        customPresets: [myCustomPreset],\n        darkMode: {\n          strategy: 'manual'\n        }\n      }\n    })\n  ]\n};"
+            "code": "import { provideNUI } from '@nui/core';\nimport { myCustomPreset } from './themes/custom';\n\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    provideNUI({\n      theme: {\n        preset: 'custom',\n        customPresets: [myCustomPreset],\n        darkMode: {\n          strategy: 'manual'\n        }\n      }\n    })\n  ]\n};"
           },
           "step3": {
             "title": "Usa tu tema",
@@ -1115,7 +1118,7 @@
         },
         "config": {
           "title": "PopoverConfig",
-          "description": "Interface para configuración global del popover mediante <code>provideNUIConfig({ popover: {...} })</code>"
+          "description": "Interface para configuración global del popover mediante <code>provideNUI({ popover: {...} })</code>"
         },
         "context": {
           "title": "PopoverContext",
@@ -1260,7 +1263,7 @@
         "defaults": {
           "title": "Configuración predeterminada",
           "description": "El panel se abrirá utilizando los valores predeterminados globales configurados.",
-          "note": "Si no se proporcionan opciones al abrir el panel, se usarán los valores predeterminados globales definidos en la configuración de NUI de <code>provideNUIConfig({ sidebarPanel: {...} })</code>."
+          "note": "Si no se proporcionan opciones al abrir el panel, se usarán los valores predeterminados globales definidos en la configuración de NUI de <code>provideNUI({ sidebarPanel: {...} })</code>."
         },
         "sizes": {
           "title": "Tamaños",

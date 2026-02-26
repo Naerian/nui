@@ -97,7 +97,7 @@ export const DEFAULT_FAB_BUTTON_CONFIG: FabButtonConfig = {
  */
 export function injectFabButtonConfig(): FabButtonConfig {
   const globalConfig = inject(NUI_CONFIG, { optional: true });
-  const fabButtonOverrides = globalConfig?.fabButton;
+  const fabButtonOverrides = globalConfig?.config?.fabButton;
 
   return deepMerge(DEFAULT_FAB_BUTTON_CONFIG, fabButtonOverrides);
 }

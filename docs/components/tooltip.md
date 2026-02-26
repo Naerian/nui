@@ -54,16 +54,16 @@ interface TooltipConfig {
 
 ## ⚙️ Configuración Global
 
-Puedes configurar valores por defecto para todos los tooltips de la aplicación usando `provideNUIConfig`:
+Puedes configurar valores por defecto para todos los tooltips de la aplicación usando `provideNUI`:
 
 ```typescript
 // En app.config.ts
 import { ApplicationConfig } from '@angular/core';
-import { provideNUIConfig } from '@shared/configs';
+import { provideNUI } from '@shared/configs';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideNUIConfig({
+    provideNUI({
       tooltip: {
         position: 'bottom',      // Todos los tooltips se mostrarán abajo por defecto
         event: 'hover',          // Evento por defecto

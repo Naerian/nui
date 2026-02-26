@@ -27,6 +27,7 @@ import {
   DEFAULT_VARIANT,
 } from '../../configs';
 import { ButtonWidth, ButtonWidthEnum } from '../button/models/button.model';
+import { injectSelectButtonConfig } from '../../configs/select-button';
 
 @Component({
   selector: 'nui-select-btn',
@@ -48,7 +49,7 @@ import { ButtonWidth, ButtonWidthEnum } from '../button/models/button.model';
   ],
 })
 export class SelectButtonComponent implements ControlValueAccessor {
-  private readonly _nuiConfig = inject(NUI_CONFIG);
+  private readonly globalConfig = injectSelectButtonConfig();
 
   // ========================================================================
   // INPUTS
@@ -128,13 +129,16 @@ export class SelectButtonComponent implements ControlValueAccessor {
 
   /** Configuración efectiva (Global vs Local) */
   protected readonly effectiveSize = computed(
-    () => this.size() ?? this._nuiConfig?.defaultSize ?? DEFAULT_SIZE
+    () => this.size() ?? this.globalConfig?.size ?? DEFAULT_SIZE
   );
   protected readonly effectiveColor = computed(
-    () => this.color() ?? this._nuiConfig?.defaultColor ?? DEFAULT_COLOR
+    () => this.color() ?? this.globalConfig?.color ?? DEFAULT_COLOR
   );
   protected readonly effectiveVariant = computed(
-    () => this.variant() ?? this._nuiConfig?.defaultVariant ?? DEFAULT_VARIANT
+    () => this.variant() ?? this.globalConfig?.variant ?? DEFAULT_VARIANT
+  );
+  protected readonly effectiveWidth = computed(
+    () => this.width() ?? this.globalConfig?.width ?? ButtonWidthEnum.AUTO
   );
 
   /** Clases CSS del contenedor principal */
@@ -144,15 +148,11 @@ export class SelectButtonComponent implements ControlValueAccessor {
       `nui-select-btn--${this.effectiveSize()}`,
       `nui-select-btn--${this.effectiveVariant()}`,
       `nui-select-btn--${this.effectiveColor()}`,
+      `nui-select-btn--${this.effectiveWidth()}`,
     ];
 
     if (this.disabled()) classes.push('nui-select-btn--disabled');
     if (this.iconOnly()) classes.push('nui-select-btn--icon-only');
-
-    // Clases de ancho
-    if (this.width() === 'full') classes.push('nui-select-btn--full');
-    if (this.width() === 'fit') classes.push('nui-select-btn--fit');
-    if (this.width() === 'auto') classes.push('nui-select-btn--auto');
 
     return classes.join(' ');
   });

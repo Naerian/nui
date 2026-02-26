@@ -23,7 +23,7 @@ export const DEFAULT_POPOVER_CONFIG: PopoverConfig = {
  * * @returns {PopoverConfig} Configuración final combinada
  */
 export function injectPopoverConfig(): PopoverConfig {
-  const globalConfig = inject(NUI_CONFIG, { optional: true });
+  const globalConfig = inject(NUI_CONFIG, { optional: true })?.config;
   const popoverOverrides = globalConfig?.popover;
 
   return deepMerge(DEFAULT_POPOVER_CONFIG, popoverOverrides);

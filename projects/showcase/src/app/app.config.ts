@@ -4,8 +4,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { routes } from './app.routes';
-import { provideNUI, minimal, provideNUIConfig } from 'nui';
 import { Observable } from 'rxjs';
+import { minimal, provideNUI } from 'nui';
 
 // Simple custom loader for translations
 export class CustomTranslateLoader implements TranslateLoader {
@@ -38,13 +38,6 @@ export const appConfig: ApplicationConfig = {
     provideNUI({
       preset: minimal,
       darkMode: 'manual',
-    }),
-    provideNUIConfig({
-      calendar: {
-        showTimePicker: 'default',
-        timePickerMode: 'HOUR_MINUTE_24',
-        defaultDate: new Date(), // Puedes cambiar esto por cualquier fecha por defecto que quieras
-      },
     }),
   ],
 };

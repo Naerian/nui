@@ -1,14 +1,59 @@
 import { inject } from '@angular/core';
-import { PaginatorGlobalConfig } from '../../components/paginator';
+import {
+  IconConfig,
+  InfiniteConfig,
+  KeyboardConfig,
+  LoadingConfig,
+  PaginatorConfig,
+  PaginatorLayout,
+  PaginatorTexts,
+  ResponsiveConfig,
+} from '../../components/paginator';
 import { NUI_TRANSLATIONS } from '../../translations'; // O la ruta correcta a tu token
 import { NUI_CONFIG } from '../nui.config';
 import { deepMerge } from '../../utils/deep-merge';
+import { NUIColor, NUISize, NUIVariant } from '../common';
+
+/**
+ * Configuración completa del Paginator
+ */
+export interface PaginatorGlobalConfig {
+  /** Tamaño del paginador */
+  size?: NUISize;
+  /** Color del paginador */
+  color?: NUIColor;
+  /** Variante del paginador */
+  variant?: NUIVariant;
+  /** Configuración básica */
+  config?: PaginatorConfig;
+  /** Textos personalizados */
+  texts?: PaginatorTexts;
+  /** Configuración de teclado */
+  keyboard?: KeyboardConfig;
+  /** Configuración de loading */
+  loading?: LoadingConfig;
+  /** Configuración responsiva */
+  responsive?: ResponsiveConfig;
+  /** Configuración de iconos */
+  icons?: IconConfig;
+  /** Configuración del modo infinito */
+  infinite?: InfiniteConfig;
+  /** Configuración del layout personalizado */
+  layout?: PaginatorLayout;
+  /** Configuración del layout para dispositivos móviles */
+  mobileLayout?: PaginatorLayout;
+  /** Configuración del layout para modo infinito */
+  infiniteLayout?: PaginatorLayout;
+}
 
 /**
  * Defaults estáticos. No hay inyección aquí, es una constante pura.
  * (Si no se usa el Paginator, esto no entra en el build final).
  */
 export const DEFAULT_PAGINATOR_CONFIG: PaginatorGlobalConfig = {
+  size: 'md',
+  color: 'primary',
+  variant: 'solid',
   config: {
     maxVisiblePages: 7,
     showFirstLast: false,
@@ -80,11 +125,6 @@ export const DEFAULT_PAGINATOR_CONFIG: PaginatorGlobalConfig = {
     showCounter: true,
     onLoadMore: () => {},
   },
-  appearance: {
-    color: 'primary',
-    size: 'md',
-    variant: 'solid',
-  },
   layout: {
     top: [],
     left: ['itemRange', 'pageSize'],
@@ -118,7 +158,7 @@ export const DEFAULT_PAGINATOR_CONFIG: PaginatorGlobalConfig = {
  * Orden de precedencia: Base Estática <- Traducciones (si hay) <- Configuración Global (si hay)
  */
 export function injectPaginatorConfig(): PaginatorGlobalConfig {
-  const globalConfig = inject(NUI_CONFIG, { optional: true });
+  const globalConfig = inject(NUI_CONFIG, { optional: true })?.config;
   const translations = inject(NUI_TRANSLATIONS, { optional: true });
 
   // 1. Mapeamos las traducciones dinámicas solo si existen

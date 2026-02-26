@@ -25,6 +25,7 @@ import {
   NUIVariant,
   NUI_SIZES,
   injectPaginatorConfig,
+  DEFAULT_VARIANT,
 } from '../../configs';
 import { NUI_TRANSLATIONS } from '../../translations';
 import {
@@ -121,14 +122,13 @@ import { ButtonDirective } from '../button/button.directive';
     // Clases dinámicas (Concatenación de strings para variantes)
     // Esto sustituye al [ngClass] del array
     '[class]':
-      '"nui-paginator-container--" + effectiveSize() + " nui-paginator-container--" + color() + " nui-paginator-container--" + variant() + " nui-paginator-container--" + effectiveMode()',
+      '"nui-paginator-container--" + effectiveSize() + " nui-paginator-container--" + effectiveColor() + " nui-paginator-container--" + effectiveVariant() + " nui-paginator-container--" + effectiveMode()',
 
     // Atributos de accesibilidad
     '[attr.aria-description]': 'getAriaDescription()',
   },
 })
 export class PaginatorComponent implements OnInit, OnDestroy {
-  private readonly globalConfig = inject(NUI_CONFIG);
   private readonly destroyRef = inject(DestroyRef);
   private readonly elementRef = inject(ElementRef);
   protected readonly _translations = inject(NUI_TRANSLATIONS);
@@ -148,14 +148,14 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Valores posibles: 'primary', 'secondary', 'success', 'info', 'warning', 'danger', 'accent'
    * @default 'primary' (o valor configurado globalmente)
    */
-  color = model<NUIColor>(inject(NUI_CONFIG).defaultColor || DEFAULT_COLOR);
+  color = model<NUIColor>();
 
   /**
    * Tamaño del paginador.
    * Valores posibles: 'xs', 'sm', 'md', 'lg', 'xl'
    * @default 'md' (o valor configurado globalmente)
    */
-  size = model<NUISize>(inject(NUI_CONFIG).defaultSize || DEFAULT_SIZE);
+  size = model<NUISize>();
 
   /**
    * Variante visual del paginador.
@@ -164,7 +164,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * - 'ghost': Sin borde ni fondo, solo texto/icono
    * @default 'solid'
    */
-  variant = input<NUIVariant>('solid');
+  variant = input<NUIVariant>();
 
   /**
    * Modo de visualización del paginador.
@@ -435,6 +435,20 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     // Sino, usar el valor de la configuración global, o false como último fallback
     return inputValue ?? this.paginatorConfig.config?.showPageSizeSelector ?? false;
   });
+
+  /**
+   * Valores efectivos de color, considerando configuración global y fallback a constante por defecto.
+   * Prioridad: Input > Global Config > Default Constant
+   */
+  effectiveColor = computed(() => this.color() || this.paginatorConfig?.color || DEFAULT_COLOR);
+
+  /**
+   * Valor efectivo de variant, considerando configuración global y modo automático en móvil
+   * Prioridad: Input > Global Config > Default Constant
+   */
+  effectiveVariant = computed(
+    () => this.variant() || this.paginatorConfig?.variant || DEFAULT_VARIANT
+  );
 
   /**
    * Signal computado que devuelve si estamos en la primera página
@@ -710,7 +724,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * En móviles, reduce automáticamente el tamaño para mejorar UX.
    */
   effectiveSize = computed<NUISize>(() => {
-    const currentSize = this.size();
+    const currentSize = this.size() || this.paginatorConfig?.size || DEFAULT_SIZE;
 
     // En móviles, reducir automáticamente el tamaño
     if (this.isMobileDevice()) {
@@ -727,6 +741,13 @@ export class PaginatorComponent implements OnInit, OnDestroy {
 
     return currentSize;
   });
+
+  /**
+   * Computed para el tamaño efectivo del botón de modo infinito.
+   */
+  effectiveSizeInfiniteBtn = computed<NUISize>(
+    () => this.size() || this.paginatorConfig?.size || DEFAULT_SIZE
+  );
 
   /**
    * Computed para el número máximo de páginas visibles efectivo.
@@ -758,12 +779,6 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   });
 
   constructor() {
-    // Inicializar valores por defecto desde configuración global
-    const defaultSize = this.globalConfig.defaultSize || DEFAULT_SIZE;
-    const defaultColor = this.globalConfig.defaultColor || DEFAULT_COLOR;
-    this.size.set(defaultSize);
-    this.color.set(defaultColor);
-
     // Redimensión reactiva
     fromEvent(window, 'resize')
       .pipe(takeUntilDestroyed()) // Detecta automáticamente el destroyRef por estar en el constructor

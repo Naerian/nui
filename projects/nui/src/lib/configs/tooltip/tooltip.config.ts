@@ -23,7 +23,7 @@ export const DEFAULT_TOOLTIP_CONFIG: TooltipConfig = {
  * @returns {TooltipConfig} Configuración final combinada
  */
 export function injectTooltipConfig(): TooltipConfig {
-  const globalConfig = inject(NUI_CONFIG, { optional: true });
+  const globalConfig = inject(NUI_CONFIG, { optional: true })?.config;
   const tooltipOverrides = globalConfig?.tooltip;
 
   return deepMerge(DEFAULT_TOOLTIP_CONFIG, tooltipOverrides);

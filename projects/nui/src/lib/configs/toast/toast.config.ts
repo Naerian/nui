@@ -54,7 +54,7 @@ export const DEFAULT_TOAST_CONFIG: ToastGlobalConfig = {
  * @returns {ToastGlobalConfig} Configuración final combinada
  */
 export function injectToastConfig(): ToastGlobalConfig {
-  const globalConfig = inject(NUI_CONFIG, { optional: true });
+  const globalConfig = inject(NUI_CONFIG, { optional: true })?.config;
   const toastOverrides = globalConfig?.toast;
 
   return deepMerge(DEFAULT_TOAST_CONFIG, toastOverrides);

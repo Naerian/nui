@@ -9,7 +9,7 @@ import { CodeExample } from '../../../core/models';
   standalone: true,
   imports: [CommonModule, TranslateModule, CodeBlockComponent],
   templateUrl: './configuration.component.html',
-  styleUrls: ['./configuration.component.scss']
+  styleUrls: ['./configuration.component.scss'],
 })
 export class ConfigurationComponent {
   presetConfigExamples: CodeExample[] = [
@@ -20,8 +20,8 @@ export class ConfigurationComponent {
 
 provideNUI({ 
   preset: dopamine 
-})`
-    }
+})`,
+    },
   ];
 
   darkModeConfigExamples: CodeExample[] = [
@@ -31,8 +31,8 @@ provideNUI({
       code: `provideNUI({ 
   preset: minimal,
   darkMode: 'manual' // 'auto' | 'manual' | 'system'
-})`
-    }
+})`,
+    },
   ];
 
   customPresetExamples: CodeExample[] = [
@@ -65,7 +65,40 @@ const myPreset: ThemePreset = {
   }
 };
 
-provideNUI({ preset: myPreset })`
+provideNUI({ preset: myPreset })`,
+    },
+  ];
+
+  customComponentExamples: CodeExample[] = [
+    {
+      language: 'typescript',
+      title: 'TypeScript',
+      code: `import { provideNUI, ButtonGlobalConfig, PaginatorGlobalConfig } from 'nui';
+
+const myCustomButtonConfig: Partial<ButtonGlobalConfig> = {
+  size: 'lg',
+  color: 'accent',
+  variant: 'outline',
+  shape: 'pill',
+  width: 'full',
+  iconPosition: 'start',
+};
+
+const myCustomPaginatorConfig: Partial<PaginatorGlobalConfig> = {
+  color: 'success',
+  size: 'sm',
+  texts: {
+    previous: 'Back',
+    next: 'Next',
+  },
+};
+
+provideNUI({ 
+    config: {
+      button: myCustomButtonConfig,
+      paginator: myCustomPaginatorConfig
     }
+})`,
+    },
   ];
 }

@@ -19,8 +19,3 @@ export const PURE_COLORS = {
  * Preset por defecto (Minimalista)
  */
 export const DEFAULT_PRESET: ThemePreset = minimal;
-
-/**
- * Token de inyección para la configuración del tema
- */
-export const NUI_THEME_CONFIG = Symbol('NUI_THEME_CONFIG');

@@ -25,11 +25,11 @@ El paginador soporta configuración global a través del sistema de configuraci�
 ```typescript
 // app.config.ts o main.ts
 import { ApplicationConfig } from '@angular/core';
-import { provideNuiConfig } from 'nui';
+import { provideNUI } from 'nui';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideNuiConfig({
+    provideNUI({
       paginator: {
         config: {
           maxVisiblePages: 7,
@@ -1176,7 +1176,7 @@ export class BlogPostsComponent {
 1. **Configuración Global**: La configuración global tiene `showFirstLast: false`
    ```typescript
    // ❌ Global config deshabilitándolo
-   provideNuiConfig({ paginator: { config: { showFirstLast: false } } })
+   provideNUI({ paginator: { config: { showFirstLast: false } } })
    ```
    
 2. **Layout Explícito**: Usas un layout personalizado sin incluir el elemento `first-last`
@@ -1273,7 +1273,7 @@ totalPages = computed(() => Math.ceil(this.totalItems() / this.itemsPerPage()));
    // app.config.ts
    export const appConfig: ApplicationConfig = {
      providers: [
-       provideNuiConfig({
+       provideNUI({
          paginator: {
            config: { /* ... */ },
            layout: { /* ... */ }

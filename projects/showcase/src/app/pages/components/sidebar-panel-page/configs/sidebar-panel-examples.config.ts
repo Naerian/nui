@@ -46,7 +46,7 @@ export const SIDEBAR_PANEL_EXAMPLES_SECTIONS: ComponentSection[] = [
         code: `// Default NUI Configuration for Sidebar Panels
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideNUIConfig({
+    provideNUI({
       sidebarPanel: {
         position: 'left',        // All panels will open to the left
         size: 'lg',              // All will be large by default

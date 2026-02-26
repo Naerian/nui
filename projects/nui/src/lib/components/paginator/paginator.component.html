@@ -101,8 +101,8 @@
             [options]="pageSizeOptionsData()"
             [ngModel]="itemsPerPage().toString()"
             [size]="effectiveSize()"
-            [color]="color()"
-            [variant]="variant()"
+            [color]="effectiveColor()"
+            [variant]="effectiveVariant()"
             (valueChange)="onPageSizeChange($event)"
           />
         </div>
@@ -228,7 +228,9 @@
       @if (canShowElement('infiniteButton')) {
         <button
           nuiButton
-          [color]="color()"
+          [color]="effectiveColor()"
+          [variant]="effectiveVariant()"
+          [size]="effectiveSizeInfiniteBtn()"
           [loading]="infiniteState().isLoading"
           loadingPosition="start"
           (click)="loadMore()"
