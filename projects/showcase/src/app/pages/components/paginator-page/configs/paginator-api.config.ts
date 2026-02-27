@@ -49,6 +49,12 @@ export const PAGINATOR_API_SECTIONS: ComponentSection[] = [
           'Deshabilita el paginador',
         ],
         [
+          '<code>paginationText</code>',
+          'Partial<PaginatorTexts>',
+          '<code class="neutral">undefined</code>',
+          'Textos personalizados para el paginador (sobrescribe traducciones por defecto y globales)',
+        ],
+        [
           '<code>currentPage</code>',
           'number',
           '<code class="neutral">1</code>',
@@ -208,7 +214,7 @@ export const PAGINATOR_API_SECTIONS: ComponentSection[] = [
     description: 'components.paginator.api.config.description',
     anchor: 'api-config',
     table: {
-      headers: [ 'common.tables.property',  'common.tables.type', 'common.tables.description'],
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
         ['<code>maxVisiblePages</code>', 'number', 'Número máximo de páginas visibles'],
         ['<code>showFirstLast</code>', 'boolean', 'Mostrar botones de primera y última página'],
@@ -245,21 +251,61 @@ export const PAGINATOR_API_SECTIONS: ComponentSection[] = [
     description: 'components.paginator.api.texts.description',
     anchor: 'api-texts',
     table: {
-      headers: [ 'common.tables.property',  'common.tables.type', 'common.tables.description'],
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
-        ['<code>firstPage</code>', 'string', 'Texto para "Primera página"'],
-        ['<code>lastPage</code>', 'string', 'Texto para "Última página"'],
-        ['<code>previousPage</code>', 'string', 'Texto para "Página anterior"'],
-        ['<code>nextPage</code>', 'string', 'Texto para "Página siguiente"'],
-        ['<code>goToPage</code>', 'string', 'Texto para "Ir a la página"'],
-        ['<code>go</code>', 'string', 'Texto para "Ir" (botón)'],
         ['<code>itemsPerPage</code>', 'string', 'Texto para "Items por página"'],
         [
           '<code>showingItems</code>',
           'string',
-          'Template para mostrar rango: {start}-{end} de {total}',
+          'Template: "Mostrando {start}-{end} de {total} resultados"',
         ],
-        ['<code>pageLabel</code>', 'string', 'Texto para "Página {page}"'],
+        ['<code>page</code>', 'string', 'Texto para "Página"'],
+        ['<code>of</code>', 'string', 'Texto para "de"'],
+        ['<code>goToPage</code>', 'string', 'Texto para "Ir a página"'],
+        ['<code>go</code>', 'string', 'Texto para "Ir" (botón)'],
+        ['<code>invalidPage</code>', 'string', 'Texto para "Página inválida"'],
+        ['<code>firstPage</code>', 'string', 'Texto para "Primera página"'],
+        ['<code>lastPage</code>', 'string', 'Texto para "Última página"'],
+        ['<code>previousPage</code>', 'string', 'Texto para "Página anterior"'],
+        ['<code>nextPage</code>', 'string', 'Texto para "Página siguiente"'],
+        ['<code>pageLabel</code>', 'string', 'Template: "Página {page}"'],
+        ['<code>morePages</code>', 'string', 'Texto para "Más páginas"'],
+        ['<code>loadMore</code>', 'string', 'Texto para "Cargar más"'],
+        ['<code>loading</code>', 'string', 'Texto para "Cargando..."'],
+        [
+          '<code>pageJumpHelp</code>',
+          'string',
+          'Template: "Página inválida. Ingrese un número entre 1 y {totalPages}."',
+        ],
+        [
+          '<code>infiniteLoadedItems</code>',
+          'string',
+          'Template: "{loaded} elementos cargados de {total}"',
+        ],
+        ['<code>infiniteLoadEnd</code>', 'string', 'Texto para "No hay más elementos que mostrar"'],
+
+        // ARIA labels
+        ['<code>ariaPagination</code>', 'string', 'ARIA label para "Paginación"'],
+        ['<code>ariaMorePages</code>', 'string', 'ARIA label para "Más páginas"'],
+        ['<code>ariaPage</code>', 'string', 'Template ARIA: "Página {page}"'],
+        ['<code>ariaCurrentPage</code>', 'string', 'ARIA label para "página actual"'],
+        ['<code>ariaGoToPage</code>', 'string', 'Template ARIA: "Ir a página {page}"'],
+        [
+          '<code>ariaCurrentPageWithRange</code>',
+          'string',
+          'Template ARIA: "Página {page} de {totalPages}, mostrando items {start} a {end} de {total} resultados"',
+        ],
+        [
+          '<code>ariaCurrentPageNoRange</code>',
+          'string',
+          'Template ARIA: "Página {page} de {totalPages}"',
+        ],
+        [
+          '<code>ariaShowingItems</code>',
+          'string',
+          'Template ARIA: "Mostrando items {start} a {end} de {total} resultados"',
+        ],
+        ['<code>ariaLoading</code>', 'string', 'ARIA label para "Cargando nueva página..."'],
       ],
     },
   },
@@ -269,7 +315,7 @@ export const PAGINATOR_API_SECTIONS: ComponentSection[] = [
     description: 'components.paginator.api.keyboard.description',
     anchor: 'api-keyboard',
     table: {
-      headers: [ 'common.tables.property',  'common.tables.type', 'common.tables.description'],
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
         ['<code>enabled</code>', 'boolean', 'Habilitar navegación por teclado'],
         ['<code>firstPage</code>', 'string[]', 'Teclas para ir a la primera página'],
@@ -285,10 +331,9 @@ export const PAGINATOR_API_SECTIONS: ComponentSection[] = [
     description: 'components.paginator.api.loading.description',
     anchor: 'api-loading',
     table: {
-      headers: [ 'common.tables.property',  'common.tables.type', 'common.tables.description'],
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
         ['<code>showLoading</code>', 'boolean', 'Mostrar indicador de loading durante cambios'],
-        ['<code>loadingText</code>', 'string', 'Texto durante loading'],
         ['<code>loadingDelay</code>', 'number', 'Delay antes de mostrar loading (ms)'],
         ['<code>disableOnLoading</code>', 'boolean', 'Deshabilitar controles durante loading'],
       ],
@@ -300,7 +345,7 @@ export const PAGINATOR_API_SECTIONS: ComponentSection[] = [
     description: 'components.paginator.api.responsive.description',
     anchor: 'api-responsive',
     table: {
-      headers: [ 'common.tables.property',  'common.tables.type', 'common.tables.description'],
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
         [
           '<code>mobile</code>',
@@ -326,7 +371,7 @@ export const PAGINATOR_API_SECTIONS: ComponentSection[] = [
     description: 'components.paginator.api.layout.description',
     anchor: 'api-layout',
     table: {
-      headers: [ 'common.tables.property',  'common.tables.type', 'common.tables.description'],
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
         ['<code>top</code>', 'PaginatorElement[]', 'Elementos en el área superior'],
         ['<code>left</code>', 'PaginatorElement[]', 'Elementos en el área izquierda'],
@@ -441,7 +486,7 @@ export const PAGINATOR_API_SECTIONS: ComponentSection[] = [
     description: 'components.paginator.api.infinite.description',
     anchor: 'api-infinite',
     table: {
-      headers: [ 'common.tables.property',  'common.tables.type', 'common.tables.description'],
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
         ['<code>enabled</code>', 'boolean', 'Habilitar modo infinito'],
         [
@@ -449,7 +494,6 @@ export const PAGINATOR_API_SECTIONS: ComponentSection[] = [
           "'scroll' | 'button' | 'hybrid'",
           'Tipo de modo infinito: scroll automático, botón manual o híbrido',
         ],
-        ['<code>loadMoreText</code>', 'string', 'Texto del botón "Cargar más"'],
         ['<code>scrollOffset</code>', 'number', 'Offset para detectar scroll (px desde el bottom)'],
         ['<code>itemsPerLoad</code>', 'number', 'Número de items a cargar por lote'],
         ['<code>maxItems</code>', 'number', 'Máximo número de items a cargar'],

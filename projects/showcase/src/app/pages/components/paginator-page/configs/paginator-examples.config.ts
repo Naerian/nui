@@ -250,7 +250,6 @@ type PaginatorElement =
   showCounter?: boolean;         // Show loaded items counter
   initialLoadedItems?: number;   // Initially loaded items
   onLoadMore: () => void | Promise<void>; // Callback to load more
-  loadingText?: string;          // Loading text
   buttonText?: string;           // Button text
   endText?: string;              // Text when no more items
 }`,

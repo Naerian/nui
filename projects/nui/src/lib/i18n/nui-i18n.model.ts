@@ -1,3 +1,5 @@
+import { PaginatorTexts } from '../components/paginator';
+
 /**
  * Interfaz para las traducciones de la librería
  */
@@ -361,36 +363,10 @@ export interface NuiI18n {
   };
 
   // Textos del componente Paginator
-  paginator: {
-    itemsPerPage: string;
-    showingItems: string; // "Mostrando {start}-{end} de {total} resultados"
-    page: string; // "Página"
-    of: string; // "de"
-    goToPage: string; // "Ir a página"
-    go: string; // "Ir"
-    invalidPage: string; // "Página inválida"
-    firstPage: string; // "Primera página"
-    lastPage: string; // "Última página"
-    previousPage: string; // "Página anterior"
-    nextPage: string; // "Página siguiente"
-    pageLabel: string; // "Página {page}"
-    morePages: string; // "Más páginas"
-    loadMore: string; // "Cargar más"
-    loading: string; // "Cargando..."
-    pageJumpHelp: string; // "Página inválida. Ingrese un número entre 1 y {totalPages}."
-    infiniteLoadedItems: string; // "{loaded} elementos cargados de {total}"
-    infiniteLoadEnd: string; // "No hay más elementos que mostrar"
-    // ARIA labels
-    ariaPagination: string; // "Paginación"
-    ariaMorePages: string; // "Más páginas"
-    ariaPage: string; // "Página {page}"
-    ariaCurrentPage: string; // "página actual"
-    ariaGoToPage: string; // "Ir a página {page}"
-    ariaCurrentPageWithRange: string; // "Página {page} de {totalPages}, mostrando items {start} a {end} de {total} resultados"
-    ariaCurrentPageNoRange: string; // "Página {page} de {totalPages}"
-    ariaShowingItems: string; // "Mostrando items {start} a {end} de {total} resultados"
-    ariaLoading: string; // "Cargando nueva página..."
-  };
+  // Esta interfaz se importa desde el modelo del paginador para mantener la consistencia de los textos relacionados con este componente.
+  // Un paginador puede ser usado en diferentes contextos y aplicaciones, por lo que tener una interfaz dedicada para
+  // sus textos permite una mayor flexibilidad y claridad a la hora de definir las traducciones necesarias para este componente en particular.
+  paginator: PaginatorTexts;
 
   // Textos de las Tabs
   tabs: {

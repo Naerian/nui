@@ -58,6 +58,7 @@ import {
   PVerticalAlignEnum,
   PVerticalAlign,
   PaginatorLayoutAreaEnum,
+  PaginatorTexts,
 } from './models/paginator.model';
 import { SelectButtonComponent } from '../select-button/select-button.component';
 import { SelectBtnOption } from '../select-button/models/select-button.model';
@@ -197,6 +198,11 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @default DEFAULT_PAGE_SIZE_OPTIONS = [10, 20, 50, 100] (o valor configurado globalmente)
    */
   pageSizeOptions = input<number[]>(DEFAULT_PAGE_SIZE_OPTIONS);
+
+  /**
+   * Textos personalizables para elementos del paginador (ej: aria-labels, mensajes de rango, etc).
+   */
+  paginationText = input<Partial<PaginatorTexts> | undefined>(undefined);
 
   /**
    * Mostrar selector de items por página.
@@ -395,10 +401,14 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   pageSizeChangeAdvanced = output<PageSizeChangeEvent>();
 
   /**
-   * Valores efectivos que consideran la configuración global como fallback.
-   * Estos computed signals leen primero del input explícito del usuario,
-   * y si no está definido (undefined), usan el valor de la configuración global.
+   * Textos efectivos del paginador, combinando los valores por defecto con los personalizados recibidos por input.
+   * Prioridad: Input > Configuración global > Textos por defecto
    */
+  effectiveTexts = computed<PaginatorTexts>(() => {
+    const defaultTexts = this._i18n();
+    const customTexts = this.paginationText() || {};
+    return { ...defaultTexts, ...customTexts };
+  });
 
   /**
    * Valor efectivo de showItemRange considerando configuración global

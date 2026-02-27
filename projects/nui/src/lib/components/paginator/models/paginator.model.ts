@@ -46,28 +46,35 @@ export interface PaginatorConfig {
  * Textos personalizables del Paginator
  */
 export interface PaginatorTexts {
-  /** Texto para "Primera página" */
-  firstPage?: string;
-  /** Texto para "Última página" */
-  lastPage?: string;
-  /** Texto para "Página anterior" */
-  previousPage?: string;
-  /** Texto para "Página siguiente" */
-  nextPage?: string;
-  /** Texto para "Ir a la página" */
-  goToPage?: string;
-  /** Texto para "Ir" (botón) */
-  go?: string;
-  /** Texto para "Items por página" */
-  itemsPerPage?: string;
-  /** Template para mostrar rango: {start}-{end} de {total} */
-  showingItems?: string;
-  /** Texto para "Página {page}" */
-  pageLabel?: string;
-  /** Texto durante loading */
-  loadingText?: string;
-  /** Texto del botón "Cargar más" */
-  loadMoreText?: string;
+  itemsPerPage: string;
+  showingItems: string; // "Mostrando {start}-{end} de {total} resultados"
+  page: string; // "Página"
+  of: string; // "de"
+  goToPage: string; // "Ir a página"
+  go: string; // "Ir"
+  invalidPage: string; // "Página inválida"
+  firstPage: string; // "Primera página"
+  lastPage: string; // "Última página"
+  previousPage: string; // "Página anterior"
+  nextPage: string; // "Página siguiente"
+  pageLabel: string; // "Página {page}"
+  morePages: string; // "Más páginas"
+  loadMore: string; // "Cargar más"
+  loading: string; // "Cargando..."
+  pageJumpHelp: string; // "Página inválida. Ingrese un número entre 1 y {totalPages}."
+  infiniteLoadedItems: string; // "{loaded} elementos cargados de {total}"
+  infiniteLoadEnd: string; // "No hay más elementos que mostrar"
+  
+  // ARIA labels
+  ariaPagination: string; // "Paginación"
+  ariaMorePages: string; // "Más páginas"
+  ariaPage: string; // "Página {page}"
+  ariaCurrentPage: string; // "página actual"
+  ariaGoToPage: string; // "Ir a página {page}"
+  ariaCurrentPageWithRange: string; // "Página {page} de {totalPages}, mostrando items {start} a {end} de {total} resultados"
+  ariaCurrentPageNoRange: string; // "Página {page} de {totalPages}"
+  ariaShowingItems: string; // "Mostrando items {start} a {end} de {total} resultados"
+  ariaLoading: string; // "Cargando nueva página..."
 }
 
 /**
