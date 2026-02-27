@@ -1,108 +1,85 @@
 import { inject } from '@angular/core';
 import {
-  IconConfig,
+  PaginatorIcons,
   InfiniteConfig,
+  InfiniteModeEnum,
   KeyboardConfig,
   LoadingConfig,
-  PaginatorConfig,
+  PaginatorNavDisplayEnum,
   PaginatorLayout,
-  ResponsiveConfig,
+  PaginatorNavDisplay,
+  DEFAULT_ICON_CONFIG,
+  DEFAULT_KEYBOARD_CONFIG,
 } from '../../components/paginator';
 import { NUI_CONFIG } from '../nui.config';
 import { deepMerge } from '../../utils/deep-merge';
 import { NUIColor, NUISize, NUIVariant } from '../common';
-import { NuiI18nService } from '../../i18n/nui-i18n.service';
+import {
+  DEFAULT_PAGINATOR_I18N,
+  PaginatorI18n,
+} from '../../components/paginator/models/paginator-i18n.model';
 
 /**
  * Configuración completa del Paginator
  */
-export interface PaginatorGlobalConfig {
-  /** Tamaño del paginador */
+export interface PaginatorConfig {
+  // Propiedades de estilo
   size?: NUISize;
-  /** Color del paginador */
   color?: NUIColor;
-  /** Variante del paginador */
   variant?: NUIVariant;
-  /** Configuración básica */
-  config?: PaginatorConfig;
-  /** Configuración de teclado */
-  keyboard?: KeyboardConfig;
-  /** Configuración de loading */
-  loading?: LoadingConfig;
-  /** Configuración responsiva */
-  responsive?: ResponsiveConfig;
-  /** Configuración de iconos */
-  icons?: IconConfig;
-  /** Configuración del modo infinito */
-  infinite?: InfiniteConfig;
-  /** Configuración del layout personalizado */
-  layout?: PaginatorLayout;
-  /** Configuración del layout para dispositivos móviles */
-  mobileLayout?: PaginatorLayout;
-  /** Configuración del layout para modo infinito */
-  infiniteLayout?: PaginatorLayout;
+
+  // Propiedades de comportamiento
+  maxVisiblePages?: number;
+  showFirstLast?: boolean;
+  showPageSizeSelector?: boolean;
+  showItemRange?: boolean;
+  showPageJump?: boolean;
+  pageSizeOptions?: number[];
+  autoScroll?: boolean;
+  scrollTarget?: string | HTMLElement;
+  navDisplay?: PaginatorNavDisplay;
+
+  // Propiedades de bloques
+  navIcons?: Partial<PaginatorIcons>;
+  navTexts?: Partial<PaginatorI18n>;
+  keyboard?: Partial<KeyboardConfig>;
+  loading?: Partial<LoadingConfig>;
+  infinite?: Partial<InfiniteConfig>;
+
+  // Layouts
+  layout?: Partial<PaginatorLayout>;
+  mobileLayout?: Partial<PaginatorLayout>;
+  infiniteLayout?: Partial<PaginatorLayout>;
 }
 
 /**
  * Defaults estáticos. No hay inyección aquí, es una constante pura.
  * (Si no se usa el Paginator, esto no entra en el build final).
  */
-export const DEFAULT_PAGINATOR_CONFIG: PaginatorGlobalConfig = {
+export const DEFAULT_PAGINATOR_CONFIG: PaginatorConfig = {
   size: 'md',
   color: 'primary',
   variant: 'solid',
-  config: {
-    maxVisiblePages: 7,
-    showFirstLast: false,
-    showPageSizeSelector: false,
-    showItemRange: false,
-    showPageJump: false,
-    pageSizeOptions: [10, 25, 50, 100],
-    autoScroll: false,
-    scrollTarget: 'body',
-  },
-  keyboard: {
-    firstPage: ['Home'],
-    lastPage: ['End'],
-    previousPage: ['ArrowLeft'],
-    nextPage: ['ArrowRight'],
-    enabled: true,
-  },
+  maxVisiblePages: 7,
+  showFirstLast: false,
+  showPageSizeSelector: false,
+  showItemRange: false,
+  showPageJump: false,
+  pageSizeOptions: [10, 25, 50, 100],
+  autoScroll: false,
+  scrollTarget: 'body',
+  navDisplay: PaginatorNavDisplayEnum.ICON,
+  navIcons: DEFAULT_ICON_CONFIG,
+  navTexts: DEFAULT_PAGINATOR_I18N,
+  keyboard: DEFAULT_KEYBOARD_CONFIG,
   loading: {
     showLoading: false,
     loadingDelay: 200,
     disableOnLoading: true,
   },
-  responsive: {
-    mobile: {
-      maxVisiblePages: 3,
-      showFirstLast: false,
-      showPageJump: false,
-      showPageSizeSelector: false,
-    },
-    tablet: {
-      maxVisiblePages: 5,
-      showFirstLast: true,
-      showPageJump: false,
-      showPageSizeSelector: true,
-    },
-    breakpoints: {
-      mobile: 768,
-      tablet: 1024,
-    },
-  },
-  icons: {
-    first: 'ri-arrow-left-double-line',
-    previous: 'ri-arrow-left-s-line',
-    next: 'ri-arrow-right-s-line',
-    last: 'ri-arrow-right-double-line',
-    loadMore: 'ri-add-line',
-    loading: 'ri-loader-4-line',
-    prefix: 'ri-',
-  },
   infinite: {
     enabled: false,
-    mode: 'button',
+    mode: InfiniteModeEnum.BUTTON,
     scrollOffset: 100,
     itemsPerLoad: 20,
     maxItems: 1000,
@@ -141,7 +118,7 @@ export const DEFAULT_PAGINATOR_CONFIG: PaginatorGlobalConfig = {
  * Resolver del Paginator. Lo inyecta el componente en su constructor/propiedades.
  * Orden de precedencia: Base Estática <- Traducciones (si hay) <- Configuración Global (si hay)
  */
-export function injectPaginatorConfig(): PaginatorGlobalConfig {
+export function injectPaginatorConfig(): PaginatorConfig {
   // Inyectamos la config global (opcional por si el usuario no hizo provideNUI)
   const globalConfig = inject(NUI_CONFIG, { optional: true })?.config;
 

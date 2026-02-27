@@ -18,8 +18,8 @@ import { ToastRef } from './toast-ref';
 import { ToastAction } from './models/toast.model';
 import { TOAST_ANIMATIONS } from './animations/toast.animations';
 import { NUIColor, NUIShape, NUIVariant } from '../../configs';
-import { NUI_I18N } from '../../i18n/nui-i18n.token';
 import { ButtonDirective } from '../button/button.directive';
+import { NuiI18nService } from '../../i18n';
 
 @Component({
   selector: 'nui-toast',
@@ -41,16 +41,21 @@ export class ToastComponent implements OnInit, OnDestroy {
    * Referencia al ToastRef que contiene la configuración y estado del toast
    */
   readonly toastRef = input.required<ToastRef>();
-  
+
   /**
    * Evento emitido cuando el toast se cierra
    */
   readonly closed = output<void>();
-  
+
   /**
    * Evento emitido cuando se hace click en una acción del toast
    */
   readonly actionClicked = output<ToastAction>();
+
+  // Inyectamos el servicio de i18n para acceder a las traducciones dinámicas
+  protected readonly _i18nService = inject(NuiI18nService);
+  protected readonly _i18n = computed(() => this._i18nService.translations());
+  private readonly sanitizer = inject(DomSanitizer);
 
   // Señales para estado reactivo
   protected readonly isExpanded = signal(false);
@@ -59,9 +64,7 @@ export class ToastComponent implements OnInit, OnDestroy {
   // Computed values
   protected readonly config = computed(() => this.toastRef().config());
   protected readonly state = computed(() => this.toastRef().state());
-  protected readonly timeRemaining = computed(() =>
-    this.toastRef().timeRemaining(),
-  );
+  protected readonly timeRemaining = computed(() => this.toastRef().timeRemaining());
   protected readonly isPaused = computed(() => this.toastRef().isPaused());
 
   // Computed: Determina si se debe mostrar el contenido estándar
@@ -195,16 +198,12 @@ export class ToastComponent implements OnInit, OnDestroy {
       accent: 'ri-information-line',
     };
 
-    return config.type
-      ? defaultIcons[config.type] || 'ri-information-line'
-      : 'ri-information-line';
+    return config.type ? defaultIcons[config.type] || 'ri-information-line' : 'ri-information-line';
   });
 
   protected readonly safeHtml = computed((): SafeHtml | null => {
     const html = this.config().html;
-    return html
-      ? (this.sanitizer.sanitize(SecurityContext.HTML, html) as SafeHtml)
-      : null;
+    return html ? (this.sanitizer.sanitize(SecurityContext.HTML, html) as SafeHtml) : null;
   });
 
   // Computed para botones de acción
@@ -216,7 +215,7 @@ export class ToastComponent implements OnInit, OnDestroy {
   protected readonly buttonVariant = computed((): NUIVariant => {
     const config = this.config();
     const variant = config.buttonsVariant || 'ghost';
-    return (variant as NUIVariant);
+    return variant as NUIVariant;
   });
 
   protected readonly buttonShape = computed((): NUIShape => {
@@ -229,10 +228,6 @@ export class ToastComponent implements OnInit, OnDestroy {
   private touchStartY = 0;
   protected isSwiping = false;
 
-  protected readonly translation = inject(NUI_I18N);
-
-  constructor(private sanitizer: DomSanitizer) {}
-
   ngOnInit(): void {
     // Marcar como mostrado después de la animación de entrada
     const duration = this.config().animationDuration || 300;
@@ -241,9 +236,11 @@ export class ToastComponent implements OnInit, OnDestroy {
     }, duration);
 
     // Suscribirse al cierre
-    this.toastRef().afterClosed().subscribe(() => {
-      this.closed.emit();
-    });
+    this.toastRef()
+      .afterClosed()
+      .subscribe(() => {
+        this.closed.emit();
+      });
   }
 
   ngOnDestroy(): void {

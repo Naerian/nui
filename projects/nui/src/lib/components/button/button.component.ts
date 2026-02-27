@@ -76,7 +76,7 @@ export class ButtonComponent implements AfterContentInit {
   readonly shape = input<NUIShape>();
 
   /** Si el botón tiene estilo "elevado" (sombra). */
-  readonly raised = input(false, { alias: 'raised', transform: booleanAttribute });
+  readonly raised = input<boolean | undefined, unknown>(undefined, { transform: booleanAttribute });
 
   /** Texto del botón (alternativa a ng-content). */
   readonly label = input<string>();

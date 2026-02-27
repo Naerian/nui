@@ -9,7 +9,7 @@ import { DarkModeStrategy, ThemePreset } from '../themes';
 import { ButtonGlobalConfig } from './button';
 import { ActionMenuGlobalConfig } from './action-menu';
 import { SelectButtonGlobalConfig } from './select-button';
-import { PaginatorGlobalConfig } from './paginator';
+import { PaginatorConfig } from './paginator';
 import { AvatarGlobalConfig } from './avatar';
 
 /**
@@ -24,7 +24,7 @@ export interface NUIConfig {
   // Configuraciones globales de componentes (opcional)
   config?: {
     /** Avatar global defaults */
-    avatar: Partial<AvatarGlobalConfig>;
+    avatar?: Partial<AvatarGlobalConfig>;
     /** Action Menu global defaults */
     actionMenu?: Partial<ActionMenuGlobalConfig>;
     /** Select Button global defaults */
@@ -34,7 +34,7 @@ export interface NUIConfig {
     /** Calendar global defaults */
     calendar?: Partial<CalendarGlobalConfig>;
     /** Paginator global defaults */
-    paginator?: Partial<PaginatorGlobalConfig>;
+    paginator?: Partial<PaginatorConfig>;
     /** Toast global defaults */
     toast?: Partial<ToastGlobalConfig>;
     /** Tooltip global defaults */

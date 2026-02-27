@@ -12,6 +12,7 @@ import {
   output,
   computed,
   model,
+  booleanAttribute,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -28,8 +29,7 @@ import {
 } from '../../configs';
 import {
   KeyboardConfig,
-  PaginatorConfig,
-  IconConfig,
+  PaginatorIcons,
   InfiniteConfig,
   PageChangeEvent,
   PageSizeChangeEvent,
@@ -58,12 +58,16 @@ import {
   PVerticalAlignEnum,
   PVerticalAlign,
   PaginatorLayoutAreaEnum,
-  PaginatorTexts,
+  PaginatorNavDisplay,
+  PaginatorNavDisplayEnum,
+  InfiniteModeEnum,
+  DEFAULT_KEYBOARD_CONFIG,
 } from './models/paginator.model';
 import { SelectButtonComponent } from '../select-button/select-button.component';
 import { SelectBtnOption } from '../select-button/models/select-button.model';
 import { ButtonDirective } from '../button/button.directive';
 import { NuiI18nService } from '../../i18n/nui-i18n.service';
+import { DEFAULT_PAGINATOR_I18N, PaginatorI18n } from './models/paginator-i18n.model';
 
 /**
  * @name
@@ -142,11 +146,12 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   // Caché para memoización de páginas visibles
   private _visiblePagesCache = new Map<string, (number | string)[]>();
 
-  // Configuración de teclado
-  private keyboardConfig: KeyboardConfig = {};
-
   // Temporizador para limpiar mensajes del aria-live
   private clearAriaLiveMsgTimeout?: ReturnType<typeof setTimeout>;
+
+  // Enum para usar en el template
+  protected PaginatorNavDisplayEnum = PaginatorNavDisplayEnum;
+  protected PaginatorElementEnum = PaginatorElementEnum;
 
   /**
    * Color del paginador.
@@ -185,7 +190,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Indica si el paginador está deshabilitado.
    * @default false
    */
-  disabled = input(false, { transform: (value: unknown) => value === '' || value === true });
+  disabled = input(false, { transform: booleanAttribute });
 
   /**
    * Número total de items/resultados.
@@ -202,18 +207,25 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   /**
    * Textos personalizables para elementos del paginador (ej: aria-labels, mensajes de rango, etc).
    */
-  paginationText = input<Partial<PaginatorTexts> | undefined>(undefined);
+  navTexts = input<Partial<PaginatorI18n> | undefined>(undefined);
+
+  /**
+   * Cómo mostrar los botones de navegación (primero, anterior, siguiente, último).
+   */
+  navDisplay = input<PaginatorNavDisplay | undefined>(undefined);
+
+  /**
+   * Configuración de iconos para los botones de navegación.
+   */
+  navIcons = input<Partial<PaginatorIcons> | undefined>(undefined);
 
   /**
    * Mostrar selector de items por página.
    * Si no se especifica, se usará el valor de la configuración global.
    * @default undefined (usa config global)
    */
-  showPageSizeSelector = input<boolean | undefined, boolean | string | undefined>(undefined, {
-    transform: (value: boolean | string | undefined): boolean | undefined => {
-      if (value === undefined || value === null) return undefined;
-      return value === '' || value === true;
-    },
+  showPageSizeSelector = input<boolean | undefined, unknown>(undefined, {
+    transform: booleanAttribute,
   });
 
   /**
@@ -222,41 +234,33 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Si no se especifica, se usará el valor de la configuración global.
    * @default undefined (usa config global)
    */
-  showItemRange = input<boolean | undefined, boolean | string | undefined>(undefined, {
-    transform: (value: boolean | string | undefined): boolean | undefined => {
-      if (value === undefined || value === null) return undefined;
-      return value === '' || value === true;
-    },
-  });
+  showItemRange = input<boolean | undefined, unknown>(undefined, { transform: booleanAttribute });
+
+  /**
+   * Configuración de navegación por teclado.
+   * Si no se especifica, se usará la configuración global.
+   * @default undefined (usa config global)
+   */
+  keyboard = input<Partial<KeyboardConfig> | undefined>(undefined);
 
   /**
    * Mostrar input para saltar a una página específica.
    * Si no se especifica, se usará el valor de la configuración global.
    * @default undefined (usa config global)
    */
-  showPageJump = input<boolean | undefined, boolean | string | undefined>(undefined, {
-    transform: (value: boolean | string | undefined): boolean | undefined => {
-      if (value === undefined || value === null) return undefined;
-      return value === '' || value === true;
-    },
-  });
+  showPageJump = input<boolean | undefined, unknown>(undefined, { transform: booleanAttribute });
 
   /**
    * Scroll automático al cambiar página.
    * @default false
    */
-  autoScroll = input<boolean | undefined>(undefined);
+  autoScroll = input<boolean | undefined, unknown>(undefined, { transform: booleanAttribute });
 
   /**
    * Elemento target para scroll (selector CSS o elemento).
    * @default 'body'
    */
   scrollTarget = input<string | HTMLElement | undefined>(undefined);
-
-  /**
-   * Configuración avanzada del componente.
-   */
-  config = input<PaginatorConfig | undefined>(undefined);
 
   /**
    * Configuración de layout para posicionar elementos del paginador.
@@ -302,19 +306,6 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @default true
    */
   autoWrap = input(true, { transform: (value: unknown) => value === '' || value === true });
-
-  /**
-   * Configuración de iconos personalizables.
-   */
-  iconConfig = input<IconConfig | undefined>(undefined);
-
-  /**
-   * Iconos específicos que sobreescriben la configuración global.
-   * Se puede usar para cambiar iconos específicos sin afectar la configuración global.
-   * @example
-   * [icons]="{ next: 'custom-next-icon', previous: 'custom-prev-icon' }"
-   */
-  icons = input<Partial<IconConfig> | undefined>(undefined);
 
   /**
    * Configuración del modo infinito.
@@ -402,12 +393,54 @@ export class PaginatorComponent implements OnInit, OnDestroy {
 
   /**
    * Textos efectivos del paginador, combinando los valores por defecto con los personalizados recibidos por input.
-   * Prioridad: Input > Configuración global > Textos por defecto
+   * Prioridad: Input > Configuración global > i18n > Valores por defecto
    */
-  effectiveTexts = computed<PaginatorTexts>(() => {
-    const defaultTexts = this._i18n();
-    const customTexts = this.paginationText() || {};
-    return { ...defaultTexts, ...customTexts };
+  effectiveI18n = computed<PaginatorI18n>(() => {
+    return {
+      ...DEFAULT_PAGINATOR_I18N, // 1. La base por defecto (siempre lleno)
+      ...this._i18n(), // 2. Lo que diga el servicio (traducción actual)
+      ...(this.paginatorConfig?.navTexts || {}), // 3. Sobrescritura para toda la app (config global)
+      ...(this.navTexts() || {}), // 4. Sobrescritura para este botón concreto (input)
+    };
+  });
+
+  /**
+   * Valor efectivo de navDisplay considerando configuración global.
+   * Si el input navDisplay no está definido, se usará el valor de la configuración global.
+   */
+  effectiveNavDisplay = computed(() => {
+    const inputValue = this.navDisplay();
+    return inputValue || this.paginatorConfig?.navDisplay || PaginatorNavDisplayEnum.ICON;
+  });
+
+  /**
+   * Valor efectivo de navIcons combinando configuración global y input.
+   * Prioridad: Input > Configuración global > Iconos por defecto
+   */
+  effectiveNavIcons = computed<Required<PaginatorIcons>>(() => {
+    const inputIcons = this.navIcons() || {};
+    const globalIcons = this.paginatorConfig?.navIcons || {};
+    const config = {
+      ...DEFAULT_ICON_CONFIG,
+      ...globalIcons,
+      ...inputIcons,
+    };
+    return config;
+  });
+
+  /**
+   * Valor efectivo de la configuración de navegación por teclado combinando configuración global y input.
+   * Prioridad: Input > Configuración global > Valores por defecto
+   * Si no se especifica nada, se usarán los valores por defecto definidos en DEFAULT_KEYBOARD_CONFIG.
+   */
+  effectiveKeyboard = computed<KeyboardConfig>(() => {
+    const inputValue = this.keyboard();
+    const globalValue = this.paginatorConfig.keyboard || {};
+    return {
+      ...DEFAULT_KEYBOARD_CONFIG,
+      ...globalValue,
+      ...inputValue,
+    };
   });
 
   /**
@@ -415,9 +448,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    */
   effectiveShowItemRange = computed(() => {
     const inputValue = this.showItemRange();
-    // Si el input está explícitamente definido (true o false), usarlo
-    // Sino, usar el valor de la configuración global, o true como último fallback
-    return inputValue ?? this.paginatorConfig.config?.showItemRange ?? true;
+    return inputValue ?? this.paginatorConfig?.showItemRange ?? true;
   });
 
   /**
@@ -425,9 +456,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    */
   effectiveShowPageJump = computed(() => {
     const inputValue = this.showPageJump();
-    // Si el input está explícitamente definido (true o false), usarlo
-    // Sino, usar el valor de la configuración global, o false como último fallback
-    return inputValue ?? this.paginatorConfig.config?.showPageJump ?? false;
+    return inputValue ?? this.paginatorConfig?.showPageJump ?? false;
   });
 
   /**
@@ -435,9 +464,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    */
   effectiveShowFirstLast = computed(() => {
     const inputValue = this.showFirstLast();
-    // Si el input está explícitamente definido (true o false), usarlo
-    // Sino, usar el valor de la configuración global, o true como último fallback
-    return inputValue ?? this.paginatorConfig.config?.showFirstLast ?? true;
+    return inputValue ?? this.paginatorConfig?.showFirstLast ?? true;
   });
 
   /**
@@ -445,9 +472,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    */
   effectiveShowPageSizeSelector = computed(() => {
     const inputValue = this.showPageSizeSelector();
-    // Si el input está explícitamente definido (true o false), usarlo
-    // Sino, usar el valor de la configuración global, o false como último fallback
-    return inputValue ?? this.paginatorConfig.config?.showPageSizeSelector ?? false;
+    return inputValue ?? this.paginatorConfig?.showPageSizeSelector ?? false;
   });
 
   /**
@@ -463,6 +488,49 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   effectiveVariant = computed(
     () => this.variant() || this.paginatorConfig?.variant || DEFAULT_VARIANT
   );
+
+  /**
+   * Computed para el modo efectivo del paginador.
+   * Prioriza en este orden:
+   * 1. Si hay layout explícito → NO aplicar autoMobile ni protecciones (control total del desarrollador)
+   * 2. Si modo infinito está activo → respetar el modo sin cambios (no aplicar autoMobile)
+   * 3. autoMobile → detectar móvil y cambiar a fractional automáticamente
+   * 4. protección automática en móvil → evitar configuraciones problemáticas
+   * 5. modo explícito o default
+   * @return {PaginatorMode}
+   */
+  effectiveMode = computed<PaginatorMode>(() => {
+    // Layout explícito = control total del desarrollador
+    // NO aplicar autoMobile ni protecciones automáticas
+    if (this.layout()) {
+      return this.mode(); // Respetar modo explícito sin ninguna modificación
+    }
+
+    // Si modo infinito está activo, NO aplicar autoMobile
+    // El modo infinito tiene su propio layout y comportamiento específico
+    if (this.isInfiniteMode()) {
+      return this.mode(); // Respetar el modo sin cambios
+    }
+
+    // AutoMobile solo si NO hay layout personalizado NI modo infinito
+    if (this.autoMobile() && this.isMobileDevice()) {
+      return PaginatorModeEnum.FRACTIONAL; // Cambiar automáticamente a modo fractional en móviles
+    }
+
+    // Protección automática SOLO sin layout ni infinito
+    const currentMode = this.mode();
+    if (this.isMobileDevice() && currentMode === PaginatorModeEnum.DEFAULT) {
+      const total = this.totalPages();
+      const showFirst = this.showFirstLast();
+      const maxVisible = this.maxVisiblePages();
+
+      if ((total > 2 && showFirst) || (total > 2 && maxVisible > 3 && !showFirst)) {
+        return PaginatorModeEnum.FRACTIONAL;
+      }
+    }
+
+    return currentMode;
+  });
 
   /**
    * Signal computado que devuelve si estamos en la primera página
@@ -518,11 +586,6 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   ariaLiveMessage = signal<string>('');
 
   /**
-   * Configuración de iconos aplicada
-   */
-  appliedIconConfig = signal<Required<IconConfig>>(DEFAULT_ICON_CONFIG);
-
-  /**
    * Estado del modo infinito
    */
   infiniteState = signal<InfiniteState>(DEFAULT_INFINITE_STATE);
@@ -546,49 +609,6 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Signal para detectar dispositivos móviles
    */
   isMobileDevice = signal(this.detectMobileDevice());
-
-  /**
-   * Computed para el modo efectivo del paginador.
-   * Prioriza en este orden:
-   * 1. Si hay layout explícito → NO aplicar autoMobile ni protecciones (control total del desarrollador)
-   * 2. Si modo infinito está activo → respetar el modo sin cambios (no aplicar autoMobile)
-   * 3. autoMobile → detectar móvil y cambiar a fractional automáticamente
-   * 4. protección automática en móvil → evitar configuraciones problemáticas
-   * 5. modo explícito o default
-   * @return {PaginatorMode}
-   */
-  effectiveMode = computed<PaginatorMode>(() => {
-    // Layout explícito = control total del desarrollador
-    // NO aplicar autoMobile ni protecciones automáticas
-    if (this.layout()) {
-      return this.mode(); // Respetar modo explícito sin ninguna modificación
-    }
-
-    // Si modo infinito está activo, NO aplicar autoMobile
-    // El modo infinito tiene su propio layout y comportamiento específico
-    if (this.isInfiniteMode()) {
-      return this.mode(); // Respetar el modo sin cambios
-    }
-
-    // AutoMobile solo si NO hay layout personalizado NI modo infinito
-    if (this.autoMobile() && this.isMobileDevice()) {
-      return PaginatorModeEnum.FRACTIONAL; // Cambiar automáticamente a modo fractional en móviles
-    }
-
-    // Protección automática SOLO sin layout ni infinito
-    const currentMode = this.mode();
-    if (this.isMobileDevice() && currentMode === PaginatorModeEnum.DEFAULT) {
-      const total = this.totalPages();
-      const showFirst = this.showFirstLast();
-      const maxVisible = this.maxVisiblePages();
-
-      if ((total > 2 && showFirst) || (total > 2 && maxVisible > 3 && !showFirst)) {
-        return PaginatorModeEnum.FRACTIONAL;
-      }
-    }
-
-    return currentMode;
-  });
 
   /**
    * Genera un layout por defecto basado en el modo del paginador.
@@ -804,9 +824,6 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // Inicializar configuraciones desde el provider
-    this.initializeFromProvider();
-
     // Detectar dispositivo móvil inicialmente
     this.isMobileDevice.set(this.detectMobileDevice());
 
@@ -843,26 +860,6 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     this.setupKeyboardNavigation();
   }
 
-  /**
-   * Inicializa las configuraciones desde el provider global
-   */
-  private initializeFromProvider(): void {
-    // Configurar teclado
-    this.keyboardConfig = {
-      // Fallbacks por defecto para evitar problemas si no hay configuración global
-      firstPage: ['Home'],
-      lastPage: ['End'],
-      previousPage: ['ArrowLeft'],
-      nextPage: ['ArrowRight'],
-      enabled: true,
-      // Override con config global si existe que sobreescribirá los valores por defecto
-      ...(this.paginatorConfig.keyboard || {}),
-    };
-
-    // Aplicar configuración de iconos
-    this.applyIconConfiguration();
-  }
-
   ngOnDestroy(): void {
     // Los observables se limpian automáticamente con takeUntilDestroyed
     // Limpiar caché si es necesario
@@ -870,26 +867,13 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Aplica la configuración de iconos
-   * @return {void}
-   */
-  private applyIconConfiguration(): void {
-    const config = {
-      ...this.paginatorConfig.icons,
-      ...this.iconConfig(),
-      ...this.icons(),
-    };
-    this.appliedIconConfig.set(config as Required<IconConfig>);
-  }
-
-  /**
    * Obtiene el icono para un tipo específico
-   * @param {keyof IconConfig} type - Tipo de icono
+   * @param {keyof navIcons} type - Tipo de icono
    * @return {string} - Nombre del icono
    */
-  getIcon(type: keyof IconConfig): string {
-    const config = this.appliedIconConfig();
-    return config[type] || '';
+  getIcon(type: keyof PaginatorIcons): string {
+    const icons = this.effectiveNavIcons();
+    return icons[type] || DEFAULT_ICON_CONFIG[type];
   }
 
   /**
@@ -905,7 +889,6 @@ export class PaginatorComponent implements OnInit, OnDestroy {
 
     // Calcular cuántos items se van a cargar
     const itemsPerLoad = config.itemsPerLoad || this.paginatorConfig.infinite?.itemsPerLoad || 20;
-    const potentialLoadedItems = currentState.loadedItems + itemsPerLoad;
 
     // Verificar límite de totalItems si está configurado
     const totalItems = this.totalItems();
@@ -998,7 +981,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * y atajos Home/End para primera/última página
    */
   private setupKeyboardNavigation(): void {
-    if (!this.keyboardConfig.enabled) return;
+    if (!this.effectiveKeyboard().enabled) return;
 
     // Escuchar eventos de teclado en FASE DE CAPTURA para interceptar antes que el navegador
     fromEvent<KeyboardEvent>(document, 'keydown', { capture: true })
@@ -1033,53 +1016,62 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @param {HTMLElement} target - Elemento que tiene el foco
    */
   private handleKeyboardNavigation(event: KeyboardEvent, target: HTMLElement): void {
-    const { key } = event;
+    // No interferir con la escritura en inputs o textarea
+    if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) {
+      return;
+    }
 
-    // Solo interceptar teclas de navegación si el foco está en un botón del paginador
+    const { key } = event;
+    const keyboardConfig = this.effectiveKeyboard();
+
+    // Normalizamos a minúsculas para una comparación insensible
+    const pressedKey = key.toLowerCase();
+
+    // Función helper interna para verificar si la tecla está en la config
+    const isShortcut = (configKeys?: string[]) =>
+      configKeys?.map(k => k.toLowerCase()).includes(pressedKey);
+
+    // Verificar si el elemento con foco es un botón de página para decidir si procesar las flechas
     const isPageButton = target.hasAttribute('data-paginator-button');
 
-    // Home: Ir a primera página
-    if (this.keyboardConfig.firstPage?.includes(key)) {
+    // Home / Tecla personalizada: Primera página
+    if (isShortcut(keyboardConfig.firstPage)) {
       event.preventDefault();
-      event.stopPropagation(); // Evitar que el navegador haga scroll
+      event.stopPropagation();
       this.goToFirstPage();
-      // Enfocar el botón de la página 1 después del cambio
       setTimeout(() => this.focusPageButton(1), 50);
       return;
     }
 
-    // End: Ir a última página
-    if (this.keyboardConfig.lastPage?.includes(key)) {
+    // End / Tecla personalizada: Última página
+    if (isShortcut(keyboardConfig.lastPage)) {
       event.preventDefault();
-      event.stopPropagation(); // Evitar que el navegador haga scroll
+      event.stopPropagation();
       this.goToLastPage();
-      // Enfocar el botón de la última página después del cambio
       setTimeout(() => this.focusPageButton(this.totalPages()), 50);
       return;
     }
 
-    // Flechas solo funcionan si el foco está en un botón de página
+    // Si no es un botón de página, no procesamos las flechas para evitar interferir con otros atajos globales
     if (!isPageButton) return;
 
-    // Flecha izquierda: Página anterior
-    if (key === 'ArrowLeft' || this.keyboardConfig.previousPage?.includes(key)) {
+    // Flecha Izquierda / Tecla personalizada: Anterior
+    if (isShortcut(keyboardConfig.previousPage)) {
       event.preventDefault();
       if (!this.isFirstPage()) {
         const targetPage = this.currentPage() - 1;
         this.goToPreviousPage();
-        // Enfocar el botón de la página anterior después del cambio
         setTimeout(() => this.focusPageButton(targetPage), 50);
       }
       return;
     }
 
-    // Flecha derecha: Página siguiente
-    if (key === 'ArrowRight' || this.keyboardConfig.nextPage?.includes(key)) {
+    // Flecha Derecha / Tecla personalizada: Siguiente
+    if (isShortcut(keyboardConfig.nextPage)) {
       event.preventDefault();
       if (!this.isLastPage()) {
         const targetPage = this.currentPage() + 1;
         this.goToNextPage();
-        // Enfocar el botón de la página siguiente después del cambio
         setTimeout(() => this.focusPageButton(targetPage), 50);
       }
       return;
@@ -1379,7 +1371,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
 
     let element: HTMLElement | null = null;
     const scrollTargetValue = this.scrollTarget();
-    const scrollTarget = scrollTargetValue || this.paginatorConfig.config?.scrollTarget || 'body';
+    const scrollTarget = scrollTargetValue || this.paginatorConfig?.scrollTarget || 'body';
 
     if (typeof scrollTarget === 'string') {
       element = document.querySelector(scrollTarget);
@@ -1616,7 +1608,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
           return (
             this.isInfiniteMode() &&
             this.infiniteState().hasMore &&
-            this.infiniteConfig()?.mode !== 'scroll'
+            this.infiniteConfig()?.mode !== InfiniteModeEnum.SCROLL
           );
 
         case PaginatorElementEnum.INFINITE_END_MESSAGE:
@@ -1650,7 +1642,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
         return (
           this.isInfiniteMode() &&
           this.infiniteState().hasMore &&
-          this.infiniteConfig()?.mode !== 'scroll'
+          this.infiniteConfig()?.mode !== InfiniteModeEnum.SCROLL
         );
 
       case PaginatorElementEnum.INFINITE_END_MESSAGE:

@@ -54,6 +54,29 @@
                 </div>
               }
 
+              @case ('navDisplay') {
+                <div class="example-preview flex-column align-items-center">
+                  <nui-paginator
+                    [currentPage]="currentPage()"
+                    [totalItems]="totalItems"
+                    [itemsPerPage]="pageSize()"
+                    [navDisplay]="'both'"
+                  ></nui-paginator>
+                  <nui-paginator
+                    [currentPage]="currentPage()"
+                    [totalItems]="totalItems"
+                    [itemsPerPage]="pageSize()"
+                    [navDisplay]="'icon'"
+                  ></nui-paginator>
+                  <nui-paginator
+                    [currentPage]="currentPage()"
+                    [totalItems]="totalItems"
+                    [itemsPerPage]="pageSize()"
+                    [navDisplay]="'text'"
+                  ></nui-paginator>
+                </div>
+              }
+
               @case ('colors') {
                 <div class="example-preview flex-column align-items-center gap-4">
                   <nui-paginator

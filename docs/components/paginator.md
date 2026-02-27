@@ -217,8 +217,8 @@ onPageChange(newPage: number) {
 | `autoWrap` | `boolean` | `true` | Permite wrap en pantallas pequeñas |
 | `layout` | `PaginatorLayout` | - | Configuración personalizada de layout (**ignora propiedades show\* cuando está definido**) |
 | `mobileLayout` | `PaginatorLayout` | - | Layout específico para móviles |
-| `iconConfig` | `IconConfig` | - | Configuración de iconos |
-| `icons` | `Partial<IconConfig>` | - | Iconos específicos a sobreescribir |
+| `navIcons` | `navIcons` | - | Configuración de iconos |
+| `icons` | `Partial<navIcons>` | - | Iconos específicos a sobreescribir |
 | `infiniteConfig` | `InfiniteConfig` | - | Configuración de modo infinito |
 
 ### @Output Events
@@ -278,7 +278,7 @@ interface PageSizeChangeEvent {
   totalPages: number;
 }
 
-interface IconConfig {
+interface navIcons {
   first: string;
   previous: string;
   next: string;

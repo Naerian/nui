@@ -32,7 +32,7 @@ export class PaginatorPageComponent extends BaseComponentPage {
       id: 'examples',
       label: 'common.tabs.examples',
       icon: 'ri-code-s-slash-line',
-      sections: ['basic', 'colors', 'sizes', 'layout', 'infinite'],
+      sections: ['basic', 'navDisplay', 'colors', 'sizes', 'layout', 'infinite'],
     },
     {
       id: 'api',

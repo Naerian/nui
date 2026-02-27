@@ -1,4 +1,4 @@
-import { TimePeriod, TimePickerConfig, TimePickerMode, TimeValue } from '../../time-picker';
+import { TimePickerConfig, TimePickerMode, TimeValue } from '../../time-picker';
 
 export enum CalendarType {
   DAY = 'day',

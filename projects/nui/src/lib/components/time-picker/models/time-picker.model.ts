@@ -14,7 +14,13 @@ export enum TimePickerModeEnum {
 
 export type TimePeriod = 'AM' | 'PM';
 
-export type TimePickerSection = 'hour' | 'minute' | 'period' | 'duration-hours' | 'duration-minutes' | 'duration-seconds';
+export type TimePickerSection =
+  | 'hour'
+  | 'minute'
+  | 'period'
+  | 'duration-hours'
+  | 'duration-minutes'
+  | 'duration-seconds';
 
 export type TimePickerStrategy = 'now' | 'smart' | 'empty' | 'custom';
 export enum TimePickerStrategyEnum {
@@ -40,8 +46,8 @@ export interface TimeValue {
  * Representa un intervalo de tiempo, no un momento específico
  */
 export interface DurationValue {
-  hours: number;    // 0-n (sin límite superior por defecto)
-  minutes: number;  // 0-59
+  hours: number; // 0-n (sin límite superior por defecto)
+  minutes: number; // 0-59
   seconds?: number; // 0-59 (opcional, para mayor precisión)
 }
 
@@ -58,12 +64,12 @@ export interface DurationPreset {
  * Configuración específica para modo DURATION
  */
 export interface DurationConfig {
-  maxHours?: number;      // Límite máximo de horas (default: 23)
-  minHours?: number;      // Mínimo de horas (default: 0)
-  showSeconds?: boolean;  // Mostrar selector de segundos
-  secondStep?: number;    // Paso para segundos (default: 1)
-  allowZero?: boolean;    // Permitir duración 0 (default: true)
-  
+  maxHours?: number; // Límite máximo de horas (default: 23)
+  minHours?: number; // Mínimo de horas (default: 0)
+  showSeconds?: boolean; // Mostrar selector de segundos
+  secondStep?: number; // Paso para segundos (default: 1)
+  allowZero?: boolean; // Permitir duración 0 (default: true)
+
   // Presets comunes para duraciones
   quickDurations?: DurationPreset[];
 }

@@ -59,8 +59,8 @@ export class AppComponent implements OnInit {
 
     // Listen for language changes to update i18n service
     this.translate.onLangChange.subscribe(event => {
-      const res = event.translations['NUI'];
-      if (res) this.nuiI18n.setTranslations(res as Partial<NuiI18n>);
+      const nuiData = event.translations['NUI'];
+      if (nuiData) this.nuiI18n.setTranslations(nuiData as Partial<NuiI18n>);
     });
 
     // Initialize dark mode

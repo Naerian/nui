@@ -6,7 +6,7 @@ export const DEFAULT_GAP = '0.5rem';
 /**
  * Configuración de iconos aplicada, con valores por defecto
  */
-export const DEFAULT_ICON_CONFIG: Required<IconConfig> = {
+export const DEFAULT_ICON_CONFIG: Required<PaginatorIcons> = {
   first: 'ri-arrow-left-double-line',
   previous: 'ri-arrow-left-s-line',
   next: 'ri-arrow-right-s-line',
@@ -17,65 +17,15 @@ export const DEFAULT_ICON_CONFIG: Required<IconConfig> = {
 };
 
 /**
- * Configuración del componente Paginator
+ * Atajos de teclado por defecto para navegación
  */
-export interface PaginatorConfig {
-  /** Número máximo de páginas visibles */
-  maxVisiblePages?: number;
-  /** Mostrar botones de primera y última página */
-  showFirstLast?: boolean;
-  /** Mostrar selector de items por página */
-  showPageSizeSelector?: boolean;
-  /** Mostrar información del rango de items */
-  showItemRange?: boolean;
-  /** Mostrar input para saltar a una página específica */
-  showPageJump?: boolean;
-  /** Opciones para el selector de items por página */
-  pageSizeOptions?: number[];
-  /** Scroll automático al cambiar página */
-  autoScroll?: boolean;
-  /** Elemento al que hacer scroll (selector CSS o elemento) */
-  scrollTarget?: string | HTMLElement;
-  /** Configuración del layout personalizado */
-  layout?: PaginatorLayout;
-  /** Configuración del layout para dispositivos móviles (se usa en modo compact automático) */
-  mobileLayout?: PaginatorLayout;
-}
-
-/**
- * Textos personalizables del Paginator
- */
-export interface PaginatorTexts {
-  itemsPerPage: string;
-  showingItems: string; // "Mostrando {start}-{end} de {total} resultados"
-  page: string; // "Página"
-  of: string; // "de"
-  goToPage: string; // "Ir a página"
-  go: string; // "Ir"
-  invalidPage: string; // "Página inválida"
-  firstPage: string; // "Primera página"
-  lastPage: string; // "Última página"
-  previousPage: string; // "Página anterior"
-  nextPage: string; // "Página siguiente"
-  pageLabel: string; // "Página {page}"
-  morePages: string; // "Más páginas"
-  loadMore: string; // "Cargar más"
-  loading: string; // "Cargando..."
-  pageJumpHelp: string; // "Página inválida. Ingrese un número entre 1 y {totalPages}."
-  infiniteLoadedItems: string; // "{loaded} elementos cargados de {total}"
-  infiniteLoadEnd: string; // "No hay más elementos que mostrar"
-  
-  // ARIA labels
-  ariaPagination: string; // "Paginación"
-  ariaMorePages: string; // "Más páginas"
-  ariaPage: string; // "Página {page}"
-  ariaCurrentPage: string; // "página actual"
-  ariaGoToPage: string; // "Ir a página {page}"
-  ariaCurrentPageWithRange: string; // "Página {page} de {totalPages}, mostrando items {start} a {end} de {total} resultados"
-  ariaCurrentPageNoRange: string; // "Página {page} de {totalPages}"
-  ariaShowingItems: string; // "Mostrando items {start} a {end} de {total} resultados"
-  ariaLoading: string; // "Cargando nueva página..."
-}
+export const DEFAULT_KEYBOARD_CONFIG: Required<KeyboardConfig> = {
+  firstPage: ['Home'],
+  lastPage: ['End'],
+  previousPage: ['ArrowLeft'],
+  nextPage: ['ArrowRight'],
+  enabled: true,
+};
 
 /**
  * Configuración de navegación por teclado
@@ -106,18 +56,13 @@ export interface LoadingConfig {
 }
 
 /**
- * Configuración responsiva para diferentes breakpoints
+ * Tipos para el display de los botones del paginador
  */
-export interface ResponsiveConfig {
-  /** Configuración para móviles */
-  mobile?: Partial<PaginatorConfig>;
-  /** Configuración para tablets */
-  tablet?: Partial<PaginatorConfig>;
-  /** Breakpoints personalizados (px) */
-  breakpoints?: {
-    mobile?: number;
-    tablet?: number;
-  };
+export type PaginatorNavDisplay = 'icon' | 'text' | 'both';
+export enum PaginatorNavDisplayEnum {
+  ICON = 'icon',
+  TEXT = 'text',
+  BOTH = 'both',
 }
 
 /**
@@ -286,7 +231,7 @@ export const DEFAULT_FRACTIONAL_LAYOUT: PaginatorLayout = {
 /**
  * Configuración de iconos personalizables
  */
-export interface IconConfig {
+export interface PaginatorIcons {
   /** Icono para primera página */
   first?: string;
   /** Icono para página anterior */
@@ -306,11 +251,17 @@ export interface IconConfig {
 /**
  * Configuración del modo infinito
  */
+export type InfiniteMode = 'scroll' | 'button' | 'hybrid';
+export enum InfiniteModeEnum {
+  SCROLL = 'scroll',
+  BUTTON = 'button',
+  HYBRID = 'hybrid',
+}
 export interface InfiniteConfig {
   /** Habilitar modo infinito */
   enabled?: boolean;
   /** Tipo de modo infinito */
-  mode?: 'scroll' | 'button' | 'hybrid';
+  mode?: InfiniteMode;
   /** Offset para detectar scroll (px desde el bottom) */
   scrollOffset?: number;
   /** Número de items a cargar por lote */

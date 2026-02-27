@@ -26,8 +26,8 @@
               [color]="'secondary'"
               [variant]="'ghost'"
               (onClick)="minimize()"
-              [attr.aria-label]="translations.minimize"
-              [title]="translations.minimize"
+              [attr.aria-label]="_i18n().minimize"
+              [title]="_i18n().minimize"
               class="nui-sidebar-panel-minimize-btn"
             ></nui-button>
           }
@@ -37,8 +37,8 @@
               [color]="'secondary'"
               [variant]="'ghost'"
               (click)="requestClose()"
-              [attr.aria-label]="translations.close"
-              [title]="translations.close"
+              [attr.aria-label]="_i18n().close"
+              [title]="_i18n().close"
             ></nui-button>
           }
         </div>

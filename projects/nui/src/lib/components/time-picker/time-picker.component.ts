@@ -35,8 +35,9 @@ import {
 } from './models/time-picker.model';
 import { SelectButtonComponent } from '../select-button';
 import type { SelectBtnOption } from '../select-button/models/select-button.model';
-import { NUI_I18N } from '../../i18n';
 import { TooltipDirective } from '../tooltip';
+import { NuiI18nService } from '../../i18n/nui-i18n.service';
+import { DEFAULT_TIMEPICKER_I18N } from './models';
 @Component({
   selector: 'nui-time-picker',
   standalone: true,
@@ -147,7 +148,9 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   @ViewChild('durationSecondsColumn')
   durationSecondsColumn?: ElementRef<HTMLDivElement>;
 
-  protected readonly _translations = inject(NUI_I18N);
+  // Inyectamos el servicio de i18n para acceder a las traducciones dinámicas
+  protected readonly _i18nService = inject(NuiI18nService);
+  protected readonly _i18n = computed(() => this._i18nService.translations().timePicker);
 
   // ==================
   // SIGNALS
@@ -177,6 +180,17 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   isDurationMode = computed(() => this.mode() === TimePickerModeEnum.DURATION);
 
   /**
+   * Valor efectivo de los textos de i18n, combinando las traducciones globales con los defaults.
+   * Prioridad: traducciones globales > defaults (en caso de que falte alguna clave en las traducciones)
+   */
+  effectiveI18n = computed(() => {
+    return {
+      ...DEFAULT_TIMEPICKER_I18N,
+      ...this._i18n(),
+    };
+  });
+
+  /**
    * Presets efectivos: si hay presets configurados, usarlos; si no, usar preset por defecto de "Ahora"
    */
   effectivePresets = computed<TimePreset[]>(() => {
@@ -191,19 +205,19 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
       // Para modo DURATION, presets comunes de duración
       return [
         {
-          label: this._translations.timePicker.presets.minutes.replace('{{value}}', '15'),
+          label: this.effectiveI18n().presets.minutes.replace('{{value}}', '15'),
           time: { hour: 0, minute: 15 },
         },
         {
-          label: this._translations.timePicker.presets.minutes.replace('{{value}}', '30'),
+          label: this.effectiveI18n().presets.minutes.replace('{{value}}', '30'),
           time: { hour: 0, minute: 30 },
         },
         {
-          label: this._translations.timePicker.presets.hour.replace('{{value}}', '1'),
+          label: this.effectiveI18n().presets.hour.replace('{{value}}', '1'),
           time: { hour: 1, minute: 0 },
         },
         {
-          label: this._translations.timePicker.presets.hours.replace('{{value}}', '2'),
+          label: this.effectiveI18n().presets.hours.replace('{{value}}', '2'),
           time: { hour: 2, minute: 0 },
         },
       ];
@@ -218,10 +232,10 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
         : { hour: 12, minute: 0 };
 
       return [
-        { label: this._translations.timePicker.presets.now, time: now, icon: 'ri-time-line' },
-        { label: this._translations.timePicker.presets.noon, time: noon, icon: 'ri-sun-line' },
+        { label: this.effectiveI18n().presets.now, time: now, icon: 'ri-time-line' },
+        { label: this.effectiveI18n().presets.noon, time: noon, icon: 'ri-sun-line' },
         {
-          label: this._translations.timePicker.presets.midnight,
+          label: this.effectiveI18n().presets.midnight,
           time: midnight,
           icon: 'ri-moon-line',
         },
@@ -248,12 +262,12 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
    */
   tabOptions = computed<SelectBtnOption[]>(() => {
     const options: SelectBtnOption[] = [
-      { label: this._translations.timePicker.tabs.selector, value: 'selector' },
+      { label: this.effectiveI18n().tabs.selector, value: 'selector' },
     ];
 
     if (this.hasCustomPresets()) {
       options.push({
-        label: this._translations.timePicker.tabs.presets,
+        label: this.effectiveI18n().tabs.presets,
         value: 'presets',
       });
     }
@@ -438,19 +452,17 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     // Modo Duration: mostrar duración
     if (this.isDurationMode()) {
       const duration = this.selectedDuration();
-      if (!duration) return this._translations.timePicker.duration.selectDuration + '<br/>' + '--';
+      if (!duration) return this.effectiveI18n().duration.selectDuration + '<br/>' + '--';
 
       const parts: string[] = [];
 
       if (duration.hours > 0) {
-        const label =
-          duration.hours === 1 ? 'h' : this._translations.timePicker.duration.hoursShort;
+        const label = duration.hours === 1 ? 'h' : this.effectiveI18n().duration.hoursShort;
         parts.push(`${duration.hours} ${label}`);
       }
 
       if (duration.minutes > 0) {
-        const label =
-          duration.minutes === 1 ? 'm' : this._translations.timePicker.duration.minutesShort;
+        const label = duration.minutes === 1 ? 'm' : this.effectiveI18n().duration.minutesShort;
         parts.push(`${duration.minutes} ${label}`);
       }
 
@@ -459,21 +471,19 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
         duration.seconds !== undefined &&
         duration.seconds > 0
       ) {
-        const label =
-          duration.seconds === 1 ? 's' : this._translations.timePicker.duration.secondsShort;
+        const label = duration.seconds === 1 ? 's' : this.effectiveI18n().duration.secondsShort;
         parts.push(`${duration.seconds} ${label}`);
       }
 
       const result =
-        parts.length > 0 ? parts.join(', ') : `0 ${this._translations.timePicker.duration.minutes}`;
+        parts.length > 0 ? parts.join(', ') : `0 ${this.effectiveI18n().duration.minutes}`;
 
-      return this._translations.timePicker.duration.durationSelected + '<br/>' + result;
+      return this.effectiveI18n().duration.durationSelected + '<br/>' + result;
     }
 
     // Modo normal de hora
     const time = this.selectedTime();
-    if (!time)
-      return this.title() || this._translations.timePicker.selectTime + '<br/>' + '-- : --';
+    if (!time) return this.title() || this.effectiveI18n().selectTime + '<br/>' + '-- : --';
 
     const { hour, minute, period } = time;
 
@@ -490,7 +500,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
       formatted += ` ${period}`;
     }
 
-    return this.title() || this._translations.timePicker.timeSelected + '<br/>' + formatted;
+    return this.title() || this.effectiveI18n().timeSelected + '<br/>' + formatted;
   });
 
   // Computed para horas disponibles en modo DURATION

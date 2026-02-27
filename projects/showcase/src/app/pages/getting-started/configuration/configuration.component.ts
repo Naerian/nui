@@ -73,7 +73,7 @@ provideNUI({ preset: myPreset })`,
     {
       language: 'typescript',
       title: 'TypeScript',
-      code: `import { provideNUI, ButtonGlobalConfig, PaginatorGlobalConfig } from 'nui';
+      code: `import { provideNUI, ButtonGlobalConfig, PaginatorConfig } from 'nui';
 
 const myCustomButtonConfig: Partial<ButtonGlobalConfig> = {
   size: 'lg',
@@ -84,7 +84,7 @@ const myCustomButtonConfig: Partial<ButtonGlobalConfig> = {
   iconPosition: 'start',
 };
 
-const myCustomPaginatorConfig: Partial<PaginatorGlobalConfig> = {
+const myCustomPaginatorConfig: Partial<PaginatorConfig> = {
   color: 'success',
   size: 'sm',
   texts: {
@@ -136,8 +136,9 @@ export class AppComponent {
     // Automatic synchronization: whenever the app's language changes,
     // NUI updates its components instantly using Signals.
     this.translate.onLangChange.subscribe(event => {
-      const res = event.translations['nui']; // JSON Key where NUI translations are stored
-      if (res) this.nuiI18n.setTranslations(res as Partial<NuiI18n>);
+      const nTranslations = event.translations['NUI'];
+      this.nuiI18n.setLang(event.lang);
+      if (nTranslations) this.nuiI18n.setTranslations(nTranslations as Partial<NuiI18n>);
     });
   }
 }`,
@@ -152,8 +153,9 @@ import { TranslocoService } from '@ngneat/transloco';
 export class AppComponent {
   constructor(private transloco: TranslocoService, private nuiI18n: NuiI18nService) {
     this.transloco.selectTranslation().subscribe(translation => {
-      const res = translation['NUI']; // JSON Key where NUI translations are stored
-      if (res) this.nuiI18n.setTranslations(res as Partial<NuiI18n>);
+      const nTranslations = event.translations['NUI'];
+      this.nuiI18n.setLang(event.lang);
+      if (nTranslations) this.nuiI18n.setTranslations(nTranslations as Partial<NuiI18n>);
     });
   }
 }`,
@@ -192,6 +194,26 @@ i18nService.setTranslations({
     }
   }
 }`,
+    },
+  ];
+
+  i18nDateConfigExamples: CodeExample[] = [
+    {
+      title: 'Static Integration (provideNuiDateLocales)',
+      language: 'typescript',
+      code: `import { provideNuiDateLocales } from 'nui';
+
+// Register date adapter locales to enable calendar localization and date formatting in NUI components.
+// This is necessary because the default date adapter (NuiDateFnsAdapter) relies on these locales for formatting and localization.
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideNuiDateLocales({
+      'es': es,
+      'en': en,
+      'fr': fr
+    })
+  ]
+};`,
     },
   ];
 }

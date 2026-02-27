@@ -994,12 +994,8 @@
           "title": "Outputs",
           "description": "Eventos emitidos por el componente Paginator"
         },
-        "config": {
-          "title": "PaginatorConfig",
-          "description": "Interface para configuración avanzada del componente"
-        },
         "texts": {
-          "title": "PaginatorTexts",
+          "title": "PaginatorI18n",
           "description": "Interface para textos personalizables del paginador"
         },
         "keyboard": {
@@ -1019,7 +1015,7 @@
           "description": "Interface para layout personalizado: organiza elementos en áreas (top, left, center, right, bottom)"
         },
         "icons": {
-          "title": "IconConfig",
+          "title": "navIcons",
           "description": "Interface para configuración de iconos personalizables"
         },
         "infinite": {

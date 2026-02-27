@@ -30,7 +30,7 @@
             class="nui-calendar__nav-btn nui-calendar__nav-btn--icon-only"
             data-calendar-nav
             [disabled]="!canNavigateBack()"
-            [attr.aria-label]="viewMode() === ViewMode.YEAR ? _i18n().prevYears : _i18n().prevMonth"
+            [attr.aria-label]="viewMode() === ViewMode.YEAR ? effectiveI18n().prevYears : effectiveI18n().prevMonth"
             (click)="handlePreviousNavigation()"
           >
             <i class="ri-arrow-left-s-line"></i>
@@ -42,7 +42,7 @@
                 type="button"
                 class="nui-calendar__nav-btn"
                 data-calendar-nav
-                [attr.aria-label]="_i18n().changeMonth"
+                [attr.aria-label]="effectiveI18n().changeMonth"
                 (click)="switchToMonthView()"
               >
                 {{ displayedMonth() }}
@@ -51,7 +51,7 @@
                 type="button"
                 class="nui-calendar__nav-btn"
                 data-calendar-nav
-                [attr.aria-label]="_i18n().changeYear"
+                [attr.aria-label]="effectiveI18n().changeYear"
                 (click)="switchToYearView()"
               >
                 {{ displayedYear() }}
@@ -61,13 +61,13 @@
                 type="button"
                 class="nui-calendar__nav-btn"
                 data-calendar-nav
-                [attr.aria-label]="_i18n().changeYear"
+                [attr.aria-label]="effectiveI18n().changeYear"
                 (click)="switchToYearView()"
               >
                 {{ displayedYear() }}
               </button>
             } @else {
-              <span class="nui-calendar__title-text">{{ _i18n().changeYear }}</span>
+              <span class="nui-calendar__title-text">{{ effectiveI18n().changeYear }}</span>
             }
           </div>
 
@@ -76,7 +76,7 @@
             class="nui-calendar__nav-btn nui-calendar__nav-btn--icon-only"
             data-calendar-nav
             [disabled]="!canNavigateForward()"
-            [attr.aria-label]="viewMode() === ViewMode.YEAR ? _i18n().nextYears : _i18n().nextMonth"
+            [attr.aria-label]="viewMode() === ViewMode.YEAR ? effectiveI18n().nextYears : effectiveI18n().nextMonth"
             (click)="handleNextNavigation()"
           >
             <i class="ri-arrow-right-s-line"></i>
@@ -95,7 +95,7 @@
             <!-- Columna vacía para alinear con números de semana -->
             @if (showWeekNumbers()) {
               <div class="nui-calendar__week-number">
-                {{ _i18n().weekNumbers }}
+                {{ effectiveI18n().weekNumbers }}
               </div>
             }
             @for (day of orderedWeekDays(); track day) {
@@ -157,7 +157,7 @@
         <!-- Vista de meses -->
         @if (viewMode() === ViewMode.MONTH) {
           <div class="nui-calendar__months" data-calendar-view="months">
-            @for (month of _i18n().months; track month; let i = $index) {
+            @for (month of effectiveI18n().months; track month; let i = $index) {
               <button
                 #monthButton
                 type="button"
@@ -221,7 +221,7 @@
               class="nui-calendar__nav-btn nui-calendar__nav-btn-today nui-calendar__footer-button"
               (click)="goToToday()"
             >
-              {{ _i18n().today }}
+              {{ effectiveI18n().today }}
             </button>
           </div>
         </div>

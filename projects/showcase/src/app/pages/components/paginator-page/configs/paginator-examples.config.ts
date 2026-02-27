@@ -23,6 +23,44 @@ export const PAGINATOR_EXAMPLES_SECTIONS: ComponentSection[] = [
     ],
   },
   {
+    id: 'navDisplay',
+    title: 'components.paginator.nav-display.title',
+    description: 'components.paginator.nav-display.description',
+    anchor: 'nav-display',
+    examples: [
+      {
+        title: 'Both',
+        code: `<nui-paginator
+  [currentPage]="currentPage()"
+  [totalItems]="totalItems"
+  [itemsPerPage]="pageSize()"
+  [navDisplay]="'both'"
+/>`,
+        language: 'html',
+      },
+      {
+        title: 'Icon',
+        code: `<nui-paginator
+  [currentPage]="currentPage()"
+  [totalItems]="totalItems"
+  [itemsPerPage]="pageSize()"
+  [navDisplay]="'icon'"
+/>`,
+        language: 'html',
+      },
+      {
+        title: 'Text',
+        code: `<nui-paginator
+  [currentPage]="currentPage()"
+  [totalItems]="totalItems"
+  [itemsPerPage]="pageSize()"
+  [navDisplay]="'text'"
+/>`,
+        language: 'html',
+      },
+    ],
+  },
+  {
     id: 'colors',
     title: 'components.paginator.colors.title',
     description: 'components.paginator.colors.description',

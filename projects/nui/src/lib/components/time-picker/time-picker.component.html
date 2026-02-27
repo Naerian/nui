@@ -44,13 +44,13 @@
         <div
           class="nui-time-picker__column nui-time-picker__column--duration-hours"
           role="listbox"
-          [attr.aria-label]="_translations.timePicker.duration.hours"
+          [attr.aria-label]="effectiveI18n().duration.hours"
           tabindex="0"
           (keydown)="onKeyDown($event, 'duration-hours')"
           (focus)="onColumnFocus('duration-hours')"
         >
           <div class="nui-time-picker__column-label">
-            {{ _translations.timePicker.duration.hours }}
+            {{ effectiveI18n().duration.hours }}
           </div>
 
           <div class="nui-time-picker__column-items" #durationHoursColumn>
@@ -84,13 +84,13 @@
         <div
           class="nui-time-picker__column nui-time-picker__column--duration-minutes"
           role="listbox"
-          [attr.aria-label]="_translations.timePicker.duration.minutes"
+          [attr.aria-label]="effectiveI18n().duration.minutes"
           tabindex="0"
           (keydown)="onKeyDown($event, 'duration-minutes')"
           (focus)="onColumnFocus('duration-minutes')"
         >
           <div class="nui-time-picker__column-label">
-            {{ _translations.timePicker.duration.minutes }}
+            {{ effectiveI18n().duration.minutes }}
           </div>
 
           <div class="nui-time-picker__column-items" #durationMinutesColumn>
@@ -125,13 +125,13 @@
           <div
             class="nui-time-picker__column nui-time-picker__column--duration-seconds"
             role="listbox"
-            [attr.aria-label]="_translations.timePicker.duration.seconds"
+            [attr.aria-label]="effectiveI18n().duration.seconds"
             tabindex="0"
             (keydown)="onKeyDown($event, 'duration-seconds')"
             (focus)="onColumnFocus('duration-seconds')"
           >
             <div class="nui-time-picker__column-label">
-              {{ _translations.timePicker.duration.seconds }}
+              {{ effectiveI18n().duration.seconds }}
             </div>
 
             <div class="nui-time-picker__column-items" #durationSecondsColumn>
@@ -171,9 +171,9 @@
           class="nui-time-picker__footer-btn"
           (click)="clear()"
           [disabled]="isDisabled() || !selectedDuration()"
-          [attr.aria-label]="_translations.timePicker.clear"
+          [attr.aria-label]="effectiveI18n().clear"
         >
-          {{ _translations.timePicker.clear }}
+          {{ effectiveI18n().clear }}
         </button>
       </div>
     </div>
@@ -194,8 +194,8 @@
                 aria-live="assertive"
                 [nuiTooltipAllowHtml]="true"
                 [nuiTooltip]="
-                  _translations.timePicker.normalizedTime
-                    .replace('{ original }', normalizationInfo()?.original ?? '')
+                  effectiveI18n()
+                    .normalizedTime.replace('{ original }', normalizationInfo()?.original ?? '')
                     .replace('{ normalized }', normalizationInfo()?.normalized ?? '')
                 "
               ></i>
@@ -207,7 +207,7 @@
                 class="ri-information-line nui-time-picker__info-indicator"
                 [nuiTooltipAllowHtml]="true"
                 [nuiTooltip]="
-                  _translations.timePicker.rangeLabel +
+                  effectiveI18n().rangeLabel +
                   '<br/>' +
                   formatTimeValue(config.minTime) +
                   ' — ' +
@@ -231,9 +231,7 @@
         <div
           class="nui-time-picker__column"
           role="listbox"
-          [attr.aria-label]="
-            is12HourFormat() ? _translations.timePicker.hour12 : _translations.timePicker.hour24
-          "
+          [attr.aria-label]="is12HourFormat() ? effectiveI18n().hour12 : effectiveI18n().hour24"
           [attr.aria-activedescendant]="
             selectedTime()?.hour ? 'hour-' + selectedTime()?.hour : null
           "
@@ -244,11 +242,7 @@
           (blur)="focusedSection.set(null)"
         >
           <div class="nui-time-picker__column-label">
-            {{
-              isDurationMode()
-                ? _translations.timePicker.duration.hours
-                : _translations.timePicker.hour
-            }}
+            {{ isDurationMode() ? effectiveI18n().duration.hours : effectiveI18n().hour }}
           </div>
 
           <!-- Ayuda oculta para lectores de pantalla -->
@@ -295,7 +289,7 @@
           <div
             class="nui-time-picker__column"
             role="listbox"
-            [attr.aria-label]="_translations.timePicker.minutes"
+            [attr.aria-label]="effectiveI18n().minutes"
             [attr.aria-activedescendant]="
               selectedTime()?.minute !== undefined ? 'minute-' + selectedTime()?.minute : null
             "
@@ -306,11 +300,7 @@
             (blur)="focusedSection.set(null)"
           >
             <div class="nui-time-picker__column-label">
-              {{
-                isDurationMode()
-                  ? _translations.timePicker.duration.minutes
-                  : _translations.timePicker.minutes
-              }}
+              {{ isDurationMode() ? effectiveI18n().duration.minutes : effectiveI18n().minutes }}
             </div>
 
             <!-- Ayuda oculta para lectores de pantalla -->
@@ -361,7 +351,7 @@
           <div
             class="nui-time-picker__period-toggle"
             role="radiogroup"
-            [attr.aria-label]="_translations.timePicker.period || 'AM/PM'"
+            [attr.aria-label]="effectiveI18n().period || 'AM/PM'"
             [attr.aria-describedby]="'period-help'"
           >
             <nui-select-btn
@@ -385,9 +375,9 @@
           class="nui-time-picker__footer-btn"
           (click)="clear()"
           [disabled]="isDisabled() || !selectedTime()"
-          [attr.aria-label]="_translations.timePicker.clear"
+          [attr.aria-label]="effectiveI18n().clear"
         >
-          {{ _translations.timePicker.clear }}
+          {{ effectiveI18n().clear }}
         </button>
 
         @if (!isDurationMode()) {
@@ -397,9 +387,9 @@
             class="nui-time-picker__footer-btn"
             (click)="setToNow()"
             [disabled]="isDisabled()"
-            [attr.aria-label]="_translations.timePicker.setToCurrentTime"
+            [attr.aria-label]="effectiveI18n().setToCurrentTime"
           >
-            {{ _translations.timePicker.setToCurrentTime }}
+            {{ effectiveI18n().setToCurrentTime }}
           </button>
         }
       </div>

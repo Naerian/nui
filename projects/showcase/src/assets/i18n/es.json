@@ -151,7 +151,9 @@
       "customComponentConfigDescription": "Personaliza la configuración global de los componentes de NUI para adaptarlos a las necesidades de tu aplicación. Puedes configurar opciones como tamaños, colores, variantes y más para cada componente. De esta forma, puedes establecer estilos y comportamientos predeterminados para todos los componentes de tu aplicación, asegurando una apariencia y experiencia de usuario coherente sin tener que configurar cada componente individualmente.",
       "customComponentConfigTitle": "Configuración global de componentes",
       "i18nConfig": "NUI i18n",
-      "i18nConfigDescription": "NUI implementa un sistema de internacionalización (i18n) <strong>agnóstico y reactivo basado en Signals</strong>. Esto permite que la librería se integre con cualquier motor de traducción sin dependencias directas. Además, al usar un servcio único para ello (<code>NuiI18nService</code>), NUI puede actualizar automáticamente los textos de los componentes en tiempo real cada vez que el idioma cambia, sin necesidad de recargar la página o recompilar la aplicación, ni tener que traer toda la configuración de la librería."
+      "i18nConfigDescription": "NUI implementa un sistema de internacionalización (i18n) <strong>agnóstico y reactivo basado en Signals</strong>. Esto permite que la librería se integre con cualquier motor de traducción sin dependencias directas. Además, al usar un servcio único para ello (<code>NuiI18nService</code>), NUI puede actualizar automáticamente los textos de los componentes en tiempo real cada vez que el idioma cambia, sin necesidad de recargar la página o recompilar la aplicación, ni tener que traer toda la configuración de la librería.",
+      "i18nDateConfig": "NUI i18n en fechas",
+      "i18nDateConfigDescription": "Para que los componentes que gestionan fechas (como el Calendar) puedan mostrar formatos localizados y etiquetas de accesibilidad (ARIA) en diferentes idiomas, es necesario registrar los objetos de idioma de la librería de fechas utilizada (por defecto date-fns mediante el adaptador <code>NuiDateFnsAdapter</code>).<br/><br/>NUI utiliza un sistema de registro bajo demanda. Esto permite que tu aplicación solo incluya los idiomas que realmente utiliza, manteniendo el tamaño del paquete final lo más pequeño posible.<br/><br/>Para registrar los idiomas, utiliza el proveedor <code>provideNuiDateLocales()</code> en tu configuración de la aplicación, pasando un objeto que mapee los códigos de idioma a los objetos de idioma correspondientes de date-fns, esto sincronizará los idiomas por debajo mediante el servicio <code>NuiI18nService</code> y los componentes de fecha de NUI podrán usar la configuración localizada automáticamente."
     },
     "theming": {
       "title": "Temas y presets",
@@ -963,6 +965,11 @@
         "title": "Uso básico",
         "description": "Configuración estándar con navegación numérica. Soporta binding bidireccional de página y tamaño."
       },
+      "nav-display": {
+        "title": "Opciones de visualización de navegación",
+        "description": "Define como se quieren mostrar los botones de navegación: texto, iconos o ambos. Personaliza la apariencia de los botones de navegación para adaptarlos al estilo de tu aplicación.",
+        "note": "Usa el input <code>navDisplay</code> con valores <code>'text'</code>, <code>'icon'</code> o <code>'both'</code> para mostrar solo texto, solo iconos o ambos en los botones de navegación. Los iconos se basan en la biblioteca Remix Icon y se asignan automáticamente según el tipo de botón (primera página, página anterior, página siguiente, última página)."
+      },
       "colors": {
         "title": "Colores y variantes",
         "description": "Soporta todos los colores y variantes (Solid, Outline, Ghost) de NUI.",
@@ -994,12 +1001,8 @@
           "title": "Outputs",
           "description": "Eventos emitidos por el componente Paginator"
         },
-        "config": {
-          "title": "PaginatorConfig",
-          "description": "Interface para configuración avanzada del componente"
-        },
         "texts": {
-          "title": "PaginatorTexts",
+          "title": "PaginatorI18n",
           "description": "Interface para textos personalizables del paginador"
         },
         "keyboard": {
@@ -1010,16 +1013,12 @@
           "title": "LoadingConfig",
           "description": "Interface para configuración de estados de loading"
         },
-        "responsive": {
-          "title": "ResponsiveConfig",
-          "description": "Interface para configuración responsiva por breakpoints"
-        },
         "layout": {
           "title": "PaginatorLayout",
           "description": "Interface para layout personalizado: organiza elementos en áreas (top, left, center, right, bottom)"
         },
         "icons": {
-          "title": "IconConfig",
+          "title": "navIcons",
           "description": "Interface para configuración de iconos personalizables"
         },
         "infinite": {

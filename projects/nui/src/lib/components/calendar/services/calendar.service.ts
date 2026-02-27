@@ -1,14 +1,21 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, computed, inject } from '@angular/core';
 import { NuiDateFnsAdapter } from '../../../adapters/nui-date-fns-adapter';
-import { CalendarDay, DEFAULT_FORMAT, WeekRange, DateStatusFn, IsDateEnabledFn } from '../models/calendar.model';
-import { NUI_I18N } from '../../../i18n';
+import {
+  CalendarDay,
+  DEFAULT_FORMAT,
+  WeekRange,
+  DateStatusFn,
+  IsDateEnabledFn,
+} from '../models/calendar.model';
+import { NuiI18nService } from '../../../i18n/nui-i18n.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CalendarService {
   readonly dateAdapter = inject(NuiDateFnsAdapter);
-  private readonly _translations = inject(NUI_I18N);
+  private readonly _i18nService = inject(NuiI18nService);
+  private readonly _i18n = computed(() => this._i18nService.translations().calendar);
 
   convertToDate(value: string | Date | null | undefined): Date | null {
     return this.dateAdapter.convertToDate(value);
@@ -58,7 +65,7 @@ export class CalendarService {
   getCalendarDays(date: Date, weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6 = 1): Date[] {
     const monthStart = this.dateAdapter.startOfMonth(date);
     const calendarStart = this.dateAdapter.startOfWeek(monthStart, weekStartsOn);
-    
+
     // Siempre mostrar 6 semanas completas (42 días) para cubrir todos los casos
     // Esto asegura que todos los meses se muestren completamente, incluso aquellos
     // que empiezan en domingo y terminan en lunes (el peor caso posible)
@@ -66,7 +73,7 @@ export class CalendarService {
     for (let i = 0; i < 42; i++) {
       days.push(this.dateAdapter.addDays(calendarStart, i));
     }
-    
+
     return days;
   }
 
@@ -201,7 +208,12 @@ export class CalendarService {
       const isWeekend = dayOfWeek === 0 || dayOfWeek === 6; // Domingo o Sábado
       const isCurrentMonth = this.isSameMonth(date, currentDate);
       const isToday = this.isToday(date);
-      const isSelected = this.isDateSelected(date, selectedDate, selectedRange, selectedMultipleDates);
+      const isSelected = this.isDateSelected(
+        date,
+        selectedDate,
+        selectedRange,
+        selectedMultipleDates
+      );
       const isInRange = this.isDateInRange(date, selectedRange, selectedWeek, hoveredDate);
       const isDisabled = this.isDateUnselectable(
         date,
@@ -211,7 +223,7 @@ export class CalendarService {
         isDateEnabledFn
       );
       const isHovered = hoveredDate ? this.isSameDay(date, hoveredDate) : false;
-      const status = dateStatusFn ? dateStatusFn(date) ?? undefined : undefined;
+      const status = dateStatusFn ? (dateStatusFn(date) ?? undefined) : undefined;
 
       // Generar ariaLabel descriptivo para accesibilidad
       const ariaLabel = this.generateAriaLabel(
@@ -265,10 +277,7 @@ export class CalendarService {
     }
 
     if (selectedRange.start && selectedRange.end) {
-      return (
-        this.isSameDay(date, selectedRange.start) ||
-        this.isSameDay(date, selectedRange.end)
-      );
+      return this.isSameDay(date, selectedRange.start) || this.isSameDay(date, selectedRange.end);
     }
 
     return false;
@@ -311,11 +320,11 @@ export class CalendarService {
 
   /**
    * Verifica si una fecha es no-seleccionable (deshabilitada/fuera de rango).
-   * 
+   *
    * SMART SERVICE (PASO 1):
    * - Si isDateEnabledFn está presente, prevalece sobre disabledDates
    * - Siempre valida minDate y maxDate
-   * 
+   *
    * @private
    */
   private isDateUnselectable(
@@ -351,10 +360,7 @@ export class CalendarService {
 
   /**
    * Genera etiqueta ARIA descriptiva para accesibilidad.
-   * Formato: "Lunes 15 de enero de 2024, Hoy, Seleccionado, Deshabilitado"
-   * 
-   * PASO 1: Usa el sistema de traducciones de NUI para i18n
-   * 
+   *  
    * @private
    */
   private generateAriaLabel(
@@ -368,10 +374,10 @@ export class CalendarService {
     const parts: string[] = [];
 
     // Fecha completa en formato largo
-    parts.push(this.dateAdapter.format(date, 'EEEE d \'de\' MMMM \'de\' yyyy'));
+    parts.push(this.dateAdapter.format(date, "EEEE MMMM 'de' yyyy"));
 
     // Estados contextuales (traducidos)
-    const aria = this._translations.calendar.aria;
+    const aria = this._i18n().aria;
     if (isToday) parts.push(aria.today);
     if (isSelected) parts.push(aria.selected);
     if (isInRange) parts.push(aria.inRange);
