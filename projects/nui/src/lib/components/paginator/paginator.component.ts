@@ -397,7 +397,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    */
   effectiveI18n = computed<PaginatorI18n>(() => {
     return {
-      ...DEFAULT_PAGINATOR_I18N, // 1. La base por defecto (siempre lleno)
+      ...DEFAULT_PAGINATOR_I18N, // 1. La base por defecto
       ...this._i18n(), // 2. Lo que diga el servicio (traducción actual)
       ...(this.paginatorConfig?.navTexts || {}), // 3. Sobrescritura para toda la app (config global)
       ...(this.navTexts() || {}), // 4. Sobrescritura para este botón concreto (input)

@@ -1,5 +1,4 @@
 import { Injectable, computed, inject } from '@angular/core';
-import { NuiDateFnsAdapter } from '../../../adapters/nui-date-fns-adapter';
 import {
   CalendarDay,
   DEFAULT_FORMAT,
@@ -8,14 +7,20 @@ import {
   IsDateEnabledFn,
 } from '../models/calendar.model';
 import { NuiI18nService } from '../../../i18n/nui-i18n.service';
+import { NUI_DATE_FULL_FORMAT } from '../../../i18n';
+import { DEFAULT_CALENDAR_I18N } from '../models';
+import { NUI_DATE_ADAPTER } from '../../../i18n/i18n-dates';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CalendarService {
-  readonly dateAdapter = inject(NuiDateFnsAdapter);
+  readonly dateAdapter = inject(NUI_DATE_ADAPTER);
   private readonly _i18nService = inject(NuiI18nService);
-  private readonly _i18n = computed(() => this._i18nService.translations().calendar);
+  private readonly _i18n = computed(() => {
+    const translations = this._i18nService.translations();
+    return translations?.calendar || DEFAULT_CALENDAR_I18N;
+  });
 
   convertToDate(value: string | Date | null | undefined): Date | null {
     return this.dateAdapter.convertToDate(value);
@@ -360,7 +365,7 @@ export class CalendarService {
 
   /**
    * Genera etiqueta ARIA descriptiva para accesibilidad.
-   *  
+   *
    * @private
    */
   private generateAriaLabel(
@@ -371,10 +376,13 @@ export class CalendarService {
     isDisabled: boolean,
     status?: 'success' | 'warning' | 'danger' | 'info'
   ): string {
+    const i18n = this._i18n();
     const parts: string[] = [];
 
+    if (!i18n || !i18n.aria) return '';
+
     // Fecha completa en formato largo
-    parts.push(this.dateAdapter.format(date, "EEEE MMMM 'de' yyyy"));
+    parts.push(this.dateAdapter.format(date, i18n.aria.dateFormatAria || NUI_DATE_FULL_FORMAT));
 
     // Estados contextuales (traducidos)
     const aria = this._i18n().aria;

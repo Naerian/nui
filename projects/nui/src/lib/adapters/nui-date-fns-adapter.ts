@@ -25,6 +25,7 @@ import {
   isBefore,
   isAfter,
 } from 'date-fns';
+import { enUS, enGB, es } from 'date-fns/locale';
 import { Injectable } from '@angular/core';
 import { NuiDateAdapter } from './nui-date-adapter';
 
@@ -38,10 +39,46 @@ import { NuiDateAdapter } from './nui-date-adapter';
  * IMPORTANTE: Todos los métodos devuelven objetos Date nativos de JavaScript,
  * manteniendo la transparencia de la API pública.
  */
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class NuiDateFnsAdapter implements NuiDateAdapter {
+  // ============================================================================
+  // LOCALE (Configuración regional)
+  // ============================================================================
+  private _currentLocaleId = 'en';
+
+  // Solo registramos el inglés de base para que nunca falle
+  private _registeredLocales: Record<string, any> = {
+    en: enUS,
+  };
+
+  /**
+   * El desarrollador usará esto para registrar sus idiomas.
+   * Esto permite que solo se incluya en el bundle lo que el usuario importe.
+   */
+  registerLocales(locales: Record<string, any>): void {
+    this._registeredLocales = { ...this._registeredLocales, ...locales };
+  }
+
+  setLocale(localeId: string): void {
+    console.log(`[NUI DateFnsAdapter] Locale set to:`, localeId);
+    this._currentLocaleId = localeId;
+  }
+
+  /**
+   * Helper interno para obtener el locale activo con fallback
+   * que permite soportar tanto locales específicos (ej: 'en-GB') como genéricos (ej: 'en').
+   * Si no se encuentra ninguno, se usa el inglés por defecto.
+   */
+  private get _activeLocale(): any {
+    // Intentamos buscar el locale específico (ej: 'en-GB'),
+    // si no, el genérico (ej: 'en'), si no, el default absoluto (enUS)
+    return (
+      this._registeredLocales[this._currentLocaleId] ||
+      this._registeredLocales[this._currentLocaleId.split('-')[0]] ||
+      enUS
+    );
+  }
+
   // ============================================================================
   // PARSING & EXTRACTION
   // ============================================================================
@@ -62,11 +99,12 @@ export class NuiDateFnsAdapter implements NuiDateAdapter {
     return null;
   }
 
-  format(date: Date, pattern: string): string {
+  format(date: Date, fnsPattern: string): string {
     try {
-      return format(date, pattern);
+      console.log('Adaptador formateando en:', this._currentLocaleId);
+      return format(date, fnsPattern, { locale: this._activeLocale });
     } catch (error) {
-      console.warn(`Invalid date format pattern: ${pattern}`, error);
+      console.warn(`[NUI DateFnsAdapter] Error formatting:`, error);
       return '';
     }
   }

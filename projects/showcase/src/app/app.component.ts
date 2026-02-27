@@ -44,10 +44,12 @@ export class AppComponent implements OnInit {
     // Initialize language
     if (config.language) {
       this.translate.use(config.language);
+      this.nuiI18n.setLang(config.language);
     } else {
       const browserLang = this.translate.getBrowserLang();
       const langToUse = browserLang?.match(/en|es/) ? browserLang : 'en';
       this.translate.use(langToUse);
+      this.nuiI18n.setLang(langToUse);
       this.showcaseConfig.setLanguage(langToUse);
     }
 
@@ -59,8 +61,9 @@ export class AppComponent implements OnInit {
 
     // Listen for language changes to update i18n service
     this.translate.onLangChange.subscribe(event => {
-      const nuiData = event.translations['NUI'];
-      if (nuiData) this.nuiI18n.setTranslations(nuiData as Partial<NuiI18n>);
+      const nTranslations = event.translations['NUI'];
+      this.nuiI18n.setLang(event.lang);
+      if (nTranslations) this.nuiI18n.setTranslations(nTranslations as Partial<NuiI18n>);
     });
 
     // Initialize dark mode

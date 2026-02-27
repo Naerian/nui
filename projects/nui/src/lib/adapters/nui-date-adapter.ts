@@ -11,6 +11,16 @@
  */
 export interface NuiDateAdapter {
   // ============================================================================
+  // LOCALE (Configuración regional)
+  // ============================================================================
+
+  /** Registra locales de date-fns vinculados a un ID (ej: 'es') */
+  registerLocales(locales: Record<string, any>): void;
+
+  /** Establece el idioma actual del adaptador */
+  setLocale(localeId: string): void;
+
+  // ============================================================================
   // PARSING & EXTRACTION
   // ============================================================================
 

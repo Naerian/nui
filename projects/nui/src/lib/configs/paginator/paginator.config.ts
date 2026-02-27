@@ -70,7 +70,6 @@ export const DEFAULT_PAGINATOR_CONFIG: PaginatorConfig = {
   scrollTarget: 'body',
   navDisplay: PaginatorNavDisplayEnum.ICON,
   navIcons: DEFAULT_ICON_CONFIG,
-  navTexts: DEFAULT_PAGINATOR_I18N,
   keyboard: DEFAULT_KEYBOARD_CONFIG,
   loading: {
     showLoading: false,

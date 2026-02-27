@@ -6,6 +6,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { routes } from './app.routes';
 import { Observable } from 'rxjs';
 import { minimal, provideNUI } from 'nui';
+import { provideNuiDateLocales } from '../../../nui/src/lib/i18n/i18n-dates';
+import { enUS, es } from 'date-fns/locale';
 
 // Simple custom loader for translations
 export class CustomTranslateLoader implements TranslateLoader {
@@ -38,6 +40,10 @@ export const appConfig: ApplicationConfig = {
     provideNUI({
       preset: minimal,
       darkMode: 'manual',
+    }),
+    provideNuiDateLocales({
+      en: enUS,
+      es: es,
     }),
   ],
 };

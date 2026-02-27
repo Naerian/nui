@@ -1,3 +1,5 @@
+import { NUI_DATE_FULL_FORMAT } from "../../../i18n";
+
 export const DEFAULT_CALENDAR_I18N: CalendarI18n = {
   weekDaysShort: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá', 'Do'],
   weekDays: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
@@ -60,6 +62,7 @@ export const DEFAULT_CALENDAR_I18N: CalendarI18n = {
     statusWarning: 'Advertencia',
     statusDanger: 'Peligro',
     statusInfo: 'Información',
+    dateFormatAria: NUI_DATE_FULL_FORMAT, // Usamos el formato definido para el adaptador
   },
 };
 
@@ -112,5 +115,6 @@ export interface CalendarI18n {
     statusWarning: string;
     statusDanger: string;
     statusInfo: string;
+    dateFormatAria: string;
   };
 }

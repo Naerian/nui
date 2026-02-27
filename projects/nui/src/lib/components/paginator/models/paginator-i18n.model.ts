@@ -2,6 +2,7 @@
  * Textos por defecto del Paginator
  */
 export const DEFAULT_PAGINATOR_I18N: Required<PaginatorI18n> = {
+  // Textos visibles
   itemsPerPage: 'Elementos por página:',
   showingItems: '{start}-{end} de {total}',
   page: 'Página',
@@ -20,6 +21,8 @@ export const DEFAULT_PAGINATOR_I18N: Required<PaginatorI18n> = {
   pageJumpHelp: 'Ingrese un número entre 1 y {totalPages}.',
   infiniteLoadedItems: '{loaded} elementos cargados de {total}',
   infiniteLoadEnd: 'No hay más elementos que mostrar',
+
+  // ARIA labels
   ariaPagination: 'Paginación',
   ariaMorePages: 'Más páginas',
   ariaPage: 'Página {page}',
@@ -36,6 +39,7 @@ export const DEFAULT_PAGINATOR_I18N: Required<PaginatorI18n> = {
  * Textos personalizables del Paginator
  */
 export interface PaginatorI18n {
+  // Textos visibles
   itemsPerPage: string; // "Items por página"
   showingItems: string; // "Mostrando {start}-{end} de {total} resultados"
   page: string; // "Página"

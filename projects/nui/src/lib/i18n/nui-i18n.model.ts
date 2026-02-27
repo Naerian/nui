@@ -3,6 +3,8 @@ import { CalendarI18n } from '../components/calendar/models/calendar-i18n.model'
 import { PaginatorI18n } from '../components/paginator/models/paginator-i18n.model';
 import { TimePickerI18n } from '../components/time-picker/models/time-picker-i18n.model';
 
+export const NUI_DATE_FULL_FORMAT = 'PPPP';
+
 /**
  * Interfaz para las traducciones de la librería
  */

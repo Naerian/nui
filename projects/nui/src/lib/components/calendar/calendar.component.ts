@@ -370,6 +370,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   displayedMonthIndex = computed(() => this.calendarService.getMonth(this.currentDate()));
 
   calendarDays = computed(() => {
+    // Forzamos a recalcular si cambia el idioma para actualizar los estados de las fechas según las nuevas traducciones 
+    // (por ejemplo, para dateStatusFn que depende de textos)
+    // Al ser un "computed" se volverá a ejecutar en cuanto detecte cambios en la signal de idioma.
+    const lang = this._i18nService.currentLang();
+
+    
     const rawDisabledDates = this.disabledDates();
     const convertedDisabledDates = rawDisabledDates
       ? rawDisabledDates
@@ -548,9 +554,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     const firstDay = this.effectiveFirstDayOfWeek();
 
     // Si empieza en Lunes (1), el array ya está en orden correcto
-    if (firstDay === 1) {
-      return weekDays;
-    }
+    if (firstDay === 1) return weekDays;
 
     // Rotar el array según el primer día
     // weekDays original: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'S?', 'Do'] (índices 0-6 = Lunes-Domingo)
@@ -1999,34 +2003,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     }
   }
 
-  protected getDayAriaLabel(day: CalendarDay): string {
-    const baseLabel = this.formatDayLabel(day);
-
-    if (day.isDisabled) {
-      return this.effectiveI18n().dayDisabled.replace('{date}', baseLabel);
-      // Resultado: "Deshabilitado: jueves, 9 octubre 2025"
-    }
-
-    return baseLabel;
-  }
-
-  protected formatDayLabel(day: CalendarDay): string {
-    const dayOfWeek = this.calendarService.dateAdapter.getDayOfWeek(day.date); // 0 = Domingo, 1 = Lunes, etc.
-    const dayNumber = this.calendarService.dateAdapter.format(day.date, 'd'); // D?a del mes sin cero inicial
-    const monthIndex = parseInt(this.calendarService.dateAdapter.format(day.date, 'M'), 10) - 1; // 0-11
-    const year = this.calendarService.dateAdapter.format(day.date, 'yyyy');
-
-    // Usamos `effectiveFirstDayOfWeek` para ajustar el índice del día de la semana según la configuración del usuario
-    const dayIndex = (this.effectiveFirstDayOfWeek() + dayOfWeek) % 7;
-    // Ejemplo: si effectiveFirstDayOfWeek=1 (Lunes) y dayOfWeek=0 (Domingo), dayIndex=1
-    // Esto asegura que el primer día de la semana sea el correcto según la configuración del usuario
-
-    const dayName = this.effectiveI18n().weekDays[dayIndex].toLowerCase();
-    const monthName = this.effectiveI18n().months[monthIndex].toLowerCase();
-
-    return `${dayName}, ${dayNumber} ${monthName} ${year}`;
-  }
-
   /**
    * Handler para el evento focus en un bot?n de d?a.
    * Sincroniza el ?ndice enfocado cuando se navega con Tab.
@@ -2569,14 +2545,5 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       // Este es el evento que el Popover/Modal escuchará para cerrarse
       this.selectFinished.emit();
     }
-  }
-
-  /**
-   * Genera una etiqueta aria-label para una semana, indicando el rango de fechas que abarca.
-   * @param week Número de semana o rango de fechas de la semana
-   * @returns Cadena formateada para aria-label, por ejemplo: "Semana del 6 al 12 octubre 2025"
-   */
-  getWeekAriaLabel(week: number): string {
-    return this.effectiveI18n().week.replace('{week}', week.toString());
   }
 }

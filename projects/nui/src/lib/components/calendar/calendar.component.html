@@ -30,7 +30,9 @@
             class="nui-calendar__nav-btn nui-calendar__nav-btn--icon-only"
             data-calendar-nav
             [disabled]="!canNavigateBack()"
-            [attr.aria-label]="viewMode() === ViewMode.YEAR ? effectiveI18n().prevYears : effectiveI18n().prevMonth"
+            [attr.aria-label]="
+              viewMode() === ViewMode.YEAR ? effectiveI18n().prevYears : effectiveI18n().prevMonth
+            "
             (click)="handlePreviousNavigation()"
           >
             <i class="ri-arrow-left-s-line"></i>
@@ -76,7 +78,9 @@
             class="nui-calendar__nav-btn nui-calendar__nav-btn--icon-only"
             data-calendar-nav
             [disabled]="!canNavigateForward()"
-            [attr.aria-label]="viewMode() === ViewMode.YEAR ? effectiveI18n().nextYears : effectiveI18n().nextMonth"
+            [attr.aria-label]="
+              viewMode() === ViewMode.YEAR ? effectiveI18n().nextYears : effectiveI18n().nextMonth
+            "
             (click)="handleNextNavigation()"
           >
             <i class="ri-arrow-right-s-line"></i>
@@ -114,7 +118,7 @@
                     type() === CalendarType.WEEK ||
                     (type() === CalendarType.DAY && selection() === CalendarSelection.MULTIPLE)
                   "
-                  [attr.aria-label]="getWeekAriaLabel(i / 7)"
+                  [attr.aria-label]="day.ariaLabel"
                   (click)="onWeekNumberClick(i / 7)"
                 >
                   {{ weekNumbers()[i / 7] }}
@@ -138,7 +142,7 @@
                 [class.nui-calendar__day--status-warning]="day.status === 'warning'"
                 [class.nui-calendar__day--status-danger]="day.status === 'danger'"
                 [class.nui-calendar__day--status-info]="day.status === 'info'"
-                [attr.aria-label]="getDayAriaLabel(day)"
+                [attr.aria-label]="day.ariaLabel"
                 [attr.aria-selected]="day.isSelected"
                 [attr.aria-disabled]="day.isDisabled"
                 [disabled]="day.isDisabled"
