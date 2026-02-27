@@ -23,7 +23,12 @@ export const NUI_I18N = new InjectionToken<NuiI18n>('NuiI18n', {
  * import { provideNuiI18n } from './translations.token';
  * export const appConfig: ApplicationConfig = {
  *   providers: [
- *    provideNuiI18n({ formfield: { multipleChoices: '{choices} items selected' } })
+ *    provideNuiI18n({
+ *       paginator: {
+ *          itemsPerPage: 'Items per page',
+ *          nextPage: 'Next page',
+ *       }
+ *    })
  *  ]
  * };
  *

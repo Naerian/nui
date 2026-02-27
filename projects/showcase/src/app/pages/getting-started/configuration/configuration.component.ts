@@ -202,15 +202,15 @@ i18nService.setTranslations({
       title: 'Static Integration (provideNuiDateLocales)',
       language: 'typescript',
       code: `import { provideNuiDateLocales } from 'nui';
+import { enUS, es } from 'date-fns/locale';
 
 // Register date adapter locales to enable calendar localization and date formatting in NUI components.
 // This is necessary because the default date adapter (NuiDateFnsAdapter) relies on these locales for formatting and localization.
 export const appConfig: ApplicationConfig = {
   providers: [
     provideNuiDateLocales({
-      'es': es,
-      'en': en,
-      'fr': fr
+      en: enUS,
+      es: es,
     })
   ]
 };`,
