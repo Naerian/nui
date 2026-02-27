@@ -222,9 +222,12 @@ pre code {
     .docs-section,
     .section {
       margin-bottom: 2rem;
+      border-bottom: 1px solid var(--nui-border-subtle);
+      padding-bottom: 2rem;
 
       &:last-child {
         margin-bottom: 0;
+        border-bottom: none;
       }
 
       h2 {

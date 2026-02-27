@@ -18,7 +18,7 @@ import { ToastRef } from './toast-ref';
 import { ToastAction } from './models/toast.model';
 import { TOAST_ANIMATIONS } from './animations/toast.animations';
 import { NUIColor, NUIShape, NUIVariant } from '../../configs';
-import { NUI_TRANSLATIONS } from '../../translations/translations.token';
+import { NUI_I18N } from '../../i18n/nui-i18n.token';
 import { ButtonDirective } from '../button/button.directive';
 
 @Component({
@@ -229,7 +229,7 @@ export class ToastComponent implements OnInit, OnDestroy {
   private touchStartY = 0;
   protected isSwiping = false;
 
-  protected readonly translation = inject(NUI_TRANSLATIONS);
+  protected readonly translation = inject(NUI_I18N);
 
   constructor(private sanitizer: DomSanitizer) {}
 

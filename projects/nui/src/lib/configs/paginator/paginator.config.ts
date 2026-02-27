@@ -6,13 +6,12 @@ import {
   LoadingConfig,
   PaginatorConfig,
   PaginatorLayout,
-  PaginatorTexts,
   ResponsiveConfig,
 } from '../../components/paginator';
-import { NUI_TRANSLATIONS } from '../../translations'; // O la ruta correcta a tu token
 import { NUI_CONFIG } from '../nui.config';
 import { deepMerge } from '../../utils/deep-merge';
 import { NUIColor, NUISize, NUIVariant } from '../common';
+import { NuiI18nService } from '../../i18n/nui-i18n.service';
 
 /**
  * Configuración completa del Paginator
@@ -26,8 +25,6 @@ export interface PaginatorGlobalConfig {
   variant?: NUIVariant;
   /** Configuración básica */
   config?: PaginatorConfig;
-  /** Textos personalizados */
-  texts?: PaginatorTexts;
   /** Configuración de teclado */
   keyboard?: KeyboardConfig;
   /** Configuración de loading */
@@ -64,17 +61,6 @@ export const DEFAULT_PAGINATOR_CONFIG: PaginatorGlobalConfig = {
     autoScroll: false,
     scrollTarget: 'body',
   },
-  texts: {
-    firstPage: 'Primera página',
-    lastPage: 'Última página',
-    previousPage: 'Página anterior',
-    nextPage: 'Página siguiente',
-    goToPage: 'Ir a la página',
-    go: 'Ir',
-    itemsPerPage: 'Items por página',
-    showingItems: '{start}-{end} de {total}',
-    pageLabel: 'Página {page}',
-  },
   keyboard: {
     firstPage: ['Home'],
     lastPage: ['End'],
@@ -84,7 +70,6 @@ export const DEFAULT_PAGINATOR_CONFIG: PaginatorGlobalConfig = {
   },
   loading: {
     showLoading: false,
-    loadingText: 'Cargando...',
     loadingDelay: 200,
     disableOnLoading: true,
   },
@@ -118,7 +103,6 @@ export const DEFAULT_PAGINATOR_CONFIG: PaginatorGlobalConfig = {
   infinite: {
     enabled: false,
     mode: 'button',
-    loadMoreText: 'Cargar más',
     scrollOffset: 100,
     itemsPerLoad: 20,
     maxItems: 1000,
@@ -158,36 +142,12 @@ export const DEFAULT_PAGINATOR_CONFIG: PaginatorGlobalConfig = {
  * Orden de precedencia: Base Estática <- Traducciones (si hay) <- Configuración Global (si hay)
  */
 export function injectPaginatorConfig(): PaginatorGlobalConfig {
+  // Inyectamos la config global (opcional por si el usuario no hizo provideNUI)
   const globalConfig = inject(NUI_CONFIG, { optional: true })?.config;
-  const translations = inject(NUI_TRANSLATIONS, { optional: true });
 
-  // 1. Mapeamos las traducciones dinámicas solo si existen
-  // Mantenemos la estructura para que deepMerge la combine sin machacar defaults
-  const translationsOverride: Partial<PaginatorGlobalConfig> = translations?.paginator
-    ? {
-        texts: {
-          firstPage: translations.paginator.firstPage,
-          lastPage: translations.paginator.lastPage,
-          previousPage: translations.paginator.previousPage,
-          nextPage: translations.paginator.nextPage,
-          goToPage: translations.paginator.goToPage,
-          go: translations.paginator.go,
-          itemsPerPage: translations.paginator.itemsPerPage,
-          showingItems: translations.paginator.showingItems,
-          pageLabel: translations.paginator.pageLabel,
-        },
-        loading: {
-          loadingText: translations.paginator.loading,
-        },
-        infinite: {
-          loadMoreText: translations.paginator.loadMore,
-        },
-      }
-    : {};
+  // Extraemos solo la parte que nos interesa
+  const paginatorOverrides = globalConfig?.paginator || {};
 
-  // 2. Mezclamos Defaults Base + Traducciones
-  const configWithTranslations = deepMerge(DEFAULT_PAGINATOR_CONFIG, translationsOverride);
-
-  // 3. Mezclamos (Base+Traducciones) + Configuración global del usuario (que tiene la prioridad final)
-  return deepMerge(configWithTranslations, globalConfig?.paginator);
+  // Fusionamos: Defaults Base <- pisan <- Overrides Globales
+  return deepMerge(DEFAULT_PAGINATOR_CONFIG, paginatorOverrides);
 }

@@ -48,12 +48,12 @@ export const DEFAULT_BUTTON_CONFIG: ButtonGlobalConfig = {
  * Sigue el patrón de inyectar el NUI_CONFIG global y hacer el merge.
  */
 export function injectButtonConfig(): ButtonGlobalConfig {
-  // 1. Inyectamos la config global del monorepo
+  // Inyectamos la config global del monorepo
   const globalConfig = inject(NUI_CONFIG, { optional: true })?.config;
 
-  // 2. Extraemos la sección de button
+  // Extraemos la sección de button
   const buttonOverrides = globalConfig?.button || {};
 
-  // 3. Fusionamos los defaults de la librería con lo configurado por el usuario
+  // Fusionamos los defaults de la librería con lo configurado por el usuario
   return deepMerge(DEFAULT_BUTTON_CONFIG, buttonOverrides);
 }

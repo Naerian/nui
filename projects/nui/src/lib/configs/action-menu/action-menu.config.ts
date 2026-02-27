@@ -26,12 +26,12 @@ export const DEFAULT_ACTION_MENU_CONFIG: ActionMenuGlobalConfig = {
  * Sigue el patrón de inyectar el NUI_CONFIG global y hacer el merge.
  */
 export function injectActionMenuConfig(): ActionMenuGlobalConfig {
-  // 1. Inyectamos la config global del monorepo
+  // Inyectamos la config global del monorepo
   const globalConfig = inject(NUI_CONFIG, { optional: true })?.config;
 
-  // 2. Extraemos la sección de actionMenu
+  // Extraemos la sección de actionMenu
   const actionMenuOverrides = globalConfig?.actionMenu || {};
 
-  // 3. Fusionamos los defaults de la librería con lo configurado por el usuario
+  // Fusionamos los defaults de la librería con lo configurado por el usuario
   return deepMerge(DEFAULT_ACTION_MENU_CONFIG, actionMenuOverrides);
 }

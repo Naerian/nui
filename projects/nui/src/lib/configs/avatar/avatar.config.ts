@@ -26,12 +26,12 @@ export const DEFAULT_AVATAR_CONFIG: AvatarGlobalConfig = {
  * Sigue el patrón de inyectar el NUI_CONFIG global y hacer el merge.
  */
 export function injectAvatarConfig(): AvatarGlobalConfig {
-  // 1. Inyectamos la config global del monorepo
+  // Inyectamos la config global del monorepo
   const globalConfig = inject(NUI_CONFIG, { optional: true })?.config;
 
-  // 2. Extraemos la sección de avatar
+  // Extraemos la sección de avatar
   const avatarOverrides = globalConfig?.avatar || {};
 
-  // 3. Fusionamos los defaults de la librería con lo configurado por el usuario
+  // Fusionamos los defaults de la librería con lo configurado por el usuario
   return deepMerge(DEFAULT_AVATAR_CONFIG, avatarOverrides);
 }

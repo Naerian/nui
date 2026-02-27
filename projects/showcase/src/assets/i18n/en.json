@@ -10,6 +10,7 @@
     "dark": "Oscuro"
   },
   "sidebar": {
+    "home": "Inicio",
     "gettingStarted": "Comenzar",
     "installation": "Instalación",
     "configuration": "Configuración",
@@ -148,7 +149,9 @@
       "customPresetConfigTitle": "Crear preset personalizado",
       "customComponentConfig": "Configuración global de componentes",
       "customComponentConfigDescription": "Personaliza la configuración global de los componentes de NUI para adaptarlos a las necesidades de tu aplicación. Puedes configurar opciones como tamaños, colores, variantes y más para cada componente. De esta forma, puedes establecer estilos y comportamientos predeterminados para todos los componentes de tu aplicación, asegurando una apariencia y experiencia de usuario coherente sin tener que configurar cada componente individualmente.",
-      "customComponentConfigTitle": "Configuración global de componentes"
+      "customComponentConfigTitle": "Configuración global de componentes",
+      "i18nConfig": "NUI i18n",
+      "i18nConfigDescription": "NUI implementa un sistema de internacionalización (i18n) <strong>agnóstico y reactivo basado en Signals</strong>. Esto permite que la librería se integre con cualquier motor de traducción sin dependencias directas. Además, al usar un servcio único para ello (<code>NuiI18nService</code>), NUI puede actualizar automáticamente los textos de los componentes en tiempo real cada vez que el idioma cambia, sin necesidad de recargar la página o recompilar la aplicación, ni tener que traer toda la configuración de la librería."
     },
     "theming": {
       "title": "Temas y presets",

@@ -1,15 +1,15 @@
 import { InjectionToken, Provider } from '@angular/core';
-import { NUITranslations } from './translations.model';
-import { NUI_DEFAULT_I18N } from './translations';
+import { NuiI18n } from './nui-i18n.model';
+import { NUI_I18N_DEFAULT } from './nui-i18n';
 
 /**
  * Token de inyección para proporcionar traducciones personalizadas al componente Select.
  */
-export const NUI_TRANSLATIONS = new InjectionToken<NUITranslations>(
-  'NUITranslations',
+export const NUI_I18N = new InjectionToken<NuiI18n>(
+  'NuiI18n',
   {
     providedIn: 'root', // Asegura que esté disponible globalmente
-    factory: () => NUI_DEFAULT_I18N, // Provee la implementación por defecto
+    factory: () => NUI_I18N_DEFAULT, // Provee la implementación por defecto
   },
 );
 
@@ -22,30 +22,30 @@ export const NUI_TRANSLATIONS = new InjectionToken<NUITranslations>(
  *
  * @example
  * // En app.config.ts o main.ts
- * import { provideNUITranslations } from './translations.token';
+ * import { provideNuiI18n } from './translations.token';
  * export const appConfig: ApplicationConfig = {
  *   providers: [
- *    provideNUITranslations({ formfield: { multipleChoices: '{choices} items selected' } })
+ *    provideNuiI18n({ formfield: { multipleChoices: '{choices} items selected' } })
  *  ]
  * };
  *
  * // El objeto pasado se fusiona con las traducciones por defecto,
  * // permitiendo personalizar solo las necesarias.
  */
-export function provideNUITranslations(
-  translations: Partial<NUITranslations>,
+export function provideNuiI18n(
+  translations: Partial<NuiI18n>,
 ): Provider {
   // Fusionamos las traducciones por defecto con las proporcionadas
   // asegurando que las traducciones personalizadas tengan prioridad.
   // Esto permite que el desarrollador pueda personalizar las traducciones
   // sin perder las traducciones por defecto de la librería.
-  const mergedTranslations: NUITranslations = {
-    ...NUI_DEFAULT_I18N,
+  const mergedTranslations: NuiI18n = {
+    ...NUI_I18N_DEFAULT,
     ...translations,
   };
 
   return {
-    provide: NUI_TRANSLATIONS,
+    provide: NUI_I18N,
     useValue: mergedTranslations,
   };
 }

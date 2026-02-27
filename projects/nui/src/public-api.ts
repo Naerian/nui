@@ -2,7 +2,7 @@
 export * from './lib/configs';
 
 // Translations
-export * from './lib/translations';
+export * from './lib/i18n';
 
 // Theming
 export * from './lib/themes';

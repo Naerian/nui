@@ -1,6 +1,6 @@
-import { NUITranslations } from './translations.model';
+import { NuiI18n } from './nui-i18n.model';
 
-export const NUI_DEFAULT_I18N: NUITranslations = {
+export const NUI_I18N_DEFAULT: NuiI18n = {
   // Textos genéricos
   expand: 'Expandir',
   collapse: 'Colapsar',

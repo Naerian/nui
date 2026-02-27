@@ -28,14 +28,16 @@ export const DEFAULT_SIDEBAR_PANEL_CONFIG: SidebarPanelConfig = {
 };
 
 /**
- * Resolver del SidebarPanel.
- * Combina la base estática con las configuraciones globales inyectadas a través de NUI_CONFIG.
- *
- * @returns {SidebarPanelConfig} Configuración final combinada
+ * Función inyectable para resolver la configuración final del SidebarPanel.
+ * Sigue el patrón de inyectar el NUI_CONFIG global y hacer el merge.
  */
 export function injectSidebarPanelConfig(): SidebarPanelConfig {
+  // Inyectamos la config global del monorepo
   const globalConfig = inject(NUI_CONFIG, { optional: true })?.config;
+
+  // Extraemos la sección de sidebarPanel
   const sidebarPanelOverrides = globalConfig?.sidebarPanel;
 
+  // Fusionamos los defaults de la librería con lo configurado por el usuario
   return deepMerge(DEFAULT_SIDEBAR_PANEL_CONFIG, sidebarPanelOverrides);
 }

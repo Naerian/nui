@@ -1,7 +1,7 @@
 /**
  * Interfaz para las traducciones de la librería
  */
-export interface NUITranslations {
+export interface NuiI18n {
   // Textos genéricos
   expand: string;
   collapse: string;

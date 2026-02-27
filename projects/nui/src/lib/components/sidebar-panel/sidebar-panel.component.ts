@@ -33,7 +33,7 @@ import {
   sidebarPanelAnimation,
   fadeBackdropAnimation,
 } from './animations/sidebar-panel.animations';
-import { NUI_TRANSLATIONS } from '../../translations/translations.token';
+import { NUI_I18N } from '../../i18n/nui-i18n.token';
 import { ButtonComponent } from '../button/button.component';
 import { SidebarPanelActionsService } from './services/sidebar-panel-actions.service';
 import { SidebarPanelTabsService } from './services/sidebar-panel-tabs.service';
@@ -85,7 +85,7 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly _focusTrapFactory = inject(FocusTrapFactory);
   private readonly _elementRef = inject(ElementRef);
   private readonly _tabsService = inject(SidebarPanelTabsService);
-  protected readonly translations = inject(NUI_TRANSLATIONS);
+  protected readonly translations = inject(NUI_I18N);
   protected readonly sidebarPanelConfig = inject(SIDEBAR_PANEL_CONFIG);
   protected readonly actionsService = inject(SidebarPanelActionsService, {
     optional: true,

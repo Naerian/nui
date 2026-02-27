@@ -1,14 +1,14 @@
 import { Injectable, inject } from '@angular/core';
 import { NuiDateFnsAdapter } from '../../../adapters/nui-date-fns-adapter';
 import { CalendarDay, DEFAULT_FORMAT, WeekRange, DateStatusFn, IsDateEnabledFn } from '../models/calendar.model';
-import { NUI_TRANSLATIONS } from '../../../translations';
+import { NUI_I18N } from '../../../i18n';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CalendarService {
   readonly dateAdapter = inject(NuiDateFnsAdapter);
-  private readonly _translations = inject(NUI_TRANSLATIONS);
+  private readonly _translations = inject(NUI_I18N);
 
   convertToDate(value: string | Date | null | undefined): Date | null {
     return this.dateAdapter.convertToDate(value);

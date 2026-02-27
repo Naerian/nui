@@ -17,7 +17,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import {
-  NUI_CONFIG,
   NUIColor,
   DEFAULT_COLOR,
   NUISize,
@@ -27,7 +26,6 @@ import {
   injectPaginatorConfig,
   DEFAULT_VARIANT,
 } from '../../configs';
-import { NUI_TRANSLATIONS } from '../../translations';
 import {
   KeyboardConfig,
   PaginatorConfig,
@@ -64,6 +62,7 @@ import {
 import { SelectButtonComponent } from '../select-button/select-button.component';
 import { SelectBtnOption } from '../select-button/models/select-button.model';
 import { ButtonDirective } from '../button/button.directive';
+import { NuiI18nService } from '../../i18n/nui-i18n.service';
 
 /**
  * @name
@@ -131,8 +130,13 @@ import { ButtonDirective } from '../button/button.directive';
 export class PaginatorComponent implements OnInit, OnDestroy {
   private readonly destroyRef = inject(DestroyRef);
   private readonly elementRef = inject(ElementRef);
-  protected readonly _translations = inject(NUI_TRANSLATIONS);
+
+  // Inyectamos la configuración global del paginador para usarla como fallback en los inputs
   private readonly paginatorConfig = injectPaginatorConfig();
+
+  // Inyectamos el servicio de i18n para acceder a las traducciones dinámicas
+  protected readonly _i18nService = inject(NuiI18nService);
+  protected readonly _i18n = computed(() => this._i18nService.translations().paginator);
 
   // Caché para memoización de páginas visibles
   private _visiblePagesCache = new Map<string, (number | string)[]>();
@@ -773,7 +777,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   pageSizeOptionsData = computed<SelectBtnOption[]>(() => {
     return this.pageSizeOptions().map((size: number) => ({
       label: size.toString(),
-      tooltip: this._translations.paginator.itemsPerPage + ' ' + size.toString(),
+      tooltip: this._i18n().itemsPerPage + ' ' + size.toString(),
       value: size.toString(),
     }));
   });
@@ -951,29 +955,6 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    */
   isInfiniteMode(): boolean {
     return this.infiniteConfig()?.enabled || false;
-  }
-
-  /**
-   * Obtiene el texto del botón "Cargar más"
-   * @return {string}
-   */
-  getLoadMoreText(): string {
-    const config = { ...this.paginatorConfig.infinite, ...this.infiniteConfig };
-    return config.loadMoreText || this._translations.paginator.loadMore;
-  }
-
-  /**
-   * Obtiene el texto de carga
-   * @return {string}
-   */
-  /**
-   * Obtiene el texto de carga
-   * @return {string}
-   */
-  getLoadingText(): string {
-    const infiniteCfg = this.infiniteConfig();
-    const config = { ...this.paginatorConfig.loading, ...infiniteCfg };
-    return config.loadingText || this._translations.paginator.loading;
   }
 
   /**
@@ -1312,11 +1293,11 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    */
   getEllipsisAriaLabel(page: string): string {
     if (page === 'ellipsis-start') {
-      return this._translations.paginator.previousPage;
+      return this._i18n().previousPage;
     } else if (page === 'ellipsis-end') {
-      return this._translations.paginator.nextPage;
+      return this._i18n().nextPage;
     }
-    return this._translations.paginator.morePages;
+    return this._i18n().morePages;
   }
 
   /**
@@ -1370,9 +1351,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
 
     if (isNaN(pageNum) || pageNum < 1 || pageNum > total) {
       // Mostrar mensaje de error accesible
-      this.ariaLiveMessage.set(
-        this._translations.paginator.pageJumpHelp.replace('{totalPages}', total.toString())
-      );
+      this.ariaLiveMessage.set(this._i18n().pageJumpHelp.replace('{totalPages}', total.toString()));
       this.pageJumpValue.set('');
       return;
     }
@@ -1420,8 +1399,8 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     const range = this.itemRange();
     if (!range) return '';
 
-    return this._translations.paginator.showingItems
-      .replace('{start}', range.start.toString())
+    return this._i18n()
+      .showingItems.replace('{start}', range.start.toString())
       .replace('{end}', range.end.toString())
       .replace('{total}', range.total.toString());
   }
@@ -1437,14 +1416,14 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     // Si no hay más elementos o no hay totalItems, solo mostrar los elementos cargados
     if (!state.hasMore || totalItems === undefined || totalItems === null || totalItems === 0) {
       // Mostrar solo la parte de "elementos cargados" sin el total
-      return this._translations.paginator.infiniteLoadedItems
-        .replace('{loaded}', state.loadedItems.toString())
+      return this._i18n()
+        .infiniteLoadedItems.replace('{loaded}', state.loadedItems.toString())
         .replace(/\s+de\s+\{total\}/, ''); // Eliminar la parte "de {total}"
     }
 
     // Mostrar el texto completo con loaded y total
-    return this._translations.paginator.infiniteLoadedItems
-      .replace('{loaded}', state.loadedItems.toString())
+    return this._i18n()
+      .infiniteLoadedItems.replace('{loaded}', state.loadedItems.toString())
       .replace('{total}', totalItems.toString());
   }
 
@@ -1454,14 +1433,13 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @return {string} - Etiqueta ARIA para la página
    */
   getPageAriaLabel(page: number | string): string {
-    if (typeof page === 'string') return this._translations.paginator.ariaMorePages;
+    if (typeof page === 'string') return this._i18n().ariaMorePages;
 
     const isActive = this.isPageActive(page);
 
-    if (isActive)
-      return this._translations.paginator.ariaCurrentPage.replace('{page}', page.toString());
+    if (isActive) return this._i18n().ariaCurrentPage.replace('{page}', page.toString());
 
-    return this._translations.paginator.ariaGoToPage.replace('{page}', page.toString());
+    return this._i18n().ariaGoToPage.replace('{page}', page.toString());
   }
 
   /**
@@ -1471,15 +1449,15 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   getAriaDescription(): string {
     const range = this.itemRange();
     if (range) {
-      return this._translations.paginator.ariaCurrentPageWithRange
-        .replace('{page}', this.currentPage().toString())
+      return this._i18n()
+        .ariaCurrentPageWithRange.replace('{page}', this.currentPage().toString())
         .replace('{totalPages}', this.totalPages().toString())
         .replace('{start}', range.start.toString())
         .replace('{end}', range.end.toString())
         .replace('{total}', range.total.toString());
     }
-    return this._translations.paginator.ariaCurrentPageNoRange
-      .replace('{page}', this.currentPage().toString())
+    return this._i18n()
+      .ariaCurrentPageNoRange.replace('{page}', this.currentPage().toString())
       .replace('{totalPages}', this.totalPages().toString());
   }
 
@@ -1490,19 +1468,19 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   private updateAriaLiveMessage(page: number): void {
     const range = this.itemRange();
     const totalPages = this.totalPages();
-    let message = this._translations.paginator.ariaPage.replace('{page}', page.toString());
+    let message = this._i18n().ariaPage.replace('{page}', page.toString());
 
     if (totalPages != 0) {
-      message = this._translations.paginator.ariaCurrentPageNoRange
-        .replace('{page}', page.toString())
+      message = this._i18n()
+        .ariaCurrentPageNoRange.replace('{page}', page.toString())
         .replace('{totalPages}', totalPages.toString());
     }
 
     if (range) {
       message +=
         ', ' +
-        this._translations.paginator.ariaShowingItems
-          .replace('{start}', range.start.toString())
+        this._i18n()
+          .ariaShowingItems.replace('{start}', range.start.toString())
           .replace('{end}', range.end.toString())
           .replace('{total}', range.total.toString());
     }
@@ -1521,7 +1499,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     this.isLoading.set(loading);
 
     if (loading) {
-      this.ariaLiveMessage.set(this._translations.paginator.ariaLoading);
+      this.ariaLiveMessage.set(this._i18n().ariaLoading);
     }
   }
 

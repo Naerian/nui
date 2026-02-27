@@ -26,12 +26,12 @@ export const DEFAULT_CALENDAR_CONFIG: CalendarGlobalConfig = {
  * Combina los defaults estáticos con los posibles overrides del provider global de NUI.
  */
 export function injectCalendarConfig(): CalendarGlobalConfig {
-  // 1. Inyectamos la config global (opcional por si el usuario no hizo provideNUI)
+  // Inyectamos la config global (opcional por si el usuario no hizo provideNUI)
   const globalConfig = inject(NUI_CONFIG, { optional: true })?.config;
 
-  // 2. Extraemos solo la parte que nos interesa
+  // Extraemos solo la parte que nos interesa
   const calendarOverrides = globalConfig?.calendar || {};
 
-  // 3. Fusionamos: Defaults Base <- pisan <- Overrides Globales
+  // Fusionamos: Defaults Base <- pisan <- Overrides Globales
   return deepMerge(DEFAULT_CALENDAR_CONFIG, calendarOverrides);
 }

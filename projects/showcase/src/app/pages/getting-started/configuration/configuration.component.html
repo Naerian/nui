@@ -53,6 +53,18 @@
           [examples]="customComponentExamples"
         ></app-code-block>
       </section>
+
+      <section class="docs-section">
+        <h2>{{ 'pages.configuration.i18nConfig' | translate }}</h2>
+        <p
+          class="section-description"
+          [innerHTML]="'pages.configuration.i18nConfigDescription' | translate"
+        ></p>
+
+        <app-code-block
+          [examples]="i18nConfigExamples"
+        ></app-code-block>
+      </section>
     </div>
   </div>
 </div>

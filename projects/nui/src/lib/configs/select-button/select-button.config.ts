@@ -29,12 +29,12 @@ export const DEFAULT_SELECT_BUTTON_CONFIG: SelectButtonGlobalConfig = {
  * Sigue el patrón de inyectar el NUI_CONFIG global y hacer el merge.
  */
 export function injectSelectButtonConfig(): SelectButtonGlobalConfig {
-  // 1. Inyectamos la config global del monorepo
+  // Inyectamos la config global del monorepo
   const globalConfig = inject(NUI_CONFIG, { optional: true })?.config;
 
-  // 2. Extraemos la sección de button
+  // Extraemos la sección de selectButton
   const selectButtonOverrides = globalConfig?.selectButton || {};
 
-  // 3. Fusionamos los defaults de la librería con lo configurado por el usuario
+  // Fusionamos los defaults de la librería con lo configurado por el usuario
   return deepMerge(DEFAULT_SELECT_BUTTON_CONFIG, selectButtonOverrides);
 }

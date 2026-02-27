@@ -46,7 +46,7 @@ import {
   TimeValue,
 } from '../time-picker/models/time-picker.model';
 import { TimePickerComponent } from '../time-picker/time-picker.component';
-import { NUI_TRANSLATIONS } from '../../translations';
+import { NUI_I18N, NuiI18nService } from '../../i18n';
 import { SelectBtnOption } from '../select-button';
 import { injectCalendarConfig } from '../../configs/calendar/calendar.config';
 
@@ -169,8 +169,13 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
   calendarService = inject(CalendarService);
   private keyboardNavService = inject(CalendarKeyboardNavigationService);
-  protected readonly _translations = inject(NUI_TRANSLATIONS);
+
+  // Configuración global inyectada (fusionada con defaults)
   private readonly calendarConfig = injectCalendarConfig();
+
+  // Inyectamos el servicio de i18n para acceder a las traducciones dinámicas
+  protected readonly _i18nService = inject(NuiI18nService);
+  protected readonly _i18n = computed(() => this._i18nService.translations().calendar);
 
   // Signals para estado reactivo
   viewMode = signal<ViewMode>(ViewMode.DAY);
@@ -250,10 +255,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
    */
   timePickerToggleOptions = computed<SelectBtnOption[]>(() => [
     {
-      label: this._translations.calendar.timePicker.start,
+      label: this._i18n().timePicker.start,
       value: 'start',
     },
-    { label: this._translations.calendar.timePicker.end, value: 'end' },
+    { label: this._i18n().timePicker.end, value: 'end' },
   ]);
 
   /**
@@ -277,19 +282,19 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
    */
   tabOptions = computed<SelectBtnOption[]>(() => {
     const options: SelectBtnOption[] = [
-      { label: this._translations.calendar.tabs.calendar, value: 'calendar' },
+      { label: this._i18n().tabs.calendar, value: 'calendar' },
     ];
 
     if (this.showPresets() && this.type() === CalendarType.RANGE) {
       options.push({
-        label: this._translations.calendar.tabs.presets,
+        label: this._i18n().tabs.presets,
         value: 'presets',
       });
     }
 
     if (this.effectiveShowTimePicker() !== CalendarTimePickerModeEnum.NONE) {
       options.push({
-        label: this._translations.calendar.tabs.time,
+        label: this._i18n().tabs.time,
         value: 'time',
       });
     }
@@ -348,7 +353,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
   displayedYear = computed(() => this.calendarService.getYear(this.currentDate()));
   displayedMonth = computed(
-    () => this._translations.calendar.months[this.calendarService.getMonth(this.currentDate())]
+    () => this._i18n().months[this.calendarService.getMonth(this.currentDate())]
   );
   displayedMonthIndex = computed(() => this.calendarService.getMonth(this.currentDate()));
 
@@ -527,7 +532,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   // Días de la semana ordenados según firstDayOfWeek
   // Rota el array de traducciones para que coincida con el orden visual del calendario
   orderedWeekDays = computed(() => {
-    const weekDays = this._translations.calendar.weekDaysShort;
+    const weekDays = this._i18n().weekDaysShort;
     const firstDay = this.effectiveFirstDayOfWeek();
 
     // Si empieza en Lunes (1), el array ya está en orden correcto
@@ -664,14 +669,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   // Presets por defecto
   defaultPresets = computed<DateRangePreset[]>(() => [
     {
-      label: this._translations.calendar.presets.today,
+      label: this._i18n().presets.today,
       getValue: () => {
         const today = new Date();
         return { start: today, end: today };
       },
     },
     {
-      label: this._translations.calendar.presets.last7Days,
+      label: this._i18n().presets.last7Days,
       getValue: () => {
         const end = new Date();
         const start = this.calendarService.dateAdapter.subtractDays(end, 6);
@@ -679,7 +684,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       },
     },
     {
-      label: this._translations.calendar.presets.last30Days,
+      label: this._i18n().presets.last30Days,
       getValue: () => {
         const end = new Date();
         const start = this.calendarService.dateAdapter.subtractDays(end, 29);
@@ -687,7 +692,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       },
     },
     {
-      label: this._translations.calendar.presets.thisMonth,
+      label: this._i18n().presets.thisMonth,
       getValue: () => {
         const today = new Date();
         const firstDay = this.calendarService.dateAdapter.startOfMonth(today);
@@ -696,7 +701,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       },
     },
     {
-      label: this._translations.calendar.presets.lastMonth,
+      label: this._i18n().presets.lastMonth,
       getValue: () => {
         const lastMonth = this.calendarService.dateAdapter.subtractMonths(new Date(), 1);
         const firstDay = this.calendarService.dateAdapter.startOfMonth(lastMonth);
@@ -705,7 +710,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       },
     },
     {
-      label: this._translations.calendar.presets.thisYear,
+      label: this._i18n().presets.thisYear,
       getValue: () => {
         const today = new Date();
         const firstDay = this.calendarService.dateAdapter.startOfYear(today);
@@ -1986,7 +1991,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     const baseLabel = this.formatDayLabel(day);
 
     if (day.isDisabled) {
-      return this._translations.calendar.dayDisabled.replace('{date}', baseLabel);
+      return this._i18n().dayDisabled.replace('{date}', baseLabel);
       // Resultado: "Deshabilitado: jueves, 9 octubre 2025"
     }
 
@@ -2004,8 +2009,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     // Ejemplo: si effectiveFirstDayOfWeek=1 (Lunes) y dayOfWeek=0 (Domingo), dayIndex=1
     // Esto asegura que el primer día de la semana sea el correcto según la configuración del usuario
 
-    const dayName = this._translations.calendar.weekDays[dayIndex].toLowerCase();
-    const monthName = this._translations.calendar.months[monthIndex].toLowerCase();
+    const dayName = this._i18n().weekDays[dayIndex].toLowerCase();
+    const monthName = this._i18n().months[monthIndex].toLowerCase();
 
     return `${dayName}, ${dayNumber} ${monthName} ${year}`;
   }
@@ -2560,6 +2565,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
    * @returns Cadena formateada para aria-label, por ejemplo: "Semana del 6 al 12 octubre 2025"
    */
   getWeekAriaLabel(week: number): string {
-    return this._translations.calendar.week.replace('{week}', week.toString());
+    return this._i18n().week.replace('{week}', week.toString());
   }
 }

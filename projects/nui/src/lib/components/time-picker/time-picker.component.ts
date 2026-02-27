@@ -35,7 +35,7 @@ import {
 } from './models/time-picker.model';
 import { SelectButtonComponent } from '../select-button';
 import type { SelectBtnOption } from '../select-button/models/select-button.model';
-import { NUI_TRANSLATIONS } from '../../translations';
+import { NUI_I18N } from '../../i18n';
 import { TooltipDirective } from '../tooltip';
 @Component({
   selector: 'nui-time-picker',
@@ -147,7 +147,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   @ViewChild('durationSecondsColumn')
   durationSecondsColumn?: ElementRef<HTMLDivElement>;
 
-  protected readonly _translations = inject(NUI_TRANSLATIONS);
+  protected readonly _translations = inject(NUI_I18N);
 
   // ==================
   // SIGNALS

@@ -18,7 +18,7 @@ import {
   NUIColor,
   NUISize,
 } from '../../configs';
-import { NUI_TRANSLATIONS } from '../../translations';
+import { NUI_I18N } from '../../i18n';
 import { injectAvatarConfig } from '../../configs/avatar';
 
 /**
@@ -39,7 +39,7 @@ import { injectAvatarConfig } from '../../configs/avatar';
 })
 export class AvatarGroupComponent {
   // ===== DEPENDENCIES =====
-  protected readonly translation = inject(NUI_TRANSLATIONS);
+  protected readonly translation = inject(NUI_I18N);
   private readonly globalConfig = injectAvatarConfig();
 
   // ===== SIGNAL INPUTS =====

@@ -18,6 +18,12 @@ export interface MenuItem {
  */
 export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
   {
+    label: 'Home',
+    translationKey: 'sidebar.home',
+    route: '/',
+    icon: 'ri-home-line',
+  },
+  {
     label: 'Getting Started',
     translationKey: 'sidebar.gettingStarted',
     route: '/getting-started',

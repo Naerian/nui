@@ -1,9 +1,20 @@
-import { NUIColor, NUISize, NUIVariant } from '../../../configs';
-
 export const DEFAULT_PAGE_SIZE_OPTIONS = [10, 20, 50, 100];
 export const DEFAULT_MAX_VISIBLE_PAGES = 5;
 export const DEFAULT_ITEMS_PER_PAGE = 10;
 export const DEFAULT_GAP = '0.5rem';
+
+/**
+ * Configuración de iconos aplicada, con valores por defecto
+ */
+export const DEFAULT_ICON_CONFIG: Required<IconConfig> = {
+  first: 'ri-arrow-left-double-line',
+  previous: 'ri-arrow-left-s-line',
+  next: 'ri-arrow-right-s-line',
+  last: 'ri-arrow-right-double-line',
+  loadMore: 'ri-add-line',
+  loading: 'ri-loader-4-line',
+  prefix: 'ri-',
+};
 
 /**
  * Configuración del componente Paginator
@@ -53,6 +64,10 @@ export interface PaginatorTexts {
   showingItems?: string;
   /** Texto para "Página {page}" */
   pageLabel?: string;
+  /** Texto durante loading */
+  loadingText?: string;
+  /** Texto del botón "Cargar más" */
+  loadMoreText?: string;
 }
 
 /**
@@ -77,8 +92,6 @@ export interface KeyboardConfig {
 export interface LoadingConfig {
   /** Mostrar loading durante cambios */
   showLoading?: boolean;
-  /** Texto durante loading */
-  loadingText?: string;
   /** Delay antes de mostrar loading (ms) */
   loadingDelay?: number;
   /** Deshabilitar controles durante loading */
@@ -284,19 +297,6 @@ export interface IconConfig {
 }
 
 /**
- * Configuración de iconos aplicada, con valores por defecto
- */
-export const DEFAULT_ICON_CONFIG: Required<IconConfig> = {
-  first: 'ri-arrow-left-double-line',
-  previous: 'ri-arrow-left-s-line',
-  next: 'ri-arrow-right-s-line',
-  last: 'ri-arrow-right-double-line',
-  loadMore: 'ri-add-line',
-  loading: 'ri-loader-4-line',
-  prefix: 'ri-',
-};
-
-/**
  * Configuración del modo infinito
  */
 export interface InfiniteConfig {
@@ -304,8 +304,6 @@ export interface InfiniteConfig {
   enabled?: boolean;
   /** Tipo de modo infinito */
   mode?: 'scroll' | 'button' | 'hybrid';
-  /** Texto del botón "Cargar más" */
-  loadMoreText?: string;
   /** Offset para detectar scroll (px desde el bottom) */
   scrollOffset?: number;
   /** Número de items a cargar por lote */

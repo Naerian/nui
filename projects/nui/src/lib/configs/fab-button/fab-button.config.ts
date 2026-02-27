@@ -90,14 +90,16 @@ export const DEFAULT_FAB_BUTTON_CONFIG: FabButtonConfig = {
 };
 
 /**
- * Resolver del Fab Button.
- * Combina la base estática con las configuraciones globales inyectadas a través de NUI_CONFIG.
- *
- * @returns {FabButtonConfig} Configuración final combinada
+ * Función inyectable para resolver la configuración final del FAB Button.
+ * Sigue el patrón de inyectar el NUI_CONFIG global y hacer el merge.
  */
 export function injectFabButtonConfig(): FabButtonConfig {
+  // Inyectamos la config global del monorepo
   const globalConfig = inject(NUI_CONFIG, { optional: true });
+
+  // Extraemos la sección de fabButton
   const fabButtonOverrides = globalConfig?.config?.fabButton;
 
+  // Fusionamos los defaults de la librería con lo configurado por el usuario
   return deepMerge(DEFAULT_FAB_BUTTON_CONFIG, fabButtonOverrides);
 }

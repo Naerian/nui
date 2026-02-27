@@ -5,8 +5,9 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './shared/header/header.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ShowcaseConfigService } from './core/services/showcase-config.service';
-import { ThemeService } from 'nui';
+import { NuiI18n, ThemeService } from 'nui';
 import { filter } from 'rxjs/operators';
+import { NuiI18nService } from 'nui';
 
 @Component({
   selector: 'app-root',
@@ -23,10 +24,15 @@ export class AppComponent implements OnInit {
   isSidebarCollapsed = false;
 
   private presets = this.themeService.getNuiPresets();
-  private presetMap = this.presets.reduce((map, preset) => {
-    map[preset.name] = preset;
-    return map;
-  }, {} as Record<string, any>)
+  private presetMap = this.presets.reduce(
+    (map, preset) => {
+      map[preset.name] = preset;
+      return map;
+    },
+    {} as Record<string, any>
+  );
+
+  private nuiI18n = inject(NuiI18nService);
 
   ngOnInit(): void {
     // Set default language
@@ -50,6 +56,12 @@ export class AppComponent implements OnInit {
     if (preset) {
       this.themeService.usePreset(preset);
     }
+
+    // Listen for language changes to update i18n service
+    this.translate.onLangChange.subscribe(event => {
+      const res = event.translations['NUI'];
+      if (res) this.nuiI18n.setTranslations(res as Partial<NuiI18n>);
+    });
 
     // Initialize dark mode
     this.themeService.setDarkMode(config.isDarkMode);

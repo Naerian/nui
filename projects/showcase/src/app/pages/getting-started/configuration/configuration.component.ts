@@ -101,4 +101,97 @@ provideNUI({
 })`,
     },
   ];
+
+  i18nConfigExamples: CodeExample[] = [
+    {
+      title: 'Static Integration (provideNuiI18n)',
+      language: 'typescript',
+      code: `import { provideNuiI18n } from 'nui';
+
+// Useful for single-language applications or to override 
+// specific NUI terms during startup.
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideNuiI18n({
+      paginator: {
+        itemsPerPage: 'Registros por página:',
+        nextPage: 'Siguiente'
+      }
+    })
+  ]
+};`,
+    },
+    {
+      title: 'Reactive Integration (ngx-translate)',
+      language: 'typescript',
+      code: `// app.component.ts
+import { NuiI18nService, NuiI18n } from 'nui';
+import { TranslateService } from '@ngx-translate/core';
+
+export class AppComponent {
+  constructor(
+    private translate: TranslateService,
+    private nuiI18n: NuiI18nService
+  ) {
+    // Automatic synchronization: whenever the app's language changes,
+    // NUI updates its components instantly using Signals.
+    this.translate.onLangChange.subscribe(event => {
+      const res = event.translations['nui']; // JSON Key where NUI translations are stored
+      if (res) this.nuiI18n.setTranslations(res as Partial<NuiI18n>);
+    });
+  }
+}`,
+    },
+    {
+      title: 'Reactive Integration (Transloco)',
+      language: 'typescript',
+      code: `// app.component.ts
+import { NuiI18nService, NuiI18n } from 'nui';
+import { TranslocoService } from '@ngneat/transloco';
+
+export class AppComponent {
+  constructor(private transloco: TranslocoService, private nuiI18n: NuiI18nService) {
+    this.transloco.selectTranslation().subscribe(translation => {
+      const res = translation['NUI']; // JSON Key where NUI translations are stored
+      if (res) this.nuiI18n.setTranslations(res as Partial<NuiI18n>);
+    });
+  }
+}`,
+    },
+    {
+      title: 'Manual Integration',
+      language: 'typescript',
+      code: `// Anywhere in your app
+const i18nService = inject(NuiI18nService);
+
+// Puedes actualizar solo una sección específica de la librería
+i18nService.setTranslations({
+  paginator: {
+    nextPage: 'Next Step',
+    itemsPerPage: 'Rows:'
+  }
+});`,
+    },
+    {
+      title: 'Custom i18n JSON Structure',
+      language: 'json',
+      code: `{
+  "NUI": {
+    "paginator": {
+      "firstPage": "First Page",
+      "lastPage": "Last Page",
+      "previousPage": "Previous Page",
+      "nextPage": "Next Page",
+      "itemsPerPage": "Items per page",
+      "showingItems": "{start}-{end} of {total}"
+    },
+    "calendar": {
+      "today": "Today",
+      "nextMonth": "Next month",
+      "weekDaysShort": ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
+    }
+  }
+}`,
+    },
+  ];
 }
