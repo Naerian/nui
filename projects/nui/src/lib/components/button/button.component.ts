@@ -32,6 +32,7 @@ import {
   DEFAULT_SHAPE,
 } from '../../configs';
 import { injectButtonConfig } from '../../configs/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'nui-button',
@@ -48,6 +49,7 @@ import { injectButtonConfig } from '../../configs/button';
     '[style.display]': 'width() === "full" ? "flex" : "inline-flex"',
     '[style.width]': 'width() === "full" ? "100%" : "auto"',
   },
+  imports: [CommonModule],
 })
 export class ButtonComponent implements AfterContentInit {
   private elementRef = inject(ElementRef);
@@ -68,8 +70,8 @@ export class ButtonComponent implements AfterContentInit {
   /** Tamaño del botón. Fallback a configuración global o default. */
   readonly size = input<NUISize>();
 
-  /** Variante visual (solid, outline, ghost). */
-  readonly variant = input<NUIVariant>();
+  /** Variante visual (solid, outline, ghost, link). */
+  readonly variant = input<NUIVariant | 'link'>();
 
   /** Forma del botón (rounded, square, pill). */
   readonly shape = input<NUIShape>();
@@ -153,9 +155,23 @@ export class ButtonComponent implements AfterContentInit {
     () => this.width() ?? this.globalConfig?.width ?? ButtonWidthEnum.AUTO
   );
 
-  readonly effectiveRaised = computed(
-    () => this.raised() ?? this.globalConfig?.raised ?? false
-  );
+  readonly effectiveRaised = computed(() => this.raised() ?? this.globalConfig?.raised ?? false);
+  
+  // ========================================================================
+  // Dynamic host classes
+  // ========================================================================
+
+  readonly hostClasses = computed(() => ({
+    [`nui-btn--${this.effectiveColor()}`]: true,
+    [`nui-btn--${this.effectiveSize()}`]: true,
+    [`nui-btn--${this.effectiveVariant()}`]: true,
+    [`nui-btn--${this.effectiveShape()}`]: true,
+    [`nui-btn--${this.effectiveWidth()}`]: true,
+    'nui-btn--raised': this.effectiveRaised(),
+    'nui-btn--icon': this.isIconOnly(),
+    'nui-btn--loading': this.loading(),
+    'nui-btn--disabled': this.disabled(),
+  }));
 
   // ========================================================================
   // INTERNAL STATE & LOGIC
@@ -167,7 +183,7 @@ export class ButtonComponent implements AfterContentInit {
   /** Determina si mostramos contenido (Label Input O Proyección HTML) */
   readonly hasVisibleContent = computed(() => this._hasProjectedContent() || !!this.label());
 
-  /** Determina si es un botón cuadrado (solo icono, sin texto) */
+  /** Determina si el botón es solo un icono (sin contenido visible) */
   readonly isIconOnly = computed(() => !!this.icon() && !this.hasVisibleContent());
 
   /** Cálculo inteligente del aria-label para asegurar a11y */

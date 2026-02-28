@@ -56,7 +56,7 @@ export class ButtonDirective implements AfterViewInit, OnDestroy {
   // ========================================================================
   readonly color = input<NUIColor>();
   readonly size = input<NUISize>();
-  readonly variant = input<NUIVariant>();
+  readonly variant = input<NUIVariant | 'link'>();
   readonly shape = input<NUIShape>();
   readonly width = input<ButtonWidth>();
   readonly type = input<ButtonType>();

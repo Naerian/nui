@@ -160,7 +160,7 @@
       },
       "i18n": {
         "title": "Configuración de internacionalización (i18n)",
-        "description": "NUI implementa un sistema de i18n reactivo basado en <code>Signals</code>. Puedes establecer una base de textos inicial mediante el proveedor <code>provideNuiI18n()</code>. Para aplicaciones multi-idioma, el servicio <code>NuiI18nService</code> permite inyectar nuevos diccionarios en tiempo de ejecución mediante el método <code>setLang()</code>. Al hacerlo, todos los componentes suscritos se actualizan automáticamente sin necesidad de recargar la aplicación ni dependencias de terceros.",
+        "description": "NUI implementa un sistema de i18n reactivo basado en <code>Signals</code>. Puedes establecer una base de textos inicial mediante el proveedor <code>provideNuiI18n()</code>. Para aplicaciones multi-idioma, el servicio <code>NuiI18nService</code> permite inyectar nuevos diccionarios en tiempo de ejecución mediante el método <code>setLang()</code>. Al hacerlo, todos los componentes suscritos se actualizan automáticamente sin necesidad de recargar la aplicación ni dependencias de terceros.<br/><br/>Usa <code>setTranslations</code> para actualizar solo un subconjunto de textos indicando la raíz del diccionario. Por ejemplo, si usas <code>ngx-translate</code> puedes indicar donde se encuentra el objeto json 'NUI' dentro de tu archivo de traducciones y pasar ese objeto al servicio de NUI para mantener todo sincronizado.",
         "note": "Los textos se actualizan dinámicamente mediante el servicio, mientras que los locales de fecha deben registrarse previamente en la configuración global para que el adaptador pueda procesar formatos y etiquetas ARIA de forma reactiva."
       },
       "i18n-date": {

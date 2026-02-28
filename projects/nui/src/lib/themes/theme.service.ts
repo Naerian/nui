@@ -653,6 +653,17 @@ export class ThemeService {
       --nui-btn-${name}-ghost-active-bg: ${alpha20};
       --nui-btn-${name}-ghost-active-border: transparent;
 
+      /* Link States (variant that looks like a hyperlink) */
+      --nui-btn-${name}-link-bg: transparent;
+      --nui-btn-${name}-link-border: transparent;
+      --nui-btn-${name}-link-text: ${color};
+      --nui-btn-${name}-link-hover-bg: transparent;
+      --nui-btn-${name}-link-hover-border: transparent;
+      --nui-btn-${name}-link-hover-text: ${hoverBg};
+      --nui-btn-${name}-link-active-bg: transparent;
+      --nui-btn-${name}-link-active-border: transparent;
+      --nui-btn-${name}-link-active-text: ${activeBg};
+
       /* Focus Ring */
       --nui-btn-${name}-focus-ring: ${this.withAlpha(color, 0.4)};
     `;

@@ -20,7 +20,7 @@ export const BUTTON_API_SECTIONS: ComponentSection[] = [
       rows: [
         [
           '<code>variant</code>',
-          'NUIVariant',
+          'NUIVariant | "link"',
           '<code class="neutral">solid</code>',
           'Button visual variant',
         ],

@@ -61,6 +61,18 @@ export const BUTTON_EXAMPLES_SECTIONS: ComponentSection[] = [
 <nui-button variant="ghost" color="danger">Danger</nui-button>`,
         language: 'html',
       },
+      {
+        title: 'Link',
+        code: `<nui-button variant="link" color="primary">Primary</nui-button>
+<nui-button variant="link" color="secondary">Secondary</nui-button>
+<nui-button variant="link" color="accent">Accent</nui-button>
+<nui-button variant="link" color="success">Success</nui-button>
+<nui-button variant="link" color="info">Info</nui-button>
+<nui-button variant="link" color="warning">Warning</nui-button>
+<nui-button variant="link" color="danger">Danger</nui-button>
+<nui-button variant="link" color="neutral">Neutral</nui-button>`,
+        language: 'html',
+      },
     ],
   },
   {
@@ -76,8 +88,13 @@ export const BUTTON_EXAMPLES_SECTIONS: ComponentSection[] = [
       {
         title: 'codeExamples.html',
         code: `<nui-button shape="rounded">Rounded</nui-button>
+<nui-button shape="rounded" icon="ri-user-line" variant="outline"></nui-button>
 <nui-button shape="square">Square</nui-button>
-<nui-button shape="pill">Pill</nui-button>`,
+<nui-button shape="square" icon="ri-user-line" color="danger"></nui-button>
+<nui-button shape="pill">Pill</nui-button>
+<nui-button shape="pill" icon="ri-user-line"></nui-button>
+<nui-button shape="square" color="danger" variant="ghost">Square</nui-button>
+<nui-button shape="pill" color="success" variant="outline">Pill</nui-button>`,
         language: 'html',
       },
     ],
@@ -96,8 +113,11 @@ export const BUTTON_EXAMPLES_SECTIONS: ComponentSection[] = [
         title: 'codeExamples.html',
         code: `<nui-button raised>Raised Button</nui-button>
 <nui-button raised color="primary">Raised Primary</nui-button>
+<nui-button raised color="success" icon="ri-user-line" shape="pill"></nui-button>
 <nui-button raised variant="outline" color="secondary">Raised Outline</nui-button>
+<nui-button raised variant="outline" color="secondary" icon="ri-user-line" shape="pill"></nui-button>
 <nui-button raised variant="ghost" color="accent">Raised Ghost</nui-button>
+<nui-button raised variant="ghost" color="accent" icon="ri-user-line" shape="pill"></nui-button>
 <button nuiButton [raised]="true" color="success">Raised Directive</button>`,
         language: 'html',
       },

@@ -34,7 +34,7 @@
     isolation: isolate;
 
     $colors: primary, secondary, success, info, warning, danger, accent, neutral;
-    $variants: solid, outline, ghost;
+    $variants: solid, outline, ghost, link;
 
     @include button-theme(primary, solid); // Default theme
 
@@ -69,6 +69,15 @@
     &:disabled,
     &.nui-btn--disabled {
       @include global.disabled;
+    }
+
+    &.nui-btn--link {
+      &:hover:not(:disabled) {
+        text-decoration: underline !important;
+        text-underline-offset: var(--nui-button-link-underline-offset);
+        text-decoration-thickness: var(--nui-button-link-underline-thickness);
+        text-decoration-skip-ink: var(--nui-button-link-underline-skip-ink);
+      }
     }
 
     $sizes: xs, s, sm, md, lg, xl;
@@ -147,11 +156,22 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      line-height: 1;
       width: 1em;
       height: 1em;
-      flex-shrink: 0;
-      line-height: 1.2;
       vertical-align: middle;
+
+      &::before {
+        display: block;
+        color: currentColor;
+      }
+    }
+
+    &__icon {
+      i {
+        margin: 0;
+        font-size: inherit;
+      }
     }
 
     &__spinner {
@@ -195,8 +215,9 @@
 
     &__content {
       display: inline-flex;
-      align-items: center;
-      line-height: 1.2;
+      justify-content: center;
+      line-height: 1;
+      vertical-align: middle;
 
       &:empty {
         display: none;

@@ -7,6 +7,7 @@ $button-gap: 0.5rem !default;
 $button-spin-duration: 1s !default;
 $button-focus-width: 0.125rem !default;
 $button-focus-offset: 0.125rem !default;
+$button-link-underline-offset: 0.25em !default;
 
 // MIXINS
 @mixin nui-button-vars {
@@ -30,4 +31,9 @@ $button-focus-offset: 0.125rem !default;
 
   // Font weight
   --nui-button-font-weight: var(--nui-font-weight-semibold);
+
+  // Link variant
+  --nui-button-link-underline-offset: #{$button-link-underline-offset};
+  --nui-button-link-underline-thickness: var(--nui-border-width-sm);
+  --nui-button-link-underline-skip-ink: auto;
 }
