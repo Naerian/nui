@@ -48,6 +48,7 @@ import { CommonModule } from '@angular/common';
     '[class.nui-btn-full]': 'width() === "full"',
     '[style.display]': 'width() === "full" ? "flex" : "inline-flex"',
     '[style.width]': 'width() === "full" ? "100%" : "auto"',
+    '[style.cursor]': 'disabled() || loading() ? "default" : "pointer"',
   },
   imports: [CommonModule],
 })

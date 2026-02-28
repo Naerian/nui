@@ -69,6 +69,7 @@
     &:disabled,
     &.nui-btn--disabled {
       @include global.disabled;
+      cursor: default !important;
     }
 
     &.nui-btn--link {
