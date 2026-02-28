@@ -1,3 +1,5 @@
+import { InjectionToken } from "@angular/core";
+
 /**
  * Interfaz abstracta para operaciones de fechas en NUI.
  * Define el contrato que cualquier implementación de adaptador de fechas debe cumplir.
@@ -205,3 +207,14 @@ export interface NuiDateAdapter {
    */
   clone(date: Date): Date;
 }
+
+/**
+ * Token de inyección para el adaptador de fechas de NUI
+ * Permite a los usuarios proporcionar su propia implementación de adaptador de fechas
+ * para desacoplar la lógica de componentes de librerías específicas como date-fns.
+ *
+ * Por defecto, se proporciona una implementación basada en date-fns, pero el usuario
+ * puede override esto para usar otra librería (ej: Day.js) o su propia lógica personalizada.
+ * Todos los métodos del adaptador deben devolver objetos Date nativos de JavaScript para mantener la transparencia en la API pública.
+ */
+export const NUI_DATE_ADAPTER = new InjectionToken<NuiDateAdapter>('NuiDateAdapter');

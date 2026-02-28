@@ -5,8 +5,7 @@ import { provideHttpClient, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { routes } from './app.routes';
 import { Observable } from 'rxjs';
-import { minimal, provideNUI } from 'nui';
-import { provideNuiDateLocales } from '../../../nui/src/lib/i18n/i18n-dates';
+import { minimal, provideNUI, provideNuiDateLocales } from 'nui';
 import { enUS, es } from 'date-fns/locale';
 
 // Simple custom loader for translations

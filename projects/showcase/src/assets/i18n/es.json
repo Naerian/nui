@@ -138,22 +138,36 @@
     "configuration": {
       "title": "Configuración",
       "subtitle": "Configura NUI según tus necesidades",
-      "presetConfig": "Configuración de preset",
-      "presetConfigDescription": "Los presets definen la paleta de colores de tu aplicación. NUI incluye 12 presets predefinidos: <code>aura</code>, <code>autumn</code>, <code>neon</code>, <code>dopamine</code>, <code>corporate</code>, <code>minimal</code>, <code>sunset</code>, <code>twilight</code>, <code>ocean</code>, <code>velvet</code>, <code>coffee</code>, <code>emerald</code>.",
-      "presetConfigTitle": "Configuración de preset",
-      "darkModeConfig": "Configuración de Modo Oscuro",
-      "darkModeConfigDescription": "Controla cómo se aplica el modo oscuro en tu aplicación. Las opciones disponibles son: <code>manual</code> (controlado por código), <code>auto</code> (basado en hora del día), o <code>system</code> (según las preferencias del sistema operativo).",
-      "darkModeConfigTitle": "Configuración de Modo Oscuro",
-      "customPresetConfig": "Preset personalizado",
-      "customPresetConfigDescription": "Crea tu propio preset definiendo colores personalizados para los modos <code>claro</code> y <code>oscuro</code>. Cada preset debe incluir: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code> y <code>neutral</code>.",
-      "customPresetConfigTitle": "Crear preset personalizado",
-      "customComponentConfig": "Configuración global de componentes",
-      "customComponentConfigDescription": "Personaliza la configuración global de los componentes de NUI para adaptarlos a las necesidades de tu aplicación. Puedes configurar opciones como tamaños, colores, variantes y más para cada componente. De esta forma, puedes establecer estilos y comportamientos predeterminados para todos los componentes de tu aplicación, asegurando una apariencia y experiencia de usuario coherente sin tener que configurar cada componente individualmente.",
-      "customComponentConfigTitle": "Configuración global de componentes",
-      "i18nConfig": "NUI i18n",
-      "i18nConfigDescription": "NUI implementa un sistema de internacionalización (i18n) <strong>agnóstico y reactivo basado en Signals</strong>. Esto permite que la librería se integre con cualquier motor de traducción sin dependencias directas. Además, al usar un servcio único para ello (<code>NuiI18nService</code>), NUI puede actualizar automáticamente los textos de los componentes en tiempo real cada vez que el idioma cambia, sin necesidad de recargar la página o recompilar la aplicación, ni tener que traer toda la configuración de la librería.",
-      "i18nDateConfig": "NUI i18n en fechas",
-      "i18nDateConfigDescription": "Para que los componentes que gestionan fechas (como el Calendar) puedan mostrar formatos localizados y etiquetas de accesibilidad (ARIA) en diferentes idiomas, es necesario registrar los objetos de idioma de la librería de fechas utilizada (por defecto date-fns mediante el adaptador <code>NuiDateFnsAdapter</code>).<br/><br/>NUI utiliza un sistema de registro bajo demanda. Esto permite que tu aplicación solo incluya los idiomas que realmente utiliza, manteniendo el tamaño del paquete final lo más pequeño posible.<br/><br/>Para registrar los idiomas, utiliza el proveedor <code>provideNuiDateLocales()</code> en tu configuración de la aplicación, pasando un objeto que mapee los códigos de idioma a los objetos de idioma correspondientes de date-fns, esto sincronizará los idiomas por debajo mediante el servicio <code>NuiI18nService</code> y los componentes de fecha de NUI podrán usar la configuración localizada automáticamente."
+      "presets": {
+        "title": "Configuración de preset",
+        "description": "NUI incluye 12 presets predefinidos que puedes usar directamente en tu aplicación. Cada preset define una paleta de colores única para los modos claro y oscuro, asegurando una apariencia consistente en todos los componentes.",
+        "note": "Puedes cambiar el preset en tiempo de ejecución usando el <code>ThemeService</code>, lo que te permite ofrecer a tus usuarios la opción de elegir su apariencia preferida."
+      },
+      "custom-presets": {
+        "title": "Presets personalizados",
+        "description": "Además de los presets predefinidos, puedes crear tus propios presets personalizados definiendo colores específicos para los modos claro y oscuro. Esto te permite adaptar la apariencia de tu aplicación a la identidad de tu marca o crear experiencias de usuario únicas.",
+        "note": "Los presets personalizados se definen como objetos de TypeScript que cumplen con la interfaz <code>ThemePreset</code>, lo que garantiza una configuración segura para tipos y una integración perfecta con el sistema de temas de NUI."
+      },
+      "dark-mode": {
+        "title": "Configuración de modo oscuro",
+        "description": "Controla cómo se aplica el modo oscuro en tu aplicación. Las opciones disponibles son: <code>manual</code> (controlado por código), <code>auto</code> (basado en hora del día), o <code>system</code> (según las preferencias del sistema operativo).",
+        "note": "El modo oscuro se puede activar programáticamente usando el <code>ThemeService</code>, lo que te permite ofrecer a tus usuarios la opción de alternar entre modos o seguir automáticamente la configuración de su sistema."
+      },
+      "component-config": {
+        "title": "Configuración específica de componentes",
+        "description": "NUI permite configurar ciertos aspectos de los componentes a través de la configuración global, como el sistema de paginación 'Shapeshifter' del Paginator o las variantes disponibles para el Button. Esto te da control sobre el comportamiento y apariencia de los componentes sin necesidad de modificar su código fuente.",
+        "note": "Al configurar opciones específicas de componentes en el proveedor de NUI, puedes garantizar una experiencia de usuario consistente en toda tu aplicación y adaptar los componentes a tus necesidades sin complicaciones."
+      },
+      "i18n": {
+        "title": "Configuración de internacionalización (i18n)",
+        "description": "NUI implementa un sistema de i18n reactivo basado en <code>Signals</code>. Puedes establecer una base de textos inicial mediante el proveedor <code>provideNuiI18n()</code>. Para aplicaciones multi-idioma, el servicio <code>NuiI18nService</code> permite inyectar nuevos diccionarios en tiempo de ejecución mediante el método <code>setLang()</code>. Al hacerlo, todos los componentes suscritos se actualizan automáticamente sin necesidad de recargar la aplicación ni dependencias de terceros.",
+        "note": "Los textos se actualizan dinámicamente mediante el servicio, mientras que los locales de fecha deben registrarse previamente en la configuración global para que el adaptador pueda procesar formatos y etiquetas ARIA de forma reactiva."
+      },
+      "i18n-date": {
+        "title": "NUI i18n en fechas",
+        "description": "Para que componentes como el Calendar gestionen formatos y etiquetas de accesibilidad (ARIA) en diferentes idiomas, debes registrar los objetos de localización (ej: date-fns) usando provideNuiDateLocales().<br/><br/>NUI sincroniza automáticamente estos locales con el servicio de i18n, garantizando que tanto los textos como las fechas (ej: \"lunes, 1 de enero\") sean gramaticalmente correctos y accesibles sin configuración adicional.",
+        "note": "Cuando cambias el idioma de la aplicación mediante <code>nuiI18nService.setLang('es')</code>, NUI sincroniza automáticamente el Adaptador de Fechas y el Diccionario de Textos. Todo el sistema es reactivo: tus calendarios y paginadores se actualizarán instantáneamente sin necesidad de lógica extra en tus componentes."
+      }
     },
     "theming": {
       "title": "Temas y presets",

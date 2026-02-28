@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { TooltipPosition } from '../../components/tooltip';
 import { NUIColor, NUISize, NUIVariant } from '../common/types';
-import { NUI_CONFIG } from '../nui.config';
+import { NUI_CONFIG } from '../nui.token';
 import { deepMerge } from '../../utils/deep-merge';
 
 /**

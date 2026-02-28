@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { PopoverConfig } from '../../components/popover';
-import { NUI_CONFIG } from '../nui.config';
+import { NUI_CONFIG } from '../nui.token';
 import { deepMerge } from '../../utils/deep-merge';
 
 /**

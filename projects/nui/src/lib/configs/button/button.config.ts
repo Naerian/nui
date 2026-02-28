@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { NUI_CONFIG } from '../nui.config'; // Ajustar ruta según tu árbol
+import { NUI_CONFIG } from '../nui.token'; // Ajustar ruta según tu árbol
 import { deepMerge } from '../../utils/deep-merge';
 import { NUIColor, NUIShape, NUISize, NUIVariant } from '../common';
 import {

@@ -10,6 +10,9 @@ export * from './lib/themes';
 // Animations
 export * from './lib/animations';
 
+// Adapters
+export * from './lib/adapters';
+
 // Components
 export * from './lib/components/button';
 export * from './lib/components/select-button';

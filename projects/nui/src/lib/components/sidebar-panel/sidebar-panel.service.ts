@@ -23,7 +23,7 @@ import {
 } from './models/sidebar-panel.model';
 import { SidebarPanelComponent } from './sidebar-panel.component';
 import { SidebarPanelActionsService } from './services/sidebar-panel-actions.service';
-import { injectSidebarPanelConfig, NUI_CONFIG } from '../../configs';
+import { injectSidebarPanelConfig } from '../../configs';
 import { SimpleContentComponent } from './simple-content.component';
 import { deepMerge } from '../../utils';
 

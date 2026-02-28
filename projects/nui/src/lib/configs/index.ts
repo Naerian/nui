@@ -18,5 +18,5 @@ export * from './sidebar-panel';
 
 // Main NUI configuration
 export * from './nui.model';
-export * from './nui.config';
+export * from './nui.provider';
 export * from './nui.consts';

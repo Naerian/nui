@@ -19,7 +19,6 @@ import {
   SelectBtnModeEnum,
 } from './models/select-button.model';
 import {
-  NUI_CONFIG,
   NUISize,
   NUIColor,
   DEFAULT_COLOR,

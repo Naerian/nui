@@ -2,7 +2,7 @@ import { Injectable, inject, signal, computed, effect } from '@angular/core';
 import { NUI_I18N } from './nui-i18n.token';
 import { NuiI18n } from './nui-i18n.model';
 import { deepMerge } from '../utils/deep-merge';
-import { NUI_DATE_ADAPTER } from '../i18n/i18n-dates/i18n-dates.token';
+import { NUI_DATE_ADAPTER } from '../adapters/nui-date-adapter';
 
 @Injectable({
   providedIn: 'root',

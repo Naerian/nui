@@ -22,7 +22,6 @@ import {
   ButtonWidthEnum,
 } from './models/button.model';
 import {
-  NUI_CONFIG,
   NUIColor,
   NUISize,
   NUIVariant,

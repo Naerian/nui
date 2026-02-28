@@ -25,7 +25,6 @@ import { FADE_IN_OUT_SCALE } from '../../animations';
 import {
   DEFAULT_COLOR,
   DEFAULT_SIZE,
-  NUI_CONFIG,
   NUIColor,
   NUISize,
   NUIVariant,

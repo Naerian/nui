@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CalendarGlobalConfig, CalendarTimePickerModeEnum } from '../../components/calendar/models';
-import { NUI_CONFIG } from '../nui.config';
+import { NUI_CONFIG } from '../nui.token';
 import { deepMerge } from '../../utils/deep-merge';
 import { TimePickerModeEnum } from '../../components/time-picker/models/time-picker.model';
 

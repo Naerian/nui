@@ -14,7 +14,6 @@ import {
   DEFAULT_COLOR,
   DEFAULT_SIZE,
   DEFAULT_VARIANT,
-  NUI_CONFIG,
   NUIColor,
   NUISize,
 } from '../../configs';

@@ -1,21 +1,14 @@
 import {
   APP_INITIALIZER,
   EnvironmentProviders,
-  InjectionToken,
   makeEnvironmentProviders,
   Provider,
 } from '@angular/core';
 import { NUIConfig } from './nui.model';
 import { ThemeService } from '../themes';
 import { NuiDateFnsAdapter } from '../adapters';
-import { NUI_DATE_ADAPTER } from '../i18n/i18n-dates/i18n-dates.token';
-
-/**
- * Token de inyección para la configuración global de NUI.
- * Permite a los usuarios proporcionar una configuración parcial que se fusionará
- * con los valores predeterminados internos de cada componente.
- */
-export const NUI_CONFIG = new InjectionToken<Partial<NUIConfig>>('NUIConfig');
+import { NUI_CONFIG } from './nui.token';
+import { NUI_DATE_ADAPTER } from '../adapters/nui-date-adapter';
 
 /**
  * Proporciona la configuración global de la librería NUI.

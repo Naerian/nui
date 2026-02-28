@@ -14,7 +14,7 @@ import { CodeExample } from '../../../core/models';
 export class ConfigurationComponent {
   presetConfigExamples: CodeExample[] = [
     {
-      title: 'app.config.ts',
+      title: 'provideNUI (app.config.ts)',
       language: 'typescript',
       code: `import { provideNUI, dopamine } from 'nui';
 
@@ -22,23 +22,53 @@ provideNUI({
   preset: dopamine 
 })`,
     },
+    {
+      title: 'Using ThemeService (runtime)',
+      language: 'typescript',
+      code: `import { ThemeService } from 'nui';
+
+export class AppComponent {
+  constructor(private themeService: ThemeService) {
+    // Change the theme at runtime
+    this.themeService.usePreset(dopamine);
+  }
+}`,
+    },
   ];
 
   darkModeConfigExamples: CodeExample[] = [
     {
-      title: 'app.config.ts',
+      title: 'provideNUI (app.config.ts)',
       language: 'typescript',
       code: `provideNUI({ 
   preset: minimal,
   darkMode: 'manual' // 'auto' | 'manual' | 'system'
 })`,
     },
+    {
+      title: 'Using ThemeService (runtime)',
+      language: 'typescript',
+      code: `import { ThemeService } from 'nui';
+
+export class AppComponent {
+  constructor(private themeService: ThemeService) {
+    // Change to dark mode programmatically
+    this.themeService.toggleDarkMode();
+
+    // Set dark mode explicitly
+    this.themeService.setDarkMode(enabled);
+
+    // Check current dark mode strategy
+    const currentStrategy = this.themeService.getDarkModeStrategy();
+  }
+}`,
+    },
   ];
 
   customPresetExamples: CodeExample[] = [
     {
       language: 'typescript',
-      title: 'TypeScript',
+      title: 'provideNUI (app.config.ts)',
       code: `import { ThemePreset } from 'nui';
 
 const myPreset: ThemePreset = {
@@ -72,33 +102,23 @@ provideNUI({ preset: myPreset })`,
   customComponentExamples: CodeExample[] = [
     {
       language: 'typescript',
-      title: 'TypeScript',
-      code: `import { provideNUI, ButtonGlobalConfig, PaginatorConfig } from 'nui';
+      title: 'provideNUI (app.config.ts)',
+      code: `import { provideNUI, dopamine } from 'nui';
 
-const myCustomButtonConfig: Partial<ButtonGlobalConfig> = {
-  size: 'lg',
-  color: 'accent',
-  variant: 'outline',
-  shape: 'pill',
-  width: 'full',
-  iconPosition: 'start',
-};
-
-const myCustomPaginatorConfig: Partial<PaginatorConfig> = {
-  color: 'success',
-  size: 'sm',
-  texts: {
-    previous: 'Back',
-    next: 'Next',
-  },
-};
-
+// Custom global configuration for components
 provideNUI({ 
-    config: {
-      button: myCustomButtonConfig,
-      paginator: myCustomPaginatorConfig
+    preset: dopamine,
+    button: {
+      size: 'lg',
+      variant: 'outline',
+      shape: 'pill'
+    },
+    paginator: {
+      color: 'success',
+      size: 'sm',
+      maxVisiblePages: 5
     }
-})`,
+});`,
     },
   ];
 
@@ -199,7 +219,7 @@ i18nService.setTranslations({
 
   i18nDateConfigExamples: CodeExample[] = [
     {
-      title: 'Static Integration (provideNuiDateLocales)',
+      title: 'provideNuiDateLocales (app.config.ts)',
       language: 'typescript',
       code: `import { provideNuiDateLocales } from 'nui';
 import { enUS, es } from 'date-fns/locale';

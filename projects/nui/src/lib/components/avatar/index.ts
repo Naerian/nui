@@ -1,6 +1,3 @@
-// Components
-export { AvatarComponent } from './avatar.component';
-export { AvatarGroupComponent } from './avatar-group.component';
-
-// Models
+export * from './avatar.component';
+export * from './avatar-group.component';
 export * from './models/avatar.model';

@@ -17,7 +17,7 @@ import {
 } from './models/theme.config';
 import { NUI_PRESETS } from './models/theme-presets';
 import { ZINC_GRAYS } from './models/theme-grays';
-import { NUI_CONFIG } from '../configs';
+import { NUI_CONFIG } from '../configs/nui.token';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {

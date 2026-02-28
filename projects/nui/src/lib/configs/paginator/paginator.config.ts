@@ -11,7 +11,7 @@ import {
   DEFAULT_ICON_CONFIG,
   DEFAULT_KEYBOARD_CONFIG,
 } from '../../components/paginator';
-import { NUI_CONFIG } from '../nui.config';
+import { NUI_CONFIG } from '../nui.token';
 import { deepMerge } from '../../utils/deep-merge';
 import { NUIColor, NUISize, NUIVariant } from '../common';
 import {
