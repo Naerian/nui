@@ -77,7 +77,9 @@ export class FabButtonComponent implements OnDestroy {
   // ========================================================================
   // ViewChild
   // ========================================================================
-  readonly triggerBtn = viewChild<ElementRef<HTMLButtonElement>>('triggerBtn');
+  readonly triggerBtn  = viewChild<ElementRef<HTMLButtonElement>>('triggerBtn');
+  /** Reference to the <ul> menu list — used to focus items programmatically. */
+  readonly itemsList = viewChild<ElementRef<HTMLUListElement>>('itemsList');
 
   // ========================================================================
   // INPUTS
@@ -283,13 +285,126 @@ export class FabButtonComponent implements OnDestroy {
   }
 
   // ========================================================================
-  // KEYBOARD HANDLERS
+  // KEYBOARD HANDLERS — WAI-ARIA Menu Button Pattern
+  // https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/
+  //
+  // A single @HostListener on the host element is used instead of (keydown)
+  // bindings on individual children. This guarantees:
+  //  • Events are captured BEFORE the browser processes Home/End page-scroll.
+  //  • No reliance on bubbling from <button> → <ul>, which can be unreliable
+  //    when inert or pointer-events affect intermediate nodes.
   // ========================================================================
 
-  @HostListener('document:keydown.escape')
-  onEscKey(): void {
-    if (this.isOpen() && this.effectiveCloseOnEsc()) {
-      this.close();
+  @HostListener('keydown', ['$event'])
+  _onHostKeydown(event: KeyboardEvent): void {
+    const active   = document.activeElement;
+    const trigger  = this.triggerBtn()?.nativeElement;
+    const onTrigger = active === trigger;
+    const onItem    = !onTrigger && !!this.itemsList()?.nativeElement.contains(active);
+
+    if (onTrigger) {
+      this._handleTriggerKey(event);
+    } else if (onItem && this.isOpen()) {
+      this._handleItemKey(event);
+    }
+  }
+
+  /**
+   * Keyboard handler for the trigger button.
+   *
+   * | Key           | Behaviour                                          |
+   * |---------------|----------------------------------------------------|
+   * | Enter / Space | Toggle; if opening → focus visually-first item     |
+   * | ArrowDown     | Open menu → focus visually-first item              |
+   * | ArrowUp       | Open menu → focus visually-last item               |
+   * | Escape        | Close (respects closeOnEsc)                        |
+   */
+  private _handleTriggerKey(event: KeyboardEvent): void {
+    switch (event.key) {
+      case 'Enter':
+      case ' ':
+        event.preventDefault();
+        this.isOpen() ? this.close() : this._openAndFocus('visual-first');
+        break;
+      case 'ArrowDown':
+        event.preventDefault();
+        this._openAndFocus('visual-first');
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        this._openAndFocus('visual-last');
+        break;
+      case 'Escape':
+        if (this.isOpen() && this.effectiveCloseOnEsc()) {
+          event.preventDefault();
+          this.close();
+        }
+        break;
+    }
+  }
+
+  /**
+   * Keyboard handler for the items list (focus is on a menu item).
+   *
+   * Navigation step is direction-aware so ArrowDown/Up always match the
+   * visual layout regardless of expansion direction:
+   *   - Upward expansions (up / up-left / up-right): step = -1
+   *     (ArrowDown → toward trigger → visually downward)
+   *   - All other directions: step = +1 (standard)
+   *
+   * | Key       | Behaviour                                               |
+   * |-----------|---------------------------------------------------------|
+   * | ArrowDown | Move focus to the next visually-lower item (circular)   |
+   * | ArrowUp   | Move focus to the next visually-higher item (circular)  |
+   * | Home      | Focus visually-first (topmost) item                     |
+   * | End       | Focus visually-last (bottommost) item                   |
+   * | Escape    | Close and return focus to trigger                       |
+   * | Tab       | Close (focus moves naturally to next page element)      |
+   */
+  private _handleItemKey(event: KeyboardEvent): void {
+    const buttons = this._getEnabledMenuItems();
+    if (!buttons.length) return;
+
+    const current    = document.activeElement;
+    const currentIdx = buttons.indexOf(current as HTMLButtonElement | HTMLAnchorElement);
+    // step = +1 for downward/radial layouts, -1 for upward layouts.
+    // This ensures ArrowDown always moves focus in the visually ‘downward’ direction.
+    const step = this._getNavStep();
+
+    // Visual-first index: the item at the top of the visual reading order.
+    const visualFirst = step > 0 ? 0 : buttons.length - 1;
+    const visualLast  = step > 0 ? buttons.length - 1 : 0;
+
+    switch (event.key) {
+      case 'ArrowDown': {
+        event.preventDefault();
+        const next = (currentIdx + step + buttons.length) % buttons.length;
+        buttons[next].focus({ preventScroll: true });
+        break;
+      }
+      case 'ArrowUp': {
+        event.preventDefault();
+        const prev = (currentIdx - step + buttons.length) % buttons.length;
+        buttons[prev].focus({ preventScroll: true });
+        break;
+      }
+      case 'Home':
+        event.preventDefault();
+        buttons[visualFirst].focus({ preventScroll: true });
+        break;
+      case 'End':
+        event.preventDefault();
+        buttons[visualLast].focus({ preventScroll: true });
+        break;
+      case 'Escape':
+        if (this.effectiveCloseOnEsc()) {
+          event.preventDefault();
+          this.close();
+        }
+        break;
+      case 'Tab':
+        this.close();
+        break;
     }
   }
 
@@ -317,6 +432,7 @@ export class FabButtonComponent implements OnDestroy {
   // TEMPLATE HANDLERS
   // ========================================================================
 
+  /** Mouse-click handler on the trigger (keyboard is handled in handleTriggerKeydown). */
   handleTriggerClick(): void {
     if (this.disabled()) return;
     this.toggle();
@@ -636,6 +752,61 @@ export class FabButtonComponent implements OnDestroy {
       [FabButtonDirectionEnum.UP_RIGHT]: -Math.PI / 4,
     };
     return map[direction];
+  }
+
+  // ========================================================================
+  // FOCUS MANAGEMENT HELPERS (WAI-ARIA menu navigation)
+  // ========================================================================
+
+  /**
+   * Opens the menu and moves focus to the visually-first or visually-last
+   * enabled item, taking the expansion direction into account.
+   *
+   * For upward expansions the DOM order is inverted relative to the visual
+   * reading order (item 0 is nearest = visually bottom). We compensate so
+   * ‘visual-first’ always means the topmost visible item.
+   */
+  private _openAndFocus(target: 'visual-first' | 'visual-last'): void {
+    if (this.disabled()) return;
+    this._setExpanded(true);
+    queueMicrotask(() => {
+      const btns = this._getEnabledMenuItems();
+      if (!btns.length) return;
+      const step = this._getNavStep();
+      // step > 0: DOM order matches visual order (index 0 = visual top)
+      // step < 0: DOM order is inverted (index 0 = visual bottom)
+      const visualFirstIdx = step > 0 ? 0 : btns.length - 1;
+      const visualLastIdx  = step > 0 ? btns.length - 1 : 0;
+      const idx = target === 'visual-first' ? visualFirstIdx : visualLastIdx;
+      btns[idx]?.focus({ preventScroll: true });
+    });
+  }
+
+  /**
+   * Navigation step based on the current expansion direction.
+   *
+   * Returns +1 for downward / rightward / radial layouts (standard order).
+   * Returns -1 for upward directions so ArrowDown always moves focus
+   * toward the trigger and ArrowUp moves it away — matching the visual layout.
+   */
+  private _getNavStep(): 1 | -1 {
+    if (this.effectiveLayout() !== 'linear') return 1;
+    const dir = this.effectiveDirection();
+    return (dir === 'up' || dir === 'up-left' || dir === 'up-right') ? -1 : 1;
+  }
+
+  /**
+   * Returns all non-disabled focusable item elements inside the menu list.
+   * Covers both <button> and <a> rendered items.
+   */
+  private _getEnabledMenuItems(): (HTMLButtonElement | HTMLAnchorElement)[] {
+    const list = this.itemsList()?.nativeElement;
+    if (!list) return [];
+    return Array.from(
+      list.querySelectorAll<HTMLButtonElement | HTMLAnchorElement>(
+        '.nui-fab__item-btn:not([disabled]):not([aria-disabled="true"])'
+      )
+    );
   }
 
   // ========================================================================

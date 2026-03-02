@@ -19,6 +19,7 @@
     type="button"
     [disabled]="disabled()"
     [attr.aria-expanded]="isOpen()"
+    [attr.aria-haspopup]="'menu'"
     [attr.aria-controls]="itemsId"
     [attr.aria-label]="triggerAriaLabel()"
     (click)="handleTriggerClick()"
@@ -27,11 +28,13 @@
   </button>
 
   <ul
+    #itemsList
     class="nui-fab__items"
     role="menu"
     [id]="itemsId"
     [attr.aria-hidden]="!isOpen()"
     [attr.aria-label]="ariaLabel()"
+    [attr.inert]="isOpen() ? null : ''"
   >
     @for (item of resolvedItems(); track trackItem($index, item)) {
       <li
@@ -60,6 +63,7 @@
             [attr.data-color]="item.color ?? null"
             [attr.data-size]="item.size ?? null"
             [attr.data-variant]="item.variant ?? null"
+            [attr.tabindex]="-1"
             [style.--nui-fab-item-bg]="item.backgroundColor ?? null"
             [style.--nui-fab-item-color]="item.textColor ?? null"
             (click)="handleItemClick(item, $event)"
@@ -84,6 +88,7 @@
             [attr.data-color]="item.color ?? null"
             [attr.data-size]="item.size ?? null"
             [attr.data-variant]="item.variant ?? null"
+            [attr.tabindex]="-1"
             [style.--nui-fab-item-bg]="item.backgroundColor ?? null"
             [style.--nui-fab-item-color]="item.textColor ?? null"
             (click)="handleItemClick(item, $event)"
