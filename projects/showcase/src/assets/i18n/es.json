@@ -1582,6 +1582,8 @@
       }
     },
     "fabButton": {
+      "title": "FAB Button",
+      "subtitle": "Botón de acción flotante con layouts radiales y múltiples opciones de personalización",
       "scenarios": {
         "mobile": {
           "title": "App móvil (FAB principal con layout linear)",
