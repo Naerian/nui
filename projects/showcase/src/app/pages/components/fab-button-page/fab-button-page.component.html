@@ -31,254 +31,143 @@
             @switch (section.id) {
               <!-- ─ Scenario 1: Mobile App ────────────────────── -->
               @case ('scenario-mobile') {
-                <div class="fab-scenario fab-scenario--mobile">
-                  <!-- Chrome: status bar + simulated content -->
-                  <div class="fab-scenario__chrome">
-                    <div class="fab-scenario__chrome-bar">
-                      <div class="fab-scenario__chrome-signal">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                      </div>
-                      <span class="fab-scenario__chrome-title">My notes</span>
+                <div class="example-preview fab-demo">
+                  <div class="fab-demo__list">
+                    <div class="fab-demo__list-item">
+                      <i class="ri-file-text-line"></i>
+                      <span>This is a note title</span>
+                    </div>
+                    <div class="fab-demo__list-item">
+                      <i class="ri-image-line"></i>
+                      <span>Another note with an image</span>
+                    </div>
+                    <div class="fab-demo__list-item">
+                      <i class="ri-links-line"></i>
+                      <span>A third note with a link</span>
                     </div>
                   </div>
-                  <!-- Simulated list content -->
-                  <div class="fab-scenario__body">
-                    <div class="fab-scenario__list-item">
-                      <div class="fab-scenario__list-icon"><i class="ri-file-text-line"></i></div>
-                      <div class="fab-scenario__list-content">
-                        <div class="fab-scenario__line fab-scenario__line--title">
-                          This is a note title
-                        </div>
-                      </div>
-                    </div>
-                    <div class="fab-scenario__list-item">
-                      <div class="fab-scenario__list-icon"><i class="ri-image-line"></i></div>
-                      <div class="fab-scenario__list-content">
-                        <div class="fab-scenario__line fab-scenario__line--title">
-                          Another note with an image
-                        </div>
-                      </div>
-                    </div>
-                    <div class="fab-scenario__list-item">
-                      <div class="fab-scenario__list-icon"><i class="ri-links-line"></i></div>
-                      <div class="fab-scenario__list-content">
-                        <div class="fab-scenario__line fab-scenario__line--title">
-                          A third note with a link
-                        </div>
-                      </div>
-                    </div>
-                    <!-- FAB: bottom right corner -->
-                    <div class="fab-scenario__anchor fab-scenario__anchor--br">
-                      <nui-fab-button
-                        direction="up"
-                        layout="linear"
-                        shape="circular"
-                        color="primary"
-                        animation="scale"
-                        [items]="mobileActions"
-                      />
-                    </div>
+                  <div class="fab-demo__anchor--br">
+                    <nui-fab-button
+                      direction="up"
+                      layout="linear"
+                      shape="circular"
+                      color="primary"
+                      animation="scale"
+                      [items]="mobileActions"
+                    />
                   </div>
                 </div>
               }
 
               <!-- ─ Scenario 2: Dashboard ───────────────────── -->
               @case ('scenario-dashboard') {
-                <div class="fab-scenario fab-scenario--dashboard">
-                  <!-- Simulated header -->
-                  <div class="fab-scenario__chrome">
-                    <div class="fab-scenario__chrome-bar">
-                      <span class="fab-scenario__chrome-title">Analytics Dashboard</span>
-                      <div class="fab-scenario__chrome-avatar"></div>
-                    </div>
+                <div class="example-preview fab-demo">
+                  <div class="fab-demo__chart">
+                    <span style="--h: 55%"></span>
+                    <span style="--h: 80%"></span>
+                    <span style="--h: 45%"></span>
+                    <span style="--h: 70%"></span>
+                    <span style="--h: 90%"></span>
+                    <span style="--h: 60%"></span>
+                    <span style="--h: 75%"></span>
                   </div>
-                  <!-- Dashboard-like body with cards and chart -->
-                  <div class="fab-scenario__body fab-scenario__body--dashboard">
-                    <div class="fab-scenario__kpi-row">
-                      <div class="fab-scenario__kpi">
-                        <div class="fab-scenario__line fab-scenario__line--xs"></div>
-                        <div class="fab-scenario__line fab-scenario__line--kpi"></div>
-                      </div>
-                      <div class="fab-scenario__kpi">
-                        <div class="fab-scenario__line fab-scenario__line--xs"></div>
-                        <div class="fab-scenario__line fab-scenario__line--kpi"></div>
-                      </div>
-                      <div class="fab-scenario__kpi">
-                        <div class="fab-scenario__line fab-scenario__line--xs"></div>
-                        <div class="fab-scenario__line fab-scenario__line--kpi"></div>
-                      </div>
-                    </div>
-                    <div class="fab-scenario__chart-block">
-                      <div class="fab-scenario__chart-bars">
-                        <span style="--h: 55%"></span>
-                        <span style="--h: 80%"></span>
-                        <span style="--h: 45%"></span>
-                        <span style="--h: 70%"></span>
-                        <span style="--h: 90%"></span>
-                        <span style="--h: 60%"></span>
-                        <span style="--h: 75%"></span>
-                      </div>
-                    </div>
-                    <!-- FAB: bottom right corner, semi-circle -->
-                    <div class="fab-scenario__anchor fab-scenario__anchor--br">
-                      <nui-fab-button
-                        layout="semi-circle"
-                        direction="up-left"
-                        shape="circular"
-                        color="accent"
-                        variant="solid"
-                        [backdrop]="true"
-                        [items]="dashboardActions"
-                      />
-                    </div>
+                  <div class="fab-demo__anchor--br">
+                    <nui-fab-button
+                      layout="semi-circle"
+                      direction="left"
+                      shape="circular"
+                      color="accent"
+                      variant="solid"
+                      [backdrop]="true"
+                      [items]="dashboardActions"
+                    />
                   </div>
                 </div>
               }
 
               <!-- ─ Scenario 3: Card contextual ──────────────── -->
               @case ('scenario-card') {
-                <div class="fab-scenario fab-scenario--card">
-                  <div class="fab-scenario__chrome">
-                    <div class="fab-scenario__chrome-bar">
-                      <span class="fab-scenario__chrome-title">Projects</span>
-                      <div class="fab-scenario__chrome-signal">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                <div class="example-preview fab-demo fab-demo--cards">
+                  @for (card of scenarioCards; track card.title) {
+                    <div
+                      class="fab-demo__card"
+                      [class.fab-demo__card--featured]="card.featured"
+                    >
+                      @if (card.featured) {
+                        <div class="fab-demo__anchor--tr">
+                          <nui-fab-button
+                            layout="linear"
+                            direction="left"
+                            shape="circular"
+                            color="neutral"
+                            variant="solid"
+                            size="sm"
+                            triggerIcon="ri-more-2-fill"
+                            [items]="cardActions"
+                          />
+                        </div>
+                      }
+                      <div class="fab-demo__card-header">
+                        <div class="fab-demo__card-icon"><i [class]="card.icon"></i></div>
+                        <div class="fab-demo__card-meta">
+                          <div class="fab-demo__line fab-demo__line--title"></div>
+                          <div class="fab-demo__line"></div>
+                        </div>
+                      </div>
+                      <div class="fab-demo__card-body">
+                        <div class="fab-demo__line"></div>
+                        <div class="fab-demo__line fab-demo__line--md"></div>
+                        <div class="fab-demo__line fab-demo__line--sm"></div>
+                      </div>
+                      <div class="fab-demo__card-tags">
+                        <span class="fab-demo__tag"></span>
+                        <span class="fab-demo__tag fab-demo__tag--accent"></span>
                       </div>
                     </div>
-                  </div>
-                  <div class="fab-scenario__body fab-scenario__body--cards">
-                    @for (card of scenarioCards; track card.title) {
-                      <div
-                        class="fab-scenario__card"
-                        [class.fab-scenario__card--featured]="card.featured"
-                      >
-                        <!-- FAB only on the first card -->
-                        @if (card.featured) {
-                          <div class="fab-scenario__anchor fab-scenario__anchor--card-tr">
-                            <nui-fab-button
-                              layout="linear"
-                              direction="left"
-                              shape="circular"
-                              color="neutral"
-                              variant="solid"
-                              size="sm"
-                              triggerIcon="ri-more-2-fill"
-                              [items]="cardActions"
-                            />
-                          </div>
-                        }
-                        <div class="fab-scenario__card-header">
-                          <div class="fab-scenario__card-icon"><i [class]="card.icon"></i></div>
-                          <div class="fab-scenario__card-meta">
-                            <div class="fab-scenario__line fab-scenario__line--card-title"></div>
-                            <div class="fab-scenario__line fab-scenario__line--xs"></div>
-                          </div>
-                        </div>
-                        <div class="fab-scenario__card-body">
-                          <div class="fab-scenario__line"></div>
-                          <div class="fab-scenario__line fab-scenario__line--md"></div>
-                          <div class="fab-scenario__line fab-scenario__line--sm"></div>
-                        </div>
-                        <div class="fab-scenario__card-tags">
-                          <span class="fab-scenario__tag"></span>
-                          <span class="fab-scenario__tag fab-scenario__tag--accent"></span>
-                        </div>
-                      </div>
-                    }
-                  </div>
+                  }
                 </div>
               }
 
               <!-- ─ Scenario 4: Radial Menu ──────────────────── -->
               @case ('scenario-radial') {
-                <div class="fab-scenario fab-scenario--radial">
-                  <div class="fab-scenario__chrome">
-                    <div class="fab-scenario__chrome-bar">
-                      <span class="fab-scenario__chrome-title">Radial Navigation</span>
-                      <div class="fab-scenario__chrome-signal">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="fab-scenario__body fab-scenario__body--centered">
-                    <div class="fab-scenario__radial-hint">
-                      <i class="ri-arrow-up-line"></i>
-                      <span>press the central button</span>
-                    </div>
-                    <div class="fab-scenario__anchor fab-scenario__anchor--center">
-                      <nui-fab-button
-                        layout="circle"
-                        shape="circular"
-                        color="secondary"
-                        animation="scale"
-                        triggerIcon="ri-apps-2-line"
-                        [items]="radialActions"
-                      />
-                    </div>
-                  </div>
+                <div class="example-preview fab-demo">
+                  <nui-fab-button
+                    layout="circle"
+                    shape="circular"
+                    color="secondary"
+                    animation="scale"
+                    triggerIcon="ri-apps-2-line"
+                    [items]="radialActions"
+                  />
                 </div>
               }
 
               <!-- ─ Scenario 5: Side Panel ────────────────── -->
               @case ('scenario-panel') {
-                <div class="fab-scenario fab-scenario--panel">
-                  <div class="fab-scenario__chrome">
-                    <div class="fab-scenario__chrome-bar">
-                      <span class="fab-scenario__chrome-title">Record List</span>
-                      <div class="fab-scenario__chrome-signal">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                      </div>
-                    </div>
+                <div class="example-preview fab-demo fab-demo--panel">
+                  <div class="fab-demo__anchor--tl">
+                    <nui-fab-button
+                      layout="quarter-circle"
+                      direction="down-right"
+                      shape="circular"
+                      color="info"
+                      variant="solid"
+                      triggerIcon="ri-layout-3-line"
+                      [items]="panelActions"
+                    />
                   </div>
-                  <div class="fab-scenario__body fab-scenario__body--panel">
-                    <!-- Main Content -->
-                    <div class="fab-scenario__main">
-                      <!-- FAB: top-left corner with quarter-circle -->
-                      <div class="fab-scenario__anchor fab-scenario__anchor--tl">
-                        <nui-fab-button
-                          layout="quarter-circle"
-                          direction="down-right"
-                          shape="circular"
-                          color="info"
-                          variant="solid"
-                          triggerIcon="ri-layout-3-line"
-                          [items]="panelActions"
-                        />
-                      </div>
-                      <div class="fab-scenario__table-mock">
-                        <div class="fab-scenario__table-row fab-scenario__table-row--header">
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                        </div>
-                        <div class="fab-scenario__table-row">
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                        </div>
-                        <div class="fab-scenario__table-row">
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                        </div>
-                        <div class="fab-scenario__table-row">
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                        </div>
-                      </div>
+                  <div class="fab-demo__table">
+                    <div class="fab-demo__table-row fab-demo__table-row--header">
+                      <span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="fab-demo__table-row">
+                      <span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="fab-demo__table-row">
+                      <span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="fab-demo__table-row">
+                      <span></span><span></span><span></span><span></span>
                     </div>
                   </div>
                 </div>
@@ -286,112 +175,69 @@
 
               <!-- ─ Scenario 6: Custom Templates ────────────── -->
               @case ('scenario-custom') {
-                <div class="fab-scenario fab-scenario--custom">
-                  <div class="fab-scenario__chrome">
-                    <div class="fab-scenario__chrome-bar">
-                      <span class="fab-scenario__chrome-title">Issue Tracker</span>
-                      <div class="fab-scenario__chrome-signal">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                      </div>
-                    </div>
-                    <!-- Sub-tab bar -->
-                    <div class="fab-scenario__issue-tabs">
-                      <span class="fab-scenario__issue-tab fab-scenario__issue-tab--active">
-                        Open&nbsp;
-                        <em>4</em>
-                      </span>
-                      <span class="fab-scenario__issue-tab">
-                        Closed&nbsp;
-                        <em>12</em>
-                      </span>
-                      <span class="fab-scenario__issue-tab">All</span>
+                <div class="example-preview fab-demo fab-demo--issues">
+                  <div class="fab-demo__issue-row">
+                    <span class="fab-demo__issue-dot fab-demo__issue-dot--danger"></span>
+                    <div class="fab-demo__issue-content">
+                      <span class="fab-demo__issue-title">Login fails on Safari 17</span>
+                      <span class="fab-demo__issue-meta">#247 &middot; opened 2h ago</span>
                     </div>
                   </div>
-                  <div class="fab-scenario__body fab-scenario__body--issues">
-                    <div class="fab-scenario__issue-row">
-                      <span class="fab-scenario__issue-dot fab-scenario__issue-dot--danger"></span>
-                      <div class="fab-scenario__issue-content">
-                        <span class="fab-scenario__issue-title">Login fails on Safari 17</span>
-                        <span class="fab-scenario__issue-meta">#247 &middot; opened 2h ago</span>
-                      </div>
+                  <div class="fab-demo__issue-row">
+                    <span class="fab-demo__issue-dot fab-demo__issue-dot--success"></span>
+                    <div class="fab-demo__issue-content">
+                      <span class="fab-demo__issue-title">Add dark mode toggle</span>
+                      <span class="fab-demo__issue-meta">#246 &middot; opened 5h ago</span>
                     </div>
-                    <div class="fab-scenario__issue-row">
-                      <span class="fab-scenario__issue-dot fab-scenario__issue-dot--success"></span>
-                      <div class="fab-scenario__issue-content">
-                        <span class="fab-scenario__issue-title">Add dark mode toggle</span>
-                        <span class="fab-scenario__issue-meta">#246 &middot; opened 5h ago</span>
-                      </div>
+                  </div>
+                  <div class="fab-demo__issue-row">
+                    <span class="fab-demo__issue-dot fab-demo__issue-dot--info"></span>
+                    <div class="fab-demo__issue-content">
+                      <span class="fab-demo__issue-title">Improve onboarding flow UX</span>
+                      <span class="fab-demo__issue-meta">#245 &middot; opened 1d ago</span>
                     </div>
-                    <div class="fab-scenario__issue-row">
-                      <span class="fab-scenario__issue-dot fab-scenario__issue-dot--info"></span>
-                      <div class="fab-scenario__issue-content">
-                        <span class="fab-scenario__issue-title">Improve onboarding flow UX</span>
-                        <span class="fab-scenario__issue-meta">#245 &middot; opened 1d ago</span>
-                      </div>
+                  </div>
+                  <div class="fab-demo__issue-row">
+                    <span class="fab-demo__issue-dot fab-demo__issue-dot--warning"></span>
+                    <div class="fab-demo__issue-content">
+                      <span class="fab-demo__issue-title">Performance regression in list view</span>
+                      <span class="fab-demo__issue-meta">#244 &middot; opened 2d ago</span>
                     </div>
-                    <div class="fab-scenario__issue-row">
-                      <span class="fab-scenario__issue-dot fab-scenario__issue-dot--warning"></span>
-                      <div class="fab-scenario__issue-content">
-                        <span class="fab-scenario__issue-title">
-                          Performance regression in list view
+                  </div>
+                  <div class="fab-demo__anchor--br">
+                    <nui-fab-button
+                      layout="linear"
+                      direction="up"
+                      shape="rounded"
+                      color="primary"
+                      variant="solid"
+                      spacing="4.5rem"
+                      [items]="customTemplateActions"
+                    >
+                      <ng-template fabTrigger let-open="isOpen">
+                        <span class="fab-demo-trigger">
+                          <i [class]="open ? 'ri-close-line' : 'ri-add-line'"></i>
+                          @if (!open) {
+                            <span class="fab-demo-trigger-label">New</span>
+                          }
                         </span>
-                        <span class="fab-scenario__issue-meta">#244 &middot; opened 2d ago</span>
-                      </div>
-                    </div>
-
-                    <!-- FAB: bottom-right, pills con icón + label per item -->
-                    <div class="fab-scenario__anchor fab-scenario__anchor--br">
-                      <nui-fab-button
-                        layout="linear"
-                        direction="up"
-                        shape="rounded"
-                        color="primary"
-                        variant="solid"
-                        spacing="3.75rem"
-                        [items]="customTemplateActions"
-                      >
-                        <!-- Trigger custom: icono rotativo + label "New" -->
-                        <ng-template fabTrigger let-open="isOpen">
-                          <span class="fab-demo-trigger">
-                            <i [class]="open ? 'ri-close-line' : 'ri-add-line'"></i>
-                            @if (!open) {
-                              <span class="fab-demo-trigger-label">New</span>
-                            }
-                          </span>
-                        </ng-template>
-
-                        <!-- Item custom: pill con icono semántico + texto -->
-                        <ng-template fabItem let-item>
-                          <span class="fab-demo-item">
-                            <i [class]="item.icon"></i>
-                            @if (item.label) {
-                              <span class="fab-demo-item-label">{{ item.label }}</span>
-                            }
-                          </span>
-                        </ng-template>
-                      </nui-fab-button>
-                    </div>
+                      </ng-template>
+                      <ng-template fabItem let-item>
+                        <span class="fab-demo-item">
+                          <i [class]="item.icon"></i>
+                          @if (item.label) {
+                            <span class="fab-demo-item-label">{{ item.label }}</span>
+                          }
+                        </span>
+                      </ng-template>
+                    </nui-fab-button>
                   </div>
                 </div>
               }
 
               <!-- ─ Scenario 7: Extended FAB features ───────── -->
               @case ('scenario-extended') {
-                <div class="fab-scenario fab-scenario--extended">
-                  <div class="fab-scenario__chrome">
-                    <div class="fab-scenario__chrome-bar">
-                      <span class="fab-scenario__chrome-title">Extended FAB features</span>
-                      <div class="fab-scenario__chrome-signal">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="fab-scenario__body fab-scenario__body--ext-grid">
+                <div class="example-preview fab-demo--ext-grid">
                     <!-- Card 1: Extended FAB (triggerLabel + triggerIconOpen + badge) -->
                     <div class="fab-ext-card">
                       <span class="fab-ext-card__label">Extended FAB + Badge</span>
@@ -538,7 +384,6 @@
                         />
                       </div>
                     </div>
-                  </div>
                 </div>
               }
             }

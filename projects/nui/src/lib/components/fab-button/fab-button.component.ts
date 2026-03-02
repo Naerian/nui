@@ -551,6 +551,14 @@ export class FabButtonComponent implements OnDestroy {
   /** Mouse-click handler on the trigger (keyboard is handled in handleTriggerKeydown). */
   handleTriggerClick(): void {
     if (this.disabled() || this.loading()) return;
+    // In hover mode on touch devices, the browser synthesizes a `click` event
+    // immediately after the `touchend` that also triggered `mouseenter` → open().
+    // If we toggled here the dial would close on the very first tap.
+    // Consume the flag and bail out — the dial is already open.
+    if (this._touchTriggeredOpen) {
+      this._touchTriggeredOpen = false;
+      return;
+    }
     // In hover mode a click still toggles (keyboard/touch accessibility fallback)
     this.toggle();
   }
@@ -565,8 +573,27 @@ export class FabButtonComponent implements OnDestroy {
    * intermediate elements.  The browser sees the pointer enter the page
    * background (outside any host descendant) and fires `mouseleave` on the host.
    * A 120 ms grace-period lets the pointer cross that gap without closing the dial.
+   *
+   * MOBILE / TOUCH: mobile browsers synthesize a `mouseenter` event from a tap,
+   * immediately followed by a synthetic `click`.  Without special handling the
+   * sequence is: touch → mouseenter (opens) → click → toggle() → closes — so
+   * the user must tap twice.  We detect this by comparing `touchstart` and
+   * `mouseenter` timestamps: if they are within 400 ms we consider the
+   * mouseenter touch-triggered and suppress the subsequent synthetic click.
    */
   private _hoverLeaveTimer: ReturnType<typeof setTimeout> | null = null;
+  /** Timestamp of the last `touchstart` on this host (0 on pointer-only devices). */
+  private _lastTouchTime = 0;
+  /**
+   * True when `mouseenter` just opened the dial via a touch-triggered event.
+   * Cleared as soon as the first synthetic click is consumed.
+   */
+  private _touchTriggeredOpen = false;
+
+  @HostListener('touchstart')
+  _onHostTouchStart(): void {
+    this._lastTouchTime = Date.now();
+  }
 
   @HostListener('mouseenter')
   _onHostMouseEnter(): void {
@@ -575,6 +602,10 @@ export class FabButtonComponent implements OnDestroy {
       this._hoverLeaveTimer = null;
     }
     if (this.effectiveOpenOn() === 'hover' && !this.disabled() && !this.loading()) {
+      // Mark as touch-triggered when: dial is currently closed AND the mouseenter
+      // arrived within 400 ms of a touchstart (mobile synthetic event window).
+      this._touchTriggeredOpen =
+        !this.isOpen() && Date.now() - this._lastTouchTime < 400;
       this.open();
     }
   }

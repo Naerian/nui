@@ -54,7 +54,7 @@ mobileActions: FabButtonItem[] = [
         code: `<nui-fab-button
   style="position: absolute; bottom: 1.5rem; right: 1.5rem"
   layout="semi-circle"
-  direction="up-left"
+  direction="left"
   shape="circular"
   color="accent"
   variant="solid"
@@ -185,7 +185,7 @@ mobileActions: FabButtonItem[] = [
   direction="up"
   shape="rounded"
   color="primary"
-  spacing="3.75rem"
+  spacing="4.5rem"
   [items]="customTemplateActions"
 >
   <!-- fabTrigger: rotative close/add icon + "New" label -->
