@@ -16,32 +16,15 @@ $fab-radius: 4rem !default;
 $fab-spacing: 3.5rem !default;
 
 // ── Button sizes ────────────────────────────────────────────
-/// Diameter of the main trigger button (per size token)
-$fab-trigger-size-xs: 2rem    !default;
-$fab-trigger-size-sm: 2.25rem !default;
-$fab-trigger-size-md: 3rem    !default;
-$fab-trigger-size-lg: 3.5rem  !default;
-$fab-trigger-size-xl: 4rem    !default;
-
-/// Diameter of each action item button (per size token)
-$fab-item-size-xs: 1.75rem  !default;
-$fab-item-size-sm: 2rem     !default;
-$fab-item-size-md: 2.5rem   !default;
-$fab-item-size-lg: 2.75rem  !default;
-$fab-item-size-xl: 3.25rem  !default;
-
-// ── Icon sizes ──────────────────────────────────────────────
-$fab-trigger-icon-xs: 1rem    !default;
-$fab-trigger-icon-sm: 1.125rem !default;
-$fab-trigger-icon-md: 1.5rem  !default;
-$fab-trigger-icon-lg: 1.75rem !default;
-$fab-trigger-icon-xl: 2rem    !default;
-
-$fab-item-icon-xs: 0.875rem !default;
-$fab-item-icon-sm: 1rem     !default;
-$fab-item-icon-md: 1.125rem !default;
-$fab-item-icon-lg: 1.25rem  !default;
-$fab-item-icon-xl: 1.5rem   !default;
+// Trigger and item sizes now derive from the global --nui-height-{size} tokens
+// via nui-control-size() — no explicit per-size SCSS variables needed.
+// Items use one size step smaller than the container size (see _fab-button.scss).
+//
+// Icon sizes are calculated as a fraction of the button height:
+//   trigger icon: --nui-height-{size} * $fab-trigger-icon-scale  (default 0.50)
+//   item icon:    --nui-height-{item-size} * $fab-item-icon-scale (default 0.45)
+$fab-trigger-icon-scale: 0.50 !default;
+$fab-item-icon-scale:    0.45 !default;
 
 // ── Animation tokens ────────────────────────────────────────
 /// Duration of the enter/leave transition for items
@@ -95,30 +78,9 @@ $fab-focus-offset: 0.125rem !default;
   --nui-fab-focus-width:   #{$fab-focus-width};
   --nui-fab-focus-offset:  #{$fab-focus-offset};
 
-  // ── Size tokens: trigger ─────────────────────────────────
-  --nui-fab-trigger-size-xs:  #{$fab-trigger-size-xs};
-  --nui-fab-trigger-size-sm:  #{$fab-trigger-size-sm};
-  --nui-fab-trigger-size-md:  #{$fab-trigger-size-md};
-  --nui-fab-trigger-size-lg:  #{$fab-trigger-size-lg};
-  --nui-fab-trigger-size-xl:  #{$fab-trigger-size-xl};
-
-  // ── Size tokens: items ───────────────────────────────────
-  --nui-fab-item-size-xs:     #{$fab-item-size-xs};
-  --nui-fab-item-size-sm:     #{$fab-item-size-sm};
-  --nui-fab-item-size-md:     #{$fab-item-size-md};
-  --nui-fab-item-size-lg:     #{$fab-item-size-lg};
-  --nui-fab-item-size-xl:     #{$fab-item-size-xl};
-
-  // ── Icon size tokens ─────────────────────────────────────
-  --nui-fab-trigger-icon-xs:  #{$fab-trigger-icon-xs};
-  --nui-fab-trigger-icon-sm:  #{$fab-trigger-icon-sm};
-  --nui-fab-trigger-icon-md:  #{$fab-trigger-icon-md};
-  --nui-fab-trigger-icon-lg:  #{$fab-trigger-icon-lg};
-  --nui-fab-trigger-icon-xl:  #{$fab-trigger-icon-xl};
-
-  --nui-fab-item-icon-xs:     #{$fab-item-icon-xs};
-  --nui-fab-item-icon-sm:     #{$fab-item-icon-sm};
-  --nui-fab-item-icon-md:     #{$fab-item-icon-md};
-  --nui-fab-item-icon-lg:     #{$fab-item-icon-lg};
-  --nui-fab-item-icon-xl:     #{$fab-item-icon-xl};
+  // ── Icon scale factors ──────────────────────────────────
+  // These are unitless multipliers applied to --nui-height-{size} in CSS calc().
+  // Override them to globally resize FAB icons without touching per-size rules.
+  --nui-fab-trigger-icon-scale: #{$fab-trigger-icon-scale};
+  --nui-fab-item-icon-scale:    #{$fab-item-icon-scale};
 }

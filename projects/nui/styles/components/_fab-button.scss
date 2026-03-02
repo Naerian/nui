@@ -1,5 +1,7 @@
 @use '../abstracts/mixins' as global;
+@use '../abstracts/mixins-base' as base;
 @use '../variables/fab-button-vars' as vars;
+@use 'sass:map';
 
 // ============================================================
 // THEME MIXINS
@@ -99,9 +101,10 @@
     color:            var(--nui-fab-trigger-text);
     border:           1px solid var(--nui-fab-trigger-border, transparent);
 
-    // Default size (md) — overridden per size class
-    width:  var(--nui-fab-trigger-size-md);
-    height: var(--nui-fab-trigger-size-md);
+    // Default size (md) — overridden per size class via nui-control-size in SIZE MODIFIERS.
+    // Width/height equal the global height token so FABs are always square.
+    width:  var(--nui-height-md);
+    height: var(--nui-height-md);
 
     // Elevation (FAB always elevated)
     box-shadow: var(--nui-shadow-interactive-rest);
@@ -141,7 +144,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--nui-fab-trigger-icon-md);
+    // Default (md): 50 % of --nui-height-md. Overridden per size in SIZE MODIFIERS.
+    font-size: calc(var(--nui-height-md) * var(--nui-fab-trigger-icon-scale, 0.5));
     line-height: 1;
     color: currentColor;
     transition: transform var(--nui-fab-anim-duration) var(--nui-fab-anim-easing);
@@ -253,9 +257,10 @@
     text-decoration: none;
     line-height: 1;
 
-    // Default size (md) — overridden per size class
-    width:  var(--nui-fab-item-size-md);
-    height: var(--nui-fab-item-size-md);
+    // Default size (md-items = sm height token, one step below md trigger).
+    // Overridden per size class via nui-control-size in SIZE MODIFIERS.
+    width:  var(--nui-height-sm);
+    height: var(--nui-height-sm);
 
     // Colours (set via theme mixin classes / per-item data attrs)
     background-color: var(--nui-fab-item-bg);
@@ -301,7 +306,9 @@
       justify-content: center;
       width: 1em;
       height: 1em;
-      font-size: var(--nui-fab-item-icon-md);
+      // Default: 45 % of --nui-height-sm (item size for md container).
+      // Overridden per size in SIZE MODIFIERS.
+      font-size: calc(var(--nui-height-sm) * var(--nui-fab-item-icon-scale, 0.45));
       line-height: 1;
       color: currentColor;
     }
@@ -361,27 +368,47 @@
 
   // ----------------------------------------------------------
   // ── SIZE MODIFIERS ────────────────────────────────────────
+  // Uses nui-control-size() — same pattern as nui-btn — so FAB sizes stay
+  // in sync with the global --nui-height-* / --nui-font-size-* design tokens.
+  //
+  // Items are rendered one size step smaller than the trigger:
+  //   xs  → items use xs   (can't go lower)
+  //   sm  → items use xs
+  //   md  → items use sm
+  //   lg  → items use md
+  //   xl  → items use lg
   // ----------------------------------------------------------
   $sizes: xs, sm, md, lg, xl;
+  $fab-item-size-map: (xs: xs, sm: xs, md: sm, lg: md, xl: lg);
 
   @each $size in $sizes {
+    $item-size: map.get($fab-item-size-map, $size);
+
     .nui-fab__container.nui-fab--#{$size} {
+
+      // ── Trigger ──────────────────────────────────────────
       .nui-fab__trigger {
-        width:     var(--nui-fab-trigger-size-#{$size});
-        height:    var(--nui-fab-trigger-size-#{$size});
-        font-size: var(--nui-fab-trigger-icon-#{$size});
+        @include base.nui-control-size($size, false);
+        // Icon-only button: remove all text padding (same as nui-btn--icon).
+        padding: 0 !important;
+        // Enforce a perfect square; nui-control-size sets min-height/min-width.
+        width:  var(--nui-height-#{$size});
+        height: var(--nui-height-#{$size});
       }
 
       .nui-fab__trigger-icon {
-        font-size: var(--nui-fab-trigger-icon-#{$size});
+        font-size: calc(var(--nui-height-#{$size}) * var(--nui-fab-trigger-icon-scale, 0.5));
       }
 
+      // ── Item buttons (one size step below trigger) ────────
       .nui-fab__item-btn {
-        width:     var(--nui-fab-item-size-#{$size});
-        height:    var(--nui-fab-item-size-#{$size});
+        @include base.nui-control-size($item-size, false);
+        padding: 0 !important;
+        width:  var(--nui-height-#{$item-size});
+        height: var(--nui-height-#{$item-size});
 
         i {
-          font-size: var(--nui-fab-item-icon-#{$size});
+          font-size: calc(var(--nui-height-#{$item-size}) * var(--nui-fab-item-icon-scale, 0.45));
         }
       }
     }
