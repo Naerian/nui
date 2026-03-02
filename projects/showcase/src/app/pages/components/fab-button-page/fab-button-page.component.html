@@ -1,0 +1,269 @@
+<div class="docs-page">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h1>{{ pageConfig.title | translate }}</h1>
+      <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
+    </div>
+
+    <app-component-tabs [tabs]="tabs" [sections]="pageConfig.sections" #tabsComp>
+      @if (tabsComp.activeSections(); as activeSections) {
+        @for (section of activeSections; track section.id) {
+          <div class="section">
+            <!-- Section title with anchor -->
+            <app-section-title
+              [anchor]="section.anchor"
+              [title]="section.title | translate"
+              [tabId]="tabsComp.activeTabId()"
+            ></app-section-title>
+
+            @if (section.description) {
+              <p class="section-description" [innerHTML]="section.description | translate"></p>
+            }
+
+            @if (section.note) {
+              <div class="section-note" [ngClass]="section.note.type">
+                @if (section.note.icon) {
+                  <i [class]="section.note.icon"></i>
+                }
+                <p [innerHTML]="section.note.content | translate"></p>
+              </div>
+            }
+
+            <!-- ─── Live preview per section ──────────────────── -->
+            @switch (section.id) {
+
+              <!-- ─ Basic ──────────────────────────────────── -->
+              @case ('basic') {
+                <div class="example-preview fab-preview--spacious">
+                  <nui-fab-button
+                    triggerIcon="ri-add-line"
+                    [items]="actions"
+                  />
+                </div>
+              }
+
+              <!-- ─ Directions ─────────────────────────────── -->
+              @case ('directions') {
+                <div class="example-preview fab-preview--grid">
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">up</span>
+                    <nui-fab-button direction="up"         [items]="actions" />
+                  </div>
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">down</span>
+                    <nui-fab-button direction="down"       [items]="actions" />
+                  </div>
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">left</span>
+                    <nui-fab-button direction="left"       [items]="actions" />
+                  </div>
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">right</span>
+                    <nui-fab-button direction="right"      [items]="actions" />
+                  </div>
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">up-left</span>
+                    <nui-fab-button direction="up-left"    [items]="actions" />
+                  </div>
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">up-right</span>
+                    <nui-fab-button direction="up-right"   [items]="actions" />
+                  </div>
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">down-left</span>
+                    <nui-fab-button direction="down-left"  [items]="actions" />
+                  </div>
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">down-right</span>
+                    <nui-fab-button direction="down-right" [items]="actions" />
+                  </div>
+                </div>
+              }
+
+              <!-- ─ Layouts ─────────────────────────────────── -->
+              @case ('layouts') {
+                <div class="example-preview fab-preview--grid">
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">linear</span>
+                    <nui-fab-button layout="linear"          direction="up" [items]="actions" />
+                  </div>
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">circle</span>
+                    <nui-fab-button layout="circle"          [items]="moreActions" />
+                  </div>
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">semi-circle</span>
+                    <nui-fab-button layout="semi-circle"     direction="up" [items]="actions" />
+                  </div>
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">quarter-circle</span>
+                    <nui-fab-button layout="quarter-circle"  direction="up-right" [items]="actions" />
+                  </div>
+                </div>
+              }
+
+              <!-- ─ Animations ─────────────────────────────── -->
+              @case ('animations') {
+                <div class="example-preview fab-preview--grid">
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">scale</span>
+                    <nui-fab-button animation="scale" [items]="actions" />
+                  </div>
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">fade</span>
+                    <nui-fab-button animation="fade"  [items]="actions" />
+                  </div>
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">slide</span>
+                    <nui-fab-button animation="slide" [items]="actions" />
+                  </div>
+                </div>
+              }
+
+              <!-- ─ Variants & Colors ───────────────────────── -->
+              @case ('variants-colors') {
+                <div class="example-preview flex-column">
+                  <!-- Solid row -->
+                  <div class="fab-row">
+                    <nui-fab-button color="primary"   variant="solid" [items]="actions" />
+                    <nui-fab-button color="secondary" variant="solid" [items]="actions" />
+                    <nui-fab-button color="accent"    variant="solid" [items]="actions" />
+                    <nui-fab-button color="success"   variant="solid" [items]="actions" />
+                    <nui-fab-button color="info"      variant="solid" [items]="actions" />
+                    <nui-fab-button color="warning"   variant="solid" [items]="actions" />
+                    <nui-fab-button color="danger"    variant="solid" [items]="actions" />
+                  </div>
+                  <!-- Outline row -->
+                  <div class="fab-row">
+                    <nui-fab-button color="primary"   variant="outline" [items]="actions" />
+                    <nui-fab-button color="secondary" variant="outline" [items]="actions" />
+                    <nui-fab-button color="accent"    variant="outline" [items]="actions" />
+                    <nui-fab-button color="success"   variant="outline" [items]="actions" />
+                    <nui-fab-button color="info"      variant="outline" [items]="actions" />
+                    <nui-fab-button color="warning"   variant="outline" [items]="actions" />
+                    <nui-fab-button color="danger"    variant="outline" [items]="actions" />
+                  </div>
+                  <!-- Ghost row -->
+                  <div class="fab-row">
+                    <nui-fab-button color="primary"   variant="ghost" [items]="actions" />
+                    <nui-fab-button color="secondary" variant="ghost" [items]="actions" />
+                    <nui-fab-button color="accent"    variant="ghost" [items]="actions" />
+                    <nui-fab-button color="success"   variant="ghost" [items]="actions" />
+                    <nui-fab-button color="info"      variant="ghost" [items]="actions" />
+                    <nui-fab-button color="warning"   variant="ghost" [items]="actions" />
+                    <nui-fab-button color="danger"    variant="ghost" [items]="actions" />
+                  </div>
+                </div>
+              }
+
+              <!-- ─ Shapes ──────────────────────────────────── -->
+              @case ('shapes') {
+                <div class="example-preview fab-preview--grid">
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">circular</span>
+                    <nui-fab-button shape="circular" [items]="actions" />
+                  </div>
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">rounded</span>
+                    <nui-fab-button shape="rounded"  [items]="actions" />
+                  </div>
+                  <div class="fab-preview__cell">
+                    <span class="fab-preview__label">square</span>
+                    <nui-fab-button shape="square"   [items]="actions" />
+                  </div>
+                </div>
+              }
+
+              <!-- ─ Sizes ───────────────────────────────────── -->
+              @case ('sizes') {
+                <div class="example-preview fab-preview--sizes">
+                  <nui-fab-button size="xs" [items]="actions" />
+                  <nui-fab-button size="sm" [items]="actions" />
+                  <nui-fab-button size="md" [items]="actions" />
+                  <nui-fab-button size="lg" [items]="actions" />
+                  <nui-fab-button size="xl" [items]="actions" />
+                </div>
+              }
+
+              <!-- ─ Backdrop ────────────────────────────────── -->
+              @case ('backdrop') {
+                <div class="example-preview fab-preview--spacious">
+                  <nui-fab-button [backdrop]="true" [items]="actions" />
+                </div>
+              }
+
+              <!-- ─ Per-item Colors ─────────────────────────── -->
+              @case ('item-colors') {
+                <div class="example-preview fab-preview--spacious">
+                  <nui-fab-button [items]="coloredActions" />
+                </div>
+              }
+
+              <!-- ─ Controlled ─────────────────────────────── -->
+              @case ('controlled') {
+                <div class="example-preview flex-column align-items-center">
+                  <nui-fab-button
+                    [expanded]="isOpen()"
+                    (expandedChange)="onExpandedChange($event)"
+                    [items]="actions"
+                  />
+                  <p class="fab-state-label">
+                    FAB state: <strong>{{ isOpen() ? 'open' : 'closed' }}</strong>
+                  </p>
+                </div>
+              }
+
+              <!-- ─ Events ──────────────────────────────────── -->
+              @case ('events') {
+                <div class="example-preview fab-preview--spacious">
+                  <nui-fab-button
+                    [items]="actions"
+                    (expandedChange)="onExpandedChange($event)"
+                    (itemClick)="onItemClick($event)"
+                  />
+                </div>
+              }
+
+              <!-- ─ Disabled ────────────────────────────────── -->
+              @case ('disabled') {
+                <div class="example-preview fab-preview--spacious">
+                  <nui-fab-button [disabled]="true" [items]="actions" />
+                </div>
+              }
+
+            }
+
+            <!-- API / Theming table -->
+            @if (section.table) {
+              <div class="api-table">
+                <table>
+                  <thead>
+                    <tr>
+                      @for (header of section.table.headers; track $index) {
+                        <th [innerHTML]="header | translate"></th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of section.table.rows; track $index) {
+                      <tr>
+                        @for (cell of row; track $index) {
+                          <td [innerHTML]="cell | translate"></td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+
+            <!-- Code blocks -->
+            @if (section.examples && section.examples.length > 0) {
+              <app-code-block [examples]="section.examples"></app-code-block>
+            }
+          </div>
+        }
+      }
+    </app-component-tabs>
+  </div>
+</div>

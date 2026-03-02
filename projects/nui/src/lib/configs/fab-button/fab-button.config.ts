@@ -1,105 +1,88 @@
 import { inject } from '@angular/core';
-import { TooltipPosition } from '../../components/tooltip';
-import { NUIColor, NUISize, NUIVariant } from '../common/types';
 import { NUI_CONFIG } from '../nui.token';
 import { deepMerge } from '../../utils/deep-merge';
+import { NUIColor, NUISize, NUIVariant } from '../common';
+import {
+  FabButtonAnimation,
+  FabButtonDirection,
+  FabButtonLayoutType,
+  FabButtonShape,
+} from '../../components/fab-button';
 
+// ============================================================
+// Config interface
+// ============================================================
 /**
- * Dirección en la que se despliegan los items del FAB
- * - up, down, left, right: Para layouts linear, circle, semi-circle
- * - up-left, up-right, down-left, down-right: Para layout quarter-circle
- */
-export type FabButtonDirection =
-  | 'up'
-  | 'down'
-  | 'left'
-  | 'right'
-  | 'up-left'
-  | 'up-right'
-  | 'down-left'
-  | 'down-right';
-
-/**
- * Tipo de animación para el despliegue de items
- */
-export type FabButtonAnimation = 'scale' | 'fade' | 'slide';
-
-/**
- * Tipo de layout para el despliegue de items
- */
-export type FabButtonLayoutType = 'linear' | 'circle' | 'semi-circle' | 'quarter-circle';
-
-/**
- * Forma del botón y sus items
- */
-export type FabButtonShape = 'circular' | 'rounded' | 'square';
-
-/**
- * Configuración de un item individual del FAB
- */
-export interface FabButtonItem {
-  id?: string;
-  icon?: string;
-  label?: string;
-  tooltip?: string;
-  tooltipPosition?: TooltipPosition;
-  tooltipDelay?: number;
-  color?: NUIColor;
-  size?: NUISize;
-  variant?: NUIVariant;
-  disabled?: boolean;
-  data?: any;
-  styleClass?: string;
-  url?: string;
-  target?: string;
-  command?: (event?: any) => void;
-  backgroundColor?: string;
-  textColor?: string;
-}
-
-/**
- * Configuración global del componente FAB Button
+ * Global configuration for the FabButton component.
+ * All fields are optional; unset fields fall back to DEFAULT_FAB_BUTTON_CONFIG.
  */
 export interface FabButtonConfig {
+  /** Direction in which items spread from the trigger. @default 'up' */
   direction?: FabButtonDirection;
+  /** Enter/leave animation for the items. @default 'scale' */
   animation?: FabButtonAnimation;
-  layoutType?: FabButtonLayoutType;
+  /** Spatial distribution of items. @default 'linear' */
+  layout?: FabButtonLayoutType;
+  /** Border-radius shape of trigger and items. @default 'circular' */
   shape?: FabButtonShape;
-  showLabels?: boolean;
-  animationDuration?: number;
-  itemSpacing?: number;
-  hideOnItemClick?: boolean;
-  hideOnClickOutside?: boolean;
-  hideOverlay?: boolean;
-  iconRotation?: number;
+  /** Semantic color for trigger and items. @default 'primary' */
+  color?: NUIColor;
+  /** Size token for trigger and items. @default 'md' */
+  size?: NUISize;
+  /** Visual variant for trigger and items. @default 'solid' */
+  variant?: NUIVariant;
+  /**
+   * Radius for circle/semi-circle/quarter-circle layouts.
+   * Accepts any valid CSS length (rem, px, em…).
+   * @default '4rem'
+   */
+  radius?: string;
+  /**
+   * Spacing between items in linear layout.
+   * Accepts any valid CSS length.
+   * @default '3.5rem'
+   */
+  spacing?: string;
+  /** Whether to show a translucent backdrop behind the items. @default false */
+  backdrop?: boolean;
+  /** Close the dial when the user clicks outside the component. @default true */
+  closeOnOutsideClick?: boolean;
+  /** Close the dial when the user presses the ESC key. @default true */
+  closeOnEsc?: boolean;
 }
 
-/**
- * Configuración estática por defecto para los FAB Buttons.
- */
-export const DEFAULT_FAB_BUTTON_CONFIG: FabButtonConfig = {
+// ============================================================
+// Default values
+// ============================================================
+export const DEFAULT_FAB_BUTTON_CONFIG: Required<FabButtonConfig> = {
   direction: 'up',
   animation: 'scale',
-  layoutType: 'linear',
+  layout: 'linear',
   shape: 'circular',
-  showLabels: false,
-  hideOnItemClick: true,
-  hideOnClickOutside: true,
-  hideOverlay: true,
-  iconRotation: 135,
+  color: 'primary',
+  size: 'md',
+  variant: 'solid',
+  radius: '4rem',
+  spacing: '3.5rem',
+  backdrop: false,
+  closeOnOutsideClick: true,
+  closeOnEsc: true,
 };
 
+// ============================================================
+// Injection helper (mirrors injectButtonConfig pattern)
+// ============================================================
 /**
- * Función inyectable para resolver la configuración final del FAB Button.
- * Sigue el patrón de inyectar el NUI_CONFIG global y hacer el merge.
+ * Resolves the final FabButton configuration by merging the library defaults
+ * with any values provided via the global NUI_CONFIG provider.
+ *
+ * Usage inside a component:
+ * ```ts
+ * private readonly config = injectFabButtonConfig();
+ * ```
  */
-export function injectFabButtonConfig(): FabButtonConfig {
-  // Inyectamos la config global del monorepo
-  const globalConfig = inject(NUI_CONFIG, { optional: true });
-
-  // Extraemos la sección de fabButton
-  const fabButtonOverrides = globalConfig?.config?.fabButton;
-
-  // Fusionamos los defaults de la librería con lo configurado por el usuario
-  return deepMerge(DEFAULT_FAB_BUTTON_CONFIG, fabButtonOverrides);
+export function injectFabButtonConfig(): Required<FabButtonConfig> {
+  const globalConfig = inject(NUI_CONFIG, { optional: true })?.config;
+  const overrides = globalConfig?.fabButton ?? {};
+  return deepMerge(DEFAULT_FAB_BUTTON_CONFIG, overrides) as Required<FabButtonConfig>;
 }

@@ -1,0 +1,124 @@
+// ============================================================
+// FAB BUTTON - Variables & Tokens
+// ============================================================
+//
+// Follows the same pattern as _button-vars.scss:
+//  1. SCSS variables (overridable via !default at build time)
+//  2. A mixin that emits CSS custom properties used by _fab-button.scss
+//
+// All CSS custom properties are prefixed --nui-fab-*.
+// ============================================================
+
+// ── Structural tokens ───────────────────────────────────────
+/// Radius used by circle / semi-circle / quarter-circle layouts
+$fab-radius: 4rem !default;
+/// Step distance between items in linear layout
+$fab-spacing: 3.5rem !default;
+
+// ── Button sizes ────────────────────────────────────────────
+/// Diameter of the main trigger button (per size token)
+$fab-trigger-size-xs: 2rem    !default;
+$fab-trigger-size-sm: 2.25rem !default;
+$fab-trigger-size-md: 3rem    !default;
+$fab-trigger-size-lg: 3.5rem  !default;
+$fab-trigger-size-xl: 4rem    !default;
+
+/// Diameter of each action item button (per size token)
+$fab-item-size-xs: 1.75rem  !default;
+$fab-item-size-sm: 2rem     !default;
+$fab-item-size-md: 2.5rem   !default;
+$fab-item-size-lg: 2.75rem  !default;
+$fab-item-size-xl: 3.25rem  !default;
+
+// ── Icon sizes ──────────────────────────────────────────────
+$fab-trigger-icon-xs: 1rem    !default;
+$fab-trigger-icon-sm: 1.125rem !default;
+$fab-trigger-icon-md: 1.5rem  !default;
+$fab-trigger-icon-lg: 1.75rem !default;
+$fab-trigger-icon-xl: 2rem    !default;
+
+$fab-item-icon-xs: 0.875rem !default;
+$fab-item-icon-sm: 1rem     !default;
+$fab-item-icon-md: 1.125rem !default;
+$fab-item-icon-lg: 1.25rem  !default;
+$fab-item-icon-xl: 1.5rem   !default;
+
+// ── Animation tokens ────────────────────────────────────────
+/// Duration of the enter/leave transition for items
+$fab-anim-duration: 200ms !default;
+/// Easing curve shared by all animation types
+$fab-anim-easing: cubic-bezier(0.4, 0, 0.2, 1) !default;
+/// Delay delta between consecutive items (stagger)
+$fab-anim-delay-step: 30ms !default;
+
+// ── Trigger-icon rotation ───────────────────────────────────
+/// Amount the trigger icon rotates when the dial is open
+$fab-trigger-rotate: 45deg !default;
+
+// ── Backdrop ────────────────────────────────────────────────
+$fab-backdrop-bg: rgba(0, 0, 0, 0.2) !default;
+$fab-backdrop-blur: 2px !default;
+
+// ── Tooltip label ───────────────────────────────────────────
+$fab-tooltip-offset: 0.5rem !default;
+
+// ── Focus ring ──────────────────────────────────────────────
+$fab-focus-width: 0.125rem  !default;
+$fab-focus-offset: 0.125rem !default;
+
+
+// ============================================================
+// CSS CUSTOM PROPERTIES MIXIN
+// (included once in :root via _global-vars.scss)
+// ============================================================
+@mixin nui-fab-button-vars {
+  // Structural
+  --nui-fab-radius:       #{$fab-radius};
+  --nui-fab-spacing:      #{$fab-spacing};
+
+  // Animation
+  --nui-fab-anim-duration:    #{$fab-anim-duration};
+  --nui-fab-anim-easing:      #{$fab-anim-easing};
+  --nui-fab-anim-delay-step:  #{$fab-anim-delay-step};
+
+  // Trigger icon rotation
+  --nui-fab-trigger-rotate:   #{$fab-trigger-rotate};
+
+  // Backdrop
+  --nui-fab-backdrop-bg:      #{$fab-backdrop-bg};
+  --nui-fab-backdrop-blur:    #{$fab-backdrop-blur};
+
+  // Tooltip label offset
+  --nui-fab-tooltip-offset:   #{$fab-tooltip-offset};
+
+  // Focus ring
+  --nui-fab-focus-width:   #{$fab-focus-width};
+  --nui-fab-focus-offset:  #{$fab-focus-offset};
+
+  // ── Size tokens: trigger ─────────────────────────────────
+  --nui-fab-trigger-size-xs:  #{$fab-trigger-size-xs};
+  --nui-fab-trigger-size-sm:  #{$fab-trigger-size-sm};
+  --nui-fab-trigger-size-md:  #{$fab-trigger-size-md};
+  --nui-fab-trigger-size-lg:  #{$fab-trigger-size-lg};
+  --nui-fab-trigger-size-xl:  #{$fab-trigger-size-xl};
+
+  // ── Size tokens: items ───────────────────────────────────
+  --nui-fab-item-size-xs:     #{$fab-item-size-xs};
+  --nui-fab-item-size-sm:     #{$fab-item-size-sm};
+  --nui-fab-item-size-md:     #{$fab-item-size-md};
+  --nui-fab-item-size-lg:     #{$fab-item-size-lg};
+  --nui-fab-item-size-xl:     #{$fab-item-size-xl};
+
+  // ── Icon size tokens ─────────────────────────────────────
+  --nui-fab-trigger-icon-xs:  #{$fab-trigger-icon-xs};
+  --nui-fab-trigger-icon-sm:  #{$fab-trigger-icon-sm};
+  --nui-fab-trigger-icon-md:  #{$fab-trigger-icon-md};
+  --nui-fab-trigger-icon-lg:  #{$fab-trigger-icon-lg};
+  --nui-fab-trigger-icon-xl:  #{$fab-trigger-icon-xl};
+
+  --nui-fab-item-icon-xs:     #{$fab-item-icon-xs};
+  --nui-fab-item-icon-sm:     #{$fab-item-icon-sm};
+  --nui-fab-item-icon-md:     #{$fab-item-icon-md};
+  --nui-fab-item-icon-lg:     #{$fab-item-icon-lg};
+  --nui-fab-item-icon-xl:     #{$fab-item-icon-xl};
+}

@@ -121,6 +121,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'fab-button',
+        loadComponent: () =>
+          import('./pages/components/fab-button-page/fab-button-page.component').then(
+            m => m.FabButtonPageComponent
+          ),
+      },
+      {
         path: 'action-menu',
         loadComponent: () =>
           import('./pages/components/action-menu-page/action-menu-page.component').then(

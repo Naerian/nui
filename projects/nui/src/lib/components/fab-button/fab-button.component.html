@@ -1,0 +1,129 @@
+<!--
+  nui-fab-button.component.html
+
+  DOM structure:
+  ┌─ .nui-fab (host)
+  │   ├─ .nui-fab__backdrop  (conditional, click-to-close)
+  │   ├─ .nui-fab__container (colour/size/variant/shape/layout classes)
+  │   │   ├─ .nui-fab__trigger  (main FAB button)
+  │   │   └─ ul.nui-fab__items  (action items, always in DOM)
+  │   │       └─ li.nui-fab__item  × N
+  │   │           └─ button|a .nui-fab__item-btn
+
+  Accessibility:
+  - Host has role="group" + aria-label (set via host binding in .ts)
+  - Trigger has aria-expanded + aria-controls pointing to the items list
+  - Items list has role="menu" + aria-hidden when collapsed
+  - Each item button has role="menuitem" + aria-label (tooltip text or label)
+-->
+
+<!-- ─── Backdrop ────────────────────────────────────────────────────── -->
+@if (isOpen() && effectiveBackdrop()) {
+  <div
+    class="nui-fab__backdrop"
+    aria-hidden="true"
+    (click)="close()"
+    (pointerdown)="$event.stopPropagation()"
+  ></div>
+}
+
+<!-- ─── Container (theme/shape/size/variant classes) ─────────────────── -->
+<div class="nui-fab__container" [ngClass]="containerClasses()">
+
+  <!-- ─── Trigger button ──────────────────────────────────────────── -->
+  <button
+    #triggerBtn
+    class="nui-fab__trigger"
+    type="button"
+    [disabled]="disabled()"
+    [attr.aria-expanded]="isOpen()"
+    [attr.aria-controls]="itemsId"
+    [attr.aria-label]="triggerAriaLabel()"
+    (click)="handleTriggerClick()"
+  >
+    <!-- Rotating icon: transforms from + to × when open -->
+    <i [class]="triggerIcon()" class="nui-fab__trigger-icon" aria-hidden="true"></i>
+  </button>
+
+  <!-- ─── Items list ──────────────────────────────────────────────── -->
+  <ul
+    class="nui-fab__items"
+    role="menu"
+    [id]="itemsId"
+    [attr.aria-hidden]="!isOpen()"
+    [attr.aria-label]="ariaLabel()"
+  >
+    @for (item of resolvedItems(); track trackItem($index, item)) {
+      <li
+        class="nui-fab__item"
+        [class.nui-fab__item--visible]="isOpen()"
+        [class.nui-fab__item--tooltip-right]="item.tooltipSide === 'right'"
+        [style.--nui-fab-item-tx]="item.tx"
+        [style.--nui-fab-item-ty]="item.ty"
+        [style.--nui-fab-item-index]="item.index"
+        role="none"
+      >
+        <!-- ─ Anchor variant ─────────────────────────────────── -->
+        @if (item.url) {
+          <a
+            class="nui-fab__item-btn"
+            [class]="item.styleClass ?? null"
+            [class.nui-fab__item-btn--disabled]="item.disabled"
+            [class.nui-fab__item-btn--custom-colors]="item.backgroundColor || item.textColor"
+            [attr.href]="item.disabled ? null : item.url"
+            [attr.target]="item.target ?? null"
+            [attr.role]="'menuitem'"
+            [attr.aria-label]="item.tooltip || item.label || null"
+            [attr.aria-disabled]="item.disabled || null"
+            [attr.data-color]="item.color ?? null"
+            [attr.data-size]="item.size ?? null"
+            [attr.data-variant]="item.variant ?? null"
+            [style.--nui-fab-item-bg]="item.backgroundColor ?? null"
+            [style.--nui-fab-item-color]="item.textColor ?? null"
+            (click)="handleItemClick(item, $event)"
+          >
+            @if (item.icon) {
+              <i [class]="item.icon" aria-hidden="true"></i>
+            }
+            @if (item.label) {
+              <span class="nui-fab__item-label">{{ item.label }}</span>
+            }
+          </a>
+        } @else {
+          <!-- ─ Button variant ────────────────────────────────── -->
+          <button
+            class="nui-fab__item-btn"
+            [class]="item.styleClass ?? null"
+            [class.nui-fab__item-btn--disabled]="item.disabled"
+            [class.nui-fab__item-btn--custom-colors]="item.backgroundColor || item.textColor"
+            type="button"
+            [disabled]="item.disabled"
+            [attr.role]="'menuitem'"
+            [attr.aria-label]="item.tooltip || item.label || null"
+            [attr.data-color]="item.color ?? null"
+            [attr.data-size]="item.size ?? null"
+            [attr.data-variant]="item.variant ?? null"
+            [style.--nui-fab-item-bg]="item.backgroundColor ?? null"
+            [style.--nui-fab-item-color]="item.textColor ?? null"
+            (click)="handleItemClick(item, $event)"
+          >
+            @if (item.icon) {
+              <i [class]="item.icon" aria-hidden="true"></i>
+            }
+            @if (item.label) {
+              <span class="nui-fab__item-label">{{ item.label }}</span>
+            }
+          </button>
+        }
+
+        <!-- ─ Tooltip label (optional, shown on hover via CSS) ── -->
+        @if (item.tooltip) {
+          <span class="nui-fab__item-tooltip" aria-hidden="true">
+            {{ item.tooltip }}
+          </span>
+        }
+      </li>
+    }
+  </ul>
+
+</div>

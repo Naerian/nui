@@ -23,6 +23,7 @@
     "themingCustomization": "Personalización",
     "components": "Componentes",
     "button": "Button",
+    "fabButton": "Fab Button",
     "avatar": "Avatar",
     "selectButton": "Select Button",
     "calendar": "Calendar",
@@ -1577,6 +1578,94 @@
         "customization": {
           "title": "Personalización",
           "description": "Ejemplos de cómo personalizar los estilos del selector de tiempo en tu aplicación. Puedes sobrescribir variables CSS globalmente o específicas a instancias. La integración con ThemeService permite generar variables de color para tus colores semánticos personalizados."
+        }
+      }
+    },
+    "fabButton": {
+      "title": "FAB Button",
+      "subtitle": "Botón de acción flotante con marcado desplegable (dial) que expande acciones secundarias con soporte para múltiples layouts, animaciones y modos de control",
+      "basic": {
+        "title": "Uso básico",
+        "description": "La forma más simple del FAB: un botón principal que expande una lista de acciones secundarias al hacer clic."
+      },
+      "directions": {
+        "title": "Direcciones",
+        "description": "Controla hacia dónde se despliegan los items al expandir el FAB. Soporta 8 direcciones: los 4 ejes cardinales y las 4 diagonales.",
+        "note": "Las diagonales (<code>up-left</code>, <code>up-right</code>, <code>down-left</code>, <code>down-right</code>) son especialmente útiles en combinación con los layouts <code>semi-circle</code> y <code>quarter-circle</code>."
+      },
+      "layouts": {
+        "title": "Layouts",
+        "description": "Define la distribución espacial de los items alrededor del botón principal. Cuatro modos disponibles: lineal, círculo completo, semicírculo y cuarto de círculo.",
+        "note": "El layout <code>circle</code> ignora <code>direction</code> y usa <code>radius</code> para determinar el radio del anillo. Los layouts <code>semi-circle</code> y <code>quarter-circle</code> combinan <code>direction</code> (centro del arco) y <code>radius</code>."
+      },
+      "animations": {
+        "title": "Animaciones",
+        "description": "Elige el tipo de animación de entrada y salida de los items: <code>scale</code> (escala), <code>fade</code> (opacidad) y <code>slide</code> (deslizamiento desde el origen)."
+      },
+      "variantsColors": {
+        "title": "Variantes y colores",
+        "description": "Compatible con todo el sistema de variantes (<code>solid</code>, <code>outline</code>, <code>ghost</code>) y los colores semánticos de NUI. El color y la variante se aplican al botón principal y a todos los items."
+      },
+      "shapes": {
+        "title": "Formas",
+        "description": "Controla la forma del botón principal y los items. Tres opciones disponibles: <code>circular</code> (predeterminado), <code>rounded</code> (esquinas redondeadas) y <code>square</code> (bordes rectos)."
+      },
+      "sizes": {
+        "title": "Tamaños",
+        "description": "Cinco tamaños predefinidos que escalan el botón principal y los items de forma armoniosa.",
+        "note": "Utiliza <code>size</code> con valores <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> y <code>'xl'</code>."
+      },
+      "backdrop": {
+        "title": "Backdrop",
+        "description": "Muestra una capa semitransparente detrás de los items cuando el FAB está expandido. Ayuda a enfocar la atención en las acciones disponibles.",
+        "note": "Usa <code>[backdrop]=\"true\"</code> para activarlo. El color y el desenfoque son personalizables mediante las variables CSS <code>--nui-fab-backdrop-bg</code> y <code>--nui-fab-backdrop-blur</code>."
+      },
+      "itemColors": {
+        "title": "Colores por item",
+        "description": "Cada item puede tener su propio color y variante independiente del color global del FAB. Ideal para diferenciar acciones destructivas, informativas o de confirmación.",
+        "note": "Usa las propiedades <code>color</code> y <code>variant</code> dentro de cada objeto <code>FabButtonItem</code> para sobrescribir el color global del componente."
+      },
+      "controlled": {
+        "title": "Modo controlado",
+        "description": "El FAB soporta modo controlado mediante el input <code>expanded</code> y el output <code>expandedChange</code>, o simplificado con el binding bidireccional <code>[(expanded)]</code>.",
+        "note": "Cuando <code>expanded</code> tiene un valor definido (<code>true</code> o <code>false</code>), el componente entra en modo controlado y el estado interno queda subordinado al valor del padre. Con <code>undefined</code> (predeterminado) funciona en modo autónomo."
+      },
+      "events": {
+        "title": "Eventos",
+        "description": "El FAB emite dos eventos: <code>expandedChange</code> cuando cambia el estado de expansión e <code>itemClick</code> cuando el usuario hace clic en un item.",
+        "consoleNote": "Abre las <strong>DevTools (F12)</strong> y revisa la pestaña <strong>Console</strong> para ver los eventos registrados al interactuar con el FAB."
+      },
+      "disabled": {
+        "title": "Estado deshabilitado",
+        "description": "El botón principal puede deshabilitarse para impedir la interacción. Los items también pueden deshabilitarse individualmente mediante la propiedad <code>disabled</code> de cada <code>FabButtonItem</code>."
+      },
+      "api": {
+        "inputs": {
+          "title": "Inputs",
+          "description": "Propiedades de entrada para configurar el comportamiento, apariencia y disposición del FAB Button."
+        },
+        "outputs": {
+          "title": "Outputs",
+          "description": "Eventos emitidos por el componente FAB Button para responder a interacciones del usuario."
+        },
+        "computed": {
+          "title": "Computed Properties",
+          "description": "Propiedades computadas reactivas (Signals) que exponen el estado interno resuelto del componente."
+        },
+        "models": {
+          "title": "Modelos",
+          "description": "Tipos e interfaces TypeScript relacionados con el componente FAB Button."
+        }
+      },
+      "theming": {
+        "colors": {
+          "title": "Variables de color",
+          "description": "Variables CSS para personalizar colores por variante (<code>solid</code>, <code>outline</code>, <code>ghost</code>) y color semántico (<code>primary</code>, <code>secondary</code>, etc.).",
+          "note": "Reemplaza <code>{color}</code> con cualquier color del sistema: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>."
+        },
+        "structure": {
+          "title": "Variables estructurales",
+          "description": "Variables CSS para personalizar el layout radial, animaciones, tamaños de botón, backdrop, tooltips y el anillo de foco."
         }
       }
     }

@@ -375,6 +375,7 @@ export class ThemeService {
     Object.entries(colors).forEach(([name, baseColor]) => {
       // Component-specific variables
       css += this.generateButtonVariables(name, baseColor);
+      css += this.generateFabButtonVariables(name, baseColor);
       css += this.generateSelectButtonVariables(name, baseColor);
       css += this.generatePaginatorVariables(name, baseColor);
       css += this.generateToastVariables(name, baseColor);
@@ -605,6 +606,68 @@ export class ThemeService {
    * These methods ensure that all components have consistent styling that adapts to the current theme preset and dark mode state.
    * =====================================================================
    */
+
+  /**
+   * Generate CSS custom property definitions for all FAB button variants of a given colour.
+   *
+   * Follows the same pattern as generateButtonVariables:
+   *  - Uses shade/tint for hover and active states
+   *  - Uses withAlpha for outline and ghost backgrounds
+   *  - Adapts results for dark mode automatically via _isDarkMode()
+   *
+   * Generated variables are consumed by styles/components/_fab-button.scss via
+   * CSS expressions like var(--nui-fab-primary-solid-bg).
+   */
+  private generateFabButtonVariables(name: string, color: string): string {
+    const contrastText = this.getContrastColor(color);
+    const isDark = this._isDarkMode();
+    const hoverBg = isDark ? this.shade(color, 10) : this.tint(color, 10);
+    const activeBg = isDark ? this.shade(color, 20) : this.tint(color, 20);
+
+    const alpha10 = this.withAlpha(color, 0.1);
+    const alpha20 = this.withAlpha(color, 0.2);
+    const alpha50 = this.withAlpha(color, 0.5);
+    const focusRing = this.withAlpha(color, 0.4);
+
+    return `
+      /* ── FAB Button: ${name} ── */
+
+      /* Base reference (used in JS/computed helpers) */
+      --nui-fab-${name}-color:  ${color};
+      --nui-fab-${name}-hover:  ${hoverBg};
+      --nui-fab-${name}-active: ${activeBg};
+
+      /* Focus ring */
+      --nui-fab-${name}-focus-ring: ${focusRing};
+
+      /* Solid */
+      --nui-fab-${name}-solid-bg:           ${color};
+      --nui-fab-${name}-solid-border:       ${color};
+      --nui-fab-${name}-solid-text:         ${contrastText};
+      --nui-fab-${name}-solid-hover-bg:     ${hoverBg};
+      --nui-fab-${name}-solid-hover-border: transparent;
+      --nui-fab-${name}-solid-hover-text:   ${contrastText};
+      --nui-fab-${name}-solid-active-bg:    ${activeBg};
+
+      /* Outline */
+      --nui-fab-${name}-outline-bg:           transparent;
+      --nui-fab-${name}-outline-border:       ${alpha20};
+      --nui-fab-${name}-outline-text:         ${color};
+      --nui-fab-${name}-outline-hover-bg:     ${alpha10};
+      --nui-fab-${name}-outline-hover-border: ${alpha50};
+      --nui-fab-${name}-outline-hover-text:   ${color};
+      --nui-fab-${name}-outline-active-bg:    ${alpha20};
+
+      /* Ghost */
+      --nui-fab-${name}-ghost-bg:           transparent;
+      --nui-fab-${name}-ghost-border:       transparent;
+      --nui-fab-${name}-ghost-text:         ${color};
+      --nui-fab-${name}-ghost-hover-bg:     ${alpha10};
+      --nui-fab-${name}-ghost-hover-border: transparent;
+      --nui-fab-${name}-ghost-hover-text:   ${color};
+      --nui-fab-${name}-ghost-active-bg:    ${alpha20};
+    `;
+  }
 
   private generateButtonVariables(name: string, color: string): string {
     const contrastText = this.getContrastColor(color);

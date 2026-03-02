@@ -14,6 +14,7 @@ export * from './lib/animations';
 export * from './lib/adapters';
 
 // Components
+export * from './lib/components/fab-button';
 export * from './lib/components/button';
 export * from './lib/components/select-button';
 export * from './lib/components/calendar';

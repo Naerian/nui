@@ -94,6 +94,12 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
         icon: 'ri-rectangle-fill',
       },
       {
+        label: 'FAB Button',
+        translationKey: 'sidebar.fabButton',
+        route: '/components/fab-button',
+        icon: 'ri-add-circle-line',
+      },
+      {
         label: 'Action Menu',
         translationKey: 'sidebar.actionMenu',
         route: '/components/action-menu',
