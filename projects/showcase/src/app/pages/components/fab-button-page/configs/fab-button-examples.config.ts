@@ -2,209 +2,371 @@
 
 /**
  * Configuración de la tab "Examples" del componente FabButton.
- * Cinco escenarios reales que muestran el FAB en contexto.
+ * Cada sección muestra una característica concreta del componente.
  */
 export const FAB_BUTTON_EXAMPLES_SECTIONS: ComponentSection[] = [
+  // ─────────────────────────────────────────────────────────────────────────
+  // BASIC
+  // ─────────────────────────────────────────────────────────────────────────
   {
-    id: 'scenario-mobile',
-    title: 'components.fabButton.scenarios.mobile.title',
-    description: 'components.fabButton.scenarios.mobile.description',
-    anchor: 'scenario-mobile',
+    id: 'basic',
+    title: 'components.fabButton.basic.title',
+    description: 'components.fabButton.basic.description',
+    anchor: 'basic',
     examples: [
       {
         title: 'codeExamples.html',
         language: 'html',
-        code: `<!-- App screen container (position: relative) -->
-<div class="app-screen">
-  <!-- ...screen content... -->
-
-  <nui-fab-button
-    style="position: absolute; bottom: 1.5rem; right: 1.5rem"
-    direction="up"
-    layout="linear"
-    shape="circular"
-    color="primary"
-    animation="scale"
-    [items]="mobileActions"
-  />
-</div>`,
+        code: `<nui-fab-button [items]="actions" />`,
       },
       {
         title: 'codeExamples.typescript',
         language: 'typescript',
         code: `import { FabButtonItem } from 'nui';
 
-mobileActions: FabButtonItem[] = [
-  { id: '1', icon: 'ri-pencil-line',   tooltip: 'New note' },
-  { id: '2', icon: 'ri-camera-line',   tooltip: 'Photo'    },
-  { id: '3', icon: 'ri-attachment-2',  tooltip: 'Attachment' },
+actions: FabButtonItem[] = [
+  { id: '1', icon: 'ri-pencil-line',  tooltip: 'Editar'    },
+  { id: '2', icon: 'ri-share-line',   tooltip: 'Compartir' },
+  { id: '3', icon: 'ri-delete-bin-line', tooltip: 'Eliminar', color: 'danger' },
 ];`,
       },
     ],
   },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // DIRECTIONS
+  // ─────────────────────────────────────────────────────────────────────────
   {
-    id: 'scenario-dashboard',
-    title: 'components.fabButton.scenarios.dashboard.title',
-    description: 'components.fabButton.scenarios.dashboard.description',
-    anchor: 'scenario-dashboard',
+    id: 'directions',
+    title: 'components.fabButton.directions.title',
+    description: 'components.fabButton.directions.description',
+    anchor: 'directions',
     examples: [
       {
         title: 'codeExamples.html',
         language: 'html',
-        code: `<nui-fab-button
-  style="position: absolute; bottom: 1.5rem; right: 1.5rem"
-  layout="semi-circle"
-  direction="left"
-  shape="circular"
-  color="accent"
-  variant="solid"
-  [backdrop]="true"
-  [items]="dashboardActions"
-/>`,
-      },
-      {
-        title: 'codeExamples.typescript',
-        language: 'typescript',
-        code: `dashboardActions: FabButtonItem[] = [
-  { id: '1', icon: 'ri-bar-chart-2-line', tooltip: 'Report'   },
-  { id: '2', icon: 'ri-download-2-line',  tooltip: 'Export'  },
-  { id: '3', icon: 'ri-share-line',       tooltip: 'Share' },
-  { id: '4', icon: 'ri-settings-3-line',  tooltip: 'Settings'   },
-];`,
+        code: `<nui-fab-button direction="up"    [items]="actions" />
+<nui-fab-button direction="right" [items]="actions" />
+<nui-fab-button direction="down"  [items]="actions" color="secondary" />
+<nui-fab-button direction="left"  [items]="actions" color="accent" />`,
       },
     ],
   },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // LAYOUTS
+  // ─────────────────────────────────────────────────────────────────────────
   {
-    id: 'scenario-card',
-    title: 'components.fabButton.scenarios.card.title',
-    description: 'components.fabButton.scenarios.card.description',
-    anchor: 'scenario-card',
+    id: 'layouts',
+    title: 'components.fabButton.layouts.title',
+    description: 'components.fabButton.layouts.description',
+    anchor: 'layouts',
     examples: [
       {
         title: 'codeExamples.html',
         language: 'html',
-        code: `<!-- Card with position: relative -->
-<div class="card" style="position: relative">
-  <nui-fab-button
-    style="position: absolute; top: 0.75rem; right: 0.75rem"
-    layout="linear"
-    direction="left"
-    shape="circular"
-    color="neutral"
-    variant="solid"
-    size="sm"
-    triggerIcon="ri-more-2-fill"
-    [items]="cardActions"
-  />
-  <!-- ...card content... -->
-</div>`,
-      },
-      {
-        title: 'codeExamples.typescript',
-        language: 'typescript',
-        code: `cardActions: FabButtonItem[] = [
-  { id: '1', icon: 'ri-pencil-line',       tooltip: 'Edit'    },
-  { id: '2', icon: 'ri-share-line',        tooltip: 'Share' },
-  { id: '3', icon: 'ri-delete-bin-2-line', tooltip: 'Delete', color: 'danger' },
-];`,
+        code: `<nui-fab-button layout="linear"        direction="up"    [items]="actions" />
+<nui-fab-button layout="semi-circle"   direction="up"    [items]="actions" color="secondary" />
+<nui-fab-button layout="quarter-circle" direction="up-right" [items]="actions" color="accent" />
+<nui-fab-button layout="circle"        triggerIcon="ri-apps-2-line" [items]="radialActions" color="info" />`,
       },
     ],
   },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SHAPES
+  // ─────────────────────────────────────────────────────────────────────────
   {
-    id: 'scenario-radial',
-    title: 'components.fabButton.scenarios.radial.title',
-    description: 'components.fabButton.scenarios.radial.description',
-    anchor: 'scenario-radial',
+    id: 'shapes',
+    title: 'components.fabButton.shapes.title',
+    description: 'components.fabButton.shapes.description',
+    anchor: 'shapes',
     examples: [
       {
         title: 'codeExamples.html',
         language: 'html',
-        code: `<nui-fab-button
-  layout="circle"
-  shape="circular"
+        code: `<nui-fab-button shape="circular" [items]="actions" />
+<nui-fab-button shape="rounded"  [items]="actions" color="secondary" />
+<nui-fab-button shape="square"   [items]="actions" color="accent" />`,
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // COLORS
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'colors',
+    title: 'components.fabButton.colors.title',
+    description: 'components.fabButton.colors.description',
+    anchor: 'colors',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<nui-fab-button color="primary"   [items]="actions" />
+<nui-fab-button color="secondary" [items]="actions" />
+<nui-fab-button color="accent"    [items]="actions" />
+<nui-fab-button color="success"   [items]="actions" />
+<nui-fab-button color="info"      [items]="actions" />
+<nui-fab-button color="warning"   [items]="actions" />
+<nui-fab-button color="danger"    [items]="actions" />
+<nui-fab-button color="neutral"   [items]="actions" />`,
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SIZES
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'sizes',
+    title: 'components.fabButton.sizes.title',
+    description: 'components.fabButton.sizes.description',
+    anchor: 'sizes',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<nui-fab-button size="xs" [items]="actions" />
+<nui-fab-button size="sm" [items]="actions" />
+<nui-fab-button size="md" [items]="actions" />
+<nui-fab-button size="lg" [items]="actions" />
+<nui-fab-button size="xl" [items]="actions" />`,
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // ANIMATION
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'animation',
+    title: 'components.fabButton.animation.title',
+    description: 'components.fabButton.animation.description',
+    anchor: 'animation',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<nui-fab-button animation="scale" [items]="actions" />
+<nui-fab-button animation="fade"  [items]="actions" color="secondary" />
+<nui-fab-button animation="slide" [items]="actions" color="accent" />`,
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // TRIGGER
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'trigger',
+    title: 'components.fabButton.trigger.title',
+    description: 'components.fabButton.trigger.description',
+    anchor: 'trigger',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<!-- Custom trigger icon -->
+<nui-fab-button
+  triggerIcon="ri-pencil-line"
+  [items]="actions"
+/>
+
+<!-- Icon swaps when open -->
+<nui-fab-button
+  triggerIcon="ri-add-line"
+  triggerIconOpen="ri-close-line"
   color="secondary"
-  animation="scale"
-  triggerIcon="ri-apps-2-line"
-  [items]="radialActions"
-/>`,
-      },
-      {
-        title: 'codeExamples.typescript',
-        language: 'typescript',
-        code: `radialActions: FabButtonItem[] = [
-  { id: '1', icon: 'ri-home-4-line',   tooltip: 'Home'   },
-  { id: '2', icon: 'ri-calendar-line', tooltip: 'Agenda'   },
-  { id: '3', icon: 'ri-mail-line',     tooltip: 'Messages' },
-  { id: '4', icon: 'ri-chat-3-line',   tooltip: 'Chat'     },
-];`,
-      },
-    ],
-  },
-  {
-    id: 'scenario-panel',
-    title: 'components.fabButton.scenarios.panel.title',
-    description: 'components.fabButton.scenarios.panel.description',
-    anchor: 'scenario-panel',
-    examples: [
-      {
-        title: 'codeExamples.html',
-        language: 'html',
-        code: `<nui-fab-button
-  style="position: absolute; top: 1rem; left: 1rem"
-  layout="quarter-circle"
-  direction="down-right"
-  shape="circular"
-  color="info"
-  variant="solid"
-  triggerIcon="ri-layout-3-line"
-  [items]="panelActions"
-/>`,
-      },
-      {
-        title: 'codeExamples.typescript',
-        language: 'typescript',
-        code: `panelActions: FabButtonItem[] = [
-  { id: '1', icon: 'ri-filter-3-line', tooltip: 'Filters'  },
-  { id: '2', icon: 'ri-bookmark-line', tooltip: 'Save'  },
-  { id: '3', icon: 'ri-printer-line',  tooltip: 'Print' },
-];`,
-      },
-    ],
-  },
-  {
-    id: 'scenario-custom',
-    title: 'components.fabButton.scenarios.custom.title',
-    description: 'components.fabButton.scenarios.custom.description',
-    anchor: 'scenario-custom',
-    examples: [
-      {
-        title: 'codeExamples.html',
-        language: 'html',
-        code: `<nui-fab-button
-  layout="linear"
-  direction="up"
+  [items]="actions"
+/>
+
+<!-- Extended FAB: icon + label -->
+<nui-fab-button
+  triggerIcon="ri-add-line"
+  triggerIconOpen="ri-close-line"
+  triggerLabel="Nuevo"
   shape="rounded"
-  color="primary"
-  spacing="4.5rem"
-  [items]="customTemplateActions"
->
-  <!-- fabTrigger: rotative close/add icon + "New" label -->
+  color="accent"
+  [items]="actions"
+/>
+
+<!-- Badge on trigger -->
+<nui-fab-button
+  triggerIcon="ri-notification-line"
+  [triggerBadge]="unreadCount()"
+  color="danger"
+  [items]="actions"
+/>`,
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // LOADING
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'loading',
+    title: 'components.fabButton.loading.title',
+    description: 'components.fabButton.loading.description',
+    anchor: 'loading',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<nui-fab-button
+  triggerIcon="ri-send-plane-line"
+  triggerLabel="Enviar"
+  shape="rounded"
+  [loading]="isSending"
+  [items]="actions"
+/>`,
+      },
+      {
+        title: 'codeExamples.typescript',
+        language: 'typescript',
+        code: `isSending = signal(false);
+
+simulateSend(): void {
+  this.isSending.set(true);
+  setTimeout(() => this.isSending.set(false), 2000);
+}`,
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // OPEN ON (click vs hover)
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'openOn',
+    title: 'components.fabButton.openOn.title',
+    description: 'components.fabButton.openOn.description',
+    anchor: 'openOn',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<!-- Default: opens on click -->
+<nui-fab-button openOn="click" [items]="actions" />
+
+<!-- Opens on hover (speed-dial) -->
+<nui-fab-button openOn="hover" color="secondary" [items]="actions" />`,
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // ITEM DISPLAY
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'itemDisplay',
+    title: 'components.fabButton.itemDisplay.title',
+    description: 'components.fabButton.itemDisplay.description',
+    anchor: 'itemDisplay',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<!-- icon (default): tooltip on hover -->
+<nui-fab-button itemDisplay="icon" [items]="actions" />
+
+<!-- icon-text: label visible inside the button -->
+<nui-fab-button itemDisplay="icon-text" shape="rounded" color="secondary" [items]="labeledActions" />`,
+      },
+      {
+        title: 'codeExamples.typescript',
+        language: 'typescript',
+        code: `labeledActions: FabButtonItem[] = [
+  { id: '1', icon: 'ri-file-add-line',   label: 'Documento' },
+  { id: '2', icon: 'ri-image-add-line',  label: 'Imagen'    },
+  { id: '3', icon: 'ri-folder-add-line', label: 'Carpeta'   },
+];`,
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // CLOSE OPTIONS
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'closeOptions',
+    title: 'components.fabButton.closeOptions.title',
+    description: 'components.fabButton.closeOptions.description',
+    anchor: 'closeOptions',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<!-- Stays open after item click (multi-action) -->
+<nui-fab-button
+  [closeOnItemClick]="false"
+  triggerIcon="ri-filter-3-line"
+  color="neutral"
+  [items]="actions"
+/>
+
+<!-- Closes when clicking outside -->
+<nui-fab-button
+  [closeOnOutsideClick]="true"
+  color="secondary"
+  [items]="actions"
+/>
+
+<!-- Closes when the nearest scroll container scrolls -->
+<nui-fab-button
+  [closeOnScroll]="true"
+  color="accent"
+  [items]="actions"
+/>`,
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // BACKDROP
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'backdrop',
+    title: 'components.fabButton.backdrop.title',
+    description: 'components.fabButton.backdrop.description',
+    anchor: 'backdrop',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<nui-fab-button [backdrop]="true" layout="semi-circle" direction="up" [items]="actions" />`,
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // CUSTOM TEMPLATES
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'templates',
+    title: 'components.fabButton.templates.title',
+    description: 'components.fabButton.templates.description',
+    anchor: 'templates',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<nui-fab-button shape="rounded" color="primary" [items]="templateActions">
+  <!-- fabTrigger: control total del trigger -->
   <ng-template fabTrigger let-open="isOpen">
-    <span class="my-trigger">
+    <span class="custom-trigger">
       <i [class]="open ? 'ri-close-line' : 'ri-add-line'"></i>
-      @if (!open) {
-        <span class="my-trigger-label">New</span>
-      }
+      @if (!open) { <span>Nuevo</span> }
     </span>
   </ng-template>
 
-  <!-- fabItem: semantic — icon + label per item -->
+  <!-- fabItem: control total de cada item -->
   <ng-template fabItem let-item>
-    <span class="my-item">
+    <span class="custom-item">
       <i [class]="item.icon"></i>
-      @if (item.label) {
-        <span>{{ item.label }}</span>
-      }
+      <span>{{ item.label }}</span>
     </span>
   </ng-template>
 </nui-fab-button>`,
@@ -212,110 +374,15 @@ mobileActions: FabButtonItem[] = [
       {
         title: 'codeExamples.typescript',
         language: 'typescript',
-        code: `import { FabButtonItem, FabTriggerDirective, FabItemDirective } from 'nui';
+        code: `import { FabButtonComponent, FabTriggerDirective, FabItemDirective } from 'nui';
 
-// In @Component imports array:
+// imports del componente:
 imports: [FabButtonComponent, FabTriggerDirective, FabItemDirective]
 
-customTemplateActions: FabButtonItem[] = [
-  { id: '1', icon: 'ri-bug-line',       label: 'Bug',     color: 'danger'  },
-  { id: '2', icon: 'ri-lightbulb-line', label: 'Feature', color: 'success' },
-  { id: '3', icon: 'ri-chat-3-line',    label: 'Comment', color: 'info'    },
-];`,
-      },
-    ],
-  },
-  {
-    id: 'scenario-extended',
-    title: 'components.fabButton.scenarios.extended.title',
-    description: 'components.fabButton.scenarios.extended.description',
-    anchor: 'scenario-extended',
-    examples: [
-      {
-        title: 'codeExamples.html',
-        language: 'html',
-        code: `<!-- Extended FAB: triggerLabel + triggerIconOpen + triggerBadge -->
-<nui-fab-button
-  triggerIcon="ri-pencil-line"
-  triggerIconOpen="ri-close-line"
-  triggerLabel="Compose"
-  [triggerBadge]="unreadCount"
-  shape="rounded"
-  color="primary"
-  direction="up"
-  layout="linear"
-  [items]="composeActions"
-/>
-
-<!-- FAB with loading state (async action in progress) -->
-<nui-fab-button
-  triggerIcon="ri-send-plane-line"
-  [loading]="isSending"
-  color="primary"
-  [items]="sendActions"
-/>
-
-<!-- Speed-dial (hover to open) -->
-<nui-fab-button
-  openOn="hover"
-  triggerIcon="ri-share-line"
-  color="secondary"
-  [items]="shareActions"
-/>
-
-<!-- Multi-action: dial stays open after item click -->
-<nui-fab-button
-  [closeOnItemClick]="false"
-  triggerIcon="ri-filter-3-line"
-  color="neutral"
-  variant="outline"
-  [items]="filterActions"
-/>
-
-<!-- Icon + label inside each item button (tooltip suppressed) -->
-<nui-fab-button
-  itemDisplay="icon-text"
-  triggerIcon="ri-add-line"
-  color="primary"
-  shape="rounded"
-  direction="up"
-  layout="linear"
-  [items]="iconTextActions"
-/>
-
-<!-- Close on scroll (e.g. inside a scrollable panel) -->
-<nui-fab-button
-  [closeOnScroll]="true"
-  triggerIcon="ri-add-line"
-  color="primary"
-  [items]="quickActions"
-/>`,
-      },
-      {
-        title: 'codeExamples.typescript',
-        language: 'typescript',
-        code: `composeActions: FabButtonItem[] = [
-  { id: '1', icon: 'ri-mail-line',     tooltip: 'New email',   command: () => this.simulate() },
-  { id: '2', icon: 'ri-user-add-line', tooltip: 'New contact'  },
-  { id: '3', icon: 'ri-calendar-line', tooltip: 'New event'    },
-];
-
-shareActions: FabButtonItem[] = [
-  { id: '1', icon: 'ri-twitter-x-line', tooltip: 'Share on X'       },
-  { id: '2', icon: 'ri-linkedin-line',  tooltip: 'Share on LinkedIn' },
-  { id: '3', icon: 'ri-link',           tooltip: 'Copy link'         },
-];
-
-filterActions: FabButtonItem[] = [
-  { id: '1', icon: 'ri-sort-asc',  tooltip: 'Sort A\u2013Z' },
-  { id: '2', icon: 'ri-star-line', tooltip: 'Starred'  },
-  { id: '3', icon: 'ri-time-line', tooltip: 'Recent'   },
-];
-
-iconTextActions: FabButtonItem[] = [
-  { id: '1', icon: 'ri-file-add-line',   label: 'Document', tooltip: 'New document' },
-  { id: '2', icon: 'ri-image-add-line',  label: 'Image',    tooltip: 'New image'    },
-  { id: '3', icon: 'ri-folder-add-line', label: 'Folder',   tooltip: 'New folder'   },
+templateActions: FabButtonItem[] = [
+  { id: '1', icon: 'ri-bug-line',       label: 'Bug',       color: 'danger'  },
+  { id: '2', icon: 'ri-lightbulb-line', label: 'Feature',   color: 'success' },
+  { id: '3', icon: 'ri-chat-3-line',    label: 'Comentario', color: 'info'   },
 ];`,
       },
     ],

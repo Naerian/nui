@@ -9,7 +9,6 @@
       @if (tabsComp.activeSections(); as activeSections) {
         @for (section of activeSections; track section.id) {
           <div class="section">
-            <!-- Section title with anchor -->
             <app-section-title
               [anchor]="section.anchor"
               [title]="section.title | translate"
@@ -28,367 +27,236 @@
                 <p [innerHTML]="section.note.content | translate"></p>
               </div>
             }
+
             @switch (section.id) {
-              <!-- ─ Scenario 1: Mobile App ────────────────────── -->
-              @case ('scenario-mobile') {
-                <div class="example-preview fab-demo">
-                  <div class="fab-demo__list">
-                    <div class="fab-demo__list-item">
-                      <i class="ri-file-text-line"></i>
-                      <span>This is a note title</span>
-                    </div>
-                    <div class="fab-demo__list-item">
-                      <i class="ri-image-line"></i>
-                      <span>Another note with an image</span>
-                    </div>
-                    <div class="fab-demo__list-item">
-                      <i class="ri-links-line"></i>
-                      <span>A third note with a link</span>
-                    </div>
+              <!-- ── Basic ─────────────────────────────────────────────── -->
+              @case ('basic') {
+                <div class="example-preview fab-preview">
+                  <nui-fab-button [items]="actions" />
+                </div>
+              }
+
+              <!-- ── Directions ──────────────────────────────────────────── -->
+              @case ('directions') {
+                <div class="example-preview fab-preview fab-preview--directions">
+                  <div class="fab-dir fab-dir--up">
+                    <nui-fab-button direction="up" [items]="actions" />
                   </div>
-                  <div class="fab-demo__anchor--br">
-                    <nui-fab-button
-                      direction="up"
-                      layout="linear"
-                      shape="circular"
-                      color="primary"
-                      animation="scale"
-                      [items]="mobileActions"
-                    />
+                  <div class="fab-dir fab-dir--right">
+                    <nui-fab-button direction="right" [items]="actions" color="secondary" />
+                  </div>
+                  <div class="fab-dir fab-dir--down">
+                    <nui-fab-button direction="down" [items]="actions" color="accent" />
+                  </div>
+                  <div class="fab-dir fab-dir--left">
+                    <nui-fab-button direction="left" [items]="actions" color="info" />
                   </div>
                 </div>
               }
 
-              <!-- ─ Scenario 2: Dashboard ───────────────────── -->
-              @case ('scenario-dashboard') {
-                <div class="example-preview fab-demo">
-                  <div class="fab-demo__chart">
-                    <span style="--h: 55%"></span>
-                    <span style="--h: 80%"></span>
-                    <span style="--h: 45%"></span>
-                    <span style="--h: 70%"></span>
-                    <span style="--h: 90%"></span>
-                    <span style="--h: 60%"></span>
-                    <span style="--h: 75%"></span>
-                  </div>
-                  <div class="fab-demo__anchor--br">
-                    <nui-fab-button
-                      layout="semi-circle"
-                      direction="left"
-                      shape="circular"
-                      color="accent"
-                      variant="solid"
-                      [backdrop]="true"
-                      [items]="dashboardActions"
-                    />
-                  </div>
-                </div>
-              }
-
-              <!-- ─ Scenario 3: Card contextual ──────────────── -->
-              @case ('scenario-card') {
-                <div class="example-preview fab-demo fab-demo--cards">
-                  @for (card of scenarioCards; track card.title) {
-                    <div
-                      class="fab-demo__card"
-                      [class.fab-demo__card--featured]="card.featured"
-                    >
-                      @if (card.featured) {
-                        <div class="fab-demo__anchor--tr">
-                          <nui-fab-button
-                            layout="linear"
-                            direction="left"
-                            shape="circular"
-                            color="neutral"
-                            variant="solid"
-                            size="sm"
-                            triggerIcon="ri-more-2-fill"
-                            [items]="cardActions"
-                          />
-                        </div>
-                      }
-                      <div class="fab-demo__card-header">
-                        <div class="fab-demo__card-icon"><i [class]="card.icon"></i></div>
-                        <div class="fab-demo__card-meta">
-                          <div class="fab-demo__line fab-demo__line--title"></div>
-                          <div class="fab-demo__line"></div>
-                        </div>
-                      </div>
-                      <div class="fab-demo__card-body">
-                        <div class="fab-demo__line"></div>
-                        <div class="fab-demo__line fab-demo__line--md"></div>
-                        <div class="fab-demo__line fab-demo__line--sm"></div>
-                      </div>
-                      <div class="fab-demo__card-tags">
-                        <span class="fab-demo__tag"></span>
-                        <span class="fab-demo__tag fab-demo__tag--accent"></span>
-                      </div>
-                    </div>
-                  }
-                </div>
-              }
-
-              <!-- ─ Scenario 4: Radial Menu ──────────────────── -->
-              @case ('scenario-radial') {
-                <div class="example-preview fab-demo">
+              <!-- ── Layouts ────────────────────────────────────────────── -->
+              @case ('layouts') {
+                <div class="example-preview fab-preview fab-preview--wrap fab-preview--tall">
+                  <nui-fab-button layout="linear" direction="up" [items]="actions" />
+                  <nui-fab-button
+                    layout="semi-circle"
+                    direction="up"
+                    [items]="actions"
+                    color="secondary"
+                  />
+                  <nui-fab-button
+                    layout="quarter-circle"
+                    direction="up-right"
+                    [items]="actions"
+                    color="accent"
+                  />
                   <nui-fab-button
                     layout="circle"
-                    shape="circular"
-                    color="secondary"
-                    animation="scale"
                     triggerIcon="ri-apps-2-line"
                     [items]="radialActions"
+                    color="info"
                   />
                 </div>
               }
 
-              <!-- ─ Scenario 5: Side Panel ────────────────── -->
-              @case ('scenario-panel') {
-                <div class="example-preview fab-demo fab-demo--panel">
-                  <div class="fab-demo__anchor--tl">
-                    <nui-fab-button
-                      layout="quarter-circle"
-                      direction="down-right"
-                      shape="circular"
-                      color="info"
-                      variant="solid"
-                      triggerIcon="ri-layout-3-line"
-                      [items]="panelActions"
-                    />
-                  </div>
-                  <div class="fab-demo__table">
-                    <div class="fab-demo__table-row fab-demo__table-row--header">
-                      <span></span><span></span><span></span><span></span>
-                    </div>
-                    <div class="fab-demo__table-row">
-                      <span></span><span></span><span></span><span></span>
-                    </div>
-                    <div class="fab-demo__table-row">
-                      <span></span><span></span><span></span><span></span>
-                    </div>
-                    <div class="fab-demo__table-row">
-                      <span></span><span></span><span></span><span></span>
-                    </div>
-                  </div>
+              <!-- ── Shapes ─────────────────────────────────────────────── -->
+              @case ('shapes') {
+                <div class="example-preview fab-preview fab-preview--wrap">
+                  <nui-fab-button shape="circular" [items]="actions" />
+                  <nui-fab-button shape="rounded" [items]="actions" color="secondary" />
+                  <nui-fab-button shape="square" [items]="actions" color="accent" />
                 </div>
               }
 
-              <!-- ─ Scenario 6: Custom Templates ────────────── -->
-              @case ('scenario-custom') {
-                <div class="example-preview fab-demo fab-demo--issues">
-                  <div class="fab-demo__issue-row">
-                    <span class="fab-demo__issue-dot fab-demo__issue-dot--danger"></span>
-                    <div class="fab-demo__issue-content">
-                      <span class="fab-demo__issue-title">Login fails on Safari 17</span>
-                      <span class="fab-demo__issue-meta">#247 &middot; opened 2h ago</span>
-                    </div>
-                  </div>
-                  <div class="fab-demo__issue-row">
-                    <span class="fab-demo__issue-dot fab-demo__issue-dot--success"></span>
-                    <div class="fab-demo__issue-content">
-                      <span class="fab-demo__issue-title">Add dark mode toggle</span>
-                      <span class="fab-demo__issue-meta">#246 &middot; opened 5h ago</span>
-                    </div>
-                  </div>
-                  <div class="fab-demo__issue-row">
-                    <span class="fab-demo__issue-dot fab-demo__issue-dot--info"></span>
-                    <div class="fab-demo__issue-content">
-                      <span class="fab-demo__issue-title">Improve onboarding flow UX</span>
-                      <span class="fab-demo__issue-meta">#245 &middot; opened 1d ago</span>
-                    </div>
-                  </div>
-                  <div class="fab-demo__issue-row">
-                    <span class="fab-demo__issue-dot fab-demo__issue-dot--warning"></span>
-                    <div class="fab-demo__issue-content">
-                      <span class="fab-demo__issue-title">Performance regression in list view</span>
-                      <span class="fab-demo__issue-meta">#244 &middot; opened 2d ago</span>
-                    </div>
-                  </div>
-                  <div class="fab-demo__anchor--br">
-                    <nui-fab-button
-                      layout="linear"
-                      direction="up"
-                      shape="rounded"
-                      color="primary"
-                      variant="solid"
-                      spacing="4.5rem"
-                      [items]="customTemplateActions"
-                    >
-                      <ng-template fabTrigger let-open="isOpen">
-                        <span class="fab-demo-trigger">
-                          <i [class]="open ? 'ri-close-line' : 'ri-add-line'"></i>
-                          @if (!open) {
-                            <span class="fab-demo-trigger-label">New</span>
+              <!-- ── Colors ─────────────────────────────────────────────── -->
+              @case ('colors') {
+                <div class="example-preview fab-preview fab-preview--wrap">
+                  <nui-fab-button color="primary" [items]="actions" />
+                  <nui-fab-button color="secondary" [items]="actions" />
+                  <nui-fab-button color="accent" [items]="actions" />
+                  <nui-fab-button color="success" [items]="actions" />
+                  <nui-fab-button color="info" [items]="actions" />
+                  <nui-fab-button color="warning" [items]="actions" />
+                  <nui-fab-button color="danger" [items]="actions" />
+                  <nui-fab-button color="neutral" [items]="actions" />
+                </div>
+              }
+
+              <!-- ── Sizes ──────────────────────────────────────────────── -->
+              @case ('sizes') {
+                <div class="example-preview fab-preview fab-preview--wrap align-items-end">
+                  <nui-fab-button size="xs" [items]="actions" />
+                  <nui-fab-button size="sm" [items]="actions" />
+                  <nui-fab-button size="md" [items]="actions" />
+                  <nui-fab-button size="lg" [items]="actions" />
+                  <nui-fab-button size="xl" [items]="actions" />
+                </div>
+              }
+
+              <!-- ── Animation ──────────────────────────────────────────── -->
+              @case ('animation') {
+                <div class="example-preview fab-preview fab-preview--wrap">
+                  <nui-fab-button animation="scale" [items]="actions" />
+                  <nui-fab-button animation="fade" [items]="actions" color="secondary" />
+                  <nui-fab-button animation="slide" [items]="actions" color="accent" />
+                </div>
+              }
+
+              <!-- ── Trigger ────────────────────────────────────────────── -->
+              @case ('trigger') {
+                <div class="example-preview fab-preview fab-preview--wrap">
+                  <nui-fab-button triggerIcon="ri-pencil-line" [items]="actions" />
+                  <nui-fab-button
+                    triggerIcon="ri-add-line"
+                    triggerIconOpen="ri-close-line"
+                    color="secondary"
+                    [items]="actions"
+                  />
+                  <nui-fab-button
+                    triggerIcon="ri-add-line"
+                    triggerIconOpen="ri-close-line"
+                    triggerLabel="Nuevo"
+                    shape="rounded"
+                    color="accent"
+                    [items]="actions"
+                  />
+                  <nui-fab-button
+                    triggerIcon="ri-notification-line"
+                    [triggerBadge]="unreadCount()"
+                    color="danger"
+                    [items]="actions"
+                  />
+                </div>
+              }
+
+              <!-- ── Loading ────────────────────────────────────────────── -->
+              @case ('loading') {
+                <div class="example-preview fab-preview flex-column align-items-center">
+                  <nui-fab-button
+                    triggerIcon="ri-send-plane-line"
+                    triggerLabel="Enviar"
+                    shape="rounded"
+                    [loading]="isSending()"
+                    [items]="actions"
+                  />
+                  <button
+                    class="fab-sim-btn"
+                    type="button"
+                    (click)="simulateSend()"
+                    [disabled]="isSending()"
+                  >
+                    {{ isSending() ? 'Enviando…' : 'Simular 2s' }}
+                  </button>
+                </div>
+              }
+
+              <!-- ── openOn ─────────────────────────────────────────────── -->
+              @case ('openOn') {
+                <div class="example-preview fab-preview fab-preview--wrap">
+                  <nui-fab-button openOn="click" [items]="actions" />
+                  <nui-fab-button openOn="hover" [items]="actions" color="secondary" />
+                </div>
+              }
+
+              <!-- ── itemDisplay ────────────────────────────────────────── -->
+              @case ('itemDisplay') {
+                <div class="example-preview fab-preview fab-preview--wrap">
+                  <nui-fab-button itemDisplay="icon" [items]="labeledActions" />
+                  <nui-fab-button
+                    itemDisplay="icon-text"
+                    [items]="labeledActions"
+                    shape="rounded"
+                    color="secondary"
+                  />
+                </div>
+              }
+
+              <!-- ── closeOptions ───────────────────────────────────────── -->
+              @case ('closeOptions') {
+                <div class="example-preview fab-preview fab-preview--wrap">
+                  <nui-fab-button
+                    [closeOnItemClick]="false"
+                    triggerIcon="ri-filter-3-line"
+                    color="neutral"
+                    [items]="actions"
+                  />
+                  <nui-fab-button
+                    [closeOnOutsideClick]="true"
+                    color="secondary"
+                    [items]="actions"
+                  />
+                  <nui-fab-button [closeOnScroll]="true" color="accent" [items]="actions" />
+                </div>
+              }
+
+              <!-- ── Backdrop ───────────────────────────────────────────── -->
+              @case ('backdrop') {
+                <div class="example-preview fab-preview">
+                  <nui-fab-button
+                    [backdrop]="true"
+                    layout="semi-circle"
+                    direction="up"
+                    [items]="actions"
+                  />
+                </div>
+              }
+
+              <!-- ── Custom templates ───────────────────────────────────── -->
+              @case ('templates') {
+                <div class="example-preview fab-preview">
+                  <nui-fab-button
+                    shape="rounded"
+                    color="primary"
+                    [items]="templateActions"
+                    spacing="3.5rem"
+                  >
+                    <ng-template fabTrigger let-open="isOpen">
+                      <span class="fab-custom-trigger">
+                        <span class="fab-custom-trigger__icon">
+                          <i [class]="open ? 'ri-close-line' : 'ri-add-circle-line'"></i>
+                        </span>
+                        <span class="fab-custom-trigger__text">
+                          @if (open) {
+                            Close
+                          } @else {
+                            Create
                           }
                         </span>
-                      </ng-template>
-                      <ng-template fabItem let-item>
-                        <span class="fab-demo-item">
+                      </span>
+                    </ng-template>
+                    <ng-template fabItem let-item>
+                      <span class="fab-custom-item">
+                        <span class="fab-custom-item__icon">
                           <i [class]="item.icon"></i>
-                          @if (item.label) {
-                            <span class="fab-demo-item-label">{{ item.label }}</span>
-                          }
                         </span>
-                      </ng-template>
-                    </nui-fab-button>
-                  </div>
-                </div>
-              }
-
-              <!-- ─ Scenario 7: Extended FAB features ───────── -->
-              @case ('scenario-extended') {
-                <div class="example-preview fab-demo--ext-grid">
-                    <!-- Card 1: Extended FAB (triggerLabel + triggerIconOpen + badge) -->
-                    <div class="fab-ext-card">
-                      <span class="fab-ext-card__label">Extended FAB + Badge</span>
-                      <p class="fab-ext-card__desc">
-                        <code>triggerLabel</code>
-                        ,
-                        <code>triggerIconOpen</code>
-                        ,
-                        <code>triggerBadge</code>
-                        <span style="display: block">
-                          Trigger label and icon can change when open; badge shows unread count
-                        </span>
-                      </p>
-                      <div class="fab-ext-card__demo">
-                        <nui-fab-button
-                          triggerIcon="ri-pencil-line"
-                          triggerIconOpen="ri-close-line"
-                          triggerLabel="Compose"
-                          [triggerBadge]="extendedUnreadCount()"
-                          shape="rounded"
-                          color="primary"
-                          direction="up"
-                          layout="linear"
-                          [items]="composeActions"
-                        />
-                      </div>
-                    </div>
-
-                    <!-- Card 2: Loading state -->
-                    <div class="fab-ext-card">
-                      <span class="fab-ext-card__label">Loading state</span>
-                      <p class="fab-ext-card__desc">
-                        <code>loading</code>
-                        <span style="display: block">
-                          Trigger shows a spinner while async action is in progress
-                        </span>
-                      </p>
-                      <div class="fab-ext-card__demo fab-ext-card__demo--row">
-                        <nui-fab-button
-                          triggerIcon="ri-mail-send-line"
-                          [loading]="extendedLoading()"
-                          color="primary"
-                          shape="rounded"
-                          triggerLabel="Send"
-                          direction="up"
-                          layout="linear"
-                          [items]="composeActions"
-                        />
-                        <button
-                          class="fab-ext-sim-btn"
-                          type="button"
-                          (click)="_simLoading()"
-                          [disabled]="extendedLoading()"
-                        >
-                          {{ extendedLoading() ? 'Sending…' : 'Simulate 2s' }}
-                        </button>
-                      </div>
-                    </div>
-
-                    <!-- Card 3: Hover mode (openOn='hover') -->
-                    <div class="fab-ext-card">
-                      <span class="fab-ext-card__label">Speed-dial on hover</span>
-                      <p class="fab-ext-card__desc">
-                        <code>openOn="hover"</code>
-                        <span style="display: block">
-                          Hover over the FAB to expand (keyboard still works)
-                        </span>
-                      </p>
-                      <div class="fab-ext-card__demo">
-                        <nui-fab-button
-                          openOn="hover"
-                          triggerIcon="ri-share-line"
-                          color="secondary"
-                          direction="up"
-                          layout="linear"
-                          [items]="shareActions"
-                        />
-                      </div>
-                    </div>
-
-                    <!-- Card 4: Multi-action (closeOnItemClick=false) -->
-                    <div class="fab-ext-card">
-                      <span class="fab-ext-card__label">Multi-action (dial stays open)</span>
-                      <p class="fab-ext-card__desc">
-                        <code>[closeOnItemClick]="false"</code>
-                        <span style="display: block">
-                          Click items repeatedly without re-opening
-                        </span>
-                      </p>
-                      <div class="fab-ext-card__demo">
-                        <nui-fab-button
-                          [closeOnItemClick]="false"
-                          triggerIcon="ri-filter-3-line"
-                          color="neutral"
-                          direction="up"
-                          layout="linear"
-                          [items]="filterActions"
-                        />
-                      </div>
-                    </div>
-
-                    <!-- Card 5: itemDisplay='icon-text' -->
-                    <div class="fab-ext-card">
-                      <span class="fab-ext-card__label">Icon + label (icon-text)</span>
-                      <p class="fab-ext-card__desc">
-                        <code>itemDisplay="icon-text"</code>
-                        <span style="display: block">
-                          Label visible inside each button; tooltip suppressed
-                        </span>
-                      </p>
-                      <div class="fab-ext-card__demo">
-                        <nui-fab-button
-                          itemDisplay="icon-text"
-                          triggerIcon="ri-add-line"
-                          color="primary"
-                          shape="rounded"
-                          direction="up"
-                          layout="linear"
-                          [items]="iconTextActions"
-                        />
-                      </div>
-                    </div>
-
-                    <!-- Card 6: itemDisplay='icon' (default, comparison) -->
-                    <div class="fab-ext-card">
-                      <span class="fab-ext-card__label">Icon only (default)</span>
-                      <p class="fab-ext-card__desc">
-                        <code>itemDisplay="icon"</code>, 
-                        <code>closeOnScroll="true"</code>
-                        <span style="display: block">
-                          Compact icon-only buttons with tooltip on hover (default)
-                        </span>
-                      </p>
-                      <div class="fab-ext-card__demo">
-                        <nui-fab-button
-                          itemDisplay="icon"
-                          triggerIcon="ri-add-line"
-                          color="primary"
-                          shape="rounded"
-                          direction="up"
-                          layout="linear"
-                          [items]="iconTextActions"
-                          [closeOnScroll]="true"
-                        />
-                      </div>
-                    </div>
+                        <span class="fab-custom-item__label">{{ item.label }}</span>
+                      </span>
+                    </ng-template>
+                  </nui-fab-button>
                 </div>
               }
             }
 
-            <!-- API / Theming table -->
             @if (section.table) {
               <div class="api-table">
                 <table>
@@ -412,7 +280,6 @@
               </div>
             }
 
-            <!-- Code blocks -->
             @if (section.examples && section.examples.length > 0) {
               <app-code-block [examples]="section.examples"></app-code-block>
             }

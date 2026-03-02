@@ -1584,35 +1584,61 @@
     "fabButton": {
       "title": "FAB Button",
       "subtitle": "Botón de acción flotante con layouts radiales y múltiples opciones de personalización",
-      "scenarios": {
-        "mobile": {
-          "title": "FAB principal con layout linear",
-          "description": "El layout <code>linear</code> es el más común para FABs principales en mobile. Ubicado en la esquina inferior derecha, el botón se expande hacia arriba mostrando las acciones disponibles sin interferir con la navegación principal."
-        },
-        "dashboard": {
-          "title": "FAB contextual con layout semi-circle y backdrop",
-          "description": "Un FAB con layout <code>semi-circle</code> y backdrop puede proporcionar acceso rápido a acciones relacionadas con el contexto actual, como agregar un nuevo elemento, filtrar o acceder a configuraciones. El backdrop ayuda a enfocar la atención en las opciones del FAB mientras el menú está abierto."
-        },
-        "card": {
-          "title": "FAB contextual con layout quarter-circle",
-          "description": "Un FAB ubicado en la esquina de una tarjeta o sección puede usar el layout <code>quarter-circle</code> para mostrar acciones específicas de ese contexto, como editar, compartir o eliminar. Esto mantiene las opciones organizadas y accesibles sin saturar la interfaz."
-        },
-        "radial": {
-          "title": "FAB radial con layout circle",
-          "description": "El layout <code>circle</code> distribuye los items uniformemente en 360° alrededor del botón central. Útil como acceso directo a secciones principales o como paleta de herramientas en aplicaciones de diseño o gestión."
-        },
-        "panel": {
-          "title": "FAB con layout quarter-circle",
-          "description": "El layout <code>quarter-circle</code> con <code>direction='down-right'</code> es la elección natural para un FAB en la esquina superior izquierda: los items se expanden hacia el interior del panel sin salir de los límites del componente."
-        },
-        "custom": {
-          "title": "FAB con templates personalizados (fabTrigger + fabItem)",
-          "description": "Con las directivas <code>fabTrigger</code> y <code>fabItem</code> puedes inyectar cualquier <code>&lt;ng-template&gt;</code> como contenido del botón principal o de cada item, manteniendo el comportamiento, las animaciones y la accesibilidad intactos."
-        },
-        "extended": {
-          "title": "FAB extendido",
-          "description": "Muestra los inputs añadidos en esta versión: <code>triggerLabel</code> e <code>triggerIconOpen</code> (Extended FAB pill), <code>triggerBadge</code> (notificaciones), <code>loading</code> (estado asíncrono), <code>openOn='hover'</code> (speed-dial en desktop), <code>closeOnItemClick=false</code> (multi-acción sin cerrar el dial), <code>closeOnScroll=true</code> (cierra el dial al hacer scroll)."
-        }
+      "basic": {
+        "title": "Básico",
+        "description": "El uso más simple del FAB Button: despliega las acciones hacia arriba en layout lineal al hacer clic en el trigger."
+      },
+      "directions": {
+        "title": "Direcciones",
+        "description": "Controla hacia dónde se expanden los items con <code>direction</code>. Valores disponibles: <code>up</code>, <code>down</code>, <code>left</code>, <code>right</code> y las cuatro diagonales."
+      },
+      "layouts": {
+        "title": "Layouts",
+        "description": "Define la distribución espacial de los items con <code>layout</code>: <code>linear</code> (en línea), <code>semi-circle</code> (semicírculo), <code>quarter-circle</code> (cuarto de círculo) y <code>circle</code> (círculo completo)."
+      },
+      "shapes": {
+        "title": "Formas",
+        "description": "Personaliza el radio de borde del trigger y los items con <code>shape</code>: <code>circular</code>, <code>rounded</code> o <code>square</code>."
+      },
+      "colors": {
+        "title": "Colores",
+        "description": "Usa cualquiera de los 8 colores semánticos del sistema con el input <code>color</code>."
+      },
+      "sizes": {
+        "title": "Tamaños",
+        "description": "Controla el tamaño del trigger y los items con <code>size</code>: <code>xs</code>, <code>sm</code>, <code>md</code> (por defecto), <code>lg</code> y <code>xl</code>."
+      },
+      "animation": {
+        "title": "Animaciones",
+        "description": "Elige cómo entran y salen los items con <code>animation</code>: <code>scale</code> (por defecto), <code>fade</code> o <code>slide</code>."
+      },
+      "trigger": {
+        "title": "Trigger",
+        "description": "Personaliza el botón trigger con <code>triggerIcon</code>, <code>triggerIconOpen</code> (icono alternativo cuando está abierto), <code>triggerLabel</code> (patrón Extended FAB) y <code>triggerBadge</code> para mostrar un contador."
+      },
+      "loading": {
+        "title": "Estado de carga",
+        "description": "Muestra un spinner en el trigger con <code>[loading]=\"true\"</code>. Mientras está activo, el trigger no abre ni cierra el dial."
+      },
+      "openOn": {
+        "title": "Modo de apertura",
+        "description": "Controla cómo se abre el dial: <code>openOn=\"click\"</code> (por defecto) o <code>openOn=\"hover\"</code> para speed-dial activado al pasar el cursor. La navegación por teclado funciona igual en ambos modos."
+      },
+      "itemDisplay": {
+        "title": "Visualización de items",
+        "description": "<code>itemDisplay=\"icon\"</code> muestra solo el icono con tooltip en hover (por defecto). <code>itemDisplay=\"icon-text\"</code> muestra el icono y la propiedad <code>label</code> del item directamente visible dentro del botón."
+      },
+      "closeOptions": {
+        "title": "Opciones de cierre",
+        "description": "Controla cuándo se cierra el dial: <code>[closeOnItemClick]=\"false\"</code> mantiene el dial abierto tras pulsar un item (útil para selección múltiple), <code>[closeOnOutsideClick]=\"true\"</code> cierra al hacer clic fuera, <code>[closeOnScroll]=\"true\"</code> cierra al hacer scroll."
+      },
+      "backdrop": {
+        "title": "Backdrop",
+        "description": "Añade una capa translúcida detrás de los items con <code>[backdrop]=\"true\"</code>, ideal para destacar las acciones sobre contenido denso."
+      },
+      "templates": {
+        "title": "Templates personalizados",
+        "description": "Proyecta tu propio contenido en el trigger con <code>fabTrigger</code> y en cada item con <code>fabItem</code>. Ambas directivas exponen el contexto del item vía <code>let-item</code> y el estado abierto del dial vía <code>let-open=\"isOpen\"</code>."
       },
       "api": {
         "inputs": {

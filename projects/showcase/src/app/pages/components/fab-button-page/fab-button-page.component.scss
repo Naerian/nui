@@ -1,378 +1,150 @@
 // =============================================================================
-// FAB BUTTON PAGE — demo previews
-// Uses global .example-preview as the base container (same as paginator-page).
-// Only page-specific extras are defined here.
+// FAB BUTTON PAGE
+// Minimal additions on top of the global .example-preview base.
 // =============================================================================
 
-// -- Base FAB demo container --------------------------------------------------
-// Extends .example-preview with `position:relative` and enough height so
-// FAB items can expand without being clipped.
-.example-preview.fab-demo {
-  position: relative;
-  min-height: 280px;
-  overflow: visible; // allow FAB items to expand beyond the box
-  flex-direction: column;
+// Base FAB preview: enough height for items to expand without clipping.
+.example-preview.fab-preview {
+  min-height: 155px;
+  overflow: visible;
   align-items: center;
   justify-content: center;
 }
 
-// -- Absolute anchor helpers --------------------------------------------------
-.fab-demo__anchor--br {
-  position: absolute;
-  bottom: 1rem;
-  right:  1rem;
+// Multi-FAB rows: wrap and add extra gap between triggers.
+.example-preview.fab-preview.fab-preview--wrap {
+  flex-wrap: wrap;
+  gap: 4rem;
 }
 
-.fab-demo__anchor--tl {
-  position: absolute;
-  top:  1rem;
-  left: 1rem;
+// Taller preview for circle / radial layouts.
+.example-preview.fab-preview.fab-preview--tall {
+  min-height: 230px;
 }
 
-.fab-demo__anchor--tr {
-  position: absolute;
-  top:   0.5rem;
-  right: 0.5rem;
-}
-
-// -- Scenario 1 — list (mobile) -----------------------------------------------
-.fab-demo__list {
-  width: 100%;
-  max-width: 320px;
-}
-
-.fab-demo__list-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.625rem 0;
-  border-bottom: 1px solid var(--nui-border-color);
+// ?? Simulate button (loading demo) ??????????????????????????????????????????
+.fab-sim-btn {
+  border: 1px solid var(--nui-border-color);
+  background: var(--nui-surface);
+  color: var(--nui-on-surface);
+  border-radius: var(--nui-border-radius-md);
+  padding: 0.375rem 1rem;
   font-size: var(--nui-font-size-sm);
-  font-family: var(--nui-font-family);
-  color: var(--nui-on-surface-secondary);
-
-  &:last-child { border-bottom: none; }
-
-  i { font-size: 1.1rem; flex-shrink: 0; }
-}
-
-// -- Scenario 2 — chart (dashboard) ------------------------------------------
-.fab-demo__chart {
-  display: flex;
-  align-items: flex-end;
-  gap: 0.5rem;
-  width: 80%;
-  max-width: 280px;
-  height: 6rem;
-  margin-bottom: 1rem;
-
-  span {
-    flex: 1;
-    height: var(--h, 50%);
-    border-radius: var(--nui-border-radius-xs) var(--nui-border-radius-xs) 0 0;
-    background: color-mix(in srgb, var(--nui-border-color) 60%, var(--nui-on-surface) 40%);
-
-    &:nth-child(even) {
-      background: color-mix(in srgb, var(--nui-border-color) 40%, var(--nui-on-surface) 30%);
-    }
-  }
-}
-
-// -- Scenario 3 — card grid ---------------------------------------------------
-.example-preview.fab-demo--cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  align-items: start;
-  overflow: visible;
-
-  @media (max-width: 480px) { grid-template-columns: 1fr; }
-}
-
-.fab-demo__card {
-  position: relative;
-  background: var(--nui-surface);
-  border-radius: var(--nui-border-radius-md);
-  border: 1px solid var(--nui-border-color);
-  padding: 1rem;
-
-  &--featured {
-    border-color: color-mix(in srgb, var(--nui-border-color) 50%, var(--nui-on-surface) 20%);
-    box-shadow: var(--nui-shadow-sm);
-  }
-}
-
-.fab-demo__card-header {
-  display: flex;
-  gap: 0.625rem;
-  margin-bottom: 0.75rem;
-  padding-right: 2rem; // room for the TR-anchored FAB
-}
-
-.fab-demo__card-icon {
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: var(--nui-border-radius-sm);
-  background: var(--nui-border-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 0.875rem;
-  color: var(--nui-on-surface-secondary);
-}
-
-.fab-demo__card-meta { flex: 1; }
-
-.fab-demo__card-body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  margin-bottom: 0.75rem;
-}
-
-.fab-demo__card-tags {
-  display: flex;
-  gap: 0.375rem;
-}
-
-.fab-demo__tag {
-  height: 0.875rem;
-  width: 2.5rem;
-  border-radius: 1rem;
-  background: var(--nui-border-color);
-
-  &--accent {
-    background: color-mix(in srgb, var(--nui-border-color) 50%, var(--nui-on-surface) 20%);
-  }
-}
-
-// Skeleton lines (shared across card + other scenarios)
-.fab-demo__line {
-  height: 0.5rem;
-  border-radius: 1rem;
-  background: var(--nui-border-color);
-  width: 100%;
-  margin-bottom: 0.25rem;
-
-  &--title { height: 0.625rem; width: 65%; }
-  &--md    { width: 80%; }
-  &--sm    { width: 50%; }
-}
-
-// -- Scenario 5 — panel / table -----------------------------------------------
-.example-preview.fab-demo--panel {
-  position: relative;
-  min-height: 260px;
-  overflow: visible;
-  flex-direction: column;
-  align-items: stretch;
-  padding-top: 4.5rem; // clear space for the TL FAB
-}
-
-.fab-demo__table {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-}
-
-.fab-demo__table-row {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  border-radius: var(--nui-border-radius-sm);
-  background: var(--nui-surface);
-
-  span {
-    height: 0.5rem;
-    border-radius: 1rem;
-    background: var(--nui-border-color);
-  }
-
-  &--header {
-    background: transparent;
-    span { opacity: 0.4; }
-  }
-}
-
-// -- Scenario 6 — issue list (custom templates) -------------------------------
-.example-preview.fab-demo--issues {
-  position: relative;
-  min-height: 240px;
-  overflow: visible;
-  flex-direction: column;
-  align-items: stretch;
-  padding: 0;
-}
-
-.fab-demo__issue-row {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.7rem 1.25rem;
-  border-bottom: 1px solid var(--nui-border-color);
-  width: 100%;
-
-  &:last-of-type { border-bottom: none; }
-}
-
-.fab-demo__issue-dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  flex-shrink: 0;
-
-  &--danger  { background: var(--nui-color-danger-solid-bg,  #e53e3e); }
-  &--success { background: var(--nui-color-success-solid-bg, #38a169); }
-  &--info    { background: var(--nui-color-info-solid-bg,    #3182ce); }
-  &--warning { background: var(--nui-color-warning-solid-bg, #d69e2e); }
-}
-
-.fab-demo__issue-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.125rem;
-  min-width: 0;
-}
-
-.fab-demo__issue-title {
-  font-size: var(--nui-font-size-xs);
-  font-family: var(--nui-font-family);
-  font-weight: 500;
-  color: var(--nui-on-surface);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.fab-demo__issue-meta {
-  font-size: 0.65rem;
-  font-family: var(--nui-font-family);
-  color: var(--nui-on-surface-secondary);
-  opacity: 0.75;
-}
-
-// -- Scenario 7 — extended FAB feature grid -----------------------------------
-.example-preview.fab-demo--ext-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0;
-  padding: 0;
-  overflow: visible;
-
-  @media (max-width: 600px) { grid-template-columns: 1fr; }
-}
-
-.fab-ext-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1.25rem 1rem 1rem;
-  border-right: 1px solid var(--nui-border-color);
-  border-bottom: 1px solid var(--nui-border-color);
-  text-align: center;
-
-  &:nth-child(2n)       { border-right: none; }
-  &:nth-last-child(-n+2) { border-bottom: none; }
-
-  &__label {
-    font-size: var(--nui-font-size-xs);
-    font-family: var(--nui-font-family);
-    font-weight: 700;
-    color: var(--nui-on-surface);
-    letter-spacing: 0.01em;
-  }
-
-  &__desc {
-    font-size: 0.65rem;
-    font-family: var(--nui-font-family);
-    color: var(--nui-on-surface-secondary);
-    margin: 0;
-    line-height: 1.4;
-    max-width: 20ch;
-
-    code {
-      font-size: 0.6rem;
-      background: var(--nui-surface);
-      padding: 0.05em 0.3em;
-      border-radius: 3px;
-    }
-  }
-
-  &__demo {
-    margin-top: auto;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    width: 100%;
-    position: relative;
-    min-height: 4rem;
-
-    &--row {
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-    }
-  }
-}
-
-// "Simulate" button for loading state card
-.fab-ext-sim-btn {
-  border: 1px solid var(--nui-border-color);
-  background: var(--nui-surface);
-  color: var(--nui-on-surface);
-  border-radius: var(--nui-border-radius-md);
-  padding: 0.3rem 0.75rem;
-  font-size: var(--nui-font-size-xs);
   font-family: var(--nui-font-family);
   cursor: pointer;
   transition: background 0.15s;
+  margin-top: 1rem;
 
-  &:hover:not(:disabled) { background: var(--nui-surface-secondary); }
-  &:disabled { opacity: 0.5; cursor: wait; }
+  &:hover:not(:disabled) {
+    background: var(--nui-surface-secondary);
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: wait;
+  }
 }
 
-// =============================================================================
-// Custom-template helpers (fabTrigger / fabItem content projection)
-// =============================================================================
+// ?? Directions demo: compass grid ??????????????????????????????????????????
+.example-preview.fab-preview.fab-preview--directions {
+  display: grid;
+  grid-template-areas:
+    '.   top   .'
+    'lft  .   rgt'
+    '.   btm   .';
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  min-height: 340px;
+  align-items: stretch;
+  justify-content: stretch;
+  gap: 0;
 
-.fab-demo-trigger {
+  .fab-dir {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // Map each direction to the opposite grid cell so items open inward.
+    &--up {
+      grid-area: btm;
+    }
+    &--down {
+      grid-area: top;
+    }
+    &--right {
+      grid-area: lft;
+    }
+    &--left {
+      grid-area: rgt;
+    }
+  }
+}
+
+// ?? Custom template helpers (templates demo) ?????????????????????????????????
+.fab-custom-trigger {
   display: inline-flex;
   align-items: center;
-  gap: 0.375rem;
-  font-size: var(--nui-font-size-sm);
-  font-family: var(--nui-font-family);
-  font-weight: 600;
-  line-height: 1;
+  gap: 0.5rem;
+  padding: 0 0.125rem;
   white-space: nowrap;
-  padding: 0.375rem 0.75rem;
 
-  i { font-size: 1rem; line-height: 1; }
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: rgba(255 255 255 / 0.25);
+    backdrop-filter: blur(4px);
+
+    i {
+      font-size: 1rem;
+      line-height: 1;
+    }
+  }
+
+  &__text {
+    font-size: 0.75rem;
+    font-family: var(--nui-font-family);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
 }
 
-.fab-demo-trigger-label { letter-spacing: 0.01em; }
-
-.fab-demo-item {
+.fab-custom-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
-  line-height: 1;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 0.25rem 0.5rem;
   white-space: nowrap;
-  padding: 0.5rem 0.75rem;
-  width: 5em;
-  min-height: 2.5rem;
+  min-width: 3.75rem;
 
-  i { font-size: 0.9rem; flex-shrink: 0; }
-}
+  &__icon {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: rgba(255 255 255 / 0.2);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255 255 255 / 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.fab-demo-item-label {
-  font-size: var(--nui-font-size-xs);
-  font-family: var(--nui-font-family);
-  font-weight: 600;
-  letter-spacing: 0.01em;
+    i {
+      font-size: 0.75rem;
+      line-height: 1;
+    }
+  }
+
+  &__label {
+    font-size: 0.625rem;
+    font-family: var(--nui-font-family);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.9;
+  }
 }
