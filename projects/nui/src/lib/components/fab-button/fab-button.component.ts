@@ -23,6 +23,9 @@ import {
   FabButtonShape,
   FabButtonItem,
   FabButtonItemResolved,
+  FabButtonTooltipSide,
+  FabButtonTooltipSideEnum,
+  FabButtonDirectionEnum,
 } from './models/fab-button.model';
 import {
   NUIColor,
@@ -33,6 +36,8 @@ import {
   DEFAULT_VARIANT,
 } from '../../configs';
 import { injectFabButtonConfig } from '../../configs/fab-button';
+import { DEFAULT_FAB_BUTTON_I18N } from './models';
+import { NuiI18nService } from '../../i18n';
 
 // Unique ID counter – shared across instances (module-level)
 let _fabIdCounter = 0;
@@ -56,15 +61,14 @@ let _fabIdCounter = 0;
     '[class.nui-fab--disabled]': 'disabled()',
     '[attr.role]': '"group"',
     '[attr.aria-label]': 'hostAriaLabel()',
-    // Expose radius/spacing as CSS custom props (allow inline override)
-    '[style.--nui-fab-radius]': 'radius() ?? null',
-    '[style.--nui-fab-spacing]': 'spacing() ?? null',
   },
 })
 export class FabButtonComponent implements OnDestroy {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly globalConfig = injectFabButtonConfig();
+  protected readonly _i18nService = inject(NuiI18nService);
+  protected readonly _i18n = computed(() => this._i18nService.translations().fabButton);
 
   /** Unique instance ID used for aria-controls / aria-labelledby. */
   readonly instanceId = `nui-fab-${++_fabIdCounter}`;
@@ -158,40 +162,40 @@ export class FabButtonComponent implements OnDestroy {
 
   private readonly _expanded = signal(false);
 
+  /**
+   * Runtime tooltip-side overrides keyed by item index.
+   * Populated after measuring viewport space each time the FAB opens.
+   * Cleared on close so stale values don't leak into the next open.
+   */
+  private readonly _runtimeTooltipSides = signal<Record<number, FabButtonTooltipSide>>({});
+
   // ========================================================================
   // EFFECTIVE COMPUTED PROPS (input → global config → library default)
   // ========================================================================
 
-  readonly effectiveDirection = computed(
-    () => this.direction() ?? this.globalConfig.direction,
-  );
-  readonly effectiveLayout = computed(
-    () => this.layout() ?? this.globalConfig.layout,
-  );
-  readonly effectiveAnimation = computed(
-    () => this.animation() ?? this.globalConfig.animation,
-  );
-  readonly effectiveShape = computed(
-    () => this.shape() ?? this.globalConfig.shape,
-  );
+  readonly effectiveDirection = computed(() => this.direction() ?? this.globalConfig.direction);
+  readonly effectiveLayout = computed(() => this.layout() ?? this.globalConfig.layout);
+  readonly effectiveAnimation = computed(() => this.animation() ?? this.globalConfig.animation);
+  readonly effectiveShape = computed(() => this.shape() ?? this.globalConfig.shape);
   readonly effectiveColor = computed(
-    () => this.color() ?? this.globalConfig.color ?? DEFAULT_COLOR,
+    () => this.color() ?? this.globalConfig.color ?? DEFAULT_COLOR
   );
-  readonly effectiveSize = computed(
-    () => this.size() ?? this.globalConfig.size ?? DEFAULT_SIZE,
-  );
+  readonly effectiveSize = computed(() => this.size() ?? this.globalConfig.size ?? DEFAULT_SIZE);
   readonly effectiveVariant = computed(
-    () => this.variant() ?? this.globalConfig.variant ?? DEFAULT_VARIANT,
+    () => this.variant() ?? this.globalConfig.variant ?? DEFAULT_VARIANT
   );
-  readonly effectiveBackdrop = computed(
-    () => this.backdrop() ?? this.globalConfig.backdrop,
-  );
+  readonly effectiveBackdrop = computed(() => this.backdrop() ?? this.globalConfig.backdrop);
   readonly effectiveCloseOnOutsideClick = computed(
-    () => this.closeOnOutsideClick() ?? this.globalConfig.closeOnOutsideClick,
+    () => this.closeOnOutsideClick() ?? this.globalConfig.closeOnOutsideClick
   );
-  readonly effectiveCloseOnEsc = computed(
-    () => this.closeOnEsc() ?? this.globalConfig.closeOnEsc,
-  );
+  readonly effectiveCloseOnEsc = computed(() => this.closeOnEsc() ?? this.globalConfig.closeOnEsc);
+
+  readonly effectiveI18n = computed(() => {
+    return {
+      ...DEFAULT_FAB_BUTTON_I18N,
+      ...this._i18n(), 
+    };
+  });
 
   /**
    * Expansion state surface:
@@ -206,9 +210,7 @@ export class FabButtonComponent implements OnDestroy {
 
   readonly hostAriaLabel = computed(() => this.ariaLabel() || null);
 
-  readonly triggerAriaLabel = computed(() =>
-    this.isOpen() ? 'Close actions' : this.ariaLabel(),
-  );
+  readonly triggerAriaLabel = computed(() => (this.isOpen() ? this.effectiveI18n().triggerAriaLabel : this.ariaLabel()));
 
   // ========================================================================
   // CONTAINER CLASSES (colour/size/variant/shape/layout on inner container)
@@ -231,11 +233,16 @@ export class FabButtonComponent implements OnDestroy {
     const items = this.items();
     const layout = this.effectiveLayout();
     const direction = this.effectiveDirection();
-    return items.map((item, i) => ({
-      ...item,
-      index: i,
-      ...this._resolveItemTransform(i, items.length, layout, direction),
-    }));
+    const runtimeSides = this._runtimeTooltipSides(); // reactive dependency
+    return items.map((item, i) => {
+      const base = {
+        ...item,
+        index: i,
+        ...this._resolveItemTransform(i, items.length, layout, direction),
+      };
+      // Apply viewport-measured override when available
+      return runtimeSides[i] !== undefined ? { ...base, tooltipSide: runtimeSides[i] } : base;
+    });
   });
 
   // ========================================================================
@@ -253,6 +260,22 @@ export class FabButtonComponent implements OnDestroy {
         this._unregisterOutsideClick();
       }
     });
+
+    // Measure available viewport space for each item tooltip after opening.
+    // queueMicrotask defers until after Angular has committed the DOM update
+    // so CSS variables and trigger position are stable.
+    effect(
+      () => {
+        if (!isPlatformBrowser(this.platformId)) return;
+        const open = this.isOpen();
+        if (!open) {
+          this._runtimeTooltipSides.set({});
+          return;
+        }
+        queueMicrotask(() => this._measureAndUpdateTooltipSides());
+      },
+      { allowSignalWrites: true }
+    );
   }
 
   ngOnDestroy(): void {
@@ -334,8 +357,8 @@ export class FabButtonComponent implements OnDestroy {
     i: number,
     total: number,
     layout: FabButtonLayoutType,
-    direction: FabButtonDirection,
-  ): { tx: string; ty: string; tooltipSide: 'left' | 'right' } {
+    direction: FabButtonDirection
+  ): { tx: string; ty: string; tooltipSide: FabButtonTooltipSide } {
     switch (layout) {
       case 'linear': {
         const v = this._directionVector(direction);
@@ -345,7 +368,7 @@ export class FabButtonComponent implements OnDestroy {
         return {
           tx: mx === 0 ? '0px' : `calc(${mx} * var(--nui-fab-spacing))`,
           ty: my === 0 ? '0px' : `calc(${my} * var(--nui-fab-spacing))`,
-          tooltipSide: v.x > 0 ? 'right' : 'left',
+          tooltipSide: this._tooltipSideFromVector(v.x, v.y),
         };
       }
 
@@ -370,7 +393,7 @@ export class FabButtonComponent implements OnDestroy {
         // Example: direction='up' → arc spans from up-left to up-right.
         const center = this._directionAngle(direction);
         const startAngle = center - Math.PI / 4;
-        const step = total > 1 ? (Math.PI / 2) / (total - 1) : 0;
+        const step = total > 1 ? Math.PI / 2 / (total - 1) : 0;
         return this._radialTransform(startAngle + i * step);
       }
     }
@@ -378,18 +401,203 @@ export class FabButtonComponent implements OnDestroy {
 
   /**
    * Converts a polar angle (radians) to a CSS calc() translate pair.
-   * Returns tooltipSide based on the sign of the X cosine: items in the
-   * right half-plane show their tooltip to the right so the trigger doesn't
-   * obscure it.
+   * Uses the same perpendicular heuristic as _tooltipSideFromVector so the
+   * tooltip always appears on the face of the item that is furthest from the
+   * trigger centre.
    */
-  private _radialTransform(angle: number): { tx: string; ty: string; tooltipSide: 'left' | 'right' } {
+  private _radialTransform(angle: number): {
+    tx: string;
+    ty: string;
+    tooltipSide: FabButtonTooltipSide;
+  } {
     const cx = +Math.cos(angle).toFixed(4);
     const cy = +Math.sin(angle).toFixed(4);
     return {
       tx: cx === 0 ? '0px' : `calc(${cx} * var(--nui-fab-radius))`,
       ty: cy === 0 ? '0px' : `calc(${cy} * var(--nui-fab-radius))`,
-      tooltipSide: cx > 0 ? 'right' : 'left',
+      tooltipSide: this._tooltipSideFromVector(cx, cy),
     };
+  }
+
+  /**
+   * Determines on which face of the item button the tooltip should appear,
+   * based on the item's displacement vector from the trigger centre.
+   *
+   * Rule — tooltip is placed PERPENDICULAR to the expansion axis,
+   * always on the face furthest from the trigger ("centrifugal" placement):
+   *
+   *   │vy│ ≥ │vx│  (vertical / diagonal dominance)
+   *     → 'right' when vx ≥ 0  /  'left'  when vx < 0
+   *
+   *   │vx│ > │vy│  (purely horizontal expansion: left / right)
+   *     → 'top'  (above the item — perpendicular and never overlaps siblings)
+   *
+   * This avoids:
+   *  - Tooltip going in the same direction as the expansion (off-screen risk)
+   *  - Tooltip pointing back toward the trigger (overlap risk)
+   *  - One item's tooltip hiding behind an adjacent item (z-index fix handles this)
+   */
+  private _tooltipSideFromVector(vx: number, vy: number): FabButtonTooltipSide {
+    if (Math.abs(vy) >= Math.abs(vx)) {
+      // Vertical or diagonal: go sideways away from centre
+      return vx >= 0 ? FabButtonTooltipSideEnum.RIGHT : FabButtonTooltipSideEnum.LEFT;
+    }
+    // Purely horizontal (left / right direction): tooltip above
+    return FabButtonTooltipSideEnum.TOP;
+  }
+
+  // ========================================================================
+  // VIEWPORT-AWARE TOOLTIP PLACEMENT
+  // ========================================================================
+
+  /**
+   * Reads CSS custom-property values and the trigger's live bounding rect to
+   * calculate each item's final position in the viewport WITHOUT waiting for
+   * the CSS enter-transition to finish. Tooltip elements are already in the
+   * DOM (opacity: 0) so their real dimensions are measurable.
+   */
+  private _measureAndUpdateTooltipSides(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const host = this.elementRef.nativeElement as HTMLElement;
+    // Read spacing/radius from the container element — that is where the
+    // per-size class rules (and the developer's inline-style override) live.
+    const container = host.querySelector<HTMLElement>('.nui-fab__container') ?? host;
+    const containerStyle = getComputedStyle(container);
+    const hostStyle = getComputedStyle(host);
+    const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+
+    const toPx = (val: string): number => {
+      const n = parseFloat(val);
+      if (!isNaN(n)) {
+        if (val.trim().endsWith('rem')) return n * rootFontSize;
+        return n; // px or unitless
+      }
+      return 0;
+    };
+
+    const spacing = toPx(containerStyle.getPropertyValue('--nui-fab-spacing').trim()) || 48;
+    const radius = toPx(containerStyle.getPropertyValue('--nui-fab-radius').trim()) || 56;
+    const tooltipOffset = toPx(hostStyle.getPropertyValue('--nui-fab-tooltip-offset').trim()) || 8;
+
+    const triggerEl = this.triggerBtn()?.nativeElement;
+    if (!triggerEl) return;
+    const tr = triggerEl.getBoundingClientRect();
+    const triggerCx = tr.left + tr.width / 2;
+    const triggerCy = tr.top + tr.height / 2;
+    const halfBtn = tr.width / 2; // item button ≈ same size as trigger (close enough)
+
+    // Helper: parse "calc(N * var(--nui-fab-spacing|radius))" → pixel value
+    const parseCalc = (s: string): number => {
+      if (!s || s === '0px') return 0;
+      const m = s.match(/calc\((-?[\d.]+)\s*\*\s*var\(--nui-fab-(spacing|radius)\)\)/);
+      if (!m) return 0;
+      return parseFloat(m[1]) * (m[2] === 'spacing' ? spacing : radius);
+    };
+
+    const items = this.resolvedItems();
+    const overrides: Record<number, FabButtonTooltipSide> = {};
+
+    const liElements = host.querySelectorAll<HTMLElement>('.nui-fab__item');
+
+    items.forEach((item, i) => {
+      if (!item.tooltip) return; // nothing to position
+
+      const li = liElements[i];
+      const tooltipEl = li?.querySelector<HTMLElement>('.nui-fab__item-tooltip');
+
+      // Tooltip dimensions — real values from DOM (opacity:0 elements still have layout)
+      const tooltipW = tooltipEl?.offsetWidth || 100;
+      const tooltipH = tooltipEl?.offsetHeight || 28;
+
+      // Item button centre in viewport coordinates (computed from trigger + vector)
+      const txPx = parseCalc(item.tx);
+      const tyPx = parseCalc(item.ty);
+      const itemCx = triggerCx + txPx;
+      const itemCy = triggerCy + tyPx;
+
+      const btnRect = {
+        left: itemCx - halfBtn,
+        right: itemCx + halfBtn,
+        top: itemCy - halfBtn,
+        bottom: itemCy + halfBtn,
+      };
+
+      overrides[i] = this._bestTooltipSide(
+        btnRect,
+        item.tooltipSide,
+        tooltipW,
+        tooltipH,
+        tooltipOffset
+      );
+    });
+
+    this._runtimeTooltipSides.set(overrides);
+  }
+
+  /**
+   * Picks the best side for a tooltip so it stays inside the viewport.
+   *
+   * Priority order:
+   *   1. `preferred` (heuristic side from direction vector)
+   *   2. Opposite of preferred
+   *   3. Perpendicular sides (in order)
+   *   4. Preferred as last-resort fallback
+   */
+  private _bestTooltipSide(
+    btnRect: { left: number; right: number; top: number; bottom: number },
+    preferred: FabButtonTooltipSide,
+    tooltipW: number,
+    tooltipH: number,
+    offset: number
+  ): FabButtonTooltipSide {
+    // clientWidth/clientHeight excludes the scrollbar (window.innerWidth includes it)
+    const vw = document.documentElement.clientWidth;
+    const vh = document.documentElement.clientHeight;
+    // Extra safety margin so the tooltip never touches the edge
+    const MARGIN = 6;
+
+    const fits: Record<FabButtonTooltipSide, boolean> = {
+      [FabButtonTooltipSideEnum.RIGHT]: btnRect.right + offset + tooltipW + MARGIN <= vw,
+      [FabButtonTooltipSideEnum.LEFT]: btnRect.left - offset - tooltipW - MARGIN >= 0,
+      [FabButtonTooltipSideEnum.TOP]: btnRect.top - offset - tooltipH - MARGIN >= 0,
+      [FabButtonTooltipSideEnum.BOTTOM]: btnRect.bottom + offset + tooltipH + MARGIN <= vh,
+    };
+
+    const opposites: Record<FabButtonTooltipSide, FabButtonTooltipSide> = {
+      [FabButtonTooltipSideEnum.RIGHT]: FabButtonTooltipSideEnum.LEFT,
+      [FabButtonTooltipSideEnum.LEFT]: FabButtonTooltipSideEnum.RIGHT,
+      [FabButtonTooltipSideEnum.TOP]: FabButtonTooltipSideEnum.BOTTOM,
+      [FabButtonTooltipSideEnum.BOTTOM]: FabButtonTooltipSideEnum.TOP,
+    };
+    const perpendiculars: Record<
+      FabButtonTooltipSide,
+      [FabButtonTooltipSide, FabButtonTooltipSide]
+    > = {
+      [FabButtonTooltipSideEnum.RIGHT]: [
+        FabButtonTooltipSideEnum.TOP,
+        FabButtonTooltipSideEnum.BOTTOM,
+      ],
+      [FabButtonTooltipSideEnum.LEFT]: [
+        FabButtonTooltipSideEnum.TOP,
+        FabButtonTooltipSideEnum.BOTTOM,
+      ],
+      [FabButtonTooltipSideEnum.TOP]: [
+        FabButtonTooltipSideEnum.RIGHT,
+        FabButtonTooltipSideEnum.LEFT,
+      ],
+      [FabButtonTooltipSideEnum.BOTTOM]: [
+        FabButtonTooltipSideEnum.RIGHT,
+        FabButtonTooltipSideEnum.LEFT,
+      ],
+    };
+
+    if (fits[preferred]) return preferred;
+    if (fits[opposites[preferred]]) return opposites[preferred];
+    for (const p of perpendiculars[preferred]) {
+      if (fits[p]) return p;
+    }
+    return preferred; // last resort: preferred even if it clips
   }
 
   /**
@@ -399,14 +607,14 @@ export class FabButtonComponent implements OnDestroy {
   private _directionVector(direction: FabButtonDirection): { x: number; y: number } {
     const s = 1 / Math.sqrt(2); // ≈ 0.7071 (diagonal unit)
     const map: Record<FabButtonDirection, { x: number; y: number }> = {
-      up: { x: 0, y: -1 },
-      down: { x: 0, y: 1 },
-      left: { x: -1, y: 0 },
-      right: { x: 1, y: 0 },
-      'up-left': { x: -s, y: -s },
-      'up-right': { x: s, y: -s },
-      'down-left': { x: -s, y: s },
-      'down-right': { x: s, y: s },
+      [FabButtonDirectionEnum.UP]: { x: 0, y: -1 },
+      [FabButtonDirectionEnum.DOWN]: { x: 0, y: 1 },
+      [FabButtonDirectionEnum.LEFT]: { x: -1, y: 0 },
+      [FabButtonDirectionEnum.RIGHT]: { x: 1, y: 0 },
+      [FabButtonDirectionEnum.UP_LEFT]: { x: -s, y: -s },
+      [FabButtonDirectionEnum.UP_RIGHT]: { x: s, y: -s },
+      [FabButtonDirectionEnum.DOWN_LEFT]: { x: -s, y: s },
+      [FabButtonDirectionEnum.DOWN_RIGHT]: { x: s, y: s },
     };
     return map[direction];
   }
@@ -418,14 +626,14 @@ export class FabButtonComponent implements OnDestroy {
    */
   private _directionAngle(direction: FabButtonDirection): number {
     const map: Record<FabButtonDirection, number> = {
-      right: 0,
-      'down-right': Math.PI / 4,
-      down: Math.PI / 2,
-      'down-left': (3 * Math.PI) / 4,
-      left: Math.PI,
-      'up-left': -(3 * Math.PI) / 4,
-      up: -Math.PI / 2,
-      'up-right': -Math.PI / 4,
+      [FabButtonDirectionEnum.RIGHT]: 0,
+      [FabButtonDirectionEnum.DOWN_RIGHT]: Math.PI / 4,
+      [FabButtonDirectionEnum.DOWN]: Math.PI / 2,
+      [FabButtonDirectionEnum.DOWN_LEFT]: (3 * Math.PI) / 4,
+      [FabButtonDirectionEnum.LEFT]: Math.PI,
+      [FabButtonDirectionEnum.UP_LEFT]: -(3 * Math.PI) / 4,
+      [FabButtonDirectionEnum.UP]: -Math.PI / 2,
+      [FabButtonDirectionEnum.UP_RIGHT]: -Math.PI / 4,
     };
     return map[direction];
   }

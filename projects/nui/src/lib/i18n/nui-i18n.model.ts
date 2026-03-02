@@ -1,5 +1,6 @@
 import { AvatarI18n } from '../components/avatar/models/avatar-i18n.model';
 import { CalendarI18n } from '../components/calendar/models/calendar-i18n.model';
+import { FabButtonI18n } from '../components/fab-button';
 import { PaginatorI18n } from '../components/paginator/models/paginator-i18n.model';
 import { TimePickerI18n } from '../components/time-picker/models/time-picker-i18n.model';
 
@@ -20,4 +21,5 @@ export interface NuiI18n {
   calendar: CalendarI18n;
   timePicker: TimePickerI18n;
   paginator: PaginatorI18n;
+  fabButton: FabButtonI18n;
 }

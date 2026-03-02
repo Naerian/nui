@@ -1,60 +1,350 @@
-// Grid for direction / layout / shape / animation comparisons.
-// Each cell keeps a generous padding so items don't overflow into each other.
-.fab-preview {
-  &--grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
-    gap: 2rem;
-    padding: 6rem 2rem 2rem;
+// =============================================================================
+// FAB BUTTON PAGE — Escenarios de uso
+// Cada .fab-scenario simula un contexto real de aplicación.
+// =============================================================================
+
+.fab-scenario {
+  border-radius: var(--nui-border-radius-lg);
+  box-shadow: var(--nui-shadow-md);
+  border: 1px solid var(--nui-border-color);
+  background: var(--nui-surface);
+
+  // ── Chrome superior (simula barra de la app) ────────────────────
+  &__chrome {
+    padding: 0.625rem 1rem;
+    background: var(--nui-surface-secondary);
+    border-bottom: 1px solid var(--nui-border-color);
+    border-radius: var(--nui-border-radius-lg) var(--nui-border-radius-lg) 0 0;
   }
 
-  // Single FAB centred with extra padding so expanding items are visible.
-  &--spacious {
+  &__chrome-bar {
     display: flex;
-    justify-content: center;
-    padding: 6rem 2rem 2rem;
+    align-items: center;
+    gap: 0.5rem;
   }
 
-  // Sizes: align items to bottom so size difference is visually clear.
-  &--sizes {
+  &__chrome-title {
+    flex: 1;
+    text-align: center;
+    font-size: var(--nui-font-size-xs);
+    font-family: var(--nui-font-family);
+    font-weight: 600;
+    color: var(--nui-on-surface-secondary);
+  }
+
+  &__chrome-signal {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    span {
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 50%;
+      background: var(--nui-border-color);
+    }
+  }
+
+  &__chrome-avatar {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: var(--nui-border-color);
+    flex-shrink: 0;
+  }
+
+  // ── Cuerpo del escenario ───────────────────────────────────
+  &__body {
+    position: relative;
+    min-height: 300px;
+    padding: 1.5rem;
+    border-radius: 0 0 var(--nui-border-radius-lg) var(--nui-border-radius-lg);
+
+    &--dashboard {
+      background: var(--nui-surface-secondary);
+      // Rejilla sutil tipo graph paper
+      background-image:
+        linear-gradient(var(--nui-border-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--nui-border-color) 1px, transparent 1px);
+      background-size: 2rem 2rem;
+    }
+
+    &--cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      align-items: start;
+      padding: 1.25rem;
+
+      @media (max-width: 480px) { grid-template-columns: 1fr; }
+    }
+
+    &--centered {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // Fondo punteado
+      background-image: radial-gradient(circle, var(--nui-border-color) 1px, transparent 1px);
+      background-size: 1.5rem 1.5rem;
+    }
+
+    &--panel {
+      display: flex;
+      padding: 0;
+      min-height: 320px;
+    }
+  }
+
+  // ── Anclajes de posición absoluta para el FAB ────────────────
+  &__anchor {
+    position: absolute;
+    z-index: 1;
+
+    &--br   { bottom: 1.5rem;  right:  1.5rem; }
+    &--tl   { top:    1rem;    left:   1rem;   }
+    &--center {
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    // Esquina superior derecha de la card (relativo a .fab-scenario__card)
+    &--card-tr {
+      top:   0.5rem;
+      right: 0.5rem;
+    }
+  }
+
+  // ── Líneas de placeholder (simulan texto/contenido) ──────────
+  &__line {
+    height: 0.5rem;
+    border-radius: 1rem;
+    background: var(--nui-border-color);
+    width: 100%;
+    margin-bottom: 0.375rem;
+    
+    &--title { height: 0.625rem; width: 65%; font-weight: 600; }
+    &--card-title { height: 0.5rem; width: 75%; }
+
+    // KPI big number placeholder
+    &--kpi {
+      height: 1.25rem;
+      width: 60%;
+      margin-top: 0.25rem;
+      background: color-mix(in srgb, var(--nui-border-color) 80%, var(--nui-on-surface) 20%);
+    }
+  }
+
+  // ── Escenario 1: Lista de items (app móvil) ────────────────
+  &__list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--nui-border-color);
+
+    &:last-of-type { border-bottom: none; }
+  }
+
+  &__list-icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--nui-border-radius-md);
+    background: var(--nui-surface-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--nui-on-surface-secondary);
+    font-size: 1rem;
+  }
+
+  &__list-content {
+    flex: 1;
+    padding-top: 0.25rem;
+  }
+
+  // ── Escenario 2: KPIs + gráfica (dashboard) ──────────────
+  &__kpi-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  &__kpi {
+    background: var(--nui-surface);
+    border-radius: var(--nui-border-radius-md);
+    padding: 0.75rem;
+    border: 1px solid var(--nui-border-color);
+  }
+
+  &__chart-block {
+    background: var(--nui-surface);
+    border-radius: var(--nui-border-radius-md);
+    border: 1px solid var(--nui-border-color);
+    padding: 1rem;
+    height: 7rem;
     display: flex;
     align-items: flex-end;
-    gap: 2rem;
-    padding: 6rem 2rem 2rem;
   }
 
-  &__cell {
+  &__chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5rem;
+    width: 100%;
+    height: 100%;
+
+    span {
+      flex: 1;
+      height: var(--h, 50%);
+      border-radius: var(--nui-border-radius-xs) var(--nui-border-radius-xs) 0 0;
+      background: color-mix(in srgb, var(--nui-border-color) 60%, var(--nui-on-surface) 40%);
+
+      &:nth-child(even) {
+        background: color-mix(in srgb, var(--nui-border-color) 40%, var(--nui-on-surface) 40%);
+      }
+    }
+  }
+
+  // ── Escenario 3: Cards ───────────────────────────────
+  &__card {
+    position: relative;
+    background: var(--nui-surface-secondary);
+    border-radius: var(--nui-border-radius-md);
+    border: 1px solid var(--nui-border-color);
+    padding: 1rem;
+
+    &--featured {
+      border-color: color-mix(in srgb, var(--nui-border-color) 50%, var(--nui-on-surface) 20%);
+      box-shadow: var(--nui-shadow-sm);
+    }
+  }
+
+  &__card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 0.75rem;
+    // Dejar espacio para el FAB en la card destacada
+    padding-right: 2rem;
+  }
+
+  &__card-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: var(--nui-border-radius-sm);
+    background: var(--nui-border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.875rem;
+    color: var(--nui-on-surface-secondary);
+  }
+
+  &__card-meta { flex: 1; }
+
+  &__card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  &__card-tags {
+    display: flex;
+    gap: 0.375rem;
+  }
+
+  &__tag {
+    height: 0.875rem;
+    width: 2.5rem;
+    border-radius: 1rem;
+    background: var(--nui-border-color);
+
+    &--accent {
+      background: color-mix(in srgb, var(--nui-border-color) 50%, var(--nui-on-surface) 20%);
+    }
+  }
+
+  // ── Escenario 4: Indicación de interacción (radial) ─────────
+  &__radial-hint {
+    position: absolute;
+    top: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    padding-top: 5rem; // room for items that expand upward
-  }
-
-  &__label {
-    font-size: 0.75rem;
-    font-family: var(--nui-font-family-mono, monospace);
+    gap: 0.25rem;
     color: var(--nui-on-surface-secondary);
-    text-align: center;
+    font-size: var(--nui-font-size-xs);
+    font-family: var(--nui-font-family);
+    opacity: 0.7;
+
+    i { font-size: 1rem; }
   }
-}
 
-// Row of FABs for the variant × color grid.
-.fab-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  padding-top: 5rem; // space for items expanding upward
-}
+  // ── Escenario 5: Panel lateral ───────────────────────────
+  &__sidebar {
+    width: 3.5rem;
+    border-right: 1px solid var(--nui-border-color);
+    background: var(--nui-surface-secondary);
+    padding: 1rem 0.5rem;
+    border-radius: 0 0 0 var(--nui-border-radius-lg);
+    flex-shrink: 0;
+  }
 
-// Controlled-mode state readout.
-.fab-state-label {
-  margin-top: 1rem;
-  font-size: 0.875rem;
-  color: var(--nui-on-surface-secondary);
+  &__sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
 
-  strong {
-    color: var(--nui-on-surface);
-    font-weight: 600;
+  &__nav-item {
+    height: 2rem;
+    border-radius: var(--nui-border-radius-md);
+    background: var(--nui-border-color);
+
+    &--active {
+      background: color-mix(in srgb, var(--nui-border-color) 40%, var(--nui-on-surface) 40%);
+    }
+  }
+
+  &__main {
+    flex: 1;
+    position: relative;
+    padding: 1rem;
+  }
+
+  &__table-mock {
+    margin-top: 3.5rem; // espacio para el FAB
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__table-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: var(--nui-border-radius-sm);
+    background: var(--nui-surface-secondary);
+
+    span {
+      height: 0.5rem;
+      border-radius: 1rem;
+      background: var(--nui-border-color);
+    }
+
+    &--header {
+      background: transparent;
+
+      span {
+        background: color-mix(in srgb, var(--nui-border-color) 60%, var(--nui-on-surface) 30%);
+      }
+    }
   }
 }

@@ -1582,62 +1582,27 @@
       }
     },
     "fabButton": {
-      "title": "FAB Button",
-      "subtitle": "Botón de acción flotante con marcado desplegable (dial) que expande acciones secundarias con soporte para múltiples layouts, animaciones y modos de control",
-      "basic": {
-        "title": "Uso básico",
-        "description": "La forma más simple del FAB: un botón principal que expande una lista de acciones secundarias al hacer clic."
-      },
-      "directions": {
-        "title": "Direcciones",
-        "description": "Controla hacia dónde se despliegan los items al expandir el FAB. Soporta 8 direcciones: los 4 ejes cardinales y las 4 diagonales.",
-        "note": "Las diagonales (<code>up-left</code>, <code>up-right</code>, <code>down-left</code>, <code>down-right</code>) son especialmente útiles en combinación con los layouts <code>semi-circle</code> y <code>quarter-circle</code>."
-      },
-      "layouts": {
-        "title": "Layouts",
-        "description": "Define la distribución espacial de los items alrededor del botón principal. Cuatro modos disponibles: lineal, círculo completo, semicírculo y cuarto de círculo.",
-        "note": "El layout <code>circle</code> ignora <code>direction</code> y usa <code>radius</code> para determinar el radio del anillo. Los layouts <code>semi-circle</code> y <code>quarter-circle</code> combinan <code>direction</code> (centro del arco) y <code>radius</code>."
-      },
-      "animations": {
-        "title": "Animaciones",
-        "description": "Elige el tipo de animación de entrada y salida de los items: <code>scale</code> (escala), <code>fade</code> (opacidad) y <code>slide</code> (deslizamiento desde el origen)."
-      },
-      "variantsColors": {
-        "title": "Variantes y colores",
-        "description": "Compatible con todo el sistema de variantes (<code>solid</code>, <code>outline</code>, <code>ghost</code>) y los colores semánticos de NUI. El color y la variante se aplican al botón principal y a todos los items."
-      },
-      "shapes": {
-        "title": "Formas",
-        "description": "Controla la forma del botón principal y los items. Tres opciones disponibles: <code>circular</code> (predeterminado), <code>rounded</code> (esquinas redondeadas) y <code>square</code> (bordes rectos)."
-      },
-      "sizes": {
-        "title": "Tamaños",
-        "description": "Cinco tamaños predefinidos que escalan el botón principal y los items de forma armoniosa.",
-        "note": "Utiliza <code>size</code> con valores <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> y <code>'xl'</code>."
-      },
-      "backdrop": {
-        "title": "Backdrop",
-        "description": "Muestra una capa semitransparente detrás de los items cuando el FAB está expandido. Ayuda a enfocar la atención en las acciones disponibles.",
-        "note": "Usa <code>[backdrop]=\"true\"</code> para activarlo. El color y el desenfoque son personalizables mediante las variables CSS <code>--nui-fab-backdrop-bg</code> y <code>--nui-fab-backdrop-blur</code>."
-      },
-      "itemColors": {
-        "title": "Colores por item",
-        "description": "Cada item puede tener su propio color y variante independiente del color global del FAB. Ideal para diferenciar acciones destructivas, informativas o de confirmación.",
-        "note": "Usa las propiedades <code>color</code> y <code>variant</code> dentro de cada objeto <code>FabButtonItem</code> para sobrescribir el color global del componente."
-      },
-      "controlled": {
-        "title": "Modo controlado",
-        "description": "El FAB soporta modo controlado mediante el input <code>expanded</code> y el output <code>expandedChange</code>, o simplificado con el binding bidireccional <code>[(expanded)]</code>.",
-        "note": "Cuando <code>expanded</code> tiene un valor definido (<code>true</code> o <code>false</code>), el componente entra en modo controlado y el estado interno queda subordinado al valor del padre. Con <code>undefined</code> (predeterminado) funciona en modo autónomo."
-      },
-      "events": {
-        "title": "Eventos",
-        "description": "El FAB emite dos eventos: <code>expandedChange</code> cuando cambia el estado de expansión e <code>itemClick</code> cuando el usuario hace clic en un item.",
-        "consoleNote": "Abre las <strong>DevTools (F12)</strong> y revisa la pestaña <strong>Console</strong> para ver los eventos registrados al interactuar con el FAB."
-      },
-      "disabled": {
-        "title": "Estado deshabilitado",
-        "description": "El botón principal puede deshabilitarse para impedir la interacción. Los items también pueden deshabilitarse individualmente mediante la propiedad <code>disabled</code> de cada <code>FabButtonItem</code>."
+      "scenarios": {
+        "mobile": {
+          "title": "App móvil (FAB principal con layout linear)",
+          "description": "El FAB se posiciona en la esquina inferior derecha de la pantalla mediante <code>position: absolute</code>. El layout <code>linear</code> + <code>direction='up'</code> despliega los items hacia arriba, manteniendo el diálogo de acción alejado del contenido principal."
+        },
+        "dashboard": {
+          "title": "Dashboard (FAB contextual con layout semi-circle y backdrop)",
+          "description": "El layout <code>semi-circle</code> con <code>direction='up-left'</code> es idóneo en esquinas donde dos bordes limitan el espacio. El <code>backdrop</code> centra la atención en las acciones disponibles sin ocultar el contexto del dashboard."
+        },
+        "card": {
+          "title": "Card contextual (FAB pequeño con layout quarter-circle)",
+          "description": "Un FAB pequeño (<code>size='sm'</code>) anclado a la esquina superior derecha de una tarjeta replace al clásico menú de tres puntos. Usar <code>direction='left'</code> garantiza que los items no desborden el borde de la card."
+        },
+        "radial": {
+          "title": "Menú radial (acciones múltiples con layout circle)",
+          "description": "El layout <code>circle</code> distribuye los items uniformemente en 360° alrededor del botón central. Útil como acceso directo a secciones principales o como paleta de herramientas en aplicaciones de diseño o gestión."
+        },
+        "panel": {
+          "title": "Panel lateral (herramientas de vista con layout quarter-circle)",
+          "description": "El layout <code>quarter-circle</code> con <code>direction='down-right'</code> es la elección natural para un FAB en la esquina superior izquierda: los items se expanden hacia el interior del panel sin salir de los límites del componente."
+        }
       },
       "api": {
         "inputs": {

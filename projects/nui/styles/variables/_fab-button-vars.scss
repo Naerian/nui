@@ -10,10 +10,30 @@
 // ============================================================
 
 // ── Structural tokens ───────────────────────────────────────
-/// Radius used by circle / semi-circle / quarter-circle layouts
-$fab-radius: 4rem !default;
-/// Step distance between items in linear layout
-$fab-spacing: 3.5rem !default;
+/// Radius used by circle / semi-circle / quarter-circle layouts (md default / :root fallback)
+$fab-radius: 3.5rem !default;
+/// Step distance between items in linear layout (md default / :root fallback)
+$fab-spacing: 3rem !default;
+
+/// Per-size spacing: center-to-center distance = itemSize + 0.5rem gap.
+/// Ensures a consistent ~8px visual gap between item buttons at every scale.
+$fab-spacing-map: (
+  xs: 2.5rem,
+  sm: 2.5rem,
+  md: 3rem,
+  lg: 3.25rem,
+  xl: 3.5rem,
+) !default;
+
+/// Per-size radius for radial layouts (circle / semi-circle / quarter-circle).
+/// Sized so items never overlap even with the default item-count of ~4–6.
+$fab-radius-map: (
+  xs: 3rem,
+  sm: 3rem,
+  md: 3.5rem,
+  lg: 4rem,
+  xl: 4.5rem,
+) !default;
 
 // ── Button sizes ────────────────────────────────────────────
 // Trigger and item sizes now derive from the global --nui-height-{size} tokens

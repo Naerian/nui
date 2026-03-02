@@ -13,6 +13,16 @@ export type FabButtonDirection =
   | 'up-right'
   | 'down-left'
   | 'down-right';
+export enum FabButtonDirectionEnum {
+  UP = 'up',
+  DOWN = 'down',
+  LEFT = 'left',
+  RIGHT = 'right',
+  UP_LEFT = 'up-left',
+  UP_RIGHT = 'up-right',
+  DOWN_LEFT = 'down-left',
+  DOWN_RIGHT = 'down-right',
+}
 
 // ============================================================
 // Animation: how items enter/leave
@@ -22,16 +32,29 @@ export type FabButtonAnimation = 'scale' | 'fade' | 'slide';
 // ============================================================
 // Layout: spatial distribution of items around the trigger
 // ============================================================
-export type FabButtonLayoutType =
-  | 'linear'
-  | 'circle'
-  | 'semi-circle'
-  | 'quarter-circle';
+export type FabButtonLayoutType = 'linear' | 'circle' | 'semi-circle' | 'quarter-circle';
+export enum FabButtonLayoutTypeEnum {
+  LINEAR = 'linear',
+  CIRCLE = 'circle',
+  SEMI_CIRCLE = 'semi-circle',
+  QUARTER_CIRCLE = 'quarter-circle',
+}
 
 // ============================================================
 // Shape: border-radius of trigger and items
 // ============================================================
 export type FabButtonShape = 'circular' | 'rounded' | 'square';
+
+// ============================================================
+// Tooltip position for items with tooltips (computed internally)
+// ============================================================
+export type FabButtonTooltipSide = 'top' | 'right' | 'bottom' | 'left';
+export enum FabButtonTooltipSideEnum {
+  TOP = 'top',
+  RIGHT = 'right',
+  BOTTOM = 'bottom',
+  LEFT = 'left',
+}
 
 // ============================================================
 // Public item definition (provided by the consumer)
@@ -95,8 +118,10 @@ export interface FabButtonItemResolved extends FabButtonItem {
   index: number;
   /**
    * Which side the inline tooltip should appear on.
-   * Computed from the sign of the X multiplier so that items to the right of
-   * the trigger show their tooltip on the right (not hidden by the trigger).
+   * Computed perpendicularly to the item's expansion vector so the tooltip
+   * never competes with the expansion path:
+   *   - Vertical / diagonal dominance → 'right' (vx ≥ 0) or 'left' (vx < 0)
+   *   - Purely horizontal expansion   → 'top'
    */
-  tooltipSide: 'left' | 'right';
+  tooltipSide: 'top' | 'right' | 'bottom' | 'left';
 }

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FabButtonComponent, FabButtonItem } from 'nui';
@@ -23,28 +23,19 @@ import { FAB_BUTTON_PAGE_CONFIG } from './fab-button-page.config';
   styleUrls: ['./fab-button-page.component.scss'],
 })
 export class FabButtonPageComponent extends BaseComponentPage {
-  // ── Page config ─────────────────────────────────────────────
   override pageConfig = FAB_BUTTON_PAGE_CONFIG;
 
-  // ── Tabs ────────────────────────────────────────────────────
   tabs: ComponentTab[] = [
     {
       id: 'examples',
       label: 'common.tabs.examples',
       icon: 'ri-code-s-slash-line',
       sections: [
-        'basic',
-        'directions',
-        'layouts',
-        'animations',
-        'variants-colors',
-        'shapes',
-        'sizes',
-        'backdrop',
-        'item-colors',
-        'controlled',
-        'events',
-        'disabled',
+        'scenario-mobile',
+        'scenario-dashboard',
+        'scenario-card',
+        'scenario-radial',
+        'scenario-panel',
       ],
     },
     {
@@ -61,39 +52,42 @@ export class FabButtonPageComponent extends BaseComponentPage {
     },
   ];
 
-  // ── Shared demo data ────────────────────────────────────────
-  /** Default action items used across most demos. */
-  readonly actions: FabButtonItem[] = [
-    { id: '1', icon: 'ri-pencil-line',  tooltip: 'Edit'   },
-    { id: '2', icon: 'ri-share-line',   tooltip: 'Share'  },
-    { id: '3', icon: 'ri-delete-bin-2-line',  tooltip: 'Delete' },
+  readonly mobileActions: FabButtonItem[] = [
+    { id: '1', icon: 'ri-pencil-line',   tooltip: 'New Note' },
+    { id: '2', icon: 'ri-camera-line',   tooltip: 'Photo'    },
+    { id: '3', icon: 'ri-attachment-2', tooltip: 'Attachment' },
   ];
 
-  /** More items to showcase layouts that need 4+ entries. */
-  readonly moreActions: FabButtonItem[] = [
-    { id: '1', icon: 'ri-pencil-line',    tooltip: 'Edit'      },
-    { id: '2', icon: 'ri-share-line',     tooltip: 'Share'     },
-    { id: '3', icon: 'ri-delete-bin-2-line',    tooltip: 'Delete'    },
-    { id: '4', icon: 'ri-mail-send-line', tooltip: 'Send mail' },
+  readonly dashboardActions: FabButtonItem[] = [
+    { id: '1', icon: 'ri-bar-chart-2-line', tooltip: 'Report'   },
+    { id: '2', icon: 'ri-download-2-line',  tooltip: 'Export'  },
+    { id: '3', icon: 'ri-share-line',       tooltip: 'Share' },
+    { id: '4', icon: 'ri-settings-3-line',  tooltip: 'Settings'   },
   ];
 
-  /** Per-item color overrides demo. */
-  readonly coloredActions: FabButtonItem[] = [
-    { id: '1', icon: 'ri-pencil-line',  tooltip: 'Edit',   color: 'success' },
-    { id: '2', icon: 'ri-share-line',   tooltip: 'Share',  color: 'info'    },
-    { id: '3', icon: 'ri-delete-bin-2-line',  tooltip: 'Delete', color: 'danger'  },
+  readonly cardActions: FabButtonItem[] = [
+    { id: '1', icon: 'ri-pencil-line',       tooltip: 'Edit'    },
+    { id: '2', icon: 'ri-share-line',        tooltip: 'Share' },
+    { id: '3', icon: 'ri-delete-bin-2-line', tooltip: 'Delete', color: 'danger' },
   ];
 
-  // ── Controlled-mode state ───────────────────────────────────
-  readonly isOpen = signal(false);
+  readonly radialActions: FabButtonItem[] = [
+    { id: '1', icon: 'ri-home-4-line',   tooltip: 'Home'    },
+    { id: '2', icon: 'ri-calendar-line', tooltip: 'Agenda'    },
+    { id: '3', icon: 'ri-mail-line',     tooltip: 'Messages'  },
+    { id: '4', icon: 'ri-chat-3-line',   tooltip: 'Chat'      },
+  ];
 
-  // ── Event handlers ──────────────────────────────────────────
-  onExpandedChange(value: boolean): void {
-    this.isOpen.set(value);
-    console.log('FAB expanded:', value);
-  }
+  readonly panelActions: FabButtonItem[] = [
+    { id: '1', icon: 'ri-filter-3-line',  tooltip: 'Filters'  },
+    { id: '2', icon: 'ri-bookmark-line',  tooltip: 'Save'  },
+    { id: '3', icon: 'ri-printer-line',   tooltip: 'Print' },
+  ];
 
-  onItemClick({ item, event }: { item: FabButtonItem; event: Event }): void {
-    console.log('Item clicked:', item.id, event);
-  }
+  readonly scenarioCards = [
+    { title: 'Alpha', icon: 'ri-rocket-line',    featured: true  },
+    { title: 'Beta',  icon: 'ri-flask-line',     featured: false },
+    { title: 'Gamma', icon: 'ri-leaf-line',      featured: false },
+    { title: 'Delta', icon: 'ri-bar-chart-line', featured: false },
+  ];
 }
