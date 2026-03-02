@@ -136,11 +136,7 @@ export const FAB_BUTTON_API_SECTIONS: ComponentSection[] = [
     description: 'components.fabButton.api.outputs.description',
     anchor: 'outputs',
     table: {
-      headers: [
-        'common.tables.event',
-        'common.tables.type',
-        'common.tables.description',
-      ],
+      headers: ['common.tables.event', 'common.tables.type', 'common.tables.description'],
       rows: [
         [
           '<code>expandedChange</code>',
@@ -165,11 +161,7 @@ export const FAB_BUTTON_API_SECTIONS: ComponentSection[] = [
     description: 'components.fabButton.api.computed.description',
     anchor: 'computed',
     table: {
-      headers: [
-        'common.tables.property',
-        'common.tables.type',
-        'common.tables.description',
-      ],
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
         [
           '<code>isOpen</code>',
@@ -216,13 +208,13 @@ export const FAB_BUTTON_API_SECTIONS: ComponentSection[] = [
   },
 
   // ──────────────────────────────────────────────────────────
-  // MODELS
+  // TYPES
   // ──────────────────────────────────────────────────────────
   {
-    id: 'api-models',
-    title: 'components.fabButton.api.models.title',
-    description: 'components.fabButton.api.models.description',
-    anchor: 'models',
+    id: 'api-types',
+    title: 'components.fabButton.api.types.title',
+    description: 'components.fabButton.api.types.description',
+    anchor: 'types',
     table: {
       headers: [
         'common.tables.property',
@@ -255,44 +247,172 @@ export const FAB_BUTTON_API_SECTIONS: ComponentSection[] = [
           "'circular' | 'rounded' | 'square'",
           'Border-radius shape for trigger and item buttons',
         ],
+      ],
+    },
+  },
+
+  // ──────────────────────────────────────────────────────────
+  // FAB BUTTON ITEM
+  // ──────────────────────────────────────────────────────────
+  {
+    id: 'api-item',
+    title: 'components.fabButton.api.item.title',
+    description: 'components.fabButton.api.item.description',
+    anchor: 'item',
+    table: {
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
+      rows: [
         [
-          '<code>FabButtonItem</code>',
-          'interface',
-          '-',
-          'Public item definition provided by the consumer (icon, label, tooltip, color, command…)',
+          '<code>id</code>',
+          'string',
+          'Unique identifier. Used as the key in <code>@for</code> tracking.',
         ],
         [
-          '<code>FabButtonItemResolved</code>',
-          'interface',
-          '-',
-          'Internal: FabButtonItem extended with computed CSS translate values (tx, ty, index)',
+          '<code>icon</code>',
+          'string',
+          'Icon CSS class (e.g. <code>ri-home-line</code>). Rendered as <code>&lt;i&gt;</code> inside the item button.',
+        ],
+        [
+          '<code>label</code>',
+          'string',
+          'Text label shown next to the icon. When present, the item renders side-by-side icon + label.',
+        ],
+        [
+          '<code>tooltip</code>',
+          'string',
+          'Tooltip text shown on hover. Position is computed automatically perpendicular to the expansion axis.',
+        ],
+        [
+          '<code>tooltipPosition</code>',
+          'TooltipPosition',
+          'Override the auto-computed tooltip side: <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>.',
+        ],
+        [
+          '<code>tooltipDelay</code>',
+          'number',
+          'Delay in milliseconds before the tooltip appears.',
+        ],
+        [
+          '<code>color</code>',
+          'NUIColor',
+          'Semantic color for this item. Overrides the component-level <code>color</code> input.',
+        ],
+        [
+          '<code>size</code>',
+          'NUISize',
+          'Size token for this item. Overrides the component-level <code>size</code> input.',
+        ],
+        [
+          '<code>variant</code>',
+          'NUIVariant',
+          'Visual variant for this item. Overrides the component-level <code>variant</code> input.',
+        ],
+        [
+          '<code>disabled</code>',
+          'boolean',
+          'Disables interaction on this item. Renders with reduced opacity and <code>pointer-events: none</code>.',
+        ],
+        [
+          '<code>data</code>',
+          'unknown',
+          'Arbitrary consumer payload. Available in the <code>itemClick</code> event output as <code>item.data</code>.',
+        ],
+        [
+          '<code>styleClass</code>',
+          'string',
+          'Extra CSS class(es) applied directly to the item <code>&lt;button&gt;</code> / <code>&lt;a&gt;</code> element.',
+        ],
+        [
+          '<code>url</code>',
+          'string',
+          'When set, renders the item as an <code>&lt;a href&gt;</code> instead of a <code>&lt;button&gt;</code>.',
+        ],
+        [
+          '<code>target</code>',
+          'string',
+          'HTML <code>target</code> attribute for anchor items (e.g. <code>_blank</code>).',
+        ],
+        [
+          '<code>command</code>',
+          '(event?: Event) => void',
+          'Callback executed when the item is clicked. Receives the native DOM event.',
+        ],
+        [
+          '<code>backgroundColor</code>',
+          'string',
+          'Inline background color override. Bypasses all theme and variant variables.',
+        ],
+        [
+          '<code>textColor</code>',
+          'string',
+          'Inline text/icon color override. Bypasses all theme and variant variables.',
         ],
       ],
     },
-    examples: [
-      {
-        title: 'FabButtonItem interface',
-        language: 'typescript',
-        code: `export interface FabButtonItem {
-  id?:              string;
-  icon?:            string;
-  label?:           string;
-  tooltip?:         string;
-  tooltipPosition?: TooltipPosition;
-  tooltipDelay?:    number;
-  color?:           NUIColor;
-  size?:            NUISize;
-  variant?:         NUIVariant;
-  disabled?:        boolean;
-  data?:            unknown;
-  styleClass?:      string;
-  url?:             string;
-  target?:          string;
-  command?:         (event?: Event) => void;
-  backgroundColor?: string;
-  textColor?:       string;
-}`,
-      },
-    ],
+  },
+
+  // ──────────────────────────────────────────────────────────
+  // FAB BUTTON ITEM RESOLVED
+  // ──────────────────────────────────────────────────────────
+  {
+    id: 'api-item-resolved',
+    title: 'components.fabButton.api.itemResolved.title',
+    description: 'components.fabButton.api.itemResolved.description',
+    anchor: 'item-resolved',
+    table: {
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
+      rows: [
+        [
+          '<code>tx</code>',
+          'string',
+          'CSS <code>calc()</code> expression for the X-axis translation. Injected as <code>--nui-fab-item-tx</code> in the item inline style.',
+        ],
+        [
+          '<code>ty</code>',
+          'string',
+          'CSS <code>calc()</code> expression for the Y-axis translation. Injected as <code>--nui-fab-item-ty</code> in the item inline style.',
+        ],
+        [
+          '<code>index</code>',
+          'number',
+          'Zero-based position of the item in the resolved array. Used to compute the stagger animation delay via <code>--nui-fab-item-index</code>.',
+        ],
+        [
+          '<code>tooltipSide</code>',
+          "'top' | 'right' | 'bottom' | 'left'",
+          'Auto-computed tooltip side. Perpendicular to the item expansion vector so it never competes with the expansion path.',
+        ],
+        [
+          '<code>...FabButtonItem</code>',
+          'FabButtonItem',
+          'Inherits all properties of <code>FabButtonItem</code>. The resolved interface only adds the four computed fields above.',
+        ],
+      ],
+    },
+  },
+
+  // ──────────────────────────────────────────────────────────
+  // DIRECTIVES
+  // ──────────────────────────────────────────────────────────
+  {
+    id: 'api-directives',
+    title: 'components.fabButton.api.directives.title',
+    description: 'components.fabButton.api.directives.description',
+    anchor: 'directives',
+    table: {
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
+      rows: [
+        [
+          '<code>fabTrigger</code>',
+          'FabTriggerDirective',
+          'Place on an <code>&lt;ng-template&gt;</code> to provide a custom trigger interior. The template receives <code>let-open="isOpen"</code> (boolean).',
+        ],
+        [
+          '<code>fabItem</code>',
+          'FabItemDirective',
+          'Place on an <code>&lt;ng-template&gt;</code> to provide a custom item layout. The template receives <code>let-item</code> (<code>FabButtonItemResolved</code>), <code>let-idx="index"</code> (number) and <code>let-open="isOpen"</code> (boolean).',
+        ],
+      ],
+    },
   },
 ];

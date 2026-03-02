@@ -16,6 +16,7 @@
   <button
     #triggerBtn
     class="nui-fab__trigger"
+    [class.nui-fab__trigger--custom-tpl]="!!customTriggerTpl()"
     type="button"
     [disabled]="disabled()"
     [attr.aria-expanded]="isOpen()"
@@ -24,7 +25,14 @@
     [attr.aria-label]="triggerAriaLabel()"
     (click)="handleTriggerClick()"
   >
-    <i [class]="triggerIcon()" class="nui-fab__trigger-icon" aria-hidden="true"></i>
+    @if (customTriggerTpl(); as tplDir) {
+      <ng-container
+        [ngTemplateOutlet]="tplDir.tpl"
+        [ngTemplateOutletContext]="{ isOpen: isOpen() }"
+      ></ng-container>
+    } @else {
+      <i [class]="triggerIcon()" class="nui-fab__trigger-icon" aria-hidden="true"></i>
+    }
   </button>
 
   <ul
@@ -54,6 +62,7 @@
             class="nui-fab__item-btn"
             [class]="item.styleClass ?? null"
             [class.nui-fab__item-btn--disabled]="item.disabled"
+            [class.nui-fab__item-btn--custom-tpl]="!!customItemTpl()"
             [class.nui-fab__item-btn--custom-colors]="item.backgroundColor || item.textColor"
             [attr.href]="item.disabled ? null : item.url"
             [attr.target]="item.target ?? null"
@@ -68,11 +77,18 @@
             [style.--nui-fab-item-color]="item.textColor ?? null"
             (click)="handleItemClick(item, $event)"
           >
-            @if (item.icon) {
-              <i [class]="item.icon" aria-hidden="true"></i>
-            }
-            @if (item.label) {
-              <span class="nui-fab__item-label">{{ item.label }}</span>
+            @if (customItemTpl(); as tplDir) {
+              <ng-container
+                [ngTemplateOutlet]="tplDir.tpl"
+                [ngTemplateOutletContext]="{ $implicit: item, index: item.index, isOpen: isOpen() }"
+              ></ng-container>
+            } @else {
+              @if (item.icon) {
+                <i [class]="item.icon" aria-hidden="true"></i>
+              }
+              @if (item.label) {
+                <span class="nui-fab__item-label">{{ item.label }}</span>
+              }
             }
           </a>
         } @else {
@@ -80,6 +96,7 @@
             class="nui-fab__item-btn"
             [class]="item.styleClass ?? null"
             [class.nui-fab__item-btn--disabled]="item.disabled"
+            [class.nui-fab__item-btn--custom-tpl]="!!customItemTpl()"
             [class.nui-fab__item-btn--custom-colors]="item.backgroundColor || item.textColor"
             type="button"
             [disabled]="item.disabled"
@@ -93,11 +110,18 @@
             [style.--nui-fab-item-color]="item.textColor ?? null"
             (click)="handleItemClick(item, $event)"
           >
-            @if (item.icon) {
-              <i [class]="item.icon" aria-hidden="true"></i>
-            }
-            @if (item.label) {
-              <span class="nui-fab__item-label">{{ item.label }}</span>
+            @if (customItemTpl(); as tplDir) {
+              <ng-container
+                [ngTemplateOutlet]="tplDir.tpl"
+                [ngTemplateOutletContext]="{ $implicit: item, index: item.index, isOpen: isOpen() }"
+              ></ng-container>
+            } @else {
+              @if (item.icon) {
+                <i [class]="item.icon" aria-hidden="true"></i>
+              }
+              @if (item.label) {
+                <span class="nui-fab__item-label">{{ item.label }}</span>
+              }
             }
           </button>
         }

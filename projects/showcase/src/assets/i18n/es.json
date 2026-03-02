@@ -1604,6 +1604,10 @@
         "panel": {
           "title": "Panel lateral (herramientas de vista con layout quarter-circle)",
           "description": "El layout <code>quarter-circle</code> con <code>direction='down-right'</code> es la elección natural para un FAB en la esquina superior izquierda: los items se expanden hacia el interior del panel sin salir de los límites del componente."
+        },
+        "custom": {
+          "title": "Templates personalizados (fabTrigger + fabItem)",
+          "description": "Con las directivas <code>fabTrigger</code> y <code>fabItem</code> puedes inyectar cualquier <code>&lt;ng-template&gt;</code> como contenido del botón principal o de cada item, manteniendo el comportamiento, las animaciones y la accesibilidad intactos."
         }
       },
       "api": {
@@ -1619,9 +1623,21 @@
           "title": "Computed Properties",
           "description": "Propiedades computadas reactivas (Signals) que exponen el estado interno resuelto del componente."
         },
-        "models": {
-          "title": "Modelos",
-          "description": "Tipos e interfaces TypeScript relacionados con el componente FAB Button."
+        "types": {
+          "title": "Tipos",
+          "description": "Tipos TypeScript que definen los valores aceptados por los inputs del FAB Button."
+        },
+        "item": {
+          "title": "FabButtonItem",
+          "description": "Interfaz pública que define cada acción del menú. Todos los campos son opcionales: el único requisito es que el item sea identificable (vía <code>id</code>) y tenga al menos un <code>icon</code> o un <code>label</code>."
+        },
+        "itemResolved": {
+          "title": "FabButtonItemResolved",
+          "description": "Versión interna de <code>FabButtonItem</code> enriquecida con cuatro campos computados que el componente inyecta como variables CSS en cada <code>&lt;li&gt;</code>. Es el tipo recibido en el contexto del template <code>fabItem</code> mediante <code>let-item</code>."
+        },
+        "directives": {
+          "title": "Directives de template",
+          "description": "Directivas standalone que permiten proyectar templates personalizados en el trigger y en cada item del FAB Button. Se importan y declaran igual que cualquier directiva Angular standalone."
         }
       },
       "theming": {

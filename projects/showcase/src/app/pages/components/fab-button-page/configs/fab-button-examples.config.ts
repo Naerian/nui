@@ -171,4 +171,58 @@ mobileActions: FabButtonItem[] = [
       },
     ],
   },
+  {
+    id: 'scenario-custom',
+    title: 'components.fabButton.scenarios.custom.title',
+    description: 'components.fabButton.scenarios.custom.description',
+    anchor: 'scenario-custom',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<nui-fab-button
+  layout="linear"
+  direction="up"
+  shape="rounded"
+  color="primary"
+  spacing="3.75rem"
+  [items]="customTemplateActions"
+>
+  <!-- fabTrigger: rotative close/add icon + "New" label -->
+  <ng-template fabTrigger let-open="isOpen">
+    <span class="my-trigger">
+      <i [class]="open ? 'ri-close-line' : 'ri-add-line'"></i>
+      @if (!open) {
+        <span class="my-trigger-label">New</span>
+      }
+    </span>
+  </ng-template>
+
+  <!-- fabItem: semantic — icon + label per item -->
+  <ng-template fabItem let-item>
+    <span class="my-item">
+      <i [class]="item.icon"></i>
+      @if (item.label) {
+        <span>{{ item.label }}</span>
+      }
+    </span>
+  </ng-template>
+</nui-fab-button>`,
+      },
+      {
+        title: 'codeExamples.typescript',
+        language: 'typescript',
+        code: `import { FabButtonItem, FabTriggerDirective, FabItemDirective } from 'nui';
+
+// In @Component imports array:
+imports: [FabButtonComponent, FabTriggerDirective, FabItemDirective]
+
+customTemplateActions: FabButtonItem[] = [
+  { id: '1', icon: 'ri-bug-line',       label: 'Bug',     color: 'danger'  },
+  { id: '2', icon: 'ri-lightbulb-line', label: 'Feature', color: 'success' },
+  { id: '3', icon: 'ri-chat-3-line',    label: 'Comment', color: 'info'    },
+];`,
+      },
+    ],
+  },
 ];

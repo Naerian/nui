@@ -12,10 +12,13 @@ import {
   signal,
   effect,
   viewChild,
+  contentChild,
   OnDestroy,
   PLATFORM_ID,
 } from '@angular/core';
-import { isPlatformBrowser, NgClass } from '@angular/common';
+import { isPlatformBrowser, NgClass, NgTemplateOutlet } from '@angular/common';
+import { FabTriggerDirective } from './directives/fab-trigger.directive';
+import { FabItemDirective } from './directives/fab-item.directive';
 import {
   FabButtonDirection,
   FabButtonAnimation,
@@ -45,7 +48,7 @@ let _fabIdCounter = 0;
 @Component({
   selector: 'nui-fab-button',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, NgTemplateOutlet],
   templateUrl: './fab-button.component.html',
   styleUrls: ['./fab-button.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -80,6 +83,11 @@ export class FabButtonComponent implements OnDestroy {
   readonly triggerBtn  = viewChild<ElementRef<HTMLButtonElement>>('triggerBtn');
   /** Reference to the <ul> menu list — used to focus items programmatically. */
   readonly itemsList = viewChild<ElementRef<HTMLUListElement>>('itemsList');
+
+  /** Optional custom template for the trigger button interior. */
+  readonly customTriggerTpl = contentChild(FabTriggerDirective);
+  /** Optional custom template for each menu item. */
+  readonly customItemTpl = contentChild(FabItemDirective);
 
   // ========================================================================
   // INPUTS

@@ -292,6 +292,91 @@
                   </div>
                 </div>
               }
+
+              <!-- ─ Scenario 6: Custom Templates ────────────── -->
+              @case ('scenario-custom') {
+                <div class="fab-scenario fab-scenario--custom">
+                  <div class="fab-scenario__chrome">
+                    <div class="fab-scenario__chrome-bar">
+                      <span class="fab-scenario__chrome-title">Issue Tracker</span>
+                      <div class="fab-scenario__chrome-signal">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                    </div>
+                    <!-- Sub-tab bar -->
+                    <div class="fab-scenario__issue-tabs">
+                      <span class="fab-scenario__issue-tab fab-scenario__issue-tab--active">Open&nbsp;<em>4</em></span>
+                      <span class="fab-scenario__issue-tab">Closed&nbsp;<em>12</em></span>
+                      <span class="fab-scenario__issue-tab">All</span>
+                    </div>
+                  </div>
+                  <div class="fab-scenario__body fab-scenario__body--issues">
+                    <div class="fab-scenario__issue-row">
+                      <span class="fab-scenario__issue-dot fab-scenario__issue-dot--danger"></span>
+                      <div class="fab-scenario__issue-content">
+                        <span class="fab-scenario__issue-title">Login fails on Safari 17</span>
+                        <span class="fab-scenario__issue-meta">#247 &middot; opened 2h ago</span>
+                      </div>
+                    </div>
+                    <div class="fab-scenario__issue-row">
+                      <span class="fab-scenario__issue-dot fab-scenario__issue-dot--success"></span>
+                      <div class="fab-scenario__issue-content">
+                        <span class="fab-scenario__issue-title">Add dark mode toggle</span>
+                        <span class="fab-scenario__issue-meta">#246 &middot; opened 5h ago</span>
+                      </div>
+                    </div>
+                    <div class="fab-scenario__issue-row">
+                      <span class="fab-scenario__issue-dot fab-scenario__issue-dot--info"></span>
+                      <div class="fab-scenario__issue-content">
+                        <span class="fab-scenario__issue-title">Improve onboarding flow UX</span>
+                        <span class="fab-scenario__issue-meta">#245 &middot; opened 1d ago</span>
+                      </div>
+                    </div>
+                    <div class="fab-scenario__issue-row">
+                      <span class="fab-scenario__issue-dot fab-scenario__issue-dot--warning"></span>
+                      <div class="fab-scenario__issue-content">
+                        <span class="fab-scenario__issue-title">Performance regression in list view</span>
+                        <span class="fab-scenario__issue-meta">#244 &middot; opened 2d ago</span>
+                      </div>
+                    </div>
+
+                    <!-- FAB: bottom-right, pills con icón + label per item -->
+                    <div class="fab-scenario__anchor fab-scenario__anchor--br">
+                      <nui-fab-button
+                        layout="linear"
+                        direction="up"
+                        shape="rounded"
+                        color="primary"
+                        variant="solid"
+                        spacing="3.75rem"
+                        [items]="customTemplateActions"
+                      >
+                        <!-- Trigger custom: icono rotativo + label "New" -->
+                        <ng-template fabTrigger let-open="isOpen">
+                          <span class="fab-demo-trigger">
+                            <i [class]="open ? 'ri-close-line' : 'ri-add-line'"></i>
+                            @if (!open) {
+                              <span class="fab-demo-trigger-label">New</span>
+                            }
+                          </span>
+                        </ng-template>
+
+                        <!-- Item custom: pill con icono semántico + texto -->
+                        <ng-template fabItem let-item>
+                          <span class="fab-demo-item">
+                            <i [class]="item.icon"></i>
+                            @if (item.label) {
+                              <span class="fab-demo-item-label">{{ item.label }}</span>
+                            }
+                          </span>
+                        </ng-template>
+                      </nui-fab-button>
+                    </div>
+                  </div>
+                </div>
+              }
             }
 
             <!-- API / Theming table -->

@@ -137,6 +137,20 @@
       outline: var(--nui-fab-focus-width) solid var(--nui-fab-trigger-focus-ring);
       outline-offset: var(--nui-fab-focus-offset);
     }
+
+    // ── Custom-template override ─────────────────────────────
+    // When a `fabTrigger` template is provided, the consumer controls the
+    // interior content and may need a wider / taller button.
+    // This modifier releases the fixed square dimensions while keeping
+    // colors, elevation, shape, hover, focus-ring and transitions intact.
+    &--custom-tpl {
+      width: auto !important;   // beats SIZE MODIFIER specificity
+      height: auto !important;
+      // Accessibility floor: WCAG 2.5.8 touch target minimum
+      min-width: 2.5rem;
+      min-height: 2.5rem;
+      padding: 0.375rem 0.875rem;
+    }
   }
 
   // ── Trigger icon ─────────────────────────────────────────
@@ -285,6 +299,22 @@
     &:focus-visible {
       outline: var(--nui-fab-focus-width) solid var(--nui-fab-item-focus-ring);
       outline-offset: var(--nui-fab-focus-offset);
+    }
+
+    // ── Custom-template override ─────────────────────────────
+    // When a `fabItem` template is provided, the consumer controls the item
+    // interior (icon + text + badge, etc.). This modifier releases the fixed
+    // square dimensions so the template can dictate its own size and padding,
+    // while colors, shape, shadow, hover and focus-ring still apply.
+    &--custom-tpl {
+      width: auto !important;   // beats SIZE MODIFIER specificity
+      height: auto !important;
+      // Accessibility floor
+      min-width: 2rem;
+      min-height: 2rem;
+      padding: 0.3125rem 0.625rem;
+      // Ensure the item label / icon wrapping is visible
+      white-space: nowrap;
     }
 
     // Custom color override via inline CSS props (item.backgroundColor / item.textColor)
