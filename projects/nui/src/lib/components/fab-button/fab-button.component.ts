@@ -29,6 +29,7 @@ import {
   FabButtonTooltipSide,
   FabButtonTooltipSideEnum,
   FabButtonDirectionEnum,
+  FabButtonItemDisplay,
 } from './models/fab-button.model';
 import {
   NUIColor,
@@ -62,6 +63,8 @@ let _fabIdCounter = 0;
     '[class.nui-fab--anim-fade]': 'effectiveAnimation() === "fade"',
     '[class.nui-fab--anim-slide]': 'effectiveAnimation() === "slide"',
     '[class.nui-fab--disabled]': 'disabled()',
+    '[class.nui-fab--loading]': 'loading()',
+    '[class.nui-fab--hover-mode]': 'effectiveOpenOn() === "hover"',
     '[attr.role]': '"group"',
     '[attr.aria-label]': 'hostAriaLabel()',
   },
@@ -151,6 +154,65 @@ export class FabButtonComponent implements OnDestroy {
   readonly triggerIcon = input<string>('ri-add-line');
 
   /**
+   * Icon CSS class shown in the trigger when the dial is **open**.
+   * When set, the `triggerIcon` is replaced while expanded — avoids the
+   * need for a custom `fabTrigger` template just for an icon swap.
+   * @example 'ri-close-line'
+   */
+  readonly triggerIconOpen = input<string | undefined>(undefined);
+
+  /**
+   * Static label shown next to the trigger icon (Extended FAB pill pattern).
+   * The label hides automatically while the dial is open when `triggerIconOpen`
+   * is also set; otherwise it stays visible in both states.
+   */
+  readonly triggerLabel = input<string | undefined>(undefined);
+
+  /**
+   * Notification badge value shown on the trigger corner.
+   * Accepts a number or short string (e.g. `'99+'`).
+   * Set to `undefined` to hide the badge.
+   */
+  readonly triggerBadge = input<number | string | undefined>(undefined);
+
+  /**
+   * Shows a loading spinner inside the trigger button.
+   * While `true` the trigger does not toggle the dial.
+   */
+  readonly loading = input<boolean, unknown>(false, { transform: booleanAttribute });
+
+  /**
+   * Close the dial after an action item is clicked.
+   * Set to `false` to keep the dial open for multi-action / selection patterns.
+   */
+  readonly closeOnItemClick = input<boolean | undefined, unknown>(undefined, {
+    transform: booleanAttribute,
+  });
+
+  /**
+   * Close the dial when the nearest scroll container scrolls.
+   * Useful when the FAB is anchored inside a scrollable panel.
+   */
+  readonly closeOnScroll = input<boolean | undefined, unknown>(undefined, {
+    transform: booleanAttribute,
+  });
+
+  /**
+   * How to open the dial: `'click'` (default) or `'hover'`.
+   * In `'hover'` mode the dial opens on pointer entry and closes on leave.
+   * Keyboard navigation is unaffected in either mode (WAI-ARIA spec).
+   */
+  readonly openOn = input<'click' | 'hover'>();
+
+  /**
+   * Controls how action items render their content:
+   * - `'icon'` (default) — icon-only; tooltip appears on hover.
+   * - `'icon-text'` — icon + label text visible inside the button;
+   *   tooltip is suppressed (the visible label already conveys the action).
+   */
+  readonly itemDisplay = input<FabButtonItemDisplay>();
+
+  /**
    * Accessible label for the component host.
    * Also used as aria-label on the trigger button if not overridden.
    */
@@ -199,6 +261,35 @@ export class FabButtonComponent implements OnDestroy {
     () => this.closeOnOutsideClick() ?? this.globalConfig.closeOnOutsideClick
   );
   readonly effectiveCloseOnEsc = computed(() => this.closeOnEsc() ?? this.globalConfig.closeOnEsc);
+  readonly effectiveCloseOnItemClick = computed(
+    () => this.closeOnItemClick() ?? this.globalConfig.closeOnItemClick
+  );
+  readonly effectiveCloseOnScroll = computed(
+    () => this.closeOnScroll() ?? this.globalConfig.closeOnScroll
+  );
+  readonly effectiveOpenOn = computed(
+    () => this.openOn() ?? this.globalConfig.openOn
+  );
+  readonly effectiveItemDisplay = computed(
+    () => this.itemDisplay() ?? this.globalConfig.itemDisplay
+  );
+
+  /**
+   * Active trigger icon: shows `triggerIconOpen` while expanded (when set),
+   * falling back to `triggerIcon` in all other states.
+   */
+  readonly activeTriggerIcon = computed(() =>
+    this.isOpen() && this.triggerIconOpen() ? this.triggerIconOpen()! : this.triggerIcon()
+  );
+
+  /**
+   * Whether the trigger label should be visible.
+   * Hidden when the dial is open AND `triggerIconOpen` is configured
+   * (the open-icon communicates the state instead).
+   */
+  readonly showTriggerLabel = computed(
+    () => !!this.triggerLabel() && !(this.isOpen() && !!this.triggerIconOpen())
+  );
 
   readonly effectiveI18n = computed(() => {
     return {
@@ -232,6 +323,9 @@ export class FabButtonComponent implements OnDestroy {
     [`nui-fab--${this.effectiveVariant()}`]: true,
     [`nui-fab--${this.effectiveShape()}`]: true,
     [`nui-fab--${this.effectiveLayout()}`]: true,
+    'nui-fab--loading': this.loading(),
+    'nui-fab--hover-mode': this.effectiveOpenOn() === 'hover',
+    'nui-fab--icon-text': this.effectiveItemDisplay() === 'icon-text',
   }));
 
   // ========================================================================
@@ -271,6 +365,16 @@ export class FabButtonComponent implements OnDestroy {
       }
     });
 
+    // Close on scroll: register a capture-phase scroll listener when open
+    effect(() => {
+      if (!isPlatformBrowser(this.platformId)) return;
+      if (this.isOpen() && this.effectiveCloseOnScroll()) {
+        this._registerScroll();
+      } else {
+        this._unregisterScroll();
+      }
+    });
+
     // Measure available viewport space for each item tooltip after opening.
     // queueMicrotask defers until after Angular has committed the DOM update
     // so CSS variables and trigger position are stable.
@@ -290,6 +394,10 @@ export class FabButtonComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this._unregisterOutsideClick();
+    this._unregisterScroll();
+    if (this._hoverLeaveTimer !== null) {
+      clearTimeout(this._hoverLeaveTimer);
+    }
   }
 
   // ========================================================================
@@ -442,8 +550,43 @@ export class FabButtonComponent implements OnDestroy {
 
   /** Mouse-click handler on the trigger (keyboard is handled in handleTriggerKeydown). */
   handleTriggerClick(): void {
-    if (this.disabled()) return;
+    if (this.disabled() || this.loading()) return;
+    // In hover mode a click still toggles (keyboard/touch accessibility fallback)
     this.toggle();
+  }
+
+  /**
+   * HostListeners for hover mode (openOn='hover').
+   * The dial opens on pointer entry and closes on pointer leave.
+   * Keyboard navigation (Enter/Space/ArrowDown/ArrowUp) is unaffected.
+   *
+   * WHY A TIMER: items are children of the host but the gap between the trigger
+   * top edge and the first item bottom edge falls on `pointer-events: none`
+   * intermediate elements.  The browser sees the pointer enter the page
+   * background (outside any host descendant) and fires `mouseleave` on the host.
+   * A 120 ms grace-period lets the pointer cross that gap without closing the dial.
+   */
+  private _hoverLeaveTimer: ReturnType<typeof setTimeout> | null = null;
+
+  @HostListener('mouseenter')
+  _onHostMouseEnter(): void {
+    if (this._hoverLeaveTimer !== null) {
+      clearTimeout(this._hoverLeaveTimer);
+      this._hoverLeaveTimer = null;
+    }
+    if (this.effectiveOpenOn() === 'hover' && !this.disabled() && !this.loading()) {
+      this.open();
+    }
+  }
+
+  @HostListener('mouseleave')
+  _onHostMouseLeave(): void {
+    if (this.effectiveOpenOn() === 'hover') {
+      this._hoverLeaveTimer = setTimeout(() => {
+        this._hoverLeaveTimer = null;
+        this.close();
+      }, 120);
+    }
   }
 
   handleItemClick(item: FabButtonItem, event: Event): void {
@@ -454,7 +597,9 @@ export class FabButtonComponent implements OnDestroy {
     }
     this.itemClick.emit({ item, event });
     item.command?.(event);
-    this.close();
+    if (this.effectiveCloseOnItemClick()) {
+      this.close();
+    }
   }
 
   /** Track-by function for @for directive. */
@@ -796,6 +941,10 @@ export class FabButtonComponent implements OnDestroy {
    * Returns +1 for downward / rightward / radial layouts (standard order).
    * Returns -1 for upward directions so ArrowDown always moves focus
    * toward the trigger and ArrowUp moves it away — matching the visual layout.
+   *
+   * RTL note: arrow-key navigation uses only Up/Down (and Home/End).
+   * The horizontal axis is mirrored by CSS via `--nui-fab-item-tx` negation
+   * in `[dir="rtl"]`, so the DOM order and focus sequence remain unchanged.
    */
   private _getNavStep(): 1 | -1 {
     if (this.effectiveLayout() !== 'linear') return 1;
@@ -847,5 +996,29 @@ export class FabButtonComponent implements OnDestroy {
     if (!this._outsideClickHandler) return;
     document.removeEventListener('pointerdown', this._outsideClickHandler, true);
     this._outsideClickHandler = null;
+  }
+
+  // ── Scroll close handler ────────────────────────────────
+
+  private _scrollHandler: ((e: Event) => void) | null = null;
+
+  /**
+   * Registers a capture-phase scroll listener on `window` that closes the
+   * dial when any scrollable ancestor fires a scroll event.
+   * Only active when `closeOnScroll` resolves to `true` and the dial is open.
+   */
+  private _registerScroll(): void {
+    if (this._scrollHandler) return;
+    this._scrollHandler = () => {
+      if (this.isOpen()) this.close();
+    };
+    // Capture phase catches scroll from nested scrollable containers too
+    window.addEventListener('scroll', this._scrollHandler, { capture: true, passive: true });
+  }
+
+  private _unregisterScroll(): void {
+    if (!this._scrollHandler) return;
+    window.removeEventListener('scroll', this._scrollHandler, true);
+    this._scrollHandler = null;
   }
 }

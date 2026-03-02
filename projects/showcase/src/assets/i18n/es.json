@@ -1586,28 +1586,32 @@
       "subtitle": "Botón de acción flotante con layouts radiales y múltiples opciones de personalización",
       "scenarios": {
         "mobile": {
-          "title": "App móvil (FAB principal con layout linear)",
-          "description": "El FAB se posiciona en la esquina inferior derecha de la pantalla mediante <code>position: absolute</code>. El layout <code>linear</code> + <code>direction='up'</code> despliega los items hacia arriba, manteniendo el diálogo de acción alejado del contenido principal."
+          "title": "FAB principal con layout linear",
+          "description": "El layout <code>linear</code> es el más común para FABs principales en mobile. Ubicado en la esquina inferior derecha, el botón se expande hacia arriba mostrando las acciones disponibles sin interferir con la navegación principal."
         },
         "dashboard": {
-          "title": "Dashboard (FAB contextual con layout semi-circle y backdrop)",
-          "description": "El layout <code>semi-circle</code> con <code>direction='up-left'</code> es idóneo en esquinas donde dos bordes limitan el espacio. El <code>backdrop</code> centra la atención en las acciones disponibles sin ocultar el contexto del dashboard."
+          "title": "FAB contextual con layout semi-circle y backdrop",
+          "description": "Un FAB con layout <code>semi-circle</code> y backdrop puede proporcionar acceso rápido a acciones relacionadas con el contexto actual, como agregar un nuevo elemento, filtrar o acceder a configuraciones. El backdrop ayuda a enfocar la atención en las opciones del FAB mientras el menú está abierto."
         },
         "card": {
-          "title": "Card contextual (FAB pequeño con layout quarter-circle)",
-          "description": "Un FAB pequeño (<code>size='sm'</code>) anclado a la esquina superior derecha de una tarjeta replace al clásico menú de tres puntos. Usar <code>direction='left'</code> garantiza que los items no desborden el borde de la card."
+          "title": "FAB contextual con layout quarter-circle",
+          "description": "Un FAB ubicado en la esquina de una tarjeta o sección puede usar el layout <code>quarter-circle</code> para mostrar acciones específicas de ese contexto, como editar, compartir o eliminar. Esto mantiene las opciones organizadas y accesibles sin saturar la interfaz."
         },
         "radial": {
-          "title": "Menú radial (acciones múltiples con layout circle)",
+          "title": "FAB radial con layout circle",
           "description": "El layout <code>circle</code> distribuye los items uniformemente en 360° alrededor del botón central. Útil como acceso directo a secciones principales o como paleta de herramientas en aplicaciones de diseño o gestión."
         },
         "panel": {
-          "title": "Panel lateral (herramientas de vista con layout quarter-circle)",
+          "title": "FAB con layout quarter-circle",
           "description": "El layout <code>quarter-circle</code> con <code>direction='down-right'</code> es la elección natural para un FAB en la esquina superior izquierda: los items se expanden hacia el interior del panel sin salir de los límites del componente."
         },
         "custom": {
-          "title": "Templates personalizados (fabTrigger + fabItem)",
+          "title": "FAB con templates personalizados (fabTrigger + fabItem)",
           "description": "Con las directivas <code>fabTrigger</code> y <code>fabItem</code> puedes inyectar cualquier <code>&lt;ng-template&gt;</code> como contenido del botón principal o de cada item, manteniendo el comportamiento, las animaciones y la accesibilidad intactos."
+        },
+        "extended": {
+          "title": "FAB extendido",
+          "description": "Muestra los inputs añadidos en esta versión: <code>triggerLabel</code> e <code>triggerIconOpen</code> (Extended FAB pill), <code>triggerBadge</code> (notificaciones), <code>loading</code> (estado asíncrono), <code>openOn='hover'</code> (speed-dial en desktop), <code>closeOnItemClick=false</code> (multi-acción sin cerrar el dial), <code>closeOnScroll=true</code> (cierra el dial al hacer scroll)."
         }
       },
       "api": {
@@ -1638,6 +1642,10 @@
         "directives": {
           "title": "Directives de template",
           "description": "Directivas standalone que permiten proyectar templates personalizados en el trigger y en cada item del FAB Button. Se importan y declaran igual que cualquier directiva Angular standalone."
+        },
+        "config": {
+          "title": "Configuración global (FabButtonConfig)",
+          "description": "Todas las propiedades de configuración global disponibles a través de <code>provideNuiConfig({ config: { fabButton: { … } } })</code>. Los valores son los que se aplican cuando el input correspondiente del componente no está definido."
         }
       },
       "theming": {

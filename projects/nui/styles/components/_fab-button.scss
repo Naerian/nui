@@ -13,32 +13,31 @@
 // ============================================================
 
 @mixin fab-trigger-theme($color, $variant: 'solid') {
-  --nui-fab-trigger-bg:           var(--nui-fab-#{$color}-#{$variant}-bg);
-  --nui-fab-trigger-text:         var(--nui-fab-#{$color}-#{$variant}-text);
-  --nui-fab-trigger-border:       var(--nui-fab-#{$color}-#{$variant}-border);
-  --nui-fab-trigger-hover-bg:     var(--nui-fab-#{$color}-#{$variant}-hover-bg);
-  --nui-fab-trigger-hover-text:   var(--nui-fab-#{$color}-#{$variant}-hover-text);
+  --nui-fab-trigger-bg: var(--nui-fab-#{$color}-#{$variant}-bg);
+  --nui-fab-trigger-text: var(--nui-fab-#{$color}-#{$variant}-text);
+  --nui-fab-trigger-border: var(--nui-fab-#{$color}-#{$variant}-border);
+  --nui-fab-trigger-hover-bg: var(--nui-fab-#{$color}-#{$variant}-hover-bg);
+  --nui-fab-trigger-hover-text: var(--nui-fab-#{$color}-#{$variant}-hover-text);
   --nui-fab-trigger-hover-border: var(--nui-fab-#{$color}-#{$variant}-hover-border);
-  --nui-fab-trigger-active-bg:    var(--nui-fab-#{$color}-#{$variant}-active-bg);
-  --nui-fab-trigger-focus-ring:   var(--nui-fab-#{$color}-focus-ring);
+  --nui-fab-trigger-active-bg: var(--nui-fab-#{$color}-#{$variant}-active-bg);
+  --nui-fab-trigger-focus-ring: var(--nui-fab-#{$color}-focus-ring);
 }
 
 @mixin fab-item-theme($color, $variant: 'solid') {
-  --nui-fab-item-bg:           var(--nui-fab-#{$color}-#{$variant}-bg);
-  --nui-fab-item-text:         var(--nui-fab-#{$color}-#{$variant}-text);
-  --nui-fab-item-border:       var(--nui-fab-#{$color}-#{$variant}-border);
-  --nui-fab-item-hover-bg:     var(--nui-fab-#{$color}-#{$variant}-hover-bg);
-  --nui-fab-item-hover-text:   var(--nui-fab-#{$color}-#{$variant}-hover-text);
+  --nui-fab-item-bg: var(--nui-fab-#{$color}-#{$variant}-bg);
+  --nui-fab-item-text: var(--nui-fab-#{$color}-#{$variant}-text);
+  --nui-fab-item-border: var(--nui-fab-#{$color}-#{$variant}-border);
+  --nui-fab-item-hover-bg: var(--nui-fab-#{$color}-#{$variant}-hover-bg);
+  --nui-fab-item-hover-text: var(--nui-fab-#{$color}-#{$variant}-hover-text);
   --nui-fab-item-hover-border: var(--nui-fab-#{$color}-#{$variant}-hover-border);
-  --nui-fab-item-active-bg:    var(--nui-fab-#{$color}-#{$variant}-active-bg);
-  --nui-fab-item-focus-ring:   var(--nui-fab-#{$color}-focus-ring);
+  --nui-fab-item-active-bg: var(--nui-fab-#{$color}-#{$variant}-active-bg);
+  --nui-fab-item-focus-ring: var(--nui-fab-#{$color}-focus-ring);
 }
 
 // ============================================================
 // MAIN MIXIN — included once in _global-components.scss
 // ============================================================
 @mixin nui-fab-button-styles {
-
   // ----------------------------------------------------------
   // Host element
   // ----------------------------------------------------------
@@ -98,25 +97,25 @@
 
     // Colours (set via theme mixin classes below)
     background-color: var(--nui-fab-trigger-bg);
-    color:            var(--nui-fab-trigger-text);
-    border:           1px solid var(--nui-fab-trigger-border, transparent);
+    color: var(--nui-fab-trigger-text);
+    border: 1px solid var(--nui-fab-trigger-border, transparent);
 
     // Default size (md) — overridden per size class via nui-control-size in SIZE MODIFIERS.
     // Width/height equal the global height token so FABs are always square.
-    width:  var(--nui-height-md);
+    width: var(--nui-height-md);
     height: var(--nui-height-md);
 
     // Elevation (FAB always elevated)
     box-shadow: var(--nui-shadow-interactive-rest);
     transition:
       background-color var(--nui-fab-anim-duration) var(--nui-fab-anim-easing),
-      box-shadow       var(--nui-fab-anim-duration) var(--nui-fab-anim-easing),
-      transform        var(--nui-fab-anim-duration) var(--nui-fab-anim-easing);
+      box-shadow var(--nui-fab-anim-duration) var(--nui-fab-anim-easing),
+      transform var(--nui-fab-anim-duration) var(--nui-fab-anim-easing);
 
     &:hover:not(:disabled) {
       background-color: var(--nui-fab-trigger-hover-bg);
-      color:            var(--nui-fab-trigger-hover-text);
-      border-color:     var(--nui-fab-trigger-hover-border, transparent);
+      color: var(--nui-fab-trigger-hover-text);
+      border-color: var(--nui-fab-trigger-hover-border, transparent);
       box-shadow: var(--nui-shadow-interactive-hover);
     }
 
@@ -144,12 +143,91 @@
     // This modifier releases the fixed square dimensions while keeping
     // colors, elevation, shape, hover, focus-ring and transitions intact.
     &--custom-tpl {
-      width: auto !important;   // beats SIZE MODIFIER specificity
+      width: auto !important; // beats SIZE MODIFIER specificity
       height: auto !important;
       // Accessibility floor: WCAG 2.5.8 touch target minimum
       min-width: 2.5rem;
       min-height: 2.5rem;
       padding: 0.375rem 0.875rem;
+    }
+
+    // ── Extended FAB (triggerLabel) ──────────────────────────
+    // Applied automatically when a `triggerLabel` input is set without a
+    // custom `fabTrigger` template. Renders as an icon + label pill.
+    &--labeled {
+      width: auto !important;
+      height: auto !important;
+      min-width: 2.5rem;
+      min-height: 2.5rem;
+      padding: 0.375rem 1rem;
+      gap: 0.5rem;
+    }
+  }
+
+  // ── Trigger label (Extended FAB text) ────────────────────
+  .nui-fab__trigger-label {
+    font-size: var(--nui-font-size-sm);
+    font-family: var(--nui-font-family);
+    font-weight: 600;
+    white-space: nowrap;
+    color: currentColor;
+    letter-spacing: 0.01em;
+  }
+
+  // ── Trigger badge ────────────────────────────────────────
+  // Notification count shown in the top-end corner of the trigger.
+  .nui-fab__trigger-badge {
+    position: absolute;
+    top: -0.3rem;
+    inset-inline-end: -0.3rem;
+    min-width: 1.1rem;
+    height: 1.1rem;
+    padding: 0 0.25rem;
+    border-radius: 999px;
+    background-color: var(--nui-color-danger, #ef4444);
+    color: #fff;
+    font-size: 0.6rem;
+    font-family: var(--nui-font-family);
+    font-weight: 700;
+    line-height: 1.1rem;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 3;
+    pointer-events: none;
+    // Thin white ring separates badge from trigger background
+    box-shadow: 0 0 0 0.125rem var(--nui-fab-trigger-bg, transparent);
+  }
+
+  // ── Trigger spinner (loading state) ─────────────────────
+  .nui-fab__trigger-spinner {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(var(--nui-height-md) * 0.45);
+    line-height: 1;
+    color: currentColor;
+    animation: nui-fab-spin 0.75s linear infinite;
+  }
+
+  // ── Loading modifier ─────────────────────────────────────
+  .nui-fab--loading .nui-fab__trigger {
+    cursor: wait;
+    pointer-events: none;
+  }
+
+  // ── Hover-mode ───────────────────────────────────────────
+  // Applied when openOn='hover'. The trigger cursor gives a visual cue
+  // that hovering the whole component opens the dial.
+  .nui-fab--hover-mode .nui-fab__trigger {
+    cursor: pointer;
+  }
+
+  @keyframes nui-fab-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
     }
   }
 
@@ -213,16 +291,15 @@
     transition-property: transform, opacity;
     transition-duration: var(--nui-fab-anim-duration);
     transition-timing-function: var(--nui-fab-anim-easing);
-    transition-delay: calc(
-      var(--nui-fab-item-index, 0) * var(--nui-fab-anim-delay-step)
-    );
+    transition-delay: calc(var(--nui-fab-item-index, 0) * var(--nui-fab-anim-delay-step));
 
     // ─── FADE: already at final position, just fades ─────────
     .nui-fab--anim-fade & {
       transform: translate(
-        calc(-50% + var(--nui-fab-item-tx, 0px)),
-        calc(-50% + var(--nui-fab-item-ty, 0px))
-      ) scale(1);
+          calc(-50% + var(--nui-fab-item-tx, 0px)),
+          calc(-50% + var(--nui-fab-item-ty, 0px))
+        )
+        scale(1);
     }
 
     // ─── SLIDE: starts at trigger center, slides to position ──
@@ -236,9 +313,10 @@
       opacity: 1;
       pointer-events: auto;
       transform: translate(
-        calc(-50% + var(--nui-fab-item-tx, 0px)),
-        calc(-50% + var(--nui-fab-item-ty, 0px))
-      ) scale(1);
+          calc(-50% + var(--nui-fab-item-tx, 0px)),
+          calc(-50% + var(--nui-fab-item-ty, 0px))
+        )
+        scale(1);
 
       // Slide needs an explicit override: the collapsed slide rule
       // (.nui-fab--anim-slide .nui-fab__item) has specificity (0,2,0)
@@ -246,9 +324,10 @@
       // class back here gives (0,2,0) with later source order → wins.
       .nui-fab--anim-slide & {
         transform: translate(
-          calc(-50% + var(--nui-fab-item-tx, 0px)),
-          calc(-50% + var(--nui-fab-item-ty, 0px))
-        ) scale(1);
+            calc(-50% + var(--nui-fab-item-tx, 0px)),
+            calc(-50% + var(--nui-fab-item-ty, 0px))
+          )
+          scale(1);
       }
     }
   }
@@ -273,23 +352,23 @@
 
     // Default size (md-items = sm height token, one step below md trigger).
     // Overridden per size class via nui-control-size in SIZE MODIFIERS.
-    width:  var(--nui-height-sm);
+    width: var(--nui-height-sm);
     height: var(--nui-height-sm);
 
     // Colours (set via theme mixin classes / per-item data attrs)
     background-color: var(--nui-fab-item-bg);
-    color:            var(--nui-fab-item-text);
-    border:           1px solid var(--nui-fab-item-border, transparent);
+    color: var(--nui-fab-item-text);
+    border: 1px solid var(--nui-fab-item-border, transparent);
     box-shadow: var(--nui-shadow-sm, none);
 
     transition:
       background-color var(--nui-fab-anim-duration) var(--nui-fab-anim-easing),
-      box-shadow       var(--nui-fab-anim-duration) var(--nui-fab-anim-easing);
+      box-shadow var(--nui-fab-anim-duration) var(--nui-fab-anim-easing);
 
     &:hover:not(:disabled) {
       background-color: var(--nui-fab-item-hover-bg);
-      color:            var(--nui-fab-item-hover-text);
-      border-color:     var(--nui-fab-item-hover-border, transparent);
+      color: var(--nui-fab-item-hover-text);
+      border-color: var(--nui-fab-item-hover-border, transparent);
     }
 
     &:active:not(:disabled) {
@@ -307,7 +386,7 @@
     // square dimensions so the template can dictate its own size and padding,
     // while colors, shape, shadow, hover and focus-ring still apply.
     &--custom-tpl {
-      width: auto !important;   // beats SIZE MODIFIER specificity
+      width: auto !important; // beats SIZE MODIFIER specificity
       height: auto !important;
       // Accessibility floor
       min-width: 2rem;
@@ -320,7 +399,7 @@
     // Custom color override via inline CSS props (item.backgroundColor / item.textColor)
     &--custom-colors {
       background-color: var(--nui-fab-item-bg, transparent);
-      color:            var(--nui-fab-item-color, inherit);
+      color: var(--nui-fab-item-color, inherit);
     }
 
     &--disabled,
@@ -449,7 +528,13 @@
   //   xl  → items use lg
   // ----------------------------------------------------------
   $sizes: xs, sm, md, lg, xl;
-  $fab-item-size-map: (xs: xs, sm: xs, md: sm, lg: md, xl: lg);
+  $fab-item-size-map: (
+    xs: xs,
+    sm: xs,
+    md: sm,
+    lg: md,
+    xl: lg,
+  );
 
   @each $size in $sizes {
     $item-size: map.get($fab-item-size-map, $size);
@@ -459,7 +544,7 @@
       // Inline style from the [spacing] / [radius] inputs wins over these
       // class rules when the developer passes an explicit value.
       --nui-fab-spacing: #{map.get(vars.$fab-spacing-map, $size)};
-      --nui-fab-radius:  #{map.get(vars.$fab-radius-map,  $size)};
+      --nui-fab-radius: #{map.get(vars.$fab-radius-map, $size)};
 
       // ── Trigger ──────────────────────────────────────────
       .nui-fab__trigger {
@@ -467,19 +552,29 @@
         // Icon-only button: remove all text padding (same as nui-btn--icon).
         padding: 0 !important;
         // Enforce a perfect square; nui-control-size sets min-height/min-width.
-        width:  var(--nui-height-#{$size});
+        width: var(--nui-height-#{$size});
         height: var(--nui-height-#{$size});
+        // BUT: labeled and custom-tpl modifiers must override the !important above.
+        &.nui-fab__trigger--labeled,
+        &.nui-fab__trigger--custom-tpl {
+          padding: 0.375rem 1rem !important;
+          width: auto !important;
+          height: auto !important;
+        }
       }
 
       .nui-fab__trigger-icon {
         font-size: calc(var(--nui-height-#{$size}) * var(--nui-fab-trigger-icon-scale, 0.5));
       }
 
+      .nui-fab__trigger-spinner {
+        font-size: calc(var(--nui-height-#{$size}) * 0.45);
+      }
+
       // ── Item buttons (one size step below trigger) ────────
       .nui-fab__item-btn {
         @include base.nui-control-size($item-size, false);
-        padding: 0 !important;
-        width:  var(--nui-height-#{$item-size});
+        width: var(--nui-height-#{$item-size});
         height: var(--nui-height-#{$item-size});
 
         i {
@@ -495,24 +590,30 @@
   .nui-fab__container {
     &.nui-fab--circular {
       .nui-fab__trigger,
-      .nui-fab__item-btn { border-radius: 50%; }
+      .nui-fab__item-btn {
+        border-radius: 50%;
+      }
     }
 
     &.nui-fab--rounded {
       .nui-fab__trigger,
-      .nui-fab__item-btn { border-radius: var(--nui-border-radius-md); }
+      .nui-fab__item-btn {
+        border-radius: var(--nui-border-radius-md);
+      }
     }
 
     &.nui-fab--square {
       .nui-fab__trigger,
-      .nui-fab__item-btn { border-radius: 0; }
+      .nui-fab__item-btn {
+        border-radius: 0;
+      }
     }
   }
 
   // ----------------------------------------------------------
   // ── COLOUR × VARIANT MODIFIERS ────────────────────────────
   // ----------------------------------------------------------
-  $colors:   primary, secondary, success, info, warning, danger, accent, neutral;
+  $colors: primary, secondary, success, info, warning, danger, accent, neutral;
   $variants: solid, outline, ghost;
 
   // BLOCK 1: Container-level colour × variant.
@@ -520,14 +621,22 @@
   @each $color in $colors {
     .nui-fab__container.nui-fab--#{$color} {
       // Default: solid variant
-      .nui-fab__trigger  { @include fab-trigger-theme($color, solid); }
-      .nui-fab__item-btn { @include fab-item-theme($color, solid); }
+      .nui-fab__trigger {
+        @include fab-trigger-theme($color, solid);
+      }
+      .nui-fab__item-btn {
+        @include fab-item-theme($color, solid);
+      }
 
       // Explicit variant overrides
       @each $variant in $variants {
         &.nui-fab--#{$variant} {
-          .nui-fab__trigger  { @include fab-trigger-theme($color, $variant); }
-          .nui-fab__item-btn { @include fab-item-theme($color, $variant); }
+          .nui-fab__trigger {
+            @include fab-trigger-theme($color, $variant);
+          }
+          .nui-fab__item-btn {
+            @include fab-item-theme($color, $variant);
+          }
         }
       }
     }
@@ -548,12 +657,115 @@
     }
   }
 
+  // ── Icon-text display mode ────────────────────────────────
+  // Applied when [itemDisplay]="'icon-text'" (or global config equivalent).
+  // Releases the fixed square dimensions so the icon + label fit naturally,
+  // while keeping colors, shape, shadow, hover and focus-ring intact.
+  // Uses the same !important pattern as --custom-tpl to beat SIZE MODIFIERS.
+  .nui-fab--icon-text {
+    // Icon-text buttons are shorter than icon-only buttons (min-height:2rem vs ~2.5rem),
+    // so the default per-size spacing creates a larger-than-expected visual gap.
+    // Override to ~2.75rem for a comfortable 0.75rem gap between items.
+    // The [spacing] input (inline style) still wins over this class rule.
+    --nui-fab-spacing: 2.75rem;
+
+    .nui-fab__item-btn {
+      width: auto !important;
+      height: auto !important;
+      min-width: 2rem;
+      min-height: 2rem;
+      padding: 0.3125rem 0.75rem !important;
+      white-space: nowrap;
+      gap: 0.375rem;
+    }
+
+    // Icon inside icon-text items: same size as the item-label font line-height
+    .nui-fab__item-btn i {
+      font-size: var(--nui-font-size-sm);
+      width: 1em;
+      height: 1em;
+    }
+  }
+
+  // ----------------------------------------------------------
+  // ── RTL SUPPORT ───────────────────────────────────────────
+  // Mirrors the horizontal expansion axis so items appear in the
+  // correct visual position in right-to-left page layouts.
+  //
+  // Strategy: negate --nui-fab-item-tx (x-component of the translation
+  // vector) so every animation state uses the mirrored position without
+  // duplicating the per-animation rules.
+  //
+  // Keyboard accessibility: arrow-key navigation (Up/Down + Home/End) is
+  // based on vertical reading order and is therefore RTL-safe as-is.
+  // The horizontal axis flip in CSS does NOT affect the DOM order that
+  // _getNavStep() and _getEnabledMenuItems() use for focus management.
+  //
+  // Tooltip sides: left ↔ right labels are swapped to match mirrored positions.
+  // Top/bottom tooltips are unaffected.
+  // ----------------------------------------------------------
+  [dir='rtl'] {
+    .nui-fab__item {
+      // ─── DEFAULT / SCALE (collapsed) ─────────────────────
+      // Collapsed state is always the trigger center — no tx involved.
+      // Explicit override not needed.
+
+      // ─── FADE: starts at mirror of final position ─────────
+      .nui-fab--anim-fade & {
+        transform: translate(
+            calc(-50% - var(--nui-fab-item-tx, 0px)),
+            calc(-50% + var(--nui-fab-item-ty, 0px))
+          )
+          scale(1);
+      }
+
+      // ─── EXPANDED / VISIBLE STATE ─────────────────────────
+      // Negates only the x component of the translation.
+      &--visible {
+        transform: translate(
+            calc(-50% - var(--nui-fab-item-tx, 0px)),
+            calc(-50% + var(--nui-fab-item-ty, 0px))
+          )
+          scale(1);
+
+        // Slide override (needs higher specificity match)
+        .nui-fab--anim-slide & {
+          transform: translate(
+              calc(-50% - var(--nui-fab-item-tx, 0px)),
+              calc(-50% + var(--nui-fab-item-ty, 0px))
+            )
+            scale(1);
+        }
+      }
+    }
+
+    // ── Swap tooltip left ↔ right ─────────────────────────
+    .nui-fab__item--tooltip-right .nui-fab__item-tooltip {
+      top: 50%;
+      left: auto;
+      right: calc(100% + var(--nui-fab-tooltip-offset));
+      bottom: auto;
+      transform: translateY(-50%);
+    }
+
+    .nui-fab__item--tooltip-left .nui-fab__item-tooltip {
+      top: 50%;
+      left: calc(100% + var(--nui-fab-tooltip-offset));
+      right: auto;
+      bottom: auto;
+      transform: translateY(-50%);
+    }
+  }
+
   // ----------------------------------------------------------
   // ── BACKDROP ANIMATION ────────────────────────────────────
   // ----------------------------------------------------------
   @keyframes nui-fab-backdrop-in {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
-
 } // end @mixin nui-fab-button-styles

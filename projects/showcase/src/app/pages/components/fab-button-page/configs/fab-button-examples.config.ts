@@ -225,4 +225,99 @@ customTemplateActions: FabButtonItem[] = [
       },
     ],
   },
+  {
+    id: 'scenario-extended',
+    title: 'components.fabButton.scenarios.extended.title',
+    description: 'components.fabButton.scenarios.extended.description',
+    anchor: 'scenario-extended',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<!-- Extended FAB: triggerLabel + triggerIconOpen + triggerBadge -->
+<nui-fab-button
+  triggerIcon="ri-pencil-line"
+  triggerIconOpen="ri-close-line"
+  triggerLabel="Compose"
+  [triggerBadge]="unreadCount"
+  shape="rounded"
+  color="primary"
+  direction="up"
+  layout="linear"
+  [items]="composeActions"
+/>
+
+<!-- FAB with loading state (async action in progress) -->
+<nui-fab-button
+  triggerIcon="ri-send-plane-line"
+  [loading]="isSending"
+  color="primary"
+  [items]="sendActions"
+/>
+
+<!-- Speed-dial (hover to open) -->
+<nui-fab-button
+  openOn="hover"
+  triggerIcon="ri-share-line"
+  color="secondary"
+  [items]="shareActions"
+/>
+
+<!-- Multi-action: dial stays open after item click -->
+<nui-fab-button
+  [closeOnItemClick]="false"
+  triggerIcon="ri-filter-3-line"
+  color="neutral"
+  variant="outline"
+  [items]="filterActions"
+/>
+
+<!-- Icon + label inside each item button (tooltip suppressed) -->
+<nui-fab-button
+  itemDisplay="icon-text"
+  triggerIcon="ri-add-line"
+  color="primary"
+  shape="rounded"
+  direction="up"
+  layout="linear"
+  [items]="iconTextActions"
+/>
+
+<!-- Close on scroll (e.g. inside a scrollable panel) -->
+<nui-fab-button
+  [closeOnScroll]="true"
+  triggerIcon="ri-add-line"
+  color="primary"
+  [items]="quickActions"
+/>`,
+      },
+      {
+        title: 'codeExamples.typescript',
+        language: 'typescript',
+        code: `composeActions: FabButtonItem[] = [
+  { id: '1', icon: 'ri-mail-line',     tooltip: 'New email',   command: () => this.simulate() },
+  { id: '2', icon: 'ri-user-add-line', tooltip: 'New contact'  },
+  { id: '3', icon: 'ri-calendar-line', tooltip: 'New event'    },
+];
+
+shareActions: FabButtonItem[] = [
+  { id: '1', icon: 'ri-twitter-x-line', tooltip: 'Share on X'       },
+  { id: '2', icon: 'ri-linkedin-line',  tooltip: 'Share on LinkedIn' },
+  { id: '3', icon: 'ri-link',           tooltip: 'Copy link'         },
+];
+
+filterActions: FabButtonItem[] = [
+  { id: '1', icon: 'ri-sort-asc',  tooltip: 'Sort A\u2013Z' },
+  { id: '2', icon: 'ri-star-line', tooltip: 'Starred'  },
+  { id: '3', icon: 'ri-time-line', tooltip: 'Recent'   },
+];
+
+iconTextActions: FabButtonItem[] = [
+  { id: '1', icon: 'ri-file-add-line',   label: 'Document', tooltip: 'New document' },
+  { id: '2', icon: 'ri-image-add-line',  label: 'Image',    tooltip: 'New image'    },
+  { id: '3', icon: 'ri-folder-add-line', label: 'Folder',   tooltip: 'New folder'   },
+];`,
+      },
+    ],
+  },
 ];

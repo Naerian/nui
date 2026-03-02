@@ -30,6 +30,15 @@ export enum FabButtonDirectionEnum {
 export type FabButtonAnimation = 'scale' | 'fade' | 'slide';
 
 // ============================================================
+// Item display: icon-only or icon + label inside the button
+// ============================================================
+export type FabButtonItemDisplay = 'icon' | 'icon-text';
+export enum FabButtonItemDisplayEnum {
+  ICON      = 'icon',
+  ICON_TEXT = 'icon-text',
+}
+
+// ============================================================
 // Layout: spatial distribution of items around the trigger
 // ============================================================
 export type FabButtonLayoutType = 'linear' | 'circle' | 'semi-circle' | 'quarter-circle';

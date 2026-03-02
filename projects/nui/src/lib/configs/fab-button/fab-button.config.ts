@@ -7,6 +7,7 @@ import {
   FabButtonDirection,
   FabButtonLayoutType,
   FabButtonShape,
+  FabButtonItemDisplay,
 } from '../../components/fab-button';
 
 // ============================================================
@@ -49,6 +50,43 @@ export interface FabButtonConfig {
   closeOnOutsideClick?: boolean;
   /** Close the dial when the user presses the ESC key. @default true */
   closeOnEsc?: boolean;
+  /**
+   * Controls how action items render their content:
+   * - `'icon'` (default) — icon-only button; label is not shown but tooltip appears on hover.
+   * - `'icon-text'` — icon + label text inside the button; tooltip is suppressed
+   *   (the visible label already conveys the action).
+   * @default 'icon'
+   */
+  itemDisplay?: FabButtonItemDisplay;
+  /**
+   * Set to `false` to keep the dial open for multi-action patterns. @default true
+   */
+  closeOnItemClick?: boolean;
+  /**
+   * Close the dial when the nearest scroll container scrolls.
+   * Useful when the FAB is inside a scrollable panel. @default false
+   */
+  closeOnScroll?: boolean;
+  /**
+   * How to open the dial: 'click' (default) or 'hover'.
+   * In 'hover' mode the dial opens on pointer entry and closes on leave.
+   * Keyboard navigation is unaffected in either mode. @default 'click'
+   */
+  openOn?: 'click' | 'hover';
+  /**
+   * Icon CSS class shown in the trigger when the dial is open.
+   * When set, the `triggerIcon` is replaced by this class while expanded —
+   * avoids the need for a custom `fabTrigger` template just for icon swap.
+   * @example 'ri-close-line'
+   */
+  triggerIconOpen?: string;
+  /**
+   * Static label shown next to the trigger icon.
+   * Renders the trigger as an Extended FAB pill (icon + text).
+   * The label is omitted when the dial is open and `triggerIconOpen` is set.
+   * @example 'Compose'
+   */
+  triggerLabel?: string;
 }
 
 // ============================================================
@@ -67,6 +105,12 @@ export const DEFAULT_FAB_BUTTON_CONFIG: Required<FabButtonConfig> = {
   backdrop: false,
   closeOnOutsideClick: true,
   closeOnEsc: true,
+  itemDisplay: 'icon',
+  closeOnItemClick: true,
+  closeOnScroll: false,
+  openOn: 'click',
+  triggerIconOpen: '',
+  triggerLabel: '',
 };
 
 // ============================================================

@@ -123,6 +123,54 @@ export const FAB_BUTTON_API_SECTIONS: ComponentSection[] = [
           '<code class="neutral">Open actions</code>',
           'Accessible label for the component host and trigger button',
         ],
+        [
+          '<code>triggerIconOpen</code>',
+          'string | undefined',
+          '<code class="neutral">undefined</code>',
+          'Icon CSS class shown in the trigger when the dial is <strong>open</strong>. Replaces <code>triggerIcon</code> while expanded — no custom <code>fabTrigger</code> template needed for a simple icon swap.',
+        ],
+        [
+          '<code>triggerLabel</code>',
+          'string | undefined',
+          '<code class="neutral">undefined</code>',
+          'Static label shown next to the trigger icon (Extended FAB pill pattern). Hidden automatically when the dial is open and <code>triggerIconOpen</code> is also set.',
+        ],
+        [
+          '<code>triggerBadge</code>',
+          'number | string | undefined',
+          '<code class="neutral">undefined</code>',
+          'Notification badge value shown in the top-end corner of the trigger. Pass <code>undefined</code> to hide. Accepts a number or short string (e.g. <code>\'99+\'</code>).',
+        ],
+        [
+          '<code>loading</code>',
+          'boolean',
+          '<code class="neutral">false</code>',
+          'Shows a loading spinner inside the trigger button. While <code>true</code>, the trigger does not toggle the dial and receives <code>aria-busy="true"</code>.',
+        ],
+        [
+          '<code>closeOnItemClick</code>',
+          'boolean',
+          '<code class="neutral">true</code>',
+          'Close the dial after an action item is clicked. Set to <code>false</code> to keep the dial open for multi-action or selection patterns.',
+        ],
+        [
+          '<code>closeOnScroll</code>',
+          'boolean',
+          '<code class="neutral">false</code>',
+          'Close the dial when the nearest scroll container fires a scroll event. Useful when the FAB is anchored inside a scrollable panel.',
+        ],
+        [
+          '<code>openOn</code>',
+          '\'click\' | \'hover\'',
+          '<code class="neutral">\'click\'</code>',
+          'How to open the dial. <code>\'hover\'</code> opens the dial on pointer entry and closes on pointer leave (speed-dial UX for desktop). Click still works in both modes for keyboard and touch accessibility.',
+        ],
+        [
+          '<code>itemDisplay</code>',
+          'FabButtonItemDisplay',
+          '<code class="neutral">\'icon\'</code>',
+          'Controls how action items render: <code>\'icon\'</code> — icon-only, tooltip on hover; <code>\'icon-text\'</code> — icon + label visible inside the button (tooltip is suppressed, the label conveys the action).',
+        ],
       ],
     },
   },
@@ -203,6 +251,26 @@ export const FAB_BUTTON_API_SECTIONS: ComponentSection[] = [
           'Signal&lt;FabButtonLayoutType&gt;',
           'Resolved layout (Input → Global Config → Default)',
         ],
+        [
+          '<code>activeTriggerIcon</code>',
+          'Signal&lt;string&gt;',
+          'Trigger icon in use: returns <code>triggerIconOpen</code> while the dial is open (when set), otherwise returns <code>triggerIcon</code>',
+        ],
+        [
+          '<code>effectiveOpenOn</code>',
+          "Signal&lt;'click' | 'hover'&gt;",
+          "Resolved open mode (Input → Global Config → Default 'click')",
+        ],
+        [
+          '<code>effectiveCloseOnItemClick</code>',
+          'Signal&lt;boolean&gt;',
+          'Resolved close-on-item-click (Input → Global Config → Default true)',
+        ],
+        [
+          '<code>effectiveCloseOnScroll</code>',
+          'Signal&lt;boolean&gt;',
+          'Resolved close-on-scroll (Input → Global Config → Default false)',
+        ],
       ],
     },
   },
@@ -246,6 +314,12 @@ export const FAB_BUTTON_API_SECTIONS: ComponentSection[] = [
           'type',
           "'circular' | 'rounded' | 'square'",
           'Border-radius shape for trigger and item buttons',
+        ],
+        [
+          '<code>FabButtonItemDisplay</code>',
+          'type',
+          "'icon' | 'icon-text'",
+          '<code>\'icon\'</code>: icon-only items with tooltip on hover. <code>\'icon-text\'</code>: icon + visible label text inside the button, tooltip suppressed.',
         ],
       ],
     },
@@ -414,5 +488,63 @@ export const FAB_BUTTON_API_SECTIONS: ComponentSection[] = [
         ],
       ],
     },
+  },
+
+  // ──────────────────────────────────────────────────────────
+  // GLOBAL CONFIG (FabButtonConfig)
+  // ──────────────────────────────────────────────────────────
+  {
+    id: 'api-config',
+    title: 'components.fabButton.api.config.title',
+    description: 'components.fabButton.api.config.description',
+    anchor: 'config',
+    table: {
+      headers: [
+        'common.tables.property',
+        'common.tables.type',
+        'common.tables.default',
+        'common.tables.description',
+      ],
+      rows: [
+        ['<code>direction</code>', 'FabButtonDirection', "<code class=\"neutral\">'up'</code>", 'Default expansion direction'],
+        ['<code>animation</code>', 'FabButtonAnimation', "<code class=\"neutral\">'scale'</code>", 'Default enter/leave animation'],
+        ['<code>layout</code>', 'FabButtonLayoutType', "<code class=\"neutral\">'linear'</code>", 'Default spatial layout'],
+        ['<code>shape</code>', 'FabButtonShape', "<code class=\"neutral\">'circular'</code>", 'Default border-radius shape'],
+        ['<code>color</code>', 'NUIColor', "<code class=\"neutral\">'primary'</code>", 'Default semantic color'],
+        ['<code>size</code>', 'NUISize', "<code class=\"neutral\">'md'</code>", 'Default size token'],
+        ['<code>variant</code>', 'NUIVariant', "<code class=\"neutral\">'solid'</code>", 'Default visual variant'],
+        ['<code>radius</code>', 'string', "<code class=\"neutral\">'4rem'</code>", 'Default radial layout radius'],
+        ['<code>spacing</code>', 'string', "<code class=\"neutral\">'3.5rem'</code>", 'Default linear layout item spacing'],
+        ['<code>backdrop</code>', 'boolean', '<code class="neutral">false</code>', 'Show backdrop by default'],
+        ['<code>closeOnOutsideClick</code>', 'boolean', '<code class="neutral">true</code>', 'Close on outside click by default'],
+        ['<code>closeOnEsc</code>', 'boolean', '<code class="neutral">true</code>', 'Close on Escape key by default'],
+        ['<code>closeOnItemClick</code>', 'boolean', '<code class="neutral">true</code>', 'Close after item click by default'],
+        ['<code>closeOnScroll</code>', 'boolean', '<code class="neutral">false</code>', 'Close on scroll by default'],
+        ["<code>openOn</code>", "'click' | 'hover'", "<code class=\"neutral\">'click'</code>", 'Default open trigger mode'],        ['<code>itemDisplay</code>', 'FabButtonItemDisplay', "<code class=\"neutral\">'icon'</code>", "Default item display mode: 'icon' (icon-only + tooltip) or 'icon-text' (icon + visible label)"],        ['<code>triggerIconOpen</code>', 'string', '<code class="neutral">—</code>', 'Default trigger icon when expanded'],
+        ['<code>triggerLabel</code>', 'string', '<code class="neutral">—</code>', 'Default trigger label (Extended FAB)'],
+      ],
+    },
+    examples: [
+      {
+        title: 'Global config via NUI_CONFIG',
+        language: 'typescript',
+        code: `import { provideNuiConfig } from 'nui';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideNuiConfig({
+      config: {
+        fabButton: {
+          closeOnItemClick: false,  // multi-action pattern
+          openOn: 'hover',          // speed-dial on desktop
+          closeOnScroll: true,      // close when panel scrolls
+          triggerIconOpen: 'ri-close-line',
+        },
+      },
+    }),
+  ],
+});`,
+      },
+    ],
   },
 ];

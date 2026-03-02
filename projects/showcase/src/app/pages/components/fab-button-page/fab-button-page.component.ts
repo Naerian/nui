@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FabButtonComponent, FabButtonItem, FabTriggerDirective, FabItemDirective } from 'nui';
@@ -39,13 +39,14 @@ export class FabButtonPageComponent extends BaseComponentPage {
         'scenario-radial',
         'scenario-panel',
         'scenario-custom',
+        'scenario-extended',
       ],
     },
     {
       id: 'api',
       label: 'common.tabs.api',
       icon: 'ri-braces-line',
-      sections: ['api-inputs', 'api-outputs', 'api-computed', 'api-types', 'api-item', 'api-item-resolved', 'api-directives'],
+      sections: ['api-inputs', 'api-outputs', 'api-computed', 'api-types', 'api-item', 'api-item-resolved', 'api-directives', 'api-config'],
     },
     {
       id: 'theming',
@@ -92,6 +93,41 @@ export class FabButtonPageComponent extends BaseComponentPage {
     { id: '2', icon: 'ri-lightbulb-line', label: 'Feature' },
     { id: '3', icon: 'ri-chat-3-line', label: 'Comment' },
   ];
+
+  // Extended FAB scenario data
+  readonly extendedUnreadCount = signal(3);
+  readonly extendedLoading = signal(false);
+
+  readonly composeActions: FabButtonItem[] = [
+    { id: '1', icon: 'ri-mail-line',     tooltip: 'New email',   command: () => this._simLoading() },
+    { id: '2', icon: 'ri-user-add-line', tooltip: 'New contact'  },
+    { id: '3', icon: 'ri-calendar-line', tooltip: 'New event'    },
+  ];
+
+  readonly shareActions: FabButtonItem[] = [
+    { id: '1', icon: 'ri-twitter-x-line', tooltip: 'Share on X'       },
+    { id: '2', icon: 'ri-linkedin-line',  tooltip: 'Share on LinkedIn' },
+    { id: '3', icon: 'ri-link',           tooltip: 'Copy link'         },
+  ];
+
+  readonly filterActions: FabButtonItem[] = [
+    { id: '1', icon: 'ri-sort-asc',  tooltip: 'Sort A–Z' },
+    { id: '2', icon: 'ri-star-line', tooltip: 'Starred'  },
+    { id: '3', icon: 'ri-time-line', tooltip: 'Recent'   },
+  ];
+
+  // Items with label for icon-text display demo
+  readonly iconTextActions: FabButtonItem[] = [
+    { id: '1', icon: 'ri-file-add-line',   label: 'Document', tooltip: 'New document' },
+    { id: '2', icon: 'ri-image-add-line',  label: 'Image',    tooltip: 'New image'    },
+    { id: '3', icon: 'ri-folder-add-line', label: 'Folder',   tooltip: 'New folder'   },
+  ];
+
+  /** Simulates a 2-second async action for the loading demo. */
+  _simLoading(): void {
+    this.extendedLoading.set(true);
+    setTimeout(() => this.extendedLoading.set(false), 2000);
+  }
 
   readonly scenarioCards = [
     { title: 'Alpha', icon: 'ri-rocket-line', featured: true },

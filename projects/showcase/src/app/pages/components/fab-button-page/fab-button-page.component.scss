@@ -285,33 +285,6 @@
     i { font-size: 1rem; }
   }
 
-  // ── Escenario 5: Panel lateral ───────────────────────────
-  &__sidebar {
-    width: 3.5rem;
-    border-right: 1px solid var(--nui-border-color);
-    background: var(--nui-surface-secondary);
-    padding: 1rem 0.5rem;
-    border-radius: 0 0 0 var(--nui-border-radius-lg);
-    flex-shrink: 0;
-  }
-
-  &__sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-  }
-
-  &__nav-item {
-    height: 2rem;
-    border-radius: var(--nui-border-radius-md);
-    background: var(--nui-border-color);
-
-    &--active {
-      background: color-mix(in srgb, var(--nui-border-color) 40%, var(--nui-on-surface) 40%);
-    }
-  }
-
   &__main {
     flex: 1;
     position: relative;
@@ -523,5 +496,103 @@
     background: color-mix(in srgb, var(--nui-color-info-solid-bg, #3182ce) 15%, transparent);
     color: var(--nui-color-info-solid-bg, #3182ce);
     border: 1px solid color-mix(in srgb, var(--nui-color-info-solid-bg, #3182ce) 30%, transparent);
+  }
+}
+
+// =============================================================================
+// SCENARIO 7: Extended FAB features
+// =============================================================================
+
+.fab-scenario__body--ext-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  position: relative;
+  min-height: 320px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Individual feature card
+.fab-ext-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 1rem 1rem;
+  border-right: 1px solid var(--nui-border-color);
+  border-bottom: 1px solid var(--nui-border-color);
+
+  text-align: center;
+
+  &:nth-child(2n) {
+    border-right: none;
+  }
+  &:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+
+  &__label {
+    font-size: var(--nui-font-size-xs);
+    font-family: var(--nui-font-family);
+    font-weight: 700;
+    color: var(--nui-on-surface);
+    letter-spacing: 0.01em;
+  }
+
+  &__desc {
+    font-size: 0.65rem;
+    font-family: var(--nui-font-family);
+    color: var(--nui-on-surface-secondary);
+    margin: 0;
+    margin-bottom: 0 !important;
+    line-height: 1.4;
+    max-width: 20ch;
+
+    code {
+      font-size: 0.6rem;
+      background: var(--nui-surface-secondary);
+      padding: 0.05em 0.3em;
+      border-radius: 3px;
+    }
+  }
+
+  &__demo {
+    margin-top: auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+
+    &--row {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+  }
+}
+
+// "Simulate" button shown next to loading FAB
+.fab-ext-sim-btn {
+  border: 1px solid var(--nui-border-color);
+  background: var(--nui-surface);
+  color: var(--nui-on-surface);
+  border-radius: var(--nui-border-radius-md);
+  padding: 0.3rem 0.75rem;
+  font-size: var(--nui-font-size-xs);
+  font-family: var(--nui-font-family);
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover:not(:disabled) {
+    background: var(--nui-surface-secondary);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: wait;
   }
 }

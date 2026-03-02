@@ -536,6 +536,7 @@ export class ThemeService {
       /* Overlay colors */
       --nui-overlay-bg: ${isDark ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.5)'};
       --nui-color-backdrop: ${isDark ? 'rgba(0, 0, 0, 0.75)' : 'rgba(0, 0, 0, 0.5)'};
+      --nui-z-index-overlay: 1000;
     `;
   }
 

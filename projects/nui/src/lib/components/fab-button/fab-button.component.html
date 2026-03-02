@@ -17,21 +17,34 @@
     #triggerBtn
     class="nui-fab__trigger"
     [class.nui-fab__trigger--custom-tpl]="!!customTriggerTpl()"
+    [class.nui-fab__trigger--labeled]="!!triggerLabel() && !customTriggerTpl()"
     type="button"
-    [disabled]="disabled()"
+    [disabled]="disabled() || loading()"
     [attr.aria-expanded]="isOpen()"
     [attr.aria-haspopup]="'menu'"
     [attr.aria-controls]="itemsId"
     [attr.aria-label]="triggerAriaLabel()"
+    [attr.aria-busy]="loading() || null"
     (click)="handleTriggerClick()"
   >
-    @if (customTriggerTpl(); as tplDir) {
+    @if (loading()) {
+      <i class="nui-fab__trigger-spinner ri-loader-4-line" aria-hidden="true"></i>
+    } @else if (customTriggerTpl()) {
       <ng-container
-        [ngTemplateOutlet]="tplDir.tpl"
+        [ngTemplateOutlet]="customTriggerTpl()!.tpl"
         [ngTemplateOutletContext]="{ isOpen: isOpen() }"
       ></ng-container>
     } @else {
-      <i [class]="triggerIcon()" class="nui-fab__trigger-icon" aria-hidden="true"></i>
+      <i [class]="activeTriggerIcon()" class="nui-fab__trigger-icon" aria-hidden="true"></i>
+      @if (showTriggerLabel()) {
+        <span class="nui-fab__trigger-label">{{ triggerLabel() }}</span>
+      }
+    }
+
+    @if (triggerBadge() !== undefined && triggerBadge() !== null) {
+      <span class="nui-fab__trigger-badge" [attr.aria-label]="'(' + triggerBadge() + ')'">
+        {{ triggerBadge() }}
+      </span>
     }
   </button>
 
@@ -67,7 +80,7 @@
             [attr.href]="item.disabled ? null : item.url"
             [attr.target]="item.target ?? null"
             [attr.role]="'menuitem'"
-            [attr.aria-label]="item.tooltip || item.label || null"
+            [attr.aria-label]="effectiveItemDisplay() === 'icon-text' && item.label ? null : (item.tooltip || item.label || null)"
             [attr.aria-disabled]="item.disabled || null"
             [attr.data-color]="item.color ?? null"
             [attr.data-size]="item.size ?? null"
@@ -86,7 +99,7 @@
               @if (item.icon) {
                 <i [class]="item.icon" aria-hidden="true"></i>
               }
-              @if (item.label) {
+              @if (effectiveItemDisplay() === 'icon-text' && item.label) {
                 <span class="nui-fab__item-label">{{ item.label }}</span>
               }
             }
@@ -101,7 +114,7 @@
             type="button"
             [disabled]="item.disabled"
             [attr.role]="'menuitem'"
-            [attr.aria-label]="item.tooltip || item.label || null"
+            [attr.aria-label]="effectiveItemDisplay() === 'icon-text' && item.label ? null : (item.tooltip || item.label || null)"
             [attr.data-color]="item.color ?? null"
             [attr.data-size]="item.size ?? null"
             [attr.data-variant]="item.variant ?? null"
@@ -119,14 +132,14 @@
               @if (item.icon) {
                 <i [class]="item.icon" aria-hidden="true"></i>
               }
-              @if (item.label) {
+              @if (effectiveItemDisplay() === 'icon-text' && item.label) {
                 <span class="nui-fab__item-label">{{ item.label }}</span>
               }
             }
           </button>
         }
 
-        @if (item.tooltip) {
+        @if (effectiveItemDisplay() === 'icon' && item.tooltip) {
           <span class="nui-fab__item-tooltip" aria-hidden="true">
             {{ item.tooltip }}
           </span>

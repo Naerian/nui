@@ -239,15 +239,6 @@
                     </div>
                   </div>
                   <div class="fab-scenario__body fab-scenario__body--panel">
-                    <!-- Decorative Sidebar -->
-                    <div class="fab-scenario__sidebar">
-                      <div class="fab-scenario__sidebar-nav">
-                        <div class="fab-scenario__nav-item fab-scenario__nav-item--active"></div>
-                        <div class="fab-scenario__nav-item"></div>
-                        <div class="fab-scenario__nav-item"></div>
-                        <div class="fab-scenario__nav-item"></div>
-                      </div>
-                    </div>
                     <!-- Main Content -->
                     <div class="fab-scenario__main">
                       <!-- FAB: top-left corner with quarter-circle -->
@@ -307,8 +298,14 @@
                     </div>
                     <!-- Sub-tab bar -->
                     <div class="fab-scenario__issue-tabs">
-                      <span class="fab-scenario__issue-tab fab-scenario__issue-tab--active">Open&nbsp;<em>4</em></span>
-                      <span class="fab-scenario__issue-tab">Closed&nbsp;<em>12</em></span>
+                      <span class="fab-scenario__issue-tab fab-scenario__issue-tab--active">
+                        Open&nbsp;
+                        <em>4</em>
+                      </span>
+                      <span class="fab-scenario__issue-tab">
+                        Closed&nbsp;
+                        <em>12</em>
+                      </span>
                       <span class="fab-scenario__issue-tab">All</span>
                     </div>
                   </div>
@@ -337,7 +334,9 @@
                     <div class="fab-scenario__issue-row">
                       <span class="fab-scenario__issue-dot fab-scenario__issue-dot--warning"></span>
                       <div class="fab-scenario__issue-content">
-                        <span class="fab-scenario__issue-title">Performance regression in list view</span>
+                        <span class="fab-scenario__issue-title">
+                          Performance regression in list view
+                        </span>
                         <span class="fab-scenario__issue-meta">#244 &middot; opened 2d ago</span>
                       </div>
                     </div>
@@ -373,6 +372,171 @@
                           </span>
                         </ng-template>
                       </nui-fab-button>
+                    </div>
+                  </div>
+                </div>
+              }
+
+              <!-- ─ Scenario 7: Extended FAB features ───────── -->
+              @case ('scenario-extended') {
+                <div class="fab-scenario fab-scenario--extended">
+                  <div class="fab-scenario__chrome">
+                    <div class="fab-scenario__chrome-bar">
+                      <span class="fab-scenario__chrome-title">Extended FAB features</span>
+                      <div class="fab-scenario__chrome-signal">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="fab-scenario__body fab-scenario__body--ext-grid">
+                    <!-- Card 1: Extended FAB (triggerLabel + triggerIconOpen + badge) -->
+                    <div class="fab-ext-card">
+                      <span class="fab-ext-card__label">Extended FAB + Badge</span>
+                      <p class="fab-ext-card__desc">
+                        <code>triggerLabel</code>
+                        ,
+                        <code>triggerIconOpen</code>
+                        ,
+                        <code>triggerBadge</code>
+                        <span style="display: block">
+                          Trigger label and icon can change when open; badge shows unread count
+                        </span>
+                      </p>
+                      <div class="fab-ext-card__demo">
+                        <nui-fab-button
+                          triggerIcon="ri-pencil-line"
+                          triggerIconOpen="ri-close-line"
+                          triggerLabel="Compose"
+                          [triggerBadge]="extendedUnreadCount()"
+                          shape="rounded"
+                          color="primary"
+                          direction="up"
+                          layout="linear"
+                          [items]="composeActions"
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Card 2: Loading state -->
+                    <div class="fab-ext-card">
+                      <span class="fab-ext-card__label">Loading state</span>
+                      <p class="fab-ext-card__desc">
+                        <code>loading</code>
+                        <span style="display: block">
+                          Trigger shows a spinner while async action is in progress
+                        </span>
+                      </p>
+                      <div class="fab-ext-card__demo fab-ext-card__demo--row">
+                        <nui-fab-button
+                          triggerIcon="ri-mail-send-line"
+                          [loading]="extendedLoading()"
+                          color="primary"
+                          shape="rounded"
+                          triggerLabel="Send"
+                          direction="up"
+                          layout="linear"
+                          [items]="composeActions"
+                        />
+                        <button
+                          class="fab-ext-sim-btn"
+                          type="button"
+                          (click)="_simLoading()"
+                          [disabled]="extendedLoading()"
+                        >
+                          {{ extendedLoading() ? 'Sending…' : 'Simulate 2s' }}
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Card 3: Hover mode (openOn='hover') -->
+                    <div class="fab-ext-card">
+                      <span class="fab-ext-card__label">Speed-dial on hover</span>
+                      <p class="fab-ext-card__desc">
+                        <code>openOn="hover"</code>
+                        <span style="display: block">
+                          Hover over the FAB to expand (keyboard still works)
+                        </span>
+                      </p>
+                      <div class="fab-ext-card__demo">
+                        <nui-fab-button
+                          openOn="hover"
+                          triggerIcon="ri-share-line"
+                          color="secondary"
+                          direction="up"
+                          layout="linear"
+                          [items]="shareActions"
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Card 4: Multi-action (closeOnItemClick=false) -->
+                    <div class="fab-ext-card">
+                      <span class="fab-ext-card__label">Multi-action (dial stays open)</span>
+                      <p class="fab-ext-card__desc">
+                        <code>[closeOnItemClick]="false"</code>
+                        <span style="display: block">
+                          Click items repeatedly without re-opening
+                        </span>
+                      </p>
+                      <div class="fab-ext-card__demo">
+                        <nui-fab-button
+                          [closeOnItemClick]="false"
+                          triggerIcon="ri-filter-3-line"
+                          color="neutral"
+                          direction="up"
+                          layout="linear"
+                          [items]="filterActions"
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Card 5: itemDisplay='icon-text' -->
+                    <div class="fab-ext-card">
+                      <span class="fab-ext-card__label">Icon + label (icon-text)</span>
+                      <p class="fab-ext-card__desc">
+                        <code>itemDisplay="icon-text"</code>
+                        <span style="display: block">
+                          Label visible inside each button; tooltip suppressed
+                        </span>
+                      </p>
+                      <div class="fab-ext-card__demo">
+                        <nui-fab-button
+                          itemDisplay="icon-text"
+                          triggerIcon="ri-add-line"
+                          color="primary"
+                          shape="rounded"
+                          direction="up"
+                          layout="linear"
+                          [items]="iconTextActions"
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Card 6: itemDisplay='icon' (default, comparison) -->
+                    <div class="fab-ext-card">
+                      <span class="fab-ext-card__label">Icon only (default)</span>
+                      <p class="fab-ext-card__desc">
+                        <code>itemDisplay="icon"</code>, 
+                        <code>closeOnScroll="true"</code>
+                        <span style="display: block">
+                          Compact icon-only buttons with tooltip on hover (default)
+                        </span>
+                      </p>
+                      <div class="fab-ext-card__demo">
+                        <nui-fab-button
+                          itemDisplay="icon"
+                          triggerIcon="ri-add-line"
+                          color="primary"
+                          shape="rounded"
+                          direction="up"
+                          layout="linear"
+                          [items]="iconTextActions"
+                          [closeOnScroll]="true"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
