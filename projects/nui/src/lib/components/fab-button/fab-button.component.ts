@@ -83,7 +83,7 @@ export class FabButtonComponent implements OnDestroy {
   // ========================================================================
   // ViewChild
   // ========================================================================
-  readonly triggerBtn  = viewChild<ElementRef<HTMLButtonElement>>('triggerBtn');
+  readonly triggerBtn = viewChild<ElementRef<HTMLButtonElement>>('triggerBtn');
   /** Reference to the <ul> menu list — used to focus items programmatically. */
   readonly itemsList = viewChild<ElementRef<HTMLUListElement>>('itemsList');
 
@@ -228,6 +228,12 @@ export class FabButtonComponent implements OnDestroy {
   /** Emits when an item is clicked (before close). */
   readonly itemClick = output<{ item: FabButtonItem; event: Event }>();
 
+  /** Event when menu hidden */
+  readonly menuHidden = output<void>();
+
+  /** Event when menu shown */
+  readonly menuShown = output<void>();
+
   // ========================================================================
   // INTERNAL STATE
   // ========================================================================
@@ -267,9 +273,7 @@ export class FabButtonComponent implements OnDestroy {
   readonly effectiveCloseOnScroll = computed(
     () => this.closeOnScroll() ?? this.globalConfig.closeOnScroll
   );
-  readonly effectiveOpenOn = computed(
-    () => this.openOn() ?? this.globalConfig.openOn
-  );
+  readonly effectiveOpenOn = computed(() => this.openOn() ?? this.globalConfig.openOn);
   readonly effectiveItemDisplay = computed(
     () => this.itemDisplay() ?? this.globalConfig.itemDisplay
   );
@@ -294,7 +298,7 @@ export class FabButtonComponent implements OnDestroy {
   readonly effectiveI18n = computed(() => {
     return {
       ...DEFAULT_FAB_BUTTON_I18N,
-      ...this._i18n(), 
+      ...this._i18n(),
     };
   });
 
@@ -311,7 +315,9 @@ export class FabButtonComponent implements OnDestroy {
 
   readonly hostAriaLabel = computed(() => this.ariaLabel() || null);
 
-  readonly triggerAriaLabel = computed(() => (this.isOpen() ? this.effectiveI18n().triggerAriaLabel : this.ariaLabel()));
+  readonly triggerAriaLabel = computed(() =>
+    this.isOpen() ? this.effectiveI18n().triggerAriaLabel : this.ariaLabel()
+  );
 
   // ========================================================================
   // CONTAINER CLASSES (colour/size/variant/shape/layout on inner container)
@@ -413,10 +419,10 @@ export class FabButtonComponent implements OnDestroy {
 
   @HostListener('keydown', ['$event'])
   _onHostKeydown(event: KeyboardEvent): void {
-    const active   = document.activeElement;
-    const trigger  = this.triggerBtn()?.nativeElement;
+    const active = document.activeElement;
+    const trigger = this.triggerBtn()?.nativeElement;
     const onTrigger = active === trigger;
-    const onItem    = !onTrigger && !!this.itemsList()?.nativeElement.contains(active);
+    const onItem = !onTrigger && !!this.itemsList()?.nativeElement.contains(active);
 
     if (onTrigger) {
       this._handleTriggerKey(event);
@@ -481,7 +487,7 @@ export class FabButtonComponent implements OnDestroy {
     const buttons = this._getEnabledMenuItems();
     if (!buttons.length) return;
 
-    const current    = document.activeElement;
+    const current = document.activeElement;
     const currentIdx = buttons.indexOf(current as HTMLButtonElement | HTMLAnchorElement);
     // step = +1 for downward/radial layouts, -1 for upward layouts.
     // This ensures ArrowDown always moves focus in the visually ‘downward’ direction.
@@ -489,7 +495,7 @@ export class FabButtonComponent implements OnDestroy {
 
     // Visual-first index: the item at the top of the visual reading order.
     const visualFirst = step > 0 ? 0 : buttons.length - 1;
-    const visualLast  = step > 0 ? buttons.length - 1 : 0;
+    const visualLast = step > 0 ? buttons.length - 1 : 0;
 
     switch (event.key) {
       case 'ArrowDown': {
@@ -535,6 +541,7 @@ export class FabButtonComponent implements OnDestroy {
   open(): void {
     if (this.disabled()) return;
     this._setExpanded(true);
+    this.menuShown.emit();
   }
 
   close(): void {
@@ -542,6 +549,7 @@ export class FabButtonComponent implements OnDestroy {
     // Return focus to trigger for proper accessibility flow.
     // preventScroll avoids undesired page scroll when the trigger is off-screen.
     this.triggerBtn()?.nativeElement.focus({ preventScroll: true });
+    this.menuHidden.emit();
   }
 
   // ========================================================================
@@ -604,8 +612,7 @@ export class FabButtonComponent implements OnDestroy {
     if (this.effectiveOpenOn() === 'hover' && !this.disabled() && !this.loading()) {
       // Mark as touch-triggered when: dial is currently closed AND the mouseenter
       // arrived within 400 ms of a touchstart (mobile synthetic event window).
-      this._touchTriggeredOpen =
-        !this.isOpen() && Date.now() - this._lastTouchTime < 400;
+      this._touchTriggeredOpen = !this.isOpen() && Date.now() - this._lastTouchTime < 400;
       this.open();
     }
   }
@@ -960,7 +967,7 @@ export class FabButtonComponent implements OnDestroy {
       // step > 0: DOM order matches visual order (index 0 = visual top)
       // step < 0: DOM order is inverted (index 0 = visual bottom)
       const visualFirstIdx = step > 0 ? 0 : btns.length - 1;
-      const visualLastIdx  = step > 0 ? btns.length - 1 : 0;
+      const visualLastIdx = step > 0 ? btns.length - 1 : 0;
       const idx = target === 'visual-first' ? visualFirstIdx : visualLastIdx;
       btns[idx]?.focus({ preventScroll: true });
     });
@@ -980,7 +987,7 @@ export class FabButtonComponent implements OnDestroy {
   private _getNavStep(): 1 | -1 {
     if (this.effectiveLayout() !== 'linear') return 1;
     const dir = this.effectiveDirection();
-    return (dir === 'up' || dir === 'up-left' || dir === 'up-right') ? -1 : 1;
+    return dir === 'up' || dir === 'up-left' || dir === 'up-right' ? -1 : 1;
   }
 
   /**
