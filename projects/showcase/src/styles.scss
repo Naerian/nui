@@ -1,11 +1,6 @@
 // Import NUI complete bundle
 @import '../../nui/styles/nui-bundle.scss';
 
-:root {
-  --bs-font-sans-serif: var(--nui-font-family) !important;
-  --bs-body-font-family: var(--nui-font-family) !important;
-}
-
 html,
 body {
   height: 100%;
@@ -13,7 +8,6 @@ body {
 }
 
 body {
-  font-family: var(--nui-font-family) !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--nui-surface);
