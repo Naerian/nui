@@ -1282,7 +1282,7 @@
         "sizes": {
           "title": "Größen",
           "description": "Definiert die Größe, mit der das Panel geöffnet wird.",
-          "note": "Sie können vordefinierte Werte wie <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> und <code>'full'</code> verwenden."
+          "note": "Sie können vordefinierte Werte wie <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> und <code>'full'</code> verwenden. Auf <code>mobile</code> wird automatisch die Größe <code>'full'</code> angewendet, um eine optimale Erfahrung auf mobilen Geräten zu gewährleisten."
         },
         "positions": {
           "title": "Positionen",

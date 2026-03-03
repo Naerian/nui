@@ -22,7 +22,6 @@ export const DEFAULT_SIDEBAR_PANEL_CONFIG: SidebarPanelConfig = {
   ariaLabel: 'Slide Panel',
   animationDuration: 225,
   minimizable: false,
-  zIndex: 1000,
   allowMultiple: false,
   lazyLoad: true,
 };

@@ -1289,7 +1289,7 @@
         "sizes": {
           "title": "Tamaños",
           "description": "Permite definir el tamaño con el que se abrirá el panel.",
-          "note": "Puedes usar valores predefinidos como <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> y <code>'full'</code>."
+          "note": "Puedes usar valores predefinidos como <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> y <code>'full'</code>. En <code>mobile</code> se aplicará automáticamente el tamaño <code>'full'</code> para garantizar una experiencia óptima en dispositivos móviles."
         },
         "positions": {
           "title": "Posiciones",

@@ -239,7 +239,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       position: 'right',
       size: 'sm',
       htmlContent: `
-        <div style="padding: 1rem;">
+        <div>
           <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
             <i class="ri-check-circle-fill" style="font-size: 2.5rem; color: var(--nui-success);"></i>
             <div>
@@ -295,7 +295,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
     ];
 
     const htmlContent = `
-      <div style="padding: 1rem;">
+      <div>
         <h3 style="margin-top: 0;">Task List Report</h3>
         <table style="width: 100%; border-collapse: collapse;">
           <thead>

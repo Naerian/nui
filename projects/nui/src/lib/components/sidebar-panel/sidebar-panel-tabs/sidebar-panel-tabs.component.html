@@ -8,7 +8,8 @@
         (click)="restorePanel(tab.id)"
         [attr.aria-label]="'Restore ' + tab.title"
         [attr.data-sidebar-panel-id]="tab.id"
-        [attr.title]="tab.title"
+        [nuiTooltip]="tab.title"
+        nuiTooltipPosition="left"
       >
         @if (tab.customization?.template) {
           <!-- Template completamente custom -->
@@ -39,7 +40,8 @@
         (click)="restorePanel(tab.id)"
         [attr.aria-label]="'Restore ' + tab.title"
         [attr.data-sidebar-panel-id]="tab.id"
-        [attr.title]="tab.title"
+        [nuiTooltip]="tab.title"
+        nuiTooltipPosition="right"
       >
         @if (tab.customization?.template) {
           <!-- Template completamente custom -->
@@ -70,7 +72,8 @@
         (click)="restorePanel(tab.id)"
         [attr.aria-label]="'Restore ' + tab.title"
         [attr.data-sidebar-panel-id]="tab.id"
-        [attr.title]="tab.title"
+        [nuiTooltip]="tab.title"
+        nuiTooltipPosition="bottom"
       >
         @if (tab.customization?.template) {
           <!-- Template completamente custom -->
@@ -101,7 +104,8 @@
         (click)="restorePanel(tab.id)"
         [attr.aria-label]="'Restore ' + tab.title"
         [attr.data-sidebar-panel-id]="tab.id"
-        [attr.title]="tab.title"
+        [nuiTooltip]="tab.title"
+        nuiTooltipPosition="top"
       >
         @if (tab.customization?.template) {
           <!-- Template completamente custom -->
@@ -131,7 +135,8 @@
       (click)="restorePanel(tab.id)"
       [attr.aria-label]="'Restore ' + tab.title"
       [attr.data-sidebar-panel-id]="tab.id"
-      [attr.title]="tab.title"
+      [nuiTooltip]="tab.title"
+      nuiTooltipPosition="top"
     >
       @if (tab.customization?.template) {
         <!-- Template completamente custom -->

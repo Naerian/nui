@@ -26,7 +26,6 @@ import {
   SidebarPanelPosition,
   SidebarPanelAction,
   FOCUS_TRAP_DELAY,
-  SIDEBAR_PANEL_CONFIG,
 } from './models/sidebar-panel.model';
 import { SidebarPanelRef } from './sidebar-panel-ref';
 import {
@@ -36,7 +35,7 @@ import {
 import { ButtonComponent } from '../button/button.component';
 import { SidebarPanelActionsService } from './services/sidebar-panel-actions.service';
 import { SidebarPanelTabsService } from './services/sidebar-panel-tabs.service';
-import { injectSidebarPanelConfig } from '../../configs';
+import { SIDEBAR_PANEL_CONFIG } from './models/sidebar-panel.model';
 import { NuiI18nService } from '../../i18n';
 
 /**
@@ -89,8 +88,8 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
   protected readonly _i18nService = inject(NuiI18nService);
   protected readonly _i18n = computed(() => this._i18nService.translations());
 
-  protected readonly sidebarPanelConfig = injectSidebarPanelConfig();
-  
+  protected readonly sidebarPanelConfig = inject(SIDEBAR_PANEL_CONFIG);
+
   protected readonly actionsService = inject(SidebarPanelActionsService, {
     optional: true,
   });

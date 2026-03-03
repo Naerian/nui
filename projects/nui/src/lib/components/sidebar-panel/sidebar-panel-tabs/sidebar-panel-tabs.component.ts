@@ -2,6 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { SidebarPanelTabsService } from '../services/sidebar-panel-tabs.service';
 import { SidebarPanelPosition } from '../models/sidebar-panel.model';
+import { TooltipDirective } from '../../tooltip/tooltip.directive';
 
 /**
  * Componente global que renderiza todas las pestaÃ±as de paneles minimizados
@@ -21,7 +22,7 @@ import { SidebarPanelPosition } from '../models/sidebar-panel.model';
 @Component({
   selector: 'nui-sidebar-panel-tabs',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TooltipDirective],
   templateUrl: './sidebar-panel-tabs.component.html',
   styleUrls: ['./sidebar-panel-tabs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

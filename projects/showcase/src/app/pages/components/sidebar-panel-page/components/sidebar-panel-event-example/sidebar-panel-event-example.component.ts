@@ -143,7 +143,6 @@ export interface SidebarPanelEventExampleResult {
   styles: [
     `
       .event-example {
-        padding: 1.5rem;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
@@ -227,14 +226,6 @@ export interface SidebarPanelEventExampleResult {
         }
 
         &__item {
-          display: grid;
-          grid-template-columns: auto auto 1fr;
-          gap: 0.75rem;
-          background: var(--nui-surface-neutral);
-          border-radius: 0.25rem;
-          font-size: 0.8125rem;
-          align-items: center;
-
           .event-type {
             padding: 0.25rem 0.5rem;
             background: var(--nui-primary);

@@ -1282,7 +1282,7 @@
         "sizes": {
           "title": "Sizes",
           "description": "Allows defining the size at which the panel will open.",
-          "note": "You can use predefined values like <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> and <code>'full'</code>."
+          "note": "You can use predefined values like <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> and <code>'full'</code>. On <code>mobile</code>, the <code>'full'</code> size will be applied automatically to ensure an optimal experience on mobile devices."
         },
         "positions": {
           "title": "Positions",

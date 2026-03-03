@@ -1282,7 +1282,7 @@
         "sizes": {
           "title": "Tailles",
           "description": "Permet de définir la taille à laquelle le panneau s'ouvrira.",
-          "note": "Vous pouvez utiliser des valeurs prédéfinies comme <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> et <code>'full'</code>."
+          "note": "Vous pouvez utiliser des valeurs prédéfinies comme <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> et <code>'full'</code>. Sur <code>mobile</code>, la taille <code>'full'</code> sera appliquée automatiquement pour garantir une expérience optimale sur les appareils mobiles."
         },
         "positions": {
           "title": "Positions",
