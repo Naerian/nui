@@ -19,7 +19,6 @@
     [class.nui-fab__trigger--custom-tpl]="!!customTriggerTpl()"
     [class.nui-fab__trigger--labeled]="!!triggerLabel() && !customTriggerTpl()"
     [class.nui-fab__trigger--opened]="isOpen()"
-    [class.nui-fab__trigger--with-backdrop]="isOpen() && effectiveBackdrop()"
     type="button"
     [disabled]="disabled() || loading()"
     [attr.aria-expanded]="isOpen()"

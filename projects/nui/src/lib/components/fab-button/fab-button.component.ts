@@ -346,6 +346,7 @@ export class FabButtonComponent implements OnDestroy {
     'nui-fab--loading': this.loading(),
     'nui-fab--hover-mode': this.effectiveOpenOn() === 'hover',
     'nui-fab--icon-text': this.effectiveItemDisplay() === 'icon-text',
+    'nui-fab--with-backdrop': this.isOpen() && this.effectiveBackdrop(),
   }));
 
   // ========================================================================

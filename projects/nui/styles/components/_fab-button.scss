@@ -34,14 +34,14 @@
 
   .nui-fab__backdrop {
     @include global.overlay-backdrop();
-    z-index: var(--nui-fab-z-index) !important;
+    z-index: calc(var(--nui-fab-z-index) + 1) !important;
   }
 
   .nui-fab__container {
     position: relative;
     display: inline-flex;
     isolation: isolate;
-    z-index: calc(var(--nui-fab-z-index) + 1);
+    z-index: var(--nui-fab-z-index);
   }
 
   .nui-fab__trigger {
@@ -505,6 +505,10 @@
         }
       }
     }
+  }
+
+  .nui-fab--with-backdrop {
+    z-index: calc(var(--nui-fab-z-index) + 2);
   }
 
   .nui-fab--icon-text {
