@@ -76,19 +76,41 @@ export class SidebarComponent implements OnInit {
   }
 
   private updateExpandedSections(url: string): void {
-    // Reset all sections
+    // Reset all expandable sections (levels 1 and 2)
     this.menuItems.forEach(item => {
       if (item.children) {
         this.expandedSections[item.route] = false;
+        item.children.forEach(child => {
+          if (child.children) {
+            this.expandedSections[child.route] = false;
+          }
+        });
       }
     });
 
-    // Expand section if current route matches any child
+    // Auto-expand based on current URL (handles 3 levels)
     this.menuItems.forEach(item => {
       if (item.children) {
-        const hasActiveChild = item.children.some(child => url.includes(child.route));
-        if (hasActiveChild) {
+        const isParentActive = item.children.some(child => {
+          if (child.children) {
+            // Category group: active if any grandchild matches
+            return child.children.some(grandchild => url.startsWith(grandchild.route));
+          }
+          return url.startsWith(child.route);
+        });
+
+        if (isParentActive) {
           this.expandedSections[item.route] = true;
+
+          // Also expand matching category
+          item.children.forEach(child => {
+            if (child.children) {
+              const hasCategoryActive = child.children.some(gc => url.startsWith(gc.route));
+              if (hasCategoryActive) {
+                this.expandedSections[child.route] = true;
+              }
+            }
+          });
         }
       }
     });

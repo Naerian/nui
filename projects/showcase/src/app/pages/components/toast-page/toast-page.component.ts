@@ -223,4 +223,5 @@ export class ToastPageComponent extends BaseComponentPage {
       });
     }, 2000);
   }
+
 }

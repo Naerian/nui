@@ -1,20 +1,20 @@
-/**
- * Configuración del menú lateral de navegación
+﻿/**
+ * ConfiguraciÃ³n del menÃº lateral de navegaciÃ³n
  *
- * Este archivo centraliza toda la estructura del menú para facilitar
- * el mantenimiento y la adición de nuevos componentes.
+ * Este archivo centraliza toda la estructura del menÃº para facilitar
+ * el mantenimiento y la adiciÃ³n de nuevos componentes.
  */
 
 export interface MenuItem {
   label: string;
   translationKey: string;
   route: string;
-  icon: string;
+  icon?: string;
   children?: MenuItem[];
 }
 
 /**
- * Configuración completa del menú de navegación
+ * ConfiguraciÃ³n completa del menÃº de navegaciÃ³n
  */
 export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
   {
@@ -88,76 +88,92 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
     icon: 'ri-layout-grid-line',
     children: [
       {
-        label: 'Button',
-        translationKey: 'sidebar.button',
-        route: '/components/button',
-        icon: 'ri-rectangle-fill',
+        label: 'Actions',
+        translationKey: 'sidebar.componentsActions',
+        route: '/components/actions',
+        children: [
+          {
+            label: 'Button',
+            translationKey: 'sidebar.button',
+            route: '/components/button',
+          },
+          {
+            label: 'FAB Button',
+            translationKey: 'sidebar.fabButton',
+            route: '/components/fab-button',
+          },
+          {
+            label: 'Select Button',
+            translationKey: 'sidebar.selectButton',
+            route: '/components/select-button',
+          },
+          {
+            label: 'Action Menu',
+            translationKey: 'sidebar.actionMenu',
+            route: '/components/action-menu',
+          },
+        ],
       },
       {
-        label: 'FAB Button',
-        translationKey: 'sidebar.fabButton',
-        route: '/components/fab-button',
-        icon: 'ri-add-circle-line',
+        label: 'Overlays',
+        translationKey: 'sidebar.componentsOverlays',
+        route: '/components/overlays',
+        children: [
+          {
+            label: 'Popover',
+            translationKey: 'sidebar.popover',
+            route: '/components/popover',
+          },
+          {
+            label: 'Tooltip',
+            translationKey: 'sidebar.tooltip',
+            route: '/components/tooltip',
+          },
+          {
+            label: 'Toast',
+            translationKey: 'sidebar.toast',
+            route: '/components/toast',
+          },
+          {
+            label: 'Sidebar Panel',
+            translationKey: 'sidebar.sidebarPanel',
+            route: '/components/sidebar-panel',
+          },
+        ],
       },
       {
-        label: 'Action Menu',
-        translationKey: 'sidebar.actionMenu',
-        route: '/components/action-menu',
-        icon: 'ri-menu-line',
+        label: 'Forms',
+        translationKey: 'sidebar.componentsForms',
+        route: '/components/forms',
+        children: [
+          {
+            label: 'Calendar',
+            translationKey: 'sidebar.calendar',
+            route: '/components/calendar',
+          },
+          {
+            label: 'Time Picker',
+            translationKey: 'sidebar.timePicker',
+            route: '/components/time-picker',
+          },
+        ],
       },
       {
-        label: 'Avatar',
-        translationKey: 'sidebar.avatar',
-        route: '/components/avatar',
-        icon: 'ri-user-line',
-      },
-      {
-        label: 'Select Button',
-        translationKey: 'sidebar.selectButton',
-        route: '/components/select-button',
-        icon: 'ri-layout-grid-line',
-      },
-      {
-        label: 'Paginator',
-        translationKey: 'sidebar.paginator',
-        route: '/components/paginator',
-        icon: 'ri-pages-line',
-      },
-      {
-        label: 'Popover',
-        translationKey: 'sidebar.popover',
-        route: '/components/popover',
-        icon: 'ri-chat-4-line',
-      },
-      {
-        label: 'Toast',
-        translationKey: 'sidebar.toast',
-        route: '/components/toast',
-        icon: 'ri-notification-line',
-      },
-      {
-        label: 'Tooltip',
-        translationKey: 'sidebar.tooltip',
-        route: '/components/tooltip',
-        icon: 'ri-question-line',
-      },
-      {
-        label: 'Sidebar Panel',
-        translationKey: 'sidebar.sidebarPanel',
-        route: '/components/sidebar-panel',
-        icon: 'ri-side-bar-fill',
-      },
-      {
-        label: 'Calendar',
-        translationKey: 'sidebar.calendar',
-        route: '/components/calendar',
-        icon: 'ri-calendar-line',
-      },
-      {
-        label: 'Time Picker',
-        translationKey: 'sidebar.timePicker',
-        route: '/components/time-picker',
-        icon: 'ri-time-line',
+        label: 'Display',
+        translationKey: 'sidebar.componentsDisplay',
+        route: '/components/display',
+        children: [
+          {
+            label: 'Avatar',
+            translationKey: 'sidebar.avatar',
+            route: '/components/avatar',
+          },
+          {
+            label: 'Paginator',
+            translationKey: 'sidebar.paginator',
+            route: '/components/paginator',
+          },
+        ],
       },
     ],
   },

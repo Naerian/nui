@@ -16,8 +16,40 @@
 
           <ul class="nav-sublist" *ngIf="isSectionExpanded(item.route)">
             <li *ngFor="let child of item.children" class="nav-subitem">
-              <a [routerLink]="child.route" routerLinkActive="active" class="nav-sublink">
-                <i [class]="child.icon"></i>
+              <!-- Nivel 2 → Categoría con hijos (nivel 3) -->
+              <div *ngIf="child.children" class="nav-subcategory-wrapper">
+                <button
+                  class="nav-sublink nav-sublink--group"
+                  (click)="toggleSection(child.route)"
+                  [class.expanded]="isSectionExpanded(child.route)"
+                >
+                  <i *ngIf="child.icon" [class]="child.icon"></i>
+                  <span class="nav-label">{{ child.translationKey | translate }}</span>
+                  <i class="nav-arrow ri-arrow-down-s-line"></i>
+                </button>
+
+                <ul class="nav-subsublist" *ngIf="isSectionExpanded(child.route)">
+                  <li *ngFor="let grandchild of child.children" class="nav-subsubitem">
+                    <a
+                      [routerLink]="grandchild.route"
+                      routerLinkActive="active"
+                      class="nav-subsublink"
+                    >
+                      <i *ngIf="grandchild.icon" [class]="grandchild.icon"></i>
+                      <span class="nav-label">{{ grandchild.translationKey | translate }}</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Nivel 2 → Hoja simple -->
+              <a
+                *ngIf="!child.children"
+                [routerLink]="child.route"
+                routerLinkActive="active"
+                class="nav-sublink"
+              >
+                <i *ngIf="child.icon" [class]="child.icon"></i>
                 <span class="nav-label">{{ child.translationKey | translate }}</span>
               </a>
             </li>
@@ -31,7 +63,7 @@
           routerLinkActive="active"
           class="nav-link"
         >
-          <i [class]="item.icon"></i>
+          <i *ngIf="item.icon" [class]="item.icon"></i>
           <span class="nav-label">{{ item.translationKey | translate }}</span>
         </a>
       </li>

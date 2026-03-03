@@ -1,4 +1,4 @@
-import {
+﻿import {
   Injectable,
   ApplicationRef,
   ComponentRef,
@@ -33,7 +33,7 @@ export class ToastService {
   private document = inject(DOCUMENT);
   private readonly toastConfig: ToastGlobalConfig = injectToastConfig();
 
-  // Mapa de contenedores por posición (uno por posición)
+  // Mapa de contenedores por posiciÃ³n (uno por posiciÃ³n)
   private containers = new Map<ToastPosition, ComponentRef<ToastContainerComponent>>();
 
   // Signal con los toasts activos
@@ -45,7 +45,7 @@ export class ToastService {
   readonly activeToasts: Signal<ToastRef[]> = this._activeToasts.asReadonly();
 
   /**
-   * Computed: número de toasts activos
+   * Computed: nÃºmero de toasts activos
    */
   readonly activeCount = computed(() => this._activeToasts().length);
 
@@ -79,10 +79,10 @@ export class ToastService {
     }
   }
 
-  // ===== MÉTODOS PRINCIPALES =====
+  // ===== MÃ‰TODOS PRINCIPALES =====
 
   /**
-   * Toast de éxito
+   * Toast de Ã©xito
    */
   success(message: string, config?: ToastConfig): ToastRef {
     return this.show('success', message, config);
@@ -110,7 +110,7 @@ export class ToastService {
   }
 
   /**
-   * Toast genérico/personalizado
+   * Toast genÃ©rico/personalizado
    */
   custom(message: string, config?: ToastConfig): ToastRef {
     return this.show('secondary', message, config);
@@ -138,7 +138,7 @@ export class ToastService {
   }
 
   /**
-   * Toast de promesa (loading → success/error automático)
+   * Toast de promesa (loading â†’ success/error automÃ¡tico)
    */
   async promise<T>(
     promise: Promise<T>,
@@ -183,10 +183,10 @@ export class ToastService {
     }
   }
 
-  // ===== GESTIÓN DE TOASTS =====
+  // ===== GESTIÃ“N DE TOASTS =====
 
   /**
-   * Muestra un toast con tipo específico
+   * Muestra un toast con tipo especÃ­fico
    */
   private show(type: ToastType, message: string, config?: ToastConfig): ToastRef {
     const mergedConfig = this.mergeConfig(type, message, config);
@@ -200,22 +200,22 @@ export class ToastService {
       }
     }
 
-    // Determinar la posición
+    // Determinar la posiciÃ³n
     const position = mergedConfig.position || this.toastConfig.position;
 
-    // 1. Verificar límite GLOBAL primero
+    // 1. Verificar lÃ­mite GLOBAL primero
     if (this._activeToasts().length >= this.toastConfig.maxToasts) {
       return this.handleMaxToasts(type, message, config);
     }
 
-    // 2. Verificar límite por posición específica
+    // 2. Verificar lÃ­mite por posiciÃ³n especÃ­fica
     const currentCountInPosition = this._activeToasts().filter(
       t => (t.config().position || this.toastConfig.position) === position
     ).length;
 
     const maxPerPosition = this.toastConfig.maxToastsPerPosition || this.toastConfig.maxToasts;
     if (currentCountInPosition >= maxPerPosition) {
-      // Eliminar el toast más antiguo de esa posición
+      // Eliminar el toast mÃ¡s antiguo de esa posiciÃ³n
       const oldestInPosition = this._activeToasts()
         .filter(t => (t.config().position || this.toastConfig.position) === position)
         .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime())[0];
@@ -238,7 +238,7 @@ export class ToastService {
   }
 
   /**
-   * Cierra un toast específico
+   * Cierra un toast especÃ­fico
    */
   close(id: string): void {
     const toast = this.get(id);
@@ -255,7 +255,7 @@ export class ToastService {
   }
 
   /**
-   * Cierra toasts de un grupo específico
+   * Cierra toasts de un grupo especÃ­fico
    */
   closeGroup(group: string): void {
     this.getGroup(group).forEach(toast => toast.close());
@@ -305,7 +305,7 @@ export class ToastService {
     }
   }
 
-  // ===== MÉTODOS PRIVADOS =====
+  // ===== MÃ‰TODOS PRIVADOS =====
 
   /**
    * Crea un nuevo toast
@@ -327,10 +327,10 @@ export class ToastService {
     const key = this.getToastKey(config);
     this.toastMap.set(key, toastRef);
 
-    // Determinar la posición (usar la específica del config o la global)
+    // Determinar la posiciÃ³n (usar la especÃ­fica del config o la global)
     const position = config.position || this.toastConfig.position;
 
-    // Asegurar que el contenedor exista para esta posición
+    // Asegurar que el contenedor exista para esta posiciÃ³n
     const containerRef = this.ensureContainer(position);
 
     // Agregar al contenedor
@@ -342,7 +342,7 @@ export class ToastService {
       this.toastMap.delete(key);
     });
 
-    // Persistir si está configurado
+    // Persistir si estÃ¡ configurado
     if (config.persistent && config.persistentId) {
       this.persistToast(toastRef);
     }
@@ -368,7 +368,7 @@ export class ToastService {
   }
 
   /**
-   * Maneja el caso cuando se alcanza el máximo de toasts
+   * Maneja el caso cuando se alcanza el mÃ¡ximo de toasts
    */
   private handleMaxToasts(type: ToastType, message: string, config?: ToastConfig): ToastRef {
     const behavior = this.toastConfig.stackingBehavior;
@@ -404,7 +404,7 @@ export class ToastService {
   }
 
   /**
-   * Combina la configuración global con la específica del toast
+   * Combina la configuraciÃ³n global con la especÃ­fica del toast
    */
   private mergeConfig(type: ToastType, message: string, config?: ToastConfig): ToastConfig {
     const defaultConfig: ToastConfig = {
@@ -433,14 +433,14 @@ export class ToastService {
   }
 
   /**
-   * Obtiene el role ARIA según el tipo
+   * Obtiene el role ARIA segÃºn el tipo
    */
   private getAriaRole(type: ToastType): 'status' | 'alert' | 'log' {
     return type === 'danger' || type === 'warning' ? 'alert' : 'status';
   }
 
   /**
-   * Obtiene el aria-live según el tipo
+   * Obtiene el aria-live segÃºn el tipo
    */
   private getAriaLive(type: ToastType): 'polite' | 'assertive' | 'off' {
     return type === 'danger' ? 'assertive' : 'polite';
@@ -463,17 +463,17 @@ export class ToastService {
   }
 
   /**
-   * Genera una clave única para detectar duplicados
+   * Genera una clave Ãºnica para detectar duplicados
    */
   private getToastKey(config: ToastConfig): string {
     return `${config.type}-${config.message}-${config.title || ''}`;
   }
 
   /**
-   * Asegura que el contenedor exista para una posición específica
+   * Asegura que el contenedor exista para una posiciÃ³n especÃ­fica
    */
   private ensureContainer(position: ToastPosition): ComponentRef<ToastContainerComponent> {
-    // Verificar si ya existe un contenedor para esta posición
+    // Verificar si ya existe un contenedor para esta posiciÃ³n
     let containerRef = this.containers.get(position);
 
     if (containerRef) {
@@ -485,14 +485,14 @@ export class ToastService {
       environmentInjector: this.injector,
     });
 
-    // Adjuntar a la aplicación
+    // Adjuntar a la aplicaciÃ³n
     this.appRef.attachView(containerRef.hostView);
 
     // Agregar al DOM
     const domElem = (containerRef.hostView as any).rootNodes[0] as HTMLElement;
     this.document.body.appendChild(domElem);
 
-    // Configurar posición
+    // Configurar posiciÃ³n
     containerRef.instance.updatePosition(position);
 
     // Guardar en el mapa
@@ -500,6 +500,7 @@ export class ToastService {
 
     return containerRef;
   }
+
 
   /**
    * Persiste un toast en localStorage

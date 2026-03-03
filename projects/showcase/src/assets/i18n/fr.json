@@ -1,0 +1,1687 @@
+{
+  "header": {
+    "title": "NUI",
+    "arialLabel": "NUI - Bibliothèque de composants Angular",
+    "preset": "Préréglage",
+    "theme": "Thème",
+    "language": "Langue",
+    "version": "Version",
+    "light": "Clair",
+    "dark": "Sombre"
+  },
+  "sidebar": {
+    "home": "Accueil",
+    "gettingStarted": "Démarrer",
+    "installation": "Installation",
+    "configuration": "Configuration",
+    "theming": "Thématisation",
+    "themingOverview": "Vue d'ensemble",
+    "themingPresets": "Préréglages",
+    "themingArchitecture": "Architecture",
+    "themingDarkMode": "Mode sombre",
+    "themingCssVariables": "Variables CSS",
+    "themingCustomization": "Personnalisation",
+    "components": "Composants",
+    "componentsActions": "Actions",
+    "componentsOverlays": "Overlays",
+    "componentsForms": "Formulaires",
+    "componentsDisplay": "Affichage",
+    "button": "Bouton",
+    "fabButton": "Bouton FAB",
+    "avatar": "Avatar",
+    "selectButton": "Bouton de sélection",
+    "calendar": "Calendrier",
+    "paginator": "Paginateur",
+    "popover": "Popover",
+    "toast": "Toast",
+    "tooltip": "Infobulle",
+    "sidebarPanel": "Panneau latéral",
+    "actionMenu": "Menu d'actions",
+    "timePicker": "Sélecteur d'heure"
+  },
+  "presets": {
+    "aura": "Aura",
+    "autumn": "Automne",
+    "neon": "Néon",
+    "dopamine": "Dopamine",
+    "corporate": "Entreprise",
+    "minimal": "Minimal",
+    "sunset": "Coucher de soleil",
+    "twilight": "Crépuscule",
+    "ocean": "Océan",
+    "emerald": "Émeraude",
+    "coffee": "Café",
+    "velvet": "Velours"
+  },
+  "footer": {
+    "license": "Inclut des icônes de Remix Icon (Licence MIT)",
+    "copyright": "2025 NUI. Tous droits réservés (MIT)."
+  },
+  "common": {
+    "tabs": {
+      "examples": "Exemples",
+      "api": "API",
+      "theming": "Thématisation"
+    },
+    "tables": {
+      "cssVariable": "Variable CSS",
+      "description": "Description",
+      "default": "Valeur par défaut",
+      "variants": "Variantes",
+      "value": "Valeur",
+      "property": "Propriété",
+      "type": "Type",
+      "info": "Info",
+      "event": "Événement",
+      "method": "Méthode",
+      "argument": "Argument",
+      "returns": "Retourne",
+      "parameters": "Paramètres"
+    }
+  },
+  "codeBlock": {
+    "copy": "Copier",
+    "copied": "Copié !",
+    "copyCode": "Copier le code"
+  },
+  "codeExamples": {
+    "html": "HTML",
+    "typescript": "TypeScript",
+    "css": "CSS",
+    "scss": "SCSS",
+    "component": "Composant",
+    "usage": "Utilisation",
+    "definition": "Définition",
+    "configuration": "Configuration",
+    "customization": "Personnalisation",
+    "example": "Exemple",
+    "componentCode": "Entrées et sorties du composant",
+    "usageCode": "Exemple d'utilisation complet",
+    "itemInterface": "Interface",
+    "parent": "Composant parent",
+    "child": "Composant enfant",
+    "directiveCode": "Entrées et sorties de la directive",
+    "tokensCode": "Jetons d'injection pour les composants",
+    "serviceCode": "Méthodes du service",
+    "refCode": "Référence du composant",
+    "interfacesCode": "Interfaces",
+    "cssVariables": "Variables CSS disponibles"
+  },
+  "pages": {
+    "home": {
+      "title": "Bienvenue sur NUI",
+      "subtitle": "Une bibliothèque de composants Angular moderne et personnalisable",
+      "description": "Créez de belles applications avec notre ensemble complet de composants UI",
+      "multitheme": {
+        "title": "Système de thèmes puissant",
+        "description": "Personnalisez l'apparence de votre application avec plusieurs préréglages prédéfinis et la prise en charge de thèmes personnalisés."
+      },
+      "darkMode": {
+        "title": "Mode sombre intelligent",
+        "description": "Prise en charge intégrée du mode sombre avec des stratégies manuelles, automatiques et basées sur le système."
+      },
+      "components": {
+        "title": "Composants polyvalents",
+        "description": "Une large gamme de composants UI prêts à l'emploi, conçus pour être accessibles et faciles à personnaliser."
+      }
+    },
+    "installation": {
+      "title": "Installation",
+      "subtitle": "Démarrez avec NUI dans votre projet Angular",
+      "step1": "Installer le paquet",
+      "step1Description": "Utilisez npm ou yarn pour installer le paquet NUI dans votre projet.",
+      "step2": "Importer le module NUI",
+      "step2Description": "Configurez NUI dans votre fichier de configuration d'application. Définissez le préréglage que vous souhaitez utiliser et le mode de thème.",
+      "step2Title": "Configurer le fournisseur NUI",
+      "step3": "Importer les styles",
+      "step3Description": "Vous pouvez importer les styles NUI de trois manières différentes : dans votre fichier global styles.scss, dans angular.json, ou dans project.json si vous utilisez Nx.",
+      "step3Title": "Importer les styles NUI",
+      "step4": "Commencer à utiliser les composants",
+      "step4Description": "Vous pouvez maintenant utiliser n'importe quel composant NUI dans vos templates HTML.",
+      "step4Title": "Utiliser les composants NUI"
+    },
+    "configuration": {
+      "title": "Configuration",
+      "subtitle": "Configurez NUI selon vos besoins",
+      "presets": {
+        "title": "Configuration des préréglages",
+        "description": "NUI inclut 12 préréglages prédéfinis que vous pouvez utiliser directement dans votre application. Chaque préréglage définit une palette de couleurs unique pour les modes clair et sombre, garantissant une apparence cohérente sur tous les composants.",
+        "note": "Vous pouvez changer le préréglage à l'exécution en utilisant le <code>ThemeService</code>, ce qui vous permet d'offrir à vos utilisateurs la possibilité de choisir leur apparence préférée."
+      },
+      "custom-presets": {
+        "title": "Préréglages personnalisés",
+        "description": "En plus des préréglages prédéfinis, vous pouvez créer vos propres préréglages personnalisés en définissant des couleurs spécifiques pour les modes clair et sombre. Cela vous permet d'adapter l'apparence de votre application à votre identité de marque ou de créer des expériences utilisateur uniques.",
+        "note": "Les préréglages personnalisés sont définis comme des objets TypeScript conformes à l'interface <code>ThemePreset</code>, garantissant une configuration sûre et une intégration transparente avec le système de thématisation de NUI."
+      },
+      "dark-mode": {
+        "title": "Configuration du mode sombre",
+        "description": "Contrôlez comment le mode sombre est appliqué dans votre application. Les options disponibles sont : <code>manual</code> (contrôlé par le code), <code>auto</code> (basé sur l'heure de la journée) ou <code>system</code> (basé sur les préférences du système d'exploitation).",
+        "note": "Le mode sombre peut être activé par programmation en utilisant le <code>ThemeService</code>, vous permettant d'offrir aux utilisateurs la possibilité de basculer entre les modes ou de suivre automatiquement les paramètres de leur système."
+      },
+      "component-config": {
+        "title": "Configuration spécifique aux composants",
+        "description": "NUI permet de configurer certains aspects des composants via une configuration globale, comme le système de pagination 'Shapeshifter' du Paginateur ou les variantes disponibles pour le Bouton. Cela vous donne le contrôle sur le comportement et l'apparence des composants sans avoir à modifier le code source.",
+        "note": "En configurant les options spécifiques aux composants dans le fournisseur NUI, vous pouvez garantir une expérience utilisateur cohérente dans toute votre application et adapter les composants à vos besoins sans effort."
+      },
+      "i18n": {
+        "title": "Configuration de l'internationalisation (i18n)",
+        "description": "NUI implémente un système i18n réactif basé sur les <code>Signals</code>. Vous pouvez définir une base de texte initiale en utilisant le fournisseur <code>provideNuiI18n()</code>. Pour les applications multilingues, le <code>NuiI18nService</code> permet d'injecter de nouveaux dictionnaires à l'exécution via la méthode <code>setLang()</code>. Dans ce cas, tous les composants abonnés se mettent à jour automatiquement sans recharger l'application ni les dépendances tierces.<br/><br/>Utilisez <code>setTranslations</code> pour mettre à jour uniquement un sous-ensemble de textes en spécifiant la racine du dictionnaire. Par exemple, si vous utilisez <code>ngx-translate</code>, vous pouvez indiquer où se trouve l'objet JSON 'NUI' dans votre fichier de traductions et passer cet objet au service NUI pour tout synchroniser.",
+        "note": "Les textes sont mis à jour dynamiquement via le service, tandis que les paramètres régionaux de date doivent être pré-enregistrés dans la configuration globale afin que l'adaptateur puisse traiter les formats et les libellés ARIA de manière réactive."
+      },
+      "i18n-date": {
+        "title": "i18n NUI dans les dates",
+        "description": "Pour que des composants comme le Calendrier gèrent les formats et les libellés d'accessibilité (ARIA) dans différentes langues, vous devez enregistrer des objets de paramètres régionaux (ex. : date-fns) en utilisant provideNuiDateLocales().<br/><br/>NUI synchronise automatiquement ces paramètres régionaux avec le service i18n, garantissant que les textes et les dates (ex. : \"Lundi, 1er janvier\") sont grammaticalement corrects et accessibles sans configuration supplémentaire.",
+        "note": "Lorsque vous changez la langue de l'application via <code>nuiI18nService.setLang('fr')</code>, NUI synchronise automatiquement l'adaptateur de dates et le dictionnaire de textes. Le système entier est réactif : vos calendriers et paginateurs se mettront à jour instantanément sans logique supplémentaire dans vos composants."
+      }
+    },
+    "theming": {
+      "title": "Thèmes et préréglages",
+      "subtitle": "Personnalisez l'apparence de votre application",
+      "description": "NUI inclut plusieurs préréglages prédéfinis. Chaque préréglage définit une palette de couleurs unique appliquée à tous les composants. Changez de préréglage à l'exécution pour voir les modifications instantanément. De plus, le basculement entre les modes <code>clair</code> et <code>sombre</code> ajuste automatiquement les couleurs pour maintenir le contraste et la lisibilité.",
+      "selectPreset": "Sélectionnez un préréglage pour le prévisualiser",
+      "colorPalette": "Palette de couleurs",
+      "primary": "Primaire",
+      "secondary": "Secondaire",
+      "accent": "Accent",
+      "success": "Succès",
+      "info": "Info",
+      "warning": "Avertissement",
+      "danger": "Danger",
+      "neutral": "Neutre",
+      "presetDescriptions": {
+        "aura": "Palette par défaut moderne et élégante avec des tons turquoise et violet",
+        "autumn": "Palette chaleureuse et accueillante avec des tons corail et dorés, parfaite pour le commerce électronique",
+        "neon": "Palette cyberpunk futuriste avec des couleurs cyan électrique et néon, idéale pour le jeu",
+        "dopamine": "Palette optimiste et joyeuse avec des tons citron vert et rose vifs",
+        "corporate": "Palette bleue professionnelle, parfaite pour les applications d'entreprise",
+        "minimal": "Palette minimaliste raffinée avec des couleurs subtiles et un accent violet élégant",
+        "sunset": "Palette chaude et vibrante avec des tons rose, orange et corail, parfaite pour les applications créatives",
+        "twilight": "Palette douce et relaxante avec des tons lavande et bleu grisâtre, idéale pour le bien-être",
+        "ocean": "Palette calme et professionnelle avec des bleus profonds et des tons aquatiques, idéale pour la productivité",
+        "emerald": "Palette fraîche et naturelle avec des verts émeraude et des accents turquoise, parfaite pour la santé et la nature",
+        "coffee": "Palette chaude et cosy avec des tons marron et des accents crème, idéale pour le style de vie et la gastronomie",
+        "velvet": "Palette riche et luxueuse avec des tons bordeaux et des accents rosés, parfaite pour les applications élégantes et sophistiquées"
+      },
+      "overview": {
+        "title": "Système de thématisation",
+        "subtitle": "Une solution de thématisation puissante et configurable à l'exécution pour les applications Angular",
+        "whatItSolves": {
+          "title": "Quel problème résout-il ?",
+          "description": "Le système de thématisation de NUI élimine le besoin de configuration CSS manuelle, de reconstruction de thèmes ou de gestion complexe des variables SCSS. Il fournit une manière unifiée et sûre de personnaliser l'apparence de votre application à l'exécution."
+        },
+        "features": {
+          "runtimeSwitching": {
+            "title": "Changement de thème en temps réel",
+            "description": "Changez de thème instantanément sans recharger la page ni recompiler. Parfait pour les préférences utilisateur et les tests A/B."
+          },
+          "darkMode": {
+            "title": "Mode sombre automatique",
+            "description": "Prise en charge intégrée du mode sombre avec ajustement automatique des couleurs et plusieurs stratégies d'activation."
+          },
+          "tokenGeneration": {
+            "title": "Plus de 200 variables CSS",
+            "description": "Système de variables complet couvrant les couleurs, les ombres, les teintes, les valeurs alpha et les jetons spécifiques aux composants."
+          },
+          "componentSpecific": {
+            "title": "Variables spécifiques aux composants",
+            "description": "Chaque composant dispose de ses propres variables CSS personnalisables qui héritent du thème global."
+          },
+          "typeSafety": {
+            "title": "Configuration sûre",
+            "description": "Prise en charge complète de TypeScript avec des interfaces qui garantissent que vos thèmes personnalisés sont correctement configurés."
+          },
+          "zeroScss": {
+            "title": "Pas de surcharge de compilation",
+            "description": "Les thèmes sont générés dans le navigateur à l'exécution. Pas besoin de recompiler l'application lors du changement de thème."
+          }
+        },
+        "integration": {
+          "title": "Comment il s'intègre",
+          "description": "Le système de thématisation est profondément intégré dans NUI et fonctionne de manière transparente sur tous les composants :",
+          "point1": "<strong>Point de configuration unique</strong> : Définissez votre thème une fois dans <code>provideNUI()</code>",
+          "point2": "<strong>Propagation automatique</strong> : Tous les composants NUI consomment automatiquement les variables de thème",
+          "point3": "<strong>Composants personnalisés</strong> : Vos propres composants peuvent utiliser les variables CSS NUI pour des styles cohérents",
+          "point4": "<strong>Contrôle à l'exécution</strong> : Changez de thème ou activez le mode sombre par programmation via <code>ThemeService</code>",
+          "point5": "<strong>CSS indépendant du framework</strong> : Les variables fonctionnent dans tout HTML/CSS, pas seulement dans les composants Angular"
+        },
+        "keyFeatures": {
+          "title": "Caractéristiques techniques clés",
+          "feat1": "Variables CSS générées dynamiquement à partir de la configuration TypeScript",
+          "feat2Label": "8 couleurs sémantiques",
+          "feat2": "(primaire, secondaire, accent, succès, info, avertissement, danger, neutre)",
+          "feat3Label": "Échelle de gris en 10 niveaux",
+          "feat3": "pour des neutres cohérents en modes clair et sombre",
+          "feat4Label": "Variantes automatiques",
+          "feat4": "(ombres, teintes, valeurs alpha) générées pour chaque couleur",
+          "feat5Label": "Mode sombre intelligent",
+          "feat5": "avec des stratégies manuelles, système et basées sur le temps"
+        }
+      },
+      "architecture": {
+        "title": "Architecture de thématisation",
+        "subtitle": "Un système en couches pour la génération dynamique de variables CSS",
+        "overview": "Le système de thématisation de NUI utilise une architecture en couches qui génère dynamiquement plus de 1000 variables CSS à partir de la configuration du préréglage. Chaque couche s'appuie sur la précédente, créant un système cohérent et évolutif.",
+        "layer1": {
+          "title": "Couche 1 : Système de préréglages (couleurs sémantiques)",
+          "description": "Chaque préréglage définit 8 couleurs sémantiques qui sont appliquées de manière cohérente dans toute l'application. Ces couleurs adaptent automatiquement leur tonalité entre les modes clair et sombre.",
+          "primary": "Couleur principale de la marque, actions primaires et éléments de navigation clés",
+          "secondary": "Couleur complémentaire pour la hiérarchie visuelle et les actions secondaires",
+          "accent": "Couleur d'emphase pour les surlignages, les liens et les états interactifs",
+          "success": "Confirmations positives, opérations réussies et validation correcte",
+          "info": "Messages informatifs, notifications neutres et contenu d'aide",
+          "warning": "Alertes de prudence nécessitant attention mais non critiques",
+          "danger": "Erreurs critiques, actions destructives et validation échouée",
+          "neutral": "Éléments neutres, états désactivés et arrière-plans subtils"
+        },
+        "layer2": {
+          "title": "Couche 2 : Variables structurelles",
+          "description": "Variables de base qui définissent les couleurs de texte, les arrière-plans, les bordures et d'autres éléments structurels. Générées à partir de l'échelle de gris du préréglage et adaptées au mode clair/sombre.",
+          "surfaces": {
+            "title": "Surfaces",
+            "surface": "Arrière-plan principal pour les cartes, les modales et les panneaux",
+            "surfaceSecondary": "Arrière-plan secondaire pour les sections imbriquées",
+            "surfaceNeutral": "Arrière-plan neutre pour les états désactivés ou les espaces réservés"
+          },
+          "text": {
+            "title": "Texte",
+            "primary": "Texte primaire avec contraste maximum",
+            "secondary": "Texte secondaire pour les métadonnées et les libellés",
+            "weak": "Texte faible pour le contenu tertiaire",
+            "disabled": "Texte pour les éléments désactivés"
+          },
+          "borders": {
+            "title": "Bordures",
+            "high": "Bordures proéminentes nécessitant un contraste élevé",
+            "default": "Bordures standard pour la séparation visuelle",
+            "subtle": "Bordures subtiles pour les divisions légères"
+          }
+        },
+        "layer3": {
+          "title": "Couche 3 : Génération de variantes",
+          "description": "Pour chaque couleur sémantique, le système génère automatiquement des variantes de teinte, d'ombre et d'alpha. Cela permet une hiérarchie visuelle sans définir de couleurs supplémentaires.",
+          "tints": {
+            "title": "Teintes (plus claires)",
+            "description": "Versions éclaircies en mélangeant la couleur avec du blanc. Idéales pour les arrière-plans doux, les états de survol et les accents subtils."
+          },
+          "shades": {
+            "title": "Ombres (plus sombres)",
+            "description": "Versions assombries en mélangeant la couleur avec du noir. Utilisées pour les états actifs, les bordures et la profondeur visuelle."
+          },
+          "alpha": {
+            "title": "Valeurs alpha (transparence)",
+            "description": "Versions semi-transparentes de la couleur. Parfaites pour les superpositions, les effets de verre et les états désactivés."
+          }
+        },
+        "layer4": {
+          "title": "Couche 4 : Système d'ombres",
+          "description": "Système d'ombres à deux niveaux : primitives (xs, sm, md, lg, xl) et alias sémantiques qui mappent les cas d'utilisation aux primitives.",
+          "primitivesTitle": "Primitives d'ombres",
+          "aliasesTitle": "Alias sémantiques",
+          "mapsTo": "Correspond à",
+          "primitives": {
+            "xs": "Ombre minimale pour les champs de saisie et les formulaires",
+            "sm": "Ombre subtile pour les cartes et les conteneurs",
+            "md": "Ombre moyenne pour les éléments interactifs",
+            "lg": "Ombre élevée pour les popovers et les menus déroulants",
+            "xl": "Ombre maximale pour les modales et les superpositions"
+          },
+          "aliases": {
+            "field": "Champs de formulaire (entrées, sélections, zones de texte)",
+            "container": "Cartes, panneaux, conteneurs de contenu",
+            "interactive": "Boutons, puces, éléments cliquables",
+            "elevated": "Popovers, menus déroulants, menus flottants, modales"
+          }
+        },
+        "layer5": {
+          "title": "Couche 5 : Variables de composants",
+          "description": "Chaque composant dispose d'un ensemble de variables CSS générées dynamiquement dérivées des couleurs sémantiques et adaptées aux variantes (solid, outline, ghost).",
+          "button": {
+            "description": "Variables pour 3 variantes (Solid, Outline, Ghost) × 8 couleurs × 4 états (par défaut, survol, actif, désactivé). Total : ~96 variables."
+          },
+          "toast": {
+            "description": "Variables spécifiques pour 4 types de toasts (succès, info, avertissement, danger) incluant l'arrière-plan, la bordure, le titre, le texte, la progression et l'icône."
+          },
+          "paginator": {
+            "description": "Système 'Shapeshifter' où les boutons inactifs sont ghost et le bouton actif adopte la variante spécifiée. Les boutons de navigation sont toujours ghost."
+          }
+        },
+        "performance": {
+          "title": "Optimisation des performances",
+          "description": "Le système de thématisation inclut des optimisations pour minimiser l'impact sur les performances lors du changement de thème dynamique.",
+          "cache": {
+            "title": "Cache CSS",
+            "description": "Le CSS généré pour chaque combinaison préréglage+mode est mis en cache en mémoire. Les changements ultérieurs sont instantanés en réutilisant le CSS pré-généré."
+          },
+          "pregeneration": {
+            "title": "Pré-génération en arrière-plan",
+            "description": "Au chargement de l'application, le CSS pour les deux modes (clair/sombre) est pré-généré en utilisant requestIdleCallback. Le premier basculement est déjà instantané."
+          },
+          "containment": {
+            "title": "CSS Containment",
+            "description": "Les composants lourds utilisent 'contain: layout style paint' pour limiter la portée des recalculs de styles."
+          }
+        },
+        "flow": {
+          "title": "Flux de génération des variables",
+          "description": "De la sélection du préréglage à l'application dans le DOM, voici comment le processus fonctionne :",
+          "step1": {
+            "title": "L'utilisateur sélectionne un préréglage ou bascule le mode sombre",
+            "description": "Via l'interface ou ThemeService.toggleDarkMode() / ThemeService.usePreset()"
+          },
+          "step2": {
+            "title": "ThemeService vérifie le cache CSS",
+            "description": "La clé 'presetName-isDarkMode' est générée. Si elle existe dans le cache, elle est réutilisée. Sinon, elle est générée."
+          },
+          "step3": {
+            "title": "Génération des variables CSS",
+            "description": "~1000 calculs de couleurs (teintes, ombres, alphas, contrastes) sont exécutés pour créer la chaîne CSS complète."
+          },
+          "step4": {
+            "title": "Injection dans le DOM",
+            "description": "Le CSS est injecté dans <style id='nui-theme-colors'>. Le navigateur recalcule les styles et re-rend les composants affectés."
+          }
+        }
+      },
+      "darkMode": {
+        "title": "Stratégies du mode sombre",
+        "subtitle": "Plusieurs façons de gérer le mode sombre dans votre application",
+        "currentStrategy": "Stratégie actuelle",
+        "currentMode": "Mode actuel",
+        "dark": "Sombre",
+        "light": "Clair",
+        "strategiesTitle": "Stratégies disponibles",
+        "strategiesDescription": "NUI propose trois stratégies différentes pour gérer le mode sombre, chacune adaptée à différents cas d'utilisation :",
+        "strategies": {
+          "manual": {
+            "title": "Manuel",
+            "description": "Contrôle programmatique complet. Le mode sombre est activé explicitement via ThemeService.",
+            "feat1": "Contrôle complet dans le code de votre application",
+            "feat2": "Préférence utilisateur sauvegardée dans localStorage",
+            "feat3": "Parfait pour les applications avec une interface de basculement de thème"
+          },
+          "system": {
+            "title": "Système",
+            "description": "Suit automatiquement les préférences du système d'exploitation de l'utilisateur en utilisant la media query prefers-color-scheme.",
+            "feat1": "Respecte le paramètre de mode sombre du système d'exploitation",
+            "feat2": "Se met à jour automatiquement quand l'utilisateur change ses préférences système"
+          },
+          "auto": {
+            "title": "Auto",
+            "description": "Basculement intelligent basé sur le temps. Le mode sombre s'active pendant les heures nocturnes (20h00 - 6h00 heure locale).",
+            "feat1": "Active le mode sombre de 20h00 à 6h00",
+            "feat2": "Réduit la fatigue oculaire lors d'une utilisation nocturne"
+          }
+        },
+        "demo": {
+          "title": "Essayez",
+          "description": "La démo est configurée avec la stratégie 'manual', vous pouvez donc contrôler le mode sombre par programmation :",
+          "toggle": "Basculer le mode sombre",
+          "enableDark": "Activer le mode sombre",
+          "enableLight": "Activer le mode clair"
+        },
+        "customClass": {
+          "title": "Classe de mode sombre personnalisée",
+          "description": "Par défaut, NUI ajoute la classe 'dark-mode' à <html> lorsque le mode sombre est actif. Vous pouvez personnaliser ce nom de classe :"
+        }
+      },
+      "cssVars": {
+        "title": "Explorateur de variables CSS",
+        "subtitle": "Explorez et recherchez plus de 200 variables CSS générées par le système de thématisation",
+        "filters": {
+          "search": "Rechercher",
+          "searchPlaceholder": "Rechercher des variables...",
+          "category": "Catégorie"
+        },
+        "categories": {
+          "all": "Toutes les variables",
+          "semantic": "Couleurs sémantiques",
+          "structural": "Variables structurelles",
+          "button": "Bouton",
+          "avatar": "Avatar",
+          "toast": "Toast",
+          "paginator": "Paginateur",
+          "shadows": "Ombres"
+        },
+        "noResults": "Aucune variable trouvée correspondant à votre recherche",
+        "copy": "Copier dans le presse-papiers",
+        "groups": {
+          "semantic": "Couleurs sémantiques",
+          "structural": "Variables structurelles",
+          "button": "Variables du bouton",
+          "avatar": "Variables de l'avatar",
+          "toast": "Variables du toast",
+          "paginator": "Variables du paginateur",
+          "shadows": "Variables d'ombres"
+        },
+        "usage": {
+          "title": "Comment utiliser les variables CSS",
+          "description": "Vous pouvez utiliser n'importe quelle variable CSS NUI dans les feuilles de style de vos composants :",
+          "example": ".my-component {\n  background: var(--nui-bg-primary);\n  color: var(--nui-text-primary);\n  border: 1px solid var(--nui-border-color);\n  box-shadow: var(--nui-box-shadow-md);\n}\n\n.my-button {\n  background: var(--nui-color-primary);\n  \n  &:hover {\n    background: var(--nui-color-primary-shade-50);\n  }\n}"
+        }
+      },
+      "customization": {
+        "title": "Personnalisation avancée des thèmes",
+        "subtitle": "Créez vos propres préréglages de thème avec des couleurs personnalisées",
+        "intro": {
+          "title": "Pourquoi créer des thèmes personnalisés ?",
+          "description": "Les thèmes personnalisés vous permettent d'adapter l'identité de votre marque, de créer des expériences utilisateur uniques ou d'offrir plusieurs options de thème à vos utilisateurs. NUI facilite cela avec un système de configuration sûr."
+        },
+        "stepsTitle": "Étapes pour créer un thème personnalisé",
+        "steps": {
+          "step1": {
+            "title": "Définissez votre préréglage personnalisé",
+            "description": "Créez un objet <code>ThemePreset</code> avec des couleurs pour les modes <code>clair</code> et <code>sombre</code>. Chaque mode nécessite 8 couleurs sémantiques.",
+            "code": "import { ThemePreset } from '@nui/core';\n\nexport const myCustomPreset: ThemePreset = {\n  name: 'custom',\n  label: 'Thème personnalisé',\n  colors: {\n    light: {\n      primary: '#6366f1',\n      secondary: '#8b5cf6',\n      accent: '#ec4899',\n      success: '#10b981',\n      info: '#3b82f6',\n      warning: '#f59e0b',\n      danger: '#ef4444',\n      neutral: '#6b7280'\n    },\n    dark: {\n      primary: '#818cf8',\n      secondary: '#a78bfa',\n      accent: '#f472b6',\n      success: '#34d399',\n      info: '#60a5fa',\n      warning: '#fbbf24',\n      danger: '#f87171',\n      neutral: '#9ca3af'\n    }\n  }\n};"
+          },
+          "step2": {
+            "title": "Enregistrez votre thème",
+            "description": "Ajoutez votre préréglage personnalisé à la configuration NUI dans votre <code>app.config.ts</code> ou <code>main.ts</code> :",
+            "code": "import { provideNUI } from '@nui/core';\nimport { myCustomPreset } from './themes/custom';\n\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    provideNUI({\n      theme: {\n        preset: 'custom',\n        customPresets: [myCustomPreset],\n        darkMode: {\n          strategy: 'manual'\n        }\n      }\n    })\n  ]\n};"
+          },
+          "step3": {
+            "title": "Utilisez votre thème",
+            "description": "Votre thème personnalisé est maintenant actif ! Vous pouvez également changer de thème à l'exécution :",
+            "code": "import { ThemeService } from '@nui/core';\n\nexport class MyComponent {\n  constructor(private themeService: ThemeService) {}\n\n  switchToCustomTheme() {\n    this.themeService.setPreset('custom');\n  }\n\n  switchToAura() {\n    this.themeService.setPreset('aura');\n  }\n}"
+          }
+        },
+        "grayScale": {
+          "title": "Échelle de gris personnalisée (optionnel)",
+          "description": "Vous pouvez également définir une échelle de gris personnalisée en 10 niveaux pour un contrôle encore plus grand sur les couleurs neutres. Si elle est omise, NUI en génère une automatiquement."
+        },
+        "bestPractices": {
+          "title": "Meilleures pratiques",
+          "practice1": "<strong>Utilisez des couleurs hexadécimales</strong> pour une meilleure compatibilité et performance",
+          "practice2": "<strong>Testez en modes clair et sombre</strong> pour assurer la lisibilité et le contraste",
+          "practice3": "<strong>Maintenez une signification sémantique cohérente</strong> (ex. : 'danger' doit toujours signifier erreur/danger)",
+          "practice4": "<strong>Utilisez des vérificateurs de contraste de couleurs</strong> pour respecter les normes d'accessibilité WCAG",
+          "practice5": "<strong>Tenez compte du daltonisme</strong> et ne vous fiez pas uniquement à la couleur pour transmettre des informations"
+        },
+        "advanced": {
+          "title": "Personnalisation avancée",
+          "tip1": {
+            "title": "Plusieurs préréglages personnalisés",
+            "description": "Vous pouvez enregistrer plusieurs préréglages personnalisés et laisser les utilisateurs choisir entre eux à l'exécution."
+          },
+          "tip2": {
+            "title": "Héritage de préréglage",
+            "description": "Partez d'un préréglage existant et ne remplacez que des couleurs spécifiques pour créer des variations."
+          },
+          "tip3": {
+            "title": "Génération dynamique de thèmes",
+            "description": "Générez des thèmes par programmation en fonction des entrées utilisateur, des couleurs de marque ou des données d'API."
+          }
+        },
+        "example": {
+          "title": "Exemple complet",
+          "description": "Voici un exemple complet d'un thème <code>Forêt</code> personnalisé avec mode sombre manuel :",
+          "code": "import { ThemePreset } from '@nui/core';\n\nexport const forestPreset: ThemePreset = {\n  name: 'forest',\n  label: 'Forêt',\n  colors: {\n    light: {\n      primary: '#059669',    // Émeraude\n      secondary: '#0891b2',  // Cyan\n      accent: '#7c3aed',     // Violet\n      success: '#16a34a',    // Vert\n      info: '#0284c7',       // Ciel\n      warning: '#ca8a04',    // Jaune\n      danger: '#dc2626',     // Rouge\n      neutral: '#52525b'     // Zinc\n    },\n    dark: {\n      primary: '#34d399',\n      secondary: '#22d3ee',\n      accent: '#a78bfa',\n      success: '#4ade80',\n      info: '#38bdf8',\n      warning: '#facc15',\n      danger: '#f87171',\n      neutral: '#a1a1aa'\n    }\n  },\n  grays: {\n    light: {\n      50: '#fafafa',\n      100: '#f4f4f5',\n      200: '#e4e4e7',\n      300: '#d4d4d8',\n      400: '#a1a1aa',\n      500: '#71717a',\n      600: '#52525b',\n      700: '#3f3f46',\n      800: '#27272a',\n      900: '#18181b'\n    },\n    dark: {\n      50: '#18181b',\n      100: '#27272a',\n      200: '#3f3f46',\n      300: '#52525b',\n      400: '#71717a',\n      500: '#a1a1aa',\n      600: '#d4d4d8',\n      700: '#e4e4e7',\n      800: '#f4f4f5',\n      900: '#fafafa'\n    }\n  }\n};"
+        }
+      }
+    }
+  },
+  "components": {
+    "button": {
+      "title": "Bouton",
+      "subtitle": "Composant bouton polyvalent avec plusieurs variantes, tailles et états",
+      "basic": {
+        "title": "Bouton de base",
+        "description": "La forme la plus simple d'un bouton avec les styles par défaut."
+      },
+      "variants-colors": {
+        "title": "Variantes et couleurs",
+        "description": "Prend en charge différentes variantes et couleurs du système NUI.",
+        "note": "Combinez <code>color</code> et <code>variant</code> pour personnaliser l'apparence du bouton selon vos besoins."
+      },
+      "shapes": {
+        "title": "Formes",
+        "description": "Contrôlez la forme du bouton avec des options de bordure arrondie.",
+        "note": "Options de forme : <code>'rounded'</code> pour des bordures légèrement arrondies, <code>'pill'</code> pour des bordures entièrement arrondies, et <code>'square'</code> pour des bordures droites."
+      },
+      "raised": {
+        "title": "Boutons en relief",
+        "description": "Ajoutez de la profondeur visuelle à vos boutons avec une ombre subtile.",
+        "note": "Les boutons en relief sont idéaux pour les actions primaires que vous souhaitez mettre en évidence dans votre interface. Utilisez l'attribut <code>raised</code> sur votre composant Button."
+      },
+      "sizes": {
+        "title": "Tailles",
+        "description": "Cinq options de taille disponibles dans NUI.",
+        "note": "Les tailles affectent la hauteur du bouton, le rembourrage horizontal et la taille de police. Utilisez <code>size</code> avec les valeurs <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> et <code>'xl'</code>."
+      },
+      "icons": {
+        "title": "Icônes",
+        "description": "Ajoutez des icônes aux boutons au début ou à la fin. Les boutons avec uniquement une icône sont rendus comme des boutons icône circulaires.",
+        "note": "Position de l'icône : <code>'start'</code> affiche l'icône avant le texte, <code>'end'</code> l'affiche après. Les boutons icône uniquement nécessitent l'attribut <code>aria-label</code> pour l'accessibilité."
+      },
+      "loading": {
+        "title": "État de chargement",
+        "description": "Affiche un spinner de chargement dans trois positions : début, fin ou centre (qui remplace le contenu).",
+        "note": "Positions de chargement : <code>'start'</code> affiche le spinner avant le texte, <code>'end'</code> l'affiche après, <code>'center'</code> remplace entièrement le contenu par un spinner centré. Si le bouton contient uniquement une <code>icône</code>, le contenu est également remplacé par le spinner pendant le chargement."
+      },
+      "width": {
+        "title": "Largeur",
+        "description": "Contrôlez la largeur du bouton : auto (par défaut), full (100%) ou fit (adapté au contenu).",
+        "note": "Options de largeur : <code>'auto'</code> s'adapte au contenu avec un rembourrage standard, <code>'full'</code> s'étend à 100% du conteneur, <code>'fit'</code> utilise l'espace minimum nécessaire."
+      },
+      "disabled": {
+        "title": "État désactivé",
+        "description": "Les boutons désactivés empêchent l'interaction utilisateur et affichent une apparence atténuée."
+      },
+      "events": {
+        "title": "Événements",
+        "description": "Gérez les événements de clic avec la sortie onClick. Prend en charge les types de boutons : button, submit et reset.",
+        "consoleNote": "Ouvrez <strong>DevTools (F12)</strong> et vérifiez l'onglet <strong>Console</strong> pour voir les événements enregistrés lorsque vous cliquez sur les boutons."
+      },
+      "directive": {
+        "title": "Utilisation de la directive",
+        "description": "Appliquez les styles de bouton aux éléments HTML natifs en utilisant la directive nuiButton.",
+        "note": "Vous pouvez utiliser la directive <code>nuiButton</code> sur n'importe quel élément HTML natif comme <code>&lt;button&gt;</code>, <code>&lt;a&gt;</code> ou <code>&lt;div&gt;</code> pour appliquer les styles et comportements de bouton NUI."
+      },
+      "api": {
+        "inputs": {
+          "title": "Entrées",
+          "description": "Propriétés d'entrée pour configurer le comportement et l'apparence du bouton."
+        },
+        "outputs": {
+          "title": "Sorties",
+          "description": "Événements émis par le composant Button."
+        },
+        "computed": {
+          "title": "Propriétés calculées",
+          "description": "Propriétés calculées réactives (Signals) du composant."
+        },
+        "models": {
+          "title": "Modèles",
+          "description": "Modèles de données liés au composant Button."
+        }
+      },
+      "theming": {
+        "colors": {
+          "title": "Variables de couleur",
+          "description": "Variables CSS pour personnaliser les couleurs par variante (solid, outline, ghost) et couleur (primary, secondary, etc.).",
+          "note": "Remplacez <code>{color}</code> par n'importe quelle couleur du système : <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>."
+        },
+        "structure": {
+          "title": "Variables structurelles",
+          "description": "Variables CSS pour l'espacement, les tailles, la typographie et les effets visuels."
+        }
+      }
+    },
+    "actionMenu": {
+      "title": "Menu d'actions",
+      "subtitle": "Composant de menu déroulant avec prise en charge des éléments statiques, dynamiques et des sous-menus",
+      "basic": {
+        "title": "Utilisation de base",
+        "description": "Menu d'actions simple avec un tableau d'éléments. Chaque élément peut avoir un libellé, une icône et une action.",
+        "note": "Voici un exemple utilisant à la fois <code>type='static'</code> et <code>type='dynamic'</code>.",
+        "consoleNote": "Ouvrez DevTools (F12) et vérifiez l'onglet Console pour voir les actions enregistrées lorsque vous cliquez sur les éléments du menu."
+      },
+      "separators": {
+        "title": "Séparateurs",
+        "description": "Regroupez les actions associées en utilisant des séparateurs visuels.",
+        "note": "Utilisez des éléments avec la propriété <code>separator: true</code> pour ajouter des lignes de séparation entre les groupes d'actions. Vous pouvez ajouter un libellé optionnel au séparateur en utilisant la propriété <code>label</code>."
+      },
+      "submenu": {
+        "title": "Sous-menus",
+        "description": "Créez des menus imbriqués en utilisant la propriété <code>children</code>. Les sous-menus peuvent être imbriqués sur plusieurs niveaux.",
+        "note": "Utilisez la propriété <code>children</code> pour définir les éléments du sous-menu. Chaque enfant peut avoir ses propres enfants pour un imbrication plus profonde. <strong>Remarque :</strong> Si un enfant a <code>selected: true</code>, l'élément parent affichera un indicateur visuel (ligne verticale à gauche) pour faciliter la navigation."
+      },
+      "variants": {
+        "title": "Variantes de bouton",
+        "description": "Le bouton prend en charge différentes variantes et couleurs du système NUI. La variante affecte le bouton, tandis que la couleur affecte à la fois le bouton et son contenu.",
+        "note": "Combinez <code>color</code> et <code>variant</code> pour personnaliser l'apparence du bouton de menu selon vos besoins."
+      },
+      "sizes": {
+        "title": "Tailles",
+        "description": "Utilisez l'une des cinq tailles prédéfinies de NUI. La taille affecte le bouton, mais le contenu reste le même.",
+        "note": "Utilisez l'entrée <code>size</code> pour ajuster la taille du bouton de menu et son contenu en utilisant les tailles <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code> et <code>xl</code>."
+      },
+      "label": {
+        "title": "Contenu du bouton",
+        "description": "Ajoutez du texte au bouton de menu. Peut être combiné avec des icônes et prend en charge le mode pleine largeur.",
+        "note": "Utilisez <code>icon</code> avec <code>label</code> pour afficher les deux sur le bouton. Utilisez <code>width='full'</code> pour que le bouton occupe toute la largeur disponible. Si vous utilisez uniquement <code>label</code> sans icône, le bouton est rendu comme un bouton texte simple.",
+        "codeTitle1": "Texte et icône",
+        "codeTitle2": "Texte uniquement",
+        "codeTitle3": "Pleine largeur"
+      },
+      "disabled": {
+        "title": "État désactivé",
+        "description": "Désactivez des éléments de menu individuels ou l'ensemble du menu. Les éléments désactivés sont affichés mais non cliquables."
+      },
+      "withSubtitle": {
+        "title": "Sous-titre de l'élément",
+        "description": "Ajoutez du texte secondaire sous le libellé principal. Utile pour afficher des informations supplémentaires comme des e-mails, des descriptions ou des raccourcis."
+      },
+      "selected": {
+        "title": "État sélectionné",
+        "description": "Marquez des éléments comme sélectionnés pour afficher le choix actuel. Une icône de coche apparaît automatiquement. Parfait pour les sélecteurs, les filtres ou les paramètres."
+      },
+      "icons": {
+        "title": "Icônes descriptives",
+        "description": "Utilisez des icônes et des libellés significatifs pour communiquer le but de chaque action. Les icônes aident les utilisateurs à identifier rapidement les actions.",
+        "note": "Utilisez des icônes pertinentes de la bibliothèque <strong>Remix Icon</strong> pour améliorer la compréhension visuelle des actions du menu."
+      },
+      "template": {
+        "title": "Template personnalisé",
+        "description": "Personnalisez entièrement le rendu du menu en utilisant des templates et des directives.",
+        "note": "Le template <code>#item</code> reçoit l'élément complet comme contexte (<code>let-item</code>). Les directives <code>menu-header</code> et <code>menu-footer</code> permettent une syntaxe simple et claire, évitant les ng-templates inutiles. <br/><br/> <strong>Important :</strong> Lors de l'utilisation de templates personnalisés, vous devez gérer l'événement de clic manuellement avec <code>(click)=\"handleAction(item)\"</code>. L'événement <code>onItemAction</code> n'est émis automatiquement qu'avec les éléments par défaut."
+      },
+      "api": {
+        "inputs": {
+          "title": "Entrées du composant",
+          "description": "Propriétés d'entrée qui modifient le comportement et l'apparence du menu d'actions."
+        },
+        "outputs": {
+          "title": "Sorties du composant",
+          "description": "Événements émis par le composant auxquels vous pouvez écouter pour réagir aux interactions utilisateur."
+        },
+        "interface": {
+          "title": "Interface ActionMenuItem",
+          "description": "Structure complète d'un élément de menu avec toutes les propriétés disponibles."
+        }
+      },
+      "theming": {
+        "structure": {
+          "title": "Variables structurelles",
+          "description": "Variables CSS qui contrôlent les dimensions du menu, l'espacement, les bordures et les ombres."
+        },
+        "items": {
+          "title": "Variables des éléments",
+          "description": "Variables CSS pour personnaliser l'apparence des éléments, des séparateurs, des raccourcis et des éléments internes."
+        },
+        "colors": {
+          "title": "Variables de couleur",
+          "description": "Modèle de variable CSS pour personnaliser les couleurs des éléments de menu par état.",
+          "note": "Remplacez <code>{color}</code> par n'importe quelle couleur sémantique NUI (<code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>) pour personnaliser l'apparence des éléments pour différents états."
+        }
+      },
+      "styling": {
+        "title": "Styles et personnalisation",
+        "description": "Personnalisez l'apparence du menu via des variables CSS. Contrôlez les couleurs, l'espacement, la typographie et plus encore."
+      }
+    },
+    "avatar": {
+      "title": "Avatar",
+      "subtitle": "Composant graphique pour représenter des utilisateurs, des entités ou des marques via des images, des initiales ou des icônes",
+      "basic": {
+        "title": "Utilisation de base",
+        "description": "Affichez un avatar simple en chargeant une image externe. C'est la forme la plus courante de représentation utilisateur."
+      },
+      "types": {
+        "title": "Types de contenu et priorité",
+        "description": "Le composant décide intelligemment quoi afficher en fonction des données disponibles. Cette logique garantit qu'il y a toujours quelque chose de significatif à afficher.",
+        "note": "<strong>Priorité de rendu :</strong> 1. Image (si elle charge) &gt; 2. Initiales &gt; 3. Icône &gt; 4. Repli (lettre Alt) &gt; 5. Icône par défaut."
+      },
+      "variants": {
+        "title": "Variantes de forme",
+        "description": "L'avatar prend en charge trois formes géométriques pour s'adapter à différents contextes de conception.",
+        "note": "Utilisez l'entrée <code>variant</code> avec les valeurs <code>'circular'</code>, <code>'rounded'</code> et <code>'square'</code> pour changer la forme de l'avatar."
+      },
+      "sizes": {
+        "title": "Tailles",
+        "description": "Cinq tailles prédéfinies qui mettent à l'échelle harmonieusement le conteneur, la typographie et les icônes.",
+        "note": "Les tailles affectent la dimension de l'avatar, la taille de police pour les initiales et la taille des icônes. Utilisez <code>size</code> avec les valeurs <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> et <code>'xl'</code>."
+      },
+      "colors": {
+        "title": "Couleurs",
+        "description": "Personnalisez la couleur d'arrière-plan et de texte en utilisant la palette du système. Idéal pour différencier les utilisateurs ou les états lorsqu'il n'y a pas d'image.",
+        "note": "Utilisez l'entrée <code>color</code> avec des valeurs comme <code>'primary'</code>, <code>'secondary'</code>, <code>'accent'</code>, <code>'success'</code>, <code>'info'</code>, <code>'warning'</code> et <code>'danger'</code> pour changer les couleurs de l'avatar. Vous pouvez également utiliser des couleurs personnalisées en format <code>rgb</code>, <code>hexadécimal</code> ou <code>mot-clé</code> pour un contrôle total sur l'apparence de l'avatar. Si vous utilisez une couleur personnalisée, le composant calculera automatiquement une couleur de texte contrastante pour assurer la lisibilité des initiales ou des icônes."
+      },
+      "customSize": {
+        "title": "Taille personnalisée",
+        "description": "Définissez des dimensions exactes en pixels lorsque les tailles standard ne conviennent pas. Les tailles de police et d'icône sont calculées automatiquement de manière proportionnelle.",
+        "note": "L'entrée <code>customSize</code> remplace l'entrée <code>size</code>. Le calcul interne maintient la lisibilité des initiales."
+      },
+      "grouped": {
+        "title": "Avatars groupés",
+        "description": "Affichez plusieurs avatars dans un seul composant avec chevauchement et une limite d'affichage.",
+        "note": "Utilisez le composant <code>nui-avatar-group</code> pour regrouper plusieurs avatars. Contrôlez le nombre maximum visible avec <code>max</code>. Les avatars supplémentaires sont représentés par un compteur '+X'. Vous pouvez utiliser <code>bordered</code> pour voir une séparation claire entre chaque avatar."
+      },
+      "error": {
+        "title": "Gestion des erreurs (repli)",
+        "description": "Système de récupération automatique. Si l'URL de l'image échoue (erreur 404), le composant bascule instantanément pour afficher les initiales ou l'icône de repli sans casser la mise en page."
+      },
+      "api": {
+        "inputs": {
+          "title": "Entrées du composant",
+          "description": "Propriétés d'entrée qui modifient le comportement et l'apparence de l'avatar."
+        },
+        "outputs": {
+          "title": "Sorties du composant",
+          "description": "Événements émis par le composant auxquels vous pouvez écouter pour réagir aux erreurs de chargement d'image."
+        }
+      },
+      "theming": {
+        "sizes": {
+          "title": "Variables de taille",
+          "description": "Variables CSS qui contrôlent les dimensions de l'avatar, les tailles de police et les tailles d'icône."
+        },
+        "styles": {
+          "title": "Variables de style",
+          "description": "Variables CSS pour personnaliser les bordures, les couleurs par défaut et la typographie de l'avatar."
+        }
+      },
+      "styling": {
+        "title": "Styles et personnalisation",
+        "description": "Personnalisez l'apparence de l'avatar via des variables CSS. Contrôlez les tailles, les couleurs, les bordures et plus encore."
+      }
+    },
+    "selectButton": {
+      "title": "Bouton de sélection",
+      "subtitle": "Ensemble de boutons groupés pour une sélection simple (Radio) ou multiple (Case à cocher)",
+      "basic": {
+        "title": "Utilisation de base",
+        "description": "Le cas le plus simple accepte un tableau de chaînes. Par défaut, il agit comme un sélecteur d'option unique (Radio)."
+      },
+      "modes": {
+        "title": "Modes de sélection",
+        "description": "Permet de changer le type de sélection de bouton entre bouton radio et case à cocher.",
+        "note": "Passez à <code>mode='checkbox'</code> pour permettre la sélection de plusieurs options à la fois. La valeur retournée sera un tableau."
+      },
+      "complex": {
+        "title": "Objets complexes",
+        "description": "Prend en charge des tableaux d'objets avec des propriétés personnalisées pour le libellé, la valeur et l'état désactivé.",
+        "note": "Mappez les propriétés d'objets arbitraires en utilisant <code>labelBy</code>, <code>valueBy</code>, <code>iconBy</code> et <code>disabledBy</code>."
+      },
+      "icons": {
+        "title": "Icônes",
+        "description": "Prend en charge les boutons icône uniquement pour une barre de boutons compacte de style barre d'outils.",
+        "note": "Prise en charge de Remix Icon. Utilisez <code>iconOnly='true'</code> pour une barre de boutons compacte de style barre d'outils. Si c'est un <strong>objet</strong>, vous pouvez mapper la propriété d'icône en utilisant <code>iconBy</code>."
+      },
+      "colors": {
+        "title": "Couleurs et variantes",
+        "description": "Compatible avec le système de variantes complet (Solid, Outline, Ghost) et les couleurs NUI.",
+        "note": "Combinez <code>color</code> et <code>variant</code>."
+      },
+      "segmented": {
+        "title": "Variante segmentée (style iOS)",
+        "description": "Style visuel similaire au <strong>Contrôle Segmenté iOS</strong>, spécial et en plus des types de variantes de base de NUI. Idéal pour les bascules de vue (ex. : Mois / Année, Liste / Carte).",
+        "note": "Utilisez <code>variant='segmented'</code> pour appliquer cette variante unique."
+      },
+      "sizes": {
+        "title": "Tailles",
+        "description": "Cinq tailles prédéfinies qui mettent à l'échelle harmonieusement le conteneur, la typographie et les icônes.",
+        "note": "Utilisez <code>size</code> avec les valeurs <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> et <code>'xl'</code>."
+      },
+      "width": {
+        "title": "Pleine largeur",
+        "description": "Développez les boutons pour occuper tout l'espace disponible de manière égale.",
+        "note": "Utilisez <code>width='full'</code> pour que chaque bouton se développe et occupe une largeur égale dans le conteneur."
+      },
+      "api": {
+        "title": "API et référence",
+        "description": "Documentation complète des entrées, sorties et utilisation avancée du composant Bouton de sélection.",
+        "inputs": {
+          "title": "Entrées",
+          "description": "Propriétés du composant qui contrôlent son comportement et son apparence."
+        },
+        "outputs": {
+          "title": "Sorties",
+          "description": "Événements émis par le composant pendant son cycle de vie."
+        }
+      },
+      "theming": {
+        "title": "Styles et personnalisation",
+        "description": "Personnalisez l'apparence du Bouton de sélection via des variables CSS. Contrôlez l'espacement, les couleurs, les ombres et plus encore.",
+        "general": {
+          "title": "Variables générales",
+          "description": "Variables CSS pour personnaliser le style général du Bouton de sélection (mise en page par défaut)."
+        },
+        "segmented": {
+          "title": "Variables de mise en page segmentée",
+          "description": "Variables CSS spécifiques au style segmenté (style iOS). Contrôle le conteneur, les états sélectionné/non sélectionné et les effets de survol."
+        }
+      }
+    },
+    "calendar": {
+      "title": "Calendrier",
+      "subtitle": "Composant pour sélectionner des dates avec plusieurs modes (jour, semaine, plage), tailles et stratégies de largeur",
+      "basic": {
+        "title": "Utilisation de base",
+        "description": "Calendrier simple pour sélectionner une seule date. Affiche le mois en cours et permet la navigation entre les mois et les années."
+      },
+      "sizes": {
+        "title": "Tailles",
+        "description": "Cinq options de taille (xs, sm, md, lg, xl) et une sixième option auto qui s'adapte au conteneur. Les tailles mettent à l'échelle harmonieusement tous les éléments internes.",
+        "note": "Les tailles affectent la largeur, la hauteur des cellules, le rembourrage et la taille de police du calendrier. Utilisez <code>size</code> avec les valeurs <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> ou <code>'auto'</code>."
+      },
+      "widths": {
+        "title": "Stratégies de largeur",
+        "description": "Deux stratégies de largeur : <strong>compact</strong> (largeur fixe basée sur la taille) et <strong>full</strong> (occupe 100% du conteneur). Le mode full utilise Container Queries pour ajuster la typographie.",
+        "note": "Utilisez <code>width='compact'</code> pour un calendrier à largeur fixe idéal pour les popovers. Utilisez <code>width='full'</code> pour un calendrier qui occupe tout l'espace disponible, idéal pour les formulaires ou les zones de contenu."
+      },
+      "week-selection": {
+        "title": "Sélection de semaine",
+        "description": "Mode spécial pour sélectionner une semaine complète (7 jours consécutifs). Utile pour la planification hebdomadaire.",
+        "note": "Définissez <code>type='WEEK'</code> pour activer ce mode. Le calendrier mettra en évidence la semaine complète au survol et retournera un objet avec les dates de début et de fin de la semaine."
+      },
+      "range-selection": {
+        "title": "Sélection de plage",
+        "description": "Permet de sélectionner une plage de dates avec début et fin. Affiche visuellement les dates intermédiaires de la plage.",
+        "note": "Définissez <code>type='RANGE'</code> pour activer ce mode. Le calendrier attendra deux clics : un pour le début et un pour la fin de la plage. La sortie retournera un objet <code>{ start: Date, end: Date }</code>."
+      },
+      "presets": {
+        "title": "Préréglages de plage rapide",
+        "description": "Ajoutez des boutons de préréglage pour les plages fréquentes comme 'La semaine dernière', 'Le mois dernier', 'L'année dernière'. Permet d'inclure des icônes Remix.",
+        "note": "Cette fonctionnalité n'est disponible que lorsque <code>type='RANGE'</code>. Fournissez un tableau d'objets <code>DateRangePreset</code> dans <code>customPresets</code>. Chaque préréglage a un <code>label</code>, une <code>range</code> (avec début/fin) et une <code>icon</code> optionnelle."
+      },
+      "time-picker": {
+        "title": "Intégration du sélecteur d'heure",
+        "description": "Combinez la sélection de date avec la sélection d'heure. Prend en charge l'heure de début, l'heure de fin ou les deux selon le type de calendrier.",
+        "note": "Utilisez <code>showTimePicker='true'</code> et configurez <code>timePickerMode</code> avec <code>'start'</code>, <code>'end'</code> ou <code>'both'</code>. Vous pouvez personnaliser le sélecteur d'heure avec <code>timePickerConfig</code> (pas, plage, préréglages, etc.)."
+      },
+      "disabled-dates": {
+        "title": "Dates désactivées",
+        "description": "Bloquez des dates spécifiques pour qu'elles ne soient pas sélectionnables. Utile pour les jours fériés, les week-ends ou les dates indisponibles.",
+        "note": "Utilisez <code>disabledDates</code> pour spécifier un tableau de dates désactivées. Les dates désactivées affichent un style atténué distinctif et ne sont pas sélectionnables."
+      },
+      "min-max-dates": {
+        "title": "Plage minimale et maximale",
+        "description": "Limitez la plage de dates sélectionnable en utilisant des valeurs minimales et maximales. Les dates hors plage sont désactivées.",
+        "note": "Configurez <code>minDate</code> et <code>maxDate</code> pour définir les limites. Les utilisateurs ne pourront pas naviguer au-delà de ces limites ni sélectionner des dates hors plage."
+      },
+      "reactive-forms": {
+        "title": "Formulaires réactifs",
+        "description": "Intégration complète avec les formulaires réactifs Angular. Implémente ControlValueAccessor pour la synchronisation automatique.",
+        "note": "Utilisez <code>formControl</code> ou <code>formControlName</code> pour intégrer avec les formulaires Angular. Le composant gère automatiquement la synchronisation, la validation et l'état. Prend en charge tous les types (DAY, WEEK, RANGE) dans les formulaires."
+      },
+      "dynamic-disabled-dates": {
+        "title": "Dates désactivées dynamiquement",
+        "description": "Désactivez des dates basées sur une logique métier complexe en utilisant une fonction personnalisée. Remplace le tableau statique <code>disabledDates</code>.",
+        "note": "Utilisez <code>isDateEnabledFn</code> pour définir des règles d'activation dynamiques. La fonction reçoit une date et doit retourner <code>true</code> si activée ou <code>false</code> si elle doit être désactivée. Idéal pour les calendriers d'entreprise, les systèmes de réservation ou les applications avec une logique de disponibilité complexe."
+      },
+      "date-status": {
+        "title": "États visuels (dateStatusFn)",
+        "description": "Assignez des états visuels aux dates pour indiquer des informations métier : disponibilité, priorité, événements, etc.",
+        "note": "Utilisez <code>dateStatusFn</code> pour assigner l'un des quatre états à chaque date : <code>'success'</code> (vert), <code>'info'</code> (bleu), <code>'warning'</code> (ambre) ou <code>'danger'</code> (rouge). Les états sont affichés comme une ligne de couleur subtile en haut du jour. Retournez <code>null</code> pour les jours sans état spécial."
+      },
+      "selection-modes": {
+        "title": "Modes de sélection avancés",
+        "description": "Le calendrier prend en charge trois modes de sélection spécialisés : sélection normale de jour, sélection de mois/année et sélection d'année uniquement.",
+        "note": "Chaque mode est optimisé pour un cas d'utilisation spécifique : <code>type='day'</code> pour la sélection de date complète, <code>type='month'</code> pour sélectionner le mois et l'année (idéal pour les filtres mensuels), et <code>type='year'</code> pour sélectionner uniquement l'année (idéal pour les rapports annuels). Les modes <code>month</code> et <code>year</code> démarrent directement dans la vue correspondante et se ferment automatiquement à la sélection si <code>closeOnSelect</code> est actif."
+      },
+      "multiple-selection": {
+        "title": "Sélection multiple",
+        "description": "Permet de sélectionner plusieurs dates, mois ou années avec un seul clic. Idéal pour sélectionner des jours ouvrables, des jours fériés ou des événements distribués.",
+        "note": "Activez le mode de sélection multiple avec <code>selection=\"multiple\"</code> combiné avec <code>type='day'</code>, <code>type='month'</code> ou <code>type='year'</code>. Les utilisateurs peuvent cliquer sur plusieurs éléments pour les ajouter/supprimer de la sélection (toggle). Ce mode <strong>ne ferme jamais automatiquement</strong> le calendrier, même si <code>closeOnSelect</code> est <code>true</code>, pour permettre une sélection continue. La sortie retourne un objet avec <code>dates</code>, <code>months</code> ou <code>years</code> selon le type."
+      },
+      "week-numbers": {
+        "title": "Numéros de semaine ISO-8601",
+        "description": "Affiche les numéros de semaine selon la norme ISO-8601 dans une colonne à gauche du calendrier. Utile pour les entreprises, la logistique et la planification.",
+        "note": "Activez les numéros de semaine avec <code>[showWeekNumbers]=\"true\"</code>. Les numéros de semaine sont cliquables lorsque <code>type='week'</code> ou lorsque <code>type='day'</code> et <code>selection='multiple'</code>, permettant la sélection de la semaine complète d'un seul clic. La norme ISO-8601 définit que la semaine commence le lundi et que la semaine 1 de l'année est la première semaine contenant au moins 4 jours de la nouvelle année."
+      },
+      "api": {
+        "inputs": {
+          "title": "Entrées",
+          "description": "Propriétés d'entrée pour configurer le comportement, l'apparence et les contraintes du calendrier"
+        },
+        "outputs": {
+          "title": "Sorties",
+          "description": "Événements émis par le calendrier lorsque l'utilisateur sélectionne une date ou une plage"
+        },
+        "calendar-value": {
+          "title": "CalendarValue",
+          "description": "Type union représentant toutes les valeurs possibles du calendrier selon le type sélectionné",
+          "note": "Le type de valeur retourné dépend de <code>type</code> : <strong>DAY</strong> retourne <code>Date | null</code>, <strong>WEEK</strong> retourne <code>{ start: Date, end: Date } | null</code>, et <strong>RANGE</strong> retourne <code>{ start: Date, end: Date } | null</code>."
+        },
+        "calendar-type": {
+          "title": "CalendarType",
+          "description": "Énumération qui définit le mode de sélection du calendrier"
+        },
+        "calendar-width": {
+          "title": "CalendarWidth",
+          "description": "Énumération qui définit la stratégie de largeur du calendrier"
+        },
+        "calendar-selection": {
+          "title": "CalendarSelection",
+          "description": "Énumération qui définit le mode de sélection du calendrier : simple ou multiple"
+        },
+        "view-mode": {
+          "title": "ViewMode",
+          "description": "Énumération qui définit le mode de vue actuel (jours, mois ou années). Principalement pour une utilisation interne au composant.",
+          "note": "Cette énumération est utilisée en interne par le composant pour gérer la navigation entre les vues. Elle n'a pas besoin d'être configurée directement dans la plupart des cas."
+        },
+        "preset": {
+          "title": "DateRangePreset",
+          "description": "Interface pour définir des préréglages de plage rapide avec un libellé, une plage de dates et une icône optionnelle"
+        },
+        "smart-types": {
+          "title": "Types intelligents",
+          "description": "Types et fonctions pour la validation avancée des dates et la logique de statut. Permettent d'appliquer des règles métier complexes et des visualisations dynamiques.",
+          "note": "Ces types sont fondamentaux pour implémenter des fonctionnalités avancées : <strong>DateStatusFn</strong> assigne des états visuels (success, warning, danger, info) aux dates basés sur la logique métier, tandis que <strong>IsDateEnabledFn</strong> contrôle dynamiquement quelles dates sont activées ou désactivées. Les deux fonctions reçoivent une date et permettent d'implémenter des validations complexes telles que des calendriers d'entreprise, des systèmes de réservation ou des règles de disponibilité personnalisées."
+        }
+      },
+      "theming": {
+        "colors": {
+          "title": "Couleurs",
+          "description": "Le calendrier utilise principalement des variables de thème globales. Les jours sélectionnés, le survol et les états actifs utilisent la couleur primaire du thème actif.",
+          "note": "Le composant s'intègre entièrement avec le système de thématisation de NUI. Les couleurs primaires, d'arrière-plan, de texte et de bordure sont automatiquement héritées du préréglage de thème sélectionné."
+        },
+        "sizes": {
+          "title": "Tailles",
+          "description": "Variables CSS spécifiques aux tailles qui contrôlent la largeur, le rembourrage, l'espacement, les tailles des cellules et la typographie. Cinq variantes de taille disponibles : xs, sm, md (par défaut), lg et xl."
+        },
+        "structure": {
+          "title": "Structure",
+          "description": "Variables CSS structurelles pour contrôler les bordures, les opacités, les animations et les dimensions. Inclut la personnalisation des onglets, les jours d'autres mois, les préréglages et les états de focus."
+        },
+        "customization": {
+          "title": "Personnalisation",
+          "description": "Exemples de personnalisation des styles du calendrier dans votre application. Vous pouvez remplacer les variables CSS globalement ou pour des instances spécifiques."
+        }
+      }
+    },
+    "paginator": {
+      "title": "Paginateur",
+      "subtitle": "Composant avancé pour la navigation dans les données avec prise en charge des mises en page flexibles et du chargement infini",
+      "basic": {
+        "title": "Utilisation de base",
+        "description": "Configuration standard avec navigation numérique. Prend en charge la liaison bidirectionnelle pour la page et la taille."
+      },
+      "nav-display": {
+        "title": "Options d'affichage de navigation",
+        "description": "Définissez comment les boutons de navigation doivent être affichés : texte, icônes ou les deux. Personnalisez l'apparence des boutons de navigation pour les adapter au style de votre application.",
+        "note": "Utilisez l'entrée <code>navDisplay</code> avec les valeurs <code>'text'</code>, <code>'icon'</code> ou <code>'both'</code> pour afficher uniquement le texte, uniquement les icônes ou les deux dans les boutons de navigation. Les icônes sont basées sur la bibliothèque Remix Icon et assignées automatiquement par type de bouton (première page, page précédente, page suivante, dernière page)."
+      },
+      "colors": {
+        "title": "Couleurs et variantes",
+        "description": "Prend en charge toutes les couleurs et variantes NUI (Solid, Outline, Ghost).",
+        "note": "Combinez <code>color</code> et <code>variant</code> pour personnaliser l'apparence du paginateur selon vos besoins."
+      },
+      "sizes": {
+        "title": "Options de taille de page",
+        "description": "Définissez un ensemble personnalisé d'options pour la taille de page.",
+        "note": "En utilisant l'entrée <code>size</code>, vous pouvez offrir aux utilisateurs un ensemble spécifique de tailles de page parmi lesquelles choisir."
+      },
+      "layout": {
+        "title": "Mise en page personnalisée",
+        "description": "La fonctionnalité la plus puissante. Définissez exactement où va chaque élément (haut, gauche, centre, droite, bas) en utilisant un objet de configuration.",
+        "note": "<strong>⚠️ Important pour mobile :</strong> Les mises en page complexes conçues pour le bureau peuvent déborder sur les petits écrans. Fournissez toujours un <code>mobileLayout</code> optimisé qui réorganise les éléments verticalement et priorise la navigation essentielle. Cela évite les problèmes UX sur les appareils mobiles. <br/><br/><strong>Système de zones :</strong> Lorsqu'une mise en page est définie, les attributs comme <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> et <code>showPageJump</code> sont ignorés car la mise en page personnalisée a le contrôle total sur ce qu'il faut afficher et où."
+      },
+      "infinite": {
+        "title": "Chargement infini",
+        "description": "Transforme le paginateur en un bouton <strong>Charger plus</strong> avec état de chargement intégré. Idéal pour les listes mobiles ou les fils d'actualité.",
+        "note": "Activez le mode de chargement infini avec <code>infiniteConfig</code>. Le paginateur devient un bouton qui charge plus d'éléments lorsqu'il est cliqué. Utilisez la sortie <code>onLoadMore</code> dans <code>infiniteConfig</code> pour gérer la logique de chargement des données."
+      },
+      "api": {
+        "title": "API et référence",
+        "description": "Documentation complète des entrées, sorties et interfaces du composant Paginateur pour une intégration avancée.",
+        "inputs": {
+          "title": "Entrées",
+          "description": "Propriétés d'entrée du composant Paginateur"
+        },
+        "outputs": {
+          "title": "Sorties",
+          "description": "Événements émis par le composant Paginateur"
+        },
+        "texts": {
+          "title": "PaginatorI18n",
+          "description": "Interface pour les textes personnalisables du paginateur"
+        },
+        "keyboard": {
+          "title": "KeyboardConfig",
+          "description": "Interface pour la configuration de la navigation au clavier"
+        },
+        "loading": {
+          "title": "LoadingConfig",
+          "description": "Interface pour la configuration de l'état de chargement"
+        },
+        "layout": {
+          "title": "PaginatorLayout",
+          "description": "Interface pour la mise en page personnalisée : organisez les éléments dans des zones (haut, gauche, centre, droite, bas)"
+        },
+        "icons": {
+          "title": "navIcons",
+          "description": "Interface pour la configuration des icônes personnalisables"
+        },
+        "infinite": {
+          "title": "InfiniteConfig",
+          "description": "Interface pour la configuration du mode défilement infini"
+        }
+      },
+      "styling": {
+        "title": "Styles et personnalisation",
+        "description": "Personnalisez l'apparence du paginateur via des variables CSS. Contrôlez la mise en page, les boutons, les numéros de page et plus encore."
+      },
+      "theming": {
+        "layout": {
+          "title": "Mise en page",
+          "description": "Variables CSS pour la mise en page générale du paginateur"
+        },
+        "buttons": {
+          "title": "Boutons",
+          "description": "Variables CSS pour les boutons de navigation et les numéros de page"
+        },
+        "active": {
+          "title": "Page active",
+          "description": "Variables CSS pour l'état actif de la page courante"
+        },
+        "controls": {
+          "title": "Contrôles",
+          "description": "Variables CSS pour le sélecteur de taille, l'affichage de la plage d'éléments et le saut de page"
+        },
+        "infinite": {
+          "title": "Défilement infini",
+          "description": "Variables CSS pour le mode de chargement infini"
+        }
+      }
+    },
+    "popover": {
+      "title": "Popover",
+      "subtitle": "Composant de contenu flottant interactif avec prise en charge du texte, des templates et des composants dynamiques. Contrairement au <code>Tooltip</code>, le popover peut contenir des éléments interactifs tels que des boutons, des formulaires ou des listes.",
+      "examples": {
+        "basic": {
+          "title": "Utilisation de base",
+          "description": "Popover simple avec contenu textuel. Le popover est affiché au clic (comportement par défaut)."
+        },
+        "colors": {
+          "title": "Couleurs et variantes",
+          "description": "Prend en charge toutes les couleurs et variantes NUI (Solid, Outline, Ghost) pour personnaliser l'apparence du popover.",
+          "note": "Combinez <code>color</code> et <code>variant</code> pour adapter le style du popover à votre design."
+        },
+        "positions": {
+          "title": "Positions",
+          "description": "Contrôlez la position préférée du popover : haut, bas, gauche ou droite. Le popover se repositionne automatiquement s'il n'y a pas assez d'espace."
+        },
+        "events": {
+          "title": "Événements déclencheurs",
+          "description": "Définissez comment le popover est déclenché : clic (par défaut), survol, focus ou manuel. Le mode manuel permet un contrôle programmatique complet.",
+          "note": "En utilisant <code>nuiPopoverEvent</code>, nous avons trois modes : <code>'click'</code> (afficher/masquer au clic), <code>'hover'</code> (afficher au survol de la souris, masquer à la sortie) et <code>'focus'</code> (afficher au focus, masquer au blur)."
+        },
+        "template": {
+          "title": "Template personnalisé",
+          "description": "Utilisez des templates Angular pour du contenu interactif riche. Le contexte du template fournit une fonction <code>close</code> pour fermer le popover.",
+          "note": "Le template <code>#popoverTemplate</code> reçoit un contexte avec une fonction <code>close()</code> que vous pouvez utiliser pour fermer le popover depuis l'intérieur du template."
+        },
+        "component": {
+          "title": "Composant dynamique",
+          "description": "Rendez des composants Angular complets à l'intérieur du popover. Idéal pour les formulaires, les listes ou le contenu complexe."
+        },
+        "delays": {
+          "title": "Délais d'affichage/masquage",
+          "description": "Configurez des délais en millisecondes avant d'afficher ou de masquer le popover. Utile pour améliorer l'expérience utilisateur en mode survol."
+        },
+        "customization": {
+          "title": "Personnalisation",
+          "description": "Personnalisez l'apparence du popover : sans flèche, largeur personnalisée, classes CSS personnalisées ou décalage plus grand.",
+          "note": "Vous pouvez utiliser <code>nuiPopoverShowArrow</code> pour masquer/afficher la flèche, <code>nuiPopoverMaxWidth</code> pour définir une largeur maximale, <code>nuiPopoverMinWidth</code> pour définir une largeur minimale, <code>nuiPopoverClass</code> pour ajouter des classes CSS personnalisées, et <code>nuiPopoverOffset</code> pour ajuster la distance entre le popover et l'élément cible."
+        },
+        "closeOptions": {
+          "title": "Options de fermeture",
+          "description": "Contrôlez comment le popover peut être fermé : clic extérieur, touche Échap, ou autoriser plusieurs popovers ouverts simultanément.",
+          "note": "Utilisez <code>nuiPopoverCloseOnClickOutside</code> pour fermer au clic extérieur, <code>nuiPopoverCloseOnEscape</code> pour fermer avec Échap, et <code>nuiPopoverAllowMultiple</code> pour permettre plusieurs popovers ouverts à la fois."
+        },
+        "backdrop": {
+          "title": "Fond",
+          "description": "Ajoutez un arrière-plan sombre derrière le popover pour créer une expérience modale. Vous pouvez contrôler si cliquer sur le fond ferme le popover.",
+          "note": "Utilisez <code>nuiPopoverBackdrop</code> pour activer/désactiver le fond et <code>nuiBackdropClose</code> pour contrôler si cliquer sur le fond ferme le popover."
+        },
+        "disabled": {
+          "title": "État désactivé",
+          "description": "Contrôlez dynamiquement si le popover est activé ou désactivé.",
+          "note": "Lorsque <code>nuiPopoverDisabled</code> est <code>true</code>, le popover ne s'affichera pas et ne répondra pas aux événements."
+        }
+      },
+      "api": {
+        "inputs": {
+          "title": "Entrées",
+          "description": "Propriétés d'entrée de la directive <code>nuiPopover</code>"
+        },
+        "outputs": {
+          "title": "Sorties",
+          "description": "Événements émis par la directive <code>nuiPopover</code>"
+        },
+        "config": {
+          "title": "PopoverConfig",
+          "description": "Interface pour la configuration globale du popover via <code>provideNUI({ popover: {...} })</code>"
+        },
+        "context": {
+          "title": "PopoverContext",
+          "description": "Interface du contexte disponible dans les templates de popover via <code>let-close=\"close\"</code> et <code>let-data=\"data\"</code>"
+        },
+        "tokens": {
+          "title": "Jetons d'injection",
+          "description": "Jetons pour injecter des données et des fonctions dans les composants dynamiques de popover"
+        }
+      },
+      "theming": {
+        "spacing": {
+          "title": "Espacement et dimensions",
+          "description": "Variables CSS pour contrôler la taille, le rembourrage et l'espacement du popover"
+        },
+        "typography": {
+          "title": "Typographie",
+          "description": "Variables CSS pour contrôler la police du contenu du popover"
+        },
+        "borders": {
+          "title": "Bordures",
+          "description": "Variables CSS pour contrôler les bordures et le rayon de bordure du popover"
+        },
+        "shadow": {
+          "title": "Ombre",
+          "description": "Variable CSS pour contrôler l'ombre du popover"
+        },
+        "zindex": {
+          "title": "Z-index",
+          "description": "Variable CSS pour contrôler l'ordre d'empilement du popover"
+        },
+        "animation": {
+          "title": "Animation",
+          "description": "Variables CSS pour contrôler les transitions et animations du popover"
+        }
+      }
+    },
+    "toast": {
+      "title": "Toast",
+      "subtitle": "Notifications temporaires non intrusives pour le retour utilisateur",
+      "examples": {
+        "basic": {
+          "title": "Toasts de base",
+          "description": "Affichez des notifications simples avec différents types : succès, erreur, avertissement et info."
+        },
+        "withTitle": {
+          "title": "Toasts avec titre",
+          "description": "Ajoutez un titre pour donner plus de contexte à la notification."
+        },
+        "withActions": {
+          "title": "Toasts avec actions",
+          "description": "Incluez des boutons d'action pour que l'utilisateur interagisse avec la notification."
+        },
+        "positions": {
+          "title": "Positions",
+          "description": "Contrôlez où les toasts apparaissent à l'écran : haut-gauche, haut-centre, haut-droite, bas-gauche, bas-centre, bas-droite."
+        },
+        "iconTop": {
+          "title": "Icône en haut",
+          "description": "Affiche l'icône du toast centrée en haut pour un design plus proéminent.",
+          "note": "Utilisez la propriété <code>iconPosition='top'</code> pour centrer l'icône en haut du toast. C'est particulièrement utile pour les toasts avec titres et actions, car cela améliore la hiérarchie visuelle et rend l'icône plus proéminente."
+        },
+        "icons": {
+          "title": "Icônes personnalisées",
+          "description": "Vous pouvez afficher des icônes par défaut basées sur le type de toast ou utiliser des icônes personnalisées. Vous pouvez même masquer l'icône si vous le souhaitez.",
+          "note": "Utilisez la propriété <code>icon</code>. Si vous utilisez la valeur <code>false</code>, l'icône sera masquée. Si vous utilisez une <code>chaîne</code>, vous pouvez spécifier une icône personnalisée de <strong>Remix Icon</strong>. Par défaut, les icônes sont affichées selon le type de toast lorsque <code>icon</code> est <code>true</code>."
+        },
+        "duration": {
+          "title": "Durée",
+          "description": "Configurez combien de temps le toast reste visible avant de disparaître. Utilisez 0 pour les toasts qui ne se ferment pas automatiquement."
+        },
+        "loading": {
+          "title": "Toast de chargement",
+          "description": "Affichez un toast avec un état de chargement qui peut être mis à jour dynamiquement lorsque l'opération se termine."
+        }
+      },
+      "api": {
+        "service": {
+          "title": "ToastService",
+          "description": "Service principal pour afficher des notifications toast. Fournit des méthodes pour créer, mettre à jour et fermer les toasts."
+        },
+        "config": {
+          "title": "ToastConfig",
+          "description": "Interface de configuration par toast. Permet de remplacer la configuration globale pour des toasts spécifiques."
+        },
+        "global": {
+          "title": "Configuration globale",
+          "description": "Configuration globale pour le système de toast. Peut être définie lors de l'initialisation de l'application."
+        },
+        "types": {
+          "title": "Types et interfaces",
+          "description": "Définitions de types TypeScript pour le système de toast : ToastType, ToastPosition, ToastAction, ToastRef."
+        },
+        "usage": {
+          "title": "Exemple d'utilisation complet",
+          "description": "Exemple complet intégrant ToastService dans un composant avec différents scénarios d'utilisation."
+        }
+      },
+      "theming": {
+        "container": {
+          "title": "Variables du conteneur",
+          "description": "Variables CSS pour personnaliser le conteneur général du toast (arrière-plan, bordure, ombre, espacement)."
+        },
+        "typography": {
+          "title": "Variables de typographie",
+          "description": "Variables CSS pour personnaliser le texte du toast (titre, message, taille de police, graisse)."
+        },
+        "icon": {
+          "title": "Variables d'icône",
+          "description": "Variables CSS pour personnaliser l'icône du toast (taille, couleur, espacement)."
+        },
+        "close": {
+          "title": "Variables du bouton de fermeture",
+          "description": "Variables CSS pour personnaliser le bouton de fermeture (taille, couleur, survol)."
+        },
+        "progress": {
+          "title": "Variables de la barre de progression",
+          "description": "Variables CSS pour personnaliser la barre de progression automatique (couleur, hauteur, animation)."
+        },
+        "types": {
+          "title": "Variables par type",
+          "description": "Variables CSS spécifiques à chaque type de toast (succès, erreur, avertissement, info, chargement)."
+        },
+        "animations": {
+          "title": "Variables d'animation",
+          "description": "Variables CSS pour personnaliser les animations d'entrée/sortie des toasts."
+        },
+        "examples": {
+          "title": "Exemple de personnalisation",
+          "description": "Exemple complet de personnalisation du toast avec des variables CSS pour créer un thème sombre."
+        }
+      }
+    },
+    "sidebar-panel": {
+      "title": "Panneau latéral",
+      "subtitle": "Panneaux latéraux coulissants avec CDK Overlay pour afficher du contenu dynamique",
+      "examples": {
+        "basic": {
+          "title": "Utilisation de base",
+          "description": "Ouvrez un panneau latéral depuis le SidebarPanelService. Le panneau glisse depuis le bord de l'écran avec une animation fluide."
+        },
+        "defaults": {
+          "title": "Configuration par défaut",
+          "description": "Le panneau s'ouvrira en utilisant les valeurs par défaut globales configurées.",
+          "note": "Si aucune option n'est fournie lors de l'ouverture du panneau, les valeurs par défaut globales définies dans la configuration NUI à <code>provideNUI({ sidebarPanel: {...} })</code> seront utilisées."
+        },
+        "sizes": {
+          "title": "Tailles",
+          "description": "Permet de définir la taille à laquelle le panneau s'ouvrira.",
+          "note": "Vous pouvez utiliser des valeurs prédéfinies comme <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> et <code>'full'</code>."
+        },
+        "positions": {
+          "title": "Positions",
+          "description": "Contrôlez depuis quel côté de l'écran le panneau glisse.",
+          "note": "Utilisez la propriété <code>position</code> pour définir le côté depuis lequel le panneau s'ouvrira en utilisant <code>'right'</code>, <code>'left'</code>, <code>'top'</code> ou <code>'bottom'</code> comme valeurs."
+        },
+        "html-content": {
+          "title": "Contenu HTML personnalisé",
+          "description": "Rendez du contenu HTML arbitraire à l'intérieur du panneau en utilisant des templates Angular.",
+          "note": "Utilisez la propriété <code>htmlContent</code> pour passer une chaîne HTML. Vous pouvez générer le HTML dynamiquement ou le concaténer avec vos données. Cette option ne nécessite pas de créer un composant Angular complet."
+        },
+        "template-content": {
+          "title": "Contenu de template personnalisé (TemplateRef)",
+          "description": "Utilisez des templates Angular avec des données de contexte et des fonctions sans avoir besoin d'un composant complet. Idéal pour le contenu réutilisable avec des données dynamiques.",
+          "note": "Utilisez la propriété <code>contentTemplate</code> pour passer un <code>TemplateRef</code> et <code>templateContext</code> pour passer des données et des fonctions. Le template reçoit le contexte via des variables <code>let-varname</code>. Cela permet l'interactivité sans créer un composant."
+        },
+        "dynamic-component": {
+          "title": "Composant dynamique",
+          "description": "Chargez n'importe quel composant Angular à l'intérieur du panneau et passez des données via l'injection de dépendances.",
+          "note": "Utilisez la propriété <code>data</code> pour passer des données au composant chargé dynamiquement. Ces données sont injectées en utilisant le jeton <code>SIDEBAR_PANEL_DATA</code>. Si vous souhaitez également référencer le panneau lui-même depuis le composant chargé, vous pouvez injecter <code>SIDEBAR_PANEL_REF</code>."
+        },
+        "dynamic-component-events": {
+          "title": "Événements @Outputs du composant dynamique",
+          "description": "Écoutez les événements émis par le composant chargé à l'intérieur du panneau pour gérer les interactions et fermer le panneau si nécessaire.",
+          "note": "Vous pouvez vous abonner aux sorties du composant chargé dynamiquement. Utilisez <code>panelRef.componentInstance</code> pour accéder à l'instance du composant enfant et vous abonner à ses <code>@Output()</code>."
+        },
+        "minimizable": {
+          "title": "Panneau minimisable",
+          "description": "Les panneaux peuvent être réduits en un onglet <strong>situé du côté depuis lequel la Sidebar s'ouvre</strong> pour libérer de l'espace à l'écran tout en préservant l'état, et peuvent être restaurés lorsque souhaité.",
+          "note": "Utilisez l'attribut <code>minimizable</code> pour rendre la Sidebar minimisable. Vous pouvez également utiliser la méthode <code>minimize()</code> de SidebarPanel pour minimiser le panneau par programmation et <code>restore()</code> pour le restaurer. Si <code>minimizable</code> est activé, l'attribut <code>id</code> est requis pour identifier le panneau minimisé. Vous pouvez également vérifier si la Sidebar est minimisée via <code>isMinimized</code>.<br><br><strong>Personnalisation de l'onglet :</strong> Vous pouvez personnaliser l'icône, ajouter du texte, appliquer du CSS personnalisé ou utiliser un template entièrement personnalisé via <code>minimizedTabCustomization</code>. Pour les boutons flottants avec positionnement libre (ex. : chat en bas à droite), utilisez <code>standalone: true</code> pour rendre en dehors du conteneur groupé et éviter les restrictions de positionnement."
+        },
+        "close-button": {
+          "title": "Bouton de fermeture",
+          "description": "Contrôlez la visibilité du bouton de fermeture dans l'en-tête du panneau.",
+          "note": "Utilisez la propriété <code>showCloseButton</code> pour afficher ou masquer le bouton de fermeture dans l'en-tête du panneau."
+        },
+        "backdrop": {
+          "title": "Fond",
+          "description": "Ajoutez un arrière-plan sombre derrière le panneau pour créer une expérience modale. Contrôlez si cliquer sur le fond ferme le panneau.",
+          "note": "Utilisez la propriété <code>hasBackdrop</code> pour activer/désactiver le fond (par défaut <code>true</code>) et <code>closeOnBackdropClick</code> pour contrôler si cliquer sur le fond ferme le panneau."
+        },
+        "custom-backdrop": {
+          "title": "Fond personnalisé",
+          "description": "Personnalisez le fond avec des classes CSS personnalisées. Vous pouvez appliquer des effets comme le flou, des couleurs personnalisées et des transitions.",
+          "note": "Utilisez la propriété <code>backdropClass</code> pour ajouter des classes CSS personnalisées au fond du panneau. Vous pouvez ajouter une seule classe ou un <code>tableau</code> de classes."
+        },
+        "multiple": {
+          "title": "Panneaux multiples",
+          "description": "Ouvrez plusieurs panneaux simultanément depuis différents côtés. Contrôlez l'empilement avec z-index et fermez-les tous à la fois.",
+          "note": "Chaque panneau ouvert est indépendant et peut avoir sa propre configuration. Utilisez la méthode <code>closeAll()</code> de <code>SidebarPanelService</code> pour fermer tous les panneaux ouverts par programmation à la fois."
+        },
+        "footer-actions": {
+          "title": "Actions du pied de page",
+          "description": "Ajoutez des boutons d'action dans le pied de page du panneau.",
+          "note": "Utilisez <code>customButtons</code> pour des actions simples ou <code>footerTemplate</code> pour des mises en page entièrement personnalisées. Vous pouvez combiner plusieurs boutons avec différentes variantes et couleurs NUI."
+        },
+        "child-footer-actions": {
+          "title": "Actions depuis le composant enfant",
+          "description": "Le composant enfant peut enregistrer ses propres actions de pied de page en utilisant SidebarPanelActionsService.",
+          "note": "Cette approche est idéale pour les formulaires où l'enfant gère toute la logique (validation, sauvegarde, états). Le composant enfant injecte <code>SidebarPanelActionsService</code> et enregistre des actions via <code>register()</code>. Les actions peuvent avoir des états réactifs (désactivé, chargement) et exécuter une logique complexe."
+        }
+      },
+      "api": {
+        "service": {
+          "title": "SidebarPanelService",
+          "description": "Méthodes du service pour gérer les panneaux latéraux"
+        },
+        "ref-properties": {
+          "title": "SidebarPanelRef (Propriétés)",
+          "description": "Propriétés de la référence du panneau latéral"
+        },
+        "ref-methods": {
+          "title": "SidebarPanelRef (Méthodes)",
+          "description": "Méthodes de la référence du panneau latéral pour le contrôle et les événements"
+        },
+        "config": {
+          "title": "SidebarPanelConfig",
+          "description": "Configuration complète du panneau latéral"
+        },
+        "custom-button": {
+          "title": "SidebarPanelCustomButton",
+          "description": "Configuration du bouton personnalisé du pied de page"
+        },
+        "minimized-tab": {
+          "title": "MinimizedTabCustomization",
+          "description": "Personnalisation de l'onglet lorsque le panneau est minimisé"
+        },
+        "footer-actions": {
+          "title": "SidebarPanelAction",
+          "description": "Définition des actions enregistrées depuis les composants enfants pour le pied de page du panneau"
+        },
+        "footer-actions-service": {
+          "title": "SidebarPanelActionsService",
+          "description": "Service pour que les composants enfants enregistrent des actions dans le pied de page du panneau"
+        }
+      },
+      "theming": {
+        "colors": {
+          "title": "Variables de couleur",
+          "description": "Variables CSS pour contrôler les couleurs du panneau latéral : arrière-plan, texte, bordures et superposition. Ces variables s'adaptent automatiquement au mode clair/sombre du thème actif."
+        },
+        "layout": {
+          "title": "Variables de mise en page",
+          "description": "Variables CSS pour contrôler la taille et l'espacement du panneau latéral : préréglages de taille prédéfinis (xs à full) et rembourrage de l'en-tête et du contenu"
+        },
+        "typography": {
+          "title": "Variables de typographie",
+          "description": "Variables CSS pour contrôler la typographie du titre du panneau latéral"
+        },
+        "elevation": {
+          "title": "Variables d'élévation",
+          "description": "Variables CSS pour contrôler l'ombre et le z-index du panneau latéral et de la superposition"
+        },
+        "scrollbar": {
+          "title": "Variables de la barre de défilement",
+          "description": "Variables CSS pour contrôler l'apparence de la barre de défilement du panneau latéral"
+        },
+        "examples": {
+          "title": "Exemples de personnalisation",
+          "description": "Exemples SCSS pour personnaliser les styles du panneau latéral dans votre application"
+        }
+      }
+    },
+    "tooltip": {
+      "title": "Infobulle",
+      "subtitle": "Infobulles informatives avec prise en charge du texte et des templates personnalisés",
+      "examples": {
+        "basic": {
+          "title": "Infobulles de base",
+          "description": "Affichez des infobulles textuelles simples au survol.",
+          "note": "Vous pouvez masquer la flèche avec <code>nuiTooltipShowArrow</code>."
+        },
+        "positions": {
+          "title": "Positions",
+          "description": "Contrôlez la position de l'infobulle par rapport à l'élément : haut (par défaut), bas, gauche, droite."
+        },
+        "events": {
+          "title": "Événements",
+          "description": "Définissez quel événement déclenche l'infobulle : survol (par défaut), clic, focus ou manuel pour un contrôle programmatique."
+        },
+        "delays": {
+          "title": "Délais",
+          "description": "Configurez des délais avant d'afficher et de masquer l'infobulle.",
+          "note": "Utilisez les propriétés <code>nuiTooltipShowDelay</code> et <code>nuiTooltipHideDelay</code> pour ajuster les temps d'attente."
+        },
+        "templates": {
+          "title": "Templates personnalisés",
+          "description": "Utilisez des templates Angular pour afficher du contenu HTML riche dans l'infobulle."
+        },
+        "interactive": {
+          "title": "Infobulles interactives",
+          "description": "Permet d'interagir avec le contenu de l'infobulle. Utile pour inclure des boutons ou des liens.",
+          "note": "Activez la propriété <code>nuiTooltipInteractive</code> pour permettre l'interaction à l'intérieur de l'infobulle sans qu'elle se ferme automatiquement lorsque le curseur se déplace."
+        },
+        "disabled": {
+          "title": "État désactivé",
+          "description": "Contrôlez dynamiquement si l'infobulle est activée ou désactivée.",
+          "note": "Utilisez la propriété <code>nuiTooltipDisabled</code> pour activer ou désactiver l'infobulle selon les besoins."
+        }
+      },
+      "api": {
+        "inputs": {
+          "title": "Entrées",
+          "description": "Propriétés d'entrée de la directive <code>nuiTooltip</code>"
+        },
+        "outputs": {
+          "title": "Sorties",
+          "description": "Événements émis par la directive <code>nuiTooltip</code>"
+        },
+        "usage": {
+          "title": "Exemples d'utilisation",
+          "description": "Exemples complets d'utilisation de la directive <code>nuiTooltip</code> dans les composants Angular"
+        }
+      },
+      "theming": {
+        "container": {
+          "title": "Conteneur de l'infobulle",
+          "description": "Variables CSS pour contrôler l'apparence du conteneur de l'infobulle : couleurs, dimensions, rembourrage, police, bordures, ombre et z-index"
+        },
+        "arrow": {
+          "title": "Flèche de l'infobulle",
+          "description": "Variable CSS pour contrôler la taille de la flèche de l'infobulle"
+        },
+        "animation": {
+          "title": "Animations",
+          "description": "Variables CSS pour contrôler la durée et le timing des animations d'entrée et de sortie de l'infobulle"
+        },
+        "examples": {
+          "title": "Exemples de personnalisation",
+          "description": "Exemples SCSS pour personnaliser les styles de l'infobulle dans votre application"
+        }
+      }
+    },
+    "timePicker": {
+      "title": "Sélecteur d'heure",
+      "subtitle": "Composant pour sélectionner l'heure avec plusieurs modes, tailles et configurations avancées",
+      "basic": {
+        "title": "Utilisation de base",
+        "description": "Sélecteur d'heure simple avec la configuration par défaut. Sélectionnez les heures et les minutes au format 24 heures."
+      },
+      "modes": {
+        "title": "Modes d'heure",
+        "description": "Cinq modes disponibles : heures uniquement (12h/24h), heures et minutes (12h/24h) et mode durée.",
+        "note": "Utilisez <code>mode</code> avec les valeurs : <code>'HOUR_12'</code>, <code>'HOUR_24'</code>, <code>'HOUR_MINUTE_12'</code> et <code>'HOUR_MINUTE_24'</code>."
+      },
+      "sizes": {
+        "title": "Tailles",
+        "description": "Cinq options de taille qui mettent à l'échelle harmonieusement le composant et ses éléments internes.",
+        "note": "Les tailles affectent la hauteur, le rembourrage et la taille de police du sélecteur. Utilisez <code>size</code> avec les valeurs <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> et <code>'xl'</code>."
+      },
+      "presets": {
+        "title": "Préréglages rapides",
+        "description": "Ajoutez des boutons de préréglage pour les heures fréquentes comme 'Maintenant', 'Petit-déjeuner', 'Déjeuner'. Peut inclure des icônes personnalisées.",
+        "note": "Fournissez un tableau d'objets <code>TimePreset</code> dans <code>config</code>. Chaque préréglage a un <code>label</code>, une <code>time</code> et une <code>icon</code> optionnelle. Prend en charge les icônes Remix Icon."
+      },
+      "steps": {
+        "title": "Pas d'heure et de minutes",
+        "description": "Contrôlez les intervalles d'incrémentation pour les heures et les minutes afin de limiter les options sélectionnables.",
+        "note": "Utilisez <code>hourStep</code> et <code>minuteStep</code> dans <code>config</code>. Par exemple, <code>hourStep: 2</code> n'affiche que les heures paires, et <code>minuteStep: 15</code> affiche les quarts d'heure (00, 15, 30, 45)."
+      },
+      "timeRange": {
+        "title": "Plage horaire",
+        "description": "Limitez la plage horaire sélectionnable en utilisant des valeurs minimales et maximales. Affiche optionnellement un indicateur visuel.",
+        "note": "Configurez <code>minTime</code> et <code>maxTime</code> dans <code>config</code>. Les heures en dehors de cette plage sont désactivées. Utilisez <code>showRangeIndicator: true</code> pour mettre en évidence visuellement la plage valide."
+      },
+      "disabledTimes": {
+        "title": "Heures désactivées",
+        "description": "Bloquez des heures ou des minutes spécifiques pour empêcher leur sélection. Utile pour les créneaux horaires indisponibles.",
+        "note": "Utilisez <code>disabledHours</code> et <code>disabledMinutes</code> dans <code>config</code> pour spécifier des tableaux de valeurs désactivées. Les éléments désactivés affichent un style atténué distinctif."
+      },
+      "durationMode": {
+        "title": "Mode durée",
+        "description": "Mode spécial pour sélectionner des intervalles de temps. Peut afficher les secondes et définir une durée maximale.",
+        "note": "Définissez <code>mode='DURATION'</code> et configurez avec <code>duration: { maxHours: 8, showSeconds: true }</code> dans <code>config</code>. Utile pour la sélection de créneaux, le suivi du temps, etc."
+      },
+      "defaultStrategies": {
+        "title": "Stratégies par défaut",
+        "description": "Contrôlez l'heure initiale lorsqu'aucune valeur n'est fournie : maintenant, intelligent (actuel + décalage), vide ou personnalisé.",
+        "note": "Utilisez <code>defaultStrategy</code> avec les valeurs <code>'now'</code>, <code>'smart'</code>, <code>'empty'</code> ou <code>'custom'</code>. Pour 'smart', configurez <code>smartOffset</code> en minutes. Pour 'custom', utilisez <code>defaultValue</code>."
+      },
+      "disabled": {
+        "title": "État désactivé",
+        "description": "Désactivez l'ensemble du sélecteur, empêchant l'interaction utilisateur et affichant une apparence atténuée.",
+        "note": "Utilisez la propriété <code>disabled</code> pour contrôler dynamiquement si le sélecteur d'heure est activé ou désactivé."
+      },
+      "reactiveForms": {
+        "title": "Formulaires réactifs",
+        "description": "Intégration complète avec les formulaires réactifs Angular. Implémente ControlValueAccessor.",
+        "note": "Utilisez <code>formControl</code> ou <code>formControlName</code> pour intégrer avec les formulaires Angular. Le composant gère automatiquement la synchronisation, la validation et l'état."
+      },
+      "api": {
+        "inputs": {
+          "title": "Entrées",
+          "description": "Propriétés d'entrée pour configurer le comportement, l'apparence et les contraintes du sélecteur d'heure"
+        },
+        "outputs": {
+          "title": "Sorties",
+          "description": "Événements émis par le sélecteur d'heure lorsque l'utilisateur interagit avec lui"
+        },
+        "config": {
+          "title": "TimePickerConfig",
+          "description": "Interface de configuration avec toutes les options disponibles : pas, plages, heures désactivées, préréglages et configuration de durée"
+        },
+        "durationConfig": {
+          "title": "DurationConfig",
+          "description": "Configuration spécifique pour le mode DURATION : limites d'heures, afficher les secondes, pas et préréglages de durée rapide"
+        },
+        "models": {
+          "title": "Définitions de types",
+          "description": "Interfaces et définitions de types pour les valeurs, la configuration et les préréglages"
+        },
+        "methods": {
+          "title": "Méthodes",
+          "description": "Le composant implémente ControlValueAccessor pour une intégration transparente avec les formulaires Angular"
+        }
+      },
+      "theming": {
+        "colors": {
+          "title": "Couleurs",
+          "description": "Variables CSS de couleur générées par ThemeService pour chaque couleur sémantique. Chaque couleur génère 9 variables spécifiques pour différents états du sélecteur : arrière-plans des éléments (normal, survol, sélectionné), couleurs de texte, états désactivés, accents et anneau de focus."
+        },
+        "sizes": {
+          "title": "Tailles",
+          "description": "Variables CSS spécifiques aux tailles qui contrôlent les hauteurs des éléments, les rembourrages et les dimensions du conteneur. Cinq variantes de taille disponibles : xs, sm, md (par défaut), lg et xl."
+        },
+        "structure": {
+          "title": "Structure",
+          "description": "Variables CSS structurelles pour contrôler les dimensions, l'espacement, la typographie et l'apparence visuelle. Inclut le style des séparateurs, la personnalisation de la barre de défilement, les bordures, les polices et les états de focus."
+        },
+        "customization": {
+          "title": "Personnalisation",
+          "description": "Exemples de personnalisation des styles du sélecteur d'heure dans votre application. Vous pouvez remplacer les variables CSS globalement ou pour des instances spécifiques. L'intégration avec ThemeService permet de générer des variables de couleur pour vos couleurs sémantiques personnalisées."
+        }
+      }
+    },
+    "fabButton": {
+      "title": "Bouton FAB",
+      "subtitle": "Bouton d'action flottant avec mises en page radiales et plusieurs options de personnalisation",
+      "basic": {
+        "title": "De base",
+        "description": "L'utilisation la plus simple du Bouton FAB : développe les actions vers le haut dans une mise en page linéaire lorsque le déclencheur est cliqué."
+      },
+      "directions": {
+        "title": "Directions",
+        "description": "Contrôlez la direction dans laquelle les éléments se développent avec <code>direction</code>. Valeurs disponibles : <code>up</code>, <code>down</code>, <code>left</code>, <code>right</code> et les quatre diagonales."
+      },
+      "layouts": {
+        "title": "Mises en page",
+        "description": "Définissez la distribution spatiale des éléments avec <code>layout</code> : <code>linear</code> (en ligne), <code>semi-circle</code> (demi-cercle), <code>quarter-circle</code> (quart de cercle) et <code>circle</code> (cercle complet)."
+      },
+      "shapes": {
+        "title": "Formes",
+        "description": "Personnalisez le rayon de bordure du déclencheur et des éléments avec <code>shape</code> : <code>circular</code>, <code>rounded</code> ou <code>square</code>."
+      },
+      "colors": {
+        "title": "Couleurs",
+        "description": "Utilisez l'une des 8 couleurs sémantiques du système avec l'entrée <code>color</code>."
+      },
+      "sizes": {
+        "title": "Tailles",
+        "description": "Contrôlez la taille du déclencheur et des éléments avec <code>size</code> : <code>xs</code>, <code>sm</code>, <code>md</code> (par défaut), <code>lg</code> et <code>xl</code>."
+      },
+      "animation": {
+        "title": "Animations",
+        "description": "Choisissez comment les éléments entrent et sortent avec <code>animation</code> : <code>scale</code> (par défaut), <code>fade</code> ou <code>slide</code>."
+      },
+      "trigger": {
+        "title": "Déclencheur",
+        "description": "Personnalisez le bouton déclencheur avec <code>triggerIcon</code>, <code>triggerIconOpen</code> (icône alternative lorsqu'ouvert), <code>triggerLabel</code> (motif FAB étendu) et <code>triggerBadge</code> pour afficher un compteur."
+      },
+      "loading": {
+        "title": "État de chargement",
+        "description": "Affiche un spinner sur le déclencheur avec <code>[loading]=\"true\"</code>. Pendant l'activation, le déclencheur n'ouvre ni ne ferme le menu."
+      },
+      "openOn": {
+        "title": "Mode d'ouverture",
+        "description": "Contrôlez comment le menu s'ouvre : <code>openOn=\"click\"</code> (par défaut) ou <code>openOn=\"hover\"</code> pour un speed-dial activé au survol de la souris. La navigation au clavier fonctionne de la même manière dans les deux modes."
+      },
+      "itemDisplay": {
+        "title": "Affichage des éléments",
+        "description": "<code>itemDisplay=\"icon\"</code> affiche uniquement l'icône avec une infobulle au survol (par défaut). <code>itemDisplay=\"icon-text\"</code> affiche l'icône et la propriété <code>label</code> de l'élément directement visible dans le bouton."
+      },
+      "closeOptions": {
+        "title": "Options de fermeture",
+        "description": "Contrôlez quand le menu se ferme : <code>[closeOnItemClick]=\"false\"</code> garde le menu ouvert après avoir appuyé sur un élément (utile pour la multi-sélection), <code>[closeOnOutsideClick]=\"true\"</code> se ferme au clic extérieur, <code>[closeOnScroll]=\"true\"</code> se ferme au défilement."
+      },
+      "backdrop": {
+        "title": "Fond",
+        "description": "Ajoutez une couche translucide derrière les éléments avec <code>[backdrop]=\"true\"</code>, idéal pour mettre en évidence les actions sur un contenu dense."
+      },
+      "templates": {
+        "title": "Templates personnalisés",
+        "description": "Projetez votre propre contenu dans le déclencheur avec <code>fabTrigger</code> et dans chaque élément avec <code>fabItem</code>. Les deux directives exposent le contexte de l'élément via <code>let-item</code> et l'état d'ouverture du menu via <code>let-open=\"isOpen\"</code>."
+      },
+      "api": {
+        "inputs": {
+          "title": "Entrées",
+          "description": "Propriétés d'entrée pour configurer le comportement, l'apparence et la mise en page du Bouton FAB."
+        },
+        "outputs": {
+          "title": "Sorties",
+          "description": "Événements émis par le composant Bouton FAB pour répondre aux interactions utilisateur."
+        },
+        "computed": {
+          "title": "Propriétés calculées",
+          "description": "Propriétés calculées réactives (Signals) qui exposent l'état interne résolu du composant."
+        },
+        "types": {
+          "title": "Types",
+          "description": "Types TypeScript qui définissent les valeurs acceptées pour les entrées du Bouton FAB."
+        },
+        "item": {
+          "title": "FabButtonItem",
+          "description": "Interface publique qui définit chaque action du menu. Tous les champs sont optionnels : la seule exigence est que l'élément soit identifiable (via <code>id</code>) et ait au moins une <code>icon</code> ou un <code>label</code>."
+        },
+        "itemResolved": {
+          "title": "FabButtonItemResolved",
+          "description": "Version interne de <code>FabButtonItem</code> enrichie de quatre champs calculés que le composant injecte comme variables CSS dans chaque <code>&lt;li&gt;</code>. C'est le type reçu dans le contexte du template <code>fabItem</code> via <code>let-item</code>."
+        },
+        "directives": {
+          "title": "Directives de template",
+          "description": "Directives autonomes qui permettent de projeter des templates personnalisés dans le déclencheur et chaque élément du Bouton FAB. Elles sont importées et déclarées comme toute directive Angular autonome."
+        },
+        "config": {
+          "title": "Configuration globale (FabButtonConfig)",
+          "description": "Toutes les propriétés de configuration globale disponibles via <code>provideNuiConfig({ config: { fabButton: { … } } })</code>. Ces valeurs sont appliquées lorsque l'entrée du composant correspondant n'est pas définie."
+        }
+      },
+      "theming": {
+        "colors": {
+          "title": "Variables de couleur",
+          "description": "Variables CSS pour personnaliser les couleurs par variante (<code>solid</code>, <code>outline</code>, <code>ghost</code>) et couleur sémantique (<code>primary</code>, <code>secondary</code>, etc.).",
+          "note": "Remplacez <code>{color}</code> par n'importe quelle couleur du système : <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>."
+        },
+        "structure": {
+          "title": "Variables structurelles",
+          "description": "Variables CSS pour personnaliser la mise en page radiale, les animations, les tailles de boutons, le fond, les infobulles et l'anneau de focus."
+        }
+      }
+    }
+  }
+}

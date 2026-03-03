@@ -60,7 +60,6 @@ export class NuiDateFnsAdapter implements NuiDateAdapter {
   }
 
   setLocale(localeId: string): void {
-    console.log(`[NUI DateFnsAdapter] Locale set to:`, localeId);
     this._currentLocaleId = localeId;
   }
 
@@ -101,7 +100,6 @@ export class NuiDateFnsAdapter implements NuiDateAdapter {
 
   format(date: Date, fnsPattern: string): string {
     try {
-      console.log('Adaptador formateando en:', this._currentLocaleId);
       return format(date, fnsPattern, { locale: this._activeLocale });
     } catch (error) {
       console.warn(`[NUI DateFnsAdapter] Error formatting:`, error);
