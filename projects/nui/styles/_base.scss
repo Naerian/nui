@@ -1,23 +1,17 @@
 // ==========================================
-// HTML
+// HTML AND HOST
 // ==========================================
-html {
+html,
+:host {
   font-family: var(--nui-font-family);
   font-size: 100%;
+  line-height: 1.5;
   -webkit-text-size-adjust: 100%;
   -moz-tab-size: 4;
   tab-size: 4;
-  line-height: 1.5;
-  font-feature-settings: normal;
-  -webkit-tap-highlight-color: transparent;
-
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  i {
-    line-height: 1;
-  }
 }
 
 // ==========================================
