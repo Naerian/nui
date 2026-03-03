@@ -23,14 +23,7 @@ $fab-radius-map: (
   xl: 4.5rem,
 ) !default;
 
-// ── Button sizes ────────────────────────────────────────────
-// Trigger and item sizes now derive from the global --nui-height-{size} tokens
-// via nui-control-size() — no explicit per-size SCSS variables needed.
-// Items use one size step smaller than the container size (see _fab-button.scss).
-//
-// Icon sizes are calculated as a fraction of the button height:
-//   trigger icon: --nui-height-{size} * $fab-trigger-icon-scale  (default 0.50)
-//   item icon:    --nui-height-{item-size} * $fab-item-icon-scale (default 0.45)
+// Icon scaling factors to ensure consistent visual size across different FAB sizes
 $fab-trigger-icon-scale: 0.5 !default;
 $fab-item-icon-scale: 0.45 !default;
 
@@ -42,10 +35,6 @@ $fab-anim-delay-step: 30ms !default;
 // Trigger icon rotation when open (e.g. 45deg for a plus-to-x morph)
 $fab-trigger-rotate: 45deg !default;
 $fab-spin-duration: 1s !default;
-
-// Backdrop (used in "modal" mode to dim the background and capture clicks outside the FAB)
-$fab-backdrop-bg: rgba(0, 0, 0, 0.2) !default;
-$fab-backdrop-blur: 2px !default;
 
 // Tooltip label offset from the trigger button (used in "extended" mode)
 $fab-tooltip-offset: 0.5rem !default;
@@ -71,10 +60,6 @@ $fab-focus-offset: 0.125rem !default;
   // Trigger icon rotation
   --nui-fab-trigger-rotate: #{$fab-trigger-rotate};
   --nui-fab-spin-duration: #{$fab-spin-duration};
-
-  // Backdrop
-  --nui-fab-backdrop-bg: #{$fab-backdrop-bg};
-  --nui-fab-backdrop-blur: #{$fab-backdrop-blur};
 
   // Tooltip label offset
   --nui-fab-tooltip-offset: #{$fab-tooltip-offset};
