@@ -55,7 +55,7 @@ export const TOAST_THEMING_SECTIONS: ComponentSection[] = [
         [
           '<code>--nui-toast-z-index</code>',
           'Z-index del contenedor',
-          '<code>9999</code>',
+          '<code>var(--nui-z-index-status)</code>',
         ],
         [
           '<code>--nui-toast-gap</code>',

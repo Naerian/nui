@@ -30,7 +30,6 @@ $tooltip-line-height: 1.3 !default;
 $tooltip-shadow: var(--nui-box-shadow-md) !default;
 
 // Comportamiento
-$tooltip-z-index: 1000 !default;
 $tooltip-transition-duration: 150ms !default;
 $tooltip-transition-timing: ease-out !default;
 
@@ -42,32 +41,34 @@ $tooltip-arrow-size: 0.4rem !default;
 
 @mixin nui-tooltip-vars {
   // Colores
-  --tooltip-bg: #{$tooltip-bg};
-  --tooltip-text: #{$tooltip-text};
+  --nui-tooltip-bg: #{$tooltip-bg};
+  --nui-tooltip-text: #{$tooltip-text};
 
   // Layout
-  --tooltip-padding-y: #{$tooltip-padding-y};
-  --tooltip-padding-x: #{$tooltip-padding-x};
-  --tooltip-max-width: #{$tooltip-max-width};
+  --nui-tooltip-padding-y: #{$tooltip-padding-y};
+  --nui-tooltip-padding-x: #{$tooltip-padding-x};
+  --nui-tooltip-max-width: #{$tooltip-max-width};
 
   // Tipografía
-  --tooltip-font-size: #{$tooltip-font-size};
-  --tooltip-font-weight: #{$tooltip-font-weight};
-  --tooltip-line-height: #{$tooltip-line-height};
+  --nui-tooltip-font-size: #{$tooltip-font-size};
+  --nui-tooltip-font-weight: #{$tooltip-font-weight};
+  --nui-tooltip-line-height: #{$tooltip-line-height};
 
   // Bordes
-  --tooltip-border-radius: #{$tooltip-border-radius};
-  --tooltip-border-width: #{$tooltip-border-width};
-  --tooltip-border-color: #{$tooltip-border-color};
+  --nui-tooltip-border-radius: #{$tooltip-border-radius};
+  --nui-tooltip-border-width: #{$tooltip-border-width};
+  --nui-tooltip-border-color: #{$tooltip-border-color};
 
-  // Sombra y Z-Index
-  --tooltip-shadow: #{$tooltip-shadow};
-  --tooltip-z-index: #{$tooltip-z-index};
+  // Sombra
+  --nui-tooltip-shadow: #{$tooltip-shadow};
+
+  // Z-Index
+  --nui-tooltip-z-index: var(--nui-z-index-top);
 
   // Animación
-  --tooltip-transition-duration: #{$tooltip-transition-duration};
-  --tooltip-transition-timing: #{$tooltip-transition-timing};
+  --nui-tooltip-transition-duration: #{$tooltip-transition-duration};
+  --nui-tooltip-transition-timing: #{$tooltip-transition-timing};
 
   // Flecha
-  --tooltip-arrow-size: #{$tooltip-arrow-size};
+  --nui-tooltip-arrow-size: #{$tooltip-arrow-size};
 }

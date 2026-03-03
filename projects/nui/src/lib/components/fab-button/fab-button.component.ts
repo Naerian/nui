@@ -42,6 +42,7 @@ import {
 import { injectFabButtonConfig } from '../../configs/fab-button';
 import { DEFAULT_FAB_BUTTON_I18N } from './models';
 import { NuiI18nService } from '../../i18n';
+import { ThemeService } from '../../themes';
 
 // Unique ID counter – shared across instances (module-level)
 let _fabIdCounter = 0;
@@ -73,6 +74,7 @@ export class FabButtonComponent implements OnDestroy {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly globalConfig = injectFabButtonConfig();
+  private readonly themeService = inject(ThemeService);
   protected readonly _i18nService = inject(NuiI18nService);
   protected readonly _i18n = computed(() => this._i18nService.translations().fabButton);
 
@@ -176,6 +178,12 @@ export class FabButtonComponent implements OnDestroy {
   readonly triggerBadge = input<number | string | undefined>(undefined);
 
   /**
+   * CSS color for the trigger badge background. Should ensure sufficient contrast
+   * with the badge text (which is always white) and the trigger button (which may
+   */
+  readonly triggerBadgeColor = input<string>('var(--nui-danger)');
+
+  /**
    * Shows a loading spinner inside the trigger button.
    * While `true` the trigger does not toggle the dial.
    */
@@ -277,6 +285,12 @@ export class FabButtonComponent implements OnDestroy {
   readonly effectiveItemDisplay = computed(
     () => this.itemDisplay() ?? this.globalConfig.itemDisplay
   );
+  readonly effectiveBadgeColor = computed(() => this.triggerBadgeColor() ?? 'var(--nui-danger)');
+  readonly effectiveBadgeTextColor = computed(() => {
+    const bg = this.effectiveBadgeColor();
+    const contrast = this.themeService.getContrastColor(bg);
+    return contrast;
+  });
 
   /**
    * Active trigger icon: shows `triggerIconOpen` while expanded (when set),

@@ -12,7 +12,6 @@
 
   // Option B: If there is a color, it is DYNAMIC
   @else {
-
     --nui-popover-bg: var(--nui-popover-#{$color}-#{$variant}-bg);
     --nui-popover-text: var(--nui-popover-#{$color}-#{$variant}-text);
     --nui-popover-border-color: var(--nui-popover-#{$color}-#{$variant}-border);
@@ -31,7 +30,7 @@
 
 @mixin nui-popover-styles {
   .nui-popover-overlay-pane {
-    z-index: 1060 !important;
+    z-index: var(--nui-z-index-popout) !important;
     pointer-events: none;
 
     .nui-popover {
@@ -292,6 +291,7 @@
 
   .nui-popover-backdrop {
     @include global.overlay-backdrop();
+    z-index: var(--nui-z-index-popout) !important;
   }
 
   // Responsive mode (popover should never exceed viewport width on mobile)

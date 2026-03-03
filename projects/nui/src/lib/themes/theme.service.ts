@@ -10,11 +10,7 @@ import {
   DARK_MODE_CLASS,
   DarkModeStrategyEnum,
 } from './models/theme.model';
-import {
-  PURE_COLORS,
-  DEFAULT_PRESET,
-  NUI_LUMINANCE_THRESHOLD,
-} from './models/theme.config';
+import { PURE_COLORS, DEFAULT_PRESET, NUI_LUMINANCE_THRESHOLD } from './models/theme.config';
 import { NUI_PRESETS } from './models/theme-presets';
 import { ZINC_GRAYS } from './models/theme-grays';
 import { NUI_CONFIG } from '../configs/nui.token';
@@ -536,7 +532,6 @@ export class ThemeService {
       /* Overlay colors */
       --nui-overlay-bg: ${isDark ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.5)'};
       --nui-color-backdrop: ${isDark ? 'rgba(0, 0, 0, 0.75)' : 'rgba(0, 0, 0, 0.5)'};
-      --nui-z-index-overlay: 1000;
     `;
   }
 
@@ -667,6 +662,9 @@ export class ThemeService {
       --nui-fab-${name}-ghost-hover-border: transparent;
       --nui-fab-${name}-ghost-hover-text:   ${color};
       --nui-fab-${name}-ghost-active-bg:    ${alpha20};
+
+      /* Others */
+      --nui-fab-badge-border: var(--nui-border-subtle);
     `;
   }
 

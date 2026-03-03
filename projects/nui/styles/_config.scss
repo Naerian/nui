@@ -248,3 +248,18 @@ $spin-duration: 1s !default;
 /// =======================================
 /// @group Scrollbar
 $scrollbar-width: 8px !default;
+
+// ========================================
+// Z-INDEX SYSTEM (Layer Stack)
+// ========================================
+$z-index-below: -10; // Elementos detrás del contenido (ej: fondos decorativos)
+$z-index-base: 1; // Nivel de apilamiento por defecto
+$z-index-docked: 100; // Elementos pegados (sticky)
+$z-index-elevated: 200; // Elementos fijos (fixed) o sobre el flujo normal
+$z-index-overlay: 300; // Capa base para desplegables (dropdowns, menús)
+$z-index-surface: 400; // Elementos flotantes interactivos (FAB, Go to top)
+$z-index-modal: 500; // Diálogos bloqueantes y sus fondos
+$z-index-popout: 600; // Elementos que emergen sobre modales (popovers)
+$z-index-status: 700; // Avisos críticos y notificaciones (toasts)
+$z-index-top: 800; // La capa más alta de la UI (tooltips globales)
+$z-index-max: 1000; // Límite de seguridad de la librería

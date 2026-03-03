@@ -18,16 +18,16 @@
   // ========================================
   .nui-toast-container {
     position: fixed;
-    z-index: var(--toast-z-index);
+    z-index: var(--nui-toast-z-index);
     pointer-events: none;
     display: flex;
     flex-direction: column;
-    gap: var(--toast-stack-gap);
+    gap: var(--nui-toast-stack-gap);
     max-height: 100vh;
     max-width: 100vw;
 
     @media (min-width: 640px) {
-      max-width: var(--toast-max-width);
+      max-width: var(--nui-toast-max-width);
     }
 
     // ===== POSITIONS =====
@@ -104,101 +104,13 @@
         border-right: 0;
       }
     }
-  }
 
-  // ========================================
-  // TACKING EFFECT
-  // ========================================
-  .nui-toast-container {
-    &--bottom-left,
-    &--bottom-center,
-    &--bottom-right {
-      .nui-toast-container__wrapper {
-        position: relative;
-        display: block;
-        height: auto;
-        z-index: 1000;
-        pointer-events: auto;
-        width: var(--toast-width);
-        @media (max-width: 640px) {
-          width: var(--toast-width-mobile);
-        }
-      }
-
-      nui-toast {
-        width: 100%;
-        transform-origin: bottom center;
-        transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-      }
-
-      // --- REVERSE STACKING LOGIC (Angular: Last = New) ---
-
-      // THE NEW (Front) -> Last of the list
-      .nui-toast-container__wrapper > nui-toast:last-of-type {
-        position: relative;
-        z-index: 10;
-        transform: scale(1) translateY(0) !important;
-        opacity: 1 !important;
-      }
-
-      // THE PREVIOUS (Behind 1) -> 2nd from the end
-      .nui-toast-container__wrapper > nui-toast:nth-last-of-type(2) {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 9;
-        transform: scale(0.96) translateY(-12px) !important;
-        opacity: 0.9 !important;
-      }
-
-      // THE VERY OLD (Behind 2) -> 3rd from the end
-      .nui-toast-container__wrapper > nui-toast:nth-last-of-type(3) {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 8;
-        transform: scale(0.92) translateY(-24px) !important;
-        opacity: 0.7 !important;
-      }
-
-      // THE HIDDEN (Older) -> 4th from the end en adelante
-      .nui-toast-container__wrapper > nui-toast:nth-last-of-type(n + 4) {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        opacity: 0 !important;
-        transform: scale(0.9) translateY(0) !important;
-        pointer-events: none;
-      }
-
-      // --- HOVER: EXPAND ACCORDION ---
-      .nui-toast-container__wrapper:hover {
-        > nui-toast:nth-last-of-type(2) {
-          transform: translateY(-105%) scale(1) !important;
-          opacity: 1 !important;
-          z-index: 11;
-        }
-        > nui-toast:nth-last-of-type(3) {
-          transform: translateY(-210%) scale(1) !important;
-          opacity: 1 !important;
-          z-index: 12;
-        }
-        > nui-toast:nth-last-of-type(4) {
-          transform: translateY(-315%) scale(1) !important;
-          opacity: 1 !important;
-        }
-      }
+    &__wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: var(--nui-toast-stack-gap);
+      width: 100%;
     }
-  }
-
-  .nui-toast-container__wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: var(--toast-stack-gap);
-    width: 100%;
   }
 
   // ========================================
@@ -207,25 +119,25 @@
   .nui-toast {
     position: relative;
     display: block;
-    width: var(--toast-width);
+    width: var(--nui-toast-width);
     background-color: var(--nui-toast-bg);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
-    border: var(--toast-border-width) solid var(--nui-toast-border);
-    border-radius: var(--toast-radius);
-    box-shadow: var(--toast-shadow);
+    border: var(--nui-toast-border-width) solid var(--nui-toast-border);
+    border-radius: var(--nui-toast-radius);
+    box-shadow: var(--nui-toast-shadow);
     color: var(--nui-toast-text);
     pointer-events: auto;
     overflow: hidden;
-    transition: all var(--toast-duration) var(--toast-easing);
-    animation: toastSlideIn var(--toast-duration) var(--toast-easing);
+    transition: all var(--nui-toast-duration) var(--nui-toast-easing);
+    animation: toastSlideIn var(--nui-toast-duration) var(--nui-toast-easing);
 
     &:hover {
       background-color: var(--nui-toast-hover-bg);
     }
 
     @media (max-width: 640px) {
-      width: var(--toast-width-mobile);
+      width: var(--nui-toast-width-mobile);
     }
 
     // ===== INTERNAL ELEMENTS =====
@@ -242,9 +154,9 @@
     &__body {
       display: flex;
       align-items: flex-start;
-      gap: var(--toast-gap);
+      gap: var(--nui-toast-gap);
       width: 100%;
-      padding: var(--toast-padding);
+      padding: var(--nui-toast-padding);
 
       &--single-content {
         align-items: center;
@@ -258,7 +170,7 @@
       right: 0.5rem;
       display: flex;
       gap: 0.25rem;
-      z-index: 10;
+      z-index: 2;
     }
 
     // Progress Bar (Autodismiss)
@@ -270,7 +182,7 @@
       width: 100%;
       background-color: var(--nui-toast-progress);
       transform-origin: left;
-      z-index: 5;
+      z-index: 1;
 
       &--paused {
         animation-play-state: paused;
@@ -325,14 +237,14 @@
     }
 
     &__title {
-      font-size: var(--toast-title-size);
-      font-weight: var(--toast-title-weight);
+      font-size: var(--nui-toast-title-size);
+      font-weight: var(--nui-toast-title-weight);
       line-height: 1.3;
     }
 
     &__message {
-      font-size: var(--toast-message-size);
-      font-weight: var(--toast-message-weight);
+      font-size: var(--nui-toast-message-size);
+      font-weight: var(--nui-toast-message-weight);
       opacity: 0.95;
       line-height: 1.5;
     }
@@ -372,7 +284,7 @@
     &__html,
     &__template,
     &__expanded-content {
-      font-size: var(--toast-message-size);
+      font-size: var(--nui-toast-message-size);
       line-height: 1.5;
       word-wrap: break-word;
 

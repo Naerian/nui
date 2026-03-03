@@ -142,6 +142,12 @@ export const FAB_BUTTON_API_SECTIONS: ComponentSection[] = [
           "Notification badge value shown in the top-end corner of the trigger. Pass <code>undefined</code> to hide. Accepts a number or short string (e.g. <code>'99+'</code>).",
         ],
         [
+          '<code>triggerBadgeColor</code>',
+          'string',
+          '<code class="neutral">var(--nui-danger)</code>',
+          'Background color for the trigger badge. Accepts any valid CSS color value. This generate two CSS variables: <code>--nui-fab-badge-bg</code> for the badge background and <code>--nui-fab-badge-text-color</code> for the badge text color (automatically calculated for contrast).',
+        ],
+        [
           '<code>loading</code>',
           'boolean',
           '<code class="neutral">false</code>',

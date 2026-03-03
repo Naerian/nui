@@ -8,7 +8,6 @@ $popover-max-width: 20rem !default;
 $popover-min-width: 5rem !default;
 $popover-border-width: 1px !default;
 $popover-arrow-size: 0.5rem !default;
-$popover-z-index: 1000 !default;
 
 // Animation Tokens
 $popover-transition-duration: 200ms !default;
@@ -26,7 +25,7 @@ $popover-distance: 0.313rem !default;
   --nui-popover-arrow-size: #{$popover-arrow-size};
 
   // Z-Index
-  --nui-popover-z-index: #{$popover-z-index};
+  --nui-popover-z-index: var(--nui-z-index-popout);
 
   // Typography
   --nui-popover-font-size: var(--nui-font-size-sm);

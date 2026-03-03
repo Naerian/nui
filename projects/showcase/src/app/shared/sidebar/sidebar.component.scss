@@ -28,7 +28,7 @@
     left: 0;
     top: 0;
     bottom: 0;
-    z-index: 1001;
+    z-index: var(--nui-z-index-modal);
     box-shadow: var(--nui-box-shadow-md);
     padding-top: 0;
   }

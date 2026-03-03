@@ -97,7 +97,7 @@ export const POPOVER_THEMING_SECTIONS: ComponentSection[] = [
       rows: [
         [
           '<code>--nui-popover-z-index</code>',
-          '1000',
+          'var(--nui-z-index-popout)',
           'Z-index del popover para controlar el orden de apilamiento',
         ],
       ],

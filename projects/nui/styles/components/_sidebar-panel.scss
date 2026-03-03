@@ -102,17 +102,18 @@
   .nui-sidebar-panel-overlay,
   .nui-sidebar-panel-backdrop {
     @include mixins.overlay-backdrop();
+    z-index: var(--nui-sidebar-panel-z-index) !important;
   }
 
   .cdk-overlay-pane.sidebar-panel-pane {
-    z-index: var(--nui-sidebar-panel-z-index) !important;
+    z-index: calc(var(--nui-sidebar-panel-z-index) + 1) !important;
   }
 
   // Panel Host Container (The container that moves the CDK)
   .sidebar-panel-container {
     position: fixed; // The CDK manages it, but this ensures
     overflow: hidden;
-    z-index: var(--nui-sidebar-panel-z-index) !important;
+    z-index: calc(var(--nui-sidebar-panel-z-index) + 1) !important;
     height: 100vh; // Always full height
     height: 100dvh; // Dynamic viewport height (considers mobile browser bars)
     max-height: 100vh; // Fallback for browsers without dvh support

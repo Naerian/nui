@@ -4,7 +4,7 @@
   padding: 0.75rem 0;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: var(--nui-z-index-docked);
   box-shadow: 0 2px 8px var(--nui-box-shadow-sm);
 
   .btn-menu-toggle {

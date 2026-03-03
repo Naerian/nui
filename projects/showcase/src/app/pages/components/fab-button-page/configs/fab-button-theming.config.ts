@@ -18,11 +18,7 @@ export const FAB_BUTTON_THEMING_SECTIONS: ComponentSection[] = [
       content: 'components.fabButton.theming.colors.note',
     },
     table: {
-      headers: [
-        'common.tables.cssVariable',
-        'common.tables.description',
-        'common.tables.variants',
-      ],
+      headers: ['common.tables.cssVariable', 'common.tables.description', 'common.tables.variants'],
       rows: [
         // ── Solid ──────────────────────────────────────────
         [
@@ -141,6 +137,18 @@ export const FAB_BUTTON_THEMING_SECTIONS: ComponentSection[] = [
           'Focus ring color (semi-transparent)',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
+
+        // ── Others ─────────────────────────────────────
+        [
+          '<code>--nui-fab-badge-bg</code>',
+          'Background color for trigger badge (when using <code>triggerBadgeColor</code> input)',
+          'var(--nui-danger)',
+        ],
+        [
+          '<code>--nui-fab-badge-text</code>',
+          'Text color for trigger badge (automatically calculated for contrast)',
+          'var(--nui-on-danger)',
+        ],
       ],
     },
   },
@@ -154,40 +162,76 @@ export const FAB_BUTTON_THEMING_SECTIONS: ComponentSection[] = [
     description: 'components.fabButton.theming.structure.description',
     anchor: 'structure',
     table: {
-      headers: [
-        'common.tables.cssVariable',
-        'common.tables.description',
-        'common.tables.default',
-      ],
+      headers: ['common.tables.cssVariable', 'common.tables.description', 'common.tables.default'],
       rows: [
         // Layout
-        ['<code>--nui-fab-radius</code>',      'Radius for circle / semi-circle / quarter-circle layouts', '4rem'],
-        ['<code>--nui-fab-spacing</code>',     'Step distance between items in linear layout',             '3.5rem'],
+        [
+          '<code>--nui-fab-radius</code>',
+          'Radius for circle / semi-circle / quarter-circle layouts',
+          '4rem',
+        ],
+        [
+          '<code>--nui-fab-spacing</code>',
+          'Step distance between items in linear layout',
+          '3.5rem',
+        ],
 
         // Animation
-        ['<code>--nui-fab-anim-duration</code>',    'Enter/leave transition duration for items',            '200ms'],
-        ['<code>--nui-fab-anim-easing</code>',      'Easing curve shared by all animation types',          'cubic-bezier(0.4, 0, 0.2, 1)'],
-        ['<code>--nui-fab-anim-delay-step</code>',  'Stagger delay delta per item',                        '30ms'],
+        [
+          '<code>--nui-fab-anim-duration</code>',
+          'Enter/leave transition duration for items',
+          '200ms',
+        ],
+        [
+          '<code>--nui-fab-anim-easing</code>',
+          'Easing curve shared by all animation types',
+          'cubic-bezier(0.4, 0, 0.2, 1)',
+        ],
+        ['<code>--nui-fab-anim-delay-step</code>', 'Stagger delay delta per item', '30ms'],
 
         // Trigger
-        ['<code>--nui-fab-trigger-rotate</code>',   'Trigger icon rotation when expanded',                 '45deg'],
-        ['<code>--nui-fab-trigger-size-{sz}</code>', 'Trigger button diameter per size token (xs…xl)',      '3rem (md)'],
-        ['<code>--nui-fab-trigger-icon-{sz}</code>', 'Trigger icon font-size per size token',               '1.5rem (md)'],
+        ['<code>--nui-fab-trigger-rotate</code>', 'Trigger icon rotation when expanded', '45deg'],
+        [
+          '<code>--nui-fab-trigger-size-{sz}</code>',
+          'Trigger button diameter per size token (xs…xl)',
+          '3rem (md)',
+        ],
+        [
+          '<code>--nui-fab-trigger-icon-{sz}</code>',
+          'Trigger icon font-size per size token',
+          '1.5rem (md)',
+        ],
 
         // Items
-        ['<code>--nui-fab-item-size-{sz}</code>',   'Item button diameter per size token (xs…xl)',         '2.5rem (md)'],
-        ['<code>--nui-fab-item-icon-{sz}</code>',   'Item icon font-size per size token',                  '1.125rem (md)'],
+        [
+          '<code>--nui-fab-item-size-{sz}</code>',
+          'Item button diameter per size token (xs…xl)',
+          '2.5rem (md)',
+        ],
+        [
+          '<code>--nui-fab-item-icon-{sz}</code>',
+          'Item icon font-size per size token',
+          '1.125rem (md)',
+        ],
 
         // Backdrop
-        ['<code>--nui-fab-backdrop-bg</code>',      'Backdrop overlay background color',                   'rgba(0,0,0,0.2)'],
-        ['<code>--nui-fab-backdrop-blur</code>',    'Backdrop CSS blur amount',                             '2px'],
+        [
+          '<code>--nui-fab-backdrop-bg</code>',
+          'Backdrop overlay background color',
+          'rgba(0,0,0,0.2)',
+        ],
+        ['<code>--nui-fab-backdrop-blur</code>', 'Backdrop CSS blur amount', '2px'],
 
         // Tooltip label
-        ['<code>--nui-fab-tooltip-offset</code>',   'Gap between item button and its inline tooltip label','0.5rem'],
+        [
+          '<code>--nui-fab-tooltip-offset</code>',
+          'Gap between item button and its inline tooltip label',
+          '0.5rem',
+        ],
 
         // Focus ring
-        ['<code>--nui-fab-focus-width</code>',      'Focus outline width',                                 '0.125rem'],
-        ['<code>--nui-fab-focus-offset</code>',     'Focus outline offset',                                '0.125rem'],
+        ['<code>--nui-fab-focus-width</code>', 'Focus outline width', '0.125rem'],
+        ['<code>--nui-fab-focus-offset</code>', 'Focus outline offset', '0.125rem'],
       ],
     },
     examples: [

@@ -160,4 +160,20 @@
   /// =======================
   /// @group Scrollbar
   --nui-scrollbar-width: #{config.$scrollbar-width};
+
+  /// =======================
+  /// Z-INDEX SYSTEM (Layer Stack)
+  /// =======================
+  /// @group Z-Index
+  /// Note: Z-index values are defined in the config file and can be accessed via CSS variables for consistent layering across components.
+  --nui-z-index-below: #{config.$z-index-below};
+  --nui-z-index-base: #{config.$z-index-base};
+  --nui-z-index-docked: #{config.$z-index-docked};
+  --nui-z-index-elevated: #{config.$z-index-elevated};
+  --nui-z-index-overlay: #{config.$z-index-overlay};
+  --nui-z-index-surface: #{config.$z-index-surface};
+  --nui-z-index-modal: #{config.$z-index-modal};
+  --nui-z-index-popout: #{config.$z-index-popout};
+  --nui-z-index-status: #{config.$z-index-status};
+  --nui-z-index-top: #{config.$z-index-top};
 }

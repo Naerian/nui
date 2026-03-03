@@ -53,12 +53,10 @@
   .nui-fab__backdrop {
     position: fixed;
     inset: 0;
-    z-index: var(--nui-z-index-overlay, 100);
+    z-index: var(--nui-fab-z-index);
     background-color: var(--nui-fab-backdrop-bg);
     backdrop-filter: blur(var(--nui-fab-backdrop-blur));
     cursor: default;
-
-    // Animate in/out together with the items
     animation: nui-fab-backdrop-in var(--nui-fab-anim-duration) var(--nui-fab-anim-easing) forwards;
   }
 
@@ -68,10 +66,8 @@
   .nui-fab__container {
     position: relative;
     display: inline-flex;
-    // Sits above the backdrop (which uses --nui-z-index-overlay).
-    // Stacking context so z-index works correctly between trigger (z:2) and items (z:1).
     isolation: isolate;
-    z-index: calc(var(--nui-z-index-overlay, 100) + 1);
+    z-index: calc(var(--nui-fab-z-index) + 1);
   }
 
   // ----------------------------------------------------------
@@ -86,26 +82,17 @@
     justify-content: center;
     flex-shrink: 0;
     cursor: pointer;
-
-    // Reset button defaults
     border: none;
     padding: 0;
     font-family: inherit;
     line-height: 1;
     text-decoration: none;
     vertical-align: middle;
-
-    // Colours (set via theme mixin classes below)
     background-color: var(--nui-fab-trigger-bg);
     color: var(--nui-fab-trigger-text);
     border: 1px solid var(--nui-fab-trigger-border, transparent);
-
-    // Default size (md) — overridden per size class via nui-control-size in SIZE MODIFIERS.
-    // Width/height equal the global height token so FABs are always square.
     width: var(--nui-height-md);
     height: var(--nui-height-md);
-
-    // Elevation (FAB always elevated)
     box-shadow: var(--nui-shadow-interactive-rest);
     transition:
       background-color var(--nui-fab-anim-duration) var(--nui-fab-anim-easing),
@@ -145,7 +132,6 @@
     &--custom-tpl {
       width: auto !important; // beats SIZE MODIFIER specificity
       height: auto !important;
-      // Accessibility floor: WCAG 2.5.8 touch target minimum
       min-width: 2.5rem;
       min-height: 2.5rem;
       padding: 0.375rem 0.875rem;
@@ -184,8 +170,8 @@
     height: 1.1rem;
     padding: 0 0.25rem;
     border-radius: 999px;
-    background-color: var(--nui-color-danger, #ef4444);
-    color: #fff;
+    background-color: var(--nui-fab-badge-bg);
+    color: var(--nui-fab-badge-text);
     font-size: 0.6rem;
     font-family: var(--nui-font-family);
     font-weight: 700;
@@ -194,19 +180,39 @@
     white-space: nowrap;
     z-index: 3;
     pointer-events: none;
-    // Thin white ring separates badge from trigger background
-    box-shadow: 0 0 0 0.125rem var(--nui-fab-trigger-bg, transparent);
+    box-shadow: 0 0 0 0.125rem var(--nui-fab-badge-border, transparent);
   }
 
   // ── Trigger spinner (loading state) ─────────────────────
   .nui-fab__trigger-spinner {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    font-size: calc(var(--nui-height-md) * 0.45);
-    line-height: 1;
-    color: currentColor;
-    animation: nui-fab-spin 0.75s linear infinite;
+    width: 1em;
+    height: 1em;
+    line-height: 0;
+    font-size: 1em;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0.125em solid currentColor;
+      border-radius: 50%;
+      border-right-color: transparent;
+      animation: nui-spin var(--nui-fab-spin-duration) linear infinite;
+      box-sizing: border-box;
+      transform-origin: center center;
+      will-change: transform;
+    }
   }
 
   // ── Loading modifier ─────────────────────────────────────
@@ -220,15 +226,6 @@
   // that hovering the whole component opens the dial.
   .nui-fab--hover-mode .nui-fab__trigger {
     cursor: pointer;
-  }
-
-  @keyframes nui-fab-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
   }
 
   // ── Trigger icon ─────────────────────────────────────────
@@ -255,10 +252,6 @@
     list-style: none;
     margin: 0;
     padding: 0;
-
-    // Anchor to the same bounding-box as the trigger.
-    // Individual items use absolute positioning with
-    // CSS transform to reach their computed positions.
     position: absolute;
     inset: 0;
     z-index: 1;
@@ -269,25 +262,15 @@
   // ── SINGLE ITEM WRAPPER ───────────────────────────────────
   // ----------------------------------------------------------
   .nui-fab__item {
-    // Anchor absolutely: top/left 50% = trigger center
-    // (.nui-fab__items has inset:0, so it fills the trigger exactly)
     position: absolute;
     top: 50%;
     left: 50%;
-
-    // Normalize <li> rendering
     display: block;
     margin: 0;
     padding: 0;
-
-    // ─── DEFAULT / SCALE animation (collapsed) ──────────────
-    // Item sits at trigger center, scaled to 0.
-    // On expand, it simultaneously moves to final position and scales up,
-    // giving the "burst from trigger" effect.
     transform: translate(-50%, -50%) scale(0);
     opacity: 0;
     pointer-events: none;
-
     transition-property: transform, opacity;
     transition-duration: var(--nui-fab-anim-duration);
     transition-timing-function: var(--nui-fab-anim-easing);
@@ -453,9 +436,6 @@
     position: absolute;
     white-space: nowrap;
     z-index: 1;
-
-    // Visual styles — same CSS vars as nui-tooltip for visual coherence.
-    // Generated by ThemeService.generateTooltipVariables().
     background-color: var(--tooltip-bg);
     color: var(--tooltip-text);
     border: 1px solid var(--tooltip-border-color, transparent);
@@ -464,15 +444,9 @@
     padding: 0.25em 0.5em;
     border-radius: var(--nui-border-radius-sm);
     box-shadow: var(--nui-shadow-sm, none);
-
-    // Hidden by default, revealed on item hover
     opacity: 0;
     pointer-events: none;
     transition: opacity var(--nui-fab-anim-duration) var(--nui-fab-anim-easing);
-
-    // ── Default / RIGHT ──────────────────────────────────────
-    // Tooltip appears to the right of the item button, vertically centred.
-    // Used when the item expands vertically or diagonally with vx ≥ 0.
     top: 50%;
     left: calc(100% + var(--nui-fab-tooltip-offset));
     right: auto;

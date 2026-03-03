@@ -18,6 +18,8 @@
     class="nui-fab__trigger"
     [class.nui-fab__trigger--custom-tpl]="!!customTriggerTpl()"
     [class.nui-fab__trigger--labeled]="!!triggerLabel() && !customTriggerTpl()"
+    [class.nui-fab__trigger--opened]="isOpen()"
+    [class.nui-fab__trigger--with-backdrop]="isOpen() && effectiveBackdrop()"
     type="button"
     [disabled]="disabled() || loading()"
     [attr.aria-expanded]="isOpen()"
@@ -28,7 +30,7 @@
     (click)="handleTriggerClick()"
   >
     @if (loading()) {
-      <i class="nui-fab__trigger-spinner ri-loader-4-line" aria-hidden="true"></i>
+      <i class="nui-fab__trigger-spinner" aria-hidden="true"></i>
     } @else if (customTriggerTpl()) {
       <ng-container
         [ngTemplateOutlet]="customTriggerTpl()!.tpl"
@@ -42,7 +44,12 @@
     }
 
     @if (triggerBadge() !== undefined && triggerBadge() !== null) {
-      <span class="nui-fab__trigger-badge" [attr.aria-label]="'(' + triggerBadge() + ')'">
+      <span
+        class="nui-fab__trigger-badge"
+        [attr.aria-label]="'(' + triggerBadge() + ')'"
+        [style.--nui-fab-badge-bg]="effectiveBadgeColor()"
+        [style.--nui-fab-badge-text]="effectiveBadgeTextColor()"
+      >
         {{ triggerBadge() }}
       </span>
     }
@@ -80,7 +87,11 @@
             [attr.href]="item.disabled ? null : item.url"
             [attr.target]="item.target ?? null"
             [attr.role]="'menuitem'"
-            [attr.aria-label]="effectiveItemDisplay() === 'icon-text' && item.label ? null : (item.tooltip || item.label || null)"
+            [attr.aria-label]="
+              effectiveItemDisplay() === 'icon-text' && item.label
+                ? null
+                : item.tooltip || item.label || null
+            "
             [attr.aria-disabled]="item.disabled || null"
             [attr.data-color]="item.color ?? null"
             [attr.data-size]="item.size ?? null"
@@ -114,7 +125,11 @@
             type="button"
             [disabled]="item.disabled"
             [attr.role]="'menuitem'"
-            [attr.aria-label]="effectiveItemDisplay() === 'icon-text' && item.label ? null : (item.tooltip || item.label || null)"
+            [attr.aria-label]="
+              effectiveItemDisplay() === 'icon-text' && item.label
+                ? null
+                : item.tooltip || item.label || null
+            "
             [attr.data-color]="item.color ?? null"
             [attr.data-size]="item.size ?? null"
             [attr.data-variant]="item.variant ?? null"

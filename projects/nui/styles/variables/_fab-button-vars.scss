@@ -1,15 +1,3 @@
-// ============================================================
-// FAB BUTTON - Variables & Tokens
-// ============================================================
-//
-// Follows the same pattern as _button-vars.scss:
-//  1. SCSS variables (overridable via !default at build time)
-//  2. A mixin that emits CSS custom properties used by _fab-button.scss
-//
-// All CSS custom properties are prefixed --nui-fab-*.
-// ============================================================
-
-// ── Structural tokens ───────────────────────────────────────
 /// Radius used by circle / semi-circle / quarter-circle layouts (md default / :root fallback)
 $fab-radius: 3.5rem !default;
 /// Step distance between items in linear layout (md default / :root fallback)
@@ -43,32 +31,28 @@ $fab-radius-map: (
 // Icon sizes are calculated as a fraction of the button height:
 //   trigger icon: --nui-height-{size} * $fab-trigger-icon-scale  (default 0.50)
 //   item icon:    --nui-height-{item-size} * $fab-item-icon-scale (default 0.45)
-$fab-trigger-icon-scale: 0.50 !default;
-$fab-item-icon-scale:    0.45 !default;
+$fab-trigger-icon-scale: 0.5 !default;
+$fab-item-icon-scale: 0.45 !default;
 
-// ── Animation tokens ────────────────────────────────────────
-/// Duration of the enter/leave transition for items
+// Animations
 $fab-anim-duration: 200ms !default;
-/// Easing curve shared by all animation types
 $fab-anim-easing: cubic-bezier(0.4, 0, 0.2, 1) !default;
-/// Delay delta between consecutive items (stagger)
 $fab-anim-delay-step: 30ms !default;
 
-// ── Trigger-icon rotation ───────────────────────────────────
-/// Amount the trigger icon rotates when the dial is open
+// Trigger icon rotation when open (e.g. 45deg for a plus-to-x morph)
 $fab-trigger-rotate: 45deg !default;
+$fab-spin-duration: 1s !default;
 
-// ── Backdrop ────────────────────────────────────────────────
+// Backdrop (used in "modal" mode to dim the background and capture clicks outside the FAB)
 $fab-backdrop-bg: rgba(0, 0, 0, 0.2) !default;
 $fab-backdrop-blur: 2px !default;
 
-// ── Tooltip label ───────────────────────────────────────────
+// Tooltip label offset from the trigger button (used in "extended" mode)
 $fab-tooltip-offset: 0.5rem !default;
 
-// ── Focus ring ──────────────────────────────────────────────
-$fab-focus-width: 0.125rem  !default;
+// Focus ring (applies to both trigger and items)
+$fab-focus-width: 0.125rem !default;
 $fab-focus-offset: 0.125rem !default;
-
 
 // ============================================================
 // CSS CUSTOM PROPERTIES MIXIN
@@ -76,31 +60,33 @@ $fab-focus-offset: 0.125rem !default;
 // ============================================================
 @mixin nui-fab-button-vars {
   // Structural
-  --nui-fab-radius:       #{$fab-radius};
-  --nui-fab-spacing:      #{$fab-spacing};
+  --nui-fab-radius: #{$fab-radius};
+  --nui-fab-spacing: #{$fab-spacing};
 
   // Animation
-  --nui-fab-anim-duration:    #{$fab-anim-duration};
-  --nui-fab-anim-easing:      #{$fab-anim-easing};
-  --nui-fab-anim-delay-step:  #{$fab-anim-delay-step};
+  --nui-fab-anim-duration: #{$fab-anim-duration};
+  --nui-fab-anim-easing: #{$fab-anim-easing};
+  --nui-fab-anim-delay-step: #{$fab-anim-delay-step};
 
   // Trigger icon rotation
-  --nui-fab-trigger-rotate:   #{$fab-trigger-rotate};
+  --nui-fab-trigger-rotate: #{$fab-trigger-rotate};
+  --nui-fab-spin-duration: #{$fab-spin-duration};
 
   // Backdrop
-  --nui-fab-backdrop-bg:      #{$fab-backdrop-bg};
-  --nui-fab-backdrop-blur:    #{$fab-backdrop-blur};
+  --nui-fab-backdrop-bg: #{$fab-backdrop-bg};
+  --nui-fab-backdrop-blur: #{$fab-backdrop-blur};
 
   // Tooltip label offset
-  --nui-fab-tooltip-offset:   #{$fab-tooltip-offset};
+  --nui-fab-tooltip-offset: #{$fab-tooltip-offset};
 
   // Focus ring
-  --nui-fab-focus-width:   #{$fab-focus-width};
-  --nui-fab-focus-offset:  #{$fab-focus-offset};
+  --nui-fab-focus-width: #{$fab-focus-width};
+  --nui-fab-focus-offset: #{$fab-focus-offset};
 
-  // ── Icon scale factors ──────────────────────────────────
-  // These are unitless multipliers applied to --nui-height-{size} in CSS calc().
-  // Override them to globally resize FAB icons without touching per-size rules.
+  // Per-size spacing and radius (for radial layouts)
   --nui-fab-trigger-icon-scale: #{$fab-trigger-icon-scale};
-  --nui-fab-item-icon-scale:    #{$fab-item-icon-scale};
+  --nui-fab-item-icon-scale: #{$fab-item-icon-scale};
+
+  // Z-Index (should be above popovers and tooltips but below modals)
+  --nui-fab-z-index: var(--nui-z-index-elevated);
 }

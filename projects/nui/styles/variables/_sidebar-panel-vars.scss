@@ -15,9 +15,6 @@ $panel-content-padding: 1.125rem !default;
 $panel-title-size: 1.125rem !default;
 $panel-title-weight: 600 !default;
 
-$panel-z-index: 1040 !default;
-$panel-overlay-z-index: 1039 !default;
-
 $panel-shadow: var(--nui-box-shadow-xl) !default;
 
 // MIXIN (CSS Custom Properties)
@@ -39,8 +36,7 @@ $panel-shadow: var(--nui-box-shadow-xl) !default;
   --nui-sidebar-panel-title-weight: #{$panel-title-weight};
 
   // Layers
-  --nui-sidebar-panel-z-index: #{$panel-z-index};
-  --nui-sidebar-panel-overlay-z-index: #{$panel-overlay-z-index};
+  --nui-sidebar-panel-z-index: var(--nui-z-index-modal);
 
   // Base Appearance
   --nui-sidebar-panel-shadow: #{$panel-shadow};
