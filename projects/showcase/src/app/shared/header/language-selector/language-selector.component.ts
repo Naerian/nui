@@ -3,11 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ShowcaseConfigService } from '../../../core/services/showcase-config.service';
-
-interface Language {
-  code: string;
-  label: string;
-}
+import { DEFAULT_LANGUAGE, Language, LANGUAGES } from '../../../core/models/language.model';
 
 @Component({
   selector: 'app-language-selector',
@@ -21,12 +17,9 @@ export class LanguageSelectorComponent implements OnInit {
   private showcaseConfig = inject(ShowcaseConfigService);
 
   isOpen = false;
-  currentLanguage = this.showcaseConfig.currentConfig.language || 'en';
+  currentLanguage = this.showcaseConfig.currentConfig.language || DEFAULT_LANGUAGE;
 
-  languages: Language[] = [
-    { code: 'en', label: 'English' },
-    { code: 'es', label: 'Español' },
-  ];
+  languages: Language[] = LANGUAGES;
 
   ngOnInit(): void {
     this.showcaseConfig.config$.subscribe(config => {

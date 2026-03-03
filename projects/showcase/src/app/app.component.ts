@@ -8,6 +8,7 @@ import { ShowcaseConfigService } from './core/services/showcase-config.service';
 import { NuiI18n, ThemeService } from 'nui';
 import { filter } from 'rxjs/operators';
 import { NuiI18nService } from 'nui';
+import { DEFAULT_LANGUAGE, LANGUAGES } from './core/models/language.model';
 
 @Component({
   selector: 'app-root',
@@ -41,13 +42,25 @@ export class AppComponent implements OnInit {
     // Load saved config
     const config = this.showcaseConfig.currentConfig;
 
+    // Language codes
+    const availableLangs = LANGUAGES.map(lang => lang.code);
+
     // Initialize language
     if (config.language) {
       this.translate.use(config.language);
       this.nuiI18n.setLang(config.language);
     } else {
       const browserLang = this.translate.getBrowserLang();
-      const langToUse = browserLang?.match(/en|es/) ? browserLang : 'en';
+
+      // If browser language is not available, default to English
+      if (!browserLang) {
+        this.translate.use(DEFAULT_LANGUAGE);
+        this.nuiI18n.setLang(DEFAULT_LANGUAGE);
+        this.showcaseConfig.setLanguage(DEFAULT_LANGUAGE);
+        return;
+      }
+
+      const langToUse = availableLangs.includes(browserLang) ? browserLang : DEFAULT_LANGUAGE;
       this.translate.use(langToUse);
       this.nuiI18n.setLang(langToUse);
       this.showcaseConfig.setLanguage(langToUse);
@@ -78,7 +91,11 @@ export class AppComponent implements OnInit {
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe(() => {
-        window.scrollTo({ top: 0, behavior: 'instant' });
+        // Scroll to top on route change on ".showcase-content" container
+        const contentContainer = document.querySelector('.showcase-content');
+        if (contentContainer) {
+          contentContainer.scrollTo({ top: 0, behavior: 'instant' });
+        }
       });
   }
 
