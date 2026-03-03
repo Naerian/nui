@@ -14,7 +14,6 @@ import {
   model,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { animate, style, transition, trigger } from '@angular/animations';
 import {
   PopoverContext,
   POPOVER_DATA,
@@ -23,6 +22,7 @@ import {
 } from './models/popover.model';
 import { popoverAnimation } from './animations/popover.animations';
 import { NUIColor, NUIVariant } from '../../configs/common/types';
+import { injectPopoverConfig } from '../../configs/popover/popover.config';
 
 /**
  * @name
@@ -110,6 +110,31 @@ export class PopoverComponent implements OnInit {
    * Indica si el contenido es un componente
    */
   readonly isComponent = computed(() => typeof this.content() === 'function');
+
+  /**
+   * Configuración global del popover, inyectada desde un provider a nivel de aplicación.
+   * Esta configuración puede ser sobrescrita por las propiedades específicas del componente.
+   * Si no se proporciona un valor específico en el componente, se usará el valor de esta configuración global.
+   * Si tampoco hay un valor en la configuración global, se usarán los valores por defecto definidos en el componente.
+   */
+  private readonly popoverConfig = injectPopoverConfig();
+
+  /**
+   * Configuración efectiva del popover, combinando la configuración global con las propiedades específicas del componente.
+   * El orden de precedencia es: Propiedades del componente > Configuración global > Valores por defecto
+   * Esto permite que cada instancia del popover pueda sobrescribir la configuración global si es necesario.
+   */
+  protected effectiveConfig = computed(() => {
+    return {
+      ...this.popoverConfig,
+      // 3. CORRECCIÓN: Añadidos los () obligatorios para leer el valor de los inputs
+      position: this.position() || this.popoverConfig.position,
+      showArrow: this.showArrow() ?? this.popoverConfig.showArrow,
+      popoverClass: this.popoverClass() || this.popoverConfig.popoverClass,
+      maxWidth: this.maxWidth() || this.popoverConfig.maxWidth,
+      minWidth: this.minWidth() || this.popoverConfig.minWidth,
+    };
+  });
 
   /**
    * Clases CSS dinámicas para el host, basadas en color y variante

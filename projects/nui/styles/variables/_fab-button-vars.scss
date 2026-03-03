@@ -1,0 +1,77 @@
+/// Radius used by circle / semi-circle / quarter-circle layouts (md default / :root fallback)
+$fab-radius: 3.5rem !default;
+/// Step distance between items in linear layout (md default / :root fallback)
+$fab-spacing: 3rem !default;
+
+/// Per-size spacing: center-to-center distance = itemSize + 0.5rem gap.
+/// Ensures a consistent ~8px visual gap between item buttons at every scale.
+$fab-spacing-map: (
+  xs: 2.5rem,
+  sm: 2.5rem,
+  md: 3rem,
+  lg: 3.25rem,
+  xl: 3.5rem,
+) !default;
+
+/// Per-size radius for radial layouts (circle / semi-circle / quarter-circle).
+/// Sized so items never overlap even with the default item-count of ~4–6.
+$fab-radius-map: (
+  xs: 3rem,
+  sm: 3rem,
+  md: 3.5rem,
+  lg: 4rem,
+  xl: 4.5rem,
+) !default;
+
+// Icon scaling factors to ensure consistent visual size across different FAB sizes
+$fab-trigger-icon-scale: 0.5 !default;
+$fab-item-icon-scale: 0.45 !default;
+
+// Animations
+$fab-anim-duration: 200ms !default;
+$fab-anim-easing: cubic-bezier(0.4, 0, 0.2, 1) !default;
+$fab-anim-delay-step: 30ms !default;
+
+// Trigger icon rotation when open (e.g. 45deg for a plus-to-x morph)
+$fab-trigger-rotate: 45deg !default;
+$fab-spin-duration: 1s !default;
+
+// Tooltip label offset from the trigger button (used in "extended" mode)
+$fab-tooltip-offset: 0.5rem !default;
+
+// Focus ring (applies to both trigger and items)
+$fab-focus-width: 0.125rem !default;
+$fab-focus-offset: 0.125rem !default;
+
+// ============================================================
+// CSS CUSTOM PROPERTIES MIXIN
+// (included once in :root via _global-vars.scss)
+// ============================================================
+@mixin nui-fab-button-vars {
+  // Structural
+  --nui-fab-radius: #{$fab-radius};
+  --nui-fab-spacing: #{$fab-spacing};
+
+  // Animation
+  --nui-fab-anim-duration: #{$fab-anim-duration};
+  --nui-fab-anim-easing: #{$fab-anim-easing};
+  --nui-fab-anim-delay-step: #{$fab-anim-delay-step};
+
+  // Trigger icon rotation
+  --nui-fab-trigger-rotate: #{$fab-trigger-rotate};
+  --nui-fab-spin-duration: #{$fab-spin-duration};
+
+  // Tooltip label offset
+  --nui-fab-tooltip-offset: #{$fab-tooltip-offset};
+
+  // Focus ring
+  --nui-fab-focus-width: #{$fab-focus-width};
+  --nui-fab-focus-offset: #{$fab-focus-offset};
+
+  // Per-size spacing and radius (for radial layouts)
+  --nui-fab-trigger-icon-scale: #{$fab-trigger-icon-scale};
+  --nui-fab-item-icon-scale: #{$fab-item-icon-scale};
+
+  // Z-Index (should be above popovers and tooltips but below modals)
+  --nui-fab-z-index: var(--nui-z-index-elevated);
+}

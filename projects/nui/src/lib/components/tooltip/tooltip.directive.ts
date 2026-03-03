@@ -25,7 +25,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { TooltipComponent } from './tooltip.component';
 import { TooltipPosition, TooltipEvent } from './models/tooltip.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NUI_CONFIG } from '../../configs';
+import { injectTooltipConfig } from '../../configs/tooltip/tooltip.config';
 
 /**
  * @name
@@ -33,15 +33,15 @@ import { NUI_CONFIG } from '../../configs';
  * @description
  * Directiva para mostrar tooltips personalizables con soporte para texto simple y templates.
  * Utiliza Angular CDK Overlay para un posicionamiento preciso y responsive.
- * 
+ *
  * @example
  * // Tooltip básico con texto
  * <button nuiTooltip="Guardar cambios">Guardar</button>
- * 
+ *
  * @example
  * // Tooltip con posición específica
  * <button nuiTooltip="Eliminar" nuiTooltipPosition="bottom">Eliminar</button>
- * 
+ *
  * @example
  * // Tooltip con template personalizado
  * <button [nuiTooltip]="tooltipTemplate">Ver más</button>
@@ -51,28 +51,28 @@ import { NUI_CONFIG } from '../../configs';
  *     <p>Contenido detallado aquí</p>
  *   </div>
  * </ng-template>
- * 
+ *
  * @example
  * // Tooltip con configuración de delays
- * <button 
- *   nuiTooltip="Texto del tooltip" 
+ * <button
+ *   nuiTooltip="Texto del tooltip"
  *   [nuiTooltipShowDelay]="500"
  *   [nuiTooltipHideDelay]="200">
  *   Hover me
  * </button>
- * 
+ *
  * @example
  * // Tooltip deshabilitado condicionalmente
- * <button 
- *   nuiTooltip="Este tooltip está deshabilitado" 
+ * <button
+ *   nuiTooltip="Este tooltip está deshabilitado"
  *   [nuiTooltipDisabled]="true">
  *   No tooltip
  * </button>
- * 
+ *
  * @example
  * // Tooltip con clase personalizada
- * <button 
- *   nuiTooltip="Tooltip con estilo" 
+ * <button
+ *   nuiTooltip="Tooltip con estilo"
  *   nuiTooltipClass="custom-tooltip-style">
  *   Custom style
  * </button>
@@ -87,7 +87,7 @@ export class TooltipDirective implements OnInit, OnDestroy {
   private positionBuilder = inject(OverlayPositionBuilder);
   private viewContainerRef = inject(ViewContainerRef);
   private destroyRef = inject(DestroyRef);
-  private globalConfig = inject(NUI_CONFIG);
+  private tooltipConfig = injectTooltipConfig();
 
   private overlayRef?: OverlayRef;
   private componentRef?: ComponentRef<TooltipComponent>;
@@ -143,6 +143,13 @@ export class TooltipDirective implements OnInit, OnDestroy {
   @Input({ transform: booleanAttribute }) nuiTooltipShowArrow?: boolean;
 
   /**
+   * Permitir HTML en el contenido del tooltip (solo si es string)
+   * ¡Usar con precaución! Asegúrate de sanitizar el contenido para evitar XSS.
+   * @default true (o valor global configurado)
+   */
+  @Input({ transform: booleanAttribute }) nuiTooltipAllowHtml = false;
+
+  /**
    * Permite interactuar con el contenido del tooltip (hover sobre el tooltip)
    * @default false (o valor global configurado)
    */
@@ -151,39 +158,44 @@ export class TooltipDirective implements OnInit, OnDestroy {
   private isVisible = signal(false);
   private isMouseOverHost = false;
   private isMouseOverTooltip = false;
+  private scrollListenerCleanup?: () => void;
 
   // Getters para valores con fallback a configuración global
   private get position(): TooltipPosition {
-    return this.nuiTooltipPosition ?? this.globalConfig.tooltip?.position ?? 'top';
+    return this.nuiTooltipPosition ?? this.tooltipConfig?.position ?? 'top';
   }
 
   private get event(): TooltipEvent {
-    return this.nuiTooltipEvent ?? this.globalConfig.tooltip?.event ?? 'hover';
+    return this.nuiTooltipEvent ?? this.tooltipConfig?.event ?? 'hover';
   }
 
   private get showDelay(): number {
-    return this.nuiTooltipShowDelay ?? this.globalConfig.tooltip?.showDelay ?? 300;
+    return this.nuiTooltipShowDelay ?? this.tooltipConfig?.showDelay ?? 300;
   }
 
   private get hideDelay(): number {
-    return this.nuiTooltipHideDelay ?? this.globalConfig.tooltip?.hideDelay ?? 0;
+    return this.nuiTooltipHideDelay ?? this.tooltipConfig?.hideDelay ?? 0;
   }
 
   private get showArrow(): boolean {
-    return this.nuiTooltipShowArrow ?? this.globalConfig.tooltip?.showArrow ?? true;
+    return this.nuiTooltipShowArrow ?? this.tooltipConfig?.showArrow ?? true;
+  }
+
+  private get allowHtml(): boolean {
+    return this.nuiTooltipAllowHtml ?? this.tooltipConfig?.allowHtml ?? true;
   }
 
   private get interactive(): boolean {
-    return this.nuiTooltipInteractive ?? this.globalConfig.tooltip?.interactive ?? false;
+    return this.nuiTooltipInteractive ?? this.tooltipConfig?.interactive ?? false;
   }
 
   constructor() {
     // Optimizado: effect con onCleanup para mejor gestión de recursos
-    effect((onCleanup) => {
+    effect(onCleanup => {
       if (!this.isVisible() && this.overlayRef) {
         this.detach();
       }
-      
+
       onCleanup(() => {
         this.clearTimeouts();
       });
@@ -200,16 +212,19 @@ export class TooltipDirective implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.createOverlay();
-    
+
     const element = this.elementRef.nativeElement as HTMLElement;
-    
+
     // Asegurar que el elemento pueda recibir focus si el evento es 'focus'
     if (this.event === 'focus') {
       const tagName = element.tagName;
-      const isFocusableElement = tagName === 'BUTTON' || tagName === 'INPUT' || 
-                                  tagName === 'A' || tagName === 'SELECT' || 
-                                  tagName === 'TEXTAREA';
-      
+      const isFocusableElement =
+        tagName === 'BUTTON' ||
+        tagName === 'INPUT' ||
+        tagName === 'A' ||
+        tagName === 'SELECT' ||
+        tagName === 'TEXTAREA';
+
       if (!element.hasAttribute('tabindex') && !isFocusableElement) {
         element.setAttribute('tabindex', '0');
       }
@@ -224,7 +239,10 @@ export class TooltipDirective implements OnInit, OnDestroy {
     if (this.interactive) {
       this.removeInteractiveListeners();
     }
-    
+
+    // Limpiar scroll listener si existe
+    this.removeScrollListener();
+
     // El cleanup adicional ahora se maneja en el constructor con DestroyRef
     // Este método se mantiene para compatibilidad pero el trabajo se hace automáticamente
   }
@@ -246,6 +264,28 @@ export class TooltipDirective implements OnInit, OnDestroy {
         this.isMouseOverHost = false;
       }
       this.hide();
+    }
+  }
+
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent): void {
+    // En mobile, el touch puede activar el tooltip dependiendo del evento configurado
+    if (this.event === 'click') {
+      event.preventDefault(); // Prevenir el click que vendría después
+      this.toggle();
+    } else if (this.event === 'hover') {
+      if (this.interactive) {
+        this.isMouseOverHost = true;
+      }
+      this.show();
+    }
+  }
+
+  @HostListener('touchend')
+  onTouchEnd(): void {
+    // Para hover en mobile, ocultar después de un pequeño delay
+    if (this.event === 'hover' && !this.interactive) {
+      setTimeout(() => this.hide(), 1500); // Mantener visible 1.5s después del touch
     }
   }
 
@@ -301,6 +341,11 @@ export class TooltipDirective implements OnInit, OnDestroy {
     this.showTimeoutId = setTimeout(() => {
       this.attach();
       this.isVisible.set(true);
+
+      // Para eventos no-hover (click, focus), añadir listener de scroll para cerrar
+      if (this.event !== 'hover') {
+        this.setupScrollListener();
+      }
     }, this.showDelay);
   }
 
@@ -322,9 +367,10 @@ export class TooltipDirective implements OnInit, OnDestroy {
 
     // Para tooltips interactivos, añadir un pequeño delay adicional para dar tiempo
     // al usuario de mover el mouse hacia el tooltip
-    const delay = this.interactive && !this.isMouseOverHost && !this.isMouseOverTooltip
-      ? Math.max(this.hideDelay, 100)
-      : this.hideDelay;
+    const delay =
+      this.interactive && !this.isMouseOverHost && !this.isMouseOverTooltip
+        ? Math.max(this.hideDelay, 100)
+        : this.hideDelay;
 
     this.hideTimeoutId = setTimeout(() => {
       // Verificar nuevamente antes de ocultar (por si el usuario entró al tooltip)
@@ -332,6 +378,9 @@ export class TooltipDirective implements OnInit, OnDestroy {
         return;
       }
       this.isVisible.set(false);
+
+      // Limpiar scroll listener cuando se oculta
+      this.removeScrollListener();
     }, delay);
   }
 
@@ -364,12 +413,10 @@ export class TooltipDirective implements OnInit, OnDestroy {
     });
 
     // Suscribirse a los cambios de posición para actualizar la flecha si el overlay se reposiciona
-    positionStrategy.positionChanges
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        // Cuando hay un cambio de posición (ej: scroll), detectar la nueva posición
-        this.detectAndUpdatePosition();
-      });
+    positionStrategy.positionChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+      // Cuando hay un cambio de posición (ej: scroll), detectar la nueva posición
+      this.detectAndUpdatePosition();
+    });
   }
 
   /**
@@ -441,16 +488,19 @@ export class TooltipDirective implements OnInit, OnDestroy {
 
     // Establecer el contenido
     this.componentRef.setInput('content', this.content);
-    
+
     // Establecer la posición (se actualizará inmediatamente después)
     this.componentRef.setInput('position', this.currentPosition);
-    
+
     // Establecer si muestra flecha
     this.componentRef.setInput('showArrow', this.showArrow);
-    
+
+    // Establece si se permite HTML en el contenido
+    this.componentRef.setInput('allowHtml', this.allowHtml);
+
     // Establecer el ID para aria-describedby
     this.componentRef.setInput('tooltipId', this.tooltipId);
-    
+
     // Indicar si es un template
     const isTemplate = this.content instanceof TemplateRef;
     this.componentRef.instance.isTemplate.set(isTemplate);
@@ -475,7 +525,7 @@ export class TooltipDirective implements OnInit, OnDestroy {
 
     const overlayElement = this.overlayRef.overlayElement;
     const hostElement = this.elementRef.nativeElement as HTMLElement;
-    
+
     if (!overlayElement || !hostElement) return;
 
     const overlayRect = overlayElement.getBoundingClientRect();
@@ -483,7 +533,7 @@ export class TooltipDirective implements OnInit, OnDestroy {
 
     // Detectar posición basándose en las coordenadas relativas
     const actualPosition = this.detectPositionFromCoordinates(overlayRect, hostRect);
-    
+
     if (actualPosition !== this.currentPosition) {
       this.currentPosition = actualPosition;
       this.updateTooltipPosition();
@@ -493,10 +543,7 @@ export class TooltipDirective implements OnInit, OnDestroy {
   /**
    * Detecta la posición real comparando las coordenadas del overlay y el host
    */
-  private detectPositionFromCoordinates(
-    overlayRect: DOMRect,
-    hostRect: DOMRect
-  ): TooltipPosition {
+  private detectPositionFromCoordinates(overlayRect: DOMRect, hostRect: DOMRect): TooltipPosition {
     const overlayCenterY = overlayRect.top + overlayRect.height / 2;
     const hostCenterY = hostRect.top + hostRect.height / 2;
     const overlayCenterX = overlayRect.left + overlayRect.width / 2;
@@ -563,10 +610,13 @@ export class TooltipDirective implements OnInit, OnDestroy {
       if (this.interactive) {
         this.removeInteractiveListeners();
       }
-      
+
+      // Limpiar scroll listener
+      this.removeScrollListener();
+
       this.overlayRef.detach();
       this.componentRef = undefined;
-      
+
       // Resetear estado de tracking
       this.isMouseOverTooltip = false;
     }
@@ -581,6 +631,38 @@ export class TooltipDirective implements OnInit, OnDestroy {
     if (this.hideTimeoutId) {
       clearTimeout(this.hideTimeoutId);
       this.hideTimeoutId = undefined;
+    }
+  }
+
+  /**
+   * Configura un listener de scroll para cerrar el tooltip cuando se hace scroll
+   * Solo se usa para eventos no-hover (click, focus)
+   */
+  private setupScrollListener(): void {
+    // Limpiar listener anterior si existe
+    this.removeScrollListener();
+
+    const scrollHandler = () => {
+      // Cerrar el tooltip inmediatamente al hacer scroll
+      this.hide();
+    };
+
+    // Escuchar scroll en la ventana y en todos los ancestros scrollables
+    window.addEventListener('scroll', scrollHandler, true);
+
+    // Guardar función de cleanup
+    this.scrollListenerCleanup = () => {
+      window.removeEventListener('scroll', scrollHandler, true);
+    };
+  }
+
+  /**
+   * Remueve el listener de scroll
+   */
+  private removeScrollListener(): void {
+    if (this.scrollListenerCleanup) {
+      this.scrollListenerCleanup();
+      this.scrollListenerCleanup = undefined;
     }
   }
 }

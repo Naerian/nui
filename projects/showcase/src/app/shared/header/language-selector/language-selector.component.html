@@ -21,7 +21,6 @@
         class="language-item"
         [class.active]="lang.code === currentLanguage"
         (click)="selectLanguage(lang)">
-        <span class="language-flag">{{ lang.flag }}</span>
         <span class="language-name">{{ lang.label }}</span>
         <i class="ri-check-line" *ngIf="lang.code === currentLanguage"></i>
       </button>

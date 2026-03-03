@@ -19,7 +19,8 @@ import {
   ToastPosition,
   TOAST_LOADING_CLASS,
 } from './models/toast.model';
-import { NUI_CONFIG } from '../../configs/nui.config';
+import { deepMerge } from '../../utils';
+import { injectToastConfig } from '../../configs/toast/toast.config';
 
 let toastIdCounter = 0;
 
@@ -30,7 +31,7 @@ export class ToastService {
   private appRef = inject(ApplicationRef);
   private injector = inject(EnvironmentInjector);
   private document = inject(DOCUMENT);
-  private nuiConfig = inject(NUI_CONFIG, { optional: true });
+  private readonly toastConfig: ToastGlobalConfig = injectToastConfig();
 
   // Mapa de contenedores por posición (uno por posición)
   private containers = new Map<ToastPosition, ComponentRef<ToastContainerComponent>>();
@@ -58,9 +59,6 @@ export class ToastService {
    */
   readonly hasWarnings = computed(() => this._activeToasts().some(t => t.type === 'warning'));
 
-  // Configuración global
-  private readonly globalConfig: ToastGlobalConfig;
-
   // Cola de toasts pendientes
   private toastQueue: Array<{ type: ToastType; message: string; config?: ToastConfig }> = [];
 
@@ -68,11 +66,9 @@ export class ToastService {
   private toastMap = new Map<string, ToastRef>();
 
   constructor() {
-    // Obtener configuración global desde NUI_CONFIG
-    this.globalConfig = this.getGlobalConfig();
 
     // Detectar cuando la ventana pierde el foco
-    if (this.globalConfig.pauseOnFocusLoss) {
+    if (this.toastConfig.pauseOnFocusLoss) {
       this.document.addEventListener('visibilitychange', () => {
         if (this.document.hidden) {
           this._activeToasts().forEach(toast => toast.pause());
@@ -126,7 +122,7 @@ export class ToastService {
   loading(message: string, config?: ToastConfig): ToastRef {
     return this.show('info', message, {
       ...config,
-      icon: this.globalConfig.icons.loading || 'ri-loader-4-line',
+      icon: this.toastConfig.icons.loading || 'ri-loader-4-line',
       timeout: 0,
       closeButton: false,
       progressBar: false,
@@ -164,9 +160,9 @@ export class ToastService {
         type: 'success',
         message: successMessage,
         icon: true,
-        timeout: config?.timeout ?? this.globalConfig.timeout,
+        timeout: config?.timeout ?? this.toastConfig.timeout,
         closeButton: true,
-        progressBar: config?.progressBar ?? this.globalConfig.progressBar,
+        progressBar: config?.progressBar ?? this.toastConfig.progressBar,
       });
 
       return result;
@@ -178,9 +174,9 @@ export class ToastService {
         type: 'danger',
         message: errorMessage,
         icon: true,
-        timeout: config?.timeout ?? this.globalConfig.timeout,
+        timeout: config?.timeout ?? this.toastConfig.timeout,
         closeButton: true,
-        progressBar: config?.progressBar ?? this.globalConfig.progressBar,
+        progressBar: config?.progressBar ?? this.toastConfig.progressBar,
       });
 
       throw err;
@@ -196,7 +192,7 @@ export class ToastService {
     const mergedConfig = this.mergeConfig(type, message, config);
 
     // Verificar duplicados
-    if (this.globalConfig.preventDuplicates && this.isDuplicate(mergedConfig)) {
+    if (this.toastConfig.preventDuplicates && this.isDuplicate(mergedConfig)) {
       const existing = this.findDuplicate(mergedConfig);
       if (existing) {
         existing.resetTimeout();
@@ -205,23 +201,23 @@ export class ToastService {
     }
 
     // Determinar la posición
-    const position = mergedConfig.position || this.globalConfig.position;
+    const position = mergedConfig.position || this.toastConfig.position;
 
     // 1. Verificar límite GLOBAL primero
-    if (this._activeToasts().length >= this.globalConfig.maxToasts) {
+    if (this._activeToasts().length >= this.toastConfig.maxToasts) {
       return this.handleMaxToasts(type, message, config);
     }
 
     // 2. Verificar límite por posición específica
     const currentCountInPosition = this._activeToasts().filter(
-      t => (t.config().position || this.globalConfig.position) === position
+      t => (t.config().position || this.toastConfig.position) === position
     ).length;
 
-    const maxPerPosition = this.globalConfig.maxToastsPerPosition || this.globalConfig.maxToasts;
+    const maxPerPosition = this.toastConfig.maxToastsPerPosition || this.toastConfig.maxToasts;
     if (currentCountInPosition >= maxPerPosition) {
       // Eliminar el toast más antiguo de esa posición
       const oldestInPosition = this._activeToasts()
-        .filter(t => (t.config().position || this.globalConfig.position) === position)
+        .filter(t => (t.config().position || this.toastConfig.position) === position)
         .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime())[0];
 
       if (oldestInPosition) {
@@ -321,7 +317,7 @@ export class ToastService {
     // Agregar a la lista de activos
     const currentToasts = this._activeToasts();
     const newToasts =
-      this.globalConfig.stackDirection === 'prepend'
+      this.toastConfig.stackDirection === 'prepend'
         ? [toastRef, ...currentToasts]
         : [...currentToasts, toastRef];
 
@@ -332,7 +328,7 @@ export class ToastService {
     this.toastMap.set(key, toastRef);
 
     // Determinar la posición (usar la específica del config o la global)
-    const position = config.position || this.globalConfig.position;
+    const position = config.position || this.toastConfig.position;
 
     // Asegurar que el contenedor exista para esta posición
     const containerRef = this.ensureContainer(position);
@@ -375,7 +371,7 @@ export class ToastService {
    * Maneja el caso cuando se alcanza el máximo de toasts
    */
   private handleMaxToasts(type: ToastType, message: string, config?: ToastConfig): ToastRef {
-    const behavior = this.globalConfig.stackingBehavior;
+    const behavior = this.toastConfig.stackingBehavior;
 
     switch (behavior) {
       case 'queue':
@@ -414,26 +410,26 @@ export class ToastService {
     const defaultConfig: ToastConfig = {
       type,
       message,
-      timeout: this.globalConfig.timeout,
-      progressBar: this.globalConfig.progressBar,
-      closeButton: this.globalConfig.closeButton,
-      closeOnTouch: this.globalConfig.closeOnTouch,
-      pauseOnHover: this.globalConfig.pauseOnHover,
-      pauseOnFocusLoss: this.globalConfig.pauseOnFocusLoss,
-      icon: this.globalConfig.icon,
-      iconPosition: this.globalConfig.iconPosition,
-      animationIn: this.globalConfig.animationIn,
-      animationOut: this.globalConfig.animationOut,
-      animationDuration: this.globalConfig.animationDuration,
-      swipeToDismiss: this.globalConfig.swipeToDismiss,
-      swipeThreshold: this.globalConfig.swipeThreshold,
+      timeout: this.toastConfig.timeout,
+      progressBar: this.toastConfig.progressBar,
+      closeButton: this.toastConfig.closeButton,
+      closeOnTouch: this.toastConfig.closeOnTouch,
+      pauseOnHover: this.toastConfig.pauseOnHover,
+      pauseOnFocusLoss: this.toastConfig.pauseOnFocusLoss,
+      icon: this.toastConfig.icon,
+      iconPosition: this.toastConfig.iconPosition,
+      animationIn: this.toastConfig.animationIn,
+      animationOut: this.toastConfig.animationOut,
+      animationDuration: this.toastConfig.animationDuration,
+      swipeToDismiss: this.toastConfig.swipeToDismiss,
+      swipeThreshold: this.toastConfig.swipeThreshold,
       ariaRole: this.getAriaRole(type),
       ariaLive: this.getAriaLive(type),
-      announceToScreenReader: this.globalConfig.announceToScreenReader,
+      announceToScreenReader: this.toastConfig.announceToScreenReader,
       priority: 0,
     };
 
-    return { ...defaultConfig, ...config };
+    return deepMerge(defaultConfig, config);
   }
 
   /**
@@ -522,54 +518,5 @@ export class ToastService {
     } catch (err) {
       console.error('Error persisting toast:', err);
     }
-  }
-
-  /**
-   * Obtiene la configuración global
-   */
-  private getGlobalConfig(): ToastGlobalConfig {
-    // Configuración por defecto
-    const defaultConfig: ToastGlobalConfig = {
-      timeout: 5000,
-      toastClass: [],
-      position: 'top-right',
-      preventDuplicates: true,
-      progressBar: true,
-      closeOnTouch: true,
-      closeButton: true,
-      maxToasts: 6,
-      maxToastsPerPosition: 3,
-      animationIn: 'slide',
-      animationOut: 'fade',
-      animationDuration: 300,
-      templateMode: 'replace',
-      pauseOnHover: true,
-      pauseOnFocusLoss: true,
-      stackingBehavior: 'queue',
-      stackDirection: 'append',
-      icon: true,
-      iconPosition: 'left',
-      announceToScreenReader: true,
-      ariaRole: 'status',
-      ariaLive: 'polite',
-      sound: false,
-      expandable: false,
-      persistent: false,
-      swipeToDismiss: true,
-      swipeThreshold: 100,
-      icons: {
-        success: 'ri-checkbox-circle-line',
-        danger: 'ri-error-warning-line',
-        warning: 'ri-alert-line',
-        info: 'ri-information-line',
-        loading: 'ri-loader-4-line',
-      },
-    };
-
-    // Mergear con configuración del usuario desde NUI_CONFIG
-    return {
-      ...defaultConfig,
-      ...(this.nuiConfig?.toast || {}),
-    };
   }
 }

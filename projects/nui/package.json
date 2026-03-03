@@ -1,6 +1,7 @@
 {
   "name": "nui",
   "version": "0.0.1",
+  "license": "MIT",
   "style": "styles/nui-bundle.css",
   "exports": {
     "./styles/nui.css": "./styles/nui.css",

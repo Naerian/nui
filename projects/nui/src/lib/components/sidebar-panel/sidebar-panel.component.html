@@ -1,33 +1,33 @@
 ﻿<div
   class="nui-sidebar-panel-wrapper"
   [attr.role]="'dialog'"
-  [attr.aria-label]="config.ariaLabel || 'Slide Panel'"
+  [attr.aria-label]="sidebarPanelConfig.ariaLabel || 'Slide Panel'"
   [attr.aria-labelledby]="title ? 'nui-sidebar-panel-title' : null"
-  [attr.aria-describedby]="config.ariaDescribedBy"
+  [attr.aria-describedby]="sidebarPanelConfig.ariaDescribedBy"
   [attr.aria-modal]="true"
 >
   <!-- Header -->
   @if (showHeader && !panelRef.isMinimized) {
     <div class="nui-sidebar-panel-header">
       <!-- Template custom -->
-      @if (config.headerTemplate) {
-        <ng-container *ngTemplateOutlet="config.headerTemplate"></ng-container>
+      @if (sidebarPanelConfig.headerTemplate) {
+        <ng-container *ngTemplateOutlet="sidebarPanelConfig.headerTemplate"></ng-container>
       }
 
       <!-- Header por defecto -->
-      @if (!config.headerTemplate) {
+      @if (!sidebarPanelConfig.headerTemplate) {
         @if (title) {
           <h2 id="nui-sidebar-panel-title" class="nui-sidebar-panel-title">{{ title }}</h2>
         }
         <div class="nui-sidebar-panel-header-actions">
-          @if (config.minimizable) {
+          @if (sidebarPanelConfig.minimizable) {
             <nui-button
               [icon]="'ri-subtract-line'"
               [color]="'secondary'"
               [variant]="'ghost'"
               (onClick)="minimize()"
-              [attr.aria-label]="translations.minimize || 'Minimize panel'"
-              [title]="translations.minimize || 'Minimize panel'"
+              [attr.aria-label]="_i18n().minimize"
+              [title]="_i18n().minimize"
               class="nui-sidebar-panel-minimize-btn"
             ></nui-button>
           }
@@ -37,8 +37,8 @@
               [color]="'secondary'"
               [variant]="'ghost'"
               (click)="requestClose()"
-              [attr.aria-label]="translations.close || 'Close panel'"
-              [title]="translations.close || 'Close panel'"
+              [attr.aria-label]="_i18n().close"
+              [title]="_i18n().close"
             ></nui-button>
           }
         </div>
@@ -53,7 +53,7 @@
 
   <!-- Footer -->
   <!-- Precedencia: customButtons > directiva > servicio > template config -->
-  @if (config.customButtons && config.customButtons.length > 0) {
+  @if (sidebarPanelConfig.customButtons && sidebarPanelConfig.customButtons.length > 0) {
     <!-- Footer con customButtons (máxima prioridad) -->
     <div class="nui-sidebar-panel-footer">
       <div class="nui-sidebar-panel-footer-actions">
@@ -65,6 +65,9 @@
             [size]="action.size ?? 'md'"
             [disabled]="action.disabled ?? false"
             [loading]="action.loading ?? false"
+            [loadingPosition]="action.loadingPosition ?? 'center'"
+            [width]="action.width ?? 'auto'"
+            [iconPosition]="action.iconPosition ?? 'start'"
             [class]="action.class ?? ''"
             (onClick)="action.handler()"
           >
@@ -90,6 +93,9 @@
             [size]="action.size ?? 'md'"
             [disabled]="action.disabled ?? false"
             [loading]="action.loading ?? false"
+            [loadingPosition]="action.loadingPosition ?? 'start'"
+            [width]="action.width ?? 'auto'"
+            [iconPosition]="action.iconPosition ?? 'start'"
             [class]="action.class ?? ''"
             (onClick)="action.handler()"
           >
@@ -98,17 +104,15 @@
         }
       </div>
     </div>
-  } @else if (config.footerTemplate) {
-    <!-- Footer con template de configuraciÃ³n (Ãºltima prioridad) -->
+  } @else if (sidebarPanelConfig.footerTemplate) {
+    <!-- Footer con template de configuración (última prioridad) -->
     <div class="nui-sidebar-panel-footer">
       <ng-container
         *ngTemplateOutlet="
-          config.footerTemplate;
+          sidebarPanelConfig.footerTemplate;
           context: { componentInstance: componentInstance }
         "
       ></ng-container>
     </div>
   }
 </div>
-
-

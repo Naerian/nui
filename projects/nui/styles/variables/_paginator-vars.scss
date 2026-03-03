@@ -31,10 +31,6 @@ $paginator-page-jump-input-width: 4rem !default;
   --nui-pg-radius-lg: var(--nui-border-radius-lg);
   --nui-pg-radius-xl: var(--nui-border-radius-xl);
 
-  // Transitions
-  --nui-pg-transition: all var(--nui-transition-duration-normal)
-    var(--nui-transition-timing-function-ease);
-
   // Sizes (Pagination buttons and icons)
   $sizes: xs, sm, md, lg, xl;
   @each $size in $sizes {

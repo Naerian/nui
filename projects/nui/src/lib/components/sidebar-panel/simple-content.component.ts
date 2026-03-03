@@ -1,5 +1,6 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { SIDEBAR_PANEL_CONFIG } from './models/sidebar-panel.model';
 
 /**
@@ -22,12 +23,23 @@ import { SIDEBAR_PANEL_CONFIG } from './models/sidebar-panel.model';
         *ngTemplateOutlet="config.contentTemplate; context: config.templateContext || {}">
       </ng-container>
     } @else if (config.htmlContent) {
-      <!-- HTML string -->
-      <div [innerHTML]="config.htmlContent"></div>
+      <!-- HTML string sanitizado para preservar estilos inline -->
+      <div [innerHTML]="safeHtml()"></div>
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimpleContentComponent {
   protected readonly config = inject(SIDEBAR_PANEL_CONFIG);
+  private readonly sanitizer = inject(DomSanitizer);
+
+  /**
+   * HTML sanitizado como seguro para preservar estilos inline
+   * Angular por defecto elimina los atributos style por seguridad,
+   * pero en este caso confiamos en el HTML proporcionado por el desarrollador
+   */
+  protected readonly safeHtml = computed<SafeHtml>(() => {
+    const html = this.config.htmlContent || '';
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  });
 }

@@ -499,11 +499,11 @@ Puedes establecer valores por defecto para todos los popovers en tu aplicación:
 
 ```typescript
 // app.config.ts
-import { provideNUIConfig } from '@shared/configs';
+import { provideNUI } from '@shared/configs';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideNUIConfig({
+    provideNUI({
       popover: {
         position: 'bottom',
         event: 'click',

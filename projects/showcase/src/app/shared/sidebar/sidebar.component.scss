@@ -1,10 +1,12 @@
 .showcase-sidebar {
-  background-color: var(--nui-bg-primary);
-  border-right: 1px solid var(--nui-border-primary);
+  background-color: var(--nui-surface);
+  border-right: 1px solid var(--nui-border-high);
   height: 100%;
   display: flex;
   flex-direction: column;
-  transition: width 0.3s ease, transform 0.3s ease;
+  transition:
+    width 0.3s ease,
+    transform 0.3s ease;
   width: 280px;
   position: sticky;
   top: 0;
@@ -26,8 +28,8 @@
     left: 0;
     top: 0;
     bottom: 0;
-    z-index: 1001;
-    box-shadow: 2px 0 8px var(--nui-shadow-md);
+    z-index: var(--nui-z-index-modal);
+    box-shadow: var(--nui-box-shadow-md);
     padding-top: 0;
   }
 
@@ -52,7 +54,7 @@
     display: flex;
     align-items: center;
     padding: 0.75rem 1.5rem;
-    color: var(--nui-text-secondary);
+    color: var(--nui-on-surface-secondary);
     text-decoration: none;
     font-size: 0.9375rem;
     font-weight: 500;
@@ -61,7 +63,6 @@
     width: 100%;
     text-align: left;
     cursor: pointer;
-    transition: all 0.2s ease;
     position: relative;
 
     i {
@@ -81,13 +82,13 @@
     }
 
     &:hover {
-      color: var(--nui-color-primary);
-      background-color: var(--nui-color-primary-alpha-10);
+      color: var(--nui-primary);
+      background-color: var(--nui-primary-alpha-10);
     }
 
     &.active {
-      color: var(--nui-color-primary);
-      background-color: var(--nui-color-primary-alpha-10);
+      color: var(--nui-primary);
+      background-color: var(--nui-primary-alpha-10);
       font-weight: 600;
 
       &::before {
@@ -97,12 +98,12 @@
         top: 0;
         bottom: 0;
         width: 3px;
-        background-color: var(--nui-color-primary);
+        background-color: var(--nui-primary);
       }
     }
 
     &.expanded {
-      color: var(--nui-color-primary);
+      color: var(--nui-primary);
 
       .nav-arrow {
         transform: rotate(180deg);
@@ -120,7 +121,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    background-color: var(--nui-bg-secondary);
+    background-color: var(--nui-surface-secondary);
   }
 
   .nav-subitem {
@@ -139,12 +140,15 @@
 
   .sidebar-footer {
     padding: 1rem 1.5rem;
-    border-top: 1px solid var(--nui-border-primary);
-    background-color: var(--nui-bg-secondary);
+    border-top: 1px solid var(--nui-border-high);
+    background-color: var(--nui-surface-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 
     .footer-text {
-      font-size: 0.75rem;
-      color: var(--nui-text-tertiary);
+      font-size: 0.625rem;
+      color: var(--nui-on-surface-secondary);
       margin: 0;
       display: flex;
       align-items: flex-start;
@@ -169,15 +173,15 @@
   }
 
   &::-webkit-scrollbar-track {
-    background: var(--nui-bg-secondary);
+    background: var(--nui-surface-secondary);
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--nui-border-primary);
+    background: var(--nui-border-high);
     border-radius: 3px;
 
     &:hover {
-      background: var(--nui-color-primary-alpha-50);
+      background: var(--nui-primary-alpha-50);
     }
   }
 }

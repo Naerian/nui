@@ -14,11 +14,11 @@ import {
   DEFAULT_COLOR,
   DEFAULT_SIZE,
   DEFAULT_VARIANT,
-  NUI_CONFIG,
   NUIColor,
   NUISize,
 } from '../../configs';
-import { NUI_TRANSLATIONS } from '../../translations';
+import { NUI_I18N } from '../../i18n';
+import { injectAvatarConfig } from '../../configs/avatar';
 
 /**
  * Componente para agrupar múltiples avatares con superposición
@@ -38,8 +38,8 @@ import { NUI_TRANSLATIONS } from '../../translations';
 })
 export class AvatarGroupComponent {
   // ===== DEPENDENCIES =====
-  protected readonly translation = inject(NUI_TRANSLATIONS);
-  private readonly globalConfig = inject(NUI_CONFIG, { optional: true });
+  protected readonly translation = inject(NUI_I18N);
+  private readonly globalConfig = injectAvatarConfig();
 
   // ===== SIGNAL INPUTS =====
 
@@ -84,15 +84,13 @@ export class AvatarGroupComponent {
    * Prioridad: Input > Global Config > Default Constant
    */
   readonly effectiveColor = computed(
-    () => this.color() ?? this.globalConfig?.defaultColor ?? DEFAULT_COLOR
+    () => this.color() ?? this.globalConfig?.color ?? DEFAULT_COLOR
   );
 
-  readonly effectiveSize = computed(
-    () => this.size() ?? this.globalConfig?.defaultSize ?? DEFAULT_SIZE
-  );
+  readonly effectiveSize = computed(() => this.size() ?? this.globalConfig?.size ?? DEFAULT_SIZE);
 
   readonly effectiveVariant = computed(
-    () => this.variant() ?? this.globalConfig?.defaultVariant ?? DEFAULT_VARIANT
+    () => this.variant() ?? this.globalConfig?.variant ?? DEFAULT_VARIANT
   );
 
   /**
@@ -113,7 +111,6 @@ export class AvatarGroupComponent {
   protected readonly excessClasses = computed(() => {
     const classes: string[] = [];
 
-    // Solo añadimos clase de tamaño si NO hay tamaño custom
     if (this.effectiveSize()) {
       classes.push(`nui-avatar-group__excess--${this.effectiveSize()}`);
     }

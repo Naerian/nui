@@ -1,0 +1,636 @@
+@use '../../../../styles/variables/calendar-vars';
+@use '../../../../styles/abstracts/mixins' as global;
+
+// ============================================================================
+// HOST & STRUCTURE
+// ============================================================================
+
+:host {
+  @include calendar-vars.nui-calendar-vars;
+  display: inline-flex;
+  width: auto;
+
+  // Optimización: Limita el alcance de recálculos de estilo en cambios de tema
+  contain: layout style paint;
+  content-visibility: auto;
+}
+
+// ============================================================================
+// ACCESSIBILITY UTILITIES
+// ============================================================================
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ============================================================================
+// BASE STYLES (Single Standard Size - Intrinsically Responsive)
+// ============================================================================
+
+.nui-calendar {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--nui-calendar-bg);
+  border-radius: var(--nui-border-radius-md);
+  border: 1px solid var(--nui-calendar-border);
+  box-shadow: var(--nui-calendar-box-shadow);
+  user-select: none;
+  padding: var(--nui-calendar-padding);
+  gap: var(--nui-calendar-gap);
+  width: var(--nui-calendar-width);
+  max-width: 100%; // Responsive: se adapta si el contenedor es más pequeño
+  min-width: 280px; // Evita que se encoja demasiado y pierda funcionalidad
+
+  &--with-week-numbers {
+    width: calc(var(--nui-calendar-width) + var(--nui-calendar-week-number-width, 2rem));
+  }
+
+  // ============================================================================
+  // WITH TABS VARIANT
+  // ============================================================================
+
+  &--with-tabs {
+    .nui-calendar__main {
+      padding-top: 0;
+    }
+  }
+
+  // ============================================================================
+  // MAIN CONTAINER
+  // ============================================================================
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nui-calendar-gap);
+    flex: 1;
+    min-width: 0;
+  }
+
+  // ============================================================================
+  // TABS SYSTEM
+  // ============================================================================
+
+  &__tabs {
+    display: flex;
+    justify-content: center;
+  }
+
+  // ============================================================================
+  // HEADER WITH NAVIGATION
+  // ============================================================================
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nui-calendar-gap);
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--nui-spacing-xs);
+  }
+
+  // ============================================================================
+  // NAVIGATION BUTTONS (Native buttons styled like nui-button ghost)
+  // ============================================================================
+
+  &__nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-weight: var(--nui-font-weight-semibold);
+    font-family: var(--nui-font-family);
+    text-decoration: none;
+    border-width: 1px;
+    border-style: solid;
+    line-height: 1.5;
+    height: var(--nui-calendar-nav-btn-height);
+    padding: var(--nui-calendar-nav-btn-padding);
+    font-size: var(--nui-calendar-nav-btn-font-size);
+    border-radius: var(--nui-border-radius-sm);
+
+    // Theme colors (customizable via CSS variables)
+    background-color: var(--nui-calendar-nav-btn-bg);
+    color: var(--nui-calendar-nav-btn-text);
+    border-color: var(--nui-calendar-nav-btn-border);
+
+    &:hover:not(:disabled) {
+      background-color: var(--nui-calendar-nav-btn-hover-bg);
+      color: var(--nui-calendar-nav-btn-hover-text);
+      border-color: var(--nui-calendar-nav-btn-hover-border);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--nui-calendar-nav-btn-active-bg);
+      border-color: var(--nui-calendar-nav-btn-active-border);
+    }
+
+    &:disabled {
+      background-color: var(--nui-calendar-nav-btn-disabled-bg);
+      color: var(--nui-calendar-nav-btn-disabled-text);
+      border-color: var(--nui-calendar-nav-btn-disabled-border);
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    @include global.focus-ring();
+
+    // Icon styles
+    i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1em;
+      height: 1em;
+      flex-shrink: 0;
+      line-height: 1;
+      vertical-align: middle;
+      font-size: var(--nui-calendar-nav-btn-font-size);
+    }
+
+    // Icon-only buttons (square)
+    &--icon-only {
+      padding: 0;
+      width: var(--nui-calendar-nav-btn-height);
+      min-width: var(--nui-calendar-nav-btn-height);
+    }
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: var(--nui-spacing-xs);
+    flex: 1;
+    justify-content: center;
+    font-size: var(--nui-calendar-title-font-size);
+  }
+
+  &__title-text {
+    font-weight: var(--nui-font-weight-semibold);
+    font-size: var(--nui-calendar-title-font-size);
+    color: var(--nui-text-primary);
+  }
+
+  // ============================================================================
+  // BODY (DAYS/MONTHS/YEARS CONTAINER)
+  // ============================================================================
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nui-calendar-gap);
+  }
+
+  // ============================================================================
+  // WEEKDAYS HEADER
+  // ============================================================================
+
+  &__weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: var(--nui-calendar-gap);
+    width: 100%;
+    padding-bottom: var(--nui-spacing-xs);
+    border-bottom: var(--nui-calendar-tabs-border-width) solid var(--nui-border-default);
+  }
+
+  &__weekday,
+  &__week-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--nui-font-weight-semibold);
+    font-size: var(--nui-calendar-weekday-font-size);
+    color: var(--nui-text-secondary);
+    text-transform: uppercase;
+    padding: var(--nui-spacing-xs) 0;
+    min-height: var(--nui-calendar-weekday-height);
+    line-height: 1.6;
+  }
+
+  &__week-number {
+    font-size: var(--nui-calendar-week-font-size);
+  }
+
+  // ============================================================================
+  // BODY WITH WEEK NUMBERS
+  // ============================================================================
+
+  &__body--with-week-numbers {
+    .nui-calendar__weekdays {
+      grid-template-columns: var(--nui-calendar-week-number-width, 2rem) repeat(7, minmax(0, 1fr));
+    }
+
+    .nui-calendar__days-grid {
+      grid-template-columns: var(--nui-calendar-week-number-width, 2rem) repeat(7, 1fr);
+    }
+  }
+
+  // ============================================================================
+  // WEEK NUMBERS
+  // ============================================================================
+
+  &__week {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1; // Mantiene forma cuadrada al encogerse
+    min-width: 0; // Permite que se encoja
+    min-height: 0;
+    padding: 0;
+    background: transparent;
+    border: var(--nui-calendar-day-border-width) solid transparent;
+    border-radius: var(--nui-border-radius-circle);
+    font-weight: var(--nui-font-weight-medium);
+    font-size: var(--nui-calendar-week-font-size);
+    color: var(--nui-calendar-day-text);
+    cursor: default;
+    opacity: 0.2;
+    position: relative;
+    line-height: 1.6;
+
+    &--clickable {
+      cursor: pointer;
+
+      &:hover {
+        background: var(--nui-calendar-day-hover-bg);
+        color: var(--nui-calendar-day-hover-text);
+        opacity: 0.5;
+      }
+
+      @include global.focus-ring();
+
+      &:focus-visible {
+        border-radius: var(--nui-border-radius-md);
+      }
+    }
+  }
+
+  // ============================================================================
+  // DAYS GRID
+  // ============================================================================
+
+  &__days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--nui-calendar-gap);
+  }
+
+  &__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--nui-calendar-gap);
+  }
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1; // Mantiene forma cuadrada al encogerse
+    min-width: 0; // Permite que se encoja
+    min-height: 0;
+    padding: 0;
+    background: var(--nui-calendar-day-bg);
+    border: var(--nui-calendar-day-border-width) solid transparent;
+    border-radius: var(--nui-border-radius-circle);
+    font-weight: var(--nui-font-weight-regular);
+    font-size: var(--nui-calendar-day-font-size);
+    color: var(--nui-calendar-day-text);
+    opacity: var(--nui-calendar-day-other-month-opacity);
+    cursor: pointer;
+    position: relative;
+    line-height: 1.6;
+
+    &:hover:not(&--disabled):not(&--selected) {
+      background: var(--nui-calendar-day-hover-bg);
+      color: var(--nui-calendar-day-hover-text);
+      opacity: 1;
+    }
+
+    @include global.focus-ring();
+
+    &:focus-visible {
+      border-radius: var(--nui-border-radius-circle);
+    }
+
+    &--current-month {
+      opacity: 1;
+    }
+
+    &--today {
+      position: relative;
+      font-weight: var(--nui-font-weight-semibold);
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: var(--nui-calendar-today-bottom);
+        left: 50%;
+        transform: translateX(-50%);
+        width: var(--nui-calendar-today-size);
+        height: var(--nui-calendar-today-size);
+        border-radius: var(--nui-border-radius-circle);
+        background: var(--nui-calendar-day-today-bg);
+      }
+    }
+
+    &--selected {
+      background: var(--nui-calendar-day-selected-bg);
+      color: var(--nui-calendar-day-selected-text);
+      border-color: var(--nui-calendar-day-selected-border);
+      opacity: 1;
+
+      &:hover {
+        background: var(--nui-calendar-day-selected-hover-bg);
+        border-color: var(--nui-calendar-day-selected-hover-border);
+      }
+
+      &.nui-calendar__day--today {
+        &::after {
+          background: var(--nui-calendar-day-selected-today-bg);
+        }
+      }
+    }
+
+    &--in-range {
+      background: var(--nui-calendar-day-range-bg);
+      color: var(--nui-calendar-day-range-text);
+      border-color: var(--nui-calendar-day-range-border);
+      opacity: 1;
+
+      &:hover {
+        background: var(--nui-calendar-day-range-hover-bg);
+        border-color: var(--nui-calendar-day-range-hover-border);
+      }
+
+      &.nui-calendar__day--selected {
+        background: var(--nui-calendar-day-selected-bg);
+        color: var(--nui-calendar-day-selected-text);
+        border-color: var(--nui-calendar-day-selected-border);
+        opacity: 1;
+      }
+    }
+
+    &--disabled {
+      @include global.disabled(0.3);
+    }
+
+    &--focused {
+      outline: var(--nui-focus-ring-width) solid var(--nui-primary);
+      outline-offset: var(--nui-focus-ring-offset);
+    }
+
+    // ==========================================================================
+    // Smart Service - Status States (Indicadores sutiles con línea superior)
+    // ==========================================================================
+
+    &--status::before {
+      content: '';
+      position: absolute;
+      top: var(--nui-calendar-status-top);
+      left: 50%;
+      transform: translateX(-50%);
+      width: var(--nui-calendar-status-size);
+      height: 0.125rem;
+      border-radius: 1px;
+    }
+
+    $statuses: success, info, warning, danger;
+    @each $status in $statuses {
+      &--status-#{$status}::before {
+        background: var(--nui-calendar-day-status-#{$status});
+      }
+    }
+  }
+
+  // ============================================================================
+  // MONTHS GRID
+  // ============================================================================
+
+  &__months {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--nui-calendar-gap);
+  }
+
+  &__month {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 2 / 1;
+    min-width: 0;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--nui-border-radius-sm);
+    font-weight: var(--nui-font-weight-medium);
+    font-size: var(--nui-calendar-month-font-size);
+    color: var(--nui-text-primary);
+    cursor: pointer;
+    padding: var(--nui-spacing-sm);
+
+    &:hover:not(&--disabled):not(&--selected) {
+      background: var(--nui-calendar-day-hover-bg);
+      color: var(--nui-calendar-day-hover-text);
+      opacity: 1;
+    }
+
+    @include global.focus-ring();
+
+    &--current {
+      font-weight: var(--nui-font-weight-bold);
+      color: var(--nui-color-primary);
+    }
+
+    &--selected {
+      background: var(--nui-calendar-day-selected-bg);
+      color: var(--nui-calendar-day-selected-text);
+      border-color: var(--nui-calendar-day-selected-border);
+      opacity: 1;
+
+      &:hover {
+        background: var(--nui-calendar-day-selected-hover-bg);
+        border-color: var(--nui-calendar-day-selected-hover-border);
+      }
+    }
+
+    &--disabled {
+      @include global.disabled(0.3);
+    }
+  }
+
+  // ============================================================================
+  // YEARS GRID
+  // ============================================================================
+
+  &__years {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--nui-calendar-gap);
+  }
+
+  &__year {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 2 / 1;
+    min-width: 0;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--nui-border-radius-sm);
+    font-weight: var(--nui-font-weight-medium);
+    font-size: var(--nui-calendar-year-font-size);
+    color: var(--nui-text-primary);
+    cursor: pointer;
+    padding: var(--nui-spacing-xs);
+
+    &:hover:not(&--disabled):not(&--selected) {
+      background: var(--nui-calendar-day-hover-bg);
+      color: var(--nui-calendar-day-hover-text);
+      opacity: 1;
+    }
+
+    @include global.focus-ring();
+
+    &--current {
+      font-weight: var(--nui-font-weight-bold);
+      color: var(--nui-color-primary);
+    }
+
+    &--selected {
+      background: var(--nui-calendar-day-selected-bg);
+      color: var(--nui-calendar-day-selected-text);
+      border-color: var(--nui-calendar-day-selected-border);
+      opacity: 1;
+
+      &:hover {
+        background: var(--nui-calendar-day-selected-hover-bg);
+        border-color: var(--nui-calendar-day-selected-hover-border);
+      }
+    }
+
+    &--disabled {
+      @include global.disabled(0.3);
+    }
+  }
+
+  // ============================================================================
+  // PRESETS PANEL
+  // ============================================================================
+
+  &__presets-panel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--nui-calendar-gap);
+  }
+
+  &__preset-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 2 / 1;
+    min-width: 0;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--nui-border-radius-sm);
+    font-weight: var(--nui-font-weight-medium);
+    font-size: var(--nui-calendar-day-font-size);
+    color: var(--nui-calendar-day-text);
+    cursor: pointer;
+    padding: var(--nui-spacing-sm);
+    gap: var(--nui-spacing-xs);
+
+    i {
+      font-size: var(--time-picker-preset-font-size);
+      color: var(--nui-color-primary);
+    }
+
+    &:hover {
+      background: var(--nui-calendar-day-hover-bg);
+      color: var(--nui-calendar-day-hover-text);
+      opacity: 1;
+    }
+
+    @include global.focus-ring();
+  }
+
+  // ============================================================================
+  // TIME PICKER PANEL
+  // ============================================================================
+
+  &__time-picker-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nui-calendar-gap);
+    animation: fadeIn var(--nui-transition-duration-fast) ease-out;
+  }
+
+  &__time-picker {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nui-calendar-gap);
+
+    // Style override to integrate the time-picker within the calendar
+    // without borders or padding, using variables specific to this case
+    nui-time-picker {
+      --nui-time-picker-padding: 0 !important;
+      --nui-time-picker-border: transparent !important;
+      --nui-time-picker-box-shadow: none !important;
+    }
+  }
+
+  &__time-picker-header {
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--nui-spacing-xs);
+    padding-bottom: var(--nui-spacing-xs);
+    border-bottom: var(--nui-calendar-tabs-border-width) solid var(--nui-border-subtle);
+    border-top: var(--nui-calendar-tabs-border-width) solid var(--nui-border-subtle);
+  }
+
+  // ============================================================================
+  // FOOTER
+  // ============================================================================
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--nui-spacing-sm);
+    padding-top: var(--nui-calendar-gap);
+    border-top: var(--nui-calendar-tabs-border-width) solid var(--nui-border-subtle);
+  }
+
+  &__footer-center {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+  }
+
+  // ============================================================================
+  // ANIMATIONS
+  // ============================================================================
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

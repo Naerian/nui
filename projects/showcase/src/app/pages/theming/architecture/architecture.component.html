@@ -1,0 +1,268 @@
+<div class="docs-page">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h1 class="page-title">{{ 'pages.theming.architecture.title' | translate }}</h1>
+      <p class="page-subtitle">{{ 'pages.theming.architecture.subtitle' | translate }}</p>
+    </div>
+
+    <div class="docs-content">
+      <!-- Architecture Overview -->
+      <section class="docs-section">
+        <div class="architecture-overview">
+          <div class="current-preset-badge">
+            <i class="ri-palette-line"></i>
+            <span>{{ currentPreset().name | titlecase }}</span>
+            <span class="mode-indicator" [class.dark]="isDarkMode()">
+              <i [class.ri-sun-line]="!isDarkMode()" [class.ri-moon-line]="isDarkMode()"></i>
+              {{ isDarkMode() ? ('header.dark' | translate) : ('header.light' | translate) }}
+            </span>
+          </div>
+          <p class="overview-text">{{ 'pages.theming.architecture.overview' | translate }}</p>
+        </div>
+      </section>
+
+      <!-- Layer 1: Preset System (Semantic Colors) -->
+      <section class="docs-section">
+        <div class="layer-header">
+          <div class="layer-badge">
+            <i class="ri-palette-line"></i>
+          </div>
+          <div class="layer-info">
+            <h2>{{ 'pages.theming.architecture.layer1.title' | translate }}</h2>
+            <p class="layer-description">{{ 'pages.theming.architecture.layer1.description' | translate }}</p>
+          </div>
+        </div>
+
+        <div class="semantic-colors-grid">
+          @for (color of semanticColors; track color.key) {
+            <div class="semantic-color-card">
+              <div class="color-header">
+                <div class="color-preview" [style.background-color]="getColorValue(color.key)">
+                  <i [class]="color.icon" [style.color]="getContrastColor(getColorValue(color.key))"></i>
+                </div>
+                <div class="color-meta">
+                  <h4 class="color-name">{{ color.key }}</h4>
+                  <code class="color-value">{{ getColorValue(color.key) }}</code>
+                </div>
+              </div>
+              <p class="color-purpose">{{ color.purpose | translate }}</p>
+            </div>
+          }
+        </div>
+      </section>
+
+      <!-- Layer 2: Structural Variables -->
+      <section class="docs-section">
+        <div class="layer-header">
+          <div class="layer-badge">
+            <i class="ri-layout-grid-line"></i>
+          </div>
+          <div class="layer-info">
+            <h2>{{ 'pages.theming.architecture.layer2.title' | translate }}</h2>
+            <p class="layer-description">{{ 'pages.theming.architecture.layer2.description' | translate }}</p>
+          </div>
+        </div>
+
+        <div class="structural-grid">
+          @for (group of structuralGroups; track group.title) {
+            <div class="structural-card">
+              <div class="structural-header">
+                <i [class]="group.icon"></i>
+                <h3>{{ group.title | translate }}</h3>
+              </div>
+              <div class="var-list">
+                @for (varItem of group.vars; track varItem.name) {
+                  <div class="var-item">
+                    <div class="var-preview" [style.background-color]="getCSSVar(varItem.name)"></div>
+                    <div class="var-details">
+                      <code class="var-name">{{ varItem.name }}</code>
+                      <span class="var-desc">{{ varItem.desc | translate }}</span>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+
+      <!-- Layer 3: Variant Generation -->
+      <section class="docs-section">
+        <div class="layer-header">
+          <div class="layer-badge">
+            <i class="ri-artboard-line"></i>
+          </div>
+          <div class="layer-info">
+            <h2>{{ 'pages.theming.architecture.layer3.title' | translate }}</h2>
+            <p class="layer-description">{{ 'pages.theming.architecture.layer3.description' | translate }}</p>
+          </div>
+        </div>
+
+        <div class="variants-grid">
+          @for (variantType of variantTypes; track variantType.type) {
+            <div class="variant-card">
+              <div class="variant-header">
+                <i [class]="variantType.icon"></i>
+                <h3>{{ variantType.title | translate }}</h3>
+              </div>
+              <p class="variant-description">{{ variantType.description | translate }}</p>
+              <div class="variant-examples">
+                @for (example of variantType.examples; track example) {
+                  <div class="variant-item">
+                    <div class="variant-swatch" [style.background-color]="getVariantColor('primary', example)"></div>
+                    <code class="variant-code">--nui-primary-{{ example }}</code>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+
+      <!-- Layer 4: Shadow System -->
+      <section class="docs-section">
+        <div class="layer-header">
+          <div class="layer-badge">
+            <i class="ri-building-line"></i>
+          </div>
+          <div class="layer-info">
+            <h2>{{ 'pages.theming.architecture.layer4.title' | translate }}</h2>
+            <p class="layer-description">{{ 'pages.theming.architecture.layer4.description' | translate }}</p>
+          </div>
+        </div>
+
+        <div class="shadow-system">
+          <div class="shadow-section">
+            <h3><i class="ri-stack-line"></i> {{ 'pages.theming.architecture.layer4.primitivesTitle' | translate }}</h3>
+            <div class="shadow-primitives">
+              @for (shadow of shadowPrimitives; track shadow.name) {
+                <div class="shadow-card" [style.box-shadow]="getCSSVar(shadow.name)">
+                  <div class="shadow-level">{{ shadow.level }}</div>
+                  <code class="shadow-var">{{ shadow.name }}</code>
+                  <span class="shadow-usage">{{ shadow.usage | translate }}</span>
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="shadow-section">
+            <h3><i class="ri-bookmark-line"></i> {{ 'pages.theming.architecture.layer4.aliasesTitle' | translate }}</h3>
+            <div class="shadow-aliases-list">
+              @for (alias of shadowAliases; track alias.name) {
+                <div class="alias-item">
+                  <div class="alias-preview" [style.box-shadow]="getCSSVar(alias.name)">
+                    <code>{{ alias.name }}</code>
+                  </div>
+                  <div class="alias-info">
+                    <span class="alias-mapping">{{ 'pages.theming.architecture.layer4.mapsTo' | translate }}: <strong>{{ alias.maps }}</strong></span>
+                    <span class="alias-usage">{{ alias.usage | translate }}</span>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Layer 5: Component Variables -->
+      <section class="docs-section">
+        <div class="layer-header">
+          <div class="layer-badge">
+            <i class="ri-puzzle-line"></i>
+          </div>
+          <div class="layer-info">
+            <h2>{{ 'pages.theming.architecture.layer5.title' | translate }}</h2>
+            <p class="layer-description">{{ 'pages.theming.architecture.layer5.description' | translate }}</p>
+          </div>
+        </div>
+
+        <div class="components-grid">
+          @for (comp of componentExamples; track comp.component) {
+            <div class="component-card">
+              <div class="component-header">
+                <i [class]="comp.icon"></i>
+                <h3>{{ comp.component }}</h3>
+              </div>
+              <p class="component-description">{{ comp.description | translate }}</p>
+              <div class="component-variants">
+                @for (variant of comp.variants; track variant.variant) {
+                  <div class="component-variant">
+                    <strong>{{ variant.variant }}</strong>
+                    <ul class="variant-vars">
+                      @for (v of variant.vars; track v) {
+                        <li><code>--nui-{{ comp.component.toLowerCase() }}-[color]-{{ v }}</code></li>
+                      }
+                    </ul>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+
+      <!-- Performance Layer -->
+      <section class="docs-section">
+        <div class="layer-header">
+          <div class="layer-badge performance">
+            <i class="ri-speed-line"></i>
+          </div>
+          <div class="layer-info">
+            <h2>{{ 'pages.theming.architecture.performance.title' | translate }}</h2>
+            <p class="layer-description">{{ 'pages.theming.architecture.performance.description' | translate }}</p>
+          </div>
+        </div>
+
+        <div class="performance-grid">
+          @for (feature of performanceFeatures; track feature.title) {
+            <div class="performance-card">
+              <i [class]="feature.icon"></i>
+              <h3>{{ feature.title | translate }}</h3>
+              <p>{{ feature.description | translate }}</p>
+            </div>
+          }
+        </div>
+      </section>
+
+      <!-- Architecture Flow Diagram -->
+      <section class="docs-section">
+        <h2>{{ 'pages.theming.architecture.flow.title' | translate }}</h2>
+        <p class="section-description">{{ 'pages.theming.architecture.flow.description' | translate }}</p>
+
+        <div class="flow-diagram">
+          <div class="flow-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <strong>{{ 'pages.theming.architecture.flow.step1.title' | translate }}</strong>
+              <p>{{ 'pages.theming.architecture.flow.step1.description' | translate }}</p>
+            </div>
+          </div>
+          <div class="flow-arrow"><i class="ri-arrow-down-line"></i></div>
+          <div class="flow-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <strong>{{ 'pages.theming.architecture.flow.step2.title' | translate }}</strong>
+              <p>{{ 'pages.theming.architecture.flow.step2.description' | translate }}</p>
+            </div>
+          </div>
+          <div class="flow-arrow"><i class="ri-arrow-down-line"></i></div>
+          <div class="flow-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <strong>{{ 'pages.theming.architecture.flow.step3.title' | translate }}</strong>
+              <p>{{ 'pages.theming.architecture.flow.step3.description' | translate }}</p>
+            </div>
+          </div>
+          <div class="flow-arrow"><i class="ri-arrow-down-line"></i></div>
+          <div class="flow-step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <strong>{{ 'pages.theming.architecture.flow.step4.title' | translate }}</strong>
+              <p>{{ 'pages.theming.architecture.flow.step4.description' | translate }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

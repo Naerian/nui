@@ -1,194 +1,132 @@
-import { TooltipPosition } from '../../components/tooltip';
-import { NUIColor, NUISize, NUIVariant } from '../common/types';
+import { inject } from '@angular/core';
+import { NUI_CONFIG } from '../nui.token';
+import { deepMerge } from '../../utils/deep-merge';
+import { NUIColor, NUISize, NUIVariant } from '../common';
+import {
+  FabButtonAnimation,
+  FabButtonDirection,
+  FabButtonLayoutType,
+  FabButtonShape,
+  FabButtonItemDisplay,
+} from '../../components/fab-button';
 
+// ============================================================
+// Config interface
+// ============================================================
 /**
- * Dirección en la que se despliegan los items del FAB
- * - up, down, left, right: Para layouts linear, circle, semi-circle
- * - up-left, up-right, down-left, down-right: Para layout quarter-circle
- */
-export type FabButtonDirection = 
-  | 'up' | 'down' | 'left' | 'right'
-  | 'up-left' | 'up-right' | 'down-left' | 'down-right';
-
-/**
- * Tipo de animación para el despliegue de items
- */
-export type FabButtonAnimation = 'scale' | 'fade' | 'slide';
-
-/**
- * Tipo de layout para el despliegue de items
- */
-export type FabButtonLayoutType = 'linear' | 'circle' | 'semi-circle' | 'quarter-circle';
-
-/**
- * Forma del botón y sus items
- */
-export type FabButtonShape = 'circular' | 'rounded' | 'square';
-
-/**
- * Configuración de un item individual del FAB
- */
-export interface FabButtonItem {
-  /**
-   * Identificador único del item
-   */
-  id?: string;
-
-  /**
-   * Icono del item
-   */
-  icon?: string;
-
-  /**
-   * Label del item (se muestra en tooltip o inline)
-   */
-  label?: string;
-
-  /**
-   * Tooltip personalizado (si no se especifica, usa el label)
-   */
-  tooltip?: string;
-
-  /**
-   * Posición del tooltip
-   */
-  tooltipPosition?: TooltipPosition;
-
-  /**
-   * Delay del tooltip en ms
-   */
-  tooltipDelay?: number;
-
-  /**
-   * Color del item (hereda del padre si no se especifica)
-   */
-  color?: NUIColor;
-
-  /**
-   * Tamaño del item (hereda del padre si no se especifica)
-   */
-  size?: NUISize;
-
-  /**
-   * Variante del item (hereda del padre si no se especifica)
-   */
-  variant?: NUIVariant;
-
-  /**
-   * Estado deshabilitado del item
-   */
-  disabled?: boolean;
-
-  /**
-   * Datos adicionales asociados al item
-   */
-  data?: any;
-
-  /**
-   * Clase CSS adicional para el item
-   */
-  styleClass?: string;
-
-  /**
-   * URL para navegación (opcional)
-   */
-  url?: string;
-
-  /**
-   * Target para el enlace (si url está definida)
-   */
-  target?: string;
-
-  /**
-   * Comando a ejecutar al hacer clic
-   */
-  command?: (event?: any) => void;
-
-  /**
-   * Color de fondo personalizado (sobrescribe el color predefinido)
-   */
-  backgroundColor?: string;
-
-  /**
-   * Color del texto/icono personalizado (sobrescribe el color predefinido)
-   */
-  textColor?: string;
-}
-
-/**
- * Configuración global del componente FAB Button
+ * Global configuration for the FabButton component.
+ * All fields are optional; unset fields fall back to DEFAULT_FAB_BUTTON_CONFIG.
  */
 export interface FabButtonConfig {
-  /**
-   * Dirección por defecto del despliegue
-   */
+  /** Direction in which items spread from the trigger. @default 'up' */
   direction?: FabButtonDirection;
-
-  /**
-   * Tipo de animación por defecto
-   */
+  /** Enter/leave animation for the items. @default 'scale' */
   animation?: FabButtonAnimation;
-
-  /**
-   * Tipo de layout para el despliegue de items
-   */
-  layoutType?: FabButtonLayoutType;
-
-  /**
-   * Forma del botón y sus items
-   */
+  /** Spatial distribution of items. @default 'linear' */
+  layout?: FabButtonLayoutType;
+  /** Border-radius shape of trigger and items. @default 'circular' */
   shape?: FabButtonShape;
-
+  /** Semantic color for trigger and items. @default 'primary' */
+  color?: NUIColor;
+  /** Size token for trigger and items. @default 'md' */
+  size?: NUISize;
+  /** Visual variant for trigger and items. @default 'solid' */
+  variant?: NUIVariant;
   /**
-   * Mostrar labels inline por defecto
+   * Radius for circle/semi-circle/quarter-circle layouts.
+   * Accepts any valid CSS length (rem, px, em…).
+   * @default '4rem'
    */
-  showLabels?: boolean;
-
+  radius?: string;
   /**
-   * Duración de la animación en milisegundos
+   * Spacing between items in linear layout.
+   * Accepts any valid CSS length.
+   * @default '3.5rem'
    */
-  animationDuration?: number;
-
+  spacing?: string;
+  /** Whether to show a translucent backdrop behind the items. @default false */
+  backdrop?: boolean;
+  /** Close the dial when the user clicks outside the component. @default true */
+  closeOnOutsideClick?: boolean;
+  /** Close the dial when the user presses the ESC key. @default true */
+  closeOnEsc?: boolean;
   /**
-   * Espaciado entre items en pixels
+   * Controls how action items render their content:
+   * - `'icon'` (default) — icon-only button; label is not shown but tooltip appears on hover.
+   * - `'icon-text'` — icon + label text inside the button; tooltip is suppressed
+   *   (the visible label already conveys the action).
+   * @default 'icon'
    */
-  itemSpacing?: number;
-
+  itemDisplay?: FabButtonItemDisplay;
   /**
-   * Cerrar el menú al hacer clic en un item
+   * Set to `false` to keep the dial open for multi-action patterns. @default true
    */
-  hideOnItemClick?: boolean;
-
+  closeOnItemClick?: boolean;
   /**
-   * Cerrar el menú al hacer clic fuera
+   * Close the dial when the nearest scroll container scrolls.
+   * Useful when the FAB is inside a scrollable panel. @default false
    */
-  hideOnClickOutside?: boolean;
-
+  closeOnScroll?: boolean;
   /**
-   * Ocultar el overlay de fondo
+   * How to open the dial: 'click' (default) or 'hover'.
+   * In 'hover' mode the dial opens on pointer entry and closes on leave.
+   * Keyboard navigation is unaffected in either mode. @default 'click'
    */
-  hideOverlay?: boolean;
-
+  openOn?: 'click' | 'hover';
   /**
-   * Rotación del icono principal al abrir (en grados)
+   * Icon CSS class shown in the trigger when the dial is open.
+   * When set, the `triggerIcon` is replaced by this class while expanded —
+   * avoids the need for a custom `fabTrigger` template just for icon swap.
+   * @example 'ri-close-line'
    */
-  iconRotation?: number;
+  triggerIconOpen?: string;
+  /**
+   * Static label shown next to the trigger icon.
+   * Renders the trigger as an Extended FAB pill (icon + text).
+   * The label is omitted when the dial is open and `triggerIconOpen` is set.
+   * @example 'Compose'
+   */
+  triggerLabel?: string;
 }
 
+// ============================================================
+// Default values
+// ============================================================
+export const DEFAULT_FAB_BUTTON_CONFIG: Required<FabButtonConfig> = {
+  direction: 'up',
+  animation: 'scale',
+  layout: 'linear',
+  shape: 'circular',
+  color: 'primary',
+  size: 'md',
+  variant: 'solid',
+  radius: '4rem',
+  spacing: '3.5rem',
+  backdrop: false,
+  closeOnOutsideClick: true,
+  closeOnEsc: true,
+  itemDisplay: 'icon',
+  closeOnItemClick: true,
+  closeOnScroll: false,
+  openOn: 'click',
+  triggerIconOpen: '',
+  triggerLabel: '',
+};
+
+// ============================================================
+// Injection helper (mirrors injectButtonConfig pattern)
+// ============================================================
 /**
- * Configuración por defecto del FAB Button
+ * Resolves the final FabButton configuration by merging the library defaults
+ * with any values provided via the global NUI_CONFIG provider.
+ *
+ * Usage inside a component:
+ * ```ts
+ * private readonly config = injectFabButtonConfig();
+ * ```
  */
-export function createDefaultFabButtonConfig(): FabButtonConfig {
-  return {
-    direction: 'up',
-    animation: 'scale',
-    layoutType: 'linear',
-    shape: 'circular',
-    showLabels: false,
-    // animationDuration y itemSpacing se manejan por CSS
-    hideOnItemClick: true,
-    hideOnClickOutside: true,
-    hideOverlay: true, // Por defecto oculto
-    iconRotation: 135, // Rotación para efecto "×" en el icono "+"
-  };
+export function injectFabButtonConfig(): Required<FabButtonConfig> {
+  const globalConfig = inject(NUI_CONFIG, { optional: true })?.config;
+  const overrides = globalConfig?.fabButton ?? {};
+  return deepMerge(DEFAULT_FAB_BUTTON_CONFIG, overrides) as Required<FabButtonConfig>;
 }

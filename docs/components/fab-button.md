@@ -400,13 +400,13 @@ handleClose(): void {
 
 ## 🎨 Configuración Global
 
-Puedes configurar valores por defecto globalmente usando `provideNUIConfig`:
+Puedes configurar valores por defecto globalmente usando `provideNUI`:
 
 ```typescript
 // En app.config.ts
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideNUIConfig({
+    provideNUI({
       fabButton: {
         direction: 'up',
         animation: 'scale',

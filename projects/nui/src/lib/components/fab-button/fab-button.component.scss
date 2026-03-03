@@ -1,0 +1,7 @@
+:host {
+  // The host renders as an inline-block so it naturally takes up only
+  // as much space as the trigger button, while items overlap outside.
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+}

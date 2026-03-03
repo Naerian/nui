@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -24,6 +24,9 @@ export class SidebarComponent implements OnInit {
   menuItems: MenuItem[] = SIDEBAR_MENU_CONFIG;
 
   ngOnInit(): void {
+    // Asegurar que el sidebar empiece cerrado en mobile
+    this.checkAndCollapseOnMobile();
+
     this.showcaseConfig.config$.subscribe(config => {
       this.isCollapsed = config.sidebarCollapsed;
     });
@@ -36,7 +39,40 @@ export class SidebarComponent implements OnInit {
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe(event => {
         this.updateExpandedSections(event.urlAfterRedirects);
+        // Cerrar sidebar en mobile al cambiar de ruta
+        this.closeSidebarOnMobile();
       });
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    // Si se redimensiona a mobile, cerrar sidebar
+    this.checkAndCollapseOnMobile();
+  }
+
+  /**
+   * Verifica si está en mobile y cierra el sidebar si es necesario
+   */
+  private checkAndCollapseOnMobile(): void {
+    if (this.isMobile() && !this.isCollapsed) {
+      this.showcaseConfig.setSidebarCollapsed(true);
+    }
+  }
+
+  /**
+   * Cierra el sidebar en mobile
+   */
+  private closeSidebarOnMobile(): void {
+    if (this.isMobile()) {
+      this.showcaseConfig.setSidebarCollapsed(true);
+    }
+  }
+
+  /**
+   * Detecta si está en viewport mobile
+   */
+  private isMobile(): boolean {
+    return window.innerWidth < 992;
   }
 
   private updateExpandedSections(url: string): void {

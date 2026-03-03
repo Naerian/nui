@@ -16,11 +16,11 @@ import {
   DEFAULT_SIZE,
   DEFAULT_VARIANT,
   NUI_COLORS,
-  NUI_CONFIG,
   NUIColor,
   NUISize,
 } from '../../configs';
 import { ThemeService } from '../../themes/theme.service';
+import { injectAvatarConfig } from '../../configs/avatar';
 
 @Component({
   selector: 'nui-avatar',
@@ -31,7 +31,7 @@ import { ThemeService } from '../../themes/theme.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvatarComponent {
-  private readonly globalConfig = inject(NUI_CONFIG, { optional: true });
+  private readonly globalConfig = injectAvatarConfig();
   private readonly themeService = inject(ThemeService);
 
   // ========================================================================
@@ -105,23 +105,29 @@ export class AvatarComponent {
    * Prioridad: Input > Global Config > Default Constant
    */
   readonly effectiveColor = computed(
-    () => this.color() ?? this.globalConfig?.defaultColor ?? DEFAULT_COLOR
+    () => this.color() ?? this.globalConfig?.color ?? DEFAULT_COLOR
   );
 
-  readonly effectiveSize = computed(
-    () => this.size() ?? this.globalConfig?.defaultSize ?? DEFAULT_SIZE
-  );
+  /**
+   * Resolución reactiva del tamaño final
+   * Prioridad: Input > Global Config > Default Constant
+   */
+  readonly effectiveSize = computed(() => this.size() ?? this.globalConfig?.size ?? DEFAULT_SIZE);
 
+  /**
+   * Resolución reactiva de la variante final
+   * Prioridad: Input > Global Config > Default Constant
+   */
   readonly effectiveVariant = computed(
-    () => this.variant() ?? this.globalConfig?.defaultVariant ?? DEFAULT_VARIANT
+    () => this.variant() ?? this.globalConfig?.variant ?? DEFAULT_VARIANT
   );
 
   /**
    * Detecta si el color es custom (no está en los predefinidos) para aplicar estilos específicos.
    */
   readonly customColor = computed(() => {
-    const color = this.color();
-    return NUI_COLORS.includes(color as NUIColor) ? null : color;
+    const color = this.effectiveColor();
+    return color && !NUI_COLORS.includes(color as NUIColor) ? color : null;
   });
 
   /**
@@ -159,6 +165,11 @@ export class AvatarComponent {
 
     if (this.bordered()) {
       classes.push(`nui-avatar--bordered`);
+    }
+
+    // Si no tiene SRC o es FALLBACK, añadimos clase para centrar el contenido (iniciales o icono)
+    if (this.contentType() !== 'image') {
+      classes.push('nui-avatar--no-image');
     }
 
     return classes.join(' ');

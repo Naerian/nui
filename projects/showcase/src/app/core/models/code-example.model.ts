@@ -44,6 +44,21 @@ export interface SectionNote {
 }
 
 /**
+ * Configuración de una tabla de datos (para API y Theming)
+ */
+export interface TableData {
+  /**
+   * Encabezados de la tabla
+   */
+  headers: string[];
+
+  /**
+   * Filas de datos
+   */
+  rows: string[][];
+}
+
+/**
  * Configuración de una sección de demostración de componente
  */
 export interface ComponentSection {
@@ -68,9 +83,14 @@ export interface ComponentSection {
   anchor: string;
 
   /**
-   * Ejemplos de código para esta sección
+   * Ejemplos de código para esta sección (opcional)
    */
-  examples: CodeExample[];
+  examples?: CodeExample[];
+
+  /**
+   * Datos de tabla para API o Theming (opcional)
+   */
+  table?: TableData;
 
   /**
    * Nota informativa (opcional)

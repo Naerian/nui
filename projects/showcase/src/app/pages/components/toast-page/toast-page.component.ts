@@ -1,9 +1,10 @@
 ﻿import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { ButtonComponent, ToastService, ActionMenuComponent } from 'nui';
+import { ButtonComponent, ToastService } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
+import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';
 import { BaseComponentPage } from '../../../core/base/base-component-page';
 import { TOAST_PAGE_CONFIG } from './toast-page.config';
 
@@ -16,7 +17,7 @@ import { TOAST_PAGE_CONFIG } from './toast-page.config';
     ButtonComponent,
     CodeBlockComponent,
     SectionTitleComponent,
-    ActionMenuComponent,
+    ComponentTabsComponent,
   ],
   templateUrl: './toast-page.component.html',
   styleUrl: './toast-page.component.scss',
@@ -24,6 +25,45 @@ import { TOAST_PAGE_CONFIG } from './toast-page.config';
 export class ToastPageComponent extends BaseComponentPage {
   override pageConfig = TOAST_PAGE_CONFIG;
   private toastService = inject(ToastService);
+
+  tabs: ComponentTab[] = [
+    {
+      id: 'examples',
+      label: 'common.tabs.examples',
+      icon: 'ri-code-s-slash-line',
+      sections: [
+        'basic',
+        'with-title',
+        'with-actions',
+        'positions',
+        'icon-top',
+        'custom-icons',
+        'duration',
+        'loading',
+      ],
+    },
+    {
+      id: 'api',
+      label: 'common.tabs.api',
+      icon: 'ri-braces-line',
+      sections: ['api-service', 'api-config', 'api-global', 'api-types', 'api-usage'],
+    },
+    {
+      id: 'theming',
+      label: 'common.tabs.theming',
+      icon: 'ri-palette-line',
+      sections: [
+        'theming-container',
+        'theming-typography',
+        'theming-icon',
+        'theming-close',
+        'theming-progress',
+        'theming-types',
+        'theming-animations',
+        'theming-examples',
+      ],
+    },
+  ];
 
   // === BASIC TOASTS ===
   showSuccess(): void {

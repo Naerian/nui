@@ -1,6 +1,6 @@
 /**
  * Configuración del menú lateral de navegación
- * 
+ *
  * Este archivo centraliza toda la estructura del menú para facilitar
  * el mantenimiento y la adición de nuevos componentes.
  */
@@ -17,6 +17,12 @@ export interface MenuItem {
  * Configuración completa del menú de navegación
  */
 export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
+  {
+    label: 'Home',
+    translationKey: 'sidebar.home',
+    route: '/',
+    icon: 'ri-home-line',
+  },
   {
     label: 'Getting Started',
     translationKey: 'sidebar.gettingStarted',
@@ -42,6 +48,38 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
     translationKey: 'sidebar.theming',
     route: '/theming',
     icon: 'ri-palette-line',
+    children: [
+      {
+        label: 'Overview',
+        translationKey: 'sidebar.themingOverview',
+        route: '/theming/overview',
+        icon: 'ri-information-line',
+      },
+      {
+        label: 'Presets',
+        translationKey: 'sidebar.themingPresets',
+        route: '/theming/presets',
+        icon: 'ri-palette-fill',
+      },
+      {
+        label: 'Architecture',
+        translationKey: 'sidebar.themingArchitecture',
+        route: '/theming/architecture',
+        icon: 'ri-building-line',
+      },
+      {
+        label: 'Dark Mode',
+        translationKey: 'sidebar.themingDarkMode',
+        route: '/theming/dark-mode',
+        icon: 'ri-moon-line',
+      },
+      {
+        label: 'Customization',
+        translationKey: 'sidebar.themingCustomization',
+        route: '/theming/customization',
+        icon: 'ri-tools-line',
+      },
+    ],
   },
   {
     label: 'Components',
@@ -56,6 +94,12 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
         icon: 'ri-rectangle-fill',
       },
       {
+        label: 'FAB Button',
+        translationKey: 'sidebar.fabButton',
+        route: '/components/fab-button',
+        icon: 'ri-add-circle-line',
+      },
+      {
         label: 'Action Menu',
         translationKey: 'sidebar.actionMenu',
         route: '/components/action-menu',
@@ -68,9 +112,9 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
         icon: 'ri-user-line',
       },
       {
-        label: 'Button Group',
-        translationKey: 'sidebar.buttonGroup',
-        route: '/components/button-group',
+        label: 'Select Button',
+        translationKey: 'sidebar.selectButton',
+        route: '/components/select-button',
         icon: 'ri-layout-grid-line',
       },
       {
@@ -102,7 +146,19 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
         translationKey: 'sidebar.sidebarPanel',
         route: '/components/sidebar-panel',
         icon: 'ri-side-bar-fill',
-      }
+      },
+      {
+        label: 'Calendar',
+        translationKey: 'sidebar.calendar',
+        route: '/components/calendar',
+        icon: 'ri-calendar-line',
+      },
+      {
+        label: 'Time Picker',
+        translationKey: 'sidebar.timePicker',
+        route: '/components/time-picker',
+        icon: 'ri-time-line',
+      },
     ],
-  }
+  },
 ];

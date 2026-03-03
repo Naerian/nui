@@ -1,4 +1,5 @@
 @use '../config';
+@use '../variables/calendar-vars';
 @use 'sass:list';
 @use 'sass:map';
 
@@ -19,7 +20,18 @@
   margin-bottom: var(--nui-spacing-md);
   font-size: var(--nui-font-size-#{$level});
   line-height: var(--nui-line-height-#{$level});
-  font-weight: var(--nui-font-weight-#{if(list.index((h1, h2, h3), $level), 'bold', 'semibold')});
+
+  @media (max-width: 768px) {
+    font-size: var(--nui-font-size-mobile-#{$level});
+  }
+
+  $weight: 'semibold';
+
+  @if list.index((h1, h2, h3), $level) {
+    $weight: 'bold';
+  }
+
+  font-weight: var(--nui-font-weight-#{$weight});
   color: var(--nui-text-primary);
 }
 
@@ -92,9 +104,6 @@
     outline: var(--nui-focus-ring-width) solid #{$color};
     outline-offset: var(--nui-focus-ring-offset);
     border-radius: var(--nui-focus-ring-radius);
-    box-shadow:
-      0 0 0 calc(var(--nui-focus-ring-width) + 1px) var(--nui-bg-primary),
-      0 0 0 calc(var(--nui-focus-ring-width) + 2px) #{$color};
   }
 }
 

@@ -45,7 +45,6 @@
   &__avatar,
   &__excess {
     position: relative;
-    transition: var(--nui-avatar-transition);
     z-index: var(--nui-avatar-z-index-base);
     box-sizing: content-box;
 

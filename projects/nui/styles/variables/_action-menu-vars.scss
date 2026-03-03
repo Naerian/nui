@@ -11,11 +11,6 @@ $action-menu-focus-outline-offset: -1px !default;
 $action-menu-separator-padding: var(--nui-spacing-xs) 0 !default;
 $action-menu-item-notify-selected-size: 0.375rem !default;
 $action-menu-item-notify-selected-radius: 50% !default;
-$action-menu-transition:
-  background-color 0.2s ease,
-  border-color 0.2s ease,
-  color 0.2s ease,
-  box-shadow 0.2s ease !default;
 
 // MIXIN
 @mixin nui-action-menu-vars {
@@ -29,10 +24,9 @@ $action-menu-transition:
 
   // Border & Padding
   --nui-am-border-width: var(--nui-border-width-xs);
-  --nui-am-border-color: var(--nui-border-primary);
   --nui-am-border-radius: var(--nui-border-radius-md);
   --nui-am-padding: var(--nui-spacing-xs);
-  --nui-am-item-border-radius: var(--nui-border-radius-sm);
+  --nui-am-item-border-radius: calc(var(--nui-border-radius-md) - 0.125rem);
   --nui-am-focus-outline-width: #{$action-menu-focus-outline-width};
   --nui-am-focus-outline-offset: #{$action-menu-focus-outline-offset};
 
@@ -41,13 +35,10 @@ $action-menu-transition:
   --nui-am-item-notify-selected-radius: #{$action-menu-item-notify-selected-radius};
 
   // Shortcut
-  --nui-am-shortcut-bg: var(--nui-bg-tertiary);
-  --nui-am-shortcut-color: var(--nui-text-secondary);
-  --nui-am-shortcut-padding: var(--nui-spacing-xs);
+  --nui-am-shortcut-padding: 0.125rem 0.375rem;
   --nui-am-shortcut-border-width: var(--nui-border-width-xs);
-  --nui-am-shortcut-border-color: var(--nui-border-primary);
   --nui-am-shortcut-border-radius: var(--nui-border-radius-md);
-  --nui-am-shortcut-font-size: var(--nui-font-size-xs);
+  --nui-am-shortcut-font-size: 0.75rem;
 
   // Shadow
   --nui-am-shadow: var(--nui-shadow-elevated);
@@ -64,13 +55,8 @@ $action-menu-transition:
   --nui-am-separator-font-weight: var(--nui-font-weight-semibold);
 
   // Separator
-  --nui-am-separator-color: var(--nui-border-primary);
   --nui-am-separator-padding: #{$action-menu-separator-padding};
-  --nui-am-separator-label-color: var(--nui-text-tertiary);
   --nui-am-separator-label-spacing: var(--nui-spacing-xs);
-
-  // Transitions
-  --nui-am-transition: #{$action-menu-transition};
 
   // Spacing
   --nui-am-item-padding-y: var(--nui-spacing-xs);

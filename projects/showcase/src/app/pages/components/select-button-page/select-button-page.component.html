@@ -1,0 +1,222 @@
+<div class="docs-page">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h1>{{ pageConfig.title | translate }}</h1>
+      <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
+    </div>
+
+    <app-component-tabs [tabs]="tabs" [sections]="pageConfig.sections" #tabsComp>
+      @if (tabsComp.activeSections(); as activeSections) {
+        @for (section of activeSections; track section.id) {
+          <div class="section">
+            <!-- Título de sección -->
+            <app-section-title
+              [anchor]="section.anchor"
+              [title]="section.title | translate"
+              [tabId]="tabsComp.activeTabId()"
+            ></app-section-title>
+
+            @if (section.description) {
+              <p class="section-description" [innerHTML]="section.description | translate"></p>
+            }
+
+            @if (section.note) {
+              <div class="section-note" [ngClass]="section.note.type">
+                @if (section.note.icon) {
+                  <i [class]="section.note.icon"></i>
+                }
+                <p [innerHTML]="section.note.content | translate"></p>
+              </div>
+            }
+
+            <!-- Contenido específico de cada sección -->
+            @switch (section.id) {
+              @case ('basic') {
+                <div class="example-preview flex-column align-items-center">
+                  <nui-select-btn
+                    [options]="cities"
+                    [ngModel]="selectedCity()"
+                    (ngModelChange)="selectedCity.set($event)"
+                  ></nui-select-btn>
+
+                  <div class="value-display">
+                    Selected:
+                    <strong>{{ selectedCity() }}</strong>
+                  </div>
+                </div>
+              }
+
+              @case ('modes') {
+                <div class="example-preview flex-row gap-4">
+                  <div class="flex-column gap-4">
+                    <nui-select-btn
+                      mode="radio"
+                      [options]="textFormats"
+                      labelBy="label"
+                      valueBy="id"
+                      iconBy="icon"
+                      [ngModel]="selectedFormatsRadio()"
+                      (ngModelChange)="selectedFormatsRadio.set($event)"
+                    ></nui-select-btn>
+
+                    <div class="value-display">
+                      Format:
+                      <strong>{{ selectedFormatsRadio() }}</strong>
+                    </div>
+                  </div>
+
+                  <div class="flex-column gap-4">
+                    <nui-select-btn
+                      mode="checkbox"
+                      [options]="textFormats"
+                      labelBy="label"
+                      valueBy="id"
+                      iconBy="icon"
+                      [ngModel]="selectedFormats()"
+                      (ngModelChange)="selectedFormats.set($event)"
+                    ></nui-select-btn>
+
+                    <div class="value-display">
+                      Format:
+                      <strong>{{ selectedFormats() | json }}</strong>
+                    </div>
+                  </div>
+                </div>
+              }
+
+              @case ('complex') {
+                <div class="example-preview flex-column align-items-center">
+                  <nui-select-btn
+                    [options]="users"
+                    labelBy="name"
+                    valueBy="id"
+                    disabledBy="disabled"
+                    [ngModel]="selectedUser()"
+                    (ngModelChange)="selectedUser.set($event)"
+                  ></nui-select-btn>
+
+                  <div class="value-display">
+                    User ID:
+                    <strong>{{ selectedUser() }}</strong>
+                  </div>
+                </div>
+              }
+
+              @case ('icons') {
+                <div class="example-preview flex-column align-items-center">
+                  <div class="d-flex gap-4">
+                    <nui-select-btn
+                      [options]="textFormats"
+                      iconBy="icon"
+                      valueBy="id"
+                      [iconOnly]="true"
+                      mode="checkbox"
+                      [ngModel]="selectedFormats()"
+                      (ngModelChange)="selectedFormats.set($event)"
+                    ></nui-select-btn>
+                  </div>
+
+                  <div class="value-display">
+                    Format:
+                    <strong>{{ selectedFormats() | json }}</strong>
+                  </div>
+                </div>
+              }
+
+              @case ('colors') {
+                <div class="example-preview flex-row gap-4">
+                  <nui-select-btn [options]="['Yes', 'No']" color="success"></nui-select-btn>
+                  <nui-select-btn
+                    [options]="['High', 'Med', 'Low']"
+                    color="danger"
+                    variant="ghost"
+                  ></nui-select-btn>
+                  <nui-select-btn
+                    [options]="['On', 'Off']"
+                    color="warning"
+                    variant="outline"
+                  ></nui-select-btn>
+                </div>
+              }
+
+              @case ('segmented') {
+                <div class="example-preview flex-column align-items-center">
+                  <nui-select-btn
+                    variant="segmented"
+                    [options]="periods"
+                    [ngModel]="selectedPeriod()"
+                    (ngModelChange)="selectedPeriod.set($event)"
+                  ></nui-select-btn>
+
+                  <div class="value-display">
+                    Period:
+                    <strong>{{ selectedPeriod() }}</strong>
+                  </div>
+                </div>
+              }
+
+              @case ('sizes') {
+                <div class="example-preview flex-row gap-4">
+                  <nui-select-btn
+                    [options]="['S', 'M', 'L']"
+                    size="xs"
+                    layout="segmented"
+                  ></nui-select-btn>
+                  <nui-select-btn
+                    [options]="['Red', 'Green', 'Blue']"
+                    size="md"
+                    layout="segmented"
+                    color="secondary"
+                  ></nui-select-btn>
+                  <nui-select-btn
+                    [options]="['Month', 'Year']"
+                    size="xl"
+                    layout="segmented"
+                    color="accent"
+                  ></nui-select-btn>
+                </div>
+              }
+
+              @case ('width') {
+                <div class="example-preview">
+                  <div style="width: 100%; max-width: 400px">
+                    <nui-select-btn width="full" [options]="['Log In', 'Sign Up']"></nui-select-btn>
+                  </div>
+                </div>
+              }
+            }
+
+            <!-- Tabla de datos (para API o Theming) -->
+            @if (section.table) {
+              <div class="api-table">
+                <table>
+                  <thead>
+                    <tr>
+                      @for (header of section.table.headers; track $index) {
+                        <th [innerHTML]="header | translate"></th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of section.table.rows; track $index) {
+                      <tr>
+                        @for (cell of row; track $index) {
+                          <td [innerHTML]="cell | translate"></td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+
+            <!-- Code blocks asociados a esta sección -->
+            @if (section.examples && section.examples.length > 0) {
+              <app-code-block [examples]="section.examples"></app-code-block>
+            }
+          </div>
+        }
+      }
+    </app-component-tabs>
+  </div>
+</div>

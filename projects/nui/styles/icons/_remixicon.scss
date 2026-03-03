@@ -10,17 +10,11 @@
 */
 
 // ========================================
-// IMPORTANTE: Uso de CDN
+// IMPORTANT: Using CDN
 // ========================================
-// Para evitar problemas con la resolución de rutas de fuentes,
-// RemixIcon se carga desde el CDN oficial.
-// Esto permite que la librería funcione tanto con @import SCSS
-// como con CSS pre-compilado sin configuración adicional.
-//
-// Si prefieres auto-hospedar las fuentes:
-// 1. Descarga las fuentes de https://github.com/Remix-Design/RemixIcon
-// 2. Colócalas en src/assets/fonts/
-// 3. Reemplaza el @import url() con @font-face apuntando a las rutas correctas
+// To avoid issues with font path resolution,
+// RemixIcon is loaded from the official CDN.
+// This allows the library to work both with @import SCSS
+// and with pre-compiled CSS without additional configuration.
 // ========================================
-
 @import url('https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css');

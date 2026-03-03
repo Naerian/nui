@@ -1,27 +1,26 @@
 .showcase-header {
-  background-color: var(--nui-bg-primary);
-  border-bottom: 1px solid var(--nui-border-primary);
+  background-color: var(--nui-surface);
+  border-bottom: 1px solid var(--nui-border-high);
   padding: 0.75rem 0;
   position: sticky;
   top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 8px var(--nui-box-shadow--sm);
+  z-index: var(--nui-z-index-docked);
+  box-shadow: 0 2px 8px var(--nui-box-shadow-sm);
 
   .btn-menu-toggle {
     background: none;
     border: none;
     font-size: 1.5rem;
-    color: var(--nui-text-primary);
+    color: var(--nui-on-surface);
     cursor: pointer;
     padding: 0.25rem 0.5rem;
     margin-right: 1rem;
-    transition: color 0.2s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
     &:hover {
-      color: var(--nui-color-primary);
+      color: var(--nui-primary);
     }
 
     i {
@@ -30,33 +29,27 @@
   }
 
   .header-logo {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--nui-text-primary);
+    font-family: var(--nui-font-family);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    font-size: 1.5rem;
+    color: var(--nui-on-surface);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
 
-    i {
-      color: var(--nui-color-primary);
-      font-size: 1.5rem;
-    }
+    .nui-svg {
+      width: 2.5rem;
+      height: 2.5rem;
+      fill: var(--nui-primary);
 
-    @media (max-width: 767px) {
-      font-size: 1rem;
-      
-      i {
-        font-size: 1.25rem;
+      path {
+        fill: currentColor;
       }
     }
 
-    @media (max-width: 576px) {
-      font-size: 0;
-      gap: 0;
-      
-      i {
-        font-size: 1.5rem;
-      }
+    &:hover {
+      text-decoration: none;
     }
   }
 

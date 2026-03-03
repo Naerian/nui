@@ -31,7 +31,7 @@ import { fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { PopoverManagerService } from './services/popover-manager.service';
 import { PopoverComponent } from './popover.component';
-import { NUI_CONFIG, NUIColor, NUIVariant } from '../../configs';
+import { injectPopoverConfig, NUIColor, NUIVariant } from '../../configs';
 
 /**
  * @name
@@ -91,7 +91,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
   private positionBuilder = inject(OverlayPositionBuilder);
   private viewContainerRef = inject(ViewContainerRef);
   private destroyRef = inject(DestroyRef);
-  private globalConfig = inject(NUI_CONFIG);
+  private globalConfig = injectPopoverConfig();
   private popoverManager = inject(PopoverManagerService);
 
   private overlayRef?: OverlayRef;
@@ -249,40 +249,42 @@ export class PopoverDirective implements OnInit, OnDestroy {
 
   // Computed signals para valores con fallback a configuración global
   private readonly position = computed<PopoverPosition>(
-    () => this.nuiPopoverPosition() ?? this.globalConfig.popover?.position ?? 'top'
+    () => this.nuiPopoverPosition() ?? this.globalConfig?.position ?? 'top'
   );
 
   private readonly event = computed<PopoverEvent>(
-    () => this.nuiPopoverEvent() ?? this.globalConfig.popover?.event ?? 'click'
+    () => this.nuiPopoverEvent() ?? this.globalConfig?.event ?? 'click'
   );
 
   private readonly showDelay = computed(
-    () => this.nuiPopoverShowDelay() ?? this.globalConfig.popover?.showDelay ?? 0
+    () => this.nuiPopoverShowDelay() ?? this.globalConfig?.showDelay ?? 0
   );
 
   private readonly hideDelay = computed(
-    () => this.nuiPopoverHideDelay() ?? this.globalConfig.popover?.hideDelay ?? 0
+    () => this.nuiPopoverHideDelay() ?? this.globalConfig?.hideDelay ?? 0
   );
 
   private readonly showArrow = computed(
-    () => this.nuiPopoverShowArrow() ?? this.globalConfig.popover?.showArrow ?? true
+    () => this.nuiPopoverShowArrow() ?? this.globalConfig?.showArrow ?? true
   );
 
   private readonly closeOnClickOutside = computed(
     () =>
-      this.nuiPopoverCloseOnClickOutside() ?? this.globalConfig.popover?.closeOnClickOutside ?? true
+      this.nuiPopoverCloseOnClickOutside() ??
+      this.globalConfig?.closeOnClickOutside ??
+      true
   );
 
   private readonly closeOnEscape = computed(
-    () => this.nuiPopoverCloseOnEscape() ?? this.globalConfig.popover?.closeOnEscape ?? true
+    () => this.nuiPopoverCloseOnEscape() ?? this.globalConfig?.closeOnEscape ?? true
   );
 
   private readonly maxWidth = computed(
-    () => this.nuiPopoverMaxWidth() ?? this.globalConfig.popover?.maxWidth ?? '300px'
+    () => this.nuiPopoverMaxWidth() ?? this.globalConfig?.maxWidth ?? '300px'
   );
 
   private readonly minWidth = computed<string | undefined>(
-    () => this.nuiPopoverMinWidth() ?? this.globalConfig.popover?.minWidth
+    () => this.nuiPopoverMinWidth() ?? this.globalConfig?.minWidth
   );
 
   /**
@@ -315,7 +317,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
     }
 
     // Fallback a configuración global o false
-    return this.globalConfig.popover?.allowMultiple ?? false;
+    return this.globalConfig?.allowMultiple ?? false;
   });
 
   constructor() {

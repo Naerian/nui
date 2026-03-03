@@ -4,8 +4,9 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { routes } from './app.routes';
-import { provideNUI, aura } from 'nui';
 import { Observable } from 'rxjs';
+import { minimal, provideNUI, provideNuiDateLocales } from 'nui';
+import { enUS, es } from 'date-fns/locale';
 
 // Simple custom loader for translations
 export class CustomTranslateLoader implements TranslateLoader {
@@ -31,13 +32,17 @@ export const appConfig: ApplicationConfig = {
         loader: {
           provide: TranslateLoader,
           useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
-        }
+          deps: [HttpClient],
+        },
       })
     ),
-    provideNUI({ 
-      preset: aura,
-      darkMode: 'manual'
+    provideNUI({
+      preset: minimal,
+      darkMode: 'manual',
     }),
-  ]
+    provideNuiDateLocales({
+      en: enUS,
+      es: es,
+    }),
+  ],
 };

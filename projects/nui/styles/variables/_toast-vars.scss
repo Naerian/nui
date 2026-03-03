@@ -16,42 +16,43 @@ $toast-title-size: 0.938rem !default;
 $toast-title-weight: 600 !default;
 $toast-message-size: 0.875rem !default;
 $toast-message-weight: 400 !default;
-$toast-z-index: 9999 !default;
-$toast-shadow: var(--nui-box-shadow--xl) !default;
+$toast-shadow: var(--nui-box-shadow-xl) !default;
 $toast-transition-duration: 300ms !default;
 $toast-transition-easing: cubic-bezier(0.4, 0, 0.2, 1) !default;
 
 // Mixin
 @mixin nui-toast-vars {
   // Layout
-  --toast-width: #{$toast-width};
-  --toast-width-mobile: #{$toast-width-mobile};
-  --toast-min-height: #{$toast-min-height};
-  --toast-max-width: #{$toast-max-width};
-  --toast-padding: #{$toast-padding};
-  --toast-padding-compact: #{$toast-padding-compact};
-  --toast-gap: #{$toast-gap};
+  --nui-toast-width: #{$toast-width};
+  --nui-toast-width-mobile: #{$toast-width-mobile};
+  --nui-toast-min-height: #{$toast-min-height};
+  --nui-toast-max-width: #{$toast-max-width};
+  --nui-toast-padding: #{$toast-padding};
+  --nui-toast-padding-compact: #{$toast-padding-compact};
+  --nui-toast-gap: #{$toast-gap};
 
   // Border & Shadow
-  --toast-radius: #{$toast-radius};
-  --toast-border-width: #{$toast-border-width};
-  --toast-shadow: #{$toast-shadow};
-  --toast-z-index: #{$toast-z-index};
+  --nui-toast-radius: #{$toast-radius};
+  --nui-toast-border-width: #{$toast-border-width};
+  --nui-toast-shadow: #{$toast-shadow};
 
   // Typography
-  --toast-title-size: #{$toast-title-size};
-  --toast-title-weight: #{$toast-title-weight};
-  --toast-message-size: #{$toast-message-size};
-  --toast-message-weight: #{$toast-message-weight};
+  --nui-toast-title-size: #{$toast-title-size};
+  --nui-toast-title-weight: #{$toast-title-weight};
+  --nui-toast-message-size: #{$toast-message-size};
+  --nui-toast-message-weight: #{$toast-message-weight};
 
   // Animations
-  --toast-duration: #{$toast-transition-duration};
-  --toast-easing: #{$toast-transition-easing};
+  --nui-toast-duration: #{$toast-transition-duration};
+  --nui-toast-easing: #{$toast-transition-easing};
+
+  // Z-Index
+  --nui-toast-z-index: var(--nui-z-index-status);
 
   // Stacking
-  --toast-stack-gap: 0.75rem;
-  --toast-stack-scale-1: 0.96;
-  --toast-stack-scale-2: 0.92;
-  --toast-stack-y-1: -0.5rem;
-  --toast-stack-y-2: -1rem;
+  --nui-toast-stack-gap: 0.75rem;
+  --nui-toast-stack-scale-1: 0.96;
+  --nui-toast-stack-scale-2: 0.92;
+  --nui-toast-stack-y-1: -0.5rem;
+  --nui-toast-stack-y-2: -1rem;
 }

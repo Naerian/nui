@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { 
-  ActionMenuComponent, 
-  ActionMenuItem, 
-  MenuHeaderDirective, 
-  MenuFooterDirective 
-} from 'nui';
+import { ActionMenuComponent, ActionMenuItem, MenuHeaderDirective, MenuFooterDirective } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
+import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';
 import { BaseComponentPage } from '../../../core/base/base-component-page';
 import { ACTION_MENU_PAGE_CONFIG } from './action-menu-page.config';
 
@@ -16,19 +12,54 @@ import { ACTION_MENU_PAGE_CONFIG } from './action-menu-page.config';
   selector: 'app-action-menu-page',
   standalone: true,
   imports: [
-    CommonModule, 
-    TranslateModule, 
-    ActionMenuComponent, 
-    MenuHeaderDirective, 
-    MenuFooterDirective, 
+    CommonModule,
+    TranslateModule,
+    ActionMenuComponent,
+    MenuHeaderDirective,
+    MenuFooterDirective,
     CodeBlockComponent,
-    SectionTitleComponent
+    SectionTitleComponent,
+    ComponentTabsComponent,
   ],
   templateUrl: './action-menu-page.component.html',
   styleUrls: ['./action-menu-page.component.scss'],
 })
 export class ActionMenuPageComponent extends BaseComponentPage {
-  pageConfig = ACTION_MENU_PAGE_CONFIG;
+  override pageConfig = ACTION_MENU_PAGE_CONFIG;
+
+  // Tabs configuration
+  tabs: ComponentTab[] = [
+    {
+      id: 'examples',
+      label: 'common.tabs.examples',
+      icon: 'ri-code-s-slash-line',
+      sections: [
+        'basic',
+        'separators',
+        'submenu',
+        'variants',
+        'sizes',
+        'label',
+        'disabled',
+        'withSubtitle',
+        'selected',
+        'icons',
+        'template',
+      ],
+    },
+    {
+      id: 'api',
+      label: 'common.tabs.api',
+      icon: 'ri-braces-line',
+      sections: ['api-inputs', 'api-outputs', 'api-interface'],
+    },
+    {
+      id: 'theming',
+      label: 'common.tabs.theming',
+      icon: 'ri-palette-line',
+      sections: ['theming-structure', 'theming-items', 'theming-colors'],
+    },
+  ];
 
   // Datos para ejemplos interactivos
   basicMenuItems: ActionMenuItem[] = [
@@ -62,15 +93,15 @@ export class ActionMenuPageComponent extends BaseComponentPage {
       icon: 'ri-share-line',
       children: [
         { label: 'Email', action: 'share-email', icon: 'ri-mail-line' },
-        { 
-          label: 'Social Media', 
-          action: 'share-social-media', 
+        {
+          label: 'Social Media',
+          action: 'share-social-media',
           icon: 'ri-share-box-line',
           children: [
             { label: 'Facebook', action: 'share-facebook', icon: 'ri-facebook-line' },
             { label: 'Twitter', action: 'share-twitter', icon: 'ri-twitter-line' },
             { label: 'LinkedIn', action: 'share-linkedin', icon: 'ri-linkedin-line' },
-          ]
+          ],
         },
         { label: 'Copy Link', action: 'share-link', icon: 'ri-link' },
       ],
@@ -84,100 +115,100 @@ export class ActionMenuPageComponent extends BaseComponentPage {
   ];
 
   menuWithSubtitle: ActionMenuItem[] = [
-    { 
-      label: 'John Doe', 
+    {
+      label: 'John Doe',
       subtitle: 'john@example.com',
-      icon: 'ri-user-line', 
-      action: 'user1' 
+      icon: 'ri-user-line',
+      action: 'user1',
     },
-    { 
-      label: 'Jane Smith', 
+    {
+      label: 'Jane Smith',
       subtitle: 'jane@example.com',
-      icon: 'ri-user-line', 
-      action: 'user2' 
+      icon: 'ri-user-line',
+      action: 'user2',
     },
     { separator: true },
-    { 
-      label: 'Settings', 
+    {
+      label: 'Settings',
       subtitle: 'Manage preferences',
-      icon: 'ri-settings-line', 
-      action: 'settings' 
-    }
+      icon: 'ri-settings-line',
+      action: 'settings',
+    },
   ];
 
   menuWithSelected: ActionMenuItem[] = [
-    { 
-      label: 'English', 
+    {
+      label: 'English',
       icon: 'ri-global-line',
       action: 'lang-en',
-      selected: true
+      selected: true,
     },
-    { 
-      label: 'Español', 
+    {
+      label: 'Español',
       icon: 'ri-global-line',
-      action: 'lang-es'
+      action: 'lang-es',
     },
-    { 
-      label: 'Français', 
+    {
+      label: 'Français',
       icon: 'ri-global-line',
-      action: 'lang-fr'
-    }
+      action: 'lang-fr',
+    },
   ];
 
   coloredMenuItems: ActionMenuItem[] = [
-    { label: 'Info', icon: 'ri-information-line', action: 'info' },
-    { label: 'Success', icon: 'ri-checkbox-circle-line', action: 'success' },
-    { label: 'Warning', icon: 'ri-error-warning-line', action: 'warning' },
+    { label: 'Info', icon: 'ri-information-line', action: 'info', shortcut: '⌘+I' },
+    { label: 'Success', icon: 'ri-checkbox-circle-line', action: 'success', shortcut: '⌘+S' },
+    { label: 'Warning', icon: 'ri-error-warning-line', action: 'warning', shortcut: '⌘+W' },
     { separator: true },
-    { label: 'Delete', icon: 'ri-close-circle-line', action: 'delete' },
+    { label: 'Delete', icon: 'ri-close-circle-line', action: 'delete', shortcut: '⌘+D' },
   ];
 
   menuWithBadges: ActionMenuItem[] = [
-    { 
-      label: 'Mensajes', 
+    {
+      label: 'Mensajes',
       subtitle: 'Nuevos mensajes recibidos',
-      icon: 'ri-message-line', 
+      icon: 'ri-message-line',
       action: 'messages',
-      badge: '3'
+      badge: '3',
     },
-    { 
-      label: 'Tareas', 
+    {
+      label: 'Tareas',
       subtitle: 'Tareas pendientes',
-      icon: 'ri-task-line', 
+      icon: 'ri-task-line',
       action: 'tasks',
-      badge: '7'
+      badge: '7',
     },
     { separator: true },
-    { 
-      label: 'Configuración', 
-      icon: 'ri-settings-line', 
+    {
+      label: 'Configuración',
+      icon: 'ri-settings-line',
       action: 'settings',
-      shortcut: '⌘+S'
-    }
+      shortcut: '⌘+S',
+    },
   ];
 
   menuActionOnly: ActionMenuItem[] = [
-    { 
-      label: 'Export PDF', 
+    {
+      label: 'Export PDF',
       icon: 'ri-file-pdf-line',
-      action: 'export-pdf'
+      action: 'export-pdf',
     },
-    { 
-      label: 'Export Excel', 
+    {
+      label: 'Export Excel',
       icon: 'ri-file-excel-line',
-      action: 'export-excel'
+      action: 'export-excel',
     },
     { separator: true },
-    { 
-      label: 'Share', 
+    {
+      label: 'Share',
       icon: 'ri-share-line',
-      action: 'share'
+      action: 'share',
     },
-    { 
-      label: 'Print', 
+    {
+      label: 'Print',
       icon: 'ri-printer-line',
-      action: 'print'
-    }
+      action: 'print',
+    },
   ];
 
   handleAction(item: ActionMenuItem) {

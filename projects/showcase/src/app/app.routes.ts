@@ -58,7 +58,48 @@ export const routes: Routes = [
   // ============================================
   {
     path: 'theming',
-    loadComponent: () => import('./pages/theming/theming.component').then(m => m.ThemingComponent),
+    children: [
+      {
+        path: '',
+        redirectTo: 'overview',
+        pathMatch: 'full',
+      },
+      {
+        path: 'overview',
+        loadComponent: () =>
+          import('./pages/theming/overview/overview.component').then(
+            m => m.ThemeOverviewComponent
+          ),
+      },
+      {
+        path: 'presets',
+        loadComponent: () =>
+          import('./pages/theming/presets/presets.component').then(
+            m => m.PresetsComponent
+          ),
+      },
+      {
+        path: 'architecture',
+        loadComponent: () =>
+          import('./pages/theming/architecture/architecture.component').then(
+            m => m.ThemeArchitectureComponent
+          ),
+      },
+      {
+        path: 'dark-mode',
+        loadComponent: () =>
+          import('./pages/theming/dark-mode/dark-mode.component').then(
+            m => m.DarkModeComponent
+          ),
+      },
+      {
+        path: 'customization',
+        loadComponent: () =>
+          import('./pages/theming/customization/customization.component').then(
+            m => m.CustomizationComponent
+          ),
+      },
+    ],
   },
 
   // ============================================
@@ -80,6 +121,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'fab-button',
+        loadComponent: () =>
+          import('./pages/components/fab-button-page/fab-button-page.component').then(
+            m => m.FabButtonPageComponent
+          ),
+      },
+      {
         path: 'action-menu',
         loadComponent: () =>
           import('./pages/components/action-menu-page/action-menu-page.component').then(
@@ -94,10 +142,17 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'button-group',
+        path: 'select-button',
         loadComponent: () =>
-          import('./pages/components/button-group-page/button-group-page.component').then(
-            m => m.ButtonGroupPageComponent
+          import('./pages/components/select-button-page/select-button-page.component').then(
+            m => m.SelectButtonPageComponent
+          ),
+      },
+      {
+        path: 'calendar',
+        loadComponent: () =>
+          import('./pages/components/calendar-page/calendar-page.component').then(
+            m => m.CalendarPageComponent
           ),
       },
       {
@@ -133,6 +188,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/components/sidebar-panel-page/sidebar-panel-page.component').then(
             m => m.SidebarPanelPageComponent
+          ),
+      },
+      {
+        path: 'time-picker',
+        loadComponent: () =>
+          import('./pages/components/time-picker-page/time-picker-page.component').then(
+            m => m.TimePickerPageComponent
           ),
       },
     ],

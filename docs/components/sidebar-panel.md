@@ -855,13 +855,13 @@ sidebarPanelService.open(AssistantComponent, {
   padding: var(--nui-spacing-sm);
   background: var(--surface-primary);
   border: 1px solid var(--nui-border-primary);
-  box-shadow: var(--nui-box-shadow--sm);
+  box-shadow: var(--nui-box-shadow-sm);
   opacity: 0.8;
   transition: all 0.2s ease;
   
   &:hover {
     opacity: 1;
-    box-shadow: var(--nui-box-shadow--md);
+    box-shadow: var(--nui-box-shadow-md);
   }
 }
 ```

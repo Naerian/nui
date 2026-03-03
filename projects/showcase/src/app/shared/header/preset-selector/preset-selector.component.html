@@ -1,11 +1,15 @@
 <div class="preset-selector">
-  <button 
+  <button
     class="preset-trigger"
     cdkOverlayOrigin
     #trigger="cdkOverlayOrigin"
     (click)="toggleDropdown()"
-    [attr.aria-label]="'header.preset' | translate">
-    <div class="preset-preview" [style.background]="'linear-gradient(135deg, ' + getCurrentPreset().colors.join(', ') + ')'"></div>
+    [attr.aria-label]="'header.preset' | translate"
+  >
+    <div
+      class="preset-preview"
+      [style.background]="'linear-gradient(135deg, ' + getCurrentPreset().colors.join(', ') + ')'"
+    ></div>
   </button>
 
   <ng-template
@@ -14,17 +18,25 @@
     [cdkConnectedOverlayOpen]="isOpen"
     [cdkConnectedOverlayHasBackdrop]="true"
     [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'"
-    (backdropClick)="closeDropdown()">
+    (backdropClick)="closeDropdown()"
+  >
     <div class="preset-dropdown">
-      <button
-        *ngFor="let preset of presets()"
-        class="preset-item"
-        [class.active]="preset.name === currentPreset"
-        (click)="selectPreset(preset)">
-        <div class="preset-color-box" [style.background]="'linear-gradient(135deg, ' + preset.colors.join(', ') + ')'"></div>
-        <span class="preset-name">{{ preset.translationKey | translate }}</span>
-        <i class="ri-check-line" *ngIf="preset.name === currentPreset"></i>
-      </button>
+      @for (preset of presets(); track preset) {
+        <button
+          class="preset-item"
+          [class.active]="preset.name === currentPreset"
+          (click)="selectPreset(preset)"
+        >
+          <div
+            class="preset-color-box"
+            [style.background]="'linear-gradient(135deg, ' + preset.colors.join(', ') + ')'"
+          ></div>
+          <span class="preset-name">{{ preset.translationKey | translate }}</span>
+          @if (preset.name === currentPreset) {
+            <i class="ri-check-line"></i>
+          }
+        </button>
+      }
     </div>
   </ng-template>
 </div>

@@ -1,0 +1,24 @@
+<div class="nui-component-tabs">
+  <!-- Tabs Navigation -->
+  <div class="nui-component-tabs__nav">
+    @for (tab of tabs(); track tab.id) {
+      <button
+        class="nui-component-tabs__tab"
+        [class.nui-component-tabs__tab--active]="activeTabId() === tab.id"
+        (click)="changeTab(tab.id)"
+        [attr.aria-selected]="activeTabId() === tab.id"
+        role="tab"
+      >
+        @if (tab.icon) {
+          <i [class]="tab.icon"></i>
+        }
+        <span>{{ tab.label | translate }}</span>
+      </button>
+    }
+  </div>
+
+  <!-- Tab Content (proyectado desde el padre) -->
+  <div class="nui-component-tabs__content">
+    <ng-content></ng-content>
+  </div>
+</div>

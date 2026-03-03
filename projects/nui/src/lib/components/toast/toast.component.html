@@ -22,7 +22,7 @@
         type="button"
         class="nui-toast__close-button"
         (click)="close(); $event.stopPropagation()"
-        [attr.aria-label]="translation.close"
+        [attr.aria-label]="_i18n().close"
       >
         <i class="ri-close-line"></i>
       </button>
@@ -33,7 +33,7 @@
         type="button"
         class="nui-toast__expand-button"
         (click)="toggleExpanded(); $event.stopPropagation()"
-        [attr.aria-label]="isExpanded() ? translation.collapse : translation.expand"
+        [attr.aria-label]="isExpanded() ? _i18n().collapse : _i18n().expand"
         [attr.aria-expanded]="isExpanded()"
       >
         <i [class]="isExpanded() ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"></i>

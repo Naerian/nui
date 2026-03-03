@@ -5,6 +5,7 @@
 
 /// Default font family stack for the design system
 $font-family:
+  'Inter',
   system-ui,
   -apple-system,
   'Segoe UI',
@@ -23,6 +24,12 @@ $font-size-md: 1rem !default;
 $font-size-lg: 1.125rem !default;
 $font-size-xl: 1.25rem !default;
 
+$font-size-mobile-xs: 0.625rem !default;
+$font-size-mobile-sm: 0.875rem !default;
+$font-size-mobile-md: 1rem !default;
+$font-size-mobile-lg: 1.125rem !default;
+$font-size-mobile-xl: 1.25rem !default;
+
 /// Heading font sizes based on a 1.25 modular scale
 $font-size-h6: 1rem !default;
 $font-size-h5: 1.25rem !default;
@@ -30,6 +37,13 @@ $font-size-h4: 1.5rem !default;
 $font-size-h3: 1.875rem !default;
 $font-size-h2: 2.25rem !default;
 $font-size-h1: 3rem !default;
+
+$font-size-mobile-h6: 0.875rem !default;
+$font-size-mobile-h5: 1.125rem !default;
+$font-size-mobile-h4: 1.5rem !default;
+$font-size-mobile-h3: 1.875rem !default;
+$font-size-mobile-h2: 2.25rem !default;
+$font-size-mobile-h1: 2.75rem !default;
 
 /// Font weight scale aligned with modern variable fonts
 $font-weight-regular: 400 !default;
@@ -71,19 +85,27 @@ $font-sizes: (
   xl: $font-size-xl,
 ) !default;
 
+$font-sizes-mobile: (
+  xs: $font-size-mobile-xs,
+  sm: $font-size-mobile-sm,
+  md: $font-size-mobile-md,
+  lg: $font-size-mobile-lg,
+  xl: $font-size-mobile-xl,
+) !default;
+
 /// =======================================
 /// BORDERS & RADII
 /// =======================================
 /// @group Borders
 
 /// Border radius scale with md as the standard value
-$border-radius-none: 0 !default;
+$border-radius-square: 0 !default;
 
-$border-radius-xs: 0.125rem !default;
+$border-radius-xs: 0.25rem !default;
 $border-radius-sm: 0.375rem !default;
-$border-radius-md: 0.5rem !default;
-$border-radius-lg: 0.75rem !default;
-$border-radius-xl: 1rem !default;
+$border-radius-md: 0.375rem !default;
+$border-radius-lg: 0.5rem !default;
+$border-radius-xl: 0.625rem !default;
 
 /// Fully rounded shapes
 $border-radius-circle: 50% !default;
@@ -91,10 +113,21 @@ $border-radius-pill: 624.9375rem !default;
 
 /// Border width scale aligned with the radius system
 $border-width-xs: 0.0625rem !default;
-$border-width-sm: 0.1875rem !default;
+$border-width-sm: 0.125rem !default;
 $border-width-md: 0.25rem !default;
 $border-width-lg: 0.375rem !default;
 $border-width-xl: 0.5rem !default;
+
+$border-radius: (
+  square: $border-radius-square,
+  xs: $border-radius-xs,
+  sm: $border-radius-sm,
+  md: $border-radius-md,
+  lg: $border-radius-lg,
+  xl: $border-radius-xl,
+  circle: $border-radius-circle,
+  pill: $border-radius-pill,
+) !default;
 
 /// =======================================
 /// SPACING
@@ -103,10 +136,16 @@ $border-width-xl: 0.5rem !default;
 
 /// Spacing scale based on multiples of 4px
 $padding-xs: 0.375rem !default;
-$padding-sm: 0.75rem !default;
+$padding-sm: 0.5rem !default;
 $padding-md: 1rem !default;
 $padding-lg: 1.5rem !default;
 $padding-xl: 2rem !default;
+
+$padding-mobile-xs: 0.25rem !default;
+$padding-mobile-sm: 0.5rem !default;
+$padding-mobile-md: 0.75rem !default;
+$padding-mobile-lg: 1rem !default;
+$padding-mobile-xl: 1.5rem !default;
 
 /// =======================================
 /// COMPONENT TOKENS
@@ -119,6 +158,12 @@ $height-md: 2.75rem !default;
 $height-lg: 3rem !default;
 $height-xl: 3.5rem !default;
 
+$height-mobile-xs: 1.75rem !default;
+$height-mobile-sm: 2.25rem !default;
+$height-mobile-md: 2.5rem !default;
+$height-mobile-lg: 2.75rem !default;
+$height-mobile-xl: 3rem !default;
+
 /// Height scale for interactive components
 $heights: (
   xs: $height-xs,
@@ -128,13 +173,29 @@ $heights: (
   xl: $height-xl,
 ) !default;
 
+$heights-mobile: (
+  xs: $height-mobile-xs,
+  sm: $height-mobile-sm,
+  md: $height-mobile-md,
+  lg: $height-mobile-lg,
+  xl: $height-mobile-xl,
+) !default;
+
 /// Padding scale for components (vertical horizontal)
 $paddings: (
   xs: $padding-xs $padding-sm,
-  sm: $padding-sm $padding-sm,
+  sm: $padding-xs $padding-md,
   md: $padding-sm $padding-md,
   lg: $padding-md $padding-lg,
-  xl: $padding-sm $padding-xl,
+  xl: $padding-lg $padding-xl,
+) !default;
+
+$paddings-mobile: (
+  xs: $padding-mobile-xs $padding-mobile-sm,
+  sm: $padding-mobile-xs $padding-mobile-md,
+  md: $padding-mobile-sm $padding-mobile-md,
+  lg: $padding-mobile-sm $padding-mobile-lg,
+  xl: $padding-mobile-md $padding-mobile-xl,
 ) !default;
 
 /// =======================================
@@ -160,7 +221,7 @@ $transition-timing-function-ease-in-out: ease-in-out !default;
 
 /// Focus ring configuration for keyboard navigation
 $focus-ring-width: 0.125rem !default;
-$focus-ring-offset: 0.125rem !default;
+$focus-ring-offset: -0.063rem !default;
 $focus-ring-radius: $border-radius-sm !default;
 
 /// =======================================
@@ -181,3 +242,24 @@ $breakpoint-xxl: 1536px !default;
 /// =======================================
 /// @group Animations
 $spin-duration: 1s !default;
+
+/// =======================================
+/// SCROLLBAR SIZE
+/// =======================================
+/// @group Scrollbar
+$scrollbar-width: 8px !default;
+
+// ========================================
+// Z-INDEX SYSTEM (Layer Stack)
+// ========================================
+$z-index-below: -10; // Elementos detrás del contenido (ej: fondos decorativos)
+$z-index-base: 1; // Nivel de apilamiento por defecto
+$z-index-docked: 100; // Elementos pegados (sticky)
+$z-index-elevated: 200; // Elementos fijos (fixed) o sobre el flujo normal
+$z-index-overlay: 300; // Capa base para desplegables (dropdowns, menús)
+$z-index-surface: 400; // Elementos flotantes interactivos (FAB, Go to top)
+$z-index-modal: 500; // Diálogos bloqueantes y sus fondos
+$z-index-popout: 600; // Elementos que emergen sobre modales (popovers)
+$z-index-status: 700; // Avisos críticos y notificaciones (toasts)
+$z-index-top: 800; // La capa más alta de la UI (tooltips globales)
+$z-index-max: 1000; // Límite de seguridad de la librería

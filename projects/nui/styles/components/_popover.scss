@@ -5,41 +5,32 @@
 @mixin popover-theme($color: null, $variant: 'solid') {
   // Option A: If there is no color, we use the "Surface" fallback (hardcoded or global variable)
   @if $color == null {
-    --popover-bg: var(--nui-popover-surface-bg);
-    --popover-text: var(--nui-popover-surface-text);
-    --popover-border-color: var(--nui-popover-surface-border);
-    --popover-shadow: var(--nui-popover-shadow);
+    --nui-popover-bg: var(--nui-popover-surface-bg);
+    --nui-popover-text: var(--nui-popover-surface-text);
+    --nui-popover-border-color: var(--nui-popover-surface-border);
   }
 
   // Option B: If there is a color, it is DYNAMIC
   @else {
-    // We interpolate the variant name.
-    // If you pass 'solid', it looks for '...-solid-bg'.
-    // If you pass 'ghost', it looks for '...-ghost-bg'.
-    // If you pass 'outline', it would look for '...-outline-bg' (without touching this SCSS).
-
-    --popover-bg: var(--nui-popover-#{$color}-#{$variant}-bg);
-    --popover-text: var(--nui-popover-#{$color}-#{$variant}-text);
-    --popover-border-color: var(--nui-popover-#{$color}-#{$variant}-border);
-
-    // Shadow: We can do the same or leave the default
-    --popover-shadow: var(--nui-popover-shadow);
+    --nui-popover-bg: var(--nui-popover-#{$color}-#{$variant}-bg);
+    --nui-popover-text: var(--nui-popover-#{$color}-#{$variant}-text);
+    --nui-popover-border-color: var(--nui-popover-#{$color}-#{$variant}-border);
 
     // Specific adjustment for Solid (Arrow Filter)
     // This is the only thing that might require a small helper,
-    // or you can handle it with a CSS variable as well (--popover-arrow-opacity)
+    // or you can handle it with a CSS variable as well (--nui-popover-arrow-opacity)
     @if $variant == 'solid' {
-      --popover-arrow-filter: none;
+      --nui-popover-arrow-filter: none;
     } @else {
       // Reset just in case
-      --popover-arrow-filter: drop-shadow(0 1px 0 var(--popover-border-color));
+      --nui-popover-arrow-filter: drop-shadow(0 1px 0 var(--nui-popover-border-color));
     }
   }
 }
 
 @mixin nui-popover-styles {
   .nui-popover-overlay-pane {
-    z-index: 1060 !important;
+    z-index: var(--nui-z-index-popout) !important;
     pointer-events: none;
 
     .nui-popover {
@@ -59,9 +50,9 @@
     max-width: var(--nui-popover-max-width);
     min-width: var(--nui-popover-min-width);
     padding: var(--nui-popover-padding);
-    background-color: var(--popover-bg);
-    color: var(--popover-text);
-    border: var(--nui-popover-border-width) solid var(--popover-border-color);
+    background-color: var(--nui-popover-bg);
+    color: var(--nui-popover-text);
+    border: var(--nui-popover-border-width) solid var(--nui-popover-border-color);
     border-radius: var(--nui-popover-border-radius);
     box-shadow: var(--nui-popover-shadow);
     transform-origin: center center;
@@ -76,7 +67,7 @@
     &__content {
       font-size: var(--nui-popover-font-size);
       font-weight: var(--nui-popover-font-weight);
-      line-height: var(--nui-popover-line-height);
+      line-height: 1.2;
       overflow: visible;
 
       p {
@@ -99,7 +90,7 @@
       h6 {
         margin: 0 0 0.5rem 0;
         font-weight: var(--nui-font-weight-semibold);
-        color: var(--popover-text);
+        color: var(--nui-popover-text);
       }
       h1 {
         font-size: var(--nui-font-size-lg);
@@ -135,17 +126,17 @@
       }
 
       a {
-        color: var(--nui-color-primary);
+        color: var(--nui-primary);
         text-decoration: underline;
         &:hover {
-          color: var(--nui-color-primary-hover);
+          color: var(--nui-primary-hover);
         }
       }
 
       hr {
         margin: 0.75rem 0;
         border: none;
-        border-top: 1px solid var(--popover-border-color);
+        border-top: 1px solid var(--nui-popover-border-color);
       }
     }
 
@@ -163,8 +154,8 @@
         content: '';
         width: 1.5rem;
         height: 1.5rem;
-        border: 2px solid var(--popover-border-color);
-        border-top-color: var(--nui-color-primary);
+        border: 2px solid var(--nui-popover-border-color);
+        border-top-color: var(--nui-primary);
         border-radius: 50%;
         animation: spin 0.8s linear infinite;
       }
@@ -222,8 +213,8 @@
       left: 50%;
       transform: translateX(-50%);
       border-width: 8px 8px 0 8px;
-      border-color: var(--popover-bg) transparent transparent transparent;
-      filter: drop-shadow(0 1px 0 var(--popover-border-color));
+      border-color: var(--nui-popover-bg) transparent transparent transparent;
+      filter: drop-shadow(0 1px 0 var(--nui-popover-border-color));
     }
 
     &[data-position='bottom'] &__arrow {
@@ -231,8 +222,8 @@
       left: 50%;
       transform: translateX(-50%);
       border-width: 0 8px 8px 8px;
-      border-color: transparent transparent var(--popover-bg) transparent;
-      filter: drop-shadow(0 -1px 0 var(--popover-border-color));
+      border-color: transparent transparent var(--nui-popover-bg) transparent;
+      filter: drop-shadow(0 -1px 0 var(--nui-popover-border-color));
     }
 
     &[data-position='left'] &__arrow {
@@ -240,8 +231,8 @@
       top: 50%;
       transform: translateY(-50%);
       border-width: 8px 0 8px 8px;
-      border-color: transparent transparent transparent var(--popover-bg);
-      filter: drop-shadow(1px 0 0 var(--popover-border-color));
+      border-color: transparent transparent transparent var(--nui-popover-bg);
+      filter: drop-shadow(1px 0 0 var(--nui-popover-border-color));
     }
 
     &[data-position='right'] &__arrow {
@@ -249,8 +240,8 @@
       top: 50%;
       transform: translateY(-50%);
       border-width: 8px 8px 8px 0;
-      border-color: transparent var(--popover-bg) transparent transparent;
-      filter: drop-shadow(-1px 0 0 var(--popover-border-color));
+      border-color: transparent var(--nui-popover-bg) transparent transparent;
+      filter: drop-shadow(-1px 0 0 var(--nui-popover-border-color));
     }
 
     // --- GENERATION OF COLOR & VARIANTS ---
@@ -294,12 +285,13 @@
   }
 
   .nui-popover:focus-visible {
-    outline: 2px solid var(--nui-color-primary);
+    outline: 2px solid var(--nui-primary);
     outline-offset: 2px;
   }
 
   .nui-popover-backdrop {
     @include global.overlay-backdrop();
+    z-index: var(--nui-z-index-popout) !important;
   }
 
   // Responsive mode (popover should never exceed viewport width on mobile)

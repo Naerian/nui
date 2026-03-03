@@ -1,5 +1,5 @@
-import { ZINC_GRAYS } from '../models/theme.config';
 import { ThemePreset } from '../models/theme.model';
+import { SLATE_GRAYS } from '../models/theme-grays';
 
 /**
  * Neon Preset - Bold, electric theme
@@ -9,24 +9,25 @@ export const neon: ThemePreset = {
   name: 'neon',
   colors: {
     light: {
-      primary: '#0891b2',
-      secondary: '#c026d3',
-      accent: '#7c3aed',
-      success: '#059669',
-      info: '#0284c7',
-      warning: '#df8e15',
-      danger: '#ef4444',
-      neutral: ZINC_GRAYS[500],
+      primary: '#4F46E5',
+      secondary: '#DB2777',
+      accent: '#814cfd',
+      success: '#15803D',
+      info: '#0369A1',
+      warning: '#B45309',
+      danger: '#E11D48',
+      neutral: '#3F3F46',
     },
     dark: {
-      primary: '#0e7490',
-      secondary: '#a21caf',
-      accent: '#8b46f7',
-      success: '#168767',
-      info: '#1178b1',
-      warning: '#b45309',
-      danger: '#a32121',
-      neutral: ZINC_GRAYS[400],
+      primary: '#818CF8',
+      secondary: '#F472B6',
+      accent: '#22D3EE',
+      success: '#4ADE80',
+      info: '#38BDF8',
+      warning: '#FACC15',
+      danger: '#F87171',
+      neutral: '#A1A1AA',
     },
   },
+  grays: SLATE_GRAYS
 };

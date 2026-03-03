@@ -25,12 +25,12 @@ import { FADE_IN_OUT_SCALE } from '../../animations';
 import {
   DEFAULT_COLOR,
   DEFAULT_SIZE,
-  NUI_CONFIG,
   NUIColor,
   NUISize,
   NUIVariant,
 } from '../../configs';
 import { ButtonDirective } from '../button';
+import { injectActionMenuConfig } from '../../configs/action-menu';
 
 @Component({
   selector: 'nui-action-menu',
@@ -57,7 +57,7 @@ import { ButtonDirective } from '../button';
   },
 })
 export class ActionMenuComponent {
-  private readonly globalConfig = inject(NUI_CONFIG, { optional: true });
+  private readonly globalConfig = injectActionMenuConfig();
 
   // ========================================================================
   // INPUTS (Signals)
@@ -127,16 +127,16 @@ export class ActionMenuComponent {
   // ========================================================================
 
   readonly effectiveColor = computed(
-    () => this.color() ?? this.globalConfig?.defaultColor ?? DEFAULT_COLOR
+    () => this.color() ?? this.globalConfig?.color ?? DEFAULT_COLOR
   );
 
   readonly effectiveSize = computed(
-    () => this.size() ?? this.globalConfig?.defaultSize ?? DEFAULT_SIZE
+    () => this.size() ?? this.globalConfig?.size ?? DEFAULT_SIZE
   );
 
   /** Action menu usa 'ghost' por defecto si no se especifica nada */
   readonly effectiveVariant = computed(
-    () => this.variant() ?? this.globalConfig?.defaultVariant ?? 'ghost'
+    () => this.variant() ?? this.globalConfig?.variant ?? 'ghost'
   );
 
   /** Icono efectivo: si no hay label ni icono, ponemos un menú por defecto */

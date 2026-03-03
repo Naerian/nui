@@ -1,28 +1,33 @@
-import { COOL_GRAYS, SLATE_GRAYS, ZINC_GRAYS } from '../models/theme.config';
 import { ThemePreset } from '../models/theme.model';
+import { MAUVE_GRAYS } from '../models/theme-grays';
 
+/**
+ * Aura Preset - Ethereal, mystical theme
+ * Soft purple-based color palette with dreamy, otherworldly tones
+ */
 export const aura: ThemePreset = {
   name: 'aura',
   colors: {
     light: {
-      primary: '#0d9488',
-      secondary: COOL_GRAYS[700],
-      accent: '#7c3aed',
-      success: '#16a34a',
-      info: '#0891b2',
-      warning: '#ca8a04',
-      danger: '#b91c1c',
-      neutral: SLATE_GRAYS[600],
+      primary: '#6750A4',
+      secondary: '#625B71',
+      accent: '#7D5260',
+      success: '#2E7D32',
+      info: '#01669D',
+      warning: '#91501c',
+      danger: '#B3261E',
+      neutral: '#605D62',
     },
     dark: {
-      primary: '#129d92',
-      secondary: COOL_GRAYS[300],
-      accent: '#d853e5',
-      success: '#15803d',
-      info: '#0369a1',
-      warning: '#c7651a',
-      danger: '#b32525',
-      neutral: SLATE_GRAYS[500],
+      primary: '#D0BCFF',
+      secondary: '#CCC2DC',
+      accent: '#EFB8C8',
+      success: '#81C784',
+      info: '#4FC3F7',
+      warning: '#FFB74D',
+      danger: '#F2B8B5',
+      neutral: '#CAC4D0',
     },
   },
+  grays: MAUVE_GRAYS,
 };

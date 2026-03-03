@@ -1,13 +1,19 @@
 {
   "name": "nui-workspace",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "license": "MIT",
   "scripts": {
     "start": "nx serve showcase",
     "build:nui": "nx build nui && npm run build:styles",
+    "build:showcase": "npx nx build showcase",
+    "build:showcase:dev": "npx nx build showcase --skip-nx-cache",
+    "build:showcase:pro": "npx nx build showcase --configuration=production",
+    "build:nui:dev": "npx nx build nui --skip-nx-cache && npm run build:styles",
+    "build:nui:pro": "npx nx build nui --skip-nx-cache && --configuration=production && npm run build:styles",
+    "build:all": "npm run build:nui:pro && npm run build:showcase:pro",
     "build:styles": "npm run build:styles:nui && npm run build:styles:bundle",
     "build:styles:nui": "sass projects/nui/styles/nui.scss dist/nui/styles/nui.css --style=compressed --no-source-map",
     "build:styles:bundle": "sass projects/nui/styles/nui-bundle.scss dist/nui/styles/nui-bundle.css --style=compressed --no-source-map",
-    "build:play": "nx build showcase",
     "test:nui": "nx test nui"
   },
   "workspaces": [
@@ -27,11 +33,13 @@
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
     "@nx/angular": "21.1.3",
+    "date-fns": "^4.1.0",
     "nui": "file:dist/nui",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },
+  "sideEffects": false,
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.17",
     "@angular-devkit/core": "^17.3.17",

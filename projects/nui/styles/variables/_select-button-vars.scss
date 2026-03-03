@@ -1,0 +1,52 @@
+// ========================================
+// BUTTON GROUP - Tokens & Variables
+// ========================================
+
+// TOKENS
+// ----------------------------------------
+$select-button-z-index-base: 0 !default;
+$select-button-z-index-hover: 1 !default;
+$select-button-z-index-selected: 1 !default;
+$select-button-z-index-focus: 2 !default;
+
+$select-button-disabled-opacity: 0.4 !default;
+$select-button-container-disabled-opacity: 0.6 !default;
+
+$select-button-segmented-gap: 0.125rem !default; // 2px
+$select-button-segmented-padding: 0.125rem !default; // 2px
+
+$select-button-transition-duration: var(--nui-transition-duration-normal) !default;
+$select-button-transition-timing: var(--nui-transition-timing-function-ease) !default;
+
+// MIXIN
+// ----------------------------------------
+@mixin nui-select-btn-vars {
+  // Z-index layers
+  --nui-slc-btn-z-index-base: #{$select-button-z-index-base};
+  --nui-slc-btn-z-index-hover: #{$select-button-z-index-hover};
+  --nui-slc-btn-z-index-selected: #{$select-button-z-index-selected};
+  --nui-slc-btn-z-index-focus: #{$select-button-z-index-focus};
+
+  // Opacities
+  --nui-slc-btn-disabled-opacity: #{$select-button-disabled-opacity};
+  --nui-slc-btn-container-disabled-opacity: #{$select-button-container-disabled-opacity};
+
+  // Layout & spacing
+  --nui-slc-btn-border-width: var(--nui-border-width-xs);
+  --nui-slc-btn-overlap: calc(var(--nui-slc-btn-border-width) * -1);
+  --nui-slc-btn-segmented-gap: #{$select-button-segmented-gap};
+  --nui-slc-btn-segmented-padding: #{$select-button-segmented-padding};
+
+  // Scale factor: 1.1 means the icon is 10% larger than the text
+  --nui-slc-btn-icon-scale: 1.1;
+
+  $sizes: xs, sm, md, lg, xl;
+  @each $size in $sizes {
+    --nui-slc-btn-icon-size-#{$size}: calc(
+      var(--nui-font-size-#{$size}) * var(--nui-slc-btn-icon-scale)
+    );
+  }
+
+  // Border Radius base (inherited from the system)
+  --nui-slc-btn-radius: var(--nui-border-radius-md);
+}

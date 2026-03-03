@@ -4,6 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AvatarComponent, AvatarConfig, AvatarGroupComponent } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
+import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';
 import { BaseComponentPage } from '../../../core/base/base-component-page';
 import { AVATAR_PAGE_CONFIG } from './avatar-page.config';
 
@@ -17,12 +18,35 @@ import { AVATAR_PAGE_CONFIG } from './avatar-page.config';
     AvatarGroupComponent,
     CodeBlockComponent,
     SectionTitleComponent,
+    ComponentTabsComponent,
   ],
   templateUrl: './avatar-page.component.html',
   styleUrls: ['./avatar-page.component.scss'],
 })
 export class AvatarPageComponent extends BaseComponentPage {
-  pageConfig = AVATAR_PAGE_CONFIG;
+  override pageConfig = AVATAR_PAGE_CONFIG;
+
+  // Tabs configuration
+  tabs: ComponentTab[] = [
+    {
+      id: 'examples',
+      label: 'common.tabs.examples',
+      icon: 'ri-code-s-slash-line',
+      sections: ['basic', 'types', 'variants', 'sizes', 'colors', 'customSize', 'grouped', 'error'],
+    },
+    {
+      id: 'api',
+      label: 'common.tabs.api',
+      icon: 'ri-braces-line',
+      sections: ['api-inputs', 'api-outputs'],
+    },
+    {
+      id: 'theming',
+      label: 'common.tabs.theming',
+      icon: 'ri-palette-line',
+      sections: ['theming-sizes', 'theming-styles'],
+    },
+  ];
 
   // URL de ejemplo para las imágenes
   avatarUrl1 = 'https://i.pravatar.cc/150?img=12';

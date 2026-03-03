@@ -17,7 +17,7 @@ export class ShowcaseConfigService {
   
   private defaultConfig: ShowcaseConfig = {
     sidebarCollapsed: false,
-    currentPreset: 'aura',
+    currentPreset: 'minimal',
     isDarkMode: false,
     language: '', // Empty string means "not set yet"
     version: '1.0.0'

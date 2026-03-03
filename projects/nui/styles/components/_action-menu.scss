@@ -16,8 +16,8 @@
   --nui-am-item-hover-icon-color: #{$check};
   --nui-am-item-hover-border-color: #{$border};
   --nui-am-item-check-color: #{$check};
-  --nui-am-item-bg: inherit;
-  --nui-am-item-color: inherit;
+  --nui-am-item-bg: var(--nui-am-bg);
+  --nui-am-item-color: var(--nui-am-color);
 
   // Reutilizamos el mismo esquema para Selected
   --nui-am-item-selected-bg: #{$bg};
@@ -26,6 +26,9 @@
 
   // Hover sobre seleccionado (un poco más intenso)
   --nui-am-item-selected-hover-bg: #{$active-bg};
+
+  // Separadores
+  --nui-am-separator-color: color-mix(in srgb, #{$border}, transparent 80%);
 
   // Subtítulos (usamos opacidad sobre el color base para no necesitar más variables)
   --nui-am-item-subtitle-color: color-mix(in srgb, #{$color}, transparent 40%);
@@ -40,14 +43,13 @@
     min-width: var(--nui-am-min-width);
     max-width: var(--nui-am-max-width);
     border: var(--nui-am-border-width) solid var(--nui-am-border-color);
-    background-color: var(--nui-bg-primary);
+    background-color: var(--nui-am-bg);
     border-radius: var(--nui-am-border-radius);
     padding: var(--nui-am-padding);
     box-shadow: var(--nui-am-shadow);
     gap: var(--nui-am-padding);
     list-style: none;
     margin: 0;
-    transition: var(--nui-am-transition);
 
     &--fullWidth {
       width: 100%;
@@ -206,20 +208,15 @@
 
         .nui-action-menu__item__icon,
         .nui-action-menu__item__subtitle,
-        .nui-action-menu__item__shortcut,
         .nui-action-menu__item__arrow,
         .nui-action-menu__item__check {
           color: var(--nui-am-item-hover-icon-color);
-        }
-
-        .nui-action-menu__item__shortcut {
-          border-color: var(--nui-am-item-hover-border-color);
         }
       }
 
       &--selected {
         .nui-action-menu__item__check {
-          color: var(--nui-color-primary);
+          color: var(--nui-primary);
         }
       }
 
@@ -230,7 +227,7 @@
           width: var(--nui-am-item-notify-selected-size);
           height: var(--nui-am-item-notify-selected-size);
           border-radius: var(--nui-am-item-notify-selected-radius);
-          background-color: var(--nui-color-primary);
+          background-color: var(--nui-primary);
           margin-right: 8px;
           opacity: 0.8;
         }

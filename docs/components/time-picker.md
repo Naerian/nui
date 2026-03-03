@@ -240,7 +240,7 @@ npm run test:keyboard-navigation
   template: `
     <nui-time-picker
       [(value)]="selectedTime"
-      [config]="timeConfig"
+      [config]="timePickerConfig"
       [disabled]="isDisabled"
       (valueChange)="onTimeChange($event)">
     </nui-time-picker>
@@ -249,7 +249,7 @@ npm run test:keyboard-navigation
 export class MyComponent {
   selectedTime: TimeValue = { hour: 9, minute: 30, period: 'AM' };
   
-  timeConfig: TimePickerConfig = {
+  timePickerConfig: TimePickerConfig = {
     format: '12h',
     hourStep: 1,
     minuteStep: 15
@@ -339,8 +339,6 @@ import { TimePickerComponent } from '@shared/components/time-picker/time-picker.
 | `size` | `NUISize` | `'md'` | Tamaño (`'xs' \| 's' \| 'sm' \| 'md' \| 'lg' \| 'xl'`) |
 | `disabled` | `boolean` | `false` | Deshabilitar el picker |
 | `title` | `string` | `''` | Título opcional del picker |
-| `fromCalendar` | `boolean` | `false` | Indica si se usa desde Calendar (ajusta estilos) |
-| `variant` | `TimePickerVariant` | `'default'` | Variante visual (`'default' \| 'compact'`) |
 | `config` | `TimePickerConfig` | `{}` | Configuración avanzada (steps, min/max, presets, etc.) |
 | `defaultStrategy` | `'now' \| 'smart' \| 'empty' \| 'custom'` | `'empty'` | Estrategia para valor por defecto |
 | `defaultValue` | `Date \| string \| TimeValue` | - | Valor custom cuando strategy='custom' |
@@ -383,8 +381,6 @@ type TimePickerMode =
   | 'HOUR_MINUTE_SECOND_12'    // 12h con segundos
   | 'HOUR_MINUTE_SECOND_24'    // 24h con segundos
   | 'DURATION';                // Duración (0-N horas)
-
-type TimePickerVariant = 'default' | 'compact';
 
 type TimePickerSection = 'hour' | 'minute' | 'second' | 'period';
 
@@ -757,7 +753,7 @@ export class ExampleComponent {
   <nui-calendar 
     type="DAY"
     [showTimePicker]="true"
-    timeMode="HOUR_MINUTE_12"
+    timePickerMode="HOUR_MINUTE_12"
     formControlName="startDateTime">
   </nui-calendar>
   
@@ -1081,17 +1077,6 @@ El componente respeta el sistema de tamaños NUI:
 <nui-time-picker size="md"></nui-time-picker>
 ```
 
-### Integración con Calendar
-
-Cuando se usa dentro de un Calendar, el TimePicker ajusta automáticamente sus estilos:
-
-```html
-<nui-time-picker 
-  [fromCalendar]="true"
-  mode="HOUR_MINUTE_12">
-</nui-time-picker>
-```
-
 ### Personalización Avanzada
 
 Si necesitas estilos completamente personalizados:
@@ -1192,7 +1177,7 @@ Control fino sobre valores iniciales:
 
 - [Calendar Component](./calendar.md) - Integración perfecta con TimePicker
 - [Button Component](./button.md)
-- [Button Group Component](./button-group.md)
+- [Select Button Component](./select-button.md)
 
 ## 📚 Referencias Técnicas
 

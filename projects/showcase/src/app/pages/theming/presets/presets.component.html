@@ -1,0 +1,46 @@
+<div class="docs-page">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h1 class="page-title">{{ 'pages.theming.title' | translate }}</h1>
+      <p class="page-subtitle">{{ 'pages.theming.subtitle' | translate }}</p>
+    </div>
+
+    <div class="docs-content">
+      <p class="presets-description" [innerHTML]="'pages.theming.description' | translate"></p>
+      <div class="presets-grid">
+        <div
+          *ngFor="let preset of presets()"
+          class="preset-card"
+          [class.active]="preset.name === currentPreset().name"
+          (click)="selectPreset(preset.name)"
+        >
+          <div class="preset-header">
+            <h3 class="preset-name">{{ preset.translationKey | translate }}</h3>
+            <p class="preset-description">{{ preset.descriptionKey | translate }}</p>
+          </div>
+
+          <div class="color-palette">
+            @for (colorType of colorTypes(); track colorType) {
+              <div class="color-item">
+                <div
+                  class="color-swatch"
+                  [style.background-color]="getColor(preset, colorType.key)"
+                  [attr.title]="getColor(preset, colorType.key)"
+                ></div>
+                <div class="color-info">
+                  <span class="color-label">{{ colorType.translationKey | translate }}</span>
+                  <span class="color-value">{{ getColor(preset, colorType.key) }}</span>
+                </div>
+              </div>
+            }
+          </div>
+          <div class="gray-palette">
+            @for (gray of getGrays(preset); track gray) {
+              <div class="gray-swatch" [style.background-color]="gray" [attr.title]="gray"></div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

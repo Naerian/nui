@@ -946,15 +946,15 @@ this.toastService.success('Cambios guardados', {
 
 ## Configuración Global
 
-### provideNUIConfig
+### provideNUI
 
 ```typescript
 import { ApplicationConfig } from '@angular/core';
-import { provideNUIConfig } from '@shared/configs';
+import { provideNUI } from '@shared/configs';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideNUIConfig({
+    provideNUI({
       toast: {
         // ===== POSICIÓN Y LÍMITES =====
         position: 'top-right',              // Posición por defecto

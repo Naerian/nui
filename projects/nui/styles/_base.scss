@@ -53,7 +53,6 @@ textarea {
 a {
   color: var(--nui-color-primary);
   text-decoration: none;
-  transition: color 0.2s ease;
 
   &:hover {
     color: var(--nui-color-primary);
@@ -65,7 +64,7 @@ a {
 // SELECTION
 // ==========================================
 ::selection {
-  background-color: var(--nui-color-selection-bg);
+  background-color: var(--nui-selection);
   color: var(--nui-text-primary);
 }
 
@@ -73,12 +72,11 @@ a {
 // SCROLLBAR (Webkit browsers)
 // ==========================================
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: var(--nui-scrollbar-width);
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--nui-bg-secondary);
+  background: var(--nui-border-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -88,6 +86,11 @@ a {
   &:hover {
     background: var(--nui-border-primary);
   }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--nui-border-primary) var(--nui-border-secondary);
 }
 
 // ==========================================

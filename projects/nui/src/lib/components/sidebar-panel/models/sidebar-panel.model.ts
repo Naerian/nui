@@ -1,6 +1,7 @@
 ﻿import { TemplateRef, Type, InjectionToken } from '@angular/core';
 import { NUIColor, NUISize, NUIVariant } from '../../../configs/common/types';
 import { Observable } from 'rxjs';
+import { ButtonIconPosition, ButtonLoadingPosition, ButtonWidth } from '../../button';
 
 /**
  * Token de inyección para la configuración global del sidebar-panel
@@ -43,11 +44,11 @@ export const SIDEBAR_PANEL_SIZE_MAP: Record<SidebarPanelSize, string> = {
 
 /**
  * Customización visual de la pestaña minimizada
- * 
+ *
  * Permite personalizar completamente el aspecto del botón que aparece
  * cuando un panel se minimiza. Útil para crear botones flotantes de chat,
  * soporte, notificaciones, etc.
- * 
+ *
  * @example
  * ```typescript
  * // Chat flotante con icono personalizado
@@ -56,7 +57,7 @@ export const SIDEBAR_PANEL_SIZE_MAP: Record<SidebarPanelSize, string> = {
  *   label: 'Soporte',
  *   cssClass: 'floating-chat-button'
  * };
- * 
+ *
  * // Template completamente custom
  * const customization: MinimizedTabCustomization = {
  *   template: myCustomTemplate
@@ -93,31 +94,31 @@ export interface MinimizedTabCustomization {
 
   /**
    * Modo standalone: renderiza la pestaña fuera del contenedor agrupado
-   * 
+   *
    * **Por defecto (false):** Las pestañas se agrupan en contenedores fijos:
    * - Right: Agrupadas verticalmente en el borde derecho, centradas
    * - Left: Agrupadas verticalmente en el borde izquierdo, centradas
    * - Top: Agrupadas horizontalmente en el borde superior, centradas
    * - Bottom: Agrupadas horizontalmente en el borde inferior, centradas
-   * 
+   *
    * **Con standalone: true:**
    * - La pestaña se renderiza en un contenedor independiente
    * - No tiene restricciones de posicionamiento del contenedor padre
    * - Permite usar `position: fixed` con coordenadas libres en CSS
    * - Ideal para botones flotantes (chat, ayuda, soporte)
    * - El `cssClass` controla completamente la posición y estilo
-   * 
+   *
    * **¿Por qué es necesario?**
-   * 
+   *
    * Sin standalone, las pestañas están dentro de contenedores con
    * `transform: translateY(-50%)` o `translateX(-50%)`, lo que crea
    * un nuevo **stacking context**. Esto hace que el `position: fixed`
    * del hijo se comporte relativamente al padre transformado, no al viewport.
-   * 
+   *
    * Con standalone: true, la pestaña escapa de estas restricciones.
-   * 
+   *
    * @default false
-   * 
+   *
    * @example
    * ```typescript
    * // Botón flotante bottom-right (requiere standalone)
@@ -127,7 +128,7 @@ export interface MinimizedTabCustomization {
    *   cssClass: 'floating-chat-button',
    *   standalone: true  // 🔑 Permite posicionamiento libre
    * }
-   * 
+   *
    * // CSS correspondiente
    * ::ng-deep .floating-chat-button {
    *   position: fixed !important;
@@ -350,10 +351,10 @@ interface SidebarPanelConfigBase<D = any> {
 
   /**
    * Customización visual de la pestaña minimizada
-   * 
+   *
    * Solo aplica cuando `minimizable: true`. Permite personalizar el aspecto
    * del botón que aparece cuando el panel se minimiza.
-   * 
+   *
    * @example
    * ```typescript
    * // Chat flotante personalizado
@@ -368,23 +369,23 @@ interface SidebarPanelConfigBase<D = any> {
 
   /**
    * Template de Angular para renderizar contenido personalizado
-   * 
+   *
    * Si se proporciona, se renderiza en lugar del componente dinámico.
    * Tiene prioridad sobre `htmlContent`.
-   * 
+   *
    * Útil para contenido dinámico con bindings, eventos y lógica de Angular
    * sin necesidad de crear un componente completo.
-   * 
+   *
    * @example
    * ```typescript
    * // En el componente
    * ＠ViewChild('userTemplate') userTemplate!: TemplateRef<any>;
-   * 
+   *
    * // Abrir sidebar
    * this.sidebarService.open({
    *   title: 'Usuario',
    *   contentTemplate: this.userTemplate,
-   *   templateContext: { 
+   *   templateContext: {
    *     user: this.currentUser,
    *     onEdit: () => console.log('Edit')
    *   }
@@ -395,13 +396,13 @@ interface SidebarPanelConfigBase<D = any> {
 
   /**
    * Contenido HTML como string para casos simples
-   * 
+   *
    * Se renderiza usando `[innerHTML]`. Solo se usa si no se proporciona
    * `contentTemplate` ni un componente.
-   * 
+   *
    * Útil para notificaciones, mensajes de confirmación, o contenido
    * estático que no requiere lógica compleja.
-   * 
+   *
    * @example
    * ```typescript
    * this.sidebarService.open({
@@ -415,10 +416,10 @@ interface SidebarPanelConfigBase<D = any> {
 
   /**
    * Contexto para pasar datos al template
-   * 
+   *
    * Solo aplica cuando se usa `contentTemplate`. Los datos se pasan
    * al template como variables de contexto.
-   * 
+   *
    * @example
    * ```typescript
    * // Template en el componente
@@ -426,11 +427,11 @@ interface SidebarPanelConfigBase<D = any> {
    *   <p>{{ user.name }}</p>
    *   <button (click)="onSave()">Guardar</button>
    * </ng-template>
-   * 
+   *
    * // Abrir sidebar
    * this.sidebarService.open({
    *   contentTemplate: this.myTemplate,
-   *   templateContext: { 
+   *   templateContext: {
    *     user: { name: 'Juan' },
    *     onSave: () => console.log('Saving...')
    *   }
@@ -442,11 +443,11 @@ interface SidebarPanelConfigBase<D = any> {
 
 /**
  * Configuración del sidebar-panel
- * 
+ *
  * **Tipos condicionales:**
  * - Si `minimizable` es `true`, `id` es **OBLIGATORIO**
  * - Si `minimizable` es `false` o `undefined`, `id` es **opcional**
- * 
+ *
  * @example
  * ```typescript
  * // Válido - minimizable: true con id
@@ -454,13 +455,13 @@ interface SidebarPanelConfigBase<D = any> {
  *   minimizable: true,
  *   id: 'mi-panel'
  * };
- * 
+ *
  * // Error de compilación - minimizable: true sin id
  * const config: SidebarPanelConfig = {
  *   minimizable: true
  *   // Error: Property 'id' is missing
  * };
- * 
+ *
  * // Válido - sin minimizable, id opcional
  * const config: SidebarPanelConfig = {
  *   position: 'right'
@@ -470,51 +471,6 @@ interface SidebarPanelConfigBase<D = any> {
 export type SidebarPanelConfig<D = any> =
   | (SidebarPanelConfigBase<D> & { minimizable: true; id: string })
   | (SidebarPanelConfigBase<D> & { minimizable?: false; id?: string });
-
-/**
- * Configuración por defecto del sidebar-panel
- */
-export const DEFAULT_SIDEBAR_PANEL_CONFIG: Required<
-  Omit<
-    SidebarPanelConfigBase,
-    | 'data'
-    | 'headerTemplate'
-    | 'footerTemplate'
-    | 'preventClose'
-    | 'ariaDescribedBy'
-    | 'title'
-    | 'width'
-    | 'height'
-    | 'maxWidth'
-    | 'maxHeight'
-    | 'backdropClass'
-    | 'panelClass'
-    | 'customButtons'
-    | 'minimizedTabCustomization'
-    | 'contentTemplate'
-    | 'htmlContent'
-    | 'templateContext'
-  >
-> & { minimizable: false } = {
-  position: 'right',
-  size: 'md',
-  showHeader: true,
-  showCloseButton: true,
-  hasBackdrop: true,
-  closeOnBackdropClick: true,
-  closeOnEscape: true,
-  closeOnRouteChange: false,
-  autoFocus: true,
-  mobileFullScreen: false,
-  breakpoint: 768,
-  scrollStrategy: 'block',
-  ariaLabel: 'Slide Panel',
-  animationDuration: 225, // Matching Material-UI Drawer (225ms entrada, 195ms salida)
-  minimizable: false,
-  zIndex: 1040, // Debe ser mayor que overlay-z-index (1039)
-  allowMultiple: false,
-  lazyLoad: true,
-};
 
 /**
  * Eventos del sidebar-panel
@@ -570,6 +526,12 @@ export interface SidebarPanelStackItem {
  */
 export interface SidebarPanelAction {
   /**
+   * Identificador único de la acción (opcional, útil para updates dinámicos)
+   * Si no se proporciona, se genera un ID interno.
+   */
+  id?: string;
+
+  /**
    * Etiqueta visible del botón
    */
   label: string;
@@ -579,6 +541,12 @@ export interface SidebarPanelAction {
    * @example 'ri-save-line', 'ri-close-line'
    */
   icon?: string;
+
+  /**
+   * Posición del icono en el botón
+   * @default 'start'
+   */
+  iconPosition?: ButtonIconPosition;
 
   /**
    * Tipo de botón que determina el estilo visual
@@ -616,9 +584,21 @@ export interface SidebarPanelAction {
   loading?: boolean;
 
   /**
+   * Posición del icono de loading spinner (si loading es true)
+   * @default 'center'
+   */
+  loadingPosition?: ButtonLoadingPosition;
+
+  /**
    * Clases CSS adicionales
    */
   class?: string;
+
+  /**
+   * Anchura del botón (opcional)
+   * @default 'auto'
+   */
+  width?: ButtonWidth;
 }
 
 /**
@@ -636,6 +616,12 @@ export interface SidebarPanelCustomButton {
    * @example 'ri-save-line', 'ri-close-line'
    */
   icon?: string;
+
+  /**
+   * Posición del icono en el botón
+   * @default 'start'
+   */
+  iconPosition?: ButtonIconPosition;
 
   /**
    * Tipo de botón que determina el estilo visual
@@ -674,9 +660,21 @@ export interface SidebarPanelCustomButton {
   loading?: boolean;
 
   /**
+   * Posición del icono de loading spinner (si loading es true)
+   * @default 'center'
+   */
+  loadingPosition?: ButtonLoadingPosition;
+
+  /**
    * Clases CSS adicionales
    */
   class?: string;
+
+  /**
+   * Anchura del botón (opcional)
+   * @default 'auto'
+   */
+  width?: ButtonWidth;
 }
 
 // ===== UTILITY TYPES =====

@@ -1,28 +1,32 @@
-import { COOL_GRAYS, ZINC_GRAYS } from '../models/theme.config';
 import { ThemePreset } from '../models/theme.model';
 
+/**
+ * Twilight Preset - Mysterious, elegant theme
+ * Deep purples and blues with subtle accents for a sophisticated look
+ * Inspired by the colors of twilight, this preset creates a sense of calm and intrigue. The rich purples and blues evoke feelings of mystery and elegance, while the subtle accent colors add depth and interest to the overall palette. Perfect for applications that want to convey sophistication and creativity.
+ */
 export const twilight: ThemePreset = {
   name: 'twilight',
   colors: {
     light: {
-      primary: '#8b5cf6',
-      secondary: '#a78bfa',
-      accent: '#c084fc',
-      success: '#059669',
-      info: '#06b6d4',
-      warning: '#ce690a',
-      danger: '#dc2626',
-      neutral: COOL_GRAYS[600],
+      primary: '#4338CA',
+      secondary: '#5B21B6',
+      accent: '#7C3AED',
+      success: '#15803D',
+      info: '#0369A1',
+      warning: '#B45309',
+      danger: '#B91C1C',
+      neutral: '#52525B',
     },
     dark: {
-      primary: '#904fff',
-      secondary: '#8d2bdb',
-      accent: '#cc38ff',
-      success: '#1f8165',
-      info: '#1383c1',
-      warning: '#b77313',
-      danger: '#c32626',
-      neutral: COOL_GRAYS[500]
+      primary: '#A5B4FC',
+      secondary: '#C4B5FD',
+      accent: '#DDD6FE',
+      success: '#86EFAC',
+      info: '#7DD3FC',
+      warning: '#FCD34D',
+      danger: '#FCA5A5',
+      neutral: '#D4D4D8',
     },
   },
 };

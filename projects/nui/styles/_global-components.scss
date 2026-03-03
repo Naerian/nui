@@ -4,6 +4,7 @@
 @use 'components/tooltip';
 @use 'components/toast';
 @use 'components/sidebar-panel';
+@use 'components/fab-button';
 
 // Global styles for global components
 @include button.nui-button-styles;
@@ -12,3 +13,4 @@
 @include tooltip.nui-tooltip-styles;
 @include toast.nui-toast-styles;
 @include sidebar-panel.nui-sidebar-panel-styles;
+@include fab-button.nui-fab-button-styles;

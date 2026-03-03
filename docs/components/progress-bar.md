@@ -608,11 +608,11 @@ El componente utiliza las siguientes variables CSS que se generan automáticamen
 Puedes configurar valores por defecto globalmente usando `NUI_CONFIG`:
 
 ```typescript
-import { provideNUIConfig } from '@shared/configs/NUI.config';
+import { provideNUI } from '@shared/configs/NUI.config';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideNUIConfig({
+    provideNUI({
       defaultSize: 'md',
       defaultColor: 'primary'
     })

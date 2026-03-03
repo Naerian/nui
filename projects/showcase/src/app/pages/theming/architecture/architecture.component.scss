@@ -1,0 +1,667 @@
+// Architecture Component - Tema System Documentation
+.docs-page {
+  // ===========================================================================
+  // ARCHITECTURE OVERVIEW
+  // ===========================================================================
+
+  .architecture-overview {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--nui-primary-alpha-10), var(--nui-accent-alpha-10));
+    border-radius: var(--nui-border-radius-md);
+    border: 1px solid var(--nui-border-subtle);
+  }
+
+  .current-preset-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--nui-surface);
+    border-radius: var(--nui-border-radius-md);
+    border: 1px solid var(--nui-border-default);
+    font-weight: 600;
+    width: fit-content;
+    box-shadow: var(--nui-shadow-container);
+
+    i {
+      font-size: 1.25rem;
+      color: var(--nui-primary);
+    }
+
+    .mode-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding-left: 0.75rem;
+      border-left: 1px solid var(--nui-border-subtle);
+      color: var(--nui-text-secondary);
+
+      i {
+        font-size: 1rem;
+        color: var(--nui-warning);
+      }
+
+      &.dark i {
+        color: var(--nui-info);
+      }
+    }
+  }
+
+  .overview-text {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--nui-text-primary);
+    margin: 0;
+  }
+
+  // ===========================================================================
+  // LAYER HEADERS
+  // ===========================================================================
+
+  .layer-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
+  }
+
+  .layer-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--nui-primary), var(--nui-accent));
+    color: var(--nui-text-inverted);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-weight: 700;
+    box-shadow: var(--nui-shadow-elevated);
+
+    &.performance {
+      background: linear-gradient(135deg, var(--nui-success), var(--nui-info));
+      color: var(--nui-text-inverted);
+    }
+
+    .layer-number {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    i {
+      font-size: 1.5rem;
+    }
+  }
+
+  .layer-info {
+    flex: 1;
+
+    h2 {
+      margin: 0 0 0.2rem 0;
+      color: var(--nui-text-primary);
+    }
+
+    .layer-description {
+      font-size: 1rem;
+      color: var(--nui-text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+
+  // ===========================================================================
+  // LAYER 1: SEMANTIC COLORS
+  // ===========================================================================
+
+  .semantic-colors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .semantic-color-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--nui-surface-secondary);
+    border: 1px solid var(--nui-border-subtle);
+    border-radius: var(--nui-border-radius-md);
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--nui-shadow-elevated);
+    }
+
+    .color-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .color-preview {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--nui-border-radius-md);
+      box-shadow: var(--nui-shadow-interactive);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        font-size: 1.75rem;
+      }
+    }
+
+    .color-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .color-name {
+      font-weight: 700;
+      font-size: 1.125rem;
+      margin: 0 0 0.25rem 0;
+      text-transform: capitalize;
+      color: var(--nui-text-primary);
+    }
+
+    .color-value {
+      font-size: 0.75rem;
+      background: var(--nui-surface);
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--nui-border-radius-md);
+      color: var(--nui-text-secondary);
+      border: 1px solid var(--nui-border-subtle);
+      margin: 0;
+    }
+
+    .color-purpose {
+      font-size: 0.9rem;
+      color: var(--nui-text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+
+  // ===========================================================================
+  // LAYER 2: STRUCTURAL VARIABLES
+  // ===========================================================================
+
+  .structural-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .structural-card {
+    padding: 1.5rem;
+    background: var(--nui-surface-secondary);
+    border: 1px solid var(--nui-border-subtle);
+    border-radius: var(--nui-border-radius-md);
+
+    .structural-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--nui-border-subtle);
+
+      i {
+        font-size: 1.5rem;
+        color: var(--nui-primary);
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 1.125rem;
+      }
+    }
+
+    .var-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .var-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem;
+      background: var(--nui-surface);
+      border-radius: var(--nui-border-radius-md);
+      border: 1px solid var(--nui-border-subtle);
+
+      .var-preview {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--nui-border-radius-md);
+        border: 1px solid var(--nui-border-default);
+        flex-shrink: 0;
+      }
+
+      .var-details {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .var-name {
+        font-size: 0.813rem;
+        background: transparent;
+        padding: 0;
+        color: var(--nui-primary);
+        font-weight: 600;
+      }
+
+      .var-desc {
+        font-size: 0.813rem;
+        color: var(--nui-text-secondary);
+        line-height: 1.4;
+      }
+    }
+  }
+
+  // ===========================================================================
+  // LAYER 3: VARIANT GENERATION
+  // ===========================================================================
+
+  .variants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .variant-card {
+    padding: 1.5rem;
+    background: var(--nui-surface-secondary);
+    border: 1px solid var(--nui-border-subtle);
+    border-radius: var(--nui-border-radius-md);
+
+    .variant-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+
+      i {
+        font-size: 1.5rem;
+        color: var(--nui-accent);
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 1.125rem;
+      }
+    }
+
+    .variant-description {
+      font-size: 0.9rem;
+      color: var(--nui-text-secondary);
+      margin: 0 0 1.5rem 0;
+      line-height: 1.6;
+    }
+
+    .variant-examples {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .variant-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem;
+      background: var(--nui-surface);
+      border-radius: var(--nui-border-radius-md);
+
+      .variant-swatch {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--nui-border-radius-md);
+        border: 1px solid var(--nui-border-subtle);
+        box-shadow: var(--nui-shadow-field);
+      }
+
+      .variant-code {
+        font-size: 0.75rem;
+        color: var(--nui-text-primary);
+      }
+    }
+  }
+
+  // ===========================================================================
+  // LAYER 4: SHADOW SYSTEM
+  // ===========================================================================
+
+  .shadow-system {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .shadow-section {
+    h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.125rem;
+      margin-bottom: 1.5rem;
+      color: var(--nui-text-primary);
+
+      i {
+        font-size: 1.25rem;
+        color: var(--nui-info);
+      }
+    }
+  }
+
+  .shadow-primitives {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .shadow-card {
+    padding: 1.5rem;
+    background: var(--nui-surface-secondary);
+    border-radius: var(--nui-border-radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+
+    .shadow-level {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--nui-primary);
+    }
+
+    .shadow-var {
+      font-size: 0.75rem;
+      color: var(--nui-on-surface-neutral);
+      background: var(--nui-surface-neutral);
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--nui-border-radius-md);
+      word-break: break-all;
+    }
+
+    .shadow-usage {
+      font-size: 0.813rem;
+      color: var(--nui-on-surface-secondary);
+      line-height: 1.4;
+    }
+  }
+
+  .shadow-aliases-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .alias-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--nui-surface-secondary);
+    border: 1px solid var(--nui-border-subtle);
+    border-radius: var(--nui-border-radius-md);
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .alias-preview {
+      min-width: 140px;
+      padding: 1.5rem;
+      background: var(--nui-surface);
+      border-radius: var(--nui-border-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      code {
+        font-size: 0.75rem;
+        color: var(--nui-text-primary);
+      }
+    }
+
+    .alias-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .alias-mapping {
+        font-size: 0.9rem;
+        color: var(--nui-text-secondary);
+
+        strong {
+          color: var(--nui-primary);
+          text-transform: uppercase;
+        }
+      }
+
+      .alias-usage {
+        font-size: 0.813rem;
+        color: var(--nui-text-secondary);
+        line-height: 1.5;
+      }
+    }
+  }
+
+  // ===========================================================================
+  // LAYER 5: COMPONENT VARIABLES
+  // ===========================================================================
+
+  .components-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 1.5rem;
+
+    @media (max-width: 767px) {
+      grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    }
+  }
+
+  .component-card {
+    padding: 1.5rem;
+    background: var(--nui-surface-secondary);
+    border: 1px solid var(--nui-border-subtle);
+    border-radius: var(--nui-border-radius-md);
+
+    .component-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--nui-border-subtle);
+
+      i {
+        font-size: 1.5rem;
+        color: var(--nui-success);
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 1.125rem;
+      }
+    }
+
+    .component-description {
+      font-size: 0.9rem;
+      color: var(--nui-text-secondary);
+      margin: 0 0 1.5rem 0;
+      line-height: 1.6;
+    }
+
+    .component-variants {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .component-variant {
+      padding: 1rem;
+      background: var(--nui-surface);
+      border-radius: var(--nui-border-radius-md);
+      border: 1px solid var(--nui-border-subtle);
+
+      strong {
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
+        color: var(--nui-text-primary);
+      }
+
+      .variant-vars {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        li {
+          code {
+            font-size: 0.75rem;
+            background: var(--nui-surface-secondary);
+            padding: 0.5rem;
+            border-radius: var(--nui-border-radius-md);
+            display: block;
+            color: var(--nui-primary);
+            border: 1px solid var(--nui-border-subtle);
+          }
+        }
+      }
+    }
+  }
+
+  // ===========================================================================
+  // PERFORMANCE LAYER
+  // ===========================================================================
+
+  .performance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .performance-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--nui-success-alpha-10), var(--nui-info-alpha-10));
+    border: 1px solid var(--nui-border-subtle);
+    border-radius: var(--nui-border-radius-md);
+    text-align: center;
+
+    i {
+      font-size: 3rem;
+      color: var(--nui-success);
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.125rem;
+      margin: 0 0 0.75rem 0;
+      color: var(--nui-text-primary);
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: var(--nui-text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+
+  // ===========================================================================
+  // ARCHITECTURE FLOW
+  // ===========================================================================
+
+  .flow-diagram {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .flow-step {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--nui-surface-secondary);
+    border: 2px solid var(--nui-border-default);
+    border-radius: var(--nui-border-radius-md);
+
+    .step-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: var(--nui-primary);
+      color: var(--nui-text-inverted);
+      border-radius: 50%;
+      font-size: 1.5rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .step-content {
+      flex: 1;
+
+      strong {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        color: var(--nui-text-primary);
+      }
+
+      p {
+        font-size: 0.9rem;
+        color: var(--nui-text-secondary);
+        line-height: 1.6;
+        margin: 0;
+      }
+    }
+  }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+
+    i {
+      font-size: 2rem;
+      color: var(--nui-primary);
+    }
+  }
+}

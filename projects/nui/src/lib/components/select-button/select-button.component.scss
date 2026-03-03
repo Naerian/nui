@@ -1,0 +1,159 @@
+@use './../../../../styles/variables/select-button-vars';
+
+:host {
+  @include select-button-vars.nui-select-btn-vars;
+}
+
+@mixin select-button-theme($variant, $color-name) {
+  --nui-slc-btn-track-bg: var(--nui-slc-btn-#{$color-name}-#{$variant}-track-bg, transparent);
+  --nui-slc-btn-track-border: var(
+    --nui-slc-btn-#{$color-name}-#{$variant}-track-border,
+    transparent
+  );
+
+  --nui-slc-btn-base-bg: var(--nui-slc-btn-#{$color-name}-#{$variant}-bg);
+  --nui-slc-btn-base-text: var(--nui-slc-btn-#{$color-name}-#{$variant}-text);
+  --nui-slc-btn-base-border: var(--nui-slc-btn-#{$color-name}-#{$variant}-border);
+  --nui-slc-btn-hover-bg: var(--nui-slc-btn-#{$color-name}-#{$variant}-hover-bg);
+
+  --nui-slc-btn-sel-bg: var(--nui-slc-btn-#{$color-name}-#{$variant}-sel-bg);
+  --nui-slc-btn-sel-text: var(--nui-slc-btn-#{$color-name}-#{$variant}-sel-text);
+  --nui-slc-btn-sel-border: var(--nui-slc-btn-#{$color-name}-#{$variant}-sel-border);
+}
+
+.nui-select-btn {
+  display: inline-flex;
+  align-items: stretch;
+  position: relative;
+  border-radius: var(--nui-slc-btn-radius);
+  user-select: none;
+  isolation: isolate;
+  border: 1px solid var(--nui-slc-btn-track-border);
+  background-color: var(--nui-slc-btn-track-bg);
+
+  &--full {
+    display: flex;
+    width: 100%;
+    .nui-select-btn__option {
+      flex: 1;
+    }
+  }
+
+  &--fit {
+    width: fit-content;
+  }
+  &--auto {
+    width: auto;
+  }
+
+  // ==================================================
+  // OPTION STYLES
+  // ==================================================
+  &__option {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    white-space: nowrap;
+    cursor: pointer;
+    background-color: var(--nui-slc-btn-base-bg);
+    color: var(--nui-slc-btn-base-text);
+    border: var(--nui-border-width-xs) solid var(--nui-slc-btn-base-border);
+    font-family: var(--nui-font-family);
+    font-weight: var(--nui-font-weight-medium);
+    z-index: var(--nui-slc-btn-z-index-base);
+
+    &:not(:first-child) {
+      margin-left: var(--nui-slc-btn-overlap, -1px);
+    }
+
+    &:first-child {
+      border-top-left-radius: inherit;
+      border-bottom-left-radius: inherit;
+    }
+
+    &:last-child {
+      border-top-right-radius: inherit;
+      border-bottom-right-radius: inherit;
+    }
+
+    &:hover:not(&--selected):not(&--disabled) {
+      background-color: var(--nui-slc-btn-hover-bg);
+      z-index: 2;
+    }
+
+    &--selected {
+      background-color: var(--nui-slc-btn-sel-bg);
+      color: var(--nui-slc-btn-sel-text);
+      border-color: var(--nui-slc-btn-sel-border);
+      z-index: 3;
+    }
+
+    &--disabled {
+      opacity: var(--nui-slc-btn-disabled-opacity);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    line-height: 1;
+  }
+
+  // ==================================================
+  // SIZES
+  // ==================================================
+  $sizes: xs, sm, md, lg, xl;
+  @each $size in $sizes {
+    &--#{$size} {
+      .nui-select-btn__option {
+        height: var(--nui-height-#{$size});
+        padding: var(--nui-padding-#{$size});
+        font-size: var(--nui-font-size-#{$size});
+        gap: var(--nui-spacing-xs);
+      }
+      .nui-select-btn__icon {
+        font-size: var(--nui-slc-btn-icon-size-#{$size});
+      }
+    }
+  }
+
+  // ==================================================
+  // VARIANTS & COLORS
+  // ==================================================
+  $variants: solid, outline, ghost, segmented;
+  $colors: primary, secondary, success, info, warning, danger, accent, neutral;
+  @each $color in $colors {
+    &--#{$color} {
+      @each $variant in $variants {
+        &.nui-select-btn--#{$variant} {
+          @include select-button-theme($variant, $color);
+        }
+      }
+    }
+  }
+
+  // ==================================================
+  // SEGMENTED (Special variant with unique styles)
+  // ==================================================
+  &--segmented {
+    gap: var(--nui-slc-btn-segmented-gap);
+    padding: var(--nui-slc-btn-segmented-padding);
+
+    .nui-select-btn__option {
+      margin: 0 !important;
+      border-radius: calc(var(--nui-slc-btn-radius) - var(--nui-slc-btn-segmented-padding));
+
+      &--selected {
+        box-shadow: var(--nui-box-shadow-sm);
+      }
+    }
+  }
+}

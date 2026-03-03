@@ -1,2 +1,2 @@
-export * from './models/paginator.model';
+export * from './models';
 export * from './paginator.component';

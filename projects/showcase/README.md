@@ -5,7 +5,7 @@ Showcase profesional para la librería de componentes NUI con soporte multiidiom
 ## ✨ Características Implementadas
 
 ### 🎨 Sistema de Temas
-- **6 Presets predefinidos**: Aura, Warm, Neon, Dopamine, Corporate, Minimal
+- **6 Presets predefinidos**: Aura, Autum, Neon, Dopamine, Corporate, Minimal
 - **Dark Mode**: Modo claro/oscuro con transiciones suaves
 - **Cambio dinámico**: Los presets y el modo oscuro se pueden cambiar en tiempo real
 - **Persistencia**: La configuración se guarda en localStorage
@@ -152,7 +152,7 @@ El showcase usa `ngx-translate` para i18n y está configurado en `app.config.ts`
 
 ```typescript
 provideNUI({ 
-  preset: aura,
+  preset: minimal,
   darkMode: 'manual'
 })
 ```

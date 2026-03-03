@@ -1,225 +1,199 @@
 import {
   Directive,
   ElementRef,
-  HostListener,
-  Input,
-  OnInit,
-  OnChanges,
+  inject,
+  input,
+  computed,
+  output,
+  booleanAttribute,
+  Renderer2,
   OnDestroy,
   AfterViewInit,
-  SimpleChanges,
-  Renderer2,
-  inject,
+  effect,
   signal,
-  WritableSignal,
-  Output,
-  EventEmitter,
 } from '@angular/core';
 import {
+  ButtonType,
   ButtonWidth,
   ButtonIconPosition,
-  ButtonType,
   ButtonLoadingPosition,
+  ButtonTypeEnum,
+  ButtonWidthEnum,
+  ButtonIconPositionEnum,
+  ButtonLoadingPositionEnum,
 } from './models/button.model';
 import {
-  NUI_CONFIG,
   NUIColor,
-  DEFAULT_COLOR,
   NUISize,
-  DEFAULT_SIZE,
   NUIVariant,
+  NUIShape,
+  DEFAULT_COLOR,
+  DEFAULT_SIZE,
+  DEFAULT_VARIANT,
+  DEFAULT_SHAPE,
 } from '../../configs';
+import { injectButtonConfig } from '../../configs/button';
 
 @Directive({
   selector: 'button[nuiButton], a[nuiButton]',
   standalone: true,
   host: {
-    '[class.nui-btn]': 'true',
-    '[attr.disabled]': 'isButton && disabled ? true : null',
-    '[attr.aria-disabled]': 'disabled ? "true" : null',
+    '[class]': 'hostClasses()',
+    '[attr.type]': 'isButton ? effectiveType() : null',
+    '[attr.disabled]': 'isButton && (disabled() || loading()) ? true : null',
+    '[attr.aria-disabled]': 'disabled() || loading() ? "true" : null',
+    '[attr.aria-label]': 'computedAriaLabel()',
+    '(click)': 'handleClick($event)',
   },
 })
-export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewInit {
-  private readonly globalConfig = inject(NUI_CONFIG);
+export class ButtonDirective implements AfterViewInit, OnDestroy {
+  private readonly globalConfig = injectButtonConfig();
   private readonly el = inject(ElementRef);
   private readonly renderer = inject(Renderer2);
 
-  _color = signal<NUIColor>(DEFAULT_COLOR);
-  @Input() set color(value: NUIColor) {
-    this._color.set(value || this.globalConfig.defaultColor || DEFAULT_COLOR);
-  }
+  // ========================================================================
+  // INPUTS (Signals)
+  // ========================================================================
+  readonly color = input<NUIColor>();
+  readonly size = input<NUISize>();
+  readonly variant = input<NUIVariant | 'link'>();
+  readonly shape = input<NUIShape>();
+  readonly width = input<ButtonWidth>();
+  readonly type = input<ButtonType>();
+  readonly raised = input(false, { transform: booleanAttribute });
+  readonly disabled = input(false, { transform: booleanAttribute });
+  readonly loading = input(false, { transform: booleanAttribute });
+  readonly iconPosition = input<ButtonIconPosition>();
+  readonly loadingPosition = input<ButtonLoadingPosition>();
 
-  _size = signal<NUISize>(DEFAULT_SIZE);
-  @Input() set size(value: NUISize) {
-    this._size.set(value || this.globalConfig.defaultSize || DEFAULT_SIZE);
-  }
+  // Inputs adicionales para contenido dinámico en directiva
+  readonly label = input<string>();
+  readonly icon = input<string>();
 
-  _width: WritableSignal<ButtonWidth> = signal('auto');
-  @Input() set width(value: ButtonWidth) {
-    this._width.set(value || 'auto');
-  }
+  readonly onClick = output<Event>();
 
-  @Input() variant: NUIVariant = 'solid';
-  @Input() disabled = false;
-  @Input() loading = false;
-  @Input() loadingPosition: ButtonLoadingPosition = 'center';
-  @Input() label?: string;
-  @Input() icon?: string;
-  @Input() iconPosition: ButtonIconPosition = 'start';
-  @Input() type: ButtonType = 'button';
-  @Output() onClick = new EventEmitter<Event>();
+  // ========================================================================
+  // COMPUTED PROPERTIES
+  // ========================================================================
 
+  /**
+   * Resolución reactiva del color final.
+   * Prioridad: Input > Global Config > Default Constant
+   */
+  readonly effectiveColor = computed(
+    () => this.color() ?? this.globalConfig?.color ?? DEFAULT_COLOR
+  );
+
+  readonly effectiveSize = computed(() => this.size() ?? this.globalConfig?.size ?? DEFAULT_SIZE);
+
+  readonly effectiveVariant = computed(
+    () => this.variant() ?? this.globalConfig?.variant ?? DEFAULT_VARIANT
+  );
+
+  readonly effectiveShape = computed(
+    () => this.shape() ?? this.globalConfig?.shape ?? DEFAULT_SHAPE
+  );
+
+  readonly effectiveIconPosition = computed(
+    () => this.iconPosition() ?? this.globalConfig?.iconPosition ?? ButtonIconPositionEnum.START
+  );
+
+  readonly effectiveLoadingPosition = computed(
+    () =>
+      this.loadingPosition() ??
+      this.globalConfig?.loadingPosition ??
+      ButtonLoadingPositionEnum.START
+  );
+
+  readonly effectiveType = computed(
+    () => this.type() ?? this.globalConfig?.type ?? ButtonTypeEnum.BUTTON
+  );
+
+  readonly effectiveWidth = computed(
+    () => this.width() ?? this.globalConfig?.width ?? ButtonWidthEnum.AUTO
+  );
+
+  readonly effectiveRaised = computed(() => this.raised() ?? this.globalConfig?.raised ?? false);
+
+  // ========================================================================
+  // ESTADO INTERNO Y DOM
+  // ========================================================================
   private mutationObserver?: MutationObserver;
   private iconElement?: HTMLElement;
-  private labelTextNode?: Text;
   private spinnerElement?: HTMLElement;
-  private isInitialRender = true; // Control de renderizado inicial
+  private labelTextNode?: Text;
 
-  get isButton(): boolean {
-    return this.el.nativeElement.tagName === 'BUTTON';
-  }
-  get isLink(): boolean {
-    return this.el.nativeElement.tagName === 'A';
-  }
+  protected readonly isButton = this.el.nativeElement.tagName === 'BUTTON';
+  private readonly _hasExternalContent = signal(false);
 
-  ngOnInit(): void {
-    this.updateClasses();
-    this.updateAttributes();
+  /**
+   * Clases calculadas reactivamente.
+   * Utiliza las escalas de altura (xs-xl) definidas en _config.scss.
+   */
+  readonly hostClasses = computed(() => {
+    return [
+      'nui-btn',
+      `nui-btn--${this.effectiveVariant()}`,
+      `nui-btn--${this.effectiveColor()}`,
+      `nui-btn--${this.effectiveSize()}`,
+      `nui-btn--${this.effectiveShape()}`,
+      `nui-btn--${this.effectiveWidth()}`,
+      this.effectiveRaised() ? 'nui-btn--raised' : '',
+      this.disabled() || this.loading() ? 'nui-btn--disabled' : '',
+      this.loading() ? 'nui-btn--loading' : '',
+      this.isIconOnly() ? 'nui-btn--icon' : '',
+    ]
+      .filter(Boolean)
+      .join(' ');
+  });
+
+  readonly isIconOnly = computed(
+    () => !!this.icon() && !this.label() && !this._hasExternalContent()
+  );
+
+  readonly computedAriaLabel = computed(() => this.label() || this.icon() || 'button');
+
+  constructor() {
+    /**
+     * Sincronización automática del DOM cuando cambian los signals de contenido.
+     * Reemplaza la lógica manual de ngOnChanges.
+     */
+    effect(
+      () => {
+        this.buildDOMStructure();
+      },
+      { allowSignalWrites: true }
+    );
   }
 
   ngAfterViewInit(): void {
-    // Ejecutamos la lógica de construcción de una vez
-    this.buildButtonContent();
     this.setupContentObserver();
-
-    // Una vez construido, marcamos como inicializado
-    setTimeout(() => (this.isInitialRender = false));
+    this.buildDOMStructure();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.isInitialRender) return; // Evitamos ejecuciones redundantes antes de AfterViewInit
-
-    if (
-      changes['color'] ||
-      changes['size'] ||
-      changes['variant'] ||
-      changes['disabled'] ||
-      changes['loading']
-    ) {
-      this.updateClasses();
-    }
-
-    if (
-      changes['icon'] ||
-      changes['label'] ||
-      changes['iconPosition'] ||
-      changes['loading'] ||
-      changes['loadingPosition']
-    ) {
-      this.buildButtonContent();
-    }
+  ngOnDestroy(): void {
+    this.mutationObserver?.disconnect();
   }
 
-  /**
-   * Orquestador de contenido: Maneja Spinner, Icono y Label de forma atómica
-   */
-  private buildButtonContent(): void {
-    // 1. Renderizar Spinner (si loading está activo)
-    this.renderSpinner();
-    // 2. Renderizar Label (si aplica)
-    this.renderLabelIfNeeded();
-    // 3. Renderizar Icono y aplicar clase nui-btn--icon si es necesario
-    this.handleIconAndLayout();
+  // ========================================================================
+  // LÓGICA DE MANIPULACIÓN DEL DOM (Renderer2)
+  // ========================================================================
+
+  private buildDOMStructure(): void {
+    const host = this.el.nativeElement;
+
+    // 1. Manejo del Spinner (Loading)
+    this.syncSpinner(host);
+
+    // 2. Manejo de la Label (Input label)
+    this.syncLabel(host);
+
+    // 3. Manejo del Icono
+    this.syncIcon(host);
   }
 
-  private setupContentObserver(): void {
-    this.mutationObserver = new MutationObserver(mutations => {
-      // Optimizamos: solo reaccionar si el cambio no fue provocado por nosotros
-      const isExternalChange = mutations.some(
-        mutation =>
-          Array.from(mutation.addedNodes).some(
-            node =>
-              node !== this.iconElement &&
-              node !== this.labelTextNode &&
-              node !== this.spinnerElement
-          ) ||
-          Array.from(mutation.removedNodes).some(
-            node =>
-              node !== this.iconElement &&
-              node !== this.labelTextNode &&
-              node !== this.spinnerElement
-          )
-      );
-
-      if (isExternalChange) {
-        this.buildButtonContent();
-      }
-    });
-
-    this.mutationObserver.observe(this.el.nativeElement, {
-      childList: true,
-      characterData: true,
-      subtree: false, // Bajamos a false para evitar bucles profundos
-    });
-  }
-
-  private handleIconAndLayout(): void {
-    this.renderIconElement();
-    const hasText = this.hasActualText();
-
-    // Gestión de clases de layout
-    if (this.icon && !hasText) {
-      this.renderer.addClass(this.el.nativeElement, 'nui-btn--icon');
-    } else {
-      this.renderer.removeClass(this.el.nativeElement, 'nui-btn--icon');
-    }
-
-    if (this.icon && this.iconPosition === 'end') {
-      this.renderer.addClass(this.el.nativeElement, 'nui-btn--icon-end');
-    } else {
-      this.renderer.removeClass(this.el.nativeElement, 'nui-btn--icon-end');
-    }
-  }
-
-  private renderIconElement(): void {
-    const element = this.el.nativeElement;
-
-    // Si está en loading, no renderizar el icono (igual que en el componente)
-    if (!this.icon || this.loading) {
-      this.iconElement?.remove();
-      this.iconElement = undefined;
-      return;
-    }
-
-    if (!this.iconElement) {
-      this.iconElement = this.renderer.createElement('i');
-      this.renderer.setAttribute(this.iconElement, 'aria-hidden', 'true');
-    }
-
-    // Actualización de clases del icono
-    if (this.iconElement) {
-      this.iconElement.className = `${this.icon} nui-btn__icon nui-btn__icon--${this.iconPosition}`;
-    }
-
-    // Posicionamiento inteligente
-    if (this.iconPosition === 'start') {
-      if (element.firstChild !== this.iconElement) {
-        this.renderer.insertBefore(element, this.iconElement, element.firstChild);
-      }
-    } else {
-      if (element.lastChild !== this.iconElement) {
-        this.renderer.appendChild(element, this.iconElement);
-      }
-    }
-  }
-
-  /**
-   * Renderiza el spinner según loadingPosition
-   */
-  private renderSpinner(): void {
-    const element = this.el.nativeElement;
-
-    if (!this.loading) {
+  private syncSpinner(host: HTMLElement): void {
+    if (!this.loading()) {
       this.spinnerElement?.remove();
       this.spinnerElement = undefined;
       return;
@@ -230,172 +204,92 @@ export class ButtonDirective implements OnInit, OnChanges, OnDestroy, AfterViewI
       this.renderer.setAttribute(this.spinnerElement, 'aria-hidden', 'true');
     }
 
-    // Actualización de clases según posición
-    if (this.spinnerElement) {
-      this.spinnerElement.className = `nui-btn__spinner nui-btn__spinner--${this.loadingPosition}`;
-    }
+    this.spinnerElement!.className = `nui-btn__spinner nui-btn__spinner--${this.effectiveLoadingPosition()}`;
 
-    // Posicionamiento según loadingPosition
-    if (this.loadingPosition === 'start') {
-      // Al inicio, antes de todo
-      if (element.firstChild !== this.spinnerElement) {
-        this.renderer.insertBefore(element, this.spinnerElement, element.firstChild);
-      }
-    } else if (this.loadingPosition === 'center') {
-      // En el centro, lo posicionamos después del contenido (label/texto)
-      // Para que esté en el centro visualmente necesitamos CSS, pero lo insertamos después del texto
-      const middlePosition = this.findMiddlePosition(element);
-      if (middlePosition) {
-        this.renderer.insertBefore(element, this.spinnerElement, middlePosition);
-      } else {
-        this.renderer.appendChild(element, this.spinnerElement);
-      }
+    // Posicionamiento
+    if (this.effectiveLoadingPosition() === ButtonLoadingPositionEnum.START) {
+      this.renderer.insertBefore(host, this.spinnerElement, host.firstChild);
     } else {
-      // Al final (end)
-      if (element.lastChild !== this.spinnerElement) {
-        this.renderer.appendChild(element, this.spinnerElement);
-      }
+      this.renderer.appendChild(host, this.spinnerElement);
     }
   }
 
-  /**
-   * Encuentra la posición del medio del contenido para insertar el spinner center
-   */
-  private findMiddlePosition(element: HTMLElement): Node | null {
-    const nodes = Array.from(element.childNodes);
-    // Buscar el último nodo de texto o el label
-    for (let i = nodes.length - 1; i >= 0; i--) {
-      const node = nodes[i];
-      if (node === this.labelTextNode || node.nodeType === Node.TEXT_NODE) {
-        return nodes[i + 1] || null;
-      }
-    }
-    return null;
-  }
-
-  private renderLabelIfNeeded(): void {
-    if (!this.label) {
+  private syncLabel(host: HTMLElement): void {
+    if (!this.label()) {
       this.labelTextNode?.remove();
       this.labelTextNode = undefined;
       return;
     }
 
-    const element = this.el.nativeElement;
     if (!this.labelTextNode) {
-      this.labelTextNode = this.renderer.createText(this.label);
+      this.labelTextNode = this.renderer.createText(this.label()!);
+      this.renderer.appendChild(host, this.labelTextNode);
     } else {
-      this.labelTextNode.textContent = this.label;
-    }
-
-    // Evitamos re-insertar si ya está en el DOM
-    if (this.labelTextNode?.parentElement !== element) {
-      if (this.iconElement && this.iconPosition === 'end') {
-        this.renderer.insertBefore(element, this.labelTextNode, this.iconElement);
-      } else {
-        this.renderer.appendChild(element, this.labelTextNode);
-      }
+      this.labelTextNode.textContent = this.label()!;
     }
   }
 
-  private hasActualText(): boolean {
-    const element = this.el.nativeElement;
-    if (!element) return !!this.label;
+  private syncIcon(host: HTMLElement): void {
+    if (!this.icon() || this.loading()) {
+      this.iconElement?.remove();
+      this.iconElement = undefined;
+      return;
+    }
 
-    const nodes = Array.from(element.childNodes);
+    if (!this.iconElement) {
+      this.iconElement = this.renderer.createElement('i');
+      this.renderer.setAttribute(this.iconElement, 'aria-hidden', 'true');
+    }
 
-    const hasVisibleContent = nodes.some((node: any) => {
-      // 1. Ignorar elementos que la propia directiva ha insertado
-      if (this.iconElement && node === this.iconElement) {
+    this.iconElement!.className = `${this.icon()} nui-btn__icon`;
+
+    if (this.effectiveIconPosition() === ButtonIconPositionEnum.START) {
+      this.renderer.insertBefore(host, this.iconElement, host.firstChild);
+    } else {
+      this.renderer.appendChild(host, this.iconElement);
+    }
+  }
+
+  private setupContentObserver(): void {
+    this.mutationObserver = new MutationObserver(() => {
+      // Convertimos childNodes a un array de Node para que TS pueda inferir
+      const nodes: Node[] = Array.from(this.el.nativeElement.childNodes);
+
+      const hasExtra = nodes.some((node: Node) => {
+        // 1. Ignorar nodos que son gestionados internamente por la directiva
+        const isInternal =
+          node === this.iconElement || node === this.spinnerElement || node === this.labelTextNode;
+
+        if (isInternal) return false;
+
+        // 2. Si es un elemento HTML (Ej: <span>, <strong>)
+        if (node.nodeType === Node.ELEMENT_NODE) return true;
+
+        // 3. Si es un nodo de texto, verificar que no sea solo espacio en blanco
+        if (node.nodeType === Node.TEXT_NODE) {
+          return !!node.textContent?.trim();
+        }
+
         return false;
-      }
-      if (this.spinnerElement && node === this.spinnerElement) {
-        return false;
-      }
+      });
 
-      // 2. Si es un nodo de texto, verificar que no esté vacío
-      if (node.nodeType === 3) {
-        // 3 es Node.TEXT_NODE
-        return !!node.textContent?.trim();
-      }
-
-      // 3. Si es un elemento HTML
-      if (node.nodeType === 1) {
-        // 1 es Node.ELEMENT_NODE
-        // Ignorar si es un icono <i> o un span.nui-btn__spinner
-        const el = node as HTMLElement;
-        if (el.tagName === 'I') return false;
-        if (el.tagName === 'SPAN' && el.classList.contains('nui-btn__spinner')) return false;
-        return true;
-      }
-
-      return false;
+      // Actualizamos la señal reactiva
+      this._hasExternalContent.set(hasExtra);
     });
 
-    return hasVisibleContent || !!this.label;
+    this.mutationObserver.observe(this.el.nativeElement, {
+      childList: true,
+      characterData: true,
+      subtree: false,
+    });
   }
 
-  private updateClasses(): void {
-    const el = this.el.nativeElement;
-
-    // Limpiamos clases dinámicas previas para evitar acumulación
-    // (Ojo: mantenemos 'nui-btn' que viene por el host binding)
-    const colorClass = `nui-btn--${this._color()}`;
-    const sizeClass = `nui-btn--${this._size()}`;
-
-    // Aplicamos color y tamaño
-    this.renderer.addClass(el, colorClass);
-    this.renderer.addClass(el, sizeClass);
-
-    // --- Lógica de Width ---
-    if (this._width() === 'full') {
-      this.renderer.addClass(el, 'nui-btn--full');
-      this.renderer.removeClass(el, 'nui-btn--fit');
-    } else if (this._width() === 'fit') {
-      this.renderer.addClass(el, 'nui-btn--fit');
-      this.renderer.removeClass(el, 'nui-btn--full');
-    } else {
-      // Si es 'auto', quitamos ambas
-      this.renderer.removeClass(el, 'nui-btn--full');
-      this.renderer.removeClass(el, 'nui-btn--fit');
-    }
-
-    // Variantes
-    if (this.variant !== 'solid') {
-      this.renderer.addClass(el, `nui-btn--${this.variant}`);
-    }
-
-    // Estados
-    if (this.disabled || this.loading) {
-      this.renderer.addClass(el, 'nui-btn--disabled');
-    } else {
-      this.renderer.removeClass(el, 'nui-btn--disabled');
-    }
-
-    if (this.loading) {
-      this.renderer.addClass(el, 'nui-btn--loading');
-    } else {
-      this.renderer.removeClass(el, 'nui-btn--loading');
-    }
-  }
-
-  private updateAttributes(): void {
-    const el = this.el.nativeElement;
-    if (this.isButton) this.renderer.setAttribute(el, 'type', this.type);
-    const aria = this.label || this.icon || 'button';
-    this.renderer.setAttribute(el, 'aria-label', aria);
-  }
-
-  @HostListener('click', ['$event'])
   handleClick(event: Event): void {
-    if (this.disabled || this.loading) {
+    if (this.disabled() || this.loading()) {
       event.preventDefault();
       event.stopPropagation();
       return;
     }
     this.onClick.emit(event);
-  }
-
-  ngOnDestroy(): void {
-    this.mutationObserver?.disconnect();
   }
 }

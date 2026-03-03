@@ -1,59 +1,31 @@
-import { NUIColor, NUISize, NUIVariant } from '../../../configs';
-
 export const DEFAULT_PAGE_SIZE_OPTIONS = [10, 20, 50, 100];
 export const DEFAULT_MAX_VISIBLE_PAGES = 5;
 export const DEFAULT_ITEMS_PER_PAGE = 10;
 export const DEFAULT_GAP = '0.5rem';
 
 /**
- * Configuración del componente Paginator
+ * Configuración de iconos aplicada, con valores por defecto
  */
-export interface PaginatorConfig {
-  /** Número máximo de páginas visibles */
-  maxVisiblePages?: number;
-  /** Mostrar botones de primera y última página */
-  showFirstLast?: boolean;
-  /** Mostrar selector de items por página */
-  showPageSizeSelector?: boolean;
-  /** Mostrar información del rango de items */
-  showItemRange?: boolean;
-  /** Mostrar input para saltar a una página específica */
-  showPageJump?: boolean;
-  /** Opciones para el selector de items por página */
-  pageSizeOptions?: number[];
-  /** Scroll automático al cambiar página */
-  autoScroll?: boolean;
-  /** Elemento al que hacer scroll (selector CSS o elemento) */
-  scrollTarget?: string | HTMLElement;
-  /** Configuración del layout personalizado */
-  layout?: PaginatorLayout;
-  /** Configuración del layout para dispositivos móviles (se usa en modo compact automático) */
-  mobileLayout?: PaginatorLayout;
-}
+export const DEFAULT_ICON_CONFIG: Required<PaginatorIcons> = {
+  first: 'ri-arrow-left-double-line',
+  previous: 'ri-arrow-left-s-line',
+  next: 'ri-arrow-right-s-line',
+  last: 'ri-arrow-right-double-line',
+  loadMore: 'ri-add-line',
+  loading: 'ri-loader-4-line',
+  prefix: 'ri-',
+};
 
 /**
- * Textos personalizables del Paginator
+ * Atajos de teclado por defecto para navegación
  */
-export interface PaginatorTexts {
-  /** Texto para "Primera página" */
-  firstPage?: string;
-  /** Texto para "Última página" */
-  lastPage?: string;
-  /** Texto para "Página anterior" */
-  previousPage?: string;
-  /** Texto para "Página siguiente" */
-  nextPage?: string;
-  /** Texto para "Ir a la página" */
-  goToPage?: string;
-  /** Texto para "Ir" (botón) */
-  go?: string;
-  /** Texto para "Items por página" */
-  itemsPerPage?: string;
-  /** Template para mostrar rango: {start}-{end} de {total} */
-  showingItems?: string;
-  /** Texto para "Página {page}" */
-  pageLabel?: string;
-}
+export const DEFAULT_KEYBOARD_CONFIG: Required<KeyboardConfig> = {
+  firstPage: ['Home'],
+  lastPage: ['End'],
+  previousPage: ['ArrowLeft'],
+  nextPage: ['ArrowRight'],
+  enabled: true,
+};
 
 /**
  * Configuración de navegación por teclado
@@ -77,8 +49,6 @@ export interface KeyboardConfig {
 export interface LoadingConfig {
   /** Mostrar loading durante cambios */
   showLoading?: boolean;
-  /** Texto durante loading */
-  loadingText?: string;
   /** Delay antes de mostrar loading (ms) */
   loadingDelay?: number;
   /** Deshabilitar controles durante loading */
@@ -86,18 +56,13 @@ export interface LoadingConfig {
 }
 
 /**
- * Configuración responsiva para diferentes breakpoints
+ * Tipos para el display de los botones del paginador
  */
-export interface ResponsiveConfig {
-  /** Configuración para móviles */
-  mobile?: Partial<PaginatorConfig>;
-  /** Configuración para tablets */
-  tablet?: Partial<PaginatorConfig>;
-  /** Breakpoints personalizados (px) */
-  breakpoints?: {
-    mobile?: number;
-    tablet?: number;
-  };
+export type PaginatorNavDisplay = 'icon' | 'text' | 'both';
+export enum PaginatorNavDisplayEnum {
+  ICON = 'icon',
+  TEXT = 'text',
+  BOTH = 'both',
 }
 
 /**
@@ -266,7 +231,7 @@ export const DEFAULT_FRACTIONAL_LAYOUT: PaginatorLayout = {
 /**
  * Configuración de iconos personalizables
  */
-export interface IconConfig {
+export interface PaginatorIcons {
   /** Icono para primera página */
   first?: string;
   /** Icono para página anterior */
@@ -284,28 +249,19 @@ export interface IconConfig {
 }
 
 /**
- * Configuración de iconos aplicada, con valores por defecto
- */
-export const DEFAULT_ICON_CONFIG: Required<IconConfig> = {
-  first: 'ri-arrow-left-double-line',
-  previous: 'ri-arrow-left-s-line',
-  next: 'ri-arrow-right-s-line',
-  last: 'ri-arrow-right-double-line',
-  loadMore: 'ri-add-line',
-  loading: 'ri-loader-4-line',
-  prefix: 'ri-',
-};
-
-/**
  * Configuración del modo infinito
  */
+export type InfiniteMode = 'scroll' | 'button' | 'hybrid';
+export enum InfiniteModeEnum {
+  SCROLL = 'scroll',
+  BUTTON = 'button',
+  HYBRID = 'hybrid',
+}
 export interface InfiniteConfig {
   /** Habilitar modo infinito */
   enabled?: boolean;
   /** Tipo de modo infinito */
-  mode?: 'scroll' | 'button' | 'hybrid';
-  /** Texto del botón "Cargar más" */
-  loadMoreText?: string;
+  mode?: InfiniteMode;
   /** Offset para detectar scroll (px desde el bottom) */
   scrollOffset?: number;
   /** Número de items a cargar por lote */
@@ -318,38 +274,6 @@ export interface InfiniteConfig {
   initialLoadedItems?: number;
   /** Callback cuando se necesitan más datos */
   onLoadMore?: () => void | Promise<void>;
-}
-
-/**
- * Configuración completa del Paginator
- */
-export interface PaginatorGlobalConfig {
-  /** Configuración básica */
-  config?: PaginatorConfig;
-  /** Textos personalizados */
-  texts?: PaginatorTexts;
-  /** Configuración de teclado */
-  keyboard?: KeyboardConfig;
-  /** Configuración de loading */
-  loading?: LoadingConfig;
-  /** Configuración responsiva */
-  responsive?: ResponsiveConfig;
-  /** Configuración de iconos */
-  icons?: IconConfig;
-  /** Configuración del modo infinito */
-  infinite?: InfiniteConfig;
-  /** Configuración del layout personalizado */
-  layout?: PaginatorLayout;
-  /** Configuración del layout para dispositivos móviles */
-  mobileLayout?: PaginatorLayout;
-  /** Configuración del layout para modo infinito */
-  infiniteLayout?: PaginatorLayout;
-  /** Apariencia */
-  appearance?: {
-    color?: NUIColor;
-    size?: NUISize;
-    variant?: NUIVariant;
-  };
 }
 
 /**
