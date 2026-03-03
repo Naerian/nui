@@ -101,6 +101,39 @@
                   <nui-button (click)="showLoading()">Show Loading</nui-button>
                 </div>
               }
+
+              @case ('native-notifications') {
+                <div class="example-preview">
+                  <nui-button
+                    [color]="'primary'"
+                    icon="ri-notification-line"
+                    (click)="requestNativePermission()"
+                  >
+                    Request Permission
+                  </nui-button>
+                  <nui-button
+                    [color]="'success'"
+                    [disabled]="nativePermission() !== 'granted'"
+                    (click)="showAlwaysNative()"
+                  >
+                    Always Native
+                  </nui-button>
+                  <nui-button
+                    [color]="'info'"
+                    [disabled]="nativePermission() !== 'granted'"
+                    (click)="showMobileNative()"
+                  >
+                    Mobile Strategy
+                  </nui-button>
+                  <nui-button
+                    [color]="'secondary'"
+                    [disabled]="nativePermission() !== 'granted'"
+                    (click)="showPreferNative()"
+                  >
+                    Prefer Native
+                  </nui-button>
+                </div>
+              }
             }
 
             <!-- Tabla de datos (para API o Theming) -->

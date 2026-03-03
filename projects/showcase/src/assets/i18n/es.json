@@ -1210,6 +1210,11 @@
         "loading": {
           "title": "Toast de carga",
           "description": "Muestra un toast con estado de carga que puede actualizarse dinámicamente cuando la operación completa."
+        },
+        "native": {
+          "title": "Notificaciones nativas del sistema",
+          "description": "Muestra notificaciones nativas del sistema operativo en lugar de los toasts de NUI. Requiere permiso del navegador y es compatible con las cuatro estrategias del enum <code>NativeNotificationStrategy</code>.",
+          "note": "<strong>Limitaciones:</strong> iOS requiere que la app esté instalada como PWA (añadida al inicio) y con versión iOS 16.4+. Las notificaciones nativas no heredan los colores del preset de NUI. El permiso debe solicitarse mediante <code>requestNativePermission()</code>."
         }
       },
       "api": {
@@ -1232,6 +1237,10 @@
         "usage": {
           "title": "Ejemplo de uso completo",
           "description": "Ejemplo completo integrando ToastService en un componente con diferentes escenarios de uso."
+        },
+        "native": {
+          "title": "API de notificaciones nativas",
+          "description": "Método y signal del servicio para gestionar el permiso y la estrategia de notificaciones nativas del sistema operativo."
         }
       },
       "theming": {

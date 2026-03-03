@@ -4,6 +4,26 @@ import { NUIColor, NUIShape, NUISize, NUIVariant } from '../../../configs';
 export const TOAST_LOADING_CLASS = 'nui-toast--loading';
 
 /**
+ * Estrategia para mostrar notificaciones nativas del sistema operativo.
+ * Requiere que el usuario haya concedido permiso (Notification.permission === 'granted').
+ *
+ * - Never        → Siempre NUI toast (comportamiento por defecto)
+ * - Mobile       → Nativas en dispositivos móviles, NUI toast en desktop
+ * - Always       → Siempre nativas (si el permiso está concedido)
+ * - PreferNative → Nativa si hay permiso; NUI toast como fallback automático
+ */
+export enum NativeNotificationStrategy {
+  /** Siempre usa NUI toast. Comportamiento por defecto. */
+  Never = 'never',
+  /** Notificación nativa en móvil, NUI toast en desktop. */
+  Mobile = 'mobile',
+  /** Siempre notificación nativa (requiere permiso concedido). */
+  Always = 'always',
+  /** Nativa si hay permiso; NUI toast como fallback automático. */
+  PreferNative = 'prefer-native',
+}
+
+/**
  * Tipos de toast predefinidos
  */
 export type ToastType = NUIColor;
@@ -311,6 +331,14 @@ export interface ToastConfig {
    * Forma de los botones de acción
    */
   buttonsShape?: NUIShape;
+
+  // ===== NOTIFICACIONES NATIVAS =====
+  /**
+   * Estrategia para mostrar notificaciones nativas del sistema operativo.
+   * Sobrescribe la estrategia global para este toast individual.
+   * Requiere haber llamado a `ToastService.requestNativePermission()` previamente.
+   */
+  nativeStrategy?: NativeNotificationStrategy;
 }
 
 /**
@@ -527,6 +555,15 @@ export interface ToastGlobalConfig {
    * @default 'rounded'
    */
   buttonsShape?: NUIShape;
+
+  // ===== NOTIFICACIONES NATIVAS =====
+  /**
+   * Estrategia global para mostrar notificaciones nativas del sistema operativo.
+   * Puede sobrescribirse por toast con `nativeStrategy` en `ToastConfig`.
+   * Requiere haber llamado a `ToastService.requestNativePermission()` previamente.
+   * @default NativeNotificationStrategy.Never
+   */
+  nativeNotifications?: NativeNotificationStrategy;
 }
 
 /**

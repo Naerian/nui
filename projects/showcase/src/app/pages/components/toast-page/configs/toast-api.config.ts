@@ -161,6 +161,12 @@ export const TOAST_API_SECTIONS: ComponentSection[] = [
           '<code class="neutral">fade</code>',
           'Exit animation',
         ],
+        [
+          '<code>nativeStrategy</code>',
+          'NativeNotificationStrategy',
+          '<code class="neutral">undefined</code>',
+          'Override native notification strategy for this specific toast',
+        ],
       ],
     },
   },
@@ -254,6 +260,37 @@ export const TOAST_API_SECTIONS: ComponentSection[] = [
           'number',
           '<code class="neutral">300</code>',
           'Animation duration (ms)',
+        ],
+        [
+          '<code>nativeNotifications</code>',
+          'NativeNotificationStrategy',
+          '<code class="neutral">Never</code>',
+          'Global strategy for native OS notifications (Never / Mobile / Always / PreferNative)',
+        ],
+      ],
+    },
+  },
+  {
+    id: 'api-native',
+    title: 'components.toast.api.native.title',
+    description: 'components.toast.api.native.description',
+    anchor: 'api-native',
+    table: {
+      headers: [
+        'common.tables.method',
+        'common.tables.returns',
+        'common.tables.description',
+      ],
+      rows: [
+        [
+          '<code>requestNativePermission()</code>',
+          "Promise&lt;'granted' | 'denied' | 'default' | 'unsupported'&gt;",
+          'Requests browser permission for native OS notifications. Must be called from a user gesture (e.g. button click).',
+        ],
+        [
+          '<code>nativePermission</code>',
+          "Signal&lt;'granted' | 'denied' | 'default' | 'unsupported'&gt;",
+          'Read-only signal reflecting the current state of the native notification permission.',
         ],
       ],
     },

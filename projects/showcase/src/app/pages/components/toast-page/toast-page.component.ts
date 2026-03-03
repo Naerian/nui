@@ -1,7 +1,7 @@
 ﻿import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { ButtonComponent, ToastService } from 'nui';
+import { ButtonComponent, ToastService, NativeNotificationStrategy } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
 import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';
@@ -40,13 +40,14 @@ export class ToastPageComponent extends BaseComponentPage {
         'custom-icons',
         'duration',
         'loading',
+        'native-notifications',
       ],
     },
     {
       id: 'api',
       label: 'common.tabs.api',
       icon: 'ri-braces-line',
-      sections: ['api-service', 'api-config', 'api-global', 'api-types', 'api-usage'],
+      sections: ['api-service', 'api-config', 'api-global', 'api-native', 'api-types', 'api-usage'],
     },
     {
       id: 'theming',
@@ -222,5 +223,40 @@ export class ToastPageComponent extends BaseComponentPage {
         icon: 'ri-check-line',
       });
     }, 2000);
+  }
+
+  // === NATIVE NOTIFICATIONS ===
+  readonly nativePermission = this.toastService.nativePermission;
+
+  async requestNativePermission(): Promise<void> {
+    const result = await this.toastService.requestNativePermission();
+    if (result === 'granted') {
+      this.toastService.success('Native notifications enabled!');
+    } else if (result === 'denied') {
+      this.toastService.warning('Permission denied. Enable it from the browser settings.', { timeout: 6000 });
+    } else if (result === 'unsupported') {
+      this.toastService.info('This browser does not support native notifications.');
+    }
+  }
+
+  showAlwaysNative(): void {
+    this.toastService.success('This uses native OS notification', {
+      title: 'NUI Toast',
+      nativeStrategy: NativeNotificationStrategy.Always,
+    });
+  }
+
+  showMobileNative(): void {
+    this.toastService.info('Native on mobile, NUI toast on desktop', {
+      title: 'NUI Toast',
+      nativeStrategy: NativeNotificationStrategy.Mobile,
+    });
+  }
+
+  showPreferNative(): void {
+    this.toastService.success('Native if granted, NUI toast as fallback', {
+      title: 'NUI Toast',
+      nativeStrategy: NativeNotificationStrategy.PreferNative,
+    });
   }
 }

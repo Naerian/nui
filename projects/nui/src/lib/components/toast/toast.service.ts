@@ -18,6 +18,7 @@ import {
   ToastGlobalConfig,
   ToastPosition,
   TOAST_LOADING_CLASS,
+  NativeNotificationStrategy,
 } from './models/toast.model';
 import { deepMerge } from '../../utils';
 import { injectToastConfig } from '../../configs/toast/toast.config';
@@ -59,6 +60,14 @@ export class ToastService {
    */
   readonly hasWarnings = computed(() => this._activeToasts().some(t => t.type === 'warning'));
 
+  /**
+   * Signal reactivo con el estado actual del permiso de notificaciones nativas.
+   * Inicializado al arrancar y actualizado tras llamar a `requestNativePermission()`.
+   */
+  private readonly _nativePermission = signal<NotificationPermission | 'unsupported'>('default');
+  readonly nativePermission: Signal<NotificationPermission | 'unsupported'> =
+    this._nativePermission.asReadonly();
+
   // Cola de toasts pendientes
   private toastQueue: Array<{ type: ToastType; message: string; config?: ToastConfig }> = [];
 
@@ -66,6 +75,13 @@ export class ToastService {
   private toastMap = new Map<string, ToastRef>();
 
   constructor() {
+
+    // Inicializar estado del permiso de notificaciones nativas
+    if (typeof window !== 'undefined') {
+      this._nativePermission.set(
+        'Notification' in window ? Notification.permission : 'unsupported'
+      );
+    }
 
     // Detectar cuando la ventana pierde el foco
     if (this.toastConfig.pauseOnFocusLoss) {
@@ -190,6 +206,11 @@ export class ToastService {
    */
   private show(type: ToastType, message: string, config?: ToastConfig): ToastRef {
     const mergedConfig = this.mergeConfig(type, message, config);
+
+    // Bifurcar a notificación nativa si la estrategia lo indica
+    if (this.shouldUseNative(mergedConfig)) {
+      return this.showNativeNotification(type, mergedConfig);
+    }
 
     // Verificar duplicados
     if (this.toastConfig.preventDuplicates && this.isDuplicate(mergedConfig)) {
@@ -499,6 +520,107 @@ export class ToastService {
     this.containers.set(position, containerRef);
 
     return containerRef;
+  }
+
+  // ===== NOTIFICACIONES NATIVAS =====
+
+  /**
+   * Solicita al navegador el permiso para mostrar notificaciones nativas.
+   * Debe llamarse desde un gesto explícito del usuario (ej: click de botón).
+   * Actualiza el signal `nativePermission` tras la respuesta.
+   *
+   * @returns Estado del permiso: 'granted' | 'denied' | 'default' | 'unsupported'
+   */
+  async requestNativePermission(): Promise<NotificationPermission | 'unsupported'> {
+    if (typeof window === 'undefined' || !('Notification' in window)) {
+      this._nativePermission.set('unsupported');
+      return 'unsupported';
+    }
+
+    if (Notification.permission === 'granted') {
+      this._nativePermission.set('granted');
+      return 'granted';
+    }
+
+    const result = await Notification.requestPermission();
+    this._nativePermission.set(result);
+    return result;
+  }
+
+  /**
+   * Determina si se debe usar notificación nativa para un toast concreto.
+   */
+  private shouldUseNative(config: ToastConfig): boolean {
+    const strategy = config.nativeStrategy ?? this.toastConfig.nativeNotifications ?? NativeNotificationStrategy.Never;
+
+    if (strategy === NativeNotificationStrategy.Never) return false;
+    if (typeof window === 'undefined' || !('Notification' in window)) return false;
+    if (Notification.permission !== 'granted') {
+      // PreferNative hace fallback automático a NUI toast
+      return false;
+    }
+
+    if (strategy === NativeNotificationStrategy.Always || strategy === NativeNotificationStrategy.PreferNative) {
+      return true;
+    }
+
+    if (strategy === NativeNotificationStrategy.Mobile) {
+      return this.isMobile();
+    }
+
+    return false;
+  }
+
+  /**
+   * Detecta si el dispositivo actual es móvil.
+   * Usa la API moderna `userAgentData` (Chrome 90+) con fallback a userAgent.
+   */
+  private isMobile(): boolean {
+    if (typeof navigator === 'undefined') return false;
+    if ('userAgentData' in navigator) {
+      return (navigator as any).userAgentData.mobile === true;
+    }
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  /**
+   * Muestra una notificación nativa del sistema operativo.
+   * Devuelve un `ToastRef` que se puede usar para control y observación.
+   */
+  private showNativeNotification(type: ToastType, config: ToastConfig): ToastRef {
+    const id = config.id || `toast-${++toastIdCounter}`;
+    const toastRef = new ToastRef(id, type, config);
+
+    // Intentar obtener el favicon de la app como icono de la notificación
+    const iconEl = this.document.querySelector<HTMLLinkElement>('link[rel="icon"], link[rel="shortcut icon"]');
+    const iconUrl = iconEl?.href;
+
+    const notification = new Notification(config.title ?? config.message ?? '', {
+      body: config.title ? config.message : undefined,
+      icon: iconUrl,
+      tag: config.group,
+      requireInteraction: config.timeout === 0,
+    });
+
+    // Cierre automático sincronizado con el timeout del toast
+    if (config.timeout && config.timeout > 0) {
+      setTimeout(() => {
+        notification.close();
+        toastRef.close();
+      }, config.timeout);
+    }
+
+    notification.onclick = () => {
+      config.onClick?.();
+      notification.close();
+      toastRef.close();
+    };
+
+    notification.onclose = () => toastRef.close();
+
+    config.onShown?.();
+
+    return toastRef;
   }
 
   /**
