@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, HostListener } from '@angular/core';
+import { Component, inject, OnInit, AfterViewInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -13,19 +13,24 @@ import { SIDEBAR_MENU_CONFIG, MenuItem } from './sidebar-menu.config';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, AfterViewInit {
   private showcaseConfig = inject(ShowcaseConfigService);
   private router = inject(Router);
 
-  isCollapsed = false;
+  // Inicialización síncrona desde el servicio + detección de mobile
+  // Evita el flash de apertura/cierre en el primer render
+  isCollapsed = this.showcaseConfig.currentConfig.sidebarCollapsed || window.innerWidth < 992;
+
+  // Suprime la transición CSS durante el primer render
+  isInitializing = true;
   expandedSections: { [key: string]: boolean } = {};
 
   // Configuración del menú importada desde archivo externo
   menuItems: MenuItem[] = SIDEBAR_MENU_CONFIG;
 
   ngOnInit(): void {
-    // Asegurar que el sidebar empiece cerrado en mobile
-    this.checkAndCollapseOnMobile();
+    // checkAndCollapseOnMobile ya está aplicado en la inicialización del campo,
+    // no es necesario llamarlo aquí de nuevo (evita un segundo cambio de estado)
 
     this.showcaseConfig.config$.subscribe(config => {
       this.isCollapsed = config.sidebarCollapsed;
@@ -42,6 +47,14 @@ export class SidebarComponent implements OnInit {
         // Cerrar sidebar en mobile al cambiar de ruta
         this.closeSidebarOnMobile();
       });
+  }
+
+  ngAfterViewInit(): void {
+    // Eliminar la clase no-transition en el siguiente frame,
+    // una vez que el DOM ya se pintó con el estado correcto
+    requestAnimationFrame(() => {
+      this.isInitializing = false;
+    });
   }
 
   @HostListener('window:resize')

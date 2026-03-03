@@ -1,4 +1,4 @@
-<aside class="showcase-sidebar" [class.collapsed]="isCollapsed">
+<aside class="showcase-sidebar" [class.collapsed]="isCollapsed" [class.no-transition]="isInitializing">
   <nav class="sidebar-nav">
     <ul class="nav-list">
       <li *ngFor="let item of menuItems" class="nav-item">

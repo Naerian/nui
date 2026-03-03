@@ -13,6 +13,11 @@
   overflow-y: auto;
   overflow-x: hidden;
 
+  // Suprime transiciones durante el primer render para evitar el flash
+  &.no-transition {
+    transition: none !important;
+  }
+
   &.collapsed {
     width: 0;
     transform: translateX(-100%);
