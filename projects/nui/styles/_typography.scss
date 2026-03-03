@@ -2,26 +2,6 @@
 @use 'global-tokens';
 
 // ========================================
-// FONT FACES
-// ========================================
-
-@font-face {
-  font-family: 'Inter';
-  src: url('/assets/fonts/Inter-Roman.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: optional;
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: url('/assets/fonts/Inter-Italic.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: italic;
-  font-display: optional;
-}
-
-// ========================================
 // HEADINGS
 // ========================================
 

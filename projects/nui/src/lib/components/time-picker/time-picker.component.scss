@@ -80,7 +80,6 @@
   }
 
   &__display {
-    font-family: var(--nui-font-family);
     font-weight: var(--nui-font-weight-semibold);
     color: var(--nui-text-primary);
     text-align: center;
@@ -196,7 +195,6 @@
     border: var(--nui-time-picker-item-border-width) solid transparent;
     border-radius: var(--nui-time-picker-item-radius);
     color: var(--nui-time-picker-item-text);
-    font-family: var(--nui-font-family);
     font-weight: var(--nui-font-weight-regular);
     cursor: pointer;
     height: var(--nui-time-picker-item-height);
@@ -249,7 +247,6 @@
       background: var(--nui-time-picker-item-bg);
       border: 1px solid transparent;
       color: var(--nui-time-picker-item-text);
-      font-family: var(--nui-font-family);
       font-weight: var(--nui-font-weight-regular);
 
       &:hover:not(:disabled):not(.nui-time-picker__item--selected) {
@@ -359,7 +356,6 @@
     gap: 0.5rem;
     cursor: pointer;
     font-weight: var(--nui-font-weight-semibold);
-    font-family: var(--nui-font-family);
     text-decoration: none;
     border-width: 1px;
     border-style: solid;

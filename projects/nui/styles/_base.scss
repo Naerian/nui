@@ -3,7 +3,8 @@
 // ==========================================
 html,
 :host {
-  font-family: var(--nui-font-family);
+  font-family: inherit;
+  font-feature-settings: inherit;
   line-height: 1.5;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

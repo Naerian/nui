@@ -229,7 +229,6 @@
     position: relative;
     cursor: pointer;
     border-radius: var(--nui-border-radius-md);
-    font-family: var(--nui-font-family);
     font-weight: var(--nui-font-weight-medium);
 
     // ESTADO: Focus
@@ -353,7 +352,6 @@
     border: none;
     background-color: transparent;
     color: var(--nui-pg-text);
-    font-family: var(--nui-font-family);
     font-size: inherit;
     font-weight: var(--nui-font-weight-medium);
     appearance: textfield;
@@ -389,7 +387,6 @@
     border-left: 1px solid var(--nui-pg-jump-separator);
     background-color: transparent;
     color: var(--nui-pg-text);
-    font-family: var(--nui-font-family);
     font-size: inherit;
     font-weight: var(--nui-font-weight-medium);
     cursor: pointer;
