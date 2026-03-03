@@ -1,0 +1,1683 @@
+{
+  "header": {
+    "title": "NUI",
+    "arialLabel": "NUI - Angular-Komponentenbibliothek",
+    "preset": "Voreinstellung",
+    "theme": "Thema",
+    "language": "Sprache",
+    "version": "Version",
+    "light": "Hell",
+    "dark": "Dunkel"
+  },
+  "sidebar": {
+    "home": "Startseite",
+    "gettingStarted": "Erste Schritte",
+    "installation": "Installation",
+    "configuration": "Konfiguration",
+    "theming": "Theming",
+    "themingOverview": "Übersicht",
+    "themingPresets": "Voreinstellungen",
+    "themingArchitecture": "Architektur",
+    "themingDarkMode": "Dunkelmodus",
+    "themingCssVariables": "CSS-Variablen",
+    "themingCustomization": "Anpassung",
+    "components": "Komponenten",
+    "button": "Schaltfläche",
+    "fabButton": "FAB-Schaltfläche",
+    "avatar": "Avatar",
+    "selectButton": "Auswahlschaltfläche",
+    "calendar": "Kalender",
+    "paginator": "Paginierung",
+    "popover": "Popover",
+    "toast": "Toast",
+    "tooltip": "Tooltip",
+    "sidebarPanel": "Seitenpanel",
+    "actionMenu": "Aktionsmenü",
+    "timePicker": "Zeitauswahl"
+  },
+  "presets": {
+    "aura": "Aura",
+    "autumn": "Herbst",
+    "neon": "Neon",
+    "dopamine": "Dopamin",
+    "corporate": "Unternehmen",
+    "minimal": "Minimal",
+    "sunset": "Sonnenuntergang",
+    "twilight": "Dämmerung",
+    "ocean": "Ozean",
+    "emerald": "Smaragd",
+    "coffee": "Kaffee",
+    "velvet": "Samt"
+  },
+  "footer": {
+    "license": "Enthält Icons von Remix Icon (MIT-Lizenz)",
+    "copyright": "2025 NUI. Alle Rechte vorbehalten (MIT)."
+  },
+  "common": {
+    "tabs": {
+      "examples": "Beispiele",
+      "api": "API",
+      "theming": "Theming"
+    },
+    "tables": {
+      "cssVariable": "CSS-Variable",
+      "description": "Beschreibung",
+      "default": "Standardwert",
+      "variants": "Varianten",
+      "value": "Wert",
+      "property": "Eigenschaft",
+      "type": "Typ",
+      "info": "Info",
+      "event": "Ereignis",
+      "method": "Methode",
+      "argument": "Argument",
+      "returns": "Rückgabe",
+      "parameters": "Parameter"
+    }
+  },
+  "codeBlock": {
+    "copy": "Kopieren",
+    "copied": "Kopiert!",
+    "copyCode": "Code kopieren"
+  },
+  "codeExamples": {
+    "html": "HTML",
+    "typescript": "TypeScript",
+    "css": "CSS",
+    "scss": "SCSS",
+    "component": "Komponente",
+    "usage": "Verwendung",
+    "definition": "Definition",
+    "configuration": "Konfiguration",
+    "customization": "Anpassung",
+    "example": "Beispiel",
+    "componentCode": "Komponenten-Eingaben & -Ausgaben",
+    "usageCode": "Vollständiges Verwendungsbeispiel",
+    "itemInterface": "Schnittstelle",
+    "parent": "Übergeordnete Komponente",
+    "child": "Untergeordnete Komponente",
+    "directiveCode": "Direktiven-Eingaben & -Ausgaben",
+    "tokensCode": "Injektions-Tokens für Komponenten",
+    "serviceCode": "Service-Methoden",
+    "refCode": "Komponentenreferenz",
+    "interfacesCode": "Schnittstellen",
+    "cssVariables": "Verfügbare CSS-Variablen"
+  },
+  "pages": {
+    "home": {
+      "title": "Willkommen bei NUI",
+      "subtitle": "Eine moderne, anpassbare Angular-Komponentenbibliothek",
+      "description": "Erstellen Sie schöne Anwendungen mit unserem vollständigen Satz an UI-Komponenten",
+      "multitheme": {
+        "title": "Leistungsstarkes Theming-System",
+        "description": "Passen Sie das Aussehen Ihrer Anwendung mit mehreren vordefinierten Voreinstellungen und Unterstützung für benutzerdefinierte Themen an."
+      },
+      "darkMode": {
+        "title": "Intelligenter Dunkelmodus",
+        "description": "Integrierte Dunkelmodus-Unterstützung mit manuellen, automatischen und systembasierten Strategien."
+      },
+      "components": {
+        "title": "Vielseitige Komponenten",
+        "description": "Eine breite Palette gebrauchsfertiger UI-Komponenten, die barrierefrei und einfach anpassbar sind."
+      }
+    },
+    "installation": {
+      "title": "Installation",
+      "subtitle": "Starten Sie mit NUI in Ihrem Angular-Projekt",
+      "step1": "Paket installieren",
+      "step1Description": "Verwenden Sie npm oder yarn, um das NUI-Paket in Ihrem Projekt zu installieren.",
+      "step2": "NUI-Modul importieren",
+      "step2Description": "Konfigurieren Sie NUI in Ihrer Anwendungskonfigurationsdatei. Definieren Sie die gewünschte Voreinstellung und den Themen-Modus.",
+      "step2Title": "NUI-Provider konfigurieren",
+      "step3": "Stile importieren",
+      "step3Description": "Sie können NUI-Stile auf drei verschiedene Arten importieren: in Ihrer globalen styles.scss-Datei, in angular.json oder in project.json, wenn Sie Nx verwenden.",
+      "step3Title": "NUI-Stile importieren",
+      "step4": "Komponenten verwenden",
+      "step4Description": "Sie können jetzt jede NUI-Komponente in Ihren HTML-Templates verwenden.",
+      "step4Title": "NUI-Komponenten verwenden"
+    },
+    "configuration": {
+      "title": "Konfiguration",
+      "subtitle": "NUI nach Ihren Bedürfnissen konfigurieren",
+      "presets": {
+        "title": "Voreinstellungskonfiguration",
+        "description": "NUI enthält 12 vordefinierte Voreinstellungen, die Sie direkt in Ihrer Anwendung verwenden können. Jede Voreinstellung definiert eine einzigartige Farbpalette für helle und dunkle Modi und sorgt so für ein einheitliches Erscheinungsbild aller Komponenten.",
+        "note": "Sie können die Voreinstellung zur Laufzeit mit dem <code>ThemeService</code> ändern, sodass Sie Ihren Benutzern die Möglichkeit geben können, ihr bevorzugtes Erscheinungsbild zu wählen."
+      },
+      "custom-presets": {
+        "title": "Benutzerdefinierte Voreinstellungen",
+        "description": "Zusätzlich zu den vordefinierten Voreinstellungen können Sie eigene benutzerdefinierte Voreinstellungen erstellen, indem Sie spezifische Farben für helle und dunkle Modi definieren. So können Sie das Erscheinungsbild Ihrer Anwendung an Ihre Markenidentität anpassen oder einzigartige Benutzererlebnisse schaffen.",
+        "note": "Benutzerdefinierte Voreinstellungen werden als TypeScript-Objekte definiert, die der <code>ThemePreset</code>-Schnittstelle entsprechen, was eine typsichere Konfiguration und nahtlose Integration in das Theming-System von NUI gewährleistet."
+      },
+      "dark-mode": {
+        "title": "Dunkelmodus-Konfiguration",
+        "description": "Steuern Sie, wie der Dunkelmodus in Ihrer Anwendung angewendet wird. Verfügbare Optionen sind: <code>manual</code> (per Code gesteuert), <code>auto</code> (basierend auf der Tageszeit) oder <code>system</code> (basierend auf den Einstellungen des Betriebssystems).",
+        "note": "Der Dunkelmodus kann programmatisch mit dem <code>ThemeService</code> aktiviert werden, sodass Sie Benutzern die Möglichkeit bieten können, zwischen Modi umzuschalten oder automatisch den Systemeinstellungen zu folgen."
+      },
+      "component-config": {
+        "title": "Komponentenspezifische Konfiguration",
+        "description": "NUI ermöglicht die Konfiguration bestimmter Aspekte von Komponenten über eine globale Konfiguration, wie das 'Shapeshifter'-Paginierungssystem des Paginators oder die verfügbaren Varianten für die Schaltfläche. Dies gibt Ihnen die Kontrolle über das Verhalten und Erscheinungsbild von Komponenten, ohne den Quellcode ändern zu müssen.",
+        "note": "Durch die Konfiguration komponentenspezifischer Optionen im NUI-Provider können Sie ein konsistentes Benutzererlebnis in Ihrer gesamten Anwendung sicherstellen und Komponenten mühelos an Ihre Bedürfnisse anpassen."
+      },
+      "i18n": {
+        "title": "Internationalisierungskonfiguration (i18n)",
+        "description": "NUI implementiert ein reaktives i18n-System basierend auf <code>Signals</code>. Sie können eine anfängliche Textbasis mit dem <code>provideNuiI18n()</code>-Provider festlegen. Für mehrsprachige Anwendungen ermöglicht der <code>NuiI18nService</code> das Einfügen neuer Wörterbücher zur Laufzeit über die Methode <code>setLang()</code>. In diesem Fall aktualisieren sich alle abonnierten Komponenten automatisch, ohne die Anwendung oder Drittanbieter-Abhängigkeiten neu zu laden.<br/><br/>Verwenden Sie <code>setTranslations</code>, um nur eine Teilmenge von Texten zu aktualisieren, indem Sie den Wörterbuch-Stamm angeben. Wenn Sie zum Beispiel <code>ngx-translate</code> verwenden, können Sie angeben, wo sich das 'NUI'-JSON-Objekt in Ihrer Übersetzungsdatei befindet, und dieses Objekt an den NUI-Service übergeben, um alles synchron zu halten.",
+        "note": "Texte werden dynamisch über den Service aktualisiert, während Datums-Locales in der globalen Konfiguration vorregistriert werden müssen, damit der Adapter Formate und ARIA-Labels reaktiv verarbeiten kann."
+      },
+      "i18n-date": {
+        "title": "NUI i18n in Datumsangaben",
+        "description": "Damit Komponenten wie der Kalender Formate und Barrierefreiheitsbeschriftungen (ARIA) in verschiedenen Sprachen verarbeiten können, müssen Sie Locale-Objekte (z.B. date-fns) mit provideNuiDateLocales() registrieren.<br/><br/>NUI synchronisiert diese Locales automatisch mit dem i18n-Service und stellt sicher, dass sowohl Texte als auch Datumsangaben (z.B. \"Montag, 1. Januar\") grammatikalisch korrekt und barrierefrei sind, ohne zusätzliche Konfiguration.",
+        "note": "Wenn Sie die Anwendungssprache über <code>nuiI18nService.setLang('de')</code> ändern, synchronisiert NUI automatisch den Datumsadapter und das Textwörterbuch. Das gesamte System ist reaktiv: Ihre Kalender und Paginatoren aktualisieren sich sofort ohne zusätzliche Logik in Ihren Komponenten."
+      }
+    },
+    "theming": {
+      "title": "Themen & Voreinstellungen",
+      "subtitle": "Passen Sie das Erscheinungsbild Ihrer Anwendung an",
+      "description": "NUI enthält mehrere vordefinierte Voreinstellungen. Jede Voreinstellung definiert eine einzigartige Farbpalette, die auf alle Komponenten angewendet wird. Wechseln Sie Voreinstellungen zur Laufzeit, um Änderungen sofort zu sehen. Außerdem passt das Umschalten zwischen <code>hell</code> und <code>dunkel</code> die Farben automatisch an, um Kontrast und Lesbarkeit zu erhalten.",
+      "selectPreset": "Wählen Sie eine Voreinstellung zur Vorschau",
+      "colorPalette": "Farbpalette",
+      "primary": "Primär",
+      "secondary": "Sekundär",
+      "accent": "Akzent",
+      "success": "Erfolg",
+      "info": "Info",
+      "warning": "Warnung",
+      "danger": "Gefahr",
+      "neutral": "Neutral",
+      "presetDescriptions": {
+        "aura": "Moderne und elegante Standardpalette mit Türkis- und Violetttönen",
+        "autumn": "Warme und einladende Palette mit Korallen- und Goldtönen, ideal für E-Commerce",
+        "neon": "Futuristische Cyberpunk-Palette mit elektrischem Cyan und Neonfarben, ideal für Gaming",
+        "dopamine": "Optimistische und fröhliche Palette mit leuchtenden Limetten- und Pinktönen",
+        "corporate": "Professionelle blaue Palette, ideal für Unternehmensanwendungen",
+        "minimal": "Verfeinerte minimalistische Palette mit dezenten Farben und elegantem lila Akzent",
+        "sunset": "Warme und lebhafte Palette mit Pink-, Orange- und Koralltönen, ideal für kreative Apps",
+        "twilight": "Sanfte und entspannende Palette mit Lavendel- und Grau-Blautönen, ideal für Wellness",
+        "ocean": "Ruhige und professionelle Palette mit tiefen Blau- und Wassertönen, ideal für Produktivität",
+        "emerald": "Frische und natürliche Palette mit Smaragdgrün und Türkis-Akzenten, ideal für Gesundheits- und Natur-Apps",
+        "coffee": "Warme und gemütliche Palette mit Brauntönen und Creme-Akzenten, ideal für Lifestyle- und Food-Apps",
+        "velvet": "Reiche und luxuriöse Palette mit Burgunder-Tönen und rosigen Akzenten, ideal für elegante und anspruchsvolle Apps"
+      },
+      "overview": {
+        "title": "Theming-System",
+        "subtitle": "Eine leistungsstarke, zur Laufzeit konfigurierbare Theming-Lösung für Angular-Anwendungen",
+        "whatItSolves": {
+          "title": "Welches Problem löst es?",
+          "description": "Das Theming-System von NUI eliminiert die Notwendigkeit manueller CSS-Konfiguration, Themen-Neuerstellung oder komplexem SCSS-Variablenmanagement. Es bietet eine einheitliche, typsichere Möglichkeit, das Erscheinungsbild Ihrer Anwendung zur Laufzeit anzupassen."
+        },
+        "features": {
+          "runtimeSwitching": {
+            "title": "Echtzeit-Themenwechsel",
+            "description": "Wechseln Sie Themen sofort, ohne die Seite neu zu laden oder neu zu kompilieren. Perfekt für Benutzerpräferenzen und A/B-Tests."
+          },
+          "darkMode": {
+            "title": "Automatischer Dunkelmodus",
+            "description": "Integrierte Dunkelmodus-Unterstützung mit automatischer Farbanpassung und mehreren Aktivierungsstrategien."
+          },
+          "tokenGeneration": {
+            "title": "Über 200 CSS-Variablen",
+            "description": "Umfassendes Variablensystem, das Farben, Schatten, Töne, Alpha-Werte und komponentenspezifische Token abdeckt."
+          },
+          "componentSpecific": {
+            "title": "Komponentenspezifische Variablen",
+            "description": "Jede Komponente hat ihre eigenen anpassbaren CSS-Variablen, die vom globalen Thema erben."
+          },
+          "typeSafety": {
+            "title": "Typsichere Konfiguration",
+            "description": "Vollständige TypeScript-Unterstützung mit Schnittstellen, die sicherstellen, dass Ihre benutzerdefinierten Themen korrekt konfiguriert sind."
+          },
+          "zeroScss": {
+            "title": "Kein Build-Overhead",
+            "description": "Themen werden im Browser zur Laufzeit generiert. Kein Neucompilieren der Anwendung beim Themenwechsel erforderlich."
+          }
+        },
+        "integration": {
+          "title": "Integration",
+          "description": "Das Theming-System ist tief in NUI integriert und funktioniert nahtlos über alle Komponenten hinweg:",
+          "point1": "<strong>Einzelner Konfigurationspunkt</strong>: Definieren Sie Ihr Thema einmal in <code>provideNUI()</code>",
+          "point2": "<strong>Automatische Weitergabe</strong>: Alle NUI-Komponenten nutzen automatisch Theme-Variablen",
+          "point3": "<strong>Benutzerdefinierte Komponenten</strong>: Ihre eigenen Komponenten können NUI-CSS-Variablen für konsistente Stile verwenden",
+          "point4": "<strong>Laufzeitsteuerung</strong>: Themen wechseln oder Dunkelmodus programmatisch über <code>ThemeService</code> aktivieren",
+          "point5": "<strong>Framework-unabhängiges CSS</strong>: Variablen funktionieren in jedem HTML/CSS, nicht nur in Angular-Komponenten"
+        },
+        "keyFeatures": {
+          "title": "Technische Hauptmerkmale",
+          "feat1": "CSS-Variablen dynamisch aus TypeScript-Konfiguration generiert",
+          "feat2Label": "8 semantische Farben",
+          "feat2": "(primär, sekundär, Akzent, Erfolg, Info, Warnung, Gefahr, neutral)",
+          "feat3Label": "10-stufige Grauton-Skala",
+          "feat3": "für konsistente Neutrale in hellen und dunklen Modi",
+          "feat4Label": "Automatische Varianten",
+          "feat4": "(Schatten, Töne, Alpha-Werte) für jede Farbe generiert",
+          "feat5Label": "Intelligenter Dunkelmodus",
+          "feat5": "mit manuellen, system- und zeitbasierten Strategien"
+        }
+      },
+      "architecture": {
+        "title": "Theming-Architektur",
+        "subtitle": "Ein Schichtsystem zur dynamischen CSS-Variablengenerierung",
+        "overview": "Das Theming-System von NUI verwendet eine mehrschichtige Architektur, die dynamisch mehr als 1000 CSS-Variablen aus der Voreinstellungskonfiguration generiert. Jede Schicht baut auf der vorherigen auf und schafft ein kohärentes und skalierbares System.",
+        "layer1": {
+          "title": "Schicht 1: Voreinstellungssystem (semantische Farben)",
+          "description": "Jede Voreinstellung definiert 8 semantische Farben, die konsistent in der gesamten Anwendung angewendet werden. Diese Farben passen ihren Ton automatisch zwischen hellem und dunklem Modus an.",
+          "primary": "Haupt-Markenfarbe, primäre Aktionen und Schlüsselnavigationselemente",
+          "secondary": "Komplementärfarbe für visuelle Hierarchie und sekundäre Aktionen",
+          "accent": "Betonungsfarbe für Highlights, Links und interaktive Zustände",
+          "success": "Positive Bestätigungen, erfolgreiche Operationen und korrekte Validierung",
+          "info": "Informationsmeldungen, neutrale Benachrichtigungen und Hilfsinhalte",
+          "warning": "Vorsichtswarnungen, die Aufmerksamkeit erfordern, aber nicht kritisch sind",
+          "danger": "Kritische Fehler, destruktive Aktionen und fehlgeschlagene Validierung",
+          "neutral": "Neutrale Elemente, deaktivierte Zustände und subtile Hintergründe"
+        },
+        "layer2": {
+          "title": "Schicht 2: Strukturelle Variablen",
+          "description": "Basisvariablen, die Textfarben, Hintergründe, Rahmen und andere strukturelle Elemente definieren. Aus der Grauton-Skala der Voreinstellung generiert und an den Hell-/Dunkelmodus angepasst.",
+          "surfaces": {
+            "title": "Oberflächen",
+            "surface": "Haupthintergrund für Karten, Modals und Panels",
+            "surfaceSecondary": "Sekundärer Hintergrund für verschachtelte Abschnitte",
+            "surfaceNeutral": "Neutraler Hintergrund für deaktivierte Zustände oder Platzhalter"
+          },
+          "text": {
+            "title": "Text",
+            "primary": "Primärer Text mit maximalem Kontrast",
+            "secondary": "Sekundärer Text für Metadaten und Labels",
+            "weak": "Schwacher Text für tertiäre Inhalte",
+            "disabled": "Text für deaktivierte Elemente"
+          },
+          "borders": {
+            "title": "Rahmen",
+            "high": "Auffällige Rahmen mit hohem Kontrast",
+            "default": "Standardrahmen zur visuellen Trennung",
+            "subtle": "Subtile Rahmen für leichte Trennungen"
+          }
+        },
+        "layer3": {
+          "title": "Schicht 3: Variantengenerierung",
+          "description": "Für jede semantische Farbe generiert das System automatisch Tön-, Schatten- und Alpha-Varianten. Dies ermöglicht visuelle Hierarchie ohne zusätzliche Farben definieren zu müssen.",
+          "tints": {
+            "title": "Töne (heller)",
+            "description": "Aufgehellte Versionen durch Mischen der Farbe mit Weiß. Ideal für weiche Hintergründe, Hover-Zustände und subtile Akzente."
+          },
+          "shades": {
+            "title": "Schatten (dunkler)",
+            "description": "Abgedunkelte Versionen durch Mischen der Farbe mit Schwarz. Für aktive Zustände, Rahmen und visuelle Tiefe."
+          },
+          "alpha": {
+            "title": "Alpha-Werte (Transparenz)",
+            "description": "Halbtransparente Versionen der Farbe. Perfekt für Overlays, Glaseffekte und deaktivierte Zustände."
+          }
+        },
+        "layer4": {
+          "title": "Schicht 4: Schattensystem",
+          "description": "Zweistufiges Schattensystem: Primitive (xs, sm, md, lg, xl) und semantische Aliase, die Anwendungsfälle auf Primitive abbilden.",
+          "primitivesTitle": "Schatten-Primitive",
+          "aliasesTitle": "Semantische Aliase",
+          "mapsTo": "Entspricht",
+          "primitives": {
+            "xs": "Minimaler Schatten für Eingabefelder und Formulare",
+            "sm": "Subtiler Schatten für Karten und Container",
+            "md": "Mittlerer Schatten für interaktive Elemente",
+            "lg": "Erhöhter Schatten für Popovers und Dropdowns",
+            "xl": "Maximaler Schatten für Modals und Overlays"
+          },
+          "aliases": {
+            "field": "Formularfelder (Eingaben, Auswahlen, Textbereiche)",
+            "container": "Karten, Panels, Inhaltscontainer",
+            "interactive": "Schaltflächen, Chips, klickbare Elemente",
+            "elevated": "Popovers, Dropdowns, schwebende Menüs, Modals"
+          }
+        },
+        "layer5": {
+          "title": "Schicht 5: Komponentenvariablen",
+          "description": "Jede Komponente verfügt über einen Satz dynamisch generierter CSS-Variablen, die aus semantischen Farben abgeleitet und an Varianten (solid, outline, ghost) angepasst sind.",
+          "button": {
+            "description": "Variablen für 3 Varianten (Solid, Outline, Ghost) × 8 Farben × 4 Zustände (Standard, Hover, Aktiv, Deaktiviert). Gesamt: ~96 Variablen."
+          },
+          "toast": {
+            "description": "Spezifische Variablen für 4 Toast-Typen (Erfolg, Info, Warnung, Gefahr) einschließlich Hintergrund, Rahmen, Titel, Text, Fortschritt und Icon."
+          },
+          "paginator": {
+            "description": "'Shapeshifter'-System, bei dem inaktive Schaltflächen Ghost sind und die aktive Schaltfläche die angegebene Variante übernimmt. Navigationsschaltflächen sind immer Ghost."
+          }
+        },
+        "performance": {
+          "title": "Leistungsoptimierung",
+          "description": "Das Theming-System enthält Optimierungen, um die Leistungsauswirkungen des dynamischen Themenwechsels zu minimieren.",
+          "cache": {
+            "title": "CSS-Cache",
+            "description": "Das generierte CSS für jede Voreinstellungs-+Modus-Kombination wird im Speicher gecacht. Nachfolgende Änderungen sind sofort durch Wiederverwendung des vorgenerierten CSS."
+          },
+          "pregeneration": {
+            "title": "Leerlauf-Vorgenerierung",
+            "description": "Beim App-Start wird das CSS für beide Modi (hell/dunkel) mit requestIdleCallback vorgeneriert. Das erste Umschalten ist bereits sofort."
+          },
+          "containment": {
+            "title": "CSS Containment",
+            "description": "Schwere Komponenten verwenden 'contain: layout style paint', um den Bereich der Stilneuberechnungen zu begrenzen."
+          }
+        },
+        "flow": {
+          "title": "Variablengenerierungsfluss",
+          "description": "Von der Voreinstellungsauswahl bis zur DOM-Anwendung – so funktioniert der Prozess:",
+          "step1": {
+            "title": "Benutzer wählt Voreinstellung oder schaltet Dunkelmodus um",
+            "description": "Über die Benutzeroberfläche oder ThemeService.toggleDarkMode() / ThemeService.usePreset()"
+          },
+          "step2": {
+            "title": "ThemeService prüft CSS-Cache",
+            "description": "Der Schlüssel 'presetName-isDarkMode' wird generiert. Wenn er im Cache vorhanden ist, wird er wiederverwendet. Andernfalls wird er generiert."
+          },
+          "step3": {
+            "title": "CSS-Variablengenerierung",
+            "description": "~1000 Farbberechnungen (Töne, Schatten, Alphas, Kontraste) werden ausgeführt, um den vollständigen CSS-String zu erstellen."
+          },
+          "step4": {
+            "title": "DOM-Einbettung",
+            "description": "CSS wird in <style id='nui-theme-colors'> eingefügt. Der Browser berechnet Stile neu und rendert betroffene Komponenten erneut."
+          }
+        }
+      },
+      "darkMode": {
+        "title": "Dunkelmodus-Strategien",
+        "subtitle": "Mehrere Möglichkeiten zur Verwaltung des Dunkelmodus in Ihrer Anwendung",
+        "currentStrategy": "Aktuelle Strategie",
+        "currentMode": "Aktueller Modus",
+        "dark": "Dunkel",
+        "light": "Hell",
+        "strategiesTitle": "Verfügbare Strategien",
+        "strategiesDescription": "NUI bietet drei verschiedene Strategien zur Verwaltung des Dunkelmodus, die jeweils für unterschiedliche Anwendungsfälle geeignet sind:",
+        "strategies": {
+          "manual": {
+            "title": "Manuell",
+            "description": "Vollständige programmatische Kontrolle. Der Dunkelmodus wird explizit über ThemeService aktiviert.",
+            "feat1": "Vollständige Kontrolle im Anwendungscode",
+            "feat2": "Benutzerpräferenz in localStorage gespeichert",
+            "feat3": "Perfekt für Apps mit einer Themenumschalter-Benutzeroberfläche"
+          },
+          "system": {
+            "title": "System",
+            "description": "Folgt automatisch den Betriebssystemeinstellungen des Benutzers mithilfe der prefers-color-scheme-Media-Query.",
+            "feat1": "Respektiert die OS-Dunkelmodus-Einstellung",
+            "feat2": "Aktualisiert automatisch, wenn der Benutzer seine OS-Einstellung ändert"
+          },
+          "auto": {
+            "title": "Auto",
+            "description": "Intelligentes zeitbasiertes Umschalten. Der Dunkelmodus aktiviert sich während der Nachtstunden (20:00 – 06:00 Ortszeit).",
+            "feat1": "Aktiviert den Dunkelmodus von 20:00 bis 06:00 Uhr",
+            "feat2": "Reduziert die Augenbelastung bei nächtlicher Nutzung"
+          }
+        },
+        "demo": {
+          "title": "Ausprobieren",
+          "description": "Die Demo ist mit der Strategie 'manual' konfiguriert, sodass Sie den Dunkelmodus programmatisch steuern können:",
+          "toggle": "Dunkelmodus umschalten",
+          "enableDark": "Dunkel aktivieren",
+          "enableLight": "Hell aktivieren"
+        },
+        "customClass": {
+          "title": "Benutzerdefinierte Dunkelmodus-Klasse",
+          "description": "Standardmäßig fügt NUI die Klasse 'dark-mode' zu <html> hinzu, wenn der Dunkelmodus aktiv ist. Sie können diesen Klassennamen anpassen:"
+        }
+      },
+      "cssVars": {
+        "title": "CSS-Variablen-Explorer",
+        "subtitle": "Entdecken und durchsuchen Sie alle 200+ CSS-Variablen des Theming-Systems",
+        "filters": {
+          "search": "Suchen",
+          "searchPlaceholder": "Variablen suchen...",
+          "category": "Kategorie"
+        },
+        "categories": {
+          "all": "Alle Variablen",
+          "semantic": "Semantische Farben",
+          "structural": "Strukturelle Variablen",
+          "button": "Schaltfläche",
+          "avatar": "Avatar",
+          "toast": "Toast",
+          "paginator": "Paginierung",
+          "shadows": "Schatten"
+        },
+        "noResults": "Keine Variablen gefunden, die Ihrer Suche entsprechen",
+        "copy": "In Zwischenablage kopieren",
+        "groups": {
+          "semantic": "Semantische Farben",
+          "structural": "Strukturelle Variablen",
+          "button": "Schaltflächen-Variablen",
+          "avatar": "Avatar-Variablen",
+          "toast": "Toast-Variablen",
+          "paginator": "Paginierungs-Variablen",
+          "shadows": "Schatten-Variablen"
+        },
+        "usage": {
+          "title": "Verwendung von CSS-Variablen",
+          "description": "Sie können jede NUI-CSS-Variable in Ihren Komponenten-Stylesheets verwenden:",
+          "example": ".my-component {\n  background: var(--nui-bg-primary);\n  color: var(--nui-text-primary);\n  border: 1px solid var(--nui-border-color);\n  box-shadow: var(--nui-box-shadow-md);\n}\n\n.my-button {\n  background: var(--nui-color-primary);\n  \n  &:hover {\n    background: var(--nui-color-primary-shade-50);\n  }\n}"
+        }
+      },
+      "customization": {
+        "title": "Erweiterte Themenanpassung",
+        "subtitle": "Erstellen Sie eigene Themenvoreinstellungen mit benutzerdefinierten Farben",
+        "intro": {
+          "title": "Warum benutzerdefinierte Themen erstellen?",
+          "description": "Benutzerdefinierte Themen ermöglichen es Ihnen, Ihre Markenidentität anzupassen, einzigartige Benutzererlebnisse zu schaffen oder Ihren Benutzern mehrere Themenoptionen anzubieten. NUI macht dies mit einem typsicheren Konfigurationssystem einfach."
+        },
+        "stepsTitle": "Schritte zum Erstellen eines benutzerdefinierten Themas",
+        "steps": {
+          "step1": {
+            "title": "Benutzerdefinierte Voreinstellung definieren",
+            "description": "Erstellen Sie ein <code>ThemePreset</code>-Objekt mit Farben für den <code>hellen</code> und <code>dunklen</code> Modus. Jeder Modus erfordert 8 semantische Farben.",
+            "code": "import { ThemePreset } from '@nui/core';\n\nexport const myCustomPreset: ThemePreset = {\n  name: 'custom',\n  label: 'Benutzerdefiniertes Thema',\n  colors: {\n    light: {\n      primary: '#6366f1',\n      secondary: '#8b5cf6',\n      accent: '#ec4899',\n      success: '#10b981',\n      info: '#3b82f6',\n      warning: '#f59e0b',\n      danger: '#ef4444',\n      neutral: '#6b7280'\n    },\n    dark: {\n      primary: '#818cf8',\n      secondary: '#a78bfa',\n      accent: '#f472b6',\n      success: '#34d399',\n      info: '#60a5fa',\n      warning: '#fbbf24',\n      danger: '#f87171',\n      neutral: '#9ca3af'\n    }\n  }\n};"
+          },
+          "step2": {
+            "title": "Thema registrieren",
+            "description": "Fügen Sie Ihre benutzerdefinierte Voreinstellung zur NUI-Konfiguration in Ihrer <code>app.config.ts</code> oder <code>main.ts</code> hinzu:",
+            "code": "import { provideNUI } from '@nui/core';\nimport { myCustomPreset } from './themes/custom';\n\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    provideNUI({\n      theme: {\n        preset: 'custom',\n        customPresets: [myCustomPreset],\n        darkMode: {\n          strategy: 'manual'\n        }\n      }\n    })\n  ]\n};"
+          },
+          "step3": {
+            "title": "Thema verwenden",
+            "description": "Ihr benutzerdefiniertes Thema ist jetzt aktiv! Sie können auch zur Laufzeit zwischen Themen wechseln:",
+            "code": "import { ThemeService } from '@nui/core';\n\nexport class MyComponent {\n  constructor(private themeService: ThemeService) {}\n\n  switchToCustomTheme() {\n    this.themeService.setPreset('custom');\n  }\n\n  switchToAura() {\n    this.themeService.setPreset('aura');\n  }\n}"
+          }
+        },
+        "grayScale": {
+          "title": "Benutzerdefinierte Grauton-Skala (optional)",
+          "description": "Sie können auch eine benutzerdefinierte 10-stufige Grauton-Skala für noch mehr Kontrolle über neutrale Farben definieren. Falls weggelassen, generiert NUI automatisch eine."
+        },
+        "bestPractices": {
+          "title": "Bewährte Vorgehensweisen",
+          "practice1": "<strong>Hex-Farben verwenden</strong> für beste Kompatibilität und Leistung",
+          "practice2": "<strong>In hellem und dunklem Modus testen</strong> um Lesbarkeit und Kontrast sicherzustellen",
+          "practice3": "<strong>Semantische Bedeutung konsistent halten</strong> (z.B. 'danger' sollte immer Fehler/Gefahr bedeuten)",
+          "practice4": "<strong>Farbkontrast-Checker verwenden</strong> um WCAG-Barrierefreiheitsstandards zu erfüllen",
+          "practice5": "<strong>Farbenblindheit berücksichtigen</strong> und nicht ausschließlich auf Farbe zur Informationsvermittlung setzen"
+        },
+        "advanced": {
+          "title": "Erweiterte Anpassung",
+          "tip1": {
+            "title": "Mehrere benutzerdefinierte Voreinstellungen",
+            "description": "Sie können mehrere benutzerdefinierte Voreinstellungen registrieren und Benutzern ermöglichen, zur Laufzeit zwischen ihnen zu wählen."
+          },
+          "tip2": {
+            "title": "Voreinstellungsvererbung",
+            "description": "Beginnen Sie mit einer vorhandenen Voreinstellung und überschreiben Sie nur bestimmte Farben, um Variationen zu erstellen."
+          },
+          "tip3": {
+            "title": "Dynamische Themengenerierung",
+            "description": "Generieren Sie Themen programmatisch basierend auf Benutzereingaben, Markenfarben oder API-Daten."
+          }
+        },
+        "example": {
+          "title": "Vollständiges Beispiel",
+          "description": "Hier ist ein vollständiges Beispiel eines benutzerdefinierten <code>Wald</code>-Themas mit manuellem Dunkelmodus:",
+          "code": "import { ThemePreset } from '@nui/core';\n\nexport const forestPreset: ThemePreset = {\n  name: 'forest',\n  label: 'Wald',\n  colors: {\n    light: {\n      primary: '#059669',    // Smaragd\n      secondary: '#0891b2',  // Cyan\n      accent: '#7c3aed',     // Violett\n      success: '#16a34a',    // Grün\n      info: '#0284c7',       // Himmelblau\n      warning: '#ca8a04',    // Gelb\n      danger: '#dc2626',     // Rot\n      neutral: '#52525b'     // Zink\n    },\n    dark: {\n      primary: '#34d399',\n      secondary: '#22d3ee',\n      accent: '#a78bfa',\n      success: '#4ade80',\n      info: '#38bdf8',\n      warning: '#facc15',\n      danger: '#f87171',\n      neutral: '#a1a1aa'\n    }\n  },\n  grays: {\n    light: {\n      50: '#fafafa',\n      100: '#f4f4f5',\n      200: '#e4e4e7',\n      300: '#d4d4d8',\n      400: '#a1a1aa',\n      500: '#71717a',\n      600: '#52525b',\n      700: '#3f3f46',\n      800: '#27272a',\n      900: '#18181b'\n    },\n    dark: {\n      50: '#18181b',\n      100: '#27272a',\n      200: '#3f3f46',\n      300: '#52525b',\n      400: '#71717a',\n      500: '#a1a1aa',\n      600: '#d4d4d8',\n      700: '#e4e4e7',\n      800: '#f4f4f5',\n      900: '#fafafa'\n    }\n  }\n};"
+        }
+      }
+    }
+  },
+  "components": {
+    "button": {
+      "title": "Schaltfläche",
+      "subtitle": "Vielseitige Schaltflächenkomponente mit mehreren Varianten, Größen und Zuständen",
+      "basic": {
+        "title": "Einfache Schaltfläche",
+        "description": "Die einfachste Form einer Schaltfläche mit Standardstilen."
+      },
+      "variants-colors": {
+        "title": "Varianten & Farben",
+        "description": "Unterstützt verschiedene Varianten und Farben aus dem NUI-System.",
+        "note": "Kombinieren Sie <code>color</code> und <code>variant</code>, um das Erscheinungsbild der Schaltfläche nach Ihren Bedürfnissen anzupassen."
+      },
+      "shapes": {
+        "title": "Formen",
+        "description": "Steuern Sie die Schaltflächenform mit abgerundeten Rahmenoptionen.",
+        "note": "Formoptionen: <code>'rounded'</code> für leicht abgerundete Rahmen, <code>'pill'</code> für vollständig abgerundete Rahmen und <code>'square'</code> für gerade Rahmen."
+      },
+      "raised": {
+        "title": "Erhabene Schaltflächen",
+        "description": "Fügen Sie Ihren Schaltflächen mit einem subtilen Schatten visuelle Tiefe hinzu.",
+        "note": "Erhabene Schaltflächen sind ideal für primäre Aktionen, die Sie in Ihrer Oberfläche hervorheben möchten. Verwenden Sie das Attribut <code>raised</code> an Ihrer Schaltflächenkomponente."
+      },
+      "sizes": {
+        "title": "Größen",
+        "description": "Fünf Größenoptionen in NUI verfügbar.",
+        "note": "Größen beeinflussen die Schaltflächenhöhe, horizontalen Innenabstand und Schriftgröße. Verwenden Sie <code>size</code> mit den Werten <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> und <code>'xl'</code>."
+      },
+      "icons": {
+        "title": "Icons",
+        "description": "Fügen Sie Schaltflächen Icons am Anfang oder Ende hinzu. Schaltflächen mit nur einem Icon werden als kreisförmige Icon-Schaltflächen gerendert.",
+        "note": "Icon-Position: <code>'start'</code> zeigt das Icon vor dem Text, <code>'end'</code> danach. Nur-Icon-Schaltflächen benötigen das Attribut <code>aria-label</code> für Barrierefreiheit."
+      },
+      "loading": {
+        "title": "Ladezustand",
+        "description": "Zeigt einen Lade-Spinner in drei Positionen: Anfang, Ende oder Mitte (ersetzt den Inhalt).",
+        "note": "Ladepositionen: <code>'start'</code> zeigt den Spinner vor dem Text, <code>'end'</code> danach, <code>'center'</code> ersetzt den Inhalt vollständig durch einen zentrierten Spinner. Wenn die Schaltfläche nur ein <code>Icon</code> enthält, wird der Inhalt beim Laden ebenfalls durch den Spinner ersetzt."
+      },
+      "width": {
+        "title": "Breite",
+        "description": "Steuern Sie die Schaltflächenbreite: auto (Standard), full (100%) oder fit (inhaltsangepasst).",
+        "note": "Breitenoptionen: <code>'auto'</code> passt sich dem Inhalt mit Standardinnenabstand an, <code>'full'</code> dehnt sich auf 100% des Containers aus, <code>'fit'</code> verwendet den minimalen notwendigen Platz."
+      },
+      "disabled": {
+        "title": "Deaktivierter Zustand",
+        "description": "Deaktivierte Schaltflächen verhindern Benutzerinteraktion und zeigen ein abgedunkeltes Erscheinungsbild."
+      },
+      "events": {
+        "title": "Ereignisse",
+        "description": "Behandeln Sie Klick-Ereignisse mit der onClick-Ausgabe. Unterstützt Schaltflächentypen: button, submit und reset.",
+        "consoleNote": "Öffnen Sie <strong>DevTools (F12)</strong> und prüfen Sie die <strong>Konsole</strong>, um bei Klick auf die Schaltflächen protokollierte Ereignisse zu sehen."
+      },
+      "directive": {
+        "title": "Direktive verwenden",
+        "description": "Wenden Sie Schaltflächenstile auf native HTML-Elemente mit der nuiButton-Direktive an.",
+        "note": "Sie können die <code>nuiButton</code>-Direktive auf jedes native HTML-Element wie <code>&lt;button&gt;</code>, <code>&lt;a&gt;</code> oder <code>&lt;div&gt;</code> anwenden, um NUI-Schaltflächenstile und -verhalten zu übertragen."
+      },
+      "api": {
+        "inputs": {
+          "title": "Eingaben",
+          "description": "Eingabeeigenschaften zur Konfiguration des Verhaltens und Erscheinungsbilds der Schaltfläche."
+        },
+        "outputs": {
+          "title": "Ausgaben",
+          "description": "Von der Schaltflächenkomponente ausgegebene Ereignisse."
+        },
+        "computed": {
+          "title": "Berechnete Eigenschaften",
+          "description": "Reaktive berechnete Eigenschaften (Signals) der Komponente."
+        },
+        "models": {
+          "title": "Modelle",
+          "description": "Datenmodelle im Zusammenhang mit der Schaltflächenkomponente."
+        }
+      },
+      "theming": {
+        "colors": {
+          "title": "Farbvariablen",
+          "description": "CSS-Variablen zur Anpassung von Farben nach Variante (solid, outline, ghost) und Farbe (primary, secondary, etc.).",
+          "note": "Ersetzen Sie <code>{color}</code> durch eine beliebige Systemfarbe: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>."
+        },
+        "structure": {
+          "title": "Strukturelle Variablen",
+          "description": "CSS-Variablen für Abstände, Größen, Typografie und visuelle Effekte."
+        }
+      }
+    },
+    "actionMenu": {
+      "title": "Aktionsmenü",
+      "subtitle": "Dropdown-Menükomponente mit Unterstützung für statische, dynamische Elemente und Untermenüs",
+      "basic": {
+        "title": "Grundlegende Verwendung",
+        "description": "Einfaches Aktionsmenü mit einem Array von Elementen. Jedes Element kann ein Label, ein Icon und eine Aktion haben.",
+        "note": "Hier ist ein Beispiel mit sowohl <code>type='static'</code> als auch <code>type='dynamic'</code>.",
+        "consoleNote": "Öffnen Sie DevTools (F12) und prüfen Sie die Konsole, um bei Klick auf Menüelemente protokollierte Aktionen zu sehen."
+      },
+      "separators": {
+        "title": "Trennlinien",
+        "description": "Gruppieren Sie verwandte Aktionen mit visuellen Trennlinien.",
+        "note": "Verwenden Sie Elemente mit der Eigenschaft <code>separator: true</code>, um Trennlinien zwischen Aktionsgruppen hinzuzufügen. Sie können dem Trenner mit der Eigenschaft <code>label</code> ein optionales Label hinzufügen."
+      },
+      "submenu": {
+        "title": "Untermenüs",
+        "description": "Erstellen Sie verschachtelte Menüs mit der Eigenschaft <code>children</code>. Untermenüs können mehrere Ebenen tief verschachtelt werden.",
+        "note": "Verwenden Sie die Eigenschaft <code>children</code>, um Untermenüelemente zu definieren. Jedes Kind kann seine eigenen Kinder für tiefere Verschachtelung haben. <strong>Hinweis:</strong> Wenn ein Kind <code>selected: true</code> hat, zeigt das übergeordnete Element einen visuellen Indikator (vertikale Linie links) zur Erleichterung der Navigation."
+      },
+      "variants": {
+        "title": "Schaltflächenvarianten",
+        "description": "Die Schaltfläche unterstützt verschiedene Varianten und Farben aus dem NUI-System. Die Variante beeinflusst die Schaltfläche, während die Farbe sowohl die Schaltfläche als auch ihren Inhalt beeinflusst.",
+        "note": "Kombinieren Sie <code>color</code> und <code>variant</code>, um das Erscheinungsbild der Menüschaltfläche nach Ihren Bedürfnissen anzupassen."
+      },
+      "sizes": {
+        "title": "Größen",
+        "description": "Verwenden Sie eine der fünf vordefinierten NUI-Größen. Die Größe beeinflusst die Schaltfläche, der Inhalt bleibt jedoch gleich.",
+        "note": "Verwenden Sie die Eingabe <code>size</code>, um die Größe der Menüschaltfläche und ihres Inhalts mit den Größen <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code> und <code>xl</code> anzupassen."
+      },
+      "label": {
+        "title": "Schaltflächeninhalt",
+        "description": "Fügen Sie der Menüschaltfläche Text hinzu. Kann mit Icons kombiniert werden und unterstützt den Vollbreitenmodus.",
+        "note": "Verwenden Sie <code>icon</code> zusammen mit <code>label</code>, um beides auf der Schaltfläche anzuzeigen. Verwenden Sie <code>width='full'</code>, damit die Schaltfläche die volle verfügbare Breite einnimmt. Wenn Sie nur <code>label</code> ohne Icon verwenden, wird die Schaltfläche als einfache Textschaltfläche gerendert.",
+        "codeTitle1": "Text und Icon",
+        "codeTitle2": "Nur Text",
+        "codeTitle3": "Volle Breite"
+      },
+      "disabled": {
+        "title": "Deaktivierter Zustand",
+        "description": "Deaktivieren Sie einzelne Menüelemente oder das gesamte Menü. Deaktivierte Elemente werden angezeigt, sind aber nicht anklickbar."
+      },
+      "withSubtitle": {
+        "title": "Element-Untertitel",
+        "description": "Fügen Sie sekundären Text unter dem Hauptlabel hinzu. Nützlich für zusätzliche Informationen wie E-Mails, Beschreibungen oder Tastenkürzel."
+      },
+      "selected": {
+        "title": "Ausgewählter Zustand",
+        "description": "Markieren Sie Elemente als ausgewählt, um die aktuelle Auswahl anzuzeigen. Ein Häkchen-Icon erscheint automatisch. Ideal für Selektoren, Filter oder Einstellungen."
+      },
+      "icons": {
+        "title": "Beschreibende Icons",
+        "description": "Verwenden Sie aussagekräftige Icons und Labels, um den Zweck jeder Aktion zu kommunizieren. Icons helfen Benutzern, Aktionen schnell zu identifizieren.",
+        "note": "Verwenden Sie relevante Icons aus der <strong>Remix Icon</strong>-Bibliothek, um das visuelle Verständnis von Menüaktionen zu verbessern."
+      },
+      "template": {
+        "title": "Benutzerdefiniertes Template",
+        "description": "Passen Sie das Menü-Rendering vollständig mit Templates und Direktiven an.",
+        "note": "Das <code>#item</code>-Template erhält das vollständige Element als Kontext (<code>let-item</code>). Die Direktiven <code>menu-header</code> und <code>menu-footer</code> ermöglichen eine einfache und klare Syntax und vermeiden unnötige ng-Templates. <br/><br/> <strong>Wichtig:</strong> Bei der Verwendung benutzerdefinierter Templates müssen Sie das Klick-Ereignis manuell mit <code>(click)=\"handleAction(item)\"</code> behandeln. Das <code>onItemAction</code>-Ereignis wird nur automatisch bei Standardelementen ausgelöst."
+      },
+      "api": {
+        "inputs": {
+          "title": "Komponenteneingaben",
+          "description": "Eingabeeigenschaften, die das Verhalten und Erscheinungsbild des Aktionsmenüs ändern."
+        },
+        "outputs": {
+          "title": "Komponentenausgaben",
+          "description": "Vom Komponenten ausgegebene Ereignisse, auf die Sie hören können, um auf Benutzerinteraktionen zu reagieren."
+        },
+        "interface": {
+          "title": "ActionMenuItem-Schnittstelle",
+          "description": "Vollständige Struktur eines Menüelements mit allen verfügbaren Eigenschaften."
+        }
+      },
+      "theming": {
+        "structure": {
+          "title": "Strukturelle Variablen",
+          "description": "CSS-Variablen, die Menüabmessungen, Abstände, Rahmen und Schatten steuern."
+        },
+        "items": {
+          "title": "Element-Variablen",
+          "description": "CSS-Variablen zur Anpassung des Erscheinungsbilds von Elementen, Trennlinien, Tastenkürzeln und internen Elementen."
+        },
+        "colors": {
+          "title": "Farbvariablen",
+          "description": "CSS-Variablenmuster zur Anpassung von Menüelementfarben pro Zustand.",
+          "note": "Ersetzen Sie <code>{color}</code> durch eine beliebige semantische NUI-Farbe (<code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>), um das Erscheinungsbild von Elementen für verschiedene Zustände anzupassen."
+        }
+      },
+      "styling": {
+        "title": "Stile & Anpassung",
+        "description": "Passen Sie das Menüerscheinungsbild über CSS-Variablen an. Steuern Sie Farben, Abstände, Typografie und mehr."
+      }
+    },
+    "avatar": {
+      "title": "Avatar",
+      "subtitle": "Grafische Komponente zur Darstellung von Benutzern, Entitäten oder Marken über Bilder, Initialen oder Icons",
+      "basic": {
+        "title": "Grundlegende Verwendung",
+        "description": "Zeigen Sie einen einfachen Avatar an, der ein externes Bild lädt. Dies ist die häufigste Form der Benutzerdarstellung."
+      },
+      "types": {
+        "title": "Inhaltstypen & Priorität",
+        "description": "Die Komponente entscheidet intelligent, was basierend auf den verfügbaren Daten angezeigt werden soll. Diese Logik stellt sicher, dass immer etwas Bedeutungsvolles angezeigt wird.",
+        "note": "<strong>Renderpriorität:</strong> 1. Bild (falls geladen) &gt; 2. Initialen &gt; 3. Icon &gt; 4. Fallback (Alt-Buchstabe) &gt; 5. Standard-Icon."
+      },
+      "variants": {
+        "title": "Formvarianten",
+        "description": "Der Avatar unterstützt drei geometrische Formen für verschiedene Designkontexte.",
+        "note": "Verwenden Sie die Eingabe <code>variant</code> mit den Werten <code>'circular'</code>, <code>'rounded'</code> und <code>'square'</code>, um die Avatar-Form zu ändern."
+      },
+      "sizes": {
+        "title": "Größen",
+        "description": "Fünf vordefinierte Größen, die Container, Typografie und Icons harmonisch skalieren.",
+        "note": "Größen beeinflussen die Avatar-Dimension, Schriftgröße für Initialen und Icon-Größe. Verwenden Sie <code>size</code> mit den Werten <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> und <code>'xl'</code>."
+      },
+      "colors": {
+        "title": "Farben",
+        "description": "Passen Sie die Hintergrund- und Textfarbe mit der Systempalette an. Ideal zur Unterscheidung von Benutzern oder Zuständen, wenn kein Bild vorhanden ist.",
+        "note": "Verwenden Sie die Eingabe <code>color</code> mit Werten wie <code>'primary'</code>, <code>'secondary'</code>, <code>'accent'</code>, <code>'success'</code>, <code>'info'</code>, <code>'warning'</code> und <code>'danger'</code>, um die Avatar-Farben zu ändern. Sie können auch benutzerdefinierte Farben im Format <code>rgb</code>, <code>hexadezimal</code> oder <code>Schlüsselwort</code> für vollständige Kontrolle über das Erscheinungsbild des Avatars verwenden. Bei einer benutzerdefinierten Farbe berechnet die Komponente automatisch eine kontrastierende Textfarbe, um die Lesbarkeit von Initialen oder Icons sicherzustellen."
+      },
+      "customSize": {
+        "title": "Benutzerdefinierte Größe",
+        "description": "Definieren Sie exakte Pixelabmessungen, wenn Standardgrößen nicht passen. Schrift- und Icon-Größen werden automatisch proportional berechnet.",
+        "note": "Die Eingabe <code>customSize</code> überschreibt die Eingabe <code>size</code>. Die interne Berechnung erhält die Lesbarkeit der Initialen."
+      },
+      "grouped": {
+        "title": "Gruppierte Avatare",
+        "description": "Zeigen Sie mehrere Avatare in einer einzelnen Komponente mit Überlappung und einem Anzeigelimit an.",
+        "note": "Verwenden Sie die Komponente <code>nui-avatar-group</code>, um mehrere Avatare zu gruppieren. Steuern Sie die maximale sichtbare Anzahl mit <code>max</code>. Zusätzliche Avatare werden als '+X'-Zähler dargestellt. Sie können <code>bordered</code> verwenden, um eine klare Trennung zwischen den Avataren zu sehen."
+      },
+      "error": {
+        "title": "Fehlerbehandlung (Fallback)",
+        "description": "Automatisches Wiederherstellungssystem. Wenn die Bild-URL fehlschlägt (404-Fehler), wechselt die Komponente sofort zur Anzeige von Initialen oder dem Fallback-Icon, ohne das Layout zu beschädigen."
+      },
+      "api": {
+        "inputs": {
+          "title": "Komponenteneingaben",
+          "description": "Eingabeeigenschaften, die das Verhalten und Erscheinungsbild des Avatars ändern."
+        },
+        "outputs": {
+          "title": "Komponentenausgaben",
+          "description": "Vom Komponenten ausgegebene Ereignisse, auf die Sie hören können, um auf Bildladefehler zu reagieren."
+        }
+      },
+      "theming": {
+        "sizes": {
+          "title": "Größenvariablen",
+          "description": "CSS-Variablen, die Avatar-Abmessungen, Schriftgrößen und Icon-Größen steuern."
+        },
+        "styles": {
+          "title": "Stil-Variablen",
+          "description": "CSS-Variablen zur Anpassung von Rahmen, Standardfarben und Avatar-Typografie."
+        }
+      },
+      "styling": {
+        "title": "Stile & Anpassung",
+        "description": "Passen Sie das Avatar-Erscheinungsbild über CSS-Variablen an. Steuern Sie Größen, Farben, Rahmen und mehr."
+      }
+    },
+    "selectButton": {
+      "title": "Auswahlschaltfläche",
+      "subtitle": "Gruppierter Schaltflächensatz für Einfach- (Radio) oder Mehrfachauswahl (Kontrollkästchen)",
+      "basic": {
+        "title": "Grundlegende Verwendung",
+        "description": "Der einfachste Fall akzeptiert ein Array von Strings. Standardmäßig fungiert er als Einzeloptionsselektor (Radio)."
+      },
+      "modes": {
+        "title": "Auswahlmodi",
+        "description": "Ermöglicht die Änderung des Schaltflächen-Auswahltyps zwischen Optionsfeld und Kontrollkästchen.",
+        "note": "Wechseln Sie zu <code>mode='checkbox'</code>, um die gleichzeitige Auswahl mehrerer Optionen zu ermöglichen. Der zurückgegebene Wert ist dann ein Array."
+      },
+      "complex": {
+        "title": "Komplexe Objekte",
+        "description": "Unterstützt Arrays von Objekten mit benutzerdefinierten Eigenschaften für Label, Wert und deaktivierten Zustand.",
+        "note": "Bilden Sie Eigenschaften beliebiger Objekte mit <code>labelBy</code>, <code>valueBy</code>, <code>iconBy</code> und <code>disabledBy</code> ab."
+      },
+      "icons": {
+        "title": "Icons",
+        "description": "Unterstützt nur-Icon-Schaltflächen für eine kompakte Werkzeugleisten-artige Schaltflächenleiste.",
+        "note": "Remix Icon-Unterstützung. Verwenden Sie <code>iconOnly='true'</code> für eine kompakte Werkzeugleisten-artige Schaltflächenleiste. Bei einem <strong>Objekt</strong> können Sie die Icon-Eigenschaft mit <code>iconBy</code> abbilden."
+      },
+      "colors": {
+        "title": "Farben & Varianten",
+        "description": "Kompatibel mit dem vollständigen Variantensystem (Solid, Outline, Ghost) und NUI-Farben.",
+        "note": "Kombinieren Sie <code>color</code> und <code>variant</code>."
+      },
+      "segmented": {
+        "title": "Segmentierte Variante (iOS-Stil)",
+        "description": "Visueller Stil ähnlich dem <strong>iOS Segmented Control</strong>, speziell und zusätzlich zu den grundlegenden Variantentypen von NUI. Ideal für Ansichtsumschalter (z.B.: Monat / Jahr, Liste / Karte).",
+        "note": "Verwenden Sie <code>variant='segmented'</code>, um diese einzigartige Variante anzuwenden."
+      },
+      "sizes": {
+        "title": "Größen",
+        "description": "Fünf vordefinierte Größen, die Container, Typografie und Icons harmonisch skalieren.",
+        "note": "Verwenden Sie <code>size</code> mit den Werten <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> und <code>'xl'</code>."
+      },
+      "width": {
+        "title": "Volle Breite",
+        "description": "Erweitern Sie Schaltflächen, um den gesamten verfügbaren Platz gleichmäßig einzunehmen.",
+        "note": "Verwenden Sie <code>width='full'</code>, damit jede Schaltfläche sich erweitert und eine gleichmäßige Breite im Container einnimmt."
+      },
+      "api": {
+        "title": "API & Referenz",
+        "description": "Vollständige Dokumentation der Eingaben, Ausgaben und erweiterten Verwendung der Auswahlschaltflächenkomponente.",
+        "inputs": {
+          "title": "Eingaben",
+          "description": "Komponenteneigenschaften, die ihr Verhalten und Erscheinungsbild steuern."
+        },
+        "outputs": {
+          "title": "Ausgaben",
+          "description": "Vom Komponenten während seines Lebenszyklus ausgegebene Ereignisse."
+        }
+      },
+      "theming": {
+        "title": "Stile & Anpassung",
+        "description": "Passen Sie das Erscheinungsbild der Auswahlschaltfläche über CSS-Variablen an. Steuern Sie Abstände, Farben, Schatten und mehr.",
+        "general": {
+          "title": "Allgemeine Variablen",
+          "description": "CSS-Variablen zur Anpassung des allgemeinen Stils der Auswahlschaltfläche (Standard-Layout)."
+        },
+        "segmented": {
+          "title": "Segmentiertes Layout-Variablen",
+          "description": "CSS-Variablen spezifisch für den segmentierten Stil (iOS-artig). Steuert Container, ausgewählte/nicht ausgewählte Zustände und Hover-Effekte."
+        }
+      }
+    },
+    "calendar": {
+      "title": "Kalender",
+      "subtitle": "Komponente zur Datumsauswahl mit mehreren Modi (Tag, Woche, Bereich), Größen und Breitenstrategien",
+      "basic": {
+        "title": "Grundlegende Verwendung",
+        "description": "Einfacher Kalender zur Auswahl eines einzelnen Datums. Zeigt den aktuellen Monat an und ermöglicht die Navigation zwischen Monaten und Jahren."
+      },
+      "sizes": {
+        "title": "Größen",
+        "description": "Fünf Größenoptionen (xs, sm, md, lg, xl) und eine sechste Auto-Option, die sich an den Container anpasst. Größen skalieren alle internen Elemente harmonisch.",
+        "note": "Größen beeinflussen Breite, Zellhöhe, Innenabstand und Schriftgröße des Kalenders. Verwenden Sie <code>size</code> mit den Werten <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> oder <code>'auto'</code>."
+      },
+      "widths": {
+        "title": "Breitenstrategien",
+        "description": "Zwei Breitenstrategien: <strong>compact</strong> (feste Breite basierend auf Größe) und <strong>full</strong> (nimmt 100% des Containers ein). Der Full-Modus verwendet Container Queries zur Typografieanpassung.",
+        "note": "Verwenden Sie <code>width='compact'</code> für einen Kalender mit fester Breite, ideal für Popovers. Verwenden Sie <code>width='full'</code> für einen Kalender, der den gesamten verfügbaren Platz einnimmt, ideal für Formulare oder Inhaltsbereiche."
+      },
+      "week-selection": {
+        "title": "Wochenauswahl",
+        "description": "Spezieller Modus zur Auswahl einer vollständigen Woche (7 aufeinanderfolgende Tage). Nützlich für wöchentliche Planung.",
+        "note": "Setzen Sie <code>type='WEEK'</code>, um diesen Modus zu aktivieren. Der Kalender hebt beim Hover die gesamte Woche hervor und gibt ein Objekt mit den Start- und Enddaten der Woche zurück."
+      },
+      "range-selection": {
+        "title": "Bereichsauswahl",
+        "description": "Ermöglicht die Auswahl eines Datumsbereichs mit Anfang und Ende. Zeigt visuell die Zwischendaten des Bereichs an.",
+        "note": "Setzen Sie <code>type='RANGE'</code>, um diesen Modus zu aktivieren. Der Kalender erwartet zwei Klicks: einen für Anfang und einen für Ende des Bereichs. Die Ausgabe gibt ein Objekt <code>{ start: Date, end: Date }</code> zurück."
+      },
+      "presets": {
+        "title": "Schnellbereichs-Voreinstellungen",
+        "description": "Fügen Sie Voreinstellungsschaltflächen für häufige Bereiche wie 'Letzte Woche', 'Letzter Monat', 'Letztes Jahr' hinzu. Ermöglicht das Einschließen von Remix-Icons.",
+        "note": "Diese Funktion ist nur verfügbar, wenn <code>type='RANGE'</code>. Stellen Sie ein Array von <code>DateRangePreset</code>-Objekten in <code>customPresets</code> bereit. Jede Voreinstellung hat ein <code>label</code>, einen <code>range</code> (mit Start/Ende) und ein optionales <code>icon</code>."
+      },
+      "time-picker": {
+        "title": "Zeitauswahl-Integration",
+        "description": "Kombinieren Sie Datumsauswahl mit Zeitauswahl. Unterstützt Startzeit, Endzeit oder beides je nach Kalendertyp.",
+        "note": "Verwenden Sie <code>showTimePicker='true'</code> und konfigurieren Sie <code>timePickerMode</code> mit <code>'start'</code>, <code>'end'</code> oder <code>'both'</code>. Sie können die Zeitauswahl mit <code>timePickerConfig</code> anpassen (Schritte, Bereich, Voreinstellungen, etc.)."
+      },
+      "disabled-dates": {
+        "title": "Deaktivierte Daten",
+        "description": "Sperren Sie bestimmte Daten von der Auswahl. Nützlich für Feiertage, Wochenenden oder nicht verfügbare Daten.",
+        "note": "Verwenden Sie <code>disabledDates</code>, um ein Array deaktivierter Daten anzugeben. Deaktivierte Daten zeigen einen charakteristischen abgedunkelten Stil und sind nicht auswählbar."
+      },
+      "min-max-dates": {
+        "title": "Minimaler und maximaler Bereich",
+        "description": "Schränken Sie den auswählbaren Datumsbereich mit Minimal- und Maximalwerten ein. Daten außerhalb des Bereichs sind deaktiviert.",
+        "note": "Konfigurieren Sie <code>minDate</code> und <code>maxDate</code>, um die Grenzen festzulegen. Benutzer können nicht über diese Grenzen hinaus navigieren oder Daten außerhalb des Bereichs auswählen."
+      },
+      "reactive-forms": {
+        "title": "Reaktive Formulare",
+        "description": "Vollständige Integration mit Angular-Reaktivformularen. Implementiert ControlValueAccessor für automatische Synchronisation.",
+        "note": "Verwenden Sie <code>formControl</code> oder <code>formControlName</code> zur Integration mit Angular-Formularen. Die Komponente behandelt automatisch Synchronisation, Validierung und Zustand. Unterstützt alle Typen (DAY, WEEK, RANGE) in Formularen."
+      },
+      "dynamic-disabled-dates": {
+        "title": "Dynamisch deaktivierte Daten",
+        "description": "Deaktivieren Sie Daten basierend auf komplexer Geschäftslogik mit einer benutzerdefinierten Funktion. Überschreibt das statische <code>disabledDates</code>-Array.",
+        "note": "Verwenden Sie <code>isDateEnabledFn</code>, um dynamische Aktivierungsregeln zu definieren. Die Funktion erhält ein Datum und muss <code>true</code> zurückgeben, wenn aktiviert, oder <code>false</code>, wenn es deaktiviert werden soll. Ideal für Unternehmenskalender, Buchungssysteme oder Anwendungen mit komplexer Verfügbarkeitslogik."
+      },
+      "date-status": {
+        "title": "Visuelle Zustände (dateStatusFn)",
+        "description": "Weisen Sie Daten visuelle Zustände zu, um Geschäftsinformationen anzuzeigen: Verfügbarkeit, Priorität, Ereignisse, etc.",
+        "note": "Verwenden Sie <code>dateStatusFn</code>, um jedem Datum einen von vier Zuständen zuzuweisen: <code>'success'</code> (grün), <code>'info'</code> (blau), <code>'warning'</code> (bernstein) oder <code>'danger'</code> (rot). Zustände werden als subtile Farblinie oben am Tag angezeigt. Geben Sie <code>null</code> für Tage ohne besonderen Zustand zurück."
+      },
+      "selection-modes": {
+        "title": "Erweiterte Auswahlmodi",
+        "description": "Der Kalender unterstützt drei spezialisierte Auswahlmodi: normale Tagesauswahl, Monats-/Jahresauswahl und nur Jahresauswahl.",
+        "note": "Jeder Modus ist für einen bestimmten Anwendungsfall optimiert: <code>type='day'</code> für vollständige Datumsauswahl, <code>type='month'</code> für die Auswahl von Monat und Jahr (ideal für monatliche Filter), und <code>type='year'</code> für die ausschließliche Jahresauswahl (ideal für Jahresberichte). Die Modi <code>month</code> und <code>year</code> starten direkt in der entsprechenden Ansicht und schließen bei der Auswahl automatisch, wenn <code>closeOnSelect</code> aktiv ist."
+      },
+      "multiple-selection": {
+        "title": "Mehrfachauswahl",
+        "description": "Ermöglicht die Auswahl mehrerer Daten, Monate oder Jahre mit einem einzigen Klick. Ideal für die Auswahl von Arbeitstagen, Feiertagen oder verteilten Ereignissen.",
+        "note": "Aktivieren Sie den Mehrfachauswahlmodus mit <code>selection=\"multiple\"</code> kombiniert mit <code>type='day'</code>, <code>type='month'</code> oder <code>type='year'</code>. Benutzer können auf mehrere Elemente klicken, um sie zur Auswahl hinzuzufügen/zu entfernen (Toggle). Dieser Modus <strong>schließt den Kalender nie automatisch</strong>, auch wenn <code>closeOnSelect</code> <code>true</code> ist, um eine kontinuierliche Auswahl zu ermöglichen. Die Ausgabe gibt ein Objekt mit <code>dates</code>, <code>months</code> oder <code>years</code> zurück, je nach Typ."
+      },
+      "week-numbers": {
+        "title": "ISO-8601-Wochennummern",
+        "description": "Zeigt Wochennummern gemäß dem ISO-8601-Standard in einer Spalte links vom Kalender an. Nützlich für Unternehmen, Logistik und Planung.",
+        "note": "Aktivieren Sie Wochennummern mit <code>[showWeekNumbers]=\"true\"</code>. Wochennummern sind klickbar, wenn <code>type='week'</code> oder <code>type='day'</code> und <code>selection='multiple'</code>, was die Auswahl der gesamten Woche mit einem einzigen Klick ermöglicht. Der ISO-8601-Standard legt fest, dass die Woche montags beginnt und Woche 1 des Jahres die erste Woche ist, die mindestens 4 Tage des neuen Jahres enthält."
+      },
+      "api": {
+        "inputs": {
+          "title": "Eingaben",
+          "description": "Eingabeeigenschaften zur Konfiguration des Verhaltens, Erscheinungsbilds und der Einschränkungen des Kalenders"
+        },
+        "outputs": {
+          "title": "Ausgaben",
+          "description": "Vom Kalender ausgegebene Ereignisse, wenn der Benutzer ein Datum oder einen Bereich auswählt"
+        },
+        "calendar-value": {
+          "title": "CalendarValue",
+          "description": "Union-Typ, der alle möglichen Kalenderwerte abhängig vom ausgewählten Typ darstellt",
+          "note": "Der Typ des zurückgegebenen Werts hängt von <code>type</code> ab: <strong>DAY</strong> gibt <code>Date | null</code> zurück, <strong>WEEK</strong> gibt <code>{ start: Date, end: Date } | null</code> zurück, und <strong>RANGE</strong> gibt <code>{ start: Date, end: Date } | null</code> zurück."
+        },
+        "calendar-type": {
+          "title": "CalendarType",
+          "description": "Enum, das den Kalenderauswahlmodus definiert"
+        },
+        "calendar-width": {
+          "title": "CalendarWidth",
+          "description": "Enum, das die Kalenderbreitenstrategie definiert"
+        },
+        "calendar-selection": {
+          "title": "CalendarSelection",
+          "description": "Enum, das den Kalenderauswahlmodus definiert: einfach oder mehrfach"
+        },
+        "view-mode": {
+          "title": "ViewMode",
+          "description": "Enum, das den aktuellen Ansichtsmodus definiert (Tage, Monate oder Jahre). Hauptsächlich für die interne Komponentenverwendung.",
+          "note": "Dieses Enum wird intern von der Komponente zur Verwaltung der Navigation zwischen Ansichten verwendet. Es muss in den meisten Fällen nicht direkt konfiguriert werden."
+        },
+        "preset": {
+          "title": "DateRangePreset",
+          "description": "Schnittstelle zur Definition von Schnellbereichs-Voreinstellungen mit Label, Datumsbereich und optionalem Icon"
+        },
+        "smart-types": {
+          "title": "Intelligente Typen",
+          "description": "Typen und Funktionen für erweiterte Datumsvalidierung und Statuslogik. Ermöglichen die Anwendung komplexer Geschäftsregeln und dynamischer Visualisierungen.",
+          "note": "Diese Typen sind grundlegend für die Implementierung erweiterter Funktionen: <strong>DateStatusFn</strong> weist Daten basierend auf Geschäftslogik visuelle Zustände (success, warning, danger, info) zu, während <strong>IsDateEnabledFn</strong> dynamisch steuert, welche Daten aktiviert oder deaktiviert sind. Beide Funktionen erhalten ein Datum und ermöglichen komplexe Validierungen wie Unternehmenskalender, Buchungssysteme oder benutzerdefinierte Verfügbarkeitsregeln."
+        }
+      },
+      "theming": {
+        "colors": {
+          "title": "Farben",
+          "description": "Der Kalender verwendet hauptsächlich globale Theme-Variablen. Ausgewählte Tage, Hover und aktive Zustände verwenden die Primärfarbe des aktiven Themas.",
+          "note": "Die Komponente integriert sich vollständig in das Theming-System von NUI. Primär-, Hintergrund-, Text- und Rahmenfarben werden automatisch von der ausgewählten Themenvoreinstellung geerbt."
+        },
+        "sizes": {
+          "title": "Größen",
+          "description": "Größenspezifische CSS-Variablen, die Breite, Innenabstand, Abstände, Zellengrößen und Typografie steuern. Fünf verfügbare Größenvarianten: xs, sm, md (Standard), lg und xl."
+        },
+        "structure": {
+          "title": "Struktur",
+          "description": "Strukturelle CSS-Variablen zur Steuerung von Rahmen, Opazitäten, Animationen und Abmessungen. Umfasst die Anpassung von Registerkarten, Tagen anderer Monate, Voreinstellungen und Fokuszuständen."
+        },
+        "customization": {
+          "title": "Anpassung",
+          "description": "Beispiele zur Anpassung von Kalenderstilen in Ihrer Anwendung. Sie können CSS-Variablen global oder für bestimmte Instanzen überschreiben."
+        }
+      }
+    },
+    "paginator": {
+      "title": "Paginierung",
+      "subtitle": "Erweiterte Komponente für die Datennavigation mit Unterstützung für flexible Layouts und unendliches Laden",
+      "basic": {
+        "title": "Grundlegende Verwendung",
+        "description": "Standardkonfiguration mit numerischer Navigation. Unterstützt Zwei-Wege-Bindung für Seite und Größe."
+      },
+      "nav-display": {
+        "title": "Navigationsanzeigeoptionen",
+        "description": "Definieren Sie, wie Navigationsschaltflächen angezeigt werden sollen: Text, Icons oder beides. Passen Sie das Erscheinungsbild der Navigationsschaltflächen an den Stil Ihrer Anwendung an.",
+        "note": "Verwenden Sie die Eingabe <code>navDisplay</code> mit den Werten <code>'text'</code>, <code>'icon'</code> oder <code>'both'</code>, um nur Text, nur Icons oder beides in Navigationsschaltflächen anzuzeigen. Icons basieren auf der Remix Icon-Bibliothek und werden automatisch nach Schaltflächentyp zugewiesen (erste Seite, vorherige Seite, nächste Seite, letzte Seite)."
+      },
+      "colors": {
+        "title": "Farben & Varianten",
+        "description": "Unterstützt alle NUI-Farben und Varianten (Solid, Outline, Ghost).",
+        "note": "Kombinieren Sie <code>color</code> und <code>variant</code>, um das Paginierungserscheinungsbild nach Ihren Bedürfnissen anzupassen."
+      },
+      "sizes": {
+        "title": "Seitengrößenoptionen",
+        "description": "Definieren Sie einen benutzerdefinierten Satz von Optionen für die Seitengröße.",
+        "note": "Mit der Eingabe <code>size</code> können Sie Benutzern einen spezifischen Satz von Seitengrößen zur Auswahl anbieten."
+      },
+      "layout": {
+        "title": "Benutzerdefiniertes Layout",
+        "description": "Die leistungsstärkste Funktion. Definieren Sie genau, wohin jedes Element geht (oben, links, Mitte, rechts, unten) mit einem Konfigurationsobjekt.",
+        "note": "<strong>⚠️ Wichtig für Mobilgeräte:</strong> Komplexe Layouts für Desktop können auf kleinen Bildschirmen überlaufen. Stellen Sie immer ein optimiertes <code>mobileLayout</code> bereit, das Elemente vertikal neu anordnet und die wesentliche Navigation priorisiert. Dies verhindert UX-Probleme auf Mobilgeräten. <br/><br/><strong>Bereichssystem:</strong> Wenn ein Layout festgelegt ist, werden Attribute wie <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> und <code>showPageJump</code> ignoriert, da das benutzerdefinierte Layout die vollständige Kontrolle darüber hat, was wo angezeigt wird."
+      },
+      "infinite": {
+        "title": "Unendliches Laden",
+        "description": "Wandelt die Paginierung in eine <strong>Mehr laden</strong>-Schaltfläche mit integriertem Ladezustand um. Ideal für mobile Listen oder Feeds.",
+        "note": "Aktivieren Sie den unendlichen Lademodus mit <code>infiniteConfig</code>. Die Paginierung wird zu einer Schaltfläche, die beim Klicken mehr Elemente lädt. Verwenden Sie die Ausgabe <code>onLoadMore</code> in <code>infiniteConfig</code>, um die Datenladelogik zu behandeln."
+      },
+      "api": {
+        "title": "API & Referenz",
+        "description": "Vollständige Dokumentation der Eingaben, Ausgaben und Schnittstellen der Paginierungskomponente für erweiterte Integration.",
+        "inputs": {
+          "title": "Eingaben",
+          "description": "Eingabeeigenschaften der Paginierungskomponente"
+        },
+        "outputs": {
+          "title": "Ausgaben",
+          "description": "Von der Paginierungskomponente ausgegebene Ereignisse"
+        },
+        "texts": {
+          "title": "PaginatorI18n",
+          "description": "Schnittstelle für anpassbare Paginierungstexte"
+        },
+        "keyboard": {
+          "title": "KeyboardConfig",
+          "description": "Schnittstelle für die Tastaturnavigationskonfiguration"
+        },
+        "loading": {
+          "title": "LoadingConfig",
+          "description": "Schnittstelle für die Ladezustandskonfiguration"
+        },
+        "layout": {
+          "title": "PaginatorLayout",
+          "description": "Schnittstelle für benutzerdefiniertes Layout: Elemente in Bereichen organisieren (oben, links, Mitte, rechts, unten)"
+        },
+        "icons": {
+          "title": "navIcons",
+          "description": "Schnittstelle für die anpassbare Icons-Konfiguration"
+        },
+        "infinite": {
+          "title": "InfiniteConfig",
+          "description": "Schnittstelle für die Endlosladefunktion-Konfiguration"
+        }
+      },
+      "styling": {
+        "title": "Stile & Anpassung",
+        "description": "Passen Sie das Paginierungserscheinungsbild über CSS-Variablen an. Steuern Sie Layout, Schaltflächen, Seitennummern und mehr."
+      },
+      "theming": {
+        "layout": {
+          "title": "Layout",
+          "description": "CSS-Variablen für das allgemeine Paginierungslayout"
+        },
+        "buttons": {
+          "title": "Schaltflächen",
+          "description": "CSS-Variablen für Navigationsschaltflächen und Seitennummern"
+        },
+        "active": {
+          "title": "Aktive Seite",
+          "description": "CSS-Variablen für den aktiven Zustand der aktuellen Seite"
+        },
+        "controls": {
+          "title": "Steuerelemente",
+          "description": "CSS-Variablen für den Größenselektor, die Elementbereichsanzeige und den Seitensprung"
+        },
+        "infinite": {
+          "title": "Endloses Scrollen",
+          "description": "CSS-Variablen für den unendlichen Lademodus"
+        }
+      }
+    },
+    "popover": {
+      "title": "Popover",
+      "subtitle": "Interaktive schwebende Inhaltskomponente mit Unterstützung für Text, Templates und dynamische Komponenten. Anders als der <code>Tooltip</code> kann der Popover interaktive Elemente wie Schaltflächen, Formulare oder Listen enthalten.",
+      "examples": {
+        "basic": {
+          "title": "Grundlegende Verwendung",
+          "description": "Einfacher Popover mit Textinhalt. Der Popover wird beim Klicken angezeigt (Standardverhalten)."
+        },
+        "colors": {
+          "title": "Farben & Varianten",
+          "description": "Unterstützt alle NUI-Farben und Varianten (Solid, Outline, Ghost) zur Anpassung des Popover-Erscheinungsbilds.",
+          "note": "Kombinieren Sie <code>color</code> und <code>variant</code>, um den Popover-Stil an Ihr Design anzupassen."
+        },
+        "positions": {
+          "title": "Positionen",
+          "description": "Steuern Sie die bevorzugte Popover-Position: oben, unten, links oder rechts. Der Popover positioniert sich automatisch neu, wenn nicht genug Platz vorhanden ist."
+        },
+        "events": {
+          "title": "Auslöserereignisse",
+          "description": "Definieren Sie, wie der Popover ausgelöst wird: Klicken (Standard), Hover, Fokus oder manuell. Der manuelle Modus ermöglicht vollständige programmatische Kontrolle.",
+          "note": "Mit <code>nuiPopoverEvent</code> haben wir drei Modi: <code>'click'</code> (beim Klicken anzeigen/ausblenden), <code>'hover'</code> (bei Maus-Hover anzeigen, beim Verlassen ausblenden) und <code>'focus'</code> (beim Fokus anzeigen, beim Blur ausblenden)."
+        },
+        "template": {
+          "title": "Benutzerdefiniertes Template",
+          "description": "Verwenden Sie Angular-Templates für reichhaltige interaktive Inhalte. Der Template-Kontext bietet eine <code>close</code>-Funktion zum Schließen des Popovers.",
+          "note": "Das <code>#popoverTemplate</code>-Template erhält einen Kontext mit einer <code>close()</code>-Funktion, die Sie verwenden können, um den Popover von innen zu schließen."
+        },
+        "component": {
+          "title": "Dynamische Komponente",
+          "description": "Rendern Sie vollständige Angular-Komponenten innerhalb des Popovers. Ideal für Formulare, Listen oder komplexe Inhalte."
+        },
+        "delays": {
+          "title": "Anzeige-/Ausblendverzögerungen",
+          "description": "Konfigurieren Sie Verzögerungen in Millisekunden vor dem Anzeigen oder Ausblenden des Popovers. Nützlich zur Verbesserung der Benutzererfahrung im Hover-Modus."
+        },
+        "customization": {
+          "title": "Anpassung",
+          "description": "Passen Sie das Popover-Erscheinungsbild an: ohne Pfeil, benutzerdefinierte Breite, benutzerdefinierte CSS-Klassen oder größerer Trennabstand.",
+          "note": "Sie können <code>nuiPopoverShowArrow</code> zum Verstecken/Anzeigen des Pfeils, <code>nuiPopoverMaxWidth</code> zur Definition einer maximalen Breite, <code>nuiPopoverMinWidth</code> zur Definition einer minimalen Breite, <code>nuiPopoverClass</code> zum Hinzufügen benutzerdefinierter CSS-Klassen und <code>nuiPopoverOffset</code> zur Anpassung des Abstands zwischen Popover und Zielelement verwenden."
+        },
+        "closeOptions": {
+          "title": "Schließoptionen",
+          "description": "Steuern Sie, wie der Popover geschlossen werden kann: Klick außerhalb, Escape-Taste oder mehrere gleichzeitig geöffnete Popovers erlauben.",
+          "note": "Verwenden Sie <code>nuiPopoverCloseOnClickOutside</code> zum Schließen bei Außenklick, <code>nuiPopoverCloseOnEscape</code> zum Schließen mit Escape und <code>nuiPopoverAllowMultiple</code>, um mehrere gleichzeitig geöffnete Popovers zu erlauben."
+        },
+        "backdrop": {
+          "title": "Hintergrund",
+          "description": "Fügen Sie einen dunklen Hintergrund hinter dem Popover hinzu, um ein modales Erlebnis zu schaffen. Sie können steuern, ob das Klicken auf den Hintergrund den Popover schließt.",
+          "note": "Verwenden Sie <code>nuiPopoverBackdrop</code> zum Aktivieren/Deaktivieren des Hintergrunds und <code>nuiBackdropClose</code> zur Steuerung, ob das Klicken auf den Hintergrund den Popover schließt."
+        },
+        "disabled": {
+          "title": "Deaktivierter Zustand",
+          "description": "Steuern Sie dynamisch, ob der Popover aktiviert oder deaktiviert ist.",
+          "note": "Wenn <code>nuiPopoverDisabled</code> <code>true</code> ist, wird der Popover weder angezeigt noch auf Ereignisse reagieren."
+        }
+      },
+      "api": {
+        "inputs": {
+          "title": "Eingaben",
+          "description": "Eingabeeigenschaften der <code>nuiPopover</code>-Direktive"
+        },
+        "outputs": {
+          "title": "Ausgaben",
+          "description": "Von der <code>nuiPopover</code>-Direktive ausgegebene Ereignisse"
+        },
+        "config": {
+          "title": "PopoverConfig",
+          "description": "Schnittstelle für die globale Popover-Konfiguration über <code>provideNUI({ popover: {...} })</code>"
+        },
+        "context": {
+          "title": "PopoverContext",
+          "description": "Schnittstelle des Kontexts, der in Popover-Templates über <code>let-close=\"close\"</code> und <code>let-data=\"data\"</code> verfügbar ist"
+        },
+        "tokens": {
+          "title": "Injektions-Tokens",
+          "description": "Tokens zum Einfügen von Daten und Funktionen in dynamische Popover-Komponenten"
+        }
+      },
+      "theming": {
+        "spacing": {
+          "title": "Abstände & Abmessungen",
+          "description": "CSS-Variablen zur Steuerung von Popover-Größe, Innenabstand und Abständen"
+        },
+        "typography": {
+          "title": "Typografie",
+          "description": "CSS-Variablen zur Steuerung der Schriftart des Popover-Inhalts"
+        },
+        "borders": {
+          "title": "Rahmen",
+          "description": "CSS-Variablen zur Steuerung von Popover-Rahmen und Rahmenradius"
+        },
+        "shadow": {
+          "title": "Schatten",
+          "description": "CSS-Variable zur Steuerung des Popover-Schattens"
+        },
+        "zindex": {
+          "title": "Z-Index",
+          "description": "CSS-Variable zur Steuerung der Stapelreihenfolge des Popovers"
+        },
+        "animation": {
+          "title": "Animation",
+          "description": "CSS-Variablen zur Steuerung von Popover-Übergängen und -Animationen"
+        }
+      }
+    },
+    "toast": {
+      "title": "Toast",
+      "subtitle": "Nicht-invasive temporäre Benachrichtigungen für Benutzerrückmeldungen",
+      "examples": {
+        "basic": {
+          "title": "Einfache Toasts",
+          "description": "Zeigen Sie einfache Benachrichtigungen mit verschiedenen Typen an: Erfolg, Fehler, Warnung und Info."
+        },
+        "withTitle": {
+          "title": "Toasts mit Titel",
+          "description": "Fügen Sie einen Titel hinzu, um der Benachrichtigung mehr Kontext zu geben."
+        },
+        "withActions": {
+          "title": "Toasts mit Aktionen",
+          "description": "Fügen Sie Aktionsschaltflächen hinzu, damit der Benutzer mit der Benachrichtigung interagieren kann."
+        },
+        "positions": {
+          "title": "Positionen",
+          "description": "Steuern Sie, wo Toasts auf dem Bildschirm erscheinen: oben-links, oben-mitte, oben-rechts, unten-links, unten-mitte, unten-rechts."
+        },
+        "iconTop": {
+          "title": "Icon oben",
+          "description": "Zeigt das Toast-Icon oben zentriert für ein auffälligeres Design.",
+          "note": "Verwenden Sie die Eigenschaft <code>iconPosition='top'</code>, um das Icon oben im Toast zu zentrieren. Dies ist besonders nützlich für Toasts mit Titeln und Aktionen, da es die visuelle Hierarchie verbessert und das Icon auffälliger macht."
+        },
+        "icons": {
+          "title": "Benutzerdefinierte Icons",
+          "description": "Sie können Standard-Icons basierend auf dem Toast-Typ anzeigen oder benutzerdefinierte Icons verwenden. Sie können das Icon sogar ausblenden, wenn gewünscht.",
+          "note": "Verwenden Sie die Eigenschaft <code>icon</code>. Mit dem Wert <code>false</code> wird das Icon ausgeblendet. Mit einem <code>String</code> können Sie ein benutzerdefiniertes Icon von <strong>Remix Icon</strong> angeben. Standardmäßig werden Icons basierend auf dem Toast-Typ angezeigt, wenn <code>icon</code> <code>true</code> ist."
+        },
+        "duration": {
+          "title": "Dauer",
+          "description": "Konfigurieren Sie, wie lange der Toast sichtbar bleibt, bevor er verschwindet. Verwenden Sie 0 für Toasts, die sich nicht automatisch schließen."
+        },
+        "loading": {
+          "title": "Lade-Toast",
+          "description": "Zeigen Sie einen Toast mit Ladezustand an, der dynamisch aktualisiert werden kann, wenn der Vorgang abgeschlossen ist."
+        }
+      },
+      "api": {
+        "service": {
+          "title": "ToastService",
+          "description": "Hauptservice zum Anzeigen von Toast-Benachrichtigungen. Bietet Methoden zum Erstellen, Aktualisieren und Schließen von Toasts."
+        },
+        "config": {
+          "title": "ToastConfig",
+          "description": "Toast-spezifische Konfigurationsschnittstelle. Ermöglicht das Überschreiben der globalen Konfiguration für bestimmte Toasts."
+        },
+        "global": {
+          "title": "Globale Konfiguration",
+          "description": "Globale Konfiguration für das Toast-System. Kann bei der Anwendungsinitialisierung festgelegt werden."
+        },
+        "types": {
+          "title": "Typen & Schnittstellen",
+          "description": "TypeScript-Typdefinitionen für das Toast-System: ToastType, ToastPosition, ToastAction, ToastRef."
+        },
+        "usage": {
+          "title": "Vollständiges Verwendungsbeispiel",
+          "description": "Vollständiges Beispiel der ToastService-Integration in einer Komponente mit verschiedenen Verwendungsszenarien."
+        }
+      },
+      "theming": {
+        "container": {
+          "title": "Container-Variablen",
+          "description": "CSS-Variablen zur Anpassung des allgemeinen Toast-Containers (Hintergrund, Rahmen, Schatten, Abstände)."
+        },
+        "typography": {
+          "title": "Typografie-Variablen",
+          "description": "CSS-Variablen zur Anpassung des Toast-Texts (Titel, Nachricht, Schriftgröße, Gewicht)."
+        },
+        "icon": {
+          "title": "Icon-Variablen",
+          "description": "CSS-Variablen zur Anpassung des Toast-Icons (Größe, Farbe, Abstände)."
+        },
+        "close": {
+          "title": "Schließschaltflächen-Variablen",
+          "description": "CSS-Variablen zur Anpassung der Schließschaltfläche (Größe, Farbe, Hover)."
+        },
+        "progress": {
+          "title": "Fortschrittsbalken-Variablen",
+          "description": "CSS-Variablen zur Anpassung des automatischen Fortschrittsbalkens (Farbe, Höhe, Animation)."
+        },
+        "types": {
+          "title": "Variablen pro Typ",
+          "description": "CSS-Variablen spezifisch für jeden Toast-Typ (Erfolg, Fehler, Warnung, Info, Laden)."
+        },
+        "animations": {
+          "title": "Animations-Variablen",
+          "description": "CSS-Variablen zur Anpassung der Toast-Ein-/Ausgangsanimationen."
+        },
+        "examples": {
+          "title": "Anpassungsbeispiel",
+          "description": "Vollständiges Beispiel der Toast-Anpassung mit CSS-Variablen zur Erstellung eines dunklen Themas."
+        }
+      }
+    },
+    "sidebar-panel": {
+      "title": "Seitenpanel",
+      "subtitle": "Gleitende Seitenpanels mit CDK Overlay zur Anzeige dynamischer Inhalte",
+      "examples": {
+        "basic": {
+          "title": "Grundlegende Verwendung",
+          "description": "Öffnen Sie ein Seitenpanel vom SidebarPanelService. Das Panel gleitet mit einer flüssigen Animation vom Bildschirmrand herein."
+        },
+        "defaults": {
+          "title": "Standardkonfiguration",
+          "description": "Das Panel öffnet sich mit den konfigurierten globalen Standardwerten.",
+          "note": "Wenn beim Öffnen des Panels keine Optionen angegeben werden, werden die globalen Standardwerte verwendet, die in der NUI-Konfiguration bei <code>provideNUI({ sidebarPanel: {...} })</code> definiert sind."
+        },
+        "sizes": {
+          "title": "Größen",
+          "description": "Definiert die Größe, mit der das Panel geöffnet wird.",
+          "note": "Sie können vordefinierte Werte wie <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> und <code>'full'</code> verwenden."
+        },
+        "positions": {
+          "title": "Positionen",
+          "description": "Steuern Sie, von welcher Seite des Bildschirms das Panel hineingleitet.",
+          "note": "Verwenden Sie die Eigenschaft <code>position</code>, um die Seite zu definieren, von der das Panel öffnet, mit <code>'right'</code>, <code>'left'</code>, <code>'top'</code> oder <code>'bottom'</code> als Werte."
+        },
+        "html-content": {
+          "title": "Benutzerdefinierter HTML-Inhalt",
+          "description": "Rendern Sie beliebigen HTML-Inhalt innerhalb des Panels mit Angular-Templates.",
+          "note": "Verwenden Sie die Eigenschaft <code>htmlContent</code>, um einen HTML-String zu übergeben. Sie können das HTML dynamisch generieren oder mit Ihren Daten verketten. Diese Option erfordert keine Erstellung einer vollständigen Angular-Komponente."
+        },
+        "template-content": {
+          "title": "Benutzerdefinierter Template-Inhalt (TemplateRef)",
+          "description": "Verwenden Sie Angular-Templates mit Kontextdaten und Funktionen ohne eine vollständige Komponente zu benötigen. Ideal für wiederverwendbaren Inhalt mit dynamischen Daten.",
+          "note": "Verwenden Sie die Eigenschaft <code>contentTemplate</code>, um ein <code>TemplateRef</code> zu übergeben, und <code>templateContext</code>, um Daten und Funktionen zu übergeben. Das Template erhält den Kontext über <code>let-varname</code>-Variablen. Dies ermöglicht Interaktivität ohne Komponentenerstellung."
+        },
+        "dynamic-component": {
+          "title": "Dynamische Komponente",
+          "description": "Laden Sie beliebige Angular-Komponenten in das Panel und übergeben Sie Daten über Dependency Injection.",
+          "note": "Verwenden Sie die Eigenschaft <code>data</code>, um Daten an die dynamisch geladene Komponente zu übergeben. Diese Daten werden über den <code>SIDEBAR_PANEL_DATA</code>-Token injiziert. Wenn Sie das Panel selbst von der geladenen Komponente aus referenzieren möchten, können Sie <code>SIDEBAR_PANEL_REF</code> injizieren."
+        },
+        "dynamic-component-events": {
+          "title": "Dynamische Komponente @Outputs-Ereignisse",
+          "description": "Hören Sie auf Ereignisse, die von der im Panel geladenen Komponente ausgegeben werden, um Interaktionen zu behandeln und das Panel bei Bedarf zu schließen.",
+          "note": "Sie können die Ausgaben der dynamisch geladenen Komponente abonnieren. Verwenden Sie <code>panelRef.componentInstance</code>, um auf die Kind-Komponenteninstanz zuzugreifen und deren <code>@Output()</code> zu abonnieren."
+        },
+        "minimizable": {
+          "title": "Minimierbares Panel",
+          "description": "Panels können zu einem Tab <strong>auf der Seite, von der die Sidebar öffnet</strong> minimiert werden, um Bildschirmplatz freizugeben und den Zustand zu bewahren, und können bei Bedarf wiederhergestellt werden.",
+          "note": "Verwenden Sie das Attribut <code>minimizable</code>, um die Sidebar minimierbar zu machen. Sie können auch die Methode <code>minimize()</code> von SidebarPanel verwenden, um das Panel programmatisch zu minimieren, und <code>restore()</code>, um es wiederherzustellen. Wenn <code>minimizable</code> aktiviert ist, ist das Attribut <code>id</code> erforderlich, um das minimierte Panel zu identifizieren. Sie können auch prüfen, ob die Sidebar minimiert ist über <code>isMinimized</code>.<br><br><strong>Tab-Anpassung:</strong> Sie können das Icon anpassen, Text hinzufügen, benutzerdefiniertes CSS anwenden oder ein vollständig benutzerdefiniertes Template über <code>minimizedTabCustomization</code> verwenden. Für schwebende Schaltflächen mit freier Positionierung (z.B.: Chat unten rechts) verwenden Sie <code>standalone: true</code>, um außerhalb des gruppierten Containers zu rendern und Positionierungsbeschränkungen zu vermeiden."
+        },
+        "close-button": {
+          "title": "Schließschaltfläche",
+          "description": "Steuern Sie die Sichtbarkeit der Schließschaltfläche im Panel-Header.",
+          "note": "Verwenden Sie die Eigenschaft <code>showCloseButton</code>, um die Schließschaltfläche im Panel-Header anzuzeigen oder auszublenden."
+        },
+        "backdrop": {
+          "title": "Hintergrund",
+          "description": "Fügen Sie einen dunklen Hintergrund hinter dem Panel hinzu, um ein modales Erlebnis zu schaffen. Steuern Sie, ob das Klicken auf den Hintergrund das Panel schließt.",
+          "note": "Verwenden Sie die Eigenschaft <code>hasBackdrop</code> zum Aktivieren/Deaktivieren des Hintergrunds (Standard <code>true</code>) und <code>closeOnBackdropClick</code> zur Steuerung, ob das Klicken auf den Hintergrund das Panel schließt."
+        },
+        "custom-backdrop": {
+          "title": "Benutzerdefinierter Hintergrund",
+          "description": "Passen Sie den Hintergrund mit benutzerdefinierten CSS-Klassen an. Sie können Effekte wie Unschärfe, benutzerdefinierte Farben und Übergänge anwenden.",
+          "note": "Verwenden Sie die Eigenschaft <code>backdropClass</code>, um dem Panel-Hintergrund benutzerdefinierte CSS-Klassen hinzuzufügen. Sie können eine einzelne Klasse oder ein <code>Array</code> von Klassen hinzufügen."
+        },
+        "multiple": {
+          "title": "Mehrere Panels",
+          "description": "Öffnen Sie mehrere Panels gleichzeitig von verschiedenen Seiten. Steuern Sie die Stapelreihenfolge mit z-index und schließen Sie alle auf einmal.",
+          "note": "Jedes geöffnete Panel ist unabhängig und kann seine eigene Konfiguration haben. Verwenden Sie die Methode <code>closeAll()</code> von <code>SidebarPanelService</code>, um alle geöffneten Panels gleichzeitig programmatisch zu schließen."
+        },
+        "footer-actions": {
+          "title": "Fußzeilen-Aktionen",
+          "description": "Fügen Sie Aktionsschaltflächen in die Panel-Fußzeile hinzu.",
+          "note": "Verwenden Sie <code>customButtons</code> für einfache Aktionen oder <code>footerTemplate</code> für vollständig angepasste Layouts. Sie können mehrere Schaltflächen mit verschiedenen NUI-Varianten und -Farben kombinieren."
+        },
+        "child-footer-actions": {
+          "title": "Aktionen von der Kind-Komponente",
+          "description": "Die Kind-Komponente kann eigene Fußzeilen-Aktionen mit SidebarPanelActionsService registrieren.",
+          "note": "Dieser Ansatz ist ideal für Formulare, bei denen das Kind die gesamte Logik verwaltet (Validierung, Speichern, Zustände). Die Kind-Komponente injiziert <code>SidebarPanelActionsService</code> und registriert Aktionen über <code>register()</code>. Aktionen können reaktive Zustände haben (deaktiviert, laden) und komplexe Logik ausführen."
+        }
+      },
+      "api": {
+        "service": {
+          "title": "SidebarPanelService",
+          "description": "Service-Methoden zur Verwaltung von Seitenpanels"
+        },
+        "ref-properties": {
+          "title": "SidebarPanelRef (Eigenschaften)",
+          "description": "Eigenschaften der Seitenpanel-Referenz"
+        },
+        "ref-methods": {
+          "title": "SidebarPanelRef (Methoden)",
+          "description": "Methoden der Seitenpanel-Referenz für Steuerung und Ereignisse"
+        },
+        "config": {
+          "title": "SidebarPanelConfig",
+          "description": "Vollständige Seitenpanel-Konfiguration"
+        },
+        "custom-button": {
+          "title": "SidebarPanelCustomButton",
+          "description": "Konfiguration der benutzerdefinierten Fußzeilen-Schaltfläche"
+        },
+        "minimized-tab": {
+          "title": "MinimizedTabCustomization",
+          "description": "Anpassung des Tabs, wenn das Panel minimiert ist"
+        },
+        "footer-actions": {
+          "title": "SidebarPanelAction",
+          "description": "Definition der von Kind-Komponenten für die Panel-Fußzeile registrierten Aktionen"
+        },
+        "footer-actions-service": {
+          "title": "SidebarPanelActionsService",
+          "description": "Service für Kind-Komponenten zur Registrierung von Aktionen in der Panel-Fußzeile"
+        }
+      },
+      "theming": {
+        "colors": {
+          "title": "Farbvariablen",
+          "description": "CSS-Variablen zur Steuerung der Seitenpanel-Farben: Hintergrund, Text, Rahmen und Overlay. Diese Variablen passen sich automatisch an den Hell-/Dunkelmodus des aktiven Themas an."
+        },
+        "layout": {
+          "title": "Layout-Variablen",
+          "description": "CSS-Variablen zur Steuerung von Größe und Abstände des Seitenpanels: vordefinierte Größenvoreinstellungen (xs bis full) und Header- und Inhalts-Innenabstand"
+        },
+        "typography": {
+          "title": "Typografie-Variablen",
+          "description": "CSS-Variablen zur Steuerung der Typografie des Seitenpanel-Titels"
+        },
+        "elevation": {
+          "title": "Erhöhungs-Variablen",
+          "description": "CSS-Variablen zur Steuerung des Schattens und z-index des Seitenpanels und Overlays"
+        },
+        "scrollbar": {
+          "title": "Scrollbalken-Variablen",
+          "description": "CSS-Variablen zur Steuerung des Scrollbalken-Erscheinungsbilds des Seitenpanels"
+        },
+        "examples": {
+          "title": "Anpassungsbeispiele",
+          "description": "SCSS-Beispiele zur Anpassung von Seitenpanel-Stilen in Ihrer Anwendung"
+        }
+      }
+    },
+    "tooltip": {
+      "title": "Tooltip",
+      "subtitle": "Informative Tooltips mit Unterstützung für Text und benutzerdefinierte Templates",
+      "examples": {
+        "basic": {
+          "title": "Einfache Tooltips",
+          "description": "Zeigen Sie einfache Text-Tooltips beim Hover an.",
+          "note": "Sie können den Pfeil mit <code>nuiTooltipShowArrow</code> ausblenden."
+        },
+        "positions": {
+          "title": "Positionen",
+          "description": "Steuern Sie die Tooltip-Position relativ zum Element: oben (Standard), unten, links, rechts."
+        },
+        "events": {
+          "title": "Ereignisse",
+          "description": "Definieren Sie, welches Ereignis den Tooltip auslöst: Hover (Standard), Klicken, Fokus oder manuell für programmatische Kontrolle."
+        },
+        "delays": {
+          "title": "Verzögerungen",
+          "description": "Konfigurieren Sie Verzögerungen vor dem Anzeigen und Ausblenden des Tooltips.",
+          "note": "Verwenden Sie die Eigenschaften <code>nuiTooltipShowDelay</code> und <code>nuiTooltipHideDelay</code>, um Wartezeiten anzupassen."
+        },
+        "templates": {
+          "title": "Benutzerdefinierte Templates",
+          "description": "Verwenden Sie Angular-Templates, um reichhaltigen HTML-Inhalt im Tooltip anzuzeigen."
+        },
+        "interactive": {
+          "title": "Interaktive Tooltips",
+          "description": "Ermöglicht die Interaktion mit dem Tooltip-Inhalt. Nützlich für Schaltflächen oder Links.",
+          "note": "Aktivieren Sie die Eigenschaft <code>nuiTooltipInteractive</code>, um Interaktion innerhalb des Tooltips zu ermöglichen, ohne dass er automatisch schließt, wenn der Cursor sich bewegt."
+        },
+        "disabled": {
+          "title": "Deaktivierter Zustand",
+          "description": "Steuern Sie dynamisch, ob der Tooltip aktiviert oder deaktiviert ist.",
+          "note": "Verwenden Sie die Eigenschaft <code>nuiTooltipDisabled</code>, um den Tooltip nach Bedarf zu aktivieren oder zu deaktivieren."
+        }
+      },
+      "api": {
+        "inputs": {
+          "title": "Eingaben",
+          "description": "Eingabeeigenschaften der <code>nuiTooltip</code>-Direktive"
+        },
+        "outputs": {
+          "title": "Ausgaben",
+          "description": "Von der <code>nuiTooltip</code>-Direktive ausgegebene Ereignisse"
+        },
+        "usage": {
+          "title": "Verwendungsbeispiele",
+          "description": "Vollständige Beispiele der Verwendung der <code>nuiTooltip</code>-Direktive in Angular-Komponenten"
+        }
+      },
+      "theming": {
+        "container": {
+          "title": "Tooltip-Container",
+          "description": "CSS-Variablen zur Steuerung des Tooltip-Container-Erscheinungsbilds: Farben, Abmessungen, Innenabstand, Schriftart, Rahmen, Schatten und z-index"
+        },
+        "arrow": {
+          "title": "Tooltip-Pfeil",
+          "description": "CSS-Variable zur Steuerung der Tooltip-Pfeilgröße"
+        },
+        "animation": {
+          "title": "Animationen",
+          "description": "CSS-Variablen zur Steuerung von Dauer und Timing der Tooltip-Ein- und Ausgangsanimationen"
+        },
+        "examples": {
+          "title": "Anpassungsbeispiele",
+          "description": "SCSS-Beispiele zur Anpassung von Tooltip-Stilen in Ihrer Anwendung"
+        }
+      }
+    },
+    "timePicker": {
+      "title": "Zeitauswahl",
+      "subtitle": "Komponente zur Zeitauswahl mit mehreren Modi, Größen und erweiterten Konfigurationen",
+      "basic": {
+        "title": "Grundlegende Verwendung",
+        "description": "Einfache Zeitauswahl mit Standardkonfiguration. Wählen Sie Stunden und Minuten im 24-Stunden-Format."
+      },
+      "modes": {
+        "title": "Zeitmodi",
+        "description": "Fünf verfügbare Modi: nur Stunden (12h/24h), Stunden und Minuten (12h/24h) und Dauer-Modus.",
+        "note": "Verwenden Sie <code>mode</code> mit den Werten: <code>'HOUR_12'</code>, <code>'HOUR_24'</code>, <code>'HOUR_MINUTE_12'</code> und <code>'HOUR_MINUTE_24'</code>."
+      },
+      "sizes": {
+        "title": "Größen",
+        "description": "Fünf Größenoptionen, die die Komponente und ihre internen Elemente harmonisch skalieren.",
+        "note": "Größen beeinflussen Höhe, Innenabstand und Schriftgröße der Auswahl. Verwenden Sie <code>size</code> mit den Werten <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> und <code>'xl'</code>."
+      },
+      "presets": {
+        "title": "Schnellvoreinstellungen",
+        "description": "Fügen Sie Voreinstellungsschaltflächen für häufige Zeiten wie 'Jetzt', 'Frühstück', 'Mittagessen' hinzu. Kann benutzerdefinierte Icons enthalten.",
+        "note": "Stellen Sie ein Array von <code>TimePreset</code>-Objekten in <code>config</code> bereit. Jede Voreinstellung hat ein <code>label</code>, eine <code>time</code> und ein optionales <code>icon</code>. Unterstützt Remix Icon-Icons."
+      },
+      "steps": {
+        "title": "Stunden- und Minutenschritte",
+        "description": "Steuern Sie die Inkrementierungsintervalle für Stunden und Minuten, um auswählbare Optionen einzuschränken.",
+        "note": "Verwenden Sie <code>hourStep</code> und <code>minuteStep</code> in <code>config</code>. Zum Beispiel zeigt <code>hourStep: 2</code> nur gerade Stunden an und <code>minuteStep: 15</code> zeigt Viertelstunden (00, 15, 30, 45)."
+      },
+      "timeRange": {
+        "title": "Zeitbereich",
+        "description": "Schränken Sie den auswählbaren Zeitbereich mit Minimal- und Maximalwerten ein. Zeigt optional einen visuellen Indikator an.",
+        "note": "Konfigurieren Sie <code>minTime</code> und <code>maxTime</code> in <code>config</code>. Zeiten außerhalb dieses Bereichs sind deaktiviert. Verwenden Sie <code>showRangeIndicator: true</code>, um den gültigen Bereich visuell hervorzuheben."
+      },
+      "disabledTimes": {
+        "title": "Deaktivierte Zeiten",
+        "description": "Sperren Sie bestimmte Stunden oder Minuten und verhindern Sie deren Auswahl. Nützlich für nicht verfügbare Zeitfenster.",
+        "note": "Verwenden Sie <code>disabledHours</code> und <code>disabledMinutes</code> in <code>config</code>, um Arrays deaktivierter Werte anzugeben. Deaktivierte Elemente zeigen einen charakteristischen abgedunkelten Stil."
+      },
+      "durationMode": {
+        "title": "Dauer-Modus",
+        "description": "Spezieller Modus zur Auswahl von Zeitintervallen. Kann Sekunden anzeigen und eine maximale Dauer festlegen.",
+        "note": "Setzen Sie <code>mode='DURATION'</code> und konfigurieren Sie mit <code>duration: { maxHours: 8, showSeconds: true }</code> in <code>config</code>. Nützlich für Schichtauswahl, Zeiterfassung, etc."
+      },
+      "defaultStrategies": {
+        "title": "Standardstrategien",
+        "description": "Steuern Sie die Anfangszeit, wenn kein Wert angegeben ist: jetzt, intelligent (aktuell + Versatz), leer oder benutzerdefiniert.",
+        "note": "Verwenden Sie <code>defaultStrategy</code> mit den Werten <code>'now'</code>, <code>'smart'</code>, <code>'empty'</code> oder <code>'custom'</code>. Für 'smart' konfigurieren Sie <code>smartOffset</code> in Minuten. Für 'custom' verwenden Sie <code>defaultValue</code>."
+      },
+      "disabled": {
+        "title": "Deaktivierter Zustand",
+        "description": "Deaktivieren Sie die gesamte Auswahl und verhindern Sie Benutzerinteraktion mit einem abgedunkelten Erscheinungsbild.",
+        "note": "Verwenden Sie die Eigenschaft <code>disabled</code>, um dynamisch zu steuern, ob die Zeitauswahl aktiviert oder deaktiviert ist."
+      },
+      "reactiveForms": {
+        "title": "Reaktive Formulare",
+        "description": "Vollständige Integration mit Angular-Reaktivformularen. Implementiert ControlValueAccessor.",
+        "note": "Verwenden Sie <code>formControl</code> oder <code>formControlName</code> zur Integration mit Angular-Formularen. Die Komponente behandelt automatisch Synchronisation, Validierung und Zustand."
+      },
+      "api": {
+        "inputs": {
+          "title": "Eingaben",
+          "description": "Eingabeeigenschaften zur Konfiguration des Verhaltens, Erscheinungsbilds und der Einschränkungen der Zeitauswahl"
+        },
+        "outputs": {
+          "title": "Ausgaben",
+          "description": "Von der Zeitauswahl ausgegebene Ereignisse, wenn der Benutzer damit interagiert"
+        },
+        "config": {
+          "title": "TimePickerConfig",
+          "description": "Konfigurationsschnittstelle mit allen verfügbaren Optionen: Schritte, Bereiche, deaktivierte Zeiten, Voreinstellungen und Dauerkonfiguration"
+        },
+        "durationConfig": {
+          "title": "DurationConfig",
+          "description": "Spezifische Konfiguration für den DURATION-Modus: Stundenlimits, Sekunden anzeigen, Schritte und Schnelldauer-Voreinstellungen"
+        },
+        "models": {
+          "title": "Typdefinitionen",
+          "description": "Schnittstellen und Typdefinitionen für Werte, Konfiguration und Voreinstellungen"
+        },
+        "methods": {
+          "title": "Methoden",
+          "description": "Die Komponente implementiert ControlValueAccessor für nahtlose Integration mit Angular-Formularen"
+        }
+      },
+      "theming": {
+        "colors": {
+          "title": "Farben",
+          "description": "CSS-Farbvariablen, die vom ThemeService für jede semantische Farbe generiert werden. Jede Farbe generiert 9 spezifische Variablen für verschiedene Auswahlzustände: Element-Hintergründe (normal, Hover, ausgewählt), Textfarben, deaktivierte Zustände, Akzente und Fokus-Ring."
+        },
+        "sizes": {
+          "title": "Größen",
+          "description": "Größenspezifische CSS-Variablen, die Element-Höhen, Innenabstände und Container-Abmessungen steuern. Fünf verfügbare Größenvarianten: xs, sm, md (Standard), lg und xl."
+        },
+        "structure": {
+          "title": "Struktur",
+          "description": "Strukturelle CSS-Variablen zur Steuerung von Abmessungen, Abständen, Typografie und visuellem Erscheinungsbild. Umfasst Trenner-Stil, Scrollbalken-Anpassung, Rahmen, Schriftarten und Fokuszustände."
+        },
+        "customization": {
+          "title": "Anpassung",
+          "description": "Beispiele zur Anpassung von Zeitauswahl-Stilen in Ihrer Anwendung. Sie können CSS-Variablen global oder für bestimmte Instanzen überschreiben. Die Integration mit ThemeService ermöglicht die Generierung von Farbvariablen für Ihre benutzerdefinierten semantischen Farben."
+        }
+      }
+    },
+    "fabButton": {
+      "title": "FAB-Schaltfläche",
+      "subtitle": "Schwebende Aktionsschaltfläche mit radialen Layouts und mehreren Anpassungsoptionen",
+      "basic": {
+        "title": "Grundlegend",
+        "description": "Die einfachste Verwendung der FAB-Schaltfläche: Erweitert Aktionen beim Klicken auf den Auslöser nach oben in einem linearen Layout."
+      },
+      "directions": {
+        "title": "Richtungen",
+        "description": "Steuern Sie die Richtung, in die Elemente sich erweitern, mit <code>direction</code>. Verfügbare Werte: <code>up</code>, <code>down</code>, <code>left</code>, <code>right</code> und die vier Diagonalen."
+      },
+      "layouts": {
+        "title": "Layouts",
+        "description": "Definieren Sie die räumliche Verteilung der Elemente mit <code>layout</code>: <code>linear</code> (in Linie), <code>semi-circle</code> (Halbkreis), <code>quarter-circle</code> (Viertelkreis) und <code>circle</code> (vollständiger Kreis)."
+      },
+      "shapes": {
+        "title": "Formen",
+        "description": "Passen Sie den Rahmenradius von Auslöser und Elementen mit <code>shape</code> an: <code>circular</code>, <code>rounded</code> oder <code>square</code>."
+      },
+      "colors": {
+        "title": "Farben",
+        "description": "Verwenden Sie eine der 8 semantischen Systemfarben mit der <code>color</code>-Eingabe."
+      },
+      "sizes": {
+        "title": "Größen",
+        "description": "Steuern Sie die Größe von Auslöser und Elementen mit <code>size</code>: <code>xs</code>, <code>sm</code>, <code>md</code> (Standard), <code>lg</code> und <code>xl</code>."
+      },
+      "animation": {
+        "title": "Animationen",
+        "description": "Wählen Sie, wie Elemente ein- und ausgeblendet werden mit <code>animation</code>: <code>scale</code> (Standard), <code>fade</code> oder <code>slide</code>."
+      },
+      "trigger": {
+        "title": "Auslöser",
+        "description": "Passen Sie die Auslöserschaltfläche mit <code>triggerIcon</code>, <code>triggerIconOpen</code> (alternatives Icon bei geöffnetem Zustand), <code>triggerLabel</code> (erweitertes FAB-Muster) und <code>triggerBadge</code> zur Anzeige eines Zählers an."
+      },
+      "loading": {
+        "title": "Ladezustand",
+        "description": "Zeigt einen Spinner auf dem Auslöser mit <code>[loading]=\"true\"</code>. Während aktiv, öffnet oder schließt der Auslöser das Menü nicht."
+      },
+      "openOn": {
+        "title": "Öffnungsmodus",
+        "description": "Steuern Sie, wie sich das Menü öffnet: <code>openOn=\"click\"</code> (Standard) oder <code>openOn=\"hover\"</code> für ein Speed-Dial, das beim Maus-Hover aktiviert wird. Die Tastaturnavigation funktioniert in beiden Modi gleich."
+      },
+      "itemDisplay": {
+        "title": "Element-Anzeige",
+        "description": "<code>itemDisplay=\"icon\"</code> zeigt nur das Icon mit einem Tooltip beim Hover (Standard). <code>itemDisplay=\"icon-text\"</code> zeigt das Icon und die <code>label</code>-Eigenschaft des Elements direkt sichtbar in der Schaltfläche."
+      },
+      "closeOptions": {
+        "title": "Schließoptionen",
+        "description": "Steuern Sie, wann das Menü schließt: <code>[closeOnItemClick]=\"false\"</code> hält das Menü nach Drücken eines Elements offen (nützlich für Mehrfachauswahl), <code>[closeOnOutsideClick]=\"true\"</code> schließt bei Außenklick, <code>[closeOnScroll]=\"true\"</code> schließt beim Scrollen."
+      },
+      "backdrop": {
+        "title": "Hintergrund",
+        "description": "Fügen Sie eine durchscheinende Schicht hinter den Elementen mit <code>[backdrop]=\"true\"</code> hinzu, ideal zur Hervorhebung von Aktionen über dichten Inhalten."
+      },
+      "templates": {
+        "title": "Benutzerdefinierte Templates",
+        "description": "Projizieren Sie eigene Inhalte in den Auslöser mit <code>fabTrigger</code> und in jedes Element mit <code>fabItem</code>. Beide Direktiven stellen den Element-Kontext über <code>let-item</code> und den Öffnungszustand des Menüs über <code>let-open=\"isOpen\"</code> bereit."
+      },
+      "api": {
+        "inputs": {
+          "title": "Eingaben",
+          "description": "Eingabeeigenschaften zur Konfiguration des Verhaltens, Erscheinungsbilds und Layouts der FAB-Schaltfläche."
+        },
+        "outputs": {
+          "title": "Ausgaben",
+          "description": "Von der FAB-Schaltflächenkomponente ausgegebene Ereignisse zur Reaktion auf Benutzerinteraktionen."
+        },
+        "computed": {
+          "title": "Berechnete Eigenschaften",
+          "description": "Reaktive berechnete Eigenschaften (Signals), die den aufgelösten internen Zustand der Komponente offenlegen."
+        },
+        "types": {
+          "title": "Typen",
+          "description": "TypeScript-Typen, die die akzeptierten Werte für FAB-Schaltflächen-Eingaben definieren."
+        },
+        "item": {
+          "title": "FabButtonItem",
+          "description": "Öffentliche Schnittstelle, die jede Menüaktion definiert. Alle Felder sind optional: die einzige Anforderung ist, dass das Element identifizierbar ist (über <code>id</code>) und mindestens ein <code>icon</code> oder ein <code>label</code> hat."
+        },
+        "itemResolved": {
+          "title": "FabButtonItemResolved",
+          "description": "Interne Version von <code>FabButtonItem</code>, angereichert mit vier berechneten Feldern, die die Komponente als CSS-Variablen in jedes <code>&lt;li&gt;</code> injiziert. Es ist der Typ, der im <code>fabItem</code>-Template-Kontext über <code>let-item</code> empfangen wird."
+        },
+        "directives": {
+          "title": "Template-Direktiven",
+          "description": "Eigenständige Direktiven, die das Projizieren benutzerdefinierter Templates in den Auslöser und jedes FAB-Schaltflächen-Element ermöglichen. Sie werden wie jede eigenständige Angular-Direktive importiert und deklariert."
+        },
+        "config": {
+          "title": "Globale Konfiguration (FabButtonConfig)",
+          "description": "Alle globalen Konfigurationseigenschaften, die über <code>provideNuiConfig({ config: { fabButton: { … } } })</code> verfügbar sind. Diese Werte werden angewendet, wenn die entsprechende Komponenteneingabe nicht definiert ist."
+        }
+      },
+      "theming": {
+        "colors": {
+          "title": "Farbvariablen",
+          "description": "CSS-Variablen zur Anpassung von Farben nach Variante (<code>solid</code>, <code>outline</code>, <code>ghost</code>) und semantischer Farbe (<code>primary</code>, <code>secondary</code>, etc.).",
+          "note": "Ersetzen Sie <code>{color}</code> durch eine beliebige Systemfarbe: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>."
+        },
+        "structure": {
+          "title": "Strukturelle Variablen",
+          "description": "CSS-Variablen zur Anpassung von radialem Layout, Animationen, Schaltflächengrößen, Hintergrund, Tooltips und Fokus-Ring."
+        }
+      }
+    }
+  }
+}
