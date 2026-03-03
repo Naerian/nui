@@ -22,6 +22,12 @@
     width: 0;
     transform: translateX(-100%);
 
+    // El footer desaparece inmediatamente al colapsar (sin delay)
+    .sidebar-footer {
+      opacity: 0;
+      transition: opacity 0.1s ease;
+    }
+
     @media (max-width: 991px) {
       transform: translateX(-100%);
       padding-top: 0;
@@ -231,20 +237,24 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    flex-shrink: 0;
+    opacity: 1;
+    transition: opacity 0.15s ease 0.2s;
 
     .footer-text {
-      font-size: 0.625rem;
+      font-size: 0.563rem;
       color: var(--nui-on-surface-secondary);
       margin: 0;
       display: flex;
       align-items: flex-start;
       gap: 0.5rem;
-      line-height: 1.5;
+      line-height: 1;
+      white-space: nowrap;
 
       i {
-        font-size: 0.875rem;
+        font-size: 0.688rem;
         flex-shrink: 0;
-        margin-top: 0.125rem;
+        line-height: 1;
       }
 
       span {
