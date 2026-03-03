@@ -11,6 +11,7 @@
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
+  ascent-override: 90%;
 }
 
 @font-face {
@@ -19,20 +20,7 @@
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
-}
-
-// ========================================
-// BASE TYPOGRAPHY
-// ========================================
-
-html,
-body {
-  font-family: var(--nui-font-family);
-
-  // Improve text rendering quality
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  ascent-override: 90%;
 }
 
 // ========================================

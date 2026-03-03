@@ -11,6 +11,10 @@ html {
   font-feature-settings: normal;
   -webkit-tap-highlight-color: transparent;
 
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   i {
     line-height: 1;
   }
@@ -21,10 +25,6 @@ html {
 // ==========================================
 body {
   margin: 0;
-  font-family: var(--nui-font-family);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 // ==========================================

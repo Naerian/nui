@@ -26,6 +26,11 @@
             "glob": "**/*",
             "input": "projects/nui/src/assets",
             "output": "assets"
+          },
+          {
+            "glob": "**/*",
+            "input": "projects/nui/styles/fonts",
+            "output": "assets/fonts"
           }
         ],
         "styles": ["projects/showcase/src/styles.scss"],
