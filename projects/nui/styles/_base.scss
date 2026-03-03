@@ -4,11 +4,7 @@
 html,
 :host {
   font-family: var(--nui-font-family);
-  font-size: 100%;
   line-height: 1.5;
-  -webkit-text-size-adjust: 100%;
-  -moz-tab-size: 4;
-  tab-size: 4;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
