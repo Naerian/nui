@@ -740,7 +740,6 @@ export class ThemeService {
 
     // Variables de superficie (para el estado 'base' de la variante Solid)
     const sysBg = 'var(--nui-surface)';
-    const sysBgSecondary = 'var(--nui-surface-secondary)';
     const sysBorder = 'var(--nui-border-subtle)';
     const sysTextSec = 'var(--nui-on-surface-secondary)';
 
