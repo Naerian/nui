@@ -555,6 +555,11 @@ export class ToastService {
 
     if (strategy === NativeNotificationStrategy.Never) return false;
     if (typeof window === 'undefined' || !('Notification' in window)) return false;
+
+    // La API Notification requiere contexto seguro (HTTPS o localhost).
+    // HTTP sobre red local (ej: http://192.168.x.x) es rechazado por Chrome en Android.
+    if (!window.isSecureContext) return false;
+
     if (Notification.permission !== 'granted') {
       // PreferNative hace fallback automático a NUI toast
       return false;
@@ -586,6 +591,12 @@ export class ToastService {
   /**
    * Muestra una notificación nativa del sistema operativo.
    * Devuelve un `ToastRef` que se puede usar para control y observación.
+   *
+   * Estrategia de renderizado:
+   * 1. `ServiceWorkerRegistration.showNotification()` si hay un SW activo
+   *    (compatible con Android, funciona en segundo plano).
+   * 2. Constructor `new Notification()` como fallback (desktop/localhost).
+   * 3. Si ambos fallan, muestra un toast NUI normal como último recurso.
    */
   private showNativeNotification(type: ToastType, config: ToastConfig): ToastRef {
     const id = config.id || `toast-${++toastIdCounter}`;
@@ -595,32 +606,77 @@ export class ToastService {
     const iconEl = this.document.querySelector<HTMLLinkElement>('link[rel="icon"], link[rel="shortcut icon"]');
     const iconUrl = iconEl?.href;
 
-    const notification = new Notification(config.title ?? config.message ?? '', {
+    const notifTitle = config.title ?? config.message ?? '';
+    const notifOptions: NotificationOptions = {
       body: config.title ? config.message : undefined,
       icon: iconUrl,
       tag: config.group,
       requireInteraction: config.timeout === 0,
-    });
-
-    // Cierre automático sincronizado con el timeout del toast
-    if (config.timeout && config.timeout > 0) {
-      setTimeout(() => {
-        notification.close();
-        toastRef.close();
-      }, config.timeout);
-    }
-
-    notification.onclick = () => {
-      config.onClick?.();
-      notification.close();
-      toastRef.close();
     };
 
-    notification.onclose = () => toastRef.close();
+    // Intento 1: ServiceWorkerRegistration.showNotification()
+    // Solo si hay un SW activo controlando la página en este momento.
+    // navigator.serviceWorker.ready nunca rechaza: si no hay SW registrado,
+    // la Promise queda colgada y el fallback jamás ejecutaría → usamos controller.
+    const activeSW = 'serviceWorker' in navigator && navigator.serviceWorker.controller;
 
-    config.onShown?.();
+    if (activeSW) {
+      navigator.serviceWorker.ready
+        .then(registration => registration.showNotification(notifTitle, notifOptions))
+        .then(() => {
+          // Los eventos click/close de SW no son accesibles desde la página;
+          // sincronizamos solo el timeout.
+          if (config.timeout && config.timeout > 0) {
+            setTimeout(() => toastRef.close(), config.timeout);
+          }
+          config.onShown?.();
+        })
+        .catch(() => {
+          // SW presente pero falló → intentar constructor directo
+          this.showDirectNotification(notifTitle, notifOptions, config, toastRef);
+        });
+    } else {
+      // Intento 2: new Notification() — desktop, localhost, o sin SW activo
+      this.showDirectNotification(notifTitle, notifOptions, config, toastRef);
+    }
 
     return toastRef;
+  }
+
+  /**
+   * Crea una notificación con el constructor `new Notification()`.
+   * Si falla (ej: insecure context en Android), hace fallback a toast NUI.
+   */
+  private showDirectNotification(
+    title: string,
+    options: NotificationOptions,
+    config: ToastConfig,
+    toastRef: ToastRef
+  ): void {
+    try {
+      const notification = new Notification(title, options);
+
+      if (config.timeout && config.timeout > 0) {
+        setTimeout(() => {
+          notification.close();
+          toastRef.close();
+        }, config.timeout);
+      }
+
+      notification.onclick = () => {
+        config.onClick?.();
+        notification.close();
+        toastRef.close();
+      };
+
+      notification.onclose = () => toastRef.close();
+      config.onShown?.();
+    } catch (err) {
+      // Fallback final: toast NUI normal
+      console.warn('[NUI Toast] La notificación nativa falló, mostrando toast NUI:', err);
+      this.createToast(config.type!, config);
+      toastRef.close();
+    }
   }
 
   /**
