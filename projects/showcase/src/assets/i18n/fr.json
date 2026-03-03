@@ -133,9 +133,8 @@
       "step2": "Importer le module NUI",
       "step2Description": "Configurez NUI dans votre fichier de configuration d'application. Définissez le préréglage que vous souhaitez utiliser et le mode de thème.",
       "step2Title": "Configurer le fournisseur NUI",
-      "step3": "Importer les styles",
+      "step3": "Importer les styles NUI",
       "step3Description": "Vous pouvez importer les styles NUI de trois manières différentes : dans votre fichier global styles.scss, dans angular.json, ou dans project.json si vous utilisez Nx.",
-      "step3Title": "Importer les styles NUI",
       "step4": "Commencer à utiliser les composants",
       "step4Description": "Vous pouvez maintenant utiliser n'importe quel composant NUI dans vos templates HTML.",
       "step4Title": "Utiliser les composants NUI"

@@ -34,7 +34,7 @@
 
   .nui-fab__backdrop {
     @include global.overlay-backdrop();
-    z-index: var(--nui-z-index-popout) !important;
+    z-index: var(--nui-fab-z-index) !important;
   }
 
   .nui-fab__container {

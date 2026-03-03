@@ -133,9 +133,8 @@
       "step2": "NUI-Modul importieren",
       "step2Description": "Konfigurieren Sie NUI in Ihrer Anwendungskonfigurationsdatei. Definieren Sie die gewünschte Voreinstellung und den Themen-Modus.",
       "step2Title": "NUI-Provider konfigurieren",
-      "step3": "Stile importieren",
+      "step3": "NUI Stile importieren",
       "step3Description": "Sie können NUI-Stile auf drei verschiedene Arten importieren: in Ihrer globalen styles.scss-Datei, in angular.json oder in project.json, wenn Sie Nx verwenden.",
-      "step3Title": "NUI-Stile importieren",
       "step4": "Komponenten verwenden",
       "step4Description": "Sie können jetzt jede NUI-Komponente in Ihren HTML-Templates verwenden.",
       "step4Title": "NUI-Komponenten verwenden"
