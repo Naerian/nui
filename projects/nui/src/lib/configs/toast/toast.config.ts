@@ -1,6 +1,5 @@
 import { inject } from '@angular/core';
 import { ToastGlobalConfig } from '../../components/toast';
-import { NativeNotificationStrategy } from '../../components/toast/models/toast.model';
 import { NUI_CONFIG } from '../nui.token';
 import { deepMerge } from '../../utils/deep-merge';
 
@@ -46,7 +45,6 @@ export const DEFAULT_TOAST_CONFIG: ToastGlobalConfig = {
   buttonsSize: 'sm',
   buttonsVariant: 'ghost',
   buttonsShape: 'rounded',
-  nativeNotifications: NativeNotificationStrategy.Never,
 };
 
 /**

@@ -1,4 +1,4 @@
-import {
+﻿import {
   Injectable,
   ApplicationRef,
   ComponentRef,
@@ -18,7 +18,6 @@ import {
   ToastGlobalConfig,
   ToastPosition,
   TOAST_LOADING_CLASS,
-  NativeNotificationStrategy,
 } from './models/toast.model';
 import { deepMerge } from '../../utils';
 import { injectToastConfig } from '../../configs/toast/toast.config';
@@ -34,7 +33,7 @@ export class ToastService {
   private document = inject(DOCUMENT);
   private readonly toastConfig: ToastGlobalConfig = injectToastConfig();
 
-  // Mapa de contenedores por posición (uno por posición)
+  // Mapa de contenedores por posiciÃ³n (uno por posiciÃ³n)
   private containers = new Map<ToastPosition, ComponentRef<ToastContainerComponent>>();
 
   // Signal con los toasts activos
@@ -46,7 +45,7 @@ export class ToastService {
   readonly activeToasts: Signal<ToastRef[]> = this._activeToasts.asReadonly();
 
   /**
-   * Computed: número de toasts activos
+   * Computed: nÃºmero de toasts activos
    */
   readonly activeCount = computed(() => this._activeToasts().length);
 
@@ -60,14 +59,6 @@ export class ToastService {
    */
   readonly hasWarnings = computed(() => this._activeToasts().some(t => t.type === 'warning'));
 
-  /**
-   * Signal reactivo con el estado actual del permiso de notificaciones nativas.
-   * Inicializado al arrancar y actualizado tras llamar a `requestNativePermission()`.
-   */
-  private readonly _nativePermission = signal<NotificationPermission | 'unsupported'>('default');
-  readonly nativePermission: Signal<NotificationPermission | 'unsupported'> =
-    this._nativePermission.asReadonly();
-
   // Cola de toasts pendientes
   private toastQueue: Array<{ type: ToastType; message: string; config?: ToastConfig }> = [];
 
@@ -75,13 +66,6 @@ export class ToastService {
   private toastMap = new Map<string, ToastRef>();
 
   constructor() {
-
-    // Inicializar estado del permiso de notificaciones nativas
-    if (typeof window !== 'undefined') {
-      this._nativePermission.set(
-        'Notification' in window ? Notification.permission : 'unsupported'
-      );
-    }
 
     // Detectar cuando la ventana pierde el foco
     if (this.toastConfig.pauseOnFocusLoss) {
@@ -95,10 +79,10 @@ export class ToastService {
     }
   }
 
-  // ===== MÉTODOS PRINCIPALES =====
+  // ===== MÃ‰TODOS PRINCIPALES =====
 
   /**
-   * Toast de éxito
+   * Toast de Ã©xito
    */
   success(message: string, config?: ToastConfig): ToastRef {
     return this.show('success', message, config);
@@ -126,7 +110,7 @@ export class ToastService {
   }
 
   /**
-   * Toast genérico/personalizado
+   * Toast genÃ©rico/personalizado
    */
   custom(message: string, config?: ToastConfig): ToastRef {
     return this.show('secondary', message, config);
@@ -154,7 +138,7 @@ export class ToastService {
   }
 
   /**
-   * Toast de promesa (loading → success/error automático)
+   * Toast de promesa (loading â†’ success/error automÃ¡tico)
    */
   async promise<T>(
     promise: Promise<T>,
@@ -199,18 +183,13 @@ export class ToastService {
     }
   }
 
-  // ===== GESTIÓN DE TOASTS =====
+  // ===== GESTIÃ“N DE TOASTS =====
 
   /**
-   * Muestra un toast con tipo específico
+   * Muestra un toast con tipo especÃ­fico
    */
   private show(type: ToastType, message: string, config?: ToastConfig): ToastRef {
     const mergedConfig = this.mergeConfig(type, message, config);
-
-    // Bifurcar a notificación nativa si la estrategia lo indica
-    if (this.shouldUseNative(mergedConfig)) {
-      return this.showNativeNotification(type, mergedConfig);
-    }
 
     // Verificar duplicados
     if (this.toastConfig.preventDuplicates && this.isDuplicate(mergedConfig)) {
@@ -221,22 +200,22 @@ export class ToastService {
       }
     }
 
-    // Determinar la posición
+    // Determinar la posiciÃ³n
     const position = mergedConfig.position || this.toastConfig.position;
 
-    // 1. Verificar límite GLOBAL primero
+    // 1. Verificar lÃ­mite GLOBAL primero
     if (this._activeToasts().length >= this.toastConfig.maxToasts) {
       return this.handleMaxToasts(type, message, config);
     }
 
-    // 2. Verificar límite por posición específica
+    // 2. Verificar lÃ­mite por posiciÃ³n especÃ­fica
     const currentCountInPosition = this._activeToasts().filter(
       t => (t.config().position || this.toastConfig.position) === position
     ).length;
 
     const maxPerPosition = this.toastConfig.maxToastsPerPosition || this.toastConfig.maxToasts;
     if (currentCountInPosition >= maxPerPosition) {
-      // Eliminar el toast más antiguo de esa posición
+      // Eliminar el toast mÃ¡s antiguo de esa posiciÃ³n
       const oldestInPosition = this._activeToasts()
         .filter(t => (t.config().position || this.toastConfig.position) === position)
         .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime())[0];
@@ -259,7 +238,7 @@ export class ToastService {
   }
 
   /**
-   * Cierra un toast específico
+   * Cierra un toast especÃ­fico
    */
   close(id: string): void {
     const toast = this.get(id);
@@ -276,7 +255,7 @@ export class ToastService {
   }
 
   /**
-   * Cierra toasts de un grupo específico
+   * Cierra toasts de un grupo especÃ­fico
    */
   closeGroup(group: string): void {
     this.getGroup(group).forEach(toast => toast.close());
@@ -326,7 +305,7 @@ export class ToastService {
     }
   }
 
-  // ===== MÉTODOS PRIVADOS =====
+  // ===== MÃ‰TODOS PRIVADOS =====
 
   /**
    * Crea un nuevo toast
@@ -348,10 +327,10 @@ export class ToastService {
     const key = this.getToastKey(config);
     this.toastMap.set(key, toastRef);
 
-    // Determinar la posición (usar la específica del config o la global)
+    // Determinar la posiciÃ³n (usar la especÃ­fica del config o la global)
     const position = config.position || this.toastConfig.position;
 
-    // Asegurar que el contenedor exista para esta posición
+    // Asegurar que el contenedor exista para esta posiciÃ³n
     const containerRef = this.ensureContainer(position);
 
     // Agregar al contenedor
@@ -363,7 +342,7 @@ export class ToastService {
       this.toastMap.delete(key);
     });
 
-    // Persistir si está configurado
+    // Persistir si estÃ¡ configurado
     if (config.persistent && config.persistentId) {
       this.persistToast(toastRef);
     }
@@ -389,7 +368,7 @@ export class ToastService {
   }
 
   /**
-   * Maneja el caso cuando se alcanza el máximo de toasts
+   * Maneja el caso cuando se alcanza el mÃ¡ximo de toasts
    */
   private handleMaxToasts(type: ToastType, message: string, config?: ToastConfig): ToastRef {
     const behavior = this.toastConfig.stackingBehavior;
@@ -425,7 +404,7 @@ export class ToastService {
   }
 
   /**
-   * Combina la configuración global con la específica del toast
+   * Combina la configuraciÃ³n global con la especÃ­fica del toast
    */
   private mergeConfig(type: ToastType, message: string, config?: ToastConfig): ToastConfig {
     const defaultConfig: ToastConfig = {
@@ -454,14 +433,14 @@ export class ToastService {
   }
 
   /**
-   * Obtiene el role ARIA según el tipo
+   * Obtiene el role ARIA segÃºn el tipo
    */
   private getAriaRole(type: ToastType): 'status' | 'alert' | 'log' {
     return type === 'danger' || type === 'warning' ? 'alert' : 'status';
   }
 
   /**
-   * Obtiene el aria-live según el tipo
+   * Obtiene el aria-live segÃºn el tipo
    */
   private getAriaLive(type: ToastType): 'polite' | 'assertive' | 'off' {
     return type === 'danger' ? 'assertive' : 'polite';
@@ -484,17 +463,17 @@ export class ToastService {
   }
 
   /**
-   * Genera una clave única para detectar duplicados
+   * Genera una clave Ãºnica para detectar duplicados
    */
   private getToastKey(config: ToastConfig): string {
     return `${config.type}-${config.message}-${config.title || ''}`;
   }
 
   /**
-   * Asegura que el contenedor exista para una posición específica
+   * Asegura que el contenedor exista para una posiciÃ³n especÃ­fica
    */
   private ensureContainer(position: ToastPosition): ComponentRef<ToastContainerComponent> {
-    // Verificar si ya existe un contenedor para esta posición
+    // Verificar si ya existe un contenedor para esta posiciÃ³n
     let containerRef = this.containers.get(position);
 
     if (containerRef) {
@@ -506,14 +485,14 @@ export class ToastService {
       environmentInjector: this.injector,
     });
 
-    // Adjuntar a la aplicación
+    // Adjuntar a la aplicaciÃ³n
     this.appRef.attachView(containerRef.hostView);
 
     // Agregar al DOM
     const domElem = (containerRef.hostView as any).rootNodes[0] as HTMLElement;
     this.document.body.appendChild(domElem);
 
-    // Configurar posición
+    // Configurar posiciÃ³n
     containerRef.instance.updatePosition(position);
 
     // Guardar en el mapa
@@ -522,162 +501,6 @@ export class ToastService {
     return containerRef;
   }
 
-  // ===== NOTIFICACIONES NATIVAS =====
-
-  /**
-   * Solicita al navegador el permiso para mostrar notificaciones nativas.
-   * Debe llamarse desde un gesto explícito del usuario (ej: click de botón).
-   * Actualiza el signal `nativePermission` tras la respuesta.
-   *
-   * @returns Estado del permiso: 'granted' | 'denied' | 'default' | 'unsupported'
-   */
-  async requestNativePermission(): Promise<NotificationPermission | 'unsupported'> {
-    if (typeof window === 'undefined' || !('Notification' in window)) {
-      this._nativePermission.set('unsupported');
-      return 'unsupported';
-    }
-
-    if (Notification.permission === 'granted') {
-      this._nativePermission.set('granted');
-      return 'granted';
-    }
-
-    const result = await Notification.requestPermission();
-    this._nativePermission.set(result);
-    return result;
-  }
-
-  /**
-   * Determina si se debe usar notificación nativa para un toast concreto.
-   */
-  private shouldUseNative(config: ToastConfig): boolean {
-    const strategy = config.nativeStrategy ?? this.toastConfig.nativeNotifications ?? NativeNotificationStrategy.Never;
-
-    if (strategy === NativeNotificationStrategy.Never) return false;
-    if (typeof window === 'undefined' || !('Notification' in window)) return false;
-
-    // La API Notification requiere contexto seguro (HTTPS o localhost).
-    // HTTP sobre red local (ej: http://192.168.x.x) es rechazado por Chrome en Android.
-    if (!window.isSecureContext) return false;
-
-    if (Notification.permission !== 'granted') {
-      // PreferNative hace fallback automático a NUI toast
-      return false;
-    }
-
-    if (strategy === NativeNotificationStrategy.Always || strategy === NativeNotificationStrategy.PreferNative) {
-      return true;
-    }
-
-    if (strategy === NativeNotificationStrategy.Mobile) {
-      return this.isMobile();
-    }
-
-    return false;
-  }
-
-  /**
-   * Detecta si el dispositivo actual es móvil.
-   * Usa la API moderna `userAgentData` (Chrome 90+) con fallback a userAgent.
-   */
-  private isMobile(): boolean {
-    if (typeof navigator === 'undefined') return false;
-    if ('userAgentData' in navigator) {
-      return (navigator as any).userAgentData.mobile === true;
-    }
-    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-  }
-
-  /**
-   * Muestra una notificación nativa del sistema operativo.
-   * Devuelve un `ToastRef` que se puede usar para control y observación.
-   *
-   * Estrategia de renderizado:
-   * 1. `ServiceWorkerRegistration.showNotification()` si hay un SW activo
-   *    (compatible con Android, funciona en segundo plano).
-   * 2. Constructor `new Notification()` como fallback (desktop/localhost).
-   * 3. Si ambos fallan, muestra un toast NUI normal como último recurso.
-   */
-  private showNativeNotification(type: ToastType, config: ToastConfig): ToastRef {
-    const id = config.id || `toast-${++toastIdCounter}`;
-    const toastRef = new ToastRef(id, type, config);
-
-    // Intentar obtener el favicon de la app como icono de la notificación
-    const iconEl = this.document.querySelector<HTMLLinkElement>('link[rel="icon"], link[rel="shortcut icon"]');
-    const iconUrl = iconEl?.href;
-
-    const notifTitle = config.title ?? config.message ?? '';
-    const notifOptions: NotificationOptions = {
-      body: config.title ? config.message : undefined,
-      icon: iconUrl,
-      tag: config.group,
-      requireInteraction: config.timeout === 0,
-    };
-
-    // Intento 1: ServiceWorkerRegistration.showNotification()
-    // Solo si hay un SW activo controlando la página en este momento.
-    // navigator.serviceWorker.ready nunca rechaza: si no hay SW registrado,
-    // la Promise queda colgada y el fallback jamás ejecutaría → usamos controller.
-    const activeSW = 'serviceWorker' in navigator && navigator.serviceWorker.controller;
-
-    if (activeSW) {
-      navigator.serviceWorker.ready
-        .then(registration => registration.showNotification(notifTitle, notifOptions))
-        .then(() => {
-          // Los eventos click/close de SW no son accesibles desde la página;
-          // sincronizamos solo el timeout.
-          if (config.timeout && config.timeout > 0) {
-            setTimeout(() => toastRef.close(), config.timeout);
-          }
-          config.onShown?.();
-        })
-        .catch(() => {
-          // SW presente pero falló → intentar constructor directo
-          this.showDirectNotification(notifTitle, notifOptions, config, toastRef);
-        });
-    } else {
-      // Intento 2: new Notification() — desktop, localhost, o sin SW activo
-      this.showDirectNotification(notifTitle, notifOptions, config, toastRef);
-    }
-
-    return toastRef;
-  }
-
-  /**
-   * Crea una notificación con el constructor `new Notification()`.
-   * Si falla (ej: insecure context en Android), hace fallback a toast NUI.
-   */
-  private showDirectNotification(
-    title: string,
-    options: NotificationOptions,
-    config: ToastConfig,
-    toastRef: ToastRef
-  ): void {
-    try {
-      const notification = new Notification(title, options);
-
-      if (config.timeout && config.timeout > 0) {
-        setTimeout(() => {
-          notification.close();
-          toastRef.close();
-        }, config.timeout);
-      }
-
-      notification.onclick = () => {
-        config.onClick?.();
-        notification.close();
-        toastRef.close();
-      };
-
-      notification.onclose = () => toastRef.close();
-      config.onShown?.();
-    } catch (err) {
-      // Fallback final: toast NUI normal
-      console.warn('[NUI Toast] La notificación nativa falló, mostrando toast NUI:', err);
-      this.createToast(config.type!, config);
-      toastRef.close();
-    }
-  }
 
   /**
    * Persiste un toast en localStorage
