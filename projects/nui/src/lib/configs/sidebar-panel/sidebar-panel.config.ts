@@ -17,7 +17,6 @@ export const DEFAULT_SIDEBAR_PANEL_CONFIG: SidebarPanelConfig = {
   closeOnRouteChange: false,
   autoFocus: true,
   mobileFullScreen: false,
-  breakpoint: 768,
   scrollStrategy: 'block',
   ariaLabel: 'Slide Panel',
   animationDuration: 225,

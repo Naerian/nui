@@ -275,12 +275,6 @@ export const SIDEBAR_PANEL_API_SECTIONS: ComponentSection[] = [
           'Fullscreen on mobile',
         ],
         [
-          '<code>breakpoint</code>',
-          'number',
-          '<code class="neutral">768</code>',
-          'Mobile breakpoint in px',
-        ],
-        [
           '<code>panelClass</code>',
           'string | string[]',
           '<code class="neutral">undefined</code>',

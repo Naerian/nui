@@ -41,9 +41,9 @@ export const SIDEBAR_PANEL_THEMING_SECTIONS: ComponentSection[] = [
       rows: [
         ['<code>--nui-sidebar-panel-size-xs-width</code>', '320px', 'Extra small panel width'],
         ['<code>--nui-sidebar-panel-size-sm-width</code>', '400px', 'Small panel width'],
-        ['<code>--nui-sidebar-panel-size-md-width</code>', '600px', 'Medium panel width (default)'],
-        ['<code>--nui-sidebar-panel-size-lg-width</code>', '800px', 'Large panel width'],
-        ['<code>--nui-sidebar-panel-size-xl-width</code>', '1000px', 'Extra large panel width'],
+        ['<code>--nui-sidebar-panel-size-md-width</code>', '560px', 'Medium panel width (default)'],
+        ['<code>--nui-sidebar-panel-size-lg-width</code>', '720px', 'Large panel width'],
+        ['<code>--nui-sidebar-panel-size-xl-width</code>', '960px', 'Extra large panel width'],
         ['<code>--nui-sidebar-panel-size-full-width</code>', '100vw', 'Full width panel'],
         ['<code>--nui-sidebar-panel-header-padding</code>', '1.125rem', 'Header padding (18px)'],
         ['<code>--nui-sidebar-panel-content-padding</code>', '1.125rem', 'Content padding (18px)'],

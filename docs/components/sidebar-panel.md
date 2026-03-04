@@ -143,7 +143,6 @@ Configuración completa del panel:
 | `preventClose` | `() => boolean \| Promise<boolean>` | - | Función para prevenir cierre |
 | `autoFocus` | `boolean \| string` | `true` | Auto-focus: true, false, o selector CSS |
 | `mobileFullScreen` | `boolean` | `false` | Fullscreen en móvil |
-| `breakpoint` | `number` | `768` | Breakpoint para mobile fullscreen (px) |
 | `panelClass` | `string \| string[]` | - | Clases CSS del panel |
 | `scrollStrategy` | `'block' \| 'reposition' \| 'close'` | `'block'` | Estrategia de scroll |
 | `ariaLabel` | `string` | `'Slide Panel'` | Label ARIA |
@@ -702,7 +701,6 @@ sidebarPanelService.open(MyComponent, {
 ```typescript
 sidebarPanelService.open(MyComponent, {
   mobileFullScreen: true,
-  breakpoint: 768 // En pantallas < 768px será fullscreen
 });
 ```
 

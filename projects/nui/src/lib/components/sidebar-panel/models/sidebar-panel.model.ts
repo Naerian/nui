@@ -286,13 +286,6 @@ interface SidebarPanelConfigBase<D = any> {
   mobileFullScreen?: boolean;
 
   /**
-   * Breakpoint (en px) para cambiar a fullscreen en móvil
-   * Solo aplica si mobileFullScreen es true
-   * @default 768
-   */
-  breakpoint?: number;
-
-  /**
    * Clase(s) CSS adicionales para el panel
    */
   panelClass?: string | string[];
