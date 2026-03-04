@@ -2,6 +2,10 @@
   class="nui-popover"
   [class]="mainClasses()"
   role="dialog"
+  tabindex="-1"
+  aria-modal="false"
+  [attr.aria-label]="resolvedAriaLabel() || null"
+  [attr.aria-labelledby]="ariaLabelledBy() || null"
   [@fadeIn]="'true'"
   [attr.data-position]="effectiveConfig().position"
   [attr.id]="popoverId()"
@@ -13,11 +17,14 @@
   }
   <div class="nui-popover__content">
     @if (isTemplate()) {
-      <ng-container *ngTemplateOutlet="$any(content()); context: context()"></ng-container>
+      <ng-container
+        [ngTemplateOutlet]="$any(content())"
+        [ngTemplateOutletContext]="context()"
+      ></ng-container>
     } @else if (isComponent()) {
       <ng-container #dynamicComponent></ng-container>
     } @else {
-      <div [innerHTML]="content()"></div>
+      <div [innerHTML]="content()" aria-live="polite" aria-atomic="true"></div>
     }
   </div>
 </div>

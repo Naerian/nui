@@ -104,7 +104,8 @@
 
               @case ('template') {
                 <div class="example-preview">
-                  <nui-button [nuiPopover]="popoverTemplate">View details</nui-button>
+                  <!-- nuiPopoverAriaLabel requerido: el contenido es un template, no hay auto-label -->
+                  <nui-button [nuiPopover]="popoverTemplate" nuiPopoverAriaLabel="View details">View details</nui-button>
 
                   <ng-template #popoverTemplate let-close="close">
                     <div class="nui-custom-popover">
@@ -127,10 +128,12 @@
 
               @case ('component') {
                 <div class="example-preview">
+                  <!-- nuiPopoverAriaLabel requerido: componente dinámico, no hay auto-label -->
                   <nui-button
                     [nuiPopover]="UserProfilePopoverComponent"
                     [nuiPopoverData]="{ userId: 123, userName: 'Juan Pérez' }"
                     nuiPopoverPosition="bottom"
+                    nuiPopoverAriaLabel="User profile"
                   >
                     View user profile
                   </nui-button>
@@ -217,7 +220,11 @@
 
               @case ('backdrop') {
                 <div class="example-preview">
-                  <nui-button [nuiPopover]="backdropTemplate" [nuiPopoverBackdrop]="true">
+                  <nui-button
+                    [nuiPopover]="backdropTemplate"
+                    [nuiPopoverBackdrop]="true"
+                    nuiPopoverAriaLabel="Modal popover"
+                  >
                     With Backdrop
                   </nui-button>
 
@@ -225,6 +232,7 @@
                     [nuiPopover]="backdropNoCloseTemplate"
                     [nuiPopoverBackdrop]="true"
                     [nuiBackdropClose]="false"
+                    nuiPopoverAriaLabel="Modal popover without backdrop close"
                   >
                     Backdrop without close
                   </nui-button>

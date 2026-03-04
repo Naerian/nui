@@ -2,8 +2,8 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewEncapsulation,
-  signal,
   input,
+  computed,
   TemplateRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -28,35 +28,28 @@ import { tooltipAnimation } from './animations/tooltip.animations';
   animations: [tooltipAnimation],
 })
 export class TooltipComponent {
-  /**
-   * Contenido del tooltip (string o TemplateRef)
-   */
-  content = input.required<string | TemplateRef<any>>();
+  /** Contenido del tooltip (string o TemplateRef) */
+  readonly content = input.required<string | TemplateRef<any>>();
+
+  /** Posición del tooltip */
+  readonly position = input<string>('top');
+
+  /** Mostrar flecha */
+  readonly showArrow = input<boolean>(true);
+
+  /** ID único para el atributo aria-describedby del trigger */
+  readonly tooltipId = input<string>('');
 
   /**
-   * Posición del tooltip
+   * Permitir HTML en el contenido (solo si es string).
+   * Angular sanitiza automáticamente con [innerHTML].
+   * @default false
    */
-  position = input<string>('top');
+  readonly allowHtml = input<boolean>(false);
 
   /**
-   * Mostrar flecha
+   * Computed que sustituye al signal mutable externo.
+   * La directiva ya NO necesita hacer instance.isTemplate.set().
    */
-  showArrow = input<boolean>(true);
-
-  /**
-   * ID único para accesibilidad
-   */
-  tooltipId = input<string>('');
-
-  /**
-   * Permitir HTML en el contenido (solo si es string)
-   * ¡Usar con precaución! Asegúrate de sanitizar el contenido para evitar XSS.
-   * Angular sanitiza automáticamente el HTML cuando se usa [innerHTML].
-   */
-  allowHtml = input<boolean>(false);
-
-  /**
-   * Indica si el contenido es un template
-   */
-  isTemplate = signal(false);
+  readonly isTemplate = computed(() => this.content() instanceof TemplateRef);
 }

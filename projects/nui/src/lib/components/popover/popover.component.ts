@@ -77,6 +77,21 @@ export class PopoverComponent implements OnInit {
   readonly popoverId = input('');
 
   /**
+   * Nombre accesible del dialog (aria-label).
+   * Requerido por WCAG 2.1 SC 4.1.2 para role="dialog".
+   * Pásalo desde la directiva via [nuiPopoverAriaLabel].
+   * Para contenido de texto plano, se auto-deriva del propio texto.
+   */
+  readonly ariaLabel = input<string | undefined>(undefined);
+
+  /**
+   * ID de un elemento visible dentro del popover que sirve como label.
+   * Si se define, anula ariaLabel y el label auto-derivado (aria-labelledby
+   * tiene precedencia sobre aria-label en el árbol de accesibilidad).
+   */
+  readonly ariaLabelledBy = input<string | undefined>(undefined);
+
+  /**
    * Clase CSS personalizada
    */
   readonly popoverClass = input<string | undefined>(undefined);
@@ -100,6 +115,23 @@ export class PopoverComponent implements OnInit {
    * Injector para componentes dinámicos
    */
   readonly injector = input<Injector | undefined>(undefined);
+
+  /**
+   * Nombre accesible para el dialog.
+   * Prioridad: ariaLabelledBy definido → null (aria-labelledby tiene precedencia en el árbol ARIA)
+   *           > ariaLabel explícito
+   *           > auto-derivado del texto plano (máx. 100 chars)
+   *           > null (template/component sin label explícito — se debe usar nuiPopoverAriaLabel)
+   */
+  readonly resolvedAriaLabel = computed<string | null>(() => {
+    // Si hay aria-labelledby, no duplicar con aria-label (evita conflicto ARIA)
+    if (this.ariaLabelledBy()) return null;
+    if (this.ariaLabel()) return this.ariaLabel()!;
+    // Auto-etiquetado para contenido de texto plano
+    const c = this.content();
+    if (typeof c === 'string' && c.trim()) return c.trim().slice(0, 100);
+    return null;
+  });
 
   /**
    * Indica si el contenido es un template

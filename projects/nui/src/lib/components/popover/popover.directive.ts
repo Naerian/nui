@@ -80,7 +80,9 @@ import { injectPopoverConfig, NUIColor, NUIVariant } from '../../configs';
   standalone: true,
   exportAs: 'nuiPopover',
   host: {
-    '[attr.aria-describedby]': 'isVisible() ? popoverId : null',
+    // aria-controls: referencia directa al panel que controla este trigger.
+    // Solo existe cuando el popover está abierto (evita referencias a IDs inexistentes).
+    '[attr.aria-controls]': 'isVisible() ? popoverId : null',
     '[attr.aria-expanded]': 'isVisible()',
     '[attr.aria-haspopup]': '"dialog"',
   },
@@ -101,6 +103,12 @@ export class PopoverDirective implements OnInit, OnDestroy {
   private currentPosition: PopoverPosition = 'top';
   readonly popoverId = `nui-popover-${Math.random().toString(36).substring(2, 11)}`;
   private hoverSubscriptions: { unsubscribe: () => void }[] = [];
+
+  /**
+   * Referencia al elemento que tenía el foco antes de abrir el popover.
+   * Se usa para restaurar el foco al cerrar (WCAG 2.4.3 - Focus Order).
+   */
+  private _triggerElementSnapshot?: HTMLElement;
 
   /**
    * Contenido del popover (texto, template o componente)
@@ -203,6 +211,23 @@ export class PopoverDirective implements OnInit, OnDestroy {
    * Datos para pasar al componente dinámico o template
    */
   readonly nuiPopoverData = input<any>(undefined);
+
+  /**
+   * Nombre accesible del panel del popover (aria-label del role="dialog").
+   * Obligatorio para cumplir WCAG 2.1 SC 4.1.2 en popovers interactivos.
+   * Para contenido de texto plano, se auto-deriva del propio contenido.
+   * @example nuiPopoverAriaLabel="Opciones del elemento"
+   */
+  readonly nuiPopoverAriaLabel = input<string | undefined>(undefined);
+
+  /**
+   * Fix 6: ID de un elemento visible dentro del popover que actúa como
+   * nombre accesible del dialog (aria-labelledby).
+   * Preferible a nuiPopoverAriaLabel cuando el heading ya existe en el contenido.
+   * Si se define, anula el label auto-derivado y el aria-label explícito.
+   * @example nuiPopoverAriaLabelledBy="mi-heading-id"
+   */
+  readonly nuiPopoverAriaLabelledBy = input<string | undefined>(undefined);
 
   /**
    * Permite múltiples popovers abiertos simultáneamente
@@ -553,6 +578,10 @@ export class PopoverDirective implements OnInit, OnDestroy {
       this.componentRef.setInput('popoverId', this.popoverId);
       this.componentRef.setInput('color', this.nuiPopoverColor());
       this.componentRef.setInput('variant', this.nuiPopoverVariant());
+      // Nombre accesible del dialog panel (WCAG 2.1 SC 4.1.2)
+      this.componentRef.setInput('ariaLabel', this.nuiPopoverAriaLabel());
+      // Fix 6: aria-labelledby apunta a un heading visible dentro del propio panel
+      this.componentRef.setInput('ariaLabelledBy', this.nuiPopoverAriaLabelledBy());
 
       // Pasar contexto con función close y datos
       this.componentRef.setInput('context', {
@@ -562,10 +591,35 @@ export class PopoverDirective implements OnInit, OnDestroy {
 
       this.componentRef.changeDetectorRef.detectChanges();
 
+      // Capturar el elemento con foco ANTES de moverlo al popover
+      this._triggerElementSnapshot = document.activeElement as HTMLElement;
+
       this.isVisible.set(true);
 
       // Emitir evento de mostrar
       this.nuiPopoverShow.emit();
+
+      // ── Gestión de Foco (WCAG 2.4.3 - Focus Order) ────────────────────────
+      // Solo para click y focus: mover foco al interior del popover.
+      // Para hover: el usuario navega con el ratón, mover el foco sería confuso.
+      if (this.event() !== 'hover') {
+        queueMicrotask(() => {
+          if (!this.overlayRef) return;
+          const overlayEl = this.overlayRef.overlayElement;
+
+          // 1. Buscar el primer elemento interactivo dentro del popup
+          const firstFocusable = overlayEl.querySelector<HTMLElement>(
+            'button:not([disabled]), [href]:not([disabled]), input:not([disabled]), ' +
+            'select:not([disabled]), textarea:not([disabled]), ' +
+            '[tabindex]:not([tabindex="-1"]):not([disabled])'
+          );
+
+          // 2. Fallback: el propio contenedor del dialog (tiene tabindex="-1")
+          const dialogContainer = overlayEl.querySelector<HTMLElement>('[role="dialog"]');
+
+          (firstFocusable ?? dialogContainer)?.focus();
+        });
+      }
 
       // Configurar listeners para cerrar
       // NOTA: No configurar clickOutsideListener cuando hay backdrop,
@@ -589,6 +643,13 @@ export class PopoverDirective implements OnInit, OnDestroy {
   private hidePopover(): void {
     this.isVisible.set(false);
     this.popoverManager.unregister(this.popoverId); // Desregistrar del manager
+
+    // ── Restaurar foco al trigger (WCAG 2.4.3 - Focus Order) ──────────────
+    // Solo restauramos si el foco fue movido (eventos click/focus, no hover).
+    if (this.event() !== 'hover' && this._triggerElementSnapshot) {
+      this._triggerElementSnapshot.focus();
+      this._triggerElementSnapshot = undefined;
+    }
 
     // Emitir evento de ocultar
     this.nuiPopoverHide.emit();
@@ -876,7 +937,12 @@ export class PopoverDirective implements OnInit, OnDestroy {
         filter(event => event.key === 'Escape' && this.isVisible()),
         takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe(() => this.hide());
+      .subscribe(() => {
+        // Fix 2: ESC cierra y restaura el foco de forma INMEDIATA, sin respetar
+        // hideDelay. Requerido por WCAG 2.1.1 (Keyboard) y SC 2.1.2 (No Keyboard Trap).
+        this.clearTimeouts();
+        this.hidePopover();
+      });
   }
 
   /**

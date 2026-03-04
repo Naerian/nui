@@ -10,6 +10,8 @@ import {
   output,
   computed,
   signal,
+  effect,
+  isDevMode,
 } from '@angular/core';
 import {
   ButtonIconPosition,
@@ -43,8 +45,6 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'nui-button-host',
-    '[attr.role]': '"button"',
-    '[attr.aria-disabled]': 'disabled() || loading()',
     '[class.nui-btn-full]': 'width() === "full"',
     '[style.display]': 'width() === "full" ? "flex" : "inline-flex"',
     '[style.width]': 'width() === "full" ? "100%" : "auto"',
@@ -104,9 +104,17 @@ export class ButtonComponent implements AfterContentInit {
   /** Tipo de botón HTML nativo. */
   readonly type = input<ButtonType>('button');
 
-  /** Título y Aria Label (Accessibility). */
-  readonly title = input<string>('');
-  readonly ariaLabel = input<string>('', { alias: 'aria-label' });
+  /**
+   * Título nativo del botón. Cuando se define, actúa también como
+   * nombre accesible de fallback para botones icon-only.
+   */
+  readonly title = input<string | undefined>(undefined);
+
+  /**
+   * Nombre accesible explícito (aria-label). Recomendado para botones icon-only.
+   * Tiene prioridad sobre `title`.
+   */
+  readonly ariaLabel = input<string | undefined>(undefined, { alias: 'aria-label' });
 
   // ========================================================================
   // OUTPUTS (Modern API)
@@ -187,10 +195,13 @@ export class ButtonComponent implements AfterContentInit {
   /** Determina si el botón es solo un icono (sin contenido visible) */
   readonly isIconOnly = computed(() => !!this.icon() && !this.hasVisibleContent());
 
-  /** Cálculo inteligente del aria-label para asegurar a11y */
+  /**
+   * Nombre accesible resuelto para el `<button>` nativo.
+   * Prioridad: aria-label explícito > title (fallback para icon-only) > null
+   */
   readonly computedAriaLabel = computed(() => {
     if (this.ariaLabel()) return this.ariaLabel();
-    // Si es icon-only, necesitamos un label textual obligatoriamente (usamos title)
+    // Fallback: para icon-only usamos title como nombre accesible
     if (this.isIconOnly() && this.title()) return this.title();
     return null;
   });
