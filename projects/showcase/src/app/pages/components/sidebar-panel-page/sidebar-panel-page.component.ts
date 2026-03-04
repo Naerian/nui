@@ -76,20 +76,28 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         'api-custom-button',
         'api-minimized-tab',
         'api-footer-actions',
-        'api-footer-actions-service'
+        'api-footer-actions-service',
       ],
     },
     {
       id: 'theming',
       label: 'common.tabs.theming',
       icon: 'ri-palette-line',
-      sections: ['theming-colors', 'theming-layout', 'theming-typography', 'theming-elevation', 'theming-scrollbar', 'theming-examples'],
+      sections: [
+        'theming-colors',
+        'theming-layout',
+        'theming-typography',
+        'theming-elevation',
+        'theming-scrollbar',
+        'theming-examples',
+      ],
     },
   ];
 
   @ViewChild('userDetailsTemplate', { read: TemplateRef }) userDetailsTemplate!: TemplateRef<any>;
   @ViewChild('customFooterTemplate', { read: TemplateRef }) customFooterTemplate!: TemplateRef<any>;
-  @ViewChild('loadingActionsTemplate', { read: TemplateRef }) loadingActionsTemplate!: TemplateRef<any>;
+  @ViewChild('loadingActionsTemplate', { read: TemplateRef })
+  loadingActionsTemplate!: TemplateRef<any>;
 
   // Signal para controlar el estado de loading del footer
   isProcessing = signal(false);
@@ -371,7 +379,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
   }
 
   /**
-   * Abre otro panel minimizable desde la izquierda
+   * Abre otro panel minimizable desde la derecha
    */
   openMinimizablePanel2(): void {
     this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
@@ -381,7 +389,26 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       position: 'right',
       size: 'sm',
       data: {
-        message: 'Este es otro panel minimizable abierto desde la izquierda.',
+        message:
+          'Este panel puede minimizarse a una pestaña lateral. Haz clic en el botón "-" del header.',
+        showActions: false,
+      },
+    });
+  }
+
+  /**
+   * Abre otro panel minimizable desde abajo
+   */
+  openMinimizablePanel3(): void {
+    this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
+      title: 'Panel Minimizable desde abajo',
+      id: 'minimizable-panel-3',
+      minimizable: true,
+      position: 'bottom',
+      size: 'sm',
+      data: {
+        message:
+          'Este panel puede minimizarse a una pestaña lateral. Haz clic en el botón "-" del header.',
         showActions: false,
       },
     });
@@ -558,14 +585,15 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       position: 'right',
       size: 'md',
       data: {
-        message: 'Este panel tiene botones de acción en el footer configurados mediante customButtons',
+        message:
+          'Este panel tiene botones de acción en el footer configurados mediante customButtons',
       },
       customButtons: [
         {
           text: 'Cancelar',
           color: 'secondary',
           variant: 'outline',
-          callback: (panelRef) => {
+          callback: panelRef => {
             console.log('[PADRE] Cancelar clicked');
             panelRef.close({ action: 'cancel' });
           },
@@ -575,7 +603,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
           icon: 'ri-save-line',
           color: 'primary',
           variant: 'solid',
-          callback: (panelRef) => {
+          callback: panelRef => {
             console.log('[PADRE] Guardar clicked');
             alert('Datos guardados correctamente!');
             panelRef.close({ action: 'save', saved: true });
@@ -603,7 +631,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
           icon: 'ri-delete-bin-line',
           color: 'danger',
           variant: 'ghost',
-          callback: async (panelRef) => {
+          callback: async panelRef => {
             const confirmed = confirm('¿Estás seguro de eliminar?');
             if (confirmed) {
               alert('Elemento eliminado');
@@ -616,7 +644,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
           icon: 'ri-edit-line',
           color: 'info',
           variant: 'outline',
-          callback: (panelRef) => {
+          callback: panelRef => {
             alert('Modo edición activado');
           },
         },
@@ -625,7 +653,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
           icon: 'ri-share-line',
           color: 'accent',
           variant: 'solid',
-          callback: (panelRef) => {
+          callback: panelRef => {
             alert('Panel compartido');
             panelRef.close({ action: 'share' });
           },
@@ -647,7 +675,8 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       position: 'right',
       size: 'md',
       data: {
-        message: 'Este panel demuestra botones con estados de loading reactivos usando Angular Signals',
+        message:
+          'Este panel demuestra botones con estados de loading reactivos usando Angular Signals',
       },
       footerTemplate: this.loadingActionsTemplate,
     });
@@ -667,17 +696,17 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
    */
   async processLoadingAction(): Promise<void> {
     if (this.isProcessing()) return;
-    
+
     this.isProcessing.set(true);
     console.log('Iniciando proceso...');
-    
+
     try {
       // Simular operación asíncrona
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       this.isProcessing.set(false);
       alert('Proceso completado exitosamente!');
-      
+
       if (this.currentPanelRef) {
         this.currentPanelRef.close({ action: 'process', success: true });
       }
@@ -699,7 +728,8 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       position: 'right',
       size: 'md',
       data: {
-        message: 'Los botones del footer pueden estar deshabilitados según condiciones. Simula hacer cambios para habilitar los botones.',
+        message:
+          'Los botones del footer pueden estar deshabilitados según condiciones. Simula hacer cambios para habilitar los botones.',
       },
       customButtons: [
         {
@@ -707,7 +737,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
           color: 'secondary',
           variant: 'ghost',
           disabled: !hasChanges,
-          callback: (panelRef) => {
+          callback: panelRef => {
             const confirmed = confirm('¿Descartar todos los cambios?');
             if (confirmed) {
               hasChanges = false;
@@ -721,7 +751,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
           color: 'primary',
           variant: 'solid',
           disabled: !hasChanges,
-          callback: (panelRef) => {
+          callback: panelRef => {
             alert('Cambios guardados!');
             hasChanges = false;
             panelRef.close({ action: 'save', saved: true });
@@ -766,7 +796,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
           icon: 'ri-restart-line',
           color: 'secondary',
           variant: 'ghost',
-          callback: (panelRef) => {
+          callback: panelRef => {
             const confirmed = confirm('¿Restablecer formulario a valores por defecto?');
             if (confirmed) {
               alert('Formulario restablecido');
@@ -778,7 +808,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
           icon: 'ri-eye-line',
           color: 'info',
           variant: 'outline',
-          callback: (panelRef) => {
+          callback: panelRef => {
             alert('Abriendo vista previa...');
           },
         },
@@ -787,7 +817,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
           icon: 'ri-draft-line',
           color: 'secondary',
           variant: 'solid',
-          callback: async (panelRef) => {
+          callback: async panelRef => {
             console.log('Guardando borrador...');
             await new Promise(resolve => setTimeout(resolve, 1000));
             alert('Borrador guardado');
@@ -798,7 +828,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
           icon: 'ri-send-plane-fill',
           color: 'success',
           variant: 'solid',
-          callback: async (panelRef) => {
+          callback: async panelRef => {
             const confirmed = confirm('¿Publicar cambios?');
             if (confirmed) {
               console.log('Publicando...');

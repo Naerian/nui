@@ -61,7 +61,11 @@
   cursor: pointer;
   box-shadow: var(--nui-sidebar-panel-tab-minimized-shadow);
   font-family: inherit;
-  opacity: 0.8;
+  opacity: 1;
+  transition:
+    opacity 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 
   i {
     font-size: 1.25rem;
@@ -97,26 +101,63 @@
 }
 
 /**
- * Pestañas verticales (right/left) - Icono más pequeño y compacto
+ * Pestañas verticales (right/left)
  */
 .sidebar-panel-tab-vertical {
-  width: 1rem;
-  height: 2.5rem;
+  width: 2rem;
+  height: 3.5rem;
 
   i {
-    font-size: var(--nui-font-size-sm);
+    font-size: 1.25rem;
   }
 }
 
 /**
- * Pestañas horizontales (top/bottom) - Icono más pequeño y compacto
+ * Pestañas horizontales (top/bottom)
  */
 .sidebar-panel-tab-horizontal {
-  width: 48px;
-  height: 32px;
+  width: 3.5rem;
+  height: 2rem;
 
   i {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
+  }
+}
+
+// ---- Mobile --------------------------------------------------------
+// En mobile se amplían los tap targets y se ajustan posiciones para
+// evitar solapamiento con el chrome del navegador (URL bar, notch, etc.)
+@media (max-width: 768px) {
+  .sidebar-panel-tabs-right,
+  .sidebar-panel-tabs-left {
+    top: auto;
+    bottom: 30%;
+    transform: none;
+    gap: var(--nui-spacing-xs);
+  }
+
+  .sidebar-panel-tabs-top,
+  .sidebar-panel-tabs-bottom {
+    max-width: 90vw;
+    transform: translateX(-50%);
+  }
+
+  .sidebar-panel-tab-vertical {
+    width: 2rem;
+    height: 3.5rem;
+
+    i {
+      font-size: 1.375rem;
+    }
+  }
+
+  .sidebar-panel-tab-horizontal {
+    width: 3.5rem;
+    height: 2rem;
+
+    i {
+      font-size: 1.375rem;
+    }
   }
 }
 
@@ -145,11 +186,19 @@
 
 /**
  * Pestañas STANDALONE (independientes)
- * Sin restricciones de posicionamiento - totalmente controladas por CSS custom
+ * El wrapper usa position: fixed para que siempre sea visible en el viewport,
+ * independientemente de dónde esté definido el CSS del cssClass.
+ * Sin top/left/right/bottom aquí: el cssClass del botón define la posición exacta.
  */
 .sidebar-panel-tabs-standalone {
-  position: relative;
+  position: fixed;
   z-index: 999;
+  pointer-events: none; // El wrapper no captura eventos, solo los botones dentro
+}
+
+// Los botones dentro de standalone capturan eventos normalmente
+.sidebar-panel-tabs-standalone .sidebar-panel-tab-button {
+  pointer-events: auto;
 }
 
 .sidebar-panel-tab-standalone {
