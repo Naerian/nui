@@ -23,7 +23,6 @@ interface PresetOption {
 export class PresetSelectorComponent implements OnInit {
   private themeService = inject(ThemeService);
   private showcaseConfig = inject(ShowcaseConfigService);
-  private translateService = inject(TranslateService);
 
   isOpen = false;
   currentPreset = this.showcaseConfig.currentConfig.currentPreset;

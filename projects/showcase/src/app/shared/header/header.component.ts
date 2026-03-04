@@ -6,6 +6,7 @@ import { PresetSelectorComponent } from './preset-selector/preset-selector.compo
 import { LanguageSelectorComponent } from './language-selector/language-selector.component';
 import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
 import { VersionSelectorComponent } from './version-selector/version-selector.component';
+import { FontSelectorComponent } from './font-selector/font-selector.component';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -18,6 +19,7 @@ import { RouterLink } from '@angular/router';
     LanguageSelectorComponent,
     ThemeToggleComponent,
     VersionSelectorComponent,
+    FontSelectorComponent,
     RouterLink
   ],
   templateUrl: './header.component.html',

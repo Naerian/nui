@@ -1,0 +1,64 @@
+<div class="font-selector">
+  <button
+    class="font-trigger"
+    cdkOverlayOrigin
+    #trigger="cdkOverlayOrigin"
+    (click)="toggleDropdown()"
+    aria-label="Font selector"
+    [style.font-family]="currentFont().value"
+  >
+    <span class="font-trigger__label">Aa</span>
+  </button>
+
+  <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="isOpen()"
+    [cdkConnectedOverlayHasBackdrop]="true"
+    [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'"
+    (backdropClick)="closeDropdown()"
+  >
+    <div class="font-dropdown">
+
+      <!-- Font list -->
+      <div class="font-dropdown__list">
+        @for (font of fonts; track font.name) {
+          <button
+            class="font-item"
+            [class.font-item--active]="font.name === currentFontName()"
+            [style.font-family]="font.value"
+            (click)="selectFont(font)"
+          >
+            <span class="font-item__label">{{ font.label }}</span>
+            <span class="font-item__preview">Aa Bb Cc</span>
+            @if (font.name === currentFontName()) {
+              <i class="ri-check-line"></i>
+            }
+          </button>
+        }
+      </div>
+
+      <!-- Font size slider -->
+      <div class="font-size">
+        <div class="font-size__header">
+          <span class="font-size__title">Base size</span>
+          <span class="font-size__value">{{ fontSize() }}px</span>
+        </div>
+        <div class="font-size__controls">
+          <span class="font-size__bound">{{ minFontSize }}</span>
+          <input
+            class="font-size__slider"
+            type="range"
+            [min]="minFontSize"
+            [max]="maxFontSize"
+            [step]="1"
+            [value]="fontSize()"
+            (input)="onFontSizeChange($event)"
+          />
+          <span class="font-size__bound">{{ maxFontSize }}</span>
+        </div>
+      </div>
+
+    </div>
+  </ng-template>
+</div>

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { DEFAULT_FONT_NAME, DEFAULT_FONT_SIZE } from '../models/font.model';
 
 export interface ShowcaseConfig {
   sidebarCollapsed: boolean;
@@ -7,6 +8,8 @@ export interface ShowcaseConfig {
   isDarkMode: boolean;
   language: string;
   version: string;
+  fontName: string;
+  fontSize: number;
 }
 
 @Injectable({
@@ -20,7 +23,9 @@ export class ShowcaseConfigService {
     currentPreset: 'minimal',
     isDarkMode: false,
     language: '', // Empty string means "not set yet"
-    version: '1.0.0'
+    version: '1.0.0',
+    fontName: DEFAULT_FONT_NAME,
+    fontSize: DEFAULT_FONT_SIZE,
   };
 
   private configSubject = new BehaviorSubject<ShowcaseConfig>(this.loadConfig());
@@ -90,5 +95,15 @@ export class ShowcaseConfigService {
   setVersion(version: string): void {
     const config = this.currentConfig;
     this.saveConfig({ ...config, version });
+  }
+
+  setFont(fontName: string): void {
+    const config = this.currentConfig;
+    this.saveConfig({ ...config, fontName });
+  }
+
+  setFontSize(fontSize: number): void {
+    const config = this.currentConfig;
+    this.saveConfig({ ...config, fontSize });
   }
 }

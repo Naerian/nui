@@ -179,7 +179,7 @@
     }
 
     // Mobile: Always full
-    @media (max-width: 768px) {
+    @include mixins.media-below-lg {
       width: 100vw !important;
       border: none !important;
       border-radius: 0 !important;

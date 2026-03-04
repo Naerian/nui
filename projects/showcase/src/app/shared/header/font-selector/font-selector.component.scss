@@ -1,0 +1,191 @@
+.font-selector {
+  position: relative;
+}
+
+// ── Trigger button ──────────────────────────────────────────
+.font-trigger {
+  background-color: var(--nui-surface-secondary);
+  border: 1px solid var(--nui-border-high);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--nui-border-radius-sm);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    border-color: var(--nui-primary);
+    box-shadow: 0 0 0 3px var(--nui-primary-alpha-10);
+  }
+
+  &__label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--nui-on-surface);
+    line-height: 1;
+    pointer-events: none;
+  }
+}
+
+// ── Dropdown panel ──────────────────────────────────────────
+.font-dropdown {
+  background-color: var(--nui-surface);
+  border: 1px solid var(--nui-border-high);
+  border-radius: var(--nui-border-radius-md);
+  box-shadow: var(--nui-box-shadow-md);
+  min-width: 220px;
+  margin-top: 8px;
+  overflow: hidden;
+  animation: dropdownFadeIn 0.2s ease;
+
+  @keyframes dropdownFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px;
+  }
+}
+
+// ── Font item ───────────────────────────────────────────────
+.font-item {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  background: none;
+  border: none;
+  color: var(--nui-on-surface);
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: var(--nui-border-radius-sm);
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--nui-primary-alpha-10);
+  }
+
+  &--active {
+    background-color: var(--nui-primary-alpha-10);
+
+    .font-item__label {
+      color: var(--nui-primary);
+      font-weight: 600;
+    }
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    flex: 1;
+    white-space: nowrap;
+  }
+
+  &__preview {
+    font-size: 0.8125rem;
+    color: var(--nui-on-surface-secondary);
+    opacity: 0.7;
+  }
+
+  .ri-check-line {
+    color: var(--nui-primary);
+    font-size: 1.125rem;
+    flex-shrink: 0;
+  }
+}
+
+// ── Font size slider ────────────────────────────────────────
+.font-size {
+  border-top: 1px solid var(--nui-border-subtle);
+  padding: 0.75rem 1rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  &__title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--nui-on-surface-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__value {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--nui-primary);
+    font-variant-numeric: tabular-nums;
+    min-width: 2.5rem;
+    text-align: right;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__bound {
+    font-size: 0.6875rem;
+    color: var(--nui-on-surface-secondary);
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__slider {
+    flex: 1;
+    appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--nui-border-high);
+    cursor: pointer;
+    outline: none;
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--nui-primary);
+      cursor: pointer;
+      border: 2px solid var(--nui-surface);
+      box-shadow: 0 0 0 1px var(--nui-primary);
+      transition: box-shadow 0.15s ease;
+    }
+
+    &::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--nui-primary);
+      cursor: pointer;
+      border: 2px solid var(--nui-surface);
+      box-shadow: 0 0 0 1px var(--nui-primary);
+    }
+
+    &:hover::-webkit-slider-thumb {
+      box-shadow: 0 0 0 4px var(--nui-primary-alpha-20);
+    }
+
+    &:focus::-webkit-slider-thumb {
+      box-shadow: 0 0 0 4px var(--nui-primary-alpha-30);
+    }
+  }
+}

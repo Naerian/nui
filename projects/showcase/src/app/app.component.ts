@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { HeaderComponent } from './shared/header/header.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ShowcaseConfigService } from './core/services/showcase-config.service';
@@ -9,6 +9,7 @@ import { NuiI18n, ThemeService } from 'nui';
 import { filter } from 'rxjs/operators';
 import { NuiI18nService } from 'nui';
 import { DEFAULT_LANGUAGE, LANGUAGES } from './core/models/language.model';
+import { SHOWCASE_FONTS, DEFAULT_FONT_SIZE } from './core/models/font.model';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
   private showcaseConfig = inject(ShowcaseConfigService);
   private themeService = inject(ThemeService);
   private router = inject(Router);
+  private document = inject(DOCUMENT);
 
   isSidebarCollapsed = false;
 
@@ -71,6 +73,14 @@ export class AppComponent implements OnInit {
     if (preset) {
       this.themeService.usePreset(preset);
     }
+
+    // Initialize font family
+    const savedFont = SHOWCASE_FONTS.find(f => f.name === config.fontName) ?? SHOWCASE_FONTS[0];
+    this.document.documentElement.style.fontFamily = savedFont.value;
+
+    // Initialize font size
+    const savedSize = config.fontSize ?? DEFAULT_FONT_SIZE;
+    this.document.documentElement.style.fontSize = `${savedSize}px`;
 
     // Listen for language changes to update i18n service
     this.translate.onLangChange.subscribe(event => {

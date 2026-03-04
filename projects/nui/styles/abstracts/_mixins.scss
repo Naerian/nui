@@ -183,6 +183,78 @@
   }
 }
 
+// Media query for screens below extra-small breakpoint
+/// @group Responsive
+/// @access public
+/// @since 1.0.0
+/// @example scss
+/// @include media-below-xs { font-size: 14px; }
+@mixin media-below-xs {
+  @media (max-width: #{config.$breakpoint-xs - 1}) {
+    @content;
+  }
+}
+
+// Media query for screens below small breakpoint
+/// @group Responsive
+/// @access public
+/// @since 1.0.0
+/// @example scss
+/// @include media-below-sm { font-size: 14px; }
+@mixin media-below-sm {
+  @media (max-width: #{config.$breakpoint-sm - 1}) {
+    @content;
+  }
+}
+
+/// Media query for screens below medium breakpoint
+/// @group Responsive
+/// @access public
+/// @since 1.0.0
+/// @example scss
+///   @include media-below-md { font-size: 14px; }
+@mixin media-below-md {
+  @media (max-width: #{config.$breakpoint-md - 1}) {
+    @content;
+  }
+}
+
+/// Media query for screens below large breakpoint
+/// @group Responsive
+/// @access public
+/// @since 1.0.0
+/// @example scss
+///   @include media-below-lg { font-size: 14px; }
+@mixin media-below-lg {
+  @media (max-width: #{config.$breakpoint-lg - 1}) {
+    @content;
+  }
+}
+
+/// Media query for screens below extra-large breakpoint
+/// @group Responsive
+/// @access public
+/// @since 1.0.0
+/// @example scss
+///  @include media-below-xl { font-size: 14px; }
+@mixin media-below-xl {
+  @media (max-width: #{config.$breakpoint-xl - 1}) {
+    @content;
+  }
+}
+
+/// Media query for screens below extra-extra-large breakpoint
+/// @group Responsive
+/// @access public
+/// @since 1.0.0
+/// @example scss
+///  @include media-below-xxl { font-size: 14px; }
+@mixin media-below-xxl {
+  @media (max-width: #{config.$breakpoint-xxl - 1}) {
+    @content;
+  }
+}
+
 /// =======================================
 /// OVERLAY MIXINS
 /// =======================================
