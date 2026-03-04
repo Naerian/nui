@@ -32,6 +32,17 @@ export const DEFAULT_TIMEPICKER_I18N = {
     hour: '{{value}} hora',
     hours: '{{value}} horas',
   },
+  a11y: {
+    timePickerLabel: 'Selector de hora',
+    durationPickerLabel: 'Selector de duración',
+    hourColumnHelp:
+      'Flechas para navegar, Enter para seleccionar, Inicio/Fin para primero/último',
+    minuteColumnHelp:
+      'Flechas para navegar, Enter para seleccionar, Inicio/Fin para primero/último, AvPág/RePág para saltar 5',
+    periodHelp: 'Flechas o Tab para navegar, Enter para seleccionar',
+    normalizedAlert: 'Hora ajustada: { original } se normalizó a { normalized }',
+    rangeInfo: 'Rango de tiempo disponible',
+  },
 };
 
 export interface TimePickerI18n {
@@ -67,5 +78,14 @@ export interface TimePickerI18n {
     minutes: string;
     hour: string;
     hours: string;
+  };
+  a11y: {
+    timePickerLabel: string;
+    durationPickerLabel: string;
+    hourColumnHelp: string;
+    minuteColumnHelp: string;
+    periodHelp: string;
+    normalizedAlert: string;
+    rangeInfo: string;
   };
 }

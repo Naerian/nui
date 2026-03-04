@@ -1,8 +1,14 @@
 <div
   class="nui-calendar"
+  role="region"
+  [attr.aria-label]="effectiveI18n().a11y.calendarLabel"
   [class.nui-calendar--with-tabs]="shouldShowTabs()"
   [class.nui-calendar--with-week-numbers]="showWeekNumbers()"
 >
+  <!-- Regiones de anuncio para lectores de pantalla (siempre en el DOM) -->
+  <span class="sr-only" aria-live="polite" aria-atomic="true">{{ navigationAnnouncement() }}</span>
+  <span class="sr-only" aria-live="assertive" aria-atomic="true">{{ rangeAnnouncement() }}</span>
+
   <!-- SISTEMA DE PESTAÑAS (cuando hay presets o timepicker) -->
   @if (shouldShowTabs() && viewMode() === ViewMode.DAY) {
     <div class="nui-calendar__tabs">
@@ -30,6 +36,7 @@
             class="nui-calendar__nav-btn nui-calendar__nav-btn--icon-only"
             data-calendar-nav
             [disabled]="!canNavigateBack()"
+            [attr.aria-disabled]="!canNavigateBack() || null"
             [attr.aria-label]="
               viewMode() === ViewMode.YEAR ? effectiveI18n().prevYears : effectiveI18n().prevMonth
             "
@@ -78,6 +85,7 @@
             class="nui-calendar__nav-btn nui-calendar__nav-btn--icon-only"
             data-calendar-nav
             [disabled]="!canNavigateForward()"
+            [attr.aria-disabled]="!canNavigateForward() || null"
             [attr.aria-label]="
               viewMode() === ViewMode.YEAR ? effectiveI18n().nextYears : effectiveI18n().nextMonth
             "
@@ -95,66 +103,79 @@
       >
         <!-- Vista de dias -->
         @if (viewMode() === ViewMode.DAY) {
-          <div class="nui-calendar__weekdays">
-            <!-- Columna vacía para alinear con números de semana -->
-            @if (showWeekNumbers()) {
-              <div class="nui-calendar__week-number">
-                {{ effectiveI18n().weekNumbers }}
-              </div>
-            }
-            @for (day of orderedWeekDays(); track day) {
-              <div class="nui-calendar__weekday">{{ day }}</div>
-            }
-          </div>
+          <!-- Instrucciones de teclado (referenciadas por aria-describedby del grid) -->
+          <p [id]="instanceId + '-kb-help'" class="sr-only">{{ effectiveI18n().a11y.keyboardInstructions }}</p>
 
-          <div class="nui-calendar__days-grid">
-            @for (day of calendarDays(); track day.date.getTime(); let i = $index) {
-              <!-- Número de semana al inicio de cada fila (cada 7 días) -->
-              @if (showWeekNumbers() && i % 7 === 0) {
-                <button
-                  type="button"
-                  class="nui-calendar__week"
-                  [class.nui-calendar__week--clickable]="
-                    type() === CalendarType.WEEK ||
-                    (type() === CalendarType.DAY && selection() === CalendarSelection.MULTIPLE)
-                  "
-                  [attr.aria-label]="day.ariaLabel"
-                  (click)="onWeekNumberClick(i / 7)"
-                >
-                  {{ weekNumbers()[i / 7] }}
-                </button>
+          <div role="grid" [attr.aria-describedby]="instanceId + '-kb-help'">
+            <div class="nui-calendar__weekdays" role="row">
+              <!-- Columna vacía para alinear con números de semana -->
+              @if (showWeekNumbers()) {
+                <div class="nui-calendar__week-number" role="columnheader">
+                  <span aria-hidden="true">{{ effectiveI18n().weekNumbers }}</span>
+                  <span class="sr-only">{{ effectiveI18n().a11y.weekNumberLabel }}</span>
+                </div>
               }
+              @for (day of orderedWeekDays(); track day; let di = $index) {
+                <div class="nui-calendar__weekday" role="columnheader">
+                  <abbr [title]="orderedWeekDaysFull()[di]">{{ day }}</abbr>
+                </div>
+              }
+            </div>
 
-              <button
-                #dayButton
-                type="button"
-                class="nui-calendar__day"
-                data-calendar-item="day"
-                [class.nui-calendar__day--current-month]="day.isCurrentMonth"
-                [class.nui-calendar__day--today]="day.isToday"
-                [class.nui-calendar__day--selected]="day.isSelected"
-                [class.nui-calendar__day--in-range]="day.isInRange"
-                [class.nui-calendar__day--disabled]="day.isDisabled"
-                [class.nui-calendar__day--hovered]="day.isHovered"
-                [class.nui-calendar__day--focused]="focusedDayIndex() === i"
-                [class.nui-calendar__day--status]="day?.status !== undefined"
-                [class.nui-calendar__day--status-success]="day.status === 'success'"
-                [class.nui-calendar__day--status-warning]="day.status === 'warning'"
-                [class.nui-calendar__day--status-danger]="day.status === 'danger'"
-                [class.nui-calendar__day--status-info]="day.status === 'info'"
-                [attr.aria-label]="day.ariaLabel"
-                [attr.aria-selected]="day.isSelected"
-                [attr.aria-disabled]="day.isDisabled"
-                [disabled]="day.isDisabled"
-                (click)="onDayClick(day)"
-                (focus)="onDayFocus(i)"
-                (keydown)="onDayKeyDown($event, day, i)"
-                (mouseenter)="onDayHover(day)"
-                (mouseleave)="onDayHoverEnd()"
-              >
-                {{ day.dayNumber }}
-              </button>
-            }
+            <div class="nui-calendar__days-grid">
+              @for (week of calendarWeeks(); track week[0].date.getTime(); let wi = $index) {
+                <div role="row" style="display:contents">
+                  @if (showWeekNumbers()) {
+                    <button
+                      type="button"
+                      class="nui-calendar__week"
+                      role="rowheader"
+                      [class.nui-calendar__week--clickable]="
+                        type() === CalendarType.WEEK ||
+                        (type() === CalendarType.DAY && selection() === CalendarSelection.MULTIPLE)
+                      "
+                      [attr.aria-label]="effectiveI18n().week.replace('{week}', weekNumbers()[wi].toString())"
+                      (click)="onWeekNumberClick(wi)"
+                    >
+                      {{ weekNumbers()[wi] }}
+                    </button>
+                  }
+
+                  @for (day of week; track day.date.getTime(); let di = $index) {
+                    <button
+                      #dayButton
+                      type="button"
+                      role="gridcell"
+                      class="nui-calendar__day"
+                      data-calendar-item="day"
+                      [class.nui-calendar__day--current-month]="day.isCurrentMonth"
+                      [class.nui-calendar__day--today]="day.isToday"
+                      [class.nui-calendar__day--selected]="day.isSelected"
+                      [class.nui-calendar__day--in-range]="day.isInRange"
+                      [class.nui-calendar__day--disabled]="day.isDisabled"
+                      [class.nui-calendar__day--hovered]="day.isHovered"
+                      [class.nui-calendar__day--focused]="focusedDayIndex() === wi * 7 + di"
+                      [class.nui-calendar__day--status]="day?.status !== undefined"
+                      [class.nui-calendar__day--status-success]="day.status === 'success'"
+                      [class.nui-calendar__day--status-warning]="day.status === 'warning'"
+                      [class.nui-calendar__day--status-danger]="day.status === 'danger'"
+                      [class.nui-calendar__day--status-info]="day.status === 'info'"
+                      [attr.aria-label]="day.ariaLabel"
+                      [attr.aria-selected]="day.isSelected"
+                      [attr.aria-disabled]="day.isDisabled"
+                      [disabled]="day.isDisabled"
+                      (click)="onDayClick(day)"
+                      (focus)="onDayFocus(wi * 7 + di)"
+                      (keydown)="onDayKeyDown($event, day, wi * 7 + di)"
+                      (mouseenter)="onDayHover(day)"
+                      (mouseleave)="onDayHoverEnd()"
+                    >
+                      {{ day.dayNumber }}
+                    </button>
+                  }
+                </div>
+              }
+            </div>
           </div>
         }
 

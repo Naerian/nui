@@ -1,9 +1,10 @@
 import { Component, input, signal, effect, computed, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule, ViewportScroller } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { filter, Subject, takeUntil } from 'rxjs';
 import { ComponentSection } from '../../../core/models';
+import { ContentScrollService } from '../../../core/services/content-scroll.service';
 
 /**
  * Interface para definir la configuración de un tab
@@ -68,8 +69,10 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
 
   /**
    * Tab actualmente activo (signal)
+   * Se inicializa directamente desde el fragment de la URL para que el primer
+   * render de Angular ya proyecte las secciones correctas (evita doble CD cycle).
    */
-  activeTabId = signal<string>('examples');
+  activeTabId = signal<string>(this.resolveInitialTab());
 
   /**
    * Secciones filtradas según el tab activo (signal público)
@@ -86,7 +89,7 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private viewportScroller: ViewportScroller
+    private contentScrollService: ContentScrollService
   ) {
     // Detectar cambios de tab desde URL fragment
     this.router.events
@@ -100,16 +103,41 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // Establecer tab inicial
-    this.activeTabId.set(this.initialTab());
-
-    // Manejar fragment inicial de la URL
-    this.handleFragmentChange();
+    // El tab ya se inicializó en resolveInitialTab(), solo procesamos scroll a sección si hay una
+    const fragment = this.router.parseUrl(this.router.url).fragment;
+    if (fragment?.includes('.')) {
+      const [, sectionAnchor] = fragment.split('.');
+      setTimeout(() => this.contentScrollService.scrollToAnchor(sectionAnchor), 150);
+    } else if (fragment && !this.tabs().find(t => t.id === fragment)) {
+      // Formato legacy: solo sección
+      setTimeout(() => this.contentScrollService.scrollToAnchor(fragment), 150);
+    }
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  /**
+   * Resuelve el tab inicial desde el fragment de la URL de forma síncrona,
+   * para que el primer render ya muestre las secciones correctas.
+   */
+  private resolveInitialTab(): string {
+    const fragment = this.router.parseUrl(this.router.url).fragment;
+    if (!fragment) return this.initialTab() ?? 'examples';
+
+    // Formato tab.section
+    if (fragment.includes('.')) {
+      const tabId = fragment.split('.')[0];
+      // No podemos verificar tabs() aquí (signal no inicializada), devolvemos el tabId tal cual
+      return tabId;
+    }
+
+    // Formato: solo tab (si no, será una sección legacy → usar tab por defecto)
+    return fragment.includes('-') || !isNaN(Number(fragment))
+      ? (this.initialTab() ?? 'examples') // parece un anchor, no un tabId
+      : fragment;
   }
 
   /**
@@ -139,8 +167,8 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
 
     // Scroll a la sección
     setTimeout(() => {
-      this.viewportScroller.scrollToAnchor(sectionAnchor);
-    }, 100);
+      this.contentScrollService.scrollToAnchor(sectionAnchor);
+    }, 150);
   }
 
   /**
@@ -157,16 +185,10 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
     // Formato: tab.section
     if (fragment.includes('.')) {
       const [tabId, sectionAnchor] = fragment.split('.');
-      
-      // Verificar que el tab existe
       const tab = this.tabs().find(t => t.id === tabId);
       if (tab) {
         this.activeTabId.set(tabId);
-        
-        // Scroll a la sección después de cambiar el tab
-        setTimeout(() => {
-          this.viewportScroller.scrollToAnchor(sectionAnchor);
-        }, 100);
+        setTimeout(() => this.contentScrollService.scrollToAnchor(sectionAnchor), 150);
       }
       return;
     }
@@ -178,20 +200,16 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // Formato legacy: solo sección (sin tab)
-    // Buscar en qué tab está la sección
+    // Formato legacy: solo sección — buscar en qué tab está
     const tabWithSection = this.tabs().find(t =>
       t.sections.some(sectionId => {
         const section = this.sections().find(s => s.id === sectionId);
         return section?.anchor === fragment;
       })
     );
-
     if (tabWithSection) {
       this.activeTabId.set(tabWithSection.id);
-      setTimeout(() => {
-        this.viewportScroller.scrollToAnchor(fragment);
-      }, 100);
+      setTimeout(() => this.contentScrollService.scrollToAnchor(fragment), 150);
     }
   }
 }

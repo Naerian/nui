@@ -5,7 +5,11 @@
   [class.nui-time-picker--with-tabs]="shouldShowTabs()"
   [class.nui-time-picker--with-seconds]="isDurationMode() && config.duration.showSeconds"
   role="group"
-  [attr.aria-label]="isDurationMode() ? 'Duration picker' : 'Time picker'"
+  [attr.aria-label]="
+    isDurationMode()
+      ? effectiveI18n().a11y.durationPickerLabel
+      : effectiveI18n().a11y.timePickerLabel
+  "
 >
   <!-- SISTEMA DE PESTAÑAS (cuando hay presets personalizados) -->
   @if (shouldShowTabs()) {
@@ -31,10 +35,13 @@
         <div class="nui-time-picker__header">
           <div
             class="nui-time-picker__display nui-time-picker__display--duration"
-            role="status"
-            aria-live="polite"
+            aria-hidden="true"
             [innerHTML]="formattedTime()"
           ></div>
+          <!-- Live region para lectores de pantalla (texto plano, sin HTML) -->
+          <span class="sr-only" role="status" aria-live="polite" aria-atomic="true">
+            {{ formattedTimePlain() }}
+          </span>
         </div>
       }
 
@@ -45,9 +52,13 @@
           class="nui-time-picker__column nui-time-picker__column--duration-hours"
           role="listbox"
           [attr.aria-label]="effectiveI18n().duration.hours"
-          tabindex="0"
+          [attr.tabindex]="isDisabled() ? '-1' : '0'"
+          [attr.aria-activedescendant]="
+            selectedDuration() ? instanceId + '-dur-h-' + selectedDuration()?.hours : null
+          "
           (keydown)="onKeyDown($event, 'duration-hours')"
           (focus)="onColumnFocus('duration-hours')"
+          (blur)="focusedSection.set(null)"
         >
           <div class="nui-time-picker__column-label">
             {{ effectiveI18n().duration.hours }}
@@ -57,6 +68,7 @@
             @for (hour of availableDurationHours(); track hour) {
               <button
                 type="button"
+                [id]="instanceId + '-dur-h-' + hour"
                 class="nui-time-picker__item nui-time-picker__item--duration"
                 [class.nui-time-picker__item--selected]="selectedDuration()?.hours === hour"
                 [class.nui-time-picker__item--focused]="
@@ -64,9 +76,9 @@
                 "
                 [disabled]="isDisabled()"
                 [attr.data-duration-hours]="hour"
-                [attr.tabindex]="selectedDuration()?.hours === hour ? 0 : -1"
+                tabindex="-1"
+                (mousedown)="$event.preventDefault()"
                 (click)="selectDurationHours(hour)"
-                (focus)="onItemFocus('duration-hours', hour)"
                 (keydown)="onItemKeyDown($event, 'duration-hours', hour)"
                 role="option"
                 [attr.aria-selected]="selectedDuration()?.hours === hour"
@@ -85,9 +97,13 @@
           class="nui-time-picker__column nui-time-picker__column--duration-minutes"
           role="listbox"
           [attr.aria-label]="effectiveI18n().duration.minutes"
-          tabindex="0"
+          [attr.tabindex]="isDisabled() ? '-1' : '0'"
+          [attr.aria-activedescendant]="
+            selectedDuration() ? instanceId + '-dur-m-' + selectedDuration()?.minutes : null
+          "
           (keydown)="onKeyDown($event, 'duration-minutes')"
           (focus)="onColumnFocus('duration-minutes')"
+          (blur)="focusedSection.set(null)"
         >
           <div class="nui-time-picker__column-label">
             {{ effectiveI18n().duration.minutes }}
@@ -97,6 +113,7 @@
             @for (minute of availableDurationMinutes(); track minute) {
               <button
                 type="button"
+                [id]="instanceId + '-dur-m-' + minute"
                 class="nui-time-picker__item nui-time-picker__item--duration"
                 [class.nui-time-picker__item--selected]="selectedDuration()?.minutes === minute"
                 [class.nui-time-picker__item--focused]="
@@ -104,9 +121,9 @@
                 "
                 [disabled]="isDisabled()"
                 [attr.data-duration-minutes]="minute"
-                [attr.tabindex]="selectedDuration()?.minutes === minute ? 0 : -1"
+                tabindex="-1"
+                (mousedown)="$event.preventDefault()"
                 (click)="selectDurationMinutes(minute)"
-                (focus)="onItemFocus('duration-minutes', minute)"
                 (keydown)="onItemKeyDown($event, 'duration-minutes', minute)"
                 role="option"
                 [attr.aria-selected]="selectedDuration()?.minutes === minute"
@@ -126,9 +143,15 @@
             class="nui-time-picker__column nui-time-picker__column--duration-seconds"
             role="listbox"
             [attr.aria-label]="effectiveI18n().duration.seconds"
-            tabindex="0"
+            [attr.tabindex]="isDisabled() ? '-1' : '0'"
+            [attr.aria-activedescendant]="
+              selectedDuration()?.seconds !== undefined
+                ? instanceId + '-dur-s-' + selectedDuration()?.seconds
+                : null
+            "
             (keydown)="onKeyDown($event, 'duration-seconds')"
             (focus)="onColumnFocus('duration-seconds')"
+            (blur)="focusedSection.set(null)"
           >
             <div class="nui-time-picker__column-label">
               {{ effectiveI18n().duration.seconds }}
@@ -138,6 +161,7 @@
               @for (second of availableDurationSeconds(); track second) {
                 <button
                   type="button"
+                  [id]="instanceId + '-dur-s-' + second"
                   class="nui-time-picker__item nui-time-picker__item--duration"
                   [class.nui-time-picker__item--selected]="selectedDuration()?.seconds === second"
                   [class.nui-time-picker__item--focused]="
@@ -146,9 +170,9 @@
                   "
                   [disabled]="isDisabled()"
                   [attr.data-duration-seconds]="second"
-                  [attr.tabindex]="selectedDuration()?.seconds === second ? 0 : -1"
+                  tabindex="-1"
+                  (mousedown)="$event.preventDefault()"
                   (click)="selectDurationSeconds(second)"
-                  (focus)="onItemFocus('duration-seconds', second)"
                   (keydown)="onItemKeyDown($event, 'duration-seconds', second)"
                   role="option"
                   [attr.aria-selected]="selectedDuration()?.seconds === second"
@@ -186,25 +210,40 @@
       @if (showHeader()) {
         <div class="nui-time-picker__header">
           <div class="nui-time-picker__header-info">
-            <!-- Indicador de normalización -->
+            <!-- Live region para normalización: siempre en DOM, el texto cambia -->
+            <span class="sr-only" aria-live="assertive" aria-atomic="true">
+              {{ normalizationAlertText() }}
+            </span>
+
+            <!-- Indicador visual de normalización (sin role/aria-live en el icono vacío) -->
             @if (normalizationInfo()) {
-              <i
-                class="ri-alert-line nui-time-picker__normalized"
-                role="alert"
-                aria-live="assertive"
+              <button
+                type="button"
+                class="nui-time-picker__normalized"
+                aria-hidden="true"
                 [nuiTooltipAllowHtml]="true"
                 [nuiTooltip]="
                   effectiveI18n()
                     .normalizedTime.replace('{ original }', normalizationInfo()?.original ?? '')
                     .replace('{ normalized }', normalizationInfo()?.normalized ?? '')
                 "
-              ></i>
+              >
+                <i class="ri-alert-line nui-time-picker__normalized"></i>
+              </button>
             }
 
-            <!-- Indicador de rango -->
+            <!-- Indicador de rango (focusable para teclado) -->
             @if (config.showRangeIndicator && config.minTime && config.maxTime) {
-              <i
-                class="ri-information-line nui-time-picker__info-indicator"
+              <button
+                type="button"
+                class="nui-time-picker__info-indicator"
+                [attr.aria-label]="
+                  effectiveI18n().a11y.rangeInfo +
+                  ': ' +
+                  formatTimeValue(config.minTime) +
+                  ' — ' +
+                  formatTimeValue(config.maxTime)
+                "
                 [nuiTooltipAllowHtml]="true"
                 [nuiTooltip]="
                   effectiveI18n().rangeLabel +
@@ -213,14 +252,21 @@
                   ' — ' +
                   formatTimeValue(config.maxTime)
                 "
-              ></i>
+              >
+                <i class="ri-information-line" aria-hidden="true"></i>
+              </button>
             }
+
+            <!-- Display visual con HTML (oculto a AT) -->
             <div
               class="nui-time-picker__display"
-              role="status"
-              aria-live="polite"
+              aria-hidden="true"
               [innerHTML]="formattedTime()"
             ></div>
+            <!-- Live region en texto plano para lectores de pantalla -->
+            <span class="sr-only" role="status" aria-live="polite" aria-atomic="true">
+              {{ formattedTimePlain() }}
+            </span>
           </div>
         </div>
       }
@@ -233,10 +279,10 @@
           role="listbox"
           [attr.aria-label]="is12HourFormat() ? effectiveI18n().hour12 : effectiveI18n().hour24"
           [attr.aria-activedescendant]="
-            selectedTime()?.hour ? 'hour-' + selectedTime()?.hour : null
+            selectedTime() ? instanceId + '-hour-' + selectedTime()?.hour : null
           "
-          [attr.aria-describedby]="'hour-help'"
-          tabindex="0"
+          [attr.aria-describedby]="instanceId + '-hour-help'"
+          [attr.tabindex]="isDisabled() ? '-1' : '0'"
           (keydown)="onKeyDown($event, 'hour')"
           (focus)="onColumnFocus('hour')"
           (blur)="focusedSection.set(null)"
@@ -246,24 +292,24 @@
           </div>
 
           <!-- Ayuda oculta para lectores de pantalla -->
-          <div id="hour-help" class="sr-only">
-            Use arrow keys to navigate, Enter to select, Home/End for first/last
+          <div [id]="instanceId + '-hour-help'" class="sr-only">
+            {{ effectiveI18n().a11y.hourColumnHelp }}
           </div>
 
           <div class="nui-time-picker__column-items" #hoursColumn>
             @for (hour of availableHours(); track hour) {
               <button
                 type="button"
-                [id]="'hour-' + hour"
+                [id]="instanceId + '-hour-' + hour"
                 class="nui-time-picker__item"
                 [class.nui-time-picker__item--selected]="selectedTime()?.hour === hour"
                 [class.nui-time-picker__item--focused]="
                   focusedSection() === 'hour' && selectedTime()?.hour === hour
                 "
                 [disabled]="isDisabled()"
-                [tabindex]="selectedTime()?.hour === hour ? 0 : -1"
+                tabindex="-1"
+                (mousedown)="$event.preventDefault()"
                 (click)="selectHour(hour)"
-                (focus)="onItemFocus('hour', hour)"
                 (keydown)="onItemKeyDown($event, 'hour', hour)"
                 role="option"
                 [attr.aria-selected]="selectedTime()?.hour === hour"
@@ -291,10 +337,12 @@
             role="listbox"
             [attr.aria-label]="effectiveI18n().minutes"
             [attr.aria-activedescendant]="
-              selectedTime()?.minute !== undefined ? 'minute-' + selectedTime()?.minute : null
+              selectedTime()?.minute !== undefined
+                ? instanceId + '-minute-' + selectedTime()?.minute
+                : null
             "
-            [attr.aria-describedby]="'minute-help'"
-            tabindex="0"
+            [attr.aria-describedby]="instanceId + '-minute-help'"
+            [attr.tabindex]="isDisabled() ? '-1' : '0'"
             (keydown)="onKeyDown($event, 'minute')"
             (focus)="onColumnFocus('minute')"
             (blur)="focusedSection.set(null)"
@@ -304,25 +352,24 @@
             </div>
 
             <!-- Ayuda oculta para lectores de pantalla -->
-            <div id="minute-help" class="sr-only">
-              Use arrow keys to navigate, Enter to select, Home/End for first/last, PageUp/PageDown
-              to skip 5 items
+            <div [id]="instanceId + '-minute-help'" class="sr-only">
+              {{ effectiveI18n().a11y.minuteColumnHelp }}
             </div>
 
             <div class="nui-time-picker__column-items" #minutesColumn>
               @for (minute of availableMinutes(); track minute) {
                 <button
                   type="button"
-                  [id]="'minute-' + minute"
+                  [id]="instanceId + '-minute-' + minute"
                   class="nui-time-picker__item"
                   [class.nui-time-picker__item--selected]="selectedTime()?.minute === minute"
                   [class.nui-time-picker__item--focused]="
                     focusedSection() === 'minute' && selectedTime()?.minute === minute
                   "
                   [disabled]="isDisabled()"
-                  [tabindex]="selectedTime()?.minute === minute ? 0 : -1"
+                  tabindex="-1"
+                  (mousedown)="$event.preventDefault()"
                   (click)="selectMinute(minute)"
-                  (focus)="onItemFocus('minute', minute)"
                   (keydown)="onItemKeyDown($event, 'minute', minute)"
                   role="option"
                   [attr.aria-selected]="selectedTime()?.minute === minute"
@@ -344,16 +391,12 @@
           (focus)="onColumnFocus('period')"
         >
           <!-- Ayuda oculta para lectores de pantalla -->
-          <div id="period-help" class="sr-only">
-            Use arrow keys or Tab to navigate, Enter to select
+          <div [id]="instanceId + '-period-help'" class="sr-only">
+            {{ effectiveI18n().a11y.periodHelp }}
           </div>
 
-          <div
-            class="nui-time-picker__period-toggle"
-            role="radiogroup"
-            [attr.aria-label]="effectiveI18n().period || 'AM/PM'"
-            [attr.aria-describedby]="'period-help'"
-          >
+          <!-- nui-select-btn gestiona internamente su propio role="radiogroup" -->
+          <div class="nui-time-picker__period-toggle">
             <nui-select-btn
               #periodColumn
               [options]="periodOptions()"

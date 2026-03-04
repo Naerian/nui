@@ -46,7 +46,7 @@ import {
   TimeValue,
 } from '../time-picker/models/time-picker.model';
 import { TimePickerComponent } from '../time-picker/time-picker.component';
-import { NuiI18nService } from '../../i18n';
+import { NuiI18nService, NUI_DATE_FULL_FORMAT } from '../../i18n';
 import { SelectBtnOption } from '../select-button';
 import { injectCalendarConfig } from '../../configs/calendar/calendar.config';
 import { DEFAULT_CALENDAR_I18N } from './models';
@@ -209,14 +209,25 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   selectedEndTime = signal<TimeValue | null>(null); // Hora de fin (para RANGE con 'end' o 'both')
   timePickerToggleValue = signal<'start' | 'end'>('start'); // Toggle interno para modo 'both'
 
+  readonly instanceId = `nui-cal-${Math.random().toString(36).slice(2, 9)}`;
+  focusedMonthIndex = signal<number>(-1);
+  readonly navigationAnnouncement = signal<string>('');
+  readonly rangeAnnouncement = signal<string>('');
+
   /**
    * Valor efectivo de los textos de i18n, combinando las traducciones globales con los defaults.
    * Prioridad: traducciones globales > defaults (en caso de que falte alguna clave en las traducciones)
    */
   effectiveI18n = computed(() => {
+    const global = this._i18n();
     return {
       ...DEFAULT_CALENDAR_I18N,
-      ...this._i18n(),
+      ...global,
+      timePicker: { ...DEFAULT_CALENDAR_I18N.timePicker, ...(global?.timePicker ?? {}) },
+      presets: { ...DEFAULT_CALENDAR_I18N.presets, ...(global?.presets ?? {}) },
+      tabs: { ...DEFAULT_CALENDAR_I18N.tabs, ...(global?.tabs ?? {}) },
+      aria: { ...DEFAULT_CALENDAR_I18N.aria, ...(global?.aria ?? {}) },
+      a11y: { ...DEFAULT_CALENDAR_I18N.a11y, ...(global?.a11y ?? {}) },
     };
   });
 
@@ -570,7 +581,26 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     return [...weekDays.slice(rotateBy), ...weekDays.slice(0, rotateBy)];
   });
 
-  // Verificar si estamos en el mes actual (para mostrar/ocultar bot?n "Hoy")
+  // Agrupa los 42 días en 6 filas × 7 días para la estructura ARIA grid
+  calendarWeeks = computed(() => {
+    const days = this.calendarDays();
+    const weeks: CalendarDay[][] = [];
+    for (let i = 0; i < days.length; i += 7) {
+      weeks.push(days.slice(i, i + 7));
+    }
+    return weeks;
+  });
+
+  // Nombres completos de semana ordenados según firstDayOfWeek (para abbr title)
+  orderedWeekDaysFull = computed(() => {
+    const weekDays = this.effectiveI18n().weekDays;
+    const firstDay = this.effectiveFirstDayOfWeek();
+    if (firstDay === 1) return weekDays;
+    const rotateBy = firstDay === 0 ? 6 : firstDay - 1;
+    return [...weekDays.slice(rotateBy), ...weekDays.slice(0, rotateBy)];
+  });
+
+  // Verificar si estamos en el mes actual (para mostrar/ocultar botón "Hoy")
   isCurrentMonth = computed(() => {
     const today = new Date();
     return this.calendarService.isSameMonth(this.currentDate(), today);
@@ -1702,9 +1732,26 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
     if (!range.start || (range.start && range.end)) {
       this.selectedRange.set({ start: date, end: null });
+      const formattedDate = this.calendarService.dateAdapter.format(date, NUI_DATE_FULL_FORMAT);
+      this.rangeAnnouncement.set('');
+      setTimeout(() =>
+        this.rangeAnnouncement.set(
+          this.effectiveI18n().a11y.rangeStart.replace('{date}', formattedDate)
+        ), 50
+      );
     } else {
       const [start, end] = range.start < date ? [range.start, date] : [date, range.start];
       this.selectedRange.set({ start, end });
+      const formattedStart = this.calendarService.dateAdapter.format(start, NUI_DATE_FULL_FORMAT);
+      const formattedEnd = this.calendarService.dateAdapter.format(end, NUI_DATE_FULL_FORMAT);
+      this.rangeAnnouncement.set('');
+      setTimeout(() =>
+        this.rangeAnnouncement.set(
+          this.effectiveI18n().a11y.rangeComplete
+            .replace('{start}', formattedStart)
+            .replace('{end}', formattedEnd)
+        ), 50
+      );
       const calendarValue = this.buildCalendarValue(CalendarType.RANGE, {
         range: { start, end },
       });
@@ -1723,11 +1770,23 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   }
 
   previousMonth(): void {
-    this.currentDate.set(this.calendarService.previousMonth(this.currentDate()));
+    const newDate = this.calendarService.previousMonth(this.currentDate());
+    this.currentDate.set(newDate);
+    const monthName = this.effectiveI18n().months[this.calendarService.getMonth(newDate)];
+    const year = this.calendarService.getYear(newDate);
+    this.announceNavigation(
+      this.effectiveI18n().a11y.monthNavigated.replace('{month}', monthName).replace('{year}', String(year))
+    );
   }
 
   nextMonth(): void {
-    this.currentDate.set(this.calendarService.nextMonth(this.currentDate()));
+    const newDate = this.calendarService.nextMonth(this.currentDate());
+    this.currentDate.set(newDate);
+    const monthName = this.effectiveI18n().months[this.calendarService.getMonth(newDate)];
+    const year = this.calendarService.getYear(newDate);
+    this.announceNavigation(
+      this.effectiveI18n().a11y.monthNavigated.replace('{month}', monthName).replace('{year}', String(year))
+    );
   }
 
   previousYear(): void {
@@ -1736,6 +1795,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
   nextYear(): void {
     this.currentDate.set(this.calendarService.nextYear(this.currentDate()));
+  }
+
+  private announceNavigation(message: string): void {
+    this.navigationAnnouncement.set('');
+    setTimeout(() => this.navigationAnnouncement.set(message), 50);
   }
 
   /**
@@ -1908,24 +1972,21 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   @HostListener('keydown', ['$event'])
   handleKeyboardNavigation(event: KeyboardEvent): void {
     const target = event.target as HTMLElement;
-
-    // Verificar si debemos manejar este evento
-    if (!this.keyboardNavService.shouldHandleKeyEvent(event, target)) {
-      return;
-    }
-
-    // ?? SHORTCUTS GLOBALES (funcionan en todas las vistas)
     const key = event.key.toLowerCase();
 
+    // ?? SHORTCUTS GLOBALES ???????????????????????????????????????????????????
+    // Se comprueban ANTES del guard para que funcionen en todas las vistas,
+    // independientemente de en qué elemento esté el foco.
+
     // T = Today (Ir a hoy)
-    if (key === 't') {
+    if (key === 't' && !event.ctrlKey && !event.altKey && !event.metaKey) {
       event.preventDefault();
       this.goToToday();
       return;
     }
 
-    // H = Home (Primer d?a del mes en vista DAY)
-    if (key === 'h' && this.viewMode() === ViewMode.DAY) {
+    // H = Home (primer día del mes, solo en vista DAY)
+    if (key === 'h' && !event.ctrlKey && !event.altKey && !event.metaKey && this.viewMode() === ViewMode.DAY) {
       event.preventDefault();
       const firstDay = this.calendarService.dateAdapter.startOfMonth(this.currentDate());
       this.currentDate.set(firstDay);
@@ -1933,8 +1994,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       return;
     }
 
-    // E = End (?ltimo d?a del mes en vista DAY)
-    if (key === 'e' && this.viewMode() === ViewMode.DAY) {
+    // E = End (último día del mes, solo en vista DAY)
+    if (key === 'e' && !event.ctrlKey && !event.altKey && !event.metaKey && this.viewMode() === ViewMode.DAY) {
       event.preventDefault();
       const lastDay = this.calendarService.dateAdapter.endOfMonth(this.currentDate());
       this.currentDate.set(lastDay);
@@ -1966,7 +2027,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       return;
     }
 
-    // Alt + ArrowLeft = A?o anterior
+    // Alt + ArrowLeft = Año anterior
     if (event.altKey && event.key === 'ArrowLeft') {
       event.preventDefault();
       if (this.canNavigateBack()) {
@@ -1976,7 +2037,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       return;
     }
 
-    // Alt + ArrowRight = A?o siguiente
+    // Alt + ArrowRight = Año siguiente
     if (event.altKey && event.key === 'ArrowRight') {
       event.preventDefault();
       if (this.canNavigateForward()) {
@@ -1987,9 +2048,15 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       return;
     }
 
+    // ?? NAVEGACIÓN CON FLECHAS / ENTER / ESCAPE ??????????????????????????????
+    // Verificar si debemos manejar este evento (filtra nav buttons + keys no relevantes)
+    if (!this.keyboardNavService.shouldHandleKeyEvent(event, target)) {
+      return;
+    }
+
     const viewMode = this.viewMode();
 
-    // Delegar navegaci?n seg?n la vista
+    // Delegar navegación según la vista
     switch (viewMode) {
       case ViewMode.DAY:
         this.handleDayNavigation(event);
@@ -2034,7 +2101,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
    * No necesita sincronizaci?n porque usa el DOM directamente.
    */
   onMonthFocus(monthIndex: number): void {
-    // No hay estado interno que sincronizar para meses
+    this.focusedMonthIndex.set(monthIndex);
   }
 
   /**

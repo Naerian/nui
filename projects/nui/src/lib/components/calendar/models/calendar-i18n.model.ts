@@ -63,6 +63,14 @@ export const DEFAULT_CALENDAR_I18N: CalendarI18n = {
     statusDanger: 'Peligro',
     statusInfo: 'Información',
   },
+  a11y: {
+    calendarLabel: 'Calendario',
+    keyboardInstructions: 'Usa las flechas para navegar. Re. Pág / Av. Pág para cambiar de mes. T para ir a hoy.',
+    monthNavigated: 'Navegando a {month} {year}',
+    rangeStart: 'Inicio de rango: {date}. Ahora seleccione la fecha de fin.',
+    rangeComplete: 'Rango seleccionado: {start} hasta {end}.',
+    weekNumberLabel: 'Semana',
+  },
 };
 
 export interface CalendarI18n {
@@ -114,5 +122,13 @@ export interface CalendarI18n {
     statusWarning: string;
     statusDanger: string;
     statusInfo: string;
+  };
+  a11y: {
+    calendarLabel: string;
+    keyboardInstructions: string;
+    monthNavigated: string;
+    rangeStart: string;
+    rangeComplete: string;
+    weekNumberLabel: string;
   };
 }

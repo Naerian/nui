@@ -9,10 +9,9 @@
   @include time-picker-vars.nui-time-picker-vars;
   display: inline-flex;
   width: auto;
-  
+
   // Optimización: Limita el alcance de recálculos de estilo en cambios de tema
   contain: layout style paint;
-  content-visibility: auto;
 }
 
 // ============================================================================
@@ -69,6 +68,18 @@
       justify-content: center;
       gap: var(--nui-spacing-xs);
     }
+  }
+
+  &__normalized,
+  &__info-indicator {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    width: 15px;
+    height: 15px;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
   }
 
   &__normalized {
@@ -180,6 +191,7 @@
     position: relative;
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
+    overscroll-behavior: contain; // evita que el scroll se propague al contenedor padre
   }
 
   // ============================================================================

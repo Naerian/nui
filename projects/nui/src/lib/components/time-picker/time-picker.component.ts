@@ -172,6 +172,9 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   // Signal para el sistema de tabs (selector/presets)
   activeTab = signal<'selector' | 'presets'>('selector');
 
+  /** ID único por instancia para evitar colisiones en multi-instancia */
+  readonly instanceId = `nui-tp-${Math.random().toString(36).slice(2, 9)}`;
+
   // ==================
   // COMPUTED
   // ==================
@@ -184,10 +187,48 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
    * Prioridad: traducciones globales > defaults (en caso de que falte alguna clave en las traducciones)
    */
   effectiveI18n = computed(() => {
+    const global = this._i18n();
     return {
       ...DEFAULT_TIMEPICKER_I18N,
-      ...this._i18n(),
+      ...global,
+      // Deep merge de objetos anidados para preservar claves parciales
+      duration: { ...DEFAULT_TIMEPICKER_I18N.duration, ...(global?.duration ?? {}) },
+      tabs: { ...DEFAULT_TIMEPICKER_I18N.tabs, ...(global?.tabs ?? {}) },
+      presets: { ...DEFAULT_TIMEPICKER_I18N.presets, ...(global?.presets ?? {}) },
+      a11y: { ...DEFAULT_TIMEPICKER_I18N.a11y, ...(global?.a11y ?? {}) },
     };
+  });
+
+  /** Texto plano (sin HTML) para la live region de accesibilidad */
+  readonly formattedTimePlain = computed(() => {
+    const i18n = this.effectiveI18n();
+    if (this.isDurationMode()) {
+      const duration = this.selectedDuration();
+      if (!duration) return i18n.duration.selectDuration;
+      const parts: string[] = [];
+      if (duration.hours > 0) parts.push(`${duration.hours}${i18n.duration.hoursShort}`);
+      if (duration.minutes > 0) parts.push(`${duration.minutes}${i18n.duration.minutesShort}`);
+      if (this.config.duration.showSeconds && duration.seconds !== undefined && duration.seconds > 0) {
+        parts.push(`${duration.seconds}${i18n.duration.secondsShort}`);
+      }
+      const result = parts.length > 0 ? parts.join(' ') : `0 ${i18n.duration.minutes}`;
+      return `${i18n.duration.durationSelected}: ${result}`;
+    }
+    const time = this.selectedTime();
+    if (!time) return i18n.selectTime;
+    let formatted = time.hour.toString().padStart(2, '0');
+    if (this.showMinutes()) formatted += ':' + time.minute.toString().padStart(2, '0');
+    if (this.is12HourFormat() && time.period) formatted += ' ' + time.period;
+    return `${i18n.timeSelected}: ${formatted}`;
+  });
+
+  /** Texto para la live region de alerta de normalización (sin HTML) */
+  readonly normalizationAlertText = computed(() => {
+    const info = this.normalizationInfo();
+    if (!info) return '';
+    return this.effectiveI18n().a11y.normalizedAlert
+      .replace('{ original }', info.original)
+      .replace('{ normalized }', info.normalized);
   });
 
   /**
@@ -1107,7 +1148,9 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   }
 
   /**
-   * Enfoca visualmente el item actual en el DOM
+   * Hace scroll al item actual en el DOM (sin mover el foco DOM del contenedor listbox).
+   * Con el patrón aria-activedescendant, el foco permanece siempre en el contenedor;
+   * aria-activedescendant se actualiza vía binding en el template al cambiar la selección.
    */
   private focusCurrentItem(section: TimePickerSection): void {
     // Modo DURATION
@@ -1140,11 +1183,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
       }
 
       if (column && selector) {
-        const element = column.nativeElement.querySelector(selector) as HTMLElement;
-        if (element) {
-          element.focus();
-          this.scrollToElement(column, selector, true);
-        }
+        this.scrollToElement(column, selector, true);
       }
       return;
     }
@@ -1178,13 +1217,8 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     }
 
     if (column && selector) {
-      const element = column.nativeElement.querySelector(selector) as HTMLElement;
-      if (element) {
-        // Establecer focus real del DOM
-        element.focus();
-        // Hacer scroll suave al elemento enfocado
-        this.scrollToElement(column, selector, true);
-      }
+      // Solo scroll visual — el foco DOM permanece en el contenedor listbox
+      this.scrollToElement(column, selector, true);
     }
   }
 

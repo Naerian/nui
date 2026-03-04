@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { ContentScrollService } from '../../../core/services/content-scroll.service';
 
 /**
  * Componente para títulos de sección con ancla automática.
@@ -64,7 +66,9 @@ import { CommonModule } from '@angular/common';
     }
   `]
 })
-export class SectionTitleComponent {
+export class SectionTitleComponent implements OnInit, AfterViewInit {
+  private contentScrollService = inject(ContentScrollService);
+  private router = inject(Router);
   /**
    * Título de la sección que se mostrará
    */
@@ -99,20 +103,13 @@ export class SectionTitleComponent {
 
   ngAfterViewInit() {
     // Comprobar si la URL tiene un hash que coincide con este ancla
-    // Esto permite que funcione al recargar la página con F5
-    const hash = window.location.hash.substring(1); // Elimina el #
-    
-    // Soporta formato tab.anchor o solo anchor
+    const hash = window.location.hash.substring(1);
     const anchorToCheck = hash.includes('.') ? hash.split('.')[1] : hash;
-    
+
     if (anchorToCheck === this.anchor) {
-      // Usar setTimeout para asegurar que el DOM esté completamente renderizado
       setTimeout(() => {
-        const element = document.getElementById(this.anchor!);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 100);
+        this.contentScrollService.scrollToAnchor(this.anchor!);
+      }, 150);
     }
   }
 
@@ -121,15 +118,10 @@ export class SectionTitleComponent {
    */
   onAnchorClick(event: Event) {
     event.preventDefault();
-    const currentPath = window.location.pathname;
-    const newUrl = `${currentPath}#${this.fullAnchor}`;
-    window.history.pushState({}, '', newUrl);
-    
-    // Scroll suave al elemento
-    const element = document.getElementById(this.anchor!);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    // Actualizar la URL sin recargar
+    this.router.navigate([], { fragment: this.fullAnchor, replaceUrl: true });
+    // Scroll al elemento usando el contenedor correcto
+    this.contentScrollService.scrollToAnchor(this.anchor!);
   }
 
   /**

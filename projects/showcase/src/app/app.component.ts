@@ -1,10 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { HeaderComponent } from './shared/header/header.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ShowcaseConfigService } from './core/services/showcase-config.service';
+import { ContentScrollService } from './core/services/content-scroll.service';
 import { NuiI18n, ThemeService } from 'nui';
 import { filter } from 'rxjs/operators';
 import { NuiI18nService } from 'nui';
@@ -17,12 +18,15 @@ import { SHOWCASE_FONTS, DEFAULT_FONT_SIZE } from './core/models/font.model';
   imports: [RouterOutlet, CommonModule, HeaderComponent, SidebarComponent],
   templateUrl: './app.component.html',
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
+  @ViewChild('scrollContent', { static: true }) scrollContentRef!: ElementRef<HTMLElement>;
+
   private translate = inject(TranslateService);
   private showcaseConfig = inject(ShowcaseConfigService);
   private themeService = inject(ThemeService);
   private router = inject(Router);
   private document = inject(DOCUMENT);
+  private contentScrollService = inject(ContentScrollService);
 
   isSidebarCollapsed = false;
 
@@ -97,16 +101,21 @@ export class AppComponent implements OnInit {
       this.isSidebarCollapsed = config.sidebarCollapsed;
     });
 
-    // Scroll to top on route changes
+    // Scroll to top on route changes (solo cambio de ruta real, no de fragment)
+    let previousPath = '';
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
-      .subscribe(() => {
-        // Scroll to top on route change on ".showcase-content" container
-        const contentContainer = document.querySelector('.showcase-content');
-        if (contentContainer) {
-          contentContainer.scrollTo({ top: 0, behavior: 'instant' });
+      .subscribe(event => {
+        const currentPath = event.urlAfterRedirects.split('#')[0];
+        if (currentPath !== previousPath) {
+          this.scrollContentRef?.nativeElement.scrollTo({ top: 0, behavior: 'instant' });
+          previousPath = currentPath;
         }
       });
+  }
+
+  ngAfterViewInit(): void {
+    this.contentScrollService.setScrollContainer(this.scrollContentRef.nativeElement);
   }
 
   closeSidebarOnMobile(): void {
