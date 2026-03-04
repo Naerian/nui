@@ -11,6 +11,7 @@ import {
   ViewEncapsulation,
   SecurityContext,
   inject,
+  ElementRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -32,6 +33,10 @@ import { NuiI18nService } from '../../i18n';
   host: {
     class: 'nui-toast',
     '[class]': 'hostClasses()',
+    '[attr.role]': 'config().ariaRole || "status"',
+    '[attr.aria-live]': 'config().ariaLive || "polite"',
+    '[attr.aria-atomic]': 'true',
+    '[attr.aria-label]': 'computedHostLabel()',
     '[@toastAnimation]': 'animationState()',
     '[@.disabled]': '!config().animationDuration',
   },
@@ -221,6 +226,18 @@ export class ToastComponent implements OnInit, OnDestroy {
   protected readonly buttonShape = computed((): NUIShape => {
     const config = this.config();
     return config.buttonsShape || 'rounded';
+  });
+
+  /**
+   * Label accesible del host del toast para navegación por elementos.
+   * Combina tipo + título o mensaje (truncado) para dar contexto sin
+   * requerir que el usuario entre al interior del toast.
+   */
+  protected readonly computedHostLabel = computed(() => {
+    const config = this.config();
+    const type = config.type ?? 'info';
+    const label = config.title || config.message || '';
+    return label ? `${type}: ${label}` : type;
   });
 
   // Swipe handling

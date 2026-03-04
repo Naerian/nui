@@ -1,5 +1,12 @@
-<div class="nui-toast-container__wrapper">
-  @for (toast of toasts(); track trackByToastId($index, toast)) {
+<div
+  class="nui-toast-container__wrapper"
+  role="region"
+  aria-live="polite"
+  aria-relevant="additions"
+  aria-atomic="false"
+  aria-label="Notificaciones"
+>
+  @for (toast of toasts(); track toast.id) {
     <nui-toast
       [toastRef]="toast"
       (closed)="removeToast(toast.id)"

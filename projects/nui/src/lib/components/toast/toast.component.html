@@ -1,8 +1,5 @@
 <div
   class="nui-toast__container"
-  [attr.role]="config().ariaRole || 'status'"
-  [attr.aria-live]="config().ariaLive || 'polite'"
-  [attr.aria-atomic]="true"
   [style.transform]="isSwiping ? 'translateX(' + swipeDistance() + 'px)' : null"
 >
   <!-- Barra de progreso en el borde SUPERIOR -->
