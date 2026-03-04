@@ -14,7 +14,7 @@
     color: var(--nui-on-surface);
     cursor: pointer;
     padding: 0.25rem 0.5rem;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -44,6 +44,12 @@
 
       path {
         fill: currentColor;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .logo-text {
+        display: none;
       }
     }
 
