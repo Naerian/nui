@@ -659,6 +659,11 @@
         "description": "Utilisez des icônes et des libellés significatifs pour communiquer le but de chaque action. Les icônes aident les utilisateurs à identifier rapidement les actions.",
         "note": "Utilisez des icônes pertinentes de la bibliothèque <strong>Remix Icon</strong> pour améliorer la compréhension visuelle des actions du menu."
       },
+      "badge": {
+        "title": "Badge",
+        "description": "Affichez un compteur ou une étiquette numérique sur les éléments du menu via la propriété <code>badge</code>. Idéal pour les notifications, les compteurs de tâches en attente ou tout indicateur visuel.",
+        "note": "Le <code>badge</code> est rendu sous forme de pastille positionnée à l'extrémité droite de l'élément. Les lecteurs d'écran accèdent à la valeur du badge via l'<code>aria-label</code> du bouton (ex\u00a0: \"Messages (3)\"), tandis que la pastille visuelle est masquée avec <code>aria-hidden</code>."
+      },
       "template": {
         "title": "Template personnalisé",
         "description": "Personnalisez entièrement le rendu du menu en utilisant des templates et des directives.",

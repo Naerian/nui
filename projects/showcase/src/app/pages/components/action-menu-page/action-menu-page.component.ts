@@ -44,6 +44,7 @@ export class ActionMenuPageComponent extends BaseComponentPage {
         'withSubtitle',
         'selected',
         'icons',
+        'badge',
         'template',
       ],
     },

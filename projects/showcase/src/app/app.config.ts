@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, ErrorHandler, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient, HttpClient } from '@angular/common/http';
@@ -7,6 +7,7 @@ import { routes } from './app.routes';
 import { Observable } from 'rxjs';
 import { minimal, provideNUI, provideNuiDateLocales } from 'nui';
 import { enUS, es } from 'date-fns/locale';
+import { NuiGlobalErrorHandler } from './core/errors/global-error-handler';
 
 // Simple custom loader for translations
 export class CustomTranslateLoader implements TranslateLoader {
@@ -36,6 +37,10 @@ export const appConfig: ApplicationConfig = {
         },
       })
     ),
+    {
+      provide: ErrorHandler,
+      useClass: NuiGlobalErrorHandler,
+    },
     provideNUI({
       preset: minimal,
       darkMode: 'manual',

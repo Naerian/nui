@@ -229,6 +229,16 @@
                 </div>
               }
 
+              @case ('badge') {
+                <div class="example-preview">
+                  <nui-action-menu
+                    icon="ri-bell-line"
+                    [items]="menuWithBadges"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-action-menu>
+                </div>
+              }
+
               @case ('template') {
                 <div class="example-preview">
                   <nui-action-menu

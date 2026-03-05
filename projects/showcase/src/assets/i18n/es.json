@@ -666,6 +666,11 @@
         "description": "Usa iconos y etiquetas significativas para comunicar el propósito de cada acción. Los iconos ayudan a los usuarios a identificar rápidamente las acciones.",
         "note": "Utiliza iconos relevantes de la biblioteca <strong>Remix Icon</strong> para mejorar la comprensión visual de las acciones del menú."
       },
+      "badge": {
+        "title": "Badge",
+        "description": "Muestra un contador o etiqueta numérica sobre los items del menú usando la propiedad <code>badge</code>. Ideal para notificaciones, contadores de pendientes o cualquier indicador visual.",
+        "note": "El <code>badge</code> se renderiza como una píldora posicionada en el extremo derecho del item. Los lectores de pantalla acceden al valor del badge a través del <code>aria-label</code> del botón (ej: \"Messages (3)\"), mientras que la píldora visual queda oculta con <code>aria-hidden</code>."
+      },
       "template": {
         "title": "Template personalizado",
         "description": "Personaliza completamente el renderizado del menú usando templates y directivas.",

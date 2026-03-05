@@ -337,6 +337,54 @@ export const ACTION_MENU_EXAMPLES_SECTIONS: ComponentSection[] = [
     ],
   },
   {
+    id: 'badge',
+    title: 'components.actionMenu.badge.title',
+    description: 'components.actionMenu.badge.description',
+    note: {
+      type: 'info',
+      content: 'components.actionMenu.badge.note',
+    },
+    anchor: 'badge',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        code: `<nui-action-menu
+  icon="ri-bell-line"
+  [items]="menuWithBadges"
+  (onItemAction)="handleAction($event)">
+</nui-action-menu>`,
+        language: 'html',
+      },
+      {
+        title: 'codeExamples.typescript',
+        code: `menuWithBadges: ActionMenuItem[] = [
+  {
+    label: 'Messages',
+    subtitle: 'New messages received',
+    icon: 'ri-message-line',
+    action: 'messages',
+    badge: '3'        // <-- badge text (pill)
+  },
+  {
+    label: 'Tasks',
+    subtitle: 'Pending tasks',
+    icon: 'ri-task-line',
+    action: 'tasks',
+    badge: '7'
+  },
+  { separator: true },
+  {
+    label: 'Settings',
+    icon: 'ri-settings-line',
+    action: 'settings',
+    shortcut: '\u2318+S'
+  },
+];`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
     id: 'template',
     title: 'components.actionMenu.template.title',
     description: 'components.actionMenu.template.description',

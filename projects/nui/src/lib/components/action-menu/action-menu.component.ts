@@ -51,13 +51,13 @@ import { injectActionMenuConfig } from '../../configs/action-menu';
   host: {
     '[class.nui-action-menu--disabled]': 'disabled()',
     '[class.nui-action-menu--fullWidth]': 'width() === "full"',
-    // Accesibilidad
-    '[attr.aria-haspopup]': 'type() === "dynamic" ? "menu" : null',
-    '[attr.aria-expanded]': 'menuTrigger()?.isOpen()',
   },
 })
 export class ActionMenuComponent {
   private readonly globalConfig = injectActionMenuConfig();
+
+  /** ID único por instancia para vincular trigger → panel de menú */
+  readonly instanceId = `nui-am-${Math.random().toString(36).slice(2, 9)}`;
 
   // ========================================================================
   // INPUTS (Signals)
@@ -272,9 +272,10 @@ export class ActionMenuComponent {
 
   private createItemTitle(item: ActionMenuItem): string {
     if (item.templateRef) {
-      return 'custom-content'; // Simplificado para no parsear strings complejos
+      return 'custom-content';
     }
-    return item.label ?? '';
+    const base = item.label ?? '';
+    return item.badge ? `${base} (${item.badge})` : base;
   }
 
   hasSelectedChild(item: ActionMenuItem): boolean {

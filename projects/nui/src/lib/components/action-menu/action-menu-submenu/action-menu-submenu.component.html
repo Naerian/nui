@@ -24,8 +24,9 @@
     [disabled]="item.disabled"
     (cdkMenuItemTriggered)="onItemClick(item)"
     [attr.aria-label]="item.title || item.label"
-    [attr.aria-current]="item.selected ? 'true' : null"
-    role="menuitem"
+    [attr.role]="isSelectionMode() ? 'menuitemradio' : 'menuitem'"
+    [attr.aria-checked]="isSelectionMode() ? (item.selected ?? false) : null"
+    [attr.aria-keyshortcuts]="item.shortcut || null"
     type="button"
   >
     <ng-container
@@ -33,7 +34,7 @@
     ></ng-container>
 
     @if (item.selected) {
-    <i class="ri-check-line nui-action-menu__item__check"></i>
+    <i class="ri-check-line nui-action-menu__item__check" aria-hidden="true"></i>
     }
   </button>
   } @if (item.children && !item.separator) {
@@ -45,7 +46,7 @@
     [disabled]="item.disabled"
     [attr.aria-label]="item.title || item.label"
     [attr.aria-haspopup]="'menu'"
-    [attr.aria-expanded]="false"
+    [attr.aria-keyshortcuts]="item.shortcut || null"
     role="menuitem"
     type="button"
   >
@@ -54,7 +55,7 @@
     ></ng-container>
 
     <span class="nui-action-menu-submenu__item__arrow">
-      <i [class]="iconSubmenu()"></i>
+      <i [class]="iconSubmenu()" aria-hidden="true"></i>
     </span>
   </button>
   } }
@@ -63,7 +64,7 @@
 <ng-template #itemContent let-item>
   <div class="nui-action-menu-submenu__item__container">
     @if (item.icon) {
-    <i [class]="item.icon" class="nui-action-menu__item__icon"></i>
+    <i [class]="item.icon" class="nui-action-menu__item__icon" aria-hidden="true"></i>
     } @if (item.templateRef && !item.label) {
     <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
     } @else {
@@ -77,9 +78,12 @@
   </div>
 
   @if (item.shortcut) {
-  <span class="nui-action-menu-submenu__item__shortcut">{{
+  <span class="nui-action-menu-submenu__item__shortcut" aria-hidden="true">{{
     item.shortcut
   }}</span>
+  }
+  @if (item.badge) {
+  <span class="nui-action-menu__item__badge" aria-hidden="true">{{ item.badge }}</span>
   }
 </ng-template>
 
@@ -89,6 +93,7 @@
     [iconSubmenu]="iconSubmenu()"
     [size]="size()"
     [color]="color()"
+    [isSelectionMode]="isSelectionMode()"
     [items]="item.children"
   ></nui-action-menu-submenu>
 </ng-template>

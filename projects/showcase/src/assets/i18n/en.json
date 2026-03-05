@@ -659,6 +659,11 @@
         "description": "Use meaningful icons and labels to communicate the purpose of each action. Icons help users quickly identify actions.",
         "note": "Use relevant icons from the <strong>Remix Icon</strong> library to improve the visual understanding of menu actions."
       },
+      "badge": {
+        "title": "Badge",
+        "description": "Display a counter or numeric label on menu items using the <code>badge</code> property. Perfect for notifications, pending task counters, or any visual indicator.",
+        "note": "The <code>badge</code> renders as a pill positioned at the far right of the item. Screen readers access the badge value through the button\u2019s <code>aria-label</code> (e.g. \"Messages (3)\"), while the visual pill is hidden with <code>aria-hidden</code>."
+      },
       "template": {
         "title": "Custom template",
         "description": "Completely customize the menu rendering using templates and directives.",

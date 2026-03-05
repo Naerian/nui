@@ -47,6 +47,9 @@ export class ActionMenuSubmenuComponent {
   /** Color heredado del padre. */
   readonly color = input<NUIColor>(DEFAULT_COLOR);
 
+  /** Modo de selección heredado del padre (true = menuitemradio). */
+  readonly isSelectionMode = input<boolean>(false);
+
   // ========================================================================
   // OUTPUTS
   // ========================================================================

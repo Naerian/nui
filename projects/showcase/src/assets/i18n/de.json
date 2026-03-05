@@ -659,6 +659,11 @@
         "description": "Verwenden Sie aussagekräftige Icons und Labels, um den Zweck jeder Aktion zu kommunizieren. Icons helfen Benutzern, Aktionen schnell zu identifizieren.",
         "note": "Verwenden Sie relevante Icons aus der <strong>Remix Icon</strong>-Bibliothek, um das visuelle Verständnis von Menüaktionen zu verbessern."
       },
+      "badge": {
+        "title": "Badge",
+        "description": "Zeigt einen Zähler oder eine numerische Beschriftung auf Menüelementen über die Eigenschaft <code>badge</code>. Ideal für Benachrichtigungen, ausstehende Aufgaben oder andere visuelle Indikatoren.",
+        "note": "Das <code>badge</code> wird als Pille am rechten Rand des Elements dargestellt. Screenreader greifen auf den Badge-Wert über das <code>aria-label</code> des Buttons zu (z.\u00a0B. \"Messages (3)\"), während die visuelle Pille mit <code>aria-hidden</code> verborgen ist."
+      },
       "template": {
         "title": "Benutzerdefiniertes Template",
         "description": "Passen Sie das Menü-Rendering vollständig mit Templates und Direktiven an.",
