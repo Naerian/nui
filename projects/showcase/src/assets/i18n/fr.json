@@ -598,26 +598,40 @@
             "type": { "description": "Type de bouton natif" },
             "label": { "description": "Texte du bouton (alternative à la projection de contenu)" },
             "title": { "description": "Attribut title HTML" },
-            "ariaLabel": { "description": "Étiquette d'accessibilité (calculée automatiquement pour les boutons icône seul)" }
+            "ariaLabel": {
+              "description": "Étiquette d'accessibilité (calculée automatiquement pour les boutons icône seul)"
+            }
           }
         },
         "outputs": {
           "title": "Sorties",
           "description": "Événements émis par le composant Button.",
           "rows": {
-            "onClick": { "description": "Émis lors d'un clic sur le bouton (non émis si désactivé ou en cours de chargement)" }
+            "onClick": {
+              "description": "Émis lors d'un clic sur le bouton (non émis si désactivé ou en cours de chargement)"
+            }
           }
         },
         "computed": {
           "title": "Propriétés calculées",
           "description": "Propriétés calculées réactives (Signals) du composant.",
           "rows": {
-            "effectiveColor": { "description": "Couleur résolue (Input > Config globale > Défaut)" },
+            "effectiveColor": {
+              "description": "Couleur résolue (Input > Config globale > Défaut)"
+            },
             "effectiveSize": { "description": "Taille résolue (Input > Config globale > Défaut)" },
-            "effectiveVariant": { "description": "Variante résolue (Input > Config globale > Défaut)" },
-            "hasVisibleContent": { "description": "True si le bouton a du contenu textuel ou un label" },
-            "isIconOnly": { "description": "True si le bouton ne contient qu'une icône sans texte" },
-            "computedAriaLabel": { "description": "aria-label calculé automatiquement pour l'accessibilité" }
+            "effectiveVariant": {
+              "description": "Variante résolue (Input > Config globale > Défaut)"
+            },
+            "hasVisibleContent": {
+              "description": "True si le bouton a du contenu textuel ou un label"
+            },
+            "isIconOnly": {
+              "description": "True si le bouton ne contient qu'une icône sans texte"
+            },
+            "computedAriaLabel": {
+              "description": "aria-label calculé automatiquement pour l'accessibilité"
+            }
           }
         },
         "models": {
@@ -628,10 +642,16 @@
             "ButtonTypeEnum": { "description": "Énumération pour les types de bouton natifs" },
             "ButtonIconPosition": { "description": "Options de position de l'icône" },
             "ButtonIconPositionEnum": { "description": "Énumération pour la position de l'icône" },
-            "ButtonLoadingPosition": { "description": "Options de position du spinner de chargement" },
-            "ButtonLoadingPositionEnum": { "description": "Énumération pour la position du spinner de chargement" },
+            "ButtonLoadingPosition": {
+              "description": "Options de position du spinner de chargement"
+            },
+            "ButtonLoadingPositionEnum": {
+              "description": "Énumération pour la position du spinner de chargement"
+            },
             "ButtonWidth": { "description": "Options de comportement de la largeur du bouton" },
-            "ButtonWidthEnum": { "description": "Énumération pour le comportement de la largeur du bouton" }
+            "ButtonWidthEnum": {
+              "description": "Énumération pour le comportement de la largeur du bouton"
+            }
           }
         }
       },
@@ -711,10 +731,18 @@
           "description": "Le Button résout automatiquement le nom accessible en suivant un ordre de priorité strict. Fournissez toujours un nom explicite pour les boutons icône seul.",
           "note": "Les boutons icône seul (<code>isIconOnly</code>) <strong>doivent</strong> avoir un input <code>aria-label</code> ou <code>title</code>. Omettre les deux rend le bouton inaccessible.",
           "rows": {
-            "textLabel": { "description": "Le texte projeté ou l'input <code>label</code> servent de nom accessible sans avoir besoin d'aucun attribut supplémentaire." },
-            "iconText": { "description": "L'icône reçoit automatiquement aria-hidden ; le texte visible est suffisant comme nom." },
-            "iconOnly": { "description": "L'un des deux est <strong>requis</strong>. Priorité : input <code>aria-label</code> &gt; input <code>title</code>. Le composant expose <code>computedAriaLabel()</code> avec la logique résolue." },
-            "iconOnlyLoading": { "description": "Le spinner remplace visuellement l'icône, mais le nom accessible persiste tant que le bouton reste dans le DOM." }
+            "textLabel": {
+              "description": "Le texte projeté ou l'input <code>label</code> servent de nom accessible sans avoir besoin d'aucun attribut supplémentaire."
+            },
+            "iconText": {
+              "description": "L'icône reçoit automatiquement aria-hidden ; le texte visible est suffisant comme nom."
+            },
+            "iconOnly": {
+              "description": "L'un des deux est <strong>requis</strong>. Priorité : input <code>aria-label</code> &gt; input <code>title</code>. Le composant expose <code>computedAriaLabel()</code> avec la logique résolue."
+            },
+            "iconOnlyLoading": {
+              "description": "Le spinner remplace visuellement l'icône, mais le nom accessible persiste tant que le bouton reste dans le DOM."
+            }
           },
           "elements": {
             "textLabel": "Bouton avec texte ou <code>label</code>",
@@ -731,10 +759,18 @@
           "title": "Attributs ARIA",
           "description": "Le composant Button ajoute et supprime automatiquement les attributs ARIA selon son état. Aucun binding supplémentaire n'est nécessaire dans le code consommateur.",
           "rows": {
-            "ariaLabel": { "description": "Résolu par <code>computedAriaLabel()</code>. Omis lorsque le bouton a du texte visible (le nom natif est suffisant)." },
-            "ariaBusy": { "description": "Présent lorsque <code>loading=true</code>. Indique aux technologies d'assistance que le bouton traite une opération." },
-            "disabled": { "description": "Appliqué lorsque <code>disabled=true</code> ou <code>loading=true</code>. Bloque nativement le focus et les événements sans avoir besoin d'<code>aria-disabled</code>." },
-            "ariaHidden": { "description": "Tous les éléments d'icône <code>&lt;i&gt;</code> et de spinner <code>&lt;span&gt;</code> portent <code>aria-hidden</code> pour ne pas être lus par les technologies d'assistance." }
+            "ariaLabel": {
+              "description": "Résolu par <code>computedAriaLabel()</code>. Omis lorsque le bouton a du texte visible (le nom natif est suffisant)."
+            },
+            "ariaBusy": {
+              "description": "Présent lorsque <code>loading=true</code>. Indique aux technologies d'assistance que le bouton traite une opération."
+            },
+            "disabled": {
+              "description": "Appliqué lorsque <code>disabled=true</code> ou <code>loading=true</code>. Bloque nativement le focus et les événements sans avoir besoin d'<code>aria-disabled</code>."
+            },
+            "ariaHidden": {
+              "description": "Tous les éléments d'icône <code>&lt;i&gt;</code> et de spinner <code>&lt;span&gt;</code> portent <code>aria-hidden</code> pour ne pas être lus par les technologies d'assistance."
+            }
           },
           "elements": {
             "disabled": "<code>disabled</code> (natif)",
@@ -749,9 +785,13 @@
           "description": "Le composant utilise un élément natif <code>&lt;button&gt;</code>, donc le navigateur fournit tout le comportement clavier gratuitement.",
           "note": "Lorsque <code>disabled</code> ou <code>loading</code> est vrai, l'attribut natif <code>disabled</code> est défini, ce qui retire automatiquement le bouton de l'ordre de tabulation.",
           "rows": {
-            "tab": { "description": "Déplace le focus vers (ou depuis) le bouton. Les boutons <code>disabled</code> / <code>loading</code> sont exclus de l'ordre de tabulation." },
+            "tab": {
+              "description": "Déplace le focus vers (ou depuis) le bouton. Les boutons <code>disabled</code> / <code>loading</code> sont exclus de l'ordre de tabulation."
+            },
             "shiftTab": { "description": "Déplace le focus vers l'élément précédent." },
-            "spaceEnter": { "description": "Active le bouton. Si <code>disabled</code> ou <code>loading</code>, le gestionnaire intercepte et annule l'événement avant que <code>onClick</code> ne se déclenche." }
+            "spaceEnter": {
+              "description": "Active le bouton. Si <code>disabled</code> ou <code>loading</code>, le gestionnaire intercepte et annule l'événement avant que <code>onClick</code> ne se déclenche."
+            }
           }
         }
       }
@@ -846,7 +886,9 @@
           "description": "Événements émis par le composant auxquels vous pouvez écouter pour réagir aux interactions utilisateur.",
           "rows": {
             "onItemAction": { "description": "Émis lors d'un clic sur un élément" },
-            "onSelectionChange": { "description": "Émis lors d'un changement de sélection (mode sélecteur)" },
+            "onSelectionChange": {
+              "description": "Émis lors d'un changement de sélection (mode sélecteur)"
+            },
             "menuOpen": { "description": "Émis lorsque le menu s'ouvre" },
             "menuClose": { "description": "Émis lorsque le menu se ferme" }
           }
@@ -868,7 +910,9 @@
             "selected": { "description": "Si l'élément est sélectionné (affiche une coche)" },
             "separator": { "description": "Si l'élément est un séparateur visuel" },
             "onAction": { "description": "Rappel lors d'un clic sur l'élément" },
-            "data": { "description": "Données personnalisées supplémentaires pour TemplateRef<any>" },
+            "data": {
+              "description": "Données personnalisées supplémentaires pour TemplateRef<any>"
+            },
             "badge": { "description": "Badge ou compteur à afficher" }
           }
         }
@@ -948,17 +992,39 @@
           "title": "Rôles et attributs ARIA",
           "description": "L'Action Menu applique les attributs ARIA suivants conformément au modèle de menu de l'ARIA Authoring Practices Guide (APG).",
           "rows": {
-            "haspopup": { "description": "Informe les technologies d'assistance qu'activer ce bouton ouvrira un menu." },
-            "expanded": { "description": "Reflète l'état ouvert/fermé du menu. Mis à jour automatiquement à chaque interaction." },
-            "controls": { "description": "Lie le bouton déclencheur au conteneur de menu qu'il contrôle via des IDs correspondants." },
-            "roleMenu": { "description": "Identifie le conteneur déroulant comme un widget de menu." },
-            "orientation": { "description": "Précise que les éléments sont disposés verticalement (disposition de menu par défaut)." },
-            "labelledby": { "description": "En mode dynamique, lie le conteneur du menu à son bouton déclencheur en fournissant un nom accessible." },
-            "roleItem": { "description": "Rôle par défaut pour les éléments interactifs. Passe à menuitemradio quand l'élément appartient à un groupe de sélection." },
-            "ariaChecked": { "description": "Présent uniquement en mode sélection. Indique si cet élément est la sélection actuelle." },
-            "keyshortcuts": { "description": "Expose le texte du raccourci clavier affiché visuellement à côté de l'élément." },
-            "roleSeparator": { "description": "Identifie le séparateur visuel entre les groupes d'éléments de menu." },
-            "ariaHiddenIcon": { "description": "Empêche les icônes décoratives d'être annoncées par les lecteurs d'écran." }
+            "haspopup": {
+              "description": "Informe les technologies d'assistance qu'activer ce bouton ouvrira un menu."
+            },
+            "expanded": {
+              "description": "Reflète l'état ouvert/fermé du menu. Mis à jour automatiquement à chaque interaction."
+            },
+            "controls": {
+              "description": "Lie le bouton déclencheur au conteneur de menu qu'il contrôle via des IDs correspondants."
+            },
+            "roleMenu": {
+              "description": "Identifie le conteneur déroulant comme un widget de menu."
+            },
+            "orientation": {
+              "description": "Précise que les éléments sont disposés verticalement (disposition de menu par défaut)."
+            },
+            "labelledby": {
+              "description": "En mode dynamique, lie le conteneur du menu à son bouton déclencheur en fournissant un nom accessible."
+            },
+            "roleItem": {
+              "description": "Rôle par défaut pour les éléments interactifs. Passe à menuitemradio quand l'élément appartient à un groupe de sélection."
+            },
+            "ariaChecked": {
+              "description": "Présent uniquement en mode sélection. Indique si cet élément est la sélection actuelle."
+            },
+            "keyshortcuts": {
+              "description": "Expose le texte du raccourci clavier affiché visuellement à côté de l'élément."
+            },
+            "roleSeparator": {
+              "description": "Identifie le séparateur visuel entre les groupes d'éléments de menu."
+            },
+            "ariaHiddenIcon": {
+              "description": "Empêche les icônes décoratives d'être annoncées par les lecteurs d'écran."
+            }
           },
           "elements": {
             "trigger": "<code>&lt;button&gt;</code> (déclencheur)",
@@ -975,11 +1041,21 @@
           "description": "Le bouton déclencheur résout son nom accessible selon une cascade de priorités. Fournissez toujours un nom accessible explicite pour les déclencheurs avec icône uniquement.",
           "note": "Les menus avec icône uniquement (sans label) doivent avoir <code>ariaLabel</code> ou <code>title</code> défini. Sans libellé textuel visible, les technologies d'assistance ne peuvent pas identifier le but du menu.",
           "rows": {
-            "triggerLabel": { "description": "L'entrée <code>label</code> s'affiche comme le texte interne du bouton, qui devient nativement le nom accessible." },
-            "triggerAriaLabel": { "description": "L'entrée <code>ariaLabel</code> est appliquée comme attribut <code>aria-label</code> et a la priorité sur <code>label</code> et <code>title</code>." },
-            "triggerIconOnly": { "description": "Si ni <code>ariaLabel</code> ni <code>label</code> n'est fourni, l'entrée <code>title</code> est utilisée comme nom accessible via l'infobulle du navigateur." },
-            "itemLabel": { "description": "L'<code>aria-label</code> de chaque élément de menu est résolu à partir de <code>item.title || item.label</code> pour garantir que les lecteurs d'écran annoncent le bon texte." },
-            "menuLabelledby": { "description": "En mode dynamique, le conteneur du menu référence l'ID du déclencheur via <code>aria-labelledby</code>, rendant explicite leur association." }
+            "triggerLabel": {
+              "description": "L'entrée <code>label</code> s'affiche comme le texte interne du bouton, qui devient nativement le nom accessible."
+            },
+            "triggerAriaLabel": {
+              "description": "L'entrée <code>ariaLabel</code> est appliquée comme attribut <code>aria-label</code> et a la priorité sur <code>label</code> et <code>title</code>."
+            },
+            "triggerIconOnly": {
+              "description": "Si ni <code>ariaLabel</code> ni <code>label</code> n'est fourni, l'entrée <code>title</code> est utilisée comme nom accessible via l'infobulle du navigateur."
+            },
+            "itemLabel": {
+              "description": "L'<code>aria-label</code> de chaque élément de menu est résolu à partir de <code>item.title || item.label</code> pour garantir que les lecteurs d'écran annoncent le bon texte."
+            },
+            "menuLabelledby": {
+              "description": "En mode dynamique, le conteneur du menu référence l'ID du déclencheur via <code>aria-labelledby</code>, rendant explicite leur association."
+            }
           },
           "elements": {
             "triggerWithLabel": "Déclencheur avec <code>label</code>",
@@ -998,15 +1074,29 @@
           "description": "L'Action Menu implémente le schéma de clavier de menu complet de l'APG. Les touches fléchées naviguent entre les éléments ; Échap et FlècheGauche ferment les menus.",
           "note": "<kbd>FlècheBas</kbd>, <kbd>FlècheHaut</kbd>, <kbd>Début</kbd> et <kbd>Fin</kbd> appellent <code>preventDefault()</code> pour éviter le défilement de la page lors de la navigation dans le menu.",
           "rows": {
-            "tab": { "description": "Déplace le focus vers le bouton déclencheur. Quand le menu est ouvert, Tab le ferme et rend le focus au déclencheur." },
-            "spaceEnter": { "description": "Ouvre le menu quand le focus est sur le déclencheur. Active l'élément de menu ciblé quand on est dans le menu." },
-            "escape": { "description": "Ferme le menu ouvert et rend le focus au bouton déclencheur." },
-            "arrowDown": { "description": "Déplace le focus vers l'élément de menu suivant. Reprend depuis le premier élément après le dernier." },
-            "arrowUp": { "description": "Déplace le focus vers l'élément de menu précédent. Reprend depuis le dernier élément avant le premier." },
+            "tab": {
+              "description": "Déplace le focus vers le bouton déclencheur. Quand le menu est ouvert, Tab le ferme et rend le focus au déclencheur."
+            },
+            "spaceEnter": {
+              "description": "Ouvre le menu quand le focus est sur le déclencheur. Active l'élément de menu ciblé quand on est dans le menu."
+            },
+            "escape": {
+              "description": "Ferme le menu ouvert et rend le focus au bouton déclencheur."
+            },
+            "arrowDown": {
+              "description": "Déplace le focus vers l'élément de menu suivant. Reprend depuis le premier élément après le dernier."
+            },
+            "arrowUp": {
+              "description": "Déplace le focus vers l'élément de menu précédent. Reprend depuis le dernier élément avant le premier."
+            },
             "home": { "description": "Déplace le focus vers le premier élément de menu." },
             "end": { "description": "Déplace le focus vers le dernier élément de menu." },
-            "arrowRight": { "description": "Ouvre le sous-menu de l'élément ciblé et déplace le focus vers son premier élément." },
-            "arrowLeft": { "description": "Ferme le sous-menu actuel et rend le focus à l'élément parent." }
+            "arrowRight": {
+              "description": "Ouvre le sous-menu de l'élément ciblé et déplace le focus vers son premier élément."
+            },
+            "arrowLeft": {
+              "description": "Ferme le sous-menu actuel et rend le focus à l'élément parent."
+            }
           }
         }
       }
@@ -1058,21 +1148,31 @@
           "description": "Propriétés d'entrée qui modifient le comportement et l'apparence de l'avatar.",
           "rows": {
             "src": { "description": "URL de l'image de l'avatar" },
-            "alt": { "description": "Texte alternatif (utilisé pour générer des initiales si pas de src)" },
-            "initials": { "description": "Initiales à afficher (remplace celles générées depuis alt)" },
+            "alt": {
+              "description": "Texte alternatif (utilisé pour générer des initiales si pas de src)"
+            },
+            "initials": {
+              "description": "Initiales à afficher (remplace celles générées depuis alt)"
+            },
             "icon": { "description": "Classe d'icône RemixIcon à afficher" },
             "size": { "description": "Taille prédéfinie de l'avatar" },
             "customSize": { "description": "Taille personnalisée en pixels (remplace size)" },
             "variant": { "description": "Forme de l'avatar" },
-            "color": { "description": "Couleur de fond lorsqu'il n'y a pas d'image (accepte les couleurs du thème ou personnalisées)" },
-            "textColor": { "description": "Couleur du texte/icône (calculée automatiquement si non spécifiée)" }
+            "color": {
+              "description": "Couleur de fond lorsqu'il n'y a pas d'image (accepte les couleurs du thème ou personnalisées)"
+            },
+            "textColor": {
+              "description": "Couleur du texte/icône (calculée automatiquement si non spécifiée)"
+            }
           }
         },
         "outputs": {
           "title": "Sorties du composant",
           "description": "Événements émis par le composant auxquels vous pouvez écouter pour réagir aux erreurs de chargement d'image.",
           "rows": {
-            "imageError": { "description": "Émis lorsque l'image ne peut pas être chargée. Le composant affiche automatiquement le repli." }
+            "imageError": {
+              "description": "Émis lorsque l'image ne peut pas être chargée. Le composant affiche automatiquement le repli."
+            }
           }
         }
       },
@@ -1102,11 +1202,15 @@
           "title": "Variables de style",
           "description": "Variables CSS pour personnaliser les bordures, les couleurs par défaut et la typographie de l'avatar.",
           "rows": {
-            "borderRadiusCircular": { "description": "Rayon de bordure pour la variante circulaire" },
+            "borderRadiusCircular": {
+              "description": "Rayon de bordure pour la variante circulaire"
+            },
             "borderRadiusRounded": { "description": "Rayon de bordure pour la variante arrondie" },
             "borderRadiusSquare": { "description": "Rayon de bordure pour la variante carrée" },
             "borderWidth": { "description": "Épaisseur de la bordure de l'avatar" },
-            "borderWidthBordered": { "description": "Épaisseur de la bordure de l'avatar avec bordure" },
+            "borderWidthBordered": {
+              "description": "Épaisseur de la bordure de l'avatar avec bordure"
+            },
             "borderOutset": { "description": "Couleur de la bordure extérieure de l'avatar" },
             "defaultBg": { "description": "Couleur de fond par défaut" },
             "defaultColor": { "description": "Couleur de texte/icône par défaut" },
@@ -1124,7 +1228,9 @@
           "description": "Le composant <code>nui-avatar-group</code> utilise <code>NuiI18nService</code> pour construire l'étiquette accessible et l'infobulle de l'indicateur d'excès affiché lorsque le nombre d'avatars dépasse l'entrée <code>max</code>.",
           "note": "Utilisez le marqueur <code>{count}</code> dans votre chaîne de traduction. Le composant le remplace au moment de l'exécution par le nombre exact d'avatars cachés.",
           "rows": {
-            "moreProfiles": { "description": "Étiquette accessible et infobulle de l'indicateur d'excès (+N). Prend en charge le marqueur <code>{count}</code>." }
+            "moreProfiles": {
+              "description": "Étiquette accessible et infobulle de l'indicateur d'excès (+N). Prend en charge le marqueur <code>{count}</code>."
+            }
           }
         }
       },
@@ -1133,16 +1239,36 @@
           "title": "Rôles et attributs ARIA",
           "description": "Chaque avatar utilise <code>role='img'</code> pour se présenter comme une image sémantique. Le composant de groupe enveloppe les avatars dans une structure de liste accessible.",
           "rows": {
-            "roleImg": { "description": "Identifie le conteneur d'avatar comme un élément image pour les technologies d'assistance." },
-            "ariaLabel": { "description": "Nom accessible résolu depuis <code>tooltip()</code>, <code>alt()</code> ou la chaîne de repli <code>'avatar'</code>." },
-            "title": { "description": "Infobulle visuelle et repli secondaire de nom accessible pour le conteneur d'avatar." },
-            "imgAlt": { "description": "Toujours vide (<code>''</code>) pour éviter que l'image interne soit lue indépendamment ; le <code>role='img'</code> et l'<code>aria-label</code> du parent constituent la représentation accessible." },
-            "ariaHiddenDecorative": { "description": "Tous les éléments internes décoratifs (initiales, icône, span de repli) sont masqués aux technologies d'assistance." },
-            "roleList": { "description": "Le conteneur du groupe d'avatars utilise <code>role='list'</code> pour que les lecteurs d'écran l'annoncent comme une liste navigable." },
-            "roleListitem": { "description": "Chaque enveloppe d'avatar dans le groupe a <code>role='listitem'</code> pour correspondre au contexte de liste." },
-            "roleExcess": { "description": "L'indicateur d'excès (+N) a <code>role='img'</code> et un <code>aria-label</code> internationalisé pour que les lecteurs d'écran annoncent le nombre masqué." },
-            "ariaLabelExcess": { "description": "Nom accessible pour l'indicateur d'excès, généré depuis le token i18n <code>avatar.moreProfiles</code> avec <code>{count}</code> remplacé." },
-            "ariaHiddenExcess": { "description": "Le span de texte '+N' visible est masqué aux technologies d'assistance ; seul l'<code>aria-label</code> du conteneur parent est lu." }
+            "roleImg": {
+              "description": "Identifie le conteneur d'avatar comme un élément image pour les technologies d'assistance."
+            },
+            "ariaLabel": {
+              "description": "Nom accessible résolu depuis <code>tooltip()</code>, <code>alt()</code> ou la chaîne de repli <code>'avatar'</code>."
+            },
+            "title": {
+              "description": "Infobulle visuelle et repli secondaire de nom accessible pour le conteneur d'avatar."
+            },
+            "imgAlt": {
+              "description": "Toujours vide (<code>''</code>) pour éviter que l'image interne soit lue indépendamment ; le <code>role='img'</code> et l'<code>aria-label</code> du parent constituent la représentation accessible."
+            },
+            "ariaHiddenDecorative": {
+              "description": "Tous les éléments internes décoratifs (initiales, icône, span de repli) sont masqués aux technologies d'assistance."
+            },
+            "roleList": {
+              "description": "Le conteneur du groupe d'avatars utilise <code>role='list'</code> pour que les lecteurs d'écran l'annoncent comme une liste navigable."
+            },
+            "roleListitem": {
+              "description": "Chaque enveloppe d'avatar dans le groupe a <code>role='listitem'</code> pour correspondre au contexte de liste."
+            },
+            "roleExcess": {
+              "description": "L'indicateur d'excès (+N) a <code>role='img'</code> et un <code>aria-label</code> internationalisé pour que les lecteurs d'écran annoncent le nombre masqué."
+            },
+            "ariaLabelExcess": {
+              "description": "Nom accessible pour l'indicateur d'excès, généré depuis le token i18n <code>avatar.moreProfiles</code> avec <code>{count}</code> remplacé."
+            },
+            "ariaHiddenExcess": {
+              "description": "Le span de texte '+N' visible est masqué aux technologies d'assistance ; seul l'<code>aria-label</code> du conteneur parent est lu."
+            }
           },
           "elements": {
             "avatarDiv": "<code>&lt;div&gt;</code> (avatar)",
@@ -1158,10 +1284,18 @@
           "description": "L'ordre de résolution du nom accessible garantit que chaque avatar a une étiquette significative pour les lecteurs d'écran même lorsqu'il n'est que partiellement configuré.",
           "note": "Fournissez toujours <code>alt</code> ou <code>tooltip</code> pour les avatars représentant des personnes ou des entités réelles. Une étiquette générique <code>'avatar'</code> ne donne aucun contexte aux utilisateurs de lecteurs d'écran.",
           "rows": {
-            "tooltip": { "description": "L'entrée <code>tooltip</code> a la priorité la plus élevée pour le nom accessible et s'affiche également comme l'attribut natif <code>title</code>." },
-            "alt": { "description": "Si <code>tooltip</code> est absent, <code>alt</code> est utilisé comme <code>aria-label</code>. Il pilote également la génération automatique d'initiales." },
-            "fallback": { "description": "Si ni <code>tooltip</code> ni <code>alt</code> n'est défini, la chaîne <code>'avatar'</code> est utilisée comme nom accessible de repli." },
-            "excess": { "description": "L'<code>aria-label</code> du compteur d'excès est calculé depuis <code>avatar.moreProfiles</code>, en remplaçant <code>{count}</code> par le nombre d'avatars masqués." }
+            "tooltip": {
+              "description": "L'entrée <code>tooltip</code> a la priorité la plus élevée pour le nom accessible et s'affiche également comme l'attribut natif <code>title</code>."
+            },
+            "alt": {
+              "description": "Si <code>tooltip</code> est absent, <code>alt</code> est utilisé comme <code>aria-label</code>. Il pilote également la génération automatique d'initiales."
+            },
+            "fallback": {
+              "description": "Si ni <code>tooltip</code> ni <code>alt</code> n'est défini, la chaîne <code>'avatar'</code> est utilisée comme nom accessible de repli."
+            },
+            "excess": {
+              "description": "L'<code>aria-label</code> du compteur d'excès est calculé depuis <code>avatar.moreProfiles</code>, en remplaçant <code>{count}</code> par le nombre d'avatars masqués."
+            }
           },
           "elements": {
             "avatarWithTooltip": "Avatar avec <code>tooltip</code>",
@@ -1177,11 +1311,21 @@
           "title": "Éléments décoratifs masqués",
           "description": "Les éléments purement décoratifs portent <code>aria-hidden='true'</code> pour éviter les annonces dupliquées ou sans signification par les lecteurs d'écran.",
           "rows": {
-            "imgEmpty": { "description": "L'élément <code>&lt;img&gt;</code> a toujours <code>alt=''</code> pour éviter d'être lu indépendamment ; le nom accessible est sur le conteneur parent." },
-            "initials": { "description": "Le texte des initiales est masqué ; le nom accessible provient de l'<code>aria-label</code> du conteneur parent." },
-            "icon": { "description": "L'élément icône est décoratif ; le nom accessible provient de l'<code>aria-label</code> du conteneur parent." },
-            "fallbackSpan": { "description": "La lettre de repli est masquée ; le nom accessible est fourni par l'<code>aria-label</code> du div parent." },
-            "excessSpan": { "description": "Le texte '+N' visible est masqué aux AT ; l'<code>aria-label</code> du div parent fournit l'annonce pour les lecteurs d'écran." }
+            "imgEmpty": {
+              "description": "L'élément <code>&lt;img&gt;</code> a toujours <code>alt=''</code> pour éviter d'être lu indépendamment ; le nom accessible est sur le conteneur parent."
+            },
+            "initials": {
+              "description": "Le texte des initiales est masqué ; le nom accessible provient de l'<code>aria-label</code> du conteneur parent."
+            },
+            "icon": {
+              "description": "L'élément icône est décoratif ; le nom accessible provient de l'<code>aria-label</code> du conteneur parent."
+            },
+            "fallbackSpan": {
+              "description": "La lettre de repli est masquée ; le nom accessible est fourni par l'<code>aria-label</code> du div parent."
+            },
+            "excessSpan": {
+              "description": "Le texte '+N' visible est masqué aux AT ; l'<code>aria-label</code> du div parent fournit l'annonce pour les lecteurs d'écran."
+            }
           },
           "elements": {
             "initials": "<code>&lt;span&gt;</code> initiales",
@@ -1268,10 +1412,18 @@
             "listbox": "Liste d’options"
           },
           "rows": {
-            "ariaExpanded": { "description": "Le déclencheur porte <code>aria-expanded</code> indiquant si la liste est ouverte (<code>true</code>) ou fermée (<code>false</code>)." },
-            "ariaHaspopup": { "description": "<code>aria-haspopup=\"listbox\"</code> sur le déclencheur signale qu’une liste de sélection s’ouvrira." },
-            "optionRole": { "description": "Chaque option de la liste a <code>role=\"option\"</code> et <code>aria-selected=\"true\"</code> lorsqu’elle est sélectionnée." },
-            "listboxRole": { "description": "Le conteneur d’options a <code>role=\"listbox\"</code>." }
+            "ariaExpanded": {
+              "description": "Le déclencheur porte <code>aria-expanded</code> indiquant si la liste est ouverte (<code>true</code>) ou fermée (<code>false</code>)."
+            },
+            "ariaHaspopup": {
+              "description": "<code>aria-haspopup=\"listbox\"</code> sur le déclencheur signale qu’une liste de sélection s’ouvrira."
+            },
+            "optionRole": {
+              "description": "Chaque option de la liste a <code>role=\"option\"</code> et <code>aria-selected=\"true\"</code> lorsqu’elle est sélectionnée."
+            },
+            "listboxRole": {
+              "description": "Le conteneur d’options a <code>role=\"listbox\"</code>."
+            }
           }
         },
         "naming": {
@@ -1287,16 +1439,24 @@
             "placeholder": "Texte placeholder"
           },
           "rows": {
-            "value": { "description": "Lorsqu’une option est sélectionnée, son texte devient le nom accessible du bouton." },
-            "placeholder": { "description": "Lorsqu’aucun élément n’est sélectionné, le placeholder est le nom accessible du déclencheur." }
+            "value": {
+              "description": "Lorsqu’une option est sélectionnée, son texte devient le nom accessible du bouton."
+            },
+            "placeholder": {
+              "description": "Lorsqu’aucun élément n’est sélectionné, le placeholder est le nom accessible du déclencheur."
+            }
           }
         },
         "keyboard": {
           "title": "Interaction clavier",
           "description": "Le Select Button suit le pattern ARIA de bouton de listbox pour la navigation au clavier.",
           "rows": {
-            "enterSpace": { "description": "Ouvre ou ferme la liste d’options lorsque le déclencheur est focusé." },
-            "arrowDownUp": { "description": "Déplace le focus entre les options dans la liste ouverte." },
+            "enterSpace": {
+              "description": "Ouvre ou ferme la liste d’options lorsque le déclencheur est focusé."
+            },
+            "arrowDownUp": {
+              "description": "Déplace le focus entre les options dans la liste ouverte."
+            },
             "homeEnd": { "description": "Déplace le focus sur la première / dernière option." },
             "escape": { "description": "Ferme la liste sans modifier la sélection." }
           }
@@ -1440,71 +1600,135 @@
           "description": "Exemples de personnalisation des styles du calendrier dans votre application. Vous pouvez remplacer les variables CSS globalement ou pour des instances spécifiques."
         }
       },
-            "i18n": {
+      "i18n": {
         "navigation": {
           "title": "Tokens de navigation et étiquettes",
           "description": "Tokens pour les noms des jours de la semaine, les noms des mois, les étiquettes des boutons de navigation et les étiquettes d’état des jours.",
           "note": "Tous les tokens tableau (<code>weekDaysShort</code>, <code>weekDays</code>, <code>months</code>, <code>shortMonths</code>) doivent fournir toutes les valeurs. Remplacez globalement avec <code>provideNuiI18n({{ calendar: {{...}} }})</code> ou par instance avec l'input <code>[i18n]</code>.",
           "rows": {
-            "weekDaysShort": { "description": "Noms abrégés des jours affichés dans l'en-tête du calendrier (lundi–dimanche)." },
-            "weekDays": { "description": "Noms complets des jours utilisés dans les étiquettes accessibles et les infobulles." },
-            "months": { "description": "Noms complets des mois utilisés dans le sélecteur de mois et les étiquettes accessibles." },
-            "shortMonths": { "description": "Noms abrégés des mois utilisés dans les contextes compacts." },
-            "prevMonth": { "description": "Étiquette du bouton qui navigue vers le mois précédent." },
+            "weekDaysShort": {
+              "description": "Noms abrégés des jours affichés dans l'en-tête du calendrier (lundi–dimanche)."
+            },
+            "weekDays": {
+              "description": "Noms complets des jours utilisés dans les étiquettes accessibles et les infobulles."
+            },
+            "months": {
+              "description": "Noms complets des mois utilisés dans le sélecteur de mois et les étiquettes accessibles."
+            },
+            "shortMonths": {
+              "description": "Noms abrégés des mois utilisés dans les contextes compacts."
+            },
+            "prevMonth": {
+              "description": "Étiquette du bouton qui navigue vers le mois précédent."
+            },
             "nextMonth": { "description": "Étiquette du bouton qui navigue vers le mois suivant." },
-            "prevYears": { "description": "Étiquette du bouton qui navigue vers les années précédentes dans le sélecteur d'années." },
-            "nextYears": { "description": "Étiquette du bouton qui navigue vers les années suivantes dans le sélecteur d'années." },
+            "prevYears": {
+              "description": "Étiquette du bouton qui navigue vers les années précédentes dans le sélecteur d'années."
+            },
+            "nextYears": {
+              "description": "Étiquette du bouton qui navigue vers les années suivantes dans le sélecteur d'années."
+            },
             "changeMonth": { "description": "Étiquette du bouton qui ouvre le sélecteur de mois." },
             "changeYear": { "description": "Étiquette du bouton qui ouvre le sélecteur d'années." },
             "year": { "description": "Étiquette de l'en-tête du sélecteur d'années." },
-            "week": { "description": "Étiquette accessible pour la colonne d'en-tête du numéro de semaine." },
-            "weekNumbers": { "description": "Infobulle pour le bouton de basculement de la colonne des numéros de semaine." },
+            "week": {
+              "description": "Étiquette accessible pour la colonne d'en-tête du numéro de semaine."
+            },
+            "weekNumbers": {
+              "description": "Infobulle pour le bouton de basculement de la colonne des numéros de semaine."
+            },
             "today": { "description": "Étiquette pour le bouton de raccourci 'Aujourd’hui'." },
             "selectDay": { "description": "Description accessible pour sélectionner un jour." },
-            "dayDisabled": { "description": "Annonce du lecteur d'écran pour les cellules de jour désactivées." },
-            "openCalendar": { "description": "Étiquette du bouton qui ouvre le popover du calendrier." },
+            "dayDisabled": {
+              "description": "Annonce du lecteur d'écran pour les cellules de jour désactivées."
+            },
+            "openCalendar": {
+              "description": "Étiquette du bouton qui ouvre le popover du calendrier."
+            },
             "showTime": { "description": "Étiquette du bouton qui affiche le sélecteur d'heure." },
             "hideTime": { "description": "Étiquette du bouton qui masque le sélecteur d'heure." },
-            "monthAria": { "description": "Étiquette accessible pour la grille de sélection du mois." },
-            "yearsAria": { "description": "Étiquette accessible pour la grille de sélection de l'année." }
+            "monthAria": {
+              "description": "Étiquette accessible pour la grille de sélection du mois."
+            },
+            "yearsAria": {
+              "description": "Étiquette accessible pour la grille de sélection de l'année."
+            }
           }
         },
         "presetsAndTabs": {
           "title": "Tokens de préréglages, onglets et sélecteur d'heure",
           "description": "Tokens pour les raccourcis rapides de plages de dates prédéfinies, les onglets de vue et les étiquettes du sélecteur d'heure intégré.",
           "rows": {
-            "shortcuts": { "description": "Étiquette de l'en-tête du panneau de préréglages listant les raccourcis de plages de dates." },
+            "shortcuts": {
+              "description": "Étiquette de l'en-tête du panneau de préréglages listant les raccourcis de plages de dates."
+            },
             "presetsToday": { "description": "Étiquette du préréglage rapide 'Aujourd’hui'." },
-            "last7Days": { "description": "Étiquette du préréglage rapide 'Les 7 derniers jours'." },
-            "last30Days": { "description": "Étiquette du préréglage rapide 'Les 30 derniers jours'." },
+            "last7Days": {
+              "description": "Étiquette du préréglage rapide 'Les 7 derniers jours'."
+            },
+            "last30Days": {
+              "description": "Étiquette du préréglage rapide 'Les 30 derniers jours'."
+            },
             "thisMonth": { "description": "Étiquette du préréglage rapide 'Ce mois-ci'." },
             "lastMonth": { "description": "Étiquette du préréglage rapide 'Le mois dernier'." },
             "thisYear": { "description": "Étiquette du préréglage rapide 'Cette année'." },
             "tabCalendar": { "description": "Étiquette de l'onglet de vue du calendrier." },
             "tabPresets": { "description": "Étiquette de l'onglet de vue des préréglages." },
             "tabTime": { "description": "Étiquette de l'onglet de vue de l'heure." },
-            "timeStart": { "description": "Étiquette de la saisie de l'heure de début en mode plage avec heure." },
-            "timeEnd": { "description": "Étiquette de la saisie de l'heure de fin en mode plage avec heure." }
+            "timeStart": {
+              "description": "Étiquette de la saisie de l'heure de début en mode plage avec heure."
+            },
+            "timeEnd": {
+              "description": "Étiquette de la saisie de l'heure de fin en mode plage avec heure."
+            }
           }
         },
         "ariaTokens": {
           "title": "Tokens d'état ARIA et d'accessibilité",
           "description": "Tokens exposés uniquement aux technologies d'assistance pour annoncer l'état des jours, les changements de navigation et la sélection de plage.",
           "rows": {
-            "ariaToday": { "description": "Annotation du lecteur d'écran ajoutée à la cellule du jour d'aujourd'hui." },
-            "selected": { "description": "Annotation du lecteur d'écran ajoutée aux cellules de jour sélectionnées." },
-            "inRange": { "description": "Annotation du lecteur d'écran ajoutée aux cellules de jour dans une plage sélectionnée." },
-            "ariaDisabled": { "description": "Annotation du lecteur d'écran ajoutée aux cellules de jour désactivées." },
-            "statusSuccess": { "description": "Annotation du lecteur d'écran pour les dates avec statut de succès." },
-            "statusWarning": { "description": "Annotation du lecteur d'écran pour les dates avec statut d'avertissement." },
-            "statusDanger": { "description": "Annotation du lecteur d'écran pour les dates avec statut de danger." },
-            "statusInfo": { "description": "Annotation du lecteur d'écran pour les dates avec statut d'information." },
-            "calendarLabel": { "description": "Étiquette accessible pour la grille du calendrier (<code>role=\"grid\"</code>)." },
-            "keyboardInstructions": { "description": "Instructions annoncées aux utilisateurs de lecteurs d'écran sur la navigation dans le calendrier au clavier." },
-            "monthNavigated": { "description": "Annonce en direct lorsque le mois visible change. Prend en charge les espaces réservés <code>{month}</code> et <code>{year}</code>." },
-            "rangeStart": { "description": "Annonce en direct lorsque le début d'une plage de dates est sélectionné." },
-            "rangeComplete": { "description": "Annonce en direct lorsqu'une plage de dates complète a été sélectionnée." },
-            "weekNumberLabel": { "description": "Étiquette accessible pour chaque cellule de numéro de semaine. Prend en charge l'espace réservé <code>{week}</code>." }
+            "ariaToday": {
+              "description": "Annotation du lecteur d'écran ajoutée à la cellule du jour d'aujourd'hui."
+            },
+            "selected": {
+              "description": "Annotation du lecteur d'écran ajoutée aux cellules de jour sélectionnées."
+            },
+            "inRange": {
+              "description": "Annotation du lecteur d'écran ajoutée aux cellules de jour dans une plage sélectionnée."
+            },
+            "ariaDisabled": {
+              "description": "Annotation du lecteur d'écran ajoutée aux cellules de jour désactivées."
+            },
+            "statusSuccess": {
+              "description": "Annotation du lecteur d'écran pour les dates avec statut de succès."
+            },
+            "statusWarning": {
+              "description": "Annotation du lecteur d'écran pour les dates avec statut d'avertissement."
+            },
+            "statusDanger": {
+              "description": "Annotation du lecteur d'écran pour les dates avec statut de danger."
+            },
+            "statusInfo": {
+              "description": "Annotation du lecteur d'écran pour les dates avec statut d'information."
+            },
+            "calendarLabel": {
+              "description": "Étiquette accessible pour la grille du calendrier (<code>role=\"grid\"</code>)."
+            },
+            "keyboardInstructions": {
+              "description": "Instructions annoncées aux utilisateurs de lecteurs d'écran sur la navigation dans le calendrier au clavier."
+            },
+            "monthNavigated": {
+              "description": "Annonce en direct lorsque le mois visible change. Prend en charge les espaces réservés <code>{month}</code> et <code>{year}</code>."
+            },
+            "rangeStart": {
+              "description": "Annonce en direct lorsque le début d'une plage de dates est sélectionné."
+            },
+            "rangeComplete": {
+              "description": "Annonce en direct lorsqu'une plage de dates complète a été sélectionnée."
+            },
+            "weekNumberLabel": {
+              "description": "Étiquette accessible pour chaque cellule de numéro de semaine. Prend en charge l'espace réservé <code>{week}</code>."
+            }
           }
         }
       },
@@ -1520,13 +1744,27 @@
             "liveRegion": "Région en direct"
           },
           "rows": {
-            "grid": { "description": "La grille des jours utilise <code>role=\"grid\"</code> pour permettre la navigation par touches fléchées entre les cellules." },
-            "gridLabel": { "description": "La grille reçoit son étiquette du token i18n <code>calendar.a11y.calendarLabel</code>." },
-            "columnHeader": { "description": "Les en-têtes des jours de la semaine utilisent <code>role=\"columnheader\"</code> avec le nom complet du jour comme étiquette accessible." },
-            "gridcell": { "description": "Chaque cellule de jour utilise <code>role=\"gridcell\"</code>." },
-            "selected": { "description": "Les cellules de jour sélectionnées exposent <code>aria-selected=\"true\"</code>." },
-            "disabled": { "description": "Les cellules de jour désactivées exposent <code>aria-disabled=\"true\"</code>." },
-            "liveRegion": { "description": "Une région <code>aria-live=\"polite\"</code> cachée annonce la navigation entre mois aux lecteurs d'écran." }
+            "grid": {
+              "description": "La grille des jours utilise <code>role=\"grid\"</code> pour permettre la navigation par touches fléchées entre les cellules."
+            },
+            "gridLabel": {
+              "description": "La grille reçoit son étiquette du token i18n <code>calendar.a11y.calendarLabel</code>."
+            },
+            "columnHeader": {
+              "description": "Les en-têtes des jours de la semaine utilisent <code>role=\"columnheader\"</code> avec le nom complet du jour comme étiquette accessible."
+            },
+            "gridcell": {
+              "description": "Chaque cellule de jour utilise <code>role=\"gridcell\"</code>."
+            },
+            "selected": {
+              "description": "Les cellules de jour sélectionnées exposent <code>aria-selected=\"true\"</code>."
+            },
+            "disabled": {
+              "description": "Les cellules de jour désactivées exposent <code>aria-disabled=\"true\"</code>."
+            },
+            "liveRegion": {
+              "description": "Une région <code>aria-live=\"polite\"</code> cachée annonce la navigation entre mois aux lecteurs d'écran."
+            }
           }
         },
         "naming": {
@@ -1544,9 +1782,15 @@
             "ariaTokens": "Tokens calendar.aria.*"
           },
           "rows": {
-            "grid": { "description": "La grille du calendrier reçoit son nom accessible du token <code>calendar.a11y.calendarLabel</code>." },
-            "dayButton": { "description": "Le nom accessible de chaque bouton de jour est la chaîne de date formatée (ex : 'mardi 10 décembre 2024')." },
-            "stateAnnotation": { "description": "Les tokens d'état (<code>calendar.aria.today</code>, <code>selected</code>, etc.) sont ajoutés à l'étiquette de date pour communiquer l'état aux lecteurs d'écran." }
+            "grid": {
+              "description": "La grille du calendrier reçoit son nom accessible du token <code>calendar.a11y.calendarLabel</code>."
+            },
+            "dayButton": {
+              "description": "Le nom accessible de chaque bouton de jour est la chaîne de date formatée (ex : 'mardi 10 décembre 2024')."
+            },
+            "stateAnnotation": {
+              "description": "Les tokens d'état (<code>calendar.aria.today</code>, <code>selected</code>, etc.) sont ajoutés à l'étiquette de date pour communiquer l'état aux lecteurs d'écran."
+            }
           }
         },
         "keyboard": {
@@ -1560,7 +1804,9 @@
             "pageUp": { "description": "Navigue vers le mois précédent." },
             "pageDown": { "description": "Navigue vers le mois suivant." },
             "spaceEnter": { "description": "Sélectionne le jour en focus." },
-            "escape": { "description": "Ferme le popover du calendrier et rend le focus au déclencheur." }
+            "escape": {
+              "description": "Ferme le popover du calendrier et rend le focus au déclencheur."
+            }
           }
         }
       }
@@ -1669,8 +1915,12 @@
             "previousPage": { "description": "Étiquette accessible du bouton ‘Page précédente’." },
             "nextPage": { "description": "Étiquette accessible du bouton ‘Page suivante’." },
             "lastPage": { "description": "Étiquette accessible du bouton ‘Dernière page’." },
-            "itemsPerPage": { "description": "Étiquette du sélecteur de nombre d’éléments par page." },
-            "of": { "description": "Connecteur ‘de’ utilisé dans le texte de plage (ex. ‘1 – 10 de 100’)." },
+            "itemsPerPage": {
+              "description": "Étiquette du sélecteur de nombre d’éléments par page."
+            },
+            "of": {
+              "description": "Connecteur ‘de’ utilisé dans le texte de plage (ex. ‘1 – 10 de 100’)."
+            },
             "jumpToPage": { "description": "Placeholder ou étiquette du champ de saut de page." }
           }
         },
@@ -1679,8 +1929,12 @@
           "description": "Tokens supplémentaires utilisés pour les annonces de lecteurs d’écran et les attributs aria du paginateur.",
           "note": "Ces tokens sont localisés sous <code>paginator.a11y</code>.",
           "rows": {
-            "pageLabel": { "description": "Modèle de texte annoncé lors d’un changement de page (ex. ‘Page 3 sur 10’)." },
-            "navigation": { "description": "Aria-label pour la région de navigation du paginateur." }
+            "pageLabel": {
+              "description": "Modèle de texte annoncé lors d’un changement de page (ex. ‘Page 3 sur 10’)."
+            },
+            "navigation": {
+              "description": "Aria-label pour la région de navigation du paginateur."
+            }
           }
         }
       },
@@ -1695,9 +1949,15 @@
             "currentPage": "Page actuelle"
           },
           "rows": {
-            "navRole": { "description": "Le conteneur racine du paginateur a <code>role=\"navigation\"</code> et <code>aria-label</code> issu du token i18n <code>navigation</code>." },
-            "buttonLabels": { "description": "Les boutons première/précédente/suivante/dernière page ont un <code>aria-label</code> extrait des tokens i18n correspondants." },
-            "ariaCurrent": { "description": "Le bouton de la page active porte <code>aria-current=\"page\"</code>." }
+            "navRole": {
+              "description": "Le conteneur racine du paginateur a <code>role=\"navigation\"</code> et <code>aria-label</code> issu du token i18n <code>navigation</code>."
+            },
+            "buttonLabels": {
+              "description": "Les boutons première/précédente/suivante/dernière page ont un <code>aria-label</code> extrait des tokens i18n correspondants."
+            },
+            "ariaCurrent": {
+              "description": "Le bouton de la page active porte <code>aria-current=\"page\"</code>."
+            }
           }
         },
         "naming": {
@@ -1715,17 +1975,27 @@
             "ariaCurrentPage": "aria-current=‘page’"
           },
           "rows": {
-            "nav": { "description": "La région de navigation utilise le token <code>navigation</code> comme <code>aria-label</code>." },
-            "buttons": { "description": "Chaque bouton de navigation utilise son token i18n spécifique comme nom accessible." },
-            "current": { "description": "La page active porte <code>aria-current=\"page\"</code> pour être identifiée par les lecteurs d’écran." }
+            "nav": {
+              "description": "La région de navigation utilise le token <code>navigation</code> comme <code>aria-label</code>."
+            },
+            "buttons": {
+              "description": "Chaque bouton de navigation utilise son token i18n spécifique comme nom accessible."
+            },
+            "current": {
+              "description": "La page active porte <code>aria-current=\"page\"</code> pour être identifiée par les lecteurs d’écran."
+            }
           }
         },
         "keyboard": {
           "title": "Interaction clavier",
           "description": "Le Paginateur est entièrement navigable au clavier avec l’interaction standard de boutons.",
           "rows": {
-            "tab": { "description": "Tab déplace le focus entre les boutons et contrôles du paginateur." },
-            "enterSpace": { "description": "Active le bouton en focus, naviguant vers la page correspondante." }
+            "tab": {
+              "description": "Tab déplace le focus entre les boutons et contrôles du paginateur."
+            },
+            "enterSpace": {
+              "description": "Active le bouton en focus, naviguant vers la page correspondante."
+            }
           }
         }
       }
@@ -1843,10 +2113,18 @@
             "popover": "Panneau du popover"
           },
           "rows": {
-            "ariaExpanded": { "description": "Le déclencheur porte <code>aria-expanded</code> reflétant si le popover est visible (<code>true</code>) ou non (<code>false</code>)." },
-            "ariaControls": { "description": "<code>aria-controls</code> sur le déclencheur pointe vers l’<code>id</code> du panneau popover." },
-            "ariaHaspopup": { "description": "<code>aria-haspopup=\"dialog\"</code> indique que le déclencheur ouvre un panneau de contenu interactif." },
-            "popoverRole": { "description": "Le panneau du popover a <code>role=\"dialog\"</code> et <code>aria-label</code> dérivé de son titre ou contenu." }
+            "ariaExpanded": {
+              "description": "Le déclencheur porte <code>aria-expanded</code> reflétant si le popover est visible (<code>true</code>) ou non (<code>false</code>)."
+            },
+            "ariaControls": {
+              "description": "<code>aria-controls</code> sur le déclencheur pointe vers l’<code>id</code> du panneau popover."
+            },
+            "ariaHaspopup": {
+              "description": "<code>aria-haspopup=\"dialog\"</code> indique que le déclencheur ouvre un panneau de contenu interactif."
+            },
+            "popoverRole": {
+              "description": "Le panneau du popover a <code>role=\"dialog\"</code> et <code>aria-label</code> dérivé de son titre ou contenu."
+            }
           }
         },
         "naming": {
@@ -1862,17 +2140,25 @@
             "panelLabel": "aria-label du panneau"
           },
           "rows": {
-            "trigger": { "description": "Le déclencheur doit avoir son propre nom accessible (texte visible, aria-label…) décrivant l’action qui ouvre le popover." },
-            "panel": { "description": "Le panneau du popover tire son nom accessible du titre visible ou d’un <code>aria-label</code> explicite." }
+            "trigger": {
+              "description": "Le déclencheur doit avoir son propre nom accessible (texte visible, aria-label…) décrivant l’action qui ouvre le popover."
+            },
+            "panel": {
+              "description": "Le panneau du popover tire son nom accessible du titre visible ou d’un <code>aria-label</code> explicite."
+            }
           }
         },
         "keyboard": {
           "title": "Interaction clavier",
           "description": "Le Popover suit le pattern de dialogue non modal WAI-ARIA pour l’interaction clavier.",
           "rows": {
-            "enterSpace": { "description": "Ouvre ou ferme le popover lorsque le déclencheur est focusé." },
+            "enterSpace": {
+              "description": "Ouvre ou ferme le popover lorsque le déclencheur est focusé."
+            },
             "escape": { "description": "Ferme le popover et rend le focus au déclencheur." },
-            "tab": { "description": "Fait cycler le focus entre les éléments interactifs du panneau ouvert." }
+            "tab": {
+              "description": "Fait cycler le focus entre les éléments interactifs du panneau ouvert."
+            }
           }
         }
       }
@@ -1978,7 +2264,9 @@
           "description": "Le composant Toast utilise le token générique <code>close</code> du NuiI18nService pour l’étiquette du bouton de fermeture.",
           "note": "Le token <code>close</code> est partagé entre plusieurs composants (Toast, SidebarPanel…). Remplacez-le globalement pour localiser tous les boutons de fermeture à la fois.",
           "rows": {
-            "close": { "description": "Étiquette accessible du bouton de fermeture sur les toasts rejetables." }
+            "close": {
+              "description": "Étiquette accessible du bouton de fermeture sur les toasts rejetables."
+            }
           }
         }
       },
@@ -1991,10 +2279,18 @@
             "closeButton": "Bouton de fermeture"
           },
           "rows": {
-            "ariaLive": { "description": "L’élément toast porte <code>aria-live=\"polite\"</code> pour les toasts informatifs ou <code>\"assertive\"</code> pour les alertes critiques (erreur/avertissement)." },
-            "ariaAtomic": { "description": "<code>aria-atomic=\"true\"</code> garantit que le lecteur d’écran annonce le contenu complet du toast comme une unité." },
-            "ariaLabel": { "description": "Le nom accessible du toast est dérivé automatiquement : titre → message → type." },
-            "closeLabel": { "description": "Le bouton de fermeture utilise le token i18n <code>close</code> comme étiquette accessible." }
+            "ariaLive": {
+              "description": "L’élément toast porte <code>aria-live=\"polite\"</code> pour les toasts informatifs ou <code>\"assertive\"</code> pour les alertes critiques (erreur/avertissement)."
+            },
+            "ariaAtomic": {
+              "description": "<code>aria-atomic=\"true\"</code> garantit que le lecteur d’écran annonce le contenu complet du toast comme une unité."
+            },
+            "ariaLabel": {
+              "description": "Le nom accessible du toast est dérivé automatiquement : titre → message → type."
+            },
+            "closeLabel": {
+              "description": "Le bouton de fermeture utilise le token i18n <code>close</code> comme étiquette accessible."
+            }
           }
         },
         "naming": {
@@ -2012,17 +2308,27 @@
             "type": "Type du toast (success, error…)"
           },
           "rows": {
-            "hostTitle": { "description": "Lorsqu’un <code>title</code> est fourni, il devient l’étiquette accessible du toast." },
-            "hostMessage": { "description": "En l’absence de titre, le texte du <code>message</code> devient l’étiquette accessible." },
-            "hostType": { "description": "En l’absence de titre et de message, le <code>type</code> du toast est utilisé comme étiquette de repli." }
+            "hostTitle": {
+              "description": "Lorsqu’un <code>title</code> est fourni, il devient l’étiquette accessible du toast."
+            },
+            "hostMessage": {
+              "description": "En l’absence de titre, le texte du <code>message</code> devient l’étiquette accessible."
+            },
+            "hostType": {
+              "description": "En l’absence de titre et de message, le <code>type</code> du toast est utilisé comme étiquette de repli."
+            }
           }
         },
         "keyboard": {
           "title": "Interaction clavier",
           "description": "Les toasts sont non modaux. Le focus ne s’y déplace pas automatiquement ; les utilisateurs peuvent Tab vers le bouton de fermeture.",
           "rows": {
-            "tab": { "description": "Tab déplace le focus sur le bouton de fermeture à l’intérieur du toast si l’un est visible." },
-            "spaceEnter": { "description": "Active le bouton de fermeture focusé, rejetant le toast." }
+            "tab": {
+              "description": "Tab déplace le focus sur le bouton de fermeture à l’intérieur du toast si l’un est visible."
+            },
+            "spaceEnter": {
+              "description": "Active le bouton de fermeture focusé, rejetant le toast."
+            }
           }
         }
       }
@@ -2174,7 +2480,9 @@
           "rows": {
             "close": { "description": "Étiquette accessible du bouton de fermeture." },
             "minimize": { "description": "Étiquette accessible du bouton de réduction." },
-            "restore": { "description": "Étiquette accessible du bouton de restauration, visible lorsque le panneau est réduit." },
+            "restore": {
+              "description": "Étiquette accessible du bouton de restauration, visible lorsque le panneau est réduit."
+            },
             "expand": { "description": "Étiquette accessible du bouton de développement." },
             "collapse": { "description": "Étiquette accessible du bouton de réduction de taille." }
           }
@@ -2192,12 +2500,24 @@
             "backdrop": "Superposition de fond"
           },
           "rows": {
-            "panelRole": { "description": "La racine du panneau porte <code>role=\"dialog\"</code> pour signaler une région distincte aux technologies d’assistance." },
-            "ariaLabelledby": { "description": "<code>aria-labelledby</code> pointe vers l’élément titre du panneau, donnant au dialogue un nom accessible dérivé du titre visible." },
-            "closeLabel": { "description": "Le bouton de fermeture utilise le token i18n <code>close</code> comme <code>aria-label</code>." },
-            "minimizeLabel": { "description": "Le bouton réduire / restaurer expose le token i18n correspondant (<code>minimize</code> ou <code>restore</code>) comme <code>aria-label</code>." },
-            "expandLabel": { "description": "Le bouton développer / réduire expose le token correspondant comme <code>aria-label</code>." },
-            "backdropHidden": { "description": "La superposition de fond est masquée aux technologies d’assistance avec <code>aria-hidden=\"true\"</code>." }
+            "panelRole": {
+              "description": "La racine du panneau porte <code>role=\"dialog\"</code> pour signaler une région distincte aux technologies d’assistance."
+            },
+            "ariaLabelledby": {
+              "description": "<code>aria-labelledby</code> pointe vers l’élément titre du panneau, donnant au dialogue un nom accessible dérivé du titre visible."
+            },
+            "closeLabel": {
+              "description": "Le bouton de fermeture utilise le token i18n <code>close</code> comme <code>aria-label</code>."
+            },
+            "minimizeLabel": {
+              "description": "Le bouton réduire / restaurer expose le token i18n correspondant (<code>minimize</code> ou <code>restore</code>) comme <code>aria-label</code>."
+            },
+            "expandLabel": {
+              "description": "Le bouton développer / réduire expose le token correspondant comme <code>aria-label</code>."
+            },
+            "backdropHidden": {
+              "description": "La superposition de fond est masquée aux technologies d’assistance avec <code>aria-hidden=\"true\"</code>."
+            }
           }
         },
         "naming": {
@@ -2213,17 +2533,27 @@
             "i18nTokens": "Tokens i18n pour les étiquettes de boutons"
           },
           "rows": {
-            "title": { "description": "Le titre visible du panneau fournit le nom accessible de la région <code>role=\"dialog\"</code>." },
-            "buttons": { "description": "Les boutons de contrôle (fermer, réduire, développer) utilisent les tokens i18n comme étiquettes accessibles." }
+            "title": {
+              "description": "Le titre visible du panneau fournit le nom accessible de la région <code>role=\"dialog\"</code>."
+            },
+            "buttons": {
+              "description": "Les boutons de contrôle (fermer, réduire, développer) utilisent les tokens i18n comme étiquettes accessibles."
+            }
           }
         },
         "keyboard": {
           "title": "Interaction clavier",
           "description": "Le SidebarPanel prend en charge la navigation au clavier pour tous les contrôles interactifs.",
           "rows": {
-            "escape": { "description": "Ferme le panneau en mode modal, rendant le focus à l’élément déclencheur." },
-            "tab": { "description": "Fait cycler le focus entre les éléments interactifs. Le focus est piégé en mode modal." },
-            "spaceEnter": { "description": "Active le bouton de contrôle en focus (fermer, réduire, développer)." }
+            "escape": {
+              "description": "Ferme le panneau en mode modal, rendant le focus à l’élément déclencheur."
+            },
+            "tab": {
+              "description": "Fait cycler le focus entre les éléments interactifs. Le focus est piégé en mode modal."
+            },
+            "spaceEnter": {
+              "description": "Active le bouton de contrôle en focus (fermer, réduire, développer)."
+            }
           }
         }
       }
@@ -2306,8 +2636,12 @@
             "tooltip": "Élément infobulle"
           },
           "rows": {
-            "ariaDescribedby": { "description": "Le déclencheur reçoit <code>aria-describedby</code> pointant vers l'<code>id</code> de l'infobulle, afin que les lecteurs d'écran annoncent le texte comme description complémentaire." },
-            "tooltipRole": { "description": "L'infobulle flottante porte <code>role=\"tooltip\"</code> et un <code>id</code> unique référencé par <code>aria-describedby</code>." }
+            "ariaDescribedby": {
+              "description": "Le déclencheur reçoit <code>aria-describedby</code> pointant vers l'<code>id</code> de l'infobulle, afin que les lecteurs d'écran annoncent le texte comme description complémentaire."
+            },
+            "tooltipRole": {
+              "description": "L'infobulle flottante porte <code>role=\"tooltip\"</code> et un <code>id</code> unique référencé par <code>aria-describedby</code>."
+            }
           }
         },
         "naming": {
@@ -2325,17 +2659,27 @@
             "description": "Texte de l'infobulle (aria-describedby)"
           },
           "rows": {
-            "trigger": { "description": "Le déclencheur doit avoir son propre nom accessible qui reste pertinent sans le texte de l'infobulle." },
-            "iconTrigger": { "description": "Pour les déclencheurs icône seule, ajoutez un <code>aria-label</code> explicite sur l'élément déclencheur." },
-            "content": { "description": "Le texte de l'infobulle est connecté via <code>aria-describedby</code> et sert d'information complémentaire, pas d'étiquette principale." }
+            "trigger": {
+              "description": "Le déclencheur doit avoir son propre nom accessible qui reste pertinent sans le texte de l'infobulle."
+            },
+            "iconTrigger": {
+              "description": "Pour les déclencheurs icône seule, ajoutez un <code>aria-label</code> explicite sur l'élément déclencheur."
+            },
+            "content": {
+              "description": "Le texte de l'infobulle est connecté via <code>aria-describedby</code> et sert d'information complémentaire, pas d'étiquette principale."
+            }
           }
         },
         "keyboard": {
           "title": "Interaction clavier",
           "description": "Les infobulles s'affichent et se masquent automatiquement selon le focus.",
           "rows": {
-            "tab": { "description": "Tabulation vers un déclencheur affiche l'infobulle. S'en éloigner la masque." },
-            "escape": { "description": "Appuyer sur Escape pendant que le déclencheur est focusé masque l'infobulle." }
+            "tab": {
+              "description": "Tabulation vers un déclencheur affiche l'infobulle. S'en éloigner la masque."
+            },
+            "escape": {
+              "description": "Appuyer sur Escape pendant que le déclencheur est focusé masque l'infobulle."
+            }
           }
         }
       }
@@ -2447,17 +2791,31 @@
           "description": "Tokens utilisés pour les étiquettes du sélecteur, les boutons d'action et les textes de lecteurs d'écran.",
           "note": "Remplacez n'importe quel token globalement avec <code>provideNuiI18n({ timePicker: { ... } })</code>.",
           "rows": {
-            "setToCurrentTime": { "description": "Étiquette du bouton 'régler à l'heure actuelle'." },
-            "selectTime": { "description": "Étiquette placeholder lorsqu'aucune heure n'est sélectionnée." },
+            "setToCurrentTime": {
+              "description": "Étiquette du bouton 'régler à l'heure actuelle'."
+            },
+            "selectTime": {
+              "description": "Étiquette placeholder lorsqu'aucune heure n'est sélectionnée."
+            },
             "clear": { "description": "Étiquette de l'action effacer / réinitialiser l'heure." },
-            "hour": { "description": "Étiquette d'en-tête de la colonne des heures (forme longue)." },
-            "minutes": { "description": "Étiquette d'en-tête de la colonne des minutes (forme longue)." },
+            "hour": {
+              "description": "Étiquette d'en-tête de la colonne des heures (forme longue)."
+            },
+            "minutes": {
+              "description": "Étiquette d'en-tête de la colonne des minutes (forme longue)."
+            },
             "hour12": { "description": "Étiquette utilisée en mode 12 heures." },
             "hour24": { "description": "Étiquette utilisée en mode 24 heures." },
             "period": { "description": "Étiquette de la colonne période AM/PM." },
-            "normalizedTime": { "description": "Modèle d'annonce du lecteur d'écran pour la valeur d'heure normalisée." },
-            "rangeLabel": { "description": "Étiquette accessible décrivant une sélection de plage horaire." },
-            "timeSelected": { "description": "Annonce du lecteur d'écran quand une heure a été sélectionnée." }
+            "normalizedTime": {
+              "description": "Modèle d'annonce du lecteur d'écran pour la valeur d'heure normalisée."
+            },
+            "rangeLabel": {
+              "description": "Étiquette accessible décrivant une sélection de plage horaire."
+            },
+            "timeSelected": {
+              "description": "Annonce du lecteur d'écran quand une heure a été sélectionnée."
+            }
           }
         },
         "durationAndPresets": {
@@ -2467,20 +2825,41 @@
           "rows": {
             "hours": { "description": "Forme longue de 'heures' pour l'affichage de la durée." },
             "minutes": { "description": "Forme longue de 'minutes' pour l'affichage de la durée." },
-            "seconds": { "description": "Forme longue de 'secondes' pour l'affichage de la durée." },
+            "seconds": {
+              "description": "Forme longue de 'secondes' pour l'affichage de la durée."
+            },
             "hoursShort": { "description": "Abréviation courte pour les heures (ex. 'h')." },
             "minutesShort": { "description": "Abréviation courte pour les minutes (ex. 'min')." },
             "secondsShort": { "description": "Abréviation courte pour les secondes (ex. 's')." },
             "selectDuration": { "description": "Placeholder en mode sélection de durée." },
-            "durationSelected": { "description": "Annonce du lecteur d'écran quand une durée est sélectionnée." },
-            "tabSelector": { "description": "Étiquette de l'onglet sélecteur manuel quand les deux onglets sont affichés." },
-            "tabPresets": { "description": "Étiquette de l'onglet préréglages quand les deux onglets sont affichés." },
-            "presetNow": { "description": "Étiquette du préréglage 'maintenant'." },
-            "presetNoon": { "description": "Étiquette du préréglage 'midi' (12:00)." },
-            "presetMidnight": { "description": "Étiquette du préréglage 'minuit' (00:00)." },
-            "presetMinutes": { "description": "Modèle d'étiquette pour les préréglages en minutes (ex. '15 minutes')." },
-            "presetHour": { "description": "Étiquette du préréglage d'une heure." },
-            "presetHours": { "description": "Modèle d'étiquette pour les préréglages de plusieurs heures (ex. '2 heures')." }
+            "durationSelected": {
+              "description": "Annonce du lecteur d'écran quand une durée est sélectionnée."
+            },
+            "durationHours": {
+              "description": "Annonce du lecteur d'écran pour la valeur des heures en mode durée."
+            },
+            "durationMinutes": {
+              "description": "Annonce du lecteur d'écran pour la valeur des minutes en mode durée."
+            },
+            "durationSeconds": {
+              "description": "Annonce du lecteur d'écran pour la valeur des secondes en mode durée."
+            },
+            "tabSelector": {
+              "description": "Étiquette de l'onglet sélecteur manuel quand les deux onglets sont affichés."
+            },
+            "tabPresets": {
+              "description": "Étiquette de l'onglet préréglages quand les deux onglets sont affichés."
+            },
+            "presetsNow": { "description": "Étiquette du préréglage 'maintenant'." },
+            "presetsNoon": { "description": "Étiquette du préréglage 'midi' (12:00)." },
+            "presetsMidnight": { "description": "Étiquette du préréglage 'minuit' (00:00)." },
+            "presetsMinutes": {
+              "description": "Modèle d'étiquette pour les préréglages en minutes (ex. '15 minutes')."
+            },
+            "presetsHour": { "description": "Étiquette du préréglage d'une heure." },
+            "presetsHours": {
+              "description": "Modèle d'étiquette pour les préréglages de plusieurs heures (ex. '2 heures')."
+            }
           }
         },
         "a11yTokens": {
@@ -2488,13 +2867,23 @@
           "description": "Tokens utilisés exclusivement pour les annonces de lecteurs d'écran et les étiquettes ARIA.",
           "note": "Ces tokens sont imbriqués sous <code>timePicker.a11y</code>.",
           "rows": {
-            "timePickerLabel": { "description": "L'<code>aria-label</code> appliqué au conteneur racine en mode standard." },
-            "durationPickerLabel": { "description": "L'<code>aria-label</code> appliqué au conteneur racine en mode durée." },
+            "timePickerLabel": {
+              "description": "L'<code>aria-label</code> appliqué au conteneur racine en mode standard."
+            },
+            "durationPickerLabel": {
+              "description": "L'<code>aria-label</code> appliqué au conteneur racine en mode durée."
+            },
             "hourColumnHelp": { "description": "Texte d'aide annoncé pour la colonne des heures." },
-            "minuteColumnHelp": { "description": "Texte d'aide annoncé pour la colonne des minutes." },
+            "minuteColumnHelp": {
+              "description": "Texte d'aide annoncé pour la colonne des minutes."
+            },
             "periodHelp": { "description": "Texte d'aide annoncé pour la colonne AM/PM." },
-            "normalizedAlert": { "description": "Texte annoncé via une région vive assertive lorsque l'heure est normalisée." },
-            "rangeInfo": { "description": "Texte de lecteur d'écran décrivant les limites de la plage." }
+            "normalizedAlert": {
+              "description": "Texte annoncé via une région vive assertive lorsque l'heure est normalisée."
+            },
+            "rangeInfo": {
+              "description": "Texte de lecteur d'écran décrivant les limites de la plage."
+            }
           }
         }
       },
@@ -2509,10 +2898,18 @@
             "normalizedAlert": "Région vive de normalisation"
           },
           "rows": {
-            "containerLabel": { "description": "L'élément racine a <code>aria-label</code> défini par le token i18n <code>timePickerLabel</code> (ou <code>durationPickerLabel</code>)." },
-            "columnRole": { "description": "Chaque colonne a <code>role=\"listbox\"</code> et un <code>aria-label</code> issu de son token i18n spécifique." },
-            "optionRole": { "description": "Chaque valeur a <code>role=\"option\"</code> et <code>aria-selected=\"true\"</code> quand c'est la valeur active." },
-            "normalizedLive": { "description": "Un élément visuellement masqué avec <code>aria-live=\"assertive\"</code> annonce la normalisation de l'heure." }
+            "containerLabel": {
+              "description": "L'élément racine a <code>aria-label</code> défini par le token i18n <code>timePickerLabel</code> (ou <code>durationPickerLabel</code>)."
+            },
+            "columnRole": {
+              "description": "Chaque colonne a <code>role=\"listbox\"</code> et un <code>aria-label</code> issu de son token i18n spécifique."
+            },
+            "optionRole": {
+              "description": "Chaque valeur a <code>role=\"option\"</code> et <code>aria-selected=\"true\"</code> quand c'est la valeur active."
+            },
+            "normalizedLive": {
+              "description": "Un élément visuellement masqué avec <code>aria-live=\"assertive\"</code> annonce la normalisation de l'heure."
+            }
           }
         },
         "naming": {
@@ -2530,20 +2927,36 @@
             "helpTokens": "Tokens hourColumnHelp / minuteColumnHelp / periodHelp"
           },
           "rows": {
-            "container": { "description": "L'étiquette du conteneur racine provient de <code>timePicker.a11y.timePickerLabel</code>. Remplacez-la par locale." },
-            "columns": { "description": "L'étiquette de chaque colonne provient du token i18n correspondant, donnant du contexte aux utilisateurs de lecteurs d'écran." },
-            "help": { "description": "Les tokens de texte d'aide sont annoncés lorsque la colonne reçoit le focus." }
+            "container": {
+              "description": "L'étiquette du conteneur racine provient de <code>timePicker.a11y.timePickerLabel</code>. Remplacez-la par locale."
+            },
+            "columns": {
+              "description": "L'étiquette de chaque colonne provient du token i18n correspondant, donnant du contexte aux utilisateurs de lecteurs d'écran."
+            },
+            "help": {
+              "description": "Les tokens de texte d'aide sont annoncés lorsque la colonne reçoit le focus."
+            }
           }
         },
         "keyboard": {
           "title": "Interaction clavier",
           "description": "Chaque colonne du TimePicker se comporte comme un listbox indépendant.",
           "rows": {
-            "arrowUpDown": { "description": "Déplace le focus sur l'option précédente / suivante dans la colonne focusée." },
-            "tab": { "description": "Déplace le focus sur la colonne ou le contrôle interactif suivant." },
-            "homeEnd": { "description": "Saute à la première / dernière option de la colonne focusée." },
-            "spaceEnter": { "description": "Sélectionne l'option en focus et met à jour la valeur d'heure affichée." },
-            "escape": { "description": "Ferme le sélecteur et revient à la valeur précédemment confirmée." }
+            "arrowUpDown": {
+              "description": "Déplace le focus sur l'option précédente / suivante dans la colonne focusée."
+            },
+            "tab": {
+              "description": "Déplace le focus sur la colonne ou le contrôle interactif suivant."
+            },
+            "homeEnd": {
+              "description": "Saute à la première / dernière option de la colonne focusée."
+            },
+            "spaceEnter": {
+              "description": "Sélectionne l'option en focus et met à jour la valeur d'heure affichée."
+            },
+            "escape": {
+              "description": "Ferme le sélecteur et revient à la valeur précédemment confirmée."
+            }
           }
         }
       }
@@ -2658,7 +3071,9 @@
           "description": "Le composant FabButton expose un unique token i18n pour l'étiquette accessible du bouton déclencheur.",
           "note": "Remplacez-le avec <code>provideNuiI18n({ fabButton: { triggerAriaLabel: 'Ouvrir les actions' } })</code>.",
           "rows": {
-            "triggerAriaLabel": { "description": "L'<code>aria-label</code> appliqué au bouton déclencheur FAB. Utilisé par les lecteurs d'écran lorsque le bouton n'affiche qu'une icône." }
+            "triggerAriaLabel": {
+              "description": "L'<code>aria-label</code> appliqué au bouton déclencheur FAB. Utilisé par les lecteurs d'écran lorsque le bouton n'affiche qu'une icône."
+            }
           }
         }
       },
@@ -2674,13 +3089,25 @@
             "icon": "Icône décorative"
           },
           "rows": {
-            "hostRole": { "description": "L'élément hôte du FAB a <code>role=\"group\"</code> et <code>aria-label</code>." },
-            "ariaExpanded": { "description": "Le déclencheur porte <code>aria-expanded</code> reflétant si la liste d'actions est ouverte ou non." },
-            "ariaControls": { "description": "Le déclencheur porte <code>aria-controls</code> pointant vers l'<code>id</code> du menu d'actions." },
-            "ariaHaspopup": { "description": "Le déclencheur a <code>aria-haspopup=\"menu\"</code> pour signaler qu'il ouvre un menu." },
+            "hostRole": {
+              "description": "L'élément hôte du FAB a <code>role=\"group\"</code> et <code>aria-label</code>."
+            },
+            "ariaExpanded": {
+              "description": "Le déclencheur porte <code>aria-expanded</code> reflétant si la liste d'actions est ouverte ou non."
+            },
+            "ariaControls": {
+              "description": "Le déclencheur porte <code>aria-controls</code> pointant vers l'<code>id</code> du menu d'actions."
+            },
+            "ariaHaspopup": {
+              "description": "Le déclencheur a <code>aria-haspopup=\"menu\"</code> pour signaler qu'il ouvre un menu."
+            },
             "menuRole": { "description": "Le conteneur d'actions a <code>role=\"menu\"</code>." },
-            "actionRole": { "description": "Chaque action individuelle a <code>role=\"menuitem\"</code>." },
-            "iconHidden": { "description": "Les icônes décoratives sont masquées avec <code>aria-hidden=\"true\"</code>." }
+            "actionRole": {
+              "description": "Chaque action individuelle a <code>role=\"menuitem\"</code>."
+            },
+            "iconHidden": {
+              "description": "Les icônes décoratives sont masquées avec <code>aria-hidden=\"true\"</code>."
+            }
           }
         },
         "naming": {
@@ -2696,19 +3123,31 @@
             "actionLabel": "Texte d'étiquette / tooltip de l'action"
           },
           "rows": {
-            "trigger": { "description": "Le nom accessible du déclencheur provient du token i18n <code>triggerAriaLabel</code>." },
-            "action": { "description": "Le nom accessible de chaque action est pris de son texte d'étiquette visible ou, pour les actions icône seule, de l'entrée <code>tooltip</code>." }
+            "trigger": {
+              "description": "Le nom accessible du déclencheur provient du token i18n <code>triggerAriaLabel</code>."
+            },
+            "action": {
+              "description": "Le nom accessible de chaque action est pris de son texte d'étiquette visible ou, pour les actions icône seule, de l'entrée <code>tooltip</code>."
+            }
           }
         },
         "keyboard": {
           "title": "Interaction clavier",
           "description": "Le FabButton suit le pattern clavier WAI-ARIA Menu Button.",
           "rows": {
-            "enterSpace": { "description": "Active le déclencheur, basculant le menu d'actions ouvert ou fermé." },
+            "enterSpace": {
+              "description": "Active le déclencheur, basculant le menu d'actions ouvert ou fermé."
+            },
             "escape": { "description": "Ferme le menu d'actions et rend le focus au déclencheur." },
-            "arrowDownUp": { "description": "Déplace le focus entre les éléments d'action dans le menu ouvert." },
-            "homeEnd": { "description": "Déplace le focus sur le premier / dernier élément d'action." },
-            "tab": { "description": "Ferme le menu et déplace le focus sur l'élément suivant sur la page." }
+            "arrowDownUp": {
+              "description": "Déplace le focus entre les éléments d'action dans le menu ouvert."
+            },
+            "homeEnd": {
+              "description": "Déplace le focus sur le premier / dernier élément d'action."
+            },
+            "tab": {
+              "description": "Ferme le menu et déplace le focus sur l'élément suivant sur la page."
+            }
           }
         }
       }

@@ -598,26 +598,42 @@
             "type": { "description": "Nativer Schaltflächentyp" },
             "label": { "description": "Schaltflächentext (Alternative zur Content-Projection)" },
             "title": { "description": "HTML-title-Attribut" },
-            "ariaLabel": { "description": "Barrierefreiheitsetikett (automatisch berechnet für Icon-Only-Schaltflächen)" }
+            "ariaLabel": {
+              "description": "Barrierefreiheitsetikett (automatisch berechnet für Icon-Only-Schaltflächen)"
+            }
           }
         },
         "outputs": {
           "title": "Ausgaben",
           "description": "Von der Schaltflächenkomponente ausgegebene Ereignisse.",
           "rows": {
-            "onClick": { "description": "Ausgegeben wenn die Schaltfläche geklickt wird (nicht ausgegeben bei disabled oder loading)" }
+            "onClick": {
+              "description": "Ausgegeben wenn die Schaltfläche geklickt wird (nicht ausgegeben bei disabled oder loading)"
+            }
           }
         },
         "computed": {
           "title": "Berechnete Eigenschaften",
           "description": "Reaktive berechnete Eigenschaften (Signals) der Komponente.",
           "rows": {
-            "effectiveColor": { "description": "Aufgelöste Farbe (Input > Globale Konfiguration > Standard)" },
-            "effectiveSize": { "description": "Aufgelöste Größe (Input > Globale Konfiguration > Standard)" },
-            "effectiveVariant": { "description": "Aufgelöste Variante (Input > Globale Konfiguration > Standard)" },
-            "hasVisibleContent": { "description": "True wenn die Schaltfläche Textinhalt oder ein Label hat" },
-            "isIconOnly": { "description": "True wenn die Schaltfläche nur ein Symbol ohne Text enthält" },
-            "computedAriaLabel": { "description": "Automatisch berechnetes aria-label für Barrierefreiheit" }
+            "effectiveColor": {
+              "description": "Aufgelöste Farbe (Input > Globale Konfiguration > Standard)"
+            },
+            "effectiveSize": {
+              "description": "Aufgelöste Größe (Input > Globale Konfiguration > Standard)"
+            },
+            "effectiveVariant": {
+              "description": "Aufgelöste Variante (Input > Globale Konfiguration > Standard)"
+            },
+            "hasVisibleContent": {
+              "description": "True wenn die Schaltfläche Textinhalt oder ein Label hat"
+            },
+            "isIconOnly": {
+              "description": "True wenn die Schaltfläche nur ein Symbol ohne Text enthält"
+            },
+            "computedAriaLabel": {
+              "description": "Automatisch berechnetes aria-label für Barrierefreiheit"
+            }
           }
         },
         "models": {
@@ -711,10 +727,18 @@
           "description": "Der Button löst den zugänglichen Namen automatisch nach einer strikten Prioritätsreihenfolge auf. Geben Sie für Icon-Only-Schaltflächen immer einen expliziten Namen an.",
           "note": "Icon-Only-Schaltflächen (<code>isIconOnly</code>) <strong>müssen</strong> einen <code>aria-label</code>- oder <code>title</code>-Input besitzen. Das Weglassen beider macht die Schaltfläche unzugänglich.",
           "rows": {
-            "textLabel": { "description": "Der projizierte Text oder der <code>label</code>-Input dient als zugänglicher Name, ohne dass zusätzliche Attribute benötigt werden." },
-            "iconText": { "description": "Das Symbol erhält automatisch aria-hidden; der sichtbare Text ist als zugänglicher Name ausreichend." },
-            "iconOnly": { "description": "Eines der beiden ist <strong>erforderlich</strong>. Priorität: <code>aria-label</code>-Input &gt; <code>title</code>-Input. Die Komponente stellt <code>computedAriaLabel()</code> mit der aufgelösten Logik bereit." },
-            "iconOnlyLoading": { "description": "Der Spinner ersetzt das Symbol visuell, aber der zugängliche Name bleibt erhalten, solange sich die Schaltfläche im DOM befindet." }
+            "textLabel": {
+              "description": "Der projizierte Text oder der <code>label</code>-Input dient als zugänglicher Name, ohne dass zusätzliche Attribute benötigt werden."
+            },
+            "iconText": {
+              "description": "Das Symbol erhält automatisch aria-hidden; der sichtbare Text ist als zugänglicher Name ausreichend."
+            },
+            "iconOnly": {
+              "description": "Eines der beiden ist <strong>erforderlich</strong>. Priorität: <code>aria-label</code>-Input &gt; <code>title</code>-Input. Die Komponente stellt <code>computedAriaLabel()</code> mit der aufgelösten Logik bereit."
+            },
+            "iconOnlyLoading": {
+              "description": "Der Spinner ersetzt das Symbol visuell, aber der zugängliche Name bleibt erhalten, solange sich die Schaltfläche im DOM befindet."
+            }
           },
           "elements": {
             "textLabel": "Schaltfläche mit Text oder <code>label</code>",
@@ -731,10 +755,18 @@
           "title": "ARIA-Attribute",
           "description": "Die Button-Komponente fügt ARIA-Attribute automatisch hinzu und entfernt sie entsprechend ihrem Zustand. Im verbrauchenden Code sind keine zusätzlichen Bindings erforderlich.",
           "rows": {
-            "ariaLabel": { "description": "Wird durch <code>computedAriaLabel()</code> aufgelöst. Weggelassen, wenn die Schaltfläche sichtbaren Text hat (der native Name genügt)." },
-            "ariaBusy": { "description": "Vorhanden wenn <code>loading=true</code>. Teilt assistiven Technologien mit, dass die Schaltfläche einen Vorgang verarbeitet." },
-            "disabled": { "description": "Angewendet wenn <code>disabled=true</code> oder <code>loading=true</code>. Blockiert Fokus und Ereignisse nativ, ohne <code>aria-disabled</code> zu benötigen." },
-            "ariaHidden": { "description": "Alle <code>&lt;i&gt;</code>-Symbol- und <code>&lt;span&gt;</code>-Spinner-Elemente tragen <code>aria-hidden</code>, sodass sie von assistiven Technologien nicht gelesen werden." }
+            "ariaLabel": {
+              "description": "Wird durch <code>computedAriaLabel()</code> aufgelöst. Weggelassen, wenn die Schaltfläche sichtbaren Text hat (der native Name genügt)."
+            },
+            "ariaBusy": {
+              "description": "Vorhanden wenn <code>loading=true</code>. Teilt assistiven Technologien mit, dass die Schaltfläche einen Vorgang verarbeitet."
+            },
+            "disabled": {
+              "description": "Angewendet wenn <code>disabled=true</code> oder <code>loading=true</code>. Blockiert Fokus und Ereignisse nativ, ohne <code>aria-disabled</code> zu benötigen."
+            },
+            "ariaHidden": {
+              "description": "Alle <code>&lt;i&gt;</code>-Symbol- und <code>&lt;span&gt;</code>-Spinner-Elemente tragen <code>aria-hidden</code>, sodass sie von assistiven Technologien nicht gelesen werden."
+            }
           },
           "elements": {
             "disabled": "<code>disabled</code> (nativ)",
@@ -749,9 +781,13 @@
           "description": "Die Komponente verwendet ein natives <code>&lt;button&gt;</code>-Element, sodass der Browser das gesamte Tastaturverhalten kostenlos bereitstellt.",
           "note": "Wenn <code>disabled</code> oder <code>loading</code> true ist, wird das native <code>disabled</code>-Attribut gesetzt, das die Schaltfläche automatisch aus der Tab-Reihenfolge entfernt.",
           "rows": {
-            "tab": { "description": "Setzt den Fokus auf die Schaltfläche (oder verlässt sie). <code>disabled</code>- / <code>loading</code>-Schaltflächen werden aus der Tab-Reihenfolge ausgeschlossen." },
+            "tab": {
+              "description": "Setzt den Fokus auf die Schaltfläche (oder verlässt sie). <code>disabled</code>- / <code>loading</code>-Schaltflächen werden aus der Tab-Reihenfolge ausgeschlossen."
+            },
             "shiftTab": { "description": "Setzt den Fokus auf das vorherige Element." },
-            "spaceEnter": { "description": "Aktiviert die Schaltfläche. Bei <code>disabled</code> oder <code>loading</code> fängt der Handler das Ereignis ab und bricht es ab, bevor <code>onClick</code> ausgelöst wird." }
+            "spaceEnter": {
+              "description": "Aktiviert die Schaltfläche. Bei <code>disabled</code> oder <code>loading</code> fängt der Handler das Ereignis ab und bricht es ab, bevor <code>onClick</code> ausgelöst wird."
+            }
           }
         }
       }
@@ -846,7 +882,9 @@
           "description": "Vom Komponenten ausgegebene Ereignisse, auf die Sie hören können, um auf Benutzerinteraktionen zu reagieren.",
           "rows": {
             "onItemAction": { "description": "Ausgelöst beim Klick auf ein Element" },
-            "onSelectionChange": { "description": "Ausgelöst bei Änderung der Auswahl (Auswahlmodus)" },
+            "onSelectionChange": {
+              "description": "Ausgelöst bei Änderung der Auswahl (Auswahlmodus)"
+            },
             "menuOpen": { "description": "Ausgelöst wenn das Menü sich öffnet" },
             "menuClose": { "description": "Ausgelöst wenn das Menü sich schließt" }
           }
@@ -920,7 +958,9 @@
             "shortcutBorderRadius": { "description": "Eckenradius des Tastenkürzels" },
             "shortcutFontSize": { "description": "Schriftgröße des Tastenkürzels" },
             "notifySelectedSize": { "description": "Größe des Indikators für ausgewählte Kinder" },
-            "notifySelectedRadius": { "description": "Radius des Indikators für ausgewählte Kinder" }
+            "notifySelectedRadius": {
+              "description": "Radius des Indikators für ausgewählte Kinder"
+            }
           }
         },
         "colors": {
@@ -948,17 +988,37 @@
           "title": "ARIA-Rollen & Attribute",
           "description": "Das Action Menu wendet die folgenden ARIA-Attribute gemäß dem Menü-Muster des ARIA Authoring Practices Guide (APG) an.",
           "rows": {
-            "haspopup": { "description": "Teilt Hilfstechnologien mit, dass das Aktivieren dieser Schaltfläche ein Menü öffnet." },
-            "expanded": { "description": "Spiegelt den Offen-/Geschlossen-Zustand des Menüs wider. Wird bei jeder Interaktion automatisch aktualisiert." },
-            "controls": { "description": "Verknüpft die Auslöseschaltfläche mit dem Menü-Container, den sie über übereinstimmende IDs steuert." },
+            "haspopup": {
+              "description": "Teilt Hilfstechnologien mit, dass das Aktivieren dieser Schaltfläche ein Menü öffnet."
+            },
+            "expanded": {
+              "description": "Spiegelt den Offen-/Geschlossen-Zustand des Menüs wider. Wird bei jeder Interaktion automatisch aktualisiert."
+            },
+            "controls": {
+              "description": "Verknüpft die Auslöseschaltfläche mit dem Menü-Container, den sie über übereinstimmende IDs steuert."
+            },
             "roleMenu": { "description": "Identifiziert den Dropdown-Container als Menü-Widget." },
-            "orientation": { "description": "Gibt an, dass Elemente vertikal angeordnet sind (Standard-Menü-Layout)." },
-            "labelledby": { "description": "Im dynamischen Modus verknüpft es den Menü-Container mit seiner Auslöseschaltfläche und stellt einen barrierefreien Namen bereit." },
-            "roleItem": { "description": "Standardrolle für interaktive Elemente. Wechselt zu menuitemradio, wenn das Element zu einer Auswahlgruppe gehört." },
-            "ariaChecked": { "description": "Nur im Auswahlmodus vorhanden. Gibt an, ob dieses Element die aktuelle Auswahl ist." },
-            "keyshortcuts": { "description": "Gibt den visuell neben dem Element angezeigten Tastenkomplex-Text an." },
-            "roleSeparator": { "description": "Identifiziert das visuelle Trennzeichen zwischen Gruppen von Menüelem enten." },
-            "ariaHiddenIcon": { "description": "Verhindert, dass dekorative Icons von Screenreadern vorgelesen werden." }
+            "orientation": {
+              "description": "Gibt an, dass Elemente vertikal angeordnet sind (Standard-Menü-Layout)."
+            },
+            "labelledby": {
+              "description": "Im dynamischen Modus verknüpft es den Menü-Container mit seiner Auslöseschaltfläche und stellt einen barrierefreien Namen bereit."
+            },
+            "roleItem": {
+              "description": "Standardrolle für interaktive Elemente. Wechselt zu menuitemradio, wenn das Element zu einer Auswahlgruppe gehört."
+            },
+            "ariaChecked": {
+              "description": "Nur im Auswahlmodus vorhanden. Gibt an, ob dieses Element die aktuelle Auswahl ist."
+            },
+            "keyshortcuts": {
+              "description": "Gibt den visuell neben dem Element angezeigten Tastenkomplex-Text an."
+            },
+            "roleSeparator": {
+              "description": "Identifiziert das visuelle Trennzeichen zwischen Gruppen von Menüelem enten."
+            },
+            "ariaHiddenIcon": {
+              "description": "Verhindert, dass dekorative Icons von Screenreadern vorgelesen werden."
+            }
           },
           "elements": {
             "trigger": "<code>&lt;button&gt;</code> (Auslöser)",
@@ -975,11 +1035,21 @@
           "description": "Die Auslöseschaltfläche löst ihren barrierefreien Namen anhand einer Prioritätskaskade auf. Geben Sie immer einen expliziten barrierefreien Namen für Auslöser mit nur einem Symbol an.",
           "note": "Menüs mit nur einem Symbol (kein Label) müssen <code>ariaLabel</code> oder <code>title</code> gesetzt haben. Ohne sichtbares Textetikett können Hilfstechnologien den Zweck des Menüs nicht identifizieren.",
           "rows": {
-            "triggerLabel": { "description": "Die <code>label</code>-Eingabe wird als innerer Text der Schaltfläche gerendert, der nativ zum barrierefreien Namen wird." },
-            "triggerAriaLabel": { "description": "Die <code>ariaLabel</code>-Eingabe wird als <code>aria-label</code>-Attribut angewendet und hat Vorrang vor <code>label</code> und <code>title</code>." },
-            "triggerIconOnly": { "description": "Wenn weder <code>ariaLabel</code> noch <code>label</code> angegeben sind, wird die <code>title</code>-Eingabe über den Browser-Tooltip als barrierefreier Name verwendet." },
-            "itemLabel": { "description": "Das <code>aria-label</code> jedes Menüelements wird aus <code>item.title || item.label</code> aufgelöst, um sicherzustellen, dass Screenreader den richtigen Text ankündigen." },
-            "menuLabelledby": { "description": "Im dynamischen Modus referenziert der Menü-Container die Auslöser-ID über <code>aria-labelledby</code>, wodurch ihre Verbindung explizit gemacht wird." }
+            "triggerLabel": {
+              "description": "Die <code>label</code>-Eingabe wird als innerer Text der Schaltfläche gerendert, der nativ zum barrierefreien Namen wird."
+            },
+            "triggerAriaLabel": {
+              "description": "Die <code>ariaLabel</code>-Eingabe wird als <code>aria-label</code>-Attribut angewendet und hat Vorrang vor <code>label</code> und <code>title</code>."
+            },
+            "triggerIconOnly": {
+              "description": "Wenn weder <code>ariaLabel</code> noch <code>label</code> angegeben sind, wird die <code>title</code>-Eingabe über den Browser-Tooltip als barrierefreier Name verwendet."
+            },
+            "itemLabel": {
+              "description": "Das <code>aria-label</code> jedes Menüelements wird aus <code>item.title || item.label</code> aufgelöst, um sicherzustellen, dass Screenreader den richtigen Text ankündigen."
+            },
+            "menuLabelledby": {
+              "description": "Im dynamischen Modus referenziert der Menü-Container die Auslöser-ID über <code>aria-labelledby</code>, wodurch ihre Verbindung explizit gemacht wird."
+            }
           },
           "elements": {
             "triggerWithLabel": "Auslöser mit <code>label</code>",
@@ -998,15 +1068,29 @@
           "description": "Das Action Menu implementiert das vollständige APG-Menü-Tastaturmuster. Pfeiltasten navigieren zwischen Elementen; Escape und PfeilLinks schließen Menüs.",
           "note": "<kbd>PfeilUnten</kbd>, <kbd>PfeilOben</kbd>, <kbd>Pos1</kbd> und <kbd>Ende</kbd> rufen <code>preventDefault()</code> auf, um seitliches Scrollen während der Menünavigation zu verhindern.",
           "rows": {
-            "tab": { "description": "Fokussiert die Auslöseschaltfläche. Wenn das Menü offen ist, schließt Tab es und gibt den Fokus an den Auslöser zurück." },
-            "spaceEnter": { "description": "Öffnet das Menü, wenn der Fokus auf dem Auslöser liegt. Aktiviert das fokussierte Menüelement, wenn man im Menü ist." },
-            "escape": { "description": "Schließt das geöffnete Menü und gibt den Fokus an die Auslöseschaltfläche zurück." },
-            "arrowDown": { "description": "Verschiebt den Fokus auf das nächste Menüelement. Kehrt vom letzten Element zum ersten zurück." },
-            "arrowUp": { "description": "Verschiebt den Fokus auf das vorherige Menüelement. Kehrt vom ersten Element zum letzten zurück." },
+            "tab": {
+              "description": "Fokussiert die Auslöseschaltfläche. Wenn das Menü offen ist, schließt Tab es und gibt den Fokus an den Auslöser zurück."
+            },
+            "spaceEnter": {
+              "description": "Öffnet das Menü, wenn der Fokus auf dem Auslöser liegt. Aktiviert das fokussierte Menüelement, wenn man im Menü ist."
+            },
+            "escape": {
+              "description": "Schließt das geöffnete Menü und gibt den Fokus an die Auslöseschaltfläche zurück."
+            },
+            "arrowDown": {
+              "description": "Verschiebt den Fokus auf das nächste Menüelement. Kehrt vom letzten Element zum ersten zurück."
+            },
+            "arrowUp": {
+              "description": "Verschiebt den Fokus auf das vorherige Menüelement. Kehrt vom ersten Element zum letzten zurück."
+            },
             "home": { "description": "Verschiebt den Fokus auf das erste Menüelement." },
             "end": { "description": "Verschiebt den Fokus auf das letzte Menüelement." },
-            "arrowRight": { "description": "Öffnet das Untermenü des fokussierten Elements und verschiebt den Fokus auf sein erstes Element." },
-            "arrowLeft": { "description": "Schließt das aktuelle Untermenü und gibt den Fokus an das übergeordnete Element zurück." }
+            "arrowRight": {
+              "description": "Öffnet das Untermenü des fokussierten Elements und verschiebt den Fokus auf sein erstes Element."
+            },
+            "arrowLeft": {
+              "description": "Schließt das aktuelle Untermenü und gibt den Fokus an das übergeordnete Element zurück."
+            }
           }
         }
       }
@@ -1058,21 +1142,33 @@
           "description": "Eingabeeigenschaften, die das Verhalten und Erscheinungsbild des Avatars ändern.",
           "rows": {
             "src": { "description": "URL des Avatar-Bildes" },
-            "alt": { "description": "Alternativer Text (zur Generierung von Initialen wenn kein src vorhanden)" },
-            "initials": { "description": "Anzuzeigende Initialen (überschreibt aus alt generierte)" },
+            "alt": {
+              "description": "Alternativer Text (zur Generierung von Initialen wenn kein src vorhanden)"
+            },
+            "initials": {
+              "description": "Anzuzeigende Initialen (überschreibt aus alt generierte)"
+            },
             "icon": { "description": "RemixIcon-Klasse zur Anzeige" },
             "size": { "description": "Vordefinierte Avatar-Größe" },
-            "customSize": { "description": "Benutzerdefinierte Größe in Pixeln (überschreibt size)" },
+            "customSize": {
+              "description": "Benutzerdefinierte Größe in Pixeln (überschreibt size)"
+            },
             "variant": { "description": "Avatar-Form" },
-            "color": { "description": "Hintergrundfarbe wenn kein Bild vorhanden (akzeptiert Theme-Farben oder benutzerdefinierte)" },
-            "textColor": { "description": "Text-/Icon-Farbe (automatisch berechnet wenn nicht angegeben)" }
+            "color": {
+              "description": "Hintergrundfarbe wenn kein Bild vorhanden (akzeptiert Theme-Farben oder benutzerdefinierte)"
+            },
+            "textColor": {
+              "description": "Text-/Icon-Farbe (automatisch berechnet wenn nicht angegeben)"
+            }
           }
         },
         "outputs": {
           "title": "Komponentenausgaben",
           "description": "Vom Komponenten ausgegebene Ereignisse, auf die Sie hören können, um auf Bildladefehler zu reagieren.",
           "rows": {
-            "imageError": { "description": "Ausgelöst wenn das Bild nicht geladen werden kann. Die Komponente zeigt automatisch den Fallback an." }
+            "imageError": {
+              "description": "Ausgelöst wenn das Bild nicht geladen werden kann. Die Komponente zeigt automatisch den Fallback an."
+            }
           }
         }
       },
@@ -1124,7 +1220,9 @@
           "description": "Die <code>nui-avatar-group</code>-Komponente verwendet <code>NuiI18nService</code>, um das barrierefreie Etikett und den Tooltip des Überschuss-Indikators zu erstellen, der angezeigt wird, wenn die Anzahl der Avatare die <code>max</code>-Eingabe überschreitet.",
           "note": "Verwenden Sie den <code>{count}</code>-Platzhalter in Ihrer Übersetzungszeichenkette. Die Komponente ersetzt ihn zur Laufzeit durch die genaue Anzahl versteckter Avatare.",
           "rows": {
-            "moreProfiles": { "description": "Barrierefreies Etikett und Tooltip des Überschuss-Indikators (+N). Unterstützt den <code>{count}</code>-Platzhalter." }
+            "moreProfiles": {
+              "description": "Barrierefreies Etikett und Tooltip des Überschuss-Indikators (+N). Unterstützt den <code>{count}</code>-Platzhalter."
+            }
           }
         }
       },
@@ -1133,16 +1231,36 @@
           "title": "ARIA-Rollen & Attribute",
           "description": "Jeder Avatar verwendet <code>role='img'</code>, um sich als semantisches Bild darzustellen. Die Gruppenkomponente umschließt Avatare in einer barrierefreien Listenstruktur.",
           "rows": {
-            "roleImg": { "description": "Identifiziert den Avatar-Container als Bildelement für Hilfstechnologien." },
-            "ariaLabel": { "description": "Barrierefreier Name aufgelöst aus <code>tooltip()</code>, <code>alt()</code> oder dem Fallback-String <code>'avatar'</code>." },
-            "title": { "description": "Visueller Tooltip und sekundärer barrierefreier Namens-Fallback für den Avatar-Container." },
-            "imgAlt": { "description": "Immer leer (<code>''</code>), um zu verhindern, dass das innere Bild unabhängig gelesen wird; <code>role='img'</code> und <code>aria-label</code> des übergeordneten Elements sind die barrierefreie Darstellung." },
-            "ariaHiddenDecorative": { "description": "Alle dekorativen internen Elemente (Initialen, Icon, Fallback-Span) sind vor Hilfstechnologien verborgen." },
-            "roleList": { "description": "Der Avatar-Gruppen-Container verwendet <code>role='list'</code>, damit Screenreader ihn als navigierbare Liste ankündigen." },
-            "roleListitem": { "description": "Jeder Avatar-Wrapper in der Gruppe hat <code>role='listitem'</code>, um dem Listenkontext zu entsprechen." },
-            "roleExcess": { "description": "Der Überschuss-Indikator (+N) hat <code>role='img'</code> und ein internationalisiertes <code>aria-label</code>, damit Screenreader die versteckte Anzahl ankündigen." },
-            "ariaLabelExcess": { "description": "Barrierefreier Name für den Überschuss-Indikator, generiert aus dem i18n-Token <code>avatar.moreProfiles</code> mit ersetztem <code>{count}</code>." },
-            "ariaHiddenExcess": { "description": "Der sichtbare '+N'-Text-Span ist vor Hilfstechnologien verborgen; nur das <code>aria-label</code> des übergeordneten Containers wird gelesen." }
+            "roleImg": {
+              "description": "Identifiziert den Avatar-Container als Bildelement für Hilfstechnologien."
+            },
+            "ariaLabel": {
+              "description": "Barrierefreier Name aufgelöst aus <code>tooltip()</code>, <code>alt()</code> oder dem Fallback-String <code>'avatar'</code>."
+            },
+            "title": {
+              "description": "Visueller Tooltip und sekundärer barrierefreier Namens-Fallback für den Avatar-Container."
+            },
+            "imgAlt": {
+              "description": "Immer leer (<code>''</code>), um zu verhindern, dass das innere Bild unabhängig gelesen wird; <code>role='img'</code> und <code>aria-label</code> des übergeordneten Elements sind die barrierefreie Darstellung."
+            },
+            "ariaHiddenDecorative": {
+              "description": "Alle dekorativen internen Elemente (Initialen, Icon, Fallback-Span) sind vor Hilfstechnologien verborgen."
+            },
+            "roleList": {
+              "description": "Der Avatar-Gruppen-Container verwendet <code>role='list'</code>, damit Screenreader ihn als navigierbare Liste ankündigen."
+            },
+            "roleListitem": {
+              "description": "Jeder Avatar-Wrapper in der Gruppe hat <code>role='listitem'</code>, um dem Listenkontext zu entsprechen."
+            },
+            "roleExcess": {
+              "description": "Der Überschuss-Indikator (+N) hat <code>role='img'</code> und ein internationalisiertes <code>aria-label</code>, damit Screenreader die versteckte Anzahl ankündigen."
+            },
+            "ariaLabelExcess": {
+              "description": "Barrierefreier Name für den Überschuss-Indikator, generiert aus dem i18n-Token <code>avatar.moreProfiles</code> mit ersetztem <code>{count}</code>."
+            },
+            "ariaHiddenExcess": {
+              "description": "Der sichtbare '+N'-Text-Span ist vor Hilfstechnologien verborgen; nur das <code>aria-label</code> des übergeordneten Containers wird gelesen."
+            }
           },
           "elements": {
             "avatarDiv": "<code>&lt;div&gt;</code> (Avatar)",
@@ -1158,10 +1276,18 @@
           "description": "Die Reihenfolge der Auflösung des barrierefreien Namens stellt sicher, dass jeder Avatar eine aussagekräftige Beschriftung für Screenreader hat, auch wenn er nur teilweise konfiguriert ist.",
           "note": "Geben Sie immer <code>alt</code> oder <code>tooltip</code> für Avatare an, die echte Personen oder Entitäten darstellen. Eine generische <code>'avatar'</code>-Beschriftung gibt Screenreader-Benutzern keinen Kontext.",
           "rows": {
-            "tooltip": { "description": "Die <code>tooltip</code>-Eingabe hat die höchste Priorität für den barrierefreien Namen und wird auch als natives <code>title</code>-Attribut gerendert." },
-            "alt": { "description": "Wenn <code>tooltip</code> fehlt, wird <code>alt</code> als <code>aria-label</code> verwendet. Es steuert auch die automatische Initialen-Generierung." },
-            "fallback": { "description": "Wenn weder <code>tooltip</code> noch <code>alt</code> gesetzt ist, wird der String <code>'avatar'</code> als barrierefreier Fallback-Name verwendet." },
-            "excess": { "description": "Das <code>aria-label</code> des Überschuss-Zählers wird aus <code>avatar.moreProfiles</code> berechnet, wobei <code>{count}</code> durch die Anzahl versteckter Avatare ersetzt wird." }
+            "tooltip": {
+              "description": "Die <code>tooltip</code>-Eingabe hat die höchste Priorität für den barrierefreien Namen und wird auch als natives <code>title</code>-Attribut gerendert."
+            },
+            "alt": {
+              "description": "Wenn <code>tooltip</code> fehlt, wird <code>alt</code> als <code>aria-label</code> verwendet. Es steuert auch die automatische Initialen-Generierung."
+            },
+            "fallback": {
+              "description": "Wenn weder <code>tooltip</code> noch <code>alt</code> gesetzt ist, wird der String <code>'avatar'</code> als barrierefreier Fallback-Name verwendet."
+            },
+            "excess": {
+              "description": "Das <code>aria-label</code> des Überschuss-Zählers wird aus <code>avatar.moreProfiles</code> berechnet, wobei <code>{count}</code> durch die Anzahl versteckter Avatare ersetzt wird."
+            }
           },
           "elements": {
             "avatarWithTooltip": "Avatar mit <code>tooltip</code>",
@@ -1177,11 +1303,21 @@
           "title": "Verborgene dekorative Elemente",
           "description": "Rein dekorative Elemente tragen <code>aria-hidden='true'</code>, um doppelte oder bedeutungslose Ankündigungen durch Screenreader zu vermeiden.",
           "rows": {
-            "imgEmpty": { "description": "Das <code>&lt;img&gt;</code>-Element hat immer <code>alt=''</code>, um zu vermeiden, dass es unabhängig gelesen wird; der barrierefreie Name liegt auf dem übergeordneten Container." },
-            "initials": { "description": "Der Initialen-Text ist verborgen; der barrierefreie Name stammt vom <code>aria-label</code> des übergeordneten Containers." },
-            "icon": { "description": "Das Icon-Element ist dekorativ; der barrierefreie Name stammt vom <code>aria-label</code> des übergeordneten Containers." },
-            "fallbackSpan": { "description": "Der Fallback-Buchstabe ist verborgen; der barrierefreie Name wird durch das <code>aria-label</code> des übergeordneten Divs bereitgestellt." },
-            "excessSpan": { "description": "Der sichtbare '+N'-Text ist vor AT verborgen; das <code>aria-label</code> des übergeordneten Divs bietet die Ankündigung für Screenreader." }
+            "imgEmpty": {
+              "description": "Das <code>&lt;img&gt;</code>-Element hat immer <code>alt=''</code>, um zu vermeiden, dass es unabhängig gelesen wird; der barrierefreie Name liegt auf dem übergeordneten Container."
+            },
+            "initials": {
+              "description": "Der Initialen-Text ist verborgen; der barrierefreie Name stammt vom <code>aria-label</code> des übergeordneten Containers."
+            },
+            "icon": {
+              "description": "Das Icon-Element ist dekorativ; der barrierefreie Name stammt vom <code>aria-label</code> des übergeordneten Containers."
+            },
+            "fallbackSpan": {
+              "description": "Der Fallback-Buchstabe ist verborgen; der barrierefreie Name wird durch das <code>aria-label</code> des übergeordneten Divs bereitgestellt."
+            },
+            "excessSpan": {
+              "description": "Der sichtbare '+N'-Text ist vor AT verborgen; das <code>aria-label</code> des übergeordneten Divs bietet die Ankündigung für Screenreader."
+            }
           },
           "elements": {
             "initials": "<code>&lt;span&gt;</code> Initialen",
@@ -1268,10 +1404,18 @@
             "listbox": "Optionsliste"
           },
           "rows": {
-            "ariaExpanded": { "description": "Der Auslöser trägt <code>aria-expanded</code>, das angibt ob die Liste geöffnet (<code>true</code>) oder geschlossen (<code>false</code>) ist." },
-            "ariaHaspopup": { "description": "<code>aria-haspopup=\"listbox\"</code> am Auslöser gibt an, dass eine Auswahlliste geöffnet wird." },
-            "optionRole": { "description": "Jedes Listenelement hat <code>role=\"option\"</code> und <code>aria-selected=\"true\"</code> wenn es ausgewählt ist." },
-            "listboxRole": { "description": "Der Optionencontainer hat <code>role=\"listbox\"</code>." }
+            "ariaExpanded": {
+              "description": "Der Auslöser trägt <code>aria-expanded</code>, das angibt ob die Liste geöffnet (<code>true</code>) oder geschlossen (<code>false</code>) ist."
+            },
+            "ariaHaspopup": {
+              "description": "<code>aria-haspopup=\"listbox\"</code> am Auslöser gibt an, dass eine Auswahlliste geöffnet wird."
+            },
+            "optionRole": {
+              "description": "Jedes Listenelement hat <code>role=\"option\"</code> und <code>aria-selected=\"true\"</code> wenn es ausgewählt ist."
+            },
+            "listboxRole": {
+              "description": "Der Optionencontainer hat <code>role=\"listbox\"</code>."
+            }
           }
         },
         "naming": {
@@ -1287,16 +1431,24 @@
             "placeholder": "Platzhaltertext"
           },
           "rows": {
-            "value": { "description": "Wenn eine Option ausgewählt ist, wird ihr sichtbarer Text zum barrierefreien Namen der Schaltfläche." },
-            "placeholder": { "description": "Wenn kein Element ausgewählt ist, ist der Platzhaltertext der barrierefreie Name des Auslösers." }
+            "value": {
+              "description": "Wenn eine Option ausgewählt ist, wird ihr sichtbarer Text zum barrierefreien Namen der Schaltfläche."
+            },
+            "placeholder": {
+              "description": "Wenn kein Element ausgewählt ist, ist der Platzhaltertext der barrierefreie Name des Auslösers."
+            }
           }
         },
         "keyboard": {
           "title": "Tastaturinteraktion",
           "description": "Der Select Button folgt dem ARIA-Muster der Listbox-Schaltfläche für die Tastaturnavigation.",
           "rows": {
-            "enterSpace": { "description": "Öffnet oder schließt die Optionsliste, wenn der Auslöser fokussiert ist." },
-            "arrowDownUp": { "description": "Bewegt den Fokus zwischen den Optionen in der geöffneten Liste." },
+            "enterSpace": {
+              "description": "Öffnet oder schließt die Optionsliste, wenn der Auslöser fokussiert ist."
+            },
+            "arrowDownUp": {
+              "description": "Bewegt den Fokus zwischen den Optionen in der geöffneten Liste."
+            },
             "homeEnd": { "description": "Bewegt den Fokus zur ersten / letzten Option." },
             "escape": { "description": "Schließt die Liste ohne Änderung der Auswahl." }
           }
@@ -1446,25 +1598,59 @@
           "description": "Tokens für Wochentagsnamen, Monatsnamen, Navigationsschaltflächen-Beschriftungen und Tagesstatus-Beschriftungen.",
           "note": "Alle Array-Tokens (<code>weekDaysShort</code>, <code>weekDays</code>, <code>months</code>, <code>shortMonths</code>) müssen alle Werte angeben. Überschreiben Sie global mit <code>provideNuiI18n({ calendar: {...} })</code> oder pro Instanz mit dem <code>[i18n]</code>-Input.",
           "rows": {
-            "weekDaysShort": { "description": "Abgekürzte Wochentagsnamen, die im Kalender-Header angezeigt werden (Montag–Sonntag)." },
-            "weekDays": { "description": "Vollständige Wochentagsnamen, die in barrierefreien Labels und Tooltips verwendet werden." },
-            "months": { "description": "Vollständige Monatsnamen, die im Monatsauswähler und in barrierefreien Labels verwendet werden." },
-            "shortMonths": { "description": "Abgekürzte Monatsnamen, die in kompakten Kontexten verwendet werden." },
-            "prevMonth": { "description": "Beschriftung der Schaltfläche, die zum vorherigen Monat navigiert." },
-            "nextMonth": { "description": "Beschriftung der Schaltfläche, die zum nächsten Monat navigiert." },
-            "prevYears": { "description": "Beschriftung der Schaltfläche, die zu früheren Jahren im Jahresauswähler navigiert." },
-            "nextYears": { "description": "Beschriftung der Schaltfläche, die zu späteren Jahren im Jahresauswähler navigiert." },
-            "changeMonth": { "description": "Beschriftung der Schaltfläche, die den Monatsauswähler öffnet." },
-            "changeYear": { "description": "Beschriftung der Schaltfläche, die den Jahresauswähler öffnet." },
+            "weekDaysShort": {
+              "description": "Abgekürzte Wochentagsnamen, die im Kalender-Header angezeigt werden (Montag–Sonntag)."
+            },
+            "weekDays": {
+              "description": "Vollständige Wochentagsnamen, die in barrierefreien Labels und Tooltips verwendet werden."
+            },
+            "months": {
+              "description": "Vollständige Monatsnamen, die im Monatsauswähler und in barrierefreien Labels verwendet werden."
+            },
+            "shortMonths": {
+              "description": "Abgekürzte Monatsnamen, die in kompakten Kontexten verwendet werden."
+            },
+            "prevMonth": {
+              "description": "Beschriftung der Schaltfläche, die zum vorherigen Monat navigiert."
+            },
+            "nextMonth": {
+              "description": "Beschriftung der Schaltfläche, die zum nächsten Monat navigiert."
+            },
+            "prevYears": {
+              "description": "Beschriftung der Schaltfläche, die zu früheren Jahren im Jahresauswähler navigiert."
+            },
+            "nextYears": {
+              "description": "Beschriftung der Schaltfläche, die zu späteren Jahren im Jahresauswähler navigiert."
+            },
+            "changeMonth": {
+              "description": "Beschriftung der Schaltfläche, die den Monatsauswähler öffnet."
+            },
+            "changeYear": {
+              "description": "Beschriftung der Schaltfläche, die den Jahresauswähler öffnet."
+            },
             "year": { "description": "Beschriftung des Jahresauswähler-Headers." },
-            "week": { "description": "Barrierefreies Label für die Kopfzeile der Wochennummern-Spalte." },
-            "weekNumbers": { "description": "Tooltip für die Umschalttaste der Wochennummern-Spalte." },
+            "week": {
+              "description": "Barrierefreies Label für die Kopfzeile der Wochennummern-Spalte."
+            },
+            "weekNumbers": {
+              "description": "Tooltip für die Umschalttaste der Wochennummern-Spalte."
+            },
             "today": { "description": "Beschriftung für die Schaltfläche 'Heute'." },
-            "selectDay": { "description": "Barrierefreie Beschreibung für die Auswahl eines Tages." },
-            "dayDisabled": { "description": "Bildschirmlesegerät-Ankündigung für deaktivierte Tageszellen." },
-            "openCalendar": { "description": "Beschriftung der Schaltfläche, die das Kalender-Popover öffnet." },
-            "showTime": { "description": "Beschriftung der Schaltfläche, die die Zeitauswahl anzeigt." },
-            "hideTime": { "description": "Beschriftung der Schaltfläche, die die Zeitauswahl verbirgt." },
+            "selectDay": {
+              "description": "Barrierefreie Beschreibung für die Auswahl eines Tages."
+            },
+            "dayDisabled": {
+              "description": "Bildschirmlesegerät-Ankündigung für deaktivierte Tageszellen."
+            },
+            "openCalendar": {
+              "description": "Beschriftung der Schaltfläche, die das Kalender-Popover öffnet."
+            },
+            "showTime": {
+              "description": "Beschriftung der Schaltfläche, die die Zeitauswahl anzeigt."
+            },
+            "hideTime": {
+              "description": "Beschriftung der Schaltfläche, die die Zeitauswahl verbirgt."
+            },
             "monthAria": { "description": "Barrierefreies Label für das Monatsauswahl-Raster." },
             "yearsAria": { "description": "Barrierefreies Label für das Jahresauswahl-Raster." }
           }
@@ -1473,38 +1659,82 @@
           "title": "Voreinstellungs-, Reiter- und Zeitauswahl-Tokens",
           "description": "Tokens für schnelle Datumsbereichs-Voreinstellungen, Ansichts-Reiter und Beschriftungen der integrierten Zeitauswahl.",
           "rows": {
-            "shortcuts": { "description": "Beschriftung des Voreinstellungs-Panel-Headers, der Schnellzugriffe für Datumsbereiche auflistet." },
+            "shortcuts": {
+              "description": "Beschriftung des Voreinstellungs-Panel-Headers, der Schnellzugriffe für Datumsbereiche auflistet."
+            },
             "presetsToday": { "description": "Beschriftung der schnellen Voreinstellung 'Heute'." },
-            "last7Days": { "description": "Beschriftung der schnellen Voreinstellung 'Letzte 7 Tage'." },
-            "last30Days": { "description": "Beschriftung der schnellen Voreinstellung 'Letzte 30 Tage'." },
-            "thisMonth": { "description": "Beschriftung der schnellen Voreinstellung 'Diesen Monat'." },
-            "lastMonth": { "description": "Beschriftung der schnellen Voreinstellung 'Letzten Monat'." },
-            "thisYear": { "description": "Beschriftung der schnellen Voreinstellung 'Dieses Jahr'." },
+            "last7Days": {
+              "description": "Beschriftung der schnellen Voreinstellung 'Letzte 7 Tage'."
+            },
+            "last30Days": {
+              "description": "Beschriftung der schnellen Voreinstellung 'Letzte 30 Tage'."
+            },
+            "thisMonth": {
+              "description": "Beschriftung der schnellen Voreinstellung 'Diesen Monat'."
+            },
+            "lastMonth": {
+              "description": "Beschriftung der schnellen Voreinstellung 'Letzten Monat'."
+            },
+            "thisYear": {
+              "description": "Beschriftung der schnellen Voreinstellung 'Dieses Jahr'."
+            },
             "tabCalendar": { "description": "Beschriftung des Kalenderansicht-Reiters." },
             "tabPresets": { "description": "Beschriftung des Voreinstellungsansicht-Reiters." },
             "tabTime": { "description": "Beschriftung des Zeitansicht-Reiters." },
-            "timeStart": { "description": "Beschriftung für die Startzeit-Eingabe im Bereichsmodus mit Zeit." },
-            "timeEnd": { "description": "Beschriftung für die Endzeit-Eingabe im Bereichsmodus mit Zeit." }
+            "timeStart": {
+              "description": "Beschriftung für die Startzeit-Eingabe im Bereichsmodus mit Zeit."
+            },
+            "timeEnd": {
+              "description": "Beschriftung für die Endzeit-Eingabe im Bereichsmodus mit Zeit."
+            }
           }
         },
         "ariaTokens": {
           "title": "ARIA-Status- und Barrierefreiheits-Tokens",
           "description": "Tokens, die ausschließlich für unterstützende Technologien bereitgestellt werden, um den Tagesstatus, Navigationsänderungen und die Bereichsauswahl anzukündigen.",
           "rows": {
-            "ariaToday": { "description": "Bildschirmlesegerät-Anmerkung, die der Zelle des heutigen Datums hinzugefügt wird." },
-            "selected": { "description": "Bildschirmlesegerät-Anmerkung, die den ausgewählten Tageszellen hinzugefügt wird." },
-            "inRange": { "description": "Bildschirmlesegerät-Anmerkung, die den Tageszellen innerhalb eines ausgewählten Bereichs hinzugefügt wird." },
-            "ariaDisabled": { "description": "Bildschirmlesegerät-Anmerkung, die den deaktivierten Tageszellen hinzugefügt wird." },
-            "statusSuccess": { "description": "Bildschirmlesegerät-Anmerkung für Daten mit Erfolgsstatus." },
-            "statusWarning": { "description": "Bildschirmlesegerät-Anmerkung für Daten mit Warnungsstatus." },
-            "statusDanger": { "description": "Bildschirmlesegerät-Anmerkung für Daten mit Gefahrenstatus." },
-            "statusInfo": { "description": "Bildschirmlesegerät-Anmerkung für Daten mit Informationsstatus." },
-            "calendarLabel": { "description": "Barrierefreies Label für das Kalender-Raster (<code>role=\"grid\"</code>)." },
-            "keyboardInstructions": { "description": "Anweisungen, die Bildschirmlesegerät-Benutzern mitgeteilt werden, wie sie den Kalender mit der Tastatur navigieren können." },
-            "monthNavigated": { "description": "Live-Ankündigung, wenn sich der sichtbare Monat ändert. Unterstützt die Platzhalter <code>{month}</code> und <code>{year}</code>." },
-            "rangeStart": { "description": "Live-Ankündigung, wenn der Beginn eines Datumsbereichs ausgewählt wird." },
-            "rangeComplete": { "description": "Live-Ankündigung, wenn ein vollständiger Datumsbereich ausgewählt wurde." },
-            "weekNumberLabel": { "description": "Barrierefreies Label für jede Wochennummern-Zelle. Unterstützt den Platzhalter <code>{week}</code>." }
+            "ariaToday": {
+              "description": "Bildschirmlesegerät-Anmerkung, die der Zelle des heutigen Datums hinzugefügt wird."
+            },
+            "selected": {
+              "description": "Bildschirmlesegerät-Anmerkung, die den ausgewählten Tageszellen hinzugefügt wird."
+            },
+            "inRange": {
+              "description": "Bildschirmlesegerät-Anmerkung, die den Tageszellen innerhalb eines ausgewählten Bereichs hinzugefügt wird."
+            },
+            "ariaDisabled": {
+              "description": "Bildschirmlesegerät-Anmerkung, die den deaktivierten Tageszellen hinzugefügt wird."
+            },
+            "statusSuccess": {
+              "description": "Bildschirmlesegerät-Anmerkung für Daten mit Erfolgsstatus."
+            },
+            "statusWarning": {
+              "description": "Bildschirmlesegerät-Anmerkung für Daten mit Warnungsstatus."
+            },
+            "statusDanger": {
+              "description": "Bildschirmlesegerät-Anmerkung für Daten mit Gefahrenstatus."
+            },
+            "statusInfo": {
+              "description": "Bildschirmlesegerät-Anmerkung für Daten mit Informationsstatus."
+            },
+            "calendarLabel": {
+              "description": "Barrierefreies Label für das Kalender-Raster (<code>role=\"grid\"</code>)."
+            },
+            "keyboardInstructions": {
+              "description": "Anweisungen, die Bildschirmlesegerät-Benutzern mitgeteilt werden, wie sie den Kalender mit der Tastatur navigieren können."
+            },
+            "monthNavigated": {
+              "description": "Live-Ankündigung, wenn sich der sichtbare Monat ändert. Unterstützt die Platzhalter <code>{month}</code> und <code>{year}</code>."
+            },
+            "rangeStart": {
+              "description": "Live-Ankündigung, wenn der Beginn eines Datumsbereichs ausgewählt wird."
+            },
+            "rangeComplete": {
+              "description": "Live-Ankündigung, wenn ein vollständiger Datumsbereich ausgewählt wurde."
+            },
+            "weekNumberLabel": {
+              "description": "Barrierefreies Label für jede Wochennummern-Zelle. Unterstützt den Platzhalter <code>{week}</code>."
+            }
           }
         }
       },
@@ -1520,13 +1750,27 @@
             "liveRegion": "Live-Region"
           },
           "rows": {
-            "grid": { "description": "Das Tages-Raster verwendet <code>role=\"grid\"</code>, um die Pfeiltastennavigation zwischen Zellen zu ermöglichen." },
-            "gridLabel": { "description": "Das Raster erhält seine Beschriftung vom i18n-Token <code>calendar.a11y.calendarLabel</code>." },
-            "columnHeader": { "description": "Wochentag-Header verwenden <code>role=\"columnheader\"</code> mit dem vollständigen Tagesnamen als barrierefreies Label." },
-            "gridcell": { "description": "Jede Tageszelle verwendet <code>role=\"gridcell\"</code>." },
-            "selected": { "description": "Ausgewählte Tageszellen exponieren <code>aria-selected=\"true\"</code>." },
-            "disabled": { "description": "Deaktivierte Tageszellen exponieren <code>aria-disabled=\"true\"</code>." },
-            "liveRegion": { "description": "Eine versteckte <code>aria-live=\"polite\"</code>-Region kündigt die Monatsnavigation für Bildschirmlesegeräte an." }
+            "grid": {
+              "description": "Das Tages-Raster verwendet <code>role=\"grid\"</code>, um die Pfeiltastennavigation zwischen Zellen zu ermöglichen."
+            },
+            "gridLabel": {
+              "description": "Das Raster erhält seine Beschriftung vom i18n-Token <code>calendar.a11y.calendarLabel</code>."
+            },
+            "columnHeader": {
+              "description": "Wochentag-Header verwenden <code>role=\"columnheader\"</code> mit dem vollständigen Tagesnamen als barrierefreies Label."
+            },
+            "gridcell": {
+              "description": "Jede Tageszelle verwendet <code>role=\"gridcell\"</code>."
+            },
+            "selected": {
+              "description": "Ausgewählte Tageszellen exponieren <code>aria-selected=\"true\"</code>."
+            },
+            "disabled": {
+              "description": "Deaktivierte Tageszellen exponieren <code>aria-disabled=\"true\"</code>."
+            },
+            "liveRegion": {
+              "description": "Eine versteckte <code>aria-live=\"polite\"</code>-Region kündigt die Monatsnavigation für Bildschirmlesegeräte an."
+            }
           }
         },
         "naming": {
@@ -1544,9 +1788,15 @@
             "ariaTokens": "Tokens calendar.aria.*"
           },
           "rows": {
-            "grid": { "description": "Das Kalender-Raster erhält seinen barrierefreien Namen vom Token <code>calendar.a11y.calendarLabel</code>." },
-            "dayButton": { "description": "Der barrierefreie Name jeder Tages-Schaltfläche ist der formatierte Datumsstring (z. B. 'Dienstag, 10. Dezember 2024')." },
-            "stateAnnotation": { "description": "Die Status-Tokens (<code>calendar.aria.today</code>, <code>selected</code> usw.) werden zur Datumsbeschriftung hinzugefügt, um den Status für Bildschirmlesegeräte zu kommunizieren." }
+            "grid": {
+              "description": "Das Kalender-Raster erhält seinen barrierefreien Namen vom Token <code>calendar.a11y.calendarLabel</code>."
+            },
+            "dayButton": {
+              "description": "Der barrierefreie Name jeder Tages-Schaltfläche ist der formatierte Datumsstring (z. B. 'Dienstag, 10. Dezember 2024')."
+            },
+            "stateAnnotation": {
+              "description": "Die Status-Tokens (<code>calendar.aria.today</code>, <code>selected</code> usw.) werden zur Datumsbeschriftung hinzugefügt, um den Status für Bildschirmlesegeräte zu kommunizieren."
+            }
           }
         },
         "keyboard": {
@@ -1560,7 +1810,9 @@
             "pageUp": { "description": "Navigiert zum vorherigen Monat." },
             "pageDown": { "description": "Navigiert zum nächsten Monat." },
             "spaceEnter": { "description": "Wählt den fokussierten Tag aus." },
-            "escape": { "description": "Schließt das Kalender-Popover und gibt den Fokus an den Auslöser zurück." }
+            "escape": {
+              "description": "Schließt das Kalender-Popover und gibt den Fokus an den Auslöser zurück."
+            }
           }
         }
       }
@@ -1665,13 +1917,27 @@
           "description": "Der Paginierung-Komponente verwendet i18n-Tokens für Navigationsschaltflächenbeschriftungen, Elementbereichsmeldungen und die Seitengrößenauswahl.",
           "note": "Überschreiben Sie Tokens mit <code>provideNuiI18n({ paginator: { ... } })</code>.",
           "rows": {
-            "firstPage": { "description": "Barrierefreie Beschriftung der Schaltfläche 'Erste Seite'." },
-            "previousPage": { "description": "Barrierefreie Beschriftung der Schaltfläche 'Vorherige Seite'." },
-            "nextPage": { "description": "Barrierefreie Beschriftung der Schaltfläche 'Nächste Seite'." },
-            "lastPage": { "description": "Barrierefreie Beschriftung der Schaltfläche 'Letzte Seite'." },
-            "itemsPerPage": { "description": "Beschriftung des Auswählers für die Anzahl der Elemente pro Seite." },
-            "of": { "description": "Verbindungswort 'von' im Bereichstext (z. B. '1–10 von 100')." },
-            "jumpToPage": { "description": "Platzhalter oder Beschriftung des Seitensprung-Eingabefelds." }
+            "firstPage": {
+              "description": "Barrierefreie Beschriftung der Schaltfläche 'Erste Seite'."
+            },
+            "previousPage": {
+              "description": "Barrierefreie Beschriftung der Schaltfläche 'Vorherige Seite'."
+            },
+            "nextPage": {
+              "description": "Barrierefreie Beschriftung der Schaltfläche 'Nächste Seite'."
+            },
+            "lastPage": {
+              "description": "Barrierefreie Beschriftung der Schaltfläche 'Letzte Seite'."
+            },
+            "itemsPerPage": {
+              "description": "Beschriftung des Auswählers für die Anzahl der Elemente pro Seite."
+            },
+            "of": {
+              "description": "Verbindungswort 'von' im Bereichstext (z. B. '1–10 von 100')."
+            },
+            "jumpToPage": {
+              "description": "Platzhalter oder Beschriftung des Seitensprung-Eingabefelds."
+            }
           }
         },
         "a11yTokens": {
@@ -1679,7 +1945,9 @@
           "description": "Zusätzliche Tokens für Bildschirmlesegerät-Ankündigungen und ARIA-Attribute des Paginators.",
           "note": "Diese Tokens werden unter <code>paginator.a11y</code> lokalisiert.",
           "rows": {
-            "pageLabel": { "description": "Textmuster, das bei einem Seitenwechsel angesagt wird (z. B. 'Seite 3 von 10')." },
+            "pageLabel": {
+              "description": "Textmuster, das bei einem Seitenwechsel angesagt wird (z. B. 'Seite 3 von 10')."
+            },
             "navigation": { "description": "Aria-Label für den Navigationsbereich des Paginators." }
           }
         }
@@ -1695,9 +1963,15 @@
             "currentPage": "Aktuelle Seite"
           },
           "rows": {
-            "navRole": { "description": "Der Wurzelcontainer des Paginators hat <code>role=\"navigation\"</code> und <code>aria-label</code> aus dem i18n-Token <code>navigation</code>." },
-            "buttonLabels": { "description": "Die Schaltflächen erste/vorherige/nächste/letzte Seite haben <code>aria-label</code> aus den entsprechenden i18n-Tokens." },
-            "ariaCurrent": { "description": "Die aktive Seiten-Schaltfläche trägt <code>aria-current=\"page\"</code>." }
+            "navRole": {
+              "description": "Der Wurzelcontainer des Paginators hat <code>role=\"navigation\"</code> und <code>aria-label</code> aus dem i18n-Token <code>navigation</code>."
+            },
+            "buttonLabels": {
+              "description": "Die Schaltflächen erste/vorherige/nächste/letzte Seite haben <code>aria-label</code> aus den entsprechenden i18n-Tokens."
+            },
+            "ariaCurrent": {
+              "description": "Die aktive Seiten-Schaltfläche trägt <code>aria-current=\"page\"</code>."
+            }
           }
         },
         "naming": {
@@ -1715,17 +1989,27 @@
             "ariaCurrentPage": "aria-current='page'"
           },
           "rows": {
-            "nav": { "description": "Der Navigationsbereich verwendet das Token <code>navigation</code> als <code>aria-label</code>." },
-            "buttons": { "description": "Jede Navigationsschaltfläche verwendet ihr spezifisches i18n-Token als barrierefreie Beschriftung." },
-            "current": { "description": "Die aktive Seite trägt <code>aria-current=\"page\"</code>, damit Bildschirmlesegeräte sie identifizieren können." }
+            "nav": {
+              "description": "Der Navigationsbereich verwendet das Token <code>navigation</code> als <code>aria-label</code>."
+            },
+            "buttons": {
+              "description": "Jede Navigationsschaltfläche verwendet ihr spezifisches i18n-Token als barrierefreie Beschriftung."
+            },
+            "current": {
+              "description": "Die aktive Seite trägt <code>aria-current=\"page\"</code>, damit Bildschirmlesegeräte sie identifizieren können."
+            }
           }
         },
         "keyboard": {
           "title": "Tastaturinteraktion",
           "description": "Der Paginator ist vollständig per Tastatur navigierbar mit Standard-Schaltflächeninteraktion.",
           "rows": {
-            "tab": { "description": "Tab bewegt den Fokus zwischen Schaltflächen und Steuerelementen des Paginators." },
-            "enterSpace": { "description": "Aktiviert die fokussierte Schaltfläche und navigiert zur entsprechenden Seite." }
+            "tab": {
+              "description": "Tab bewegt den Fokus zwischen Schaltflächen und Steuerelementen des Paginators."
+            },
+            "enterSpace": {
+              "description": "Aktiviert die fokussierte Schaltfläche und navigiert zur entsprechenden Seite."
+            }
           }
         }
       }
@@ -1843,10 +2127,18 @@
             "popover": "Popover-Panel"
           },
           "rows": {
-            "ariaExpanded": { "description": "Der Auslöser trägt <code>aria-expanded</code>, das widerspiegelt, ob der Popover sichtbar (<code>true</code>) oder nicht (<code>false</code>) ist." },
-            "ariaControls": { "description": "<code>aria-controls</code> am Auslöser verweist auf die <code>id</code> des Popover-Panels." },
-            "ariaHaspopup": { "description": "<code>aria-haspopup=\"dialog\"</code> gibt an, dass der Auslöser ein interaktives Inhaltspanel öffnet." },
-            "popoverRole": { "description": "Das Popover-Panel hat <code>role=\"dialog\"</code> und <code>aria-label</code>, das aus seinem Titel oder Inhalt abgeleitet wird." }
+            "ariaExpanded": {
+              "description": "Der Auslöser trägt <code>aria-expanded</code>, das widerspiegelt, ob der Popover sichtbar (<code>true</code>) oder nicht (<code>false</code>) ist."
+            },
+            "ariaControls": {
+              "description": "<code>aria-controls</code> am Auslöser verweist auf die <code>id</code> des Popover-Panels."
+            },
+            "ariaHaspopup": {
+              "description": "<code>aria-haspopup=\"dialog\"</code> gibt an, dass der Auslöser ein interaktives Inhaltspanel öffnet."
+            },
+            "popoverRole": {
+              "description": "Das Popover-Panel hat <code>role=\"dialog\"</code> und <code>aria-label</code>, das aus seinem Titel oder Inhalt abgeleitet wird."
+            }
           }
         },
         "naming": {
@@ -1862,17 +2154,27 @@
             "panelLabel": "aria-label des Panels"
           },
           "rows": {
-            "trigger": { "description": "Der Auslöser muss seinen eigenen barrierefreien Namen haben (sichtbarer Text, aria-label…), der die Aktion zum Öffnen des Popovers beschreibt." },
-            "panel": { "description": "Das Popover-Panel erhält seinen barrierefreien Namen aus dem sichtbaren Titel oder einem expliziten <code>aria-label</code>." }
+            "trigger": {
+              "description": "Der Auslöser muss seinen eigenen barrierefreien Namen haben (sichtbarer Text, aria-label…), der die Aktion zum Öffnen des Popovers beschreibt."
+            },
+            "panel": {
+              "description": "Das Popover-Panel erhält seinen barrierefreien Namen aus dem sichtbaren Titel oder einem expliziten <code>aria-label</code>."
+            }
           }
         },
         "keyboard": {
           "title": "Tastaturinteraktion",
           "description": "Der Popover folgt dem WAI-ARIA Nicht-Modal-Dialog-Tastaturmuster.",
           "rows": {
-            "enterSpace": { "description": "Öffnet oder schließt den Popover, wenn der Auslöser fokussiert ist." },
-            "escape": { "description": "Schließt den Popover und gibt den Fokus an den Auslöser zurück." },
-            "tab": { "description": "Wechselt den Fokus zwischen interaktiven Elementen innerhalb des geöffneten Panels." }
+            "enterSpace": {
+              "description": "Öffnet oder schließt den Popover, wenn der Auslöser fokussiert ist."
+            },
+            "escape": {
+              "description": "Schließt den Popover und gibt den Fokus an den Auslöser zurück."
+            },
+            "tab": {
+              "description": "Wechselt den Fokus zwischen interaktiven Elementen innerhalb des geöffneten Panels."
+            }
           }
         }
       }
@@ -1978,7 +2280,9 @@
           "description": "Der Toast verwendet ein i18n-Token für die Schließen-Schaltfläche, das allen Instanzen als barrierefreies Label dient.",
           "note": "Überschreiben Sie das Token mit <code>provideNuiI18n({ toast: { ... } })</code>.",
           "rows": {
-            "close": { "description": "Barrierefreies Label der Schließen-Schaltfläche, das von Bildschirmlesegeräten vorgelesen wird." }
+            "close": {
+              "description": "Barrierefreies Label der Schließen-Schaltfläche, das von Bildschirmlesegeräten vorgelesen wird."
+            }
           }
         }
       },
@@ -1991,10 +2295,18 @@
             "closeButton": "Schließen-Schaltfläche"
           },
           "rows": {
-            "ariaLive": { "description": "Der Host-Container hat <code>aria-live=\"polite\"</code> (Informationsmeldungen) oder <code>aria-live=\"assertive\"</code> (Fehlermeldungen)." },
-            "ariaAtomic": { "description": "<code>aria-atomic=\"true\"</code> stellt sicher, dass der gesamte Toast-Inhalt als eine Einheit angesagt wird." },
-            "ariaLabel": { "description": "Der Toast-Container kann ein <code>aria-label</code> erhalten, das den Benachrichtigungsbereich identifiziert." },
-            "closeLabel": { "description": "Die Schließen-Schaltfläche hat <code>aria-label</code> aus dem i18n-Token <code>close</code>." }
+            "ariaLive": {
+              "description": "Der Host-Container hat <code>aria-live=\"polite\"</code> (Informationsmeldungen) oder <code>aria-live=\"assertive\"</code> (Fehlermeldungen)."
+            },
+            "ariaAtomic": {
+              "description": "<code>aria-atomic=\"true\"</code> stellt sicher, dass der gesamte Toast-Inhalt als eine Einheit angesagt wird."
+            },
+            "ariaLabel": {
+              "description": "Der Toast-Container kann ein <code>aria-label</code> erhalten, das den Benachrichtigungsbereich identifiziert."
+            },
+            "closeLabel": {
+              "description": "Die Schließen-Schaltfläche hat <code>aria-label</code> aus dem i18n-Token <code>close</code>."
+            }
           }
         },
         "naming": {
@@ -2012,17 +2324,27 @@
             "toastType": "Toast-Typ (info, success, warning, error)"
           },
           "rows": {
-            "withTitle": { "description": "Wenn ein Titel vorhanden ist, wird er als erste Information vom Bildschirmlesegerät angesagt." },
-            "withMessage": { "description": "Der Meldungstext ergänzt den Titel oder dient als alleinige Ankündigung." },
-            "typeFallback": { "description": "Wenn weder Titel noch Meldung vorhanden sind, dient der Toast-Typ (z. B. 'Fehler') als Fallback-Ankündigung." }
+            "withTitle": {
+              "description": "Wenn ein Titel vorhanden ist, wird er als erste Information vom Bildschirmlesegerät angesagt."
+            },
+            "withMessage": {
+              "description": "Der Meldungstext ergänzt den Titel oder dient als alleinige Ankündigung."
+            },
+            "typeFallback": {
+              "description": "Wenn weder Titel noch Meldung vorhanden sind, dient der Toast-Typ (z. B. 'Fehler') als Fallback-Ankündigung."
+            }
           }
         },
         "keyboard": {
           "title": "Tastaturinteraktion",
           "description": "Toasts sind nicht-modale Benachrichtigungen. Nur interaktive Elemente (Schließen-Schaltfläche, Aktionslinks) sind per Tastatur erreichbar.",
           "rows": {
-            "tab": { "description": "Tab setzt den Fokus auf die Schließen-Schaltfläche oder Aktionslinks innerhalb des Toasts." },
-            "spaceEnter": { "description": "Aktiviert die fokussierte Schließen-Schaltfläche oder Aktion." }
+            "tab": {
+              "description": "Tab setzt den Fokus auf die Schließen-Schaltfläche oder Aktionslinks innerhalb des Toasts."
+            },
+            "spaceEnter": {
+              "description": "Aktiviert die fokussierte Schließen-Schaltfläche oder Aktion."
+            }
           }
         }
       }
@@ -2192,12 +2514,24 @@
             "backdrop": "Hintergrundüberlagerung"
           },
           "rows": {
-            "panelRole": { "description": "Das Wurzelelement hat <code>role=\"complementary\"</code> und identifiziert den Panel-Bereich auf der Seite." },
-            "ariaLabelledby": { "description": "<code>aria-labelledby</code> verweist auf den Titel des Panels, der als barrierefreier Name dient." },
-            "closeLabel": { "description": "Die Schließen-Schaltfläche verwendet das i18n-Token <code>close</code> als <code>aria-label</code>." },
-            "minimizeLabel": { "description": "Die Minimieren/Wiederherstellen-Schaltfläche wechselt ihr <code>aria-label</code> zwischen token <code>minimize</code> und <code>restore</code>." },
-            "expandLabel": { "description": "Die Vergrößern/Verkleinern-Schaltfläche wechselt ihr <code>aria-label</code> zwischen token <code>expand</code> und <code>collapse</code>." },
-            "backdropHidden": { "description": "Die Hintergrundüberlagerung ist mit <code>aria-hidden=\"true\"</code> vor Bildschirmlesegeräten verborgen." }
+            "panelRole": {
+              "description": "Das Wurzelelement hat <code>role=\"complementary\"</code> und identifiziert den Panel-Bereich auf der Seite."
+            },
+            "ariaLabelledby": {
+              "description": "<code>aria-labelledby</code> verweist auf den Titel des Panels, der als barrierefreier Name dient."
+            },
+            "closeLabel": {
+              "description": "Die Schließen-Schaltfläche verwendet das i18n-Token <code>close</code> als <code>aria-label</code>."
+            },
+            "minimizeLabel": {
+              "description": "Die Minimieren/Wiederherstellen-Schaltfläche wechselt ihr <code>aria-label</code> zwischen token <code>minimize</code> und <code>restore</code>."
+            },
+            "expandLabel": {
+              "description": "Die Vergrößern/Verkleinern-Schaltfläche wechselt ihr <code>aria-label</code> zwischen token <code>expand</code> und <code>collapse</code>."
+            },
+            "backdropHidden": {
+              "description": "Die Hintergrundüberlagerung ist mit <code>aria-hidden=\"true\"</code> vor Bildschirmlesegeräten verborgen."
+            }
           }
         },
         "naming": {
@@ -2213,17 +2547,27 @@
             "i18nToken": "i18n-Token"
           },
           "rows": {
-            "panel": { "description": "Das Panel verwendet seinen sichtbaren Titeltext als barrierefreien Namen über <code>aria-labelledby</code>." },
-            "buttons": { "description": "Alle Steuerungsschaltflächen verwenden ihre i18n-Tokens als barrierefreie Beschriftungen." }
+            "panel": {
+              "description": "Das Panel verwendet seinen sichtbaren Titeltext als barrierefreien Namen über <code>aria-labelledby</code>."
+            },
+            "buttons": {
+              "description": "Alle Steuerungsschaltflächen verwenden ihre i18n-Tokens als barrierefreie Beschriftungen."
+            }
           }
         },
         "keyboard": {
           "title": "Tastaturinteraktion",
           "description": "Das Sidebar-Panel unterstützt Tastaturnavigation und Fokus-Trapping, wenn es als modales Overlay geöffnet ist.",
           "rows": {
-            "escape": { "description": "Schließt das Panel, wenn es geöffnet ist und der Fokus sich innerhalb des Panels befindet." },
-            "tab": { "description": "Tab wechselt zwischen den fokussierbaren Elementen innerhalb des Panels." },
-            "spaceEnter": { "description": "Aktiviert die fokussierte Steuerungsschaltfläche (Schließen, Minimieren, Vergrößern)." }
+            "escape": {
+              "description": "Schließt das Panel, wenn es geöffnet ist und der Fokus sich innerhalb des Panels befindet."
+            },
+            "tab": {
+              "description": "Tab wechselt zwischen den fokussierbaren Elementen innerhalb des Panels."
+            },
+            "spaceEnter": {
+              "description": "Aktiviert die fokussierte Steuerungsschaltfläche (Schließen, Minimieren, Vergrößern)."
+            }
           }
         }
       }
@@ -2306,8 +2650,12 @@
             "tooltip": "Tooltip-Element"
           },
           "rows": {
-            "ariaDescribedby": { "description": "Das Auslöserelement hat <code>aria-describedby</code>, das auf die <code>id</code> des Tooltips zeigt, wenn dieser sichtbar ist." },
-            "tooltipRole": { "description": "Das Tooltip-Element hat <code>role=\"tooltip\"</code>, damit Bildschirmlesegeräte es als zusätzliche Beschreibung behandeln." }
+            "ariaDescribedby": {
+              "description": "Das Auslöserelement hat <code>aria-describedby</code>, das auf die <code>id</code> des Tooltips zeigt, wenn dieser sichtbar ist."
+            },
+            "tooltipRole": {
+              "description": "Das Tooltip-Element hat <code>role=\"tooltip\"</code>, damit Bildschirmlesegeräte es als zusätzliche Beschreibung behandeln."
+            }
           }
         },
         "naming": {
@@ -2323,16 +2671,24 @@
             "tooltipId": "Tooltip-ID (aria-describedby)"
           },
           "rows": {
-            "trigger": { "description": "Das Auslöserelement muss seinen eigenen barrierefreien Namen haben (unabhängig vom Tooltip)." },
-            "tooltip": { "description": "Der Text des Tooltips wird als zusätzliche Beschreibung des Auslösers angekündigt, wenn das Auslöserelement fokussiert wird." }
+            "trigger": {
+              "description": "Das Auslöserelement muss seinen eigenen barrierefreien Namen haben (unabhängig vom Tooltip)."
+            },
+            "tooltip": {
+              "description": "Der Text des Tooltips wird als zusätzliche Beschreibung des Auslösers angekündigt, wenn das Auslöserelement fokussiert wird."
+            }
           }
         },
         "keyboard": {
           "title": "Tastaturinteraktion",
           "description": "Der Tooltip erscheint, wenn das Auslöserelement fokussiert wird, und verschwindet, wenn der Fokus verloren geht.",
           "rows": {
-            "tab": { "description": "Tab setzt den Fokus auf das Auslöserelement; der Tooltip erscheint automatisch." },
-            "escape": { "description": "Schließt den Tooltip, während der Fokus auf dem Auslöser verbleibt." }
+            "tab": {
+              "description": "Tab setzt den Fokus auf das Auslöserelement; der Tooltip erscheint automatisch."
+            },
+            "escape": {
+              "description": "Schließt den Tooltip, während der Fokus auf dem Auslöser verbleibt."
+            }
           }
         }
       }
@@ -2444,17 +2800,29 @@
           "description": "Die Zeitauswahl-Komponente bietet umfangreiche i18n-Tokens für Schaltflächen, Spalten-Header und Barrierefreiheits-Meldungen.",
           "note": "Überschreiben Sie Tokens mit <code>provideNuiI18n({ timePicker: { ... } })</code>.",
           "rows": {
-            "setToCurrentTime": { "description": "Beschriftung der Schaltfläche, die die Zeit auf die aktuelle Systemzeit setzt." },
-            "selectTime": { "description": "Platzhaltertext oder Titel für das Zeitauswahl-Steuerelement." },
-            "clear": { "description": "Beschriftung der Schaltfläche zum Zurücksetzen der Auswahl." },
+            "setToCurrentTime": {
+              "description": "Beschriftung der Schaltfläche, die die Zeit auf die aktuelle Systemzeit setzt."
+            },
+            "selectTime": {
+              "description": "Platzhaltertext oder Titel für das Zeitauswahl-Steuerelement."
+            },
+            "clear": {
+              "description": "Beschriftung der Schaltfläche zum Zurücksetzen der Auswahl."
+            },
             "hour": { "description": "Spalten-Header-Beschriftung für die Stunden-Spalte." },
             "minutes": { "description": "Spalten-Header-Beschriftung für die Minuten-Spalte." },
             "hour12": { "description": "Beschriftung beim 12-Stunden-Anzeigeformat." },
             "hour24": { "description": "Beschriftung beim 24-Stunden-Anzeigeformat." },
             "period": { "description": "Spalten-Header-Beschriftung für die AM/PM-Spalte." },
-            "normalizedTime": { "description": "Nachricht, die angezeigt wird, wenn die eingegebene Zeit auf den nächsten gültigen Schritt normalisiert wurde." },
-            "rangeLabel": { "description": "Beschriftung, die den Zeitraum-Bereich angibt (Anfang/Ende)." },
-            "timeSelected": { "description": "Live-Region-Nachricht, die angesagt wird, wenn eine Zeit ausgewählt wird." }
+            "normalizedTime": {
+              "description": "Nachricht, die angezeigt wird, wenn die eingegebene Zeit auf den nächsten gültigen Schritt normalisiert wurde."
+            },
+            "rangeLabel": {
+              "description": "Beschriftung, die den Zeitraum-Bereich angibt (Anfang/Ende)."
+            },
+            "timeSelected": {
+              "description": "Live-Region-Nachricht, die angesagt wird, wenn eine Zeit ausgewählt wird."
+            }
           }
         },
         "durationAndPresets": {
@@ -2462,22 +2830,43 @@
           "description": "Tokens für den Dauer-Picker-Modus und voreingestellte Zeitwerte.",
           "note": "Diese Tokens werden im Namespace <code>timePicker.duration</code> und <code>timePicker.presets</code> lokalisiert.",
           "rows": {
-            "hours": { "description": "Vollständige Beschriftung der Stunden-Einheit (z. B. 'Stunden')." },
+            "hours": {
+              "description": "Vollständige Beschriftung der Stunden-Einheit (z. B. 'Stunden')."
+            },
             "minutes": { "description": "Vollständige Beschriftung der Minuten-Einheit." },
             "seconds": { "description": "Vollständige Beschriftung der Sekunden-Einheit." },
-            "hoursShort": { "description": "Abgekürzte Beschriftung der Stunden-Einheit (z. B. 'Std.')." },
+            "hoursShort": {
+              "description": "Abgekürzte Beschriftung der Stunden-Einheit (z. B. 'Std.')."
+            },
             "minutesShort": { "description": "Abgekürzte Beschriftung der Minuten-Einheit." },
             "secondsShort": { "description": "Abgekürzte Beschriftung der Sekunden-Einheit." },
-            "selectDuration": { "description": "Platzhalter-/Titeltext für das Dauer-Steuerelement." },
-            "durationSelected": { "description": "Live-Region-Meldung beim Auswählen einer Dauer." },
+            "selectDuration": {
+              "description": "Platzhalter-/Titeltext für das Dauer-Steuerelement."
+            },
+            "durationSelected": {
+              "description": "Live-Region-Meldung beim Auswählen einer Dauer."
+            },
+            "durationHours": {
+              "description": "Live-Region-Meldung für den Stundenwert im Dauer-Modus."
+            },
+            "durationMinutes": {
+              "description": "Live-Region-Meldung für den Minutenwert im Dauer-Modus."
+            },
+            "durationSeconds": {
+              "description": "Live-Region-Meldung für den Sekundenwert im Dauer-Modus."
+            },
             "tabSelector": { "description": "Beschriftung des Reiters für den Zeitauswahl-Modus." },
-            "tabPresets": { "description": "Beschriftung des Reiters für den Voreinstellungs-Modus." },
-            "presetNow": { "description": "Voreinstellung 'Jetzt': aktuelle Systemzeit." },
-            "presetNoon": { "description": "Voreinstellung 'Mittag': 12:00 PM." },
-            "presetMidnight": { "description": "Voreinstellung 'Mitternacht': 00:00." },
-            "presetMinutes": { "description": "Voreinstellungstext für Minuten-Schritte (z. B. '15 Minuten')." },
-            "presetHour": { "description": "Voreinstellung für einen einzelnen Stundenwert." },
-            "presetHours": { "description": "Voreinstellung für mehrere Stunden." }
+            "tabPresets": {
+              "description": "Beschriftung des Reiters für den Voreinstellungs-Modus."
+            },
+            "presetsNow": { "description": "Voreinstellung 'Jetzt': aktuelle Systemzeit." },
+            "presetsNoon": { "description": "Voreinstellung 'Mittag': 12:00 PM." },
+            "presetsMidnight": { "description": "Voreinstellung 'Mitternacht': 00:00." },
+            "presetsMinutes": {
+              "description": "Voreinstellungstext für Minuten-Schritte (z. B. '15 Minuten')."
+            },
+            "presetsHour": { "description": "Voreinstellung für einen einzelnen Stundenwert." },
+            "presetsHours": { "description": "Voreinstellung für mehrere Stunden." }
           }
         },
         "a11yTokens": {
@@ -2487,11 +2876,21 @@
           "rows": {
             "timePickerLabel": { "description": "Aria-Label des gesamten Zeitauswahl-Containers." },
             "durationPickerLabel": { "description": "Aria-Label des Dauer-Picker-Containers." },
-            "hourColumnHelp": { "description": "Hilfetext für Bildschirmlesegeräte zur Navigation in der Stunden-Spalte." },
-            "minuteColumnHelp": { "description": "Hilfetext für Bildschirmlesegeräte zur Navigation in der Minuten-Spalte." },
-            "periodHelp": { "description": "Hilfetext für Bildschirmlesegeräte zur Navigation in der AM/PM-Spalte." },
-            "normalizedAlert": { "description": "Meldung, die angesagt wird, wenn die Zeit normalisiert wurde." },
-            "rangeInfo": { "description": "Text, der den Zeitbereich-Kontext angibt (Start-/Endauswahl)." }
+            "hourColumnHelp": {
+              "description": "Hilfetext für Bildschirmlesegeräte zur Navigation in der Stunden-Spalte."
+            },
+            "minuteColumnHelp": {
+              "description": "Hilfetext für Bildschirmlesegeräte zur Navigation in der Minuten-Spalte."
+            },
+            "periodHelp": {
+              "description": "Hilfetext für Bildschirmlesegeräte zur Navigation in der AM/PM-Spalte."
+            },
+            "normalizedAlert": {
+              "description": "Meldung, die angesagt wird, wenn die Zeit normalisiert wurde."
+            },
+            "rangeInfo": {
+              "description": "Text, der den Zeitbereich-Kontext angibt (Start-/Endauswahl)."
+            }
           }
         }
       },
@@ -2506,10 +2905,18 @@
             "normalizedAlert": "Normalisierungs-Livestream"
           },
           "rows": {
-            "containerRole": { "description": "Der Haupt-Container hat <code>role=\"group\"</code> und <code>aria-label</code> aus dem i18n-Token <code>timePickerLabel</code>." },
-            "columnRole": { "description": "Jede Zeiteinheit-Spalte (Stunden, Minuten, AM/PM) hat <code>role=\"listbox\"</code> mit einem aussagekräftigen <code>aria-label</code>." },
-            "optionRole": { "description": "Jeder auswahl­bare Zeitwert hat <code>role=\"option\"</code> und <code>aria-selected=\"true\"</code>, wenn er aktiv ist." },
-            "alertRole": { "description": "Das Element für Normalisierungsmeldungen hat <code>role=\"alert\"</code>, um geänderte Zeitwerte unmittelbar anzukundigen." }
+            "containerRole": {
+              "description": "Der Haupt-Container hat <code>role=\"group\"</code> und <code>aria-label</code> aus dem i18n-Token <code>timePickerLabel</code>."
+            },
+            "columnRole": {
+              "description": "Jede Zeiteinheit-Spalte (Stunden, Minuten, AM/PM) hat <code>role=\"listbox\"</code> mit einem aussagekräftigen <code>aria-label</code>."
+            },
+            "optionRole": {
+              "description": "Jeder auswahl­bare Zeitwert hat <code>role=\"option\"</code> und <code>aria-selected=\"true\"</code>, wenn er aktiv ist."
+            },
+            "alertRole": {
+              "description": "Das Element für Normalisierungsmeldungen hat <code>role=\"alert\"</code>, um geänderte Zeitwerte unmittelbar anzukundigen."
+            }
           }
         },
         "naming": {
@@ -2525,18 +2932,30 @@
             "optionValue": "Numerischer Zeitwert"
           },
           "rows": {
-            "column": { "description": "Spalten verwenden ihre i18n-Tokens ('Stunden', 'Minuten', 'Period') als barrierefreie Beschriftungen." },
-            "option": { "description": "Jede Option enthält den sichtbaren Wert (z. B. '07') ergänzt durch Spaltenkontext." }
+            "column": {
+              "description": "Spalten verwenden ihre i18n-Tokens ('Stunden', 'Minuten', 'Period') als barrierefreie Beschriftungen."
+            },
+            "option": {
+              "description": "Jede Option enthält den sichtbaren Wert (z. B. '07') ergänzt durch Spaltenkontext."
+            }
           }
         },
         "keyboard": {
           "title": "Tastaturinteraktion",
           "description": "Jede Spalte des Zeitauswahl verhält sich wie eine Listbox mit Pfeiltastennavigation.",
           "rows": {
-            "arrowUpDown": { "description": "Pfeiltasten oben/unten scrollen die fokussierte Spalte zum vorherigen/nächsten Zeitwert." },
-            "tab": { "description": "Tab wechselt den Fokus zwischen Spalten und aktions-Schaltflächen." },
-            "homeEnd": { "description": "Pos1 / Ende springt zum ersten / letzten Wert der Spalte." },
-            "spaceEnter": { "description": "Bestätigt den ausgewählten Wert innerhalb der Spalte." },
+            "arrowUpDown": {
+              "description": "Pfeiltasten oben/unten scrollen die fokussierte Spalte zum vorherigen/nächsten Zeitwert."
+            },
+            "tab": {
+              "description": "Tab wechselt den Fokus zwischen Spalten und aktions-Schaltflächen."
+            },
+            "homeEnd": {
+              "description": "Pos1 / Ende springt zum ersten / letzten Wert der Spalte."
+            },
+            "spaceEnter": {
+              "description": "Bestätigt den ausgewählten Wert innerhalb der Spalte."
+            },
             "escape": { "description": "Schließt die Zeitauswahl ohne Auswahländerung." }
           }
         }
@@ -2652,7 +3071,9 @@
           "description": "Der FAB-Button verwendet ein i18n-Token für das Aria-Label der Auslöser-Schaltfläche.",
           "note": "Überschreiben Sie das Token mit <code>provideNuiI18n({ fabButton: { ... } })</code>.",
           "rows": {
-            "triggerAriaLabel": { "description": "Aria-Label der Auslöser-Schaltfläche. Beschreibt die Schaltflächenfunktion für Bildschirmlesegeräte." }
+            "triggerAriaLabel": {
+              "description": "Aria-Label der Auslöser-Schaltfläche. Beschreibt die Schaltflächenfunktion für Bildschirmlesegeräte."
+            }
           }
         }
       },
@@ -2668,13 +3089,27 @@
             "icon": "Dekoratives Symbol"
           },
           "rows": {
-            "hostRole": { "description": "Der Host-Container hat <code>role=\"group\"</code>, um alle FAB-Elemente semantisch zusammenzufassen." },
-            "ariaExpanded": { "description": "Die Auslöser-Schaltfläche trägt <code>aria-expanded</code>, das angibt ob das Menü geöffnet (<code>true</code>) oder geschlossen (<code>false</code>) ist." },
-            "ariaControls": { "description": "<code>aria-controls</code> an der Auslöser-Schaltfläche verweist auf die <code>id</code> des Menü-Containers." },
-            "ariaHaspopup": { "description": "<code>aria-haspopup=\"menu\"</code> gibt an, dass die Schaltfläche ein Aktionsmenü öffnet." },
-            "menuRole": { "description": "Der Aktionsmenü-Container hat <code>role=\"menu\"</code>." },
-            "actionRole": { "description": "Jedes Aktionselement hat <code>role=\"menuitem\"</code>." },
-            "iconHidden": { "description": "Dekorative Symbole innerhalb der Schaltflächen haben <code>aria-hidden=\"true\"</code>." }
+            "hostRole": {
+              "description": "Der Host-Container hat <code>role=\"group\"</code>, um alle FAB-Elemente semantisch zusammenzufassen."
+            },
+            "ariaExpanded": {
+              "description": "Die Auslöser-Schaltfläche trägt <code>aria-expanded</code>, das angibt ob das Menü geöffnet (<code>true</code>) oder geschlossen (<code>false</code>) ist."
+            },
+            "ariaControls": {
+              "description": "<code>aria-controls</code> an der Auslöser-Schaltfläche verweist auf die <code>id</code> des Menü-Containers."
+            },
+            "ariaHaspopup": {
+              "description": "<code>aria-haspopup=\"menu\"</code> gibt an, dass die Schaltfläche ein Aktionsmenü öffnet."
+            },
+            "menuRole": {
+              "description": "Der Aktionsmenü-Container hat <code>role=\"menu\"</code>."
+            },
+            "actionRole": {
+              "description": "Jedes Aktionselement hat <code>role=\"menuitem\"</code>."
+            },
+            "iconHidden": {
+              "description": "Dekorative Symbole innerhalb der Schaltflächen haben <code>aria-hidden=\"true\"</code>."
+            }
           }
         },
         "naming": {
@@ -2690,19 +3125,31 @@
             "actionLabel": "Beschriftung des Aktionselements"
           },
           "rows": {
-            "trigger": { "description": "Die Auslöser-Schaltfläche verwendet das i18n-Token <code>triggerAriaLabel</code> als barrierefreien Namen." },
-            "action": { "description": "Jedes Aktionselement verwendet seinen sichtbaren Beschriftungstext oder ein explizites <code>aria-label</code>." }
+            "trigger": {
+              "description": "Die Auslöser-Schaltfläche verwendet das i18n-Token <code>triggerAriaLabel</code> als barrierefreien Namen."
+            },
+            "action": {
+              "description": "Jedes Aktionselement verwendet seinen sichtbaren Beschriftungstext oder ein explizites <code>aria-label</code>."
+            }
           }
         },
         "keyboard": {
           "title": "Tastaturinteraktion",
           "description": "Der FAB-Button folgt dem ARIA-Muster der Menü-Schaltfläches für Tastaturnavigation.",
           "rows": {
-            "enterSpace": { "description": "Öffnet oder schließt das Aktionsmenü, wenn die Auslöser-Schaltfläche fokussiert ist." },
-            "escape": { "description": "Schließt das Menü und gibt den Fokus zurück an die Auslöser-Schaltfläche." },
-            "arrowDownUp": { "description": "Bewegt den Fokus zwischen den Aktionselementen des geöffneten Menüs." },
+            "enterSpace": {
+              "description": "Öffnet oder schließt das Aktionsmenü, wenn die Auslöser-Schaltfläche fokussiert ist."
+            },
+            "escape": {
+              "description": "Schließt das Menü und gibt den Fokus zurück an die Auslöser-Schaltfläche."
+            },
+            "arrowDownUp": {
+              "description": "Bewegt den Fokus zwischen den Aktionselementen des geöffneten Menüs."
+            },
             "homeEnd": { "description": "Bewegt den Fokus zum ersten / letzten Aktionselement." },
-            "tab": { "description": "Schließt das Menü und wechselt den Fokus zum nächsten fokussierbaren Element auf der Seite." }
+            "tab": {
+              "description": "Schließt das Menü und wechselt den Fokus zum nächsten fokussierbaren Element auf der Seite."
+            }
           }
         }
       }
