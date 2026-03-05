@@ -61,7 +61,8 @@
     "tabs": {
       "examples": "Beispiele",
       "api": "API",
-      "theming": "Theming"
+      "theming": "Theming",
+      "a11y": "Barrierefreiheit"
     },
     "tables": {
       "cssVariable": "CSS-Variable",
@@ -578,30 +579,160 @@
       "api": {
         "inputs": {
           "title": "Eingaben",
-          "description": "Eingabeeigenschaften zur Konfiguration des Verhaltens und Erscheinungsbilds der Schaltfläche."
+          "description": "Eingabeeigenschaften zur Konfiguration des Verhaltens und Erscheinungsbilds der Schaltfläche.",
+          "rows": {
+            "variant": { "description": "Visuelle Variante der Schaltfläche" },
+            "shape": { "description": "Form der Schaltfläche" },
+            "raised": { "description": "Wendet einen erhöhten Stil mit Schatten an" },
+            "color": { "description": "Farbthema der Schaltfläche" },
+            "size": { "description": "Größe der Schaltfläche" },
+            "icon": { "description": "Remix-Icon-Klassenname" },
+            "iconPosition": { "description": "Symbolposition relativ zum Text" },
+            "loading": { "description": "Zeigt den Lade-Spinner an" },
+            "loadingPosition": { "description": "Spinner-Position" },
+            "width": { "description": "Breitenverhalten der Schaltfläche" },
+            "disabled": { "description": "Deaktiviert die Schaltflächeninteraktion" },
+            "type": { "description": "Nativer Schaltflächentyp" },
+            "label": { "description": "Schaltflächentext (Alternative zur Content-Projection)" },
+            "title": { "description": "HTML-title-Attribut" },
+            "ariaLabel": { "description": "Barrierefreiheitsetikett (automatisch berechnet für Icon-Only-Schaltflächen)" }
+          }
         },
         "outputs": {
           "title": "Ausgaben",
-          "description": "Von der Schaltflächenkomponente ausgegebene Ereignisse."
+          "description": "Von der Schaltflächenkomponente ausgegebene Ereignisse.",
+          "rows": {
+            "onClick": { "description": "Ausgegeben wenn die Schaltfläche geklickt wird (nicht ausgegeben bei disabled oder loading)" }
+          }
         },
         "computed": {
           "title": "Berechnete Eigenschaften",
-          "description": "Reaktive berechnete Eigenschaften (Signals) der Komponente."
+          "description": "Reaktive berechnete Eigenschaften (Signals) der Komponente.",
+          "rows": {
+            "effectiveColor": { "description": "Aufgelöste Farbe (Input > Globale Konfiguration > Standard)" },
+            "effectiveSize": { "description": "Aufgelöste Größe (Input > Globale Konfiguration > Standard)" },
+            "effectiveVariant": { "description": "Aufgelöste Variante (Input > Globale Konfiguration > Standard)" },
+            "hasVisibleContent": { "description": "True wenn die Schaltfläche Textinhalt oder ein Label hat" },
+            "isIconOnly": { "description": "True wenn die Schaltfläche nur ein Symbol ohne Text enthält" },
+            "computedAriaLabel": { "description": "Automatisch berechnetes aria-label für Barrierefreiheit" }
+          }
         },
         "models": {
           "title": "Modelle",
-          "description": "Datenmodelle im Zusammenhang mit der Schaltflächenkomponente."
+          "description": "Datenmodelle im Zusammenhang mit der Schaltflächenkomponente.",
+          "rows": {
+            "ButtonType": { "description": "Native Schaltflächentypen" },
+            "ButtonTypeEnum": { "description": "Enum für native Schaltflächentypen" },
+            "ButtonIconPosition": { "description": "Symbolpositionsoptionen" },
+            "ButtonIconPositionEnum": { "description": "Enum für die Symbolposition" },
+            "ButtonLoadingPosition": { "description": "Positionen des Lade-Spinners" },
+            "ButtonLoadingPositionEnum": { "description": "Enum für die Lade-Spinner-Position" },
+            "ButtonWidth": { "description": "Optionen für das Breitenverhalten der Schaltfläche" },
+            "ButtonWidthEnum": { "description": "Enum für das Breitenverhalten der Schaltfläche" }
+          }
         }
       },
       "theming": {
         "colors": {
           "title": "Farbvariablen",
           "description": "CSS-Variablen zur Anpassung von Farben nach Variante (solid, outline, ghost) und Farbe (primary, secondary, etc.).",
-          "note": "Ersetzen Sie <code>{color}</code> durch eine beliebige Systemfarbe: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>."
+          "note": "Ersetzen Sie <code>{color}</code> durch eine beliebige Systemfarbe: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>.",
+          "rows": {
+            "solidBg": { "description": "Hintergrundfarbe für die Solid-Variante" },
+            "solidText": { "description": "Textfarbe für die Solid-Variante" },
+            "solidBorder": { "description": "Rahmenfarbe für die Solid-Variante" },
+            "solidHoverBg": { "description": "Hover-Hintergrund für Solid" },
+            "solidHoverText": { "description": "Hover-Textfarbe für Solid" },
+            "solidHoverBorder": { "description": "Hover-Rahmen für Solid" },
+            "solidActiveBg": { "description": "Aktiver Hintergrund für Solid" },
+            "solidActiveBorder": { "description": "Aktiver Rahmen für Solid" },
+            "outlineBg": { "description": "Hintergrundfarbe für die Outline-Variante" },
+            "outlineText": { "description": "Textfarbe für die Outline-Variante" },
+            "outlineBorder": { "description": "Rahmenfarbe für die Outline-Variante" },
+            "outlineHoverBg": { "description": "Hover-Hintergrund für Outline" },
+            "outlineHoverText": { "description": "Hover-Text für Outline" },
+            "outlineHoverBorder": { "description": "Hover-Rahmen für Outline" },
+            "outlineActiveBg": { "description": "Aktiver Hintergrund für Outline" },
+            "outlineActiveBorder": { "description": "Aktiver Rahmen für Outline" },
+            "ghostBg": { "description": "Hintergrundfarbe für die Ghost-Variante" },
+            "ghostText": { "description": "Textfarbe für die Ghost-Variante" },
+            "ghostBorder": { "description": "Rahmenfarbe für die Ghost-Variante" },
+            "ghostHoverBg": { "description": "Hover-Hintergrund für Ghost" },
+            "ghostHoverText": { "description": "Hover-Text für Ghost" },
+            "ghostHoverBorder": { "description": "Hover-Rahmen für Ghost" },
+            "ghostActiveBg": { "description": "Aktiver Hintergrund für Ghost" },
+            "ghostActiveBorder": { "description": "Aktiver Rahmen für Ghost" },
+            "focusColor": { "description": "Fokusring-Farbe" }
+          }
         },
         "structure": {
           "title": "Strukturelle Variablen",
-          "description": "CSS-Variablen für Abstände, Größen, Typografie und visuelle Effekte."
+          "description": "CSS-Variablen für Abstände, Größen, Typografie und visuelle Effekte.",
+          "rows": {
+            "gap": { "description": "Abstand zwischen Symbol und Text" },
+            "paddingXXs": { "description": "Horizontales Padding für xs-Größe" },
+            "paddingYXs": { "description": "Vertikales Padding für xs-Größe" },
+            "paddingXSm": { "description": "Horizontales Padding für sm-Größe" },
+            "paddingYSm": { "description": "Vertikales Padding für sm-Größe" },
+            "paddingXMd": { "description": "Horizontales Padding für md-Größe" },
+            "paddingYMd": { "description": "Vertikales Padding für md-Größe" },
+            "paddingXLg": { "description": "Horizontales Padding für lg-Größe" },
+            "paddingYLg": { "description": "Vertikales Padding für lg-Größe" },
+            "paddingXXl": { "description": "Horizontales Padding für xl-Größe" },
+            "paddingYXl": { "description": "Vertikales Padding für xl-Größe" },
+            "radiusXs": { "description": "Rahmenradius für xs-Größe" },
+            "radiusSm": { "description": "Rahmenradius für sm-Größe" },
+            "radiusMd": { "description": "Rahmenradius für md-Größe" },
+            "radiusLg": { "description": "Rahmenradius für lg-Größe" },
+            "radiusXl": { "description": "Rahmenradius für xl-Größe" },
+            "fontSizeXs": { "description": "Schriftgröße für xs" },
+            "fontSizeSm": { "description": "Schriftgröße für sm" },
+            "fontSizeMd": { "description": "Schriftgröße für md" },
+            "fontSizeLg": { "description": "Schriftgröße für lg" },
+            "fontSizeXl": { "description": "Schriftgröße für xl" },
+            "iconSizeXs": { "description": "Symbolgröße für xs" },
+            "iconSizeSm": { "description": "Symbolgröße für sm" },
+            "iconSizeMd": { "description": "Symbolgröße für md" },
+            "iconSizeLg": { "description": "Symbolgröße für lg" },
+            "iconSizeXl": { "description": "Symbolgröße für xl" },
+            "transition": { "description": "Übergangsdauer" },
+            "spinDuration": { "description": "Animationsdauer des Lade-Spinners" },
+            "focusWidth": { "description": "Breite des Fokusrahmens" },
+            "focusOffset": { "description": "Versatz des Fokusrahmens" }
+          }
+        }
+      },
+      "a11y": {
+        "naming": {
+          "title": "Zugänglicher Name",
+          "description": "Der Button löst den zugänglichen Namen automatisch nach einer strikten Prioritätsreihenfolge auf. Geben Sie für Icon-Only-Schaltflächen immer einen expliziten Namen an.",
+          "note": "Icon-Only-Schaltflächen (<code>isIconOnly</code>) <strong>müssen</strong> einen <code>aria-label</code>- oder <code>title</code>-Input besitzen. Das Weglassen beider macht die Schaltfläche unzugänglich.",
+          "rows": {
+            "textLabel": { "description": "Der projizierte Text oder der <code>label</code>-Input dient als zugänglicher Name, ohne dass zusätzliche Attribute benötigt werden." },
+            "iconText": { "description": "Das Symbol erhält automatisch aria-hidden; der sichtbare Text ist als zugänglicher Name ausreichend." },
+            "iconOnly": { "description": "Eines der beiden ist <strong>erforderlich</strong>. Priorität: <code>aria-label</code>-Input &gt; <code>title</code>-Input. Die Komponente stellt <code>computedAriaLabel()</code> mit der aufgelösten Logik bereit." },
+            "iconOnlyLoading": { "description": "Der Spinner ersetzt das Symbol visuell, aber der zugängliche Name bleibt erhalten, solange sich die Schaltfläche im DOM befindet." }
+          }
+        },
+        "states": {
+          "title": "ARIA-Attribute",
+          "description": "Die Button-Komponente fügt ARIA-Attribute automatisch hinzu und entfernt sie entsprechend ihrem Zustand. Im verbrauchenden Code sind keine zusätzlichen Bindings erforderlich.",
+          "rows": {
+            "ariaLabel": { "description": "Wird durch <code>computedAriaLabel()</code> aufgelöst. Weggelassen, wenn die Schaltfläche sichtbaren Text hat (der native Name genügt)." },
+            "ariaBusy": { "description": "Vorhanden wenn <code>loading=true</code>. Teilt assistiven Technologien mit, dass die Schaltfläche einen Vorgang verarbeitet." },
+            "disabled": { "description": "Angewendet wenn <code>disabled=true</code> oder <code>loading=true</code>. Blockiert Fokus und Ereignisse nativ, ohne <code>aria-disabled</code> zu benötigen." },
+            "ariaHidden": { "description": "Alle <code>&lt;i&gt;</code>-Symbol- und <code>&lt;span&gt;</code>-Spinner-Elemente tragen <code>aria-hidden</code>, sodass sie von assistiven Technologien nicht gelesen werden." }
+          }
+        },
+        "keyboard": {
+          "title": "Tastaturinteraktion",
+          "description": "Die Komponente verwendet ein natives <code>&lt;button&gt;</code>-Element, sodass der Browser das gesamte Tastaturverhalten kostenlos bereitstellt.",
+          "note": "Wenn <code>disabled</code> oder <code>loading</code> true ist, wird das native <code>disabled</code>-Attribut gesetzt, das die Schaltfläche automatisch aus der Tab-Reihenfolge entfernt.",
+          "rows": {
+            "tab": { "description": "Setzt den Fokus auf die Schaltfläche (oder verlässt sie). <code>disabled</code>- / <code>loading</code>-Schaltflächen werden aus der Tab-Reihenfolge ausgeschlossen." },
+            "shiftTab": { "description": "Setzt den Fokus auf das vorherige Element." },
+            "spaceEnter": { "description": "Aktiviert die Schaltfläche. Bei <code>disabled</code> oder <code>loading</code> fängt der Handler das Ereignis ab und bricht es ab, bevor <code>onClick</code> ausgelöst wird." }
+          }
         }
       }
     },

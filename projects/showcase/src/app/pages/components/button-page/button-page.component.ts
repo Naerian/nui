@@ -59,6 +59,12 @@ export class ButtonPageComponent extends BaseComponentPage {
       icon: 'ri-palette-line',
       sections: ['theming-colors', 'theming-structure'],
     },
+    {
+      id: 'a11y',
+      label: 'common.tabs.a11y',
+      icon: 'ri-eye-line',
+      sections: ['a11y-naming', 'a11y-states', 'a11y-keyboard'],
+    },
   ];
 
   // Interactive demo state (only logic that needs to be in component)

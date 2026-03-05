@@ -2,11 +2,13 @@ import { ComponentPageConfig, ComponentSection } from '../../../core/models';
 import { BUTTON_EXAMPLES_SECTIONS } from './configs/button-examples.config';
 import { BUTTON_API_SECTIONS } from './configs/button-api.config';
 import { BUTTON_THEMING_SECTIONS } from './configs/button-theming.config';
+import { BUTTON_A11Y_SECTIONS } from './configs/button-a11y.config';
 
 export const BUTTON_PAGE_SECTIONS: ComponentSection[] = [
   ...BUTTON_EXAMPLES_SECTIONS,
   ...BUTTON_API_SECTIONS,
   ...BUTTON_THEMING_SECTIONS,
+  ...BUTTON_A11Y_SECTIONS,
 ];
 
 /**

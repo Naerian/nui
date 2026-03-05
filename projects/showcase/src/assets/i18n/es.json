@@ -61,7 +61,8 @@
     "tabs": {
       "examples": "Ejemplos",
       "api": "API",
-      "theming": "Theming"
+      "theming": "Theming",
+      "a11y": "Accesibilidad"
     },
     "tables": {
       "cssVariable": "Variable CSS",
@@ -585,30 +586,160 @@
       "api": {
         "inputs": {
           "title": "Inputs",
-          "description": "Propiedades de entrada para configurar el comportamiento y apariencia del botón."
+          "description": "Propiedades de entrada para configurar el comportamiento y apariencia del botón.",
+          "rows": {
+            "variant": { "description": "Variante visual del botón" },
+            "shape": { "description": "Forma del botón" },
+            "raised": { "description": "Aplica estilo elevado con sombra" },
+            "color": { "description": "Tema de color del botón" },
+            "size": { "description": "Tamaño del botón" },
+            "icon": { "description": "Nombre de clase de Remix Icon" },
+            "iconPosition": { "description": "Posición del icono relativa al texto" },
+            "loading": { "description": "Muestra el spinner de carga" },
+            "loadingPosition": { "description": "Posición del spinner" },
+            "width": { "description": "Comportamiento del ancho del botón" },
+            "disabled": { "description": "Deshabilita la interacción del botón" },
+            "type": { "description": "Tipo de botón nativo" },
+            "label": { "description": "Texto del botón (alternativa a la proyección de contenido)" },
+            "title": { "description": "Atributo title de HTML" },
+            "ariaLabel": { "description": "Etiqueta de accesibilidad (calculada automáticamente para botones de solo icono)" }
+          }
         },
         "outputs": {
           "title": "Outputs",
-          "description": "Eventos que emite el componente Button."
+          "description": "Eventos que emite el componente Button.",
+          "rows": {
+            "onClick": { "description": "Emitido cuando se hace clic en el botón (no se emite si está deshabilitado o cargando)" }
+          }
         },
         "computed": {
           "title": "Computed Properties",
-          "description": "Propiedades computadas reactivas (Signals) del componente."
+          "description": "Propiedades computadas reactivas (Signals) del componente.",
+          "rows": {
+            "effectiveColor": { "description": "Color resuelto (Input > Config global > Valor por defecto)" },
+            "effectiveSize": { "description": "Tamaño resuelto (Input > Config global > Valor por defecto)" },
+            "effectiveVariant": { "description": "Variante resuelta (Input > Config global > Valor por defecto)" },
+            "hasVisibleContent": { "description": "True si el botón tiene contenido de texto o label" },
+            "isIconOnly": { "description": "True si el botón solo contiene un icono sin texto" },
+            "computedAriaLabel": { "description": "aria-label calculado automáticamente para accesibilidad" }
+          }
         },
         "models": {
           "title": "Modelos",
-          "description": "Modelos de datos relacionados con el componente Button."
+          "description": "Modelos de datos relacionados con el componente Button.",
+          "rows": {
+            "ButtonType": { "description": "Tipos de botón nativos" },
+            "ButtonTypeEnum": { "description": "Enum para tipos de botón nativos" },
+            "ButtonIconPosition": { "description": "Opciones de posición del icono" },
+            "ButtonIconPositionEnum": { "description": "Enum para la posición del icono" },
+            "ButtonLoadingPosition": { "description": "Opciones de posición del spinner de carga" },
+            "ButtonLoadingPositionEnum": { "description": "Enum para la posición del spinner de carga" },
+            "ButtonWidth": { "description": "Opciones de comportamiento del ancho del botón" },
+            "ButtonWidthEnum": { "description": "Enum para el comportamiento del ancho del botón" }
+          }
         }
       },
       "theming": {
         "colors": {
           "title": "Variables de color",
           "description": "Variables CSS para personalizar colores por variante (solid, outline, ghost) y color (primary, secondary, etc.).",
-          "note": "Reemplaza <code>{color}</code> con cualquier color del sistema: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>."
+          "note": "Reemplaza <code>{color}</code> con cualquier color del sistema: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>.",
+          "rows": {
+            "solidBg": { "description": "Color de fondo para la variante solid" },
+            "solidText": { "description": "Color de texto para la variante solid" },
+            "solidBorder": { "description": "Color de borde para la variante solid" },
+            "solidHoverBg": { "description": "Fondo al pasar el cursor para solid" },
+            "solidHoverText": { "description": "Color de texto al pasar el cursor para solid" },
+            "solidHoverBorder": { "description": "Borde al pasar el cursor para solid" },
+            "solidActiveBg": { "description": "Fondo activo para solid" },
+            "solidActiveBorder": { "description": "Borde activo para solid" },
+            "outlineBg": { "description": "Color de fondo para la variante outline" },
+            "outlineText": { "description": "Color de texto para la variante outline" },
+            "outlineBorder": { "description": "Color de borde para la variante outline" },
+            "outlineHoverBg": { "description": "Fondo al pasar el cursor para outline" },
+            "outlineHoverText": { "description": "Texto al pasar el cursor para outline" },
+            "outlineHoverBorder": { "description": "Borde al pasar el cursor para outline" },
+            "outlineActiveBg": { "description": "Fondo activo para outline" },
+            "outlineActiveBorder": { "description": "Borde activo para outline" },
+            "ghostBg": { "description": "Color de fondo para la variante ghost" },
+            "ghostText": { "description": "Color de texto para la variante ghost" },
+            "ghostBorder": { "description": "Color de borde para la variante ghost" },
+            "ghostHoverBg": { "description": "Fondo al pasar el cursor para ghost" },
+            "ghostHoverText": { "description": "Texto al pasar el cursor para ghost" },
+            "ghostHoverBorder": { "description": "Borde al pasar el cursor para ghost" },
+            "ghostActiveBg": { "description": "Fondo activo para ghost" },
+            "ghostActiveBorder": { "description": "Borde activo para ghost" },
+            "focusColor": { "description": "Color del anillo de foco" }
+          }
         },
         "structure": {
           "title": "Variables estructurales",
-          "description": "Variables CSS para espaciado, tamaños, tipografía y efectos visuales."
+          "description": "Variables CSS para espaciado, tamaños, tipografía y efectos visuales.",
+          "rows": {
+            "gap": { "description": "Espacio entre icono y texto" },
+            "paddingXXs": { "description": "Relleno horizontal para el tamaño xs" },
+            "paddingYXs": { "description": "Relleno vertical para el tamaño xs" },
+            "paddingXSm": { "description": "Relleno horizontal para el tamaño sm" },
+            "paddingYSm": { "description": "Relleno vertical para el tamaño sm" },
+            "paddingXMd": { "description": "Relleno horizontal para el tamaño md" },
+            "paddingYMd": { "description": "Relleno vertical para el tamaño md" },
+            "paddingXLg": { "description": "Relleno horizontal para el tamaño lg" },
+            "paddingYLg": { "description": "Relleno vertical para el tamaño lg" },
+            "paddingXXl": { "description": "Relleno horizontal para el tamaño xl" },
+            "paddingYXl": { "description": "Relleno vertical para el tamaño xl" },
+            "radiusXs": { "description": "Radio de borde para el tamaño xs" },
+            "radiusSm": { "description": "Radio de borde para el tamaño sm" },
+            "radiusMd": { "description": "Radio de borde para el tamaño md" },
+            "radiusLg": { "description": "Radio de borde para el tamaño lg" },
+            "radiusXl": { "description": "Radio de borde para el tamaño xl" },
+            "fontSizeXs": { "description": "Tamaño de fuente para xs" },
+            "fontSizeSm": { "description": "Tamaño de fuente para sm" },
+            "fontSizeMd": { "description": "Tamaño de fuente para md" },
+            "fontSizeLg": { "description": "Tamaño de fuente para lg" },
+            "fontSizeXl": { "description": "Tamaño de fuente para xl" },
+            "iconSizeXs": { "description": "Tamaño de icono para xs" },
+            "iconSizeSm": { "description": "Tamaño de icono para sm" },
+            "iconSizeMd": { "description": "Tamaño de icono para md" },
+            "iconSizeLg": { "description": "Tamaño de icono para lg" },
+            "iconSizeXl": { "description": "Tamaño de icono para xl" },
+            "transition": { "description": "Duración de la transición" },
+            "spinDuration": { "description": "Duración de la animación del spinner de carga" },
+            "focusWidth": { "description": "Ancho del contorno de foco" },
+            "focusOffset": { "description": "Desplazamiento del contorno de foco" }
+          }
+        }
+      },
+      "a11y": {
+        "naming": {
+          "title": "Nombre accesible",
+          "description": "El Button resuelve el nombre accesible automáticamente siguiendo un orden de prioridad estricto. Proporciona siempre un nombre explícito en botones de solo icono.",
+          "note": "Los botones de solo icono (<code>isIconOnly</code>) <strong>deben</strong> tener un input <code>aria-label</code> o <code>title</code>. Omitir ambos hace que el botón sea inaccesible.",
+          "rows": {
+            "textLabel": { "description": "El texto proyectado o el input <code>label</code> actúan como nombre accesible sin necesitar ningún atributo adicional." },
+            "iconText": { "description": "El icono recibe aria-hidden automáticamente; el texto visible es suficiente como nombre." },
+            "iconOnly": { "description": "Se <strong>requiere</strong> uno de los dos. Prioridad: <code>aria-label</code> input &gt; <code>title</code> input. El componente expone <code>computedAriaLabel()</code> con la lógica resuelta." },
+            "iconOnlyLoading": { "description": "El spinner sustituye visualmente el icono pero el nombre accesible persiste mientras el botón permanece en el DOM." }
+          }
+        },
+        "states": {
+          "title": "Atributos ARIA",
+          "description": "El componente Button añade y elimina atributos ARIA automáticamente según su estado. El código consumidor no necesita añadir ningún binding adicional.",
+          "rows": {
+            "ariaLabel": { "description": "Resuelto por <code>computedAriaLabel()</code>. Se omite cuando el botón tiene texto visible (el nombre nativo es suficiente)." },
+            "ariaBusy": { "description": "Presente cuando <code>loading=true</code>. Indica a los AT que el botón está procesando una operación." },
+            "disabled": { "description": "Se aplica cuando <code>disabled=true</code> o cuando <code>loading=true</code>. Bloquea el foco y los eventos de forma nativa, sin necesitar <code>aria-disabled</code>." },
+            "ariaHidden": { "description": "Todos los <code>&lt;i&gt;</code> de icono y los <code>&lt;span&gt;</code> de spinner llevan <code>aria-hidden</code> para que los AT no los lean." }
+          }
+        },
+        "keyboard": {
+          "title": "Interacción por teclado",
+          "description": "El componente utiliza un elemento nativo <code>&lt;button&gt;</code>, por lo que el navegador proporciona todo el comportamiento de teclado de forma gratuita.",
+          "note": "Cuando <code>disabled</code> o <code>loading</code> son true, se establece el atributo nativo <code>disabled</code>, lo que elimina el botón del orden de tabulación automáticamente.",
+          "rows": {
+            "tab": { "description": "Mueve el foco al botón (o lo abandona). Los botones <code>disabled</code> / <code>loading</code> quedan excluidos del orden de tabulación." },
+            "shiftTab": { "description": "Mueve el foco al elemento anterior." },
+            "spaceEnter": { "description": "Activa el botón. Si está <code>disabled</code> o <code>loading</code>, el handler intercepta y cancela el evento antes de que se dispare <code>onClick</code>." }
+          }
         }
       }
     },
