@@ -1,24 +1,5 @@
 import { ComponentSection } from '../../../../core/models';
 
-/**
- * Configuración de la tab Accesibilidad del componente Toast.
- *
- * El Toast implementa la región de estado en vivo de ARIA:
- *
- *  1. Roles semánticos: el host lleva aria-live="polite" (o "assertive" para
- *     tipo error/warning) y aria-atomic="true" para que el lector de pantalla
- *     anuncie el mensaje completo cuando aparece.
- *
- *  2. Naming: el nombre accesible del host se calcula automáticamente
- *     siguiendo la cadena: title → message → type.
- *
- *  3. Botón de cierre: recibe el texto i18n `close` como aria-label y
- *     devuelve el foco al elemento disparador tras cerrarse.
- *
- *  4. No requiere gestión de foco: al ser una notificación transitoria no
- *     mueve el foco al aparecer. El contenido es anunciado por el lector
- *     de pantalla gracias a aria-live.
- */
 export const TOAST_A11Y_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────
   // 1. Roles y atributos ARIA

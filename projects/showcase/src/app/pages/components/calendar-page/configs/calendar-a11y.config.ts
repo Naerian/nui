@@ -1,26 +1,5 @@
 import { ComponentSection } from '../../../../core/models';
 
-/**
- * Configuración de la tab Accesibilidad del componente Calendar.
- *
- * El Calendar implementa el patrón ARIA Grid para la cuadrícula de días:
- *
- *  1. Roles semánticos: la cuadrícula de días usa role="grid"; la cabecera
- *     de días de la semana usa role="row" con role="columnheader"; cada
- *     celda de día usa role="gridcell" con role="button" interno.
- *
- *  2. Estado de día: las celdas exponen aria-selected, aria-disabled y
- *     atributos adicionales para hoy, en rango e inicio/fin de rango.
- *
- *  3. Live region: al navegar entre meses/años se anuncia el nuevo período
- *     a través de una región aria-live="polite" usando el token a11y.monthNavigated.
- *
- *  4. Teclado: navegación de días con flechas, salto a inicio/fin de semana
- *     con Home/End, mes anterior/siguiente con PageUp/PageDown.
- *
- *  5. Foco: al abrir el popover con el calendario, el foco se mueve al día
- *     actualmente seleccionado (o al día de hoy si no hay selección).
- */
 export const CALENDAR_A11Y_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────
   // 1. Roles y atributos ARIA

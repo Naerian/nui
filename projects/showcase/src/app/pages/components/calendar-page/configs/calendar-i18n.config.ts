@@ -1,20 +1,5 @@
 import { ComponentSection } from '../../../../core/models';
 
-/**
- * Configuración de la tab Internacionalización del componente Calendar.
- *
- * El Calendar inyecta NuiI18nService para construir todas las etiquetas
- * visibles y accesibles a través del sub-objeto `calendar.*`.
- *
- * Los tokens se organizan en los siguientes grupos funcionales:
- *  - Navegación (nombres de meses, días de la semana, botones prev/next)
- *  - Estado del día (hoy, seleccionado, deshabilitado, en rango)
- *  - Presets (accesos rápidos a rangos de fechas predefinidos)
- *  - Tabs (selector de vista: calendario, presets, hora)
- *  - TimePicker integrado (etiquetas de inicio/fin de rango horario)
- *  - ARIA (anuncios para lectores de pantalla, sub-objeto `calendar.aria.*`)
- *  - A11y avanzado (sub-objeto `calendar.a11y.*`)
- */
 export const CALENDAR_I18N_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────
   // 1. Tokens de navegación y etiquetas visibles

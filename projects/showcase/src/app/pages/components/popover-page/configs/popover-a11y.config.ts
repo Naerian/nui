@@ -1,24 +1,5 @@
 import { ComponentSection } from '../../../../core/models';
 
-/**
- * Configuración de la tab Accesibilidad del componente Popover.
- *
- * El Popover implementa el patrón ARIA Dialog:
- *
- *  1. Roles semánticos: el contenedor del popover lleva role="dialog";
- *     el disparador expone aria-expanded y aria-controls apuntando al id
- *     del popover.
- *
- *  2. Naming: la cadena de prioridad para el nombre accesible es
- *     ariaLabelledBy (externo) > ariaLabel (input) > derivado automáticamente
- *     del primer texto visible del contenido.
- *
- *  3. Foco: al abrirse, el foco se mueve al primer elemento focusable
- *     dentro del popover. Al cerrarse vuelve al disparador.
- *
- *  4. Teclado: Escape cierra el popover; Tab/Shift+Tab ciclan dentro
- *     del contenido (focus trap opcional según configuración).
- */
 export const POPOVER_A11Y_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────
   // 1. Roles y atributos ARIA
@@ -116,27 +97,6 @@ export const POPOVER_A11Y_SECTIONS: ComponentSection[] = [
         ],
       ],
     },
-    examples: [
-      {
-        title: 'codeExamples.html',
-        language: 'html',
-        code: `<!-- aria-labelledby apuntando a un título dentro del popover -->
-<button [nuiPopover]="myPopover" ariaLabelledBy="popover-title" type="button">
-  Abrir detalles
-</button>
-
-<!-- aria-label explícito -->
-<button [nuiPopover]="myPopover" ariaLabel="Panel de configuración" type="button">
-  <i class="ri-settings-line" aria-hidden="true"></i>
-</button>
-
-<!-- Derivado automáticamente del primer texto del contenido -->
-<button [nuiPopover]="myPopover" type="button">Opciones</button>
-<ng-template #myPopover>
-  <p>Personaliza la visualización del dashboard.</p>
-</ng-template>`,
-      },
-    ],
   },
   // ─────────────────────────────────────────────────────────────────────────
   // 3. Interacción con teclado

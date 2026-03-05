@@ -1,24 +1,5 @@
 import { ComponentSection } from '../../../../core/models';
 
-/**
- * Configuración de la tab Accesibilidad del componente Sidebar Panel.
- *
- * El Sidebar Panel implementa el patrón ARIA Dialog:
- *
- *  1. Roles semánticos: el panel lleva role="dialog" y aria-labelledby
- *     apuntando al id del elemento título dentro del panel.
- *
- *  2. Focus trap: al abrirse, la directiva CDK FocusTrap captura el foco
- *     dentro del panel. Al cerrarse el foco regresa al elemento que lo abrió.
- *
- *  3. Botones de control: cada botón (close, minimize, restore, expand,
- *     collapse) obtiene su aria-label del token i18n correspondiente.
- *
- *  4. Backdrop: el overlay lleva aria-hidden="true" para ocultarlo de los
- *     lectores de pantalla; la interacción con él cierra el panel.
- *
- *  5. Teclado: Escape cierra el panel activo.
- */
 export const SIDEBAR_PANEL_A11Y_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────
   // 1. Roles y atributos ARIA

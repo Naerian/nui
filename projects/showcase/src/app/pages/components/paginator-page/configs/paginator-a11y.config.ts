@@ -1,24 +1,5 @@
 import { ComponentSection } from '../../../../core/models';
 
-/**
- * Configuración de la tab Accesibilidad del componente Paginator.
- *
- * El Paginator implementa el patrón ARIA Navigation + Live Region:
- *
- *  1. Roles semánticos: el host es un elemento <nav> con aria-label derivado
- *     de `paginator.a11y.pagination` (i18n). Los botones de página llevan
- *     aria-label descriptivos y aria-current="page" en la página activa.
- *
- *  2. Region en vivo: hay una live region oculta (aria-live="polite") que
- *     anuncia los cambios de página a los lectores de pantalla.
- *
- *  3. Botones de navegación: primera/última/anterior/siguiente página
- *     llevan sus respectivos tokens i18n como aria-label. Los botones
- *     deshabilitados utilizan el atributo disabled nativo.
- *
- *  4. Salto de página: el campo de entrada tiene su propio aria-label y
- *     mensajes de error de validación enlazados con aria-describedby.
- */
 export const PAGINATOR_A11Y_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────
   // 1. Roles y atributos ARIA

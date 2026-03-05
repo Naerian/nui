@@ -1,24 +1,5 @@
 import { ComponentSection } from '../../../../core/models';
 
-/**
- * Configuración de la tab Accesibilidad del componente FAB Button.
- *
- * El FAB Button implementa el patrón ARIA Menu Button:
- *
- *  1. Roles semánticos: el host actúa como role="group" cuando el panel
- *     está abierto; el botón disparador expone aria-expanded, aria-controls
- *     y aria-haspopup="menu"; la lista de acciones tiene role="menu" y cada
- *     elemento role="menuitem".
- *
- *  2. Naming: el aria-label del host se toma de triggerAriaLabel (i18n) al
- *     abrir y del input ariaLabel al cerrar. Cada acción recibe su nombre
- *     del texto/tooltip de la propia acción.
- *
- *  3. Foco: al abrir, el foco pasa al primer ítem del menú. Al cerrar
- *     vuelve al botón disparador.
- *
- *  4. Teclado: Escape cierra el panel; las flechas navegan entre acciones.
- */
 export const FAB_BUTTON_A11Y_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────
   // 1. Roles y atributos ARIA

@@ -1,15 +1,5 @@
 import { ComponentSection } from '../../../../core/models';
 
-/**
- * Configuración de la tab Internacionalización del componente FAB Button.
- *
- * El FAB Button inyecta NuiI18nService para obtener la etiqueta del botón
- * disparador a través del token `fabButton.triggerAriaLabel`.
- *
- * Cuando el panel de acciones está abierto, el host adopta aria-label desde
- * `effectiveI18n().triggerAriaLabel`; cuando está cerrado usa el input
- * `ariaLabel` del consumidor. Ambas cadenas son traducibles.
- */
 export const FAB_BUTTON_I18N_SECTIONS: ComponentSection[] = [
   {
     id: 'i18n-tokens',

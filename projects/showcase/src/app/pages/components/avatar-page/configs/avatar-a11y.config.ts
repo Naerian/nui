@@ -1,28 +1,5 @@
 import { ComponentSection } from '../../../../core/models';
 
-/**
- * Configuración de la tab Accesibilidad del componente Avatar.
- *
- * El componente Avatar aplica los siguientes patrones ARIA:
- *
- *  1. El contenedor principal lleva role="img" para que las tecnologías
- *     asistivas lo traten como una imagen semántica. El nombre accesible se
- *     resuelve por el siguiente orden: tooltip() || alt() || 'avatar'.
- *
- *  2. El <img> interno siempre tiene alt="" vacío; la accesibilidad recae
- *     sobre el div padre, evitando nombres duplicados.
- *
- *  3. Los elementos decorativos (iniciales, icono, fallback) llevan
- *     aria-hidden="true" para no ser leídos independientemente.
- *
- *  4. En nui-avatar-group el listado usa role="list" con role="listitem" por
- *     cada avatar. El indicador de exceso "+N" tiene role="img" con
- *     aria-label generado desde el token i18n avatar.moreProfiles.
- *
- * El componente es puramente visual y no gestiona el foco ni el teclado;
- * si se usa dentro de un contexto interactivo (botón, enlace) el
- * consumidor es responsable de añadir los atributos ARIA correspondientes.
- */
 export const AVATAR_A11Y_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────
   // 1. Roles y atributos ARIA
@@ -144,23 +121,6 @@ export const AVATAR_A11Y_SECTIONS: ComponentSection[] = [
         ],
       ],
     },
-    examples: [
-      {
-        title: 'codeExamples.html',
-        language: 'html',
-        code: `<!-- tooltip tiene máxima prioridad para el nombre accesible -->
-<nui-avatar src="..." tooltip="John Doe"></nui-avatar>
-
-<!-- alt sirve tanto para generar iniciales como de nombre accesible -->
-<nui-avatar alt="Jane Smith"></nui-avatar>
-
-<!-- Sin tooltip ni alt → aria-label="avatar" (genérico, evítalo) -->
-<nui-avatar icon="ri-user-line"></nui-avatar>
-
-<!-- Grupo: el indicador "+3" anuncia "Más 3 perfiles" (i18n) -->
-<nui-avatar-group [avatars]="avatars" [max]="5"></nui-avatar-group>`,
-      },
-    ],
   },
   // ─────────────────────────────────────────────────────────────────────────
   // 3. Elementos ocultos a las AT

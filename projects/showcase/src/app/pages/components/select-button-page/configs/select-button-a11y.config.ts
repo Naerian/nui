@@ -1,24 +1,5 @@
 import { ComponentSection } from '../../../../core/models';
 
-/**
- * Configuración de la tab Accesibilidad del componente Select Button.
- *
- * El Select Button implementa los patrones ARIA RadioGroup y CheckboxGroup:
- *
- *  1. Roles semánticos: en modo radio el contenedor recibe role="radiogroup"
- *     y cada botón role="radio"; en modo checkbox el contenedor recibe
- *     role="group" y cada botón role="checkbox".
- *
- *  2. Estado: cada botón expone aria-checked="true|false" y aria-disabled
- *     cuando está deshabilitado.
- *
- *  3. Naming: el nombre accesible de cada botón se deriva del texto de
- *     la opción (label). Los iconos decorativos llevan aria-hidden="true".
- *
- *  4. Teclado: en modo radio se utiliza roving tabindex; sólo el ítem
- *     seleccionado tiene tabindex="0". Las flechas navegan entre opciones.
- *     En modo checkbox todos los ítems son accesibles con Tab.
- */
 export const SELECT_BUTTON_A11Y_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────
   // 1. Roles y atributos ARIA
@@ -112,22 +93,6 @@ export const SELECT_BUTTON_A11Y_SECTIONS: ComponentSection[] = [
         ],
       ],
     },
-    examples: [
-      {
-        title: 'codeExamples.html',
-        language: 'html',
-        code: `<!-- Texto visible: nombre accesible resuelto de form nativa -->
-<nui-select-button [(ngModel)]="value" [options]="['Día', 'Semana', 'Mes']" />
-
-<!-- Con objetos: label define el texto del botón -->
-<nui-select-button [(ngModel)]="period" [options]="periods" optionLabel="label" />
-
-<!-- El contenedor del grupo puede etiquetarse con aria-label si es necesario -->
-<div role="radiogroup" aria-label="Vista del calendario">
-  <nui-select-button [(ngModel)]="view" [options]="views" />
-</div>`,
-      },
-    ],
   },
   // ─────────────────────────────────────────────────────────────────────────
   // 3. Interacción con teclado

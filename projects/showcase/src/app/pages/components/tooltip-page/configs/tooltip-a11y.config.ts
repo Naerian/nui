@@ -1,24 +1,5 @@
 import { ComponentSection } from '../../../../core/models';
 
-/**
- * Configuración de la tab Accesibilidad del componente Tooltip.
- *
- * El Tooltip implementa el patrón ARIA «describedby»:
- *
- *  1. Roles semánticos: el elemento disparador recibe aria-describedby
- *     apuntando al id del tooltip; el tooltip renderizado lleva role="tooltip".
- *
- *  2. Naming: el contenido del tooltip proporciona la descripción del
- *     disparador, no su nombre. Si el disparador es un icono sin texto
- *     visible debe tener su propio aria-label.
- *
- *  3. Teclado: el tooltip se muestra/oculta sincronizándose con los eventos
- *     focus/blur del disparador, siguiendo así el comportamiento de teclado
- *     nativo sin necesidad de gestión adicional. Escape lo oculta.
- *
- *  4. Sin foco interno: el contenido del tooltip no es interactivo; para
- *     contenido con acciones utilizar el componente Popover.
- */
 export const TOOLTIP_A11Y_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────
   // 1. Roles y atributos ARIA
@@ -93,24 +74,6 @@ export const TOOLTIP_A11Y_SECTIONS: ComponentSection[] = [
         ],
       ],
     },
-    examples: [
-      {
-        title: 'codeExamples.html',
-        language: 'html',
-        code: `<!-- Botón con texto: el tooltip lo describe -->
-<button [nuiTooltip]="'Guarda los cambios'" type="button">Guardar</button>
-
-<!-- Icono sin texto: requiere aria-label propio en el disparador -->
-<button [nuiTooltip]="'Eliminar elemento'" aria-label="Eliminar" type="button">
-  <i class="ri-delete-bin-line" aria-hidden="true"></i>
-</button>
-
-<!-- [EVITAR] Icono sin aria-label: el nombre accesible queda vacío -->
-<button [nuiTooltip]="'Eliminar elemento'" type="button">
-  <i class="ri-delete-bin-line"></i>
-</button>`,
-      },
-    ],
   },
   // ─────────────────────────────────────────────────────────────────────────
   // 3. Interacción con teclado

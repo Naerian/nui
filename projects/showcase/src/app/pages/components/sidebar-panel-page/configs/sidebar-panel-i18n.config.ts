@@ -1,18 +1,5 @@
 import { ComponentSection } from '../../../../core/models';
 
-/**
- * Configuración de la tab Internacionalización del componente Sidebar Panel.
- *
- * El Sidebar Panel inyecta NuiI18nService para obtener las etiquetas de los
- * botones de control del panel a través de tokens genéricos del espacio de
- * nombres raíz (sin sub-objeto propio):
- *
- *  - `close`    → botón de cierre del panel
- *  - `minimize` → botón para minimizar el panel (modo minimizable)
- *  - `restore`  → botón para restaurar el panel desde minimizado
- *  - `expand`   → botón para expandir el panel colapsado
- *  - `collapse` → botón para colapsar el panel expandido
- */
 export const SIDEBAR_PANEL_I18N_SECTIONS: ComponentSection[] = [
   {
     id: 'i18n-tokens',

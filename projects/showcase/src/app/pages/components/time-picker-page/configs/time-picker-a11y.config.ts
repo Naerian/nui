@@ -1,27 +1,5 @@
 import { ComponentSection } from '../../../../core/models';
 
-/**
- * Configuración de la tab Accesibilidad del componente Time Picker.
- *
- * El TimePicker implementa el patrón ARIA Listbox para las columnas de scroll:
- *
- *  1. Roles semánticos: cada columna de scroll (horas, minutos, período)
- *     actúa como role="listbox"; cada valor dentro de la columna lleva
- *     role="option" y aria-selected.
- *
- *  2. Live region: cuando la hora se normaliza automáticamente (por límites
- *     de rango), se anuncia el nuevo valor a través de aria-live="assertive".
- *
- *  3. Naming: el aria-label del contenedor se toma del token
- *     `timePicker.a11y.timePickerLabel` (o durationPickerLabel en modo duración).
- *     Cada columna recibe su propia etiqueta descriptiva.
- *
- *  4. Foco: al abrir el TimePicker, el foco se posiciona en la primera
- *     columna activa (horas). Al cerrar, regresa al elemento disparador.
- *
- *  5. Teclado: las columnas soportan navegación con flechas verticales;
- *     Tab pasa entre columnas; Escape cierra el picker.
- */
 export const TIME_PICKER_A11Y_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────
   // 1. Roles y atributos ARIA

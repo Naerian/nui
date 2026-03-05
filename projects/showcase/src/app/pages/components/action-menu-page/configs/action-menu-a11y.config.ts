@@ -1,25 +1,5 @@
 import { ComponentSection } from '../../../../core/models';
 
-/**
- * Configuración de la tab Accesibilidad del componente Action Menu.
- *
- * El Action Menu aplica los siguientes patrones ARIA:
- *
- *  1. Roles semánticos: el botón disparador expone aria-haspopup="menu" y
- *     aria-expanded; el contenedor del menú tiene role="menu"; cada opción
- *     lleva role="menuitem" (o "menuitemradio" en modo selección) y los
- *     separadores tienen role="separator".
- *
- *  2. Naming: el nombre accesible del disparador sigue la cadena
- *     ariaLabel()||label()||title()||null. El menú se etiqueta con
- *     aria-labelledby apuntando al id del disparador (modo dinámico).
- *
- *  3. Teclado: el componente intercepta ArrowDown/Up/Home/End con
- *     preventDefault para mover el foco entre ítems, ArrowRight/Left para
- *     abrir/cerrar submenús y Escape para cerrar el menú activo.
- *
- *  4. Iconos decorativos: todos los <i> de iconos llevan aria-hidden="true".
- */
 export const ACTION_MENU_A11Y_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────
   // 1. Roles y atributos ARIA
@@ -152,23 +132,6 @@ export const ACTION_MENU_A11Y_SECTIONS: ComponentSection[] = [
         ],
       ],
     },
-    examples: [
-      {
-        title: 'codeExamples.html',
-        language: 'html',
-        code: `<!-- Disparador con texto: nombre accesible resuelto de forma nativa -->
-<nui-action-menu [items]="items" label="Actions"></nui-action-menu>
-
-<!-- Solo icono: aria-label explícito (recomendado) -->
-<nui-action-menu [items]="items" icon="ri-more-line" ariaLabel="More actions"></nui-action-menu>
-
-<!-- Solo icono: title como fallback -->
-<nui-action-menu [items]="items" icon="ri-more-line" title="More actions"></nui-action-menu>
-
-<!-- [EVITAR] Solo icono sin nombre accesible -->
-<nui-action-menu [items]="items" icon="ri-more-line"></nui-action-menu>`,
-      },
-    ],
   },
   // ─────────────────────────────────────────────────────────────────────────
   // 3. Interacción con teclado

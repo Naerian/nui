@@ -1,20 +1,5 @@
 import { ComponentSection } from '../../../../core/models';
 
-/**
- * Configuración de la tab Accesibilidad del componente Button.
- *
- * El componente Button utiliza el elemento nativo <button>, que proporciona
- * semántica, foco y eventos de teclado de forma gratuita. La capa de a11y
- * de NUI añade únicamente lo necesario sobre esa base:
- *
- *  - Cálculo automático del nombre accesible para botones de solo icono.
- *  - aria-busy durante el estado de carga.
- *  - aria-hidden en todos los elementos decorativos (iconos, spinners).
- *  - Bloqueo real del botón (atributo disabled nativo) cuando disabled/loading.
- *
- * El componente NO usa NuiI18nService porque no produce texto visible propio;
- * todo el contenido viene del consumidor (label, ng-content, aria-label).
- */
 export const BUTTON_A11Y_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────
   // 1. Nombre accesible
@@ -57,26 +42,6 @@ export const BUTTON_A11Y_SECTIONS: ComponentSection[] = [
         ],
       ],
     },
-    examples: [
-      {
-        title: 'codeExamples.html',
-        language: 'html',
-        code: `<!-- Visible text – automatically resolved accessible name -->
-<nui-button>Save changes</nui-button>
-
-<!-- Icon + text – decorative icon, text as name -->
-<nui-button icon="ri-save-line">Save</nui-button>
-
-<!-- Icon only – explicit aria-label (recommended) -->
-<nui-button icon="ri-close-line" aria-label="Close dialog"></nui-button>
-
-<!-- Icon only – title as fallback (if aria-label is not available) -->
-<nui-button icon="ri-close-line" title="Close dialog"></nui-button>
-
-<!-- Icon only without accessible name – [AVOID !!] -->
-<nui-button icon="ri-close-line"></nui-button>`,
-      },
-    ],
   },
   {
     id: 'a11y-states',

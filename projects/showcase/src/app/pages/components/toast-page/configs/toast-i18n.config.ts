@@ -1,16 +1,5 @@
 import { ComponentSection } from '../../../../core/models';
 
-/**
- * Configuración de la tab Internacionalización del componente Toast.
- *
- * El componente Toast inyecta NuiI18nService para obtener el texto del botón
- * de cierre a través del token genérico `close`. No tiene un sub-objeto
- * propio en el espacio de nombres del componente.
- *
- * La etiqueta del host (aria-label) se deriva automáticamente del contenido
- * de la notificación (título → mensaje → tipo), por lo que no se traduce
- * con i18n sino que refleja el texto del propio usuario.
- */
 export const TOAST_I18N_SECTIONS: ComponentSection[] = [
   {
     id: 'i18n-tokens',
