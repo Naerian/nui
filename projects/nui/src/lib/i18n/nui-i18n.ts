@@ -10,6 +10,7 @@ export const DEFAULT_GENERIC_I18N = {
   collapse: 'Collapse',
   close: 'Close',
   minimize: 'Minimize',
+  restore: 'Restore',
 };
 
 export const NUI_I18N_DEFAULT: NuiI18n = {

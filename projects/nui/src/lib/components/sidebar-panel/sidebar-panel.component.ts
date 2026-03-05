@@ -90,6 +90,9 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
 
   protected readonly sidebarPanelConfig = inject(SIDEBAR_PANEL_CONFIG);
 
+  /** ID único para vincular aria-labelledby sin riesgo de duplicados entre paneles */
+  readonly instanceId = `nui-sp-${Math.random().toString(36).slice(2, 9)}`;
+
   protected readonly actionsService = inject(SidebarPanelActionsService, {
     optional: true,
   });

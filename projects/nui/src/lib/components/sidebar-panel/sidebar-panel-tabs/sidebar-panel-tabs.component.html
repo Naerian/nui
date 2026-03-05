@@ -6,7 +6,7 @@
         class="sidebar-panel-tab-button sidebar-panel-tab-vertical"
         [class]="tab.customization?.cssClass || ''"
         (click)="restorePanel(tab.id)"
-        [attr.aria-label]="'Restore ' + tab.title"
+        [attr.aria-label]="_i18n().restore + ' ' + tab.title"
         [attr.data-sidebar-panel-id]="tab.id"
         [nuiTooltip]="tab.title"
         nuiTooltipPosition="left"
@@ -17,9 +17,9 @@
         } @else {
           <!-- Renderizado por defecto con customización -->
           @if (tab.customization?.icon) {
-            <i [class]="tab.customization!.icon"></i>
+            <i [class]="tab.customization!.icon" aria-hidden="true"></i>
           } @else {
-            <i class="ri-arrow-left-s-line"></i>
+            <i class="ri-arrow-left-s-line" aria-hidden="true"></i>
           }
           @if (tab.customization?.label) {
             <span class="sidebar-panel-tab-label">{{ tab.customization!.label }}</span>
@@ -38,7 +38,7 @@
         class="sidebar-panel-tab-button sidebar-panel-tab-vertical"
         [class]="tab.customization?.cssClass || ''"
         (click)="restorePanel(tab.id)"
-        [attr.aria-label]="'Restore ' + tab.title"
+        [attr.aria-label]="_i18n().restore + ' ' + tab.title"
         [attr.data-sidebar-panel-id]="tab.id"
         [nuiTooltip]="tab.title"
         nuiTooltipPosition="right"
@@ -49,9 +49,9 @@
         } @else {
           <!-- Renderizado por defecto con customización -->
           @if (tab.customization?.icon) {
-            <i [class]="tab.customization!.icon"></i>
+            <i [class]="tab.customization!.icon" aria-hidden="true"></i>
           } @else {
-            <i class="ri-arrow-right-s-line"></i>
+            <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
           }
           @if (tab.customization?.label) {
             <span class="sidebar-panel-tab-label">{{ tab.customization!.label }}</span>
@@ -70,7 +70,7 @@
         class="sidebar-panel-tab-button sidebar-panel-tab-horizontal"
         [class]="tab.customization?.cssClass || ''"
         (click)="restorePanel(tab.id)"
-        [attr.aria-label]="'Restore ' + tab.title"
+        [attr.aria-label]="_i18n().restore + ' ' + tab.title"
         [attr.data-sidebar-panel-id]="tab.id"
         [nuiTooltip]="tab.title"
         nuiTooltipPosition="bottom"
@@ -81,9 +81,9 @@
         } @else {
           <!-- Renderizado por defecto con customización -->
           @if (tab.customization?.icon) {
-            <i [class]="tab.customization!.icon"></i>
+            <i [class]="tab.customization!.icon" aria-hidden="true"></i>
           } @else {
-            <i class="ri-arrow-down-s-line"></i>
+            <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
           }
           @if (tab.customization?.label) {
             <span class="sidebar-panel-tab-label">{{ tab.customization!.label }}</span>
@@ -102,7 +102,7 @@
         class="sidebar-panel-tab-button sidebar-panel-tab-horizontal"
         [class]="tab.customization?.cssClass || ''"
         (click)="restorePanel(tab.id)"
-        [attr.aria-label]="'Restore ' + tab.title"
+        [attr.aria-label]="_i18n().restore + ' ' + tab.title"
         [attr.data-sidebar-panel-id]="tab.id"
         [nuiTooltip]="tab.title"
         nuiTooltipPosition="top"
@@ -113,9 +113,9 @@
         } @else {
           <!-- Renderizado por defecto con customización -->
           @if (tab.customization?.icon) {
-            <i [class]="tab.customization!.icon"></i>
+            <i [class]="tab.customization!.icon" aria-hidden="true"></i>
           } @else {
-            <i class="ri-arrow-up-s-line"></i>
+            <i class="ri-arrow-up-s-line" aria-hidden="true"></i>
           }
           @if (tab.customization?.label) {
             <span class="sidebar-panel-tab-label">{{ tab.customization!.label }}</span>
@@ -133,7 +133,7 @@
       class="sidebar-panel-tab-button sidebar-panel-tab-standalone"
       [class]="tab.customization?.cssClass || ''"
       (click)="restorePanel(tab.id)"
-      [attr.aria-label]="'Restore ' + tab.title"
+      [attr.aria-label]="_i18n().restore + ' ' + tab.title"
       [attr.data-sidebar-panel-id]="tab.id"
       [nuiTooltip]="tab.title"
       nuiTooltipPosition="top"
@@ -144,7 +144,7 @@
       } @else {
         <!-- Renderizado por defecto con customización -->
         @if (tab.customization?.icon) {
-          <i [class]="tab.customization!.icon"></i>
+          <i [class]="tab.customization!.icon" aria-hidden="true"></i>
         }
         @if (tab.customization?.label) {
           <span class="sidebar-panel-tab-label">{{ tab.customization!.label }}</span>

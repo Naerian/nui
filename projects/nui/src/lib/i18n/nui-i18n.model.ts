@@ -15,6 +15,7 @@ export interface NuiI18n {
   collapse: string;
   close: string;
   minimize: string;
+  restore: string;
 
   // Textos de los componentes
   avatar: AvatarI18n;

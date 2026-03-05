@@ -1,10 +1,11 @@
 ﻿<div
   class="nui-sidebar-panel-wrapper"
-  [attr.role]="'dialog'"
-  [attr.aria-label]="sidebarPanelConfig.ariaLabel || 'Slide Panel'"
-  [attr.aria-labelledby]="title ? 'nui-sidebar-panel-title' : null"
+  role="dialog"
+  [attr.aria-label]="!title ? (sidebarPanelConfig.ariaLabel || 'Panel') : null"
+  [attr.aria-labelledby]="title ? instanceId + '-title' : null"
   [attr.aria-describedby]="sidebarPanelConfig.ariaDescribedBy"
-  [attr.aria-modal]="true"
+  aria-modal="true"
+  [attr.aria-hidden]="panelRef.isMinimized ? 'true' : null"
 >
   <!-- Header -->
   @if (showHeader && !panelRef.isMinimized) {
@@ -17,7 +18,7 @@
       <!-- Header por defecto -->
       @if (!sidebarPanelConfig.headerTemplate) {
         @if (title) {
-          <h2 id="nui-sidebar-panel-title" class="nui-sidebar-panel-title">{{ title }}</h2>
+          <h2 [id]="instanceId + '-title'" class="nui-sidebar-panel-title">{{ title }}</h2>
         }
         <div class="nui-sidebar-panel-header-actions">
           @if (sidebarPanelConfig.minimizable) {

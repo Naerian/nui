@@ -4,30 +4,32 @@
   [style.width.px]="customSize()"
   [style.height.px]="customSize()"
   [style.font-size.px]="customFontSize()"
-  [title]="tooltip() || alt() || ''"
+  role="img"
   [attr.aria-label]="tooltip() || alt() || 'avatar'"
+  [attr.title]="tooltip() || alt() || null"
   [style.background-color]="customColor()"
   [style.color]="customTextColor()"
 >
   @switch (contentType()) {
     @case ('image') {
+      <!-- alt="" because the parent div[role="img"] is the accessible node -->
       <img
         class="nui-avatar__image"
         [src]="src()"
-        [alt]="alt() || 'avatar'"
+        alt=""
         (error)="onImageError()"
       />
     }
     @case ('initials') {
-      <span class="nui-avatar__initials">
+      <span class="nui-avatar__initials" aria-hidden="true">
         {{ initials() }}
       </span>
     }
     @case ('icon') {
-      <i class="nui-avatar__icon" [class]="displayIcon()"></i>
+      <i class="nui-avatar__icon" [class]="displayIcon()" aria-hidden="true"></i>
     }
     @case ('fallback') {
-      <span class="nui-avatar__fallback">
+      <span class="nui-avatar__fallback" aria-hidden="true">
         {{ firstLetter() }}
       </span>
     }

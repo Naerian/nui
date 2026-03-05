@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SidebarPanelTabsService } from '../services/sidebar-panel-tabs.service';
 import { SidebarPanelPosition } from '../models/sidebar-panel.model';
 import { TooltipDirective } from '../../tooltip/tooltip.directive';
+import { NuiI18nService } from '../../../i18n';
 
 /**
  * Componente global que renderiza todas las pestaÃ±as de paneles minimizados
@@ -29,6 +30,9 @@ import { TooltipDirective } from '../../tooltip/tooltip.directive';
 })
 export class SidebarPanelTabsComponent {
   private readonly _tabsService = inject(SidebarPanelTabsService);
+  private readonly _i18nService = inject(NuiI18nService);
+
+  protected readonly _i18n = computed(() => this._i18nService.translations());
 
   /**
    * Todas las pestaÃ±as minimizadas
