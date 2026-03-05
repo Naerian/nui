@@ -30,29 +30,29 @@ export const BUTTON_A11Y_SECTIONS: ComponentSection[] = [
     },
     table: {
       headers: [
-        'common.tables.property',
+        'common.tables.element',
         'common.tables.info',
         'common.tables.description',
       ],
       rows: [
         [
-          'Botón con texto o <code>label</code>',
-          'Nombre nativo',
+          'components.button.a11y.naming.elements.textLabel',
+          'components.button.a11y.naming.info.nativeName',
           'components.button.a11y.naming.rows.textLabel.description',
         ],
         [
-          'Icono + texto',
-          'Nombre nativo',
+          'components.button.a11y.naming.elements.iconText',
+          'components.button.a11y.naming.info.nativeName',
           'components.button.a11y.naming.rows.iconText.description',
         ],
         [
-          'Solo icono (<code>isIconOnly</code>)',
-          '<code>aria-label</code> / <code>title</code>',
+          'components.button.a11y.naming.elements.iconOnly',
+          'components.button.a11y.naming.info.ariaLabelTitle',
           'components.button.a11y.naming.rows.iconOnly.description',
         ],
         [
-          'Estado de carga con solo icono',
-          '<code>aria-label</code> / <code>title</code>',
+          'components.button.a11y.naming.elements.iconOnlyLoading',
+          'components.button.a11y.naming.info.ariaLabelTitle',
           'components.button.a11y.naming.rows.iconOnlyLoading.description',
         ],
       ],
@@ -101,13 +101,13 @@ export const BUTTON_A11Y_SECTIONS: ComponentSection[] = [
           'components.button.a11y.states.rows.ariaBusy.description',
         ],
         [
-          '<code>disabled</code> (nativo)',
+          'components.button.a11y.states.elements.disabled',
           'boolean',
           'components.button.a11y.states.rows.disabled.description',
         ],
         [
-          '<code>aria-hidden="true"</code> en iconos',
-          'Estático',
+          'components.button.a11y.states.elements.ariaHiddenIcons',
+          'components.button.a11y.states.info.staticValue',
           'components.button.a11y.states.rows.ariaHidden.description',
         ],
       ],
@@ -127,12 +127,15 @@ export const BUTTON_A11Y_SECTIONS: ComponentSection[] = [
       rows: [
         [
           '<kbd>Tab</kbd>',
-          'Mueve el foco al botón (o lo abandona). Los botones <code>disabled</code> / <code>loading</code> quedan excluidos del orden de tabulación.',
+          'components.button.a11y.keyboard.rows.tab.description',
         ],
-        ['<kbd>Shift + Tab</kbd>', 'Mueve el foco al elemento anterior.'],
+        [
+          '<kbd>Shift + Tab</kbd>',
+          'components.button.a11y.keyboard.rows.shiftTab.description',
+        ],
         [
           '<kbd>Space</kbd> / <kbd>Enter</kbd>',
-          'Activa el botón. Si está <code>disabled</code> o <code>loading</code>, el handler intercepta y cancela el evento antes de que se dispare <code>onClick</code>.',
+          'components.button.a11y.keyboard.rows.spaceEnter.description',
         ],
       ],
     },

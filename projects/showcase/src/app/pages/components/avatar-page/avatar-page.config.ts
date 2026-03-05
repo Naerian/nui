@@ -2,11 +2,15 @@ import { ComponentPageConfig, ComponentSection } from '../../../core/models';
 import { AVATAR_EXAMPLES_SECTIONS } from './configs/avatar-examples.config';
 import { AVATAR_API_SECTIONS } from './configs/avatar-api.config';
 import { AVATAR_THEMING_SECTIONS } from './configs/avatar-theming.config';
+import { AVATAR_I18N_SECTIONS } from './configs/avatar-i18n.config';
+import { AVATAR_A11Y_SECTIONS } from './configs/avatar-a11y.config';
 
 export const AVATAR_PAGE_SECTIONS: ComponentSection[] = [
   ...AVATAR_EXAMPLES_SECTIONS,
   ...AVATAR_API_SECTIONS,
   ...AVATAR_THEMING_SECTIONS,
+  ...AVATAR_I18N_SECTIONS,
+  ...AVATAR_A11Y_SECTIONS,
 ];
 
 /**

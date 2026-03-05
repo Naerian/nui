@@ -62,7 +62,8 @@
       "examples": "Ejemplos",
       "api": "API",
       "theming": "Theming",
-      "a11y": "Accesibilidad"
+      "a11y": "Accesibilidad",
+      "i18n": "I18n"
     },
     "tables": {
       "cssVariable": "Variable CSS",
@@ -77,7 +78,9 @@
       "method": "Método",
       "argument": "Argumento",
       "returns": "Retorno",
-      "parameters": "Parámetros"
+      "parameters": "Parámetros",
+      "element": "Elemento",
+      "token": "Token"
     }
   },
   "codeBlock": {
@@ -719,6 +722,16 @@
             "iconText": { "description": "El icono recibe aria-hidden automáticamente; el texto visible es suficiente como nombre." },
             "iconOnly": { "description": "Se <strong>requiere</strong> uno de los dos. Prioridad: <code>aria-label</code> input &gt; <code>title</code> input. El componente expone <code>computedAriaLabel()</code> con la lógica resuelta." },
             "iconOnlyLoading": { "description": "El spinner sustituye visualmente el icono pero el nombre accesible persiste mientras el botón permanece en el DOM." }
+          },
+          "elements": {
+            "textLabel": "Botón con texto o <code>label</code>",
+            "iconText": "Icono + texto",
+            "iconOnly": "Solo icono (<code>isIconOnly</code>)",
+            "iconOnlyLoading": "Estado de carga con solo icono"
+          },
+          "info": {
+            "nativeName": "Nombre nativo",
+            "ariaLabelTitle": "<code>aria-label</code> / <code>title</code>"
           }
         },
         "states": {
@@ -729,6 +742,13 @@
             "ariaBusy": { "description": "Presente cuando <code>loading=true</code>. Indica a los AT que el botón está procesando una operación." },
             "disabled": { "description": "Se aplica cuando <code>disabled=true</code> o cuando <code>loading=true</code>. Bloquea el foco y los eventos de forma nativa, sin necesitar <code>aria-disabled</code>." },
             "ariaHidden": { "description": "Todos los <code>&lt;i&gt;</code> de icono y los <code>&lt;span&gt;</code> de spinner llevan <code>aria-hidden</code> para que los AT no los lean." }
+          },
+          "elements": {
+            "disabled": "<code>disabled</code> (nativo)",
+            "ariaHiddenIcons": "<code>aria-hidden=\"true\"</code> en iconos"
+          },
+          "info": {
+            "staticValue": "Estático"
           }
         },
         "keyboard": {
@@ -810,35 +830,192 @@
       "api": {
         "inputs": {
           "title": "Inputs del componente",
-          "description": "Propiedades de entrada que modifican el comportamiento y apariencia del menú de acciones."
+          "description": "Propiedades de entrada que modifican el comportamiento y apariencia del menú de acciones.",
+          "rows": {
+            "items": { "description": "Array de items del menú" },
+            "type": { "description": "Modo de renderizado del menú" },
+            "color": { "description": "Color del botón trigger" },
+            "size": { "description": "Tamaño del botón trigger" },
+            "variant": { "description": "Variante del botón trigger" },
+            "width": { "description": "Ancho del botón trigger" },
+            "disabled": { "description": "Estado deshabilitado del menú" },
+            "title": { "description": "Título del botón (atributo title)" },
+            "label": { "description": "Texto del botón trigger" },
+            "icon": { "description": "Icono del botón (Remix Icon)" },
+            "iconPosition": { "description": "Posición del icono" },
+            "iconSubmenu": { "description": "Icono para indicar submenú" },
+            "ariaLabel": { "description": "Etiqueta de accesibilidad" },
+            "itemTemplate": { "description": "Template personalizado para items" }
+          }
         },
         "outputs": {
           "title": "Outputs del componente",
-          "description": "Eventos emitidos por el componente que puedes escuchar para reaccionar a interacciones del usuario."
+          "description": "Eventos emitidos por el componente que puedes escuchar para reaccionar a interacciones del usuario.",
+          "rows": {
+            "onItemAction": { "description": "Emitido al hacer clic en un item" },
+            "onSelectionChange": { "description": "Emitido al cambiar la selección (modo selector)" },
+            "menuOpen": { "description": "Emitido cuando el menú se abre" },
+            "menuClose": { "description": "Emitido cuando el menú se cierra" }
+          }
         },
         "interface": {
           "title": "Interface ActionMenuItem",
-          "description": "Estructura completa de un item del menú con todas sus propiedades disponibles."
+          "description": "Estructura completa de un item del menú con todas sus propiedades disponibles.",
+          "rows": {
+            "action": { "description": "Identificador único de la acción" },
+            "label": { "description": "Texto visible del item" },
+            "subtitle": { "description": "Texto secundario debajo del label" },
+            "title": { "description": "Texto para el atributo title (tooltip)" },
+            "icon": { "description": "Clase del icono RemixIcon" },
+            "shortcut": { "description": "Atajo de teclado (solo visual)" },
+            "templateRef": { "description": "Template personalizado para el item" },
+            "id": { "description": "ID único del item (autogenerado)" },
+            "children": { "description": "Items hijos para crear submenús" },
+            "disabled": { "description": "Si está deshabilitado" },
+            "selected": { "description": "Si está seleccionado (muestra checkmark)" },
+            "separator": { "description": "Si es un separador visual" },
+            "onAction": { "description": "Callback al hacer clic en el item" },
+            "data": { "description": "Datos personalizados adicionales para usar con TemplateRef<any>" },
+            "badge": { "description": "Badge o contador a mostrar" }
+          }
         }
       },
       "theming": {
         "structure": {
           "title": "Variables estructurales",
-          "description": "Variables CSS que controlan dimensiones, espaciado, bordes y sombras del menú."
+          "description": "Variables CSS que controlan dimensiones, espaciado, bordes y sombras del menú.",
+          "rows": {
+            "minWidth": { "description": "Ancho mínimo del menú" },
+            "maxWidth": { "description": "Ancho máximo del menú" },
+            "borderWidth": { "description": "Grosor del borde del menú" },
+            "borderColor": { "description": "Color del borde del menú" },
+            "borderRadius": { "description": "Radio de esquinas del menú" },
+            "padding": { "description": "Padding interno del menú" },
+            "shadow": { "description": "Sombra del menú desplegable" },
+            "staticShadow": { "description": "Sombra del menú estático" },
+            "itemGap": { "description": "Espacio entre elementos del item" },
+            "itemBorder": { "description": "Borde de los items" },
+            "itemBorderRadius": { "description": "Radio de esquinas de items" },
+            "itemPaddingY": { "description": "Padding vertical de items" },
+            "itemPaddingX": { "description": "Padding horizontal de items" },
+            "itemLabelMarginRight": { "description": "Margen derecho del label" },
+            "focusOutlineWidth": { "description": "Ancho del outline de foco" },
+            "focusOutlineOffset": { "description": "Offset del outline de foco" },
+            "arrowPaddingLeft": { "description": "Padding izquierdo de la flecha" },
+            "transition": { "description": "Transiciones de estados" }
+          }
         },
         "items": {
           "title": "Variables de items",
-          "description": "Variables CSS para personalizar la apariencia de los items, separadores, shortcuts y elementos internos."
+          "description": "Variables CSS para personalizar la apariencia de los items, separadores, shortcuts y elementos internos.",
+          "rows": {
+            "subtitleColor": { "description": "Color del texto secundario" },
+            "subtitleFontSize": { "description": "Tamaño de fuente del subtitle" },
+            "labelWeight": { "description": "Peso de fuente del label" },
+            "labelFontSize": { "description": "Tamaño de fuente del label" },
+            "separatorColor": { "description": "Color del separador" },
+            "separatorPadding": { "description": "Padding del separador" },
+            "separatorLabelColor": { "description": "Color del label del separador" },
+            "separatorLabelSpacing": { "description": "Espaciado del label del separador" },
+            "separatorFontSize": { "description": "Tamaño de fuente del separador" },
+            "separatorFontWeight": { "description": "Peso de fuente del separador" },
+            "shortcutBg": { "description": "Fondo del shortcut" },
+            "shortcutColor": { "description": "Color del texto del shortcut" },
+            "shortcutPadding": { "description": "Padding del shortcut" },
+            "shortcutBorderWidth": { "description": "Grosor del borde del shortcut" },
+            "shortcutBorderColor": { "description": "Color del borde del shortcut" },
+            "shortcutBorderRadius": { "description": "Radio de esquinas del shortcut" },
+            "shortcutFontSize": { "description": "Tamaño de fuente del shortcut" },
+            "notifySelectedSize": { "description": "Tamaño del indicador de hijo seleccionado" },
+            "notifySelectedRadius": { "description": "Radio del indicador de hijo seleccionado" }
+          }
         },
         "colors": {
           "title": "Variables de color",
           "description": "Patrón de variables CSS para personalizar los colores de los items del menú según el estado.",
-          "note": "Reemplaza <code>{color}</code> con cualquier color semántico de NUI (<code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>) para personalizar la apariencia de los items en diferentes estados."
+          "note": "Reemplaza <code>{color}</code> con cualquier color semántico de NUI (<code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>) para personalizar la apariencia de los items en diferentes estados.",
+          "rows": {
+            "bg": { "description": "Fondo del item en estado normal" },
+            "text": { "description": "Color del texto del item" },
+            "hoverBg": { "description": "Fondo del item en hover" },
+            "hoverText": { "description": "Color del texto en hover" },
+            "activeBg": { "description": "Fondo del item en active" },
+            "selectedBg": { "description": "Fondo del item seleccionado" },
+            "selectedText": { "description": "Color del texto del item seleccionado" },
+            "notifySelected": { "description": "Color del indicador de hijo seleccionado" }
+          }
         }
       },
       "styling": {
         "title": "Estilos y personalización",
         "description": "Personaliza la apariencia del menú mediante variables CSS. Controla colores, espaciado, tipografía y más."
+      },
+      "a11y": {
+        "roles": {
+          "title": "Roles y atributos ARIA",
+          "description": "El Action Menu aplica los siguientes atributos ARIA siguiendo el patrón de menú de la Guía de Prácticas de Autoría ARIA (APG).",
+          "rows": {
+            "haspopup": { "description": "Anuncia a las tecnologías asistivas que activar este botón abrirá un menú." },
+            "expanded": { "description": "Refleja el estado abierto/cerrado del menú. Se actualiza automáticamente en cada interacción." },
+            "controls": { "description": "Vincula el botón disparador con el contenedor del menú que controla mediante IDs coincidentes." },
+            "roleMenu": { "description": "Identifica el contenedor desplegable como un widget de menú." },
+            "orientation": { "description": "Especifica que los ítems están dispuestos verticalmente (diseño predeterminado del menú)." },
+            "labelledby": { "description": "En modo dinámico, vincula el contenedor del menú a su botón disparador proporcionando un nombre accesible." },
+            "roleItem": { "description": "Rol predeterminado para los ítems interactivos. Cambia a menuitemradio cuando el ítem pertenece a un grupo de selección." },
+            "ariaChecked": { "description": "Presente solo en modo selección. Refleja si este ítem es la selección actual." },
+            "keyshortcuts": { "description": "Expone el texto del atajo de teclado mostrado visualmente junto al ítem." },
+            "roleSeparator": { "description": "Identifica el divisor visual entre grupos de ítems del menú." },
+            "ariaHiddenIcon": { "description": "Impide que los iconos decorativos sean anunciados por los lectores de pantalla." }
+          },
+          "elements": {
+            "trigger": "<code>&lt;button&gt;</code> (disparador)",
+            "menu": "<code>&lt;div&gt;</code> (men\u00fa)",
+            "menuDynamic": "<code>&lt;div&gt;</code> (men\u00fa, modo din\u00e1mico)",
+            "item": "<code>&lt;button&gt;</code> (\u00edtem)",
+            "itemSelectable": "<code>&lt;button&gt;</code> (\u00edtem seleccionable)",
+            "separator": "<code>&lt;div&gt;</code> (separador)",
+            "icon": "<code>&lt;i&gt;</code> (icono)"
+          }
+        },
+        "naming": {
+          "title": "Nombre accesible",
+          "description": "El botón disparador resuelve su nombre accesible siguiendo una cascada de prioridad. Proporciona siempre un nombre accesible explícito para botones disparadores que solo muestran un icono.",
+          "note": "Los menús de solo icono (sin label) deben tener <code>ariaLabel</code> o <code>title</code> configurados. Sin una etiqueta de texto visible, las tecnologías asistivas no pueden identificar el propósito del menú.",
+          "rows": {
+            "triggerLabel": { "description": "El input <code>label</code> se renderiza como el texto interno del botón, que nativamente se convierte en el nombre accesible." },
+            "triggerAriaLabel": { "description": "El input <code>ariaLabel</code> se aplica como atributo <code>aria-label</code> y tiene prioridad sobre <code>label</code> y <code>title</code>." },
+            "triggerIconOnly": { "description": "Si no se proporciona ni <code>ariaLabel</code> ni <code>label</code>, el input <code>title</code> se usa como nombre accesible mediante el tooltip del navegador." },
+            "itemLabel": { "description": "El <code>aria-label</code> de cada ítem del menú se resuelve a partir de <code>item.title || item.label</code> para garantizar que los lectores de pantalla anuncien el texto correcto." },
+            "menuLabelledby": { "description": "En modo dinámico, el contenedor del menú referencia el ID del disparador mediante <code>aria-labelledby</code>, haciendo explícita su asociación." }
+          },
+          "elements": {
+            "triggerWithLabel": "Disparador con <code>label</code>",
+            "triggerWithAriaLabel": "Disparador con <code>ariaLabel</code>",
+            "triggerIconOnly": "Disparador solo icono",
+            "menuItem": "Ítem de menú",
+            "menuContainer": "Contenedor del menú (dinámico)"
+          },
+          "info": {
+            "nativeName": "Nombre nativo",
+            "titleFallback": "<code>title</code> como fallback"
+          }
+        },
+        "keyboard": {
+          "title": "Interacción con teclado",
+          "description": "El Action Menu implementa el patrón de teclado de menú completo de APG. Las teclas de flecha navegan entre ítems; Escape y ArrowLeft cierran los menús.",
+          "note": "<kbd>ArrowDown</kbd>, <kbd>ArrowUp</kbd>, <kbd>Home</kbd> y <kbd>End</kbd> llaman a <code>preventDefault()</code> para evitar el desplazamiento de la página mientras se navega por el menú.",
+          "rows": {
+            "tab": { "description": "Mueve el foco al botón disparador. Cuando el menú está abierto, Tab lo cierra y devuelve el foco al disparador." },
+            "spaceEnter": { "description": "Abre el menú cuando el foco está en el disparador. Activa el ítem del menú enfocado cuando está dentro del menú." },
+            "escape": { "description": "Cierra el menú abierto y devuelve el foco al botón disparador." },
+            "arrowDown": { "description": "Mueve el foco al siguiente ítem del menú. Vuelve del último ítem al primero." },
+            "arrowUp": { "description": "Mueve el foco al ítem anterior del menú. Vuelve del primer ítem al último." },
+            "home": { "description": "Mueve el foco al primer ítem del menú." },
+            "end": { "description": "Mueve el foco al último ítem del menú." },
+            "arrowRight": { "description": "Abre el submenú del ítem enfocado y mueve el foco a su primer ítem." },
+            "arrowLeft": { "description": "Cierra el submenú actual y devuelve el foco al ítem padre." }
+          }
+        }
       }
     },
     "avatar": {
@@ -885,26 +1062,141 @@
       "api": {
         "inputs": {
           "title": "Inputs del componente",
-          "description": "Propiedades de entrada que modifican el comportamiento y apariencia del avatar."
+          "description": "Propiedades de entrada que modifican el comportamiento y apariencia del avatar.",
+          "rows": {
+            "src": { "description": "URL de la imagen del avatar" },
+            "alt": { "description": "Texto alternativo (se usa para generar iniciales si no hay src)" },
+            "initials": { "description": "Iniciales a mostrar (sobrescribe las generadas desde alt)" },
+            "icon": { "description": "Clase de icono RemixIcon a mostrar" },
+            "size": { "description": "Tamaño predefinido del avatar" },
+            "customSize": { "description": "Tamaño personalizado en píxeles (sobrescribe size)" },
+            "variant": { "description": "Forma del avatar" },
+            "color": { "description": "Color de fondo cuando no hay imagen (acepta colores del tema o personalizados)" },
+            "textColor": { "description": "Color del texto/icono (se calcula automáticamente si no se especifica)" }
+          }
         },
         "outputs": {
           "title": "Outputs del componente",
-          "description": "Eventos emitidos por el componente que puedes escuchar para reaccionar a errores de carga de imagen."
+          "description": "Eventos emitidos por el componente que puedes escuchar para reaccionar a errores de carga de imagen.",
+          "rows": {
+            "imageError": { "description": "Emitido cuando la imagen no se puede cargar. El componente automáticamente muestra el fallback." }
+          }
         }
       },
       "theming": {
         "sizes": {
           "title": "Variables de tamaños",
-          "description": "Variables CSS que controlan las dimensiones del avatar, tamaños de fuente y tamaños de iconos."
+          "description": "Variables CSS que controlan las dimensiones del avatar, tamaños de fuente y tamaños de iconos.",
+          "rows": {
+            "sizeXs": { "description": "Dimensión del avatar extra pequeño" },
+            "sizeSm": { "description": "Dimensión del avatar pequeño" },
+            "sizeMd": { "description": "Dimensión del avatar mediano" },
+            "sizeLg": { "description": "Dimensión del avatar grande" },
+            "sizeXl": { "description": "Dimensión del avatar extra grande" },
+            "fontSizeXs": { "description": "Tamaño de fuente para iniciales (xs)" },
+            "fontSizeSm": { "description": "Tamaño de fuente para iniciales (sm)" },
+            "fontSizeMd": { "description": "Tamaño de fuente para iniciales (md)" },
+            "fontSizeLg": { "description": "Tamaño de fuente para iniciales (lg)" },
+            "fontSizeXl": { "description": "Tamaño de fuente para iniciales (xl)" },
+            "iconSizeXs": { "description": "Tamaño del icono (xs)" },
+            "iconSizeSm": { "description": "Tamaño del icono (sm)" },
+            "iconSizeMd": { "description": "Tamaño del icono (md)" },
+            "iconSizeLg": { "description": "Tamaño del icono (lg)" },
+            "iconSizeXl": { "description": "Tamaño del icono (xl)" }
+          }
         },
         "styles": {
           "title": "Variables de estilos",
-          "description": "Variables CSS para personalizar bordes, colores por defecto y tipografía del avatar."
+          "description": "Variables CSS para personalizar bordes, colores por defecto y tipografía del avatar.",
+          "rows": {
+            "borderRadiusCircular": { "description": "Radio de borde para variante circular" },
+            "borderRadiusRounded": { "description": "Radio de borde para variante rounded" },
+            "borderRadiusSquare": { "description": "Radio de borde para variante square" },
+            "borderWidth": { "description": "Grosor del borde del avatar" },
+            "borderWidthBordered": { "description": "Grosor del borde del avatar cuando está bordeado" },
+            "borderOutset": { "description": "Color del borde exterior del avatar" },
+            "defaultBg": { "description": "Color de fondo por defecto" },
+            "defaultColor": { "description": "Color de texto/icono por defecto" },
+            "fontWeight": { "description": "Peso de fuente para iniciales" }
+          }
         }
       },
       "styling": {
         "title": "Estilos y personalización",
         "description": "Personaliza la apariencia del avatar mediante variables CSS. Controla tamaños, colores, bordes y más."
+      },
+      "i18n": {
+        "tokens": {
+          "title": "Tokens de traducción",
+          "description": "El componente <code>nui-avatar-group</code> usa <code>NuiI18nService</code> para construir la etiqueta accesible y el tooltip del indicador de exceso que se muestra cuando el número de avatares supera el input <code>max</code>.",
+          "note": "Usa el marcador <code>{count}</code> en tu cadena de traducción. El componente lo reemplaza en tiempo de ejecución con el número exacto de avatares ocultos.",
+          "rows": {
+            "moreProfiles": { "description": "Etiqueta accesible y tooltip del indicador de exceso (+N). Admite el marcador <code>{count}</code>." }
+          }
+        }
+      },
+      "a11y": {
+        "roles": {
+          "title": "Roles y atributos ARIA",
+          "description": "Cada avatar usa <code>role='img'</code> para exponerse como una imagen semántica. El componente de grupo envuelve los avatares en una estructura de lista accesible.",
+          "rows": {
+            "roleImg": { "description": "Identifica el contenedor del avatar como un elemento de imagen para las tecnologías asistivas." },
+            "ariaLabel": { "description": "Nombre accesible resuelto a partir de <code>tooltip()</code>, <code>alt()</code> o la cadena de respaldo <code>'avatar'</code>." },
+            "title": { "description": "Tooltip visual y nombre accesible secundario de respaldo para el contenedor del avatar." },
+            "imgAlt": { "description": "Siempre vacío (<code>''</code>) para evitar que la imagen interna sea leída de forma independiente; el <code>role='img'</code> y el <code>aria-label</code> del padre son la representación accesible." },
+            "ariaHiddenDecorative": { "description": "Todos los elementos internos decorativos (iniciales, icono, span de respaldo) están ocultos para las tecnologías asistivas." },
+            "roleList": { "description": "El contenedor del grupo de avatares usa <code>role='list'</code> para que los lectores de pantalla lo anuncien como una lista navegable." },
+            "roleListitem": { "description": "Cada envoltorio de avatar dentro del grupo tiene <code>role='listitem'</code> para coincidir con el contexto de lista." },
+            "roleExcess": { "description": "El indicador de exceso (+N) tiene <code>role='img'</code> y un <code>aria-label</code> internacionalizado para que los lectores de pantalla anuncien la cantidad oculta." },
+            "ariaLabelExcess": { "description": "Nombre accesible para el indicador de exceso, generado a partir del token i18n <code>avatar.moreProfiles</code> con <code>{count}</code> reemplazado." },
+            "ariaHiddenExcess": { "description": "El span de texto '+N' visible está oculto para las tecnologías asistivas; solo se lee el <code>aria-label</code> del contenedor padre." }
+          },
+          "elements": {
+            "avatarDiv": "<code>&lt;div&gt;</code> (avatar)",
+            "decorative": "<code>&lt;span&gt;</code> iniciales / <code>&lt;i&gt;</code> icono",
+            "groupList": "<code>&lt;div&gt;</code> (grupo, lista)",
+            "groupItem": "<code>&lt;div&gt;</code> (grupo, ítem)",
+            "excessDiv": "<code>&lt;div&gt;</code> (indicador exceso)",
+            "excessSpan": "<code>&lt;span&gt;</code> (texto exceso \"+N\")"
+          }
+        },
+        "naming": {
+          "title": "Nombre accesible",
+          "description": "El orden de resolución del nombre accesible garantiza que cada avatar tenga una etiqueta significativa para los lectores de pantalla, incluso cuando solo está parcialmente configurado.",
+          "note": "Proporciona siempre <code>alt</code> o <code>tooltip</code> para avatares que representen personas o entidades reales. Una etiqueta genérica <code>'avatar'</code> no da contexto a los usuarios de lectores de pantalla.",
+          "rows": {
+            "tooltip": { "description": "El input <code>tooltip</code> tiene la mayor prioridad para el nombre accesible y también se renderiza como el atributo nativo <code>title</code>." },
+            "alt": { "description": "Si <code>tooltip</code> no está presente, <code>alt</code> se usa como <code>aria-label</code>. También impulsa la generación automática de iniciales." },
+            "fallback": { "description": "Si no se configura ni <code>tooltip</code> ni <code>alt</code>, la cadena <code>'avatar'</code> se usa como nombre accesible de respaldo." },
+            "excess": { "description": "El <code>aria-label</code> del contador de exceso se calcula a partir de <code>avatar.moreProfiles</code>, reemplazando <code>{count}</code> con el número de avatares ocultos." }
+          },
+          "elements": {
+            "avatarWithTooltip": "Avatar con <code>tooltip</code>",
+            "avatarWithAlt": "Avatar con <code>alt</code>",
+            "avatarWithoutName": "Avatar sin <code>tooltip</code> ni <code>alt</code>",
+            "excessIndicator": "Indicador de exceso \"+N\""
+          },
+          "info": {
+            "viaI18n": "vía i18n"
+          }
+        },
+        "hidden": {
+          "title": "Elementos decorativos ocultos",
+          "description": "Los elementos puramente decorativos llevan <code>aria-hidden='true'</code> para evitar anuncios duplicados o sin significado por parte de los lectores de pantalla.",
+          "rows": {
+            "imgEmpty": { "description": "El elemento <code>&lt;img&gt;</code> siempre tiene <code>alt=''</code> para evitar ser leído de forma independiente; el nombre accesible está en el contenedor padre." },
+            "initials": { "description": "El texto de las iniciales está oculto; el nombre accesible proviene del <code>aria-label</code> del contenedor padre." },
+            "icon": { "description": "El elemento de icono es decorativo; el nombre accesible proviene del <code>aria-label</code> del contenedor padre." },
+            "fallbackSpan": { "description": "La letra de respaldo está oculta; el nombre accesible lo proporciona el <code>aria-label</code> del div padre." },
+            "excessSpan": { "description": "El texto '+N' visible está oculto para las AT; el <code>aria-label</code> del div padre proporciona el anuncio para los lectores de pantalla." }
+          },
+          "elements": {
+            "initials": "<code>&lt;span&gt;</code> iniciales",
+            "icon": "<code>&lt;i&gt;</code> icono",
+            "fallback": "<code>&lt;span&gt;</code> fallback (letra alt)",
+            "excessSpan": "<code>&lt;span&gt;</code> texto \"+N\""
+          }
+        }
       }
     },
     "selectButton": {

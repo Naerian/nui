@@ -62,7 +62,8 @@
       "examples": "Beispiele",
       "api": "API",
       "theming": "Theming",
-      "a11y": "Barrierefreiheit"
+      "a11y": "Barrierefreiheit",
+      "i18n": "I18n"
     },
     "tables": {
       "cssVariable": "CSS-Variable",
@@ -77,7 +78,9 @@
       "method": "Methode",
       "argument": "Argument",
       "returns": "Rückgabe",
-      "parameters": "Parameter"
+      "parameters": "Parameter",
+      "element": "Element",
+      "token": "Token"
     }
   },
   "codeBlock": {
@@ -712,6 +715,16 @@
             "iconText": { "description": "Das Symbol erhält automatisch aria-hidden; der sichtbare Text ist als zugänglicher Name ausreichend." },
             "iconOnly": { "description": "Eines der beiden ist <strong>erforderlich</strong>. Priorität: <code>aria-label</code>-Input &gt; <code>title</code>-Input. Die Komponente stellt <code>computedAriaLabel()</code> mit der aufgelösten Logik bereit." },
             "iconOnlyLoading": { "description": "Der Spinner ersetzt das Symbol visuell, aber der zugängliche Name bleibt erhalten, solange sich die Schaltfläche im DOM befindet." }
+          },
+          "elements": {
+            "textLabel": "Schaltfläche mit Text oder <code>label</code>",
+            "iconText": "Symbol + Text",
+            "iconOnly": "Nur Symbol (<code>isIconOnly</code>)",
+            "iconOnlyLoading": "Ladezustand (nur Symbol)"
+          },
+          "info": {
+            "nativeName": "Nativer Name",
+            "ariaLabelTitle": "<code>aria-label</code> / <code>title</code>"
           }
         },
         "states": {
@@ -722,6 +735,13 @@
             "ariaBusy": { "description": "Vorhanden wenn <code>loading=true</code>. Teilt assistiven Technologien mit, dass die Schaltfläche einen Vorgang verarbeitet." },
             "disabled": { "description": "Angewendet wenn <code>disabled=true</code> oder <code>loading=true</code>. Blockiert Fokus und Ereignisse nativ, ohne <code>aria-disabled</code> zu benötigen." },
             "ariaHidden": { "description": "Alle <code>&lt;i&gt;</code>-Symbol- und <code>&lt;span&gt;</code>-Spinner-Elemente tragen <code>aria-hidden</code>, sodass sie von assistiven Technologien nicht gelesen werden." }
+          },
+          "elements": {
+            "disabled": "<code>disabled</code> (nativ)",
+            "ariaHiddenIcons": "<code>aria-hidden=\"true\"</code> auf Symbolen"
+          },
+          "info": {
+            "staticValue": "Statisch"
           }
         },
         "keyboard": {
@@ -803,35 +823,192 @@
       "api": {
         "inputs": {
           "title": "Komponenteneingaben",
-          "description": "Eingabeeigenschaften, die das Verhalten und Erscheinungsbild des Aktionsmenüs ändern."
+          "description": "Eingabeeigenschaften, die das Verhalten und Erscheinungsbild des Aktionsmenüs ändern.",
+          "rows": {
+            "items": { "description": "Array von Menüelementen" },
+            "type": { "description": "Menü-Rendermodus" },
+            "color": { "description": "Farbe der Auslöser-Schaltfläche" },
+            "size": { "description": "Größe der Auslöser-Schaltfläche" },
+            "variant": { "description": "Variante der Auslöser-Schaltfläche" },
+            "width": { "description": "Breite der Auslöser-Schaltfläche" },
+            "disabled": { "description": "Deaktivierter Zustand des Menüs" },
+            "title": { "description": "Schaltflächentitel (title-Attribut)" },
+            "label": { "description": "Text der Auslöser-Schaltfläche" },
+            "icon": { "description": "Schaltflächen-Icon (Remix Icon)" },
+            "iconPosition": { "description": "Icon-Position" },
+            "iconSubmenu": { "description": "Icon für Untermenü-Anzeige" },
+            "ariaLabel": { "description": "Barrierefreiheits-Label" },
+            "itemTemplate": { "description": "Benutzerdefiniertes Template für Elemente" }
+          }
         },
         "outputs": {
           "title": "Komponentenausgaben",
-          "description": "Vom Komponenten ausgegebene Ereignisse, auf die Sie hören können, um auf Benutzerinteraktionen zu reagieren."
+          "description": "Vom Komponenten ausgegebene Ereignisse, auf die Sie hören können, um auf Benutzerinteraktionen zu reagieren.",
+          "rows": {
+            "onItemAction": { "description": "Ausgelöst beim Klick auf ein Element" },
+            "onSelectionChange": { "description": "Ausgelöst bei Änderung der Auswahl (Auswahlmodus)" },
+            "menuOpen": { "description": "Ausgelöst wenn das Menü sich öffnet" },
+            "menuClose": { "description": "Ausgelöst wenn das Menü sich schließt" }
+          }
         },
         "interface": {
           "title": "ActionMenuItem-Schnittstelle",
-          "description": "Vollständige Struktur eines Menüelements mit allen verfügbaren Eigenschaften."
+          "description": "Vollständige Struktur eines Menüelements mit allen verfügbaren Eigenschaften.",
+          "rows": {
+            "action": { "description": "Eindeutiger Aktionsbezeichner" },
+            "label": { "description": "Sichtbarer Elementtext" },
+            "subtitle": { "description": "Sekundärer Text unter dem Label" },
+            "title": { "description": "Text für das title-Attribut (Tooltip)" },
+            "icon": { "description": "RemixIcon-Klasse" },
+            "shortcut": { "description": "Tastaturkürzel (nur visuell)" },
+            "templateRef": { "description": "Benutzerdefiniertes Template für das Element" },
+            "id": { "description": "Eindeutige Element-ID (automatisch generiert)" },
+            "children": { "description": "Unterelemente für Untermenüs" },
+            "disabled": { "description": "Ob es deaktiviert ist" },
+            "selected": { "description": "Ob es ausgewählt ist (zeigt Häkchen)" },
+            "separator": { "description": "Ob es ein visueller Trenner ist" },
+            "onAction": { "description": "Rückruf beim Klick auf das Element" },
+            "data": { "description": "Zusätzliche benutzerdefinierte Daten für TemplateRef<any>" },
+            "badge": { "description": "Badge oder Zähler zum Anzeigen" }
+          }
         }
       },
       "theming": {
         "structure": {
           "title": "Strukturelle Variablen",
-          "description": "CSS-Variablen, die Menüabmessungen, Abstände, Rahmen und Schatten steuern."
+          "description": "CSS-Variablen, die Menüabmessungen, Abstände, Rahmen und Schatten steuern.",
+          "rows": {
+            "minWidth": { "description": "Minimale Menübreite" },
+            "maxWidth": { "description": "Maximale Menübreite" },
+            "borderWidth": { "description": "Rahmenstärke des Menüs" },
+            "borderColor": { "description": "Rahmenfarbe des Menüs" },
+            "borderRadius": { "description": "Eckenradius des Menüs" },
+            "padding": { "description": "Innenabstand des Menüs" },
+            "shadow": { "description": "Schatten des Dropdown-Menüs" },
+            "staticShadow": { "description": "Schatten des statischen Menüs" },
+            "itemGap": { "description": "Abstand zwischen Element-Elementen" },
+            "itemBorder": { "description": "Element-Rahmen" },
+            "itemBorderRadius": { "description": "Eckenradius der Elemente" },
+            "itemPaddingY": { "description": "Vertikaler Innenabstand der Elemente" },
+            "itemPaddingX": { "description": "Horizontaler Innenabstand der Elemente" },
+            "itemLabelMarginRight": { "description": "Rechter Label-Außenabstand" },
+            "focusOutlineWidth": { "description": "Breite des Fokus-Umrisses" },
+            "focusOutlineOffset": { "description": "Versatz des Fokus-Umrisses" },
+            "arrowPaddingLeft": { "description": "Linker Innenabstand des Pfeils" },
+            "transition": { "description": "Zustandsübergänge" }
+          }
         },
         "items": {
           "title": "Element-Variablen",
-          "description": "CSS-Variablen zur Anpassung des Erscheinungsbilds von Elementen, Trennlinien, Tastenkürzeln und internen Elementen."
+          "description": "CSS-Variablen zur Anpassung des Erscheinungsbilds von Elementen, Trennlinien, Tastenkürzeln und internen Elementen.",
+          "rows": {
+            "subtitleColor": { "description": "Textfarbe des Untertitels" },
+            "subtitleFontSize": { "description": "Schriftgröße des Untertitels" },
+            "labelWeight": { "description": "Schriftgewicht des Labels" },
+            "labelFontSize": { "description": "Schriftgröße des Labels" },
+            "separatorColor": { "description": "Trennlinienfarbe" },
+            "separatorPadding": { "description": "Trennlinien-Innenabstand" },
+            "separatorLabelColor": { "description": "Farbe des Trennlinien-Labels" },
+            "separatorLabelSpacing": { "description": "Abstand des Trennlinien-Labels" },
+            "separatorFontSize": { "description": "Schriftgröße der Trennlinie" },
+            "separatorFontWeight": { "description": "Schriftgewicht der Trennlinie" },
+            "shortcutBg": { "description": "Hintergrund des Tastenkürzels" },
+            "shortcutColor": { "description": "Textfarbe des Tastenkürzels" },
+            "shortcutPadding": { "description": "Innenabstand des Tastenkürzels" },
+            "shortcutBorderWidth": { "description": "Rahmenstärke des Tastenkürzels" },
+            "shortcutBorderColor": { "description": "Rahmenfarbe des Tastenkürzels" },
+            "shortcutBorderRadius": { "description": "Eckenradius des Tastenkürzels" },
+            "shortcutFontSize": { "description": "Schriftgröße des Tastenkürzels" },
+            "notifySelectedSize": { "description": "Größe des Indikators für ausgewählte Kinder" },
+            "notifySelectedRadius": { "description": "Radius des Indikators für ausgewählte Kinder" }
+          }
         },
         "colors": {
           "title": "Farbvariablen",
           "description": "CSS-Variablenmuster zur Anpassung von Menüelementfarben pro Zustand.",
-          "note": "Ersetzen Sie <code>{color}</code> durch eine beliebige semantische NUI-Farbe (<code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>), um das Erscheinungsbild von Elementen für verschiedene Zustände anzupassen."
+          "note": "Ersetzen Sie <code>{color}</code> durch eine beliebige semantische NUI-Farbe (<code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>), um das Erscheinungsbild von Elementen für verschiedene Zustände anzupassen.",
+          "rows": {
+            "bg": { "description": "Element-Hintergrund im Normalzustand" },
+            "text": { "description": "Textfarbe des Elements" },
+            "hoverBg": { "description": "Element-Hintergrund beim Hover" },
+            "hoverText": { "description": "Textfarbe beim Hover" },
+            "activeBg": { "description": "Element-Hintergrund im aktiven Zustand" },
+            "selectedBg": { "description": "Hintergrund des ausgewählten Elements" },
+            "selectedText": { "description": "Textfarbe des ausgewählten Elements" },
+            "notifySelected": { "description": "Farbe des Indikators für ausgewählte Kinder" }
+          }
         }
       },
       "styling": {
         "title": "Stile & Anpassung",
         "description": "Passen Sie das Menüerscheinungsbild über CSS-Variablen an. Steuern Sie Farben, Abstände, Typografie und mehr."
+      },
+      "a11y": {
+        "roles": {
+          "title": "ARIA-Rollen & Attribute",
+          "description": "Das Action Menu wendet die folgenden ARIA-Attribute gemäß dem Menü-Muster des ARIA Authoring Practices Guide (APG) an.",
+          "rows": {
+            "haspopup": { "description": "Teilt Hilfstechnologien mit, dass das Aktivieren dieser Schaltfläche ein Menü öffnet." },
+            "expanded": { "description": "Spiegelt den Offen-/Geschlossen-Zustand des Menüs wider. Wird bei jeder Interaktion automatisch aktualisiert." },
+            "controls": { "description": "Verknüpft die Auslöseschaltfläche mit dem Menü-Container, den sie über übereinstimmende IDs steuert." },
+            "roleMenu": { "description": "Identifiziert den Dropdown-Container als Menü-Widget." },
+            "orientation": { "description": "Gibt an, dass Elemente vertikal angeordnet sind (Standard-Menü-Layout)." },
+            "labelledby": { "description": "Im dynamischen Modus verknüpft es den Menü-Container mit seiner Auslöseschaltfläche und stellt einen barrierefreien Namen bereit." },
+            "roleItem": { "description": "Standardrolle für interaktive Elemente. Wechselt zu menuitemradio, wenn das Element zu einer Auswahlgruppe gehört." },
+            "ariaChecked": { "description": "Nur im Auswahlmodus vorhanden. Gibt an, ob dieses Element die aktuelle Auswahl ist." },
+            "keyshortcuts": { "description": "Gibt den visuell neben dem Element angezeigten Tastenkomplex-Text an." },
+            "roleSeparator": { "description": "Identifiziert das visuelle Trennzeichen zwischen Gruppen von Menüelem enten." },
+            "ariaHiddenIcon": { "description": "Verhindert, dass dekorative Icons von Screenreadern vorgelesen werden." }
+          },
+          "elements": {
+            "trigger": "<code>&lt;button&gt;</code> (Auslöser)",
+            "menu": "<code>&lt;div&gt;</code> (Menü)",
+            "menuDynamic": "<code>&lt;div&gt;</code> (Menü, dynamischer Modus)",
+            "item": "<code>&lt;button&gt;</code> (Element)",
+            "itemSelectable": "<code>&lt;button&gt;</code> (auswählbares Element)",
+            "separator": "<code>&lt;div&gt;</code> (Trennzeichen)",
+            "icon": "<code>&lt;i&gt;</code> (Symbol)"
+          }
+        },
+        "naming": {
+          "title": "Barrierefreier Name",
+          "description": "Die Auslöseschaltfläche löst ihren barrierefreien Namen anhand einer Prioritätskaskade auf. Geben Sie immer einen expliziten barrierefreien Namen für Auslöser mit nur einem Symbol an.",
+          "note": "Menüs mit nur einem Symbol (kein Label) müssen <code>ariaLabel</code> oder <code>title</code> gesetzt haben. Ohne sichtbares Textetikett können Hilfstechnologien den Zweck des Menüs nicht identifizieren.",
+          "rows": {
+            "triggerLabel": { "description": "Die <code>label</code>-Eingabe wird als innerer Text der Schaltfläche gerendert, der nativ zum barrierefreien Namen wird." },
+            "triggerAriaLabel": { "description": "Die <code>ariaLabel</code>-Eingabe wird als <code>aria-label</code>-Attribut angewendet und hat Vorrang vor <code>label</code> und <code>title</code>." },
+            "triggerIconOnly": { "description": "Wenn weder <code>ariaLabel</code> noch <code>label</code> angegeben sind, wird die <code>title</code>-Eingabe über den Browser-Tooltip als barrierefreier Name verwendet." },
+            "itemLabel": { "description": "Das <code>aria-label</code> jedes Menüelements wird aus <code>item.title || item.label</code> aufgelöst, um sicherzustellen, dass Screenreader den richtigen Text ankündigen." },
+            "menuLabelledby": { "description": "Im dynamischen Modus referenziert der Menü-Container die Auslöser-ID über <code>aria-labelledby</code>, wodurch ihre Verbindung explizit gemacht wird." }
+          },
+          "elements": {
+            "triggerWithLabel": "Auslöser mit <code>label</code>",
+            "triggerWithAriaLabel": "Auslöser mit <code>ariaLabel</code>",
+            "triggerIconOnly": "Auslöser nur mit Symbol",
+            "menuItem": "Menüelement",
+            "menuContainer": "Menü-Container (dynamisch)"
+          },
+          "info": {
+            "nativeName": "Nativer Name",
+            "titleFallback": "<code>title</code> als Fallback"
+          }
+        },
+        "keyboard": {
+          "title": "Tastaturinteraktion",
+          "description": "Das Action Menu implementiert das vollständige APG-Menü-Tastaturmuster. Pfeiltasten navigieren zwischen Elementen; Escape und PfeilLinks schließen Menüs.",
+          "note": "<kbd>PfeilUnten</kbd>, <kbd>PfeilOben</kbd>, <kbd>Pos1</kbd> und <kbd>Ende</kbd> rufen <code>preventDefault()</code> auf, um seitliches Scrollen während der Menünavigation zu verhindern.",
+          "rows": {
+            "tab": { "description": "Fokussiert die Auslöseschaltfläche. Wenn das Menü offen ist, schließt Tab es und gibt den Fokus an den Auslöser zurück." },
+            "spaceEnter": { "description": "Öffnet das Menü, wenn der Fokus auf dem Auslöser liegt. Aktiviert das fokussierte Menüelement, wenn man im Menü ist." },
+            "escape": { "description": "Schließt das geöffnete Menü und gibt den Fokus an die Auslöseschaltfläche zurück." },
+            "arrowDown": { "description": "Verschiebt den Fokus auf das nächste Menüelement. Kehrt vom letzten Element zum ersten zurück." },
+            "arrowUp": { "description": "Verschiebt den Fokus auf das vorherige Menüelement. Kehrt vom ersten Element zum letzten zurück." },
+            "home": { "description": "Verschiebt den Fokus auf das erste Menüelement." },
+            "end": { "description": "Verschiebt den Fokus auf das letzte Menüelement." },
+            "arrowRight": { "description": "Öffnet das Untermenü des fokussierten Elements und verschiebt den Fokus auf sein erstes Element." },
+            "arrowLeft": { "description": "Schließt das aktuelle Untermenü und gibt den Fokus an das übergeordnete Element zurück." }
+          }
+        }
       }
     },
     "avatar": {
@@ -878,26 +1055,141 @@
       "api": {
         "inputs": {
           "title": "Komponenteneingaben",
-          "description": "Eingabeeigenschaften, die das Verhalten und Erscheinungsbild des Avatars ändern."
+          "description": "Eingabeeigenschaften, die das Verhalten und Erscheinungsbild des Avatars ändern.",
+          "rows": {
+            "src": { "description": "URL des Avatar-Bildes" },
+            "alt": { "description": "Alternativer Text (zur Generierung von Initialen wenn kein src vorhanden)" },
+            "initials": { "description": "Anzuzeigende Initialen (überschreibt aus alt generierte)" },
+            "icon": { "description": "RemixIcon-Klasse zur Anzeige" },
+            "size": { "description": "Vordefinierte Avatar-Größe" },
+            "customSize": { "description": "Benutzerdefinierte Größe in Pixeln (überschreibt size)" },
+            "variant": { "description": "Avatar-Form" },
+            "color": { "description": "Hintergrundfarbe wenn kein Bild vorhanden (akzeptiert Theme-Farben oder benutzerdefinierte)" },
+            "textColor": { "description": "Text-/Icon-Farbe (automatisch berechnet wenn nicht angegeben)" }
+          }
         },
         "outputs": {
           "title": "Komponentenausgaben",
-          "description": "Vom Komponenten ausgegebene Ereignisse, auf die Sie hören können, um auf Bildladefehler zu reagieren."
+          "description": "Vom Komponenten ausgegebene Ereignisse, auf die Sie hören können, um auf Bildladefehler zu reagieren.",
+          "rows": {
+            "imageError": { "description": "Ausgelöst wenn das Bild nicht geladen werden kann. Die Komponente zeigt automatisch den Fallback an." }
+          }
         }
       },
       "theming": {
         "sizes": {
           "title": "Größenvariablen",
-          "description": "CSS-Variablen, die Avatar-Abmessungen, Schriftgrößen und Icon-Größen steuern."
+          "description": "CSS-Variablen, die Avatar-Abmessungen, Schriftgrößen und Icon-Größen steuern.",
+          "rows": {
+            "sizeXs": { "description": "Abmessung des extra kleinen Avatars" },
+            "sizeSm": { "description": "Abmessung des kleinen Avatars" },
+            "sizeMd": { "description": "Abmessung des mittleren Avatars" },
+            "sizeLg": { "description": "Abmessung des großen Avatars" },
+            "sizeXl": { "description": "Abmessung des extra großen Avatars" },
+            "fontSizeXs": { "description": "Schriftgröße für Initialen (xs)" },
+            "fontSizeSm": { "description": "Schriftgröße für Initialen (sm)" },
+            "fontSizeMd": { "description": "Schriftgröße für Initialen (md)" },
+            "fontSizeLg": { "description": "Schriftgröße für Initialen (lg)" },
+            "fontSizeXl": { "description": "Schriftgröße für Initialen (xl)" },
+            "iconSizeXs": { "description": "Icon-Größe (xs)" },
+            "iconSizeSm": { "description": "Icon-Größe (sm)" },
+            "iconSizeMd": { "description": "Icon-Größe (md)" },
+            "iconSizeLg": { "description": "Icon-Größe (lg)" },
+            "iconSizeXl": { "description": "Icon-Größe (xl)" }
+          }
         },
         "styles": {
           "title": "Stil-Variablen",
-          "description": "CSS-Variablen zur Anpassung von Rahmen, Standardfarben und Avatar-Typografie."
+          "description": "CSS-Variablen zur Anpassung von Rahmen, Standardfarben und Avatar-Typografie.",
+          "rows": {
+            "borderRadiusCircular": { "description": "Randradius für kreisförmige Variante" },
+            "borderRadiusRounded": { "description": "Randradius für abgerundete Variante" },
+            "borderRadiusSquare": { "description": "Randradius für quadratische Variante" },
+            "borderWidth": { "description": "Rahmenstärke des Avatars" },
+            "borderWidthBordered": { "description": "Rahmenstärke des Avatars mit Rahmen" },
+            "borderOutset": { "description": "Farbe des äußeren Avatar-Rahmens" },
+            "defaultBg": { "description": "Standard-Hintergrundfarbe" },
+            "defaultColor": { "description": "Standard-Text-/Icon-Farbe" },
+            "fontWeight": { "description": "Schriftgewicht für Initialen" }
+          }
         }
       },
       "styling": {
         "title": "Stile & Anpassung",
         "description": "Passen Sie das Avatar-Erscheinungsbild über CSS-Variablen an. Steuern Sie Größen, Farben, Rahmen und mehr."
+      },
+      "i18n": {
+        "tokens": {
+          "title": "Übersetzungs-Tokens",
+          "description": "Die <code>nui-avatar-group</code>-Komponente verwendet <code>NuiI18nService</code>, um das barrierefreie Etikett und den Tooltip des Überschuss-Indikators zu erstellen, der angezeigt wird, wenn die Anzahl der Avatare die <code>max</code>-Eingabe überschreitet.",
+          "note": "Verwenden Sie den <code>{count}</code>-Platzhalter in Ihrer Übersetzungszeichenkette. Die Komponente ersetzt ihn zur Laufzeit durch die genaue Anzahl versteckter Avatare.",
+          "rows": {
+            "moreProfiles": { "description": "Barrierefreies Etikett und Tooltip des Überschuss-Indikators (+N). Unterstützt den <code>{count}</code>-Platzhalter." }
+          }
+        }
+      },
+      "a11y": {
+        "roles": {
+          "title": "ARIA-Rollen & Attribute",
+          "description": "Jeder Avatar verwendet <code>role='img'</code>, um sich als semantisches Bild darzustellen. Die Gruppenkomponente umschließt Avatare in einer barrierefreien Listenstruktur.",
+          "rows": {
+            "roleImg": { "description": "Identifiziert den Avatar-Container als Bildelement für Hilfstechnologien." },
+            "ariaLabel": { "description": "Barrierefreier Name aufgelöst aus <code>tooltip()</code>, <code>alt()</code> oder dem Fallback-String <code>'avatar'</code>." },
+            "title": { "description": "Visueller Tooltip und sekundärer barrierefreier Namens-Fallback für den Avatar-Container." },
+            "imgAlt": { "description": "Immer leer (<code>''</code>), um zu verhindern, dass das innere Bild unabhängig gelesen wird; <code>role='img'</code> und <code>aria-label</code> des übergeordneten Elements sind die barrierefreie Darstellung." },
+            "ariaHiddenDecorative": { "description": "Alle dekorativen internen Elemente (Initialen, Icon, Fallback-Span) sind vor Hilfstechnologien verborgen." },
+            "roleList": { "description": "Der Avatar-Gruppen-Container verwendet <code>role='list'</code>, damit Screenreader ihn als navigierbare Liste ankündigen." },
+            "roleListitem": { "description": "Jeder Avatar-Wrapper in der Gruppe hat <code>role='listitem'</code>, um dem Listenkontext zu entsprechen." },
+            "roleExcess": { "description": "Der Überschuss-Indikator (+N) hat <code>role='img'</code> und ein internationalisiertes <code>aria-label</code>, damit Screenreader die versteckte Anzahl ankündigen." },
+            "ariaLabelExcess": { "description": "Barrierefreier Name für den Überschuss-Indikator, generiert aus dem i18n-Token <code>avatar.moreProfiles</code> mit ersetztem <code>{count}</code>." },
+            "ariaHiddenExcess": { "description": "Der sichtbare '+N'-Text-Span ist vor Hilfstechnologien verborgen; nur das <code>aria-label</code> des übergeordneten Containers wird gelesen." }
+          },
+          "elements": {
+            "avatarDiv": "<code>&lt;div&gt;</code> (Avatar)",
+            "decorative": "<code>&lt;span&gt;</code> Initialen / <code>&lt;i&gt;</code> Symbol",
+            "groupList": "<code>&lt;div&gt;</code> (Gruppe, Liste)",
+            "groupItem": "<code>&lt;div&gt;</code> (Gruppe, Element)",
+            "excessDiv": "<code>&lt;div&gt;</code> (Überschuss-Indikator)",
+            "excessSpan": "<code>&lt;span&gt;</code> (\"+N\"-Text)"
+          }
+        },
+        "naming": {
+          "title": "Barrierefreier Name",
+          "description": "Die Reihenfolge der Auflösung des barrierefreien Namens stellt sicher, dass jeder Avatar eine aussagekräftige Beschriftung für Screenreader hat, auch wenn er nur teilweise konfiguriert ist.",
+          "note": "Geben Sie immer <code>alt</code> oder <code>tooltip</code> für Avatare an, die echte Personen oder Entitäten darstellen. Eine generische <code>'avatar'</code>-Beschriftung gibt Screenreader-Benutzern keinen Kontext.",
+          "rows": {
+            "tooltip": { "description": "Die <code>tooltip</code>-Eingabe hat die höchste Priorität für den barrierefreien Namen und wird auch als natives <code>title</code>-Attribut gerendert." },
+            "alt": { "description": "Wenn <code>tooltip</code> fehlt, wird <code>alt</code> als <code>aria-label</code> verwendet. Es steuert auch die automatische Initialen-Generierung." },
+            "fallback": { "description": "Wenn weder <code>tooltip</code> noch <code>alt</code> gesetzt ist, wird der String <code>'avatar'</code> als barrierefreier Fallback-Name verwendet." },
+            "excess": { "description": "Das <code>aria-label</code> des Überschuss-Zählers wird aus <code>avatar.moreProfiles</code> berechnet, wobei <code>{count}</code> durch die Anzahl versteckter Avatare ersetzt wird." }
+          },
+          "elements": {
+            "avatarWithTooltip": "Avatar mit <code>tooltip</code>",
+            "avatarWithAlt": "Avatar mit <code>alt</code>",
+            "avatarWithoutName": "Avatar ohne <code>tooltip</code> oder <code>alt</code>",
+            "excessIndicator": "Überschuss-Indikator \"+N\""
+          },
+          "info": {
+            "viaI18n": "via i18n"
+          }
+        },
+        "hidden": {
+          "title": "Verborgene dekorative Elemente",
+          "description": "Rein dekorative Elemente tragen <code>aria-hidden='true'</code>, um doppelte oder bedeutungslose Ankündigungen durch Screenreader zu vermeiden.",
+          "rows": {
+            "imgEmpty": { "description": "Das <code>&lt;img&gt;</code>-Element hat immer <code>alt=''</code>, um zu vermeiden, dass es unabhängig gelesen wird; der barrierefreie Name liegt auf dem übergeordneten Container." },
+            "initials": { "description": "Der Initialen-Text ist verborgen; der barrierefreie Name stammt vom <code>aria-label</code> des übergeordneten Containers." },
+            "icon": { "description": "Das Icon-Element ist dekorativ; der barrierefreie Name stammt vom <code>aria-label</code> des übergeordneten Containers." },
+            "fallbackSpan": { "description": "Der Fallback-Buchstabe ist verborgen; der barrierefreie Name wird durch das <code>aria-label</code> des übergeordneten Divs bereitgestellt." },
+            "excessSpan": { "description": "Der sichtbare '+N'-Text ist vor AT verborgen; das <code>aria-label</code> des übergeordneten Divs bietet die Ankündigung für Screenreader." }
+          },
+          "elements": {
+            "initials": "<code>&lt;span&gt;</code> Initialen",
+            "icon": "<code>&lt;i&gt;</code> Symbol",
+            "fallback": "<code>&lt;span&gt;</code> Fallback (Alt-Buchstabe)",
+            "excessSpan": "<code>&lt;span&gt;</code> \"+N\"-Text"
+          }
+        }
       }
     },
     "selectButton": {

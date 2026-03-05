@@ -60,6 +60,12 @@ export class ActionMenuPageComponent extends BaseComponentPage {
       icon: 'ri-palette-line',
       sections: ['theming-structure', 'theming-items', 'theming-colors'],
     },
+    {
+      id: 'a11y',
+      label: 'common.tabs.a11y',
+      icon: 'ri-eye-line',
+      sections: ['a11y-roles', 'a11y-naming', 'a11y-keyboard'],
+    },
   ];
 
   // Datos para ejemplos interactivos
