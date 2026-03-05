@@ -2,22 +2,25 @@
   <div
     class="nui-avatar-group__list"
     [class]="listClasses()"
+    role="list"
   >
     <!-- Avatares visibles -->
     @for (avatar of visibleAvatars(); track avatar) {
-      <nui-avatar
-        class="nui-avatar-group__avatar"
-        [src]="avatar.src"
-        [alt]="avatar.alt"
-        [initials]="avatar.initials"
-        [icon]="avatar.icon"
-        [color]="effectiveColor() || avatar.color"
-        [customSize]="effectiveSize() || avatar?.customSize"
-        [size]="effectiveSize() || avatar.size"
-        [variant]="effectiveVariant() || avatar.variant"
-        [bordered]="bordered()"
-        [tooltip]="avatar.tooltip || avatar.alt || ''"
-      />
+      <div role="listitem">
+        <nui-avatar
+          class="nui-avatar-group__avatar"
+          [src]="avatar.src"
+          [alt]="avatar.alt"
+          [initials]="avatar.initials"
+          [icon]="avatar.icon"
+          [color]="effectiveColor() || avatar.color"
+          [customSize]="effectiveSize() || avatar?.customSize"
+          [size]="effectiveSize() || avatar.size"
+          [variant]="effectiveVariant() || avatar.variant"
+          [bordered]="bordered()"
+          [tooltip]="avatar.tooltip || avatar.alt || ''"
+        />
+      </div>
     }
 
     <!-- Indicador de excedente "+N" -->
@@ -25,10 +28,11 @@
       <div
         class="nui-avatar-group__excess"
         [class]="excessClasses()"
-        [title]="excessTooltip()"
+        role="img"
         [attr.aria-label]="excessTooltip()"
+        [attr.title]="excessTooltip() || null"
       >
-        {{ excessText() }}
+        <span aria-hidden="true">{{ excessText() }}</span>
       </div>
     }
   </div>
