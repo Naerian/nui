@@ -22,17 +22,20 @@ export const DEFAULT_PAGINATOR_I18N: Required<PaginatorI18n> = {
   infiniteLoadedItems: '{loaded} elementos cargados de {total}',
   infiniteLoadEnd: 'No hay más elementos que mostrar',
 
-  // ARIA labels
-  ariaPagination: 'Paginación',
-  ariaMorePages: 'Más páginas',
-  ariaPage: 'Página {page}',
-  ariaCurrentPage: '{page}, página actual',
-  ariaGoToPage: 'Ir a página {page}',
-  ariaCurrentPageWithRange:
-    'Página {page} de {totalPages}, mostrando items {start} a {end} de {total} resultados',
-  ariaCurrentPageNoRange: 'Página {page} de {totalPages}',
-  ariaShowingItems: 'Mostrando items {start} a {end} de {total} resultados',
-  ariaLoading: 'Cargando nueva página...',
+  // Textos exclusivos para lectores de pantalla
+  a11y: {
+    pagination: 'Paginación',
+    morePages: 'Más páginas',
+    page: 'Página {page}',
+    currentPage: '{page}, página actual',
+    goToPage: 'Ir a página {page}',
+    currentPageWithRange:
+      'Página {page} de {totalPages}, mostrando items {start} a {end} de {total} resultados',
+    currentPageNoRange: 'Página {page} de {totalPages}',
+    fractionalPage: 'Página {page} de {totalPages}',
+    showingItems: 'Mostrando items {start} a {end} de {total} resultados',
+    loading: 'Cargando nueva página...',
+  },
 };
 
 /**
@@ -55,18 +58,21 @@ export interface PaginatorI18n {
   morePages: string; // "Más páginas"
   loadMore: string; // "Cargar más"
   loading: string; // "Cargando..."
-  pageJumpHelp: string; // "Página inválida. Ingrese un número entre 1 y {totalPages}."
+  pageJumpHelp: string; // "Ingrese un número entre 1 y {totalPages}."
   infiniteLoadedItems: string; // "{loaded} elementos cargados de {total}"
   infiniteLoadEnd: string; // "No hay más elementos que mostrar"
 
-  // ARIA labels
-  ariaPagination: string; // "Paginación"
-  ariaMorePages: string; // "Más páginas"
-  ariaPage: string; // "Página {page}"
-  ariaCurrentPage: string; // "página actual"
-  ariaGoToPage: string; // "Ir a página {page}"
-  ariaCurrentPageWithRange: string; // "Página {page} de {totalPages}, mostrando items {start} a {end} de {total} resultados"
-  ariaCurrentPageNoRange: string; // "Página {page} de {totalPages}"
-  ariaShowingItems: string; // "Mostrando items {start} a {end} de {total} resultados"
-  ariaLoading: string; // "Cargando nueva página..."
+  // Textos exclusivos para lectores de pantalla
+  a11y: {
+    pagination: string;              // "Paginación" — aria-label del <nav> y del host
+    morePages: string;               // "Más páginas" — aria-label de los puntos suspensivos
+    page: string;                    // "Página {page}" — usado en el aria-live al navegar
+    currentPage: string;             // "{page}, página actual" — aria-label del botón activo
+    goToPage: string;                // "Ir a página {page}" — aria-label de botones de página
+    currentPageWithRange: string;    // "Página {page} de {totalPages}, mostrando items {start} a {end} de {total} resultados"
+    currentPageNoRange: string;      // "Página {page} de {totalPages}"
+    fractionalPage: string;          // "Página {page} de {totalPages}" — aria-label del modo fraccionado
+    showingItems: string;            // "Mostrando items {start} a {end} de {total} resultados"
+    loading: string;                 // "Cargando nueva página..." — anuncio al hacer loading
+  };
 }

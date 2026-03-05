@@ -1,6 +1,7 @@
-<div aria-live="assertive" aria-atomic="true" class="sr-only">
-  {{ ariaLiveMessage() }}
-</div>
+<!-- Anuncios de navegación para lectores de pantalla (polite: no interrumpe al usuario) -->
+<span aria-live="polite" aria-atomic="true" class="sr-only">{{ ariaLiveMessage() }}</span>
+<!-- Anuncios de error para lectores de pantalla (assertive: interrumpe inmediatamente) -->
+<span aria-live="assertive" aria-atomic="true" class="sr-only">{{ ariaErrorMessage() }}</span>
 
 @if (isLoading()) {
   <div class="nui-paginator__loading" role="status" aria-live="polite">
@@ -49,7 +50,7 @@
         class="nui-paginator"
         [class.nui-paginator--disabled]="disabled()"
         role="navigation"
-        [attr.aria-label]="effectiveI18n().ariaPagination"
+        [attr.aria-label]="effectiveI18n().a11y.pagination"
       >
         @for (element of getElementsForArea('center'); track element) {
           <ng-container
@@ -103,6 +104,7 @@
             [size]="effectiveSize()"
             [color]="effectiveColor()"
             [variant]="effectiveVariant()"
+            [attr.aria-label]="effectiveI18n().itemsPerPage"
             (valueChange)="onPageSizeChange($event)"
           />
         </div>
@@ -213,8 +215,11 @@
       <div class="nui-paginator">
         @for (page of visiblePages(); track $index) {
           @if (isEllipsis(page)) {
-            <span class="nui-paginator__ellipsis" role="presentation">
-              {{ getEllipsisText($any(page)) }}
+            <span
+              class="nui-paginator__ellipsis"
+              [attr.aria-label]="getEllipsisAriaLabel($any(page))"
+            >
+              <span aria-hidden="true">{{ getEllipsisText($any(page)) }}</span>
             </span>
           } @else {
             <button
@@ -224,7 +229,6 @@
               [disabled]="disabled()"
               (click)="goToPage($any(page))"
               [attr.aria-current]="isPageActive(page) ? 'page' : null"
-              [attr.aria-pressed]="isPageActive(page)"
               [attr.aria-label]="getPageAriaLabel(page)"
               data-paginator-button
             >
@@ -238,6 +242,10 @@
     @case (PaginatorElementEnum.PAGE_JUMP) {
       @if (canShowElement(PaginatorElementEnum.PAGE_JUMP)) {
         <div class="nui-paginator__page-jump">
+          <!-- Hint oculto para lectores de pantalla, referenciado por aria-describedby -->
+          <span [id]="instanceId + '-jump-hint'" class="sr-only">
+            {{ getJumpHintText() }}
+          </span>
           <div class="nui-paginator__page-jump-wrapper">
             <input
               type="number"
@@ -249,6 +257,7 @@
               (keydown.enter)="handlePageJump()"
               [placeholder]="currentPage().toString()"
               [attr.aria-label]="effectiveI18n().goToPage"
+              [attr.aria-describedby]="instanceId + '-jump-hint'"
             />
             <button
               type="button"
@@ -267,11 +276,29 @@
     }
 
     @case (PaginatorElementEnum.CURRENT_PAGE) {
-      <span class="nui-paginator__current-page">{{ currentPage() }} / {{ totalPages() }}</span>
+      <span
+        class="nui-paginator__current-page"
+        [attr.aria-label]="
+          effectiveI18n()
+            .a11y.currentPageNoRange.replace('{page}', currentPage().toString())
+            .replace('{totalPages}', totalPages().toString())
+        "
+      >
+        {{ currentPage() }} / {{ totalPages() }}
+      </span>
     }
 
     @case (PaginatorElementEnum.FRACTIONAL_NUMBERS) {
-      <span class="nui-paginator__fractional-info">{{ getFractionalText() }}</span>
+      <span
+        class="nui-paginator__fractional-info"
+        [attr.aria-label]="
+          effectiveI18n()
+            .a11y.fractionalPage.replace('{page}', currentPage().toString())
+            .replace('{totalPages}', totalPages().toString())
+        "
+      >
+        {{ getFractionalText() }}
+      </span>
     }
 
     @case (PaginatorElementEnum.INFINITE_BUTTON) {
@@ -287,6 +314,29 @@
         >
           {{ effectiveI18n().loadMore }}
         </button>
+      }
+    }
+
+    @case (PaginatorElementEnum.INFINITE_COUNTER) {
+      @if (canShowElement(PaginatorElementEnum.INFINITE_COUNTER)) {
+        <div class="nui-paginator__infinite-counter" aria-live="polite" aria-atomic="true">
+          <span class="nui-paginator__infinite-counter-text">{{ getInfiniteLoadedText() }}</span>
+        </div>
+      }
+    }
+
+    @case (PaginatorElementEnum.INFINITE_END_MESSAGE) {
+      @if (canShowElement(PaginatorElementEnum.INFINITE_END_MESSAGE)) {
+        <div
+          class="nui-paginator__infinite-end"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <span class="nui-paginator__infinite-end-text">
+            {{ effectiveI18n().infiniteLoadEnd }}
+          </span>
+        </div>
       }
     }
   }

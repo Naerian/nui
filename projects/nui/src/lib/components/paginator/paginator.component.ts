@@ -114,21 +114,15 @@ import { DEFAULT_PAGINATOR_I18N, PaginatorI18n } from './models/paginator-i18n.m
   imports: [CommonModule, FormsModule, SelectButtonComponent, ButtonDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    // Clase base para que el SCSS la detecte
+    role: 'region',
     class: 'nui-paginator-container',
-
-    // Clases condicionales (booleanos)
+    '[attr.aria-label]': 'effectiveI18n().a11y.pagination',
     '[class.nui-paginator-container--mobile]': 'isMobileDevice()',
     '[class.nui-paginator-container--wrap]': 'autoWrap()',
     '[class.nui-paginator-container--custom-layout]': 'effectiveLayout()',
     '[class.nui-paginator-container--layout-column]': 'getLayoutDirection() === "column"',
-
-    // Clases dinámicas (Concatenación de strings para variantes)
-    // Esto sustituye al [ngClass] del array
     '[class]':
       '"nui-paginator-container--" + effectiveSize() + " nui-paginator-container--" + effectiveColor() + " nui-paginator-container--" + effectiveVariant() + " nui-paginator-container--" + effectiveMode()',
-
-    // Atributos de accesibilidad
     '[attr.aria-description]': 'getAriaDescription()',
   },
 })
@@ -146,8 +140,13 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   // Caché para memoización de páginas visibles
   private _visiblePagesCache = new Map<string, (number | string)[]>();
 
-  // Temporizador para limpiar mensajes del aria-live
+  // Temporizador para limpiar mensajes del aria-live de navegación
   private clearAriaLiveMsgTimeout?: ReturnType<typeof setTimeout>;
+  // Temporizador para limpiar mensajes de error del aria-live
+  private clearAriaErrorTimeout?: ReturnType<typeof setTimeout>;
+
+  /** ID único por instancia para evitar colisiones en multi-instancia */
+  readonly instanceId = `nui-pag-${Math.random().toString(36).slice(2, 9)}`;
 
   // Enum para usar en el template
   protected PaginatorNavDisplayEnum = PaginatorNavDisplayEnum;
@@ -396,11 +395,21 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * Prioridad: Input > Configuración global > i18n > Valores por defecto
    */
   effectiveI18n = computed<PaginatorI18n>(() => {
+    const base = DEFAULT_PAGINATOR_I18N;
+    const i18n = this._i18n();
+    const globalTexts = this.paginatorConfig?.navTexts || {};
+    const inputTexts = this.navTexts() || {};
     return {
-      ...DEFAULT_PAGINATOR_I18N, // 1. La base por defecto
-      ...this._i18n(), // 2. Lo que diga el servicio (traducción actual)
-      ...(this.paginatorConfig?.navTexts || {}), // 3. Sobrescritura para toda la app (config global)
-      ...(this.navTexts() || {}), // 4. Sobrescritura para este botón concreto (input)
+      ...base, // 1. La base por defecto
+      ...i18n, // 2. Lo que diga el servicio (traducción actual)
+      ...globalTexts, // 3. Sobrescritura para toda la app (config global)
+      ...inputTexts, // 4. Sobrescritura para este instancia concreta (input)
+      a11y: {
+        ...base.a11y,
+        ...(i18n.a11y || {}),
+        ...(globalTexts.a11y || {}),
+        ...(inputTexts.a11y || {}),
+      },
     };
   });
 
@@ -581,9 +590,14 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   isLoading = signal<boolean>(false);
 
   /**
-   * Mensaje para aria-live
+   * Mensaje para aria-live de navegación (polite — no interrumpe al usuario)
    */
   ariaLiveMessage = signal<string>('');
+
+  /**
+   * Mensaje para aria-live de errores (assertive — interrumpe inmediatamente)
+   */
+  ariaErrorMessage = signal<string>('');
 
   /**
    * Estado del modo infinito
@@ -862,7 +876,8 @@ export class PaginatorComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // Los observables se limpian automáticamente con takeUntilDestroyed
-    // Limpiar caché si es necesario
+    clearTimeout(this.clearAriaLiveMsgTimeout);
+    clearTimeout(this.clearAriaErrorTimeout);
     this._visiblePagesCache.clear();
   }
 
@@ -1352,8 +1367,12 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     const total = this.totalPages();
 
     if (isNaN(pageNum) || pageNum < 1 || pageNum > total) {
-      // Mostrar mensaje de error accesible
-      this.ariaLiveMessage.set(this._i18n().pageJumpHelp.replace('{totalPages}', total.toString()));
+      // Mostrar mensaje de error accesible (assertive: interrumpe al usuario intencionalmente)
+      clearTimeout(this.clearAriaErrorTimeout);
+      this.ariaErrorMessage.set(
+        this._i18n().pageJumpHelp.replace('{totalPages}', total.toString())
+      );
+      this.clearAriaErrorTimeout = setTimeout(() => this.ariaErrorMessage.set(''), 3000);
       this.pageJumpValue.set('');
       return;
     }
@@ -1435,13 +1454,13 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @return {string} - Etiqueta ARIA para la página
    */
   getPageAriaLabel(page: number | string): string {
-    if (typeof page === 'string') return this._i18n().ariaMorePages;
+    if (typeof page === 'string') return this._i18n().a11y.morePages;
 
     const isActive = this.isPageActive(page);
 
-    if (isActive) return this._i18n().ariaCurrentPage.replace('{page}', page.toString());
+    if (isActive) return this._i18n().a11y.currentPage.replace('{page}', page.toString());
 
-    return this._i18n().ariaGoToPage.replace('{page}', page.toString());
+    return this._i18n().a11y.goToPage.replace('{page}', page.toString());
   }
 
   /**
@@ -1452,14 +1471,14 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     const range = this.itemRange();
     if (range) {
       return this._i18n()
-        .ariaCurrentPageWithRange.replace('{page}', this.currentPage().toString())
+        .a11y.currentPageWithRange.replace('{page}', this.currentPage().toString())
         .replace('{totalPages}', this.totalPages().toString())
         .replace('{start}', range.start.toString())
         .replace('{end}', range.end.toString())
         .replace('{total}', range.total.toString());
     }
     return this._i18n()
-      .ariaCurrentPageNoRange.replace('{page}', this.currentPage().toString())
+      .a11y.currentPageNoRange.replace('{page}', this.currentPage().toString())
       .replace('{totalPages}', this.totalPages().toString());
   }
 
@@ -1470,11 +1489,11 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   private updateAriaLiveMessage(page: number): void {
     const range = this.itemRange();
     const totalPages = this.totalPages();
-    let message = this._i18n().ariaPage.replace('{page}', page.toString());
+    let message = this._i18n().a11y.page.replace('{page}', page.toString());
 
     if (totalPages != 0) {
       message = this._i18n()
-        .ariaCurrentPageNoRange.replace('{page}', page.toString())
+        .a11y.currentPageNoRange.replace('{page}', page.toString())
         .replace('{totalPages}', totalPages.toString());
     }
 
@@ -1482,7 +1501,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
       message +=
         ', ' +
         this._i18n()
-          .ariaShowingItems.replace('{start}', range.start.toString())
+          .a11y.showingItems.replace('{start}', range.start.toString())
           .replace('{end}', range.end.toString())
           .replace('{total}', range.total.toString());
     }
@@ -1501,7 +1520,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     this.isLoading.set(loading);
 
     if (loading) {
-      this.ariaLiveMessage.set(this._i18n().ariaLoading);
+      this.ariaLiveMessage.set(this._i18n().a11y.loading);
     }
   }
 
@@ -1554,7 +1573,18 @@ export class PaginatorComponent implements OnInit, OnDestroy {
    * @return {string} - Texto formateado del modo fraccionado
    */
   getFractionalText(): string {
-    return `${this.currentPage()} de ${this.totalPages()}`;
+    return this.effectiveI18n()
+      .a11y.fractionalPage.replace('{page}', this.currentPage().toString())
+      .replace('{totalPages}', this.totalPages().toString());
+  }
+
+  /**
+   * Obtiene el texto de ayuda para el salto a página, incluyendo el número total de páginas
+   * @return {string} - Texto de ayuda para el salto a página
+   */
+  getJumpHintText(): string {
+    const total = this.totalPages();
+    return this.effectiveI18n().pageJumpHelp.replace('{totalPages}', total.toString());
   }
 
   // ==================== Layout Methods ====================

@@ -266,28 +266,28 @@ export const PAGINATOR_API_SECTIONS: ComponentSection[] = [
         ],
         ['<code>infiniteLoadEnd</code>', 'string', 'Texto para "No hay más elementos que mostrar"'],
 
-        // ARIA labels
-        ['<code>ariaPagination</code>', 'string', 'ARIA label para "Paginación"'],
-        ['<code>ariaMorePages</code>', 'string', 'ARIA label para "Más páginas"'],
-        ['<code>ariaPage</code>', 'string', 'Template ARIA: "Página {page}"'],
-        ['<code>ariaCurrentPage</code>', 'string', 'ARIA label para "página actual"'],
-        ['<code>ariaGoToPage</code>', 'string', 'Template ARIA: "Ir a página {page}"'],
+        // Textos exclusivos para lectores de pantalla (objeto a11y)
+        ['<code>a11y.pagination</code>', 'string', 'ARIA label del <code>&lt;nav&gt;</code> de paginación'],
+        ['<code>a11y.morePages</code>', 'string', 'ARIA label de los puntos suspensivos (ellipsis)'],
+        ['<code>a11y.page</code>', 'string', 'Template ARIA: "Página {page}" — usado en aria-live al navegar'],
+        ['<code>a11y.currentPage</code>', 'string', 'ARIA label del botón de página activo: "{page}, página actual"'],
+        ['<code>a11y.goToPage</code>', 'string', 'ARIA label de botones de página no activos: "Ir a página {page}"'],
         [
-          '<code>ariaCurrentPageWithRange</code>',
+          '<code>a11y.currentPageWithRange</code>',
           'string',
           'Template ARIA: "Página {page} de {totalPages}, mostrando items {start} a {end} de {total} resultados"',
         ],
         [
-          '<code>ariaCurrentPageNoRange</code>',
+          '<code>a11y.currentPageNoRange</code>',
           'string',
           'Template ARIA: "Página {page} de {totalPages}"',
         ],
         [
-          '<code>ariaShowingItems</code>',
+          '<code>a11y.showingItems</code>',
           'string',
           'Template ARIA: "Mostrando items {start} a {end} de {total} resultados"',
         ],
-        ['<code>ariaLoading</code>', 'string', 'ARIA label para "Cargando nueva página..."'],
+        ['<code>a11y.loading</code>', 'string', 'Anuncio aria-live al iniciar carga: "Cargando nueva página..."'],
       ],
     },
   },
