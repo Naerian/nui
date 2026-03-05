@@ -45,6 +45,12 @@ export class TooltipPageComponent extends BaseComponentPage {
       icon: 'ri-palette-line',
       sections: ['theming-container', 'theming-arrow', 'theming-animation', 'theming-examples'],
     },
+    {
+      id: 'a11y',
+      label: 'common.tabs.a11y',
+      icon: 'ri-accessibility-line',
+      sections: ['a11y-roles', 'a11y-naming', 'a11y-keyboard'],
+    },
   ];
 
   isDisabled = signal(false);

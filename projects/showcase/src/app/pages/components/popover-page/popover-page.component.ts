@@ -84,6 +84,12 @@ export class PopoverPageComponent extends BaseComponentPage {
         'theming-animation',
       ],
     },
+    {
+      id: 'a11y',
+      label: 'common.tabs.a11y',
+      icon: 'ri-accessibility-line',
+      sections: ['a11y-roles', 'a11y-naming', 'a11y-keyboard'],
+    },
   ];
 
   /**

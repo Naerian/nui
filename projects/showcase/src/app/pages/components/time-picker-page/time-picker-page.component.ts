@@ -73,6 +73,18 @@ export class TimePickerPageComponent extends BaseComponentPage {
       icon: 'ri-palette-line',
       sections: ['theming-colors', 'theming-sizes', 'theming-structure', 'theming-customization'],
     },
+    {
+      id: 'i18n',
+      label: 'common.tabs.i18n',
+      icon: 'ri-translate-2',
+      sections: ['i18n-tokens', 'i18n-duration-presets', 'i18n-a11y-tokens'],
+    },
+    {
+      id: 'a11y',
+      label: 'common.tabs.a11y',
+      icon: 'ri-accessibility-line',
+      sections: ['a11y-roles', 'a11y-naming', 'a11y-keyboard'],
+    },
   ];
 
   // Examples data

@@ -1264,6 +1264,50 @@
           "title": "Variables del layout segmented",
           "description": "Variables CSS específicas para el estilo segmented (iOS-like). Controla el contenedor, estados seleccionado/no seleccionado y efectos hover."
         }
+      },
+      "a11y": {
+        "roles": {
+          "title": "Roles y atributos ARIA",
+          "description": "El Select Button implementa los patrones ARIA de listbox y option para que los lectores de pantalla puedan anunciar las opciones correctamente.",
+          "elements": {
+            "trigger": "Botón disparador",
+            "option": "Opción",
+            "listbox": "Lista de opciones"
+          },
+          "rows": {
+            "ariaExpanded": { "description": "El disparador lleva <code>aria-expanded</code> indicando si la lista está abierta (<code>true</code>) o cerrada (<code>false</code>)." },
+            "ariaHaspopup": { "description": "<code>aria-haspopup=\"listbox\"</code> en el disparador señala que al activarlo se abre una lista de selección." },
+            "optionRole": { "description": "Cada item de la lista tiene <code>role=\"option\"</code> y <code>aria-selected=\"true\"</code> cuando está seleccionado." },
+            "listboxRole": { "description": "El contenedor de opciones tiene <code>role=\"listbox\"</code>." }
+          }
+        },
+        "naming": {
+          "title": "Nombre accesible",
+          "description": "El nombre accesible del disparador se genera a partir del valor seleccionado o del texto placeholder cuando no hay selección.",
+          "note": "Asegúrate de proporcionar un placeholder descriptivo cuando el campo no tiene valor seleccionado para que los usuarios de lectores de pantalla entiendan el propósito del control.",
+          "elements": {
+            "triggerWithValue": "Disparador con valor",
+            "triggerNoValue": "Disparador sin valor"
+          },
+          "info": {
+            "selectedValue": "Texto del valor seleccionado",
+            "placeholder": "Texto placeholder"
+          },
+          "rows": {
+            "value": { "description": "Cuando hay una opción seleccionada, el texto visible del valor se convierte en el nombre accesible del botón." },
+            "placeholder": { "description": "Cuando no hay ningún item seleccionado, el placeholder es el nombre accesible del disparador." }
+          }
+        },
+        "keyboard": {
+          "title": "Interacción por teclado",
+          "description": "El Select Button sigue el patrón ARIA de botón de listbox para la navegación por teclado.",
+          "rows": {
+            "enterSpace": { "description": "Abre o cierra la lista de opciones cuando el disparador tiene el foco." },
+            "arrowDownUp": { "description": "Mueve el foco entre las opciones dentro de la lista abierta." },
+            "homeEnd": { "description": "Mueve el foco a la primera / última opción de la lista." },
+            "escape": { "description": "Cierra la lista de opciones sin cambiar la selección." }
+          }
+        }
       }
     },
     "calendar": {
@@ -1402,6 +1446,130 @@
           "title": "Personalización",
           "description": "Ejemplos de cómo personalizar los estilos del calendario en tu aplicación. Puedes sobrescribir variables CSS globalmente o específicas a instancias."
         }
+      },
+      "i18n": {
+        "navigation": {
+          "title": "Tokens de navegación y etiquetas",
+          "description": "Tokens para nombres de días de la semana, nombres de meses, etiquetas de botones de navegación y etiquetas de estado de los días.",
+          "note": "Todos los tokens de array (<code>weekDaysShort</code>, <code>weekDays</code>, <code>months</code>, <code>shortMonths</code>) deben proporcionar todos los valores. Sobreescribe globalmente con <code>provideNuiI18n({ calendar: {...} })</code> o por instancia con el input <code>[i18n]</code>.",
+          "rows": {
+            "weekDaysShort": { "description": "Nombres abreviados de los días mostrados en el encabezado del calendario (lunes–domingo)." },
+            "weekDays": { "description": "Nombres completos de los días usados en etiquetas accesibles y tooltips." },
+            "months": { "description": "Nombres completos de los meses usados en el selector de meses y etiquetas accesibles." },
+            "shortMonths": { "description": "Nombres abreviados de los meses usados en contextos compactos." },
+            "prevMonth": { "description": "Etiqueta del botón que navega al mes anterior." },
+            "nextMonth": { "description": "Etiqueta del botón que navega al mes siguiente." },
+            "prevYears": { "description": "Etiqueta del botón que navega a los años anteriores en el selector de años." },
+            "nextYears": { "description": "Etiqueta del botón que navega a los años siguientes en el selector de años." },
+            "changeMonth": { "description": "Etiqueta del botón que abre el selector de mes." },
+            "changeYear": { "description": "Etiqueta del botón que abre el selector de año." },
+            "year": { "description": "Etiqueta del encabezado del selector de año." },
+            "week": { "description": "Etiqueta accesible para la columna de encabezado del número de semana." },
+            "weekNumbers": { "description": "Tooltip para el botón de activación de la columna de números de semana." },
+            "today": { "description": "Etiqueta para el botón de atajo 'Hoy'." },
+            "selectDay": { "description": "Descripción accesible para seleccionar un día." },
+            "dayDisabled": { "description": "Anuncio del lector de pantalla para celdas de día deshabilitadas." },
+            "openCalendar": { "description": "Etiqueta del botón que abre el popover del calendario." },
+            "showTime": { "description": "Etiqueta del botón que muestra el selector de hora." },
+            "hideTime": { "description": "Etiqueta del botón que oculta el selector de hora." },
+            "monthAria": { "description": "Etiqueta accesible para la cuadrícula de selección de mes." },
+            "yearsAria": { "description": "Etiqueta accesible para la cuadrícula de selección de año." }
+          }
+        },
+        "presetsAndTabs": {
+          "title": "Tokens de presets, pestañas y selector de hora",
+          "description": "Tokens para accesos rápidos a rangos de fechas predefinidos, pestañas de vista y etiquetas del selector de hora integrado.",
+          "rows": {
+            "shortcuts": { "description": "Etiqueta del encabezado del panel de presets que lista los accesos rápidos de rangos de fechas." },
+            "presetsToday": { "description": "Etiqueta del preset rápido 'Hoy'." },
+            "last7Days": { "description": "Etiqueta del preset rápido 'Últimos 7 días'." },
+            "last30Days": { "description": "Etiqueta del preset rápido 'Últimos 30 días'." },
+            "thisMonth": { "description": "Etiqueta del preset rápido 'Este mes'." },
+            "lastMonth": { "description": "Etiqueta del preset rápido 'Mes pasado'." },
+            "thisYear": { "description": "Etiqueta del preset rápido 'Este año'." },
+            "tabCalendar": { "description": "Etiqueta de la pestaña de vista del calendario." },
+            "tabPresets": { "description": "Etiqueta de la pestaña de vista de presets." },
+            "tabTime": { "description": "Etiqueta de la pestaña de vista de hora." },
+            "timeStart": { "description": "Etiqueta del input de hora de inicio en el modo de rango con hora." },
+            "timeEnd": { "description": "Etiqueta del input de hora de fin en el modo de rango con hora." }
+          }
+        },
+        "ariaTokens": {
+          "title": "Tokens ARIA de estado y accesibilidad",
+          "description": "Tokens expuestos solo a las tecnologías asistivas para anunciar estado de los días, cambios de navegación y selección de rango.",
+          "rows": {
+            "ariaToday": { "description": "Anotación del lector de pantalla añadida a la celda del día de hoy." },
+            "selected": { "description": "Anotación del lector de pantalla añadida a las celdas de día seleccionadas." },
+            "inRange": { "description": "Anotación del lector de pantalla añadida a las celdas de día dentro de un rango seleccionado." },
+            "ariaDisabled": { "description": "Anotación del lector de pantalla añadida a las celdas de día deshabilitadas." },
+            "statusSuccess": { "description": "Anotación del lector de pantalla para fechas con estado de éxito." },
+            "statusWarning": { "description": "Anotación del lector de pantalla para fechas con estado de advertencia." },
+            "statusDanger": { "description": "Anotación del lector de pantalla para fechas con estado de peligro." },
+            "statusInfo": { "description": "Anotación del lector de pantalla para fechas con estado informativo." },
+            "calendarLabel": { "description": "Etiqueta accesible para la cuadrícula del calendario (<code>role=\"grid\"</code>)." },
+            "keyboardInstructions": { "description": "Instrucciones anunciadas a los usuarios de lectores de pantalla sobre cómo navegar el calendario con el teclado." },
+            "monthNavigated": { "description": "Anuncio en vivo cuando el mes visible cambia. Admite los marcadores <code>{month}</code> y <code>{year}</code>." },
+            "rangeStart": { "description": "Anuncio en vivo cuando se selecciona el inicio de un rango de fechas." },
+            "rangeComplete": { "description": "Anuncio en vivo cuando se ha seleccionado un rango de fechas completo." },
+            "weekNumberLabel": { "description": "Etiqueta accesible para cada celda de número de semana. Admite el marcador <code>{week}</code>." }
+          }
+        }
+      },
+      "a11y": {
+        "roles": {
+          "title": "Roles y atributos ARIA",
+          "description": "El Calendar implementa el patrón ARIA Grid para las celdas de día y una región en vivo para anuncios de navegación.",
+          "elements": {
+            "grid": "Cuadrícula de días",
+            "weekHeader": "Encabezado de días de la semana",
+            "dayCell": "Celda de día",
+            "dayButton": "Botón de día",
+            "liveRegion": "Región en vivo"
+          },
+          "rows": {
+            "grid": { "description": "La cuadrícula de días usa <code>role=\"grid\"</code> para habilitar la navegación por teclas de dirección entre celdas." },
+            "gridLabel": { "description": "La cuadrícula recibe su etiqueta del token i18n <code>calendar.a11y.calendarLabel</code>." },
+            "columnHeader": { "description": "Los encabezados de días de la semana usan <code>role=\"columnheader\"</code> con el nombre completo del día como etiqueta accesible." },
+            "gridcell": { "description": "Cada celda de día usa <code>role=\"gridcell\"</code>." },
+            "selected": { "description": "Las celdas de día seleccionadas exponen <code>aria-selected=\"true\"</code>." },
+            "disabled": { "description": "Las celdas de día deshabilitadas exponen <code>aria-disabled=\"true\"</code>." },
+            "liveRegion": { "description": "Una región <code>aria-live=\"polite\"</code> oculta anuncia la navegación de mes a los lectores de pantalla." }
+          }
+        },
+        "naming": {
+          "title": "Nombre accesible",
+          "description": "La cuadrícula del calendario y cada celda de día tienen nombres accesibles descriptivos derivados de tokens i18n y la fecha formateada.",
+          "note": "Las celdas de día incluyen anotaciones de estado (hoy, seleccionado, en rango, deshabilitado) añadidas a su etiqueta mediante los tokens <code>calendar.aria.*</code>.",
+          "elements": {
+            "grid": "Cuadrícula de días",
+            "dayButton": "Botón de día",
+            "stateAnnotation": "Anotación de estado"
+          },
+          "info": {
+            "i18nLabel": "calendarLabel (i18n)",
+            "dateFormatted": "Fecha formateada",
+            "ariaTokens": "Tokens calendar.aria.*"
+          },
+          "rows": {
+            "grid": { "description": "La cuadrícula del calendario recibe su nombre accesible del token <code>calendar.a11y.calendarLabel</code>." },
+            "dayButton": { "description": "El nombre accesible de cada botón de día es la fecha formateada (ej: 'martes, 10 de diciembre de 2024')." },
+            "stateAnnotation": { "description": "Los tokens de estado (<code>calendar.aria.today</code>, <code>selected</code>, etc.) se añaden a la etiqueta de fecha para comunicar el estado a los lectores de pantalla." }
+          }
+        },
+        "keyboard": {
+          "title": "Interacción por teclado",
+          "description": "La cuadrícula de días del calendario implementa la navegación completa de teclado según el patrón ARIA Grid.",
+          "rows": {
+            "arrowHorizontal": { "description": "Mueve el foco un día hacia adelante/atrás." },
+            "arrowVertical": { "description": "Mueve el foco una semana hacia adelante/atrás." },
+            "home": { "description": "Mueve el foco al primer día de la semana actual." },
+            "end": { "description": "Mueve el foco al último día de la semana actual." },
+            "pageUp": { "description": "Navega al mes anterior." },
+            "pageDown": { "description": "Navega al mes siguiente." },
+            "spaceEnter": { "description": "Selecciona el día con foco." },
+            "escape": { "description": "Cierra el popover del calendario y devuelve el foco al activador." }
+          }
+        }
       }
     },
     "paginator": {
@@ -1496,6 +1664,76 @@
         "infinite": {
           "title": "Scroll infinito",
           "description": "Variables CSS para el modo de carga infinita"
+        }
+      },
+      "i18n": {
+        "tokens": {
+          "title": "Tokens de traducción",
+          "description": "El Paginator utiliza tokens i18n para las etiquetas de botones de navegación, los mensajes de rango de elementos y el selector de tamaño de página.",
+          "note": "Sobreescribe los tokens con <code>provideNuiI18n({ paginator: { ... } })</code>.",
+          "rows": {
+            "firstPage": { "description": "Etiqueta accesible del botón 'Primera página'." },
+            "previousPage": { "description": "Etiqueta accesible del botón 'Página anterior'." },
+            "nextPage": { "description": "Etiqueta accesible del botón 'Página siguiente'." },
+            "lastPage": { "description": "Etiqueta accesible del botón 'Última página'." },
+            "itemsPerPage": { "description": "Etiqueta para el selector del número de elementos por página." },
+            "of": { "description": "Conector 'de' usado en el texto de rango (ej. '1–10 de 100')." },
+            "jumpToPage": { "description": "Placeholder o label del input de salto de página." }
+          }
+        },
+        "a11yTokens": {
+          "title": "Tokens de accesibilidad",
+          "description": "Tokens adicionales utilizados para los anuncios de lectores de pantalla y los atributos aria del paginador.",
+          "note": "Estos tokens se localizan bajo <code>paginator.a11y</code>.",
+          "rows": {
+            "pageLabel": { "description": "Patrón de texto anunciado cuando cambia la página (ej. 'Página 3 de 10')." },
+            "navigation": { "description": "Aria-label para la región de navegación del paginador." }
+          }
+        }
+      },
+      "a11y": {
+        "roles": {
+          "title": "Roles y atributos ARIA",
+          "description": "El Paginator implementa el patrón de navegación ARIA con <code>role=\"navigation\"</code> y botones correctamente etiquetados.",
+          "elements": {
+            "nav": "Región de navegación",
+            "prevNextButton": "Botones anterior/siguiente",
+            "pageButton": "Botón de número de página",
+            "currentPage": "Página actual"
+          },
+          "rows": {
+            "navRole": { "description": "El contenedor raíz del paginador tiene <code>role=\"navigation\"</code> y <code>aria-label</code> tomado del token i18n <code>navigation</code>." },
+            "buttonLabels": { "description": "Los botones de primera/anterior/siguiente/última página tienen <code>aria-label</code> extraído de los tokens i18n correspondientes." },
+            "ariaCurrent": { "description": "El botón de la página activa lleva <code>aria-current=\"page\"</code>." }
+          }
+        },
+        "naming": {
+          "title": "Nombre accesible",
+          "description": "Todos los controles interactivos del paginador obtienen su nombre accesible de los tokens i18n, garantizando que sean descriptivos en cualquier idioma.",
+          "note": "Localiza los tokens del namespace <code>paginator</code> para garantizar etiquetas significativas.",
+          "elements": {
+            "nav": "Región de navegación",
+            "buttons": "Botones de navegación",
+            "currentPage": "Página actual"
+          },
+          "info": {
+            "navToken": "Token i18n 'navigation'",
+            "buttonTokens": "Tokens de botones i18n",
+            "ariaCurrentPage": "aria-current='page'"
+          },
+          "rows": {
+            "nav": { "description": "La región de navegación usa el token <code>navigation</code> como <code>aria-label</code>." },
+            "buttons": { "description": "Cada botón de navegación usa su token i18n específico como nombre accesible." },
+            "current": { "description": "La página activa lleva <code>aria-current=\"page\"</code> para que los lectores de pantalla la identifiquen." }
+          }
+        },
+        "keyboard": {
+          "title": "Interacción por teclado",
+          "description": "El Paginator es totalmente navegable por teclado con la interacción estándar de botones.",
+          "rows": {
+            "tab": { "description": "Tab mueve el foco entre los botones y controles del paginador." },
+            "enterSpace": { "description": "Activa el botón con foco, cambiando a la página correspondiente." }
+          }
         }
       }
     },
@@ -1602,6 +1840,48 @@
           "title": "Animación",
           "description": "Variables CSS para controlar las transiciones y animaciones del popover"
         }
+      },
+      "a11y": {
+        "roles": {
+          "title": "Roles y atributos ARIA",
+          "description": "El Popover implementa el patrón ARIA de diálogo no modal. El trigger anuncia si el popover está abierto y señala la relación con su contenido.",
+          "elements": {
+            "trigger": "Elemento disparador",
+            "popover": "Panel del popover"
+          },
+          "rows": {
+            "ariaExpanded": { "description": "El disparador lleva <code>aria-expanded</code> reflejando si el popover está visible (<code>true</code>) o no (<code>false</code>)." },
+            "ariaControls": { "description": "<code>aria-controls</code> en el disparador apunta al <code>id</code> del panel del popover." },
+            "ariaHaspopup": { "description": "<code>aria-haspopup=\"dialog\"</code> indica que el disparador abre un panel de contenido interactivo." },
+            "popoverRole": { "description": "El panel del popover tiene <code>role=\"dialog\"</code> y <code>aria-label</code> derivado de su título o contenido." }
+          }
+        },
+        "naming": {
+          "title": "Nombre accesible",
+          "description": "El popover y su disparador deben tener nombres accesibles que comuniquen su propósito con claridad.",
+          "note": "Proporciona siempre un <code>aria-label</code> o un título visible en el popover para que los lectores de pantalla lo identifiquen correctamente.",
+          "elements": {
+            "trigger": "Disparador",
+            "popoverPanel": "Panel del popover"
+          },
+          "info": {
+            "triggerLabel": "Nombre accesible del disparador",
+            "panelLabel": "aria-label del panel"
+          },
+          "rows": {
+            "trigger": { "description": "El disparador debe tener su propio nombre accesible (texto visible, aria-label…) que describa la acción que abre el popover." },
+            "panel": { "description": "El panel del popover obtiene su nombre accesible del título visible o de un <code>aria-label</code> explícito." }
+          }
+        },
+        "keyboard": {
+          "title": "Interacción por teclado",
+          "description": "El Popover sigue el patrón de diálogo no modal de WAI-ARIA para la interacción por teclado.",
+          "rows": {
+            "enterSpace": { "description": "Abre o cierra el popover cuando el disparador tiene el foco." },
+            "escape": { "description": "Cierra el popover y devuelve el foco al disparador." },
+            "tab": { "description": "Cicla el foco entre los elementos interactivos dentro del panel abierto." }
+          }
+        }
       }
     },
     "toast": {
@@ -1697,6 +1977,60 @@
         "examples": {
           "title": "Ejemplo de personalización",
           "description": "Ejemplo completo de personalización de toasts con variables CSS para crear un tema oscuro."
+        }
+      },
+      "i18n": {
+        "tokens": {
+          "title": "Tokens de traducción",
+          "description": "El componente Toast utiliza el token genérico <code>close</code> del NuiI18nService para la etiqueta del botón de cerrar.",
+          "note": "El token <code>close</code> es compartido entre varios componentes (Toast, SidebarPanel…). Sobreescríbelo globalmente para localizar todos los botones de cierre a la vez.",
+          "rows": {
+            "close": { "description": "Etiqueta accesible del botón de cierre en los toasts descartables." }
+          }
+        }
+      },
+      "a11y": {
+        "roles": {
+          "title": "Roles y atributos ARIA",
+          "description": "Los toasts usan una región viva para que los lectores de pantalla anuncien las nuevas notificaciones sin interrumpir el foco actual del usuario.",
+          "elements": {
+            "host": "Elemento host del toast",
+            "closeButton": "Botón de cierre"
+          },
+          "rows": {
+            "ariaLive": { "description": "El elemento toast lleva <code>aria-live=\"polite\"</code> para notificaciones informativas o <code>\"assertive\"</code> para alertas críticas (error/warning)." },
+            "ariaAtomic": { "description": "<code>aria-atomic=\"true\"</code> garantiza que el lector de pantalla anuncie el contenido completo del toast como una unidad." },
+            "ariaLabel": { "description": "El nombre accesible del toast se deriva automáticamente de su contenido siguiendo la prioridad: título → mensaje → tipo." },
+            "closeLabel": { "description": "El botón de cierre usa el token i18n <code>close</code> como etiqueta accesible." }
+          }
+        },
+        "naming": {
+          "title": "Nombre accesible",
+          "description": "El nombre accesible del toast se deriva automáticamente de su contenido. No es necesario un <code>aria-label</code> explícito por parte del consumidor.",
+          "note": "Proporciona siempre contenido significativo de título o mensaje. Evita toasts que dependan solo del color o icono para transmitir su significado.",
+          "elements": {
+            "hostWithTitle": "Toast con título",
+            "hostWithMessage": "Toast sin título",
+            "hostTypeFallback": "Toast con fallback de tipo"
+          },
+          "info": {
+            "title": "Título del toast",
+            "message": "Mensaje del toast",
+            "type": "Tipo de toast (success, error…)"
+          },
+          "rows": {
+            "hostTitle": { "description": "Cuando se proporciona un <code>title</code>, se convierte en la etiqueta accesible del toast." },
+            "hostMessage": { "description": "Cuando no hay título, el texto del <code>message</code> se convierte en la etiqueta accesible." },
+            "hostType": { "description": "Cuando no hay título ni mensaje, el <code>type</code> del toast se usa como etiqueta de respaldo." }
+          }
+        },
+        "keyboard": {
+          "title": "Interacción por teclado",
+          "description": "Los toasts son no modales. El foco no se mueve a ellos automáticamente; los usuarios pueden hacer Tab hasta el botón de cierre si lo desean.",
+          "rows": {
+            "tab": { "description": "Tab mueve el foco al botón de cierre dentro del toast si hay uno visible." },
+            "spaceEnter": { "description": "Activa el botón de cierre con foco, descartando el toast." }
+          }
         }
       }
     },
@@ -1838,6 +2172,67 @@
           "title": "Ejemplos de personalización",
           "description": "Ejemplos SCSS para personalizar los estilos del panel lateral en tu aplicación"
         }
+      },
+      "i18n": {
+        "tokens": {
+          "title": "Tokens de traducción",
+          "description": "El componente SidebarPanel usa tokens genéricos del NuiI18nService para los botones de control.",
+          "note": "Todos los tokens son compartidos entre varios componentes. Sobreescríbelos globalmente con <code>provideNuiI18n({...})</code>.",
+          "rows": {
+            "close": { "description": "Etiqueta accesible del botón de cierre." },
+            "minimize": { "description": "Etiqueta accesible del botón de minimizar." },
+            "restore": { "description": "Etiqueta accesible del botón de restaurar, visible cuando el panel está minimizado." },
+            "expand": { "description": "Etiqueta accesible del botón de expandir." },
+            "collapse": { "description": "Etiqueta accesible del botón de contraer." }
+          }
+        }
+      },
+      "a11y": {
+        "roles": {
+          "title": "Roles y atributos ARIA",
+          "description": "El SidebarPanel implementa un patrón accesible similar a un diálogo para que los lectores de pantalla lo reconozcan como un area de contenido diferenciada.",
+          "elements": {
+            "panel": "Elemento raíz del panel",
+            "closeButton": "Botón de cierre",
+            "minimizeButton": "Botón minimizar / restaurar",
+            "expandButton": "Botón expandir / contraer",
+            "backdrop": "Superposición de fondo"
+          },
+          "rows": {
+            "panelRole": { "description": "La raíz del panel lleva <code>role=\"dialog\"</code> para señalar una región diferenciada a las tecnologías de asistencia." },
+            "ariaLabelledby": { "description": "<code>aria-labelledby</code> apunta al elemento de título del panel, dando al diálogo un nombre accesible derivado del encabezado visible." },
+            "closeLabel": { "description": "El botón de cierre usa el token i18n <code>close</code> como <code>aria-label</code>." },
+            "minimizeLabel": { "description": "El botón de minimizar / restaurar expone el token i18n correspondiente (<code>minimize</code> o <code>restore</code>) como <code>aria-label</code> según el estado." },
+            "expandLabel": { "description": "El botón de expandir / contraer expone el token correspondiente (<code>expand</code> o <code>collapse</code>) como <code>aria-label</code>." },
+            "backdropHidden": { "description": "La superposición de fondo se oculta de las tecnologías de asistencia con <code>aria-hidden=\"true\"</code>." }
+          }
+        },
+        "naming": {
+          "title": "Nombre accesible",
+          "description": "El nombre accesible del panel se obtiene de su título visible mediante <code>aria-labelledby</code>. Los botones de control se etiquetan con tokens i18n.",
+          "note": "Proporciona siempre un título visible dentro del panel, ya que este se convierte automáticamente en el nombre del diálogo.",
+          "elements": {
+            "panelWithTitle": "Panel con título",
+            "controlButtons": "Botones de control"
+          },
+          "info": {
+            "ariaLabelledby": "Título del panel (aria-labelledby)",
+            "i18nTokens": "Tokens i18n para etiquetas de botones"
+          },
+          "rows": {
+            "title": { "description": "El título visible del panel proporciona el nombre accesible de la región <code>role=\"dialog\"</code>." },
+            "buttons": { "description": "Los botones de control (cerrar, minimizar, expandir) usan tokens i18n como etiquetas accesibles." }
+          }
+        },
+        "keyboard": {
+          "title": "Interacción por teclado",
+          "description": "El SidebarPanel soporta la navegación por teclado para todos los controles interactivos.",
+          "rows": {
+            "escape": { "description": "Cierra el panel en modo modal, devolviendo el foco al elemento que lo abrió." },
+            "tab": { "description": "Cicla el foco entre los elementos interactivos del panel. El foco queda atrapado mientras el panel está abierto en modo modal." },
+            "spaceEnter": { "description": "Activa el botón de control con foco (cerrar, minimizar, expandir)." }
+          }
+        }
       }
     },
     "tooltip": {
@@ -1907,6 +2302,48 @@
         "examples": {
           "title": "Ejemplos de personalización",
           "description": "Ejemplos SCSS para personalizar los estilos del tooltip en tu aplicación"
+        }
+      },
+      "a11y": {
+        "roles": {
+          "title": "Roles y atributos ARIA",
+          "description": "Los tooltips siguen el patrón WAI-ARIA de Tooltip, asociando el contenido flotante con su disparador mediante <code>aria-describedby</code>.",
+          "elements": {
+            "trigger": "Elemento disparador",
+            "tooltip": "Elemento tooltip"
+          },
+          "rows": {
+            "ariaDescribedby": { "description": "El elemento disparador recibe <code>aria-describedby</code> apuntando al <code>id</code> del tooltip, de modo que los lectores de pantalla anuncian el texto del tooltip como descripción suplementaria." },
+            "tooltipRole": { "description": "El tooltip flotante lleva <code>role=\"tooltip\"</code> y un <code>id</code> único referenciado por <code>aria-describedby</code>." }
+          }
+        },
+        "naming": {
+          "title": "Nombre accesible",
+          "description": "El elemento disparador debe tener su propio nombre accesible independiente del tooltip. El tooltip solo proporciona una descripción suplementaria.",
+          "note": "No dependas del tooltip como única fuente de nombre accesible para disparadores que solo muestran un icono. Usa <code>aria-label</code> en el elemento disparador.",
+          "elements": {
+            "trigger": "Elemento disparador",
+            "iconTrigger": "Disparador solo con icono",
+            "tooltipContent": "Contenido del tooltip"
+          },
+          "info": {
+            "ownLabel": "Nombre propio del disparador",
+            "ariaLabel": "aria-label en el disparador de icono",
+            "description": "Texto del tooltip (aria-describedby)"
+          },
+          "rows": {
+            "trigger": { "description": "El disparador debe tener su propio nombre accesible (texto del botón, aria-label…) que sea significativo sin el texto del tooltip." },
+            "iconTrigger": { "description": "Para disparadores que solo muestran un icono, añade un <code>aria-label</code> explícito en el elemento disparador." },
+            "content": { "description": "El texto del tooltip se conecta mediante <code>aria-describedby</code> y sirve como información suplementaria, no como etiqueta principal." }
+          }
+        },
+        "keyboard": {
+          "title": "Interacción por teclado",
+          "description": "Los tooltips se muestran y ocultan automáticamente según el foco. No se requiere una pulsación de tecla explícita para abrirlos.",
+          "rows": {
+            "tab": { "description": "Tabular hacia un elemento disparador muestra el tooltip. Tabular fuera lo oculta." },
+            "escape": { "description": "Pulsar Escape mientras el disparador tiene el foco oculta el tooltip." }
+          }
         }
       }
     },
@@ -2009,6 +2446,112 @@
         "customization": {
           "title": "Personalización",
           "description": "Ejemplos de cómo personalizar los estilos del selector de tiempo en tu aplicación. Puedes sobrescribir variables CSS globalmente o específicas a instancias. La integración con ThemeService permite generar variables de color para tus colores semánticos personalizados."
+        }
+      },
+      "i18n": {
+        "tokens": {
+          "title": "Tokens del selector de tiempo",
+          "description": "Tokens usados para las etiquetas del selector de tiempo, los botones de acción y los textos para lectores de pantalla.",
+          "note": "Sobreescribe cualquier token globalmente con <code>provideNuiI18n({ timePicker: { ... } })</code>.",
+          "rows": {
+            "setToCurrentTime": { "description": "Etiqueta del botón de acción 'establecer a la hora actual'." },
+            "selectTime": { "description": "Etiqueta placeholder cuando no hay ningún tiempo seleccionado." },
+            "clear": { "description": "Etiqueta de la acción de limpiar / restablecer el tiempo." },
+            "hour": { "description": "Etiqueta de encabezado de la columna de horas (forma larga)." },
+            "minutes": { "description": "Etiqueta de encabezado de la columna de minutos (forma larga)." },
+            "hour12": { "description": "Etiqueta usada cuando el selector está en modo de 12 horas." },
+            "hour24": { "description": "Etiqueta usada cuando el selector está en modo de 24 horas." },
+            "period": { "description": "Etiqueta de la columna del periodo AM/PM." },
+            "normalizedTime": { "description": "Plantilla de anuncio para el lector de pantalla del valor de tiempo normalizado." },
+            "rangeLabel": { "description": "Etiqueta accesible que describe la selección de un rango de tiempo." },
+            "timeSelected": { "description": "Anuncio para el lector de pantalla cuando se ha seleccionado un tiempo correctamente." }
+          }
+        },
+        "durationAndPresets": {
+          "title": "Tokens de duración y presets",
+          "description": "Tokens específicos para los labels del modo duración, encabezados de columna y nombres de presets.",
+          "note": "Los tokens de duración viven bajo el namespace <code>timePicker.duration</code> y los de preset bajo <code>timePicker.presets</code>.",
+          "rows": {
+            "hours": { "description": "Forma larga de 'horas' en la visualización de duración." },
+            "minutes": { "description": "Forma larga de 'minutos' en la visualización de duración." },
+            "seconds": { "description": "Forma larga de 'segundos' en la visualización de duración." },
+            "hoursShort": { "description": "Abreviatura corta para horas (ej. 'h')." },
+            "minutesShort": { "description": "Abreviatura corta para minutos (ej. 'min')." },
+            "secondsShort": { "description": "Abreviatura corta para segundos (ej. 's')." },
+            "selectDuration": { "description": "Etiqueta placeholder en el modo de selección de duración." },
+            "durationSelected": { "description": "Anuncio para el lector de pantalla cuando se ha seleccionado una duración." },
+            "tabSelector": { "description": "Etiqueta de la pestaña del selector manual cuando están visibles las pestañas de selección y presets." },
+            "tabPresets": { "description": "Etiqueta de la pestaña de presets cuando están visibles ambas pestañas." },
+            "presetNow": { "description": "Etiqueta del preset 'ahora'." },
+            "presetNoon": { "description": "Etiqueta del preset 'mediodía' (12:00)." },
+            "presetMidnight": { "description": "Etiqueta del preset 'medianoche' (00:00)." },
+            "presetMinutes": { "description": "Plantilla de etiqueta para presets basados en minutos (ej. '15 minutos')." },
+            "presetHour": { "description": "Etiqueta del preset de una hora." },
+            "presetHours": { "description": "Plantilla de etiqueta para presets de varias horas (ej. '2 horas')." }
+          }
+        },
+        "a11yTokens": {
+          "title": "Tokens de accesibilidad",
+          "description": "Tokens usados exclusivamente para los anuncios de lectores de pantalla y etiquetas ARIA dentro del selector de tiempo.",
+          "note": "Estos tokens están anidados bajo <code>timePicker.a11y</code>.",
+          "rows": {
+            "timePickerLabel": { "description": "El <code>aria-label</code> aplicado al contenedor raíz del selector de tiempo en modo estándar." },
+            "durationPickerLabel": { "description": "El <code>aria-label</code> aplicado al contenedor raíz en modo duración." },
+            "hourColumnHelp": { "description": "Texto de ayuda anunciado por el lector de pantalla para la columna de horas." },
+            "minuteColumnHelp": { "description": "Texto de ayuda anunciado para la columna de minutos." },
+            "periodHelp": { "description": "Texto de ayuda anunciado para la columna AM/PM." },
+            "normalizedAlert": { "description": "Texto anunciado mediante una región viva assertiva cuando el tiempo seleccionado se normaliza al valor válido más cercano." },
+            "rangeInfo": { "description": "Texto del lector de pantalla describiendo los límites del rango de tiempo." }
+          }
+        }
+      },
+      "a11y": {
+        "roles": {
+          "title": "Roles y atributos ARIA",
+          "description": "El TimePicker implementa el patrón ARIA de <code>listbox</code> / <code>option</code> para cada columna de desplazamiento.",
+          "elements": {
+            "container": "Contenedor del selector",
+            "column": "Columna de desplazamiento",
+            "option": "Opción de tiempo",
+            "normalizedAlert": "Región viva de normalización"
+          },
+          "rows": {
+            "containerLabel": { "description": "El elemento raíz del selector tiene <code>aria-label</code> establecido desde el token i18n <code>timePickerLabel</code> (o <code>durationPickerLabel</code>)." },
+            "columnRole": { "description": "Cada columna tiene <code>role=\"listbox\"</code> y un <code>aria-label</code> derivado de su token i18n específico (hora, minutos, periodo…)." },
+            "optionRole": { "description": "Cada valor de tiempo tiene <code>role=\"option\"</code> y <code>aria-selected=\"true\"</code> cuando es el valor activo." },
+            "normalizedLive": { "description": "Un elemento visualmente oculto con <code>aria-live=\"assertive\"</code> anuncia cuando el tiempo introducido se normaliza al límite válido más cercano." }
+          }
+        },
+        "naming": {
+          "title": "Nombre accesible",
+          "description": "El selector y cada columna se etiquetan mediante tokens i18n. Las opciones individuales se etiquetan por su valor de tiempo visible.",
+          "note": "Configura siempre los tokens i18n para tu idioma para que los usuarios de lector de pantalla escuchen etiquetas de columna significativas (ej. 'Hora', 'Minutos', 'AM/PM').",
+          "elements": {
+            "container": "Etiqueta del contenedor",
+            "columns": "Etiquetas de columna",
+            "helpText": "Texto de ayuda de columna"
+          },
+          "info": {
+            "containerLabel": "Token timePickerLabel / durationPickerLabel",
+            "columnLabels": "Tokens hour / minutes / period",
+            "helpTokens": "Tokens hourColumnHelp / minuteColumnHelp / periodHelp"
+          },
+          "rows": {
+            "container": { "description": "La etiqueta del contenedor raíz proviene de <code>timePicker.a11y.timePickerLabel</code> (o <code>durationPickerLabel</code>). Sobreescríbela por idioma." },
+            "columns": { "description": "La etiqueta de cada columna proviene del token i18n correspondiente, dando contexto a los usuarios de lector de pantalla para cada región de desplazamiento." },
+            "help": { "description": "Los tokens de texto de ayuda de columna se anuncian cuando la columna recibe el foco, indicando cómo interactuar (teclas de flechas, Inicio/Fin)." }
+          }
+        },
+        "keyboard": {
+          "title": "Interacción por teclado",
+          "description": "Cada columna del TimePicker se comporta como un listbox independiente. Usa las siguientes teclas para navegar y seleccionar valores.",
+          "rows": {
+            "arrowUpDown": { "description": "Mueve el foco a la opción anterior / siguiente dentro de la columna con foco." },
+            "tab": { "description": "Mueve el foco a la siguiente columna interactiva o control (ej. alternador de periodo, botones de acción)." },
+            "homeEnd": { "description": "Salta a la primera / última opción de la columna con foco." },
+            "spaceEnter": { "description": "Selecciona la opción con foco y actualiza el valor de tiempo mostrado." },
+            "escape": { "description": "Cierra el panel del selector de tiempo y revierte al valor confirmado anteriormente." }
+          }
         }
       }
     },
@@ -2114,6 +2657,66 @@
         "structure": {
           "title": "Variables estructurales",
           "description": "Variables CSS para personalizar el layout radial, animaciones, tamaños de botón, backdrop, tooltips y el anillo de foco."
+        }
+      },
+      "i18n": {
+        "tokens": {
+          "title": "Tokens de traducción",
+          "description": "El componente FabButton expone un único token i18n para la etiqueta accesible del botón disparador.",
+          "note": "Sobreescríbelo con <code>provideNuiI18n({ fabButton: { triggerAriaLabel: 'Abrir acciones' } })</code>.",
+          "rows": {
+            "triggerAriaLabel": { "description": "El <code>aria-label</code> aplicado al botón disparador del FAB. Usado por los lectores de pantalla para identificar el botón cuando solo muestra un icono." }
+          }
+        }
+      },
+      "a11y": {
+        "roles": {
+          "title": "Roles y atributos ARIA",
+          "description": "El FabButton sigue el patrón WAI-ARIA de Menu Button. El disparador anuncia el estado abierto y la lista de acciones es un menú propiamente dicho.",
+          "elements": {
+            "host": "Host del FAB (grupo contenedor)",
+            "trigger": "Botón disparador",
+            "menu": "Menú de acciones",
+            "action": "Item de acción individual",
+            "icon": "Icono decorativo"
+          },
+          "rows": {
+            "hostRole": { "description": "El elemento host del FAB tiene <code>role=\"group\"</code> y <code>aria-label</code> para que el widget completo se anuncie como un grupo coherente." },
+            "ariaExpanded": { "description": "El botón disparador lleva <code>aria-expanded</code> reflejando si la lista de acciones está abierta (<code>true</code>) o cerrada (<code>false</code>)." },
+            "ariaControls": { "description": "El disparador lleva <code>aria-controls</code> apuntando al <code>id</code> del elemento menú de acciones." },
+            "ariaHaspopup": { "description": "El disparador tiene <code>aria-haspopup=\"menu\"</code> para indicar que al activarlo se abre un menú." },
+            "menuRole": { "description": "El contenedor de acciones tiene <code>role=\"menu\"</code>." },
+            "actionRole": { "description": "Cada acción individual tiene <code>role=\"menuitem\"</code>." },
+            "iconHidden": { "description": "Los iconos decorativos dentro de los items de acción se ocultan con <code>aria-hidden=\"true\"</code>." }
+          }
+        },
+        "naming": {
+          "title": "Nombre accesible",
+          "description": "El botón disparador y cada item de acción deben tener nombres accesibles significativos para los usuarios de lectores de pantalla.",
+          "note": "Proporciona siempre un <code>label</code> o <code>tooltip</code> para cada item de acción — estos se convierten en el nombre accesible del <code>menuitem</code>.",
+          "elements": {
+            "trigger": "Botón disparador",
+            "action": "Item de acción"
+          },
+          "info": {
+            "triggerLabel": "Token i18n triggerAriaLabel",
+            "actionLabel": "Texto de etiqueta / tooltip de la acción"
+          },
+          "rows": {
+            "trigger": { "description": "El nombre accesible del botón disparador proviene del token i18n <code>triggerAriaLabel</code>. Sobreescríbelo en tu idioma para reflejar el propósito del FAB." },
+            "action": { "description": "El nombre accesible de cada acción se extrae de su texto de etiqueta visible o, para acciones solo con icono, del input <code>tooltip</code>." }
+          }
+        },
+        "keyboard": {
+          "title": "Interacción por teclado",
+          "description": "El FabButton sigue el patrón de teclado WAI-ARIA de Menu Button.",
+          "rows": {
+            "enterSpace": { "description": "Activa el botón disparador, alternando el menú de acciones abierto o cerrado." },
+            "escape": { "description": "Cierra el menú de acciones y devuelve el foco al botón disparador." },
+            "arrowDownUp": { "description": "Mueve el foco entre los items de acción dentro del menú abierto." },
+            "homeEnd": { "description": "Mueve el foco al primer / último item de acción en el menú abierto." },
+            "tab": { "description": "Cierra el menú de acciones y mueve el foco al siguiente elemento con foco en la página." }
+          }
         }
       }
     }

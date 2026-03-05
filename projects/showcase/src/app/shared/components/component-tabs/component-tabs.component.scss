@@ -98,11 +98,20 @@
   .nui-component-tabs {
     &__nav {
       padding: 0 0.25rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
     }
 
     &__tab {
-      padding: 0.75rem 1rem;
-      font-size: 0.875rem;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.75rem;
+      border-bottom: 2px solid var(--nui-border-high);
+      width: 100%;
+
+      &--active {
+        border-bottom-color: var(--nui-primary-alpha-80);
+      }
 
       i {
         font-size: 1rem;

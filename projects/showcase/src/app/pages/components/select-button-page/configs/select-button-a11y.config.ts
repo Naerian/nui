@@ -1,0 +1,162 @@
+import { ComponentSection } from '../../../../core/models';
+
+/**
+ * Configuración de la tab Accesibilidad del componente Select Button.
+ *
+ * El Select Button implementa los patrones ARIA RadioGroup y CheckboxGroup:
+ *
+ *  1. Roles semánticos: en modo radio el contenedor recibe role="radiogroup"
+ *     y cada botón role="radio"; en modo checkbox el contenedor recibe
+ *     role="group" y cada botón role="checkbox".
+ *
+ *  2. Estado: cada botón expone aria-checked="true|false" y aria-disabled
+ *     cuando está deshabilitado.
+ *
+ *  3. Naming: el nombre accesible de cada botón se deriva del texto de
+ *     la opción (label). Los iconos decorativos llevan aria-hidden="true".
+ *
+ *  4. Teclado: en modo radio se utiliza roving tabindex; sólo el ítem
+ *     seleccionado tiene tabindex="0". Las flechas navegan entre opciones.
+ *     En modo checkbox todos los ítems son accesibles con Tab.
+ */
+export const SELECT_BUTTON_A11Y_SECTIONS: ComponentSection[] = [
+  // ─────────────────────────────────────────────────────────────────────────
+  // 1. Roles y atributos ARIA
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'a11y-roles',
+    title: 'components.selectButton.a11y.roles.title',
+    description: 'components.selectButton.a11y.roles.description',
+    anchor: 'a11y-roles',
+    table: {
+      headers: [
+        'common.tables.element',
+        'common.tables.property',
+        'common.tables.value',
+        'common.tables.description',
+      ],
+      rows: [
+        [
+          'components.selectButton.a11y.roles.elements.containerRadio',
+          '<code>role</code>',
+          '"radiogroup"',
+          'components.selectButton.a11y.roles.rows.roleRadiogroup.description',
+        ],
+        [
+          'components.selectButton.a11y.roles.elements.containerCheckbox',
+          '<code>role</code>',
+          '"group"',
+          'components.selectButton.a11y.roles.rows.roleGroup.description',
+        ],
+        [
+          'components.selectButton.a11y.roles.elements.container',
+          '<code>aria-disabled</code>',
+          '"true" | "false"',
+          'components.selectButton.a11y.roles.rows.ariaDisabled.description',
+        ],
+        [
+          'components.selectButton.a11y.roles.elements.buttonRadio',
+          '<code>role</code>',
+          '"radio"',
+          'components.selectButton.a11y.roles.rows.roleRadio.description',
+        ],
+        [
+          'components.selectButton.a11y.roles.elements.buttonCheckbox',
+          '<code>role</code>',
+          '"checkbox"',
+          'components.selectButton.a11y.roles.rows.roleCheckbox.description',
+        ],
+        [
+          'components.selectButton.a11y.roles.elements.button',
+          '<code>aria-checked</code>',
+          '"true" | "false"',
+          'components.selectButton.a11y.roles.rows.ariaChecked.description',
+        ],
+        [
+          'components.selectButton.a11y.roles.elements.icon',
+          '<code>aria-hidden</code>',
+          '"true"',
+          'components.selectButton.a11y.roles.rows.ariaHiddenIcon.description',
+        ],
+      ],
+    },
+  },
+  // ─────────────────────────────────────────────────────────────────────────
+  // 2. Nombre accesible
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'a11y-naming',
+    title: 'components.selectButton.a11y.naming.title',
+    description: 'components.selectButton.a11y.naming.description',
+    anchor: 'a11y-naming',
+    note: {
+      type: 'info',
+      content: 'components.selectButton.a11y.naming.note',
+    },
+    table: {
+      headers: [
+        'common.tables.element',
+        'common.tables.info',
+        'common.tables.description',
+      ],
+      rows: [
+        [
+          'components.selectButton.a11y.naming.elements.button',
+          'components.selectButton.a11y.naming.info.optionLabel',
+          'components.selectButton.a11y.naming.rows.button.description',
+        ],
+        [
+          'components.selectButton.a11y.naming.elements.container',
+          'components.selectButton.a11y.naming.info.groupLabel',
+          'components.selectButton.a11y.naming.rows.container.description',
+        ],
+      ],
+    },
+    examples: [
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<!-- Texto visible: nombre accesible resuelto de form nativa -->
+<nui-select-button [(ngModel)]="value" [options]="['Día', 'Semana', 'Mes']" />
+
+<!-- Con objetos: label define el texto del botón -->
+<nui-select-button [(ngModel)]="period" [options]="periods" optionLabel="label" />
+
+<!-- El contenedor del grupo puede etiquetarse con aria-label si es necesario -->
+<div role="radiogroup" aria-label="Vista del calendario">
+  <nui-select-button [(ngModel)]="view" [options]="views" />
+</div>`,
+      },
+    ],
+  },
+  // ─────────────────────────────────────────────────────────────────────────
+  // 3. Interacción con teclado
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'a11y-keyboard',
+    title: 'components.selectButton.a11y.keyboard.title',
+    description: 'components.selectButton.a11y.keyboard.description',
+    anchor: 'a11y-keyboard',
+    table: {
+      headers: ['common.tables.value', 'common.tables.description'],
+      rows: [
+        [
+          '<kbd>Tab</kbd> / <kbd>Shift + Tab</kbd>',
+          'components.selectButton.a11y.keyboard.rows.tab.description',
+        ],
+        [
+          '<kbd>ArrowRight</kbd> / <kbd>ArrowDown</kbd>',
+          'components.selectButton.a11y.keyboard.rows.arrowNext.description',
+        ],
+        [
+          '<kbd>ArrowLeft</kbd> / <kbd>ArrowUp</kbd>',
+          'components.selectButton.a11y.keyboard.rows.arrowPrev.description',
+        ],
+        [
+          '<kbd>Space</kbd> / <kbd>Enter</kbd>',
+          'components.selectButton.a11y.keyboard.rows.spaceEnter.description',
+        ],
+      ],
+    },
+  },
+];

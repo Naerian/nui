@@ -92,6 +92,18 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         'theming-examples',
       ],
     },
+    {
+      id: 'i18n',
+      label: 'common.tabs.i18n',
+      icon: 'ri-translate-2',
+      sections: ['i18n-tokens'],
+    },
+    {
+      id: 'a11y',
+      label: 'common.tabs.a11y',
+      icon: 'ri-accessibility-line',
+      sections: ['a11y-roles', 'a11y-naming', 'a11y-keyboard'],
+    },
   ];
 
   @ViewChild('userDetailsTemplate', { read: TemplateRef }) userDetailsTemplate!: TemplateRef<any>;

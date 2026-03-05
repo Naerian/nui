@@ -64,6 +64,18 @@ export class PaginatorPageComponent extends BaseComponentPage {
         'theming-examples',
       ],
     },
+    {
+      id: 'i18n',
+      label: 'common.tabs.i18n',
+      icon: 'ri-translate-2',
+      sections: ['i18n-tokens', 'i18n-a11y-tokens'],
+    },
+    {
+      id: 'a11y',
+      label: 'common.tabs.a11y',
+      icon: 'ri-accessibility-line',
+      sections: ['a11y-roles', 'a11y-naming', 'a11y-keyboard'],
+    },
   ];
 
   // ==========================================

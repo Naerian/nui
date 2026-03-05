@@ -1257,6 +1257,57 @@
           "title": "Segmented layout variables",
           "description": "CSS variables specific to the segmented style (iOS-like). Controls the container, selected/unselected states and hover effects."
         }
+      },
+      "a11y": {
+        "roles": {
+          "title": "ARIA Roles & Attributes",
+          "description": "The Select Button exposes semantic roles depending on its selection mode (radio or checkbox).",
+          "elements": {
+            "containerRadio": "Container (radio mode)",
+            "containerCheckbox": "Container (checkbox mode)",
+            "container": "Container",
+            "buttonRadio": "Option button (radio mode)",
+            "buttonCheckbox": "Option button (checkbox mode)",
+            "button": "Option button",
+            "icon": "Decorative icon"
+          },
+          "rows": {
+            "roleRadiogroup": { "description": "The container uses <code>role=\"radiogroup\"</code> in single-select mode to group mutually exclusive options." },
+            "roleGroup": { "description": "The container uses <code>role=\"group\"</code> in multi-select mode to group related checkboxes." },
+            "ariaDisabled": { "description": "Reflects the disabled state of the entire group to assistive technologies." },
+            "roleRadio": { "description": "Each button uses <code>role=\"radio\"</code> in single-select mode." },
+            "roleCheckbox": { "description": "Each button uses <code>role=\"checkbox\"</code> in multi-select mode." },
+            "ariaChecked": { "description": "Indicates whether the option is currently selected." },
+            "ariaHiddenIcon": { "description": "Decorative icons are hidden from assistive technologies with <code>aria-hidden=\"true\"</code>." }
+          }
+        },
+        "naming": {
+          "title": "Accessible Name",
+          "description": "Each option button derives its accessible name from the option label. Optionally, the group container can receive a contextual label.",
+          "note": "Always provide meaningful labels for options. For icon-only buttons, ensure each option has a descriptive label mapped via <code>labelBy</code>.",
+          "elements": {
+            "button": "Option button",
+            "container": "Container group"
+          },
+          "info": {
+            "optionLabel": "Option label text",
+            "groupLabel": "Not provided by default"
+          },
+          "rows": {
+            "button": { "description": "The accessible name of each option button is derived from the visible label text of the option." },
+            "container": { "description": "The group container does not receive an accessible name by default. Wrap it with a labelled parent element if context is required." }
+          }
+        },
+        "keyboard": {
+          "title": "Keyboard Interaction",
+          "description": "The Select Button uses roving tabindex in radio mode and standard tab navigation in checkbox mode.",
+          "rows": {
+            "tab": { "description": "In radio mode, Tab moves focus to the selected option (or the first one if none selected). In checkbox mode, Tab cycles through all options." },
+            "arrowNext": { "description": "In radio mode, moves focus to the next option and selects it (wraps around)." },
+            "arrowPrev": { "description": "In radio mode, moves focus to the previous option and selects it (wraps around)." },
+            "spaceEnter": { "description": "In checkbox mode, toggles the selection of the focused option." }
+          }
+        }
       }
     },
     "calendar": {
@@ -1395,6 +1446,130 @@
           "title": "Customization",
           "description": "Examples of how to customize calendar styles in your application. You can override CSS variables globally or for specific instances."
         }
+      },
+      "i18n": {
+        "navigation": {
+          "title": "Navigation & Label Tokens",
+          "description": "Tokens for weekday names, month names, navigation button labels and day state labels.",
+          "note": "All array tokens (<code>weekDaysShort</code>, <code>weekDays</code>, <code>months</code>, <code>shortMonths</code>) must provide all values. Override globally with <code>provideNuiI18n({ calendar: {...} })</code> or per instance with the <code>[i18n]</code> input.",
+          "rows": {
+            "weekDaysShort": { "description": "Abbreviated day names displayed in the calendar header (Monday–Sunday)." },
+            "weekDays": { "description": "Full day names used in accessible labels and tooltips." },
+            "months": { "description": "Full month names used in the month selector and accessible labels." },
+            "shortMonths": { "description": "Abbreviated month names used in compact contexts." },
+            "prevMonth": { "description": "Label for the button that navigates to the previous month." },
+            "nextMonth": { "description": "Label for the button that navigates to the next month." },
+            "prevYears": { "description": "Label for the button that navigates to previous years in the year selector." },
+            "nextYears": { "description": "Label for the button that navigates to next years in the year selector." },
+            "changeMonth": { "description": "Label for the button that opens the month selector." },
+            "changeYear": { "description": "Label for the button that opens the year selector." },
+            "year": { "description": "Label for the year selector header." },
+            "week": { "description": "Accessible label for the week number header column." },
+            "weekNumbers": { "description": "Tooltip for the week number column toggle." },
+            "today": { "description": "Label for the 'Today' shortcut button." },
+            "selectDay": { "description": "Accessible description for selecting a day." },
+            "dayDisabled": { "description": "Screen reader announcement for disabled day cells." },
+            "openCalendar": { "description": "Label for the button that opens the calendar popover." },
+            "showTime": { "description": "Label for the button that shows the time picker." },
+            "hideTime": { "description": "Label for the button that hides the time picker." },
+            "monthAria": { "description": "Accessible label for the month selection grid." },
+            "yearsAria": { "description": "Accessible label for the year selection grid." }
+          }
+        },
+        "presetsAndTabs": {
+          "title": "Presets, Tabs & Time Picker Tokens",
+          "description": "Tokens for quick date range presets, view tabs and integrated time picker labels.",
+          "rows": {
+            "shortcuts": { "description": "Header label for the presets panel listing quick date range shortcuts." },
+            "presetsToday": { "description": "Label for the 'Today' quick preset." },
+            "last7Days": { "description": "Label for the 'Last 7 days' quick preset." },
+            "last30Days": { "description": "Label for the 'Last 30 days' quick preset." },
+            "thisMonth": { "description": "Label for the 'This month' quick preset." },
+            "lastMonth": { "description": "Label for the 'Last month' quick preset." },
+            "thisYear": { "description": "Label for the 'This year' quick preset." },
+            "tabCalendar": { "description": "Label for the calendar view tab." },
+            "tabPresets": { "description": "Label for the presets view tab." },
+            "tabTime": { "description": "Label for the time view tab." },
+            "timeStart": { "description": "Label for the start time input in range mode with time." },
+            "timeEnd": { "description": "Label for the end time input in range mode with time." }
+          }
+        },
+        "ariaTokens": {
+          "title": "ARIA State & A11y Tokens",
+          "description": "Tokens exposed only to assistive technologies for announcing day state, navigation changes and range selection.",
+          "rows": {
+            "ariaToday": { "description": "Screen reader annotation appended to today's date cell." },
+            "selected": { "description": "Screen reader annotation appended to selected date cells." },
+            "inRange": { "description": "Screen reader annotation appended to date cells within a selected range." },
+            "ariaDisabled": { "description": "Screen reader annotation appended to disabled date cells." },
+            "statusSuccess": { "description": "Screen reader annotation for dates with success status." },
+            "statusWarning": { "description": "Screen reader annotation for dates with warning status." },
+            "statusDanger": { "description": "Screen reader annotation for dates with danger status." },
+            "statusInfo": { "description": "Screen reader annotation for dates with info status." },
+            "calendarLabel": { "description": "Accessible label for the calendar grid (<code>role=\"grid\"</code>)." },
+            "keyboardInstructions": { "description": "Instructions announced to screen reader users on how to navigate the calendar with keyboard." },
+            "monthNavigated": { "description": "Live announcement when the visible month changes. Supports <code>{month}</code> and <code>{year}</code> placeholders." },
+            "rangeStart": { "description": "Live announcement when the start of a date range is selected." },
+            "rangeComplete": { "description": "Live announcement when a complete date range has been selected." },
+            "weekNumberLabel": { "description": "Accessible label for each week number cell. Supports <code>{week}</code> placeholder." }
+          }
+        }
+      },
+      "a11y": {
+        "roles": {
+          "title": "ARIA Roles & Attributes",
+          "description": "The Calendar implements the ARIA Grid pattern for day cells and a live region for navigation announcements.",
+          "elements": {
+            "grid": "Day grid",
+            "weekHeader": "Week day header",
+            "dayCell": "Day cell",
+            "dayButton": "Day button",
+            "liveRegion": "Live region"
+          },
+          "rows": {
+            "grid": { "description": "The day grid uses <code>role=\"grid\"</code> to enable arrow-key navigation between cells." },
+            "gridLabel": { "description": "The grid is labelled with the <code>calendar.a11y.calendarLabel</code> i18n token." },
+            "columnHeader": { "description": "Week day headers use <code>role=\"columnheader\"</code> with the full day name as accessible label." },
+            "gridcell": { "description": "Each day cell uses <code>role=\"gridcell\"</code>." },
+            "selected": { "description": "Selected day cells expose <code>aria-selected=\"true\"</code>." },
+            "disabled": { "description": "Disabled day cells expose <code>aria-disabled=\"true\"</code>." },
+            "liveRegion": { "description": "A hidden <code>aria-live=\"polite\"</code> region announces month navigation to screen reader users." }
+          }
+        },
+        "naming": {
+          "title": "Accessible Name",
+          "description": "The calendar grid and each day cell have descriptive accessible names derived from i18n tokens and the formatted date.",
+          "note": "Day cells include state annotations (today, selected, in range, disabled) appended to their label via the <code>calendar.aria.*</code> tokens.",
+          "elements": {
+            "grid": "Day grid",
+            "dayButton": "Day button",
+            "stateAnnotation": "State annotation"
+          },
+          "info": {
+            "i18nLabel": "calendarLabel (i18n)",
+            "dateFormatted": "Formatted date string",
+            "ariaTokens": "calendar.aria.* tokens"
+          },
+          "rows": {
+            "grid": { "description": "The calendar grid receives its accessible name from the <code>calendar.a11y.calendarLabel</code> token." },
+            "dayButton": { "description": "Each day button's accessible name is the formatted date string (e.g., 'Tuesday, December 10, 2024')." },
+            "stateAnnotation": { "description": "The state tokens (<code>calendar.aria.today</code>, <code>selected</code>, etc.) are appended to the date label to communicate state to screen readers." }
+          }
+        },
+        "keyboard": {
+          "title": "Keyboard Interaction",
+          "description": "The calendar's day grid implements full keyboard navigation per the ARIA Grid pattern.",
+          "rows": {
+            "arrowHorizontal": { "description": "Moves focus one day forward/backward." },
+            "arrowVertical": { "description": "Moves focus one week forward/backward." },
+            "home": { "description": "Moves focus to the first day of the current week." },
+            "end": { "description": "Moves focus to the last day of the current week." },
+            "pageUp": { "description": "Navigates to the previous month." },
+            "pageDown": { "description": "Navigates to the next month." },
+            "spaceEnter": { "description": "Selects the focused day." },
+            "escape": { "description": "Closes the calendar popover and returns focus to the trigger." }
+          }
+        }
       }
     },
     "paginator": {
@@ -1489,6 +1664,103 @@
         "infinite": {
           "title": "Infinite scroll",
           "description": "CSS variables for infinite loading mode"
+        }
+      },
+      "i18n": {
+        "tokens": {
+          "title": "Visible Label Tokens",
+          "description": "Tokens for all user-facing text in the paginator: page selector, navigation buttons, page jump input and infinite scroll labels.",
+          "note": "Override globally with <code>provideNuiI18n({ paginator: {...} })</code> or per instance with the <code>[i18n]</code> input. Tokens support placeholders in curly braces: <code>{start}</code>, <code>{end}</code>, <code>{total}</code>, <code>{page}</code>, <code>{totalPages}</code>, <code>{loaded}</code>.",
+          "rows": {
+            "itemsPerPage": { "description": "Label for the 'Items per page' dropdown selector." },
+            "showingItems": { "description": "Summary text showing the current range and total. Supports <code>{start}</code>, <code>{end}</code>, <code>{total}</code> placeholders." },
+            "page": { "description": "Label prefix for the current page number display." },
+            "of": { "description": "Separator word between current page and total pages (e.g., '3 of 10')." },
+            "goToPage": { "description": "Label for the page jump input field." },
+            "go": { "description": "Label for the button that submits the page jump." },
+            "invalidPage": { "description": "Validation message shown when an invalid page number is entered." },
+            "firstPage": { "description": "Accessible label for the 'First page' navigation button." },
+            "lastPage": { "description": "Accessible label for the 'Last page' navigation button." },
+            "previousPage": { "description": "Accessible label for the 'Previous page' navigation button." },
+            "nextPage": { "description": "Accessible label for the 'Next page' navigation button." },
+            "pageLabel": { "description": "Accessible label template for each page number button. Supports <code>{page}</code> placeholder." },
+            "morePages": { "description": "Label for the ellipsis button indicating hidden pages." },
+            "loadMore": { "description": "Label for the 'Load more' button in infinite scroll mode." },
+            "loading": { "description": "Text shown while a new page of data is loading." },
+            "pageJumpHelp": { "description": "Helper text for the page jump input. Supports <code>{totalPages}</code> placeholder." },
+            "infiniteLoadedItems": { "description": "Status text in infinite mode. Supports <code>{loaded}</code> and <code>{total}</code> placeholders." },
+            "infiniteLoadEnd": { "description": "Message displayed when all items have been loaded in infinite scroll mode." }
+          }
+        },
+        "a11yTokens": {
+          "title": "A11y Tokens (Screen Reader Only)",
+          "description": "Sub-object <code>paginator.a11y.*</code> containing tokens used exclusively in ARIA attributes and live region announcements.",
+          "rows": {
+            "pagination": { "description": "Accessible label for the <code>&lt;nav&gt;</code> element wrapping the paginator." },
+            "morePages": { "description": "Accessible label for the ellipsis / more pages button." },
+            "page": { "description": "Accessible label template for each page button. Supports <code>{page}</code> placeholder." },
+            "currentPage": { "description": "Live region announcement for the currently active page. Supports <code>{page}</code> placeholder." },
+            "goToPage": { "description": "Accessible label for the 'Go to page' action. Supports <code>{page}</code> placeholder." },
+            "currentPageWithRange": { "description": "Full page announcement including item range and total. Supports multiple placeholders." },
+            "currentPageNoRange": { "description": "Compact page announcement without item range. Supports <code>{page}</code> and <code>{totalPages}</code> placeholders." },
+            "fractionalPage": { "description": "Announcement for fractional page states. Supports <code>{page}</code> and <code>{totalPages}</code> placeholders." },
+            "showingItems": { "description": "Accessible summary of items currently visible. Supports <code>{start}</code>, <code>{end}</code>, <code>{total}</code> placeholders." },
+            "loading": { "description": "Live region announcement while a new page is being loaded." }
+          }
+        }
+      },
+      "a11y": {
+        "roles": {
+          "title": "ARIA Roles & Attributes",
+          "description": "The Paginator exposes a navigation landmark with accessible labels on all interactive elements.",
+          "elements": {
+            "host": "Nav element",
+            "firstPage": "First page button",
+            "prevPage": "Previous page button",
+            "pageButton": "Page number button",
+            "currentPage": "Active page button",
+            "nextPage": "Next page button",
+            "lastPage": "Last page button",
+            "liveRegion": "Live region"
+          },
+          "rows": {
+            "hostLabel": { "description": "The <code>&lt;nav&gt;</code> element receives its label from the <code>paginator.a11y.pagination</code> i18n token." },
+            "firstPage": { "description": "The first page button carries the <code>paginator.firstPage</code> i18n token as its accessible label." },
+            "prevPage": { "description": "The previous page button carries the <code>paginator.previousPage</code> i18n token as its accessible label." },
+            "pageButton": { "description": "Each page button carries the <code>paginator.a11y.page</code> i18n template as its accessible label." },
+            "currentPage": { "description": "The active page button additionally exposes <code>aria-current=\"page\"</code>." },
+            "nextPage": { "description": "The next page button carries the <code>paginator.nextPage</code> i18n token as its accessible label." },
+            "lastPage": { "description": "The last page button carries the <code>paginator.lastPage</code> i18n token as its accessible label." },
+            "liveRegion": { "description": "A hidden <code>aria-live=\"polite\"</code> region announces page changes to screen reader users." }
+          }
+        },
+        "naming": {
+          "title": "Accessible Name",
+          "description": "All interactive elements receive accessible names via i18n tokens. The live region announces page context on every navigation.",
+          "note": "Override the <code>paginator.a11y.*</code> tokens to localise all screen reader-facing strings without changing the visible UI.",
+          "elements": {
+            "nav": "Nav element",
+            "pageButtons": "Page buttons",
+            "liveAnnouncement": "Live announcement"
+          },
+          "info": {
+            "i18nPagination": "paginator.a11y.pagination (i18n)",
+            "i18nPage": "paginator.a11y.page (i18n)",
+            "interpolated": "Interpolated from tokens"
+          },
+          "rows": {
+            "nav": { "description": "The navigation landmark is labelled via the paginator.a11y.pagination i18n token." },
+            "pageButtons": { "description": "Page number buttons receive their labels from the paginator.a11y.page template interpolated with the page number." },
+            "liveAnnouncement": { "description": "On each page change the live region announces a full-context string built from the currentPageWithRange or currentPageNoRange token." }
+          }
+        },
+        "keyboard": {
+          "title": "Keyboard Interaction",
+          "description": "All paginator controls are standard buttons and inputs, fully operable with keyboard.",
+          "rows": {
+            "tab": { "description": "Tab / Shift+Tab cycles through the navigation buttons and the page jump input." },
+            "spaceEnter": { "description": "Activates the focused page button or submits the page jump input." }
+          }
         }
       }
     },
@@ -1595,6 +1867,54 @@
           "title": "Animation",
           "description": "CSS variables to control popover transitions and animations"
         }
+      },
+      "a11y": {
+        "roles": {
+          "title": "ARIA Roles & Attributes",
+          "description": "The Popover implements the ARIA Dialog pattern. The trigger exposes expansion state and association with the popover.",
+          "elements": {
+            "trigger": "Trigger element",
+            "popover": "Popover container"
+          },
+          "rows": {
+            "expanded": { "description": "The trigger exposes <code>aria-expanded=\"true\"</code> while the popover is open and <code>\"false\"</code> while closed." },
+            "controls": { "description": "The trigger links to the popover via <code>aria-controls=\"{popoverId}\"</code>." },
+            "role": { "description": "The popover container carries <code>role=\"dialog\"</code>." },
+            "id": { "description": "The popover container exposes a unique <code>id</code> matching the trigger's <code>aria-controls</code>." },
+            "ariaLabel": { "description": "When <code>ariaLabel</code> is set, the popover is labelled via <code>aria-label</code>." },
+            "labelledby": { "description": "When <code>ariaLabelledBy</code> is set, the popover is labelled via <code>aria-labelledby</code> pointing to an element inside or outside the popover." }
+          }
+        },
+        "naming": {
+          "title": "Accessible Name",
+          "description": "The popover accessible name follows a priority chain: ariaLabelledBy > ariaLabel > auto-derived from the first visible text content.",
+          "note": "Always ensure the popover has a descriptive accessible name. For icon-only triggers, provide an <code>aria-label</code> on the trigger element itself.",
+          "elements": {
+            "popoverLabelledBy": "Popover with ariaLabelledBy",
+            "popoverLabel": "Popover with ariaLabel",
+            "popoverAuto": "Popover with auto-derived name",
+            "trigger": "Trigger element"
+          },
+          "info": {
+            "auto": "First visible text content",
+            "ownLabel": "Own label (text or aria-label)"
+          },
+          "rows": {
+            "labelledBy": { "description": "Highest priority. The <code>ariaLabelledBy</code> input points to an id of an element that labels the popover." },
+            "label": { "description": "Second priority. The <code>ariaLabel</code> input provides an explicit string label for the popover." },
+            "auto": { "description": "Fallback. If neither is set, the name is auto-derived from the first block of text content inside the popover." },
+            "trigger": { "description": "The trigger element must have its own accessible name independent of the popover (text, aria-label or title)." }
+          }
+        },
+        "keyboard": {
+          "title": "Keyboard Interaction",
+          "description": "The popover follows the ARIA Dialog keyboard pattern. Focus moves into the popover on open and returns on close.",
+          "rows": {
+            "spaceEnter": { "description": "Opens or closes the popover when the trigger is focused (depends on trigger mode)." },
+            "escape": { "description": "Closes the popover and returns focus to the trigger." },
+            "tab": { "description": "Tab / Shift+Tab cycle through interactive elements inside the open popover." }
+          }
+        }
       }
     },
     "toast": {
@@ -1690,6 +2010,60 @@
         "examples": {
           "title": "Customization example",
           "description": "Complete example of toast customization with CSS variables to create a dark theme."
+        }
+      },
+      "i18n": {
+        "tokens": {
+          "title": "Translation Tokens",
+          "description": "The Toast component uses a single generic i18n token for the close button label.",
+          "note": "The generic <code>close</code> token is shared across multiple components (Toast, SidebarPanel…). Override it globally to localise all close buttons at once.",
+          "rows": {
+            "close": { "description": "Accessible label for the close button shown on dismissible toasts." }
+          }
+        }
+      },
+      "a11y": {
+        "roles": {
+          "title": "ARIA Roles & Attributes",
+          "description": "Toasts use a live region so screen readers announce new notifications without interrupting the user's current focus.",
+          "elements": {
+            "host": "Toast host element",
+            "closeButton": "Close button"
+          },
+          "rows": {
+            "ariaLive": { "description": "The toast element carries <code>aria-live=\"polite\"</code> for informational toasts or <code>\"assertive\"</code> for critical alerts (error/warning), controlling announcement priority." },
+            "ariaAtomic": { "description": "<code>aria-atomic=\"true\"</code> ensures the screen reader announces the complete toast content as a single unit." },
+            "ariaLabel": { "description": "The toast element's accessible label is automatically derived from its content following the priority: title → message → type." },
+            "closeLabel": { "description": "The close button carries the <code>close</code> i18n token as its accessible label." }
+          }
+        },
+        "naming": {
+          "title": "Accessible Name",
+          "description": "The toast accessible name is derived automatically from its content. No explicit aria-label is required on the consumer side.",
+          "note": "Always provide meaningful title or message content. Avoid toasts that rely solely on color or icon to convey their meaning.",
+          "elements": {
+            "hostWithTitle": "Toast with title",
+            "hostWithMessage": "Toast without title",
+            "hostTypeFallback": "Toast with type fallback"
+          },
+          "info": {
+            "title": "Toast title",
+            "message": "Toast message",
+            "type": "Toast type (success, error…)"
+          },
+          "rows": {
+            "hostTitle": { "description": "When a <code>title</code> is provided, it becomes the toast's accessible label." },
+            "hostMessage": { "description": "When there is no title, the <code>message</code> text becomes the accessible label." },
+            "hostType": { "description": "When neither title nor message is set, the toast <code>type</code> string is used as a fallback label." }
+          }
+        },
+        "keyboard": {
+          "title": "Keyboard Interaction",
+          "description": "Toasts are non-modal. Focus does not move to them automatically; users can Tab into the close button if they choose.",
+          "rows": {
+            "tab": { "description": "Tab moves focus to the close button inside the toast if one is visible." },
+            "spaceEnter": { "description": "Activates the focused close button, dismissing the toast." }
+          }
         }
       }
     },
@@ -1831,6 +2205,67 @@
           "title": "Customization examples",
           "description": "SCSS examples for customizing side panel styles in your application"
         }
+      },
+      "i18n": {
+        "tokens": {
+          "title": "Translation Tokens",
+          "description": "The SidebarPanel component uses generic NuiI18nService tokens for its control buttons.",
+          "note": "All tokens below are shared across multiple components. Override them globally with <code>provideNuiI18n({...})</code>.",
+          "rows": {
+            "close": { "description": "Accessible label for the close button." },
+            "minimize": { "description": "Accessible label for the minimize (pin) button." },
+            "restore": { "description": "Accessible label for the restore button shown when the panel is minimised." },
+            "expand": { "description": "Accessible label for the expand button shown when the panel is collapsed." },
+            "collapse": { "description": "Accessible label for the collapse button." }
+          }
+        }
+      },
+      "a11y": {
+        "roles": {
+          "title": "ARIA Roles & Attributes",
+          "description": "The SidebarPanel implements a dialog-like accessible pattern so screen readers recognise it as a discrete landmark.",
+          "elements": {
+            "panel": "Panel root element",
+            "closeButton": "Close button",
+            "minimizeButton": "Minimize / restore button",
+            "expandButton": "Expand / collapse button",
+            "backdrop": "Backdrop overlay"
+          },
+          "rows": {
+            "panelRole": { "description": "The panel root carries <code>role=\"dialog\"</code> to signal a distinct region to assistive technologies." },
+            "ariaLabelledby": { "description": "<code>aria-labelledby</code> points to the panel's title element, giving the dialog an accessible name derived from its visible heading." },
+            "closeLabel": { "description": "The close button uses the <code>close</code> i18n token as its <code>aria-label</code>." },
+            "minimizeLabel": { "description": "The minimize / restore button exposes the appropriate i18n token (<code>minimize</code> or <code>restore</code>) as its <code>aria-label</code> depending on state." },
+            "expandLabel": { "description": "The expand / collapse button exposes the appropriate i18n token (<code>expand</code> or <code>collapse</code>) as its <code>aria-label</code> depending on state." },
+            "backdropHidden": { "description": "The backdrop overlay is hidden from assistive technologies with <code>aria-hidden=\"true\"</code>." }
+          }
+        },
+        "naming": {
+          "title": "Accessible Name",
+          "description": "The panel accessible name is derived from its visible title via <code>aria-labelledby</code>. Control buttons are labelled with i18n tokens.",
+          "note": "Always provide a visible title inside the panel. This becomes the dialog's accessible name automatically.",
+          "elements": {
+            "panelWithTitle": "Panel with title",
+            "controlButtons": "Control buttons"
+          },
+          "info": {
+            "ariaLabelledby": "Panel title (aria-labelledby)",
+            "i18nTokens": "i18n tokens for button labels"
+          },
+          "rows": {
+            "title": { "description": "The visible panel title provides the accessible name for the <code>role=\"dialog\"</code> region." },
+            "buttons": { "description": "Control buttons (close, minimize, expand) use i18n tokens as their accessible labels so they remain meaningful without icon-only tooltips." }
+          }
+        },
+        "keyboard": {
+          "title": "Keyboard Interaction",
+          "description": "The SidebarPanel supports keyboard navigation for all interactive controls.",
+          "rows": {
+            "escape": { "description": "Closes the panel when it is in modal mode, returning focus to the trigger element." },
+            "tab": { "description": "Cycles through focusable elements inside the panel. Focus is trapped while the panel is open in modal mode." },
+            "spaceEnter": { "description": "Activates the currently focused control button (close, minimize, expand)." }
+          }
+        }
       }
     },
     "tooltip": {
@@ -1900,6 +2335,48 @@
         "examples": {
           "title": "Customization examples",
           "description": "SCSS examples for customizing tooltip styles in your application"
+        }
+      },
+      "a11y": {
+        "roles": {
+          "title": "ARIA Roles & Attributes",
+          "description": "Tooltips follow the WAI-ARIA Tooltip pattern, associating the floating content with its trigger via <code>aria-describedby</code>.",
+          "elements": {
+            "trigger": "Trigger element",
+            "tooltip": "Tooltip element"
+          },
+          "rows": {
+            "ariaDescribedby": { "description": "The trigger element receives <code>aria-describedby</code> pointing to the tooltip's <code>id</code>, so screen readers announce the tooltip text as supplementary description." },
+            "tooltipRole": { "description": "The floating tooltip element carries <code>role=\"tooltip\"</code> and a unique <code>id</code> used by <code>aria-describedby</code>." }
+          }
+        },
+        "naming": {
+          "title": "Accessible Name",
+          "description": "The trigger element must have its own accessible name independent of the tooltip. The tooltip itself provides supplementary description only.",
+          "note": "Do not rely on the tooltip as the sole accessible name for icon-only triggers. Use <code>aria-label</code> on the trigger element.",
+          "elements": {
+            "trigger": "Trigger element",
+            "iconTrigger": "Icon-only trigger",
+            "tooltipContent": "Tooltip content"
+          },
+          "info": {
+            "ownLabel": "Trigger own label",
+            "ariaLabel": "aria-label on icon trigger",
+            "description": "Tooltip text (aria-describedby)"
+          },
+          "rows": {
+            "trigger": { "description": "The trigger must carry its own accessible name (button text, aria-label, etc.) that remains meaningful without the tooltip text." },
+            "iconTrigger": { "description": "For icon-only triggers, add an explicit <code>aria-label</code> to the trigger element so the action is identified regardless of tooltip visibility." },
+            "content": { "description": "The tooltip text is connected via <code>aria-describedby</code> and serves as supplementary information, not the primary label." }
+          }
+        },
+        "keyboard": {
+          "title": "Keyboard Interaction",
+          "description": "Tooltips are shown and hidden automatically based on focus and keyboard interaction. No explicit key press is needed to open them.",
+          "rows": {
+            "tab": { "description": "Tabbing to a trigger element shows the tooltip. Tabbing away hides it." },
+            "escape": { "description": "Pressing Escape while the trigger is focused hides the tooltip." }
+          }
         }
       }
     },
@@ -2002,6 +2479,112 @@
         "customization": {
           "title": "Customization",
           "description": "Examples of how to customize time picker styles in your application. You can override CSS variables globally or for specific instances. Integration with ThemeService allows generating color variables for your custom semantic colors."
+        }
+      },
+      "i18n": {
+        "tokens": {
+          "title": "Time Picker Tokens",
+          "description": "Tokens used for the time picker labels, button labels and screen-reader text.",
+          "note": "Override any token globally with <code>provideNuiI18n({ timePicker: { ... } })</code>.",
+          "rows": {
+            "setToCurrentTime": { "description": "Label for the 'set to current time' action button." },
+            "selectTime": { "description": "Placeholder label shown when no time is selected." },
+            "clear": { "description": "Label for the clear / reset time action." },
+            "hour": { "description": "Column header label for the hours column (long form)." },
+            "minutes": { "description": "Column header label for the minutes column (long form)." },
+            "hour12": { "description": "Label used when the picker is in 12-hour mode." },
+            "hour24": { "description": "Label used when the picker is in 24-hour mode." },
+            "period": { "description": "Column header label for the AM/PM period column." },
+            "normalizedTime": { "description": "Screen-reader announcement template for the normalised (end-of-range) time value." },
+            "rangeLabel": { "description": "Accessible label describing a time range selection." },
+            "timeSelected": { "description": "Screen-reader announcement when a time has been successfully selected." }
+          }
+        },
+        "durationAndPresets": {
+          "title": "Duration & Presets Tokens",
+          "description": "Tokens specific to duration mode labels, column headers and preset option names.",
+          "note": "Duration tokens live under the <code>timePicker.duration</code> namespace and preset tokens under <code>timePicker.presets</code>.",
+          "rows": {
+            "hours": { "description": "Long-form label for 'hours' used in duration display." },
+            "minutes": { "description": "Long-form label for 'minutes' used in duration display." },
+            "seconds": { "description": "Long-form label for 'seconds' used in duration display." },
+            "hoursShort": { "description": "Short-form abbreviation for hours (e.g. 'h')." },
+            "minutesShort": { "description": "Short-form abbreviation for minutes (e.g. 'min')." },
+            "secondsShort": { "description": "Short-form abbreviation for seconds (e.g. 's')." },
+            "selectDuration": { "description": "Placeholder label used in duration selection mode." },
+            "durationSelected": { "description": "Screen-reader announcement when a duration has been selected." },
+            "tabSelector": { "description": "Label for the manual time-selector tab when both selector and presets tabs are shown." },
+            "tabPresets": { "description": "Label for the presets tab when both selector and presets tabs are shown." },
+            "presetNow": { "description": "Label for the 'now' preset option." },
+            "presetNoon": { "description": "Label for the 'noon' (12:00) preset option." },
+            "presetMidnight": { "description": "Label for the 'midnight' (00:00) preset option." },
+            "presetMinutes": { "description": "Label template for minute-based presets (e.g. '15 minutes')." },
+            "presetHour": { "description": "Label for the one-hour preset option." },
+            "presetHours": { "description": "Label template for multi-hour presets (e.g. '2 hours')." }
+          }
+        },
+        "a11yTokens": {
+          "title": "Accessibility Tokens",
+          "description": "Tokens used exclusively for screen-reader announcements and ARIA labels inside the time picker.",
+          "note": "These tokens are nested under <code>timePicker.a11y</code>.",
+          "rows": {
+            "timePickerLabel": { "description": "The <code>aria-label</code> applied to the overall time picker container in standard mode." },
+            "durationPickerLabel": { "description": "The <code>aria-label</code> applied to the overall picker container when in duration mode." },
+            "hourColumnHelp": { "description": "Screen-reader help text announced for the hours listbox column." },
+            "minuteColumnHelp": { "description": "Screen-reader help text announced for the minutes listbox column." },
+            "periodHelp": { "description": "Screen-reader help text announced for the AM/PM period listbox column." },
+            "normalizedAlert": { "description": "Text announced via an assertive live region when the selected time is normalised to the nearest valid value." },
+            "rangeInfo": { "description": "Screen-reader text describing the time range boundaries." }
+          }
+        }
+      },
+      "a11y": {
+        "roles": {
+          "title": "ARIA Roles & Attributes",
+          "description": "The TimePicker implements the ARIA <code>listbox</code> / <code>option</code> pattern for each scroll column.",
+          "elements": {
+            "container": "Picker container",
+            "column": "Scroll column",
+            "option": "Time option",
+            "normalizedAlert": "Normalisation live region"
+          },
+          "rows": {
+            "containerLabel": { "description": "The picker root element has <code>aria-label</code> set from the <code>timePickerLabel</code> (or <code>durationPickerLabel</code>) i18n token." },
+            "columnRole": { "description": "Each scroll column has <code>role=\"listbox\"</code> and an <code>aria-label</code> derived from its column-specific i18n token (hour, minutes, period…)." },
+            "optionRole": { "description": "Each time value within a column has <code>role=\"option\"</code> and <code>aria-selected=\"true\"</code> when it is the currently active value." },
+            "normalizedLive": { "description": "A visually hidden element with <code>aria-live=\"assertive\"</code> announces when the entered time is normalised to the nearest valid boundary." }
+          }
+        },
+        "naming": {
+          "title": "Accessible Name",
+          "description": "The picker and each column are labelled via i18n tokens. Individual options are labelled by their visible time value.",
+          "note": "Always configure the i18n tokens for your locale so screen-reader users hear meaningful column labels (e.g. 'Hour', 'Minutes', 'AM/PM').",
+          "elements": {
+            "container": "Picker container label",
+            "columns": "Column labels",
+            "helpText": "Column help text"
+          },
+          "info": {
+            "containerLabel": "timePickerLabel / durationPickerLabel token",
+            "columnLabels": "hour / minutes / period tokens",
+            "helpTokens": "hourColumnHelp / minuteColumnHelp / periodHelp tokens"
+          },
+          "rows": {
+            "container": { "description": "The root container label comes from <code>timePicker.a11y.timePickerLabel</code> (or <code>durationPickerLabel</code>). Override it per locale." },
+            "columns": { "description": "Each column label comes from the corresponding i18n token (e.g. <code>timePicker.hour</code>), giving screen-reader users context for each scroll region." },
+            "help": { "description": "Column help text tokens (<code>hourColumnHelp</code>, etc.) are announced when the column receives focus, guiding users on how to interact (Arrow keys, Home/End)." }
+          }
+        },
+        "keyboard": {
+          "title": "Keyboard Interaction",
+          "description": "Each column in the TimePicker behaves as an independent listbox. Use the following keys to navigate and select values.",
+          "rows": {
+            "arrowUpDown": { "description": "Moves focus to the previous / next time option within the focused column." },
+            "tab": { "description": "Moves focus to the next interactive column or control (e.g. period toggle, action buttons)." },
+            "homeEnd": { "description": "Jumps to the first / last option in the focused column." },
+            "spaceEnter": { "description": "Selects the currently focused option and updates the displayed time value." },
+            "escape": { "description": "Closes the time picker overlay and reverts to the previously confirmed value." }
+          }
         }
       }
     },
@@ -2107,6 +2690,66 @@
         "structure": {
           "title": "Structural variables",
           "description": "CSS variables to customize the radial layout, animations, button sizes, backdrop, tooltips and focus ring."
+        }
+      },
+      "i18n": {
+        "tokens": {
+          "title": "Translation Tokens",
+          "description": "The FabButton component exposes a single i18n token for the trigger button's accessible label.",
+          "note": "Override with <code>provideNuiI18n({ fabButton: { triggerAriaLabel: 'Open actions' } })</code>.",
+          "rows": {
+            "triggerAriaLabel": { "description": "The <code>aria-label</code> applied to the FAB trigger button. Used by screen readers to identify the button when it shows only an icon." }
+          }
+        }
+      },
+      "a11y": {
+        "roles": {
+          "title": "ARIA Roles & Attributes",
+          "description": "The FabButton follows the WAI-ARIA Menu Button pattern. The trigger announces the open state and the actions list is a proper menu.",
+          "elements": {
+            "host": "FAB host (group wrapper)",
+            "trigger": "Trigger button",
+            "menu": "Actions menu",
+            "action": "Individual action item",
+            "icon": "Decorative icon"
+          },
+          "rows": {
+            "hostRole": { "description": "The FAB host element has <code>role=\"group\"</code> and <code>aria-label</code> so the entire widget is announced as a coherent group." },
+            "ariaExpanded": { "description": "The trigger button carries <code>aria-expanded</code> reflecting whether the actions list is open (<code>true</code>) or closed (<code>false</code>)." },
+            "ariaControls": { "description": "The trigger carries <code>aria-controls</code> pointing to the actions menu element's <code>id</code>." },
+            "ariaHaspopup": { "description": "The trigger has <code>aria-haspopup=\"menu\"</code> to signal that activating it opens a menu." },
+            "menuRole": { "description": "The actions container has <code>role=\"menu\"</code>." },
+            "actionRole": { "description": "Each individual action has <code>role=\"menuitem\"</code>." },
+            "iconHidden": { "description": "Decorative icons inside action items are hidden with <code>aria-hidden=\"true\"</code>." }
+          }
+        },
+        "naming": {
+          "title": "Accessible Name",
+          "description": "The trigger button and each action item must have meaningful accessible names for screen-reader users.",
+          "note": "Always provide a <code>label</code> or <code>tooltip</code> for every action item — these become the <code>menuitem</code> accessible name.",
+          "elements": {
+            "trigger": "Trigger button",
+            "action": "Action item"
+          },
+          "info": {
+            "triggerLabel": "i18n triggerAriaLabel token",
+            "actionLabel": "Action label / tooltip text"
+          },
+          "rows": {
+            "trigger": { "description": "The trigger button's accessible name comes from the <code>triggerAriaLabel</code> i18n token. Override it in your locale to reflect the purpose of the FAB." },
+            "action": { "description": "Each action item's accessible name is taken from its visible label text or, for icon-only actions, from the <code>tooltip</code> input." }
+          }
+        },
+        "keyboard": {
+          "title": "Keyboard Interaction",
+          "description": "The FabButton follows the WAI-ARIA Menu Button keyboard pattern.",
+          "rows": {
+            "enterSpace": { "description": "Activates the trigger button, toggling the actions menu open or closed." },
+            "escape": { "description": "Closes the actions menu and returns focus to the trigger button." },
+            "arrowDownUp": { "description": "Moves focus between action items within the open menu." },
+            "homeEnd": { "description": "Moves focus to the first / last action item in the open menu." },
+            "tab": { "description": "Closes the actions menu and moves focus to the next focusable element on the page." }
+          }
         }
       }
     }

@@ -75,6 +75,18 @@ export class CalendarPageComponent extends BaseComponentPage {
       icon: 'ri-palette-line',
       sections: ['theming-colors', 'theming-sizes', 'theming-structure', 'theming-customization'],
     },
+    {
+      id: 'i18n',
+      label: 'common.tabs.i18n',
+      icon: 'ri-translate-2',
+      sections: ['i18n-navigation', 'i18n-presets-tabs', 'i18n-aria-tokens'],
+    },
+    {
+      id: 'a11y',
+      label: 'common.tabs.a11y',
+      icon: 'ri-accessibility-line',
+      sections: ['a11y-roles', 'a11y-naming', 'a11y-keyboard'],
+    },
   ];
 
   // Examples data - Basic

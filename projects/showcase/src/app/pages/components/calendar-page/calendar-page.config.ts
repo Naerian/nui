@@ -2,11 +2,15 @@ import { ComponentPageConfig, ComponentSection } from '../../../core/models';
 import { CALENDAR_EXAMPLES_SECTIONS } from './configs/calendar-examples.config';
 import { CALENDAR_API_SECTIONS } from './configs/calendar-api.config';
 import { CALENDAR_THEMING_SECTIONS } from './configs/calendar-theming.config';
+import { CALENDAR_I18N_SECTIONS } from './configs/calendar-i18n.config';
+import { CALENDAR_A11Y_SECTIONS } from './configs/calendar-a11y.config';
 
 export const CALENDAR_PAGE_SECTIONS: ComponentSection[] = [
   ...CALENDAR_EXAMPLES_SECTIONS,
   ...CALENDAR_API_SECTIONS,
   ...CALENDAR_THEMING_SECTIONS,
+  ...CALENDAR_I18N_SECTIONS,
+  ...CALENDAR_A11Y_SECTIONS,
 ];
 
 /**

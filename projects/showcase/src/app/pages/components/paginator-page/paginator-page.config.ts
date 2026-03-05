@@ -2,6 +2,8 @@ import { ComponentPageConfig, ComponentSection } from '../../../core/models';
 import { PAGINATOR_EXAMPLES_SECTIONS } from './configs/paginator-examples.config';
 import { PAGINATOR_API_SECTIONS } from './configs/paginator-api.config';
 import { PAGINATOR_THEMING_SECTIONS } from './configs/paginator-theming.config';
+import { PAGINATOR_I18N_SECTIONS } from './configs/paginator-i18n.config';
+import { PAGINATOR_A11Y_SECTIONS } from './configs/paginator-a11y.config';
 
 /**
  * Secciones del Paginator (modularizado)
@@ -10,6 +12,8 @@ export const PAGINATOR_PAGE_SECTIONS: ComponentSection[] = [
   ...PAGINATOR_EXAMPLES_SECTIONS,
   ...PAGINATOR_API_SECTIONS,
   ...PAGINATOR_THEMING_SECTIONS,
+  ...PAGINATOR_I18N_SECTIONS,
+  ...PAGINATOR_A11Y_SECTIONS,
 ];
 
 /**
