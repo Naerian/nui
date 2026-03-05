@@ -444,6 +444,7 @@
     &--#{$size} {
       .nui-paginator__button {
         @include mixins.nui-control-size($size, true);
+        line-height: 1; // Asegura que el contenido esté centrado verticalmente
 
         i {
           font-size: var(--nui-pg-icon-size-#{$size});
