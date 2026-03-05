@@ -34,7 +34,7 @@ import { provideNuiI18n } from 'nui';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideNuiI18n({
-      close: 'Cerrar',
+      close: 'Close',
     }),
   ],
 };`,

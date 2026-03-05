@@ -54,11 +54,11 @@ import { provideNuiI18n } from 'nui';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideNuiI18n({
-      close:    'Cerrar',
-      minimize: 'Minimizar',
-      restore:  'Restaurar',
-      expand:   'Expandir',
-      collapse: 'Colapsar',
+      close:    'Close',
+      minimize: 'Minimize',
+      restore:  'Restore',
+      expand:   'Expand',
+      collapse: 'Collapse',
     }),
   ],
 };`,
