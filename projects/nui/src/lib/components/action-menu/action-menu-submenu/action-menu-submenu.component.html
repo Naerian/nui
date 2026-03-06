@@ -42,6 +42,7 @@
     class="nui-action-menu-submenu__item nui-action-menu-submenu__item--submenu"
     [cdkMenuTriggerFor]="subMenuTemplate"
     [cdkMenuTriggerData]="{ item: item }"
+    [cdkMenuPosition]="submenuPositions()"
     cdkMenuItem
     [disabled]="item.disabled"
     [attr.aria-label]="item.title || item.label"
@@ -95,5 +96,6 @@
     [color]="color()"
     [isSelectionMode]="isSelectionMode()"
     [items]="item.children"
+    [offsetSubmenu]="offsetSubmenu()"
   ></nui-action-menu-submenu>
 </ng-template>

@@ -3,22 +3,22 @@ import { TemplateRef } from '@angular/core';
 /**
  * Tipo de renderizado del menú de acciones.
  * 
- * @typedef {('static' | 'dynamic')} ActionMenuType
+ * @typedef {('inline' | 'dropdown')} ActionMenuType
  * 
- * - **'static'**: El menú se renderiza estáticamente en el DOM y se muestra/oculta con CSS.
- *   Mejor rendimiento para menús que se usan frecuentemente.
+ * - **'inline'**: El menú se renderiza directamente en el flujo del DOM, sin botón trigger.
+ *   Ideal para menús visibles de forma permanente o integrados en un layout.
  * 
- * - **'dynamic'**: El menú se crea/destruye dinámicamente en el DOM al abrir/cerrar.
- *   Mejor para menús que se usan ocasionalmente o para reducir el DOM inicial.
+ * - **'dropdown'**: El menú se despliega desde un botón trigger en un panel flotante.
+ *   El comportamiento por defecto y el más habitual.
  * 
- * @default 'dynamic'
+ * @default 'dropdown'
  * 
  * @example
  * ```typescript
- * <nui-action-menu [type]="'static'"></nui-action-menu>
+ * <nui-action-menu [type]="'inline'"></nui-action-menu>
  * ```
  */
-export type ActionMenuType = 'static' | 'dynamic';
+export type ActionMenuType = 'inline' | 'dropdown';
 
 /**
  * Item individual del menú de acciones.

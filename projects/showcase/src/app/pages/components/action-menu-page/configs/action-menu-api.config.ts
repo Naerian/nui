@@ -26,8 +26,8 @@ export const ACTION_MENU_API_SECTIONS: ComponentSection[] = [
         ],
         [
           '<code>type</code>',
-          "'static' | 'dynamic'",
-          '<code class="neutral">dynamic</code>',
+          "'dropdown' | 'inline'",
+          '<code class="neutral">dropdown</code>',
           'components.actionMenu.api.inputs.rows.type.description',
         ],
         [
@@ -107,6 +107,12 @@ export const ACTION_MENU_API_SECTIONS: ComponentSection[] = [
           'number',
           '<code class="neutral">5</code>',
           'components.actionMenu.api.inputs.rows.offset.description',
+        ],
+        [
+          '<code>offsetSubmenu</code>',
+          'number',
+          '<code class="neutral">10</code>',
+          'components.actionMenu.api.inputs.rows.offsetSubmenu.description',
         ],
       ],
     },

@@ -66,8 +66,8 @@ export class ActionMenuComponent {
   /** Lista de items del menú (Input data). */
   readonly items = input<ActionMenuItem[]>([]);
 
-  /** Tipo de menú: 'static' (inline) o 'dynamic' (popover). */
-  readonly type = input<ActionMenuType>('dynamic');
+  /** Modo de renderizado: 'dropdown' (panel flotante con trigger) o 'inline' (integrado en el flujo). */
+  readonly type = input<ActionMenuType>('dropdown');
 
   /** Color del trigger. */
   readonly color = input<NUIColor>();
@@ -92,8 +92,11 @@ export class ActionMenuComponent {
   readonly iconSubmenu = input<string>('ri-arrow-right-s-line');
   readonly ariaLabel = input<string>();
 
-  /** Distancia en px entre el trigger y el panel flotante (solo en modo 'dynamic'). */
+  /** Distancia en px entre el trigger y el panel flotante (solo en modo 'dropdown'). */
   readonly offset = input<number>();
+
+  /** Distancia en px entre el item padre y el panel del submenú anidado. */
+  readonly offsetSubmenu = input<number>();
 
   /** Template personalizado para items. */
   readonly itemTemplateInput = input<TemplateRef<any> | undefined>(undefined, {
@@ -156,6 +159,10 @@ export class ActionMenuComponent {
     () => this.offset() ?? this.globalConfig?.offset ?? 4
   );
 
+  readonly effectiveOffsetSubmenu = computed(
+    () => this.offsetSubmenu() ?? this.globalConfig?.offsetSubmenu ?? 4
+  );
+
   /**
    * Posiciones del overlay CDK con el offset aplicado.
    * Replica las posiciones por defecto del CdkMenuTrigger añadiendo offsetY.
@@ -167,6 +174,19 @@ export class ActionMenuComponent {
       { originX: 'start', originY: 'top',    overlayX: 'start', overlayY: 'bottom', offsetY: -o },
       { originX: 'end',   originY: 'bottom', overlayX: 'end',   overlayY: 'top',    offsetY:  o },
       { originX: 'end',   originY: 'top',    overlayX: 'end',   overlayY: 'bottom', offsetY: -o },
+    ];
+  });
+
+  /**
+   * Posiciones laterales para los paneles de submenú anidados (offsetX).
+   */
+  readonly submenuPositions = computed<ConnectedPosition[]>(() => {
+    const o = this.effectiveOffsetSubmenu();
+    return [
+      { originX: 'end',   originY: 'top', overlayX: 'start', overlayY: 'top',    offsetX:  o },
+      { originX: 'start', originY: 'top', overlayX: 'end',   overlayY: 'top',    offsetX: -o },
+      { originX: 'end',   originY: 'bottom', overlayX: 'start', overlayY: 'bottom', offsetX:  o },
+      { originX: 'start', originY: 'bottom', overlayX: 'end',   overlayY: 'bottom', offsetX: -o },
     ];
   });
 

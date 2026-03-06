@@ -15,12 +15,25 @@ export const ACTION_MENU_EXAMPLES_SECTIONS: ComponentSection[] = [
     },
     examples: [
       {
-        title: 'codeExamples.html',
-        code: `<nui-action-menu 
-  icon="ri-more-line" 
-  [items]="menuItems"
-  (onItemAction)="handleAction($event)">
-</nui-action-menu>`,
+        title: 'Inline',
+        code: `<nui-action-menu
+    type="inline"
+    variant="ghost"
+    icon="ri-more-line"
+    [items]="basicMenuItems"
+    (onItemAction)="handleAction($event)"
+  ></nui-action-menu>`,
+        language: 'html',
+      },
+      {
+        title: 'Dropdown',
+        code: `<nui-action-menu
+    type="dropdown"
+    variant="ghost"
+    icon="ri-more-line"
+    [items]="basicMenuItems"
+    (onItemAction)="handleAction($event)"
+  ></nui-action-menu>`,
         language: 'html',
       },
       {

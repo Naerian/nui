@@ -4,7 +4,7 @@
   "basic": {
     "title": "Utilisation basique",
     "description": "Menu d'actions simple avec un tableau d'éléments. Chaque élément peut avoir un libellé, une icône et une action.",
-    "note": "Voici un exemple utilisant à la fois <code>type='static'</code> et <code>type='dynamic'</code>.",
+    "note": "Voici un exemple utilisant à la fois <code>type='inline'</code> et <code>type='dropdown'</code>."},
     "consoleNote": "Ouvrez les DevTools (F12) et vérifiez l'onglet Console pour voir les actions enregistrées lorsque vous cliquez sur des éléments du menu."
   },
   "separators": {
@@ -111,6 +111,9 @@
         },
         "offset": {
           "description": "Distance en pixels entre le déclencheur et le panneau flottant du menu (mode dynamique uniquement)"
+        },
+        "offsetSubmenu": {
+          "description": "Distance en pixels entre un élément parent et le panneau de son sous-menu imbriqué"
         }
       }
     },

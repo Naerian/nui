@@ -4,7 +4,7 @@
   "basic": {
     "title": "Uso básico",
     "description": "Menú de acciones simple con array de items. Cada item puede tener una etiqueta, icono y acción.",
-    "note": "Aquí vemos un ejemplo de uso de ambos <code>type='static'</code> y <code>type='dynamic'</code>.",
+    "note": "Aquí vemos un ejemplo de uso de ambos <code>type='inline'</code> y <code>type='dropdown'</code>.",
     "consoleNote": "Abre las DevTools (F12) y revisa la pestaña Console para ver las acciones registradas cuando haces clic en los items del menú."
   },
   "separators": {
@@ -111,6 +111,9 @@
         },
         "offset": {
           "description": "Distancia en píxeles entre el trigger y el panel flotante del menú (solo en modo dynamic)"
+        },
+        "offsetSubmenu": {
+          "description": "Distancia en píxeles entre un item padre y el panel de su submenú anidado"
         }
       }
     },

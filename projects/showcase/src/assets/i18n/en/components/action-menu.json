@@ -4,7 +4,7 @@
   "basic": {
     "title": "Basic usage",
     "description": "Simple action menu with an array of items. Each item can have a label, icon and action.",
-    "note": "Here we see an example of using both <code>type='static'</code> and <code>type='dynamic'</code>.",
+    "note": "Here we see an example of using both <code>type='inline'</code> and <code>type='dropdown'</code>.",
     "consoleNote": "Open DevTools (F12) and check the Console tab to see the actions logged when you click on menu items."
   },
   "separators": {
@@ -111,6 +111,9 @@
         },
         "offset": {
           "description": "Distance in pixels between the trigger and the floating menu panel (dynamic mode only)"
+        },
+        "offsetSubmenu": {
+          "description": "Distance in pixels between a parent item and its nested submenu panel"
         }
       }
     },

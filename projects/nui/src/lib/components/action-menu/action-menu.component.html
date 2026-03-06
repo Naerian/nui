@@ -1,4 +1,4 @@
-@if (type() === 'dynamic') {
+@if (type() === 'dropdown') {
   <button
     nuiButton
     [cdkMenuTriggerFor]="actionMenu"
@@ -31,15 +31,15 @@
 <ng-template #actionMenu>
   <div
     class="nui-action-menu"
-    [class.nui-action-menu--static]="type() === 'static'"
-    [class.nui-action-menu--dynamic]="type() === 'dynamic'"
+    [class.nui-action-menu--inline]="type() === 'inline'"
+    [class.nui-action-menu--dropdown]="type() === 'dropdown'"
     [class]="'nui-action-menu--' + effectiveVariant()"
     [class]="'nui-action-menu--' + effectiveColor()"
     cdkMenu
     [@dropdownFadeIn]
     role="menu"
     [id]="instanceId + '-menu'"
-    [attr.aria-labelledby]="type() === 'dynamic' ? instanceId + '-trigger' : null"
+    [attr.aria-labelledby]="type() === 'dropdown' ? instanceId + '-trigger' : null"
     [attr.aria-orientation]="'vertical'"
   >
     <div class="nui-action-menu__start">
@@ -88,6 +88,7 @@
           [class.nui-action-menu__item--has-selected]="hasSelectedChild(item)"
           [cdkMenuTriggerFor]="subMenuTemplate"
           [cdkMenuTriggerData]="{ item: item }"
+          [cdkMenuPosition]="submenuPositions()"
           cdkMenuItem
           [disabled]="item.disabled"
           [attr.aria-label]="item.title || item.label"
@@ -154,5 +155,6 @@
     [items]="item.children"
     [color]="effectiveColor()"
     [isSelectionMode]="isSelectionMode()"
+    [offsetSubmenu]="effectiveOffsetSubmenu()"
   ></nui-action-menu-submenu>
 </ng-template>

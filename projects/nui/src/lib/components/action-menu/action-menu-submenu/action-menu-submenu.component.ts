@@ -5,9 +5,11 @@ import {
   ChangeDetectionStrategy,
   input,
   output,
+  computed,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
+import { ConnectedPosition } from '@angular/cdk/overlay';
 import { ActionMenuItem } from '../models/action-menu.model';
 import {
   NUISize,
@@ -49,6 +51,24 @@ export class ActionMenuSubmenuComponent {
 
   /** Modo de selección heredado del padre (true = menuitemradio). */
   readonly isSelectionMode = input<boolean>(false);
+
+  /** Distancia en px entre el item padre y el panel del submenú anidado. */
+  readonly offsetSubmenu = input<number>(4);
+
+  // ========================================================================
+  // COMPUTED
+  // ========================================================================
+
+  /** Posiciones laterales CDK con offsetX para los submenús anidados. */
+  readonly submenuPositions = computed<ConnectedPosition[]>(() => {
+    const o = this.offsetSubmenu();
+    return [
+      { originX: 'end',   originY: 'top',    overlayX: 'start', overlayY: 'top',    offsetX:  o },
+      { originX: 'start', originY: 'top',    overlayX: 'end',   overlayY: 'top',    offsetX: -o },
+      { originX: 'end',   originY: 'bottom', overlayX: 'start', overlayY: 'bottom', offsetX:  o },
+      { originX: 'start', originY: 'bottom', overlayX: 'end',   overlayY: 'bottom', offsetX: -o },
+    ];
+  });
 
   // ========================================================================
   // OUTPUTS

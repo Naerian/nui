@@ -4,7 +4,7 @@
   "basic": {
     "title": "Grundlegende Verwendung",
     "description": "Einfaches Aktionsmenü mit einem Array von Einträgen. Jeder Eintrag kann ein Label, ein Icon und eine Aktion haben.",
-    "note": "Hier sehen wir ein Verwendungsbeispiel für <code>type='static'</code> und <code>type='dynamic'</code>.",
+    "note": "Hier sehen wir ein Verwendungsbeispiel für <code>type='inline'</code> und <code>type='dropdown'</code>.",
     "consoleNote": "Öffne die DevTools (F12) und schaue in den Console-Tab, um die registrierten Aktionen zu sehen, wenn du auf Menüeinträge klickst."
   },
   "separators": {
@@ -111,6 +111,9 @@
         },
         "offset": {
           "description": "Abstand in Pixeln zwischen dem Auslöser und dem schwebenden Menübereich (nur im dynamischen Modus)"
+        },
+        "offsetSubmenu": {
+          "description": "Abstand in Pixeln zwischen einem übergeordneten Eintrag und dem zugehörigen verschachtelten Untermenübereich"
         }
       }
     },
