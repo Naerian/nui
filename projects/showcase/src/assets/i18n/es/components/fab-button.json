@@ -194,5 +194,41 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuración global",
+      "description": "El componente FabButton admite configuración global mediante <code>provideNUI()</code>. Esto permite definir valores por defecto una sola vez a nivel de aplicación, evitando repetición.",
+      "note": "La configuración global actúa como valores por defecto y siempre puede sobreescribirse por instancia mediante los inputs del componente."
+    },
+    "defaults": {
+      "title": "Propiedades configurables",
+      "description": "Las siguientes propiedades pueden configurarse globalmente a través de <code>FabButtonGlobalConfig</code>:",
+      "rows": {
+        "color": "Paleta de color por defecto aplicada al trigger y a los items de acción.",
+        "size": "Tamaño por defecto: <code>sm</code>, <code>md</code> o <code>lg</code>.",
+        "variant": "Variante visual por defecto aplicada a todos los items.",
+        "direction": "Dirección por defecto en la que los items de acción se expanden desde el trigger.",
+        "animation": "Estilo de animación por defecto al abrir/cerrar el menú de acciones.",
+        "layout": "Tipo de layout por defecto que controla cómo se organizan los items.",
+        "shape": "Forma por defecto (circular, cuadrado, etc.) del botón trigger.",
+        "radius": "Radio de órbita por defecto para layouts radiales.",
+        "spacing": "Espaciado por defecto entre items de acción.",
+        "itemDisplay": "Si los items de acción muestran icono, etiqueta o ambos por defecto.",
+        "backdrop": "Si se muestra un fondo semitransparente detrás del FAB abierto por defecto.",
+        "openOn": "Si el FAB se abre con <code>click</code> o <code>hover</code>.",
+        "closeOnItemClick": "Si el menú se cierra automáticamente al hacer clic en un item de acción.",
+        "closeOnOutsideClick": "Si el menú se cierra cuando el usuario hace clic fuera.",
+        "closeOnEsc": "Si el menú se cierra al pulsar la tecla Escape.",
+        "closeOnScroll": "Si el menú se cierra al hacer scroll en la página.",
+        "triggerIconOpen": "Clase de icono mostrada en el botón trigger cuando el menú está abierto.",
+        "triggerLabel": "Etiqueta por defecto mostrada en el botón trigger."
+      }
+    },
+    "priority": {
+      "title": "Prioridad de resolución",
+      "description": "NUI resuelve los valores de configuración usando la siguiente cadena de prioridad (gana el de mayor prioridad):",
+      "note": "<strong>Input del componente</strong> → <strong>Config global (<code>provideNUI</code>)</strong> → <strong>Valor por defecto</strong>"
+    }
   }
 }

@@ -388,5 +388,33 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Global Configuration",
+      "description": "The Calendar component supports global configuration via <code>provideNUI()</code>. This allows you to define default values once at the application level, avoiding repetition.",
+      "note": "Global configuration acts as default values and can always be overridden per instance using component inputs."
+    },
+    "defaults": {
+      "title": "Configurable properties",
+      "description": "The following properties can be configured globally via <code>CalendarGlobalConfig</code>:",
+      "rows": {
+        "firstDayOfWeek": "First day of the week. 0 = Sunday, 1 = Monday, etc.",
+        "closeOnSelect": "Whether the popover closes automatically when a date is selected.",
+        "showTodayButton": "Whether to display the 'Today' shortcut button.",
+        "showTimePicker": "Time picker display mode: <code>none</code>, <code>inline</code> or <code>popover</code>.",
+        "timePickerMode": "Time picker precision mode (12/24 hours, with or without seconds).",
+        "timePickerConfig": "Advanced configuration object for the time picker.",
+        "customPresets": "List of custom date presets shown as shortcuts.",
+        "defaultDate": "Default date displayed when no value is selected.",
+        "startTime": "Default start time for range selections with time.",
+        "endTime": "Default end time for range selections with time."
+      }
+    },
+    "priority": {
+      "title": "Resolution priority",
+      "description": "NUI resolves configuration values using the following priority chain (highest wins):",
+      "note": "<strong>Input property</strong> → <strong>Global Config (<code>provideNUI</code>)</strong> → <strong>Built-in default</strong>"
+    }
   }
 }

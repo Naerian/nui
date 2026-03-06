@@ -65,6 +65,12 @@ export class ButtonPageComponent extends BaseComponentPage {
       icon: 'ri-eye-line',
       sections: ['a11y-naming', 'a11y-states', 'a11y-keyboard'],
     },
+    {
+      id: 'globalconfig',
+      label: 'common.tabs.globalConfig',
+      icon: 'ri-settings-3-line',
+      sections: ['global-config-setup', 'global-config-defaults', 'global-config-priority'],
+    },
   ];
 
   // Interactive demo state (only logic that needs to be in component)

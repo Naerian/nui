@@ -4,6 +4,7 @@ import { SIDEBAR_PANEL_API_SECTIONS } from './configs/sidebar-panel-api.config';
 import { SIDEBAR_PANEL_THEMING_SECTIONS } from './configs/sidebar-panel-theming.config';
 import { SIDEBAR_PANEL_I18N_SECTIONS } from './configs/sidebar-panel-i18n.config';
 import { SIDEBAR_PANEL_A11Y_SECTIONS } from './configs/sidebar-panel-a11y.config';
+import { SIDEBAR_PANEL_GLOBAL_CONFIG_SECTIONS } from './configs/sidebar-panel-global-config.config';
 
 /**
  * Configuración de la página de documentación del componente Sidebar Panel
@@ -17,5 +18,6 @@ export const SIDEBAR_PANEL_PAGE_CONFIG: ComponentPageConfig = {
     ...SIDEBAR_PANEL_THEMING_SECTIONS,
     ...SIDEBAR_PANEL_I18N_SECTIONS,
     ...SIDEBAR_PANEL_A11Y_SECTIONS,
+    ...SIDEBAR_PANEL_GLOBAL_CONFIG_SECTIONS,
   ],
 };

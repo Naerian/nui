@@ -183,5 +183,27 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Globale Konfiguration",
+      "description": "Legen Sie Standardwerte für alle SelectButton-Instanzen in Ihrer Anwendung mit der Funktion <code>provideNUI()</code> fest. Jede hier definierte Eigenschaft wird automatisch auf jeden Select Button angewendet, der sie nicht durch ein direktes Input-Binding überschreibt.",
+      "note": "Nur die Eigenschaften, die Sie überschreiben möchten, müssen definiert werden. Nicht spezifizierte Eigenschaften fallen auf die Standardwerte der Bibliothek zurück."
+    },
+    "defaults": {
+      "title": "Konfigurierbare Eigenschaften",
+      "description": "Vollständige Liste der konfigurierbaren Eigenschaften über <code>SelectButtonGlobalConfig</code>, deren Typen und die Standardwerte der Bibliothek.",
+      "rows": {
+        "color": "Farbthema, das standardmäßig auf alle Select Buttons angewendet wird",
+        "size": "Größe, die standardmäßig auf alle Select Buttons angewendet wird",
+        "variant": "Visuelle Variante, die standardmäßig auf alle Select Buttons angewendet wird",
+        "width": "Breitenverhalten, das standardmäßig auf alle Select Buttons angewendet wird"
+      }
+    },
+    "priority": {
+      "title": "Auflösungspriorität",
+      "description": "Werte werden anhand einer strengen dreistufigen Prioritätskette aufgelöst. Die erste übereinstimmende Ebene gewinnt: direktes Input-Binding &gt; globale Konfiguration &gt; Standardwert der Bibliothek.",
+      "note": "Die Prioritätskette stellt sicher, dass Komponenten immer einen gültigen aufgelösten Wert haben. Ein direktes Input-Binding gewinnt immer; wenn keins angegeben ist, wird der globale Konfigurationswert verwendet; wenn auch dieser nicht konfiguriert ist, wird der Standardwert der Bibliothek angewendet."
+    }
   }
 }

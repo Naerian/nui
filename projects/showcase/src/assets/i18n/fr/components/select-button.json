@@ -183,5 +183,27 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuration globale",
+      "description": "Définissez des valeurs par défaut pour toutes les instances de SelectButton dans votre application via la fonction <code>provideNUI()</code>. Toute propriété définie ici est automatiquement appliquée à chaque select button qui ne la remplace pas via un binding direct.",
+      "note": "Seules les propriétés que vous souhaitez remplacer doivent être définies. Les propriétés non spécifiées reviennent aux valeurs par défaut de la bibliothèque."
+    },
+    "defaults": {
+      "title": "Propriétés configurables",
+      "description": "Liste complète des propriétés configurables via <code>SelectButtonGlobalConfig</code>, leurs types et les valeurs par défaut de la bibliothèque.",
+      "rows": {
+        "color": "Couleur appliquée à tous les select buttons par défaut",
+        "size": "Taille appliquée à tous les select buttons par défaut",
+        "variant": "Variante visuelle appliquée à tous les select buttons par défaut",
+        "width": "Comportement de largeur appliqué à tous les select buttons par défaut"
+      }
+    },
+    "priority": {
+      "title": "Priorité de résolution",
+      "description": "Les valeurs sont résolues selon une chaîne de priorité stricte à trois niveaux. Le premier niveau correspondant l'emporte : binding direct &gt; config globale &gt; valeur par défaut de la bibliothèque.",
+      "note": "La chaîne de priorité garantit que les composants ont toujours une valeur résolue valide. Un binding d'entrée direct l'emporte toujours ; s'il n'est pas fourni, la valeur de la configuration globale est utilisée ; si elle n'est pas non plus configurée, la valeur par défaut de la bibliothèque est appliquée."
+    }
   }
 }

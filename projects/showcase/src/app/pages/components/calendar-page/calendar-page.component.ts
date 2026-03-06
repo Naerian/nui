@@ -87,6 +87,12 @@ export class CalendarPageComponent extends BaseComponentPage {
       icon: 'ri-accessibility-line',
       sections: ['a11y-roles', 'a11y-naming', 'a11y-keyboard'],
     },
+    {
+      id: 'globalconfig',
+      label: 'common.tabs.globalConfig',
+      icon: 'ri-settings-3-line',
+      sections: ['global-config-setup', 'global-config-defaults', 'global-config-priority'],
+    },
   ];
 
   // Examples data - Basic

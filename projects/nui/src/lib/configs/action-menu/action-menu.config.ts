@@ -10,9 +10,7 @@ export interface ActionMenuGlobalConfig {
   color?: NUIColor;
   size?: NUISize;
   variant?: NUIVariant;
-  /** Distancia en píxeles entre el trigger y el panel del menú. */
   offset?: number;
-  /** Distancia en píxeles entre el item padre y el panel del submenú anidado. */
   offsetSubmenu?: number;
 }
 

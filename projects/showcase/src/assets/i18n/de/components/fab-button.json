@@ -194,5 +194,41 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Globale Konfiguration",
+      "description": "Die FabButton-Komponente unterstützt globale Konfiguration über <code>provideNUI()</code>. Damit lassen sich Standardwerte einmalig auf Anwendungsebene festlegen und Wiederholungen vermeiden.",
+      "note": "Die globale Konfiguration dient als Standardwerte und kann jederzeit pro Instanz über die Inputs der Komponente überschrieben werden."
+    },
+    "defaults": {
+      "title": "Konfigurierbare Eigenschaften",
+      "description": "Folgende Eigenschaften können global über <code>FabButtonGlobalConfig</code> konfiguriert werden:",
+      "rows": {
+        "color": "Standard-Farbpalette für den Trigger und die Aktionselemente.",
+        "size": "Standardgröße: <code>sm</code>, <code>md</code> oder <code>lg</code>.",
+        "variant": "Standard-visuelle Variante, die auf alle Elemente angewendet wird.",
+        "direction": "Standardrichtung, in die Aktionselemente vom Trigger expandieren.",
+        "animation": "Standard-Animationsstil beim Öffnen/Schließen des Aktionsmenüs.",
+        "layout": "Standard-Layout-Typ, der die Anordnung der Elemente steuert.",
+        "shape": "Standardform (kreisförmig, quadratisch usw.) der Trigger-Schaltfläche.",
+        "radius": "Standard-Orbitradius für radiale Layouts.",
+        "spacing": "Standardabstand zwischen Aktionselementen.",
+        "itemDisplay": "Ob Aktionselemente standardmäßig ein Symbol, eine Beschriftung oder beides anzeigen.",
+        "backdrop": "Ob standardmäßig ein Hintergrund hinter dem geöffneten FAB angezeigt wird.",
+        "openOn": "Ob das FAB per <code>Klick</code> oder <code>Hover</code> geöffnet wird.",
+        "closeOnItemClick": "Ob das Menü sich beim Klick auf ein Aktionselement automatisch schließt.",
+        "closeOnOutsideClick": "Ob das Menü sich schließt, wenn außerhalb geklickt wird.",
+        "closeOnEsc": "Ob das Menü sich bei der Escape-Taste schließt.",
+        "closeOnScroll": "Ob das Menü sich beim Scrollen der Seite schließt.",
+        "triggerIconOpen": "Symbol-Klasse auf der Trigger-Schaltfläche, wenn das Menü geöffnet ist.",
+        "triggerLabel": "Standard-Beschriftung der Trigger-Schaltfläche."
+      }
+    },
+    "priority": {
+      "title": "Auflösungspriorität",
+      "description": "NUI löst Konfigurationswerte anhand der folgenden Prioritätskette auf (höchste gewinnt):",
+      "note": "<strong>Komponenten-Input</strong> → <strong>Globale Konfig (<code>provideNUI</code>)</strong> → <strong>Eingebauter Standard</strong>"
+    }
   }
 }

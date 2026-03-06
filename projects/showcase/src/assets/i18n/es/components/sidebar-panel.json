@@ -229,5 +229,39 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuración global",
+      "description": "Define valores por defecto para todas las instancias de SidebarPanel en tu aplicación usando la función <code>provideNUI()</code>. Cualquier propiedad definida aquí se aplica automáticamente a cada panel abierto mediante <code>SidebarPanelService</code> que no la sobrescriba en el momento de la llamada.",
+      "note": "Solo es necesario definir las propiedades que quieras sobrescribir. Las propiedades no especificadas usan los defaults de la librería."
+    },
+    "defaults": {
+      "title": "Propiedades configurables",
+      "description": "Lista completa de propiedades configurables mediante <code>SidebarPanelConfig</code>, sus tipos y los defaults de la librería.",
+      "rows": {
+        "position": "Posición del panel respecto al viewport (left, right, top o bottom)",
+        "size": "Tamaño del panel — se mapea a una variable CSS predefinida de ancho o alto",
+        "showHeader": "Indica si la barra de encabezado del panel es visible por defecto",
+        "showCloseButton": "Indica si se muestra un botón de cierre en el encabezado del panel",
+        "hasBackdrop": "Indica si se renderiza un overlay de fondo detrás del panel",
+        "closeOnBackdropClick": "Indica si al hacer clic en el backdrop se cierra el panel",
+        "closeOnEscape": "Indica si pulsar Escape cierra el panel",
+        "closeOnRouteChange": "Indica si el panel se cierra automáticamente al navegar",
+        "autoFocus": "Indica si el foco se mueve al panel al abrirse (true, false o selector CSS)",
+        "mobileFullScreen": "Indica si el panel ocupa la pantalla completa en móvil",
+        "scrollStrategy": "Estrategia usada para gestionar el scroll de la página mientras el panel está abierto",
+        "ariaLabel": "Valor del atributo aria-label en el elemento raíz del panel",
+        "animationDuration": "Duración de la animación de apertura/cierre del panel en milisegundos",
+        "minimizable": "Indica si los paneles se pueden minimizar (requiere un id único por instancia)",
+        "allowMultiple": "Indica si puede haber más de un panel abierto al mismo tiempo",
+        "lazyLoad": "Indica si el contenido del panel se renderiza de forma lazy al abrirse por primera vez"
+      }
+    },
+    "priority": {
+      "title": "Prioridad de resolución",
+      "description": "Los valores se resuelven siguiendo una cadena de prioridad estricta de tres niveles. Gana el primero que coincida: config en la llamada &gt; config global &gt; default de librería.",
+      "note": "La cadena de prioridad garantiza que los componentes siempre tengan un valor resuelto válido. Las opciones pasadas en la llamada tienen siempre máxima prioridad; si no se proporcionan, se usa el valor del config global; si tampoco está configurado, se aplica el default de la librería."
+    }
   }
 }

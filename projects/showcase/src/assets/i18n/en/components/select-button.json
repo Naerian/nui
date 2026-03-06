@@ -183,5 +183,27 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Global configuration",
+      "description": "Set default values for all SelectButton instances in your application using the <code>provideNUI()</code> function. Any property defined here is automatically applied to every select button that does not override it via a direct input binding.",
+      "note": "Only the properties you want to override need to be defined. Properties not specified fall back to the library defaults."
+    },
+    "defaults": {
+      "title": "Configurable properties",
+      "description": "Full list of configurable properties through <code>SelectButtonGlobalConfig</code>, their types and the library defaults.",
+      "rows": {
+        "color": "Color theme applied to all select buttons by default",
+        "size": "Size applied to all select buttons by default",
+        "variant": "Visual variant applied to all select buttons by default",
+        "width": "Width behaviour applied to all select buttons by default"
+      }
+    },
+    "priority": {
+      "title": "Resolution priority",
+      "description": "Values are resolved following a strict three-level priority chain. The first matching level wins: direct input &gt; global config &gt; library default.",
+      "note": "The priority chain guarantees that components always have a valid resolved value. A direct input always wins; if not provided, the global config value is used; if not configured either, the library default is applied."
+    }
   }
 }

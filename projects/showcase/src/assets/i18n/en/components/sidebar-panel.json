@@ -229,5 +229,39 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Global configuration",
+      "description": "Set default values for all SidebarPanel instances in your application using the <code>provideNUI()</code> function. Any property defined here is automatically applied to every panel opened via <code>SidebarPanelService</code> that does not override it at call time.",
+      "note": "Only the properties you want to override need to be defined. Properties not specified fall back to the library defaults."
+    },
+    "defaults": {
+      "title": "Configurable properties",
+      "description": "Full list of configurable properties through <code>SidebarPanelConfig</code>, their types and the library defaults.",
+      "rows": {
+        "position": "Panel position relative to the viewport (left, right, top or bottom)",
+        "size": "Panel size — maps to a predefined width or height CSS variable",
+        "showHeader": "Whether the panel header bar is visible by default",
+        "showCloseButton": "Whether a close button is shown in the panel header",
+        "hasBackdrop": "Whether a backdrop overlay is rendered behind the panel",
+        "closeOnBackdropClick": "Whether clicking the backdrop closes the panel",
+        "closeOnEscape": "Whether pressing Escape closes the panel",
+        "closeOnRouteChange": "Whether the panel closes automatically on navigation",
+        "autoFocus": "Whether focus moves into the panel on open (true, false or a CSS selector)",
+        "mobileFullScreen": "Whether the panel occupies the full screen on mobile viewports",
+        "scrollStrategy": "Strategy used to handle page scroll while the panel is open",
+        "ariaLabel": "Value of the aria-label attribute on the panel root element",
+        "animationDuration": "Panel open/close animation duration in milliseconds",
+        "minimizable": "Whether panels can be minimised (requires a unique id per instance)",
+        "allowMultiple": "Whether more than one panel can be open at the same time",
+        "lazyLoad": "Whether panel content is rendered lazily on first open"
+      }
+    },
+    "priority": {
+      "title": "Resolution priority",
+      "description": "Values are resolved following a strict three-level priority chain. The first matching level wins: call-time config &gt; global config &gt; library default.",
+      "note": "The priority chain guarantees that components always have a valid resolved value. Options passed at call time always win; if not provided, the global config value is used; if not configured either, the library default is applied."
+    }
   }
 }

@@ -463,5 +463,28 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuration globale",
+      "description": "Définissez des valeurs par défaut pour toutes les instances d'Action Menu dans votre application via la fonction <code>provideNUI()</code>. Toute propriété définie ici est automatiquement appliquée à chaque action menu qui ne la remplace pas via un binding direct.",
+      "note": "Seules les propriétés que vous souhaitez remplacer doivent être définies. Les propriétés non spécifiées reviennent aux valeurs par défaut de la bibliothèque."
+    },
+    "defaults": {
+      "title": "Propriétés configurables",
+      "description": "Liste complète des propriétés configurables via <code>ActionMenuGlobalConfig</code>, leurs types et les valeurs par défaut de la bibliothèque.",
+      "rows": {
+        "color": "Couleur appliquée à tous les menus d'actions par défaut",
+        "size": "Taille appliquée à tous les menus d'actions par défaut",
+        "variant": "Variante visuelle appliquée à tous les menus d'actions par défaut",
+        "offset": "Distance en pixels entre le déclencheur et le panneau du menu",
+        "offsetSubmenu": "Distance en pixels entre un élément parent et son panneau de sous-menu imbriqué"
+      }
+    },
+    "priority": {
+      "title": "Priorité de résolution",
+      "description": "Les valeurs sont résolues selon une chaîne de priorité stricte à trois niveaux. Le premier niveau correspondant l'emporte : binding direct &gt; config globale &gt; valeur par défaut de la bibliothèque.",
+      "note": "La chaîne de priorité garantit que les composants ont toujours une valeur résolue valide. Un binding d'entrée direct l'emporte toujours ; s'il n'est pas fourni, la valeur de la configuration globale est utilisée ; si elle n'est pas non plus configurée, la valeur par défaut de la bibliothèque est appliquée."
+    }
   }
 }

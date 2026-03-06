@@ -195,5 +195,42 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Globale Konfiguration",
+      "description": "Die Paginator-Komponente unterstützt globale Konfiguration über <code>provideNUI()</code>. Damit lassen sich Standardwerte einmalig auf Anwendungsebene festlegen und Wiederholungen vermeiden.",
+      "note": "Die globale Konfiguration dient als Standardwerte und kann jederzeit pro Instanz über die Inputs der Komponente überschrieben werden."
+    },
+    "defaults": {
+      "title": "Konfigurierbare Eigenschaften",
+      "description": "Folgende Eigenschaften können global über <code>PaginatorConfig</code> konfiguriert werden:",
+      "rows": {
+        "color": "Standard-Farbpalette für alle Schaltflächen des Paginators.",
+        "size": "Standardgröße: <code>sm</code>, <code>md</code> oder <code>lg</code>.",
+        "variant": "Standard-visuelle Variante (solid, outline, ghost).",
+        "maxVisiblePages": "Maximale Anzahl sichtbarer Seitenschaltflächen.",
+        "showFirstLast": "Ob die Schaltflächen für die erste und letzte Seite angezeigt werden.",
+        "showPageSizeSelector": "Ob das Dropdown für die Seitengröße angezeigt wird.",
+        "showItemRange": "Ob der Elementbereich-Indikator angezeigt wird (z. B. 1–10 von 150).",
+        "showPageJump": "Ob das Eingabefeld für den Seitensprung angezeigt wird.",
+        "pageSizeOptions": "Verfügbare Optionen für die Seitengrößenauswahl.",
+        "autoScroll": "Ob beim Seitenwechsel automatisch nach oben gescrollt wird.",
+        "scrollTarget": "CSS-Selektor oder HTMLElement, zu dem beim Seitenwechsel gescrollt wird.",
+        "navDisplay": "Wie Navigationsschaltflächen dargestellt werden: <code>icon</code>, <code>text</code> oder <code>both</code>.",
+        "navIcons": "Benutzerdefinierte Symbolklassen für jede Navigationsschaltfläche.",
+        "keyboard": "Tastaturkürzel-Konfiguration für die Steuerelemente des Paginators.",
+        "loading": "Konfiguration des Ladezustands (Spinner anzeigen, Verzögerung, beim Laden deaktivieren).",
+        "infinite": "Konfiguration für unendliches Scrollen oder progressives Laden.",
+        "layout": "Standard-Desktop-Layout mit der Platzierung jedes Elements.",
+        "mobileLayout": "Standard-Mobil-Layout, optimiert für kleine Bildschirme.",
+        "infiniteLayout": "Standard-Layout, das beim aktivierten Unendlich-Modus verwendet wird."
+      }
+    },
+    "priority": {
+      "title": "Auflösungspriorität",
+      "description": "NUI löst Konfigurationswerte anhand der folgenden Prioritätskette auf (höchste gewinnt):",
+      "note": "<strong>Komponenten-Input</strong> → <strong>Globale Konfig (<code>provideNUI</code>)</strong> → <strong>Eingebauter Standard</strong>"
+    }
   }
 }

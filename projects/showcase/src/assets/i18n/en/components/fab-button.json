@@ -194,5 +194,41 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Global Configuration",
+      "description": "The FabButton component supports global configuration via <code>provideNUI()</code>. This allows you to define default values once at the application level, avoiding repetition.",
+      "note": "Global configuration acts as default values and can always be overridden per instance using component inputs."
+    },
+    "defaults": {
+      "title": "Configurable properties",
+      "description": "The following properties can be configured globally via <code>FabButtonGlobalConfig</code>:",
+      "rows": {
+        "color": "Default color palette applied to the FAB trigger and action items.",
+        "size": "Default size: <code>sm</code>, <code>md</code> or <code>lg</code>.",
+        "variant": "Default visual variant applied to all items.",
+        "direction": "Default direction in which action items expand from the trigger.",
+        "animation": "Default animation style when opening/closing the actions menu.",
+        "layout": "Default layout type controlling how items are arranged.",
+        "shape": "Default shape (circular, square, etc.) of the trigger button.",
+        "radius": "Default orbit radius for radial layouts.",
+        "spacing": "Default spacing between action items.",
+        "itemDisplay": "Whether action items show an icon, label or both by default.",
+        "backdrop": "Whether a backdrop is shown behind the open FAB by default.",
+        "openOn": "Whether the FAB opens on <code>click</code> or <code>hover</code>.",
+        "closeOnItemClick": "Whether the menu closes automatically when an action item is clicked.",
+        "closeOnOutsideClick": "Whether the menu closes when the user clicks outside.",
+        "closeOnEsc": "Whether the menu closes when the Escape key is pressed.",
+        "closeOnScroll": "Whether the menu closes when the page is scrolled.",
+        "triggerIconOpen": "Icon class displayed on the trigger button when the menu is open.",
+        "triggerLabel": "Default label displayed on the trigger button."
+      }
+    },
+    "priority": {
+      "title": "Resolution priority",
+      "description": "NUI resolves configuration values using the following priority chain (highest wins):",
+      "note": "<strong>Input property</strong> → <strong>Global Config (<code>provideNUI</code>)</strong> → <strong>Built-in default</strong>"
+    }
   }
 }

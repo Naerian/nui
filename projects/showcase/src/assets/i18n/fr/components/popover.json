@@ -161,5 +161,31 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuration globale",
+      "description": "Le composant Popover supporte la configuration globale via <code>provideNUI()</code>. Cela permet de définir des valeurs par défaut une seule fois au niveau de l'application, évitant la répétition.",
+      "note": "La configuration globale agit comme valeurs par défaut et peut toujours être remplacée par instance via les inputs de la directive."
+    },
+    "defaults": {
+      "title": "Propriétés configurables",
+      "description": "Les propriétés suivantes peuvent être configurées globalement via <code>PopoverConfig</code> :",
+      "rows": {
+        "position": "Position préférée par défaut : <code>top</code>, <code>bottom</code>, <code>left</code> ou <code>right</code>. Le popover se repositionne automatiquement si l'espace est insuffisant.",
+        "event": "Événement d'activation par défaut : <code>click</code>, <code>hover</code>, <code>focus</code> ou <code>manual</code>.",
+        "showDelay": "Délai par défaut en millisecondes avant l'affichage du popover.",
+        "hideDelay": "Délai par défaut en millisecondes avant le masquage du popover.",
+        "showArrow": "Si la flèche directionnelle pointant vers l'élément déclencheur est affichée.",
+        "closeOnClickOutside": "Si cliquer en dehors du panneau popover le ferme.",
+        "closeOnEscape": "Si appuyer sur la touche Échap ferme le popover.",
+        "maxWidth": "Largeur maximale par défaut du panneau popover (valeur CSS, ex. <code>320px</code> ou <code>auto</code>)."
+      }
+    },
+    "priority": {
+      "title": "Priorité de résolution",
+      "description": "NUI résout les valeurs de configuration selon la chaîne de priorité suivante (la plus haute gagne) :",
+      "note": "<strong>Input de la directive</strong> → <strong>Config globale (<code>provideNUI</code>)</strong> → <strong>Valeur par défaut</strong>"
+    }
   }
 }

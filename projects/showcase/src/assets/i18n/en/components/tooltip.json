@@ -122,5 +122,30 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Global configuration",
+      "description": "Set default values for all Tooltip instances in your application using the <code>provideNUI()</code> function. Any property defined here is automatically applied to every tooltip that does not override it via a direct input binding.",
+      "note": "Only the properties you want to override need to be defined. Properties not specified fall back to the library defaults."
+    },
+    "defaults": {
+      "title": "Configurable properties",
+      "description": "Full list of configurable properties through <code>TooltipConfig</code>, their types and the library defaults.",
+      "rows": {
+        "position": "Preferred position of the tooltip relative to the trigger element",
+        "event": "Interaction type that triggers the tooltip to show",
+        "showDelay": "Delay in milliseconds before the tooltip becomes visible after triggering",
+        "hideDelay": "Delay in milliseconds before the tooltip hides after the trigger condition ends",
+        "showArrow": "Whether a directional arrow pointing to the trigger element is displayed",
+        "allowHtml": "Whether the tooltip content is rendered as HTML",
+        "interactive": "Whether the tooltip remains visible when the cursor moves over it"
+      }
+    },
+    "priority": {
+      "title": "Resolution priority",
+      "description": "Values are resolved following a strict three-level priority chain. The first matching level wins: direct input &gt; global config &gt; library default.",
+      "note": "The priority chain guarantees that components always have a valid resolved value. A direct input always wins; if not provided, the global config value is used; if not configured either, the library default is applied."
+    }
   }
 }

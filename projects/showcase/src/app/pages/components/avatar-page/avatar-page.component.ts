@@ -58,6 +58,12 @@ export class AvatarPageComponent extends BaseComponentPage {
       icon: 'ri-eye-line',
       sections: ['a11y-roles', 'a11y-naming', 'a11y-hidden'],
     },
+    {
+      id: 'globalconfig',
+      label: 'common.tabs.globalConfig',
+      icon: 'ri-settings-3-line',
+      sections: ['global-config-setup', 'global-config-defaults', 'global-config-priority'],
+    },
   ];
 
   // URL de ejemplo para las imágenes

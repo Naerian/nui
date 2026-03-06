@@ -4,6 +4,7 @@ import { FAB_BUTTON_API_SECTIONS } from './configs/fab-button-api.config';
 import { FAB_BUTTON_THEMING_SECTIONS } from './configs/fab-button-theming.config';
 import { FAB_BUTTON_I18N_SECTIONS } from './configs/fab-button-i18n.config';
 import { FAB_BUTTON_A11Y_SECTIONS } from './configs/fab-button-a11y.config';
+import { FAB_BUTTON_GLOBAL_CONFIG_SECTIONS } from './configs/fab-button-global-config.config';
 
 export const FAB_BUTTON_PAGE_SECTIONS: ComponentSection[] = [
   ...FAB_BUTTON_EXAMPLES_SECTIONS,
@@ -11,6 +12,7 @@ export const FAB_BUTTON_PAGE_SECTIONS: ComponentSection[] = [
   ...FAB_BUTTON_THEMING_SECTIONS,
   ...FAB_BUTTON_I18N_SECTIONS,
   ...FAB_BUTTON_A11Y_SECTIONS,
+  ...FAB_BUTTON_GLOBAL_CONFIG_SECTIONS,
 ];
 
 /**

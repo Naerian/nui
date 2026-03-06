@@ -161,5 +161,31 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Globale Konfiguration",
+      "description": "Die Popover-Komponente unterstützt globale Konfiguration über <code>provideNUI()</code>. Damit lassen sich Standardwerte einmalig auf Anwendungsebene festlegen und Wiederholungen vermeiden.",
+      "note": "Die globale Konfiguration dient als Standardwerte und kann jederzeit pro Instanz über die Inputs der Direktive überschrieben werden."
+    },
+    "defaults": {
+      "title": "Konfigurierbare Eigenschaften",
+      "description": "Folgende Eigenschaften können global über <code>PopoverConfig</code> konfiguriert werden:",
+      "rows": {
+        "position": "Standardbevorzugte Position: <code>top</code>, <code>bottom</code>, <code>left</code> oder <code>right</code>. Das Popover positioniert sich automatisch um, wenn kein Platz vorhanden ist.",
+        "event": "Standard-Aktivierungsereignis: <code>click</code>, <code>hover</code>, <code>focus</code> oder <code>manual</code>.",
+        "showDelay": "Standard-Verzögerung in Millisekunden, bevor das Popover angezeigt wird.",
+        "hideDelay": "Standard-Verzögerung in Millisekunden, bevor das Popover ausgeblendet wird.",
+        "showArrow": "Ob der Richtungspfeil zum Trigger-Element angezeigt wird.",
+        "closeOnClickOutside": "Ob ein Klick außerhalb des Popover-Panels es schließt.",
+        "closeOnEscape": "Ob die Escape-Taste das Popover schließt.",
+        "maxWidth": "Standard-Maximalbreite des Popover-Panels (CSS-Wert, z. B. <code>320px</code> oder <code>auto</code>)."
+      }
+    },
+    "priority": {
+      "title": "Auflösungspriorität",
+      "description": "NUI löst Konfigurationswerte anhand der folgenden Prioritätskette auf (höchste gewinnt):",
+      "note": "<strong>Direktiven-Input</strong> → <strong>Globale Konfig (<code>provideNUI</code>)</strong> → <strong>Eingebauter Standard</strong>"
+    }
   }
 }

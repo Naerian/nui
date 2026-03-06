@@ -229,5 +229,39 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Globale Konfiguration",
+      "description": "Legen Sie Standardwerte für alle SidebarPanel-Instanzen in Ihrer Anwendung mit der Funktion <code>provideNUI()</code> fest. Jede hier definierte Eigenschaft wird automatisch auf jedes Panel angewendet, das über <code>SidebarPanelService</code> geöffnet wird und sie nicht zum Zeitpunkt des Aufrufs überschreibt.",
+      "note": "Nur die Eigenschaften, die Sie überschreiben möchten, müssen definiert werden. Nicht spezifizierte Eigenschaften fallen auf die Standardwerte der Bibliothek zurück."
+    },
+    "defaults": {
+      "title": "Konfigurierbare Eigenschaften",
+      "description": "Vollständige Liste der konfigurierbaren Eigenschaften über <code>SidebarPanelConfig</code>, deren Typen und die Standardwerte der Bibliothek.",
+      "rows": {
+        "position": "Position des Panels relativ zum Viewport (left, right, top oder bottom)",
+        "size": "Panelgröße — wird einer vordefinierten Breiten- oder Höhen-CSS-Variable zugeordnet",
+        "showHeader": "Gibt an, ob die Kopfzeilenleiste des Panels standardmäßig sichtbar ist",
+        "showCloseButton": "Gibt an, ob eine Schließen-Schaltfläche im Panelkopf angezeigt wird",
+        "hasBackdrop": "Gibt an, ob ein Hintergrund-Overlay hinter dem Panel gerendert wird",
+        "closeOnBackdropClick": "Gibt an, ob ein Klick auf den Backdrop das Panel schließt",
+        "closeOnEscape": "Gibt an, ob das Drücken von Escape das Panel schließt",
+        "closeOnRouteChange": "Gibt an, ob das Panel bei der Navigation automatisch geschlossen wird",
+        "autoFocus": "Gibt an, ob der Fokus beim Öffnen ins Panel verschoben wird (true, false oder CSS-Selektor)",
+        "mobileFullScreen": "Gibt an, ob das Panel auf Mobilgeräten den gesamten Bildschirm einnimmt",
+        "scrollStrategy": "Strategie für den Umgang mit dem Seiten-Scroll während das Panel geöffnet ist",
+        "ariaLabel": "Wert des aria-label-Attributs am Root-Element des Panels",
+        "animationDuration": "Dauer der Öffnungs-/Schließanimation des Panels in Millisekunden",
+        "minimizable": "Gibt an, ob Panels minimiert werden können (erfordert eine eindeutige id pro Instanz)",
+        "allowMultiple": "Gibt an, ob mehrere Panels gleichzeitig geöffnet sein können",
+        "lazyLoad": "Gibt an, ob der Panelinhalt beim ersten Öffnen verzögert gerendert wird"
+      }
+    },
+    "priority": {
+      "title": "Auflösungspriorität",
+      "description": "Werte werden anhand einer strengen dreistufigen Prioritätskette aufgelöst. Die erste übereinstimmende Ebene gewinnt: Konfiguration beim Aufruf &gt; globale Konfiguration &gt; Standardwert der Bibliothek.",
+      "note": "Die Prioritätskette stellt sicher, dass Komponenten immer einen gültigen aufgelösten Wert haben. Beim Aufruf übergebene Optionen gewinnen immer; wenn keine angegeben sind, wird der globale Konfigurationswert verwendet; wenn auch dieser nicht konfiguriert ist, wird der Standardwert der Bibliothek angewendet."
+    }
   }
 }

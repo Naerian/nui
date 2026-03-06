@@ -4,6 +4,7 @@ import { PAGINATOR_API_SECTIONS } from './configs/paginator-api.config';
 import { PAGINATOR_THEMING_SECTIONS } from './configs/paginator-theming.config';
 import { PAGINATOR_I18N_SECTIONS } from './configs/paginator-i18n.config';
 import { PAGINATOR_A11Y_SECTIONS } from './configs/paginator-a11y.config';
+import { PAGINATOR_GLOBAL_CONFIG_SECTIONS } from './configs/paginator-global-config.config';
 
 /**
  * Secciones del Paginator (modularizado)
@@ -14,6 +15,7 @@ export const PAGINATOR_PAGE_SECTIONS: ComponentSection[] = [
   ...PAGINATOR_THEMING_SECTIONS,
   ...PAGINATOR_I18N_SECTIONS,
   ...PAGINATOR_A11Y_SECTIONS,
+  ...PAGINATOR_GLOBAL_CONFIG_SECTIONS,
 ];
 
 /**

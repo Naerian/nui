@@ -229,5 +229,39 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuration globale",
+      "description": "Définissez des valeurs par défaut pour toutes les instances de SidebarPanel dans votre application via la fonction <code>provideNUI()</code>. Toute propriété définie ici est automatiquement appliquée à chaque panneau ouvert via <code>SidebarPanelService</code> qui ne la remplace pas lors de l'appel.",
+      "note": "Seules les propriétés que vous souhaitez remplacer doivent être définies. Les propriétés non spécifiées reviennent aux valeurs par défaut de la bibliothèque."
+    },
+    "defaults": {
+      "title": "Propriétés configurables",
+      "description": "Liste complète des propriétés configurables via <code>SidebarPanelConfig</code>, leurs types et les valeurs par défaut de la bibliothèque.",
+      "rows": {
+        "position": "Position du panneau par rapport au viewport (left, right, top ou bottom)",
+        "size": "Taille du panneau — correspond à une variable CSS de largeur ou hauteur prédéfinie",
+        "showHeader": "Indique si la barre d'en-tête du panneau est visible par défaut",
+        "showCloseButton": "Indique si un bouton de fermeture est affiché dans l'en-tête du panneau",
+        "hasBackdrop": "Indique si un overlay d'arrière-plan est rendu derrière le panneau",
+        "closeOnBackdropClick": "Indique si un clic sur le backdrop ferme le panneau",
+        "closeOnEscape": "Indique si appuyer sur Échap ferme le panneau",
+        "closeOnRouteChange": "Indique si le panneau se ferme automatiquement lors de la navigation",
+        "autoFocus": "Indique si le focus est déplacé dans le panneau à l'ouverture (true, false ou sélecteur CSS)",
+        "mobileFullScreen": "Indique si le panneau occupe tout l'écran sur mobile",
+        "scrollStrategy": "Stratégie utilisée pour gérer le défilement de la page lorsque le panneau est ouvert",
+        "ariaLabel": "Valeur de l'attribut aria-label sur l'élément racine du panneau",
+        "animationDuration": "Durée de l'animation d'ouverture/fermeture du panneau en millisecondes",
+        "minimizable": "Indique si les panneaux peuvent être réduits (nécessite un id unique par instance)",
+        "allowMultiple": "Indique si plusieurs panneaux peuvent être ouverts simultanément",
+        "lazyLoad": "Indique si le contenu du panneau est rendu en différé à la première ouverture"
+      }
+    },
+    "priority": {
+      "title": "Priorité de résolution",
+      "description": "Les valeurs sont résolues selon une chaîne de priorité stricte à trois niveaux. Le premier niveau correspondant l'emporte : config à l'appel &gt; config globale &gt; valeur par défaut de la bibliothèque.",
+      "note": "La chaîne de priorité garantit que les composants ont toujours une valeur résolue valide. Les options passées lors de l'appel l'emportent toujours ; si elles ne sont pas fournies, la valeur de la configuration globale est utilisée ; si elle n'est pas non plus configurée, la valeur par défaut de la bibliothèque est appliquée."
+    }
   }
 }

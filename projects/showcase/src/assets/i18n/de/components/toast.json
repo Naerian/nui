@@ -166,5 +166,53 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Globale Konfiguration",
+      "description": "Legen Sie Standardwerte für alle Toast-Benachrichtigungen in Ihrer Anwendung mit der Funktion <code>provideNUI()</code> fest. Jede hier definierte Eigenschaft wird automatisch auf jeden Toast angewendet, der sie nicht zum Zeitpunkt des Aufrufs überschreibt.",
+      "note": "Nur die Eigenschaften, die Sie überschreiben möchten, müssen definiert werden. Nicht spezifizierte Eigenschaften fallen auf die Standardwerte der Bibliothek zurück."
+    },
+    "defaults": {
+      "title": "Konfigurierbare Eigenschaften",
+      "description": "Vollständige Liste der konfigurierbaren Eigenschaften über <code>ToastGlobalConfig</code>, deren Typen und die Standardwerte der Bibliothek.",
+      "rows": {
+        "timeout": "Dauer in Millisekunden, bevor der Toast automatisch ausgeblendet wird (0 = persistent)",
+        "position": "Bildschirmposition, an der Toasts erscheinen",
+        "preventDuplicates": "Gibt an, ob doppelte Toasts mit identischem Inhalt unterdrückt werden",
+        "progressBar": "Gibt an, ob ein Fortschrittsbalken mit der verbleibenden Anzeigezeit angezeigt wird",
+        "closeButton": "Gibt an, ob eine Schließen-Schaltfläche auf jedem Toast gerendert wird",
+        "closeOnTouch": "Gibt an, ob das Tippen oder Klicken auf den Toast-Körper ihn ausblendet",
+        "maxToasts": "Maximale Gesamtzahl der gleichzeitig sichtbaren Toasts an allen Positionen",
+        "maxToastsPerPosition": "Maximale Anzahl sichtbarer Toasts an derselben Position",
+        "animationIn": "Animation beim Einblenden eines Toasts",
+        "animationOut": "Animation beim Ausblenden eines Toasts",
+        "animationDuration": "Dauer der Ein- und Ausblendanimationen in Millisekunden",
+        "pauseOnHover": "Gibt an, ob der Ausblend-Timer pausiert, während der Cursor über dem Toast ist",
+        "pauseOnFocusLoss": "Gibt an, ob der Ausblend-Timer pausiert, während das Dokument keinen Fokus hat",
+        "stackingBehavior": "Verhalten, wenn die maximale Toast-Anzahl erreicht ist",
+        "stackDirection": "Gibt an, ob neue Toasts am Anfang oder Ende der Liste eingefügt werden",
+        "icon": "Gibt an, ob das Typsymbol im Toast angezeigt wird",
+        "iconPosition": "Seite des Toast-Körpers, auf der das Symbol angezeigt wird",
+        "announceToScreenReader": "Gibt an, ob Toasts für Hilfstechnologien angekündigt werden",
+        "ariaRole": "ARIA-Rolle, die auf den Live-Bereich des Toasts angewendet wird",
+        "ariaLive": "ARIA-Live-Höflichkeitsstufe der Toast-Ankündigungen",
+        "persistent": "Gibt an, ob Toasts auf dem Bildschirm bleiben, bis sie explizit ausgeblendet werden",
+        "expandable": "Gibt an, ob lange Nachrichten an Ort und Stelle erweitert werden können",
+        "swipeToDismiss": "Gibt an, ob eine Wischgeste den Toast auf Berührungsgeräten ausblenden kann",
+        "swipeThreshold": "Mindestens erforderliche horizontale Wischdistanz in Pixeln zum Ausblenden",
+        "sound": "Gibt an, ob eine Audiobenachrichtigung abgespielt wird, wenn ein Toast erscheint",
+        "templateMode": "Wie eine benutzerdefinierte Vorlage relativ zum Standard-Toast-Inhalt eingefügt wird",
+        "icons": "Benutzerdefinierte Symbol-Definitionen für jeden Toast-Typ (success, danger, warning, info, loading)",
+        "buttonsSize": "Größe der im Toast gerenderten Aktionsschaltflächen",
+        "buttonsVariant": "Visuelle Variante der im Toast gerenderten Aktionsschaltflächen",
+        "buttonsShape": "Form der im Toast gerenderten Aktionsschaltflächen"
+      }
+    },
+    "priority": {
+      "title": "Auflösungspriorität",
+      "description": "Werte werden anhand einer strengen dreistufigen Prioritätskette aufgelöst. Die erste übereinstimmende Ebene gewinnt: Optionen beim Aufruf &gt; globale Konfiguration &gt; Standardwert der Bibliothek.",
+      "note": "Die Prioritätskette stellt sicher, dass Toasts immer gültige aufgelöste Werte haben. Beim Aufruf übergebene Optionen gewinnen immer; wenn keine angegeben sind, wird der globale Konfigurationswert verwendet; wenn auch dieser nicht konfiguriert ist, wird der Standardwert der Bibliothek angewendet."
+    }
   }
 }

@@ -3,6 +3,7 @@ import { TOOLTIP_EXAMPLES_SECTIONS } from './configs/tooltip-examples.config';
 import { TOOLTIP_API_SECTIONS } from './configs/tooltip-api.config';
 import { TOOLTIP_THEMING_SECTIONS } from './configs/tooltip-theming.config';
 import { TOOLTIP_A11Y_SECTIONS } from './configs/tooltip-a11y.config';
+import { TOOLTIP_GLOBAL_CONFIG_SECTIONS } from './configs/tooltip-global-config.config';
 
 /**
  * Configuración de las secciones de la página de documentación del componente Tooltip
@@ -12,6 +13,7 @@ export const TOOLTIP_PAGE_SECTIONS = [
   ...TOOLTIP_API_SECTIONS,
   ...TOOLTIP_THEMING_SECTIONS,
   ...TOOLTIP_A11Y_SECTIONS,
+  ...TOOLTIP_GLOBAL_CONFIG_SECTIONS,
 ];
 
 /**

@@ -3,6 +3,7 @@ import { SELECT_BUTTON_EXAMPLES_SECTIONS } from './configs/select-button-example
 import { SELECT_BUTTON_API_SECTIONS } from './configs/select-button-api.config';
 import { SELECT_BUTTON_THEMING_SECTIONS } from './configs/select-button-theming.config';
 import { SELECT_BUTTON_A11Y_SECTIONS } from './configs/select-button-a11y.config';
+import { SELECT_BUTTON_GLOBAL_CONFIG_SECTIONS } from './configs/select-button-global-config.config';
 
 /**
  * Secciones del Select Button (modularizado)
@@ -12,6 +13,7 @@ export const SELECT_BUTTON_PAGE_SECTIONS: ComponentSection[] = [
   ...SELECT_BUTTON_API_SECTIONS,
   ...SELECT_BUTTON_THEMING_SECTIONS,
   ...SELECT_BUTTON_A11Y_SECTIONS,
+  ...SELECT_BUTTON_GLOBAL_CONFIG_SECTIONS,
 ];
 
 /**

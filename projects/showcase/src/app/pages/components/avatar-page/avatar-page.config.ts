@@ -4,6 +4,7 @@ import { AVATAR_API_SECTIONS } from './configs/avatar-api.config';
 import { AVATAR_THEMING_SECTIONS } from './configs/avatar-theming.config';
 import { AVATAR_I18N_SECTIONS } from './configs/avatar-i18n.config';
 import { AVATAR_A11Y_SECTIONS } from './configs/avatar-a11y.config';
+import { AVATAR_GLOBAL_CONFIG_SECTIONS } from './configs/avatar-global-config.config';
 
 export const AVATAR_PAGE_SECTIONS: ComponentSection[] = [
   ...AVATAR_EXAMPLES_SECTIONS,
@@ -11,6 +12,7 @@ export const AVATAR_PAGE_SECTIONS: ComponentSection[] = [
   ...AVATAR_THEMING_SECTIONS,
   ...AVATAR_I18N_SECTIONS,
   ...AVATAR_A11Y_SECTIONS,
+  ...AVATAR_GLOBAL_CONFIG_SECTIONS,
 ];
 
 /**

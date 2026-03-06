@@ -166,5 +166,53 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuración global",
+      "description": "Define valores por defecto para todas las notificaciones Toast en tu aplicación usando la función <code>provideNUI()</code>. Cualquier propiedad definida aquí se aplica automáticamente a cada toast que no la sobrescriba en el momento de la llamada.",
+      "note": "Solo es necesario definir las propiedades que quieras sobrescribir. Las propiedades no especificadas usan los defaults de la librería."
+    },
+    "defaults": {
+      "title": "Propiedades configurables",
+      "description": "Lista completa de propiedades configurables mediante <code>ToastGlobalConfig</code>, sus tipos y los defaults de la librería.",
+      "rows": {
+        "timeout": "Duración en milisegundos antes de que el toast se descarte automáticamente (0 = persistente)",
+        "position": "Posición en pantalla donde aparecen los toasts",
+        "preventDuplicates": "Indica si se suprimen los toasts duplicados con contenido idéntico",
+        "progressBar": "Indica si se muestra una barra de progreso con el tiempo de visualización restante",
+        "closeButton": "Indica si se renderiza un botón de cierre en cada toast",
+        "closeOnTouch": "Indica si tocar o hacer clic en el cuerpo del toast lo descarta",
+        "maxToasts": "Número máximo total de toasts visibles simultáneamente en todas las posiciones",
+        "maxToastsPerPosition": "Número máximo de toasts visibles en la misma posición",
+        "animationIn": "Animación usada cuando un toast entra",
+        "animationOut": "Animación usada cuando un toast sale",
+        "animationDuration": "Duración de las animaciones de entrada y salida en milisegundos",
+        "pauseOnHover": "Indica si el temporizador de descarte se pausa mientras el cursor está sobre el toast",
+        "pauseOnFocusLoss": "Indica si el temporizador de descarte se pausa cuando el documento pierde el foco",
+        "stackingBehavior": "Comportamiento cuando se alcanza el número máximo de toasts",
+        "stackDirection": "Indica si los nuevos toasts se insertan al principio o al final de la lista",
+        "icon": "Indica si se muestra el icono del tipo dentro del toast",
+        "iconPosition": "Lado del cuerpo del toast donde se muestra el icono",
+        "announceToScreenReader": "Indica si los toasts se anuncian a las tecnologías de asistencia",
+        "ariaRole": "Rol ARIA aplicado a la región live del toast",
+        "ariaLive": "Nivel de cortésía ARIA live de los anuncios del toast",
+        "persistent": "Indica si los toasts permanecen en pantalla hasta que se descartan explícitamente",
+        "expandable": "Indica si los mensajes largos se pueden expandir en su lugar",
+        "swipeToDismiss": "Indica si un gesto de deslizamiento puede descartar el toast en dispositivos táctiles",
+        "swipeThreshold": "Distancia mínima de deslizamiento horizontal en píxeles necesaria para descartar",
+        "sound": "Indica si se reproduce una notificación de audio cuando aparece un toast",
+        "templateMode": "Cómo se inserta una plantilla personalizada respecto al contenido por defecto del toast",
+        "icons": "Definiciones de iconos personalizados para cada tipo de toast (success, danger, warning, info, loading)",
+        "buttonsSize": "Tamaño de los botones de acción renderizados dentro del toast",
+        "buttonsVariant": "Variante visual de los botones de acción renderizados dentro del toast",
+        "buttonsShape": "Forma de los botones de acción renderizados dentro del toast"
+      }
+    },
+    "priority": {
+      "title": "Prioridad de resolución",
+      "description": "Los valores se resuelven siguiendo una cadena de prioridad estricta de tres niveles. Gana el primero que coincida: opciones en la llamada &gt; config global &gt; default de librería.",
+      "note": "La cadena de prioridad garantiza que los toasts siempre tengan valores resueltos válidos. Las opciones pasadas en la llamada tienen siempre máxima prioridad; si no se proporcionan, se usa el valor del config global; si tampoco está configurado, se aplica el default de la librería."
+    }
   }
 }

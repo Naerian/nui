@@ -195,5 +195,42 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuration globale",
+      "description": "Le composant Paginator supporte la configuration globale via <code>provideNUI()</code>. Cela permet de définir des valeurs par défaut une seule fois au niveau de l'application, évitant la répétition.",
+      "note": "La configuration globale agit comme valeurs par défaut et peut toujours être remplacée par instance via les inputs du composant."
+    },
+    "defaults": {
+      "title": "Propriétés configurables",
+      "description": "Les propriétés suivantes peuvent être configurées globalement via <code>PaginatorConfig</code> :",
+      "rows": {
+        "color": "Palette de couleur par défaut appliquée à tous les boutons du paginateur.",
+        "size": "Taille par défaut : <code>sm</code>, <code>md</code> ou <code>lg</code>.",
+        "variant": "Variante visuelle par défaut (solid, outline, ghost).",
+        "maxVisiblePages": "Nombre maximum de boutons de page visibles à la fois.",
+        "showFirstLast": "Si les boutons de première et dernière page sont affichés.",
+        "showPageSizeSelector": "Si la liste déroulante de taille de page est affichée.",
+        "showItemRange": "Si l'indicateur de plage d'éléments est affiché (ex. 1–10 sur 150).",
+        "showPageJump": "Si le champ de saut de page est affiché.",
+        "pageSizeOptions": "Options disponibles pour le sélecteur de taille de page.",
+        "autoScroll": "Si un défilement automatique vers le haut est effectué lors du changement de page.",
+        "scrollTarget": "Sélecteur CSS ou HTMLElement vers lequel défiler au changement de page.",
+        "navDisplay": "Comment les boutons de navigation sont affichés : <code>icon</code>, <code>text</code> ou <code>both</code>.",
+        "navIcons": "Classes d'icônes personnalisées pour chaque bouton de navigation.",
+        "keyboard": "Configuration des raccourcis clavier pour les contrôles du paginateur.",
+        "loading": "Configuration de l'état de chargement (afficher le spinner, délai, désactiver lors du chargement).",
+        "infinite": "Configuration du défilement infini ou du chargement progressif.",
+        "layout": "Disposition bureau par défaut définissant l'emplacement de chaque élément.",
+        "mobileLayout": "Disposition mobile par défaut optimisée pour les écrans de petite taille.",
+        "infiniteLayout": "Disposition par défaut utilisée lorsque le mode infini est activé."
+      }
+    },
+    "priority": {
+      "title": "Priorité de résolution",
+      "description": "NUI résout les valeurs de configuration selon la chaîne de priorité suivante (la plus haute gagne) :",
+      "note": "<strong>Input du composant</strong> → <strong>Config globale (<code>provideNUI</code>)</strong> → <strong>Valeur par défaut</strong>"
+    }
   }
 }

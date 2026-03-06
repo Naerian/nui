@@ -166,5 +166,53 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Global configuration",
+      "description": "Set default values for all Toast notifications in your application using the <code>provideNUI()</code> function. Any property defined here is automatically applied to every toast that does not override it at call time.",
+      "note": "Only the properties you want to override need to be defined. Properties not specified fall back to the library defaults."
+    },
+    "defaults": {
+      "title": "Configurable properties",
+      "description": "Full list of configurable properties through <code>ToastGlobalConfig</code>, their types and the library defaults.",
+      "rows": {
+        "timeout": "Duration in milliseconds before the toast is automatically dismissed (0 = persistent)",
+        "position": "Screen position where toasts appear",
+        "preventDuplicates": "Whether duplicate toasts with identical content are suppressed",
+        "progressBar": "Whether a progress bar indicating remaining display time is shown",
+        "closeButton": "Whether a close button is rendered on each toast",
+        "closeOnTouch": "Whether tapping or clicking the toast body dismisses it",
+        "maxToasts": "Maximum total number of toasts visible simultaneously across all positions",
+        "maxToastsPerPosition": "Maximum number of toasts visible at the same position",
+        "animationIn": "Animation used when a toast enters",
+        "animationOut": "Animation used when a toast leaves",
+        "animationDuration": "Duration of enter and leave animations in milliseconds",
+        "pauseOnHover": "Whether the dismiss timer pauses while the cursor is over the toast",
+        "pauseOnFocusLoss": "Whether the dismiss timer pauses while the document does not have focus",
+        "stackingBehavior": "Behaviour when the maximum toast count is reached",
+        "stackDirection": "Whether new toasts are prepended or appended to the list",
+        "icon": "Whether the type icon is shown inside the toast",
+        "iconPosition": "Side of the toast body where the icon is displayed",
+        "announceToScreenReader": "Whether toasts are announced to assistive technologies",
+        "ariaRole": "ARIA role applied to the toast live region",
+        "ariaLive": "ARIA live politeness level of the toast announcements",
+        "persistent": "Whether toasts remain on screen until explicitly dismissed",
+        "expandable": "Whether long messages can be expanded in place",
+        "swipeToDismiss": "Whether a swipe gesture can dismiss the toast on touch devices",
+        "swipeThreshold": "Minimum horizontal swipe distance in pixels required to dismiss",
+        "sound": "Whether an audio notification is played when a toast appears",
+        "templateMode": "How a custom template is inserted relative to the default toast content",
+        "icons": "Custom icon definitions for each toast type (success, danger, warning, info, loading)",
+        "buttonsSize": "Size of action buttons rendered inside the toast",
+        "buttonsVariant": "Visual variant of action buttons rendered inside the toast",
+        "buttonsShape": "Shape of action buttons rendered inside the toast"
+      }
+    },
+    "priority": {
+      "title": "Resolution priority",
+      "description": "Values are resolved following a strict three-level priority chain. The first matching level wins: call-time options &gt; global config &gt; library default.",
+      "note": "The priority chain guarantees that toasts always have valid resolved values. Options passed at call time always win; if not provided, the global config value is used; if not configured either, the library default is applied."
+    }
   }
 }

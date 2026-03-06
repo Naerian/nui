@@ -166,5 +166,53 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuration globale",
+      "description": "Définissez des valeurs par défaut pour toutes les notifications Toast dans votre application via la fonction <code>provideNUI()</code>. Toute propriété définie ici est automatiquement appliquée à chaque toast qui ne la remplace pas lors de l'appel.",
+      "note": "Seules les propriétés que vous souhaitez remplacer doivent être définies. Les propriétés non spécifiées reviennent aux valeurs par défaut de la bibliothèque."
+    },
+    "defaults": {
+      "title": "Propriétés configurables",
+      "description": "Liste complète des propriétés configurables via <code>ToastGlobalConfig</code>, leurs types et les valeurs par défaut de la bibliothèque.",
+      "rows": {
+        "timeout": "Durée en millisecondes avant que le toast soit automatiquement rejeté (0 = persistant)",
+        "position": "Position à l'écran où les toasts apparaissent",
+        "preventDuplicates": "Indique si les toasts dupliqués avec un contenu identique sont supprimés",
+        "progressBar": "Indique si une barre de progression indiquant le temps d'affichage restant est affichée",
+        "closeButton": "Indique si un bouton de fermeture est rendu sur chaque toast",
+        "closeOnTouch": "Indique si toucher ou cliquer sur le corps du toast le rejette",
+        "maxToasts": "Nombre total maximum de toasts visibles simultanément à toutes les positions",
+        "maxToastsPerPosition": "Nombre maximum de toasts visibles à la même position",
+        "animationIn": "Animation utilisée lorsqu'un toast entre",
+        "animationOut": "Animation utilisée lorsqu'un toast sort",
+        "animationDuration": "Durée des animations d'entrée et de sortie en millisecondes",
+        "pauseOnHover": "Indique si le minuteur de rejet se met en pause lorsque le curseur survole le toast",
+        "pauseOnFocusLoss": "Indique si le minuteur de rejet se met en pause lorsque le document perd le focus",
+        "stackingBehavior": "Comportement lorsque le nombre maximum de toasts est atteint",
+        "stackDirection": "Indique si les nouveaux toasts sont prépayés ou ajoutés à la liste",
+        "icon": "Indique si l'icône de type est affichée dans le toast",
+        "iconPosition": "Côté du corps du toast où l'icône est affichée",
+        "announceToScreenReader": "Indique si les toasts sont annoncés aux technologies d'assistance",
+        "ariaRole": "Rôle ARIA appliqué à la région live du toast",
+        "ariaLive": "Niveau de politesse ARIA live des annonces du toast",
+        "persistent": "Indique si les toasts restent à l'écran jusqu'à ce qu'ils soient explicitement rejetés",
+        "expandable": "Indique si les longs messages peuvent être développés sur place",
+        "swipeToDismiss": "Indique si un geste de glissement peut rejeter le toast sur les appareils tactiles",
+        "swipeThreshold": "Distance de glissement horizontal minimale en pixels requise pour rejeter",
+        "sound": "Indique si une notification audio est lue lorsqu'un toast apparaît",
+        "templateMode": "Comment un modèle personnalisé est inséré par rapport au contenu toast par défaut",
+        "icons": "Définitions d'icônes personnalisées pour chaque type de toast (success, danger, warning, info, loading)",
+        "buttonsSize": "Taille des boutons d'action rendus dans le toast",
+        "buttonsVariant": "Variante visuelle des boutons d'action rendus dans le toast",
+        "buttonsShape": "Forme des boutons d'action rendus dans le toast"
+      }
+    },
+    "priority": {
+      "title": "Priorité de résolution",
+      "description": "Les valeurs sont résolues selon une chaîne de priorité stricte à trois niveaux. Le premier niveau correspondant l'emporte : options à l'appel &gt; config globale &gt; valeur par défaut de la bibliothèque.",
+      "note": "La chaîne de priorité garantit que les toasts ont toujours des valeurs résolues valides. Les options passées lors de l'appel l'emportent toujours ; si elles ne sont pas fournies, la valeur de la configuration globale est utilisée ; si elle n'est pas non plus configurée, la valeur par défaut de la bibliothèque est appliquée."
+    }
   }
 }

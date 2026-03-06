@@ -195,5 +195,42 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Global Configuration",
+      "description": "The Paginator component supports global configuration via <code>provideNUI()</code>. This allows you to define default values once at the application level, avoiding repetition.",
+      "note": "Global configuration acts as default values and can always be overridden per instance using component inputs."
+    },
+    "defaults": {
+      "title": "Configurable properties",
+      "description": "The following properties can be configured globally via <code>PaginatorConfig</code>:",
+      "rows": {
+        "color": "Default color palette applied to all paginator buttons.",
+        "size": "Default size: <code>sm</code>, <code>md</code> or <code>lg</code>.",
+        "variant": "Default visual variant (solid, outline, ghost).",
+        "maxVisiblePages": "Maximum number of page buttons visible at once.",
+        "showFirstLast": "Whether to show the first and last page buttons.",
+        "showPageSizeSelector": "Whether to display the page size selector dropdown.",
+        "showItemRange": "Whether to display the item range indicator (e.g. 1–10 of 150).",
+        "showPageJump": "Whether to display the page jump input.",
+        "pageSizeOptions": "Available options for the page size selector.",
+        "autoScroll": "Whether to automatically scroll to the top on page change.",
+        "scrollTarget": "CSS selector or HTMLElement to scroll to on page change.",
+        "navDisplay": "How navigation buttons are displayed: <code>icon</code>, <code>text</code> or <code>both</code>.",
+        "navIcons": "Custom icon classes for each navigation button.",
+        "keyboard": "Keyboard shortcut configuration for paginator controls.",
+        "loading": "Loading state configuration (show spinner, delay, disable on loading).",
+        "infinite": "Infinite scroll or load-more configuration.",
+        "layout": "Default desktop layout defining element placement in each area.",
+        "mobileLayout": "Default mobile layout optimized for small screens.",
+        "infiniteLayout": "Default layout used when infinite mode is enabled."
+      }
+    },
+    "priority": {
+      "title": "Resolution priority",
+      "description": "NUI resolves configuration values using the following priority chain (highest wins):",
+      "note": "<strong>Input property</strong> → <strong>Global Config (<code>provideNUI</code>)</strong> → <strong>Built-in default</strong>"
+    }
   }
 }

@@ -388,5 +388,33 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuration globale",
+      "description": "Le composant Calendar supporte la configuration globale via <code>provideNUI()</code>. Cela permet de définir des valeurs par défaut une seule fois au niveau de l'application, évitant la répétition.",
+      "note": "La configuration globale agit comme valeurs par défaut et peut toujours être remplacée par instance via les inputs du composant."
+    },
+    "defaults": {
+      "title": "Propriétés configurables",
+      "description": "Les propriétés suivantes peuvent être configurées globalement via <code>CalendarGlobalConfig</code> :",
+      "rows": {
+        "firstDayOfWeek": "Premier jour de la semaine. 0 = Dimanche, 1 = Lundi, etc.",
+        "closeOnSelect": "Si le popover se ferme automatiquement lors de la sélection d'une date.",
+        "showTodayButton": "Si le bouton de raccourci « Aujourd'hui » est affiché.",
+        "showTimePicker": "Mode d'affichage du sélecteur de temps : <code>none</code>, <code>inline</code> ou <code>popover</code>.",
+        "timePickerMode": "Mode de précision du sélecteur de temps (12/24 heures, avec ou sans secondes).",
+        "timePickerConfig": "Objet de configuration avancée pour le sélecteur de temps.",
+        "customPresets": "Liste de préréglages de dates personnalisés affichés comme raccourcis.",
+        "defaultDate": "Date par défaut affichée quand aucune valeur n'est sélectionnée.",
+        "startTime": "Heure de début par défaut pour les sélections de plage avec temps.",
+        "endTime": "Heure de fin par défaut pour les sélections de plage avec temps."
+      }
+    },
+    "priority": {
+      "title": "Priorité de résolution",
+      "description": "NUI résout les valeurs de configuration selon la chaîne de priorité suivante (la plus haute gagne) :",
+      "note": "<strong>Input du composant</strong> → <strong>Config globale (<code>provideNUI</code>)</strong> → <strong>Valeur par défaut</strong>"
+    }
   }
 }

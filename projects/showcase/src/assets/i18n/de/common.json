@@ -63,7 +63,8 @@
       "api": "API",
       "theming": "Thematisierung",
       "a11y": "Barrierefreiheit",
-      "i18n": "I18n"
+      "i18n": "I18n",
+      "globalConfig": "Globale Konfig."
     },
     "tables": {
       "cssVariable": "CSS-Variable",

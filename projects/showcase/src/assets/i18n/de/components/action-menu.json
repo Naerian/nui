@@ -463,5 +463,28 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Globale Konfiguration",
+      "description": "Legen Sie Standardwerte für alle Action-Menu-Instanzen in Ihrer Anwendung mit der Funktion <code>provideNUI()</code> fest. Jede hier definierte Eigenschaft wird automatisch auf jedes Aktionsmenü angewendet, das sie nicht durch ein direktes Input-Binding überschreibt.",
+      "note": "Nur die Eigenschaften, die Sie überschreiben möchten, müssen definiert werden. Nicht spezifizierte Eigenschaften fallen auf die Standardwerte der Bibliothek zurück."
+    },
+    "defaults": {
+      "title": "Konfigurierbare Eigenschaften",
+      "description": "Vollständige Liste der konfigurierbaren Eigenschaften über <code>ActionMenuGlobalConfig</code>, deren Typen und die Standardwerte der Bibliothek.",
+      "rows": {
+        "color": "Farbthema, das standardmäßig auf alle Aktionsmenüs angewendet wird",
+        "size": "Größe, die standardmäßig auf alle Aktionsmenüs angewendet wird",
+        "variant": "Visuelle Variante, die standardmäßig auf alle Aktionsmenüs angewendet wird",
+        "offset": "Abstand in Pixeln zwischen dem Trigger und dem Menü-Panel",
+        "offsetSubmenu": "Abstand in Pixeln zwischen einem übergeordneten Element und seinem verschachtelten Untermenü-Panel"
+      }
+    },
+    "priority": {
+      "title": "Auflösungspriorität",
+      "description": "Werte werden anhand einer strengen dreistufigen Prioritätskette aufgelöst. Die erste übereinstimmende Ebene gewinnt: direktes Input-Binding &gt; globale Konfiguration &gt; Standardwert der Bibliothek.",
+      "note": "Die Prioritätskette stellt sicher, dass Komponenten immer einen gültigen aufgelösten Wert haben. Ein direktes Input-Binding gewinnt immer; wenn keins angegeben ist, wird der globale Konfigurationswert verwendet; wenn auch dieser nicht konfiguriert ist, wird der Standardwert der Bibliothek angewendet."
+    }
   }
 }

@@ -63,12 +63,14 @@ export class DarkModeComponent {
   ];
 
   codeExamples: Record<string, string> = {
-    manual: `provideNUI({
+    manual: `
+// In your app.config.ts or main.ts:
+provideNUI({
   preset: ocean,
   darkMode: 'manual'
 });
 
-// En el componente:
+// In your component:
 themeService.setDarkMode(true);
 themeService.toggleDarkMode();`,
     system: `provideNUI({

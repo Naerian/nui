@@ -463,5 +463,28 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuración global",
+      "description": "Define valores por defecto para todas las instancias de Action Menu en tu aplicación usando la función <code>provideNUI()</code>. Cualquier propiedad definida aquí se aplica automáticamente a cada action menu que no la sobreescriba mediante un binding directo.",
+      "note": "Solo es necesario definir las propiedades que quieras sobreescribir. Las propiedades no especificadas usan los defaults de la librería."
+    },
+    "defaults": {
+      "title": "Propiedades configurables",
+      "description": "Lista completa de propiedades configurables mediante <code>ActionMenuGlobalConfig</code>, sus tipos y los defaults de la librería.",
+      "rows": {
+        "color": "Color aplicado a todos los action menus por defecto",
+        "size": "Tamaño aplicado a todos los action menus por defecto",
+        "variant": "Variante visual aplicada a todos los action menus por defecto",
+        "offset": "Distancia en píxeles entre el trigger y el panel del menú",
+        "offsetSubmenu": "Distancia en píxeles entre un ítem padre y su panel de submenú anidado"
+      }
+    },
+    "priority": {
+      "title": "Prioridad de resolución",
+      "description": "Los valores se resuelven siguiendo una cadena de prioridad estricta de tres niveles. Gana el primero que coincida: input directo &gt; config global &gt; default de librería.",
+      "note": "La cadena de prioridad garantiza que los componentes siempre tengan un valor resuelto válido. Un input directo siempre tiene máxima prioridad; si no se proporciona, se usa el valor del config global; si tampoco está configurado, se aplica el default de la librería."
+    }
   }
 }

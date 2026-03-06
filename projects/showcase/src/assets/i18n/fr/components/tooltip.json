@@ -122,5 +122,30 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuration globale",
+      "description": "Définissez des valeurs par défaut pour toutes les instances de Tooltip dans votre application via la fonction <code>provideNUI()</code>. Toute propriété définie ici est automatiquement appliquée à chaque tooltip qui ne la remplace pas via un binding direct.",
+      "note": "Seules les propriétés que vous souhaitez remplacer doivent être définies. Les propriétés non spécifiées reviennent aux valeurs par défaut de la bibliothèque."
+    },
+    "defaults": {
+      "title": "Propriétés configurables",
+      "description": "Liste complète des propriétés configurables via <code>TooltipConfig</code>, leurs types et les valeurs par défaut de la bibliothèque.",
+      "rows": {
+        "position": "Position préférée de l'info-bulle par rapport à l'élément déclencheur",
+        "event": "Type d'interaction qui déclenche l'affichage de l'info-bulle",
+        "showDelay": "Délai en millisecondes avant que l'info-bulle devienne visible après le déclenchement",
+        "hideDelay": "Délai en millisecondes avant que l'info-bulle se masque une fois la condition de déclenchement terminée",
+        "showArrow": "Indique si une flèche directionnelle pointant vers l'élément déclencheur est affichée",
+        "allowHtml": "Indique si le contenu de l'info-bulle est rendu en HTML",
+        "interactive": "Indique si l'info-bulle reste visible lorsque le curseur la survole"
+      }
+    },
+    "priority": {
+      "title": "Priorité de résolution",
+      "description": "Les valeurs sont résolues selon une chaîne de priorité stricte à trois niveaux. Le premier niveau correspondant l'emporte : binding direct &gt; config globale &gt; valeur par défaut de la bibliothèque.",
+      "note": "La chaîne de priorité garantit que les composants ont toujours une valeur résolue valide. Un binding d'entrée direct l'emporte toujours ; s'il n'est pas fourni, la valeur de la configuration globale est utilisée ; si elle n'est pas non plus configurée, la valeur par défaut de la bibliothèque est appliquée."
+    }
   }
 }
