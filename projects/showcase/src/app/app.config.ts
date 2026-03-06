@@ -4,22 +4,54 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { routes } from './app.routes';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { minimal, provideNUI, provideNuiDateLocales } from 'nui';
-import { enUS, es } from 'date-fns/locale';
+import { enUS, es, fr, de } from 'date-fns/locale';
 import { NuiGlobalErrorHandler } from './core/errors/global-error-handler';
 
-// Simple custom loader for translations
-export class CustomTranslateLoader implements TranslateLoader {
+// Map: JSON object key → file name inside components/
+const COMPONENT_FILES: [string, string][] = [
+  ['button', 'button'],
+  ['actionMenu', 'action-menu'],
+  ['avatar', 'avatar'],
+  ['selectButton', 'select-button'],
+  ['calendar', 'calendar'],
+  ['paginator', 'paginator'],
+  ['popover', 'popover'],
+  ['toast', 'toast'],
+  ['sidebar-panel', 'sidebar-panel'],
+  ['tooltip', 'tooltip'],
+  ['timePicker', 'time-picker'],
+  ['fabButton', 'fab-button'],
+];
+
+export class SplitTranslateLoader implements TranslateLoader {
   constructor(private http: HttpClient) {}
 
   getTranslation(lang: string): Observable<any> {
-    return this.http.get(`./assets/i18n/${lang}.json`);
+    const base = `./assets/i18n/${lang}`;
+
+    const componentRequests = Object.fromEntries(
+      COMPONENT_FILES.map(([key, file]) => [key, this.http.get(`${base}/components/${file}.json`)])
+    );
+
+    return forkJoin({
+      common: this.http.get(`${base}/common.json`),
+      pages: this.http.get(`${base}/pages.json`),
+      components: forkJoin(componentRequests),
+    }).pipe(
+      map(({ common, pages, components }) => ({
+        ...(common as object),
+        pages,
+        components,
+      }))
+    );
   }
 }
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new CustomTranslateLoader(http);
+  return new SplitTranslateLoader(http);
 }
 
 export const appConfig: ApplicationConfig = {
@@ -44,10 +76,17 @@ export const appConfig: ApplicationConfig = {
     provideNUI({
       preset: minimal,
       darkMode: 'manual',
+      config: {
+        actionMenu: {
+          offset: 5,
+        }
+      }
     }),
     provideNuiDateLocales({
       en: enUS,
       es: es,
+      fr: fr,
+      de: de,
     }),
   ],
 };

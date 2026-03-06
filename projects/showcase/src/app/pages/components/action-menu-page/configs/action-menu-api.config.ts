@@ -102,6 +102,12 @@ export const ACTION_MENU_API_SECTIONS: ComponentSection[] = [
           '<code class="neutral">undefined</code>',
           'components.actionMenu.api.inputs.rows.itemTemplate.description',
         ],
+        [
+          '<code>offset</code>',
+          'number',
+          '<code class="neutral">5</code>',
+          'components.actionMenu.api.inputs.rows.offset.description',
+        ],
       ],
     },
   },

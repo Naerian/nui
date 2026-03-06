@@ -1,0 +1,464 @@
+{
+  "title": "Aktionsmenü",
+  "subtitle": "Dropdown-Menü-Komponente mit Unterstützung für statische, dynamische Einträge und Untermenüs",
+  "basic": {
+    "title": "Grundlegende Verwendung",
+    "description": "Einfaches Aktionsmenü mit einem Array von Einträgen. Jeder Eintrag kann ein Label, ein Icon und eine Aktion haben.",
+    "note": "Hier sehen wir ein Verwendungsbeispiel für <code>type='static'</code> und <code>type='dynamic'</code>.",
+    "consoleNote": "Öffne die DevTools (F12) und schaue in den Console-Tab, um die registrierten Aktionen zu sehen, wenn du auf Menüeinträge klickst."
+  },
+  "separators": {
+    "title": "Trennlinien",
+    "description": "Gruppiere verwandte Aktionen mit visuellen Trennlinien.",
+    "note": "Verwende Einträge mit der Eigenschaft <code>separator: true</code>, um Trennlinien zwischen Aktionsgruppen hinzuzufügen. Du kannst dem Trenner eine optionale Beschriftung mit der Eigenschaft <code>label</code> hinzufügen."
+  },
+  "submenu": {
+    "title": "Untermenüs",
+    "description": "Erstelle verschachtelte Menüs mit der Eigenschaft <code>children</code>. Untermenüs können mehrere Ebenen tief verschachtelt werden.",
+    "note": "Verwende die Eigenschaft <code>children</code>, um Untermenüeinträge zu definieren. Jedes Kind kann eigene Kinder für weitere Verschachtelung haben. <strong>Hinweis:</strong> Wenn ein Kind <code>selected: true</code> hat, zeigt der übergeordnete Eintrag einen visuellen Indikator (vertikale Linie links) zur einfacheren Navigation."
+  },
+  "variants": {
+    "title": "Schaltflächenvarianten",
+    "description": "Die Schaltfläche unterstützt verschiedene Varianten und Farben des NUI-Systems. Die Variante beeinflusst die Schaltfläche, die Farbe hingegen den Farbton und den Inhalt.",
+    "note": "Kombiniere <code>color</code> und <code>variant</code>, um das Erscheinungsbild der Menüschaltfläche nach Bedarf anzupassen."
+  },
+  "sizes": {
+    "title": "Größen",
+    "description": "Nutze die fünf vordefinierten NUI-Größen. Die Größe beeinflusst die Schaltfläche, der Inhalt bleibt jedoch gleich.",
+    "note": "Verwende den Input <code>size</code>, um die Größe der Menüschaltfläche und ihres Inhalts mit den Werten <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code> und <code>xl</code> anzupassen."
+  },
+  "label": {
+    "title": "Schaltflächeninhalt",
+    "description": "Füge der Menüschaltfläche Text hinzu. Kann mit Icons kombiniert werden und unterstützt den Vollbreitenmodus.",
+    "note": "Verwende <code>icon</code> zusammen mit <code>label</code>, um beides in der Schaltfläche anzuzeigen. Mit <code>width='full'</code> nimmt die Schaltfläche die gesamte verfügbare Breite ein. Wenn nur <code>label</code> ohne Icon verwendet wird, wird die Schaltfläche als einfache Textschaltfläche gerendert.",
+    "codeTitle1": "Text und Icon",
+    "codeTitle2": "Nur Text",
+    "codeTitle3": "Volle Breite"
+  },
+  "disabled": {
+    "title": "Deaktivierter Zustand",
+    "description": "Deaktiviere einzelne Menüeinträge oder das gesamte Menü. Deaktivierte Einträge werden angezeigt, sind aber nicht anklickbar."
+  },
+  "withSubtitle": {
+    "title": "Eintragsuntertitel",
+    "description": "Füge sekundären Text unterhalb der Hauptbeschriftung hinzu. Nützlich zur Anzeige zusätzlicher Informationen wie E-Mails, Beschreibungen oder Tastenkürzel."
+  },
+  "selected": {
+    "title": "Ausgewählter Zustand",
+    "description": "Markiere Einträge als ausgewählt, um die aktuelle Auswahl anzuzeigen. Ein Häkchen-Icon erscheint automatisch. Perfekt für Selektoren, Filter oder Einstellungen."
+  },
+  "icons": {
+    "title": "Beschreibende Icons",
+    "description": "Verwende aussagekräftige Icons und Beschriftungen, um den Zweck jeder Aktion zu kommunizieren. Icons helfen Benutzern, Aktionen schnell zu identifizieren.",
+    "note": "Verwende relevante Icons aus der <strong>Remix Icon</strong>-Bibliothek, um das visuelle Verständnis der Menüaktionen zu verbessern."
+  },
+  "badge": {
+    "title": "Badge",
+    "description": "Zeige einen Zähler oder numerisches Label auf Menüeinträgen mit der Eigenschaft <code>badge</code>. Ideal für Benachrichtigungen, ausstehende Zähler oder visuelle Indikatoren.",
+    "note": "Das <code>badge</code> wird als Pille am rechten Rand des Eintrags gerendert. Screenreader greifen auf den Badge-Wert über das <code>aria-label</code> der Schaltfläche zu (z.B. \"Nachrichten (3)\"), während die visuelle Pille mit <code>aria-hidden</code> versteckt ist."
+  },
+  "template": {
+    "title": "Benutzerdefiniertes Template",
+    "description": "Passe das Menü-Rendering vollständig mit Templates und Direktiven an.",
+    "note": "Das Template <code>#item</code> erhält den vollständigen Eintrag als Kontext (<code>let-item</code>). Die Direktiven <code>menu-header</code> und <code>menu-footer</code> ermöglichen eine einfache und klare Syntax, ohne unnötige ng-templates. <br/><br/> <strong>Wichtig:</strong> Beim Verwenden benutzerdefinierter Templates muss das Click-Event manuell mit <code>(click)=\"handleAction(item)\"</code> behandelt werden. Das <code>onItemAction</code>-Event wird nur automatisch bei Standard-Einträgen ausgelöst."
+  },
+  "api": {
+    "inputs": {
+      "title": "Komponenten-Inputs",
+      "description": "Eingabeeigenschaften, die das Verhalten und die Erscheinung des Aktionsmenüs steuern.",
+      "rows": {
+        "items": {
+          "description": "Array der Menüeinträge"
+        },
+        "type": {
+          "description": "Render-Modus des Menüs"
+        },
+        "color": {
+          "description": "Farbe der Trigger-Schaltfläche"
+        },
+        "size": {
+          "description": "Größe der Trigger-Schaltfläche"
+        },
+        "variant": {
+          "description": "Variante der Trigger-Schaltfläche"
+        },
+        "width": {
+          "description": "Breite der Trigger-Schaltfläche"
+        },
+        "disabled": {
+          "description": "Deaktivierter Zustand des Menüs"
+        },
+        "title": {
+          "description": "Schaltflächentitel (title-Attribut)"
+        },
+        "label": {
+          "description": "Text der Trigger-Schaltfläche"
+        },
+        "icon": {
+          "description": "Icon der Schaltfläche (Remix Icon)"
+        },
+        "iconPosition": {
+          "description": "Position des Icons"
+        },
+        "iconSubmenu": {
+          "description": "Icon zur Anzeige von Untermenüs"
+        },
+        "ariaLabel": {
+          "description": "Barrierefreiheits-Label"
+        },
+        "itemTemplate": {
+          "description": "Benutzerdefiniertes Template für Einträge"
+        },
+        "offset": {
+          "description": "Abstand in Pixeln zwischen dem Auslöser und dem schwebenden Menübereich (nur im dynamischen Modus)"
+        }
+      }
+    },
+    "outputs": {
+      "title": "Komponenten-Outputs",
+      "description": "Vom Komponenten ausgelöste Ereignisse, auf die du reagieren kannst.",
+      "rows": {
+        "onItemAction": {
+          "description": "Wird beim Klicken auf einen Eintrag ausgelöst"
+        },
+        "onSelectionChange": {
+          "description": "Wird bei Änderung der Auswahl ausgelöst (Selektormodus)"
+        },
+        "menuOpen": {
+          "description": "Wird ausgelöst, wenn das Menü geöffnet wird"
+        },
+        "menuClose": {
+          "description": "Wird ausgelöst, wenn das Menü geschlossen wird"
+        }
+      }
+    },
+    "interface": {
+      "title": "Interface ActionMenuItem",
+      "description": "Vollständige Struktur eines Menüeintrags mit allen verfügbaren Eigenschaften.",
+      "rows": {
+        "action": {
+          "description": "Eindeutiger Bezeichner der Aktion"
+        },
+        "label": {
+          "description": "Sichtbarer Text des Eintrags"
+        },
+        "subtitle": {
+          "description": "Sekundärtext unterhalb des Labels"
+        },
+        "title": {
+          "description": "Text für das title-Attribut (Tooltip)"
+        },
+        "icon": {
+          "description": "RemixIcon-Klasse"
+        },
+        "shortcut": {
+          "description": "Tastenkürzel (nur visuell)"
+        },
+        "templateRef": {
+          "description": "Benutzerdefiniertes Template für den Eintrag"
+        },
+        "id": {
+          "description": "Eindeutige ID des Eintrags (automatisch generiert)"
+        },
+        "children": {
+          "description": "Untereinträge für Untermenüs"
+        },
+        "disabled": {
+          "description": "Ob der Eintrag deaktiviert ist"
+        },
+        "selected": {
+          "description": "Ob der Eintrag ausgewählt ist (zeigt Häkchen)"
+        },
+        "separator": {
+          "description": "Ob es sich um einen visuellen Trenner handelt"
+        },
+        "onAction": {
+          "description": "Callback beim Klicken auf den Eintrag"
+        },
+        "data": {
+          "description": "Zusätzliche benutzerdefinierte Daten für TemplateRef<any>"
+        },
+        "badge": {
+          "description": "Badge oder Zähler, der angezeigt werden soll"
+        }
+      }
+    }
+  },
+  "theming": {
+    "structure": {
+      "title": "Strukturelle Variablen",
+      "description": "CSS-Variablen, die Abmessungen, Abstände, Rahmen und Schatten des Menüs steuern.",
+      "rows": {
+        "minWidth": {
+          "description": "Mindestbreite des Menüs"
+        },
+        "maxWidth": {
+          "description": "Maximalbreite des Menüs"
+        },
+        "borderWidth": {
+          "description": "Rahmenstärke des Menüs"
+        },
+        "borderColor": {
+          "description": "Rahmenfarbe des Menüs"
+        },
+        "borderRadius": {
+          "description": "Eckradius des Menüs"
+        },
+        "padding": {
+          "description": "Innenabstand des Menüs"
+        },
+        "shadow": {
+          "description": "Schatten des Dropdown-Menüs"
+        },
+        "staticShadow": {
+          "description": "Schatten des statischen Menüs"
+        },
+        "itemGap": {
+          "description": "Abstand zwischen Eintrags-Elementen"
+        },
+        "itemBorder": {
+          "description": "Rahmen der Einträge"
+        },
+        "itemBorderRadius": {
+          "description": "Eckradius der Einträge"
+        },
+        "itemPaddingY": {
+          "description": "Vertikaler Innenabstand der Einträge"
+        },
+        "itemPaddingX": {
+          "description": "Horizontaler Innenabstand der Einträge"
+        },
+        "itemLabelMarginRight": {
+          "description": "Rechter Außenabstand des Labels"
+        },
+        "focusOutlineWidth": {
+          "description": "Stärke des Fokus-Outlines"
+        },
+        "focusOutlineOffset": {
+          "description": "Versatz des Fokus-Outlines"
+        },
+        "arrowPaddingLeft": {
+          "description": "Linker Innenabstand des Pfeils"
+        },
+        "transition": {
+          "description": "Zustandsübergänge"
+        }
+      }
+    },
+    "items": {
+      "title": "Eintrags-Variablen",
+      "description": "CSS-Variablen zur Anpassung der Eintrags-, Trenner-, Shortcut- und internen Element-Darstellung.",
+      "rows": {
+        "subtitleColor": {
+          "description": "Farbe des Sekundärtexts"
+        },
+        "subtitleFontSize": {
+          "description": "Schriftgröße des Untertitels"
+        },
+        "labelWeight": {
+          "description": "Schriftstärke des Labels"
+        },
+        "labelFontSize": {
+          "description": "Schriftgröße des Labels"
+        },
+        "separatorColor": {
+          "description": "Farbe des Trenners"
+        },
+        "separatorPadding": {
+          "description": "Innenabstand des Trenners"
+        },
+        "separatorLabelColor": {
+          "description": "Farbe des Trenner-Labels"
+        },
+        "separatorLabelSpacing": {
+          "description": "Abstände des Trenner-Labels"
+        },
+        "separatorFontSize": {
+          "description": "Schriftgröße des Trenners"
+        },
+        "separatorFontWeight": {
+          "description": "Schriftstärke des Trenners"
+        },
+        "shortcutBg": {
+          "description": "Hintergrund des Shortcuts"
+        },
+        "shortcutColor": {
+          "description": "Textfarbe des Shortcuts"
+        },
+        "shortcutPadding": {
+          "description": "Innenabstand des Shortcuts"
+        },
+        "shortcutBorderWidth": {
+          "description": "Rahmenstärke des Shortcuts"
+        },
+        "shortcutBorderColor": {
+          "description": "Rahmenfarbe des Shortcuts"
+        },
+        "shortcutBorderRadius": {
+          "description": "Eckradius des Shortcuts"
+        },
+        "shortcutFontSize": {
+          "description": "Schriftgröße des Shortcuts"
+        },
+        "notifySelectedSize": {
+          "description": "Größe des Indikators für ausgewählte Kinder"
+        },
+        "notifySelectedRadius": {
+          "description": "Radius des Indikators für ausgewählte Kinder"
+        }
+      }
+    },
+    "colors": {
+      "title": "Farbvariablen",
+      "description": "CSS-Variablenmuster zur Anpassung der Eintragsfarben nach Zustand.",
+      "note": "Ersetze <code>{color}</code> durch eine beliebige semantische NUI-Farbe (<code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>), um die Eintragsdarstellung in verschiedenen Zuständen anzupassen.",
+      "rows": {
+        "bg": {
+          "description": "Eintragshintergrund im Normalzustand"
+        },
+        "text": {
+          "description": "Textfarbe des Eintrags"
+        },
+        "hoverBg": {
+          "description": "Eintragshintergrund beim Hover"
+        },
+        "hoverText": {
+          "description": "Textfarbe beim Hover"
+        },
+        "activeBg": {
+          "description": "Eintragshintergrund beim Klicken"
+        },
+        "selectedBg": {
+          "description": "Hintergrund des ausgewählten Eintrags"
+        },
+        "selectedText": {
+          "description": "Textfarbe des ausgewählten Eintrags"
+        },
+        "notifySelected": {
+          "description": "Farbe des Indikators für ausgewählte Kinder"
+        }
+      }
+    }
+  },
+  "styling": {
+    "title": "Stile und Anpassung",
+    "description": "Passe die Erscheinung des Menüs über CSS-Variablen an. Steuere Farben, Abstände, Typografie und mehr."
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA-Rollen und -Attribute",
+      "description": "Das Aktionsmenü wendet die folgenden ARIA-Attribute gemäß dem Menümuster der ARIA Authoring Practices Guide (APG) an.",
+      "rows": {
+        "haspopup": {
+          "description": "Teilt assistiven Technologien mit, dass durch Aktivierung dieser Schaltfläche ein Menü geöffnet wird."
+        },
+        "expanded": {
+          "description": "Spiegelt den geöffneten/geschlossenen Zustand des Menüs wider. Wird bei jeder Interaktion automatisch aktualisiert."
+        },
+        "controls": {
+          "description": "Verknüpft die Trigger-Schaltfläche mit dem Menü-Container über übereinstimmende IDs."
+        },
+        "roleMenu": {
+          "description": "Identifiziert den Dropdown-Container als Menü-Widget."
+        },
+        "orientation": {
+          "description": "Gibt an, dass die Einträge vertikal angeordnet sind (Standard-Menülayout)."
+        },
+        "labelledby": {
+          "description": "Im dynamischen Modus verknüpft der Menü-Container seine Trigger-Schaltfläche für einen zugänglichen Namen."
+        },
+        "roleItem": {
+          "description": "Standardrolle für interaktive Einträge. Wechselt zu menuitemradio, wenn der Eintrag zu einer Auswahlgruppe gehört."
+        },
+        "ariaChecked": {
+          "description": "Nur im Auswahlmodus vorhanden. Spiegelt wider, ob dieser Eintrag die aktuelle Auswahl ist."
+        },
+        "keyshortcuts": {
+          "description": "Zeigt den visuell neben dem Eintrag angezeigten Tastenkürzeltext an."
+        },
+        "roleSeparator": {
+          "description": "Identifiziert den visuellen Trenner zwischen Menüeintragsgruppen."
+        },
+        "ariaHiddenIcon": {
+          "description": "Verhindert, dass dekorative Icons von Screenreadern angesagt werden."
+        }
+      },
+      "elements": {
+        "trigger": "<code>&lt;button&gt;</code> (Trigger)",
+        "menu": "<code>&lt;div&gt;</code> (Menü)",
+        "menuDynamic": "<code>&lt;div&gt;</code> (Menü, dynamischer Modus)",
+        "item": "<code>&lt;button&gt;</code> (Eintrag)",
+        "itemSelectable": "<code>&lt;button&gt;</code> (auswählbarer Eintrag)",
+        "separator": "<code>&lt;div&gt;</code> (Trenner)",
+        "icon": "<code>&lt;i&gt;</code> (Icon)"
+      }
+    },
+    "naming": {
+      "title": "Zugänglicher Name",
+      "description": "Die Trigger-Schaltfläche löst ihren zugänglichen Namen nach einer Prioritätskaskade auf. Gib immer einen expliziten zugänglichen Namen für Trigger-Schaltflächen an, die nur ein Icon zeigen.",
+      "note": "Nur-Icon-Menüs (ohne Label) müssen <code>ariaLabel</code> oder <code>title</code> gesetzt haben. Ohne sichtbares Text-Label können assistive Technologien den Zweck des Menüs nicht erkennen.",
+      "rows": {
+        "triggerLabel": {
+          "description": "Der Input <code>label</code> wird als innerer Text der Schaltfläche gerendert, der nativ zum zugänglichen Namen wird."
+        },
+        "triggerAriaLabel": {
+          "description": "Der Input <code>ariaLabel</code> wird als <code>aria-label</code>-Attribut angewendet und hat Priorität über <code>label</code> und <code>title</code>."
+        },
+        "triggerIconOnly": {
+          "description": "Wenn weder <code>ariaLabel</code> noch <code>label</code> angegeben sind, wird der Input <code>title</code> als zugänglicher Name über den Browser-Tooltip verwendet."
+        },
+        "itemLabel": {
+          "description": "Das <code>aria-label</code> jedes Menüeintrags wird aus <code>item.title || item.label</code> aufgelöst, um sicherzustellen, dass Screenreader den richtigen Text ansagen."
+        },
+        "menuLabelledby": {
+          "description": "Im dynamischen Modus referenziert der Menü-Container die ID des Triggers über <code>aria-labelledby</code>, wodurch die Zuordnung explizit wird."
+        }
+      },
+      "elements": {
+        "triggerWithLabel": "Trigger mit <code>label</code>",
+        "triggerWithAriaLabel": "Trigger mit <code>ariaLabel</code>",
+        "triggerIconOnly": "Nur-Icon-Trigger",
+        "menuItem": "Menüeintrag",
+        "menuContainer": "Menü-Container (dynamisch)"
+      },
+      "info": {
+        "nativeName": "Nativer Name",
+        "titleFallback": "<code>title</code> als Fallback"
+      }
+    },
+    "keyboard": {
+      "title": "Tastaturinteraktion",
+      "description": "Das Aktionsmenü implementiert das vollständige APG-Tastaturmuster für Menüs. Pfeiltasten navigieren zwischen Einträgen; Escape und ArrowLeft schließen Menüs.",
+      "note": "<kbd>ArrowDown</kbd>, <kbd>ArrowUp</kbd>, <kbd>Home</kbd> und <kbd>End</kbd> rufen <code>preventDefault()</code> auf, um seitenweises Scrollen während der Menünavigation zu verhindern.",
+      "rows": {
+        "tab": {
+          "description": "Bewegt den Fokus zur Trigger-Schaltfläche. Wenn das Menü geöffnet ist, schließt Tab es und gibt den Fokus an den Trigger zurück."
+        },
+        "spaceEnter": {
+          "description": "Öffnet das Menü, wenn der Fokus auf dem Trigger liegt. Aktiviert den fokussierten Menüeintrag, wenn innerhalb des Menüs."
+        },
+        "escape": {
+          "description": "Schließt das geöffnete Menü und gibt den Fokus an die Trigger-Schaltfläche zurück."
+        },
+        "arrowDown": {
+          "description": "Bewegt den Fokus zum nächsten Menüeintrag. Springt vom letzten zum ersten Eintrag."
+        },
+        "arrowUp": {
+          "description": "Bewegt den Fokus zum vorherigen Menüeintrag. Springt vom ersten zum letzten Eintrag."
+        },
+        "home": {
+          "description": "Bewegt den Fokus zum ersten Menüeintrag."
+        },
+        "end": {
+          "description": "Bewegt den Fokus zum letzten Menüeintrag."
+        },
+        "arrowRight": {
+          "description": "Öffnet das Untermenü des fokussierten Eintrags und bewegt den Fokus zu seinem ersten Eintrag."
+        },
+        "arrowLeft": {
+          "description": "Schließt das aktuelle Untermenü und gibt den Fokus an den übergeordneten Eintrag zurück."
+        }
+      }
+    }
+  }
+}

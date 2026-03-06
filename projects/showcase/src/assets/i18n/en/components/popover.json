@@ -1,0 +1,165 @@
+{
+  "title": "Popover",
+  "subtitle": "Interactive floating content component with support for text, templates and dynamic components. Unlike <code>Tooltip</code>, the popover can contain interactive elements such as buttons, forms or lists.",
+  "examples": {
+    "basic": {
+      "title": "Basic usage",
+      "description": "Simple popover with text content. The popover is displayed on click (default behavior)."
+    },
+    "colors": {
+      "title": "Colors and variants",
+      "description": "Supports all NUI colors and variants (Solid, Outline, Ghost) to customize the popover appearance.",
+      "note": "Combine <code>color</code> and <code>variant</code> to adapt the popover style to your design."
+    },
+    "positions": {
+      "title": "Positions",
+      "description": "Control the preferred popover position: top, bottom, left or right. The popover repositions automatically if there is not enough space."
+    },
+    "events": {
+      "title": "Activation events",
+      "description": "Define how the popover is activated: click (default), hover, focus or manual. Manual mode allows complete programmatic control.",
+      "note": "When using <code>nuiPopoverEvent</code> we have three modes: <code>'click'</code> (show/hide on click), <code>'hover'</code> (show on mouse over and hide on mouse out) and <code>'focus'</code> (show on focus and hide on blur)."
+    },
+    "template": {
+      "title": "Custom template",
+      "description": "Use Angular templates for rich, interactive content. The template context provides a <code>close</code> function to close the popover.",
+      "note": "The <code>#popoverTemplate</code> template receives a context with the <code>close()</code> function that you can use to close the popover from inside the template."
+    },
+    "component": {
+      "title": "Dynamic component",
+      "description": "Render full Angular components inside the popover. Ideal for forms, lists or complex content."
+    },
+    "delays": {
+      "title": "Show/hide delays",
+      "description": "Configure delays in milliseconds before showing or hiding the popover. Useful for improving the user experience in hover mode."
+    },
+    "customization": {
+      "title": "Customization",
+      "description": "Customize the popover appearance: no arrow, custom width, own CSS classes or larger separation offset.",
+      "note": "You can use <code>nuiPopoverShowArrow</code> to hide/show the arrow, <code>nuiPopoverMaxWidth</code> to define a maximum width, <code>nuiPopoverMinWidth</code> to define a minimum width, <code>nuiPopoverClass</code> to add custom CSS classes, and <code>nuiPopoverOffset</code> to adjust the distance between the popover and the target element."
+    },
+    "closeOptions": {
+      "title": "Close options",
+      "description": "Control how the popover can be closed: outside click, Escape key, or allow multiple popovers open simultaneously.",
+      "note": "Use <code>nuiPopoverCloseOnClickOutside</code> to close on outside click, <code>nuiPopoverCloseOnEscape</code> to close with Escape, and <code>nuiPopoverAllowMultiple</code> to allow multiple popovers open at the same time."
+    },
+    "backdrop": {
+      "title": "Backdrop",
+      "description": "Adds a dark background behind the popover to create a modal-like experience. You can control whether clicking on the backdrop closes the popover.",
+      "note": "Use <code>nuiPopoverBackdrop</code> to enable/disable the backdrop and <code>nuiBackdropClose</code> to control whether clicking the backdrop closes the popover."
+    },
+    "disabled": {
+      "title": "Disabled state",
+      "description": "Dynamically control whether the popover is enabled or disabled.",
+      "note": "When <code>nuiPopoverDisabled</code> is <code>true</code>, the popover will not show or respond to events."
+    }
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Input properties of the <code>nuiPopover</code> directive"
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Events emitted by the <code>nuiPopover</code> directive"
+    },
+    "config": {
+      "title": "PopoverConfig",
+      "description": "Interface for global popover configuration via <code>provideNUI({ popover: {...} })</code>"
+    },
+    "context": {
+      "title": "PopoverContext",
+      "description": "Interface for the context available in popover templates via <code>let-close=\"close\"</code> and <code>let-data=\"data\"</code>"
+    },
+    "tokens": {
+      "title": "Injection tokens",
+      "description": "Tokens for injecting data and functions into dynamic popover components"
+    }
+  },
+  "theming": {
+    "spacing": {
+      "title": "Spacing and dimensions",
+      "description": "CSS variables to control the size, padding and spacing of the popover"
+    },
+    "typography": {
+      "title": "Typography",
+      "description": "CSS variables to control the font of the popover content"
+    },
+    "borders": {
+      "title": "Borders",
+      "description": "CSS variables to control the borders and radius of the popover"
+    },
+    "shadow": {
+      "title": "Shadow",
+      "description": "CSS variable to control the popover shadow"
+    },
+    "zindex": {
+      "title": "Z-index",
+      "description": "CSS variable to control the stacking order of the popover"
+    },
+    "animation": {
+      "title": "Animation",
+      "description": "CSS variables to control popover transitions and animations"
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA roles and attributes",
+      "description": "The Popover implements the ARIA non-modal dialog pattern. The trigger announces whether the popover is open and indicates the relationship with its content.",
+      "elements": {
+        "trigger": "Trigger element",
+        "popover": "Popover panel"
+      },
+      "rows": {
+        "ariaExpanded": {
+          "description": "The trigger carries <code>aria-expanded</code> reflecting whether the popover is visible (<code>true</code>) or not (<code>false</code>)."
+        },
+        "ariaControls": {
+          "description": "<code>aria-controls</code> on the trigger points to the <code>id</code> of the popover panel."
+        },
+        "ariaHaspopup": {
+          "description": "<code>aria-haspopup=\"dialog\"</code> indicates that activating the trigger opens an interactive content panel."
+        },
+        "popoverRole": {
+          "description": "The popover panel has <code>role=\"dialog\"</code> and <code>aria-label</code> derived from its title or content."
+        }
+      }
+    },
+    "naming": {
+      "title": "Accessible name",
+      "description": "The popover and its trigger must have accessible names that clearly communicate their purpose.",
+      "note": "Always provide an <code>aria-label</code> or a visible title in the popover so screen readers can correctly identify it.",
+      "elements": {
+        "trigger": "Trigger",
+        "popoverPanel": "Popover panel"
+      },
+      "info": {
+        "triggerLabel": "Trigger accessible name",
+        "panelLabel": "Panel aria-label"
+      },
+      "rows": {
+        "trigger": {
+          "description": "The trigger must have its own accessible name (visible text, aria-label…) that describes the action of opening the popover."
+        },
+        "panel": {
+          "description": "The popover panel gets its accessible name from the visible title or an explicit <code>aria-label</code>."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Keyboard interaction",
+      "description": "The Popover follows the WAI-ARIA non-modal dialog keyboard pattern.",
+      "rows": {
+        "enterSpace": {
+          "description": "Opens or closes the popover when the trigger has focus."
+        },
+        "escape": {
+          "description": "Closes the popover and returns focus to the trigger."
+        },
+        "tab": {
+          "description": "Cycles focus between interactive elements inside the open panel."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "title": "Toast",
+  "subtitle": "Temporary non-intrusive notifications for user feedback",
+  "examples": {
+    "basic": {
+      "title": "Basic toasts",
+      "description": "Show simple notifications with different types: success, error, warning and info."
+    },
+    "withTitle": {
+      "title": "Toasts with title",
+      "description": "Add a title to give more context to the notification."
+    },
+    "withActions": {
+      "title": "Toasts with actions",
+      "description": "Include action buttons so the user can interact with the notification."
+    },
+    "positions": {
+      "title": "Positions",
+      "description": "Control where toasts appear on screen: top-left, top-center, top-right, bottom-left, bottom-center, bottom-right."
+    },
+    "iconTop": {
+      "title": "Icon at the top",
+      "description": "Displays the toast icon centered at the top for a more prominent design.",
+      "note": "Use the <code>iconPosition='top'</code> property to center the icon at the top of the toast. This is especially useful for toasts with titles and actions, as it improves visual hierarchy and makes the icon more prominent."
+    },
+    "icons": {
+      "title": "Custom icons",
+      "description": "You can display default icons based on the toast type or use custom icons. You can even hide the icon if desired.",
+      "note": "Use the <code>icon</code> property. If you use the value <code>false</code>, the icon will be hidden. If you use a <code>string</code>, you can specify a custom <strong>Remix Icon</strong>. By default, icons are shown based on the toast type with <code>icon</code> set to <code>true</code>."
+    },
+    "duration": {
+      "title": "Duration",
+      "description": "Configure how long the toast remains visible before disappearing. Use 0 for toasts that do not close automatically."
+    },
+    "loading": {
+      "title": "Loading toast",
+      "description": "Shows a toast with loading state that can be dynamically updated when the operation completes."
+    }
+  },
+  "api": {
+    "service": {
+      "title": "ToastService",
+      "description": "Main service for showing toast notifications. Provides methods to create, update and close toasts."
+    },
+    "config": {
+      "title": "ToastConfig",
+      "description": "Individual per-toast configuration interface. Allows overriding global configuration for specific toasts."
+    },
+    "global": {
+      "title": "Global configuration",
+      "description": "Global configuration for the toast system. Can be set during application initialization."
+    },
+    "types": {
+      "title": "Types and interfaces",
+      "description": "TypeScript type definitions for the toast system: ToastType, ToastPosition, ToastAction, ToastRef."
+    },
+    "usage": {
+      "title": "Complete usage example",
+      "description": "Complete example integrating ToastService into a component with different usage scenarios."
+    }
+  },
+  "theming": {
+    "container": {
+      "title": "Container variables",
+      "description": "CSS variables to customize the general toast container (background, border, shadow, spacing)."
+    },
+    "typography": {
+      "title": "Typography variables",
+      "description": "CSS variables to customize toast text (title, message, font size, weight)."
+    },
+    "icon": {
+      "title": "Icon variables",
+      "description": "CSS variables to customize the toast icon (size, color, spacing)."
+    },
+    "close": {
+      "title": "Close button variables",
+      "description": "CSS variables to customize the close button (size, color, hover)."
+    },
+    "progress": {
+      "title": "Progress bar variables",
+      "description": "CSS variables to customize the automatic progress bar (color, height, animation)."
+    },
+    "types": {
+      "title": "Per-type variables",
+      "description": "CSS variables specific to each toast type (success, error, warning, info, loading)."
+    },
+    "animations": {
+      "title": "Animation variables",
+      "description": "CSS variables to customize toast enter/exit animations."
+    },
+    "examples": {
+      "title": "Customization example",
+      "description": "Complete toast customization example using CSS variables to create a dark theme."
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Translation tokens",
+      "description": "The Toast component uses the generic <code>close</code> token from NuiI18nService for the close button label.",
+      "note": "The <code>close</code> token is shared between multiple components (Toast, SidebarPanel…). Override it globally to localize all close buttons at once.",
+      "rows": {
+        "close": {
+          "description": "Accessible label for the close button on dismissible toasts."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA roles and attributes",
+      "description": "Toasts use a live region so screen readers announce new notifications without interrupting the user's current focus.",
+      "elements": {
+        "host": "Toast host element",
+        "closeButton": "Close button"
+      },
+      "rows": {
+        "ariaLive": {
+          "description": "The toast element carries <code>aria-live=\"polite\"</code> for informational notifications or <code>\"assertive\"</code> for critical alerts (error/warning)."
+        },
+        "ariaAtomic": {
+          "description": "<code>aria-atomic=\"true\"</code> ensures the screen reader announces the complete toast content as a single unit."
+        },
+        "ariaLabel": {
+          "description": "The accessible name of the toast is automatically derived from its content following the priority: title → message → type."
+        },
+        "closeLabel": {
+          "description": "The close button uses the i18n token <code>close</code> as its accessible label."
+        }
+      }
+    },
+    "naming": {
+      "title": "Accessible name",
+      "description": "The toast's accessible name is automatically derived from its content. No explicit <code>aria-label</code> is needed from the consumer.",
+      "note": "Always provide meaningful title or message content. Avoid toasts that rely solely on color or icon to convey their meaning.",
+      "elements": {
+        "hostWithTitle": "Toast with title",
+        "hostWithMessage": "Toast without title",
+        "hostTypeFallback": "Toast with type fallback"
+      },
+      "info": {
+        "title": "Toast title",
+        "message": "Toast message",
+        "type": "Toast type (success, error…)"
+      },
+      "rows": {
+        "hostTitle": {
+          "description": "When a <code>title</code> is provided, it becomes the accessible label of the toast."
+        },
+        "hostMessage": {
+          "description": "When there is no title, the <code>message</code> text becomes the accessible label."
+        },
+        "hostType": {
+          "description": "When there is neither title nor message, the toast <code>type</code> is used as the fallback label."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Keyboard interaction",
+      "description": "Toasts are non-modal. Focus does not move to them automatically; users can Tab to the close button if desired.",
+      "rows": {
+        "tab": {
+          "description": "Tab moves focus to the close button inside the toast if one is visible."
+        },
+        "spaceEnter": {
+          "description": "Activates the focused close button, dismissing the toast."
+        }
+      }
+    }
+  }
+}

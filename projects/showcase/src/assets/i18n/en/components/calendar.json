@@ -1,0 +1,392 @@
+{
+  "title": "Calendar",
+  "subtitle": "Component for selecting dates with multiple modes (day, week, range), sizes and width strategies",
+  "basic": {
+    "title": "Basic usage",
+    "description": "Simple calendar for single date selection. Displays the current month and allows navigating between months and years."
+  },
+  "sizes": {
+    "title": "Sizes",
+    "description": "Five size options (xs, sm, md, lg, xl) and a sixth auto option that adapts to the container. Sizes harmoniously scale all internal elements.",
+    "note": "Sizes affect the width, cell height, padding and font size of the calendar. Use <code>size</code> with values <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> or <code>'auto'</code>."
+  },
+  "widths": {
+    "title": "Width strategies",
+    "description": "Two width strategies: <strong>compact</strong> (fixed width based on size) and <strong>full</strong> (occupies 100% of the container). Full mode uses Container Queries to adjust typography.",
+    "note": "Use <code>width='compact'</code> for a fixed-width calendar ideal for popovers. Use <code>width='full'</code> for a calendar that occupies all available space, ideal for forms or content areas."
+  },
+  "week-selection": {
+    "title": "Week selection",
+    "description": "Special mode for selecting a full week (7 consecutive days). Useful for weekly planning.",
+    "note": "Set <code>type='WEEK'</code> to enable this mode. The calendar will highlight the complete week on hover and return an object with the start and end dates of the week."
+  },
+  "range-selection": {
+    "title": "Range selection",
+    "description": "Allows selecting a date range with start and end. Visually displays the intermediate dates of the range.",
+    "note": "Set <code>type='RANGE'</code> to enable this mode. The calendar will wait for two clicks: one for the start and one for the end of the range. The output will return a <code>{ start: Date, end: Date }</code> object."
+  },
+  "presets": {
+    "title": "Quick range presets",
+    "description": "Add preset buttons for frequent ranges like 'Last week', 'Last month', 'Last year'. Supports Remix Icon icons.",
+    "note": "This feature is only available when <code>type='RANGE'</code>. Provide an array of <code>DateRangePreset</code> objects in <code>customPresets</code>. Each preset has a <code>label</code>, <code>range</code> (with start/end) and an optional <code>icon</code>."
+  },
+  "time-picker": {
+    "title": "Time Picker integration",
+    "description": "Combines date selection with time selection. Supports start time, end time or both depending on the calendar type.",
+    "note": "Use <code>showTimePicker='true'</code> and configure <code>timePickerMode</code> with <code>'start'</code>, <code>'end'</code> or <code>'both'</code>. You can customize the time picker with <code>timePickerConfig</code> (steps, range, presets, etc.)."
+  },
+  "disabled-dates": {
+    "title": "Disabled dates",
+    "description": "Block specific dates preventing their selection. Useful for holidays, weekends or unavailable dates.",
+    "note": "Use <code>disabledDates</code> to specify an array of disabled dates. Disabled dates show a distinctive dimmed style and are not selectable."
+  },
+  "min-max-dates": {
+    "title": "Minimum and maximum range",
+    "description": "Restricts the selectable date range using minimum and maximum values. Dates outside the range are disabled.",
+    "note": "Configure <code>minDate</code> and <code>maxDate</code> to set the limits. Users will not be able to navigate beyond these limits or select dates outside the range."
+  },
+  "reactive-forms": {
+    "title": "Reactive forms",
+    "description": "Full integration with Angular reactive forms. Implements ControlValueAccessor for automatic synchronization.",
+    "note": "Use <code>formControl</code> or <code>formControlName</code> to integrate with Angular forms. The component handles synchronization, validation and state automatically. Supports all types (DAY, WEEK, RANGE) in forms."
+  },
+  "dynamic-disabled-dates": {
+    "title": "Dynamically disabled dates",
+    "description": "Disable dates according to complex business logic using a custom function. Overrides the static <code>disabledDates</code> array.",
+    "note": "Use <code>isDateEnabledFn</code> to define dynamic enablement rules. The function receives a date and must return <code>true</code> if enabled or <code>false</code> if it should be disabled. Ideal for corporate calendars, booking systems or applications with complex availability logic."
+  },
+  "date-status": {
+    "title": "Visual states (dateStatusFn)",
+    "description": "Assigns visual states to dates to indicate business information: availability, priority, events, etc.",
+    "note": "Use <code>dateStatusFn</code> to assign one of four states to each date: <code>'success'</code> (green), <code>'info'</code> (blue), <code>'warning'</code> (amber) or <code>'danger'</code> (red). States are displayed as a subtle color line at the top of the day. Return <code>null</code> for days with no special state."
+  },
+  "selection-modes": {
+    "title": "Advanced selection modes",
+    "description": "The calendar supports three specialized selection modes: normal day selection, month/year selection and year-only selection.",
+    "note": "Each mode is optimized for a specific use case: <code>type='day'</code> for full date selection, <code>type='month'</code> for selecting month and year (ideal for monthly filters), and <code>type='year'</code> for selecting only the year (ideal for annual reports). <code>month</code> and <code>year</code> modes start directly in the corresponding view and close automatically upon selection if <code>closeOnSelect</code> is active."
+  },
+  "multiple-selection": {
+    "title": "Multiple selection",
+    "description": "Allows selecting multiple dates, months or years with a simple click. Ideal for selecting working days, holidays or distributed events.",
+    "note": "Enable multiple selection mode with <code>selection=\"multiple\"</code> combined with <code>type='day'</code>, <code>type='month'</code> or <code>type='year'</code>. Users can click multiple elements to add/remove them from the selection (toggle). This mode <strong>never automatically closes</strong> the calendar, even if <code>closeOnSelect</code> is <code>true</code>, to allow continuous selection. The output returns an object with <code>dates</code>, <code>months</code> or <code>years</code> depending on the type."
+  },
+  "week-numbers": {
+    "title": "ISO-8601 week numbers",
+    "description": "Displays week numbers according to the ISO-8601 standard in a column to the left of the calendar. Useful for businesses, logistics and planning.",
+    "note": "Enable week numbers with <code>[showWeekNumbers]=\"true\"</code>. Week numbers are clickable when <code>type='week'</code> or when <code>type='day'</code> and <code>selection='multiple'</code>, allowing selecting the full week with a single click. The ISO-8601 standard defines that the week starts on Monday and that week 1 of the year is the first week containing at least 4 days of the new year."
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Input properties to configure the behavior, appearance and restrictions of the calendar"
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Events emitted by the calendar when the user selects a date or range"
+    },
+    "calendar-value": {
+      "title": "CalendarValue",
+      "description": "Union type that represents all possible calendar values depending on the selected type",
+      "note": "The type of returned value depends on the <code>type</code>: <strong>DAY</strong> returns <code>Date | null</code>, <strong>WEEK</strong> returns <code>{ start: Date, end: Date } | null</code>, and <strong>RANGE</strong> returns <code>{ start: Date, end: Date } | null</code>."
+    },
+    "calendar-type": {
+      "title": "CalendarType",
+      "description": "Enum defining the calendar selection mode"
+    },
+    "calendar-width": {
+      "title": "CalendarWidth",
+      "description": "Enum defining the calendar width strategy"
+    },
+    "calendar-selection": {
+      "title": "CalendarSelection",
+      "description": "Enum defining the calendar selection mode: single or multiple"
+    },
+    "view-mode": {
+      "title": "ViewMode",
+      "description": "Enum defining the current view mode (days, months or years). Primarily for internal component use.",
+      "note": "This enum is used internally by the component to manage navigation between views. It is not necessary to configure it directly in most cases."
+    },
+    "preset": {
+      "title": "DateRangePreset",
+      "description": "Interface for defining quick range presets with label, date range and optional icon"
+    },
+    "smart-types": {
+      "title": "Smart Types",
+      "description": "Types and functions for advanced date validation and status logic. Allow applying complex business rules and dynamic visualizations.",
+      "note": "These types are fundamental for implementing advanced features: <strong>DateStatusFn</strong> assigns visual states (success, warning, danger, info) to dates based on business logic, while <strong>IsDateEnabledFn</strong> dynamically controls which dates are enabled or disabled. Both functions receive a date and allow implementing complex validations such as corporate calendars, booking systems or custom availability rules."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Colors",
+      "description": "The calendar primarily uses global theme variables. Selected days, hover and active states use the primary color of the active theme.",
+      "note": "The component fully integrates with the NUI theming system. Primary colors, background, text and borders are automatically inherited from the selected theme preset."
+    },
+    "sizes": {
+      "title": "Sizes",
+      "description": "Size-specific CSS variables that control width, padding, spacing, cell size and typography. Five size variants available: xs, sm, md (default), lg and xl."
+    },
+    "structure": {
+      "title": "Structure",
+      "description": "Structural CSS variables to control borders, opacities, animations and dimensions. Includes customization of tabs, days from other months, presets and focus states."
+    },
+    "customization": {
+      "title": "Customization",
+      "description": "Examples of how to customize calendar styles in your application. You can override CSS variables globally or specific to instances."
+    }
+  },
+  "i18n": {
+    "navigation": {
+      "title": "Navigation and label tokens",
+      "description": "Tokens for day-of-week names, month names, navigation button labels and day state labels.",
+      "note": "All array tokens (<code>weekDaysShort</code>, <code>weekDays</code>, <code>months</code>, <code>shortMonths</code>) must provide all values. Override globally with <code>provideNuiI18n({ calendar: {...} })</code> or per instance with the <code>[i18n]</code> input.",
+      "rows": {
+        "weekDaysShort": {
+          "description": "Abbreviated day names displayed in the calendar header (Monday–Sunday)."
+        },
+        "weekDays": {
+          "description": "Full day names used in accessible labels and tooltips."
+        },
+        "months": {
+          "description": "Full month names used in the month selector and accessible labels."
+        },
+        "shortMonths": {
+          "description": "Abbreviated month names used in compact contexts."
+        },
+        "prevMonth": {
+          "description": "Label for the button that navigates to the previous month."
+        },
+        "nextMonth": {
+          "description": "Label for the button that navigates to the next month."
+        },
+        "prevYears": {
+          "description": "Label for the button that navigates to previous years in the year selector."
+        },
+        "nextYears": {
+          "description": "Label for the button that navigates to next years in the year selector."
+        },
+        "changeMonth": {
+          "description": "Label for the button that opens the month selector."
+        },
+        "changeYear": {
+          "description": "Label for the button that opens the year selector."
+        },
+        "year": {
+          "description": "Label for the year selector header."
+        },
+        "week": {
+          "description": "Accessible label for the week number header column."
+        },
+        "weekNumbers": {
+          "description": "Tooltip for the week number column toggle button."
+        },
+        "today": {
+          "description": "Label for the 'Today' shortcut button."
+        },
+        "selectDay": {
+          "description": "Accessible description for selecting a day."
+        },
+        "dayDisabled": {
+          "description": "Screen reader announcement for disabled day cells."
+        },
+        "openCalendar": {
+          "description": "Label for the button that opens the calendar popover."
+        },
+        "showTime": {
+          "description": "Label for the button that shows the time picker."
+        },
+        "hideTime": {
+          "description": "Label for the button that hides the time picker."
+        },
+        "monthAria": {
+          "description": "Accessible label for the month selection grid."
+        },
+        "yearsAria": {
+          "description": "Accessible label for the year selection grid."
+        }
+      }
+    },
+    "presetsAndTabs": {
+      "title": "Preset, tab and time picker tokens",
+      "description": "Tokens for quick access to predefined date ranges, view tabs and integrated time picker labels.",
+      "rows": {
+        "shortcuts": {
+          "description": "Header label for the presets panel that lists quick date range shortcuts."
+        },
+        "presetsToday": {
+          "description": "Label for the 'Today' quick preset."
+        },
+        "last7Days": {
+          "description": "Label for the 'Last 7 days' quick preset."
+        },
+        "last30Days": {
+          "description": "Label for the 'Last 30 days' quick preset."
+        },
+        "thisMonth": {
+          "description": "Label for the 'This month' quick preset."
+        },
+        "lastMonth": {
+          "description": "Label for the 'Last month' quick preset."
+        },
+        "thisYear": {
+          "description": "Label for the 'This year' quick preset."
+        },
+        "tabCalendar": {
+          "description": "Label for the calendar view tab."
+        },
+        "tabPresets": {
+          "description": "Label for the presets view tab."
+        },
+        "tabTime": {
+          "description": "Label for the time view tab."
+        },
+        "timeStart": {
+          "description": "Label for the start time input in range mode with time."
+        },
+        "timeEnd": {
+          "description": "Label for the end time input in range mode with time."
+        }
+      }
+    },
+    "ariaTokens": {
+      "title": "State and accessibility ARIA tokens",
+      "description": "Tokens exposed only to assistive technologies to announce day states, navigation changes and range selection.",
+      "rows": {
+        "ariaToday": {
+          "description": "Screen reader annotation added to today's day cell."
+        },
+        "selected": {
+          "description": "Screen reader annotation added to selected day cells."
+        },
+        "inRange": {
+          "description": "Screen reader annotation added to day cells within a selected range."
+        },
+        "ariaDisabled": {
+          "description": "Screen reader annotation added to disabled day cells."
+        },
+        "statusSuccess": {
+          "description": "Screen reader annotation for dates with success status."
+        },
+        "statusWarning": {
+          "description": "Screen reader annotation for dates with warning status."
+        },
+        "statusDanger": {
+          "description": "Screen reader annotation for dates with danger status."
+        },
+        "statusInfo": {
+          "description": "Screen reader annotation for dates with informational status."
+        },
+        "calendarLabel": {
+          "description": "Accessible label for the calendar grid (<code>role=\"grid\"</code>)."
+        },
+        "keyboardInstructions": {
+          "description": "Instructions announced to screen reader users on how to navigate the calendar with the keyboard."
+        },
+        "monthNavigated": {
+          "description": "Live announcement when the visible month changes. Supports <code>{month}</code> and <code>{year}</code> placeholders."
+        },
+        "rangeStart": {
+          "description": "Live announcement when the start of a date range is selected."
+        },
+        "rangeComplete": {
+          "description": "Live announcement when a complete date range has been selected."
+        },
+        "weekNumberLabel": {
+          "description": "Accessible label for each week number cell. Supports the <code>{week}</code> placeholder."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA roles and attributes",
+      "description": "The Calendar implements the ARIA Grid pattern for day cells and a live region for navigation announcements.",
+      "elements": {
+        "grid": "Day grid",
+        "weekHeader": "Weekday header",
+        "dayCell": "Day cell",
+        "dayButton": "Day button",
+        "liveRegion": "Live region"
+      },
+      "rows": {
+        "grid": {
+          "description": "The day grid uses <code>role=\"grid\"</code> to enable arrow key navigation between cells."
+        },
+        "gridLabel": {
+          "description": "The grid receives its label from the i18n token <code>calendar.a11y.calendarLabel</code>."
+        },
+        "columnHeader": {
+          "description": "Weekday headers use <code>role=\"columnheader\"</code> with the full day name as the accessible label."
+        },
+        "gridcell": {
+          "description": "Each day cell uses <code>role=\"gridcell\"</code>."
+        },
+        "selected": {
+          "description": "Selected day cells expose <code>aria-selected=\"true\"</code>."
+        },
+        "disabled": {
+          "description": "Disabled day cells expose <code>aria-disabled=\"true\"</code>."
+        },
+        "liveRegion": {
+          "description": "A hidden <code>aria-live=\"polite\"</code> region announces month navigation to screen readers."
+        }
+      }
+    },
+    "naming": {
+      "title": "Accessible name",
+      "description": "The calendar grid and each day cell have descriptive accessible names derived from i18n tokens and the formatted date.",
+      "note": "Day cells include state annotations (today, selected, in range, disabled) added to their label via <code>calendar.aria.*</code> tokens.",
+      "elements": {
+        "grid": "Day grid",
+        "dayButton": "Day button",
+        "stateAnnotation": "State annotation"
+      },
+      "info": {
+        "i18nLabel": "calendarLabel (i18n)",
+        "dateFormatted": "Formatted date",
+        "ariaTokens": "calendar.aria.* tokens"
+      },
+      "rows": {
+        "grid": {
+          "description": "The calendar grid receives its accessible name from the <code>calendar.a11y.calendarLabel</code> token."
+        },
+        "dayButton": {
+          "description": "The accessible name of each day button is the formatted date (e.g.: 'Tuesday, December 10, 2024')."
+        },
+        "stateAnnotation": {
+          "description": "State tokens (<code>calendar.aria.today</code>, <code>selected</code>, etc.) are added to the date label to communicate state to screen readers."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Keyboard interaction",
+      "description": "The calendar day grid implements full keyboard navigation according to the ARIA Grid pattern.",
+      "rows": {
+        "arrowHorizontal": {
+          "description": "Moves focus one day forward/backward."
+        },
+        "arrowVertical": {
+          "description": "Moves focus one week forward/backward."
+        },
+        "home": {
+          "description": "Moves focus to the first day of the current week."
+        },
+        "end": {
+          "description": "Moves focus to the last day of the current week."
+        },
+        "pageUp": {
+          "description": "Navigates to the previous month."
+        },
+        "pageDown": {
+          "description": "Navigates to the next month."
+        },
+        "spaceEnter": {
+          "description": "Selects the focused day."
+        },
+        "escape": {
+          "description": "Closes the calendar popover and returns focus to the activator."
+        }
+      }
+    }
+  }
+}

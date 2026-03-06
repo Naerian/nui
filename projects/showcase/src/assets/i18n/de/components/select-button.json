@@ -1,0 +1,187 @@
+{
+  "title": "Auswahlschaltfläche",
+  "subtitle": "Gruppe von Schaltflächen für Einzel- (Radio) oder Mehrfachauswahl (Checkbox)",
+  "basic": {
+    "title": "Grundlegende Verwendung",
+    "description": "Der einfachste Fall akzeptiert ein Array von Strings. Standardmäßig funktioniert es als Einzel-Optionsselektor (Radio)."
+  },
+  "modes": {
+    "title": "Auswahlmodi",
+    "description": "Ermöglicht das Wechseln des Schaltflächen-Auswahltyps zwischen Radiobutton und Checkbox",
+    "note": "Wechsle zu <code>mode='checkbox'</code>, um die Auswahl mehrerer Optionen gleichzeitig zu ermöglichen. Der zurückgegebene Wert wird ein Array sein."
+  },
+  "complex": {
+    "title": "Komplexe Objekte",
+    "description": "Unterstützt Arrays von Objekten mit benutzerdefinierten Eigenschaften für Label, Wert und deaktivierten Zustand.",
+    "note": "Ordne beliebige Objekteigenschaften mit <code>labelBy</code>, <code>valueBy</code>, <code>iconBy</code> und <code>disabledBy</code> zu."
+  },
+  "icons": {
+    "title": "Icons",
+    "description": "Unterstützt Nur-Icon-Schaltflächen für eine kompakte Toolbar-ähnliche Schaltflächengruppe.",
+    "note": "Remix Icon-Unterstützung. Verwende <code>iconOnly='true'</code> für eine kompakte Toolbar-ähnliche Schaltflächengruppe. Wenn es sich um ein <strong>Objekt</strong> handelt, kannst du die Icon-Eigenschaft mit <code>iconBy</code> zuordnen."
+  },
+  "colors": {
+    "title": "Farben und Varianten",
+    "description": "Kompatibel mit dem vollständigen Variantensystem (Solid, Outline, Ghost) und NUI-Farben.",
+    "note": "Kombiniere <code>color</code> und <code>variant</code>."
+  },
+  "segmented": {
+    "title": "Segmentierte Variante (iOS-Stil)",
+    "description": "Visueller Stil ähnlich dem <strong>iOS Segmented Control</strong>, speziell und zusätzlich zu den grundlegenden NUI-Variantentypen. Ideal für Ansichts-Umschalter (z.B.: Monat / Jahr, Liste / Karte).",
+    "note": "Verwende <code>variant='segmented'</code>, um diese einzigartige Variante anzuwenden."
+  },
+  "sizes": {
+    "title": "Größen",
+    "description": "Fünf vordefinierte Größen, die den Container, die Typografie und Icons harmonisch skalieren.",
+    "note": "Verwende <code>size</code> mit den Werten <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> und <code>'xl'</code>."
+  },
+  "width": {
+    "title": "Volle Breite",
+    "description": "Erweitert Schaltflächen, um den gesamten verfügbaren Platz gleichmäßig einzunehmen.",
+    "note": "Verwende <code>width='full'</code>, damit jede Schaltfläche sich erweitert und eine gleiche Breite innerhalb des Containers einnimmt."
+  },
+  "api": {
+    "title": "API und Referenz",
+    "description": "Vollständige Dokumentation der Inputs, Outputs und erweiterten Verwendung der Select-Button-Komponente.",
+    "inputs": {
+      "title": "Inputs",
+      "description": "Komponenteneigenschaften, die ihr Verhalten und Erscheinungsbild steuern."
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Ereignisse, die von der Komponente während ihres Lebenszyklus ausgelöst werden."
+    }
+  },
+  "theming": {
+    "title": "Stile und Anpassung",
+    "description": "Passe das Erscheinungsbild der Auswahlschaltfläche über CSS-Variablen an. Steuere Abstände, Farben, Schatten und mehr.",
+    "general": {
+      "title": "Allgemeine Variablen",
+      "description": "CSS-Variablen zur Anpassung des allgemeinen Stils der Auswahlschaltfläche (Standard-Layout).",
+      "rows": {
+        "gap": {
+          "description": "Abstand zwischen Schaltflächen im Standard-Layout."
+        },
+        "transition": {
+          "description": "CSS-Übergang auf alle Schaltflächen angewendet."
+        }
+      }
+    },
+    "segmented": {
+      "title": "Variablen für segmentiertes Layout",
+      "description": "CSS-Variablen spezifisch für den segmentierten Stil (iOS-ähnlich). Steuert den Container, ausgewählte/nicht ausgewählte Zustände und Hover-Effekte.",
+      "rows": {
+        "gap": {
+          "description": "Abstand zwischen Schaltflächen im segmentierten Layout."
+        },
+        "bg": {
+          "description": "Hintergrundfarbe des segmentierten Containers."
+        },
+        "padding": {
+          "description": "Innerer Abstand des segmentierten Containers."
+        },
+        "borderRadius": {
+          "description": "Eckradius des segmentierten Containers."
+        },
+        "border": {
+          "description": "Rahmen des segmentierten Containers."
+        },
+        "selectedBg": {
+          "description": "Hintergrund der ausgewählten Schaltfläche."
+        },
+        "selectedShadow": {
+          "description": "Schatten der ausgewählten Schaltfläche."
+        },
+        "selectedBorder": {
+          "description": "Rahmen der ausgewählten Schaltfläche."
+        },
+        "unselectedBg": {
+          "description": "Hintergrund nicht ausgewählter Schaltflächen."
+        },
+        "unselectedText": {
+          "description": "Textfarbe nicht ausgewählter Schaltflächen."
+        },
+        "hoverBg": {
+          "description": "Hintergrund der Schaltfläche beim Hover."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA-Rollen und -Attribute",
+      "description": "Die Auswahlschaltfläche zeigt semantische Rollen je nach Auswahlmodus (Radio oder Checkbox) an.",
+      "elements": {
+        "containerRadio": "Container (Radio-Modus)",
+        "containerCheckbox": "Container (Checkbox-Modus)",
+        "container": "Container",
+        "buttonRadio": "Optionsschaltfläche (Radio-Modus)",
+        "buttonCheckbox": "Optionsschaltfläche (Checkbox-Modus)",
+        "button": "Optionsschaltfläche",
+        "icon": "Dekoratives Icon"
+      },
+      "rows": {
+        "roleRadiogroup": {
+          "description": "Der Container verwendet <code>role=\"radiogroup\"</code> im Einzelauswahlmodus, um sich gegenseitig ausschließende Optionen zu gruppieren."
+        },
+        "roleGroup": {
+          "description": "Der Container verwendet <code>role=\"group\"</code> im Mehrfachauswahlmodus, um verwandte Checkboxen zu gruppieren."
+        },
+        "ariaDisabled": {
+          "description": "Spiegelt den deaktivierten Zustand der gesamten Gruppe für assistive Technologien wider."
+        },
+        "roleRadio": {
+          "description": "Jede Schaltfläche verwendet <code>role=\"radio\"</code> im Einzelauswahlmodus."
+        },
+        "roleCheckbox": {
+          "description": "Jede Schaltfläche verwendet <code>role=\"checkbox\"</code> im Mehrfachauswahlmodus."
+        },
+        "ariaChecked": {
+          "description": "Zeigt an, ob die Option derzeit ausgewählt ist."
+        },
+        "ariaHiddenIcon": {
+          "description": "Dekorative Icons sind für assistive Technologien mit <code>aria-hidden=\"true\"</code> versteckt."
+        }
+      }
+    },
+    "naming": {
+      "title": "Zugänglicher Name",
+      "description": "Jede Optionsschaltfläche erhält ihren zugänglichen Namen aus dem Optionslabel. Optional kann der Gruppencontainer ein kontextuelles Label erhalten.",
+      "note": "Gib immer aussagekräftige Labels für Optionen an. Stelle bei Nur-Icon-Schaltflächen sicher, dass jede Option ein beschreibendes Label über <code>labelBy</code> hat.",
+      "elements": {
+        "button": "Optionsschaltfläche",
+        "container": "Gruppencontainer"
+      },
+      "info": {
+        "optionLabel": "Optionslabeltext",
+        "groupLabel": "Standardmäßig nicht bereitgestellt"
+      },
+      "rows": {
+        "button": {
+          "description": "Der zugängliche Name jeder Optionsschaltfläche wird aus dem sichtbaren Optionslabeltext abgeleitet."
+        },
+        "container": {
+          "description": "Der Gruppencontainer erhält standardmäßig keinen zugänglichen Namen. Umschließe ihn mit einem beschrifteten übergeordneten Element, wenn Kontext erforderlich ist."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Tastaturinteraktion",
+      "description": "Die Auswahlschaltfläche verwendet Roving Tabindex im Radio-Modus und Standard-Tab-Navigation im Checkbox-Modus.",
+      "rows": {
+        "tab": {
+          "description": "Im Radio-Modus bewegt Tab den Fokus zur ausgewählten Option (oder zur ersten, wenn keine ausgewählt ist). Im Checkbox-Modus durchläuft Tab alle Optionen."
+        },
+        "arrowNext": {
+          "description": "Im Radio-Modus bewegt den Fokus zur nächsten Option und wählt sie aus (springt um)."
+        },
+        "arrowPrev": {
+          "description": "Im Radio-Modus bewegt den Fokus zur vorherigen Option und wählt sie aus (springt um)."
+        },
+        "spaceEnter": {
+          "description": "Im Checkbox-Modus schaltet die Auswahl der fokussierten Option um."
+        }
+      }
+    }
+  }
+}

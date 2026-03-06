@@ -1,0 +1,425 @@
+{
+  "title": "Button",
+  "subtitle": "Versatile button component with multiple variants, sizes and states",
+  "basic": {
+    "title": "Basic button",
+    "description": "The simplest form of a button with default styles."
+  },
+  "variants-colors": {
+    "title": "Variants and colors",
+    "description": "Supports different variants and colors from the NUI system.",
+    "note": "Combine <code>color</code> and <code>variant</code> to customize the button appearance to your needs."
+  },
+  "shapes": {
+    "title": "Shapes",
+    "description": "Control the button shape with rounded border options.",
+    "note": "Shape options: <code>'rounded'</code> for slightly rounded borders, <code>'pill'</code> for fully rounded borders, and <code>'square'</code> for straight borders."
+  },
+  "raised": {
+    "title": "Raised buttons",
+    "description": "Add visual depth to your buttons with a subtle shadow.",
+    "note": "Raised buttons are ideal for primary actions you want to highlight in your interface. Use the <code>raised</code> attribute on your Button component."
+  },
+  "sizes": {
+    "title": "Sizes",
+    "description": "Five size options available in NUI.",
+    "note": "Sizes affect the button height, horizontal padding and font size. Use <code>size</code> with values <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> and <code>'xl'</code>."
+  },
+  "icons": {
+    "title": "Icons",
+    "description": "Add icons to buttons at the start or end. Buttons with only an icon are rendered as circular icon buttons.",
+    "note": "Icon position: <code>'start'</code> shows the icon before the text, <code>'end'</code> shows it after. Icon-only buttons require the <code>aria-label</code> attribute for accessibility."
+  },
+  "loading": {
+    "title": "Loading state",
+    "description": "Displays a loading spinner in three positions: start, end or center (which replaces the content).",
+    "note": "Loading positions: <code>'start'</code> shows the spinner before the text, <code>'end'</code> shows it after, <code>'center'</code> completely replaces the content with a centered spinner. If the button only contains an <code>icon</code>, the content is also replaced by the spinner while loading."
+  },
+  "width": {
+    "title": "Width",
+    "description": "Control the button width: auto (default), full (100%) or fit (adjusted to content).",
+    "note": "Width options: <code>'auto'</code> adapts to content with standard padding, <code>'full'</code> stretches to 100% of the container, <code>'fit'</code> uses the minimum required space."
+  },
+  "disabled": {
+    "title": "Disabled state",
+    "description": "Disabled buttons prevent user interaction and show a dimmed appearance."
+  },
+  "events": {
+    "title": "Events",
+    "description": "Handle click events with the onClick output. Supports button types: button, submit and reset.",
+    "consoleNote": "Open <strong>DevTools (F12)</strong> and check the <strong>Console</strong> tab to see the events logged when you click on the buttons."
+  },
+  "directive": {
+    "title": "Using directive",
+    "description": "Apply button styles to native HTML elements using the nuiButton directive.",
+    "note": "You can use the <code>nuiButton</code> directive on any native HTML element such as <code>&lt;button&gt;</code>, <code>&lt;a&gt;</code> or <code>&lt;div&gt;</code> to apply NUI button styles and behaviors."
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Input properties to configure the button behavior and appearance.",
+      "rows": {
+        "variant": {
+          "description": "Visual button variant"
+        },
+        "shape": {
+          "description": "Button shape"
+        },
+        "raised": {
+          "description": "Applies elevated style with shadow"
+        },
+        "color": {
+          "description": "Button color theme"
+        },
+        "size": {
+          "description": "Button size"
+        },
+        "icon": {
+          "description": "Remix Icon class name"
+        },
+        "iconPosition": {
+          "description": "Icon position relative to text"
+        },
+        "loading": {
+          "description": "Shows the loading spinner"
+        },
+        "loadingPosition": {
+          "description": "Spinner position"
+        },
+        "width": {
+          "description": "Button width behavior"
+        },
+        "disabled": {
+          "description": "Disables button interaction"
+        },
+        "type": {
+          "description": "Native button type"
+        },
+        "label": {
+          "description": "Button text (alternative to content projection)"
+        },
+        "title": {
+          "description": "HTML title attribute"
+        },
+        "ariaLabel": {
+          "description": "Accessibility label (automatically calculated for icon-only buttons)"
+        }
+      }
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Events emitted by the Button component.",
+      "rows": {
+        "onClick": {
+          "description": "Emitted when the button is clicked (not emitted if disabled or loading)"
+        }
+      }
+    },
+    "computed": {
+      "title": "Computed Properties",
+      "description": "Reactive computed properties (Signals) of the component.",
+      "rows": {
+        "effectiveColor": {
+          "description": "Resolved color (Input > Global config > Default value)"
+        },
+        "effectiveSize": {
+          "description": "Resolved size (Input > Global config > Default value)"
+        },
+        "effectiveVariant": {
+          "description": "Resolved variant (Input > Global config > Default value)"
+        },
+        "hasVisibleContent": {
+          "description": "True if the button has text content or label"
+        },
+        "isIconOnly": {
+          "description": "True if the button only contains an icon without text"
+        },
+        "computedAriaLabel": {
+          "description": "Automatically calculated aria-label for accessibility"
+        }
+      }
+    },
+    "models": {
+      "title": "Models",
+      "description": "Data models related to the Button component.",
+      "rows": {
+        "ButtonType": {
+          "description": "Native button types"
+        },
+        "ButtonTypeEnum": {
+          "description": "Enum for native button types"
+        },
+        "ButtonIconPosition": {
+          "description": "Icon position options"
+        },
+        "ButtonIconPositionEnum": {
+          "description": "Enum for icon position"
+        },
+        "ButtonLoadingPosition": {
+          "description": "Loading spinner position options"
+        },
+        "ButtonLoadingPositionEnum": {
+          "description": "Enum for loading spinner position"
+        },
+        "ButtonWidth": {
+          "description": "Button width behavior options"
+        },
+        "ButtonWidthEnum": {
+          "description": "Enum for button width behavior"
+        }
+      }
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Color variables",
+      "description": "CSS variables to customize colors by variant (solid, outline, ghost) and color (primary, secondary, etc.).",
+      "note": "Replace <code>{color}</code> with any system color: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>.",
+      "rows": {
+        "solidBg": {
+          "description": "Background color for solid variant"
+        },
+        "solidText": {
+          "description": "Text color for solid variant"
+        },
+        "solidBorder": {
+          "description": "Border color for solid variant"
+        },
+        "solidHoverBg": {
+          "description": "Background on hover for solid"
+        },
+        "solidHoverText": {
+          "description": "Text color on hover for solid"
+        },
+        "solidHoverBorder": {
+          "description": "Border on hover for solid"
+        },
+        "solidActiveBg": {
+          "description": "Active background for solid"
+        },
+        "solidActiveBorder": {
+          "description": "Active border for solid"
+        },
+        "outlineBg": {
+          "description": "Background color for outline variant"
+        },
+        "outlineText": {
+          "description": "Text color for outline variant"
+        },
+        "outlineBorder": {
+          "description": "Border color for outline variant"
+        },
+        "outlineHoverBg": {
+          "description": "Background on hover for outline"
+        },
+        "outlineHoverText": {
+          "description": "Text on hover for outline"
+        },
+        "outlineHoverBorder": {
+          "description": "Border on hover for outline"
+        },
+        "outlineActiveBg": {
+          "description": "Active background for outline"
+        },
+        "outlineActiveBorder": {
+          "description": "Active border for outline"
+        },
+        "ghostBg": {
+          "description": "Background color for ghost variant"
+        },
+        "ghostText": {
+          "description": "Text color for ghost variant"
+        },
+        "ghostBorder": {
+          "description": "Border color for ghost variant"
+        },
+        "ghostHoverBg": {
+          "description": "Background on hover for ghost"
+        },
+        "ghostHoverText": {
+          "description": "Text on hover for ghost"
+        },
+        "ghostHoverBorder": {
+          "description": "Border on hover for ghost"
+        },
+        "ghostActiveBg": {
+          "description": "Active background for ghost"
+        },
+        "ghostActiveBorder": {
+          "description": "Active border for ghost"
+        },
+        "focusColor": {
+          "description": "Focus ring color"
+        }
+      }
+    },
+    "structure": {
+      "title": "Structural variables",
+      "description": "CSS variables for spacing, sizes, typography and visual effects.",
+      "rows": {
+        "gap": {
+          "description": "Space between icon and text"
+        },
+        "paddingXXs": {
+          "description": "Horizontal padding for xs size"
+        },
+        "paddingYXs": {
+          "description": "Vertical padding for xs size"
+        },
+        "paddingXSm": {
+          "description": "Horizontal padding for sm size"
+        },
+        "paddingYSm": {
+          "description": "Vertical padding for sm size"
+        },
+        "paddingXMd": {
+          "description": "Horizontal padding for md size"
+        },
+        "paddingYMd": {
+          "description": "Vertical padding for md size"
+        },
+        "paddingXLg": {
+          "description": "Horizontal padding for lg size"
+        },
+        "paddingYLg": {
+          "description": "Vertical padding for lg size"
+        },
+        "paddingXXl": {
+          "description": "Horizontal padding for xl size"
+        },
+        "paddingYXl": {
+          "description": "Vertical padding for xl size"
+        },
+        "radiusXs": {
+          "description": "Border radius for xs size"
+        },
+        "radiusSm": {
+          "description": "Border radius for sm size"
+        },
+        "radiusMd": {
+          "description": "Border radius for md size"
+        },
+        "radiusLg": {
+          "description": "Border radius for lg size"
+        },
+        "radiusXl": {
+          "description": "Border radius for xl size"
+        },
+        "fontSizeXs": {
+          "description": "Font size for xs"
+        },
+        "fontSizeSm": {
+          "description": "Font size for sm"
+        },
+        "fontSizeMd": {
+          "description": "Font size for md"
+        },
+        "fontSizeLg": {
+          "description": "Font size for lg"
+        },
+        "fontSizeXl": {
+          "description": "Font size for xl"
+        },
+        "iconSizeXs": {
+          "description": "Icon size for xs"
+        },
+        "iconSizeSm": {
+          "description": "Icon size for sm"
+        },
+        "iconSizeMd": {
+          "description": "Icon size for md"
+        },
+        "iconSizeLg": {
+          "description": "Icon size for lg"
+        },
+        "iconSizeXl": {
+          "description": "Icon size for xl"
+        },
+        "transition": {
+          "description": "Transition duration"
+        },
+        "spinDuration": {
+          "description": "Loading spinner animation duration"
+        },
+        "focusWidth": {
+          "description": "Focus outline width"
+        },
+        "focusOffset": {
+          "description": "Focus outline offset"
+        }
+      }
+    }
+  },
+  "a11y": {
+    "naming": {
+      "title": "Accessible name",
+      "description": "The Button resolves the accessible name automatically following a strict priority order. Always provide an explicit name for icon-only buttons.",
+      "note": "Icon-only buttons (<code>isIconOnly</code>) <strong>must</strong> have an <code>aria-label</code> or <code>title</code> input. Omitting both makes the button inaccessible.",
+      "rows": {
+        "textLabel": {
+          "description": "Projected text or the <code>label</code> input act as the accessible name without needing any additional attribute."
+        },
+        "iconText": {
+          "description": "The icon automatically receives aria-hidden; the visible text is sufficient as the name."
+        },
+        "iconOnly": {
+          "description": "One of the two is <strong>required</strong>. Priority: <code>aria-label</code> input &gt; <code>title</code> input. The component exposes <code>computedAriaLabel()</code> with the resolved logic."
+        },
+        "iconOnlyLoading": {
+          "description": "The spinner visually replaces the icon but the accessible name persists while the button remains in the DOM."
+        }
+      },
+      "elements": {
+        "textLabel": "Button with text or <code>label</code>",
+        "iconText": "Icon + text",
+        "iconOnly": "Icon only (<code>isIconOnly</code>)",
+        "iconOnlyLoading": "Loading state with icon only"
+      },
+      "info": {
+        "nativeName": "Native name",
+        "ariaLabelTitle": "<code>aria-label</code> / <code>title</code>"
+      }
+    },
+    "states": {
+      "title": "ARIA attributes",
+      "description": "The Button component adds and removes ARIA attributes automatically based on its state. Consumer code does not need to add any additional bindings.",
+      "rows": {
+        "ariaLabel": {
+          "description": "Resolved by <code>computedAriaLabel()</code>. Omitted when the button has visible text (the native name is sufficient)."
+        },
+        "ariaBusy": {
+          "description": "Present when <code>loading=true</code>. Indicates to ATs that the button is processing an operation."
+        },
+        "disabled": {
+          "description": "Applied when <code>disabled=true</code> or when <code>loading=true</code>. Blocks focus and events natively, without needing <code>aria-disabled</code>."
+        },
+        "ariaHidden": {
+          "description": "All icon <code>&lt;i&gt;</code> elements and spinner <code>&lt;span&gt;</code> elements carry <code>aria-hidden</code> so ATs do not read them."
+        }
+      },
+      "elements": {
+        "disabled": "<code>disabled</code> (native)",
+        "ariaHiddenIcons": "<code>aria-hidden=\"true\"</code> on icons"
+      },
+      "info": {
+        "staticValue": "Static"
+      }
+    },
+    "keyboard": {
+      "title": "Keyboard interaction",
+      "description": "The component uses a native <code>&lt;button&gt;</code> element, so the browser provides all keyboard behavior for free.",
+      "note": "When <code>disabled</code> or <code>loading</code> are true, the native <code>disabled</code> attribute is set, which automatically removes the button from the tab order.",
+      "rows": {
+        "tab": {
+          "description": "Moves focus to the button (or away from it). <code>disabled</code> / <code>loading</code> buttons are excluded from the tab order."
+        },
+        "shiftTab": {
+          "description": "Moves focus to the previous element."
+        },
+        "spaceEnter": {
+          "description": "Activates the button. If <code>disabled</code> or <code>loading</code>, the handler intercepts and cancels the event before <code>onClick</code> fires."
+        }
+      }
+    }
+  }
+}

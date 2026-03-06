@@ -1,0 +1,198 @@
+{
+  "title": "FAB Button",
+  "subtitle": "Floating action button with radial layouts and multiple customization options",
+  "basic": {
+    "title": "Basic",
+    "description": "The simplest usage of the FAB Button: expands actions upward in a linear layout when the trigger is clicked."
+  },
+  "directions": {
+    "title": "Directions",
+    "description": "Control where items expand with <code>direction</code>. Available values: <code>up</code>, <code>down</code>, <code>left</code>, <code>right</code> and the four diagonals."
+  },
+  "layouts": {
+    "title": "Layouts",
+    "description": "Define the spatial distribution of items with <code>layout</code>: <code>linear</code> (inline), <code>semi-circle</code> (semicircle), <code>quarter-circle</code> (quarter circle) and <code>circle</code> (full circle)."
+  },
+  "shapes": {
+    "title": "Shapes",
+    "description": "Customize the border radius of the trigger and items with <code>shape</code>: <code>circular</code>, <code>rounded</code> or <code>square</code>."
+  },
+  "colors": {
+    "title": "Colors",
+    "description": "Use any of the 8 semantic system colors with the <code>color</code> input."
+  },
+  "sizes": {
+    "title": "Sizes",
+    "description": "Control the size of the trigger and items with <code>size</code>: <code>xs</code>, <code>sm</code>, <code>md</code> (default), <code>lg</code> and <code>xl</code>."
+  },
+  "animation": {
+    "title": "Animations",
+    "description": "Choose how items enter and exit with <code>animation</code>: <code>scale</code> (default), <code>fade</code> or <code>slide</code>."
+  },
+  "trigger": {
+    "title": "Trigger",
+    "description": "Customize the trigger button with <code>triggerIcon</code>, <code>triggerIconOpen</code> (alternative icon when open), <code>triggerLabel</code> (Extended FAB pattern) and <code>triggerBadge</code> to display a counter."
+  },
+  "loading": {
+    "title": "Loading state",
+    "description": "Shows a spinner on the trigger with <code>[loading]=\"true\"</code>. While active, the trigger does not open or close the dial."
+  },
+  "openOn": {
+    "title": "Open mode",
+    "description": "Control how the dial opens: <code>openOn=\"click\"</code> (default) or <code>openOn=\"hover\"</code> for a speed-dial activated on hover. Keyboard navigation works the same in both modes."
+  },
+  "itemDisplay": {
+    "title": "Item display",
+    "description": "<code>itemDisplay=\"icon\"</code> shows only the icon with a tooltip on hover (default). <code>itemDisplay=\"icon-text\"</code> shows the icon and the item's <code>label</code> property directly visible inside the button."
+  },
+  "closeOptions": {
+    "title": "Close options",
+    "description": "Control when the dial closes: <code>[closeOnItemClick]=\"false\"</code> keeps the dial open after clicking an item (useful for multiple selection), <code>[closeOnOutsideClick]=\"true\"</code> closes on outside click, <code>[closeOnScroll]=\"true\"</code> closes on scroll."
+  },
+  "backdrop": {
+    "title": "Backdrop",
+    "description": "Adds a translucent layer behind the items with <code>[backdrop]=\"true\"</code>, ideal for highlighting actions over dense content."
+  },
+  "templates": {
+    "title": "Custom templates",
+    "description": "Project your own content into the trigger with <code>fabTrigger</code> and into each item with <code>fabItem</code>. Both directives expose the item context via <code>let-item</code> and the dial open state via <code>let-open=\"isOpen\"</code>."
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Input properties to configure the behavior, appearance and layout of the FAB Button."
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Events emitted by the FAB Button component to respond to user interactions."
+    },
+    "computed": {
+      "title": "Computed Properties",
+      "description": "Reactive computed properties (Signals) that expose the resolved internal state of the component."
+    },
+    "types": {
+      "title": "Types",
+      "description": "TypeScript types that define the accepted values for FAB Button inputs."
+    },
+    "item": {
+      "title": "FabButtonItem",
+      "description": "Public interface that defines each menu action. All fields are optional: the only requirement is that the item be identifiable (via <code>id</code>) and have at least an <code>icon</code> or a <code>label</code>."
+    },
+    "itemResolved": {
+      "title": "FabButtonItemResolved",
+      "description": "Internal version of <code>FabButtonItem</code> enriched with four computed fields that the component injects as CSS variables on each <code>&lt;li&gt;</code>. This is the type received in the <code>fabItem</code> template context via <code>let-item</code>."
+    },
+    "directives": {
+      "title": "Template directives",
+      "description": "Standalone directives that allow projecting custom templates into the trigger and into each FAB Button item. They are imported and declared like any Angular standalone directive."
+    },
+    "config": {
+      "title": "Global configuration (FabButtonConfig)",
+      "description": "All global configuration properties available via <code>provideNuiConfig({ config: { fabButton: { … } } })</code>. These values are applied when the corresponding component input is not defined."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Color variables",
+      "description": "CSS variables to customize colors by variant (<code>solid</code>, <code>outline</code>, <code>ghost</code>) and semantic color (<code>primary</code>, <code>secondary</code>, etc.).",
+      "note": "Replace <code>{color}</code> with any system color: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>."
+    },
+    "structure": {
+      "title": "Structural variables",
+      "description": "CSS variables to customize the radial layout, animations, button sizes, backdrop, tooltips and the focus ring."
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Translation tokens",
+      "description": "The FabButton component exposes a single i18n token for the accessible label of the trigger button.",
+      "note": "Override it with <code>provideNuiI18n({ fabButton: { triggerAriaLabel: 'Open actions' } })</code>.",
+      "rows": {
+        "triggerAriaLabel": {
+          "description": "The <code>aria-label</code> applied to the FAB trigger button. Used by screen readers to identify the button when it only shows an icon."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA roles and attributes",
+      "description": "The FabButton follows the WAI-ARIA Menu Button pattern. The trigger announces the open state and the action list is a proper menu.",
+      "elements": {
+        "host": "FAB host (container group)",
+        "trigger": "Trigger button",
+        "menu": "Actions menu",
+        "action": "Individual action item",
+        "icon": "Decorative icon"
+      },
+      "rows": {
+        "roleGroup": {
+          "description": "The FAB host element has <code>role=\"group\"</code> and <code>aria-label</code> so the full widget is announced as a coherent group."
+        },
+        "hostLabel": {
+          "description": "The host's <code>aria-label</code> is taken from the i18n token <code>triggerAriaLabel</code>, providing screen reader users context about the purpose of the FAB."
+        },
+        "expanded": {
+          "description": "The trigger button has <code>aria-expanded</code> reflecting whether the action list is open (<code>true</code>) or closed (<code>false</code>)."
+        },
+        "controls": {
+          "description": "The trigger has <code>aria-controls</code> pointing to the <code>id</code> of the actions menu element."
+        },
+        "haspopup": {
+          "description": "The trigger has <code>aria-haspopup=\"menu\"</code> to indicate that activating it opens a menu."
+        },
+        "roleMenu": {
+          "description": "The actions container has <code>role=\"menu\"</code>."
+        },
+        "roleMenuItem": {
+          "description": "Each individual action has <code>role=\"menuitem\"</code>."
+        },
+        "ariaHiddenIcon": {
+          "description": "Decorative icons inside action items are hidden with <code>aria-hidden=\"true\"</code>."
+        }
+      }
+    },
+    "naming": {
+      "title": "Accessible name",
+      "description": "The trigger button and each action item must have meaningful accessible names for screen reader users.",
+      "note": "Always provide a <code>label</code> or <code>tooltip</code> for each action item — these become the accessible name of the <code>menuitem</code>.",
+      "elements": {
+        "trigger": "Trigger button",
+        "action": "Action item"
+      },
+      "info": {
+        "triggerLabel": "i18n token triggerAriaLabel",
+        "actionLabel": "Action label text / tooltip"
+      },
+      "rows": {
+        "trigger": {
+          "description": "The accessible name of the trigger button comes from the i18n token <code>triggerAriaLabel</code>. Override it in your language to reflect the purpose of the FAB."
+        },
+        "action": {
+          "description": "The accessible name of each action is extracted from its visible label text or, for icon-only actions, from the <code>tooltip</code> input."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Keyboard interaction",
+      "description": "The FabButton follows the WAI-ARIA Menu Button keyboard pattern.",
+      "rows": {
+        "spaceEnter": {
+          "description": "Activates the trigger button, toggling the actions menu open or closed."
+        },
+        "escape": {
+          "description": "Closes the actions menu and returns focus to the trigger button."
+        },
+        "arrowDownUp": {
+          "description": "Moves focus between action items within the open menu."
+        },
+        "homeEnd": {
+          "description": "Moves focus to the first / last action item in the open menu."
+        },
+        "tab": {
+          "description": "Closes the actions menu and moves focus to the next focusable element on the page."
+        }
+      }
+    }
+  }
+}

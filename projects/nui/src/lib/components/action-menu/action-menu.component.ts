@@ -4,7 +4,6 @@ import {
   ChangeDetectionStrategy,
   HostListener,
   booleanAttribute,
-  inject,
   input,
   output,
   computed,
@@ -17,11 +16,11 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
+import { ConnectedPosition } from '@angular/cdk/overlay';
 import { ActionMenuType, ActionMenuItem } from './models/action-menu.model';
 import { ActionMenuItemComponent } from './action-menu-item/action-menu-item.component';
 import { ActionMenuSubmenuComponent } from './action-menu-submenu/action-menu-submenu.component';
 import { ButtonIconPosition, ButtonWidth } from '../button/models/button.model';
-import { FADE_IN_OUT_SCALE } from '../../animations';
 import {
   DEFAULT_COLOR,
   DEFAULT_SIZE,
@@ -31,6 +30,7 @@ import {
 } from '../../configs';
 import { ButtonDirective } from '../button';
 import { injectActionMenuConfig } from '../../configs/action-menu';
+import { dropdownFadeInAnimation } from '../../animations/dropdown-fade-in.animation';
 
 @Component({
   selector: 'nui-action-menu',
@@ -45,7 +45,7 @@ import { injectActionMenuConfig } from '../../configs/action-menu';
     ActionMenuSubmenuComponent,
     ButtonDirective,
   ],
-  animations: [FADE_IN_OUT_SCALE],
+  animations: [dropdownFadeInAnimation],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -91,6 +91,9 @@ export class ActionMenuComponent {
   readonly iconPosition = input<ButtonIconPosition>('start');
   readonly iconSubmenu = input<string>('ri-arrow-right-s-line');
   readonly ariaLabel = input<string>();
+
+  /** Distancia en px entre el trigger y el panel flotante (solo en modo 'dynamic'). */
+  readonly offset = input<number>();
 
   /** Template personalizado para items. */
   readonly itemTemplateInput = input<TemplateRef<any> | undefined>(undefined, {
@@ -148,6 +151,24 @@ export class ActionMenuComponent {
   readonly effectiveItemTemplate = computed(
     () => this.itemTemplateInput() ?? this.itemTemplateQuery()
   );
+
+  readonly effectiveOffset = computed(
+    () => this.offset() ?? this.globalConfig?.offset ?? 4
+  );
+
+  /**
+   * Posiciones del overlay CDK con el offset aplicado.
+   * Replica las posiciones por defecto del CdkMenuTrigger añadiendo offsetY.
+   */
+  readonly menuPositions = computed<ConnectedPosition[]>(() => {
+    const o = this.effectiveOffset();
+    return [
+      { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top',    offsetY:  o },
+      { originX: 'start', originY: 'top',    overlayX: 'start', overlayY: 'bottom', offsetY: -o },
+      { originX: 'end',   originY: 'bottom', overlayX: 'end',   overlayY: 'top',    offsetY:  o },
+      { originX: 'end',   originY: 'top',    overlayX: 'end',   overlayY: 'bottom', offsetY: -o },
+    ];
+  });
 
   /**
    * Combina items de Input + Proyección HTML

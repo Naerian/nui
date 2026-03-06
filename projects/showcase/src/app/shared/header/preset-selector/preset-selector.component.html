@@ -21,22 +21,24 @@
     (backdropClick)="closeDropdown()"
   >
     <div class="preset-dropdown">
-      @for (preset of presets(); track preset) {
-        <button
-          class="preset-item"
-          [class.active]="preset.name === currentPreset"
-          (click)="selectPreset(preset)"
-        >
-          <div
-            class="preset-color-box"
-            [style.background]="'linear-gradient(135deg, ' + preset.colors.join(', ') + ')'"
-          ></div>
-          <span class="preset-name">{{ preset.translationKey | translate }}</span>
-          @if (preset.name === currentPreset) {
-            <i class="ri-check-line"></i>
-          }
-        </button>
-      }
+      <div class="preset-dropdown__list">
+        @for (preset of presets(); track preset) {
+          <button
+            class="preset-item"
+            [class.active]="preset.name === currentPreset"
+            (click)="selectPreset(preset)"
+          >
+            <div
+              class="preset-color-box"
+              [style.background]="'linear-gradient(135deg, ' + preset.colors.join(', ') + ')'"
+            ></div>
+            <span class="preset-name">{{ preset.translationKey | translate }}</span>
+            @if (preset.name === currentPreset) {
+              <i class="ri-check-line"></i>
+            }
+          </button>
+        }
+      </div>
     </div>
   </ng-template>
 </div>

@@ -1,0 +1,464 @@
+{
+  "title": "Action Menu",
+  "subtitle": "Dropdown menu component with support for static, dynamic items and submenus",
+  "basic": {
+    "title": "Basic usage",
+    "description": "Simple action menu with an array of items. Each item can have a label, icon and action.",
+    "note": "Here we see an example of using both <code>type='static'</code> and <code>type='dynamic'</code>.",
+    "consoleNote": "Open DevTools (F12) and check the Console tab to see the actions logged when you click on menu items."
+  },
+  "separators": {
+    "title": "Separators",
+    "description": "Group related actions using visual separators.",
+    "note": "Use items with the <code>separator: true</code> property to add dividing lines between groups of actions. You can add an optional label to the separator using the <code>label</code> property."
+  },
+  "submenu": {
+    "title": "Submenus",
+    "description": "Create nested menus using the <code>children</code> property. Submenus can be nested multiple levels.",
+    "note": "Use the <code>children</code> property to define submenu items. Each child can have its own children for further nesting. <strong>Note:</strong> If a child has <code>selected: true</code>, the parent item will show a visual indicator (vertical line on the left) to aid navigation."
+  },
+  "variants": {
+    "title": "Button variants",
+    "description": "The button supports different variants and colors from the NUI system. The variant affects the button, while the color affects both the color and its content.",
+    "note": "Combine <code>color</code> and <code>variant</code> to customize the appearance of the menu button to your needs."
+  },
+  "sizes": {
+    "title": "Sizes",
+    "description": "Use the five predefined NUI sizes. The size affects the button, but the content will remain the same.",
+    "note": "Use the <code>size</code> input to adjust the size of the menu button and its content using the sizes <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code> and <code>xl</code>."
+  },
+  "label": {
+    "title": "Button content",
+    "description": "Add text to the menu button. It can be combined with icons and supports full width mode.",
+    "note": "Use <code>icon</code> together with <code>label</code> to display both in the button. Use <code>width='full'</code> to make the button occupy the full available width. If you only use <code>label</code> without an icon, the button renders as a simple text button.",
+    "codeTitle1": "Text and icon",
+    "codeTitle2": "Text only",
+    "codeTitle3": "Full width"
+  },
+  "disabled": {
+    "title": "Disabled state",
+    "description": "Disable individual menu items or the entire menu. Disabled items are shown but are not clickable."
+  },
+  "withSubtitle": {
+    "title": "Item subtitle",
+    "description": "Add secondary text below the main label. Useful for displaying additional information such as emails, descriptions or shortcuts."
+  },
+  "selected": {
+    "title": "Selected state",
+    "description": "Mark items as selected to show the current choice. A check icon appears automatically. Perfect for selectors, filters or settings."
+  },
+  "icons": {
+    "title": "Descriptive icons",
+    "description": "Use meaningful icons and labels to communicate the purpose of each action. Icons help users quickly identify actions.",
+    "note": "Use relevant icons from the <strong>Remix Icon</strong> library to improve visual understanding of menu actions."
+  },
+  "badge": {
+    "title": "Badge",
+    "description": "Display a counter or numeric label on menu items using the <code>badge</code> property. Ideal for notifications, pending counters or any visual indicator.",
+    "note": "The <code>badge</code> renders as a pill positioned at the far right of the item. Screen readers access the badge value through the button's <code>aria-label</code> (e.g. \"Messages (3)\"), while the visual pill is hidden with <code>aria-hidden</code>."
+  },
+  "template": {
+    "title": "Custom template",
+    "description": "Fully customize the rendering of the menu using templates and directives.",
+    "note": "The <code>#item</code> template receives the full item as context (<code>let-item</code>). The <code>menu-header</code> and <code>menu-footer</code> directives allow a simple and clear syntax, avoiding unnecessary ng-templates. <br/><br/> <strong>Important:</strong> When using custom templates, you must handle the click event manually with <code>(click)=\"handleAction(item)\"</code>. The <code>onItemAction</code> event is only emitted automatically with default items."
+  },
+  "api": {
+    "inputs": {
+      "title": "Component inputs",
+      "description": "Input properties that modify the behavior and appearance of the action menu.",
+      "rows": {
+        "items": {
+          "description": "Array of menu items"
+        },
+        "type": {
+          "description": "Menu rendering mode"
+        },
+        "color": {
+          "description": "Trigger button color"
+        },
+        "size": {
+          "description": "Trigger button size"
+        },
+        "variant": {
+          "description": "Trigger button variant"
+        },
+        "width": {
+          "description": "Trigger button width"
+        },
+        "disabled": {
+          "description": "Disabled state of the menu"
+        },
+        "title": {
+          "description": "Button title (title attribute)"
+        },
+        "label": {
+          "description": "Trigger button text"
+        },
+        "icon": {
+          "description": "Button icon (Remix Icon)"
+        },
+        "iconPosition": {
+          "description": "Icon position"
+        },
+        "iconSubmenu": {
+          "description": "Icon to indicate submenu"
+        },
+        "ariaLabel": {
+          "description": "Accessibility label"
+        },
+        "itemTemplate": {
+          "description": "Custom template for items"
+        },
+        "offset": {
+          "description": "Distance in pixels between the trigger and the floating menu panel (dynamic mode only)"
+        }
+      }
+    },
+    "outputs": {
+      "title": "Component outputs",
+      "description": "Events emitted by the component that you can listen to in order to react to user interactions.",
+      "rows": {
+        "onItemAction": {
+          "description": "Emitted when an item is clicked"
+        },
+        "onSelectionChange": {
+          "description": "Emitted when the selection changes (selector mode)"
+        },
+        "menuOpen": {
+          "description": "Emitted when the menu opens"
+        },
+        "menuClose": {
+          "description": "Emitted when the menu closes"
+        }
+      }
+    },
+    "interface": {
+      "title": "ActionMenuItem Interface",
+      "description": "Full structure of a menu item with all available properties.",
+      "rows": {
+        "action": {
+          "description": "Unique action identifier"
+        },
+        "label": {
+          "description": "Visible text of the item"
+        },
+        "subtitle": {
+          "description": "Secondary text below the label"
+        },
+        "title": {
+          "description": "Text for the title attribute (tooltip)"
+        },
+        "icon": {
+          "description": "RemixIcon icon class"
+        },
+        "shortcut": {
+          "description": "Keyboard shortcut (visual only)"
+        },
+        "templateRef": {
+          "description": "Custom template for the item"
+        },
+        "id": {
+          "description": "Unique item ID (auto-generated)"
+        },
+        "children": {
+          "description": "Child items for creating submenus"
+        },
+        "disabled": {
+          "description": "Whether the item is disabled"
+        },
+        "selected": {
+          "description": "Whether the item is selected (shows checkmark)"
+        },
+        "separator": {
+          "description": "Whether it is a visual separator"
+        },
+        "onAction": {
+          "description": "Callback when the item is clicked"
+        },
+        "data": {
+          "description": "Additional custom data for use with TemplateRef<any>"
+        },
+        "badge": {
+          "description": "Badge or counter to display"
+        }
+      }
+    }
+  },
+  "theming": {
+    "structure": {
+      "title": "Structural variables",
+      "description": "CSS variables that control dimensions, spacing, borders and shadows of the menu.",
+      "rows": {
+        "minWidth": {
+          "description": "Minimum width of the menu"
+        },
+        "maxWidth": {
+          "description": "Maximum width of the menu"
+        },
+        "borderWidth": {
+          "description": "Menu border thickness"
+        },
+        "borderColor": {
+          "description": "Menu border color"
+        },
+        "borderRadius": {
+          "description": "Menu corner radius"
+        },
+        "padding": {
+          "description": "Inner padding of the menu"
+        },
+        "shadow": {
+          "description": "Dropdown menu shadow"
+        },
+        "staticShadow": {
+          "description": "Static menu shadow"
+        },
+        "itemGap": {
+          "description": "Space between item elements"
+        },
+        "itemBorder": {
+          "description": "Item border"
+        },
+        "itemBorderRadius": {
+          "description": "Item corner radius"
+        },
+        "itemPaddingY": {
+          "description": "Item vertical padding"
+        },
+        "itemPaddingX": {
+          "description": "Item horizontal padding"
+        },
+        "itemLabelMarginRight": {
+          "description": "Label right margin"
+        },
+        "focusOutlineWidth": {
+          "description": "Focus outline width"
+        },
+        "focusOutlineOffset": {
+          "description": "Focus outline offset"
+        },
+        "arrowPaddingLeft": {
+          "description": "Arrow left padding"
+        },
+        "transition": {
+          "description": "State transitions"
+        }
+      }
+    },
+    "items": {
+      "title": "Item variables",
+      "description": "CSS variables to customize the appearance of items, separators, shortcuts and internal elements.",
+      "rows": {
+        "subtitleColor": {
+          "description": "Secondary text color"
+        },
+        "subtitleFontSize": {
+          "description": "Subtitle font size"
+        },
+        "labelWeight": {
+          "description": "Label font weight"
+        },
+        "labelFontSize": {
+          "description": "Label font size"
+        },
+        "separatorColor": {
+          "description": "Separator color"
+        },
+        "separatorPadding": {
+          "description": "Separator padding"
+        },
+        "separatorLabelColor": {
+          "description": "Separator label color"
+        },
+        "separatorLabelSpacing": {
+          "description": "Separator label spacing"
+        },
+        "separatorFontSize": {
+          "description": "Separator font size"
+        },
+        "separatorFontWeight": {
+          "description": "Separator font weight"
+        },
+        "shortcutBg": {
+          "description": "Shortcut background"
+        },
+        "shortcutColor": {
+          "description": "Shortcut text color"
+        },
+        "shortcutPadding": {
+          "description": "Shortcut padding"
+        },
+        "shortcutBorderWidth": {
+          "description": "Shortcut border thickness"
+        },
+        "shortcutBorderColor": {
+          "description": "Shortcut border color"
+        },
+        "shortcutBorderRadius": {
+          "description": "Shortcut corner radius"
+        },
+        "shortcutFontSize": {
+          "description": "Shortcut font size"
+        },
+        "notifySelectedSize": {
+          "description": "Selected child indicator size"
+        },
+        "notifySelectedRadius": {
+          "description": "Selected child indicator radius"
+        }
+      }
+    },
+    "colors": {
+      "title": "Color variables",
+      "description": "CSS variable pattern to customize menu item colors by state.",
+      "note": "Replace <code>{color}</code> with any NUI semantic color (<code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>) to customize item appearance in different states.",
+      "rows": {
+        "bg": {
+          "description": "Item background in normal state"
+        },
+        "text": {
+          "description": "Item text color"
+        },
+        "hoverBg": {
+          "description": "Item background on hover"
+        },
+        "hoverText": {
+          "description": "Text color on hover"
+        },
+        "activeBg": {
+          "description": "Item background on active"
+        },
+        "selectedBg": {
+          "description": "Selected item background"
+        },
+        "selectedText": {
+          "description": "Selected item text color"
+        },
+        "notifySelected": {
+          "description": "Selected child indicator color"
+        }
+      }
+    }
+  },
+  "styling": {
+    "title": "Styles and customization",
+    "description": "Customize the appearance of the menu using CSS variables. Control colors, spacing, typography and more."
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA roles and attributes",
+      "description": "The Action Menu applies the following ARIA attributes following the menu pattern from the ARIA Authoring Practices Guide (APG).",
+      "rows": {
+        "haspopup": {
+          "description": "Announces to assistive technologies that activating this button will open a menu."
+        },
+        "expanded": {
+          "description": "Reflects the open/closed state of the menu. Updated automatically on every interaction."
+        },
+        "controls": {
+          "description": "Links the trigger button to the menu container it controls via matching IDs."
+        },
+        "roleMenu": {
+          "description": "Identifies the dropdown container as a menu widget."
+        },
+        "orientation": {
+          "description": "Specifies that items are arranged vertically (default menu layout)."
+        },
+        "labelledby": {
+          "description": "In dynamic mode, links the menu container to its trigger button providing an accessible name."
+        },
+        "roleItem": {
+          "description": "Default role for interactive items. Changes to menuitemradio when the item belongs to a selection group."
+        },
+        "ariaChecked": {
+          "description": "Present only in selection mode. Reflects whether this item is the current selection."
+        },
+        "keyshortcuts": {
+          "description": "Exposes the keyboard shortcut text displayed visually alongside the item."
+        },
+        "roleSeparator": {
+          "description": "Identifies the visual divider between groups of menu items."
+        },
+        "ariaHiddenIcon": {
+          "description": "Prevents decorative icons from being announced by screen readers."
+        }
+      },
+      "elements": {
+        "trigger": "<code>&lt;button&gt;</code> (trigger)",
+        "menu": "<code>&lt;div&gt;</code> (menu)",
+        "menuDynamic": "<code>&lt;div&gt;</code> (menu, dynamic mode)",
+        "item": "<code>&lt;button&gt;</code> (item)",
+        "itemSelectable": "<code>&lt;button&gt;</code> (selectable item)",
+        "separator": "<code>&lt;div&gt;</code> (separator)",
+        "icon": "<code>&lt;i&gt;</code> (icon)"
+      }
+    },
+    "naming": {
+      "title": "Accessible name",
+      "description": "The trigger button resolves its accessible name following a priority cascade. Always provide an explicit accessible name for trigger buttons that only show an icon.",
+      "note": "Icon-only menus (without a label) must have <code>ariaLabel</code> or <code>title</code> configured. Without a visible text label, assistive technologies cannot identify the purpose of the menu.",
+      "rows": {
+        "triggerLabel": {
+          "description": "The <code>label</code> input renders as the button's inner text, which natively becomes the accessible name."
+        },
+        "triggerAriaLabel": {
+          "description": "The <code>ariaLabel</code> input is applied as the <code>aria-label</code> attribute and takes priority over <code>label</code> and <code>title</code>."
+        },
+        "triggerIconOnly": {
+          "description": "If neither <code>ariaLabel</code> nor <code>label</code> is provided, the <code>title</code> input is used as the accessible name via the browser tooltip."
+        },
+        "itemLabel": {
+          "description": "The <code>aria-label</code> of each menu item is resolved from <code>item.title || item.label</code> to ensure screen readers announce the correct text."
+        },
+        "menuLabelledby": {
+          "description": "In dynamic mode, the menu container references the trigger's ID via <code>aria-labelledby</code>, making their association explicit."
+        }
+      },
+      "elements": {
+        "triggerWithLabel": "Trigger with <code>label</code>",
+        "triggerWithAriaLabel": "Trigger with <code>ariaLabel</code>",
+        "triggerIconOnly": "Icon-only trigger",
+        "menuItem": "Menu item",
+        "menuContainer": "Menu container (dynamic)"
+      },
+      "info": {
+        "nativeName": "Native name",
+        "titleFallback": "<code>title</code> as fallback"
+      }
+    },
+    "keyboard": {
+      "title": "Keyboard interaction",
+      "description": "The Action Menu implements the full APG menu keyboard pattern. Arrow keys navigate between items; Escape and ArrowLeft close menus.",
+      "note": "<kbd>ArrowDown</kbd>, <kbd>ArrowUp</kbd>, <kbd>Home</kbd> and <kbd>End</kbd> call <code>preventDefault()</code> to prevent page scrolling while navigating the menu.",
+      "rows": {
+        "tab": {
+          "description": "Moves focus to the trigger button. When the menu is open, Tab closes it and returns focus to the trigger."
+        },
+        "spaceEnter": {
+          "description": "Opens the menu when focus is on the trigger. Activates the focused menu item when inside the menu."
+        },
+        "escape": {
+          "description": "Closes the open menu and returns focus to the trigger button."
+        },
+        "arrowDown": {
+          "description": "Moves focus to the next menu item. Wraps from the last item to the first."
+        },
+        "arrowUp": {
+          "description": "Moves focus to the previous menu item. Wraps from the first item to the last."
+        },
+        "home": {
+          "description": "Moves focus to the first menu item."
+        },
+        "end": {
+          "description": "Moves focus to the last menu item."
+        },
+        "arrowRight": {
+          "description": "Opens the submenu of the focused item and moves focus to its first item."
+        },
+        "arrowLeft": {
+          "description": "Closes the current submenu and returns focus to the parent item."
+        }
+      }
+    }
+  }
+}

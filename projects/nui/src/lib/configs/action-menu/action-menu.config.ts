@@ -10,6 +10,8 @@ export interface ActionMenuGlobalConfig {
   color?: NUIColor;
   size?: NUISize;
   variant?: NUIVariant;
+  /** Distancia en píxeles entre el trigger y el panel del menú. */
+  offset?: number;
 }
 
 /**
@@ -19,6 +21,7 @@ export const DEFAULT_ACTION_MENU_CONFIG: ActionMenuGlobalConfig = {
   color: 'primary',
   size: 'md',
   variant: 'solid',
+  offset: 5,
 };
 
 /**

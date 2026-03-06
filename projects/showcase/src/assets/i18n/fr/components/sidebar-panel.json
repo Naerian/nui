@@ -1,0 +1,233 @@
+{
+  "title": "Panneau latéral",
+  "subtitle": "Panneaux latéraux coulissants avec CDK Overlay pour afficher du contenu dynamique",
+  "examples": {
+    "basic": {
+      "title": "Utilisation basique",
+      "description": "Ouvrez un panneau latéral depuis le SidebarPanelService. Le panneau coulisse depuis le bord de l'écran avec une animation fluide."
+    },
+    "defaults": {
+      "title": "Configuration par défaut",
+      "description": "Le panneau s'ouvrira en utilisant les valeurs par défaut globales configurées.",
+      "note": "Si aucune option n'est fournie lors de l'ouverture du panneau, les valeurs par défaut globales définies dans la configuration NUI via <code>provideNUI({ sidebarPanel: {...} })</code> seront utilisées."
+    },
+    "sizes": {
+      "title": "Tailles",
+      "description": "Permet de définir la taille avec laquelle le panneau s'ouvrira.",
+      "note": "Vous pouvez utiliser des valeurs prédéfinies comme <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> et <code>'full'</code>. Sur <code>mobile</code>, la taille <code>'full'</code> sera appliquée automatiquement pour assurer une expérience optimale sur les appareils mobiles."
+    },
+    "positions": {
+      "title": "Positions",
+      "description": "Contrôlez depuis quel côté de l'écran le panneau coulisse.",
+      "note": "Utilisez la propriété <code>position</code> pour définir le côté depuis lequel le panneau s'ouvrira avec <code>'right'</code>, <code>'left'</code>, <code>'top'</code> ou <code>'bottom'</code> comme valeurs."
+    },
+    "html-content": {
+      "title": "Contenu HTML personnalisé",
+      "description": "Rendez du contenu HTML arbitraire dans le panneau en utilisant des templates Angular.",
+      "note": "Utilisez la propriété <code>htmlContent</code> pour passer une chaîne HTML. Vous pouvez générer le HTML dynamiquement ou le concaténer avec vos données. Cette option ne nécessite pas la création d'un composant Angular complet."
+    },
+    "template-content": {
+      "title": "Contenu template personnalisé (TemplateRef)",
+      "description": "Utilisez des templates Angular avec des données de contexte et des fonctions sans nécessiter un composant complet. Idéal pour du contenu réutilisable avec des données dynamiques.",
+      "note": "Utilisez la propriété <code>contentTemplate</code> pour passer un <code>TemplateRef</code> et <code>templateContext</code> pour passer des données et des fonctions. Le template reçoit le contexte via des variables <code>let-varname</code>. Cela permet l'interactivité sans créer un composant."
+    },
+    "dynamic-component": {
+      "title": "Composant dynamique",
+      "description": "Chargez n'importe quel composant Angular dans le panneau et passez des données via l'injection de dépendances",
+      "note": "Utilisez la propriété <code>data</code> pour passer des données au composant chargé dynamiquement. Ces données sont injectées en utilisant le token <code>SIDEBAR_PANEL_DATA</code>. Si vous souhaitez également référencer le panneau lui-même depuis le composant chargé, vous pouvez injecter <code>SIDEBAR_PANEL_REF</code>."
+    },
+    "dynamic-component-events": {
+      "title": "Événements @Outputs du composant dynamique",
+      "description": "Écoutez les événements émis par le composant chargé dans le panneau pour gérer les interactions et fermer le panneau si nécessaire.",
+      "note": "Vous pouvez vous abonner aux sorties du composant chargé dynamiquement. Utilisez <code>panelRef.componentInstance</code> pour accéder à l'instance du composant enfant et vous abonner à ses <code>@Output()</code>."
+    },
+    "minimizable": {
+      "title": "Panneau réductible",
+      "description": "Les panneaux peuvent être réduits à un onglet <strong>qui sera situé du côté depuis lequel la barre latérale s'ouvre</strong> pour libérer de l'espace à l'écran tout en préservant l'état, et peuvent être restaurés à volonté.",
+      "note": "Utilisez l'attribut <code>minimizable</code> pour rendre la barre latérale réductible. De plus, vous pouvez utiliser la méthode <code>minimize()</code> de SidebarPanel pour réduire le panneau programmatiquement et <code>restore()</code> pour le restaurer. Si <code>minimizable</code> est activé, l'attribut <code>id</code> est requis pour identifier le panneau réduit. Vous pouvez également vérifier si la barre latérale est réduite via <code>isMinimized</code>.<br><br><strong>Personnalisation de l'onglet :</strong> Vous pouvez personnaliser l'icône, ajouter du texte, appliquer des CSS personnalisés ou utiliser un template entièrement personnalisé via <code>minimizedTabCustomization</code>. Pour les boutons flottants avec positionnement libre (ex. : chat en bas à droite), utilisez <code>standalone: true</code> pour rendre en dehors du conteneur groupé et éviter les restrictions de positionnement. Les styles de boutons doivent être au niveau global pour éviter l'encapsulation dans le composant appelant."
+    },
+    "close-button": {
+      "title": "Bouton de fermeture",
+      "description": "Contrôlez la visibilité du bouton de fermeture dans l'en-tête du panneau.",
+      "note": "Utilisez la propriété <code>showCloseButton</code> pour afficher ou masquer le bouton de fermeture dans l'en-tête du panneau."
+    },
+    "backdrop": {
+      "title": "Fond d'écran",
+      "description": "Ajoute un fond sombre derrière le panneau pour créer une expérience similaire à une boîte de dialogue modale. Contrôlez si un clic sur le fond ferme le panneau.",
+      "note": "Utilisez la propriété <code>hasBackdrop</code> pour activer/désactiver le fond (défaut <code>true</code>) et <code>closeOnBackdropClick</code> pour contrôler si un clic sur le fond ferme le panneau."
+    },
+    "custom-backdrop": {
+      "title": "Fond d'écran personnalisé",
+      "description": "Personnalisez le fond avec des classes CSS personnalisées. Vous pouvez appliquer des effets comme le flou, des couleurs personnalisées et des transitions.",
+      "note": "Utilisez la propriété <code>backdropClass</code> pour ajouter des classes CSS personnalisées au fond du panneau. Vous pouvez ajouter une seule classe ou un <code>tableau</code> de classes."
+    },
+    "multiple": {
+      "title": "Plusieurs panneaux",
+      "description": "Ouvrez plusieurs panneaux simultanément depuis différents côtés. Contrôlez l'empilement avec z-index et fermez-les tous en même temps.",
+      "note": "Chaque panneau ouvert est indépendant et peut avoir sa propre configuration. Utilisez la méthode <code>closeAll()</code> du <code>SidebarPanelService</code> pour fermer programmatiquement tous les panneaux ouverts simultanément."
+    },
+    "footer-actions": {
+      "title": "Actions de pied de page",
+      "description": "Ajoutez des boutons d'action dans le pied de page du panneau.",
+      "note": "Utilisez <code>customButtons</code> pour des actions simples ou <code>footerTemplate</code> pour des dispositions entièrement personnalisées. Vous pouvez combiner plusieurs boutons avec les différentes variantes et couleurs NUI."
+    },
+    "child-footer-actions": {
+      "title": "Actions depuis le composant enfant",
+      "description": "Le composant enfant peut enregistrer ses propres actions de pied de page en utilisant SidebarPanelActionsService.",
+      "note": "Cette approche est idéale pour les formulaires où l'enfant gère toute la logique (validation, sauvegarde, états). Le composant enfant injecte <code>SidebarPanelActionsService</code> et enregistre des actions via <code>register()</code>. Les actions peuvent avoir des états réactifs (désactivé, chargement) et exécuter une logique complexe."
+    }
+  },
+  "api": {
+    "service": {
+      "title": "SidebarPanelService",
+      "description": "Méthodes de service pour gérer les panneaux latéraux"
+    },
+    "ref-properties": {
+      "title": "SidebarPanelRef (Propriétés)",
+      "description": "Propriétés de la référence du panneau latéral"
+    },
+    "ref-methods": {
+      "title": "SidebarPanelRef (Méthodes)",
+      "description": "Méthodes de référence du panneau latéral pour le contrôle et les événements"
+    },
+    "config": {
+      "title": "SidebarPanelConfig",
+      "description": "Configuration complète du panneau latéral"
+    },
+    "custom-button": {
+      "title": "SidebarPanelCustomButton",
+      "description": "Configuration du bouton personnalisé de pied de page"
+    },
+    "minimized-tab": {
+      "title": "MinimizedTabCustomization",
+      "description": "Personnalisation de l'onglet quand le panneau est réduit"
+    },
+    "footer-actions": {
+      "title": "SidebarPanelAction",
+      "description": "Définition des actions enregistrées depuis les composants enfants pour le pied de page du panneau"
+    },
+    "footer-actions-service": {
+      "title": "SidebarPanelActionsService",
+      "description": "Service pour les composants enfants pour enregistrer des actions dans le pied de page du panneau"
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Variables de couleurs",
+      "description": "Variables CSS pour contrôler les couleurs du panneau latéral : fond, texte, bordures et superposition. Ces variables s'adaptent automatiquement au mode clair/sombre du thème actif."
+    },
+    "layout": {
+      "title": "Variables de disposition",
+      "description": "Variables CSS pour contrôler la taille et l'espacement du panneau latéral : préréglages de taille prédéfinis (xs à full) et rembourrage de l'en-tête et du contenu"
+    },
+    "typography": {
+      "title": "Variables typographiques",
+      "description": "Variables CSS pour contrôler la typographie du titre du panneau latéral"
+    },
+    "elevation": {
+      "title": "Variables d'élévation",
+      "description": "Variables CSS pour contrôler l'ombre et le z-index du panneau latéral et de la superposition"
+    },
+    "scrollbar": {
+      "title": "Variables de barre de défilement",
+      "description": "Variables CSS pour contrôler l'apparence de la barre de défilement du panneau latéral"
+    },
+    "examples": {
+      "title": "Exemples de personnalisation",
+      "description": "Exemples SCSS pour personnaliser les styles du panneau latéral dans votre application"
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Tokens de traduction",
+      "description": "Le composant SidebarPanel utilise des tokens NuiI18nService génériques pour les boutons de contrôle.",
+      "note": "Tous les tokens sont partagés entre plusieurs composants. Remplacez-les globalement avec <code>provideNuiI18n({...})</code>.",
+      "rows": {
+        "close": {
+          "description": "Libellé accessible pour le bouton de fermeture."
+        },
+        "minimize": {
+          "description": "Libellé accessible pour le bouton de réduction."
+        },
+        "restore": {
+          "description": "Libellé accessible pour le bouton de restauration, visible quand le panneau est réduit."
+        },
+        "expand": {
+          "description": "Libellé accessible pour le bouton d'agrandissement."
+        },
+        "collapse": {
+          "description": "Libellé accessible pour le bouton de réduction."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "Rôles et attributs ARIA",
+      "description": "Le SidebarPanel implémente un modèle accessible similaire à une boîte de dialogue pour que les lecteurs d'écran le reconnaissent comme une zone de contenu distincte.",
+      "elements": {
+        "panel": "Élément racine du panneau",
+        "closeButton": "Bouton de fermeture",
+        "minimizeButton": "Bouton de réduction / restauration",
+        "expandButton": "Bouton d'agrandissement / réduction",
+        "backdrop": "Superposition de fond"
+      },
+      "rows": {
+        "panelRole": {
+          "description": "La racine du panneau porte <code>role=\"dialog\"</code> pour signaler une région distincte aux technologies d'assistance."
+        },
+        "ariaLabelledby": {
+          "description": "<code>aria-labelledby</code> pointe vers l'élément titre du panneau, donnant à la boîte de dialogue un nom accessible dérivé du titre visible."
+        },
+        "closeLabel": {
+          "description": "Le bouton de fermeture utilise le token i18n <code>close</code> comme <code>aria-label</code>."
+        },
+        "minimizeLabel": {
+          "description": "Le bouton de réduction/restauration expose le token i18n correspondant (<code>minimize</code> ou <code>restore</code>) comme <code>aria-label</code> selon l'état."
+        },
+        "expandLabel": {
+          "description": "Le bouton d'agrandissement/réduction expose le token correspondant (<code>expand</code> ou <code>collapse</code>) comme <code>aria-label</code>."
+        },
+        "backdropHidden": {
+          "description": "La superposition de fond est masquée des technologies d'assistance avec <code>aria-hidden=\"true\"</code>."
+        }
+      }
+    },
+    "naming": {
+      "title": "Nom accessible",
+      "description": "Le nom accessible du panneau est obtenu depuis son titre visible via <code>aria-labelledby</code>. Les boutons de contrôle sont étiquetés avec des tokens i18n.",
+      "note": "Fournissez toujours un titre visible dans le panneau, car il devient automatiquement le nom de la boîte de dialogue.",
+      "elements": {
+        "panelWithTitle": "Panneau avec titre",
+        "controlButtons": "Boutons de contrôle"
+      },
+      "info": {
+        "ariaLabelledby": "Titre du panneau (aria-labelledby)",
+        "i18nTokens": "Tokens i18n pour les libellés de boutons"
+      },
+      "rows": {
+        "title": {
+          "description": "Le titre visible du panneau fournit le nom accessible de la région <code>role=\"dialog\"</code>."
+        },
+        "buttons": {
+          "description": "Les boutons de contrôle (fermer, réduire, agrandir) utilisent des tokens i18n comme libellés accessibles."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Interaction clavier",
+      "description": "Le SidebarPanel supporte la navigation au clavier pour tous les contrôles interactifs.",
+      "rows": {
+        "escape": {
+          "description": "Ferme le panneau en mode modal, retournant le focus à l'élément qui l'a ouvert."
+        },
+        "tab": {
+          "description": "Cycle le focus entre les éléments interactifs du panneau. Le focus est piégé quand le panneau est ouvert en mode modal."
+        },
+        "spaceEnter": {
+          "description": "Active le bouton de contrôle focalisé (fermer, réduire, agrandir)."
+        }
+      }
+    }
+  }
+}

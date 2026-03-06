@@ -1,0 +1,233 @@
+{
+  "title": "Sidebar Panel",
+  "subtitle": "Paneles laterales deslizantes con CDK Overlay para mostrar contenido dinámico",
+  "examples": {
+    "basic": {
+      "title": "Uso básico",
+      "description": "Abre un panel lateral desde el servicio SidebarPanelService. El panel se desliza desde el borde de la pantalla con una animación suave."
+    },
+    "defaults": {
+      "title": "Configuración predeterminada",
+      "description": "El panel se abrirá utilizando los valores predeterminados globales configurados.",
+      "note": "Si no se proporcionan opciones al abrir el panel, se usarán los valores predeterminados globales definidos en la configuración de NUI de <code>provideNUI({ sidebarPanel: {...} })</code>."
+    },
+    "sizes": {
+      "title": "Tamaños",
+      "description": "Permite definir el tamaño con el que se abrirá el panel.",
+      "note": "Puedes usar valores predefinidos como <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> y <code>'full'</code>. En <code>mobile</code> se aplicará automáticamente el tamaño <code>'full'</code> para garantizar una experiencia óptima en dispositivos móviles."
+    },
+    "positions": {
+      "title": "Posiciones",
+      "description": "Controla desde qué lado de la pantalla se desliza el panel.",
+      "note": "Usa la propiedad <code>position</code> para definir el lado desde el que se abrirá el panel usando <code>'right'</code>, <code>'left'</code>, <code>'top'</code> o <code>'bottom'</code> como valores."
+    },
+    "html-content": {
+      "title": "Contenido HTML personalizado",
+      "description": "Renderiza contenido HTML arbitrario dentro del panel usando templates de Angular.",
+      "note": "Usa la propiedad <code>htmlContent</code> para pasar una cadena HTML. Puedes generar el HTML dinámicamente o concatenarlo con tus datos. Esta opción no requiere crear un componente Angular completo."
+    },
+    "template-content": {
+      "title": "Contenido de plantilla personalizada (TemplateRef)",
+      "description": "Usa templates de Angular con datos de contexto y funciones sin necesidad de un componente completo. Ideal para contenido reutilizable con datos dinámicos.",
+      "note": "Usa la propiedad <code>contentTemplate</code> para pasar un <code>TemplateRef</code> y <code>templateContext</code> para pasar datos y funciones. El template recibe el contexto mediante variables <code>let-varname</code>. Esto permite interactividad sin crear un componente."
+    },
+    "dynamic-component": {
+      "title": "Componente dinámico",
+      "description": "Carga cualquier componente Angular dentro del panel y pasa datos mediante inyección de dependencias",
+      "note": "Usa la propiedad <code>data</code> para pasar datos al componente cargado dinámicamente. Estos datos se inyectan usando el token <code>SIDEBAR_PANEL_DATA</code>. Si además queremos hacer referencia al propio panel desde el componente cargado, podemos inyectar <code>SIDEBAR_PANEL_REF</code>."
+    },
+    "dynamic-component-events": {
+      "title": "Eventos @Outputs de componentes dinámicos",
+      "description": "Escucha eventos emitidos por el componente cargado dentro del panel para manejar interacciones y cerrar el panel cuando sea necesario.",
+      "note": "Puedes suscribirte a los outputs del componente cargado dinámicamente. Usa <code>panelRef.componentInstance</code> para acceder a la instancia del componente hijo y suscribirte a sus <code>@Output()</code>."
+    },
+    "minimizable": {
+      "title": "Panel minimizable",
+      "description": "Los paneles pueden minimizarse a una pestaña que <strong>quedará ubicada en el lugar desde el que se abre el Sidebar</strong> para liberar espacio en pantalla mientras se preserva el estado, pudiendo restaurarlo cuando se desee.",
+      "note": "Utiliza el atributo <code>minimizable</code> para convertir el Sidebar en minimizable. Además, podrás usar el método <code>minimize()</code> del SidebarPanel para minimizar el panel programáticamente y <code>restore()</code> para restaurarlo. Si <code>minimizable</code> está habilitado, el atributo <code>id</code> es obligatorio para identificar el panel minimizado. También puedes comprobar si el Sidebar está minimizado mediante <code>isMinimized</code>.<br><br><strong>Customización de pestañas:</strong> Puedes personalizar el icono, agregar texto, aplicar CSS personalizado o usar un template completamente custom mediante <code>minimizedTabCustomization</code>. Para botones flotantes con posicionamiento libre (ej: chat bottom-right), usa <code>standalone: true</code> para renderizar fuera del contenedor agrupado y evitar restricciones de posicionamiento. Los estilos del botón deberán de ir a nivel global para evitar que queden encapsulados en el componente que lo llama."
+    },
+    "close-button": {
+      "title": "Botón de cerrar",
+      "description": "Controla la visibilidad del botón de cerrar en el header del panel.",
+      "note": "Usa la propiedad <code>showCloseButton</code> para mostrar u ocultar el botón de cerrar en el header del panel."
+    },
+    "backdrop": {
+      "title": "Backdrop",
+      "description": "Agrega un fondo oscuro detrás del panel para crear una experiencia modal. Controla si el click en el backdrop cierra o no el panel.",
+      "note": "Usa la propiedad <code>hasBackdrop</code> para habilitar / deshabilitar el backdrop (por defecto <code>true</code>) y <code>closeOnBackdropClick</code> para controlar si el click en el backdrop cierra el panel."
+    },
+    "custom-backdrop": {
+      "title": "Backdrop personalizado",
+      "description": "Personaliza el backdrop con clases CSS custom. Puedes aplicar efectos como blur, colores personalizados y transiciones.",
+      "note": "Usa la propiedad <code>backdropClass</code> para agregar clases CSS personalizadas al backdrop del panel. Puedes añadir una única clase o un <code>array</code> de clases."
+    },
+    "multiple": {
+      "title": "Múltiples paneles",
+      "description": "Abre múltiples paneles simultáneamente desde diferentes lados. Controla el apilamiento con z-index y cierra todos a la vez.",
+      "note": "Cada panel abierto es independiente y puede tener su propia configuración. Usa el método <code>closeAll()</code> del servicio <code>SidebarPanelService</code> para cerrar todos los paneles abiertos programáticamente de forma simultánea."
+    },
+    "footer-actions": {
+      "title": "Acciones en el footer",
+      "description": "Agrega botones de acción en el footer del panel.",
+      "note": "Usa <code>customButtons</code> para acciones simples o <code>footerTemplate</code> para layouts completamente personalizados. Puedes combinar múltiples botones con las diferentes variantes y colores de NUI."
+    },
+    "child-footer-actions": {
+      "title": "Acciones desde componente hijo",
+      "description": "El componente hijo puede registrar sus propias acciones de footer usando SidebarPanelActionsService.",
+      "note": "Esta aproximación es ideal para formularios donde el hijo maneja toda la lógica (validación, guardado, estados). El componente hijo inyecta <code>SidebarPanelActionsService</code> y registra las acciones mediante <code>register()</code>. Las acciones pueden tener estados reactivos (disabled, loading) y ejecutar lógica compleja."
+    }
+  },
+  "api": {
+    "service": {
+      "title": "SidebarPanelService",
+      "description": "Métodos del servicio para gestionar paneles laterales"
+    },
+    "ref-properties": {
+      "title": "SidebarPanelRef (Propiedades)",
+      "description": "Propiedades de la referencia del panel lateral"
+    },
+    "ref-methods": {
+      "title": "SidebarPanelRef (Métodos)",
+      "description": "Métodos de la referencia del panel lateral para control y eventos"
+    },
+    "config": {
+      "title": "SidebarPanelConfig",
+      "description": "Configuración completa del panel lateral"
+    },
+    "custom-button": {
+      "title": "SidebarPanelCustomButton",
+      "description": "Configuración de botones personalizados del footer"
+    },
+    "minimized-tab": {
+      "title": "MinimizedTabCustomization",
+      "description": "Customización de la pestaña cuando el panel está minimizado"
+    },
+    "footer-actions": {
+      "title": "SidebarPanelAction",
+      "description": "Definición de acciones registradas desde componentes hijos para el footer del panel"
+    },
+    "footer-actions-service": {
+      "title": "SidebarPanelActionsService",
+      "description": "Servicio para que los componentes hijos puedan registrar acciones en el footer del panel"
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Variables de color",
+      "description": "Variables CSS para controlar los colores del panel lateral: fondo, texto, bordes y overlay. Estas variables se adaptan automáticamente al modo claro/oscuro del tema activo."
+    },
+    "layout": {
+      "title": "Variables de layout",
+      "description": "Variables CSS para controlar el tamaño y espaciado del panel lateral: presets de tamaño predefinidos (xs a full) y padding del header y contenido"
+    },
+    "typography": {
+      "title": "Variables de tipografía",
+      "description": "Variables CSS para controlar la tipografía del título del panel lateral"
+    },
+    "elevation": {
+      "title": "Variables de elevación",
+      "description": "Variables CSS para controlar la sombra y z-index del panel lateral y del overlay"
+    },
+    "scrollbar": {
+      "title": "Variables de scrollbar",
+      "description": "Variables CSS para controlar la apariencia de la barra de desplazamiento del panel lateral"
+    },
+    "examples": {
+      "title": "Ejemplos de personalización",
+      "description": "Ejemplos SCSS para personalizar los estilos del panel lateral en tu aplicación"
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Tokens de traducción",
+      "description": "El componente SidebarPanel usa tokens genéricos del NuiI18nService para los botones de control.",
+      "note": "Todos los tokens son compartidos entre varios componentes. Sobreescríbelos globalmente con <code>provideNuiI18n({...})</code>.",
+      "rows": {
+        "close": {
+          "description": "Etiqueta accesible del botón de cierre."
+        },
+        "minimize": {
+          "description": "Etiqueta accesible del botón de minimizar."
+        },
+        "restore": {
+          "description": "Etiqueta accesible del botón de restaurar, visible cuando el panel está minimizado."
+        },
+        "expand": {
+          "description": "Etiqueta accesible del botón de expandir."
+        },
+        "collapse": {
+          "description": "Etiqueta accesible del botón de contraer."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "Roles y atributos ARIA",
+      "description": "El SidebarPanel implementa un patrón accesible similar a un diálogo para que los lectores de pantalla lo reconozcan como un area de contenido diferenciada.",
+      "elements": {
+        "panel": "Elemento raíz del panel",
+        "closeButton": "Botón de cierre",
+        "minimizeButton": "Botón minimizar / restaurar",
+        "expandButton": "Botón expandir / contraer",
+        "backdrop": "Superposición de fondo"
+      },
+      "rows": {
+        "panelRole": {
+          "description": "La raíz del panel lleva <code>role=\"dialog\"</code> para señalar una región diferenciada a las tecnologías de asistencia."
+        },
+        "ariaLabelledby": {
+          "description": "<code>aria-labelledby</code> apunta al elemento de título del panel, dando al diálogo un nombre accesible derivado del encabezado visible."
+        },
+        "closeLabel": {
+          "description": "El botón de cierre usa el token i18n <code>close</code> como <code>aria-label</code>."
+        },
+        "minimizeLabel": {
+          "description": "El botón de minimizar / restaurar expone el token i18n correspondiente (<code>minimize</code> o <code>restore</code>) como <code>aria-label</code> según el estado."
+        },
+        "expandLabel": {
+          "description": "El botón de expandir / contraer expone el token correspondiente (<code>expand</code> o <code>collapse</code>) como <code>aria-label</code>."
+        },
+        "backdropHidden": {
+          "description": "La superposición de fondo se oculta de las tecnologías de asistencia con <code>aria-hidden=\"true\"</code>."
+        }
+      }
+    },
+    "naming": {
+      "title": "Nombre accesible",
+      "description": "El nombre accesible del panel se obtiene de su título visible mediante <code>aria-labelledby</code>. Los botones de control se etiquetan con tokens i18n.",
+      "note": "Proporciona siempre un título visible dentro del panel, ya que este se convierte automáticamente en el nombre del diálogo.",
+      "elements": {
+        "panelWithTitle": "Panel con título",
+        "controlButtons": "Botones de control"
+      },
+      "info": {
+        "ariaLabelledby": "Título del panel (aria-labelledby)",
+        "i18nTokens": "Tokens i18n para etiquetas de botones"
+      },
+      "rows": {
+        "title": {
+          "description": "El título visible del panel proporciona el nombre accesible de la región <code>role=\"dialog\"</code>."
+        },
+        "buttons": {
+          "description": "Los botones de control (cerrar, minimizar, expandir) usan tokens i18n como etiquetas accesibles."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Interacción por teclado",
+      "description": "El SidebarPanel soporta la navegación por teclado para todos los controles interactivos.",
+      "rows": {
+        "escape": {
+          "description": "Cierra el panel en modo modal, devolviendo el foco al elemento que lo abrió."
+        },
+        "tab": {
+          "description": "Cicla el foco entre los elementos interactivos del panel. El foco queda atrapado mientras el panel está abierto en modo modal."
+        },
+        "spaceEnter": {
+          "description": "Activa el botón de control con foco (cerrar, minimizar, expandir)."
+        }
+      }
+    }
+  }
+}

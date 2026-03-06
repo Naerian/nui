@@ -1,0 +1,289 @@
+{
+  "title": "Avatar",
+  "subtitle": "Graphic component to represent users, entities or brands through images, letters or icons",
+  "basic": {
+    "title": "Basic usage",
+    "description": "Displays a simple avatar loading an external image. This is the most common form of user representation."
+  },
+  "types": {
+    "title": "Content types and priority",
+    "description": "The component intelligently decides what to show based on the available data. This logic ensures something meaningful is always displayed.",
+    "note": "<strong>Rendering priority:</strong> 1. Image (if it loads) &gt; 2. Initials &gt; 3. Icon &gt; 4. Fallback (Alt letter) &gt; 5. Default icon."
+  },
+  "variants": {
+    "title": "Shape variants",
+    "description": "The avatar supports three geometric shapes to adapt to different design contexts.",
+    "note": "Use the <code>variant</code> input with values <code>'circular'</code>, <code>'rounded'</code> and <code>'square'</code> to change the avatar shape."
+  },
+  "sizes": {
+    "title": "Sizes",
+    "description": "Five predefined sizes that harmoniously scale the container, typography and icons.",
+    "note": "Sizes affect the avatar dimension, font size for initials and icon size. Use <code>size</code> with values <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> and <code>'xl'</code>."
+  },
+  "colors": {
+    "title": "Colors",
+    "description": "Customize the background and text color using the system palette. Ideal for differentiating users or states when no image is available.",
+    "note": "Use the <code>color</code> input with values such as <code>'primary'</code>, <code>'secondary'</code>, <code>'accent'</code>, <code>'success'</code>, <code>'info'</code>, <code>'warning'</code> and <code>'danger'</code> to change avatar colors. You can also use custom colors in <code>rgb</code>, <code>hexadecimal</code> or <code>keyword</code> format for full control over avatar appearance. If you use a custom color, the component will automatically calculate a contrasting text color to ensure readability of initials or the icon."
+  },
+  "customSize": {
+    "title": "Custom size",
+    "description": "Define exact pixel dimensions when the standard sizes do not fit. Font size and icons are calculated proportionally and automatically.",
+    "note": "The <code>customSize</code> input overrides the <code>size</code> input. The internal calculation maintains initials readability."
+  },
+  "grouped": {
+    "title": "Grouped avatars",
+    "description": "Display multiple avatars in a single component with overlap and a display limit.",
+    "note": "Use the <code>nui-avatar-group</code> component to group several avatars. Control the maximum visible count with <code>max</code>. Extra avatars are represented as a '+X' counter. You can use <code>bordered</code> to see a clear separation between each avatar."
+  },
+  "error": {
+    "title": "Error handling (Fallback)",
+    "description": "Automatic recovery system. If the image URL fails (404 error), the component instantly switches to showing the initials or fallback icon without breaking the layout."
+  },
+  "api": {
+    "inputs": {
+      "title": "Component inputs",
+      "description": "Input properties that modify the behavior and appearance of the avatar.",
+      "rows": {
+        "src": {
+          "description": "Avatar image URL"
+        },
+        "alt": {
+          "description": "Alternative text (used to generate initials if no src)"
+        },
+        "initials": {
+          "description": "Initials to display (overrides those generated from alt)"
+        },
+        "icon": {
+          "description": "RemixIcon icon class to display"
+        },
+        "size": {
+          "description": "Predefined avatar size"
+        },
+        "customSize": {
+          "description": "Custom size in pixels (overrides size)"
+        },
+        "variant": {
+          "description": "Avatar shape"
+        },
+        "color": {
+          "description": "Background color when no image is available (accepts theme or custom colors)"
+        },
+        "textColor": {
+          "description": "Text/icon color (calculated automatically if not specified)"
+        }
+      }
+    },
+    "outputs": {
+      "title": "Component outputs",
+      "description": "Events emitted by the component that you can listen to in order to react to image loading errors.",
+      "rows": {
+        "imageError": {
+          "description": "Emitted when the image cannot be loaded. The component automatically shows the fallback."
+        }
+      }
+    }
+  },
+  "theming": {
+    "sizes": {
+      "title": "Size variables",
+      "description": "CSS variables that control avatar dimensions, font sizes and icon sizes.",
+      "rows": {
+        "sizeXs": {
+          "description": "Extra small avatar dimension"
+        },
+        "sizeSm": {
+          "description": "Small avatar dimension"
+        },
+        "sizeMd": {
+          "description": "Medium avatar dimension"
+        },
+        "sizeLg": {
+          "description": "Large avatar dimension"
+        },
+        "sizeXl": {
+          "description": "Extra large avatar dimension"
+        },
+        "fontSizeXs": {
+          "description": "Font size for initials (xs)"
+        },
+        "fontSizeSm": {
+          "description": "Font size for initials (sm)"
+        },
+        "fontSizeMd": {
+          "description": "Font size for initials (md)"
+        },
+        "fontSizeLg": {
+          "description": "Font size for initials (lg)"
+        },
+        "fontSizeXl": {
+          "description": "Font size for initials (xl)"
+        },
+        "iconSizeXs": {
+          "description": "Icon size (xs)"
+        },
+        "iconSizeSm": {
+          "description": "Icon size (sm)"
+        },
+        "iconSizeMd": {
+          "description": "Icon size (md)"
+        },
+        "iconSizeLg": {
+          "description": "Icon size (lg)"
+        },
+        "iconSizeXl": {
+          "description": "Icon size (xl)"
+        }
+      }
+    },
+    "styles": {
+      "title": "Style variables",
+      "description": "CSS variables to customize borders, default colors and typography of the avatar.",
+      "rows": {
+        "borderRadiusCircular": {
+          "description": "Border radius for circular variant"
+        },
+        "borderRadiusRounded": {
+          "description": "Border radius for rounded variant"
+        },
+        "borderRadiusSquare": {
+          "description": "Border radius for square variant"
+        },
+        "borderWidth": {
+          "description": "Avatar border thickness"
+        },
+        "borderWidthBordered": {
+          "description": "Avatar border thickness when bordered"
+        },
+        "borderOutset": {
+          "description": "Avatar outer border color"
+        },
+        "defaultBg": {
+          "description": "Default background color"
+        },
+        "defaultColor": {
+          "description": "Default text/icon color"
+        },
+        "fontWeight": {
+          "description": "Font weight for initials"
+        }
+      }
+    }
+  },
+  "styling": {
+    "title": "Styles and customization",
+    "description": "Customize the appearance of the avatar using CSS variables. Control sizes, colors, borders and more."
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Translation tokens",
+      "description": "The <code>nui-avatar-group</code> component uses <code>NuiI18nService</code> to build the accessible label and tooltip for the excess indicator that appears when the number of avatars exceeds the <code>max</code> input.",
+      "note": "Use the <code>{count}</code> placeholder in your translation string. The component replaces it at runtime with the exact number of hidden avatars.",
+      "rows": {
+        "moreProfiles": {
+          "description": "Accessible label and tooltip for the excess indicator (+N). Supports the <code>{count}</code> placeholder."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA roles and attributes",
+      "description": "Each avatar uses <code>role='img'</code> to expose itself as a semantic image. The group component wraps avatars in an accessible list structure.",
+      "rows": {
+        "roleImg": {
+          "description": "Identifies the avatar container as an image element for assistive technologies."
+        },
+        "ariaLabel": {
+          "description": "Accessible name resolved from <code>tooltip()</code>, <code>alt()</code> or the fallback string <code>'avatar'</code>."
+        },
+        "title": {
+          "description": "Visual tooltip and secondary fallback accessible name for the avatar container."
+        },
+        "imgAlt": {
+          "description": "Always empty (<code>''</code>) to prevent the inner image from being read independently; the parent's <code>role='img'</code> and <code>aria-label</code> are the accessible representation."
+        },
+        "ariaHiddenDecorative": {
+          "description": "All internal decorative elements (initials, icon, fallback span) are hidden from assistive technologies."
+        },
+        "roleList": {
+          "description": "The avatar group container uses <code>role='list'</code> so screen readers announce it as a navigable list."
+        },
+        "roleListitem": {
+          "description": "Each avatar wrapper inside the group has <code>role='listitem'</code> to match the list context."
+        },
+        "roleExcess": {
+          "description": "The excess indicator (+N) has <code>role='img'</code> and an internationalized <code>aria-label</code> so screen readers announce the hidden count."
+        },
+        "ariaLabelExcess": {
+          "description": "Accessible name for the excess indicator, generated from the i18n token <code>avatar.moreProfiles</code> with <code>{count}</code> replaced."
+        },
+        "ariaHiddenExcess": {
+          "description": "The visible '+N' text span is hidden from assistive technologies; only the parent container's <code>aria-label</code> is read."
+        }
+      },
+      "elements": {
+        "avatarDiv": "<code>&lt;div&gt;</code> (avatar)",
+        "decorative": "<code>&lt;span&gt;</code> initials / <code>&lt;i&gt;</code> icon",
+        "groupList": "<code>&lt;div&gt;</code> (group, list)",
+        "groupItem": "<code>&lt;div&gt;</code> (group, item)",
+        "excessDiv": "<code>&lt;div&gt;</code> (excess indicator)",
+        "excessSpan": "<code>&lt;span&gt;</code> (excess text \"+N\")"
+      }
+    },
+    "naming": {
+      "title": "Accessible name",
+      "description": "The accessible name resolution order ensures every avatar has a meaningful label for screen readers, even when only partially configured.",
+      "note": "Always provide <code>alt</code> or <code>tooltip</code> for avatars that represent real people or entities. A generic <code>'avatar'</code> label gives no context to screen reader users.",
+      "rows": {
+        "tooltip": {
+          "description": "The <code>tooltip</code> input has the highest priority for the accessible name and is also rendered as the native <code>title</code> attribute."
+        },
+        "alt": {
+          "description": "If <code>tooltip</code> is not present, <code>alt</code> is used as <code>aria-label</code>. It also drives automatic initials generation."
+        },
+        "fallback": {
+          "description": "If neither <code>tooltip</code> nor <code>alt</code> is configured, the string <code>'avatar'</code> is used as the fallback accessible name."
+        },
+        "excess": {
+          "description": "The excess counter's <code>aria-label</code> is computed from <code>avatar.moreProfiles</code>, replacing <code>{count}</code> with the number of hidden avatars."
+        }
+      },
+      "elements": {
+        "avatarWithTooltip": "Avatar with <code>tooltip</code>",
+        "avatarWithAlt": "Avatar with <code>alt</code>",
+        "avatarWithoutName": "Avatar without <code>tooltip</code> or <code>alt</code>",
+        "excessIndicator": "Excess indicator \"+N\""
+      },
+      "info": {
+        "viaI18n": "via i18n"
+      }
+    },
+    "hidden": {
+      "title": "Hidden decorative elements",
+      "description": "Purely decorative elements carry <code>aria-hidden='true'</code> to avoid duplicate or meaningless announcements by screen readers.",
+      "rows": {
+        "imgEmpty": {
+          "description": "The <code>&lt;img&gt;</code> element always has <code>alt=''</code> to prevent it from being read independently; the accessible name is on the parent container."
+        },
+        "initials": {
+          "description": "The initials text is hidden; the accessible name comes from the parent container's <code>aria-label</code>."
+        },
+        "icon": {
+          "description": "The icon element is decorative; the accessible name comes from the parent container's <code>aria-label</code>."
+        },
+        "fallbackSpan": {
+          "description": "The fallback letter is hidden; the accessible name is provided by the parent div's <code>aria-label</code>."
+        },
+        "excessSpan": {
+          "description": "The visible '+N' text is hidden from ATs; the parent div's <code>aria-label</code> provides the announcement for screen readers."
+        }
+      },
+      "elements": {
+        "initials": "<code>&lt;span&gt;</code> initials",
+        "icon": "<code>&lt;i&gt;</code> icon",
+        "fallback": "<code>&lt;span&gt;</code> fallback (alt letter)",
+        "excessSpan": "<code>&lt;span&gt;</code> text \"+N\""
+      }
+    }
+  }
+}

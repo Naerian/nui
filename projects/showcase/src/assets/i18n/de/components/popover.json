@@ -1,0 +1,165 @@
+{
+  "title": "Popover",
+  "subtitle": "Interaktive schwebende Inhaltskomponente mit Unterstützung für Text, Templates und dynamische Komponenten. Im Gegensatz zu <code>Tooltip</code> kann das Popover interaktive Elemente wie Schaltflächen, Formulare oder Listen enthalten.",
+  "examples": {
+    "basic": {
+      "title": "Grundlegende Verwendung",
+      "description": "Einfaches Popover mit Textinhalt. Das Popover wird beim Klicken angezeigt (Standardverhalten)."
+    },
+    "colors": {
+      "title": "Farben und Varianten",
+      "description": "Unterstützt alle NUI-Farben und -Varianten (Solid, Outline, Ghost) zur Anpassung des Popover-Erscheinungsbilds.",
+      "note": "Kombiniere <code>color</code> und <code>variant</code>, um den Popover-Stil an dein Design anzupassen."
+    },
+    "positions": {
+      "title": "Positionen",
+      "description": "Steuere die bevorzugte Popover-Position: oben, unten, links oder rechts. Das Popover positioniert sich automatisch neu, wenn nicht genug Platz vorhanden ist."
+    },
+    "events": {
+      "title": "Aktivierungsereignisse",
+      "description": "Definiere, wie das Popover aktiviert wird: Klick (Standard), Hover, Fokus oder manuell. Der manuelle Modus ermöglicht vollständige programmatische Kontrolle.",
+      "note": "Bei Verwendung von <code>nuiPopoverEvent</code> gibt es drei Modi: <code>'click'</code> (ein-/ausblenden beim Klicken), <code>'hover'</code> (einblenden beim Mouseover und ausblenden beim Mouseout) und <code>'focus'</code> (einblenden beim Fokus und ausblenden beim Blur)."
+    },
+    "template": {
+      "title": "Benutzerdefiniertes Template",
+      "description": "Verwende Angular-Templates für reichhaltige, interaktive Inhalte. Der Template-Kontext stellt eine <code>close</code>-Funktion zum Schließen des Popovers bereit.",
+      "note": "Das Template <code>#popoverTemplate</code> empfängt einen Kontext mit der Funktion <code>close()</code>, die du verwenden kannst, um das Popover von innen zu schließen."
+    },
+    "component": {
+      "title": "Dynamische Komponente",
+      "description": "Render vollständige Angular-Komponenten innerhalb des Popovers. Ideal für Formulare, Listen oder komplexe Inhalte."
+    },
+    "delays": {
+      "title": "Ein-/Ausblendverzögerungen",
+      "description": "Konfiguriere Verzögerungen in Millisekunden vor dem Ein- oder Ausblenden des Popovers. Nützlich zur Verbesserung der Benutzererfahrung im Hover-Modus."
+    },
+    "customization": {
+      "title": "Anpassung",
+      "description": "Passe das Popover-Erscheinungsbild an: kein Pfeil, benutzerdefinierte Breite, eigene CSS-Klassen oder größerer Abstand.",
+      "note": "Du kannst <code>nuiPopoverShowArrow</code> zum Ein-/Ausblenden des Pfeils, <code>nuiPopoverMaxWidth</code> für eine maximale Breite, <code>nuiPopoverMinWidth</code> für eine minimale Breite, <code>nuiPopoverClass</code> zum Hinzufügen benutzerdefinierter CSS-Klassen und <code>nuiPopoverOffset</code> zur Anpassung des Abstands zwischen Popover und Zielelement verwenden."
+    },
+    "closeOptions": {
+      "title": "Schließoptionen",
+      "description": "Steuere, wie das Popover geschlossen werden kann: Außenklick, Escape-Taste oder mehrere Popovers gleichzeitig offen lassen.",
+      "note": "Verwende <code>nuiPopoverCloseOnClickOutside</code> zum Schließen bei Außenklick, <code>nuiPopoverCloseOnEscape</code> zum Schließen mit Escape und <code>nuiPopoverAllowMultiple</code>, um mehrere Popovers gleichzeitig offen zu lassen."
+    },
+    "backdrop": {
+      "title": "Hintergrundblatt",
+      "description": "Fügt einen dunklen Hintergrund hinter dem Popover hinzu, um ein modales Erlebnis zu schaffen. Du kannst steuern, ob das Klicken auf das Hintergrundblatt das Popover schließt.",
+      "note": "Verwende <code>nuiPopoverBackdrop</code> zum Aktivieren/Deaktivieren des Hintergrundblatt und <code>nuiBackdropClose</code>, um zu steuern, ob das Klicken darauf das Popover schließt."
+    },
+    "disabled": {
+      "title": "Deaktivierter Zustand",
+      "description": "Steuere dynamisch, ob das Popover aktiviert oder deaktiviert ist.",
+      "note": "Wenn <code>nuiPopoverDisabled</code> <code>true</code> ist, wird das Popover nicht angezeigt und reagiert nicht auf Ereignisse."
+    }
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Eingabeeigenschaften der Direktive <code>nuiPopover</code>"
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Ereignisse, die von der Direktive <code>nuiPopover</code> ausgelöst werden"
+    },
+    "config": {
+      "title": "PopoverConfig",
+      "description": "Interface für die globale Popover-Konfiguration über <code>provideNUI({ popover: {...} })</code>"
+    },
+    "context": {
+      "title": "PopoverContext",
+      "description": "Interface für den in Popover-Templates verfügbaren Kontext über <code>let-close=\"close\"</code> und <code>let-data=\"data\"</code>"
+    },
+    "tokens": {
+      "title": "Injektions-Tokens",
+      "description": "Tokens zum Injizieren von Daten und Funktionen in dynamische Popover-Komponenten"
+    }
+  },
+  "theming": {
+    "spacing": {
+      "title": "Abstände und Abmessungen",
+      "description": "CSS-Variablen zur Steuerung der Größe, des Innenabstands und der Abstände des Popovers"
+    },
+    "typography": {
+      "title": "Typografie",
+      "description": "CSS-Variablen zur Steuerung der Schriftart des Popover-Inhalts"
+    },
+    "borders": {
+      "title": "Rahmen",
+      "description": "CSS-Variablen zur Steuerung der Rahmen und des Radius des Popovers"
+    },
+    "shadow": {
+      "title": "Schatten",
+      "description": "CSS-Variable zur Steuerung des Popover-Schattens"
+    },
+    "zindex": {
+      "title": "Z-Index",
+      "description": "CSS-Variable zur Steuerung der Stapelreihenfolge des Popovers"
+    },
+    "animation": {
+      "title": "Animation",
+      "description": "CSS-Variablen zur Steuerung von Popover-Übergängen und Animationen"
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA-Rollen und -Attribute",
+      "description": "Das Popover implementiert das ARIA-Muster für nicht-modale Dialoge. Der Trigger kündigt an, ob das Popover geöffnet ist, und zeigt die Beziehung zu seinem Inhalt an.",
+      "elements": {
+        "trigger": "Trigger-Element",
+        "popover": "Popover-Panel"
+      },
+      "rows": {
+        "ariaExpanded": {
+          "description": "Der Trigger trägt <code>aria-expanded</code>, das anzeigt, ob das Popover sichtbar (<code>true</code>) oder nicht (<code>false</code>) ist."
+        },
+        "ariaControls": {
+          "description": "<code>aria-controls</code> beim Trigger zeigt auf die <code>id</code> des Popover-Panels."
+        },
+        "ariaHaspopup": {
+          "description": "<code>aria-haspopup=\"dialog\"</code> zeigt an, dass das Aktivieren des Triggers ein interaktives Inhaltspanel öffnet."
+        },
+        "popoverRole": {
+          "description": "Das Popover-Panel hat <code>role=\"dialog\"</code> und <code>aria-label</code> aus seinem Titel oder Inhalt."
+        }
+      }
+    },
+    "naming": {
+      "title": "Zugänglicher Name",
+      "description": "Das Popover und sein Trigger müssen zugängliche Namen haben, die ihren Zweck klar kommunizieren.",
+      "note": "Gib immer ein <code>aria-label</code> oder einen sichtbaren Titel im Popover an, damit Screenreader es korrekt identifizieren können.",
+      "elements": {
+        "trigger": "Trigger",
+        "popoverPanel": "Popover-Panel"
+      },
+      "info": {
+        "triggerLabel": "Zugänglicher Trigger-Name",
+        "panelLabel": "Panel aria-label"
+      },
+      "rows": {
+        "trigger": {
+          "description": "Der Trigger muss seinen eigenen zugänglichen Namen haben (sichtbarer Text, aria-label…), der die Aktion des Öffnens des Popovers beschreibt."
+        },
+        "panel": {
+          "description": "Das Popover-Panel erhält seinen zugänglichen Namen aus dem sichtbaren Titel oder einem expliziten <code>aria-label</code>."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Tastaturinteraktion",
+      "description": "Das Popover folgt dem WAI-ARIA-Tastaturmuster für nicht-modale Dialoge.",
+      "rows": {
+        "enterSpace": {
+          "description": "Öffnet oder schließt das Popover, wenn der Trigger den Fokus hat."
+        },
+        "escape": {
+          "description": "Schließt das Popover und gibt den Fokus an den Trigger zurück."
+        },
+        "tab": {
+          "description": "Wechselt den Fokus zwischen interaktiven Elementen im geöffneten Panel."
+        }
+      }
+    }
+  }
+}

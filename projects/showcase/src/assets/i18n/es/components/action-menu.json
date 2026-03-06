@@ -1,0 +1,464 @@
+{
+  "title": "Menú de acciones",
+  "subtitle": "Componente de menú desplegable con soporte para items estáticos, dinámicos y submenús",
+  "basic": {
+    "title": "Uso básico",
+    "description": "Menú de acciones simple con array de items. Cada item puede tener una etiqueta, icono y acción.",
+    "note": "Aquí vemos un ejemplo de uso de ambos <code>type='static'</code> y <code>type='dynamic'</code>.",
+    "consoleNote": "Abre las DevTools (F12) y revisa la pestaña Console para ver las acciones registradas cuando haces clic en los items del menú."
+  },
+  "separators": {
+    "title": "Separadores",
+    "description": "Agrupa acciones relacionadas usando separadores visuales.",
+    "note": "Usa items con la propiedad <code>separator: true</code> para agregar líneas divisorias entre grupos de acciones. Puedes añadir una etiqueta opcional al separador usando la propiedad <code>label</code>."
+  },
+  "submenu": {
+    "title": "Submenús",
+    "description": "Crea menús anidados usando la propiedad <code>children</code>. Los submenús pueden anidarse múltiples niveles.",
+    "note": "Usa la propiedad <code>children</code> para definir items de submenú. Cada hijo puede tener sus propios hijos para mayor anidación. <strong>Nota:</strong> Si un hijo tiene <code>selected: true</code>, el item padre mostrará un indicador visual (línea vertical a la izquierda) para facilitar la navegación."
+  },
+  "variants": {
+    "title": "Variantes del botón",
+    "description": "El botón soporta diferentes variantes y colores del sistema NUI. La variante afectará al botón, pero el color afecta al color y al contenido.",
+    "note": "Combina <code>color</code> y <code>variant</code> para personalizar la apariencia del botón del menú según tus necesidades."
+  },
+  "sizes": {
+    "title": "Tamaños",
+    "description": "Haz uso de los cinco tamaños predefinidos de NUI. El tamaño afecta al botón, pero el contenido seguirá siendo el mismo.",
+    "note": "Utiliza el input <code>size</code> para ajustar el tamaño del botón del menú y su contenido haciendo uso de los tamaños <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code> y <code>xl</code>."
+  },
+  "label": {
+    "title": "Contenido del botón",
+    "description": "Agrega texto al botón del menú. Puede combinarse con iconos y soporta modo de ancho completo.",
+    "note": "Usa <code>icon</code> junto con <code>label</code> para mostrar ambos en el botón. Usa <code>width='full'</code> para que el botón ocupe todo el ancho disponible. Si únicamente usas <code>label</code> sin icono, el botón se renderiza como un botón de texto simple.",
+    "codeTitle1": "Texto e icono",
+    "codeTitle2": "Solo texto",
+    "codeTitle3": "Ancho completo"
+  },
+  "disabled": {
+    "title": "Estado deshabilitado",
+    "description": "Deshabilita items individuales del menú o el menú completo. Los items deshabilitados se muestran pero no son clicables."
+  },
+  "withSubtitle": {
+    "title": "Subtítulo de elementos",
+    "description": "Agrega texto secundario debajo de la etiqueta principal. Útil para mostrar información adicional como correos, descripciones o atajos."
+  },
+  "selected": {
+    "title": "Estado seleccionado",
+    "description": "Marca items como seleccionados para mostrar la elección actual. Un icono de check aparece automáticamente. Perfecto para selectores, filtros o configuraciones."
+  },
+  "icons": {
+    "title": "Iconos descriptivos",
+    "description": "Usa iconos y etiquetas significativas para comunicar el propósito de cada acción. Los iconos ayudan a los usuarios a identificar rápidamente las acciones.",
+    "note": "Utiliza iconos relevantes de la biblioteca <strong>Remix Icon</strong> para mejorar la comprensión visual de las acciones del menú."
+  },
+  "badge": {
+    "title": "Badge",
+    "description": "Muestra un contador o etiqueta numérica sobre los items del menú usando la propiedad <code>badge</code>. Ideal para notificaciones, contadores de pendientes o cualquier indicador visual.",
+    "note": "El <code>badge</code> se renderiza como una píldora posicionada en el extremo derecho del item. Los lectores de pantalla acceden al valor del badge a través del <code>aria-label</code> del botón (ej: \"Messages (3)\"), mientras que la píldora visual queda oculta con <code>aria-hidden</code>."
+  },
+  "template": {
+    "title": "Template personalizado",
+    "description": "Personaliza completamente el renderizado del menú usando templates y directivas.",
+    "note": "El template <code>#item</code> recibe el item completo como contexto (<code>let-item</code>). Las directivas <code>menu-header</code> y <code>menu-footer</code> permiten una sintaxis simple y clara, evitando ng-template innecesarios. <br/><br/> <strong>Importante:</strong> Al usar templates personalizados, debes manejar el evento click manualmente con <code>(click)=\"handleAction(item)\"</code>. El evento <code>onItemAction</code> solo se emite automáticamente con items por defecto."
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs del componente",
+      "description": "Propiedades de entrada que modifican el comportamiento y apariencia del menú de acciones.",
+      "rows": {
+        "items": {
+          "description": "Array de items del menú"
+        },
+        "type": {
+          "description": "Modo de renderizado del menú"
+        },
+        "color": {
+          "description": "Color del botón trigger"
+        },
+        "size": {
+          "description": "Tamaño del botón trigger"
+        },
+        "variant": {
+          "description": "Variante del botón trigger"
+        },
+        "width": {
+          "description": "Ancho del botón trigger"
+        },
+        "disabled": {
+          "description": "Estado deshabilitado del menú"
+        },
+        "title": {
+          "description": "Título del botón (atributo title)"
+        },
+        "label": {
+          "description": "Texto del botón trigger"
+        },
+        "icon": {
+          "description": "Icono del botón (Remix Icon)"
+        },
+        "iconPosition": {
+          "description": "Posición del icono"
+        },
+        "iconSubmenu": {
+          "description": "Icono para indicar submenú"
+        },
+        "ariaLabel": {
+          "description": "Etiqueta de accesibilidad"
+        },
+        "itemTemplate": {
+          "description": "Template personalizado para items"
+        },
+        "offset": {
+          "description": "Distancia en píxeles entre el trigger y el panel flotante del menú (solo en modo dynamic)"
+        }
+      }
+    },
+    "outputs": {
+      "title": "Outputs del componente",
+      "description": "Eventos emitidos por el componente que puedes escuchar para reaccionar a interacciones del usuario.",
+      "rows": {
+        "onItemAction": {
+          "description": "Emitido al hacer clic en un item"
+        },
+        "onSelectionChange": {
+          "description": "Emitido al cambiar la selección (modo selector)"
+        },
+        "menuOpen": {
+          "description": "Emitido cuando el menú se abre"
+        },
+        "menuClose": {
+          "description": "Emitido cuando el menú se cierra"
+        }
+      }
+    },
+    "interface": {
+      "title": "Interface ActionMenuItem",
+      "description": "Estructura completa de un item del menú con todas sus propiedades disponibles.",
+      "rows": {
+        "action": {
+          "description": "Identificador único de la acción"
+        },
+        "label": {
+          "description": "Texto visible del item"
+        },
+        "subtitle": {
+          "description": "Texto secundario debajo del label"
+        },
+        "title": {
+          "description": "Texto para el atributo title (tooltip)"
+        },
+        "icon": {
+          "description": "Clase del icono RemixIcon"
+        },
+        "shortcut": {
+          "description": "Atajo de teclado (solo visual)"
+        },
+        "templateRef": {
+          "description": "Template personalizado para el item"
+        },
+        "id": {
+          "description": "ID único del item (autogenerado)"
+        },
+        "children": {
+          "description": "Items hijos para crear submenús"
+        },
+        "disabled": {
+          "description": "Si está deshabilitado"
+        },
+        "selected": {
+          "description": "Si está seleccionado (muestra checkmark)"
+        },
+        "separator": {
+          "description": "Si es un separador visual"
+        },
+        "onAction": {
+          "description": "Callback al hacer clic en el item"
+        },
+        "data": {
+          "description": "Datos personalizados adicionales para usar con TemplateRef<any>"
+        },
+        "badge": {
+          "description": "Badge o contador a mostrar"
+        }
+      }
+    }
+  },
+  "theming": {
+    "structure": {
+      "title": "Variables estructurales",
+      "description": "Variables CSS que controlan dimensiones, espaciado, bordes y sombras del menú.",
+      "rows": {
+        "minWidth": {
+          "description": "Ancho mínimo del menú"
+        },
+        "maxWidth": {
+          "description": "Ancho máximo del menú"
+        },
+        "borderWidth": {
+          "description": "Grosor del borde del menú"
+        },
+        "borderColor": {
+          "description": "Color del borde del menú"
+        },
+        "borderRadius": {
+          "description": "Radio de esquinas del menú"
+        },
+        "padding": {
+          "description": "Padding interno del menú"
+        },
+        "shadow": {
+          "description": "Sombra del menú desplegable"
+        },
+        "staticShadow": {
+          "description": "Sombra del menú estático"
+        },
+        "itemGap": {
+          "description": "Espacio entre elementos del item"
+        },
+        "itemBorder": {
+          "description": "Borde de los items"
+        },
+        "itemBorderRadius": {
+          "description": "Radio de esquinas de items"
+        },
+        "itemPaddingY": {
+          "description": "Padding vertical de items"
+        },
+        "itemPaddingX": {
+          "description": "Padding horizontal de items"
+        },
+        "itemLabelMarginRight": {
+          "description": "Margen derecho del label"
+        },
+        "focusOutlineWidth": {
+          "description": "Ancho del outline de foco"
+        },
+        "focusOutlineOffset": {
+          "description": "Offset del outline de foco"
+        },
+        "arrowPaddingLeft": {
+          "description": "Padding izquierdo de la flecha"
+        },
+        "transition": {
+          "description": "Transiciones de estados"
+        }
+      }
+    },
+    "items": {
+      "title": "Variables de items",
+      "description": "Variables CSS para personalizar la apariencia de los items, separadores, shortcuts y elementos internos.",
+      "rows": {
+        "subtitleColor": {
+          "description": "Color del texto secundario"
+        },
+        "subtitleFontSize": {
+          "description": "Tamaño de fuente del subtitle"
+        },
+        "labelWeight": {
+          "description": "Peso de fuente del label"
+        },
+        "labelFontSize": {
+          "description": "Tamaño de fuente del label"
+        },
+        "separatorColor": {
+          "description": "Color del separador"
+        },
+        "separatorPadding": {
+          "description": "Padding del separador"
+        },
+        "separatorLabelColor": {
+          "description": "Color del label del separador"
+        },
+        "separatorLabelSpacing": {
+          "description": "Espaciado del label del separador"
+        },
+        "separatorFontSize": {
+          "description": "Tamaño de fuente del separador"
+        },
+        "separatorFontWeight": {
+          "description": "Peso de fuente del separador"
+        },
+        "shortcutBg": {
+          "description": "Fondo del shortcut"
+        },
+        "shortcutColor": {
+          "description": "Color del texto del shortcut"
+        },
+        "shortcutPadding": {
+          "description": "Padding del shortcut"
+        },
+        "shortcutBorderWidth": {
+          "description": "Grosor del borde del shortcut"
+        },
+        "shortcutBorderColor": {
+          "description": "Color del borde del shortcut"
+        },
+        "shortcutBorderRadius": {
+          "description": "Radio de esquinas del shortcut"
+        },
+        "shortcutFontSize": {
+          "description": "Tamaño de fuente del shortcut"
+        },
+        "notifySelectedSize": {
+          "description": "Tamaño del indicador de hijo seleccionado"
+        },
+        "notifySelectedRadius": {
+          "description": "Radio del indicador de hijo seleccionado"
+        }
+      }
+    },
+    "colors": {
+      "title": "Variables de color",
+      "description": "Patrón de variables CSS para personalizar los colores de los items del menú según el estado.",
+      "note": "Reemplaza <code>{color}</code> con cualquier color semántico de NUI (<code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>) para personalizar la apariencia de los items en diferentes estados.",
+      "rows": {
+        "bg": {
+          "description": "Fondo del item en estado normal"
+        },
+        "text": {
+          "description": "Color del texto del item"
+        },
+        "hoverBg": {
+          "description": "Fondo del item en hover"
+        },
+        "hoverText": {
+          "description": "Color del texto en hover"
+        },
+        "activeBg": {
+          "description": "Fondo del item en active"
+        },
+        "selectedBg": {
+          "description": "Fondo del item seleccionado"
+        },
+        "selectedText": {
+          "description": "Color del texto del item seleccionado"
+        },
+        "notifySelected": {
+          "description": "Color del indicador de hijo seleccionado"
+        }
+      }
+    }
+  },
+  "styling": {
+    "title": "Estilos y personalización",
+    "description": "Personaliza la apariencia del menú mediante variables CSS. Controla colores, espaciado, tipografía y más."
+  },
+  "a11y": {
+    "roles": {
+      "title": "Roles y atributos ARIA",
+      "description": "El Action Menu aplica los siguientes atributos ARIA siguiendo el patrón de menú de la Guía de Prácticas de Autoría ARIA (APG).",
+      "rows": {
+        "haspopup": {
+          "description": "Anuncia a las tecnologías asistivas que activar este botón abrirá un menú."
+        },
+        "expanded": {
+          "description": "Refleja el estado abierto/cerrado del menú. Se actualiza automáticamente en cada interacción."
+        },
+        "controls": {
+          "description": "Vincula el botón disparador con el contenedor del menú que controla mediante IDs coincidentes."
+        },
+        "roleMenu": {
+          "description": "Identifica el contenedor desplegable como un widget de menú."
+        },
+        "orientation": {
+          "description": "Especifica que los ítems están dispuestos verticalmente (diseño predeterminado del menú)."
+        },
+        "labelledby": {
+          "description": "En modo dinámico, vincula el contenedor del menú a su botón disparador proporcionando un nombre accesible."
+        },
+        "roleItem": {
+          "description": "Rol predeterminado para los ítems interactivos. Cambia a menuitemradio cuando el ítem pertenece a un grupo de selección."
+        },
+        "ariaChecked": {
+          "description": "Presente solo en modo selección. Refleja si este ítem es la selección actual."
+        },
+        "keyshortcuts": {
+          "description": "Expone el texto del atajo de teclado mostrado visualmente junto al ítem."
+        },
+        "roleSeparator": {
+          "description": "Identifica el divisor visual entre grupos de ítems del menú."
+        },
+        "ariaHiddenIcon": {
+          "description": "Impide que los iconos decorativos sean anunciados por los lectores de pantalla."
+        }
+      },
+      "elements": {
+        "trigger": "<code>&lt;button&gt;</code> (disparador)",
+        "menu": "<code>&lt;div&gt;</code> (menú)",
+        "menuDynamic": "<code>&lt;div&gt;</code> (menú, modo dinámico)",
+        "item": "<code>&lt;button&gt;</code> (ítem)",
+        "itemSelectable": "<code>&lt;button&gt;</code> (ítem seleccionable)",
+        "separator": "<code>&lt;div&gt;</code> (separador)",
+        "icon": "<code>&lt;i&gt;</code> (icono)"
+      }
+    },
+    "naming": {
+      "title": "Nombre accesible",
+      "description": "El botón disparador resuelve su nombre accesible siguiendo una cascada de prioridad. Proporciona siempre un nombre accesible explícito para botones disparadores que solo muestran un icono.",
+      "note": "Los menús de solo icono (sin label) deben tener <code>ariaLabel</code> o <code>title</code> configurados. Sin una etiqueta de texto visible, las tecnologías asistivas no pueden identificar el propósito del menú.",
+      "rows": {
+        "triggerLabel": {
+          "description": "El input <code>label</code> se renderiza como el texto interno del botón, que nativamente se convierte en el nombre accesible."
+        },
+        "triggerAriaLabel": {
+          "description": "El input <code>ariaLabel</code> se aplica como atributo <code>aria-label</code> y tiene prioridad sobre <code>label</code> y <code>title</code>."
+        },
+        "triggerIconOnly": {
+          "description": "Si no se proporciona ni <code>ariaLabel</code> ni <code>label</code>, el input <code>title</code> se usa como nombre accesible mediante el tooltip del navegador."
+        },
+        "itemLabel": {
+          "description": "El <code>aria-label</code> de cada ítem del menú se resuelve a partir de <code>item.title || item.label</code> para garantizar que los lectores de pantalla anuncien el texto correcto."
+        },
+        "menuLabelledby": {
+          "description": "En modo dinámico, el contenedor del menú referencia el ID del disparador mediante <code>aria-labelledby</code>, haciendo explícita su asociación."
+        }
+      },
+      "elements": {
+        "triggerWithLabel": "Disparador con <code>label</code>",
+        "triggerWithAriaLabel": "Disparador con <code>ariaLabel</code>",
+        "triggerIconOnly": "Disparador solo icono",
+        "menuItem": "Ítem de menú",
+        "menuContainer": "Contenedor del menú (dinámico)"
+      },
+      "info": {
+        "nativeName": "Nombre nativo",
+        "titleFallback": "<code>title</code> como fallback"
+      }
+    },
+    "keyboard": {
+      "title": "Interacción con teclado",
+      "description": "El Action Menu implementa el patrón de teclado de menú completo de APG. Las teclas de flecha navegan entre ítems; Escape y ArrowLeft cierran los menús.",
+      "note": "<kbd>ArrowDown</kbd>, <kbd>ArrowUp</kbd>, <kbd>Home</kbd> y <kbd>End</kbd> llaman a <code>preventDefault()</code> para evitar el desplazamiento de la página mientras se navega por el menú.",
+      "rows": {
+        "tab": {
+          "description": "Mueve el foco al botón disparador. Cuando el menú está abierto, Tab lo cierra y devuelve el foco al disparador."
+        },
+        "spaceEnter": {
+          "description": "Abre el menú cuando el foco está en el disparador. Activa el ítem del menú enfocado cuando está dentro del menú."
+        },
+        "escape": {
+          "description": "Cierra el menú abierto y devuelve el foco al botón disparador."
+        },
+        "arrowDown": {
+          "description": "Mueve el foco al siguiente ítem del menú. Vuelve del último ítem al primero."
+        },
+        "arrowUp": {
+          "description": "Mueve el foco al ítem anterior del menú. Vuelve del primer ítem al último."
+        },
+        "home": {
+          "description": "Mueve el foco al primer ítem del menú."
+        },
+        "end": {
+          "description": "Mueve el foco al último ítem del menú."
+        },
+        "arrowRight": {
+          "description": "Abre el submenú del ítem enfocado y mueve el foco a su primer ítem."
+        },
+        "arrowLeft": {
+          "description": "Cierra el submenú actual y devuelve el foco al ítem padre."
+        }
+      }
+    }
+  }
+}

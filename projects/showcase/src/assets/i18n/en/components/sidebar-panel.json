@@ -1,0 +1,233 @@
+{
+  "title": "Sidebar Panel",
+  "subtitle": "Sliding side panels with CDK Overlay to display dynamic content",
+  "examples": {
+    "basic": {
+      "title": "Basic usage",
+      "description": "Open a side panel from the SidebarPanelService. The panel slides from the screen edge with a smooth animation."
+    },
+    "defaults": {
+      "title": "Default configuration",
+      "description": "The panel will open using the configured global default values.",
+      "note": "If no options are provided when opening the panel, the global defaults defined in NUI configuration via <code>provideNUI({ sidebarPanel: {...} })</code> will be used."
+    },
+    "sizes": {
+      "title": "Sizes",
+      "description": "Allows defining the size with which the panel will open.",
+      "note": "You can use predefined values such as <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> and <code>'full'</code>. On <code>mobile</code>, the <code>'full'</code> size will be applied automatically to ensure an optimal experience on mobile devices."
+    },
+    "positions": {
+      "title": "Positions",
+      "description": "Control from which side of the screen the panel slides.",
+      "note": "Use the <code>position</code> property to define the side from which the panel will open using <code>'right'</code>, <code>'left'</code>, <code>'top'</code> or <code>'bottom'</code> as values."
+    },
+    "html-content": {
+      "title": "Custom HTML content",
+      "description": "Render arbitrary HTML content inside the panel using Angular templates.",
+      "note": "Use the <code>htmlContent</code> property to pass an HTML string. You can generate the HTML dynamically or concatenate it with your data. This option does not require creating a full Angular component."
+    },
+    "template-content": {
+      "title": "Custom template content (TemplateRef)",
+      "description": "Use Angular templates with context data and functions without needing a full component. Ideal for reusable content with dynamic data.",
+      "note": "Use the <code>contentTemplate</code> property to pass a <code>TemplateRef</code> and <code>templateContext</code> to pass data and functions. The template receives the context via <code>let-varname</code> variables. This allows interactivity without creating a component."
+    },
+    "dynamic-component": {
+      "title": "Dynamic component",
+      "description": "Load any Angular component inside the panel and pass data via dependency injection",
+      "note": "Use the <code>data</code> property to pass data to the dynamically loaded component. This data is injected using the <code>SIDEBAR_PANEL_DATA</code> token. If we also want to reference the panel itself from the loaded component, we can inject <code>SIDEBAR_PANEL_REF</code>."
+    },
+    "dynamic-component-events": {
+      "title": "Dynamic component @Outputs events",
+      "description": "Listen to events emitted by the component loaded inside the panel to handle interactions and close the panel when necessary.",
+      "note": "You can subscribe to the outputs of the dynamically loaded component. Use <code>panelRef.componentInstance</code> to access the child component instance and subscribe to its <code>@Output()</code>."
+    },
+    "minimizable": {
+      "title": "Minimizable panel",
+      "description": "Panels can be minimized to a tab that <strong>will be located at the side from which the Sidebar opens</strong> to free up screen space while preserving state, and can be restored when desired.",
+      "note": "Use the <code>minimizable</code> attribute to make the Sidebar minimizable. Additionally, you can use the <code>minimize()</code> method of SidebarPanel to minimize the panel programmatically and <code>restore()</code> to restore it. If <code>minimizable</code> is enabled, the <code>id</code> attribute is required to identify the minimized panel. You can also check if the Sidebar is minimized via <code>isMinimized</code>.<br><br><strong>Tab customization:</strong> You can customize the icon, add text, apply custom CSS or use a fully custom template via <code>minimizedTabCustomization</code>. For floating buttons with free positioning (e.g.: chat bottom-right), use <code>standalone: true</code> to render outside the grouped container and avoid positioning restrictions. Button styles should be at global level to avoid being encapsulated in the calling component."
+    },
+    "close-button": {
+      "title": "Close button",
+      "description": "Control the visibility of the close button in the panel header.",
+      "note": "Use the <code>showCloseButton</code> property to show or hide the close button in the panel header."
+    },
+    "backdrop": {
+      "title": "Backdrop",
+      "description": "Adds a dark background behind the panel to create a modal-like experience. Control whether clicking the backdrop closes the panel.",
+      "note": "Use the <code>hasBackdrop</code> property to enable/disable the backdrop (default <code>true</code>) and <code>closeOnBackdropClick</code> to control whether clicking the backdrop closes the panel."
+    },
+    "custom-backdrop": {
+      "title": "Custom backdrop",
+      "description": "Customize the backdrop with custom CSS classes. You can apply effects such as blur, custom colors and transitions.",
+      "note": "Use the <code>backdropClass</code> property to add custom CSS classes to the panel backdrop. You can add a single class or an <code>array</code> of classes."
+    },
+    "multiple": {
+      "title": "Multiple panels",
+      "description": "Open multiple panels simultaneously from different sides. Control stacking with z-index and close all at once.",
+      "note": "Each open panel is independent and can have its own configuration. Use the <code>closeAll()</code> method of the <code>SidebarPanelService</code> to programmatically close all open panels simultaneously."
+    },
+    "footer-actions": {
+      "title": "Footer actions",
+      "description": "Add action buttons in the panel footer.",
+      "note": "Use <code>customButtons</code> for simple actions or <code>footerTemplate</code> for fully customized layouts. You can combine multiple buttons with the different NUI variants and colors."
+    },
+    "child-footer-actions": {
+      "title": "Actions from child component",
+      "description": "The child component can register its own footer actions using SidebarPanelActionsService.",
+      "note": "This approach is ideal for forms where the child handles all the logic (validation, saving, states). The child component injects <code>SidebarPanelActionsService</code> and registers actions via <code>register()</code>. Actions can have reactive states (disabled, loading) and execute complex logic."
+    }
+  },
+  "api": {
+    "service": {
+      "title": "SidebarPanelService",
+      "description": "Service methods for managing side panels"
+    },
+    "ref-properties": {
+      "title": "SidebarPanelRef (Properties)",
+      "description": "Properties of the side panel reference"
+    },
+    "ref-methods": {
+      "title": "SidebarPanelRef (Methods)",
+      "description": "Side panel reference methods for control and events"
+    },
+    "config": {
+      "title": "SidebarPanelConfig",
+      "description": "Complete side panel configuration"
+    },
+    "custom-button": {
+      "title": "SidebarPanelCustomButton",
+      "description": "Footer custom button configuration"
+    },
+    "minimized-tab": {
+      "title": "MinimizedTabCustomization",
+      "description": "Customization of the tab when the panel is minimized"
+    },
+    "footer-actions": {
+      "title": "SidebarPanelAction",
+      "description": "Definition of actions registered from child components for the panel footer"
+    },
+    "footer-actions-service": {
+      "title": "SidebarPanelActionsService",
+      "description": "Service for child components to register actions in the panel footer"
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Color variables",
+      "description": "CSS variables to control the colors of the side panel: background, text, borders and overlay. These variables automatically adapt to the light/dark mode of the active theme."
+    },
+    "layout": {
+      "title": "Layout variables",
+      "description": "CSS variables to control the size and spacing of the side panel: predefined size presets (xs to full) and header and content padding"
+    },
+    "typography": {
+      "title": "Typography variables",
+      "description": "CSS variables to control the typography of the side panel title"
+    },
+    "elevation": {
+      "title": "Elevation variables",
+      "description": "CSS variables to control the shadow and z-index of the side panel and overlay"
+    },
+    "scrollbar": {
+      "title": "Scrollbar variables",
+      "description": "CSS variables to control the appearance of the side panel scrollbar"
+    },
+    "examples": {
+      "title": "Customization examples",
+      "description": "SCSS examples to customize side panel styles in your application"
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Translation tokens",
+      "description": "The SidebarPanel component uses generic NuiI18nService tokens for the control buttons.",
+      "note": "All tokens are shared between multiple components. Override them globally with <code>provideNuiI18n({...})</code>.",
+      "rows": {
+        "close": {
+          "description": "Accessible label for the close button."
+        },
+        "minimize": {
+          "description": "Accessible label for the minimize button."
+        },
+        "restore": {
+          "description": "Accessible label for the restore button, visible when the panel is minimized."
+        },
+        "expand": {
+          "description": "Accessible label for the expand button."
+        },
+        "collapse": {
+          "description": "Accessible label for the collapse button."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA roles and attributes",
+      "description": "The SidebarPanel implements an accessible dialog-like pattern so screen readers recognize it as a distinct content area.",
+      "elements": {
+        "panel": "Panel root element",
+        "closeButton": "Close button",
+        "minimizeButton": "Minimize / restore button",
+        "expandButton": "Expand / collapse button",
+        "backdrop": "Background overlay"
+      },
+      "rows": {
+        "panelRole": {
+          "description": "The panel root carries <code>role=\"dialog\"</code> to signal a distinct region to assistive technologies."
+        },
+        "ariaLabelledby": {
+          "description": "<code>aria-labelledby</code> points to the panel title element, giving the dialog an accessible name derived from the visible heading."
+        },
+        "closeLabel": {
+          "description": "The close button uses the i18n token <code>close</code> as <code>aria-label</code>."
+        },
+        "minimizeLabel": {
+          "description": "The minimize/restore button exposes the corresponding i18n token (<code>minimize</code> or <code>restore</code>) as <code>aria-label</code> according to state."
+        },
+        "expandLabel": {
+          "description": "The expand/collapse button exposes the corresponding token (<code>expand</code> or <code>collapse</code>) as <code>aria-label</code>."
+        },
+        "backdropHidden": {
+          "description": "The background overlay is hidden from assistive technologies with <code>aria-hidden=\"true\"</code>."
+        }
+      }
+    },
+    "naming": {
+      "title": "Accessible name",
+      "description": "The accessible name of the panel is obtained from its visible title via <code>aria-labelledby</code>. Control buttons are labelled with i18n tokens.",
+      "note": "Always provide a visible title inside the panel, as it automatically becomes the dialog name.",
+      "elements": {
+        "panelWithTitle": "Panel with title",
+        "controlButtons": "Control buttons"
+      },
+      "info": {
+        "ariaLabelledby": "Panel title (aria-labelledby)",
+        "i18nTokens": "i18n tokens for button labels"
+      },
+      "rows": {
+        "title": {
+          "description": "The visible panel title provides the accessible name of the <code>role=\"dialog\"</code> region."
+        },
+        "buttons": {
+          "description": "Control buttons (close, minimize, expand) use i18n tokens as accessible labels."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Keyboard interaction",
+      "description": "The SidebarPanel supports keyboard navigation for all interactive controls.",
+      "rows": {
+        "escape": {
+          "description": "Closes the panel in modal mode, returning focus to the element that opened it."
+        },
+        "tab": {
+          "description": "Cycles focus between the panel's interactive elements. Focus is trapped while the panel is open in modal mode."
+        },
+        "spaceEnter": {
+          "description": "Activates the focused control button (close, minimize, expand)."
+        }
+      }
+    }
+  }
+}

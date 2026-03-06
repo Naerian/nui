@@ -2,21 +2,25 @@
   position: relative;
 }
 
+// ── Trigger button ──────────────────────────────────────────
 .language-trigger {
   background-color: var(--nui-surface-secondary);
   border: 1px solid var(--nui-border-high);
-  color: var(--nui-on-surface-secondary);
   width: 40px;
   height: 40px;
   border-radius: var(--nui-border-radius-sm);
   cursor: pointer;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 
   &:hover {
     border-color: var(--nui-primary);
-    background-color: var(--nui-primary-alpha-10);
+    box-shadow: 0 0 0 3px var(--nui-primary-alpha-10);
   }
 
   i {
@@ -24,21 +28,16 @@
   }
 }
 
+// ── Dropdown panel ──────────────────────────────────────────
 .language-dropdown {
   background-color: var(--nui-surface);
   border: 1px solid var(--nui-border-high);
   border-radius: var(--nui-border-radius-md);
   box-shadow: var(--nui-box-shadow-md);
-  min-width: 200px;
+  min-width: 220px;
   margin-top: 8px;
   overflow: hidden;
   animation: dropdownFadeIn 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 8px;
-  max-height: 300px;
-  overflow-y: auto;
 
   @keyframes dropdownFadeIn {
     from {
@@ -50,32 +49,53 @@
       transform: translateY(0);
     }
   }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px;
+  }
 }
 
+// ── Font item ───────────────────────────────────────────────
 .language-item {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.625rem 0.875rem;
   background: none;
   border: none;
   color: var(--nui-on-surface);
-  font-size: 0.875rem;
   text-align: left;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  border-radius: var(--nui-border-radius-sm);
+  transition: background-color 0.15s ease;
 
   &:hover {
     background-color: var(--nui-primary-alpha-10);
   }
 
-  &.active {
+  &--active {
     background-color: var(--nui-primary-alpha-10);
-    font-weight: 600;
 
-    .language-name {
+    .language-item__label {
       color: var(--nui-primary);
+      font-weight: 600;
     }
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    flex: 1;
+    white-space: nowrap;
+  }
+
+  .ri-check-line {
+    color: var(--nui-primary);
+    font-size: 1.125rem;
+    flex-shrink: 0;
   }
 }
 

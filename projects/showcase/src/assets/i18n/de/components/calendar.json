@@ -1,0 +1,392 @@
+{
+  "title": "Kalender",
+  "subtitle": "Komponente zur Datumsauswahl mit mehreren Modi (Tag, Woche, Bereich), Größen und Breitenstrategien",
+  "basic": {
+    "title": "Grundlegende Verwendung",
+    "description": "Einfacher Kalender für die Einzeldatumsauswahl. Zeigt den aktuellen Monat an und ermöglicht die Navigation zwischen Monaten und Jahren."
+  },
+  "sizes": {
+    "title": "Größen",
+    "description": "Fünf Größenoptionen (xs, sm, md, lg, xl) und eine sechste Auto-Option, die sich dem Container anpasst. Größen skalieren alle internen Elemente harmonisch.",
+    "note": "Größen beeinflussen Breite, Zellhöhe, Innenabstand und Schriftgröße des Kalenders. Verwende <code>size</code> mit den Werten <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> oder <code>'auto'</code>."
+  },
+  "widths": {
+    "title": "Breitenstrategien",
+    "description": "Zwei Breitenstrategien: <strong>compact</strong> (feste Breite basierend auf Größe) und <strong>full</strong> (nimmt 100% des Containers ein). Der Full-Modus verwendet Container Queries zur Anpassung der Typografie.",
+    "note": "Verwende <code>width='compact'</code> für einen Kalender mit fester Breite, ideal für Popovers. Verwende <code>width='full'</code> für einen Kalender, der den gesamten verfügbaren Platz einnimmt, ideal für Formulare oder Inhaltsbereiche."
+  },
+  "week-selection": {
+    "title": "Wochenauswahl",
+    "description": "Spezieller Modus zur Auswahl einer vollständigen Woche (7 aufeinanderfolgende Tage). Nützlich für die Wochenplanung.",
+    "note": "Setze <code>type='WEEK'</code>, um diesen Modus zu aktivieren. Der Kalender hebt beim Hover die gesamte Woche hervor und gibt ein Objekt mit Start- und Enddatum der Woche zurück."
+  },
+  "range-selection": {
+    "title": "Bereichsauswahl",
+    "description": "Ermöglicht die Auswahl eines Datumsbereichs mit Start und Ende. Zeigt die Zwischendaten des Bereichs visuell an.",
+    "note": "Setze <code>type='RANGE'</code>, um diesen Modus zu aktivieren. Der Kalender wartet auf zwei Klicks: einen für den Beginn und einen für das Ende des Bereichs. Der Output gibt ein <code>{ start: Date, end: Date }</code>-Objekt zurück."
+  },
+  "presets": {
+    "title": "Schnellbereichs-Voreinstellungen",
+    "description": "Füge Voreinstellungsschaltflächen für häufige Bereiche wie 'Letzte Woche', 'Letzter Monat', 'Letztes Jahr' hinzu. Unterstützt Remix Icon-Icons.",
+    "note": "Diese Funktion ist nur bei <code>type='RANGE'</code> verfügbar. Gib ein Array von <code>DateRangePreset</code>-Objekten in <code>customPresets</code> an. Jede Voreinstellung hat ein <code>label</code>, einen <code>range</code> (mit Start/Ende) und ein optionales <code>icon</code>."
+  },
+  "time-picker": {
+    "title": "Integration mit Zeitauswahl",
+    "description": "Kombiniert Datumsauswahl mit Zeitauswahl. Unterstützt Startzeit, Endzeit oder beides, abhängig vom Kalendertyp.",
+    "note": "Verwende <code>showTimePicker='true'</code> und konfiguriere <code>timePickerMode</code> mit <code>'start'</code>, <code>'end'</code> oder <code>'both'</code>. Du kannst die Zeitauswahl mit <code>timePickerConfig</code> anpassen (Schritte, Bereich, Voreinstellungen, usw.)."
+  },
+  "disabled-dates": {
+    "title": "Deaktivierte Daten",
+    "description": "Blockiere bestimmte Daten, um deren Auswahl zu verhindern. Nützlich für Feiertage, Wochenenden oder nicht verfügbare Daten.",
+    "note": "Verwende <code>disabledDates</code>, um ein Array deaktivierter Daten anzugeben. Deaktivierte Daten zeigen einen deutlich abgedunkelten Stil und sind nicht auswählbar."
+  },
+  "min-max-dates": {
+    "title": "Mindest- und Höchstbereich",
+    "description": "Schränkt den auswählbaren Datumsbereich durch Mindest- und Höchstwerte ein. Daten außerhalb des Bereichs sind deaktiviert.",
+    "note": "Konfiguriere <code>minDate</code> und <code>maxDate</code>, um die Grenzen festzulegen. Benutzer können nicht über diese Grenzen hinaus navigieren oder Daten außerhalb des Bereichs auswählen."
+  },
+  "reactive-forms": {
+    "title": "Reaktive Formulare",
+    "description": "Vollständige Integration mit Angular-Reaktivformularen. Implementiert ControlValueAccessor für automatische Synchronisierung.",
+    "note": "Verwende <code>formControl</code> oder <code>formControlName</code> für die Integration mit Angular-Formularen. Die Komponente verwaltet Synchronisierung, Validierung und Zustand automatisch. Unterstützt alle Typen (DAY, WEEK, RANGE) in Formularen."
+  },
+  "dynamic-disabled-dates": {
+    "title": "Dynamisch deaktivierte Daten",
+    "description": "Deaktiviere Daten gemäß komplexer Geschäftslogik mit einer benutzerdefinierten Funktion. Überschreibt das statische <code>disabledDates</code>-Array.",
+    "note": "Verwende <code>isDateEnabledFn</code>, um dynamische Aktivierungsregeln zu definieren. Die Funktion empfängt ein Datum und muss <code>true</code> zurückgeben, wenn es aktiviert ist, oder <code>false</code>, wenn es deaktiviert werden soll. Ideal für Unternehmenskalender, Buchungssysteme oder Anwendungen mit komplexer Verfügbarkeitslogik."
+  },
+  "date-status": {
+    "title": "Visuelle Zustände (dateStatusFn)",
+    "description": "Weist Daten visuelle Zustände zu, um Geschäftsinformationen anzuzeigen: Verfügbarkeit, Priorität, Ereignisse, usw.",
+    "note": "Verwende <code>dateStatusFn</code>, um jedem Datum einen von vier Zuständen zuzuweisen: <code>'success'</code> (grün), <code>'info'</code> (blau), <code>'warning'</code> (bernstein) oder <code>'danger'</code> (rot). Zustände werden als dezente Farblinie oben am Tag angezeigt. Gib <code>null</code> für Tage ohne besonderen Zustand zurück."
+  },
+  "selection-modes": {
+    "title": "Erweiterte Auswahlmodi",
+    "description": "Der Kalender unterstützt drei spezialisierte Auswahlmodi: normale Tagesauswahl, Monat/Jahr-Auswahl und reine Jahresauswahl.",
+    "note": "Jeder Modus ist für einen bestimmten Anwendungsfall optimiert: <code>type='day'</code> für vollständige Datumsauswahl, <code>type='month'</code> für die Auswahl von Monat und Jahr (ideal für monatliche Filter) und <code>type='year'</code> für die reine Jahresauswahl (ideal für Jahresberichte). Die Modi <code>month</code> und <code>year</code> starten direkt in der entsprechenden Ansicht und schließen automatisch nach der Auswahl, wenn <code>closeOnSelect</code> aktiv ist."
+  },
+  "multiple-selection": {
+    "title": "Mehrfachauswahl",
+    "description": "Ermöglicht die Auswahl mehrerer Daten, Monate oder Jahre mit einem einfachen Klick. Ideal für die Auswahl von Arbeitstagen, Feiertagen oder verteilten Ereignissen.",
+    "note": "Aktiviere den Mehrfachauswahlmodus mit <code>selection=\"multiple\"</code> kombiniert mit <code>type='day'</code>, <code>type='month'</code> oder <code>type='year'</code>. Benutzer können mehrere Elemente klicken, um sie zur Auswahl hinzuzufügen oder daraus zu entfernen (Umschalten). Dieser Modus <strong>schließt den Kalender nie automatisch</strong>, auch wenn <code>closeOnSelect</code> <code>true</code> ist, um eine kontinuierliche Auswahl zu ermöglichen. Der Output gibt ein Objekt mit <code>dates</code>, <code>months</code> oder <code>years</code> je nach Typ zurück."
+  },
+  "week-numbers": {
+    "title": "ISO-8601-Wochennummern",
+    "description": "Zeigt Wochennummern gemäß dem ISO-8601-Standard in einer Spalte links vom Kalender an. Nützlich für Unternehmen, Logistik und Planung.",
+    "note": "Aktiviere Wochennummern mit <code>[showWeekNumbers]=\"true\"</code>. Wochennummern sind anklickbar bei <code>type='week'</code> oder wenn <code>type='day'</code> und <code>selection='multiple'</code>, wodurch die vollständige Woche mit einem einzigen Klick ausgewählt werden kann. Der ISO-8601-Standard definiert, dass die Woche am Montag beginnt und Woche 1 des Jahres die erste Woche ist, die mindestens 4 Tage des neuen Jahres enthält."
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Eingabeeigenschaften zur Konfiguration des Verhaltens, Erscheinungsbilds und der Einschränkungen des Kalenders"
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Ereignisse, die der Kalender ausgibt, wenn der Benutzer ein Datum oder einen Bereich auswählt"
+    },
+    "calendar-value": {
+      "title": "CalendarValue",
+      "description": "Union-Typ, der alle möglichen Kalenderwerte je nach ausgewähltem Typ repräsentiert",
+      "note": "Der Typ des zurückgegebenen Werts hängt vom <code>type</code> ab: <strong>DAY</strong> gibt <code>Date | null</code> zurück, <strong>WEEK</strong> gibt <code>{ start: Date, end: Date } | null</code> zurück, und <strong>RANGE</strong> gibt <code>{ start: Date, end: Date } | null</code> zurück."
+    },
+    "calendar-type": {
+      "title": "CalendarType",
+      "description": "Enum, das den Kalenderauswahlmodus definiert"
+    },
+    "calendar-width": {
+      "title": "CalendarWidth",
+      "description": "Enum, das die Kalenderbreitenstrategie definiert"
+    },
+    "calendar-selection": {
+      "title": "CalendarSelection",
+      "description": "Enum, das den Kalenderauswahlmodus definiert: einfach oder mehrfach"
+    },
+    "view-mode": {
+      "title": "ViewMode",
+      "description": "Enum, das den aktuellen Ansichtsmodus definiert (Tage, Monate oder Jahre). Primär für den internen Komponentengebrauch.",
+      "note": "Dieses Enum wird intern von der Komponente zur Verwaltung der Navigation zwischen Ansichten verwendet. In den meisten Fällen ist es nicht notwendig, es direkt zu konfigurieren."
+    },
+    "preset": {
+      "title": "DateRangePreset",
+      "description": "Interface zur Definition von Schnellbereichs-Voreinstellungen mit Label, Datumsbereich und optionalem Icon"
+    },
+    "smart-types": {
+      "title": "Smart Types",
+      "description": "Typen und Funktionen für erweiterte Datumsvalidierung und Statuslogik. Ermöglichen die Anwendung komplexer Geschäftsregeln und dynamischer Visualisierungen.",
+      "note": "Diese Typen sind grundlegend für die Implementierung erweiterter Funktionen: <strong>DateStatusFn</strong> weist Daten visuelle Zustände (success, warning, danger, info) basierend auf der Geschäftslogik zu, während <strong>IsDateEnabledFn</strong> dynamisch steuert, welche Daten aktiviert oder deaktiviert sind. Beide Funktionen empfangen ein Datum und ermöglichen die Implementierung komplexer Validierungen wie Unternehmenskalender, Buchungssysteme oder benutzerdefinierte Verfügbarkeitsregeln."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Farben",
+      "description": "Der Kalender verwendet primär globale Theme-Variablen. Ausgewählte Tage, Hover- und Aktiv-Zustände verwenden die Primärfarbe des aktiven Themes.",
+      "note": "Die Komponente integriert sich vollständig in die NUI-Thematisierung. Primärfarben, Hintergrund, Text und Rahmen werden automatisch aus dem ausgewählten Theme-Preset übernommen."
+    },
+    "sizes": {
+      "title": "Größen",
+      "description": "Größenspezifische CSS-Variablen, die Breite, Innenabstand, Abstände, Zellengröße und Typografie steuern. Fünf Größenvarianten verfügbar: xs, sm, md (Standard), lg und xl."
+    },
+    "structure": {
+      "title": "Struktur",
+      "description": "Strukturelle CSS-Variablen zur Steuerung von Rahmen, Transparenzen, Animationen und Abmessungen. Enthält Anpassung von Tabs, Tagen aus anderen Monaten, Voreinstellungen und Fokuszuständen."
+    },
+    "customization": {
+      "title": "Anpassung",
+      "description": "Beispiele zur Anpassung von Kalenderstilen in deiner Anwendung. Du kannst CSS-Variablen global oder instanzspezifisch überschreiben."
+    }
+  },
+  "i18n": {
+    "navigation": {
+      "title": "Navigations- und Label-Tokens",
+      "description": "Tokens für Wochentagsnamen, Monatsnamen, Navigationsschaltflächen-Labels und Tagesstatus-Labels.",
+      "note": "Alle Array-Tokens (<code>weekDaysShort</code>, <code>weekDays</code>, <code>months</code>, <code>shortMonths</code>) müssen alle Werte angeben. Überschreibe global mit <code>provideNuiI18n({ calendar: {...} })</code> oder pro Instanz mit dem Input <code>[i18n]</code>.",
+      "rows": {
+        "weekDaysShort": {
+          "description": "Abgekürzte Tagnamen im Kalender-Header (Montag–Sonntag)."
+        },
+        "weekDays": {
+          "description": "Vollständige Tagnamen in zugänglichen Labels und Tooltips."
+        },
+        "months": {
+          "description": "Vollständige Monatsnamen im Monatsselektor und zugänglichen Labels."
+        },
+        "shortMonths": {
+          "description": "Abgekürzte Monatsnamen in kompakten Kontexten."
+        },
+        "prevMonth": {
+          "description": "Label für die Schaltfläche zum vorherigen Monat."
+        },
+        "nextMonth": {
+          "description": "Label für die Schaltfläche zum nächsten Monat."
+        },
+        "prevYears": {
+          "description": "Label für die Schaltfläche zu vorherigen Jahren im Jahresselektor."
+        },
+        "nextYears": {
+          "description": "Label für die Schaltfläche zu nächsten Jahren im Jahresselektor."
+        },
+        "changeMonth": {
+          "description": "Label für die Schaltfläche zum Öffnen des Monatsselektors."
+        },
+        "changeYear": {
+          "description": "Label für die Schaltfläche zum Öffnen des Jahresselektors."
+        },
+        "year": {
+          "description": "Label für den Jahresselektor-Header."
+        },
+        "week": {
+          "description": "Zugängliches Label für die Wochennummer-Header-Spalte."
+        },
+        "weekNumbers": {
+          "description": "Tooltip für die Umschalttaste der Wochennummernspalte."
+        },
+        "today": {
+          "description": "Label für die Schnellzugriffs-Schaltfläche 'Heute'."
+        },
+        "selectDay": {
+          "description": "Zugängliche Beschreibung für die Tagesauswahl."
+        },
+        "dayDisabled": {
+          "description": "Screenreader-Ansage für deaktivierte Tageszellen."
+        },
+        "openCalendar": {
+          "description": "Label für die Schaltfläche zum Öffnen des Kalender-Popovers."
+        },
+        "showTime": {
+          "description": "Label für die Schaltfläche zum Anzeigen der Zeitauswahl."
+        },
+        "hideTime": {
+          "description": "Label für die Schaltfläche zum Ausblenden der Zeitauswahl."
+        },
+        "monthAria": {
+          "description": "Zugängliches Label für das Monatsauswahlraster."
+        },
+        "yearsAria": {
+          "description": "Zugängliches Label für das Jahresauswahlraster."
+        }
+      }
+    },
+    "presetsAndTabs": {
+      "title": "Voreinstellungs-, Tab- und Zeitauswahl-Tokens",
+      "description": "Tokens für schnellen Zugriff auf vordefinierte Datumsbereiche, Ansichtstabs und integrierte Zeitauswahl-Labels.",
+      "rows": {
+        "shortcuts": {
+          "description": "Header-Label für das Voreinstellungspanel mit Schnellzugriff auf Datumsbereiche."
+        },
+        "presetsToday": {
+          "description": "Label für die Schnellvoreinstellung 'Heute'."
+        },
+        "last7Days": {
+          "description": "Label für die Schnellvoreinstellung 'Letzte 7 Tage'."
+        },
+        "last30Days": {
+          "description": "Label für die Schnellvoreinstellung 'Letzte 30 Tage'."
+        },
+        "thisMonth": {
+          "description": "Label für die Schnellvoreinstellung 'Diesen Monat'."
+        },
+        "lastMonth": {
+          "description": "Label für die Schnellvoreinstellung 'Letzten Monat'."
+        },
+        "thisYear": {
+          "description": "Label für die Schnellvoreinstellung 'Dieses Jahr'."
+        },
+        "tabCalendar": {
+          "description": "Label für den Kalenderansicht-Tab."
+        },
+        "tabPresets": {
+          "description": "Label für den Voreinstellungsansicht-Tab."
+        },
+        "tabTime": {
+          "description": "Label für den Zeitansicht-Tab."
+        },
+        "timeStart": {
+          "description": "Label für den Startzeit-Input im Bereichsmodus mit Zeitauswahl."
+        },
+        "timeEnd": {
+          "description": "Label für den Endzeit-Input im Bereichsmodus mit Zeitauswahl."
+        }
+      }
+    },
+    "ariaTokens": {
+      "title": "Zustands- und Barrierefreiheits-ARIA-Tokens",
+      "description": "Tokens, die nur für assistive Technologien zugänglich sind, um Tagesstatus, Navigationsänderungen und Bereichsauswahl anzuzeigen.",
+      "rows": {
+        "ariaToday": {
+          "description": "Screenreader-Anmerkung zur Tageszelle des heutigen Tages."
+        },
+        "selected": {
+          "description": "Screenreader-Anmerkung zu ausgewählten Tageszellen."
+        },
+        "inRange": {
+          "description": "Screenreader-Anmerkung zu Tageszellen innerhalb eines ausgewählten Bereichs."
+        },
+        "ariaDisabled": {
+          "description": "Screenreader-Anmerkung zu deaktivierten Tageszellen."
+        },
+        "statusSuccess": {
+          "description": "Screenreader-Anmerkung für Daten mit Erfolgsstatus."
+        },
+        "statusWarning": {
+          "description": "Screenreader-Anmerkung für Daten mit Warnungsstatus."
+        },
+        "statusDanger": {
+          "description": "Screenreader-Anmerkung für Daten mit Gefahrenstatus."
+        },
+        "statusInfo": {
+          "description": "Screenreader-Anmerkung für Daten mit Informationsstatus."
+        },
+        "calendarLabel": {
+          "description": "Zugängliches Label für das Kalenderraster (<code>role=\"grid\"</code>)."
+        },
+        "keyboardInstructions": {
+          "description": "Anweisungen für Screenreader-Benutzer zur Tastaturnavigation im Kalender."
+        },
+        "monthNavigated": {
+          "description": "Live-Ansage beim Wechsel des sichtbaren Monats. Unterstützt Platzhalter <code>{month}</code> und <code>{year}</code>."
+        },
+        "rangeStart": {
+          "description": "Live-Ansage bei Auswahl des Beginns eines Datumsbereichs."
+        },
+        "rangeComplete": {
+          "description": "Live-Ansage, wenn ein vollständiger Datumsbereich ausgewählt wurde."
+        },
+        "weekNumberLabel": {
+          "description": "Zugängliches Label für jede Wochennummernzelle. Unterstützt den Platzhalter <code>{week}</code>."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA-Rollen und -Attribute",
+      "description": "Der Kalender implementiert das ARIA-Grid-Muster für Tageszellen und einen Live-Bereich für Navigationsansagen.",
+      "elements": {
+        "grid": "Tagesraster",
+        "weekHeader": "Wochentagsheader",
+        "dayCell": "Tageszelle",
+        "dayButton": "Tagesschaltfläche",
+        "liveRegion": "Live-Bereich"
+      },
+      "rows": {
+        "grid": {
+          "description": "Das Tagesraster verwendet <code>role=\"grid\"</code>, um die Pfeiltastennavigation zwischen Zellen zu ermöglichen."
+        },
+        "gridLabel": {
+          "description": "Das Raster erhält sein Label vom i18n-Token <code>calendar.a11y.calendarLabel</code>."
+        },
+        "columnHeader": {
+          "description": "Wochentagsheader verwenden <code>role=\"columnheader\"</code> mit dem vollständigen Tagnamen als zugängliches Label."
+        },
+        "gridcell": {
+          "description": "Jede Tageszelle verwendet <code>role=\"gridcell\"</code>."
+        },
+        "selected": {
+          "description": "Ausgewählte Tageszellen zeigen <code>aria-selected=\"true\"</code>."
+        },
+        "disabled": {
+          "description": "Deaktivierte Tageszellen zeigen <code>aria-disabled=\"true\"</code>."
+        },
+        "liveRegion": {
+          "description": "Ein versteckter <code>aria-live=\"polite\"</code>-Bereich kündigt Monatsnavigation für Screenreader an."
+        }
+      }
+    },
+    "naming": {
+      "title": "Zugänglicher Name",
+      "description": "Das Kalenderraster und jede Tageszelle haben beschreibende zugängliche Namen aus i18n-Tokens und dem formatierten Datum.",
+      "note": "Tageszellen enthalten Zustandsanmerkungen (heute, ausgewählt, im Bereich, deaktiviert), die ihrem Label über <code>calendar.aria.*</code>-Tokens hinzugefügt werden.",
+      "elements": {
+        "grid": "Tagesraster",
+        "dayButton": "Tagesschaltfläche",
+        "stateAnnotation": "Zustandsanmerkung"
+      },
+      "info": {
+        "i18nLabel": "calendarLabel (i18n)",
+        "dateFormatted": "Formatiertes Datum",
+        "ariaTokens": "calendar.aria.*-Tokens"
+      },
+      "rows": {
+        "grid": {
+          "description": "Das Kalenderraster erhält seinen zugänglichen Namen vom Token <code>calendar.a11y.calendarLabel</code>."
+        },
+        "dayButton": {
+          "description": "Der zugängliche Name jeder Tagesschaltfläche ist das formatierte Datum (z.B.: 'Dienstag, 10. Dezember 2024')."
+        },
+        "stateAnnotation": {
+          "description": "Zustands-Tokens (<code>calendar.aria.today</code>, <code>selected</code>, usw.) werden dem Datum-Label hinzugefügt, um den Zustand für Screenreader zu kommunizieren."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Tastaturinteraktion",
+      "description": "Das Kalender-Tagesraster implementiert vollständige Tastaturnavigation gemäß dem ARIA-Grid-Muster.",
+      "rows": {
+        "arrowHorizontal": {
+          "description": "Bewegt den Fokus einen Tag vorwärts/rückwärts."
+        },
+        "arrowVertical": {
+          "description": "Bewegt den Fokus eine Woche vorwärts/rückwärts."
+        },
+        "home": {
+          "description": "Bewegt den Fokus zum ersten Tag der aktuellen Woche."
+        },
+        "end": {
+          "description": "Bewegt den Fokus zum letzten Tag der aktuellen Woche."
+        },
+        "pageUp": {
+          "description": "Navigiert zum vorherigen Monat."
+        },
+        "pageDown": {
+          "description": "Navigiert zum nächsten Monat."
+        },
+        "spaceEnter": {
+          "description": "Wählt den fokussierten Tag aus."
+        },
+        "escape": {
+          "description": "Schließt das Kalender-Popover und gibt den Fokus an den Aktivator zurück."
+        }
+      }
+    }
+  }
+}

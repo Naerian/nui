@@ -1,0 +1,170 @@
+{
+  "title": "Toast",
+  "subtitle": "Notifications temporaires non intrusives pour les retours utilisateur",
+  "examples": {
+    "basic": {
+      "title": "Toasts basiques",
+      "description": "Affichez des notifications simples avec différents types : succès, erreur, avertissement et info."
+    },
+    "withTitle": {
+      "title": "Toasts avec titre",
+      "description": "Ajoutez un titre pour donner plus de contexte à la notification."
+    },
+    "withActions": {
+      "title": "Toasts avec actions",
+      "description": "Incluez des boutons d'action pour que l'utilisateur puisse interagir avec la notification."
+    },
+    "positions": {
+      "title": "Positions",
+      "description": "Contrôlez où les toasts apparaissent à l'écran : haut-gauche, haut-centre, haut-droite, bas-gauche, bas-centre, bas-droite."
+    },
+    "iconTop": {
+      "title": "Icône en haut",
+      "description": "Affiche l'icône du toast centrée en haut pour un design plus proéminent.",
+      "note": "Utilisez la propriété <code>iconPosition='top'</code> pour centrer l'icône en haut du toast. C'est particulièrement utile pour les toasts avec titres et actions, car cela améliore la hiérarchie visuelle et rend l'icône plus proéminente."
+    },
+    "icons": {
+      "title": "Icônes personnalisées",
+      "description": "Vous pouvez afficher des icônes par défaut basées sur le type de toast ou utiliser des icônes personnalisées. Vous pouvez même masquer l'icône si désiré.",
+      "note": "Utilisez la propriété <code>icon</code>. Si vous utilisez la valeur <code>false</code>, l'icône sera masquée. Si vous utilisez une <code>chaîne</code>, vous pouvez spécifier un <strong>Remix Icon</strong> personnalisé. Par défaut, les icônes sont affichées selon le type de toast avec <code>icon</code> défini à <code>true</code>."
+    },
+    "duration": {
+      "title": "Durée",
+      "description": "Configurez combien de temps le toast reste visible avant de disparaître. Utilisez 0 pour les toasts qui ne se ferment pas automatiquement."
+    },
+    "loading": {
+      "title": "Toast de chargement",
+      "description": "Affiche un toast avec état de chargement qui peut être mis à jour dynamiquement quand l'opération se termine."
+    }
+  },
+  "api": {
+    "service": {
+      "title": "ToastService",
+      "description": "Service principal pour afficher les notifications toast. Fournit des méthodes pour créer, mettre à jour et fermer les toasts."
+    },
+    "config": {
+      "title": "ToastConfig",
+      "description": "Interface de configuration individuelle par toast. Permet de remplacer la configuration globale pour des toasts spécifiques."
+    },
+    "global": {
+      "title": "Configuration globale",
+      "description": "Configuration globale pour le système toast. Peut être définie lors de l'initialisation de l'application."
+    },
+    "types": {
+      "title": "Types et interfaces",
+      "description": "Définitions de types TypeScript pour le système toast : ToastType, ToastPosition, ToastAction, ToastRef."
+    },
+    "usage": {
+      "title": "Exemple d'utilisation complet",
+      "description": "Exemple complet intégrant ToastService dans un composant avec différents scénarios d'utilisation."
+    }
+  },
+  "theming": {
+    "container": {
+      "title": "Variables du conteneur",
+      "description": "Variables CSS pour personnaliser le conteneur général du toast (fond, bordure, ombre, espacement)."
+    },
+    "typography": {
+      "title": "Variables typographiques",
+      "description": "Variables CSS pour personnaliser le texte du toast (titre, message, taille de police, poids)."
+    },
+    "icon": {
+      "title": "Variables d'icône",
+      "description": "Variables CSS pour personnaliser l'icône du toast (taille, couleur, espacement)."
+    },
+    "close": {
+      "title": "Variables du bouton de fermeture",
+      "description": "Variables CSS pour personnaliser le bouton de fermeture (taille, couleur, survol)."
+    },
+    "progress": {
+      "title": "Variables de barre de progression",
+      "description": "Variables CSS pour personnaliser la barre de progression automatique (couleur, hauteur, animation)."
+    },
+    "types": {
+      "title": "Variables par type",
+      "description": "Variables CSS spécifiques à chaque type de toast (succès, erreur, avertissement, info, chargement)."
+    },
+    "animations": {
+      "title": "Variables d'animation",
+      "description": "Variables CSS pour personnaliser les animations d'entrée/sortie du toast."
+    },
+    "examples": {
+      "title": "Exemple de personnalisation",
+      "description": "Exemple de personnalisation complète du toast utilisant des variables CSS pour créer un thème sombre."
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Tokens de traduction",
+      "description": "Le composant Toast utilise le token générique <code>close</code> de NuiI18nService pour le libellé du bouton de fermeture.",
+      "note": "Le token <code>close</code> est partagé entre plusieurs composants (Toast, SidebarPanel…). Remplacez-le globalement pour localiser tous les boutons de fermeture en même temps.",
+      "rows": {
+        "close": {
+          "description": "Libellé accessible pour le bouton de fermeture sur les toasts dismissibles."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "Rôles et attributs ARIA",
+      "description": "Les toasts utilisent une région live pour que les lecteurs d'écran annoncent les nouvelles notifications sans interrompre le focus actuel de l'utilisateur.",
+      "elements": {
+        "host": "Élément hôte du toast",
+        "closeButton": "Bouton de fermeture"
+      },
+      "rows": {
+        "ariaLive": {
+          "description": "L'élément toast porte <code>aria-live=\"polite\"</code> pour les notifications informatives ou <code>\"assertive\"</code> pour les alertes critiques (erreur/avertissement)."
+        },
+        "ariaAtomic": {
+          "description": "<code>aria-atomic=\"true\"</code> garantit que le lecteur d'écran annonce le contenu complet du toast comme une seule unité."
+        },
+        "ariaLabel": {
+          "description": "Le nom accessible du toast est automatiquement dérivé de son contenu en suivant la priorité : titre → message → type."
+        },
+        "closeLabel": {
+          "description": "Le bouton de fermeture utilise le token i18n <code>close</code> comme libellé accessible."
+        }
+      }
+    },
+    "naming": {
+      "title": "Nom accessible",
+      "description": "Le nom accessible du toast est automatiquement dérivé de son contenu. Aucun <code>aria-label</code> explicite n'est nécessaire du consommateur.",
+      "note": "Fournissez toujours un contenu de titre ou de message significatif. Évitez les toasts qui reposent uniquement sur la couleur ou l'icône pour transmettre leur signification.",
+      "elements": {
+        "hostWithTitle": "Toast avec titre",
+        "hostWithMessage": "Toast sans titre",
+        "hostTypeFallback": "Toast avec repli sur le type"
+      },
+      "info": {
+        "title": "Titre du toast",
+        "message": "Message du toast",
+        "type": "Type du toast (succès, erreur…)"
+      },
+      "rows": {
+        "hostTitle": {
+          "description": "Quand un <code>titre</code> est fourni, il devient le libellé accessible du toast."
+        },
+        "hostMessage": {
+          "description": "Quand il n'y a pas de titre, le texte du <code>message</code> devient le libellé accessible."
+        },
+        "hostType": {
+          "description": "Quand il n'y a ni titre ni message, le <code>type</code> du toast est utilisé comme libellé de repli."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Interaction clavier",
+      "description": "Les toasts sont non-modaux. Le focus ne se déplace pas vers eux automatiquement ; les utilisateurs peuvent Tab jusqu'au bouton de fermeture si désiré.",
+      "rows": {
+        "tab": {
+          "description": "Tab déplace le focus vers le bouton de fermeture à l'intérieur du toast si un est visible."
+        },
+        "spaceEnter": {
+          "description": "Active le bouton de fermeture focalisé, dismissant le toast."
+        }
+      }
+    }
+  }
+}

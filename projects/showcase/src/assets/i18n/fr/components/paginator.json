@@ -1,0 +1,199 @@
+{
+  "title": "Paginateur",
+  "subtitle": "Composant avancé de navigation de données avec support pour des dispositions flexibles et le chargement infini",
+  "basic": {
+    "title": "Utilisation basique",
+    "description": "Configuration standard avec navigation numérique. Supporte la liaison bidirectionnelle pour la page et la taille."
+  },
+  "nav-display": {
+    "title": "Options d'affichage de navigation",
+    "description": "Définissez comment les boutons de navigation sont affichés : texte, icônes ou les deux. Personnalisez l'apparence des boutons de navigation pour correspondre au style de votre application.",
+    "note": "Utilisez l'entrée <code>navDisplay</code> avec les valeurs <code>'text'</code>, <code>'icon'</code> ou <code>'both'</code> pour afficher uniquement le texte, uniquement les icônes ou les deux dans les boutons de navigation. Les icônes sont basées sur la bibliothèque Remix Icon et sont automatiquement attribuées selon le type de bouton (première page, page précédente, page suivante, dernière page)."
+  },
+  "colors": {
+    "title": "Couleurs et variantes",
+    "description": "Supporte toutes les couleurs et variantes NUI (Solid, Outline, Ghost).",
+    "note": "Combinez <code>color</code> et <code>variant</code> pour personnaliser l'apparence du paginateur selon vos besoins."
+  },
+  "sizes": {
+    "title": "Options de taille de page",
+    "description": "Définissez un ensemble personnalisé d'options pour la taille de page.",
+    "note": "En utilisant l'entrée <code>size</code>, vous pouvez offrir aux utilisateurs un ensemble spécifique de tailles de page parmi lesquelles choisir."
+  },
+  "layout": {
+    "title": "Disposition personnalisée",
+    "description": "La fonctionnalité la plus puissante. Définissez exactement où va chaque élément (haut, gauche, centre, droite, bas) en utilisant un objet de configuration.",
+    "note": "<strong>⚠️ Important pour mobile :</strong> Les dispositions complexes conçues pour le bureau peuvent déborder sur les petits écrans. Fournissez toujours un <code>mobileLayout</code> optimisé qui réorganise les éléments verticalement et priorise la navigation essentielle. Cela évite les problèmes d'UX sur les appareils mobiles. <br/><br/><strong>Système de zones :</strong> Quand une disposition est définie, les attributs comme <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> et <code>showPageJump</code> sont ignorés car la disposition personnalisée contrôle entièrement ce qui est affiché et où."
+  },
+  "infinite": {
+    "title": "Chargement infini",
+    "description": "Transforme le paginateur en bouton <strong>Charger plus</strong> avec état de chargement intégré. Idéal pour les listes mobiles ou les fils d'actualité.",
+    "note": "Activez le mode de chargement infini avec <code>infiniteConfig</code>. Le paginateur devient un bouton qui charge plus d'éléments au clic. Utilisez la sortie <code>onLoadMore</code> dans <code>infiniteConfig</code> pour gérer la logique de chargement des données."
+  },
+  "api": {
+    "title": "API et référence",
+    "description": "Documentation complète des entrées, sorties et interfaces du composant Paginateur pour une intégration avancée.",
+    "inputs": {
+      "title": "Entrées",
+      "description": "Propriétés d'entrée du composant Paginateur"
+    },
+    "outputs": {
+      "title": "Sorties",
+      "description": "Événements émis par le composant Paginateur"
+    },
+    "texts": {
+      "title": "PaginatorI18n",
+      "description": "Interface pour les textes personnalisables du paginateur"
+    },
+    "keyboard": {
+      "title": "KeyboardConfig",
+      "description": "Interface pour la configuration de navigation au clavier"
+    },
+    "loading": {
+      "title": "LoadingConfig",
+      "description": "Interface pour la configuration de l'état de chargement"
+    },
+    "layout": {
+      "title": "PaginatorLayout",
+      "description": "Interface pour la disposition personnalisée : organise les éléments en zones (haut, gauche, centre, droite, bas)"
+    },
+    "icons": {
+      "title": "navIcons",
+      "description": "Interface pour la configuration des icônes personnalisables"
+    },
+    "infinite": {
+      "title": "InfiniteConfig",
+      "description": "Interface pour la configuration du mode défilement infini"
+    }
+  },
+  "styling": {
+    "title": "Styles et personnalisation",
+    "description": "Personnalisez l'apparence du paginateur en utilisant des variables CSS. Contrôlez la disposition, les boutons, les numéros de page et plus encore."
+  },
+  "theming": {
+    "layout": {
+      "title": "Disposition",
+      "description": "Variables CSS pour la disposition générale du paginateur"
+    },
+    "buttons": {
+      "title": "Boutons",
+      "description": "Variables CSS pour les boutons de navigation et les numéros de page"
+    },
+    "active": {
+      "title": "Page active",
+      "description": "Variables CSS pour l'état actif de la page courante"
+    },
+    "controls": {
+      "title": "Contrôles",
+      "description": "Variables CSS pour le sélecteur de taille, la plage d'éléments et le saut de page"
+    },
+    "infinite": {
+      "title": "Défilement infini",
+      "description": "Variables CSS pour le mode de chargement infini"
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Tokens de traduction",
+      "description": "Le Paginateur utilise des tokens i18n pour les libellés des boutons de navigation, les messages de plage d'éléments et le sélecteur de taille de page.",
+      "note": "Remplacez les tokens avec <code>provideNuiI18n({ paginator: { ... } })</code>.",
+      "rows": {
+        "firstPage": {
+          "description": "Libellé accessible pour le bouton 'Première page'."
+        },
+        "previousPage": {
+          "description": "Libellé accessible pour le bouton 'Page précédente'."
+        },
+        "nextPage": {
+          "description": "Libellé accessible pour le bouton 'Page suivante'."
+        },
+        "lastPage": {
+          "description": "Libellé accessible pour le bouton 'Dernière page'."
+        },
+        "itemsPerPage": {
+          "description": "Libellé pour le sélecteur d'éléments par page."
+        },
+        "of": {
+          "description": "Connecteur 'sur' utilisé dans le texte de plage (ex. '1–10 sur 100')."
+        },
+        "jumpToPage": {
+          "description": "Placeholder ou libellé pour le champ de saut de page."
+        }
+      }
+    },
+    "a11yTokens": {
+      "title": "Tokens d'accessibilité",
+      "description": "Tokens supplémentaires utilisés pour les annonces des lecteurs d'écran et les attributs aria du paginateur.",
+      "note": "Ces tokens sont localisés sous <code>paginator.a11y</code>.",
+      "rows": {
+        "pageLabel": {
+          "description": "Modèle de texte annoncé lors du changement de page (ex. 'Page 3 sur 10')."
+        },
+        "navigation": {
+          "description": "Aria-label pour la région de navigation du paginateur."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "Rôles et attributs ARIA",
+      "description": "Le Paginateur implémente le modèle de navigation ARIA avec <code>role=\"navigation\"</code> et des boutons correctement étiquetés.",
+      "elements": {
+        "nav": "Région de navigation",
+        "prevNextButton": "Boutons précédent/suivant",
+        "pageButton": "Bouton de numéro de page",
+        "currentPage": "Page courante"
+      },
+      "rows": {
+        "navRole": {
+          "description": "Le conteneur racine du paginateur a <code>role=\"navigation\"</code> et <code>aria-label</code> tiré du token i18n <code>navigation</code>."
+        },
+        "buttonLabels": {
+          "description": "Les boutons première/précédente/suivante/dernière page ont <code>aria-label</code> extrait des tokens i18n correspondants."
+        },
+        "ariaCurrent": {
+          "description": "Le bouton de page active porte <code>aria-current=\"page\"</code>."
+        }
+      }
+    },
+    "naming": {
+      "title": "Nom accessible",
+      "description": "Tous les contrôles interactifs du paginateur obtiennent leur nom accessible des tokens i18n, garantissant qu'ils sont descriptifs dans toute langue.",
+      "note": "Localisez les tokens de l'espace de noms <code>paginator</code> pour des libellés significatifs.",
+      "elements": {
+        "nav": "Région de navigation",
+        "buttons": "Boutons de navigation",
+        "currentPage": "Page courante"
+      },
+      "info": {
+        "navToken": "Token i18n 'navigation'",
+        "buttonTokens": "Tokens de boutons i18n",
+        "ariaCurrentPage": "aria-current='page'"
+      },
+      "rows": {
+        "nav": {
+          "description": "La région de navigation utilise le token <code>navigation</code> comme <code>aria-label</code>."
+        },
+        "buttons": {
+          "description": "Chaque bouton de navigation utilise son token i18n spécifique comme nom accessible."
+        },
+        "current": {
+          "description": "La page active porte <code>aria-current=\"page\"</code> pour que les lecteurs d'écran l'identifient."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Interaction clavier",
+      "description": "Le Paginateur est entièrement navigable au clavier avec une interaction standard de bouton.",
+      "rows": {
+        "tab": {
+          "description": "Tab déplace le focus entre les boutons et contrôles du paginateur."
+        },
+        "enterSpace": {
+          "description": "Active le bouton focalisé, naviguant vers la page correspondante."
+        }
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@
   <button
     nuiButton
     [cdkMenuTriggerFor]="actionMenu"
+    [cdkMenuPosition]="menuPositions()"
     (cdkMenuOpened)="onCdkMenuOpened()"
     (cdkMenuClosed)="onCdkMenuClosed()"
     [icon]="effectiveIcon()"
@@ -35,7 +36,7 @@
     [class]="'nui-action-menu--' + effectiveVariant()"
     [class]="'nui-action-menu--' + effectiveColor()"
     cdkMenu
-    [@fadeInOutScale]
+    [@dropdownFadeIn]
     role="menu"
     [id]="instanceId + '-menu'"
     [attr.aria-labelledby]="type() === 'dynamic' ? instanceId + '-trigger' : null"

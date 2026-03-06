@@ -1,0 +1,198 @@
+{
+  "title": "FAB Button",
+  "subtitle": "Botón de acción flotante con layouts radiales y múltiples opciones de personalización",
+  "basic": {
+    "title": "Básico",
+    "description": "El uso más simple del FAB Button: despliega las acciones hacia arriba en layout lineal al hacer clic en el trigger."
+  },
+  "directions": {
+    "title": "Direcciones",
+    "description": "Controla hacia dónde se expanden los items con <code>direction</code>. Valores disponibles: <code>up</code>, <code>down</code>, <code>left</code>, <code>right</code> y las cuatro diagonales."
+  },
+  "layouts": {
+    "title": "Layouts",
+    "description": "Define la distribución espacial de los items con <code>layout</code>: <code>linear</code> (en línea), <code>semi-circle</code> (semicírculo), <code>quarter-circle</code> (cuarto de círculo) y <code>circle</code> (círculo completo)."
+  },
+  "shapes": {
+    "title": "Formas",
+    "description": "Personaliza el radio de borde del trigger y los items con <code>shape</code>: <code>circular</code>, <code>rounded</code> o <code>square</code>."
+  },
+  "colors": {
+    "title": "Colores",
+    "description": "Usa cualquiera de los 8 colores semánticos del sistema con el input <code>color</code>."
+  },
+  "sizes": {
+    "title": "Tamaños",
+    "description": "Controla el tamaño del trigger y los items con <code>size</code>: <code>xs</code>, <code>sm</code>, <code>md</code> (por defecto), <code>lg</code> y <code>xl</code>."
+  },
+  "animation": {
+    "title": "Animaciones",
+    "description": "Elige cómo entran y salen los items con <code>animation</code>: <code>scale</code> (por defecto), <code>fade</code> o <code>slide</code>."
+  },
+  "trigger": {
+    "title": "Trigger",
+    "description": "Personaliza el botón trigger con <code>triggerIcon</code>, <code>triggerIconOpen</code> (icono alternativo cuando está abierto), <code>triggerLabel</code> (patrón Extended FAB) y <code>triggerBadge</code> para mostrar un contador."
+  },
+  "loading": {
+    "title": "Estado de carga",
+    "description": "Muestra un spinner en el trigger con <code>[loading]=\"true\"</code>. Mientras está activo, el trigger no abre ni cierra el dial."
+  },
+  "openOn": {
+    "title": "Modo de apertura",
+    "description": "Controla cómo se abre el dial: <code>openOn=\"click\"</code> (por defecto) o <code>openOn=\"hover\"</code> para speed-dial activado al pasar el cursor. La navegación por teclado funciona igual en ambos modos."
+  },
+  "itemDisplay": {
+    "title": "Visualización de items",
+    "description": "<code>itemDisplay=\"icon\"</code> muestra solo el icono con tooltip en hover (por defecto). <code>itemDisplay=\"icon-text\"</code> muestra el icono y la propiedad <code>label</code> del item directamente visible dentro del botón."
+  },
+  "closeOptions": {
+    "title": "Opciones de cierre",
+    "description": "Controla cuándo se cierra el dial: <code>[closeOnItemClick]=\"false\"</code> mantiene el dial abierto tras pulsar un item (útil para selección múltiple), <code>[closeOnOutsideClick]=\"true\"</code> cierra al hacer clic fuera, <code>[closeOnScroll]=\"true\"</code> cierra al hacer scroll."
+  },
+  "backdrop": {
+    "title": "Backdrop",
+    "description": "Añade una capa translúcida detrás de los items con <code>[backdrop]=\"true\"</code>, ideal para destacar las acciones sobre contenido denso."
+  },
+  "templates": {
+    "title": "Templates personalizados",
+    "description": "Proyecta tu propio contenido en el trigger con <code>fabTrigger</code> y en cada item con <code>fabItem</code>. Ambas directivas exponen el contexto del item vía <code>let-item</code> y el estado abierto del dial vía <code>let-open=\"isOpen\"</code>."
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Propiedades de entrada para configurar el comportamiento, apariencia y disposición del FAB Button."
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Eventos emitidos por el componente FAB Button para responder a interacciones del usuario."
+    },
+    "computed": {
+      "title": "Computed Properties",
+      "description": "Propiedades computadas reactivas (Signals) que exponen el estado interno resuelto del componente."
+    },
+    "types": {
+      "title": "Tipos",
+      "description": "Tipos TypeScript que definen los valores aceptados por los inputs del FAB Button."
+    },
+    "item": {
+      "title": "FabButtonItem",
+      "description": "Interfaz pública que define cada acción del menú. Todos los campos son opcionales: el único requisito es que el item sea identificable (vía <code>id</code>) y tenga al menos un <code>icon</code> o un <code>label</code>."
+    },
+    "itemResolved": {
+      "title": "FabButtonItemResolved",
+      "description": "Versión interna de <code>FabButtonItem</code> enriquecida con cuatro campos computados que el componente inyecta como variables CSS en cada <code>&lt;li&gt;</code>. Es el tipo recibido en el contexto del template <code>fabItem</code> mediante <code>let-item</code>."
+    },
+    "directives": {
+      "title": "Directives de template",
+      "description": "Directivas standalone que permiten proyectar templates personalizados en el trigger y en cada item del FAB Button. Se importan y declaran igual que cualquier directiva Angular standalone."
+    },
+    "config": {
+      "title": "Configuración global (FabButtonConfig)",
+      "description": "Todas las propiedades de configuración global disponibles a través de <code>provideNuiConfig({ config: { fabButton: { … } } })</code>. Los valores son los que se aplican cuando el input correspondiente del componente no está definido."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Variables de color",
+      "description": "Variables CSS para personalizar colores por variante (<code>solid</code>, <code>outline</code>, <code>ghost</code>) y color semántico (<code>primary</code>, <code>secondary</code>, etc.).",
+      "note": "Reemplaza <code>{color}</code> con cualquier color del sistema: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>."
+    },
+    "structure": {
+      "title": "Variables estructurales",
+      "description": "Variables CSS para personalizar el layout radial, animaciones, tamaños de botón, backdrop, tooltips y el anillo de foco."
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Tokens de traducción",
+      "description": "El componente FabButton expone un único token i18n para la etiqueta accesible del botón disparador.",
+      "note": "Sobreescríbelo con <code>provideNuiI18n({ fabButton: { triggerAriaLabel: 'Abrir acciones' } })</code>.",
+      "rows": {
+        "triggerAriaLabel": {
+          "description": "El <code>aria-label</code> aplicado al botón disparador del FAB. Usado por los lectores de pantalla para identificar el botón cuando solo muestra un icono."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "Roles y atributos ARIA",
+      "description": "El FabButton sigue el patrón WAI-ARIA de Menu Button. El disparador anuncia el estado abierto y la lista de acciones es un menú propiamente dicho.",
+      "elements": {
+        "host": "Host del FAB (grupo contenedor)",
+        "trigger": "Botón disparador",
+        "menu": "Menú de acciones",
+        "action": "Item de acción individual",
+        "icon": "Icono decorativo"
+      },
+      "rows": {
+        "roleGroup": {
+          "description": "El elemento host del FAB tiene <code>role=\"group\"</code> y <code>aria-label</code> para que el widget completo se anuncie como un grupo coherente."
+        },
+        "hostLabel": {
+          "description": "El <code>aria-label</code> del host se toma del token i18n <code>triggerAriaLabel</code>, proporcionando a los usuarios de lectores de pantalla contexto sobre el propósito del FAB."
+        },
+        "expanded": {
+          "description": "El botón disparador lleva <code>aria-expanded</code> reflejando si la lista de acciones está abierta (<code>true</code>) o cerrada (<code>false</code>)."
+        },
+        "controls": {
+          "description": "El disparador lleva <code>aria-controls</code> apuntando al <code>id</code> del elemento menú de acciones."
+        },
+        "haspopup": {
+          "description": "El disparador tiene <code>aria-haspopup=\"menu\"</code> para indicar que al activarlo se abre un menú."
+        },
+        "roleMenu": {
+          "description": "El contenedor de acciones tiene <code>role=\"menu\"</code>."
+        },
+        "roleMenuItem": {
+          "description": "Cada acción individual tiene <code>role=\"menuitem\"</code>."
+        },
+        "ariaHiddenIcon": {
+          "description": "Los iconos decorativos dentro de los items de acción están ocultos con <code>aria-hidden=\"true\"</code>."
+        }
+      }
+    },
+    "naming": {
+      "title": "Nombre accesible",
+      "description": "El botón disparador y cada item de acción deben tener nombres accesibles significativos para los usuarios de lectores de pantalla.",
+      "note": "Proporciona siempre un <code>label</code> o <code>tooltip</code> para cada item de acción — estos se convierten en el nombre accesible del <code>menuitem</code>.",
+      "elements": {
+        "trigger": "Botón disparador",
+        "action": "Item de acción"
+      },
+      "info": {
+        "triggerLabel": "Token i18n triggerAriaLabel",
+        "actionLabel": "Texto de etiqueta / tooltip de la acción"
+      },
+      "rows": {
+        "trigger": {
+          "description": "El nombre accesible del botón disparador proviene del token i18n <code>triggerAriaLabel</code>. Sobreescríbelo en tu idioma para reflejar el propósito del FAB."
+        },
+        "action": {
+          "description": "El nombre accesible de cada acción se extrae de su texto de etiqueta visible o, para acciones solo con icono, del input <code>tooltip</code>."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Interacción por teclado",
+      "description": "El FabButton sigue el patrón de teclado WAI-ARIA de Menu Button.",
+      "rows": {
+        "spaceEnter": {
+          "description": "Activa el botón disparador, alternando el menú de acciones abierto o cerrado."
+        },
+        "escape": {
+          "description": "Cierra el menú de acciones y devuelve el foco al botón disparador."
+        },
+        "arrowDownUp": {
+          "description": "Mueve el foco entre los items de acción dentro del menú abierto."
+        },
+        "homeEnd": {
+          "description": "Mueve el foco al primer / último item de acción en el menú abierto."
+        },
+        "tab": {
+          "description": "Cierra el menú de acciones y mueve el foco al siguiente elemento con foco en la página."
+        }
+      }
+    }
+  }
+}

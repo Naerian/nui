@@ -1,0 +1,464 @@
+{
+  "title": "Menu d'actions",
+  "subtitle": "Composant menu déroulant avec support des éléments statiques, dynamiques et des sous-menus",
+  "basic": {
+    "title": "Utilisation basique",
+    "description": "Menu d'actions simple avec un tableau d'éléments. Chaque élément peut avoir un libellé, une icône et une action.",
+    "note": "Voici un exemple utilisant à la fois <code>type='static'</code> et <code>type='dynamic'</code>.",
+    "consoleNote": "Ouvrez les DevTools (F12) et vérifiez l'onglet Console pour voir les actions enregistrées lorsque vous cliquez sur des éléments du menu."
+  },
+  "separators": {
+    "title": "Séparateurs",
+    "description": "Groupez les actions associées en utilisant des séparateurs visuels.",
+    "note": "Utilisez des éléments avec la propriété <code>separator: true</code> pour ajouter des lignes de séparation entre les groupes d'actions. Vous pouvez ajouter un libellé optionnel au séparateur avec la propriété <code>label</code>."
+  },
+  "submenu": {
+    "title": "Sous-menus",
+    "description": "Créez des menus imbriqués en utilisant la propriété <code>children</code>. Les sous-menus peuvent être imbriqués sur plusieurs niveaux.",
+    "note": "Utilisez la propriété <code>children</code> pour définir les éléments du sous-menu. Chaque enfant peut avoir ses propres enfants pour un imbrication supplémentaire. <strong>Remarque :</strong> Si un enfant a <code>selected: true</code>, l'élément parent affichera un indicateur visuel (ligne verticale à gauche) pour faciliter la navigation."
+  },
+  "variants": {
+    "title": "Variantes du bouton",
+    "description": "Le bouton supporte différentes variantes et couleurs du système NUI. La variante affecte le bouton, tandis que la couleur affecte à la fois la couleur et son contenu.",
+    "note": "Combinez <code>color</code> et <code>variant</code> pour personnaliser l'apparence du bouton de menu selon vos besoins."
+  },
+  "sizes": {
+    "title": "Tailles",
+    "description": "Utilisez les cinq tailles prédéfinies NUI. La taille affecte le bouton, mais le contenu restera identique.",
+    "note": "Utilisez l'entrée <code>size</code> pour ajuster la taille du bouton de menu et de son contenu avec les tailles <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code> et <code>xl</code>."
+  },
+  "label": {
+    "title": "Contenu du bouton",
+    "description": "Ajoutez du texte au bouton de menu. Peut être combiné avec des icônes et supporte le mode pleine largeur.",
+    "note": "Utilisez <code>icon</code> avec <code>label</code> pour afficher les deux dans le bouton. Utilisez <code>width='full'</code> pour que le bouton occupe toute la largeur disponible. Si vous utilisez uniquement <code>label</code> sans icône, le bouton s'affiche comme un simple bouton texte.",
+    "codeTitle1": "Texte et icône",
+    "codeTitle2": "Texte seul",
+    "codeTitle3": "Pleine largeur"
+  },
+  "disabled": {
+    "title": "État désactivé",
+    "description": "Désactivez des éléments individuels du menu ou tout le menu. Les éléments désactivés sont affichés mais ne sont pas cliquables."
+  },
+  "withSubtitle": {
+    "title": "Sous-titre d'élément",
+    "description": "Ajoutez du texte secondaire sous le libellé principal. Utile pour afficher des informations supplémentaires telles que des e-mails, des descriptions ou des raccourcis."
+  },
+  "selected": {
+    "title": "État sélectionné",
+    "description": "Marquez les éléments comme sélectionnés pour afficher le choix actuel. Une icône de coche apparaît automatiquement. Idéal pour les sélecteurs, filtres ou paramètres."
+  },
+  "icons": {
+    "title": "Icônes descriptives",
+    "description": "Utilisez des icônes et des libellés significatifs pour communiquer le but de chaque action. Les icônes aident les utilisateurs à identifier rapidement les actions.",
+    "note": "Utilisez des icônes pertinentes de la bibliothèque <strong>Remix Icon</strong> pour améliorer la compréhension visuelle des actions du menu."
+  },
+  "badge": {
+    "title": "Badge",
+    "description": "Affichez un compteur ou un libellé numérique sur les éléments du menu en utilisant la propriété <code>badge</code>. Idéal pour les notifications, compteurs en attente ou tout indicateur visuel.",
+    "note": "Le <code>badge</code> s'affiche en forme de pastille positionné à l'extrémité droite de l'élément. Les lecteurs d'écran accèdent à la valeur du badge via l'<code>aria-label</code> du bouton (ex. \"Messages (3)\"), tandis que la pastille visuelle est masquée avec <code>aria-hidden</code>."
+  },
+  "template": {
+    "title": "Template personnalisé",
+    "description": "Personnalisez entièrement le rendu du menu en utilisant des templates et des directives.",
+    "note": "Le template <code>#item</code> reçoit l'élément complet comme contexte (<code>let-item</code>). Les directives <code>menu-header</code> et <code>menu-footer</code> permettent une syntaxe simple et claire, évitant les ng-templates inutiles. <br/><br/> <strong>Important :</strong> Lors de l'utilisation de templates personnalisés, vous devez gérer l'événement de clic manuellement avec <code>(click)=\"handleAction(item)\"</code>. L'événement <code>onItemAction</code> n'est émis automatiquement qu'avec les éléments par défaut."
+  },
+  "api": {
+    "inputs": {
+      "title": "Entrées du composant",
+      "description": "Propriétés d'entrée qui modifient le comportement et l'apparence du menu d'actions.",
+      "rows": {
+        "items": {
+          "description": "Tableau d'éléments du menu"
+        },
+        "type": {
+          "description": "Mode de rendu du menu"
+        },
+        "color": {
+          "description": "Couleur du bouton déclencheur"
+        },
+        "size": {
+          "description": "Taille du bouton déclencheur"
+        },
+        "variant": {
+          "description": "Variante du bouton déclencheur"
+        },
+        "width": {
+          "description": "Largeur du bouton déclencheur"
+        },
+        "disabled": {
+          "description": "État désactivé du menu"
+        },
+        "title": {
+          "description": "Titre du bouton (attribut title)"
+        },
+        "label": {
+          "description": "Texte du bouton déclencheur"
+        },
+        "icon": {
+          "description": "Icône du bouton (Remix Icon)"
+        },
+        "iconPosition": {
+          "description": "Position de l'icône"
+        },
+        "iconSubmenu": {
+          "description": "Icône pour indiquer un sous-menu"
+        },
+        "ariaLabel": {
+          "description": "Libellé d'accessibilité"
+        },
+        "itemTemplate": {
+          "description": "Template personnalisé pour les éléments"
+        },
+        "offset": {
+          "description": "Distance en pixels entre le déclencheur et le panneau flottant du menu (mode dynamique uniquement)"
+        }
+      }
+    },
+    "outputs": {
+      "title": "Sorties du composant",
+      "description": "Événements émis par le composant auxquels vous pouvez réagir pour répondre aux interactions utilisateur.",
+      "rows": {
+        "onItemAction": {
+          "description": "Émis lorsqu'un élément est cliqué"
+        },
+        "onSelectionChange": {
+          "description": "Émis lorsque la sélection change (mode sélecteur)"
+        },
+        "menuOpen": {
+          "description": "Émis lorsque le menu s'ouvre"
+        },
+        "menuClose": {
+          "description": "Émis lorsque le menu se ferme"
+        }
+      }
+    },
+    "interface": {
+      "title": "Interface ActionMenuItem",
+      "description": "Structure complète d'un élément de menu avec toutes les propriétés disponibles.",
+      "rows": {
+        "action": {
+          "description": "Identifiant d'action unique"
+        },
+        "label": {
+          "description": "Texte visible de l'élément"
+        },
+        "subtitle": {
+          "description": "Texte secondaire sous le libellé"
+        },
+        "title": {
+          "description": "Texte pour l'attribut title (infobulle)"
+        },
+        "icon": {
+          "description": "Classe d'icône RemixIcon"
+        },
+        "shortcut": {
+          "description": "Raccourci clavier (visuel uniquement)"
+        },
+        "templateRef": {
+          "description": "Template personnalisé pour l'élément"
+        },
+        "id": {
+          "description": "ID unique de l'élément (auto-généré)"
+        },
+        "children": {
+          "description": "Éléments enfants pour créer des sous-menus"
+        },
+        "disabled": {
+          "description": "Si l'élément est désactivé"
+        },
+        "selected": {
+          "description": "Si l'élément est sélectionné (affiche une coche)"
+        },
+        "separator": {
+          "description": "Si c'est un séparateur visuel"
+        },
+        "onAction": {
+          "description": "Callback lorsque l'élément est cliqué"
+        },
+        "data": {
+          "description": "Données personnalisées supplémentaires pour TemplateRef<any>"
+        },
+        "badge": {
+          "description": "Badge ou compteur à afficher"
+        }
+      }
+    }
+  },
+  "theming": {
+    "structure": {
+      "title": "Variables structurelles",
+      "description": "Variables CSS qui contrôlent les dimensions, l'espacement, les bordures et les ombres du menu.",
+      "rows": {
+        "minWidth": {
+          "description": "Largeur minimale du menu"
+        },
+        "maxWidth": {
+          "description": "Largeur maximale du menu"
+        },
+        "borderWidth": {
+          "description": "Épaisseur de la bordure du menu"
+        },
+        "borderColor": {
+          "description": "Couleur de la bordure du menu"
+        },
+        "borderRadius": {
+          "description": "Rayon des coins du menu"
+        },
+        "padding": {
+          "description": "Rembourrage interne du menu"
+        },
+        "shadow": {
+          "description": "Ombre du menu déroulant"
+        },
+        "staticShadow": {
+          "description": "Ombre du menu statique"
+        },
+        "itemGap": {
+          "description": "Espace entre les éléments"
+        },
+        "itemBorder": {
+          "description": "Bordure de l'élément"
+        },
+        "itemBorderRadius": {
+          "description": "Rayon des coins de l'élément"
+        },
+        "itemPaddingY": {
+          "description": "Rembourrage vertical de l'élément"
+        },
+        "itemPaddingX": {
+          "description": "Rembourrage horizontal de l'élément"
+        },
+        "itemLabelMarginRight": {
+          "description": "Marge droite du libellé"
+        },
+        "focusOutlineWidth": {
+          "description": "Largeur du contour de focus"
+        },
+        "focusOutlineOffset": {
+          "description": "Décalage du contour de focus"
+        },
+        "arrowPaddingLeft": {
+          "description": "Rembourrage gauche de la flèche"
+        },
+        "transition": {
+          "description": "Transitions d'état"
+        }
+      }
+    },
+    "items": {
+      "title": "Variables des éléments",
+      "description": "Variables CSS pour personnaliser l'apparence des éléments, séparateurs, raccourcis et éléments internes.",
+      "rows": {
+        "subtitleColor": {
+          "description": "Couleur du texte secondaire"
+        },
+        "subtitleFontSize": {
+          "description": "Taille de police du sous-titre"
+        },
+        "labelWeight": {
+          "description": "Graisse du libellé"
+        },
+        "labelFontSize": {
+          "description": "Taille de police du libellé"
+        },
+        "separatorColor": {
+          "description": "Couleur du séparateur"
+        },
+        "separatorPadding": {
+          "description": "Rembourrage du séparateur"
+        },
+        "separatorLabelColor": {
+          "description": "Couleur du libellé du séparateur"
+        },
+        "separatorLabelSpacing": {
+          "description": "Espacement du libellé du séparateur"
+        },
+        "separatorFontSize": {
+          "description": "Taille de police du séparateur"
+        },
+        "separatorFontWeight": {
+          "description": "Graisse de police du séparateur"
+        },
+        "shortcutBg": {
+          "description": "Arrière-plan du raccourci"
+        },
+        "shortcutColor": {
+          "description": "Couleur du texte du raccourci"
+        },
+        "shortcutPadding": {
+          "description": "Rembourrage du raccourci"
+        },
+        "shortcutBorderWidth": {
+          "description": "Épaisseur de la bordure du raccourci"
+        },
+        "shortcutBorderColor": {
+          "description": "Couleur de la bordure du raccourci"
+        },
+        "shortcutBorderRadius": {
+          "description": "Rayon des coins du raccourci"
+        },
+        "shortcutFontSize": {
+          "description": "Taille de police du raccourci"
+        },
+        "notifySelectedSize": {
+          "description": "Taille de l'indicateur d'enfant sélectionné"
+        },
+        "notifySelectedRadius": {
+          "description": "Rayon de l'indicateur d'enfant sélectionné"
+        }
+      }
+    },
+    "colors": {
+      "title": "Variables de couleurs",
+      "description": "Modèle de variable CSS pour personnaliser les couleurs des éléments du menu par état.",
+      "note": "Remplacez <code>{color}</code> par n'importe quelle couleur sémantique NUI (<code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>) pour personnaliser l'apparence des éléments dans différents états.",
+      "rows": {
+        "bg": {
+          "description": "Arrière-plan de l'élément en état normal"
+        },
+        "text": {
+          "description": "Couleur du texte de l'élément"
+        },
+        "hoverBg": {
+          "description": "Arrière-plan de l'élément au survol"
+        },
+        "hoverText": {
+          "description": "Couleur du texte au survol"
+        },
+        "activeBg": {
+          "description": "Arrière-plan de l'élément actif"
+        },
+        "selectedBg": {
+          "description": "Arrière-plan de l'élément sélectionné"
+        },
+        "selectedText": {
+          "description": "Couleur du texte de l'élément sélectionné"
+        },
+        "notifySelected": {
+          "description": "Couleur de l'indicateur d'enfant sélectionné"
+        }
+      }
+    }
+  },
+  "styling": {
+    "title": "Styles et personnalisation",
+    "description": "Personnalisez l'apparence du menu en utilisant des variables CSS. Contrôlez les couleurs, l'espacement, la typographie et plus encore."
+  },
+  "a11y": {
+    "roles": {
+      "title": "Rôles et attributs ARIA",
+      "description": "Le Menu d'actions applique les attributs ARIA suivants, conformément au modèle de menu du Guide des pratiques de création ARIA (APG).",
+      "rows": {
+        "haspopup": {
+          "description": "Indique aux technologies d'assistance qu'activer ce bouton ouvrira un menu."
+        },
+        "expanded": {
+          "description": "Reflète l'état ouvert/fermé du menu. Mis à jour automatiquement à chaque interaction."
+        },
+        "controls": {
+          "description": "Relie le bouton déclencheur au conteneur de menu qu'il contrôle via des IDs correspondants."
+        },
+        "roleMenu": {
+          "description": "Identifie le conteneur déroulant comme un widget de menu."
+        },
+        "orientation": {
+          "description": "Indique que les éléments sont disposés verticalement (disposition de menu par défaut)."
+        },
+        "labelledby": {
+          "description": "En mode dynamique, relie le conteneur de menu à son bouton déclencheur, fournissant un nom accessible."
+        },
+        "roleItem": {
+          "description": "Rôle par défaut pour les éléments interactifs. Change en menuitemradio si l'élément appartient à un groupe de sélection."
+        },
+        "ariaChecked": {
+          "description": "Présent uniquement en mode sélection. Indique si cet élément est la sélection actuelle."
+        },
+        "keyshortcuts": {
+          "description": "Expose le texte du raccourci clavier affiché visuellement à côté de l'élément."
+        },
+        "roleSeparator": {
+          "description": "Identifie le séparateur visuel entre les groupes d'éléments du menu."
+        },
+        "ariaHiddenIcon": {
+          "description": "Empêche les icônes décoratives d'être annoncées par les lecteurs d'écran."
+        }
+      },
+      "elements": {
+        "trigger": "<code>&lt;button&gt;</code> (déclencheur)",
+        "menu": "<code>&lt;div&gt;</code> (menu)",
+        "menuDynamic": "<code>&lt;div&gt;</code> (menu, mode dynamique)",
+        "item": "<code>&lt;button&gt;</code> (élément)",
+        "itemSelectable": "<code>&lt;button&gt;</code> (élément sélectionnable)",
+        "separator": "<code>&lt;div&gt;</code> (séparateur)",
+        "icon": "<code>&lt;i&gt;</code> (icône)"
+      }
+    },
+    "naming": {
+      "title": "Nom accessible",
+      "description": "Le bouton déclencheur résout son nom accessible selon une cascade de priorités. Fournissez toujours un nom accessible explicite pour les boutons déclencheurs qui n'affichent qu'une icône.",
+      "note": "Les menus avec icône seule (sans libellé) doivent avoir <code>ariaLabel</code> ou <code>title</code> configuré. Sans texte visible, les technologies d'assistance ne peuvent pas identifier le but du menu.",
+      "rows": {
+        "triggerLabel": {
+          "description": "L'entrée <code>label</code> s'affiche comme texte interne du bouton, qui devient nativement le nom accessible."
+        },
+        "triggerAriaLabel": {
+          "description": "L'entrée <code>ariaLabel</code> est appliquée comme attribut <code>aria-label</code> et a priorité sur <code>label</code> et <code>title</code>."
+        },
+        "triggerIconOnly": {
+          "description": "Si ni <code>ariaLabel</code> ni <code>label</code> n'est fourni, l'entrée <code>title</code> est utilisée comme nom accessible via l'infobulle du navigateur."
+        },
+        "itemLabel": {
+          "description": "L'<code>aria-label</code> de chaque élément du menu est résolu depuis <code>item.title || item.label</code> pour s'assurer que les lecteurs d'écran annoncent le texte correct."
+        },
+        "menuLabelledby": {
+          "description": "En mode dynamique, le conteneur de menu référence l'ID du déclencheur via <code>aria-labelledby</code>, rendant leur association explicite."
+        }
+      },
+      "elements": {
+        "triggerWithLabel": "Déclencheur avec <code>label</code>",
+        "triggerWithAriaLabel": "Déclencheur avec <code>ariaLabel</code>",
+        "triggerIconOnly": "Déclencheur icône seule",
+        "menuItem": "Élément de menu",
+        "menuContainer": "Conteneur de menu (dynamique)"
+      },
+      "info": {
+        "nativeName": "Nom natif",
+        "titleFallback": "<code>title</code> comme repli"
+      }
+    },
+    "keyboard": {
+      "title": "Interaction clavier",
+      "description": "Le Menu d'actions implémente le modèle clavier complet APG pour les menus. Les touches fléchées naviguent entre les éléments ; Échap et FlècheSinistre ferment les menus.",
+      "note": "<kbd>FlècheBas</kbd>, <kbd>FlècheHaut</kbd>, <kbd>Début</kbd> et <kbd>Fin</kbd> appellent <code>preventDefault()</code> pour empêcher le défilement de la page lors de la navigation dans le menu.",
+      "rows": {
+        "tab": {
+          "description": "Déplace le focus sur le bouton déclencheur. Lorsque le menu est ouvert, Tab le ferme et retourne le focus sur le déclencheur."
+        },
+        "spaceEnter": {
+          "description": "Ouvre le menu lorsque le focus est sur le déclencheur. Active l'élément de menu focalisé lorsqu'on est dans le menu."
+        },
+        "escape": {
+          "description": "Ferme le menu ouvert et retourne le focus sur le bouton déclencheur."
+        },
+        "arrowDown": {
+          "description": "Déplace le focus vers l'élément de menu suivant. Revient du dernier au premier élément."
+        },
+        "arrowUp": {
+          "description": "Déplace le focus vers l'élément de menu précédent. Revient du premier au dernier élément."
+        },
+        "home": {
+          "description": "Déplace le focus vers le premier élément du menu."
+        },
+        "end": {
+          "description": "Déplace le focus vers le dernier élément du menu."
+        },
+        "arrowRight": {
+          "description": "Ouvre le sous-menu de l'élément focalisé et déplace le focus vers son premier élément."
+        },
+        "arrowLeft": {
+          "description": "Ferme le sous-menu actuel et retourne le focus sur l'élément parent."
+        }
+      }
+    }
+  }
+}

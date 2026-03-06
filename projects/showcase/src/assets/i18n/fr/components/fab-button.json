@@ -1,0 +1,198 @@
+{
+  "title": "Bouton FAB",
+  "subtitle": "Bouton d'action flottant avec dispositions radiales et de multiples options de personnalisation",
+  "basic": {
+    "title": "Basique",
+    "description": "L'utilisation la plus simple du Bouton FAB : les actions se déploient vers le haut dans une disposition linéaire lorsque le déclencheur est cliqué."
+  },
+  "directions": {
+    "title": "Directions",
+    "description": "Contrôlez dans quelle direction les éléments se déploient avec <code>direction</code>. Valeurs disponibles : <code>up</code>, <code>down</code>, <code>left</code>, <code>right</code> et les quatre diagonales."
+  },
+  "layouts": {
+    "title": "Dispositions",
+    "description": "Définissez la distribution spatiale des éléments avec <code>layout</code> : <code>linear</code> (en ligne), <code>semi-circle</code> (demi-cercle), <code>quarter-circle</code> (quart de cercle) et <code>circle</code> (cercle complet)."
+  },
+  "shapes": {
+    "title": "Formes",
+    "description": "Personnalisez le rayon de bordure du déclencheur et des éléments avec <code>shape</code> : <code>circular</code>, <code>rounded</code> ou <code>square</code>."
+  },
+  "colors": {
+    "title": "Couleurs",
+    "description": "Utilisez n'importe laquelle des 8 couleurs sémantiques du système avec l'entrée <code>color</code>."
+  },
+  "sizes": {
+    "title": "Tailles",
+    "description": "Contrôlez la taille du déclencheur et des éléments avec <code>size</code> : <code>xs</code>, <code>sm</code>, <code>md</code> (défaut), <code>lg</code> et <code>xl</code>."
+  },
+  "animation": {
+    "title": "Animations",
+    "description": "Choisissez comment les éléments entrent et sortent avec <code>animation</code> : <code>scale</code> (défaut), <code>fade</code> ou <code>slide</code>."
+  },
+  "trigger": {
+    "title": "Déclencheur",
+    "description": "Personnalisez le bouton déclencheur avec <code>triggerIcon</code>, <code>triggerIconOpen</code> (icône alternative quand ouvert), <code>triggerLabel</code> (modèle Extended FAB) et <code>triggerBadge</code> pour afficher un compteur."
+  },
+  "loading": {
+    "title": "État de chargement",
+    "description": "Affiche un indicateur sur le déclencheur avec <code>[loading]=\"true\"</code>. Pendant son activité, le déclencheur n'ouvre ni ne ferme le dial."
+  },
+  "openOn": {
+    "title": "Mode d'ouverture",
+    "description": "Contrôlez comment le dial s'ouvre : <code>openOn=\"click\"</code> (défaut) ou <code>openOn=\"hover\"</code> pour un speed-dial activé au survol. La navigation au clavier fonctionne de la même manière dans les deux modes."
+  },
+  "itemDisplay": {
+    "title": "Affichage des éléments",
+    "description": "<code>itemDisplay=\"icon\"</code> affiche uniquement l'icône avec une infobulle au survol (défaut). <code>itemDisplay=\"icon-text\"</code> affiche l'icône et la propriété <code>label</code> de l'élément directement visible dans le bouton."
+  },
+  "closeOptions": {
+    "title": "Options de fermeture",
+    "description": "Contrôlez quand le dial se ferme : <code>[closeOnItemClick]=\"false\"</code> garde le dial ouvert après avoir cliqué sur un élément (utile pour la sélection multiple), <code>[closeOnOutsideClick]=\"true\"</code> ferme lors d'un clic extérieur, <code>[closeOnScroll]=\"true\"</code> ferme lors d'un défilement."
+  },
+  "backdrop": {
+    "title": "Fond d'écran",
+    "description": "Ajoute une couche translucide derrière les éléments avec <code>[backdrop]=\"true\"</code>, idéal pour mettre en évidence les actions sur du contenu dense."
+  },
+  "templates": {
+    "title": "Templates personnalisés",
+    "description": "Projetez votre propre contenu dans le déclencheur avec <code>fabTrigger</code> et dans chaque élément avec <code>fabItem</code>. Les deux directives exposent le contexte de l'élément via <code>let-item</code> et l'état d'ouverture du dial via <code>let-open=\"isOpen\"</code>."
+  },
+  "api": {
+    "inputs": {
+      "title": "Entrées",
+      "description": "Propriétés d'entrée pour configurer le comportement, l'apparence et la disposition du Bouton FAB."
+    },
+    "outputs": {
+      "title": "Sorties",
+      "description": "Événements émis par le composant Bouton FAB pour répondre aux interactions utilisateur."
+    },
+    "computed": {
+      "title": "Propriétés calculées",
+      "description": "Propriétés calculées réactives (Signals) qui exposent l'état interne résolu du composant."
+    },
+    "types": {
+      "title": "Types",
+      "description": "Types TypeScript définissant les valeurs acceptées pour les entrées du Bouton FAB."
+    },
+    "item": {
+      "title": "FabButtonItem",
+      "description": "Interface publique définissant chaque action de menu. Tous les champs sont optionnels : la seule exigence est que l'élément soit identifiable (via <code>id</code>) et ait au moins une <code>icône</code> ou un <code>label</code>."
+    },
+    "itemResolved": {
+      "title": "FabButtonItemResolved",
+      "description": "Version interne de <code>FabButtonItem</code> enrichie avec quatre champs calculés que le composant injecte comme variables CSS sur chaque <code>&lt;li&gt;</code>. C'est le type reçu dans le contexte du template <code>fabItem</code> via <code>let-item</code>."
+    },
+    "directives": {
+      "title": "Directives de template",
+      "description": "Directives standalone qui permettent de projeter des templates personnalisés dans le déclencheur et dans chaque élément du Bouton FAB. Elles sont importées et déclarées comme toute directive Angular standalone."
+    },
+    "config": {
+      "title": "Configuration globale (FabButtonConfig)",
+      "description": "Toutes les propriétés de configuration globales disponibles via <code>provideNuiConfig({ config: { fabButton: { … } } })</code>. Ces valeurs sont appliquées lorsque l'entrée du composant correspondante n'est pas définie."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Variables de couleurs",
+      "description": "Variables CSS pour personnaliser les couleurs par variante (<code>solid</code>, <code>outline</code>, <code>ghost</code>) et couleur sémantique (<code>primary</code>, <code>secondary</code>, etc.).",
+      "note": "Remplacez <code>{color}</code> par n'importe quelle couleur système : <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>."
+    },
+    "structure": {
+      "title": "Variables structurelles",
+      "description": "Variables CSS pour personnaliser la disposition radiale, les animations, les tailles de boutons, le fond d'écran, les infobulles et l'anneau de focus."
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Tokens de traduction",
+      "description": "Le composant FabButton expose un seul token i18n pour le libellé accessible du bouton déclencheur.",
+      "note": "Remplacez-le avec <code>provideNuiI18n({ fabButton: { triggerAriaLabel: 'Ouvrir les actions' } })</code>.",
+      "rows": {
+        "triggerAriaLabel": {
+          "description": "L'<code>aria-label</code> appliqué au bouton déclencheur FAB. Utilisé par les lecteurs d'écran pour identifier le bouton lorsqu'il n'affiche qu'une icône."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "Rôles et attributs ARIA",
+      "description": "Le FabButton suit le modèle WAI-ARIA Menu Button. Le déclencheur annonce l'état d'ouverture et la liste d'actions est un menu approprié.",
+      "elements": {
+        "host": "Hôte FAB (groupe conteneur)",
+        "trigger": "Bouton déclencheur",
+        "menu": "Menu d'actions",
+        "action": "Élément d'action individuel",
+        "icon": "Icône décorative"
+      },
+      "rows": {
+        "roleGroup": {
+          "description": "L'élément hôte FAB a <code>role=\"group\"</code> et <code>aria-label</code> pour que le widget complet soit annoncé comme un groupe cohérent."
+        },
+        "hostLabel": {
+          "description": "L'<code>aria-label</code> de l'hôte est tiré du token i18n <code>triggerAriaLabel</code>, fournissant aux utilisateurs de lecteurs d'écran le contexte sur le but du FAB."
+        },
+        "expanded": {
+          "description": "Le bouton déclencheur a <code>aria-expanded</code> reflétant si la liste d'actions est ouverte (<code>true</code>) ou fermée (<code>false</code>)."
+        },
+        "controls": {
+          "description": "Le déclencheur a <code>aria-controls</code> pointant vers l'<code>id</code> de l'élément menu d'actions."
+        },
+        "haspopup": {
+          "description": "Le déclencheur a <code>aria-haspopup=\"menu\"</code> pour indiquer que son activation ouvre un menu."
+        },
+        "roleMenu": {
+          "description": "Le conteneur d'actions a <code>role=\"menu\"</code>."
+        },
+        "roleMenuItem": {
+          "description": "Chaque action individuelle a <code>role=\"menuitem\"</code>."
+        },
+        "ariaHiddenIcon": {
+          "description": "Les icônes décoratives dans les éléments d'action sont masquées avec <code>aria-hidden=\"true\"</code>."
+        }
+      }
+    },
+    "naming": {
+      "title": "Nom accessible",
+      "description": "Le bouton déclencheur et chaque élément d'action doivent avoir des noms accessibles significatifs pour les utilisateurs de lecteurs d'écran.",
+      "note": "Fournissez toujours un <code>label</code> ou <code>tooltip</code> pour chaque élément d'action — ils deviennent le nom accessible du <code>menuitem</code>.",
+      "elements": {
+        "trigger": "Bouton déclencheur",
+        "action": "Élément d'action"
+      },
+      "info": {
+        "triggerLabel": "Token i18n triggerAriaLabel",
+        "actionLabel": "Texte du libellé d'action / infobulle"
+      },
+      "rows": {
+        "trigger": {
+          "description": "Le nom accessible du bouton déclencheur vient du token i18n <code>triggerAriaLabel</code>. Remplacez-le dans votre langue pour refléter le but du FAB."
+        },
+        "action": {
+          "description": "Le nom accessible de chaque action est extrait de son texte de libellé visible ou, pour les actions icône seule, de l'entrée <code>tooltip</code>."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Interaction clavier",
+      "description": "Le FabButton suit le modèle clavier WAI-ARIA Menu Button.",
+      "rows": {
+        "spaceEnter": {
+          "description": "Active le bouton déclencheur, basculant le menu d'actions ouvert ou fermé."
+        },
+        "escape": {
+          "description": "Ferme le menu d'actions et retourne le focus sur le bouton déclencheur."
+        },
+        "arrowDownUp": {
+          "description": "Déplace le focus entre les éléments d'action dans le menu ouvert."
+        },
+        "homeEnd": {
+          "description": "Déplace le focus vers le premier / dernier élément d'action dans le menu ouvert."
+        },
+        "tab": {
+          "description": "Ferme le menu d'actions et déplace le focus vers l'élément focusable suivant sur la page."
+        }
+      }
+    }
+  }
+}

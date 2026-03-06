@@ -1,0 +1,126 @@
+{
+  "title": "Tooltip",
+  "subtitle": "Tooltips informativos con soporte para texto y templates personalizados",
+  "examples": {
+    "basic": {
+      "title": "Tooltips básicos",
+      "description": "Muestra tooltips simples con texto al hacer hover.",
+      "note": "Puedes desactivar la flecha con <code>nuiTooltipShowArrow</code>."
+    },
+    "positions": {
+      "title": "Posiciones",
+      "description": "Controla la posición del tooltip respecto al elemento: top (predeterminado), bottom, left, right."
+    },
+    "events": {
+      "title": "Eventos",
+      "description": "Define qué evento dispara el tooltip: hover (predeterminado), click, focus, o manual para control programático."
+    },
+    "delays": {
+      "title": "Delays",
+      "description": "Configura los retrasos antes de mostrar y ocultar el tooltip.",
+      "note": "Usa las propiedades <code>nuiTooltipShowDelay</code> y <code>nuiTooltipHideDelay</code> para ajustar los tiempos de espera."
+    },
+    "templates": {
+      "title": "Templates personalizados",
+      "description": "Usa templates de Angular para mostrar contenido HTML enriquecido en el tooltip."
+    },
+    "interactive": {
+      "title": "Tooltips interactivos",
+      "description": "Permite interactuar con el contenido del tooltip. Útil para incluir botones o enlaces.",
+      "note": "Habilita la propiedad <code>nuiTooltipInteractive</code> para permitir interacción dentro del tooltip sin que se cierre automáticamente al mover el cursor."
+    },
+    "disabled": {
+      "title": "Estado deshabilitado",
+      "description": "Controla dinámicamente si el tooltip está habilitado o deshabilitado.",
+      "note": "Usa la propiedad <code>nuiTooltipDisabled</code> para activar o desactivar el tooltip según sea necesario."
+    }
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Propiedades de entrada de la directiva <code>nuiTooltip</code>"
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Eventos emitidos por la directiva <code>nuiTooltip</code>"
+    },
+    "usage": {
+      "title": "Ejemplos de uso",
+      "description": "Ejemplos completos de uso de la directiva <code>nuiTooltip</code> en componentes Angular"
+    }
+  },
+  "theming": {
+    "container": {
+      "title": "Contenedor del tooltip",
+      "description": "Variables CSS para controlar la apariencia del contenedor del tooltip: colores, dimensiones, padding, fuente, bordes, sombra y z-index"
+    },
+    "arrow": {
+      "title": "Flecha del tooltip",
+      "description": "Variable CSS para controlar el tamaño de la flecha del tooltip"
+    },
+    "animation": {
+      "title": "Animaciones",
+      "description": "Variables CSS para controlar la duración y timing de las animaciones de entrada y salida del tooltip"
+    },
+    "examples": {
+      "title": "Ejemplos de personalización",
+      "description": "Ejemplos SCSS para personalizar los estilos del tooltip en tu aplicación"
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "Roles y atributos ARIA",
+      "description": "Los tooltips siguen el patrón WAI-ARIA de Tooltip, asociando el contenido flotante con su disparador mediante <code>aria-describedby</code>.",
+      "elements": {
+        "trigger": "Elemento disparador",
+        "tooltip": "Elemento tooltip"
+      },
+      "rows": {
+        "ariaDescribedby": {
+          "description": "El elemento disparador recibe <code>aria-describedby</code> apuntando al <code>id</code> del tooltip, de modo que los lectores de pantalla anuncian el texto del tooltip como descripción suplementaria."
+        },
+        "tooltipRole": {
+          "description": "El tooltip flotante lleva <code>role=\"tooltip\"</code> y un <code>id</code> único referenciado por <code>aria-describedby</code>."
+        }
+      }
+    },
+    "naming": {
+      "title": "Nombre accesible",
+      "description": "El elemento disparador debe tener su propio nombre accesible independiente del tooltip. El tooltip solo proporciona una descripción suplementaria.",
+      "note": "No dependas del tooltip como única fuente de nombre accesible para disparadores que solo muestran un icono. Usa <code>aria-label</code> en el elemento disparador.",
+      "elements": {
+        "trigger": "Elemento disparador",
+        "iconTrigger": "Disparador solo con icono",
+        "tooltipContent": "Contenido del tooltip"
+      },
+      "info": {
+        "ownLabel": "Nombre propio del disparador",
+        "ariaLabel": "aria-label en el disparador de icono",
+        "description": "Texto del tooltip (aria-describedby)"
+      },
+      "rows": {
+        "trigger": {
+          "description": "El disparador debe tener su propio nombre accesible (texto del botón, aria-label…) que sea significativo sin el texto del tooltip."
+        },
+        "iconTrigger": {
+          "description": "Para disparadores que solo muestran un icono, añade un <code>aria-label</code> explícito en el elemento disparador."
+        },
+        "content": {
+          "description": "El texto del tooltip se conecta mediante <code>aria-describedby</code> y sirve como información suplementaria, no como etiqueta principal."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Interacción por teclado",
+      "description": "Los tooltips se muestran y ocultan automáticamente según el foco. No se requiere una pulsación de tecla explícita para abrirlos.",
+      "rows": {
+        "tab": {
+          "description": "Tabular hacia un elemento disparador muestra el tooltip. Tabular fuera lo oculta."
+        },
+        "escape": {
+          "description": "Pulsar Escape mientras el disparador tiene el foco oculta el tooltip."
+        }
+      }
+    }
+  }
+}

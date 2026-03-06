@@ -1,0 +1,411 @@
+{
+  "home": {
+    "title": "Willkommen bei NUI",
+    "subtitle": "Eine moderne, anpassbare Angular-Komponentenbibliothek",
+    "description": "Erstellen Sie schöne Anwendungen mit unserem vollständigen Satz an UI-Komponenten",
+    "multitheme": {
+      "title": "Leistungsstarkes Thematisierung",
+      "description": "Passen Sie das Aussehen Ihrer Anwendung mit mehreren vordefinierten Voreinstellungen und Unterstützung für benutzerdefinierte Themen an."
+    },
+    "darkMode": {
+      "title": "Intelligenter Dunkelmodus",
+      "description": "Integrierte Dunkelmodus-Unterstützung mit manuellen, automatischen und systembasierten Strategien."
+    },
+    "components": {
+      "title": "Vielseitige Komponenten",
+      "description": "Eine breite Palette gebrauchsfertiger UI-Komponenten, die für Barrierefreiheit und einfache Anpassung ausgelegt sind."
+    }
+  },
+  "installation": {
+    "title": "Installation",
+    "subtitle": "Starten Sie mit NUI in Ihrem Angular-Projekt",
+    "step1": "Paket installieren",
+    "step1Description": "Verwenden Sie npm oder yarn, um das NUI-Paket in Ihrem Projekt zu installieren.",
+    "step2": "NUI-Modul importieren",
+    "step2Description": "Konfigurieren Sie NUI in Ihrer Anwendungskonfigurationsdatei. Definieren Sie die gewünschte Voreinstellung und den Themen-Modus.",
+    "step2Title": "NUI-Provider konfigurieren",
+    "step3": "NUI Stile importieren",
+    "step3Description": "Sie können NUI-Stile auf drei verschiedene Arten importieren: in Ihrer globalen styles.scss-Datei, in angular.json oder in project.json, wenn Sie Nx verwenden.",
+    "step4": "Komponenten verwenden",
+    "step4Description": "Sie können jetzt jede NUI-Komponente in Ihren HTML-Templates verwenden.",
+    "step4Title": "NUI-Komponenten verwenden"
+  },
+  "configuration": {
+    "title": "Konfiguration",
+    "subtitle": "NUI nach Ihren Bedürfnissen konfigurieren",
+    "presets": {
+      "title": "Voreinstellungskonfiguration",
+      "description": "NUI enthält 12 vordefinierte Voreinstellungen, die Sie direkt in Ihrer Anwendung verwenden können. Jede Voreinstellung definiert eine einzigartige Farbpalette für helle und dunkle Modi und sorgt so für ein einheitliches Erscheinungsbild aller Komponenten.",
+      "note": "Sie können die Voreinstellung zur Laufzeit mit dem <code>ThemeService</code> ändern, sodass Sie Ihren Benutzern die Möglichkeit geben können, ihr bevorzugtes Erscheinungsbild zu wählen."
+    },
+    "custom-presets": {
+      "title": "Benutzerdefinierte Voreinstellungen",
+      "description": "Zusätzlich zu den vordefinierten Voreinstellungen können Sie eigene Voreinstellungen erstellen, indem Sie spezifische Farben für helle und dunkle Modi definieren. So können Sie das Erscheinungsbild Ihrer Anwendung an Ihre Markenidentität anpassen oder einzigartige Benutzererlebnisse schaffen.",
+      "note": "Benutzerdefinierte Voreinstellungen werden als TypeScript-Objekte definiert, die der <code>ThemePreset</code>-Schnittstelle entsprechen, was eine typsichere Konfiguration und nahtlose Integration in das Thematisierung von NUI gewährleistet."
+    },
+    "dark-mode": {
+      "title": "Dunkelmodus-Konfiguration",
+      "description": "Steuern Sie, wie der Dunkelmodus in Ihrer Anwendung angewendet wird. Verfügbare Optionen: <code>manual</code> (per Code gesteuert), <code>auto</code> (tageszeit­basiert) oder <code>system</code> (gemäß Betriebssystem­einstellungen).",
+      "note": "Der Dunkelmodus kann programmatisch mit dem <code>ThemeService</code> aktiviert werden, sodass Sie Benutzern die Möglichkeit bieten können, zwischen Modi umzuschalten oder automatisch den Systemeinstellungen zu folgen."
+    },
+    "component-config": {
+      "title": "Komponentenspezifische Konfiguration",
+      "description": "NUI ermöglicht die Konfiguration bestimmter Komponentenaspekte über die globale Konfiguration, wie das 'Shapeshifter'-Paginierungssystem des Paginators oder die verfügbaren Varianten für den Button. So haben Sie die Kontrolle über Verhalten und Erscheinungsbild der Komponenten, ohne deren Quellcode zu ändern.",
+      "note": "Durch die Konfiguration komponentenspezifischer Optionen im NUI-Provider können Sie ein konsistentes Benutzererlebnis in Ihrer gesamten Anwendung sicherstellen und Komponenten mühelos an Ihre Bedürfnisse anpassen."
+    },
+    "i18n": {
+      "title": "Internationalisierungskonfiguration (i18n)",
+      "description": "NUI implementiert ein reaktives i18n-System auf Basis von <code>Signals</code>. Sie können eine anfängliche Textbasis über den Provider <code>provideNuiI18n()</code> bereitstellen. Für mehrsprachige Anwendungen ermöglicht der <code>NuiI18nService</code> das Einschleusen neuer Wörterbücher zur Laufzeit über die Methode <code>setLang()</code>. Alle abonnierten Komponenten aktualisieren sich automatisch, ohne die Anwendung neu zu laden.<br/><br/>Verwenden Sie <code>setTranslations</code>, um nur eine Teilmenge von Texten zu aktualisieren.",
+      "note": "Texte werden dynamisch über den Service aktualisiert, während Datums-Locales in der globalen Konfiguration vorregistriert werden müssen, damit der Adapter Formate und ARIA-Labels reaktiv verarbeiten kann."
+    },
+    "i18n-date": {
+      "title": "NUI i18n für Datumsangaben",
+      "description": "Damit Komponenten wie der Calendar Formate und Barrierefreiheits­labels (ARIA) in verschiedenen Sprachen verwalten können, müssen Sie die Locale-Objekte (z. B. date-fns) mit <code>provideNuiDateLocales()</code> registrieren.<br/><br/>NUI synchronisiert diese Locales automatisch mit dem i18n-Service und stellt sicher, dass Texte und Datumsangaben (z. B. „Montag, 1. Januar\") grammatikalisch korrekt und barrierefrei sind.",
+      "note": "Wenn Sie die Anwendungssprache über <code>nuiI18nService.setLang('de')</code> ändern, synchronisiert NUI automatisch den Datumsadapter und das Textwörterbuch. Das gesamte System ist reaktiv: Ihre Kalender und Paginatoren aktualisieren sich sofort ohne zusätzliche Logik in Ihren Komponenten."
+    }
+  },
+  "theming": {
+    "title": "Temas y presets",
+    "subtitle": "Personaliza la apariencia de tu aplicación",
+    "description": "NUI incluye múltiples presets predefinidos. Cada preset define una paleta de colores única que se aplica a todos los componentes. Alterna entre presets en tiempo de ejecución para ver los cambios instantáneamente. Además si cambias entre modo <code>claro</code> y <code>oscuro</code>, los colores se ajustarán automáticamente para mantener el contraste y la legibilidad.",
+    "selectPreset": "Selecciona un preset para previsualizarlo",
+    "colorPalette": "Paleta de colores",
+    "primary": "Primario",
+    "secondary": "Secundario",
+    "accent": "Acento",
+    "success": "Éxito",
+    "info": "Información",
+    "warning": "Advertencia",
+    "danger": "Peligro",
+    "neutral": "Neutral",
+    "presetDescriptions": {
+      "aura": "Paleta moderna y elegante por defecto con tonos turquesa y violeta",
+      "autumn": "Paleta acogedora e invitante con tonos cálidos coral y dorados, perfecta para e-commerce",
+      "neon": "Paleta futurista cyberpunk con colores cyan eléctrico y neón, ideal para gaming",
+      "dopamine": "Paleta optimista y alegre con tonos lima brillante y rosa",
+      "corporate": "Paleta azul profesional, perfecta para aplicaciones empresariales",
+      "minimal": "Paleta minimalista refinada con colores sutiles y elegante acento púrpura",
+      "sunset": "Paleta cálida y vibrante con tonos rosa, naranja y coral, perfecta para apps creativas",
+      "twilight": "Paleta suave y relajante con tonos lavanda y azul grisáceo, ideal para bienestar",
+      "ocean": "Paleta calmada y profesional con azules profundos y tonos agua, ideal para productividad",
+      "emerald": "Paleta fresca y natural con verdes esmeralda y acentos turquesa, perfecta para apps de salud y naturaleza",
+      "coffee": "Paleta cálida y acogedora con tonos marrones y acentos crema, ideal para apps de estilo de vida y comida",
+      "velvet": "Paleta rica y lujosa con tonos burdeos y acentos rosados, perfecta para apps elegantes y sofisticadas"
+    },
+    "overview": {
+      "title": "Sistema de temas",
+      "subtitle": "Una solución de tematización potente y configurable en tiempo de ejecución para aplicaciones Angular",
+      "whatItSolves": {
+        "title": "¿Qué problema resuelve?",
+        "description": "El sistema de temas de NUI elimina la necesidad de configuración manual de CSS, reconstrucción de temas o gestión compleja de variables SCSS. Proporciona una forma unificada y type-safe de personalizar la apariencia de tu aplicación en tiempo de ejecución."
+      },
+      "features": {
+        "runtimeSwitching": {
+          "title": "Cambio de tema en tiempo real",
+          "description": "Cambia temas instantáneamente sin recargar la página ni recompilar. Perfecto para preferencias de usuario y pruebas A/B."
+        },
+        "darkMode": {
+          "title": "Modo oscuro automático",
+          "description": "Soporte de modo oscuro integrado con ajustes automáticos de color y múltiples estrategias de activación."
+        },
+        "tokenGeneration": {
+          "title": "200+ variables CSS",
+          "description": "Sistema completo de variables que cubre colores, sombras, tintes, valores alpha y tokens específicos de componentes."
+        },
+        "componentSpecific": {
+          "title": "Variables específicas de componentes",
+          "description": "Cada componente tiene sus propias variables CSS personalizables que heredan del tema global."
+        },
+        "typeSafety": {
+          "title": "Configuración type-safe",
+          "description": "Soporte completo de TypeScript con interfaces que aseguran que tus temas personalizados estén correctamente configurados."
+        },
+        "zeroScss": {
+          "title": "Sin sobrecarga de build",
+          "description": "Los temas se generan en el navegador en tiempo de ejecución. No es necesario recompilar la aplicación al cambiar temas."
+        }
+      },
+      "integration": {
+        "title": "Cómo se integra",
+        "description": "El sistema de temas está profundamente integrado en NUI y funciona perfectamente en todos los componentes:",
+        "point1": "<strong>Punto único de configuración</strong>: Define tu tema una vez en <code>provideNUI()</code>",
+        "point2": "<strong>Propagación automática</strong>: Todos los componentes NUI consumen automáticamente las variables del tema",
+        "point3": "<strong>Componentes personalizados</strong>: Tus propios componentes pueden usar variables CSS de NUI para estilos consistentes",
+        "point4": "<strong>Control en runtime</strong>: Cambia temas o activa modo oscuro programáticamente vía <code>ThemeService</code>",
+        "point5": "<strong>CSS agnóstico al framework</strong>: Las variables funcionan en cualquier HTML/CSS, no solo componentes Angular"
+      },
+      "keyFeatures": {
+        "title": "Características técnicas clave",
+        "feat1": "Variables CSS generadas dinámicamente desde configuración TypeScript",
+        "feat2Label": "8 colores semánticos",
+        "feat2": "(primary, secondary, accent, success, info, warning, danger, neutral)",
+        "feat3Label": "Escala de grises de 10 pasos",
+        "feat3": "para neutrales consistentes en modos claro y oscuro",
+        "feat4Label": "Variantes automáticas",
+        "feat4": "(sombras, tintes, valores alpha) generadas para cada color",
+        "feat5Label": "Modo oscuro inteligente",
+        "feat5": "con estrategias manual, sistema y basada en tiempo"
+      }
+    },
+    "architecture": {
+      "title": "Arquitectura de temas",
+      "subtitle": "Sistema en capas para generación dinámica de variables CSS",
+      "overview": "El sistema de temas de NUI utiliza una arquitectura en capas que genera dinámicamente más de 1000 variables CSS desde la configuración del preset. Cada capa se construye sobre la anterior, creando un sistema cohesivo y escalable.",
+      "layer1": {
+        "title": "Capa 1: Sistema de presets (colores semánticos)",
+        "description": "Cada preset define 8 colores semánticos que se aplican de forma consistente en toda la aplicación. Estos colores adaptan automáticamente su tonalidad entre modo claro y oscuro.",
+        "primary": "Color principal de marca, acciones primarias y elementos clave de navegación",
+        "secondary": "Color complementario para jerarquía visual y acciones secundarias",
+        "accent": "Color de énfasis para resaltados, enlaces y estados interactivos",
+        "success": "Confirmaciones positivas, operaciones exitosas y validación correcta",
+        "info": "Mensajes informativos, notificaciones neutrales y contenido de ayuda",
+        "warning": "Alertas de precaución que requieren atención pero no son críticas",
+        "danger": "Errores críticos, acciones destructivas y validación fallida",
+        "neutral": "Elementos neutrales, estados deshabilitados y backgrounds sutiles"
+      },
+      "layer2": {
+        "title": "Capa 2: Variables estructurales",
+        "description": "Variables base que definen colores de texto, fondos, bordes y otros elementos estructurales. Se generan a partir de la escala de grises del preset y se adaptan al modo claro/oscuro.",
+        "surfaces": {
+          "title": "Superficies",
+          "surface": "Fondo principal para cards, modals y paneles",
+          "surfaceSecondary": "Fondo secundario para secciones anidadas",
+          "surfaceNeutral": "Fondo neutral para estados disabled o placeholders"
+        },
+        "text": {
+          "title": "Texto",
+          "primary": "Texto principal con máximo contraste",
+          "secondary": "Texto secundario para metadatos y labels",
+          "weak": "Texto débil para contenido terciario",
+          "disabled": "Texto para elementos deshabilitados"
+        },
+        "borders": {
+          "title": "Bordes",
+          "high": "Bordes prominentes que requieren alto contraste",
+          "default": "Bordes estándar para separación visual",
+          "subtle": "Bordes sutiles para divisiones leves"
+        }
+      },
+      "layer3": {
+        "title": "Capa 3: Generación de variantes",
+        "description": "Para cada color semántico, el sistema genera automáticamente variantes de tintes, sombras y valores alpha. Esto permite jerarquía visual sin definir colores adicionales.",
+        "tints": {
+          "title": "Tintes (Lighter)",
+          "description": "Versiones aclaradas mezclando el color con blanco. Ideal para backgrounds suaves, estados hover y acentos sutiles."
+        },
+        "shades": {
+          "title": "Sombras (Darker)",
+          "description": "Versiones oscurecidas mezclando el color con negro. Usado para estados active, bordes y profundidad visual."
+        },
+        "alpha": {
+          "title": "Valores Alpha (Transparencia)",
+          "description": "Versiones semi-transparentes del color. Perfecto para overlays, efectos de vidrio y estados disabled."
+        }
+      },
+      "layer4": {
+        "title": "Capa 4: Sistema de sombras",
+        "description": "Sistema de sombras en dos niveles: primitivas (xs, sm, md, lg, xl) y aliases semánticos que mapean casos de uso a primitivas.",
+        "primitivesTitle": "Primitivas de sombra",
+        "aliasesTitle": "Aliases semánticos",
+        "mapsTo": "Mapea a",
+        "primitives": {
+          "xs": "Sombra mínima para inputs y campos de formulario",
+          "sm": "Sombra sutil para cards y contenedores",
+          "md": "Sombra media para elementos interactivos",
+          "lg": "Sombra elevada para popovers y dropdowns",
+          "xl": "Sombra máxima para modals y overlays"
+        },
+        "aliases": {
+          "field": "Campos de formulario (inputs, selects, textareas)",
+          "container": "Cards, panels, contenedores de contenido",
+          "interactive": "Botones, chips, elementos clicables",
+          "elevated": "Popovers, dropdowns, menús flotantes, modals"
+        }
+      },
+      "layer5": {
+        "title": "Capa 5: Variables de componentes",
+        "description": "Cada componente tiene un conjunto de variables CSS generadas dinámicamente que derivan de los colores semánticos y se adaptan a las variantes (solid, outline, ghost).",
+        "button": {
+          "description": "Variables para 3 variantes (Solid, Outline, Ghost) × 8 colores × 4 estados (default, hover, active, disabled). Total: ~96 variables."
+        },
+        "toast": {
+          "description": "Variables específicas para 4 tipos de toast (success, info, warning, danger) incluyendo background, border, title, text, progress e icon."
+        },
+        "paginator": {
+          "description": "Sistema 'Shapeshifter' donde botones inactivos son ghost y el botón activo adopta la variante especificada. Botones de navegación siempre ghost."
+        }
+      },
+      "performance": {
+        "title": "Optimización de performance",
+        "description": "El sistema de temas incluye optimizaciones para minimizar el impacto en performance del cambio de temas dinámico.",
+        "cache": {
+          "title": "Caché de CSS",
+          "description": "El CSS generado para cada combinación preset+modo se cachea en memoria. Cambios subsecuentes son instantáneos al reutilizar el CSS pre-generado."
+        },
+        "pregeneration": {
+          "title": "Pre-generación en Idle",
+          "description": "Al cargar la app, se pre-genera el CSS para ambos modos (light/dark) usando requestIdleCallback. El primer toggle ya es instantáneo."
+        },
+        "containment": {
+          "title": "CSS Containment",
+          "description": "Componentes pesados usan 'contain: layout style paint' para limitar el alcance de recálculos de estilo."
+        }
+      },
+      "flow": {
+        "title": "Flujo de generación de variables",
+        "description": "Desde la selección del preset hasta la aplicación en el DOM, así funciona el proceso:",
+        "step1": {
+          "title": "Usuario selecciona preset o cambia modo dark",
+          "description": "Via UI o ThemeService.toggleDarkMode() / ThemeService.usePreset()"
+        },
+        "step2": {
+          "title": "ThemeService verifica caché CSS",
+          "description": "Se genera clave 'presetName-isDarkMode'. Si existe en caché, se reutiliza. Sino, se genera."
+        },
+        "step3": {
+          "title": "Generación de variables CSS",
+          "description": "Se ejecutan ~1000 cálculos de color (tints, shades, alphas, contrast) para crear el string CSS completo."
+        },
+        "step4": {
+          "title": "Inyección al DOM",
+          "description": "El CSS se inyecta en <style id='nui-theme-colors'>. El navegador recalcula estilos y re-renderiza componentes afectados."
+        }
+      }
+    },
+    "darkMode": {
+      "title": "Estrategias de Modo Oscuro",
+      "subtitle": "Múltiples formas de manejar el modo oscuro en tu aplicación",
+      "currentStrategy": "Estrategia actual",
+      "currentMode": "Modo actual",
+      "dark": "Oscuro",
+      "light": "Claro",
+      "strategiesTitle": "Estrategias disponibles",
+      "strategiesDescription": "NUI proporciona tres estrategias diferentes para gestionar el modo oscuro, cada una adecuada para diferentes casos de uso:",
+      "strategies": {
+        "manual": {
+          "title": "Manual",
+          "description": "Control programático completo. El modo oscuro se activa explícitamente vía ThemeService.",
+          "feat1": "Control completo en el código de tu aplicación",
+          "feat2": "Preferencia del usuario guardada en localStorage",
+          "feat3": "Perfecto para apps con UI de cambio de tema"
+        },
+        "system": {
+          "title": "Sistema",
+          "description": "Sigue automáticamente la preferencia del sistema operativo del usuario usando la media query prefers-color-scheme.",
+          "feat1": "Respeta la configuración de modo oscuro del SO",
+          "feat2": "Se actualiza automáticamente cuando el usuario cambia preferencia del SO"
+        },
+        "auto": {
+          "title": "Auto",
+          "description": "Cambio inteligente basado en tiempo. El modo oscuro se activa durante horas nocturnas (8 PM - 6 AM hora local).",
+          "feat1": "Activa modo oscuro de 8 PM a 6 AM",
+          "feat2": "Reduce fatiga visual durante uso nocturno"
+        }
+      },
+      "demo": {
+        "title": "Pruébalo",
+        "description": "El showcase está configurado con estrategia 'manual', puedes controlar el modo oscuro programáticamente:",
+        "toggle": "Alternar Modo Oscuro",
+        "enableDark": "Activar Oscuro",
+        "enableLight": "Activar Claro"
+      },
+      "customClass": {
+        "title": "Clase personalizada para modo oscuro",
+        "description": "Por defecto, NUI agrega la clase 'dark-mode' a <html> cuando el modo oscuro está activo. Puedes personalizar este nombre de clase:"
+      }
+    },
+    "cssVars": {
+      "title": "Explorador de variables CSS",
+      "subtitle": "Explora y busca todas las 200+ variables CSS generadas por el sistema de temas",
+      "filters": {
+        "search": "Buscar",
+        "searchPlaceholder": "Buscar variables...",
+        "category": "Categoría"
+      },
+      "categories": {
+        "all": "Todas las variables",
+        "semantic": "Colores semánticos",
+        "structural": "Variables estructurales",
+        "button": "Button",
+        "avatar": "Avatar",
+        "toast": "Toast",
+        "paginator": "Paginator",
+        "shadows": "Sombras"
+      },
+      "noResults": "No se encontraron variables que coincidan con tu búsqueda",
+      "copy": "Copiar al portapapeles",
+      "groups": {
+        "semantic": "Colores semánticos",
+        "structural": "Variables estructurales",
+        "button": "Variables de button",
+        "avatar": "Variables de avatar",
+        "toast": "Variables de toast",
+        "paginator": "Variables de paginator",
+        "shadows": "Variables de sombra"
+      },
+      "usage": {
+        "title": "Cómo usar variables CSS",
+        "description": "Puedes usar cualquier variable CSS de NUI en las hojas de estilo de tus componentes:",
+        "example": ".my-component {\n  background: var(--nui-bg-primary);\n  color: var(--nui-text-primary);\n  border: 1px solid var(--nui-border-color);\n  box-shadow: var(--nui-box-shadow-md);\n}\n\n.my-button {\n  background: var(--nui-color-primary);\n  \n  &:hover {\n    background: var(--nui-color-primary-shade-50);\n  }\n}"
+      }
+    },
+    "customization": {
+      "title": "Personalización avanzada de temas",
+      "subtitle": "Crea tus propios presets de tema con colores personalizados",
+      "intro": {
+        "title": "¿Por qué crear temas personalizados?",
+        "description": "Los temas personalizados te permiten adaptar la identidad de tu marca, crear experiencias de usuario únicas u ofrecer múltiples opciones de tema a tus usuarios. NUI lo facilita con un sistema de configuración seguro para tipos."
+      },
+      "stepsTitle": "Pasos para crear un tema personalizado",
+      "steps": {
+        "step1": {
+          "title": "Define tu preset personalizado",
+          "description": "Crea un objeto <code>ThemePreset</code> con colores para los modos <code>claro</code> y <code>oscuro</code>. Cada modo requiere 8 colores semánticos.",
+          "code": "import { ThemePreset } from '@nui/core';\n\nexport const myCustomPreset: ThemePreset = {\n  name: 'custom',\n  label: 'Custom Theme',\n  colors: {\n    light: {\n      primary: '#6366f1',\n      secondary: '#8b5cf6',\n      accent: '#ec4899',\n      success: '#10b981',\n      info: '#3b82f6',\n      warning: '#f59e0b',\n      danger: '#ef4444',\n      neutral: '#6b7280'\n    },\n    dark: {\n      primary: '#818cf8',\n      secondary: '#a78bfa',\n      accent: '#f472b6',\n      success: '#34d399',\n      info: '#60a5fa',\n      warning: '#fbbf24',\n      danger: '#f87171',\n      neutral: '#9ca3af'\n    }\n  }\n};"
+        },
+        "step2": {
+          "title": "Registra tu tema",
+          "description": "Agrega tu preset personalizado a la configuración de NUI en tu <code>app.config.ts</code> o <code>main.ts</code>:",
+          "code": "import { provideNUI } from '@nui/core';\nimport { myCustomPreset } from './themes/custom';\n\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    provideNUI({\n      theme: {\n        preset: 'custom',\n        customPresets: [myCustomPreset],\n        darkMode: {\n          strategy: 'manual'\n        }\n      }\n    })\n  ]\n};"
+        },
+        "step3": {
+          "title": "Usa tu tema",
+          "description": "¡Tu tema personalizado ya está activo! También puedes cambiar entre temas en tiempo de ejecución:",
+          "code": "import { ThemeService } from '@nui/core';\n\nexport class MyComponent {\n  constructor(private themeService: ThemeService) {}\n\n  switchToCustomTheme() {\n    this.themeService.setPreset('custom');\n  }\n\n  switchToAura() {\n    this.themeService.setPreset('aura');\n  }\n}"
+        }
+      },
+      "grayScale": {
+        "title": "Escala de grises personalizada (Opcional)",
+        "description": "También puedes definir una escala de grises personalizada de 10 pasos para tener un control aún mayor sobre los colores neutrales. Si se omite, NUI genera una automáticamente."
+      },
+      "bestPractices": {
+        "title": "Mejores prácticas",
+        "practice1": "<strong>Usa colores hexadecimales</strong> para la mejor compatibilidad y rendimiento",
+        "practice2": "<strong>Prueba en modos claro y oscuro</strong> para asegurar legibilidad y contraste",
+        "practice3": "<strong>Mantén el significado semántico consistente</strong> (por ejemplo, 'danger' siempre debe significar error / peligro)",
+        "practice4": "<strong>Usa verificadores de contraste de color</strong> para cumplir con los estándares de accesibilidad WCAG",
+        "practice5": "<strong>Considera el daltonismo</strong> y no dependas únicamente del color para transmitir información"
+      },
+      "advanced": {
+        "title": "Personalización avanzada",
+        "tip1": {
+          "title": "Múltiples presets personalizados",
+          "description": "Puedes registrar múltiples presets personalizados y permitir que los usuarios elijan entre ellos en tiempo de ejecución."
+        },
+        "tip2": {
+          "title": "Herencia de presets",
+          "description": "Comienza desde un preset existente y sobrescribe solo colores específicos para crear variaciones."
+        },
+        "tip3": {
+          "title": "Generación dinámica de temas",
+          "description": "Genera temas programáticamente basados en la entrada del usuario, colores de la marca o datos de API."
+        }
+      },
+      "example": {
+        "title": "Ejemplo completo",
+        "description": "Aquí tienes un ejemplo completo de un tema personalizado <code>Forest</code> con modo oscuro manual:",
+        "code": "import { ThemePreset } from '@nui/core';\n\nexport const forestPreset: ThemePreset = {\n  name: 'forest',\n  label: 'Forest',\n  colors: {\n    light: {\n      primary: '#059669',    // Emerald\n      secondary: '#0891b2',  // Cyan\n      accent: '#7c3aed',     // Violet\n      success: '#16a34a',    // Green\n      info: '#0284c7',       // Sky\n      warning: '#ca8a04',    // Yellow\n      danger: '#dc2626',     // Red\n      neutral: '#52525b'     // Zinc\n    },\n    dark: {\n      primary: '#34d399',\n      secondary: '#22d3ee',\n      accent: '#a78bfa',\n      success: '#4ade80',\n      info: '#38bdf8',\n      warning: '#facc15',\n      danger: '#f87171',\n      neutral: '#a1a1aa'\n    }\n  },\n  grays: {\n    light: {\n      50: '#fafafa',\n      100: '#f4f4f5',\n      200: '#e4e4e7',\n      300: '#d4d4d8',\n      400: '#a1a1aa',\n      500: '#71717a',\n      600: '#52525b',\n      700: '#3f3f46',\n      800: '#27272a',\n      900: '#18181b'\n    },\n    dark: {\n      50: '#18181b',\n      100: '#27272a',\n      200: '#3f3f46',\n      300: '#52525b',\n      400: '#71717a',\n      500: '#a1a1aa',\n      600: '#d4d4d8',\n      700: '#e4e4e7',\n      800: '#f4f4f5',\n      900: '#fafafa'\n    }\n  }\n};"
+      }
+    }
+  }
+}

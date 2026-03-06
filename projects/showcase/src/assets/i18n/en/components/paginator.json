@@ -1,0 +1,199 @@
+{
+  "title": "Paginator",
+  "subtitle": "Advanced component for data navigation with support for flexible layouts and infinite loading",
+  "basic": {
+    "title": "Basic usage",
+    "description": "Standard configuration with numeric navigation. Supports two-way binding for page and size."
+  },
+  "nav-display": {
+    "title": "Navigation display options",
+    "description": "Define how the navigation buttons are displayed: text, icons or both. Customize the appearance of navigation buttons to match your application style.",
+    "note": "Use the <code>navDisplay</code> input with values <code>'text'</code>, <code>'icon'</code> or <code>'both'</code> to show only text, only icons or both in the navigation buttons. Icons are based on the Remix Icon library and are automatically assigned depending on the button type (first page, previous page, next page, last page)."
+  },
+  "colors": {
+    "title": "Colors and variants",
+    "description": "Supports all NUI colors and variants (Solid, Outline, Ghost).",
+    "note": "Combine <code>color</code> and <code>variant</code> to customize the appearance of the paginator to your needs."
+  },
+  "sizes": {
+    "title": "Page size options",
+    "description": "Define a custom set of options for the page size.",
+    "note": "Using the <code>size</code> input you can offer users a specific set of page sizes to choose from."
+  },
+  "layout": {
+    "title": "Custom layout",
+    "description": "The most powerful feature. Define exactly where each element goes (top, left, center, right, bottom) using a configuration object.",
+    "note": "<strong>⚠️ Important for mobile:</strong> Complex layouts designed for desktop may overflow on small screens. Always provide an optimized <code>mobileLayout</code> that rearranges elements vertically and prioritizes essential navigation. This prevents UX issues on mobile devices. <br/><br/><strong>Area system:</strong> When a layout is set, attributes like <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> and <code>showPageJump</code> are ignored because the custom layout has full control over what to show and where."
+  },
+  "infinite": {
+    "title": "Infinite loading",
+    "description": "Transforms the paginator into a <strong>Load more</strong> button with integrated loading state. Ideal for mobile lists or feeds.",
+    "note": "Enable infinite loading mode with <code>infiniteConfig</code>. The paginator becomes a button that loads more items on click. Use the <code>onLoadMore</code> output inside <code>infiniteConfig</code> to handle the data loading logic."
+  },
+  "api": {
+    "title": "API and reference",
+    "description": "Complete documentation of inputs, outputs and interfaces of the Paginator component for advanced integration.",
+    "inputs": {
+      "title": "Inputs",
+      "description": "Input properties of the Paginator component"
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Events emitted by the Paginator component"
+    },
+    "texts": {
+      "title": "PaginatorI18n",
+      "description": "Interface for customizable paginator texts"
+    },
+    "keyboard": {
+      "title": "KeyboardConfig",
+      "description": "Interface for keyboard navigation configuration"
+    },
+    "loading": {
+      "title": "LoadingConfig",
+      "description": "Interface for loading state configuration"
+    },
+    "layout": {
+      "title": "PaginatorLayout",
+      "description": "Interface for custom layout: organizes elements into areas (top, left, center, right, bottom)"
+    },
+    "icons": {
+      "title": "navIcons",
+      "description": "Interface for customizable icons configuration"
+    },
+    "infinite": {
+      "title": "InfiniteConfig",
+      "description": "Interface for infinite scroll mode configuration"
+    }
+  },
+  "styling": {
+    "title": "Styles and customization",
+    "description": "Customize the appearance of the paginator using CSS variables. Control layout, buttons, page numbers and more."
+  },
+  "theming": {
+    "layout": {
+      "title": "Layout",
+      "description": "CSS variables for the overall paginator layout"
+    },
+    "buttons": {
+      "title": "Buttons",
+      "description": "CSS variables for navigation buttons and page numbers"
+    },
+    "active": {
+      "title": "Active page",
+      "description": "CSS variables for the active state of the current page"
+    },
+    "controls": {
+      "title": "Controls",
+      "description": "CSS variables for the size selector, item range and page jump"
+    },
+    "infinite": {
+      "title": "Infinite scroll",
+      "description": "CSS variables for infinite loading mode"
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Translation tokens",
+      "description": "The Paginator uses i18n tokens for navigation button labels, item range messages and the page size selector.",
+      "note": "Override tokens with <code>provideNuiI18n({ paginator: { ... } })</code>.",
+      "rows": {
+        "firstPage": {
+          "description": "Accessible label for the 'First page' button."
+        },
+        "previousPage": {
+          "description": "Accessible label for the 'Previous page' button."
+        },
+        "nextPage": {
+          "description": "Accessible label for the 'Next page' button."
+        },
+        "lastPage": {
+          "description": "Accessible label for the 'Last page' button."
+        },
+        "itemsPerPage": {
+          "description": "Label for the items-per-page selector."
+        },
+        "of": {
+          "description": "Connector 'of' used in the range text (e.g. '1–10 of 100')."
+        },
+        "jumpToPage": {
+          "description": "Placeholder or label for the page jump input."
+        }
+      }
+    },
+    "a11yTokens": {
+      "title": "Accessibility tokens",
+      "description": "Additional tokens used for screen reader announcements and paginator aria attributes.",
+      "note": "These tokens are localized under <code>paginator.a11y</code>.",
+      "rows": {
+        "pageLabel": {
+          "description": "Text pattern announced when the page changes (e.g. 'Page 3 of 10')."
+        },
+        "navigation": {
+          "description": "Aria-label for the paginator navigation region."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA roles and attributes",
+      "description": "The Paginator implements the ARIA navigation pattern with <code>role=\"navigation\"</code> and correctly labelled buttons.",
+      "elements": {
+        "nav": "Navigation region",
+        "prevNextButton": "Previous/next buttons",
+        "pageButton": "Page number button",
+        "currentPage": "Current page"
+      },
+      "rows": {
+        "navRole": {
+          "description": "The root paginator container has <code>role=\"navigation\"</code> and <code>aria-label</code> taken from the i18n token <code>navigation</code>."
+        },
+        "buttonLabels": {
+          "description": "First/previous/next/last page buttons have <code>aria-label</code> extracted from the corresponding i18n tokens."
+        },
+        "ariaCurrent": {
+          "description": "The active page button carries <code>aria-current=\"page\"</code>."
+        }
+      }
+    },
+    "naming": {
+      "title": "Accessible name",
+      "description": "All interactive paginator controls get their accessible name from i18n tokens, ensuring they are descriptive in any language.",
+      "note": "Localize the <code>paginator</code> namespace tokens to ensure meaningful labels.",
+      "elements": {
+        "nav": "Navigation region",
+        "buttons": "Navigation buttons",
+        "currentPage": "Current page"
+      },
+      "info": {
+        "navToken": "i18n token 'navigation'",
+        "buttonTokens": "i18n button tokens",
+        "ariaCurrentPage": "aria-current='page'"
+      },
+      "rows": {
+        "nav": {
+          "description": "The navigation region uses the <code>navigation</code> token as <code>aria-label</code>."
+        },
+        "buttons": {
+          "description": "Each navigation button uses its specific i18n token as the accessible name."
+        },
+        "current": {
+          "description": "The active page carries <code>aria-current=\"page\"</code> so screen readers identify it."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Keyboard interaction",
+      "description": "The Paginator is fully keyboard-navigable with standard button interaction.",
+      "rows": {
+        "tab": {
+          "description": "Tab moves focus between the paginator buttons and controls."
+        },
+        "enterSpace": {
+          "description": "Activates the focused button, navigating to the corresponding page."
+        }
+      }
+    }
+  }
+}

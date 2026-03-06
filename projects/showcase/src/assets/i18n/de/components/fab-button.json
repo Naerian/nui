@@ -1,0 +1,198 @@
+{
+  "title": "FAB-Schaltfläche",
+  "subtitle": "Schwebende Aktionsschaltfläche mit radialen Layouts und mehreren Anpassungsoptionen",
+  "basic": {
+    "title": "Grundlegend",
+    "description": "Die einfachste Verwendung der FAB-Schaltfläche: Aktionen werden beim Klicken auf den Trigger linear nach oben erweitert."
+  },
+  "directions": {
+    "title": "Richtungen",
+    "description": "Steuere, wohin sich Elemente mit <code>direction</code> erweitern. Verfügbare Werte: <code>up</code>, <code>down</code>, <code>left</code>, <code>right</code> und die vier Diagonalen."
+  },
+  "layouts": {
+    "title": "Layouts",
+    "description": "Definiere die räumliche Verteilung der Elemente mit <code>layout</code>: <code>linear</code> (inline), <code>semi-circle</code> (Halbkreis), <code>quarter-circle</code> (Viertelkreis) und <code>circle</code> (Vollkreis)."
+  },
+  "shapes": {
+    "title": "Formen",
+    "description": "Passe den Rahmenradius des Triggers und der Elemente mit <code>shape</code> an: <code>circular</code>, <code>rounded</code> oder <code>square</code>."
+  },
+  "colors": {
+    "title": "Farben",
+    "description": "Verwende eine der 8 semantischen Systemfarben mit dem Input <code>color</code>."
+  },
+  "sizes": {
+    "title": "Größen",
+    "description": "Steuere die Größe des Triggers und der Elemente mit <code>size</code>: <code>xs</code>, <code>sm</code>, <code>md</code> (Standard), <code>lg</code> und <code>xl</code>."
+  },
+  "animation": {
+    "title": "Animationen",
+    "description": "Wähle, wie Elemente ein- und ausblenden mit <code>animation</code>: <code>scale</code> (Standard), <code>fade</code> oder <code>slide</code>."
+  },
+  "trigger": {
+    "title": "Trigger",
+    "description": "Passe die Trigger-Schaltfläche mit <code>triggerIcon</code>, <code>triggerIconOpen</code> (alternatives Icon im geöffneten Zustand), <code>triggerLabel</code> (Extended FAB-Muster) und <code>triggerBadge</code> zur Anzeige eines Zählers an."
+  },
+  "loading": {
+    "title": "Ladezustand",
+    "description": "Zeigt einen Spinner auf dem Trigger mit <code>[loading]=\"true\"</code>. Während aktiv, öffnet oder schließt der Trigger das Wählrad nicht."
+  },
+  "openOn": {
+    "title": "Öffnungsmodus",
+    "description": "Steuere, wie das Wählrad geöffnet wird: <code>openOn=\"click\"</code> (Standard) oder <code>openOn=\"hover\"</code> für ein per Hover aktiviertes Speed-Dial. Die Tastaturnavigation funktioniert in beiden Modi gleich."
+  },
+  "itemDisplay": {
+    "title": "Element-Anzeige",
+    "description": "<code>itemDisplay=\"icon\"</code> zeigt nur das Icon mit einem Tooltip beim Hover (Standard). <code>itemDisplay=\"icon-text\"</code> zeigt das Icon und die <code>label</code>-Eigenschaft des Elements direkt sichtbar innerhalb der Schaltfläche an."
+  },
+  "closeOptions": {
+    "title": "Schließoptionen",
+    "description": "Steuere, wann das Wählrad schließt: <code>[closeOnItemClick]=\"false\"</code> hält das Wählrad nach dem Klicken auf ein Element offen (nützlich für Mehrfachauswahl), <code>[closeOnOutsideClick]=\"true\"</code> schließt bei Außenklick, <code>[closeOnScroll]=\"true\"</code> schließt beim Scrollen."
+  },
+  "backdrop": {
+    "title": "Hintergrundblatt",
+    "description": "Fügt eine halbtransparente Schicht hinter den Elementen mit <code>[backdrop]=\"true\"</code> hinzu, ideal zum Hervorheben von Aktionen über dichtem Inhalt."
+  },
+  "templates": {
+    "title": "Benutzerdefinierte Templates",
+    "description": "Projiziere eigenen Inhalt in den Trigger mit <code>fabTrigger</code> und in jedes Element mit <code>fabItem</code>. Beide Direktiven geben den Element-Kontext über <code>let-item</code> und den offenen Zustand des Wählrads über <code>let-open=\"isOpen\"</code> weiter."
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Eingabeeigenschaften zur Konfiguration des Verhaltens, Erscheinungsbilds und Layouts der FAB-Schaltfläche."
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Ereignisse, die von der FAB-Button-Komponente ausgelöst werden, um auf Benutzerinteraktionen zu reagieren."
+    },
+    "computed": {
+      "title": "Berechnete Eigenschaften",
+      "description": "Reaktive berechnete Eigenschaften (Signals), die den aufgelösten internen Zustand der Komponente bereitstellen."
+    },
+    "types": {
+      "title": "Typen",
+      "description": "TypeScript-Typen, die die akzeptierten Werte für FAB-Button-Inputs definieren."
+    },
+    "item": {
+      "title": "FabButtonItem",
+      "description": "Öffentliches Interface, das jede Menüaktion definiert. Alle Felder sind optional: Die einzige Anforderung ist, dass das Element identifizierbar ist (über <code>id</code>) und mindestens ein <code>icon</code> oder ein <code>label</code> hat."
+    },
+    "itemResolved": {
+      "title": "FabButtonItemResolved",
+      "description": "Interne Version von <code>FabButtonItem</code>, angereichert mit vier berechneten Feldern, die die Komponente als CSS-Variablen auf jedes <code>&lt;li&gt;</code> injiziert. Dies ist der Typ, der im <code>fabItem</code>-Template-Kontext über <code>let-item</code> empfangen wird."
+    },
+    "directives": {
+      "title": "Template-Direktiven",
+      "description": "Eigenständige Direktiven, die die Projektion benutzerdefinierter Templates in den Trigger und in jedes FAB-Button-Element ermöglichen. Sie werden wie jede Angular-Standalone-Direktive importiert und deklariert."
+    },
+    "config": {
+      "title": "Globale Konfiguration (FabButtonConfig)",
+      "description": "Alle global über <code>provideNuiConfig({ config: { fabButton: { … } } })</code> verfügbaren Konfigurationseigenschaften. Diese Werte werden angewendet, wenn der entsprechende Komponenten-Input nicht definiert ist."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Farbvariablen",
+      "description": "CSS-Variablen zur Anpassung der Farben nach Variante (<code>solid</code>, <code>outline</code>, <code>ghost</code>) und semantischer Farbe (<code>primary</code>, <code>secondary</code>, usw.).",
+      "note": "Ersetze <code>{color}</code> durch eine beliebige Systemfarbe: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>."
+    },
+    "structure": {
+      "title": "Strukturelle Variablen",
+      "description": "CSS-Variablen zur Anpassung des radialen Layouts, Animationen, Schaltflächengrößen, Hintergrundblatt, Tooltips und des Fokus-Rings."
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Übersetzungs-Tokens",
+      "description": "Die FabButton-Komponente stellt ein einzelnes i18n-Token für das zugängliche Label der Trigger-Schaltfläche bereit.",
+      "note": "Überschreibe es mit <code>provideNuiI18n({ fabButton: { triggerAriaLabel: 'Aktionen öffnen' } })</code>.",
+      "rows": {
+        "triggerAriaLabel": {
+          "description": "Das <code>aria-label</code>, das auf die FAB-Trigger-Schaltfläche angewendet wird. Von Screenreadern verwendet, um die Schaltfläche zu identifizieren, wenn sie nur ein Icon zeigt."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA-Rollen und -Attribute",
+      "description": "Die FabButton folgt dem WAI-ARIA Menu Button-Muster. Der Trigger kündigt den offenen Zustand an und die Aktionsliste ist ein korrektes Menü.",
+      "elements": {
+        "host": "FAB-Host (Container-Gruppe)",
+        "trigger": "Trigger-Schaltfläche",
+        "menu": "Aktionsmenü",
+        "action": "Einzelne Aktion",
+        "icon": "Dekoratives Icon"
+      },
+      "rows": {
+        "roleGroup": {
+          "description": "Das FAB-Host-Element hat <code>role=\"group\"</code> und <code>aria-label</code>, damit das gesamte Widget als kohärente Gruppe angekündigt wird."
+        },
+        "hostLabel": {
+          "description": "Das <code>aria-label</code> des Hosts stammt vom i18n-Token <code>triggerAriaLabel</code> und gibt Screenreader-Benutzern Kontext über den Zweck des FAB."
+        },
+        "expanded": {
+          "description": "Die Trigger-Schaltfläche hat <code>aria-expanded</code>, das anzeigt, ob die Aktionsliste geöffnet (<code>true</code>) oder geschlossen (<code>false</code>) ist."
+        },
+        "controls": {
+          "description": "Der Trigger hat <code>aria-controls</code>, der auf die <code>id</code> des Aktionsmenü-Elements zeigt."
+        },
+        "haspopup": {
+          "description": "Der Trigger hat <code>aria-haspopup=\"menu\"</code>, um anzuzeigen, dass das Aktivieren ein Menü öffnet."
+        },
+        "roleMenu": {
+          "description": "Der Aktions-Container hat <code>role=\"menu\"</code>."
+        },
+        "roleMenuItem": {
+          "description": "Jede einzelne Aktion hat <code>role=\"menuitem\"</code>."
+        },
+        "ariaHiddenIcon": {
+          "description": "Dekorative Icons innerhalb von Aktionselementen sind mit <code>aria-hidden=\"true\"</code> versteckt."
+        }
+      }
+    },
+    "naming": {
+      "title": "Zugänglicher Name",
+      "description": "Die Trigger-Schaltfläche und jedes Aktionselement müssen aussagekräftige zugängliche Namen für Screenreader-Benutzer haben.",
+      "note": "Gib immer ein <code>label</code> oder <code>tooltip</code> für jedes Aktionselement an — diese werden zum zugänglichen Namen des <code>menuitem</code>.",
+      "elements": {
+        "trigger": "Trigger-Schaltfläche",
+        "action": "Aktionselement"
+      },
+      "info": {
+        "triggerLabel": "i18n-Token triggerAriaLabel",
+        "actionLabel": "Aktionslabeltext / Tooltip"
+      },
+      "rows": {
+        "trigger": {
+          "description": "Der zugängliche Name der Trigger-Schaltfläche kommt vom i18n-Token <code>triggerAriaLabel</code>. Überschreibe es in deiner Sprache, um den Zweck des FAB zu beschreiben."
+        },
+        "action": {
+          "description": "Der zugängliche Name jeder Aktion wird aus dem sichtbaren Label-Text oder, für Nur-Icon-Aktionen, aus dem Input <code>tooltip</code> entnommen."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Tastaturinteraktion",
+      "description": "Die FabButton folgt dem WAI-ARIA Menu Button-Tastaturmuster.",
+      "rows": {
+        "spaceEnter": {
+          "description": "Aktiviert die Trigger-Schaltfläche und schaltet das Aktionsmenü ein oder aus."
+        },
+        "escape": {
+          "description": "Schließt das Aktionsmenü und gibt den Fokus an die Trigger-Schaltfläche zurück."
+        },
+        "arrowDownUp": {
+          "description": "Bewegt den Fokus zwischen Aktionselementen im geöffneten Menü."
+        },
+        "homeEnd": {
+          "description": "Bewegt den Fokus zum ersten / letzten Aktionselement im geöffneten Menü."
+        },
+        "tab": {
+          "description": "Schließt das Aktionsmenü und bewegt den Fokus zum nächsten fokussierbaren Element auf der Seite."
+        }
+      }
+    }
+  }
+}

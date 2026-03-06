@@ -1,0 +1,187 @@
+{
+  "title": "Select Button",
+  "subtitle": "Group of buttons for single (Radio) or multiple (Checkbox) selection",
+  "basic": {
+    "title": "Basic usage",
+    "description": "The simplest case accepts an array of strings. By default, it acts as a single-option selector (Radio)."
+  },
+  "modes": {
+    "title": "Selection modes",
+    "description": "Allows changing the button selection type between radiobutton and checkbox",
+    "note": "Switch to <code>mode='checkbox'</code> to allow selecting multiple options at once. The returned value will be an Array."
+  },
+  "complex": {
+    "title": "Complex objects",
+    "description": "Supports arrays of objects with custom properties for label, value and disabled state.",
+    "note": "Map arbitrary object properties using <code>labelBy</code>, <code>valueBy</code>, <code>iconBy</code> and <code>disabledBy</code>."
+  },
+  "icons": {
+    "title": "Icons",
+    "description": "Supports icon-only buttons for a compact toolbar-style button group.",
+    "note": "Remix Icon support. Use <code>iconOnly='true'</code> for a compact toolbar-style button group. If it is an <strong>object</strong>, you can map the icon property using <code>iconBy</code>."
+  },
+  "colors": {
+    "title": "Colors and variants",
+    "description": "Compatible with the full variant system (Solid, Outline, Ghost) and NUI colors.",
+    "note": "Combine <code>color</code> and <code>variant</code>."
+  },
+  "segmented": {
+    "title": "Segmented variant (iOS style)",
+    "description": "Visual style similar to <strong>iOS Segmented Control</strong>, special and in addition to the basic NUI variant types. Ideal for view switchers (e.g.: Month / Year, List / Map).",
+    "note": "Use <code>variant='segmented'</code> to apply this unique variant."
+  },
+  "sizes": {
+    "title": "Sizes",
+    "description": "Five predefined sizes that harmoniously scale the container, typography and icons.",
+    "note": "Use <code>size</code> with values <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> and <code>'xl'</code>."
+  },
+  "width": {
+    "title": "Full width",
+    "description": "Expands buttons to occupy all available space equally.",
+    "note": "Use <code>width='full'</code> so each button expands and occupies equal width within the container."
+  },
+  "api": {
+    "title": "API and reference",
+    "description": "Complete documentation of inputs, outputs and advanced usage of the Select Button component.",
+    "inputs": {
+      "title": "Inputs",
+      "description": "Component properties that control its behavior and appearance."
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Events emitted by the component during its lifecycle."
+    }
+  },
+  "theming": {
+    "title": "Styles and customization",
+    "description": "Customize the appearance of the Select Button using CSS variables. Control spacing, colors, shadows and more.",
+    "general": {
+      "title": "General variables",
+      "description": "CSS variables to customize the general style of the Select Button (default layout).",
+      "rows": {
+        "gap": {
+          "description": "Space between buttons in the default layout."
+        },
+        "transition": {
+          "description": "CSS transition applied to all buttons."
+        }
+      }
+    },
+    "segmented": {
+      "title": "Segmented layout variables",
+      "description": "CSS variables specific to the segmented style (iOS-like). Controls the container, selected/unselected states and hover effects.",
+      "rows": {
+        "gap": {
+          "description": "Space between buttons in the segmented layout."
+        },
+        "bg": {
+          "description": "Background color of the segmented container."
+        },
+        "padding": {
+          "description": "Inner padding of the segmented container."
+        },
+        "borderRadius": {
+          "description": "Corner radius of the segmented container."
+        },
+        "border": {
+          "description": "Border of the segmented container."
+        },
+        "selectedBg": {
+          "description": "Background of the selected button."
+        },
+        "selectedShadow": {
+          "description": "Shadow of the selected button."
+        },
+        "selectedBorder": {
+          "description": "Border of the selected button."
+        },
+        "unselectedBg": {
+          "description": "Background of unselected buttons."
+        },
+        "unselectedText": {
+          "description": "Text color of unselected buttons."
+        },
+        "hoverBg": {
+          "description": "Background of the button on hover state."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA roles and attributes",
+      "description": "The Select Button exposes semantic roles depending on its selection mode (radio or checkbox).",
+      "elements": {
+        "containerRadio": "Container (radio mode)",
+        "containerCheckbox": "Container (checkbox mode)",
+        "container": "Container",
+        "buttonRadio": "Option button (radio mode)",
+        "buttonCheckbox": "Option button (checkbox mode)",
+        "button": "Option button",
+        "icon": "Decorative icon"
+      },
+      "rows": {
+        "roleRadiogroup": {
+          "description": "The container uses <code>role=\"radiogroup\"</code> in single-selection mode to group mutually exclusive options."
+        },
+        "roleGroup": {
+          "description": "The container uses <code>role=\"group\"</code> in multiple-selection mode to group related checkboxes."
+        },
+        "ariaDisabled": {
+          "description": "Reflects the disabled state of the entire group to assistive technologies."
+        },
+        "roleRadio": {
+          "description": "Each button uses <code>role=\"radio\"</code> in single-selection mode."
+        },
+        "roleCheckbox": {
+          "description": "Each button uses <code>role=\"checkbox\"</code> in multiple-selection mode."
+        },
+        "ariaChecked": {
+          "description": "Indicates whether the option is currently selected."
+        },
+        "ariaHiddenIcon": {
+          "description": "Decorative icons are hidden from assistive technologies with <code>aria-hidden=\"true\"</code>."
+        }
+      }
+    },
+    "naming": {
+      "title": "Accessible name",
+      "description": "Each option button gets its accessible name from the option label. Optionally, the group container can receive a contextual label.",
+      "note": "Always provide meaningful labels for options. For icon-only buttons, ensure each option has a descriptive label assigned via <code>labelBy</code>.",
+      "elements": {
+        "button": "Option button",
+        "container": "Group container"
+      },
+      "info": {
+        "optionLabel": "Option label text",
+        "groupLabel": "Not provided by default"
+      },
+      "rows": {
+        "button": {
+          "description": "The accessible name of each option button is derived from the visible option label text."
+        },
+        "container": {
+          "description": "The group container does not receive an accessible name by default. Wrap it with a labelled parent element if context is required."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Keyboard interaction",
+      "description": "The Select Button uses roving tabindex in radio mode and standard Tab navigation in checkbox mode.",
+      "rows": {
+        "tab": {
+          "description": "In radio mode, Tab moves focus to the selected option (or to the first if none is selected). In checkbox mode, Tab cycles through all options."
+        },
+        "arrowNext": {
+          "description": "In radio mode, moves focus to the next option and selects it (wraps around)."
+        },
+        "arrowPrev": {
+          "description": "In radio mode, moves focus to the previous option and selects it (wraps around)."
+        },
+        "spaceEnter": {
+          "description": "In checkbox mode, toggles the selection of the focused option."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,233 @@
+{
+  "title": "Seitenbereich",
+  "subtitle": "Gleitende Seitenpanels mit CDK Overlay zur Anzeige dynamischer Inhalte",
+  "examples": {
+    "basic": {
+      "title": "Grundlegende Verwendung",
+      "description": "Öffnen Sie ein Seitenpanel über den SidebarPanelService. Das Panel gleitet mit einer sanften Animation vom Bildschirmrand."
+    },
+    "defaults": {
+      "title": "Standardkonfiguration",
+      "description": "Das Panel wird mit den konfigurierten globalen Standardwerten geöffnet.",
+      "note": "Wenn beim Öffnen des Panels keine Optionen angegeben werden, werden die in der NUI-Konfiguration über <code>provideNUI({ sidebarPanel: {...} })</code> definierten globalen Standardwerte verwendet."
+    },
+    "sizes": {
+      "title": "Größen",
+      "description": "Legt die Größe fest, mit der das Panel geöffnet wird.",
+      "note": "Sie können vordefinierte Werte wie <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code>, <code>'xl'</code> und <code>'full'</code> verwenden. Auf <code>mobilen</code> Geräten wird automatisch die Größe <code>'full'</code> angewendet, um ein optimales Erlebnis sicherzustellen."
+    },
+    "positions": {
+      "title": "Positionen",
+      "description": "Legen Sie fest, von welcher Seite des Bildschirms das Panel gleitet.",
+      "note": "Verwenden Sie die Eigenschaft <code>position</code>, um die Seite festzulegen, von der das Panel geöffnet wird: <code>'right'</code>, <code>'left'</code>, <code>'top'</code> oder <code>'bottom'</code>."
+    },
+    "html-content": {
+      "title": "Benutzerdefinierter HTML-Inhalt",
+      "description": "Rendern Sie beliebigen HTML-Inhalt im Panel mithilfe von Angular-Templates.",
+      "note": "Verwenden Sie die Eigenschaft <code>htmlContent</code>, um einen HTML-String zu übergeben. Das HTML kann dynamisch generiert oder mit Ihren Daten verknüpft werden. Diese Option erfordert keine vollständige Angular-Komponente."
+    },
+    "template-content": {
+      "title": "Benutzerdefinierter Template-Inhalt (TemplateRef)",
+      "description": "Verwenden Sie Angular-Templates mit Kontextdaten und Funktionen, ohne eine vollständige Komponente zu benötigen. Ideal für wiederverwendbare Inhalte mit dynamischen Daten.",
+      "note": "Verwenden Sie die Eigenschaft <code>contentTemplate</code>, um ein <code>TemplateRef</code> zu übergeben, und <code>templateContext</code>, um Daten und Funktionen zu übergeben. Das Template erhält den Kontext über <code>let-varname</code>-Variablen. Dies ermöglicht Interaktivität ohne das Erstellen einer Komponente."
+    },
+    "dynamic-component": {
+      "title": "Dynamische Komponente",
+      "description": "Laden Sie eine beliebige Angular-Komponente in das Panel und übergeben Sie Daten per Dependency Injection.",
+      "note": "Verwenden Sie die Eigenschaft <code>data</code>, um Daten an die dynamisch geladene Komponente zu übergeben. Diese Daten werden über das Token <code>SIDEBAR_PANEL_DATA</code> injiziert. Um aus der geladenen Komponente auf das Panel selbst verweisen zu können, injizieren Sie <code>SIDEBAR_PANEL_REF</code>."
+    },
+    "dynamic-component-events": {
+      "title": "Ereignisse dynamischer Komponenten (@Output)",
+      "description": "Abonnieren Sie Ereignisse, die von der im Panel geladenen Komponente ausgegeben werden, um Interaktionen zu verarbeiten und das Panel bei Bedarf zu schließen.",
+      "note": "Sie können die Outputs der dynamisch geladenen Komponente abonnieren. Verwenden Sie <code>panelRef.componentInstance</code>, um auf die untergeordnete Komponenteninstanz zuzugreifen und ihre <code>@Output()</code>-Eigenschaften zu abonnieren."
+    },
+    "minimizable": {
+      "title": "Minimierbares Panel",
+      "description": "Panels können zu einem Tab auf der Seite minimiert werden, von der der Seitenbereich geöffnet wird, um Platz freizugeben und den Zustand zu erhalten. Sie können jederzeit wiederhergestellt werden.",
+      "note": "Verwenden Sie das Attribut <code>minimizable</code>, um den Seitenbereich minimierbar zu machen. Zusätzlich können Sie die Methode <code>minimize()</code> von SidebarPanel verwenden, um das Panel programmgesteuert zu minimieren, und <code>restore()</code>, um es wiederherzustellen. Wenn <code>minimizable</code> aktiviert ist, ist das Attribut <code>id</code> erforderlich, um das minimierte Panel zu identifizieren. Sie können auch prüfen, ob der Seitenbereich minimiert ist, über <code>isMinimized</code>.<br><br><strong>Tab-Anpassung:</strong> Sie können das Symbol anpassen, Text hinzufügen, benutzerdefiniertes CSS anwenden oder ein vollständig angepasstes Template über <code>minimizedTabCustomization</code> verwenden. Für schwebende Schaltflächen mit freier Positionierung (z. B. Chat unten rechts) verwenden Sie <code>standalone: true</code>, um außerhalb des gruppierten Containers zu rendern. Schaltflächenstile sollten auf globaler Ebene definiert werden."
+    },
+    "close-button": {
+      "title": "Schließen-Schaltfläche",
+      "description": "Steuern Sie die Sichtbarkeit der Schließen-Schaltfläche im Panel-Header.",
+      "note": "Verwenden Sie die Eigenschaft <code>showCloseButton</code>, um die Schließen-Schaltfläche im Panel-Header ein- oder auszublenden."
+    },
+    "backdrop": {
+      "title": "Hintergrundblatt",
+      "description": "Fügt einen dunklen Hintergrund hinter dem Panel hinzu, um ein modales Erlebnis zu erzeugen. Legen Sie fest, ob ein Klick auf das Hintergrundblatt das Panel schließt.",
+      "note": "Verwenden Sie die Eigenschaft <code>hasBackdrop</code>, um das Hintergrundblatt zu aktivieren/deaktivieren (Standard <code>true</code>), und <code>closeOnBackdropClick</code>, um zu steuern, ob ein Klick darauf das Panel schließt."
+    },
+    "custom-backdrop": {
+      "title": "Benutzerdefiniertes Hintergrundblatt",
+      "description": "Passen Sie das Hintergrundblatt mit eigenen CSS-Klassen an. Sie können Effekte wie Unschärfe, benutzerdefinierte Farben und Übergänge anwenden.",
+      "note": "Verwenden Sie die Eigenschaft <code>backdropClass</code>, um benutzerdefinierte CSS-Klassen zum Panel-Hintergrundblatt hinzuzufügen. Sie können eine einzelne Klasse oder ein <code>Array</code> von Klassen hinzufügen."
+    },
+    "multiple": {
+      "title": "Mehrere Panels",
+      "description": "Öffnen Sie mehrere Panels gleichzeitig von verschiedenen Seiten. Steuern Sie die Stapelreihenfolge mit z-index und schließen Sie alle auf einmal.",
+      "note": "Jedes geöffnete Panel ist unabhängig und kann eine eigene Konfiguration haben. Verwenden Sie die Methode <code>closeAll()</code> des <code>SidebarPanelService</code>, um alle geöffneten Panels programmgesteuert gleichzeitig zu schließen."
+    },
+    "footer-actions": {
+      "title": "Fußzeilen-Aktionen",
+      "description": "Fügen Sie Aktionsschaltflächen in der Panel-Fußzeile hinzu.",
+      "note": "Verwenden Sie <code>customButtons</code> für einfache Aktionen oder <code>footerTemplate</code> für vollständig angepasste Layouts. Sie können mehrere Schaltflächen mit den verschiedenen NUI-Varianten und -Farben kombinieren."
+    },
+    "child-footer-actions": {
+      "title": "Aktionen aus untergeordneter Komponente",
+      "description": "Die untergeordnete Komponente kann eigene Fußzeilen-Aktionen über SidebarPanelActionsService registrieren.",
+      "note": "Dieser Ansatz eignet sich ideal für Formulare, bei denen die untergeordnete Komponente die gesamte Logik verwaltet (Validierung, Speichern, Zustände). Die untergeordnete Komponente injiziert <code>SidebarPanelActionsService</code> und registriert Aktionen über <code>register()</code>. Aktionen können reaktive Zustände (deaktiviert, wird geladen) haben und komplexe Logik ausführen."
+    }
+  },
+  "api": {
+    "service": {
+      "title": "SidebarPanelService",
+      "description": "Service-Methoden zur Verwaltung von Seitenpanels"
+    },
+    "ref-properties": {
+      "title": "SidebarPanelRef (Eigenschaften)",
+      "description": "Eigenschaften der Seitenpanel-Referenz"
+    },
+    "ref-methods": {
+      "title": "SidebarPanelRef (Methoden)",
+      "description": "Methoden der Seitenpanel-Referenz zur Steuerung und für Ereignisse"
+    },
+    "config": {
+      "title": "SidebarPanelConfig",
+      "description": "Vollständige Konfiguration des Seitenpanels"
+    },
+    "custom-button": {
+      "title": "SidebarPanelCustomButton",
+      "description": "Konfiguration der benutzerdefinierten Fußzeilen-Schaltfläche"
+    },
+    "minimized-tab": {
+      "title": "MinimizedTabCustomization",
+      "description": "Anpassung des Tabs, wenn das Panel minimiert ist"
+    },
+    "footer-actions": {
+      "title": "SidebarPanelAction",
+      "description": "Definition der Aktionen, die von untergeordneten Komponenten für die Panel-Fußzeile registriert werden"
+    },
+    "footer-actions-service": {
+      "title": "SidebarPanelActionsService",
+      "description": "Service für untergeordnete Komponenten, um Aktionen in der Panel-Fußzeile zu registrieren"
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Farbvariablen",
+      "description": "CSS-Variablen zur Steuerung der Farben des Seitenpanels: Hintergrund, Text, Rahmen und Overlay. Diese Variablen passen sich automatisch dem Hell-/Dunkelmodus des aktiven Themes an."
+    },
+    "layout": {
+      "title": "Layout-Variablen",
+      "description": "CSS-Variablen zur Steuerung von Größe und Abstand des Seitenpanels: vordefinierte Größen (xs bis full) sowie Header- und Inhaltsabstand"
+    },
+    "typography": {
+      "title": "Typografie-Variablen",
+      "description": "CSS-Variablen zur Steuerung der Typografie des Seitenpanel-Titels"
+    },
+    "elevation": {
+      "title": "Erhebungs-Variablen",
+      "description": "CSS-Variablen zur Steuerung von Schatten und z-index des Seitenpanels und Overlays"
+    },
+    "scrollbar": {
+      "title": "Scrollleisten-Variablen",
+      "description": "CSS-Variablen zur Steuerung des Erscheinungsbilds der Seitenpanel-Scrollleiste"
+    },
+    "examples": {
+      "title": "Anpassungsbeispiele",
+      "description": "SCSS-Beispiele zur Anpassung der Seitenpanel-Stile in Ihrer Anwendung"
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Übersetzungstoken",
+      "description": "Die SidebarPanel-Komponente verwendet generische NuiI18nService-Token für die Steuerungsschaltflächen.",
+      "note": "Alle Token werden von mehreren Komponenten gemeinsam genutzt. Überschreiben Sie sie global mit <code>provideNuiI18n({...})</code>.",
+      "rows": {
+        "close": {
+          "description": "Barrierefreies Label für die Schließen-Schaltfläche."
+        },
+        "minimize": {
+          "description": "Barrierefreies Label für die Minimieren-Schaltfläche."
+        },
+        "restore": {
+          "description": "Barrierefreies Label für die Wiederherstellen-Schaltfläche, sichtbar wenn das Panel minimiert ist."
+        },
+        "expand": {
+          "description": "Barrierefreies Label für die Erweitern-Schaltfläche."
+        },
+        "collapse": {
+          "description": "Barrierefreies Label für die Reduzieren-Schaltfläche."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA-Rollen und Attribute",
+      "description": "Der SidebarPanel implementiert ein barrierefreies Dialog-Muster, damit Screenreader ihn als eigenständigen Inhaltsbereich erkennen.",
+      "elements": {
+        "panel": "Panel-Wurzelelement",
+        "closeButton": "Schließen-Schaltfläche",
+        "minimizeButton": "Minimieren-/Wiederherstellen-Schaltfläche",
+        "expandButton": "Erweitern-/Reduzieren-Schaltfläche",
+        "backdrop": "Hintergrundoverlay"
+      },
+      "rows": {
+        "panelRole": {
+          "description": "Das Panel-Wurzelelement hat <code>role=\"dialog\"</code>, um Hilfstechnologien einen eigenständigen Bereich zu signalisieren."
+        },
+        "ariaLabelledby": {
+          "description": "<code>aria-labelledby</code> verweist auf das Panel-Titelelement und gibt dem Dialog einen barrierefreien Namen aus der sichtbaren Überschrift."
+        },
+        "closeLabel": {
+          "description": "Die Schließen-Schaltfläche verwendet den i18n-Token <code>close</code> als <code>aria-label</code>."
+        },
+        "minimizeLabel": {
+          "description": "Die Minimieren-/Wiederherstellen-Schaltfläche verwendet je nach Zustand den entsprechenden i18n-Token (<code>minimize</code> oder <code>restore</code>) als <code>aria-label</code>."
+        },
+        "expandLabel": {
+          "description": "Die Erweitern-/Reduzieren-Schaltfläche verwendet den entsprechenden Token (<code>expand</code> oder <code>collapse</code>) als <code>aria-label</code>."
+        },
+        "backdropHidden": {
+          "description": "Das Hintergrundoverlay ist mit <code>aria-hidden=\"true\"</code> vor Hilfstechnologien verborgen."
+        }
+      }
+    },
+    "naming": {
+      "title": "Barrierefreier Name",
+      "description": "Der barrierefreie Name des Panels wird über <code>aria-labelledby</code> aus dem sichtbaren Titel abgeleitet. Steuerungsschaltflächen sind mit i18n-Token beschriftet.",
+      "note": "Geben Sie immer einen sichtbaren Titel im Panel an, da dieser automatisch zum Dialog-Namen wird.",
+      "elements": {
+        "panelWithTitle": "Panel mit Titel",
+        "controlButtons": "Steuerungsschaltflächen"
+      },
+      "info": {
+        "ariaLabelledby": "Panel-Titel (aria-labelledby)",
+        "i18nTokens": "i18n-Token für Schaltflächenbeschriftungen"
+      },
+      "rows": {
+        "title": {
+          "description": "Der sichtbare Panel-Titel liefert den barrierefreien Namen des <code>role=\"dialog\"</code>-Bereichs."
+        },
+        "buttons": {
+          "description": "Steuerungsschaltflächen (Schließen, Minimieren, Erweitern) verwenden i18n-Token als barrierefreie Labels."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Tastaturinteraktion",
+      "description": "Der SidebarPanel unterstützt Tastaturnavigation für alle interaktiven Steuerelemente.",
+      "rows": {
+        "escape": {
+          "description": "Schließt das Panel im modalen Modus und gibt den Fokus an das Element zurück, das es geöffnet hat."
+        },
+        "tab": {
+          "description": "Wechselt den Fokus zwischen den interaktiven Elementen des Panels. Der Fokus wird eingeschlossen, solange das Panel im modalen Modus geöffnet ist."
+        },
+        "spaceEnter": {
+          "description": "Aktiviert die fokussierte Steuerungsschaltfläche (Schließen, Minimieren, Erweitern)."
+        }
+      }
+    }
+  }
+}

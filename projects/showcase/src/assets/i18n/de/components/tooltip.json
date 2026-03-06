@@ -1,0 +1,126 @@
+{
+  "title": "Tooltip",
+  "subtitle": "Informations-Tooltips mit Unterstützung für Text und benutzerdefinierte Vorlagen",
+  "examples": {
+    "basic": {
+      "title": "Grundlegende Tooltips",
+      "description": "Zeigt einfache Tooltips mit Text beim Hover an.",
+      "note": "Der Pfeil kann mit <code>nuiTooltipShowArrow</code> ausgeblendet werden."
+    },
+    "positions": {
+      "title": "Positionen",
+      "description": "Steuern Sie die Tooltip-Position relativ zum Element: oben (Standard), unten, links, rechts."
+    },
+    "events": {
+      "title": "Ereignisse",
+      "description": "Legen Sie fest, welches Ereignis den Tooltip auslöst: Hover (Standard), Klick, Fokus oder manuell für programmgesteuerte Steuerung."
+    },
+    "delays": {
+      "title": "Verzögerungen",
+      "description": "Konfigurieren Sie die Verzögerungen vor dem Ein- und Ausblenden des Tooltips.",
+      "note": "Verwenden Sie die Eigenschaften <code>nuiTooltipShowDelay</code> und <code>nuiTooltipHideDelay</code>, um die Wartezeiten anzupassen."
+    },
+    "templates": {
+      "title": "Benutzerdefinierte Vorlagen",
+      "description": "Verwenden Sie Angular-Templates, um umfangreichen HTML-Inhalt im Tooltip anzuzeigen."
+    },
+    "interactive": {
+      "title": "Interaktive Tooltips",
+      "description": "Ermöglicht die Interaktion mit dem Tooltip-Inhalt. Nützlich für Schaltflächen oder Links.",
+      "note": "Aktivieren Sie die Eigenschaft <code>nuiTooltipInteractive</code>, um die Interaktion im Tooltip zu ermöglichen, ohne dass er automatisch schließt, wenn die Maus bewegt wird."
+    },
+    "disabled": {
+      "title": "Deaktivierter Zustand",
+      "description": "Steuern Sie dynamisch, ob der Tooltip aktiviert oder deaktiviert ist.",
+      "note": "Verwenden Sie die Eigenschaft <code>nuiTooltipDisabled</code>, um den Tooltip bei Bedarf zu aktivieren oder zu deaktivieren."
+    }
+  },
+  "api": {
+    "inputs": {
+      "title": "Eingaben",
+      "description": "Eingabeeigenschaften der <code>nuiTooltip</code>-Direktive"
+    },
+    "outputs": {
+      "title": "Ausgaben",
+      "description": "Ereignisse, die von der <code>nuiTooltip</code>-Direktive ausgegeben werden"
+    },
+    "usage": {
+      "title": "Verwendungsbeispiele",
+      "description": "Vollständige Verwendungsbeispiele der <code>nuiTooltip</code>-Direktive in Angular-Komponenten"
+    }
+  },
+  "theming": {
+    "container": {
+      "title": "Tooltip-Container",
+      "description": "CSS-Variablen zur Steuerung des Tooltip-Container-Erscheinungsbilds: Farben, Abmessungen, Innenabstand, Schrift, Rahmen, Schatten und z-index"
+    },
+    "arrow": {
+      "title": "Tooltip-Pfeil",
+      "description": "CSS-Variable zur Steuerung der Größe des Tooltip-Pfeils"
+    },
+    "animation": {
+      "title": "Animationen",
+      "description": "CSS-Variablen zur Steuerung von Dauer und Timing der Tooltip-Ein-/Ausblend-Animationen"
+    },
+    "examples": {
+      "title": "Anpassungsbeispiele",
+      "description": "SCSS-Beispiele zur Anpassung der Tooltip-Stile in Ihrer Anwendung"
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA-Rollen und Attribute",
+      "description": "Tooltips folgen dem WAI-ARIA Tooltip-Muster und verknüpfen den schwebenden Inhalt mit seinem Auslöser über <code>aria-describedby</code>.",
+      "elements": {
+        "trigger": "Auslöserelement",
+        "tooltip": "Tooltip-Element"
+      },
+      "rows": {
+        "ariaDescribedby": {
+          "description": "Das Auslöserelement erhält <code>aria-describedby</code>, das auf die <code>id</code> des Tooltips verweist, damit Screenreader den Tooltip-Text als ergänzende Beschreibung ankündigen."
+        },
+        "tooltipRole": {
+          "description": "Der schwebende Tooltip hat <code>role=\"tooltip\"</code> und eine eindeutige <code>id</code>, auf die <code>aria-describedby</code> verweist."
+        }
+      }
+    },
+    "naming": {
+      "title": "Barrierefreier Name",
+      "description": "Das Auslöserelement muss einen eigenen barrierefreien Namen haben, unabhängig vom Tooltip. Der Tooltip liefert nur eine ergänzende Beschreibung.",
+      "note": "Verlassen Sie sich nicht auf den Tooltip als einzige Quelle für den barrierefreien Namen von Auslösern, die nur ein Symbol anzeigen. Verwenden Sie <code>aria-label</code> am Auslöserelement.",
+      "elements": {
+        "trigger": "Auslöserelement",
+        "iconTrigger": "Auslöser mit Symbol",
+        "tooltipContent": "Tooltip-Inhalt"
+      },
+      "info": {
+        "ownLabel": "Eigener Name des Auslösers",
+        "ariaLabel": "aria-label am Symbol-Auslöser",
+        "description": "Tooltip-Text (aria-describedby)"
+      },
+      "rows": {
+        "trigger": {
+          "description": "Der Auslöser muss einen eigenen barrierefreien Namen haben (Schaltflächentext, aria-label…), der ohne den Tooltip-Text aussagekräftig ist."
+        },
+        "iconTrigger": {
+          "description": "Für Auslöser, die nur ein Symbol anzeigen, fügen Sie am Auslöserelement ein explizites <code>aria-label</code> hinzu."
+        },
+        "content": {
+          "description": "Der Tooltip-Text ist über <code>aria-describedby</code> verknüpft und dient als ergänzende Information, nicht als Hauptlabel."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Tastaturinteraktion",
+      "description": "Tooltips werden basierend auf dem Fokus automatisch ein- und ausgeblendet. Es ist keine explizite Tasteneingabe zum Öffnen erforderlich.",
+      "rows": {
+        "tab": {
+          "description": "Das Tabben zu einem Auslöserelement zeigt den Tooltip an. Das Wegtabben blendet ihn aus."
+        },
+        "escape": {
+          "description": "Das Drücken von Escape, während der Auslöser den Fokus hat, blendet den Tooltip aus."
+        }
+      }
+    }
+  }
+}

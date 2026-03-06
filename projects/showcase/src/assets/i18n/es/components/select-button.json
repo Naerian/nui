@@ -1,0 +1,187 @@
+{
+  "title": "Select Button",
+  "subtitle": "Conjunto de botones agrupados para selección única (Radio) o múltiple (Checkbox)",
+  "basic": {
+    "title": "Uso básico",
+    "description": "El caso más simple acepta un array de strings. Por defecto, actúa como un selector de opción única (Radio)."
+  },
+  "modes": {
+    "title": "Modos de selección",
+    "description": "Permite cambiar el tipo de selección del botón entre radiobutton y checkbox",
+    "note": "Cambia a <code>mode='checkbox'</code> para permitir seleccionar múltiples opciones a la vez. El valor devuelto será un Array."
+  },
+  "complex": {
+    "title": "Objetos complejos",
+    "description": "Soporta arrays de objetos con propiedades personalizadas para etiqueta, valor y estado deshabilitado.",
+    "note": "Mapea propiedades de objetos arbitrarios usando <code>labelBy</code>, <code>valueBy</code>, <code>iconBy</code> y <code>disabledBy</code>."
+  },
+  "icons": {
+    "title": "Iconos",
+    "description": "Soporta botones de solo icono para una botonera compacta tipo barra de herramientas.",
+    "note": "Soporte para iconos Remix Icon. Usa <code>iconOnly='true'</code> para una botonera compacta tipo barra de herramientas. Si es un <strong>objeto</strong>, puedes mapear la propiedad del icono usando <code>iconBy</code>."
+  },
+  "colors": {
+    "title": "Colores y variantes",
+    "description": "Compatible con todo el sistema de variantes (Solid, Outline, Ghost) y colores de NUI.",
+    "note": "Combina <code>color</code> y <code>variant</code>."
+  },
+  "segmented": {
+    "title": "Variante segmented (Estilo iOS)",
+    "description": "Estilo visual tipo <strong>iOS Segmented Control</strong>, espcial y sumado a los tipos de variantes básicos de NUI. Ideal para conmutadores de vistas (ej: Mes / Año, Lista / Mapa).",
+    "note": "Usa <code>variant='segmented'</code> para aplicar esta variante única."
+  },
+  "sizes": {
+    "title": "Tamaños",
+    "description": "Cinco tamaños predefinidos que escalan armoniosamente el contenedor, la tipografía y los iconos.",
+    "note": "Utiliza <code>size</code> con valores <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> y <code>'xl'</code>."
+  },
+  "width": {
+    "title": "Ancho completo",
+    "description": "Expande los botones para que ocupen todo el espacio disponible equitativamente.",
+    "note": "Usa <code>width='full'</code> para que cada botón se expanda y ocupe un ancho igual dentro del contenedor."
+  },
+  "api": {
+    "title": "API y referencia",
+    "description": "Documentación completa de inputs, outputs y uso avanzado del componente Select Button.",
+    "inputs": {
+      "title": "Inputs",
+      "description": "Propiedades del componente que controlan su comportamiento y apariencia."
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Eventos emitidos por el componente durante su ciclo de vida."
+    }
+  },
+  "theming": {
+    "title": "Estilos y personalización",
+    "description": "Personaliza la apariencia del Select Button mediante variables CSS. Controla espaciado, colores, sombras y más.",
+    "general": {
+      "title": "Variables generales",
+      "description": "Variables CSS para personalizar el estilo general del Select Button (layout default).",
+      "rows": {
+        "gap": {
+          "description": "Espacio entre botones en el layout por defecto."
+        },
+        "transition": {
+          "description": "Transición CSS aplicada a todos los botones."
+        }
+      }
+    },
+    "segmented": {
+      "title": "Variables del layout segmented",
+      "description": "Variables CSS específicas para el estilo segmented (iOS-like). Controla el contenedor, estados seleccionado/no seleccionado y efectos hover.",
+      "rows": {
+        "gap": {
+          "description": "Espacio entre botones en el layout segmented."
+        },
+        "bg": {
+          "description": "Color de fondo del contenedor segmented."
+        },
+        "padding": {
+          "description": "Padding interno del contenedor segmented."
+        },
+        "borderRadius": {
+          "description": "Radio de esquinas del contenedor segmented."
+        },
+        "border": {
+          "description": "Borde del contenedor segmented."
+        },
+        "selectedBg": {
+          "description": "Fondo del botón seleccionado."
+        },
+        "selectedShadow": {
+          "description": "Sombra del botón seleccionado."
+        },
+        "selectedBorder": {
+          "description": "Borde del botón seleccionado."
+        },
+        "unselectedBg": {
+          "description": "Fondo de los botones no seleccionados."
+        },
+        "unselectedText": {
+          "description": "Color de texto de los botones no seleccionados."
+        },
+        "hoverBg": {
+          "description": "Fondo del botón en estado hover."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "Roles y atributos ARIA",
+      "description": "El Select Button expone roles semánticos dependiendo de su modo de selección (radio o checkbox).",
+      "elements": {
+        "containerRadio": "Contenedor (modo radio)",
+        "containerCheckbox": "Contenedor (modo checkbox)",
+        "container": "Contenedor",
+        "buttonRadio": "Botón de opción (modo radio)",
+        "buttonCheckbox": "Botón de opción (modo checkbox)",
+        "button": "Botón de opción",
+        "icon": "Icono decorativo"
+      },
+      "rows": {
+        "roleRadiogroup": {
+          "description": "El contenedor utiliza <code>role=\"radiogroup\"</code> en modo de selección única para agrupar opciones mutuamente excluyentes."
+        },
+        "roleGroup": {
+          "description": "El contenedor utiliza <code>role=\"group\"</code> en modo de selección múltiple para agrupar casillas de verificación relacionadas."
+        },
+        "ariaDisabled": {
+          "description": "Refleja el estado deshabilitado de todo el grupo a las tecnologías de asistencia."
+        },
+        "roleRadio": {
+          "description": "Cada botón utiliza <code>role=\"radio\"</code> en modo de selección única."
+        },
+        "roleCheckbox": {
+          "description": "Cada botón utiliza <code>role=\"checkbox\"</code> en modo de selección múltiple."
+        },
+        "ariaChecked": {
+          "description": "Indica si la opción está actualmente seleccionada."
+        },
+        "ariaHiddenIcon": {
+          "description": "Los iconos decorativos están ocultos para las tecnologías de asistencia con <code>aria-hidden=\"true\"</code>."
+        }
+      }
+    },
+    "naming": {
+      "title": "Nombre accesible",
+      "description": "Cada botón de opción obtiene su nombre accesible a partir de la etiqueta de la opción. Opcionalmente, el contenedor del grupo puede recibir una etiqueta contextual.",
+      "note": "Siempre proporcione etiquetas significativas para las opciones. Para los botones solo con icono, asegúrese de que cada opción tenga una etiqueta descriptiva asignada mediante <code>labelBy</code>.",
+      "elements": {
+        "button": "Botón de opción",
+        "container": "Contenedor del grupo"
+      },
+      "info": {
+        "optionLabel": "Texto de la etiqueta de la opción",
+        "groupLabel": "No proporcionado por defecto"
+      },
+      "rows": {
+        "button": {
+          "description": "El nombre accesible de cada botón de opción se deriva del texto de la etiqueta visible de la opción."
+        },
+        "container": {
+          "description": "El contenedor del grupo no recibe un nombre accesible por defecto. Envuélvalo con un elemento padre etiquetado si se requiere contexto."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Interacción con el teclado",
+      "description": "El Select Button utiliza tabindex móvil en modo radio y navegación estándar con Tab en modo checkbox.",
+      "rows": {
+        "tab": {
+          "description": "En modo radio, Tab mueve el foco a la opción seleccionada (o a la primera si no hay ninguna seleccionada). En modo checkbox, Tab recorre todas las opciones."
+        },
+        "arrowNext": {
+          "description": "En modo radio, mueve el foco a la siguiente opción y la selecciona (se envuelve alrededor)."
+        },
+        "arrowPrev": {
+          "description": "En modo radio, mueve el foco a la opción anterior y la selecciona (se envuelve alrededor)."
+        },
+        "spaceEnter": {
+          "description": "En modo checkbox, alterna la selección de la opción enfocada."
+        }
+      }
+    }
+  }
+}

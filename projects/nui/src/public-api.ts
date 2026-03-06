@@ -7,9 +7,6 @@ export * from './lib/i18n';
 // Theming
 export * from './lib/themes';
 
-// Animations
-export * from './lib/animations';
-
 // Adapters
 export * from './lib/adapters';
 

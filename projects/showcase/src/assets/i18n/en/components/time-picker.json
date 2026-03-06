@@ -1,0 +1,309 @@
+{
+  "title": "Time Picker",
+  "subtitle": "Component for selecting time with multiple modes, sizes and advanced configurations",
+  "basic": {
+    "title": "Basic usage",
+    "description": "Simple time picker with default configuration. Select hours and minutes in 24-hour format."
+  },
+  "modes": {
+    "title": "Time modes",
+    "description": "Five available modes: hours only (12h/24h), hours and minutes (12h/24h), and duration mode.",
+    "note": "Use <code>mode</code> with values: <code>'HOUR_12'</code>, <code>'HOUR_24'</code>, <code>'HOUR_MINUTE_12'</code> and <code>'HOUR_MINUTE_24'</code>."
+  },
+  "sizes": {
+    "title": "Sizes",
+    "description": "Five size options that harmoniously scale the component and its internal elements.",
+    "note": "Sizes affect the height, padding and font size of the picker. Use <code>size</code> with values <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> and <code>'xl'</code>."
+  },
+  "presets": {
+    "title": "Quick presets",
+    "description": "Add preset buttons for frequent times like 'Now', 'Breakfast', 'Lunch'. Can include custom icons.",
+    "note": "Provide an array of <code>TimePreset</code> objects in the <code>config</code>. Each preset has a <code>label</code>, <code>time</code> and optional <code>icon</code>. Supports Remix Icon icons."
+  },
+  "steps": {
+    "title": "Hour and minute steps",
+    "description": "Control the increment intervals for hours and minutes to limit selectable options.",
+    "note": "Use <code>hourStep</code> and <code>minuteStep</code> in the <code>config</code>. For example, <code>hourStep: 2</code> shows only even hours, and <code>minuteStep: 15</code> shows quarter hours (00, 15, 30, 45)."
+  },
+  "timeRange": {
+    "title": "Time range",
+    "description": "Restricts the selectable time range using minimum and maximum values. Optionally shows a visual indicator.",
+    "note": "Configure <code>minTime</code> and <code>maxTime</code> in the <code>config</code>. Times outside this range are disabled. Use <code>showRangeIndicator: true</code> to visually highlight the valid range."
+  },
+  "disabledTimes": {
+    "title": "Disabled time",
+    "description": "Blocks specific hours or minutes, preventing their selection. Useful for unavailable time slots.",
+    "note": "Use <code>disabledHours</code> and <code>disabledMinutes</code> in the <code>config</code> to specify arrays of disabled values. Disabled items show a distinctive dimmed style."
+  },
+  "durationMode": {
+    "title": "Duration mode",
+    "description": "Special mode for selecting time intervals. Can display seconds and set a maximum duration.",
+    "note": "Set <code>mode='DURATION'</code> and configure with <code>duration: { maxHours: 8, showSeconds: true }</code> in the <code>config</code>. Useful for shift selection, time tracking, etc."
+  },
+  "defaultStrategies": {
+    "title": "Default strategies",
+    "description": "Controls the initial time when no value is provided: now, smart (current + offset), empty or custom.",
+    "note": "Use <code>defaultStrategy</code> with values <code>'now'</code>, <code>'smart'</code>, <code>'empty'</code> or <code>'custom'</code>. For 'smart', configure <code>smartOffset</code> in minutes. For 'custom', use <code>defaultValue</code>."
+  },
+  "disabled": {
+    "title": "Disabled state",
+    "description": "Disables the entire picker, preventing user interaction and showing a dimmed appearance.",
+    "note": "Use the <code>disabled</code> property to dynamically control whether the time picker is enabled or disabled."
+  },
+  "reactiveForms": {
+    "title": "Reactive forms",
+    "description": "Full integration with Angular reactive forms. Implements ControlValueAccessor.",
+    "note": "Use <code>formControl</code> or <code>formControlName</code> to integrate with Angular forms. The component handles synchronization, validation and state automatically."
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Input properties to configure the behavior, appearance and restrictions of the time picker"
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Events emitted by the time picker when the user interacts with it"
+    },
+    "config": {
+      "title": "TimePickerConfig",
+      "description": "Configuration interface with all available options: steps, ranges, disabled times, presets and duration configuration"
+    },
+    "durationConfig": {
+      "title": "DurationConfig",
+      "description": "Specific configuration for DURATION mode: hour limits, show seconds, steps and quick duration presets"
+    },
+    "models": {
+      "title": "Type definitions",
+      "description": "Interfaces and type definitions for values, configuration and presets"
+    },
+    "methods": {
+      "title": "Methods",
+      "description": "The component implements ControlValueAccessor for seamless integration with Angular forms"
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Colors",
+      "description": "CSS color variables generated by ThemeService for each semantic color. Each color generates 9 specific variables for different picker states: item backgrounds (normal, hover, selected), text colors, disabled states, accents and focus ring."
+    },
+    "sizes": {
+      "title": "Sizes",
+      "description": "Size-specific CSS variables that control item heights, paddings and container dimensions. Five size variants available: xs, sm, md (default), lg and xl."
+    },
+    "structure": {
+      "title": "Structure",
+      "description": "Structural CSS variables to control dimensions, spacing, typography and visual appearance. Includes separator style, scrollbar customization, borders, fonts and focus states."
+    },
+    "customization": {
+      "title": "Customization",
+      "description": "Examples of how to customize time picker styles in your application. You can override CSS variables globally or specific to instances. The integration with ThemeService allows generating color variables for your custom semantic colors."
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Time picker tokens",
+      "description": "Tokens used for time picker labels, action buttons and screen reader texts.",
+      "note": "Override any token globally with <code>provideNuiI18n({ timePicker: { ... } })</code>.",
+      "rows": {
+        "setToCurrentTime": {
+          "description": "Label for the 'set to current time' action button."
+        },
+        "selectTime": {
+          "description": "Placeholder label when no time is selected."
+        },
+        "clear": {
+          "description": "Label for the clear/reset time action."
+        },
+        "hour": {
+          "description": "Header label for the hour column (long form)."
+        },
+        "minutes": {
+          "description": "Header label for the minutes column (long form)."
+        },
+        "hour12": {
+          "description": "Label used when the picker is in 12-hour mode."
+        },
+        "hour24": {
+          "description": "Label used when the picker is in 24-hour mode."
+        },
+        "period": {
+          "description": "Label for the AM/PM period column."
+        },
+        "normalizedTime": {
+          "description": "Screen reader announcement template for the normalized time value."
+        },
+        "rangeLabel": {
+          "description": "Accessible label describing a time range selection."
+        },
+        "timeSelected": {
+          "description": "Screen reader announcement when a time has been successfully selected."
+        }
+      }
+    },
+    "durationAndPresets": {
+      "title": "Duration and preset tokens",
+      "description": "Specific tokens for duration mode labels, column headers and preset names.",
+      "note": "Duration tokens live under the <code>timePicker.duration</code> namespace and preset tokens under <code>timePicker.presets</code>.",
+      "rows": {
+        "hours": {
+          "description": "Long form of 'hours' in the duration display."
+        },
+        "minutes": {
+          "description": "Long form of 'minutes' in the duration display."
+        },
+        "seconds": {
+          "description": "Long form of 'seconds' in the duration display."
+        },
+        "hoursShort": {
+          "description": "Short abbreviation for hours (e.g. 'h')."
+        },
+        "minutesShort": {
+          "description": "Short abbreviation for minutes (e.g. 'min')."
+        },
+        "secondsShort": {
+          "description": "Short abbreviation for seconds (e.g. 's')."
+        },
+        "selectDuration": {
+          "description": "Placeholder label in duration selection mode."
+        },
+        "durationSelected": {
+          "description": "Screen reader announcement when a duration has been selected."
+        },
+        "durationHours": {
+          "description": "Screen reader announcement for the hours value in duration mode."
+        },
+        "durationMinutes": {
+          "description": "Screen reader announcement for the minutes value in duration mode."
+        },
+        "durationSeconds": {
+          "description": "Screen reader announcement for the seconds value in duration mode."
+        },
+        "tabSelector": {
+          "description": "Label for the manual selector tab when both selection and preset tabs are visible."
+        },
+        "tabPresets": {
+          "description": "Label for the presets tab when both tabs are visible."
+        },
+        "presetsNow": {
+          "description": "Label for the 'now' preset."
+        },
+        "presetsNoon": {
+          "description": "Label for the 'noon' preset (12:00)."
+        },
+        "presetsMidnight": {
+          "description": "Label for the 'midnight' preset (00:00)."
+        },
+        "presetsMinutes": {
+          "description": "Label template for minute-based presets (e.g. '15 minutes')."
+        },
+        "presetsHour": {
+          "description": "Label for the one-hour preset."
+        },
+        "presetsHours": {
+          "description": "Label template for multi-hour presets (e.g. '2 hours')."
+        }
+      }
+    },
+    "a11yTokens": {
+      "title": "Accessibility tokens",
+      "description": "Tokens used exclusively for screen reader announcements and ARIA labels within the time picker.",
+      "note": "These tokens are nested under <code>timePicker.a11y</code>.",
+      "rows": {
+        "timePickerLabel": {
+          "description": "The <code>aria-label</code> applied to the time picker root container in standard mode."
+        },
+        "durationPickerLabel": {
+          "description": "The <code>aria-label</code> applied to the root container in duration mode."
+        },
+        "hourColumnHelp": {
+          "description": "Help text announced by the screen reader for the hour column."
+        },
+        "minuteColumnHelp": {
+          "description": "Help text announced for the minutes column."
+        },
+        "periodHelp": {
+          "description": "Help text announced for the AM/PM column."
+        },
+        "normalizedAlert": {
+          "description": "Text announced via an assertive live region when the selected time is normalized to the nearest valid value."
+        },
+        "rangeInfo": {
+          "description": "Screen reader text describing the time range limits."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA roles and attributes",
+      "description": "The TimePicker implements the ARIA <code>listbox</code> / <code>option</code> pattern for each scrollable column.",
+      "elements": {
+        "container": "Picker container",
+        "column": "Scrollable column",
+        "option": "Time option",
+        "normalizedAlert": "Normalization live region"
+      },
+      "rows": {
+        "containerLabel": {
+          "description": "The picker root element has <code>aria-label</code> set from the i18n token <code>timePickerLabel</code> (or <code>durationPickerLabel</code>)."
+        },
+        "columnRole": {
+          "description": "Each column has <code>role=\"listbox\"</code> and an <code>aria-label</code> derived from its specific i18n token (hour, minutes, period…)."
+        },
+        "optionRole": {
+          "description": "Each time value has <code>role=\"option\"</code> and <code>aria-selected=\"true\"</code> when it is the active value."
+        },
+        "normalizedLive": {
+          "description": "A visually hidden element with <code>aria-live=\"assertive\"</code> announces when the entered time is normalized to the nearest valid limit."
+        }
+      }
+    },
+    "naming": {
+      "title": "Accessible name",
+      "description": "The picker and each column are labelled via i18n tokens. Individual options are labelled by their visible time value.",
+      "note": "Always configure i18n tokens for your language so screen reader users hear meaningful column labels (e.g. 'Hour', 'Minutes', 'AM/PM').",
+      "elements": {
+        "container": "Container label",
+        "columns": "Column labels",
+        "helpText": "Column help text"
+      },
+      "info": {
+        "containerLabel": "Token timePickerLabel / durationPickerLabel",
+        "columnLabels": "Tokens hour / minutes / period",
+        "helpTokens": "Tokens hourColumnHelp / minuteColumnHelp / periodHelp"
+      },
+      "rows": {
+        "container": {
+          "description": "The root container label comes from <code>timePicker.a11y.timePickerLabel</code> (or <code>durationPickerLabel</code>). Override it per language."
+        },
+        "columns": {
+          "description": "Each column label comes from the corresponding i18n token, giving context to screen reader users for each scrollable region."
+        },
+        "help": {
+          "description": "Column help text tokens are announced when the column receives focus, indicating how to interact (arrow keys, Home/End)."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Keyboard interaction",
+      "description": "Each TimePicker column behaves as an independent listbox. Use the following keys to navigate and select values.",
+      "rows": {
+        "arrowUpDown": {
+          "description": "Moves focus to the previous/next option within the focused column."
+        },
+        "tab": {
+          "description": "Moves focus to the next interactive column or control (e.g. period toggler, action buttons)."
+        },
+        "homeEnd": {
+          "description": "Jumps to the first/last option in the focused column."
+        },
+        "spaceEnter": {
+          "description": "Selects the focused option and updates the displayed time value."
+        },
+        "escape": {
+          "description": "Closes the time picker panel and reverts to the previously confirmed value."
+        }
+      }
+    }
+  }
+}

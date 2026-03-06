@@ -1,0 +1,126 @@
+{
+  "title": "Tooltip",
+  "subtitle": "Informational tooltips with support for text and custom templates",
+  "examples": {
+    "basic": {
+      "title": "Basic tooltips",
+      "description": "Shows simple tooltips with text on hover.",
+      "note": "You can hide the arrow with <code>nuiTooltipShowArrow</code>."
+    },
+    "positions": {
+      "title": "Positions",
+      "description": "Control the tooltip position relative to the element: top (default), bottom, left, right."
+    },
+    "events": {
+      "title": "Events",
+      "description": "Define what event triggers the tooltip: hover (default), click, focus, or manual for programmatic control."
+    },
+    "delays": {
+      "title": "Delays",
+      "description": "Configure the delays before showing and hiding the tooltip.",
+      "note": "Use the <code>nuiTooltipShowDelay</code> and <code>nuiTooltipHideDelay</code> properties to adjust the waiting times."
+    },
+    "templates": {
+      "title": "Custom templates",
+      "description": "Use Angular templates to display rich HTML content in the tooltip."
+    },
+    "interactive": {
+      "title": "Interactive tooltips",
+      "description": "Allows interacting with tooltip content. Useful for including buttons or links.",
+      "note": "Enable the <code>nuiTooltipInteractive</code> property to allow interaction inside the tooltip without it closing automatically when the cursor is moved."
+    },
+    "disabled": {
+      "title": "Disabled state",
+      "description": "Dynamically control whether the tooltip is enabled or disabled.",
+      "note": "Use the <code>nuiTooltipDisabled</code> property to enable or disable the tooltip as needed."
+    }
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Input properties of the <code>nuiTooltip</code> directive"
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Events emitted by the <code>nuiTooltip</code> directive"
+    },
+    "usage": {
+      "title": "Usage examples",
+      "description": "Complete usage examples of the <code>nuiTooltip</code> directive in Angular components"
+    }
+  },
+  "theming": {
+    "container": {
+      "title": "Tooltip container",
+      "description": "CSS variables to control the appearance of the tooltip container: colors, dimensions, padding, font, borders, shadow and z-index"
+    },
+    "arrow": {
+      "title": "Tooltip arrow",
+      "description": "CSS variable to control the size of the tooltip arrow"
+    },
+    "animation": {
+      "title": "Animations",
+      "description": "CSS variables to control the duration and timing of tooltip enter/exit animations"
+    },
+    "examples": {
+      "title": "Customization examples",
+      "description": "SCSS examples to customize tooltip styles in your application"
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA roles and attributes",
+      "description": "Tooltips follow the WAI-ARIA Tooltip pattern, associating the floating content with its trigger via <code>aria-describedby</code>.",
+      "elements": {
+        "trigger": "Trigger element",
+        "tooltip": "Tooltip element"
+      },
+      "rows": {
+        "ariaDescribedby": {
+          "description": "The trigger element receives <code>aria-describedby</code> pointing to the tooltip's <code>id</code>, so screen readers announce the tooltip text as supplemental description."
+        },
+        "tooltipRole": {
+          "description": "The floating tooltip carries <code>role=\"tooltip\"</code> and a unique <code>id</code> referenced by <code>aria-describedby</code>."
+        }
+      }
+    },
+    "naming": {
+      "title": "Accessible name",
+      "description": "The trigger element must have its own accessible name independent of the tooltip. The tooltip only provides a supplemental description.",
+      "note": "Do not rely on the tooltip as the sole source of accessible name for triggers that only show an icon. Use <code>aria-label</code> on the trigger element.",
+      "elements": {
+        "trigger": "Trigger element",
+        "iconTrigger": "Icon-only trigger",
+        "tooltipContent": "Tooltip content"
+      },
+      "info": {
+        "ownLabel": "Trigger's own name",
+        "ariaLabel": "aria-label on icon trigger",
+        "description": "Tooltip text (aria-describedby)"
+      },
+      "rows": {
+        "trigger": {
+          "description": "The trigger must have its own accessible name (button text, aria-label…) that is meaningful without the tooltip text."
+        },
+        "iconTrigger": {
+          "description": "For triggers that only show an icon, add an explicit <code>aria-label</code> on the trigger element."
+        },
+        "content": {
+          "description": "The tooltip text is connected via <code>aria-describedby</code> and serves as supplemental information, not as the main label."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Keyboard interaction",
+      "description": "Tooltips show and hide automatically based on focus. No explicit key press is required to open them.",
+      "rows": {
+        "tab": {
+          "description": "Tabbing to a trigger element shows the tooltip. Tabbing away hides it."
+        },
+        "escape": {
+          "description": "Pressing Escape while the trigger has focus hides the tooltip."
+        }
+      }
+    }
+  }
+}

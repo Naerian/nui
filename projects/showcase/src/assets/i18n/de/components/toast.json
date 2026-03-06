@@ -1,0 +1,170 @@
+{
+  "title": "Toast",
+  "subtitle": "Temporäre, nicht aufdringliche Benachrichtigungen für Benutzerrückmeldungen",
+  "examples": {
+    "basic": {
+      "title": "Grundlegende Toasts",
+      "description": "Zeigen Sie einfache Benachrichtigungen mit verschiedenen Typen an: Erfolg, Fehler, Warnung und Info."
+    },
+    "withTitle": {
+      "title": "Toasts mit Titel",
+      "description": "Fügen Sie einen Titel hinzu, um der Benachrichtigung mehr Kontext zu geben."
+    },
+    "withActions": {
+      "title": "Toasts mit Aktionen",
+      "description": "Fügen Sie Aktionsschaltflächen ein, damit der Benutzer mit der Benachrichtigung interagieren kann."
+    },
+    "positions": {
+      "title": "Positionen",
+      "description": "Legen Sie fest, wo Toasts auf dem Bildschirm erscheinen: oben-links, oben-mitte, oben-rechts, unten-links, unten-mitte, unten-rechts."
+    },
+    "iconTop": {
+      "title": "Symbol oben",
+      "description": "Zeigt das Toast-Symbol zentriert oben für ein auffälligeres Design an.",
+      "note": "Verwenden Sie die Eigenschaft <code>iconPosition='top'</code>, um das Symbol oben im Toast zu zentrieren. Dies ist besonders nützlich für Toasts mit Titeln und Aktionen, da es die visuelle Hierarchie verbessert und das Symbol hervorhebt."
+    },
+    "icons": {
+      "title": "Benutzerdefinierte Symbole",
+      "description": "Sie können Standardsymbole basierend auf dem Toast-Typ anzeigen oder benutzerdefinierte Symbole verwenden und das Symbol bei Bedarf ausblenden.",
+      "note": "Verwenden Sie die Eigenschaft <code>icon</code>. Mit dem Wert <code>false</code> wird das Symbol ausgeblendet. Mit einem <code>String</code> können Sie ein benutzerdefiniertes <strong>Remix Icon</strong> angeben. Standardmäßig werden Symbole basierend auf dem Toast-Typ angezeigt (<code>icon</code> auf <code>true</code> gesetzt)."
+    },
+    "duration": {
+      "title": "Anzeigedauer",
+      "description": "Konfigurieren Sie, wie lange der Toast sichtbar bleibt, bevor er verschwindet. Verwenden Sie 0 für Toasts, die sich nicht automatisch schließen."
+    },
+    "loading": {
+      "title": "Lade-Toast",
+      "description": "Zeigt einen Toast im Ladezustand an, der dynamisch aktualisiert werden kann, wenn der Vorgang abgeschlossen ist."
+    }
+  },
+  "api": {
+    "service": {
+      "title": "ToastService",
+      "description": "Haupt-Service zur Anzeige von Toast-Benachrichtigungen. Bietet Methoden zum Erstellen, Aktualisieren und Schließen von Toasts."
+    },
+    "config": {
+      "title": "ToastConfig",
+      "description": "Individuelle Toast-Konfigurationsschnittstelle. Ermöglicht das Überschreiben der globalen Konfiguration für bestimmte Toasts."
+    },
+    "global": {
+      "title": "Globale Konfiguration",
+      "description": "Globale Konfiguration für das Toast-System. Kann bei der Anwendungsinitialisierung festgelegt werden."
+    },
+    "types": {
+      "title": "Typen und Interfaces",
+      "description": "TypeScript-Typdefinitionen für das Toast-System: ToastType, ToastPosition, ToastAction, ToastRef."
+    },
+    "usage": {
+      "title": "Vollständiges Verwendungsbeispiel",
+      "description": "Vollständiges Beispiel zur Integration von ToastService in eine Komponente mit verschiedenen Verwendungsszenarien."
+    }
+  },
+  "theming": {
+    "container": {
+      "title": "Container-Variablen",
+      "description": "CSS-Variablen zur Anpassung des allgemeinen Toast-Containers (Hintergrund, Rahmen, Schatten, Abstände)."
+    },
+    "typography": {
+      "title": "Typografie-Variablen",
+      "description": "CSS-Variablen zur Anpassung des Toast-Textes (Titel, Nachricht, Schriftgröße, -gewicht)."
+    },
+    "icon": {
+      "title": "Symbol-Variablen",
+      "description": "CSS-Variablen zur Anpassung des Toast-Symbols (Größe, Farbe, Abstände)."
+    },
+    "close": {
+      "title": "Schließen-Schaltflächen-Variablen",
+      "description": "CSS-Variablen zur Anpassung der Schließen-Schaltfläche (Größe, Farbe, Hover)."
+    },
+    "progress": {
+      "title": "Fortschrittsbalken-Variablen",
+      "description": "CSS-Variablen zur Anpassung des automatischen Fortschrittsbalkens (Farbe, Höhe, Animation)."
+    },
+    "types": {
+      "title": "Typ-spezifische Variablen",
+      "description": "CSS-Variablen spezifisch für jeden Toast-Typ (Erfolg, Fehler, Warnung, Info, Laden)."
+    },
+    "animations": {
+      "title": "Animations-Variablen",
+      "description": "CSS-Variablen zur Anpassung der Toast-Ein-/Ausblend-Animationen."
+    },
+    "examples": {
+      "title": "Anpassungsbeispiel",
+      "description": "Vollständiges Toast-Anpassungsbeispiel mit CSS-Variablen zur Erstellung eines dunklen Themes."
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Übersetzungstoken",
+      "description": "Die Toast-Komponente verwendet den generischen Token <code>close</code> aus NuiI18nService für das Label der Schließen-Schaltfläche.",
+      "note": "Der Token <code>close</code> wird von mehreren Komponenten gemeinsam genutzt (Toast, SidebarPanel…). Überschreiben Sie ihn global, um alle Schließen-Schaltflächen auf einmal zu lokalisieren.",
+      "rows": {
+        "close": {
+          "description": "Barrierefreies Label für die Schließen-Schaltfläche bei abwerfbaren Toasts."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA-Rollen und Attribute",
+      "description": "Toasts verwenden eine Live-Region, damit Screenreader neue Benachrichtigungen ankündigen, ohne den aktuellen Fokus des Benutzers zu unterbrechen.",
+      "elements": {
+        "host": "Toast-Host-Element",
+        "closeButton": "Schließen-Schaltfläche"
+      },
+      "rows": {
+        "ariaLive": {
+          "description": "Das Toast-Element hat <code>aria-live=\"polite\"</code> für Informationsbenachrichtigungen oder <code>\"assertive\"</code> für kritische Meldungen (Fehler/Warnung)."
+        },
+        "ariaAtomic": {
+          "description": "<code>aria-atomic=\"true\"</code> stellt sicher, dass der Screenreader den vollständigen Toast-Inhalt als eine Einheit ankündigt."
+        },
+        "ariaLabel": {
+          "description": "Der barrierefreie Name des Toasts wird automatisch aus seinem Inhalt abgeleitet, nach dieser Priorität: Titel → Nachricht → Typ."
+        },
+        "closeLabel": {
+          "description": "Die Schließen-Schaltfläche verwendet den i18n-Token <code>close</code> als barrierefreies Label."
+        }
+      }
+    },
+    "naming": {
+      "title": "Barrierefreier Name",
+      "description": "Der barrierefreie Name des Toasts wird automatisch aus seinem Inhalt abgeleitet. Kein explizites <code>aria-label</code> vom Verwender erforderlich.",
+      "note": "Geben Sie immer aussagekräftigen Titel- oder Nachrichteninhalt an. Vermeiden Sie Toasts, die ausschließlich auf Farbe oder Symbol angewiesen sind, um ihre Bedeutung zu vermitteln.",
+      "elements": {
+        "hostWithTitle": "Toast mit Titel",
+        "hostWithMessage": "Toast ohne Titel",
+        "hostTypeFallback": "Toast mit Typ-Fallback"
+      },
+      "info": {
+        "title": "Toast-Titel",
+        "message": "Toast-Nachricht",
+        "type": "Toast-Typ (Erfolg, Fehler…)"
+      },
+      "rows": {
+        "hostTitle": {
+          "description": "Wenn ein <code>title</code> angegeben ist, wird er zum barrierefreien Label des Toasts."
+        },
+        "hostMessage": {
+          "description": "Wenn kein Titel vorhanden ist, wird der <code>message</code>-Text zum barrierefreien Label."
+        },
+        "hostType": {
+          "description": "Wenn weder Titel noch Nachricht vorhanden sind, wird der Toast-<code>type</code> als Fallback-Label verwendet."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Tastaturinteraktion",
+      "description": "Toasts sind nicht modal. Der Fokus wird nicht automatisch dorthin verschoben; Benutzer können mit Tab zur Schließen-Schaltfläche navigieren.",
+      "rows": {
+        "tab": {
+          "description": "Tab verschiebt den Fokus zur Schließen-Schaltfläche im Toast, falls eine sichtbar ist."
+        },
+        "spaceEnter": {
+          "description": "Aktiviert die fokussierte Schließen-Schaltfläche und blendet den Toast aus."
+        }
+      }
+    }
+  }
+}

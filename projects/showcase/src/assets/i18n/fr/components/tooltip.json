@@ -1,0 +1,126 @@
+{
+  "title": "Info-bulle",
+  "subtitle": "Info-bulles informatives avec support pour du texte et des templates personnalisés",
+  "examples": {
+    "basic": {
+      "title": "Info-bulles basiques",
+      "description": "Affiche des info-bulles simples avec du texte au survol.",
+      "note": "Vous pouvez masquer la flèche avec <code>nuiTooltipShowArrow</code>."
+    },
+    "positions": {
+      "title": "Positions",
+      "description": "Contrôlez la position de l'info-bulle par rapport à l'élément : haut (défaut), bas, gauche, droite."
+    },
+    "events": {
+      "title": "Événements",
+      "description": "Définissez quel événement déclenche l'info-bulle : survol (défaut), clic, focus, ou manuel pour un contrôle programmatique."
+    },
+    "delays": {
+      "title": "Délais",
+      "description": "Configurez les délais avant l'affichage et le masquage de l'info-bulle.",
+      "note": "Utilisez les propriétés <code>nuiTooltipShowDelay</code> et <code>nuiTooltipHideDelay</code> pour ajuster les temps d'attente."
+    },
+    "templates": {
+      "title": "Templates personnalisés",
+      "description": "Utilisez des templates Angular pour afficher du contenu HTML riche dans l'info-bulle."
+    },
+    "interactive": {
+      "title": "Info-bulles interactives",
+      "description": "Permet d'interagir avec le contenu de l'info-bulle. Utile pour inclure des boutons ou des liens.",
+      "note": "Activez la propriété <code>nuiTooltipInteractive</code> pour permettre l'interaction à l'intérieur de l'info-bulle sans qu'elle se ferme automatiquement quand le curseur est déplacé."
+    },
+    "disabled": {
+      "title": "État désactivé",
+      "description": "Contrôlez dynamiquement si l'info-bulle est activée ou désactivée.",
+      "note": "Utilisez la propriété <code>nuiTooltipDisabled</code> pour activer ou désactiver l'info-bulle selon les besoins."
+    }
+  },
+  "api": {
+    "inputs": {
+      "title": "Entrées",
+      "description": "Propriétés d'entrée de la directive <code>nuiTooltip</code>"
+    },
+    "outputs": {
+      "title": "Sorties",
+      "description": "Événements émis par la directive <code>nuiTooltip</code>"
+    },
+    "usage": {
+      "title": "Exemples d'utilisation",
+      "description": "Exemples d'utilisation complets de la directive <code>nuiTooltip</code> dans des composants Angular"
+    }
+  },
+  "theming": {
+    "container": {
+      "title": "Conteneur de l'info-bulle",
+      "description": "Variables CSS pour contrôler l'apparence du conteneur de l'info-bulle : couleurs, dimensions, rembourrage, police, bordures, ombre et z-index"
+    },
+    "arrow": {
+      "title": "Flèche de l'info-bulle",
+      "description": "Variable CSS pour contrôler la taille de la flèche de l'info-bulle"
+    },
+    "animation": {
+      "title": "Animations",
+      "description": "Variables CSS pour contrôler la durée et le timing des animations d'entrée/sortie de l'info-bulle"
+    },
+    "examples": {
+      "title": "Exemples de personnalisation",
+      "description": "Exemples SCSS pour personnaliser les styles de l'info-bulle dans votre application"
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "Rôles et attributs ARIA",
+      "description": "Les info-bulles suivent le modèle ARIA Tooltip, associant le contenu flottant à son déclencheur via <code>aria-describedby</code>.",
+      "elements": {
+        "trigger": "Élément déclencheur",
+        "tooltip": "Élément info-bulle"
+      },
+      "rows": {
+        "ariaDescribedby": {
+          "description": "L'élément déclencheur reçoit <code>aria-describedby</code> pointant vers l'<code>id</code> de l'info-bulle, pour que les lecteurs d'écran annoncent le texte de l'info-bulle comme description supplémentaire."
+        },
+        "tooltipRole": {
+          "description": "L'info-bulle flottante porte <code>role=\"tooltip\"</code> et un <code>id</code> unique référencé par <code>aria-describedby</code>."
+        }
+      }
+    },
+    "naming": {
+      "title": "Nom accessible",
+      "description": "L'élément déclencheur doit avoir son propre nom accessible indépendant de l'info-bulle. L'info-bulle fournit uniquement une description supplémentaire.",
+      "note": "Ne reposez pas sur l'info-bulle comme seule source de nom accessible pour les déclencheurs qui n'affichent qu'une icône. Utilisez <code>aria-label</code> sur l'élément déclencheur.",
+      "elements": {
+        "trigger": "Élément déclencheur",
+        "iconTrigger": "Déclencheur icône seule",
+        "tooltipContent": "Contenu de l'info-bulle"
+      },
+      "info": {
+        "ownLabel": "Nom propre du déclencheur",
+        "ariaLabel": "aria-label sur le déclencheur icône",
+        "description": "Texte de l'info-bulle (aria-describedby)"
+      },
+      "rows": {
+        "trigger": {
+          "description": "Le déclencheur doit avoir son propre nom accessible (texte du bouton, aria-label…) qui est significatif sans le texte de l'info-bulle."
+        },
+        "iconTrigger": {
+          "description": "Pour les déclencheurs qui n'affichent qu'une icône, ajoutez un <code>aria-label</code> explicite sur l'élément déclencheur."
+        },
+        "content": {
+          "description": "Le texte de l'info-bulle est connecté via <code>aria-describedby</code> et sert d'information supplémentaire, pas comme libellé principal."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Interaction clavier",
+      "description": "Les info-bulles s'affichent et se masquent automatiquement selon le focus. Aucune touche explicite n'est nécessaire pour les ouvrir.",
+      "rows": {
+        "tab": {
+          "description": "Tabber vers un élément déclencheur affiche l'info-bulle. Tabber ailleurs la masque."
+        },
+        "escape": {
+          "description": "Appuyer sur Échap quand le déclencheur a le focus masque l'info-bulle."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "title": "Seitennavigation",
+  "subtitle": "Erweiterte Komponente für die Datennavigation mit Unterstützung für flexible Layouts und unendliches Laden",
+  "basic": {
+    "title": "Grundlegende Verwendung",
+    "description": "Standardkonfiguration mit numerischer Navigation. Unterstützt Two-Way-Binding für Seite und Größe."
+  },
+  "nav-display": {
+    "title": "Navigationsanzeigeoptionen",
+    "description": "Definiere, wie die Navigationsschaltflächen angezeigt werden: Text, Icons oder beides. Passe das Erscheinungsbild der Navigationsschaltflächen an deinen Anwendungsstil an.",
+    "note": "Verwende den Input <code>navDisplay</code> mit den Werten <code>'text'</code>, <code>'icon'</code> oder <code>'both'</code>, um nur Text, nur Icons oder beides in den Navigationsschaltflächen anzuzeigen. Icons basieren auf der Remix Icon-Bibliothek und werden je nach Schaltflächentyp automatisch zugewiesen (erste Seite, vorherige Seite, nächste Seite, letzte Seite)."
+  },
+  "colors": {
+    "title": "Farben und Varianten",
+    "description": "Unterstützt alle NUI-Farben und -Varianten (Solid, Outline, Ghost).",
+    "note": "Kombiniere <code>color</code> und <code>variant</code>, um das Erscheinungsbild der Seitennavigation nach deinen Bedürfnissen anzupassen."
+  },
+  "sizes": {
+    "title": "Seitengrößenoptionen",
+    "description": "Definiere einen benutzerdefinierten Satz von Optionen für die Seitengröße.",
+    "note": "Mit dem Input <code>size</code> kannst du Benutzern einen bestimmten Satz von Seitengrößen zur Auswahl anbieten."
+  },
+  "layout": {
+    "title": "Benutzerdefiniertes Layout",
+    "description": "Die leistungsstärkste Funktion. Definiere genau, wohin jedes Element geht (oben, links, Mitte, rechts, unten) mit einem Konfigurationsobjekt.",
+    "note": "<strong>⚠️ Wichtig für Mobilgeräte:</strong> Komplexe Desktop-Layouts können auf kleinen Bildschirmen überlaufen. Stelle immer ein optimiertes <code>mobileLayout</code> bereit, das Elemente vertikal anordnet und wichtige Navigation priorisiert. Dies verhindert UX-Probleme auf Mobilgeräten. <br/><br/><strong>Bereichssystem:</strong> Wenn ein Layout gesetzt ist, werden Attribute wie <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> und <code>showPageJump</code> ignoriert, da das benutzerdefinierte Layout die vollständige Kontrolle darüber hat, was und wo angezeigt wird."
+  },
+  "infinite": {
+    "title": "Unendliches Laden",
+    "description": "Verwandelt die Seitennavigation in eine <strong>Mehr laden</strong>-Schaltfläche mit integriertem Ladezustand. Ideal für mobile Listen oder Feeds.",
+    "note": "Aktiviere den unendlichen Lademodus mit <code>infiniteConfig</code>. Die Seitennavigation wird zu einer Schaltfläche, die beim Klicken mehr Elemente lädt. Verwende den Output <code>onLoadMore</code> innerhalb von <code>infiniteConfig</code>, um die Datenladelogik zu behandeln."
+  },
+  "api": {
+    "title": "API und Referenz",
+    "description": "Vollständige Dokumentation der Inputs, Outputs und Interfaces der Paginator-Komponente für die erweiterte Integration.",
+    "inputs": {
+      "title": "Inputs",
+      "description": "Eingabeeigenschaften der Paginator-Komponente"
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Ereignisse, die von der Paginator-Komponente ausgelöst werden"
+    },
+    "texts": {
+      "title": "PaginatorI18n",
+      "description": "Interface für anpassbare Paginator-Texte"
+    },
+    "keyboard": {
+      "title": "KeyboardConfig",
+      "description": "Interface für die Tastaturnavigationskonfiguration"
+    },
+    "loading": {
+      "title": "LoadingConfig",
+      "description": "Interface für die Ladezustandskonfiguration"
+    },
+    "layout": {
+      "title": "PaginatorLayout",
+      "description": "Interface für benutzerdefiniertes Layout: organisiert Elemente in Bereiche (oben, links, Mitte, rechts, unten)"
+    },
+    "icons": {
+      "title": "navIcons",
+      "description": "Interface für die anpassbare Icon-Konfiguration"
+    },
+    "infinite": {
+      "title": "InfiniteConfig",
+      "description": "Interface für die Konfiguration des unendlichen Scrollmodus"
+    }
+  },
+  "styling": {
+    "title": "Stile und Anpassung",
+    "description": "Passe das Erscheinungsbild der Seitennavigation über CSS-Variablen an. Steuere Layout, Schaltflächen, Seitennummern und mehr."
+  },
+  "theming": {
+    "layout": {
+      "title": "Layout",
+      "description": "CSS-Variablen für das Gesamtlayout der Seitennavigation"
+    },
+    "buttons": {
+      "title": "Schaltflächen",
+      "description": "CSS-Variablen für Navigationsschaltflächen und Seitennummern"
+    },
+    "active": {
+      "title": "Aktive Seite",
+      "description": "CSS-Variablen für den aktiven Zustand der aktuellen Seite"
+    },
+    "controls": {
+      "title": "Steuerelemente",
+      "description": "CSS-Variablen für den Größenselektor, Elementbereich und Seitensprung"
+    },
+    "infinite": {
+      "title": "Unendliches Scrollen",
+      "description": "CSS-Variablen für den unendlichen Lademodus"
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Übersetzungs-Tokens",
+      "description": "Die Seitennavigation verwendet i18n-Tokens für Navigationsschaltflächen-Labels, Elementbereichsmeldungen und den Seitengrößenselektor.",
+      "note": "Überschreibe Tokens mit <code>provideNuiI18n({ paginator: { ... } })</code>.",
+      "rows": {
+        "firstPage": {
+          "description": "Zugängliches Label für die Schaltfläche 'Erste Seite'."
+        },
+        "previousPage": {
+          "description": "Zugängliches Label für die Schaltfläche 'Vorherige Seite'."
+        },
+        "nextPage": {
+          "description": "Zugängliches Label für die Schaltfläche 'Nächste Seite'."
+        },
+        "lastPage": {
+          "description": "Zugängliches Label für die Schaltfläche 'Letzte Seite'."
+        },
+        "itemsPerPage": {
+          "description": "Label für den Elemente-pro-Seite-Selektor."
+        },
+        "of": {
+          "description": "Verbinder 'von' im Bereichstext (z.B. '1–10 von 100')."
+        },
+        "jumpToPage": {
+          "description": "Platzhalter oder Label für den Seitensprung-Input."
+        }
+      }
+    },
+    "a11yTokens": {
+      "title": "Barrierefreiheits-Tokens",
+      "description": "Zusätzliche Tokens für Screenreader-Ansagen und Paginator-ARIA-Attribute.",
+      "note": "Diese Tokens sind unter <code>paginator.a11y</code> lokalisiert.",
+      "rows": {
+        "pageLabel": {
+          "description": "Textmuster, das beim Seitenwechsel angesagt wird (z.B. 'Seite 3 von 10')."
+        },
+        "navigation": {
+          "description": "Aria-label für den Navigationsbereich der Seitennavigation."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA-Rollen und -Attribute",
+      "description": "Die Seitennavigation implementiert das ARIA-Navigationsmuster mit <code>role=\"navigation\"</code> und korrekt beschrifteten Schaltflächen.",
+      "elements": {
+        "nav": "Navigationsbereich",
+        "prevNextButton": "Vorherige/nächste Schaltflächen",
+        "pageButton": "Seitennummernschaltfläche",
+        "currentPage": "Aktuelle Seite"
+      },
+      "rows": {
+        "navRole": {
+          "description": "Der Root-Paginator-Container hat <code>role=\"navigation\"</code> und <code>aria-label</code> aus dem i18n-Token <code>navigation</code>."
+        },
+        "buttonLabels": {
+          "description": "Schaltflächen für erste/vorherige/nächste/letzte Seite haben <code>aria-label</code> aus den entsprechenden i18n-Tokens."
+        },
+        "ariaCurrent": {
+          "description": "Die aktive Seitenschaltfläche trägt <code>aria-current=\"page\"</code>."
+        }
+      }
+    },
+    "naming": {
+      "title": "Zugänglicher Name",
+      "description": "Alle interaktiven Steuerelemente der Seitennavigation erhalten ihren zugänglichen Namen aus i18n-Tokens, was sicherstellt, dass sie in jeder Sprache beschreibend sind.",
+      "note": "Lokalisiere die <code>paginator</code>-Namespace-Tokens, um aussagekräftige Labels sicherzustellen.",
+      "elements": {
+        "nav": "Navigationsbereich",
+        "buttons": "Navigationsschaltflächen",
+        "currentPage": "Aktuelle Seite"
+      },
+      "info": {
+        "navToken": "i18n-Token 'navigation'",
+        "buttonTokens": "i18n-Schaltflächen-Tokens",
+        "ariaCurrentPage": "aria-current='page'"
+      },
+      "rows": {
+        "nav": {
+          "description": "Der Navigationsbereich verwendet das Token <code>navigation</code> als <code>aria-label</code>."
+        },
+        "buttons": {
+          "description": "Jede Navigationsschaltfläche verwendet ihr spezifisches i18n-Token als zugänglichen Namen."
+        },
+        "current": {
+          "description": "Die aktive Seite trägt <code>aria-current=\"page\"</code>, damit Screenreader sie identifizieren."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Tastaturinteraktion",
+      "description": "Die Seitennavigation ist vollständig per Tastatur mit Standard-Schaltflächeninteraktion navigierbar.",
+      "rows": {
+        "tab": {
+          "description": "Tab bewegt den Fokus zwischen den Schaltflächen und Steuerelementen der Seitennavigation."
+        },
+        "enterSpace": {
+          "description": "Aktiviert die fokussierte Schaltfläche und navigiert zur entsprechenden Seite."
+        }
+      }
+    }
+  }
+}

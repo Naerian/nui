@@ -1,0 +1,425 @@
+{
+  "title": "Schaltfläche",
+  "subtitle": "Vielseitige Schaltflächen-Komponente mit mehreren Varianten, Größen und Zuständen",
+  "basic": {
+    "title": "Einfache Schaltfläche",
+    "description": "Die einfachste Form einer Schaltfläche mit Standardstilen."
+  },
+  "variants-colors": {
+    "title": "Varianten und Farben",
+    "description": "Unterstützt verschiedene Varianten und Farben aus dem NUI-System.",
+    "note": "Kombiniere <code>color</code> und <code>variant</code>, um das Erscheinungsbild der Schaltfläche nach deinen Bedürfnissen anzupassen."
+  },
+  "shapes": {
+    "title": "Formen",
+    "description": "Steuere die Form der Schaltfläche mit abgerundeten Rahmenoptionen.",
+    "note": "Formoptionen: <code>'rounded'</code> für leicht abgerundete Rahmen, <code>'pill'</code> für vollständig abgerundete Rahmen und <code>'square'</code> für gerade Rahmen."
+  },
+  "raised": {
+    "title": "Erhabene Schaltflächen",
+    "description": "Füge Schaltflächen mit einem dezenten Schatten visuelle Tiefe hinzu.",
+    "note": "Erhabene Schaltflächen sind ideal für primäre Aktionen, die du in deiner Oberfläche hervorheben möchtest. Verwende das Attribut <code>raised</code> in deiner Button-Komponente."
+  },
+  "sizes": {
+    "title": "Größen",
+    "description": "Fünf Größenoptionen in NUI verfügbar.",
+    "note": "Größen beeinflussen die Schaltflächenhöhe, den horizontalen Innenabstand und die Schriftgröße. Verwende <code>size</code> mit den Werten <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> und <code>'xl'</code>."
+  },
+  "icons": {
+    "title": "Icons",
+    "description": "Füge am Anfang oder Ende Icons zu Schaltflächen hinzu. Schaltflächen mit nur einem Icon werden als kreisförmige Icon-Schaltflächen gerendert.",
+    "note": "Icon-Position: <code>'start'</code> zeigt das Icon vor dem Text, <code>'end'</code> danach. Nur-Icon-Schaltflächen benötigen das Attribut <code>aria-label</code> für die Barrierefreiheit."
+  },
+  "loading": {
+    "title": "Ladezustand",
+    "description": "Zeigt einen Lade-Spinner in drei Positionen: Anfang, Ende oder Mitte (ersetzt den Inhalt).",
+    "note": "Ladepositionen: <code>'start'</code> zeigt den Spinner vor dem Text, <code>'end'</code> danach, <code>'center'</code> ersetzt den Inhalt vollständig durch einen zentrierten Spinner. Wenn die Schaltfläche nur ein <code>icon</code> enthält, wird der Inhalt während des Ladens ebenfalls durch den Spinner ersetzt."
+  },
+  "width": {
+    "title": "Breite",
+    "description": "Steuere die Schaltflächenbreite: auto (Standard), full (100%) oder fit (angepasst an Inhalt).",
+    "note": "Breitenoptionen: <code>'auto'</code> passt sich mit Standardpolsterung an den Inhalt an, <code>'full'</code> dehnt sich auf 100% des Containers aus, <code>'fit'</code> verwendet den minimal erforderlichen Platz."
+  },
+  "disabled": {
+    "title": "Deaktivierter Zustand",
+    "description": "Deaktivierte Schaltflächen verhindern Benutzerinteraktionen und zeigen ein abgedunkeltes Erscheinungsbild."
+  },
+  "events": {
+    "title": "Ereignisse",
+    "description": "Behandle Click-Ereignisse mit dem onClick-Output. Unterstützt Schaltflächentypen: button, submit und reset.",
+    "consoleNote": "Öffne <strong>DevTools (F12)</strong> und schaue in den <strong>Console</strong>-Tab, um die protokollierten Ereignisse beim Klicken auf die Schaltflächen zu sehen."
+  },
+  "directive": {
+    "title": "Direktive verwenden",
+    "description": "Wende Schaltflächenstile auf native HTML-Elemente mit der nuiButton-Direktive an.",
+    "note": "Du kannst die Direktive <code>nuiButton</code> auf jedes native HTML-Element wie <code>&lt;button&gt;</code>, <code>&lt;a&gt;</code> oder <code>&lt;div&gt;</code> anwenden, um NUI-Schaltflächenstile und -Verhalten zu übernehmen."
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Eingabeeigenschaften zur Konfiguration des Schaltflächenverhaltens und -erscheinungsbilds.",
+      "rows": {
+        "variant": {
+          "description": "Visuelle Schaltflächenvariante"
+        },
+        "shape": {
+          "description": "Schaltflächenform"
+        },
+        "raised": {
+          "description": "Wendet erhabenen Stil mit Schatten an"
+        },
+        "color": {
+          "description": "Farbthema der Schaltfläche"
+        },
+        "size": {
+          "description": "Schaltflächengröße"
+        },
+        "icon": {
+          "description": "Remix Icon Klassenname"
+        },
+        "iconPosition": {
+          "description": "Icon-Position relativ zum Text"
+        },
+        "loading": {
+          "description": "Zeigt den Lade-Spinner"
+        },
+        "loadingPosition": {
+          "description": "Spinner-Position"
+        },
+        "width": {
+          "description": "Breitenverhalten der Schaltfläche"
+        },
+        "disabled": {
+          "description": "Deaktiviert die Schaltflächeninteraktion"
+        },
+        "type": {
+          "description": "Nativer Schaltflächentyp"
+        },
+        "label": {
+          "description": "Schaltflächentext (Alternative zu Content Projection)"
+        },
+        "title": {
+          "description": "HTML-title-Attribut"
+        },
+        "ariaLabel": {
+          "description": "Barrierefreiheits-Label (wird für Nur-Icon-Schaltflächen automatisch berechnet)"
+        }
+      }
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Ereignisse, die von der Button-Komponente ausgelöst werden.",
+      "rows": {
+        "onClick": {
+          "description": "Wird beim Klicken auf die Schaltfläche ausgelöst (nicht wenn deaktiviert oder ladend)"
+        }
+      }
+    },
+    "computed": {
+      "title": "Berechnete Eigenschaften",
+      "description": "Reaktive berechnete Eigenschaften (Signals) der Komponente.",
+      "rows": {
+        "effectiveColor": {
+          "description": "Aufgelöste Farbe (Input > Globale Konfiguration > Standardwert)"
+        },
+        "effectiveSize": {
+          "description": "Aufgelöste Größe (Input > Globale Konfiguration > Standardwert)"
+        },
+        "effectiveVariant": {
+          "description": "Aufgelöste Variante (Input > Globale Konfiguration > Standardwert)"
+        },
+        "hasVisibleContent": {
+          "description": "Wahr, wenn die Schaltfläche Textinhalt oder ein Label hat"
+        },
+        "isIconOnly": {
+          "description": "Wahr, wenn die Schaltfläche nur ein Icon ohne Text enthält"
+        },
+        "computedAriaLabel": {
+          "description": "Automatisch berechnetes aria-label für die Barrierefreiheit"
+        }
+      }
+    },
+    "models": {
+      "title": "Modelle",
+      "description": "Datenmodelle im Zusammenhang mit der Button-Komponente.",
+      "rows": {
+        "ButtonType": {
+          "description": "Native Schaltflächentypen"
+        },
+        "ButtonTypeEnum": {
+          "description": "Enum für native Schaltflächentypen"
+        },
+        "ButtonIconPosition": {
+          "description": "Icon-Positionsoptionen"
+        },
+        "ButtonIconPositionEnum": {
+          "description": "Enum für Icon-Position"
+        },
+        "ButtonLoadingPosition": {
+          "description": "Lade-Spinner-Positionsoptionen"
+        },
+        "ButtonLoadingPositionEnum": {
+          "description": "Enum für Lade-Spinner-Position"
+        },
+        "ButtonWidth": {
+          "description": "Schaltflächen-Breitenoptionen"
+        },
+        "ButtonWidthEnum": {
+          "description": "Enum für Schaltflächenbreite"
+        }
+      }
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Farbvariablen",
+      "description": "CSS-Variablen zur Anpassung der Farben nach Variante (solid, outline, ghost) und Farbe (primary, secondary, usw.).",
+      "note": "Ersetze <code>{color}</code> durch eine beliebige Systemfarbe: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>.",
+      "rows": {
+        "solidBg": {
+          "description": "Hintergrundfarbe für solid-Variante"
+        },
+        "solidText": {
+          "description": "Textfarbe für solid-Variante"
+        },
+        "solidBorder": {
+          "description": "Rahmenfarbe für solid-Variante"
+        },
+        "solidHoverBg": {
+          "description": "Hintergrund bei Hover für solid"
+        },
+        "solidHoverText": {
+          "description": "Textfarbe bei Hover für solid"
+        },
+        "solidHoverBorder": {
+          "description": "Rahmen bei Hover für solid"
+        },
+        "solidActiveBg": {
+          "description": "Aktiver Hintergrund für solid"
+        },
+        "solidActiveBorder": {
+          "description": "Aktiver Rahmen für solid"
+        },
+        "outlineBg": {
+          "description": "Hintergrundfarbe für outline-Variante"
+        },
+        "outlineText": {
+          "description": "Textfarbe für outline-Variante"
+        },
+        "outlineBorder": {
+          "description": "Rahmenfarbe für outline-Variante"
+        },
+        "outlineHoverBg": {
+          "description": "Hintergrund bei Hover für outline"
+        },
+        "outlineHoverText": {
+          "description": "Text bei Hover für outline"
+        },
+        "outlineHoverBorder": {
+          "description": "Rahmen bei Hover für outline"
+        },
+        "outlineActiveBg": {
+          "description": "Aktiver Hintergrund für outline"
+        },
+        "outlineActiveBorder": {
+          "description": "Aktiver Rahmen für outline"
+        },
+        "ghostBg": {
+          "description": "Hintergrundfarbe für ghost-Variante"
+        },
+        "ghostText": {
+          "description": "Textfarbe für ghost-Variante"
+        },
+        "ghostBorder": {
+          "description": "Rahmenfarbe für ghost-Variante"
+        },
+        "ghostHoverBg": {
+          "description": "Hintergrund bei Hover für ghost"
+        },
+        "ghostHoverText": {
+          "description": "Text bei Hover für ghost"
+        },
+        "ghostHoverBorder": {
+          "description": "Rahmen bei Hover für ghost"
+        },
+        "ghostActiveBg": {
+          "description": "Aktiver Hintergrund für ghost"
+        },
+        "ghostActiveBorder": {
+          "description": "Aktiver Rahmen für ghost"
+        },
+        "focusColor": {
+          "description": "Fokus-Ring-Farbe"
+        }
+      }
+    },
+    "structure": {
+      "title": "Strukturelle Variablen",
+      "description": "CSS-Variablen für Abstände, Größen, Typografie und visuelle Effekte.",
+      "rows": {
+        "gap": {
+          "description": "Abstand zwischen Icon und Text"
+        },
+        "paddingXXs": {
+          "description": "Horizontaler Innenabstand für xs-Größe"
+        },
+        "paddingYXs": {
+          "description": "Vertikaler Innenabstand für xs-Größe"
+        },
+        "paddingXSm": {
+          "description": "Horizontaler Innenabstand für sm-Größe"
+        },
+        "paddingYSm": {
+          "description": "Vertikaler Innenabstand für sm-Größe"
+        },
+        "paddingXMd": {
+          "description": "Horizontaler Innenabstand für md-Größe"
+        },
+        "paddingYMd": {
+          "description": "Vertikaler Innenabstand für md-Größe"
+        },
+        "paddingXLg": {
+          "description": "Horizontaler Innenabstand für lg-Größe"
+        },
+        "paddingYLg": {
+          "description": "Vertikaler Innenabstand für lg-Größe"
+        },
+        "paddingXXl": {
+          "description": "Horizontaler Innenabstand für xl-Größe"
+        },
+        "paddingYXl": {
+          "description": "Vertikaler Innenabstand für xl-Größe"
+        },
+        "radiusXs": {
+          "description": "Rahmenradius für xs-Größe"
+        },
+        "radiusSm": {
+          "description": "Rahmenradius für sm-Größe"
+        },
+        "radiusMd": {
+          "description": "Rahmenradius für md-Größe"
+        },
+        "radiusLg": {
+          "description": "Rahmenradius für lg-Größe"
+        },
+        "radiusXl": {
+          "description": "Rahmenradius für xl-Größe"
+        },
+        "fontSizeXs": {
+          "description": "Schriftgröße für xs"
+        },
+        "fontSizeSm": {
+          "description": "Schriftgröße für sm"
+        },
+        "fontSizeMd": {
+          "description": "Schriftgröße für md"
+        },
+        "fontSizeLg": {
+          "description": "Schriftgröße für lg"
+        },
+        "fontSizeXl": {
+          "description": "Schriftgröße für xl"
+        },
+        "iconSizeXs": {
+          "description": "Icon-Größe für xs"
+        },
+        "iconSizeSm": {
+          "description": "Icon-Größe für sm"
+        },
+        "iconSizeMd": {
+          "description": "Icon-Größe für md"
+        },
+        "iconSizeLg": {
+          "description": "Icon-Größe für lg"
+        },
+        "iconSizeXl": {
+          "description": "Icon-Größe für xl"
+        },
+        "transition": {
+          "description": "Übergangsdauer"
+        },
+        "spinDuration": {
+          "description": "Lade-Spinner-Animationsdauer"
+        },
+        "focusWidth": {
+          "description": "Fokus-Outline-Breite"
+        },
+        "focusOffset": {
+          "description": "Fokus-Outline-Versatz"
+        }
+      }
+    }
+  },
+  "a11y": {
+    "naming": {
+      "title": "Zugänglicher Name",
+      "description": "Die Schaltfläche löst den zugänglichen Namen automatisch nach einer strengen Prioritätsreihenfolge auf. Gib immer einen expliziten Namen für Nur-Icon-Schaltflächen an.",
+      "note": "Nur-Icon-Schaltflächen (<code>isIconOnly</code>) <strong>müssen</strong> einen Input <code>aria-label</code> oder <code>title</code> haben. Das Fehlen beider macht die Schaltfläche unzugänglich.",
+      "rows": {
+        "textLabel": {
+          "description": "Projizierter Text oder der Input <code>label</code> dienen als zugänglicher Name ohne zusätzliches Attribut."
+        },
+        "iconText": {
+          "description": "Das Icon erhält automatisch aria-hidden; der sichtbare Text ist ausreichend als Name."
+        },
+        "iconOnly": {
+          "description": "Eines der beiden ist <strong>erforderlich</strong>. Priorität: Input <code>aria-label</code> &gt; Input <code>title</code>. Die Komponente stellt <code>computedAriaLabel()</code> mit der aufgelösten Logik bereit."
+        },
+        "iconOnlyLoading": {
+          "description": "Der Spinner ersetzt das Icon visuell, aber der zugängliche Name bleibt erhalten, solange die Schaltfläche im DOM ist."
+        }
+      },
+      "elements": {
+        "textLabel": "Schaltfläche mit Text oder <code>label</code>",
+        "iconText": "Icon + Text",
+        "iconOnly": "Nur Icon (<code>isIconOnly</code>)",
+        "iconOnlyLoading": "Ladezustand mit nur Icon"
+      },
+      "info": {
+        "nativeName": "Nativer Name",
+        "ariaLabelTitle": "<code>aria-label</code> / <code>title</code>"
+      }
+    },
+    "states": {
+      "title": "ARIA-Attribute",
+      "description": "Die Button-Komponente fügt ARIA-Attribute basierend auf ihrem Zustand automatisch hinzu und entfernt sie. Im Consumer-Code sind keine zusätzlichen Bindungen erforderlich.",
+      "rows": {
+        "ariaLabel": {
+          "description": "Aufgelöst durch <code>computedAriaLabel()</code>. Weggelassen, wenn die Schaltfläche sichtbaren Text hat (der native Name ist ausreichend)."
+        },
+        "ariaBusy": {
+          "description": "Vorhanden, wenn <code>loading=true</code>. Zeigt ATs an, dass die Schaltfläche eine Operation verarbeitet."
+        },
+        "disabled": {
+          "description": "Angewendet, wenn <code>disabled=true</code> oder <code>loading=true</code>. Blockiert Fokus und Ereignisse nativ, ohne <code>aria-disabled</code> zu benötigen."
+        },
+        "ariaHidden": {
+          "description": "Alle Icon-<code>&lt;i&gt;</code>-Elemente und Spinner-<code>&lt;span&gt;</code>-Elemente tragen <code>aria-hidden</code>, damit ATs sie nicht lesen."
+        }
+      },
+      "elements": {
+        "disabled": "<code>disabled</code> (nativ)",
+        "ariaHiddenIcons": "<code>aria-hidden=\"true\"</code> auf Icons"
+      },
+      "info": {
+        "staticValue": "Statisch"
+      }
+    },
+    "keyboard": {
+      "title": "Tastaturinteraktion",
+      "description": "Die Komponente verwendet ein natives <code>&lt;button&gt;</code>-Element, sodass der Browser das gesamte Tastaturverhalten kostenlos bereitstellt.",
+      "note": "Wenn <code>disabled</code> oder <code>loading</code> wahr sind, wird das native <code>disabled</code>-Attribut gesetzt, das die Schaltfläche automatisch aus der Tab-Reihenfolge entfernt.",
+      "rows": {
+        "tab": {
+          "description": "Bewegt den Fokus zur Schaltfläche (oder weg). <code>disabled</code>/<code>loading</code>-Schaltflächen sind von der Tab-Reihenfolge ausgeschlossen."
+        },
+        "shiftTab": {
+          "description": "Bewegt den Fokus zum vorherigen Element."
+        },
+        "spaceEnter": {
+          "description": "Aktiviert die Schaltfläche. Wenn <code>disabled</code> oder <code>loading</code>, fängt der Handler das Ereignis ab und bricht es vor dem Auslösen von <code>onClick</code> ab."
+        }
+      }
+    }
+  }
+}
