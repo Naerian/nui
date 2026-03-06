@@ -36,7 +36,6 @@ export interface PaginatorConfig {
   showPageJump?: boolean;
   pageSizeOptions?: number[];
   autoScroll?: boolean;
-  scrollTarget?: string | HTMLElement;
   navDisplay?: PaginatorNavDisplay;
 
   // Propiedades de bloques
@@ -44,7 +43,7 @@ export interface PaginatorConfig {
   navTexts?: Partial<PaginatorI18n>;
   keyboard?: Partial<KeyboardConfig>;
   loading?: Partial<LoadingConfig>;
-  infinite?: Partial<InfiniteConfig>;
+  infinite?: Partial<Omit<InfiniteConfig, 'onLoadMore'>>;
 
   // Layouts
   layout?: Partial<PaginatorLayout>;
@@ -67,7 +66,6 @@ export const DEFAULT_PAGINATOR_CONFIG: PaginatorConfig = {
   showPageJump: false,
   pageSizeOptions: [10, 25, 50, 100],
   autoScroll: false,
-  scrollTarget: 'body',
   navDisplay: PaginatorNavDisplayEnum.ICON,
   navIcons: DEFAULT_ICON_CONFIG,
   keyboard: DEFAULT_KEYBOARD_CONFIG,
@@ -83,7 +81,6 @@ export const DEFAULT_PAGINATOR_CONFIG: PaginatorConfig = {
     itemsPerLoad: 20,
     maxItems: 1000,
     showCounter: true,
-    onLoadMore: () => {},
   },
   layout: {
     top: [],

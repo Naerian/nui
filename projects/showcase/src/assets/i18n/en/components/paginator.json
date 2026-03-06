@@ -216,7 +216,6 @@
         "showPageJump": "Whether to display the page jump input.",
         "pageSizeOptions": "Available options for the page size selector.",
         "autoScroll": "Whether to automatically scroll to the top on page change.",
-        "scrollTarget": "CSS selector or HTMLElement to scroll to on page change.",
         "navDisplay": "How navigation buttons are displayed: <code>icon</code>, <code>text</code> or <code>both</code>.",
         "navIcons": "Custom icon classes for each navigation button.",
         "keyboard": "Keyboard shortcut configuration for paginator controls.",

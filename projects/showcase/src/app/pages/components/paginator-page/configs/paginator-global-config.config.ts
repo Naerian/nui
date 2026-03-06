@@ -125,12 +125,7 @@ export const appConfig: ApplicationConfig = {
           '<code class="neutral">false</code>',
           'components.paginator.globalConfig.defaults.rows.autoScroll',
         ],
-        [
-          '<code>scrollTarget</code>',
-          "string | HTMLElement",
-          '<code class="neutral">body</code>',
-          'components.paginator.globalConfig.defaults.rows.scrollTarget',
-        ],
+
         [
           '<code>navDisplay</code>',
           "PaginatorNavDisplay",

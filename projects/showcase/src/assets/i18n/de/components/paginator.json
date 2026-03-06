@@ -216,7 +216,6 @@
         "showPageJump": "Ob das Eingabefeld für den Seitensprung angezeigt wird.",
         "pageSizeOptions": "Verfügbare Optionen für die Seitengrößenauswahl.",
         "autoScroll": "Ob beim Seitenwechsel automatisch nach oben gescrollt wird.",
-        "scrollTarget": "CSS-Selektor oder HTMLElement, zu dem beim Seitenwechsel gescrollt wird.",
         "navDisplay": "Wie Navigationsschaltflächen dargestellt werden: <code>icon</code>, <code>text</code> oder <code>both</code>.",
         "navIcons": "Benutzerdefinierte Symbolklassen für jede Navigationsschaltfläche.",
         "keyboard": "Tastaturkürzel-Konfiguration für die Steuerelemente des Paginators.",

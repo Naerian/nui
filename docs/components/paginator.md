@@ -39,7 +39,6 @@ export const appConfig: ApplicationConfig = {
           showPageJump: true,  // ← Configuración global
           pageSizeOptions: [10, 25, 50, 100],
           autoScroll: false,
-          scrollTarget: 'body',
         },
         layout: {
           // Layout por defecto para toda la app

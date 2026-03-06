@@ -144,6 +144,8 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   private clearAriaLiveMsgTimeout?: ReturnType<typeof setTimeout>;
   // Temporizador para limpiar mensajes de error del aria-live
   private clearAriaErrorTimeout?: ReturnType<typeof setTimeout>;
+  // Temporizador para el delay de loading (config.loading.loadingDelay)
+  private _loadingTimeout?: ReturnType<typeof setTimeout>;
 
   /** ID único por instancia para evitar colisiones en multi-instancia */
   readonly instanceId = `nui-pag-${Math.random().toString(36).slice(2, 9)}`;
@@ -199,9 +201,10 @@ export class PaginatorComponent implements OnInit, OnDestroy {
 
   /**
    * Opciones para el selector de items por página.
-   * @default DEFAULT_PAGE_SIZE_OPTIONS = [10, 20, 50, 100] (o valor configurado globalmente)
+   * Si no se especifica, se usará el valor de la configuración global.
+   * @default undefined (usa config global → DEFAULT_PAGE_SIZE_OPTIONS = [10, 20, 50, 100])
    */
-  pageSizeOptions = input<number[]>(DEFAULT_PAGE_SIZE_OPTIONS);
+  pageSizeOptions = input<number[] | undefined>(undefined);
 
   /**
    * Textos personalizables para elementos del paginador (ej: aria-labels, mensajes de rango, etc).
@@ -346,9 +349,10 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   /**
    * Número máximo de páginas visibles en el paginador.
    * El paginador mostrará un máximo de este número de botones de página.
-   * @default DEFAULT_MAX_VISIBLE_PAGES = 5 (o valor configurado globalmente)
+   * Si no se especifica, se usará el valor de la configuración global.
+   * @default undefined (usa config global → DEFAULT_MAX_VISIBLE_PAGES = 5)
    */
-  maxVisiblePages = input<number>(DEFAULT_MAX_VISIBLE_PAGES);
+  maxVisiblePages = input<number | undefined>(undefined);
 
   /**
    * Mostrar botones de primera y última página.
@@ -531,7 +535,8 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     if (this.isMobileDevice() && currentMode === PaginatorModeEnum.DEFAULT) {
       const total = this.totalPages();
       const showFirst = this.showFirstLast();
-      const maxVisible = this.maxVisiblePages();
+      // Usamos el valor sin reducción mobile para decidir el cambio de modo
+      const maxVisible = this.maxVisiblePages() ?? this.paginatorConfig?.maxVisiblePages ?? DEFAULT_MAX_VISIBLE_PAGES;
 
       if ((total > 2 && showFirst) || (total > 2 && maxVisible > 3 && !showFirst)) {
         return PaginatorModeEnum.FRACTIONAL;
@@ -799,10 +804,11 @@ export class PaginatorComponent implements OnInit, OnDestroy {
 
   /**
    * Computed para el número máximo de páginas visibles efectivo.
+   * Prioridad: Input > Global Config > Default Constant.
    * En móviles, reduce automáticamente el número de páginas visibles para mejorar UX.
    */
   effectiveMaxVisiblePages = computed<number>(() => {
-    const maxVisible = this.maxVisiblePages();
+    const maxVisible = this.maxVisiblePages() ?? this.paginatorConfig?.maxVisiblePages ?? DEFAULT_MAX_VISIBLE_PAGES;
 
     // En móviles, reducir automáticamente
     if (this.isMobileDevice()) {
@@ -816,15 +822,33 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   });
 
   /**
+   * Computed de las opciones efectivas para el selector de tamaño de página.
+   * Prioridad: Input > Global Config > Default Constant.
+   */
+  effectivePageSizeOptions = computed<number[]>(
+    () => this.pageSizeOptions() ?? this.paginatorConfig?.pageSizeOptions ?? DEFAULT_PAGE_SIZE_OPTIONS
+  );
+
+  /**
    * Opciones para el selector de tamaño de página
    */
   pageSizeOptionsData = computed<SelectBtnOption[]>(() => {
-    return this.pageSizeOptions().map((size: number) => ({
+    return this.effectivePageSizeOptions().map((size: number) => ({
       label: size.toString(),
       tooltip: this._i18n().itemsPerPage + ' ' + size.toString(),
       value: size.toString(),
     }));
   });
+
+  /**
+   * Estado disabled efectivo.
+   * Combina el input `disabled` con la config global `loading.disableOnLoading`:
+   * si el paginador está en loading y `disableOnLoading` es true, también se deshabilita.
+   * Prioridad: disabled() || (isLoading && disableOnLoading)
+   */
+  effectiveDisabled = computed<boolean>(
+    () => this.disabled() || (this.isLoading() && (this.paginatorConfig?.loading?.disableOnLoading ?? true))
+  );
 
   constructor() {
     // Redimensión reactiva
@@ -878,6 +902,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     // Los observables se limpian automáticamente con takeUntilDestroyed
     clearTimeout(this.clearAriaLiveMsgTimeout);
     clearTimeout(this.clearAriaErrorTimeout);
+    clearTimeout(this._loadingTimeout);
     this._visiblePagesCache.clear();
   }
 
@@ -1382,15 +1407,16 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Realiza scroll automático si está habilitado
+   * Realiza scroll automático si está habilitado.
+   * Prioridad: Input > Global Config > false (desactivado por defecto)
    */
   private performAutoScroll(): void {
-    const autoScrollValue = this.autoScroll();
+    const autoScrollValue = this.autoScroll() ?? this.paginatorConfig?.autoScroll ?? false;
     if (!autoScrollValue) return;
 
     let element: HTMLElement | null = null;
     const scrollTargetValue = this.scrollTarget();
-    const scrollTarget = scrollTargetValue || this.paginatorConfig?.scrollTarget || 'body';
+    const scrollTarget = scrollTargetValue || 'body';
 
     if (typeof scrollTarget === 'string') {
       element = document.querySelector(scrollTarget);
@@ -1513,14 +1539,23 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Configura el estado de loading
+   * Configura el estado de loading.
+   * Respeta la configuración global: loadingDelay añade un retardo antes de mostrar el indicador.
    * @param {boolean} loading - Estado de loading
    */
   setLoading(loading: boolean): void {
-    this.isLoading.set(loading);
+    clearTimeout(this._loadingTimeout);
 
     if (loading) {
+      const delay = this.paginatorConfig?.loading?.loadingDelay ?? 0;
+      if (delay > 0) {
+        this._loadingTimeout = setTimeout(() => this.isLoading.set(true), delay);
+      } else {
+        this.isLoading.set(true);
+      }
       this.ariaLiveMessage.set(this._i18n().a11y.loading);
+    } else {
+      this.isLoading.set(false);
     }
   }
 

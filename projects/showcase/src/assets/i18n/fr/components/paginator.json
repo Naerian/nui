@@ -216,7 +216,6 @@
         "showPageJump": "Si le champ de saut de page est affiché.",
         "pageSizeOptions": "Options disponibles pour le sélecteur de taille de page.",
         "autoScroll": "Si un défilement automatique vers le haut est effectué lors du changement de page.",
-        "scrollTarget": "Sélecteur CSS ou HTMLElement vers lequel défiler au changement de page.",
         "navDisplay": "Comment les boutons de navigation sont affichés : <code>icon</code>, <code>text</code> ou <code>both</code>.",
         "navIcons": "Classes d'icônes personnalisées pour chaque bouton de navigation.",
         "keyboard": "Configuration des raccourcis clavier pour les contrôles du paginateur.",

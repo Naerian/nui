@@ -216,7 +216,6 @@
         "showPageJump": "Si se muestra el input de salto de página.",
         "pageSizeOptions": "Opciones disponibles para el selector de tamaño de página.",
         "autoScroll": "Si se hace scroll automático al inicio al cambiar de página.",
-        "scrollTarget": "Selector CSS o HTMLElement al que se hace scroll al cambiar de página.",
         "navDisplay": "Cómo se muestran los botones de navegación: <code>icon</code>, <code>text</code> o <code>both</code>.",
         "navIcons": "Clases de icono personalizadas para cada botón de navegación.",
         "keyboard": "Configuración de atajos de teclado para los controles del paginador.",
