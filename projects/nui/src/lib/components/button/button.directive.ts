@@ -15,11 +15,9 @@ import {
 import {
   ButtonType,
   ButtonWidth,
-  ButtonIconPosition,
   ButtonLoadingPosition,
   ButtonTypeEnum,
   ButtonWidthEnum,
-  ButtonIconPositionEnum,
   ButtonLoadingPositionEnum,
 } from './models/button.model';
 import {
@@ -63,12 +61,12 @@ export class ButtonDirective implements AfterViewInit, OnDestroy {
   readonly raised = input(false, { transform: booleanAttribute });
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly loading = input(false, { transform: booleanAttribute });
-  readonly iconPosition = input<ButtonIconPosition>();
   readonly loadingPosition = input<ButtonLoadingPosition>();
 
   // Inputs adicionales para contenido dinámico en directiva
   readonly label = input<string>();
-  readonly icon = input<string>();
+  readonly prefixIcon = input<string>();
+  readonly suffixIcon = input<string>();
 
   readonly onClick = output<Event>();
 
@@ -94,10 +92,6 @@ export class ButtonDirective implements AfterViewInit, OnDestroy {
     () => this.shape() ?? this.globalConfig?.shape ?? DEFAULT_SHAPE
   );
 
-  readonly effectiveIconPosition = computed(
-    () => this.iconPosition() ?? this.globalConfig?.iconPosition ?? ButtonIconPositionEnum.START
-  );
-
   readonly effectiveLoadingPosition = computed(
     () =>
       this.loadingPosition() ??
@@ -119,7 +113,8 @@ export class ButtonDirective implements AfterViewInit, OnDestroy {
   // ESTADO INTERNO Y DOM
   // ========================================================================
   private mutationObserver?: MutationObserver;
-  private iconElement?: HTMLElement;
+  private prefixIconElement?: HTMLElement;
+  private suffixIconElement?: HTMLElement;
   private spinnerElement?: HTMLElement;
   private labelTextNode?: Text;
 
@@ -148,10 +143,15 @@ export class ButtonDirective implements AfterViewInit, OnDestroy {
   });
 
   readonly isIconOnly = computed(
-    () => !!this.icon() && !this.label() && !this._hasExternalContent()
+    () =>
+      (!!this.prefixIcon() || !!this.suffixIcon()) &&
+      !this.label() &&
+      !this._hasExternalContent()
   );
 
-  readonly computedAriaLabel = computed(() => this.label() || this.icon() || 'button');
+  readonly computedAriaLabel = computed(
+    () => this.label() || this.prefixIcon() || this.suffixIcon() || 'button'
+  );
 
   constructor() {
     /**
@@ -188,8 +188,11 @@ export class ButtonDirective implements AfterViewInit, OnDestroy {
     // 2. Manejo de la Label (Input label)
     this.syncLabel(host);
 
-    // 3. Manejo del Icono
-    this.syncIcon(host);
+    // 3. Manejo del Icono prefijo
+    this.syncPrefixIcon(host);
+
+    // 4. Manejo del Icono sufijo
+    this.syncSuffixIcon(host);
   }
 
   private syncSpinner(host: HTMLElement): void {
@@ -229,25 +232,38 @@ export class ButtonDirective implements AfterViewInit, OnDestroy {
     }
   }
 
-  private syncIcon(host: HTMLElement): void {
-    if (!this.icon() || this.loading()) {
-      this.iconElement?.remove();
-      this.iconElement = undefined;
+  private syncPrefixIcon(host: HTMLElement): void {
+    if (!this.prefixIcon() || this.loading()) {
+      this.prefixIconElement?.remove();
+      this.prefixIconElement = undefined;
       return;
     }
 
-    if (!this.iconElement) {
-      this.iconElement = this.renderer.createElement('i');
-      this.renderer.setAttribute(this.iconElement, 'aria-hidden', 'true');
+    if (!this.prefixIconElement) {
+      this.prefixIconElement = this.renderer.createElement('i');
+      this.renderer.setAttribute(this.prefixIconElement, 'aria-hidden', 'true');
     }
 
-    this.iconElement!.className = `${this.icon()} nui-btn__icon`;
+    this.prefixIconElement!.className = `${this.prefixIcon()} nui-btn__icon nui-btn__icon--prefix`;
+    // Siempre al inicio, antes del label/content
+    this.renderer.insertBefore(host, this.prefixIconElement, host.firstChild);
+  }
 
-    if (this.effectiveIconPosition() === ButtonIconPositionEnum.START) {
-      this.renderer.insertBefore(host, this.iconElement, host.firstChild);
-    } else {
-      this.renderer.appendChild(host, this.iconElement);
+  private syncSuffixIcon(host: HTMLElement): void {
+    if (!this.suffixIcon() || this.loading()) {
+      this.suffixIconElement?.remove();
+      this.suffixIconElement = undefined;
+      return;
     }
+
+    if (!this.suffixIconElement) {
+      this.suffixIconElement = this.renderer.createElement('i');
+      this.renderer.setAttribute(this.suffixIconElement, 'aria-hidden', 'true');
+    }
+
+    this.suffixIconElement!.className = `${this.suffixIcon()} nui-btn__icon nui-btn__icon--suffix`;
+    // Siempre al final
+    this.renderer.appendChild(host, this.suffixIconElement);
   }
 
   private setupContentObserver(): void {
@@ -258,7 +274,10 @@ export class ButtonDirective implements AfterViewInit, OnDestroy {
       const hasExtra = nodes.some((node: Node) => {
         // 1. Ignorar nodos que son gestionados internamente por la directiva
         const isInternal =
-          node === this.iconElement || node === this.spinnerElement || node === this.labelTextNode;
+          node === this.prefixIconElement ||
+          node === this.suffixIconElement ||
+          node === this.spinnerElement ||
+          node === this.labelTextNode;
 
         if (isInternal) return false;
 

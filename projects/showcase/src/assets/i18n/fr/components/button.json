@@ -27,8 +27,8 @@
   },
   "icons": {
     "title": "Icônes",
-    "description": "Ajoutez des icônes aux boutons au début ou à la fin. Les boutons avec seulement une icône sont rendus comme des boutons icône circulaires.",
-    "note": "Position des icônes : <code>'start'</code> affiche l'icône avant le texte, <code>'end'</code> l'affiche après. Les boutons icône seule nécessitent l'attribut <code>aria-label</code> pour l'accessibilité."
+    "description": "Ajoutez des icônes aux boutons avec prefixIcon (avant le contenu) ou suffixIcon (après). Les deux peuvent être combinés pour des résultats comme ← Précédent / Suivant →.",
+    "note": "Les boutons icône seule (seulement <code>prefixIcon</code> ou <code>suffixIcon</code>, sans texte) sont rendus comme boutons icône et nécessitent <code>aria-label</code> ou <code>title</code> pour l'accessibilité."
   },
   "loading": {
     "title": "État de chargement",
@@ -74,11 +74,11 @@
         "size": {
           "description": "Taille du bouton"
         },
-        "icon": {
-          "description": "Nom de classe Remix Icon"
+        "prefixIcon": {
+          "description": "Nom de classe Remix Icon affiché avant le contenu"
         },
-        "iconPosition": {
-          "description": "Position de l'icône relative au texte"
+        "suffixIcon": {
+          "description": "Nom de classe Remix Icon affiché après le contenu"
         },
         "loading": {
           "description": "Affiche l'indicateur de chargement"
@@ -148,12 +148,6 @@
         },
         "ButtonTypeEnum": {
           "description": "Enum pour les types natifs de bouton"
-        },
-        "ButtonIconPosition": {
-          "description": "Options de position d'icône"
-        },
-        "ButtonIconPositionEnum": {
-          "description": "Enum pour la position d'icône"
         },
         "ButtonLoadingPosition": {
           "description": "Options de position de l'indicateur de chargement"

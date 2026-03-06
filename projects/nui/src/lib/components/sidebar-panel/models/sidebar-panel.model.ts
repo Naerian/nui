@@ -1,7 +1,7 @@
 ﻿import { TemplateRef, Type, InjectionToken } from '@angular/core';
 import { NUIColor, NUISize, NUIVariant } from '../../../configs/common/types';
 import { Observable } from 'rxjs';
-import { ButtonIconPosition, ButtonLoadingPosition, ButtonWidth } from '../../button';
+import { ButtonLoadingPosition, ButtonWidth } from '../../button';
 
 /**
  * Token de inyección para la configuración global del sidebar-panel
@@ -530,16 +530,16 @@ export interface SidebarPanelAction {
   label: string;
 
   /**
-   * Icono opcional (clase de Remix Icons)
-   * @example 'ri-save-line', 'ri-close-line'
+   * Icono opcional antes del texto (clase de Remix Icons)
+   * @example 'ri-save-line', 'ri-check-line'
    */
-  icon?: string;
+  prefixIcon?: string;
 
   /**
-   * Posición del icono en el botón
-   * @default 'start'
+   * Icono opcional después del texto (clase de Remix Icons)
+   * @example 'ri-arrow-right-line'
    */
-  iconPosition?: ButtonIconPosition;
+  suffixIcon?: string;
 
   /**
    * Tipo de botón que determina el estilo visual
@@ -605,16 +605,16 @@ export interface SidebarPanelCustomButton {
   text: string;
 
   /**
-   * Icono opcional (clase de Remix Icons)
-   * @example 'ri-save-line', 'ri-close-line'
+   * Icono opcional antes del texto (clase de Remix Icons)
+   * @example 'ri-save-line', 'ri-check-line'
    */
-  icon?: string;
+  prefixIcon?: string;
 
   /**
-   * Posición del icono en el botón
-   * @default 'start'
+   * Icono opcional después del texto (clase de Remix Icons)
+   * @example 'ri-arrow-right-line'
    */
-  iconPosition?: ButtonIconPosition;
+  suffixIcon?: string;
 
   /**
    * Tipo de botón que determina el estilo visual

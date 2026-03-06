@@ -27,8 +27,8 @@
   },
   "icons": {
     "title": "Iconos",
-    "description": "Agrega iconos a los botones al inicio o al final. Los botones con solo un icono se renderizan como botones circulares de icono.",
-    "note": "Posición del icono: <code>'start'</code> muestra el icono antes del texto, <code>'end'</code> lo muestra después. Los botones de solo icono requieren el atributo <code>aria-label</code> para accesibilidad."
+    "description": "Añade iconos a los botones usando prefixIcon (antes del contenido) o suffixIcon (después). Puedes combinar ambos para patrones como ← Anterior / Siguiente →.",
+    "note": "Los botones de solo icono (solo <code>prefixIcon</code> o <code>suffixIcon</code>, sin texto) se renderizan como botones icono y requieren <code>aria-label</code> o <code>title</code> para accesibilidad."
   },
   "loading": {
     "title": "Estado de carga",
@@ -74,11 +74,11 @@
         "size": {
           "description": "Tamaño del botón"
         },
-        "icon": {
-          "description": "Nombre de clase de Remix Icon"
+        "prefixIcon": {
+          "description": "Clase de Remix Icon mostrada antes del contenido"
         },
-        "iconPosition": {
-          "description": "Posición del icono relativa al texto"
+        "suffixIcon": {
+          "description": "Clase de Remix Icon mostrada después del contenido"
         },
         "loading": {
           "description": "Muestra el spinner de carga"
@@ -148,12 +148,6 @@
         },
         "ButtonTypeEnum": {
           "description": "Enum para tipos de botón nativos"
-        },
-        "ButtonIconPosition": {
-          "description": "Opciones de posición del icono"
-        },
-        "ButtonIconPositionEnum": {
-          "description": "Enum para la posición del icono"
         },
         "ButtonLoadingPosition": {
           "description": "Opciones de posición del spinner de carga"

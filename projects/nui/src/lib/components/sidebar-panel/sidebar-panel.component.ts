@@ -115,7 +115,8 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.sidebarPanelConfig.customButtons && this.sidebarPanelConfig.customButtons.length > 0) {
       return this.sidebarPanelConfig.customButtons.map(btn => ({
         label: btn.text,
-        icon: btn.icon,
+        prefixIcon: btn.prefixIcon,
+        suffixIcon: btn.suffixIcon,
         color: btn.color,
         variant: btn.variant,
         size: btn.size,
@@ -124,7 +125,6 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
         loading: btn.loading,
         loadingPosition: btn.loadingPosition,
         width: btn.width,
-        iconPosition: btn.iconPosition,
         class: btn.class,
       }));
     }

@@ -612,7 +612,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         },
         {
           text: 'Guardar',
-          icon: 'ri-save-line',
+          prefixIcon: 'ri-save-line',
           color: 'primary',
           variant: 'solid',
           callback: panelRef => {
@@ -640,7 +640,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       customButtons: [
         {
           text: 'Eliminar',
-          icon: 'ri-delete-bin-line',
+          prefixIcon: 'ri-delete-bin-line',
           color: 'danger',
           variant: 'ghost',
           callback: async panelRef => {
@@ -653,7 +653,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         },
         {
           text: 'Editar',
-          icon: 'ri-edit-line',
+          prefixIcon: 'ri-edit-line',
           color: 'info',
           variant: 'outline',
           callback: panelRef => {
@@ -662,7 +662,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         },
         {
           text: 'Compartir',
-          icon: 'ri-share-line',
+          prefixIcon: 'ri-share-line',
           color: 'accent',
           variant: 'solid',
           callback: panelRef => {
@@ -759,7 +759,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         },
         {
           text: 'Guardar Cambios',
-          icon: 'ri-save-line',
+          prefixIcon: 'ri-save-line',
           color: 'primary',
           variant: 'solid',
           disabled: !hasChanges,
@@ -805,7 +805,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       customButtons: [
         {
           text: 'Restablecer',
-          icon: 'ri-restart-line',
+          prefixIcon: 'ri-restart-line',
           color: 'secondary',
           variant: 'ghost',
           callback: panelRef => {
@@ -817,7 +817,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         },
         {
           text: 'Vista Previa',
-          icon: 'ri-eye-line',
+          prefixIcon: 'ri-eye-line',
           color: 'info',
           variant: 'outline',
           callback: panelRef => {
@@ -826,7 +826,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         },
         {
           text: 'Guardar Borrador',
-          icon: 'ri-draft-line',
+          prefixIcon: 'ri-draft-line',
           color: 'secondary',
           variant: 'solid',
           callback: async panelRef => {
@@ -837,7 +837,7 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         },
         {
           text: 'Publicar',
-          icon: 'ri-send-plane-fill',
+          prefixIcon: 'ri-send-plane-fill',
           color: 'success',
           variant: 'solid',
           callback: async panelRef => {

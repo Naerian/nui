@@ -77,15 +77,15 @@
         </p>
 
         <div class="demo-controls">
-          <nui-button (click)="toggleDarkMode()" [icon]="'ri-contrast-2-line'">
+          <nui-button (click)="toggleDarkMode()" [prefixIcon]="'ri-contrast-2-line'">
             {{ 'pages.theming.darkMode.demo.toggle' | translate }}
           </nui-button>
 
-          <nui-button (click)="setDarkMode(true)" [icon]="'ri-moon-line'">
+          <nui-button (click)="setDarkMode(true)" [prefixIcon]="'ri-moon-line'">
             {{ 'pages.theming.darkMode.demo.enableDark' | translate }}
           </nui-button>
 
-          <nui-button (click)="setDarkMode(false)" [icon]="'ri-sun-line'">
+          <nui-button (click)="setDarkMode(false)" [prefixIcon]="'ri-sun-line'">
             {{ 'pages.theming.darkMode.demo.enableLight' | translate }}
           </nui-button>
         </div>

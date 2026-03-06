@@ -13,8 +13,8 @@
     <span class="nui-btn__spinner nui-btn__spinner--start" aria-hidden="true"></span>
   }
 
-  @if (icon() && effectiveIconPosition() === ButtonIconPositionEnum.START && !loading()) {
-    <i [class]="icon()" class="nui-btn__icon nui-btn__icon--start" aria-hidden="true"></i>
+  @if (prefixIcon() && !loading()) {
+    <i [class]="prefixIcon()" class="nui-btn__icon nui-btn__icon--prefix" aria-hidden="true"></i>
   }
 
   <span
@@ -32,9 +32,11 @@
   @if (loading() && effectiveLoadingPosition() === ButtonLoadingPositionEnum.CENTER) {
     <span class="nui-btn__spinner nui-btn__spinner--center" aria-hidden="true"></span>
   }
-  @if (icon() && effectiveIconPosition() === ButtonIconPositionEnum.END && !loading()) {
-    <i [class]="icon()" class="nui-btn__icon nui-btn__icon--end" aria-hidden="true"></i>
+
+  @if (suffixIcon() && !loading()) {
+    <i [class]="suffixIcon()" class="nui-btn__icon nui-btn__icon--suffix" aria-hidden="true"></i>
   }
+
   @if (loading() && effectiveLoadingPosition() === ButtonLoadingPositionEnum.END) {
     <span class="nui-btn__spinner nui-btn__spinner--end" aria-hidden="true"></span>
   }

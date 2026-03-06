@@ -23,7 +23,7 @@
         <div class="nui-sidebar-panel-header-actions">
           @if (sidebarPanelConfig.minimizable) {
             <nui-button
-              [icon]="'ri-subtract-line'"
+              [prefixIcon]="'ri-subtract-line'"
               [color]="'secondary'"
               [variant]="'ghost'"
               (onClick)="minimize()"
@@ -34,7 +34,7 @@
           }
           @if (showCloseButton) {
             <nui-button
-              [icon]="'ri-close-large-line'"
+              [prefixIcon]="'ri-close-large-line'"
               [color]="'secondary'"
               [variant]="'ghost'"
               (click)="requestClose()"
@@ -60,7 +60,8 @@
       <div class="nui-sidebar-panel-footer-actions">
         @for (action of footerActions; track $index) {
           <nui-button
-            [icon]="action.icon"
+            [prefixIcon]="action.prefixIcon"
+            [suffixIcon]="action.suffixIcon"
             [color]="action.color ?? 'secondary'"
             [variant]="action.variant ?? 'solid'"
             [size]="action.size ?? 'md'"
@@ -68,7 +69,6 @@
             [loading]="action.loading ?? false"
             [loadingPosition]="action.loadingPosition ?? 'center'"
             [width]="action.width ?? 'auto'"
-            [iconPosition]="action.iconPosition ?? 'start'"
             [class]="action.class ?? ''"
             (onClick)="action.handler()"
           >
@@ -88,7 +88,8 @@
       <div class="nui-sidebar-panel-footer-actions">
         @for (action of footerActions; track $index) {
           <nui-button
-            [icon]="action.icon"
+            [prefixIcon]="action.prefixIcon"
+            [suffixIcon]="action.suffixIcon"
             [color]="action.color ?? 'secondary'"
             [variant]="action.variant ?? 'solid'"
             [size]="action.size ?? 'md'"
@@ -96,7 +97,6 @@
             [loading]="action.loading ?? false"
             [loadingPosition]="action.loadingPosition ?? 'start'"
             [width]="action.width ?? 'auto'"
-            [iconPosition]="action.iconPosition ?? 'start'"
             [class]="action.class ?? ''"
             (onClick)="action.handler()"
           >

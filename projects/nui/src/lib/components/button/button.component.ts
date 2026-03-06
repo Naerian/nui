@@ -14,11 +14,9 @@ import {
   isDevMode,
 } from '@angular/core';
 import {
-  ButtonIconPosition,
   ButtonType,
   ButtonWidth,
   ButtonLoadingPosition,
-  ButtonIconPositionEnum,
   ButtonLoadingPositionEnum,
   ButtonTypeEnum,
   ButtonWidthEnum,
@@ -56,7 +54,6 @@ export class ButtonComponent implements AfterContentInit {
   private elementRef = inject(ElementRef);
   private readonly globalConfig = injectButtonConfig();
 
-  protected ButtonIconPositionEnum = ButtonIconPositionEnum;
   protected ButtonLoadingPositionEnum = ButtonLoadingPositionEnum;
   protected ButtonTypeEnum = ButtonTypeEnum;
   protected ButtonWidthEnum = ButtonWidthEnum;
@@ -83,11 +80,11 @@ export class ButtonComponent implements AfterContentInit {
   /** Texto del botón (alternativa a ng-content). */
   readonly label = input<string>();
 
-  /** Icono (clase CSS, ej: 'ri-home-line'). */
-  readonly icon = input<string>();
+  /** Icono prefijo, antes del contenido (clase CSS, ej: 'ri-home-line'). */
+  readonly prefixIcon = input<string>();
 
-  /** Posición del icono ('start' | 'end'). */
-  readonly iconPosition = input<ButtonIconPosition>('start');
+  /** Icono sufijo, después del contenido (clase CSS, ej: 'ri-arrow-right-line'). */
+  readonly suffixIcon = input<string>();
 
   /** Estado de carga. */
   readonly loading = input(false, { transform: booleanAttribute });
@@ -145,10 +142,6 @@ export class ButtonComponent implements AfterContentInit {
     () => this.shape() ?? this.globalConfig?.shape ?? DEFAULT_SHAPE
   );
 
-  readonly effectiveIconPosition = computed(
-    () => this.iconPosition() ?? this.globalConfig?.iconPosition ?? ButtonIconPositionEnum.START
-  );
-
   readonly effectiveLoadingPosition = computed(
     () =>
       this.loadingPosition() ??
@@ -193,7 +186,9 @@ export class ButtonComponent implements AfterContentInit {
   readonly hasVisibleContent = computed(() => this._hasProjectedContent() || !!this.label());
 
   /** Determina si el botón es solo un icono (sin contenido visible) */
-  readonly isIconOnly = computed(() => !!this.icon() && !this.hasVisibleContent());
+  readonly isIconOnly = computed(
+    () => (!!this.prefixIcon() || !!this.suffixIcon()) && !this.hasVisibleContent()
+  );
 
   /**
    * Nombre accesible resuelto para el `<button>` nativo.
@@ -203,6 +198,8 @@ export class ButtonComponent implements AfterContentInit {
     if (this.ariaLabel()) return this.ariaLabel();
     // Fallback: para icon-only usamos title como nombre accesible
     if (this.isIconOnly() && this.title()) return this.title();
+    // Si hay suffixIcon pero no hay ariaLabel ni title en modo icon-only, el prefixIcon actúa como fallback
+    if (this.isIconOnly() && this.prefixIcon()) return this.prefixIcon();
     return null;
   });
 

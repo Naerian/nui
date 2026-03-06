@@ -21,7 +21,6 @@
 
             @if (section.note; as note) {
               <div class="section-note" [ngClass]="note.type">
-                <i [class]="getSectionNoteIcon(note)"></i>
                 <p [innerHTML]="note.content | translate"></p>
               </div>
             }
@@ -306,8 +305,8 @@
 
     <!-- Actions -->
     <div style="display: flex; gap: 0.75rem">
-      <nui-button (onClick)="onRefresh()" [icon]="'ri-refresh-line'">Refresh</nui-button>
-      <nui-button (onClick)="onLogout()" [color]="'secondary'" [icon]="'ri-logout-box-line'">
+      <nui-button (onClick)="onRefresh()" [prefixIcon]="'ri-refresh-line'">Refresh</nui-button>
+      <nui-button (onClick)="onLogout()" [color]="'secondary'" [prefixIcon]="'ri-logout-box-line'">
         Logout
       </nui-button>
     </div>
@@ -337,13 +336,13 @@
 
     <!-- Action buttons -->
     <div style="display: flex; gap: 0.5rem; justify-content: flex-end">
-      <nui-button [color]="'secondary'" [variant]="'ghost'" [icon]="'ri-close-line'">
+      <nui-button [color]="'secondary'" [variant]="'ghost'" [prefixIcon]="'ri-close-line'">
         Cancelar
       </nui-button>
-      <nui-button [color]="'info'" [variant]="'outline'" [icon]="'ri-file-copy-line'">
+      <nui-button [color]="'info'" [variant]="'outline'" [prefixIcon]="'ri-file-copy-line'">
         Duplicar
       </nui-button>
-      <nui-button [color]="'success'" [variant]="'solid'" [icon]="'ri-check-line'">
+      <nui-button [color]="'success'" [variant]="'solid'" [prefixIcon]="'ri-check-line'">
         Confirmar
       </nui-button>
     </div>
@@ -363,7 +362,7 @@
     </nui-button>
     <nui-button
       [color]="'primary'"
-      [icon]="'ri-refresh-line'"
+      [prefixIcon]="'ri-refresh-line'"
       [disabled]="isProcessing()"
       [loading]="isProcessing()"
       (click)="processLoadingAction()"

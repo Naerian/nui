@@ -27,8 +27,8 @@
   },
   "icons": {
     "title": "Icons",
-    "description": "Füge am Anfang oder Ende Icons zu Schaltflächen hinzu. Schaltflächen mit nur einem Icon werden als kreisförmige Icon-Schaltflächen gerendert.",
-    "note": "Icon-Position: <code>'start'</code> zeigt das Icon vor dem Text, <code>'end'</code> danach. Nur-Icon-Schaltflächen benötigen das Attribut <code>aria-label</code> für die Barrierefreiheit."
+    "description": "Füge Schaltflächen Icons hinzu mit prefixIcon (vor dem Inhalt) oder suffixIcon (danach). Beide können kombiniert werden für Muster wie ← Zurück / Weiter →.",
+    "note": "Nur-Icon-Schaltflächen (nur <code>prefixIcon</code> oder <code>suffixIcon</code>, kein Text) werden als Icon-Schaltflächen gerendert und benötigen <code>aria-label</code> oder <code>title</code> für Barrierefreiheit."
   },
   "loading": {
     "title": "Ladezustand",
@@ -74,11 +74,11 @@
         "size": {
           "description": "Schaltflächengröße"
         },
-        "icon": {
-          "description": "Remix Icon Klassenname"
+        "prefixIcon": {
+          "description": "Remix Icon Klassenname, der vor dem Inhalt angezeigt wird"
         },
-        "iconPosition": {
-          "description": "Icon-Position relativ zum Text"
+        "suffixIcon": {
+          "description": "Remix Icon Klassenname, der nach dem Inhalt angezeigt wird"
         },
         "loading": {
           "description": "Zeigt den Lade-Spinner"
@@ -148,12 +148,6 @@
         },
         "ButtonTypeEnum": {
           "description": "Enum für native Schaltflächentypen"
-        },
-        "ButtonIconPosition": {
-          "description": "Icon-Positionsoptionen"
-        },
-        "ButtonIconPositionEnum": {
-          "description": "Enum für Icon-Position"
         },
         "ButtonLoadingPosition": {
           "description": "Lade-Spinner-Positionsoptionen"

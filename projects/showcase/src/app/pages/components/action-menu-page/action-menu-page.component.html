@@ -15,12 +15,13 @@
               [tabId]="tabsComp.activeTabId()"
             ></app-section-title>
 
-            <p class="section-description" [innerHTML]="section.description | translate"></p>
+            @if (section.description) {
+              <p class="section-description" [innerHTML]="section.description | translate"></p>
+            }
 
-            @if (section.note; as note) {
-              <div class="section-note" [ngClass]="note.type">
-                <i [class]="getSectionNoteIcon(note)"></i>
-                <p [innerHTML]="note.content | translate"></p>
+            @if (section.note) {
+              <div class="section-note" [ngClass]="section.note.type">
+                <p [innerHTML]="section.note.content | translate"></p>
               </div>
             }
 
@@ -30,12 +31,12 @@
                   <nui-action-menu
                     type="inline"
                     variant="ghost"
-                    icon="ri-more-line"
+                    prefixIcon="ri-more-line"
                     [items]="basicMenuItems"
                     (onItemAction)="handleAction($event)"
                   ></nui-action-menu>
                   <nui-action-menu
-                    icon="ri-more-line"
+                    prefixIcon="ri-more-line"
                     [items]="basicMenuItems"
                     (onItemAction)="handleAction($event)"
                   ></nui-action-menu>
@@ -45,7 +46,7 @@
               @case ('separators') {
                 <div class="example-preview">
                   <nui-action-menu
-                    icon="ri-more-line"
+                    prefixIcon="ri-more-line"
                     [items]="menuWithSeparators"
                     (onItemAction)="handleAction($event)"
                   ></nui-action-menu>
@@ -55,7 +56,7 @@
               @case ('submenu') {
                 <div class="example-preview">
                   <nui-action-menu
-                    icon="ri-more-2-line"
+                    prefixIcon="ri-more-2-line"
                     [items]="menuWithSubmenu"
                     (onItemAction)="handleAction($event)"
                   ></nui-action-menu>
@@ -65,14 +66,14 @@
               @case ('variants') {
                 <div class="example-preview">
                   <nui-action-menu
-                    icon="ri-more-line"
+                    prefixIcon="ri-more-line"
                     variant="ghost"
                     [items]="basicMenuItems"
                     (onItemAction)="handleAction($event)"
                   ></nui-action-menu>
 
                   <nui-action-menu
-                    icon="ri-more-line"
+                    prefixIcon="ri-more-line"
                     variant="solid"
                     color="primary"
                     [items]="basicMenuItems"
@@ -80,7 +81,7 @@
                   ></nui-action-menu>
 
                   <nui-action-menu
-                    icon="ri-more-line"
+                    prefixIcon="ri-more-line"
                     variant="outline"
                     color="accent"
                     [items]="basicMenuItems"
@@ -88,7 +89,7 @@
                   ></nui-action-menu>
 
                   <nui-action-menu
-                    icon="ri-more-line"
+                    prefixIcon="ri-more-line"
                     variant="solid"
                     color="danger"
                     [items]="basicMenuItems"
@@ -96,7 +97,7 @@
                   ></nui-action-menu>
 
                   <nui-action-menu
-                    icon="ri-more-line"
+                    prefixIcon="ri-more-line"
                     variant="solid"
                     color="success"
                     [items]="basicMenuItems"
@@ -109,31 +110,31 @@
                 <div class="example-preview">
                   <nui-action-menu
                     size="xs"
-                    icon="ri-more-line"
+                    prefixIcon="ri-more-line"
                     [items]="basicMenuItems"
                     (onItemAction)="handleAction($event)"
                   ></nui-action-menu>
                   <nui-action-menu
                     size="sm"
-                    icon="ri-more-line"
+                    prefixIcon="ri-more-line"
                     [items]="basicMenuItems"
                     (onItemAction)="handleAction($event)"
                   ></nui-action-menu>
                   <nui-action-menu
                     size="md"
-                    icon="ri-more-line"
+                    prefixIcon="ri-more-line"
                     [items]="basicMenuItems"
                     (onItemAction)="handleAction($event)"
                   ></nui-action-menu>
                   <nui-action-menu
                     size="lg"
-                    icon="ri-more-line"
+                    prefixIcon="ri-more-line"
                     [items]="basicMenuItems"
                     (onItemAction)="handleAction($event)"
                   ></nui-action-menu>
                   <nui-action-menu
                     size="xl"
-                    icon="ri-more-line"
+                    prefixIcon="ri-more-line"
                     [items]="basicMenuItems"
                     (onItemAction)="handleAction($event)"
                   ></nui-action-menu>
@@ -144,7 +145,7 @@
                 <div class="example-preview flex-column align-items-center">
                   <nui-action-menu
                     label="Actions"
-                    icon="ri-more-2-line"
+                    prefixIcon="ri-more-2-line"
                     color="primary"
                     variant="solid"
                     [items]="basicMenuItems"
@@ -170,14 +171,14 @@
               @case ('disabled') {
                 <div class="example-preview">
                   <nui-action-menu
-                    icon="ri-more-line"
+                    prefixIcon="ri-more-line"
                     [items]="menuWithDisabled"
                     (onItemAction)="handleAction($event)"
                   ></nui-action-menu>
 
                   <nui-action-menu
                     [disabled]="true"
-                    icon="ri-more-line"
+                    prefixIcon="ri-more-line"
                     [items]="basicMenuItems"
                   ></nui-action-menu>
                 </div>
@@ -187,7 +188,7 @@
                 <div class="example-preview">
                   <nui-action-menu
                     type="inline"
-                    icon="ri-user-line"
+                    prefixIcon="ri-user-line"
                     label="Users"
                     [items]="menuWithSubtitle"
                     (onItemAction)="handleAction($event)"
@@ -200,7 +201,7 @@
                   <div class="example-item d-flex flex-column align-items-center gap-3">
                     <p class="mb-0">Selection Mode (with selected items):</p>
                     <nui-action-menu
-                      icon="ri-global-line"
+                      prefixIcon="ri-global-line"
                       label="Language"
                       [items]="menuWithSelected"
                       (onSelectionChange)="handleSelectionChange($event)"
@@ -209,7 +210,7 @@
                     <div class="example-item d-flex flex-column align-items-center gap-3">
                       <p class="mb-0">Action Mode (no selection):</p>
                       <nui-action-menu
-                        icon="ri-more-2-line"
+                        prefixIcon="ri-more-2-line"
                         label="Options"
                         [items]="menuActionOnly"
                         (onItemAction)="handleAction($event)"
@@ -222,7 +223,7 @@
               @case ('icons') {
                 <div class="example-preview">
                   <nui-action-menu
-                    icon="ri-more-line"
+                    prefixIcon="ri-more-line"
                     [items]="coloredMenuItems"
                     (onItemAction)="handleAction($event)"
                   ></nui-action-menu>
@@ -232,7 +233,7 @@
               @case ('badge') {
                 <div class="example-preview">
                   <nui-action-menu
-                    icon="ri-bell-line"
+                    prefixIcon="ri-bell-line"
                     [items]="menuWithBadges"
                     (onItemAction)="handleAction($event)"
                   ></nui-action-menu>
@@ -242,7 +243,7 @@
               @case ('template') {
                 <div class="example-preview">
                   <nui-action-menu
-                    icon="ri-user-line"
+                    prefixIcon="ri-user-line"
                     label="Mi Cuenta"
                     variant="solid"
                     color="primary"

@@ -3,8 +3,6 @@ import { NUI_CONFIG } from '../nui.token'; // Ajustar ruta según tu árbol
 import { deepMerge } from '../../utils/deep-merge';
 import { NUIColor, NUIShape, NUISize, NUIVariant } from '../common';
 import {
-  ButtonIconPosition,
-  ButtonIconPositionEnum,
   ButtonLoadingPosition,
   ButtonLoadingPositionEnum,
   ButtonType,
@@ -18,7 +16,6 @@ import {
  */
 export interface ButtonGlobalConfig {
   type?: ButtonType;
-  iconPosition?: ButtonIconPosition;
   loadingPosition?: ButtonLoadingPosition;
   width?: ButtonWidth;
   color?: NUIColor;
@@ -33,7 +30,6 @@ export interface ButtonGlobalConfig {
  */
 export const DEFAULT_BUTTON_CONFIG: ButtonGlobalConfig = {
   type: ButtonTypeEnum.BUTTON,
-  iconPosition: ButtonIconPositionEnum.START,
   loadingPosition: ButtonLoadingPositionEnum.START,
   width: ButtonWidthEnum.AUTO,
   color: 'primary',

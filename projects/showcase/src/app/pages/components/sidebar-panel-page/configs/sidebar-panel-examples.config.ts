@@ -697,7 +697,7 @@ this.sidebarPanelService.closeAll();`,
     },
     {
       text: 'Save',
-      icon: 'ri-save-line',
+      prefixIcon: 'ri-save-line',
       color: 'primary',
       variant: 'solid',
       callback: (panelRef) => {
@@ -716,7 +716,7 @@ this.sidebarPanelService.closeAll();`,
   customButtons: [
     {
       text: 'Delete',
-      icon: 'ri-delete-bin-line',
+      prefixIcon: 'ri-delete-bin-line',
       color: 'danger',
       variant: 'ghost',
       callback: (panelRef) => {
@@ -727,14 +727,14 @@ this.sidebarPanelService.closeAll();`,
     },
     {
       text: 'Edit',
-      icon: 'ri-edit-line',
+      prefixIcon: 'ri-edit-line',
       color: 'info',
       variant: 'outline',
       callback: () => alert('Edit mode activated')
     },
     {
       text: 'Share',
-      icon: 'ri-share-line',
+      prefixIcon: 'ri-share-line',
       color: 'accent',
       variant: 'solid',
       callback: (panelRef) => {
@@ -766,7 +766,7 @@ this.sidebarPanelService.closeAll();`,
     </nui-button>
     <nui-button
       [color]="'primary'"
-      [icon]="'ri-refresh-line'"
+      [prefixIcon]="'ri-refresh-line'"
       [disabled]="isProcessing()"
       [loading]="isProcessing()"
       (click)="processAction()">
@@ -853,7 +853,7 @@ export class MyComponent {
       },
       {
         text: 'Save Changes',
-        icon: 'ri-save-line',
+        prefixIcon: 'ri-save-line',
         color: 'primary',
         variant: 'solid',
         disabled: !hasChanges,
@@ -884,7 +884,7 @@ openPanel() {
   <div style="padding: 1rem; background: var(--nui-surface-variant);">
     <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
       <nui-button [color]="'secondary'" [variant]="'ghost'">Cancel</nui-button>
-      <nui-button [color]="'success'" [icon]="'ri-check-line'">Confirm</nui-button>
+      <nui-button [color]="'success'" [prefixIcon]="'ri-check-line'">Confirm</nui-button>
     </div>
   </div>
 </ng-template>`,
@@ -899,7 +899,7 @@ openPanel() {
   customButtons: [
     {
       text: 'Reset Form',
-      icon: 'ri-restart-line',
+      prefixIcon: 'ri-restart-line',
       color: 'secondary',
       variant: 'ghost',
       callback: (panelRef) => {
@@ -910,14 +910,14 @@ openPanel() {
     },
     {
       text: 'Preview',
-      icon: 'ri-eye-line',
+      prefixIcon: 'ri-eye-line',
       color: 'info',
       variant: 'outline',
       callback: () => alert('Opening preview...')
     },
     {
       text: 'Save Draft',
-      icon: 'ri-draft-line',
+      prefixIcon: 'ri-draft-line',
       color: 'secondary',
       variant: 'solid',
       callback: async (panelRef) => {
@@ -927,7 +927,7 @@ openPanel() {
     },
     {
       text: 'Publish',
-      icon: 'ri-send-plane-fill',
+      prefixIcon: 'ri-send-plane-fill',
       color: 'success',
       variant: 'solid',
       callback: async (panelRef) => {

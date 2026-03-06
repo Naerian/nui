@@ -19,7 +19,7 @@ export const ACTION_MENU_EXAMPLES_SECTIONS: ComponentSection[] = [
         code: `<nui-action-menu
     type="inline"
     variant="ghost"
-    icon="ri-more-line"
+    prefixIcon="ri-more-line"
     [items]="basicMenuItems"
     (onItemAction)="handleAction($event)"
   ></nui-action-menu>`,
@@ -30,7 +30,7 @@ export const ACTION_MENU_EXAMPLES_SECTIONS: ComponentSection[] = [
         code: `<nui-action-menu
     type="dropdown"
     variant="ghost"
-    icon="ri-more-line"
+    prefixIcon="ri-more-line"
     [items]="basicMenuItems"
     (onItemAction)="handleAction($event)"
   ></nui-action-menu>`,
@@ -144,7 +144,7 @@ export const ACTION_MENU_EXAMPLES_SECTIONS: ComponentSection[] = [
       {
         title: 'Ghost',
         code: `<nui-action-menu 
-  icon="ri-more-line"
+  prefixIcon="ri-more-line"
   variant="ghost"
   [items]="menuItems">
 </nui-action-menu>`,
@@ -153,7 +153,7 @@ export const ACTION_MENU_EXAMPLES_SECTIONS: ComponentSection[] = [
       {
         title: 'Outline',
         code: `<nui-action-menu 
-  icon="ri-more-line"
+  prefixIcon="ri-more-line"
   variant="outline"
   [items]="menuItems">
 </nui-action-menu>`,
@@ -162,7 +162,7 @@ export const ACTION_MENU_EXAMPLES_SECTIONS: ComponentSection[] = [
       {
         title: 'Solid',
         code: `<nui-action-menu 
-  icon="ri-more-line"
+  prefixIcon="ri-more-line"
   variant="solid"
   [items]="menuItems">
 </nui-action-menu>`,
@@ -182,11 +182,11 @@ export const ACTION_MENU_EXAMPLES_SECTIONS: ComponentSection[] = [
     examples: [
       {
         title: 'codeExamples.html',
-        code: `<nui-action-menu size="xs" icon="ri-more-line" [items]="menuItems"></nui-action-menu>
-<nui-action-menu size="sm" icon="ri-more-line" [items]="menuItems"></nui-action-menu>
-<nui-action-menu size="md" icon="ri-more-line" [items]="menuItems"></nui-action-menu>
-<nui-action-menu size="lg" icon="ri-more-line" [items]="menuItems"></nui-action-menu>
-<nui-action-menu size="xl" icon="ri-more-line" [items]="menuItems"></nui-action-menu>`,
+        code: `<nui-action-menu size="xs" prefixIcon="ri-more-line" [items]="menuItems"></nui-action-menu>
+<nui-action-menu size="sm" prefixIcon="ri-more-line" [items]="menuItems"></nui-action-menu>
+<nui-action-menu size="md" prefixIcon="ri-more-line" [items]="menuItems"></nui-action-menu>
+<nui-action-menu size="lg" prefixIcon="ri-more-line" [items]="menuItems"></nui-action-menu>
+<nui-action-menu size="xl" prefixIcon="ri-more-line" [items]="menuItems"></nui-action-menu>`,
         language: 'html',
       },
     ],
@@ -205,7 +205,7 @@ export const ACTION_MENU_EXAMPLES_SECTIONS: ComponentSection[] = [
         title: 'components.actionMenu.label.codeTitle1',
         code: `<nui-action-menu 
   label="Actions"
-  icon="ri-more-2-line"
+  prefixIcon="ri-more-2-line"
   color="primary"
   variant="solid"
   [items]="menuItems">
@@ -256,7 +256,7 @@ export const ACTION_MENU_EXAMPLES_SECTIONS: ComponentSection[] = [
       {
         title: 'codeExamples.html',
         code: `<nui-action-menu 
-  icon="ri-more-line" 
+  prefixIcon="ri-more-line" 
   [items]="menuItems">
 </nui-action-menu>`,
         language: 'html',
@@ -362,7 +362,7 @@ export const ACTION_MENU_EXAMPLES_SECTIONS: ComponentSection[] = [
       {
         title: 'codeExamples.html',
         code: `<nui-action-menu
-  icon="ri-bell-line"
+  prefixIcon="ri-bell-line"
   [items]="menuWithBadges"
   (onItemAction)="handleAction($event)">
 </nui-action-menu>`,
@@ -410,7 +410,7 @@ export const ACTION_MENU_EXAMPLES_SECTIONS: ComponentSection[] = [
       {
         title: 'codeExamples.html',
         code: `<nui-action-menu 
-  icon="ri-user-line" 
+  prefixIcon="ri-user-line" 
   label="Mi Cuenta"
   variant="solid"
   color="primary"

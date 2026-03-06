@@ -13,19 +13,6 @@ export enum ButtonTypeEnum {
 }
 
 /**
- * Posición del icono en el botón.
- * - 'start': Icono a la izquierda del texto (por defecto)
- * - 'end': Icono a la derecha del texto
- * Solo aplica cuando hay tanto icono como contenido de texto.
- * @default 'start'
- */
-export type ButtonIconPosition = 'start' | 'end';
-export enum ButtonIconPositionEnum {
-  START = 'start',
-  END = 'end',
-}
-
-/**
  * Posición del spinner de carga en el botón.
  *
  * - **'start'**: Spinner a la izquierda del texto

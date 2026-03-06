@@ -22,9 +22,6 @@
 
             @if (section.note) {
               <div class="section-note" [ngClass]="section.note.type">
-                @if (section.note.icon) {
-                  <i [class]="section.note.icon"></i>
-                }
                 <p [innerHTML]="section.note.content | translate"></p>
               </div>
             }

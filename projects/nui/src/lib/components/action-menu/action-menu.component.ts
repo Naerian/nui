@@ -20,7 +20,7 @@ import { ConnectedPosition } from '@angular/cdk/overlay';
 import { ActionMenuType, ActionMenuItem } from './models/action-menu.model';
 import { ActionMenuItemComponent } from './action-menu-item/action-menu-item.component';
 import { ActionMenuSubmenuComponent } from './action-menu-submenu/action-menu-submenu.component';
-import { ButtonIconPosition, ButtonWidth } from '../button/models/button.model';
+import { ButtonWidth } from '../button/models/button.model';
 import {
   DEFAULT_COLOR,
   DEFAULT_SIZE,
@@ -87,8 +87,7 @@ export class ActionMenuComponent {
   // --- Props del Botón Trigger ---
   readonly title = input<string>('');
   readonly label = input<string>();
-  readonly icon = input<string>();
-  readonly iconPosition = input<ButtonIconPosition>('start');
+  readonly prefixIcon = input<string>();
   readonly iconSubmenu = input<string>('ri-arrow-right-s-line');
   readonly ariaLabel = input<string>();
 
@@ -145,10 +144,10 @@ export class ActionMenuComponent {
     () => this.variant() ?? this.globalConfig?.variant ?? 'ghost'
   );
 
-  /** Icono efectivo: si no hay label ni icono, ponemos un menú por defecto */
+  /** Icono efectivo: si no hay label ni prefixIcon, ponemos un menú por defecto */
   readonly effectiveIcon = computed(() => {
-    if (!this.label() && !this.icon()) return 'ri-menu-line';
-    return this.icon();
+    if (!this.label() && !this.prefixIcon()) return 'ri-menu-line';
+    return this.prefixIcon();
   });
 
   readonly effectiveItemTemplate = computed(

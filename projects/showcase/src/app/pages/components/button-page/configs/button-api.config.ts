@@ -39,16 +39,16 @@ export const BUTTON_API_SECTIONS: ComponentSection[] = [
         ],
         ['<code>size</code>', 'NUISize', '<code class="neutral">md</code>', 'components.button.api.inputs.rows.size.description'],
         [
-          '<code>icon</code>',
+          '<code>prefixIcon</code>',
           'string',
           '<code class="neutral">undefined</code>',
-          'components.button.api.inputs.rows.icon.description',
+          'components.button.api.inputs.rows.prefixIcon.description',
         ],
         [
-          '<code>iconPosition</code>',
-          "'start' | 'end'",
-          '<code class="neutral">start</code>',
-          'components.button.api.inputs.rows.iconPosition.description',
+          '<code>suffixIcon</code>',
+          'string',
+          '<code class="neutral">undefined</code>',
+          'components.button.api.inputs.rows.suffixIcon.description',
         ],
         [
           '<code>loading</code>',
@@ -173,8 +173,6 @@ export const BUTTON_API_SECTIONS: ComponentSection[] = [
       rows: [
         ['<code>ButtonType</code>', 'type', "'button' | 'submit' | 'reset'", 'components.button.api.models.rows.ButtonType.description'],
         ['<code>ButtonTypeEnum</code>', 'enum', '-', 'components.button.api.models.rows.ButtonTypeEnum.description'],
-        ['<code>ButtonIconPosition</code>', 'type', "'start' | 'end'", 'components.button.api.models.rows.ButtonIconPosition.description'],
-        ['<code>ButtonIconPositionEnum</code>', 'enum', '-', 'components.button.api.models.rows.ButtonIconPositionEnum.description'],
         [
           '<code>ButtonLoadingPosition</code>',
           'type',

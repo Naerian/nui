@@ -73,9 +73,8 @@ export interface SidebarPanelEventExampleResult {
           <div class="button-group">
             <nui-button
               [color]="'primary'"
-              [icon]="'ri-pencil-line'"
+              [prefixIcon]="'ri-pencil-line'"
               [size]="'sm'"
-              [iconPosition]="'start'"
               (click)="emitDataChanged()"
             >
               Emitir dataChanged
@@ -83,8 +82,7 @@ export interface SidebarPanelEventExampleResult {
 
             <nui-button
               [color]="'secondary'"
-              [icon]="'ri-checkbox-circle-line'"
-              [iconPosition]="'start'"
+              [prefixIcon]="'ri-checkbox-circle-line'"
               [size]="'sm'"
               (click)="emitStatusChanged()"
             >
@@ -93,8 +91,7 @@ export interface SidebarPanelEventExampleResult {
 
             <nui-button
               [color]="'accent'"
-              [icon]="'ri-notification-line'"
-              [iconPosition]="'start'"
+              [prefixIcon]="'ri-notification-line'"
               [size]="'sm'"
               (click)="emitCustomEvent()"
             >
@@ -108,8 +105,7 @@ export interface SidebarPanelEventExampleResult {
           <div class="button-group">
             <nui-button
               [color]="'success'"
-              [icon]="'ri-save-line'"
-              [iconPosition]="'start'"
+              [prefixIcon]="'ri-save-line'"
               [size]="'sm'"
               (click)="closeWithSave()"
             >
@@ -118,8 +114,7 @@ export interface SidebarPanelEventExampleResult {
 
             <nui-button
               [color]="'danger'"
-              [icon]="'ri-delete-bin-line'"
-              [iconPosition]="'start'"
+              [prefixIcon]="'ri-delete-bin-line'"
               [size]="'sm'"
               (click)="closeWithDelete()"
             >
@@ -128,8 +123,7 @@ export interface SidebarPanelEventExampleResult {
 
             <nui-button
               [variant]="'outline'"
-              [icon]="'ri-close-line'"
-              [iconPosition]="'start'"
+              [prefixIcon]="'ri-close-line'"
               [size]="'sm'"
               (click)="closeWithCancel()"
             >

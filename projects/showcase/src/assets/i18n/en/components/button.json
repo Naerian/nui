@@ -27,8 +27,8 @@
   },
   "icons": {
     "title": "Icons",
-    "description": "Add icons to buttons at the start or end. Buttons with only an icon are rendered as circular icon buttons.",
-    "note": "Icon position: <code>'start'</code> shows the icon before the text, <code>'end'</code> shows it after. Icon-only buttons require the <code>aria-label</code> attribute for accessibility."
+    "description": "Add icons to buttons using prefixIcon (before content) or suffixIcon (after). You can mix both for patterns like ← Prev / Next →.",
+    "note": "Icon-only buttons (only <code>prefixIcon</code> or <code>suffixIcon</code>, no text) are rendered as square/rounded icon buttons and require <code>aria-label</code> or <code>title</code> for accessibility."
   },
   "loading": {
     "title": "Loading state",
@@ -74,11 +74,11 @@
         "size": {
           "description": "Button size"
         },
-        "icon": {
-          "description": "Remix Icon class name"
+        "prefixIcon": {
+          "description": "Remix Icon class name shown before the content"
         },
-        "iconPosition": {
-          "description": "Icon position relative to text"
+        "suffixIcon": {
+          "description": "Remix Icon class name shown after the content"
         },
         "loading": {
           "description": "Shows the loading spinner"
@@ -148,12 +148,6 @@
         },
         "ButtonTypeEnum": {
           "description": "Enum for native button types"
-        },
-        "ButtonIconPosition": {
-          "description": "Icon position options"
-        },
-        "ButtonIconPositionEnum": {
-          "description": "Enum for icon position"
         },
         "ButtonLoadingPosition": {
           "description": "Loading spinner position options"

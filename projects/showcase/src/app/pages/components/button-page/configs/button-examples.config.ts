@@ -88,11 +88,11 @@ export const BUTTON_EXAMPLES_SECTIONS: ComponentSection[] = [
       {
         title: 'codeExamples.html',
         code: `<nui-button shape="rounded">Rounded</nui-button>
-<nui-button shape="rounded" icon="ri-user-line" variant="outline"></nui-button>
+<nui-button shape="rounded" prefixIcon="ri-user-line" variant="outline"></nui-button>
 <nui-button shape="square">Square</nui-button>
-<nui-button shape="square" icon="ri-user-line" color="danger"></nui-button>
+<nui-button shape="square" prefixIcon="ri-user-line" color="danger"></nui-button>
 <nui-button shape="pill">Pill</nui-button>
-<nui-button shape="pill" icon="ri-user-line"></nui-button>
+<nui-button shape="pill" prefixIcon="ri-user-line"></nui-button>
 <nui-button shape="square" color="danger" variant="ghost">Square</nui-button>
 <nui-button shape="pill" color="success" variant="outline">Pill</nui-button>`,
         language: 'html',
@@ -113,11 +113,11 @@ export const BUTTON_EXAMPLES_SECTIONS: ComponentSection[] = [
         title: 'codeExamples.html',
         code: `<nui-button raised>Raised Button</nui-button>
 <nui-button raised color="primary">Raised Primary</nui-button>
-<nui-button raised color="success" icon="ri-user-line" shape="pill"></nui-button>
+<nui-button raised color="success" prefixIcon="ri-user-line" shape="pill"></nui-button>
 <nui-button raised variant="outline" color="secondary">Raised Outline</nui-button>
-<nui-button raised variant="outline" color="secondary" icon="ri-user-line" shape="pill"></nui-button>
+<nui-button raised variant="outline" color="secondary" prefixIcon="ri-user-line" shape="pill"></nui-button>
 <nui-button raised variant="ghost" color="accent">Raised Ghost</nui-button>
-<nui-button raised variant="ghost" color="accent" icon="ri-user-line" shape="pill"></nui-button>
+<nui-button raised variant="ghost" color="accent" prefixIcon="ri-user-line" shape="pill"></nui-button>
 <button nuiButton [raised]="true" color="success">Raised Directive</button>`,
         language: 'html',
       },
@@ -156,9 +156,10 @@ export const BUTTON_EXAMPLES_SECTIONS: ComponentSection[] = [
     examples: [
       {
         title: 'codeExamples.html',
-        code: `<nui-button icon="ri-user-line">Profile</nui-button>
-<nui-button icon="ri-arrow-right-line" iconPosition="end">Next</nui-button>
-<nui-button icon="ri-settings-line" aria-label="Settings"></nui-button>`,
+        code: `<nui-button prefixIcon="ri-user-line">Profile</nui-button>
+<nui-button suffixIcon="ri-arrow-right-line">Next</nui-button>
+<nui-button prefixIcon="ri-settings-line" aria-label="Settings"></nui-button>
+<nui-button prefixIcon="ri-settings-line" suffixIcon="ri-arrow-right-line" aria-label="Settings">Example</nui-button>`,
         language: 'html',
       },
     ],
@@ -189,7 +190,7 @@ export const BUTTON_EXAMPLES_SECTIONS: ComponentSection[] = [
 <nui-button
   [loading]="isLoading()"
   loadingPosition="end"
-  [icon]="'ri-loader-line'"
+  [prefixIcon]="'ri-loader-line'"
 />
 
 <!-- Spinner in center position replaces content -->
@@ -299,14 +300,14 @@ export const BUTTON_EXAMPLES_SECTIONS: ComponentSection[] = [
 <button nuiButton variant="ghost" color="danger">Ghost Danger</button>
 
 <!-- With icons -->
-<button nuiButton icon="ri-save-line">Save</button>
-<button nuiButton icon="ri-download-line" iconPosition="end">Download</button>
+<button nuiButton prefixIcon="ri-save-line">Save</button>
+<button nuiButton suffixIcon="ri-download-line">Download</button>
 
 <!-- With loading -->
 <button nuiButton [loading]="isLoading">Submit</button>
 
 <!-- <a> elements with button appearance -->
-<a nuiButton href="/profile" icon="ri-user-line">View Profile</a>
+<a nuiButton href="/profile" prefixIcon="ri-user-line">View Profile</a>
 <a nuiButton variant="outline" color="accent" href="/settings">Settings</a>`,
         language: 'html',
       },
