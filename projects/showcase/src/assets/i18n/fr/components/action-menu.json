@@ -4,7 +4,7 @@
   "basic": {
     "title": "Utilisation basique",
     "description": "Menu d'actions simple avec un tableau d'éléments. Chaque élément peut avoir un libellé, une icône et une action.",
-    "note": "Voici un exemple utilisant à la fois <code>type='inline'</code> et <code>type='dropdown'</code>."},
+    "note": "Voici un exemple utilisant à la fois <code>type='inline'</code> et <code>type='dropdown'</code>.",
     "consoleNote": "Ouvrez les DevTools (F12) et vérifiez l'onglet Console pour voir les actions enregistrées lorsque vous cliquez sur des éléments du menu."
   },
   "separators": {
