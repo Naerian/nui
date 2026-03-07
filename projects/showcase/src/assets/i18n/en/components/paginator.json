@@ -140,46 +140,65 @@
       "title": "ARIA roles and attributes",
       "description": "The Paginator implements the ARIA navigation pattern with <code>role=\"navigation\"</code> and correctly labelled buttons.",
       "elements": {
-        "nav": "Navigation region",
-        "prevNextButton": "Previous/next buttons",
-        "pageButton": "Page number button",
-        "currentPage": "Current page"
+        "currentPage": "Current page",
+        "pageButton": "Page buttons",
+        "host": "Paginator host element",
+        "firstPage": "First page button",
+        "prevPage": "Previous page button",
+        "nextPage": "Next page button",
+        "lastPage": "Last page button",
+        "liveRegion": "ARIA live region for page change announcements"
       },
       "rows": {
-        "navRole": {
-          "description": "The root paginator container has <code>role=\"navigation\"</code> and <code>aria-label</code> taken from the i18n token <code>navigation</code>."
+        "hostLabel": {
+          "description": "The paginator host element has a descriptive <code>aria-label</code> that includes the total number of pages (e.g. 'Paginator, 10 pages')."
         },
-        "buttonLabels": {
-          "description": "First/previous/next/last page buttons have <code>aria-label</code> extracted from the corresponding i18n tokens."
+        "pageButton": {
+          "description": "Each page button has an <code>aria-label</code> indicating its function (e.g. 'Go to page 3', 'Next page')."
         },
-        "ariaCurrent": {
-          "description": "The active page button carries <code>aria-current=\"page\"</code>."
+        "currentPage": {
+          "description": "The active page has <code>aria-current=\"page\"</code> to indicate it is the current page."
+        },
+        "firstPage": {
+          "description": "The first page button has a specific i18n token for its accessible label (e.g. 'First page')."
+        },
+        "prevPage": {
+          "description": "The previous page button has a specific i18n token for its accessible label (e.g. 'Previous page')."
+        },
+        "nextPage": {
+          "description": "The next page button has a specific i18n token for its accessible label (e.g. 'Next page')."
+        },
+        "lastPage": {
+          "description": "The last page button has a specific i18n token for its accessible label (e.g. 'Last page')."
+        },
+        "liveRegion": {
+          "description": "The ARIA live region announces the page change with a message that includes the current page number and the total number of pages (e.g. 'Page 3 of 10')."
         }
       }
     },
     "naming": {
-      "title": "Accessible name",
+      "title": "Accessible naming",
       "description": "All interactive paginator controls get their accessible name from i18n tokens, ensuring they are descriptive in any language.",
       "note": "Localize the <code>paginator</code> namespace tokens to ensure meaningful labels.",
       "elements": {
         "nav": "Navigation region",
-        "buttons": "Navigation buttons",
-        "currentPage": "Current page"
+        "pageButtons": "Navigation buttons",
+        "liveAnnouncement": "Page change announcement"
       },
       "info": {
-        "navToken": "i18n token 'navigation'",
-        "buttonTokens": "i18n button tokens",
-        "ariaCurrentPage": "aria-current='page'"
+        "i18nPagination": "i18n tokens for pagination",
+        "i18nPage": "i18n token for page number",
+        "interpolated": "Interpolated page number token"
       },
       "rows": {
         "nav": {
-          "description": "The navigation region uses the <code>navigation</code> token as <code>aria-label</code>."
+          "description": "The navigation region uses the <code>navigation</code> token as its <code>aria-label</code>."
         },
-        "buttons": {
-          "description": "Each navigation button uses its specific i18n token as the accessible name."
+        "pageButtons": {
+          "description": "Each navigation button uses its specific i18n token as its accessible name."
         },
-        "current": {
-          "description": "The active page carries <code>aria-current=\"page\"</code> so screen readers identify it."
+        "liveAnnouncement": {
+          "description": "The page change announcement uses the <code>pageLabel</code> token with interpolation to announce the current and total pages."
         }
       }
     },

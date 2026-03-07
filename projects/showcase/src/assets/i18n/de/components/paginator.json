@@ -138,48 +138,67 @@
   "a11y": {
     "roles": {
       "title": "ARIA-Rollen und -Attribute",
-      "description": "Die Seitennavigation implementiert das ARIA-Navigationsmuster mit <code>role=\"navigation\"</code> und korrekt beschrifteten Schaltflächen.",
+      "description": "Der Paginator implementiert das ARIA-Navigationsmuster mit <code>role=\"navigation\"</code> und korrekt beschrifteten Schaltflächen.",
       "elements": {
-        "nav": "Navigationsbereich",
-        "prevNextButton": "Vorherige/nächste Schaltflächen",
-        "pageButton": "Seitennummernschaltfläche",
-        "currentPage": "Aktuelle Seite"
+        "currentPage": "Aktuelle Seite",
+        "pageButton": "Seiten-Schaltflächen",
+        "host": "Paginator-Host-Element",
+        "firstPage": "Schaltfläche Erste Seite",
+        "prevPage": "Schaltfläche Vorherige Seite",
+        "nextPage": "Schaltfläche Nächste Seite",
+        "lastPage": "Schaltfläche Letzte Seite",
+        "liveRegion": "ARIA-Live-Region für Seitenwechselansagen"
       },
       "rows": {
-        "navRole": {
-          "description": "Der Root-Paginator-Container hat <code>role=\"navigation\"</code> und <code>aria-label</code> aus dem i18n-Token <code>navigation</code>."
+        "hostLabel": {
+          "description": "Das Paginator-Host-Element hat ein beschreibendes <code>aria-label</code>, das die Gesamtzahl der Seiten enthält (z.B. 'Paginator, 10 Seiten')."
         },
-        "buttonLabels": {
-          "description": "Schaltflächen für erste/vorherige/nächste/letzte Seite haben <code>aria-label</code> aus den entsprechenden i18n-Tokens."
+        "pageButton": {
+          "description": "Jede Seiten-Schaltfläche hat ein <code>aria-label</code>, das ihre Funktion angibt (z.B. 'Gehe zu Seite 3', 'Nächste Seite')."
         },
-        "ariaCurrent": {
-          "description": "Die aktive Seitenschaltfläche trägt <code>aria-current=\"page\"</code>."
+        "currentPage": {
+          "description": "Die aktive Seite hat <code>aria-current=\"page\"</code>, um anzuzeigen, dass sie die aktuelle Seite ist."
+        },
+        "firstPage": {
+          "description": "Die Schaltfläche Erste Seite hat ein spezifisches i18n-Token für ihr zugängliches Label (z.B. 'Erste Seite')."
+        },
+        "prevPage": {
+          "description": "Die Schaltfläche Vorherige Seite hat ein spezifisches i18n-Token für ihr zugängliches Label (z.B. 'Vorherige Seite')."
+        },
+        "nextPage": {
+          "description": "Die Schaltfläche Nächste Seite hat ein spezifisches i18n-Token für ihr zugängliches Label (z.B. 'Nächste Seite')."
+        },
+        "lastPage": {
+          "description": "Die Schaltfläche Letzte Seite hat ein spezifisches i18n-Token für ihr zugängliches Label (z.B. 'Letzte Seite')."
+        },
+        "liveRegion": {
+          "description": "Die ARIA-Live-Region kündigt den Seitenwechsel mit einer Nachricht an, die die aktuelle Seitenzahl und die Gesamtzahl der Seiten enthält (z.B. 'Seite 3 von 10')."
         }
       }
     },
     "naming": {
-      "title": "Zugänglicher Name",
-      "description": "Alle interaktiven Steuerelemente der Seitennavigation erhalten ihren zugänglichen Namen aus i18n-Tokens, was sicherstellt, dass sie in jeder Sprache beschreibend sind.",
-      "note": "Lokalisiere die <code>paginator</code>-Namespace-Tokens, um aussagekräftige Labels sicherzustellen.",
+      "title": "Zugängliche Benennung",
+      "description": "Alle interaktiven Steuerelemente des Paginators erhalten ihren zugänglichen Namen aus den i18n-Tokens, wodurch sichergestellt wird, dass sie in jeder Sprache beschreibend sind.",
+      "note": "Lokalisieren Sie die Tokens im Namespace <code>paginator</code>, um aussagekräftige Labels sicherzustellen.",
       "elements": {
         "nav": "Navigationsbereich",
-        "buttons": "Navigationsschaltflächen",
-        "currentPage": "Aktuelle Seite"
+        "pageButtons": "Navigationsschaltflächen",
+        "liveAnnouncement": "Ankündigung des Seitenwechsels"
       },
       "info": {
-        "navToken": "i18n-Token 'navigation'",
-        "buttonTokens": "i18n-Schaltflächen-Tokens",
-        "ariaCurrentPage": "aria-current='page'"
+        "i18nPagination": "i18n-Tokens für die Paginierung",
+        "i18nPage": "i18n-Token für die Seitennummer",
+        "interpolated": "Interpoliertes i18n-Token für die Seitennummer"
       },
       "rows": {
         "nav": {
           "description": "Der Navigationsbereich verwendet das Token <code>navigation</code> als <code>aria-label</code>."
         },
-        "buttons": {
+        "pageButtons": {
           "description": "Jede Navigationsschaltfläche verwendet ihr spezifisches i18n-Token als zugänglichen Namen."
         },
-        "current": {
-          "description": "Die aktive Seite trägt <code>aria-current=\"page\"</code>, damit Screenreader sie identifizieren."
+        "liveAnnouncement": {
+          "description": "Die Ankündigung des Seitenwechsels verwendet das Token <code>pageLabel</code> mit Interpolation, um die aktuelle und die Gesamtseitenzahl anzukündigen."
         }
       }
     },

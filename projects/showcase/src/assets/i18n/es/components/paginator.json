@@ -140,20 +140,39 @@
       "title": "Roles y atributos ARIA",
       "description": "El Paginator implementa el patrón de navegación ARIA con <code>role=\"navigation\"</code> y botones correctamente etiquetados.",
       "elements": {
-        "nav": "Región de navegación",
-        "prevNextButton": "Botones anterior/siguiente",
-        "pageButton": "Botón de número de página",
-        "currentPage": "Página actual"
+        "currentPage": "Página actual",
+        "pageButton": "Botones de página",
+        "host": "Elemento host del paginador",
+        "firstPage": "Botón de primera página",
+        "prevPage": "Botón de página anterior",
+        "nextPage": "Botón de página siguiente",
+        "lastPage": "Botón de última página",
+        "liveRegion": "Región ARIA live para anuncios de cambio de página"
       },
       "rows": {
-        "navRole": {
-          "description": "El contenedor raíz del paginador tiene <code>role=\"navigation\"</code> y <code>aria-label</code> tomado del token i18n <code>navigation</code>."
+        "hostLabel": {
+          "description": "El elemento host del paginador tiene un <code>aria-label</code> descriptivo que incluye el número total de páginas (ej. 'Paginador, 10 páginas')."
         },
-        "buttonLabels": {
-          "description": "Los botones de primera/anterior/siguiente/última página tienen <code>aria-label</code> extraído de los tokens i18n correspondientes."
+        "pageButton": {
+          "description": "Cada botón de página tiene un <code>aria-label</code> que indica su función (ej. 'Ir a la página 3', 'Página siguiente')."
         },
-        "ariaCurrent": {
-          "description": "El botón de la página activa lleva <code>aria-current=\"page\"</code>."
+        "currentPage": {
+          "description": "La página activa tiene <code>aria-current=\"page\"</code> para indicar que es la página actual."
+        },
+        "firstPage": {
+          "description": "El botón de primera página tiene un token i18n específico para su etiqueta accesible (ej. 'Primera página')."
+        },
+        "prevPage": {
+          "description": "El botón de página anterior tiene un token i18n específico para su etiqueta accesible (ej. 'Página anterior')."
+        },
+        "nextPage": {
+          "description": "El botón de página siguiente tiene un token i18n específico para su etiqueta accesible (ej. 'Página siguiente')."
+        },
+        "lastPage": {
+          "description": "El botón de última página tiene un token i18n específico para su etiqueta accesible (ej. 'Última página')."
+        },
+        "liveRegion": {
+          "description": "La región ARIA live anuncia el cambio de página con un mensaje que incluye el número de página actual y el total de páginas (ej. 'Página 3 de 10')."
         }
       }
     },
@@ -163,23 +182,23 @@
       "note": "Localiza los tokens del namespace <code>paginator</code> para garantizar etiquetas significativas.",
       "elements": {
         "nav": "Región de navegación",
-        "buttons": "Botones de navegación",
-        "currentPage": "Página actual"
+        "pageButtons": "Botones de navegación",
+        "liveAnnouncement": "Anuncio de cambio de página"
       },
       "info": {
-        "navToken": "Token i18n 'navigation'",
-        "buttonTokens": "Tokens de botones i18n",
-        "ariaCurrentPage": "aria-current='page'"
+        "i18nPagination": "Tokens i18n para paginación",
+        "i18nPage": "Token de número de página",
+        "interpolated": "Token de número de página interpolado"
       },
       "rows": {
         "nav": {
           "description": "La región de navegación usa el token <code>navigation</code> como <code>aria-label</code>."
         },
-        "buttons": {
+        "pageButtons": {
           "description": "Cada botón de navegación usa su token i18n específico como nombre accesible."
         },
-        "current": {
-          "description": "La página activa lleva <code>aria-current=\"page\"</code> para que los lectores de pantalla la identifiquen."
+        "liveAnnouncement": {
+          "description": "El anuncio de cambio de página usa el token <code>pageLabel</code> con interpolación para anunciar la página actual y total."
         }
       }
     },
