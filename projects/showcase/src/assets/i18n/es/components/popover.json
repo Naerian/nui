@@ -111,17 +111,26 @@
         "popover": "Panel del popover"
       },
       "rows": {
-        "ariaExpanded": {
+        "expanded": {
           "description": "El disparador lleva <code>aria-expanded</code> reflejando si el popover está visible (<code>true</code>) o no (<code>false</code>)."
         },
-        "ariaControls": {
+        "controls": {
           "description": "<code>aria-controls</code> en el disparador apunta al <code>id</code> del panel del popover."
         },
-        "ariaHaspopup": {
+        "haspopup": {
           "description": "<code>aria-haspopup=\"dialog\"</code> indica que el disparador abre un panel de contenido interactivo."
         },
-        "popoverRole": {
+        "role": {
           "description": "El panel del popover tiene <code>role=\"dialog\"</code> y <code>aria-label</code> derivado de su título o contenido."
+        },
+        "id": {
+          "description": "El panel del popover tiene un <code>id</code> único que es referenciado por el disparador a través de <code>aria-controls</code>."
+        },
+        "label": {
+          "description": "El panel del popover obtiene su nombre accesible de un título visible o de un <code>aria-label</code> explícito para que los lectores de pantalla lo identifiquen correctamente."
+        },
+        "labelledby": {
+          "description": "Si el panel del popover tiene un título visible, se usa <code>aria-labelledby</code> apuntando al <code>id</code> del título para proporcionar su nombre accesible."
         }
       }
     },
@@ -131,18 +140,26 @@
       "note": "Proporciona siempre un <code>aria-label</code> o un título visible en el popover para que los lectores de pantalla lo identifiquen correctamente.",
       "elements": {
         "trigger": "Disparador",
-        "popoverPanel": "Panel del popover"
+        "popoverLabelledBy": "Panel del popover con título visible",
+        "popoverLabel": "Panel del popover sin título visible",
+        "popoverAuto": "Nombre accesible automático"
       },
       "info": {
-        "triggerLabel": "Nombre accesible del disparador",
-        "panelLabel": "aria-label del panel"
+        "ownLabel": "Nombre accesible del disparador",
+        "auto": "aria-label del panel"
       },
       "rows": {
         "trigger": {
           "description": "El disparador debe tener su propio nombre accesible (texto visible, aria-label…) que describa la acción que abre el popover."
         },
-        "panel": {
-          "description": "El panel del popover obtiene su nombre accesible del título visible o de un <code>aria-label</code> explícito."
+        "labelledBy": {
+          "description": "Si el panel del popover tiene un título visible, este debe tener un <code>id</code> único que sea referenciado por el panel a través de <code>aria-labelledby</code> para proporcionar su nombre accesible."
+        },
+        "label": {
+          "description": "Si el panel del popover no tiene un título visible, debe tener un <code>aria-label</code> explícito que describa su contenido para que los lectores de pantalla lo identifiquen correctamente."
+        },
+        "auto": {
+          "description": "Si el panel del popover tiene un título visible, el popover usará automáticamente ese título como su nombre accesible sin necesidad de un <code>aria-label</code> adicional."
         }
       }
     },

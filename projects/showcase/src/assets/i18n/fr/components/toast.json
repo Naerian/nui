@@ -161,7 +161,7 @@
         "tab": {
           "description": "Tab déplace le focus vers le bouton de fermeture à l'intérieur du toast si un est visible."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Active le bouton de fermeture focalisé, dismissant le toast."
         }
       }

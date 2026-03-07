@@ -100,7 +100,7 @@ export const BUTTON_A11Y_SECTIONS: ComponentSection[] = [
         ],
         [
           '<kbd>Space</kbd> / <kbd>Enter</kbd>',
-          'components.button.a11y.keyboard.rows.spaceEnter.description',
+          'components.button.a11y.keyboard.rows.enterSpace.description',
         ],
       ],
     },

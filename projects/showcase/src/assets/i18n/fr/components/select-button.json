@@ -178,7 +178,7 @@
         "arrowPrev": {
           "description": "En mode radio, déplace le focus sur l'option précédente et la sélectionne (avec retour à la fin)."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "En mode checkbox, bascule la sélection de l'option focalisée."
         }
       }

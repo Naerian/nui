@@ -105,7 +105,7 @@
         "iconTrigger": {
           "description": "Für Auslöser, die nur ein Symbol anzeigen, fügen Sie am Auslöserelement ein explizites <code>aria-label</code> hinzu."
         },
-        "content": {
+        "tooltipContent": {
           "description": "Der Tooltip-Text ist über <code>aria-describedby</code> verknüpft und dient als ergänzende Information, nicht als Hauptlabel."
         }
       }

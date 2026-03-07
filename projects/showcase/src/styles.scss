@@ -269,6 +269,17 @@ code {
   }
 }
 
+kbd {
+  color: var(--nui-primary);
+  background: color-mix(in srgb, var(--nui-primary) 10%, transparent);
+  border-radius: 0.25rem;
+  padding: 0.15rem 0.35rem;
+  font-size: inherit !important;
+  margin: 0 0.15rem;
+  font-weight: var(--nui-font-weight-medium);
+  line-height: 1;
+}
+
 pre code {
   background-color: transparent;
   border: none;

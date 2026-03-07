@@ -173,10 +173,10 @@
         "backdrop": "Hintergrundoverlay"
       },
       "rows": {
-        "panelRole": {
+        "role": {
           "description": "Das Panel-Wurzelelement hat <code>role=\"dialog\"</code>, um Hilfstechnologien einen eigenständigen Bereich zu signalisieren."
         },
-        "ariaLabelledby": {
+        "labelledby": {
           "description": "<code>aria-labelledby</code> verweist auf das Panel-Titelelement und gibt dem Dialog einen barrierefreien Namen aus der sichtbaren Überschrift."
         },
         "closeLabel": {
@@ -188,7 +188,7 @@
         "expandLabel": {
           "description": "Die Erweitern-/Reduzieren-Schaltfläche verwendet den entsprechenden Token (<code>expand</code> oder <code>collapse</code>) als <code>aria-label</code>."
         },
-        "backdropHidden": {
+        "backdrop": {
           "description": "Das Hintergrundoverlay ist mit <code>aria-hidden=\"true\"</code> vor Hilfstechnologien verborgen."
         }
       }
@@ -199,7 +199,7 @@
       "note": "Geben Sie immer einen sichtbaren Titel im Panel an, da dieser automatisch zum Dialog-Namen wird.",
       "elements": {
         "panelWithTitle": "Panel mit Titel",
-        "controlButtons": "Steuerungsschaltflächen"
+        "buttons": "Steuerungsschaltflächen"
       },
       "info": {
         "ariaLabelledby": "Panel-Titel (aria-labelledby)",
@@ -224,7 +224,7 @@
         "tab": {
           "description": "Wechselt den Fokus zwischen den interaktiven Elementen des Panels. Der Fokus wird eingeschlossen, solange das Panel im modalen Modus geöffnet ist."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Aktiviert die fokussierte Steuerungsschaltfläche (Schließen, Minimieren, Erweitern)."
         }
       }
@@ -260,8 +260,8 @@
     },
     "priority": {
       "title": "Auflösungspriorität",
-      "description": "Werte werden anhand einer strengen dreistufigen Prioritätskette aufgelöst. Die erste übereinstimmende Ebene gewinnt: Konfiguration beim Aufruf &gt; globale Konfiguration &gt; Standardwert der Bibliothek.",
-      "note": "Die Prioritätskette stellt sicher, dass Komponenten immer einen gültigen aufgelösten Wert haben. Beim Aufruf übergebene Optionen gewinnen immer; wenn keine angegeben sind, wird der globale Konfigurationswert verwendet; wenn auch dieser nicht konfiguriert ist, wird der Standardwert der Bibliothek angewendet."
+      "description": "NUI löst Konfigurationswerte anhand der folgenden Prioritätskette auf (höchste gewinnt):",
+      "note": "<strong>Komponenten-Input</strong> → <strong>Globale Konfig (<code>provideNUI</code>)</strong> → <strong>Eingebauter Standard</strong>"
     }
   }
 }

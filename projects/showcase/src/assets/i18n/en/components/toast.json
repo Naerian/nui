@@ -161,7 +161,7 @@
         "tab": {
           "description": "Tab moves focus to the close button inside the toast if one is visible."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Activates the focused close button, dismissing the toast."
         }
       }

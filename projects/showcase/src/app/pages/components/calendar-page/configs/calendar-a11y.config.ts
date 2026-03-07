@@ -136,7 +136,7 @@ export const CALENDAR_A11Y_SECTIONS: ComponentSection[] = [
         ],
         [
           '<kbd>Enter</kbd> / <kbd>Space</kbd>',
-          'components.calendar.a11y.keyboard.rows.spaceEnter.description',
+          'components.calendar.a11y.keyboard.rows.enterSpace.description',
         ],
         [
           '<kbd>Escape</kbd>',

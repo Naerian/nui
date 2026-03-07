@@ -255,6 +255,15 @@
         },
         "normalizedLive": {
           "description": "A visually hidden element with <code>aria-live=\"assertive\"</code> announces when the entered time is normalized to the nearest valid limit."
+        },
+        "columnLabels": {
+          "description": "Column help text tokens are announced when the column receives focus, indicating how to interact (arrow keys, Home/End)."
+        },
+        "optionSelected": {
+          "description": "When a time is selected, it is announced via the i18n token <code>timeSelected</code> which includes the selected time (e.g. 'Time selected: 3:15 PM')."
+        },
+        "normalizedAlert": {
+          "description": "When the time is normalized, it is announced via the i18n token <code>normalizedTime</code> which includes the normalized time (e.g. 'Time normalized to 4:00 PM')."
         }
       }
     },
@@ -265,7 +274,7 @@
       "elements": {
         "container": "Container label",
         "columns": "Column labels",
-        "helpText": "Column help text"
+        "help": "Column help text"
       },
       "info": {
         "containerLabel": "Token timePickerLabel / durationPickerLabel",
@@ -288,7 +297,7 @@
       "title": "Keyboard interaction",
       "description": "Each TimePicker column behaves as an independent listbox. Use the following keys to navigate and select values.",
       "rows": {
-        "arrowUpDown": {
+        "arrows": {
           "description": "Moves focus to the previous/next option within the focused column."
         },
         "tab": {
@@ -297,7 +306,7 @@
         "homeEnd": {
           "description": "Jumps to the first/last option in the focused column."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Selects the focused option and updates the displayed time value."
         },
         "escape": {

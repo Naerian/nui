@@ -161,7 +161,7 @@
         "tab": {
           "description": "Tab mueve el foco al botón de cierre dentro del toast si hay uno visible."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Activa el botón de cierre con foco, descartando el toast."
         }
       }

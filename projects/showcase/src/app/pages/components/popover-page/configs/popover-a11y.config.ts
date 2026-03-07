@@ -30,6 +30,12 @@ export const POPOVER_A11Y_SECTIONS: ComponentSection[] = [
           'components.popover.a11y.roles.rows.controls.description',
         ],
         [
+          'components.popover.a11y.roles.elements.trigger',
+          '<code>aria-haspopup</code>',
+          '"dialog"',
+          'components.popover.a11y.roles.rows.role.description',
+        ],
+        [
           'components.popover.a11y.roles.elements.popover',
           '<code>role</code>',
           '"dialog"',
@@ -111,7 +117,7 @@ export const POPOVER_A11Y_SECTIONS: ComponentSection[] = [
       rows: [
         [
           '<kbd>Enter</kbd> / <kbd>Space</kbd>',
-          'components.popover.a11y.keyboard.rows.spaceEnter.description',
+          'components.popover.a11y.keyboard.rows.enterSpace.description',
         ],
         [
           '<kbd>Escape</kbd>',

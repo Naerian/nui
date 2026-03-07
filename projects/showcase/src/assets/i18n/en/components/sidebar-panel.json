@@ -173,10 +173,10 @@
         "backdrop": "Background overlay"
       },
       "rows": {
-        "panelRole": {
+        "role": {
           "description": "The panel root carries <code>role=\"dialog\"</code> to signal a distinct region to assistive technologies."
         },
-        "ariaLabelledby": {
+        "labelledby": {
           "description": "<code>aria-labelledby</code> points to the panel title element, giving the dialog an accessible name derived from the visible heading."
         },
         "closeLabel": {
@@ -188,7 +188,7 @@
         "expandLabel": {
           "description": "The expand/collapse button exposes the corresponding token (<code>expand</code> or <code>collapse</code>) as <code>aria-label</code>."
         },
-        "backdropHidden": {
+        "backdrop": {
           "description": "The background overlay is hidden from assistive technologies with <code>aria-hidden=\"true\"</code>."
         }
       }
@@ -199,7 +199,7 @@
       "note": "Always provide a visible title inside the panel, as it automatically becomes the dialog name.",
       "elements": {
         "panelWithTitle": "Panel with title",
-        "controlButtons": "Control buttons"
+        "buttons": "Control buttons"
       },
       "info": {
         "ariaLabelledby": "Panel title (aria-labelledby)",
@@ -224,7 +224,7 @@
         "tab": {
           "description": "Cycles focus between the panel's interactive elements. Focus is trapped while the panel is open in modal mode."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Activates the focused control button (close, minimize, expand)."
         }
       }
@@ -260,8 +260,8 @@
     },
     "priority": {
       "title": "Resolution priority",
-      "description": "Values are resolved following a strict three-level priority chain. The first matching level wins: call-time config &gt; global config &gt; library default.",
-      "note": "The priority chain guarantees that components always have a valid resolved value. Options passed at call time always win; if not provided, the global config value is used; if not configured either, the library default is applied."
+      "description": "NUI resolves configuration values using the following priority chain (highest wins):",
+      "note": "<strong>Input property</strong> → <strong>Global Config (<code>provideNUI</code>)</strong> → <strong>Built-in default</strong>"
     }
   }
 }

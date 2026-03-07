@@ -105,7 +105,7 @@
         "iconTrigger": {
           "description": "Pour les déclencheurs qui n'affichent qu'une icône, ajoutez un <code>aria-label</code> explicite sur l'élément déclencheur."
         },
-        "content": {
+        "tooltipContent": {
           "description": "Le texte de l'info-bulle est connecté via <code>aria-describedby</code> et sert d'information supplémentaire, pas comme libellé principal."
         }
       }

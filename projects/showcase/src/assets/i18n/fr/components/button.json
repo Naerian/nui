@@ -410,7 +410,7 @@
         "shiftTab": {
           "description": "Déplace le focus vers l'élément précédent."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Active le bouton. Si <code>disabled</code> ou <code>loading</code>, le gestionnaire intercepte et annule l'événement avant que <code>onClick</code> ne se déclenche."
         }
       }
@@ -438,8 +438,8 @@
     },
     "priority": {
       "title": "Priorité de résolution",
-      "description": "Les valeurs sont résolues selon une chaîne de priorité stricte à trois niveaux. Le premier niveau correspondant l'emporte : binding direct &gt; config globale &gt; valeur par défaut de la bibliothèque.",
-      "note": "La chaîne de priorité garantit que les composants ont toujours une valeur résolue valide. Un binding d'entrée direct l'emporte toujours ; s'il n'est pas fourni, la valeur de la configuration globale est utilisée ; si elle n'est pas non plus configurée, la valeur par défaut de la bibliothèque est appliquée."
+      "description": "NUI résout les valeurs de configuration selon la chaîne de priorité suivante (la plus haute gagne) :",
+      "note": "<strong>Input du composant</strong> → <strong>Config globale (<code>provideNUI</code>)</strong> → <strong>Valeur par défaut</strong>"
     }
   }
 }

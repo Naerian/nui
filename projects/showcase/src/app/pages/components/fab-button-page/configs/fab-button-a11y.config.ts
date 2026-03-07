@@ -113,7 +113,7 @@ export const FAB_BUTTON_A11Y_SECTIONS: ComponentSection[] = [
       rows: [
         [
           '<kbd>Enter</kbd> / <kbd>Space</kbd>',
-          'components.fabButton.a11y.keyboard.rows.spaceEnter.description',
+          'components.fabButton.a11y.keyboard.rows.enterSpace.description',
         ],
         [
           '<kbd>Escape</kbd>',

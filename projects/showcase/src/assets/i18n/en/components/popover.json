@@ -111,17 +111,26 @@
         "popover": "Popover panel"
       },
       "rows": {
-        "ariaExpanded": {
+        "expanded": {
           "description": "The trigger carries <code>aria-expanded</code> reflecting whether the popover is visible (<code>true</code>) or not (<code>false</code>)."
         },
-        "ariaControls": {
+        "controls": {
           "description": "<code>aria-controls</code> on the trigger points to the <code>id</code> of the popover panel."
         },
-        "ariaHaspopup": {
-          "description": "<code>aria-haspopup=\"dialog\"</code> indicates that activating the trigger opens an interactive content panel."
+        "haspopup": {
+          "description": "<code>aria-haspopup=\"dialog\"</code> indicates that the trigger opens an interactive content panel."
         },
-        "popoverRole": {
+        "role": {
           "description": "The popover panel has <code>role=\"dialog\"</code> and <code>aria-label</code> derived from its title or content."
+        },
+        "id": {
+          "description": "The popover panel has a unique <code>id</code> that is referenced by the trigger via <code>aria-controls</code>."
+        },
+        "label": {
+          "description": "The popover panel gets its accessible name from a visible title or an explicit <code>aria-label</code> so that screen readers can correctly identify it."
+        },
+        "labelledby": {
+          "description": "If the popover panel has a visible title, <code>aria-labelledby</code> is used pointing to the <code>id</code> of the title to provide its accessible name."
         }
       }
     },
@@ -131,18 +140,26 @@
       "note": "Always provide an <code>aria-label</code> or a visible title in the popover so screen readers can correctly identify it.",
       "elements": {
         "trigger": "Trigger",
-        "popoverPanel": "Popover panel"
+        "popoverLabelledBy": "Popover panel with visible title",
+        "popoverLabel": "Popover panel without visible title",
+        "popoverAuto": "Automatic accessible name"
       },
       "info": {
-        "triggerLabel": "Trigger accessible name",
-        "panelLabel": "Panel aria-label"
+        "ownLabel": "Trigger's accessible name",
+        "auto": "Panel's aria-label"
       },
       "rows": {
         "trigger": {
-          "description": "The trigger must have its own accessible name (visible text, aria-label…) that describes the action of opening the popover."
+          "description": "The trigger must have its own accessible name (visible text, aria-label…) that describes the action that opens the popover."
         },
-        "panel": {
-          "description": "The popover panel gets its accessible name from the visible title or an explicit <code>aria-label</code>."
+        "labelledBy": {
+          "description": "If the popover panel has a visible title, it must have a unique <code>id</code> that is referenced by the panel via <code>aria-labelledby</code> to provide its accessible name."
+        },
+        "label": {
+          "description": "If the popover panel does not have a visible title, it must have an explicit <code>aria-label</code> that describes its content so that screen readers can correctly identify it."
+        },
+        "auto": {
+          "description": "If the popover panel has a visible title, the popover will automatically use that title as its accessible name without the need for an additional <code>aria-label</code>."
         }
       }
     },

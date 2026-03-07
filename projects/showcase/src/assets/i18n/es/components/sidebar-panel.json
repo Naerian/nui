@@ -173,10 +173,10 @@
         "backdrop": "Superposición de fondo"
       },
       "rows": {
-        "panelRole": {
+        "role": {
           "description": "La raíz del panel lleva <code>role=\"dialog\"</code> para señalar una región diferenciada a las tecnologías de asistencia."
         },
-        "ariaLabelledby": {
+        "labelledby": {
           "description": "<code>aria-labelledby</code> apunta al elemento de título del panel, dando al diálogo un nombre accesible derivado del encabezado visible."
         },
         "closeLabel": {
@@ -188,7 +188,7 @@
         "expandLabel": {
           "description": "El botón de expandir / contraer expone el token correspondiente (<code>expand</code> o <code>collapse</code>) como <code>aria-label</code>."
         },
-        "backdropHidden": {
+        "backdrop": {
           "description": "La superposición de fondo se oculta de las tecnologías de asistencia con <code>aria-hidden=\"true\"</code>."
         }
       }
@@ -199,7 +199,7 @@
       "note": "Proporciona siempre un título visible dentro del panel, ya que este se convierte automáticamente en el nombre del diálogo.",
       "elements": {
         "panelWithTitle": "Panel con título",
-        "controlButtons": "Botones de control"
+        "buttons": "Botones de control"
       },
       "info": {
         "ariaLabelledby": "Título del panel (aria-labelledby)",
@@ -224,7 +224,7 @@
         "tab": {
           "description": "Cicla el foco entre los elementos interactivos del panel. El foco queda atrapado mientras el panel está abierto en modo modal."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Activa el botón de control con foco (cerrar, minimizar, expandir)."
         }
       }
@@ -260,8 +260,8 @@
     },
     "priority": {
       "title": "Prioridad de resolución",
-      "description": "Los valores se resuelven siguiendo una cadena de prioridad estricta de tres niveles. Gana el primero que coincida: config en la llamada &gt; config global &gt; default de librería.",
-      "note": "La cadena de prioridad garantiza que los componentes siempre tengan un valor resuelto válido. Las opciones pasadas en la llamada tienen siempre máxima prioridad; si no se proporcionan, se usa el valor del config global; si tampoco está configurado, se aplica el default de la librería."
+      "description": "NUI resuelve los valores de configuración usando la siguiente cadena de prioridad (gana el de mayor prioridad):",
+      "note": "<strong>Input del componente</strong> → <strong>Config global (<code>provideNUI</code>)</strong> → <strong>Valor por defecto</strong>"
     }
   }
 }

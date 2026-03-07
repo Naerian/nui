@@ -437,7 +437,7 @@
         "tab": {
           "description": "Mueve el foco al botón disparador. Cuando el menú está abierto, Tab lo cierra y devuelve el foco al disparador."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Abre el menú cuando el foco está en el disparador. Activa el ítem del menú enfocado cuando está dentro del menú."
         },
         "escape": {

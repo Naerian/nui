@@ -111,17 +111,26 @@
         "popover": "Panneau popover"
       },
       "rows": {
-        "ariaExpanded": {
-          "description": "Le déclencheur porte <code>aria-expanded</code> reflétant si le popover est visible (<code>true</code>) ou non (<code>false</code>)."
+        "expanded": {
+          "description": "Le déclencheur contient <code>aria-expanded</code> indiquant si la fenêtre contextuelle est visible (<code>true</code>) ou non (<code>false</code>)."
         },
-        "ariaControls": {
+        "controls": {
           "description": "<code>aria-controls</code> sur le déclencheur pointe vers l'<code>id</code> du panneau popover."
         },
-        "ariaHaspopup": {
-          "description": "<code>aria-haspopup=\"dialog\"</code> indique que l'activation du déclencheur ouvre un panneau de contenu interactif."
+        "haspopup": {
+          "description": "<code>aria-haspopup=\"dialog\"</code> indique que le déclencheur ouvre un panneau de contenu interactif."
         },
-        "popoverRole": {
-          "description": "Le panneau popover a <code>role=\"dialog\"</code> et <code>aria-label</code> dérivé de son titre ou contenu."
+        "role": {
+          "description": "Le panneau du popover a <code>role=\"dialog\"</code> et <code>aria-label</code> dérivé de son titre ou contenu."
+        },
+        "id": {
+          "description": "Le panneau du popover a un <code>id</code> unique qui est référencé par le déclencheur via <code>aria-controls</code>."
+        },
+        "label": {
+          "description": "Le panneau du popover obtient son nom accessible d'un titre visible ou d'un <code>aria-label</code> explicite pour que les lecteurs d'écran puissent l'identifier correctement."
+        },
+        "labelledby": {
+          "description": "Si le panneau du popover a un titre visible, <code>aria-labelledby</code> est utilisé en pointant vers l'<code>id</code> du titre pour fournir son nom accessible."
         }
       }
     },
@@ -131,18 +140,26 @@
       "note": "Fournissez toujours un <code>aria-label</code> ou un titre visible dans le popover pour que les lecteurs d'écran puissent l'identifier correctement.",
       "elements": {
         "trigger": "Déclencheur",
-        "popoverPanel": "Panneau popover"
+        "popoverLabelledBy": "Panneau du popover avec titre visible",
+        "popoverLabel": "Panneau du popover sans titre visible",
+        "popoverAuto": "Nom accessible automatique"
       },
       "info": {
-        "triggerLabel": "Nom accessible du déclencheur",
-        "panelLabel": "aria-label du panneau"
+        "ownLabel": "Nom accessible du déclencheur",
+        "auto": "aria-label du panneau"
       },
       "rows": {
         "trigger": {
-          "description": "Le déclencheur doit avoir son propre nom accessible (texte visible, aria-label…) qui décrit l'action d'ouverture du popover."
+          "description": "Le déclencheur doit avoir son propre nom accessible (texte visible, aria-label…) qui décrit l'action qui ouvre le popover."
         },
-        "panel": {
-          "description": "Le panneau popover obtient son nom accessible du titre visible ou d'un <code>aria-label</code> explicite."
+        "labelledBy": {
+          "description": "Si le panneau du popover a un titre visible, celui-ci doit avoir un <code>id</code> unique qui est référencé par le panneau via <code>aria-labelledby</code> pour fournir son nom accessible."
+        },
+        "label": {
+          "description": "Si le panneau du popover n'a pas de titre visible, il doit avoir un <code>aria-label</code> explicite qui décrit son contenu pour que les lecteurs d'écran puissent l'identifier correctement."
+        },
+        "auto": {
+          "description": "Si le panneau du popover a un titre visible, le popover utilisera automatiquement ce titre comme son nom accessible sans besoin d'un <code>aria-label</code> supplémentaire."
         }
       }
     },

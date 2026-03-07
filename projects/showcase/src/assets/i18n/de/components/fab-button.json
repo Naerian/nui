@@ -177,7 +177,7 @@
       "title": "Tastaturinteraktion",
       "description": "Die FabButton folgt dem WAI-ARIA Menu Button-Tastaturmuster.",
       "rows": {
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Aktiviert die Trigger-Schaltfläche und schaltet das Aktionsmenü ein oder aus."
         },
         "escape": {

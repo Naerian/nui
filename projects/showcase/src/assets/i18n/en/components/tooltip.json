@@ -105,7 +105,7 @@
         "iconTrigger": {
           "description": "For triggers that only show an icon, add an explicit <code>aria-label</code> on the trigger element."
         },
-        "content": {
+        "tooltipContent": {
           "description": "The tooltip text is connected via <code>aria-describedby</code> and serves as supplemental information, not as the main label."
         }
       }

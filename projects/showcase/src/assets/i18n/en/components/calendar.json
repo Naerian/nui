@@ -380,7 +380,7 @@
         "pageDown": {
           "description": "Navigates to the next month."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Selects the focused day."
         },
         "escape": {

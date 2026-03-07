@@ -255,6 +255,15 @@
         },
         "normalizedLive": {
           "description": "Ein visuell verborgenes Element mit <code>aria-live=\"assertive\"</code> kündigt an, wenn die eingegebene Zeit auf die nächste gültige Grenze normalisiert wird."
+        },
+        "columnLabels": {
+          "description": "Spalten-Hilfstext-Token werden angekündigt, wenn die Spalte den Fokus erhält, und zeigen an, wie interagiert werden kann (Pfeiltasten, Pos1/Ende)."
+        },
+        "optionSelected": {
+          "description": "Wenn eine Zeit ausgewählt wird, wird sie über das i18n-Token <code>timeSelected</code> angekündigt, das die ausgewählte Zeit enthält (z. B. 'Ausgewählte Zeit: 3:15 PM')."
+        },
+        "normalizedAlert": {
+          "description": "Wenn die Zeit normalisiert wird, wird sie über das i18n-Token <code>normalizedTime</code> angekündigt, das die normalisierte Zeit enthält (z. B. 'Zeit normalisiert auf 4:00 PM')."
         }
       }
     },
@@ -265,7 +274,7 @@
       "elements": {
         "container": "Container-Label",
         "columns": "Spalten-Labels",
-        "helpText": "Spalten-Hilfstext"
+        "help": "Spalten-Hilfstext"
       },
       "info": {
         "containerLabel": "Token timePickerLabel / durationPickerLabel",
@@ -288,7 +297,7 @@
       "title": "Tastaturinteraktion",
       "description": "Jede Zeitauswahl-Spalte verhält sich als eigenständige Listbox. Verwenden Sie die folgenden Tasten zur Navigation und Auswahl von Werten.",
       "rows": {
-        "arrowUpDown": {
+        "arrows": {
           "description": "Bewegt den Fokus zur vorherigen/nächsten Option in der fokussierten Spalte."
         },
         "tab": {
@@ -297,7 +306,7 @@
         "homeEnd": {
           "description": "Springt zur ersten/letzten Option in der fokussierten Spalte."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Wählt die fokussierte Option aus und aktualisiert die angezeigte Zeit."
         },
         "escape": {

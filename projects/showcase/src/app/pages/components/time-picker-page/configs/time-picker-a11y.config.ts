@@ -86,9 +86,9 @@ export const TIME_PICKER_A11Y_SECTIONS: ComponentSection[] = [
           'components.timePicker.a11y.naming.rows.columns.description',
         ],
         [
-          'components.timePicker.a11y.naming.elements.helpText',
+          'components.timePicker.a11y.naming.elements.help',
           'components.timePicker.a11y.naming.info.a11yHelpTokens',
-          'components.timePicker.a11y.naming.rows.helpText.description',
+          'components.timePicker.a11y.naming.rows.help.description',
         ],
       ],
     },
@@ -118,7 +118,7 @@ export const TIME_PICKER_A11Y_SECTIONS: ComponentSection[] = [
         ],
         [
           '<kbd>Enter</kbd> / <kbd>Space</kbd>',
-          'components.timePicker.a11y.keyboard.rows.spaceEnter.description',
+          'components.timePicker.a11y.keyboard.rows.enterSpace.description',
         ],
         [
           '<kbd>Escape</kbd>',

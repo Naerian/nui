@@ -437,7 +437,7 @@
         "tab": {
           "description": "Bewegt den Fokus zur Trigger-Schaltfläche. Wenn das Menü geöffnet ist, schließt Tab es und gibt den Fokus an den Trigger zurück."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Öffnet das Menü, wenn der Fokus auf dem Trigger liegt. Aktiviert den fokussierten Menüeintrag, wenn innerhalb des Menüs."
         },
         "escape": {

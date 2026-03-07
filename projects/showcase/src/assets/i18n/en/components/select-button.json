@@ -178,7 +178,7 @@
         "arrowPrev": {
           "description": "In radio mode, moves focus to the previous option and selects it (wraps around)."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "In checkbox mode, toggles the selection of the focused option."
         }
       }

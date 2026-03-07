@@ -161,7 +161,7 @@
         "tab": {
           "description": "Tab verschiebt den Fokus zur Schließen-Schaltfläche im Toast, falls eine sichtbar ist."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Aktiviert die fokussierte Schließen-Schaltfläche und blendet den Toast aus."
         }
       }

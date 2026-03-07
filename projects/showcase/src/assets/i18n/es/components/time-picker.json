@@ -255,6 +255,15 @@
         },
         "normalizedLive": {
           "description": "Un elemento visualmente oculto con <code>aria-live=\"assertive\"</code> anuncia cuando el tiempo introducido se normaliza al límite válido más cercano."
+        },
+        "columnLabels": {
+          "description": "Los tokens de texto de ayuda de columna se anuncian cuando la columna recibe el foco, indicando cómo interactuar (teclas de flechas, Inicio/Fin)."
+        },
+        "optionSelected": {
+          "description": "Cuando se selecciona un tiempo, se anuncia mediante el token i18n <code>timeSelected</code> que incluye el tiempo seleccionado (ej. 'Hora seleccionada: 3:15 PM')."
+        },
+        "normalizedAlert": {
+          "description": "Cuando el tiempo se normaliza, se anuncia mediante el token i18n <code>normalizedTime</code> que incluye el tiempo normalizado (ej. 'Tiempo normalizado a 4:00 PM')."
         }
       }
     },
@@ -265,7 +274,7 @@
       "elements": {
         "container": "Etiqueta del contenedor",
         "columns": "Etiquetas de columna",
-        "helpText": "Texto de ayuda de columna"
+        "help": "Texto de ayuda de columna"
       },
       "info": {
         "containerLabel": "Token timePickerLabel / durationPickerLabel",
@@ -288,7 +297,7 @@
       "title": "Interacción por teclado",
       "description": "Cada columna del TimePicker se comporta como un listbox independiente. Usa las siguientes teclas para navegar y seleccionar valores.",
       "rows": {
-        "arrowUpDown": {
+        "arrows": {
           "description": "Mueve el foco a la opción anterior / siguiente dentro de la columna con foco."
         },
         "tab": {
@@ -297,7 +306,7 @@
         "homeEnd": {
           "description": "Salta a la primera / última opción de la columna con foco."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Selecciona la opción con foco y actualiza el valor de tiempo mostrado."
         },
         "escape": {

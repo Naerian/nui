@@ -437,7 +437,7 @@
         "tab": {
           "description": "Déplace le focus sur le bouton déclencheur. Lorsque le menu est ouvert, Tab le ferme et retourne le focus sur le déclencheur."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Ouvre le menu lorsque le focus est sur le déclencheur. Active l'élément de menu focalisé lorsqu'on est dans le menu."
         },
         "escape": {

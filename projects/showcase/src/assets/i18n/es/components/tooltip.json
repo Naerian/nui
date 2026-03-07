@@ -105,7 +105,7 @@
         "iconTrigger": {
           "description": "Para disparadores que solo muestran un icono, añade un <code>aria-label</code> explícito en el elemento disparador."
         },
-        "content": {
+        "tooltipContent": {
           "description": "El texto del tooltip se conecta mediante <code>aria-describedby</code> y sirve como información suplementaria, no como etiqueta principal."
         }
       }

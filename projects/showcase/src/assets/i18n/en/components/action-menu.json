@@ -437,7 +437,7 @@
         "tab": {
           "description": "Moves focus to the trigger button. When the menu is open, Tab closes it and returns focus to the trigger."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Opens the menu when focus is on the trigger. Activates the focused menu item when inside the menu."
         },
         "escape": {

@@ -255,6 +255,15 @@
         },
         "normalizedLive": {
           "description": "Un élément visuellement masqué avec <code>aria-live=\"assertive\"</code> annonce quand l'heure saisie est normalisée à la limite valide la plus proche."
+        },
+        "columnLabels": {
+          "description": "Les tokens de texte d'aide de colonne sont annoncés lorsque la colonne reçoit le focus, indiquant comment interagir (touches fléchées, Début/Fin)."
+        },
+        "optionSelected": {
+          "description": "Lorsque qu'une heure est sélectionnée, elle est annoncée via le token i18n <code>timeSelected</code> qui inclut l'heure sélectionnée (ex. 'Heure sélectionnée : 3:15 PM')."
+        },
+        "normalizedAlert": {
+          "description": "Lorsque l'heure est normalisée, elle est annoncée via le token i18n <code>normalizedTime</code> qui inclut l'heure normalisée (ex. 'Heure normalisée à 4:00 PM')."
         }
       }
     },
@@ -265,7 +274,7 @@
       "elements": {
         "container": "Libellé du conteneur",
         "columns": "Libellés des colonnes",
-        "helpText": "Texte d'aide des colonnes"
+        "help": "Texte d'aide des colonnes"
       },
       "info": {
         "containerLabel": "Token timePickerLabel / durationPickerLabel",
@@ -288,7 +297,7 @@
       "title": "Interaction clavier",
       "description": "Chaque colonne du Sélecteur d'heure se comporte comme une liste box indépendante. Utilisez les touches suivantes pour naviguer et sélectionner des valeurs.",
       "rows": {
-        "arrowUpDown": {
+        "arrows": {
           "description": "Déplace le focus vers l'option précédente/suivante dans la colonne focalisée."
         },
         "tab": {
@@ -297,7 +306,7 @@
         "homeEnd": {
           "description": "Saute à la première/dernière option dans la colonne focalisée."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Sélectionne l'option focalisée et met à jour la valeur d'heure affichée."
         },
         "escape": {

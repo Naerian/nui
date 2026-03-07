@@ -410,7 +410,7 @@
         "shiftTab": {
           "description": "Mueve el foco al elemento anterior."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Activa el botón. Si está <code>disabled</code> o <code>loading</code>, el handler intercepta y cancela el evento antes de que se dispare <code>onClick</code>."
         }
       }
@@ -438,8 +438,8 @@
     },
     "priority": {
       "title": "Prioridad de resolución",
-      "description": "Los valores se resuelven siguiendo una cadena de prioridad estricta de tres niveles. Gana el primero que coincida: input directo &gt; config global &gt; default de librería.",
-      "note": "La cadena de prioridad garantiza que los componentes siempre tengan un valor resuelto válido. Un input directo siempre tiene máxima prioridad; si no se proporciona, se usa el valor del config global; si tampoco está configurado, se aplica el default de la librería."
+      "description": "NUI resuelve los valores de configuración usando la siguiente cadena de prioridad (gana el de mayor prioridad):",
+      "note": "<strong>Input del componente</strong> → <strong>Config global (<code>provideNUI</code>)</strong> → <strong>Valor por defecto</strong>"
     }
   }
 }

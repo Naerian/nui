@@ -78,12 +78,12 @@ export const SIDEBAR_PANEL_A11Y_SECTIONS: ComponentSection[] = [
         [
           'components.sidebar-panel.a11y.naming.elements.panelWithTitle',
           '<code>aria-labelledby</code>',
-          'components.sidebar-panel.a11y.naming.rows.panelTitle.description',
+          'components.sidebar-panel.a11y.naming.rows.title.description',
         ],
         [
-          'components.sidebar-panel.a11y.naming.elements.controlButtons',
+          'components.sidebar-panel.a11y.naming.elements.buttons',
           'components.sidebar-panel.a11y.naming.info.i18nTokens',
-          'components.sidebar-panel.a11y.naming.rows.controlButtons.description',
+          'components.sidebar-panel.a11y.naming.rows.buttons.description',
         ],
       ],
     },
@@ -109,7 +109,7 @@ export const SIDEBAR_PANEL_A11Y_SECTIONS: ComponentSection[] = [
         ],
         [
           '<kbd>Enter</kbd> / <kbd>Space</kbd>',
-          'components.sidebar-panel.a11y.keyboard.rows.spaceEnter.description',
+          'components.sidebar-panel.a11y.keyboard.rows.enterSpace.description',
         ],
       ],
     },

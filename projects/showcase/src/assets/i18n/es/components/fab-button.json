@@ -177,7 +177,7 @@
       "title": "Interacción por teclado",
       "description": "El FabButton sigue el patrón de teclado WAI-ARIA de Menu Button.",
       "rows": {
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Activa el botón disparador, alternando el menú de acciones abierto o cerrado."
         },
         "escape": {

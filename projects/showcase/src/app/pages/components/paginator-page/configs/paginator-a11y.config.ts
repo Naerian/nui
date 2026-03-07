@@ -122,7 +122,7 @@ export const PAGINATOR_A11Y_SECTIONS: ComponentSection[] = [
         ],
         [
           '<kbd>Enter</kbd> / <kbd>Space</kbd>',
-          'components.paginator.a11y.keyboard.rows.spaceEnter.description',
+          'components.paginator.a11y.keyboard.rows.enterSpace.description',
         ],
       ],
     },

@@ -380,7 +380,7 @@
         "pageDown": {
           "description": "Navigiert zum nächsten Monat."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Wählt den fokussierten Tag aus."
         },
         "escape": {

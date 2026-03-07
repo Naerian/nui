@@ -173,10 +173,10 @@
         "backdrop": "Superposition de fond"
       },
       "rows": {
-        "panelRole": {
+        "role": {
           "description": "La racine du panneau porte <code>role=\"dialog\"</code> pour signaler une région distincte aux technologies d'assistance."
         },
-        "ariaLabelledby": {
+        "labelledby": {
           "description": "<code>aria-labelledby</code> pointe vers l'élément titre du panneau, donnant à la boîte de dialogue un nom accessible dérivé du titre visible."
         },
         "closeLabel": {
@@ -188,7 +188,7 @@
         "expandLabel": {
           "description": "Le bouton d'agrandissement/réduction expose le token correspondant (<code>expand</code> ou <code>collapse</code>) comme <code>aria-label</code>."
         },
-        "backdropHidden": {
+        "backdrop": {
           "description": "La superposition de fond est masquée des technologies d'assistance avec <code>aria-hidden=\"true\"</code>."
         }
       }
@@ -199,7 +199,7 @@
       "note": "Fournissez toujours un titre visible dans le panneau, car il devient automatiquement le nom de la boîte de dialogue.",
       "elements": {
         "panelWithTitle": "Panneau avec titre",
-        "controlButtons": "Boutons de contrôle"
+        "buttons": "Boutons de contrôle"
       },
       "info": {
         "ariaLabelledby": "Titre du panneau (aria-labelledby)",
@@ -224,7 +224,7 @@
         "tab": {
           "description": "Cycle le focus entre les éléments interactifs du panneau. Le focus est piégé quand le panneau est ouvert en mode modal."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Active le bouton de contrôle focalisé (fermer, réduire, agrandir)."
         }
       }
@@ -260,8 +260,8 @@
     },
     "priority": {
       "title": "Priorité de résolution",
-      "description": "Les valeurs sont résolues selon une chaîne de priorité stricte à trois niveaux. Le premier niveau correspondant l'emporte : config à l'appel &gt; config globale &gt; valeur par défaut de la bibliothèque.",
-      "note": "La chaîne de priorité garantit que les composants ont toujours une valeur résolue valide. Les options passées lors de l'appel l'emportent toujours ; si elles ne sont pas fournies, la valeur de la configuration globale est utilisée ; si elle n'est pas non plus configurée, la valeur par défaut de la bibliothèque est appliquée."
+      "description": "NUI résout les valeurs de configuration selon la chaîne de priorité suivante (la plus haute gagne) :",
+      "note": "<strong>Input du composant</strong> → <strong>Config globale (<code>provideNUI</code>)</strong> → <strong>Valeur par défaut</strong>"
     }
   }
 }

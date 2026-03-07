@@ -177,7 +177,7 @@
       "title": "Interaction clavier",
       "description": "Le FabButton suit le modèle clavier WAI-ARIA Menu Button.",
       "rows": {
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Active le bouton déclencheur, basculant le menu d'actions ouvert ou fermé."
         },
         "escape": {

@@ -177,7 +177,7 @@
       "title": "Keyboard interaction",
       "description": "The FabButton follows the WAI-ARIA Menu Button keyboard pattern.",
       "rows": {
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Activates the trigger button, toggling the actions menu open or closed."
         },
         "escape": {

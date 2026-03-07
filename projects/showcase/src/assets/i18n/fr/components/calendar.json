@@ -380,7 +380,7 @@
         "pageDown": {
           "description": "Navigue vers le mois suivant."
         },
-        "spaceEnter": {
+        "enterSpace": {
           "description": "Sélectionne le jour focalisé."
         },
         "escape": {

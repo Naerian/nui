@@ -154,7 +154,7 @@ export const ACTION_MENU_A11Y_SECTIONS: ComponentSection[] = [
         ],
         [
           '<kbd>Space</kbd> / <kbd>Enter</kbd>',
-          'components.actionMenu.a11y.keyboard.rows.spaceEnter.description',
+          'components.actionMenu.a11y.keyboard.rows.enterSpace.description',
         ],
         [
           '<kbd>Escape</kbd>',
