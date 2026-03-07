@@ -16,6 +16,9 @@ export * from './sidebar-panel';
 // Fab Button configuration
 export * from './fab-button';
 
+// Time Picker configuration
+export * from './time-picker';
+
 // Main NUI configuration
 export * from './nui.model';
 export * from './nui.provider';

@@ -31,7 +31,7 @@
   @if (isDurationMode() && (!shouldShowTabs() || activeTab() === 'selector')) {
     <div class="nui-time-picker__duration-view">
       <!-- Header: Display de duración -->
-      @if (showHeader()) {
+      @if (effectiveShowHeader()) {
         <div class="nui-time-picker__header">
           <div
             class="nui-time-picker__display nui-time-picker__display--duration"
@@ -207,7 +207,7 @@
   @if (!isDurationMode() && (!shouldShowTabs() || activeTab() === 'selector')) {
     <div class="nui-time-picker__main">
       <!-- Header: Display actual -->
-      @if (showHeader()) {
+      @if (effectiveShowHeader()) {
         <div class="nui-time-picker__header">
           <div class="nui-time-picker__header-info">
             <!-- Live region para normalización: siempre en DOM, el texto cambia -->

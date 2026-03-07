@@ -38,6 +38,7 @@ import type { SelectBtnOption } from '../select-button/models/select-button.mode
 import { TooltipDirective } from '../tooltip';
 import { NuiI18nService } from '../../i18n/nui-i18n.service';
 import { DEFAULT_TIMEPICKER_I18N } from './models';
+import { injectTimePickerConfig } from '../../configs/time-picker';
 @Component({
   selector: 'nui-time-picker',
   standalone: true,
@@ -55,12 +56,17 @@ import { DEFAULT_TIMEPICKER_I18N } from './models';
 })
 export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterViewInit {
   // ==================
+  // CONFIG GLOBAL
+  // ==================
+  private readonly _globalConfig = injectTimePickerConfig();
+
+  // ==================
   // INPUTS
   // ==================
   mode = input<TimePickerMode>('HOUR_MINUTE_24');
   disabled = input<boolean>(false);
   title = input<string>('');
-  showHeader = input<boolean>(true);
+  showHeader = input<boolean | undefined>(undefined);
 
   // Internal disabled state from form (ControlValueAccessor)
   private _disabledByForm = signal<boolean>(false);
@@ -68,8 +74,15 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   // Combined disabled state (input or form)
   isDisabled = computed(() => this.disabled() || this._disabledByForm());
 
+  /** showHeader efectivo: Input → Config global → true */
+  effectiveShowHeader = computed(() => this.showHeader() ?? this._globalConfig.showHeader ?? true);
+
   @Input() set config(value: TimePickerConfig) {
     const mergedConfig = { ...DEFAULT_CONFIG, ...value };
+
+    // Aplicar fallbacks de config global para hourStep y minuteStep
+    if (!value.hourStep) mergedConfig.hourStep = this._globalConfig.hourStep ?? DEFAULT_CONFIG.hourStep;
+    if (!value.minuteStep) mergedConfig.minuteStep = this._globalConfig.minuteStep ?? DEFAULT_CONFIG.minuteStep;
 
     // Si es modo DURATION y no se proporcionó config de duration, usar valores por defecto razonables
     if (!value.duration) {
@@ -98,13 +111,19 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   }
 
   /**
-   * Estrategia de valor por defecto
+   * Estrategia de valor por defecto.
    * - 'now': Hora actual
    * - 'smart': Hora actual + redondeo + offset
    * - 'empty': Sin valor inicial
    * - 'custom': Usar defaultValue
+   * Si no se especifica, se usa la config global (default: 'empty').
    */
-  defaultStrategy = input<TimePickerStrategy>(TimePickerStrategyEnum.EMPTY);
+  defaultStrategy = input<TimePickerStrategy | undefined>(undefined);
+
+  /** defaultStrategy efectivo: Input → Config global → 'empty' */
+  effectiveDefaultStrategy = computed<TimePickerStrategy>(
+    () => this.defaultStrategy() ?? this._globalConfig.defaultStrategy ?? TimePickerStrategyEnum.EMPTY
+  );
 
   /**
    * Valor custom cuando strategy = 'custom'
@@ -112,9 +131,15 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   defaultValue = input<Date | string | TimeValue | undefined>(undefined);
 
   /**
-   * Offset en minutos para strategy 'smart' (default: 30)
+   * Offset en minutos para strategy 'smart'.
+   * Si no se especifica, se usa la config global (default: 30).
    */
-  smartOffset = input<number>(30);
+  smartOffset = input<number | undefined>(undefined);
+
+  /** smartOffset efectivo: Input → Config global → 30 */
+  effectiveSmartOffset = computed<number>(
+    () => this.smartOffset() ?? this._globalConfig.smartOffset ?? 30
+  );
 
   /**
    * Permite establecer el valor directamente desde el template
@@ -597,7 +622,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
       if (
         !this.selectedTime() &&
         !this.hasExternalValue() &&
-        this.defaultStrategy() !== TimePickerStrategyEnum.EMPTY
+        this.effectiveDefaultStrategy() !== TimePickerStrategyEnum.EMPTY
       ) {
         const defaultValue = this.getDefaultValue();
         if (defaultValue) {
@@ -1394,7 +1419,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
    * Obtiene el valor por defecto según la estrategia configurada
    */
   private getDefaultValue(): TimeValue | null {
-    switch (this.defaultStrategy()) {
+    switch (this.effectiveDefaultStrategy()) {
       case TimePickerStrategyEnum.NOW:
         return this.getCurrentTime();
 
@@ -1451,7 +1476,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     const now = new Date();
 
     // Agregar offset en minutos
-    now.setMinutes(now.getMinutes() + this.smartOffset());
+    now.setMinutes(now.getMinutes() + this.effectiveSmartOffset());
 
     // Redondear a incrementos según la configuración
     const minuteStep = this.config.minuteStep;

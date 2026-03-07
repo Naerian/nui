@@ -314,5 +314,28 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuration globale",
+      "description": "Le composant TimePicker supporte la configuration globale via <code>provideNUI()</code>. Définissez des valeurs par défaut une seule fois au niveau de l'application pour tous les sélecteurs d'heure.",
+      "note": "La configuration globale agit comme valeurs par défaut et peut toujours être remplacée par instance via les inputs du composant."
+    },
+    "defaults": {
+      "title": "Propriétés configurables",
+      "description": "Les propriétés suivantes peuvent être configurées globalement via <code>TimePickerGlobalConfig</code> :",
+      "rows": {
+        "showHeader": "Si l'en-tête affichant l'heure formatée est affiché en haut du sélecteur.",
+        "defaultStrategy": "Stratégie de valeur initiale : <code>empty</code> (sans valeur), <code>now</code> (heure actuelle), <code>smart</code> (heure actuelle + offset) ou <code>custom</code>.",
+        "smartOffset": "Offset en minutes ajouté à l'heure actuelle quand la stratégie est <code>smart</code>.",
+        "hourStep": "Incrément pour le sélecteur d'heures. Par exemple, <code>2</code> affiche uniquement les heures paires.",
+        "minuteStep": "Incrément pour le sélecteur de minutes. Par exemple, <code>15</code> affiche les quarts d'heure."
+      }
+    },
+    "priority": {
+      "title": "Priorité de résolution",
+      "description": "NUI résout les valeurs de configuration en utilisant la chaîne de priorité suivante (la priorité la plus élevée l'emporte) :",
+      "note": "<strong>Input du composant</strong> → <strong>Config globale (<code>provideNUI</code>)</strong> → <strong>Valeur par défaut</strong>"
+    }
   }
 }

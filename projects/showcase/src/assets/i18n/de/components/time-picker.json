@@ -314,5 +314,28 @@
         }
       }
     }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Globale Konfiguration",
+      "description": "Die TimePicker-Komponente unterstützt globale Konfiguration über <code>provideNUI()</code>. Definieren Sie Standardwerte einmal auf Anwendungsebene für alle Zeitauswahl-Komponenten.",
+      "note": "Die globale Konfiguration wirkt als Standardwerte und kann jederzeit pro Instanz über die Inputs der Komponente überschrieben werden."
+    },
+    "defaults": {
+      "title": "Konfigurierbare Eigenschaften",
+      "description": "Die folgenden Eigenschaften können global über <code>TimePickerGlobalConfig</code> konfiguriert werden:",
+      "rows": {
+        "showHeader": "Ob die Kopfzeile mit der formatierten Zeit oben im Selektor angezeigt wird.",
+        "defaultStrategy": "Anfangswert-Strategie: <code>empty</code> (kein Wert), <code>now</code> (aktuelle Zeit), <code>smart</code> (aktuelle Zeit + Offset) oder <code>custom</code>.",
+        "smartOffset": "Offset in Minuten, der zur aktuellen Zeit addiert wird, wenn die Strategie <code>smart</code> ist.",
+        "hourStep": "Schrittweite für die Stundenauswahl. Zum Beispiel zeigt <code>2</code> nur gerade Stunden.",
+        "minuteStep": "Schrittweite für die Minutenauswahl. Zum Beispiel zeigt <code>15</code> Viertelstunden."
+      }
+    },
+    "priority": {
+      "title": "Auflösungspriorität",
+      "description": "NUI löst Konfigurationswerte nach folgender Prioritätskette auf (höchste Priorität gewinnt):",
+      "note": "<strong>Komponenten-Input</strong> → <strong>Globale Konfiguration (<code>provideNUI</code>)</strong> → <strong>Standardwert</strong>"
+    }
   }
 }

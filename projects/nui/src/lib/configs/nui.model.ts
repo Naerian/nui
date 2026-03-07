@@ -11,6 +11,7 @@ import { ActionMenuGlobalConfig } from './action-menu';
 import { SelectButtonGlobalConfig } from './select-button';
 import { PaginatorConfig } from './paginator';
 import { AvatarGlobalConfig } from './avatar';
+import { TimePickerGlobalConfig } from './time-picker';
 
 /**
  * Configuración global de la librería NUI (Narian UI).
@@ -45,5 +46,7 @@ export interface NUIConfig {
     fabButton?: Partial<FabButtonConfig>;
     /** Sidebar panel global defaults */
     sidebarPanel?: Partial<SidebarPanelConfig>;
+    /** Time Picker global defaults */
+    timePicker?: Partial<TimePickerGlobalConfig>;
   };
 }
