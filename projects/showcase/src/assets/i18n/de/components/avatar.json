@@ -303,8 +303,8 @@
     },
     "priority": {
       "title": "Auflösungspriorität",
-      "description": "Werte werden anhand einer strengen dreistufigen Prioritätskette aufgelöst. Die erste übereinstimmende Ebene gewinnt: direktes Input-Binding &gt; globale Konfiguration &gt; Standardwert der Bibliothek.",
-      "note": "Die Prioritätskette stellt sicher, dass Komponenten immer einen gültigen aufgelösten Wert haben. Ein direktes Input-Binding gewinnt immer; wenn keins angegeben ist, wird der globale Konfigurationswert verwendet; wenn auch dieser nicht konfiguriert ist, wird der Standardwert der Bibliothek angewendet."
+      "description": "NUI löst Konfigurationswerte anhand der folgenden Prioritätskette auf (höchste gewinnt):",
+      "note": "<strong>Komponenten-Input</strong> → <strong>Globale Konfig (<code>provideNUI</code>)</strong> → <strong>Eingebauter Standard</strong>"
     }
   }
 }

@@ -303,8 +303,8 @@
     },
     "priority": {
       "title": "Resolution priority",
-      "description": "Values are resolved following a strict three-level priority chain. The first matching level wins: direct input &gt; global config &gt; library default.",
-      "note": "The priority chain guarantees that components always have a valid resolved value. A direct input always wins; if not provided, the global config value is used; if not configured either, the library default is applied."
+      "description": "NUI resolves configuration values using the following priority chain (highest wins):",
+      "note": "<strong>Input property</strong> → <strong>Global Config (<code>provideNUI</code>)</strong> → <strong>Built-in default</strong>"
     }
   }
 }
