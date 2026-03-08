@@ -54,8 +54,11 @@
     "customColors": {
       "title": "Couleurs personnalisées",
       "description": "Remplacez les couleurs de la piste, du remplissage et du texte avec des inputs personnalisés acceptant n'importe quelle valeur de couleur CSS.",
-      "note": "Utilisez les inputs <code>trackColor</code>, <code>fillColor</code> et <code>textColor</code> pour des couleurs personnalisées."
-    }
+      "note": "Utilisez les inputs <code>trackColor</code>, <code>fillColor</code> et <code>textColor</code> pour des couleurs personnalisées."    },
+    "steps": {
+      "title": "Étapes",
+      "description": "Divise le track en segments égaux à l'aide de séparateurs visuels, idéal pour communiquer des étapes discrètes comme les étapes d'un wizard ou les flux d'onboarding.",
+      "note": "Utilisez l'input <code>steps</code> avec une valeur ≥ 2. Chaque segment se remplit individuellement au fil de la progression. Personnalisez l'écart entre les segments avec <code>--nui-pb-step-gap</code>. Note : le mode <code>indeterminate</code> ignore <code>steps</code>."    }
   },
   "api": {
     "inputs": {

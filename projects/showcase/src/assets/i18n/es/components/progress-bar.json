@@ -55,6 +55,11 @@
       "title": "Colores personalizados",
       "description": "Sobreescribe los colores del track, fill y texto con inputs personalizados que aceptan cualquier valor de color CSS.",
       "note": "Usa los inputs <code>trackColor</code>, <code>fillColor</code> y <code>textColor</code> para colores personalizados."
+    },
+    "steps": {
+      "title": "Pasos",
+      "description": "Divide el track en segmentos iguales mediante divisores visuales, ideal para comunicar etapas discretas como pasos de un wizard o flujos de onboarding.",
+      "note": "Usa el input <code>steps</code> con un valor ≥ 2. Cada segmento se rellena individualmente a medida que avanza el progreso. Personaliza el ancho del hueco entre segmentos con <code>--nui-pb-step-gap</code>. Nota: el modo <code>indeterminate</code> ignora <code>steps</code>."
     }
   },
   "api": {

@@ -83,6 +83,16 @@
                 </div>
               }
 
+              @case ('steps') {
+                <div class="example-preview flex-column gap-4">
+                  <nui-progress-bar [value]="60" [steps]="10" />
+                  <nui-progress-bar [value]="3" [maxValue]="4" [steps]="4" color="success" valueFormat="fractional" valuePosition="left" />
+                  <nui-progress-bar [value]="70" [steps]="10" variant="outline" color="warning" valuePosition="top" />
+                  <nui-progress-bar [value]="70" [steps]="10" variant="ghost" color="info" />
+                  <nui-progress-bar [value]="75" [steps]="4" compact color="danger" trailingIcon="ri-error-warning-line" />
+                </div>
+              }
+
               @case ('value-positions') {
                 <div class="example-preview flex-column gap-4">
                   @for (pos of valuePositions; track pos) {

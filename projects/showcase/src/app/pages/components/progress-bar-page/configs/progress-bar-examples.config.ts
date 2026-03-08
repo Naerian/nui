@@ -234,6 +234,35 @@ export const PROGRESS_BAR_EXAMPLES_SECTIONS: ComponentSection[] = [
     ],
   },
   {
+    id: 'steps',
+    title: 'components.progressBar.examples.steps.title',
+    description: 'components.progressBar.examples.steps.description',
+    note: {
+      type: 'info',
+      content: 'components.progressBar.examples.steps.note',
+    },
+    anchor: 'steps',
+    examples: [
+      {
+        title: 'Basic steps',
+        code: `<nui-progress-bar [value]="60" [steps]="5" label="Step 3 / 5" labelPosition="top" />
+<nui-progress-bar [value]="3" [maxValue]="4" [steps]="4" color="success" valueFormat="fractional" />`,
+        language: 'html',
+      },
+      {
+        title: 'Steps + variants',
+        code: `<nui-progress-bar [value]="70" [steps]="10" variant="outline" color="warning" />
+<nui-progress-bar [value]="70" [steps]="10" variant="ghost" color="info" />`,
+        language: 'html',
+      },
+      {
+        title: 'Steps + compact',
+        code: `<nui-progress-bar [value]="75" [steps]="4" compact color="danger" trailingIcon="ri-error-warning-line" />`,
+        language: 'html',
+      },
+    ],
+  },
+  {
     id: 'custom-colors',
     title: 'components.progressBar.examples.customColors.title',
     description: 'components.progressBar.examples.customColors.description',

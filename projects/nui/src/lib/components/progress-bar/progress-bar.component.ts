@@ -39,6 +39,7 @@ export class ProgressBarComponent {
   readonly trailingIcon = input<string | null>(null);
   readonly labelPosition = input<ProgressBarLabelPosition>(DEFAULT_PB_LABEL_POSITION);
   readonly showValueInLabel = input<boolean, unknown>(false, { transform: booleanAttribute });
+  readonly steps = input<number>(0);
 
   // ─── Static IDs (generados una vez) ─────────────────────────────────────────────
   readonly id = `nui-pb-${Math.random().toString(36).substring(2, 9)}`;
@@ -47,6 +48,34 @@ export class ProgressBarComponent {
   // ─── Effective values: Input → Config global → Default ─────────────────────────
   readonly effectiveColor = computed(() => this.color() ?? this.globalConfig.color ?? DEFAULT_COLOR);
   readonly effectiveVariant = computed(() => this.variant() ?? this.globalConfig.variant ?? DEFAULT_VARIANT);
+
+  /** Sanitized steps count: must be an integer ≥ 2 to make sense visually. */
+  readonly stepsCount = computed(() => {
+    const s = Math.floor(this.steps());
+    return s >= 2 ? s : 0;
+  });
+
+  /**
+   * Segment fill ratios (0..1) for stepped mode.
+   * Returns null → use standard single-fill render.
+   * Semantically incompatible with indeterminate → returns null.
+   */
+  readonly segments = computed<number[] | null>(() => {
+    const n = this.stepsCount();
+    if (!n || this.indeterminate()) return null;
+    const val = this.value();
+    const max = this.maxValue();
+    if (val === null || max === null || max === 0) {
+      return Array.from({ length: n }, () => 0);
+    }
+    const filledFloat = Math.max(0, Math.min(n, (val / max) * n));
+    const filledWhole = Math.floor(filledFloat);
+    return Array.from({ length: n }, (_, i) => {
+      if (i < filledWhole) return 1;
+      if (i === filledWhole) return filledFloat - filledWhole;
+      return 0;
+    });
+  });
 
   // ─── Computed ────────────────────────────────────────────────────────────────
   readonly progressBarWidth = computed<string>(() => {
@@ -99,8 +128,17 @@ export class ProgressBarComponent {
   readonly showOutsideValue = computed<boolean>(
     () =>
       !this.showValueInLabel() &&
-      this.valuePosition() !== 'hidden' &&
-      this.valuePosition() !== 'inside' &&
+      this.effectiveValuePosition() !== 'hidden' &&
+      this.effectiveValuePosition() !== 'inside' &&
       !!this.computedValueText()
   );
+
+  /**
+   * In steps mode, 'inside' has no single fill element to anchor to.
+   * Remap it to 'right' so the value is always visible.
+   */
+  readonly effectiveValuePosition = computed<ProgressBarValuePosition>(() => {
+    if (this.segments() !== null && this.valuePosition() === 'inside') return 'right';
+    return this.valuePosition();
+  });
 }

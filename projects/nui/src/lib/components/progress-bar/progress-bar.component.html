@@ -17,10 +17,10 @@
   <div
     class="nui-pb__bar"
     [class.nui-pb__bar--indeterminate]="indeterminate()"
-    [class.nui-pb__bar--value-top]="valuePosition() === 'top' && !showValueInLabel()"
-    [class.nui-pb__bar--value-bottom]="valuePosition() === 'bottom' && !showValueInLabel()"
-    [class.nui-pb__bar--value-left]="valuePosition() === 'left' && !showValueInLabel()"
-    [class.nui-pb__bar--value-right]="valuePosition() === 'right' && !showValueInLabel()"
+    [class.nui-pb__bar--value-top]="effectiveValuePosition() === 'top' && !showValueInLabel()"
+    [class.nui-pb__bar--value-bottom]="effectiveValuePosition() === 'bottom' && !showValueInLabel()"
+    [class.nui-pb__bar--value-left]="effectiveValuePosition() === 'left' && !showValueInLabel()"
+    [class.nui-pb__bar--value-right]="effectiveValuePosition() === 'right' && !showValueInLabel()"
     role="progressbar"
     [attr.aria-valuenow]="!indeterminate() ? value() : null"
     [attr.aria-valuemin]="0"
@@ -38,21 +38,34 @@
 
     <div
       class="nui-pb__track"
+      [class.nui-pb__track--stepped]="segments() !== null"
       [style.background-color]="trackColor() || null"
       [style.border-color]="trackColor() || null"
     >
-      <div
-        class="nui-pb__fill"
-        [style.width]="progressBarWidth()"
-        [style.background-color]="fillColor() || null"
-      >
-        @if (valuePosition() === 'inside' && computedValueText()) {
-          <span
-            class="nui-pb__value nui-pb__value--inside"
-            [class.nui-pb__value--inside-hidden]="!value()"
-          >{{ computedValueText() }}</span>
+      @if (segments(); as segs) {
+        @for (segFill of segs; track $index) {
+          <div class="nui-pb__segment">
+            <div
+              class="nui-pb__segment-fill"
+              [style.width.%]="segFill * 100"
+              [style.background-color]="fillColor() || null"
+            ></div>
+          </div>
         }
-      </div>
+      } @else {
+        <div
+          class="nui-pb__fill"
+          [style.width]="progressBarWidth()"
+          [style.background-color]="fillColor() || null"
+        >
+          @if (valuePosition() === 'inside' && computedValueText()) {
+            <span
+              class="nui-pb__value nui-pb__value--inside"
+              [class.nui-pb__value--inside-hidden]="!value()"
+            >{{ computedValueText() }}</span>
+          }
+        </div>
+      }
     </div>
 
     @if (finalLabelText() && labelPosition() === 'right') {

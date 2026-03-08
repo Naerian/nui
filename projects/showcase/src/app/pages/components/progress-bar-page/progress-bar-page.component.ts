@@ -49,6 +49,7 @@ export class ProgressBarPageComponent extends BaseComponentPage {
         'colors',
         'variants',
         'indeterminate',
+        'steps',
         'value-positions',
         'value-format',
         'label',

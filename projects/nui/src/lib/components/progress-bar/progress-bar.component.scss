@@ -115,18 +115,50 @@
       var(--nui-shadow-field),
       inset 0 1px 3px rgba(0, 0, 0, 0.12);
     transition: all var(--nui-pb-transition-duration) var(--nui-pb-transition-timing);
+
+    // Stepped mode: track becomes a transparent flex wrapper;
+    // each segment is its own mini-track so the gap shows the page surface —
+    // visible at any fill level regardless of color/theme/variant.
+    &--stepped {
+      display: flex;
+      flex-direction: row;
+      gap: var(--nui-pb-step-gap);
+      // Reset outer track visuals — each segment handles them individually
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      overflow: visible;
+
+      .nui-pb__segment {
+        background-color: var(--nui-pb-track-bg, var(--nui-surface-neutral));
+        border-width: var(--nui-pb-border-width);
+        border-style: solid;
+        border-color: var(--nui-pb-track-border, var(--nui-border-default));
+        box-shadow:
+          var(--nui-shadow-field),
+          inset 0 1px 3px rgba(0, 0, 0, 0.12);
+        border-radius: 0;
+
+        &:first-child {
+          border-radius: var(--nui-pb-radius) 0 0 var(--nui-pb-radius);
+        }
+
+        &:last-child {
+          border-radius: 0 var(--nui-pb-radius) var(--nui-pb-radius) 0;
+        }
+      }
+
+      &:hover .nui-pb__segment-fill {
+        background-color: var(--nui-pb-fill-hover-bg);
+      }
+    }
   }
 
   &__fill {
     position: relative;
     height: 100%;
-    border-radius: inherit;
+    border-radius: 0;
     background-color: var(--nui-pb-fill-bg);
-    background-image: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.13) 0%,
-      rgba(0, 0, 0, 0.07) 100%
-    );
     transition: width var(--nui-pb-transition-duration) var(--nui-pb-transition-timing);
 
     &:hover {
@@ -144,6 +176,21 @@
     animation: nui-pb-indeterminate var(--nui-pb-indeterminate-duration) infinite
       var(--nui-pb-indeterminate-timing);
     transform-origin: 0% 50%;
+  }
+
+  &__segment {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  &__segment-fill {
+    height: 100%;
+    background-color: var(--nui-pb-fill-bg);
+    transition:
+      width var(--nui-pb-transition-duration) var(--nui-pb-transition-timing),
+      background-color var(--nui-pb-transition-duration) var(--nui-pb-transition-timing);
   }
 
   &__value {
@@ -198,6 +245,16 @@
     .nui-pb__track {
       height: var(--nui-pb-height-compact);
       border-radius: var(--nui-pb-radius-compact);
+
+      &--stepped .nui-pb__segment {
+        &:first-child {
+          border-radius: var(--nui-pb-radius-compact) 0 0 var(--nui-pb-radius-compact);
+        }
+
+        &:last-child {
+          border-radius: 0 var(--nui-pb-radius-compact) var(--nui-pb-radius-compact) 0;
+        }
+      }
     }
 
     .nui-pb__value--inside,

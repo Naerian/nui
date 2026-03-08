@@ -99,6 +99,12 @@ export const PROGRESS_BAR_API_SECTIONS: ComponentSection[] = [
           'Muestra el valor de progreso inline junto a la etiqueta.',
         ],
         [
+          '<code>steps</code>',
+          'number',
+          '<code class="neutral">0</code>',
+          'Divide visualmente el track en N segmentos mediante líneas divisoras. Requiere ≥ 2 para activarse.',
+        ],
+        [
           '<code>trackColor</code>',
           'string | null',
           '<code class="neutral">null</code>',

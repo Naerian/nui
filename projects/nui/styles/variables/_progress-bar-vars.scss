@@ -11,6 +11,8 @@ $pb-indeterminate-timing: ease-in-out !default;
 
 $pb-font-weight-inside: 600 !default;
 
+$pb-step-gap: 0rem !default;
+
 // MIXIN (CSS Custom Properties expuestas al consumidor)
 @mixin nui-progress-bar-vars {
   // Heights
@@ -32,4 +34,7 @@ $pb-font-weight-inside: 600 !default;
   --nui-pb-transition-timing: #{$pb-transition-timing};
   --nui-pb-indeterminate-duration: #{$pb-indeterminate-duration};
   --nui-pb-indeterminate-timing: #{$pb-indeterminate-timing};
+
+  // Steps
+  --nui-pb-step-gap: #{$pb-step-gap};
 }

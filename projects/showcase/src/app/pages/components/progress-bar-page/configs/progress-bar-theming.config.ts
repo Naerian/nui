@@ -19,6 +19,7 @@ export const PROGRESS_BAR_THEMING_SECTIONS: ComponentSection[] = [
         ['<code>--nui-pb-text</code>', 'Color del texto dentro del fill (inside)'],
         ['<code>--nui-pb-value-text</code>', 'Color del texto del valor fuera del fill'],
         ['<code>--nui-pb-label-text</code>', 'Color del texto de la etiqueta'],
+        ['<code>--nui-pb-step-divider</code>', 'Color de las líneas divisorias de pasos (si se usan)'],
       ],
     },
   },
@@ -42,6 +43,7 @@ export const PROGRESS_BAR_THEMING_SECTIONS: ComponentSection[] = [
         ['<code>--nui-pb-border-width</code>', 'var(--nui-border-width-xs)', 'Anchura del borde del track'],
         ['<code>--nui-pb-transition-duration</code>', '0.3s', 'Duración de la transición del fill'],
         ['<code>--nui-pb-indeterminate-duration</code>', '1.5s', 'Duración del ciclo de animación indeterminada'],
+        ['<code>--nui-pb-step-width</code>', '0.188rem', 'Anchura de las líneas divisorias de pasos, si <code>steps</code> tiene valor'],
       ],
     },
     examples: [
@@ -51,6 +53,7 @@ export const PROGRESS_BAR_THEMING_SECTIONS: ComponentSection[] = [
 nui-progress-bar {
   --nui-pb-height-md: 0.75rem;
   --nui-pb-indeterminate-duration: 2s;
+  --nui-pb-step-width: 4px;
 }`,
         language: 'scss',
       },

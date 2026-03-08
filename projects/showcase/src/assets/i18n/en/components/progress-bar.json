@@ -55,6 +55,11 @@
       "title": "Custom Colors",
       "description": "Overrides the track, fill, and text colors with custom inputs that accept any CSS color value.",
       "note": "Use the <code>trackColor</code>, <code>fillColor</code>, and <code>textColor</code> inputs for custom colors."
+    },
+    "steps": {
+      "title": "Steps",
+      "description": "Divides the track into equal segments using visual dividers, ideal for communicating discrete stages such as wizard steps or onboarding flows.",
+      "note": "Use the <code>steps</code> input with a value ≥ 2. Each segment fills individually as progress advances. Customize the gap width between segments via <code>--nui-pb-step-gap</code>. Note: <code>indeterminate</code> mode ignores <code>steps</code>."
     }
   },
   "api": {

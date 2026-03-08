@@ -55,6 +55,11 @@
       "title": "Benutzerdefinierte Farben",
       "description": "Überschreibt die Farben der Spur, Füllung und des Textes mit benutzerdefinierten Eingaben, die jeden CSS-Farbwert akzeptieren.",
       "note": "Verwenden Sie die Eingaben <code>trackColor</code>, <code>fillColor</code> und <code>textColor</code> für benutzerdefinierte Farben."
+    },
+    "steps": {
+      "title": "Schritte",
+      "description": "Teilt den Track in gleiche Segmente durch visuelle Trennlinien auf, ideal zur Darstellung diskreter Phasen wie Wizard-Schritte oder Onboarding-Abläufe.",
+      "note": "Verwenden Sie das <code>steps</code>-Input mit einem Wert ≥ 2. Jedes Segment füllt sich individuell, wenn der Fortschritt voranschreitet. Passen Sie den Abstand zwischen den Segmenten über <code>--nui-pb-step-gap</code> an. Hinweis: Im <code>indeterminate</code>-Modus wird <code>steps</code> ignoriert."
     }
   },
   "api": {
