@@ -1236,36 +1236,48 @@ export class ThemeService {
 
   private generateProgressBarVariables(name: string, color: string): string {
     const isDark = this._isDarkMode();
-    const hoverBg = isDark ? this.shade(color, 10) : this.tint(color, 10);
-    const pbText = isDark ? this.shade(color, 70) : this.tint(color, 70);
-    const pbTextShadow = isDark ? this.withAlpha(color, 0.8) : this.withAlpha(color, 0.8);
+    const pbText = this.getContrastColor(color);
+    const pbTextShadow = this.withAlpha(color, 0.8);
+
+    // Solid: always darkens on hover → weight and solidity
+    const solidFillHover = this.shade(color, 12);
+
+    // Outline: stronger border, lightens on hover → open and airy
+    const outlineBorder = this.withAlpha(color, 0.55);
+    const outlineFillHover = isDark ? this.shade(color, 8) : this.tint(color, 12);
+
+    // Ghost: translucent fill → ethereal, becomes more opaque on hover
+    const ghostFill = this.withAlpha(color, 0.72);
+    const ghostFillHover = this.withAlpha(color, 0.88);
+    const ghostValueText = isDark ? this.tint(color, 45) : this.shade(color, 20);
+    const ghostLabelText = isDark ? this.tint(color, 35) : this.shade(color, 30);
 
     return `
       /* ── Progress Bar: ${name} ── */
 
-      /* Solid neutral track + colored fill */
+      /* Solid: neutral groove + opaque fill, darkens on hover */
       --nui-pb-${name}-solid-track-bg: var(--nui-surface-neutral);
       --nui-pb-${name}-solid-track-border: var(--nui-border-default);
       --nui-pb-${name}-solid-fill-bg: ${color};
-      --nui-pb-${name}-solid-fill-hover-bg: ${hoverBg};
+      --nui-pb-${name}-solid-fill-hover-bg: ${solidFillHover};
       --nui-pb-${name}-solid-value-text: var(--nui-text-secondary);
       --nui-pb-${name}-solid-label-text: var(--nui-text-primary);
 
-      /* Outline transparent track with colored border */
+      /* Outline: open transparent groove + stronger border + brand-colored text, lightens on hover */
       --nui-pb-${name}-outline-track-bg: transparent;
-      --nui-pb-${name}-outline-track-border: ${this.withAlpha(color, 0.35)};
+      --nui-pb-${name}-outline-track-border: ${outlineBorder};
       --nui-pb-${name}-outline-fill-bg: ${color};
-      --nui-pb-${name}-outline-fill-hover-bg: ${hoverBg};
+      --nui-pb-${name}-outline-fill-hover-bg: ${outlineFillHover};
       --nui-pb-${name}-outline-value-text: ${color};
       --nui-pb-${name}-outline-label-text: ${color};
 
-      /* Ghost alpha track + solid fill */
+      /* Ghost: barely-there tinted groove + translucent fill, reveals itself on hover */
       --nui-pb-${name}-ghost-track-bg: ${this.withAlpha(color, 0.1)};
       --nui-pb-${name}-ghost-track-border: transparent;
-      --nui-pb-${name}-ghost-fill-bg: ${color};
-      --nui-pb-${name}-ghost-fill-hover-bg: ${hoverBg};
-      --nui-pb-${name}-ghost-value-text: var(--nui-text-secondary);
-      --nui-pb-${name}-ghost-label-text: var(--nui-text-primary);
+      --nui-pb-${name}-ghost-fill-bg: ${ghostFill};
+      --nui-pb-${name}-ghost-fill-hover-bg: ${ghostFillHover};
+      --nui-pb-${name}-ghost-value-text: ${ghostValueText};
+      --nui-pb-${name}-ghost-label-text: ${ghostLabelText};
 
       /* Misc */
       --nui-pb-text: ${pbText};

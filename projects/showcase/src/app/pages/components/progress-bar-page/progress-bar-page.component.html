@@ -62,8 +62,13 @@
                 <div class="example-preview flex-column gap-4">
                   @for (variant of variants; track variant) {
                     <div class="variant-row">
-                      <span class="variant-label">{{ variant }}</span>
-                      <nui-progress-bar [variant]="variant" color="primary" [value]="70" />
+                      <nui-progress-bar
+                        [variant]="variant"
+                        color="primary"
+                        [value]="70"
+                        [label]="variant"
+                        labelPosition="left"
+                      />
                     </div>
                   }
                 </div>
