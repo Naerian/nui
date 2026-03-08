@@ -86,10 +86,48 @@
               @case ('steps') {
                 <div class="example-preview flex-column gap-4">
                   <nui-progress-bar [value]="60" [steps]="10" />
-                  <nui-progress-bar [value]="3" [maxValue]="4" [steps]="4" color="success" valueFormat="fractional" valuePosition="left" />
-                  <nui-progress-bar [value]="70" [steps]="10" variant="outline" color="warning" valuePosition="top" />
+                  <nui-progress-bar
+                    [value]="3"
+                    [maxValue]="4"
+                    [steps]="4"
+                    color="success"
+                    valueFormat="fractional"
+                    valuePosition="left"
+                  />
+                  <nui-progress-bar
+                    [value]="70"
+                    [steps]="10"
+                    variant="outline"
+                    color="warning"
+                    valuePosition="top"
+                  />
                   <nui-progress-bar [value]="70" [steps]="10" variant="ghost" color="info" />
-                  <nui-progress-bar [value]="75" [steps]="4" compact color="danger" trailingIcon="ri-error-warning-line" />
+                  <nui-progress-bar
+                    [value]="75"
+                    [steps]="4"
+                    compact
+                    color="danger"
+                    trailingIcon="ri-error-warning-line"
+                  />
+                </div>
+              }
+
+              @case ('value-template') {
+                <div class="example-preview flex-column gap-4">
+                  <nui-progress-bar [value]="70" valuePosition="right">
+                    <ng-template nuiPbValue let-percent>
+                      @if (percent >= 80) { 🔥 } @else if (percent >= 50) { 🚀 } @else { 🐢 }
+                      {{ percent | number:'1.0-0' }}%
+                    </ng-template>
+                  </nui-progress-bar>
+                  <nui-progress-bar [value]="3" [maxValue]="5" color="success" valuePosition="right">
+                    <ng-template nuiPbValue let-v let-max="max">
+                      {{ v | number:'1.0-0' }} / {{ max }} ✅
+                    </ng-template>
+                  </nui-progress-bar>
+                  <nui-progress-bar [value]="45" valuePosition="inside" color="warning" variant="ghost">
+                    <ng-template nuiPbValue let-percent>★ {{ percent | number:'1.0-0' }}%</ng-template>
+                  </nui-progress-bar>
                 </div>
               }
 
@@ -178,19 +216,28 @@
                     [value]="65"
                     trackColor="#e8f4fc"
                     fillColor="#2196f3"
-                    textColor="#0d47a1"
+                    textColor="#000ba3"
                   />
                   <nui-progress-bar
                     [value]="40"
                     trackColor="#fde8e8"
                     fillColor="#e53935"
-                    textColor="#b71c1c"
+                    textColor="#8d0808"
                   />
                   <nui-progress-bar
                     [value]="80"
                     trackColor="#e8f5e9"
                     fillColor="#43a047"
-                    textColor="#1b5e20"
+                    textColor="#001c01"
+                  />
+                  <!-- RAF-driven bar: CSS transition disabled so the fill tracks
+                       the value exactly at 60 fps — no lag, no visual jump. -->
+                  <nui-progress-bar
+                    [value]="dynamicColorValue().value"
+                    [trackColor]="dynamicColorValue().trackColor"
+                    [fillColor]="dynamicColorValue().fillColor"
+                    [textColor]="dynamicColorValue().textColor"
+                    style="--nui-pb-transition-duration: 0s"
                   />
                 </div>
               }

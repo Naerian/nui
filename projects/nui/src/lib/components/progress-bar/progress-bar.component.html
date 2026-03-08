@@ -33,7 +33,13 @@
     }
 
     @if (showOutsideValue()) {
-      <span class="nui-pb__value nui-pb__value--outside">{{ computedValueText() }}</span>
+      <span class="nui-pb__value nui-pb__value--outside">
+        @if (valueTemplate(); as tpl) {
+          <ng-container *ngTemplateOutlet="tpl; context: valueTemplateContext()"></ng-container>
+        } @else {
+          {{ computedValueText() }}
+        }
+      </span>
     }
 
     <div
@@ -58,11 +64,17 @@
           [style.width]="progressBarWidth()"
           [style.background-color]="fillColor() || null"
         >
-          @if (valuePosition() === 'inside' && computedValueText()) {
+          @if (valuePosition() === 'inside' && (computedValueText() || valueTemplate())) {
             <span
               class="nui-pb__value nui-pb__value--inside"
               [class.nui-pb__value--inside-hidden]="!value()"
-            >{{ computedValueText() }}</span>
+            >
+              @if (valueTemplate(); as tpl) {
+                <ng-container *ngTemplateOutlet="tpl; context: valueTemplateContext()"></ng-container>
+              } @else {
+                {{ computedValueText() }}
+              }
+            </span>
           }
         </div>
       }

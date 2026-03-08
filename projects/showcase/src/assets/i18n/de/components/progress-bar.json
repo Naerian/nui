@@ -60,6 +60,11 @@
       "title": "Schritte",
       "description": "Teilt den Track in gleiche Segmente durch visuelle Trennlinien auf, ideal zur Darstellung diskreter Phasen wie Wizard-Schritte oder Onboarding-Abläufe.",
       "note": "Verwenden Sie das <code>steps</code>-Input mit einem Wert ≥ 2. Jedes Segment füllt sich individuell, wenn der Fortschritt voranschreitet. Passen Sie den Abstand zwischen den Segmenten über <code>--nui-pb-step-gap</code> an. Hinweis: Im <code>indeterminate</code>-Modus wird <code>steps</code> ignoriert."
+    },
+    "value-template": {
+      "title": "Benutzerdefinierte Wertvorlage",
+      "description": "Ermöglicht die vollständige Kontrolle über die Darstellung des Werts. Übergeben Sie ein <code>ng-template</code> mit der Direktive <code>nuiPbValue</code> als Kindelement von <code>nui-progress-bar</code>.",
+      "note": "Der Vorlagenkontext stellt bereit: <code>let-value</code> (Rohzahl), <code>let-percent</code> (0-100), <code>let-max</code> (Maximalwert) und <code>let-text</code> (vorformatierter Text). Funktioniert mit jeder <code>valuePosition</code>, einschließlich <code>inside</code>."
     }
   },
   "api": {

@@ -58,7 +58,13 @@
     "steps": {
       "title": "Étapes",
       "description": "Divise le track en segments égaux à l'aide de séparateurs visuels, idéal pour communiquer des étapes discrètes comme les étapes d'un wizard ou les flux d'onboarding.",
-      "note": "Utilisez l'input <code>steps</code> avec une valeur ≥ 2. Chaque segment se remplit individuellement au fil de la progression. Personnalisez l'écart entre les segments avec <code>--nui-pb-step-gap</code>. Note : le mode <code>indeterminate</code> ignore <code>steps</code>."    }
+      "note": "Utilisez l'input <code>steps</code> avec une valeur ≥ 2. Chaque segment se remplit individuellement au fil de la progression. Personnalisez l'écart entre les segments avec <code>--nui-pb-step-gap</code>. Note : le mode <code>indeterminate</code> ignore <code>steps</code>."
+    },
+    "value-template": {
+      "title": "Gabarit de valeur personnalisé",
+      "description": "Permet de contrôler entièrement l'affichage de la valeur. Passez un <code>ng-template</code> avec la directive <code>nuiPbValue</code> comme contenu enfant de <code>nui-progress-bar</code>.",
+      "note": "Le contexte du gabarit expose : <code>let-value</code> (nombre brut), <code>let-percent</code> (0-100), <code>let-max</code> (valeur maximale) et <code>let-text</code> (chaîne pré-formatée). Compatible avec toutes les valeurs de <code>valuePosition</code>, y compris <code>inside</code>."
+    }
   },
   "api": {
     "inputs": {

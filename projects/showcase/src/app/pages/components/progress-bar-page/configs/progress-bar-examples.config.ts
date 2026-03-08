@@ -109,6 +109,41 @@ export const PROGRESS_BAR_EXAMPLES_SECTIONS: ComponentSection[] = [
     ],
   },
   {
+    id: 'value-template',
+    title: 'components.progressBar.examples.value-template.title',
+    description: 'components.progressBar.examples.value-template.description',
+    note: {
+      type: 'info',
+      content: 'components.progressBar.examples.value-template.note',
+    },
+    anchor: 'value-template',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        code: `<!-- Emoji based on progress -->
+<nui-progress-bar [value]="70" valuePosition="right">
+  <ng-template nuiPbValue let-percent>
+    @if (percent >= 80) { 🔥 } @else if (percent >= 50) { 🚀 } @else { 🐢 }
+    {{ percent | number:'1.0-0' }}%
+  </ng-template>
+</nui-progress-bar>
+
+<!-- Fractional with checkmark -->
+<nui-progress-bar [value]="3" [maxValue]="5" color="success" valuePosition="right">
+  <ng-template nuiPbValue let-v let-max="max">
+    {{ v | number:'1.0-0' }} / {{ max }} ✅
+  </ng-template>
+</nui-progress-bar>
+
+<!-- Inside (ghost) with star rating style -->
+<nui-progress-bar [value]="45" valuePosition="inside" color="warning" variant="ghost">
+  <ng-template nuiPbValue let-percent>★ {{ percent | number:'1.0-0' }}%</ng-template>
+</nui-progress-bar>`,
+        language: 'html',
+      },
+    ],
+  },
+  {
     id: 'value-positions',
     title: 'components.progressBar.examples.valuePositions.title',
     description: 'components.progressBar.examples.valuePositions.description',
@@ -278,9 +313,84 @@ export const PROGRESS_BAR_EXAMPLES_SECTIONS: ComponentSection[] = [
   [value]="65"
   trackColor="#e8f4fc"
   fillColor="#2196f3"
-  textColor="#0d47a1"
+  textColor="#000ba3"
+/>
+<nui-progress-bar
+  [value]="40"
+  trackColor="#fde8e8"
+  fillColor="#e53935"
+  textColor="#b71c1c"
+/>
+<nui-progress-bar
+  [value]="80"
+  trackColor="#e8f5e9"
+  fillColor="#43a047"
+  textColor="#001c01"
+/>
+<nui-progress-bar
+  [value]="dynamicColorValue().value"
+  [trackColor]="dynamicColorValue().trackColor"
+  [fillColor]="dynamicColorValue().fillColor"
+  [textColor]="dynamicColorValue().textColor"
 />`,
         language: 'html',
+      },
+      {
+        title: 'codeExamples.typescript',
+        code: `// Signal example
+dynamicColorValue = signal({
+    value: 0,
+    trackColor: '#e8f4fc',
+    fillColor: '#2196f3',
+    textColor: '#0d47a1',
+});
+
+// Method for dynamically changing color and value
+startProgressAnimation(): void {
+    const FILL_DURATION = 8000; // ms for a full 0→100 cycle
+    const PAUSE_MS = 2500;      // pause at 100 % before restarting
+
+    const run = (): void => {
+      let startTime: number | null = null;
+
+      const animate = (timestamp: number): void => {
+        if (startTime === null) startTime = timestamp;
+
+        const progress = Math.min((timestamp - startTime) / FILL_DURATION, 1);
+        const pct = progress * 100;
+        const hue = progress * 120; // 0° (red) → 120° (green)
+
+        this.dynamicColorValue.set({
+          value: pct,
+          trackColor: 'rgba(232, 244, 252, 1)',
+          fillColor: \`hsl(\${hue}, 80%, 50%)\`,
+          // Same hue, dark shade — always readable, no abrupt flip
+          textColor: \`hsl(\${hue}, 80%, 18%)\`,
+        });
+
+        if (progress < 1) {
+          this.animationFrameId = requestAnimationFrame(animate);
+        } else {
+          // Bar has --nui-pb-transition-duration: 0s so the snap to 0 is instant.
+          // Just wait for the user to see 100 %, then restart.
+          this.animationTimeoutId = setTimeout(() => {
+            this.dynamicColorValue.set({
+              value: 0,
+              trackColor: 'rgba(232, 244, 252, 1)',
+              fillColor: 'hsl(0, 80%, 50%)',
+              textColor: 'hsl(0, 80%, 18%)',
+            });
+            run();
+          }, PAUSE_MS);
+        }
+      };
+
+      this.animationFrameId = requestAnimationFrame(animate);
+    };
+
+    run();
+  }`,
+        language: 'typescript',
       },
     ],
   },

@@ -1281,7 +1281,6 @@ export class ThemeService {
 
       /* Misc */
       --nui-pb-text: ${pbText};
-      --nui-pb-text-shadow: 2px 1px 3px ${pbTextShadow};
     `;
   }
 

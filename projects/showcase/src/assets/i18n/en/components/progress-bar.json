@@ -60,6 +60,11 @@
       "title": "Steps",
       "description": "Divides the track into equal segments using visual dividers, ideal for communicating discrete stages such as wizard steps or onboarding flows.",
       "note": "Use the <code>steps</code> input with a value ≥ 2. Each segment fills individually as progress advances. Customize the gap width between segments via <code>--nui-pb-step-gap</code>. Note: <code>indeterminate</code> mode ignores <code>steps</code>."
+    },
+    "value-template": {
+      "title": "Custom Value Template",
+      "description": "Provides full control over how the value is rendered. Pass an <code>ng-template</code> with the <code>nuiPbValue</code> directive as a content child of <code>nui-progress-bar</code>.",
+      "note": "The template context exposes: <code>let-value</code> (raw number), <code>let-percent</code> (0-100), <code>let-max</code> (max value), and <code>let-text</code> (pre-formatted string). Works with any <code>valuePosition</code>, including <code>inside</code>."
     }
   },
   "api": {

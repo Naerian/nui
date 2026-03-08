@@ -105,6 +105,12 @@ export const PROGRESS_BAR_API_SECTIONS: ComponentSection[] = [
           'Divide visualmente el track en N segmentos mediante líneas divisoras. Requiere ≥ 2 para activarse.',
         ],
         [
+          '<code>nuiPbValue</code> <em>(template)</em>',
+          'TemplateRef',
+          '—',
+          'Plantilla de contenido para personalizar el valor mostrado. Contexto disponible: <code>let-value</code> (número), <code>let-percent</code> (0-100), <code>let-max</code>, <code>let-text</code> (string formateado).',
+        ],
+        [
           '<code>trackColor</code>',
           'string | null',
           '<code class="neutral">null</code>',

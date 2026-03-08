@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, input, TemplateRef } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ProgressBarValuePosition,
   ProgressBarLabelPosition,
@@ -10,12 +11,14 @@ import {
 import { NUIColor, NUIVariant } from '../../configs';
 import { DEFAULT_COLOR, DEFAULT_VARIANT } from '../../configs/nui.consts';
 import { injectProgressBarConfig } from '../../configs/progress-bar';
+import { NuiProgressBarValueTemplateDirective } from './progress-bar-value-template.directive';
 
 @Component({
   selector: 'nui-progress-bar',
   templateUrl: './progress-bar.component.html',
   styleUrls: ['./progress-bar.component.scss'],
   standalone: true,
+  imports: [NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressBarComponent {
@@ -40,6 +43,10 @@ export class ProgressBarComponent {
   readonly labelPosition = input<ProgressBarLabelPosition>(DEFAULT_PB_LABEL_POSITION);
   readonly showValueInLabel = input<boolean, unknown>(false, { transform: booleanAttribute });
   readonly steps = input<number>(0);
+
+  // ─── Content template ────────────────────────────────────────────────────────
+  /** Optional custom template for the value display. Receives {value, percent, max, text} context. */
+  readonly valueTemplate = contentChild(NuiProgressBarValueTemplateDirective, { read: TemplateRef });
 
   // ─── Static IDs (generados una vez) ─────────────────────────────────────────────
   readonly id = `nui-pb-${Math.random().toString(36).substring(2, 9)}`;
@@ -125,12 +132,22 @@ export class ProgressBarComponent {
     return null;
   });
 
+  readonly valueTemplateContext = computed(() => {
+    const val = this.value();
+    const max = this.maxValue();
+    const percent =
+      val !== null && max !== null && max !== 0
+        ? Math.max(0, Math.min(100, (val / max) * 100))
+        : 0;
+    return { $implicit: val, value: val, percent, max, text: this.computedValueText() };
+  });
+
   readonly showOutsideValue = computed<boolean>(
     () =>
       !this.showValueInLabel() &&
       this.effectiveValuePosition() !== 'hidden' &&
       this.effectiveValuePosition() !== 'inside' &&
-      !!this.computedValueText()
+      (!!this.computedValueText() || !!this.valueTemplate())
   );
 
   /**

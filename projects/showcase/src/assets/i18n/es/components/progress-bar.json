@@ -60,6 +60,11 @@
       "title": "Pasos",
       "description": "Divide el track en segmentos iguales mediante divisores visuales, ideal para comunicar etapas discretas como pasos de un wizard o flujos de onboarding.",
       "note": "Usa el input <code>steps</code> con un valor ≥ 2. Cada segmento se rellena individualmente a medida que avanza el progreso. Personaliza el ancho del hueco entre segmentos con <code>--nui-pb-step-gap</code>. Nota: el modo <code>indeterminate</code> ignora <code>steps</code>."
+    },
+    "value-template": {
+      "title": "Plantilla de valor personalizada",
+      "description": "Permite personalizar completamente cómo se muestra el valor. Pasa un <code>ng-template</code> con la directiva <code>nuiPbValue</code> como contenido hijo de <code>nui-progress-bar</code>.",
+      "note": "El contexto de la plantilla expone: <code>let-value</code> (número bruto), <code>let-percent</code> (0-100), <code>let-max</code> (valor máximo) y <code>let-text</code> (cadena pre-formateada). Compatible con cualquier <code>valuePosition</code>, incluyendo <code>inside</code>."
     }
   },
   "api": {
