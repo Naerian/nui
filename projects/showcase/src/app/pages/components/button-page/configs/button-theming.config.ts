@@ -161,44 +161,154 @@ export const BUTTON_THEMING_SECTIONS: ComponentSection[] = [
       headers: ['common.tables.cssVariable', 'common.tables.description', 'common.tables.default'],
       rows: [
         // Spacing
-        ['<code>--nui-button-gap</code>', 'components.button.theming.structure.rows.gap.description', '0.5rem'],
-        ['<code>--nui-button-padding-x-xs</code>', 'components.button.theming.structure.rows.paddingXXs.description', '0.5rem'],
-        ['<code>--nui-button-padding-y-xs</code>', 'components.button.theming.structure.rows.paddingYXs.description', '0.25rem'],
-        ['<code>--nui-button-padding-x-sm</code>', 'components.button.theming.structure.rows.paddingXSm.description', '0.75rem'],
-        ['<code>--nui-button-padding-y-sm</code>', 'components.button.theming.structure.rows.paddingYSm.description', '0.375rem'],
-        ['<code>--nui-button-padding-x-md</code>', 'components.button.theming.structure.rows.paddingXMd.description', '1rem'],
-        ['<code>--nui-button-padding-y-md</code>', 'components.button.theming.structure.rows.paddingYMd.description', '0.5rem'],
-        ['<code>--nui-button-padding-x-lg</code>', 'components.button.theming.structure.rows.paddingXLg.description', '1.25rem'],
-        ['<code>--nui-button-padding-y-lg</code>', 'components.button.theming.structure.rows.paddingYLg.description', '0.625rem'],
-        ['<code>--nui-button-padding-x-xl</code>', 'components.button.theming.structure.rows.paddingXXl.description', '1.5rem'],
-        ['<code>--nui-button-padding-y-xl</code>', 'components.button.theming.structure.rows.paddingYXl.description', '0.75rem'],
+        [
+          '<code>--nui-button-gap</code>',
+          'components.button.theming.structure.rows.gap.description',
+          '0.5rem',
+        ],
+        [
+          '<code>--nui-button-padding-x-xs</code>',
+          'components.button.theming.structure.rows.paddingXXs.description',
+          '0.5rem',
+        ],
+        [
+          '<code>--nui-button-padding-y-xs</code>',
+          'components.button.theming.structure.rows.paddingYXs.description',
+          '0.25rem',
+        ],
+        [
+          '<code>--nui-button-padding-x-sm</code>',
+          'components.button.theming.structure.rows.paddingXSm.description',
+          '0.75rem',
+        ],
+        [
+          '<code>--nui-button-padding-y-sm</code>',
+          'components.button.theming.structure.rows.paddingYSm.description',
+          '0.375rem',
+        ],
+        [
+          '<code>--nui-button-padding-x-md</code>',
+          'components.button.theming.structure.rows.paddingXMd.description',
+          '1rem',
+        ],
+        [
+          '<code>--nui-button-padding-y-md</code>',
+          'components.button.theming.structure.rows.paddingYMd.description',
+          '0.5rem',
+        ],
+        [
+          '<code>--nui-button-padding-x-lg</code>',
+          'components.button.theming.structure.rows.paddingXLg.description',
+          '1.25rem',
+        ],
+        [
+          '<code>--nui-button-padding-y-lg</code>',
+          'components.button.theming.structure.rows.paddingYLg.description',
+          '0.625rem',
+        ],
+        [
+          '<code>--nui-button-padding-x-xl</code>',
+          'components.button.theming.structure.rows.paddingXXl.description',
+          '1.5rem',
+        ],
+        [
+          '<code>--nui-button-padding-y-xl</code>',
+          'components.button.theming.structure.rows.paddingYXl.description',
+          '0.75rem',
+        ],
 
         // Border radius
-        ['<code>--nui-button-radius-xs</code>', 'components.button.theming.structure.rows.radiusXs.description', '0.25rem'],
-        ['<code>--nui-button-radius-sm</code>', 'components.button.theming.structure.rows.radiusSm.description', '0.375rem'],
-        ['<code>--nui-button-radius-md</code>', 'components.button.theming.structure.rows.radiusMd.description', '0.5rem'],
-        ['<code>--nui-button-radius-lg</code>', 'components.button.theming.structure.rows.radiusLg.description', '0.625rem'],
-        ['<code>--nui-button-radius-xl</code>', 'components.button.theming.structure.rows.radiusXl.description', '0.75rem'],
+        [
+          '<code>--nui-button-radius-xs</code>',
+          'components.button.theming.structure.rows.radiusXs.description',
+          '0.25rem',
+        ],
+        [
+          '<code>--nui-button-radius-sm</code>',
+          'components.button.theming.structure.rows.radiusSm.description',
+          '0.375rem',
+        ],
+        [
+          '<code>--nui-button-radius-md</code>',
+          'components.button.theming.structure.rows.radiusMd.description',
+          '0.5rem',
+        ],
+        [
+          '<code>--nui-button-radius-lg</code>',
+          'components.button.theming.structure.rows.radiusLg.description',
+          '0.625rem',
+        ],
+        [
+          '<code>--nui-button-radius-xl</code>',
+          'components.button.theming.structure.rows.radiusXl.description',
+          '0.75rem',
+        ],
 
         // Font sizes
-        ['<code>--nui-button-font-size-xs</code>', 'components.button.theming.structure.rows.fontSizeXs.description', '0.75rem'],
-        ['<code>--nui-button-font-size-sm</code>', 'components.button.theming.structure.rows.fontSizeSm.description', '0.875rem'],
-        ['<code>--nui-button-font-size-md</code>', 'components.button.theming.structure.rows.fontSizeMd.description', '1rem'],
-        ['<code>--nui-button-font-size-lg</code>', 'components.button.theming.structure.rows.fontSizeLg.description', '1.125rem'],
-        ['<code>--nui-button-font-size-xl</code>', 'components.button.theming.structure.rows.fontSizeXl.description', '1.25rem'],
+        [
+          '<code>--nui-button-font-size-xs</code>',
+          'components.button.theming.structure.rows.fontSizeXs.description',
+          '0.75rem',
+        ],
+        [
+          '<code>--nui-button-font-size-sm</code>',
+          'components.button.theming.structure.rows.fontSizeSm.description',
+          '0.875rem',
+        ],
+        [
+          '<code>--nui-button-font-size-md</code>',
+          'components.button.theming.structure.rows.fontSizeMd.description',
+          '1rem',
+        ],
+        [
+          '<code>--nui-button-font-size-lg</code>',
+          'components.button.theming.structure.rows.fontSizeLg.description',
+          '1.125rem',
+        ],
+        [
+          '<code>--nui-button-font-size-xl</code>',
+          'components.button.theming.structure.rows.fontSizeXl.description',
+          '1.25rem',
+        ],
 
         // Icon sizes
-        ['<code>--nui-button-icon-size-xs</code>', 'components.button.theming.structure.rows.iconSizeXs.description', '1rem'],
-        ['<code>--nui-button-icon-size-sm</code>', 'components.button.theming.structure.rows.iconSizeSm.description', '1.125rem'],
-        ['<code>--nui-button-icon-size-md</code>', 'components.button.theming.structure.rows.iconSizeMd.description', '1.25rem'],
-        ['<code>--nui-button-icon-size-lg</code>', 'components.button.theming.structure.rows.iconSizeLg.description', '1.375rem'],
-        ['<code>--nui-button-icon-size-xl</code>', 'components.button.theming.structure.rows.iconSizeXl.description', '1.5rem'],
+        [
+          '<code>--nui-button-icon-size-xs</code>',
+          'components.button.theming.structure.rows.iconSizeXs.description',
+          '1rem',
+        ],
+        [
+          '<code>--nui-button-icon-size-sm</code>',
+          'components.button.theming.structure.rows.iconSizeSm.description',
+          '1.125rem',
+        ],
+        [
+          '<code>--nui-button-icon-size-md</code>',
+          'components.button.theming.structure.rows.iconSizeMd.description',
+          '1.25rem',
+        ],
+        [
+          '<code>--nui-button-icon-size-lg</code>',
+          'components.button.theming.structure.rows.iconSizeLg.description',
+          '1.375rem',
+        ],
+        [
+          '<code>--nui-button-icon-size-xl</code>',
+          'components.button.theming.structure.rows.iconSizeXl.description',
+          '1.5rem',
+        ],
 
         // Animations & Effects
-        ['<code>--nui-button-transition</code>', 'components.button.theming.structure.rows.transition.description', '0.2s ease'],
-        ['<code>--nui-button-spin-duration</code>', 'components.button.theming.structure.rows.spinDuration.description', '0.8s'],
-        ['<code>--nui-button-focus-width</code>', 'components.button.theming.structure.rows.focusWidth.description', '2px'],
-        ['<code>--nui-button-focus-offset</code>', 'components.button.theming.structure.rows.focusOffset.description', '2px'],
+        [
+          '<code>--nui-button-transition</code>',
+          'components.button.theming.structure.rows.transition.description',
+          '0.2s ease',
+        ],
+        [
+          '<code>--nui-button-spin-duration</code>',
+          'components.button.theming.structure.rows.spinDuration.description',
+          '0.8s',
+        ],
       ],
     },
   },

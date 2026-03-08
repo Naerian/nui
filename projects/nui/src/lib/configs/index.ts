@@ -19,6 +19,9 @@ export * from './fab-button';
 // Time Picker configuration
 export * from './time-picker';
 
+// Progress Bar configuration
+export * from './progress-bar';
+
 // Main NUI configuration
 export * from './nui.model';
 export * from './nui.provider';

@@ -37,6 +37,7 @@
     "tooltip": "Tooltip",
     "sidebarPanel": "Sidebar Panel",
     "actionMenu": "Action Menu",
+    "progressBar": "Barra de progreso",
     "timePicker": "Time Picker"
   },
   "presets": {

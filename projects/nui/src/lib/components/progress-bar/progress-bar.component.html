@@ -1,0 +1,72 @@
+<div
+  class="nui-pb"
+  [class]="'nui-pb--' + effectiveColor() + ' nui-pb--' + effectiveVariant()"
+  [class.nui-pb--compact]="compact()"
+  [class.nui-pb--label-top]="finalLabelText() && labelPosition() === 'top'"
+  [class.nui-pb--label-bottom]="finalLabelText() && labelPosition() === 'bottom'"
+  [class.nui-pb--label-left]="finalLabelText() && labelPosition() === 'left'"
+  [class.nui-pb--label-right]="finalLabelText() && labelPosition() === 'right'"
+  [style.--nui-pb-text]="textColor() || null"
+  [style.--nui-pb-value-text]="textColor() || null"
+  [style.--nui-pb-label-text]="textColor() || null"
+>
+  @if (finalLabelText() && labelPosition() === 'top') {
+    <span class="nui-pb__label" [id]="labelId" [innerHTML]="finalLabelText()"></span>
+  }
+
+  <div
+    class="nui-pb__bar"
+    [class.nui-pb__bar--indeterminate]="indeterminate()"
+    [class.nui-pb__bar--value-top]="valuePosition() === 'top' && !showValueInLabel()"
+    [class.nui-pb__bar--value-bottom]="valuePosition() === 'bottom' && !showValueInLabel()"
+    [class.nui-pb__bar--value-left]="valuePosition() === 'left' && !showValueInLabel()"
+    [class.nui-pb__bar--value-right]="valuePosition() === 'right' && !showValueInLabel()"
+    role="progressbar"
+    [attr.aria-valuenow]="!indeterminate() ? value() : null"
+    [attr.aria-valuemin]="0"
+    [attr.aria-valuemax]="!indeterminate() ? maxValue() : null"
+    [attr.aria-valuetext]="ariaValueText()"
+    [attr.aria-labelledby]="label() ? labelId : null"
+  >
+    @if (finalLabelText() && labelPosition() === 'left') {
+      <span class="nui-pb__label" [id]="labelId" [innerHTML]="finalLabelText()"></span>
+    }
+
+    @if (showOutsideValue()) {
+      <span class="nui-pb__value nui-pb__value--outside">{{ computedValueText() }}</span>
+    }
+
+    <div
+      class="nui-pb__track"
+      [style.background-color]="trackColor() || null"
+      [style.border-color]="trackColor() || null"
+    >
+      <div
+        class="nui-pb__fill"
+        [style.width]="progressBarWidth()"
+        [style.background-color]="fillColor() || null"
+      >
+        @if (valuePosition() === 'inside' && computedValueText()) {
+          <span
+            class="nui-pb__value nui-pb__value--inside"
+            [class.nui-pb__value--inside-hidden]="!value()"
+          >{{ computedValueText() }}</span>
+        }
+      </div>
+    </div>
+
+    @if (finalLabelText() && labelPosition() === 'right') {
+      <span class="nui-pb__label" [id]="labelId" [innerHTML]="finalLabelText()"></span>
+    }
+
+    @if (trailingIcon()) {
+      <span class="nui-pb__trailing-icon" aria-hidden="true">
+        <i [class]="trailingIcon()"></i>
+      </span>
+    }
+  </div>
+
+  @if (finalLabelText() && labelPosition() === 'bottom') {
+    <span class="nui-pb__label" [id]="labelId" [innerHTML]="finalLabelText()"></span>
+  }
+</div>

@@ -37,6 +37,7 @@
     "tooltip": "Infobulle",
     "sidebarPanel": "Panneau latéral",
     "actionMenu": "Menu d'actions",
+    "progressBar": "Barre de progression",
     "timePicker": "Sélecteur d'heure"
   },
   "presets": {

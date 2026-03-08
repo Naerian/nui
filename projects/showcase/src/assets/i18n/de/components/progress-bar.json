@@ -1,0 +1,122 @@
+{
+  "title": "Fortschrittsanzeige",
+  "subtitle": "Visueller Indikator für den Fortschritt einer Aufgabe oder Operation mit Unterstützung für Farben, Varianten, Beschriftungen, kompakten Modus und unbestimmte Animation.",
+  "examples": {
+    "basic": {
+      "title": "Grundlegend",
+      "description": "Einfache Fortschrittsanzeige mit einem numerischen Wert von 0 bis 100."
+    },
+    "compact": {
+      "title": "Kompakt",
+      "description": "Ermöglicht die Umwandlung der Leiste in einen dünnen Indikator. Der Werttext wird automatisch ausgeblendet.",
+      "note": "Fügen Sie das Attribut <code>compact</code> hinzu, um die Leiste zu verkleinern."
+    },
+    "colors": {
+      "title": "Farben",
+      "description": "Unterstützung für verschiedene NUI-Farben",
+      "note": "Alle NUI-semantischen Farben werden über das <code>color</code>-Input unterstützt."
+    },
+    "variants": {
+      "title": "Varianten",
+      "description": "Unterstützung für verschiedene NUI-Varianten",
+      "note": "<code>solid</code> verwendet eine neutrale Spur mit einer festen Füllung. <code>outline</code> verwendet eine transparente Spur mit einem farbigen Rand. <code>ghost</code> verwendet eine Spur mit leichter Alpha."
+    },
+    "indeterminate": {
+      "title": "Unbestimmt",
+      "description": "Zeigt eine Schleifenanimation an, wenn der Fortschritt unbekannt ist.",
+      "note": "Setzen Sie <code>[indeterminate]=\"true\"</code>, um die Animation anzuzeigen."
+    },
+    "valuePositions": {
+      "title": "Wertposition",
+      "description": "Steuert, wo der Werttext angezeigt wird.",
+      "note": "Verwenden Sie das <code>valuePosition</code>-Input mit den Werten <code>inside</code>, <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code> oder <code>hidden</code>."
+    },
+    "valueFormat": {
+      "title": "Wertformat",
+      "description": "Steuert das Format des mit der Fortschrittsanzeige angezeigten Werts.",
+      "note": "Wählen Sie zwischen <code>percentage</code> (z. B. <em>70 %</em>) und <code>fractional</code> (z. B. <em>70 / 100</em>) mit dem <code>valueFormat</code>-Input."
+    },
+    "label": {
+      "title": "Beschriftung",
+      "description": "Fügt eine beschreibende Beschriftung hinzu und steuert deren Position.",
+      "note": "Verwenden Sie das <code>label</code>-Input, um eine Beschriftung hinzuzufügen. Steuern Sie deren Position mit <code>labelPosition</code>: <code>top</code>, <code>bottom</code>, <code>left</code> oder <code>right</code>."
+    },
+    "combined": {
+      "title": "Beschriftung mit Wert (Kombiniert)",
+      "description": "Kombiniert eine beschreibende Beschriftung mit dem Fortschrittswert.",
+      "note": "Fügen Sie das Attribut <code>showValueInLabel</code> hinzu, um den Fortschrittswert inline mit der Beschriftung anzuzeigen."
+    },
+    "icons": {
+      "title": "Symbole",
+      "description": "Verknüpft Symbole mit der Fortschrittsanzeige, um deren visuelle Bedeutung zu verbessern. Sie können Präfix- oder Suffix-Symbole hinzufügen, die die Beschriftung dekorieren, oder ein unabhängiges Symbol am Ende der Fortschrittsanzeige.",
+      "note": "Verwenden Sie <code>prefixIcon</code> oder <code>suffixIcon</code>, um die Beschriftung zu dekorieren. Verwenden Sie <code>trailingIcon</code> für ein Symbol, das unabhängig am Ende der Fortschrittsanzeige platziert wird, unabhängig von der Position der Beschriftung."
+    },
+    "customColors": {
+      "title": "Benutzerdefinierte Farben",
+      "description": "Überschreibt die Farben der Spur, Füllung und des Textes mit benutzerdefinierten Eingaben, die jeden CSS-Farbwert akzeptieren.",
+      "note": "Verwenden Sie die Eingaben <code>trackColor</code>, <code>fillColor</code> und <code>textColor</code> für benutzerdefinierte Farben."
+    }
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Alle verfügbaren Input-Eigenschaften von <code>nui-progress-bar</code>."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Farb-Tokens",
+      "description": "Lokale CSS-Eigenschaften, die pro Farbe und Variante vom ThemeService aufgelöst werden."
+    },
+    "sizes": {
+      "title": "Größen-Tokens",
+      "description": "Strukturelle CSS-Eigenschaften zur Steuerung von Track-Höhe, Randradius und Übergängen."
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA-Rollen und Attribute",
+      "description": "Stellen Sie sicher, dass die Fortschrittsanzeige für Benutzer von unterstützenden Technologien zugänglich ist, indem Sie geeignete ARIA-Rollen und -Attribute verwenden.",
+      "rows": {
+        "role": {
+          "description": "Die Hauptkomponente der Fortschrittsanzeige muss die Rolle <code>progressbar</code> haben, um ihre Funktion für Bildschirmleser anzuzeigen."
+        },
+        "valuenow": {
+          "description": "Das Attribut <code>aria-valuenow</code> muss dynamisch aktualisiert werden, um den aktuellen Fortschrittswert (0-100) widerzuspiegeln."
+        },
+        "valuemin": {
+          "description": "Das Attribut <code>aria-valuemin</code> muss auf 0 gesetzt werden, um den minimalen Fortschrittswert anzuzeigen."
+        },
+        "valuemax": {
+          "description": "Das Attribut <code>aria-valuemax</code> muss auf 100 gesetzt werden, um den maximalen Fortschrittswert anzuzeigen."
+        },
+        "valuetext": {
+          "description": "Wenn eine beschreibende Beschriftung vorhanden ist, muss das Attribut <code>aria-valuetext</code> aktualisiert werden, um sowohl die Beschriftung als auch den Fortschrittswert für ein besseres Verständnis einzuschließen."
+        },
+        "labelledby": {
+          "description": "Wenn die Fortschrittsanzeige eine sichtbare Beschriftung hat, muss das Attribut <code>aria-labelledby</code> auf die ID des Beschriftungselements verweisen, um sie korrekt zuzuordnen."
+        }
+      }
+    }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Globale Konfiguration",
+      "description": "Die ProgressBar-Komponente unterstützt eine globale Konfiguration über <code>provideNUI()</code>. Dies ermöglicht es, Standardwerte einmal auf Anwendungsebene festzulegen und Wiederholungen zu vermeiden.",
+      "note": "Die globale Konfiguration fungiert als Standardwerte und kann jederzeit pro Instanz über die Komponenten-Inputs überschrieben werden."
+    },
+    "defaults": {
+      "title": "Konfigurierbare Eigenschaften",
+      "description": "Die folgenden Eigenschaften können global über <code>ProgressBarGlobalConfig</code> konfiguriert werden:",
+      "rows": {
+        "color": "Standardfarbe der Fortschrittsanzeige.",
+        "variant": "Standardvariante der Fortschrittsanzeige."
+      }
+    },
+    "priority": {
+      "title": "Auflösung Priorität",
+      "description": "NUI löst die Konfigurationswerte unter Verwendung der folgenden Prioritätskette auf (höchste Priorität gewinnt):",
+      "note": "<strong>Komponenten-Input</strong> → <strong>Globale Konfiguration (<code>provideNUI</code>)</strong> → <strong>Standardwert</strong>"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+// ========================================
+// PROGRESS BAR - Tokens & Variables
+// ========================================
+$pb-height: 1.25rem !default;
+$pb-height-compact: 0.375rem !default;
+
+$pb-transition-duration: 0.3s !default;
+$pb-transition-timing: ease !default;
+$pb-indeterminate-duration: 1.5s !default;
+$pb-indeterminate-timing: ease-in-out !default;
+
+$pb-font-weight-inside: 600 !default;
+
+// MIXIN (CSS Custom Properties expuestas al consumidor)
+@mixin nui-progress-bar-vars {
+  // Heights
+  --nui-pb-height: #{$pb-height};
+  --nui-pb-height-compact: #{$pb-height-compact};
+
+  // Border radius
+  --nui-pb-radius: var(--nui-border-radius-md);
+  --nui-pb-radius-compact: var(--nui-border-radius-sm);
+
+  // Border
+  --nui-pb-border-width: var(--nui-border-width-xs);
+
+  // Typography
+  --nui-pb-font-weight-inside: #{$pb-font-weight-inside};
+
+  // Transiciones
+  --nui-pb-transition-duration: #{$pb-transition-duration};
+  --nui-pb-transition-timing: #{$pb-transition-timing};
+  --nui-pb-indeterminate-duration: #{$pb-indeterminate-duration};
+  --nui-pb-indeterminate-timing: #{$pb-indeterminate-timing};
+}

@@ -1,0 +1,122 @@
+{
+  "title": "Barre de progression",
+  "subtitle": "Indicateur visuel de l'avancement d'une tâche ou d'une opération, avec prise en charge des couleurs, variantes, étiquettes, mode compact et animation indéterminée.",
+  "examples": {
+    "basic": {
+      "title": "Basique",
+      "description": "Barre de progression simple avec une valeur numérique de 0 à 100."
+    },
+    "compact": {
+      "title": "Compact",
+      "description": "Permet de convertir la barre en un indicateur fin. Le texte de la valeur est automatiquement masqué.",
+      "note": "Ajoutez l'attribut <code>compact</code> pour réduire la barre."
+    },
+    "colors": {
+      "title": "Couleurs",
+      "description": "Prise en charge des différentes couleurs de NUI",
+      "note": "Toutes les couleurs sémantiques de NUI sont compatibles via l'input <code>color</code>."
+    },
+    "variants": {
+      "title": "Variantes",
+      "description": "Prise en charge des différentes variantes de NUI",
+      "note": "<code>solid</code> utilise une piste neutre avec un remplissage solide. <code>outline</code> utilise une piste transparente avec une bordure colorée. <code>ghost</code> utilise une piste avec une légère alpha."
+    },
+    "indeterminate": {
+      "title": "Indéterminé",
+      "description": "Affiche une animation en boucle lorsque la progression est inconnue.",
+      "note": "Définissez <code>[indeterminate]=\"true\"</code> pour afficher l'animation."
+    },
+    "valuePositions": {
+      "title": "Position de la valeur",
+      "description": "Contrôle où le texte de la valeur apparaît.",
+      "note": "Utilisez l'input <code>valuePosition</code> avec les valeurs <code>inside</code>, <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code> ou <code>hidden</code>."
+    },
+    "valueFormat": {
+      "title": "Format de la valeur",
+      "description": "Contrôle le format de la valeur affichée avec la barre de progression.",
+      "note": "Choisissez entre <code>percentage</code> (ex. <em>70 %</em>) et <code>fractional</code> (ex. <em>70 / 100</em>) avec l'input <code>valueFormat</code>."
+    },
+    "label": {
+      "title": "Étiquette",
+      "description": "Ajoute une étiquette descriptive et contrôle sa position.",
+      "note": "Utilisez l'input <code>label</code> pour ajouter une étiquette. Contrôlez sa position avec <code>labelPosition</code> : <code>top</code>, <code>bottom</code>, <code>left</code> ou <code>right</code>."
+    },
+    "combined": {
+      "title": "Étiquette avec valeur (combinées)",
+      "description": "Combine une étiquette descriptive avec la valeur de progression.",
+      "note": "Ajoutez l'attribut <code>showValueInLabel</code> pour afficher la valeur de progression en ligne avec l'étiquette."
+    },
+    "icons": {
+      "title": "Icônes",
+      "description": "Associe des icônes à la barre de progression pour améliorer sa signification visuelle. Vous pouvez ajouter des icônes de préfixe ou de suffixe qui décorent l'étiquette, ou une icône indépendante à la fin de la barre.",
+      "note": "Utilisez <code>prefixIcon</code> ou <code>suffixIcon</code> pour décorer l'étiquette. Utilisez <code>trailingIcon</code> pour une icône placée indépendamment à la fin de la barre, quelle que soit la position de l'étiquette."
+    },
+    "customColors": {
+      "title": "Couleurs personnalisées",
+      "description": "Remplacez les couleurs de la piste, du remplissage et du texte avec des inputs personnalisés acceptant n'importe quelle valeur de couleur CSS.",
+      "note": "Utilisez les inputs <code>trackColor</code>, <code>fillColor</code> et <code>textColor</code> pour des couleurs personnalisées."
+    }
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Toutes les propriétés d'entrée disponibles de <code>nui-progress-bar</code>."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Tokens de couleur",
+      "description": "Propriétés CSS personnalisées locales résolues par couleur et variante via ThemeService."
+    },
+    "sizes": {
+      "title": "Tokens de taille",
+      "description": "Propriétés CSS personnalisées structurelles contrôlant la hauteur de la piste, le rayon de bordure et les transitions."
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "Rôles et attributs ARIA",
+      "description": "Assurez-vous que la barre de progression est accessible aux utilisateurs de technologies d'assistance en utilisant les rôles et attributs ARIA appropriés.",
+      "rows": {
+        "role": {
+          "description": "Le composant principal de la barre de progression doit avoir le rôle <code>progressbar</code> pour indiquer sa fonction aux lecteurs d'écran."
+        },
+        "valuenow": {
+          "description": "L'attribut <code>aria-valuenow</code> doit être mis à jour dynamiquement pour refléter la valeur actuelle de la progression (0-100)."
+        },
+        "valuemin": {
+          "description": "L'attribut <code>aria-valuemin</code> doit être défini sur 0 pour indiquer la valeur minimale de la progression."
+        },
+        "valuemax": {
+          "description": "L'attribut <code>aria-valuemax</code> doit être défini sur 100 pour indiquer la valeur maximale de la progression."
+        },
+        "valuetext": {
+          "description": "Si une étiquette descriptive est fournie, l'attribut <code>aria-valuetext</code> doit être mis à jour pour inclure à la fois l'étiquette et la valeur de la progression pour une meilleure compréhension."
+        },
+        "labelledby": {
+          "description": "Si la barre de progression a une étiquette visible, l'attribut <code>aria-labelledby</code> doit pointer vers l'ID de l'élément de l'étiquette pour les associer correctement."
+        }
+      }
+    }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuration globale",
+      "description": "Le composant ProgressBar prend en charge la configuration globale via <code>provideNUI()</code>. Cela permet de définir des valeurs par défaut une seule fois au niveau de l'application, évitant ainsi la répétition.",
+      "note": "La configuration globale agit comme des valeurs par défaut et peut toujours être remplacée par instance via les inputs du composant."
+    },
+    "defaults": {
+      "title": "Propriétés configurables",
+      "description": "Les propriétés suivantes peuvent être configurées globalement via <code>ProgressBarGlobalConfig</code> :",
+      "rows": {
+        "color": "Couleur par défaut de la barre de progression.",
+        "variant": "Variante par défaut de la barre de progression."
+      }
+    },
+    "priority": {
+      "title": "Priorité de résolution",
+      "description": "NUI résout les valeurs de configuration en utilisant la chaîne de priorité suivante (la plus haute priorité l'emporte) :",
+      "note": "<strong>Input du composant</strong> → <strong>Config globale (<code>provideNUI</code>)</strong> → <strong>Valeur par défaut</strong>"
+    }
+  }
+}

@@ -197,6 +197,13 @@ export const routes: Routes = [
             m => m.TimePickerPageComponent
           ),
       },
+      {
+        path: 'progress-bar',
+        loadComponent: () =>
+          import('./pages/components/progress-bar-page/progress-bar-page.component').then(
+            m => m.ProgressBarPageComponent
+          ),
+      },
     ],
   },
 

@@ -173,6 +173,11 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
             translationKey: 'sidebar.paginator',
             route: '/components/paginator',
           },
+          {
+            label: 'Progress Bar',
+            translationKey: 'sidebar.progressBar',
+            route: '/components/progress-bar',
+          },
         ],
       },
     ],

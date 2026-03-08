@@ -1,0 +1,122 @@
+{
+  "title": "Barra de progreso",
+  "subtitle": "Indicador visual del progreso de una tarea u operación, con soporte de colores, variantes, etiquetas, modo compacto y animación indeterminada.",
+  "examples": {
+    "basic": {
+      "title": "Básico",
+      "description": "Barra de progreso simple con un valor numérico de 0 a 100."
+    },
+    "compact": {
+      "title": "Compacto",
+      "description": "Permite convertir la barra en un indicador delgado. El texto del valor se oculta automáticamente.",
+      "note": "Agrega el atributo <code>compact</code> para reducir la barra."
+    },
+    "colors": {
+      "title": "Colores",
+      "description": "Soporte para los diferentes colores de NUI",
+      "note": "Todos los colores semánticos de NUI son compatibles a través del input <code>color</code>."
+    },
+    "variants": {
+      "title": "Variantes",
+      "description": "Soporte para las diferentes viarntes de NUI",
+      "note": "<code>solid</code> usa un track neutro con un relleno sólido. <code>outline</code> usa un track transparente con un borde coloreado. <code>ghost</code> usa un track con una alpha ligera."
+    },
+    "indeterminate": {
+      "title": "Indeterminado",
+      "description": "Muestra una animación en bucle cuando el progreso es desconocido.",
+      "note": "Establece <code>[indeterminate]=\"true\"</code> para mostrar la animación."
+    },
+    "valuePositions": {
+      "title": "Posición del valor",
+      "description": "Controla dónde aparece el texto del valor.",
+      "note": "Usa el input <code>valuePosition</code> con los valores <code>inside</code>, <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code> o <code>hidden</code>."
+    },
+    "valueFormat": {
+      "title": "Formato del valor",
+      "description": "Controla el formato del valor que se mostrará con la barra de progreso.",
+      "note": "Elige entre <code>percentage</code> (ej. <em>70 %</em>) y <code>fractional</code> (ej. <em>70 / 100</em>) con el input <code>valueFormat</code>"
+    },
+    "label": {
+      "title": "Etiqueta",
+      "description": "Añade una etiqueta descriptiva y controla su posición.",
+      "note": "Usa el input <code>label</code> para añadir una etiqueta. Controla su posición con <code>labelPosition</code>: <code>top</code>, <code>bottom</code>, <code>left</code> o <code>right</code>."
+    },
+    "combined": {
+      "title": "Etiqueta con valor (combinados)",
+      "description": "Combina una etiqueta descriptiva con el valor de progreso.",
+      "note": "Agrega el atributo <code>showValueInLabel</code> para mostrar el valor del progreso en línea junto a la etiqueta."
+    },
+    "icons": {
+      "title": "Iconos",
+      "description": "Asocia iconos a la barra de progreso para mejorar su significado visual. Puedes añadir iconos de prefijo o sufijo que decoren la etiqueta, o un icono independiente al final del row de la barra.",
+      "note": "Usa <code>prefixIcon</code> o <code>suffixIcon</code> para decorar la etiqueta. Usa <code>trailingIcon</code> para un icono colocado independientemente al final del row de la barra, sin importar la posición de la etiqueta."
+    },
+    "customColors": {
+      "title": "Colores personalizados",
+      "description": "Sobreescribe los colores del track, fill y texto con inputs personalizados que aceptan cualquier valor de color CSS.",
+      "note": "Usa los inputs <code>trackColor</code>, <code>fillColor</code> y <code>textColor</code> para colores personalizados."
+    }
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Todas las propiedades de entrada disponibles de <code>nui-progress-bar</code>."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Tokens de color",
+      "description": "Propiedades CSS personalizadas locales resueltas por color y variante desde ThemeService."
+    },
+    "sizes": {
+      "title": "Tokens de tamaño",
+      "description": "Propiedades CSS personalizadas estructurales que controlan la altura del track, el radio de borde y las transiciones."
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "Roles y atributos ARIA",
+      "description": "Asegura que la barra de progreso sea accesible para usuarios de tecnologías asistivas mediante el uso de roles y atributos ARIA apropiados.",
+      "rows": {
+        "role": {
+          "description": "El componente principal de la barra de progreso debe tener el rol <code>progressbar</code> para indicar su función a los lectores de pantalla."
+        },
+        "valuenow": {
+          "description": "El atributo <code>aria-valuenow</code> debe actualizarse dinámicamente para reflejar el valor actual del progreso (0-100)."
+        },
+        "valuemin": {
+          "description": "El atributo <code>aria-valuemin</code> debe establecerse en 0 para indicar el valor mínimo del progreso."
+        },
+        "valuemax": {
+          "description": "El atributo <code>aria-valuemax</code> debe establecerse en 100 para indicar el valor máximo del progreso."
+        },
+        "valuetext": {
+          "description": "Si se proporciona una etiqueta descriptiva, el atributo <code>aria-valuetext</code> debe actualizarse para incluir tanto la etiqueta como el valor del progreso para una mejor comprensión."
+        },
+        "labelledby": {
+          "description": "Si la barra de progreso tiene una etiqueta visible, el atributo <code>aria-labelledby</code> debe apuntar al ID del elemento de la etiqueta para asociarlos correctamente."
+        }
+      }
+    }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuración global",
+      "description": "El componente ProgressBar admite configuración global mediante <code>provideNUI()</code>. Esto permite definir valores por defecto una sola vez a nivel de aplicación, evitando repetición.",
+      "note": "La configuración global actúa como valores por defecto y siempre puede sobreescribirse por instancia mediante los inputs del componente."
+    },
+    "defaults": {
+      "title": "Propiedades configurables",
+      "description": "Las siguientes propiedades pueden configurarse globalmente a través de <code>ProgressBarGlobalConfig</code>:",
+      "rows": {
+        "color": "Color por defecto de la barra de progreso.",
+        "variant": "Variante por defecto de la barra de progreso."
+      }
+    },
+    "priority": {
+      "title": "Prioridad de resolución",
+      "description": "NUI resuelve los valores de configuración usando la siguiente cadena de prioridad (gana el de mayor prioridad):",
+      "note": "<strong>Input del componente</strong> → <strong>Config global (<code>provideNUI</code>)</strong> → <strong>Valor por defecto</strong>"
+    }
+  }
+}

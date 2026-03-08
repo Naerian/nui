@@ -12,6 +12,7 @@ import { SelectButtonGlobalConfig } from './select-button';
 import { PaginatorConfig } from './paginator';
 import { AvatarGlobalConfig } from './avatar';
 import { TimePickerGlobalConfig } from './time-picker';
+import { ProgressBarGlobalConfig } from './progress-bar';
 
 /**
  * Configuración global de la librería NUI (Narian UI).
@@ -48,5 +49,7 @@ export interface NUIConfig {
     sidebarPanel?: Partial<SidebarPanelConfig>;
     /** Time Picker global defaults */
     timePicker?: Partial<TimePickerGlobalConfig>;
+    /** Progress Bar global defaults */
+    progressBar?: Partial<ProgressBarGlobalConfig>;
   };
 }

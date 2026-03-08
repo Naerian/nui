@@ -79,9 +79,9 @@ export class MyComponent {}
 
 | Propiedad | Tipo | Default | Descripción |
 |-----------|------|---------|-------------|
-| `valuePosition` | `ProgressBarValuePosition` | `'inside'` | Posición del valor: `'inside' \| 'hidden' \| 'top' \| 'bottom' \| 'left' \| 'right'` |
-| `valueFormat` | `ProgressBarValueFormat` | `'percentage'` | Formato del valor: `'percentage' \| 'fractional'` |
-| `labelPosition` | `ProgressBarLabelPosition` | `'top'` | Posición de la etiqueta: `'top' \| 'bottom' \| 'left' \| 'right'` |
+| `valuePosition` | `PBValuePosition` | `'inside'` | Posición del valor: `'inside' \| 'hidden' \| 'top' \| 'bottom' \| 'left' \| 'right'` |
+| `valueFormat` | `PBValueFormat` | `'percentage'` | Formato del valor: `'percentage' \| 'fractional'` |
+| `labelPosition` | `PBLabelPosition` | `'top'` | Posición de la etiqueta: `'top' \| 'bottom' \| 'left' \| 'right'` |
 | `label` | `string \| null` | `null` | Texto de la etiqueta descriptiva |
 | `icon` | `string \| null` | `null` | Clase del icono (ej: 'ri-upload-line') |
 

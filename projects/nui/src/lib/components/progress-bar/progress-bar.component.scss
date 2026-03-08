@@ -1,0 +1,223 @@
+@use '../../../../styles/variables/progress-bar-vars' as vars;
+
+// ============================================================================
+// THEME MIXIN
+// Maps the resolved color+variant tokens to local component variables
+// ============================================================================
+@mixin progress-bar-theme($color, $variant: 'solid') {
+  --nui-pb-track-bg: var(--nui-pb-#{$color}-#{$variant}-track-bg);
+  --nui-pb-track-border: var(--nui-pb-#{$color}-#{$variant}-track-border);
+  --nui-pb-fill-bg: var(--nui-pb-#{$color}-#{$variant}-fill-bg);
+  --nui-pb-fill-hover-bg: var(--nui-pb-#{$color}-#{$variant}-fill-hover-bg);
+  --nui-pb-value-text: var(--nui-pb-#{$color}-#{$variant}-value-text);
+  --nui-pb-label-text: var(--nui-pb-#{$color}-#{$variant}-label-text);
+}
+
+// ============================================================================
+// HOST
+// ============================================================================
+:host {
+  @include vars.nui-progress-bar-vars;
+  display: block;
+  width: 100%;
+}
+
+// ============================================================================
+// BLOCK: .nui-pb
+// ============================================================================
+.nui-pb {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nui-spacing-xs);
+  width: 100%;
+
+  // --- Color & variant automatic generation ---
+  $colors: primary, secondary, success, info, warning, danger, accent, neutral;
+  $variants: solid, outline, ghost;
+
+  @each $color in $colors {
+    &--#{$color} {
+      @include progress-bar-theme($color, solid); // Solid is the default variant
+
+      @each $variant in $variants {
+        &.nui-pb--#{$variant} {
+          @include progress-bar-theme($color, $variant);
+        }
+      }
+    }
+  }
+
+  // --- Label positioning ---
+  &--label-left,
+  &--label-right {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &--label-right {
+    flex-direction: row-reverse;
+  }
+
+  // ── Elements ────────────────────────────────────────────────────────────
+
+  &__label {
+    font-size: var(--nui-font-size-sm);
+    color: var(--nui-pb-label-text, var(--nui-text-primary));
+    white-space: nowrap;
+    font-family: inherit;
+    line-height: var(--nui-line-height-sm);
+  }
+
+  &__bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--nui-spacing-xs);
+    flex: 1;
+    min-width: 0;
+    position: relative;
+
+    // Value positioning modifiers
+    &--value-top,
+    &--value-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+
+      // In column direction flex: 1 collapses the track height;
+      // override to use intrinsic height from --nui-pb-height.
+      .nui-pb__track {
+        flex: none;
+        width: 100%;
+      }
+    }
+
+    &--value-bottom {
+      flex-direction: column-reverse;
+    }
+
+    &--value-right {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &__track {
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: var(--nui-pb-height);
+    border-radius: var(--nui-pb-radius);
+    border-width: var(--nui-pb-border-width);
+    border-style: solid;
+    background-color: var(--nui-pb-track-bg, var(--nui-surface-neutral));
+    border-color: var(--nui-pb-track-border, var(--nui-border-default));
+    box-shadow:
+      var(--nui-shadow-field),
+      inset 0 1px 3px rgba(0, 0, 0, 0.12);
+    transition: all var(--nui-pb-transition-duration) var(--nui-pb-transition-timing);
+  }
+
+  &__fill {
+    position: relative;
+    height: 100%;
+    border-radius: inherit;
+    background-color: var(--nui-pb-fill-bg);
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.13) 0%,
+      rgba(0, 0, 0, 0.07) 100%
+    );
+    transition: width var(--nui-pb-transition-duration) var(--nui-pb-transition-timing);
+
+    &:hover {
+      background-color: var(--nui-pb-fill-hover-bg);
+    }
+  }
+
+  // Indeterminate animation: needs absolute fill inside relative track
+  &__bar--indeterminate &__fill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100% !important;
+    animation: nui-pb-indeterminate var(--nui-pb-indeterminate-duration) infinite
+      var(--nui-pb-indeterminate-timing);
+    transform-origin: 0% 50%;
+  }
+
+  &__value {
+    font-size: var(--nui-font-size-sm);
+    white-space: nowrap;
+    color: var(--nui-pb-value-text, var(--nui-text-secondary));
+
+    &--outside {
+      padding: 0 var(--nui-spacing-xs);
+    }
+
+    &--inside {
+      // Anchored to the right edge of __fill — always on the coloured fill background
+      position: absolute;
+      right: var(--nui-spacing-xs);
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+      font-weight: var(--nui-pb-font-weight-inside);
+      font-size: var(--nui-font-size-xs);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      // Fill always provides the background → only subtle depth shadow needed
+      color: var(--nui-pb-text, var(--nui-text-light));
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+      transition:
+        opacity var(--nui-pb-transition-duration) var(--nui-pb-transition-timing),
+        visibility var(--nui-pb-transition-duration) var(--nui-pb-transition-timing);
+
+      &-hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+  }
+
+  &__trailing-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--nui-pb-label-text, var(--nui-text-secondary));
+    font-size: var(--nui-font-size-md);
+    line-height: 1;
+  }
+
+  // --- Compact modifier ---
+  &--compact {
+    .nui-pb__track {
+      height: var(--nui-pb-height-compact);
+      border-radius: var(--nui-pb-radius-compact);
+    }
+
+    .nui-pb__value--inside,
+    .nui-pb__value--outside {
+      display: none;
+    }
+  }
+}
+
+// ============================================================================
+// KEYFRAMES
+// ============================================================================
+@keyframes nui-pb-indeterminate {
+  0% {
+    transform: translateX(0) scaleX(0);
+  }
+  40% {
+    transform: translateX(0) scaleX(0.4);
+  }
+  100% {
+    transform: translateX(100%) scaleX(0.5);
+  }
+}

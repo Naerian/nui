@@ -15,10 +15,6 @@ $button-link-underline-offset: 0.25em !default;
   --nui-button-gap: #{$button-gap};
   --nui-button-spin-duration: #{$button-spin-duration};
 
-  // Focus
-  --nui-button-focus-width: #{$button-focus-width};
-  --nui-button-focus-offset: #{$button-focus-offset};
-
   // Border-radius
   --nui-button-radius-xs: var(--nui-border-radius-xs);
   --nui-button-radius-sm: var(--nui-border-radius-sm);

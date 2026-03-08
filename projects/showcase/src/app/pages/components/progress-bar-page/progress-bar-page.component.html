@@ -1,0 +1,217 @@
+<div class="docs-page">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h1>{{ pageConfig.title | translate }}</h1>
+      <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
+    </div>
+
+    <app-component-tabs [tabs]="tabs" [sections]="pageConfig.sections" #tabsComp>
+      @if (tabsComp.activeSections(); as activeSections) {
+        @for (section of activeSections; track section.id) {
+          <div class="section">
+            <app-section-title
+              [anchor]="section.anchor"
+              [title]="section.title | translate"
+              [tabId]="tabsComp.activeTabId()"
+            ></app-section-title>
+
+            @if (section.description) {
+              <p class="section-description" [innerHTML]="section.description | translate"></p>
+            }
+
+            @if (section.note) {
+              <div class="section-note" [ngClass]="section.note.type">
+                <p [innerHTML]="section.note.content | translate"></p>
+              </div>
+            }
+
+            @switch (section.id) {
+              @case ('basic') {
+                <div class="example-preview flex-column">
+                  <nui-progress-bar [value]="70" />
+                </div>
+              }
+
+              @case ('compact') {
+                <div class="example-preview flex-column gap-3">
+                  <nui-progress-bar [value]="60" compact />
+                  <nui-progress-bar [value]="60" compact color="danger" />
+                  <nui-progress-bar
+                    [value]="60"
+                    compact
+                    color="success"
+                    trailingIcon="ri-check-line"
+                  />
+                </div>
+              }
+
+              @case ('colors') {
+                <div class="example-preview flex-column gap-3">
+                  @for (color of colors; track color) {
+                    <nui-progress-bar
+                      [color]="color"
+                      [value]="70"
+                      [label]="color"
+                      labelPosition="left"
+                    />
+                  }
+                </div>
+              }
+
+              @case ('variants') {
+                <div class="example-preview flex-column gap-4">
+                  @for (variant of variants; track variant) {
+                    <div class="variant-row">
+                      <span class="variant-label">{{ variant }}</span>
+                      <nui-progress-bar [variant]="variant" color="primary" [value]="70" />
+                    </div>
+                  }
+                </div>
+              }
+
+              @case ('indeterminate') {
+                <div class="example-preview flex-column gap-3">
+                  <nui-progress-bar [indeterminate]="true" />
+                  <nui-progress-bar [indeterminate]="true" color="success" />
+                  <nui-progress-bar [indeterminate]="true" variant="outline" color="warning" />
+                  <nui-progress-bar [indeterminate]="true" variant="ghost" color="danger" />
+                </div>
+              }
+
+              @case ('value-positions') {
+                <div class="example-preview flex-column gap-4">
+                  @for (pos of valuePositions; track pos) {
+                    <nui-progress-bar [value]="70" [valuePosition]="pos" />
+                  }
+                </div>
+              }
+
+              @case ('value-format') {
+                <div class="example-preview flex-column gap-3">
+                  <nui-progress-bar
+                    [value]="35"
+                    [maxValue]="100"
+                    valueFormat="percentage"
+                    label="percentage"
+                    labelPosition="left"
+                  />
+                  <nui-progress-bar
+                    [value]="35"
+                    [maxValue]="100"
+                    valueFormat="fractional"
+                    label="fractional"
+                    labelPosition="left"
+                  />
+                </div>
+              }
+
+              @case ('label') {
+                <div class="example-preview flex-column gap-4">
+                  <nui-progress-bar [value]="60" label="Uploading file..." labelPosition="top" />
+                  <nui-progress-bar [value]="60" label="Uploading file..." labelPosition="bottom" />
+                  <nui-progress-bar [value]="60" label="Uploading" labelPosition="left" />
+                  <nui-progress-bar [value]="60" label="Done" labelPosition="right" />
+                </div>
+              }
+
+              @case ('combined') {
+                <div class="example-preview flex-column gap-3">
+                  <nui-progress-bar
+                    [value]="60"
+                    label="Storage used"
+                    showValueInLabel
+                    labelPosition="top"
+                  />
+                  <nui-progress-bar
+                    [value]="60"
+                    label="Files"
+                    showValueInLabel
+                    valueFormat="fractional"
+                    labelPosition="left"
+                  />
+                </div>
+              }
+
+              @case ('icons') {
+                <div class="example-preview flex-column gap-3">
+                  <nui-progress-bar
+                    [value]="80"
+                    label="Upload"
+                    prefixIcon="ri-upload-cloud-2-line"
+                    labelPosition="top"
+                  />
+                  <nui-progress-bar
+                    [value]="45"
+                    label="Download"
+                    suffixIcon="ri-download-cloud-2-line"
+                    showValueInLabel
+                    labelPosition="left"
+                  />
+                  <nui-progress-bar
+                    [value]="65"
+                    label="Syncing..."
+                    prefixIcon="ri-refresh-line"
+                    trailingIcon="ri-check-fill"
+                    labelPosition="left"
+                  />
+                </div>
+              }
+
+              @case ('custom-colors') {
+                <div class="example-preview flex-column gap-3">
+                  <nui-progress-bar
+                    [value]="65"
+                    trackColor="#e8f4fc"
+                    fillColor="#2196f3"
+                    textColor="#0d47a1"
+                  />
+                  <nui-progress-bar
+                    [value]="40"
+                    trackColor="#fde8e8"
+                    fillColor="#e53935"
+                    textColor="#b71c1c"
+                  />
+                  <nui-progress-bar
+                    [value]="80"
+                    trackColor="#e8f5e9"
+                    fillColor="#43a047"
+                    textColor="#1b5e20"
+                  />
+                </div>
+              }
+            }
+
+            <!-- Tabla de datos (para API o Theming) -->
+            @if (section.table) {
+              <div class="api-table">
+                <table>
+                  <thead>
+                    <tr>
+                      @for (header of section.table.headers; track $index) {
+                        <th [innerHTML]="header | translate"></th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of section.table.rows; track $index) {
+                      <tr>
+                        @for (cell of row; track $index) {
+                          <td [innerHTML]="cell | translate"></td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+
+            <!-- Code blocks asociados a esta sección -->
+            @if (section.examples && section.examples.length > 0) {
+              <app-code-block [examples]="section.examples"></app-code-block>
+            }
+          </div>
+        }
+      }
+    </app-component-tabs>
+  </div>
+</div>

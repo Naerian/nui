@@ -378,6 +378,7 @@ export class ThemeService {
       css += this.generateAvatarVariables(name, baseColor);
       css += this.generateActionMenuVariables(name, baseColor);
       css += this.generatePopoverVariables(name, baseColor);
+      css += this.generateProgressBarVariables(name, baseColor);
     });
 
     // Generar variables de Tooltip (no depende de colores semánticos)
@@ -1231,6 +1232,45 @@ export class ThemeService {
     /* Others */
     --nui-popover-shadow: var(--nui-box-shadow-md);
   `;
+  }
+
+  private generateProgressBarVariables(name: string, color: string): string {
+    const isDark = this._isDarkMode();
+    const hoverBg = isDark ? this.shade(color, 10) : this.tint(color, 10);
+    const pbText = isDark ? this.shade(color, 70) : this.tint(color, 70);
+    const pbTextShadow = isDark ? this.withAlpha(color, 0.8) : this.withAlpha(color, 0.8);
+
+    return `
+      /* ── Progress Bar: ${name} ── */
+
+      /* Solid neutral track + colored fill */
+      --nui-pb-${name}-solid-track-bg: var(--nui-surface-neutral);
+      --nui-pb-${name}-solid-track-border: var(--nui-border-default);
+      --nui-pb-${name}-solid-fill-bg: ${color};
+      --nui-pb-${name}-solid-fill-hover-bg: ${hoverBg};
+      --nui-pb-${name}-solid-value-text: var(--nui-text-secondary);
+      --nui-pb-${name}-solid-label-text: var(--nui-text-primary);
+
+      /* Outline transparent track with colored border */
+      --nui-pb-${name}-outline-track-bg: transparent;
+      --nui-pb-${name}-outline-track-border: ${this.withAlpha(color, 0.35)};
+      --nui-pb-${name}-outline-fill-bg: ${color};
+      --nui-pb-${name}-outline-fill-hover-bg: ${hoverBg};
+      --nui-pb-${name}-outline-value-text: ${color};
+      --nui-pb-${name}-outline-label-text: ${color};
+
+      /* Ghost alpha track + solid fill */
+      --nui-pb-${name}-ghost-track-bg: ${this.withAlpha(color, 0.1)};
+      --nui-pb-${name}-ghost-track-border: transparent;
+      --nui-pb-${name}-ghost-fill-bg: ${color};
+      --nui-pb-${name}-ghost-fill-hover-bg: ${hoverBg};
+      --nui-pb-${name}-ghost-value-text: var(--nui-text-secondary);
+      --nui-pb-${name}-ghost-label-text: var(--nui-text-primary);
+
+      /* Misc */
+      --nui-pb-text: ${pbText};
+      --nui-pb-text-shadow: 2px 1px 3px ${pbTextShadow};
+    `;
   }
 
   /**

@@ -1,0 +1,122 @@
+{
+  "title": "Progress Bar",
+  "subtitle": "Visual indicator of task or operation completion with support for colors, variants, labels, compact mode and indeterminate animation.",
+  "examples": {
+    "basic": {
+      "title": "Basic",
+      "description": "Simple progress bar with a numeric value from 0 to 100."
+    },
+    "compact": {
+      "title": "Compact",
+      "description": "Allows converting the bar into a thin indicator. The value text is automatically hidden.",
+      "note": "Add the <code>compact</code> attribute to reduce the bar."
+    },
+    "colors": {
+      "title": "Colors",
+      "description": "Support for different NUI colors",
+      "note": "All NUI semantic colors are supported via the <code>color</code> input."
+    },
+    "variants": {
+      "title": "Variants",
+      "description": "Support for different NUI variants",
+      "note": "<code>solid</code> uses a neutral track with a solid fill. <code>outline</code> uses a transparent track with a colored border. <code>ghost</code> uses a track with a light alpha."
+    },
+    "indeterminate": {
+      "title": "Indeterminate",
+      "description": "Displays a looping animation when the progress is unknown.",
+      "note": "Set <code>[indeterminate]=\"true\"</code> to show the animation."
+    },
+    "valuePositions": {
+      "title": "Value Position",
+      "description": "Controls where the value text appears.",
+      "note": "Use the <code>valuePosition</code> input with values <code>inside</code>, <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code>, or <code>hidden</code>."
+    },
+    "valueFormat": {
+      "title": "Value Format",
+      "description": "Controls the format of the value displayed with the progress bar.",
+      "note": "Choose between <code>percentage</code> (e.g., <em>70 %</em>) and <code>fractional</code> (e.g., <em>70 / 100</em>) with the <code>valueFormat</code> input."
+    },
+    "label": {
+      "title": "Label",
+      "description": "Adds a descriptive label and controls its position.",
+      "note": "Use the <code>label</code> input to add a label. Control its position with <code>labelPosition</code>: <code>top</code>, <code>bottom</code>, <code>left</code>, or <code>right</code>."
+    },
+    "combined": {
+      "title": "Label with Value (Combined)",
+      "description": "Combines a descriptive label with the progress value.",
+      "note": "Add the <code>showValueInLabel</code> attribute to display the progress value inline with the label."
+    },
+    "icons": {
+      "title": "Icons",
+      "description": "Associates icons with the progress bar to enhance its visual meaning. You can add prefix or suffix icons that decorate the label, or an independent icon at the end of the progress bar row.",
+      "note": "Use <code>prefixIcon</code> or <code>suffixIcon</code> to decorate the label. Use <code>trailingIcon</code> for an icon placed independently at the end of the progress bar row, regardless of the label position."
+    },
+    "customColors": {
+      "title": "Custom Colors",
+      "description": "Overrides the track, fill, and text colors with custom inputs that accept any CSS color value.",
+      "note": "Use the <code>trackColor</code>, <code>fillColor</code>, and <code>textColor</code> inputs for custom colors."
+    }
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "All available input properties of <code>nui-progress-bar</code>."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Color tokens",
+      "description": "Local CSS custom properties resolved per color and variant by ThemeService."
+    },
+    "sizes": {
+      "title": "Size tokens",
+      "description": "Structural CSS custom properties that control track height, border radius and transitions. Override them on the element or a parent selector."
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA roles & attributes",
+      "description": "Ensure the progress bar is accessible to assistive technology users by using appropriate ARIA roles and attributes.",
+      "rows": {
+        "role": {
+          "description": "The main progress bar component must have the <code>progressbar</code> role to indicate its function to screen readers."
+        },
+        "valuenow": {
+          "description": "The <code>aria-valuenow</code> attribute must be dynamically updated to reflect the current progress value (0-100)."
+        },
+        "valuemin": {
+          "description": "The <code>aria-valuemin</code> attribute must be set to 0 to indicate the minimum progress value."
+        },
+        "valuemax": {
+          "description": "The <code>aria-valuemax</code> attribute must be set to 100 to indicate the maximum progress value."
+        },
+        "valuetext": {
+          "description": "If a descriptive label is provided, the <code>aria-valuetext</code> attribute must be updated to include both the label and the progress value for better understanding."
+        },
+        "labelledby": {
+          "description": "If the progress bar has a visible label, the <code>aria-labelledby</code> attribute must point to the ID of the label element to associate them correctly."
+        }
+      }
+    }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Global configuration",
+      "description": "The ProgressBar component supports global configuration via <code>provideNUI()</code>. This allows you to set default values once at the application level, avoiding repetition.",
+      "note": "Global configuration acts as default values and can always be overridden per instance via component inputs."
+    },
+    "defaults": {
+      "title": "Configurable properties",
+      "description": "The following properties can be configured globally via <code>ProgressBarGlobalConfig</code>:",
+      "rows": {
+        "color": "Default color of the progress bar.",
+        "variant": "Default variant of the progress bar."
+      }
+    },
+    "priority": {
+      "title": "Resolution priority",
+      "description": "NUI resolves configuration values using the following priority chain (highest priority wins):",
+      "note": "<strong>Component input</strong> → <strong>Global config (<code>provideNUI</code>)</strong> → <strong>Default value</strong>"
+    }
+  }
+}
