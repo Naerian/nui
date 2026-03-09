@@ -26,7 +26,8 @@
     border-bottom-right-radius: 0;
     margin-bottom: -2px;
     cursor: pointer;
-    font-size: 0.875rem;
+    font-size: 0.938rem;
+    line-height: 1;
     color: var(--nui-on-surface-secondary);
     white-space: nowrap;
     outline: none;
@@ -104,17 +105,14 @@
     }
 
     &__tab {
-      padding: 0.5rem 0.75rem;
-      font-size: 0.75rem;
+      padding: 0.875rem 0.75rem;
+      font-size: 0.875rem;
       border-bottom: 2px solid var(--nui-border-high);
       width: 100%;
+      line-height: 1;
 
       &--active {
         border-bottom-color: var(--nui-primary-alpha-80);
-      }
-
-      i {
-        font-size: 1rem;
       }
     }
   }
