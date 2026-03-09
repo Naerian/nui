@@ -104,27 +104,27 @@ export class TooltipDirective implements OnInit, OnDestroy {
   /** Contenido del tooltip (texto o template) */
   readonly content = input.required<string | TemplateRef<any>>({ alias: 'nuiTooltip' });
 
-  /** 
-   * Posición del tooltip. 
-   * @default 'top' 
+  /**
+   * Posición del tooltip.
+   * @default 'top'
    */
   readonly nuiTooltipPosition = input<TooltipPosition | undefined>(undefined);
 
-  /** 
-   * Evento disparador. 
-   * @default 'hover' 
+  /**
+   * Evento disparador.
+   * @default 'hover'
    */
   readonly nuiTooltipEvent = input<TooltipEvent | undefined>(undefined);
 
-  /** 
-   * Delay antes de mostrar (ms). 
-   * @default 300 
+  /**
+   * Delay antes de mostrar (ms).
+   * @default 300
    */
   readonly nuiTooltipShowDelay = input<number | undefined>(undefined);
 
-  /** 
-   * Delay antes de ocultar (ms). 
-   * @default 0 
+  /**
+   * Delay antes de ocultar (ms).
+   * @default 0
    */
   readonly nuiTooltipHideDelay = input<number | undefined>(undefined);
 
@@ -137,9 +137,9 @@ export class TooltipDirective implements OnInit, OnDestroy {
   /** Clase CSS personalizada. */
   readonly nuiTooltipClass = input<string | undefined>(undefined);
 
-  /** 
-   * Mostrar flecha. 
-   * @default true 
+  /**
+   * Mostrar flecha.
+   * @default true
    */
   readonly nuiTooltipShowArrow = input(undefined, { transform: booleanAttribute });
 
@@ -182,7 +182,7 @@ export class TooltipDirective implements OnInit, OnDestroy {
   );
 
   /**
-   * Fix allowHtml: el default del input es false. El fallback global puede activarlo.
+   * El default del input es false. El fallback global puede activarlo.
    * La prioridad es: input explícito > config global > false (nunca true por defecto).
    */
   private readonly allowHtml = computed(
@@ -241,22 +241,13 @@ export class TooltipDirective implements OnInit, OnDestroy {
         element.setAttribute('tabindex', '0');
       }
     }
-
-    // Fix aria-describedby: NO lo ponemos permanentemente en ngOnInit porque el
-    // elemento role="tooltip" no existe en el DOM hasta que el overlay se adjunta.
-    // Se añade/quita dinámicamente en attach()/detach() para que la referencia sea válida.
   }
 
   ngOnDestroy(): void {
     if (this.interactive()) {
       this.removeInteractiveListeners();
     }
-
-    // Limpiar scroll listener si existe
     this.removeScrollListener();
-
-    // El cleanup adicional ahora se maneja en el constructor con DestroyRef
-    // Este método se mantiene para compatibilidad pero el trabajo se hace automáticamente
   }
 
   @HostListener('mouseenter')
@@ -288,15 +279,32 @@ export class TooltipDirective implements OnInit, OnDestroy {
       if (this.interactive()) {
         this.isMouseOverHost = true;
       }
-      this.show();
+      this.showOnTouch();
     }
   }
 
   @HostListener('touchend')
   onTouchEnd(): void {
-    if (this.event() === 'hover' && !this.interactive()) {
-      this.hide();
+    if (this.event() === 'hover' && !this.interactive() && this.isVisible()) {
+      // Programar auto-cierre con hideTimeoutId para que el scroll listener
+      // pueda cancelarlo con clearTimeouts() y cerrar inmediatamente al scroll.
+      this.hideTimeoutId = setTimeout(() => {
+        this.isVisible.set(false);
+      }, 1500);
     }
+  }
+
+  /**
+   * Muestra el tooltip inmediatamente en touch, sin showDelay.
+   * El showDelay solo tiene sentido en hover de escritorio (evita flickering
+   * al pasar el ratón). En touch, el usuario toca deliberadamente el elemento.
+   */
+  private showOnTouch(): void {
+    if (this.nuiTooltipDisabled() || !this.content() || this.isVisible()) return;
+    this.clearTimeouts();
+    this.attach();
+    this.isVisible.set(true);
+    this.setupScrollListener();
   }
 
   @HostListener('click', ['$event'])
@@ -332,7 +340,7 @@ export class TooltipDirective implements OnInit, OnDestroy {
   }
 
   /**
-   * Fix a11y: ESC cierra el tooltip inmediatamente (WCAG 2.1.1 - Keyboard).
+   * ESC cierra el tooltip inmediatamente (WCAG 2.1.1 - Keyboard).
    * Solo actúa si el tooltip está visible para no interferir con otros handlers.
    */
   @HostListener('document:keydown.escape')
@@ -512,7 +520,7 @@ export class TooltipDirective implements OnInit, OnDestroy {
       this.detectAndUpdatePosition();
     }, 0);
 
-    // Fix aria-describedby dinámico: solo cuando el tooltip existe en el DOM
+    // Solo cuando el tooltip existe en el DOM
     this.elementRef.nativeElement.setAttribute('aria-describedby', this.tooltipId);
 
     if (this.interactive() && this.overlayRef) {
@@ -617,7 +625,7 @@ export class TooltipDirective implements OnInit, OnDestroy {
       this.componentRef = undefined;
       this.isMouseOverTooltip = false;
 
-      // Fix aria-describedby dinámico: eliminar cuando el tooltip ya no está en el DOM
+      // Eliminar cuando el tooltip ya no está en el DOM
       this.elementRef.nativeElement.removeAttribute('aria-describedby');
     }
   }
