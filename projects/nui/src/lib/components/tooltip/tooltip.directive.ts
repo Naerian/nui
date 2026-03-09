@@ -292,15 +292,6 @@ export class TooltipDirective implements OnInit, OnDestroy {
     }
   }
 
-  @HostListener('touchmove')
-  onTouchMove(): void {
-    // Cancelar siempre (aunque el tooltip aún esté en el show-delay)
-    this.clearTimeouts();
-    if (this.isVisible()) {
-      this.isVisible.set(false);
-    }
-  }
-
   @HostListener('touchend')
   onTouchEnd(): void {
     if (this.event() === 'hover' && !this.interactive()) {
@@ -372,10 +363,8 @@ export class TooltipDirective implements OnInit, OnDestroy {
       this.attach();
       this.isVisible.set(true);
 
-      // Para eventos no-hover (click, focus), añadir listener de scroll para cerrar
-      if (this.event() !== 'hover') {
-        this.setupScrollListener();
-      }
+      // Siempre escuchar scroll para cerrar el tooltip (incluye mobile/touch)
+      this.setupScrollListener();
     }, this.showDelay());
   }
 
