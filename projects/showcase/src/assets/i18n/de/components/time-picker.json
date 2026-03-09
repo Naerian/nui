@@ -237,12 +237,6 @@
     "roles": {
       "title": "ARIA-Rollen und Attribute",
       "description": "Der TimePicker implementiert das ARIA <code>listbox</code>/<code>option</code>-Muster für jede scrollbare Spalte.",
-      "elements": {
-        "container": "Auswahl-Container",
-        "column": "Scrollbare Spalte",
-        "option": "Zeitoption",
-        "normalizedAlert": "Normalisierungs-Live-Region"
-      },
       "rows": {
         "containerLabel": {
           "description": "Das Wurzelelement der Zeitauswahl hat <code>aria-label</code>, das aus dem i18n-Token <code>timePickerLabel</code> (oder <code>durationPickerLabel</code>) gesetzt wird."
@@ -271,11 +265,6 @@
       "title": "Barrierefreier Name",
       "description": "Die Zeitauswahl und jede Spalte sind über i18n-Token beschriftet. Einzelne Optionen sind durch ihren sichtbaren Zeitwert beschriftet.",
       "note": "Konfigurieren Sie immer i18n-Token für Ihre Sprache, damit Screenreader-Benutzer aussagekräftige Spaltenbeschriftungen hören (z. B. 'Stunde', 'Minuten', 'AM/PM').",
-      "elements": {
-        "container": "Container-Label",
-        "columns": "Spalten-Labels",
-        "help": "Spalten-Hilfstext"
-      },
       "info": {
         "containerLabel": "Token timePickerLabel / durationPickerLabel",
         "columnLabels": "Token hour / minutes / period",

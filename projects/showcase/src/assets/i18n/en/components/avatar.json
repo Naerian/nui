@@ -221,14 +221,6 @@
           "description": "The visible '+N' text span is hidden from assistive technologies; only the parent container's <code>aria-label</code> is read."
         }
       },
-      "elements": {
-        "avatarDiv": "<code>&lt;div&gt;</code> (avatar)",
-        "decorative": "<code>&lt;span&gt;</code> initials / <code>&lt;i&gt;</code> icon",
-        "groupList": "<code>&lt;div&gt;</code> (group, list)",
-        "groupItem": "<code>&lt;div&gt;</code> (group, item)",
-        "excessDiv": "<code>&lt;div&gt;</code> (excess indicator)",
-        "excessSpan": "<code>&lt;span&gt;</code> (excess text \"+N\")"
-      }
     },
     "naming": {
       "title": "Accessible name",
@@ -247,12 +239,6 @@
         "excess": {
           "description": "The excess counter's <code>aria-label</code> is computed from <code>avatar.moreProfiles</code>, replacing <code>{count}</code> with the number of hidden avatars."
         }
-      },
-      "elements": {
-        "avatarWithTooltip": "Avatar with <code>tooltip</code>",
-        "avatarWithAlt": "Avatar with <code>alt</code>",
-        "avatarWithoutName": "Avatar without <code>tooltip</code> or <code>alt</code>",
-        "excessIndicator": "Excess indicator \"+N\""
       },
       "info": {
         "viaI18n": "via i18n"
@@ -278,12 +264,6 @@
           "description": "The visible '+N' text is hidden from ATs; the parent div's <code>aria-label</code> provides the announcement for screen readers."
         }
       },
-      "elements": {
-        "initials": "<code>&lt;span&gt;</code> initials",
-        "icon": "<code>&lt;i&gt;</code> icon",
-        "fallback": "<code>&lt;span&gt;</code> fallback (alt letter)",
-        "excessSpan": "<code>&lt;span&gt;</code> text \"+N\""
-      }
     }
   },
   "globalConfig": {

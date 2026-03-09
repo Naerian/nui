@@ -221,14 +221,7 @@
           "description": "Der sichtbare Text '+N' ist für assistive Technologien ausgeblendet; nur das <code>aria-label</code> des übergeordneten Containers wird gelesen."
         }
       },
-      "elements": {
-        "avatarDiv": "<code>&lt;div&gt;</code> (Avatar)",
-        "decorative": "<code>&lt;span&gt;</code> Initialen / <code>&lt;i&gt;</code> Icon",
-        "groupList": "<code>&lt;div&gt;</code> (Gruppe, Liste)",
-        "groupItem": "<code>&lt;div&gt;</code> (Gruppe, Element)",
-        "excessDiv": "<code>&lt;div&gt;</code> (Überschuss-Indikator)",
-        "excessSpan": "<code>&lt;span&gt;</code> (Überschuss-Text \"+N\")"
-      }
+
     },
     "naming": {
       "title": "Zugänglicher Name",
@@ -248,12 +241,7 @@
           "description": "Das <code>aria-label</code> des Überschusszählers wird aus <code>avatar.moreProfiles</code> berechnet und ersetzt <code>{count}</code> durch die Anzahl der versteckten Avatare."
         }
       },
-      "elements": {
-        "avatarWithTooltip": "Avatar mit <code>tooltip</code>",
-        "avatarWithAlt": "Avatar mit <code>alt</code>",
-        "avatarWithoutName": "Avatar ohne <code>tooltip</code> und <code>alt</code>",
-        "excessIndicator": "Überschuss-Indikator \"+N\""
-      },
+
       "info": {
         "viaI18n": "via i18n"
       }
@@ -278,12 +266,7 @@
           "description": "Der sichtbare Text '+N' ist für AT versteckt; das <code>aria-label</code> des übergeordneten div liefert die Screenreader-Ansage."
         }
       },
-      "elements": {
-        "initials": "<code>&lt;span&gt;</code> Initialen",
-        "icon": "<code>&lt;i&gt;</code> Icon",
-        "fallback": "<code>&lt;span&gt;</code> Fallback (Alt-Buchstabe)",
-        "excessSpan": "<code>&lt;span&gt;</code> Text \"+N\""
-      }
+
     }
   },
   "globalConfig": {

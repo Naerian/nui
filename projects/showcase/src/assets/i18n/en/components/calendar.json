@@ -301,13 +301,6 @@
     "roles": {
       "title": "ARIA roles and attributes",
       "description": "The Calendar implements the ARIA Grid pattern for day cells and a live region for navigation announcements.",
-      "elements": {
-        "grid": "Day grid",
-        "weekHeader": "Weekday header",
-        "dayCell": "Day cell",
-        "dayButton": "Day button",
-        "liveRegion": "Live region"
-      },
       "rows": {
         "grid": {
           "description": "The day grid uses <code>role=\"grid\"</code> to enable arrow key navigation between cells."
@@ -336,11 +329,6 @@
       "title": "Accessible name",
       "description": "The calendar grid and each day cell have descriptive accessible names derived from i18n tokens and the formatted date.",
       "note": "Day cells include state annotations (today, selected, in range, disabled) added to their label via <code>calendar.aria.*</code> tokens.",
-      "elements": {
-        "grid": "Day grid",
-        "dayButton": "Day button",
-        "stateAnnotation": "State annotation"
-      },
       "info": {
         "i18nLabel": "calendarLabel (i18n)",
         "dateFormatted": "Formatted date",

@@ -363,12 +363,6 @@
           "description": "The spinner visually replaces the icon but the accessible name persists while the button remains in the DOM."
         }
       },
-      "elements": {
-        "textLabel": "Button with text or <code>label</code>",
-        "iconText": "Icon + text",
-        "iconOnly": "Icon only (<code>isIconOnly</code>)",
-        "iconOnlyLoading": "Loading state with icon only"
-      },
       "info": {
         "nativeName": "Native name",
         "ariaLabelTitle": "<code>aria-label</code> / <code>title</code>"

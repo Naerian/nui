@@ -386,15 +386,7 @@
           "description": "Empêche les icônes décoratives d'être annoncées par les lecteurs d'écran."
         }
       },
-      "elements": {
-        "trigger": "<code>&lt;button&gt;</code> (déclencheur)",
-        "menu": "<code>&lt;div&gt;</code> (menu)",
-        "menuDynamic": "<code>&lt;div&gt;</code> (menu, mode dynamique)",
-        "item": "<code>&lt;button&gt;</code> (élément)",
-        "itemSelectable": "<code>&lt;button&gt;</code> (élément sélectionnable)",
-        "separator": "<code>&lt;div&gt;</code> (séparateur)",
-        "icon": "<code>&lt;i&gt;</code> (icône)"
-      }
+
     },
     "naming": {
       "title": "Nom accessible",
@@ -417,13 +409,7 @@
           "description": "En mode dynamique, le conteneur de menu référence l'ID du déclencheur via <code>aria-labelledby</code>, rendant leur association explicite."
         }
       },
-      "elements": {
-        "triggerWithLabel": "Déclencheur avec <code>label</code>",
-        "triggerWithAriaLabel": "Déclencheur avec <code>ariaLabel</code>",
-        "triggerIconOnly": "Déclencheur icône seule",
-        "menuItem": "Élément de menu",
-        "menuContainer": "Conteneur de menu (dynamique)"
-      },
+
       "info": {
         "nativeName": "Nom natif",
         "titleFallback": "<code>title</code> comme repli"

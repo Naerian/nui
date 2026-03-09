@@ -111,15 +111,6 @@
     "roles": {
       "title": "Roles y atributos ARIA",
       "description": "El Select Button expone roles semánticos dependiendo de su modo de selección (radio o checkbox).",
-      "elements": {
-        "containerRadio": "Contenedor (modo radio)",
-        "containerCheckbox": "Contenedor (modo checkbox)",
-        "container": "Contenedor",
-        "buttonRadio": "Botón de opción (modo radio)",
-        "buttonCheckbox": "Botón de opción (modo checkbox)",
-        "button": "Botón de opción",
-        "icon": "Icono decorativo"
-      },
       "rows": {
         "roleRadiogroup": {
           "description": "El contenedor utiliza <code>role=\"radiogroup\"</code> en modo de selección única para agrupar opciones mutuamente excluyentes."
@@ -148,10 +139,6 @@
       "title": "Nombre accesible",
       "description": "Cada botón de opción obtiene su nombre accesible a partir de la etiqueta de la opción. Opcionalmente, el contenedor del grupo puede recibir una etiqueta contextual.",
       "note": "Siempre proporcione etiquetas significativas para las opciones. Para los botones solo con icono, asegúrese de que cada opción tenga una etiqueta descriptiva asignada mediante <code>labelBy</code>.",
-      "elements": {
-        "button": "Botón de opción",
-        "container": "Contenedor del grupo"
-      },
       "info": {
         "optionLabel": "Texto de la etiqueta de la opción",
         "groupLabel": "No proporcionado por defecto"

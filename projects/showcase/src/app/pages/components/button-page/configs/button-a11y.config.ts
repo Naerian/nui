@@ -15,28 +15,23 @@ export const BUTTON_A11Y_SECTIONS: ComponentSection[] = [
     },
     table: {
       headers: [
-        'common.tables.element',
         'common.tables.info',
         'common.tables.description',
       ],
       rows: [
         [
-          'components.button.a11y.naming.elements.textLabel',
           'components.button.a11y.naming.info.nativeName',
           'components.button.a11y.naming.rows.textLabel.description',
         ],
         [
-          'components.button.a11y.naming.elements.iconText',
           'components.button.a11y.naming.info.nativeName',
           'components.button.a11y.naming.rows.iconText.description',
         ],
         [
-          'components.button.a11y.naming.elements.iconOnly',
           'components.button.a11y.naming.info.ariaLabelTitle',
           'components.button.a11y.naming.rows.iconOnly.description',
         ],
         [
-          'components.button.a11y.naming.elements.iconOnlyLoading',
           'components.button.a11y.naming.info.ariaLabelTitle',
           'components.button.a11y.naming.rows.iconOnlyLoading.description',
         ],

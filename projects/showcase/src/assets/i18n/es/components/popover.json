@@ -106,10 +106,6 @@
     "roles": {
       "title": "Roles y atributos ARIA",
       "description": "El Popover implementa el patrón ARIA de diálogo no modal. El trigger anuncia si el popover está abierto y señala la relación con su contenido.",
-      "elements": {
-        "trigger": "Elemento disparador",
-        "popover": "Panel del popover"
-      },
       "rows": {
         "expanded": {
           "description": "El disparador lleva <code>aria-expanded</code> reflejando si el popover está visible (<code>true</code>) o no (<code>false</code>)."
@@ -138,12 +134,6 @@
       "title": "Nombre accesible",
       "description": "El popover y su disparador deben tener nombres accesibles que comuniquen su propósito con claridad.",
       "note": "Proporciona siempre un <code>aria-label</code> o un título visible en el popover para que los lectores de pantalla lo identifiquen correctamente.",
-      "elements": {
-        "trigger": "Disparador",
-        "popoverLabelledBy": "Panel del popover con título visible",
-        "popoverLabel": "Panel del popover sin título visible",
-        "popoverAuto": "Nombre accesible automático"
-      },
       "info": {
         "ownLabel": "Nombre accesible del disparador",
         "auto": "aria-label del panel"

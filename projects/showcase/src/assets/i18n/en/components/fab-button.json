@@ -118,13 +118,6 @@
     "roles": {
       "title": "ARIA roles and attributes",
       "description": "The FabButton follows the WAI-ARIA Menu Button pattern. The trigger announces the open state and the action list is a proper menu.",
-      "elements": {
-        "host": "FAB host (container group)",
-        "trigger": "Trigger button",
-        "menu": "Actions menu",
-        "action": "Individual action item",
-        "icon": "Decorative icon"
-      },
       "rows": {
         "roleGroup": {
           "description": "The FAB host element has <code>role=\"group\"</code> and <code>aria-label</code> so the full widget is announced as a coherent group."
@@ -156,10 +149,6 @@
       "title": "Accessible name",
       "description": "The trigger button and each action item must have meaningful accessible names for screen reader users.",
       "note": "Always provide a <code>label</code> or <code>tooltip</code> for each action item — these become the accessible name of the <code>menuitem</code>.",
-      "elements": {
-        "trigger": "Trigger button",
-        "action": "Action item"
-      },
       "info": {
         "triggerLabel": "i18n token triggerAriaLabel",
         "actionLabel": "Action label text / tooltip"

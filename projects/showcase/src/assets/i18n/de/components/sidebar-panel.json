@@ -165,13 +165,7 @@
     "roles": {
       "title": "ARIA-Rollen und Attribute",
       "description": "Der SidebarPanel implementiert ein barrierefreies Dialog-Muster, damit Screenreader ihn als eigenständigen Inhaltsbereich erkennen.",
-      "elements": {
-        "panel": "Panel-Wurzelelement",
-        "closeButton": "Schließen-Schaltfläche",
-        "minimizeButton": "Minimieren-/Wiederherstellen-Schaltfläche",
-        "expandButton": "Erweitern-/Reduzieren-Schaltfläche",
-        "backdrop": "Hintergrundoverlay"
-      },
+
       "rows": {
         "role": {
           "description": "Das Panel-Wurzelelement hat <code>role=\"dialog\"</code>, um Hilfstechnologien einen eigenständigen Bereich zu signalisieren."
@@ -197,10 +191,6 @@
       "title": "Barrierefreier Name",
       "description": "Der barrierefreie Name des Panels wird über <code>aria-labelledby</code> aus dem sichtbaren Titel abgeleitet. Steuerungsschaltflächen sind mit i18n-Token beschriftet.",
       "note": "Geben Sie immer einen sichtbaren Titel im Panel an, da dieser automatisch zum Dialog-Namen wird.",
-      "elements": {
-        "panelWithTitle": "Panel mit Titel",
-        "buttons": "Steuerungsschaltflächen"
-      },
       "info": {
         "ariaLabelledby": "Panel-Titel (aria-labelledby)",
         "i18nTokens": "i18n-Token für Schaltflächenbeschriftungen"

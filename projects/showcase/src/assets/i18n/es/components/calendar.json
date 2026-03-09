@@ -301,13 +301,6 @@
     "roles": {
       "title": "Roles y atributos ARIA",
       "description": "El Calendar implementa el patrón ARIA Grid para las celdas de día y una región en vivo para anuncios de navegación.",
-      "elements": {
-        "grid": "Cuadrícula de días",
-        "weekHeader": "Encabezado de días de la semana",
-        "dayCell": "Celda de día",
-        "dayButton": "Botón de día",
-        "liveRegion": "Región en vivo"
-      },
       "rows": {
         "grid": {
           "description": "La cuadrícula de días usa <code>role=\"grid\"</code> para habilitar la navegación por teclas de dirección entre celdas."
@@ -336,11 +329,6 @@
       "title": "Nombre accesible",
       "description": "La cuadrícula del calendario y cada celda de día tienen nombres accesibles descriptivos derivados de tokens i18n y la fecha formateada.",
       "note": "Las celdas de día incluyen anotaciones de estado (hoy, seleccionado, en rango, deshabilitado) añadidas a su etiqueta mediante los tokens <code>calendar.aria.*</code>.",
-      "elements": {
-        "grid": "Cuadrícula de días",
-        "dayButton": "Botón de día",
-        "stateAnnotation": "Anotación de estado"
-      },
       "info": {
         "i18nLabel": "calendarLabel (i18n)",
         "dateFormatted": "Fecha formateada",

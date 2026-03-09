@@ -237,12 +237,6 @@
     "roles": {
       "title": "Roles y atributos ARIA",
       "description": "El TimePicker implementa el patrón ARIA de <code>listbox</code> / <code>option</code> para cada columna de desplazamiento.",
-      "elements": {
-        "container": "Contenedor del selector",
-        "column": "Columna de desplazamiento",
-        "option": "Opción de tiempo",
-        "normalizedAlert": "Región viva de normalización"
-      },
       "rows": {
         "containerLabel": {
           "description": "El elemento raíz del selector tiene <code>aria-label</code> establecido desde el token i18n <code>timePickerLabel</code> (o <code>durationPickerLabel</code>)."
@@ -271,11 +265,6 @@
       "title": "Nombre accesible",
       "description": "El selector y cada columna se etiquetan mediante tokens i18n. Las opciones individuales se etiquetan por su valor de tiempo visible.",
       "note": "Configura siempre los tokens i18n para tu idioma para que los usuarios de lector de pantalla escuchen etiquetas de columna significativas (ej. 'Hora', 'Minutos', 'AM/PM').",
-      "elements": {
-        "container": "Etiqueta del contenedor",
-        "columns": "Etiquetas de columna",
-        "help": "Texto de ayuda de columna"
-      },
       "info": {
         "containerLabel": "Token timePickerLabel / durationPickerLabel",
         "columnLabels": "Tokens hour / minutes / period",

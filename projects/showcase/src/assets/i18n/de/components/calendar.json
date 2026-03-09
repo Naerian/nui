@@ -301,13 +301,6 @@
     "roles": {
       "title": "ARIA-Rollen und -Attribute",
       "description": "Der Kalender implementiert das ARIA-Grid-Muster für Tageszellen und einen Live-Bereich für Navigationsansagen.",
-      "elements": {
-        "grid": "Tagesraster",
-        "weekHeader": "Wochentagsheader",
-        "dayCell": "Tageszelle",
-        "dayButton": "Tagesschaltfläche",
-        "liveRegion": "Live-Bereich"
-      },
       "rows": {
         "grid": {
           "description": "Das Tagesraster verwendet <code>role=\"grid\"</code>, um die Pfeiltastennavigation zwischen Zellen zu ermöglichen."
@@ -336,11 +329,6 @@
       "title": "Zugänglicher Name",
       "description": "Das Kalenderraster und jede Tageszelle haben beschreibende zugängliche Namen aus i18n-Tokens und dem formatierten Datum.",
       "note": "Tageszellen enthalten Zustandsanmerkungen (heute, ausgewählt, im Bereich, deaktiviert), die ihrem Label über <code>calendar.aria.*</code>-Tokens hinzugefügt werden.",
-      "elements": {
-        "grid": "Tagesraster",
-        "dayButton": "Tagesschaltfläche",
-        "stateAnnotation": "Zustandsanmerkung"
-      },
       "info": {
         "i18nLabel": "calendarLabel (i18n)",
         "dateFormatted": "Formatiertes Datum",

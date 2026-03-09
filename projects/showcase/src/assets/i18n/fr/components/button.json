@@ -363,12 +363,7 @@
           "description": "L'indicateur remplace visuellement l'icône mais le nom accessible persiste tant que le bouton est dans le DOM."
         }
       },
-      "elements": {
-        "textLabel": "Bouton avec texte ou <code>label</code>",
-        "iconText": "Icône + texte",
-        "iconOnly": "Icône seule (<code>isIconOnly</code>)",
-        "iconOnlyLoading": "État de chargement avec icône seule"
-      },
+
       "info": {
         "nativeName": "Nom natif",
         "ariaLabelTitle": "<code>aria-label</code> / <code>title</code>"

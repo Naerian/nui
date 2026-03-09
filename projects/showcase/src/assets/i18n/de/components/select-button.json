@@ -111,15 +111,6 @@
     "roles": {
       "title": "ARIA-Rollen und -Attribute",
       "description": "Die Auswahlschaltfläche zeigt semantische Rollen je nach Auswahlmodus (Radio oder Checkbox) an.",
-      "elements": {
-        "containerRadio": "Container (Radio-Modus)",
-        "containerCheckbox": "Container (Checkbox-Modus)",
-        "container": "Container",
-        "buttonRadio": "Optionsschaltfläche (Radio-Modus)",
-        "buttonCheckbox": "Optionsschaltfläche (Checkbox-Modus)",
-        "button": "Optionsschaltfläche",
-        "icon": "Dekoratives Icon"
-      },
       "rows": {
         "roleRadiogroup": {
           "description": "Der Container verwendet <code>role=\"radiogroup\"</code> im Einzelauswahlmodus, um sich gegenseitig ausschließende Optionen zu gruppieren."
@@ -148,10 +139,6 @@
       "title": "Zugänglicher Name",
       "description": "Jede Optionsschaltfläche erhält ihren zugänglichen Namen aus dem Optionslabel. Optional kann der Gruppencontainer ein kontextuelles Label erhalten.",
       "note": "Gib immer aussagekräftige Labels für Optionen an. Stelle bei Nur-Icon-Schaltflächen sicher, dass jede Option ein beschreibendes Label über <code>labelBy</code> hat.",
-      "elements": {
-        "button": "Optionsschaltfläche",
-        "container": "Gruppencontainer"
-      },
       "info": {
         "optionLabel": "Optionslabeltext",
         "groupLabel": "Standardmäßig nicht bereitgestellt"

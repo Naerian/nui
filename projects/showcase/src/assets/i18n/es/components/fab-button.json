@@ -118,13 +118,6 @@
     "roles": {
       "title": "Roles y atributos ARIA",
       "description": "El FabButton sigue el patrón WAI-ARIA de Menu Button. El disparador anuncia el estado abierto y la lista de acciones es un menú propiamente dicho.",
-      "elements": {
-        "host": "Host del FAB (grupo contenedor)",
-        "trigger": "Botón disparador",
-        "menu": "Menú de acciones",
-        "action": "Item de acción individual",
-        "icon": "Icono decorativo"
-      },
       "rows": {
         "roleGroup": {
           "description": "El elemento host del FAB tiene <code>role=\"group\"</code> y <code>aria-label</code> para que el widget completo se anuncie como un grupo coherente."
@@ -156,10 +149,6 @@
       "title": "Nombre accesible",
       "description": "El botón disparador y cada item de acción deben tener nombres accesibles significativos para los usuarios de lectores de pantalla.",
       "note": "Proporciona siempre un <code>label</code> o <code>tooltip</code> para cada item de acción — estos se convierten en el nombre accesible del <code>menuitem</code>.",
-      "elements": {
-        "trigger": "Botón disparador",
-        "action": "Item de acción"
-      },
       "info": {
         "triggerLabel": "Token i18n triggerAriaLabel",
         "actionLabel": "Texto de etiqueta / tooltip de la acción"

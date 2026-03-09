@@ -11,50 +11,42 @@ export const SELECT_BUTTON_A11Y_SECTIONS: ComponentSection[] = [
     anchor: 'a11y-roles',
     table: {
       headers: [
-        'common.tables.element',
         'common.tables.property',
         'common.tables.value',
         'common.tables.description',
       ],
       rows: [
         [
-          'components.selectButton.a11y.roles.elements.containerRadio',
           '<code>role</code>',
           '"radiogroup"',
           'components.selectButton.a11y.roles.rows.roleRadiogroup.description',
         ],
         [
-          'components.selectButton.a11y.roles.elements.containerCheckbox',
           '<code>role</code>',
           '"group"',
           'components.selectButton.a11y.roles.rows.roleGroup.description',
         ],
         [
-          'components.selectButton.a11y.roles.elements.container',
           '<code>aria-disabled</code>',
           '"true" | "false"',
           'components.selectButton.a11y.roles.rows.ariaDisabled.description',
         ],
         [
-          'components.selectButton.a11y.roles.elements.buttonRadio',
           '<code>role</code>',
           '"radio"',
           'components.selectButton.a11y.roles.rows.roleRadio.description',
         ],
         [
-          'components.selectButton.a11y.roles.elements.buttonCheckbox',
           '<code>role</code>',
           '"checkbox"',
           'components.selectButton.a11y.roles.rows.roleCheckbox.description',
         ],
         [
-          'components.selectButton.a11y.roles.elements.button',
           '<code>aria-checked</code>',
           '"true" | "false"',
           'components.selectButton.a11y.roles.rows.ariaChecked.description',
         ],
         [
-          'components.selectButton.a11y.roles.elements.icon',
           '<code>aria-hidden</code>',
           '"true"',
           'components.selectButton.a11y.roles.rows.ariaHiddenIcon.description',
@@ -76,18 +68,15 @@ export const SELECT_BUTTON_A11Y_SECTIONS: ComponentSection[] = [
     },
     table: {
       headers: [
-        'common.tables.element',
         'common.tables.info',
         'common.tables.description',
       ],
       rows: [
         [
-          'components.selectButton.a11y.naming.elements.button',
           'components.selectButton.a11y.naming.info.optionLabel',
           'components.selectButton.a11y.naming.rows.button.description',
         ],
         [
-          'components.selectButton.a11y.naming.elements.container',
           'components.selectButton.a11y.naming.info.groupLabel',
           'components.selectButton.a11y.naming.rows.container.description',
         ],

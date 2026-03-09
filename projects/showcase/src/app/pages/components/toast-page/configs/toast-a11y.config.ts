@@ -11,32 +11,27 @@ export const TOAST_A11Y_SECTIONS: ComponentSection[] = [
     anchor: 'a11y-roles',
     table: {
       headers: [
-        'common.tables.element',
         'common.tables.property',
         'common.tables.value',
         'common.tables.description',
       ],
       rows: [
         [
-          'components.toast.a11y.roles.elements.host',
           '<code>aria-live</code>',
           '"polite" | "assertive"',
           'components.toast.a11y.roles.rows.ariaLive.description',
         ],
         [
-          'components.toast.a11y.roles.elements.host',
           '<code>aria-atomic</code>',
           '"true"',
           'components.toast.a11y.roles.rows.ariaAtomic.description',
         ],
         [
-          'components.toast.a11y.roles.elements.host',
           '<code>aria-label</code>',
           'title | message | type',
           'components.toast.a11y.roles.rows.ariaLabel.description',
         ],
         [
-          'components.toast.a11y.roles.elements.closeButton',
           '<code>aria-label</code>',
           '"Close" (i18n)',
           'components.toast.a11y.roles.rows.closeLabel.description',
@@ -58,23 +53,19 @@ export const TOAST_A11Y_SECTIONS: ComponentSection[] = [
     },
     table: {
       headers: [
-        'common.tables.element',
         'common.tables.info',
         'common.tables.description',
       ],
       rows: [
         [
-          'components.toast.a11y.naming.elements.hostWithTitle',
           'components.toast.a11y.naming.info.title',
           'components.toast.a11y.naming.rows.hostTitle.description',
         ],
         [
-          'components.toast.a11y.naming.elements.hostWithMessage',
           'components.toast.a11y.naming.info.message',
           'components.toast.a11y.naming.rows.hostMessage.description',
         ],
         [
-          'components.toast.a11y.naming.elements.hostTypeFallback',
           'components.toast.a11y.naming.info.type',
           'components.toast.a11y.naming.rows.hostType.description',
         ],

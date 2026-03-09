@@ -165,13 +165,6 @@
     "roles": {
       "title": "ARIA roles and attributes",
       "description": "The SidebarPanel implements an accessible dialog-like pattern so screen readers recognize it as a distinct content area.",
-      "elements": {
-        "panel": "Panel root element",
-        "closeButton": "Close button",
-        "minimizeButton": "Minimize / restore button",
-        "expandButton": "Expand / collapse button",
-        "backdrop": "Background overlay"
-      },
       "rows": {
         "role": {
           "description": "The panel root carries <code>role=\"dialog\"</code> to signal a distinct region to assistive technologies."
@@ -197,10 +190,6 @@
       "title": "Accessible name",
       "description": "The accessible name of the panel is obtained from its visible title via <code>aria-labelledby</code>. Control buttons are labelled with i18n tokens.",
       "note": "Always provide a visible title inside the panel, as it automatically becomes the dialog name.",
-      "elements": {
-        "panelWithTitle": "Panel with title",
-        "buttons": "Control buttons"
-      },
       "info": {
         "ariaLabelledby": "Panel title (aria-labelledby)",
         "i18nTokens": "i18n tokens for button labels"

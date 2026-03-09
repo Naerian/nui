@@ -301,13 +301,6 @@
     "roles": {
       "title": "Rôles et attributs ARIA",
       "description": "Le Calendrier implémente le modèle ARIA Grid pour les cellules de jour et une région live pour les annonces de navigation.",
-      "elements": {
-        "grid": "Grille de jours",
-        "weekHeader": "En-tête de jour de semaine",
-        "dayCell": "Cellule de jour",
-        "dayButton": "Bouton de jour",
-        "liveRegion": "Région live"
-      },
       "rows": {
         "grid": {
           "description": "La grille de jours utilise <code>role=\"grid\"</code> pour activer la navigation au clavier entre les cellules."
@@ -336,11 +329,6 @@
       "title": "Nom accessible",
       "description": "La grille du calendrier et chaque cellule de jour ont des noms accessibles descriptifs dérivés des tokens i18n et de la date formatée.",
       "note": "Les cellules de jour incluent des annotations d'état (aujourd'hui, sélectionné, dans la plage, désactivé) ajoutées à leur libellé via les tokens <code>calendar.aria.*</code>.",
-      "elements": {
-        "grid": "Grille de jours",
-        "dayButton": "Bouton de jour",
-        "stateAnnotation": "Annotation d'état"
-      },
       "info": {
         "i18nLabel": "calendarLabel (i18n)",
         "dateFormatted": "Date formatée",

@@ -71,10 +71,6 @@
     "roles": {
       "title": "Rôles et attributs ARIA",
       "description": "Les info-bulles suivent le modèle ARIA Tooltip, associant le contenu flottant à son déclencheur via <code>aria-describedby</code>.",
-      "elements": {
-        "trigger": "Élément déclencheur",
-        "tooltip": "Élément info-bulle"
-      },
       "rows": {
         "ariaDescribedby": {
           "description": "L'élément déclencheur reçoit <code>aria-describedby</code> pointant vers l'<code>id</code> de l'info-bulle, pour que les lecteurs d'écran annoncent le texte de l'info-bulle comme description supplémentaire."
@@ -88,11 +84,6 @@
       "title": "Nom accessible",
       "description": "L'élément déclencheur doit avoir son propre nom accessible indépendant de l'info-bulle. L'info-bulle fournit uniquement une description supplémentaire.",
       "note": "Ne reposez pas sur l'info-bulle comme seule source de nom accessible pour les déclencheurs qui n'affichent qu'une icône. Utilisez <code>aria-label</code> sur l'élément déclencheur.",
-      "elements": {
-        "trigger": "Élément déclencheur",
-        "iconTrigger": "Déclencheur icône seule",
-        "tooltipContent": "Contenu de l'info-bulle"
-      },
       "info": {
         "ownLabel": "Nom propre du déclencheur",
         "ariaLabel": "aria-label sur le déclencheur icône",

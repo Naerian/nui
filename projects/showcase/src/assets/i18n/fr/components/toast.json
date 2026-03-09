@@ -109,10 +109,6 @@
     "roles": {
       "title": "Rôles et attributs ARIA",
       "description": "Les toasts utilisent une région live pour que les lecteurs d'écran annoncent les nouvelles notifications sans interrompre le focus actuel de l'utilisateur.",
-      "elements": {
-        "host": "Élément hôte du toast",
-        "closeButton": "Bouton de fermeture"
-      },
       "rows": {
         "ariaLive": {
           "description": "L'élément toast porte <code>aria-live=\"polite\"</code> pour les notifications informatives ou <code>\"assertive\"</code> pour les alertes critiques (erreur/avertissement)."
@@ -132,11 +128,6 @@
       "title": "Nom accessible",
       "description": "Le nom accessible du toast est automatiquement dérivé de son contenu. Aucun <code>aria-label</code> explicite n'est nécessaire du consommateur.",
       "note": "Fournissez toujours un contenu de titre ou de message significatif. Évitez les toasts qui reposent uniquement sur la couleur ou l'icône pour transmettre leur signification.",
-      "elements": {
-        "hostWithTitle": "Toast avec titre",
-        "hostWithMessage": "Toast sans titre",
-        "hostTypeFallback": "Toast avec repli sur le type"
-      },
       "info": {
         "title": "Titre du toast",
         "message": "Message du toast",

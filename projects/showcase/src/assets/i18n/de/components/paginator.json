@@ -139,16 +139,6 @@
     "roles": {
       "title": "ARIA-Rollen und -Attribute",
       "description": "Der Paginator implementiert das ARIA-Navigationsmuster mit <code>role=\"navigation\"</code> und korrekt beschrifteten Schaltflächen.",
-      "elements": {
-        "currentPage": "Aktuelle Seite",
-        "pageButton": "Seiten-Schaltflächen",
-        "host": "Paginator-Host-Element",
-        "firstPage": "Schaltfläche Erste Seite",
-        "prevPage": "Schaltfläche Vorherige Seite",
-        "nextPage": "Schaltfläche Nächste Seite",
-        "lastPage": "Schaltfläche Letzte Seite",
-        "liveRegion": "ARIA-Live-Region für Seitenwechselansagen"
-      },
       "rows": {
         "hostLabel": {
           "description": "Das Paginator-Host-Element hat ein beschreibendes <code>aria-label</code>, das die Gesamtzahl der Seiten enthält (z.B. 'Paginator, 10 Seiten')."
@@ -180,11 +170,6 @@
       "title": "Zugängliche Benennung",
       "description": "Alle interaktiven Steuerelemente des Paginators erhalten ihren zugänglichen Namen aus den i18n-Tokens, wodurch sichergestellt wird, dass sie in jeder Sprache beschreibend sind.",
       "note": "Lokalisieren Sie die Tokens im Namespace <code>paginator</code>, um aussagekräftige Labels sicherzustellen.",
-      "elements": {
-        "nav": "Navigationsbereich",
-        "pageButtons": "Navigationsschaltflächen",
-        "liveAnnouncement": "Ankündigung des Seitenwechsels"
-      },
       "info": {
         "i18nPagination": "i18n-Tokens für die Paginierung",
         "i18nPage": "i18n-Token für die Seitennummer",

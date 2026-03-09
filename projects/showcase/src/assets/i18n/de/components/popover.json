@@ -106,10 +106,6 @@
     "roles": {
       "title": "ARIA-Rollen und -Attribute",
       "description": "Das Popover implementiert das ARIA-Muster für nicht-modale Dialoge. Der Trigger kündigt an, ob das Popover geöffnet ist, und zeigt die Beziehung zu seinem Inhalt an.",
-      "elements": {
-        "trigger": "Trigger-Element",
-        "popover": "Popover-Panel"
-      },
       "rows": {
         "expanded": {
           "description": "Der Trigger trägt <code>aria-expanded</code>, das anzeigt, ob das Popover sichtbar (<code>true</code>) oder nicht (<code>false</code>) ist."
@@ -138,12 +134,6 @@
       "title": "Zugänglicher Name",
       "description": "Das Popover und sein Trigger müssen zugängliche Namen haben, die ihren Zweck klar kommunizieren.",
       "note": "Gib immer ein <code>aria-label</code> oder einen sichtbaren Titel im Popover an, damit Screenreader es korrekt identifizieren können.",
-      "elements": {
-        "trigger": "Trigger",
-        "popoverLabelledBy": "Panel des Popovers mit sichtbarem Titel",
-        "popoverLabel": "Panel des Popovers ohne sichtbaren Titel",
-        "popoverAuto": "Automatischer zugänglicher Name"
-      },
       "info": {
         "ownLabel": "Zugänglicher Name des Triggers",
         "auto": "Automatischer zugänglicher Name des Popovers"

@@ -11,50 +11,42 @@ export const CALENDAR_A11Y_SECTIONS: ComponentSection[] = [
     anchor: 'a11y-roles',
     table: {
       headers: [
-        'common.tables.element',
         'common.tables.property',
         'common.tables.value',
         'common.tables.description',
       ],
       rows: [
         [
-          'components.calendar.a11y.roles.elements.grid',
           '<code>role</code>',
           '"grid"',
           'components.calendar.a11y.roles.rows.grid.description',
         ],
         [
-          'components.calendar.a11y.roles.elements.grid',
           '<code>aria-label</code>',
           '"Calendario" (i18n)',
           'components.calendar.a11y.roles.rows.gridLabel.description',
         ],
         [
-          'components.calendar.a11y.roles.elements.weekHeader',
           '<code>role</code>',
           '"columnheader"',
           'components.calendar.a11y.roles.rows.columnHeader.description',
         ],
         [
-          'components.calendar.a11y.roles.elements.dayCell',
           '<code>role</code>',
           '"gridcell"',
           'components.calendar.a11y.roles.rows.gridcell.description',
         ],
         [
-          'components.calendar.a11y.roles.elements.dayButton',
           '<code>aria-selected</code>',
           '"true" | "false"',
           'components.calendar.a11y.roles.rows.selected.description',
         ],
         [
-          'components.calendar.a11y.roles.elements.dayButton',
           '<code>aria-disabled</code>',
           '"true" | "false"',
           'components.calendar.a11y.roles.rows.disabled.description',
         ],
         [
-          'components.calendar.a11y.roles.elements.liveRegion',
           '<code>aria-live</code>',
           '"polite"',
           'components.calendar.a11y.roles.rows.liveRegion.description',
@@ -76,23 +68,19 @@ export const CALENDAR_A11Y_SECTIONS: ComponentSection[] = [
     },
     table: {
       headers: [
-        'common.tables.element',
         'common.tables.info',
         'common.tables.description',
       ],
       rows: [
         [
-          'components.calendar.a11y.naming.elements.grid',
           'components.calendar.a11y.naming.info.i18nLabel',
           'components.calendar.a11y.naming.rows.grid.description',
         ],
         [
-          'components.calendar.a11y.naming.elements.dayButton',
           'components.calendar.a11y.naming.info.dateFormatted',
           'components.calendar.a11y.naming.rows.dayButton.description',
         ],
         [
-          'components.calendar.a11y.naming.elements.stateAnnotation',
           'components.calendar.a11y.naming.info.ariaTokens',
           'components.calendar.a11y.naming.rows.stateAnnotation.description',
         ],

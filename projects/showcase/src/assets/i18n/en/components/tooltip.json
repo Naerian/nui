@@ -71,10 +71,6 @@
     "roles": {
       "title": "ARIA roles and attributes",
       "description": "Tooltips follow the WAI-ARIA Tooltip pattern, associating the floating content with its trigger via <code>aria-describedby</code>.",
-      "elements": {
-        "trigger": "Trigger element",
-        "tooltip": "Tooltip element"
-      },
       "rows": {
         "ariaDescribedby": {
           "description": "The trigger element receives <code>aria-describedby</code> pointing to the tooltip's <code>id</code>, so screen readers announce the tooltip text as supplemental description."
@@ -88,11 +84,6 @@
       "title": "Accessible name",
       "description": "The trigger element must have its own accessible name independent of the tooltip. The tooltip only provides a supplemental description.",
       "note": "Do not rely on the tooltip as the sole source of accessible name for triggers that only show an icon. Use <code>aria-label</code> on the trigger element.",
-      "elements": {
-        "trigger": "Trigger element",
-        "iconTrigger": "Icon-only trigger",
-        "tooltipContent": "Tooltip content"
-      },
       "info": {
         "ownLabel": "Trigger's own name",
         "ariaLabel": "aria-label on icon trigger",

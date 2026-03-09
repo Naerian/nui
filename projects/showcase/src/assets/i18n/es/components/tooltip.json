@@ -71,10 +71,6 @@
     "roles": {
       "title": "Roles y atributos ARIA",
       "description": "Los tooltips siguen el patrón WAI-ARIA de Tooltip, asociando el contenido flotante con su disparador mediante <code>aria-describedby</code>.",
-      "elements": {
-        "trigger": "Elemento disparador",
-        "tooltip": "Elemento tooltip"
-      },
       "rows": {
         "ariaDescribedby": {
           "description": "El elemento disparador recibe <code>aria-describedby</code> apuntando al <code>id</code> del tooltip, de modo que los lectores de pantalla anuncian el texto del tooltip como descripción suplementaria."
@@ -88,11 +84,6 @@
       "title": "Nombre accesible",
       "description": "El elemento disparador debe tener su propio nombre accesible independiente del tooltip. El tooltip solo proporciona una descripción suplementaria.",
       "note": "No dependas del tooltip como única fuente de nombre accesible para disparadores que solo muestran un icono. Usa <code>aria-label</code> en el elemento disparador.",
-      "elements": {
-        "trigger": "Elemento disparador",
-        "iconTrigger": "Disparador solo con icono",
-        "tooltipContent": "Contenido del tooltip"
-      },
       "info": {
         "ownLabel": "Nombre propio del disparador",
         "ariaLabel": "aria-label en el disparador de icono",

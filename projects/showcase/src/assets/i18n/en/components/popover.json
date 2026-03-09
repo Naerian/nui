@@ -106,10 +106,6 @@
     "roles": {
       "title": "ARIA roles and attributes",
       "description": "The Popover implements the ARIA non-modal dialog pattern. The trigger announces whether the popover is open and indicates the relationship with its content.",
-      "elements": {
-        "trigger": "Trigger element",
-        "popover": "Popover panel"
-      },
       "rows": {
         "expanded": {
           "description": "The trigger carries <code>aria-expanded</code> reflecting whether the popover is visible (<code>true</code>) or not (<code>false</code>)."
@@ -138,12 +134,6 @@
       "title": "Accessible name",
       "description": "The popover and its trigger must have accessible names that clearly communicate their purpose.",
       "note": "Always provide an <code>aria-label</code> or a visible title in the popover so screen readers can correctly identify it.",
-      "elements": {
-        "trigger": "Trigger",
-        "popoverLabelledBy": "Popover panel with visible title",
-        "popoverLabel": "Popover panel without visible title",
-        "popoverAuto": "Automatic accessible name"
-      },
       "info": {
         "ownLabel": "Trigger's accessible name",
         "auto": "Panel's aria-label"

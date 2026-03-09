@@ -118,13 +118,6 @@
     "roles": {
       "title": "Rôles et attributs ARIA",
       "description": "Le FabButton suit le modèle WAI-ARIA Menu Button. Le déclencheur annonce l'état d'ouverture et la liste d'actions est un menu approprié.",
-      "elements": {
-        "host": "Hôte FAB (groupe conteneur)",
-        "trigger": "Bouton déclencheur",
-        "menu": "Menu d'actions",
-        "action": "Élément d'action individuel",
-        "icon": "Icône décorative"
-      },
       "rows": {
         "roleGroup": {
           "description": "L'élément hôte FAB a <code>role=\"group\"</code> et <code>aria-label</code> pour que le widget complet soit annoncé comme un groupe cohérent."
@@ -156,10 +149,6 @@
       "title": "Nom accessible",
       "description": "Le bouton déclencheur et chaque élément d'action doivent avoir des noms accessibles significatifs pour les utilisateurs de lecteurs d'écran.",
       "note": "Fournissez toujours un <code>label</code> ou <code>tooltip</code> pour chaque élément d'action — ils deviennent le nom accessible du <code>menuitem</code>.",
-      "elements": {
-        "trigger": "Bouton déclencheur",
-        "action": "Élément d'action"
-      },
       "info": {
         "triggerLabel": "Token i18n triggerAriaLabel",
         "actionLabel": "Texte du libellé d'action / infobulle"

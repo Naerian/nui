@@ -11,26 +11,22 @@ export const TOOLTIP_A11Y_SECTIONS: ComponentSection[] = [
     anchor: 'a11y-roles',
     table: {
       headers: [
-        'common.tables.element',
         'common.tables.property',
         'common.tables.value',
         'common.tables.description',
       ],
       rows: [
         [
-          'components.tooltip.a11y.roles.elements.trigger',
           '<code>aria-describedby</code>',
           '"{tooltipId}"',
           'components.tooltip.a11y.roles.rows.describedby.description',
         ],
         [
-          'components.tooltip.a11y.roles.elements.tooltip',
           '<code>role</code>',
           '"tooltip"',
           'components.tooltip.a11y.roles.rows.role.description',
         ],
         [
-          'components.tooltip.a11y.roles.elements.tooltip',
           '<code>id</code>',
           '"{tooltipId}"',
           'components.tooltip.a11y.roles.rows.id.description',
@@ -52,23 +48,19 @@ export const TOOLTIP_A11Y_SECTIONS: ComponentSection[] = [
     },
     table: {
       headers: [
-        'common.tables.element',
         'common.tables.info',
         'common.tables.description',
       ],
       rows: [
         [
-          'components.tooltip.a11y.naming.elements.trigger',
           'components.tooltip.a11y.naming.info.ownLabel',
           'components.tooltip.a11y.naming.rows.trigger.description',
         ],
         [
-          'components.tooltip.a11y.naming.elements.iconTrigger',
           'components.tooltip.a11y.naming.info.ariaLabel',
           'components.tooltip.a11y.naming.rows.iconTrigger.description',
         ],
         [
-          'components.tooltip.a11y.naming.elements.tooltipContent',
           'components.tooltip.a11y.naming.info.description',
           'components.tooltip.a11y.naming.rows.tooltipContent.description',
         ],

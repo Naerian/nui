@@ -237,12 +237,6 @@
     "roles": {
       "title": "ARIA roles and attributes",
       "description": "The TimePicker implements the ARIA <code>listbox</code> / <code>option</code> pattern for each scrollable column.",
-      "elements": {
-        "container": "Picker container",
-        "column": "Scrollable column",
-        "option": "Time option",
-        "normalizedAlert": "Normalization live region"
-      },
       "rows": {
         "containerLabel": {
           "description": "The picker root element has <code>aria-label</code> set from the i18n token <code>timePickerLabel</code> (or <code>durationPickerLabel</code>)."
@@ -271,11 +265,6 @@
       "title": "Accessible name",
       "description": "The picker and each column are labelled via i18n tokens. Individual options are labelled by their visible time value.",
       "note": "Always configure i18n tokens for your language so screen reader users hear meaningful column labels (e.g. 'Hour', 'Minutes', 'AM/PM').",
-      "elements": {
-        "container": "Container label",
-        "columns": "Column labels",
-        "help": "Column help text"
-      },
       "info": {
         "containerLabel": "Token timePickerLabel / durationPickerLabel",
         "columnLabels": "Tokens hour / minutes / period",

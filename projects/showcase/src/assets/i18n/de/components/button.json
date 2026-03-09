@@ -363,12 +363,7 @@
           "description": "Der Spinner ersetzt das Icon visuell, aber der zugängliche Name bleibt erhalten, solange die Schaltfläche im DOM ist."
         }
       },
-      "elements": {
-        "textLabel": "Schaltfläche mit Text oder <code>label</code>",
-        "iconText": "Icon + Text",
-        "iconOnly": "Nur Icon (<code>isIconOnly</code>)",
-        "iconOnlyLoading": "Ladezustand mit nur Icon"
-      },
+
       "info": {
         "nativeName": "Nativer Name",
         "ariaLabelTitle": "<code>aria-label</code> / <code>title</code>"

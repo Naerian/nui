@@ -11,56 +11,47 @@ export const PAGINATOR_A11Y_SECTIONS: ComponentSection[] = [
     anchor: 'a11y-roles',
     table: {
       headers: [
-        'common.tables.element',
         'common.tables.property',
         'common.tables.value',
         'common.tables.description',
       ],
       rows: [
         [
-          'components.paginator.a11y.roles.elements.host',
           '<code>aria-label</code>',
-          '"Paginaci\u00f3n" (i18n)',
+          '"Paginación" (i18n)',
           'components.paginator.a11y.roles.rows.hostLabel.description',
         ],
         [
-          'components.paginator.a11y.roles.elements.firstPage',
           '<code>aria-label</code>',
-          '"Primera p\u00e1gina" (i18n)',
+          '"Primera página" (i18n)',
           'components.paginator.a11y.roles.rows.firstPage.description',
         ],
         [
-          'components.paginator.a11y.roles.elements.prevPage',
           '<code>aria-label</code>',
-          '"P\u00e1gina anterior" (i18n)',
+          '"Página anterior" (i18n)',
           'components.paginator.a11y.roles.rows.prevPage.description',
         ],
         [
-          'components.paginator.a11y.roles.elements.pageButton',
           '<code>aria-label</code>',
-          '"P\u00e1gina {page}" (i18n)',
+          '"Página {page}" (i18n)',
           'components.paginator.a11y.roles.rows.pageButton.description',
         ],
         [
-          'components.paginator.a11y.roles.elements.currentPage',
           '<code>aria-current</code>',
           '"page"',
           'components.paginator.a11y.roles.rows.currentPage.description',
         ],
         [
-          'components.paginator.a11y.roles.elements.nextPage',
           '<code>aria-label</code>',
-          '"P\u00e1gina siguiente" (i18n)',
+          '"Página siguiente" (i18n)',
           'components.paginator.a11y.roles.rows.nextPage.description',
         ],
         [
-          'components.paginator.a11y.roles.elements.lastPage',
           '<code>aria-label</code>',
-          '"Última p\u00e1gina" (i18n)',
+          '"Última página" (i18n)',
           'components.paginator.a11y.roles.rows.lastPage.description',
         ],
         [
-          'components.paginator.a11y.roles.elements.liveRegion',
           '<code>aria-live</code>',
           '"polite"',
           'components.paginator.a11y.roles.rows.liveRegion.description',
@@ -82,23 +73,19 @@ export const PAGINATOR_A11Y_SECTIONS: ComponentSection[] = [
     },
     table: {
       headers: [
-        'common.tables.element',
         'common.tables.info',
         'common.tables.description',
       ],
       rows: [
         [
-          'components.paginator.a11y.naming.elements.nav',
           'components.paginator.a11y.naming.info.i18nPagination',
           'components.paginator.a11y.naming.rows.nav.description',
         ],
         [
-          'components.paginator.a11y.naming.elements.pageButtons',
           'components.paginator.a11y.naming.info.i18nPage',
           'components.paginator.a11y.naming.rows.pageButtons.description',
         ],
         [
-          'components.paginator.a11y.naming.elements.liveAnnouncement',
           'components.paginator.a11y.naming.info.interpolated',
           'components.paginator.a11y.naming.rows.liveAnnouncement.description',
         ],

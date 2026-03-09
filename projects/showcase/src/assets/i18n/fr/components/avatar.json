@@ -221,14 +221,7 @@
           "description": "Le span de texte visible '+N' est masqué des technologies d'assistance ; seul l'<code>aria-label</code> du conteneur parent est lu."
         }
       },
-      "elements": {
-        "avatarDiv": "<code>&lt;div&gt;</code> (avatar)",
-        "decorative": "<code>&lt;span&gt;</code> initiales / <code>&lt;i&gt;</code> icône",
-        "groupList": "<code>&lt;div&gt;</code> (groupe, liste)",
-        "groupItem": "<code>&lt;div&gt;</code> (groupe, élément)",
-        "excessDiv": "<code>&lt;div&gt;</code> (indicateur de surplus)",
-        "excessSpan": "<code>&lt;span&gt;</code> (texte surplus \"+N\")"
-      }
+
     },
     "naming": {
       "title": "Nom accessible",
@@ -248,12 +241,7 @@
           "description": "L'<code>aria-label</code> du compteur de surplus est calculé depuis <code>avatar.moreProfiles</code>, en remplaçant <code>{count}</code> par le nombre d'avatars masqués."
         }
       },
-      "elements": {
-        "avatarWithTooltip": "Avatar avec <code>tooltip</code>",
-        "avatarWithAlt": "Avatar avec <code>alt</code>",
-        "avatarWithoutName": "Avatar sans <code>tooltip</code> ni <code>alt</code>",
-        "excessIndicator": "Indicateur de surplus \"+N\""
-      },
+
       "info": {
         "viaI18n": "via i18n"
       }
@@ -278,12 +266,7 @@
           "description": "Le texte visible '+N' est masqué des TA ; l'<code>aria-label</code> du div parent fournit l'annonce pour les lecteurs d'écran."
         }
       },
-      "elements": {
-        "initials": "<code>&lt;span&gt;</code> initiales",
-        "icon": "<code>&lt;i&gt;</code> icône",
-        "fallback": "<code>&lt;span&gt;</code> repli (lettre alt)",
-        "excessSpan": "<code>&lt;span&gt;</code> texte \"+N\""
-      }
+
     }
   },
   "globalConfig": {

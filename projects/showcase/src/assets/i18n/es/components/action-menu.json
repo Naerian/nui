@@ -386,15 +386,6 @@
           "description": "Impide que los iconos decorativos sean anunciados por los lectores de pantalla."
         }
       },
-      "elements": {
-        "trigger": "<code>&lt;button&gt;</code> (disparador)",
-        "menu": "<code>&lt;div&gt;</code> (menú)",
-        "menuDynamic": "<code>&lt;div&gt;</code> (menú, modo dinámico)",
-        "item": "<code>&lt;button&gt;</code> (ítem)",
-        "itemSelectable": "<code>&lt;button&gt;</code> (ítem seleccionable)",
-        "separator": "<code>&lt;div&gt;</code> (separador)",
-        "icon": "<code>&lt;i&gt;</code> (icono)"
-      }
     },
     "naming": {
       "title": "Nombre accesible",
@@ -416,13 +407,6 @@
         "menuLabelledby": {
           "description": "En modo dinámico, el contenedor del menú referencia el ID del disparador mediante <code>aria-labelledby</code>, haciendo explícita su asociación."
         }
-      },
-      "elements": {
-        "triggerWithLabel": "Disparador con <code>label</code>",
-        "triggerWithAriaLabel": "Disparador con <code>ariaLabel</code>",
-        "triggerIconOnly": "Disparador solo icono",
-        "menuItem": "Ítem de menú",
-        "menuContainer": "Contenedor del menú (dinámico)"
       },
       "info": {
         "nativeName": "Nombre nativo",

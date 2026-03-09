@@ -106,10 +106,6 @@
     "roles": {
       "title": "Rôles et attributs ARIA",
       "description": "Le Popover implémente le modèle de dialogue non-modal ARIA. Le déclencheur annonce si le popover est ouvert et indique la relation avec son contenu.",
-      "elements": {
-        "trigger": "Élément déclencheur",
-        "popover": "Panneau popover"
-      },
       "rows": {
         "expanded": {
           "description": "Le déclencheur contient <code>aria-expanded</code> indiquant si la fenêtre contextuelle est visible (<code>true</code>) ou non (<code>false</code>)."
@@ -138,12 +134,6 @@
       "title": "Nom accessible",
       "description": "Le popover et son déclencheur doivent avoir des noms accessibles qui communiquent clairement leur but.",
       "note": "Fournissez toujours un <code>aria-label</code> ou un titre visible dans le popover pour que les lecteurs d'écran puissent l'identifier correctement.",
-      "elements": {
-        "trigger": "Déclencheur",
-        "popoverLabelledBy": "Panneau du popover avec titre visible",
-        "popoverLabel": "Panneau du popover sans titre visible",
-        "popoverAuto": "Nom accessible automatique"
-      },
       "info": {
         "ownLabel": "Nom accessible du déclencheur",
         "auto": "aria-label du panneau"

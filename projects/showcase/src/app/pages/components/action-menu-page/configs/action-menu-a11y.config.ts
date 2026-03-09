@@ -11,74 +11,62 @@ export const ACTION_MENU_A11Y_SECTIONS: ComponentSection[] = [
     anchor: 'a11y-roles',
     table: {
       headers: [
-        'common.tables.element',
         'common.tables.property',
         'common.tables.value',
         'common.tables.description',
       ],
       rows: [
         [
-          'components.actionMenu.a11y.roles.elements.trigger',
           '<code>aria-haspopup</code>',
           '"menu"',
           'components.actionMenu.a11y.roles.rows.haspopup.description',
         ],
         [
-          'components.actionMenu.a11y.roles.elements.trigger',
           '<code>aria-expanded</code>',
           '"true" | "false"',
           'components.actionMenu.a11y.roles.rows.expanded.description',
         ],
         [
-          'components.actionMenu.a11y.roles.elements.trigger',
           '<code>aria-controls</code>',
           '"{instanceId}-menu"',
           'components.actionMenu.a11y.roles.rows.controls.description',
         ],
         [
-          'components.actionMenu.a11y.roles.elements.menu',
           '<code>role</code>',
           '"menu"',
           'components.actionMenu.a11y.roles.rows.roleMenu.description',
         ],
         [
-          'components.actionMenu.a11y.roles.elements.menu',
           '<code>aria-orientation</code>',
           '"vertical"',
           'components.actionMenu.a11y.roles.rows.orientation.description',
         ],
         [
-          'components.actionMenu.a11y.roles.elements.menuDynamic',
           '<code>aria-labelledby</code>',
           '"{instanceId}-trigger"',
           'components.actionMenu.a11y.roles.rows.labelledby.description',
         ],
         [
-          'components.actionMenu.a11y.roles.elements.item',
           '<code>role</code>',
           '"menuitem" | "menuitemradio"',
           'components.actionMenu.a11y.roles.rows.roleItem.description',
         ],
         [
-          'components.actionMenu.a11y.roles.elements.itemSelectable',
           '<code>aria-checked</code>',
           '"true" | "false"',
           'components.actionMenu.a11y.roles.rows.ariaChecked.description',
         ],
         [
-          'components.actionMenu.a11y.roles.elements.item',
           '<code>aria-keyshortcuts</code>',
           'string | null',
           'components.actionMenu.a11y.roles.rows.keyshortcuts.description',
         ],
         [
-          'components.actionMenu.a11y.roles.elements.separator',
           '<code>role</code>',
           '"separator"',
           'components.actionMenu.a11y.roles.rows.roleSeparator.description',
         ],
         [
-          'components.actionMenu.a11y.roles.elements.icon',
           '<code>aria-hidden</code>',
           '"true"',
           'components.actionMenu.a11y.roles.rows.ariaHiddenIcon.description',
@@ -100,33 +88,27 @@ export const ACTION_MENU_A11Y_SECTIONS: ComponentSection[] = [
     },
     table: {
       headers: [
-        'common.tables.element',
         'common.tables.info',
         'common.tables.description',
       ],
       rows: [
         [
-          'components.actionMenu.a11y.naming.elements.triggerWithLabel',
           'components.actionMenu.a11y.naming.info.nativeName',
           'components.actionMenu.a11y.naming.rows.triggerLabel.description',
         ],
         [
-          'components.actionMenu.a11y.naming.elements.triggerWithAriaLabel',
           '<code>aria-label</code>',
           'components.actionMenu.a11y.naming.rows.triggerAriaLabel.description',
         ],
         [
-          'components.actionMenu.a11y.naming.elements.triggerIconOnly',
           'components.actionMenu.a11y.naming.info.titleFallback',
           'components.actionMenu.a11y.naming.rows.triggerIconOnly.description',
         ],
         [
-          'components.actionMenu.a11y.naming.elements.menuItem',
           '<code>aria-label</code>',
           'components.actionMenu.a11y.naming.rows.itemLabel.description',
         ],
         [
-          'components.actionMenu.a11y.naming.elements.menuContainer',
           '<code>aria-labelledby</code>',
           'components.actionMenu.a11y.naming.rows.menuLabelledby.description',
         ],

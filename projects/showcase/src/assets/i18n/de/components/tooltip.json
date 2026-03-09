@@ -71,10 +71,6 @@
     "roles": {
       "title": "ARIA-Rollen und Attribute",
       "description": "Tooltips folgen dem WAI-ARIA Tooltip-Muster und verknüpfen den schwebenden Inhalt mit seinem Auslöser über <code>aria-describedby</code>.",
-      "elements": {
-        "trigger": "Auslöserelement",
-        "tooltip": "Tooltip-Element"
-      },
       "rows": {
         "ariaDescribedby": {
           "description": "Das Auslöserelement erhält <code>aria-describedby</code>, das auf die <code>id</code> des Tooltips verweist, damit Screenreader den Tooltip-Text als ergänzende Beschreibung ankündigen."
@@ -88,11 +84,6 @@
       "title": "Barrierefreier Name",
       "description": "Das Auslöserelement muss einen eigenen barrierefreien Namen haben, unabhängig vom Tooltip. Der Tooltip liefert nur eine ergänzende Beschreibung.",
       "note": "Verlassen Sie sich nicht auf den Tooltip als einzige Quelle für den barrierefreien Namen von Auslösern, die nur ein Symbol anzeigen. Verwenden Sie <code>aria-label</code> am Auslöserelement.",
-      "elements": {
-        "trigger": "Auslöserelement",
-        "iconTrigger": "Auslöser mit Symbol",
-        "tooltipContent": "Tooltip-Inhalt"
-      },
       "info": {
         "ownLabel": "Eigener Name des Auslösers",
         "ariaLabel": "aria-label am Symbol-Auslöser",

@@ -386,15 +386,7 @@
           "description": "Verhindert, dass dekorative Icons von Screenreadern angesagt werden."
         }
       },
-      "elements": {
-        "trigger": "<code>&lt;button&gt;</code> (Trigger)",
-        "menu": "<code>&lt;div&gt;</code> (Menü)",
-        "menuDynamic": "<code>&lt;div&gt;</code> (Menü, dynamischer Modus)",
-        "item": "<code>&lt;button&gt;</code> (Eintrag)",
-        "itemSelectable": "<code>&lt;button&gt;</code> (auswählbarer Eintrag)",
-        "separator": "<code>&lt;div&gt;</code> (Trenner)",
-        "icon": "<code>&lt;i&gt;</code> (Icon)"
-      }
+
     },
     "naming": {
       "title": "Zugänglicher Name",
@@ -417,13 +409,7 @@
           "description": "Im dynamischen Modus referenziert der Menü-Container die ID des Triggers über <code>aria-labelledby</code>, wodurch die Zuordnung explizit wird."
         }
       },
-      "elements": {
-        "triggerWithLabel": "Trigger mit <code>label</code>",
-        "triggerWithAriaLabel": "Trigger mit <code>ariaLabel</code>",
-        "triggerIconOnly": "Nur-Icon-Trigger",
-        "menuItem": "Menüeintrag",
-        "menuContainer": "Menü-Container (dynamisch)"
-      },
+
       "info": {
         "nativeName": "Nativer Name",
         "titleFallback": "<code>title</code> als Fallback"

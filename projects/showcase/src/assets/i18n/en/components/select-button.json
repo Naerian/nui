@@ -111,15 +111,6 @@
     "roles": {
       "title": "ARIA roles and attributes",
       "description": "The Select Button exposes semantic roles depending on its selection mode (radio or checkbox).",
-      "elements": {
-        "containerRadio": "Container (radio mode)",
-        "containerCheckbox": "Container (checkbox mode)",
-        "container": "Container",
-        "buttonRadio": "Option button (radio mode)",
-        "buttonCheckbox": "Option button (checkbox mode)",
-        "button": "Option button",
-        "icon": "Decorative icon"
-      },
       "rows": {
         "roleRadiogroup": {
           "description": "The container uses <code>role=\"radiogroup\"</code> in single-selection mode to group mutually exclusive options."
@@ -148,10 +139,6 @@
       "title": "Accessible name",
       "description": "Each option button gets its accessible name from the option label. Optionally, the group container can receive a contextual label.",
       "note": "Always provide meaningful labels for options. For icon-only buttons, ensure each option has a descriptive label assigned via <code>labelBy</code>.",
-      "elements": {
-        "button": "Option button",
-        "container": "Group container"
-      },
       "info": {
         "optionLabel": "Option label text",
         "groupLabel": "Not provided by default"

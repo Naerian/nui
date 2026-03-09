@@ -237,12 +237,6 @@
     "roles": {
       "title": "Rôles et attributs ARIA",
       "description": "Le Sélecteur d'heure implémente le modèle ARIA <code>listbox</code> / <code>option</code> pour chaque colonne défilable.",
-      "elements": {
-        "container": "Conteneur du sélecteur",
-        "column": "Colonne défilable",
-        "option": "Option d'heure",
-        "normalizedAlert": "Région live de normalisation"
-      },
       "rows": {
         "containerLabel": {
           "description": "L'élément racine du sélecteur a <code>aria-label</code> défini depuis le token i18n <code>timePickerLabel</code> (ou <code>durationPickerLabel</code>)."
@@ -271,11 +265,6 @@
       "title": "Nom accessible",
       "description": "Le sélecteur et chaque colonne sont étiquetés via des tokens i18n. Les options individuelles sont étiquetées par leur valeur temporelle visible.",
       "note": "Configurez toujours les tokens i18n pour votre langue pour que les utilisateurs de lecteurs d'écran entendent des libellés de colonnes significatifs (ex. 'Heure', 'Minutes', 'AM/PM').",
-      "elements": {
-        "container": "Libellé du conteneur",
-        "columns": "Libellés des colonnes",
-        "help": "Texte d'aide des colonnes"
-      },
       "info": {
         "containerLabel": "Token timePickerLabel / durationPickerLabel",
         "columnLabels": "Tokens heure / minutes / période",

@@ -139,16 +139,6 @@
     "roles": {
       "title": "ARIA roles and attributes",
       "description": "The Paginator implements the ARIA navigation pattern with <code>role=\"navigation\"</code> and correctly labelled buttons.",
-      "elements": {
-        "currentPage": "Current page",
-        "pageButton": "Page buttons",
-        "host": "Paginator host element",
-        "firstPage": "First page button",
-        "prevPage": "Previous page button",
-        "nextPage": "Next page button",
-        "lastPage": "Last page button",
-        "liveRegion": "ARIA live region for page change announcements"
-      },
       "rows": {
         "hostLabel": {
           "description": "The paginator host element has a descriptive <code>aria-label</code> that includes the total number of pages (e.g. 'Paginator, 10 pages')."
@@ -180,11 +170,6 @@
       "title": "Accessible naming",
       "description": "All interactive paginator controls get their accessible name from i18n tokens, ensuring they are descriptive in any language.",
       "note": "Localize the <code>paginator</code> namespace tokens to ensure meaningful labels.",
-      "elements": {
-        "nav": "Navigation region",
-        "pageButtons": "Navigation buttons",
-        "liveAnnouncement": "Page change announcement"
-      },
       "info": {
         "i18nPagination": "i18n tokens for pagination",
         "i18nPage": "i18n token for page number",

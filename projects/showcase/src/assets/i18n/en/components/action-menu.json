@@ -386,15 +386,6 @@
           "description": "Prevents decorative icons from being announced by screen readers."
         }
       },
-      "elements": {
-        "trigger": "<code>&lt;button&gt;</code> (trigger)",
-        "menu": "<code>&lt;div&gt;</code> (menu)",
-        "menuDynamic": "<code>&lt;div&gt;</code> (menu, dynamic mode)",
-        "item": "<code>&lt;button&gt;</code> (item)",
-        "itemSelectable": "<code>&lt;button&gt;</code> (selectable item)",
-        "separator": "<code>&lt;div&gt;</code> (separator)",
-        "icon": "<code>&lt;i&gt;</code> (icon)"
-      }
     },
     "naming": {
       "title": "Accessible name",
@@ -416,13 +407,6 @@
         "menuLabelledby": {
           "description": "In dynamic mode, the menu container references the trigger's ID via <code>aria-labelledby</code>, making their association explicit."
         }
-      },
-      "elements": {
-        "triggerWithLabel": "Trigger with <code>label</code>",
-        "triggerWithAriaLabel": "Trigger with <code>ariaLabel</code>",
-        "triggerIconOnly": "Icon-only trigger",
-        "menuItem": "Menu item",
-        "menuContainer": "Menu container (dynamic)"
       },
       "info": {
         "nativeName": "Native name",

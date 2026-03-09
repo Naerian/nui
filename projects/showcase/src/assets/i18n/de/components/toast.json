@@ -109,10 +109,6 @@
     "roles": {
       "title": "ARIA-Rollen und Attribute",
       "description": "Toasts verwenden eine Live-Region, damit Screenreader neue Benachrichtigungen ankündigen, ohne den aktuellen Fokus des Benutzers zu unterbrechen.",
-      "elements": {
-        "host": "Toast-Host-Element",
-        "closeButton": "Schließen-Schaltfläche"
-      },
       "rows": {
         "ariaLive": {
           "description": "Das Toast-Element hat <code>aria-live=\"polite\"</code> für Informationsbenachrichtigungen oder <code>\"assertive\"</code> für kritische Meldungen (Fehler/Warnung)."
@@ -132,11 +128,6 @@
       "title": "Barrierefreier Name",
       "description": "Der barrierefreie Name des Toasts wird automatisch aus seinem Inhalt abgeleitet. Kein explizites <code>aria-label</code> vom Verwender erforderlich.",
       "note": "Geben Sie immer aussagekräftigen Titel- oder Nachrichteninhalt an. Vermeiden Sie Toasts, die ausschließlich auf Farbe oder Symbol angewiesen sind, um ihre Bedeutung zu vermitteln.",
-      "elements": {
-        "hostWithTitle": "Toast mit Titel",
-        "hostWithMessage": "Toast ohne Titel",
-        "hostTypeFallback": "Toast mit Typ-Fallback"
-      },
       "info": {
         "title": "Toast-Titel",
         "message": "Toast-Nachricht",
