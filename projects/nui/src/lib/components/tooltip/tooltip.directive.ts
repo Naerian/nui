@@ -292,10 +292,19 @@ export class TooltipDirective implements OnInit, OnDestroy {
     }
   }
 
+  @HostListener('touchmove')
+  onTouchMove(): void {
+    // Cerrar inmediatamente al detectar scroll en mobile
+    if (this.isVisible()) {
+      this.clearTimeouts();
+      this.isVisible.set(false);
+    }
+  }
+
   @HostListener('touchend')
   onTouchEnd(): void {
     if (this.event() === 'hover' && !this.interactive()) {
-      setTimeout(() => this.hide(), 1500);
+      this.hide();
     }
   }
 
