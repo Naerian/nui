@@ -294,9 +294,9 @@ export class TooltipDirective implements OnInit, OnDestroy {
 
   @HostListener('touchmove')
   onTouchMove(): void {
-    // Cerrar inmediatamente al detectar scroll en mobile
+    // Cancelar siempre (aunque el tooltip aún esté en el show-delay)
+    this.clearTimeouts();
     if (this.isVisible()) {
-      this.clearTimeouts();
       this.isVisible.set(false);
     }
   }
