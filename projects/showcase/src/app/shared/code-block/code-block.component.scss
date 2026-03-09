@@ -4,7 +4,6 @@
   margin-bottom: 0;
   border: 1px solid var(--nui-border-default);
   border-radius: var(--nui-border-radius-md);
-  background-color: var(--nui-surface-neutral);
   overflow: hidden;
 
   .code-block-header {
@@ -138,20 +137,19 @@
 
   .code-block-pre {
     margin: 0;
-    padding: 1rem 0;
+    padding-bottom: 1rem;
     overflow-x: auto;
     font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
     font-size: 0.75rem;
     line-height: 1.5;
-    background-color: var(--nui-surface-neutral);
     max-height: 250px;
 
+    // hljs controla background y color del <code>
     code {
-      color: var(--nui-on-surface-neutral);
       display: block;
-      background: none;
       padding: 0;
       border-radius: 0;
+      margin: 0;
 
       .code-line {
         display: flex;
@@ -160,7 +158,7 @@
         .line-number {
           user-select: none;
           -webkit-user-select: none;
-          min-width: 1rem;
+          min-width: 3rem;
           padding: 0 0.875rem 0 1.25rem;
           text-align: right;
           opacity: 0.4;
@@ -169,7 +167,7 @@
         }
 
         .line-content {
-          padding: 0 1.25rem;
+          padding: 0 0.25rem;
           white-space: pre;
         }
       }

@@ -2,7 +2,10 @@
   <!-- Header with title and copy button -->
   <div class="code-block-header" *ngIf="title || examples">
     <!-- Single example title or general title -->
-    <div class="code-block-title" *ngIf="title || (examples && examples.length === 1 && examples[0].title)">
+    <div
+      class="code-block-title"
+      *ngIf="title || (examples && examples.length === 1 && examples[0].title)"
+    >
       <i class="ri-code-box-line"></i>
       <span *ngIf="title">{{ title }}</span>
       <span *ngIf="!title && examples && examples.length === 1 && examples[0].title">
@@ -16,18 +19,20 @@
         *ngFor="let example of examples; let i = index"
         class="tab-button"
         [class.active]="selectedTab() === i"
-        (click)="selectTab(i)">
+        (click)="selectTab(i)"
+      >
         <i [class]="getLanguageIcon(example.language)"></i>
-        <span>{{ (example.title || getLanguageLabel(example.language)) | translate }}</span>
+        <span>{{ example.title || getLanguageLabel(example.language) | translate }}</span>
       </button>
     </div>
 
     <div class="code-block-actions">
-      <button 
+      <button
         class="btn-copy"
         (click)="copyCode()"
         [class.success]="copySuccess()"
-        [attr.aria-label]="(copySuccess() ? 'codeBlock.copied' : 'codeBlock.copy') | translate">
+        [attr.aria-label]="(copySuccess() ? 'codeBlock.copied' : 'codeBlock.copy') | translate"
+      >
         <i [class]="copySuccess() ? 'ri-check-line' : 'ri-file-copy-line'"></i>
         <span>{{ (copySuccess() ? 'codeBlock.copied' : 'codeBlock.copy') | translate }}</span>
       </button>
@@ -35,15 +40,17 @@
   </div>
 
   <!-- Simple copy button for single code blocks without title -->
-  <button 
+  <button
     *ngIf="!title && !examples"
     class="btn-copy-simple"
     (click)="copyCode()"
     [class.success]="copySuccess()"
-    [attr.aria-label]="(copySuccess() ? 'codeBlock.copied' : 'codeBlock.copy') | translate">
+    [attr.aria-label]="(copySuccess() ? 'codeBlock.copied' : 'codeBlock.copy') | translate"
+  >
     <i [class]="copySuccess() ? 'ri-check-line' : 'ri-file-copy-line'"></i>
   </button>
 
   <!-- Code display -->
-  <pre class="code-block-pre" [attr.data-language]="currentLanguage"><code>@for (line of currentLines; track $index) {<span class="code-line"><span class="line-number">{{ $index + 1 }}</span><span class="line-content">{{ line }}</span></span>}</code></pre>
+  <pre class="code-block-pre" [attr.data-language]="currentLanguage">
+  <code class="hljs">@for (line of highlightedLines; track $index) {<span class="code-line"><span class="line-number">{{ $index + 1 }}</span><span class="line-content" [innerHTML]="line"></span></span>}</code></pre>
 </div>
