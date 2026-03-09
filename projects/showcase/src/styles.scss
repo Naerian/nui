@@ -299,6 +299,10 @@ pre code {
 .docs-page {
   margin: 0 auto;
 
+  .container-fluid {
+    padding: 0;
+  }
+
   .page-header {
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
