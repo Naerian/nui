@@ -220,8 +220,7 @@
         "ariaHiddenExcess": {
           "description": "Der sichtbare Text '+N' ist für assistive Technologien ausgeblendet; nur das <code>aria-label</code> des übergeordneten Containers wird gelesen."
         }
-      },
-
+      }
     },
     "naming": {
       "title": "Zugänglicher Name",
@@ -265,8 +264,7 @@
         "excessSpan": {
           "description": "Der sichtbare Text '+N' ist für AT versteckt; das <code>aria-label</code> des übergeordneten div liefert die Screenreader-Ansage."
         }
-      },
-
+      }
     }
   },
   "globalConfig": {

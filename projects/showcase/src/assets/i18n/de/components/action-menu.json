@@ -385,8 +385,7 @@
         "ariaHiddenIcon": {
           "description": "Verhindert, dass dekorative Icons von Screenreadern angesagt werden."
         }
-      },
-
+      }
     },
     "naming": {
       "title": "Zugänglicher Name",

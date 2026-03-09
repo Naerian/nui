@@ -23,7 +23,7 @@
   "layout": {
     "title": "Layout personalizado",
     "description": "La característica más potente. Define exactamente dónde va cada elemento (top, left, center, right, bottom) usando un objeto de configuración.",
-    "note": "<strong>⚠️ Importante para móvil:</strong> Los layouts complejos diseñados para desktop pueden desbordarse en pantallas pequeñas. Siempre proporciona un <code>mobileLayout</code> optimizado que reorganice los elementos verticalmente y priorice la navegación esencial. Esto previene problemas de UX en dispositivos móviles. <br/><br/><strong>Sistema de áreas:</strong> Cuando se establece un layout, los atributos como <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> y <code>showPageJump</code> se ignoran porque el layout personalizado tiene control total sobre qué mostrar y dónde."
+    "note": "<strong>Importante para móvil:</strong> Los layouts complejos diseñados para desktop pueden desbordarse en pantallas pequeñas. Siempre proporciona un <code>mobileLayout</code> optimizado que reorganice los elementos verticalmente y priorice la navegación esencial. Esto previene problemas de UX en dispositivos móviles. <br/><br/><strong>Sistema de áreas:</strong> Cuando se establece un layout, los atributos como <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> y <code>showPageJump</code> se ignoran porque el layout personalizado tiene control total sobre qué mostrar y dónde."
   },
   "infinite": {
     "title": "Carga infinita",

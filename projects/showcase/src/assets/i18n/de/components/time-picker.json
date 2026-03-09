@@ -247,9 +247,6 @@
         "optionRole": {
           "description": "Jeder Zeitwert hat <code>role=\"option\"</code> und <code>aria-selected=\"true\"</code>, wenn er der aktive Wert ist."
         },
-        "normalizedLive": {
-          "description": "Ein visuell verborgenes Element mit <code>aria-live=\"assertive\"</code> kündigt an, wenn die eingegebene Zeit auf die nächste gültige Grenze normalisiert wird."
-        },
         "columnLabels": {
           "description": "Spalten-Hilfstext-Token werden angekündigt, wenn die Spalte den Fokus erhält, und zeigen an, wie interagiert werden kann (Pfeiltasten, Pos1/Ende)."
         },

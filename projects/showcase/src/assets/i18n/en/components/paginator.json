@@ -23,7 +23,7 @@
   "layout": {
     "title": "Custom layout",
     "description": "The most powerful feature. Define exactly where each element goes (top, left, center, right, bottom) using a configuration object.",
-    "note": "<strong>⚠️ Important for mobile:</strong> Complex layouts designed for desktop may overflow on small screens. Always provide an optimized <code>mobileLayout</code> that rearranges elements vertically and prioritizes essential navigation. This prevents UX issues on mobile devices. <br/><br/><strong>Area system:</strong> When a layout is set, attributes like <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> and <code>showPageJump</code> are ignored because the custom layout has full control over what to show and where."
+    "note": "<strong>Important for mobile:</strong> Complex layouts designed for desktop may overflow on small screens. Always provide an optimized <code>mobileLayout</code> that rearranges elements vertically and prioritizes essential navigation. This prevents UX issues on mobile devices. <br/><br/><strong>Area system:</strong> When a layout is set, attributes like <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> and <code>showPageJump</code> are ignored because the custom layout has full control over what to show and where."
   },
   "infinite": {
     "title": "Infinite loading",

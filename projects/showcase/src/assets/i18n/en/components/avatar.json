@@ -220,7 +220,7 @@
         "ariaHiddenExcess": {
           "description": "The visible '+N' text span is hidden from assistive technologies; only the parent container's <code>aria-label</code> is read."
         }
-      },
+      }
     },
     "naming": {
       "title": "Accessible name",
@@ -263,7 +263,7 @@
         "excessSpan": {
           "description": "The visible '+N' text is hidden from ATs; the parent div's <code>aria-label</code> provides the announcement for screen readers."
         }
-      },
+      }
     }
   },
   "globalConfig": {

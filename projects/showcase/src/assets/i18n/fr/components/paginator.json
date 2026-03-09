@@ -23,7 +23,7 @@
   "layout": {
     "title": "Disposition personnalisée",
     "description": "La fonctionnalité la plus puissante. Définissez exactement où va chaque élément (haut, gauche, centre, droite, bas) en utilisant un objet de configuration.",
-    "note": "<strong>⚠️ Important pour mobile :</strong> Les dispositions complexes conçues pour le bureau peuvent déborder sur les petits écrans. Fournissez toujours un <code>mobileLayout</code> optimisé qui réorganise les éléments verticalement et priorise la navigation essentielle. Cela évite les problèmes d'UX sur les appareils mobiles. <br/><br/><strong>Système de zones :</strong> Quand une disposition est définie, les attributs comme <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> et <code>showPageJump</code> sont ignorés car la disposition personnalisée contrôle entièrement ce qui est affiché et où."
+    "note": "<strong>Important pour mobile :</strong> Les dispositions complexes conçues pour le bureau peuvent déborder sur les petits écrans. Fournissez toujours un <code>mobileLayout</code> optimisé qui réorganise les éléments verticalement et priorise la navigation essentielle. Cela évite les problèmes d'UX sur les appareils mobiles. <br/><br/><strong>Système de zones :</strong> Quand une disposition est définie, les attributs comme <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> et <code>showPageJump</code> sont ignorés car la disposition personnalisée contrôle entièrement ce qui est affiché et où."
   },
   "infinite": {
     "title": "Chargement infini",

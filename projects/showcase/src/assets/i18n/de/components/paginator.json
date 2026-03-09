@@ -23,7 +23,7 @@
   "layout": {
     "title": "Benutzerdefiniertes Layout",
     "description": "Die leistungsstärkste Funktion. Definiere genau, wohin jedes Element geht (oben, links, Mitte, rechts, unten) mit einem Konfigurationsobjekt.",
-    "note": "<strong>⚠️ Wichtig für Mobilgeräte:</strong> Komplexe Desktop-Layouts können auf kleinen Bildschirmen überlaufen. Stelle immer ein optimiertes <code>mobileLayout</code> bereit, das Elemente vertikal anordnet und wichtige Navigation priorisiert. Dies verhindert UX-Probleme auf Mobilgeräten. <br/><br/><strong>Bereichssystem:</strong> Wenn ein Layout gesetzt ist, werden Attribute wie <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> und <code>showPageJump</code> ignoriert, da das benutzerdefinierte Layout die vollständige Kontrolle darüber hat, was und wo angezeigt wird."
+    "note": "<strong>Wichtig für Mobilgeräte:</strong> Komplexe Desktop-Layouts können auf kleinen Bildschirmen überlaufen. Stelle immer ein optimiertes <code>mobileLayout</code> bereit, das Elemente vertikal anordnet und wichtige Navigation priorisiert. Dies verhindert UX-Probleme auf Mobilgeräten. <br/><br/><strong>Bereichssystem:</strong> Wenn ein Layout gesetzt ist, werden Attribute wie <code>showPageSizeSelector</code>, <code>showFirstLast</code>, <code>showItemRange</code> und <code>showPageJump</code> ignoriert, da das benutzerdefinierte Layout die vollständige Kontrolle darüber hat, was und wo angezeigt wird."
   },
   "infinite": {
     "title": "Unendliches Laden",

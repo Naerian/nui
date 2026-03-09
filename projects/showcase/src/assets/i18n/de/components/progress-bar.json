@@ -72,23 +72,45 @@
       "title": "Inputs",
       "description": "Alle verf\u00fcgbaren Input-Eigenschaften von <code>nui-progress-bar</code>.",
       "rows": {
-        "compact": { "description": "Reduziert die Leiste auf einen d\u00fcnnen Indikator (6\u202fpx) und blendet den Wert aus." },
+        "compact": {
+          "description": "Reduziert die Leiste auf einen d\u00fcnnen Indikator (6\u202fpx) und blendet den Wert aus."
+        },
         "color": { "description": "Semantische Farbe der Komponente." },
         "variant": { "description": "Visuelle Variante: 'solid', 'outline', 'ghost'." },
         "value": { "description": "Aktueller Fortschrittswert." },
         "maxValue": { "description": "Maximaler Fortschrittswert." },
         "indeterminate": { "description": "Aktiviert die unbestimmte Fortschrittsanimation." },
-        "valuePosition": { "description": "Position des Werts: 'hidden', 'inside', 'top', 'bottom', 'left', 'right'." },
-        "valueFormat": { "description": "Wertformat: 'percentage' zeigt 70\u202f%, 'fractional' zeigt 70\u202f/\u202f100." },
+        "valuePosition": {
+          "description": "Position des Werts: 'hidden', 'inside', 'top', 'bottom', 'left', 'right'."
+        },
+        "valueFormat": {
+          "description": "Wertformat: 'percentage' zeigt 70\u202f%, 'fractional' zeigt 70\u202f/\u202f100."
+        },
         "label": { "description": "Beschreibender Beschriftungstext f\u00fcr den Fortschritt." },
-        "labelPosition": { "description": "Position der Beschriftung: 'top', 'bottom', 'left', 'right'." },
-        "trailingIcon": { "description": "RemixIcon-Klasse, die am Ende der Leiste gerendert wird, unabh\u00e4ngig von der Beschriftung und <code>labelPosition</code>." },
-        "showValueInLabel": { "description": "Zeigt den Fortschrittswert inline in der Beschriftung an." },
-        "ariaLabel": { "description": "Barrierefreier Name f\u00fcr Bildschirmleser, wenn keine sichtbare Beschriftung vorhanden ist. Wird nur angewendet, wenn weder <code>label</code> noch <code>nuiPbLabel</code> aktiv sind." },
-        "steps": { "description": "Teilt den Track visuell in N Segmente durch Trennlinien auf. Erfordert \u2265\u202f2 zur Aktivierung." },
-        "trackColor": { "description": "Benutzerdefinierte Hintergrundfarbe f\u00fcr den Track (\u00fcberschreibt das Theme)." },
-        "fillColor": { "description": "Benutzerdefinierte Hintergrundfarbe f\u00fcr die F\u00fcllung (\u00fcberschreibt das Theme)." },
-        "textColor": { "description": "Benutzerdefinierte Farbe f\u00fcr den Werttext, die Beschriftung und die Symbole." }
+        "labelPosition": {
+          "description": "Position der Beschriftung: 'top', 'bottom', 'left', 'right'."
+        },
+        "trailingIcon": {
+          "description": "RemixIcon-Klasse, die am Ende der Leiste gerendert wird, unabh\u00e4ngig von der Beschriftung und <code>labelPosition</code>."
+        },
+        "showValueInLabel": {
+          "description": "Zeigt den Fortschrittswert inline in der Beschriftung an."
+        },
+        "ariaLabel": {
+          "description": "Barrierefreier Name f\u00fcr Bildschirmleser, wenn keine sichtbare Beschriftung vorhanden ist. Wird nur angewendet, wenn weder <code>label</code> noch <code>nuiPbLabel</code> aktiv sind."
+        },
+        "steps": {
+          "description": "Teilt den Track visuell in N Segmente durch Trennlinien auf. Erfordert \u2265\u202f2 zur Aktivierung."
+        },
+        "trackColor": {
+          "description": "Benutzerdefinierte Hintergrundfarbe f\u00fcr den Track (\u00fcberschreibt das Theme)."
+        },
+        "fillColor": {
+          "description": "Benutzerdefinierte Hintergrundfarbe f\u00fcr die F\u00fcllung (\u00fcberschreibt das Theme)."
+        },
+        "textColor": {
+          "description": "Benutzerdefinierte Farbe f\u00fcr den Werttext, die Beschriftung und die Symbole."
+        }
       }
     },
     "templates": {
@@ -96,19 +118,33 @@
       "description": "Übergeben Sie ein <code>ng-template</code> mit <code>[nuiPbTemplate]</code> und dem <code>slot</code>-Attribut als Kindelement von <code>nui-progress-bar</code>. Beide Slots können gleichzeitig aktiv sein, jeder in seiner eigenen unabhängigen Position.",
       "note": "<code>let-text</code> (ohne <code>=\"...\"</code>) bindet an <code>$implicit</code> &mdash; Angulars besondere Regel: die <strong>einzige</strong> Kontexteigenschaft, die <strong>kein</strong> explizites Mapping ben\u00f6tigt. Alle anderen verwenden <code>=\"Schl\u00fcssel\"</code>: <code>let-percent=\"percent\"</code> liest <code>ctx.percent</code>, <code>let-v=\"value\"</code> liest <code>ctx.value</code>. Der Name der lokalen Variable (linke Seite) ist immer frei w\u00e4hlbar.",
       "rows": {
-        "value": { "description": "Ersetzt den numerischen Wertblock. Kompatibel mit jeder <code>valuePosition</code>, einschlie\u00dflich <code>inside</code>." },
-        "label": { "description": "Ersetzt den beschreibenden Beschriftungsblock. Kann gleichzeitig mit <code>slot=&quot;value&quot;</code> aktiv sein, jeder in seiner eigenen unabh\u00e4ngigen Position." }
+        "value": {
+          "description": "Ersetzt den numerischen Wertblock. Kompatibel mit jeder <code>valuePosition</code>, einschlie\u00dflich <code>inside</code>."
+        },
+        "label": {
+          "description": "Ersetzt den beschreibenden Beschriftungsblock. Kann gleichzeitig mit <code>slot=&quot;value&quot;</code> aktiv sein, jeder in seiner eigenen unabh\u00e4ngigen Position."
+        }
       }
     },
     "context": {
       "title": "Kontext-Bindungen",
       "description": "Template-Kontext f\u00fcr <code>slot=\"value\"</code> und <code>slot=\"label\"</code> (au\u00dfer <code>let-label</code>, das exklusiv f\u00fcr den label-Slot ist). Syntax: <code>let-Name=\"Schl\u00fcssel\"</code> &mdash; au\u00dfer <code>$implicit</code>, das mit einem einfachen <code>let-Name</code> ohne <code>=\"...\"</code> gebunden wird.",
       "rows": {
-        "text": { "description": "Vorformatierter Wert-String (z.\u202fB. <em>&quot;70 %&quot;</em>). Dies ist der <code>$implicit</code> des Kontexts: das <strong>einzige</strong> Binding, das <strong>kein</strong> <code>=&quot;...&quot;</code> ben\u00f6tigt, da Angular es automatisch mit einem einfachen <code>let-X</code> einbindet." },
-        "percent": { "description": "Berechneter Prozentsatz: 0\u2013100. Kontextschl\u00fcssel: <code>percent</code>. Lokaler Name ist frei: <code>let-pct=&quot;percent&quot;</code> oder <code>let-p=&quot;percent&quot;</code> sind gleicherma\u00dfen g\u00fcltig." },
-        "value": { "description": "Roher Zahlenwert aus dem <code>value</code>-Input. Schl\u00fcssel: <code>value</code>. Lokaler Name ist frei: <code>let-val=&quot;value&quot;</code>, <code>let-current=&quot;value&quot;</code>, etc." },
-        "max": { "description": "Rohes Maximum aus dem <code>maxValue</code>-Input. Kontextschl\u00fcssel: <code>max</code>." },
-        "label": { "description": "Rohstring aus dem <code>label</code>-Input. Exklusiv f\u00fcr <code>slot=&quot;label&quot;</code>; in <code>slot=&quot;value&quot;</code> wird es <code>undefined</code> sein." }
+        "text": {
+          "description": "Vorformatierter Wert-String (z.\u202fB. <em>&quot;70 %&quot;</em>). Dies ist der <code>$implicit</code> des Kontexts: das <strong>einzige</strong> Binding, das <strong>kein</strong> <code>=&quot;...&quot;</code> ben\u00f6tigt, da Angular es automatisch mit einem einfachen <code>let-X</code> einbindet."
+        },
+        "percent": {
+          "description": "Berechneter Prozentsatz: 0\u2013100. Kontextschl\u00fcssel: <code>percent</code>. Lokaler Name ist frei: <code>let-pct=&quot;percent&quot;</code> oder <code>let-p=&quot;percent&quot;</code> sind gleicherma\u00dfen g\u00fcltig."
+        },
+        "value": {
+          "description": "Roher Zahlenwert aus dem <code>value</code>-Input. Schl\u00fcssel: <code>value</code>. Lokaler Name ist frei: <code>let-val=&quot;value&quot;</code>, <code>let-current=&quot;value&quot;</code>, etc."
+        },
+        "max": {
+          "description": "Rohes Maximum aus dem <code>maxValue</code>-Input. Kontextschl\u00fcssel: <code>max</code>."
+        },
+        "label": {
+          "description": "Rohstring aus dem <code>label</code>-Input. Exklusiv f\u00fcr <code>slot=&quot;label&quot;</code>; in <code>slot=&quot;value&quot;</code> wird es <code>undefined</code> sein."
+        }
       }
     }
   },
@@ -117,14 +153,18 @@
       "title": "Farb-Tokens",
       "description": "Lokale CSS-Eigenschaften, die pro Farbe und Variante vom ThemeService aufgel\u00f6st werden.",
       "rows": {
-        "trackBg": { "description": "Hintergrundfarbe des Tracks (per Theme und Variante aufgel\u00f6st)." },
+        "trackBg": {
+          "description": "Hintergrundfarbe des Tracks (per Theme und Variante aufgel\u00f6st)."
+        },
         "trackBorder": { "description": "Randfarbe des Tracks." },
         "fillBg": { "description": "Hintergrundfarbe der F\u00fcllung." },
         "fillHoverBg": { "description": "Hintergrundfarbe der F\u00fcllung beim Hover." },
         "text": { "description": "Textfarbe innerhalb der F\u00fcllung (inside-Modus)." },
         "valueText": { "description": "Textfarbe des Werts au\u00dferhalb der F\u00fcllung." },
         "labelText": { "description": "Textfarbe der Beschriftung." },
-        "stepDivider": { "description": "Farbe der Schritttrennlinien (wenn steps verwendet werden)." }
+        "stepDivider": {
+          "description": "Farbe der Schritttrennlinien (wenn steps verwendet werden)."
+        }
       }
     },
     "sizes": {
@@ -138,8 +178,12 @@
         "heightXl": { "description": "Leistenhöhe bei Größe xl." },
         "borderWidth": { "description": "Randbreite des Tracks." },
         "transitionDuration": { "description": "Übergangsdauer der Füllung." },
-        "indeterminateDuration": { "description": "Animationszyklusdauer der unbestimmten Animation." },
-        "stepWidth": { "description": "Breite der Schritttrennlinien, wenn <code>steps</code> einen Wert hat." }
+        "indeterminateDuration": {
+          "description": "Animationszyklusdauer der unbestimmten Animation."
+        },
+        "stepWidth": {
+          "description": "Breite der Schritttrennlinien, wenn <code>steps</code> einen Wert hat."
+        }
       }
     }
   },

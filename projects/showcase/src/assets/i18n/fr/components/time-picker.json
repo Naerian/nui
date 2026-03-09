@@ -247,9 +247,6 @@
         "optionRole": {
           "description": "Chaque valeur temporelle a <code>role=\"option\"</code> et <code>aria-selected=\"true\"</code> quand c'est la valeur active."
         },
-        "normalizedLive": {
-          "description": "Un élément visuellement masqué avec <code>aria-live=\"assertive\"</code> annonce quand l'heure saisie est normalisée à la limite valide la plus proche."
-        },
         "columnLabels": {
           "description": "Les tokens de texte d'aide de colonne sont annoncés lorsque la colonne reçoit le focus, indiquant comment interagir (touches fléchées, Début/Fin)."
         },

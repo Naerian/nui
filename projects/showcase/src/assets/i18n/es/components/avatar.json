@@ -220,7 +220,7 @@
         "ariaHiddenExcess": {
           "description": "El span de texto '+N' visible está oculto para las tecnologías asistivas; solo se lee el <code>aria-label</code> del contenedor padre."
         }
-      },
+      }
     },
     "naming": {
       "title": "Nombre accesible",
@@ -263,7 +263,7 @@
         "excessSpan": {
           "description": "El texto '+N' visible está oculto para las AT; el <code>aria-label</code> del div padre proporciona el anuncio para los lectores de pantalla."
         }
-      },
+      }
     }
   },
   "globalConfig": {

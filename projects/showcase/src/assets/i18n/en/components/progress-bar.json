@@ -72,20 +72,32 @@
       "title": "Inputs",
       "description": "All available input properties of <code>nui-progress-bar</code>.",
       "rows": {
-        "compact": { "description": "Reduces the bar to a thin indicator (6 px) and hides the value." },
+        "compact": {
+          "description": "Reduces the bar to a thin indicator (6 px) and hides the value."
+        },
         "color": { "description": "Semantic color of the component." },
         "variant": { "description": "Visual variant: 'solid', 'outline', 'ghost'." },
         "value": { "description": "Current progress value." },
         "maxValue": { "description": "Maximum progress value." },
         "indeterminate": { "description": "Activates the indeterminate progress animation." },
-        "valuePosition": { "description": "Position of the value: 'hidden', 'inside', 'top', 'bottom', 'left', 'right'." },
-        "valueFormat": { "description": "Value format: 'percentage' shows 70\u202f%, 'fractional' shows 70\u202f/\u202f100." },
+        "valuePosition": {
+          "description": "Position of the value: 'hidden', 'inside', 'top', 'bottom', 'left', 'right'."
+        },
+        "valueFormat": {
+          "description": "Value format: 'percentage' shows 70\u202f%, 'fractional' shows 70\u202f/\u202f100."
+        },
         "label": { "description": "Descriptive label text for the progress." },
         "labelPosition": { "description": "Label position: 'top', 'bottom', 'left', 'right'." },
-        "trailingIcon": { "description": "RemixIcon class rendered at the end of the bar row, independent from the label and regardless of <code>labelPosition</code>." },
+        "trailingIcon": {
+          "description": "RemixIcon class rendered at the end of the bar row, independent from the label and regardless of <code>labelPosition</code>."
+        },
         "showValueInLabel": { "description": "Displays the progress value inline with the label." },
-        "ariaLabel": { "description": "Accessible name for screen readers when no visible label is present. Only applied if neither <code>label</code> nor <code>nuiPbLabel</code> are active." },
-        "steps": { "description": "Visually divides the track into N segments using dividers. Requires \u2265\u202f2 to activate." },
+        "ariaLabel": {
+          "description": "Accessible name for screen readers when no visible label is present. Only applied if neither <code>label</code> nor <code>nuiPbLabel</code> are active."
+        },
+        "steps": {
+          "description": "Visually divides the track into N segments using dividers. Requires \u2265\u202f2 to activate."
+        },
         "trackColor": { "description": "Custom background color for the track (overrides theme)." },
         "fillColor": { "description": "Custom background color for the fill (overrides theme)." },
         "textColor": { "description": "Custom color for the value text, label and icons." }
@@ -96,19 +108,33 @@
       "description": "Pass an <code>ng-template</code> with <code>[nuiPbTemplate]</code> and the <code>slot</code> attribute as a content child of <code>nui-progress-bar</code>. Both slots can be active simultaneously, each rendering in its own independent position.",
       "note": "<code>let-text</code> (no <code>=\"...\"</code> needed) binds to <code>$implicit</code> \u2014 Angular&rsquo;s special rule: the <strong>only</strong> context property that does <strong>not</strong> require an explicit key mapping. Every other property uses <code>=\"contextKey\"</code>: <code>let-percent=\"percent\"</code> reads <code>ctx.percent</code>, <code>let-v=\"value\"</code> reads <code>ctx.value</code>. The local variable name (left side) is always free to choose.",
       "rows": {
-        "value": { "description": "Replaces the numeric value block. Compatible with any <code>valuePosition</code>, including <code>inside</code>." },
-        "label": { "description": "Replaces the descriptive label block. Can be active simultaneously with <code>slot=&quot;value&quot;</code>, each in its own independent position." }
+        "value": {
+          "description": "Replaces the numeric value block. Compatible with any <code>valuePosition</code>, including <code>inside</code>."
+        },
+        "label": {
+          "description": "Replaces the descriptive label block. Can be active simultaneously with <code>slot=&quot;value&quot;</code>, each in its own independent position."
+        }
       }
     },
     "context": {
       "title": "Context Bindings",
       "description": "Template context available for both <code>slot=\"value\"</code> and <code>slot=\"label\"</code> (except <code>let-label</code> which is label-only). Syntax: <code>let-localName=\"contextKey\"</code> &mdash; except <code>$implicit</code>, which binds with a bare <code>let-localName</code> and no <code>=\"...\"</code>.",
       "rows": {
-        "text": { "description": "Pre-formatted value string (e.g. <em>&quot;70 %&quot;</em>). This is the <code>$implicit</code> of the context: the <strong>only</strong> binding that does <strong>not</strong> require <code>=&quot;...&quot;</code>, as Angular maps it automatically with a bare <code>let-X</code>." },
-        "percent": { "description": "Computed percentage: 0\u2013100. Context key: <code>percent</code>. Local name is free: <code>let-pct=&quot;percent&quot;</code> or <code>let-p=&quot;percent&quot;</code> are equally valid." },
-        "value": { "description": "Raw numeric value from the <code>value</code> input. Key: <code>value</code>. Local name is free: <code>let-val=&quot;value&quot;</code>, <code>let-current=&quot;value&quot;</code>, etc." },
-        "max": { "description": "Raw maximum from the <code>maxValue</code> input. Context key: <code>max</code>." },
-        "label": { "description": "Raw string from the <code>label</code> input. Exclusive to <code>slot=&quot;label&quot;</code>; will be <code>undefined</code> in <code>slot=&quot;value&quot;</code>." }
+        "text": {
+          "description": "Pre-formatted value string (e.g. <em>&quot;70 %&quot;</em>). This is the <code>$implicit</code> of the context: the <strong>only</strong> binding that does <strong>not</strong> require <code>=&quot;...&quot;</code>, as Angular maps it automatically with a bare <code>let-X</code>."
+        },
+        "percent": {
+          "description": "Computed percentage: 0\u2013100. Context key: <code>percent</code>. Local name is free: <code>let-pct=&quot;percent&quot;</code> or <code>let-p=&quot;percent&quot;</code> are equally valid."
+        },
+        "value": {
+          "description": "Raw numeric value from the <code>value</code> input. Key: <code>value</code>. Local name is free: <code>let-val=&quot;value&quot;</code>, <code>let-current=&quot;value&quot;</code>, etc."
+        },
+        "max": {
+          "description": "Raw maximum from the <code>maxValue</code> input. Context key: <code>max</code>."
+        },
+        "label": {
+          "description": "Raw string from the <code>label</code> input. Exclusive to <code>slot=&quot;label&quot;</code>; will be <code>undefined</code> in <code>slot=&quot;value&quot;</code>."
+        }
       }
     }
   },
@@ -139,7 +165,9 @@
         "borderWidth": { "description": "Track border width." },
         "transitionDuration": { "description": "Fill transition duration." },
         "indeterminateDuration": { "description": "Indeterminate animation cycle duration." },
-        "stepWidth": { "description": "Width of the step divider lines, if <code>steps</code> has a value." }
+        "stepWidth": {
+          "description": "Width of the step divider lines, if <code>steps</code> has a value."
+        }
       }
     }
   },

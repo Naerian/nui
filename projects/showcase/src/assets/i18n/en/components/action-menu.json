@@ -385,7 +385,7 @@
         "ariaHiddenIcon": {
           "description": "Prevents decorative icons from being announced by screen readers."
         }
-      },
+      }
     },
     "naming": {
       "title": "Accessible name",

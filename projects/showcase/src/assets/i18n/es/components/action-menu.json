@@ -385,7 +385,7 @@
         "ariaHiddenIcon": {
           "description": "Impide que los iconos decorativos sean anunciados por los lectores de pantalla."
         }
-      },
+      }
     },
     "naming": {
       "title": "Nombre accesible",
@@ -407,6 +407,13 @@
         "menuLabelledby": {
           "description": "En modo dinámico, el contenedor del menú referencia el ID del disparador mediante <code>aria-labelledby</code>, haciendo explícita su asociación."
         }
+      },
+      "elements": {
+        "triggerWithLabel": "Disparador con <code>label</code>",
+        "triggerWithAriaLabel": "Disparador con <code>ariaLabel</code>",
+        "triggerIconOnly": "Disparador solo icono",
+        "menuItem": "Ítem de menú",
+        "menuContainer": "Contenedor del menú (dinámico)"
       },
       "info": {
         "nativeName": "Nombre nativo",
