@@ -357,14 +357,12 @@ export interface CalendarGlobalConfig {
   /**
    * Mostrar selector de hora integrado para fechas seleccionadas.
    * Permite seleccionar horas junto con fechas sin necesidad de un time picker externo.
-   * - 'start': Mostrar selector de hora solo para la fecha de inicio (útil en RANGE)
-   * - 'end': Mostrar selector de hora solo para la fecha de fin (útil en RANGE)
    * - 'both': Mostrar selector de hora para ambas fechas (inicio y fin)
-   * - 'default': Comportamiento inteligente según el tipo de selección (DAY/WEEK: mostrar, RANGE: mostrar ambos)
+   * - 'default': Comportamiento inteligente por defecto (mostrar selector de hora para fecha de inicio en RANGE, o para la única fecha en DAY/WEEK)
    * - 'none': No mostrar selector de hora integrado
    * Por defecto: 'none' (no mostrar time picker integrado)
    */
-  showTimePicker?: CalendarTimePickerMode; // Mostrar selector de hora integrado: 'start'/'end'/'both'/'default'/'none'
+  showTimePicker?: CalendarTimePickerMode;
 
   /**
    * Hora de inicio y fin inicial para selección con time picker integrado.

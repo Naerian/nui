@@ -113,8 +113,17 @@
                       <nui-calendar
                         [type]="CalendarType.DAY"
                         [showWeekNumbers]="true"
+                        (valueChange)="onDateWithWeekNumbersChange($event)"
                       ></nui-calendar>
                     </div>
+                    @if (selectedDateString()) {
+                      <div class="value-display">
+                        <strong>Selected:</strong>
+                        {{ selectedDateString() }}
+                      </div>
+                    } @else {
+                      <div class="value-display">No selection</div>
+                    }
                   </div>
                 </div>
               }

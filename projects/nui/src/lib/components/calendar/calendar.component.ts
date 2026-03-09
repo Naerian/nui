@@ -133,7 +133,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   showPresets = input<boolean>(); // Mostrar panel de presets
   customPresets = input<DateRangePreset[]>(); // Presets personalizados
   firstDayOfWeek = input<FirstDayOfWeek>(); // 0=Domingo, 1=Lunes (default)
-  showTimePicker = input<CalendarTimePickerMode>(); // Mostrar selector de hora integrado: true/'start'/'end'/'both'
+  showTimePicker = input<CalendarTimePickerMode>(); // Mostrar selector de hora integrado: 'both' | 'default' | 'none'
   timePickerMode = input<TimePickerMode>(); // Modo de mostrar la hora en el timePicker
   timePickerConfig = input<TimePickerConfig>(); // Opciones de configuración para el timePicker
   startTime = input<TimeValue | Date | string | null>(); // Hora de inicio inicial
@@ -1050,7 +1050,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   }
 
   ngOnInit(): void {
-    this.initializeCalendar();
+    // La inicialización se delega al effect() del constructor,
+    // que cubre tanto la carga inicial como los cambios posteriores del input `date`.
   }
 
   ngAfterViewInit(): void {

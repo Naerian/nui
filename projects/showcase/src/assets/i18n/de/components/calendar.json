@@ -78,11 +78,34 @@
   "api": {
     "inputs": {
       "title": "Inputs",
-      "description": "Eingabeeigenschaften zur Konfiguration des Verhaltens, Erscheinungsbilds und der Einschränkungen des Kalenders"
+      "description": "Eingabeeigenschaften zur Konfiguration des Verhaltens, Erscheinungsbilds und der Einschränkungen des Kalenders",
+      "rows": {
+        "type": { "description": "Auswahltyp: 'day' (einzelnes Datum), 'week' (Woche), 'range' (Bereich), 'month' (Monat/Jahr), 'year' (Jahr)" },
+        "selection": { "description": "Auswahlmodus: 'single' (ein Element) oder 'multiple' (mehrere). Gilt für DAY, MONTH und YEAR. Benutzer können mehrere Elemente durch Klicken hinzufügen/entfernen (Toggle)" },
+        "date": { "description": "Ausgangsdatum oder ausgewählte Daten" },
+        "disabledDates": { "description": "Array deaktivierter Datumsangaben" },
+        "minDate": { "description": "Minimales auswählbares Datum" },
+        "maxDate": { "description": "Maximales auswählbares Datum" },
+        "showTodayButton": { "description": "Zeigt 'Heute'-Schaltfläche in der Fußzeile" },
+        "showPresets": { "description": "Zeigt den Voreinstellungsbereich (nur für den RANGE-Typ)" },
+        "customPresets": { "description": "Benutzerdefinierte Datumsbereichs-Voreinstellungen" },
+        "firstDayOfWeek": { "description": "0=Sonntag, 1=Montag (erster Wochentag)" },
+        "showTimePicker": { "description": "Zeigt Zeitselektor: 'both' | 'default' | 'none'" },
+        "timePickerMode": { "description": "Anzeigemodus des integrierten Zeitselektors" },
+        "timePickerConfig": { "description": "Zeitselektor-Konfiguration (Schritte, Bereiche usw.)" },
+        "startTime": { "description": "Anfängliche Startzeit" },
+        "endTime": { "description": "Anfängliche Endzeit" },
+        "dateStatusFn": { "description": "Funktion, die Datumsangaben visuelle Zustände zuweist ('success', 'warning', 'danger', 'info')" },
+        "isDateEnabledFn": { "description": "Funktion, die dynamisch bestimmt, ob ein Datum aktiviert ist (überschreibt disabledDates)" },
+        "showWeekNumbers": { "description": "Zeigt ISO-8601 Wochennummern in einer Spalte links. Anklickbar im WEEK-Modus oder DAY mehrfach zur vollständigen Wochenauswahl" }
+      }
     },
     "outputs": {
       "title": "Outputs",
-      "description": "Ereignisse, die der Kalender ausgibt, wenn der Benutzer ein Datum oder einen Bereich auswählt"
+      "description": "Ereignisse, die der Kalender ausgibt, wenn der Benutzer ein Datum oder einen Bereich auswählt",
+      "rows": {
+        "valueChange": { "description": "Wird ausgelöst, wenn sich die Auswahl ändert. Enthält Datum/Daten, Bereich/Woche und Zeit, wenn aktiviert" }
+      }
     },
     "calendar-value": {
       "title": "CalendarValue",
@@ -91,7 +114,14 @@
     },
     "calendar-type": {
       "title": "CalendarType",
-      "description": "Enum, das den Kalenderauswahlmodus definiert"
+      "description": "Enum, das den Kalenderauswahlmodus definiert",
+      "rows": {
+        "DAY": { "description": "Einzeldatumsauswahl. Mit selection=\"multiple\" können mehrere Daten ausgewählt werden" },
+        "WEEK": { "description": "Auswahl einer vollständigen Woche (7 aufeinanderfolgende Tage)" },
+        "RANGE": { "description": "Auswahl eines Datumsbereichs (Anfang und Ende)" },
+        "MONTH": { "description": "Monats- und Jahresauswahl. Mit selection=\"multiple\" können mehrere Monate ausgewählt werden" },
+        "YEAR": { "description": "Jahresauswahl. Mit selection=\"multiple\" können mehrere Jahre ausgewählt werden" }
+      }
     },
     "calendar-width": {
       "title": "CalendarWidth",
@@ -99,36 +129,89 @@
     },
     "calendar-selection": {
       "title": "CalendarSelection",
-      "description": "Enum, das den Kalenderauswahlmodus definiert: einfach oder mehrfach"
+      "description": "Enum, das den Kalenderauswahlmodus definiert: einfach oder mehrfach",
+      "rows": {
+        "single": { "description": "Ermöglicht die Auswahl eines einzelnen Elements (Tag, Monat oder Jahr je nach Typ)" },
+        "multiple": { "description": "Ermöglicht die Auswahl mehrerer Elemente durch Klicken (Toggle). Der Kalender schließt in diesem Modus nie automatisch" }
+      }
     },
     "view-mode": {
       "title": "ViewMode",
       "description": "Enum, das den aktuellen Ansichtsmodus definiert (Tage, Monate oder Jahre). Primär für den internen Komponentengebrauch.",
-      "note": "Dieses Enum wird intern von der Komponente zur Verwaltung der Navigation zwischen Ansichten verwendet. In den meisten Fällen ist es nicht notwendig, es direkt zu konfigurieren."
+      "note": "Dieses Enum wird intern von der Komponente zur Verwaltung der Navigation zwischen Ansichten verwendet. In den meisten Fällen ist es nicht notwendig, es direkt zu konfigurieren.",
+      "rows": {
+        "DAY": { "description": "Tagesansicht des Monats (7x6-Raster)" },
+        "MONTH": { "description": "Monatsansicht des Jahres (3x4-Raster)" },
+        "YEAR": { "description": "Jahresansicht (4x3-Raster, 12 Jahre)" }
+      }
     },
     "preset": {
       "title": "DateRangePreset",
-      "description": "Interface zur Definition von Schnellbereichs-Voreinstellungen mit Label, Datumsbereich und optionalem Icon"
+      "description": "Interface zur Definition von Schnellbereichs-Voreinstellungen mit Label, Datumsbereich und optionalem Icon",
+      "rows": {
+        "label": { "description": "Auf der Schaltfläche angezeigter Text" },
+        "start": { "description": "Anfangsdatum des Bereichs" },
+        "end": { "description": "Enddatum des Bereichs" }
+      }
     },
     "smart-types": {
       "title": "Smart Types",
       "description": "Typen und Funktionen für erweiterte Datumsvalidierung und Statuslogik. Ermöglichen die Anwendung komplexer Geschäftsregeln und dynamischer Visualisierungen.",
-      "note": "Diese Typen sind grundlegend für die Implementierung erweiterter Funktionen: <strong>DateStatusFn</strong> weist Daten visuelle Zustände (success, warning, danger, info) basierend auf der Geschäftslogik zu, während <strong>IsDateEnabledFn</strong> dynamisch steuert, welche Daten aktiviert oder deaktiviert sind. Beide Funktionen empfangen ein Datum und ermöglichen die Implementierung komplexer Validierungen wie Unternehmenskalender, Buchungssysteme oder benutzerdefinierte Verfügbarkeitsregeln."
+      "note": "Diese Typen sind grundlegend für die Implementierung erweiterter Funktionen: <strong>DateStatusFn</strong> weist Daten visuelle Zustände (success, warning, danger, info) basierend auf der Geschäftslogik zu, während <strong>IsDateEnabledFn</strong> dynamisch steuert, welche Daten aktiviert oder deaktiviert sind. Beide Funktionen empfangen ein Datum und ermöglichen die Implementierung komplexer Validierungen wie Unternehmenskalender, Buchungssysteme oder benutzerdefinierte Verfügbarkeitsregeln.",
+      "rows": {
+        "DateStatus": { "description": "Visuelle Zustände: 'success' | 'warning' | 'danger' | 'info'" },
+        "DateStatusFn": { "description": "<code>(date: Date) => DateStatus | null</code> — Funktion, die visuellen Zustand dynamisch zuweist" },
+        "IsDateEnabledFn": { "description": "<code>(date: Date) => boolean</code> — Funktion, die prüft, ob ein Datum aktiviert ist (überschreibt disabledDates)" }
+      }
     }
   },
   "theming": {
     "colors": {
       "title": "Farben",
       "description": "Der Kalender verwendet primär globale Theme-Variablen. Ausgewählte Tage, Hover- und Aktiv-Zustände verwenden die Primärfarbe des aktiven Themes.",
-      "note": "Die Komponente integriert sich vollständig in die NUI-Thematisierung. Primärfarben, Hintergrund, Text und Rahmen werden automatisch aus dem ausgewählten Theme-Preset übernommen."
+      "note": "Die Komponente integriert sich vollständig in die NUI-Thematisierung. Primärfarben, Hintergrund, Text und Rahmen werden automatisch aus dem ausgewählten Theme-Preset übernommen.",
+      "rows": {
+        "dayBg": { "description": "Hintergrundfarbe der Tageszellen" },
+        "dayText": { "description": "Textfarbe der Tageszellen" },
+        "dayHoverBg": { "description": "Hintergrundfarbe beim Bewegen der Maus über einen Tag" },
+        "dayHoverText": { "description": "Textfarbe beim Bewegen der Maus über einen Tag" },
+        "daySelectedBg": { "description": "Hintergrundfarbe des ausgewählten Tags" },
+        "daySelectedText": { "description": "Textfarbe des ausgewählten Tags" },
+        "daySelectedBorder": { "description": "Rahmenfarbe des ausgewählten Tags" },
+        "daySelectedHoverBg": { "description": "Hintergrundfarbe des ausgewählten Tags beim Hover" },
+        "daySelectedHoverBorder": { "description": "Rahmenfarbe des ausgewählten Tags beim Hover" },
+        "dayRangeBg": { "description": "Hintergrundfarbe der Tage innerhalb eines Bereichs" },
+        "dayRangeText": { "description": "Textfarbe der Tage innerhalb eines Bereichs" }
+      }
     },
     "sizes": {
       "title": "Größen",
-      "description": "Größenspezifische CSS-Variablen, die Breite, Innenabstand, Abstände, Zellengröße und Typografie steuern. Fünf Größenvarianten verfügbar: xs, sm, md (Standard), lg und xl."
+      "description": "Größenspezifische CSS-Variablen, die Breite, Innenabstand, Abstände, Zellengröße und Typografie steuern. Fünf Größenvarianten verfügbar: xs, sm, md (Standard), lg und xl.",
+      "rows": {
+        "width": { "description": "Standardbreite des Kalenders" },
+        "padding": { "description": "Interner Innenabstand des Kalenders" },
+        "gap": { "description": "Abstand zwischen Kalenderelementen" },
+        "dayFontSize": { "description": "Schriftgröße der Tageszellen" },
+        "titleFontSize": { "description": "Schriftgröße des Monat/Jahr-Titels" },
+        "weekdayFontSize": { "description": "Schriftgröße der Wochentagsüberschriften" },
+        "weekdayHeight": { "description": "Höhe der Wochentagszeile" },
+        "monthFontSize": { "description": "Schriftgröße in der Monatsansicht" },
+        "yearFontSize": { "description": "Schriftgröße in der Jahresansicht" },
+        "navBtnHeight": { "description": "Höhe der Navigationsschaltflächen" },
+        "navBtnPadding": { "description": "Innenabstand der Navigationsschaltflächen" },
+        "navBtnFontSize": { "description": "Schriftgröße der Navigationsschaltflächen" }
+      }
     },
     "structure": {
       "title": "Struktur",
-      "description": "Strukturelle CSS-Variablen zur Steuerung von Rahmen, Transparenzen, Animationen und Abmessungen. Enthält Anpassung von Tabs, Tagen aus anderen Monaten, Voreinstellungen und Fokuszuständen."
+      "description": "Strukturelle CSS-Variablen zur Steuerung von Rahmen, Transparenzen, Animationen und Abmessungen. Enthält Anpassung von Tabs, Tagen aus anderen Monaten, Voreinstellungen und Fokuszuständen.",
+      "rows": {
+        "tabsBorderWidth": { "description": "Rahmenbreite der Tabs" },
+        "dayBorderWidth": { "description": "Rahmenbreite der Tageszellen" },
+        "dayOtherMonthOpacity": { "description": "Transparenz der Tage aus anderen Monaten" },
+        "presetBorderWidth": { "description": "Rahmenbreite der Voreinstellungsschaltflächen" },
+        "presetHoverTranslateY": { "description": "Vertikale Verschiebung beim Hover über eine Voreinstellung" }
+      }
     },
     "customization": {
       "title": "Anpassung",

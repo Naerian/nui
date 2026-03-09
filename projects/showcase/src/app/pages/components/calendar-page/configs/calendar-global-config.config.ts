@@ -33,7 +33,7 @@ export const appConfig: ApplicationConfig = {
           firstDayOfWeek: 0,        // 0 = Sunday
           closeOnSelect: false,
           showTodayButton: false,
-          showTimePicker: 'inline',
+          showTimePicker: '',
           timePickerMode: 'hour-minute-24',
         },
       },

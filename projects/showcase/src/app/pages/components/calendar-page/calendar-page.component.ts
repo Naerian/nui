@@ -248,6 +248,14 @@ export class CalendarPageComponent extends BaseComponentPage {
     }
   }
 
+  onDateWithWeekNumbersChange(value: CalendarValue): void {
+    console.log('Date with week numbers changed:', value);
+    if (value.type === CalendarType.DAY && 'date' in value && value.date) {
+      this.selectedDate.set(value.date);
+      this.selectedDateString.set(value.date.toLocaleDateString());
+    }
+  }
+
   onMultipleMonthsSelected(value: CalendarValue): void {
     console.log('Multiple months selected:', value);
 
