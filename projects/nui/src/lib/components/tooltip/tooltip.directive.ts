@@ -286,8 +286,10 @@ export class TooltipDirective implements OnInit, OnDestroy {
   @HostListener('touchend')
   onTouchEnd(): void {
     if (this.event() === 'hover' && !this.interactive() && this.isVisible()) {
-      // Programar auto-cierre con hideTimeoutId para que el scroll listener
-      // pueda cancelarlo con clearTimeouts() y cerrar inmediatamente al scroll.
+      // En mobile, los delays de show/hide (nuiTooltipShowDelay / nuiTooltipHideDelay)
+      // no aplican: son conceptos de escritorio (evitar parpadeo al pasar el ratón).
+      // Se usa un delay fijo de 1500ms para dar tiempo de leer antes del auto-cierre.
+      // El scroll listener cancela este timeout con clearTimeouts() para cerrar al instante.
       this.hideTimeoutId = setTimeout(() => {
         this.isVisible.set(false);
       }, 1500);

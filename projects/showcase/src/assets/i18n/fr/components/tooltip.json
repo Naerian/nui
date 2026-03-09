@@ -17,8 +17,8 @@
     },
     "delays": {
       "title": "Délais",
-      "description": "Configurez les délais avant l'affichage et le masquage de l'info-bulle.",
-      "note": "Utilisez les propriétés <code>nuiTooltipShowDelay</code> et <code>nuiTooltipHideDelay</code> pour ajuster les temps d'attente."
+      "description": "Configurez les délais avant l'affichage et le masquage de l'info-bulle. Ces paramètres s'appliquent uniquement sur bureau (survol/focus/clic) ; sur les appareils mobiles, les interactions tactiles ignorent les deux délais pour une expérience plus naturelle.",
+      "note": "Utilisez les propriétés <code>nuiTooltipShowDelay</code> et <code>nuiTooltipHideDelay</code> pour ajuster les temps d'attente. Ces propriétés n'ont aucun effet sur les appareils tactiles."
     },
     "templates": {
       "title": "Templates personnalisés",

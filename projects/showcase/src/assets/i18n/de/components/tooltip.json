@@ -17,8 +17,8 @@
     },
     "delays": {
       "title": "Verzögerungen",
-      "description": "Konfigurieren Sie die Verzögerungen vor dem Ein- und Ausblenden des Tooltips.",
-      "note": "Verwenden Sie die Eigenschaften <code>nuiTooltipShowDelay</code> und <code>nuiTooltipHideDelay</code>, um die Wartezeiten anzupassen."
+      "description": "Konfigurieren Sie die Verzögerungen vor dem Ein- und Ausblenden des Tooltips. Diese Einstellungen gelten nur auf dem Desktop (Hover/Fokus/Klick); auf mobilen Geräten werden beide Verzögerungen bei Touch-Interaktionen ignoriert.",
+      "note": "Verwenden Sie die Eigenschaften <code>nuiTooltipShowDelay</code> und <code>nuiTooltipHideDelay</code>, um die Wartezeiten anzupassen. Diese Eingaben haben auf Touch-Geräten keine Wirkung."
     },
     "templates": {
       "title": "Benutzerdefinierte Vorlagen",

@@ -17,8 +17,8 @@
     },
     "delays": {
       "title": "Delays",
-      "description": "Configura los retrasos antes de mostrar y ocultar el tooltip.",
-      "note": "Usa las propiedades <code>nuiTooltipShowDelay</code> y <code>nuiTooltipHideDelay</code> para ajustar los tiempos de espera."
+      "description": "Configura los retrasos antes de mostrar y ocultar el tooltip. Estas opciones solo aplican en escritorio (hover/focus/click); en dispositivos móviles, las interacciones táctiles ignoran ambos delays para una experiencia más natural.",
+      "note": "Usa las propiedades <code>nuiTooltipShowDelay</code> y <code>nuiTooltipHideDelay</code> para ajustar los tiempos de espera. Estos inputs no tienen efecto en dispositivos táctiles."
     },
     "templates": {
       "title": "Templates personalizados",

@@ -17,8 +17,8 @@
     },
     "delays": {
       "title": "Delays",
-      "description": "Configure the delays before showing and hiding the tooltip.",
-      "note": "Use the <code>nuiTooltipShowDelay</code> and <code>nuiTooltipHideDelay</code> properties to adjust the waiting times."
+      "description": "Configure the delays before showing and hiding the tooltip. These settings only apply on desktop (hover/focus/click); on mobile devices, touch interactions ignore both delays for a more natural feel.",
+      "note": "Use the <code>nuiTooltipShowDelay</code> and <code>nuiTooltipHideDelay</code> properties to adjust the waiting times. These inputs have no effect on touch devices."
     },
     "templates": {
       "title": "Custom templates",
