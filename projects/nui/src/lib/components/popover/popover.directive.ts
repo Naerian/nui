@@ -600,9 +600,10 @@ export class PopoverDirective implements OnInit, OnDestroy {
       this.nuiPopoverShow.emit();
 
       // ── Gestión de Foco (WCAG 2.4.3 - Focus Order) ────────────────────────
-      // Solo para click y focus: mover foco al interior del popover.
+      // Solo para click: mover foco al interior del popover.
       // Para hover: el usuario navega con el ratón, mover el foco sería confuso.
-      if (this.event() !== 'hover') {
+      // Para focus: el trigger ya tiene el foco; moverlo dispararía blur → cierre inmediato.
+      if (this.event() === 'click') {
         queueMicrotask(() => {
           if (!this.overlayRef) return;
           const overlayEl = this.overlayRef.overlayElement;
@@ -645,8 +646,9 @@ export class PopoverDirective implements OnInit, OnDestroy {
     this.popoverManager.unregister(this.popoverId); // Desregistrar del manager
 
     // ── Restaurar foco al trigger (WCAG 2.4.3 - Focus Order) ──────────────
-    // Solo restauramos si el foco fue movido (eventos click/focus, no hover).
-    if (this.event() !== 'hover' && this._triggerElementSnapshot) {
+    // Solo restauramos si el foco fue movido (solo en evento click).
+    // Para focus: el trigger ya gestiona su propio foco; restaurarlo causaría un bucle.
+    if (this.event() === 'click' && this._triggerElementSnapshot) {
       this._triggerElementSnapshot.focus();
       this._triggerElementSnapshot = undefined;
     }
