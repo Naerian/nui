@@ -256,7 +256,7 @@
         "normalizedLive": {
           "description": "Un elemento visualmente oculto con <code>aria-live=\"assertive\"</code> anuncia cuando el tiempo introducido se normaliza al límite válido más cercano."
         },
-        "columnLabels": {
+        "columnLabel": {
           "description": "Los tokens de texto de ayuda de columna se anuncian cuando la columna recibe el foco, indicando cómo interactuar (teclas de flechas, Inicio/Fin)."
         },
         "optionSelected": {

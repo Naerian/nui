@@ -53,6 +53,12 @@ export const TIME_PICKER_A11Y_SECTIONS: ComponentSection[] = [
           '"assertive"',
           'components.timePicker.a11y.roles.rows.normalizedAlert.description',
         ],
+        [
+          'components.timePicker.a11y.roles.elements.normalizedLive',
+          '<code>aria-live</code>',
+          '"assertive"',
+          'components.timePicker.a11y.roles.rows.normalizedLive.description',
+        ]
       ],
     },
   },

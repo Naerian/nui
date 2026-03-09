@@ -70,26 +70,77 @@
   "api": {
     "inputs": {
       "title": "Inputs",
-      "description": "Todas las propiedades de entrada disponibles de <code>nui-progress-bar</code>."
+      "description": "Todas las propiedades de entrada disponibles de <code>nui-progress-bar</code>.",
+      "rows": {
+        "compact": { "description": "Reduce la barra a un indicador fino (6 px) y oculta el valor." },
+        "color": { "description": "Color sem\u00e1ntico del componente." },
+        "variant": { "description": "Variante visual: 'solid', 'outline', 'ghost'." },
+        "value": { "description": "Valor actual del progreso." },
+        "maxValue": { "description": "Valor m\u00e1ximo del progreso." },
+        "indeterminate": { "description": "Activa la animaci\u00f3n de progreso indeterminado." },
+        "valuePosition": { "description": "Posici\u00f3n del valor: 'hidden', 'inside', 'top', 'bottom', 'left', 'right'." },
+        "valueFormat": { "description": "Formato del valor: 'percentage' muestra 70\u202f%, 'fractional' muestra 70\u202f/\u202f100." },
+        "label": { "description": "Texto de etiqueta descriptiva del progreso." },
+        "labelPosition": { "description": "Posici\u00f3n de la etiqueta: 'top', 'bottom', 'left', 'right'." },
+        "trailingIcon": { "description": "Clase RemixIcon renderizada al final del row de la barra, independiente de la etiqueta e ignorando <code>labelPosition</code>." },
+        "showValueInLabel": { "description": "Muestra el valor de progreso en l\u00ednea junto a la etiqueta." },
+        "ariaLabel": { "description": "Nombre accesible para lectores de pantalla cuando no hay etiqueta visible. Solo se aplica si no hay <code>label</code> ni <code>nuiPbLabel</code> activos." },
+        "steps": { "description": "Divide visualmente el track en N segmentos mediante l\u00edneas divisoras. Requiere \u2265\u202f2 para activarse." },
+        "trackColor": { "description": "Color de fondo personalizado del track (sobreescribe el tema)." },
+        "fillColor": { "description": "Color de fondo personalizado del fill (sobreescribe el tema)." },
+        "textColor": { "description": "Color personalizado para el texto del valor, etiqueta e iconos." }
+      }
     },
     "templates": {
       "title": "Plantillas de contenido",
       "description": "Pasa un <code>ng-template</code> con <code>[nuiPbTemplate]</code> y el atributo <code>slot</code> como contenido hijo de <code>nui-progress-bar</code>. Ambos slots pueden estar activos simult&#225;neamente, cada uno en su propia posici&#243;n independiente.",
-      "note": "<code>let-text</code> (sin <code>=\"...\"</code>) se enlaza con <code>$implicit</code> — la regla especial de Angular: la <strong>&#250;nica</strong> propiedad del contexto que <strong>no</strong> necesita un mapeo expl&#237;cito. El resto requieren <code>=\"clave\"</code>: <code>let-percent=\"percent\"</code> lee <code>ctx.percent</code>, <code>let-v=\"value\"</code> lee <code>ctx.value</code>. El nombre de variable local (parte izquierda) es siempre libre."
+      "note": "<code>let-text</code> (sin <code>=\"...\"</code>) se enlaza con <code>$implicit</code> \u2014 la regla especial de Angular: la <strong>&#250;nica</strong> propiedad del contexto que <strong>no</strong> necesita un mapeo expl&#237;cito. El resto requieren <code>=\"clave\"</code>: <code>let-percent=\"percent\"</code> lee <code>ctx.percent</code>, <code>let-v=\"value\"</code> lee <code>ctx.value</code>. El nombre de variable local (parte izquierda) es siempre libre.",
+      "rows": {
+        "value": { "description": "Reemplaza el bloque del valor num\u00e9rico. Compatible con cualquier <code>valuePosition</code>, incluyendo <code>inside</code>." },
+        "label": { "description": "Reemplaza el bloque de la etiqueta descriptiva. Puede estar activo simult\u00e1neamente con <code>slot=&quot;value&quot;</code>, cada uno en su propia posici\u00f3n independiente." }
+      }
     },
     "context": {
       "title": "Bindings de contexto",
-      "description": "Contexto de plantilla disponible para <code>slot=\"value\"</code> y <code>slot=\"label\"</code> (excepto <code>let-label</code>, exclusivo del slot label). Sintaxis: <code>let-nombre=\"clave\"</code>, excepto <code>$implicit</code>, que se enlaza con un <code>let-nombre</code> simple sin <code>=\"...\"</code>."
+      "description": "Contexto de plantilla disponible para <code>slot=\"value\"</code> y <code>slot=\"label\"</code> (excepto <code>let-label</code>, exclusivo del slot label). Sintaxis: <code>let-nombre=\"clave\"</code>, excepto <code>$implicit</code>, que se enlaza con un <code>let-nombre</code> simple sin <code>=\"...\"</code>.",
+      "rows": {
+        "text": { "description": "Cadena pre-formateada (ej. <em>&quot;70 %&quot;</em>). Es el <code>$implicit</code> del contexto: el <strong>\u00fanico</strong> binding que <strong>no</strong> necesita <code>=&quot;...&quot;</code>, porque Angular lo mapea autom\u00e1ticamente con un <code>let-X</code> libre." },
+        "percent": { "description": "Porcentaje calculado: 0\u2013100. Clave del contexto: <code>percent</code>. El nombre local es libre: <code>let-pct=&quot;percent&quot;</code> o <code>let-p=&quot;percent&quot;</code> son igual de v\u00e1lidos." },
+        "value": { "description": "Valor num\u00e9rico bruto del input <code>value</code>. Clave: <code>value</code>. El nombre local es libre: <code>let-val=&quot;value&quot;</code>, <code>let-current=&quot;value&quot;</code>, etc." },
+        "max": { "description": "Valor m\u00e1ximo bruto del input <code>maxValue</code>. Clave de contexto: <code>max</code>." },
+        "label": { "description": "String crudo del input <code>label</code>. Exclusivo de <code>slot=&quot;label&quot;</code>; en <code>slot=&quot;value&quot;</code> ser\u00e1 <code>undefined</code>." }
+      }
     }
   },
   "theming": {
     "colors": {
       "title": "Tokens de color",
-      "description": "Propiedades CSS personalizadas locales resueltas por color y variante desde ThemeService."
+      "description": "Propiedades CSS personalizadas locales resueltas por color y variante desde ThemeService.",
+      "rows": {
+        "trackBg": { "description": "Color de fondo del track (resuelto por tema y variante)." },
+        "trackBorder": { "description": "Color de borde del track." },
+        "fillBg": { "description": "Color de fondo del fill." },
+        "fillHoverBg": { "description": "Color de fondo del fill en hover." },
+        "text": { "description": "Color del texto dentro del fill (modo inside)." },
+        "valueText": { "description": "Color del texto del valor fuera del fill." },
+        "labelText": { "description": "Color del texto de la etiqueta." },
+        "stepDivider": { "description": "Color de las l\u00edneas divisorias de pasos (si se usan steps)." }
+      }
     },
     "sizes": {
       "title": "Tokens de tamaño",
-      "description": "Propiedades CSS personalizadas estructurales que controlan la altura del track, el radio de borde y las transiciones."
+      "description": "Propiedades CSS personalizadas estructurales que controlan la altura del track, el radio de borde y las transiciones.",
+      "rows": {
+        "heightXs": { "description": "Altura de la barra en tama\u00f1o xs." },
+        "heightSm": { "description": "Altura de la barra en tama\u00f1o sm." },
+        "heightMd": { "description": "Altura de la barra en tama\u00f1o md." },
+        "heightLg": { "description": "Altura de la barra en tama\u00f1o lg." },
+        "heightXl": { "description": "Altura de la barra en tama\u00f1o xl." },
+        "borderWidth": { "description": "Anchura del borde del track." },
+        "transitionDuration": { "description": "Duraci\u00f3n de la transici\u00f3n del fill." },
+        "indeterminateDuration": { "description": "Duraci\u00f3n del ciclo de animaci\u00f3n indeterminada." },
+        "stepWidth": { "description": "Anchura de las l\u00edneas divisorias de pasos, si <code>steps</code> tiene valor." }
+      }
     }
   },
   "a11y": {
