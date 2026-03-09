@@ -1,17 +1,22 @@
-<div
+﻿<div
   class="nui-pb"
   [class]="'nui-pb--' + effectiveColor() + ' nui-pb--' + effectiveVariant()"
   [class.nui-pb--compact]="compact()"
-  [class.nui-pb--label-top]="finalLabelText() && labelPosition() === 'top'"
-  [class.nui-pb--label-bottom]="finalLabelText() && labelPosition() === 'bottom'"
-  [class.nui-pb--label-left]="finalLabelText() && labelPosition() === 'left'"
-  [class.nui-pb--label-right]="finalLabelText() && labelPosition() === 'right'"
-  [style.--nui-pb-text]="textColor() || null"
+  [class.nui-pb--label-top]="hasLabel() && labelPosition() === 'top'"
+  [class.nui-pb--label-bottom]="hasLabel() && labelPosition() === 'bottom'"
+  [class.nui-pb--label-left]="hasLabel() && labelPosition() === 'left'"
+  [class.nui-pb--label-right]="hasLabel() && labelPosition() === 'right'"
   [style.--nui-pb-value-text]="textColor() || null"
   [style.--nui-pb-label-text]="textColor() || null"
 >
-  @if (finalLabelText() && labelPosition() === 'top') {
-    <span class="nui-pb__label" [id]="labelId" [innerHTML]="finalLabelText()"></span>
+  @if (hasLabel() && labelPosition() === 'top') {
+    <span class="nui-pb__label" [id]="labelId">
+      @if (labelTemplate(); as tpl) {
+        <ng-container *ngTemplateOutlet="tpl; context: templateContext()"></ng-container>
+      } @else {
+        {{ finalLabelText() }}
+      }
+    </span>
   }
 
   <div
@@ -26,18 +31,15 @@
     [attr.aria-valuemin]="0"
     [attr.aria-valuemax]="!indeterminate() ? maxValue() : null"
     [attr.aria-valuetext]="ariaValueText()"
-    [attr.aria-labelledby]="label() ? labelId : null"
+    [attr.aria-labelledby]="hasLabel() ? labelId : null"
+    [attr.aria-label]="!hasLabel() ? (ariaLabel() || null) : null"
   >
-    @if (finalLabelText() && labelPosition() === 'left') {
-      <span class="nui-pb__label" [id]="labelId" [innerHTML]="finalLabelText()"></span>
-    }
-
-    @if (showOutsideValue()) {
-      <span class="nui-pb__value nui-pb__value--outside">
-        @if (valueTemplate(); as tpl) {
-          <ng-container *ngTemplateOutlet="tpl; context: valueTemplateContext()"></ng-container>
+    @if (hasLabel() && labelPosition() === 'left') {
+      <span class="nui-pb__label" [id]="labelId">
+        @if (labelTemplate(); as tpl) {
+          <ng-container *ngTemplateOutlet="tpl; context: templateContext()"></ng-container>
         } @else {
-          {{ computedValueText() }}
+          {{ finalLabelText() }}
         }
       </span>
     }
@@ -67,10 +69,10 @@
           @if (valuePosition() === 'inside' && (computedValueText() || valueTemplate())) {
             <span
               class="nui-pb__value nui-pb__value--inside"
-              [class.nui-pb__value--inside-hidden]="!value()"
+              [class.nui-pb__value--inside-hidden]="insideValueHidden()"
             >
               @if (valueTemplate(); as tpl) {
-                <ng-container *ngTemplateOutlet="tpl; context: valueTemplateContext()"></ng-container>
+                <ng-container *ngTemplateOutlet="tpl; context: templateContext()"></ng-container>
               } @else {
                 {{ computedValueText() }}
               }
@@ -80,8 +82,24 @@
       }
     </div>
 
-    @if (finalLabelText() && labelPosition() === 'right') {
-      <span class="nui-pb__label" [id]="labelId" [innerHTML]="finalLabelText()"></span>
+    @if (showOutsideValue()) {
+      <span class="nui-pb__value nui-pb__value--outside">
+        @if (valueTemplate(); as tpl) {
+          <ng-container *ngTemplateOutlet="tpl; context: templateContext()"></ng-container>
+        } @else {
+          {{ computedValueText() }}
+        }
+      </span>
+    }
+
+    @if (hasLabel() && labelPosition() === 'right') {
+      <span class="nui-pb__label" [id]="labelId">
+        @if (labelTemplate(); as tpl) {
+          <ng-container *ngTemplateOutlet="tpl; context: templateContext()"></ng-container>
+        } @else {
+          {{ finalLabelText() }}
+        }
+      </span>
     }
 
     @if (trailingIcon()) {
@@ -91,7 +109,13 @@
     }
   </div>
 
-  @if (finalLabelText() && labelPosition() === 'bottom') {
-    <span class="nui-pb__label" [id]="labelId" [innerHTML]="finalLabelText()"></span>
+  @if (hasLabel() && labelPosition() === 'bottom') {
+    <span class="nui-pb__label" [id]="labelId">
+      @if (labelTemplate(); as tpl) {
+        <ng-container *ngTemplateOutlet="tpl; context: templateContext()"></ng-container>
+      } @else {
+        {{ finalLabelText() }}
+      }
+    </span>
   }
 </div>

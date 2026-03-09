@@ -68,6 +68,10 @@
       "globalConfig": "Conf. global"
     },
     "tables": {
+      "binding": "Binding",
+      "directive": "Directiva",
+      "slot": "Slot",
+      "context": "Contexto de plantilla",
       "cssVariable": "Variable CSS",
       "description": "Descripción",
       "default": "Valor por defecto",

@@ -46,10 +46,15 @@
       "description": "Combine une étiquette descriptive avec la valeur de progression.",
       "note": "Ajoutez l'attribut <code>showValueInLabel</code> pour afficher la valeur de progression en ligne avec l'étiquette."
     },
+    "progress-bar-template": {
+      "title": "Slots de gabarit",
+      "description": "Utilisez <code>[nuiPbTemplate]</code> avec l'attribut <code>slot</code> comme contenu enfant de <code>nui-progress-bar</code>. Utilisez <code>slot=\"value\"</code> pour personnaliser la valeur, ou <code>slot=\"label\"</code> pour l'étiquette. Les deux peuvent être actifs simultanément, chacun dans sa propre position.",
+      "note": "Le contexte est identique pour les deux slots. <code>let-text</code> se lie à <code>$implicit</code> — le <strong>seul</strong> binding qui n'a pas besoin de clé explicite. Tous les autres oui : <code>let-percent</code> lit la clé <code>percent</code>, <code>let-v</code> lit <code>value</code>, <code>let-max</code> lit <code>max</code>. Le binding <code>let-label</code> est exclusif au <code>slot=\"label\"</code>. Le nom de la variable locale est toujours libre. Voir le tableau Liaisons de contexte."
+    },
     "icons": {
-      "title": "Icônes",
-      "description": "Associe des icônes à la barre de progression pour améliorer sa signification visuelle. Vous pouvez ajouter des icônes de préfixe ou de suffixe qui décorent l'étiquette, ou une icône indépendante à la fin de la barre.",
-      "note": "Utilisez <code>prefixIcon</code> ou <code>suffixIcon</code> pour décorer l'étiquette. Utilisez <code>trailingIcon</code> pour une icône placée indépendamment à la fin de la barre, quelle que soit la position de l'étiquette."
+      "title": "Icônes (trailing)",
+      "description": "Ajoute une icône indépendante à la fin de la barre de progression, rendant l'état visuellement clair en un coup d'œil.",
+      "note": "Utilisez l'input <code>trailingIcon</code> avec n'importe quelle classe RemixIcon. L'icône est toujours placée après le track, quelle que soit la valeur de <code>labelPosition</code>."
     },
     "customColors": {
       "title": "Couleurs personnalisées",
@@ -59,17 +64,21 @@
       "title": "Étapes",
       "description": "Divise le track en segments égaux à l'aide de séparateurs visuels, idéal pour communiquer des étapes discrètes comme les étapes d'un wizard ou les flux d'onboarding.",
       "note": "Utilisez l'input <code>steps</code> avec une valeur ≥ 2. Chaque segment se remplit individuellement au fil de la progression. Personnalisez l'écart entre les segments avec <code>--nui-pb-step-gap</code>. Note : le mode <code>indeterminate</code> ignore <code>steps</code>."
-    },
-    "value-template": {
-      "title": "Gabarit de valeur personnalisé",
-      "description": "Permet de contrôler entièrement l'affichage de la valeur. Passez un <code>ng-template</code> avec la directive <code>nuiPbValue</code> comme contenu enfant de <code>nui-progress-bar</code>.",
-      "note": "Le contexte du gabarit expose : <code>let-value</code> (nombre brut), <code>let-percent</code> (0-100), <code>let-max</code> (valeur maximale) et <code>let-text</code> (chaîne pré-formatée). Compatible avec toutes les valeurs de <code>valuePosition</code>, y compris <code>inside</code>."
     }
   },
   "api": {
     "inputs": {
       "title": "Inputs",
       "description": "Toutes les propriétés d'entrée disponibles de <code>nui-progress-bar</code>."
+    },
+    "templates": {
+      "title": "Gabarits de contenu",
+      "description": "Passez un <code>ng-template</code> avec <code>[nuiPbTemplate]</code> et l'attribut <code>slot</code> comme contenu enfant de <code>nui-progress-bar</code>. Les deux slots peuvent être actifs simultanément, chacun dans sa propre position indépendante.",
+      "note": "<code>let-text</code> (sans <code>=\"...\"</code>) se lie à <code>$implicit</code> &mdash; la règle spéciale d'Angular : la <strong>seule</strong> propriété de contexte qui ne nécessite <strong>pas</strong> de mappage explicite. Toutes les autres utilisent <code>=\"clé\"</code> : <code>let-percent=\"percent\"</code> lit <code>ctx.percent</code>, <code>let-v=\"value\"</code> lit <code>ctx.value</code>. Le nom de la variable locale (côté gauche) est toujours libre."
+    },
+    "context": {
+      "title": "Liaisons de contexte",
+      "description": "Contexte de gabarit disponible pour <code>slot=\"value\"</code> et <code>slot=\"label\"</code> (sauf <code>let-label</code>, exclusif au slot label). Syntaxe : <code>let-nom=\"clé\"</code> &mdash; excepté <code>$implicit</code>, qui se lie avec un simple <code>let-nom</code> sans <code>=\"...\"</code>."
     }
   },
   "theming": {

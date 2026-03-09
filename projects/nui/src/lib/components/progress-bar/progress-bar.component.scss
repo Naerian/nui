@@ -80,7 +80,7 @@
     // Value positioning modifiers
     &--value-top,
     &--value-bottom {
-      flex-direction: column;
+      flex-direction: column-reverse;
       align-items: flex-start;
 
       // In column direction flex: 1 collapses the track height;
@@ -92,11 +92,19 @@
     }
 
     &--value-bottom {
-      flex-direction: column-reverse;
+      flex-direction: column;
     }
 
     &--value-right {
-      flex-direction: row-reverse;
+      .nui-pb__value--outside {
+        order: 1;
+      }
+    }
+
+    &--value-left {
+      .nui-pb__value--outside {
+        order: -1;
+      }
     }
   }
 
@@ -170,13 +178,10 @@
   // Indeterminate animation: needs absolute fill inside relative track
   &__bar--indeterminate &__fill {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     width: 100% !important;
-    animation: nui-pb-indeterminate var(--nui-pb-indeterminate-duration) infinite
-      var(--nui-pb-indeterminate-timing);
-    transform-origin: 0% 50%;
+    transform-origin: left center;
+    animation: nui-pb-indeterminate var(--nui-pb-indeterminate-duration) linear infinite;
   }
 
   &__segment {
@@ -268,12 +273,12 @@
 // ============================================================================
 @keyframes nui-pb-indeterminate {
   0% {
-    transform: translateX(0) scaleX(0);
+    transform: translateX(-100%) scaleX(0.4);
   }
-  40% {
-    transform: translateX(0) scaleX(0.4);
+  50% {
+    transform: translateX(0%) scaleX(0.6);
   }
   100% {
-    transform: translateX(100%) scaleX(0.5);
+    transform: translateX(100%) scaleX(0.4);
   }
 }

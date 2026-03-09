@@ -68,6 +68,10 @@
       "globalConfig": "Config. globale"
     },
     "tables": {
+      "binding": "Liaison",
+      "directive": "Directive",
+      "slot": "Slot",
+      "context": "Contexte de gabarit",
       "cssVariable": "Variable CSS",
       "description": "Description",
       "default": "Valeur par défaut",

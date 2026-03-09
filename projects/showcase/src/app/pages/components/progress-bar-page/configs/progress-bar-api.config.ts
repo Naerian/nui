@@ -75,18 +75,6 @@ export const PROGRESS_BAR_API_SECTIONS: ComponentSection[] = [
           "Posición de la etiqueta: 'top', 'bottom', 'left', 'right'",
         ],
         [
-          '<code>prefixIcon</code>',
-          'string | null',
-          '<code class="neutral">null</code>',
-          'Clase RemixIcon mostrada antes del texto de la etiqueta.',
-        ],
-        [
-          '<code>suffixIcon</code>',
-          'string | null',
-          '<code class="neutral">null</code>',
-          'Clase RemixIcon mostrada después del texto de la etiqueta.',
-        ],
-        [
           '<code>trailingIcon</code>',
           'string | null',
           '<code class="neutral">null</code>',
@@ -99,16 +87,16 @@ export const PROGRESS_BAR_API_SECTIONS: ComponentSection[] = [
           'Muestra el valor de progreso inline junto a la etiqueta.',
         ],
         [
+          '<code>ariaLabel</code>',
+          'string | null',
+          '<code class="neutral">null</code>',
+          'Nombre accesible para lectores de pantalla cuando no hay etiqueta visible. Solo se aplica si no hay <code>label</code> ni <code>nuiPbLabel</code> activos.',
+        ],
+        [
           '<code>steps</code>',
           'number',
           '<code class="neutral">0</code>',
           'Divide visualmente el track en N segmentos mediante líneas divisoras. Requiere ≥ 2 para activarse.',
-        ],
-        [
-          '<code>nuiPbValue</code> <em>(template)</em>',
-          'TemplateRef',
-          '—',
-          'Plantilla de contenido para personalizar el valor mostrado. Contexto disponible: <code>let-value</code> (número), <code>let-percent</code> (0-100), <code>let-max</code>, <code>let-text</code> (string formateado).',
         ],
         [
           '<code>trackColor</code>',
@@ -127,6 +115,81 @@ export const PROGRESS_BAR_API_SECTIONS: ComponentSection[] = [
           'string | null',
           '<code class="neutral">null</code>',
           'Color personalizado para el texto del valor, etiqueta e iconos.',
+        ],
+      ],
+    },
+  },
+  {
+    id: 'api-templates',
+    title: 'components.progressBar.api.templates.title',
+    description: 'components.progressBar.api.templates.description',
+    anchor: 'api-templates',
+    note: {
+      type: 'info',
+      content: 'components.progressBar.api.templates.note',
+    },
+    table: {
+      headers: [
+        'common.tables.directive',
+        'common.tables.slot',
+        'common.tables.description',
+      ],
+      rows: [
+        [
+          '<code>[nuiPbTemplate]</code>',
+          '<code>slot="value"</code>',
+          'Reemplaza el bloque del valor numérico. Compatible con cualquier <code>valuePosition</code>, incluyendo <code>inside</code>.',
+        ],
+        [
+          '<code>[nuiPbTemplate]</code>',
+          '<code>slot="label"</code>',
+          'Reemplaza el bloque de la etiqueta descriptiva. Puede estar activo simultáneamente con <code>slot="value"</code>, cada uno en su propia posición.',
+        ],
+      ],
+    },
+  },
+  {
+    id: 'api-context',
+    title: 'components.progressBar.api.context.title',
+    description: 'components.progressBar.api.context.description',
+    anchor: 'api-context',
+    table: {
+      headers: [
+        'common.tables.binding',
+        'common.tables.type',
+        'common.tables.slot',
+        'common.tables.description',
+      ],
+      rows: [
+        [
+          '<code>let-text</code> <em>(<code>$implicit</code>)</em>',
+          '<code>string</code>',
+          'value + label',
+          'Cadena pre-formateada (ej. <em>"70 %"</em>). Es el <code>$implicit</code> del contexto: el <strong>único</strong> binding que <strong>no</strong> necesita <code>="..."</code>, porque Angular lo mapea automáticamente con un <code>let-X</code> libre.',
+        ],
+        [
+          '<code>let-percent="percent"</code>',
+          '<code>number</code>',
+          'value + label',
+          'Porcentaje calculado: 0&ndash;100. Clave del contexto: <code>percent</code>. El nombre local es libre: <code>let-pct="percent"</code> o <code>let-p="percent"</code> son igual de válidos.',
+        ],
+        [
+          '<code>let-v="value"</code>',
+          '<code>number</code>',
+          'value + label',
+          'Valor numérico bruto del input <code>value</code>. Clave: <code>value</code>. El nombre local es libre: <code>let-val="value"</code>, <code>let-current="value"</code>, etc.',
+        ],
+        [
+          '<code>let-max="max"</code>',
+          '<code>number</code>',
+          'value + label',
+          'Valor máximo bruto del input <code>maxValue</code>. Clave de contexto: <code>max</code>.',
+        ],
+        [
+          '<code>let-label="label"</code>',
+          '<code>string | null</code>',
+          '<em>solo</em> <code>slot="label"</code>',
+          'String crudo del input <code>label</code>. Exclusivo de <code>slot="label"</code>; en <code>slot="value"</code> será <code>undefined</code>.',
         ],
       ],
     },

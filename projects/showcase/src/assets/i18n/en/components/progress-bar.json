@@ -46,10 +46,15 @@
       "description": "Combines a descriptive label with the progress value.",
       "note": "Add the <code>showValueInLabel</code> attribute to display the progress value inline with the label."
     },
+    "progress-bar-template": {
+      "title": "Template Slots",
+      "description": "Use <code>[nuiPbTemplate]</code> with the <code>slot</code> attribute as a content child of <code>nui-progress-bar</code>. Use <code>slot=\"value\"</code> to customize the value display, or <code>slot=\"label\"</code> for the label. Both can be active simultaneously, each in its own independent position.",
+      "note": "The context is identical for both slots. <code>let-text</code> binds to <code>$implicit</code> — the <strong>only</strong> binding that needs no explicit key. All others require one: <code>let-percent</code> reads key <code>percent</code>, <code>let-v</code> reads key <code>value</code>, <code>let-max</code> reads key <code>max</code>. The <code>let-label</code> binding is exclusive to <code>slot=\"label\"</code>. Local variable names are always free. See the Context Bindings table."
+    },
     "icons": {
-      "title": "Icons",
-      "description": "Associates icons with the progress bar to enhance its visual meaning. You can add prefix or suffix icons that decorate the label, or an independent icon at the end of the progress bar row.",
-      "note": "Use <code>prefixIcon</code> or <code>suffixIcon</code> to decorate the label. Use <code>trailingIcon</code> for an icon placed independently at the end of the progress bar row, regardless of the label position."
+      "title": "Icons (trailing)",
+      "description": "Adds a standalone icon at the end of the progress bar row, making the status visually clear at a glance.",
+      "note": "Use the <code>trailingIcon</code> input with any RemixIcon class. The icon is always placed after the track, regardless of <code>labelPosition</code>."
     },
     "customColors": {
       "title": "Custom Colors",
@@ -60,17 +65,21 @@
       "title": "Steps",
       "description": "Divides the track into equal segments using visual dividers, ideal for communicating discrete stages such as wizard steps or onboarding flows.",
       "note": "Use the <code>steps</code> input with a value ≥ 2. Each segment fills individually as progress advances. Customize the gap width between segments via <code>--nui-pb-step-gap</code>. Note: <code>indeterminate</code> mode ignores <code>steps</code>."
-    },
-    "value-template": {
-      "title": "Custom Value Template",
-      "description": "Provides full control over how the value is rendered. Pass an <code>ng-template</code> with the <code>nuiPbValue</code> directive as a content child of <code>nui-progress-bar</code>.",
-      "note": "The template context exposes: <code>let-value</code> (raw number), <code>let-percent</code> (0-100), <code>let-max</code> (max value), and <code>let-text</code> (pre-formatted string). Works with any <code>valuePosition</code>, including <code>inside</code>."
     }
   },
   "api": {
     "inputs": {
       "title": "Inputs",
       "description": "All available input properties of <code>nui-progress-bar</code>."
+    },
+    "templates": {
+      "title": "Content Templates",
+      "description": "Pass an <code>ng-template</code> with <code>[nuiPbTemplate]</code> and the <code>slot</code> attribute as a content child of <code>nui-progress-bar</code>. Both slots can be active simultaneously, each rendering in its own independent position.",
+      "note": "<code>let-text</code> (no <code>=\"...\"</code> needed) binds to <code>$implicit</code> — Angular&rsquo;s special rule: the <strong>only</strong> context property that does <strong>not</strong> require an explicit key mapping. Every other property uses <code>=\"contextKey\"</code>: <code>let-percent=\"percent\"</code> reads <code>ctx.percent</code>, <code>let-v=\"value\"</code> reads <code>ctx.value</code>. The local variable name (left side) is always free to choose."
+    },
+    "context": {
+      "title": "Context Bindings",
+      "description": "Template context available for both <code>slot=\"value\"</code> and <code>slot=\"label\"</code> (except <code>let-label</code> which is label-only). Syntax: <code>let-localName=\"contextKey\"</code> &mdash; except <code>$implicit</code>, which binds with a bare <code>let-localName</code> and no <code>=\"...\"</code>."
     }
   },
   "theming": {

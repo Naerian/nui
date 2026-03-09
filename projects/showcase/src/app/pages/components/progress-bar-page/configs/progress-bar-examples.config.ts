@@ -103,41 +103,53 @@ export const PROGRESS_BAR_EXAMPLES_SECTIONS: ComponentSection[] = [
         title: 'codeExamples.html',
         code: `<nui-progress-bar [indeterminate]="true" />
 <nui-progress-bar [indeterminate]="true" color="success" />
-<nui-progress-bar [indeterminate]="true" variant="outline" color="warning" />`,
+<nui-progress-bar [indeterminate]="true" color="success" compact="" />
+<nui-progress-bar [indeterminate]="true" color="danger" compact="" />`,
         language: 'html',
       },
     ],
   },
   {
-    id: 'value-template',
-    title: 'components.progressBar.examples.value-template.title',
-    description: 'components.progressBar.examples.value-template.description',
+    id: 'progress-bar-template',
+    title: 'components.progressBar.examples.progress-bar-template.title',
+    description: 'components.progressBar.examples.progress-bar-template.description',
     note: {
       type: 'info',
-      content: 'components.progressBar.examples.value-template.note',
+      content: 'components.progressBar.examples.progress-bar-template.note',
     },
-    anchor: 'value-template',
+    anchor: 'progress-bar-template',
     examples: [
       {
-        title: 'codeExamples.html',
-        code: `<!-- Emoji based on progress -->
+        title: 'slot="value"',
+        code: `<!-- let-percent="percent": named key, local variable name is free -->
 <nui-progress-bar [value]="70" valuePosition="right">
-  <ng-template nuiPbValue let-percent>
+  <ng-template nuiPbTemplate slot="value" let-percent="percent">
     @if (percent >= 80) { 🔥 } @else if (percent >= 50) { 🚀 } @else { 🐢 }
     {{ percent | number:'1.0-0' }}%
   </ng-template>
-</nui-progress-bar>
-
-<!-- Fractional with checkmark -->
-<nui-progress-bar [value]="3" [maxValue]="5" color="success" valuePosition="right">
-  <ng-template nuiPbValue let-v let-max="max">
-    {{ v | number:'1.0-0' }} / {{ max }} ✅
+</nui-progress-bar>`,
+        language: 'html',
+      },
+      {
+        title: 'slot="label" + slot="value"',
+        code: `<!-- Both slots active simultaneously -->
+<nui-progress-bar [value]="80" labelPosition="left" valuePosition="right">
+  <ng-template nuiPbTemplate slot="label">
+    <i class="ri-upload-cloud-2-line"></i> Upload
   </ng-template>
-</nui-progress-bar>
-
-<!-- Inside (ghost) with star rating style -->
-<nui-progress-bar [value]="45" valuePosition="inside" color="warning" variant="ghost">
-  <ng-template nuiPbValue let-percent>★ {{ percent | number:'1.0-0' }}%</ng-template>
+  <ng-template nuiPbTemplate slot="value" let-percent="percent">
+    @if (percent >= 100) { OK } @else { {{ percent | number:'1.0-0' }}% }
+  </ng-template>
+</nui-progress-bar>`,
+        language: 'html',
+      },
+      {
+        title: 'slot="label" — $implicit',
+        code: `<!-- let-text binds to $implicit — no ="..." needed -->
+<nui-progress-bar [value]="3" [maxValue]="5" labelPosition="left" color="success" valuePosition="hidden">
+  <ng-template nuiPbTemplate slot="label" let-text>
+    <i class="ri-file-line"></i> Files {{ text }}
+  </ng-template>
 </nui-progress-bar>`,
         language: 'html',
       },
@@ -237,33 +249,9 @@ export const PROGRESS_BAR_EXAMPLES_SECTIONS: ComponentSection[] = [
     examples: [
       {
         title: 'codeExamples.html',
-        code: `<nui-progress-bar
-  [value]="80"
-  label="Upload"
-  prefixIcon="ri-upload-cloud-2-line"
-  labelPosition="top"
-/>
-<nui-progress-bar
-  [value]="45"
-  label="Download"
-  suffixIcon="ri-download-cloud-2-line"
-  showValueInLabel
-  labelPosition="left"
-/>
-<nui-progress-bar
-  [value]="65"
-  label="Syncing..."
-  prefixIcon="ri-refresh-line"
-  trailingIcon="ri-check-fill"
-  labelPosition="left"
-/>
-<nui-progress-bar
-  [value]="65"
-  label="Sync"
-  prefixIcon="ri-refresh-line"
-  suffixIcon="ri-check-line"
-  labelPosition="top"
-/>`,
+        code: `<nui-progress-bar [value]="80" label="Upload complete" trailingIcon="ri-check-line" color="success" />
+<nui-progress-bar [value]="45" label="Syncing..." trailingIcon="ri-loader-line" />
+<nui-progress-bar [value]="20" label="Storage critical" trailingIcon="ri-error-warning-line" color="danger" />`,
         language: 'html',
       },
     ],

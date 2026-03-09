@@ -46,10 +46,15 @@
       "description": "Combina una etiqueta descriptiva con el valor de progreso.",
       "note": "Agrega el atributo <code>showValueInLabel</code> para mostrar el valor del progreso en línea junto a la etiqueta."
     },
+    "progress-bar-template": {
+      "title": "Slots de plantilla",
+      "description": "Usa <code>[nuiPbTemplate]</code> con el atributo <code>slot</code> como contenido hijo de <code>nui-progress-bar</code>. Usa <code>slot=\"value\"</code> para personalizar el valor, o <code>slot=\"label\"</code> para la etiqueta. Ambos pueden estar activos al mismo tiempo, cada uno en su propia posición.",
+      "note": "El contexto es idéntico en ambos slots. <code>let-text</code> se enlaza con <code>$implicit</code> — el <strong>único</strong> binding que no necesita clave explícita. Todos los demás sí: <code>let-percent</code> lee la clave <code>percent</code>, <code>let-v</code> lee <code>value</code>, <code>let-max</code> lee <code>max</code>. El binding <code>let-label</code> es exclusivo de <code>slot=\"label\"</code>. El nombre local es siempre libre. Ver la tabla Bindings de contexto."
+    },
     "icons": {
-      "title": "Iconos",
-      "description": "Asocia iconos a la barra de progreso para mejorar su significado visual. Puedes añadir iconos de prefijo o sufijo que decoren la etiqueta, o un icono independiente al final del row de la barra.",
-      "note": "Usa <code>prefixIcon</code> o <code>suffixIcon</code> para decorar la etiqueta. Usa <code>trailingIcon</code> para un icono colocado independientemente al final del row de la barra, sin importar la posición de la etiqueta."
+      "title": "Iconos (trailing)",
+      "description": "Añade un icono independiente al final del row de la barra de progreso, haciendo el estado visualmente claro de un vistazo.",
+      "note": "Usa el input <code>trailingIcon</code> con cualquier clase de RemixIcon. El icono siempre se coloca después del track, independientemente de la posición de <code>labelPosition</code>."
     },
     "customColors": {
       "title": "Colores personalizados",
@@ -60,17 +65,21 @@
       "title": "Pasos",
       "description": "Divide el track en segmentos iguales mediante divisores visuales, ideal para comunicar etapas discretas como pasos de un wizard o flujos de onboarding.",
       "note": "Usa el input <code>steps</code> con un valor ≥ 2. Cada segmento se rellena individualmente a medida que avanza el progreso. Personaliza el ancho del hueco entre segmentos con <code>--nui-pb-step-gap</code>. Nota: el modo <code>indeterminate</code> ignora <code>steps</code>."
-    },
-    "value-template": {
-      "title": "Plantilla de valor personalizada",
-      "description": "Permite personalizar completamente cómo se muestra el valor. Pasa un <code>ng-template</code> con la directiva <code>nuiPbValue</code> como contenido hijo de <code>nui-progress-bar</code>.",
-      "note": "El contexto de la plantilla expone: <code>let-value</code> (número bruto), <code>let-percent</code> (0-100), <code>let-max</code> (valor máximo) y <code>let-text</code> (cadena pre-formateada). Compatible con cualquier <code>valuePosition</code>, incluyendo <code>inside</code>."
     }
   },
   "api": {
     "inputs": {
       "title": "Inputs",
       "description": "Todas las propiedades de entrada disponibles de <code>nui-progress-bar</code>."
+    },
+    "templates": {
+      "title": "Plantillas de contenido",
+      "description": "Pasa un <code>ng-template</code> con <code>[nuiPbTemplate]</code> y el atributo <code>slot</code> como contenido hijo de <code>nui-progress-bar</code>. Ambos slots pueden estar activos simult&#225;neamente, cada uno en su propia posici&#243;n independiente.",
+      "note": "<code>let-text</code> (sin <code>=\"...\"</code>) se enlaza con <code>$implicit</code> — la regla especial de Angular: la <strong>&#250;nica</strong> propiedad del contexto que <strong>no</strong> necesita un mapeo expl&#237;cito. El resto requieren <code>=\"clave\"</code>: <code>let-percent=\"percent\"</code> lee <code>ctx.percent</code>, <code>let-v=\"value\"</code> lee <code>ctx.value</code>. El nombre de variable local (parte izquierda) es siempre libre."
+    },
+    "context": {
+      "title": "Bindings de contexto",
+      "description": "Contexto de plantilla disponible para <code>slot=\"value\"</code> y <code>slot=\"label\"</code> (excepto <code>let-label</code>, exclusivo del slot label). Sintaxis: <code>let-nombre=\"clave\"</code>, excepto <code>$implicit</code>, que se enlaza con un <code>let-nombre</code> simple sin <code>=\"...\"</code>."
     }
   },
   "theming": {

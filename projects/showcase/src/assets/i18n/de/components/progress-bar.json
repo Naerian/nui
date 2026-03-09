@@ -46,10 +46,15 @@
       "description": "Kombiniert eine beschreibende Beschriftung mit dem Fortschrittswert.",
       "note": "Fügen Sie das Attribut <code>showValueInLabel</code> hinzu, um den Fortschrittswert inline mit der Beschriftung anzuzeigen."
     },
+    "progress-bar-template": {
+      "title": "Template-Slots",
+      "description": "Verwenden Sie <code>[nuiPbTemplate]</code> mit dem <code>slot</code>-Attribut als Kindelement von <code>nui-progress-bar</code>. Verwenden Sie <code>slot=\"value\"</code> für die Wertanzeige oder <code>slot=\"label\"</code> für die Beschriftung. Beide können gleichzeitig aktiv sein, jeder in seiner eigenen Position.",
+      "note": "Der Kontext ist für beide Slots identisch. <code>let-text</code> bindet an <code>$implicit</code> — das <strong>einzige</strong> Binding ohne expliziten Schlüssel. Alle anderen benötigen einen: <code>let-percent</code> liest <code>percent</code>, <code>let-v</code> liest <code>value</code>, <code>let-max</code> liest <code>max</code>. Das Binding <code>let-label</code> ist exklusiv für <code>slot=\"label\"</code>. Der lokale Variablenname ist immer frei. Siehe Tabelle Kontext-Bindungen."
+    },
     "icons": {
-      "title": "Symbole",
-      "description": "Verknüpft Symbole mit der Fortschrittsanzeige, um deren visuelle Bedeutung zu verbessern. Sie können Präfix- oder Suffix-Symbole hinzufügen, die die Beschriftung dekorieren, oder ein unabhängiges Symbol am Ende der Fortschrittsanzeige.",
-      "note": "Verwenden Sie <code>prefixIcon</code> oder <code>suffixIcon</code>, um die Beschriftung zu dekorieren. Verwenden Sie <code>trailingIcon</code> für ein Symbol, das unabhängig am Ende der Fortschrittsanzeige platziert wird, unabhängig von der Position der Beschriftung."
+      "title": "Symbole (trailing)",
+      "description": "Fügt ein eigenständiges Symbol am Ende der Fortschrittsanzeige hinzu, das den Status auf einen Blick visuell verdeutlicht.",
+      "note": "Verwenden Sie das <code>trailingIcon</code>-Input mit einer beliebigen RemixIcon-Klasse. Das Symbol wird immer nach dem Track platziert, unabhängig von <code>labelPosition</code>."
     },
     "customColors": {
       "title": "Benutzerdefinierte Farben",
@@ -60,17 +65,21 @@
       "title": "Schritte",
       "description": "Teilt den Track in gleiche Segmente durch visuelle Trennlinien auf, ideal zur Darstellung diskreter Phasen wie Wizard-Schritte oder Onboarding-Abläufe.",
       "note": "Verwenden Sie das <code>steps</code>-Input mit einem Wert ≥ 2. Jedes Segment füllt sich individuell, wenn der Fortschritt voranschreitet. Passen Sie den Abstand zwischen den Segmenten über <code>--nui-pb-step-gap</code> an. Hinweis: Im <code>indeterminate</code>-Modus wird <code>steps</code> ignoriert."
-    },
-    "value-template": {
-      "title": "Benutzerdefinierte Wertvorlage",
-      "description": "Ermöglicht die vollständige Kontrolle über die Darstellung des Werts. Übergeben Sie ein <code>ng-template</code> mit der Direktive <code>nuiPbValue</code> als Kindelement von <code>nui-progress-bar</code>.",
-      "note": "Der Vorlagenkontext stellt bereit: <code>let-value</code> (Rohzahl), <code>let-percent</code> (0-100), <code>let-max</code> (Maximalwert) und <code>let-text</code> (vorformatierter Text). Funktioniert mit jeder <code>valuePosition</code>, einschließlich <code>inside</code>."
     }
   },
   "api": {
     "inputs": {
       "title": "Inputs",
       "description": "Alle verfügbaren Input-Eigenschaften von <code>nui-progress-bar</code>."
+    },
+    "templates": {
+      "title": "Inhaltsvorlagen",
+      "description": "Übergeben Sie ein <code>ng-template</code> mit <code>[nuiPbTemplate]</code> und dem <code>slot</code>-Attribut als Kindelement von <code>nui-progress-bar</code>. Beide Slots können gleichzeitig aktiv sein, jeder in seiner eigenen unabhängigen Position.",
+      "note": "<code>let-text</code> (ohne <code>=\"...\"</code>) bindet an <code>$implicit</code> &mdash; Angulars besondere Regel: die <strong>einzige</strong> Kontexteigenschaft, die <strong>kein</strong> explizites Mapping benötigt. Alle anderen verwenden <code>=\"Schlüssel\"</code>: <code>let-percent=\"percent\"</code> liest <code>ctx.percent</code>, <code>let-v=\"value\"</code> liest <code>ctx.value</code>. Der Name der lokalen Variable (linke Seite) ist immer frei wählbar."
+    },
+    "context": {
+      "title": "Kontext-Bindungen",
+      "description": "Template-Kontext für <code>slot=\"value\"</code> und <code>slot=\"label\"</code> (außer <code>let-label</code>, das exklusiv für den label-Slot ist). Syntax: <code>let-Name=\"Schlüssel\"</code> &mdash; außer <code>$implicit</code>, das mit einem einfachen <code>let-Name</code> ohne <code>=\"...\"</code> gebunden wird."
     }
   },
   "theming": {

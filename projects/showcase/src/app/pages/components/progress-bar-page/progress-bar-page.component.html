@@ -78,8 +78,8 @@
                 <div class="example-preview flex-column gap-3">
                   <nui-progress-bar [indeterminate]="true" />
                   <nui-progress-bar [indeterminate]="true" color="success" />
-                  <nui-progress-bar [indeterminate]="true" variant="outline" color="warning" />
-                  <nui-progress-bar [indeterminate]="true" variant="ghost" color="danger" />
+                  <nui-progress-bar [indeterminate]="true" color="success" compact="" />
+                  <nui-progress-bar [indeterminate]="true" color="danger" compact="" />
                 </div>
               }
 
@@ -112,30 +112,57 @@
                 </div>
               }
 
-              @case ('value-template') {
+              @case ('progress-bar-template') {
                 <div class="example-preview flex-column gap-4">
+                  <!-- slot="value" — let-percent="percent": named key, local name is free -->
                   <nui-progress-bar [value]="70" valuePosition="right">
-                    <ng-template nuiPbValue let-percent>
-                      @if (percent >= 80) { 🔥 } @else if (percent >= 50) { 🚀 } @else { 🐢 }
-                      {{ percent | number:'1.0-0' }}%
+                    <ng-template nuiPbTemplate slot="value" let-percent="percent">
+                      @if (percent >= 80) {
+                        🔥
+                      } @else if (percent >= 50) {
+                        🚀
+                      } @else {
+                        🐢
+                      }
+                      {{ percent | number: '1.0-0' }}%
                     </ng-template>
                   </nui-progress-bar>
-                  <nui-progress-bar [value]="3" [maxValue]="5" color="success" valuePosition="right">
-                    <ng-template nuiPbValue let-v let-max="max">
-                      {{ v | number:'1.0-0' }} / {{ max }} ✅
+
+                  <!-- slot="label" + slot="value" activos simultáneamente -->
+                  <nui-progress-bar [value]="80" labelPosition="left" valuePosition="right">
+                    <ng-template nuiPbTemplate slot="label">
+                      <i class="ri-upload-cloud-2-line"></i>
+                      Upload&nbsp;
+                    </ng-template>
+                    <ng-template nuiPbTemplate slot="value" let-percent="percent">
+                      @if (percent >= 100) {
+                        OK
+                      } @else {
+                        {{ percent | number: '1.0-0' }}%
+                      }
                     </ng-template>
                   </nui-progress-bar>
-                  <nui-progress-bar [value]="45" valuePosition="inside" color="warning" variant="ghost">
-                    <ng-template nuiPbValue let-percent>★ {{ percent | number:'1.0-0' }}%</ng-template>
+
+                  <!-- slot="label" con let-text ($implicit — sin ="...") -->
+                  <nui-progress-bar
+                    [value]="3"
+                    [maxValue]="5"
+                    labelPosition="left"
+                    color="success"
+                    valuePosition="hidden"
+                  >
+                    <ng-template nuiPbTemplate slot="label" let-text>
+                      <i class="ri-file-line"></i>
+                      &nbsp;Files {{ text }}
+                    </ng-template>
                   </nui-progress-bar>
                 </div>
               }
 
               @case ('value-positions') {
                 <div class="example-preview flex-column gap-4">
-                  @for (pos of valuePositions; track pos) {
-                    <nui-progress-bar [value]="70" [valuePosition]="pos" />
-                  }
+                  <nui-progress-bar [value]="70" [valuePosition]="'top'" />
+                  <nui-progress-bar [value]="70" [valuePosition]="'right'" />
                 </div>
               }
 
@@ -145,15 +172,15 @@
                     [value]="35"
                     [maxValue]="100"
                     valueFormat="percentage"
-                    label="percentage"
-                    labelPosition="left"
+                    label="Percentage"
+                    labelPosition="top"
                   />
                   <nui-progress-bar
                     [value]="35"
                     [maxValue]="100"
                     valueFormat="fractional"
-                    label="fractional"
-                    labelPosition="left"
+                    label="Fractional"
+                    labelPosition="top"
                   />
                 </div>
               }
@@ -161,9 +188,7 @@
               @case ('label') {
                 <div class="example-preview flex-column gap-4">
                   <nui-progress-bar [value]="60" label="Uploading file..." labelPosition="top" />
-                  <nui-progress-bar [value]="60" label="Uploading file..." labelPosition="bottom" />
                   <nui-progress-bar [value]="60" label="Uploading" labelPosition="left" />
-                  <nui-progress-bar [value]="60" label="Done" labelPosition="right" />
                 </div>
               }
 
@@ -189,23 +214,16 @@
                 <div class="example-preview flex-column gap-3">
                   <nui-progress-bar
                     [value]="80"
-                    label="Upload"
-                    prefixIcon="ri-upload-cloud-2-line"
-                    labelPosition="top"
+                    label="Upload complete"
+                    trailingIcon="ri-check-line"
+                    color="success"
                   />
+                  <nui-progress-bar [value]="45" label="Syncing..." trailingIcon="ri-loader-line" />
                   <nui-progress-bar
-                    [value]="45"
-                    label="Download"
-                    suffixIcon="ri-download-cloud-2-line"
-                    showValueInLabel
-                    labelPosition="left"
-                  />
-                  <nui-progress-bar
-                    [value]="65"
-                    label="Syncing..."
-                    prefixIcon="ri-refresh-line"
-                    trailingIcon="ri-check-fill"
-                    labelPosition="left"
+                    [value]="20"
+                    label="Storage critical"
+                    trailingIcon="ri-error-warning-line"
+                    color="danger"
                   />
                 </div>
               }

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { NuiProgressBarValueTemplateDirective, ProgressBarComponent } from 'nui';
+import { ProgressBarTemplateDirective, ProgressBarComponent } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
 import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';
@@ -15,7 +15,8 @@ import { PROGRESS_BAR_PAGE_CONFIG } from './progress-bar-page.config';
     CommonModule,
     TranslateModule,
     ProgressBarComponent,
-    NuiProgressBarValueTemplateDirective,
+    ProgressBarTemplateDirective,
+
     CodeBlockComponent,
     SectionTitleComponent,
     ComponentTabsComponent,
@@ -37,7 +38,6 @@ export class ProgressBarPageComponent extends BaseComponentPage implements OnDes
     'neutral',
   ] as const;
   readonly variants = ['solid', 'outline', 'ghost'] as const;
-  readonly valuePositions = ['inside', 'top', 'bottom', 'left', 'right', 'hidden'] as const;
 
   dynamicColorValue = signal({
     value: 0,
@@ -58,11 +58,11 @@ export class ProgressBarPageComponent extends BaseComponentPage implements OnDes
         'variants',
         'indeterminate',
         'steps',
-        'value-template',
         'value-positions',
         'value-format',
         'label',
         'combined',
+        'progress-bar-template',
         'icons',
         'custom-colors',
       ],
@@ -71,7 +71,7 @@ export class ProgressBarPageComponent extends BaseComponentPage implements OnDes
       id: 'api',
       label: 'common.tabs.api',
       icon: 'ri-braces-line',
-      sections: ['api-inputs'],
+      sections: ['api-inputs', 'api-templates', 'api-context'],
     },
     {
       id: 'theming',

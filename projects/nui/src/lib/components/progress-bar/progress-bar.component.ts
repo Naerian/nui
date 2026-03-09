@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChild, input, TemplateRef } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, input } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ProgressBarValuePosition,
@@ -11,7 +11,7 @@ import {
 import { NUIColor, NUIVariant } from '../../configs';
 import { DEFAULT_COLOR, DEFAULT_VARIANT } from '../../configs/nui.consts';
 import { injectProgressBarConfig } from '../../configs/progress-bar';
-import { NuiProgressBarValueTemplateDirective } from './progress-bar-value-template.directive';
+import { ProgressBarTemplateDirective } from './progress-bar-template.directive';
 
 @Component({
   selector: 'nui-progress-bar',
@@ -37,16 +37,16 @@ export class ProgressBarComponent {
   readonly valuePosition = input<ProgressBarValuePosition>(DEFAULT_PB_VALUE_POSITION);
   readonly valueFormat = input<ProgressBarValueFormat>(DEFAULT_PB_VALUE_FORMAT);
   readonly label = input<string | null>(null);
-  readonly prefixIcon = input<string | null>(null);
-  readonly suffixIcon = input<string | null>(null);
+  readonly ariaLabel = input<string | null>(null);
   readonly trailingIcon = input<string | null>(null);
   readonly labelPosition = input<ProgressBarLabelPosition>(DEFAULT_PB_LABEL_POSITION);
   readonly showValueInLabel = input<boolean, unknown>(false, { transform: booleanAttribute });
   readonly steps = input<number>(0);
 
-  // ─── Content template ────────────────────────────────────────────────────────
-  /** Optional custom template for the value display. Receives {value, percent, max, text} context. */
-  readonly valueTemplate = contentChild(NuiProgressBarValueTemplateDirective, { read: TemplateRef });
+  // ─── Content templates ───────────────────────────────────────────────────────
+  private readonly _templates = contentChildren(ProgressBarTemplateDirective);
+  readonly valueTemplate = computed(() => this._templates().find(t => t.slot() === 'value')?.templateRef ?? null);
+  readonly labelTemplate = computed(() => this._templates().find(t => t.slot() === 'label')?.templateRef ?? null);
 
   // ─── Static IDs (generados una vez) ─────────────────────────────────────────────
   readonly id = `nui-pb-${Math.random().toString(36).substring(2, 9)}`;
@@ -103,26 +103,21 @@ export class ProgressBarComponent {
       : `${val} / ${max}`;
   });
 
+  /**
+   * Plain-text label string combining `label` + optional inline value.
+   * No HTML injection — icons belong in `nuiPbLabel` template.
+   */
   readonly finalLabelText = computed<string | null>(() => {
     const lbl = this.label();
-    const prefix = this.prefixIcon();
-    const suffix = this.suffixIcon();
     const showValue = this.showValueInLabel();
-
-    if (!lbl && !prefix && !suffix && !showValue) return null;
-
-    const prefixHtml = prefix ? `<i class="${prefix}"></i>` : '';
-    const suffixHtml = suffix ? `<i class="${suffix}"></i>` : '';
-
-    if (this.indeterminate()) {
-      const parts = [prefixHtml, lbl, suffixHtml].filter(Boolean);
-      return parts.length > 0 ? parts.join(' ') : null;
-    }
-
-    const valueText = showValue ? this.computedValueText() : '';
-    const parts = [prefixHtml, lbl, valueText, suffixHtml].filter(Boolean);
+    if (!lbl && !showValue) return null;
+    if (this.indeterminate()) return lbl || null;
+    const parts = [lbl, showValue ? this.computedValueText() : ''].filter(Boolean);
     return parts.length > 0 ? parts.join(' ') : null;
   });
+
+  /** True when there is any visible label — either via template or text. */
+  readonly hasLabel = computed(() => !!this.labelTemplate() || !!this.finalLabelText());
 
   readonly ariaValueText = computed<string | null>(() => {
     if (this.indeterminate()) return null;
@@ -135,11 +130,26 @@ export class ProgressBarComponent {
   readonly valueTemplateContext = computed(() => {
     const val = this.value();
     const max = this.maxValue();
+    const text = this.computedValueText();
     const percent =
       val !== null && max !== null && max !== 0
         ? Math.max(0, Math.min(100, (val / max) * 100))
         : 0;
-    return { $implicit: val, value: val, percent, max, text: this.computedValueText() };
+    return { $implicit: text, text, value: val, percent, max, label: this.label() };
+  });
+
+  // Alias used in HTML for both slots — same context object.
+  readonly templateContext = this.valueTemplateContext;
+
+  /**
+   * Hides the inside value when the fill is too narrow to contain it legibly.
+   * Threshold: < 15 % of total width.
+   */
+  readonly insideValueHidden = computed<boolean>(() => {
+    const val = this.value();
+    const max = this.maxValue();
+    if (!val || max === null || max === 0) return true;
+    return (val / max) * 100 < 15;
   });
 
   readonly showOutsideValue = computed<boolean>(
