@@ -5,6 +5,7 @@
   border: 1px solid var(--nui-border-default);
   border-radius: var(--nui-border-radius-md);
   overflow: hidden;
+  box-shadow: var(--nui-box-shadow-xs);
 
   .code-block-header {
     display: flex;

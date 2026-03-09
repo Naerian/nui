@@ -15,10 +15,10 @@ export const TOOLTIP_EXAMPLES_SECTIONS: ComponentSection[] = [
         code: `// Simple tooltip with text and arrow
 <button nuiTooltip="Save changes">Save</button>
   
- // Tooltip without arrow
- <button nuiTooltip="No arrow tooltip" [nuiTooltipShowArrow]="false">
-   No Arrow
- </button>`,
+// Tooltip without arrow
+<button nuiTooltip="No arrow tooltip" [nuiTooltipShowArrow]="false">
+  No Arrow
+</button>`,
         language: 'html',
       },
     ],
