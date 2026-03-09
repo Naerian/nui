@@ -1,5 +1,5 @@
 {
-  "title": "Sidebar Panel",
+  "title": "Panel lateral",
   "subtitle": "Paneles laterales deslizantes con CDK Overlay para mostrar contenido dinámico",
   "examples": {
     "basic": {
