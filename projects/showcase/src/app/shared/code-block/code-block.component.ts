@@ -19,6 +19,12 @@ export class CodeBlockComponent {
   selectedTab = signal(0);
   copySuccess = signal(false);
 
+  get currentLines(): string[] {
+    const lines = this.currentCode.split('\n');
+    if (lines.at(-1) === '') lines.pop();
+    return lines;
+  }
+
   get currentCode(): string {
     if (this.examples && this.examples.length > 0) {
       return this.examples[this.selectedTab()].code;

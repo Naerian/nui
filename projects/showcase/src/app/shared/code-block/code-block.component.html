@@ -45,5 +45,5 @@
   </button>
 
   <!-- Code display -->
-  <pre class="code-block-pre" [attr.data-language]="currentLanguage"><code>{{ currentCode }}</code></pre>
+  <pre class="code-block-pre" [attr.data-language]="currentLanguage"><code>@for (line of currentLines; track $index) {<span class="code-line"><span class="line-number">{{ $index + 1 }}</span><span class="line-content">{{ line }}</span></span>}</code></pre>
 </div>
