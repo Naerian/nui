@@ -354,7 +354,7 @@
           "description": "Projizierter Text oder der Input <code>label</code> dienen als zugänglicher Name ohne zusätzliches Attribut."
         },
         "iconText": {
-          "description": "Das Icon erhält automatisch aria-hidden; der sichtbare Text ist ausreichend als Name."
+          "description": "Das Icon erhält automatisch<code>aria-hidden</code>. Der sichtbare Text ist ausreichend als Name."
         },
         "iconOnly": {
           "description": "Eines der beiden ist <strong>erforderlich</strong>. Priorität: Input <code>aria-label</code> &gt; Input <code>title</code>. Die Komponente stellt <code>computedAriaLabel()</code> mit der aufgelösten Logik bereit."
@@ -387,8 +387,8 @@
         }
       },
       "elements": {
-        "disabled": "<code>disabled</code> (nativ)",
-        "ariaHiddenIcons": "<code>aria-hidden=\"true\"</code> auf Icons"
+        "disabled": "<code>disabled</code>",
+        "ariaHiddenIcons": "<code>aria-hidden=\"true\"</code>"
       },
       "info": {
         "staticValue": "Statisch"

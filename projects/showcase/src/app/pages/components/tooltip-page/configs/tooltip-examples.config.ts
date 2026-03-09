@@ -123,7 +123,7 @@ export const TOOLTIP_EXAMPLES_SECTIONS: ComponentSection[] = [
         title: 'codeExamples.html',
         code: `<button [nuiTooltip]="tooltipTemplate">View Info</button>
 
-<!-- Template Content -->
+// Template Content
 <ng-template #tooltipTemplate>
   <div class="custom-tooltip">
     <strong>Important Information</strong>
@@ -152,7 +152,7 @@ export const TOOLTIP_EXAMPLES_SECTIONS: ComponentSection[] = [
   Interactive Tooltip
 </button>
 
-<!-- Template Content -->
+// Template Content
 <ng-template #interactiveTemplate>
   <div class="interactive-tooltip">
     <h4>Available Actions</h4>

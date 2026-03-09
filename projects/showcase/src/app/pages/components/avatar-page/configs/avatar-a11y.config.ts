@@ -88,15 +88,15 @@ export const AVATAR_A11Y_SECTIONS: ComponentSection[] = [
       ],
       rows: [
         [
-          '<code>aria-label</code> = tooltip()',
+          '<code>aria-label</code>',
           'components.avatar.a11y.naming.rows.tooltip.description',
         ],
         [
-          '<code>aria-label</code> = alt()',
+          '<code>aria-label</code>',
           'components.avatar.a11y.naming.rows.alt.description',
         ],
         [
-          '<code>aria-label</code> = "avatar"',
+          '<code>aria-label</code>',
           'components.avatar.a11y.naming.rows.fallback.description',
         ],
         [

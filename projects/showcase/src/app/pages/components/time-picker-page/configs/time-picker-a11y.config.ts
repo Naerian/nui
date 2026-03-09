@@ -68,7 +68,7 @@ export const TIME_PICKER_A11Y_SECTIONS: ComponentSection[] = [
       ],
       rows: [
         [
-          'components.timePicker.a11y.naming.info.i18nLabel',
+          'components.timePicker.a11y.naming.info.containerLabel',
           'components.timePicker.a11y.naming.rows.container.description',
         ],
         [
@@ -76,7 +76,7 @@ export const TIME_PICKER_A11Y_SECTIONS: ComponentSection[] = [
           'components.timePicker.a11y.naming.rows.columns.description',
         ],
         [
-          'components.timePicker.a11y.naming.info.a11yHelpTokens',
+          'components.timePicker.a11y.naming.info.helpTokens',
           'components.timePicker.a11y.naming.rows.help.description',
         ],
       ],
