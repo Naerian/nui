@@ -653,8 +653,13 @@ export class TooltipDirective implements OnInit, OnDestroy {
     this.removeScrollListener();
 
     const scrollHandler = () => {
-      // Cerrar el tooltip inmediatamente al hacer scroll
-      this.hide();
+      // Cierre inmediato al hacer scroll, ignorando hideDelay.
+      // hide() respeta el hideDelay configurado (puede ser >1s), lo que causa
+      // que el tooltip quede "flotando" mientras el usuario desplaza la página.
+      this.clearTimeouts();
+      if (this.isVisible()) {
+        this.isVisible.set(false);
+      }
     };
 
     // Escuchar scroll en la ventana y en todos los ancestros scrollables
