@@ -2,38 +2,10 @@
 @use '../../../../styles/abstracts/mixins-base' as mixins;
 
 /**
- * Sistema "Shapeshifter" para Paginator
- * 
- * Arquitectura de variantes:
- * - Botones inactivos: Siempre Ghost (transparente)
- * - Botón activo: Según variante (Solid/Outline/Ghost)
- * - Navegación (Prev/Next/First/Last): Ghost para sobriedad
+ * Paginator — sin variantes de color semántico.
+ * El color activo lo define el ThemeService usando el primary del preset.
+ * Solo se diferencian las 3 variantes de estilo: solid (default), outline, ghost.
  */
-@mixin paginator-theme($color, $variant: 'solid') {
-  // Botones inactivos (páginas no seleccionadas) - Siempre Ghost
-  --nui-pg-bg: var(--nui-pg-#{$color}-ghost-bg);
-  --nui-pg-text: var(--nui-pg-#{$color}-ghost-text);
-  --nui-pg-border: var(--nui-pg-#{$color}-ghost-border);
-  --nui-pg-hover-bg: var(--nui-pg-#{$color}-ghost-hover-bg);
-  --nui-pg-hover-border: var(--nui-pg-#{$color}-ghost-hover-border);
-  --nui-pg-hover-text: var(--nui-pg-#{$color}-ghost-text);
-
-  // Botón activo - Según la variante especificada
-  --nui-pg-active-bg: var(--nui-pg-#{$color}-#{$variant}-active-bg);
-  --nui-pg-active-border: var(--nui-pg-#{$color}-#{$variant}-active-border);
-  --nui-pg-active-text: var(--nui-pg-#{$color}-#{$variant}-active-text);
-
-  // Botones de navegación (Prev/Next/First/Last) - Ghost para sobriedad
-  --nui-pg-nav-bg: var(--nui-pg-#{$color}-nav-bg);
-  --nui-pg-nav-text: var(--nui-pg-#{$color}-nav-text);
-  --nui-pg-nav-border: var(--nui-pg-#{$color}-nav-border);
-  --nui-pg-nav-hover-bg: var(--nui-pg-#{$color}-nav-hover-bg);
-  --nui-pg-nav-hover-text: var(--nui-pg-#{$color}-nav-hover-text);
-  --nui-pg-nav-hover-border: var(--nui-pg-#{$color}-nav-hover-border);
-
-  // Focus Ring
-  --nui-pg-focus-ring: var(--nui-pg-#{$color}-focus-ring);
-}
 
 // ============================================================================
 // HOST & LAYOUT STRUCTURE
@@ -52,25 +24,37 @@
 :host.nui-paginator-container {
   display: contents;
 
-  // --- COLORS (Automatic Generation) ---
-  $colors: primary, secondary, success, info, warning, danger, accent, neutral;
-  $variants: solid, outline, ghost;
+  // --- Base tokens (invariantes a la variante) ---
+  // Botones inactivos: siempre ghost style
+  --nui-pg-bg: var(--nui-pg-ghost-bg);
+  --nui-pg-text: var(--nui-pg-ghost-text);
+  --nui-pg-border: var(--nui-pg-ghost-border);
+  --nui-pg-hover-bg: var(--nui-pg-ghost-hover-bg);
+  --nui-pg-hover-border: var(--nui-pg-ghost-hover-border);
+  --nui-pg-hover-text: var(--nui-pg-ghost-text);
 
-  @each $color in $colors {
-    &--#{$color} {
-      // By default, apply the solid variant styles for the color preset
-      @include paginator-theme($color, 'solid');
+  // Botón activo: variante solid por defecto
+  --nui-pg-active-bg: var(--nui-pg-solid-active-bg);
+  --nui-pg-active-border: var(--nui-pg-solid-active-border);
+  --nui-pg-active-text: var(--nui-pg-solid-active-text);
 
-      @each $variant in $variants {
-        &.nui-paginator-container--#{$variant} {
-          @include paginator-theme($color, $variant);
-        }
-      }
+  // Botones de navegación (prev/next/first/last) — tokens directos del ThemeService
 
-      .nui-paginator__ellipsis {
-        color: var(--nui-pg-#{$color}-ellipsis-color, var(--nui-text-secondary));
-      }
-    }
+  // --- VARIANTES de estilo (solo afectan al botón activo) ---
+  &.nui-paginator-container--outline {
+    --nui-pg-active-bg: var(--nui-pg-outline-active-bg);
+    --nui-pg-active-border: var(--nui-pg-outline-active-border);
+    --nui-pg-active-text: var(--nui-pg-outline-active-text);
+  }
+
+  &.nui-paginator-container--ghost {
+    --nui-pg-active-bg: var(--nui-pg-ghost-active-bg);
+    --nui-pg-active-border: var(--nui-pg-ghost-active-border);
+    --nui-pg-active-text: var(--nui-pg-ghost-active-text);
+  }
+
+  .nui-paginator__ellipsis {
+    color: var(--nui-pg-ellipsis-color, var(--nui-text-secondary));
   }
 
   // --- GENERIC AREAS ---
@@ -444,7 +428,7 @@
     &--#{$size} {
       .nui-paginator__button {
         @include mixins.nui-control-size($size, true);
-        line-height: 1; // Asegura que el contenido esté centrado verticalmente
+        line-height: 1.2; // Asegura que el contenido esté centrado verticalmente
 
         i {
           font-size: var(--nui-pg-icon-size-#{$size});
@@ -471,31 +455,7 @@
     }
   }
 
-  .nui-paginator__area--self-start {
-    align-self: flex-start;
-  }
-  .nui-paginator__area--self-center {
-    align-self: center;
-  }
-  .nui-paginator__area--self-end {
-    align-self: flex-end;
-  }
-
-  .nui-paginator__area--justify-start {
-    justify-content: flex-start;
-    text-align: left;
-  }
-  .nui-paginator__area--justify-center {
-    justify-content: center;
-    text-align: center;
-  }
-  .nui-paginator__area--justify-space-between {
-    justify-content: space-between;
-  }
-  .nui-paginator__area--justify-end {
-    justify-content: flex-end;
-    text-align: right;
-  }
+  // --self-* and --justify-* classes are defined inside .nui-paginator__horizontal-areas above
 }
 
 // Accessibility Helper

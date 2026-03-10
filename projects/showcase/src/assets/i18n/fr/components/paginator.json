@@ -10,10 +10,10 @@
     "description": "Définissez comment les boutons de navigation sont affichés : texte, icônes ou les deux. Personnalisez l'apparence des boutons de navigation pour correspondre au style de votre application.",
     "note": "Utilisez l'entrée <code>navDisplay</code> avec les valeurs <code>'text'</code>, <code>'icon'</code> ou <code>'both'</code> pour afficher uniquement le texte, uniquement les icônes ou les deux dans les boutons de navigation. Les icônes sont basées sur la bibliothèque Remix Icon et sont automatiquement attribuées selon le type de bouton (première page, page précédente, page suivante, dernière page)."
   },
-  "colors": {
-    "title": "Couleurs et variantes",
-    "description": "Supporte toutes les couleurs et variantes NUI (Solid, Outline, Ghost).",
-    "note": "Combinez <code>color</code> et <code>variant</code> pour personnaliser l'apparence du paginateur selon vos besoins."
+  "variants": {
+    "title": "Variantes",
+    "description": "Supporte toutes les variantes (Solid, Outline, Ghost) de NUI.",
+    "note": "Appliquez la variante souhaitée en utilisant l'entrée <code>variant</code> avec les valeurs <code>'solid'</code>, <code>'outline'</code> ou <code>'ghost'</code>. La variante affecte principalement le style du bouton de page actif, tandis que les boutons de navigation conservent un style cohérent pour garantir la clarté et l'utilisabilité."
   },
   "sizes": {
     "title": "Options de taille de page",

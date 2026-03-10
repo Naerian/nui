@@ -10,10 +10,10 @@
     "description": "Definiere, wie die Navigationsschaltflächen angezeigt werden: Text, Icons oder beides. Passe das Erscheinungsbild der Navigationsschaltflächen an deinen Anwendungsstil an.",
     "note": "Verwende den Input <code>navDisplay</code> mit den Werten <code>'text'</code>, <code>'icon'</code> oder <code>'both'</code>, um nur Text, nur Icons oder beides in den Navigationsschaltflächen anzuzeigen. Icons basieren auf der Remix Icon-Bibliothek und werden je nach Schaltflächentyp automatisch zugewiesen (erste Seite, vorherige Seite, nächste Seite, letzte Seite)."
   },
-  "colors": {
-    "title": "Farben und Varianten",
-    "description": "Unterstützt alle NUI-Farben und -Varianten (Solid, Outline, Ghost).",
-    "note": "Kombiniere <code>color</code> und <code>variant</code>, um das Erscheinungsbild der Seitennavigation nach deinen Bedürfnissen anzupassen."
+  "variants": {
+    "title": "Varianten",
+    "description": "Unterstützt alle NUI-Varianten (Solid, Outline, Ghost).",
+    "note": "Wende die gewünschte Variante mit dem Input <code>variant</code> und den Werten <code>'solid'</code>, <code>'outline'</code> oder <code>'ghost'</code> an. Die Variante beeinflusst hauptsächlich den Stil der aktiven Seiten-Schaltfläche, während die Navigationsschaltflächen einen konsistenten Stil beibehalten, um Klarheit und Benutzerfreundlichkeit zu gewährleisten."
   },
   "sizes": {
     "title": "Seitengrößenoptionen",

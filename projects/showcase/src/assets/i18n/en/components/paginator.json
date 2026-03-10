@@ -10,10 +10,10 @@
     "description": "Define how the navigation buttons are displayed: text, icons or both. Customize the appearance of navigation buttons to match your application style.",
     "note": "Use the <code>navDisplay</code> input with values <code>'text'</code>, <code>'icon'</code> or <code>'both'</code> to show only text, only icons or both in the navigation buttons. Icons are based on the Remix Icon library and are automatically assigned depending on the button type (first page, previous page, next page, last page)."
   },
-  "colors": {
-    "title": "Colors and variants",
-    "description": "Supports all NUI colors and variants (Solid, Outline, Ghost).",
-    "note": "Combine <code>color</code> and <code>variant</code> to customize the appearance of the paginator to your needs."
+  "variants": {
+    "title": "Variants",
+    "description": "Supports all NUI variants (Solid, Outline, Ghost).",
+    "note": "Apply the desired variant using the <code>variant</code> input with values <code>'solid'</code>, <code>'outline'</code> or <code>'ghost'</code>. The variant mainly affects the style of the active page button, while the navigation buttons maintain a consistent style to ensure clarity and usability."
   },
   "sizes": {
     "title": "Page size options",

@@ -373,13 +373,16 @@ export class ThemeService {
       css += this.generateButtonVariables(name, baseColor);
       css += this.generateFabButtonVariables(name, baseColor);
       css += this.generateSelectButtonVariables(name, baseColor);
-      css += this.generatePaginatorVariables(name, baseColor);
       css += this.generateToastVariables(name, baseColor);
       css += this.generateAvatarVariables(name, baseColor);
       css += this.generateActionMenuVariables(name, baseColor);
       css += this.generatePopoverVariables(name, baseColor);
       css += this.generateProgressBarVariables(name, baseColor);
     });
+
+    // Paginator uses a single color token set (preset primary) — no per-color variants
+    const primaryColor = colors['primary'] ?? Object.values(colors)[0];
+    css += this.generatePaginatorVariables(primaryColor);
 
     // Generar variables de Tooltip (no depende de colores semánticos)
     css += this.generateTooltipVariables();
@@ -823,68 +826,56 @@ export class ThemeService {
    *
    * Esta arquitectura evita interfaces "cargadas" y dirige la atención al botón activo.
    */
-  private generatePaginatorVariables(name: string, color: string): string {
+  /**
+   * Genera las variables CSS del Paginator usando el color primario del preset.
+   * Sin dimensión de color semántico — un solo conjunto de tokens flat.
+   */
+  private generatePaginatorVariables(color: string): string {
     const isDark = this._isDarkMode();
     const contrastText = this.getContrastColor(color);
     const grays = this.grays();
 
-    // Alpha variants para efectos sutiles
     const alpha10 = this.withAlpha(color, 0.1);
     const alpha15 = this.withAlpha(color, 0.15);
-
-    // Color base y hover para modo dark/light
     const hoverBg = this.withAlpha(color, 0.05);
 
-    return `      
-      /* Inactive buttons - Always Ghost */
-      --nui-pg-${name}-ghost-bg: transparent;
-      --nui-pg-${name}-ghost-text: ${isDark ? grays[300] : grays[700]};
-      --nui-pg-${name}-ghost-border: transparent;
-      --nui-pg-${name}-ghost-hover-bg: ${hoverBg};
-      --nui-pg-${name}-ghost-hover-border: transparent;
+    return `
+      /* Paginator inactive buttons (always ghost) */
+      --nui-pg-ghost-bg: transparent;
+      --nui-pg-ghost-text: ${isDark ? grays[300] : grays[700]};
+      --nui-pg-ghost-border: transparent;
+      --nui-pg-ghost-hover-bg: ${hoverBg};
+      --nui-pg-ghost-hover-border: transparent;
 
-      /* Active button - Variant: Solid */
-      --nui-pg-${name}-solid-bg: transparent;
-      --nui-pg-${name}-solid-text: ${isDark ? grays[300] : grays[700]};
-      --nui-pg-${name}-solid-border: transparent;
-      --nui-pg-${name}-solid-hover-bg: ${hoverBg};
-      --nui-pg-${name}-solid-hover-border: transparent;
-      --nui-pg-${name}-solid-active-bg: ${color};
-      --nui-pg-${name}-solid-active-text: ${contrastText};
-      --nui-pg-${name}-solid-active-border: ${color};
+      /* Paginator active button: Solid */
+      --nui-pg-solid-active-bg: ${color};
+      --nui-pg-solid-active-text: ${contrastText};
+      --nui-pg-solid-active-border: ${color};
 
-      /* Active button - Variant: Outline */
-      --nui-pg-${name}-outline-bg: transparent;
-      --nui-pg-${name}-outline-text: ${isDark ? grays[300] : grays[700]};
-      --nui-pg-${name}-outline-border: transparent;
-      --nui-pg-${name}-outline-hover-bg: ${hoverBg};
-      --nui-pg-${name}-outline-hover-border: transparent;
-      --nui-pg-${name}-outline-active-bg: ${alpha10};
-      --nui-pg-${name}-outline-active-text: ${color};
-      --nui-pg-${name}-outline-active-border: ${color};
+      /* Paginator active button: Outline */
+      --nui-pg-outline-active-bg: ${alpha10};
+      --nui-pg-outline-active-text: ${color};
+      --nui-pg-outline-active-border: ${color};
 
-      /* Active button - Variant: Ghost */
-      --nui-pg-${name}-ghost-active-bg: ${alpha15};
-      --nui-pg-${name}-ghost-active-text: ${isDark ? this.tint(color, 30) : this.shade(color, 10)};
-      --nui-pg-${name}-ghost-active-border: transparent;
+      /* Paginator active button: Ghost */
+      --nui-pg-ghost-active-bg: ${alpha15};
+      --nui-pg-ghost-active-text: ${isDark ? this.tint(color, 30) : this.shade(color, 10)};
+      --nui-pg-ghost-active-border: transparent;
 
-      /* Navigation buttons (Prev/Next) - Always Ghost for subtlety */
-      --nui-pg-${name}-nav-bg: transparent;
-      --nui-pg-${name}-nav-text: ${isDark ? grays[400] : grays[600]};
-      --nui-pg-${name}-nav-border: transparent;
-      --nui-pg-${name}-nav-hover-bg: ${hoverBg};
-      --nui-pg-${name}-nav-hover-text: ${isDark ? grays[200] : grays[800]};
-      --nui-pg-${name}-nav-hover-border: transparent;
+      /* Paginator navigation buttons (prev/next/first/last) */
+      --nui-pg-nav-bg: transparent;
+      --nui-pg-nav-text: ${isDark ? grays[400] : grays[600]};
+      --nui-pg-nav-border: transparent;
+      --nui-pg-nav-hover-bg: ${hoverBg};
+      --nui-pg-nav-hover-text: ${isDark ? grays[200] : grays[800]};
+      --nui-pg-nav-hover-border: transparent;
 
-      /* Ellipsis & focus ring */
-      --nui-pg-${name}-ellipsis-color: ${isDark ? grays[500] : grays[400]};
-      --nui-pg-${name}-focus-ring: ${this.withAlpha(color, 0.4)};
-
-      /* Jump to page */
+      /* Paginator misc */
+      --nui-pg-ellipsis-color: ${isDark ? grays[500] : grays[400]};
+      --nui-pg-focus-ring: ${this.withAlpha(color, 0.4)};
       --nui-pg-jump-border: var(--nui-border-subtle);
       --nui-pg-jump-separator: var(--nui-border-subtle);
       --nui-pg-jump-hover-bg: ${hoverBg};
-
     `;
   }
 

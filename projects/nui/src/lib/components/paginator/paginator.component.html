@@ -102,7 +102,6 @@
             [options]="pageSizeOptionsData()"
             [ngModel]="itemsPerPage().toString()"
             [size]="effectiveSize()"
-            [color]="effectiveColor()"
             [variant]="effectiveVariant()"
             [attr.aria-label]="effectiveI18n().itemsPerPage"
             (valueChange)="onPageSizeChange($event)"
@@ -305,7 +304,6 @@
       @if (canShowElement(PaginatorElementEnum.INFINITE_BUTTON)) {
         <button
           nuiButton
-          [color]="effectiveColor()"
           [variant]="effectiveVariant()"
           [size]="effectiveSizeInfiniteBtn()"
           [loading]="infiniteState().isLoading"

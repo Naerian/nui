@@ -13,9 +13,8 @@ import {
 } from '../../components/paginator';
 import { NUI_CONFIG } from '../nui.token';
 import { deepMerge } from '../../utils/deep-merge';
-import { NUIColor, NUISize, NUIVariant } from '../common';
+import { NUISize, NUIVariant } from '../common';
 import {
-  DEFAULT_PAGINATOR_I18N,
   PaginatorI18n,
 } from '../../components/paginator/models/paginator-i18n.model';
 
@@ -25,7 +24,6 @@ import {
 export interface PaginatorConfig {
   // Propiedades de estilo
   size?: NUISize;
-  color?: NUIColor;
   variant?: NUIVariant;
 
   // Propiedades de comportamiento
@@ -57,7 +55,6 @@ export interface PaginatorConfig {
  */
 export const DEFAULT_PAGINATOR_CONFIG: PaginatorConfig = {
   size: 'md',
-  color: 'primary',
   variant: 'solid',
   maxVisiblePages: 7,
   showFirstLast: false,

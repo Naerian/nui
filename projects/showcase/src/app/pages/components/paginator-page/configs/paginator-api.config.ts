@@ -19,12 +19,6 @@ export const PAGINATOR_API_SECTIONS: ComponentSection[] = [
       ],
       rows: [
         [
-          '<code>color</code>',
-          'NUIColor',
-          '<code class="neutral">primary</code>',
-          "Color del paginador: 'primary', 'secondary', 'accent', etc.",
-        ],
-        [
           '<code>size</code>',
           'NUISize',
           '<code class="neutral">md</code>',

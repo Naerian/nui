@@ -74,36 +74,19 @@
                 </div>
               }
 
-              @case ('colors') {
+              @case ('variants') {
                 <div class="example-preview flex-column align-items-center gap-4">
                   <nui-paginator
-                    color="primary"
-                    variant="ghost"
-                    [totalItems]="100"
-                    [showPageSizeSelector]="true"
-                  ></nui-paginator>
-                  <nui-paginator
-                    color="secondary"
-                    variant="outline"
-                    [totalItems]="100"
-                    [showPageSizeSelector]="true"
-                  ></nui-paginator>
-                  <nui-paginator
-                    color="success"
                     variant="solid"
                     [totalItems]="100"
-                    [showPageSizeSelector]="true"
                   ></nui-paginator>
                   <nui-paginator
-                    color="danger"
-                    [totalItems]="100"
-                    [showPageSizeSelector]="true"
-                  ></nui-paginator>
-                  <nui-paginator
-                    color="warning"
                     variant="outline"
                     [totalItems]="100"
-                    [showPageSizeSelector]="true"
+                  ></nui-paginator>
+                  <nui-paginator
+                    variant="ghost"
+                    [totalItems]="100"
                   ></nui-paginator>
                 </div>
               }

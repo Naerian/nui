@@ -122,7 +122,7 @@ import { DEFAULT_PAGINATOR_I18N, PaginatorI18n } from './models/paginator-i18n.m
     '[class.nui-paginator-container--custom-layout]': 'effectiveLayout()',
     '[class.nui-paginator-container--layout-column]': 'getLayoutDirection() === "column"',
     '[class]':
-      '"nui-paginator-container--" + effectiveSize() + " nui-paginator-container--" + effectiveColor() + " nui-paginator-container--" + effectiveVariant() + " nui-paginator-container--" + effectiveMode()',
+      '"nui-paginator-container--" + effectiveSize() + " nui-paginator-container--" + effectiveVariant() + " nui-paginator-container--" + effectiveMode()',
     '[attr.aria-description]': 'getAriaDescription()',
   },
 })
@@ -153,13 +153,6 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   // Enum para usar en el template
   protected PaginatorNavDisplayEnum = PaginatorNavDisplayEnum;
   protected PaginatorElementEnum = PaginatorElementEnum;
-
-  /**
-   * Color del paginador.
-   * Valores posibles: 'primary', 'secondary', 'success', 'info', 'warning', 'danger', 'accent'
-   * @default 'primary' (o valor configurado globalmente)
-   */
-  color = model<NUIColor>();
 
   /**
    * Tamaño del paginador.
@@ -487,12 +480,6 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     const inputValue = this.showPageSizeSelector();
     return inputValue ?? this.paginatorConfig?.showPageSizeSelector ?? false;
   });
-
-  /**
-   * Valores efectivos de color, considerando configuración global y fallback a constante por defecto.
-   * Prioridad: Input > Global Config > Default Constant
-   */
-  effectiveColor = computed(() => this.color() || this.paginatorConfig?.color || DEFAULT_COLOR);
 
   /**
    * Valor efectivo de variant, considerando configuración global y modo automático en móvil

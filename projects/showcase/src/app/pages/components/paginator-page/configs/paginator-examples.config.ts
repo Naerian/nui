@@ -61,22 +61,16 @@ export const PAGINATOR_EXAMPLES_SECTIONS: ComponentSection[] = [
     ],
   },
   {
-    id: 'colors',
-    title: 'components.paginator.colors.title',
-    description: 'components.paginator.colors.description',
-    note: {
-      type: 'info',
-      content: 'components.paginator.colors.note',
-    },
-    anchor: 'colors',
+    id: 'variants',
+    title: 'components.paginator.variants.title',
+    description: 'components.paginator.variants.description',
+    anchor: 'variants',
     examples: [
       {
         title: 'codeExamples.html',
-        code: `<nui-paginator color="primary" variant="ghost" [totalItems]="100" [showPageSizeSelector]="true"></nui-paginator>
-<nui-paginator color="secondary" variant="outline" [totalItems]="100" [showPageSizeSelector]="true"></nui-paginator>
-<nui-paginator color="success" variant="solid" [totalItems]="100" [showPageSizeSelector]="true"></nui-paginator>
-<nui-paginator color="danger" [totalItems]="100" [showPageSizeSelector]="true"></nui-paginator>
-<nui-paginator color="warning" variant="outline" [totalItems]="100" [showPageSizeSelector]="true"></nui-paginator>`,
+        code: `<nui-paginator variant="solid" [totalItems]="100"></nui-paginator>
+<nui-paginator variant="outline" [totalItems]="100"></nui-paginator>
+<nui-paginator variant="ghost" [totalItems]="100"></nui-paginator>`,
         language: 'html',
       },
     ],
