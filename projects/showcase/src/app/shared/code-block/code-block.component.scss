@@ -138,14 +138,13 @@
 
   .code-block-pre {
     margin: 0;
-    padding-bottom: 1rem;
+    padding: 1rem 0;
     overflow-x: auto;
     font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
     font-size: 0.75rem;
     line-height: 1.5;
     max-height: 250px;
 
-    // hljs controla background y color del <code>
     code {
       display: block;
       padding: 0;

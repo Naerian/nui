@@ -1,4 +1,5 @@
 import { ErrorHandler, Injectable, NgZone } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 /**
  * Manejador global de errores para NUI.
@@ -7,7 +8,10 @@ import { ErrorHandler, Injectable, NgZone } from '@angular/core';
  */
 @Injectable()
 export class NuiGlobalErrorHandler implements ErrorHandler {
-  constructor(private zone: NgZone) {}
+  constructor(
+    private zone: NgZone,
+    private translate: TranslateService,
+  ) {}
 
   handleError(error: any): void {
     const chunkFailedMessage = /Failed to fetch dynamically imported module|Loading chunk/;
@@ -15,11 +19,7 @@ export class NuiGlobalErrorHandler implements ErrorHandler {
     if (chunkFailedMessage.test(error.message)) {
       // Forzamos la recarga dentro de la zona de Angular para asegurar consistencia
       this.zone.run(() => {
-        if (
-          confirm(
-            'Se ha detectado una nueva versión de NUI. ¿Deseas recargar la página para actualizar?'
-          )
-        ) {
+        if (confirm(this.translate.instant('errors.newVersion'))) {
           window.location.reload();
         }
       });

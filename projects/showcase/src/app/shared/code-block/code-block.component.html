@@ -1,56 +1,61 @@
 <div class="code-block-container">
-  <!-- Header with title and copy button -->
-  <div class="code-block-header" *ngIf="title || examples">
-    <!-- Single example title or general title -->
-    <div
-      class="code-block-title"
-      *ngIf="title || (examples && examples.length === 1 && examples[0].title)"
+  <!-- Header: visible when a title or tabs are provided -->
+  @if (title() || examples()) {
+    <div class="code-block-header">
+      <!-- Title row (single example or static title) -->
+      @if (title() || (examples() && examples()!.length === 1 && examples()![0].title)) {
+        <div class="code-block-title">
+          <i class="ri-code-box-line"></i>
+          @if (title()) {
+            <span>{{ title() }}</span>
+          } @else {
+            <span>{{ examples()![0].title | translate }}</span>
+          }
+        </div>
+      }
+
+      <!-- Tab bar (multiple examples) -->
+      @if (examples() && examples()!.length > 1) {
+        <div class="code-block-tabs">
+          @for (example of examples()!; track example) {
+            <button
+              class="tab-button"
+              [class.active]="selectedTab() === $index"
+              (click)="selectTab($index)"
+            >
+              <i [class]="getLanguageIcon(example.language)"></i>
+              <span>{{ example.title || getLanguageLabel(example.language) | translate }}</span>
+            </button>
+          }
+        </div>
+      }
+
+      <div class="code-block-actions">
+        <button
+          class="btn-copy"
+          (click)="copyCode()"
+          [class.success]="copySuccess()"
+          [attr.aria-label]="(copySuccess() ? 'codeBlock.copied' : 'codeBlock.copy') | translate"
+        >
+          <i [class]="copySuccess() ? 'ri-check-line' : 'ri-file-copy-line'"></i>
+          <span>{{ (copySuccess() ? 'codeBlock.copied' : 'codeBlock.copy') | translate }}</span>
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- Botón flotante para bloques sin header -->
+  @if (!title() && !examples()) {
+    <button
+      class="btn-copy-simple"
+      (click)="copyCode()"
+      [class.success]="copySuccess()"
+      [attr.aria-label]="(copySuccess() ? 'codeBlock.copied' : 'codeBlock.copy') | translate"
     >
-      <i class="ri-code-box-line"></i>
-      <span *ngIf="title">{{ title }}</span>
-      <span *ngIf="!title && examples && examples.length === 1 && examples[0].title">
-        {{ examples[0].title | translate }}
-      </span>
-    </div>
+      <i [class]="copySuccess() ? 'ri-check-line' : 'ri-file-copy-line'"></i>
+    </button>
+  }
 
-    <!-- Tabs for multiple examples -->
-    <div class="code-block-tabs" *ngIf="examples && examples.length > 1">
-      <button
-        *ngFor="let example of examples; let i = index"
-        class="tab-button"
-        [class.active]="selectedTab() === i"
-        (click)="selectTab(i)"
-      >
-        <i [class]="getLanguageIcon(example.language)"></i>
-        <span>{{ example.title || getLanguageLabel(example.language) | translate }}</span>
-      </button>
-    </div>
-
-    <div class="code-block-actions">
-      <button
-        class="btn-copy"
-        (click)="copyCode()"
-        [class.success]="copySuccess()"
-        [attr.aria-label]="(copySuccess() ? 'codeBlock.copied' : 'codeBlock.copy') | translate"
-      >
-        <i [class]="copySuccess() ? 'ri-check-line' : 'ri-file-copy-line'"></i>
-        <span>{{ (copySuccess() ? 'codeBlock.copied' : 'codeBlock.copy') | translate }}</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Simple copy button for single code blocks without title -->
-  <button
-    *ngIf="!title && !examples"
-    class="btn-copy-simple"
-    (click)="copyCode()"
-    [class.success]="copySuccess()"
-    [attr.aria-label]="(copySuccess() ? 'codeBlock.copied' : 'codeBlock.copy') | translate"
-  >
-    <i [class]="copySuccess() ? 'ri-check-line' : 'ri-file-copy-line'"></i>
-  </button>
-
-  <!-- Code display -->
-  <pre class="code-block-pre" [attr.data-language]="currentLanguage">
-  <code class="hljs">@for (line of highlightedLines; track $index) {<span class="code-line"><span class="line-number">{{ $index + 1 }}</span><span class="line-content" [innerHTML]="line"></span></span>}</code></pre>
+  <!-- Código: HTML de tokens Shiki inyectado por línea vía [innerHTML] -->
+  <pre class="code-block-pre" [attr.data-language]="currentLanguage()"><code>@for (line of highlightedLines(); track $index) {<span class="code-line"><span class="line-number">{{ $index + 1 }}</span><span class="line-content" [innerHTML]="line"></span></span>}</code></pre>
 </div>

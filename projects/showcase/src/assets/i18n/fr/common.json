@@ -88,8 +88,9 @@
       "element": "Élément",
       "token": "Token"
     }
-  },
-  "codeBlock": {
+  },  "errors": {
+    "newVersion": "Une nouvelle version de NUI a été détectée. Souhaitez-vous recharger la page pour mettre à jour ?"
+  },  "codeBlock": {
     "copy": "Copier",
     "copied": "Copié !",
     "copyCode": "Copier le code"

@@ -89,6 +89,9 @@
       "token": "Token"
     }
   },
+  "errors": {
+    "newVersion": "Se ha detectado una nueva versión de NUI. ¿Deseas recargar la página para actualizar?"
+  },
   "codeBlock": {
     "copy": "Copiar",
     "copied": "¡Copiado!",

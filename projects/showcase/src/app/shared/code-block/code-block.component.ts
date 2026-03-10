@@ -1,85 +1,132 @@
 import {
   Component,
-  Input,
   signal,
   computed,
+  effect,
+  inject,
   ChangeDetectionStrategy,
+  input,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { CodeExample } from '../../core/models';
-import hljs from 'highlight.js/lib/core';
-// Lenguajes utilizados en el showcase
-import typescript from 'highlight.js/lib/languages/typescript';
-import javascript from 'highlight.js/lib/languages/javascript';
-import xml from 'highlight.js/lib/languages/xml';     // cubre HTML
-import css from 'highlight.js/lib/languages/css';
-import scss from 'highlight.js/lib/languages/scss';
-import json from 'highlight.js/lib/languages/json';
-import bash from 'highlight.js/lib/languages/bash';
+import { ThemeService } from 'nui';
+import { getSingletonHighlighter, type BundledLanguage } from 'shiki';
 
-hljs.registerLanguage('typescript', typescript);
-hljs.registerLanguage('ts', typescript);
-hljs.registerLanguage('javascript', javascript);
-hljs.registerLanguage('js', javascript);
-hljs.registerLanguage('html', xml);
-hljs.registerLanguage('xml', xml);
-hljs.registerLanguage('css', css);
-hljs.registerLanguage('scss', scss);
-hljs.registerLanguage('json', json);
-hljs.registerLanguage('bash', bash);
-hljs.registerLanguage('shell', bash);
+// ── Shiki singleton ────────────────────────────────────────────────────────
+// Una instancia compartida por todas las instancias del componente.
+let _highlighterPromise: ReturnType<typeof getSingletonHighlighter> | null = null;
+
+function getHighlighter() {
+  _highlighterPromise ??= getSingletonHighlighter({
+    themes: ['github-light', 'github-dark'],
+    langs: ['typescript', 'javascript', 'html', 'css', 'scss', 'json', 'bash', 'plaintext'],
+  });
+  return _highlighterPromise;
+}
+
+/** Normaliza alias de lenguaje al nombre registrado en Shiki. */
+const LANG_ALIASES: Record<string, string> = {
+  ts: 'typescript',
+  js: 'javascript',
+  xml: 'html',
+  shell: 'bash',
+};
 
 @Component({
   selector: 'app-code-block',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [TranslateModule],
   templateUrl: './code-block.component.html',
   styleUrls: ['./code-block.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeBlockComponent {
-  @Input() title?: string;
-  @Input() code?: string;
-  @Input() language: string = 'typescript';
-  @Input() examples?: CodeExample[];
+  // ── Inputs (Signal API) ──────────────────────────────────────────────────
+  readonly title = input<string>();
+  readonly code = input<string>('');
+  readonly language = input<string>('typescript');
+  readonly examples = input<CodeExample[]>();
 
-  selectedTab = signal(0);
-  copySuccess = signal(false);
+  // ── UI state ─────────────────────────────────────────────────────────────
+  readonly selectedTab = signal(0);
+  readonly copySuccess = signal(false);
+  /** Líneas de HTML generado por Shiki (seguro — no viene del usuario). */
+  readonly highlightedLines = signal<string[]>([]);
 
-  get currentCode(): string {
-    if (this.examples && this.examples.length > 0) {
-      return this.examples[this.selectedTab()].code;
-    }
-    return this.code || '';
+  // ── Derived ──────────────────────────────────────────────────────────────
+  private readonly _currentCode = computed(() => {
+    const exs = this.examples();
+    return exs?.length ? exs[this.selectedTab()].code : this.code();
+  });
+
+  private readonly _currentLang = computed(() => {
+    const exs = this.examples();
+    const raw = exs?.length ? exs[this.selectedTab()].language : this.language();
+    const normalized = raw?.toLowerCase() ?? 'typescript';
+    return LANG_ALIASES[normalized] ?? normalized;
+  });
+
+  /** Expuesto al template para el atributo data-language. */
+  readonly currentLanguage = this._currentLang;
+
+  // ── Contador de generación para evitar race conditions async ───────────
+  private _generation = 0;
+
+  private readonly _themeService = inject(ThemeService);
+
+  constructor() {
+    effect(() => {
+      this._runHighlight(
+        this._currentCode(),
+        this._currentLang(),
+        this._themeService.isDarkMode(),
+      );
+    });
   }
 
-  get currentLanguage(): string {
-    if (this.examples && this.examples.length > 0) {
-      return this.examples[this.selectedTab()].language;
+  // ── Highlighting ─────────────────────────────────────────────────────────
+
+  private async _runHighlight(code: string, lang: string, isDark: boolean): Promise<void> {
+    const gen = ++this._generation;
+    try {
+      const hl = await getHighlighter();
+      const loaded = hl.getLoadedLanguages() as string[];
+      const resolvedLang: BundledLanguage = (loaded.includes(lang)
+        ? lang
+        : 'plaintext') as BundledLanguage;
+
+      const html = hl.codeToHtml(code, {
+        lang: resolvedLang,
+        theme: isDark ? 'github-dark' : 'github-light',
+      });
+
+      if (gen === this._generation) {
+        this.highlightedLines.set(this._extractLines(html));
+      }
+    } catch {
+      if (gen === this._generation) {
+        this.highlightedLines.set(code.split('\n').map((l) => this._escapeHtml(l)));
+      }
     }
-    return this.language;
   }
 
   /**
-   * Resalta el código con highlight.js y divide el resultado en líneas HTML.
-   * Cada línea es HTML seguro generado por hljs (no viene de usuario).
+   * Extrae el HTML interno de cada línea del bloque <code> generado por Shiki.
+   * Shiki envuelve cada línea en <span class="line">…</span>.
    */
-  get highlightedLines(): string[] {
-    const lang = this.currentLanguage?.toLowerCase();
-    const code = this.currentCode;
-    let highlighted: string;
-
-    if (lang && hljs.getLanguage(lang)) {
-      highlighted = hljs.highlight(code, { language: lang, ignoreIllegals: true }).value;
-    } else {
-      highlighted = hljs.highlightAuto(code).value;
-    }
-
-    const lines = highlighted.split('\n');
+  private _extractLines(shikiHtml: string): string[] {
+    const match = shikiHtml.match(/<code>([\s\S]*?)<\/code>/);
+    if (!match) return [];
+    const lines = match[1].split('\n');
     if (lines.at(-1) === '') lines.pop();
-    return lines;
+    return lines.map((l) => l.replace(/^<span class="line">|<\/span>$/g, ''));
   }
+
+  private _escapeHtml(s: string): string {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // ── Public methods ───────────────────────────────────────────────────────
 
   selectTab(index: number): void {
     this.selectedTab.set(index);
@@ -88,16 +135,16 @@ export class CodeBlockComponent {
 
   async copyCode(): Promise<void> {
     try {
-      await navigator.clipboard.writeText(this.currentCode);
+      await navigator.clipboard.writeText(this._currentCode());
       this.copySuccess.set(true);
       setTimeout(() => this.copySuccess.set(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy code:', err);
+    } catch {
+      // Acceso al portapapeles denegado — ignorado silenciosamente
     }
   }
 
   getLanguageLabel(lang: string): string {
-    const labels: { [key: string]: string } = {
+    const labels: Record<string, string> = {
       typescript: 'TypeScript',
       ts: 'TypeScript',
       javascript: 'JavaScript',
@@ -109,11 +156,11 @@ export class CodeBlockComponent {
       bash: 'Bash',
       shell: 'Shell',
     };
-    return labels[lang.toLowerCase()] || lang;
+    return labels[lang.toLowerCase()] ?? lang;
   }
 
   getLanguageIcon(lang: string): string {
-    const icons: { [key: string]: string } = {
+    const icons: Record<string, string> = {
       typescript: 'ri-braces-line',
       ts: 'ri-braces-line',
       javascript: 'ri-braces-line',
@@ -125,6 +172,6 @@ export class CodeBlockComponent {
       bash: 'ri-terminal-line',
       shell: 'ri-terminal-line',
     };
-    return icons[lang.toLowerCase()] || 'ri-file-code-line';
+    return icons[lang.toLowerCase()] ?? 'ri-file-code-line';
   }
 }
