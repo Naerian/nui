@@ -51,8 +51,8 @@
                     <nui-progress-bar
                       [color]="color"
                       [value]="70"
-                      [label]="color"
-                      labelPosition="left"
+                      [label]="color | titlecase"
+                      labelPosition="top"
                     />
                   }
                 </div>
@@ -66,8 +66,8 @@
                         [variant]="variant"
                         color="primary"
                         [value]="70"
-                        [label]="variant"
-                        labelPosition="left"
+                        [label]="variant | titlecase"
+                        labelPosition="top"
                       />
                     </div>
                   }

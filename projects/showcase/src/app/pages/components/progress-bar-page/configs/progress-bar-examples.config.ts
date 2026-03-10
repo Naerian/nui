@@ -50,14 +50,14 @@ export const PROGRESS_BAR_EXAMPLES_SECTIONS: ComponentSection[] = [
     examples: [
       {
         title: 'codeExamples.html',
-        code: `<nui-progress-bar color="primary"   [value]="70" />
+        code: `<nui-progress-bar color="primary" [value]="70" />
 <nui-progress-bar color="secondary" [value]="70" />
-<nui-progress-bar color="success"   [value]="70" />
-<nui-progress-bar color="info"      [value]="70" />
-<nui-progress-bar color="warning"   [value]="70" />
-<nui-progress-bar color="danger"    [value]="70" />
-<nui-progress-bar color="accent"    [value]="70" />
-<nui-progress-bar color="neutral"   [value]="70" />`,
+<nui-progress-bar color="success" [value]="70" />
+<nui-progress-bar color="info" [value]="70" />
+<nui-progress-bar color="warning" [value]="70" />
+<nui-progress-bar color="danger" [value]="70" />
+<nui-progress-bar color="accent" [value]="70" />
+<nui-progress-bar color="neutral" [value]="70" />`,
         language: 'html',
       },
     ],
