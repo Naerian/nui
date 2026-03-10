@@ -7,6 +7,7 @@ import {
   ChangeDetectionStrategy,
   input,
 } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 import { CodeExample } from '../../core/models';
 import { ThemeService } from 'nui';
@@ -50,8 +51,12 @@ export class CodeBlockComponent {
   // ── UI state ─────────────────────────────────────────────────────────────
   readonly selectedTab = signal(0);
   readonly copySuccess = signal(false);
-  /** Líneas de HTML generado por Shiki (seguro — no viene del usuario). */
-  readonly highlightedLines = signal<string[]>([]);
+  /**
+   * Líneas de HTML generado por Shiki marcadas como seguras para [innerHTML].
+   * Angular elimina inline styles al sanitizar; bypassSecurityTrustHtml los preserva.
+   * El HTML proviene de Shiki (no del usuario), por lo que es seguro.
+   */
+  readonly highlightedLines = signal<SafeHtml[]>([]);
 
   // ── Derived ──────────────────────────────────────────────────────────────
   private readonly _currentCode = computed(() => {
@@ -73,6 +78,7 @@ export class CodeBlockComponent {
   private _generation = 0;
 
   private readonly _themeService = inject(ThemeService);
+  private readonly _sanitizer = inject(DomSanitizer);
 
   constructor() {
     effect(() => {
@@ -101,11 +107,15 @@ export class CodeBlockComponent {
       });
 
       if (gen === this._generation) {
-        this.highlightedLines.set(this._extractLines(html));
+        this.highlightedLines.set(
+          this._extractLines(html).map((l) => this._sanitizer.bypassSecurityTrustHtml(l)),
+        );
       }
     } catch {
       if (gen === this._generation) {
-        this.highlightedLines.set(code.split('\n').map((l) => this._escapeHtml(l)));
+        this.highlightedLines.set(
+          code.split('\n').map((l) => this._sanitizer.bypassSecurityTrustHtml(this._escapeHtml(l))),
+        );
       }
     }
   }
