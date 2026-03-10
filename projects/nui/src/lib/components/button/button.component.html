@@ -6,7 +6,7 @@
   [attr.type]="effectiveType()"
   [attr.aria-label]="computedAriaLabel()"
   [attr.aria-busy]="loading()"
-  [title]="title()"
+  [attr.title]="title() ?? null"
   (click)="handleClick($event)"
 >
   @if (loading() && effectiveLoadingPosition() === 'start') {
