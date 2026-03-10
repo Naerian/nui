@@ -57,5 +57,19 @@
   }
 
   <!-- Código: HTML de tokens Shiki inyectado por línea vía [innerHTML] -->
-  <pre class="code-block-pre" [attr.data-language]="currentLanguage()"><code>@for (line of highlightedLines(); track $index) {<span class="code-line"><span class="line-number">{{ $index + 1 }}</span><span class="line-content" [innerHTML]="line"></span></span>}</code></pre>
+  <div class="code-block-body" [class.code-block-body--expanded]="isExpanded()">
+    <pre class="code-block-pre" [attr.data-language]="currentLanguage()"><code>@for (line of highlightedLines(); track $index) {<span class="code-line"><span class="line-number">{{ $index + 1 }}</span><span class="line-content" [innerHTML]="line"></span></span>}</code></pre>
+    @if (isExpandable() && !isExpanded()) {
+      <div class="code-block-fade" aria-hidden="true"></div>
+    }
+  </div>
+
+  @if (isExpandable()) {
+    <div class="code-block-expand-bar">
+      <button class="btn-expand" (click)="toggleExpand()">
+        <i [class]="isExpanded() ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"></i>
+        <span>{{ (isExpanded() ? 'codeBlock.collapse' : 'codeBlock.expand') | translate }}</span>
+      </button>
+    </div>
+  }
 </div>

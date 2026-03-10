@@ -51,6 +51,7 @@ export class CodeBlockComponent {
   // ── UI state ─────────────────────────────────────────────────────────────
   readonly selectedTab = signal(0);
   readonly copySuccess = signal(false);
+  readonly isExpanded = signal(false);
   /**
    * Líneas de HTML generado por Shiki marcadas como seguras para [innerHTML].
    * Angular elimina inline styles al sanitizar; bypassSecurityTrustHtml los preserva.
@@ -71,6 +72,13 @@ export class CodeBlockComponent {
     return LANG_ALIASES[normalized] ?? normalized;
   });
 
+  /**
+   * Sincrónico: usa el código fuente (no el output de Shiki).
+   * Threshold: max-height 250px - padding 32px = 218px útiles;
+   * font 12px × line-height 1.5 = 18px/línea → 218/18 ≈ 12 líneas visibles.
+   */
+  readonly isExpandable = computed(() => this._currentCode().split('\n').length > 12);
+
   /** Expuesto al template para el atributo data-language. */
   readonly currentLanguage = this._currentLang;
 
@@ -81,13 +89,18 @@ export class CodeBlockComponent {
   private readonly _sanitizer = inject(DomSanitizer);
 
   constructor() {
-    effect(() => {
-      this._runHighlight(
-        this._currentCode(),
-        this._currentLang(),
-        this._themeService.isDarkMode(),
-      );
-    });
+    effect(
+      () => {
+        // Resetear estado expandido cuando cambia cualquier dependencia
+        this.isExpanded.set(false);
+        this._runHighlight(
+          this._currentCode(),
+          this._currentLang(),
+          this._themeService.isDarkMode(),
+        );
+      },
+      { allowSignalWrites: true },
+    );
   }
 
   // ── Highlighting ─────────────────────────────────────────────────────────
@@ -125,11 +138,13 @@ export class CodeBlockComponent {
    * Shiki envuelve cada línea en <span class="line">…</span>.
    */
   private _extractLines(shikiHtml: string): string[] {
-    const match = shikiHtml.match(/<code>([\s\S]*?)<\/code>/);
+    // [^>]* handles Shiki 4.x which may emit <code class="..."> with attributes
+    const match = shikiHtml.match(/<code[^>]*>([\s\S]*?)<\/code>/);
     if (!match) return [];
     const lines = match[1].split('\n');
     if (lines.at(-1) === '') lines.pop();
-    return lines.map((l) => l.replace(/^<span class="line">|<\/span>$/g, ''));
+    // Strip outer <span class="line"> wrapper Shiki adds around each line
+    return lines.map((l) => l.replace(/^<span[^>]*>|<\/span>$/g, ''));
   }
 
   private _escapeHtml(s: string): string {
@@ -141,6 +156,10 @@ export class CodeBlockComponent {
   selectTab(index: number): void {
     this.selectedTab.set(index);
     this.copySuccess.set(false);
+  }
+
+  toggleExpand(): void {
+    this.isExpanded.update((v) => !v);
   }
 
   async copyCode(): Promise<void> {

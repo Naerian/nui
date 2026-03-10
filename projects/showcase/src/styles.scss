@@ -1,6 +1,26 @@
 // Import NUI complete bundle
 @import '../../nui/styles/nui-bundle.scss';
 
+// ── Code block: Shiki background ───────────────────────────────────────────
+// Shiki añade background-color inline en <pre>; lo sobreescribimos con !important
+// para que el token NUI controle el fondo y la variable CSS funcione en el fade.
+.code-block-container {
+  --code-block-bg: #ffffff;
+}
+
+html.dark-mode .code-block-container {
+  --code-block-bg: #0d1117;
+}
+
+.code-block-pre {
+  background-color: var(--code-block-bg) !important;
+  color: #1f2328;
+}
+
+html.dark-mode .code-block-pre {
+  color: #e6edf3;
+}
+
 html {
   font-family:
     'Inter',

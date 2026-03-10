@@ -95,7 +95,9 @@
   "codeBlock": {
     "copy": "Copy",
     "copied": "Copied!",
-    "copyCode": "Copy code"
+    "copyCode": "Copy code",
+    "expand": "Show more",
+    "collapse": "Show less"
   },
   "codeExamples": {
     "html": "HTML",

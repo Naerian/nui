@@ -93,7 +93,9 @@
   },  "codeBlock": {
     "copy": "Copier",
     "copied": "Copié !",
-    "copyCode": "Copier le code"
+    "copyCode": "Copier le code",
+    "expand": "Voir plus",
+    "collapse": "Voir moins"
   },
   "codeExamples": {
     "html": "HTML",
