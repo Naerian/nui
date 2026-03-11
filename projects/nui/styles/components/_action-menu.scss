@@ -169,6 +169,7 @@
 
       &__subtitle {
         font-size: var(--nui-am-item-subtitle-font-size);
+        line-height: 1.2;
         color: var(--nui-am-item-subtitle-color);
         margin-top: 0.313rem;
         @include global.text-truncate;
