@@ -11,7 +11,7 @@
   width: auto;
 
   // Optimización: Limita el alcance de recálculos de estilo en cambios de tema
-  contain: layout style paint;
+  contain: layout style;
 }
 
 // ============================================================================
