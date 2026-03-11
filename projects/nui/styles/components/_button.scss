@@ -109,17 +109,17 @@
     // Raised sólo tiene sentido en solid: en outline/ghost/link la sombra
     // choca con un borde ya visible o con la ausencia de fondo.
     &.nui-btn--raised:not(.nui-btn--outline):not(.nui-btn--ghost):not(.nui-btn--link) {
-      box-shadow: var(--nui-shadow-interactive-rest) !important;
+      box-shadow: var(--nui-shadow-interactive-rest);
       transition: box-shadow 160ms cubic-bezier(.4, 0, .2, 1),
         transform 120ms cubic-bezier(.4, 0, .2, 1);
 
       &:hover:not(:disabled) {
-        box-shadow: var(--nui-shadow-interactive-hover) !important;
+        box-shadow: var(--nui-shadow-interactive-hover);
         transform: translateY(-1px);
       }
 
       &:active:not(:disabled) {
-        box-shadow: var(--nui-shadow-interactive-active) !important;
+        box-shadow: var(--nui-shadow-interactive-active);
         transform: translateY(0);
       }
     }

@@ -59,12 +59,9 @@
     // =========================================================================
 
     &__main {
-        // Eliminar radio derecho para soldarse visualmente con el disparador
         border-top-right-radius: 0 !important;
         border-bottom-right-radius: 0 !important;
-        // Eliminar el borde derecho (lo aporta el separador)
         border-right: none !important;
-        // Mantener z-index base
         position: relative;
         z-index: 0;
 
