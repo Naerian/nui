@@ -82,6 +82,13 @@
     "exampleRange": "Rango con footer Aplicar / Limpiar",
     "exampleDay": "Día con footer personalizado"
   },
+  "day-template": {
+    "title": "Plantilla de celda de día",
+    "description": "Proyecta un <code>ng-template</code> con la directiva <strong>nuiCalendarDay</strong> para personalizar visualmente el contenido de cada celda de día. Permite añadir indicadores de estado, precios, etiquetas o cualquier contenido custom manteniendo toda la accesibilidad gestionada por el componente.",
+    "note": "La directiva solo reemplaza el <strong>contenido visual</strong> del botón de día. El componente sigue gestionando todos los atributos ARIA, la navegación por teclado y los eventos. El contexto incluye el objeto <code>CalendarDay</code> completo como <code>$implicit</code> (accesible con <code>let-fullDay</code>) y 3 atajos: <code>day</code> (número), <code>isToday</code> y <code>status</code>.",
+    "exampleStatus": "Con indicadores de estado (dateStatusFn)",
+    "examplePrice": "Con precio por día (motor de reservas)"
+  },
   "api": {
     "inputs": {
       "title": "Inputs",
@@ -172,6 +179,17 @@
         "goToToday": { "description": "Navega al mes actual y selecciona hoy. Equivalente al botón built-in \"Hoy\"." },
         "clear": { "description": "Limpia la selección actual y notifica al <code>FormControl</code> o <code>ngModel</code> vinculado." },
         "close": { "description": "Emite el evento <code>selectFinished</code>, lo que provoca el cierre del popover o modal que contiene el calendario." }
+      }
+    },
+    "day-context": {
+      "title": "CalendarDayContext",
+      "description": "Contexto tipado que recibe el <code>ng-template</code> proyectado con la directiva <code>nuiCalendarDay</code>. Proporciona el objeto <code>CalendarDay</code> completo como <code>$implicit</code> y 3 atajos para los campos más habituales.",
+      "note": "La clase <strong>CalendarDayDirective</strong> debe importarse en el componente consumidor (<code>imports: [CalendarDayDirective]</code>). El selector del template es <code>[nuiCalendarDay]</code>. Usa <code>let-fullDay</code> (sin binding = $implicit) para acceder al objeto completo, o los atajos <code>let-dayNumber=\"day\"</code>, <code>let-status=\"status\"</code>, <code>let-isToday=\"isToday\"</code>.",
+      "rows": {
+        "implicit": { "description": "Objeto <code>CalendarDay</code> completo. Shorthand: <code>let-fullDay</code> (sin binding de nombre). Da acceso a todas las propiedades: <code>isWeekend</code>, <code>isSelected</code>, <code>isDisabled</code>, <code>isCurrentMonth</code>, <code>isInRange</code>, <code>date</code>, etc." },
+        "day": { "description": "Número del día (1–31). Atajo de <code>$implicit.dayNumber</code>." },
+        "isToday": { "description": "Es el día actual (hoy). Atajo de <code>$implicit.isToday</code>." },
+        "status": { "description": "Estado de negocio asignado por <code>dateStatusFn</code>: <code>'success'</code>, <code>'warning'</code>, <code>'danger'</code>, <code>'info'</code> o <code>null</code>. Atajo de <code>$implicit.status</code>." }
       }
     },
     "smart-types": {
@@ -481,6 +499,11 @@
           "description": "Cierra el popover del calendario y devuelve el foco al activador."
         }
       }
+    },
+    "day-template": {
+      "title": "Accesibilidad con plantilla de día personalizada",
+      "description": "La directiva <code>nuiCalendarDay</code> solo reemplaza el contenido visual interno del botón. El componente mantiene íntegros todos los atributos ARIA (<code>aria-label</code>, <code>aria-selected</code>, <code>aria-disabled</code>) y la navegación por teclado.",
+      "note": "Asegúrate de que el contenido del <code>ng-template</code> sea puramente visual. No añadas elementos interactivos (botones, enlaces) dentro de la celda de día, ya que provocaría botones anidados o problemas de foco inesperados. El <code>aria-label</code> del botón padre ya proporciona toda la información de accesibilidad necesaria."
     }
   },
   "globalConfig": {

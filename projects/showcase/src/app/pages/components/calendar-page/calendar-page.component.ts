@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { CalendarComponent, CalendarType, CalendarValue, DateStatusFn, IsDateEnabledFn, CalendarFooterDirective, ButtonDirective } from 'nui';
+import { CalendarComponent, CalendarType, CalendarValue, DateStatusFn, IsDateEnabledFn, CalendarFooterDirective, CalendarDayDirective, ButtonDirective } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
 import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';
@@ -19,6 +19,7 @@ import { addDays } from 'date-fns';
     TranslateModule,
     CalendarComponent,
     CalendarFooterDirective,
+    CalendarDayDirective,
     ButtonDirective,
     CodeBlockComponent,
     SectionTitleComponent,
@@ -54,6 +55,7 @@ export class CalendarPageComponent extends BaseComponentPage {
         'multiple-selection',
         'reactive-forms',
         'custom-footer',
+        'day-template',
       ],
     },
     {
@@ -71,6 +73,7 @@ export class CalendarPageComponent extends BaseComponentPage {
         'api-preset',
         'api-smart-types',
         'api-footer-context',
+        'api-day-context',
       ],
     },
     {
@@ -89,7 +92,7 @@ export class CalendarPageComponent extends BaseComponentPage {
       id: 'a11y',
       label: 'common.tabs.a11y',
       icon: 'ri-accessibility-line',
-      sections: ['a11y-roles', 'a11y-naming', 'a11y-keyboard'],
+      sections: ['a11y-roles', 'a11y-naming', 'a11y-keyboard', 'a11y-day-template'],
     },
     {
       id: 'globalconfig',

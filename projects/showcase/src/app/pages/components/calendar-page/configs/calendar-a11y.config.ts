@@ -138,4 +138,15 @@ export const CALENDAR_A11Y_SECTIONS: ComponentSection[] = [
       ],
     },
   },
+  {
+    id: 'a11y-day-template',
+    title: 'components.calendar.a11y.day-template.title',
+    description: 'components.calendar.a11y.day-template.description',
+    anchor: 'a11y-day-template',
+    note: {
+      type: 'warning',
+      icon: 'ri-shield-check-line',
+      content: 'components.calendar.a11y.day-template.note',
+    },
+  },
 ];

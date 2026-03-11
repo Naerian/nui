@@ -298,6 +298,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     aspect-ratio: 1 / 1; // Mantiene forma cuadrada al encogerse
     min-width: 0; // Permite que se encoja
     min-height: 0;
@@ -329,7 +330,7 @@
       opacity: 1;
     }
 
-    &--today {
+    &--today:not(.nui-calendar__day--template) {
       position: relative;
       font-weight: var(--nui-font-weight-semibold);
 
@@ -357,7 +358,7 @@
         border-color: var(--nui-calendar-day-selected-hover-border);
       }
 
-      &.nui-calendar__day--today {
+      &.nui-calendar__day--today:not(.nui-calendar__day--template) {
         &::after {
           background: var(--nui-calendar-day-selected-today-bg);
         }
@@ -396,18 +397,22 @@
     // Smart Service - Status States (Indicadores sutiles con línea superior)
     // ==========================================================================
 
-    &--status::before {
-      content: '';
-      position: absolute;
-      top: var(--nui-calendar-status-top);
-      left: 50%;
-      transform: translateX(-50%);
-      width: var(--nui-calendar-status-size);
-      height: 0.125rem;
-      border-radius: 1px;
+    &--status:not(.nui-calendar__day--template) {
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: var(--nui-calendar-status-top);
+        left: 50%;
+        transform: translateX(-50%);
+        width: var(--nui-calendar-status-size);
+        height: 0.125rem;
+        border-radius: 1px;
+      }
     }
 
     $statuses: success, info, warning, danger;
+
     @each $status in $statuses {
       &--status-#{$status}::before {
         background: var(--nui-calendar-day-status-#{$status});
@@ -635,6 +640,7 @@
       opacity: 0;
       transform: translateY(-4px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);

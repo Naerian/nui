@@ -82,6 +82,13 @@
     "exampleRange": "Plage avec footer Appliquer / Effacer",
     "exampleDay": "Jour avec footer personnalisé"
   },
+  "day-template": {
+    "title": "Modèle de cellule de jour",
+    "description": "Projetez un <code>ng-template</code> avec la directive <strong>nuiCalendarDay</strong> pour personnaliser visuellement le contenu de chaque cellule de jour. Ajoutez des indicateurs d'état, des prix, des étiquettes ou tout contenu personnalisé tout en conservant toute l'accessibilité gérée par le composant.",
+    "note": "La directive ne remplace que le <strong>contenu visuel</strong> du bouton de jour. Le composant continue de gérer tous les attributs ARIA, la navigation clavier et les événements. Le contexte fournit l'objet <code>CalendarDay</code> complet comme <code>$implicit</code> (accessible via <code>let-fullDay</code>) et 3 raccourcis : <code>day</code> (numéro), <code>isToday</code> et <code>status</code>.",
+    "exampleStatus": "Avec indicateurs d'état (dateStatusFn)",
+    "examplePrice": "Avec prix par jour (moteur de réservation)"
+  },
   "api": {
     "inputs": {
       "title": "Entrées",
@@ -172,6 +179,17 @@
         "goToToday": { "description": "Navigue vers le mois actuel et sélectionne aujourd'hui. Équivalent au bouton intégré \"Aujourd'hui\"." },
         "clear": { "description": "Efface la sélection actuelle et notifie le <code>FormControl</code> ou <code>ngModel</code> lié." },
         "close": { "description": "Émet l'événement <code>selectFinished</code>, provoquant la fermeture du popover ou de la modale contenant le calendrier." }
+      }
+    },
+    "day-context": {
+      "title": "CalendarDayContext",
+      "description": "Contexte typé reçu par le <code>ng-template</code> projeté avec la directive <code>nuiCalendarDay</code>. Fournit l'objet <code>CalendarDay</code> complet comme <code>$implicit</code> et 3 raccourcis pour les champs les plus courants.",
+      "note": "La classe <strong>CalendarDayDirective</strong> doit être importée dans le composant consommateur (<code>imports: [CalendarDayDirective]</code>). Le sélecteur du template est <code>[nuiCalendarDay]</code>. Utilisez <code>let-fullDay</code> (sans binding = $implicit) pour l'objet complet, ou les raccourcis <code>let-dayNumber=\"day\"</code>, <code>let-status=\"status\"</code>, <code>let-isToday=\"isToday\"</code>.",
+      "rows": {
+        "implicit": { "description": "Objet <code>CalendarDay</code> complet. Raccourci : <code>let-fullDay</code> (sans binding de nom). Donne accès à toutes les propriétés : <code>isWeekend</code>, <code>isSelected</code>, <code>isDisabled</code>, <code>isCurrentMonth</code>, <code>isInRange</code>, <code>date</code>, etc." },
+        "day": { "description": "Numéro du jour (1\u201331). Raccourci de <code>$implicit.dayNumber</code>." },
+        "isToday": { "description": "Est la date d'aujourd'hui. Raccourci de <code>$implicit.isToday</code>." },
+        "status": { "description": "État métier attribué par <code>dateStatusFn</code> : <code>'success'</code>, <code>'warning'</code>, <code>'danger'</code>, <code>'info'</code> ou <code>null</code>. Raccourci de <code>$implicit.status</code>." }
       }
     },
     "smart-types": {
@@ -481,6 +499,11 @@
           "description": "Ferme le popover du calendrier et retourne le focus à l'activateur."
         }
       }
+    },
+    "day-template": {
+      "title": "Accessibilité avec modèle de jour personnalisé",
+      "description": "La directive <code>nuiCalendarDay</code> ne remplace que le contenu visuel interne du bouton de jour. Le composant conserve tous les attributs ARIA (<code>aria-label</code>, <code>aria-selected</code>, <code>aria-disabled</code>) et la navigation clavier entièrement intacts.",
+      "note": "Assurez-vous que le contenu du <code>ng-template</code> est purement visuel. N'ajoutez pas d'éléments interactifs (boutons, liens) dans la cellule de jour, car cela créerait des boutons imbriqués ou des problèmes de focus inattendus. L'<code>aria-label</code> sur le bouton parent fournit déjà toutes les informations d'accessibilité nécessaires."
     }
   },
   "globalConfig": {

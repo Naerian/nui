@@ -499,6 +499,49 @@
                   </div>
                 </div>
               }
+
+              @case ('day-template') {
+                <div class="example-preview flex-row gap-3 align-items-start">
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">With status indicators (dateStatusFn)</h6>
+                    <nui-calendar type="day" [dateStatusFn]="dateStatusFn">
+                      <ng-template
+                        nuiCalendarDay
+                        let-dayNumber="day"
+                        let-status="status"
+                        let-fullDay
+                      >
+                        <span
+                          [style.font-weight]="fullDay.isToday ? 'bold' : 'inherit'"
+                          [style.line-height]="status ? '1.2' : 'inherit'"
+                        >
+                          {{ dayNumber }}
+                        </span>
+                        @if (status) {
+                          <span
+                            style="
+                              display: block;
+                              width: 5px;
+                              height: 5px;
+                              border-radius: 50%;
+                              margin: 0.5px auto 0;
+                            "
+                            [style.background-color]="
+                              status === 'success'
+                                ? 'var(--nui-success)'
+                                : status === 'warning'
+                                  ? 'var(--nui-warning)'
+                                  : status === 'danger'
+                                    ? 'var(--nui-danger)'
+                                    : 'var(--nui-info)'
+                            "
+                          ></span>
+                        }
+                      </ng-template>
+                    </nui-calendar>
+                  </div>
+                </div>
+              }
             }
 
             <!-- Data table (for API or Theming) -->

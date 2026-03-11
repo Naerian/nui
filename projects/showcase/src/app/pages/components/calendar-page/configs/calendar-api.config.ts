@@ -296,6 +296,46 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
     },
   },
   {
+    id: 'api-day-context',
+    title: 'components.calendar.api.day-context.title',
+    description: 'components.calendar.api.day-context.description',
+    anchor: 'api-day-context',
+    note: {
+      type: 'info',
+      icon: 'ri-layout-grid-line',
+      content: 'components.calendar.api.day-context.note',
+    },
+    table: {
+      headers: [
+        'common.tables.property',
+        'common.tables.type',
+        'common.tables.description',
+      ],
+      rows: [
+        [
+          '<code>$implicit</code>',
+          'CalendarDay',
+          'components.calendar.api.day-context.rows.implicit.description',
+        ],
+        [
+          '<code>day</code>',
+          'number',
+          'components.calendar.api.day-context.rows.day.description',
+        ],
+        [
+          '<code>isToday</code>',
+          'boolean',
+          'components.calendar.api.day-context.rows.isToday.description',
+        ],
+        [
+          '<code>status</code>',
+          'DateStatus | null',
+          'components.calendar.api.day-context.rows.status.description',
+        ],
+      ],
+    },
+  },
+  {
     id: 'api-smart-types',
     title: 'components.calendar.api.smart-types.title',
     description: 'components.calendar.api.smart-types.description',

@@ -52,8 +52,9 @@ import { NuiI18nService, NUI_DATE_FULL_FORMAT } from '../../i18n';
 import { SelectBtnOption } from '../select-button';
 import { injectCalendarConfig } from '../../configs/calendar/calendar.config';
 import { DEFAULT_CALENDAR_I18N } from './models';
-import { CalendarFooterContext } from './models/calendar.model';
+import { CalendarDayContext, CalendarFooterContext } from './models/calendar.model';
 import { CalendarFooterDirective } from './directives/calendar-footer.directive';
+import { CalendarDayDirective } from './directives/calendar-day-template.directive';
 
 @Component({
   selector: 'nui-calendar',
@@ -175,6 +176,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   /** Referencia a la directiva `nuiCalendarFooter` proyectada por el consumidor (si existe). */
   private readonly _footerDir = contentChild(CalendarFooterDirective);
 
+  /**
+   * Template personalizado para el contenido interno de cada celda de día.
+   * Proyectado por el consumidor con `nuiCalendarDay`. `undefined` si no se usa.
+   */
+  readonly dateTemplate = contentChild(CalendarDayDirective, { read: TemplateRef });
+
   calendarService = inject(CalendarService);
   private keyboardNavService = inject(CalendarKeyboardNavigationService);
 
@@ -243,6 +250,19 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       close: () => this.selectFinished.emit(),
     },
   }));
+
+  /**
+   * Construye el contexto tipado que se pasa al template `nuiCalendarDay`
+   * para cada celda de día.
+   */
+  buildDayContext(day: CalendarDay): CalendarDayContext {
+    return {
+      $implicit: day,
+      day: day.dayNumber,
+      isToday: day.isToday,
+      status: day.status ?? null,
+    };
+  }
 
   /**
    * Valor efectivo de los textos de i18n, combinando las traducciones globales con los defaults.

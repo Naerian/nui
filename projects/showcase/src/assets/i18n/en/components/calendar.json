@@ -82,6 +82,13 @@
     "exampleRange": "Range with Apply / Clear footer",
     "exampleDay": "Day with custom footer"
   },
+  "day-template": {
+    "title": "Day cell template",
+    "description": "Project an <code>ng-template</code> with the <strong>nuiCalendarDay</strong> directive to visually customise the content of each day cell. Add status indicators, prices, labels or any custom content while keeping all accessibility managed by the component.",
+    "note": "The directive only replaces the <strong>visual content</strong> of the day button. The component continues to manage all ARIA attributes, keyboard navigation and events. The context provides the full <code>CalendarDay</code> object as <code>$implicit</code> (access via <code>let-fullDay</code>) plus 3 shortcuts: <code>day</code> (number), <code>isToday</code> and <code>status</code>.",
+    "exampleStatus": "With status indicators (dateStatusFn)",
+    "examplePrice": "With price per day (booking engine)"
+  },
   "api": {
     "inputs": {
       "title": "Inputs",
@@ -172,6 +179,17 @@
         "goToToday": { "description": "Navigates to the current month and selects today. Equivalent to the built-in \"Today\" button." },
         "clear": { "description": "Clears the current selection and notifies the bound <code>FormControl</code> or <code>ngModel</code>." },
         "close": { "description": "Emits the <code>selectFinished</code> event, triggering the closure of the popover or modal hosting the calendar." }
+      }
+    },
+    "day-context": {
+      "title": "CalendarDayContext",
+      "description": "Typed context received by the <code>ng-template</code> projected with the <code>nuiCalendarDay</code> directive. Provides the full <code>CalendarDay</code> object as <code>$implicit</code> and 3 shortcuts for the most common fields.",
+      "note": "The <strong>CalendarDayDirective</strong> must be imported in the consuming component (<code>imports: [CalendarDayDirective]</code>). The template selector is <code>[nuiCalendarDay]</code>. Use <code>let-fullDay</code> (no binding = $implicit) for the full object, or the shortcuts <code>let-dayNumber=\"day\"</code>, <code>let-status=\"status\"</code>, <code>let-isToday=\"isToday\"</code>.",
+      "rows": {
+        "implicit": { "description": "Full <code>CalendarDay</code> object. Shorthand: <code>let-fullDay</code> (no name binding). Gives access to all properties: <code>isWeekend</code>, <code>isSelected</code>, <code>isDisabled</code>, <code>isCurrentMonth</code>, <code>isInRange</code>, <code>date</code>, etc." },
+        "day": { "description": "Day number (1\u201331). Shortcut for <code>$implicit.dayNumber</code>." },
+        "isToday": { "description": "Is today's date. Shortcut for <code>$implicit.isToday</code>." },
+        "status": { "description": "Business state assigned by <code>dateStatusFn</code>: <code>'success'</code>, <code>'warning'</code>, <code>'danger'</code>, <code>'info'</code> or <code>null</code>. Shortcut for <code>$implicit.status</code>." }
       }
     },
     "smart-types": {
@@ -481,6 +499,11 @@
           "description": "Closes the calendar popover and returns focus to the activator."
         }
       }
+    },
+    "day-template": {
+      "title": "Accessibility with custom day template",
+      "description": "The <code>nuiCalendarDay</code> directive only replaces the visual inner content of the day button. The component keeps all ARIA attributes (<code>aria-label</code>, <code>aria-selected</code>, <code>aria-disabled</code>) and keyboard navigation fully intact.",
+      "note": "Ensure the <code>ng-template</code> content is purely visual. Do not add interactive elements (buttons, links) inside the day cell, as this would create nested buttons or unexpected focus issues. The <code>aria-label</code> on the parent button already provides all necessary accessibility information."
     }
   },
   "globalConfig": {

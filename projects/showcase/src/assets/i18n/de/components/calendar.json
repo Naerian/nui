@@ -82,6 +82,13 @@
     "exampleRange": "Bereich mit Footer Anwenden / Löschen",
     "exampleDay": "Tag mit benutzerdefiniertem Footer"
   },
+  "day-template": {
+    "title": "Tageszellen-Vorlage",
+    "description": "Projiziere ein <code>ng-template</code> mit der Direktive <strong>nuiCalendarDay</strong>, um den visuellen Inhalt jeder Tageszelle anzupassen. Füge Statusindikatoren, Preise, Bezeichnungen oder beliebige benutzerdefinierte Inhalte hinzu, während die gesamte Barrierefreiheit von der Komponente verwaltet wird.",
+    "note": "Die Direktive ersetzt nur den <strong>visuellen Inhalt</strong> der Tag-Schaltfläche. Die Komponente verwaltet weiterhin alle ARIA-Attribute, die Tastaturnavigation und Ereignisse. Der Kontext stellt das vollständige <code>CalendarDay</code>-Objekt als <code>$implicit</code> bereit (zugänglich über <code>let-fullDay</code>) sowie 3 Abkürzungen: <code>day</code> (Nummer), <code>isToday</code> und <code>status</code>.",
+    "exampleStatus": "Mit Statusindikatoren (dateStatusFn)",
+    "examplePrice": "Mit Preis pro Tag (Buchungsmotor)"
+  },
   "api": {
     "inputs": {
       "title": "Inputs",
@@ -172,6 +179,17 @@
         "goToToday": { "description": "Navigiert zum aktuellen Monat und wählt heute aus. Äquivalent zur integrierten Schaltfläche \"Heute\"." },
         "clear": { "description": "Löscht die aktuelle Auswahl und benachrichtigt das gebundene <code>FormControl</code> oder <code>ngModel</code>." },
         "close": { "description": "Sendet das Ereignis <code>selectFinished</code>, was das Schließen des Popovers oder Modals auslöst, das den Kalender enthält." }
+      }
+    },
+    "day-context": {
+      "title": "CalendarDayContext",
+      "description": "Typisierter Kontext, den das mit der Direktive <code>nuiCalendarDay</code> projizierte <code>ng-template</code> empfängt. Stellt das vollständige <code>CalendarDay</code>-Objekt als <code>$implicit</code> und 3 Abkürzungen für die häufigsten Felder bereit.",
+      "note": "Die Klasse <strong>CalendarDayDirective</strong> muss im konsumierenden Komponent importiert werden (<code>imports: [CalendarDayDirective]</code>). Der Template-Selektor lautet <code>[nuiCalendarDay]</code>. Verwende <code>let-fullDay</code> (kein Binding = $implicit) für das vollständige Objekt oder die Abkürzungen <code>let-dayNumber=\"day\"</code>, <code>let-status=\"status\"</code>, <code>let-isToday=\"isToday\"</code>.",
+      "rows": {
+        "implicit": { "description": "Vollständiges <code>CalendarDay</code>-Objekt. Abkürzung: <code>let-fullDay</code> (kein Namens-Binding). Gibt Zugriff auf alle Eigenschaften: <code>isWeekend</code>, <code>isSelected</code>, <code>isDisabled</code>, <code>isCurrentMonth</code>, <code>isInRange</code>, <code>date</code> usw." },
+        "day": { "description": "Tagesnummer (1\u201331). Abkürzung für <code>$implicit.dayNumber</code>." },
+        "isToday": { "description": "Ist das heutige Datum. Abkürzung für <code>$implicit.isToday</code>." },
+        "status": { "description": "Von <code>dateStatusFn</code> zugewiesener Geschäftsstatus: <code>'success'</code>, <code>'warning'</code>, <code>'danger'</code>, <code>'info'</code> oder <code>null</code>. Abkürzung für <code>$implicit.status</code>." }
       }
     },
     "smart-types": {
@@ -481,6 +499,11 @@
           "description": "Schließt das Kalender-Popover und gibt den Fokus an den Aktivator zurück."
         }
       }
+    },
+    "day-template": {
+      "title": "Barrierefreiheit mit benutzerdefinierter Tagesvorlage",
+      "description": "Die Direktive <code>nuiCalendarDay</code> ersetzt nur den visuellen inneren Inhalt der Tag-Schaltfläche. Die Komponente behält alle ARIA-Attribute (<code>aria-label</code>, <code>aria-selected</code>, <code>aria-disabled</code>) und die Tastaturnavigation vollständig bei.",
+      "note": "Stelle sicher, dass der Inhalt des <code>ng-template</code> rein visuell ist. Füge keine interaktiven Elemente (Schaltflächen, Links) in die Tageszelle ein, da dies zu verschachtelten Schaltflächen oder unerwarteten Fokusprobleme führen würde. Das <code>aria-label</code> der übergeordneten Schaltfläche liefert bereits alle erforderlichen Barrierefreiheitsinformationen."
     }
   },
   "globalConfig": {

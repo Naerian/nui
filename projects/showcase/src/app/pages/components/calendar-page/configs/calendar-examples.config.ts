@@ -533,4 +533,65 @@ onFooterApply(value: CalendarValue | null): void {
       },
     ],
   },
+  {
+    id: 'day-template',
+    title: 'components.calendar.day-template.title',
+    description: 'components.calendar.day-template.description',
+    anchor: 'day-template',
+    note: {
+      type: 'info',
+      icon: 'ri-layout-grid-line',
+      content: 'components.calendar.day-template.note',
+    },
+    examples: [
+      {
+        title: 'components.calendar.day-template.exampleStatus',
+        code: `<nui-calendar type="day" [dateStatusFn]="dateStatusFn">
+  <ng-template nuiCalendarDay let-dayNumber="day" let-status="status" let-fullDay>
+    <span [class.today-marker]="fullDay.isToday">{{ dayNumber }}</span>
+    @if (status) {
+      <span class="status-dot status-dot--{{ status }}"></span>
+    }
+  </ng-template>
+</nui-calendar>`,
+        language: 'html',
+      },
+      {
+        title: 'components.calendar.day-template.examplePrice',
+        code: `<nui-calendar type="range" [dateStatusFn]="availabilityStatusFn">
+  <ng-template nuiCalendarDay let-dayNumber="day" let-fullDay>
+    <span>{{ dayNumber }}</span>
+    @if (fullDay.isCurrentMonth && !fullDay.isDisabled) {
+      <small class="nui-calendar__day-price">
+        {{ getPriceForDate(fullDay.date) | currency:'EUR':'symbol':'1.0-0' }}
+      </small>
+    }
+  </ng-template>
+</nui-calendar>`,
+        language: 'html',
+      },
+      {
+        title: 'codeExamples.typescript',
+        code: `import { CalendarDayDirective, DateStatusFn } from 'nui';
+
+@Component({
+  imports: [CalendarComponent, CalendarDayDirective, CurrencyPipe],
+})
+export class MyComponent {
+  dateStatusFn: DateStatusFn = (date) => {
+    const availability = this.getAvailability(date);
+    if (availability === 0) return 'danger';
+    if (availability < 5) return 'warning';
+    if (availability >= 10) return 'success';
+    return 'info';
+  };
+
+  getPriceForDate(date: Date): number {
+    return this.priceMap.get(date.toDateString()) ?? 0;
+  }
+}`,
+        language: 'typescript',
+      },
+    ],
+  },
 ];

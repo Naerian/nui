@@ -283,6 +283,36 @@ export interface CalendarFooterContext {
 }
 
 // ============================================================================
+// DAY CELL TEMPLATE CONTEXT
+// ============================================================================
+
+/**
+ * Contexto tipado que recibe el `ng-template` proyectado con la directiva `nuiCalendarDay`.
+ * Permite personalizar el contenido visual de cada celda de día manteniendo
+ * todos los atributos ARIA, el manejo de teclado y los eventos gestionados por el componente.
+ *
+ * @example
+ * ```html
+ * <nui-calendar [dateStatusFn]="dateStatusFn">
+ *   <ng-template nuiCalendarDay let-dayNumber="day" let-status="status" let-fullDay>
+ *     <span>{{ dayNumber }}</span>
+ *     @if (status === 'danger') { <i class="ri-error-warning-line"></i> }
+ *   </ng-template>
+ * </nui-calendar>
+ * ```
+ */
+export interface CalendarDayContext {
+  /** Objeto `CalendarDay` completo. Shorthand: `let-fullDay` (sin binding = $implicit) */
+  $implicit: CalendarDay;
+  /** Número del día (1–31). Atajo de `$implicit.dayNumber`. */
+  day: number;
+  /** Es el día de hoy. Atajo de `$implicit.isToday`. */
+  isToday: boolean;
+  /** Estado de negocio asignado por `dateStatusFn`, o `null` si no aplica. Atajo de `$implicit.status`. */
+  status: DateStatus | null;
+}
+
+// ============================================================================
 // CONFIGURACIÓN GLOBAL DEL CALENDARIO
 // ============================================================================
 

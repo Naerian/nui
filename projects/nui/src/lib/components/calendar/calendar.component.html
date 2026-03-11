@@ -104,7 +104,9 @@
         <!-- Vista de dias -->
         @if (viewMode() === ViewMode.DAY) {
           <!-- Instrucciones de teclado (referenciadas por aria-describedby del grid) -->
-          <p [id]="instanceId + '-kb-help'" class="sr-only">{{ effectiveI18n().a11y.keyboardInstructions }}</p>
+          <p [id]="instanceId + '-kb-help'" class="sr-only">
+            {{ effectiveI18n().a11y.keyboardInstructions }}
+          </p>
 
           <div role="grid" [attr.aria-describedby]="instanceId + '-kb-help'">
             <div class="nui-calendar__weekdays" role="row">
@@ -124,7 +126,7 @@
 
             <div class="nui-calendar__days-grid">
               @for (week of calendarWeeks(); track week[0].date.getTime(); let wi = $index) {
-                <div role="row" style="display:contents">
+                <div role="row" style="display: contents">
                   @if (showWeekNumbers()) {
                     <button
                       type="button"
@@ -134,7 +136,9 @@
                         type() === CalendarType.WEEK ||
                         (type() === CalendarType.DAY && selection() === CalendarSelection.MULTIPLE)
                       "
-                      [attr.aria-label]="effectiveI18n().week.replace('{week}', weekNumbers()[wi].toString())"
+                      [attr.aria-label]="
+                        effectiveI18n().week.replace('{week}', weekNumbers()[wi].toString())
+                      "
                       (click)="onWeekNumberClick(wi)"
                     >
                       {{ weekNumbers()[wi] }}
@@ -148,6 +152,7 @@
                       role="gridcell"
                       class="nui-calendar__day"
                       data-calendar-item="day"
+                      [class.nui-calendar__day--template]="dateTemplate()"
                       [class.nui-calendar__day--current-month]="day.isCurrentMonth"
                       [class.nui-calendar__day--today]="day.isToday"
                       [class.nui-calendar__day--selected]="day.isSelected"
@@ -170,7 +175,14 @@
                       (mouseenter)="onDayHover(day)"
                       (mouseleave)="onDayHoverEnd()"
                     >
-                      {{ day.dayNumber }}
+                      @if (dateTemplate()) {
+                        <ng-container
+                          [ngTemplateOutlet]="dateTemplate()!"
+                          [ngTemplateOutletContext]="buildDayContext(day)"
+                        />
+                      } @else {
+                        {{ day.dayNumber }}
+                      }
                     </button>
                   }
                 </div>
