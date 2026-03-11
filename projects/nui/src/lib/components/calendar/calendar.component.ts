@@ -2048,16 +2048,17 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       return;
     }
 
-    // H = Home (primer día del mes, solo en vista DAY)
+    // H = Home (acceso rápido: primer día del mes, solo en vista DAY)
     if (key === 'h' && !event.ctrlKey && !event.altKey && !event.metaKey && this.viewMode() === ViewMode.DAY) {
       event.preventDefault();
       const firstDay = this.calendarService.dateAdapter.startOfMonth(this.currentDate());
       this.currentDate.set(firstDay);
       this.focusedDayIndex.set(0);
+      this.focusDayButton(0);
       return;
     }
 
-    // E = End (último día del mes, solo en vista DAY)
+    // E = End (acceso rápido: último día del mes, solo en vista DAY)
     if (key === 'e' && !event.ctrlKey && !event.altKey && !event.metaKey && this.viewMode() === ViewMode.DAY) {
       event.preventDefault();
       const lastDay = this.calendarService.dateAdapter.endOfMonth(this.currentDate());
@@ -2068,24 +2069,114 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       );
       if (lastDayIndex >= 0) {
         this.focusedDayIndex.set(lastDayIndex);
+        this.focusDayButton(lastDayIndex);
       }
       return;
     }
 
-    // PageUp = Mes anterior
+    // Home = primer día de la SEMANA actual (navegación ARIA estándar, solo en vista DAY)
+    if (event.key === 'Home' && this.viewMode() === ViewMode.DAY) {
+      event.preventDefault();
+      let currentIndex = this.focusedDayIndex();
+      if (currentIndex < 0) currentIndex = this.findInitialDayIndex(this.calendarDays());
+      const weekStart = Math.floor(currentIndex / 7) * 7;
+      this.focusedDayIndex.set(weekStart);
+      this.focusDayButton(weekStart);
+      return;
+    }
+
+    // End = último día de la SEMANA actual (navegación ARIA estándar, solo en vista DAY)
+    if (event.key === 'End' && this.viewMode() === ViewMode.DAY) {
+      event.preventDefault();
+      let currentIndex = this.focusedDayIndex();
+      if (currentIndex < 0) currentIndex = this.findInitialDayIndex(this.calendarDays());
+      const weekEnd = Math.min(Math.floor(currentIndex / 7) * 7 + 6, this.calendarDays().length - 1);
+      this.focusedDayIndex.set(weekEnd);
+      this.focusDayButton(weekEnd);
+      return;
+    }
+
+    // PageUp = mes anterior (día) / año anterior (mes) / década anterior (año)
+    // Shift+PageUp = año anterior (día) — sin efecto en vistas mes/año
     if (event.key === 'PageUp') {
       event.preventDefault();
-      if (this.canNavigateBack()) {
-        this.previousMonth();
+      const viewMode = this.viewMode();
+      if (viewMode === ViewMode.DAY) {
+        if (event.shiftKey) {
+          // Shift+PageUp: ir al año anterior manteniendo el día
+          if (this.canNavigateBack()) {
+            const focusedDayNumber = this.getFocusedDayNumber();
+            const newDate = this.calendarService.dateAdapter.subtractYears(this.currentDate(), 1);
+            this.currentDate.set(newDate);
+            const newIndex = this.findDayIndexByNumber(focusedDayNumber);
+            this.focusedDayIndex.set(newIndex);
+            setTimeout(() => this.focusDayButton(newIndex));
+          }
+        } else {
+          // PageUp sin Shift: mes anterior
+          if (this.canNavigateBack()) {
+            const focusedDayNumber = this.getFocusedDayNumber();
+            this.previousMonth();
+            const newIndex = this.findDayIndexByNumber(focusedDayNumber);
+            this.focusedDayIndex.set(newIndex);
+            setTimeout(() => this.focusDayButton(newIndex));
+          }
+        }
+      } else if (viewMode === ViewMode.MONTH) {
+        // En vista mes: año anterior
+        if (this.canNavigateBack()) {
+          this.previousYear();
+          setTimeout(() => this.focusCurrentMonth());
+        }
+      } else if (viewMode === ViewMode.YEAR) {
+        // En vista año: década anterior
+        if (this.canNavigateBack()) {
+          this.previousYearBlock();
+          setTimeout(() => this.focusCurrentYear());
+        }
       }
       return;
     }
 
-    // PageDown = Mes siguiente
+    // PageDown = mes siguiente (día) / año siguiente (mes) / década siguiente (año)
+    // Shift+PageDown = año siguiente (día) — sin efecto en vistas mes/año
     if (event.key === 'PageDown') {
       event.preventDefault();
-      if (this.canNavigateForward()) {
-        this.nextMonth();
+      const viewMode = this.viewMode();
+      if (viewMode === ViewMode.DAY) {
+        if (event.shiftKey) {
+          // Shift+PageDown: ir al año siguiente manteniendo el día
+          if (this.canNavigateForward()) {
+            const focusedDayNumber = this.getFocusedDayNumber();
+            const newDate = new Date(this.currentDate());
+            newDate.setFullYear(newDate.getFullYear() + 1);
+            this.currentDate.set(newDate);
+            const newIndex = this.findDayIndexByNumber(focusedDayNumber);
+            this.focusedDayIndex.set(newIndex);
+            setTimeout(() => this.focusDayButton(newIndex));
+          }
+        } else {
+          // PageDown sin Shift: mes siguiente
+          if (this.canNavigateForward()) {
+            const focusedDayNumber = this.getFocusedDayNumber();
+            this.nextMonth();
+            const newIndex = this.findDayIndexByNumber(focusedDayNumber);
+            this.focusedDayIndex.set(newIndex);
+            setTimeout(() => this.focusDayButton(newIndex));
+          }
+        }
+      } else if (viewMode === ViewMode.MONTH) {
+        // En vista mes: año siguiente
+        if (this.canNavigateForward()) {
+          this.nextYear();
+          setTimeout(() => this.focusCurrentMonth());
+        }
+      } else if (viewMode === ViewMode.YEAR) {
+        // En vista año: década siguiente
+        if (this.canNavigateForward()) {
+          this.nextYearBlock();
+          setTimeout(() => this.focusCurrentYear());
+        }
       }
       return;
     }
@@ -2241,13 +2332,17 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     );
 
     if (result.shouldChangeMonth) {
-      // Cambiar de mes
+      // Cambiar de mes y restaurar el foco tras la re-renderización
       if (result.direction === 'prev') {
         this.previousMonth();
-        this.focusedDayIndex.set(this.calendarDays().length - 1);
+        const newIndex = this.calendarDays().length - 1;
+        this.focusedDayIndex.set(newIndex);
+        setTimeout(() => this.focusDayButton(newIndex));
       } else {
         this.nextMonth();
-        this.focusedDayIndex.set(result.newIndex);
+        const newIndex = result.newIndex;
+        this.focusedDayIndex.set(newIndex);
+        setTimeout(() => this.focusDayButton(newIndex));
       }
     } else {
       this.focusedDayIndex.set(result.newIndex);
@@ -2349,6 +2444,34 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     } else if (result.newIndex !== currentIndex && allYears[result.newIndex]) {
       allYears[result.newIndex].focus();
     }
+  }
+
+  /** Devuelve el número de día del mes del día actualmente enfocado en la cuadrícula, o null. */
+  private getFocusedDayNumber(): number | null {
+    const currentIndex = this.focusedDayIndex();
+    if (currentIndex >= 0) {
+      const day = this.calendarDays()[currentIndex];
+      if (day?.isCurrentMonth) return day.dayNumber;
+    }
+    return null;
+  }
+
+  /**
+   * Encuentra el índice del día con `dayNumber` en el mes actual de `calendarDays()`.
+   * Si el día no existe (ej: el 31 en un mes de 30 días), devuelve el último día del mes.
+   * Fallback final: primer día del mes actual.
+   */
+  private findDayIndexByNumber(dayNumber: number | null): number {
+    const days = this.calendarDays();
+    if (dayNumber !== null) {
+      const exact = days.findIndex(d => d.isCurrentMonth && d.dayNumber === dayNumber);
+      if (exact >= 0) return exact;
+      // Día inexistente en el mes destino: ir al último día del mes
+      for (let i = days.length - 1; i >= 0; i--) {
+        if (days[i].isCurrentMonth) return i;
+      }
+    }
+    return days.findIndex(d => d.isCurrentMonth);
   }
 
   private focusDayButton(index: number): void {

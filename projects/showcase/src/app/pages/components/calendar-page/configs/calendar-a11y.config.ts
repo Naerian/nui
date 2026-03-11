@@ -124,8 +124,16 @@ export const CALENDAR_A11Y_SECTIONS: ComponentSection[] = [
           'components.calendar.a11y.keyboard.rows.pageUp.description',
         ],
         [
+          '<kbd>Shift</kbd> + <kbd>PageUp</kbd>',
+          'components.calendar.a11y.keyboard.rows.shiftPageUp.description',
+        ],
+        [
           '<kbd>PageDown</kbd>',
           'components.calendar.a11y.keyboard.rows.pageDown.description',
+        ],
+        [
+          '<kbd>Shift</kbd> + <kbd>PageDown</kbd>',
+          'components.calendar.a11y.keyboard.rows.shiftPageDown.description',
         ],
         [
           '<kbd>Enter</kbd> / <kbd>Space</kbd>',

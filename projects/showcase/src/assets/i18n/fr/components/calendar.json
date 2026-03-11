@@ -487,10 +487,16 @@
           "description": "Déplace le focus vers le dernier jour de la semaine actuelle."
         },
         "pageUp": {
-          "description": "Navigue vers le mois précédent."
+          "description": "Vue jour : mois précédent. Vue mois : année précédente. Vue année : décennie précédente."
+        },
+        "shiftPageUp": {
+          "description": "Vue jour : année précédente. Sans effet en vues mois/année."
         },
         "pageDown": {
-          "description": "Navigue vers le mois suivant."
+          "description": "Vue jour : mois suivant. Vue mois : année suivante. Vue année : décennie suivante."
+        },
+        "shiftPageDown": {
+          "description": "Vue jour : année suivante. Sans effet en vues mois/année."
         },
         "enterSpace": {
           "description": "Sélectionne le jour focalisé."

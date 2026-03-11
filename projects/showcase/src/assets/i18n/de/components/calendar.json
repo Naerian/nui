@@ -487,10 +487,16 @@
           "description": "Bewegt den Fokus zum letzten Tag der aktuellen Woche."
         },
         "pageUp": {
-          "description": "Navigiert zum vorherigen Monat."
+          "description": "Tagesansicht: vorheriger Monat. Monatsansicht: vorheriges Jahr. Jahresansicht: vorheriges Jahrzehnt."
+        },
+        "shiftPageUp": {
+          "description": "Tagesansicht: vorheriges Jahr. Kein Effekt in Monats-/Jahresansicht."
         },
         "pageDown": {
-          "description": "Navigiert zum nächsten Monat."
+          "description": "Tagesansicht: nächster Monat. Monatsansicht: nächstes Jahr. Jahresansicht: nächstes Jahrzehnt."
+        },
+        "shiftPageDown": {
+          "description": "Tagesansicht: nächstes Jahr. Kein Effekt in Monats-/Jahresansicht."
         },
         "enterSpace": {
           "description": "Wählt den fokussierten Tag aus."

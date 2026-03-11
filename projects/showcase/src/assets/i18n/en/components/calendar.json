@@ -487,10 +487,16 @@
           "description": "Moves focus to the last day of the current week."
         },
         "pageUp": {
-          "description": "Navigates to the previous month."
+          "description": "Day view: previous month. Month view: previous year. Year view: previous decade."
+        },
+        "shiftPageUp": {
+          "description": "Day view: previous year. No effect in month or year view."
         },
         "pageDown": {
-          "description": "Navigates to the next month."
+          "description": "Day view: next month. Month view: next year. Year view: next decade."
+        },
+        "shiftPageDown": {
+          "description": "Day view: next year. No effect in month or year view."
         },
         "enterSpace": {
           "description": "Selects the focused day."

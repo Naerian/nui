@@ -547,10 +547,16 @@
           "description": "Mueve el foco al último día de la semana actual."
         },
         "pageUp": {
-          "description": "Navega al mes anterior."
+          "description": "En vista día: mes anterior. En vista mes: año anterior. En vista año: década anterior."
+        },
+        "shiftPageUp": {
+          "description": "En vista día: año anterior. Sin efecto en vistas mes/año."
         },
         "pageDown": {
-          "description": "Navega al mes siguiente."
+          "description": "En vista día: mes siguiente. En vista mes: año siguiente. En vista año: década siguiente."
+        },
+        "shiftPageDown": {
+          "description": "En vista día: año siguiente. Sin efecto en vistas mes/año."
         },
         "enterSpace": {
           "description": "Selecciona el día con foco."
