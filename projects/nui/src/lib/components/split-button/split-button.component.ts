@@ -3,6 +3,7 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
   booleanAttribute,
+  inject,
   input,
   output,
   computed,
@@ -31,9 +32,9 @@ import {
   DEFAULT_VARIANT,
   DEFAULT_SHAPE,
 } from '../../configs';
-import { ButtonType } from '../button/models/button.model';
+import { ButtonType, ButtonWidth } from '../button/models/button.model';
 import { injectSplitButtonConfig } from '../../configs/split-button';
-import { SplitButtonI18n, DEFAULT_SPLIT_BUTTON_I18N } from './models/split-button.model';
+import { NuiI18nService } from '../../i18n';
 
 @Component({
   selector: 'nui-split-button',
@@ -60,6 +61,8 @@ import { SplitButtonI18n, DEFAULT_SPLIT_BUTTON_I18N } from './models/split-butto
 })
 export class SplitButtonComponent {
   private readonly globalConfig = injectSplitButtonConfig();
+  private readonly _i18nService = inject(NuiI18nService);
+  private readonly _i18n = computed(() => this._i18nService.translations());
 
   // ========================================================================
   // INPUTS
@@ -96,7 +99,7 @@ export class SplitButtonComponent {
   readonly disabledTrigger = input(false, { transform: booleanAttribute });
 
   /** Ancho del conjunto: 'auto' | 'full'. */
-  readonly width = input<'auto' | 'full'>('auto');
+  readonly width = input<ButtonWidth>('auto');
 
   /** Items del menú desplegable. */
   readonly items = input<ActionMenuItem[]>([]);
@@ -122,8 +125,8 @@ export class SplitButtonComponent {
   /** Aria-label del botón principal. */
   readonly ariaLabel = input<string | undefined>(undefined, { alias: 'aria-label' });
 
-  /** Textos i18n del componente. */
-  readonly i18n = input<Partial<SplitButtonI18n>>();
+  /** Aria-label del botón disparador del menú. Prioridad: Input > Config global > Default. */
+  readonly triggerAriaLabel = input<string>();
 
   // ========================================================================
   // OUTPUTS
@@ -210,13 +213,8 @@ export class SplitButtonComponent {
     () => this.offsetSubmenu() ?? this.globalConfig?.offsetSubmenu ?? 4
   );
 
-  readonly effectiveI18n = computed<SplitButtonI18n>(() => ({
-    ...DEFAULT_SPLIT_BUTTON_I18N,
-    ...this.i18n(),
-  }));
-
-  readonly triggerAriaLabel = computed(
-    () => this.effectiveI18n().triggerAriaLabel
+  readonly effectiveTriggerAriaLabel = computed(
+    () => this.triggerAriaLabel() ?? this._i18n().openActionsMenu
   );
 
   readonly wrapperClasses = computed(() => ({

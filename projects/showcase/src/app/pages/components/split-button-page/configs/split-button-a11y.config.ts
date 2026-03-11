@@ -17,12 +17,12 @@ export const SPLIT_BUTTON_A11Y_SECTIONS: ComponentSection[] = [
         'common.tables.description',
       ],
       rows: [
-        ['<code>role</code> (main btn)', '<code class="neutral">button</code>', 'components.splitButton.a11y.roles.rows.mainRole'],
-        ['<code>role</code> (trigger btn)', '<code class="neutral">button</code>', 'components.splitButton.a11y.roles.rows.triggerRole'],
+        ['<code>role</code>', '<code class="neutral">button</code>', 'components.splitButton.a11y.roles.rows.mainRole'],
+        ['<code>role</code>', '<code class="neutral">button</code>', 'components.splitButton.a11y.roles.rows.triggerRole'],
         ['<code>aria-haspopup</code>', '<code class="neutral">menu</code>', 'components.splitButton.a11y.roles.rows.ariaHaspopup'],
         ['<code>aria-expanded</code>', '<code class="neutral">true | false</code>', 'components.splitButton.a11y.roles.rows.ariaExpanded'],
-        ['<code>role</code> (panel)', '<code class="neutral">menu</code>', 'components.splitButton.a11y.roles.rows.panelRole'],
-        ['<code>role</code> (item)', '<code class="neutral">menuitem</code>', 'components.splitButton.a11y.roles.rows.itemRole'],
+        ['<code>role</code>', '<code class="neutral">menu</code>', 'components.splitButton.a11y.roles.rows.panelRole'],
+        ['<code>role</code>', '<code class="neutral">menuitem</code>', 'components.splitButton.a11y.roles.rows.itemRole'],
       ],
     },
   },
@@ -48,11 +48,11 @@ export const SPLIT_BUTTON_A11Y_SECTIONS: ComponentSection[] = [
   [items]="items"
 ></nui-split-button>
 
-<!-- Aria-label del disparador via i18n input -->
+<!-- Aria-label del disparador via input directo -->
 <nui-split-button
   label="Save"
   [items]="items"
-  [i18n]="{ triggerAriaLabel: 'Open save options' }"
+  triggerAriaLabel="Open save options"
 ></nui-split-button>`,
       },
     ],

@@ -79,7 +79,7 @@
         "offsetSubmenu": "Pixel distance between a parent item and its submenu panel.",
         "itemTemplate": "Custom TemplateRef to render each menu item.",
         "ariaLabel": "Accessible label for the main button.",
-        "i18n": "Override i18n strings. Currently supports triggerAriaLabel."
+        "triggerAriaLabel": "Accessible label for the dropdown trigger button."
       }
     },
     "outputs": {

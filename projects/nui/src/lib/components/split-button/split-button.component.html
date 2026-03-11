@@ -46,7 +46,7 @@
     [shape]="effectiveShape()"
     [raised]="effectiveRaised()"
     [disabled]="disabled() || disabledTrigger()"
-    [attr.aria-label]="triggerAriaLabel()"
+    [attr.aria-label]="effectiveTriggerAriaLabel()"
     [attr.aria-haspopup]="'menu'"
     [attr.aria-expanded]="isOpen()"
     type="button"

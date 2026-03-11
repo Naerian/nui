@@ -3,7 +3,6 @@ import { DEFAULT_CALENDAR_I18N } from '../components/calendar/models/calendar-i1
 import { DEFAULT_FAB_BUTTON_I18N } from '../components/fab-button/models/fab-button-i18n.model';
 import { DEFAULT_PAGINATOR_I18N } from '../components/paginator/models/paginator-i18n.model';
 import { DEFAULT_TIMEPICKER_I18N } from '../components/time-picker/models/time-picker-i18n.model';
-import { DEFAULT_SPLIT_BUTTON_I18N } from '../components/split-button/models/split-button.model';
 import { NuiI18n } from './nui-i18n.model';
 
 export const DEFAULT_GENERIC_I18N = {
@@ -12,6 +11,7 @@ export const DEFAULT_GENERIC_I18N = {
   close: 'Close',
   minimize: 'Minimize',
   restore: 'Restore',
+  openActionsMenu: 'Open actions menu',
 };
 
 export const NUI_I18N_DEFAULT: NuiI18n = {
@@ -23,5 +23,4 @@ export const NUI_I18N_DEFAULT: NuiI18n = {
   timePicker: DEFAULT_TIMEPICKER_I18N,
   paginator: DEFAULT_PAGINATOR_I18N,
   fabButton: DEFAULT_FAB_BUTTON_I18N,
-  splitButton: DEFAULT_SPLIT_BUTTON_I18N,
 };

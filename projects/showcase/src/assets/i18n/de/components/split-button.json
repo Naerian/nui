@@ -79,7 +79,7 @@
         "offsetSubmenu": "Pixelabstand zwischen einem übergeordneten Element und seinem Untermenü.",
         "itemTemplate": "Benutzerdefiniertes TemplateRef zum Rendern jedes Menüelements.",
         "ariaLabel": "Barrierefreiheits-Label für den Hauptbutton.",
-        "i18n": "Überschreibt i18n-Texte. Unterstützt derzeit triggerAriaLabel."
+        "triggerAriaLabel": "Barrierefreiheits-Label für den Dropdown-Auslöser."
       }
     },
     "outputs": {

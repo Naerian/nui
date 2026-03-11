@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   HostListener,
   booleanAttribute,
+  inject,
   input,
   output,
   computed,
@@ -18,6 +19,7 @@ import { CommonModule } from '@angular/common';
 import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import { ActionMenuType, ActionMenuItem } from './models/action-menu.model';
+import { NuiI18nService } from '../../i18n';
 import { ActionMenuItemComponent } from './action-menu-item/action-menu-item.component';
 import { ActionMenuSubmenuComponent } from './action-menu-submenu/action-menu-submenu.component';
 import { ButtonWidth } from '../button/models/button.model';
@@ -55,6 +57,8 @@ import { dropdownFadeInAnimation } from '../../animations/dropdown-fade-in.anima
 })
 export class ActionMenuComponent {
   private readonly globalConfig = injectActionMenuConfig();
+  private readonly _i18nService = inject(NuiI18nService);
+  private readonly _i18n = computed(() => this._i18nService.translations());
 
   /** ID único por instancia para vincular trigger → panel de menú */
   readonly instanceId = `nui-am-${Math.random().toString(36).slice(2, 9)}`;
@@ -90,6 +94,10 @@ export class ActionMenuComponent {
   readonly prefixIcon = input<string>();
   readonly iconSubmenu = input<string>('ri-arrow-right-s-line');
   readonly ariaLabel = input<string>();
+
+  readonly effectiveAriaLabel = computed(
+    () => this.ariaLabel() ?? this._i18n().openActionsMenu
+  );
 
   /** Distancia en px entre el trigger y el panel flotante (solo en modo 'dropdown'). */
   readonly offset = input<number>();

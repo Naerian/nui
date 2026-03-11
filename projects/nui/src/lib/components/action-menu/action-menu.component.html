@@ -12,7 +12,7 @@
     [variant]="effectiveVariant()"
     [disabled]="disabled()"
     [title]="title() || label() || ''"
-    [attr.aria-label]="ariaLabel() || label() || title() || null"
+    [attr.aria-label]="ariaLabel() || label() || title() || effectiveAriaLabel()"
     [attr.aria-haspopup]="'menu'"
     [attr.aria-expanded]="menuTrigger()?.isOpen() ?? false"
     [attr.aria-controls]="instanceId + '-menu'"

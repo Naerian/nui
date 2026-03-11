@@ -79,7 +79,7 @@
         "offsetSubmenu": "Distancia en píxeles entre un ítem padre y su submenú.",
         "itemTemplate": "TemplateRef personalizado para renderizar cada ítem del menú.",
         "ariaLabel": "Etiqueta accesible para el botón principal.",
-        "i18n": "Sobreescribe textos i18n. Actualmente soporta triggerAriaLabel."
+        "triggerAriaLabel": "Etiqueta accesible para el botón disparador del menú."
       }
     },
     "outputs": {
