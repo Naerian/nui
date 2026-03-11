@@ -251,6 +251,38 @@ export enum CalendarTimePickerModeEnum {
 export type CalendarTabType = 'calendar' | 'presets' | 'time';
 
 // ============================================================================
+// FOOTER TEMPLATE CONTEXT
+// ============================================================================
+
+/**
+ * Contexto expuesto al template del footer personalizado (`nuiCalendarFooter`).
+ * Permite que el desarrollador acceda al estado actual del calendario y a
+ * las acciones más comunes directamente desde su template.
+ *
+ * @example
+ * <ng-template nuiCalendarFooter let-value="value" let-actions="actions">
+ *   <span>{{ value?.dates?.length }} días seleccionados</span>
+ *   <button (click)="actions.clear()">Limpiar</button>
+ *   <button (click)="actions.close()">Aplicar</button>
+ * </ng-template>
+ */
+export interface CalendarFooterContext {
+  /** Valor de selección actual (fechas, rango, semana, etc.) */
+  value: CalendarValue | null;
+  /** Vista activa en el calendario (day, month, year) */
+  viewMode: ViewMode;
+  /** Acciones del calendario disponibles en el footer */
+  actions: {
+    /** Navega al día de hoy y lo selecciona (solo en tipo DAY) */
+    goToToday: () => void;
+    /** Limpia la selección actual */
+    clear: () => void;
+    /** Emite el evento de cierre (equivalente a confirmar la selección) */
+    close: () => void;
+  };
+}
+
+// ============================================================================
 // CONFIGURACIÓN GLOBAL DEL CALENDARIO
 // ============================================================================
 

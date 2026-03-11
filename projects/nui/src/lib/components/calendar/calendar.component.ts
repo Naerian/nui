@@ -6,6 +6,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  contentChild,
   effect,
   ElementRef,
   forwardRef,
@@ -15,6 +16,7 @@ import {
   OnInit,
   output,
   signal,
+  TemplateRef,
   untracked,
   viewChildren,
 } from '@angular/core';
@@ -50,6 +52,8 @@ import { NuiI18nService, NUI_DATE_FULL_FORMAT } from '../../i18n';
 import { SelectBtnOption } from '../select-button';
 import { injectCalendarConfig } from '../../configs/calendar/calendar.config';
 import { DEFAULT_CALENDAR_I18N } from './models';
+import { CalendarFooterContext } from './models/calendar.model';
+import { CalendarFooterDirective } from './directives/calendar-footer.directive';
 
 @Component({
   selector: 'nui-calendar',
@@ -168,6 +172,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   monthButtons = viewChildren<ElementRef>('monthButton');
   yearButtons = viewChildren<ElementRef>('yearButton');
 
+  /** Referencia a la directiva `nuiCalendarFooter` proyectada por el consumidor (si existe). */
+  private readonly _footerDir = contentChild(CalendarFooterDirective);
+
   calendarService = inject(CalendarService);
   private keyboardNavService = inject(CalendarKeyboardNavigationService);
 
@@ -213,6 +220,29 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   focusedMonthIndex = signal<number>(-1);
   readonly navigationAnnouncement = signal<string>('');
   readonly rangeAnnouncement = signal<string>('');
+
+  /** Último valor seleccionado. Actualizado internamente en cada `emitSelection`. */
+  readonly currentValue = signal<CalendarValue | null>(null);
+
+  /**
+   * Template del footer personalizado proyectado por el consumidor.
+   * Si es `null`, se renderiza el footer built-in (botón "Hoy").
+   */
+  readonly footerTemplate = computed(() => this._footerDir()?.templateRef ?? null);
+
+  /**
+   * Contexto tipado que se pasa al template `nuiCalendarFooter`.
+   * Las `actions` son funciones estables (no recreadas en cada render).
+   */
+  readonly footerContext = computed<CalendarFooterContext>(() => ({
+    value: this.currentValue(),
+    viewMode: this.viewMode(),
+    actions: {
+      goToToday: () => this.goToToday(),
+      clear: () => this.clear(),
+      close: () => this.selectFinished.emit(),
+    },
+  }));
 
   /**
    * Valor efectivo de los textos de i18n, combinando las traducciones globales con los defaults.
@@ -1405,6 +1435,18 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     }, 0);
   }
 
+  /**
+   * Limpia la selección actual del calendario.
+   * Restablece todos los estados de selección y notifica al FormControl si está
+   * vinculado mediante `ngModel` o `formControl`.
+   */
+  clear(): void {
+    this.resetSelectionStates();
+    this.currentValue.set(null);
+    this.onChange(null);
+    this.onTouched();
+  }
+
   // Aplicar preset de rango
   applyPreset(preset: DateRangePreset): void {
     if (this.type() !== CalendarType.RANGE) return;
@@ -2393,7 +2435,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     // EMITIR VALORES
     // ------------------------------------------------------------------------------
 
-    // 1. Emitir evento valueChange (CalendarValue completo - para uso avanzado)
+    // 1. Actualizar el signal de valor actual (para el contexto del footer)
+    this.currentValue.set(calendarValue);
+
+    // 2. Emitir evento valueChange (CalendarValue completo - para uso avanzado)
     this.valueChange.emit(calendarValue);
 
     // 2. Notificar a ngModel / FormControl (valor simplificado - para formularios reactivos)

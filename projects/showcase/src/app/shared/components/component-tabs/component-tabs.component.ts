@@ -113,7 +113,7 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
       if (this.tabs().find(t => t.id === tabId)) {
         this.activeTabId.set(tabId);
       }
-      setTimeout(() => this.contentScrollService.scrollToAnchor(sectionAnchor), 300);
+      this.contentScrollService.scrollToAnchorWhenStable(sectionAnchor);
       return;
     }
 
@@ -132,7 +132,7 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
     );
     if (tabWithSection) {
       this.activeTabId.set(tabWithSection.id);
-      setTimeout(() => this.contentScrollService.scrollToAnchor(fragment), 300);
+      this.contentScrollService.scrollToAnchorWhenStable(fragment);
     }
   }
 
@@ -205,7 +205,7 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
       const tab = this.tabs().find(t => t.id === tabId);
       if (tab) {
         this.activeTabId.set(tabId);
-        setTimeout(() => this.contentScrollService.scrollToAnchor(sectionAnchor), 300);
+        this.contentScrollService.scrollToAnchorWhenStable(sectionAnchor);
       }
       return;
     }
@@ -226,7 +226,7 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
     );
     if (tabWithSection) {
       this.activeTabId.set(tabWithSection.id);
-      setTimeout(() => this.contentScrollService.scrollToAnchor(fragment), 300);
+      this.contentScrollService.scrollToAnchorWhenStable(fragment);
     }
   }
 }

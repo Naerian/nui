@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { CalendarComponent, CalendarType, CalendarValue, DateStatusFn, IsDateEnabledFn } from 'nui';
+import { CalendarComponent, CalendarType, CalendarValue, DateStatusFn, IsDateEnabledFn, CalendarFooterDirective, ButtonDirective } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
 import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';
@@ -18,6 +18,8 @@ import { addDays } from 'date-fns';
     ReactiveFormsModule,
     TranslateModule,
     CalendarComponent,
+    CalendarFooterDirective,
+    ButtonDirective,
     CodeBlockComponent,
     SectionTitleComponent,
     ComponentTabsComponent,
@@ -51,6 +53,7 @@ export class CalendarPageComponent extends BaseComponentPage {
         'selection-modes',
         'multiple-selection',
         'reactive-forms',
+        'custom-footer',
       ],
     },
     {
@@ -67,6 +70,7 @@ export class CalendarPageComponent extends BaseComponentPage {
         'api-view-mode',
         'api-preset',
         'api-smart-types',
+        'api-footer-context',
       ],
     },
     {
@@ -127,6 +131,9 @@ export class CalendarPageComponent extends BaseComponentPage {
   // Reactive Forms
   dateControl = new FormControl<Date | null>(null);
   rangeControl = new FormControl<Date[] | null>(null);
+
+  // Custom footer example
+  footerAppliedRange = signal<string>('');
 
   // Enums para el template
   CalendarType = CalendarType;
@@ -287,6 +294,15 @@ export class CalendarPageComponent extends BaseComponentPage {
   // ========================================================================
   // EXAMPLE DATA
   // ========================================================================
+
+  // Custom footer: handler invoked from the Apply button inside the footer template
+  onFooterApply(value: CalendarValue | null): void {
+    if (!value || value.type !== CalendarType.RANGE) return;
+    const { start, end } = value.range;
+    this.footerAppliedRange.set(
+      `${start.toLocaleDateString()} \u2013 ${end.toLocaleDateString()}`
+    );
+  }
 
   // Disabled dates for example
   disabledDates: Date[] = [new Date(2024, 0, 15), new Date(2024, 0, 20), new Date(2024, 0, 25)];

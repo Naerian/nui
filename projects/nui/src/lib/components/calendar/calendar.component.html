@@ -230,8 +230,16 @@
         }
       </div>
 
-      <!-- FOOTER con botón Today (solo si no hay tabs) -->
-      @if (
+      <!-- FOOTER: custom template (nuiCalendarFooter) o built-in (botón "Hoy") -->
+      @if (footerTemplate()) {
+        <!-- Footer personalizado: reemplaza el built-in y recibe contexto tipado -->
+        <div class="nui-calendar__footer nui-calendar__footer--custom" role="group">
+          <ng-container
+            [ngTemplateOutlet]="footerTemplate()!"
+            [ngTemplateOutletContext]="footerContext()"
+          />
+        </div>
+      } @else if (
         !showPresets() &&
         viewMode() === ViewMode.DAY &&
         effectiveShowTodayButton() &&
@@ -239,6 +247,7 @@
         isTodayEnabled() &&
         type() === CalendarType.DAY
       ) {
+        <!-- Footer built-in: solo botón "Hoy" -->
         <div class="nui-calendar__footer">
           <div class="nui-calendar__footer-center">
             <button

@@ -44,6 +44,63 @@ export class ContentScrollService {
   }
 
   /**
+   * Igual que scrollToAnchor, pero espera a que la posición del elemento se
+   * estabilice antes de hacer el scroll final. Útil en carga inicial cuando
+   * el contenido dinámico (componentes Angular) aún se está renderizando y
+   * puede desplazar el elemento destino hacia abajo.
+   *
+   * @param anchor      ID del elemento destino
+   * @param offset      Píxeles de margen superior
+   * @param maxWaitMs   Tiempo máximo de espera (ms) antes de forzar el scroll
+   */
+  scrollToAnchorWhenStable(anchor: string, offset = 24, maxWaitMs = 1500): void {
+    const startTime = Date.now();
+    const pollMs = 100;
+    let lastRelativeTop: number | null = null;
+    let stableRounds = 0;
+
+    const attempt = () => {
+      const container = this.scrollContainer;
+      const target =
+        (document.getElementById(anchor) as HTMLElement | null) ||
+        (document.getElementsByName(anchor)[0] as HTMLElement | null);
+
+      if (!target || !container) {
+        if (Date.now() - startTime < maxWaitMs) setTimeout(attempt, pollMs);
+        return;
+      }
+
+      const relativeTop =
+        target.getBoundingClientRect().top -
+        container.getBoundingClientRect().top +
+        container.scrollTop;
+
+      if (relativeTop === lastRelativeTop) {
+        stableRounds++;
+        // Dos rondas consecutivas con la misma posición → layout estable
+        if (stableRounds >= 2) {
+          container.scrollTo({ top: Math.max(0, relativeTop - offset), behavior: 'smooth' });
+          return;
+        }
+      } else {
+        stableRounds = 0;
+      }
+
+      lastRelativeTop = relativeTop;
+
+      if (Date.now() - startTime < maxWaitMs) {
+        setTimeout(attempt, pollMs);
+      } else {
+        // Tiempo agotado: forzar scroll con la posición actual
+        container.scrollTo({ top: Math.max(0, relativeTop - offset), behavior: 'smooth' });
+      }
+    };
+
+    // Primera comprobación tras un frame, cuando el DOM ya existe
+    setTimeout(attempt, pollMs);
+  }
+
+  /**
    * Hace scroll al top del contenedor.
    */
   scrollToTop(): void {

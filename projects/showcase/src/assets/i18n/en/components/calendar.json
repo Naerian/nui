@@ -75,6 +75,13 @@
     "description": "Displays week numbers according to the ISO-8601 standard in a column to the left of the calendar. Useful for businesses, logistics and planning.",
     "note": "Enable week numbers with <code>[showWeekNumbers]=\"true\"</code>. Week numbers are clickable when <code>type='week'</code> or when <code>type='day'</code> and <code>selection='multiple'</code>, allowing selecting the full week with a single click. The ISO-8601 standard defines that the week starts on Monday and that week 1 of the year is the first week containing at least 4 days of the new year."
   },
+  "custom-footer": {
+    "title": "Custom footer",
+    "description": "Project an <code>ng-template</code> with the <strong>nuiCalendarFooter</strong> directive to replace the built-in footer with your own action buttons, counters or any content you need.",
+    "note": "The custom template <strong>replaces</strong> the built-in footer (Today button). The typed <code>CalendarFooterContext</code> exposes <code>value</code> (current selection), <code>viewMode</code> and the actions <code>goToToday()</code>, <code>clear()</code> and <code>close()</code>.",
+    "exampleRange": "Range with Apply / Clear footer",
+    "exampleDay": "Day with custom footer"
+  },
   "api": {
     "inputs": {
       "title": "Inputs",
@@ -104,7 +111,8 @@
       "title": "Outputs",
       "description": "Events emitted by the calendar when the user selects a date or range",
       "rows": {
-        "valueChange": { "description": "Emits when the selection changes. Includes date(s), range/week and time if enabled" }
+        "valueChange": { "description": "Emits when the selection changes. Includes date(s), range/week and time if enabled" },
+        "selectFinished": { "description": "Emits when the selection is confirmed and the calendar should close. Useful for integration with popovers or modals. Also triggered by <code>actions.close()</code> in a custom footer." }
       }
     },
     "calendar-value": {
@@ -152,6 +160,18 @@
         "label": { "description": "Text shown on the button" },
         "start": { "description": "Range start date" },
         "end": { "description": "Range end date" }
+      }
+    },
+    "footer-context": {
+      "title": "CalendarFooterContext",
+      "description": "Typed context received by the <code>ng-template</code> projected with the <code>nuiCalendarFooter</code> directive. Provides access to the current calendar state and allows executing actions from the custom footer.",
+      "note": "The <strong>CalendarFooterDirective</strong> must be imported in the consuming component (<code>imports: [CalendarFooterDirective]</code>). The template selector is <code>[nuiCalendarFooter]</code>.",
+      "rows": {
+        "value": { "description": "Current selection value (<code>CalendarValue | null</code>). Reflects the user's selection in real time." },
+        "viewMode": { "description": "Active calendar view: <code>'day'</code>, <code>'month'</code> or <code>'year'</code>. Useful for showing or hiding actions based on the view." },
+        "goToToday": { "description": "Navigates to the current month and selects today. Equivalent to the built-in \"Today\" button." },
+        "clear": { "description": "Clears the current selection and notifies the bound <code>FormControl</code> or <code>ngModel</code>." },
+        "close": { "description": "Emits the <code>selectFinished</code> event, triggering the closure of the popover or modal hosting the calendar." }
       }
     },
     "smart-types": {
@@ -405,6 +425,9 @@
         },
         "liveRegion": {
           "description": "A hidden <code>aria-live=\"polite\"</code> region announces month navigation to screen readers."
+        },
+        "footerGroup": {
+          "description": "The custom footer (<code>nuiCalendarFooter</code>) uses <code>role=\"group\"</code> to semantically group its action controls. Tab focus naturally flows from the day grid to the footer."
         }
       }
     },

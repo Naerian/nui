@@ -481,4 +481,56 @@ onMultipleMonthsSelected(value: CalendarValue): void {
       },
     ],
   },
+  {
+    id: 'custom-footer',
+    title: 'components.calendar.custom-footer.title',
+    description: 'components.calendar.custom-footer.description',
+    anchor: 'custom-footer',
+    note: {
+      type: 'info',
+      content: 'components.calendar.custom-footer.note',
+    },
+    examples: [
+      {
+        title: 'components.calendar.custom-footer.exampleRange',
+        code: `<nui-calendar [type]="CalendarType.RANGE">
+  <ng-template nuiCalendarFooter let-value="value" let-actions="actions">
+    <button nuiButton prefixIcon="ri-close-line" size="xs" (onClick)="actions.clear(); footerAppliedRange.set('')"> Clear </button>
+    <button nuiButton size="xs" [disabled]="!value" (onClick)="onFooterApply(value); actions.close()"> Apply </button>
+  </ng-template>
+</nui-calendar>`,
+        language: 'html',
+      },
+      {
+        title: 'codeExamples.typescript',
+        code: `import { CalendarFooterDirective, CalendarValue, CalendarType } from 'nui';
+
+// In @Component imports:
+imports: [..., CalendarFooterDirective]
+
+// State
+footerAppliedRange = signal<string>('');
+
+// Handler for the Apply button
+onFooterApply(value: CalendarValue | null): void {
+  if (!value || value.type !== CalendarType.RANGE) return;
+  const { start, end } = value.range;
+  this.footerAppliedRange.set(
+    \`\${start.toLocaleDateString()} – \${end.toLocaleDateString()}\`
+  );
+}`,
+        language: 'typescript',
+      },
+      {
+        title: 'components.calendar.custom-footer.exampleDay',
+        code: `<nui-calendar type="day" [showTodayButton]="false">
+  <ng-template nuiCalendarFooter let-actions="actions">
+    <button nuiButton prefixIcon="ri-close-line" size="xs" (onClick)="actions.clear()"> Clear </button>
+    <button nuiButton size="xs" (onClick)="actions.goToToday()">Today</button>
+  </ng-template>
+</nui-calendar>`,
+        language: 'html',
+      },
+    ],
+  },
 ];

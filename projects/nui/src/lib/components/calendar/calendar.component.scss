@@ -610,6 +610,14 @@
     gap: var(--nui-spacing-sm);
     padding-top: var(--nui-calendar-gap);
     border-top: var(--nui-calendar-tabs-border-width) solid var(--nui-border-subtle);
+    // Altura mínima garantizada para evitar saltos de layout al cambiar de vista
+    min-height: calc(var(--nui-spacing-lg) + var(--nui-spacing-2xl));
+
+    &--custom {
+      // En modo custom el flexbox es punto de partida; el desarrollador
+      // puede centrar, alinear a la derecha, etc. directamente desde su template.
+      justify-content: flex-end;
+    }
   }
 
   &__footer-center {

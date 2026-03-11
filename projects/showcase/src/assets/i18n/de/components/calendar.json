@@ -75,6 +75,13 @@
     "description": "Zeigt Wochennummern gemäß dem ISO-8601-Standard in einer Spalte links vom Kalender an. Nützlich für Unternehmen, Logistik und Planung.",
     "note": "Aktiviere Wochennummern mit <code>[showWeekNumbers]=\"true\"</code>. Wochennummern sind anklickbar bei <code>type='week'</code> oder wenn <code>type='day'</code> und <code>selection='multiple'</code>, wodurch die vollständige Woche mit einem einzigen Klick ausgewählt werden kann. Der ISO-8601-Standard definiert, dass die Woche am Montag beginnt und Woche 1 des Jahres die erste Woche ist, die mindestens 4 Tage des neuen Jahres enthält."
   },
+  "custom-footer": {
+    "title": "Benutzerdefinierter Footer",
+    "description": "Projiziere ein <code>ng-template</code> mit der Direktive <strong>nuiCalendarFooter</strong>, um den integrierten Footer durch eigene Aktionsschaltflächen, Zähler oder beliebige Inhalte zu ersetzen.",
+    "note": "Das benutzerdefinierte Template <strong>ersetzt</strong> den integrierten Footer (Heute-Schaltfläche). Der typisierte <code>CalendarFooterContext</code> stellt <code>value</code> (aktuelle Auswahl), <code>viewMode</code> und die Aktionen <code>goToToday()</code>, <code>clear()</code> und <code>close()</code> bereit.",
+    "exampleRange": "Bereich mit Footer Anwenden / Löschen",
+    "exampleDay": "Tag mit benutzerdefiniertem Footer"
+  },
   "api": {
     "inputs": {
       "title": "Inputs",
@@ -104,7 +111,8 @@
       "title": "Outputs",
       "description": "Ereignisse, die der Kalender ausgibt, wenn der Benutzer ein Datum oder einen Bereich auswählt",
       "rows": {
-        "valueChange": { "description": "Wird ausgelöst, wenn sich die Auswahl ändert. Enthält Datum/Daten, Bereich/Woche und Zeit, wenn aktiviert" }
+        "valueChange": { "description": "Wird ausgelöst, wenn sich die Auswahl ändert. Enthält Datum/Daten, Bereich/Woche und Zeit, wenn aktiviert" },
+        "selectFinished": { "description": "Wird ausgelöst, wenn die Auswahl bestätigt wird und der Kalender geschlossen werden soll. Nützlich für die Integration mit Popovers oder Modals. Wird auch durch <code>actions.close()</code> in einem benutzerdefinierten Footer ausgelöst." }
       }
     },
     "calendar-value": {
@@ -152,6 +160,18 @@
         "label": { "description": "Auf der Schaltfläche angezeigter Text" },
         "start": { "description": "Anfangsdatum des Bereichs" },
         "end": { "description": "Enddatum des Bereichs" }
+      }
+    },
+    "footer-context": {
+      "title": "CalendarFooterContext",
+      "description": "Typisierter Kontext, den das mit der Direktive <code>nuiCalendarFooter</code> projizierte <code>ng-template</code> empfängt. Ermöglicht den Zugriff auf den aktuellen Kalenderzustand und das Ausführen von Aktionen aus dem benutzerdefinierten Footer.",
+      "note": "Die Direktive <strong>CalendarFooterDirective</strong> muss im konsumierenden Komponent importiert werden (<code>imports: [CalendarFooterDirective]</code>). Der Template-Selektor lautet <code>[nuiCalendarFooter]</code>.",
+      "rows": {
+        "value": { "description": "Aktueller Auswahlwert (<code>CalendarValue | null</code>). Spiegelt die Benutzerauswahl in Echtzeit wider." },
+        "viewMode": { "description": "Aktive Kalenderansicht: <code>'day'</code>, <code>'month'</code> oder <code>'year'</code>. Nützlich zum Ein-/Ausblenden von Aktionen je nach Ansicht." },
+        "goToToday": { "description": "Navigiert zum aktuellen Monat und wählt heute aus. Äquivalent zur integrierten Schaltfläche \"Heute\"." },
+        "clear": { "description": "Löscht die aktuelle Auswahl und benachrichtigt das gebundene <code>FormControl</code> oder <code>ngModel</code>." },
+        "close": { "description": "Sendet das Ereignis <code>selectFinished</code>, was das Schließen des Popovers oder Modals auslöst, das den Kalender enthält." }
       }
     },
     "smart-types": {
@@ -405,6 +425,9 @@
         },
         "liveRegion": {
           "description": "Ein versteckter <code>aria-live=\"polite\"</code>-Bereich kündigt Monatsnavigation für Screenreader an."
+        },
+        "footerGroup": {
+          "description": "Der benutzerdefinierte Footer (<code>nuiCalendarFooter</code>) verwendet <code>role=\"group\"</code> zur semantischen Gruppierung seiner Aktionssteuerelemente. Der Tab-Fokus fließt natürlich vom Tagesraster zum Footer."
         }
       }
     },

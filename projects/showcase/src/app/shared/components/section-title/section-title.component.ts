@@ -102,15 +102,10 @@ export class SectionTitleComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // Comprobar si la URL tiene un hash que coincide con este ancla
-    const hash = window.location.hash.substring(1);
-    const anchorToCheck = hash.includes('.') ? hash.split('.')[1] : hash;
-
-    if (anchorToCheck === this.anchor) {
-      setTimeout(() => {
-        this.contentScrollService.scrollToAnchor(this.anchor!);
-      }, 150);
-    }
+    // El scroll al ancla en la carga inicial lo gestiona ComponentTabsComponent
+    // usando scrollToAnchorWhenStable(), que espera a que el layout sea estable.
+    // Aquí no hacemos nada para evitar un scroll prematuro que luego queda desfasado
+    // cuando el contenido dinámico encima acaba de renderizarse.
   }
 
   /**

@@ -51,6 +51,11 @@ export const CALENDAR_A11Y_SECTIONS: ComponentSection[] = [
           '"polite"',
           'components.calendar.a11y.roles.rows.liveRegion.description',
         ],
+        [
+          '<code>role</code>',
+          '"group"',
+          'components.calendar.a11y.roles.rows.footerGroup.description',
+        ],
       ],
     },
   },

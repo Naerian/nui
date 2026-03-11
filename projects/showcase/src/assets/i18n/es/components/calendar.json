@@ -75,6 +75,13 @@
     "description": "Muestra los números de semana según el estándar ISO-8601 en una columna a la izquierda del calendario. Útil para empresas, logística y planificación.",
     "note": "Activa los números de semana con <code>[showWeekNumbers]=\"true\"</code>. Los números de semana son clicables cuando <code>type='week'</code> o cuando <code>type='day'</code> y <code>selection='multiple'</code>, permitiendo seleccionar la semana completa con un solo clic. El estándar ISO-8601 define que la semana comienza en lunes y que la semana 1 del año es la primera semana que contiene al menos 4 días del nuevo año."
   },
+  "custom-footer": {
+    "title": "Footer personalizado",
+    "description": "Proyecta un <code>ng-template</code> con la directiva <strong>nuiCalendarFooter</strong> para reemplazar el footer built-in con botones de acción propios, contadores o cualquier contenido que necesites.",
+    "note": "El template custom <strong>reemplaza</strong> el footer built-in (botón \"Hoy\"). El contexto tipado <code>CalendarFooterContext</code> expone <code>value</code> (selección actual), <code>viewMode</code> y las acciones <code>goToToday()</code>, <code>clear()</code> y <code>close()</code>.",
+    "exampleRange": "Rango con footer Aplicar / Limpiar",
+    "exampleDay": "Día con footer personalizado"
+  },
   "api": {
     "inputs": {
       "title": "Inputs",
@@ -104,7 +111,8 @@
       "title": "Outputs",
       "description": "Eventos emitidos por el calendario cuando el usuario selecciona una fecha o rango",
       "rows": {
-        "valueChange": { "description": "Emite cuando cambia la selección. Incluye fecha(s), rango/semana y tiempo si está habilitado" }
+        "valueChange": { "description": "Emite cuando cambia la selección. Incluye fecha(s), rango/semana y tiempo si está habilitado" },
+        "selectFinished": { "description": "Emite cuando la selección se confirma y el calendario debe cerrarse. Útil para integración con popovers o modales. También es invocado por <code>actions.close()</code> del footer personalizado." }
       }
     },
     "calendar-value": {
@@ -152,6 +160,18 @@
         "label": { "description": "Texto que se muestra en el botón" },
         "start": { "description": "Fecha de inicio del rango" },
         "end": { "description": "Fecha de fin del rango" }
+      }
+    },
+    "footer-context": {
+      "title": "CalendarFooterContext",
+      "description": "Contexto tipado que recibe el <code>ng-template</code> proyectado con la directiva <code>nuiCalendarFooter</code>. Permite acceder al estado actual del calendario y ejecutar acciones desde el footer personalizado.",
+      "note": "La directiva <strong>CalendarFooterDirective</strong> debe importarse en el componente consumidor (<code>imports: [CalendarFooterDirective]</code>). El selector del template es <code>[nuiCalendarFooter]</code>.",
+      "rows": {
+        "value": { "description": "Valor de selección actual (<code>CalendarValue | null</code>). Refleja en tiempo real la selección del usuario." },
+        "viewMode": { "description": "Vista activa del calendario: <code>'day'</code>, <code>'month'</code> o <code>'year'</code>. Útil para mostrar u ocultar acciones según la vista." },
+        "goToToday": { "description": "Navega al mes actual y selecciona hoy. Equivalente al botón built-in \"Hoy\"." },
+        "clear": { "description": "Limpia la selección actual y notifica al <code>FormControl</code> o <code>ngModel</code> vinculado." },
+        "close": { "description": "Emite el evento <code>selectFinished</code>, lo que provoca el cierre del popover o modal que contiene el calendario." }
       }
     },
     "smart-types": {
@@ -405,6 +425,9 @@
         },
         "liveRegion": {
           "description": "Una región <code>aria-live=\"polite\"</code> oculta anuncia la navegación de mes a los lectores de pantalla."
+        },
+        "footerGroup": {
+          "description": "El footer personalizado (<code>nuiCalendarFooter</code>) usa <code>role=\"group\"</code> para agrupar semánticamente sus controles de acción. El orden de foco (Tab) pasa naturalmente del grid de días al footer."
         }
       }
     },

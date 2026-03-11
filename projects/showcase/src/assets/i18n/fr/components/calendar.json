@@ -75,6 +75,13 @@
     "description": "Affiche les numéros de semaine selon la norme ISO-8601 dans une colonne à gauche du calendrier. Utile pour les entreprises, la logistique et la planification.",
     "note": "Activez les numéros de semaine avec <code>[showWeekNumbers]=\"true\"</code>. Les numéros de semaine sont cliquables lorsque <code>type='week'</code> ou lorsque <code>type='day'</code> et <code>selection='multiple'</code>, permettant de sélectionner la semaine complète en un seul clic. La norme ISO-8601 définit que la semaine commence le lundi et que la semaine 1 de l'année est la première semaine contenant au moins 4 jours de la nouvelle année."
   },
+  "custom-footer": {
+    "title": "Footer personnalisé",
+    "description": "Projetez un <code>ng-template</code> avec la directive <strong>nuiCalendarFooter</strong> pour remplacer le footer intégré par vos propres boutons d'action, compteurs ou tout autre contenu.",
+    "note": "Le template personnalisé <strong>remplace</strong> le footer intégré (bouton Aujourd'hui). Le contexte typé <code>CalendarFooterContext</code> expose <code>value</code> (sélection actuelle), <code>viewMode</code> et les actions <code>goToToday()</code>, <code>clear()</code> et <code>close()</code>.",
+    "exampleRange": "Plage avec footer Appliquer / Effacer",
+    "exampleDay": "Jour avec footer personnalisé"
+  },
   "api": {
     "inputs": {
       "title": "Entrées",
@@ -104,7 +111,8 @@
       "title": "Sorties",
       "description": "Événements émis par le calendrier lorsque l'utilisateur sélectionne une date ou une plage",
       "rows": {
-        "valueChange": { "description": "Émis lorsque la sélection change. Inclut la ou les dates, la plage/semaine et l'heure si activée" }
+        "valueChange": { "description": "Émis lorsque la sélection change. Inclut la ou les dates, la plage/semaine et l'heure si activée" },
+        "selectFinished": { "description": "Émis lorsque la sélection est confirmée et le calendrier doit se fermer. Utile pour l'intégration avec des popovers ou des modales. Également déclenché par <code>actions.close()</code> dans un footer personnalisé." }
       }
     },
     "calendar-value": {
@@ -152,6 +160,18 @@
         "label": { "description": "Texte affiché sur le bouton" },
         "start": { "description": "Date de début de la plage" },
         "end": { "description": "Date de fin de la plage" }
+      }
+    },
+    "footer-context": {
+      "title": "CalendarFooterContext",
+      "description": "Contexte typé reçu par le <code>ng-template</code> projeté avec la directive <code>nuiCalendarFooter</code>. Permet d'accéder à l'état actuel du calendrier et d'exécuter des actions depuis le footer personnalisé.",
+      "note": "La directive <strong>CalendarFooterDirective</strong> doit être importée dans le composant consommateur (<code>imports: [CalendarFooterDirective]</code>). Le sélecteur du template est <code>[nuiCalendarFooter]</code>.",
+      "rows": {
+        "value": { "description": "Valeur de sélection actuelle (<code>CalendarValue | null</code>). Reflète la sélection de l'utilisateur en temps réel." },
+        "viewMode": { "description": "Vue active du calendrier : <code>'day'</code>, <code>'month'</code> ou <code>'year'</code>. Utile pour afficher ou masquer des actions selon la vue." },
+        "goToToday": { "description": "Navigue vers le mois actuel et sélectionne aujourd'hui. Équivalent au bouton intégré \"Aujourd'hui\"." },
+        "clear": { "description": "Efface la sélection actuelle et notifie le <code>FormControl</code> ou <code>ngModel</code> lié." },
+        "close": { "description": "Émet l'événement <code>selectFinished</code>, provoquant la fermeture du popover ou de la modale contenant le calendrier." }
       }
     },
     "smart-types": {
@@ -405,6 +425,9 @@
         },
         "liveRegion": {
           "description": "Une région <code>aria-live=\"polite\"</code> masquée annonce la navigation de mois aux lecteurs d'écran."
+        },
+        "footerGroup": {
+          "description": "Le footer personnalisé (<code>nuiCalendarFooter</code>) utilise <code>role=\"group\"</code> pour regrouper sémantiquement ses contrôles d'action. Le focus Tab passe naturellement de la grille des jours au footer."
         }
       }
     },

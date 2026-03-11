@@ -142,6 +142,11 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
           'EventEmitter<CalendarValue>',
           'components.calendar.api.outputs.rows.valueChange.description',
         ],
+        [
+          '<code>selectFinished</code>',
+          'EventEmitter<void>',
+          'components.calendar.api.outputs.rows.selectFinished.description',
+        ],
       ],
     },
   },
@@ -244,6 +249,51 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
         language: 'typescript',
       },
     ],
+  },
+  {
+    id: 'api-footer-context',
+    title: 'components.calendar.api.footer-context.title',
+    description: 'components.calendar.api.footer-context.description',
+    anchor: 'api-footer-context',
+    note: {
+      type: 'info',
+      icon: 'ri-layout-bottom-line',
+      content: 'components.calendar.api.footer-context.note',
+    },
+    table: {
+      headers: [
+        'common.tables.property',
+        'common.tables.type',
+        'common.tables.description',
+      ],
+      rows: [
+        [
+          '<code>value</code>',
+          'CalendarValue | null',
+          'components.calendar.api.footer-context.rows.value.description',
+        ],
+        [
+          '<code>viewMode</code>',
+          'ViewMode',
+          'components.calendar.api.footer-context.rows.viewMode.description',
+        ],
+        [
+          '<code>actions.goToToday()</code>',
+          '() => void',
+          'components.calendar.api.footer-context.rows.goToToday.description',
+        ],
+        [
+          '<code>actions.clear()</code>',
+          '() => void',
+          'components.calendar.api.footer-context.rows.clear.description',
+        ],
+        [
+          '<code>actions.close()</code>',
+          '() => void',
+          'components.calendar.api.footer-context.rows.close.description',
+        ],
+      ],
+    },
   },
   {
     id: 'api-smart-types',

@@ -445,6 +445,60 @@
                   </div>
                 </div>
               }
+
+              @case ('custom-footer') {
+                <div class="example-preview flex-row gap-3 align-items-start">
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">Range with Apply / Clear footer</h6>
+                    <nui-calendar [type]="CalendarType.RANGE">
+                      <ng-template nuiCalendarFooter let-value="value" let-actions="actions">
+                        <button
+                          nuiButton
+                          prefixIcon="ri-close-line"
+                          size="xs"
+                          (onClick)="actions.clear(); footerAppliedRange.set('')"
+                        >
+                          Clear
+                        </button>
+                        <button
+                          nuiButton
+                          size="xs"
+                          [disabled]="!value"
+                          (onClick)="onFooterApply(value); actions.close()"
+                        >
+                          Apply
+                        </button>
+                      </ng-template>
+                    </nui-calendar>
+                    @if (footerAppliedRange()) {
+                      <div class="value-display">
+                        <i class="ri-check-line text-success me-1"></i>
+                        Applied:
+                        <strong>{{ footerAppliedRange() }}</strong>
+                      </div>
+                    } @else {
+                      <div class="value-display">Select a range and click "Apply"</div>
+                    }
+                  </div>
+
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">Day with custom "Today" + "Clear"</h6>
+                    <nui-calendar type="day" [showTodayButton]="false">
+                      <ng-template nuiCalendarFooter let-actions="actions">
+                        <button
+                          nuiButton
+                          prefixIcon="ri-close-line"
+                          size="xs"
+                          (onClick)="actions.clear()"
+                        >
+                          Clear
+                        </button>
+                        <button nuiButton size="xs" (onClick)="actions.goToToday()">Today</button>
+                      </ng-template>
+                    </nui-calendar>
+                  </div>
+                </div>
+              }
             }
 
             <!-- Data table (for API or Theming) -->
