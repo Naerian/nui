@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { TimePickerComponent, TimePickerConfig, TimeValue, DurationValue, TimePreset } from 'nui';
+import { TimePickerComponent, TimePickerConfig, TimeValue, DurationValue, TimePreset, TimePickerItemDirective, TimePickerFooterDirective, TimePickerHeaderDirective, ButtonDirective } from 'nui';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
 import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';
@@ -15,8 +15,12 @@ import { TIME_PICKER_PAGE_CONFIG } from './time-picker-page.config';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    ButtonDirective,
     TranslateModule,
     TimePickerComponent,
+    TimePickerItemDirective,
+    TimePickerFooterDirective,
+    TimePickerHeaderDirective,
     CodeBlockComponent,
     SectionTitleComponent,
     ComponentTabsComponent,
@@ -43,6 +47,9 @@ export class TimePickerPageComponent extends BaseComponentPage {
         'disabled-times',
         'duration-mode',
         'default-strategies',
+        'custom-footer',
+        'custom-header',
+        'custom-item',
         'disabled',
         'reactive-forms',
       ],
@@ -56,6 +63,10 @@ export class TimePickerPageComponent extends BaseComponentPage {
         'api-outputs',
         'api-config',
         'api-duration-config',
+        'api-content-directives',
+        'api-item-context',
+        'api-footer-context',
+        'api-header-context',
         'api-time-value',
         'api-duration-value',
         'api-time-preset',
@@ -83,7 +94,7 @@ export class TimePickerPageComponent extends BaseComponentPage {
       id: 'a11y',
       label: 'common.tabs.a11y',
       icon: 'ri-accessibility-line',
-      sections: ['a11y-roles', 'a11y-naming', 'a11y-keyboard'],
+      sections: ['a11y-roles', 'a11y-naming', 'a11y-keyboard', 'a11y-templates'],
     },
     {
       id: 'globalconfig',
@@ -96,6 +107,9 @@ export class TimePickerPageComponent extends BaseComponentPage {
   // Examples data
   selectedTime = signal<TimeValue | null>(null);
   selectedTimeWithPresets = signal<TimeValue | null>(null);
+  timeForCustomFooter = signal<TimeValue | null>(null);
+  timeForCustomHeader = signal<TimeValue | null>(null);
+  timeForCustomItem = signal<TimeValue | null>(null);
   
   // Presets example
   presets: TimePreset[] = [
@@ -146,5 +160,17 @@ export class TimePickerPageComponent extends BaseComponentPage {
 
   onTimeWithPresetsChange(time: TimeValue | DurationValue | null): void {
     this.selectedTimeWithPresets.set(time as TimeValue | null);
+  }
+
+  onCustomFooterChange(time: TimeValue | DurationValue | null): void {
+    this.timeForCustomFooter.set(time as TimeValue | null);
+  }
+
+  onCustomHeaderChange(time: TimeValue | DurationValue | null): void {
+    this.timeForCustomHeader.set(time as TimeValue | null);
+  }
+
+  onCustomItemChange(time: TimeValue | DurationValue | null): void {
+    this.timeForCustomItem.set(time as TimeValue | null);
   }
 }

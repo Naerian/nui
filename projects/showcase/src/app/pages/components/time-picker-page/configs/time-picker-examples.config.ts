@@ -235,6 +235,116 @@ config: TimePickerConfig = {
     ],
   },
   {
+    id: 'custom-footer',
+    title: 'components.timePicker.customFooter.title',
+    description: 'components.timePicker.customFooter.description',
+    note: {
+      type: 'info',
+      content: 'components.timePicker.customFooter.note',
+    },
+    anchor: 'custom-footer',
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `import { TimePickerFooterDirective } from 'nui';
+
+// En el componente consumidor:
+timeForCustomFooter = signal<TimeValue | null>(null);`,
+        language: 'typescript',
+      },
+      {
+        title: 'codeExamples.html',
+        code: `<nui-time-picker (valueChange)="onCustomFooterChange($event)">
+  <ng-template nuiTimePickerFooter let-currentTime let-actions="actions">
+    <div class="my-footer">
+      <span>{{ currentTime ? currentTime.hour + ':' + (currentTime.minute | number:'2.0-0') : '--:--' }}</span>
+      <div class="my-footer__actions">
+        <button type="button" (click)="actions.setToNow()">Ahora</button>
+        <button type="button" (click)="actions.clear()">Limpiar</button>
+      </div>
+    </div>
+  </ng-template>
+</nui-time-picker>`,
+        language: 'html',
+      },
+    ],
+  },
+  {
+    id: 'custom-header',
+    title: 'components.timePicker.customHeader.title',
+    description: 'components.timePicker.customHeader.description',
+    note: {
+      type: 'info',
+      content: 'components.timePicker.customHeader.note',
+    },
+    anchor: 'custom-header',
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `import { TimePickerHeaderDirective } from 'nui';
+
+// En el componente consumidor:
+timeForCustomHeader = signal<TimeValue | null>(null);`,
+        language: 'typescript',
+      },
+      {
+        title: 'codeExamples.html',
+        code: `<nui-time-picker (valueChange)="onCustomHeaderChange($event)">
+  <ng-template
+    nuiTimePickerHeader
+    let-currentTime
+    let-formattedTime="formattedTime"
+    let-normalization="normalization"
+    let-range="range"
+  >
+    <div class="my-header">
+      <strong>{{ formattedTime }}</strong>
+      @if (normalization) {
+        <small>Normalizado desde {{ normalization.original }}</small>
+      }
+      @if (range.min && range.max) {
+        <span>Rango: {{ range.min.hour }}:00 — {{ range.max.hour }}:00</span>
+      }
+    </div>
+  </ng-template>
+</nui-time-picker>`,
+        language: 'html',
+      },
+    ],
+  },
+  {
+    id: 'custom-item',
+    title: 'components.timePicker.customItem.title',
+    description: 'components.timePicker.customItem.description',
+    note: {
+      type: 'info',
+      content: 'components.timePicker.customItem.note',
+    },
+    anchor: 'custom-item',
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `import { TimePickerItemDirective } from 'nui';`,
+        language: 'typescript',
+      },
+      {
+        title: 'codeExamples.html',
+        code: `<nui-time-picker>
+  <ng-template nuiTimePickerItem
+    let-value
+    let-type="type"
+    let-selected="selected"
+  >
+    <span [style.fontWeight]="selected ? '700' : '400'">
+      {{ value }}{{ type === 'hour' ? 'h' : 'm' }}
+    </span>
+  </ng-template>
+</nui-time-picker>`,
+        language: 'html',
+      },
+    ],
+  },
+  {
     id: 'reactive-forms',
     title: 'components.timePicker.reactiveForms.title',
     description: 'components.timePicker.reactiveForms.description',

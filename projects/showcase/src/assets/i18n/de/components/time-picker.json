@@ -55,6 +55,21 @@
     "description": "Vollständige Integration mit Angular-Reaktivformularen. Implementiert ControlValueAccessor.",
     "note": "Verwenden Sie <code>formControl</code> oder <code>formControlName</code>, um die Integration mit Angular-Formularen herzustellen. Die Komponente übernimmt Synchronisierung, Validierung und Zustandsverwaltung automatisch."
   },
+  "customFooter": {
+    "title": "Benutzerdefinierte Fußzeile",
+    "description": "Projizieren Sie ein <code>ng-template</code> mit der Direktive <strong>nuiTimePickerFooter</strong>, um die integrierte Fußzeile durch eigene Aktionsschaltflächen oder beliebige Inhalte zu ersetzen.",
+    "note": "Das benutzerdefinierte Template <strong>ersetzt</strong> die integrierte Fußzeile ('Löschen'- und 'Jetzt'-Schaltflächen). Der typisierte Kontext <code>TimePickerFooterContext</code> stellt <code>$implicit</code> (aktueller Wert), <code>actions</code> mit den Methoden <code>clear()</code> und <code>setToNow()</code>, <code>normalization</code> und <code>range</code> bereit."
+  },
+  "customHeader": {
+    "title": "Benutzerdefinierte Kopfzeile",
+    "description": "Projizieren Sie ein <code>ng-template</code> mit der Direktive <strong>nuiTimePickerHeader</strong>, um die visuelle Anzeige der Kopfzeile durch eigene Inhalte zu ersetzen: formatierten Wert, Bereichsindikator, Normalisierungswarnung oder beliebige Elemente.",
+    "note": "Das benutzerdefinierte Template ersetzt nur den <strong>visuellen Inhalt</strong> der Kopfzeile. Barrierefrei-Live-Regionen (<code>aria-live</code>) bleiben unabhängig vom Template aktiv und stellen sicher, dass Bildschirmleser weiterhin Änderungen ankkündigen. Der typisierte Kontext <code>TimePickerHeaderContext</code> stellt <code>$implicit</code> (aktueller Wert), <code>formattedTime</code> (lesbarer Text), <code>mode</code>, <code>is12h</code>, <code>normalization</code> und <code>range</code> bereit."
+  },
+  "customItem": {
+    "title": "Benutzerdefiniertes Element",
+    "description": "Projizieren Sie ein <code>ng-template</code> mit der Direktive <strong>nuiTimePickerItem</strong>, um den visuellen Inhalt jeder Option in den Stunden-, Minuten- und Sekundenspalten anzupassen.",
+    "note": "Die Direktive ersetzt nur den <strong>visuellen Inhalt</strong> der Element-Schaltfläche. Die Komponente verwaltet weiterhin alle ARIA-Attribute (<code>role='option'</code>, <code>aria-selected</code>), Tastaturnavigation und Auswahlereignisse. Der Kontext umfasst den Wert als <code>$implicit</code>, den Spaltentyp <code>type</code> sowie die Zustände <code>selected</code> und <code>disabled</code>."
+  },
   "api": {
     "inputs": {
       "title": "Eingaben",
@@ -79,6 +94,10 @@
     "methods": {
       "title": "Methoden",
       "description": "Die Komponente implementiert ControlValueAccessor für eine nahtlose Integration mit Angular-Formularen"
+    },
+    "contentDirectives": {
+      "title": "Inhaltsdirektiven",
+      "description": "Marker-Direktiven, die das Projizieren benutzerdefinierter Templates für Elemente, die Fußzeile und die Kopfzeile der Zeitauswahl ermöglichen"
     }
   },
   "theming": {
@@ -287,7 +306,7 @@
           "description": "Bewegt den Fokus zur vorherigen/nächsten Option in der fokussierten Spalte."
         },
         "tab": {
-          "description": "Bewegt den Fokus zur nächsten interaktiven Spalte oder Steuerung (z. B. Periode-Umschalter, Aktionsschaltflächen)."
+          "description": "Bewegt den Fokus zur nächsten interaktiven Spalte oder Steuerung (z. B. Periode-Umschalter, Aktionsschaltflächen)."
         },
         "homeEnd": {
           "description": "Springt zur ersten/letzten Option in der fokussierten Spalte."
@@ -297,6 +316,33 @@
         },
         "escape": {
           "description": "Schließt die Zeitauswahl und setzt auf den zuvor bestätigten Wert zurück."
+        }
+      }
+    },
+    "templates": {
+      "title": "Benutzerdefinierte Templates und Barrierefreiheit",
+      "description": "Bei der Verwendung von <code>nuiTimePickerItem</code>, <code>nuiTimePickerFooter</code> oder <code>nuiTimePickerHeader</code> behält die Komponente ihre Barrierefreiheits-Infrastruktur. Befolgen Sie diese Richtlinien für eine barrierefreie Erfahrung.",
+      "note": "Entfernen Sie niemals sichtbaren Text aus Elementen bei der Anpassung. Bildschirmleser kündigen Schaltflächenwerte über ihren Textinhalt an. Wenn Sie nur Symbole oder Farben verwenden, fügen Sie immer ein <code>span</code> mit <code>class='sr-only'</code> mit dem lesbaren Wert hinzu.",
+      "rows": {
+        "buttonWrapper": {
+          "info": "Von NUI verwalteter Wrapper",
+          "description": "Das äußere <code>button</code>-Element (mit <code>role='option'</code>, <code>aria-selected</code> und Tastaturverwaltung) wird <strong>nicht geändert</strong>. Nur der innere Inhalt wird ersetzt."
+        },
+        "visibleText": {
+          "info": "Erforderlicher sichtbarer Text",
+          "description": "Nehmen Sie immer den lesbaren Wert (<code>{{ value }}</code>) in das Template auf. Wenn das Design ihn visuell verbirgt, verwenden Sie <code>&lt;span class='sr-only'&gt;{{ value }}&lt;/span&gt;</code>."
+        },
+        "footerButtons": {
+          "info": "Barrierefreiheit der Fußzeilen-Schaltflächen",
+          "description": "Schaltflächen in der benutzerdefinierten Fußzeile müssen <code>type='button'</code> und beschreibenden Text oder <code>aria-label</code> enthalten. Vermeiden Sie reine Symbol-Schaltflächen ohne Beschriftung."
+        },
+        "headerLiveRegions": {
+          "info": "Live-Regionen der Kopfzeile erhalten",
+          "description": "Bei der Verwendung von <code>nuiTimePickerHeader</code> verbleiben die Live-Regionen (<code>aria-live='polite'</code> für den aktuellen Wert und <code>aria-live='assertive'</code> für die Normalisierungswarnung) im DOM, auch wenn das Template die visuelle Anzeige ersetzt. Es ist nicht nötig, sie manuell im benutzerdefinierten Template hinzuzufügen."
+        },
+        "colorOnly": {
+          "info": "Verwenden Sie nicht nur Farbe, um Zustände zu vermitteln",
+          "description": "Wenn der <code>selected</code>-Zustand nur durch Farbe angezeigt wird, können Nutzer mit eingeschränkter Sehkraft oder Farbenblindheit ihn nicht erkennen. Kombinieren Sie immer Farbe mit einer typografischen Änderung oder einem Symbol."
         }
       }
     }

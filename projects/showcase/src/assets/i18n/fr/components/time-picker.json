@@ -55,6 +55,21 @@
     "description": "Intégration complète avec les formulaires réactifs Angular. Implémente ControlValueAccessor.",
     "note": "Utilisez <code>formControl</code> ou <code>formControlName</code> pour intégrer avec les formulaires Angular. Le composant gère la synchronisation, la validation et l'état automatiquement."
   },
+  "customFooter": {
+    "title": "Pied de page personnalisé",
+    "description": "Projetez un <code>ng-template</code> avec la directive <strong>nuiTimePickerFooter</strong> pour remplacer le pied de page intégré par vos propres boutons d'action ou tout autre contenu.",
+    "note": "Le template personnalisé <strong>remplace</strong> le pied de page intégré (boutons 'Effacer' et 'Maintenant'). Le contexte typé <code>TimePickerFooterContext</code> expose <code>$implicit</code> (valeur actuelle), <code>actions</code> avec les méthodes <code>clear()</code> et <code>setToNow()</code>, <code>normalization</code> et <code>range</code>."
+  },
+  "customHeader": {
+    "title": "En-tête personnalisé",
+    "description": "Projetez un <code>ng-template</code> avec la directive <strong>nuiTimePickerHeader</strong> pour remplacer l'affichage visuel de l'en-tête par votre propre contenu : valeur formatée, indicateur de plage, alerte de normalisation ou tout élément dont vous avez besoin.",
+    "note": "Le template personnalisé ne remplace que le <strong>contenu visuel</strong> de l'en-tête. Les régions live d'accessibilité (<code>aria-live</code>) restent actives quel que soit le template, garantissant que les lecteurs d'écran continuent d'annoncer les changements de valeur. Le contexte typé <code>TimePickerHeaderContext</code> expose <code>$implicit</code> (valeur actuelle), <code>formattedTime</code> (texte lisible), <code>mode</code>, <code>is12h</code>, <code>normalization</code> et <code>range</code>."
+  },
+  "customItem": {
+    "title": "Élément personnalisé",
+    "description": "Projetez un <code>ng-template</code> avec la directive <strong>nuiTimePickerItem</strong> pour personnaliser visuellement le contenu de chaque option dans les colonnes d'heures, de minutes et de secondes.",
+    "note": "La directive remplace uniquement le <strong>contenu visuel</strong> du bouton d'élément. Le composant gère toujours tous les attributs ARIA (<code>role='option'</code>, <code>aria-selected</code>), la navigation au clavier et les événements de sélection. Le contexte inclut la valeur en tant que <code>$implicit</code>, le type de colonne <code>type</code>, et les états <code>selected</code> et <code>disabled</code>."
+  },
   "api": {
     "inputs": {
       "title": "Entrées",
@@ -79,6 +94,10 @@
     "methods": {
       "title": "Méthodes",
       "description": "Le composant implémente ControlValueAccessor pour une intégration transparente avec les formulaires Angular"
+    },
+    "contentDirectives": {
+      "title": "Directives de contenu",
+      "description": "Directives marker permettant de projeter des templates personnalisés pour les éléments, le pied de page et l'en-tête du sélecteur"
     }
   },
   "theming": {
@@ -297,6 +316,33 @@
         },
         "escape": {
           "description": "Ferme le panneau du sélecteur d'heure et revient à la valeur précédemment confirmée."
+        }
+      }
+    },
+    "templates": {
+      "title": "Templates personnalisés et accessibilité",
+      "description": "Lors de l'utilisation de <code>nuiTimePickerItem</code>, <code>nuiTimePickerFooter</code> ou <code>nuiTimePickerHeader</code>, le composant maintient son infrastructure d'accessibilité. Suivez ces directives pour garantir une expérience accessible.",
+      "note": "Ne supprimez jamais le texte visible des éléments lors de la personnalisation. Les lecteurs d'écran annoncent les valeurs des boutons via leur contenu textuel. Si vous utilisez uniquement des icônes ou des couleurs, ajoutez toujours un <code>span</code> avec <code>class='sr-only'</code> contenant la valeur lisible.",
+      "rows": {
+        "buttonWrapper": {
+          "info": "Conteneur géré par NUI",
+          "description": "L'élément <code>button</code> externe (avec <code>role='option'</code>, <code>aria-selected</code> et gestion du clavier) n'est <strong>pas modifié</strong>. Seul le contenu interne est remplacé."
+        },
+        "visibleText": {
+          "info": "Texte visible obligatoire",
+          "description": "Incluez toujours la valeur lisible (<code>{{ value }}</code>) dans le template. Si le design le masque visuellement, utilisez <code>&lt;span class='sr-only'&gt;{{ value }}&lt;/span&gt;</code>."
+        },
+        "footerButtons": {
+          "info": "Accessibilité des boutons du pied de page",
+          "description": "Les boutons du pied de page personnalisé doivent inclure <code>type='button'</code> et du texte descriptif ou un <code>aria-label</code>. Évitez les boutons avec uniquement des icônes sans étiquette."
+        },
+        "headerLiveRegions": {
+          "info": "Régions live de l'en-tête préservées",
+          "description": "Lors de l'utilisation de <code>nuiTimePickerHeader</code>, les régions live (<code>aria-live='polite'</code> pour la valeur actuelle et <code>aria-live='assertive'</code> pour l'alerte de normalisation) restent dans le DOM même lorsque le template remplace l'affichage visuel. Il n'est pas nécessaire de les ajouter manuellement dans le template personnalisé."
+        },
+        "colorOnly": {
+          "info": "Ne pas utiliser uniquement la couleur pour communiquer l'état",
+          "description": "Si l'état <code>selected</code> est indiqué uniquement par la couleur, les utilisateurs malvoyants ou daltoniens ne pourront pas le distinguer. Combinez toujours la couleur avec un changement typographique ou une icône."
         }
       }
     }

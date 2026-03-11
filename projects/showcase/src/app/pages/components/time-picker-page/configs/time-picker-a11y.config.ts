@@ -116,4 +116,42 @@ export const TIME_PICKER_A11Y_SECTIONS: ComponentSection[] = [
       ],
     },
   },
+  // ─────────────────────────────────────────────────────────────────────────
+  // 4. Templates personalizados y accesibilidad
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'a11y-templates',
+    title: 'components.timePicker.a11y.templates.title',
+    description: 'components.timePicker.a11y.templates.description',
+    anchor: 'a11y-templates',
+    note: {
+      type: 'warning',
+      content: 'components.timePicker.a11y.templates.note',
+    },
+    table: {
+      headers: ['common.tables.info', 'common.tables.description'],
+      rows: [
+        [
+          'components.timePicker.a11y.templates.rows.buttonWrapper.info',
+          'components.timePicker.a11y.templates.rows.buttonWrapper.description',
+        ],
+        [
+          'components.timePicker.a11y.templates.rows.visibleText.info',
+          'components.timePicker.a11y.templates.rows.visibleText.description',
+        ],
+        [
+          'components.timePicker.a11y.templates.rows.footerButtons.info',
+          'components.timePicker.a11y.templates.rows.footerButtons.description',
+        ],
+        [
+          'components.timePicker.a11y.templates.rows.headerLiveRegions.info',
+          'components.timePicker.a11y.templates.rows.headerLiveRegions.description',
+        ],
+        [
+          'components.timePicker.a11y.templates.rows.colorOnly.info',
+          'components.timePicker.a11y.templates.rows.colorOnly.description',
+        ],
+      ],
+    },
+  },
 ];

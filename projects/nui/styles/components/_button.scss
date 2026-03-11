@@ -86,6 +86,7 @@
     @each $size in $sizes {
       &.nui-btn--#{$size} {
         @include base.nui-control-size($size, true);
+        line-height: 1;
 
         i {
           font-size: var(--nui-font-size-#{$size});

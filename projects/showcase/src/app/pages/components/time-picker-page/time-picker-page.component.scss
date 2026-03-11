@@ -2,3 +2,113 @@
   max-width: 300px;
   text-align: center;
 }
+
+// Demo for custom-footer example
+.custom-footer-demo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+
+  &__time {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--nui-text-primary);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 0.15s;
+
+    &--now {
+      background: var(--nui-primary-subtle, #e8f0fe);
+      color: var(--nui-primary, #1a73e8);
+
+      &:hover {
+        background: var(--nui-primary-subtle-hover, #d2e3fc);
+      }
+    }
+
+    &--clear {
+      background: transparent;
+      color: var(--nui-text-secondary);
+      border-color: var(--nui-border);
+
+      &:hover {
+        background: var(--nui-surface-hover);
+      }
+    }
+  }
+}
+
+// Demo for custom-item example
+.custom-item-demo {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  color: var(--nui-text-primary);
+  transition: font-weight 0.1s;
+
+  &--selected {
+    font-weight: 700;
+    color: var(--nui-primary);
+    font-size: 0.9375rem;
+  }
+}
+
+// Demo for custom-header example
+.custom-header-demo {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  flex-wrap: wrap;
+
+  &__time {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--nui-text-primary);
+    min-width: 3.5rem;
+  }
+
+  &__range {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--nui-text-secondary);
+    font-variant-numeric: tabular-nums;
+
+    i { font-size: 0.875rem; }
+  }
+
+  &__normalized {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--nui-warning, #f59e0b);
+    font-weight: 500;
+
+    i { font-size: 0.875rem; }
+  }
+}

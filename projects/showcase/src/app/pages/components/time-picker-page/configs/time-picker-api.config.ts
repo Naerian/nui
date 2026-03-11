@@ -165,8 +165,7 @@ export const TIME_PICKER_API_SECTIONS: ComponentSection[] = [
     id: 'api-duration-config',
     title: 'components.timePicker.api.durationConfig.title',
     description: 'components.timePicker.api.durationConfig.description',
-    anchor: 'api-duration-config',
-    table: {
+    anchor: 'api-duration-config',    table: {
       headers: [
         'common.tables.property',
         'common.tables.type',
@@ -474,5 +473,173 @@ export const TIME_PICKER_API_SECTIONS: ComponentSection[] = [
       ],
     },
   },
-];
+  // ─────────────────────────────────────────────────────────────────────────
+  // Content Directives (custom templates)
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'api-content-directives',
+    title: 'components.timePicker.api.contentDirectives.title',
+    description: 'components.timePicker.api.contentDirectives.description',
+    anchor: 'api-content-directives',
+    table: {
+      headers: [
+        'common.tables.directive',
+        'Selector CSS',
+        'common.tables.description',
+      ],
+      rows: [
+        [
+          '<code>TimePickerItemDirective</code>',
+          '<code>[nuiTimePickerItem]</code>',
+          'Proyecta un <code>ng-template</code> que reemplaza el contenido visual de cada ítem en las columnas de selección (hora, minuto, segundo).',
+        ],
+        [
+          '<code>TimePickerFooterDirective</code>',
+          '<code>[nuiTimePickerFooter]</code>',
+          'Proyecta un <code>ng-template</code> que reemplaza el footer built-in con botones de acción propios.',
+        ],
+        [
+          '<code>TimePickerHeaderDirective</code>',
+          '<code>[nuiTimePickerHeader]</code>',
+          'Proyecta un <code>ng-template</code> que reemplaza el display visual del header. Las live regions de a11y se mantienen activas independientemente.',
+        ],
+      ],
+    },
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `import { TimePickerItemDirective, TimePickerFooterDirective, TimePickerHeaderDirective } from 'nui';
 
+@Component({
+  imports: [
+    TimePickerComponent,
+    TimePickerItemDirective,
+    TimePickerFooterDirective,
+    TimePickerHeaderDirective,
+  ]
+})`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
+    id: 'api-item-context',
+    title: 'TimePickerItemContext',
+    description: 'Contexto disponible en el template de <code>[nuiTimePickerItem]</code>. Accede con <code>let-value</code>, <code>let-type="type"</code>, etc.',
+    anchor: 'api-item-context',
+    table: {
+      headers: [
+        'common.tables.property',
+        'common.tables.type',
+        'common.tables.description',
+      ],
+      rows: [
+        [
+          '<code>$implicit</code>',
+          'number | string',
+          'Valor del ítem (hora o minuto como número, periodo como string "AM"/"PM"). Accede con <code>let-value</code>.',
+        ],
+        [
+          '<code>type</code>',
+          "'hour' | 'minute' | 'period'",
+          'Tipo de columna al que pertenece el ítem.',
+        ],
+        [
+          '<code>selected</code>',
+          'boolean',
+          'Indica si este ítem es el valor actualmente seleccionado.',
+        ],
+        [
+          '<code>disabled</code>',
+          'boolean',
+          'Indica si el selector está en estado deshabilitado.',
+        ],
+      ],
+    },
+  },
+  {
+    id: 'api-footer-context',
+    title: 'TimePickerFooterContext',
+    description: 'Contexto disponible en el template de <code>[nuiTimePickerFooter]</code>. Accede con <code>let-currentTime</code> y <code>let-actions="actions"</code>.',
+    anchor: 'api-footer-context',
+    table: {
+      headers: [
+        'common.tables.property',
+        'common.tables.type',
+        'common.tables.description',
+      ],
+      rows: [
+        [
+          '<code>$implicit</code>',
+          'TimeValue | DurationValue | null',
+          'Valor actualmente seleccionado en el picker. Accede con <code>let-currentTime</code>.',
+        ],
+        [
+          '<code>actions.clear()</code>',
+          '() => void',
+          'Limpia el valor seleccionado y emite <code>null</code>.',
+        ],
+        [
+          '<code>actions.setToNow()</code>',
+          '() => void',
+          'Establece el valor a la hora actual (solo en modo no-DURATION).',
+        ],
+        [
+          '<code>normalization</code>',
+          '{ original: string; normalized: string } | null',
+          'Info de normalización si se recibió un valor string que fue normalizado automáticamente.',
+        ],
+        [
+          '<code>range</code>',
+          '{ min: TimeValue | undefined; max: TimeValue | undefined }',
+          'Rango horario configurado en <code>config.minTime</code> / <code>config.maxTime</code>.',
+        ],
+      ],
+    },
+  },
+  {
+    id: 'api-header-context',
+    title: 'TimePickerHeaderContext',
+    description: 'Contexto disponible en el template de <code>[nuiTimePickerHeader]</code>. Accede con <code>let-currentTime</code>, <code>let-formattedTime="formattedTime"</code>, etc.',
+    anchor: 'api-header-context',
+    table: {
+      headers: [
+        'common.tables.property',
+        'common.tables.type',
+        'common.tables.description',
+      ],
+      rows: [
+        [
+          '<code>$implicit</code>',
+          'TimeValue | DurationValue | null',
+          'Valor actualmente seleccionado. Accede con <code>let-currentTime</code>.',
+        ],
+        [
+          '<code>mode</code>',
+          'TimePickerMode',
+          'Modo activo del picker, p.ej. <code>\'HOUR_MINUTE_24\'</code> o <code>\'DURATION\'</code>.',
+        ],
+        [
+          '<code>is12h</code>',
+          'boolean',
+          '<code>true</code> si el modo usa formato 12h (AM/PM).',
+        ],
+        [
+          '<code>formattedTime</code>',
+          'string',
+          'Representación legible del valor actual en texto plano (sin HTML), lista para mostrar directamente.',
+        ],
+        [
+          '<code>normalization</code>',
+          '{ original: string; normalized: string } | null',
+          'Info de normalización si se recibió un valor string normalizado, <code>null</code> en caso contrario.',
+        ],
+        [
+          '<code>range</code>',
+          '{ min: TimeValue | undefined; max: TimeValue | undefined }',
+          'Rango horario configurado en <code>config.minTime</code> / <code>config.maxTime</code>.',
+        ],
+      ],
+    },
+  },
+];

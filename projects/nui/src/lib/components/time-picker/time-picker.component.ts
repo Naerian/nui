@@ -6,6 +6,7 @@ import {
   signal,
   computed,
   input,
+  contentChild,
   ChangeDetectionStrategy,
   forwardRef,
   ViewChild,
@@ -13,6 +14,7 @@ import {
   AfterViewInit,
   OnInit,
   inject,
+  TemplateRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
@@ -39,6 +41,9 @@ import { TooltipDirective } from '../tooltip';
 import { NuiI18nService } from '../../i18n/nui-i18n.service';
 import { DEFAULT_TIMEPICKER_I18N } from './models';
 import { injectTimePickerConfig } from '../../configs/time-picker';
+import { TimePickerItemDirective } from './directives/time-picker-item.directive';
+import { TimePickerFooterDirective } from './directives/time-picker-footer.directive';
+import { TimePickerHeaderDirective } from './directives/time-picker-header.directive';
 @Component({
   selector: 'nui-time-picker',
   standalone: true,
@@ -59,6 +64,13 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   // CONFIG GLOBAL
   // ==================
   private readonly _globalConfig = injectTimePickerConfig();
+
+  // ==================
+  // CONTENT CHILDREN (Template customization)
+  // ==================
+  itemTemplate = contentChild(TimePickerItemDirective, { read: TemplateRef });
+  footerTemplate = contentChild(TimePickerFooterDirective, { read: TemplateRef });
+  headerTemplate = contentChild(TimePickerHeaderDirective, { read: TemplateRef });
 
   // ==================
   // INPUTS
@@ -206,6 +218,30 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   is12HourFormat = computed(() => this.mode().includes('12'));
   showMinutes = computed(() => this.mode().includes('MINUTE'));
   isDurationMode = computed(() => this.mode() === TimePickerModeEnum.DURATION);
+
+  /** Objeto de acciones expuesto al footer template del usuario */
+  readonly footerActions = computed(() => ({
+    clear: () => this.clear(),
+    setToNow: () => this.setToNow(),
+  }));
+
+  /** Contexto completo expuesto al header template del usuario */
+  readonly headerContext = computed(() => ({
+    $implicit: this.isDurationMode() ? this.selectedDuration() : this.selectedTime(),
+    mode: this.mode(),
+    is12h: this.is12HourFormat(),
+    formattedTime: this.formattedTimePlain(),
+    normalization: this.normalizationInfo(),
+    range: { min: this.config.minTime, max: this.config.maxTime },
+  }));
+
+  /** Contexto completo expuesto al footer template: valor actual, acciones, normalización y rango */
+  readonly footerContext = computed(() => ({
+    $implicit: this.isDurationMode() ? this.selectedDuration() : this.selectedTime(),
+    actions: this.footerActions(),
+    normalization: this.normalizationInfo(),
+    range: { min: this.config.minTime, max: this.config.maxTime },
+  }));
 
   /**
    * Valor efectivo de los textos de i18n, combinando las traducciones globales con los defaults.

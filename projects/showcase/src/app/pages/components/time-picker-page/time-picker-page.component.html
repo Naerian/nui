@@ -131,6 +131,113 @@
                 </div>
               }
 
+              @case ('custom-footer') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-time-picker (valueChange)="onCustomFooterChange($event)">
+                    <ng-template nuiTimePickerFooter let-currentTime let-actions="actions">
+                      <div class="custom-footer-demo">
+                        <span class="custom-footer-demo__time">
+                          @if (currentTime) {
+                            {{ $any(currentTime).hour }}:{{
+                              $any(currentTime).minute.toString().padStart(2, '0')
+                            }}
+                          } @else {
+                            --:--
+                          }
+                        </span>
+                        <div class="custom-footer-demo__actions">
+                          <button
+                            nuiButton
+                            size="xs"
+                            prefixIcon="ri-time-line"
+                            variant="ghost"
+                            (onClick)="actions.setToNow?.()"
+                          >
+                            Now
+                          </button>
+                          <button
+                            nuiButton
+                            size="xs"
+                            variant="ghost"
+                            prefixIcon="ri-close-line"
+                            (onClick)="actions.clear()"
+                          >
+                            Clean
+                          </button>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </nui-time-picker>
+
+                  <div class="value-display">
+                    Selected time:
+                    <strong>{{ timeForCustomFooter() | json }}</strong>
+                  </div>
+                </div>
+              }
+
+              @case ('custom-header') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-time-picker
+                    [config]="configWithRange"
+                    (valueChange)="onCustomHeaderChange($event)"
+                  >
+                    <ng-template
+                      nuiTimePickerHeader
+                      let-currentTime
+                      let-formattedTime="formattedTime"
+                      let-normalization="normalization"
+                      let-range="range"
+                    >
+                      <div class="custom-header-demo">
+                        <span class="custom-header-demo__time">{{ formattedTime }}</span>
+                        @if (range.min && range.max) {
+                          <span class="custom-header-demo__range">
+                            <i class="ri-time-line" aria-hidden="true"></i>
+                            {{ range.min.hour }}:{{ range.min.minute.toString().padStart(2, '0') }}
+                            &ndash;
+                            {{ range.max.hour }}:{{ range.max.minute.toString().padStart(2, '0') }}
+                          </span>
+                        }
+                        @if (normalization) {
+                          <span class="custom-header-demo__normalized">
+                            <i class="ri-alert-line" aria-hidden="true"></i>
+                            {{ normalization.original }}
+                          </span>
+                        }
+                      </div>
+                    </ng-template>
+                  </nui-time-picker>
+
+                  <div class="value-display">
+                    Selected time:
+                    <strong>{{ timeForCustomHeader() | json }}</strong>
+                  </div>
+                </div>
+              }
+
+              @case ('custom-item') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-time-picker (valueChange)="onCustomItemChange($event)">
+                    <ng-template
+                      nuiTimePickerItem
+                      let-value
+                      let-type="type"
+                      let-selected="selected"
+                    >
+                      <span class="custom-item-demo" [class.custom-item-demo--selected]="selected">
+                        {{ value }}{{ type === 'hour' ? 'h' : 'm' }}
+                      </span>
+                    </ng-template>
+                  </nui-time-picker>
+
+                  <div class="value-display">
+                    Selected time:
+                    <strong>{{ timeForCustomItem() | json }}</strong>
+                  </div>
+                </div>
+              }
+
               @case ('reactive-forms') {
                 <div class="example-preview flex-column align-items-center gap-3">
                   <nui-time-picker [formControl]="timeControl"></nui-time-picker>
@@ -142,21 +249,20 @@
 
                   <div class="button-row">
                     <button
-                      class="btn btn-sm btn-outline-secondary"
+                      nuiButton
+                      size="xs"
+                      color="secondary"
                       (click)="timeControl.setValue({ hour: 10, minute: 30 })"
                     >
                       Set to 10:30
                     </button>
-                    <button class="btn btn-sm btn-outline-secondary" (click)="timeControl.reset()">
+                    <button nuiButton size="xs" color="secondary" (click)="timeControl.reset()">
                       Reset
                     </button>
-                    <button
-                      class="btn btn-sm btn-outline-secondary"
-                      (click)="timeControl.disable()"
-                    >
+                    <button nuiButton size="xs" color="secondary" (click)="timeControl.disable()">
                       Disable
                     </button>
-                    <button class="btn btn-sm btn-outline-secondary" (click)="timeControl.enable()">
+                    <button nuiButton size="xs" color="secondary" (click)="timeControl.enable()">
                       Enable
                     </button>
                   </div>

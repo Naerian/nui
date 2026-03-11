@@ -55,6 +55,21 @@
     "description": "Full integration with Angular reactive forms. Implements ControlValueAccessor.",
     "note": "Use <code>formControl</code> or <code>formControlName</code> to integrate with Angular forms. The component handles synchronization, validation and state automatically."
   },
+  "customFooter": {
+    "title": "Custom footer",
+    "description": "Project an <code>ng-template</code> with the <strong>nuiTimePickerFooter</strong> directive to replace the built-in footer with your own action buttons, additional info or any content you need.",
+    "note": "The custom template <strong>replaces</strong> the built-in footer ('Clear' and 'Now' buttons). The typed context <code>TimePickerFooterContext</code> exposes <code>$implicit</code> (current value), <code>actions</code> with <code>clear()</code> and <code>setToNow()</code> methods, <code>normalization</code> and <code>range</code>."
+  },
+  "customHeader": {
+    "title": "Custom header",
+    "description": "Project an <code>ng-template</code> with the <strong>nuiTimePickerHeader</strong> directive to replace the visual display of the header with your own content: formatted value, range indicator, normalization alert or any element you need.",
+    "note": "The custom template only replaces the <strong>visual content</strong> of the header. Accessibility live regions (<code>aria-live</code>) remain active regardless, ensuring screen readers continue announcing value changes. The typed context <code>TimePickerHeaderContext</code> exposes <code>$implicit</code> (current value), <code>formattedTime</code> (readable text), <code>mode</code>, <code>is12h</code>, <code>normalization</code> and <code>range</code>."
+  },
+  "customItem": {
+    "title": "Custom item",
+    "description": "Project an <code>ng-template</code> with the <strong>nuiTimePickerItem</strong> directive to visually customize the content of each option in the hour, minute and second columns.",
+    "note": "The directive only replaces the <strong>visual content</strong> of the item button. The component still manages all ARIA attributes (<code>role='option'</code>, <code>aria-selected</code>), keyboard navigation and selection events. The context includes the value as <code>$implicit</code>, the column type <code>type</code>, and the <code>selected</code> and <code>disabled</code> states."
+  },
   "api": {
     "inputs": {
       "title": "Inputs",
@@ -79,6 +94,10 @@
     "methods": {
       "title": "Methods",
       "description": "The component implements ControlValueAccessor for seamless integration with Angular forms"
+    },
+    "contentDirectives": {
+      "title": "Content directives",
+      "description": "Marker directives that allow projecting custom templates for items, the footer and the header of the time picker"
     }
   },
   "theming": {
@@ -297,6 +316,33 @@
         },
         "escape": {
           "description": "Closes the time picker panel and reverts to the previously confirmed value."
+        }
+      }
+    },
+    "templates": {
+      "title": "Custom templates and accessibility",
+      "description": "When using <code>nuiTimePickerItem</code>, <code>nuiTimePickerFooter</code> or <code>nuiTimePickerHeader</code>, the component maintains its accessibility infrastructure. Follow these guidelines to ensure an accessible experience.",
+      "note": "Never remove visible text from items when customizing. Screen readers announce button values via their text content. If you use only icons or colors, always add a <code>span</code> with <code>class='sr-only'</code> containing the readable value.",
+      "rows": {
+        "buttonWrapper": {
+          "info": "NUI-managed wrapper",
+          "description": "The outer <code>button</code> element (with <code>role='option'</code>, <code>aria-selected</code> and keyboard management) is <strong>not modified</strong>. Only the inner content is replaced."
+        },
+        "visibleText": {
+          "info": "Required visible text",
+          "description": "Always include the readable value (<code>{{ value }}</code>) in the template. If the design hides it visually, use <code>&lt;span class='sr-only'&gt;{{ value }}&lt;/span&gt;</code>."
+        },
+        "footerButtons": {
+          "info": "Footer button accessibility",
+          "description": "Buttons in the custom footer must include <code>type='button'</code> and descriptive text or <code>aria-label</code>. Avoid icon-only buttons without a label."
+        },
+        "headerLiveRegions": {
+          "info": "Header live regions preserved",
+          "description": "When using <code>nuiTimePickerHeader</code>, the live regions (<code>aria-live='polite'</code> for the current value and <code>aria-live='assertive'</code> for the normalization alert) remain in the DOM even when the template replaces the visual display. There is no need to add them manually in the custom template."
+        },
+        "colorOnly": {
+          "info": "Don't use color alone to convey state",
+          "description": "If the <code>selected</code> state is indicated only by color, users with low vision or color blindness won't be able to distinguish it. Always combine color with a typographic change or icon."
         }
       }
     }

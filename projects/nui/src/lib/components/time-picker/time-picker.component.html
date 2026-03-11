@@ -33,15 +33,22 @@
       <!-- Header: Display de duración -->
       @if (effectiveShowHeader()) {
         <div class="nui-time-picker__header">
-          <div
-            class="nui-time-picker__display nui-time-picker__display--duration"
-            aria-hidden="true"
-            [innerHTML]="formattedTime()"
-          ></div>
-          <!-- Live region para lectores de pantalla (texto plano, sin HTML) -->
+          <!-- Live region siempre presente para lectores de pantalla -->
           <span class="sr-only" role="status" aria-live="polite" aria-atomic="true">
             {{ formattedTimePlain() }}
           </span>
+          @if (headerTemplate()) {
+            <ng-container
+              [ngTemplateOutlet]="headerTemplate()!"
+              [ngTemplateOutletContext]="headerContext()"
+            />
+          } @else {
+            <div
+              class="nui-time-picker__display nui-time-picker__display--duration"
+              aria-hidden="true"
+              [innerHTML]="formattedTime()"
+            ></div>
+          }
         </div>
       }
 
@@ -83,10 +90,22 @@
                 role="option"
                 [attr.aria-selected]="selectedDuration()?.hours === hour"
               >
-                <span class="nui-time-picker__duration-value">
-                  {{ hour.toString().padStart(2, '0') }}
-                </span>
-                <span class="nui-time-picker__duration-unit">h</span>
+                @if (itemTemplate()) {
+                  <ng-container
+                    [ngTemplateOutlet]="itemTemplate()!"
+                    [ngTemplateOutletContext]="{
+                      $implicit: hour,
+                      type: 'hour',
+                      selected: selectedDuration()?.hours === hour,
+                      disabled: isDisabled()
+                    }"
+                  />
+                } @else {
+                  <span class="nui-time-picker__duration-value">
+                    {{ hour.toString().padStart(2, '0') }}
+                  </span>
+                  <span class="nui-time-picker__duration-unit">h</span>
+                }
               </button>
             }
           </div>
@@ -128,10 +147,22 @@
                 role="option"
                 [attr.aria-selected]="selectedDuration()?.minutes === minute"
               >
-                <span class="nui-time-picker__duration-value">
-                  {{ minute.toString().padStart(2, '0') }}
-                </span>
-                <span class="nui-time-picker__duration-unit">min</span>
+                @if (itemTemplate()) {
+                  <ng-container
+                    [ngTemplateOutlet]="itemTemplate()!"
+                    [ngTemplateOutletContext]="{
+                      $implicit: minute,
+                      type: 'minute',
+                      selected: selectedDuration()?.minutes === minute,
+                      disabled: isDisabled()
+                    }"
+                  />
+                } @else {
+                  <span class="nui-time-picker__duration-value">
+                    {{ minute.toString().padStart(2, '0') }}
+                  </span>
+                  <span class="nui-time-picker__duration-unit">min</span>
+                }
               </button>
             }
           </div>
@@ -177,10 +208,22 @@
                   role="option"
                   [attr.aria-selected]="selectedDuration()?.seconds === second"
                 >
-                  <span class="nui-time-picker__duration-value">
-                    {{ second.toString().padStart(2, '0') }}
-                  </span>
-                  <span class="nui-time-picker__duration-unit">s</span>
+                  @if (itemTemplate()) {
+                    <ng-container
+                      [ngTemplateOutlet]="itemTemplate()!"
+                      [ngTemplateOutletContext]="{
+                        $implicit: second,
+                        type: 'minute',
+                        selected: selectedDuration()?.seconds === second,
+                        disabled: isDisabled()
+                      }"
+                    />
+                  } @else {
+                    <span class="nui-time-picker__duration-value">
+                      {{ second.toString().padStart(2, '0') }}
+                    </span>
+                    <span class="nui-time-picker__duration-unit">s</span>
+                  }
                 </button>
               }
             </div>
@@ -190,15 +233,22 @@
 
       <!-- Footer con controles -->
       <div class="nui-time-picker__footer">
-        <button
-          type="button"
-          class="nui-time-picker__footer-btn"
-          (click)="clear()"
-          [disabled]="isDisabled() || !selectedDuration()"
-          [attr.aria-label]="effectiveI18n().clear"
-        >
-          {{ effectiveI18n().clear }}
-        </button>
+        @if (footerTemplate()) {
+          <ng-container
+            [ngTemplateOutlet]="footerTemplate()!"
+            [ngTemplateOutletContext]="footerContext()"
+          />
+        } @else {
+          <button
+            type="button"
+            class="nui-time-picker__footer-btn"
+            (click)="clear()"
+            [disabled]="isDisabled() || !selectedDuration()"
+            [attr.aria-label]="effectiveI18n().clear"
+          >
+            {{ effectiveI18n().clear }}
+          </button>
+        }
       </div>
     </div>
   }
@@ -209,65 +259,79 @@
       <!-- Header: Display actual -->
       @if (effectiveShowHeader()) {
         <div class="nui-time-picker__header">
-          <div class="nui-time-picker__header-info">
-            <!-- Live region para normalización: siempre en DOM, el texto cambia -->
+          @if (headerTemplate()) {
+            <!-- Live regions siempre presentes para a11y aunque haya template personalizado -->
             <span class="sr-only" aria-live="assertive" aria-atomic="true">
               {{ normalizationAlertText() }}
             </span>
-
-            <!-- Indicador visual de normalización (sin role/aria-live en el icono vacío) -->
-            @if (normalizationInfo()) {
-              <button
-                type="button"
-                class="nui-time-picker__normalized"
-                aria-hidden="true"
-                [nuiTooltipAllowHtml]="true"
-                [nuiTooltip]="
-                  effectiveI18n()
-                    .normalizedTime.replace('{ original }', normalizationInfo()?.original ?? '')
-                    .replace('{ normalized }', normalizationInfo()?.normalized ?? '')
-                "
-              >
-                <i class="ri-alert-line nui-time-picker__normalized"></i>
-              </button>
-            }
-
-            <!-- Indicador de rango (focusable para teclado) -->
-            @if (config.showRangeIndicator && config.minTime && config.maxTime) {
-              <button
-                type="button"
-                class="nui-time-picker__info-indicator"
-                [attr.aria-label]="
-                  effectiveI18n().a11y.rangeInfo +
-                  ': ' +
-                  formatTimeValue(config.minTime) +
-                  ' — ' +
-                  formatTimeValue(config.maxTime)
-                "
-                [nuiTooltipAllowHtml]="true"
-                [nuiTooltip]="
-                  effectiveI18n().rangeLabel +
-                  '<br/>' +
-                  formatTimeValue(config.minTime) +
-                  ' — ' +
-                  formatTimeValue(config.maxTime)
-                "
-              >
-                <i class="ri-information-line" aria-hidden="true"></i>
-              </button>
-            }
-
-            <!-- Display visual con HTML (oculto a AT) -->
-            <div
-              class="nui-time-picker__display"
-              aria-hidden="true"
-              [innerHTML]="formattedTime()"
-            ></div>
-            <!-- Live region en texto plano para lectores de pantalla -->
             <span class="sr-only" role="status" aria-live="polite" aria-atomic="true">
               {{ formattedTimePlain() }}
             </span>
-          </div>
+            <ng-container
+              [ngTemplateOutlet]="headerTemplate()!"
+              [ngTemplateOutletContext]="headerContext()"
+            />
+          } @else {
+            <div class="nui-time-picker__header-info">
+              <!-- Live region para normalización: siempre en DOM, el texto cambia -->
+              <span class="sr-only" aria-live="assertive" aria-atomic="true">
+                {{ normalizationAlertText() }}
+              </span>
+
+              <!-- Indicador visual de normalización (sin role/aria-live en el icono vacío) -->
+              @if (normalizationInfo()) {
+                <button
+                  type="button"
+                  class="nui-time-picker__normalized"
+                  aria-hidden="true"
+                  [nuiTooltipAllowHtml]="true"
+                  [nuiTooltip]="
+                    effectiveI18n()
+                      .normalizedTime.replace('{ original }', normalizationInfo()?.original ?? '')
+                      .replace('{ normalized }', normalizationInfo()?.normalized ?? '')
+                  "
+                >
+                  <i class="ri-alert-line nui-time-picker__normalized"></i>
+                </button>
+              }
+
+              <!-- Indicador de rango (focusable para teclado) -->
+              @if (config.showRangeIndicator && config.minTime && config.maxTime) {
+                <button
+                  type="button"
+                  class="nui-time-picker__info-indicator"
+                  [attr.aria-label]="
+                    effectiveI18n().a11y.rangeInfo +
+                    ': ' +
+                    formatTimeValue(config.minTime) +
+                    ' — ' +
+                    formatTimeValue(config.maxTime)
+                  "
+                  [nuiTooltipAllowHtml]="true"
+                  [nuiTooltip]="
+                    effectiveI18n().rangeLabel +
+                    '<br/>' +
+                    formatTimeValue(config.minTime) +
+                    ' — ' +
+                    formatTimeValue(config.maxTime)
+                  "
+                >
+                  <i class="ri-information-line" aria-hidden="true"></i>
+                </button>
+              }
+
+              <!-- Display visual con HTML (oculto a AT) -->
+              <div
+                class="nui-time-picker__display"
+                aria-hidden="true"
+                [innerHTML]="formattedTime()"
+              ></div>
+              <!-- Live region en texto plano para lectores de pantalla -->
+              <span class="sr-only" role="status" aria-live="polite" aria-atomic="true">
+                {{ formattedTimePlain() }}
+              </span>
+            </div>
+          }
         </div>
       }
 
@@ -315,7 +379,19 @@
                 [attr.aria-selected]="selectedTime()?.hour === hour"
                 [attr.data-hour]="hour"
               >
-                {{ hour.toString().padStart(2, '0') }}
+                @if (itemTemplate()) {
+                  <ng-container
+                    [ngTemplateOutlet]="itemTemplate()!"
+                    [ngTemplateOutletContext]="{
+                      $implicit: hour,
+                      type: 'hour',
+                      selected: selectedTime()?.hour === hour,
+                      disabled: isDisabled()
+                    }"
+                  />
+                } @else {
+                  {{ hour.toString().padStart(2, '0') }}
+                }
               </button>
             }
           </div>
@@ -375,7 +451,19 @@
                   [attr.aria-selected]="selectedTime()?.minute === minute"
                   [attr.data-minute]="minute"
                 >
-                  {{ minute.toString().padStart(2, '0') }}
+                  @if (itemTemplate()) {
+                    <ng-container
+                      [ngTemplateOutlet]="itemTemplate()!"
+                      [ngTemplateOutletContext]="{
+                        $implicit: minute,
+                        type: 'minute',
+                        selected: selectedTime()?.minute === minute,
+                        disabled: isDisabled()
+                      }"
+                    />
+                  } @else {
+                    {{ minute.toString().padStart(2, '0') }}
+                  }
                 </button>
               }
             </div>
@@ -413,27 +501,34 @@
 
       <!-- Footer: Controles de acción -->
       <div class="nui-time-picker__footer">
-        <button
-          type="button"
-          class="nui-time-picker__footer-btn"
-          (click)="clear()"
-          [disabled]="isDisabled() || !selectedTime()"
-          [attr.aria-label]="effectiveI18n().clear"
-        >
-          {{ effectiveI18n().clear }}
-        </button>
-
-        @if (!isDurationMode()) {
-          <!-- Si NO estamos en modo Duration, mostrar botón de "Ahora" -->
+        @if (footerTemplate()) {
+          <ng-container
+            [ngTemplateOutlet]="footerTemplate()!"
+            [ngTemplateOutletContext]="footerContext()"
+          />
+        } @else {
           <button
             type="button"
             class="nui-time-picker__footer-btn"
-            (click)="setToNow()"
-            [disabled]="isDisabled()"
-            [attr.aria-label]="effectiveI18n().setToCurrentTime"
+            (click)="clear()"
+            [disabled]="isDisabled() || !selectedTime()"
+            [attr.aria-label]="effectiveI18n().clear"
           >
-            {{ effectiveI18n().setToCurrentTime }}
+            {{ effectiveI18n().clear }}
           </button>
+
+          @if (!isDurationMode()) {
+            <!-- Si NO estamos en modo Duration, mostrar botón de "Ahora" -->
+            <button
+              type="button"
+              class="nui-time-picker__footer-btn"
+              (click)="setToNow()"
+              [disabled]="isDisabled()"
+              [attr.aria-label]="effectiveI18n().setToCurrentTime"
+            >
+              {{ effectiveI18n().setToCurrentTime }}
+            </button>
+          }
         }
       </div>
     </div>
