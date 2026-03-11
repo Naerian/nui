@@ -54,7 +54,7 @@ import { injectCalendarConfig } from '../../configs/calendar/calendar.config';
 import { DEFAULT_CALENDAR_I18N } from './models';
 import { CalendarDayContext, CalendarFooterContext } from './models/calendar.model';
 import { CalendarFooterDirective } from './directives/calendar-footer.directive';
-import { CalendarDayDirective } from './directives/calendar-day-template.directive';
+import { CalendarDayDirective } from './directives/calendar-day.directive';
 
 @Component({
   selector: 'nui-calendar',
