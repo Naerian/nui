@@ -1,0 +1,176 @@
+﻿<div [ngClass]="wrapperClasses()">
+  <!-- =====================================================================
+    Botón principal de acción
+  ====================================================================== -->
+  <button
+    nuiButton
+    class="nui-split-btn__main"
+    [color]="effectiveColor()"
+    [size]="effectiveSize()"
+    [variant]="effectiveVariant()"
+    [shape]="effectiveShape()"
+    [raised]="effectiveRaised()"
+    [loading]="loading()"
+    [disabled]="disabled()"
+    [type]="type()"
+    [attr.aria-label]="ariaLabel() ?? null"
+    (click)="handleMainClick($event)"
+  >
+    @if (prefixIcon() && !loading()) {
+      <i [class]="prefixIcon()" aria-hidden="true"></i>
+    }
+    @if (label()) {
+      <span>{{ label() }}</span>
+    }
+    <ng-content></ng-content>
+  </button>
+
+  <!-- =====================================================================
+    Separador visual entre botón principal y disparador
+  ====================================================================== -->
+  <span class="nui-split-btn__divider" aria-hidden="true"></span>
+
+  <!-- =====================================================================
+    Botón disparador del menú (caret)
+  ====================================================================== -->
+  <button
+    nuiButton
+    class="nui-split-btn__trigger"
+    [cdkMenuTriggerFor]="splitMenu"
+    [cdkMenuPosition]="menuPositions()"
+    (cdkMenuOpened)="onMenuOpened()"
+    (cdkMenuClosed)="onMenuClosed()"
+    [color]="effectiveColor()"
+    [size]="effectiveSize()"
+    [variant]="effectiveVariant()"
+    [shape]="effectiveShape()"
+    [raised]="effectiveRaised()"
+    [disabled]="disabled() || disabledTrigger()"
+    [attr.aria-label]="triggerAriaLabel()"
+    [attr.aria-haspopup]="'menu'"
+    [attr.aria-expanded]="isOpen()"
+    type="button"
+  >
+    <i
+      class="nui-split-btn__trigger-icon"
+      [class]="effectiveTriggerIcon()"
+      [class.nui-split-btn__trigger-icon--open]="isOpen()"
+      aria-hidden="true"
+    ></i>
+  </button>
+</div>
+
+<!-- =========================================================================
+  Panel del menú desplegable (CDK overlay)
+========================================================================== -->
+<ng-template #splitMenu>
+  <div
+    class="nui-action-menu nui-action-menu--dropdown"
+    [class]="'nui-action-menu--' + effectiveColor()"
+    cdkMenu
+    [@dropdownFadeIn]
+    role="menu"
+    [attr.aria-orientation]="'vertical'"
+  >
+    @for (item of items(); track $index) {
+      @if (item.separator) {
+        <div
+          class="nui-action-menu__separator"
+          [class.nui-action-menu__separator--labeled]="item.label"
+          role="separator"
+        >
+          @if (item.label) {
+            <span class="nui-action-menu__separator__label">{{ item.label }}</span>
+          }
+        </div>
+      }
+
+      @if (!item.children && !item.separator) {
+        <button
+          class="nui-action-menu__item nui-action-menu__item--action"
+          [class.nui-action-menu__item--selected]="item.selected"
+          [class.nui-action-menu__item--custom-template]="itemTemplate()"
+          cdkMenuItem
+          [disabled]="item.disabled"
+          (cdkMenuItemTriggered)="handleItemClick(item)"
+          [attr.aria-label]="item.title || item.label"
+          [attr.aria-keyshortcuts]="item.shortcut || null"
+          role="menuitem"
+          type="button"
+        >
+          <ng-container
+            *ngTemplateOutlet="itemContentTpl; context: { $implicit: item }"
+          ></ng-container>
+          @if (item.selected) {
+            <i class="ri-check-line nui-action-menu__item__check" aria-hidden="true"></i>
+          }
+        </button>
+      }
+
+      @if (item.children && !item.separator) {
+        <button
+          class="nui-action-menu__item nui-action-menu__item--submenu"
+          [cdkMenuTriggerFor]="subMenuTemplate"
+          [cdkMenuTriggerData]="{ item: item }"
+          [cdkMenuPosition]="submenuPositions()"
+          cdkMenuItem
+          [disabled]="item.disabled"
+          [attr.aria-label]="item.title || item.label"
+          [attr.aria-haspopup]="'menu'"
+          [attr.aria-keyshortcuts]="item.shortcut || null"
+          role="menuitem"
+          type="button"
+        >
+          <ng-container
+            *ngTemplateOutlet="itemContentTpl; context: { $implicit: item }"
+          ></ng-container>
+          <span class="nui-action-menu__item__arrow">
+            <i [class]="iconSubmenu()" aria-hidden="true"></i>
+          </span>
+        </button>
+      }
+    }
+  </div>
+</ng-template>
+
+<!-- Template de renderizado de contenido de cada item -->
+<ng-template #itemContentTpl let-item>
+  @if (itemTemplate()) {
+    <ng-container
+      *ngTemplateOutlet="itemTemplate()!; context: { $implicit: item }"
+    ></ng-container>
+  } @else {
+    <div
+      class="nui-action-menu__item__container"
+      [class.nui-action-menu__item__container--icon]="item.icon"
+    >
+      @if (item.icon) {
+        <i [class]="item.icon" class="nui-action-menu__item__icon" aria-hidden="true"></i>
+      }
+      <div class="nui-action-menu__item__text">
+        <span class="nui-action-menu__item__label">{{ item.label }}</span>
+        @if (item.subtitle) {
+          <span class="nui-action-menu__item__subtitle">{{ item.subtitle }}</span>
+        }
+      </div>
+    </div>
+    @if (item.shortcut) {
+      <span class="nui-action-menu__item__shortcut" aria-hidden="true">{{ item.shortcut }}</span>
+    }
+    @if (item.badge) {
+      <span class="nui-action-menu__item__badge" aria-hidden="true">{{ item.badge }}</span>
+    }
+  }
+</ng-template>
+
+<!-- Template del panel de submenú anidado -->
+<ng-template #subMenuTemplate let-item="item">
+  <nui-action-menu-submenu
+    (onItemAction)="handleItemClick($event)"
+    [iconSubmenu]="iconSubmenu()"
+    [items]="item.children"
+    [color]="effectiveColor()"
+    [size]="effectiveSize()"
+    [offsetSubmenu]="effectiveOffsetSubmenu()"
+  ></nui-action-menu-submenu>
+</ng-template>

@@ -87,7 +87,11 @@
               @case ('shapes') {
                 <div class="example-preview">
                   <nui-button shape="rounded">Rounded</nui-button>
-                  <nui-button shape="rounded" prefixIcon="ri-user-line" variant="outline"></nui-button>
+                  <nui-button
+                    shape="rounded"
+                    prefixIcon="ri-user-line"
+                    variant="outline"
+                  ></nui-button>
                   <nui-button shape="square">Square</nui-button>
                   <nui-button shape="square" prefixIcon="ri-user-line" color="danger"></nui-button>
                   <nui-button shape="pill">Pill</nui-button>
@@ -100,23 +104,13 @@
                 <div class="example-preview">
                   <nui-button raised>Raised Button</nui-button>
                   <nui-button raised color="primary">Raised Primary</nui-button>
-                  <nui-button raised color="success" prefixIcon="ri-user-line" shape="pill"></nui-button>
+                  <nui-button
+                    raised
+                    color="success"
+                    prefixIcon="ri-user-line"
+                    shape="pill"
+                  ></nui-button>
                   <nui-button raised variant="outline" color="secondary">Raised Outline</nui-button>
-                  <nui-button
-                    raised
-                    variant="outline"
-                    color="secondary"
-                    prefixIcon="ri-user-line"
-                    shape="pill"
-                  ></nui-button>
-                  <nui-button raised variant="ghost" color="accent">Raised Ghost</nui-button>
-                  <nui-button
-                    raised
-                    variant="ghost"
-                    color="accent"
-                    prefixIcon="ri-user-line"
-                    shape="pill"
-                  ></nui-button>
                   <button nuiButton [raised]="true" color="success">Raised Directive</button>
                 </div>
               }
@@ -134,7 +128,13 @@
                   <nui-button prefixIcon="ri-user-line">Profile</nui-button>
                   <nui-button suffixIcon="ri-arrow-right-line">Next</nui-button>
                   <nui-button prefixIcon="ri-settings-line" aria-label="Settings"></nui-button>
-                  <nui-button prefixIcon="ri-settings-line" suffixIcon="ri-arrow-right-line" aria-label="Settings">Example</nui-button>
+                  <nui-button
+                    prefixIcon="ri-settings-line"
+                    suffixIcon="ri-arrow-right-line"
+                    aria-label="Settings"
+                  >
+                    Example
+                  </nui-button>
                 </div>
               }
               @case ('loading') {

@@ -6,6 +6,7 @@
 @use 'variables/toast-vars';
 @use 'variables/sidebar-panel-vars';
 @use 'variables/fab-button-vars';
+@use 'variables/split-button-vars';
 
 // Inject variables as CSS custom GLOBAL properties
 // These "includes" are intended to be used in components that use "ViewEncapsulation.None"
@@ -18,4 +19,5 @@
   @include toast-vars.nui-toast-vars;
   @include sidebar-panel-vars.nui-sidebar-panel-vars;
   @include fab-button-vars.nui-fab-button-vars;
+  @include split-button-vars.nui-split-button-vars;
 }

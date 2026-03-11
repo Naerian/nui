@@ -38,7 +38,8 @@
     "sidebarPanel": "Seitenpanel",
     "actionMenu": "Aktionsmenü",
     "progressBar": "Fortschrittsanzeige",
-    "timePicker": "Zeitauswahl"
+    "timePicker": "Zeitauswahl",
+    "splitButton": "Geteilter Button"
   },
   "presets": {
     "aura": "Aura",

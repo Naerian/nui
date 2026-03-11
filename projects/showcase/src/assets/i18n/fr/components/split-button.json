@@ -1,0 +1,178 @@
+{
+  "title": "Split Button",
+  "subtitle": "Bouton composite combinant une action principale avec un menu déroulant d'actions secondaires",
+  "basic": {
+    "title": "Utilisation de base",
+    "description": "Un split button combine un bouton d'action principal avec un déclencheur de menu déroulant. Cliquez sur la partie gauche pour l'action principale, ou sur le caret à droite pour ouvrir le menu d'actions."
+  },
+  "variantsColors": {
+    "title": "Variantes et couleurs",
+    "description": "Le split button supporte les mêmes variantes NUI (solid, outline, ghost) et couleurs (primary, secondary, accent, success, info, warning, danger, neutral) que le bouton ordinaire.",
+    "note": "Le séparateur entre le bouton principal et le déclencheur adapte sa couleur automatiquement pour chaque combinaison couleur/variante."
+  },
+  "shapes": {
+    "title": "Formes",
+    "description": "Contrôlez la forme des bordures du split button. Les coins intérieurs (entre le bouton principal et le déclencheur) restent toujours droits pour préserver l'aspect composite.",
+    "note": "Options de forme : <code>'rounded'</code> pour des bordures légèrement arrondies, <code>'pill'</code> pour des coins extérieurs entièrement arrondis, et <code>'square'</code> pour des bordures droites."
+  },
+  "sizes": {
+    "title": "Tailles",
+    "description": "Cinq tailles prédéfinies correspondant au système NUI. Le bouton principal et le déclencheur évoluent ensemble."
+  },
+  "raised": {
+    "title": "Surélevé",
+    "description": "Ajoutez une ombre subtile pour élever le split button dans les actions principales."
+  },
+  "icons": {
+    "title": "Icônes",
+    "description": "Utilisez <code>prefixIcon</code> sur le bouton principal et <code>triggerIcon</code> pour personnaliser le caret du menu déroulant.",
+    "note": "L'icône du déclencheur par défaut est <code>ri-arrow-down-s-line</code>. Vous pouvez la remplacer par n'importe quelle classe Remix Icon."
+  },
+  "loading": {
+    "title": "État de chargement",
+    "description": "L'état <code>loading</code> s'applique uniquement au bouton principal. Le déclencheur reste interactif sauf si <code>disabled</code> ou <code>disabledTrigger</code> est défini.",
+    "note": "Pendant le chargement, le bouton principal remplace son contenu par un spinner. Le déclencheur reste actif pour que les utilisateurs puissent choisir une autre action dans le menu."
+  },
+  "disabled": {
+    "title": "État désactivé",
+    "description": "Utilisez <code>disabled</code> pour désactiver tout le composant, ou <code>disabledTrigger</code> pour désactiver uniquement le déclencheur du menu tout en conservant l'action principale cliquable.",
+    "note": "Avec <code>disabledTrigger</code>, le bouton principal reste entièrement fonctionnel. Utile pour restreindre l'accès au menu tout en maintenant l'action principale disponible."
+  },
+  "menuItems": {
+    "title": "Éléments du menu",
+    "description": "Le menu déroulant supporte les mêmes fonctionnalités d'éléments enrichis que <code>nui-action-menu</code> : séparateurs, sous-titres, état sélectionné, icônes et badges."
+  },
+  "submenu": {
+    "title": "Sous-menus",
+    "description": "Les éléments avec un tableau <code>children</code> se comportent comme des déclencheurs de sous-menu qui ouvrent un panneau imbriqué au survol ou au focus."
+  },
+  "fullWidth": {
+    "title": "Pleine largeur",
+    "description": "Utilisez <code>width=\"full\"</code> pour étirer le split button sur toute la largeur de son conteneur. Le bouton principal et le déclencheur remplissent proportionnellement l'espace disponible."
+  },
+  "events": {
+    "title": "Événements",
+    "description": "Écoutez <code>onClick</code> pour le clic sur le bouton principal, <code>onItemAction</code> pour la sélection d'éléments du menu, et <code>menuOpen</code> / <code>menuClose</code> pour les changements de visibilité du panneau.",
+    "consoleNote": "Ouvrez les <strong>DevTools (F12)</strong> et vérifiez l'onglet <strong>Console</strong> pour voir les événements enregistrés lors de votre interaction avec le split button."
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Propriétés d'entrée pour configurer l'apparence et le comportement du split button.",
+      "rows": {
+        "label": "Texte du bouton d'action principal.",
+        "prefixIcon": "Classe Remix Icon à afficher avant le label.",
+        "color": "Couleur appliquée aux deux boutons.",
+        "size": "Taille appliquée aux deux boutons et au séparateur.",
+        "variant": "Variante visuelle : solid, outline ou ghost.",
+        "shape": "Forme des bordures. Les coins intérieurs restent toujours droits.",
+        "raised": "Élève le composant avec une ombre subtile.",
+        "loading": "Affiche un spinner dans le bouton principal.",
+        "disabled": "Désactive le bouton principal et le déclencheur.",
+        "disabledTrigger": "Désactive uniquement le déclencheur du menu.",
+        "width": "Mode de largeur : auto (défaut) ou full (100%).",
+        "items": "Tableau d'ActionMenuItem pour le menu déroulant.",
+        "type": "Attribut type HTML de l'élément bouton principal.",
+        "triggerIcon": "Classe d'icône pour le bouton caret du menu.",
+        "iconSubmenu": "Icône affichée sur les éléments ayant des enfants.",
+        "offset": "Distance en pixels entre le déclencheur et le panneau.",
+        "offsetSubmenu": "Distance en pixels entre un élément parent et son sous-menu.",
+        "itemTemplate": "TemplateRef personnalisé pour afficher chaque élément du menu.",
+        "ariaLabel": "Étiquette accessible pour le bouton principal.",
+        "i18n": "Remplace les textes i18n. Supporte actuellement triggerAriaLabel."
+      }
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Événements émis par le split button.",
+      "rows": {
+        "onClick": "Émis lors du clic sur le bouton principal (non émis si disabled ou loading).",
+        "onItemAction": "Émis lors de la sélection d'un élément du menu, avec l'ActionMenuItem complet.",
+        "menuOpen": "Émis lorsque le panneau déroulant s'ouvre.",
+        "menuClose": "Émis lorsque le panneau déroulant se ferme."
+      }
+    },
+    "interface": {
+      "title": "Interfaces",
+      "description": "Définitions de types utilisées par le composant split button."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Tokens de couleur du séparateur",
+      "description": "Le séparateur entre le bouton principal et le déclencheur utilise des propriétés CSS personnalisées par couleur/variante générées par le ThemeService.",
+      "note": "Remplacez <code>{color}</code> par n'importe quelle couleur NUI : primary, secondary, accent, success, info, warning, danger, neutral.",
+      "rows": {
+        "solidDivider": "Couleur du séparateur pour la variante solid. Par défaut un blanc semi-transparent.",
+        "outlineDivider": "Couleur du séparateur pour la variante outline. Par défaut une version semi-transparente de la couleur.",
+        "ghostDivider": "Couleur du séparateur pour la variante ghost. Par défaut un alpha plus clair de la couleur."
+      }
+    },
+    "structure": {
+      "title": "Tokens de structure",
+      "description": "Propriétés CSS personnalisées globales contrôlant le séparateur et les dimensions du déclencheur.",
+      "rows": {
+        "dividerWidth": "Largeur du séparateur vertical entre le bouton principal et le déclencheur.",
+        "triggerPadding": "Padding du bouton déclencheur (caret).",
+        "triggerMinWidth": "Largeur minimale du bouton déclencheur."
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "Rôles ARIA",
+      "description": "Le split button expose des attributs ARIA précis pour les technologies d'assistance.",
+      "rows": {
+        "mainRole": "Rôle button natif pour l'action principale.",
+        "triggerRole": "Rôle button natif pour le déclencheur du menu.",
+        "ariaHaspopup": "Indique que le déclencheur ouvre un menu.",
+        "ariaExpanded": "Reflète l'état ouvert/fermé du panneau.",
+        "panelRole": "L'overlay CDK reçoit role='menu'.",
+        "itemRole": "Chaque élément du menu reçoit role='menuitem'."
+      }
+    },
+    "naming": {
+      "title": "Nom accessible",
+      "description": "Les deux boutons ont besoin de noms accessibles descriptifs. Utilisez <code>aria-label</code> pour le bouton principal et <code>i18n.triggerAriaLabel</code> pour le déclencheur.",
+      "note": "Les boutons avec uniquement une icône ou des étiquettes abrégées doivent toujours être complétés par <code>aria-label</code> pour que les lecteurs d'écran comprennent le rôle de chaque bouton."
+    },
+    "keyboard": {
+      "title": "Navigation au clavier",
+      "description": "Implémentée avec Angular CDK Menu pour une accessibilité clavier complète.",
+      "rows": {
+        "tab": "Déplace le focus entre le bouton principal et le déclencheur.",
+        "enter": "Active le bouton focalisé (clic principal ou ouvre le menu).",
+        "arrows": "Navigue entre les éléments dans le menu ouvert.",
+        "right": "Ouvre un sous-menu sur un élément ayant des enfants.",
+        "esc": "Ferme le niveau actuel du menu ou revient au déclencheur."
+      }
+    }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuration",
+      "description": "Fournissez des valeurs par défaut globales pour le split button via <code>provideNUI()</code>. Ces valeurs s'appliquent à chaque <code>nui-split-button</code> de l'application sauf si elles sont remplacées par un input direct.",
+      "note": "La configuration globale est injectée via le système DI d'Angular. Chaque propriété est optionnelle — seules celles que vous spécifiez remplacent les valeurs par défaut de la bibliothèque."
+    },
+    "defaults": {
+      "title": "Propriétés configurables",
+      "description": "Les propriétés suivantes peuvent être définies globalement. Chacune agit comme fallback lorsque l'input correspondant n'est pas fourni.",
+      "rows": {
+        "color": "Couleur par défaut globale.",
+        "size": "Taille par défaut globale.",
+        "variant": "Variante par défaut globale.",
+        "shape": "Forme par défaut globale.",
+        "raised": "État raised par défaut global.",
+        "width": "Mode de largeur par défaut global.",
+        "triggerIcon": "Icône caret par défaut globale.",
+        "offset": "Décalage du déroulant par défaut en pixels.",
+        "offsetSubmenu": "Décalage du sous-menu par défaut en pixels."
+      }
+    },
+    "priority": {
+      "title": "Priorité de résolution",
+      "description": "NUI résout les valeurs de configuration selon la chaîne de priorité suivante (la plus haute gagne) :",
+      "note": "<strong>Input du composant</strong> → <strong>Config globale (<code>provideNUI</code>)</strong> → <strong>Valeur par défaut</strong>"
+    }
+  }
+}

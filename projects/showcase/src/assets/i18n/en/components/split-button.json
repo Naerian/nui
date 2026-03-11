@@ -1,0 +1,178 @@
+{
+  "title": "Split Button",
+  "subtitle": "Composite button combining a primary action with a dropdown menu of secondary actions",
+  "basic": {
+    "title": "Basic usage",
+    "description": "A split button combines a main action button with a dropdown trigger. Click the left area to trigger the main action, or the caret on the right to open the action menu."
+  },
+  "variantsColors": {
+    "title": "Variants and colors",
+    "description": "The split button supports the same NUI variants (solid, outline, ghost) and colors (primary, secondary, accent, success, info, warning, danger, neutral) as the regular button.",
+    "note": "The divider between the main button and the trigger adapts its color automatically for each color/variant combination."
+  },
+  "shapes": {
+    "title": "Shapes",
+    "description": "Control the border shape of the split button. The inner corners (between main and trigger) are always straight to preserve the composite visual.",
+    "note": "Shape options: <code>'rounded'</code> for slightly rounded borders, <code>'pill'</code> for fully rounded outer corners, and <code>'square'</code> for straight borders."
+  },
+  "sizes": {
+    "title": "Sizes",
+    "description": "Five predefined sizes matching the NUI system. Both the main button and the trigger scale together."
+  },
+  "raised": {
+    "title": "Raised",
+    "description": "Add a subtle shadow to elevate the split button for primary actions."
+  },
+  "icons": {
+    "title": "Icons",
+    "description": "Use <code>prefixIcon</code> on the main button and <code>triggerIcon</code> to customize the dropdown caret.",
+    "note": "The default trigger icon is <code>ri-arrow-down-s-line</code>. You can replace it with any Remix Icon class."
+  },
+  "loading": {
+    "title": "Loading state",
+    "description": "The <code>loading</code> state applies only to the main button. The dropdown trigger remains interactive unless <code>disabled</code> or <code>disabledTrigger</code> is set.",
+    "note": "While loading, the main button replaces its content with a spinner. The trigger remains enabled so users can still choose an alternative action from the menu."
+  },
+  "disabled": {
+    "title": "Disabled state",
+    "description": "Use <code>disabled</code> to disable the entire component, or <code>disabledTrigger</code> to disable only the dropdown trigger while keeping the main action clickable.",
+    "note": "With <code>disabledTrigger</code>, the main button remains fully functional. This is useful when you want to restrict menu access while keeping the primary action available."
+  },
+  "menuItems": {
+    "title": "Menu items",
+    "description": "The dropdown menu supports the same rich item features as <code>nui-action-menu</code>: separators, subtitles, selected state, icons and badges."
+  },
+  "submenu": {
+    "title": "Submenus",
+    "description": "Items with a <code>children</code> array render as submenu triggers that open a nested panel on hover or focus."
+  },
+  "fullWidth": {
+    "title": "Full width",
+    "description": "Use <code>width=\"full\"</code> to stretch the split button to the full width of its container. Both the main button and the trigger fill the available space proportionally."
+  },
+  "events": {
+    "title": "Events",
+    "description": "Listen to <code>onClick</code> for the main button click, <code>onItemAction</code> for menu item selections, and <code>menuOpen</code> / <code>menuClose</code> for panel visibility changes.",
+    "consoleNote": "Open <strong>DevTools (F12)</strong> and check the <strong>Console</strong> tab to see the events logged when you interact with the split button."
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Input properties to configure the split button appearance and behavior.",
+      "rows": {
+        "label": "Text for the main action button.",
+        "prefixIcon": "Remix Icon class to display before the label.",
+        "color": "Color palette token applied to both buttons.",
+        "size": "Size applied to both buttons and the divider.",
+        "variant": "Visual variant: solid, outline or ghost.",
+        "shape": "Border shape. Inner corners always remain straight.",
+        "raised": "Elevates the component with a subtle shadow.",
+        "loading": "Shows a loading spinner in the main button.",
+        "disabled": "Disables both the main button and the trigger.",
+        "disabledTrigger": "Disables only the dropdown trigger.",
+        "width": "Width mode: auto (default) or full (100%).",
+        "items": "Array of ActionMenuItem items for the dropdown.",
+        "type": "HTML type attribute for the main button element.",
+        "triggerIcon": "Icon class for the dropdown caret button.",
+        "iconSubmenu": "Icon displayed on items that have children.",
+        "offset": "Pixel distance between trigger and the dropdown panel.",
+        "offsetSubmenu": "Pixel distance between a parent item and its submenu panel.",
+        "itemTemplate": "Custom TemplateRef to render each menu item.",
+        "ariaLabel": "Accessible label for the main button.",
+        "i18n": "Override i18n strings. Currently supports triggerAriaLabel."
+      }
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Output events emitted by the split button.",
+      "rows": {
+        "onClick": "Emitted when the main button is clicked (not emitted if disabled or loading).",
+        "onItemAction": "Emitted when a menu item is selected, carrying the full ActionMenuItem.",
+        "menuOpen": "Emitted when the dropdown panel opens.",
+        "menuClose": "Emitted when the dropdown panel closes."
+      }
+    },
+    "interface": {
+      "title": "Interfaces",
+      "description": "Type definitions used by the split button component."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Divider color tokens",
+      "description": "The divider between the main button and the trigger uses per-color/variant CSS custom properties generated by the ThemeService.",
+      "note": "Replace <code>{color}</code> with any NUI color: primary, secondary, accent, success, info, warning, danger, neutral.",
+      "rows": {
+        "solidDivider": "Divider color for the solid variant. Defaults to a semi-transparent white.",
+        "outlineDivider": "Divider color for the outline variant. Defaults to a semi-transparent version of the color.",
+        "ghostDivider": "Divider color for the ghost variant. Defaults to a lighter alpha of the color."
+      }
+    },
+    "structure": {
+      "title": "Structure tokens",
+      "description": "Global structure CSS custom properties that control the divider and trigger dimensions.",
+      "rows": {
+        "dividerWidth": "Width of the vertical divider between main button and trigger.",
+        "triggerPadding": "Padding of the trigger (caret) button.",
+        "triggerMinWidth": "Minimum width of the trigger button."
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA roles",
+      "description": "The split button exposes accurate ARIA attributes for assistive technologies.",
+      "rows": {
+        "mainRole": "Native button role for the main action.",
+        "triggerRole": "Native button role for the dropdown trigger.",
+        "ariaHaspopup": "Communicates that the trigger opens a menu.",
+        "ariaExpanded": "Reflects the open/closed state of the menu panel.",
+        "panelRole": "The CDK menu overlay receives role='menu'.",
+        "itemRole": "Each menu item receives role='menuitem'."
+      }
+    },
+    "naming": {
+      "title": "Accessible naming",
+      "description": "Both buttons need descriptive accessible names. Use <code>aria-label</code> for the main button and <code>i18n.triggerAriaLabel</code> for the dropdown trigger.",
+      "note": "Icon-only or abbreviated labels should always be supplemented with an <code>aria-label</code> to ensure screen reader users understand each button's purpose."
+    },
+    "keyboard": {
+      "title": "Keyboard navigation",
+      "description": "Powered by Angular CDK Menu for full keyboard accessibility.",
+      "rows": {
+        "tab": "Moves focus between the main button and the trigger.",
+        "enter": "Activates the focused button (main click or opens menu).",
+        "arrows": "Navigates between items inside the open menu.",
+        "right": "Opens a submenu when focused on an item with children.",
+        "esc": "Closes the current menu level or returns to the trigger."
+      }
+    }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Setup",
+      "description": "Provide global defaults for the split button via <code>provideNUI()</code>. These defaults apply to every <code>nui-split-button</code> in the application unless overridden by a direct input.",
+      "note": "The global configuration is injected via Angular's DI system. Each property is optional — only the ones you specify override the library defaults."
+    },
+    "defaults": {
+      "title": "Configurable properties",
+      "description": "The following properties can be set globally. Each acts as a fallback when the corresponding input is not provided.",
+      "rows": {
+        "color": "Global default color.",
+        "size": "Global default size.",
+        "variant": "Global default variant.",
+        "shape": "Global default shape.",
+        "raised": "Global default raised state.",
+        "width": "Global default width mode.",
+        "triggerIcon": "Global default caret icon.",
+        "offset": "Global default dropdown offset in pixels.",
+        "offsetSubmenu": "Global default submenu offset in pixels."
+      }
+    },
+    "priority": {
+      "title": "Resolution priority",
+      "description": "NUI resolves configuration values using the following priority chain (highest wins):",
+      "note": "<strong>Input property</strong> → <strong>Global Config (<code>provideNUI</code>)</strong> → <strong>Built-in default</strong>"
+    }
+  }
+}

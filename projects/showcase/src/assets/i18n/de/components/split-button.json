@@ -1,0 +1,178 @@
+{
+  "title": "Split Button",
+  "subtitle": "Zusammengesetzter Button, der eine Hauptaktion mit einem Dropdown-Menü für sekundäre Aktionen verbindet",
+  "basic": {
+    "title": "Grundlegende Verwendung",
+    "description": "Ein Split Button kombiniert einen Hauptaktionsmit einem Dropdown-Auslöser. Klicken Sie auf den linken Teil für die Hauptaktion oder auf das Caret rechts, um das Aktionsmenü zu öffnen."
+  },
+  "variantsColors": {
+    "title": "Varianten und Farben",
+    "description": "Der Split Button unterstützt dieselben NUI-Varianten (solid, outline, ghost) und Farben (primary, secondary, accent, success, info, warning, danger, neutral) wie der reguläre Button.",
+    "note": "Der Trenner zwischen Hauptschaltfläche und Auslöser passt seine Farbe automatisch für jede Farb-/Variantenkombination an."
+  },
+  "shapes": {
+    "title": "Formen",
+    "description": "Steuern Sie die Randform des Split Buttons. Die inneren Ecken (zwischen Hauptschaltfläche und Auslöser) bleiben immer gerade, um das zusammengesetzte Erscheinungsbild zu erhalten.",
+    "note": "Formoptionen: <code>'rounded'</code> für leicht abgerundete Ränder, <code>'pill'</code> für vollständig abgerundete Außenecken, und <code>'square'</code> für gerade Ränder."
+  },
+  "sizes": {
+    "title": "Größen",
+    "description": "Fünf vordefinierte Größen passend zum NUI-System. Hauptschaltfläche und Auslöser skalieren gemeinsam."
+  },
+  "raised": {
+    "title": "Erhöht",
+    "description": "Fügen Sie einen subtilen Schatten hinzu, um den Split Button für primäre Aktionen hervorzuheben."
+  },
+  "icons": {
+    "title": "Icons",
+    "description": "Verwenden Sie <code>prefixIcon</code> am Hauptbutton und <code>triggerIcon</code>, um das Caret des Dropdowns anzupassen.",
+    "note": "Das Standard-Auslöser-Icon ist <code>ri-arrow-down-s-line</code>. Sie können es durch jede Remix Icon-Klasse ersetzen."
+  },
+  "loading": {
+    "title": "Ladezustand",
+    "description": "Der <code>loading</code>-Zustand gilt nur für den Hauptbutton. Der Menü-Auslöser bleibt interaktiv, sofern <code>disabled</code> oder <code>disabledTrigger</code> nicht gesetzt ist.",
+    "note": "Während des Ladens ersetzt der Hauptbutton seinen Inhalt durch einen Ladekreisel. Der Auslöser bleibt aktiviert, damit Benutzer trotzdem eine alternative Aktion aus dem Menü wählen können."
+  },
+  "disabled": {
+    "title": "Deaktivierter Zustand",
+    "description": "Verwenden Sie <code>disabled</code>, um die gesamte Komponente zu deaktivieren, oder <code>disabledTrigger</code>, um nur den Menü-Auslöser zu deaktivieren, während der Hauptbutton klickbar bleibt.",
+    "note": "Mit <code>disabledTrigger</code> bleibt der Hauptbutton voll funktionsfähig. Nützlich, wenn Sie den Menüzugang einschränken, die Hauptaktion aber beibehalten möchten."
+  },
+  "menuItems": {
+    "title": "Menüelemente",
+    "description": "Das Dropdown-Menü unterstützt dieselben umfangreichen Element-Funktionen wie <code>nui-action-menu</code>: Trennlinien, Untertitel, ausgewählter Zustand, Icons und Badges."
+  },
+  "submenu": {
+    "title": "Untermenüs",
+    "description": "Elemente mit einem <code>children</code>-Array werden als Untermenü-Auslöser dargestellt, die bei Hover oder Fokus ein verschachteltes Panel öffnen."
+  },
+  "fullWidth": {
+    "title": "Volle Breite",
+    "description": "Verwenden Sie <code>width=\"full\"</code>, um den Split Button auf die volle Breite seines Containers zu strecken. Hauptschaltfläche und Auslöser füllen den verfügbaren Platz proportional."
+  },
+  "events": {
+    "title": "Ereignisse",
+    "description": "Lauschen Sie auf <code>onClick</code> für den Klick auf die Hauptschaltfläche, <code>onItemAction</code> für die Auswahl von Menüelementen sowie <code>menuOpen</code> / <code>menuClose</code> für Änderungen der Panel-Sichtbarkeit.",
+    "consoleNote": "Öffnen Sie die <strong>DevTools (F12)</strong> und prüfen Sie den <strong>Console</strong>-Tab, um die protokollierten Ereignisse bei der Interaktion mit dem Split Button zu sehen."
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Eingabeeigenschaften zur Konfiguration von Erscheinungsbild und Verhalten des Split Buttons.",
+      "rows": {
+        "label": "Text des Hauptaktionsbuttons.",
+        "prefixIcon": "Remix Icon-Klasse vor dem Label.",
+        "color": "Auf beide Buttons angewendete Farbe.",
+        "size": "Auf beide Buttons und den Trenner angewendete Größe.",
+        "variant": "Visuelle Variante: solid, outline oder ghost.",
+        "shape": "Randform. Innere Ecken bleiben immer gerade.",
+        "raised": "Hebt die Komponente mit einem subtilen Schatten an.",
+        "loading": "Zeigt einen Spinner im Hauptbutton an.",
+        "disabled": "Deaktiviert Hauptbutton und Auslöser.",
+        "disabledTrigger": "Deaktiviert nur den Menü-Auslöser.",
+        "width": "Breitenmodus: auto (Standard) oder full (100%).",
+        "items": "Array von ActionMenuItem für das Dropdown-Menü.",
+        "type": "HTML-type-Attribut des Hauptbutton-Elements.",
+        "triggerIcon": "Icon-Klasse für den Caret-Button des Menüs.",
+        "iconSubmenu": "Icon bei Elementen mit untergeordneten Einträgen.",
+        "offset": "Pixelabstand zwischen Auslöser und Dropdown-Panel.",
+        "offsetSubmenu": "Pixelabstand zwischen einem übergeordneten Element und seinem Untermenü.",
+        "itemTemplate": "Benutzerdefiniertes TemplateRef zum Rendern jedes Menüelements.",
+        "ariaLabel": "Barrierefreiheits-Label für den Hauptbutton.",
+        "i18n": "Überschreibt i18n-Texte. Unterstützt derzeit triggerAriaLabel."
+      }
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Vom Split Button ausgegebene Ereignisse.",
+      "rows": {
+        "onClick": "Wird beim Klick auf den Hauptbutton ausgelöst (nicht bei disabled oder loading).",
+        "onItemAction": "Wird bei der Auswahl eines Menüelements ausgelöst, mit dem vollständigen ActionMenuItem.",
+        "menuOpen": "Wird ausgelöst, wenn das Dropdown-Panel öffnet.",
+        "menuClose": "Wird ausgelöst, wenn das Dropdown-Panel schließt."
+      }
+    },
+    "interface": {
+      "title": "Interfaces",
+      "description": "Typdefinitionen, die von der Split Button-Komponente verwendet werden."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Trenner-Farb-Tokens",
+      "description": "Der Trenner zwischen Hauptbutton und Auslöser verwendet vom ThemeService generierte CSS-Properties pro Farbe/Variante.",
+      "note": "Ersetzen Sie <code>{color}</code> durch eine beliebige NUI-Farbe: primary, secondary, accent, success, info, warning, danger, neutral.",
+      "rows": {
+        "solidDivider": "Trennerfarbe für die solid-Variante. Standard: halbtransparentes Weiß.",
+        "outlineDivider": "Trennerfarbe für die outline-Variante. Standard: halbtransparente Version der Farbe.",
+        "ghostDivider": "Trennerfarbe für die ghost-Variante. Standard: helleres Alpha der Farbe."
+      }
+    },
+    "structure": {
+      "title": "Struktur-Tokens",
+      "description": "Globale CSS-Properties für Trenner und Auslöser-Abmessungen.",
+      "rows": {
+        "dividerWidth": "Breite des vertikalen Trenners zwischen Hauptbutton und Auslöser.",
+        "triggerPadding": "Innenabstand des Auslöser-Buttons (Caret).",
+        "triggerMinWidth": "Mindestbreite des Auslöser-Buttons."
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA-Rollen",
+      "description": "Der Split Button stellt präzise ARIA-Attribute für assistive Technologien bereit.",
+      "rows": {
+        "mainRole": "Nativer Button-Rolle für die Hauptaktion.",
+        "triggerRole": "Nativer Button-Rolle für den Menü-Auslöser.",
+        "ariaHaspopup": "Zeigt an, dass der Auslöser ein Menü öffnet.",
+        "ariaExpanded": "Spiegelt den geöffneten/geschlossenen Zustand des Panels.",
+        "panelRole": "Das CDK-Overlay erhält role='menu'.",
+        "itemRole": "Jedes Menüelement erhält role='menuitem'."
+      }
+    },
+    "naming": {
+      "title": "Barrierefreie Bezeichnung",
+      "description": "Beide Buttons benötigen beschreibende barrierefreie Namen. Verwenden Sie <code>aria-label</code> für den Hauptbutton und <code>i18n.triggerAriaLabel</code> für den Auslöser.",
+      "note": "Buttons mit nur einem Icon oder abgekürzten Labels sollten immer durch <code>aria-label</code> ergänzt werden, damit Screenreader-Nutzer den Zweck jedes Buttons verstehen."
+    },
+    "keyboard": {
+      "title": "Tastaturnavigation",
+      "description": "Implementiert mit Angular CDK Menu für vollständige Tastaturzugänglichkeit.",
+      "rows": {
+        "tab": "Bewegt den Fokus zwischen Hauptbutton und Auslöser.",
+        "enter": "Aktiviert den fokussierten Button (Hauptklick oder öffnet Menü).",
+        "arrows": "Navigiert zwischen Elementen im geöffneten Menü.",
+        "right": "Öffnet ein Untermenü bei einem Element mit untergeordneten Einträgen.",
+        "esc": "Schließt die aktuelle Menüebene oder kehrt zum Auslöser zurück."
+      }
+    }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Einrichtung",
+      "description": "Geben Sie globale Standardwerte für den Split Button über <code>provideNUI()</code> an. Diese Werte gelten für jeden <code>nui-split-button</code> in der Anwendung, sofern sie nicht durch einen direkten Input überschrieben werden.",
+      "note": "Die globale Konfiguration wird über Angulars DI-System injiziert. Jede Eigenschaft ist optional — nur die angegebenen überschreiben die Bibliotheks-Standardwerte."
+    },
+    "defaults": {
+      "title": "Konfigurierbare Eigenschaften",
+      "description": "Die folgenden Eigenschaften können global festgelegt werden. Jede fungiert als Fallback, wenn der entsprechende Input nicht angegeben wird.",
+      "rows": {
+        "color": "Globale Standardfarbe.",
+        "size": "Globale Standardgröße.",
+        "variant": "Globale Standardvariante.",
+        "shape": "Globale Standardform.",
+        "raised": "Globaler Raised-Standardzustand.",
+        "width": "Globaler Standard-Breitenmodus.",
+        "triggerIcon": "Globales Standard-Caret-Icon.",
+        "offset": "Globaler Standard-Dropdown-Abstand in Pixel.",
+        "offsetSubmenu": "Globaler Standard-Untermenü-Abstand in Pixel."
+      }
+    },
+    "priority": {
+      "title": "Auflösungspriorität",
+      "description": "NUI löst Konfigurationswerte anhand der folgenden Prioritätskette auf (höchste gewinnt):",
+      "note": "<strong>Komponenten-Input</strong> → <strong>Globale Konfig (<code>provideNUI</code>)</strong> → <strong>Eingebauter Standard</strong>"
+    }
+  }
+}

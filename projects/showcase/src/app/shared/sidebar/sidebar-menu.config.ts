@@ -112,6 +112,11 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
             translationKey: 'sidebar.actionMenu',
             route: '/components/action-menu',
           },
+          {
+            label: 'Split Button',
+            translationKey: 'sidebar.splitButton',
+            route: '/components/split-button',
+          },
         ],
       },
       {

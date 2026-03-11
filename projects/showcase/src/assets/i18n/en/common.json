@@ -38,7 +38,8 @@
     "sidebarPanel": "Sidebar Panel",
     "actionMenu": "Action Menu",
     "progressBar": "Progress Bar",
-    "timePicker": "Time Picker"
+    "timePicker": "Time Picker",
+    "splitButton": "Split Button"
   },
   "presets": {
     "aura": "Aura",

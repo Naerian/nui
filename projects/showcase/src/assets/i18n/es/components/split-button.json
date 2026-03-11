@@ -1,0 +1,178 @@
+{
+  "title": "Split Button",
+  "subtitle": "Botón compuesto que combina una acción principal con un menú desplegable de acciones secundarias",
+  "basic": {
+    "title": "Uso básico",
+    "description": "Un split button combina un botón de acción principal con un disparador de menú desplegable. Haz clic en la parte izquierda para la acción principal, o en el caret de la derecha para abrir el menú de acciones."
+  },
+  "variantsColors": {
+    "title": "Variantes y colores",
+    "description": "El split button soporta las mismas variantes NUI (solid, outline, ghost) y colores (primary, secondary, accent, success, info, warning, danger, neutral) que el botón regular.",
+    "note": "El separador entre el botón principal y el disparador adapta su color automáticamente para cada combinación de color/variante."
+  },
+  "shapes": {
+    "title": "Formas",
+    "description": "Controla la forma del borde del split button. Las esquinas interiores (entre el botón principal y el disparador) siempre son rectas para preservar la visual compuesta.",
+    "note": "Opciones de forma: <code>'rounded'</code> para bordes ligeramente redondeados, <code>'pill'</code> para esquinas exteriores totalmente redondeadas, y <code>'square'</code> para bordes rectos."
+  },
+  "sizes": {
+    "title": "Tamaños",
+    "description": "Cinco tamaños predefinidos que coinciden con el sistema NUI. El botón principal y el disparador escalan juntos."
+  },
+  "raised": {
+    "title": "Elevado",
+    "description": "Agrega una sombra sutil para elevar el split button en acciones primarias."
+  },
+  "icons": {
+    "title": "Iconos",
+    "description": "Usa <code>prefixIcon</code> en el botón principal y <code>triggerIcon</code> para personalizar el caret del menú desplegable.",
+    "note": "El icono del disparador por defecto es <code>ri-arrow-down-s-line</code>. Puedes reemplazarlo con cualquier clase de Remix Icon."
+  },
+  "loading": {
+    "title": "Estado de carga",
+    "description": "El estado <code>loading</code> aplica solo al botón principal. El disparador del menú sigue siendo interactivo a menos que se establezca <code>disabled</code> o <code>disabledTrigger</code>.",
+    "note": "Mientras carga, el botón principal reemplaza su contenido con un spinner. El disparador permanece habilitado para que los usuarios puedan elegir una acción alternativa del menú."
+  },
+  "disabled": {
+    "title": "Estado deshabilitado",
+    "description": "Usa <code>disabled</code> para deshabilitar todo el componente, o <code>disabledTrigger</code> para deshabilitar solo el disparador del menú mientras el botón principal sigue siendo clicable.",
+    "note": "Con <code>disabledTrigger</code>, el botón principal sigue siendo completamente funcional. Útil cuando quieres restringir el acceso al menú pero mantener la acción principal disponible."
+  },
+  "menuItems": {
+    "title": "Ítems del menú",
+    "description": "El menú desplegable soporta las mismas características de ítems enriquecidos que <code>nui-action-menu</code>: separadores, subtítulos, estado seleccionado, iconos y badges."
+  },
+  "submenu": {
+    "title": "Submenús",
+    "description": "Los ítems con un array <code>children</code> se renderizan como disparadores de submenú que abren un panel anidado al pasar el ratón o enfocar."
+  },
+  "fullWidth": {
+    "title": "Ancho completo",
+    "description": "Usa <code>width=\"full\"</code> para extender el split button al ancho completo de su contenedor. El botón principal y el disparador llenan el espacio disponible proporcionalmente."
+  },
+  "events": {
+    "title": "Eventos",
+    "description": "Escucha <code>onClick</code> para el clic del botón principal, <code>onItemAction</code> para la selección de ítems del menú, y <code>menuOpen</code> / <code>menuClose</code> para los cambios de visibilidad del panel.",
+    "consoleNote": "Abre <strong>DevTools (F12)</strong> y revisa la pestaña <strong>Console</strong> para ver los eventos registrados al interactuar con el split button."
+  },
+  "api": {
+    "inputs": {
+      "title": "Inputs",
+      "description": "Propiedades de entrada para configurar la apariencia y comportamiento del split button.",
+      "rows": {
+        "label": "Texto del botón de acción principal.",
+        "prefixIcon": "Clase Remix Icon a mostrar antes del label.",
+        "color": "Color aplicado a ambos botones.",
+        "size": "Tamaño aplicado a ambos botones y al separador.",
+        "variant": "Variante visual: solid, outline o ghost.",
+        "shape": "Forma del borde. Las esquinas interiores siempre permanecen rectas.",
+        "raised": "Eleva el componente con una sombra sutil.",
+        "loading": "Muestra un spinner en el botón principal.",
+        "disabled": "Deshabilita el botón principal y el disparador.",
+        "disabledTrigger": "Deshabilita solo el disparador del menú.",
+        "width": "Modo de ancho: auto (por defecto) o full (100%).",
+        "items": "Array de ActionMenuItem para el menú desplegable.",
+        "type": "Atributo type HTML del elemento botón principal.",
+        "triggerIcon": "Clase de icono para el botón caret del menú.",
+        "iconSubmenu": "Icono en los ítems que tienen hijos.",
+        "offset": "Distancia en píxeles entre el disparador y el panel.",
+        "offsetSubmenu": "Distancia en píxeles entre un ítem padre y su submenú.",
+        "itemTemplate": "TemplateRef personalizado para renderizar cada ítem del menú.",
+        "ariaLabel": "Etiqueta accesible para el botón principal.",
+        "i18n": "Sobreescribe textos i18n. Actualmente soporta triggerAriaLabel."
+      }
+    },
+    "outputs": {
+      "title": "Outputs",
+      "description": "Eventos emitidos por el split button.",
+      "rows": {
+        "onClick": "Emitido al hacer clic en el botón principal (no se emite si está disabled o loading).",
+        "onItemAction": "Emitido al seleccionar un ítem del menú, con el ActionMenuItem completo.",
+        "menuOpen": "Emitido cuando el panel desplegable se abre.",
+        "menuClose": "Emitido cuando el panel desplegable se cierra."
+      }
+    },
+    "interface": {
+      "title": "Interfaces",
+      "description": "Definiciones de tipos utilizadas por el componente split button."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Tokens de color del separador",
+      "description": "El separador entre el botón principal y el disparador usa propiedades personalizadas CSS por color/variante generadas por el ThemeService.",
+      "note": "Reemplaza <code>{color}</code> con cualquier color NUI: primary, secondary, accent, success, info, warning, danger, neutral.",
+      "rows": {
+        "solidDivider": "Color del separador para la variante solid. Por defecto es un blanco semi-transparente.",
+        "outlineDivider": "Color del separador para la variante outline. Por defecto es una versión semi-transparente del color.",
+        "ghostDivider": "Color del separador para la variante ghost. Por defecto es un alfa más claro del color."
+      }
+    },
+    "structure": {
+      "title": "Tokens de estructura",
+      "description": "Propiedades personalizadas CSS globales que controlan el separador y las dimensiones del disparador.",
+      "rows": {
+        "dividerWidth": "Ancho del separador vertical entre el botón principal y el disparador.",
+        "triggerPadding": "Padding del botón disparador (caret).",
+        "triggerMinWidth": "Ancho mínimo del botón disparador."
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "Roles ARIA",
+      "description": "El split button expone atributos ARIA precisos para tecnologías asistivas.",
+      "rows": {
+        "mainRole": "Rol de botón nativo para la acción principal.",
+        "triggerRole": "Rol de botón nativo para el disparador del menú.",
+        "ariaHaspopup": "Comunica que el disparador abre un menú.",
+        "ariaExpanded": "Refleja el estado abierto/cerrado del panel.",
+        "panelRole": "El overlay CDK recibe role='menu'.",
+        "itemRole": "Cada ítem del menú recibe role='menuitem'."
+      }
+    },
+    "naming": {
+      "title": "Nombre accesible",
+      "description": "Ambos botones necesitan nombres accesibles descriptivos. Usa <code>aria-label</code> para el botón principal y <code>i18n.triggerAriaLabel</code> para el disparador.",
+      "note": "Los botones con solo icono o etiquetas abreviadas deben complementarse siempre con <code>aria-label</code> para que los lectores de pantalla comprendan el propósito de cada botón."
+    },
+    "keyboard": {
+      "title": "Navegación por teclado",
+      "description": "Implementada con Angular CDK Menu para accesibilidad completa de teclado.",
+      "rows": {
+        "tab": "Mueve el foco entre el botón principal y el disparador.",
+        "enter": "Activa el botón enfocado (clic principal o abre el menú).",
+        "arrows": "Navega entre ítems dentro del menú abierto.",
+        "right": "Abre un submenú al enfocar un ítem con hijos.",
+        "esc": "Cierra el nivel actual del menú o vuelve al disparador."
+      }
+    }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuración",
+      "description": "Provee valores por defecto globales para el split button mediante <code>provideNUI()</code>. Estos valores se aplican a cada <code>nui-split-button</code> en la aplicación, salvo que se sobreescriban con un input directo.",
+      "note": "La configuración global se inyecta a través del sistema DI de Angular. Cada propiedad es opcional — solo las que indiques sobreescriben los valores por defecto de la librería."
+    },
+    "defaults": {
+      "title": "Propiedades configurables",
+      "description": "Las siguientes propiedades pueden establecerse globalmente. Cada una actúa como fallback cuando el input correspondiente no está provisto.",
+      "rows": {
+        "color": "Color por defecto global.",
+        "size": "Tamaño por defecto global.",
+        "variant": "Variante por defecto global.",
+        "shape": "Forma por defecto global.",
+        "raised": "Estado raised por defecto global.",
+        "width": "Modo de ancho por defecto global.",
+        "triggerIcon": "Icono caret por defecto global.",
+        "offset": "Offset del desplegable por defecto en píxeles.",
+        "offsetSubmenu": "Offset del submenú por defecto en píxeles."
+      }
+    },
+    "priority": {
+      "title": "Prioridad de resolución",
+      "description": "NUI resuelve los valores de configuración usando la siguiente cadena de prioridad (gana el de mayor prioridad):",
+      "note": "<strong>Input del componente</strong> → <strong>Config global (<code>provideNUI</code>)</strong> → <strong>Valor por defecto</strong>"
+    }
+  }
+}

@@ -378,6 +378,7 @@ export class ThemeService {
       css += this.generateActionMenuVariables(name, baseColor);
       css += this.generatePopoverVariables(name, baseColor);
       css += this.generateProgressBarVariables(name, baseColor);
+      css += this.generateSplitButtonVariables(name, baseColor);
     });
 
     // Paginator uses a single color token set (preset primary) — no per-color variants
@@ -551,28 +552,23 @@ export class ThemeService {
   private generateShadowVariables(): string {
     const isDark = this._isDarkMode();
 
-    // 1. Shadow Color: Lo mantenemos negro para realismo físico,
-    // pero lo dejamos preparado para presets (ej: un dark mode azulado)
+    // Shadow Color
     const shadowBase = '0, 0, 0';
 
-    // 2. Ring: Vital para la separación en Dark Mode
+    // Ring (separación en dark mode)
     const ring = isDark ? '0 0 0 1px rgba(255, 255, 255, 0.1), ' : '';
 
-    // 3. RAISED INTERACTIVE (Específicas para el botón "Raised")
-    // Rest: Ya tiene cuerpo. Offset de 2px y blur de 4px para que se despegue del suelo.
     const interactiveRest = isDark
-      ? `${ring}0 4px 6px -1px rgba(${shadowBase}, 0.7), 0 2px 4px -2px rgba(${shadowBase}, 0.5)`
-      : `0 2px 4px 0 rgba(${shadowBase}, 0.14), 0 1px 10px 0 rgba(${shadowBase}, 0.12)`;
+      ? `${ring}0 4px 6px -1px rgba(${shadowBase}, 0.35), 0 2px 4px -1px rgba(${shadowBase}, 0.25)`
+      : `0 4px 6px -1px rgba(${shadowBase}, 0.14), 0 2px 4px -1px rgba(${shadowBase}, 0.1)`;
 
-    // Hover: Elevación máxima (Tailwind shadow-lg/xl style)
     const interactiveHover = isDark
-      ? `${ring}0 12px 20px -5px rgba(${shadowBase}, 0.8), 0 8px 10px -6px rgba(${shadowBase}, 0.7)`
+      ? `${ring}0 10px 20px -3px rgba(${shadowBase}, 0.75), 0 4px 8px -2px rgba(${shadowBase}, 0.6)`
       : `0 10px 15px -3px rgba(${shadowBase}, 0.16), 0 4px 6px -2px rgba(${shadowBase}, 0.1)`;
 
-    // Active: El botón toca el suelo
     const interactiveActive = isDark
-      ? `${ring}0 1px 2px 0 rgba(${shadowBase}, 0.5)`
-      : `0 1px 2px 0 rgba(${shadowBase}, 0.1)`;
+      ? `${ring}0 1px 2px rgba(${shadowBase}, 0.5)`
+      : `0 1px 2px rgba(${shadowBase}, 0.1)`;
 
     return `
     /* === SHADOW PRIMITIVES === */
@@ -626,7 +622,6 @@ export class ThemeService {
 
     const alpha10 = this.withAlpha(color, 0.1);
     const alpha20 = this.withAlpha(color, 0.2);
-    const alpha50 = this.withAlpha(color, 0.5);
     const focusRing = this.withAlpha(color, 0.4);
 
     return `
@@ -641,31 +636,31 @@ export class ThemeService {
       --nui-fab-${name}-focus-ring: ${focusRing};
 
       /* Solid */
-      --nui-fab-${name}-solid-bg:           ${color};
-      --nui-fab-${name}-solid-border:       ${color};
-      --nui-fab-${name}-solid-text:         ${contrastText};
-      --nui-fab-${name}-solid-hover-bg:     ${hoverBg};
+      --nui-fab-${name}-solid-bg: ${color};
+      --nui-fab-${name}-solid-border: ${color};
+      --nui-fab-${name}-solid-text: ${contrastText};
+      --nui-fab-${name}-solid-hover-bg: ${hoverBg};
       --nui-fab-${name}-solid-hover-border: transparent;
-      --nui-fab-${name}-solid-hover-text:   ${contrastText};
-      --nui-fab-${name}-solid-active-bg:    ${activeBg};
+      --nui-fab-${name}-solid-hover-text: ${contrastText};
+      --nui-fab-${name}-solid-active-bg: ${activeBg};
 
       /* Outline */
-      --nui-fab-${name}-outline-bg:           transparent;
-      --nui-fab-${name}-outline-border:       ${alpha20};
-      --nui-fab-${name}-outline-text:         ${color};
-      --nui-fab-${name}-outline-hover-bg:     ${alpha10};
-      --nui-fab-${name}-outline-hover-border: ${alpha50};
-      --nui-fab-${name}-outline-hover-text:   ${color};
-      --nui-fab-${name}-outline-active-bg:    ${alpha20};
+      --nui-fab-${name}-outline-bg: transparent;
+      --nui-fab-${name}-outline-border: ${alpha20};
+      --nui-fab-${name}-outline-text: ${color};
+      --nui-fab-${name}-outline-hover-bg: ${alpha10};
+      --nui-fab-${name}-outline-hover-border: ${alpha20};
+      --nui-fab-${name}-outline-hover-text: ${color};
+      --nui-fab-${name}-outline-active-bg: ${alpha20};
 
       /* Ghost */
-      --nui-fab-${name}-ghost-bg:           transparent;
-      --nui-fab-${name}-ghost-border:       transparent;
-      --nui-fab-${name}-ghost-text:         ${color};
-      --nui-fab-${name}-ghost-hover-bg:     ${alpha10};
+      --nui-fab-${name}-ghost-bg: transparent;
+      --nui-fab-${name}-ghost-border: transparent;
+      --nui-fab-${name}-ghost-text: ${color};
+      --nui-fab-${name}-ghost-hover-bg: ${alpha10};
       --nui-fab-${name}-ghost-hover-border: transparent;
-      --nui-fab-${name}-ghost-hover-text:   ${color};
-      --nui-fab-${name}-ghost-active-bg:    ${alpha20};
+      --nui-fab-${name}-ghost-hover-text: ${color};
+      --nui-fab-${name}-ghost-active-bg: ${alpha20};
 
       /* Others */
       --nui-fab-badge-border: var(--nui-border-subtle);
@@ -681,7 +676,6 @@ export class ThemeService {
     // Opacidades para outline y ghost
     const alpha10 = this.withAlpha(color, 0.1);
     const alpha20 = this.withAlpha(color, 0.2);
-    const alpha50 = this.withAlpha(color, 0.5);
 
     return `
       /* Base color for the button (used for text in outline/ghost variants and background in solid variant) */
@@ -704,7 +698,7 @@ export class ThemeService {
       --nui-btn-${name}-outline-border: ${alpha20};
       --nui-btn-${name}-outline-text: ${color};
       --nui-btn-${name}-outline-hover-bg: ${alpha10};
-      --nui-btn-${name}-outline-hover-border: ${alpha50};
+      --nui-btn-${name}-outline-hover-border: ${alpha20};
       --nui-btn-${name}-outline-hover-text: ${color};
       --nui-btn-${name}-outline-active-bg: ${alpha20};
       --nui-btn-${name}-outline-active-border: ${alpha20};
@@ -1186,7 +1180,6 @@ export class ThemeService {
    */
   private generatePopoverVariables(name: string, color: string): string {
     const contrastText = this.getContrastColor(color);
-    const grays = this._currentPreset().grays || this.getDefaultGrays();
 
     // Variables auxiliares
     const alpha80 = this.withAlpha(color, 0.7); // Para Ghost/Glass BG
@@ -1272,6 +1265,26 @@ export class ThemeService {
 
       /* Misc */
       --nui-pb-text: ${pbText};
+    `;
+  }
+
+  private generateSplitButtonVariables(name: string, color: string): string {
+    const isDark = this._isDarkMode();
+
+    // solid → divider white semi-transparent sobre fondo de color
+    const solidDivider = isDark ? this.withAlpha('#ffffff', 0.2) : this.withAlpha('#ffffff', 0.3);
+
+    // outline → ligeramente más opaco que el borde del botón outline
+    const alpha30 = this.withAlpha(color, 0.3);
+
+    // ghost → ligero, mismo tono que el hover ghost
+    const alpha15 = this.withAlpha(color, 0.15);
+
+    return `
+      /* ── Split Button: ${name} ── */
+      --nui-split-btn-${name}-solid-divider: ${solidDivider};
+      --nui-split-btn-${name}-outline-divider: ${alpha30};
+      --nui-split-btn-${name}-ghost-divider: ${alpha15};
     `;
   }
 

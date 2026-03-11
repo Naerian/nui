@@ -1,0 +1,223 @@
+:host {
+    display: inline-flex;
+    vertical-align: middle;
+
+    &.nui-split-btn-host--full {
+        display: flex;
+        width: 100%;
+    }
+}
+
+.nui-split-btn {
+    display: inline-flex;
+    align-items: stretch;
+    position: relative;
+
+    // =========================================================================
+    // Border-radius del wrapper — imprescindible para que el box-shadow
+    // de "raised" siga la forma de los botones internos en lugar de
+    // dibujarse como un rectángulo que parece un borde extra.
+    // Se replica la misma lógica forma/tamaño que usa .nui-btn.
+    // =========================================================================
+    border-radius: var(--nui-split-btn-radius-md); // rounded + md (por defecto)
+
+    &--xs {
+        border-radius: var(--nui-split-btn-radius-xs);
+    }
+
+    &--sm {
+        border-radius: var(--nui-split-btn-radius-sm);
+    }
+
+    &--lg {
+        border-radius: var(--nui-split-btn-radius-lg);
+    }
+
+    &--xl {
+        border-radius: var(--nui-split-btn-radius-xl);
+    }
+
+    // Las formas sobreescriben el radio de tamaño (mayor especificidad por orden)
+    &--square {
+        border-radius: 0;
+    }
+
+    &--pill {
+        border-radius: var(--nui-border-radius-pill);
+    }
+
+    &--full {
+        width: 100%;
+
+        .nui-split-btn__main {
+            flex: 1;
+        }
+    }
+
+    // =========================================================================
+    // Botón principal
+    // =========================================================================
+
+    &__main {
+        // Eliminar radio derecho para soldarse visualmente con el disparador
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        // Eliminar el borde derecho (lo aporta el separador)
+        border-right: none !important;
+        // Mantener z-index base
+        position: relative;
+        z-index: 0;
+
+        &:focus-visible {
+            z-index: 2;
+        }
+
+        &:hover:not(:disabled) {
+            z-index: 1;
+        }
+    }
+
+    // =========================================================================
+    // Separador entre botón principal y disparador
+    // =========================================================================
+
+    &__divider {
+        display: block;
+        width: var(--nui-split-btn-divider-width);
+        background-color: var(--nui-split-btn-divider);
+        flex-shrink: 0;
+        align-self: stretch;
+        transition: background-color var(--nui-transition-duration-fast) var(--nui-transition-timing-function-ease);
+    }
+
+    // =========================================================================
+    // Botón disparador (caret)
+    // =========================================================================
+
+    &__trigger {
+        // Eliminar radio izquierdo para soldarse visualmente con el botón principal
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        // Quitar borde izquierdo (lo aporta el separador)
+        border-left: none !important;
+        // Ancho fijo: contenedor cuadrado proporcional al tamaño
+        padding-inline: var(--nui-split-btn-trigger-padding) !important;
+        min-width: var(--nui-split-btn-trigger-min-width);
+        position: relative;
+        z-index: 0;
+
+        &:focus-visible {
+            z-index: 2;
+        }
+
+        &:hover:not(:disabled) {
+            z-index: 1;
+        }
+    }
+
+    // =========================================================================
+    // Icono del disparador con animación de rotación
+    // =========================================================================
+
+    &__trigger-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform var(--nui-transition-duration-normal) var(--nui-transition-timing-function-ease);
+
+        &--open {
+            transform: rotate(180deg);
+        }
+    }
+
+    // =========================================================================
+    // Raised: la sombra se aplica al wrapper, no a cada botón por separado.
+    // Anulamos el box-shadow individual para que no aparezca en la zona
+    // del separador ni se duplique en los bordes interiores.
+    // =========================================================================
+
+    // Raised sólo aplica con solid: en outline/ghost la sombra es incongruente.
+    &--raised:not(.nui-split-btn--outline):not(.nui-split-btn--ghost) {
+        box-shadow: var(--nui-shadow-interactive-rest);
+        transition: box-shadow 160ms cubic-bezier(.4, 0, .2, 1),
+            transform 120ms cubic-bezier(.4, 0, .2, 1);
+
+        &:hover:not(:has(:disabled)) {
+            box-shadow: var(--nui-shadow-interactive-hover);
+            transform: translateY(-1px);
+        }
+
+        &:active:not(:has(:disabled)) {
+            box-shadow: var(--nui-shadow-interactive-active);
+            transform: translateY(0);
+        }
+
+        .nui-split-btn__main,
+        .nui-split-btn__trigger {
+            box-shadow: none !important;
+            transform: none !important;
+            transition: background-color var(--nui-transition-duration-fast) var(--nui-transition-timing-function-ease),
+                border-color var(--nui-transition-duration-fast) var(--nui-transition-timing-function-ease),
+                color var(--nui-transition-duration-fast) var(--nui-transition-timing-function-ease) !important;
+
+            &:hover:not(:disabled),
+            &:active:not(:disabled) {
+                box-shadow: none !important;
+            }
+        }
+    }
+
+    // =========================================================================
+    // Estado disabled
+    // =========================================================================
+
+    &--disabled {
+        .nui-split-btn__divider {
+            opacity: 0.4;
+        }
+    }
+
+    // =========================================================================
+    // Ghost: sin separador — el componente es completamente borderless.
+    // =========================================================================
+
+    &--ghost {
+        .nui-split-btn__divider {
+            display: none;
+        }
+
+        // Restaurar el borde derecho/izquierdo que eliminamos para que el gap
+        // entre botones no quede completamente sin separación visual cuando
+        // existe un borde de foco o hover (el borde es transparent, no none).
+        .nui-split-btn__main {
+            border-right: var(--nui-button-border-width) solid transparent !important;
+        }
+
+        .nui-split-btn__trigger {
+            border-left: var(--nui-button-border-width) solid transparent !important;
+        }
+    }
+
+    // =========================================================================
+    // Variante de color para el separador (solid y outline únicamente).
+    // Usa las var() generadas por ThemeService.
+    // =========================================================================
+
+    $colors: primary, secondary, success, info, warning, danger, accent, neutral;
+
+    @each $color in $colors {
+        &--#{$color} {
+            &.nui-split-btn--solid {
+                .nui-split-btn__divider {
+                    background-color: var(--nui-split-btn-#{$color}-solid-divider);
+                }
+            }
+
+            &.nui-split-btn--outline {
+                .nui-split-btn__divider {
+                    background-color: var(--nui-split-btn-#{$color}-outline-divider);
+                }
+            }
+        }
+    }
+}

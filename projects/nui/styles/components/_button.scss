@@ -39,6 +39,7 @@
 
     @each $color in $colors {
       &--#{$color} {
+
         // Generate classes for each variant
         @each $variant in $variants {
           &.nui-btn--#{$variant} {
@@ -81,6 +82,7 @@
     }
 
     $sizes: xs, s, sm, md, lg, xl;
+
     @each $size in $sizes {
       &.nui-btn--#{$size} {
         @include base.nui-control-size($size, true);
@@ -93,6 +95,7 @@
 
     // Generate classes for each shape
     $shapes: square, pill; // Rounded is the default, so it doesn't need a class
+
     @each $shape in $shapes {
       &.nui-btn--#{$shape} {
         border-radius: var(--nui-border-radius-#{$shape});
@@ -103,16 +106,21 @@
     color: var(--nui-button-text);
     border-color: var(--nui-button-border);
 
-    &.nui-btn--raised {
+    // Raised sólo tiene sentido en solid: en outline/ghost/link la sombra
+    // choca con un borde ya visible o con la ausencia de fondo.
+    &.nui-btn--raised:not(.nui-btn--outline):not(.nui-btn--ghost):not(.nui-btn--link) {
       box-shadow: var(--nui-shadow-interactive-rest) !important;
-      transition: box-shadow 0.15s ease-in-out;
+      transition: box-shadow 160ms cubic-bezier(.4, 0, .2, 1),
+        transform 120ms cubic-bezier(.4, 0, .2, 1);
 
       &:hover:not(:disabled) {
         box-shadow: var(--nui-shadow-interactive-hover) !important;
+        transform: translateY(-1px);
       }
 
       &:active:not(:disabled) {
         box-shadow: var(--nui-shadow-interactive-active) !important;
+        transform: translateY(0);
       }
     }
 
@@ -130,6 +138,7 @@
     &--full {
       width: 100%;
     }
+
     &--fit {
       width: fit-content;
     }

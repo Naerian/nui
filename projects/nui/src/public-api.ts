@@ -24,3 +24,4 @@ export * from './lib/components/avatar';
 export * from './lib/components/sidebar-panel';
 export * from './lib/components/time-picker';
 export * from './lib/components/progress-bar';
+export * from './lib/components/split-button';

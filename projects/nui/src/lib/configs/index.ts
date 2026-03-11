@@ -22,6 +22,9 @@ export * from './time-picker';
 // Progress Bar configuration
 export * from './progress-bar';
 
+// Split Button configuration
+export * from './split-button';
+
 // Main NUI configuration
 export * from './nui.model';
 export * from './nui.provider';

@@ -38,7 +38,8 @@
     "sidebarPanel": "Panneau latéral",
     "actionMenu": "Menu d'actions",
     "progressBar": "Barre de progression",
-    "timePicker": "Sélecteur d'heure"
+    "timePicker": "Sélecteur d'heure",
+    "splitButton": "Bouton Divisé"
   },
   "presets": {
     "aura": "Aura",

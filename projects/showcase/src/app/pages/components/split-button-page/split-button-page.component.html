@@ -1,0 +1,531 @@
+<div class="docs-page">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h1>{{ pageConfig.title | translate }}</h1>
+      <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
+    </div>
+
+    <app-component-tabs [tabs]="tabs" [sections]="pageConfig.sections" #tabsComp>
+      @if (tabsComp.activeSections(); as activeSections) {
+        @for (section of activeSections; track section.id) {
+          <div class="section">
+            <app-section-title
+              [anchor]="section.anchor"
+              [title]="section.title | translate"
+              [tabId]="tabsComp.activeTabId()"
+            ></app-section-title>
+
+            @if (section.description) {
+              <p class="section-description" [innerHTML]="section.description | translate"></p>
+            }
+
+            @if (section.note) {
+              <div class="section-note" [ngClass]="section.note.type">
+                <p [innerHTML]="section.note.content | translate"></p>
+              </div>
+            }
+
+            <!-- ============================================================
+              Switch de secciones interactivas
+            ============================================================= -->
+            @switch (section.id) {
+              <!-- BASIC -->
+              @case ('basic') {
+                <div class="example-preview">
+                  <nui-split-button
+                    label="Save"
+                    prefixIcon="ri-save-line"
+                    [items]="basicItems"
+                    (onClick)="handleMainClick($event)"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                </div>
+              }
+
+              <!-- VARIANTS & COLORS -->
+              @case ('variants-colors') {
+                <div class="example-preview">
+                  <!-- Solid -->
+                  <div class="button-row">
+                    <nui-split-button
+                      label="Primary"
+                      color="primary"
+                      variant="solid"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Secondary"
+                      color="secondary"
+                      variant="solid"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Accent"
+                      color="accent"
+                      variant="solid"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Success"
+                      color="success"
+                      variant="solid"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Info"
+                      color="info"
+                      variant="solid"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Warning"
+                      color="warning"
+                      variant="solid"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Danger"
+                      color="danger"
+                      variant="solid"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Neutral"
+                      color="neutral"
+                      variant="solid"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                  </div>
+                  <!-- Outline -->
+                  <div class="button-row">
+                    <nui-split-button
+                      label="Primary"
+                      color="primary"
+                      variant="outline"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Secondary"
+                      color="secondary"
+                      variant="outline"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Accent"
+                      color="accent"
+                      variant="outline"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Success"
+                      color="success"
+                      variant="outline"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Info"
+                      color="info"
+                      variant="outline"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Warning"
+                      color="warning"
+                      variant="outline"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Danger"
+                      color="danger"
+                      variant="outline"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Neutral"
+                      color="neutral"
+                      variant="outline"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                  </div>
+                  <!-- Ghost -->
+                  <div class="button-row">
+                    <nui-split-button
+                      label="Primary"
+                      color="primary"
+                      variant="ghost"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Secondary"
+                      color="secondary"
+                      variant="ghost"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Accent"
+                      color="accent"
+                      variant="ghost"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Success"
+                      color="success"
+                      variant="ghost"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Info"
+                      color="info"
+                      variant="ghost"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Warning"
+                      color="warning"
+                      variant="ghost"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Danger"
+                      color="danger"
+                      variant="ghost"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                    <nui-split-button
+                      label="Neutral"
+                      color="neutral"
+                      variant="ghost"
+                      [items]="basicItems"
+                      (onItemAction)="handleAction($event)"
+                    ></nui-split-button>
+                  </div>
+                </div>
+              }
+
+              <!-- SHAPES -->
+              @case ('shapes') {
+                <div class="example-preview">
+                  <nui-split-button
+                    label="Rounded"
+                    shape="rounded"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Square"
+                    shape="square"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Pill"
+                    shape="pill"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Rounded"
+                    shape="rounded"
+                    variant="outline"
+                    color="secondary"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Square"
+                    shape="square"
+                    variant="outline"
+                    color="secondary"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Pill"
+                    shape="pill"
+                    variant="outline"
+                    color="secondary"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                </div>
+              }
+
+              <!-- SIZES -->
+              @case ('sizes') {
+                <div class="example-preview">
+                  <nui-split-button
+                    label="XSmall"
+                    size="xs"
+                    prefixIcon="ri-save-line"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Small"
+                    size="sm"
+                    prefixIcon="ri-save-line"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Medium"
+                    size="md"
+                    prefixIcon="ri-save-line"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Large"
+                    size="lg"
+                    prefixIcon="ri-save-line"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="XLarge"
+                    size="xl"
+                    prefixIcon="ri-save-line"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                </div>
+              }
+
+              <!-- RAISED -->
+              @case ('raised') {
+                <div class="example-preview">
+                  <nui-split-button
+                    label="Raised Primary"
+                    raised
+                    color="primary"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Raised Pill"
+                    raised
+                    shape="pill"
+                    color="success"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                </div>
+              }
+
+              <!-- ICONS -->
+              @case ('icons') {
+                <div class="example-preview">
+                  <nui-split-button
+                    label="Save"
+                    prefixIcon="ri-save-line"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Upload"
+                    prefixIcon="ri-upload-line"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                    color="secondary"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Share"
+                    prefixIcon="ri-share-line"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                    color="accent"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Options"
+                    triggerIcon="ri-more-line"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                    variant="outline"
+                    color="primary"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Actions"
+                    triggerIcon="ri-settings-line"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                    variant="ghost"
+                    color="secondary"
+                  ></nui-split-button>
+                </div>
+              }
+
+              <!-- LOADING -->
+              @case ('loading') {
+                <div class="example-preview">
+                  <nui-split-button
+                    label="Save"
+                    prefixIcon="ri-save-line"
+                    [loading]="isLoading()"
+                    [items]="basicItems"
+                    (onClick)="simulateLoading()"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Always loading"
+                    [loading]="true"
+                    [items]="basicItems"
+                    color="secondary"
+                  ></nui-split-button>
+                </div>
+              }
+
+              <!-- DISABLED -->
+              @case ('disabled') {
+                <div class="example-preview">
+                  <nui-split-button
+                    label="Fully disabled"
+                    disabled
+                    [items]="basicItems"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Trigger disabled"
+                    disabledTrigger
+                    [items]="basicItems"
+                    (onClick)="handleMainClick($event)"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Disabled outline"
+                    disabled
+                    variant="outline"
+                    color="secondary"
+                    [items]="basicItems"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Disabled ghost"
+                    disabled
+                    variant="ghost"
+                    color="accent"
+                    [items]="basicItems"
+                  ></nui-split-button>
+                </div>
+              }
+
+              <!-- MENU ITEMS -->
+              @case ('menu-items') {
+                <div class="example-preview">
+                  <nui-split-button
+                    label="Document"
+                    prefixIcon="ri-file-line"
+                    [items]="richItems"
+                    (onClick)="handleMainClick($event)"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                </div>
+              }
+
+              <!-- SUBMENU -->
+              @case ('submenu') {
+                <div class="example-preview">
+                  <nui-split-button
+                    label="Actions"
+                    prefixIcon="ri-settings-line"
+                    [items]="submenuItems"
+                    (onClick)="handleMainClick($event)"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                </div>
+              }
+
+              <!-- FULL WIDTH -->
+              @case ('full-width') {
+                <div
+                  class="example-preview"
+                  style="display: flex; flex-direction: column; gap: 0.75rem"
+                >
+                  <nui-split-button
+                    label="Full width action"
+                    prefixIcon="ri-save-line"
+                    width="full"
+                    [items]="basicItems"
+                    (onClick)="handleMainClick($event)"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                  <nui-split-button
+                    label="Full width outline"
+                    width="full"
+                    variant="outline"
+                    color="secondary"
+                    [items]="basicItems"
+                    (onItemAction)="handleAction($event)"
+                  ></nui-split-button>
+                </div>
+              }
+
+              <!-- EVENTS -->
+              @case ('events') {
+                <div class="example-preview">
+                  <nui-split-button
+                    label="Save"
+                    prefixIcon="ri-save-line"
+                    [items]="basicItems"
+                    (onClick)="handleMainClick($event)"
+                    (onItemAction)="handleAction($event)"
+                    (menuOpen)="onMenuOpen()"
+                    (menuClose)="onMenuClose()"
+                  ></nui-split-button>
+                </div>
+              }
+            }
+
+            <!-- Tabla de datos (para API o Theming) -->
+            @if (section.table) {
+              <div class="api-table">
+                <table>
+                  <thead>
+                    <tr>
+                      @for (header of section.table.headers; track $index) {
+                        <th [innerHTML]="header | translate"></th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of section.table.rows; track $index) {
+                      <tr>
+                        @for (cell of row; track $index) {
+                          <td [innerHTML]="cell | translate"></td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+
+            <!-- Code blocks asociados a esta sección -->
+            @if (section.examples && section.examples.length > 0) {
+              <app-code-block [examples]="section.examples"></app-code-block>
+            }
+          </div>
+        }
+      }
+    </app-component-tabs>
+  </div>
+</div>

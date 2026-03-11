@@ -135,6 +135,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'split-button',
+        loadComponent: () =>
+          import('./pages/components/split-button-page/split-button-page.component').then(
+            m => m.SplitButtonPageComponent
+          ),
+      },
+      {
         path: 'avatar',
         loadComponent: () =>
           import('./pages/components/avatar-page/avatar-page.component').then(

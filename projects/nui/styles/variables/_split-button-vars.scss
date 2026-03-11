@@ -1,0 +1,25 @@
+// ========================================
+// SPLIT BUTTON - Variables & Tokens
+// ========================================
+
+// TOKENS
+$split-button-divider-width: 1px !default;
+$split-button-trigger-padding: 0.5rem !default;
+$split-button-trigger-min-width: 2rem !default;
+
+// MIXIN
+@mixin nui-split-button-vars {
+  // Separador entre botón principal y disparador
+  --nui-split-btn-divider-width: #{$split-button-divider-width};
+
+  // Padding horizontal del botón disparador (caret)
+  --nui-split-btn-trigger-padding: #{$split-button-trigger-padding};
+  --nui-split-btn-trigger-min-width: #{$split-button-trigger-min-width};
+
+  // Border-radius heredado del sistema (resolución por tamaño)
+  --nui-split-btn-radius-xs: var(--nui-border-radius-xs);
+  --nui-split-btn-radius-sm: var(--nui-border-radius-sm);
+  --nui-split-btn-radius-md: var(--nui-border-radius-md);
+  --nui-split-btn-radius-lg: var(--nui-border-radius-lg);
+  --nui-split-btn-radius-xl: var(--nui-border-radius-xl);
+}

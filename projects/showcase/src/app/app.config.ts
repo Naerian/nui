@@ -25,6 +25,7 @@ const COMPONENT_FILES: [string, string][] = [
   ['timePicker', 'time-picker'],
   ['fabButton', 'fab-button'],
   ['progressBar', 'progress-bar'],
+  ['splitButton', 'split-button'],
 ];
 
 export class SplitTranslateLoader implements TranslateLoader {

@@ -114,10 +114,6 @@ export const BUTTON_EXAMPLES_SECTIONS: ComponentSection[] = [
         code: `<nui-button raised>Raised Button</nui-button>
 <nui-button raised color="primary">Raised Primary</nui-button>
 <nui-button raised color="success" prefixIcon="ri-user-line" shape="pill"></nui-button>
-<nui-button raised variant="outline" color="secondary">Raised Outline</nui-button>
-<nui-button raised variant="outline" color="secondary" prefixIcon="ri-user-line" shape="pill"></nui-button>
-<nui-button raised variant="ghost" color="accent">Raised Ghost</nui-button>
-<nui-button raised variant="ghost" color="accent" prefixIcon="ri-user-line" shape="pill"></nui-button>
 <button nuiButton [raised]="true" color="success">Raised Directive</button>`,
         language: 'html',
       },
