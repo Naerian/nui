@@ -69,8 +69,9 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
 
   /**
    * Tab actualmente activo (signal)
-   * Se inicializa directamente desde el fragment de la URL para que el primer
-   * render de Angular ya proyecte las secciones correctas (evita doble CD cycle).
+   * Valor inicial genérico; ngOnInit lo corrige usando tabs() (disponible
+   * tras la inicialización de inputs) para evitar la heurística frágil
+   * de resolveInitialTab().
    */
   activeTabId = signal<string>(this.resolveInitialTab());
 
@@ -103,14 +104,35 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // El tab ya se inicializó en resolveInitialTab(), solo procesamos scroll a sección si hay una
     const fragment = this.router.parseUrl(this.router.url).fragment;
-    if (fragment?.includes('.')) {
-      const [, sectionAnchor] = fragment.split('.');
-      setTimeout(() => this.contentScrollService.scrollToAnchor(sectionAnchor), 150);
-    } else if (fragment && !this.tabs().find(t => t.id === fragment)) {
-      // Formato legacy: solo sección
-      setTimeout(() => this.contentScrollService.scrollToAnchor(fragment), 150);
+    if (!fragment) return;
+
+    if (fragment.includes('.')) {
+      const [tabId, sectionAnchor] = fragment.split('.');
+      // Verificar con tabs() —ya disponible en ngOnInit.
+      if (this.tabs().find(t => t.id === tabId)) {
+        this.activeTabId.set(tabId);
+      }
+      setTimeout(() => this.contentScrollService.scrollToAnchor(sectionAnchor), 300);
+      return;
+    }
+
+    // ¿Es un tab ID válido?
+    if (this.tabs().find(t => t.id === fragment)) {
+      this.activeTabId.set(fragment);
+      return;
+    }
+
+    // Es un anchor de sección (formato legacy): encontrar en qué tab está.
+    const tabWithSection = this.tabs().find(t =>
+      t.sections.some(sectionId => {
+        const section = this.sections().find(s => s.id === sectionId);
+        return section?.anchor === fragment;
+      })
+    );
+    if (tabWithSection) {
+      this.activeTabId.set(tabWithSection.id);
+      setTimeout(() => this.contentScrollService.scrollToAnchor(fragment), 300);
     }
   }
 
@@ -120,24 +142,19 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Resuelve el tab inicial desde el fragment de la URL de forma síncrona,
-   * para que el primer render ya muestre las secciones correctas.
+   * Valor inicial del tab activo —heurística rápida para el primer render.
+   * Solo se usa como fallback; ngOnInit corrige usando tabs().
    */
   private resolveInitialTab(): string {
     const fragment = this.router.parseUrl(this.router.url).fragment;
     if (!fragment) return this.initialTab() ?? 'examples';
 
-    // Formato tab.section
-    if (fragment.includes('.')) {
-      const tabId = fragment.split('.')[0];
-      // No podemos verificar tabs() aquí (signal no inicializada), devolvemos el tabId tal cual
-      return tabId;
-    }
+    // Formato canónico tab.section → extraer tab ID
+    if (fragment.includes('.')) return fragment.split('.')[0];
 
-    // Formato: solo tab (si no, será una sección legacy → usar tab por defecto)
-    return fragment.includes('-') || !isNaN(Number(fragment))
-      ? (this.initialTab() ?? 'examples') // parece un anchor, no un tabId
-      : fragment;
+    // Fragmento sin punto: devolvemos tal cual asumiendo que es un tab ID.
+    // Si resulta ser un anchor de sección, ngOnInit() lo corregirá.
+    return fragment;
   }
 
   /**
@@ -188,7 +205,7 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
       const tab = this.tabs().find(t => t.id === tabId);
       if (tab) {
         this.activeTabId.set(tabId);
-        setTimeout(() => this.contentScrollService.scrollToAnchor(sectionAnchor), 150);
+        setTimeout(() => this.contentScrollService.scrollToAnchor(sectionAnchor), 300);
       }
       return;
     }
@@ -209,7 +226,7 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
     );
     if (tabWithSection) {
       this.activeTabId.set(tabWithSection.id);
-      setTimeout(() => this.contentScrollService.scrollToAnchor(fragment), 150);
+      setTimeout(() => this.contentScrollService.scrollToAnchor(fragment), 300);
     }
   }
 }

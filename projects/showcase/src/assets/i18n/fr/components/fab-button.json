@@ -1,61 +1,81 @@
 {
   "title": "Bouton FAB",
   "subtitle": "Bouton d'action flottant avec dispositions radiales et de multiples options de personnalisation",
-  "basic": {
-    "title": "Basique",
-    "description": "L'utilisation la plus simple du Bouton FAB : les actions se déploient vers le haut dans une disposition linéaire lorsque le déclencheur est cliqué."
-  },
-  "directions": {
-    "title": "Directions",
-    "description": "Contrôlez dans quelle direction les éléments se déploient avec <code>direction</code>. Valeurs disponibles : <code>up</code>, <code>down</code>, <code>left</code>, <code>right</code> et les quatre diagonales."
-  },
-  "layouts": {
-    "title": "Dispositions",
-    "description": "Définissez la distribution spatiale des éléments avec <code>layout</code> : <code>linear</code> (en ligne), <code>semi-circle</code> (demi-cercle), <code>quarter-circle</code> (quart de cercle) et <code>circle</code> (cercle complet)."
-  },
-  "shapes": {
-    "title": "Formes",
-    "description": "Personnalisez le rayon de bordure du déclencheur et des éléments avec <code>shape</code> : <code>circular</code>, <code>rounded</code> ou <code>square</code>."
-  },
-  "colors": {
-    "title": "Couleurs",
-    "description": "Utilisez n'importe laquelle des 8 couleurs sémantiques du système avec l'entrée <code>color</code>."
-  },
-  "sizes": {
-    "title": "Tailles",
-    "description": "Contrôlez la taille du déclencheur et des éléments avec <code>size</code> : <code>xs</code>, <code>sm</code>, <code>md</code> (défaut), <code>lg</code> et <code>xl</code>."
-  },
-  "animation": {
-    "title": "Animations",
-    "description": "Choisissez comment les éléments entrent et sortent avec <code>animation</code> : <code>scale</code> (défaut), <code>fade</code> ou <code>slide</code>."
-  },
-  "trigger": {
-    "title": "Déclencheur",
-    "description": "Personnalisez le bouton déclencheur avec <code>triggerIcon</code>, <code>triggerIconOpen</code> (icône alternative quand ouvert), <code>triggerLabel</code> (modèle Extended FAB) et <code>triggerBadge</code> pour afficher un compteur."
-  },
-  "loading": {
-    "title": "État de chargement",
-    "description": "Affiche un indicateur sur le déclencheur avec <code>[loading]=\"true\"</code>. Pendant son activité, le déclencheur n'ouvre ni ne ferme le dial."
-  },
-  "openOn": {
-    "title": "Mode d'ouverture",
-    "description": "Contrôlez comment le dial s'ouvre : <code>openOn=\"click\"</code> (défaut) ou <code>openOn=\"hover\"</code> pour un speed-dial activé au survol. La navigation au clavier fonctionne de la même manière dans les deux modes."
-  },
-  "itemDisplay": {
-    "title": "Affichage des éléments",
-    "description": "<code>itemDisplay=\"icon\"</code> affiche uniquement l'icône avec une infobulle au survol (défaut). <code>itemDisplay=\"icon-text\"</code> affiche l'icône et la propriété <code>label</code> de l'élément directement visible dans le bouton."
-  },
-  "closeOptions": {
-    "title": "Options de fermeture",
-    "description": "Contrôlez quand le dial se ferme : <code>[closeOnItemClick]=\"false\"</code> garde le dial ouvert après avoir cliqué sur un élément (utile pour la sélection multiple), <code>[closeOnOutsideClick]=\"true\"</code> ferme lors d'un clic extérieur, <code>[closeOnScroll]=\"true\"</code> ferme lors d'un défilement."
-  },
-  "backdrop": {
-    "title": "Fond d'écran",
-    "description": "Ajoute une couche translucide derrière les éléments avec <code>[backdrop]=\"true\"</code>, idéal pour mettre en évidence les actions sur du contenu dense."
-  },
-  "templates": {
-    "title": "Templates personnalisés",
-    "description": "Projetez votre propre contenu dans le déclencheur avec <code>fabTrigger</code> et dans chaque élément avec <code>fabItem</code>. Les deux directives exposent le contexte de l'élément via <code>let-item</code> et l'état d'ouverture du dial via <code>let-open=\"isOpen\"</code>."
+  "examples": {
+    "basic": {
+      "title": "Utilisation basique",
+      "description": "L'utilisation la plus simple du bouton FAB : déploie les actions vers le haut dans une disposition linéaire en cliquant sur le déclencheur."
+    },
+    "directions": {
+      "title": "Directions",
+      "description": "Contrôle la direction dans laquelle les éléments se déploient.",
+      "note": "Utilisez <code>direction</code> pour spécifier la direction. Par défaut, c'est <code>up</code>, mais vous pouvez également utiliser <code>down</code>, <code>left</code>, <code>right</code> et les quatre diagonales."
+    },
+    "layouts": {
+      "title": "Layouts",
+      "description": "Définissez la disposition spatiale des éléments.",
+      "note": "La disposition <code>linear</code> est par défaut, mais vous pouvez également choisir parmi <code>layout</code> : <code>linear</code> (en ligne), <code>semi-circle</code> (demi-cercle), <code>quarter-circle</code> (quart de cercle) et <code>circle</code> (cercle complet). La valeur <code>radius</code> contrôle le rayon de l'orbite pour les dispositions radiales."
+    },
+    "shapes": {
+      "title": "Formes",
+      "description": "Personnalisez le rayon de bord du déclencheur et des éléments.",
+      "note": "Le bouton FAB est <code>circular</code> par défaut, mais vous pouvez utiliser <code>shape</code> pour changer sa forme en carré <code>square</code>, arrondi <code>rounded</code> ou toute forme personnalisée avec CSS."
+    },
+    "colors": {
+      "title": "Couleurs",
+      "description": "Utilisez l'une des 8 couleurs sémantiques de NUI.",
+      "note": "Choisissez la couleur avec l'input <code>color</code> : <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code> ou <code>neutral</code>."
+    },
+    "variants": {
+      "title": "Variantes",
+      "description": "Choisissez parmi les variantes visuelles de NUI.",
+      "note": "Contrôlez l'apparence du déclencheur et des éléments avec l'input <code>variant</code> : <code>solid</code> (par défaut), <code>outline</code> ou <code>ghost</code>."
+    },
+    "sizes": {
+      "title": "Tailles",
+      "description": "Contrôlez la taille du déclencheur et du bouton principal en utilisant NUI",
+      "note": "Utilisez l'input <code>size</code> pour choisir parmi les options de taille de NUI : <code>xs</code>, <code>sm</code>, <code>md</code> (par défaut), <code>lg</code> et <code>xl</code>."
+    },
+    "animation": {
+      "title": "Animations",
+      "description": "Choisissez comment les éléments entrent et sortent.",
+      "note": "Contrôlez le style d'animation avec l'input <code>animation</code> : <code>fade</code> (fondu), <code>scale</code> (mise à l'échelle) ou <code>slide</code> (glissement)."
+    },
+    "trigger": {
+      "title": "Déclencheur",
+      "description": "Personnalisez le bouton déclencheur avec différentes options.",
+      "note": "Utilisez <code>triggerIcon</code>, <code>triggerIconOpen</code> (icône alternative lorsque ouvert), <code>triggerLabel</code> (modèle Extended FAB) et <code>triggerBadge</code> pour afficher un compteur ou un indicateur sur le déclencheur."
+    },
+    "loading": {
+      "title": "État de chargement",
+      "description": "Affiche un spinner sur le déclencheur.",
+      "note": "Activez l'état de chargement avec <code>[loading]=\"true\"</code> pour indiquer qu'une action est en cours de traitement. Cela remplace l'icône du déclencheur par un spinner animé et désactive l'interaction pour éviter plusieurs activations."
+    },
+    "openOn": {
+      "title": "Mode d'ouverture",
+      "description": "Contrôle comment le dial d'actions s'ouvre.",
+      "note": "Par défaut, le FAB s'ouvre en cliquant sur le déclencheur (<code>click</code>), mais vous pouvez également le configurer pour qu'il s'ouvre au survol de la souris (<code>hover</code>) en utilisant l'input <code>openOn</code>."
+    },
+    "itemDisplay": {
+      "title": "Affichage des éléments",
+      "description": "Contrôle si les éléments affichent uniquement l'icône, uniquement le texte ou les deux.",
+      "note": "<code>itemDisplay=\"icon\"</code> affiche uniquement l'icône avec infobulle au survol (par défaut). <code>itemDisplay=\"icon-text\"</code> affiche l'icône et la propriété <code>label</code> de l'élément directement visible dans le bouton."
+    },
+    "closeOptions": {
+      "title": "Options de fermeture",
+      "description": "Contrôle quand le dial d'actions se ferme après l'ouverture.",
+      "note": "<code>[closeOnItemClick]=\"false\"</code> maintient le dial ouvert après avoir cliqué sur un élément (utile pour la sélection multiple), <code>[closeOnOutsideClick]=\"true\"</code> ferme en cliquant à l'extérieur, <code>[closeOnScroll]=\"true\"</code> ferme lors du défilement."
+    },
+    "backdrop": {
+      "title": "Backdrop",
+      "description": "Ajoute une couche translucide derrière les éléments pour mettre en valeur les actions sur un contenu dense.",
+      "note": "Utilisez <code>[backdrop]=\"true\"</code>, idéal pour mettre en valeur les actions sur un contenu dense."
+    },
+    "templates": {
+      "title": "Templates personnalisés",
+      "description": "Projetez votre propre contenu dans le déclencheur et dans chaque élément avec des directives de template.",
+      "note": "Utilisez <code>fabTrigger</code> pour le déclencheur et <code>fabItem</code> pour chaque élément. Les deux directives exposent le contexte de l'élément via <code>let-item</code> et l'état ouvert du dial via <code>let-open=\"isOpen\"</code>."
+    }
   },
   "api": {
     "inputs": {

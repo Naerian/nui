@@ -1,61 +1,81 @@
 {
   "title": "FAB Button",
   "subtitle": "Floating action button with radial layouts and multiple customization options",
-  "basic": {
-    "title": "Basic",
-    "description": "The simplest usage of the FAB Button: expands actions upward in a linear layout when the trigger is clicked."
-  },
-  "directions": {
-    "title": "Directions",
-    "description": "Control where items expand with <code>direction</code>. Available values: <code>up</code>, <code>down</code>, <code>left</code>, <code>right</code> and the four diagonals."
-  },
-  "layouts": {
-    "title": "Layouts",
-    "description": "Define the spatial distribution of items with <code>layout</code>: <code>linear</code> (inline), <code>semi-circle</code> (semicircle), <code>quarter-circle</code> (quarter circle) and <code>circle</code> (full circle)."
-  },
-  "shapes": {
-    "title": "Shapes",
-    "description": "Customize the border radius of the trigger and items with <code>shape</code>: <code>circular</code>, <code>rounded</code> or <code>square</code>."
-  },
-  "colors": {
-    "title": "Colors",
-    "description": "Use any of the 8 semantic system colors with the <code>color</code> input."
-  },
-  "sizes": {
-    "title": "Sizes",
-    "description": "Control the size of the trigger and items with <code>size</code>: <code>xs</code>, <code>sm</code>, <code>md</code> (default), <code>lg</code> and <code>xl</code>."
-  },
-  "animation": {
-    "title": "Animations",
-    "description": "Choose how items enter and exit with <code>animation</code>: <code>scale</code> (default), <code>fade</code> or <code>slide</code>."
-  },
-  "trigger": {
-    "title": "Trigger",
-    "description": "Customize the trigger button with <code>triggerIcon</code>, <code>triggerIconOpen</code> (alternative icon when open), <code>triggerLabel</code> (Extended FAB pattern) and <code>triggerBadge</code> to display a counter."
-  },
-  "loading": {
-    "title": "Loading state",
-    "description": "Shows a spinner on the trigger with <code>[loading]=\"true\"</code>. While active, the trigger does not open or close the dial."
-  },
-  "openOn": {
-    "title": "Open mode",
-    "description": "Control how the dial opens: <code>openOn=\"click\"</code> (default) or <code>openOn=\"hover\"</code> for a speed-dial activated on hover. Keyboard navigation works the same in both modes."
-  },
-  "itemDisplay": {
-    "title": "Item display",
-    "description": "<code>itemDisplay=\"icon\"</code> shows only the icon with a tooltip on hover (default). <code>itemDisplay=\"icon-text\"</code> shows the icon and the item's <code>label</code> property directly visible inside the button."
-  },
-  "closeOptions": {
-    "title": "Close options",
-    "description": "Control when the dial closes: <code>[closeOnItemClick]=\"false\"</code> keeps the dial open after clicking an item (useful for multiple selection), <code>[closeOnOutsideClick]=\"true\"</code> closes on outside click, <code>[closeOnScroll]=\"true\"</code> closes on scroll."
-  },
-  "backdrop": {
-    "title": "Backdrop",
-    "description": "Adds a translucent layer behind the items with <code>[backdrop]=\"true\"</code>, ideal for highlighting actions over dense content."
-  },
-  "templates": {
-    "title": "Custom templates",
-    "description": "Project your own content into the trigger with <code>fabTrigger</code> and into each item with <code>fabItem</code>. Both directives expose the item context via <code>let-item</code> and the dial open state via <code>let-open=\"isOpen\"</code>."
+  "examples": {
+    "basic": {
+    "title": "Basic usage",
+      "description": "The simplest use of the FAB Button: expands actions upwards in a linear layout when clicking the trigger."
+    },
+    "directions": {
+      "title": "Directions",
+      "description": "Controls the direction in which the items expand.",
+      "note": "Use <code>direction</code> to specify the direction. By default, it is <code>up</code>, but you can also use <code>down</code>, <code>left</code>, <code>right</code>, and the four diagonals."
+    },
+    "layouts": {
+      "title": "Layouts",
+      "description": "Define the spatial arrangement of the items.",
+      "note": "The <code>linear</code> layout is the default, but you can also choose from <code>layout</code>: <code>linear</code> (inline), <code>semi-circle</code> (semi-circle), <code>quarter-circle</code> (quarter circle), and <code>circle</code> (full circle). The <code>radius</code> value controls the orbit radius for radial layouts."
+    },
+    "shapes": {
+      "title": "Shapes",
+      "description": "Customize the border radius of the trigger and items.",
+      "note": "The FAB Button is <code>circular</code> by default, but you can use <code>shape</code> to change its shape to square <code>square</code>, rounded <code>rounded</code>, or any custom shape with CSS."
+    },
+    "colors": {
+      "title": "Colors",
+      "description": "Use any of the 8 semantic colors of NUI.",
+      "note": "Choose the color with the input <code>color</code>: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, or <code>neutral</code>."
+    },
+    "variants": {
+      "title": "Variants",
+      "description": "Choose from the visual variants of NUI.",
+      "note": "Control the appearance of the trigger and items with the input <code>variant</code>: <code>solid</code> (default), <code>outline</code>, or <code>ghost</code>."
+    },
+    "sizes": {
+      "title": "Sizes",
+      "description": "Control the size of the trigger and main button using NUI",
+      "note": "Use the input <code>size</code> to choose from the NUI size options: <code>xs</code>, <code>sm</code>, <code>md</code> (default), <code>lg</code>, and <code>xl</code>."
+    },
+    "animation": {
+      "title": "Animations",
+      "description": "Choose how the items enter and exit.",
+      "note": "Control the animation style with the input <code>animation</code>: <code>fade</code> (fade), <code>scale</code> (scale), or <code>slide</code> (slide)."
+    },
+    "trigger": {
+      "title": "Trigger",
+      "description": "Customize the trigger button with different options.",
+      "note": "Use <code>triggerIcon</code>, <code>triggerIconOpen</code> (alternative icon when open), <code>triggerLabel</code> (Extended FAB pattern), and <code>triggerBadge</code> to display a counter or indicator on the trigger."
+    },
+    "loading": {
+      "title": "Loading State",
+      "description": "Displays a spinner on the trigger.",
+      "note": "Activate the loading state with <code>[loading]=\"true\"</code> to indicate that an action is being processed. This replaces the trigger icon with an animated spinner and disables interaction to prevent multiple activations."
+    },
+    "openOn": {
+      "title": "Open Mode",
+      "description": "Controls how the action dial opens.",
+      "note": "By default, the FAB opens on click (<code>click</code>), but you can also configure it to open on hover (<code>hover</code>) using the input <code>openOn</code>."
+    },
+    "itemDisplay": {
+      "title": "Item Display",
+      "description": "Controls whether items display only the icon, only the text, or both.",
+      "note": "<code>itemDisplay=\"icon\"</code> displays only the icon with a tooltip on hover (default). <code>itemDisplay=\"icon-text\"</code> displays the icon and the item's <code>label</code> directly visible within the button."
+    },
+    "closeOptions": {
+      "title": "Close Options",
+      "description": "Controls when the action dial closes after opening.",
+      "note": "<code>[closeOnItemClick]=\"false\"</code> keeps the dial open after clicking an item (useful for multiple selection), <code>[closeOnOutsideClick]=\"true\"</code> closes on outside click, <code>[closeOnScroll]=\"true\"</code> closes on scroll."
+    },
+    "backdrop": {
+      "title": "Backdrop",
+      "description": "Adds a translucent layer behind the items to highlight actions over dense content.",
+      "note": "Use <code>[backdrop]=\"true\"</code>, ideal for highlighting actions over dense content."
+    },
+    "templates": {
+      "title": "Custom Templates",
+      "description": "Project your own content into the trigger and each item using template directives.",
+      "note": "Use <code>fabTrigger</code> for the trigger and <code>fabItem</code> for each item. Both directives expose the item context via <code>let-item</code> and the open state of the dial via <code>let-open=\"isOpen\"</code>."
+    }
   },
   "api": {
     "inputs": {

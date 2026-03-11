@@ -2,7 +2,7 @@
   "title": "Schaltfläche",
   "subtitle": "Vielseitige Schaltflächen-Komponente mit mehreren Varianten, Größen und Zuständen",
   "basic": {
-    "title": "Einfache Schaltfläche",
+    "title": "Grundlegende Verwendung",
     "description": "Die einfachste Form einer Schaltfläche mit Standardstilen."
   },
   "variants-colors": {

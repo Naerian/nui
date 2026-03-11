@@ -110,7 +110,8 @@
     // choca con un borde ya visible o con la ausencia de fondo.
     &.nui-btn--raised:not(.nui-btn--outline):not(.nui-btn--ghost):not(.nui-btn--link) {
       box-shadow: var(--nui-shadow-interactive-rest);
-      transition: box-shadow 160ms cubic-bezier(.4, 0, .2, 1),
+      transition:
+        box-shadow 160ms cubic-bezier(.4, 0, .2, 1),
         transform 120ms cubic-bezier(.4, 0, .2, 1);
 
       &:hover:not(:disabled) {
@@ -120,7 +121,7 @@
 
       &:active:not(:disabled) {
         box-shadow: var(--nui-shadow-interactive-active);
-        transform: translateY(0);
+        transform: translateY(1px);
       }
     }
 

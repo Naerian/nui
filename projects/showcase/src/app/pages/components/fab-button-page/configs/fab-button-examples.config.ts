@@ -10,8 +10,8 @@ export const FAB_BUTTON_EXAMPLES_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 'basic',
-    title: 'components.fabButton.basic.title',
-    description: 'components.fabButton.basic.description',
+    title: 'components.fabButton.examples.basic.title',
+    description: 'components.fabButton.examples.basic.description',
     anchor: 'basic',
     examples: [
       {
@@ -38,8 +38,12 @@ actions: FabButtonItem[] = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 'directions',
-    title: 'components.fabButton.directions.title',
-    description: 'components.fabButton.directions.description',
+    title: 'components.fabButton.examples.directions.title',
+    description: 'components.fabButton.examples.directions.description',
+    note: {
+      type: 'info',
+      content: 'components.fabButton.examples.directions.note',
+    },
     anchor: 'directions',
     examples: [
       {
@@ -58,17 +62,22 @@ actions: FabButtonItem[] = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 'layouts',
-    title: 'components.fabButton.layouts.title',
-    description: 'components.fabButton.layouts.description',
+    title: 'components.fabButton.examples.layouts.title',
+    description: 'components.fabButton.examples.layouts.description',
+    note: {
+      type: 'info',
+      content: 'components.fabButton.examples.layouts.note',
+    },
     anchor: 'layouts',
     examples: [
       {
         title: 'codeExamples.html',
         language: 'html',
-        code: `<nui-fab-button layout="linear"        direction="up"    [items]="actions" />
-<nui-fab-button layout="semi-circle"   direction="up"    [items]="actions" color="secondary" />
+        code: `<nui-fab-button layout="linear" direction="up" [items]="actions" />
+<nui-fab-button layout="semi-circle" direction="up" [items]="actions" color="secondary" />
 <nui-fab-button layout="quarter-circle" direction="up-right" [items]="actions" color="accent" />
-<nui-fab-button layout="circle"        triggerIcon="ri-apps-2-line" [items]="radialActions" color="info" />`,
+<nui-fab-button layout="circle" triggerIcon="ri-apps-2-line" [items]="radialActions" color="info" />
+<nui-fab-button layout="circle" triggerIcon="ri-apps-2-line" [items]="radialActions" color="danger" radius="3rem"/>`,
       },
     ],
   },
@@ -78,8 +87,12 @@ actions: FabButtonItem[] = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 'shapes',
-    title: 'components.fabButton.shapes.title',
-    description: 'components.fabButton.shapes.description',
+    title: 'components.fabButton.examples.shapes.title',
+    description: 'components.fabButton.examples.shapes.description',
+    note: {
+      type: 'info',
+      content: 'components.fabButton.examples.shapes.note',
+    },
     anchor: 'shapes',
     examples: [
       {
@@ -97,8 +110,12 @@ actions: FabButtonItem[] = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 'colors',
-    title: 'components.fabButton.colors.title',
-    description: 'components.fabButton.colors.description',
+    title: 'components.fabButton.examples.colors.title',
+    description: 'components.fabButton.examples.colors.description',
+    note: {
+      type: 'info',
+      content: 'components.fabButton.examples.colors.note',
+    },
     anchor: 'colors',
     examples: [
       {
@@ -117,12 +134,39 @@ actions: FabButtonItem[] = [
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // VARIANTS
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'variants',
+    title: 'components.fabButton.examples.variants.title',
+    description: 'components.fabButton.examples.variants.description',
+    note: {
+      type: 'info',
+      content: 'components.fabButton.examples.variants.note',
+    },
+    anchor: 'variants',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<nui-fab-button color="primary" [items]="actions" />
+<nui-fab-button variant="outline" color="secondary" [items]="actions" />
+<nui-fab-button variant="ghost" color="accent" [items]="actions" />`,
+      },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // SIZES
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 'sizes',
-    title: 'components.fabButton.sizes.title',
-    description: 'components.fabButton.sizes.description',
+    title: 'components.fabButton.examples.sizes.title',
+    description: 'components.fabButton.examples.sizes.description',
+    note: {
+      type: 'info',
+      content: 'components.fabButton.examples.sizes.note',
+    },
     anchor: 'sizes',
     examples: [
       {
@@ -142,8 +186,12 @@ actions: FabButtonItem[] = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 'animation',
-    title: 'components.fabButton.animation.title',
-    description: 'components.fabButton.animation.description',
+    title: 'components.fabButton.examples.animation.title',
+    description: 'components.fabButton.examples.animation.description',
+    note: {
+      type: 'info',
+      content: 'components.fabButton.examples.animation.note',
+    },
     anchor: 'animation',
     examples: [
       {
@@ -161,8 +209,12 @@ actions: FabButtonItem[] = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 'trigger',
-    title: 'components.fabButton.trigger.title',
-    description: 'components.fabButton.trigger.description',
+    title: 'components.fabButton.examples.trigger.title',
+    description: 'components.fabButton.examples.trigger.description',
+    note: {
+      type: 'info',
+      content: 'components.fabButton.examples.trigger.note',
+    },
     anchor: 'trigger',
     examples: [
       {
@@ -208,8 +260,12 @@ actions: FabButtonItem[] = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 'loading',
-    title: 'components.fabButton.loading.title',
-    description: 'components.fabButton.loading.description',
+    title: 'components.fabButton.examples.loading.title',
+    description: 'components.fabButton.examples.loading.description',
+    note: {
+      type: 'info',
+      content: 'components.fabButton.examples.loading.note',
+    },
     anchor: 'loading',
     examples: [
       {
@@ -241,8 +297,12 @@ simulateSend(): void {
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 'openOn',
-    title: 'components.fabButton.openOn.title',
-    description: 'components.fabButton.openOn.description',
+    title: 'components.fabButton.examples.openOn.title',
+    description: 'components.fabButton.examples.openOn.description',
+    note: {
+      type: 'info',
+      content: 'components.fabButton.examples.openOn.note',
+    },
     anchor: 'openOn',
     examples: [
       {
@@ -262,8 +322,12 @@ simulateSend(): void {
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 'itemDisplay',
-    title: 'components.fabButton.itemDisplay.title',
-    description: 'components.fabButton.itemDisplay.description',
+    title: 'components.fabButton.examples.itemDisplay.title',
+    description: 'components.fabButton.examples.itemDisplay.description',
+    note: {
+      type: 'info',
+      content: 'components.fabButton.examples.itemDisplay.note',
+    },
     anchor: 'itemDisplay',
     examples: [
       {
@@ -292,8 +356,12 @@ simulateSend(): void {
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 'closeOptions',
-    title: 'components.fabButton.closeOptions.title',
-    description: 'components.fabButton.closeOptions.description',
+    title: 'components.fabButton.examples.closeOptions.title',
+    description: 'components.fabButton.examples.closeOptions.description',
+    note: {
+      type: 'info',
+      content: 'components.fabButton.examples.closeOptions.note',
+    },
     anchor: 'closeOptions',
     examples: [
       {
@@ -329,8 +397,12 @@ simulateSend(): void {
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 'backdrop',
-    title: 'components.fabButton.backdrop.title',
-    description: 'components.fabButton.backdrop.description',
+    title: 'components.fabButton.examples.backdrop.title',
+    description: 'components.fabButton.examples.backdrop.description',
+    note: {
+      type: 'info',
+      content: 'components.fabButton.examples.backdrop.note',
+    },
     anchor: 'backdrop',
     examples: [
       {
@@ -346,8 +418,12 @@ simulateSend(): void {
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 'templates',
-    title: 'components.fabButton.templates.title',
-    description: 'components.fabButton.templates.description',
+    title: 'components.fabButton.examples.templates.title',
+    description: 'components.fabButton.examples.templates.description',
+    note: {
+      type: 'info',
+      content: 'components.fabButton.examples.templates.note',
+    },
     anchor: 'templates',
     examples: [
       {

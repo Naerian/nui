@@ -620,7 +620,7 @@ export class ThemeService {
     const hoverBg = isDark ? this.shade(color, 10) : this.tint(color, 10);
     const activeBg = isDark ? this.shade(color, 20) : this.tint(color, 20);
 
-    const alpha10 = this.withAlpha(color, 0.1);
+    const alpha05 = this.withAlpha(color, 0.05);
     const alpha20 = this.withAlpha(color, 0.2);
     const focusRing = this.withAlpha(color, 0.4);
 
@@ -648,7 +648,7 @@ export class ThemeService {
       --nui-fab-${name}-outline-bg: transparent;
       --nui-fab-${name}-outline-border: ${alpha20};
       --nui-fab-${name}-outline-text: ${color};
-      --nui-fab-${name}-outline-hover-bg: ${alpha10};
+      --nui-fab-${name}-outline-hover-bg: ${alpha05};
       --nui-fab-${name}-outline-hover-border: ${alpha20};
       --nui-fab-${name}-outline-hover-text: ${color};
       --nui-fab-${name}-outline-active-bg: ${alpha20};
@@ -657,7 +657,7 @@ export class ThemeService {
       --nui-fab-${name}-ghost-bg: transparent;
       --nui-fab-${name}-ghost-border: transparent;
       --nui-fab-${name}-ghost-text: ${color};
-      --nui-fab-${name}-ghost-hover-bg: ${alpha10};
+      --nui-fab-${name}-ghost-hover-bg: ${alpha05};
       --nui-fab-${name}-ghost-hover-border: transparent;
       --nui-fab-${name}-ghost-hover-text: ${color};
       --nui-fab-${name}-ghost-active-bg: ${alpha20};
@@ -674,6 +674,7 @@ export class ThemeService {
     const activeBg = isDark ? this.shade(color, 20) : this.tint(color, 20);
 
     // Opacidades para outline y ghost
+    const alpha05 = this.withAlpha(color, 0.05);
     const alpha10 = this.withAlpha(color, 0.1);
     const alpha20 = this.withAlpha(color, 0.2);
 
@@ -697,7 +698,7 @@ export class ThemeService {
       --nui-btn-${name}-outline-bg: transparent;
       --nui-btn-${name}-outline-border: ${alpha20};
       --nui-btn-${name}-outline-text: ${color};
-      --nui-btn-${name}-outline-hover-bg: ${alpha10};
+      --nui-btn-${name}-outline-hover-bg: ${alpha05};
       --nui-btn-${name}-outline-hover-border: ${alpha20};
       --nui-btn-${name}-outline-hover-text: ${color};
       --nui-btn-${name}-outline-active-bg: ${alpha20};
@@ -707,7 +708,7 @@ export class ThemeService {
       --nui-btn-${name}-ghost-bg: transparent;
       --nui-btn-${name}-ghost-border: transparent;
       --nui-btn-${name}-ghost-text: ${color};
-      --nui-btn-${name}-ghost-hover-bg: ${alpha10};
+      --nui-btn-${name}-ghost-hover-bg: ${alpha05};
       --nui-btn-${name}-ghost-hover-border: transparent;
       --nui-btn-${name}-ghost-hover-text: ${color};
       --nui-btn-${name}-ghost-active-bg: ${alpha20};
@@ -733,7 +734,7 @@ export class ThemeService {
     const contrastText = this.getContrastColor(color);
 
     // Opacidades para hover states
-    const alpha10 = this.withAlpha(color, 0.1);
+    const alpha05 = this.withAlpha(color, 0.05);
     const alpha20 = this.withAlpha(color, 0.2);
 
     // Variables de superficie (para el estado 'base' de la variante Solid)
@@ -749,7 +750,7 @@ export class ThemeService {
     --nui-slc-btn-${name}-solid-sel-bg: ${color};
     --nui-slc-btn-${name}-solid-sel-text: ${contrastText};
     --nui-slc-btn-${name}-solid-sel-border: ${sysBg};
-    --nui-slc-btn-${name}-solid-hover-bg: ${alpha10};
+    --nui-slc-btn-${name}-solid-hover-bg: ${alpha05};
     --nui-slc-btn-${name}-solid-hover-text: ${contrastText};
     --nui-slc-btn-${name}-solid-hover-border: ${alpha20};
 
@@ -760,7 +761,7 @@ export class ThemeService {
     --nui-slc-btn-${name}-outline-sel-bg: ${alpha20};
     --nui-slc-btn-${name}-outline-sel-text: ${color};
     --nui-slc-btn-${name}-outline-sel-border: ${color};
-    --nui-slc-btn-${name}-outline-hover-bg: ${alpha10};
+    --nui-slc-btn-${name}-outline-hover-bg: ${alpha05};
     --nui-slc-btn-${name}-outline-hover-text: ${color};
     --nui-slc-btn-${name}-outline-hover-border: ${alpha20};
 
@@ -771,7 +772,7 @@ export class ThemeService {
     --nui-slc-btn-${name}-ghost-sel-bg: ${alpha20};
     --nui-slc-btn-${name}-ghost-sel-text: ${color};
     --nui-slc-btn-${name}-ghost-sel-border: transparent;
-    --nui-slc-btn-${name}-ghost-hover-bg: ${alpha10};
+    --nui-slc-btn-${name}-ghost-hover-bg: ${alpha05};
     --nui-slc-btn-${name}-ghost-hover-text: ${color};
     --nui-slc-btn-${name}-ghost-hover-border: transparent;
 
@@ -784,7 +785,7 @@ export class ThemeService {
     --nui-slc-btn-${name}-segmented-sel-bg: ${color};
     --nui-slc-btn-${name}-segmented-sel-text: ${contrastText};
     --nui-slc-btn-${name}-segmented-sel-border: transparent;
-    --nui-slc-btn-${name}-segmented-hover-bg: ${alpha10};
+    --nui-slc-btn-${name}-segmented-hover-bg: ${alpha05};
   `;
   }
 
@@ -829,7 +830,7 @@ export class ThemeService {
     const contrastText = this.getContrastColor(color);
     const grays = this.grays();
 
-    const alpha10 = this.withAlpha(color, 0.1);
+    const alpha05 = this.withAlpha(color, 0.05);
     const alpha15 = this.withAlpha(color, 0.15);
     const hoverBg = this.withAlpha(color, 0.05);
 
@@ -847,7 +848,7 @@ export class ThemeService {
       --nui-pg-solid-active-border: ${color};
 
       /* Paginator active button: Outline */
-      --nui-pg-outline-active-bg: ${alpha10};
+      --nui-pg-outline-active-bg: ${alpha05};
       --nui-pg-outline-active-text: ${color};
       --nui-pg-outline-active-border: ${color};
 
@@ -1221,7 +1222,6 @@ export class ThemeService {
   private generateProgressBarVariables(name: string, color: string): string {
     const isDark = this._isDarkMode();
     const pbText = this.getContrastColor(color);
-    const pbTextShadow = this.withAlpha(color, 0.8);
 
     // Solid: always darkens on hover → weight and solidity
     const solidFillHover = this.shade(color, 12);

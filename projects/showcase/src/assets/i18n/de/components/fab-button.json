@@ -1,61 +1,81 @@
 {
   "title": "FAB-Schaltfläche",
   "subtitle": "Schwebende Aktionsschaltfläche mit radialen Layouts und mehreren Anpassungsoptionen",
-  "basic": {
-    "title": "Grundlegend",
-    "description": "Die einfachste Verwendung der FAB-Schaltfläche: Aktionen werden beim Klicken auf den Trigger linear nach oben erweitert."
-  },
-  "directions": {
-    "title": "Richtungen",
-    "description": "Steuere, wohin sich Elemente mit <code>direction</code> erweitern. Verfügbare Werte: <code>up</code>, <code>down</code>, <code>left</code>, <code>right</code> und die vier Diagonalen."
-  },
-  "layouts": {
-    "title": "Layouts",
-    "description": "Definiere die räumliche Verteilung der Elemente mit <code>layout</code>: <code>linear</code> (inline), <code>semi-circle</code> (Halbkreis), <code>quarter-circle</code> (Viertelkreis) und <code>circle</code> (Vollkreis)."
-  },
-  "shapes": {
-    "title": "Formen",
-    "description": "Passe den Rahmenradius des Triggers und der Elemente mit <code>shape</code> an: <code>circular</code>, <code>rounded</code> oder <code>square</code>."
-  },
-  "colors": {
-    "title": "Farben",
-    "description": "Verwende eine der 8 semantischen Systemfarben mit dem Input <code>color</code>."
-  },
-  "sizes": {
-    "title": "Größen",
-    "description": "Steuere die Größe des Triggers und der Elemente mit <code>size</code>: <code>xs</code>, <code>sm</code>, <code>md</code> (Standard), <code>lg</code> und <code>xl</code>."
-  },
-  "animation": {
-    "title": "Animationen",
-    "description": "Wähle, wie Elemente ein- und ausblenden mit <code>animation</code>: <code>scale</code> (Standard), <code>fade</code> oder <code>slide</code>."
-  },
-  "trigger": {
-    "title": "Trigger",
-    "description": "Passe die Trigger-Schaltfläche mit <code>triggerIcon</code>, <code>triggerIconOpen</code> (alternatives Icon im geöffneten Zustand), <code>triggerLabel</code> (Extended FAB-Muster) und <code>triggerBadge</code> zur Anzeige eines Zählers an."
-  },
-  "loading": {
-    "title": "Ladezustand",
-    "description": "Zeigt einen Spinner auf dem Trigger mit <code>[loading]=\"true\"</code>. Während aktiv, öffnet oder schließt der Trigger das Wählrad nicht."
-  },
-  "openOn": {
-    "title": "Öffnungsmodus",
-    "description": "Steuere, wie das Wählrad geöffnet wird: <code>openOn=\"click\"</code> (Standard) oder <code>openOn=\"hover\"</code> für ein per Hover aktiviertes Speed-Dial. Die Tastaturnavigation funktioniert in beiden Modi gleich."
-  },
-  "itemDisplay": {
-    "title": "Element-Anzeige",
-    "description": "<code>itemDisplay=\"icon\"</code> zeigt nur das Icon mit einem Tooltip beim Hover (Standard). <code>itemDisplay=\"icon-text\"</code> zeigt das Icon und die <code>label</code>-Eigenschaft des Elements direkt sichtbar innerhalb der Schaltfläche an."
-  },
-  "closeOptions": {
-    "title": "Schließoptionen",
-    "description": "Steuere, wann das Wählrad schließt: <code>[closeOnItemClick]=\"false\"</code> hält das Wählrad nach dem Klicken auf ein Element offen (nützlich für Mehrfachauswahl), <code>[closeOnOutsideClick]=\"true\"</code> schließt bei Außenklick, <code>[closeOnScroll]=\"true\"</code> schließt beim Scrollen."
-  },
-  "backdrop": {
-    "title": "Hintergrundblatt",
-    "description": "Fügt eine halbtransparente Schicht hinter den Elementen mit <code>[backdrop]=\"true\"</code> hinzu, ideal zum Hervorheben von Aktionen über dichtem Inhalt."
-  },
-  "templates": {
-    "title": "Benutzerdefinierte Templates",
-    "description": "Projiziere eigenen Inhalt in den Trigger mit <code>fabTrigger</code> und in jedes Element mit <code>fabItem</code>. Beide Direktiven geben den Element-Kontext über <code>let-item</code> und den offenen Zustand des Wählrads über <code>let-open=\"isOpen\"</code> weiter."
+  "examples": {
+    "basic": {
+      "title": "Grundlegende Verwendung",
+      "description": "Die einfachste Verwendung der FAB-Schaltfläche: Aktionen werden beim Klicken auf den Auslöser nach oben in einem linearen Layout erweitert."
+    },
+    "directions": {
+      "title": "Richtungen",
+      "description": "Steuert, in welche Richtung sich die Elemente erweitern.",
+      "note": "Verwenden Sie <code>direction</code>, um die Richtung anzugeben. Standardmäßig ist <code>up</code>, aber Sie können auch <code>down</code>, <code>left</code>, <code>right</code> und die vier Diagonalen verwenden."
+    },
+    "layouts": {
+      "title": "Layouts",
+      "description": "Definieren Sie die räumliche Anordnung der Elemente.",
+      "note": "Das <code>linear</code>-Layout ist standardmäßig, aber Sie können auch aus <code>layout</code>: <code>linear</code> (inline), <code>semi-circle</code> (Halbkreis), <code>quarter-circle</code> (Viertelkreis) und <code>circle</code> (Vollkreis) wählen. Der Wert <code>radius</code> steuert den Orbit-Radius für radiale Layouts."
+    },
+    "shapes": {
+      "title": "Formen",
+      "description": "Passen Sie den Radius des Triggers und der Elemente an.",
+      "note": "Die FAB-Schaltfläche ist standardmäßig <code>circular</code>, aber Sie können <code>shape</code> verwenden, um ihre Form in <code>square</code> (quadratisch), <code>rounded</code> (abgerundet) oder jede benutzerdefinierte Form mit CSS zu ändern."
+    },
+    "colors": {
+      "title": "Farben",
+      "description": "Verwenden Sie eine der 8 semantischen Farben von NUI.",
+      "note": "Wählen Sie die Farbe mit dem Input <code>color</code>: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code> oder <code>neutral</code>."
+    },
+    "variants": {
+      "title": "Varianten",
+      "description": "Wählen Sie aus den visuellen Varianten von NUI.",
+      "note": "Steuern Sie das Erscheinungsbild des Triggers und der Elemente mit dem Input <code>variant</code>: <code>solid</code> (Standard), <code>outline</code> oder <code>ghost</code>."
+    },
+    "sizes": {
+      "title": "Größen",
+      "description": "Steuert die Größe des Triggers und der Hauptschaltfläche mit NUI",
+      "note": "Verwenden Sie den Input <code>size</code>, um aus den NUI-Größenoptionen zu wählen: <code>xs</code>, <code>sm</code>, <code>md</code> (Standard), <code>lg</code> und <code>xl</code>."
+    },
+    "animation": {
+      "title": "Animationen",
+      "description": "Wählen Sie, wie die Elemente ein- und ausgeblendet werden.",
+      "note": "Steuern Sie den Animationsstil mit dem Input <code>animation</code>: <code>fade</code> (Einblenden), <code>scale</code> (Skalieren) oder <code>slide</code> (Schieben)."
+    },
+    "trigger": {
+      "title": "Trigger",
+      "description": "Passen Sie die Trigger-Schaltfläche mit verschiedenen Optionen an.",
+      "note": "Verwenden Sie <code>triggerIcon</code>, <code>triggerIconOpen</code> (alternatives Symbol, wenn geöffnet), <code>triggerLabel</code> (Extended FAB-Muster) und <code>triggerBadge</code>, um einen Zähler oder Indikator auf dem Trigger anzuzeigen."
+    },
+    "loading": {
+      "title": "Ladezustand",
+      "description": "Zeigt einen Spinner auf dem Trigger an.",
+      "note": "Aktivieren Sie den Ladezustand mit <code>[loading]=\"true\"</code>, um anzuzeigen, dass eine Aktion verarbeitet wird. Dies ersetzt das Trigger-Symbol durch einen animierten Spinner und deaktiviert die Interaktion, um mehrere Aktivierungen zu verhindern."
+    },
+    "openOn": {
+      "title": "Öffnungsmodus",
+      "description": "Steuert, wie das Aktionswahlrad geöffnet wird.",
+      "note": "Standardmäßig öffnet sich das FAB beim Klicken auf den Trigger (<code>click</code>), aber Sie können es auch so konfigurieren, dass es beim Überfahren mit der Maus (<code>hover</code>) geöffnet wird, indem Sie den Input <code>openOn</code> verwenden."
+    },
+    "itemDisplay": {
+      "title": "Elementanzeige",
+      "description": "Steuert, ob Elemente nur das Symbol, nur den Text oder beides anzeigen.",
+      "note": "<code>itemDisplay=\"icon\"</code> zeigt nur das Symbol mit Tooltip beim Überfahren (Standard). <code>itemDisplay=\"icon-text\"</code> zeigt das Symbol und das <code>label</code> des Elements direkt im Button an."
+    },
+    "closeOptions": {
+      "title": "Schließoptionen",
+      "description": "Steuert, wann das Aktionswahlrad nach dem Öffnen geschlossen wird.",
+      "note": "<code>[closeOnItemClick]=\"false\"</code> hält das Wahlrad nach dem Klicken auf ein Element geöffnet (nützlich für Mehrfachauswahl), <code>[closeOnOutsideClick]=\"true\"</code> schließt es beim Klicken außerhalb, <code>[closeOnScroll]=\"true\"</code> schließt es beim Scrollen."
+    },
+    "backdrop": {
+      "title": "Backdrop",
+      "description": "Fügt eine durchsichtige Schicht hinter den Elementen hinzu, um Aktionen über dichten Inhalt hervorzuheben.",
+      "note": "Verwenden Sie <code>[backdrop]=\"true\"</code>, ideal, um Aktionen über dichten Inhalt hervorzuheben."
+    },
+    "templates": {
+      "title": "Benutzerdefinierte Templates",
+      "description": "Projizieren Sie Ihren eigenen Inhalt in den Trigger und in jedes Element mit Template-Direktiven.",
+      "note": "Verwenden Sie <code>fabTrigger</code> für den Trigger und <code>fabItem</code> für jedes Element. Beide Direktiven stellen den Elementkontext über <code>let-item</code> und den offenen Zustand des Wahlrads über <code>let-open=\"isOpen\"</code> bereit."
+    }
   },
   "api": {
     "inputs": {

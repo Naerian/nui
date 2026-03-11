@@ -136,17 +136,18 @@
     // Raised sólo aplica con solid: en outline/ghost la sombra es incongruente.
     &--raised:not(.nui-split-btn--outline):not(.nui-split-btn--ghost) {
         box-shadow: var(--nui-shadow-interactive-rest);
-        transition: box-shadow 160ms cubic-bezier(.4, 0, .2, 1),
+        transition:
+            box-shadow 160ms cubic-bezier(.4, 0, .2, 1),
             transform 120ms cubic-bezier(.4, 0, .2, 1);
 
-        &:hover:not(:has(:disabled)) {
+        &:hover:not(:disabled) {
             box-shadow: var(--nui-shadow-interactive-hover);
             transform: translateY(-1px);
         }
 
-        &:active:not(:has(:disabled)) {
+        &:active:not(:disabled) {
             box-shadow: var(--nui-shadow-interactive-active);
-            transform: translateY(0);
+            transform: translateY(1px);
         }
 
         .nui-split-btn__main,

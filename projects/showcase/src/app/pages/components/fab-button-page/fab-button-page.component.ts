@@ -43,6 +43,7 @@ export class FabButtonPageComponent extends BaseComponentPage {
         'layouts',
         'shapes',
         'colors',
+        'variants',
         'sizes',
         'animation',
         'trigger',

@@ -2,7 +2,7 @@
   "title": "Button",
   "subtitle": "Versatile button component with multiple variants, sizes and states",
   "basic": {
-    "title": "Basic button",
+    "title": "Basic usage",
     "description": "The simplest form of a button with default styles."
   },
   "variants-colors": {

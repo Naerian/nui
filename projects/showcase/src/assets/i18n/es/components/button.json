@@ -2,7 +2,7 @@
   "title": "Botón",
   "subtitle": "Componente de botón versátil con múltiples variantes, tamaños y estados",
   "basic": {
-    "title": "Botón básico",
+    "title": "Uso básico",
     "description": "La forma más simple de un botón con estilos predeterminados."
   },
   "variants-colors": {

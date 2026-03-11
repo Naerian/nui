@@ -73,6 +73,13 @@
                     [items]="radialActions"
                     color="info"
                   />
+                  <nui-fab-button
+                    layout="circle"
+                    triggerIcon="ri-apps-2-line"
+                    [items]="radialActions"
+                    radius="3rem"
+                    color="danger"
+                  />
                 </div>
               }
 
@@ -96,6 +103,15 @@
                   <nui-fab-button color="warning" [items]="actions" />
                   <nui-fab-button color="danger" [items]="actions" />
                   <nui-fab-button color="neutral" [items]="actions" />
+                </div>
+              }
+
+              <!-- ── Variants ─────────────────────────────────────────────── -->
+              @case ('variants') {
+                <div class="example-preview fab-preview fab-preview--wrap">
+                  <nui-fab-button color="primary" [items]="actions" />
+                  <nui-fab-button variant="outline" color="secondary" [items]="actions" />
+                  <nui-fab-button variant="ghost" color="accent" [items]="actions" />
                 </div>
               }
 
