@@ -34,7 +34,7 @@
             ></div>
             <span class="preset-name">{{ preset.translationKey | translate }}</span>
             @if (preset.name === currentPreset) {
-              <i class="ri-check-line"></i>
+              <i class="ri-check-line" aria-hidden="true"></i>
             }
           </button>
         }

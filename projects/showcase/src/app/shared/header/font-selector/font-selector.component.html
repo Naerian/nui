@@ -18,13 +18,13 @@
     [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'"
     (backdropClick)="closeDropdown()"
   >
-    <div class="font-dropdown">
-
+    <div class="font-dropdown" role="menu">
       <!-- Font list -->
       <div class="font-dropdown__list">
         @for (font of fonts; track font.name) {
           <button
             class="font-item"
+            role="menuitem"
             [class.font-item--active]="font.name === currentFontName()"
             [style.font-family]="font.value"
             (click)="selectFont(font)"
@@ -32,7 +32,7 @@
             <span class="font-item__label">{{ font.label }}</span>
             <span class="font-item__preview">Aa Bb Cc</span>
             @if (font.name === currentFontName()) {
-              <i class="ri-check-line"></i>
+              <i class="ri-check-line" aria-hidden="true"></i>
             }
           </button>
         }
@@ -58,7 +58,6 @@
           <span class="font-size__bound">{{ maxFontSize }}</span>
         </div>
       </div>
-
     </div>
   </ng-template>
 </div>

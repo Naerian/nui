@@ -23,7 +23,7 @@ export class LanguageSelectorComponent implements OnInit {
 
   ngOnInit(): void {
     this.showcaseConfig.config$.subscribe(config => {
-      this.currentLanguage = config.language;
+      this.currentLanguage = config?.language || DEFAULT_LANGUAGE;
     });
   }
 

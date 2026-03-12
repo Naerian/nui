@@ -1,29 +1,37 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DEFAULT_FONT_NAME, DEFAULT_FONT_SIZE } from '../models/font.model';
+import { DEFAULT_VERSION } from '../models/version.model';
 
 export interface ShowcaseConfig {
   sidebarCollapsed: boolean;
   currentPreset: string;
   isDarkMode: boolean;
-  language: string;
+  language?: string;
   version: string;
   fontName: string;
   fontSize: number;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ShowcaseConfigService {
   private readonly STORAGE_KEY = 'nui-showcase-config';
-  
+
+  // Extraemos la versión como una constante que cambiaremos por rama
+  // En la rama support/v17 valdrá '17', en main valdrá '18', etc...
+  // --
+  // De esta forma podemos mantener distintas versiones en paralelo sin que
+  // se pisen las configs en localStorage (porque cada rama buscará su propia versión)
+  private readonly APP_VERSION = DEFAULT_VERSION;
+
+  // Configuración por defecto (si no hay nada en localStorage)
   private defaultConfig: ShowcaseConfig = {
     sidebarCollapsed: false,
     currentPreset: 'minimal',
     isDarkMode: false,
-    language: '', // Empty string means "not set yet"
-    version: '1.0.0',
+    version: this.APP_VERSION,
     fontName: DEFAULT_FONT_NAME,
     fontSize: DEFAULT_FONT_SIZE,
   };
@@ -41,7 +49,9 @@ export class ShowcaseConfigService {
     try {
       const stored = localStorage.getItem(this.STORAGE_KEY);
       if (stored) {
-        return { ...this.defaultConfig, ...JSON.parse(stored) };
+        const parsed = JSON.parse(stored);
+        // Forzamos que la versión sea siempre la de la APP_VERSION de la rama
+        return { ...this.defaultConfig, ...parsed, version: this.APP_VERSION };
       }
     } catch (e) {
       console.warn('Failed to load showcase config from localStorage', e);

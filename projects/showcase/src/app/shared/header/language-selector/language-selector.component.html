@@ -6,7 +6,7 @@
     (click)="toggleDropdown()"
     [attr.aria-label]="'header.language' | translate"
   >
-    <i class="ri-global-line"></i>
+    <i class="ri-global-line" aria-hidden="true"></i>
   </button>
 
   <ng-template
@@ -17,17 +17,18 @@
     [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'"
     (backdropClick)="closeDropdown()"
   >
-    <div class="language-dropdown">
+    <div class="language-dropdown" role="menu">
       <div class="language-dropdown__list">
         @for (lang of languages; track lang.code) {
           <button
             class="language-item"
+            role="menuitem"
             [class.language-item--active]="lang.code === currentLanguage"
             (click)="selectLanguage(lang)"
           >
             <span class="language-item__label">{{ lang.label }}</span>
             @if (lang.code === currentLanguage) {
-              <i class="ri-check-line"></i>
+              <i class="ri-check-line" aria-hidden="true"></i>
             }
           </button>
         }

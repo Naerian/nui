@@ -34,7 +34,7 @@
   border: 1px solid var(--nui-border-high);
   border-radius: var(--nui-border-radius-md);
   box-shadow: var(--nui-box-shadow-md);
-  min-width: 220px;
+  min-width: 50px;
   margin-top: 8px;
   overflow: hidden;
   animation: dropdownFadeIn 0.2s ease;
@@ -97,13 +97,4 @@
     font-size: 1.125rem;
     flex-shrink: 0;
   }
-}
-
-.language-name {
-  flex: 1;
-}
-
-.ri-check-line {
-  color: var(--nui-primary);
-  font-size: 1.125rem;
 }

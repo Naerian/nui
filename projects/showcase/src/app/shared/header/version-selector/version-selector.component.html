@@ -1,29 +1,41 @@
 <div class="version-selector">
-  <button 
+  <button
     class="version-trigger"
     cdkOverlayOrigin
     #trigger="cdkOverlayOrigin"
     (click)="toggleDropdown()"
-    [attr.aria-label]="'header.version' | translate">
-    <i class="ri-git-branch-line"></i>
+    [attr.aria-expanded]="isOpen()"
+    [attr.aria-label]="'header.version' | translate"
+  >
+    <span class="version-trigger__label">v{{ currentVersion() }}</span>
   </button>
 
   <ng-template
     cdkConnectedOverlay
     [cdkConnectedOverlayOrigin]="trigger"
-    [cdkConnectedOverlayOpen]="isOpen"
+    [cdkConnectedOverlayOpen]="isOpen()"
     [cdkConnectedOverlayHasBackdrop]="true"
     [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'"
-    (backdropClick)="closeDropdown()">
-    <div class="version-dropdown">
-      <button
-        *ngFor="let version of versions"
-        class="version-item"
-        [class.active]="version.value === currentVersion"
-        (click)="selectVersion(version)">
-        <span class="version-label">{{ version.label }}</span>
-        <i class="ri-check-line" *ngIf="version.value === currentVersion"></i>
-      </button>
+    (backdropClick)="closeDropdown()"
+  >
+    <div class="version-dropdown" role="menu">
+      <div class="version-dropdown__list">
+        @for (version of versions(); track version.value) {
+          <button
+            type="button"
+            class="version-item"
+            role="menuitem"
+            [class.version-item--active]="version.value === currentVersion()"
+            (click)="selectVersion(version)"
+          >
+            <span class="version-item__label">{{ version.label }}</span>
+
+            @if (version.value === currentVersion()) {
+              <i class="ri-check-line" aria-hidden="true"></i>
+            }
+          </button>
+        }
+      </div>
     </div>
   </ng-template>
 </div>
