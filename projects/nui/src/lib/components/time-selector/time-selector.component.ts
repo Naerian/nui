@@ -1002,6 +1002,7 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
     this.normalizationInfo.set(null);
     this.onChange(null);
     this.emitSelection(null);
+    this.checkAutoClose();
   }
 
   setToNow(): void {
