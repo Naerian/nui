@@ -188,7 +188,8 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
     id: 'api-duration-config',
     title: 'components.timeSelector.api.durationConfig.title',
     description: 'components.timeSelector.api.durationConfig.description',
-    anchor: 'api-duration-config',    table: {
+    anchor: 'api-duration-config',
+    table: {
       headers: [
         'common.tables.property',
         'common.tables.type',
@@ -241,22 +242,10 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
     description: 'Interface para representar un valor de tiempo (hora del día)',
     anchor: 'api-time-value',
     table: {
-      headers: [
-        'common.tables.property',
-        'common.tables.type',
-        'common.tables.description',
-      ],
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
-        [
-          '<code>hour</code>',
-          'number',
-          'components.timeSelector.api.timeValue.rows.hour',
-        ],
-        [
-          '<code>minute</code>',
-          'number',
-          'components.timeSelector.api.timeValue.rows.minute',
-        ],
+        ['<code>hour</code>', 'number', 'components.timeSelector.api.timeValue.rows.hour'],
+        ['<code>minute</code>', 'number', 'components.timeSelector.api.timeValue.rows.minute'],
         [
           '<code>period</code>',
           'TimePeriod | null',
@@ -271,17 +260,9 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
     description: 'Interface para representar un intervalo de tiempo (duración)',
     anchor: 'api-duration-value',
     table: {
-      headers: [
-        'common.tables.property',
-        'common.tables.type',
-        'common.tables.description',
-      ],
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
-        [
-          '<code>hours</code>',
-          'number',
-          'components.timeSelector.api.durationValue.rows.hours',
-        ],
+        ['<code>hours</code>', 'number', 'components.timeSelector.api.durationValue.rows.hours'],
         [
           '<code>minutes</code>',
           'number',
@@ -301,27 +282,11 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
     description: 'Interface para definir presets de tiempo rápido (ej: "Ahora", "Mediodía")',
     anchor: 'api-time-preset',
     table: {
-      headers: [
-        'common.tables.property',
-        'common.tables.type',
-        'common.tables.description',
-      ],
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
-        [
-          '<code>label</code>',
-          'string',
-          'components.timeSelector.api.timePreset.rows.label',
-        ],
-        [
-          '<code>time</code>',
-          'TimeValue',
-          'components.timeSelector.api.timePreset.rows.time',
-        ],
-        [
-          '<code>icon</code>',
-          'string',
-          'components.timeSelector.api.timePreset.rows.icon',
-        ],
+        ['<code>label</code>', 'string', 'components.timeSelector.api.timePreset.rows.label'],
+        ['<code>time</code>', 'TimeValue', 'components.timeSelector.api.timePreset.rows.time'],
+        ['<code>icon</code>', 'string', 'components.timeSelector.api.timePreset.rows.icon'],
       ],
     },
   },
@@ -331,27 +296,15 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
     description: 'Interface para definir presets de duración rápida (ej: "15 min", "1 hora")',
     anchor: 'api-duration-preset',
     table: {
-      headers: [
-        'common.tables.property',
-        'common.tables.type',
-        'common.tables.description',
-      ],
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
-        [
-          '<code>label</code>',
-          'string',
-          'components.timeSelector.api.durationPreset.rows.label',
-        ],
+        ['<code>label</code>', 'string', 'components.timeSelector.api.durationPreset.rows.label'],
         [
           '<code>duration</code>',
           'DurationValue',
           'components.timeSelector.api.durationPreset.rows.duration',
         ],
-        [
-          '<code>icon</code>',
-          'string',
-          'components.timeSelector.api.durationPreset.rows.icon',
-        ],
+        ['<code>icon</code>', 'string', 'components.timeSelector.api.durationPreset.rows.icon'],
       ],
     },
   },
@@ -363,26 +316,11 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
     table: {
       headers: ['common.tables.value', 'common.tables.description'],
       rows: [
-        [
-          '<code>HOUR_12</code>',
-          'components.timeSelector.api.mode.rows.HOUR_12',
-        ],
-        [
-          '<code>HOUR_24</code>',
-          'components.timeSelector.api.mode.rows.HOUR_24',
-        ],
-        [
-          '<code>HOUR_MINUTE_12</code>',
-          'components.timeSelector.api.mode.rows.HOUR_MINUTE_12',
-        ],
-        [
-          '<code>HOUR_MINUTE_24</code>',
-          'components.timeSelector.api.mode.rows.HOUR_MINUTE_24',
-        ],
-        [
-          '<code>DURATION</code>',
-          'components.timeSelector.api.mode.rows.DURATION',
-        ],
+        ['<code>HOUR_12</code>', 'components.timeSelector.api.mode.rows.HOUR_12'],
+        ['<code>HOUR_24</code>', 'components.timeSelector.api.mode.rows.HOUR_24'],
+        ['<code>HOUR_MINUTE_12</code>', 'components.timeSelector.api.mode.rows.HOUR_MINUTE_12'],
+        ['<code>HOUR_MINUTE_24</code>', 'components.timeSelector.api.mode.rows.HOUR_MINUTE_24'],
+        ['<code>DURATION</code>', 'components.timeSelector.api.mode.rows.DURATION'],
       ],
     },
   },
@@ -394,22 +332,10 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
     table: {
       headers: ['common.tables.value', 'common.tables.description'],
       rows: [
-        [
-          '<code>now</code>',
-          'components.timeSelector.api.strategy.rows.now',
-        ],
-        [
-          '<code>smart</code>',
-          'components.timeSelector.api.strategy.rows.smart',
-        ],
-        [
-          '<code>empty</code>',
-          'components.timeSelector.api.strategy.rows.empty',
-        ],
-        [
-          '<code>custom</code>',
-          'components.timeSelector.api.strategy.rows.custom',
-        ],
+        ['<code>now</code>', 'components.timeSelector.api.strategy.rows.now'],
+        ['<code>smart</code>', 'components.timeSelector.api.strategy.rows.smart'],
+        ['<code>empty</code>', 'components.timeSelector.api.strategy.rows.empty'],
+        ['<code>custom</code>', 'components.timeSelector.api.strategy.rows.custom'],
       ],
     },
   },
@@ -421,26 +347,11 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
     table: {
       headers: ['common.tables.type', 'common.tables.description'],
       rows: [
-        [
-          '<code>TimeValue</code>',
-          'components.timeSelector.api.value.rows.timeValue',
-        ],
-        [
-          '<code>DurationValue</code>',
-          'components.timeSelector.api.value.rows.durationValue',
-        ],
-        [
-          '<code>Date</code>',
-          'components.timeSelector.api.value.rows.date',
-        ],
-        [
-          '<code>string</code>',
-          'components.timeSelector.api.value.rows.string',
-        ],
-        [
-          '<code>null</code>',
-          'components.timeSelector.api.value.rows.null',
-        ],
+        ['<code>TimeValue</code>', 'components.timeSelector.api.value.rows.timeValue'],
+        ['<code>DurationValue</code>', 'components.timeSelector.api.value.rows.durationValue'],
+        ['<code>Date</code>', 'components.timeSelector.api.value.rows.date'],
+        ['<code>string</code>', 'components.timeSelector.api.value.rows.string'],
+        ['<code>null</code>', 'components.timeSelector.api.value.rows.null'],
       ],
     },
   },
@@ -505,11 +416,7 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
     description: 'components.timeSelector.api.contentDirectives.description',
     anchor: 'api-content-directives',
     table: {
-      headers: [
-        'common.tables.directive',
-        'Selector CSS',
-        'common.tables.description',
-      ],
+      headers: ['common.tables.directive', 'Selector CSS', 'common.tables.description'],
       rows: [
         [
           '<code>TimeSelectorItemDirective</code>',
@@ -528,34 +435,15 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
         ],
       ],
     },
-    examples: [
-      {
-        title: 'codeExamples.typescript',
-        code: `import { TimeSelectorItemDirective, TimeSelectorFooterDirective, TimeSelectorHeaderDirective } from 'nui';
-
-@Component({
-  imports: [
-    TimeSelectorComponent,
-    TimeSelectorItemDirective,
-    TimeSelectorFooterDirective,
-    TimeSelectorHeaderDirective,
-  ]
-})`,
-        language: 'typescript',
-      },
-    ],
   },
   {
     id: 'api-item-context',
     title: 'TimeSelectorItemContext',
-    description: 'Contexto disponible en el template de <code>[nuiTimeSelectorItem]</code>. Accede con <code>let-value</code>, <code>let-type="type"</code>, etc.',
+    description:
+      'Contexto disponible en el template de <code>[nuiTimeSelectorItem]</code>. Accede con <code>let-value</code>, <code>let-type="type"</code>, etc.',
     anchor: 'api-item-context',
     table: {
-      headers: [
-        'common.tables.property',
-        'common.tables.type',
-        'common.tables.description',
-      ],
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
         [
           '<code>$implicit</code>',
@@ -583,14 +471,11 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
   {
     id: 'api-footer-context',
     title: 'TimeSelectorFooterContext',
-    description: 'Contexto disponible en el template de <code>[nuiTimeSelectorFooter]</code>. Accede con <code>let-currentTime</code> y <code>let-actions="actions"</code>.',
+    description:
+      'Contexto disponible en el template de <code>[nuiTimeSelectorFooter]</code>. Accede con <code>let-currentTime</code> y <code>let-actions="actions"</code>.',
     anchor: 'api-footer-context',
     table: {
-      headers: [
-        'common.tables.property',
-        'common.tables.type',
-        'common.tables.description',
-      ],
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
         [
           '<code>$implicit</code>',
@@ -623,14 +508,11 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
   {
     id: 'api-header-context',
     title: 'TimeSelectorHeaderContext',
-    description: 'Contexto disponible en el template de <code>[nuiTimeSelectorHeader]</code>. Accede con <code>let-currentTime</code>, <code>let-formattedTime="formattedTime"</code>, etc.',
+    description:
+      'Contexto disponible en el template de <code>[nuiTimeSelectorHeader]</code>. Accede con <code>let-currentTime</code>, <code>let-formattedTime="formattedTime"</code>, etc.',
     anchor: 'api-header-context',
     table: {
-      headers: [
-        'common.tables.property',
-        'common.tables.type',
-        'common.tables.description',
-      ],
+      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
         [
           '<code>$implicit</code>',
@@ -642,11 +524,7 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
           'TimeSelectorMode',
           'components.timeSelector.api.headerContext.rows.mode',
         ],
-        [
-          '<code>is12h</code>',
-          'boolean',
-          'components.timeSelector.api.headerContext.rows.is12h',
-        ],
+        ['<code>is12h</code>', 'boolean', 'components.timeSelector.api.headerContext.rows.is12h'],
         [
           '<code>formattedTime</code>',
           'string',

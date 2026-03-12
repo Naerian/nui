@@ -231,17 +231,17 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
         title: 'Interface DateRangePreset',
         code: `customPresets: DateRangePreset[] = [
   {
-    label: 'Últimos 7 días',
+    label: 'Last 7 days',
     start: subDays(new Date(), 7),
     end: new Date(),
   },
   {
-    label: 'Este mes',
+    label: 'This month',
     start: startOfMonth(new Date()),
     end: endOfMonth(new Date()),
   },
   {
-    label: 'Último mes',
+    label: 'Last month',
     start: startOfMonth(subMonths(new Date(), 1)),
     end: endOfMonth(subMonths(new Date(), 1)),
   },
