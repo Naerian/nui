@@ -561,7 +561,7 @@ export class SidebarPanelService {
    * }
    *
    * // En template
-   * <div *ngIf="SidebarPanelService.openPanelsCount > 0">
+   * <div>
    *   Hay {{ SidebarPanelService.openPanelsCount }} panel(es) abierto(s)
    * </div>
    * ```

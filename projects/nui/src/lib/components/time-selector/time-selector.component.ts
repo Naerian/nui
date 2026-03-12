@@ -1,16 +1,14 @@
 ﻿import {
   Component,
-  Input,
-  Output,
-  EventEmitter,
   signal,
   computed,
   input,
   output,
+  viewChild,
   contentChild,
+  effect,
   ChangeDetectionStrategy,
   forwardRef,
-  ViewChild,
   ElementRef,
   AfterViewInit,
   OnInit,
@@ -98,7 +96,10 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
   effectiveShowHeader = computed(() => this.showHeader() ?? this._globalConfig.showHeader ?? true);
   effectiveShowFooter = computed(() => this.showFooter() ?? this._globalConfig.showFooter ?? true);
 
-  @Input() set config(value: TimeSelectorConfig) {
+  readonly _configInput = input<TimeSelectorConfig>(DEFAULT_CONFIG, { alias: 'config' });
+
+  private readonly _resolvedConfig = computed<ResolvedTimeSelectorConfig>(() => {
+    const value = this._configInput();
     const mergedConfig = { ...DEFAULT_CONFIG, ...value };
 
     // Aplicar fallbacks de config global para hourStep y minuteStep
@@ -122,13 +123,11 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
       };
     }
 
-    this._config = mergedConfig;
-  }
-
-  private _config: ResolvedTimeSelectorConfig = DEFAULT_CONFIG;
+    return mergedConfig;
+  });
 
   get config(): ResolvedTimeSelectorConfig {
-    return this._config;
+    return this._resolvedConfig();
   }
 
   /**
@@ -166,9 +165,11 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
    * Permite establecer el valor directamente desde el template
    * Acepta: TimeValue, Date, string (HH:mm), o null
    */
-  @Input() set value(val: TimeSelectorValue) {
-    this.writeValue(val);
-  }
+  readonly _valueInput = input<TimeSelectorValue | undefined>(undefined, { alias: 'value' });
+  private readonly _valueEffect = effect(() => {
+    const val = this._valueInput();
+    if (val !== undefined) this.writeValue(val);
+  }, { allowSignalWrites: true });
   get value(): TimeValue | null {
     return this.selectedTime();
   }
@@ -179,7 +180,7 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
   /**
    * Emite el valor TimeValue o DurationValue cuando cambia la hora/duración seleccionada
    */
-  @Output() valueChange = new EventEmitter<TimeValue | DurationValue | null>();
+  valueChange = output<TimeValue | DurationValue | null>();
 
   /**
    * Se emite cuando el usuario ha completado la selección (para cerrar overlay/datepicker).
@@ -190,15 +191,12 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
   // ==================
   // VIEW CHILDREN
   // ==================
-  @ViewChild('hoursColumn') hoursColumn?: ElementRef<HTMLDivElement>;
-  @ViewChild('minutesColumn') minutesColumn?: ElementRef<HTMLDivElement>;
-  @ViewChild('periodColumn') periodColumn?: ElementRef<any>; // ButtonGroup reference
-  @ViewChild('durationHoursColumn')
-  durationHoursColumn?: ElementRef<HTMLDivElement>;
-  @ViewChild('durationMinutesColumn')
-  durationMinutesColumn?: ElementRef<HTMLDivElement>;
-  @ViewChild('durationSecondsColumn')
-  durationSecondsColumn?: ElementRef<HTMLDivElement>;
+  hoursColumn = viewChild<ElementRef<HTMLDivElement>>('hoursColumn');
+  minutesColumn = viewChild<ElementRef<HTMLDivElement>>('minutesColumn');
+  periodColumn = viewChild<ElementRef<any>>('periodColumn'); // ButtonGroup reference
+  durationHoursColumn = viewChild<ElementRef<HTMLDivElement>>('durationHoursColumn');
+  durationMinutesColumn = viewChild<ElementRef<HTMLDivElement>>('durationMinutesColumn');
+  durationSecondsColumn = viewChild<ElementRef<HTMLDivElement>>('durationSecondsColumn');
 
   // Inyectamos el servicio de i18n para acceder a las traducciones dinámicas
   protected readonly _i18nService = inject(NuiI18nService);
@@ -671,7 +669,7 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
     // Si está en modo overlay, enfocar la primera columna disponible
     if (this.overlayMode()) {
       setTimeout(() => {
-        this.hoursColumn?.nativeElement?.focus?.();
+        this.hoursColumn()?.nativeElement?.focus?.();
       }, 0);
     }
 
@@ -792,7 +790,7 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
 
     // Scroll al elemento seleccionado con animación suave
     setTimeout(() => {
-      this.scrollToElement(this.hoursColumn, `[data-hour="${hour}"]`, true);
+      this.scrollToElement(this.hoursColumn(), `[data-hour="${hour}"]`, true);
     }, 10);
 
     // Auto-focus a minutos si está disponible
@@ -844,7 +842,7 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
 
     // Scroll al elemento seleccionado con animación suave
     setTimeout(() => {
-      this.scrollToElement(this.minutesColumn, `[data-minute="${minute}"]`, true);
+      this.scrollToElement(this.minutesColumn(), `[data-minute="${minute}"]`, true);
     }, 10);
   }
 
@@ -865,7 +863,7 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
 
     // Scroll al elemento seleccionado con animación suave
     setTimeout(() => {
-      this.scrollToElement(this.periodColumn, `[data-period="${period}"]`, true);
+      this.scrollToElement(this.periodColumn(), `[data-period="${period}"]`, true);
     }, 10);
   }
 
@@ -1254,16 +1252,16 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
       switch (section) {
         case 'duration-hours':
           selector = `[data-duration-hours="${current.hours}"]`;
-          column = this.durationHoursColumn;
+          column = this.durationHoursColumn();
           break;
         case 'duration-minutes':
           selector = `[data-duration-minutes="${current.minutes}"]`;
-          column = this.durationMinutesColumn;
+          column = this.durationMinutesColumn();
           break;
         case 'duration-seconds':
           if (this.config.duration.showSeconds && current.seconds !== undefined) {
             selector = `[data-duration-seconds="${current.seconds}"]`;
-            column = this.durationSecondsColumn;
+            column = this.durationSecondsColumn();
           } else {
             return;
           }
@@ -1288,11 +1286,11 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
     switch (section) {
       case 'hour':
         selector = `[data-hour="${current.hour}"]`;
-        column = this.hoursColumn;
+        column = this.hoursColumn();
         break;
       case 'minute':
         selector = `[data-minute="${current.minute}"]`;
-        column = this.minutesColumn;
+        column = this.minutesColumn();
         break;
       case 'period':
         if (this.is12HourFormat() && current.period) {
@@ -1318,9 +1316,9 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
   private focusPeriodButton(period: TimePeriod): void {
     // Focus the ButtonGroup period selector
     setTimeout(() => {
-      if (this.periodColumn) {
+      if (this.periodColumn()) {
         // Try to focus the ButtonGroup component
-        const buttonGroup = this.periodColumn.nativeElement;
+        const buttonGroup = this.periodColumn()!.nativeElement;
         if (buttonGroup) {
           // Look for the active button or the first button
           const activeButton =
@@ -1890,7 +1888,7 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
     if (!time) return;
 
     // Verificar que los ViewChild estén disponibles antes de hacer scroll
-    if (!this.hoursColumn?.nativeElement) {
+    if (!this.hoursColumn()?.nativeElement) {
       // Si no están disponibles, programar para más tarde
       setTimeout(() => this.scrollToSelected(), 10);
       return;
@@ -1898,16 +1896,16 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
 
     // Scroll directo (sin smooth) para mayor confiabilidad
     // Scroll a la hora seleccionada
-    this.scrollToElement(this.hoursColumn, `[data-hour="${time.hour}"]`, false);
+    this.scrollToElement(this.hoursColumn(), `[data-hour="${time.hour}"]`, false);
 
     // Scroll a los minutos seleccionados si está visible
     if (this.showMinutes()) {
-      this.scrollToElement(this.minutesColumn, `[data-minute="${time.minute}"]`, false);
+      this.scrollToElement(this.minutesColumn(), `[data-minute="${time.minute}"]`, false);
     }
 
     // Scroll al período seleccionado si es formato 12h
     if (this.is12HourFormat() && time.period) {
-      this.scrollToElement(this.periodColumn, `[data-period="${time.period}"]`, false);
+      this.scrollToElement(this.periodColumn(), `[data-period="${time.period}"]`, false);
     }
   }
 

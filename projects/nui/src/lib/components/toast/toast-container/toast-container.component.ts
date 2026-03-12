@@ -133,11 +133,4 @@ export class ToastContainerComponent implements OnInit, OnDestroy {
       this.overlayRef = undefined;
     }
   }
-
-  /**
-   * Trackby function para ngFor
-   */
-  trackByToastId(index: number, toast: ToastRef): string {
-    return toast.id;
-  }
 }
