@@ -81,6 +81,16 @@
       "title": "Inputs",
       "description": "Input properties to configure the behavior, appearance and restrictions of the time picker",
       "rows": {
+        "mode": "Selection mode: 'HOUR_12', 'HOUR_24', 'HOUR_MINUTE_12', 'HOUR_MINUTE_24', 'DURATION'",
+        "disabled": "Disabled state of the component",
+        "title": "Custom title displayed in the header",
+        "showHeader": "Whether to display the header showing the formatted time at the top of the picker. Supports customization via <code>nuiTimeSelectorHeader</code>.",
+        "showFooter": "Whether to display the built-in footer with the 'Clear' and 'Now' buttons. Supports customization via <code>nuiTimeSelectorFooter</code>.",
+        "config": "Full configuration: steps, ranges, presets, duration, etc.",
+        "defaultStrategy": "Initial value strategy: 'now', 'smart', 'empty', 'custom'",
+        "defaultValue": "Custom value when strategy='custom'",
+        "smartOffset": "Offset in minutes for strategy='smart' (current time + offset)",
+        "value": "Current picker value (TimeValue, DurationValue, Date, string or null)",
         "autoClose": "If true, emits selectFinished when the selection is complete. Designed for use inside a datepicker or overlay.",
         "overlayMode": "If true, activates overlay-specific behaviors: auto-focuses the first column when opened."
       }
@@ -89,16 +99,90 @@
       "title": "Outputs",
       "description": "Events emitted by the time picker when the user interacts with it",
       "rows": {
+        "valueChange": "Emits when the selected value changes (time or duration)",
         "selectFinished": "Emits (void) when the user completes the selection and autoClose is true. The overlay can close upon receiving this event."
       }
     },
     "config": {
       "title": "TimeSelectorConfig",
-      "description": "Configuration interface with all available options: steps, ranges, disabled times, presets and duration configuration"
+      "description": "Configuration interface with all available options: steps, ranges, disabled times, presets and duration configuration",
+      "rows": {
+        "hourStep": "Increment between selectable hours (e.g. 2 = only even hours)",
+        "minuteStep": "Increment between minutes (common: 5, 10, 15, 30)",
+        "minTime": "Minimum selectable time",
+        "maxTime": "Maximum selectable time",
+        "disabledHours": "Array of disabled hours",
+        "disabledMinutes": "Array of disabled minutes",
+        "presets": "Quick time presets with label, time and optional icon",
+        "showRangeIndicator": "Show visual range indicator",
+        "duration": "Configuration for DURATION mode"
+      }
     },
     "durationConfig": {
       "title": "DurationConfig",
-      "description": "Specific configuration for DURATION mode: hour limits, show seconds, steps and quick duration presets"
+      "description": "Specific configuration for DURATION mode: hour limits, show seconds, steps and quick duration presets",
+      "rows": {
+        "maxHours": "Maximum selectable hours limit",
+        "minHours": "Minimum hours limit",
+        "showSeconds": "Show seconds selector",
+        "secondStep": "Increment between seconds",
+        "allowZero": "Allow zero duration (all units at 0)",
+        "quickDurations": "Common duration presets with label, duration and icon"
+      }
+    },
+    "timeValue": {
+      "rows": {
+        "hour": "Hour: 0–23 for 24h format, 1–12 for 12h format",
+        "minute": "Minutes: 0–59",
+        "period": "Optional. Period 'AM' or 'PM' (only for 12h format)"
+      }
+    },
+    "durationValue": {
+      "rows": {
+        "hours": "Hours: 0–n (no upper limit by default)",
+        "minutes": "Minutes: 0–59",
+        "seconds": "Optional. Seconds: 0–59 (for greater precision)"
+      }
+    },
+    "timePreset": {
+      "rows": {
+        "label": "Text displayed on the preset button",
+        "time": "Time value the preset jumps to",
+        "icon": "Optional. Remix Icon for the button (e.g. 'time-line')"
+      }
+    },
+    "durationPreset": {
+      "rows": {
+        "label": "Text displayed on the preset button",
+        "duration": "Duration value the preset jumps to",
+        "icon": "Optional. Remix Icon for the button"
+      }
+    },
+    "mode": {
+      "rows": {
+        "HOUR_12": "Hours-only selector in 12h format (AM/PM)",
+        "HOUR_24": "Hours-only selector in 24h format",
+        "HOUR_MINUTE_12": "Hours and minutes selector in 12h format (AM/PM)",
+        "HOUR_MINUTE_24": "Hours and minutes selector in 24h format (default)",
+        "DURATION": "Duration mode for selecting time intervals"
+      }
+    },
+    "strategy": {
+      "rows": {
+        "now": "Uses the current time as initial value",
+        "smart": "Current time + offset (configurable with smartOffset)",
+        "empty": "No initial value (default)",
+        "custom": "Uses the value provided in defaultValue"
+      }
+    },
+    "value": {
+      "rows": {
+        "timeValue": "{ hour, minute, period? } — For HOUR_* modes (time of day)",
+        "durationValue": "{ hours, minutes, seconds? } — For DURATION mode (interval)",
+        "date": "Date object with a specific time",
+        "string": "Format \"HH:mm\" or \"HH:mm AM/PM\"",
+        "null": "No selected value"
+      }
     },
     "models": {
       "title": "Type definitions",
@@ -106,11 +190,51 @@
     },
     "methods": {
       "title": "Methods",
-      "description": "The component implements ControlValueAccessor for seamless integration with Angular forms"
+      "description": "The component implements ControlValueAccessor for seamless integration with Angular forms",
+      "rows": {
+        "writeValue": "Writes the value programmatically (ControlValueAccessor method)",
+        "registerOnChange": "Registers a callback for value changes (ControlValueAccessor method)",
+        "registerOnTouched": "Registers a callback for the touched event (ControlValueAccessor method)",
+        "setDisabledState": "Sets the disabled state programmatically (ControlValueAccessor method)",
+        "toDate": "Converts the current value to a Date object. Uses baseDate as reference (default: current date)",
+        "toDurationMilliseconds": "Converts the current duration value to milliseconds. Only available in DURATION mode"
+      }
     },
     "contentDirectives": {
       "title": "Content directives",
-      "description": "Marker directives that allow projecting custom templates for items, the footer and the header of the time picker"
+      "description": "Marker directives that allow projecting custom templates for items, the footer and the header of the time picker",
+      "rows": {
+        "item": "Projects an <code>ng-template</code> that replaces the visual content of each item in the selection columns (hour, minute, second).",
+        "footer": "Projects an <code>ng-template</code> that replaces the built-in footer with your own action buttons.",
+        "header": "Projects an <code>ng-template</code> that replaces the visual display of the header. A11y live regions remain active regardless."
+      }
+    },
+    "itemContext": {
+      "rows": {
+        "implicit": "Item value (hour or minute as number, period as string 'AM'/'PM'). Access with <code>let-value</code>.",
+        "type": "Column type the item belongs to.",
+        "selected": "Whether this item is the currently selected value.",
+        "disabled": "Whether the selector is in disabled state."
+      }
+    },
+    "footerContext": {
+      "rows": {
+        "implicit": "Currently selected value in the picker. Access with <code>let-currentTime</code>.",
+        "actionsClear": "Clears the selected value and emits <code>null</code>.",
+        "actionsSetToNow": "Sets the value to the current time (only in non-DURATION mode).",
+        "normalization": "Normalization info if a string value was automatically normalized.",
+        "range": "Time range configured in <code>config.minTime</code> / <code>config.maxTime</code>."
+      }
+    },
+    "headerContext": {
+      "rows": {
+        "implicit": "Currently selected value. Access with <code>let-currentTime</code>.",
+        "mode": "Active picker mode, e.g. <code>'HOUR_MINUTE_24'</code> or <code>'DURATION'</code>.",
+        "is12h": "<code>true</code> if the mode uses 12h format (AM/PM).",
+        "formattedTime": "Human-readable representation of the current value in plain text (no HTML), ready to display directly.",
+        "normalization": "Normalization info if a string value was normalized, <code>null</code> otherwise.",
+        "range": "Time range configured in <code>config.minTime</code> / <code>config.maxTime</code>."
+      }
     }
   },
   "theming": {

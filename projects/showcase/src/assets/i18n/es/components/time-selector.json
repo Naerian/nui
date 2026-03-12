@@ -81,6 +81,16 @@
       "title": "Inputs",
       "description": "Propiedades de entrada para configurar el comportamiento, apariencia y restricciones del selector de tiempo",
       "rows": {
+        "mode": "Modo de selección: 'HOUR_12', 'HOUR_24', 'HOUR_MINUTE_12', 'HOUR_MINUTE_24', 'DURATION'",
+        "disabled": "Estado deshabilitado del componente",
+        "title": "Título personalizado que se muestra en el header",
+        "showHeader": "Si se muestra la cabecera con el tiempo formateado en la parte superior del selector. Admite personalización mediante <code>nuiTimeSelectorHeader</code>.",
+        "showFooter": "Si se muestra el footer built-in con los botones 'Limpiar' y 'Ahora'. Admite personalización mediante <code>nuiTimeSelectorFooter</code>.",
+        "config": "Configuración completa: steps, rangos, presets, duration, etc.",
+        "defaultStrategy": "Estrategia de valor inicial: 'now', 'smart', 'empty', 'custom'",
+        "defaultValue": "Valor custom cuando strategy='custom'",
+        "smartOffset": "Offset en minutos para strategy='smart' (hora actual + offset)",
+        "value": "Valor actual del picker (TimeValue, DurationValue, Date, string o null)",
         "autoClose": "Si true, emite selectFinished al completar la selección. Diseñado para uso dentro de un datepicker u overlay.",
         "overlayMode": "Si true, activa comportamientos específicos de overlay: foco inicial en la primera columna al abrirse."
       }
@@ -89,16 +99,90 @@
       "title": "Outputs",
       "description": "Eventos emitidos por el selector de tiempo cuando el usuario interactúa con él",
       "rows": {
+        "valueChange": "Emite cuando cambia el valor seleccionado (hora o duración)",
         "selectFinished": "Emite (void) cuando el usuario completa la selección y autoClose es true. El overlay puede cerrarse al recibir este evento."
       }
     },
     "config": {
       "title": "TimeSelectorConfig",
-      "description": "Interfaz de configuración con todas las opciones disponibles: pasos, rangos, tiempos deshabilitados, presets y configuración de duración"
+      "description": "Interfaz de configuración con todas las opciones disponibles: pasos, rangos, tiempos deshabilitados, presets y configuración de duración",
+      "rows": {
+        "hourStep": "Incremento entre horas seleccionables (ej: 2 = solo horas pares)",
+        "minuteStep": "Incremento entre minutos (común: 5, 10, 15, 30)",
+        "minTime": "Hora mínima seleccionable",
+        "maxTime": "Hora máxima seleccionable",
+        "disabledHours": "Array de horas deshabilitadas",
+        "disabledMinutes": "Array de minutos deshabilitados",
+        "presets": "Presets de hora rápida con label, time e icon opcional",
+        "showRangeIndicator": "Mostrar indicador visual del rango permitido",
+        "duration": "Configuración para modo DURATION"
+      }
     },
     "durationConfig": {
       "title": "DurationConfig",
-      "description": "Configuración específica para modo DURATION: límites de horas, mostrar segundos, pasos y presets de duración rápidos"
+      "description": "Configuración específica para modo DURATION: límites de horas, mostrar segundos, pasos y presets de duración rápidos",
+      "rows": {
+        "maxHours": "Límite máximo de horas seleccionables",
+        "minHours": "Límite mínimo de horas",
+        "showSeconds": "Mostrar selector de segundos",
+        "secondStep": "Incremento entre segundos",
+        "allowZero": "Permitir duración de 0 (todas las unidades en 0)",
+        "quickDurations": "Presets comunes de duración con label, duration e icon"
+      }
+    },
+    "timeValue": {
+      "rows": {
+        "hour": "Hora: 0-23 para formato 24h, 1-12 para formato 12h",
+        "minute": "Minutos: 0-59",
+        "period": "Opcional. Periodo 'AM' o 'PM' (solo para formato 12h)"
+      }
+    },
+    "durationValue": {
+      "rows": {
+        "hours": "Horas: 0-n (sin límite superior por defecto)",
+        "minutes": "Minutos: 0-59",
+        "seconds": "Opcional. Segundos: 0-59 (para mayor precisión)"
+      }
+    },
+    "timePreset": {
+      "rows": {
+        "label": "Texto que se muestra en el botón del preset",
+        "time": "Valor de tiempo al que salta el preset",
+        "icon": "Opcional. Icono Remix Icon para el botón (ej: \"time-line\")"
+      }
+    },
+    "durationPreset": {
+      "rows": {
+        "label": "Texto que se muestra en el botón del preset",
+        "duration": "Valor de duración al que salta el preset",
+        "icon": "Opcional. Icono Remix Icon para el botón"
+      }
+    },
+    "mode": {
+      "rows": {
+        "HOUR_12": "Solo selector de horas en formato 12h (AM/PM)",
+        "HOUR_24": "Solo selector de horas en formato 24h",
+        "HOUR_MINUTE_12": "Selector de horas y minutos en formato 12h (AM/PM)",
+        "HOUR_MINUTE_24": "Selector de horas y minutos en formato 24h (predeterminado)",
+        "DURATION": "Modo duración para seleccionar intervalos de tiempo"
+      }
+    },
+    "strategy": {
+      "rows": {
+        "now": "Usa la hora actual como valor inicial",
+        "smart": "Hora actual + offset (configurable con smartOffset)",
+        "empty": "Sin valor inicial (predeterminado)",
+        "custom": "Usa el valor proporcionado en defaultValue"
+      }
+    },
+    "value": {
+      "rows": {
+        "timeValue": "{ hour, minute, period? } - Para modos HOUR_* (hora del día)",
+        "durationValue": "{ hours, minutes, seconds? } - Para modo DURATION (intervalo)",
+        "date": "Objeto Date con hora específica",
+        "string": "Formato \"HH:mm\" o \"HH:mm AM/PM\"",
+        "null": "Sin valor seleccionado"
+      }
     },
     "models": {
       "title": "Definiciones de tipos",
@@ -106,11 +190,51 @@
     },
     "methods": {
       "title": "Métodos",
-      "description": "El componente implementa ControlValueAccessor para integración perfecta con formularios de Angular"
+      "description": "El componente implementa ControlValueAccessor para integración perfecta con formularios de Angular",
+      "rows": {
+        "writeValue": "Escribe el valor programáticamente (método de ControlValueAccessor)",
+        "registerOnChange": "Registra callback para cambios de valor (método de ControlValueAccessor)",
+        "registerOnTouched": "Registra callback para evento touched (método de ControlValueAccessor)",
+        "setDisabledState": "Establece el estado deshabilitado programáticamente (método de ControlValueAccessor)",
+        "toDate": "Convierte el valor actual a un objeto Date. Usa baseDate como referencia (por defecto: fecha actual)",
+        "toDurationMilliseconds": "Convierte el valor de duración actual a milisegundos. Solo disponible en modo DURATION"
+      }
     },
     "contentDirectives": {
       "title": "Directivas de contenido",
-      "description": "Directivas marker que permiten proyectar templates personalizados para los ítems, el footer y el header del selector"
+      "description": "Directivas marker que permiten proyectar templates personalizados para los ítems, el footer y el header del selector",
+      "rows": {
+        "item": "Proyecta un <code>ng-template</code> que reemplaza el contenido visual de cada ítem en las columnas de selección (hora, minuto, segundo).",
+        "footer": "Proyecta un <code>ng-template</code> que reemplaza el footer built-in con botones de acción propios.",
+        "header": "Proyecta un <code>ng-template</code> que reemplaza el display visual del header. Las live regions de a11y se mantienen activas independientemente."
+      }
+    },
+    "itemContext": {
+      "rows": {
+        "implicit": "Valor del ítem (hora o minuto como número, periodo como string \"AM\"/\"PM\"). Accede con <code>let-value</code>.",
+        "type": "Tipo de columna al que pertenece el ítem.",
+        "selected": "Indica si este ítem es el valor actualmente seleccionado.",
+        "disabled": "Indica si el selector está en estado deshabilitado."
+      }
+    },
+    "footerContext": {
+      "rows": {
+        "implicit": "Valor actualmente seleccionado en el picker. Accede con <code>let-currentTime</code>.",
+        "actionsClear": "Limpia el valor seleccionado y emite <code>null</code>.",
+        "actionsSetToNow": "Establece el valor a la hora actual (solo en modo no-DURATION).",
+        "normalization": "Info de normalización si se recibió un valor string que fue normalizado automáticamente.",
+        "range": "Rango horario configurado en <code>config.minTime</code> / <code>config.maxTime</code>."
+      }
+    },
+    "headerContext": {
+      "rows": {
+        "implicit": "Valor actualmente seleccionado. Accede con <code>let-currentTime</code>.",
+        "mode": "Modo activo del picker, p.ej. <code>'HOUR_MINUTE_24'</code> o <code>'DURATION'</code>.",
+        "is12h": "<code>true</code> si el modo usa formato 12h (AM/PM).",
+        "formattedTime": "Representación legible del valor actual en texto plano (sin HTML), lista para mostrar directamente.",
+        "normalization": "Info de normalización si se recibió un valor string normalizado, <code>null</code> en caso contrario.",
+        "range": "Rango horario configurado en <code>config.minTime</code> / <code>config.maxTime</code>."
+      }
     }
   },
   "theming": {

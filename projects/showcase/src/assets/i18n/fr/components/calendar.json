@@ -101,32 +101,56 @@
       "title": "Entrées",
       "description": "Propriétés d'entrée pour configurer le comportement, l'apparence et les restrictions du calendrier",
       "rows": {
-        "type": { "description": "Type de sélection : 'day' (date unique), 'week' (semaine), 'range' (plage), 'month' (mois/année), 'year' (année)" },
-        "selection": { "description": "Mode de sélection : 'single' (un seul) ou 'multiple' (plusieurs). S'applique à DAY, MONTH et YEAR. Les utilisateurs peuvent cliquer sur plusieurs éléments pour les ajouter/supprimer (bascule)" },
+        "type": {
+          "description": "Type de sélection : 'day' (date unique), 'week' (semaine), 'range' (plage), 'month' (mois/année), 'year' (année)"
+        },
+        "selection": {
+          "description": "Mode de sélection : 'single' (un seul) ou 'multiple' (plusieurs). S'applique à DAY, MONTH et YEAR. Les utilisateurs peuvent cliquer sur plusieurs éléments pour les ajouter/supprimer (bascule)"
+        },
         "date": { "description": "Date initiale ou dates sélectionnées" },
         "disabledDates": { "description": "Tableau de dates désactivées" },
         "minDate": { "description": "Date sélectionnable minimale" },
         "maxDate": { "description": "Date sélectionnable maximale" },
-        "showFooter": { "description": "Affiche ou masque le pied de page intégré (boutons 'Aujourd'hui' + 'Effacer'). Supporte aussi un pied de page personnalisé via <code>nuiCalendarFooter</code>" },
-        "showPresets": { "description": "Affiche le panneau de préréglages (uniquement pour le type RANGE)" },
+        "showFooter": {
+          "description": "Affiche ou masque le pied de page intégré (boutons 'Aujourd'hui' + 'Effacer'). Supporte aussi un pied de page personnalisé via <code>nuiCalendarFooter</code>"
+        },
+        "showPresets": {
+          "description": "Affiche le panneau de préréglages (uniquement pour le type RANGE)"
+        },
         "customPresets": { "description": "Préréglages de plages de dates personnalisés" },
         "firstDayOfWeek": { "description": "0=Dimanche, 1=Lundi (premier jour de la semaine)" },
-        "showTimeSelector": { "description": "Affiche le sélecteur d'heure : 'both' | 'default' | 'none'" },
-        "timeSelectorMode": { "description": "Mode d'affichage dans le sélecteur de temps intégré" },
-        "timeSelectorConfig": { "description": "Configuration du sélecteur d'heure (pas, plages, etc.)" },
+        "showTimeSelector": {
+          "description": "Affiche le sélecteur d'heure : 'both' | 'default' | 'none'"
+        },
+        "timeSelectorMode": {
+          "description": "Mode d'affichage dans le sélecteur de temps intégré"
+        },
+        "timeSelectorConfig": {
+          "description": "Configuration du sélecteur d'heure (pas, plages, etc.)"
+        },
         "startTime": { "description": "Heure de début initiale" },
         "endTime": { "description": "Heure de fin initiale" },
-        "dateStatusFn": { "description": "Fonction qui attribue des états visuels aux dates ('success', 'warning', 'danger', 'info')" },
-        "isDateEnabledFn": { "description": "Fonction qui détermine dynamiquement si une date est activée (prévaut sur disabledDates)" },
-        "showWeekNumbers": { "description": "Affiche les numéros de semaine ISO-8601 dans une colonne à gauche. Cliquables en mode WEEK ou DAY multiple pour sélectionner la semaine complète" }
+        "dateStatusFn": {
+          "description": "Fonction qui attribue des états visuels aux dates ('success', 'warning', 'danger', 'info')"
+        },
+        "isDateEnabledFn": {
+          "description": "Fonction qui détermine dynamiquement si une date est activée (prévaut sur disabledDates)"
+        },
+        "showWeekNumbers": {
+          "description": "Affiche les numéros de semaine ISO-8601 dans une colonne à gauche. Cliquables en mode WEEK ou DAY multiple pour sélectionner la semaine complète"
+        }
       }
     },
     "outputs": {
       "title": "Sorties",
       "description": "Événements émis par le calendrier lorsque l'utilisateur sélectionne une date ou une plage",
       "rows": {
-        "valueChange": { "description": "Émis lorsque la sélection change. Inclut la ou les dates, la plage/semaine et l'heure si activée" },
-        "selectFinished": { "description": "Émis lorsque la sélection est confirmée et le calendrier doit se fermer. Utile pour l'intégration avec des popovers ou des modales. Également déclenché par <code>actions.close()</code> dans un footer personnalisé." }
+        "valueChange": {
+          "description": "Émis lorsque la sélection change. Inclut la ou les dates, la plage/semaine et l'heure si activée"
+        },
+        "selectFinished": {
+          "description": "Émis lorsque la sélection est confirmée et le calendrier doit se fermer. Utile pour l'intégration avec des popovers ou des modales. Également déclenché par <code>actions.close()</code> dans un footer personnalisé."
+        }
       }
     },
     "calendar-value": {
@@ -138,11 +162,17 @@
       "title": "CalendarType",
       "description": "Enum définissant le mode de sélection du calendrier",
       "rows": {
-        "DAY": { "description": "Sélection d'une seule date. Avec selection=\"multiple\" permet de sélectionner plusieurs dates" },
+        "DAY": {
+          "description": "Sélection d'une seule date. Avec selection=\"multiple\" permet de sélectionner plusieurs dates"
+        },
         "WEEK": { "description": "Sélection d'une semaine complète (7 jours consécutifs)" },
         "RANGE": { "description": "Sélection d'une plage de dates (début et fin)" },
-        "MONTH": { "description": "Sélection du mois et de l'année. Avec selection=\"multiple\" permet de sélectionner plusieurs mois" },
-        "YEAR": { "description": "Sélection de l'année. Avec selection=\"multiple\" permet de sélectionner plusieurs années" }
+        "MONTH": {
+          "description": "Sélection du mois et de l'année. Avec selection=\"multiple\" permet de sélectionner plusieurs mois"
+        },
+        "YEAR": {
+          "description": "Sélection de l'année. Avec selection=\"multiple\" permet de sélectionner plusieurs années"
+        }
       }
     },
     "calendar-width": {
@@ -153,8 +183,12 @@
       "title": "CalendarSelection",
       "description": "Enum définissant le mode de sélection du calendrier : unique ou multiple",
       "rows": {
-        "single": { "description": "Permet de sélectionner un seul élément (jour, mois ou année selon le type)" },
-        "multiple": { "description": "Permet de sélectionner plusieurs éléments avec bascule au clic. Le calendrier ne se ferme jamais automatiquement dans ce mode" }
+        "single": {
+          "description": "Permet de sélectionner un seul élément (jour, mois ou année selon le type)"
+        },
+        "multiple": {
+          "description": "Permet de sélectionner plusieurs éléments avec bascule au clic. Le calendrier ne se ferme jamais automatiquement dans ce mode"
+        }
       }
     },
     "view-mode": {
@@ -181,11 +215,21 @@
       "description": "Contexte typé reçu par le <code>ng-template</code> projeté avec la directive <code>nuiCalendarFooter</code>. Permet d'accéder à l'état actuel du calendrier et d'exécuter des actions depuis le footer personnalisé.",
       "note": "La directive <strong>CalendarFooterDirective</strong> doit être importée dans le composant consommateur (<code>imports: [CalendarFooterDirective]</code>). Le sélecteur du template est <code>[nuiCalendarFooter]</code>.",
       "rows": {
-        "value": { "description": "Valeur de sélection actuelle (<code>CalendarValue | null</code>). Reflète la sélection de l'utilisateur en temps réel." },
-        "viewMode": { "description": "Vue active du calendrier : <code>'day'</code>, <code>'month'</code> ou <code>'year'</code>. Utile pour afficher ou masquer des actions selon la vue." },
-        "goToToday": { "description": "Navigue vers le mois actuel et sélectionne aujourd'hui. Équivalent au bouton intégré \"Aujourd'hui\"." },
-        "clear": { "description": "Efface la sélection actuelle et notifie le <code>FormControl</code> ou <code>ngModel</code> lié." },
-        "close": { "description": "Émet l'événement <code>selectFinished</code>, provoquant la fermeture du popover ou de la modale contenant le calendrier." }
+        "value": {
+          "description": "Valeur de sélection actuelle (<code>CalendarValue | null</code>). Reflète la sélection de l'utilisateur en temps réel."
+        },
+        "viewMode": {
+          "description": "Vue active du calendrier : <code>'day'</code>, <code>'month'</code> ou <code>'year'</code>. Utile pour afficher ou masquer des actions selon la vue."
+        },
+        "goToToday": {
+          "description": "Navigue vers le mois actuel et sélectionne aujourd'hui. Équivalent au bouton intégré \"Aujourd'hui\"."
+        },
+        "clear": {
+          "description": "Efface la sélection actuelle et notifie le <code>FormControl</code> ou <code>ngModel</code> lié."
+        },
+        "close": {
+          "description": "Émet l'événement <code>selectFinished</code>, provoquant la fermeture du popover ou de la modale contenant le calendrier."
+        }
       }
     },
     "day-context": {
@@ -193,10 +237,18 @@
       "description": "Contexte typé reçu par le <code>ng-template</code> projeté avec la directive <code>nuiCalendarDay</code>. Fournit l'objet <code>CalendarDay</code> complet comme <code>$implicit</code> et 3 raccourcis pour les champs les plus courants.",
       "note": "La classe <strong>CalendarDayDirective</strong> doit être importée dans le composant consommateur (<code>imports: [CalendarDayDirective]</code>). Le sélecteur du template est <code>[nuiCalendarDay]</code>. Utilisez <code>let-fullDay</code> (sans binding = $implicit) pour l'objet complet, ou les raccourcis <code>let-dayNumber=\"day\"</code>, <code>let-status=\"status\"</code>, <code>let-isToday=\"isToday\"</code>.",
       "rows": {
-        "implicit": { "description": "Objet <code>CalendarDay</code> complet. Raccourci : <code>let-fullDay</code> (sans binding de nom). Donne accès à toutes les propriétés : <code>isWeekend</code>, <code>isSelected</code>, <code>isDisabled</code>, <code>isCurrentMonth</code>, <code>isInRange</code>, <code>date</code>, etc." },
-        "day": { "description": "Numéro du jour (1\u201331). Raccourci de <code>$implicit.dayNumber</code>." },
-        "isToday": { "description": "Est la date d'aujourd'hui. Raccourci de <code>$implicit.isToday</code>." },
-        "status": { "description": "État métier attribué par <code>dateStatusFn</code> : <code>'success'</code>, <code>'warning'</code>, <code>'danger'</code>, <code>'info'</code> ou <code>null</code>. Raccourci de <code>$implicit.status</code>." }
+        "implicit": {
+          "description": "Objet <code>CalendarDay</code> complet. Raccourci : <code>let-fullDay</code> (sans binding de nom). Donne accès à toutes les propriétés : <code>isWeekend</code>, <code>isSelected</code>, <code>isDisabled</code>, <code>isCurrentMonth</code>, <code>isInRange</code>, <code>date</code>, etc."
+        },
+        "day": {
+          "description": "Numéro du jour (1\u201331). Raccourci de <code>$implicit.dayNumber</code>."
+        },
+        "isToday": {
+          "description": "Est la date d'aujourd'hui. Raccourci de <code>$implicit.isToday</code>."
+        },
+        "status": {
+          "description": "État métier attribué par <code>dateStatusFn</code> : <code>'success'</code>, <code>'warning'</code>, <code>'danger'</code>, <code>'info'</code> ou <code>null</code>. Raccourci de <code>$implicit.status</code>."
+        }
       }
     },
     "smart-types": {
@@ -204,9 +256,15 @@
       "description": "Types et fonctions pour la validation avancée de dates et la logique d'état. Permettent d'appliquer des règles métier complexes et des visualisations dynamiques.",
       "note": "Ces types sont fondamentaux pour implémenter des fonctionnalités avancées : <strong>DateStatusFn</strong> assigne des états visuels (success, warning, danger, info) aux dates selon la logique métier, tandis que <strong>IsDateEnabledFn</strong> contrôle dynamiquement quelles dates sont activées ou désactivées. Les deux fonctions reçoivent une date et permettent d'implémenter des validations complexes telles que des calendriers d'entreprise, des systèmes de réservation ou des règles de disponibilité personnalisées.",
       "rows": {
-        "DateStatus": { "description": "États visuels : 'success' | 'warning' | 'danger' | 'info'" },
-        "DateStatusFn": { "description": "<code>(date: Date) => DateStatus | null</code> — Fonction qui attribue dynamiquement des états visuels" },
-        "IsDateEnabledFn": { "description": "<code>(date: Date) => boolean</code> — Fonction qui valide si une date est activée (prévaut sur disabledDates)" }
+        "DateStatus": {
+          "description": "États visuels : 'success' | 'warning' | 'danger' | 'info'"
+        },
+        "DateStatusFn": {
+          "description": "<code>(date: Date) => DateStatus | null</code> — Fonction qui attribue dynamiquement des états visuels"
+        },
+        "IsDateEnabledFn": {
+          "description": "<code>(date: Date) => boolean</code> — Fonction qui valide si une date est activée (prévaut sur disabledDates)"
+        }
       }
     }
   },
@@ -223,8 +281,12 @@
         "daySelectedBg": { "description": "Couleur d'arrière-plan du jour sélectionné" },
         "daySelectedText": { "description": "Couleur de texte du jour sélectionné" },
         "daySelectedBorder": { "description": "Couleur de bordure du jour sélectionné" },
-        "daySelectedHoverBg": { "description": "Couleur d'arrière-plan du jour sélectionné au survol" },
-        "daySelectedHoverBorder": { "description": "Couleur de bordure du jour sélectionné au survol" },
+        "daySelectedHoverBg": {
+          "description": "Couleur d'arrière-plan du jour sélectionné au survol"
+        },
+        "daySelectedHoverBorder": {
+          "description": "Couleur de bordure du jour sélectionné au survol"
+        },
         "dayRangeBg": { "description": "Couleur d'arrière-plan des jours dans une plage" },
         "dayRangeText": { "description": "Couleur de texte des jours dans une plage" }
       }
@@ -255,7 +317,9 @@
         "dayBorderWidth": { "description": "Épaisseur de bordure des cellules de jour" },
         "dayOtherMonthOpacity": { "description": "Opacité des jours des autres mois" },
         "presetBorderWidth": { "description": "Épaisseur de bordure des boutons de préréglage" },
-        "presetHoverTranslateY": { "description": "Translation verticale au survol d'un préréglage" }
+        "presetHoverTranslateY": {
+          "description": "Translation verticale au survol d'un préréglage"
+        }
       }
     },
     "customization": {
@@ -530,7 +594,6 @@
       "description": "Les propriétés suivantes peuvent être configurées globalement via <code>CalendarGlobalConfig</code> :",
       "rows": {
         "firstDayOfWeek": "Premier jour de la semaine. 0 = Dimanche, 1 = Lundi, etc.",
-
         "showFooter": "Si le pied de page intégré du calendrier (boutons 'Aujourd'hui' + 'Effacer') est affiché.",
         "showTimeSelector": "Mode d'affichage du sélecteur de temps : <code>none</code>, <code>inline</code> ou <code>popover</code>.",
         "timeSelectorMode": "Mode de précision du sélecteur de temps (12/24 heures, avec ou sans secondes).",
