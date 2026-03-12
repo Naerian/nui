@@ -338,10 +338,10 @@ export interface CalendarGlobalConfig {
   // ========================================================================
 
   /**
-   * Mostrar bot�n "Hoy" en el calendario por defecto
+   * Mostrar el footer del calendario (bot\u00f3n "Hoy" + "Limpiar") o footer custom.
    * Por defecto: true
    */
-  showTodayButton?: boolean;
+  showFooter?: boolean;
 
   /**
    * Formato de hora integrado para selecci�n con time picker.

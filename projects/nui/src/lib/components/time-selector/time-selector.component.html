@@ -232,24 +232,26 @@
       </div>
 
       <!-- Footer con controles -->
-      <div class="nui-time-selector__footer">
-        @if (footerTemplate()) {
-          <ng-container
-            [ngTemplateOutlet]="footerTemplate()!"
-            [ngTemplateOutletContext]="footerContext()"
-          />
-        } @else {
-          <button
-            type="button"
-            class="nui-time-selector__footer-btn"
-            (click)="clear()"
-            [disabled]="isDisabled() || !selectedDuration()"
-            [attr.aria-label]="effectiveI18n().clear"
-          >
-            {{ effectiveI18n().clear }}
-          </button>
-        }
-      </div>
+      @if (effectiveShowFooter()) {
+        <div class="nui-time-selector__footer">
+          @if (footerTemplate()) {
+            <ng-container
+              [ngTemplateOutlet]="footerTemplate()!"
+              [ngTemplateOutletContext]="footerContext()"
+            />
+          } @else {
+            <button
+              type="button"
+              class="nui-time-selector__footer-btn"
+              (click)="clear()"
+              [disabled]="isDisabled() || !selectedDuration()"
+              [attr.aria-label]="effectiveI18n().clear"
+            >
+              {{ effectiveI18n().clear }}
+            </button>
+          }
+        </div>
+      }
     </div>
   }
 
@@ -500,37 +502,39 @@
       }
 
       <!-- Footer: Controles de acción -->
-      <div class="nui-time-selector__footer">
-        @if (footerTemplate()) {
-          <ng-container
-            [ngTemplateOutlet]="footerTemplate()!"
-            [ngTemplateOutletContext]="footerContext()"
-          />
-        } @else {
-          <button
-            type="button"
-            class="nui-time-selector__footer-btn"
-            (click)="clear()"
-            [disabled]="isDisabled() || !selectedTime()"
-            [attr.aria-label]="effectiveI18n().clear"
-          >
-            {{ effectiveI18n().clear }}
-          </button>
-
-          @if (!isDurationMode()) {
-            <!-- Si NO estamos en modo Duration, mostrar botón de "Ahora" -->
+      @if (effectiveShowFooter()) {
+        <div class="nui-time-selector__footer">
+          @if (footerTemplate()) {
+            <ng-container
+              [ngTemplateOutlet]="footerTemplate()!"
+              [ngTemplateOutletContext]="footerContext()"
+            />
+          } @else {
             <button
               type="button"
               class="nui-time-selector__footer-btn"
-              (click)="setToNow()"
-              [disabled]="isDisabled()"
-              [attr.aria-label]="effectiveI18n().setToCurrentTime"
+              (click)="clear()"
+              [disabled]="isDisabled() || !selectedTime()"
+              [attr.aria-label]="effectiveI18n().clear"
             >
-              {{ effectiveI18n().setToCurrentTime }}
+              {{ effectiveI18n().clear }}
             </button>
+
+            @if (!isDurationMode()) {
+              <!-- Si NO estamos en modo Duration, mostrar botón de "Ahora" -->
+              <button
+                type="button"
+                class="nui-time-selector__footer-btn"
+                (click)="setToNow()"
+                [disabled]="isDisabled()"
+                [attr.aria-label]="effectiveI18n().setToCurrentTime"
+              >
+                {{ effectiveI18n().setToCurrentTime }}
+              </button>
+            }
           }
-        }
-      </div>
+        </div>
+      }
     </div>
   }
 

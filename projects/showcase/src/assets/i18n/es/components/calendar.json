@@ -111,7 +111,7 @@
         "disabledDates": { "description": "Array de fechas deshabilitadas" },
         "minDate": { "description": "Fecha mínima seleccionable" },
         "maxDate": { "description": "Fecha máxima seleccionable" },
-        "showTodayButton": { "description": "Muestra botón \"Hoy\" en el footer" },
+        "showFooter": { "description": "Muestra u oculta el footer built-in del calendario (botones 'Hoy' + 'Limpiar'). Admite footer custom con <code>nuiCalendarFooter</code>" },
         "showPresets": { "description": "Muestra panel de presets (solo para tipo RANGE)" },
         "customPresets": { "description": "Presets personalizados de rangos de fechas" },
         "firstDayOfWeek": { "description": "0=Domingo, 1=Lunes (primer día de la semana)" },
@@ -590,7 +590,7 @@
       "description": "Las siguientes propiedades pueden configurarse globalmente a través de <code>CalendarGlobalConfig</code>:",
       "rows": {
         "firstDayOfWeek": "Primer día de la semana. 0 = Domingo, 1 = Lunes, etc.",
-        "showTodayButton": "Si se muestra el botón de atajo 'Hoy'.",
+        "showFooter": "Si se muestra el footer built-in del calendario (botones 'Hoy' + 'Limpiar').",
         "showTimeSelector": "Modo de visualización del selector de tiempo: <code>none</code>, <code>inline</code> o <code>popover</code>.",
         "timeSelectorMode": "Modo de precisión del selector de tiempo (12/24 horas, con o sin segundos).",
         "timeSelectorConfig": "Objeto de configuración avanzada para el selector de tiempo.",

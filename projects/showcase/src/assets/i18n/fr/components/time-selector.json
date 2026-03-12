@@ -371,6 +371,7 @@
       "description": "Les propriétés suivantes peuvent être configurées globalement via <code>TimeSelectorGlobalConfig</code> :",
       "rows": {
         "showHeader": "Si l'en-tête affichant l'heure formatée est affiché en haut du sélecteur.",
+        "showFooter": "Si le pied de page intégré avec les boutons 'Effacer' et 'Maintenant' est affiché.",
         "defaultStrategy": "Stratégie de valeur initiale : <code>empty</code> (sans valeur), <code>now</code> (heure actuelle), <code>smart</code> (heure actuelle + offset) ou <code>custom</code>.",
         "smartOffset": "Offset en minutes ajouté à l'heure actuelle quand la stratégie est <code>smart</code>.",
         "hourStep": "Incrément pour le sélecteur d'heures. Par exemple, <code>2</code> affiche uniquement les heures paires.",

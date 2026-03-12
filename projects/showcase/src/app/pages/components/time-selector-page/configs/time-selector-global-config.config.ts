@@ -67,6 +67,12 @@ export const appConfig: ApplicationConfig = {
           'components.timeSelector.globalConfig.defaults.rows.showHeader',
         ],
         [
+          '<code>showFooter</code>',
+          'boolean',
+          '<code class="neutral">true</code>',
+          'components.timeSelector.globalConfig.defaults.rows.showFooter',
+        ],
+        [
           '<code>defaultStrategy</code>',
           'TimeSelectorStrategy',
           '<code class="neutral">empty</code>',

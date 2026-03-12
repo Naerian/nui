@@ -10,7 +10,7 @@ import { TimeSelectorModeEnum } from '../../components/time-selector/models/time
  */
 export const DEFAULT_CALENDAR_CONFIG: CalendarGlobalConfig = {
   firstDayOfWeek: 1,
-  showTodayButton: true,
+  showFooter: true,
   showTimeSelector: CalendarTimeSelectorModeEnum.NONE,
   timeSelectorMode: TimeSelectorModeEnum.HOUR_MINUTE_24,
   timeSelectorConfig: undefined,

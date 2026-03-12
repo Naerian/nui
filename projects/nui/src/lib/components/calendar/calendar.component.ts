@@ -133,7 +133,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   overlayMode = input<boolean>(); // Indica si el calendario est� dentro de un overlay (datepicker, popover) para ajustar comportamientos como el foco inicial y el cierre al seleccionar
   minDate = input<Date | string | null>(); // Fecha m�nima permitida
   maxDate = input<Date | string | null>(); // Fecha m�xima permitida
-  showTodayButton = input<boolean>(); // Mostrar bot�n "Hoy"
+  showFooter = input<boolean>(); // Mostrar footer built-in ("Hoy" + "Limpiar") o footer custom
   showWeekNumbers = input<boolean>(); // Mostrar n�meros de semana ISO en la columna izquierda
   showPresets = input<boolean>(); // Mostrar panel de presets
   customPresets = input<DateRangePreset[]>(); // Presets personalizados
@@ -372,11 +372,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   // ============================================================================
 
   /**
-   * Valor efectivo de showTodayButton considerando configuraci�n global
+   * Valor efectivo de showFooter considerando configuracion global
    */
-  effectiveShowTodayButton = computed(() => {
-    const inputValue = this.showTodayButton();
-    return inputValue ?? this.calendarConfig.showTodayButton ?? true;
+  effectiveShowFooter = computed(() => {
+    const inputValue = this.showFooter();
+    return inputValue ?? this.calendarConfig.showFooter ?? true;
   });
 
   /**

@@ -55,10 +55,10 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
           'components.calendar.api.inputs.rows.maxDate.description',
         ],
         [
-          '<code>showTodayButton</code>',
+          '<code>showFooter</code>',
           'boolean',
           '<code class="neutral">true</code>',
-          'components.calendar.api.inputs.rows.showTodayButton.description',
+          'components.calendar.api.inputs.rows.showFooter.description',
         ],
         [
           '<code>showPresets</code>',

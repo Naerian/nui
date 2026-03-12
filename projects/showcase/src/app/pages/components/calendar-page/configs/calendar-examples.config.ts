@@ -523,7 +523,7 @@ onFooterApply(value: CalendarValue | null): void {
       },
       {
         title: 'components.calendar.custom-footer.exampleDay',
-        code: `<nui-calendar type="day" [showTodayButton]="false">
+        code: `<nui-calendar type="day" [showFooter]="false">
   <ng-template nuiCalendarFooter let-actions="actions">
     <button nuiButton prefixIcon="ri-close-line" size="xs" (onClick)="actions.clear()"> Clear </button>
     <button nuiButton size="xs" (onClick)="actions.goToToday()">Today</button>

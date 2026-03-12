@@ -107,7 +107,7 @@
         "disabledDates": { "description": "Array of disabled dates" },
         "minDate": { "description": "Minimum selectable date" },
         "maxDate": { "description": "Maximum selectable date" },
-        "showTodayButton": { "description": "Shows 'Today' button in the footer" },
+        "showFooter": { "description": "Shows or hides the built-in calendar footer ('Today' + 'Clear' buttons). Also supports custom footer via <code>nuiCalendarFooter</code>" },
         "showPresets": { "description": "Shows presets panel (only for RANGE type)" },
         "customPresets": { "description": "Custom date range presets" },
         "firstDayOfWeek": { "description": "0=Sunday, 1=Monday (first day of the week)" },
@@ -530,7 +530,7 @@
       "description": "The following properties can be configured globally via <code>CalendarGlobalConfig</code>:",
       "rows": {
         "firstDayOfWeek": "First day of the week. 0 = Sunday, 1 = Monday, etc.",
-        "showTodayButton": "Whether to display the 'Today' shortcut button.",
+        "showFooter": "Whether to display the built-in calendar footer ('Today' + 'Clear' buttons).",
         "showTimeSelector": "Time picker display mode: <code>none</code>, <code>inline</code> or <code>popover</code>.",
         "timeSelectorMode": "Time picker precision mode (12/24 hours, with or without seconds).",
         "timeSelectorConfig": "Advanced configuration object for the time picker.",

@@ -43,6 +43,12 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
           'Indica si se muestra el header del selector de tiempo',
         ],
         [
+          '<code>showFooter</code>',
+          'boolean',
+          '<code class="neutral">true</code>',
+          'Indica si se muestra el footer built-in (botones "Limpiar" + "Ahora")',
+        ],
+        [
           '<code>config</code>',
           'TimeSelectorConfig',
           '<code class="neutral">undefined</code>',

@@ -107,7 +107,7 @@
         "disabledDates": { "description": "Tableau de dates désactivées" },
         "minDate": { "description": "Date sélectionnable minimale" },
         "maxDate": { "description": "Date sélectionnable maximale" },
-        "showTodayButton": { "description": "Affiche le bouton 'Aujourd'hui' dans le pied de page" },
+        "showFooter": { "description": "Affiche ou masque le pied de page intégré (boutons 'Aujourd'hui' + 'Effacer'). Supporte aussi un pied de page personnalisé via <code>nuiCalendarFooter</code>" },
         "showPresets": { "description": "Affiche le panneau de préréglages (uniquement pour le type RANGE)" },
         "customPresets": { "description": "Préréglages de plages de dates personnalisés" },
         "firstDayOfWeek": { "description": "0=Dimanche, 1=Lundi (premier jour de la semaine)" },
@@ -531,7 +531,7 @@
       "rows": {
         "firstDayOfWeek": "Premier jour de la semaine. 0 = Dimanche, 1 = Lundi, etc.",
 
-        "showTodayButton": "Si le bouton de raccourci « Aujourd'hui » est affiché.",
+        "showFooter": "Si le pied de page intégré du calendrier (boutons 'Aujourd'hui' + 'Effacer') est affiché.",
         "showTimeSelector": "Mode d'affichage du sélecteur de temps : <code>none</code>, <code>inline</code> ou <code>popover</code>.",
         "timeSelectorMode": "Mode de précision du sélecteur de temps (12/24 heures, avec ou sans secondes).",
         "timeSelectorConfig": "Objet de configuration avancée pour le sélecteur de temps.",

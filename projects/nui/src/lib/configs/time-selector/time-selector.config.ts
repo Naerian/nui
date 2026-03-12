@@ -10,6 +10,8 @@ import { deepMerge } from '../../utils/deep-merge';
 export interface TimeSelectorGlobalConfig {
   /** Mostrar la cabecera con el tiempo formateado */
   showHeader?: boolean;
+  /** Mostrar el footer built-in (botones 'Limpiar' + 'Ahora'). Por defecto: true */
+  showFooter?: boolean;
   /** Estrategia de valor inicial: 'now', 'smart', 'empty' o 'custom' */
   defaultStrategy?: TimeSelectorStrategy;
   /** Offset en minutos para la estrategia 'smart' */
@@ -25,6 +27,7 @@ export interface TimeSelectorGlobalConfig {
  */
 export const DEFAULT_TIME_SELECTOR_CONFIG: TimeSelectorGlobalConfig = {
   showHeader: true,
+  showFooter: true,
   defaultStrategy: 'empty',
   smartOffset: 30,
   hourStep: 1,

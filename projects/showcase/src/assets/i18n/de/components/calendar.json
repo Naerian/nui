@@ -107,7 +107,7 @@
         "disabledDates": { "description": "Array deaktivierter Datumsangaben" },
         "minDate": { "description": "Minimales auswählbares Datum" },
         "maxDate": { "description": "Maximales auswählbares Datum" },
-        "showTodayButton": { "description": "Zeigt 'Heute'-Schaltfläche in der Fußzeile" },
+        "showFooter": { "description": "Blendet die integrierte Fußzeile ein oder aus (Schaltflächen 'Heute' + 'Löschen'). Unterstützt auch benutzerdefinierte Fußzeilen via <code>nuiCalendarFooter</code>" },
         "showPresets": { "description": "Zeigt den Voreinstellungsbereich (nur für den RANGE-Typ)" },
         "customPresets": { "description": "Benutzerdefinierte Datumsbereichs-Voreinstellungen" },
         "firstDayOfWeek": { "description": "0=Sonntag, 1=Montag (erster Wochentag)" },
@@ -530,7 +530,7 @@
       "description": "Folgende Eigenschaften können global über <code>CalendarGlobalConfig</code> konfiguriert werden:",
       "rows": {
         "firstDayOfWeek": "Erster Wochentag. 0 = Sonntag, 1 = Montag, usw.",
-        "showTodayButton": "Ob die Schaltfläche 'Heute' angezeigt wird.",
+        "showFooter": "Ob die integrierte Fußzeile des Kalenders (Schaltflächen 'Heute' + 'Löschen') angezeigt wird.",
         "showTimeSelector": "Anzeigemodus der Zeitauswahl: <code>none</code>, <code>inline</code> oder <code>popover</code>.",
         "timeSelectorMode": "Präzisionsmodus der Zeitauswahl (12/24 Stunden, mit oder ohne Sekunden).",
         "timeSelectorConfig": "Erweitertes Konfigurationsobjekt für die Zeitauswahl.",

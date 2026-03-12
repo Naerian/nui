@@ -31,6 +31,7 @@ export const DEFAULT_CALENDAR_I18N: CalendarI18n = {
   yearsAria: 'Vista de años',
   openCalendar: 'Abrir calendario',
   today: 'Hoy',
+  clear: 'Limpiar',
   week: 'Semana {week}',
   weekNumbers: 'S',
   showTime: 'Mostrar selector de hora',
@@ -91,6 +92,7 @@ export interface CalendarI18n {
   yearsAria: string;
   openCalendar: string;
   today: string;
+  clear: string;
   week: string;
   weekNumbers: string;
   showTime: string;

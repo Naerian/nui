@@ -371,6 +371,7 @@
       "description": "Die folgenden Eigenschaften können global über <code>TimeSelectorGlobalConfig</code> konfiguriert werden:",
       "rows": {
         "showHeader": "Ob die Kopfzeile mit der formatierten Zeit oben im Selektor angezeigt wird.",
+        "showFooter": "Ob die integrierte Fußzeile mit den Schaltflächen 'Löschen' und 'Jetzt' angezeigt wird.",
         "defaultStrategy": "Anfangswert-Strategie: <code>empty</code> (kein Wert), <code>now</code> (aktuelle Zeit), <code>smart</code> (aktuelle Zeit + Offset) oder <code>custom</code>.",
         "smartOffset": "Offset in Minuten, der zur aktuellen Zeit addiert wird, wenn die Strategie <code>smart</code> ist.",
         "hourStep": "Schrittweite für die Stundenauswahl. Zum Beispiel zeigt <code>2</code> nur gerade Stunden.",

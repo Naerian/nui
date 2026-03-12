@@ -80,6 +80,7 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
   disabled = input<boolean>(false);
   title = input<string>('');
   showHeader = input<boolean | undefined>(undefined);
+  showFooter = input<boolean | undefined>(undefined);
 
   /** Si true, emite `selectFinished` al completar la selección (para uso en datepicker/overlay). */
   autoClose = input<boolean>(false);
@@ -95,6 +96,7 @@ export class TimeSelectorComponent implements ControlValueAccessor, OnInit, Afte
 
   /** showHeader efectivo: Input → Config global → true */
   effectiveShowHeader = computed(() => this.showHeader() ?? this._globalConfig.showHeader ?? true);
+  effectiveShowFooter = computed(() => this.showFooter() ?? this._globalConfig.showFooter ?? true);
 
   @Input() set config(value: TimeSelectorConfig) {
     const mergedConfig = { ...DEFAULT_CONFIG, ...value };
