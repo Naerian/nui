@@ -50,6 +50,13 @@
     "description": "Full integration with Angular reactive forms. Implements ControlValueAccessor for automatic synchronization.",
     "note": "Use <code>formControl</code> or <code>formControlName</code> to integrate with Angular forms. The component handles synchronization, validation and state automatically. Supports all types (DAY, WEEK, RANGE) in forms."
   },
+  "overlay-integration": {
+    "title": "Overlay integration",
+    "description": "The Calendar can act as the selection panel inside a datepicker or popover. Use <code>autoClose</code> together with <code>(selectFinished)</code> so the host knows when to close the overlay: the output emits when the selection is complete.",
+    "note": "The <code>overlayMode</code> input activates additional behaviors designed for use inside an overlay: adjusts initial focus and may modify view navigation. Combine it with <code>autoClose</code> for optimal integration.",
+    "selectedLabel": "Selected date",
+    "eventLabel": "selectFinished emitted count"
+  },
   "dynamic-disabled-dates": {
     "title": "Dynamically disabled dates",
     "description": "Disable dates according to complex business logic using a custom function. Overrides the static <code>disabledDates</code> array.",
@@ -63,12 +70,12 @@
   "selection-modes": {
     "title": "Advanced selection modes",
     "description": "The calendar supports three specialized selection modes: normal day selection, month/year selection and year-only selection.",
-    "note": "Each mode is optimized for a specific use case: <code>type='day'</code> for full date selection, <code>type='month'</code> for selecting month and year (ideal for monthly filters), and <code>type='year'</code> for selecting only the year (ideal for annual reports). <code>month</code> and <code>year</code> modes start directly in the corresponding view and close automatically upon selection if <code>closeOnSelect</code> is active."
+    "note": "Each mode is optimized for a specific use case: <code>type='day'</code> for full date selection, <code>type='month'</code> for selecting month and year (ideal for monthly filters), and <code>type='year'</code> for selecting only the year (ideal for annual reports). <code>month</code> and <code>year</code> modes start directly in the corresponding view and close automatically upon selection if <code>autoClose</code> is active."
   },
   "multiple-selection": {
     "title": "Multiple selection",
     "description": "Allows selecting multiple dates, months or years with a simple click. Ideal for selecting working days, holidays or distributed events.",
-    "note": "Enable multiple selection mode with <code>selection=\"multiple\"</code> combined with <code>type='day'</code>, <code>type='month'</code> or <code>type='year'</code>. Users can click multiple elements to add/remove them from the selection (toggle). This mode <strong>never automatically closes</strong> the calendar, even if <code>closeOnSelect</code> is <code>true</code>, to allow continuous selection. The output returns an object with <code>dates</code>, <code>months</code> or <code>years</code> depending on the type."
+    "note": "Enable multiple selection mode with <code>selection=\"multiple\"</code> combined with <code>type='day'</code>, <code>type='month'</code> or <code>type='year'</code>. Users can click multiple elements to add/remove them from the selection (toggle). This mode <strong>never automatically closes</strong> the calendar, even if <code>autoClose</code> is <code>true</code>, to allow continuous selection. The output returns an object with <code>dates</code>, <code>months</code> or <code>years</code> depending on the type."
   },
   "week-numbers": {
     "title": "ISO-8601 week numbers",
@@ -523,7 +530,6 @@
       "description": "The following properties can be configured globally via <code>CalendarGlobalConfig</code>:",
       "rows": {
         "firstDayOfWeek": "First day of the week. 0 = Sunday, 1 = Monday, etc.",
-        "closeOnSelect": "Whether the popover closes automatically when a date is selected.",
         "showTodayButton": "Whether to display the 'Today' shortcut button.",
         "showTimePicker": "Time picker display mode: <code>none</code>, <code>inline</code> or <code>popover</code>.",
         "timePickerMode": "Time picker precision mode (12/24 hours, with or without seconds).",

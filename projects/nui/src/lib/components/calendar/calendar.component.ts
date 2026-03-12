@@ -130,7 +130,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
    */
   isDateEnabledFn = input<IsDateEnabledFn>();
 
-  isOpenedByOverlay = input<boolean>(); // Indica si el calendario está dentro de un overlay (datepicker, popover) para ajustar comportamientos como el cierre al seleccionar
+  overlayMode = input<boolean>(); // Indica si el calendario está dentro de un overlay (datepicker, popover) para ajustar comportamientos como el foco inicial y el cierre al seleccionar
   minDate = input<Date | string | null>(); // Fecha mínima permitida
   maxDate = input<Date | string | null>(); // Fecha máxima permitida
   showTodayButton = input<boolean>(); // Mostrar botón "Hoy"
@@ -143,7 +143,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   timePickerConfig = input<TimePickerConfig>(); // Opciones de configuración para el timePicker
   startTime = input<TimeValue | Date | string | null>(); // Hora de inicio inicial
   endTime = input<TimeValue | Date | string | null>(); // Hora de fin inicial
-  closeOnSelect = input<boolean>(false); // Control de cierre automático al seleccionar (útil para RANGE)
+  autoClose = input<boolean>(false); // Si true, emite selectFinished al completar la selección (útil para datepicker/overlay)
 
   // ============================================================================
   // OUTPUTS (Signals API)
@@ -161,7 +161,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
   /**
    * Evento que se emite cuando se completa la selección y que va vinculado al cierre del
-   * calendario (si se usa dentro de un datepicker o con autoClose) mediante `closeOnSelect`.
+   * calendario (si se usa dentro de un datepicker o con autoClose).
    */
   selectFinished = output<void>();
 
@@ -303,15 +303,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   effectiveTimePickerConfig = computed(() => {
     const timePickerConfig = this.timePickerConfig();
     return timePickerConfig ?? this.calendarConfig.timePickerConfig ?? {};
-  });
-
-  /**
-   * Valor efectivo de closeOnSelect considerando la configuración global y el input local.
-   */
-  effectiveCloseOnSelect = computed(() => {
-    const inputValue = this.closeOnSelect();
-    // Si el input es undefined, usar el valor global, si este también es undefined, usar false
-    return inputValue ?? this.calendarConfig.closeOnSelect ?? false;
   });
 
   /**
@@ -865,7 +856,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     // Effecto para manejar el enfoque del teclado en los botones de día/mes/año
     // Solo se ejecuta si el calendario se abrió desde un overlay (datepicker)
     effect(() => {
-      if (!this.isOpenedByOverlay()) return;
+      if (!this.overlayMode()) return;
 
       const buttons = this.dayButtons();
       if (buttons.length > 0) {
@@ -879,7 +870,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     // Efectos para manejar el enfoque al cambiar de vista (mes/año)
     // Solo se ejecuta si el calendario se abrió desde un overlay
     effect(() => {
-      if (!this.isOpenedByOverlay()) return;
+      if (!this.overlayMode()) return;
 
       const buttons = this.monthButtons();
       if (buttons.length > 0 && this.viewMode() === ViewMode.MONTH) {
@@ -890,7 +881,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     // Efecto para enfocar el año seleccionado al entrar en vista de años
     // Solo se ejecuta si el calendario se abrió desde un overlay
     effect(() => {
-      if (!this.isOpenedByOverlay()) return;
+      if (!this.overlayMode()) return;
 
       const buttons = this.yearButtons();
       if (buttons.length > 0 && this.viewMode() === ViewMode.YEAR) {
@@ -1105,8 +1096,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   }
 
   ngAfterViewInit(): void {
-    // Si se abri? desde un overlay (datepicker), hacer focus en el d?a seleccionado/actual
-    if (this.isOpenedByOverlay()) {
+    // Si se abrió desde un overlay (datepicker), hacer focus en el día seleccionado/actual
+    if (this.overlayMode()) {
       this.focusInitialDay();
     }
   }
@@ -2753,7 +2744,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
    */
   private checkAutoClose(): void {
     // 1. Si la funcionalidad está desactivada, no hacemos nada
-    if (!this.closeOnSelect()) {
+    if (!this.autoClose()) {
       return;
     }
 

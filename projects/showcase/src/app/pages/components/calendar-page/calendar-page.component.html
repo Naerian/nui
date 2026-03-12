@@ -376,7 +376,7 @@
                     <h6 class="mb-0">Month picker</h6>
                     <nui-calendar
                       type="month"
-                      [closeOnSelect]="true"
+                      [autoClose]="true"
                       (valueChange)="onMonthSelected($event)"
                     ></nui-calendar>
                     @if (selectedMonth()) {
@@ -393,7 +393,7 @@
                     <h6 class="mb-0">Year picker</h6>
                     <nui-calendar
                       type="year"
-                      [closeOnSelect]="true"
+                      [autoClose]="true"
                       (valueChange)="onYearSelected($event)"
                     ></nui-calendar>
                     @if (selectedYear()) {
@@ -539,6 +539,31 @@
                         }
                       </ng-template>
                     </nui-calendar>
+                  </div>
+                </div>
+              }
+
+              @case ('overlay-integration') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-calendar
+                    type="day"
+                    [autoClose]="true"
+                    [overlayMode]="true"
+                    (selectFinished)="onCalendarSelectFinished()"
+                    (valueChange)="onCalendarOverlayDateChange($event)"
+                  ></nui-calendar>
+
+                  <div class="value-display">
+                    @if (overlaySelectedDate()) {
+                      <span>
+                        {{ 'components.calendar.overlay-integration.selectedLabel' | translate }}:
+                        <strong>{{ overlaySelectedDate()!.toLocaleDateString() }}</strong>
+                      </span>
+                    }
+                    <span>
+                      {{ 'components.calendar.overlay-integration.eventLabel' | translate }}:
+                      <strong>{{ calendarAutoCloseEventCount() }}</strong>
+                    </span>
                   </div>
                 </div>
               }

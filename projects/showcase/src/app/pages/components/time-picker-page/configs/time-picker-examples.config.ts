@@ -368,4 +368,41 @@ timeForCustomHeader = signal<TimeValue | null>(null);`,
       },
     ],
   },
+  {
+    id: 'overlay-integration',
+    title: 'components.timePicker.overlayIntegration.title',
+    description: 'components.timePicker.overlayIntegration.description',
+    note: {
+      type: 'info',
+      content: 'components.timePicker.overlayIntegration.note',
+    },
+    anchor: 'overlay-integration',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        code: `<!-- Dentro del host del datepicker/overlay -->
+<nui-time-picker
+  [autoClose]="true"
+  (selectFinished)="closePicker()"
+  (valueChange)="onTimeChange($event)"
+></nui-time-picker>`,
+        language: 'html',
+      },
+      {
+        title: 'codeExamples.typescript',
+        code: `isPickerOpen = signal<boolean>(false);
+selectedTime = signal<TimeValue | null>(null);
+
+onTimeChange(time: TimeValue | null): void {
+  this.selectedTime.set(time);
+}
+
+// Llamado automáticamente al completar la selección cuando autoClose=true
+closePicker(): void {
+  this.isPickerOpen.set(false);
+}`,
+        language: 'typescript',
+      },
+    ],
+  },
 ];

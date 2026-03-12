@@ -55,6 +55,12 @@
     "description": "Integración completa con formularios reactivos de Angular. Implementa ControlValueAccessor.",
     "note": "Usa <code>formControl</code> o <code>formControlName</code> para integrar con formularios de Angular. El componente maneja la sincronización, validación y estado automáticamente."
   },
+  "overlayIntegration": {
+    "title": "Integración con overlay",
+    "description": "Usa <code>autoClose</code> y <code>selectFinished</code> para integrar el TimePicker dentro de un datepicker o popover. El output <code>selectFinished</code> se emite al completar la selección para que el host cierre el overlay.",
+    "note": "El input <code>overlayMode</code> activa comportamientos adicionales de foco pensados para cuando el componente se renderiza dentro de un overlay: enfoca automáticamente la primera columna al montarse.",
+    "eventLabel": "Veces emitido selectFinished"
+  },
   "customFooter": {
     "title": "Footer personalizado",
     "description": "Proyecta un <code>ng-template</code> con la directiva <strong>nuiTimePickerFooter</strong> para reemplazar el footer built-in con botones de acción propios, información adicional o cualquier contenido que necesites.",
@@ -73,11 +79,18 @@
   "api": {
     "inputs": {
       "title": "Inputs",
-      "description": "Propiedades de entrada para configurar el comportamiento, apariencia y restricciones del selector de tiempo"
+      "description": "Propiedades de entrada para configurar el comportamiento, apariencia y restricciones del selector de tiempo",
+      "rows": {
+        "autoClose": "Si true, emite selectFinished al completar la selección. Diseñado para uso dentro de un datepicker u overlay.",
+        "overlayMode": "Si true, activa comportamientos específicos de overlay: foco inicial en la primera columna al abrirse."
+      }
     },
     "outputs": {
       "title": "Outputs",
-      "description": "Eventos emitidos por el selector de tiempo cuando el usuario interactúa con él"
+      "description": "Eventos emitidos por el selector de tiempo cuando el usuario interactúa con él",
+      "rows": {
+        "selectFinished": "Emite (void) cuando el usuario completa la selección y autoClose es true. El overlay puede cerrarse al recibir este evento."
+      }
     },
     "config": {
       "title": "TimePickerConfig",

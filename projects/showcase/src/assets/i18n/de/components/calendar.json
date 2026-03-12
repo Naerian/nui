@@ -50,6 +50,13 @@
     "description": "Vollständige Integration mit Angular-Reaktivformularen. Implementiert ControlValueAccessor für automatische Synchronisierung.",
     "note": "Verwende <code>formControl</code> oder <code>formControlName</code> für die Integration mit Angular-Formularen. Die Komponente verwaltet Synchronisierung, Validierung und Zustand automatisch. Unterstützt alle Typen (DAY, WEEK, RANGE) in Formularen."
   },
+  "overlay-integration": {
+    "title": "Overlay- / Datepicker-Integration",
+    "description": "Der Calendar kann als Auswahlpanel in einem Datepicker oder Popover fungieren. Verwende <code>autoClose</code> zusammen mit <code>(selectFinished)</code>, damit der Host weiß, wann er das Overlay schließen soll: das Output emittiert, wenn die Auswahl abgeschlossen ist.",
+    "note": "Der Input <code>overlayMode</code> aktiviert zusätzliche Verhaltensweisen für die Verwendung in einem Overlay: passt den Anfangsfokus an und kann die Ansichtsnavigation ändern. Kombiniere ihn mit <code>autoClose</code> für optimale Integration.",
+    "selectedLabel": "Ausgewähltes Datum",
+    "eventLabel": "selectFinished-Emissions-Anzahl"
+  },
   "dynamic-disabled-dates": {
     "title": "Dynamisch deaktivierte Daten",
     "description": "Deaktiviere Daten gemäß komplexer Geschäftslogik mit einer benutzerdefinierten Funktion. Überschreibt das statische <code>disabledDates</code>-Array.",
@@ -63,12 +70,12 @@
   "selection-modes": {
     "title": "Erweiterte Auswahlmodi",
     "description": "Der Kalender unterstützt drei spezialisierte Auswahlmodi: normale Tagesauswahl, Monat/Jahr-Auswahl und reine Jahresauswahl.",
-    "note": "Jeder Modus ist für einen bestimmten Anwendungsfall optimiert: <code>type='day'</code> für vollständige Datumsauswahl, <code>type='month'</code> für die Auswahl von Monat und Jahr (ideal für monatliche Filter) und <code>type='year'</code> für die reine Jahresauswahl (ideal für Jahresberichte). Die Modi <code>month</code> und <code>year</code> starten direkt in der entsprechenden Ansicht und schließen automatisch nach der Auswahl, wenn <code>closeOnSelect</code> aktiv ist."
+    "note": "Jeder Modus ist für einen bestimmten Anwendungsfall optimiert: <code>type='day'</code> für vollständige Datumsauswahl, <code>type='month'</code> für die Auswahl von Monat und Jahr (ideal für monatliche Filter) und <code>type='year'</code> für die reine Jahresauswahl (ideal für Jahresberichte). Die Modi <code>month</code> und <code>year</code> starten direkt in der entsprechenden Ansicht und schließen automatisch nach der Auswahl, wenn <code>autoClose</code> aktiv ist."
   },
   "multiple-selection": {
     "title": "Mehrfachauswahl",
     "description": "Ermöglicht die Auswahl mehrerer Daten, Monate oder Jahre mit einem einfachen Klick. Ideal für die Auswahl von Arbeitstagen, Feiertagen oder verteilten Ereignissen.",
-    "note": "Aktiviere den Mehrfachauswahlmodus mit <code>selection=\"multiple\"</code> kombiniert mit <code>type='day'</code>, <code>type='month'</code> oder <code>type='year'</code>. Benutzer können mehrere Elemente klicken, um sie zur Auswahl hinzuzufügen oder daraus zu entfernen (Umschalten). Dieser Modus <strong>schließt den Kalender nie automatisch</strong>, auch wenn <code>closeOnSelect</code> <code>true</code> ist, um eine kontinuierliche Auswahl zu ermöglichen. Der Output gibt ein Objekt mit <code>dates</code>, <code>months</code> oder <code>years</code> je nach Typ zurück."
+    "note": "Aktiviere den Mehrfachauswahlmodus mit <code>selection=\"multiple\"</code> kombiniert mit <code>type='day'</code>, <code>type='month'</code> oder <code>type='year'</code>. Benutzer können mehrere Elemente klicken, um sie zur Auswahl hinzuzufügen oder daraus zu entfernen (Umschalten). Dieser Modus <strong>schließt den Kalender nie automatisch</strong>, auch wenn <code>autoClose</code> <code>true</code> ist, um eine kontinuierliche Auswahl zu ermöglichen. Der Output gibt ein Objekt mit <code>dates</code>, <code>months</code> oder <code>years</code> je nach Typ zurück."
   },
   "week-numbers": {
     "title": "ISO-8601-Wochennummern",
@@ -523,7 +530,6 @@
       "description": "Folgende Eigenschaften können global über <code>CalendarGlobalConfig</code> konfiguriert werden:",
       "rows": {
         "firstDayOfWeek": "Erster Wochentag. 0 = Sonntag, 1 = Montag, usw.",
-        "closeOnSelect": "Ob das Popover automatisch geschlossen wird, wenn ein Datum ausgewählt wird.",
         "showTodayButton": "Ob die Schaltfläche 'Heute' angezeigt wird.",
         "showTimePicker": "Anzeigemodus der Zeitauswahl: <code>none</code>, <code>inline</code> oder <code>popover</code>.",
         "timePickerMode": "Präzisionsmodus der Zeitauswahl (12/24 Stunden, mit oder ohne Sekunden).",

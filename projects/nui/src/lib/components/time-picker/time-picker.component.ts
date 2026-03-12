@@ -6,6 +6,7 @@ import {
   signal,
   computed,
   input,
+  output,
   contentChild,
   ChangeDetectionStrategy,
   forwardRef,
@@ -79,6 +80,12 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   disabled = input<boolean>(false);
   title = input<string>('');
   showHeader = input<boolean | undefined>(undefined);
+
+  /** Si true, emite `selectFinished` al completar la selección (para uso en datepicker/overlay). */
+  autoClose = input<boolean>(false);
+
+  /** Si true, activa comportamientos específicos de overlay (foco inicial en la primera columna). */
+  overlayMode = input<boolean>(false);
 
   // Internal disabled state from form (ControlValueAccessor)
   private _disabledByForm = signal<boolean>(false);
@@ -171,6 +178,12 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
    * Emite el valor TimeValue o DurationValue cuando cambia la hora/duración seleccionada
    */
   @Output() valueChange = new EventEmitter<TimeValue | DurationValue | null>();
+
+  /**
+   * Se emite cuando el usuario ha completado la selección (para cerrar overlay/datepicker).
+   * Solo se emite si `autoClose` es true.
+   */
+  selectFinished = output<void>();
 
   // ==================
   // VIEW CHILDREN
@@ -653,6 +666,13 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   }
 
   ngAfterViewInit(): void {
+    // Si está en modo overlay, enfocar la primera columna disponible
+    if (this.overlayMode()) {
+      setTimeout(() => {
+        this.hoursColumn?.nativeElement?.focus?.();
+      }, 0);
+    }
+
     // Aplicar estrategia de valor por defecto solo si no hay valor externo
     setTimeout(() => {
       if (
@@ -776,6 +796,9 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     // Auto-focus a minutos si está disponible
     if (this.showMinutes()) {
       this.focusedSection.set('minute');
+    } else {
+      // En modo HOUR_ONLY, la selección de hora es el paso final
+      this.checkAutoClose();
     }
   }
 
@@ -815,6 +838,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
 
     this.updateTime(newTime);
     this.emitSelection(newTime);
+    this.checkAutoClose();
 
     // Scroll al elemento seleccionado con animación suave
     setTimeout(() => {
@@ -1007,6 +1031,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     this.emitSelection(finalTime);
 
     this.scheduleScroll();
+    this.checkAutoClose();
   }
 
   /**
@@ -1049,6 +1074,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
 
     // Volver a la pestaña del selector después de aplicar el preset
     this.activeTab.set('selector');
+    this.checkAutoClose();
   }
 
   // Método público para convertir TimeValue a Date
@@ -1390,6 +1416,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
     const current = this.selectedTime();
     if (current) {
       this.emitSelection(current);
+      this.checkAutoClose();
     }
   }
 
@@ -1428,6 +1455,16 @@ export class TimePickerComponent implements ControlValueAccessor, OnInit, AfterV
   private emitSelection(time: TimeValue | null): void {
     this.valueChange.emit(time);
     this.onTouched();
+  }
+
+  /**
+   * Emite `selectFinished` si `autoClose` está activo.
+   * Llamado al completar una selección en los diferentes flujos (hora, minuto, preset, ahora).
+   */
+  private checkAutoClose(): void {
+    if (this.autoClose()) {
+      this.selectFinished.emit();
+    }
   }
 
   /**

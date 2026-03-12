@@ -397,7 +397,7 @@ private getAvailability(date: Date): number {
         title: 'Month picker',
         code: `<nui-calendar
   type="month"
-  [closeOnSelect]="true"
+  [autoClose]="true"
   (valueChange)="onMonthSelected($event)"
 ></nui-calendar>`,
         language: 'html',
@@ -406,7 +406,7 @@ private getAvailability(date: Date): number {
         title: 'Year picker',
         code: `<nui-calendar
   type="year"
-  [closeOnSelect]="true"
+  [autoClose]="true"
   (valueChange)="onYearSelected($event)"
 ></nui-calendar>`,
         language: 'html',
@@ -589,6 +589,38 @@ export class MyComponent {
   getPriceForDate(date: Date): number {
     return this.priceMap.get(date.toDateString()) ?? 0;
   }
+}`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
+    id: 'overlay-integration',
+    title: 'components.calendar.overlay-integration.title',
+    description: 'components.calendar.overlay-integration.description',
+    note: {
+      type: 'info',
+      content: 'components.calendar.overlay-integration.note',
+    },
+    anchor: 'overlay-integration',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        code: `<nui-calendar
+  type="day"
+  [autoClose]="true"
+  [overlayMode]="true"
+  (selectFinished)="closeDatepicker()"
+  (valueChange)="onDateChange($event)"
+></nui-calendar>`,
+        language: 'html',
+      },
+      {
+        title: 'codeExamples.typescript',
+        code: `isOpen = signal<boolean>(false);
+
+closeDatepicker(): void {
+  this.isOpen.set(false);
 }`,
         language: 'typescript',
       },

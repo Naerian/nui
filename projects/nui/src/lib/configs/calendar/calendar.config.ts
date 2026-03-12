@@ -10,7 +10,6 @@ import { TimePickerModeEnum } from '../../components/time-picker/models/time-pic
  */
 export const DEFAULT_CALENDAR_CONFIG: CalendarGlobalConfig = {
   firstDayOfWeek: 1,
-  closeOnSelect: true,
   showTodayButton: true,
   showTimePicker: CalendarTimePickerModeEnum.NONE,
   timePickerMode: TimePickerModeEnum.HOUR_MINUTE_24,

@@ -55,6 +55,12 @@
     "description": "Intégration complète avec les formulaires réactifs Angular. Implémente ControlValueAccessor.",
     "note": "Utilisez <code>formControl</code> ou <code>formControlName</code> pour intégrer avec les formulaires Angular. Le composant gère la synchronisation, la validation et l'état automatiquement."
   },
+  "overlayIntegration": {
+    "title": "Intégration overlay",
+    "description": "Utilisez <code>autoClose</code> et <code>selectFinished</code> pour intégrer le TimePicker dans un datepicker ou un popover. Le output <code>selectFinished</code> est émis quand la sélection est terminée pour que l'hôte ferme l'overlay.",
+    "note": "L'input <code>overlayMode</code> active des comportements de focus supplémentaires conçus pour quand le composant est rendu dans un overlay : focus automatique sur la première colonne au montage.",
+    "eventLabel": "Nombre d'émissions de selectFinished"
+  },
   "customFooter": {
     "title": "Pied de page personnalisé",
     "description": "Projetez un <code>ng-template</code> avec la directive <strong>nuiTimePickerFooter</strong> pour remplacer le pied de page intégré par vos propres boutons d'action ou tout autre contenu.",
@@ -73,11 +79,18 @@
   "api": {
     "inputs": {
       "title": "Entrées",
-      "description": "Propriétés d'entrée pour configurer le comportement, l'apparence et les restrictions du sélecteur d'heure"
+      "description": "Propriétés d'entrée pour configurer le comportement, l'apparence et les restrictions du sélecteur d'heure",
+      "rows": {
+        "autoClose": "Si true, émet selectFinished à la fin de la sélection. Conçu pour une utilisation dans un datepicker ou un overlay.",
+        "overlayMode": "Si true, active les comportements spécifiques aux overlays : focus automatique sur la première colonne à l'ouverture."
+      }
     },
     "outputs": {
       "title": "Sorties",
-      "description": "Événements émis par le sélecteur d'heure quand l'utilisateur interagit avec lui"
+      "description": "Événements émis par le sélecteur d'heure quand l'utilisateur interagit avec lui",
+      "rows": {
+        "selectFinished": "Émet (void) quand l'utilisateur termine la sélection et que autoClose est true. L'overlay peut se fermer à la réception de cet événement."
+      }
     },
     "config": {
       "title": "TimePickerConfig",

@@ -55,6 +55,12 @@
     "description": "Full integration with Angular reactive forms. Implements ControlValueAccessor.",
     "note": "Use <code>formControl</code> or <code>formControlName</code> to integrate with Angular forms. The component handles synchronization, validation and state automatically."
   },
+  "overlayIntegration": {
+    "title": "Overlay integration",
+    "description": "Use <code>autoClose</code> and <code>selectFinished</code> to integrate the TimePicker inside a datepicker or popover. The <code>selectFinished</code> output is emitted when selection is complete so the host can close the overlay.",
+    "note": "The <code>overlayMode</code> input activates additional focus behaviors designed for when the component is rendered inside an overlay: automatically focuses the first column on mount.",
+    "eventLabel": "selectFinished emitted count"
+  },
   "customFooter": {
     "title": "Custom footer",
     "description": "Project an <code>ng-template</code> with the <strong>nuiTimePickerFooter</strong> directive to replace the built-in footer with your own action buttons, additional info or any content you need.",
@@ -73,11 +79,18 @@
   "api": {
     "inputs": {
       "title": "Inputs",
-      "description": "Input properties to configure the behavior, appearance and restrictions of the time picker"
+      "description": "Input properties to configure the behavior, appearance and restrictions of the time picker",
+      "rows": {
+        "autoClose": "If true, emits selectFinished when the selection is complete. Designed for use inside a datepicker or overlay.",
+        "overlayMode": "If true, activates overlay-specific behaviors: auto-focuses the first column when opened."
+      }
     },
     "outputs": {
       "title": "Outputs",
-      "description": "Events emitted by the time picker when the user interacts with it"
+      "description": "Events emitted by the time picker when the user interacts with it",
+      "rows": {
+        "selectFinished": "Emits (void) when the user completes the selection and autoClose is true. The overlay can close upon receiving this event."
+      }
     },
     "config": {
       "title": "TimePickerConfig",

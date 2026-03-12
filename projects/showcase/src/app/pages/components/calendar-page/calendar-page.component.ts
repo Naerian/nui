@@ -56,6 +56,7 @@ export class CalendarPageComponent extends BaseComponentPage {
         'reactive-forms',
         'custom-footer',
         'day-template',
+        'overlay-integration',
       ],
     },
     {
@@ -137,6 +138,20 @@ export class CalendarPageComponent extends BaseComponentPage {
 
   // Custom footer example
   footerAppliedRange = signal<string>('');
+
+  // Overlay integration example
+  calendarAutoCloseEventCount = signal<number>(0);
+  overlaySelectedDate = signal<Date | null>(null);
+
+  onCalendarSelectFinished(): void {
+    this.calendarAutoCloseEventCount.update(n => n + 1);
+  }
+
+  onCalendarOverlayDateChange(value: CalendarValue): void {
+    if (value.type === CalendarType.DAY && 'date' in value && value.date) {
+      this.overlaySelectedDate.set(value.date);
+    }
+  }
 
   // Enums para el template
   CalendarType = CalendarType;

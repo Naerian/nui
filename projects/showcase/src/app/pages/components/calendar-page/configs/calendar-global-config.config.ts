@@ -31,7 +31,6 @@ export const appConfig: ApplicationConfig = {
       config: {
         calendar: {
           firstDayOfWeek: 0,        // 0 = Sunday
-          closeOnSelect: false,
           showTodayButton: false,
           showTimePicker: '',
           timePickerMode: 'hour-minute-24',
@@ -65,12 +64,6 @@ export const appConfig: ApplicationConfig = {
           'FirstDayOfWeek',
           '<code class="neutral">1</code>',
           'components.calendar.globalConfig.defaults.rows.firstDayOfWeek',
-        ],
-        [
-          '<code>closeOnSelect</code>',
-          'boolean',
-          '<code class="neutral">true</code>',
-          'components.calendar.globalConfig.defaults.rows.closeOnSelect',
         ],
         [
           '<code>showTodayButton</code>',

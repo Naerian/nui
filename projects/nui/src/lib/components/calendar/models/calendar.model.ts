@@ -333,15 +333,6 @@ export interface CalendarGlobalConfig {
    */
   firstDayOfWeek?: FirstDayOfWeek;
 
-  /**
-   * Cerrar automáticamente el calendario tras seleccionar una fecha.
-   * Esto es especialmente útil para calendarios de selección única (DAY/WEEK).
-   * Para RANGE, normalmente se deja false para permitir seleccionar inicio y fin sin cerrar.
-   * Aquí se establece el default global, pero cada Calendar puede sobrescribirlo.
-   * Por defecto: true (para tipos DAY y WEEK), false (para RANGE)
-   */
-  closeOnSelect?: boolean;
-
   // ========================================================================
   // 2. COMPORTAMIENTO Y UX
   // ========================================================================

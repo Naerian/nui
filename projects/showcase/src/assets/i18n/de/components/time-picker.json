@@ -55,6 +55,12 @@
     "description": "Vollständige Integration mit Angular-Reaktivformularen. Implementiert ControlValueAccessor.",
     "note": "Verwenden Sie <code>formControl</code> oder <code>formControlName</code>, um die Integration mit Angular-Formularen herzustellen. Die Komponente übernimmt Synchronisierung, Validierung und Zustandsverwaltung automatisch."
   },
+  "overlayIntegration": {
+    "title": "Overlay- / Datepicker-Integration",
+    "description": "Verwenden Sie <code>autoClose</code> und <code>selectFinished</code>, um den TimePicker in einem Datepicker oder Popover zu integrieren. Das Output <code>selectFinished</code> wird beim Abschluss der Auswahl emittiert, damit der Host das Overlay schließen kann.",
+    "note": "Der Input <code>overlayMode</code> aktiviert zusätzliche Fokusverhalten für die Verwendung innerhalb eines Overlays: Automatischer Fokus auf die erste Spalte beim Einbinden.",
+    "eventLabel": "selectFinished-Emissions-Anzahl"
+  },
   "customFooter": {
     "title": "Benutzerdefinierte Fußzeile",
     "description": "Projizieren Sie ein <code>ng-template</code> mit der Direktive <strong>nuiTimePickerFooter</strong>, um die integrierte Fußzeile durch eigene Aktionsschaltflächen oder beliebige Inhalte zu ersetzen.",
@@ -73,11 +79,18 @@
   "api": {
     "inputs": {
       "title": "Eingaben",
-      "description": "Eingabeeigenschaften zur Konfiguration von Verhalten, Erscheinungsbild und Einschränkungen der Zeitauswahl"
+      "description": "Eingabeeigenschaften zur Konfiguration von Verhalten, Erscheinungsbild und Einschränkungen der Zeitauswahl",
+      "rows": {
+        "autoClose": "Wenn true, wird selectFinished beim Abschluss der Auswahl emittiert. Für die Verwendung innerhalb eines Datepickers oder Overlays konzipiert.",
+        "overlayMode": "Wenn true, aktiviert overlay-spezifische Verhaltensweisen: Automatischer Fokus auf die erste Spalte beim Öffnen."
+      }
     },
     "outputs": {
       "title": "Ausgaben",
-      "description": "Ereignisse, die von der Zeitauswahl bei Benutzerinteraktion ausgegeben werden"
+      "description": "Ereignisse, die von der Zeitauswahl bei Benutzerinteraktion ausgegeben werden",
+      "rows": {
+        "selectFinished": "Emittiert (void), wenn der Benutzer die Auswahl abschließt und autoClose true ist. Das Overlay kann bei Erhalt dieses Ereignisses geschlossen werden."
+      }
     },
     "config": {
       "title": "TimePickerConfig",

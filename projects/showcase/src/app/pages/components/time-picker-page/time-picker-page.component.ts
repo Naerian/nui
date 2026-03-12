@@ -52,6 +52,7 @@ export class TimePickerPageComponent extends BaseComponentPage {
         'custom-item',
         'disabled',
         'reactive-forms',
+        'overlay-integration',
       ],
     },
     {
@@ -152,6 +153,13 @@ export class TimePickerPageComponent extends BaseComponentPage {
 
   // Reactive forms example
   timeControl = new FormControl<TimeValue | null>(null);
+
+  // Overlay integration example
+  autoCloseEventCount = signal<number>(0);
+
+  onSelectFinished(): void {
+    this.autoCloseEventCount.update(n => n + 1);
+  }
 
   // Event handlers
   onTimeChange(time: TimeValue | null): void {
