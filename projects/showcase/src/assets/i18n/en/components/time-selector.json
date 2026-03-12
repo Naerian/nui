@@ -370,8 +370,8 @@
       "title": "Configurable properties",
       "description": "The following properties can be configured globally via <code>TimeSelectorGlobalConfig</code>:",
       "rows": {
-        "showHeader": "Whether to display the header showing the formatted time at the top of the picker.",
-        "showFooter": "Whether to display the built-in footer with the 'Clear' and 'Now' buttons.",
+        "showHeader": "Whether to display the header showing the formatted time at the top of the picker. Supports customization via <code>nuiTimeSelectorHeader</code>.",
+        "showFooter": "Whether to display the built-in footer with the 'Clear' and 'Now' buttons. Supports customization via <code>nuiTimeSelectorFooter</code>.",
         "defaultStrategy": "Initial value strategy: <code>empty</code> (no value), <code>now</code> (current time), <code>smart</code> (current time + offset) or <code>custom</code>.",
         "smartOffset": "Offset in minutes added to the current time when strategy is <code>smart</code>.",
         "hourStep": "Increment for the hour selector. For example, <code>2</code> shows only even hours.",

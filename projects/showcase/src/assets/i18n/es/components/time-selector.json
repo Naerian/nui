@@ -366,8 +366,8 @@
       "title": "Propiedades configurables",
       "description": "Las siguientes propiedades pueden configurarse globalmente a través de <code>TimeSelectorGlobalConfig</code>:",
       "rows": {
-        "showHeader": "Si se muestra la cabecera con el tiempo formateado en la parte superior del selector.",
-        "showFooter": "Si se muestra el footer built-in con los botones 'Limpiar' y 'Ahora'.",
+        "showHeader": "Si se muestra la cabecera con el tiempo formateado en la parte superior del selector. Admite personalización mediante <code>nuiTimeSelectorHeader</code>.",
+        "showFooter": "Si se muestra el footer built-in con los botones 'Limpiar' y 'Ahora'. Admite personalización mediante <code>nuiTimeSelectorFooter</code>.",
         "defaultStrategy": "Estrategia de valor inicial: <code>empty</code> (sin valor), <code>now</code> (hora actual), <code>smart</code> (hora actual + offset) o <code>custom</code>.",
         "smartOffset": "Offset en minutos añadido a la hora actual cuando la estrategia es <code>smart</code>.",
         "hourStep": "Incremento para el selector de horas. Por ejemplo, <code>2</code> muestra solo horas pares.",
