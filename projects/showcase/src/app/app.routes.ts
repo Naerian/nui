@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+﻿import { Routes } from '@angular/router';
 
 /**
  * Configuración de rutas de la aplicación Showcase
@@ -198,10 +198,10 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'time-picker',
+        path: 'time-selector',
         loadComponent: () =>
-          import('./pages/components/time-picker-page/time-picker-page.component').then(
-            m => m.TimePickerPageComponent
+          import('./pages/components/time-selector-page/time-selector-page.component').then(
+            m => m.TimeSelectorPageComponent
           ),
       },
       {

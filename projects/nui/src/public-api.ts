@@ -1,4 +1,4 @@
-// Config
+﻿// Config
 export * from './lib/configs';
 
 // Translations
@@ -22,6 +22,6 @@ export * from './lib/components/tooltip';
 export * from './lib/components/action-menu';
 export * from './lib/components/avatar';
 export * from './lib/components/sidebar-panel';
-export * from './lib/components/time-picker';
+export * from './lib/components/time-selector';
 export * from './lib/components/progress-bar';
 export * from './lib/components/split-button';

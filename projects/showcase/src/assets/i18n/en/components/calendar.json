@@ -1,4 +1,4 @@
-{
+﻿{
   "title": "Calendar",
   "subtitle": "Component for selecting dates with multiple modes (day, week, range), sizes and width strategies",
   "basic": {
@@ -30,10 +30,10 @@
     "description": "Add preset buttons for frequent ranges like 'Last week', 'Last month', 'Last year'. Supports Remix Icon icons.",
     "note": "This feature is only available when <code>type='RANGE'</code>. Provide an array of <code>DateRangePreset</code> objects in <code>customPresets</code>. Each preset has a <code>label</code>, <code>range</code> (with start/end) and an optional <code>icon</code>."
   },
-  "time-picker": {
+  "time-selector": {
     "title": "Time Picker integration",
     "description": "Combines date selection with time selection. Supports start time, end time or both depending on the calendar type.",
-    "note": "Use <code>showTimePicker='true'</code> and configure <code>timePickerMode</code> with <code>'start'</code>, <code>'end'</code> or <code>'both'</code>. You can customize the time picker with <code>timePickerConfig</code> (steps, range, presets, etc.)."
+    "note": "Use <code>showTimeSelector='true'</code> and configure <code>timeSelectorMode</code> with <code>'start'</code>, <code>'end'</code> or <code>'both'</code>. You can customize the time picker with <code>timeSelectorConfig</code> (steps, range, presets, etc.)."
   },
   "disabled-dates": {
     "title": "Disabled dates",
@@ -111,9 +111,9 @@
         "showPresets": { "description": "Shows presets panel (only for RANGE type)" },
         "customPresets": { "description": "Custom date range presets" },
         "firstDayOfWeek": { "description": "0=Sunday, 1=Monday (first day of the week)" },
-        "showTimePicker": { "description": "Shows time selector: 'both' | 'default' | 'none'" },
-        "timePickerMode": { "description": "Integrated time picker display mode" },
-        "timePickerConfig": { "description": "Time picker configuration (steps, ranges, etc.)" },
+        "showTimeSelector": { "description": "Shows time selector: 'both' | 'default' | 'none'" },
+        "timeSelectorMode": { "description": "Integrated time picker display mode" },
+        "timeSelectorConfig": { "description": "Time picker configuration (steps, ranges, etc.)" },
         "startTime": { "description": "Initial start time" },
         "endTime": { "description": "Initial end time" },
         "dateStatusFn": { "description": "Function that assigns visual states to dates ('success', 'warning', 'danger', 'info')" },
@@ -531,9 +531,9 @@
       "rows": {
         "firstDayOfWeek": "First day of the week. 0 = Sunday, 1 = Monday, etc.",
         "showTodayButton": "Whether to display the 'Today' shortcut button.",
-        "showTimePicker": "Time picker display mode: <code>none</code>, <code>inline</code> or <code>popover</code>.",
-        "timePickerMode": "Time picker precision mode (12/24 hours, with or without seconds).",
-        "timePickerConfig": "Advanced configuration object for the time picker.",
+        "showTimeSelector": "Time picker display mode: <code>none</code>, <code>inline</code> or <code>popover</code>.",
+        "timeSelectorMode": "Time picker precision mode (12/24 hours, with or without seconds).",
+        "timeSelectorConfig": "Advanced configuration object for the time picker.",
         "customPresets": "List of custom date presets shown as shortcuts.",
         "defaultDate": "Default date displayed when no value is selected.",
         "startTime": "Default start time for range selections with time.",

@@ -1,0 +1,386 @@
+﻿{
+  "title": "Zeitauswahl",
+  "subtitle": "Komponente zur Zeitauswahl mit mehreren Modi, Größen und erweiterten Konfigurationen",
+  "basic": {
+    "title": "Grundlegende Verwendung",
+    "description": "Einfache Zeitauswahl mit Standardkonfiguration. Stunden und Minuten im 24-Stunden-Format auswählen."
+  },
+  "modes": {
+    "title": "Zeitmodi",
+    "description": "Fünf verfügbare Modi: nur Stunden (12h/24h), Stunden und Minuten (12h/24h) und Dauermodus.",
+    "note": "Verwenden Sie <code>mode</code> mit den Werten: <code>'HOUR_12'</code>, <code>'HOUR_24'</code>, <code>'HOUR_MINUTE_12'</code> und <code>'HOUR_MINUTE_24'</code>."
+  },
+  "sizes": {
+    "title": "Größen",
+    "description": "Fünf Größenoptionen, die die Komponente und ihre internen Elemente proportional skalieren.",
+    "note": "Größen beeinflussen Höhe, Innenabstand und Schriftgröße. Verwenden Sie <code>size</code> mit den Werten <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> und <code>'xl'</code>."
+  },
+  "presets": {
+    "title": "Schnellvoreinstellungen",
+    "description": "Fügen Sie Voreinstellungsschaltflächen für häufige Zeiten hinzu, z. B. 'Jetzt', 'Frühstück', 'Mittagessen'. Können benutzerdefinierte Symbole enthalten.",
+    "note": "Geben Sie ein Array von <code>TimePreset</code>-Objekten in der <code>config</code> an. Jede Voreinstellung hat ein <code>label</code>, eine <code>time</code> und ein optionales <code>icon</code>. Remix-Icon-Icons werden unterstützt."
+  },
+  "steps": {
+    "title": "Stunden- und Minutenschritte",
+    "description": "Steuern Sie die Schrittweiten für Stunden und Minuten, um die auswählbaren Optionen einzuschränken.",
+    "note": "Verwenden Sie <code>hourStep</code> und <code>minuteStep</code> in der <code>config</code>. Beispielsweise zeigt <code>hourStep: 2</code> nur gerade Stunden und <code>minuteStep: 15</code> Viertelstunden (00, 15, 30, 45)."
+  },
+  "timeRange": {
+    "title": "Zeitbereich",
+    "description": "Schränkt den auswählbaren Zeitbereich durch Minimum- und Maximumwerte ein. Optional wird ein visueller Indikator angezeigt.",
+    "note": "Konfigurieren Sie <code>minTime</code> und <code>maxTime</code> in der <code>config</code>. Zeiten außerhalb dieses Bereichs sind deaktiviert. Verwenden Sie <code>showRangeIndicator: true</code>, um den gültigen Bereich visuell hervorzuheben."
+  },
+  "disabledTimes": {
+    "title": "Deaktivierte Zeiten",
+    "description": "Sperrt bestimmte Stunden oder Minuten und verhindert deren Auswahl. Nützlich für nicht verfügbare Zeitfenster.",
+    "note": "Verwenden Sie <code>disabledHours</code> und <code>disabledMinutes</code> in der <code>config</code>, um Arrays mit deaktivierten Werten anzugeben. Deaktivierte Elemente werden abgeblendet dargestellt."
+  },
+  "durationMode": {
+    "title": "Dauermodus",
+    "description": "Spezieller Modus zur Auswahl von Zeitintervallen. Kann Sekunden anzeigen und eine maximale Dauer festlegen.",
+    "note": "Setzen Sie <code>mode='DURATION'</code> und konfigurieren Sie <code>duration: { maxHours: 8, showSeconds: true }</code> in der <code>config</code>. Nützlich für Schichtauswahl, Zeiterfassung usw."
+  },
+  "defaultStrategies": {
+    "title": "Standardstrategien",
+    "description": "Steuert die Anfangszeit, wenn kein Wert vorhanden ist: jetzt, smart (aktuell + Versatz), leer oder benutzerdefiniert.",
+    "note": "Verwenden Sie <code>defaultStrategy</code> mit den Werten <code>'now'</code>, <code>'smart'</code>, <code>'empty'</code> oder <code>'custom'</code>. Für 'smart' konfigurieren Sie <code>smartOffset</code> in Minuten. Für 'custom' verwenden Sie <code>defaultValue</code>."
+  },
+  "disabled": {
+    "title": "Deaktivierter Zustand",
+    "description": "Deaktiviert die gesamte Zeitauswahl, verhindert Benutzerinteraktion und zeigt ein abgeblendetes Erscheinungsbild.",
+    "note": "Verwenden Sie die Eigenschaft <code>disabled</code>, um dynamisch zu steuern, ob die Zeitauswahl aktiviert oder deaktiviert ist."
+  },
+  "reactiveForms": {
+    "title": "Reaktive Formulare",
+    "description": "Vollständige Integration mit Angular-Reaktivformularen. Implementiert ControlValueAccessor.",
+    "note": "Verwenden Sie <code>formControl</code> oder <code>formControlName</code>, um die Integration mit Angular-Formularen herzustellen. Die Komponente übernimmt Synchronisierung, Validierung und Zustandsverwaltung automatisch."
+  },
+  "overlayIntegration": {
+    "title": "Overlay- / Datepicker-Integration",
+    "description": "Verwenden Sie <code>autoClose</code> und <code>selectFinished</code>, um den TimeSelector in einem Datepicker oder Popover zu integrieren. Das Output <code>selectFinished</code> wird beim Abschluss der Auswahl emittiert, damit der Host das Overlay schließen kann.",
+    "note": "Der Input <code>overlayMode</code> aktiviert zusätzliche Fokusverhalten für die Verwendung innerhalb eines Overlays: Automatischer Fokus auf die erste Spalte beim Einbinden.",
+    "eventLabel": "selectFinished-Emissions-Anzahl"
+  },
+  "customFooter": {
+    "title": "Benutzerdefinierte Fußzeile",
+    "description": "Projizieren Sie ein <code>ng-template</code> mit der Direktive <strong>nuiTimeSelectorFooter</strong>, um die integrierte Fußzeile durch eigene Aktionsschaltflächen oder beliebige Inhalte zu ersetzen.",
+    "note": "Das benutzerdefinierte Template <strong>ersetzt</strong> die integrierte Fußzeile ('Löschen'- und 'Jetzt'-Schaltflächen). Der typisierte Kontext <code>TimeSelectorFooterContext</code> stellt <code>$implicit</code> (aktueller Wert), <code>actions</code> mit den Methoden <code>clear()</code> und <code>setToNow()</code>, <code>normalization</code> und <code>range</code> bereit."
+  },
+  "customHeader": {
+    "title": "Benutzerdefinierte Kopfzeile",
+    "description": "Projizieren Sie ein <code>ng-template</code> mit der Direktive <strong>nuiTimeSelectorHeader</strong>, um die visuelle Anzeige der Kopfzeile durch eigene Inhalte zu ersetzen: formatierten Wert, Bereichsindikator, Normalisierungswarnung oder beliebige Elemente.",
+    "note": "Das benutzerdefinierte Template ersetzt nur den <strong>visuellen Inhalt</strong> der Kopfzeile. Barrierefrei-Live-Regionen (<code>aria-live</code>) bleiben unabhängig vom Template aktiv und stellen sicher, dass Bildschirmleser weiterhin Änderungen ankkündigen. Der typisierte Kontext <code>TimeSelectorHeaderContext</code> stellt <code>$implicit</code> (aktueller Wert), <code>formattedTime</code> (lesbarer Text), <code>mode</code>, <code>is12h</code>, <code>normalization</code> und <code>range</code> bereit."
+  },
+  "customItem": {
+    "title": "Benutzerdefiniertes Element",
+    "description": "Projizieren Sie ein <code>ng-template</code> mit der Direktive <strong>nuiTimeSelectorItem</strong>, um den visuellen Inhalt jeder Option in den Stunden-, Minuten- und Sekundenspalten anzupassen.",
+    "note": "Die Direktive ersetzt nur den <strong>visuellen Inhalt</strong> der Element-Schaltfläche. Die Komponente verwaltet weiterhin alle ARIA-Attribute (<code>role='option'</code>, <code>aria-selected</code>), Tastaturnavigation und Auswahlereignisse. Der Kontext umfasst den Wert als <code>$implicit</code>, den Spaltentyp <code>type</code> sowie die Zustände <code>selected</code> und <code>disabled</code>."
+  },
+  "api": {
+    "inputs": {
+      "title": "Eingaben",
+      "description": "Eingabeeigenschaften zur Konfiguration von Verhalten, Erscheinungsbild und Einschränkungen der Zeitauswahl",
+      "rows": {
+        "autoClose": "Wenn true, wird selectFinished beim Abschluss der Auswahl emittiert. Für die Verwendung innerhalb eines Datepickers oder Overlays konzipiert.",
+        "overlayMode": "Wenn true, aktiviert overlay-spezifische Verhaltensweisen: Automatischer Fokus auf die erste Spalte beim Öffnen."
+      }
+    },
+    "outputs": {
+      "title": "Ausgaben",
+      "description": "Ereignisse, die von der Zeitauswahl bei Benutzerinteraktion ausgegeben werden",
+      "rows": {
+        "selectFinished": "Emittiert (void), wenn der Benutzer die Auswahl abschließt und autoClose true ist. Das Overlay kann bei Erhalt dieses Ereignisses geschlossen werden."
+      }
+    },
+    "config": {
+      "title": "TimeSelectorConfig",
+      "description": "Konfigurationsinterface mit allen verfügbaren Optionen: Schritte, Bereiche, deaktivierte Zeiten, Voreinstellungen und Dauerkonfiguration"
+    },
+    "durationConfig": {
+      "title": "DurationConfig",
+      "description": "Spezifische Konfiguration für den DURATION-Modus: Stundenlimits, Sekunden anzeigen, Schritte und Dauerschnellvoreinstellungen"
+    },
+    "models": {
+      "title": "Typdefinitionen",
+      "description": "Interfaces und Typdefinitionen für Werte, Konfiguration und Voreinstellungen"
+    },
+    "methods": {
+      "title": "Methoden",
+      "description": "Die Komponente implementiert ControlValueAccessor für eine nahtlose Integration mit Angular-Formularen"
+    },
+    "contentDirectives": {
+      "title": "Inhaltsdirektiven",
+      "description": "Marker-Direktiven, die das Projizieren benutzerdefinierter Templates für Elemente, die Fußzeile und die Kopfzeile der Zeitauswahl ermöglichen"
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Farben",
+      "description": "CSS-Farbvariablen, die vom ThemeService für jede semantische Farbe generiert werden. Jede Farbe erzeugt 9 spezifische Variablen für verschiedene Zeitauswahl-Zustände: Element-Hintergründe (normal, Hover, ausgewählt), Textfarben, deaktivierte Zustände, Akzente und Fokusring."
+    },
+    "sizes": {
+      "title": "Größen",
+      "description": "Größenspezifische CSS-Variablen zur Steuerung von Elementhöhen, Innenabständen und Containerabmessungen. Fünf Größenvarianten verfügbar: xs, sm, md (Standard), lg und xl."
+    },
+    "structure": {
+      "title": "Struktur",
+      "description": "Strukturelle CSS-Variablen zur Steuerung von Abmessungen, Abständen, Typografie und visuellem Erscheinungsbild. Enthält Trennzeichenstil, Scrollleisten-Anpassung, Rahmen, Schriftarten und Fokuszustände."
+    },
+    "customization": {
+      "title": "Anpassung",
+      "description": "Beispiele zur Anpassung der Zeitauswahl-Stile in Ihrer Anwendung. CSS-Variablen können global oder für einzelne Instanzen überschrieben werden. Die Integration mit ThemeService ermöglicht die Generierung von Farbvariablen für benutzerdefinierte semantische Farben."
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Zeitauswahl-Token",
+      "description": "Token für Labels der Zeitauswahl, Aktionsschaltflächen und Screenreader-Texte.",
+      "note": "Überschreiben Sie beliebige Token global mit <code>provideNuiI18n({ timeSelector: { ... } })</code>.",
+      "rows": {
+        "setToCurrentTime": {
+          "description": "Label für die Aktionsschaltfläche 'Aktuelle Zeit einstellen'."
+        },
+        "selectTime": {
+          "description": "Platzhalter-Label, wenn keine Zeit ausgewählt ist."
+        },
+        "clear": {
+          "description": "Label für die Aktion zum Löschen/Zurücksetzen der Zeit."
+        },
+        "hour": {
+          "description": "Kopfzeilen-Label für die Stunden-Spalte (Langform)."
+        },
+        "minutes": {
+          "description": "Kopfzeilen-Label für die Minuten-Spalte (Langform)."
+        },
+        "hour12": {
+          "description": "Label, wenn die Zeitauswahl im 12-Stunden-Modus ist."
+        },
+        "hour24": {
+          "description": "Label, wenn die Zeitauswahl im 24-Stunden-Modus ist."
+        },
+        "period": {
+          "description": "Label für die AM/PM-Spalte."
+        },
+        "normalizedTime": {
+          "description": "Screenreader-Ankündigungsvorlage für den normalisierten Zeitwert."
+        },
+        "rangeLabel": {
+          "description": "Barrierefreies Label zur Beschreibung einer Zeitbereichsauswahl."
+        },
+        "timeSelected": {
+          "description": "Screenreader-Ankündigung, wenn eine Zeit erfolgreich ausgewählt wurde."
+        }
+      }
+    },
+    "durationAndPresets": {
+      "title": "Dauer- und Voreinstellungs-Token",
+      "description": "Spezifische Token für Labels im Dauermodus, Spaltenüberschriften und Voreinstellungsnamen.",
+      "note": "Dauer-Token befinden sich unter dem Namespace <code>timeSelector.duration</code> und Voreinstellungs-Token unter <code>timeSelector.presets</code>.",
+      "rows": {
+        "hours": {
+          "description": "Langform von 'Stunden' in der Daueranzeige."
+        },
+        "minutes": {
+          "description": "Langform von 'Minuten' in der Daueranzeige."
+        },
+        "seconds": {
+          "description": "Langform von 'Sekunden' in der Daueranzeige."
+        },
+        "hoursShort": {
+          "description": "Kurzabkürzung für Stunden (z. B. 'Std.')."
+        },
+        "minutesShort": {
+          "description": "Kurzabkürzung für Minuten (z. B. 'Min.')."
+        },
+        "secondsShort": {
+          "description": "Kurzabkürzung für Sekunden (z. B. 's')."
+        },
+        "selectDuration": {
+          "description": "Platzhalter-Label im Dauerauswahlmodus."
+        },
+        "durationSelected": {
+          "description": "Screenreader-Ankündigung, wenn eine Dauer ausgewählt wurde."
+        },
+        "durationHours": {
+          "description": "Screenreader-Ankündigung für den Stundenwert im Dauermodus."
+        },
+        "durationMinutes": {
+          "description": "Screenreader-Ankündigung für den Minutenwert im Dauermodus."
+        },
+        "durationSeconds": {
+          "description": "Screenreader-Ankündigung für den Sekundenwert im Dauermodus."
+        },
+        "tabSelector": {
+          "description": "Label für den manuellen Auswahl-Tab, wenn beide Tabs sichtbar sind."
+        },
+        "tabPresets": {
+          "description": "Label für den Voreinstellungs-Tab, wenn beide Tabs sichtbar sind."
+        },
+        "presetsNow": {
+          "description": "Label für die 'Jetzt'-Voreinstellung."
+        },
+        "presetsNoon": {
+          "description": "Label für die 'Mittag'-Voreinstellung (12:00)."
+        },
+        "presetsMidnight": {
+          "description": "Label für die 'Mitternacht'-Voreinstellung (00:00)."
+        },
+        "presetsMinutes": {
+          "description": "Label-Vorlage für minutenbasierte Voreinstellungen (z. B. '15 Minuten')."
+        },
+        "presetsHour": {
+          "description": "Label für die Einstunden-Voreinstellung."
+        },
+        "presetsHours": {
+          "description": "Label-Vorlage für mehrstündige Voreinstellungen (z. B. '2 Stunden')."
+        }
+      }
+    },
+    "a11yTokens": {
+      "title": "Barrierefreiheits-Token",
+      "description": "Token, die ausschließlich für Screenreader-Ankündigungen und ARIA-Labels innerhalb der Zeitauswahl verwendet werden.",
+      "note": "Diese Token sind unter <code>timeSelector.a11y</code> verschachtelt.",
+      "rows": {
+        "timeSelectorLabel": {
+          "description": "Das <code>aria-label</code> für den Zeitauswahl-Wurzelcontainer im Standardmodus."
+        },
+        "durationPickerLabel": {
+          "description": "Das <code>aria-label</code> für den Wurzelcontainer im Dauermodus."
+        },
+        "hourColumnHelp": {
+          "description": "Hilfstext, der vom Screenreader für die Stunden-Spalte angekündigt wird."
+        },
+        "minuteColumnHelp": {
+          "description": "Hilfstext für die Minuten-Spalte."
+        },
+        "periodHelp": {
+          "description": "Hilfstext für die AM/PM-Spalte."
+        },
+        "normalizedAlert": {
+          "description": "Text, der über eine assertive Live-Region angekündigt wird, wenn die ausgewählte Zeit auf den nächsten gültigen Wert normalisiert wird."
+        },
+        "rangeInfo": {
+          "description": "Screenreader-Text zur Beschreibung der Zeitbereichsgrenzen."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA-Rollen und Attribute",
+      "description": "Der TimeSelector implementiert das ARIA <code>listbox</code>/<code>option</code>-Muster für jede scrollbare Spalte.",
+      "rows": {
+        "containerLabel": {
+          "description": "Das Wurzelelement der Zeitauswahl hat <code>aria-label</code>, das aus dem i18n-Token <code>timeSelectorLabel</code> (oder <code>durationPickerLabel</code>) gesetzt wird."
+        },
+        "columnRole": {
+          "description": "Jede Spalte hat <code>role=\"listbox\"</code> und ein <code>aria-label</code>, das aus dem spezifischen i18n-Token (Stunden, Minuten, Periode…) abgeleitet wird."
+        },
+        "optionRole": {
+          "description": "Jeder Zeitwert hat <code>role=\"option\"</code> und <code>aria-selected=\"true\"</code>, wenn er der aktive Wert ist."
+        },
+        "columnLabels": {
+          "description": "Spalten-Hilfstext-Token werden angekündigt, wenn die Spalte den Fokus erhält, und zeigen an, wie interagiert werden kann (Pfeiltasten, Pos1/Ende)."
+        },
+        "optionSelected": {
+          "description": "Wenn eine Zeit ausgewählt wird, wird sie über das i18n-Token <code>timeSelected</code> angekündigt, das die ausgewählte Zeit enthält (z. B. 'Ausgewählte Zeit: 3:15 PM')."
+        },
+        "normalizedAlert": {
+          "description": "Wenn die Zeit normalisiert wird, wird sie über das i18n-Token <code>normalizedTime</code> angekündigt, das die normalisierte Zeit enthält (z. B. 'Zeit normalisiert auf 4:00 PM')."
+        }
+      }
+    },
+    "naming": {
+      "title": "Barrierefreier Name",
+      "description": "Die Zeitauswahl und jede Spalte sind über i18n-Token beschriftet. Einzelne Optionen sind durch ihren sichtbaren Zeitwert beschriftet.",
+      "note": "Konfigurieren Sie immer i18n-Token für Ihre Sprache, damit Screenreader-Benutzer aussagekräftige Spaltenbeschriftungen hören (z. B. 'Stunde', 'Minuten', 'AM/PM').",
+      "info": {
+        "containerLabel": "Token timeSelectorLabel / durationPickerLabel",
+        "columnLabels": "Token hour / minutes / period",
+        "helpTokens": "Token hourColumnHelp / minuteColumnHelp / periodHelp"
+      },
+      "rows": {
+        "container": {
+          "description": "Das Wurzelcontainer-Label stammt aus <code>timeSelector.a11y.timeSelectorLabel</code> (oder <code>durationPickerLabel</code>). Für jede Sprache überschreiben."
+        },
+        "columns": {
+          "description": "Jedes Spalten-Label stammt aus dem entsprechenden i18n-Token und gibt Screenreader-Benutzern Kontext für jede scrollbare Region."
+        },
+        "help": {
+          "description": "Spalten-Hilfstexte werden angekündigt, wenn die Spalte den Fokus erhält, und zeigen an, wie interagiert werden kann (Pfeiltasten, Pos1/Ende)."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Tastaturinteraktion",
+      "description": "Jede Zeitauswahl-Spalte verhält sich als eigenständige Listbox. Verwenden Sie die folgenden Tasten zur Navigation und Auswahl von Werten.",
+      "rows": {
+        "arrows": {
+          "description": "Bewegt den Fokus zur vorherigen/nächsten Option in der fokussierten Spalte."
+        },
+        "tab": {
+          "description": "Bewegt den Fokus zur nächsten interaktiven Spalte oder Steuerung (z. B. Periode-Umschalter, Aktionsschaltflächen)."
+        },
+        "homeEnd": {
+          "description": "Springt zur ersten/letzten Option in der fokussierten Spalte."
+        },
+        "enterSpace": {
+          "description": "Wählt die fokussierte Option aus und aktualisiert die angezeigte Zeit."
+        },
+        "escape": {
+          "description": "Schließt die Zeitauswahl und setzt auf den zuvor bestätigten Wert zurück."
+        }
+      }
+    },
+    "templates": {
+      "title": "Benutzerdefinierte Templates und Barrierefreiheit",
+      "description": "Bei der Verwendung von <code>nuiTimeSelectorItem</code>, <code>nuiTimeSelectorFooter</code> oder <code>nuiTimeSelectorHeader</code> behält die Komponente ihre Barrierefreiheits-Infrastruktur. Befolgen Sie diese Richtlinien für eine barrierefreie Erfahrung.",
+      "note": "Entfernen Sie niemals sichtbaren Text aus Elementen bei der Anpassung. Bildschirmleser kündigen Schaltflächenwerte über ihren Textinhalt an. Wenn Sie nur Symbole oder Farben verwenden, fügen Sie immer ein <code>span</code> mit <code>class='sr-only'</code> mit dem lesbaren Wert hinzu.",
+      "rows": {
+        "buttonWrapper": {
+          "info": "Von NUI verwalteter Wrapper",
+          "description": "Das äußere <code>button</code>-Element (mit <code>role='option'</code>, <code>aria-selected</code> und Tastaturverwaltung) wird <strong>nicht geändert</strong>. Nur der innere Inhalt wird ersetzt."
+        },
+        "visibleText": {
+          "info": "Erforderlicher sichtbarer Text",
+          "description": "Nehmen Sie immer den lesbaren Wert (<code>{{ value }}</code>) in das Template auf. Wenn das Design ihn visuell verbirgt, verwenden Sie <code>&lt;span class='sr-only'&gt;{{ value }}&lt;/span&gt;</code>."
+        },
+        "footerButtons": {
+          "info": "Barrierefreiheit der Fußzeilen-Schaltflächen",
+          "description": "Schaltflächen in der benutzerdefinierten Fußzeile müssen <code>type='button'</code> und beschreibenden Text oder <code>aria-label</code> enthalten. Vermeiden Sie reine Symbol-Schaltflächen ohne Beschriftung."
+        },
+        "headerLiveRegions": {
+          "info": "Live-Regionen der Kopfzeile erhalten",
+          "description": "Bei der Verwendung von <code>nuiTimeSelectorHeader</code> verbleiben die Live-Regionen (<code>aria-live='polite'</code> für den aktuellen Wert und <code>aria-live='assertive'</code> für die Normalisierungswarnung) im DOM, auch wenn das Template die visuelle Anzeige ersetzt. Es ist nicht nötig, sie manuell im benutzerdefinierten Template hinzuzufügen."
+        },
+        "colorOnly": {
+          "info": "Verwenden Sie nicht nur Farbe, um Zustände zu vermitteln",
+          "description": "Wenn der <code>selected</code>-Zustand nur durch Farbe angezeigt wird, können Nutzer mit eingeschränkter Sehkraft oder Farbenblindheit ihn nicht erkennen. Kombinieren Sie immer Farbe mit einer typografischen Änderung oder einem Symbol."
+        }
+      }
+    }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Globale Konfiguration",
+      "description": "Die TimeSelector-Komponente unterstützt globale Konfiguration über <code>provideNUI()</code>. Definieren Sie Standardwerte einmal auf Anwendungsebene für alle Zeitauswahl-Komponenten.",
+      "note": "Die globale Konfiguration wirkt als Standardwerte und kann jederzeit pro Instanz über die Inputs der Komponente überschrieben werden."
+    },
+    "defaults": {
+      "title": "Konfigurierbare Eigenschaften",
+      "description": "Die folgenden Eigenschaften können global über <code>TimeSelectorGlobalConfig</code> konfiguriert werden:",
+      "rows": {
+        "showHeader": "Ob die Kopfzeile mit der formatierten Zeit oben im Selektor angezeigt wird.",
+        "defaultStrategy": "Anfangswert-Strategie: <code>empty</code> (kein Wert), <code>now</code> (aktuelle Zeit), <code>smart</code> (aktuelle Zeit + Offset) oder <code>custom</code>.",
+        "smartOffset": "Offset in Minuten, der zur aktuellen Zeit addiert wird, wenn die Strategie <code>smart</code> ist.",
+        "hourStep": "Schrittweite für die Stundenauswahl. Zum Beispiel zeigt <code>2</code> nur gerade Stunden.",
+        "minuteStep": "Schrittweite für die Minutenauswahl. Zum Beispiel zeigt <code>15</code> Viertelstunden."
+      }
+    },
+    "priority": {
+      "title": "Auflösungspriorität",
+      "description": "NUI löst Konfigurationswerte nach folgender Prioritätskette auf (höchste Priorität gewinnt):",
+      "note": "<strong>Komponenten-Input</strong> → <strong>Globale Konfiguration (<code>provideNUI</code>)</strong> → <strong>Standardwert</strong>"
+    }
+  }
+}

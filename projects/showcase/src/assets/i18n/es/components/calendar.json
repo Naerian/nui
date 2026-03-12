@@ -1,4 +1,4 @@
-{
+﻿{
   "title": "Calendario",
   "subtitle": "Componente para seleccionar fechas con múltiples modos (día, semana, rango), tamaños y width strategies",
   "basic": {
@@ -30,10 +30,10 @@
     "description": "Agrega botones de preset para rangos frecuentes como 'Última semana', 'Último mes', 'Último año'. Permite incluir iconos Remix Icon.",
     "note": "Esta característica solo está disponible cuando <code>type='RANGE'</code>. Proporciona un array de objetos <code>DateRangePreset</code> en <code>customPresets</code>. Cada preset tiene un <code>label</code>, <code>range</code> (con start/end) e <code>icon</code> opcional."
   },
-  "time-picker": {
+  "time-selector": {
     "title": "Integración con Time Picker",
     "description": "Combina selección de fecha con selección de hora. Soporta hora de inicio, hora de fin o ambas según el tipo de calendario.",
-    "note": "Usa <code>showTimePicker='true'</code> y configura <code>timePickerMode</code> con <code>'start'</code>, <code>'end'</code> o <code>'both'</code>. Puedes personalizar el time picker con <code>timePickerConfig</code> (pasos, rango, presets, etc.)."
+    "note": "Usa <code>showTimeSelector='true'</code> y configura <code>timeSelectorMode</code> con <code>'start'</code>, <code>'end'</code> o <code>'both'</code>. Puedes personalizar el time picker con <code>timeSelectorConfig</code> (pasos, rango, presets, etc.)."
   },
   "disabled-dates": {
     "title": "Fechas deshabilitadas",
@@ -115,11 +115,11 @@
         "showPresets": { "description": "Muestra panel de presets (solo para tipo RANGE)" },
         "customPresets": { "description": "Presets personalizados de rangos de fechas" },
         "firstDayOfWeek": { "description": "0=Domingo, 1=Lunes (primer día de la semana)" },
-        "showTimePicker": {
+        "showTimeSelector": {
           "description": "Muestra selector de hora: 'both' | 'default' | 'none'"
         },
-        "timePickerMode": { "description": "Modo de mostrar la hora en el timePicker integrado" },
-        "timePickerConfig": {
+        "timeSelectorMode": { "description": "Modo de mostrar la hora en el timeSelector integrado" },
+        "timeSelectorConfig": {
           "description": "Configuración del selector de hora (steps, rangos, etc.)"
         },
         "startTime": { "description": "Hora de inicio inicial" },
@@ -591,9 +591,9 @@
       "rows": {
         "firstDayOfWeek": "Primer día de la semana. 0 = Domingo, 1 = Lunes, etc.",
         "showTodayButton": "Si se muestra el botón de atajo 'Hoy'.",
-        "showTimePicker": "Modo de visualización del selector de tiempo: <code>none</code>, <code>inline</code> o <code>popover</code>.",
-        "timePickerMode": "Modo de precisión del selector de tiempo (12/24 horas, con o sin segundos).",
-        "timePickerConfig": "Objeto de configuración avanzada para el selector de tiempo.",
+        "showTimeSelector": "Modo de visualización del selector de tiempo: <code>none</code>, <code>inline</code> o <code>popover</code>.",
+        "timeSelectorMode": "Modo de precisión del selector de tiempo (12/24 horas, con o sin segundos).",
+        "timeSelectorConfig": "Objeto de configuración avanzada para el selector de tiempo.",
         "customPresets": "Lista de presets de fecha personalizados mostrados como atajos.",
         "defaultDate": "Fecha por defecto mostrada cuando no hay valor seleccionado.",
         "startTime": "Hora de inicio por defecto para selecciones de rango con tiempo.",

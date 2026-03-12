@@ -1,4 +1,4 @@
-import { TimePickerConfig, TimePickerMode, TimeValue } from '../../time-picker';
+ï»¿import { TimeSelectorConfig, TimeSelectorMode, TimeValue } from '../../time-selector';
 
 export enum CalendarType {
   DAY = 'day',
@@ -12,8 +12,8 @@ export enum CalendarType {
 export type SelectionType = CalendarType | `${CalendarType}`;
 
 /**
- * Modo de selección del calendario.
- * Define si el usuario puede seleccionar uno o múltiples elementos.
+ * Modo de selecciï¿½n del calendario.
+ * Define si el usuario puede seleccionar uno o mï¿½ltiples elementos.
  */
 export enum CalendarSelection {
   SINGLE = 'single',
@@ -22,7 +22,7 @@ export enum CalendarSelection {
 
 export type CalendarSelectionMode = CalendarSelection | `${CalendarSelection}`;
 
-// Cantidad de años visibles en el bloque de años
+// Cantidad de aï¿½os visibles en el bloque de aï¿½os
 export const COUNT_BLOCK_YEARS = 20;
 
 export enum ViewMode {
@@ -36,20 +36,20 @@ export enum ViewMode {
 // ============================================================================
 
 /**
- * Estado de negocio para un día específico del calendario.
- * Permite marcar visualmente días con estados significativos para la aplicación.
+ * Estado de negocio para un dï¿½a especï¿½fico del calendario.
+ * Permite marcar visualmente dï¿½as con estados significativos para la aplicaciï¿½n.
  *
  * @example
- * - 'success': Días con reservas confirmadas, pagos completados
- * - 'warning': Días con reservas pendientes, validaciones requeridas
- * - 'danger': Días con errores, reservas canceladas, límite excedido
- * - 'info': Días con información adicional, eventos programados
+ * - 'success': Dï¿½as con reservas confirmadas, pagos completados
+ * - 'warning': Dï¿½as con reservas pendientes, validaciones requeridas
+ * - 'danger': Dï¿½as con errores, reservas canceladas, lï¿½mite excedido
+ * - 'info': Dï¿½as con informaciï¿½n adicional, eventos programados
  */
 export type DateStatus = 'success' | 'warning' | 'danger' | 'info';
 
 /**
- * Función que determina el estado de negocio de una fecha.
- * Permite lógica dinámica basada en datos de la aplicación.
+ * Funciï¿½n que determina el estado de negocio de una fecha.
+ * Permite lï¿½gica dinï¿½mica basada en datos de la aplicaciï¿½n.
  *
  * @param date - Fecha a evaluar
  * @returns El estado de negocio o null si no aplica
@@ -66,25 +66,25 @@ export type DateStatus = 'success' | 'warning' | 'danger' | 'info';
 export type DateStatusFn = (date: Date) => DateStatus | null;
 
 /**
- * Predicado que determina si una fecha está habilitada.
- * Permite lógica de validación dinámica que prevalece sobre disabledDates.
+ * Predicado que determina si una fecha estï¿½ habilitada.
+ * Permite lï¿½gica de validaciï¿½n dinï¿½mica que prevalece sobre disabledDates.
  *
  * @param date - Fecha a validar
- * @returns true si la fecha está habilitada, false si debe deshabilitarse
+ * @returns true si la fecha estï¿½ habilitada, false si debe deshabilitarse
  *
  * @example
  * const isDateEnabledFn: IsDateEnabledFn = (date) => {
  *   // Deshabilitar festivos
  *   if (isHoliday(date)) return false;
- *   // Deshabilitar días sin disponibilidad
+ *   // Deshabilitar dï¿½as sin disponibilidad
  *   return hasAvailability(date);
  * };
  */
 export type IsDateEnabledFn = (date: Date) => boolean;
 
 /**
- * Modelo de datos para cada día del calendario (ViewModel).
- * Contiene toda la información necesaria para renderizar y gestionar un día.
+ * Modelo de datos para cada dï¿½a del calendario (ViewModel).
+ * Contiene toda la informaciï¿½n necesaria para renderizar y gestionar un dï¿½a.
  *
  * BACKWARD COMPATIBILITY:
  * - Nuevas propiedades son opcionales o tienen valores por defecto
@@ -98,42 +98,42 @@ export interface CalendarDay {
   /** Objeto Date nativo de JavaScript */
   date: Date;
 
-  /** Número del día del mes (1-31) */
+  /** Nï¿½mero del dï¿½a del mes (1-31) */
   dayNumber: number;
 
   // ========================================================================
-  // ESTADOS DE POSICIÓN Y CONTEXTO
+  // ESTADOS DE POSICIï¿½N Y CONTEXTO
   // ========================================================================
 
-  /** Pertenece al mes actualmente mostrado (vs días del mes anterior/siguiente) */
+  /** Pertenece al mes actualmente mostrado (vs dï¿½as del mes anterior/siguiente) */
   isCurrentMonth: boolean;
 
-  /** Es el día actual (hoy) */
+  /** Es el dï¿½a actual (hoy) */
   isToday: boolean;
 
-  /** Es fin de semana (sábado o domingo) - Útil para destacar visualmente */
+  /** Es fin de semana (sï¿½bado o domingo) - ï¿½til para destacar visualmente */
   isWeekend: boolean;
 
-  /** Es el primer día de la semana (según firstDayOfWeek configurado) */
+  /** Es el primer dï¿½a de la semana (segï¿½n firstDayOfWeek configurado) */
   isWeekStart?: boolean;
 
-  /** Es el último día de la semana */
+  /** Es el ï¿½ltimo dï¿½a de la semana */
   isWeekEnd?: boolean;
 
   // ========================================================================
-  // ESTADOS DE SELECCIÓN
+  // ESTADOS DE SELECCIï¿½N
   // ========================================================================
 
   /** Es una fecha seleccionada (endpoint en DAY/RANGE, o punto de la semana en WEEK) */
   isSelected: boolean;
 
-  /** Está dentro del rango seleccionado (WEEK o RANGE) o preview en hover */
+  /** Estï¿½ dentro del rango seleccionado (WEEK o RANGE) o preview en hover */
   isInRange: boolean;
 
   /** No puede ser seleccionado (por disabledDates, minDate, maxDate, o isDateEnabledFn) */
   isDisabled: boolean;
 
-  /** Está siendo actualmente señalado con el mouse (útil para previsualización) */
+  /** Estï¿½ siendo actualmente seï¿½alado con el mouse (ï¿½til para previsualizaciï¿½n) */
   isHovered: boolean;
 
   // ========================================================================
@@ -141,8 +141,8 @@ export interface CalendarDay {
   // ========================================================================
 
   /**
-   * Estado de negocio asignado dinámicamente mediante dateStatusFn.
-   * Permite marcar visualmente días con significado para la aplicación.
+   * Estado de negocio asignado dinï¿½micamente mediante dateStatusFn.
+   * Permite marcar visualmente dï¿½as con significado para la aplicaciï¿½n.
    * @since PASO 1
    */
   status?: DateStatus;
@@ -153,7 +153,7 @@ export interface CalendarDay {
 
   /**
    * Etiqueta descriptiva para lectores de pantalla (ARIA).
-   * Generada automáticamente con formato: "Lunes 15 de enero de 2024, Hoy, Seleccionado, Deshabilitado"
+   * Generada automï¿½ticamente con formato: "Lunes 15 de enero de 2024, Hoy, Seleccionado, Deshabilitado"
    * @since PASO 1
    */
   ariaLabel: string;
@@ -164,70 +164,70 @@ export interface WeekRange {
   end: Date;
 }
 
-// TimeValue importado desde time-picker (no duplicar definición)
+// TimeValue importado desde time-selector (no duplicar definiciï¿½n)
 
 // ------------------------------------------------------------------------------
 // FORMATO DE RESPUESTA DEL CALENDARIO (Estructurado y Tipado)
 // ------------------------------------------------------------------------------
 
 /**
- * Tipo de valor devuelto por el calendario según el modo de selección.
- * Cada tipo tiene su estructura específica con toda la información relevante.
+ * Tipo de valor devuelto por el calendario segï¿½n el modo de selecciï¿½n.
+ * Cada tipo tiene su estructura especï¿½fica con toda la informaciï¿½n relevante.
  *
  * IMPORTANTE:
- * - Soporta selección simple (date/month/year) y múltiple (dates/months/years)
- * - La propiedad singular (date/month/year) existe solo en selección simple
- * - La propiedad plural (dates/months/years) contiene solo valores VÁLIDOS (excluye deshabilitados)
+ * - Soporta selecciï¿½n simple (date/month/year) y mï¿½ltiple (dates/months/years)
+ * - La propiedad singular (date/month/year) existe solo en selecciï¿½n simple
+ * - La propiedad plural (dates/months/years) contiene solo valores Vï¿½LIDOS (excluye deshabilitados)
  * - `type` usa CalendarType enum para type-safety completo
  */
 export type CalendarValue =
   | {
       type: CalendarType.DAY;
-      date: Date; // Fecha seleccionada (selección simple)
-      dates?: never; // No existe en selección simple
+      date: Date; // Fecha seleccionada (selecciï¿½n simple)
+      dates?: never; // No existe en selecciï¿½n simple
       time?: TimeValue; // Hora opcional
     }
   | {
       type: CalendarType.DAY;
-      dates: Date[]; // Array de fechas seleccionadas (selección múltiple)
-      date?: never; // No existe en selección múltiple
+      dates: Date[]; // Array de fechas seleccionadas (selecciï¿½n mï¿½ltiple)
+      date?: never; // No existe en selecciï¿½n mï¿½ltiple
       time?: TimeValue; // Hora opcional aplicada a todas las fechas
     }
   | {
       type: CalendarType.WEEK;
-      dates: Date[]; // Array de fechas VÁLIDAS de la semana (pueden ser menos de 7 si hay deshabilitadas)
+      dates: Date[]; // Array de fechas Vï¿½LIDAS de la semana (pueden ser menos de 7 si hay deshabilitadas)
       week: { start: Date; end: Date }; // Rango completo de la semana
       time?: { start: TimeValue; end: TimeValue }; // Horas opcionales de inicio/fin
     }
   | {
       type: CalendarType.RANGE;
-      dates: Date[]; // Array de fechas VÁLIDAS del rango (excluye deshabilitadas)
+      dates: Date[]; // Array de fechas Vï¿½LIDAS del rango (excluye deshabilitadas)
       range: { start: Date; end: Date }; // Fecha de inicio y fin del rango
       time?: { start: TimeValue; end: TimeValue }; // Horas opcionales de inicio/fin
     }
   | {
       type: CalendarType.MONTH;
-      date: Date; // Primer día del mes seleccionado (ej: 2024-01-01 para enero 2024)
-      month: { month: number; year: number }; // Mes (0-11) y año seleccionado (selección simple)
-      months?: never; // No existe en selección simple
+      date: Date; // Primer dï¿½a del mes seleccionado (ej: 2024-01-01 para enero 2024)
+      month: { month: number; year: number }; // Mes (0-11) y aï¿½o seleccionado (selecciï¿½n simple)
+      months?: never; // No existe en selecciï¿½n simple
     }
   | {
       type: CalendarType.MONTH;
-      dates: Date[]; // Primeros días de cada mes seleccionado
-      months: Array<{ month: number; year: number }>; // Array de meses seleccionados (selección múltiple)
-      month?: never; // No existe en selección múltiple
+      dates: Date[]; // Primeros dï¿½as de cada mes seleccionado
+      months: Array<{ month: number; year: number }>; // Array de meses seleccionados (selecciï¿½n mï¿½ltiple)
+      month?: never; // No existe en selecciï¿½n mï¿½ltiple
     }
   | {
       type: CalendarType.YEAR;
-      date: Date; // Primer día del año seleccionado (ej: 2024-01-01)
-      year: number; // Año seleccionado (selección simple)
-      years?: never; // No existe en selección simple
+      date: Date; // Primer dï¿½a del aï¿½o seleccionado (ej: 2024-01-01)
+      year: number; // Aï¿½o seleccionado (selecciï¿½n simple)
+      years?: never; // No existe en selecciï¿½n simple
     }
   | {
       type: CalendarType.YEAR;
-      dates: Date[]; // Primeros días de cada año seleccionado
-      years: number[]; // Array de años seleccionados (selección múltiple)
-      year?: never; // No existe en selección múltiple
+      dates: Date[]; // Primeros dï¿½as de cada aï¿½o seleccionado
+      years: number[]; // Array de aï¿½os seleccionados (selecciï¿½n mï¿½ltiple)
+      year?: never; // No existe en selecciï¿½n mï¿½ltiple
     };
 
 export interface DateRangePreset {
@@ -241,8 +241,8 @@ export const DEFAULT_FORMAT = 'yyyy-MM-dd';
 export type FirstDayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 // Time Picker display modes for Calendar integration
-export type CalendarTimePickerMode = 'both' | 'default' | 'none';
-export enum CalendarTimePickerModeEnum {
+export type CalendarTimeSelectorMode = 'both' | 'default' | 'none';
+export enum CalendarTimeSelectorModeEnum {
   BOTH = 'both',
   DEFAULT = 'default',
   NONE = 'none',
@@ -257,27 +257,27 @@ export type CalendarTabType = 'calendar' | 'presets' | 'time';
 /**
  * Contexto expuesto al template del footer personalizado (`nuiCalendarFooter`).
  * Permite que el desarrollador acceda al estado actual del calendario y a
- * las acciones más comunes directamente desde su template.
+ * las acciones mï¿½s comunes directamente desde su template.
  *
  * @example
  * <ng-template nuiCalendarFooter let-value="value" let-actions="actions">
- *   <span>{{ value?.dates?.length }} días seleccionados</span>
+ *   <span>{{ value?.dates?.length }} dï¿½as seleccionados</span>
  *   <button (click)="actions.clear()">Limpiar</button>
  *   <button (click)="actions.close()">Aplicar</button>
  * </ng-template>
  */
 export interface CalendarFooterContext {
-  /** Valor de selección actual (fechas, rango, semana, etc.) */
+  /** Valor de selecciï¿½n actual (fechas, rango, semana, etc.) */
   value: CalendarValue | null;
   /** Vista activa en el calendario (day, month, year) */
   viewMode: ViewMode;
   /** Acciones del calendario disponibles en el footer */
   actions: {
-    /** Navega al día de hoy y lo selecciona (solo en tipo DAY) */
+    /** Navega al dï¿½a de hoy y lo selecciona (solo en tipo DAY) */
     goToToday: () => void;
-    /** Limpia la selección actual */
+    /** Limpia la selecciï¿½n actual */
     clear: () => void;
-    /** Emite el evento de cierre (equivalente a confirmar la selección) */
+    /** Emite el evento de cierre (equivalente a confirmar la selecciï¿½n) */
     close: () => void;
   };
 }
@@ -288,7 +288,7 @@ export interface CalendarFooterContext {
 
 /**
  * Contexto tipado que recibe el `ng-template` proyectado con la directiva `nuiCalendarDay`.
- * Permite personalizar el contenido visual de cada celda de día manteniendo
+ * Permite personalizar el contenido visual de cada celda de dï¿½a manteniendo
  * todos los atributos ARIA, el manejo de teclado y los eventos gestionados por el componente.
  *
  * @example
@@ -304,31 +304,31 @@ export interface CalendarFooterContext {
 export interface CalendarDayContext {
   /** Objeto `CalendarDay` completo. Shorthand: `let-fullDay` (sin binding = $implicit) */
   $implicit: CalendarDay;
-  /** Número del día (1–31). Atajo de `$implicit.dayNumber`. */
+  /** Nï¿½mero del dï¿½a (1ï¿½31). Atajo de `$implicit.dayNumber`. */
   day: number;
-  /** Es el día de hoy. Atajo de `$implicit.isToday`. */
+  /** Es el dï¿½a de hoy. Atajo de `$implicit.isToday`. */
   isToday: boolean;
   /** Estado de negocio asignado por `dateStatusFn`, o `null` si no aplica. Atajo de `$implicit.status`. */
   status: DateStatus | null;
 }
 
 // ============================================================================
-// CONFIGURACIÓN GLOBAL DEL CALENDARIO
+// CONFIGURACIï¿½N GLOBAL DEL CALENDARIO
 // ============================================================================
 
 /**
- * Configuración global para el componente Calendar a nivel de aplicación.
+ * Configuraciï¿½n global para el componente Calendar a nivel de aplicaciï¿½n.
  * Permite definir comportamientos, formatos, y estilos por defecto que se
- * aplicarán a todos los calendarios de la app, evitando discrepancias.
+ * aplicarï¿½n a todos los calendarios de la app, evitando discrepancias.
  */
 export interface CalendarGlobalConfig {
   // ========================================================================
-  // 1. LOCALIZACIÓN Y FORMATEO
+  // 1. LOCALIZACIï¿½N Y FORMATEO
   // ========================================================================
 
   /**
-   * Primer día de la semana (0=Domingo, 1=Lunes, etc.)
-   * Por defecto: 1 (Lunes) - Estándar internacional ISO 8601
+   * Primer dï¿½a de la semana (0=Domingo, 1=Lunes, etc.)
+   * Por defecto: 1 (Lunes) - Estï¿½ndar internacional ISO 8601
    * @example 1 // Semana empieza en lunes
    */
   firstDayOfWeek?: FirstDayOfWeek;
@@ -338,44 +338,44 @@ export interface CalendarGlobalConfig {
   // ========================================================================
 
   /**
-   * Mostrar botón "Hoy" en el calendario por defecto
+   * Mostrar botï¿½n "Hoy" en el calendario por defecto
    * Por defecto: true
    */
   showTodayButton?: boolean;
 
   /**
-   * Formato de hora integrado para selección con time picker.
-   * Define el formato de hora que se usará cuando showTimePicker esté activo.
-   * Por defecto: TimePickerModeEnum.HOUR_MINUTE_24 (formato de 24 horas con horas y minutos)
-   * @example TimePickerModeEnum.HOUR_12 // Usar formato de 12 horas con AM/PM
-   * @example TimePickerModeEnum.HOUR_24 // Usar formato de 24 horas con solo horas (sin minutos)
-   * @example TimePickerModeEnum.HOUR_MINUTE_12 // Usar formato de 12 horas con horas y minutos
-   * @example TimePickerModeEnum.HOUR_MINUTE_24 // Usar formato de 24 horas con horas y minutos
-   * @example TimePickerModeEnum.DURATION // Usar formato de duración (horas y minutos sin AM/PM)
+   * Formato de hora integrado para selecciï¿½n con time picker.
+   * Define el formato de hora que se usarï¿½ cuando showTimeSelector estï¿½ activo.
+   * Por defecto: timeSelectorModeEnum.HOUR_MINUTE_24 (formato de 24 horas con horas y minutos)
+   * @example timeSelectorModeEnum.HOUR_12 // Usar formato de 12 horas con AM/PM
+   * @example timeSelectorModeEnum.HOUR_24 // Usar formato de 24 horas con solo horas (sin minutos)
+   * @example timeSelectorModeEnum.HOUR_MINUTE_12 // Usar formato de 12 horas con horas y minutos
+   * @example timeSelectorModeEnum.HOUR_MINUTE_24 // Usar formato de 24 horas con horas y minutos
+   * @example timeSelectorModeEnum.DURATION // Usar formato de duraciï¿½n (horas y minutos sin AM/PM)
    */
-  timePickerMode?: TimePickerMode;
+  timeSelectorMode?: TimeSelectorMode;
 
   /**
-   * Configuración adicional para el time picker integrado en el calendario.
+   * Configuraciï¿½n adicional para el time picker integrado en el calendario.
    * Permite personalizar el comportamiento del selector de hora (steps, rangos, presets, etc.)
-   * Esta configuración se aplicará a todos los calendarios que usen showTimePicker, pero cada calendario puede sobrescribirla.
-   * Por defecto: undefined (usar configuración por defecto del time picker)
+   * Esta configuraciï¿½n se aplicarï¿½ a todos los calendarios que usen showTimeSelector, pero cada calendario puede sobrescribirla.
+   * Por defecto: undefined (usar configuraciï¿½n por defecto del time picker)
    * @example
    * {
    *    hourStep: 1, // Incrementos de hora de 1 en 1
    *    minuteStep: 15, // Incrementos de minuto de 15 en 15
-   *    minTime: { hour: 8, minute: 0 }, // Hora mínima seleccionable (08:00)
-   *    maxTime: { hour: 18, minute: 0 }, // Hora máxima seleccionable (18:00)
+   *    minTime: { hour: 8, minute: 0 }, // Hora mï¿½nima seleccionable (08:00)
+   *    maxTime: { hour: 18, minute: 0 }, // Hora mï¿½xima seleccionable (18:00)
    *    disabledHours: [12, 13], // Deshabilitar horas de 12 a 13
    *    presets: [
    *          // Presets personalizados para el time picker
-   *          { label: 'Mañana', value: { hour: 9, minute: 0 } },
+   *          { label: 'Maï¿½ana', value: { hour: 9, minute: 0 } },
    *          { label: 'Tarde', value: { hour: 15, minute: 0 } },
    *          { label: 'Noche', value: { hour: 20, minute: 0 } },
    *    ],
    * }
    */
-  timePickerConfig?: TimePickerConfig;
+  timeSelectorConfig?: TimeSelectorConfig;
 
   // ========================================================================
   // 4. PRESETS DE RANGO
@@ -384,7 +384,7 @@ export interface CalendarGlobalConfig {
   /**
    * Array de presets personalizados para rangos de fechas.
    * Se inyectan globalmente en todos los calendarios con CalendarType.RANGE.
-   * Útil para períodos recurrentes como trimestres fiscales, semana actual, etc.
+   * ï¿½til para perï¿½odos recurrentes como trimestres fiscales, semana actual, etc.
    * Por defecto: undefined (sin presets adicionales)
    *
    * @example
@@ -397,7 +397,7 @@ export interface CalendarGlobalConfig {
    *     })
    *   },
    *   {
-   *     label: 'Año Fiscal',
+   *     label: 'Aï¿½o Fiscal',
    *     getValue: () => ({
    *       start: new Date(2024, 3, 1),
    *       end: new Date(2025, 2, 31)
@@ -411,36 +411,36 @@ export interface CalendarGlobalConfig {
    * Mostrar selector de hora integrado para fechas seleccionadas.
    * Permite seleccionar horas junto con fechas sin necesidad de un time picker externo.
    * - 'both': Mostrar selector de hora para ambas fechas (inicio y fin)
-   * - 'default': Comportamiento inteligente por defecto (mostrar selector de hora para fecha de inicio en RANGE, o para la única fecha en DAY/WEEK)
+   * - 'default': Comportamiento inteligente por defecto (mostrar selector de hora para fecha de inicio en RANGE, o para la ï¿½nica fecha en DAY/WEEK)
    * - 'none': No mostrar selector de hora integrado
    * Por defecto: 'none' (no mostrar time picker integrado)
    */
-  showTimePicker?: CalendarTimePickerMode;
+  showTimeSelector?: CalendarTimeSelectorMode;
 
   /**
-   * Hora de inicio y fin inicial para selección con time picker integrado.
-   * Permite establecer un rango horario por defecto cuando se usa showTimePicker.
-   * Por ejemplo, para reservas de hotel, puedes establecer 14:00 - 12:00 del día siguiente.
-   * Estas horas se aplicarán inicialmente al seleccionar fechas, pero el usuario podrá modificarlas.
+   * Hora de inicio y fin inicial para selecciï¿½n con time picker integrado.
+   * Permite establecer un rango horario por defecto cuando se usa showTimeSelector.
+   * Por ejemplo, para reservas de hotel, puedes establecer 14:00 - 12:00 del dï¿½a siguiente.
+   * Estas horas se aplicarï¿½n inicialmente al seleccionar fechas, pero el usuario podrï¿½ modificarlas.
    * Por defecto: null (sin hora inicial)
    */
-  startTime?: TimeValue | Date | string | null; // Hora de inicio inicial para selección con time picker
-  endTime?: TimeValue | Date | string | null; // Hora de fin inicial para selección con time picker
+  startTime?: TimeValue | Date | string | null; // Hora de inicio inicial para selecciï¿½n con time picker
+  endTime?: TimeValue | Date | string | null; // Hora de fin inicial para selecciï¿½n con time picker
 
   /**
    * Fecha o fechas que se muestran inicialmente al abrir el calendario, sin estar seleccionadas.
-   * Permite controlar el enfoque inicial del calendario (ej: mostrar mes actual, mes de cumpleaños, etc.)
+   * Permite controlar el enfoque inicial del calendario (ej: mostrar mes actual, mes de cumpleaï¿½os, etc.)
    * Puede ser:
-   * - string: Formato "yyyy-MM-dd" para una fecha específica, o "yyyy-MM" para un mes, o "yyyy" para un año, o rango tomando como referencia el primer día (ej: "2024-01" para enero 2024)
-   * - Date: Objeto Date para una fecha específica, mes, año o rango de semanas tomando como referencia el primer día de la semana en base a la fecha
-   * - Date[]: Array de fechas para rangos, selección múltiple, meses, años o rango de semanas (se usará la primera fecha para determinar el mes/año a mostrar)
+   * - string: Formato "yyyy-MM-dd" para una fecha especï¿½fica, o "yyyy-MM" para un mes, o "yyyy" para un aï¿½o, o rango tomando como referencia el primer dï¿½a (ej: "2024-01" para enero 2024)
+   * - Date: Objeto Date para una fecha especï¿½fica, mes, aï¿½o o rango de semanas tomando como referencia el primer dï¿½a de la semana en base a la fecha
+   * - Date[]: Array de fechas para rangos, selecciï¿½n mï¿½ltiple, meses, aï¿½os o rango de semanas (se usarï¿½ la primera fecha para determinar el mes/aï¿½o a mostrar)
    * - null: Sin fecha inicial, mostrar mes actual por defecto
    * Por defecto: null (sin fecha inicial, mostrar mes actual)
-   * @example "2024-01-15" // Mostrar enero 2024 con enfoque en el día 15
-   * @example "2024-01" // Mostrar enero 2024 sin enfoque específico
-   * @example "2024" // Mostrar año 2024 sin enfoque específico
-   * @example new Date(2024, 0, 15) // Mostrar enero 2024 con enfoque en el día 15
-   * @example [new Date(2024, 0, 15), new Date(2024, 0, 20)] // Mostrar enero 2024 con enfoque en la semana del día 15 al 20
+   * @example "2024-01-15" // Mostrar enero 2024 con enfoque en el dï¿½a 15
+   * @example "2024-01" // Mostrar enero 2024 sin enfoque especï¿½fico
+   * @example "2024" // Mostrar aï¿½o 2024 sin enfoque especï¿½fico
+   * @example new Date(2024, 0, 15) // Mostrar enero 2024 con enfoque en el dï¿½a 15
+   * @example [new Date(2024, 0, 15), new Date(2024, 0, 20)] // Mostrar enero 2024 con enfoque en la semana del dï¿½a 15 al 20
    */
   defaultDate?: string | Date | Date[] | null; // Fecha que se muestra inicialmente al abrir el calendario (sin seleccionar)
 }

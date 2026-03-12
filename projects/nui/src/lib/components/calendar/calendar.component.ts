@@ -1,4 +1,4 @@
-import { A11yModule } from '@angular/cdk/a11y';
+ï»¿import { A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -28,11 +28,11 @@ import {
   COUNT_BLOCK_YEARS,
   DateRangePreset,
   FirstDayOfWeek,
-  CalendarTimePickerMode,
+  CalendarTimeSelectorMode,
   CalendarValue,
   WeekRange,
   CalendarTabType,
-  CalendarTimePickerModeEnum,
+  CalendarTimeSelectorModeEnum,
   DateStatusFn,
   IsDateEnabledFn,
   CalendarSelection,
@@ -42,12 +42,12 @@ import { CalendarService } from './services/calendar.service';
 import { CalendarKeyboardNavigationService } from './services/calendar-keyboard-navigation.service';
 import { SelectButtonComponent } from '../select-button/select-button.component';
 import {
-  TimePickerConfig,
-  TimePickerMode,
-  TimePickerModeEnum,
+  TimeSelectorConfig,
+  TimeSelectorMode,
+  TimeSelectorModeEnum,
   TimeValue,
-} from '../time-picker/models/time-picker.model';
-import { TimePickerComponent } from '../time-picker/time-picker.component';
+} from '../time-selector/models/time-selector.model';
+import { TimeSelectorComponent } from '../time-selector/time-selector.component';
 import { NuiI18nService, NUI_DATE_FULL_FORMAT } from '../../i18n';
 import { SelectBtnOption } from '../select-button';
 import { injectCalendarConfig } from '../../configs/calendar/calendar.config';
@@ -62,7 +62,7 @@ import { CalendarDayDirective } from './directives/calendar-day.directive';
   styleUrls: ['./calendar.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, A11yModule, SelectButtonComponent, TimePickerComponent, FormsModule],
+  imports: [CommonModule, A11yModule, SelectButtonComponent, TimeSelectorComponent, FormsModule],
   providers: [
     CalendarKeyboardNavigationService,
     {
@@ -76,7 +76,7 @@ import { CalendarDayDirective } from './directives/calendar-day.directive';
   },
 })
 export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAccessor {
-  CalendarTimePickerModeEnum = CalendarTimePickerModeEnum; // Exponer enum a la plantilla
+  CalendarTimeSelectorModeEnum = CalendarTimeSelectorModeEnum; // Exponer enum a la plantilla
 
   // ============================================================================
   // INPUTS (Signals API)
@@ -85,10 +85,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   type = input<CalendarType | string>(CalendarType.DAY);
 
   /**
-   * Modo de selección: single (uno) o multiple (varios).
-   * - type="day" + selection="multiple" ? Seleccionar múltiples días
-   * - type="month" + selection="multiple" ? Seleccionar múltiples meses
-   * - type="year" + selection="multiple" ? Seleccionar múltiples años
+   * Modo de selecciï¿½n: single (uno) o multiple (varios).
+   * - type="day" + selection="multiple" ? Seleccionar mï¿½ltiples dï¿½as
+   * - type="month" + selection="multiple" ? Seleccionar mï¿½ltiples meses
+   * - type="year" + selection="multiple" ? Seleccionar mï¿½ltiples aï¿½os
    * - type="week" o "range" ? selection se ignora (siempre son multi-fecha por naturaleza)
    */
   selection = input<CalendarSelectionMode>(CalendarSelection.SINGLE);
@@ -103,12 +103,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   disabledDates = input<(string | Date)[]>(); // Fechas deshabilitadas
 
   // ========================================================================
-  // PASO 1: Smart Service - Inputs para lógica de negocio avanzada
+  // PASO 1: Smart Service - Inputs para lï¿½gica de negocio avanzada
   // ========================================================================
 
   /**
-   * Función que determina el estado de negocio de una fecha.
-   * Permite asignar estados visuales dinámicamente: 'success', 'warning', 'danger', 'info'
+   * Funciï¿½n que determina el estado de negocio de una fecha.
+   * Permite asignar estados visuales dinï¿½micamente: 'success', 'warning', 'danger', 'info'
    * @example
    * dateStatusFn = (date) => {
    *   const availability = getAvailability(date);
@@ -120,8 +120,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   dateStatusFn = input<DateStatusFn>();
 
   /**
-   * Predicado que determina dinámicamente si una fecha está habilitada.
-   * Prevalece sobre disabledDates para permitir lógica de validación compleja.
+   * Predicado que determina dinï¿½micamente si una fecha estï¿½ habilitada.
+   * Prevalece sobre disabledDates para permitir lï¿½gica de validaciï¿½n compleja.
    * @example
    * isDateEnabledFn = (date) => {
    *   if (date.getDay() === 0 || date.getDay() === 6) return false; // No fines de semana
@@ -130,20 +130,20 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
    */
   isDateEnabledFn = input<IsDateEnabledFn>();
 
-  overlayMode = input<boolean>(); // Indica si el calendario está dentro de un overlay (datepicker, popover) para ajustar comportamientos como el foco inicial y el cierre al seleccionar
-  minDate = input<Date | string | null>(); // Fecha mínima permitida
-  maxDate = input<Date | string | null>(); // Fecha máxima permitida
-  showTodayButton = input<boolean>(); // Mostrar botón "Hoy"
-  showWeekNumbers = input<boolean>(); // Mostrar números de semana ISO en la columna izquierda
+  overlayMode = input<boolean>(); // Indica si el calendario estï¿½ dentro de un overlay (datepicker, popover) para ajustar comportamientos como el foco inicial y el cierre al seleccionar
+  minDate = input<Date | string | null>(); // Fecha mï¿½nima permitida
+  maxDate = input<Date | string | null>(); // Fecha mï¿½xima permitida
+  showTodayButton = input<boolean>(); // Mostrar botï¿½n "Hoy"
+  showWeekNumbers = input<boolean>(); // Mostrar nï¿½meros de semana ISO en la columna izquierda
   showPresets = input<boolean>(); // Mostrar panel de presets
   customPresets = input<DateRangePreset[]>(); // Presets personalizados
   firstDayOfWeek = input<FirstDayOfWeek>(); // 0=Domingo, 1=Lunes (default)
-  showTimePicker = input<CalendarTimePickerMode>(); // Mostrar selector de hora integrado: 'both' | 'default' | 'none'
-  timePickerMode = input<TimePickerMode>(); // Modo de mostrar la hora en el timePicker
-  timePickerConfig = input<TimePickerConfig>(); // Opciones de configuración para el timePicker
+  showTimeSelector = input<CalendarTimeSelectorMode>(); // Mostrar selector de hora integrado: 'both' | 'default' | 'none'
+  timeSelectorMode = input<TimeSelectorMode>(); // Modo de mostrar la hora en el timeSelector
+  timeSelectorConfig = input<TimeSelectorConfig>(); // Opciones de configuraciï¿½n para el timeSelector
   startTime = input<TimeValue | Date | string | null>(); // Hora de inicio inicial
   endTime = input<TimeValue | Date | string | null>(); // Hora de fin inicial
-  autoClose = input<boolean>(false); // Si true, emite selectFinished al completar la selección (útil para datepicker/overlay)
+  autoClose = input<boolean>(false); // Si true, emite selectFinished al completar la selecciï¿½n (ï¿½til para datepicker/overlay)
 
   // ============================================================================
   // OUTPUTS (Signals API)
@@ -151,7 +151,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
   /**
    * Evento que emite el valor seleccionado en formato estructurado CalendarValue.
-   * Incluye toda la información: fecha(s), rango/semana, y tiempo si está habilitado.
+   * Incluye toda la informaciï¿½n: fecha(s), rango/semana, y tiempo si estï¿½ habilitado.
    *
    * - Para DAY: { type: 'DAY', date: Date, time?: TimeValue }
    * - Para WEEK: { type: 'WEEK', dates: Date[], week: {...}, time?: {...} }
@@ -160,7 +160,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   valueChange = output<CalendarValue>();
 
   /**
-   * Evento que se emite cuando se completa la selección y que va vinculado al cierre del
+   * Evento que se emite cuando se completa la selecciï¿½n y que va vinculado al cierre del
    * calendario (si se usa dentro de un datepicker o con autoClose).
    */
   selectFinished = output<void>();
@@ -177,7 +177,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   private readonly _footerDir = contentChild(CalendarFooterDirective);
 
   /**
-   * Template personalizado para el contenido interno de cada celda de día.
+   * Template personalizado para el contenido interno de cada celda de dï¿½a.
    * Proyectado por el consumidor con `nuiCalendarDay`. `undefined` si no se usa.
    */
   readonly dateTemplate = contentChild(CalendarDayDirective, { read: TemplateRef });
@@ -185,10 +185,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   calendarService = inject(CalendarService);
   private keyboardNavService = inject(CalendarKeyboardNavigationService);
 
-  // Configuración global inyectada (fusionada con defaults)
+  // Configuraciï¿½n global inyectada (fusionada con defaults)
   private readonly calendarConfig = injectCalendarConfig();
 
-  // Inyectamos el servicio de i18n para acceder a las traducciones dinámicas
+  // Inyectamos el servicio de i18n para acceder a las traducciones dinï¿½micas
   protected readonly _i18nService = inject(NuiI18nService);
   protected readonly _i18n = computed(() => this._i18nService.translations().calendar);
 
@@ -197,17 +197,17 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   currentDate = signal<Date>(new Date());
   previousViewDate = signal<Date | null>(null); // Para cancelar con Escape
 
-  // Selección simple (selection='single')
+  // Selecciï¿½n simple (selection='single')
   selectedDate = signal<Date | null>(null);
-  selectedMonth = signal<{ month: number; year: number } | null>(null); // Mes y año seleccionado (para type='month')
-  selectedYear = signal<number | null>(null); // Año seleccionado independiente
+  selectedMonth = signal<{ month: number; year: number } | null>(null); // Mes y aï¿½o seleccionado (para type='month')
+  selectedYear = signal<number | null>(null); // Aï¿½o seleccionado independiente
 
-  // Selección múltiple (selection='multiple')
+  // Selecciï¿½n mï¿½ltiple (selection='multiple')
   selectedDates = signal<Date[]>([]); // Array de fechas seleccionadas (para type='day' + selection='multiple')
   selectedMonths = signal<Array<{ month: number; year: number }>>([]); // Array de meses seleccionados
-  selectedYears = signal<number[]>([]); // Array de años seleccionados
+  selectedYears = signal<number[]>([]); // Array de aï¿½os seleccionados
 
-  // Selección de rango y semana (siempre múltiple por naturaleza)
+  // Selecciï¿½n de rango y semana (siempre mï¿½ltiple por naturaleza)
   selectedRange = signal<{ start: Date | null; end: Date | null }>({
     start: null,
     end: null,
@@ -217,23 +217,23 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   hoveredDate = signal<Date | null>(null);
   focusedDayIndex = signal<number>(-1);
   presetsVisible = signal<boolean>(false); // Control de visibilidad de presets
-  timePickerVisible = signal<boolean>(false); // Control de visibilidad del time picker
-  activeTab = signal<CalendarTabType>('calendar'); // Pestaña activa en el sistema de tabs
+  timeSelectorVisible = signal<boolean>(false); // Control de visibilidad del time picker
+  activeTab = signal<CalendarTabType>('calendar'); // Pestaï¿½a activa en el sistema de tabs
   selectedStartTime = signal<TimeValue | null>(null); // Hora de inicio (para WEEK/RANGE con 'start' o 'both')
   selectedEndTime = signal<TimeValue | null>(null); // Hora de fin (para RANGE con 'end' o 'both')
-  timePickerToggleValue = signal<'start' | 'end'>('start'); // Toggle interno para modo 'both'
+  timeSelectorToggleValue = signal<'start' | 'end'>('start'); // Toggle interno para modo 'both'
 
   readonly instanceId = `nui-cal-${Math.random().toString(36).slice(2, 9)}`;
   focusedMonthIndex = signal<number>(-1);
   readonly navigationAnnouncement = signal<string>('');
   readonly rangeAnnouncement = signal<string>('');
 
-  /** Último valor seleccionado. Actualizado internamente en cada `emitSelection`. */
+  /** ï¿½ltimo valor seleccionado. Actualizado internamente en cada `emitSelection`. */
   readonly currentValue = signal<CalendarValue | null>(null);
 
   /**
    * Template del footer personalizado proyectado por el consumidor.
-   * Si es `null`, se renderiza el footer built-in (botón "Hoy").
+   * Si es `null`, se renderiza el footer built-in (botï¿½n "Hoy").
    */
   readonly footerTemplate = computed(() => this._footerDir()?.templateRef ?? null);
 
@@ -253,7 +253,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
   /**
    * Construye el contexto tipado que se pasa al template `nuiCalendarDay`
-   * para cada celda de día.
+   * para cada celda de dï¿½a.
    */
   buildDayContext(day: CalendarDay): CalendarDayContext {
     return {
@@ -273,7 +273,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     return {
       ...DEFAULT_CALENDAR_I18N,
       ...global,
-      timePicker: { ...DEFAULT_CALENDAR_I18N.timePicker, ...(global?.timePicker ?? {}) },
+      timeSelector: { ...DEFAULT_CALENDAR_I18N.timeSelector, ...(global?.timeSelector ?? {}) },
       presets: { ...DEFAULT_CALENDAR_I18N.presets, ...(global?.presets ?? {}) },
       tabs: { ...DEFAULT_CALENDAR_I18N.tabs, ...(global?.tabs ?? {}) },
       aria: { ...DEFAULT_CALENDAR_I18N.aria, ...(global?.aria ?? {}) },
@@ -282,7 +282,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   });
 
   /**
-   * Valor efectivo de defaultDate considerando la configuración global y el input local.
+   * Valor efectivo de defaultDate considerando la configuraciï¿½n global y el input local.
    */
   effectiveDefaultDate = computed(() => {
     const defaultDate = this.date();
@@ -290,59 +290,59 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   });
 
   /**
-   * Valor efectivo del timePickerMode considerando la configuración global y el input local.
+   * Valor efectivo del TimeSelectorMode considerando la configuraciï¿½n global y el input local.
    */
-  effectiveTimePickerMode = computed(() => {
-    const mode = this.timePickerMode();
-    return mode ?? this.calendarConfig.timePickerMode ?? TimePickerModeEnum.HOUR_MINUTE_24;
+  effectiveTimeSelectorMode = computed(() => {
+    const mode = this.timeSelectorMode();
+    return mode ?? this.calendarConfig.timeSelectorMode ?? TimeSelectorModeEnum.HOUR_MINUTE_24;
   });
 
   /**
-   * Valor efectivo del timePickerConfig considerando la configuración global y el input local.
+   * Valor efectivo del TimeSelectorConfig considerando la configuraciï¿½n global y el input local.
    */
-  effectiveTimePickerConfig = computed(() => {
-    const timePickerConfig = this.timePickerConfig();
-    return timePickerConfig ?? this.calendarConfig.timePickerConfig ?? {};
+  effectiveTimeSelectorConfig = computed(() => {
+    const timeSelectorConfig = this.timeSelectorConfig();
+    return timeSelectorConfig ?? this.calendarConfig.timeSelectorConfig ?? {};
   });
 
   /**
-   * Valor efectivo de showTimePicker considerando la configuración global y el input local.
+   * Valor efectivo de showTimeSelector considerando la configuraciï¿½n global y el input local.
    */
-  effectiveShowTimePicker = computed(() => {
-    const inputValue = this.showTimePicker();
-    // Si el input es undefined, usar el valor global, si este también es undefined, usar 'none'
-    return inputValue ?? this.calendarConfig.showTimePicker ?? CalendarTimePickerModeEnum.NONE;
+  effectiveShowTimeSelector = computed(() => {
+    const inputValue = this.showTimeSelector();
+    // Si el input es undefined, usar el valor global, si este tambiï¿½n es undefined, usar 'none'
+    return inputValue ?? this.calendarConfig.showTimeSelector ?? CalendarTimeSelectorModeEnum.NONE;
   });
 
   /**
    * Opciones para el ButtonGroup de Start / End en modo 'both'
    */
-  timePickerToggleOptions = computed<SelectBtnOption[]>(() => [
+  timeSelectorToggleOptions = computed<SelectBtnOption[]>(() => [
     {
-      label: this.effectiveI18n().timePicker.start,
+      label: this.effectiveI18n().timeSelector.start,
       value: 'start',
     },
-    { label: this.effectiveI18n().timePicker.end, value: 'end' },
+    { label: this.effectiveI18n().timeSelector.end, value: 'end' },
   ]);
 
   /**
    * Manejador para el cambio de toggle en modo 'both' del time picker.
-   * Actualiza el signal `timePickerToggleValue` que controla qué time picker mostrar (start o end).
+   * Actualiza el signal `timeSelectorToggleValue` que controla quï¿½ time picker mostrar (start o end).
    */
-  onTimePickerToggleChange = (value: 'start' | 'end') => {
-    this.timePickerToggleValue.set(value);
+  onTimeSelectorToggleChange = (value: 'start' | 'end') => {
+    this.timeSelectorToggleValue.set(value);
   };
 
   /**
-   * Indica si se debe mostrar el sistema de pestañas
-   * Solo si hay presets o timepicker disponibles
+   * Indica si se debe mostrar el sistema de pestaï¿½as
+   * Solo si hay presets o time-selector disponibles
    */
   shouldShowTabs = computed(() => {
-    return this.showPresets() || this.effectiveShowTimePicker() !== CalendarTimePickerModeEnum.NONE;
+    return this.showPresets() || this.effectiveShowTimeSelector() !== CalendarTimeSelectorModeEnum.NONE;
   });
 
   /**
-   * Opciones para las pestañas del calendario
+   * Opciones para las pestaï¿½as del calendario
    */
   tabOptions = computed<SelectBtnOption[]>(() => {
     const options: SelectBtnOption[] = [
@@ -356,7 +356,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       });
     }
 
-    if (this.effectiveShowTimePicker() !== CalendarTimePickerModeEnum.NONE) {
+    if (this.effectiveShowTimeSelector() !== CalendarTimeSelectorModeEnum.NONE) {
       options.push({
         label: this.effectiveI18n().tabs.time,
         value: 'time',
@@ -372,7 +372,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   // ============================================================================
 
   /**
-   * Valor efectivo de showTodayButton considerando configuración global
+   * Valor efectivo de showTodayButton considerando configuraciï¿½n global
    */
   effectiveShowTodayButton = computed(() => {
     const inputValue = this.showTodayButton();
@@ -380,7 +380,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   });
 
   /**
-   * Valor efectivo de customPresets considerando configuración global
+   * Valor efectivo de customPresets considerando configuraciï¿½n global
    */
   effectiveCustomPresets = computed(() => {
     const inputValue = this.customPresets();
@@ -388,7 +388,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   });
 
   /**
-   * Valor efectivo de firstDayOfWeek considerando configuración global y luego default a 1 (Lunes)
+   * Valor efectivo de firstDayOfWeek considerando configuraciï¿½n global y luego default a 1 (Lunes)
    */
   effectiveFirstDayOfWeek = computed(() => {
     const inputValue = this.firstDayOfWeek();
@@ -396,7 +396,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   });
 
   /**
-   * Valor efectivo de startTime considerando configuración global
+   * Valor efectivo de startTime considerando configuraciï¿½n global
    */
   effectiveStartTime = computed(() => {
     const inputValue = this.startTime();
@@ -404,7 +404,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   });
 
   /**
-   * Valor efectivo de endTime considerando configuración global
+   * Valor efectivo de endTime considerando configuraciï¿½n global
    */
   effectiveEndTime = computed(() => {
     const inputValue = this.endTime();
@@ -422,9 +422,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   displayedMonthIndex = computed(() => this.calendarService.getMonth(this.currentDate()));
 
   calendarDays = computed(() => {
-    // Forzamos a recalcular si cambia el idioma para actualizar los estados de las fechas según las nuevas traducciones 
+    // Forzamos a recalcular si cambia el idioma para actualizar los estados de las fechas segï¿½n las nuevas traducciones 
     // (por ejemplo, para dateStatusFn que depende de textos)
-    // Al ser un "computed" se volverá a ejecutar en cuanto detecte cambios en la signal de idioma.
+    // Al ser un "computed" se volverï¿½ a ejecutar en cuanto detecte cambios en la signal de idioma.
     const lang = this._i18nService.currentLang();
 
     
@@ -460,8 +460,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   });
 
   /**
-   * Calcula los números de semana ISO-8601 para cada semana visible en el calendario.
-   * Retorna un array de números de semana correspondientes a cada fila de días.
+   * Calcula los nï¿½meros de semana ISO-8601 para cada semana visible en el calendario.
+   * Retorna un array de nï¿½meros de semana correspondientes a cada fila de dï¿½as.
    */
   weekNumbers = computed(() => {
     if (!this.showWeekNumbers()) {
@@ -471,7 +471,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     const days = this.calendarDays();
     const weekNumbers: number[] = [];
 
-    // Agrupar días en semanas (7 días por semana)
+    // Agrupar dï¿½as en semanas (7 dï¿½as por semana)
     for (let i = 0; i < days.length; i += 7) {
       const firstDayOfWeek = days[i];
       if (firstDayOfWeek) {
@@ -484,35 +484,35 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   });
 
   /**
-   * Calcula el número de semana ISO-8601 para una fecha dada.
-   * ISO-8601: La semana comienza el lunes y la semana 1 es la primera con al menos 4 días del año.
+   * Calcula el nï¿½mero de semana ISO-8601 para una fecha dada.
+   * ISO-8601: La semana comienza el lunes y la semana 1 es la primera con al menos 4 dï¿½as del aï¿½o.
    */
   private getISOWeekNumber(date: Date): number {
     const tempDate = new Date(date.getTime());
 
-    // Establecer al jueves de la misma semana (ISO considera jueves como día clave)
+    // Establecer al jueves de la misma semana (ISO considera jueves como dï¿½a clave)
     tempDate.setDate(tempDate.getDate() + 4 - (tempDate.getDay() || 7));
 
-    // Obtener el primer día del año
+    // Obtener el primer dï¿½a del aï¿½o
     const yearStart = new Date(tempDate.getFullYear(), 0, 1);
 
-    // Calcular el número de semana completa
+    // Calcular el nï¿½mero de semana completa
     const weekNumber = Math.ceil(((tempDate.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
 
     return weekNumber;
   }
 
-  // Verificar si un mes está deshabilitado (fuera del rango min/max)
+  // Verificar si un mes estï¿½ deshabilitado (fuera del rango min/max)
   isMonthDisabled = (monthIndex: number): boolean => {
     const minDateValue = this.minDate();
     const maxDateValue = this.maxDate();
     const currentYear = this.displayedYear();
 
-    // Crear fecha del primer y último día del mes a verificar
+    // Crear fecha del primer y ï¿½ltimo dï¿½a del mes a verificar
     const monthStart = new Date(currentYear, monthIndex, 1);
-    const monthEnd = new Date(currentYear, monthIndex + 1, 0); // Último día del mes
+    const monthEnd = new Date(currentYear, monthIndex + 1, 0); // ï¿½ltimo dï¿½a del mes
 
-    // Si hay minDate, verificar que el último día del mes no sea anterior
+    // Si hay minDate, verificar que el ï¿½ltimo dï¿½a del mes no sea anterior
     if (minDateValue) {
       const minDate = this.calendarService.convertToDate(minDateValue);
       if (minDate && monthEnd < minDate) {
@@ -520,7 +520,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       }
     }
 
-    // Si hay maxDate, verificar que el primer día del mes no sea posterior
+    // Si hay maxDate, verificar que el primer dï¿½a del mes no sea posterior
     if (maxDateValue) {
       const maxDate = this.calendarService.convertToDate(maxDateValue);
       if (maxDate && monthStart > maxDate) {
@@ -531,16 +531,16 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     return false;
   };
 
-  // Verificar si un año está deshabilitado (fuera del rango min/max)
+  // Verificar si un aï¿½o estï¿½ deshabilitado (fuera del rango min/max)
   isYearDisabled = (year: number): boolean => {
     const minDateValue = this.minDate();
     const maxDateValue = this.maxDate();
 
-    // Crear fecha del primer y último día del año a verificar
+    // Crear fecha del primer y ï¿½ltimo dï¿½a del aï¿½o a verificar
     const yearStart = new Date(year, 0, 1);
     const yearEnd = new Date(year, 11, 31);
 
-    // Si hay minDate, verificar que el último día del año no sea anterior
+    // Si hay minDate, verificar que el ï¿½ltimo dï¿½a del aï¿½o no sea anterior
     if (minDateValue) {
       const minDate = this.calendarService.convertToDate(minDateValue);
       if (minDate && yearEnd < minDate) {
@@ -548,7 +548,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       }
     }
 
-    // Si hay maxDate, verificar que el primer día del año no sea posterior
+    // Si hay maxDate, verificar que el primer dï¿½a del aï¿½o no sea posterior
     if (maxDateValue) {
       const maxDate = this.calendarService.convertToDate(maxDateValue);
       if (maxDate && yearStart > maxDate) {
@@ -559,70 +559,70 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     return false;
   };
 
-  // Verificar si un mes está seleccionado
+  // Verificar si un mes estï¿½ seleccionado
   isMonthSelected = (monthIndex: number): boolean => {
     if (this.type() === CalendarType.MONTH) {
-      // En modo MONTH, verificar según si es single o multiple
+      // En modo MONTH, verificar segï¿½n si es single o multiple
       if (this.selection() === CalendarSelection.MULTIPLE) {
-        // Selección múltiple: buscar en el array
+        // Selecciï¿½n mï¿½ltiple: buscar en el array
         const selectedMonths = this.selectedMonths();
         const currentYear = this.displayedYear();
         return selectedMonths.some(m => m.month === monthIndex && m.year === currentYear);
       } else {
-        // Selección simple: verificar el signal
+        // Selecciï¿½n simple: verificar el signal
         const selected = this.selectedMonth();
         if (!selected) return false;
         return selected.month === monthIndex && selected.year === this.displayedYear();
       }
     } else {
-      // En modo navegación, marcar el mes actual mostrado
+      // En modo navegaciï¿½n, marcar el mes actual mostrado
       return monthIndex === this.displayedMonthIndex();
     }
   };
 
-  // Verificar si un año está seleccionado
+  // Verificar si un aï¿½o estï¿½ seleccionado
   isYearSelected = (year: number): boolean => {
     if (this.type() === CalendarType.YEAR) {
-      // En modo YEAR, verificar según si es single o multiple
+      // En modo YEAR, verificar segï¿½n si es single o multiple
       if (this.selection() === CalendarSelection.MULTIPLE) {
-        // Selección múltiple: buscar en el array
+        // Selecciï¿½n mï¿½ltiple: buscar en el array
         const selectedYears = this.selectedYears();
         return selectedYears.includes(year);
       } else {
-        // Selección simple: verificar el signal
+        // Selecciï¿½n simple: verificar el signal
         const selected = this.selectedYear();
         return selected === year;
       }
     } else {
-      // En modo navegación, marcar el año actual mostrado
+      // En modo navegaciï¿½n, marcar el aï¿½o actual mostrado
       return year === this.selectedYear();
     }
   };
 
-  // Días de la semana ordenados según firstDayOfWeek
+  // Dï¿½as de la semana ordenados segï¿½n firstDayOfWeek
   // Rota el array de traducciones para que coincida con el orden visual del calendario
   orderedWeekDays = computed(() => {
     const weekDays = this.effectiveI18n().weekDaysShort;
     const firstDay = this.effectiveFirstDayOfWeek();
 
-    // Si empieza en Lunes (1), el array ya está en orden correcto
+    // Si empieza en Lunes (1), el array ya estï¿½ en orden correcto
     if (firstDay === 1) return weekDays;
 
-    // Rotar el array según el primer día
-    // weekDays original: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'S?', 'Do'] (índices 0-6 = Lunes-Domingo)
+    // Rotar el array segï¿½n el primer dï¿½a
+    // weekDays original: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'S?', 'Do'] (ï¿½ndices 0-6 = Lunes-Domingo)
     // Si firstDay = 0 (Domingo), necesitamos: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'S?']
-    // Si firstDay = 6 (Sábado), necesitamos: ['Sá', 'Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi']
+    // Si firstDay = 6 (Sï¿½bado), necesitamos: ['Sï¿½', 'Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi']
 
-    // Calcular cuántas posiciones rotar
+    // Calcular cuï¿½ntas posiciones rotar
     // firstDay 0 (Dom) = weekDays[6] primero ? rotar 6 a la izquierda (o 1 a la derecha)
-    // firstDay 1 (Lun) = weekDays[0] primero ? no rotar (ya está en orden)
-    // firstDay 6 (Sáb) = weekDays[5] primero ? rotar 5 a la izquierda (o 2 a la derecha)
+    // firstDay 1 (Lun) = weekDays[0] primero ? no rotar (ya estï¿½ en orden)
+    // firstDay 6 (Sï¿½b) = weekDays[5] primero ? rotar 5 a la izquierda (o 2 a la derecha)
     const rotateBy = firstDay === 0 ? 6 : firstDay - 1;
 
     return [...weekDays.slice(rotateBy), ...weekDays.slice(0, rotateBy)];
   });
 
-  // Agrupa los 42 días en 6 filas × 7 días para la estructura ARIA grid
+  // Agrupa los 42 dï¿½as en 6 filas ï¿½ 7 dï¿½as para la estructura ARIA grid
   calendarWeeks = computed(() => {
     const days = this.calendarDays();
     const weeks: CalendarDay[][] = [];
@@ -632,7 +632,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     return weeks;
   });
 
-  // Nombres completos de semana ordenados según firstDayOfWeek (para abbr title)
+  // Nombres completos de semana ordenados segï¿½n firstDayOfWeek (para abbr title)
   orderedWeekDaysFull = computed(() => {
     const weekDays = this.effectiveI18n().weekDays;
     const firstDay = this.effectiveFirstDayOfWeek();
@@ -641,7 +641,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     return [...weekDays.slice(rotateBy), ...weekDays.slice(0, rotateBy)];
   });
 
-  // Verificar si estamos en el mes actual (para mostrar/ocultar botón "Hoy")
+  // Verificar si estamos en el mes actual (para mostrar/ocultar botï¿½n "Hoy")
   isCurrentMonth = computed(() => {
     const today = new Date();
     return this.calendarService.isSameMonth(this.currentDate(), today);
@@ -656,7 +656,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       : false;
   });
 
-  // Verificar si la fecha de hoy está habilitada según las restricciones
+  // Verificar si la fecha de hoy estï¿½ habilitada segï¿½n las restricciones
   isTodayEnabled = computed(() => {
     const today = new Date();
     const minDateValue = this.minDate();
@@ -715,11 +715,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       const firstYear = this.years()[0];
       return firstYear > minDateObj.getFullYear();
     } else if (viewMode === ViewMode.MONTH) {
-      // En vista de meses, verificar si se puede navegar al año anterior
+      // En vista de meses, verificar si se puede navegar al aï¿½o anterior
       return currentYear > minDateObj.getFullYear();
     } else {
-      // En vista de días, verificar si el mes anterior tiene algún día válido
-      // Calcular el último día del mes anterior
+      // En vista de dï¿½as, verificar si el mes anterior tiene algï¿½n dï¿½a vï¿½lido
+      // Calcular el ï¿½ltimo dï¿½a del mes anterior
       const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
       const previousYear = currentMonth === 0 ? currentYear - 1 : currentYear;
       const lastDayOfPreviousMonth = new Date(previousYear, previousMonth + 1, 0);
@@ -740,11 +740,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       const lastYear = this.years()[this.years().length - 1];
       return lastYear < maxDateObj.getFullYear();
     } else if (viewMode === ViewMode.MONTH) {
-      // En vista de meses, verificar si se puede navegar al año siguiente
+      // En vista de meses, verificar si se puede navegar al aï¿½o siguiente
       return currentYear < maxDateObj.getFullYear();
     } else {
-      // En vista de días, verificar si el mes siguiente tiene algún día válido
-      // Calcular el primer día del mes siguiente
+      // En vista de dï¿½as, verificar si el mes siguiente tiene algï¿½n dï¿½a vï¿½lido
+      // Calcular el primer dï¿½a del mes siguiente
       const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
       const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear;
       const firstDayOfNextMonth = new Date(nextYear, nextMonth, 1);
@@ -837,7 +837,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
           const parsedTime = this.parseTimeInput(startTimeInput);
           if (parsedTime) {
             this.selectedStartTime.set(parsedTime);
-            if (this.effectiveShowTimePicker() === CalendarTimePickerModeEnum.DEFAULT) {
+            if (this.effectiveShowTimeSelector() === CalendarTimeSelectorModeEnum.DEFAULT) {
               this.selectedStartTime.set(parsedTime);
             }
           }
@@ -853,8 +853,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       });
     });
 
-    // Effecto para manejar el enfoque del teclado en los botones de día/mes/año
-    // Solo se ejecuta si el calendario se abrió desde un overlay (datepicker)
+    // Effecto para manejar el enfoque del teclado en los botones de dï¿½a/mes/aï¿½o
+    // Solo se ejecuta si el calendario se abriï¿½ desde un overlay (datepicker)
     effect(() => {
       if (!this.overlayMode()) return;
 
@@ -867,8 +867,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       }
     });
 
-    // Efectos para manejar el enfoque al cambiar de vista (mes/año)
-    // Solo se ejecuta si el calendario se abrió desde un overlay
+    // Efectos para manejar el enfoque al cambiar de vista (mes/aï¿½o)
+    // Solo se ejecuta si el calendario se abriï¿½ desde un overlay
     effect(() => {
       if (!this.overlayMode()) return;
 
@@ -878,8 +878,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       }
     });
 
-    // Efecto para enfocar el año seleccionado al entrar en vista de años
-    // Solo se ejecuta si el calendario se abrió desde un overlay
+    // Efecto para enfocar el aï¿½o seleccionado al entrar en vista de aï¿½os
+    // Solo se ejecuta si el calendario se abriï¿½ desde un overlay
     effect(() => {
       if (!this.overlayMode()) return;
 
@@ -1091,12 +1091,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   }
 
   ngOnInit(): void {
-    // La inicialización se delega al effect() del constructor,
+    // La inicializaciï¿½n se delega al effect() del constructor,
     // que cubre tanto la carga inicial como los cambios posteriores del input `date`.
   }
 
   ngAfterViewInit(): void {
-    // Si se abrió desde un overlay (datepicker), hacer focus en el día seleccionado/actual
+    // Si se abriï¿½ desde un overlay (datepicker), hacer focus en el dï¿½a seleccionado/actual
     if (this.overlayMode()) {
       this.focusInitialDay();
     }
@@ -1104,7 +1104,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
   /**
    * Inicializa el calendario posicion?ndolo en la fecha por defecto (si se provee) o en la fecha actual.
-   * El comportamiento de la selección dependerá del tipo de calendario (DAY, WEEK, RANGE, MONTH, YEAR) y del modo de selección (SINGLE o MULTIPLE).
+   * El comportamiento de la selecciï¿½n dependerï¿½ del tipo de calendario (DAY, WEEK, RANGE, MONTH, YEAR) y del modo de selecciï¿½n (SINGLE o MULTIPLE).
    */
   private initializeCalendar(): void {
     const today = new Date();
@@ -1142,7 +1142,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       // Posicionar el calendario en la primera fecha
       this.currentDate.set(firstDate);
 
-      // Inicializar la selección según el tipo de calendario
+      // Inicializar la selecciï¿½n segï¿½n el tipo de calendario
       this.initializeByType(dates, firstDate, lastDate);
     } catch (error) {
       console.error('Error initializing calendar:', error);
@@ -1150,8 +1150,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   }
 
   /**
-   * Verifica si una fecha dada está habilitada según las restricciones de minDate, maxDate, disabledDates e isDateEnabledFn.
-   * Retorna true si la fecha está habilitada, false si está deshabilitada.
+   * Verifica si una fecha dada estï¿½ habilitada segï¿½n las restricciones de minDate, maxDate, disabledDates e isDateEnabledFn.
+   * Retorna true si la fecha estï¿½ habilitada, false si estï¿½ deshabilitada.
    */
   isDateEnabled(date: Date): boolean {
     const disabledDatesValue = this.disabledDates();
@@ -1200,12 +1200,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
    * Resetea los estados de selecci?n del calendario
    */
   private resetSelectionStates(): void {
-    // Selección simple
+    // Selecciï¿½n simple
     this.selectedDate.set(null);
     this.selectedMonth.set(null);
     this.selectedYear.set(null);
 
-    // Selección múltiple
+    // Selecciï¿½n mï¿½ltiple
     this.selectedDates.set([]);
     this.selectedMonths.set([]);
     this.selectedYears.set([]);
@@ -1220,9 +1220,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
    */
   private initializeWithoutDate(today: Date): void {
     // No seleccionar ninguna fecha por defecto
-    // El calendario mostrará el mes actual sin ninguna fecha seleccionada
+    // El calendario mostrarï¿½ el mes actual sin ninguna fecha seleccionada
 
-    // Establecer la vista inicial según el tipo de calendario
+    // Establecer la vista inicial segï¿½n el tipo de calendario
     if (this.type() === CalendarType.MONTH) {
       this.viewMode.set(ViewMode.MONTH);
     } else if (this.type() === CalendarType.YEAR) {
@@ -1242,14 +1242,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   }
 
   /**
-   * Valida que una fecha sea válida
+   * Valida que una fecha sea vï¿½lida
    */
   private isValidDate(date: Date | null): boolean {
     return date !== null && !isNaN(date.getTime());
   }
 
   /**
-   * Inicializa el calendario según su tipo (DAY, WEEK, RANGE, MONTH, YEAR)
+   * Inicializa el calendario segï¿½n su tipo (DAY, WEEK, RANGE, MONTH, YEAR)
    */
   private initializeByType(dates: Date[], firstDate: Date, lastDate: Date): void {
     let calendarValue: CalendarValue | null = null;
@@ -1351,8 +1351,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     // Si es Date
     if (time instanceof Date) {
       const is12h =
-        this.timePickerMode() === TimePickerModeEnum.HOUR_12 ||
-        this.timePickerMode() === TimePickerModeEnum.HOUR_MINUTE_12;
+        this.timeSelectorMode() === TimeSelectorModeEnum.HOUR_12 ||
+        this.timeSelectorMode() === TimeSelectorModeEnum.HOUR_MINUTE_12;
       const hour = is12h ? time.getHours() % 12 || 12 : time.getHours();
       return {
         hour,
@@ -1392,7 +1392,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       : [];
 
     return dates.filter(date => {
-      // Verificar si está deshabilitado por disabledDates
+      // Verificar si estï¿½ deshabilitado por disabledDates
       if (
         disabledDates.length > 0 &&
         this.calendarService.isDateDisabled(date, disabledDates as Date[])
@@ -1400,7 +1400,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         return false;
       }
 
-      // Verificar si está fuera del rango min/max
+      // Verificar si estï¿½ fuera del rango min/max
       if (this.minDate()) {
         const minDateObj = this.parseDate(this.minDate());
         if (this.calendarService.dateAdapter.isBefore(date, minDateObj)) {
@@ -1434,7 +1434,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       this.emitSelection(calendarValue);
     }
 
-    // Hacer focus en el día de hoy después de que el DOM se actualice
+    // Hacer focus en el dï¿½a de hoy despuï¿½s de que el DOM se actualice
     setTimeout(() => {
       const days = this.calendarDays();
       const todayIndex = days.findIndex(d => d.isToday);
@@ -1447,8 +1447,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   }
 
   /**
-   * Limpia la selección actual del calendario.
-   * Restablece todos los estados de selección y notifica al FormControl si está
+   * Limpia la selecciï¿½n actual del calendario.
+   * Restablece todos los estados de selecciï¿½n y notifica al FormControl si estï¿½
    * vinculado mediante `ngModel` o `formControl`.
    */
   clear(): void {
@@ -1471,7 +1471,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     });
     this.emitSelection(calendarValue);
 
-    // Si el calendario está abierto, verificar si se debe cerrar automáticamente
+    // Si el calendario estï¿½ abierto, verificar si se debe cerrar automï¿½ticamente
     this.checkAutoClose();
 
     this.activeTab.set('calendar');
@@ -1483,8 +1483,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   }
 
   // Toggle visibilidad del time picker
-  toggleTimePicker(): void {
-    this.timePickerVisible.update(visible => !visible);
+  toggleTimeSelector(): void {
+    this.timeSelectorVisible.update(visible => !visible);
   }
 
   /**
@@ -1666,10 +1666,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
     if (this.type() === CalendarType.DAY) {
       if (this.selection() === CalendarSelection.MULTIPLE) {
-        // Selección múltiple: toggle fecha
+        // Selecciï¿½n mï¿½ltiple: toggle fecha
         this.handleMultipleDaySelection(day.date);
       } else {
-        // Selección simple
+        // Selecciï¿½n simple
         this.selectedDate.set(day.date);
         const calendarValue = this.buildCalendarValue(CalendarType.DAY, {
           date: day.date,
@@ -1687,14 +1687,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       this.handleRangeSelection(day.date);
     }
 
-    // Si el calendario está abierto, verificar si se debe cerrar automáticamente
+    // Si el calendario estï¿½ abierto, verificar si se debe cerrar automï¿½ticamente
     this.checkAutoClose();
   }
 
   /**
-   * Maneja el click en un número de semana.
+   * Maneja el click en un nï¿½mero de semana.
    * Selecciona toda la semana correspondiente.
-   * @param weekIndex Índice de la semana (fila) en el calendario
+   * @param weekIndex ï¿½ndice de la semana (fila) en el calendario
    */
   onWeekNumberClick(weekIndex: number): void {
     // Solo funciona en modo WEEK o si queremos cambiar el comportamiento para DAY
@@ -1705,9 +1705,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
     if (weekDays.length === 0) return;
 
-    // Obtener el primer día de la semana que no esté deshabilitado
+    // Obtener el primer dï¿½a de la semana que no estï¿½ deshabilitado
     const firstEnabledDay = weekDays.find(day => !day.isDisabled);
-    if (!firstEnabledDay) return; // Toda la semana está deshabilitada
+    if (!firstEnabledDay) return; // Toda la semana estï¿½ deshabilitada
 
     // Si estamos en modo WEEK, seleccionar toda la semana
     if (this.type() === CalendarType.WEEK) {
@@ -1724,11 +1724,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     }
     // En modo DAY multiple, toggle de toda la semana (acumulativo)
     else if (this.type() === CalendarType.DAY && this.selection() === CalendarSelection.MULTIPLE) {
-      // Obtener todos los días habilitados de la semana clickeada
+      // Obtener todos los dï¿½as habilitados de la semana clickeada
       const enabledDaysInWeek = weekDays.filter(day => !day.isDisabled).map(day => day.date);
       const currentDates = this.selectedDates();
 
-      // Verificar si todos los días de la semana ya están seleccionados
+      // Verificar si todos los dï¿½as de la semana ya estï¿½n seleccionados
       const allSelected = enabledDaysInWeek.every(weekDay =>
         currentDates.some(selectedDay => this.calendarService.isSameDay(selectedDay, weekDay))
       );
@@ -1736,13 +1736,13 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       let newDates: Date[];
 
       if (allSelected) {
-        // Si todos están seleccionados, desmarcar toda la semana
+        // Si todos estï¿½n seleccionados, desmarcar toda la semana
         newDates = currentDates.filter(
           selectedDay =>
             !enabledDaysInWeek.some(weekDay => this.calendarService.isSameDay(weekDay, selectedDay))
         );
       } else {
-        // Si no todos están seleccionados, agregar los días que faltan (acumulativo)
+        // Si no todos estï¿½n seleccionados, agregar los dï¿½as que faltan (acumulativo)
         const datesToAdd = enabledDaysInWeek.filter(
           weekDay =>
             !currentDates.some(selectedDay => this.calendarService.isSameDay(selectedDay, weekDay))
@@ -1920,7 +1920,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   }
 
   selectYear(year: number): void {
-    // No permitir seleccionar años deshabilitados
+    // No permitir seleccionar aï¿½os deshabilitados
     if (this.isYearDisabled(year)) {
       return;
     }
@@ -1931,7 +1931,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     // Si el tipo es YEAR, emitir el valor y cerrar
     if (this.type() === CalendarType.YEAR) {
       if (this.selection() === CalendarSelection.MULTIPLE) {
-        // Selección múltiple: toggle año
+        // Selecciï¿½n mï¿½ltiple: toggle aï¿½o
         const currentYears = this.selectedYears();
         const yearIndex = currentYears.indexOf(year);
 
@@ -1953,7 +1953,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         this.emitSelection(calendarValue);
         this.checkAutoClose();
       } else {
-        // Selección simple
+        // Selecciï¿½n simple
         this.selectedYear.set(year);
         const yearDate = new Date(year, 0, 1);
         const calendarValue = this.buildCalendarValue(CalendarType.YEAR, {
@@ -1964,7 +1964,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         this.checkAutoClose();
       }
     } else {
-      // Navegación normal: cambiar a vista de mes
+      // Navegaciï¿½n normal: cambiar a vista de mes
       this.selectedYear.set(year);
       this.switchToMonthView();
     }
@@ -1984,7 +1984,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       const year = this.displayedYear();
 
       if (this.selection() === CalendarSelection.MULTIPLE) {
-        // Selección múltiple: toggle mes
+        // Selecciï¿½n mï¿½ltiple: toggle mes
         const currentMonths = this.selectedMonths();
         const monthValue = { month: monthIndex, year };
         const monthIndex_ = currentMonths.findIndex(m => m.month === monthIndex && m.year === year);
@@ -2007,7 +2007,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         this.emitSelection(calendarValue);
         this.checkAutoClose();
       } else {
-        // Selección simple
+        // Selecciï¿½n simple
         const monthDate = new Date(year, monthIndex, 1);
         this.selectedMonth.set({ month: monthIndex, year });
         const calendarValue = this.buildCalendarValue(CalendarType.MONTH, {
@@ -2018,7 +2018,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         this.checkAutoClose();
       }
     } else {
-      // Navegación normal: cambiar a vista de día
+      // Navegaciï¿½n normal: cambiar a vista de dï¿½a
       this.switchToDayView();
     }
   }
@@ -2030,7 +2030,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
     // ?? SHORTCUTS GLOBALES ???????????????????????????????????????????????????
     // Se comprueban ANTES del guard para que funcionen en todas las vistas,
-    // independientemente de en qué elemento esté el foco.
+    // independientemente de en quï¿½ elemento estï¿½ el foco.
 
     // T = Today (Ir a hoy)
     if (key === 't' && !event.ctrlKey && !event.altKey && !event.metaKey) {
@@ -2039,7 +2039,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       return;
     }
 
-    // H = Home (acceso rápido: primer día del mes, solo en vista DAY)
+    // H = Home (acceso rï¿½pido: primer dï¿½a del mes, solo en vista DAY)
     if (key === 'h' && !event.ctrlKey && !event.altKey && !event.metaKey && this.viewMode() === ViewMode.DAY) {
       event.preventDefault();
       const firstDay = this.calendarService.dateAdapter.startOfMonth(this.currentDate());
@@ -2049,7 +2049,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       return;
     }
 
-    // E = End (acceso rápido: último día del mes, solo en vista DAY)
+    // E = End (acceso rï¿½pido: ï¿½ltimo dï¿½a del mes, solo en vista DAY)
     if (key === 'e' && !event.ctrlKey && !event.altKey && !event.metaKey && this.viewMode() === ViewMode.DAY) {
       event.preventDefault();
       const lastDay = this.calendarService.dateAdapter.endOfMonth(this.currentDate());
@@ -2065,7 +2065,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       return;
     }
 
-    // Home = primer día de la SEMANA actual (navegación ARIA estándar, solo en vista DAY)
+    // Home = primer dï¿½a de la SEMANA actual (navegaciï¿½n ARIA estï¿½ndar, solo en vista DAY)
     if (event.key === 'Home' && this.viewMode() === ViewMode.DAY) {
       event.preventDefault();
       let currentIndex = this.focusedDayIndex();
@@ -2076,7 +2076,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       return;
     }
 
-    // End = último día de la SEMANA actual (navegación ARIA estándar, solo en vista DAY)
+    // End = ï¿½ltimo dï¿½a de la SEMANA actual (navegaciï¿½n ARIA estï¿½ndar, solo en vista DAY)
     if (event.key === 'End' && this.viewMode() === ViewMode.DAY) {
       event.preventDefault();
       let currentIndex = this.focusedDayIndex();
@@ -2087,14 +2087,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       return;
     }
 
-    // PageUp = mes anterior (día) / año anterior (mes) / década anterior (año)
-    // Shift+PageUp = año anterior (día) — sin efecto en vistas mes/año
+    // PageUp = mes anterior (dï¿½a) / aï¿½o anterior (mes) / dï¿½cada anterior (aï¿½o)
+    // Shift+PageUp = aï¿½o anterior (dï¿½a) ï¿½ sin efecto en vistas mes/aï¿½o
     if (event.key === 'PageUp') {
       event.preventDefault();
       const viewMode = this.viewMode();
       if (viewMode === ViewMode.DAY) {
         if (event.shiftKey) {
-          // Shift+PageUp: ir al año anterior manteniendo el día
+          // Shift+PageUp: ir al aï¿½o anterior manteniendo el dï¿½a
           if (this.canNavigateBack()) {
             const focusedDayNumber = this.getFocusedDayNumber();
             const newDate = this.calendarService.dateAdapter.subtractYears(this.currentDate(), 1);
@@ -2114,13 +2114,13 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
           }
         }
       } else if (viewMode === ViewMode.MONTH) {
-        // En vista mes: año anterior
+        // En vista mes: aï¿½o anterior
         if (this.canNavigateBack()) {
           this.previousYear();
           setTimeout(() => this.focusCurrentMonth());
         }
       } else if (viewMode === ViewMode.YEAR) {
-        // En vista año: década anterior
+        // En vista aï¿½o: dï¿½cada anterior
         if (this.canNavigateBack()) {
           this.previousYearBlock();
           setTimeout(() => this.focusCurrentYear());
@@ -2129,14 +2129,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       return;
     }
 
-    // PageDown = mes siguiente (día) / año siguiente (mes) / década siguiente (año)
-    // Shift+PageDown = año siguiente (día) — sin efecto en vistas mes/año
+    // PageDown = mes siguiente (dï¿½a) / aï¿½o siguiente (mes) / dï¿½cada siguiente (aï¿½o)
+    // Shift+PageDown = aï¿½o siguiente (dï¿½a) ï¿½ sin efecto en vistas mes/aï¿½o
     if (event.key === 'PageDown') {
       event.preventDefault();
       const viewMode = this.viewMode();
       if (viewMode === ViewMode.DAY) {
         if (event.shiftKey) {
-          // Shift+PageDown: ir al año siguiente manteniendo el día
+          // Shift+PageDown: ir al aï¿½o siguiente manteniendo el dï¿½a
           if (this.canNavigateForward()) {
             const focusedDayNumber = this.getFocusedDayNumber();
             const newDate = new Date(this.currentDate());
@@ -2157,13 +2157,13 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
           }
         }
       } else if (viewMode === ViewMode.MONTH) {
-        // En vista mes: año siguiente
+        // En vista mes: aï¿½o siguiente
         if (this.canNavigateForward()) {
           this.nextYear();
           setTimeout(() => this.focusCurrentMonth());
         }
       } else if (viewMode === ViewMode.YEAR) {
-        // En vista año: década siguiente
+        // En vista aï¿½o: dï¿½cada siguiente
         if (this.canNavigateForward()) {
           this.nextYearBlock();
           setTimeout(() => this.focusCurrentYear());
@@ -2172,7 +2172,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       return;
     }
 
-    // Alt + ArrowLeft = Año anterior
+    // Alt + ArrowLeft = Aï¿½o anterior
     if (event.altKey && event.key === 'ArrowLeft') {
       event.preventDefault();
       if (this.canNavigateBack()) {
@@ -2182,7 +2182,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       return;
     }
 
-    // Alt + ArrowRight = Año siguiente
+    // Alt + ArrowRight = Aï¿½o siguiente
     if (event.altKey && event.key === 'ArrowRight') {
       event.preventDefault();
       if (this.canNavigateForward()) {
@@ -2193,7 +2193,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       return;
     }
 
-    // ?? NAVEGACIÓN CON FLECHAS / ENTER / ESCAPE ??????????????????????????????
+    // ?? NAVEGACIï¿½N CON FLECHAS / ENTER / ESCAPE ??????????????????????????????
     // Verificar si debemos manejar este evento (filtra nav buttons + keys no relevantes)
     if (!this.keyboardNavService.shouldHandleKeyEvent(event, target)) {
       return;
@@ -2201,7 +2201,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
     const viewMode = this.viewMode();
 
-    // Delegar navegación según la vista
+    // Delegar navegaciï¿½n segï¿½n la vista
     switch (viewMode) {
       case ViewMode.DAY:
         this.handleDayNavigation(event);
@@ -2323,7 +2323,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     );
 
     if (result.shouldChangeMonth) {
-      // Cambiar de mes y restaurar el foco tras la re-renderización
+      // Cambiar de mes y restaurar el foco tras la re-renderizaciï¿½n
       if (result.direction === 'prev') {
         this.previousMonth();
         const newIndex = this.calendarDays().length - 1;
@@ -2437,7 +2437,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     }
   }
 
-  /** Devuelve el número de día del mes del día actualmente enfocado en la cuadrícula, o null. */
+  /** Devuelve el nï¿½mero de dï¿½a del mes del dï¿½a actualmente enfocado en la cuadrï¿½cula, o null. */
   private getFocusedDayNumber(): number | null {
     const currentIndex = this.focusedDayIndex();
     if (currentIndex >= 0) {
@@ -2448,16 +2448,16 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   }
 
   /**
-   * Encuentra el índice del día con `dayNumber` en el mes actual de `calendarDays()`.
-   * Si el día no existe (ej: el 31 en un mes de 30 días), devuelve el último día del mes.
-   * Fallback final: primer día del mes actual.
+   * Encuentra el ï¿½ndice del dï¿½a con `dayNumber` en el mes actual de `calendarDays()`.
+   * Si el dï¿½a no existe (ej: el 31 en un mes de 30 dï¿½as), devuelve el ï¿½ltimo dï¿½a del mes.
+   * Fallback final: primer dï¿½a del mes actual.
    */
   private findDayIndexByNumber(dayNumber: number | null): number {
     const days = this.calendarDays();
     if (dayNumber !== null) {
       const exact = days.findIndex(d => d.isCurrentMonth && d.dayNumber === dayNumber);
       if (exact >= 0) return exact;
-      // Día inexistente en el mes destino: ir al último día del mes
+      // Dï¿½a inexistente en el mes destino: ir al ï¿½ltimo dï¿½a del mes
       for (let i = days.length - 1; i >= 0; i--) {
         if (days[i].isCurrentMonth) return i;
       }
@@ -2576,7 +2576,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     this.valueChange.emit(calendarValue);
 
     // 2. Notificar a ngModel / FormControl (valor simplificado - para formularios reactivos)
-    // Se emite un formato más simple según el tipo para facilitar el uso con FormControl
+    // Se emite un formato mï¿½s simple segï¿½n el tipo para facilitar el uso con FormControl
     let formValue: Date | Date[] | null = null;
 
     switch (calendarValue.type) {
@@ -2643,7 +2643,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     const startTime = this.selectedStartTime();
     const endTime = this.selectedEndTime();
 
-    // DAY - Selección simple
+    // DAY - Selecciï¿½n simple
     if (type === CalendarType.DAY && data.date) {
       return {
         type: CalendarType.DAY,
@@ -2652,7 +2652,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       } as CalendarValue;
     }
 
-    // DAY - Selección múltiple
+    // DAY - Selecciï¿½n mï¿½ltiple
     if (type === CalendarType.DAY && data.dates) {
       return {
         type: CalendarType.DAY,
@@ -2699,7 +2699,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       };
     }
 
-    // MONTH - Selección simple
+    // MONTH - Selecciï¿½n simple
     if (type === CalendarType.MONTH && data.month && data.date) {
       return {
         type: CalendarType.MONTH,
@@ -2708,7 +2708,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       } as CalendarValue;
     }
 
-    // MONTH - Selección múltiple
+    // MONTH - Selecciï¿½n mï¿½ltiple
     if (type === CalendarType.MONTH && data.months && data.dates) {
       return {
         type: CalendarType.MONTH,
@@ -2717,7 +2717,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       } as CalendarValue;
     }
 
-    // YEAR - Selección simple
+    // YEAR - Selecciï¿½n simple
     if (type === CalendarType.YEAR && data.year !== undefined && data.date) {
       return {
         type: CalendarType.YEAR,
@@ -2726,7 +2726,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
       } as CalendarValue;
     }
 
-    // YEAR - Selección múltiple
+    // YEAR - Selecciï¿½n mï¿½ltiple
     if (type === CalendarType.YEAR && data.years && data.dates) {
       return {
         type: CalendarType.YEAR,
@@ -2739,16 +2739,16 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
   }
 
   /**
-   * Verifica si se debe emitir el evento de cierre automático
-   * basado en la configuración y el estado actual de selección.
+   * Verifica si se debe emitir el evento de cierre automï¿½tico
+   * basado en la configuraciï¿½n y el estado actual de selecciï¿½n.
    */
   private checkAutoClose(): void {
-    // 1. Si la funcionalidad está desactivada, no hacemos nada
+    // 1. Si la funcionalidad estï¿½ desactivada, no hacemos nada
     if (!this.autoClose()) {
       return;
     }
 
-    // 2. Si está en modo de selección múltiple, nunca cerrar automáticamente
+    // 2. Si estï¿½ en modo de selecciï¿½n mï¿½ltiple, nunca cerrar automï¿½ticamente
     //    (el usuario quiere seguir seleccionando)
     if (this.selection() === CalendarSelection.MULTIPLE) {
       return;
@@ -2756,17 +2756,17 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
 
     const currentType = this.type();
 
-    // 3. Evaluamos según el tipo de selección (solo en modo single)
+    // 3. Evaluamos segï¿½n el tipo de selecciï¿½n (solo en modo single)
     let shouldClose = false;
 
     switch (currentType) {
       case CalendarType.DAY:
-        // En modo día, cualquier selección válida dispara el cierre
+        // En modo dï¿½a, cualquier selecciï¿½n vï¿½lida dispara el cierre
         shouldClose = !!this.selectedDate();
         break;
 
       case CalendarType.RANGE:
-        // En modo rango, solo cerramos cuando el intervalo está completo
+        // En modo rango, solo cerramos cuando el intervalo estï¿½ completo
         const range = this.selectedRange();
         shouldClose = !!(range.start && range.end);
         break;
@@ -2782,14 +2782,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
         break;
 
       case CalendarType.YEAR:
-        // En modo año, se cierra al seleccionar el año
+        // En modo aï¿½o, se cierra al seleccionar el aï¿½o
         shouldClose = !!this.selectedYear();
         break;
     }
 
-    // 4. Si se cumple la condición, emitimos el output semántico
+    // 4. Si se cumple la condiciï¿½n, emitimos el output semï¿½ntico
     if (shouldClose) {
-      // Este es el evento que el Popover/Modal escuchará para cerrarse
+      // Este es el evento que el Popover/Modal escucharï¿½ para cerrarse
       this.selectFinished.emit();
     }
   }

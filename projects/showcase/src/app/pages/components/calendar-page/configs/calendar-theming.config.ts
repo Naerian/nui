@@ -1,4 +1,4 @@
-import { ComponentSection } from '../../../../core/models';
+﻿import { ComponentSection } from '../../../../core/models';
 
 /**
  * Configuración de la tab Theming del componente Calendar

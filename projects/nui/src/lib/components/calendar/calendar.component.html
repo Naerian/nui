@@ -1,4 +1,4 @@
-<div
+﻿<div
   class="nui-calendar"
   role="region"
   [attr.aria-label]="effectiveI18n().a11y.calendarLabel"
@@ -9,7 +9,7 @@
   <span class="sr-only" aria-live="polite" aria-atomic="true">{{ navigationAnnouncement() }}</span>
   <span class="sr-only" aria-live="assertive" aria-atomic="true">{{ rangeAnnouncement() }}</span>
 
-  <!-- SISTEMA DE PESTAÑAS (cuando hay presets o timepicker) -->
+  <!-- SISTEMA DE PESTAÑAS (cuando hay presets o time-selector) -->
   @if (shouldShowTabs() && viewMode() === ViewMode.DAY) {
     <div class="nui-calendar__tabs">
       <nui-select-btn
@@ -296,53 +296,53 @@
   @if (
     shouldShowTabs() &&
     activeTab() === 'time' &&
-    effectiveShowTimePicker() &&
+    effectiveShowTimeSelector() &&
     viewMode() === ViewMode.DAY
   ) {
-    <div class="nui-calendar__time-picker-panel" [attr.data-mode]="effectiveShowTimePicker()">
+    <div class="nui-calendar__time-selector-panel" [attr.data-mode]="effectiveShowTimeSelector()">
       <!-- TIME PICKER DE INICIO (o único) -->
-      @if (effectiveShowTimePicker() !== CalendarTimePickerModeEnum.NONE) {
-        <div class="nui-calendar__time-picker">
+      @if (effectiveShowTimeSelector() !== CalendarTimeSelectorModeEnum.NONE) {
+        <div class="nui-calendar__time-selector">
           <!-- Header con toggle para modo 'both' -->
-          @if (effectiveShowTimePicker() === CalendarTimePickerModeEnum.BOTH) {
-            <div class="nui-calendar__time-picker-header">
+          @if (effectiveShowTimeSelector() === CalendarTimeSelectorModeEnum.BOTH) {
+            <div class="nui-calendar__time-selector-header">
               <nui-select-btn
                 [width]="'full'"
-                [options]="timePickerToggleOptions()"
-                [ngModel]="timePickerToggleValue()"
-                (ngModelChange)="onTimePickerToggleChange($event)"
+                [options]="timeSelectorToggleOptions()"
+                [ngModel]="timeSelectorToggleValue()"
+                (ngModelChange)="onTimeSelectorToggleChange($event)"
                 variant="ghost"
                 mode="radio"
                 [variant]="'segmented'"
                 size="xs"
-                class="nui-calendar__time-picker-toggle"
+                class="nui-calendar__time-selector-toggle"
               />
             </div>
           }
 
           <!-- Time Picker (cambia según toggle en modo 'both') -->
           @if (
-            effectiveShowTimePicker() === CalendarTimePickerModeEnum.DEFAULT ||
-            (effectiveShowTimePicker() === CalendarTimePickerModeEnum.BOTH &&
-              timePickerToggleValue() === 'start')
+            effectiveShowTimeSelector() === CalendarTimeSelectorModeEnum.DEFAULT ||
+            (effectiveShowTimeSelector() === CalendarTimeSelectorModeEnum.BOTH &&
+              timeSelectorToggleValue() === 'start')
           ) {
-            <nui-time-picker
+            <nui-time-selector
               [showHeader]="false"
-              [mode]="effectiveTimePickerMode()"
-              [config]="effectiveTimePickerConfig()"
+              [mode]="effectiveTimeSelectorMode()"
+              [config]="effectiveTimeSelectorConfig()"
               [ngModel]="selectedStartTime()"
               (ngModelChange)="onTimeChange($event, false)"
             />
           }
 
           @if (
-            effectiveShowTimePicker() === CalendarTimePickerModeEnum.BOTH &&
-            timePickerToggleValue() === 'end'
+            effectiveShowTimeSelector() === CalendarTimeSelectorModeEnum.BOTH &&
+            timeSelectorToggleValue() === 'end'
           ) {
-            <nui-time-picker
+            <nui-time-selector
               [showHeader]="false"
-              [mode]="effectiveTimePickerMode()"
-              [config]="effectiveTimePickerConfig()"
+              [mode]="effectiveTimeSelectorMode()"
+              [config]="effectiveTimeSelectorConfig()"
               [ngModel]="selectedEndTime()"
               (ngModelChange)="onTimeChange($event, true)"
             />

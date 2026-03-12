@@ -1,4 +1,4 @@
-{
+﻿{
   "header": {
     "title": "NUI",
     "arialLabel": "NUI - Angular Component Library",
@@ -38,7 +38,7 @@
     "sidebarPanel": "Sidebar Panel",
     "actionMenu": "Action Menu",
     "progressBar": "Progress Bar",
-    "timePicker": "Time Picker",
+    "timeSelector": "Time Picker",
     "splitButton": "Split Button"
   },
   "presets": {

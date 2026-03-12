@@ -1,8 +1,8 @@
-import { inject } from '@angular/core';
-import { CalendarGlobalConfig, CalendarTimePickerModeEnum } from '../../components/calendar/models';
+﻿import { inject } from '@angular/core';
+import { CalendarGlobalConfig, CalendarTimeSelectorModeEnum } from '../../components/calendar/models';
 import { NUI_CONFIG } from '../nui.token';
 import { deepMerge } from '../../utils/deep-merge';
-import { TimePickerModeEnum } from '../../components/time-picker/models/time-picker.model';
+import { TimeSelectorModeEnum } from '../../components/time-selector/models/time-selector.model';
 
 /**
  * Constante pura con los defaults del Calendar.
@@ -11,9 +11,9 @@ import { TimePickerModeEnum } from '../../components/time-picker/models/time-pic
 export const DEFAULT_CALENDAR_CONFIG: CalendarGlobalConfig = {
   firstDayOfWeek: 1,
   showTodayButton: true,
-  showTimePicker: CalendarTimePickerModeEnum.NONE,
-  timePickerMode: TimePickerModeEnum.HOUR_MINUTE_24,
-  timePickerConfig: undefined,
+  showTimeSelector: CalendarTimeSelectorModeEnum.NONE,
+  timeSelectorMode: TimeSelectorModeEnum.HOUR_MINUTE_24,
+  timeSelectorConfig: undefined,
   customPresets: undefined,
   startTime: null,
   endTime: null,

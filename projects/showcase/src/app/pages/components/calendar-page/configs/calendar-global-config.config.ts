@@ -1,4 +1,4 @@
-import { ComponentSection } from '../../../../core/models';
+﻿import { ComponentSection } from '../../../../core/models';
 
 /**
  * Configuración de la tab "Conf. global" del componente Calendar.
@@ -32,8 +32,8 @@ export const appConfig: ApplicationConfig = {
         calendar: {
           firstDayOfWeek: 0,        // 0 = Sunday
           showTodayButton: false,
-          showTimePicker: '',
-          timePickerMode: 'hour-minute-24',
+          showTimeSelector: '',
+          TimeSelectorMode: 'hour-minute-24',
         },
       },
     }),
@@ -72,22 +72,22 @@ export const appConfig: ApplicationConfig = {
           'components.calendar.globalConfig.defaults.rows.showTodayButton',
         ],
         [
-          '<code>showTimePicker</code>',
-          'CalendarTimePickerMode',
+          '<code>showTimeSelector</code>',
+          'CalendarTimeSelectorMode',
           '<code class="neutral">none</code>',
-          'components.calendar.globalConfig.defaults.rows.showTimePicker',
+          'components.calendar.globalConfig.defaults.rows.showTimeSelector',
         ],
         [
-          '<code>timePickerMode</code>',
-          'TimePickerMode',
+          '<code>TimeSelectorMode</code>',
+          'TimeSelectorMode',
           '<code class="neutral">hour-minute-24</code>',
-          'components.calendar.globalConfig.defaults.rows.timePickerMode',
+          'components.calendar.globalConfig.defaults.rows.TimeSelectorMode',
         ],
         [
-          '<code>timePickerConfig</code>',
-          'TimePickerConfig | undefined',
+          '<code>TimeSelectorConfig</code>',
+          'TimeSelectorConfig | undefined',
           '<code class="neutral">undefined</code>',
-          'components.calendar.globalConfig.defaults.rows.timePickerConfig',
+          'components.calendar.globalConfig.defaults.rows.TimeSelectorConfig',
         ],
         [
           '<code>customPresets</code>',

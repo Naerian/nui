@@ -1,4 +1,4 @@
-{
+﻿{
   "title": "Calendrier",
   "subtitle": "Composant de sélection de dates avec plusieurs modes (jour, semaine, plage), tailles et stratégies de largeur",
   "basic": {
@@ -30,10 +30,10 @@
     "description": "Ajoutez des boutons de préréglage pour les plages fréquentes comme 'Semaine dernière', 'Mois dernier', 'Année dernière'. Supporte les icônes Remix Icon.",
     "note": "Cette fonctionnalité n'est disponible que lorsque <code>type='RANGE'</code>. Fournissez un tableau d'objets <code>DateRangePreset</code> dans <code>customPresets</code>. Chaque préréglage a un <code>label</code>, une <code>range</code> (avec start/end) et une <code>icône</code> optionnelle."
   },
-  "time-picker": {
+  "time-selector": {
     "title": "Intégration du sélecteur d'heure",
     "description": "Combine la sélection de date avec la sélection d'heure. Supporte l'heure de début, l'heure de fin ou les deux selon le type de calendrier.",
-    "note": "Utilisez <code>showTimePicker='true'</code> et configurez <code>timePickerMode</code> avec <code>'start'</code>, <code>'end'</code> ou <code>'both'</code>. Vous pouvez personnaliser le sélecteur d'heure avec <code>timePickerConfig</code> (pas, plage, préréglages, etc.)."
+    "note": "Utilisez <code>showTimeSelector='true'</code> et configurez <code>timeSelectorMode</code> avec <code>'start'</code>, <code>'end'</code> ou <code>'both'</code>. Vous pouvez personnaliser le sélecteur d'heure avec <code>timeSelectorConfig</code> (pas, plage, préréglages, etc.)."
   },
   "disabled-dates": {
     "title": "Dates désactivées",
@@ -111,9 +111,9 @@
         "showPresets": { "description": "Affiche le panneau de préréglages (uniquement pour le type RANGE)" },
         "customPresets": { "description": "Préréglages de plages de dates personnalisés" },
         "firstDayOfWeek": { "description": "0=Dimanche, 1=Lundi (premier jour de la semaine)" },
-        "showTimePicker": { "description": "Affiche le sélecteur d'heure : 'both' | 'default' | 'none'" },
-        "timePickerMode": { "description": "Mode d'affichage dans le sélecteur de temps intégré" },
-        "timePickerConfig": { "description": "Configuration du sélecteur d'heure (pas, plages, etc.)" },
+        "showTimeSelector": { "description": "Affiche le sélecteur d'heure : 'both' | 'default' | 'none'" },
+        "timeSelectorMode": { "description": "Mode d'affichage dans le sélecteur de temps intégré" },
+        "timeSelectorConfig": { "description": "Configuration du sélecteur d'heure (pas, plages, etc.)" },
         "startTime": { "description": "Heure de début initiale" },
         "endTime": { "description": "Heure de fin initiale" },
         "dateStatusFn": { "description": "Fonction qui attribue des états visuels aux dates ('success', 'warning', 'danger', 'info')" },
@@ -532,9 +532,9 @@
         "firstDayOfWeek": "Premier jour de la semaine. 0 = Dimanche, 1 = Lundi, etc.",
 
         "showTodayButton": "Si le bouton de raccourci « Aujourd'hui » est affiché.",
-        "showTimePicker": "Mode d'affichage du sélecteur de temps : <code>none</code>, <code>inline</code> ou <code>popover</code>.",
-        "timePickerMode": "Mode de précision du sélecteur de temps (12/24 heures, avec ou sans secondes).",
-        "timePickerConfig": "Objet de configuration avancée pour le sélecteur de temps.",
+        "showTimeSelector": "Mode d'affichage du sélecteur de temps : <code>none</code>, <code>inline</code> ou <code>popover</code>.",
+        "timeSelectorMode": "Mode de précision du sélecteur de temps (12/24 heures, avec ou sans secondes).",
+        "timeSelectorConfig": "Objet de configuration avancée pour le sélecteur de temps.",
         "customPresets": "Liste de préréglages de dates personnalisés affichés comme raccourcis.",
         "defaultDate": "Date par défaut affichée quand aucune valeur n'est sélectionnée.",
         "startTime": "Heure de début par défaut pour les sélections de plage avec temps.",

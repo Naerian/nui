@@ -1,0 +1,386 @@
+﻿{
+  "title": "Sélecteur d'heure",
+  "subtitle": "Composant de sélection d'heure avec plusieurs modes, tailles et configurations avancées",
+  "basic": {
+    "title": "Utilisation basique",
+    "description": "Sélecteur d'heure simple avec configuration par défaut. Sélectionnez les heures et les minutes en format 24 heures."
+  },
+  "modes": {
+    "title": "Modes de temps",
+    "description": "Cinq modes disponibles : heures seulement (12h/24h), heures et minutes (12h/24h), et mode durée.",
+    "note": "Utilisez <code>mode</code> avec les valeurs : <code>'HOUR_12'</code>, <code>'HOUR_24'</code>, <code>'HOUR_MINUTE_12'</code> et <code>'HOUR_MINUTE_24'</code>."
+  },
+  "sizes": {
+    "title": "Tailles",
+    "description": "Cinq options de taille qui redimensionnent harmonieusement le composant et ses éléments internes.",
+    "note": "Les tailles affectent la hauteur, le rembourrage et la taille de police du sélecteur. Utilisez <code>size</code> avec les valeurs <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> et <code>'xl'</code>."
+  },
+  "presets": {
+    "title": "Préréglages rapides",
+    "description": "Ajoutez des boutons de préréglage pour les heures fréquentes comme 'Maintenant', 'Petit-déjeuner', 'Déjeuner'. Peuvent inclure des icônes personnalisées.",
+    "note": "Fournissez un tableau d'objets <code>TimePreset</code> dans la <code>config</code>. Chaque préréglage a un <code>label</code>, un <code>time</code> et une <code>icon</code> optionnelle. Supporte les icônes Remix Icon."
+  },
+  "steps": {
+    "title": "Pas d'heures et de minutes",
+    "description": "Contrôlez les intervalles d'incrément pour les heures et les minutes afin de limiter les options sélectionnables.",
+    "note": "Utilisez <code>hourStep</code> et <code>minuteStep</code> dans la <code>config</code>. Par exemple, <code>hourStep: 2</code> affiche uniquement les heures paires, et <code>minuteStep: 15</code> affiche les quarts d'heure (00, 15, 30, 45)."
+  },
+  "timeRange": {
+    "title": "Plage horaire",
+    "description": "Restreint la plage horaire sélectionnable en utilisant des valeurs minimales et maximales. Affiche optionnellement un indicateur visuel.",
+    "note": "Configurez <code>minTime</code> et <code>maxTime</code> dans la <code>config</code>. Les heures en dehors de cette plage sont désactivées. Utilisez <code>showRangeIndicator: true</code> pour mettre visuellement en évidence la plage valide."
+  },
+  "disabledTimes": {
+    "title": "Heures désactivées",
+    "description": "Bloque des heures ou des minutes spécifiques, empêchant leur sélection. Utile pour les créneaux horaires non disponibles.",
+    "note": "Utilisez <code>disabledHours</code> et <code>disabledMinutes</code> dans la <code>config</code> pour spécifier des tableaux de valeurs désactivées. Les éléments désactivés affichent un style distinctif atténué."
+  },
+  "durationMode": {
+    "title": "Mode durée",
+    "description": "Mode spécial pour la sélection d'intervalles de temps. Peut afficher les secondes et définir une durée maximale.",
+    "note": "Définissez <code>mode='DURATION'</code> et configurez avec <code>duration: { maxHours: 8, showSeconds: true }</code> dans la <code>config</code>. Utile pour la sélection de quarts, le suivi du temps, etc."
+  },
+  "defaultStrategies": {
+    "title": "Stratégies par défaut",
+    "description": "Contrôle l'heure initiale quand aucune valeur n'est fournie : maintenant, intelligent (actuel + décalage), vide ou personnalisé.",
+    "note": "Utilisez <code>defaultStrategy</code> avec les valeurs <code>'now'</code>, <code>'smart'</code>, <code>'empty'</code> ou <code>'custom'</code>. Pour 'smart', configurez <code>smartOffset</code> en minutes. Pour 'custom', utilisez <code>defaultValue</code>."
+  },
+  "disabled": {
+    "title": "État désactivé",
+    "description": "Désactive l'ensemble du sélecteur, empêchant l'interaction utilisateur et affichant une apparence atténuée.",
+    "note": "Utilisez la propriété <code>disabled</code> pour contrôler dynamiquement si le sélecteur d'heure est activé ou désactivé."
+  },
+  "reactiveForms": {
+    "title": "Formulaires réactifs",
+    "description": "Intégration complète avec les formulaires réactifs Angular. Implémente ControlValueAccessor.",
+    "note": "Utilisez <code>formControl</code> ou <code>formControlName</code> pour intégrer avec les formulaires Angular. Le composant gère la synchronisation, la validation et l'état automatiquement."
+  },
+  "overlayIntegration": {
+    "title": "Intégration overlay",
+    "description": "Utilisez <code>autoClose</code> et <code>selectFinished</code> pour intégrer le TimeSelector dans un datepicker ou un popover. Le output <code>selectFinished</code> est émis quand la sélection est terminée pour que l'hôte ferme l'overlay.",
+    "note": "L'input <code>overlayMode</code> active des comportements de focus supplémentaires conçus pour quand le composant est rendu dans un overlay : focus automatique sur la première colonne au montage.",
+    "eventLabel": "Nombre d'émissions de selectFinished"
+  },
+  "customFooter": {
+    "title": "Pied de page personnalisé",
+    "description": "Projetez un <code>ng-template</code> avec la directive <strong>nuiTimeSelectorFooter</strong> pour remplacer le pied de page intégré par vos propres boutons d'action ou tout autre contenu.",
+    "note": "Le template personnalisé <strong>remplace</strong> le pied de page intégré (boutons 'Effacer' et 'Maintenant'). Le contexte typé <code>TimeSelectorFooterContext</code> expose <code>$implicit</code> (valeur actuelle), <code>actions</code> avec les méthodes <code>clear()</code> et <code>setToNow()</code>, <code>normalization</code> et <code>range</code>."
+  },
+  "customHeader": {
+    "title": "En-tête personnalisé",
+    "description": "Projetez un <code>ng-template</code> avec la directive <strong>nuiTimeSelectorHeader</strong> pour remplacer l'affichage visuel de l'en-tête par votre propre contenu : valeur formatée, indicateur de plage, alerte de normalisation ou tout élément dont vous avez besoin.",
+    "note": "Le template personnalisé ne remplace que le <strong>contenu visuel</strong> de l'en-tête. Les régions live d'accessibilité (<code>aria-live</code>) restent actives quel que soit le template, garantissant que les lecteurs d'écran continuent d'annoncer les changements de valeur. Le contexte typé <code>TimeSelectorHeaderContext</code> expose <code>$implicit</code> (valeur actuelle), <code>formattedTime</code> (texte lisible), <code>mode</code>, <code>is12h</code>, <code>normalization</code> et <code>range</code>."
+  },
+  "customItem": {
+    "title": "Élément personnalisé",
+    "description": "Projetez un <code>ng-template</code> avec la directive <strong>nuiTimeSelectorItem</strong> pour personnaliser visuellement le contenu de chaque option dans les colonnes d'heures, de minutes et de secondes.",
+    "note": "La directive remplace uniquement le <strong>contenu visuel</strong> du bouton d'élément. Le composant gère toujours tous les attributs ARIA (<code>role='option'</code>, <code>aria-selected</code>), la navigation au clavier et les événements de sélection. Le contexte inclut la valeur en tant que <code>$implicit</code>, le type de colonne <code>type</code>, et les états <code>selected</code> et <code>disabled</code>."
+  },
+  "api": {
+    "inputs": {
+      "title": "Entrées",
+      "description": "Propriétés d'entrée pour configurer le comportement, l'apparence et les restrictions du sélecteur d'heure",
+      "rows": {
+        "autoClose": "Si true, émet selectFinished à la fin de la sélection. Conçu pour une utilisation dans un datepicker ou un overlay.",
+        "overlayMode": "Si true, active les comportements spécifiques aux overlays : focus automatique sur la première colonne à l'ouverture."
+      }
+    },
+    "outputs": {
+      "title": "Sorties",
+      "description": "Événements émis par le sélecteur d'heure quand l'utilisateur interagit avec lui",
+      "rows": {
+        "selectFinished": "Émet (void) quand l'utilisateur termine la sélection et que autoClose est true. L'overlay peut se fermer à la réception de cet événement."
+      }
+    },
+    "config": {
+      "title": "TimeSelectorConfig",
+      "description": "Interface de configuration avec toutes les options disponibles : pas, plages, heures désactivées, préréglages et configuration de durée"
+    },
+    "durationConfig": {
+      "title": "DurationConfig",
+      "description": "Configuration spécifique au mode DURATION : limites d'heures, affichage des secondes, pas et préréglages de durée rapide"
+    },
+    "models": {
+      "title": "Définitions de types",
+      "description": "Interfaces et définitions de types pour les valeurs, la configuration et les préréglages"
+    },
+    "methods": {
+      "title": "Méthodes",
+      "description": "Le composant implémente ControlValueAccessor pour une intégration transparente avec les formulaires Angular"
+    },
+    "contentDirectives": {
+      "title": "Directives de contenu",
+      "description": "Directives marker permettant de projeter des templates personnalisés pour les éléments, le pied de page et l'en-tête du sélecteur"
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Couleurs",
+      "description": "Variables CSS de couleur générées par ThemeService pour chaque couleur sémantique. Chaque couleur génère 9 variables spécifiques pour différents états du sélecteur : fonds des éléments (normal, survol, sélectionné), couleurs de texte, états désactivés, accents et anneau de focus."
+    },
+    "sizes": {
+      "title": "Tailles",
+      "description": "Variables CSS spécifiques aux tailles qui contrôlent les hauteurs des éléments, les rembourrages et les dimensions des conteneurs. Cinq variantes de taille disponibles : xs, sm, md (défaut), lg et xl."
+    },
+    "structure": {
+      "title": "Structure",
+      "description": "Variables CSS structurelles pour contrôler les dimensions, l'espacement, la typographie et l'apparence visuelle. Inclut le style du séparateur, la personnalisation de la barre de défilement, les bordures, les polices et les états de focus."
+    },
+    "customization": {
+      "title": "Personnalisation",
+      "description": "Exemples de personnalisation des styles du sélecteur d'heure dans votre application. Vous pouvez remplacer les variables CSS globalement ou spécifiquement aux instances. L'intégration avec ThemeService permet de générer des variables de couleur pour vos couleurs sémantiques personnalisées."
+    }
+  },
+  "i18n": {
+    "tokens": {
+      "title": "Tokens du sélecteur d'heure",
+      "description": "Tokens utilisés pour les libellés du sélecteur d'heure, les boutons d'action et les textes pour lecteurs d'écran.",
+      "note": "Remplacez n'importe quel token globalement avec <code>provideNuiI18n({ timeSelector: { ... } })</code>.",
+      "rows": {
+        "setToCurrentTime": {
+          "description": "Libellé du bouton d'action 'définir à l'heure actuelle'."
+        },
+        "selectTime": {
+          "description": "Libellé de placeholder quand aucune heure n'est sélectionnée."
+        },
+        "clear": {
+          "description": "Libellé de l'action d'effacement/réinitialisation de l'heure."
+        },
+        "hour": {
+          "description": "Libellé d'en-tête pour la colonne des heures (forme longue)."
+        },
+        "minutes": {
+          "description": "Libellé d'en-tête pour la colonne des minutes (forme longue)."
+        },
+        "hour12": {
+          "description": "Libellé utilisé quand le sélecteur est en mode 12 heures."
+        },
+        "hour24": {
+          "description": "Libellé utilisé quand le sélecteur est en mode 24 heures."
+        },
+        "period": {
+          "description": "Libellé pour la colonne de période AM/PM."
+        },
+        "normalizedTime": {
+          "description": "Modèle d'annonce pour les lecteurs d'écran de la valeur d'heure normalisée."
+        },
+        "rangeLabel": {
+          "description": "Libellé accessible décrivant une sélection de plage horaire."
+        },
+        "timeSelected": {
+          "description": "Annonce pour les lecteurs d'écran quand une heure a été sélectionnée avec succès."
+        }
+      }
+    },
+    "durationAndPresets": {
+      "title": "Tokens de durée et de préréglages",
+      "description": "Tokens spécifiques pour les libellés du mode durée, les en-têtes de colonnes et les noms de préréglages.",
+      "note": "Les tokens de durée sont sous l'espace de noms <code>timeSelector.duration</code> et les tokens de préréglages sous <code>timeSelector.presets</code>.",
+      "rows": {
+        "hours": {
+          "description": "Forme longue de 'heures' dans l'affichage de durée."
+        },
+        "minutes": {
+          "description": "Forme longue de 'minutes' dans l'affichage de durée."
+        },
+        "seconds": {
+          "description": "Forme longue de 'secondes' dans l'affichage de durée."
+        },
+        "hoursShort": {
+          "description": "Abréviation courte pour les heures (ex. 'h')."
+        },
+        "minutesShort": {
+          "description": "Abréviation courte pour les minutes (ex. 'min')."
+        },
+        "secondsShort": {
+          "description": "Abréviation courte pour les secondes (ex. 's')."
+        },
+        "selectDuration": {
+          "description": "Libellé de placeholder en mode de sélection de durée."
+        },
+        "durationSelected": {
+          "description": "Annonce pour les lecteurs d'écran quand une durée a été sélectionnée."
+        },
+        "durationHours": {
+          "description": "Annonce pour les lecteurs d'écran de la valeur des heures en mode durée."
+        },
+        "durationMinutes": {
+          "description": "Annonce pour les lecteurs d'écran de la valeur des minutes en mode durée."
+        },
+        "durationSeconds": {
+          "description": "Annonce pour les lecteurs d'écran de la valeur des secondes en mode durée."
+        },
+        "tabSelector": {
+          "description": "Libellé de l'onglet sélecteur manuel quand les deux onglets de sélection et de préréglage sont visibles."
+        },
+        "tabPresets": {
+          "description": "Libellé de l'onglet de préréglages quand les deux onglets sont visibles."
+        },
+        "presetsNow": {
+          "description": "Libellé du préréglage 'maintenant'."
+        },
+        "presetsNoon": {
+          "description": "Libellé du préréglage 'midi' (12:00)."
+        },
+        "presetsMidnight": {
+          "description": "Libellé du préréglage 'minuit' (00:00)."
+        },
+        "presetsMinutes": {
+          "description": "Modèle de libellé pour les préréglages en minutes (ex. '15 minutes')."
+        },
+        "presetsHour": {
+          "description": "Libellé pour le préréglage d'une heure."
+        },
+        "presetsHours": {
+          "description": "Modèle de libellé pour les préréglages multi-heures (ex. '2 heures')."
+        }
+      }
+    },
+    "a11yTokens": {
+      "title": "Tokens d'accessibilité",
+      "description": "Tokens utilisés exclusivement pour les annonces des lecteurs d'écran et les libellés ARIA dans le sélecteur d'heure.",
+      "note": "Ces tokens sont imbriqués sous <code>timeSelector.a11y</code>.",
+      "rows": {
+        "timeSelectorLabel": {
+          "description": "L'<code>aria-label</code> appliqué au conteneur racine du sélecteur d'heure en mode standard."
+        },
+        "durationPickerLabel": {
+          "description": "L'<code>aria-label</code> appliqué au conteneur racine en mode durée."
+        },
+        "hourColumnHelp": {
+          "description": "Texte d'aide annoncé par le lecteur d'écran pour la colonne des heures."
+        },
+        "minuteColumnHelp": {
+          "description": "Texte d'aide annoncé pour la colonne des minutes."
+        },
+        "periodHelp": {
+          "description": "Texte d'aide annoncé pour la colonne AM/PM."
+        },
+        "normalizedAlert": {
+          "description": "Texte annoncé via une région live assertive quand l'heure sélectionnée est normalisée à la valeur valide la plus proche."
+        },
+        "rangeInfo": {
+          "description": "Texte pour lecteur d'écran décrivant les limites de la plage horaire."
+        }
+      }
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "Rôles et attributs ARIA",
+      "description": "Le Sélecteur d'heure implémente le modèle ARIA <code>listbox</code> / <code>option</code> pour chaque colonne défilable.",
+      "rows": {
+        "containerLabel": {
+          "description": "L'élément racine du sélecteur a <code>aria-label</code> défini depuis le token i18n <code>timeSelectorLabel</code> (ou <code>durationPickerLabel</code>)."
+        },
+        "columnRole": {
+          "description": "Chaque colonne a <code>role=\"listbox\"</code> et un <code>aria-label</code> dérivé de son token i18n spécifique (heure, minutes, période…)."
+        },
+        "optionRole": {
+          "description": "Chaque valeur temporelle a <code>role=\"option\"</code> et <code>aria-selected=\"true\"</code> quand c'est la valeur active."
+        },
+        "columnLabels": {
+          "description": "Les tokens de texte d'aide de colonne sont annoncés lorsque la colonne reçoit le focus, indiquant comment interagir (touches fléchées, Début/Fin)."
+        },
+        "optionSelected": {
+          "description": "Lorsque qu'une heure est sélectionnée, elle est annoncée via le token i18n <code>timeSelected</code> qui inclut l'heure sélectionnée (ex. 'Heure sélectionnée : 3:15 PM')."
+        },
+        "normalizedAlert": {
+          "description": "Lorsque l'heure est normalisée, elle est annoncée via le token i18n <code>normalizedTime</code> qui inclut l'heure normalisée (ex. 'Heure normalisée à 4:00 PM')."
+        }
+      }
+    },
+    "naming": {
+      "title": "Nom accessible",
+      "description": "Le sélecteur et chaque colonne sont étiquetés via des tokens i18n. Les options individuelles sont étiquetées par leur valeur temporelle visible.",
+      "note": "Configurez toujours les tokens i18n pour votre langue pour que les utilisateurs de lecteurs d'écran entendent des libellés de colonnes significatifs (ex. 'Heure', 'Minutes', 'AM/PM').",
+      "info": {
+        "containerLabel": "Token timeSelectorLabel / durationPickerLabel",
+        "columnLabels": "Tokens heure / minutes / période",
+        "helpTokens": "Tokens hourColumnHelp / minuteColumnHelp / periodHelp"
+      },
+      "rows": {
+        "container": {
+          "description": "Le libellé du conteneur racine vient de <code>timeSelector.a11y.timeSelectorLabel</code> (ou <code>durationPickerLabel</code>). Remplacez-le par langue."
+        },
+        "columns": {
+          "description": "Chaque libellé de colonne vient du token i18n correspondant, donnant du contexte aux utilisateurs de lecteurs d'écran pour chaque région défilable."
+        },
+        "help": {
+          "description": "Les tokens de texte d'aide des colonnes sont annoncés quand la colonne reçoit le focus, indiquant comment interagir (touches fléchées, Début/Fin)."
+        }
+      }
+    },
+    "keyboard": {
+      "title": "Interaction clavier",
+      "description": "Chaque colonne du Sélecteur d'heure se comporte comme une liste box indépendante. Utilisez les touches suivantes pour naviguer et sélectionner des valeurs.",
+      "rows": {
+        "arrows": {
+          "description": "Déplace le focus vers l'option précédente/suivante dans la colonne focalisée."
+        },
+        "tab": {
+          "description": "Déplace le focus vers la colonne interactive suivante ou le contrôle (ex. commutateur de période, boutons d'action)."
+        },
+        "homeEnd": {
+          "description": "Saute à la première/dernière option dans la colonne focalisée."
+        },
+        "enterSpace": {
+          "description": "Sélectionne l'option focalisée et met à jour la valeur d'heure affichée."
+        },
+        "escape": {
+          "description": "Ferme le panneau du sélecteur d'heure et revient à la valeur précédemment confirmée."
+        }
+      }
+    },
+    "templates": {
+      "title": "Templates personnalisés et accessibilité",
+      "description": "Lors de l'utilisation de <code>nuiTimeSelectorItem</code>, <code>nuiTimeSelectorFooter</code> ou <code>nuiTimeSelectorHeader</code>, le composant maintient son infrastructure d'accessibilité. Suivez ces directives pour garantir une expérience accessible.",
+      "note": "Ne supprimez jamais le texte visible des éléments lors de la personnalisation. Les lecteurs d'écran annoncent les valeurs des boutons via leur contenu textuel. Si vous utilisez uniquement des icônes ou des couleurs, ajoutez toujours un <code>span</code> avec <code>class='sr-only'</code> contenant la valeur lisible.",
+      "rows": {
+        "buttonWrapper": {
+          "info": "Conteneur géré par NUI",
+          "description": "L'élément <code>button</code> externe (avec <code>role='option'</code>, <code>aria-selected</code> et gestion du clavier) n'est <strong>pas modifié</strong>. Seul le contenu interne est remplacé."
+        },
+        "visibleText": {
+          "info": "Texte visible obligatoire",
+          "description": "Incluez toujours la valeur lisible (<code>{{ value }}</code>) dans le template. Si le design le masque visuellement, utilisez <code>&lt;span class='sr-only'&gt;{{ value }}&lt;/span&gt;</code>."
+        },
+        "footerButtons": {
+          "info": "Accessibilité des boutons du pied de page",
+          "description": "Les boutons du pied de page personnalisé doivent inclure <code>type='button'</code> et du texte descriptif ou un <code>aria-label</code>. Évitez les boutons avec uniquement des icônes sans étiquette."
+        },
+        "headerLiveRegions": {
+          "info": "Régions live de l'en-tête préservées",
+          "description": "Lors de l'utilisation de <code>nuiTimeSelectorHeader</code>, les régions live (<code>aria-live='polite'</code> pour la valeur actuelle et <code>aria-live='assertive'</code> pour l'alerte de normalisation) restent dans le DOM même lorsque le template remplace l'affichage visuel. Il n'est pas nécessaire de les ajouter manuellement dans le template personnalisé."
+        },
+        "colorOnly": {
+          "info": "Ne pas utiliser uniquement la couleur pour communiquer l'état",
+          "description": "Si l'état <code>selected</code> est indiqué uniquement par la couleur, les utilisateurs malvoyants ou daltoniens ne pourront pas le distinguer. Combinez toujours la couleur avec un changement typographique ou une icône."
+        }
+      }
+    }
+  },
+  "globalConfig": {
+    "setup": {
+      "title": "Configuration globale",
+      "description": "Le composant TimeSelector supporte la configuration globale via <code>provideNUI()</code>. Définissez des valeurs par défaut une seule fois au niveau de l'application pour tous les sélecteurs d'heure.",
+      "note": "La configuration globale agit comme valeurs par défaut et peut toujours être remplacée par instance via les inputs du composant."
+    },
+    "defaults": {
+      "title": "Propriétés configurables",
+      "description": "Les propriétés suivantes peuvent être configurées globalement via <code>TimeSelectorGlobalConfig</code> :",
+      "rows": {
+        "showHeader": "Si l'en-tête affichant l'heure formatée est affiché en haut du sélecteur.",
+        "defaultStrategy": "Stratégie de valeur initiale : <code>empty</code> (sans valeur), <code>now</code> (heure actuelle), <code>smart</code> (heure actuelle + offset) ou <code>custom</code>.",
+        "smartOffset": "Offset en minutes ajouté à l'heure actuelle quand la stratégie est <code>smart</code>.",
+        "hourStep": "Incrément pour le sélecteur d'heures. Par exemple, <code>2</code> affiche uniquement les heures paires.",
+        "minuteStep": "Incrément pour le sélecteur de minutes. Par exemple, <code>15</code> affiche les quarts d'heure."
+      }
+    },
+    "priority": {
+      "title": "Priorité de résolution",
+      "description": "NUI résout les valeurs de configuration en utilisant la chaîne de priorité suivante (la priorité la plus élevée l'emporte) :",
+      "note": "<strong>Input du composant</strong> → <strong>Config globale (<code>provideNUI</code>)</strong> → <strong>Valeur par défaut</strong>"
+    }
+  }
+}

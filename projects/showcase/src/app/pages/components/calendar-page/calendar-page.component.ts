@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+﻿import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -46,7 +46,7 @@ export class CalendarPageComponent extends BaseComponentPage {
         'week-numbers',
         'range-selection',
         'presets',
-        'time-picker',
+        'time-selector',
         'disabled-dates',
         'dynamic-disabled-dates',
         'min-max-dates',

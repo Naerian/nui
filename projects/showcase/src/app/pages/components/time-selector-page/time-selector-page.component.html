@@ -1,0 +1,321 @@
+﻿<div class="docs-page">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h1>{{ pageConfig.title | translate }}</h1>
+      <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
+    </div>
+
+    <app-component-tabs [tabs]="tabs" [sections]="pageConfig.sections" #tabsComp>
+      @if (tabsComp.activeSections(); as activeSections) {
+        @for (section of activeSections; track section.id) {
+          <div class="section">
+            <!-- Título de sección -->
+            <app-section-title
+              [anchor]="section.anchor"
+              [title]="section.title | translate"
+              [tabId]="tabsComp.activeTabId()"
+            ></app-section-title>
+
+            @if (section.description) {
+              <p class="section-description" [innerHTML]="section.description | translate"></p>
+            }
+
+            @if (section.note) {
+              <div class="section-note" [ngClass]="section.note.type">
+                <p [innerHTML]="section.note.content | translate"></p>
+              </div>
+            }
+
+            <!-- Contenido específico de cada sección -->
+            @switch (section.id) {
+              @case ('basic') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-time-selector></nui-time-selector>
+                </div>
+              }
+
+              @case ('modes') {
+                <div class="example-preview flex-row align-items-start gap-3">
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">HOUR_24</h6>
+                    <nui-time-selector mode="HOUR_24"></nui-time-selector>
+                  </div>
+
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">HOUR_12 (AM/PM)</h6>
+                    <nui-time-selector mode="HOUR_12"></nui-time-selector>
+                  </div>
+
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">HOUR_MINUTE_24 (24h)</h6>
+                    <nui-time-selector mode="HOUR_MINUTE_24"></nui-time-selector>
+                  </div>
+
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">HOUR_MINUTE_12 (12h AM/PM)</h6>
+                    <nui-time-selector mode="HOUR_MINUTE_12"></nui-time-selector>
+                  </div>
+                </div>
+              }
+
+              @case ('presets') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-time-selector
+                    [config]="configWithPresets"
+                    (valueChange)="onTimeWithPresetsChange($event)"
+                  ></nui-time-selector>
+
+                  <div class="value-display">
+                    Selected time:
+                    <strong>{{ selectedTimeWithPresets() | json }}</strong>
+                  </div>
+                </div>
+              }
+
+              @case ('steps') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <h6 class="mb-0">hourStep: 2, minuteStep: 15</h6>
+                  <nui-time-selector [config]="configWithSteps"></nui-time-selector>
+                </div>
+              }
+
+              @case ('time-range') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <h6 class="mb-0">minTime: 09:00, maxTime: 18:00</h6>
+                  <nui-time-selector [config]="configWithRange"></nui-time-selector>
+                </div>
+              }
+
+              @case ('disabled-times') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <h6 class="mb-0">disabledHours: [12, 13, 14], disabledMinutes: [15, 45]</h6>
+                  <nui-time-selector [config]="configWithDisabled"></nui-time-selector>
+                </div>
+              }
+
+              @case ('duration-mode') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <h6 class="mb-0">maxHours: 8, showSeconds: true</h6>
+                  <nui-time-selector mode="DURATION" [config]="configDuration"></nui-time-selector>
+                </div>
+              }
+
+              @case ('default-strategies') {
+                <div class="example-preview flex-row gap-3 align-items-start">
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">Strategy: now</h6>
+                    <p class="mb-0"><em>Start with the current time</em></p>
+                    <nui-time-selector defaultStrategy="now"></nui-time-selector>
+                  </div>
+
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">Strategy: smart</h6>
+                    <p class="mb-0"><em>Current time + 30 min rounded</em></p>
+                    <nui-time-selector defaultStrategy="smart" [smartOffset]="30"></nui-time-selector>
+                  </div>
+
+                  <div class="example-item d-flex flex-column align-items-center gap-3">
+                    <h6 class="mb-0">Strategy: custom</h6>
+                    <p class="mb-0"><em>Custom value: 09:00</em></p>
+                    <nui-time-selector
+                      defaultStrategy="custom"
+                      [defaultValue]="{ hour: 9, minute: 0 }"
+                    ></nui-time-selector>
+                  </div>
+                </div>
+              }
+
+              @case ('disabled') {
+                <div class="example-preview">
+                  <nui-time-selector [disabled]="true"></nui-time-selector>
+                </div>
+              }
+
+              @case ('custom-footer') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-time-selector (valueChange)="onCustomFooterChange($event)">
+                    <ng-template nuiTimeSelectorFooter let-currentTime let-actions="actions">
+                      <div class="custom-footer-demo">
+                        <span class="custom-footer-demo__time">
+                          @if (currentTime) {
+                            {{ $any(currentTime).hour }}:{{
+                              $any(currentTime).minute.toString().padStart(2, '0')
+                            }}
+                          } @else {
+                            --:--
+                          }
+                        </span>
+                        <div class="custom-footer-demo__actions">
+                          <button
+                            nuiButton
+                            size="xs"
+                            prefixIcon="ri-time-line"
+                            variant="ghost"
+                            (onClick)="actions.setToNow?.()"
+                          >
+                            Now
+                          </button>
+                          <button
+                            nuiButton
+                            size="xs"
+                            variant="ghost"
+                            prefixIcon="ri-close-line"
+                            (onClick)="actions.clear()"
+                          >
+                            Clean
+                          </button>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </nui-time-selector>
+
+                  <div class="value-display">
+                    Selected time:
+                    <strong>{{ timeForCustomFooter() | json }}</strong>
+                  </div>
+                </div>
+              }
+
+              @case ('custom-header') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-time-selector
+                    [config]="configWithRange"
+                    (valueChange)="onCustomHeaderChange($event)"
+                  >
+                    <ng-template
+                      nuiTimeSelectorHeader
+                      let-currentTime
+                      let-formattedTime="formattedTime"
+                      let-normalization="normalization"
+                      let-range="range"
+                    >
+                      <div class="custom-header-demo">
+                        <span class="custom-header-demo__time">{{ formattedTime }}</span>
+                        @if (range.min && range.max) {
+                          <span class="custom-header-demo__range">
+                            <i class="ri-time-line" aria-hidden="true"></i>
+                            {{ range.min.hour }}:{{ range.min.minute.toString().padStart(2, '0') }}
+                            &ndash;
+                            {{ range.max.hour }}:{{ range.max.minute.toString().padStart(2, '0') }}
+                          </span>
+                        }
+                        @if (normalization) {
+                          <span class="custom-header-demo__normalized">
+                            <i class="ri-alert-line" aria-hidden="true"></i>
+                            {{ normalization.original }}
+                          </span>
+                        }
+                      </div>
+                    </ng-template>
+                  </nui-time-selector>
+
+                  <div class="value-display">
+                    Selected time:
+                    <strong>{{ timeForCustomHeader() | json }}</strong>
+                  </div>
+                </div>
+              }
+
+              @case ('custom-item') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-time-selector (valueChange)="onCustomItemChange($event)">
+                    <ng-template
+                      nuiTimeSelectorItem
+                      let-value
+                      let-type="type"
+                      let-selected="selected"
+                    >
+                      <span class="custom-item-demo" [class.custom-item-demo--selected]="selected">
+                        {{ value }}{{ type === 'hour' ? 'h' : 'm' }}
+                      </span>
+                    </ng-template>
+                  </nui-time-selector>
+
+                  <div class="value-display">
+                    Selected time:
+                    <strong>{{ timeForCustomItem() | json }}</strong>
+                  </div>
+                </div>
+              }
+
+              @case ('reactive-forms') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-time-selector [formControl]="timeControl"></nui-time-selector>
+
+                  <div class="value-display">
+                    Form value:
+                    <strong>{{ timeControl.value | json }}</strong>
+                  </div>
+
+                  <div class="button-row">
+                    <button
+                      nuiButton
+                      size="xs"
+                      color="secondary"
+                      (click)="timeControl.setValue({ hour: 10, minute: 30 })"
+                    >
+                      Set to 10:30
+                    </button>
+                    <button nuiButton size="xs" color="secondary" (click)="timeControl.reset()">
+                      Reset
+                    </button>
+                    <button nuiButton size="xs" color="secondary" (click)="timeControl.disable()">
+                      Disable
+                    </button>
+                    <button nuiButton size="xs" color="secondary" (click)="timeControl.enable()">
+                      Enable
+                    </button>
+                  </div>
+                </div>
+              }
+
+              @case ('overlay-integration') {
+                <div class="example-preview flex-column align-items-center gap-3">
+                  <nui-time-selector
+                    [autoClose]="true"
+                    (selectFinished)="onSelectFinished()"
+                  ></nui-time-selector>
+
+                  <div class="value-display">
+                    <span>{{ 'components.timeSelector.overlayIntegration.eventLabel' | translate }}:
+                      <strong>{{ autoCloseEventCount() }}</strong>
+                    </span>
+                  </div>
+                </div>
+              }
+            }
+
+            <!-- Tabla de datos (para API o Theming) -->
+            @if (section.table) {
+              <div class="api-table">
+                <table>
+                  <thead>
+                    <tr>
+                      @for (header of section.table.headers; track $index) {
+                        <th [innerHTML]="header | translate"></th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of section.table.rows; track $index) {
+                      <tr>
+                        @for (cell of row; track $index) {
+                          <td [innerHTML]="cell | translate"></td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+
+            <!-- Code blocks asociados a esta sección -->
+            @if (section.examples && section.examples.length > 0) {
+              <app-code-block [examples]="section.examples"></app-code-block>
+            }
+          </div>
+        }
+      }
+    </app-component-tabs>
+  </div>
+</div>

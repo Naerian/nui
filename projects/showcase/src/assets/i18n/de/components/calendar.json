@@ -1,4 +1,4 @@
-{
+﻿{
   "title": "Kalender",
   "subtitle": "Komponente zur Datumsauswahl mit mehreren Modi (Tag, Woche, Bereich), Größen und Breitenstrategien",
   "basic": {
@@ -30,10 +30,10 @@
     "description": "Füge Voreinstellungsschaltflächen für häufige Bereiche wie 'Letzte Woche', 'Letzter Monat', 'Letztes Jahr' hinzu. Unterstützt Remix Icon-Icons.",
     "note": "Diese Funktion ist nur bei <code>type='RANGE'</code> verfügbar. Gib ein Array von <code>DateRangePreset</code>-Objekten in <code>customPresets</code> an. Jede Voreinstellung hat ein <code>label</code>, einen <code>range</code> (mit Start/Ende) und ein optionales <code>icon</code>."
   },
-  "time-picker": {
+  "time-selector": {
     "title": "Integration mit Zeitauswahl",
     "description": "Kombiniert Datumsauswahl mit Zeitauswahl. Unterstützt Startzeit, Endzeit oder beides, abhängig vom Kalendertyp.",
-    "note": "Verwende <code>showTimePicker='true'</code> und konfiguriere <code>timePickerMode</code> mit <code>'start'</code>, <code>'end'</code> oder <code>'both'</code>. Du kannst die Zeitauswahl mit <code>timePickerConfig</code> anpassen (Schritte, Bereich, Voreinstellungen, usw.)."
+    "note": "Verwende <code>showTimeSelector='true'</code> und konfiguriere <code>timeSelectorMode</code> mit <code>'start'</code>, <code>'end'</code> oder <code>'both'</code>. Du kannst die Zeitauswahl mit <code>timeSelectorConfig</code> anpassen (Schritte, Bereich, Voreinstellungen, usw.)."
   },
   "disabled-dates": {
     "title": "Deaktivierte Daten",
@@ -111,9 +111,9 @@
         "showPresets": { "description": "Zeigt den Voreinstellungsbereich (nur für den RANGE-Typ)" },
         "customPresets": { "description": "Benutzerdefinierte Datumsbereichs-Voreinstellungen" },
         "firstDayOfWeek": { "description": "0=Sonntag, 1=Montag (erster Wochentag)" },
-        "showTimePicker": { "description": "Zeigt Zeitselektor: 'both' | 'default' | 'none'" },
-        "timePickerMode": { "description": "Anzeigemodus des integrierten Zeitselektors" },
-        "timePickerConfig": { "description": "Zeitselektor-Konfiguration (Schritte, Bereiche usw.)" },
+        "showTimeSelector": { "description": "Zeigt Zeitselektor: 'both' | 'default' | 'none'" },
+        "timeSelectorMode": { "description": "Anzeigemodus des integrierten Zeitselektors" },
+        "timeSelectorConfig": { "description": "Zeitselektor-Konfiguration (Schritte, Bereiche usw.)" },
         "startTime": { "description": "Anfängliche Startzeit" },
         "endTime": { "description": "Anfängliche Endzeit" },
         "dateStatusFn": { "description": "Funktion, die Datumsangaben visuelle Zustände zuweist ('success', 'warning', 'danger', 'info')" },
@@ -531,9 +531,9 @@
       "rows": {
         "firstDayOfWeek": "Erster Wochentag. 0 = Sonntag, 1 = Montag, usw.",
         "showTodayButton": "Ob die Schaltfläche 'Heute' angezeigt wird.",
-        "showTimePicker": "Anzeigemodus der Zeitauswahl: <code>none</code>, <code>inline</code> oder <code>popover</code>.",
-        "timePickerMode": "Präzisionsmodus der Zeitauswahl (12/24 Stunden, mit oder ohne Sekunden).",
-        "timePickerConfig": "Erweitertes Konfigurationsobjekt für die Zeitauswahl.",
+        "showTimeSelector": "Anzeigemodus der Zeitauswahl: <code>none</code>, <code>inline</code> oder <code>popover</code>.",
+        "timeSelectorMode": "Präzisionsmodus der Zeitauswahl (12/24 Stunden, mit oder ohne Sekunden).",
+        "timeSelectorConfig": "Erweitertes Konfigurationsobjekt für die Zeitauswahl.",
         "customPresets": "Liste benutzerdefinierter Datums-Presets als Schnellauswahl.",
         "defaultDate": "Standarddatum, das angezeigt wird, wenn kein Wert ausgewählt ist.",
         "startTime": "Standardstartzeit für Bereichsauswahlen mit Uhrzeit.",

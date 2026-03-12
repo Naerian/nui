@@ -158,8 +158,8 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
           },
           {
             label: 'Time Picker',
-            translationKey: 'sidebar.timePicker',
-            route: '/components/time-picker',
+            translationKey: 'sidebar.timeSelector',
+            route: '/components/time-selector',
           },
         ],
       },

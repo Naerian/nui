@@ -1,4 +1,4 @@
-import { ComponentSection } from '../../../../core/models';
+﻿import { ComponentSection } from '../../../../core/models';
 
 export const CALENDAR_I18N_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────
@@ -125,7 +125,7 @@ export const CALENDAR_I18N_SECTIONS: ComponentSection[] = [
     },
   },
   // ─────────────────────────────────────────────────────────────────────────
-  // 2. Tokens de presets, tabs y TimePicker integrado
+  // 2. Tokens de presets, tabs y TimeSelector integrado
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 'i18n-presets-tabs',
@@ -186,12 +186,12 @@ export const CALENDAR_I18N_SECTIONS: ComponentSection[] = [
           'components.calendar.i18n.presetsAndTabs.rows.tabTime.description',
         ],
         [
-          '<code>calendar.timePicker.start</code>',
+          '<code>calendar.timeSelector.start</code>',
           '"Start time"',
           'components.calendar.i18n.presetsAndTabs.rows.timeStart.description',
         ],
         [
-          '<code>calendar.timePicker.end</code>',
+          '<code>calendar.timeSelector.end</code>',
           '"End time"',
           'components.calendar.i18n.presetsAndTabs.rows.timeEnd.description',
         ],

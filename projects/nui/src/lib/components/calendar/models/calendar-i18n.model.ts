@@ -1,4 +1,4 @@
-import { NUI_DATE_FULL_FORMAT } from "../../../i18n";
+﻿import { NUI_DATE_FULL_FORMAT } from "../../../i18n";
 
 export const DEFAULT_CALENDAR_I18N: CalendarI18n = {
   weekDaysShort: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá', 'Do'],
@@ -35,7 +35,7 @@ export const DEFAULT_CALENDAR_I18N: CalendarI18n = {
   weekNumbers: 'S',
   showTime: 'Mostrar selector de hora',
   hideTime: 'Ocultar selector de hora',
-  timePicker: {
+  timeSelector: {
     start: 'Hora de inicio',
     end: 'Hora de fin',
   },
@@ -95,7 +95,7 @@ export interface CalendarI18n {
   weekNumbers: string;
   showTime: string;
   hideTime: string;
-  timePicker: {
+  timeSelector: {
     start: string;
     end: string;
   };

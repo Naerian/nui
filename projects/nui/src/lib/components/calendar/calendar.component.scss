@@ -1,4 +1,4 @@
-@use '../../../../styles/variables/calendar-vars';
+﻿@use '../../../../styles/variables/calendar-vars';
 @use '../../../../styles/abstracts/mixins' as global;
 
 // ============================================================================
@@ -557,7 +557,7 @@
     gap: var(--nui-spacing-xs);
 
     i {
-      font-size: var(--time-picker-preset-font-size);
+      font-size: var(--time-selector-preset-font-size);
       color: var(--nui-color-primary);
     }
 
@@ -574,28 +574,28 @@
   // TIME PICKER PANEL
   // ============================================================================
 
-  &__time-picker-panel {
+  &__time-selector-panel {
     display: flex;
     flex-direction: column;
     gap: var(--nui-calendar-gap);
     animation: fadeIn var(--nui-transition-duration-fast) ease-out;
   }
 
-  &__time-picker {
+  &__time-selector {
     display: flex;
     flex-direction: column;
     gap: var(--nui-calendar-gap);
 
-    // Style override to integrate the time-picker within the calendar
+    // Style override to integrate the time-selector within the calendar
     // without borders or padding, using variables specific to this case
-    nui-time-picker {
-      --nui-time-picker-padding: 0 !important;
-      --nui-time-picker-border: transparent !important;
-      --nui-time-picker-box-shadow: none !important;
+    nui-time-selector {
+      --nui-time-selector-padding: 0 !important;
+      --nui-time-selector-border: transparent !important;
+      --nui-time-selector-box-shadow: none !important;
     }
   }
 
-  &__time-picker-header {
+  &__time-selector-header {
     display: flex;
     flex-direction: column;
     padding-top: var(--nui-spacing-xs);

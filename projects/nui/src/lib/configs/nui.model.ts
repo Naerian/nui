@@ -1,4 +1,4 @@
-import { NUIColor, NUISize, NUIVariant } from './common';
+﻿import { NUIColor, NUISize, NUIVariant } from './common';
 import { CalendarGlobalConfig } from '../components/calendar';
 import { FabButtonConfig } from './fab-button/fab-button.config';
 import { TooltipConfig } from '../components/tooltip';
@@ -11,7 +11,7 @@ import { ActionMenuGlobalConfig } from './action-menu';
 import { SelectButtonGlobalConfig } from './select-button';
 import { PaginatorConfig } from './paginator';
 import { AvatarGlobalConfig } from './avatar';
-import { TimePickerGlobalConfig } from './time-picker';
+import { TimeSelectorGlobalConfig } from './time-selector';
 import { ProgressBarGlobalConfig } from './progress-bar';
 import { SplitButtonGlobalConfig } from './split-button';
 
@@ -49,7 +49,7 @@ export interface NUIConfig {
     /** Sidebar panel global defaults */
     sidebarPanel?: Partial<SidebarPanelConfig>;
     /** Time Picker global defaults */
-    timePicker?: Partial<TimePickerGlobalConfig>;
+    timeSelector?: Partial<TimeSelectorGlobalConfig>;
     /** Progress Bar global defaults */
     progressBar?: Partial<ProgressBarGlobalConfig>;
     /** Split Button global defaults */

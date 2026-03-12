@@ -1,4 +1,4 @@
-import { ComponentSection } from '../../../../core/models';
+﻿import { ComponentSection } from '../../../../core/models';
 
 /**
  * Configuración de la tab Examples del componente Calendar
@@ -168,16 +168,16 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
     ],
   },
   {
-    id: 'time-picker',
-    title: 'components.calendar.time-picker.title',
-    description: 'components.calendar.time-picker.description',
-    anchor: 'time-picker',
+    id: 'time-selector',
+    title: 'components.calendar.time-selector.title',
+    description: 'components.calendar.time-selector.description',
+    anchor: 'time-selector',
     examples: [
       {
         title: 'Start time (DAY)',
         code: `<nui-calendar
   [type]="CalendarType.DAY"
-  [showTimePicker]="true"
+  [showTimeSelector]="true"
 ></nui-calendar>`,
         language: 'html',
       },
@@ -185,7 +185,7 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
         title: 'Start time (RANGE)',
         code: `<nui-calendar
   [type]="CalendarType.RANGE"
-  showTimePicker="start"
+  showTimeSelector="start"
 ></nui-calendar>`,
         language: 'html',
       },
@@ -193,7 +193,7 @@ export const CALENDAR_EXAMPLES_SECTIONS: ComponentSection[] = [
         title: 'Start and end time (RANGE)',
         code: `<nui-calendar
   [type]="CalendarType.RANGE"
-  showTimePicker="both"
+  showTimeSelector="both"
 ></nui-calendar>`,
         language: 'html',
       },

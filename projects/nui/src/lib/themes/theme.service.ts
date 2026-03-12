@@ -1,4 +1,4 @@
-import { Injectable, Inject, Optional, signal, computed, Signal } from '@angular/core';
+﻿import { Injectable, Inject, Optional, signal, computed, Signal } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Observable } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
@@ -389,7 +389,7 @@ export class ThemeService {
     css += this.generateTooltipVariables();
     css += this.generateSidebarPanelVariables();
     css += this.generateCalendarVariables();
-    css += this.generateTimePickerVariables();
+    css += this.generateTimeSelectorVariables();
 
     css += '}\n';
     return css;
@@ -1091,7 +1091,7 @@ export class ThemeService {
   /**
    * Genera variables CSS para el componente Time Picker
    */
-  private generateTimePickerVariables(): string {
+  private generateTimeSelectorVariables(): string {
     const isDark = this._isDarkMode();
     const grays = this._currentPreset().grays || this.getDefaultGrays();
     const colors = this._isDarkMode()
@@ -1135,43 +1135,43 @@ export class ThemeService {
     const navBtnDisabledBorder = 'transparent';
 
     return `
-      --nui-time-picker-bg: ${sysBg};
+      --nui-time-selector-bg: ${sysBg};
 
-      --nui-time-picker-border: ${sysBorder};
-      --nui-time-picker-box-shadow: ${sysShadow};
+      --nui-time-selector-border: ${sysBorder};
+      --nui-time-selector-box-shadow: ${sysShadow};
 
-      --nui-time-picker-item-bg: ${timeBg};
-      --nui-time-picker-item-text: ${timeText};
+      --nui-time-selector-item-bg: ${timeBg};
+      --nui-time-selector-item-text: ${timeText};
 
-      --nui-time-picker-item-hover-bg: ${timeHoverBg};
-      --nui-time-picker-item-hover-text: ${timeHoverText};
+      --nui-time-selector-item-hover-bg: ${timeHoverBg};
+      --nui-time-selector-item-hover-text: ${timeHoverText};
 
-      --nui-time-picker-item-selected-bg: ${timeSelectedBg};
-      --nui-time-picker-item-selected-border: ${timeSelectedBorder};
-      --nui-time-picker-item-selected-text: ${timeSelectedText};
-      --nui-time-picker-item-selected-border: ${timeSelectedBg};
+      --nui-time-selector-item-selected-bg: ${timeSelectedBg};
+      --nui-time-selector-item-selected-border: ${timeSelectedBorder};
+      --nui-time-selector-item-selected-text: ${timeSelectedText};
+      --nui-time-selector-item-selected-border: ${timeSelectedBg};
 
-      --nui-time-picker-item-selected-hover-bg: ${timeSelectedHoverBg};
-      --nui-time-picker-item-selected-hover-border: ${timeSelectedHoverBorder};
+      --nui-time-selector-item-selected-hover-bg: ${timeSelectedHoverBg};
+      --nui-time-selector-item-selected-hover-border: ${timeSelectedHoverBorder};
 
-      --nui-time-picker-item-disabled-bg: transparent;
-      --nui-time-picker-item-disabled-text: var(--nui-text-disabled);
+      --nui-time-selector-item-disabled-bg: transparent;
+      --nui-time-selector-item-disabled-text: var(--nui-text-disabled);
 
       /* Time Picker Footer Buttons (customizable ghost-style buttons) */
-      --nui-time-picker-nav-btn-bg: ${navBtnBg};
-      --nui-time-picker-nav-btn-text: ${navBtnText};
-      --nui-time-picker-nav-btn-border: ${navBtnBorder};
+      --nui-time-selector-nav-btn-bg: ${navBtnBg};
+      --nui-time-selector-nav-btn-text: ${navBtnText};
+      --nui-time-selector-nav-btn-border: ${navBtnBorder};
       
-      --nui-time-picker-nav-btn-hover-bg: ${navBtnHoverBg};
-      --nui-time-picker-nav-btn-hover-text: ${navBtnHoverText};
-      --nui-time-picker-nav-btn-hover-border: ${navBtnHoverBorder};
+      --nui-time-selector-nav-btn-hover-bg: ${navBtnHoverBg};
+      --nui-time-selector-nav-btn-hover-text: ${navBtnHoverText};
+      --nui-time-selector-nav-btn-hover-border: ${navBtnHoverBorder};
       
-      --nui-time-picker-nav-btn-active-bg: ${navBtnActiveBg};
-      --nui-time-picker-nav-btn-active-border: ${navBtnActiveBorder};
+      --nui-time-selector-nav-btn-active-bg: ${navBtnActiveBg};
+      --nui-time-selector-nav-btn-active-border: ${navBtnActiveBorder};
       
-      --nui-time-picker-nav-btn-disabled-bg: ${navBtnDisabledBg};
-      --nui-time-picker-nav-btn-disabled-text: ${navBtnDisabledText};
-      --nui-time-picker-nav-btn-disabled-border: ${navBtnDisabledBorder};
+      --nui-time-selector-nav-btn-disabled-bg: ${navBtnDisabledBg};
+      --nui-time-selector-nav-btn-disabled-text: ${navBtnDisabledText};
+      --nui-time-selector-nav-btn-disabled-border: ${navBtnDisabledBorder};
     `;
   }
 

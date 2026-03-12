@@ -1,4 +1,4 @@
-{
+﻿{
   "header": {
     "title": "NUI",
     "arialLabel": "NUI - Angular-Komponentenbibliothek",
@@ -38,7 +38,7 @@
     "sidebarPanel": "Seitenpanel",
     "actionMenu": "Aktionsmenü",
     "progressBar": "Fortschrittsanzeige",
-    "timePicker": "Zeitauswahl",
+    "timeSelector": "Zeitauswahl",
     "splitButton": "Geteilter Button"
   },
   "presets": {

@@ -1,4 +1,4 @@
-import { ComponentSection } from '../../../../core/models';
+﻿import { ComponentSection } from '../../../../core/models';
 
 /**
  * Configuración de la tab API del componente Calendar
@@ -79,22 +79,22 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
           'components.calendar.api.inputs.rows.firstDayOfWeek.description',
         ],
         [
-          '<code>showTimePicker</code>',
-          'CalendarTimePickerMode',
+          '<code>showTimeSelector</code>',
+          'CalendarTimeSelectorMode',
           '<code class="neutral">none</code>',
-          'components.calendar.api.inputs.rows.showTimePicker.description',
+          'components.calendar.api.inputs.rows.showTimeSelector.description',
         ],
         [
-          '<code>timePickerMode</code>',
-          'TimePickerMode',
+          '<code>TimeSelectorMode</code>',
+          'TimeSelectorMode',
           '<code class="neutral">HOUR_MINUTE_24</code>',
-          'components.calendar.api.inputs.rows.timePickerMode.description',
+          'components.calendar.api.inputs.rows.TimeSelectorMode.description',
         ],
         [
-          '<code>timePickerConfig</code>',
-          'TimePickerConfig',
+          '<code>TimeSelectorConfig</code>',
+          'TimeSelectorConfig',
           '<code class="neutral">{}</code>',
-          'components.calendar.api.inputs.rows.timePickerConfig.description',
+          'components.calendar.api.inputs.rows.TimeSelectorConfig.description',
         ],
         [
           '<code>startTime</code>',

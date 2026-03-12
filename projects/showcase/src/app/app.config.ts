@@ -1,4 +1,4 @@
-import { ApplicationConfig, ErrorHandler, importProvidersFrom } from '@angular/core';
+﻿import { ApplicationConfig, ErrorHandler, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient, HttpClient } from '@angular/common/http';
@@ -22,7 +22,7 @@ const COMPONENT_FILES: [string, string][] = [
   ['toast', 'toast'],
   ['sidebar-panel', 'sidebar-panel'],
   ['tooltip', 'tooltip'],
-  ['timePicker', 'time-picker'],
+  ['timeSelector', 'time-selector'],
   ['fabButton', 'fab-button'],
   ['progressBar', 'progress-bar'],
   ['splitButton', 'split-button'],

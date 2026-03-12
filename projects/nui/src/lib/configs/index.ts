@@ -1,4 +1,4 @@
-// Common types
+﻿// Common types
 export * from './common';
 
 // Paginator configuration
@@ -17,7 +17,7 @@ export * from './sidebar-panel';
 export * from './fab-button';
 
 // Time Picker configuration
-export * from './time-picker';
+export * from './time-selector';
 
 // Progress Bar configuration
 export * from './progress-bar';

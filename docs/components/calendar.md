@@ -1,6 +1,6 @@
-# Calendar Component
+﻿# Calendar Component
 
-Componente de calendario avanzado con selección de fechas individuales, semanas o rangos, integración con TimePicker y soporte para fechas deshabilitadas. Utiliza **Signals API** de Angular 18+ y un patrón de **Adapter Pattern** para encapsular la lógica de manipulación de fechas.
+Componente de calendario avanzado con selección de fechas individuales, semanas o rangos, integración con TimeSelector y soporte para fechas deshabilitadas. Utiliza **Signals API** de Angular 18+ y un patrón de **Adapter Pattern** para encapsular la lógica de manipulación de fechas.
 
 ## 📦 Importación
 
@@ -126,7 +126,7 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-**Resultado:** Todos los componentes (Calendar, DatePicker, TimePicker, etc.) ahora usan Day.js sin cambiar una sola línea de código en ellos. 🎉
+**Resultado:** Todos los componentes (Calendar, DatePicker, TimeSelector, etc.) ahora usan Day.js sin cambiar una sola línea de código en ellos. 🎉
 
 #### Ejemplo: Adapter Personalizado
 
@@ -220,7 +220,7 @@ Componente puramente de presentación. **Cero imports de date-fns**. Todo delega
 - ✅ Gestión de eventos UI (clicks, teclado, mouse hover)
 - ✅ Inyección de configuración global desde `NUI_CONFIG`
 - ✅ Emit de valores seleccionados con formato `CalendarValue`
-- ✅ Integración con TimePicker
+- ✅ Integración con TimeSelector
 - ✅ Sistema de tabs (Calendar/Presets/Time)
 
 ---
@@ -246,12 +246,12 @@ interface CalendarGlobalConfig {
   // Visual (3 propiedades)
   size?: 'sm' | 'md' | 'lg'; // Default: 'md'
   width?: CalendarWidth; // Default: 'compact'
-  timePickerMode?: '12h' | '24h'; // Default: '24h'
+  timeSelectorMode?: '12h' | '24h'; // Default: '24h'
 
   // Presets (1 propiedad)
   customPresets?: DateRangePreset[]; // Default: undefined
 
-  // TimePicker
+  // TimeSelector
   startTime?: TimeValue | Date | string | null;
   endTime?: TimeValue | Date | string | null;
 }
@@ -326,11 +326,11 @@ El componente resuelve valores en este orden de prioridad:
 | `size`                | `NUISize`                             | `'md'`             | ✅     | Tamaño del calendario (`'xs' \| 's' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| 'auto'`)                                     |
 | `width`               | `CalendarWidth`                       | `'compact'`        | ✅     | Ancho: `compact` (fijo) o `full` (100% contenedor)                                                                  |
 | `firstDayOfWeek`      | `FirstDayOfWeek`                      | `1`                | ✅     | Primer día de la semana (`0`=Domingo, `1`=Lunes)                                                                    |
-| `showTimePicker`      | `CalendarTimePickerMode`              | `false`            | ❌     | Mostrar selector de hora (`true \| 'start' \| 'end' \| 'both'`)                                                     |
-| `timePickerMode`            | `TimePickerMode`                      | `'HOUR_MINUTE_24'` | ❌     | Modo del time picker (`'HOUR_MINUTE_12' \| 'HOUR_MINUTE_24' \| 'HOUR_MINUTE_SECOND_12' \| 'HOUR_MINUTE_SECOND_24'`) |
-| `timePickerConfig`          | `TimePickerConfig`                    | `{}`               | ❌     | Config del time picker (steps, min/max, disabled hours/minutes)                                                     |
-| `startTime`           | `TimeValue \| Date \| string \| null` | `null`             | ❌     | Hora de inicio inicial (para RANGE con timepicker)                                                                  |
-| `endTime`             | `TimeValue \| Date \| string \| null` | `null`             | ❌     | Hora de fin inicial (para RANGE con timepicker)                                                                     |
+| `showTimeSelector`      | `CalendarTimeSelectorMode`              | `false`            | ❌     | Mostrar selector de hora (`true \| 'start' \| 'end' \| 'both'`)                                                     |
+| `timeSelectorMode`            | `TimeSelectorMode`                      | `'HOUR_MINUTE_24'` | ❌     | Modo del time picker (`'HOUR_MINUTE_12' \| 'HOUR_MINUTE_24' \| 'HOUR_MINUTE_SECOND_12' \| 'HOUR_MINUTE_SECOND_24'`) |
+| `timeSelectorConfig`          | `TimeSelectorConfig`                    | `{}`               | ❌     | Config del time picker (steps, min/max, disabled hours/minutes)                                                     |
+| `startTime`           | `TimeValue \| Date \| string \| null` | `null`             | ❌     | Hora de inicio inicial (para RANGE con time-selector)                                                                  |
+| `endTime`             | `TimeValue \| Date \| string \| null` | `null`             | ❌     | Hora de fin inicial (para RANGE con time-selector)                                                                     |
 | `minDate`             | `Date \| string \| null`              | `null`             | ❌     | Fecha mínima seleccionable                                                                                          |
 | `maxDate`             | `Date \| string \| null`              | `null`             | ❌     | Fecha máxima seleccionable                                                                                          |
 | `disabledDates`       | `(Date \| string)[]`                  | `[]`               | ❌     | Array de fechas deshabilitadas                                                                                      |
@@ -385,7 +385,7 @@ type IsDateEnabledFn = (date: Date) => boolean;
 type FirstDayOfWeek = 0 | 1; // 0 = Domingo, 1 = Lunes
 
 // Mostrar time picker
-type CalendarTimePickerMode = boolean | 'start' | 'end' | 'both';
+type CalendarTimeSelectorMode = boolean | 'start' | 'end' | 'both';
 
 // Ancho del calendario
 type CalendarWidth = 'compact' | 'full';
@@ -420,7 +420,7 @@ interface CalendarValue {
   week?: WeekRange; // Solo WEEK
   range?: DateRange; // Solo RANGE
 
-  // Con TimePicker
+  // Con TimeSelector
   time?: TimeValue; // DAY + time
   startTime?: TimeValue; // RANGE + time='start'|'both'
   endTime?: TimeValue; // RANGE + time='end'|'both'
@@ -443,7 +443,7 @@ interface TimeValue {
   period?: 'AM' | 'PM'; // Solo formato 12h
 }
 
-interface TimePickerConfig {
+interface TimeSelectorConfig {
   hourStep?: number; // Incremento de horas
   minuteStep?: number; // Incremento de minutos
   secondStep?: number; // Incremento de segundos
@@ -588,23 +588,23 @@ onRangeSelect(value: CalendarValue) {
 }
 ```
 
-### 5. Con TimePicker Integrado
+### 5. Con TimeSelector Integrado
 
 ```html
 <!-- Seleccionar fecha y hora (DAY) -->
 <nui-calendar
   type="DAY"
-  [showTimePicker]="true"
-  timePickerMode="HOUR_MINUTE_12"
+  [showTimeSelector]="true"
+  timeSelectorMode="HOUR_MINUTE_12"
   (valueChange)="onDateTimeSelect($event)"
 ></nui-calendar>
 
 <!-- Rango con hora de inicio y fin -->
 <nui-calendar
   type="RANGE"
-  [showTimePicker]="'both'"
-  timePickerMode="HOUR_MINUTE_24"
-  [timePickerConfig]="{ hourStep: 1, minuteStep: 15 }"
+  [showTimeSelector]="'both'"
+  timeSelectorMode="HOUR_MINUTE_24"
+  [timeSelectorConfig]="{ hourStep: 1, minuteStep: 15 }"
   (valueChange)="onRangeWithTimeSelect($event)"
 ></nui-calendar>
 ```
@@ -1355,14 +1355,14 @@ if (startDate < endDate) {
 <nui-calendar></nui-calendar>
 ```
 
-### 8. timePickerConfig Apropiado
+### 8. timeSelectorConfig Apropiado
 
 ```typescript
 // ✅ BIEN: Configurar según caso de uso
 <nui-calendar
   type="DAY"
-  [showTimePicker]="true"
-  [timePickerConfig]="{
+  [showTimeSelector]="true"
+  [timeSelectorConfig]="{
     hourStep: 1,
     minuteStep: 15,
     minTime: { hour: 9 },
@@ -1374,7 +1374,7 @@ if (startDate < endDate) {
 // ❌ EVITA: Time picker sin restricciones
 <nui-calendar
   type="DAY"
-  [showTimePicker]="true">
+  [showTimeSelector]="true">
 </nui-calendar>
 ```
 
@@ -1502,7 +1502,7 @@ onDateChange(value: CalendarValue) {
 
 ## 🔗 Componentes Relacionados
 
-- [TimePicker Component](./time-picker.md) - Selector de hora complementario
+- [TimeSelector Component](./time-selector.md) - Selector de hora complementario
 - [DatePicker Component](./date-picker.md) - Wrapper con input de fecha
 - [Button Component](./button.md) - Para controles adicionales
 - [Modal Component](./modal.md) - Para calendarios en modal
@@ -1535,7 +1535,7 @@ onDateChange(value: CalendarValue) {
 ### v1.5.0 (Octubre 2025)
 
 - ✨ **Nuevo**: Width modes (compact/full) con Container Queries
-- ✨ **Nuevo**: Sistema de tabs para presets + timepicker
+- ✨ **Nuevo**: Sistema de tabs para presets + time-selector
 - 🔧 **Mejorado**: Escalado fluido de fuentes en full mode
 - 📦 **Mejorado**: 85% menos código CSS con mixins
 

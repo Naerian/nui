@@ -1,4 +1,4 @@
-import { ComponentSection } from '../../../../core/models';
+﻿import { ComponentSection } from '../../../../core/models';
 
 export const CALENDAR_A11Y_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────

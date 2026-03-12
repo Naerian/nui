@@ -1,0 +1,99 @@
+﻿// ========================================
+// TIME SELECTOR - Variables & Tokens (Simplified - Single Standard Size)
+// ========================================
+
+// TOKENS (Sass) - Single Standard Values
+$time-selector-width: 300px !default;
+$time-selector-item-height: 2.25rem !default;
+$time-selector-max-height: 11rem !default;
+$time-selector-min-height: 8rem !default;
+$time-selector-padding: clamp(0.75rem, 2vw, 1rem) !default;
+$time-selector-gap: clamp(0.25rem, 1.5vw, 0.5rem) !default;
+
+// Configuración del separador
+$time-selector-separator-width: 2rem !default;
+$time-selector-separator-line-width: 0.125rem !default;
+$time-selector-separator-line-height: 1.5rem !default;
+$time-selector-separator-border-radius: 0.063rem !default;
+$time-selector-separator-padding-top: 1.5rem !default;
+
+// Configuración de la lista de items
+$time-selector-items-gap: 2px !default;
+$time-selector-items-padding: 2px !default;
+$time-selector-items-border-radius: 2px !default;
+
+// Configuración de opciones
+$time-selector-option-min-height: 48px !default;
+
+// Configuración de botones de acción
+$time-selector-actions-gap: 1rem !default;
+
+// Min widths
+$time-selector-min-width: 160px !default;
+$time-selector-min-width-with-seconds: 220px !default;
+
+// Borders
+$time-selector-header-border-width: 1px !default;
+$time-selector-item-border-width: 1px !default;
+
+// Font sizes
+$time-selector-font-size: clamp(0.75rem, 3.5cqw, 0.813rem) !default;
+$time-selector-display-font-size: clamp(0.75rem, 3.5cqw, 0.813rem) !default;
+$time-selector-normalized-font-size: clamp(0.75rem, 3.5cqw, 0.813rem) !default;
+
+// Navigation button sizes
+$time-selector-nav-btn-height: 2.5rem !default;
+$time-selector-nav-btn-padding: 0.5rem 0.75rem !default;
+$time-selector-nav-btn-font-size: clamp(0.75rem, 3.5cqw, 0.813rem) !default;
+
+// MIXIN (CSS Custom Properties)
+@mixin nui-time-selector-vars {
+  // Standard size
+  --nui-time-selector-width: #{$time-selector-width};
+  --nui-time-selector-item-height: #{$time-selector-item-height};
+  --nui-time-selector-padding: #{$time-selector-padding};
+  --nui-time-selector-max-height: #{$time-selector-max-height};
+  --nui-time-selector-min-height: #{$time-selector-min-height};
+  --nui-time-selector-gap: #{$time-selector-gap};
+
+  // Border-radius (usa el estándar md)
+  --nui-time-selector-item-radius: calc(var(--nui-border-radius-md) - 0.125rem);
+
+  // Font size (usa el estándar md)
+  --nui-time-selector-font-size: #{$time-selector-font-size};
+
+  // Separador
+  --nui-time-selector-separator-width: #{$time-selector-separator-width};
+  --nui-time-selector-separator-line-width: #{$time-selector-separator-line-width};
+  --nui-time-selector-separator-line-height: #{$time-selector-separator-line-height};
+  --nui-time-selector-separator-border-radius: #{$time-selector-separator-border-radius};
+  --nui-time-selector-separator-padding-top: #{$time-selector-separator-padding-top};
+
+  // Items
+  --nui-time-selector-items-gap: #{$time-selector-items-gap};
+  --nui-time-selector-items-padding: #{$time-selector-items-padding};
+  --nui-time-selector-items-border-radius: #{$time-selector-items-border-radius};
+
+  // Opciones
+  --nui-time-selector-option-min-height: #{$time-selector-option-min-height};
+
+  // Acciones
+  --nui-time-selector-actions-gap: #{$time-selector-actions-gap};
+
+  // Min widths
+  --nui-time-selector-min-width: #{$time-selector-min-width};
+  --nui-time-selector-min-width-with-seconds: #{$time-selector-min-width-with-seconds};
+
+  // Borders
+  --nui-time-selector-header-border-width: #{$time-selector-header-border-width};
+  --nui-time-selector-item-border-width: #{$time-selector-item-border-width};
+
+  // Font sizes
+  --nui-time-selector-display-font-size: #{$time-selector-display-font-size};
+  --nui-time-selector-normalized-font-size: #{$time-selector-normalized-font-size};
+
+  // Navigation button sizes
+  --nui-time-selector-nav-btn-height: #{$time-selector-nav-btn-height};
+  --nui-time-selector-nav-btn-padding: #{$time-selector-nav-btn-padding};
+  --nui-time-selector-nav-btn-font-size: #{$time-selector-nav-btn-font-size};
+}

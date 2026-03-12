@@ -1,4 +1,4 @@
-<div class="docs-page">
+﻿<div class="docs-page">
   <div class="container-fluid">
     <div class="page-header">
       <h1>{{ pageConfig.title | translate }}</h1>
@@ -165,14 +165,14 @@
                 </div>
               }
 
-              @case ('time-picker') {
+              @case ('time-selector') {
                 <div class="example-preview flex-row gap-3">
                   <div class="example-item d-flex flex-column align-items-center gap-3">
                     <h6 class="mb-0">Date with start time</h6>
                     <div style="max-width: 400px">
                       <nui-calendar
                         [type]="CalendarType.DAY"
-                        [showTimePicker]="'default'"
+                        [showTimeSelector]="'default'"
                         (valueChange)="onDateWithTimeChange($event)"
                       ></nui-calendar>
                     </div>
@@ -198,7 +198,7 @@
                     <div style="max-width: 400px">
                       <nui-calendar
                         [type]="CalendarType.RANGE"
-                        showTimePicker="both"
+                        showTimeSelector="both"
                         (valueChange)="onRangeWithTimeChange($event)"
                       ></nui-calendar>
                     </div>
