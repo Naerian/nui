@@ -3,21 +3,21 @@
 // ========================================
 
 // TOKENS (Sass)
-$modal-dialog-border-radius: 12px !default;
+$modal-dialog-border-radius: 0.75rem !default;
 
-$modal-dialog-header-padding: 20px !default;
-$modal-dialog-body-padding-y: 16px !default;
-$modal-dialog-body-padding-x: 20px !default;
-$modal-dialog-footer-padding-top: 12px !default;
-$modal-dialog-footer-padding-bottom: 20px !default;
-$modal-dialog-footer-padding-x: 20px !default;
+$modal-dialog-header-padding: 1.25rem !default;
+$modal-dialog-body-padding-y: 1rem !default;
+$modal-dialog-body-padding-x: 1.25rem !default;
+$modal-dialog-footer-padding-top: 0.75rem !default;
+$modal-dialog-footer-padding-bottom: 1.25rem !default;
+$modal-dialog-footer-padding-x: 1.25rem !default;
 
 $modal-dialog-title-size: 1rem !default;
 $modal-dialog-title-weight: 600 !default;
 
 $modal-dialog-shadow: var(--nui-box-shadow-xl) !default;
 
-$modal-dialog-dock-border-radius: 8px !default;
+$modal-dialog-dock-border-radius: 0.5rem !default;
 
 // MIXIN (CSS Custom Properties)
 @mixin nui-modal-dialog-vars {

@@ -13,7 +13,7 @@
   computed,
   ViewEncapsulation,
 } from '@angular/core';
-import { NgTemplateOutlet, NgStyle } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
 import { ButtonComponent } from '../button/button.component';
 import {
@@ -38,7 +38,7 @@ import { NuiI18nService } from '../../i18n';
 @Component({
   selector: 'nui-modal-dialog',
   standalone: true,
-  imports: [NgTemplateOutlet, NgStyle, ButtonComponent],
+  imports: [NgTemplateOutlet, ButtonComponent],
   templateUrl: './modal-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -122,19 +122,24 @@ export class ModalDialogComponent implements OnInit, AfterViewInit, OnDestroy {
     return false;
   }
 
-  protected get statusBarStyles(): Record<string, string> {
+  @HostBinding('style.border-left')
+  get hostBorderLeft(): string | null { return this._statusBarBorder('left'); }
+
+  @HostBinding('style.border-right')
+  get hostBorderRight(): string | null { return this._statusBarBorder('right'); }
+
+  @HostBinding('style.border-top')
+  get hostBorderTop(): string | null { return this._statusBarBorder('top'); }
+
+  @HostBinding('style.border-bottom')
+  get hostBorderBottom(): string | null { return this._statusBarBorder('bottom'); }
+
+  private _statusBarBorder(side: 'left' | 'right' | 'top' | 'bottom'): string | null {
     const sb = this.config.statusBar;
-    if (!sb || sb.position === 'none') return {};
-    const thickness = `${sb.thickness ?? 4}px`;
+    if (!sb || sb.position === 'none' || sb.position !== side) return null;
+    const thickness = sb.thickness ?? 4;
     const color = sb.color ?? this._getSemanticColor();
-    const base: Record<string, string> = { 'background-color': color, 'pointer-events': 'none' };
-    switch (sb.position) {
-      case 'left':   return { ...base, left: '0', top: '0', bottom: '0', width: thickness };
-      case 'right':  return { ...base, right: '0', top: '0', bottom: '0', width: thickness };
-      case 'top':    return { ...base, top: '0', left: '0', right: '0', height: thickness };
-      case 'bottom': return { ...base, bottom: '0', left: '0', right: '0', height: thickness };
-      default: return {};
-    }
+    return `${thickness}px solid ${color}`;
   }
 
   private _timeoutInterval?: ReturnType<typeof setInterval>;

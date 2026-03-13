@@ -27,6 +27,7 @@
     background: var(--nui-modal-dialog-bg);
     border-radius: var(--nui-modal-dialog-border-radius);
     box-shadow: var(--nui-modal-dialog-shadow);
+    box-sizing: border-box;
     overflow: hidden;
     position: relative;
     outline: none;
@@ -166,12 +167,6 @@
       color: var(--nui-info);
     }
 
-    // Status bar (barra de color absoluta en un borde del modal)
-    &__status-bar {
-      position: absolute;
-      pointer-events: none;
-      z-index: 2;
-    }
   }
 
   // ===========================================================================

@@ -1,9 +1,4 @@
-﻿<!-- Status bar (borde de color semántico configurado via inline style) -->
-@if (config.statusBar && config.statusBar.position !== 'none') {
-  <div class="nui-modal-dialog__status-bar" [ngStyle]="statusBarStyles"></div>
-}
-
-<!-- Barra de progreso del timeout -->
+﻿<!-- Barra de progreso del timeout -->
 @if (config.timeout && effectiveShowProgressBar) {
   <div
     class="nui-modal-dialog__progress-bar"
