@@ -151,17 +151,6 @@ export const MODAL_DIALOG_API_SECTIONS: ComponentSection[] = [
       type: 'info',
       content: 'components.modal-dialog.api.footer-directive.note',
     },
-    table: {
-      headers: [
-        'common.tables.type',
-        'common.tables.description',
-      ],
-      rows: [
-        ['<code>[nuiModalDialogFooter]</code>', 'Apply to an <code>ng-template</code> inside a dynamic component loaded by <code>ModalDialogService</code>'],
-        ['<code>ModalDialogFooterDirective</code> from <code>nui</code>', 'Add to the <code>imports</code> array of the dynamic component'],
-        ['<code>customButtons</code>', 'Overrides <code>ModalDialogActionsService</code> actions and <code>footerTemplate</code> config prop'],
-      ],
-    },
   },
   {
     id: 'api-ref',

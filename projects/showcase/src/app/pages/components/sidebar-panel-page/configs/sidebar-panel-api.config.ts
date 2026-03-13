@@ -574,23 +574,6 @@ export const SIDEBAR_PANEL_API_SECTIONS: ComponentSection[] = [
     title: 'components.sidebar-panel.api.footer-directive.title',
     description: 'components.sidebar-panel.api.footer-directive.description',
     anchor: 'api-footer-directive',
-    table: {
-      headers: ['common.tables.property', 'common.tables.description'],
-      rows: [
-        [
-          '<code>[nuiSidebarPanelFooter]</code>',
-          'Apply to an <code>ng-template</code> inside a dynamic component loaded by <code>SidebarPanelService</code>',
-        ],
-        [
-          '<code>SidebarPanelFooterDirective</code> from <code>nui</code>',
-          'Add to the <code>imports</code> array of the dynamic component',
-        ],
-        [
-          '<code>customButtons</code>',
-          'Overrides <code>SidebarPanelActionsService</code> actions and <code>footerTemplate</code> config prop',
-        ],
-      ],
-    },
   },
   {
     id: 'api-tokens',
