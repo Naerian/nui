@@ -6,11 +6,6 @@
       "title": "Utilisation basique",
       "description": "Ouvrez un panneau latéral depuis le SidebarPanelService. Le panneau coulisse depuis le bord de l'écran avec une animation fluide."
     },
-    "defaults": {
-      "title": "Configuration par défaut",
-      "description": "Le panneau s'ouvrira en utilisant les valeurs par défaut globales configurées.",
-      "note": "Si aucune option n'est fournie lors de l'ouverture du panneau, les valeurs par défaut globales définies dans la configuration NUI via <code>provideNUI({ sidebarPanel: {...} })</code> seront utilisées."
-    },
     "sizes": {
       "title": "Tailles",
       "description": "Permet de définir la taille avec laquelle le panneau s'ouvrira.",
@@ -69,46 +64,51 @@
     "footer-actions": {
       "title": "Actions de pied de page",
       "description": "Ajoutez des boutons d'action dans le pied de page du panneau.",
-      "note": "Utilisez <code>customButtons</code> pour des actions simples ou <code>footerTemplate</code> pour des dispositions entièrement personnalisées. Vous pouvez combiner plusieurs boutons avec les différentes variantes et couleurs NUI."
+      "note": "Utilisez <code>customButtons</code> pour des actions simples ou <code>footerTemplate</code> pour des dispositions entièrement personnalisées. Vous pouvez combiner plusieurs boutons avec les différentes variantes et couleurs de NUI.<br/><br/>Pour utiliser <code>loading</code> ou <code>disabled</code> de manière réactive, vous pouvez injecter le <code>SidebarPanelActionsService</code> dans votre composant enfant pour contrôler l'état des boutons depuis l'intérieur du composant, utiliser la directive <code>nuiSidebarPanelFooter</code> sur vos boutons personnalisés pour les lier à des actions prédéfinies comme 'confirm' ou 'cancel', ou émettre des événements personnalisés et vous y abonner depuis le composant enfant ou en utilisant un template <code>ng-template</code>, sans directive, depuis le composant parent."
     },
     "child-footer-actions": {
       "title": "Actions depuis le composant enfant",
       "description": "Le composant enfant peut enregistrer ses propres actions de pied de page en utilisant SidebarPanelActionsService.",
-      "note": "Cette approche est idéale pour les formulaires où l'enfant gère toute la logique (validation, sauvegarde, états). Le composant enfant injecte <code>SidebarPanelActionsService</code> et enregistre des actions via <code>register()</code>. Les actions peuvent avoir des états réactifs (désactivé, chargement) et exécuter une logique complexe."
+      "note": "Cette approche est idéale pour les formulaires où l'enfant gère toute la logique (validation, sauvegarde, états). Le composant enfant injecte <code>SidebarPanelActionsService</code> et enregistre des actions via <code>register()</code>. Les actions peuvent avoir des états réactifs (désactivé, chargement) et exécuter une logique complexe.",
+      "note2": "Alternativement, utilisez la directive <code>nuiSidebarPanelFooter</code> dans un composant dynamique pour un contrôle total du pied de page avec HTML natif. Contrairement à <code>SidebarPanelActionsService</code>, qui enregistre des données de boutons rendus par le shell, la directive projette un <code>ng-template</code> complet : tout binding Angular est réévalué à chaque cycle de détection des changements, sans appel à <code>update()</code>."
     }
   },
   "api": {
     "service": {
       "title": "SidebarPanelService",
-      "description": "Méthodes de service pour gérer les panneaux latéraux"
+      "description": "Injectez <code>SidebarPanelService</code> pour ouvrir et gérer des panneaux latéraux. Toutes les méthodes renvoient un <code>SidebarPanelRef</code>."
     },
-    "ref-properties": {
-      "title": "SidebarPanelRef (Propriétés)",
-      "description": "Propriétés de la référence du panneau latéral"
+    "ref": {
+      "title": "SidebarPanelRef",
+      "description": "La référence renvoyée par <code>open()</code>. Utilisez-la pour fermer le modal, écouter les événements et observer les changements du cycle de vie."
     },
-    "ref-methods": {
-      "title": "SidebarPanelRef (Méthodes)",
-      "description": "Méthodes de référence du panneau latéral pour le contrôle et les événements"
+    "tokens": {
+      "title": "Jetons d’injection",
+      "description": "Utilisez ces jetons pour injecter le contexte du panneau latéral dans un composant dynamique chargé par le service."
     },
     "config": {
       "title": "SidebarPanelConfig",
-      "description": "Configuration complète du panneau latéral"
+      "description": "Objet de configuration passé à <code>open()</code>. Les propriétés sont fusionnées avec les valeurs globales de <code>provideNUI()</code>."
     },
     "custom-button": {
       "title": "SidebarPanelCustomButton",
-      "description": "Configuration du bouton personnalisé de pied de page"
+      "description": "Définition d’un bouton inline passé via <code>customButtons</code> dans la configuration. Il est évalué une seule fois à l’ouverture du modal — utilisez <code>SidebarPanelActionsService</code> pour des états réactifs."
     },
     "minimized-tab": {
       "title": "MinimizedTabCustomization",
-      "description": "Personnalisation de l'onglet quand le panneau est réduit"
+      "description": "Personnalisation de l’onglet lorsque le panneau est minimisé"
     },
     "footer-actions": {
       "title": "SidebarPanelAction",
-      "description": "Définition des actions enregistrées depuis les composants enfants pour le pied de page du panneau"
+      "description": "Définition des actions enregistrées depuis les composants enfants pour le footer du panneau"
     },
     "footer-actions-service": {
       "title": "SidebarPanelActionsService",
-      "description": "Service pour les composants enfants pour enregistrer des actions dans le pied de page du panneau"
+      "description": "Service permettant aux composants enfants d’enregistrer des actions dans le footer du panneau"
+    },
+    "footer-directive": {
+      "title": "SidebarPanelFooterDirective",
+      "description": "Directive appliquée à un <code>ng-template</code> dans un composant dynamique. Projette le template complet dans le footer du panneau avec les bindings natifs d’Angular."
     }
   },
   "theming": {

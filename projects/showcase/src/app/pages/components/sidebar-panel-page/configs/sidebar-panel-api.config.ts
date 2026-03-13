@@ -37,10 +37,10 @@ export const SIDEBAR_PANEL_API_SECTIONS: ComponentSection[] = [
     },
   },
   {
-    id: 'api-ref-properties',
-    title: 'components.sidebar-panel.api.ref-properties.title',
-    description: 'components.sidebar-panel.api.ref-properties.description',
-    anchor: 'api-ref-properties',
+    id: 'api-ref',
+    title: 'components.sidebar-panel.api.ref.title',
+    description: 'components.sidebar-panel.api.ref.description',
+    anchor: 'api-ref',
     table: {
       headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
@@ -56,22 +56,6 @@ export const SIDEBAR_PANEL_API_SECTIONS: ComponentSection[] = [
           'ReadonlyArray&lt;SidebarPanelState&gt;',
           'History of panel states',
         ],
-      ],
-    },
-  },
-  {
-    id: 'api-ref-methods',
-    title: 'components.sidebar-panel.api.ref-methods.title',
-    description: 'components.sidebar-panel.api.ref-methods.description',
-    anchor: 'api-ref-methods',
-    table: {
-      headers: [
-        'common.tables.method',
-        'common.tables.parameters',
-        'common.tables.returns',
-        'common.tables.description',
-      ],
-      rows: [
         ['<code>close()</code>', 'result?: R', 'Promise&lt;void&gt;', 'Closes the panel'],
         ['<code>minimize()</code>', '-', 'void', 'Minimizes the panel (if minimizable: true)'],
         ['<code>restore()</code>', '-', 'void', 'Restores the panel from minimized state'],
@@ -581,6 +565,55 @@ export const SIDEBAR_PANEL_API_SECTIONS: ComponentSection[] = [
           'index: number, loading: boolean',
           'void',
           'Sets the loading state of an action by index',
+        ],
+      ],
+    },
+  },
+  {
+    id: 'api-footer-directive',
+    title: 'components.sidebar-panel.api.footer-directive.title',
+    description: 'components.sidebar-panel.api.footer-directive.description',
+    anchor: 'api-footer-directive',
+    table: {
+      headers: ['common.tables.property', 'common.tables.description'],
+      rows: [
+        [
+          '<code>[nuiSidebarPanelFooter]</code>',
+          'Apply to an <code>ng-template</code> inside a dynamic component loaded by <code>SidebarPanelService</code>',
+        ],
+        [
+          '<code>SidebarPanelFooterDirective</code> from <code>nui</code>',
+          'Add to the <code>imports</code> array of the dynamic component',
+        ],
+        [
+          '<code>customButtons</code>',
+          'Overrides <code>SidebarPanelActionsService</code> actions and <code>footerTemplate</code> config prop',
+        ],
+      ],
+    },
+  },
+  {
+    id: 'api-tokens',
+    title: 'components.sidebar-panel.api.tokens.title',
+    description: 'components.sidebar-panel.api.tokens.description',
+    anchor: 'api-tokens',
+    table: {
+      headers: ['common.tables.token', 'common.tables.type', 'common.tables.description'],
+      rows: [
+        [
+          '<code>SIDEBAR_PANEL_DATA</code>',
+          'InjectionToken&lt;D&gt;',
+          'Inject typed data in the dynamic component',
+        ],
+        [
+          '<code>SIDEBAR_PANEL_REF</code>',
+          'InjectionToken&lt;SidebarPanelRef&gt;',
+          'Inject the sidebar panel reference in the shell or dynamic component',
+        ],
+        [
+          '<code>SIDEBAR_PANEL_CONFIG</code>',
+          'InjectionToken&lt;SidebarPanelConfig&gt;',
+          'Inject the full configuration object (read-only)',
         ],
       ],
     },

@@ -6,11 +6,6 @@
       "title": "Basic usage",
       "description": "Open a side panel from the SidebarPanelService. The panel slides from the screen edge with a smooth animation."
     },
-    "defaults": {
-      "title": "Default configuration",
-      "description": "The panel will open using the configured global default values.",
-      "note": "If no options are provided when opening the panel, the global defaults defined in NUI configuration via <code>provideNUI({ sidebarPanel: {...} })</code> will be used."
-    },
     "sizes": {
       "title": "Sizes",
       "description": "Allows defining the size with which the panel will open.",
@@ -69,34 +64,35 @@
     "footer-actions": {
       "title": "Footer actions",
       "description": "Add action buttons in the panel footer.",
-      "note": "Use <code>customButtons</code> for simple actions or <code>footerTemplate</code> for fully customized layouts. You can combine multiple buttons with the different NUI variants and colors."
+      "note": "Use <code>customButtons</code> for simple actions or <code>footerTemplate</code> for fully customized layouts. You can combine multiple buttons with the different NUI variants and colors.<br/><br/>To use <code>loading</code> or <code>disabled</code> reactively, you can inject the <code>SidebarPanelActionsService</code> into your child component to control the button states from within the component, use the <code>nuiSidebarPanelFooter</code> directive on your custom buttons to link them to predefined actions like 'confirm' or 'cancel', or emit custom events and subscribe to them from the child component or using an <code>ng-template</code> in the parent component, without the directive."
     },
     "child-footer-actions": {
       "title": "Actions from child component",
       "description": "The child component can register its own footer actions using SidebarPanelActionsService.",
-      "note": "This approach is ideal for forms where the child handles all the logic (validation, saving, states). The child component injects <code>SidebarPanelActionsService</code> and registers actions via <code>register()</code>. Actions can have reactive states (disabled, loading) and execute complex logic."
+      "note": "This approach is ideal for forms where the child handles all the logic (validation, saving, states). The child component injects <code>SidebarPanelActionsService</code> and registers actions via <code>register()</code>. Actions can have reactive states (disabled, loading) and execute complex logic.",
+      "note2": "Alternatively, use the <code>nuiSidebarPanelFooter</code> directive inside a dynamic component for full footer control with native HTML. Unlike <code>SidebarPanelActionsService</code>, which registers button data rendered by the shell, the directive projects a complete <code>ng-template</code>: any Angular binding re-evaluates on every change detection cycle without calling <code>update()</code>."
     }
   },
   "api": {
     "service": {
       "title": "SidebarPanelService",
-      "description": "Service methods for managing side panels"
+      "description": "Inject <code>SidebarPanelService</code> to open and manage sidebar panels. All methods return a <code>SidebarPanelRef</code>."
     },
-    "ref-properties": {
-      "title": "SidebarPanelRef (Properties)",
-      "description": "Properties of the side panel reference"
+    "ref": {
+      "title": "SidebarPanelRef",
+      "description": "The reference returned by <code>open()</code>. Use it to close the modal, listen to events, and observe lifecycle changes."
     },
-    "ref-methods": {
-      "title": "SidebarPanelRef (Methods)",
-      "description": "Side panel reference methods for control and events"
+    "tokens": {
+      "title": "Injection tokens",
+      "description": "Use these tokens to inject the sidebar panel context inside a dynamic component loaded by the service."
     },
     "config": {
       "title": "SidebarPanelConfig",
-      "description": "Complete side panel configuration"
+      "description": "Configuration object passed to <code>open()</code>. Properties are merged with the global values from <code>provideNUI()</code>."
     },
     "custom-button": {
       "title": "SidebarPanelCustomButton",
-      "description": "Footer custom button configuration"
+      "description": "Inline button definition passed through <code>customButtons</code> in the configuration. It is evaluated only once when the modal opens — use <code>SidebarPanelActionsService</code> for reactive states."
     },
     "minimized-tab": {
       "title": "MinimizedTabCustomization",
@@ -108,7 +104,11 @@
     },
     "footer-actions-service": {
       "title": "SidebarPanelActionsService",
-      "description": "Service for child components to register actions in the panel footer"
+      "description": "Service that allows child components to register actions in the panel footer"
+    },
+    "footer-directive": {
+      "title": "SidebarPanelFooterDirective",
+      "description": "Directive applied to an <code>ng-template</code> inside a dynamic component. It projects the entire template into the panel footer with native Angular bindings."
     }
   },
   "theming": {

@@ -69,7 +69,16 @@ export class ModalDialogPageComponent extends BaseComponentPage {
       id: 'api',
       label: 'common.tabs.api',
       icon: 'ri-file-list-3-line',
-      sections: ['api-service', 'api-config', 'api-ref', 'api-tokens'],
+      sections: [
+        'api-service',
+        'api-ref',
+        'api-config',
+        'api-custom-button',
+        'api-modal-action',
+        'api-actions-service',
+        'api-footer-directive',
+        'api-tokens',
+      ],
     },
     {
       id: 'theming',

@@ -3,8 +3,8 @@
   "subtitle": "Diálogos modales superpuestos mediante CDK Overlay con gestión completa del foco, animaciones, minimización e integración de temas",
   "examples": {
     "basic": {
-      "title": "Diálogo de confirmación básico",
-      "description": "Abre un modal usando <code>ModalDialogService.open()</code> o los helpers de conveniencia. El servicio ofrece opciones para título, mensaje, botones confirm/cancel, color y tipo semántico."
+      "title": "Uso básico",
+      "description": "Abre un modal desde el servicio ModalDialogService. El modal se desliza desde el borde de la pantalla con una animación suave."
     },
     "semanticTypes": {
       "title": "Tipos semánticos",
@@ -43,30 +43,48 @@
     "footer-custom": {
       "title": "Acciones personalizadas",
       "description": "Personaliza las acciones del modal con botones personalizados",
-      "note": "Puedes usar la opción <code>customButtons</code> en la configuración del modal para definir botones con acciones específicas o <code>nuiModalDialogFooter</code> para una personalización total del pie de página mediante un <code>ng-template</code>."
+      "note": "Puedes usar la opción <code>customButtons</code> en la configuración del modal para definir botones con acciones específicas o <code>nuiModalDialogFooter</code> para una personalización total del pie de página mediante un <code>ng-template</code>.<br/><br/>Para usar <code>loading</code> o <code>disabled</code> de forma reactiva puedes inyectar el <code>ModalDialogActionsService</code> en tu componente hijo para controlar el estado de los botones desde dentro del componente, usar la directiva <code>nuiModalDialogAction</code> en tus botones personalizados para vincularlos a acciones predefinidas como 'confirm' o 'cancel', o emitir eventos personalizados y suscribirte a ellos desde el componente hijo o usando un template <code>ng-template</code>, sin directiva, desde el propio componente padre."
     },
     "child-footer-actions": {
       "title": "Acciones desde componente hijo",
       "description": "Personaliza las acciones del modal desde un componente dinámico cargado dentro del modal.",
-      "note": "Inyecta el <code>ModalDialogActionsService</code> en tu componente dinámico para agregar botones al pie de página del modal desde dentro del componente."
+      "note": "Inyecta el <code>ModalDialogActionsService</code> en tu componente dinámico para agregar botones al pie de página del modal desde dentro del componente.",
+      "note2": "Como alternativa, usa la directiva <code>nuiModalDialogFooter</code> dentro de un componente dinámico para tener control total del footer con HTML nativo. A diferencia de <code>ModalDialogActionsService</code>, que registra datos de botones renderizados por el shell del modal, la directiva proyecta un <code>ng-template</code> completo: cualquier binding de Angular se reevalúa automáticamente en cada ciclo de detección de cambios, sin necesidad de llamar a <code>update()</code>."
     }
   },
   "api": {
     "service": {
-      "title": "ModalDialogService — métodos",
+      "title": "ModalDialogService",
       "description": "Inyecta <code>ModalDialogService</code> para abrir y gestionar modales. Todos los métodos devuelven un <code>ModalDialogRef</code>."
     },
     "config": {
-      "title": "ModalDialogConfig — propiedades",
+      "title": "ModalDialogConfig ",
       "description": "Objeto de configuración pasado a <code>open()</code>. Las propiedades se fusionan con los valores globales de <code>provideNUI()</code>."
     },
     "ref": {
-      "title": "ModalDialogRef — métodos",
+      "title": "ModalDialogRef",
       "description": "La referencia devuelta por <code>open()</code>. Úsala para cerrar el modal, escuchar eventos y observar los cambios de ciclo de vida."
     },
     "tokens": {
       "title": "Tokens de inyección",
       "description": "Usa estos tokens para inyectar contexto del modal dentro de un componente dinámico cargado por el servicio."
+    },
+    "custom-button": {
+      "title": "ModalDialogCustomButton",
+      "description": "Definición de botón inline pasada mediante <code>customButtons</code> en la configuración. Se evalúa una sola vez al abrir el modal — usa <code>ModalDialogActionsService</code> para estados reactivos."
+    },
+    "modal-action": {
+      "title": "ModalDialogAction",
+      "description": "Acción de footer registrada desde un componente dinámico mediante <code>ModalDialogActionsService</code>. Admite estados reactivos de <code>disabled</code> y <code>loading</code> mediante funciones getter."
+    },
+    "actions-service": {
+      "title": "ModalDialogActionsService",
+      "description": "Inyectado por el componente dinámico para registrar acciones de footer programáticamente. <code>ModalDialogService</code> crea una instancia nueva por cada modal."
+    },
+    "footer-directive": {
+      "title": "ModalDialogFooterDirective",
+      "description": "Directiva aplicada a un <code>ng-template</code> dentro del componente dinámico. Proyecta el template completo en el footer del modal con bindings nativos de Angular.",
+      "note": "Prioridad: <code>customButtons</code> &gt; directiva <code>nuiModalDialogFooter</code> &gt; <code>ModalDialogActionsService</code> &gt; prop de configuración <code>footerTemplate</code>."
     }
   },
   "theming": {
@@ -85,12 +103,9 @@
   },
   "i18n": {
     "keys": {
-      "title": "Claves i18n",
-      "description": "Todo el texto visible al usuario en Modal Dialog puede sobreescribirse vía <code>provideNuiI18n()</code> o la configuración por-modal para etiquetas."
-    },
-    "override": {
-      "title": "Sobreescritura global",
-      "description": "Proporciona traducciones personalizadas globalmente usando <code>provideNuiI18n()</code> en tu <code>app.config.ts</code>."
+      "title": "Tokens de traducción",
+      "description": "El componente Modal Dialog usa tokens propios para sus textos.",
+      "note": "Todos los textos visibles por el usuario en Modal Dialog pueden ser sobreescritos globalmente usando <code>provideNuiI18n()</code>. Otros pueden traducirse pasando la traducción personalizada en la configuración de <code>open()</code>."
     }
   },
   "a11y": {

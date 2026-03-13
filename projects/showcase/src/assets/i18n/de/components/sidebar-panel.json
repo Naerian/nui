@@ -6,11 +6,6 @@
       "title": "Grundlegende Verwendung",
       "description": "Öffnen Sie ein Seitenpanel über den SidebarPanelService. Das Panel gleitet mit einer sanften Animation vom Bildschirmrand."
     },
-    "defaults": {
-      "title": "Standardkonfiguration",
-      "description": "Das Panel wird mit den konfigurierten globalen Standardwerten geöffnet.",
-      "note": "Wenn beim Öffnen des Panels keine Optionen angegeben werden, werden die in der NUI-Konfiguration über <code>provideNUI({ sidebarPanel: {...} })</code> definierten globalen Standardwerte verwendet."
-    },
     "sizes": {
       "title": "Größen",
       "description": "Legt die Größe fest, mit der das Panel geöffnet wird.",
@@ -69,34 +64,35 @@
     "footer-actions": {
       "title": "Fußzeilen-Aktionen",
       "description": "Fügen Sie Aktionsschaltflächen in der Panel-Fußzeile hinzu.",
-      "note": "Verwenden Sie <code>customButtons</code> für einfache Aktionen oder <code>footerTemplate</code> für vollständig angepasste Layouts. Sie können mehrere Schaltflächen mit den verschiedenen NUI-Varianten und -Farben kombinieren."
+      "note": "Verwenden Sie <code>customButtons</code> für einfache Aktionen oder <code>footerTemplate</code> für vollständig angepasste Layouts. Sie können mehrere Schaltflächen mit den verschiedenen NUI-Varianten und -Farben kombinieren.<br/><br/>Um <code>loading</code> oder <code>disabled</code> reaktiv zu verwenden, können Sie den <code>SidebarPanelActionsService</code> in Ihre untergeordnete Komponente injizieren, um den Status der Schaltflächen von innerhalb der Komponente zu steuern, die Direktive <code>nuiSidebarPanelFooter</code> auf Ihren benutzerdefinierten Schaltflächen verwenden, um sie mit vordefinierten Aktionen wie 'confirm' oder 'cancel' zu verknüpfen, oder benutzerdefinierte Ereignisse auslösen und sich von der untergeordneten Komponente oder unter Verwendung eines <code>ng-template</code> im übergeordneten Komponenten abonnieren, ohne die Direktive zu verwenden."
     },
     "child-footer-actions": {
       "title": "Aktionen aus untergeordneter Komponente",
       "description": "Die untergeordnete Komponente kann eigene Fußzeilen-Aktionen über SidebarPanelActionsService registrieren.",
-      "note": "Dieser Ansatz eignet sich ideal für Formulare, bei denen die untergeordnete Komponente die gesamte Logik verwaltet (Validierung, Speichern, Zustände). Die untergeordnete Komponente injiziert <code>SidebarPanelActionsService</code> und registriert Aktionen über <code>register()</code>. Aktionen können reaktive Zustände (deaktiviert, wird geladen) haben und komplexe Logik ausführen."
+      "note": "Dieser Ansatz eignet sich ideal für Formulare, bei denen die untergeordnete Komponente die gesamte Logik verwaltet (Validierung, Speichern, Zustände). Die untergeordnete Komponente injiziert <code>SidebarPanelActionsService</code> und registriert Aktionen über <code>register()</code>. Aktionen können reaktive Zustände (deaktiviert, wird geladen) haben und komplexe Logik ausführen.",
+      "note2": "Alternativ können Sie die Direktive <code>nuiSidebarPanelFooter</code> in einer dynamischen Komponente verwenden, um volle Kontrolle über die Fußzeile mit nativem HTML zu erhalten. Im Gegensatz zu <code>SidebarPanelActionsService</code>, der Button-Daten registriert und vom Panel-Shell gerendert werden, projiziert die Direktive ein vollständiges <code>ng-template</code>: Jedes Angular-Binding wird bei jeder Änderungserkennung neu ausgewertet, ohne <code>update()</code> aufrufen zu müssen."
     }
   },
   "api": {
     "service": {
       "title": "SidebarPanelService",
-      "description": "Service-Methoden zur Verwaltung von Seitenpanels"
+      "description": "Injizieren Sie <code>SidebarPanelService</code>, um Seitenleisten-Panels zu öffnen und zu verwalten. Alle Methoden geben ein <code>SidebarPanelRef</code> zurück."
     },
-    "ref-properties": {
-      "title": "SidebarPanelRef (Eigenschaften)",
-      "description": "Eigenschaften der Seitenpanel-Referenz"
+    "ref": {
+      "title": "SidebarPanelRef",
+      "description": "Die von <code>open()</code> zurückgegebene Referenz. Verwenden Sie sie, um das Modal zu schließen, auf Ereignisse zu hören und Änderungen im Lebenszyklus zu beobachten."
     },
-    "ref-methods": {
-      "title": "SidebarPanelRef (Methoden)",
-      "description": "Methoden der Seitenpanel-Referenz zur Steuerung und für Ereignisse"
+    "tokens": {
+      "title": "Injection-Tokens",
+      "description": "Verwenden Sie diese Tokens, um den Kontext des Seitenleisten-Panels innerhalb einer dynamischen Komponente zu injizieren, die vom Service geladen wurde."
     },
     "config": {
       "title": "SidebarPanelConfig",
-      "description": "Vollständige Konfiguration des Seitenpanels"
+      "description": "Konfigurationsobjekt, das an <code>open()</code> übergeben wird. Die Eigenschaften werden mit den globalen Werten von <code>provideNUI()</code> zusammengeführt."
     },
     "custom-button": {
       "title": "SidebarPanelCustomButton",
-      "description": "Konfiguration der benutzerdefinierten Fußzeilen-Schaltfläche"
+      "description": "Inline-Button-Definition, die über <code>customButtons</code> in der Konfiguration übergeben wird. Sie wird nur einmal beim Öffnen des Modals ausgewertet — verwenden Sie <code>SidebarPanelActionsService</code> für reaktive Zustände."
     },
     "minimized-tab": {
       "title": "MinimizedTabCustomization",
@@ -104,11 +100,15 @@
     },
     "footer-actions": {
       "title": "SidebarPanelAction",
-      "description": "Definition der Aktionen, die von untergeordneten Komponenten für die Panel-Fußzeile registriert werden"
+      "description": "Definition von Aktionen, die von Kindkomponenten für den Footer des Panels registriert werden"
     },
     "footer-actions-service": {
       "title": "SidebarPanelActionsService",
-      "description": "Service für untergeordnete Komponenten, um Aktionen in der Panel-Fußzeile zu registrieren"
+      "description": "Service, mit dem Kindkomponenten Aktionen im Footer des Panels registrieren können"
+    },
+    "footer-directive": {
+      "title": "SidebarPanelFooterDirective",
+      "description": "Direktive, die auf ein <code>ng-template</code> innerhalb einer dynamischen Komponente angewendet wird. Sie projiziert das gesamte Template mit nativen Angular-Bindings in den Footer des Panels."
     }
   },
   "theming": {

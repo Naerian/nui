@@ -32,43 +32,6 @@ export const SIDEBAR_PANEL_EXAMPLES_SECTIONS: ComponentSection[] = [
     ],
   },
   {
-    id: 'defaults',
-    title: 'components.sidebar-panel.examples.defaults.title',
-    description: 'components.sidebar-panel.examples.defaults.description',
-    anchor: 'defaults',
-    note: {
-      type: 'info',
-      content: 'components.sidebar-panel.examples.defaults.note',
-    },
-    examples: [
-      {
-        title: 'codeExamples.typescript',
-        code: `// Default NUI Configuration for Sidebar Panels
-export const appConfig: ApplicationConfig = {
-  providers: [
-    provideNUI({
-      sidebarPanel: {
-        position: 'left',        // All panels will open to the left
-        size: 'lg',              // All will be large by default
-        animationDuration: 300,  // Slower animation
-        mobileFullScreen: true   // Fullscreen on mobile
-      }
-    })
-  ]
-};
-
-// Using the global defaults when opening a panel
-openPanel() {
-  this.sidebarPanelService.open(MyContentComponent, {
-    title: 'Sample Panel'
-    // No need to specify position, size, etc. Will use global defaults
-  });
-}`,
-        language: 'typescript',
-      },
-    ],
-  },
-  {
     id: 'sizes',
     title: 'components.sidebar-panel.examples.sizes.title',
     description: 'components.sidebar-panel.examples.sizes.description',
@@ -748,32 +711,26 @@ this.sidebarPanelService.closeAll();`,
       },
       {
         title: 'Loading States',
-        code: `<!-- Template con loading states reactivos -->
-<ng-template #loadingActionsTemplate>
-  <div style="
-    display: flex;
-    gap: 0.5rem;
-    padding: 1rem 1.5rem;
-    justify-content: flex-end;
-    border-top: 1px solid var(--nui-border-high);
-  ">
-    <nui-button
-      [color]="'secondary'"
-      [variant]="'outline'"
-      [disabled]="isProcessing()"
-      (click)="cancelPanel()">
-      Cancelar
-    </nui-button>
-    <nui-button
-      [color]="'primary'"
-      [prefixIcon]="'ri-refresh-line'"
-      [disabled]="isProcessing()"
-      [loading]="isProcessing()"
-      (click)="processAction()">
-      Procesar
-    </nui-button>
-  </div>
-</ng-template>
+        code: `// HTML Template:
+// <ng-template #loadingActionsTemplate>
+//   <div>
+//     <nui-button
+//       [color]="'secondary'"
+//       [variant]="'outline'"
+//       [disabled]="isProcessing()"
+//       (click)="cancelPanel()">
+//       Cancel
+//     </nui-button>
+//     <nui-button
+//       [color]="'primary'"
+//       [prefixIcon]="'ri-refresh-line'"
+//       [disabled]="isProcessing()"
+//       [loading]="isProcessing()"
+//       (click)="processAction()">
+//       Process
+//     </nui-button>
+//   </div>
+// </ng-template>
           
 
 // In the component class
@@ -869,25 +826,41 @@ export class MyComponent {
         language: 'typescript',
       },
       {
-        title: 'Template',
-        code: `@ViewChild('customFooterTemplate') customFooterTemplate!: TemplateRef<any>;
+        title: 'Template (nuiSidebarPanelFooter)',
+        code: `// Inside a dynamic component loaded by SidebarPanelService:
+// The directive registers the template into the panel footer automatically.
 
-openPanel() {
-  this.sidebarPanelService.open(MyContentComponent, {
-    title: 'Panel with Custom Footer Template',
-    footerTemplate: this.customFooterTemplate
+@Component({
+  selector: 'app-my-form',
+  standalone: true,
+  imports: [ReactiveFormsModule, SidebarPanelFooterDirective, ButtonComponent],
+  template: \`
+    <form [formGroup]="form">
+      <input formControlName="name" placeholder="Name" />
+    </form>
+
+    <ng-template nuiSidebarPanelFooter>
+      <div style="display:flex; gap:8px; justify-content:flex-end">
+        <nui-button color="secondary" variant="outline" (click)="cancel()">
+          Cancel
+        </nui-button>
+        <nui-button color="primary" [disabled]="form.invalid" (click)="save()">
+          Save
+        </nui-button>
+      </div>
+    </ng-template>
+  \`,
+})
+export class MyFormComponent {
+  private readonly panelRef = inject<SidebarPanelRef>(SIDEBAR_PANEL_REF);
+
+  form = inject(FormBuilder).group({
+    name: ['', Validators.required],
   });
-}
 
-// In the template:
-<ng-template #customFooterTemplate>
-  <div style="padding: 1rem; background: var(--nui-surface-variant);">
-    <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
-      <nui-button [color]="'secondary'" [variant]="'ghost'">Cancel</nui-button>
-      <nui-button [color]="'success'" [prefixIcon]="'ri-check-line'">Confirm</nui-button>
-    </div>
-  </div>
-</ng-template>`,
+  cancel() { this.panelRef.close({ confirmed: false }); }
+  save()   { this.panelRef.close({ confirmed: true, data: this.form.value }); }
+}`,
         language: 'typescript',
       },
       {
@@ -950,9 +923,14 @@ openPanel() {
     description: 'components.sidebar-panel.examples.child-footer-actions.description',
     anchor: 'child-footer-actions',
     note: {
-      type: 'success',
+      type: 'info',
       icon: 'ri-lightbulb-line',
       content: 'components.sidebar-panel.examples.child-footer-actions.note',
+    },
+    note2: {
+      type: 'info',
+      icon: 'ri-lightbulb-flash-line',
+      content: 'components.sidebar-panel.examples.child-footer-actions.note2',
     },
     examples: [
       {

@@ -10,6 +10,7 @@ import { SIDEBAR_PANEL_PAGE_CONFIG } from './sidebar-panel-page.config';
 import { SidebarPanelExampleContentComponent } from './components/sidebar-panel-example-content/sidebar-panel-example-content.component';
 import { SidebarPanelEventExampleComponent } from './components/sidebar-panel-event-example/sidebar-panel-event-example.component';
 import { UserFormExampleComponent } from './components/user-form-example/user-form-example.component';
+import { FooterDirectivePanelComponent } from './components/footer-directive-panel/footer-directive-panel.component';
 
 /**
  * Página de documentación del componente Sidebar Panel
@@ -70,13 +71,14 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       icon: 'ri-braces-line',
       sections: [
         'api-service',
-        'api-ref-properties',
-        'api-ref-methods',
+        'api-ref',
         'api-config',
         'api-custom-button',
         'api-minimized-tab',
         'api-footer-actions',
         'api-footer-actions-service',
+        'api-footer-directive',
+        'api-tokens',
       ],
     },
     {
@@ -784,14 +786,10 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
    * Demuestra el uso de footerTemplate para layouts completamente custom
    */
   openPanelWithCustomFooterTemplate(): void {
-    this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
-      title: 'Panel con Footer Template Custom',
+    this.sidebarPanelService.open(FooterDirectivePanelComponent, {
+      title: 'Template (nuiSidebarPanelFooter)',
       position: 'right',
       size: 'md',
-      data: {
-        message: 'Este panel usa un template completamente personalizado en el footer',
-      },
-      footerTemplate: this.customFooterTemplate,
     });
   }
 

@@ -497,6 +497,11 @@ export class MyFormComponent {
       type: 'info',
       content: 'components.modal-dialog.examples.child-footer-actions.note',
     },
+    note2: {
+      type: 'info',
+      icon: 'ri-lightbulb-line',
+      content: 'components.modal-dialog.examples.child-footer-actions.note2',
+    },
     anchor: 'child-footer-actions',
     examples: [
       {

@@ -39,24 +39,52 @@
     "statusBar": {
       "title": "Status bar",
       "description": "Add a colored border stripe to one side of the modal to convey additional semantic information using the <code>statusBar</code> config option."
+    },
+    "footer-custom": {
+      "title": "Custom footer actions",
+      "description": "Customize the modal footer with your own buttons and templates.",
+      "note": "Customize the modal footer using <code>customButtons</code>, the <code>ModalDialogActionsService</code> (from inside the dynamic component), or the <code>[nuiModalDialogFooter]</code> directive."
+    },
+    "child-footer-actions": {
+      "title": "Actions from child component",
+      "description": "Customize the modal footer from a dynamic component loaded inside the modal.",
+      "note": "Inject <code>ModalDialogActionsService</code> into your dynamic component to register footer buttons from within the component. Actions support reactive <code>disabled</code> and <code>loading</code> states via getters — no <code>update()</code> calls needed.",
+      "note2": "Alternatively, use the <code>nuiModalDialogFooter</code> directive inside a dynamic component for full footer control with native HTML. Unlike <code>ModalDialogActionsService</code>, which registers button data rendered by the modal shell, the directive projects a complete <code>ng-template</code>: any Angular binding re-evaluates on every change detection cycle automatically, without calling <code>update()</code>."
     }
   },
   "api": {
     "service": {
-      "title": "ModalDialogService — methods",
+      "title": "ModalDialogService",
       "description": "Inject <code>ModalDialogService</code> to open and manage modals. All methods return a <code>ModalDialogRef</code>."
     },
     "config": {
-      "title": "ModalDialogConfig — properties",
+      "title": "ModalDialogConfig",
       "description": "Configuration object passed to <code>open()</code>. Properties are merged with the global defaults from <code>provideNUI()</code>."
     },
     "ref": {
-      "title": "ModalDialogRef — methods",
+      "title": "ModalDialogRef",
       "description": "The reference returned by <code>open()</code>. Use it to close the modal, listen to events, and observe lifecycle changes."
     },
     "tokens": {
       "title": "Injection tokens",
       "description": "Use these tokens to inject modal context inside a dynamic component loaded by the service."
+    },
+    "custom-button": {
+      "title": "ModalDialogCustomButton",
+      "description": "Inline button definition passed via <code>customButtons</code> in the config. Evaluated once at open time — use <code>ModalDialogActionsService</code> for reactive states."
+    },
+    "modal-action": {
+      "title": "ModalDialogAction",
+      "description": "Footer action registered from a dynamic component via <code>ModalDialogActionsService</code>. Supports reactive <code>disabled</code> and <code>loading</code> via getter functions."
+    },
+    "actions-service": {
+      "title": "ModalDialogActionsService",
+      "description": "Injected by the dynamic component to register footer actions programmatically. A fresh instance is created per modal by <code>ModalDialogService</code>."
+    },
+    "footer-directive": {
+      "title": "ModalDialogFooterDirective",
+      "description": "Directive applied to an <code>ng-template</code> inside the dynamic component. Projects the full template into the modal footer with native Angular bindings.",
+      "note": "Priority: <code>customButtons</code> &gt; <code>nuiModalDialogFooter</code> directive &gt; <code>ModalDialogActionsService</code> &gt; <code>footerTemplate</code> config prop."
     }
   },
   "theming": {
@@ -75,12 +103,9 @@
   },
   "i18n": {
     "keys": {
-      "title": "i18n keys",
-      "description": "All user-facing text in Modal Dialog can be overridden via <code>provideNuiI18n()</code> or the per-modal config for labels."
-    },
-    "override": {
-      "title": "Global override",
-      "description": "Provide custom translations globally using <code>provideNuiI18n()</code> in your <code>app.config.ts</code>."
+      "title": "Translation tokens",
+      "description": "The Modal Dialog component uses its own tokens for its texts.",
+      "note": "All user-facing text in Modal Dialog can be overridden globally using <code>provideNuiI18n()</code>. Others can be translated by passing the custom translation in the <code>open()</code> configuration."
     }
   },
   "a11y": {

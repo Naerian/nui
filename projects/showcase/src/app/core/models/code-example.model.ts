@@ -98,6 +98,11 @@ export interface ComponentSection {
   note?: SectionNote;
 
   /**
+   * Segunda nota informativa (opcional)
+   */
+  note2?: SectionNote;
+
+  /**
    * Clase CSS adicional para el preview (opcional)
    */
   previewClass?: string;

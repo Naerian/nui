@@ -182,7 +182,6 @@ export interface ModalDialogCustomButton {
  */
 export interface ModalDialogStackItem {
   id: string;
-  /** ModalDialogRef — tipado como `any` para evitar dependencia circular */
   modalRef: any;
   componentType: any;
   config: ModalDialogConfig;

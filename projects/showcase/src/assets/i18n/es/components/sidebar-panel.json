@@ -6,11 +6,6 @@
       "title": "Uso básico",
       "description": "Abre un panel lateral desde el servicio SidebarPanelService. El panel se desliza desde el borde de la pantalla con una animación suave."
     },
-    "defaults": {
-      "title": "Configuración predeterminada",
-      "description": "El panel se abrirá utilizando los valores predeterminados globales configurados.",
-      "note": "Si no se proporcionan opciones al abrir el panel, se usarán los valores predeterminados globales definidos en la configuración de NUI de <code>provideNUI({ sidebarPanel: {...} })</code>."
-    },
     "sizes": {
       "title": "Tamaños",
       "description": "Permite definir el tamaño con el que se abrirá el panel.",
@@ -69,34 +64,35 @@
     "footer-actions": {
       "title": "Acciones en el footer",
       "description": "Agrega botones de acción en el footer del panel.",
-      "note": "Usa <code>customButtons</code> para acciones simples o <code>footerTemplate</code> para layouts completamente personalizados. Puedes combinar múltiples botones con las diferentes variantes y colores de NUI."
+      "note": "Usa <code>customButtons</code> para acciones simples o <code>footerTemplate</code> para layouts completamente personalizados. Puedes combinar múltiples botones con las diferentes variantes y colores de NUI.<br/><br/>Para usar <code>loading</code> o <code>disabled</code> de forma reactiva, puedes inyectar el <code>SidebarPanelActionsService</code> en tu componente hijo para controlar el estado de los botones desde dentro del componente, usar la directiva <code>nuiSidebarPanelFooter</code> en tus botones personalizados para vincularlos a acciones predefinidas como 'confirm' o 'cancel', o emitir eventos personalizados y suscribirte a ellos desde el componente hijo o usando un template <code>ng-template</code> en el componente padre, sin necesidad de la directiva."
     },
     "child-footer-actions": {
       "title": "Acciones desde componente hijo",
       "description": "El componente hijo puede registrar sus propias acciones de footer usando SidebarPanelActionsService.",
-      "note": "Esta aproximación es ideal para formularios donde el hijo maneja toda la lógica (validación, guardado, estados). El componente hijo inyecta <code>SidebarPanelActionsService</code> y registra las acciones mediante <code>register()</code>. Las acciones pueden tener estados reactivos (disabled, loading) y ejecutar lógica compleja."
+      "note": "Esta aproximación es ideal para formularios donde el hijo maneja toda la lógica (validación, guardado, estados). El componente hijo inyecta <code>SidebarPanelActionsService</code> y registra las acciones mediante <code>register()</code>. Las acciones pueden tener estados reactivos (disabled, loading) y ejecutar lógica compleja.",
+      "note2": "Como alternativa, usa la directiva <code>nuiSidebarPanelFooter</code> dentro de un componente dinámico para tener control total del footer con HTML nativo. A diferencia de <code>SidebarPanelActionsService</code>, que registra datos de botones renderizados por el shell, la directiva proyecta un <code>ng-template</code> completo: cualquier binding de Angular se reevalúa en cada ciclo de detección de cambios sin necesidad de llamar a <code>update()</code>."
     }
   },
   "api": {
     "service": {
       "title": "SidebarPanelService",
-      "description": "Métodos del servicio para gestionar paneles laterales"
+      "description": "Inyecta <code>SidebarPanelService</code> para abrir y gestionar paneles laterales. Todos los métodos devuelven un <code>SidebarPanelRef</code>."
     },
-    "ref-properties": {
-      "title": "SidebarPanelRef (Propiedades)",
-      "description": "Propiedades de la referencia del panel lateral"
+    "ref": {
+      "title": "SidebarPanelRef",
+      "description": "La referencia devuelta por <code>open()</code>. Úsala para cerrar el modal, escuchar eventos y observar los cambios de ciclo de vida."
     },
-    "ref-methods": {
-      "title": "SidebarPanelRef (Métodos)",
-      "description": "Métodos de la referencia del panel lateral para control y eventos"
+    "tokens": {
+      "title": "Tokens de inyección",
+      "description": "Usa estos tokens para inyectar contexto del panel lateral dentro de un componente dinámico cargado por el servicio."
     },
     "config": {
       "title": "SidebarPanelConfig",
-      "description": "Configuración completa del panel lateral"
+      "description": "Objeto de configuración pasado a <code>open()</code>. Las propiedades se fusionan con los valores globales de <code>provideNUI()</code>."
     },
     "custom-button": {
       "title": "SidebarPanelCustomButton",
-      "description": "Configuración de botones personalizados del footer"
+      "description": "Definición de botón inline pasada mediante <code>customButtons</code> en la configuración. Se evalúa una sola vez al abrir el modal — usa <code>SidebarPanelActionsService</code> para estados reactivos."
     },
     "minimized-tab": {
       "title": "MinimizedTabCustomization",
@@ -109,6 +105,10 @@
     "footer-actions-service": {
       "title": "SidebarPanelActionsService",
       "description": "Servicio para que los componentes hijos puedan registrar acciones en el footer del panel"
+    },
+    "footer-directive": {
+      "title": "SidebarPanelFooterDirective",
+      "description": "Directiva aplicada a un <code>ng-template</code> dentro de un componente dinámico. Proyecta el template completo en el footer del panel con bindings nativos de Angular."
     }
   },
   "theming": {

@@ -3,8 +3,8 @@
   "subtitle": "Boîtes de dialogue modales superposées via CDK Overlay avec gestion complète du focus, animations, minimisation et intégration des thèmes",
   "examples": {
     "basic": {
-      "title": "Boîte de dialogue de confirmation basique",
-      "description": "Ouvrez un modal avec <code>ModalDialogService.open()</code> ou les helpers de commodité. Le service propose des options pour le titre, le message, les boutons confirmer/annuler, la couleur et le type sémantique."
+      "title": "Utilisation de base",
+      "description": "Ouvrez un modal depuis le service ModalDialogService. Le modal glisse depuis le bord de l'écran avec une animation fluide."
     },
     "semanticTypes": {
       "title": "Types sémantiques",
@@ -39,24 +39,52 @@
     "statusBar": {
       "title": "Barre de statut",
       "description": "Ajoutez une bordure colorée sur un côté du modal pour transmettre des informations sémantiques supplémentaires via l'option <code>statusBar</code> de la configuration."
+    },
+    "footer-custom": {
+      "title": "Actions de pied de page personnalisées",
+      "description": "Personnalisez le pied de page du modal avec vos propres boutons et templates.",
+      "note": "Personnalisez le pied de page du modal avec <code>customButtons</code>, le <code>ModalDialogActionsService</code> (depuis le composant dynamique) ou la directive <code>[nuiModalDialogFooter]</code>."
+    },
+    "child-footer-actions": {
+      "title": "Actions depuis le composant enfant",
+      "description": "Personnalisez le pied de page du modal depuis un composant dynamique chargé dans le modal.",
+      "note": "Injectez <code>ModalDialogActionsService</code> dans votre composant dynamique pour enregistrer des boutons dans le pied de page depuis l'intérieur du composant. Les actions prennent en charge des états <code>disabled</code> et <code>loading</code> réactifs via des getters, sans <code>update()</code>.",
+      "note2": "Alternativement, utilisez la directive <code>nuiModalDialogFooter</code> dans un composant dynamique pour un contrôle total du pied de page avec HTML natif. Contrairement à <code>ModalDialogActionsService</code>, qui enregistre des données de boutons rendus par le shell du modal, la directive projette un <code>ng-template</code> complet : tout binding Angular est réévalué automatiquement à chaque cycle de détection des changements, sans appel à <code>update()</code>."
     }
   },
   "api": {
     "service": {
-      "title": "ModalDialogService — méthodes",
+      "title": "ModalDialogService",
       "description": "Injectez <code>ModalDialogService</code> pour ouvrir et gérer les modaux. Toutes les méthodes retournent un <code>ModalDialogRef</code>."
     },
     "config": {
-      "title": "ModalDialogConfig — propriétés",
+      "title": "ModalDialogConfig",
       "description": "Objet de configuration passé à <code>open()</code>. Les propriétés sont fusionnées avec les valeurs globales de <code>provideNUI()</code>."
     },
     "ref": {
-      "title": "ModalDialogRef — méthodes",
+      "title": "ModalDialogRef",
       "description": "La référence retournée par <code>open()</code>. Utilisez-la pour fermer le modal, écouter les événements et observer les changements du cycle de vie."
     },
     "tokens": {
       "title": "Tokens d'injection",
       "description": "Utilisez ces tokens pour injecter du contexte modal dans un composant dynamique chargé par le service."
+    },
+    "custom-button": {
+      "title": "ModalDialogCustomButton",
+      "description": "Définition de bouton inline passée via <code>customButtons</code> dans la configuration. Évaluée une seule fois à l'ouverture — utilisez <code>ModalDialogActionsService</code> pour des états réactifs."
+    },
+    "modal-action": {
+      "title": "ModalDialogAction",
+      "description": "Action de pied de page enregistrée depuis un composant dynamique via <code>ModalDialogActionsService</code>. Prend en charge des états <code>disabled</code> et <code>loading</code> réactifs via des fonctions getter."
+    },
+    "actions-service": {
+      "title": "ModalDialogActionsService",
+      "description": "Injecté par le composant dynamique pour enregistrer des actions de pied de page par programmation. <code>ModalDialogService</code> crée une instance fraîche par modal."
+    },
+    "footer-directive": {
+      "title": "ModalDialogFooterDirective",
+      "description": "Directive appliquée à un <code>ng-template</code> dans le composant dynamique. Projette le template complet dans le pied de page du modal avec des bindings Angular natifs.",
+      "note": "Priorité : <code>customButtons</code> &gt; directive <code>nuiModalDialogFooter</code> &gt; <code>ModalDialogActionsService</code> &gt; propriété de configuration <code>footerTemplate</code>."
     }
   },
   "theming": {
@@ -75,12 +103,9 @@
   },
   "i18n": {
     "keys": {
-      "title": "Clés i18n",
-      "description": "Tous les textes visibles par l'utilisateur dans Modal Dialog peuvent être remplacés via <code>provideNuiI18n()</code> ou la configuration par-modal pour les étiquettes."
-    },
-    "override": {
-      "title": "Remplacement global",
-      "description": "Fournissez des traductions personnalisées globalement avec <code>provideNuiI18n()</code> dans votre <code>app.config.ts</code>."
+      "title": "Tokens de traduction",
+      "description": "Le composant Modal Dialog utilise ses propres tokens pour ses textes.",
+      "note": "Tous les textes visibles par l'utilisateur dans Modal Dialog peuvent être remplacés globalement en utilisant <code>provideNuiI18n()</code>. D'autres peuvent être traduits en passant la traduction personnalisée dans la configuration de <code>open()</code>."
     }
   },
   "a11y": {

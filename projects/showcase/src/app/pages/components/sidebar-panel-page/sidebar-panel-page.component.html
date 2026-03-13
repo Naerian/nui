@@ -25,6 +25,12 @@
               </div>
             }
 
+            @if (section.note2; as note2) {
+              <div class="section-note" [ngClass]="note2.type">
+                <p [innerHTML]="note2.content | translate"></p>
+              </div>
+            }
+
             @switch (section.id) {
               @case ('basic') {
                 <div class="example-preview">
@@ -153,7 +159,7 @@
                     Conditional Actions
                   </nui-button>
                   <nui-button [color]="'primary'" (click)="openPanelWithCustomFooterTemplate()">
-                    Template Custom
+                    Template (nuiSidebarPanelFooter)
                   </nui-button>
                   <nui-button [color]="'primary'" (click)="openPanelWithComplexActions()">
                     Advanced (4 Actions)

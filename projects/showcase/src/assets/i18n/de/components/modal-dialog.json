@@ -39,24 +39,52 @@
     "statusBar": {
       "title": "Statusleiste",
       "description": "Fügen Sie einen farbigen Rahmen an einer Seite des Modals hinzu, um zusätzliche semantische Informationen über die Option <code>statusBar</code> in der Konfiguration zu übermitteln."
+    },
+    "footer-custom": {
+      "title": "Benutzerdefinierte Footer-Aktionen",
+      "description": "Passen Sie die Modal-Fußzeile mit eigenen Schaltflächen und Templates an.",
+      "note": "Passen Sie die Modal-Fußzeile mit <code>customButtons</code>, dem <code>ModalDialogActionsService</code> (von innerhalb der dynamischen Komponente) oder der Direktive <code>[nuiModalDialogFooter]</code> an."
+    },
+    "child-footer-actions": {
+      "title": "Aktionen aus untergeordneter Komponente",
+      "description": "Passen Sie die Modal-Fußzeile von einer dynamisch geladenen Komponente innerhalb des Modals an.",
+      "note": "Injizieren Sie <code>ModalDialogActionsService</code> in Ihre dynamische Komponente, um Footer-Schaltflächen von innerhalb der Komponente zu registrieren. Aktionen unterstützen reaktive Zustände für <code>disabled</code> und <code>loading</code> über Getter, ohne <code>update()</code>-Aufrufe.",
+      "note2": "Alternativ können Sie die Direktive <code>nuiModalDialogFooter</code> in einer dynamischen Komponente verwenden, um volle Kontrolle über die Fußzeile mit nativem HTML zu erhalten. Im Gegensatz zu <code>ModalDialogActionsService</code>, der Button-Daten registriert und vom Modal-Shell gerendert werden, projiziert die Direktive ein vollständiges <code>ng-template</code>: Jedes Angular-Binding wird bei jeder Änderungserkennung automatisch neu ausgewertet, ohne <code>update()</code> aufrufen zu müssen."
     }
   },
   "api": {
     "service": {
-      "title": "ModalDialogService — Methoden",
+      "title": "ModalDialogService",
       "description": "Injizieren Sie <code>ModalDialogService</code>, um Modals zu öffnen und zu verwalten. Alle Methoden geben eine <code>ModalDialogRef</code> zurück."
     },
     "config": {
-      "title": "ModalDialogConfig — Eigenschaften",
+      "title": "ModalDialogConfig",
       "description": "Konfigurationsobjekt, das an <code>open()</code> übergeben wird. Eigenschaften werden mit globalen Werten aus <code>provideNUI()</code> zusammengeführt."
     },
     "ref": {
-      "title": "ModalDialogRef — Methoden",
+      "title": "ModalDialogRef",
       "description": "Die von <code>open()</code> zurückgegebene Referenz. Verwenden Sie sie, um das Modal zu schließen, Ereignisse zu lauschen und Lebenszyklusänderungen zu beobachten."
     },
     "tokens": {
       "title": "Injektions-Token",
       "description": "Verwenden Sie diese Token, um Modal-Kontext in eine dynamische Komponente zu injizieren, die vom Service geladen wird."
+    },
+    "custom-button": {
+      "title": "ModalDialogCustomButton",
+      "description": "Inline-Schaltflächendefinition, die über <code>customButtons</code> in der Konfiguration übergeben wird. Wird einmalig zum Öffnungszeitpunkt ausgewertet — verwenden Sie <code>ModalDialogActionsService</code> für reaktive Zustände."
+    },
+    "modal-action": {
+      "title": "ModalDialogAction",
+      "description": "Footer-Aktion, die von einer dynamischen Komponente über <code>ModalDialogActionsService</code> registriert wird. Unterstützt reaktive <code>disabled</code>- und <code>loading</code>-Zustände über Getter-Funktionen."
+    },
+    "actions-service": {
+      "title": "ModalDialogActionsService",
+      "description": "Wird von der dynamischen Komponente injiziert, um Footer-Aktionen programmatisch zu registrieren. Pro Modal wird von <code>ModalDialogService</code> eine neue Instanz erstellt."
+    },
+    "footer-directive": {
+      "title": "ModalDialogFooterDirective",
+      "description": "Direktive, die auf ein <code>ng-template</code> innerhalb der dynamischen Komponente angewendet wird. Projiziert das vollständige Template mit nativen Angular-Bindings in die Modal-Fußzeile.",
+      "note": "Priorität: <code>customButtons</code> &gt; Direktive <code>nuiModalDialogFooter</code> &gt; <code>ModalDialogActionsService</code> &gt; Konfigurationseigenschaft <code>footerTemplate</code>."
     }
   },
   "theming": {
@@ -75,12 +103,9 @@
   },
   "i18n": {
     "keys": {
-      "title": "i18n-Schlüssel",
-      "description": "Alle für Benutzer sichtbaren Texte im Modal Dialog können über <code>provideNuiI18n()</code> oder die pro-Modal-Konfiguration für Labels überschrieben werden."
-    },
-    "override": {
-      "title": "Globale Überschreibung",
-      "description": "Stellen Sie benutzerdefinierte Übersetzungen global mit <code>provideNuiI18n()</code> in Ihrer <code>app.config.ts</code> bereit."
+      "title": "Übersetzungstoken",
+      "description": "Die Modal Dialog-Komponente verwendet eigene Tokens für ihre Texte.",
+      "note": "Alle für den Benutzer sichtbaren Texte im Modal Dialog können global mit <code>provideNuiI18n()</code> überschrieben werden. Andere können durch die Übergabe der benutzerdefinierten Übersetzung in der <code>open()</code>-Konfiguration übersetzt werden."
     }
   },
   "a11y": {
