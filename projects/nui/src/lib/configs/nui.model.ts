@@ -14,6 +14,7 @@ import { AvatarGlobalConfig } from './avatar';
 import { TimeSelectorGlobalConfig } from './time-selector';
 import { ProgressBarGlobalConfig } from './progress-bar';
 import { SplitButtonGlobalConfig } from './split-button';
+import { ModalDialogGlobalConfig } from './modal-dialog';
 
 /**
  * Configuración global de la librería NUI (Narian UI).
@@ -54,5 +55,7 @@ export interface NUIConfig {
     progressBar?: Partial<ProgressBarGlobalConfig>;
     /** Split Button global defaults */
     splitButton?: Partial<SplitButtonGlobalConfig>;
+    /** Modal Dialog global defaults */
+    modalDialog?: Partial<ModalDialogGlobalConfig>;
   };
 }

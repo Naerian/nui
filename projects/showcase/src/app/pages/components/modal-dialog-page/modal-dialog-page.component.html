@@ -1,0 +1,136 @@
+<div class="docs-page">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h1>{{ pageConfig.title | translate }}</h1>
+      <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
+    </div>
+
+    <app-component-tabs [tabs]="tabs" [sections]="pageConfig.sections" #tabsComp>
+      @if (tabsComp.activeSections(); as activeSections) {
+        @for (section of activeSections; track section.id) {
+          <div class="section">
+            <app-section-title
+              [title]="section.title | translate"
+              [anchor]="section.anchor"
+              [tabId]="tabsComp.activeTabId()"
+            ></app-section-title>
+
+            @if (section.description) {
+              <p class="section-description" [innerHTML]="section.description | translate"></p>
+            }
+
+            @if (section.note; as note) {
+              <div class="section-note" [ngClass]="note.type">
+                <p [innerHTML]="note.content | translate"></p>
+              </div>
+            }
+
+            @switch (section.id) {
+              @case ('basic') {
+                <div class="example-preview">
+                  <nui-button (click)="openBasicConfirm()">
+                    Open Confirm Dialog
+                  </nui-button>
+                </div>
+              }
+
+              @case ('semantic-types') {
+                <div class="example-preview example-preview--spaced">
+                  <nui-button [color]="'info'" (click)="openInfoModal()">Info</nui-button>
+                  <nui-button [color]="'warning'" (click)="openWarningModal()">Warning</nui-button>
+                  <nui-button [color]="'success'" (click)="openSuccessModal()">Success</nui-button>
+                  <nui-button [color]="'danger'" (click)="openErrorModal()">Error</nui-button>
+                </div>
+              }
+
+              @case ('verification') {
+                <div class="example-preview">
+                  <nui-button [color]="'danger'" (click)="openVerificationModal()">
+                    Delete Project (Verification)
+                  </nui-button>
+                </div>
+              }
+
+              @case ('loader') {
+                <div class="example-preview">
+                  <nui-button [color]="'primary'" (click)="openLoaderModal()">
+                    Open Loader (3s)
+                  </nui-button>
+                </div>
+              }
+
+              @case ('dynamic-component') {
+                <div class="example-preview">
+                  <nui-button [color]="'primary'" (click)="openDynamicComponentDemo()">
+                    Open Dynamic Component Demo
+                  </nui-button>
+                </div>
+              }
+
+              @case ('minimizable') {
+                <div class="example-preview">
+                  <nui-button [color]="'primary'" (click)="openMinimizableModal()">
+                    Open Minimizable Modal
+                  </nui-button>
+                </div>
+              }
+
+              @case ('timeout') {
+                <div class="example-preview">
+                  <nui-button [color]="'primary'" (click)="openTimedModal()">
+                    Open Timed Modal (10s)
+                  </nui-button>
+                </div>
+              }
+
+              @case ('footer-actions') {
+                <div class="example-preview example-preview--spaced">
+                  <nui-button [color]="'primary'" (click)="openCustomButtonsModal()">
+                    Custom Buttons
+                  </nui-button>
+                </div>
+              }
+
+              @case ('status-bar') {
+                <div class="example-preview">
+                  <nui-button [color]="'info'" (click)="openStatusBarModal()">
+                    Open with Status Bar
+                  </nui-button>
+                </div>
+              }
+            }
+
+            <!-- Tabla de datos (para API o Theming) -->
+            @if (section.table) {
+              <div class="api-table">
+                <table>
+                  <thead>
+                    <tr>
+                      @for (header of section.table.headers; track $index) {
+                        <th [innerHTML]="header | translate"></th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of section.table.rows; track $index) {
+                      <tr>
+                        @for (cell of row; track $index) {
+                          <td [innerHTML]="cell | translate"></td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+
+            <!-- Code blocks asociados a esta sección -->
+            @if (section.examples && section.examples.length > 0) {
+              <app-code-block [examples]="section.examples"></app-code-block>
+            }
+          </div>
+        }
+      }
+    </app-component-tabs>
+  </div>
+</div>

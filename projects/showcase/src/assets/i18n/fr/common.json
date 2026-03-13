@@ -39,7 +39,8 @@
     "actionMenu": "Menu d'actions",
     "progressBar": "Barre de progression",
     "timeSelector": "Sélecteur d'heure",
-    "splitButton": "Bouton Divisé"
+    "splitButton": "Bouton Divisé",
+    "modalDialog": "Modal Dialog"
   },
   "presets": {
     "aura": "Aura",

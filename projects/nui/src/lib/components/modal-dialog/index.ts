@@ -48,3 +48,6 @@ export {
   ModalDialogDockItem,
   ModalDialogConfig,
 } from './models/modal-dialog.model';
+
+// -- i18n ---------------------------------------------------------------
+export { ModalDialogI18n, DEFAULT_MODAL_DIALOG_I18N } from './models/modal-dialog-i18n.model';

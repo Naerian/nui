@@ -1,6 +1,7 @@
 ﻿import { DEFAULT_AVATAR_I18N } from '../components/avatar/models/avatar-i18n.model';
 import { DEFAULT_CALENDAR_I18N } from '../components/calendar/models/calendar-i18n.model';
 import { DEFAULT_FAB_BUTTON_I18N } from '../components/fab-button/models/fab-button-i18n.model';
+import { DEFAULT_MODAL_DIALOG_I18N } from '../components/modal-dialog/models/modal-dialog-i18n.model';
 import { DEFAULT_PAGINATOR_I18N } from '../components/paginator/models/paginator-i18n.model';
 import { DEFAULT_TIMESELECTOR_I18N } from '../components/time-selector/models/time-selector-i18n.model';
 import { NuiI18n } from './nui-i18n.model';
@@ -23,4 +24,5 @@ export const NUI_I18N_DEFAULT: NuiI18n = {
   timeSelector: DEFAULT_TIMESELECTOR_I18N,
   paginator: DEFAULT_PAGINATOR_I18N,
   fabButton: DEFAULT_FAB_BUTTON_I18N,
+  modalDialog: DEFAULT_MODAL_DIALOG_I18N,
 };

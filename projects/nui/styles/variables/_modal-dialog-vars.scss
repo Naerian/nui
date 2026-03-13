@@ -1,0 +1,45 @@
+// ========================================
+// MODAL DIALOG - Tokens & Variables
+// ========================================
+
+// TOKENS (Sass)
+$modal-dialog-border-radius: 12px !default;
+
+$modal-dialog-header-padding: 20px !default;
+$modal-dialog-body-padding-y: 16px !default;
+$modal-dialog-body-padding-x: 20px !default;
+$modal-dialog-footer-padding-top: 12px !default;
+$modal-dialog-footer-padding-bottom: 20px !default;
+$modal-dialog-footer-padding-x: 20px !default;
+
+$modal-dialog-title-size: 1rem !default;
+$modal-dialog-title-weight: 600 !default;
+
+$modal-dialog-shadow: var(--nui-box-shadow-xl) !default;
+
+$modal-dialog-dock-border-radius: 8px !default;
+
+// MIXIN (CSS Custom Properties)
+@mixin nui-modal-dialog-vars {
+  // Layout
+  --nui-modal-dialog-border-radius: #{$modal-dialog-border-radius};
+  --nui-modal-dialog-header-padding: #{$modal-dialog-header-padding};
+  --nui-modal-dialog-body-padding-y: #{$modal-dialog-body-padding-y};
+  --nui-modal-dialog-body-padding-x: #{$modal-dialog-body-padding-x};
+  --nui-modal-dialog-footer-padding-top: #{$modal-dialog-footer-padding-top};
+  --nui-modal-dialog-footer-padding-bottom: #{$modal-dialog-footer-padding-bottom};
+  --nui-modal-dialog-footer-padding-x: #{$modal-dialog-footer-padding-x};
+
+  // Typography
+  --nui-modal-dialog-title-size: #{$modal-dialog-title-size};
+  --nui-modal-dialog-title-weight: #{$modal-dialog-title-weight};
+
+  // Layer
+  --nui-modal-dialog-z-index: var(--nui-z-index-modal);
+
+  // Shadow
+  --nui-modal-dialog-shadow: #{$modal-dialog-shadow};
+
+  // Dock chip
+  --nui-modal-dialog-dock-border-radius: #{$modal-dialog-dock-border-radius};
+}

@@ -11,8 +11,6 @@
     [attr.aria-valuenow]="timeoutProgress()"
     aria-valuemin="0"
     aria-valuemax="100"
-    (mouseenter)="pauseTimeout()"
-    (mouseleave)="resumeTimeout()"
   >
     <div
       class="nui-modal-dialog__progress-fill"
@@ -58,8 +56,8 @@
           [variant]="'ghost'"
           [size]="'sm'"
           (onClick)="minimize()"
-          [attr.aria-label]="_i18n().minimize || 'Minimizar'"
-          [title]="_i18n().minimize || 'Minimizar'"
+          [attr.aria-label]="_i18n().modalDialog.minimize"
+          [title]="_i18n().modalDialog.minimize"
         ></nui-button>
       }
       @if (showCloseButton) {
@@ -69,8 +67,8 @@
           [variant]="'ghost'"
           [size]="'sm'"
           (click)="requestClose()"
-          [attr.aria-label]="_i18n().close || 'Cerrar'"
-          [title]="_i18n().close || 'Cerrar'"
+          [attr.aria-label]="_i18n().modalDialog.close"
+          [title]="_i18n().modalDialog.close"
         ></nui-button>
       }
     </div>
@@ -78,14 +76,14 @@
 }
 
 <!-- Área de contenido (componente dinámico o ModalDialogSimpleContentComponent) -->
-@if (!modalRef?.isMinimized) {
+@if (!modalRef.isMinimized) {
   <div class="nui-modal-dialog__body" [id]="instanceId + '-body'">
     <!-- El servicio inserta aquí el componente dinámico buscando '.nui-modal-dialog__body' -->
   </div>
 }
 
 <!-- Footer — precedencia: customButtons > directiva > actionsService > footerTemplate config -->
-@if (!modalRef?.isMinimized && shouldShowFooter) {
+@if (!modalRef.isMinimized && shouldShowFooter) {
 
   @if (config.customButtons && config.customButtons.length > 0) {
     <!-- customButtons (máxima prioridad) -->

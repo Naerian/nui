@@ -25,6 +25,9 @@ export * from './progress-bar';
 // Split Button configuration
 export * from './split-button';
 
+// Modal Dialog configuration
+export * from './modal-dialog';
+
 // Main NUI configuration
 export * from './nui.model';
 export * from './nui.provider';

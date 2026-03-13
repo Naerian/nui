@@ -1,0 +1,304 @@
+@mixin nui-modal-dialog-styles {
+  // ===========================================================================
+  // BACKDROP
+  // ===========================================================================
+
+  .nui-modal-backdrop {
+    background-color: var(--nui-modal-dialog-overlay-bg);
+    z-index: var(--nui-modal-dialog-z-index) !important;
+  }
+
+  // ===========================================================================
+  // CDK OVERLAY PANE
+  // ===========================================================================
+
+  .cdk-overlay-pane.nui-modal-overlay {
+    z-index: calc(var(--nui-modal-dialog-z-index) + 1) !important;
+    pointer-events: auto;
+  }
+
+  // ===========================================================================
+  // SHELL HOST
+  // ===========================================================================
+
+  nui-modal-dialog {
+    display: flex;
+    flex-direction: column;
+    background: var(--nui-modal-dialog-bg);
+    border-radius: var(--nui-modal-dialog-border-radius);
+    box-shadow: var(--nui-modal-dialog-shadow);
+    overflow: hidden;
+    position: relative;
+    outline: none;
+  }
+
+  // ===========================================================================
+  // BEM CLASSES
+  // ===========================================================================
+
+  .nui-modal-dialog {
+    // Progress bar
+    &__progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--nui-modal-dialog-progress-bg);
+      z-index: 1;
+    }
+
+    &__progress-fill {
+      height: 100%;
+      background: var(--nui-modal-dialog-progress-color);
+      transition: width 50ms linear;
+    }
+
+    // Header
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--nui-modal-dialog-header-padding) var(--nui-modal-dialog-header-padding) 0;
+      gap: 0.5rem;
+      min-height: 3rem;
+    }
+
+    &__title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 1;
+      min-width: 0;
+    }
+
+    &__title-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    &__title-text {
+      font-size: var(--nui-modal-dialog-title-size);
+      font-weight: var(--nui-modal-dialog-title-weight);
+      color: var(--nui-modal-dialog-text);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &__countdown {
+      font-size: 0.875rem;
+      color: var(--nui-text-secondary);
+      flex-shrink: 0;
+    }
+
+    &__header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      flex-shrink: 0;
+    }
+
+    // Body
+    &__body {
+      padding: var(--nui-modal-dialog-body-padding-y) var(--nui-modal-dialog-body-padding-x);
+      flex: 1;
+      overflow-y: auto;
+      color: var(--nui-modal-dialog-text);
+
+      &::-webkit-scrollbar {
+        width: var(--nui-scrollbar-width, 6px);
+      }
+
+      &::-webkit-scrollbar-track {
+        background: var(--nui-modal-dialog-scroll-bg);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--nui-modal-dialog-scroll-thumb-bg);
+        border-radius: 4px;
+
+        &:hover {
+          background: var(--nui-modal-dialog-scroll-thumb-hover-bg);
+        }
+      }
+
+      scrollbar-width: thin;
+      scrollbar-color: var(--nui-modal-dialog-scroll-thumb-bg) var(--nui-modal-dialog-scroll-bg);
+    }
+
+    // Footer
+    &__footer {
+      padding: var(--nui-modal-dialog-footer-padding-top) var(--nui-modal-dialog-footer-padding-x) var(--nui-modal-dialog-footer-padding-bottom);
+      border-top: 1px solid var(--nui-modal-dialog-border);
+    }
+
+    &__footer-actions {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    // Estado minimizado
+    &--minimized {
+      display: none;
+    }
+
+    // Variantes de tipo semántico
+    &--danger &__title-icon,
+    &--danger &__title-text {
+      color: var(--nui-danger);
+    }
+
+    &--warning &__title-icon,
+    &--warning &__title-text {
+      color: var(--nui-warning);
+    }
+
+    &--success &__title-icon,
+    &--success &__title-text {
+      color: var(--nui-success);
+    }
+
+    &--info &__title-icon,
+    &--info &__title-text {
+      color: var(--nui-info);
+    }
+
+    // Status bar (barra de color absoluta en un borde del modal)
+    &__status-bar {
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+    }
+  }
+
+  // ===========================================================================
+  // SIMPLE CONTENT (ModalDialogSimpleContentComponent)
+  // ===========================================================================
+
+  .nui-modal-dialog-simple {
+    // Mensaje HTML
+    &__message {
+      line-height: 1.6;
+      color: var(--nui-modal-dialog-text);
+      font-size: 0.9375rem;
+
+      code {
+        font-family: monospace;
+        font-size: 0.875em;
+        padding: 2px 6px;
+        background: var(--nui-modal-dialog-progress-bg);
+        border-radius: 4px;
+      }
+
+      strong {
+        font-weight: 600;
+      }
+    }
+
+    // Loading
+    &__loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 24px 0;
+    }
+
+    &__loader {
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--nui-modal-dialog-progress-bg);
+      border-top-color: var(--nui-primary);
+      border-radius: 50%;
+      animation: nui-modal-spinner 0.7s linear infinite;
+      flex-shrink: 0;
+    }
+
+    &__loading-label {
+      color: var(--nui-modal-dialog-text);
+      font-size: 0.875rem;
+      text-align: center;
+      margin: 0;
+    }
+
+    &__loading-message {
+      color: var(--nui-text-secondary);
+      font-size: 0.8125rem;
+      text-align: center;
+      margin: 0;
+    }
+
+    // Verification
+    &__verification {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    &__verification-label {
+      font-size: 0.875rem;
+      color: var(--nui-text-secondary);
+      font-weight: 500;
+      margin: 0;
+    }
+
+    &__verification-target {
+      padding: 8px 12px;
+      background: var(--nui-modal-dialog-progress-bg);
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-family: monospace;
+      color: var(--nui-modal-dialog-text);
+      border: 1px solid var(--nui-modal-dialog-border);
+
+      strong {
+        font-weight: 600;
+      }
+    }
+
+    &__verification-input {
+      width: 100%;
+      padding: 8px 12px;
+      background: var(--nui-modal-dialog-bg);
+      border: 1px solid var(--nui-modal-dialog-border);
+      border-radius: 6px;
+      font-size: 0.875rem;
+      color: var(--nui-modal-dialog-text);
+      outline: none;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+      box-sizing: border-box;
+      font-family: inherit;
+
+      &::placeholder {
+        color: var(--nui-placeholder-text);
+      }
+
+      &:focus {
+        border-color: var(--nui-primary);
+        box-shadow: 0 0 0 3px var(--nui-focus-ring-color);
+      }
+
+      &[aria-invalid='true'] {
+        border-color: var(--nui-danger);
+
+        &:focus {
+          box-shadow: 0 0 0 3px color-mix(in srgb, var(--nui-danger) 25%, transparent);
+        }
+      }
+    }
+
+    &__verification-error {
+      font-size: 0.75rem;
+      color: var(--nui-danger);
+      margin: 0;
+    }
+  }
+
+  @keyframes nui-modal-spinner {
+    to { transform: rotate(360deg); }
+  }
+}

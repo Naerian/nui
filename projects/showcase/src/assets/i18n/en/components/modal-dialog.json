@@ -1,0 +1,107 @@
+{
+  "title": "Modal Dialog",
+  "subtitle": "Overlay modal dialogs via CDK Overlay with full focus management, animations, minimization, and theme integration",
+  "examples": {
+    "basic": {
+      "title": "Basic confirm dialog",
+      "description": "Open a modal dialog using <code>ModalDialogService.open()</code> or the convenience helpers. The service provides options for title, message, confirm/cancel labels, color, and semantic type."
+    },
+    "semanticTypes": {
+      "title": "Semantic types",
+      "description": "Use semantic helpers to quickly open pre-styled dialogs: <code>openInfo()</code>, <code>openWarning()</code>, <code>openSuccess()</code>, and <code>openError()</code>."
+    },
+    "verification": {
+      "title": "Verification dialog",
+      "description": "Require the user to type a specific phrase before confirming a destructive action. Use <code>openVerification()</code> or set <code>verificationText</code> in the config."
+    },
+    "loader": {
+      "title": "Loader modal",
+      "description": "Display a non-closeable loading spinner overlay during long-running operations. Use <code>openLoader()</code> and close the reference when the operation completes."
+    },
+    "dynamicComponent": {
+      "title": "Dynamic component",
+      "description": "Open a modal with a custom Angular component as the body. Inject <code>MODAL_DIALOG_DATA</code> to receive data and <code>MODAL_DIALOG_REF</code> to control the modal from within.",
+      "seeCode": "See the code examples below to integrate a custom component."
+    },
+    "minimizable": {
+      "title": "Minimizable modal",
+      "description": "Allow users to minimize the modal to a dock chip at the bottom of the screen without losing context. Requires a unique <code>id</code> in the config.",
+      "note": "A unique <code>id</code> is required when <code>minimizable: true</code>. Calling <code>open()</code> with the same <code>id</code> will restore the minimized modal instead of creating a new one."
+    },
+    "timeout": {
+      "title": "Timeout with progress bar",
+      "description": "Automatically close the modal after a configurable duration. A visual progress bar tracks the remaining time and can be paused on mouse hover."
+    },
+    "footerActions": {
+      "title": "Footer actions",
+      "description": "Customize the modal footer using <code>customButtons</code>, the <code>ModalDialogActionsService</code> (from inside the dynamic component), or the <code>[nuiModalDialogFooter]</code> directive."
+    },
+    "statusBar": {
+      "title": "Status bar",
+      "description": "Add a colored border stripe to one side of the modal to convey additional semantic information using the <code>statusBar</code> config option."
+    }
+  },
+  "api": {
+    "service": {
+      "title": "ModalDialogService — methods",
+      "description": "Inject <code>ModalDialogService</code> to open and manage modals. All methods return a <code>ModalDialogRef</code>."
+    },
+    "config": {
+      "title": "ModalDialogConfig — properties",
+      "description": "Configuration object passed to <code>open()</code>. Properties are merged with the global defaults from <code>provideNUI()</code>."
+    },
+    "ref": {
+      "title": "ModalDialogRef — methods",
+      "description": "The reference returned by <code>open()</code>. Use it to close the modal, listen to events, and observe lifecycle changes."
+    },
+    "tokens": {
+      "title": "Injection tokens",
+      "description": "Use these tokens to inject modal context inside a dynamic component loaded by the service."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Color tokens",
+      "description": "Override these CSS custom properties to adjust modal dialog colors for your brand or custom theme."
+    },
+    "layout": {
+      "title": "Layout tokens",
+      "description": "Control dimensions, spacing, typography, and layer (z-index) of the modal dialog via these CSS variables."
+    },
+    "dock": {
+      "title": "Dock tokens",
+      "description": "Customize the appearance of chip items in the minimized modal dock."
+    }
+  },
+  "i18n": {
+    "keys": {
+      "title": "i18n keys",
+      "description": "All user-facing text in Modal Dialog can be overridden via <code>provideNuiI18n()</code> or the per-modal config for labels."
+    },
+    "override": {
+      "title": "Global override",
+      "description": "Provide custom translations globally using <code>provideNuiI18n()</code> in your <code>app.config.ts</code>."
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA roles and attributes",
+      "description": "The modal shell automatically applies the required ARIA attributes for screen reader compatibility."
+    },
+    "focus": {
+      "title": "Focus management",
+      "description": "The CDK FocusTrap ensures keyboard navigation is confined to the modal while it is open.",
+      "note": "Focus is automatically restored to the element that triggered the modal when it closes."
+    }
+  },
+  "globalConfig": {
+    "options": {
+      "title": "Global config options",
+      "description": "Default values applied to every modal opened with <code>ModalDialogService</code>. Override per-modal by passing config to <code>open()</code>."
+    },
+    "example": {
+      "title": "Usage example",
+      "description": "Configure global defaults in your <code>app.config.ts</code> using <code>provideNUI()</code>."
+    }
+  }
+}

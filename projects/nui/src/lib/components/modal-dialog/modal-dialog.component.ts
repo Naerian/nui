@@ -6,6 +6,7 @@
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   HostBinding,
+  HostListener,
   ElementRef,
   inject,
   signal,
@@ -39,7 +40,6 @@ import { NuiI18nService } from '../../i18n';
   standalone: true,
   imports: [NgTemplateOutlet, NgStyle, ButtonComponent],
   templateUrl: './modal-dialog.component.html',
-  styleUrls: ['./modal-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   animations: [modalDialogAnimation],
@@ -125,14 +125,16 @@ export class ModalDialogComponent implements OnInit, AfterViewInit, OnDestroy {
   protected get statusBarStyles(): Record<string, string> {
     const sb = this.config.statusBar;
     if (!sb || sb.position === 'none') return {};
-    const thickness = sb.thickness ?? 4;
+    const thickness = `${sb.thickness ?? 4}px`;
     const color = sb.color ?? this._getSemanticColor();
-    const styles: Record<string, string> = {};
-    if (sb.position === 'top') styles['border-top'] = `${thickness}px solid ${color}`;
-    else if (sb.position === 'bottom') styles['border-bottom'] = `${thickness}px solid ${color}`;
-    else if (sb.position === 'left') styles['border-left'] = `${thickness}px solid ${color}`;
-    else if (sb.position === 'right') styles['border-right'] = `${thickness}px solid ${color}`;
-    return styles;
+    const base: Record<string, string> = { 'background-color': color, 'pointer-events': 'none' };
+    switch (sb.position) {
+      case 'left':   return { ...base, left: '0', top: '0', bottom: '0', width: thickness };
+      case 'right':  return { ...base, right: '0', top: '0', bottom: '0', width: thickness };
+      case 'top':    return { ...base, top: '0', left: '0', right: '0', height: thickness };
+      case 'bottom': return { ...base, bottom: '0', left: '0', right: '0', height: thickness };
+      default: return {};
+    }
   }
 
   private _timeoutInterval?: ReturnType<typeof setInterval>;
@@ -250,6 +252,12 @@ export class ModalDialogComponent implements OnInit, AfterViewInit, OnDestroy {
       this._pauseStartTime = undefined;
     }
   }
+
+  @HostListener('mouseenter')
+  onHostMouseEnter(): void { this.pauseTimeout(); }
+
+  @HostListener('mouseleave')
+  onHostMouseLeave(): void { this.resumeTimeout(); }
 
   private _startTimeout(): void {
     const timeout = this.config.timeout!;
@@ -369,16 +377,16 @@ export class ModalDialogComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private _getSemanticColor(): string {
     const colorMap: Record<string, string> = {
-      confirm: 'var(--border-primary)',
-      info: 'var(--border-info)',
-      warning: 'var(--border-warning)',
-      danger: 'var(--border-danger)',
-      success: 'var(--border-success)',
-      verification: 'var(--border-success)',
+      confirm: 'var(--nui-primary)',
+      info: 'var(--nui-info)',
+      warning: 'var(--nui-warning)',
+      danger: 'var(--nui-danger)',
+      success: 'var(--nui-success)',
+      verification: 'var(--nui-success)',
     };
     return this.config.modalType
-      ? colorMap[this.config.modalType] ?? 'var(--color-primary)'
-      : 'var(--color-primary)';
+      ? colorMap[this.config.modalType] ?? 'var(--nui-primary)'
+      : 'var(--nui-primary)';
   }
 
   private _customButtonsToActions(buttons: ModalDialogCustomButton[]): ModalDialogAction[] {

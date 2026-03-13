@@ -390,6 +390,7 @@ export class ThemeService {
     css += this.generateSidebarPanelVariables();
     css += this.generateCalendarVariables();
     css += this.generateTimeSelectorVariables();
+    css += this.generateModalDialogVariables();
 
     css += '}\n';
     return css;
@@ -968,6 +969,34 @@ export class ThemeService {
       --nui-sidebar-panel-tab-minimized-hover-border: var(--nui-border-default);
       --nui-sidebar-panel-tab-minimized-shadow: var(--nui-box-shadow-sm);
       --nui-sidebar-panel-tab-minimized-hover-shadow: var(--nui-box-shadow-md);
+    `;
+  }
+
+  /**
+   * Genera variables CSS para el Modal Dialog según el tema activo.
+   */
+  private generateModalDialogVariables(): string {
+    return `
+      --nui-modal-dialog-bg: var(--nui-surface);
+      --nui-modal-dialog-text: var(--nui-on-surface);
+      --nui-modal-dialog-border: var(--nui-border-subtle);
+      --nui-modal-dialog-overlay-bg: var(--nui-overlay-bg);
+
+      --nui-modal-dialog-progress-bg: var(--nui-surface-neutral);
+      --nui-modal-dialog-progress-color: var(--nui-primary);
+
+      --nui-modal-dialog-scroll-bg: var(--nui-surface);
+      --nui-modal-dialog-scroll-thumb-bg: var(--nui-border-high);
+      --nui-modal-dialog-scroll-thumb-hover-bg: var(--nui-border-high);
+
+      /* Dock minimized chips */
+      --nui-modal-dialog-dock-bg: var(--nui-surface);
+      --nui-modal-dialog-dock-border: var(--nui-border-subtle);
+      --nui-modal-dialog-dock-text: var(--nui-on-surface);
+      --nui-modal-dialog-dock-shadow: var(--nui-box-shadow-md);
+      --nui-modal-dialog-dock-hover-shadow: var(--nui-box-shadow-xl);
+      --nui-modal-dialog-dock-chip-bg: var(--nui-surface);
+      --nui-modal-dialog-dock-chip-hover-bg: var(--nui-surface-neutral);
     `;
   }
 

@@ -39,7 +39,8 @@
     "actionMenu": "Menú de acciones",
     "progressBar": "Barra de progreso",
     "timeSelector": "Selector de tiempo",
-    "splitButton": "Botón dividido"
+    "splitButton": "Botón dividido",
+    "modalDialog": "Modal Dialog"
   },
   "presets": {
     "aura": "Aura",

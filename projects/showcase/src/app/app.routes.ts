@@ -211,6 +211,13 @@ export const routes: Routes = [
             m => m.ProgressBarPageComponent
           ),
       },
+      {
+        path: 'modal-dialog',
+        loadComponent: () =>
+          import('./pages/components/modal-dialog-page/modal-dialog-page.component').then(
+            m => m.ModalDialogPageComponent
+          ),
+      },
     ],
   },
 

@@ -1,0 +1,103 @@
+import { ComponentSection } from '../../../../core';
+
+export const MODAL_DIALOG_API_SECTIONS: ComponentSection[] = [
+  {
+    id: 'api-service',
+    title: 'components.modal-dialog.api.service.title',
+    description: 'components.modal-dialog.api.service.description',
+    anchor: 'api-service',
+    table: {
+      headers: [
+        'common.tables.method',
+        'common.tables.parameters',
+        'common.tables.returns',
+        'common.tables.description',
+      ],
+      rows: [
+        ['<code>open()</code>', 'component: Type&lt;T&gt;, config?: ModalDialogConfig', 'ModalDialogRef&lt;T, R&gt;', 'Opens a modal with a dynamic component'],
+        ['<code>open()</code>', 'config: SimpleModalDialogConfig', 'ModalDialogRef', 'Opens a simple message/HTML modal'],
+        ['<code>openConfirm()</code>', 'config: SimpleModalDialogConfig', 'ModalDialogRef', 'Opens a confirm dialog (type: confirm)'],
+        ['<code>openInfo()</code>', 'config: SimpleModalDialogConfig', 'ModalDialogRef', 'Opens an info dialog'],
+        ['<code>openWarning()</code>', 'config: SimpleModalDialogConfig', 'ModalDialogRef', 'Opens a warning dialog'],
+        ['<code>openError()</code>', 'config: SimpleModalDialogConfig', 'ModalDialogRef', 'Opens an error dialog'],
+        ['<code>openSuccess()</code>', 'config: SimpleModalDialogConfig', 'ModalDialogRef', 'Opens a success dialog'],
+        ['<code>openVerification()</code>', 'config: SimpleModalDialogConfig', 'ModalDialogRef', 'Opens a text-verification dialog'],
+        ['<code>openLoader()</code>', 'config: SimpleModalDialogConfig', 'ModalDialogRef', 'Opens a loading spinner modal'],
+        ['<code>closeAll()</code>', '-', 'void', 'Closes all open modals'],
+      ],
+    },
+  },
+  {
+    id: 'api-config',
+    title: 'components.modal-dialog.api.config.title',
+    description: 'components.modal-dialog.api.config.description',
+    anchor: 'api-config',
+    table: {
+      headers: [
+        'common.tables.property',
+        'common.tables.type',
+        'common.tables.default',
+        'common.tables.description',
+      ],
+      rows: [
+        ['<code>title</code>', 'string', '-', 'Modal title shown in the header'],
+        ['<code>message</code>', 'string', '-', 'Simple text message for the body (simple modals)'],
+        ['<code>htmlContent</code>', 'string', '-', 'Sanitized HTML content for the body'],
+        ['<code>modalType</code>', 'ModalDialogType', 'null', 'Semantic type: confirm | info | warning | danger | success | verification'],
+        ['<code>color</code>', 'NUIColor', '-', 'Button/accent color'],
+        ['<code>width</code>', 'string', "'500px'", 'CSS width of the modal panel'],
+        ['<code>minimizable</code>', 'boolean', 'false', 'Allows minimizing the modal to the dock'],
+        ['<code>id</code>', 'string', '-', 'Required when minimizable: true (singleton key)'],
+        ['<code>hasBackdrop</code>', 'boolean', 'true', 'Show backdrop overlay'],
+        ['<code>closeOnBackdropClick</code>', 'boolean', 'true', 'Close on backdrop click'],
+        ['<code>closeOnEscape</code>', 'boolean', 'true', 'Close on Escape key'],
+        ['<code>closeOnRouteChange</code>', 'boolean', 'false', 'Auto-close on route navigation'],
+        ['<code>timeout</code>', 'ModalDialogTimeoutOptions', '-', 'Auto-close countdown with progress bar'],
+        ['<code>gestures</code>', 'ModalDialogGestureOptions', '-', 'Touch swipe gestures configuration'],
+        ['<code>statusBar</code>', 'ModalDialogStatusBar', '-', 'Colored border stripe on one side of the modal'],
+        ['<code>customButtons</code>', 'ModalDialogCustomButton[]', '-', 'Custom footer buttons (highest priority)'],
+        ['<code>verificationText</code>', 'string', '-', 'Text the user must type to confirm'],
+        ['<code>data</code>', 'D', '-', 'Data injected via MODAL_DIALOG_DATA token'],
+      ],
+    },
+  },
+  {
+    id: 'api-ref',
+    title: 'components.modal-dialog.api.ref.title',
+    description: 'components.modal-dialog.api.ref.description',
+    anchor: 'api-ref',
+    table: {
+      headers: [
+        'common.tables.method',
+        'common.tables.parameters',
+        'common.tables.returns',
+        'common.tables.description',
+      ],
+      rows: [
+        ['<code>close()</code>', 'result?: ModalDialogResult', 'void', 'Closes the modal and emits result'],
+        ['<code>minimize()</code>', '-', 'void', 'Minimizes the modal to the dock'],
+        ['<code>restore()</code>', '-', 'void', 'Restores a minimized modal'],
+        ['<code>afterOpened()</code>', '-', 'Observable&lt;void&gt;', 'Emits once when the modal finishes opening'],
+        ['<code>afterClosed()</code>', '-', 'Observable&lt;ModalDialogResult | undefined&gt;', 'Emits once when the modal closes'],
+        ['<code>backdropClick()</code>', '-', 'Observable&lt;MouseEvent&gt;', 'Emits on each backdrop click'],
+        ['<code>keydownEvents()</code>', '-', 'Observable&lt;KeyboardEvent&gt;', 'Emits keyboard events from the overlay'],
+        ['<code>stateChanged()</code>', '-', 'Observable&lt;ModalDialogState&gt;', 'Emits on every state transition'],
+        ['<code>closePrevented()</code>', '-', 'Observable&lt;void&gt;', 'Emits when close is blocked (canBeClosed: false)'],
+      ],
+    },
+  },
+  {
+    id: 'api-tokens',
+    title: 'components.modal-dialog.api.tokens.title',
+    description: 'components.modal-dialog.api.tokens.description',
+    anchor: 'api-tokens',
+    table: {
+      headers: ['common.tables.token', 'common.tables.type', 'common.tables.description'],
+      rows: [
+        ['<code>MODAL_DIALOG_DATA</code>', 'InjectionToken&lt;D&gt;', 'Inject typed data in the dynamic component'],
+        ['<code>MODAL_DIALOG_REF</code>', 'InjectionToken&lt;ModalDialogRef&gt;', 'Inject the modal reference in the shell or dynamic component'],
+        ['<code>MODAL_DIALOG_CONFIG</code>', 'InjectionToken&lt;ModalDialogConfig&gt;', 'Inject the full configuration object (read-only)'],
+      ],
+    },
+  },
+];

@@ -144,6 +144,11 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
             translationKey: 'sidebar.sidebarPanel',
             route: '/components/sidebar-panel',
           },
+          {
+            label: 'Modal Dialog',
+            translationKey: 'sidebar.modalDialog',
+            route: '/components/modal-dialog',
+          },
         ],
       },
       {

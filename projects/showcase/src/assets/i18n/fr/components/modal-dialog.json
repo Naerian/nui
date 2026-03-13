@@ -1,0 +1,107 @@
+{
+  "title": "Modal Dialog",
+  "subtitle": "Boîtes de dialogue modales superposées via CDK Overlay avec gestion complète du focus, animations, minimisation et intégration des thèmes",
+  "examples": {
+    "basic": {
+      "title": "Boîte de dialogue de confirmation basique",
+      "description": "Ouvrez un modal avec <code>ModalDialogService.open()</code> ou les helpers de commodité. Le service propose des options pour le titre, le message, les boutons confirmer/annuler, la couleur et le type sémantique."
+    },
+    "semanticTypes": {
+      "title": "Types sémantiques",
+      "description": "Utilisez les helpers sémantiques pour ouvrir rapidement des boîtes de dialogue pré-stylisées : <code>openInfo()</code>, <code>openWarning()</code>, <code>openSuccess()</code> et <code>openError()</code>."
+    },
+    "verification": {
+      "title": "Boîte de dialogue de vérification",
+      "description": "Demandez à l'utilisateur de saisir une phrase spécifique avant de confirmer une action destructrice. Utilisez <code>openVerification()</code> ou définissez <code>verificationText</code> dans la configuration."
+    },
+    "loader": {
+      "title": "Modal de chargement",
+      "description": "Affichez un spinner de chargement non-fermable pendant les opérations longues. Utilisez <code>openLoader()</code> et fermez la référence lorsque l'opération se termine."
+    },
+    "dynamicComponent": {
+      "title": "Composant dynamique",
+      "description": "Ouvrez un modal avec un composant Angular personnalisé comme corps. Injectez <code>MODAL_DIALOG_DATA</code> pour recevoir des données et <code>MODAL_DIALOG_REF</code> pour contrôler le modal de l'intérieur.",
+      "seeCode": "Consultez les exemples de code ci-dessous pour intégrer un composant personnalisé."
+    },
+    "minimizable": {
+      "title": "Modal réductible",
+      "description": "Permettez aux utilisateurs de réduire le modal en une puce dans le dock en bas de l'écran sans perdre le contexte. Nécessite un <code>id</code> unique dans la configuration.",
+      "note": "Un <code>id</code> unique est requis lorsque <code>minimizable: true</code>. Appeler <code>open()</code> avec le même <code>id</code> restaurera le modal réduit au lieu d'en créer un nouveau."
+    },
+    "timeout": {
+      "title": "Délai d'attente avec barre de progression",
+      "description": "Fermez automatiquement le modal après une durée configurable. Une barre de progression visuelle suit le temps restant et peut être mise en pause au survol de la souris."
+    },
+    "footerActions": {
+      "title": "Actions du pied de page",
+      "description": "Personnalisez le pied de page du modal avec <code>customButtons</code>, le <code>ModalDialogActionsService</code> (depuis le composant dynamique) ou la directive <code>[nuiModalDialogFooter]</code>."
+    },
+    "statusBar": {
+      "title": "Barre de statut",
+      "description": "Ajoutez une bordure colorée sur un côté du modal pour transmettre des informations sémantiques supplémentaires via l'option <code>statusBar</code> de la configuration."
+    }
+  },
+  "api": {
+    "service": {
+      "title": "ModalDialogService — méthodes",
+      "description": "Injectez <code>ModalDialogService</code> pour ouvrir et gérer les modaux. Toutes les méthodes retournent un <code>ModalDialogRef</code>."
+    },
+    "config": {
+      "title": "ModalDialogConfig — propriétés",
+      "description": "Objet de configuration passé à <code>open()</code>. Les propriétés sont fusionnées avec les valeurs globales de <code>provideNUI()</code>."
+    },
+    "ref": {
+      "title": "ModalDialogRef — méthodes",
+      "description": "La référence retournée par <code>open()</code>. Utilisez-la pour fermer le modal, écouter les événements et observer les changements du cycle de vie."
+    },
+    "tokens": {
+      "title": "Tokens d'injection",
+      "description": "Utilisez ces tokens pour injecter du contexte modal dans un composant dynamique chargé par le service."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Tokens de couleur",
+      "description": "Remplacez ces propriétés CSS personnalisées pour adapter les couleurs du modal dialog à votre marque ou thème personnalisé."
+    },
+    "layout": {
+      "title": "Tokens de mise en page",
+      "description": "Contrôlez les dimensions, l'espacement, la typographie et la couche (z-index) du modal via ces variables CSS."
+    },
+    "dock": {
+      "title": "Tokens du dock",
+      "description": "Personnalisez l'apparence des puces dans le dock des modaux réduits."
+    }
+  },
+  "i18n": {
+    "keys": {
+      "title": "Clés i18n",
+      "description": "Tous les textes visibles par l'utilisateur dans Modal Dialog peuvent être remplacés via <code>provideNuiI18n()</code> ou la configuration par-modal pour les étiquettes."
+    },
+    "override": {
+      "title": "Remplacement global",
+      "description": "Fournissez des traductions personnalisées globalement avec <code>provideNuiI18n()</code> dans votre <code>app.config.ts</code>."
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "Rôles et attributs ARIA",
+      "description": "Le shell du modal applique automatiquement les attributs ARIA requis pour la compatibilité avec les lecteurs d'écran."
+    },
+    "focus": {
+      "title": "Gestion du focus",
+      "description": "Le CDK FocusTrap garantit que la navigation au clavier est confinée au modal lorsqu'il est ouvert.",
+      "note": "Le focus est automatiquement restauré à l'élément qui a déclenché le modal lorsqu'il se ferme."
+    }
+  },
+  "globalConfig": {
+    "options": {
+      "title": "Options de configuration globale",
+      "description": "Valeurs par défaut appliquées à tous les modaux ouverts avec <code>ModalDialogService</code>. Peuvent être remplacées par-modal en passant une configuration à <code>open()</code>."
+    },
+    "example": {
+      "title": "Exemple d'utilisation",
+      "description": "Configurez les valeurs globales dans votre <code>app.config.ts</code> avec <code>provideNUI()</code>."
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "title": "Modal Dialog",
+  "subtitle": "Modale Dialoge über CDK Overlay mit vollständiger Fokusverwaltung, Animationen, Minimierung und Theme-Integration",
+  "examples": {
+    "basic": {
+      "title": "Einfacher Bestätigungsdialog",
+      "description": "Öffnen Sie ein Modal mit <code>ModalDialogService.open()</code> oder praktischen Hilfsmethoden. Der Service bietet Optionen für Titel, Nachricht, Bestätigen-/Abbrechen-Schaltflächen, Farbe und semantischen Typ."
+    },
+    "semanticTypes": {
+      "title": "Semantische Typen",
+      "description": "Verwenden Sie semantische Hilfsmethoden, um schnell vorgestaltete Dialoge zu öffnen: <code>openInfo()</code>, <code>openWarning()</code>, <code>openSuccess()</code> und <code>openError()</code>."
+    },
+    "verification": {
+      "title": "Verifikationsdialog",
+      "description": "Fordern Sie den Benutzer auf, einen bestimmten Text einzugeben, bevor eine destruktive Aktion bestätigt wird. Verwenden Sie <code>openVerification()</code> oder setzen Sie <code>verificationText</code> in der Konfiguration."
+    },
+    "loader": {
+      "title": "Lade-Modal",
+      "description": "Zeigen Sie einen nicht schließbaren Ladespinner während länger laufender Operationen an. Verwenden Sie <code>openLoader()</code> und schließen Sie die Referenz, wenn die Operation abgeschlossen ist."
+    },
+    "dynamicComponent": {
+      "title": "Dynamische Komponente",
+      "description": "Öffnen Sie ein Modal mit einer benutzerdefinierten Angular-Komponente als Inhalt. Injizieren Sie <code>MODAL_DIALOG_DATA</code>, um Daten zu empfangen, und <code>MODAL_DIALOG_REF</code>, um das Modal von innen zu steuern.",
+      "seeCode": "Sehen Sie sich die Codebeispiele unten an, um eine benutzerdefinierte Komponente zu integrieren."
+    },
+    "minimizable": {
+      "title": "Minimierbares Modal",
+      "description": "Ermöglichen Sie Benutzern, das Modal als Chip im Dock am unteren Bildschirmrand zu minimieren, ohne den Kontext zu verlieren. Erfordert eine eindeutige <code>id</code> in der Konfiguration.",
+      "note": "Eine eindeutige <code>id</code> ist erforderlich, wenn <code>minimizable: true</code>. Ein Aufruf von <code>open()</code> mit derselben <code>id</code> stellt das minimierte Modal wieder her, anstatt ein neues zu erstellen."
+    },
+    "timeout": {
+      "title": "Zeitlimit mit Fortschrittsanzeige",
+      "description": "Schließen Sie das Modal automatisch nach einer konfigurierbaren Dauer. Ein visueller Fortschrittsbalken verfolgt die verbleibende Zeit und kann beim Überfahren mit der Maus pausiert werden."
+    },
+    "footerActions": {
+      "title": "Fußleisten-Aktionen",
+      "description": "Passen Sie die Fußleiste des Modals mit <code>customButtons</code>, dem <code>ModalDialogActionsService</code> (aus der dynamischen Komponente) oder der Direktive <code>[nuiModalDialogFooter]</code> an."
+    },
+    "statusBar": {
+      "title": "Statusleiste",
+      "description": "Fügen Sie einen farbigen Rahmen an einer Seite des Modals hinzu, um zusätzliche semantische Informationen über die Option <code>statusBar</code> in der Konfiguration zu übermitteln."
+    }
+  },
+  "api": {
+    "service": {
+      "title": "ModalDialogService — Methoden",
+      "description": "Injizieren Sie <code>ModalDialogService</code>, um Modals zu öffnen und zu verwalten. Alle Methoden geben eine <code>ModalDialogRef</code> zurück."
+    },
+    "config": {
+      "title": "ModalDialogConfig — Eigenschaften",
+      "description": "Konfigurationsobjekt, das an <code>open()</code> übergeben wird. Eigenschaften werden mit globalen Werten aus <code>provideNUI()</code> zusammengeführt."
+    },
+    "ref": {
+      "title": "ModalDialogRef — Methoden",
+      "description": "Die von <code>open()</code> zurückgegebene Referenz. Verwenden Sie sie, um das Modal zu schließen, Ereignisse zu lauschen und Lebenszyklusänderungen zu beobachten."
+    },
+    "tokens": {
+      "title": "Injektions-Token",
+      "description": "Verwenden Sie diese Token, um Modal-Kontext in eine dynamische Komponente zu injizieren, die vom Service geladen wird."
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Farb-Token",
+      "description": "Überschreiben Sie diese CSS-Custom-Properties, um die Farben des Modal Dialogs an Ihre Marke oder Ihr benutzerdefiniertes Theme anzupassen."
+    },
+    "layout": {
+      "title": "Layout-Token",
+      "description": "Steuern Sie Abmessungen, Abstände, Typografie und Ebene (z-index) des Modals über diese CSS-Variablen."
+    },
+    "dock": {
+      "title": "Dock-Token",
+      "description": "Passen Sie das Erscheinungsbild von Chips im Dock minimierter Modals an."
+    }
+  },
+  "i18n": {
+    "keys": {
+      "title": "i18n-Schlüssel",
+      "description": "Alle für Benutzer sichtbaren Texte im Modal Dialog können über <code>provideNuiI18n()</code> oder die pro-Modal-Konfiguration für Labels überschrieben werden."
+    },
+    "override": {
+      "title": "Globale Überschreibung",
+      "description": "Stellen Sie benutzerdefinierte Übersetzungen global mit <code>provideNuiI18n()</code> in Ihrer <code>app.config.ts</code> bereit."
+    }
+  },
+  "a11y": {
+    "roles": {
+      "title": "ARIA-Rollen und -Attribute",
+      "description": "Die Modal-Shell wendet automatisch die erforderlichen ARIA-Attribute für die Kompatibilität mit Bildschirmlesern an."
+    },
+    "focus": {
+      "title": "Fokusverwaltung",
+      "description": "CDK FocusTrap stellt sicher, dass die Tastaturnavigation auf das Modal beschränkt ist, wenn es geöffnet ist.",
+      "note": "Der Fokus wird automatisch auf das Element zurückgesetzt, das das Modal ausgelöst hat, wenn es geschlossen wird."
+    }
+  },
+  "globalConfig": {
+    "options": {
+      "title": "Globale Konfigurationsoptionen",
+      "description": "Standardwerte, die auf alle mit <code>ModalDialogService</code> geöffneten Modals angewendet werden. Können pro-Modal überschrieben werden, indem eine Konfiguration an <code>open()</code> übergeben wird."
+    },
+    "example": {
+      "title": "Verwendungsbeispiel",
+      "description": "Konfigurieren Sie globale Werte in Ihrer <code>app.config.ts</code> mit <code>provideNUI()</code>."
+    }
+  }
+}

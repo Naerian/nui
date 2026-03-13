@@ -25,6 +25,7 @@ import {
 import { ModalDialogComponent } from '../modal-dialog.component';
 import { ModalDialogActionsService } from './modal-dialog-actions.service';
 import { ModalDialogSimpleContentComponent } from '../modal-dialog-simple-content.component';
+import { NuiI18nService } from '../../../i18n';
 
 // ─── Tokens públicos ──────────────────────────────────────────────────────────
 
@@ -108,6 +109,9 @@ export class ModalDialogService {
   private readonly _openPanels = new Map<string, ModalDialogStackItem>();
   private readonly _baseZIndex = 1040;
   private _zIndexCounter = 0;
+  private readonly _i18nService = inject(NuiI18nService);
+
+  private get _i18n() { return this._i18nService.translations().modalDialog; }
 
   // ─── Getters de estado ───────────────────────────────────────────────────────
 
@@ -180,6 +184,9 @@ export class ModalDialogService {
       portal
     ) as ComponentRef<ModalDialogComponent>;
 
+    // Forzar renderizado del template OnPush antes de buscar .nui-modal-dialog__body
+    containerRef.changeDetectorRef.detectChanges();
+
     // Z-index del backdrop
     if (overlayRef.backdropElement) {
       overlayRef.backdropElement.style.zIndex = (zIndex - 1).toString();
@@ -248,8 +255,8 @@ export class ModalDialogService {
   openConfirm<R = any>(options: SimpleModalDialogConfig): ModalDialogRef<any, R> {
     return this.open({
       modalType: 'confirm',
-      confirmText: options.confirmText ?? 'Confirmar',
-      cancelText: options.cancelText ?? 'Cancelar',
+      confirmText: options.confirmText ?? this._i18n.confirm,
+      cancelText: options.cancelText ?? this._i18n.cancel,
       statusBar: options.statusBar ?? { position: 'left', thickness: 4 },
       ...options,
     }) as ModalDialogRef<any, R>;
@@ -259,7 +266,7 @@ export class ModalDialogService {
   openInfo<R = any>(options: SimpleModalDialogConfig): ModalDialogRef<any, R> {
     return this.open({
       modalType: 'info',
-      confirmText: options.confirmText ?? 'Aceptar',
+      confirmText: options.confirmText ?? this._i18n.confirm,
       canBeClosed: options.canBeClosed !== false,
       statusBar: options.statusBar ?? { position: 'left', thickness: 4 },
       ...options,
@@ -270,7 +277,7 @@ export class ModalDialogService {
   openWarning<R = any>(options: SimpleModalDialogConfig): ModalDialogRef<any, R> {
     return this.open({
       modalType: 'warning',
-      confirmText: options.confirmText ?? 'Entendido',
+      confirmText: options.confirmText ?? this._i18n.confirm,
       iconTitle: options.iconTitle ?? 'ri-alert-line',
       statusBar: options.statusBar ?? { position: 'left', thickness: 4 },
       ...options,
@@ -281,7 +288,7 @@ export class ModalDialogService {
   openError<R = any>(options: SimpleModalDialogConfig): ModalDialogRef<any, R> {
     return this.open({
       modalType: 'danger',
-      confirmText: options.confirmText ?? 'Cerrar',
+      confirmText: options.confirmText ?? this._i18n.confirm,
       iconTitle: options.iconTitle ?? 'ri-error-warning-line',
       statusBar: options.statusBar ?? { position: 'left', thickness: 4 },
       ...options,
@@ -292,7 +299,7 @@ export class ModalDialogService {
   openSuccess<R = any>(options: SimpleModalDialogConfig): ModalDialogRef<any, R> {
     return this.open({
       modalType: 'success',
-      confirmText: options.confirmText ?? 'Continuar',
+      confirmText: options.confirmText ?? this._i18n.confirm,
       iconTitle: options.iconTitle ?? 'ri-checkbox-circle-line',
       statusBar: options.statusBar ?? { position: 'left', thickness: 4 },
       ...options,
@@ -306,10 +313,10 @@ export class ModalDialogService {
     }
     return this.open({
       modalType: 'verification',
-      confirmText: options.confirmText ?? 'Confirmar',
-      cancelText: options.cancelText ?? 'Cancelar',
+      confirmText: options.confirmText ?? this._i18n.confirm,
+      cancelText: options.cancelText ?? this._i18n.cancel,
       iconTitle: options.iconTitle ?? 'ri-shield-check-line',
-      verificationLabel: options.verificationLabel ?? 'Para confirmar, escriba:',
+      verificationLabel: options.verificationLabel ?? this._i18n.verificationLabel,
       verificationPlaceholder: options.verificationPlaceholder ?? options.verificationText,
       caseSensitive: options.caseSensitive !== false,
       statusBar: options.statusBar ?? { position: 'left', thickness: 4 },

@@ -7,6 +7,7 @@
 @use 'variables/sidebar-panel-vars';
 @use 'variables/fab-button-vars';
 @use 'variables/split-button-vars';
+@use 'variables/modal-dialog-vars';
 
 // Inject variables as CSS custom GLOBAL properties
 // These "includes" are intended to be used in components that use "ViewEncapsulation.None"
@@ -20,4 +21,5 @@
   @include sidebar-panel-vars.nui-sidebar-panel-vars;
   @include fab-button-vars.nui-fab-button-vars;
   @include split-button-vars.nui-split-button-vars;
+  @include modal-dialog-vars.nui-modal-dialog-vars;
 }

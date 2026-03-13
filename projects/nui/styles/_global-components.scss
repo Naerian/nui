@@ -5,6 +5,7 @@
 @use 'components/toast';
 @use 'components/sidebar-panel';
 @use 'components/fab-button';
+@use 'components/modal-dialog';
 
 // Global styles for global components
 @include button.nui-button-styles;
@@ -14,3 +15,4 @@
 @include toast.nui-toast-styles;
 @include sidebar-panel.nui-sidebar-panel-styles;
 @include fab-button.nui-fab-button-styles;
+@include modal-dialog.nui-modal-dialog-styles;

@@ -17,6 +17,7 @@ import { ModalDialogRef } from './modal-dialog-ref';
 import { ModalDialogActionsService } from './services/modal-dialog-actions.service';
 import { DEFAULT_SIZE, DEFAULT_VARIANT } from '../../configs';
 import { NUISize, NUIVariant } from '../../configs/common/types';
+import { NuiI18nService } from '../../i18n';
 
 /**
  * Componente interno que renderiza el **contenido del body** para modales simples
@@ -44,7 +45,10 @@ import { NUISize, NUIVariant } from '../../configs/common/types';
     <!-- Loading spinner -->
     @if (config.isLoading) {
       <div class="nui-modal-dialog-simple__loading">
-        <div class="nui-modal-dialog-simple__loader" [attr.aria-label]="loadingLabel" role="status"></div>
+        <div class="nui-modal-dialog-simple__loader" aria-hidden="true"></div>
+        <p class="nui-modal-dialog-simple__loading-label" role="status">
+          {{ loadingLabel }}
+        </p>
         @if (config.message) {
           <p class="nui-modal-dialog-simple__loading-message">{{ config.message }}</p>
         }
@@ -99,6 +103,9 @@ export class ModalDialogSimpleContentComponent implements OnInit, OnDestroy {
   protected readonly modalRef = inject<ModalDialogRef>(MODAL_DIALOG_REF);
   private readonly actionsService = inject(ModalDialogActionsService, { optional: true });
   private readonly sanitizer = inject(DomSanitizer);
+  private readonly _i18nService = inject(NuiI18nService);
+
+  private get _i18n() { return this._i18nService.translations().modalDialog; }
 
   // ── Verificación (estado local reactivo) ─────────────────────
 
@@ -125,19 +132,19 @@ export class ModalDialogSimpleContentComponent implements OnInit, OnDestroy {
   // ── Helpers de configuración (herencia de NUI_CONFIG) ────────
 
   protected get loadingLabel(): string {
-    return (this.config as any).loadingLabel ?? 'Cargando...';
+    return (this.config as any).loadingLabel ?? this._i18n.loading;
   }
 
   protected get verificationLabel(): string {
-    return this.config.verificationLabel ?? 'Escribe para confirmar';
+    return this.config.verificationLabel ?? this._i18n.verificationLabel;
   }
 
   protected get verificationPlaceholder(): string {
-    return this.config.verificationPlaceholder ?? 'Escribe aquí...';
+    return this.config.verificationPlaceholder ?? this._i18n.verificationPlaceholder;
   }
 
   protected get verificationErrorMessage(): string {
-    return this.config.verificationErrorMessage ?? 'El texto no coincide';
+    return this.config.verificationErrorMessage ?? this._i18n.verificationErrorMessage;
   }
 
   private get defaultVariant(): NUIVariant {

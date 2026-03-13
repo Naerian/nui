@@ -3,6 +3,7 @@ import { CalendarI18n } from '../components/calendar/models/calendar-i18n.model'
 import { FabButtonI18n } from '../components/fab-button';
 import { PaginatorI18n } from '../components/paginator/models/paginator-i18n.model';
 import { TimeSelectorI18n } from '../components/time-selector/models/time-selector-i18n.model';
+import { ModalDialogI18n } from '../components/modal-dialog/models/modal-dialog-i18n.model';
 
 export const NUI_DATE_FULL_FORMAT = 'PPPP';
 
@@ -25,4 +26,5 @@ export interface NuiI18n {
   timeSelector: TimeSelectorI18n;
   paginator: PaginatorI18n;
   fabButton: FabButtonI18n;
+  modalDialog: ModalDialogI18n;
 }
