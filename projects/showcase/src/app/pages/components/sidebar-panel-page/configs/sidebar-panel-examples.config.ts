@@ -605,11 +605,11 @@ this.sidebarPanelService.open(MyContentComponent, {
   },
   {
     id: 'custom-backdrop',
-    title: 'components.sidebar-panel.examples.customBackdrop.title',
-    description: 'components.sidebar-panel.examples.customBackdrop.description',
+    title: 'components.sidebar-panel.examples.custom-backdrop.title',
+    description: 'components.sidebar-panel.examples.custom-backdrop.description',
     note: {
       type: 'info',
-      content: 'components.sidebar-panel.examples.customBackdrop.note',
+      content: 'components.sidebar-panel.examples.custom-backdrop.note',
     },
     anchor: 'custom-backdrop',
     examples: [

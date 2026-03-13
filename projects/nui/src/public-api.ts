@@ -25,3 +25,4 @@ export * from './lib/components/sidebar-panel';
 export * from './lib/components/time-selector';
 export * from './lib/components/progress-bar';
 export * from './lib/components/split-button';
+export * from './lib/components/modal-dialog';

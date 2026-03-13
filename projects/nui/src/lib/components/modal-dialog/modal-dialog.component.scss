@@ -1,0 +1,136 @@
+﻿/**
+ * Estilos del shell ModalDialogComponent.
+ *
+ * Los estilos globales del modal-box (fondo, sombra, bordes redondeados) se
+ * gestionan en el bundle global de NUI (styles/components/_modal-dialog.scss).
+ * Aquí solo se definen los estilos del host y las variantes BEM del shell.
+ */
+:host {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-elevated, #ffffff);
+  border-radius: 12px;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  position: relative;
+  outline: none;
+}
+
+.nui-modal-dialog {
+  // Progress bar
+  &__progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--surface-subtle, #f1f5f9);
+    z-index: 1;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    background: var(--color-primary, #3b82f6);
+    transition: width 50ms linear;
+  }
+
+  // Status bar (borde de color)
+  &__status-bar {
+    // Los estilos de borde se aplican via [ngStyle] directo en el host
+    display: none; // Este div es solo un hook para ngStyle — el borde está en el host
+  }
+
+  // Header
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 0;
+    gap: 8px;
+    min-height: 48px;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  &__title-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary, #1a202c);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__countdown {
+    font-size: 0.875rem;
+    color: var(--text-tertiary, #94a3b8);
+    flex-shrink: 0;
+  }
+
+  &__header-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  // Body
+  &__body {
+    padding: 16px 20px;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  // Footer
+  &__footer {
+    padding: 12px 20px 20px;
+    border-top: 1px solid var(--border-subtle, #e2e8f0);
+  }
+
+  &__footer-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  // Estado minimizado (oculto visualmente pero mantenido en el DOM)
+  &--minimized {
+    display: none;
+  }
+
+  // Variantes de tipo semántico — color del título y borde
+  &--danger &__title-icon,
+  &--danger &__title-text {
+    color: var(--color-danger, #ef4444);
+  }
+
+  &--warning &__title-icon,
+  &--warning &__title-text {
+    color: var(--color-warning, #f59e0b);
+  }
+
+  &--success &__title-icon,
+  &--success &__title-text {
+    color: var(--color-success, #22c55e);
+  }
+
+  &--info &__title-icon,
+  &--info &__title-text {
+    color: var(--color-info, #0ea5e9);
+  }
+}

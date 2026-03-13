@@ -1,0 +1,155 @@
+﻿<!-- Status bar (borde de color semántico configurado via inline style) -->
+@if (config.statusBar && config.statusBar.position !== 'none') {
+  <div class="nui-modal-dialog__status-bar" [ngStyle]="statusBarStyles"></div>
+}
+
+<!-- Barra de progreso del timeout -->
+@if (config.timeout && effectiveShowProgressBar) {
+  <div
+    class="nui-modal-dialog__progress-bar"
+    role="progressbar"
+    [attr.aria-valuenow]="timeoutProgress()"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    (mouseenter)="pauseTimeout()"
+    (mouseleave)="resumeTimeout()"
+  >
+    <div
+      class="nui-modal-dialog__progress-fill"
+      [style.width.%]="timeoutProgress()"
+    ></div>
+  </div>
+}
+
+<!-- Header -->
+@if (showHeader && !config.hideDefaultHeader) {
+  <div class="nui-modal-dialog__header">
+
+    @if (config.headerTemplate) {
+      <!-- Template custom para el header -->
+      <ng-container
+        *ngTemplateOutlet="config.headerTemplate; context: { $implicit: config, modalRef: modalRef }"
+      ></ng-container>
+    } @else if (config.title) {
+      <!-- Header por defecto -->
+      <div [id]="instanceId + '-title'" class="nui-modal-dialog__title">
+        @if (config.iconTitle) {
+          <i
+            [class]="config.iconTitle + ' nui-modal-dialog__title-icon'"
+            aria-hidden="true"
+          ></i>
+        }
+        <span class="nui-modal-dialog__title-text">{{ config.title }}</span>
+
+        <!-- Countdown del timeout -->
+        @if (config.timeout && remainingTime() > 0) {
+          <span class="nui-modal-dialog__countdown" aria-live="polite">
+            ({{ remainingTime() }}s)
+          </span>
+        }
+      </div>
+    }
+
+    <div class="nui-modal-dialog__header-actions">
+      @if (config.minimizable) {
+        <nui-button
+          [prefixIcon]="'ri-subtract-line'"
+          [color]="'secondary'"
+          [variant]="'ghost'"
+          [size]="'sm'"
+          (onClick)="minimize()"
+          [attr.aria-label]="_i18n().minimize || 'Minimizar'"
+          [title]="_i18n().minimize || 'Minimizar'"
+        ></nui-button>
+      }
+      @if (showCloseButton) {
+        <nui-button
+          [prefixIcon]="'ri-close-large-line'"
+          [color]="'secondary'"
+          [variant]="'ghost'"
+          [size]="'sm'"
+          (click)="requestClose()"
+          [attr.aria-label]="_i18n().close || 'Cerrar'"
+          [title]="_i18n().close || 'Cerrar'"
+        ></nui-button>
+      }
+    </div>
+  </div>
+}
+
+<!-- Área de contenido (componente dinámico o ModalDialogSimpleContentComponent) -->
+@if (!modalRef?.isMinimized) {
+  <div class="nui-modal-dialog__body" [id]="instanceId + '-body'">
+    <!-- El servicio inserta aquí el componente dinámico buscando '.nui-modal-dialog__body' -->
+  </div>
+}
+
+<!-- Footer — precedencia: customButtons > directiva > actionsService > footerTemplate config -->
+@if (!modalRef?.isMinimized && shouldShowFooter) {
+
+  @if (config.customButtons && config.customButtons.length > 0) {
+    <!-- customButtons (máxima prioridad) -->
+    <div class="nui-modal-dialog__footer">
+      <div class="nui-modal-dialog__footer-actions">
+        @for (action of footerActions; track $index) {
+          <nui-button
+            [prefixIcon]="action.prefixIcon"
+            [suffixIcon]="action.suffixIcon"
+            [color]="action.color ?? 'secondary'"
+            [variant]="action.variant ?? 'solid'"
+            [size]="action.size ?? 'md'"
+            [disabled]="resolveBoolean(action.disabled)"
+            [loading]="resolveBoolean(action.loading)"
+            [loadingPosition]="action.loadingPosition ?? 'center'"
+            [width]="action.width ?? 'auto'"
+            [class]="action.class ?? ''"
+            (onClick)="action.handler()"
+          >
+            {{ action.label }}
+          </nui-button>
+        }
+      </div>
+    </div>
+
+  } @else if (footerTemplate) {
+    <!-- Template registrado por ModalDialogFooterDirective (segunda prioridad) -->
+    <div class="nui-modal-dialog__footer">
+      <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+    </div>
+
+  } @else if (footerActions.length > 0) {
+    <!-- Acciones registradas por ModalDialogActionsService (tercera prioridad) -->
+    <div class="nui-modal-dialog__footer">
+      <div class="nui-modal-dialog__footer-actions">
+        @for (action of footerActions; track $index) {
+          <nui-button
+            [prefixIcon]="action.prefixIcon"
+            [suffixIcon]="action.suffixIcon"
+            [color]="action.color ?? 'secondary'"
+            [variant]="action.variant ?? 'solid'"
+            [size]="action.size ?? 'md'"
+            [disabled]="resolveBoolean(action.disabled)"
+            [loading]="resolveBoolean(action.loading)"
+            [loadingPosition]="action.loadingPosition ?? 'start'"
+            [width]="action.width ?? 'auto'"
+            [class]="action.class ?? ''"
+            (onClick)="action.handler()"
+          >
+            {{ action.label }}
+          </nui-button>
+        }
+      </div>
+    </div>
+
+  } @else if (config.footerTemplate) {
+    <!-- Template de configuración (menor prioridad) -->
+    <div class="nui-modal-dialog__footer">
+      <ng-container
+        *ngTemplateOutlet="
+          config.footerTemplate;
+          context: { $implicit: config, modalRef: modalRef }
+        "
+      ></ng-container>
+    </div>
+  }
+}
