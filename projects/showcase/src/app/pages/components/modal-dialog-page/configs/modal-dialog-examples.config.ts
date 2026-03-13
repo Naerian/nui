@@ -268,41 +268,223 @@ openOrRestoreForm() {
     anchor: 'footer-custom',
     examples: [
       {
-        title: 'CustomButtons',
-        code: `openWithCustomButtons() {
-  const ref = this.modalService.open({
-    title: 'Custom Footer',
-    message: 'Choose an action for this item.',
-    customButtons: [
-      {
-        text: 'Save Draft',
-        color: 'secondary',
-        variant: 'outline',
-        callback: () => this.saveDraft(),
-        closeOnClick: true,   // Close modal after callback
+        title: 'Basic',
+        code: `this.modalService.open({
+  title: 'Confirm Action',
+  message: 'Choose an action for this item.',
+  customButtons: [
+    {
+      text: 'Cancel',
+      color: 'secondary',
+      variant: 'outline',
+      callback: (modalRef) => modalRef.close({ confirmed: false }),
+    },
+    {
+      text: 'Save',
+      prefixIcon: 'ri-save-line',
+      color: 'primary',
+      variant: 'solid',
+      callback: (modalRef) => {
+        this.save();
+        modalRef.close({ confirmed: true });
+      },
+    },
+  ],
+});`,
+        language: 'typescript',
       },
       {
-        text: 'Publish',
-        color: 'primary',
-        variant: 'solid',
-        callback: (modalRef) => {
-          this.publish();
-          modalRef.close({ confirmed: true });
-        },
+        title: 'Variants',
+        code: `this.modalService.open({
+  title: 'Choose an Action',
+  message: 'Select the appropriate action for this item.',
+  customButtons: [
+    {
+      text: 'Delete',
+      prefixIcon: 'ri-delete-bin-line',
+      color: 'danger',
+      variant: 'ghost',
+      callback: (modalRef) => {
+        this.delete();
+        modalRef.close({ confirmed: false });
       },
-    ],
+    },
+    {
+      text: 'Archive',
+      prefixIcon: 'ri-archive-line',
+      color: 'secondary',
+      variant: 'outline',
+      callback: (modalRef) => {
+        this.archive();
+        modalRef.close({ confirmed: false });
+      },
+    },
+    {
+      text: 'Publish',
+      prefixIcon: 'ri-send-plane-line',
+      color: 'primary',
+      variant: 'solid',
+      callback: (modalRef) => {
+        this.publish();
+        modalRef.close({ confirmed: true });
+      },
+    },
+  ],
+});`,
+        language: 'typescript',
+      },
+      {
+        title: 'Loading States',
+        code: `// Component template:
+// <ng-template #footerRef>
+//   <div style="display:flex; gap:8px; justify-content:flex-end">
+//     <nui-button color="secondary" [disabled]="isProcessing()" (click)="cancelModal()">Cancel</nui-button>
+//     <nui-button color="primary" [loading]="isProcessing()" [disabled]="isProcessing()" (click)="processAction()">Process</nui-button>
+//   </div>
+// </ng-template>
+
+@ViewChild('footerRef') footerRef!: TemplateRef<any>;
+isProcessing = signal(false);
+currentModalRef: ModalDialogRef | null = null;
+
+openModal() {
+  this.isProcessing.set(false);
+  this.currentModalRef = this.modalService.open({
+    title: 'Process Data',
+    message: 'Click Process to start the operation.',
+    footerTemplate: this.footerRef,
   });
+}
+
+cancelModal() {
+  this.currentModalRef?.close({ confirmed: false });
+}
+
+async processAction() {
+  if (this.isProcessing()) return;
+  this.isProcessing.set(true);
+  try {
+    await this.dataService.process();
+    this.currentModalRef?.close({ confirmed: true });
+  } catch (e) {
+    console.error(e);
+  } finally {
+    this.isProcessing.set(false);
+  }
 }`,
         language: 'typescript',
       },
       {
+        title: 'Conditionals',
+        code: `// Static disabled state — set before opening
+const hasUnsavedChanges = this.form.dirty;
+
+this.modalService.open({
+  title: 'Unsaved Changes',
+  message: 'You have unsaved changes. What would you like to do?',
+  customButtons: [
+    {
+      text: 'Discard',
+      color: 'secondary',
+      variant: 'ghost',
+      disabled: !hasUnsavedChanges,
+      callback: (modalRef) => modalRef.close({ confirmed: false }),
+    },
+    {
+      text: 'Save & Close',
+      prefixIcon: 'ri-save-line',
+      color: 'primary',
+      variant: 'solid',
+      disabled: !hasUnsavedChanges,
+      callback: (modalRef) => {
+        this.saveChanges();
+        modalRef.close({ confirmed: true });
+      },
+    },
+  ],
+});`,
+        language: 'typescript',
+      },
+      {
         title: 'Template (nuiModalDialogFooter)',
-        code: `<ng-template nuiModalDialogFooter>
-  <div style="display:flex; gap: 8px; justify-content: flex-end">
-    <nui-button color="secondary" (onClick)="cancel()">Cancel</nui-button>
-    <nui-button color="primary" (onClick)="save()">Save</nui-button>
-  </div>
-</ng-template>`,
+        code: `// Inside a dynamic component loaded by ModalDialogService:
+// The directive registers the template into the modal footer automatically.
+
+@Component({
+  selector: 'app-my-form',
+  standalone: true,
+  imports: [ReactiveFormsModule, ModalDialogFooterDirective, ButtonComponent],
+  template: \`
+    <form [formGroup]="form">
+      <input formControlName="name" placeholder="Name" />
+    </form>
+
+    <ng-template nuiModalDialogFooter>
+      <div style="display:flex; gap:8px; justify-content:flex-end">
+        <nui-button color="secondary" variant="outline" (click)="cancel()">
+          Cancel
+        </nui-button>
+        <nui-button color="primary" [disabled]="form.invalid" (click)="save()">
+          Save
+        </nui-button>
+      </div>
+    </ng-template>
+  \`,
+})
+export class MyFormComponent {
+  private readonly modalRef = inject<ModalDialogRef>(MODAL_DIALOG_REF);
+
+  form = inject(FormBuilder).group({
+    name: ['', Validators.required],
+  });
+
+  cancel() { this.modalRef.close({ confirmed: false }); }
+  save()   { this.modalRef.close({ confirmed: true, data: this.form.value }); }
+}`,
+        language: 'typescript',
+      },
+      {
+        title: 'Advanced',
+        code: `this.modalService.open(MyFormComponent, {
+  title: 'Edit Content',
+  width: '640px',
+  customButtons: [
+    {
+      text: 'Reset',
+      prefixIcon: 'ri-restart-line',
+      color: 'secondary',
+      variant: 'ghost',
+      callback: () => this.resetForm(),
+    },
+    {
+      text: 'Preview',
+      prefixIcon: 'ri-eye-line',
+      color: 'info',
+      variant: 'outline',
+      callback: () => this.openPreview(),
+    },
+    {
+      text: 'Save Draft',
+      prefixIcon: 'ri-draft-line',
+      color: 'secondary',
+      variant: 'solid',
+      callback: async () => {
+        await this.saveDraft();
+      },
+      closeOnClick: false,  // Keep modal open after saving draft
+    },
+    {
+      text: 'Publish',
+      prefixIcon: 'ri-send-plane-fill',
+      color: 'success',
+      variant: 'solid',
+      callback: async (modalRef) => {
+        await this.publish();
+        modalRef.close({ confirmed: true });
+      },
+    },
+  ],
+});`,
         language: 'typescript',
       },
     ],

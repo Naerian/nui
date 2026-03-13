@@ -94,18 +94,36 @@
 
               @case ('footer-custom') {
                 <div class="example-preview example-preview--spaced">
-                  <nui-button [color]="'primary'" (click)="openCustomButtonsModal()">
-                    Custom Buttons
+                  <nui-button (click)="openBasicModal()">Basic</nui-button>
+                  <nui-button (click)="openVariantsModal()">Variants</nui-button>
+                  <nui-button (click)="openLoadingStatesModal()">Loading States</nui-button>
+                  <nui-button (click)="openConditionalsModal()">Conditionals</nui-button>
+                  <nui-button (click)="openFooterDirectiveModal()">
+                    Template (nuiModalDialogFooter)
                   </nui-button>
+                  <nui-button (click)="openAdvancedModal()">Advanced</nui-button>
                 </div>
-              }
 
-              @case ('footer-actions') {
-                <div class="example-preview example-preview--spaced">
-                  <nui-button [color]="'primary'" (click)="openCustomButtonsModal()">
-                    Custom Buttons
-                  </nui-button>
-                </div>
+                <ng-template #footerRef>
+                  <div style="display: flex; gap: 0.5rem; justify-content: flex-end">
+                    <nui-button
+                      color="secondary"
+                      variant="outline"
+                      [disabled]="isProcessing()"
+                      (click)="cancelProcess()"
+                    >
+                      Cancel
+                    </nui-button>
+                    <nui-button
+                      color="primary"
+                      [loading]="isProcessing()"
+                      [disabled]="isProcessing()"
+                      (click)="runProcess()"
+                    >
+                      Process
+                    </nui-button>
+                  </div>
+                </ng-template>
               }
 
               @case ('child-footer-actions') {

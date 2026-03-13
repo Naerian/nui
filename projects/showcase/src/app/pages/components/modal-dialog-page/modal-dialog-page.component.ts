@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, ViewChild, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { ButtonComponent, ModalDialogService } from 'nui';
+import { ButtonComponent, ModalDialogService, ModalDialogRef } from 'nui';
 import { UserFormModalComponent } from './components/user-form-modal/user-form-modal.component';
+import { FooterDirectiveModalComponent } from './components/footer-directive-modal/footer-directive-modal.component';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
 import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';
@@ -41,6 +42,10 @@ export class ModalDialogPageComponent extends BaseComponentPage {
   override pageConfig = MODAL_DIALOG_PAGE_CONFIG;
 
   private readonly _modalService = inject(ModalDialogService);
+
+  @ViewChild('footerRef') footerRef!: TemplateRef<any>;
+  readonly isProcessing = signal(false);
+  private _loadingModalRef: ModalDialogRef | null = null;
 
   tabs: ComponentTab[] = [
     {
@@ -189,25 +194,150 @@ export class ModalDialogPageComponent extends BaseComponentPage {
     });
   }
 
-  openCustomButtonsModal(): void {
+  openBasicModal(): void {
     this._modalService.open({
-      title: 'Custom Footer',
-      message: 'This modal uses customButtons for the footer.',
+      title: 'Confirm Action',
+      message: 'Choose an action for this item.',
       customButtons: [
         {
-          text: 'Save Draft',
+          text: 'Cancel',
           color: 'secondary',
           variant: 'outline',
-          callback: () => console.log('Draft saved'),
+          callback: modalRef => modalRef.close({ confirmed: false }),
+        },
+        {
+          text: 'Save',
+          prefixIcon: 'ri-save-line',
+          color: 'primary',
+          variant: 'solid',
+          callback: modalRef => modalRef.close({ confirmed: true }),
+        },
+      ],
+    });
+  }
+
+  openVariantsModal(): void {
+    this._modalService.open({
+      title: 'Choose an Action',
+      message: 'Select the appropriate action for this item.',
+      customButtons: [
+        {
+          text: 'Delete',
+          prefixIcon: 'ri-delete-bin-line',
+          color: 'danger',
+          variant: 'ghost',
+          callback: modalRef => modalRef.close({ confirmed: false }),
+        },
+        {
+          text: 'Archive',
+          prefixIcon: 'ri-archive-line',
+          color: 'secondary',
+          variant: 'outline',
+          callback: modalRef => modalRef.close({ confirmed: false }),
         },
         {
           text: 'Publish',
+          prefixIcon: 'ri-send-plane-line',
           color: 'primary',
           variant: 'solid',
-          callback: modalRef => {
-            console.log('Published');
-            modalRef.close({ confirmed: true });
-          },
+          callback: modalRef => modalRef.close({ confirmed: true }),
+        },
+      ],
+    });
+  }
+
+  openLoadingStatesModal(): void {
+    this.isProcessing.set(false);
+    this._loadingModalRef = this._modalService.open({
+      title: 'Process Data',
+      message: 'Click Process to start the operation.',
+      footerTemplate: this.footerRef,
+    });
+  }
+
+  cancelProcess(): void {
+    this._loadingModalRef?.close({ confirmed: false });
+    this._loadingModalRef = null;
+  }
+
+  async runProcess(): Promise<void> {
+    if (this.isProcessing()) return;
+    this.isProcessing.set(true);
+    try {
+      await new Promise<void>(resolve => setTimeout(resolve, 2000));
+      this._loadingModalRef?.close({ confirmed: true });
+      this._loadingModalRef = null;
+    } finally {
+      this.isProcessing.set(false);
+    }
+  }
+
+  openConditionalsModal(): void {
+    const hasChanges = false; // static value at open-time
+    this._modalService.open({
+      title: 'Unsaved Changes',
+      message: 'You have unsaved changes. What would you like to do?',
+      customButtons: [
+        {
+          text: 'Discard',
+          color: 'secondary',
+          variant: 'ghost',
+          disabled: !hasChanges,
+          callback: modalRef => modalRef.close({ confirmed: false }),
+        },
+        {
+          text: 'Save & Close',
+          prefixIcon: 'ri-save-line',
+          color: 'primary',
+          variant: 'solid',
+          callback: modalRef => modalRef.close({ confirmed: true }),
+        },
+      ],
+    });
+  }
+
+  openFooterDirectiveModal(): void {
+    this._modalService.open(FooterDirectiveModalComponent, {
+      title: 'Template (nuiModalDialogFooter)',
+      width: '480px',
+    });
+  }
+
+  openAdvancedModal(): void {
+    this._modalService.open({
+      title: 'Edit Content',
+      width: '640px',
+      customButtons: [
+        {
+          text: 'Reset',
+          prefixIcon: 'ri-restart-line',
+          color: 'secondary',
+          variant: 'ghost',
+          callback: () => console.log('Reset'),
+          closeOnClick: false,
+        },
+        {
+          text: 'Preview',
+          prefixIcon: 'ri-eye-line',
+          color: 'info',
+          variant: 'outline',
+          callback: () => console.log('Preview'),
+          closeOnClick: false,
+        },
+        {
+          text: 'Save Draft',
+          prefixIcon: 'ri-draft-line',
+          color: 'secondary',
+          variant: 'solid',
+          callback: () => console.log('Draft saved'),
+          closeOnClick: false,
+        },
+        {
+          text: 'Publish',
+          prefixIcon: 'ri-send-plane-fill',
+          color: 'success',
+          variant: 'solid',
+          callback: modalRef => modalRef.close({ confirmed: true }),
         },
       ],
     });
