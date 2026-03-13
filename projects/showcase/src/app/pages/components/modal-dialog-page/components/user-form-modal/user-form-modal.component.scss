@@ -1,0 +1,32 @@
+input {
+    width: 100%;
+    padding: 8px 12px;
+    background: var(--nui-modal-dialog-bg);
+    border: 1px solid var(--nui-modal-dialog-border);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    color: var(--nui-modal-dialog-text);
+    outline: none;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    &__label {
+        font-size: 0.875rem;
+        color: var(--nui-text-secondary);
+        font-weight: 500;
+        margin: 0;
+    }
+}

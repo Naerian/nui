@@ -8,37 +8,47 @@
     },
     "semanticTypes": {
       "title": "Tipos semánticos",
-      "description": "Usa los helpers semánticos para abrir diálogos pre-diseñados rápidamente: <code>openInfo()</code>, <code>openWarning()</code>, <code>openSuccess()</code> y <code>openError()</code>."
+      "description": "Usa los helpers semánticos para abrir rápidamente diálogos pre-estilizados.",
+      "note": "Puedes lanzar un modal de estado con <code>openInfo()</code>, <code>openWarning()</code>, <code>openSuccess()</code> y <code>openError()</code>."
     },
     "verification": {
       "title": "Diálogo de verificación",
-      "description": "Requiere que el usuario escriba una frase específica antes de confirmar una acción destructiva. Usa <code>openVerification()</code> o define <code>verificationText</code> en la configuración."
+      "description": "Requiere que el usuario escriba una frase específica antes de confirmar una acción destructiva.",
+      "note": "Usa <code>openVerification()</code> o establece <code>verificationText</code> en la configuración."
     },
     "loader": {
       "title": "Modal de carga",
-      "description": "Muestra un spinner de carga no cerrable durante operaciones de larga duración. Usa <code>openLoader()</code> y cierra la referencia cuando la operación termina."
+      "description": "Muestra un spinner de carga no cerrable durante operaciones de larga duración.",
+      "note": "Usa <code>openLoader()</code> y cierra la referencia cuando la operación se complete."
     },
     "dynamicComponent": {
       "title": "Componente dinámico",
-      "description": "Abre un modal con un componente Angular personalizado como cuerpo. Inyecta <code>MODAL_DIALOG_DATA</code> para recibir datos y <code>MODAL_DIALOG_REF</code> para controlar el modal desde dentro.",
-      "seeCode": "Consulta los ejemplos de código a continuación para integrar un componente personalizado."
+      "description": "Abre un modal con un componente Angular personalizado como cuerpo.",
+      "note": "Inyecta <code>MODAL_DIALOG_DATA</code> para recibir datos y <code>MODAL_DIALOG_REF</code> para controlar el modal desde dentro."
     },
     "minimizable": {
       "title": "Modal minimizable",
-      "description": "Permite a los usuarios minimizar el modal a un chip en el dock inferior sin perder el contexto. Requiere un <code>id</code> único en la configuración.",
+      "description": "Permite a los usuarios minimizar el modal a un chip en el dock inferior sin perder el contexto.",
       "note": "Se requiere un <code>id</code> único cuando <code>minimizable: true</code>. Llamar a <code>open()</code> con el mismo <code>id</code> restaurará el modal minimizado en lugar de crear uno nuevo."
     },
     "timeout": {
       "title": "Timeout con barra de progreso",
-      "description": "Cierra automáticamente el modal tras una duración configurable. Una barra de progreso visual rastrea el tiempo restante y puede pausarse al pasar el ratón."
-    },
-    "footerActions": {
-      "title": "Acciones del footer",
-      "description": "Personaliza el footer del modal usando <code>customButtons</code>, el <code>ModalDialogActionsService</code> (desde dentro del componente dinámico) o la directiva <code>[nuiModalDialogFooter]</code>."
+      "description": "Cierra automáticamente el modal tras una duración configurable. Una barra de progreso visual rastrea el tiempo restante y puede pausarse al pasar el ratón.",
+      "note": "Usa la opción <code>timeout</code> en la configuración del modal para habilitar esta función. Podrás asignar <code>duration</code> en segundos, <code>showProgressBar</code> para mostrar la barra de progreso, <code>pauseOnHover</code> para pausar el temporizador al pasar el ratón por el modal y <code>timeoutAction</code> para ejecutar una función personalizada cuando se agote el tiempo (<code>'confirm'</code> | <code>'cancel'</code>)."
     },
     "statusBar": {
       "title": "Barra de estado",
       "description": "Añade una franja de borde de color en un lado del modal para transmitir información semántica adicional usando la opción <code>statusBar</code> de la configuración."
+    },
+    "footer-custom": {
+      "title": "Acciones personalizadas",
+      "description": "Personaliza las acciones del modal con botones personalizados",
+      "note": "Puedes usar la opción <code>customButtons</code> en la configuración del modal para definir botones con acciones específicas o <code>nuiModalDialogFooter</code> para una personalización total del pie de página mediante un <code>ng-template</code>."
+    },
+    "child-footer-actions": {
+      "title": "Acciones desde componente hijo",
+      "description": "Personaliza las acciones del modal desde un componente dinámico cargado dentro del modal.",
+      "note": "Inyecta el <code>ModalDialogActionsService</code> en tu componente dinámico para agregar botones al pie de página del modal desde dentro del componente."
     }
   },
   "api": {

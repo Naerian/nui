@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonComponent, ModalDialogService } from 'nui';
+import { UserFormModalComponent } from './components/user-form-modal/user-form-modal.component';
 import { CodeBlockComponent } from '../../../shared/code-block/code-block.component';
 import { SectionTitleComponent } from '../../../shared/components/section-title/section-title.component';
 import { ComponentTabsComponent, ComponentTab } from '../../../shared/components/component-tabs';
@@ -54,8 +55,9 @@ export class ModalDialogPageComponent extends BaseComponentPage {
         'dynamic-component',
         'minimizable',
         'timeout',
-        'footer-actions',
         'status-bar',
+        'footer-custom',
+        'child-footer-actions',
       ],
     },
     {
@@ -211,11 +213,40 @@ export class ModalDialogPageComponent extends BaseComponentPage {
     });
   }
 
+  openChildFooterActionsModal(): void {
+    const ref = this._modalService.open(UserFormModalComponent, {
+      title: 'Edit User',
+      data: { name: 'Jane Doe', email: 'jane@example.com' },
+      width: '480px',
+    });
+
+    ref.afterClosed().subscribe(result => {
+      if (result?.confirmed) {
+        console.log('User saved from parent:', result.data);
+      }
+    });
+  }
+
   openStatusBarModal(): void {
     this._modalService.open({
+      title: 'Important notice',
+      message: 'This modal has a custom colored status bar at the top.',
+      statusBar: {
+        position: 'top',
+        color: '#2bbeeb',
+        thickness: 4,
+      },
+    });
+  }
+
+  openStatusBarModalSemantic(): void {
+    this._modalService.open({
       title: 'Status Bar Example',
-      message: 'This modal has a colored status bar on the left side.',
-      statusBar: { position: 'left', thickness: 4 },
+      message: 'This modal uses a semantic color for the status bar based on the modal type.',
+      statusBar: {
+        position: 'left',
+        thickness: 4,
+      },
       modalType: 'info',
     });
   }

@@ -28,9 +28,7 @@
             @switch (section.id) {
               @case ('basic') {
                 <div class="example-preview">
-                  <nui-button (click)="openBasicConfirm()">
-                    Open Confirm Dialog
-                  </nui-button>
+                  <nui-button (click)="openBasicConfirm()">Open Confirm Dialog</nui-button>
                 </div>
               }
 
@@ -83,6 +81,25 @@
                 </div>
               }
 
+              @case ('status-bar') {
+                <div class="example-preview">
+                  <nui-button (click)="openStatusBarModal()">
+                    Open with Custom Status Bar Color
+                  </nui-button>
+                  <nui-button [color]="'info'" (click)="openStatusBarModalSemantic()">
+                    Open with Semantic Status Bar Color
+                  </nui-button>
+                </div>
+              }
+
+              @case ('footer-custom') {
+                <div class="example-preview example-preview--spaced">
+                  <nui-button [color]="'primary'" (click)="openCustomButtonsModal()">
+                    Custom Buttons
+                  </nui-button>
+                </div>
+              }
+
               @case ('footer-actions') {
                 <div class="example-preview example-preview--spaced">
                   <nui-button [color]="'primary'" (click)="openCustomButtonsModal()">
@@ -91,10 +108,10 @@
                 </div>
               }
 
-              @case ('status-bar') {
-                <div class="example-preview">
-                  <nui-button [color]="'info'" (click)="openStatusBarModal()">
-                    Open with Status Bar
+              @case ('child-footer-actions') {
+                <div class="example-preview example-preview--spaced">
+                  <nui-button [color]="'primary'" (click)="openChildFooterActionsModal()">
+                    Edit User (Child Footer Actions)
                   </nui-button>
                 </div>
               }

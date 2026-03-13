@@ -34,6 +34,10 @@ openDeleteConfirm() {
     id: 'semantic-types',
     title: 'components.modal-dialog.examples.semanticTypes.title',
     description: 'components.modal-dialog.examples.semanticTypes.description',
+    note: {
+      type: 'info',
+      content: 'components.modal-dialog.examples.semanticTypes.note',
+    },
     anchor: 'semantic-types',
     examples: [
       {
@@ -62,6 +66,10 @@ openError() {
     id: 'verification',
     title: 'components.modal-dialog.examples.verification.title',
     description: 'components.modal-dialog.examples.verification.description',
+    note: {
+      type: 'info',
+      content: 'components.modal-dialog.examples.verification.note',
+    },
     anchor: 'verification',
     examples: [
       {
@@ -90,6 +98,10 @@ openError() {
     id: 'loader',
     title: 'components.modal-dialog.examples.loader.title',
     description: 'components.modal-dialog.examples.loader.description',
+    note: {
+      type: 'info',
+      content: 'components.modal-dialog.examples.loader.note',
+    },
     anchor: 'loader',
     examples: [
       {
@@ -116,6 +128,10 @@ openError() {
     id: 'dynamic-component',
     title: 'components.modal-dialog.examples.dynamicComponent.title',
     description: 'components.modal-dialog.examples.dynamicComponent.description',
+    note: {
+      type: 'info',
+      content: 'components.modal-dialog.examples.dynamicComponent.note',
+    },
     anchor: 'dynamic-component',
     examples: [
       {
@@ -180,6 +196,10 @@ openOrRestoreForm() {
     id: 'timeout',
     title: 'components.modal-dialog.examples.timeout.title',
     description: 'components.modal-dialog.examples.timeout.description',
+    note: {
+      type: 'info',
+      content: 'components.modal-dialog.examples.timeout.note',
+    },
     anchor: 'timeout',
     examples: [
       {
@@ -201,15 +221,55 @@ openOrRestoreForm() {
     ],
   },
   {
-    id: 'footer-actions',
-    title: 'components.modal-dialog.examples.footerActions.title',
-    description: 'components.modal-dialog.examples.footerActions.description',
-    anchor: 'footer-actions',
+    id: 'status-bar',
+    title: 'components.modal-dialog.examples.statusBar.title',
+    description: 'components.modal-dialog.examples.statusBar.description',
+    note: {
+      type: 'info',
+      content: 'components.modal-dialog.examples.statusBar.note',
+    },
+    anchor: 'status-bar',
     examples: [
       {
-        title: 'codeExamples.typescript',
-        code: `// Option 1: Custom buttons via config (use text + callback)
-openWithCustomButtons() {
+        title: 'Custom color',
+        code: `this.modalService.open(MyContent, {
+  title: 'Important notice',
+  statusBar: {
+    position: 'top',
+    color: '#f59e0b',
+    thickness: 4,
+  },
+});`,
+        language: 'typescript',
+      },
+      {
+        title: 'Semantic color (modalType)',
+        code: `this._modalService.open({
+  title: 'Status Bar Example',
+  message: 'This modal has a colored status bar on the left side.',
+  statusBar: { 
+    position: 'left', 
+    thickness: 4 
+  },
+  modalType: 'info',
+});`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
+    id: 'footer-custom',
+    title: 'components.modal-dialog.examples.footer-custom.title',
+    description: 'components.modal-dialog.examples.footer-custom.description',
+    note: {
+      type: 'info',
+      content: 'components.modal-dialog.examples.footer-custom.note',
+    },
+    anchor: 'footer-custom',
+    examples: [
+      {
+        title: 'CustomButtons',
+        code: `openWithCustomButtons() {
   const ref = this.modalService.open({
     title: 'Custom Footer',
     message: 'Choose an action for this item.',
@@ -232,48 +292,104 @@ openWithCustomButtons() {
       },
     ],
   });
-}
-
-// Option 2: Register actions inside the dynamic component
-// readonly actionsService = inject(ModalDialogActionsService);
-//
-// ngOnInit() {
-//   this.actionsService.register([
-//     { label: 'Cancel', color: 'secondary', handler: () => this.modalRef.close({ confirmed: false }) },
-//     { label: 'Save', color: 'primary', handler: () => this.save() },
-//   ]);
-// }`,
+}`,
         language: 'typescript',
       },
       {
-        title: 'codeExamples.html',
-        code: `<!-- Option 3: Footer directive in the component template -->
-<ng-template nuiModalDialogFooter>
+        title: 'Template (nuiModalDialogFooter)',
+        code: `<ng-template nuiModalDialogFooter>
   <div style="display:flex; gap: 8px; justify-content: flex-end">
     <nui-button color="secondary" (onClick)="cancel()">Cancel</nui-button>
     <nui-button color="primary" (onClick)="save()">Save</nui-button>
   </div>
 </ng-template>`,
-        language: 'html',
+        language: 'typescript',
       },
     ],
   },
   {
-    id: 'status-bar',
-    title: 'components.modal-dialog.examples.statusBar.title',
-    description: 'components.modal-dialog.examples.statusBar.description',
-    anchor: 'status-bar',
+    id: 'child-footer-actions',
+    title: 'components.modal-dialog.examples.child-footer-actions.title',
+    description: 'components.modal-dialog.examples.child-footer-actions.description',
+    note: {
+      type: 'info',
+      content: 'components.modal-dialog.examples.child-footer-actions.note',
+    },
+    anchor: 'child-footer-actions',
     examples: [
       {
-        title: 'codeExamples.typescript',
-        code: `this.modalService.open(MyContent, {
-  title: 'Important notice',
-  statusBar: {
-    position: 'top',      // 'top' | 'bottom' | 'left' | 'right' | 'none'
-    color: '#f59e0b',     // Any CSS color or leave undefined for semantic color
-    thickness: 4,         // px, default: 4
-  },
-});`,
+        title: 'Child Component (TS)',
+        code: `
+export class UserFormModalComponent implements OnInit {
+  private readonly _actionsService = inject(ModalDialogActionsService);
+  private readonly _modalRef = inject<ModalDialogRef>(MODAL_DIALOG_REF);
+  readonly data = inject<Partial<UserFormData>>(MODAL_DIALOG_DATA);
+
+  readonly form = inject(FormBuilder).group({
+    name: [this.data?.name ?? '', Validators.required],
+    email: [this.data?.email ?? '', [Validators.required, Validators.email]],
+  });
+
+  readonly isLoading = signal(false);
+
+  private isInvalid = toSignal(this.form.statusChanges.pipe(map(s => s === 'INVALID')), {
+    initialValue: this.form.invalid,
+  });
+
+  constructor() {
+    effect(() => {
+      const loading = this.isLoading();
+      const invalid = this.isInvalid();
+      untracked(() => {
+        this._actionsService.update(0, { disabled: loading });
+        this._actionsService.update(1, { disabled: invalid || loading, loading });
+      });
+    });
+  }
+
+  ngOnInit(): void {
+    this._actionsService.register([
+      {
+        label: 'Cancel',
+        color: 'secondary',
+        variant: 'outline',
+        handler: () => this._modalRef.close({ confirmed: false }),
+      },
+      {
+        label: 'Save',
+        color: 'primary',
+        handler: () => this._save(),
+      },
+    ]);
+  }
+
+  private async _save(): Promise<void> {
+    if (this.form.invalid) return;
+    this.isLoading.set(true);
+
+    // Simulate async save
+    await new Promise(r => setTimeout(r, 1500));
+    console.log('Saved user data from child:', this.form.value);
+    this._modalRef.close({ confirmed: true, data: this.form.value });
+  }
+}`,
+        language: 'typescript',
+      },
+      {
+        title: 'Parent Component (TS)',
+        code: `openEditUserModal(user: User) {
+  const ref = this.modalService.open(EditUserFormComponent, {
+    title: 'Edit User',
+    data: { name: user.name, email: user.email },
+    width: '480px',
+  });
+
+  ref.afterClosed().subscribe(result => {
+    if (result?.confirmed) {
+      console.log('User saved from parent:', result.data);
+    }
+  });
+}`,
         language: 'typescript',
       },
     ],

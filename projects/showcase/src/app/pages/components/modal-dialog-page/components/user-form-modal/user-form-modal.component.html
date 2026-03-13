@@ -1,0 +1,37 @@
+<form [formGroup]="form" class="user-form">
+  <div class="user-form__field">
+    <label class="user-form__label" for="uf-name">Name</label>
+    <input
+      id="uf-name"
+      class="user-form__input"
+      [class.user-form__input--error]="form.controls.name.invalid && form.controls.name.touched"
+      formControlName="name"
+      type="text"
+      placeholder="Full name"
+      autocomplete="name"
+    />
+    @if (form.controls.name.touched && form.controls.name.hasError('required')) {
+      <p class="user-form__error">Name is required.</p>
+    }
+  </div>
+
+  <div class="user-form__field">
+    <label class="user-form__label" for="uf-email">Email</label>
+    <input
+      id="uf-email"
+      class="user-form__input"
+      [class.user-form__input--error]="form.controls.email.invalid && form.controls.email.touched"
+      formControlName="email"
+      type="email"
+      placeholder="email@example.com"
+      autocomplete="email"
+    />
+    @if (form.controls.email.touched) {
+      @if (form.controls.email.hasError('required')) {
+        <p class="user-form__error">Email is required.</p>
+      } @else if (form.controls.email.hasError('email')) {
+        <p class="user-form__error">Enter a valid email address.</p>
+      }
+    }
+  </div>
+</form>

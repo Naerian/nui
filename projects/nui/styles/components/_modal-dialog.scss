@@ -60,9 +60,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: var(--nui-modal-dialog-header-padding) var(--nui-modal-dialog-header-padding) 0;
+      padding: var(--nui-modal-dialog-header-padding-y) var(--nui-modal-dialog-header-padding) 0;
       gap: 0.5rem;
-      min-height: 3rem;
     }
 
     &__title {

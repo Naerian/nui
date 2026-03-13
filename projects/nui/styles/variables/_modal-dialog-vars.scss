@@ -3,9 +3,10 @@
 // ========================================
 
 // TOKENS (Sass)
-$modal-dialog-border-radius: 0.75rem !default;
+$modal-dialog-border-radius: var(--nui-border-radius-md) !default;
 
 $modal-dialog-header-padding: 1.25rem !default;
+$modal-dialog-header-padding-y: 0.75rem !default;
 $modal-dialog-body-padding-y: 1rem !default;
 $modal-dialog-body-padding-x: 1.25rem !default;
 $modal-dialog-footer-padding-top: 0.75rem !default;
@@ -24,6 +25,7 @@ $modal-dialog-dock-border-radius: 0.5rem !default;
   // Layout
   --nui-modal-dialog-border-radius: #{$modal-dialog-border-radius};
   --nui-modal-dialog-header-padding: #{$modal-dialog-header-padding};
+  --nui-modal-dialog-header-padding-y: #{$modal-dialog-header-padding-y};
   --nui-modal-dialog-body-padding-y: #{$modal-dialog-body-padding-y};
   --nui-modal-dialog-body-padding-x: #{$modal-dialog-body-padding-x};
   --nui-modal-dialog-footer-padding-top: #{$modal-dialog-footer-padding-top};

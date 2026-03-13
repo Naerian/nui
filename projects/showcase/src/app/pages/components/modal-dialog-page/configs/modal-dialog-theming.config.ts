@@ -28,7 +28,7 @@ export const MODAL_DIALOG_THEMING_SECTIONS: ComponentSection[] = [
     table: {
       headers: ['common.tables.cssVariable', 'common.tables.default', 'common.tables.description'],
       rows: [
-        ['<code>--nui-modal-dialog-border-radius</code>', '12px', 'Corner radius of the modal panel'],
+        ['<code>--nui-modal-dialog-border-radius</code>', 'var(--nui-border-radius-md)', 'Corner radius of the modal panel'],
         ['<code>--nui-modal-dialog-shadow</code>', 'var(--nui-box-shadow-xl)', 'Drop shadow of the modal panel'],
         ['<code>--nui-modal-dialog-header-padding</code>', '20px', 'Header top/side padding'],
         ['<code>--nui-modal-dialog-body-padding-y</code>', '16px', 'Body vertical padding'],
