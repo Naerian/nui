@@ -162,6 +162,7 @@ export class ModalDialogPageComponent extends BaseComponentPage {
     const ref = this._modalService.openLoader({
       title: 'Processing',
       loadingLabel: 'Please wait while we process your request...',
+      message: 'This operation may take a few moments.',
       canBeClosed: false,
     });
 
