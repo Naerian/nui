@@ -81,6 +81,7 @@ export class ModalDialogPageComponent extends BaseComponentPage {
         'api-ref',
         'api-config',
         'api-custom-button',
+        'api-minimized-tab',
         'api-modal-action',
         'api-actions-service',
         'api-footer-directive',

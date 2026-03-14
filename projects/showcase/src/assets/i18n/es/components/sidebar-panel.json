@@ -86,35 +86,148 @@
   "api": {
     "service": {
       "title": "SidebarPanelService",
-      "description": "Inyecta <code>SidebarPanelService</code> para abrir y gestionar paneles laterales. Todos los métodos devuelven un <code>SidebarPanelRef</code>."
+      "description": "Inyecta <code>SidebarPanelService</code> para abrir y gestionar paneles laterales. Todos los métodos devuelven un <code>SidebarPanelRef</code>.",
+      "rows": {
+        "open": "Abre un panel con un componente dinámico.",
+        "close": "Cierra el panel con el ID indicado.",
+        "closeAll": "Cierra todos los paneles abiertos.",
+        "getPanel": "Devuelve el elemento de pila del panel con el ID indicado, o <code>undefined</code> si no existe.",
+        "getAllPanels": "Devuelve un array con todos los elementos de pila de paneles actualmente abiertos.",
+        "openPanelsCount": "Getter que devuelve el número de paneles actualmente abiertos."
+      }
     },
     "ref": {
       "title": "SidebarPanelRef",
-      "description": "La referencia devuelta por <code>open()</code>. Úsala para cerrar el modal, escuchar eventos y observar los cambios de ciclo de vida."
+      "description": "La referencia devuelta por <code>open()</code>. Úsala para cerrar el modal, escuchar eventos y observar los cambios de ciclo de vida.",
+      "rows": {
+        "id": "Identificador único de la instancia del panel.",
+        "componentInstance": "Referencia a la instancia del componente cargado dinámicamente, o <code>null</code> si aún no se ha renderizado.",
+        "config": "El objeto de configuración resuelto para este panel.",
+        "state": "El estado actual del panel (<code>SidebarPanelState</code>).",
+        "isOpen": "<code>true</code> si el panel está abierto o en proceso de apertura.",
+        "isClosed": "<code>true</code> si el panel está cerrado o en proceso de cierre.",
+        "isMinimized": "<code>true</code> si el panel está actualmente minimizado.",
+        "stateHistory": "Array de solo lectura que registra la secuencia de estados por los que ha pasado el panel.",
+        "close": "Cierra el panel programáticamente. Se resuelve cuando finaliza la animación de cierre.",
+        "minimize": "Minimiza el panel al dock. Solo disponible cuando <code>minimizable: true</code> está configurado.",
+        "restore": "Restaura el panel desde su estado minimizado.",
+        "updateTitle": "Actualiza el título del panel después de que haya sido abierto.",
+        "updateHeaderTemplate": "Reemplaza el header del panel con un <code>TemplateRef</code> personalizado después de abrirlo.",
+        "updateFooterTemplate": "Reemplaza el footer del panel con un <code>TemplateRef</code> personalizado después de abrirlo.",
+        "canTransitionTo": "Devuelve <code>true</code> si el panel puede transicionar al estado indicado desde su estado actual.",
+        "afterOpened": "Observable que emite una vez cuando el panel se ha abierto completamente.",
+        "afterClosed": "Observable que emite una vez cuando el panel se ha cerrado, con el valor de resultado opcional.",
+        "backdropClick": "Observable que emite en cada clic sobre el overlay de backdrop.",
+        "keydownEvents": "Observable que emite los eventos de teclado originados dentro del panel.",
+        "stateChanged": "Observable que emite cada vez que el panel transiciona a un nuevo estado.",
+        "closePrevented": "Observable que emite cuando un intento de cierre es bloqueado por el guard <code>preventClose</code>."
+      }
     },
     "tokens": {
       "title": "Tokens de inyección",
-      "description": "Usa estos tokens para inyectar contexto del panel lateral dentro de un componente dinámico cargado por el servicio."
+      "description": "Usa estos tokens para inyectar contexto del panel lateral dentro de un componente dinámico cargado por el servicio.",
+      "rows": {
+        "SIDEBAR_PANEL_DATA": "Inyecta los datos tipados pasados mediante la propiedad de configuración <code>data</code> en el componente dinámico.",
+        "SIDEBAR_PANEL_REF": "Inyecta la instancia de <code>SidebarPanelRef</code> dentro del shell o del componente dinámico.",
+        "SIDEBAR_PANEL_CONFIG": "Inyecta el objeto de configuración completo y de solo lectura del panel actual."
+      }
     },
     "config": {
       "title": "SidebarPanelConfig",
-      "description": "Objeto de configuración pasado a <code>open()</code>. Las propiedades se fusionan con los valores globales de <code>provideNUI()</code>."
+      "description": "Objeto de configuración pasado a <code>open()</code>. Las propiedades se fusionan con los valores globales de <code>provideNUI()</code>.",
+      "rows": {
+        "id": "Identificador único del panel. Obligatorio cuando <code>minimizable: true</code>.",
+        "position": "Borde del viewport desde el que se desliza el panel.",
+        "size": "Tamaño predefinido del panel aplicado mediante una variable CSS.",
+        "width": "Ancho CSS personalizado para paneles izquierdo/derecho. Sobreescribe <code>size</code>.",
+        "height": "Alto CSS personalizado para paneles superior/inferior. Sobreescribe <code>size</code>.",
+        "data": "Datos arbitrarios inyectados en el componente dinámico mediante <code>SIDEBAR_PANEL_DATA</code>.",
+        "contentTemplate": "<code>TemplateRef</code> de Angular renderizado como cuerpo del panel.",
+        "htmlContent": "Cadena HTML sin formato renderizada como cuerpo del panel. Sanitizada por el <code>DomSanitizer</code> de Angular.",
+        "templateContext": "Objeto de contexto pasado a <code>contentTemplate</code> mediante <code>$implicit</code>.",
+        "title": "Título mostrado en el header del panel.",
+        "showHeader": "Indica si la barra de header del panel se renderiza.",
+        "showCloseButton": "Indica si se muestra el botón de cierre en el header del panel.",
+        "headerTemplate": "<code>TemplateRef</code> personalizado que reemplaza el header por defecto del panel.",
+        "footerTemplate": "<code>TemplateRef</code> personalizado renderizado en el área de footer del panel.",
+        "customButtons": "Definiciones de botones de footer inline. Se evalúan una sola vez al abrir.",
+        "hasBackdrop": "Indica si se renderiza un overlay de backdrop detrás del panel.",
+        "backdropClass": "Una o más clases CSS aplicadas al elemento de backdrop.",
+        "closeOnBackdropClick": "Indica si al hacer clic en el backdrop se cierra el panel.",
+        "closeOnEscape": "Indica si pulsar la tecla Escape cierra el panel.",
+        "closeOnRouteChange": "Indica si el panel se cierra automáticamente al cambiar la ruta.",
+        "preventClose": "Función guard invocada antes de cada intento de cierre. Devuelve <code>false</code> para bloquearlo.",
+        "autoFocus": "Indica si el foco se mueve al panel al abrirse. Acepta <code>true</code>, <code>false</code> o un selector CSS.",
+        "mobileFullScreen": "Indica si el panel se expande a pantalla completa en dispositivos móviles.",
+        "panelClass": "Una o más clases CSS aplicadas al elemento host del panel.",
+        "scrollStrategy": "Estrategia para gestionar el scroll de la página mientras el panel está abierto.",
+        "animationDuration": "Duración de las animaciones de apertura y cierre en milisegundos.",
+        "zIndex": "Valor base de z-index para el panel y su backdrop.",
+        "minimizable": "Indica si el panel puede minimizarse al dock.",
+        "dockTabConfig": "Opciones de personalización del chip del dock cuando el panel está minimizado.",
+        "allowMultiple": "Indica si puede haber más de una instancia del panel abierta simultáneamente.",
+        "lazyLoad": "Indica si el contenido del panel se renderiza de forma lazy al abrirse por primera vez.",
+        "ariaLabel": "Valor del atributo <code>aria-label</code> en el elemento raíz del panel.",
+        "ariaDescribedBy": "ID del elemento que proporciona una descripción accesible para el panel."
+      }
     },
     "custom-button": {
       "title": "SidebarPanelCustomButton",
-      "description": "Definición de botón inline pasada mediante <code>customButtons</code> en la configuración. Se evalúa una sola vez al abrir el modal — usa <code>SidebarPanelActionsService</code> para estados reactivos."
+      "description": "Definición de botón inline pasada mediante <code>customButtons</code> en la configuración. Se evalúa una sola vez al abrir el modal — usa <code>SidebarPanelActionsService</code> para estados reactivos.",
+      "rows": {
+        "text": "Etiqueta del botón. Obligatorio.",
+        "icon": "Clase de Remix Icon mostrada dentro del botón (p. ej., <code>ri-save-line</code>).",
+        "color": "Color NUI aplicado al botón.",
+        "variant": "Variante del botón: solid, outline o ghost.",
+        "size": "Tamaño NUI aplicado al botón.",
+        "callback": "Manejador de clic invocado con la <code>SidebarPanelRef</code>. Obligatorio.",
+        "disabled": "Indica si el botón se renderiza en estado deshabilitado.",
+        "loading": "Indica si el botón muestra un spinner de carga.",
+        "class": "Una o más clases CSS adicionales aplicadas al elemento del botón."
+      }
     },
     "minimized-tab": {
-      "title": "dockTabConfig",
-      "description": "Customización del chip del dock cuando el panel está minimizado. Las propiedades se mapean al <code>NuiDockItem</code> gestionado por <code>NuiDockService</code>."
+      "title": "DockTabConfig",
+      "description": "Customización del chip del dock cuando el panel está minimizado. Las propiedades se mapean al <code>NuiDockItem</code> gestionado por <code>NuiDockService</code>.",
+      "rows": {
+        "prefixIcon": "Clase de Remix Icon para el icono de prefijo mostrado dentro del chip del dock.",
+        "suffixIcon": "Clase de Remix Icon para el icono de sufijo. Solo se muestra cuando <code>prefixIcon</code> está definido. Útil para indicar estado adicional como un punto de notificación.",
+        "hideSuffixIcon": "Cuando es <code>true</code>, oculta el icono de flecha direccional que indica la posición original del panel.",
+        "label": "Título alternativo para el chip del dock. Si no se especifica, se usa el título del panel.",
+        "cssClass": "Una o más clases CSS adicionales aplicadas al botón del chip del dock."
+      }
     },
     "footer-actions": {
       "title": "SidebarPanelAction",
-      "description": "Definición de acciones registradas desde componentes hijos para el footer del panel"
+      "description": "Definición de acciones registradas desde componentes hijos para el footer del panel",
+      "rows": {
+        "id": "Identificador único opcional de la acción. Útil para actualizaciones puntuales mediante <code>updateById()</code>.",
+        "label": "Etiqueta del botón. Obligatorio.",
+        "icon": "Clase de Remix Icon mostrada dentro del botón (p. ej., <code>ri-save-line</code>).",
+        "iconPosition": "Posición del icono respecto a la etiqueta: <code>start</code> o <code>end</code>.",
+        "color": "Color NUI aplicado al botón.",
+        "variant": "Variante del botón: solid, outline o ghost.",
+        "size": "Tamaño NUI aplicado al botón.",
+        "handler": "Función manejadora del clic. Obligatorio.",
+        "disabled": "Indica si el botón se renderiza en estado deshabilitado.",
+        "loading": "Indica si el botón muestra un spinner de carga.",
+        "loadingPosition": "Posición del spinner de carga respecto a la etiqueta: <code>start</code> o <code>end</code>.",
+        "class": "Una o más clases CSS adicionales aplicadas al elemento del botón.",
+        "width": "Modo de anchura del botón: <code>auto</code> (ajustado al contenido) o <code>full</code> (ancho completo del contenedor)."
+      }
     },
     "footer-actions-service": {
       "title": "SidebarPanelActionsService",
-      "description": "Servicio para que los componentes hijos puedan registrar acciones en el footer del panel"
+      "description": "Servicio para que los componentes hijos puedan registrar acciones en el footer del panel",
+      "rows": {
+        "register": "Registra un conjunto completo de acciones de footer, reemplazando las existentes.",
+        "add": "Añade una única acción al conjunto de acciones de footer existente.",
+        "update": "Actualiza parcialmente la acción en el índice indicado.",
+        "updateById": "Actualiza parcialmente la acción que coincide con el ID indicado.",
+        "clear": "Elimina todas las acciones de footer registradas.",
+        "setDisabled": "Establece el estado deshabilitado de la acción en el índice indicado.",
+        "setLoading": "Establece el estado de carga de la acción en el índice indicado."
+      }
     },
     "footer-directive": {
       "title": "SidebarPanelFooterDirective",

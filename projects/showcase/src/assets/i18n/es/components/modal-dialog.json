@@ -80,35 +80,154 @@
   "api": {
     "service": {
       "title": "ModalDialogService",
-      "description": "Inyecta <code>ModalDialogService</code> para abrir y gestionar modales. Todos los métodos devuelven un <code>ModalDialogRef</code>."
+      "description": "Inyecta <code>ModalDialogService</code> para abrir y gestionar modales. Todos los métodos devuelven un <code>ModalDialogRef</code>.",
+      "rows": {
+        "openDynamic": "Abre un modal con un componente Angular dinámico como cuerpo.",
+        "openSimple": "Abre un modal simple de mensaje o HTML.",
+        "openConfirm": "Abre un diálogo de confirmación (type: confirm).",
+        "openInfo": "Abre un diálogo informativo.",
+        "openWarning": "Abre un diálogo de advertencia.",
+        "openError": "Abre un diálogo de error.",
+        "openSuccess": "Abre un diálogo de éxito.",
+        "openVerification": "Abre un diálogo de verificación de texto que requiere que el usuario escriba una frase específica.",
+        "openLoader": "Abre un modal de spinner de carga no cerrable.",
+        "closeAll": "Cierra todos los modales abiertos."
+      }
     },
     "config": {
       "title": "ModalDialogConfig ",
-      "description": "Objeto de configuración pasado a <code>open()</code>. Las propiedades se fusionan con los valores globales de <code>provideNUI()</code>."
+      "description": "Objeto de configuración pasado a <code>open()</code>. Las propiedades se fusionan con los valores globales de <code>provideNUI()</code>.",
+      "rows": {
+        "title": "Título del modal mostrado en el header.",
+        "message": "Mensaje HTML mostrado en el cuerpo. Sanitizado por el <code>DomSanitizer</code> de Angular.",
+        "modalType": "Tipo semántico del modal: confirm, info, warning, danger, success o verification.",
+        "color": "Color NUI aplicado al acento y los botones.",
+        "width": "Ancho CSS del panel del modal.",
+        "minimizable": "Indica si el modal puede minimizarse al dock.",
+        "preventClose": "Cuando es <code>true</code>, oculta el botón de cierre y bloquea todos los gestos de cierre.",
+        "contentTemplate": "<code>TemplateRef</code> para el cuerpo. Tiene prioridad sobre <code>message</code>. Usa <code>templateContext</code> para pasar datos de contexto.",
+        "templateContext": "Objeto de contexto para el template del cuerpo.",
+        "id": "Obligatorio cuando <code>minimizable: true</code>. Se usa como clave singleton para restaurar un modal minimizado.",
+        "hasBackdrop": "Indica si se renderiza un overlay de backdrop detrás del modal.",
+        "backdropClass": "Una o más clases CSS aplicadas al elemento de backdrop.",
+        "closeOnBackdropClick": "Indica si al hacer clic en el backdrop se cierra el modal.",
+        "closeOnEscape": "Indica si pulsar la tecla Escape cierra el modal.",
+        "closeOnRouteChange": "Indica si el modal se cierra automáticamente al navegar.",
+        "timeout": "Configuración de cierre automático con barra de progreso opcional.",
+        "gestures": "Configuración de gestos táctiles de deslizamiento.",
+        "statusBar": "Franja de borde de color mostrada en un lado del modal.",
+        "customButtons": "Definiciones de botones de footer personalizados (máxima prioridad).",
+        "footerTemplate": "<code>TemplateRef</code> para el footer. Menor prioridad que la directiva o <code>customButtons</code>.",
+        "confirmText": "Etiqueta personalizada para el botón de confirmación.",
+        "cancelText": "Etiqueta personalizada para el botón de cancelación.",
+        "canBeClosed": "Cuando es <code>false</code>, oculta el botón de cierre y bloquea todos los gestos de cierre. Útil para loaders.",
+        "verificationText": "Texto que el usuario debe escribir para confirmar una acción destructiva.",
+        "data": "Datos inyectados en el componente dinámico mediante <code>MODAL_DIALOG_DATA</code>.",
+        "dockTabConfig": "Opciones de personalización del chip del dock cuando el modal está minimizado."
+      }
     },
     "ref": {
       "title": "ModalDialogRef",
-      "description": "La referencia devuelta por <code>open()</code>. Úsala para cerrar el modal, escuchar eventos y observar los cambios de ciclo de vida."
+      "description": "La referencia devuelta por <code>open()</code>. Úsala para cerrar el modal, escuchar eventos y observar los cambios de ciclo de vida.",
+      "rows": {
+        "close": "Cierra el modal y emite el resultado opcional.",
+        "minimize": "Minimiza el modal al dock.",
+        "restore": "Restaura un modal minimizado.",
+        "updateTitle": "Actualiza el título del modal después de que haya sido abierto.",
+        "updateHeaderTemplate": "Reemplaza el header del modal con un <code>TemplateRef</code> personalizado después de abrirlo.",
+        "updateFooterTemplate": "Reemplaza el footer del modal con un <code>TemplateRef</code> personalizado después de abrirlo.",
+        "afterOpened": "Observable que emite una vez cuando el modal finaliza su apertura.",
+        "afterClosed": "Observable que emite una vez cuando el modal se cierra.",
+        "backdropClick": "Observable que emite en cada clic sobre el backdrop.",
+        "keydownEvents": "Observable que emite los eventos de teclado del overlay.",
+        "stateChanged": "Observable que emite en cada transición de estado.",
+        "closePrevented": "Observable que emite cuando el cierre está bloqueado (p. ej. <code>canBeClosed: false</code>).",
+        "id": "Identificador único de la instancia del modal.",
+        "componentInstance": "Referencia a la instancia del componente cargado dinámicamente, o <code>null</code> si aún no se ha renderizado.",
+        "config": "El objeto de configuración resuelto para este modal.",
+        "state": "El estado actual del modal (<code>ModalDialogState</code>).",
+        "isOpen": "<code>true</code> si el modal está abierto o en proceso de apertura.",
+        "isClosed": "<code>true</code> si el modal está cerrado o en proceso de cierre.",
+        "isMinimized": "<code>true</code> si el modal está actualmente minimizado.",
+        "stateHistory": "Array de solo lectura que registra la secuencia de estados por los que ha pasado el modal."
+      }
     },
     "tokens": {
       "title": "Tokens de inyección",
-      "description": "Usa estos tokens para inyectar contexto del modal dentro de un componente dinámico cargado por el servicio."
+      "description": "Usa estos tokens para inyectar contexto del modal dentro de un componente dinámico cargado por el servicio.",
+      "rows": {
+        "MODAL_DIALOG_DATA": "Inyecta los datos tipados pasados mediante la propiedad de configuración <code>data</code> en el componente dinámico.",
+        "MODAL_DIALOG_REF": "Inyecta la instancia de <code>ModalDialogRef</code> dentro del shell o del componente dinámico.",
+        "MODAL_DIALOG_CONFIG": "Inyecta el objeto de configuración completo y de solo lectura del modal actual."
+      }
     },
     "custom-button": {
       "title": "ModalDialogCustomButton",
-      "description": "Definición de botón inline pasada mediante <code>customButtons</code> en la configuración. Se evalúa una sola vez al abrir el modal — usa <code>ModalDialogActionsService</code> para estados reactivos."
+      "description": "Definición de botón inline pasada mediante <code>customButtons</code> en la configuración. Se evalúa una sola vez al abrir el modal — usa <code>ModalDialogActionsService</code> para estados reactivos.",
+      "rows": {
+        "text": "Etiqueta del botón. Obligatorio.",
+        "color": "Color NUI aplicado al botón.",
+        "variant": "Variante del botón: solid, outline o ghost.",
+        "size": "Tamaño NUI aplicado al botón.",
+        "prefixIcon": "Clase de Remix Icon para el icono de prefijo.",
+        "suffixIcon": "Clase de Remix Icon para el icono de sufijo.",
+        "callback": "Manejador de clic invocado con la <code>ModalDialogRef</code> opcional. Obligatorio.",
+        "disabled": "Estado deshabilitado estático, evaluado una vez al abrir.",
+        "loading": "Estado de carga estático, evaluado una vez al abrir.",
+        "closeOnClick": "Indica si el modal se cierra automáticamente tras ejecutar el callback.",
+        "class": "Una o más clases CSS adicionales aplicadas al elemento del botón.",
+        "ariaLabel": "Etiqueta accesible para el botón."
+      }
+    },
+    "minimized-tab": {
+      "title": "DockTabConfig",
+      "description": "Customización del chip del dock cuando el panel está minimizado. Las propiedades se mapean al <code>NuiDockItem</code> gestionado por <code>NuiDockService</code>.",
+      "rows": {
+        "prefixIcon": "Clase de Remix Icon para el icono de prefijo mostrado dentro del chip del dock.",
+        "suffixIcon": "Clase de Remix Icon para el icono de sufijo. Solo se muestra cuando <code>prefixIcon</code> está definido. Útil para indicar estado adicional como un punto de notificación.",
+        "hideSuffixIcon": "Cuando es <code>true</code>, oculta el icono de flecha direccional que indica la posición original del panel.",
+        "label": "Título alternativo para el chip del dock. Si no se especifica, se usa el título del panel.",
+        "cssClass": "Una o más clases CSS adicionales aplicadas al botón del chip del dock."
+      }
     },
     "modal-action": {
       "title": "ModalDialogAction",
-      "description": "Acción de footer registrada desde un componente dinámico mediante <code>ModalDialogActionsService</code>. Admite estados reactivos de <code>disabled</code> y <code>loading</code> mediante funciones getter."
+      "description": "Acción de footer registrada desde un componente dinámico mediante <code>ModalDialogActionsService</code>. Admite estados reactivos de <code>disabled</code> y <code>loading</code> mediante funciones getter.",
+      "rows": {
+        "label": "Etiqueta del botón. Obligatorio.",
+        "prefixIcon": "Clase de Remix Icon para el icono de prefijo.",
+        "suffixIcon": "Clase de Remix Icon para el icono de sufijo.",
+        "color": "Color NUI aplicado al botón.",
+        "variant": "Variante del botón: solid, outline o ghost.",
+        "size": "Tamaño NUI aplicado al botón.",
+        "handler": "Función manejadora del clic. Obligatorio.",
+        "disabled": "Booleano estático o getter reactivo — reevaluado en cada ciclo de detección de cambios.",
+        "loading": "Booleano estático o getter reactivo — reevaluado en cada ciclo de detección de cambios.",
+        "loadingPosition": "Posición del spinner de carga respecto a la etiqueta: <code>start</code> o <code>end</code>.",
+        "width": "Modo de anchura del botón: <code>auto</code> (ajustado al contenido) o <code>full</code> (ancho completo del contenedor).",
+        "class": "Una o más clases CSS adicionales aplicadas al elemento del botón."
+      }
     },
     "actions-service": {
       "title": "ModalDialogActionsService",
-      "description": "Inyectado por el componente dinámico para registrar acciones de footer programáticamente. <code>ModalDialogService</code> crea una instancia nueva por cada modal."
+      "description": "Inyectado por el componente dinámico para registrar acciones de footer programáticamente. <code>ModalDialogService</code> crea una instancia nueva por cada modal.",
+      "rows": {
+        "register": "Registra un conjunto completo de acciones de footer, reemplazando las existentes.",
+        "add": "Añade una única acción al conjunto de acciones de footer existente.",
+        "update": "Actualiza parcialmente la acción en el índice indicado.",
+        "clear": "Elimina todas las acciones de footer registradas.",
+        "registerFooterTemplate": "Registra un <code>TemplateRef</code> como footer completo, sobreescribiendo las acciones. Menor prioridad que la directiva."
+      }
     },
     "dock-tab-config": {
       "title": "dockTabConfig",
-      "description": "Customización del chip mostrado en el <strong>NuiDock</strong> cuando el modal está minimizado. Las propiedades se mapean al <code>NuiDockItem</code> gestionado por <code>NuiDockService</code>."
+      "description": "Customización del chip mostrado en el <strong>NuiDock</strong> cuando el modal está minimizado. Las propiedades se mapean al <code>NuiDockItem</code> gestionado por <code>NuiDockService</code>.",
+      "rows": {
+        "prefixIcon": "Clase de Remix Icon para el icono de prefijo mostrado dentro del chip del dock.",
+        "suffixIcon": "Clase de Remix Icon para el icono de sufijo. Solo se muestra cuando <code>prefixIcon</code> está definido. Útil para indicar estado adicional como un punto de notificación.",
+        "label": "Título alternativo para el chip del dock. Si no se especifica, se usa el título del modal.",
+        "cssClass": "Una o más clases CSS adicionales aplicadas al botón del chip del dock."
+      }
     },
     "footer-directive": {
       "title": "ModalDialogFooterDirective",

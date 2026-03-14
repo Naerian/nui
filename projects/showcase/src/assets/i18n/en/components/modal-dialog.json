@@ -80,35 +80,154 @@
   "api": {
     "service": {
       "title": "ModalDialogService",
-      "description": "Inject <code>ModalDialogService</code> to open and manage modals. All methods return a <code>ModalDialogRef</code>."
+      "description": "Inject <code>ModalDialogService</code> to open and manage modals. All methods return a <code>ModalDialogRef</code>.",
+      "rows": {
+        "openDynamic": "Opens a modal with a dynamic Angular component as the body.",
+        "openSimple": "Opens a simple message or HTML modal.",
+        "openConfirm": "Opens a confirm dialog (type: confirm).",
+        "openInfo": "Opens an informational dialog.",
+        "openWarning": "Opens a warning dialog.",
+        "openError": "Opens an error dialog.",
+        "openSuccess": "Opens a success dialog.",
+        "openVerification": "Opens a text-verification dialog requiring the user to type a specific phrase.",
+        "openLoader": "Opens a non-closable loading spinner modal.",
+        "closeAll": "Closes all open modals."
+      }
     },
     "config": {
       "title": "ModalDialogConfig",
-      "description": "Configuration object passed to <code>open()</code>. Properties are merged with the global defaults from <code>provideNUI()</code>."
+      "description": "Configuration object passed to <code>open()</code>. Properties are merged with the global defaults from <code>provideNUI()</code>.",
+      "rows": {
+        "title": "Modal title displayed in the header.",
+        "message": "HTML message displayed in the body. Sanitized by Angular's <code>DomSanitizer</code>.",
+        "modalType": "Semantic type of the modal: confirm, info, warning, danger, success, or verification.",
+        "color": "NUI color applied to the accent and buttons.",
+        "width": "CSS width of the modal panel.",
+        "minimizable": "Whether the modal can be minimized to the dock.",
+        "preventClose": "When <code>true</code>, hides the close button and blocks all close gestures.",
+        "contentTemplate": "<code>TemplateRef</code> for the body. Takes priority over <code>message</code>. Use <code>templateContext</code> to pass context data.",
+        "templateContext": "Context object for the body template.",
+        "id": "Required when <code>minimizable: true</code>. Used as a singleton key to restore a minimized modal.",
+        "hasBackdrop": "Whether a backdrop overlay is rendered behind the modal.",
+        "backdropClass": "One or more CSS classes applied to the backdrop element.",
+        "closeOnBackdropClick": "Whether clicking the backdrop closes the modal.",
+        "closeOnEscape": "Whether pressing the Escape key closes the modal.",
+        "closeOnRouteChange": "Whether the modal closes automatically on route navigation.",
+        "timeout": "Auto-close countdown configuration with an optional progress bar.",
+        "gestures": "Touch swipe gesture configuration.",
+        "statusBar": "Colored border stripe displayed on one side of the modal.",
+        "customButtons": "Custom footer button definitions (highest priority).",
+        "footerTemplate": "<code>TemplateRef</code> for the footer. Lower priority than the directive or <code>customButtons</code>.",
+        "confirmText": "Custom label for the confirm button.",
+        "cancelText": "Custom label for the cancel button.",
+        "canBeClosed": "When <code>false</code>, hides the close button and blocks all close gestures. Use for loaders.",
+        "verificationText": "Text the user must type to confirm a destructive action.",
+        "data": "Data injected into the dynamic component via <code>MODAL_DIALOG_DATA</code>.",
+        "dockTabConfig": "Dock chip customization options when the modal is minimized."
+      }
     },
     "ref": {
       "title": "ModalDialogRef",
-      "description": "The reference returned by <code>open()</code>. Use it to close the modal, listen to events, and observe lifecycle changes."
+      "description": "The reference returned by <code>open()</code>. Use it to close the modal, listen to events, and observe lifecycle changes.",
+      "rows": {
+        "close": "Closes the modal and emits the optional result.",
+        "minimize": "Minimizes the modal to the dock.",
+        "restore": "Restores a minimized modal.",
+        "updateTitle": "Updates the modal title after it has been opened.",
+        "updateHeaderTemplate": "Replaces the modal header with a custom <code>TemplateRef</code> after opening.",
+        "updateFooterTemplate": "Replaces the modal footer with a custom <code>TemplateRef</code> after opening.",
+        "afterOpened": "Observable that emits once when the modal finishes opening.",
+        "afterClosed": "Observable that emits once when the modal closes.",
+        "backdropClick": "Observable that emits on each backdrop click.",
+        "keydownEvents": "Observable that emits keyboard events from the overlay.",
+        "stateChanged": "Observable that emits on every state transition.",
+        "closePrevented": "Observable that emits when close is blocked (e.g. <code>canBeClosed: false</code>).",
+        "id": "Unique identifier of the modal instance.",
+        "componentInstance": "Reference to the dynamically loaded component instance, or <code>null</code> if not yet rendered.",
+        "config": "The resolved configuration object for this modal.",
+        "state": "The current state of the modal (<code>ModalDialogState</code>).",
+        "isOpen": "<code>true</code> if the modal is open or in the process of opening.",
+        "isClosed": "<code>true</code> if the modal is closed or in the process of closing.",
+        "isMinimized": "<code>true</code> if the modal is currently minimized.",
+        "stateHistory": "Read-only array recording the sequence of states the modal has transitioned through."
+      }
     },
     "tokens": {
       "title": "Injection tokens",
-      "description": "Use these tokens to inject modal context inside a dynamic component loaded by the service."
+      "description": "Use these tokens to inject modal context inside a dynamic component loaded by the service.",
+      "rows": {
+        "MODAL_DIALOG_DATA": "Inject the typed data passed via the <code>data</code> config property into the dynamic component.",
+        "MODAL_DIALOG_REF": "Inject the <code>ModalDialogRef</code> instance inside the shell or dynamic component.",
+        "MODAL_DIALOG_CONFIG": "Inject the full, read-only configuration object of the current modal."
+      }
     },
     "custom-button": {
       "title": "ModalDialogCustomButton",
-      "description": "Inline button definition passed via <code>customButtons</code> in the config. Evaluated once at open time — use <code>ModalDialogActionsService</code> for reactive states."
+      "description": "Inline button definition passed via <code>customButtons</code> in the config. Evaluated once at open time — use <code>ModalDialogActionsService</code> for reactive states.",
+      "rows": {
+        "text": "Button label. Required.",
+        "color": "NUI color applied to the button.",
+        "variant": "Button variant: solid, outline, or ghost.",
+        "size": "NUI size applied to the button.",
+        "prefixIcon": "Remix Icon class for the prefix icon.",
+        "suffixIcon": "Remix Icon class for the suffix icon.",
+        "callback": "Click handler invoked with the optional <code>ModalDialogRef</code>. Required.",
+        "disabled": "Static disabled state, evaluated once at open time.",
+        "loading": "Static loading state, evaluated once at open time.",
+        "closeOnClick": "Whether the modal closes automatically after the callback runs.",
+        "class": "One or more additional CSS classes applied to the button element.",
+        "ariaLabel": "Accessible label for the button."
+      }
+    },
+    "minimized-tab": {
+      "title": "DockTabConfig",
+      "description": "Customization of the dock chip when the panel is minimized. Properties map to the <code>NuiDockItem</code> managed by <code>NuiDockService</code>.",
+      "rows": {
+        "prefixIcon": "Remix Icon class for the prefix icon displayed inside the dock chip.",
+        "suffixIcon": "Remix Icon class for the suffix icon. Only shown when <code>prefixIcon</code> is set. Useful for indicating additional status such as a notification dot.",
+        "hideSuffixIcon": "When <code>true</code>, hides the directional arrow icon that indicates the sidebar panel's original position.",
+        "label": "Title override for the dock chip. Falls back to the panel title if not set.",
+        "cssClass": "One or more additional CSS classes applied to the dock chip button."
+      }
     },
     "modal-action": {
       "title": "ModalDialogAction",
-      "description": "Footer action registered from a dynamic component via <code>ModalDialogActionsService</code>. Supports reactive <code>disabled</code> and <code>loading</code> via getter functions."
+      "description": "Footer action registered from a dynamic component via <code>ModalDialogActionsService</code>. Supports reactive <code>disabled</code> and <code>loading</code> via getter functions.",
+      "rows": {
+        "label": "Button label. Required.",
+        "prefixIcon": "Remix Icon class for the prefix icon.",
+        "suffixIcon": "Remix Icon class for the suffix icon.",
+        "color": "NUI color applied to the button.",
+        "variant": "Button variant: solid, outline, or ghost.",
+        "size": "NUI size applied to the button.",
+        "handler": "Click handler function. Required.",
+        "disabled": "Static boolean or reactive getter — re-evaluated every change detection cycle.",
+        "loading": "Static boolean or reactive getter — re-evaluated every change detection cycle.",
+        "loadingPosition": "Position of the loading spinner relative to the label: <code>start</code> or <code>end</code>.",
+        "width": "Button width mode: <code>auto</code> (content-sized) or <code>full</code> (full container width).",
+        "class": "One or more additional CSS classes applied to the button element."
+      }
     },
     "actions-service": {
       "title": "ModalDialogActionsService",
-      "description": "Injected by the dynamic component to register footer actions programmatically. A fresh instance is created per modal by <code>ModalDialogService</code>."
+      "description": "Injected by the dynamic component to register footer actions programmatically. A fresh instance is created per modal by <code>ModalDialogService</code>.",
+      "rows": {
+        "register": "Registers a complete set of footer actions, replacing any previously registered ones.",
+        "add": "Appends a single action to the existing set of footer actions.",
+        "update": "Partially updates the action at the given index.",
+        "clear": "Removes all registered footer actions.",
+        "registerFooterTemplate": "Registers a <code>TemplateRef</code> as the full footer, overriding actions. Lower priority than the directive."
+      }
     },
     "dock-tab-config": {
       "title": "dockTabConfig",
-      "description": "Customization of the chip shown in the <strong>NuiDock</strong> when the modal is minimized. Properties are mapped to the <code>NuiDockItem</code> managed by <code>NuiDockService</code>."
+      "description": "Customization of the chip shown in the <strong>NuiDock</strong> when the modal is minimized. Properties are mapped to the <code>NuiDockItem</code> managed by <code>NuiDockService</code>.",
+      "rows": {
+        "prefixIcon": "Remix Icon class for the prefix icon displayed inside the dock chip.",
+        "suffixIcon": "Remix Icon class for the suffix icon. Only shown when <code>prefixIcon</code> is set. Useful for indicating additional status such as a notification dot.",
+        "label": "Title override for the dock chip. Falls back to the modal title if not set.",
+        "cssClass": "One or more additional CSS classes applied to the dock chip button."
+      }
     },
     "footer-directive": {
       "title": "ModalDialogFooterDirective",

@@ -86,35 +86,148 @@
   "api": {
     "service": {
       "title": "SidebarPanelService",
-      "description": "Injectez <code>SidebarPanelService</code> pour ouvrir et gérer des panneaux latéraux. Toutes les méthodes renvoient un <code>SidebarPanelRef</code>."
+      "description": "Injectez <code>SidebarPanelService</code> pour ouvrir et gérer des panneaux latéraux. Toutes les méthodes renvoient un <code>SidebarPanelRef</code>.",
+      "rows": {
+        "open": "Ouvre un panneau avec un composant dynamique.",
+        "close": "Ferme le panneau ayant l’identifiant indiqué.",
+        "closeAll": "Ferme tous les panneaux ouverts.",
+        "getPanel": "Retourne l’élément de pile du panneau ayant l’identifiant indiqué, ou <code>undefined</code> s’il n’existe pas.",
+        "getAllPanels": "Retourne un tableau de tous les éléments de pile des panneaux actuellement ouverts.",
+        "openPanelsCount": "Accesseur retournant le nombre de panneaux actuellement ouverts."
+      }
     },
     "ref": {
       "title": "SidebarPanelRef",
-      "description": "La référence renvoyée par <code>open()</code>. Utilisez-la pour fermer le modal, écouter les événements et observer les changements du cycle de vie."
+      "description": "La référence renvoyée par <code>open()</code>. Utilisez-la pour fermer le modal, écouter les événements et observer les changements du cycle de vie.",
+      "rows": {
+        "id": "Identifiant unique de l’instance du panneau.",
+        "componentInstance": "Référence à l’instance du composant chargé dynamiquement, ou <code>null</code> si pas encore rendu.",
+        "config": "L’objet de configuration résolu pour ce panneau.",
+        "state": "L’état actuel du panneau (<code>SidebarPanelState</code>).",
+        "isOpen": "<code>true</code> si le panneau est ouvert ou en cours d’ouverture.",
+        "isClosed": "<code>true</code> si le panneau est fermé ou en cours de fermeture.",
+        "isMinimized": "<code>true</code> si le panneau est actuellement minimisé.",
+        "stateHistory": "Tableau en lecture seule enregistrant la séquence des états traversés par le panneau.",
+        "close": "Ferme le panneau de façon programmatique. Se résout quand l’animation de fermeture est terminée.",
+        "minimize": "Minimise le panneau dans le dock. Disponible uniquement quand <code>minimizable: true</code> est configuré.",
+        "restore": "Restaure le panneau depuis son état minimisé.",
+        "updateTitle": "Met à jour le titre du panneau après son ouverture.",
+        "updateHeaderTemplate": "Remplace l’en-tête du panneau par un <code>TemplateRef</code> personnalisé après l’ouverture.",
+        "updateFooterTemplate": "Remplace le pied de page du panneau par un <code>TemplateRef</code> personnalisé après l’ouverture.",
+        "canTransitionTo": "Retourne <code>true</code> si le panneau peut passer à l’état indiqué depuis son état actuel.",
+        "afterOpened": "Observable qui émet une fois quand le panneau est complètement ouvert.",
+        "afterClosed": "Observable qui émet une fois quand le panneau est fermé, avec la valeur de résultat optionnelle.",
+        "backdropClick": "Observable qui émet à chaque clic sur l’overlay de backdrop.",
+        "keydownEvents": "Observable qui émet les événements clavier provenant de l’intérieur du panneau.",
+        "stateChanged": "Observable qui émet chaque fois que le panneau passe à un nouvel état.",
+        "closePrevented": "Observable qui émet quand une tentative de fermeture est bloquée par le garde <code>preventClose</code>."
+      }
     },
     "tokens": {
       "title": "Jetons d’injection",
-      "description": "Utilisez ces jetons pour injecter le contexte du panneau latéral dans un composant dynamique chargé par le service."
+      "description": "Utilisez ces jetons pour injecter le contexte du panneau latéral dans un composant dynamique chargé par le service.",
+      "rows": {
+        "SIDEBAR_PANEL_DATA": "Injecte les données typées passées via la propriété de configuration <code>data</code> dans le composant dynamique.",
+        "SIDEBAR_PANEL_REF": "Injecte l’instance de <code>SidebarPanelRef</code> dans le shell ou le composant dynamique.",
+        "SIDEBAR_PANEL_CONFIG": "Injecte l’objet de configuration complet et en lecture seule du panneau actuel."
+      }
     },
     "config": {
       "title": "SidebarPanelConfig",
-      "description": "Objet de configuration passé à <code>open()</code>. Les propriétés sont fusionnées avec les valeurs globales de <code>provideNUI()</code>."
+      "description": "Objet de configuration passé à <code>open()</code>. Les propriétés sont fusionnées avec les valeurs globales de <code>provideNUI()</code>.",
+      "rows": {
+        "id": "Identifiant unique du panneau. Obligatoire quand <code>minimizable: true</code>.",
+        "position": "Bord du viewport depuis lequel le panneau coulisse.",
+        "size": "Taille prédéfinie du panneau appliquée via une variable CSS.",
+        "width": "Largeur CSS personnalisée pour les panneaux gauche/droite. Remplace <code>size</code>.",
+        "height": "Hauteur CSS personnalisée pour les panneaux haut/bas. Remplace <code>size</code>.",
+        "data": "Données arbitraires injectées dans le composant dynamique via <code>SIDEBAR_PANEL_DATA</code>.",
+        "contentTemplate": "<code>TemplateRef</code> Angular rendu comme corps du panneau.",
+        "htmlContent": "Chaîne HTML brute rendue comme corps du panneau. Assainie par le <code>DomSanitizer</code> d’Angular.",
+        "templateContext": "Objet de contexte passé à <code>contentTemplate</code> via <code>$implicit</code>.",
+        "title": "Titre affiché dans l’en-tête du panneau.",
+        "showHeader": "Indique si la barre d’en-tête du panneau est rendue.",
+        "showCloseButton": "Indique si le bouton de fermeture est affiché dans l’en-tête du panneau.",
+        "headerTemplate": "<code>TemplateRef</code> personnalisé qui remplace l’en-tête par défaut du panneau.",
+        "footerTemplate": "<code>TemplateRef</code> personnalisé rendu dans la zone de pied de page du panneau.",
+        "customButtons": "Définitions de boutons de pied de page inline. Évaluées une seule fois à l’ouverture.",
+        "hasBackdrop": "Indique si un overlay de backdrop est rendu derrière le panneau.",
+        "backdropClass": "Une ou plusieurs classes CSS appliquées à l’élément de backdrop.",
+        "closeOnBackdropClick": "Indique si un clic sur le backdrop ferme le panneau.",
+        "closeOnEscape": "Indique si l’appui sur la touche Échap ferme le panneau.",
+        "closeOnRouteChange": "Indique si le panneau se ferme automatiquement lors d’un changement de route.",
+        "preventClose": "Fonction garde appelée avant chaque tentative de fermeture. Retourner <code>false</code> pour bloquer.",
+        "autoFocus": "Indique si le focus se déplace dans le panneau à l’ouverture. Accepte <code>true</code>, <code>false</code> ou un sélecteur CSS.",
+        "mobileFullScreen": "Indique si le panneau s’étend en plein écran sur les appareils mobiles.",
+        "panelClass": "Une ou plusieurs classes CSS appliquées à l’élément hôte du panneau.",
+        "scrollStrategy": "Stratégie pour gérer le défilement de la page pendant que le panneau est ouvert.",
+        "animationDuration": "Durée des animations d’ouverture et de fermeture en millisecondes.",
+        "zIndex": "Valeur z-index de base pour le panneau et son backdrop.",
+        "minimizable": "Indique si le panneau peut être minimisé dans le dock.",
+        "dockTabConfig": "Options de personnalisation du chip du dock quand le panneau est minimisé.",
+        "allowMultiple": "Indique si plusieurs instances du panneau peuvent être ouvertes simultanément.",
+        "lazyLoad": "Indique si le contenu du panneau est rendu de façon différée à la première ouverture.",
+        "ariaLabel": "Valeur de l’attribut <code>aria-label</code> sur l’élément racine du panneau.",
+        "ariaDescribedBy": "ID de l’élément fournissant une description accessible pour le panneau."
+      }
     },
     "custom-button": {
       "title": "SidebarPanelCustomButton",
-      "description": "Définition d’un bouton inline passé via <code>customButtons</code> dans la configuration. Il est évalué une seule fois à l’ouverture du modal — utilisez <code>SidebarPanelActionsService</code> pour des états réactifs."
+      "description": "Définition d’un bouton inline passé via <code>customButtons</code> dans la configuration. Il est évalué une seule fois à l’ouverture du modal — utilisez <code>SidebarPanelActionsService</code> pour des états réactifs.",
+      "rows": {
+        "text": "Libellé du bouton. Obligatoire.",
+        "icon": "Classe Remix Icon affichée dans le bouton (ex. <code>ri-save-line</code>).",
+        "color": "Couleur NUI appliquée au bouton.",
+        "variant": "Variante du bouton : solid, outline ou ghost.",
+        "size": "Taille NUI appliquée au bouton.",
+        "callback": "Gestionnaire de clic appelé avec la <code>SidebarPanelRef</code>. Obligatoire.",
+        "disabled": "Indique si le bouton est rendu dans un état désactivé.",
+        "loading": "Indique si le bouton affiche un spinner de chargement.",
+        "class": "Une ou plusieurs classes CSS supplémentaires appliquées à l’élément bouton."
+      }
     },
     "minimized-tab": {
-      "title": "dockTabConfig",
-      "description": "Personnalisation du chip affiché dans le <strong>NuiDock</strong> lorsque le panneau est minimisé. Les propriétés sont mappées vers le <code>NuiDockItem</code> géré par <code>NuiDockService</code>."
+      "title": "DockTabConfig",
+      "description": "Personnalisation du chip affiché dans le <strong>NuiDock</strong> lorsque le panneau est minimisé. Les propriétés sont mappées vers le <code>NuiDockItem</code> géré par <code>NuiDockService</code>.",
+      "rows": {
+        "prefixIcon": "Classe Remix Icon pour l’icône de préfixe affichée dans le chip du dock.",
+        "suffixIcon": "Classe Remix Icon pour l’icône de suffixe. Affichée uniquement quand <code>prefixIcon</code> est défini. Utile pour indiquer un statut supplémentaire comme un point de notification.",
+        "hideSuffixIcon": "Quand <code>true</code>, masque l’icône de flèche directionnelle indiquant la position d’origine du panneau.",
+        "label": "Titre de remplacement pour le chip du dock. Utilise le titre du panneau si non défini.",
+        "cssClass": "Une ou plusieurs classes CSS supplémentaires appliquées au bouton du chip du dock."
+      }
     },
     "footer-actions": {
       "title": "SidebarPanelAction",
-      "description": "Définition des actions enregistrées depuis les composants enfants pour le footer du panneau"
+      "description": "Définition des actions enregistrées depuis les composants enfants pour le footer du panneau",
+      "rows": {
+        "id": "Identifiant unique optionnel de l’action. Utile pour les mises à jour ciblées via <code>updateById()</code>.",
+        "label": "Libellé du bouton. Obligatoire.",
+        "icon": "Classe Remix Icon affichée dans le bouton (ex. <code>ri-save-line</code>).",
+        "iconPosition": "Position de l’icône par rapport au libellé : <code>start</code> ou <code>end</code>.",
+        "color": "Couleur NUI appliquée au bouton.",
+        "variant": "Variante du bouton : solid, outline ou ghost.",
+        "size": "Taille NUI appliquée au bouton.",
+        "handler": "Fonction gestionnaire de clic. Obligatoire.",
+        "disabled": "Indique si le bouton est rendu dans un état désactivé.",
+        "loading": "Indique si le bouton affiche un spinner de chargement.",
+        "loadingPosition": "Position du spinner de chargement par rapport au libellé : <code>start</code> ou <code>end</code>.",
+        "class": "Une ou plusieurs classes CSS supplémentaires appliquées à l’élément bouton.",
+        "width": "Mode de largeur du bouton : <code>auto</code> (ajusté au contenu) ou <code>full</code> (largeur totale du conteneur)."
+      }
     },
     "footer-actions-service": {
       "title": "SidebarPanelActionsService",
-      "description": "Service permettant aux composants enfants d’enregistrer des actions dans le footer du panneau"
+      "description": "Service permettant aux composants enfants d’enregistrer des actions dans le footer du panneau",
+      "rows": {
+        "register": "Enregistre un ensemble complet d’actions de pied de page, remplaçant les existantes.",
+        "add": "Ajoute une seule action à l’ensemble d’actions de pied de page existant.",
+        "update": "Met à jour partiellement l’action à l’index indiqué.",
+        "updateById": "Met à jour partiellement l’action correspondant à l’identifiant indiqué.",
+        "clear": "Supprime toutes les actions de pied de page enregistrées.",
+        "setDisabled": "Définit l’état désactivé de l’action à l’index indiqué.",
+        "setLoading": "Définit l’état de chargement de l’action à l’index indiqué."
+      }
     },
     "footer-directive": {
       "title": "SidebarPanelFooterDirective",

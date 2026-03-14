@@ -86,35 +86,148 @@
   "api": {
     "service": {
       "title": "SidebarPanelService",
-      "description": "Injizieren Sie <code>SidebarPanelService</code>, um Seitenleisten-Panels zu öffnen und zu verwalten. Alle Methoden geben ein <code>SidebarPanelRef</code> zurück."
+      "description": "Injizieren Sie <code>SidebarPanelService</code>, um Seitenleisten-Panels zu öffnen und zu verwalten. Alle Methoden geben ein <code>SidebarPanelRef</code> zurück.",
+      "rows": {
+        "open": "Öffnet ein Panel mit einer dynamischen Komponente.",
+        "close": "Schließt das Panel mit der angegebenen ID.",
+        "closeAll": "Schließt alle geöffneten Panels.",
+        "getPanel": "Gibt das Stack-Element des Panels mit der angegebenen ID zurück, oder <code>undefined</code> wenn nicht gefunden.",
+        "getAllPanels": "Gibt ein Array aller aktuell geöffneten Panel-Stack-Elemente zurück.",
+        "openPanelsCount": "Getter, der die Anzahl der aktuell geöffneten Panels zurückgibt."
+      }
     },
     "ref": {
       "title": "SidebarPanelRef",
-      "description": "Die von <code>open()</code> zurückgegebene Referenz. Verwenden Sie sie, um das Modal zu schließen, auf Ereignisse zu hören und Änderungen im Lebenszyklus zu beobachten."
+      "description": "Die von <code>open()</code> zurückgegebene Referenz. Verwenden Sie sie, um das Modal zu schließen, auf Ereignisse zu hören und Änderungen im Lebenszyklus zu beobachten.",
+      "rows": {
+        "id": "Eindeutiger Bezeichner der Panel-Instanz.",
+        "componentInstance": "Referenz auf die dynamisch geladene Komponenteninstanz, oder <code>null</code> wenn noch nicht gerendert.",
+        "config": "Das aufgelöste Konfigurationsobjekt für dieses Panel.",
+        "state": "Der aktuelle Zustand des Panels (<code>SidebarPanelState</code>).",
+        "isOpen": "<code>true</code>, wenn das Panel geöffnet ist oder gerade geöffnet wird.",
+        "isClosed": "<code>true</code>, wenn das Panel geschlossen ist oder gerade geschlossen wird.",
+        "isMinimized": "<code>true</code>, wenn das Panel aktuell minimiert ist.",
+        "stateHistory": "Schreibgeschütztes Array, das die Abfolge der Zustände aufzeichnet, die das Panel durchlaufen hat.",
+        "close": "Schließt das Panel programmatisch. Wird aufgelöst, wenn die Schließanimation abgeschlossen ist.",
+        "minimize": "Minimiert das Panel in den Dock. Nur verfügbar, wenn <code>minimizable: true</code> in der Konfiguration gesetzt ist.",
+        "restore": "Stellt das Panel aus dem minimierten Zustand wieder her.",
+        "updateTitle": "Aktualisiert den Panel-Titel, nachdem das Panel geöffnet wurde.",
+        "updateHeaderTemplate": "Ersetzt den Panel-Header durch ein benutzerdefiniertes <code>TemplateRef</code> nach dem Öffnen.",
+        "updateFooterTemplate": "Ersetzt den Panel-Footer durch ein benutzerdefiniertes <code>TemplateRef</code> nach dem Öffnen.",
+        "canTransitionTo": "Gibt <code>true</code> zurück, wenn das Panel aus seinem aktuellen Zustand in den angegebenen Zustand wechseln kann.",
+        "afterOpened": "Observable, das einmalig emittiert, wenn das Panel vollständig geöffnet wurde.",
+        "afterClosed": "Observable, das einmalig emittiert, wenn das Panel geschlossen wurde, mit dem optionalen Ergebniswert.",
+        "backdropClick": "Observable, das bei jedem Klick auf den Backdrop-Overlay emittiert.",
+        "keydownEvents": "Observable, das Tastaturereignisse ausgibt, die innerhalb des Panels entstehen.",
+        "stateChanged": "Observable, das jedes Mal emittiert, wenn das Panel in einen neuen Zustand wechselt.",
+        "closePrevented": "Observable, das emittiert, wenn ein Schließversuch durch den <code>preventClose</code>-Guard blockiert wird."
+      }
     },
     "tokens": {
       "title": "Injection-Tokens",
-      "description": "Verwenden Sie diese Tokens, um den Kontext des Seitenleisten-Panels innerhalb einer dynamischen Komponente zu injizieren, die vom Service geladen wurde."
+      "description": "Verwenden Sie diese Tokens, um den Kontext des Seitenleisten-Panels innerhalb einer dynamischen Komponente zu injizieren, die vom Service geladen wurde.",
+      "rows": {
+        "SIDEBAR_PANEL_DATA": "Injiziert die typisierten Daten, die über die Konfigurationseigenschaft <code>data</code> übergeben werden, in die dynamische Komponente.",
+        "SIDEBAR_PANEL_REF": "Injiziert die <code>SidebarPanelRef</code>-Instanz in den Shell oder die dynamische Komponente.",
+        "SIDEBAR_PANEL_CONFIG": "Injiziert das vollständige, schreibgeschützte Konfigurationsobjekt des aktuellen Panels."
+      }
     },
     "config": {
       "title": "SidebarPanelConfig",
-      "description": "Konfigurationsobjekt, das an <code>open()</code> übergeben wird. Die Eigenschaften werden mit den globalen Werten von <code>provideNUI()</code> zusammengeführt."
+      "description": "Konfigurationsobjekt, das an <code>open()</code> übergeben wird. Die Eigenschaften werden mit den globalen Werten von <code>provideNUI()</code> zusammengeführt.",
+      "rows": {
+        "id": "Eindeutiger Panel-Bezeichner. Erforderlich, wenn <code>minimizable: true</code>.",
+        "position": "Bildschirmrand, von dem das Panel hereingleitet.",
+        "size": "Vordefinierte Panelgröße, die über eine CSS-Variable angewendet wird.",
+        "width": "Benutzerdefinierte CSS-Breite für links/rechts positionierte Panels. Überschreibt <code>size</code>.",
+        "height": "Benutzerdefinierte CSS-Höhe für oben/unten positionierte Panels. Überschreibt <code>size</code>.",
+        "data": "Beliebige Daten, die über <code>SIDEBAR_PANEL_DATA</code> in die dynamische Komponente injiziert werden.",
+        "contentTemplate": "Angular-<code>TemplateRef</code>, das als Panel-Inhalt gerendert wird.",
+        "htmlContent": "Einfacher HTML-String, der als Panel-Inhalt gerendert wird. Wird vom <code>DomSanitizer</code> von Angular bereinigt.",
+        "templateContext": "Kontextobjekt, das über <code>$implicit</code> an <code>contentTemplate</code> übergeben wird.",
+        "title": "Titel, der in der Panel-Kopfzeile angezeigt wird.",
+        "showHeader": "Gibt an, ob die Panel-Kopfzeile gerendert wird.",
+        "showCloseButton": "Gibt an, ob die Schließen-Schaltfläche in der Panel-Kopfzeile angezeigt wird.",
+        "headerTemplate": "Benutzerdefiniertes <code>TemplateRef</code>, das die Standard-Panel-Kopfzeile ersetzt.",
+        "footerTemplate": "Benutzerdefiniertes <code>TemplateRef</code>, das im Panel-Fußbereich gerendert wird.",
+        "customButtons": "Inline-Fußzeilen-Schaltflächendefinitionen. Werden einmalig beim Öffnen ausgewertet.",
+        "hasBackdrop": "Gibt an, ob ein Backdrop-Overlay hinter dem Panel gerendert wird.",
+        "backdropClass": "Eine oder mehrere CSS-Klassen, die auf das Backdrop-Element angewendet werden.",
+        "closeOnBackdropClick": "Gibt an, ob ein Klick auf den Backdrop das Panel schließt.",
+        "closeOnEscape": "Gibt an, ob das Drücken der Escape-Taste das Panel schließt.",
+        "closeOnRouteChange": "Gibt an, ob das Panel beim Routenwechsel automatisch geschlossen wird.",
+        "preventClose": "Guard-Funktion, die vor jedem Schließversuch aufgerufen wird. Gibt <code>false</code> zurück, um zu blockieren.",
+        "autoFocus": "Gibt an, ob der Fokus beim Öffnen in das Panel verschoben wird. Akzeptiert <code>true</code>, <code>false</code> oder einen CSS-Selektor.",
+        "mobileFullScreen": "Gibt an, ob das Panel auf mobilen Endgeräten im Vollbildmodus angezeigt wird.",
+        "panelClass": "Eine oder mehrere CSS-Klassen, die auf das Panel-Host-Element angewendet werden.",
+        "scrollStrategy": "Strategie für den Umgang mit dem Seiten-Scroll, während das Panel geöffnet ist.",
+        "animationDuration": "Dauer der Öffnungs- und Schließanimationen in Millisekunden.",
+        "zIndex": "Basis-z-index-Wert für das Panel und seinen Backdrop.",
+        "minimizable": "Gibt an, ob das Panel in den Dock minimiert werden kann.",
+        "dockTabConfig": "Anpassungsoptionen für den Dock-Chip, wenn das Panel minimiert ist.",
+        "allowMultiple": "Gibt an, ob mehrere Panel-Instanzen gleichzeitig geöffnet sein können.",
+        "lazyLoad": "Gibt an, ob der Panel-Inhalt beim ersten Öffnen verzögert gerendert wird.",
+        "ariaLabel": "Wert des <code>aria-label</code>-Attributs am Panel-Root-Element.",
+        "ariaDescribedBy": "ID des Elements, das eine barrierefreie Beschreibung für das Panel bereitstellt."
+      }
     },
     "custom-button": {
       "title": "SidebarPanelCustomButton",
-      "description": "Inline-Button-Definition, die über <code>customButtons</code> in der Konfiguration übergeben wird. Sie wird nur einmal beim Öffnen des Modals ausgewertet — verwenden Sie <code>SidebarPanelActionsService</code> für reaktive Zustände."
+      "description": "Inline-Button-Definition, die über <code>customButtons</code> in der Konfiguration übergeben wird. Sie wird nur einmal beim Öffnen des Modals ausgewertet — verwenden Sie <code>SidebarPanelActionsService</code> für reaktive Zustände.",
+      "rows": {
+        "text": "Schaltflächenbeschriftung. Erforderlich.",
+        "icon": "Remix-Icon-Klasse, die in der Schaltfläche angezeigt wird (z. B. <code>ri-save-line</code>).",
+        "color": "NUI-Farbe, die auf die Schaltfläche angewendet wird.",
+        "variant": "Schaltflächenvariante: solid, outline oder ghost.",
+        "size": "NUI-Größe, die auf die Schaltfläche angewendet wird.",
+        "callback": "Klick-Handler, der mit der <code>SidebarPanelRef</code> aufgerufen wird. Erforderlich.",
+        "disabled": "Gibt an, ob die Schaltfläche im deaktivierten Zustand gerendert wird.",
+        "loading": "Gibt an, ob die Schaltfläche einen Lade-Spinner anzeigt.",
+        "class": "Eine oder mehrere zusätzliche CSS-Klassen, die auf das Schaltflächenelement angewendet werden."
+      }
     },
     "minimized-tab": {
-      "title": "dockTabConfig",
-      "description": "Anpassung des Chips im <strong>NuiDock</strong>, wenn das Panel minimiert wird. Die Eigenschaften werden dem <code>NuiDockItem</code> zugeordnet, das von <code>NuiDockService</code> verwaltet wird."
+      "title": "DockTabConfig",
+      "description": "Anpassung des Chips im <strong>NuiDock</strong>, wenn das Panel minimiert wird. Die Eigenschaften werden dem <code>NuiDockItem</code> zugeordnet, das von <code>NuiDockService</code> verwaltet wird.",
+      "rows": {
+        "prefixIcon": "Remix-Icon-Klasse für das Präfix-Symbol, das im Dock-Chip angezeigt wird.",
+        "suffixIcon": "Remix-Icon-Klasse für das Suffix-Symbol. Wird nur angezeigt, wenn <code>prefixIcon</code> gesetzt ist. Nützlich zur Anzeige eines zusätzlichen Status wie einem Benachrichtigungspunkt.",
+        "hideSuffixIcon": "Wenn <code>true</code>, wird das Richtungspfeil-Symbol ausgeblendet, das die ursprüngliche Position des Seitenbereichs anzeigt.",
+        "label": "Titelüberschreibung für den Dock-Chip. Fällt auf den Panel-Titel zurück, wenn nicht gesetzt.",
+        "cssClass": "Eine oder mehrere zusätzliche CSS-Klassen, die auf den Dock-Chip-Button angewendet werden."
+      }
     },
     "footer-actions": {
       "title": "SidebarPanelAction",
-      "description": "Definition von Aktionen, die von Kindkomponenten für den Footer des Panels registriert werden"
+      "description": "Definition von Aktionen, die von Kindkomponenten für den Footer des Panels registriert werden",
+      "rows": {
+        "id": "Optionaler eindeutiger Bezeichner der Aktion. Nützlich für gezielte Aktualisierungen über <code>updateById()</code>.",
+        "label": "Schaltflächenbeschriftung. Erforderlich.",
+        "icon": "Remix-Icon-Klasse, die in der Schaltfläche angezeigt wird (z. B. <code>ri-save-line</code>).",
+        "iconPosition": "Position des Symbols relativ zur Beschriftung: <code>start</code> oder <code>end</code>.",
+        "color": "NUI-Farbe, die auf die Schaltfläche angewendet wird.",
+        "variant": "Schaltflächenvariante: solid, outline oder ghost.",
+        "size": "NUI-Größe, die auf die Schaltfläche angewendet wird.",
+        "handler": "Klick-Handler-Funktion. Erforderlich.",
+        "disabled": "Gibt an, ob die Schaltfläche im deaktivierten Zustand gerendert wird.",
+        "loading": "Gibt an, ob die Schaltfläche einen Lade-Spinner anzeigt.",
+        "loadingPosition": "Position des Lade-Spinners relativ zur Beschriftung: <code>start</code> oder <code>end</code>.",
+        "class": "Eine oder mehrere zusätzliche CSS-Klassen, die auf das Schaltflächenelement angewendet werden.",
+        "width": "Schaltflächenbreite: <code>auto</code> (inhaltsbasiert) oder <code>full</code> (volle Containerbreite)."
+      }
     },
     "footer-actions-service": {
       "title": "SidebarPanelActionsService",
-      "description": "Service, mit dem Kindkomponenten Aktionen im Footer des Panels registrieren können"
+      "description": "Service, mit dem Kindkomponenten Aktionen im Footer des Panels registrieren können",
+      "rows": {
+        "register": "Registriert einen vollständigen Satz von Footer-Aktionen und ersetzt dabei alle zuvor registrierten.",
+        "add": "Fügt eine einzelne Aktion dem bestehenden Satz von Footer-Aktionen hinzu.",
+        "update": "Aktualisiert die Aktion am angegebenen Index partiell.",
+        "updateById": "Aktualisiert die Aktion mit der angegebenen ID partiell.",
+        "clear": "Entfernt alle registrierten Footer-Aktionen.",
+        "setDisabled": "Setzt den deaktivierten Zustand der Aktion am angegebenen Index.",
+        "setLoading": "Setzt den Ladezustand der Aktion am angegebenen Index."
+      }
     },
     "footer-directive": {
       "title": "SidebarPanelFooterDirective",
