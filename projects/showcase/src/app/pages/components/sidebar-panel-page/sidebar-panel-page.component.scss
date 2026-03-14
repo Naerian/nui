@@ -17,12 +17,3 @@
     backdrop-filter 300ms ease-in-out;
 }
 
-// ==========================================
-// BOTÓN FLOTANTE PERSONALIZADO
-// ==========================================
-// IMPORTANTE: Los estilos de `.floating-chat-button` se han movido a styles.scss (global)
-// porque los paneles minimizados sobreviven a la destrucción de este componente.
-// Los `::ng-deep` en SCSS de componente desaparecen cuando Angular destruye ese componente,
-// haciendo que el botón pierda su `position: fixed` y quede invisible fuera del viewport.
-//
-// Ver: projects/showcase/src/styles.scss → sección "SIDEBAR PANEL - ESTILOS GLOBALES"

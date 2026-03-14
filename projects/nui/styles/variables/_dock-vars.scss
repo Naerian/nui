@@ -1,0 +1,25 @@
+// ========================================
+// DOCK - Tokens & Variables
+// ========================================
+
+// TOKENS (Sass)
+$dock-z-index: 1060 !default;
+$dock-offset: 16px !default;
+$dock-border-radius: 0.5rem !default;
+$dock-max-width: none !default;
+$dock-separator-height: 24px !default;
+
+// MIXIN (CSS Custom Properties)
+@mixin nui-dock-vars {
+  // Layer
+  --nui-dock-z-index: #{$dock-z-index};
+
+  // Position
+  --nui-dock-offset: #{$dock-offset};
+
+  // Container
+  --nui-dock-max-width: #{$dock-max-width};
+
+  // Chip
+  --nui-dock-border-radius: #{$dock-border-radius};
+}

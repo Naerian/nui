@@ -18,8 +18,6 @@ $modal-dialog-title-weight: 600 !default;
 
 $modal-dialog-shadow: var(--nui-box-shadow-xl) !default;
 
-$modal-dialog-dock-border-radius: 0.5rem !default;
-
 // MIXIN (CSS Custom Properties)
 @mixin nui-modal-dialog-vars {
   // Layout
@@ -41,7 +39,4 @@ $modal-dialog-dock-border-radius: 0.5rem !default;
 
   // Shadow
   --nui-modal-dialog-shadow: #{$modal-dialog-shadow};
-
-  // Dock chip
-  --nui-modal-dialog-dock-border-radius: #{$modal-dialog-dock-border-radius};
 }

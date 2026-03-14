@@ -26,7 +26,7 @@ import {
 import { ModalDialogRef } from './modal-dialog-ref';
 import { MODAL_DIALOG_REF } from './services/modal-dialog.service';
 import { ModalDialogActionsService } from './services/modal-dialog-actions.service';
-import { ModalDialogDockService } from './services/modal-dialog-dock.service';
+import { NuiDockService } from '../dock/nui-dock.service';
 import { modalDialogAnimation } from './animations/modal-dialog.animations';
 import { NuiI18nService } from '../../i18n';
 
@@ -48,7 +48,7 @@ export class ModalDialogComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly _cdr = inject(ChangeDetectorRef);
   private readonly _focusTrapFactory = inject(FocusTrapFactory);
   private readonly _elementRef = inject(ElementRef);
-  private readonly _dockService = inject(ModalDialogDockService);
+  private readonly _dockService = inject(NuiDockService);
   private readonly _i18nService = inject(NuiI18nService);
 
   protected readonly _i18n = computed(() => this._i18nService.translations());
@@ -88,22 +88,28 @@ export class ModalDialogComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostBinding('attr.aria-labelledby')
   get hostAriaLabelledBy(): string | null {
-    return this.config.title && !this.config.hideDefaultHeader
-      ? `${this.instanceId}-title`
-      : null;
+    return this.config.title && !this.config.hideDefaultHeader ? `${this.instanceId}-title` : null;
   }
 
   @HostBinding('style.width')
-  get hostWidth(): string { return this.config.width ?? '500px'; }
+  get hostWidth(): string {
+    return this.config.width ?? '500px';
+  }
 
   @HostBinding('style.min-width')
-  get hostMinWidth(): string | null { return this.config.minWidth ?? null; }
+  get hostMinWidth(): string | null {
+    return this.config.minWidth ?? null;
+  }
 
   @HostBinding('style.max-width')
-  get hostMaxWidth(): string | null { return this.config.maxWidth ?? null; }
+  get hostMaxWidth(): string | null {
+    return this.config.maxWidth ?? null;
+  }
 
   @HostBinding('style.min-height')
-  get hostMinHeight(): string | null { return this.config.minHeight ?? null; }
+  get hostMinHeight(): string | null {
+    return this.config.minHeight ?? null;
+  }
 
   protected get footerActions(): ModalDialogAction[] {
     if (this.config.customButtons && this.config.customButtons.length > 0) {
@@ -126,16 +132,24 @@ export class ModalDialogComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   @HostBinding('style.border-left')
-  get hostBorderLeft(): string | null { return this._statusBarBorder('left'); }
+  get hostBorderLeft(): string | null {
+    return this._statusBarBorder('left');
+  }
 
   @HostBinding('style.border-right')
-  get hostBorderRight(): string | null { return this._statusBarBorder('right'); }
+  get hostBorderRight(): string | null {
+    return this._statusBarBorder('right');
+  }
 
   @HostBinding('style.border-top')
-  get hostBorderTop(): string | null { return this._statusBarBorder('top'); }
+  get hostBorderTop(): string | null {
+    return this._statusBarBorder('top');
+  }
 
   @HostBinding('style.border-bottom')
-  get hostBorderBottom(): string | null { return this._statusBarBorder('bottom'); }
+  get hostBorderBottom(): string | null {
+    return this._statusBarBorder('bottom');
+  }
 
   private _statusBarBorder(side: 'left' | 'right' | 'top' | 'bottom'): string | null {
     const sb = this.config.statusBar;
@@ -220,7 +234,7 @@ export class ModalDialogComponent implements OnInit, AfterViewInit, OnDestroy {
     this._focusTrap?.destroy();
     this._clearTimeout();
     this._clearGestures();
-    if (this.modalRef?.isMinimized) this._dockService.removeItem(this.modalRef.id);
+    if (this.modalRef?.isMinimized) this._dockService.remove(this.modalRef.id);
     this._restoreScroll();
     if (
       this._previouslyFocusedElement &&
@@ -245,19 +259,24 @@ export class ModalDialogComponent implements OnInit, AfterViewInit, OnDestroy {
     const duration = this.config.animationDuration ?? 220;
     setTimeout(() => {
       this.modalRef.minimize();
-      this._dockService.addItem({
+      const dock = this.config.dockTabConfig;
+      this._dockService.add({
         id: this.modalRef.id,
-        title: this.config.title ?? 'Modal',
-        icon: this.config.iconTitle,
+        type: 'modal',
+        title: dock?.label ?? this.config.title ?? 'Modal',
+        prefixIcon: dock?.prefixIcon ?? this.config.iconTitle,
+        suffixIcon: dock?.suffixIcon,
+        hideSuffixIcon: dock?.hideSuffixIcon ?? false,
         color: this.config.color,
-        restoreCallback: () => this._restore(),
+        cssClass: dock?.cssClass,
+        restore: () => this._restore(),
       });
       this._cdr.detectChanges();
     }, duration);
   }
 
   private _restore(): void {
-    this._dockService.removeItem(this.modalRef.id);
+    this._dockService.remove(this.modalRef.id);
     this.modalRef.restore();
     this._cdr.detectChanges();
     requestAnimationFrame(() => {
@@ -282,10 +301,14 @@ export class ModalDialogComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   @HostListener('mouseenter')
-  onHostMouseEnter(): void { this.pauseTimeout(); }
+  onHostMouseEnter(): void {
+    this.pauseTimeout();
+  }
 
   @HostListener('mouseleave')
-  onHostMouseLeave(): void { this.resumeTimeout(); }
+  onHostMouseLeave(): void {
+    this.resumeTimeout();
+  }
 
   private _startTimeout(): void {
     const timeout = this.config.timeout!;
@@ -323,9 +346,9 @@ export class ModalDialogComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private _subscribeToStateChanges(): void {
-    this.modalRef?.stateChanged().subscribe((state) => {
+    this.modalRef?.stateChanged().subscribe(state => {
       if (state === 'open' && this.animationState() === 'hidden') {
-        this._dockService.removeItem(this.modalRef.id);
+        this._dockService.remove(this.modalRef.id);
         requestAnimationFrame(() => {
           this.animationState.set('visible');
           this._cdr.detectChanges();
@@ -381,13 +404,25 @@ export class ModalDialogComponent implements OnInit, AfterViewInit, OnDestroy {
     const dx = e.changedTouches[0].clientX - this._touchStartX;
     const dy = e.changedTouches[0].clientY - this._touchStartY;
     const gestures = this.config.gestures!;
-    if (gestures.swipeDown?.enabled && dy > (gestures.swipeDown.threshold ?? 100) && Math.abs(dx) < 50) {
+    if (
+      gestures.swipeDown?.enabled &&
+      dy > (gestures.swipeDown.threshold ?? 100) &&
+      Math.abs(dx) < 50
+    ) {
       this._triggerHaptic();
       this.modalRef.close({ confirmed: false, data: null, reason: 'cancelled' });
-    } else if (gestures.swipeLeft?.enabled && dx < -(gestures.swipeLeft.threshold ?? 100) && Math.abs(dy) < 50) {
+    } else if (
+      gestures.swipeLeft?.enabled &&
+      dx < -(gestures.swipeLeft.threshold ?? 100) &&
+      Math.abs(dy) < 50
+    ) {
       this._triggerHaptic();
       this.modalRef.close({ confirmed: false, data: null, reason: 'cancelled' });
-    } else if (gestures.swipeRight?.enabled && dx > (gestures.swipeRight.threshold ?? 100) && Math.abs(dy) < 50) {
+    } else if (
+      gestures.swipeRight?.enabled &&
+      dx > (gestures.swipeRight.threshold ?? 100) &&
+      Math.abs(dy) < 50
+    ) {
       this._triggerHaptic();
       this.modalRef.close({ confirmed: true, data: this.config.data ?? null, reason: 'confirmed' });
     }
@@ -413,12 +448,12 @@ export class ModalDialogComponent implements OnInit, AfterViewInit, OnDestroy {
       verification: 'var(--nui-success)',
     };
     return this.config.modalType
-      ? colorMap[this.config.modalType] ?? 'var(--nui-primary)'
+      ? (colorMap[this.config.modalType] ?? 'var(--nui-primary)')
       : 'var(--nui-primary)';
   }
 
   private _customButtonsToActions(buttons: ModalDialogCustomButton[]): ModalDialogAction[] {
-    return buttons.map((btn) => ({
+    return buttons.map(btn => ({
       label: btn.text,
       prefixIcon: btn.prefixIcon,
       suffixIcon: btn.suffixIcon,

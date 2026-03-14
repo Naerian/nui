@@ -866,12 +866,12 @@ sidebarPanelService.open(AssistantComponent, {
 
 ### Customización de Pestañas Minimizadas
 
-Personaliza completamente la apariencia de las pestañas minimizadas mediante la propiedad `minimizedTabCustomization`. Puedes cambiar el icono, agregar texto, aplicar CSS personalizado o incluso usar un template completamente custom.
+Personaliza completamente la apariencia de las pestañas minimizadas mediante la propiedad `dockTabConfig`. Puedes cambiar el icono, agregar texto, aplicar CSS personalizado o incluso usar un template completamente custom.
 
-#### Interface MinimizedTabCustomization
+#### Interface dockTabConfig
 
 ```typescript
-interface MinimizedTabCustomization {
+interface dockTabConfig {
   /**
    * Icono personalizado (clase de Remix Icon)
    * Reemplaza el icono de flecha por defecto
@@ -929,7 +929,7 @@ sidebarPanelService.open(ChatComponent, {
   id: 'chat-support',
   title: 'Chat de Soporte',
   minimizable: true,
-  minimizedTabCustomization: {
+  dockTabConfig: {
     icon: 'ri-customer-service-line', // Icono de headset
     label: 'Soporte'                  // Texto junto al icono
   }
@@ -948,7 +948,7 @@ sidebarPanelService.open(ChatComponent, {
   title: 'Chat en Vivo',
   minimizable: true,
   position: 'right',
-  minimizedTabCustomization: {
+  dockTabConfig: {
     icon: 'ri-question-answer-line',
     label: 'Chat',
     cssClass: 'floating-chat-button',
@@ -1032,7 +1032,7 @@ Combina pestañas agrupadas normales con botones flotantes independientes:
 sidebarPanelService.open(ChatComponent, {
   id: 'chat',
   minimizable: true,
-  minimizedTabCustomization: {
+  dockTabConfig: {
     icon: 'ri-chat-3-line',
     label: 'Chat',
     cssClass: 'floating-chat-button',
@@ -1044,7 +1044,7 @@ sidebarPanelService.open(ChatComponent, {
 sidebarPanelService.open(NotificationsComponent, {
   id: 'notifications',
   minimizable: true,
-  minimizedTabCustomization: {
+  dockTabConfig: {
     icon: 'ri-notification-3-line',
     label: 'Notificaciones'
     // Sin standalone: se agrupa con otras pestañas en el borde
@@ -1055,7 +1055,7 @@ sidebarPanelService.open(NotificationsComponent, {
 sidebarPanelService.open(SettingsComponent, {
   id: 'settings',
   minimizable: true,
-  minimizedTabCustomization: {
+  dockTabConfig: {
     icon: 'ri-settings-3-line',
     label: 'Ajustes'
     // Sin standalone: se agrupa junto a notificaciones
@@ -1090,7 +1090,7 @@ openWithCustomTemplate(): void {
   this.sidebarPanelService.open(MessagesComponent, {
     id: 'messages',
     minimizable: true,
-    minimizedTabCustomization: {
+    dockTabConfig: {
       template: this.customTabTemplate,
       standalone: true  // Para posicionamiento libre
     }
@@ -1112,7 +1112,7 @@ openWithCustomTemplate(): void {
 
 **Pestañas Agrupadas (standalone: false - default):**
 ```typescript
-minimizedTabCustomization: {
+dockTabConfig: {
   icon: 'ri-notification-line',
   label: 'Notificaciones'
   // Sin standalone: se agrupa con otras en el borde
@@ -1126,7 +1126,7 @@ minimizedTabCustomization: {
 
 **Pestañas Standalone (standalone: true):**
 ```typescript
-minimizedTabCustomization: {
+dockTabConfig: {
   icon: 'ri-chat-line',
   label: 'Chat',
   cssClass: 'floating-chat-button',

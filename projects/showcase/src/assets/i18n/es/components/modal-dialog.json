@@ -106,6 +106,10 @@
       "title": "ModalDialogActionsService",
       "description": "Inyectado por el componente dinámico para registrar acciones de footer programáticamente. <code>ModalDialogService</code> crea una instancia nueva por cada modal."
     },
+    "dock-tab-config": {
+      "title": "dockTabConfig",
+      "description": "Customización del chip mostrado en el <strong>NuiDock</strong> cuando el modal está minimizado. Las propiedades se mapean al <code>NuiDockItem</code> gestionado por <code>NuiDockService</code>."
+    },
     "footer-directive": {
       "title": "ModalDialogFooterDirective",
       "description": "Directiva aplicada a un <code>ng-template</code> dentro del componente dinámico. Proyecta el template completo en el footer del modal con bindings nativos de Angular.",
@@ -122,8 +126,8 @@
       "description": "Controla dimensiones, espaciado, tipografía y capa (z-index) del modal mediante estas variables CSS."
     },
     "dock": {
-      "title": "Tokens del dock",
-      "description": "Personaliza la apariencia de los chips del dock de modales minimizados."
+      "title": "Tokens del NuiDock",
+      "description": "Personaliza la apariencia del dock unificado de elementos minimizados (modales y paneles laterales). Los tokens <code>--nui-dock-*</code> controlan los chips; usa <code>--nui-dock-z-index</code> y <code>--nui-dock-offset</code> para posicionamiento."
     }
   },
   "i18n": {

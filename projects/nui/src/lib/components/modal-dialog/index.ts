@@ -1,10 +1,10 @@
-﻿// ── Componente shell ──────────────────────────────────────────────────────────
+// ── Componente shell ──────────────────────────────────────────────────────────
 export { ModalDialogComponent } from './modal-dialog.component';
 
 // ── Componente de contenido simple ────────────────────────────────────────────
 export { ModalDialogSimpleContentComponent } from './modal-dialog-simple-content.component';
 
-// ── Servicio principal  + tokens ──────────────────────────────────────────────
+// ── Servicio principal + tokens ───────────────────────────────────────────────
 export {
   ModalDialogService,
   MODAL_DIALOG_DATA,
@@ -17,10 +17,6 @@ export { ModalDialogRef } from './modal-dialog-ref';
 
 // ── Servicio de acciones del footer ──────────────────────────────────────────
 export { ModalDialogActionsService } from './services/modal-dialog-actions.service';
-
-// ── Dock (modal minimizado) ───────────────────────────────────────────────────
-export { ModalDialogDockService } from './services/modal-dialog-dock.service';
-export { ModalDialogDockComponent } from './dock/modal-dialog-dock.component';
 
 // ── Directiva del footer ──────────────────────────────────────────────────────
 export { ModalDialogFooterDirective } from './directives/modal-dialog-footer.directive';
@@ -45,9 +41,8 @@ export {
   ModalDialogAction,
   ModalDialogCustomButton,
   ModalDialogStackItem,
-  ModalDialogDockItem,
   ModalDialogConfig,
 } from './models/modal-dialog.model';
 
-// -- i18n ---------------------------------------------------------------
+// ── i18n ──────────────────────────────────────────────────────────────────────
 export { ModalDialogI18n, DEFAULT_MODAL_DIALOG_I18N } from './models/modal-dialog-i18n.model';

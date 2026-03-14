@@ -437,8 +437,8 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
   }
 
   /**
-   * Abre un panel de chat con pestaña personalizada
-   * Demuestra customización completa: icono, label, CSS class y standalone para botón flotante
+   * Abre un panel de chat con chip personalizado en el NuiDock
+   * Demuestra customización del chip: icono, label y clase CSS
    */
   openChatSupportPanel(): void {
     this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
@@ -447,15 +447,13 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       minimizable: true,
       position: 'right',
       size: 'md',
-      minimizedTabCustomization: {
-        icon: 'ri-customer-service-line', // Icono de soporte
-        label: 'Soporte', // Texto del botón
-        cssClass: 'floating-chat-button', // Clase CSS para posición flotante
-        standalone: true, // Permite posicionamiento libre (bottom-right)
+      dockTabConfig: {
+        prefixIcon: 'ri-customer-service-line',
+        label: 'Soporte',
       },
       data: {
         message:
-          'Panel de chat con pestaña personalizada. Minimiza este panel para ver el botón flotante personalizado en la esquina inferior derecha. El modo standalone permite posicionamiento CSS libre sin restricciones.',
+          'Panel de chat con chip personalizado. Minimiza este panel para ver el chip con icono y etiqueta personalizados en el dock inferior.',
         showActions: false,
       },
     });

@@ -1,0 +1,110 @@
+// ========================================
+// DOCK - Global component styles
+// ========================================
+// Estos estilos se inyectan en el bundle global porque el NuiDockComponent
+// se crea dinámicamente (document.body.appendChild) y debe tener sus estilos
+// disponibles desde el inicio, independientemente del momento de carga.
+
+@mixin nui-dock-styles {
+  // ─── Host: posicionamiento fijo en el viewport ──────────────────────────────
+  .nui-dock {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    pointer-events: none;
+    z-index: var(--nui-dock-z-index);
+
+    &--bottom { bottom: var(--nui-dock-offset); }
+    &--top    { top: var(--nui-dock-offset); }
+  }
+
+  // ─── Contenedor horizontal ──────────────────────────────────────────────────
+  .nui-dock__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    pointer-events: auto;
+    max-width: var(--nui-dock-max-width);
+  }
+
+  // ─── Chip (botón de elemento minimizado) ────────────────────────────────────
+  .nui-dock__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: var(--nui-dock-border-radius);
+    border: 1px solid var(--nui-dock-border);
+    background: var(--nui-dock-chip-bg);
+    color: var(--nui-dock-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    max-width: 240px;
+    white-space: nowrap;
+    overflow: hidden;
+    box-shadow: var(--nui-dock-shadow);
+    transition: box-shadow 80ms ease, transform 80ms ease;
+    user-select: none;
+    font-family: inherit;
+
+    &:hover {
+      box-shadow: var(--nui-dock-hover-shadow);
+      background: var(--nui-dock-chip-hover-bg);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: var(--nui-dock-shadow);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--nui-primary, #3b82f6);
+      outline-offset: 2px;
+    }
+
+    // ── Variantes de color semántico ────────────────────────────────────────
+    &--primary { border-color: var(--nui-primary); }
+    &--success { border-color: var(--nui-success); }
+    &--warning { border-color: var(--nui-warning); }
+    &--danger  { border-color: var(--nui-danger); }
+    &--info    { border-color: var(--nui-info); }
+  }
+
+  // ─── Icono principal del chip ─────────────────────────────────────────────
+  .nui-dock__item-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+
+    // Icono de posición (sidebar sin icono custom): más sutil
+    &--position {
+      font-size: 0.875rem;
+      opacity: 0.55;
+    }
+  }
+
+  // ─── Título del chip ─────────────────────────────────────────────────────
+  .nui-dock__item-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // ─── Icono de restauración ────────────────────────────────────────────────
+  .nui-dock__item-restore {
+    font-size: 0.875rem;
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+
+  // ─── Separador entre grupos modal / sidebar ───────────────────────────────
+  .nui-dock__separator {
+    width: 1px;
+    height: 24px;
+    background: var(--nui-dock-separator-color);
+    flex-shrink: 0;
+    margin: 0 4px;
+  }
+}

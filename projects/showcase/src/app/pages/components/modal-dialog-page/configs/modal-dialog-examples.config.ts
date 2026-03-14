@@ -208,7 +208,7 @@ openUserForm() {
     },
     examples: [
       {
-        title: 'codeExamples.typescript',
+        title: 'Minimizable Modal',
         code: `// Minimizable modals require a unique ID
 openMinimizableForm() {
   const ref = this.modalService.open(LongFormComponent, {
@@ -216,6 +216,33 @@ openMinimizableForm() {
     minimizable: true,
     title: 'Long Form',
     width: '700px',
+  });
+}
+
+// Calling open() with the same ID restores the minimized modal
+openOrRestoreForm() {
+  this.modalService.open(LongFormComponent, {
+    id: 'user-form-modal',
+    minimizable: true,
+    title: 'Long Form',
+  });
+}`,
+        language: 'typescript',
+      },
+      {
+        title: 'Minimizable Modal (Custom Dock Config)',
+        code: `// Minimizable modals require a unique ID
+openMinimizableCustomForm() {
+  const ref = this.modalService.open(LongFormComponent, {
+    id: 'user-form-modal',   // Required for minimizable
+    minimizable: true,
+    title: 'Long Form',
+    width: '700px',
+    // Custom dock tab configuration for this modal when minimized
+    dockTabConfig: {
+      label: 'Custom Tab',
+      icon: 'ri-star-line',
+    },
   });
 }
 

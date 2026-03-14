@@ -160,6 +160,12 @@ export const MODAL_DIALOG_API_SECTIONS: ComponentSection[] = [
         ],
         ['<code>verificationText</code>', 'string', '-', 'Text the user must type to confirm'],
         ['<code>data</code>', 'D', '-', 'Data injected via MODAL_DIALOG_DATA token'],
+        [
+          '<code>dockTabConfig</code>',
+          'DockTabConfig',
+          '<code class="neutral">undefined</code>',
+          'Dock chip customization when the modal is minimized',
+        ],
       ],
     },
   },
@@ -386,6 +392,40 @@ export const MODAL_DIALOG_API_SECTIONS: ComponentSection[] = [
           '<code>stateHistory</code>',
           'ReadonlyArray&lt;ModalDialogState&gt;',
           'History of panel states',
+        ],
+      ],
+    },
+  },
+  {
+    id: 'api-dock-tab-config',
+    title: 'components.modal-dialog.api.dock-tab-config.title',
+    description: 'components.modal-dialog.api.dock-tab-config.description',
+    anchor: 'api-dock-tab-config',
+    table: {
+      headers: [
+        'common.tables.property',
+        'common.tables.type',
+        'common.tables.default',
+        'common.tables.description',
+      ],
+      rows: [
+        [
+          '<code>icon</code>',
+          'string',
+          '<code class="neutral">undefined</code>',
+          'Remix Icon class shown in the dock chip. Falls back to the modal iconTitle if not set.',
+        ],
+        [
+          '<code>label</code>',
+          'string',
+          '<code class="neutral">undefined</code>',
+          'Title override for the dock chip. Falls back to the modal title if not set.',
+        ],
+        [
+          '<code>cssClass</code>',
+          'string | string[]',
+          '<code class="neutral">undefined</code>',
+          'Additional CSS classes applied to the dock chip button.',
         ],
       ],
     },

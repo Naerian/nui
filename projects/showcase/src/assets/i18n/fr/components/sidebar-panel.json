@@ -38,8 +38,8 @@
     },
     "minimizable": {
       "title": "Panneau réductible",
-      "description": "Les panneaux peuvent être réduits à un onglet <strong>qui sera situé du côté depuis lequel la barre latérale s'ouvre</strong> pour libérer de l'espace à l'écran tout en préservant l'état, et peuvent être restaurés à volonté.",
-      "note": "Utilisez l'attribut <code>minimizable</code> pour rendre la barre latérale réductible. De plus, vous pouvez utiliser la méthode <code>minimize()</code> de SidebarPanel pour réduire le panneau programmatiquement et <code>restore()</code> pour le restaurer. Si <code>minimizable</code> est activé, l'attribut <code>id</code> est requis pour identifier le panneau réduit. Vous pouvez également vérifier si la barre latérale est réduite via <code>isMinimized</code>.<br><br><strong>Personnalisation de l'onglet :</strong> Vous pouvez personnaliser l'icône, ajouter du texte, appliquer des CSS personnalisés ou utiliser un template entièrement personnalisé via <code>minimizedTabCustomization</code>. Pour les boutons flottants avec positionnement libre (ex. : chat en bas à droite), utilisez <code>standalone: true</code> pour rendre en dehors du conteneur groupé et éviter les restrictions de positionnement. Les styles de boutons doivent être au niveau global pour éviter l'encapsulation dans le composant appelant."
+      "description": "Les panneaux peuvent être réduits à un chip dans le <strong>NuiDock</strong>, le dock unifié en bas de l'écran, pour libérer de l'espace tout en préservant l'état, et peuvent être restaurés à volonté.",
+      "note": "Utilisez l'attribut <code>minimizable</code> pour rendre la barre latérale réductible. De plus, vous pouvez utiliser la méthode <code>minimize()</code> de SidebarPanel pour réduire le panneau programmatiquement et <code>restore()</code> pour le restaurer. Si <code>minimizable</code> est activé, l'attribut <code>id</code> est requis pour identifier le panneau réduit. Vous pouvez également vérifier si la barre latérale est réduite via <code>isMinimized</code>.<br><br><strong>Personnalisation du chip du dock :</strong> Utilisez <code>dockTabConfig</code> pour personnaliser l'icône, le titre ou les classes CSS du chip affiché dans le dock inférieur. Si aucune icône n'est spécifiée, un indicateur directionnel est affiché automatiquement en fonction de la position du panneau."
     },
     "close-button": {
       "title": "Bouton de fermeture",
@@ -105,8 +105,8 @@
       "description": "Définition d’un bouton inline passé via <code>customButtons</code> dans la configuration. Il est évalué une seule fois à l’ouverture du modal — utilisez <code>SidebarPanelActionsService</code> pour des états réactifs."
     },
     "minimized-tab": {
-      "title": "MinimizedTabCustomization",
-      "description": "Personnalisation de l’onglet lorsque le panneau est minimisé"
+      "title": "dockTabConfig",
+      "description": "Personnalisation du chip affiché dans le <strong>NuiDock</strong> lorsque le panneau est minimisé. Les propriétés sont mappées vers le <code>NuiDockItem</code> géré par <code>NuiDockService</code>."
     },
     "footer-actions": {
       "title": "SidebarPanelAction",

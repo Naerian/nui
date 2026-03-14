@@ -44,7 +44,8 @@ export class ModalDialogPageComponent extends BaseComponentPage {
   private readonly _modalService = inject(ModalDialogService);
 
   @ViewChild('footerRef') footerRef!: TemplateRef<any>;
-  @ViewChild('userProfileModalTemplate', { read: TemplateRef }) userProfileModalTemplate?: TemplateRef<any>;
+  @ViewChild('userProfileModalTemplate', { read: TemplateRef })
+  userProfileModalTemplate?: TemplateRef<any>;
   readonly isProcessing = signal(false);
   private _loadingModalRef: ModalDialogRef | null = null;
 
@@ -193,6 +194,20 @@ export class ModalDialogPageComponent extends BaseComponentPage {
       title: 'Minimizable Modal',
       message: 'This modal can be minimized to the dock at the bottom of the screen.',
       confirmText: 'OK',
+    });
+  }
+
+  openMinimizableCustomModal(): void {
+    this._modalService.open({
+      id: 'showcase-minimizable-custom-modal',
+      minimizable: true,
+      title: 'Minimizable Modal with Custom Dock Config',
+      message: 'This modal has a custom configuration for its dock tab when minimized.',
+      confirmText: 'OK',
+      dockTabConfig: {
+        label: 'Custom Tab',
+        prefixIcon: 'ri-star-line',
+      },
     });
   }
 

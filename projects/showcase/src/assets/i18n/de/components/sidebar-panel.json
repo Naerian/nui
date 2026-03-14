@@ -38,8 +38,8 @@
     },
     "minimizable": {
       "title": "Minimierbares Panel",
-      "description": "Panels können zu einem Tab auf der Seite minimiert werden, von der der Seitenbereich geöffnet wird, um Platz freizugeben und den Zustand zu erhalten. Sie können jederzeit wiederhergestellt werden.",
-      "note": "Verwenden Sie das Attribut <code>minimizable</code>, um den Seitenbereich minimierbar zu machen. Zusätzlich können Sie die Methode <code>minimize()</code> von SidebarPanel verwenden, um das Panel programmgesteuert zu minimieren, und <code>restore()</code>, um es wiederherzustellen. Wenn <code>minimizable</code> aktiviert ist, ist das Attribut <code>id</code> erforderlich, um das minimierte Panel zu identifizieren. Sie können auch prüfen, ob der Seitenbereich minimiert ist, über <code>isMinimized</code>.<br><br><strong>Tab-Anpassung:</strong> Sie können das Symbol anpassen, Text hinzufügen, benutzerdefiniertes CSS anwenden oder ein vollständig angepasstes Template über <code>minimizedTabCustomization</code> verwenden. Für schwebende Schaltflächen mit freier Positionierung (z. B. Chat unten rechts) verwenden Sie <code>standalone: true</code>, um außerhalb des gruppierten Containers zu rendern. Schaltflächenstile sollten auf globaler Ebene definiert werden."
+      "description": "Panels können zu einem Chip im <strong>NuiDock</strong>, dem einheitlichen Dock am unteren Bildschirmrand, minimiert werden, um Platz freizugeben und den Zustand zu erhalten. Sie können jederzeit wiederhergestellt werden.",
+      "note": "Verwenden Sie das Attribut <code>minimizable</code>, um den Seitenbereich minimierbar zu machen. Zusätzlich können Sie die Methode <code>minimize()</code> von SidebarPanel verwenden, um das Panel programmgesteuert zu minimieren, und <code>restore()</code>, um es wiederherzustellen. Wenn <code>minimizable</code> aktiviert ist, ist das Attribut <code>id</code> erforderlich, um das minimierte Panel zu identifizieren. Sie können auch prüfen, ob der Seitenbereich minimiert ist, über <code>isMinimized</code>.<br><br><strong>Dock-Chip-Anpassung:</strong> Verwenden Sie <code>dockTabConfig</code>, um das Symbol, den Titel oder CSS-Klassen des Chips im unteren Dock anzupassen. Wenn kein Symbol angegeben wird, wird automatisch ein Richtungsindikator basierend auf der Panel-Position angezeigt."
     },
     "close-button": {
       "title": "Schließen-Schaltfläche",
@@ -105,8 +105,8 @@
       "description": "Inline-Button-Definition, die über <code>customButtons</code> in der Konfiguration übergeben wird. Sie wird nur einmal beim Öffnen des Modals ausgewertet — verwenden Sie <code>SidebarPanelActionsService</code> für reaktive Zustände."
     },
     "minimized-tab": {
-      "title": "MinimizedTabCustomization",
-      "description": "Anpassung des Tabs, wenn das Panel minimiert ist"
+      "title": "dockTabConfig",
+      "description": "Anpassung des Chips im <strong>NuiDock</strong>, wenn das Panel minimiert wird. Die Eigenschaften werden dem <code>NuiDockItem</code> zugeordnet, das von <code>NuiDockService</code> verwaltet wird."
     },
     "footer-actions": {
       "title": "SidebarPanelAction",

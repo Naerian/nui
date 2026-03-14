@@ -1,6 +1,7 @@
 import { InjectionToken, TemplateRef } from '@angular/core';
 import { NUIColor, NUISize, NUIVariant } from '../../../configs/common/types';
 import { ButtonLoadingPosition, ButtonWidth } from '../../button';
+import { DockTabConfig } from '../../dock/models/nui-dock.model';
 
 // ─────────────────────────────────────────────────────────────
 // Token de inyección para la configuración global del modal
@@ -190,17 +191,6 @@ export interface ModalDialogStackItem {
   createdAt: number;
 }
 
-/**
- * Elemento en el dock inferior que representa un modal minimizado
- */
-export interface ModalDialogDockItem {
-  id: string;
-  title: string;
-  icon?: string;
-  color?: NUIColor;
-  restoreCallback: () => void;
-}
-
 // ─────────────────────────────────────────────────────────────
 // Configuración del modal (ModalDialogConfig)
 // ─────────────────────────────────────────────────────────────
@@ -297,6 +287,10 @@ interface ModalDialogConfigBase<D = any> {
 
   // ── Gestos táctiles ─────────────────────────────────────────
   gestures?: ModalDialogGestureOptions;
+
+  // ── Dock ────────────────────────────────────────────────────
+  /** Customización del chip del dock cuando el modal está minimizado */
+  dockTabConfig?: DockTabConfig;
 
   // ── Verificación ────────────────────────────────────────────
   /** Texto que el usuario debe escribir para habilitar el botón de confirmación */

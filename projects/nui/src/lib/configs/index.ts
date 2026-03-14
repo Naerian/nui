@@ -28,6 +28,9 @@ export * from './split-button';
 // Modal Dialog configuration
 export * from './modal-dialog';
 
+// Dock configuration
+export * from './dock';
+
 // Main NUI configuration
 export * from './nui.model';
 export * from './nui.provider';

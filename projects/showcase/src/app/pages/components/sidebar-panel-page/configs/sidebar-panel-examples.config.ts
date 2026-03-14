@@ -456,64 +456,30 @@ if (panelRef.isMinimized) {
       },
       {
         title: 'codeExamples.typescript',
-        code: `// Open a minimizable sidebar panel
+        code: `// Customizing the dock chip appearance
 this.sidebarPanelService.open(ChatComponent, {
   title: 'Support Chat',
   id: 'chat-support',
   minimizable: true,
   position: 'right',
   size: 'md',
-  minimizedTabCustomization: {
-    icon: 'ri-customer-service-line',  // Custom icon
-    label: 'Support',                  // Button text
-    cssClass: 'floating-chat-button',  // Custom CSS class
-    standalone: true  // Allows free positioning (bottom-right)
+  dockTabConfig: {
+    icon: 'ri-customer-service-line',  // Custom icon in the dock chip
+    label: 'Support',                  // Title override in the dock chip
+    cssClass: 'my-support-chip',       // Extra CSS class on the chip button
   }
 });
 
-// Without standalone (grouped at the edge)
+// Without customization: icon derived from panel position, title from panel title
 this.sidebarPanelService.open(NotificationsComponent, {
   id: 'notifications',
   minimizable: true,
-  minimizedTabCustomization: {
+  dockTabConfig: {
     icon: 'ri-notification-3-line',
-    label: 'Notifications'
-    // Without standalone: grouped with other tabs at the edge
+    label: 'Notifications',
   }
 });`,
         language: 'typescript',
-      },
-      {
-        title: 'codeExamples.scss',
-        code: `// Custom floating button CSS styles
-::ng-deep .floating-chat-button {
-  // Floating position at bottom right corner
-  position: fixed !important;
-  bottom: 24px;
-  right: 24px;
-  
-  // Dimensions and padding
-  width: auto !important;
-  height: auto !important;
-  padding: 14px 20px !important;
-  
-  // Rounded style (pill)
-  border-radius: 50px !important;
-  
-  // Elevated shadow
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-  
-  // Colors
-  background: var(--nui-color-primary) !important;
-  color: white !important;
-  
-  // Hover effects
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
-  }
-}`,
-        language: 'scss',
       },
     ],
   },

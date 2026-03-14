@@ -34,7 +34,7 @@ import {
 } from './animations/sidebar-panel.animations';
 import { ButtonComponent } from '../button/button.component';
 import { SidebarPanelActionsService } from './services/sidebar-panel-actions.service';
-import { SidebarPanelTabsService } from './services/sidebar-panel-tabs.service';
+import { NuiDockService } from '../dock/nui-dock.service';
 import { SIDEBAR_PANEL_CONFIG } from './models/sidebar-panel.model';
 import { NuiI18nService } from '../../i18n';
 
@@ -83,7 +83,7 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly _cdr = inject(ChangeDetectorRef);
   private readonly _focusTrapFactory = inject(FocusTrapFactory);
   private readonly _elementRef = inject(ElementRef);
-  private readonly _tabsService = inject(SidebarPanelTabsService);
+  private readonly _dockService = inject(NuiDockService);
 
   protected readonly _i18nService = inject(NuiI18nService);
   protected readonly _i18n = computed(() => this._i18nService.translations());
@@ -444,8 +444,8 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
       this.panelRef.stateChanged().subscribe(state => {
         // Si el estado cambiÃ³ a 'open' desde 'minimized', ejecutar animaciÃ³n de restauraciÃ³n
         if (state === 'open' && this.animationState() === 'hidden') {
-          // Remover la pestaÃ±a si existe (por si se restaurÃ³ desde otro lugar)
-          this._tabsService.removeTab(this.panelRef.id);
+          // Remover el item del dock si existe (por si se restauró desde otro lugar)
+          this._dockService.remove(this.panelRef.id);
 
           // Ejecutar animaciÃ³n de entrada
           requestAnimationFrame(() => {
@@ -497,9 +497,9 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this._focusTrap?.destroy();
 
-    // Limpiar la pestaña del servicio si el panel está minimizado
+    // Limpiar el item del dock si el panel está minimizado
     if (this.panelRef?.isMinimized) {
-      this._tabsService.removeTab(this.panelRef.id);
+      this._dockService.remove(this.panelRef.id);
     }
 
     // Restaurar scroll
@@ -557,13 +557,18 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
       setTimeout(() => {
         this.panelRef.minimize();
 
-        // Registrar la pestaña en el servicio global
-        this._tabsService.addTab({
+        // Registrar el item en el dock unificado
+        const dock = this.sidebarPanelConfig.dockTabConfig;
+        this._dockService.add({
           id: this.panelRef.id,
-          title: this.title || 'Panel',
+          type: 'sidebar',
+          title: dock?.label || this.title || 'Panel',
+          prefixIcon: dock?.prefixIcon,
+          suffixIcon: dock?.suffixIcon,
+          hideSuffixIcon: dock?.hideSuffixIcon ?? false,
           position: this.sidebarPanelConfig.position ?? 'right',
-          restoreCallback: () => this.restore(),
-          customization: this.sidebarPanelConfig.minimizedTabCustomization, // Pasar customización
+          cssClass: dock?.cssClass,
+          restore: () => this.restore(),
         });
 
         this._cdr.detectChanges();
@@ -576,8 +581,8 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   restore(): void {
     if (this.panelRef) {
-      // 1. Remover la pestaña del servicio
-      this._tabsService.removeTab(this.panelRef.id);
+      // 1. Remover el item del dock
+      this._dockService.remove(this.panelRef.id);
 
       // 2. Cambiar estado del panel (esto también muestra el backdrop)
       this.panelRef.restore();
