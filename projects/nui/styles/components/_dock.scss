@@ -113,6 +113,7 @@
     transition: box-shadow 80ms ease, transform 80ms ease;
     user-select: none;
     font-family: inherit;
+    line-height: 1.2;
 
     &:hover {
       box-shadow: var(--nui-dock-hover-shadow);
@@ -154,8 +155,9 @@
 
   // ─── Icono principal del chip ─────────────────────────────────────────────
   .nui-dock__item-icon {
-    font-size: 1rem;
+    font-size: 0.875rem;
     flex-shrink: 0;
+    line-height: 1.2;
 
     // Icono de posición (sidebar sin icono custom): más sutil
     &--position {
