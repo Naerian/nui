@@ -7,7 +7,7 @@
   transition:
     width 0.3s ease,
     transform 0.3s ease;
-  width: 280px;
+  width: 245px;
   position: sticky;
   top: 0;
   overflow-y: auto;
@@ -125,7 +125,7 @@
   }
 
   .nav-item-expandable {
-    > .nav-link {
+    >.nav-link {
       padding-right: 1rem;
     }
   }

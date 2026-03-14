@@ -21,6 +21,15 @@ export interface NuiDockGlobalConfig {
    * @default true
    */
   showTypeSeparator?: boolean;
+
+  /**
+   * Número máximo de chips visibles en el dock antes de colapsar el resto
+   * en un chip de desbordamiento "+N". Útil en mobile para evitar que el dock
+   * crezca más allá del ancho de pantalla.
+   * Si no se define, se muestran todos los chips sin límite.
+   * @default undefined (sin límite)
+   */
+  maxVisibleChips?: number;
 }
 
 /**
@@ -29,6 +38,7 @@ export interface NuiDockGlobalConfig {
 export const DEFAULT_NUI_DOCK_CONFIG: NuiDockGlobalConfig = {
   position: 'bottom',
   showTypeSeparator: true,
+  maxVisibleChips: 4,
 };
 
 /**

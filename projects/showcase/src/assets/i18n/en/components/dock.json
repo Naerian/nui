@@ -66,7 +66,8 @@
       "note": "All NUI i18n strings can be overridden globally via <code>provideNuiI18n()</code> or per-component via the <code>i18n</code> configuration property.",
       "rows": {
         "ariaLabel": "Accessible label for the dock toolbar (<code>role=\"toolbar\"</code> element)",
-        "close": "Accessible label for the dismiss button on each chip (shared top-level key)"
+        "close": "Accessible label for the dismiss button on each chip (shared top-level key)",
+        "sheetTitle": "Title displayed in the bottom sheet header and used as the accessible label of the overflow sheet dialog"
       }
     }
   },
@@ -76,7 +77,8 @@
       "description": "These options can be set globally via <code>provideNUI({ config: { dock: { ... } } })</code> and apply to all dock instances in the application.",
       "rows": {
         "position": "Viewport edge where the dock is rendered",
-        "showTypeSeparator": "Show a vertical separator between modal chips and sidebar chips"
+        "showTypeSeparator": "Show a vertical separator between modal chips and sidebar chips",
+        "maxVisibleChips": "Maximum number of chips shown in the toolbar before the rest collapse into a '+N' overflow chip. Recommended for mobile. When undefined, all chips are visible."
       }
     },
     "example": {

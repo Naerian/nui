@@ -118,7 +118,7 @@
 /// @example scss
 ///   @include media-xs { font-size: 12px; }
 @mixin media-xs {
-  @media (max-width: #{config.$breakpoint-sm - 1}) {
+  @media (max-width: #{config.$breakpoint-sm}) {
     @content;
   }
 }
@@ -190,7 +190,7 @@
 /// @example scss
 /// @include media-below-xs { font-size: 14px; }
 @mixin media-below-xs {
-  @media (max-width: #{config.$breakpoint-xs - 1}) {
+  @media (max-width: #{config.$breakpoint-xs}) {
     @content;
   }
 }
@@ -202,7 +202,7 @@
 /// @example scss
 /// @include media-below-sm { font-size: 14px; }
 @mixin media-below-sm {
-  @media (max-width: #{config.$breakpoint-sm - 1}) {
+  @media (max-width: #{config.$breakpoint-sm}) {
     @content;
   }
 }
@@ -214,7 +214,7 @@
 /// @example scss
 ///   @include media-below-md { font-size: 14px; }
 @mixin media-below-md {
-  @media (max-width: #{config.$breakpoint-md - 1}) {
+  @media (max-width: #{config.$breakpoint-md}) {
     @content;
   }
 }
@@ -226,7 +226,7 @@
 /// @example scss
 ///   @include media-below-lg { font-size: 14px; }
 @mixin media-below-lg {
-  @media (max-width: #{config.$breakpoint-lg - 1}) {
+  @media (max-width: #{config.$breakpoint-lg}) {
     @content;
   }
 }
@@ -238,7 +238,7 @@
 /// @example scss
 ///  @include media-below-xl { font-size: 14px; }
 @mixin media-below-xl {
-  @media (max-width: #{config.$breakpoint-xl - 1}) {
+  @media (max-width: #{config.$breakpoint-xl}) {
     @content;
   }
 }
@@ -250,7 +250,7 @@
 /// @example scss
 ///  @include media-below-xxl { font-size: 14px; }
 @mixin media-below-xxl {
-  @media (max-width: #{config.$breakpoint-xxl - 1}) {
+  @media (max-width: #{config.$breakpoint-xxl}) {
     @content;
   }
 }

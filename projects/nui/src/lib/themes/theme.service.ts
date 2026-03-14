@@ -430,7 +430,7 @@ export class ThemeService {
       --nui-text-dark: ${PURE_COLORS.BLACK};
       --nui-text-inverted: ${isDark ? grays[900] : PURE_COLORS.WHITE};
       --nui-text-disabled: ${isDark ? grays[600] : grays[400]};
-      --nui-text-muted: ${isDark ? grays[500] : grays[300]};
+      --nui-text-muted: ${grays[500]};
       
       --nui-link: ${colors.primary};
       --nui-link-hover: ${this.tint(colors.primary, 20)};

@@ -26,6 +26,12 @@ export const DOCK_GLOBAL_CONFIG_SECTIONS: ComponentSection[] = [
           'true',
           'components.dock.globalConfig.options.rows.showTypeSeparator',
         ],
+        [
+          '<code>maxVisibleChips</code>',
+          'number | undefined',
+          'undefined',
+          'components.dock.globalConfig.options.rows.maxVisibleChips',
+        ],
       ],
     },
   },
@@ -46,6 +52,7 @@ export const appConfig: ApplicationConfig = {
         dock: {
           position: 'top',           // Show dock at the top of the viewport
           showTypeSeparator: false,  // Hide the separator between modal and sidebar chips
+          maxVisibleChips: 3,        // Collapse overflow into a "+N" chip (recommended for mobile)
         }
       }
     })

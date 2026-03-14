@@ -66,7 +66,8 @@
       "note": "Alle NUI-i18n-Texte können global über <code>provideNuiI18n()</code> oder komponentenspezifisch über die Konfigurationseigenschaft <code>i18n</code> überschrieben werden.",
       "rows": {
         "ariaLabel": "Zugängliche Beschriftung für die Dock-Toolbar (Element mit <code>role=\"toolbar\"</code>)",
-        "close": "Zugängliche Beschriftung für den Schließen-Button an jedem Chip (gemeinsamer Top-Level-Schlüssel)"
+        "close": "Zugängliche Beschriftung für den Schließen-Button an jedem Chip (gemeinsamer Top-Level-Schlüssel)",
+        "sheetTitle": "Titel in der Kopfzeile des Bottom Sheets und zugängliche Beschriftung des Overflow-Sheet-Dialogs"
       }
     }
   },
@@ -76,7 +77,8 @@
       "description": "Diese Optionen können global über <code>provideNUI({ config: { dock: { ... } } })</code> festgelegt werden und gelten für alle Dock-Instanzen in der Anwendung.",
       "rows": {
         "position": "Viewport-Rand, an dem der Dock gerendert wird",
-        "showTypeSeparator": "Zeigt ein vertikales Trennelement zwischen Modal-Chips und Sidebar-Chips an"
+        "showTypeSeparator": "Zeigt ein vertikales Trennelement zwischen Modal-Chips und Sidebar-Chips an",
+        "maxVisibleChips": "Maximale Anzahl sichtbarer Chips in der Toolbar, bevor der Rest in einem '+N'-Überlauf-Chip zusammengefasst wird. Für Mobile empfohlen. Bei undefined werden alle Chips angezeigt."
       }
     },
     "example": {

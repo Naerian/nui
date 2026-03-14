@@ -66,7 +66,8 @@
       "note": "Todos los textos i18n de NUI pueden sobrescribirse globalmente mediante <code>provideNuiI18n()</code> o por componente a través de la propiedad de configuración <code>i18n</code>.",
       "rows": {
         "ariaLabel": "Etiqueta accesible para la barra de herramientas del dock (elemento <code>role=\"toolbar\"</code>)",
-        "close": "Etiqueta accesible para el botón de cierre de cada chip (clave compartida de nivel superior)"
+        "close": "Etiqueta accesible para el botón de cierre de cada chip (clave compartida de nivel superior)",
+        "sheetTitle": "Título mostrado en el encabezado de la hoja inferior y usado como etiqueta accesible del diálogo de desbordamiento"
       }
     }
   },
@@ -76,7 +77,8 @@
       "description": "Estas opciones pueden definirse globalmente mediante <code>provideNUI({ config: { dock: { ... } } })</code> y se aplican a todas las instancias del dock en la aplicación.",
       "rows": {
         "position": "Borde del viewport donde se renderiza el dock",
-        "showTypeSeparator": "Muestra un separador vertical entre los chips de modales y los de sidebars"
+        "showTypeSeparator": "Muestra un separador vertical entre los chips de modales y los de sidebars",
+        "maxVisibleChips": "Número máximo de chips visibles en el toolbar antes de colapsar el resto en un chip '+N'. Recomendado para mobile. Si es undefined, se muestran todos los chips."
       }
     },
     "example": {
