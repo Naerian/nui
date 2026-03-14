@@ -59,6 +59,9 @@ export class ModalDialogComponent implements OnInit, AfterViewInit, OnDestroy {
 
   readonly instanceId = `nui-md-${Math.random().toString(36).slice(2, 9)}`;
 
+  /** Signal interno para actualizar el título en caliente desde ModalDialogRef */
+  private readonly _titleOverride = signal<string | undefined>(undefined);
+
   animationState = signal<'void' | 'visible' | 'hidden'>('void');
 
   private readonly _animationParams = computed(() => ({
@@ -173,6 +176,26 @@ export class ModalDialogComponent implements OnInit, AfterViewInit, OnDestroy {
 
   protected get showCloseButton(): boolean {
     return (this.config.canBeClosed ?? true) && (this.config.showCloseButton ?? true);
+  }
+
+  get title(): string {
+    return this._titleOverride() ?? this.config.title ?? '';
+  }
+
+  /**
+   * Actualiza el título del modal de forma reactiva (signal-based).
+   * @internal — Llamado por ModalDialogRef.updateTitle()
+   */
+  updateTitle(newTitle: string): void {
+    this._titleOverride.set(newTitle);
+  }
+
+  /**
+   * Fuerza la detección de cambios desde dentro del componente.
+   * @internal — Llamado por ModalDialogRef.updateHeaderTemplate() / updateFooterTemplate()
+   */
+  _refreshView(): void {
+    this._cdr.detectChanges();
   }
 
   ngOnInit(): void {

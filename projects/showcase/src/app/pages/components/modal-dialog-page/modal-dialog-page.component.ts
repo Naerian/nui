@@ -44,6 +44,7 @@ export class ModalDialogPageComponent extends BaseComponentPage {
   private readonly _modalService = inject(ModalDialogService);
 
   @ViewChild('footerRef') footerRef!: TemplateRef<any>;
+  @ViewChild('userProfileModalTemplate', { read: TemplateRef }) userProfileModalTemplate?: TemplateRef<any>;
   readonly isProcessing = signal(false);
   private _loadingModalRef: ModalDialogRef | null = null;
 
@@ -63,6 +64,11 @@ export class ModalDialogPageComponent extends BaseComponentPage {
         'status-bar',
         'footer-custom',
         'child-footer-actions',
+        'html-content',
+        'body-template',
+        'prevent-close',
+        'backdrop',
+        'update-ref',
       ],
     },
     {
@@ -388,6 +394,138 @@ export class ModalDialogPageComponent extends BaseComponentPage {
         thickness: 4,
       },
       modalType: 'info',
+    });
+  }
+
+  openHtmlContentModal(): void {
+    this._modalService.open({
+      title: 'Order summary',
+      htmlContent: `
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <div style="display: flex; justify-content: space-between;">
+            <span>Product A &times; 2</span><strong>$58.00</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>Product B &times; 1</span><strong>$14.00</strong>
+          </div>
+          <hr style="border: none; border-top: 1px solid var(--nui-border-high); margin: 0.25rem 0;">
+          <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1rem;">
+            <span>Total</span><span>$72.00</span>
+          </div>
+        </div>
+      `,
+      confirmText: 'Proceed to checkout',
+      cancelText: 'Cancel',
+    });
+  }
+
+  openBodyTemplateModal(): void {
+    if (!this.userProfileModalTemplate) return;
+    this._modalService.open({
+      title: 'User profile',
+      bodyTemplate: this.userProfileModalTemplate,
+      templateContext: {
+        user: { name: 'Jane Doe', email: 'jane@example.com', role: 'Admin' },
+      },
+      confirmText: 'Close',
+    });
+  }
+
+  openPreventCloseModal(): void {
+    let hasUnsavedChanges = false;
+
+    const ref = this._modalService.open({
+      title: 'Edit settings',
+      message:
+        'Click "Mark as modified", then try to close the modal via ESC, backdrop click, or the X button.',
+      preventClose: () => {
+        if (!hasUnsavedChanges) return true;
+        return confirm('You have unsaved changes. Discard them?');
+      },
+      customButtons: [
+        {
+          text: 'Mark as modified',
+          color: 'secondary',
+          variant: 'outline',
+          prefixIcon: 'ri-edit-line',
+          closeOnClick: false,
+          callback: () => {
+            hasUnsavedChanges = true;
+            alert('Now try to close the modal — it will be blocked.');
+          },
+        },
+        {
+          text: 'Save & close',
+          color: 'primary',
+          variant: 'solid',
+          prefixIcon: 'ri-save-line',
+          callback: ref => {
+            hasUnsavedChanges = false;
+            ref.close({ confirmed: true });
+          },
+        },
+      ],
+    });
+
+    ref.closePrevented().subscribe(() => {
+      console.log('[preventClose] Close was blocked — unsaved changes exist');
+    });
+  }
+
+  openNoBackdropModal(): void {
+    this._modalService.open({
+      title: 'No backdrop',
+      message:
+        'This modal has no backdrop overlay. The page content behind is visible and interactive.',
+      hasBackdrop: false,
+      confirmText: 'Close',
+    });
+  }
+
+  openBackdropNoCloseModal(): void {
+    this._modalService.open({
+      title: 'Backdrop does not close',
+      message: 'Clicking the backdrop will not close this modal. Use the X button.',
+      closeOnBackdropClick: false,
+      confirmText: 'Close',
+    });
+  }
+
+  openNoEscapeModal(): void {
+    this._modalService.open({
+      title: 'ESC disabled',
+      message: 'Pressing the Escape key will not close this modal. Use the X button.',
+      closeOnEscape: false,
+      confirmText: 'Close',
+    });
+  }
+
+  openUpdateRefModal(): void {
+    const ref = this._modalService.open({
+      title: 'Loading data…',
+      message: 'The title updates in 1.5 seconds. You can also rename it manually.',
+      customButtons: [
+        {
+          text: 'Rename modal',
+          color: 'secondary',
+          variant: 'outline',
+          prefixIcon: 'ri-edit-line',
+          closeOnClick: false,
+          callback: ref => {
+            ref.updateTitle(`Updated at ${new Date().toLocaleTimeString()}`);
+          },
+        },
+        {
+          text: 'Close',
+          color: 'secondary',
+          variant: 'ghost',
+          callback: ref => ref.close({ confirmed: false }),
+        },
+      ],
+    });
+
+    ref.afterOpened().subscribe(() => {
+      setTimeout(() => ref.updateTitle('Data loaded ✓'), 1500);
     });
   }
 }

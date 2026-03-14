@@ -62,10 +62,10 @@ import { NuiI18nService } from '../../i18n';
       </div>
     } @else if (config.message) {
       <!-- Mensaje HTML (sanitizado) -->
-      <div
-        class="nui-modal-dialog-simple__message"
-        [innerHTML]="safeMessage()"
-      ></div>
+      <div class="nui-modal-dialog-simple__message" [innerHTML]="safeMessage()"></div>
+    } @else if (config.htmlContent) {
+      <!-- HTML string sanitizado para preservar estilos inline -->
+      <div [innerHTML]="safeHtml()"></div>
     }
 
     <!-- Campo de verificación -->
@@ -105,7 +105,9 @@ export class ModalDialogSimpleContentComponent implements OnInit, OnDestroy {
   private readonly sanitizer = inject(DomSanitizer);
   private readonly _i18nService = inject(NuiI18nService);
 
-  private get _i18n() { return this._i18nService.translations().modalDialog; }
+  private get _i18n() {
+    return this._i18nService.translations().modalDialog;
+  }
 
   // ── Verificación (estado local reactivo) ─────────────────────
 
@@ -126,6 +128,11 @@ export class ModalDialogSimpleContentComponent implements OnInit, OnDestroy {
 
   protected readonly safeMessage = computed<SafeHtml>(() => {
     const html = this.config.message ?? '';
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  });
+
+  protected readonly safeHtml = computed<SafeHtml>(() => {
+    const html = this.config.htmlContent ?? '';
     return this.sanitizer.bypassSecurityTrustHtml(html);
   });
 

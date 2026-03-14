@@ -581,4 +581,246 @@ export class UserFormModalComponent implements OnInit {
       },
     ],
   },
+  {
+    id: 'html-content',
+    title: 'components.modal-dialog.examples.html-content.title',
+    description: 'components.modal-dialog.examples.html-content.description',
+    note: {
+      type: 'info',
+      content: 'components.modal-dialog.examples.html-content.note',
+    },
+    anchor: 'html-content',
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `openOrderSummary() {
+  this.modalService.open({
+    title: 'Order summary',
+    htmlContent: \`
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <div style="display: flex; justify-content: space-between;">
+          <span>Product A × 2</span><strong>$58.00</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>Product B × 1</span><strong>$14.00</strong>
+        </div>
+        <hr style="border: none; border-top: 1px solid var(--nui-border-high); margin: 0.25rem 0;">
+        <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1rem;">
+          <span>Total</span><span>$72.00</span>
+        </div>
+      </div>
+    \`,
+    confirmText: 'Proceed to checkout',
+    cancelText: 'Cancel',
+  });
+}`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
+    id: 'body-template',
+    title: 'components.modal-dialog.examples.body-template.title',
+    description: 'components.modal-dialog.examples.body-template.description',
+    note: {
+      type: 'info',
+      content: 'components.modal-dialog.examples.body-template.note',
+    },
+    anchor: 'body-template',
+    examples: [
+      {
+        title: 'codeExamples.html',
+        code: `<!-- Define the template in your component -->
+<ng-template #userProfileTpl let-user="user">
+  <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+    <p style="margin: 0;"><strong>Name:</strong> {{ user.name }}</p>
+    <p style="margin: 0;"><strong>Email:</strong> {{ user.email }}</p>
+    <p style="margin: 0;"><strong>Role:</strong> {{ user.role }}</p>
+  </div>
+</ng-template>`,
+        language: 'html',
+      },
+      {
+        title: 'codeExamples.typescript',
+        code: `@ViewChild('userProfileTpl') userProfileTpl!: TemplateRef<any>;
+
+openUserProfile() {
+  this.modalService.open({
+    title: 'User profile',
+    bodyTemplate: this.userProfileTpl,
+    templateContext: {
+      user: { name: 'Jane Doe', email: 'jane@example.com', role: 'Admin' },
+    },
+    confirmText: 'Close',
+  });
+}`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
+    id: 'prevent-close',
+    title: 'components.modal-dialog.examples.prevent-close.title',
+    description: 'components.modal-dialog.examples.prevent-close.description',
+    note: {
+      type: 'info',
+      content: 'components.modal-dialog.examples.prevent-close.note',
+    },
+    anchor: 'prevent-close',
+    examples: [
+      {
+        title: 'Sync guard',
+        code: `openFormModal() {
+  let hasUnsavedChanges = false;
+
+  const ref = this.modalService.open({
+    title: 'Edit settings',
+    message: 'Make changes and try to close the modal.',
+    preventClose: () => {
+      if (!hasUnsavedChanges) return true;
+      return confirm('You have unsaved changes. Discard them?');
+    },
+    customButtons: [
+      {
+        text: 'Mark as modified',
+        color: 'secondary',
+        variant: 'outline',
+        closeOnClick: false,
+        callback: () => { hasUnsavedChanges = true; },
+      },
+      {
+        text: 'Save & close',
+        color: 'primary',
+        variant: 'solid',
+        callback: (ref) => {
+          hasUnsavedChanges = false;
+          ref.close({ confirmed: true });
+        },
+      },
+    ],
+  });
+
+  // React when a close attempt is blocked
+  ref.closePrevented().subscribe(() => {
+    console.log('Close was prevented — unsaved changes exist');
+  });
+}`,
+        language: 'typescript',
+      },
+      {
+        title: 'Async guard',
+        code: `// Async guard — await another modal as confirmation dialog
+openAsyncGuardModal() {
+  this.modalService.open({
+    title: 'Document editor',
+    message: 'This modal uses an async preventClose guard.',
+    preventClose: async () => {
+      const result = await firstValueFrom(
+        this.modalService
+          .openWarning({
+            title: 'Discard changes?',
+            message: 'Your unsaved changes will be lost.',
+            confirmText: 'Discard',
+            cancelText: 'Keep editing',
+          })
+          .afterClosed()
+      );
+      return result?.confirmed ?? false;
+    },
+  });
+}`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
+    id: 'backdrop',
+    title: 'components.modal-dialog.examples.backdrop.title',
+    description: 'components.modal-dialog.examples.backdrop.description',
+    note: {
+      type: 'info',
+      content: 'components.modal-dialog.examples.backdrop.note',
+    },
+    anchor: 'backdrop',
+    examples: [
+      {
+        title: 'No backdrop',
+        code: `// No dark overlay — page content remains visible and interactive
+this.modalService.open({
+  title: 'Floating panel',
+  message: 'This modal has no backdrop. The page behind it is fully interactive.',
+  hasBackdrop: false,
+  confirmText: 'Close',
+});`,
+        language: 'typescript',
+      },
+      {
+        title: 'Backdrop without auto-close',
+        code: `// Backdrop visible but clicking it does NOT close the modal
+this.modalService.open({
+  title: 'Sticky modal',
+  message: 'Clicking the backdrop will not close this modal. Use the X button.',
+  closeOnBackdropClick: false,
+  confirmText: 'Close',
+});`,
+        language: 'typescript',
+      },
+      {
+        title: 'ESC disabled',
+        code: `// The Escape key will not close this modal
+this.modalService.open({
+  title: 'ESC disabled',
+  message: 'Pressing Escape will not close this modal. Use the X button.',
+  closeOnEscape: false,
+  confirmText: 'Close',
+});`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
+    id: 'update-ref',
+    title: 'components.modal-dialog.examples.update-ref.title',
+    description: 'components.modal-dialog.examples.update-ref.description',
+    note: {
+      type: 'info',
+      content: 'components.modal-dialog.examples.update-ref.note',
+    },
+    anchor: 'update-ref',
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `openDataModal() {
+  const ref = this.modalService.open({
+    title: 'Loading data…',
+    message: 'The title updates automatically when data arrives.',
+    customButtons: [
+      {
+        text: 'Rename modal',
+        color: 'secondary',
+        variant: 'outline',
+        prefixIcon: 'ri-edit-line',
+        closeOnClick: false,
+        callback: (ref) => {
+          ref.updateTitle(\`Updated at \${new Date().toLocaleTimeString()}\`);
+        },
+      },
+      {
+        text: 'Close',
+        color: 'secondary',
+        variant: 'ghost',
+        callback: (ref) => ref.close({ confirmed: false }),
+      },
+    ],
+  });
+
+  // Works correctly even when called outside Angular's zone
+  ref.afterOpened().subscribe(() => {
+    setTimeout(() => ref.updateTitle('Data loaded ✓'), 1500);
+  });
+}`,
+        language: 'typescript',
+      },
+    ],
+  },
 ];

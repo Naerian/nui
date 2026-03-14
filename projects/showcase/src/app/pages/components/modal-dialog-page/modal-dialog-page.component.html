@@ -139,6 +139,46 @@
                   </nui-button>
                 </div>
               }
+
+              @case ('html-content') {
+                <div class="example-preview">
+                  <nui-button (click)="openHtmlContentModal()">Open HTML Content Modal</nui-button>
+                </div>
+              }
+
+              @case ('body-template') {
+                <ng-template #userProfileModalTemplate let-user="user">
+                  <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <p style="margin: 0;"><strong>Name:</strong> {{ user.name }}</p>
+                    <p style="margin: 0;"><strong>Email:</strong> {{ user.email }}</p>
+                    <p style="margin: 0;"><strong>Role:</strong> {{ user.role }}</p>
+                  </div>
+                </ng-template>
+
+                <div class="example-preview">
+                  <nui-button (click)="openBodyTemplateModal()">Open Body Template Modal</nui-button>
+                </div>
+              }
+
+              @case ('prevent-close') {
+                <div class="example-preview">
+                  <nui-button (click)="openPreventCloseModal()">Open with Prevent Close</nui-button>
+                </div>
+              }
+
+              @case ('backdrop') {
+                <div class="example-preview example-preview--spaced">
+                  <nui-button (click)="openNoBackdropModal()">No Backdrop</nui-button>
+                  <nui-button (click)="openBackdropNoCloseModal()">Backdrop doesn't close</nui-button>
+                  <nui-button (click)="openNoEscapeModal()">ESC disabled</nui-button>
+                </div>
+              }
+
+              @case ('update-ref') {
+                <div class="example-preview">
+                  <nui-button (click)="openUpdateRefModal()">Open (title updates in 1.5s)</nui-button>
+                </div>
+              }
             }
 
             <!-- Tabla de datos (para API o Theming) -->

@@ -227,16 +227,29 @@ export class ModalDialogRef<T = any, R = any> {
 
   // ─── Mutaciones de configuración en caliente ───────────────
 
+  /**
+   * Actualiza el título del modal en caliente.
+   * Llama a updateTitle() en la instancia del componente (signal-based).
+   */
   updateTitle(title: string): void {
     (this.config as any).title = title;
+    this._containerComponentRef?.instance?.updateTitle?.(title);
   }
 
+  /**
+   * Actualiza el template del header en caliente.
+   */
   updateHeaderTemplate(template: TemplateRef<any>): void {
     (this.config as any).headerTemplate = template;
+    this._containerComponentRef?.instance?._refreshView?.();
   }
 
+  /**
+   * Actualiza el template del footer en caliente.
+   */
   updateFooterTemplate(template: TemplateRef<any>): void {
     (this.config as any).footerTemplate = template;
+    this._containerComponentRef?.instance?._refreshView?.();
   }
 
   // ─── API interna (@internal) ───────────────────────────────

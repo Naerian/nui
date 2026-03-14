@@ -162,9 +162,7 @@ openDynamicReport() {
         \${items.map(item => \`
           <tr>
             <td>\${item.id}</td>
-            <td>\$
-
-{item.name}</td>
+            <td>\${item.name}</td>
             <td>\${item.status}</td>
           </tr>
         \`).join('')}

@@ -47,9 +47,34 @@
     },
     "child-footer-actions": {
       "title": "Acciones desde componente hijo",
-      "description": "Personaliza las acciones del modal desde un componente dinámico cargado dentro del modal.",
-      "note": "Inyecta el <code>ModalDialogActionsService</code> en tu componente dinámico para agregar botones al pie de página del modal desde dentro del componente.",
-      "note2": "Como alternativa, usa la directiva <code>nuiModalDialogFooter</code> dentro de un componente dinámico para tener control total del footer con HTML nativo. A diferencia de <code>ModalDialogActionsService</code>, que registra datos de botones renderizados por el shell del modal, la directiva proyecta un <code>ng-template</code> completo: cualquier binding de Angular se reevalúa automáticamente en cada ciclo de detección de cambios, sin necesidad de llamar a <code>update()</code>."
+      "description": "Personaliza las acciones del modal desde un componente din\u00e1mico cargado dentro del modal.",
+      "note": "Inyecta el <code>ModalDialogActionsService</code> en tu componente din\u00e1mico para agregar botones al pie de p\u00e1gina del modal desde dentro del componente.",
+      "note2": "Como alternativa, usa la directiva <code>nuiModalDialogFooter</code> dentro de un componente din\u00e1mico para tener control total del footer con HTML nativo. A diferencia de <code>ModalDialogActionsService</code>, que registra datos de botones renderizados por el shell del modal, la directiva proyecta un <code>ng-template</code> completo: cualquier binding de Angular se reevalúa automáticamente en cada ciclo de detección de cambios, sin necesidad de llamar a <code>update()</code>."
+    },
+    "html-content": {
+      "title": "Contenido HTML",
+      "description": "Pasa una cadena HTML mediante <code>htmlContent</code> para contenido rico en el cuerpo del modal sin necesidad de un componente Angular completo. La cadena es sanitizada por el <code>DomSanitizer</code> de Angular.",
+      "note": "Usa <code>htmlContent</code> para marcado est\u00e1tico o renderizado desde servidor. Para bindings de Angular (eventos, interpolaci\u00f3n, directivas), usa <code>bodyTemplate</code>."
+    },
+    "body-template": {
+      "title": "Template del cuerpo",
+      "description": "Pasa un <code>TemplateRef</code> de Angular mediante <code>bodyTemplate</code> para utilizar bindings de Angular dentro del cuerpo del modal. Combin\u00e1lo con <code>templateContext</code> para inyectar datos din\u00e1micos.",
+      "note": "El template se renderiza con <code>*ngTemplateOutlet</code>. Usa <code>let-nombre=\"clave\"</code> en el template para acceder a los valores del <code>templateContext</code>."
+    },
+    "prevent-close": {
+      "title": "Prevenir cierre",
+      "description": "Usa <code>preventClose</code> para interceptar intentos de cierre y bloquearlos condicionalmente. Soporta guardias s\u00edncronos y as\u00edncronos. Suscr\u00edbete a <code>closePrevented()</code> para reaccionar cuando se bloquea un cierre.",
+      "note": "La funci\u00f3n <code>preventClose</code> debe devolver <code>true</code> (permitir) o <code>false</code> / <code>Promise&lt;false&gt;</code> (bloquear). Se ejecuta en cada intento de cierre: ESC, clic en el backdrop y el bot\u00f3n X."
+    },
+    "backdrop": {
+      "title": "Backdrop y disparadores de cierre",
+      "description": "Controla la visibilidad del backdrop y qu\u00e9 acciones del usuario pueden cerrar el modal usando <code>hasBackdrop</code>, <code>closeOnBackdropClick</code> y <code>closeOnEscape</code>.",
+      "note": "Establecer <code>hasBackdrop: false</code> elimina la capa de overlay completamente, permitiendo la interacci\u00f3n con la p\u00e1gina detr\u00e1s del modal."
+    },
+    "update-ref": {
+      "title": "Actualizaciones en caliente via ModalDialogRef",
+      "description": "Usa <code>ref.updateTitle()</code>, <code>ref.updateHeaderTemplate()</code> y <code>ref.updateFooterTemplate()</code> para actualizar un modal abierto sin cerrarlo y reabrirlo.",
+      "note": "La actualizaci\u00f3n del t\u00edtulo es reactiva mediante signals y se renderiza s\u00edncronamente, incluso cuando se llama fuera de la zona de Angular (p. ej. desde <code>setTimeout</code>)."
     }
   },
   "api": {

@@ -48,8 +48,33 @@
     "child-footer-actions": {
       "title": "Actions from child component",
       "description": "Customize the modal footer from a dynamic component loaded inside the modal.",
-      "note": "Inject <code>ModalDialogActionsService</code> into your dynamic component to register footer buttons from within the component. Actions support reactive <code>disabled</code> and <code>loading</code> states via getters — no <code>update()</code> calls needed.",
+      "note": "Inject <code>ModalDialogActionsService</code> into your dynamic component to register footer buttons from within the component. Actions support reactive <code>disabled</code> and <code>loading</code> states via getters \u2014 no <code>update()</code> calls needed.",
       "note2": "Alternatively, use the <code>nuiModalDialogFooter</code> directive inside a dynamic component for full footer control with native HTML. Unlike <code>ModalDialogActionsService</code>, which registers button data rendered by the modal shell, the directive projects a complete <code>ng-template</code>: any Angular binding re-evaluates on every change detection cycle automatically, without calling <code>update()</code>."
+    },
+    "html-content": {
+      "title": "HTML content",
+      "description": "Pass an HTML string via <code>htmlContent</code> for rich body content without creating a full Angular component. The string is sanitized by Angular\u2019s <code>DomSanitizer</code>.",
+      "note": "Use <code>htmlContent</code> for static or server-rendered markup. For Angular bindings (events, interpolation, directives), use <code>bodyTemplate</code> instead."
+    },
+    "body-template": {
+      "title": "Body template",
+      "description": "Pass an Angular <code>TemplateRef</code> via <code>bodyTemplate</code> to use Angular bindings inside the modal body. Pair with <code>templateContext</code> to inject dynamic data.",
+      "note": "The template is rendered with <code>*ngTemplateOutlet</code>. Use <code>let-varName=\"key\"</code> in the template to access values from <code>templateContext</code>."
+    },
+    "prevent-close": {
+      "title": "Prevent close",
+      "description": "Use <code>preventClose</code> to intercept close attempts and conditionally block them. Supports both synchronous and async guards. Subscribe to <code>closePrevented()</code> to react when a close is blocked.",
+      "note": "The <code>preventClose</code> function must return <code>true</code> (allow) or <code>false</code> / <code>Promise&lt;false&gt;</code> (block). It runs on every close trigger: ESC, backdrop click, and the X button."
+    },
+    "backdrop": {
+      "title": "Backdrop & close triggers",
+      "description": "Control the backdrop visibility and which user actions can close the modal using <code>hasBackdrop</code>, <code>closeOnBackdropClick</code>, and <code>closeOnEscape</code>.",
+      "note": "Setting <code>hasBackdrop: false</code> removes the overlay entirely, allowing interaction with the page behind the modal."
+    },
+    "update-ref": {
+      "title": "Hot updates via ModalDialogRef",
+      "description": "Use <code>ref.updateTitle()</code>, <code>ref.updateHeaderTemplate()</code>, and <code>ref.updateFooterTemplate()</code> to update an open modal in place without closing and reopening it.",
+      "note": "The title update is signal-based and re-renders synchronously \u2014 it works correctly even when called outside Angular\u2019s zone (e.g. from <code>setTimeout</code>)."
     }
   },
   "api": {

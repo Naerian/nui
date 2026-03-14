@@ -47,9 +47,34 @@
     },
     "child-footer-actions": {
       "title": "Aktionen aus untergeordneter Komponente",
-      "description": "Passen Sie die Modal-Fußzeile von einer dynamisch geladenen Komponente innerhalb des Modals an.",
-      "note": "Injizieren Sie <code>ModalDialogActionsService</code> in Ihre dynamische Komponente, um Footer-Schaltflächen von innerhalb der Komponente zu registrieren. Aktionen unterstützen reaktive Zustände für <code>disabled</code> und <code>loading</code> über Getter, ohne <code>update()</code>-Aufrufe.",
-      "note2": "Alternativ können Sie die Direktive <code>nuiModalDialogFooter</code> in einer dynamischen Komponente verwenden, um volle Kontrolle über die Fußzeile mit nativem HTML zu erhalten. Im Gegensatz zu <code>ModalDialogActionsService</code>, der Button-Daten registriert und vom Modal-Shell gerendert werden, projiziert die Direktive ein vollständiges <code>ng-template</code>: Jedes Angular-Binding wird bei jeder Änderungserkennung automatisch neu ausgewertet, ohne <code>update()</code> aufrufen zu müssen."
+      "description": "Passen Sie die Modal-Fu\u00dfzeile von einer dynamisch geladenen Komponente innerhalb des Modals an.",
+      "note": "Injizieren Sie <code>ModalDialogActionsService</code> in Ihre dynamische Komponente, um Footer-Schaltfl\u00e4chen von innerhalb der Komponente zu registrieren. Aktionen unterst\u00fctzen reaktive Zust\u00e4nde f\u00fcr <code>disabled</code> und <code>loading</code> \u00fcber Getter, ohne <code>update()</code>-Aufrufe.",
+      "note2": "Alternativ k\u00f6nnen Sie die Direktive <code>nuiModalDialogFooter</code> in einer dynamischen Komponente verwenden, um volle Kontrolle \u00fcber die Fu\u00dfzeile mit nativem HTML zu erhalten. Im Gegensatz zu <code>ModalDialogActionsService</code>, der Button-Daten registriert und vom Modal-Shell gerendert werden, projiziert die Direktive ein vollst\u00e4ndiges <code>ng-template</code>: Jedes Angular-Binding wird bei jeder \u00c4nderungserkennung automatisch neu ausgewertet, ohne <code>update()</code> aufrufen zu m\u00fcssen."
+    },
+    "html-content": {
+      "title": "HTML-Inhalt",
+      "description": "\u00dcbergeben Sie einen HTML-String \u00fcber <code>htmlContent</code> f\u00fcr reichhaltigen Body-Inhalt, ohne eine vollst\u00e4ndige Angular-Komponente zu erstellen. Der String wird von Angulars <code>DomSanitizer</code> bereinigt.",
+      "note": "Verwenden Sie <code>htmlContent</code> f\u00fcr statisches oder serverseitig gerendertes Markup. F\u00fcr Angular-Bindings (Ereignisse, Interpolation, Direktiven) verwenden Sie stattdessen <code>bodyTemplate</code>."
+    },
+    "body-template": {
+      "title": "Body-Template",
+      "description": "\u00dcbergeben Sie ein Angular-<code>TemplateRef</code> \u00fcber <code>bodyTemplate</code>, um Angular-Bindings im Modal-Body zu verwenden. Kombinieren Sie es mit <code>templateContext</code>, um dynamische Daten einzuspritzen.",
+      "note": "Das Template wird mit <code>*ngTemplateOutlet</code> gerendert. Verwenden Sie <code>let-name=\"key\"</code> im Template, um auf Werte aus <code>templateContext</code> zuzugreifen."
+    },
+    "prevent-close": {
+      "title": "Schlie\u00dfen verhindern",
+      "description": "Verwenden Sie <code>preventClose</code>, um Schlie\u00dfversuche abzufangen und sie bedingt zu blockieren. Unterst\u00fctzt synchrone und asynchrone Guards. Abonnieren Sie <code>closePrevented()</code>, um auf blockierte Schlie\u00dfversuche zu reagieren.",
+      "note": "Die Funktion <code>preventClose</code> muss <code>true</code> (erlauben) oder <code>false</code> / <code>Promise&lt;false&gt;</code> (blockieren) zur\u00fcckgeben. Sie wird bei jedem Schlie\u00dfversuch ausgef\u00fchrt: ESC, Backdrop-Klick und X-Schaltfl\u00e4che."
+    },
+    "backdrop": {
+      "title": "Backdrop und Schlie\u00dfausl\u00f6ser",
+      "description": "Steuern Sie die Backdrop-Sichtbarkeit und welche Benutzeraktionen das Modal schlie\u00dfen k\u00f6nnen, mit <code>hasBackdrop</code>, <code>closeOnBackdropClick</code> und <code>closeOnEscape</code>.",
+      "note": "Das Setzen von <code>hasBackdrop: false</code> entfernt das Overlay vollst\u00e4ndig und erm\u00f6glicht die Interaktion mit der Seite hinter dem Modal."
+    },
+    "update-ref": {
+      "title": "Hot-Updates \u00fcber ModalDialogRef",
+      "description": "Verwenden Sie <code>ref.updateTitle()</code>, <code>ref.updateHeaderTemplate()</code> und <code>ref.updateFooterTemplate()</code>, um ein ge\u00f6ffnetes Modal direkt zu aktualisieren, ohne es zu schlie\u00dfen.",
+      "note": "Die Titelaktualisierung ist signal-basiert und rendert synchron \u2014 sie funktioniert auch au\u00dferhalb der Angular-Zone (z.B. aus einem <code>setTimeout</code>)."
     }
   },
   "api": {
