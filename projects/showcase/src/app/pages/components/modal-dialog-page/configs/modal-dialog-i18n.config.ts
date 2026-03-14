@@ -16,32 +16,32 @@ export const MODAL_DIALOG_I18N_SECTIONS: ComponentSection[] = [
         [
           '<code>close</code>',
           'Close',
-          'Aria label and title of the header close button',
+          'components.modal-dialog.i18n.keys.rows.close',
         ],
         [
           '<code>minimize</code>',
           'Minimize',
-          'Aria label and title of the header minimize button',
+          'components.modal-dialog.i18n.keys.rows.minimize',
         ],
-        ['<code>restore</code>', 'Restore', 'Label for the dock restore chip'],
-        ['<code>confirm</code>', 'Confirm', 'Default confirm button label'],
-        ['<code>cancel</code>', 'Cancel', 'Default cancel button label'],
-        
-        ['<code>modalDialog.loading</code>', 'Loading...', 'Label displayed in loader modals'],
+        ['<code>restore</code>', 'Restore', 'components.modal-dialog.i18n.keys.rows.restore'],
+        ['<code>confirm</code>', 'Confirm', 'components.modal-dialog.i18n.keys.rows.confirm'],
+        ['<code>cancel</code>', 'Cancel', 'components.modal-dialog.i18n.keys.rows.cancel'],
+
+        ['<code>modalDialog.loading</code>', 'Loading...', 'components.modal-dialog.i18n.keys.rows.modalDialogLoading'],
         [
           '<code>modalDialog.verificationLabel</code>',
           'Type the following to confirm',
-          'Label of the verification text field',
+          'components.modal-dialog.i18n.keys.rows.modalDialogVerificationLabel',
         ],
         [
           '<code>modalDialog.verificationPlaceholder</code>',
           'Type here to confirm',
-          'Placeholder of the verification text field',
+          'components.modal-dialog.i18n.keys.rows.modalDialogVerificationPlaceholder',
         ],
         [
           '<code>modalDialog.verificationErrorMessage</code>',
           'The text does not match. Please try again.',
-          'Error shown when verification text is wrong',
+          'components.modal-dialog.i18n.keys.rows.modalDialogVerificationErrorMessage',
         ],
       ],
     },

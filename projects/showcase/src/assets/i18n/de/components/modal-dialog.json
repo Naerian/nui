@@ -238,39 +238,111 @@
   "theming": {
     "colors": {
       "title": "Farb-Token",
-      "description": "Überschreiben Sie diese CSS-Custom-Properties, um die Farben des Modal Dialogs an Ihre Marke oder Ihr benutzerdefiniertes Theme anzupassen."
+      "description": "Überschreiben Sie diese CSS-Custom-Properties, um die Farben des Modal Dialogs an Ihre Marke oder Ihr benutzerdefiniertes Theme anzupassen.",
+      "rows": {
+        "bg": "Hintergrundfarbe des Modal-Panels.",
+        "text": "Textfarbe des Modals.",
+        "border": "Trennlinienfarbe des Footer-Rahmens.",
+        "overlayBg": "Hintergrundfarbe des Backdrop-Overlays.",
+        "progressBg": "Hintergrundfarbe der Timeout-Fortschrittsbalken-Leiste.",
+        "progressColor": "Füllfarbe des Timeout-Fortschrittsbalkens.",
+        "scrollBg": "Hintergrundfarbe der Scrollleisten-Schiene.",
+        "scrollThumbBg": "Farbe des Scrollleisten-Ziehers."
+      }
     },
     "layout": {
       "title": "Layout-Token",
-      "description": "Steuern Sie Abmessungen, Abstände, Typografie und Ebene (z-index) des Modals über diese CSS-Variablen."
+      "description": "Steuern Sie Abmessungen, Abstände, Typografie und Ebene (z-index) des Modals über diese CSS-Variablen.",
+      "rows": {
+        "borderRadius": "Eckenradius des Modal-Panels.",
+        "shadow": "Schlagschatten des Modal-Panels.",
+        "headerPadding": "Innenabstand des Headers.",
+        "headerPaddingY": "Vertikaler Innenabstand des Headers.",
+        "bodyPaddingY": "Vertikaler Innenabstand des Inhaltsbereichs.",
+        "bodyPaddingX": "Horizontaler Innenabstand des Inhaltsbereichs.",
+        "footerPaddingTop": "Oberer Innenabstand des Footers.",
+        "footerPaddingBottom": "Unterer Innenabstand des Footers.",
+        "footerPaddingX": "Horizontaler Innenabstand des Footers.",
+        "titleSize": "Schriftgröße des Titels.",
+        "titleWeight": "Schriftgewicht des Titels.",
+        "zIndex": "Stapelebene des Backdrop-Overlays."
+      }
     },
     "dock": {
       "title": "NuiDock-Token",
-      "description": "Passen Sie das Erscheinungsbild des zentralen Docks für minimierte Elemente (Modals und Seitenleisten) an. Die <code>--nui-dock-*</code>-Token steuern die Chips; verwenden Sie <code>--nui-dock-z-index</code> und <code>--nui-dock-offset</code> für die Positionierung."
+      "description": "Passen Sie das Erscheinungsbild des zentralen Docks für minimierte Elemente (Modals und Seitenleisten) an. Die <code>--nui-dock-*</code>-Token steuern die Chips; verwenden Sie <code>--nui-dock-z-index</code> und <code>--nui-dock-offset</code> für die Positionierung.",
+      "rows": {
+        "zIndex": "Stapelebene der Dock-Leiste.",
+        "offset": "Abstand zum Viewport-Rand.",
+        "maxWidth": "Maximale Breite des Dock-Containers.",
+        "borderRadius": "Eckenradius des Chips.",
+        "chipBg": "Hintergrundfarbe des Chips.",
+        "chipHoverBg": "Hintergrundfarbe des Chips beim Darüberfahren.",
+        "text": "Textfarbe des Chips.",
+        "border": "Rahmenfarbe des Chips.",
+        "shadow": "Standardschatten des Chips.",
+        "hoverShadow": "Schatten des Chips beim Darüberfahren.",
+        "separatorColor": "Trennlinienfarbe zwischen den Chip-Gruppen für Modals und Seitenleisten."
+      }
     }
   },
   "i18n": {
     "keys": {
       "title": "Übersetzungstoken",
       "description": "Die Modal Dialog-Komponente verwendet eigene Tokens und einige gemeinsame Tokens.",
-      "note": "Alle für den Benutzer sichtbaren Texte im Modal Dialog können global mit <code>provideNuiI18n()</code> überschrieben werden. Andere können durch die Übergabe der benutzerdefinierten Übersetzung in der <code>open()</code>-Konfiguration übersetzt werden."
+      "note": "Alle für den Benutzer sichtbaren Texte im Modal Dialog können global mit <code>provideNuiI18n()</code> überschrieben werden. Andere können durch die Übergabe der benutzerdefinierten Übersetzung in der <code>open()</code>-Konfiguration übersetzt werden.",
+      "rows": {
+        "close": "Aria-Label und Titel der Schließen-Schaltfläche im Header.",
+        "minimize": "Aria-Label und Titel der Minimieren-Schaltfläche im Header.",
+        "restore": "Beschriftung des Wiederherstellungs-Chips im Dock.",
+        "confirm": "Standard-Beschriftung der Bestätigungsschaltfläche.",
+        "cancel": "Standard-Beschriftung der Abbrechen-Schaltfläche.",
+        "modalDialogLoading": "Beschriftung in Lade-Modals.",
+        "modalDialogVerificationLabel": "Beschriftung des Verifizierungstextfelds.",
+        "modalDialogVerificationPlaceholder": "Platzhalter des Verifizierungstextfelds.",
+        "modalDialogVerificationErrorMessage": "Fehlermeldung, wenn der Verifizierungstext nicht übereinstimmt."
+      }
     }
   },
   "a11y": {
     "roles": {
       "title": "ARIA-Rollen und -Attribute",
-      "description": "Die Modal-Shell wendet automatisch die erforderlichen ARIA-Attribute für die Kompatibilität mit Bildschirmlesern an."
+      "description": "Die Modal-Shell wendet automatisch die erforderlichen ARIA-Attribute für die Kompatibilität mit Bildschirmlesern an.",
+      "rows": {
+        "role": "Kennzeichnet das Element als Dialog.",
+        "ariaModal": "Informiert Hilfstechnologien, dass Inhalte außerhalb des Modals inaktiv sind.",
+        "ariaLabelledby": "Verknüpft die Überschrift mit dem Dialog. Wird automatisch gesetzt, wenn ein Titel vorhanden ist.",
+        "ariaDescribedby": "Verknüpft den Inhaltsbereich mit dem Dialog."
+      }
     },
     "focus": {
       "title": "Fokusverwaltung",
       "description": "CDK FocusTrap stellt sicher, dass die Tastaturnavigation auf das Modal beschränkt ist, wenn es geöffnet ist.",
-      "note": "Der Fokus wird automatisch auf das Element zurückgesetzt, das das Modal ausgelöst hat, wenn es geschlossen wird."
+      "note": "Der Fokus wird automatisch auf das Element zurückgesetzt, das das Modal ausgelöst hat, wenn es geschlossen wird.",
+      "rows": {
+        "focusTrap": "Der Tastaturfokus bleibt während der Öffnung des Modals eingeschlossen (Angular CDK FocusTrap).",
+        "focusRestoration": "Beim Schließen des Modals kehrt der Fokus zum auslösenden Element zurück.",
+        "escapeKey": "Die Escape-Taste schließt das Modal. Konfigurierbar über <code>closeOnEscape</code>.",
+        "autoFocus": "Wenn <code>true</code> (Standard), erhält das erste fokussierbare Element beim Öffnen den Fokus."
+      }
     }
   },
   "globalConfig": {
     "options": {
       "title": "Globale Konfigurationsoptionen",
-      "description": "Standardwerte, die auf alle mit <code>ModalDialogService</code> geöffneten Modals angewendet werden. Können pro-Modal überschrieben werden, indem eine Konfiguration an <code>open()</code> übergeben wird."
+      "description": "Standardwerte, die auf alle mit <code>ModalDialogService</code> geöffneten Modals angewendet werden. Können pro-Modal überschrieben werden, indem eine Konfiguration an <code>open()</code> übergeben wird.",
+      "rows": {
+        "animationDuration": "Dauer der Öffnungs-/Schließanimation in Millisekunden.",
+        "hasBackdrop": "Zeigt standardmäßig ein Backdrop-Overlay hinter dem Modal an.",
+        "closeOnBackdropClick": "Schließt das Modal standardmäßig beim Klick auf den Backdrop.",
+        "closeOnEscape": "Schließt das Modal standardmäßig beim Drücken der Escape-Taste.",
+        "closeOnRouteChange": "Schließt das Modal standardmäßig automatisch bei der Navigation.",
+        "showCloseButton": "Zeigt die Schließen-Schaltfläche im Header standardmäßig an.",
+        "autoFocus": "Setzt den Fokus beim Öffnen standardmäßig auf das erste fokussierbare Element.",
+        "width": "Standardbreite des Modal-Panels.",
+        "buttonsVariant": "Standardvariante der Bestätigungs- und Abbrechen-Schaltflächen.",
+        "buttonsSize": "Standardgröße der Bestätigungs- und Abbrechen-Schaltflächen."
+      }
     },
     "example": {
       "title": "Verwendungsbeispiel",

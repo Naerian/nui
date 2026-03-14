@@ -238,39 +238,111 @@
   "theming": {
     "colors": {
       "title": "Tokens de couleur",
-      "description": "Remplacez ces propriétés CSS personnalisées pour adapter les couleurs du modal dialog à votre marque ou thème personnalisé."
+      "description": "Remplacez ces propriétés CSS personnalisées pour adapter les couleurs du modal dialog à votre marque ou thème personnalisé.",
+      "rows": {
+        "bg": "Couleur de fond du panneau modal.",
+        "text": "Couleur du texte du modal.",
+        "border": "Couleur du séparateur du bord du footer.",
+        "overlayBg": "Couleur de fond de l'overlay de backdrop.",
+        "progressBg": "Couleur de la piste de la barre de progression du timeout.",
+        "progressColor": "Couleur de remplissage de la barre de progression du timeout.",
+        "scrollBg": "Couleur de la piste de la barre de défilement.",
+        "scrollThumbBg": "Couleur du curseur de la barre de défilement."
+      }
     },
     "layout": {
       "title": "Tokens de mise en page",
-      "description": "Contrôlez les dimensions, l'espacement, la typographie et la couche (z-index) du modal via ces variables CSS."
+      "description": "Contrôlez les dimensions, l'espacement, la typographie et la couche (z-index) du modal via ces variables CSS.",
+      "rows": {
+        "borderRadius": "Rayon des coins du panneau modal.",
+        "shadow": "Ombre portée du panneau modal.",
+        "headerPadding": "Rembourrage de l'en-tête.",
+        "headerPaddingY": "Rembourrage vertical de l'en-tête.",
+        "bodyPaddingY": "Rembourrage vertical du corps.",
+        "bodyPaddingX": "Rembourrage horizontal du corps.",
+        "footerPaddingTop": "Rembourrage supérieur du pied de page.",
+        "footerPaddingBottom": "Rembourrage inférieur du pied de page.",
+        "footerPaddingX": "Rembourrage horizontal du pied de page.",
+        "titleSize": "Taille de police du titre.",
+        "titleWeight": "Graisse de police du titre.",
+        "zIndex": "Couche d'empilement de l'overlay de backdrop."
+      }
     },
     "dock": {
       "title": "Tokens du NuiDock",
-      "description": "Personnalisez l'apparence du dock unifié des éléments minimisés (modaux et panneaux latéraux). Les tokens <code>--nui-dock-*</code> contrôlent les chips ; utilisez <code>--nui-dock-z-index</code> et <code>--nui-dock-offset</code> pour le positionnement."
+      "description": "Personnalisez l'apparence du dock unifié des éléments minimisés (modaux et panneaux latéraux). Les tokens <code>--nui-dock-*</code> contrôlent les chips ; utilisez <code>--nui-dock-z-index</code> et <code>--nui-dock-offset</code> pour le positionnement.",
+      "rows": {
+        "zIndex": "Couche d'empilement de la barre du dock.",
+        "offset": "Distance par rapport au bord du viewport.",
+        "maxWidth": "Largeur maximale du conteneur du dock.",
+        "borderRadius": "Rayon des coins du chip.",
+        "chipBg": "Couleur de fond du chip.",
+        "chipHoverBg": "Couleur de fond du chip au survol.",
+        "text": "Couleur du texte du chip.",
+        "border": "Couleur de bordure du chip.",
+        "shadow": "Ombre par défaut du chip.",
+        "hoverShadow": "Ombre du chip au survol.",
+        "separatorColor": "Couleur du séparateur entre les groupes de chips des modaux et des panneaux latéraux."
+      }
     }
   },
   "i18n": {
     "keys": {
       "title": "Tokens de traduction",
       "description": "Le composant de dialogue modal utilise ses propres tokens et certains tokens partagés.",
-      "note": "Tous les textes visibles par l'utilisateur dans Modal Dialog peuvent être remplacés globalement en utilisant <code>provideNuiI18n()</code>. D'autres peuvent être traduits en passant la traduction personnalisée dans la configuration de <code>open()</code>."
+      "note": "Tous les textes visibles par l'utilisateur dans Modal Dialog peuvent être remplacés globalement en utilisant <code>provideNuiI18n()</code>. D'autres peuvent être traduits en passant la traduction personnalisée dans la configuration de <code>open()</code>.",
+      "rows": {
+        "close": "Aria label et titre du bouton de fermeture dans l'en-tête.",
+        "minimize": "Aria label et titre du bouton de réduction dans l'en-tête.",
+        "restore": "Libellé du chip de restauration dans le dock.",
+        "confirm": "Libellé par défaut du bouton de confirmation.",
+        "cancel": "Libellé par défaut du bouton d'annulation.",
+        "modalDialogLoading": "Libellé affiché dans les modaux de chargement.",
+        "modalDialogVerificationLabel": "Libellé du champ de texte de vérification.",
+        "modalDialogVerificationPlaceholder": "Placeholder du champ de texte de vérification.",
+        "modalDialogVerificationErrorMessage": "Message d'erreur affiché lorsque le texte de vérification ne correspond pas."
+      }
     }
   },
   "a11y": {
     "roles": {
       "title": "Rôles et attributs ARIA",
-      "description": "Le shell du modal applique automatiquement les attributs ARIA requis pour la compatibilité avec les lecteurs d'écran."
+      "description": "Le shell du modal applique automatiquement les attributs ARIA requis pour la compatibilité avec les lecteurs d'écran.",
+      "rows": {
+        "role": "Identifie l'élément comme une boîte de dialogue.",
+        "ariaModal": "Informe les technologies d'assistance que le contenu extérieur au modal est inerte.",
+        "ariaLabelledby": "Associe le titre au dialogue. Appliqué automatiquement lorsqu'un titre est défini.",
+        "ariaDescribedby": "Associe la région du corps au dialogue."
+      }
     },
     "focus": {
       "title": "Gestion du focus",
       "description": "Le CDK FocusTrap garantit que la navigation au clavier est confinée au modal lorsqu'il est ouvert.",
-      "note": "Le focus est automatiquement restauré à l'élément qui a déclenché le modal lorsqu'il se ferme."
+      "note": "Le focus est automatiquement restauré à l'élément qui a déclenché le modal lorsqu'il se ferme.",
+      "rows": {
+        "focusTrap": "Le focus clavier reste confiné au modal pendant qu'il est ouvert (Angular CDK FocusTrap).",
+        "focusRestoration": "À la fermeture du modal, le focus revient à l'élément déclencheur.",
+        "escapeKey": "La touche Échap ferme le modal. Configurable via <code>closeOnEscape</code>.",
+        "autoFocus": "Quand <code>true</code> (par défaut), le premier élément focalisable reçoit le focus à l'ouverture."
+      }
     }
   },
   "globalConfig": {
     "options": {
       "title": "Options de configuration globale",
-      "description": "Valeurs par défaut appliquées à tous les modaux ouverts avec <code>ModalDialogService</code>. Peuvent être remplacées par-modal en passant une configuration à <code>open()</code>."
+      "description": "Valeurs par défaut appliquées à tous les modaux ouverts avec <code>ModalDialogService</code>. Peuvent être remplacées par-modal en passant une configuration à <code>open()</code>.",
+      "rows": {
+        "animationDuration": "Durée de l'animation d'ouverture/fermeture en millisecondes.",
+        "hasBackdrop": "Affiche un overlay de backdrop derrière le modal par défaut.",
+        "closeOnBackdropClick": "Ferme le modal au clic sur le backdrop par défaut.",
+        "closeOnEscape": "Ferme le modal à l'appui sur la touche Échap par défaut.",
+        "closeOnRouteChange": "Ferme automatiquement le modal lors de la navigation par défaut.",
+        "showCloseButton": "Affiche le bouton de fermeture dans l'en-tête par défaut.",
+        "autoFocus": "Place le focus sur le premier élément focalisable à l'ouverture par défaut.",
+        "width": "Largeur par défaut du panneau modal.",
+        "buttonsVariant": "Variante par défaut des boutons de confirmation et d'annulation.",
+        "buttonsSize": "Taille par défaut des boutons de confirmation et d'annulation."
+      }
     },
     "example": {
       "title": "Exemple d'utilisation",

@@ -238,39 +238,111 @@
   "theming": {
     "colors": {
       "title": "Tokens de color",
-      "description": "Sobreescribe estas propiedades CSS personalizadas para ajustar los colores del modal a tu marca o tema personalizado."
+      "description": "Sobreescribe estas propiedades CSS personalizadas para ajustar los colores del modal a tu marca o tema personalizado.",
+      "rows": {
+        "bg": "Color de fondo del panel modal.",
+        "text": "Color del texto del modal.",
+        "border": "Color del separador del borde del footer.",
+        "overlayBg": "Color de fondo del overlay del backdrop.",
+        "progressBg": "Color del track de la barra de progreso del timeout.",
+        "progressColor": "Color de relleno de la barra de progreso del timeout.",
+        "scrollBg": "Color del track de la barra de desplazamiento.",
+        "scrollThumbBg": "Color del thumb de la barra de desplazamiento."
+      }
     },
     "layout": {
       "title": "Tokens de layout",
-      "description": "Controla dimensiones, espaciado, tipografía y capa (z-index) del modal mediante estas variables CSS."
+      "description": "Controla dimensiones, espaciado, tipografía y capa (z-index) del modal mediante estas variables CSS.",
+      "rows": {
+        "borderRadius": "Radio de esquina del panel modal.",
+        "shadow": "Sombra del panel modal.",
+        "headerPadding": "Padding del header.",
+        "headerPaddingY": "Padding vertical del header.",
+        "bodyPaddingY": "Padding vertical del body.",
+        "bodyPaddingX": "Padding horizontal del body.",
+        "footerPaddingTop": "Padding superior del footer.",
+        "footerPaddingBottom": "Padding inferior del footer.",
+        "footerPaddingX": "Padding horizontal del footer.",
+        "titleSize": "Tamaño de fuente del título.",
+        "titleWeight": "Peso de fuente del título.",
+        "zIndex": "Capa de apilamiento del overlay del backdrop."
+      }
     },
     "dock": {
       "title": "Tokens del NuiDock",
-      "description": "Personaliza la apariencia del dock unificado de elementos minimizados (modales y paneles laterales). Los tokens <code>--nui-dock-*</code> controlan los chips; usa <code>--nui-dock-z-index</code> y <code>--nui-dock-offset</code> para posicionamiento."
+      "description": "Personaliza la apariencia del dock unificado de elementos minimizados (modales y paneles laterales). Los tokens <code>--nui-dock-*</code> controlan los chips; usa <code>--nui-dock-z-index</code> y <code>--nui-dock-offset</code> para posicionamiento.",
+      "rows": {
+        "zIndex": "Capa de apilamiento de la barra del dock.",
+        "offset": "Distancia al borde del viewport.",
+        "maxWidth": "Anchura máxima del contenedor del dock.",
+        "borderRadius": "Radio de esquina del chip.",
+        "chipBg": "Color de fondo del chip.",
+        "chipHoverBg": "Color de fondo del chip al pasar el cursor.",
+        "text": "Color del texto del chip.",
+        "border": "Color del borde del chip.",
+        "shadow": "Sombra por defecto del chip.",
+        "hoverShadow": "Sombra del chip al pasar el cursor.",
+        "separatorColor": "Color del separador entre los grupos de chips de modales y paneles laterales."
+      }
     }
   },
   "i18n": {
     "keys": {
       "title": "Tokens de traducción",
       "description": "El componente Modal Dialog usa tokens propios y algunos compartidos.",
-      "note": "Todos los textos visibles por el usuario en Modal Dialog pueden ser sobreescritos globalmente usando <code>provideNuiI18n()</code>. Otros pueden traducirse pasando la traducción personalizada en la configuración de <code>open()</code>."
+      "note": "Todos los textos visibles por el usuario en Modal Dialog pueden ser sobreescritos globalmente usando <code>provideNuiI18n()</code>. Otros pueden traducirse pasando la traducción personalizada en la configuración de <code>open()</code>.",
+      "rows": {
+        "close": "Aria label y título del botón de cierre del header.",
+        "minimize": "Aria label y título del botón de minimizar del header.",
+        "restore": "Etiqueta del chip de restauración del dock.",
+        "confirm": "Etiqueta por defecto del botón de confirmación.",
+        "cancel": "Etiqueta por defecto del botón de cancelación.",
+        "modalDialogLoading": "Etiqueta mostrada en los modales de carga.",
+        "modalDialogVerificationLabel": "Etiqueta del campo de texto de verificación.",
+        "modalDialogVerificationPlaceholder": "Placeholder del campo de texto de verificación.",
+        "modalDialogVerificationErrorMessage": "Mensaje de error mostrado cuando el texto de verificación no coincide."
+      }
     }
   },
   "a11y": {
     "roles": {
       "title": "Roles y atributos ARIA",
-      "description": "El shell del modal aplica automáticamente los atributos ARIA requeridos para compatibilidad con lectores de pantalla."
+      "description": "El shell del modal aplica automáticamente los atributos ARIA requeridos para compatibilidad con lectores de pantalla.",
+      "rows": {
+        "role": "Identifica el elemento como un diálogo.",
+        "ariaModal": "Informa a las tecnologías de asistencia que el contenido exterior al modal está inactivo.",
+        "ariaLabelledby": "Asocia el encabezado con el diálogo. Se aplica automáticamente cuando se establece un título.",
+        "ariaDescribedby": "Asocia la región del body con el diálogo."
+      }
     },
     "focus": {
       "title": "Gestión del foco",
       "description": "El CDK FocusTrap garantiza que la navegación por teclado quede confinada al modal mientras esté abierto.",
-      "note": "El foco se restaura automáticamente al elemento que abrió el modal cuando este se cierra."
+      "note": "El foco se restaura automáticamente al elemento que abrió el modal cuando este se cierra.",
+      "rows": {
+        "focusTrap": "El foco por teclado queda confinado al modal mientras está abierto (Angular CDK FocusTrap).",
+        "focusRestoration": "Al cerrarse el modal, el foco vuelve al elemento que lo originó.",
+        "escapeKey": "Al pulsar Escape se cierra el modal. Se puede configurar mediante <code>closeOnEscape</code>.",
+        "autoFocus": "Cuando es <code>true</code> (por defecto), el primer elemento enfocable recibe el foco al abrirse."
+      }
     }
   },
   "globalConfig": {
     "options": {
       "title": "Opciones de configuración global",
-      "description": "Valores por defecto aplicados a todos los modales abiertos con <code>ModalDialogService</code>. Se pueden sobreescribir por-modal pasando la configuración a <code>open()</code>."
+      "description": "Valores por defecto aplicados a todos los modales abiertos con <code>ModalDialogService</code>. Se pueden sobreescribir por-modal pasando la configuración a <code>open()</code>.",
+      "rows": {
+        "animationDuration": "Duración de la animación de apertura/cierre en milisegundos.",
+        "hasBackdrop": "Muestra un overlay de backdrop detrás del modal por defecto.",
+        "closeOnBackdropClick": "Cierra el modal al hacer clic en el backdrop por defecto.",
+        "closeOnEscape": "Cierra el modal al pulsar la tecla Escape por defecto.",
+        "closeOnRouteChange": "Cierra automáticamente el modal al navegar por defecto.",
+        "showCloseButton": "Muestra el botón de cierre del header por defecto.",
+        "autoFocus": "Enfoca el primer elemento enfocable al abrirse por defecto.",
+        "width": "Anchura por defecto del panel modal.",
+        "buttonsVariant": "Variante por defecto de los botones de confirmación y cancelación.",
+        "buttonsSize": "Tamaño por defecto de los botones de confirmación y cancelación."
+      }
     },
     "example": {
       "title": "Ejemplo de uso",

@@ -9,10 +9,10 @@ export const MODAL_DIALOG_A11Y_SECTIONS: ComponentSection[] = [
     table: {
       headers: ['common.tables.attribute', 'common.tables.value', 'common.tables.description'],
       rows: [
-        ['<code>role</code>', 'dialog', 'Identifies the element as a dialog'],
-        ['<code>aria-modal</code>', 'true', 'Informs assistive tech that content outside is inert'],
-        ['<code>aria-labelledby</code>', '{instanceId}-title', 'Associates the heading with the dialog (auto when title is set)'],
-        ['<code>aria-describedby</code>', '{instanceId}-body', 'Associates the body region with the dialog'],
+        ['<code>role</code>', 'dialog', 'components.modal-dialog.a11y.roles.rows.role'],
+        ['<code>aria-modal</code>', 'true', 'components.modal-dialog.a11y.roles.rows.ariaModal'],
+        ['<code>aria-labelledby</code>', '{instanceId}-title', 'components.modal-dialog.a11y.roles.rows.ariaLabelledby'],
+        ['<code>aria-describedby</code>', '{instanceId}-body', 'components.modal-dialog.a11y.roles.rows.ariaDescribedby'],
       ],
     },
   },
@@ -28,10 +28,10 @@ export const MODAL_DIALOG_A11Y_SECTIONS: ComponentSection[] = [
     table: {
       headers: ['common.tables.feature', 'common.tables.description'],
       rows: [
-        ['Focus trap', 'Keyboard focus is contained within the modal while it is open (Angular CDK FocusTrap)'],
-        ['Focus restoration', 'When the modal closes, focus returns to the element that triggered it'],
-        ['Escape key', 'Pressing Escape closes the modal (configurable via closeOnEscape)'],
-        ['autoFocus', 'When true (default), the first focusable element receives focus on open'],
+        ['Focus trap', 'components.modal-dialog.a11y.focus.rows.focusTrap'],
+        ['Focus restoration', 'components.modal-dialog.a11y.focus.rows.focusRestoration'],
+        ['Escape key', 'components.modal-dialog.a11y.focus.rows.escapeKey'],
+        ['autoFocus', 'components.modal-dialog.a11y.focus.rows.autoFocus'],
       ],
     },
   },

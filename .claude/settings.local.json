@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(xargs grep:*)",
-      "Bash(grep -E \"\\\\.\\(ts|json\\)$\")"
+      "Bash(grep -E \"\\\\.\\(ts|json\\)$\")",
+      "Bash(python3 -c \":*)",
+      "Bash(node -e \":*)"
     ]
   }
 }

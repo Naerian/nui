@@ -237,23 +237,52 @@
   "theming": {
     "colors": {
       "title": "Color variables",
-      "description": "CSS variables to control the colors of the side panel: background, text, borders and overlay. These variables automatically adapt to the light/dark mode of the active theme."
+      "description": "CSS variables to control the colors of the side panel: background, text, borders and overlay. These variables automatically adapt to the light/dark mode of the active theme.",
+      "rows": {
+        "bg": "Panel background color. Adapts dynamically based on the active theme.",
+        "text": "Panel text color.",
+        "border": "Panel border color. Adapts dynamically based on the active theme.",
+        "overlayBg": "Backdrop overlay background color."
+      }
     },
     "layout": {
       "title": "Layout variables",
-      "description": "CSS variables to control the size and spacing of the side panel: predefined size presets (xs to full) and header and content padding"
+      "description": "CSS variables to control the size and spacing of the side panel: predefined size presets (xs to full) and header and content padding",
+      "rows": {
+        "sizeXsWidth": "Extra small panel width.",
+        "sizeSmWidth": "Small panel width.",
+        "sizeMdWidth": "Medium panel width (default).",
+        "sizeLgWidth": "Large panel width.",
+        "sizeXlWidth": "Extra large panel width.",
+        "sizeFullWidth": "Full-width panel.",
+        "headerPadding": "Header padding.",
+        "contentPadding": "Content area padding."
+      }
     },
     "typography": {
       "title": "Typography variables",
-      "description": "CSS variables to control the typography of the side panel title"
+      "description": "CSS variables to control the typography of the side panel title",
+      "rows": {
+        "titleSize": "Panel title font size.",
+        "titleWeight": "Panel title font weight."
+      }
     },
     "elevation": {
       "title": "Elevation variables",
-      "description": "CSS variables to control the shadow and z-index of the side panel and overlay"
+      "description": "CSS variables to control the shadow and z-index of the side panel and overlay",
+      "rows": {
+        "shadow": "Panel drop shadow for elevation.",
+        "zIndex": "Panel z-index stacking layer."
+      }
     },
     "scrollbar": {
       "title": "Scrollbar variables",
-      "description": "CSS variables to control the appearance of the side panel scrollbar"
+      "description": "CSS variables to control the appearance of the side panel scrollbar",
+      "rows": {
+        "scrollBg": "Scrollbar track background color.",
+        "scrollThumbBg": "Scrollbar thumb background color.",
+        "scrollThumbHoverBg": "Scrollbar thumb background color on hover."
+      }
     },
     "examples": {
       "title": "Customization examples",

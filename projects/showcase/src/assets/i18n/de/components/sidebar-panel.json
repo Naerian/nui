@@ -237,23 +237,52 @@
   "theming": {
     "colors": {
       "title": "Farbvariablen",
-      "description": "CSS-Variablen zur Steuerung der Farben des Seitenpanels: Hintergrund, Text, Rahmen und Overlay. Diese Variablen passen sich automatisch dem Hell-/Dunkelmodus des aktiven Themes an."
+      "description": "CSS-Variablen zur Steuerung der Farben des Seitenpanels: Hintergrund, Text, Rahmen und Overlay. Diese Variablen passen sich automatisch dem Hell-/Dunkelmodus des aktiven Themes an.",
+      "rows": {
+        "bg": "Hintergrundfarbe des Panels. Passt sich dynamisch je nach aktivem Theme an.",
+        "text": "Textfarbe des Panels.",
+        "border": "Rahmenfarbe des Panels. Passt sich dynamisch je nach aktivem Theme an.",
+        "overlayBg": "Hintergrundfarbe des Backdrop-Overlays."
+      }
     },
     "layout": {
       "title": "Layout-Variablen",
-      "description": "CSS-Variablen zur Steuerung von Größe und Abstand des Seitenpanels: vordefinierte Größen (xs bis full) sowie Header- und Inhaltsabstand"
+      "description": "CSS-Variablen zur Steuerung von Größe und Abstand des Seitenpanels: vordefinierte Größen (xs bis full) sowie Header- und Inhaltsabstand",
+      "rows": {
+        "sizeXsWidth": "Breite des extra kleinen Panels.",
+        "sizeSmWidth": "Breite des kleinen Panels.",
+        "sizeMdWidth": "Breite des mittleren Panels (Standard).",
+        "sizeLgWidth": "Breite des großen Panels.",
+        "sizeXlWidth": "Breite des extra großen Panels.",
+        "sizeFullWidth": "Panel in voller Breite.",
+        "headerPadding": "Innenabstand des Headers.",
+        "contentPadding": "Innenabstand des Inhaltsbereichs."
+      }
     },
     "typography": {
       "title": "Typografie-Variablen",
-      "description": "CSS-Variablen zur Steuerung der Typografie des Seitenpanel-Titels"
+      "description": "CSS-Variablen zur Steuerung der Typografie des Seitenpanel-Titels",
+      "rows": {
+        "titleSize": "Schriftgröße des Panel-Titels.",
+        "titleWeight": "Schriftgewicht des Panel-Titels."
+      }
     },
     "elevation": {
       "title": "Erhebungs-Variablen",
-      "description": "CSS-Variablen zur Steuerung von Schatten und z-index des Seitenpanels und Overlays"
+      "description": "CSS-Variablen zur Steuerung von Schatten und z-index des Seitenpanels und Overlays",
+      "rows": {
+        "shadow": "Schlagschatten des Panels für die Elevation.",
+        "zIndex": "z-index-Stapelebene des Panels."
+      }
     },
     "scrollbar": {
       "title": "Scrollleisten-Variablen",
-      "description": "CSS-Variablen zur Steuerung des Erscheinungsbilds der Seitenpanel-Scrollleiste"
+      "description": "CSS-Variablen zur Steuerung des Erscheinungsbilds der Seitenpanel-Scrollleiste",
+      "rows": {
+        "scrollBg": "Hintergrundfarbe der Scrollleisten-Schiene.",
+        "scrollThumbBg": "Hintergrundfarbe des Scrollleisten-Ziehers.",
+        "scrollThumbHoverBg": "Hintergrundfarbe des Scrollleisten-Ziehers beim Darüberfahren."
+      }
     },
     "examples": {
       "title": "Anpassungsbeispiele",

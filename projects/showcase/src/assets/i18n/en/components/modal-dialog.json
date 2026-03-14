@@ -238,39 +238,111 @@
   "theming": {
     "colors": {
       "title": "Color tokens",
-      "description": "Override these CSS custom properties to adjust modal dialog colors for your brand or custom theme."
+      "description": "Override these CSS custom properties to adjust modal dialog colors for your brand or custom theme.",
+      "rows": {
+        "bg": "Modal panel background color.",
+        "text": "Modal text color.",
+        "border": "Footer border separator color.",
+        "overlayBg": "Backdrop overlay background color.",
+        "progressBg": "Timeout progress bar track color.",
+        "progressColor": "Timeout progress bar fill color.",
+        "scrollBg": "Scrollbar track color.",
+        "scrollThumbBg": "Scrollbar thumb color."
+      }
     },
     "layout": {
       "title": "Layout tokens",
-      "description": "Control dimensions, spacing, typography, and layer (z-index) of the modal dialog via these CSS variables."
+      "description": "Control dimensions, spacing, typography, and layer (z-index) of the modal dialog via these CSS variables.",
+      "rows": {
+        "borderRadius": "Corner radius of the modal panel.",
+        "shadow": "Drop shadow of the modal panel.",
+        "headerPadding": "Header padding.",
+        "headerPaddingY": "Header vertical padding.",
+        "bodyPaddingY": "Body vertical padding.",
+        "bodyPaddingX": "Body horizontal padding.",
+        "footerPaddingTop": "Footer top padding.",
+        "footerPaddingBottom": "Footer bottom padding.",
+        "footerPaddingX": "Footer horizontal padding.",
+        "titleSize": "Title font size.",
+        "titleWeight": "Title font weight.",
+        "zIndex": "Stack layer for the overlay backdrop."
+      }
     },
     "dock": {
       "title": "NuiDock tokens",
-      "description": "Customize the appearance of the unified dock for minimized items (modals and sidebar panels). The <code>--nui-dock-*</code> tokens control the chips; use <code>--nui-dock-z-index</code> and <code>--nui-dock-offset</code> for positioning."
+      "description": "Customize the appearance of the unified dock for minimized items (modals and sidebar panels). The <code>--nui-dock-*</code> tokens control the chips; use <code>--nui-dock-z-index</code> and <code>--nui-dock-offset</code> for positioning.",
+      "rows": {
+        "zIndex": "Stack layer for the dock toolbar.",
+        "offset": "Distance from the viewport edge.",
+        "maxWidth": "Maximum width of the dock container.",
+        "borderRadius": "Chip corner radius.",
+        "chipBg": "Chip background color.",
+        "chipHoverBg": "Chip background color on hover.",
+        "text": "Chip text color.",
+        "border": "Chip border color.",
+        "shadow": "Chip default shadow.",
+        "hoverShadow": "Chip shadow on hover.",
+        "separatorColor": "Separator color between modal and sidebar chip groups."
+      }
     }
   },
   "i18n": {
     "keys": {
       "title": "Translation tokens",
       "description": "The Modal Dialog component uses its own tokens and some shared tokens.",
-      "note": "All user-facing text in Modal Dialog can be overridden globally using <code>provideNuiI18n()</code>. Others can be translated by passing the custom translation in the <code>open()</code> configuration."
+      "note": "All user-facing text in Modal Dialog can be overridden globally using <code>provideNuiI18n()</code>. Others can be translated by passing the custom translation in the <code>open()</code> configuration.",
+      "rows": {
+        "close": "Aria label and title of the header close button.",
+        "minimize": "Aria label and title of the header minimize button.",
+        "restore": "Label for the dock restore chip.",
+        "confirm": "Default confirm button label.",
+        "cancel": "Default cancel button label.",
+        "modalDialogLoading": "Label displayed in loader modals.",
+        "modalDialogVerificationLabel": "Label of the verification text field.",
+        "modalDialogVerificationPlaceholder": "Placeholder of the verification text field.",
+        "modalDialogVerificationErrorMessage": "Error message shown when the verification text does not match."
+      }
     }
   },
   "a11y": {
     "roles": {
       "title": "ARIA roles and attributes",
-      "description": "The modal shell automatically applies the required ARIA attributes for screen reader compatibility."
+      "description": "The modal shell automatically applies the required ARIA attributes for screen reader compatibility.",
+      "rows": {
+        "role": "Identifies the element as a dialog.",
+        "ariaModal": "Informs assistive technologies that content outside the modal is inert.",
+        "ariaLabelledby": "Associates the heading with the dialog. Applied automatically when a title is set.",
+        "ariaDescribedby": "Associates the body region with the dialog."
+      }
     },
     "focus": {
       "title": "Focus management",
       "description": "The CDK FocusTrap ensures keyboard navigation is confined to the modal while it is open.",
-      "note": "Focus is automatically restored to the element that triggered the modal when it closes."
+      "note": "Focus is automatically restored to the element that triggered the modal when it closes.",
+      "rows": {
+        "focusTrap": "Keyboard focus is contained within the modal while it is open (Angular CDK FocusTrap).",
+        "focusRestoration": "When the modal closes, focus returns to the element that triggered it.",
+        "escapeKey": "Pressing Escape closes the modal. Configurable via <code>closeOnEscape</code>.",
+        "autoFocus": "When <code>true</code> (default), the first focusable element receives focus on open."
+      }
     }
   },
   "globalConfig": {
     "options": {
       "title": "Global config options",
-      "description": "Default values applied to every modal opened with <code>ModalDialogService</code>. Override per-modal by passing config to <code>open()</code>."
+      "description": "Default values applied to every modal opened with <code>ModalDialogService</code>. Override per-modal by passing config to <code>open()</code>.",
+      "rows": {
+        "animationDuration": "Open/close animation duration in milliseconds.",
+        "hasBackdrop": "Show a backdrop overlay behind the modal by default.",
+        "closeOnBackdropClick": "Close the modal on backdrop click by default.",
+        "closeOnEscape": "Close the modal on Escape key press by default.",
+        "closeOnRouteChange": "Auto-close the modal on route navigation by default.",
+        "showCloseButton": "Show the header close button by default.",
+        "autoFocus": "Focus the first focusable element on open by default.",
+        "width": "Default modal panel width.",
+        "buttonsVariant": "Default button variant for confirm and cancel actions.",
+        "buttonsSize": "Default button size for confirm and cancel actions."
+      }
     },
     "example": {
       "title": "Usage example",
