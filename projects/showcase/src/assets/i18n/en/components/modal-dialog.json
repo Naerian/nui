@@ -129,7 +129,7 @@
   "i18n": {
     "keys": {
       "title": "Translation tokens",
-      "description": "The Modal Dialog component uses its own tokens for its texts.",
+      "description": "The Modal Dialog component uses its own tokens and some shared tokens.",
       "note": "All user-facing text in Modal Dialog can be overridden globally using <code>provideNuiI18n()</code>. Others can be translated by passing the custom translation in the <code>open()</code> configuration."
     }
   },

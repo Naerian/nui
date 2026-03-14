@@ -14,18 +14,19 @@ export const MODAL_DIALOG_I18N_SECTIONS: ComponentSection[] = [
       headers: ['common.tables.token', 'common.tables.default', 'common.tables.description'],
       rows: [
         [
-          '<code>modalDialog.close</code>',
+          '<code>close</code>',
           'Close',
           'Aria label and title of the header close button',
         ],
         [
-          '<code>modalDialog.minimize</code>',
+          '<code>minimize</code>',
           'Minimize',
           'Aria label and title of the header minimize button',
         ],
-        ['<code>modalDialog.restore</code>', 'Restore', 'Label for the dock restore chip'],
-        ['<code>modalDialog.confirm</code>', 'Confirm', 'Default confirm button label'],
-        ['<code>modalDialog.cancel</code>', 'Cancel', 'Default cancel button label'],
+        ['<code>restore</code>', 'Restore', 'Label for the dock restore chip'],
+        ['<code>confirm</code>', 'Confirm', 'Default confirm button label'],
+        ['<code>cancel</code>', 'Cancel', 'Default cancel button label'],
+        
         ['<code>modalDialog.loading</code>', 'Loading...', 'Label displayed in loader modals'],
         [
           '<code>modalDialog.verificationLabel</code>',
@@ -51,12 +52,12 @@ export const MODAL_DIALOG_I18N_SECTIONS: ComponentSection[] = [
 import { provideNuiI18n, NuiI18n } from 'nui';
 
 const myI18n: Partial<NuiI18n> = {
+  close: 'Cerrar',
+  minimize: 'Minimizar',
+  restore: 'Restaurar',
+  confirm: 'Confirmar',
+  cancel: 'Cancelar',
   modalDialog: {
-    close: 'Cerrar',
-    minimize: 'Minimizar',
-    restore: 'Restaurar',
-    confirm: 'Confirmar',
-    cancel: 'Cancelar',
     loading: 'Cargando...',
     verificationLabel: 'Escribe lo siguiente para confirmar',
     verificationPlaceholder: 'Escribe aquí para confirmar',

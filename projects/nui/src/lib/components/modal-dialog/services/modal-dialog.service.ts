@@ -110,7 +110,7 @@ export class ModalDialogService {
   private _zIndexCounter = 0;
   private readonly _i18nService = inject(NuiI18nService);
 
-  private get _i18n() { return this._i18nService.translations().modalDialog; }
+  private get _i18n() { return this._i18nService.translations(); }
 
   // ─── Getters de estado ───────────────────────────────────────────────────────
 
@@ -312,10 +312,10 @@ export class ModalDialogService {
     }
     return this.open({
       modalType: 'verification',
-      confirmText: options.confirmText ?? this._i18n.confirm,
+      confirmText: options.confirmText ?? this._i18n.modalDialog.loading,
       cancelText: options.cancelText ?? this._i18n.cancel,
       iconTitle: options.iconTitle ?? 'ri-shield-check-line',
-      verificationLabel: options.verificationLabel ?? this._i18n.verificationLabel,
+      verificationLabel: options.verificationLabel ?? this._i18n.modalDialog.verificationLabel,
       verificationPlaceholder: options.verificationPlaceholder ?? options.verificationText,
       caseSensitive: options.caseSensitive !== false,
       statusBar: options.statusBar ?? { position: 'left', thickness: 4 },

@@ -129,7 +129,7 @@
   "i18n": {
     "keys": {
       "title": "Übersetzungstoken",
-      "description": "Die Modal Dialog-Komponente verwendet eigene Tokens für ihre Texte.",
+      "description": "Die Modal Dialog-Komponente verwendet eigene Tokens und einige gemeinsame Tokens.",
       "note": "Alle für den Benutzer sichtbaren Texte im Modal Dialog können global mit <code>provideNuiI18n()</code> überschrieben werden. Andere können durch die Übergabe der benutzerdefinierten Übersetzung in der <code>open()</code>-Konfiguration übersetzt werden."
     }
   },

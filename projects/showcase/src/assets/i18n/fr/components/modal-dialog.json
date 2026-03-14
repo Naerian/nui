@@ -129,7 +129,7 @@
   "i18n": {
     "keys": {
       "title": "Tokens de traduction",
-      "description": "Le composant Modal Dialog utilise ses propres tokens pour ses textes.",
+      "description": "Le composant de dialogue modal utilise ses propres tokens et certains tokens partagés.",
       "note": "Tous les textes visibles par l'utilisateur dans Modal Dialog peuvent être remplacés globalement en utilisant <code>provideNuiI18n()</code>. D'autres peuvent être traduits en passant la traduction personnalisée dans la configuration de <code>open()</code>."
     }
   },

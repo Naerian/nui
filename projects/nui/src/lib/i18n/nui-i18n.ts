@@ -12,6 +12,8 @@ export const DEFAULT_GENERIC_I18N = {
   close: 'Close',
   minimize: 'Minimize',
   restore: 'Restore',
+  confirm: 'Confirm',
+  cancel: 'Cancel',
   openActionsMenu: 'Open actions menu',
 };
 

@@ -17,6 +17,9 @@ export interface NuiI18n {
   close: string;
   minimize: string;
   restore: string;
+  confirm: string;
+  cancel: string;
+  
   /** Etiqueta accesible genérica para botones que abren un menú de acciones. */
   openActionsMenu: string;
 

@@ -51,8 +51,8 @@
           [variant]="'ghost'"
           [size]="'sm'"
           (onClick)="minimize()"
-          [attr.aria-label]="_i18n().modalDialog.minimize"
-          [title]="_i18n().modalDialog.minimize"
+          [attr.aria-label]="_i18n().minimize"
+          [title]="_i18n().minimize"
         ></nui-button>
       }
       @if (showCloseButton) {
@@ -62,8 +62,8 @@
           [variant]="'ghost'"
           [size]="'sm'"
           (click)="requestClose()"
-          [attr.aria-label]="_i18n().modalDialog.close"
-          [title]="_i18n().modalDialog.close"
+          [attr.aria-label]="_i18n().close"
+          [title]="_i18n().close"
         ></nui-button>
       }
     </div>
