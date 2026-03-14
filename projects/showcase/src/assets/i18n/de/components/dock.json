@@ -65,7 +65,8 @@
       "description": "Der Dock stellt eine zugängliche Beschriftung bereit, die als <code>aria-label</code> des Toolbar-Containers verwendet wird.",
       "note": "Alle NUI-i18n-Texte können global über <code>provideNuiI18n()</code> oder komponentenspezifisch über die Konfigurationseigenschaft <code>i18n</code> überschrieben werden.",
       "rows": {
-        "ariaLabel": "Zugängliche Beschriftung für die Dock-Toolbar (Element mit <code>role=\"toolbar\"</code>)"
+        "ariaLabel": "Zugängliche Beschriftung für die Dock-Toolbar (Element mit <code>role=\"toolbar\"</code>)",
+        "close": "Zugängliche Beschriftung für den Schließen-Button an jedem Chip (gemeinsamer Top-Level-Schlüssel)"
       }
     }
   },

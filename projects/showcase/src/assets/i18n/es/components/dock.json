@@ -65,7 +65,8 @@
       "description": "El dock expone una etiqueta accesible utilizada como <code>aria-label</code> del contenedor de la barra de herramientas.",
       "note": "Todos los textos i18n de NUI pueden sobrescribirse globalmente mediante <code>provideNuiI18n()</code> o por componente a través de la propiedad de configuración <code>i18n</code>.",
       "rows": {
-        "ariaLabel": "Etiqueta accesible para la barra de herramientas del dock (elemento <code>role=\"toolbar\"</code>)"
+        "ariaLabel": "Etiqueta accesible para la barra de herramientas del dock (elemento <code>role=\"toolbar\"</code>)",
+        "close": "Etiqueta accesible para el botón de cierre de cada chip (clave compartida de nivel superior)"
       }
     }
   },

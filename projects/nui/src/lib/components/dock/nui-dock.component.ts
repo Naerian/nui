@@ -89,6 +89,13 @@ export class NuiDockComponent {
     this._dockService.restore(id);
   }
 
+  /**
+   * Elimina el elemento del dock sin restaurarlo (dismiss desde el botón de cierre).
+   */
+  protected dismissItem(id: string): void {
+    this._dockService.remove(id);
+  }
+
   protected trackById(_: number, item: NuiDockItem): string {
     return item.id;
   }

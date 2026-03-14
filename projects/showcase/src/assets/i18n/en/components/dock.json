@@ -65,7 +65,8 @@
       "description": "The dock exposes one accessible label used as the <code>aria-label</code> of the toolbar container.",
       "note": "All NUI i18n strings can be overridden globally via <code>provideNuiI18n()</code> or per-component via the <code>i18n</code> configuration property.",
       "rows": {
-        "ariaLabel": "Accessible label for the dock toolbar (<code>role=\"toolbar\"</code> element)"
+        "ariaLabel": "Accessible label for the dock toolbar (<code>role=\"toolbar\"</code> element)",
+        "close": "Accessible label for the dismiss button on each chip (shared top-level key)"
       }
     }
   },

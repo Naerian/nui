@@ -6,6 +6,7 @@
 // disponibles desde el inicio, independientemente del momento de carga.
 
 @mixin nui-dock-styles {
+
   // ─── Host: posicionamiento fijo en el viewport ──────────────────────────────
   .nui-dock {
     position: fixed;
@@ -15,8 +16,13 @@
     pointer-events: none;
     z-index: var(--nui-dock-z-index);
 
-    &--bottom { bottom: var(--nui-dock-offset); }
-    &--top    { top: var(--nui-dock-offset); }
+    &--bottom {
+      bottom: var(--nui-dock-offset);
+    }
+
+    &--top {
+      top: var(--nui-dock-offset);
+    }
   }
 
   // ─── Contenedor horizontal ──────────────────────────────────────────────────
@@ -27,6 +33,64 @@
     gap: 8px;
     pointer-events: auto;
     max-width: var(--nui-dock-max-width);
+  }
+
+  // ─── Grupo chip + botón de cierre ───────────────────────────────────────────
+  .nui-dock__chip-group {
+    position: relative;
+    display: inline-flex;
+
+    &:hover .nui-dock__close {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  // ─── Botón de cierre (dismiss sin restaurar) ─────────────────────────────────
+  .nui-dock__close {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--nui-dock-border);
+    background: var(--nui-dock-chip-bg);
+    color: var(--nui-dock-text);
+    font-size: 0.7rem;
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 120ms ease, transform 120ms ease, background 80ms ease;
+    font-family: inherit;
+    padding: 0;
+
+    i {
+      line-height: 1.5;
+      font-size: 0.7rem;
+    }
+
+    &:hover {
+      background: var(--nui-danger);
+      border-color: var(--nui-danger);
+      color: var(--nui-on-danger);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--nui-primary);
+      outline-offset: 2px;
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    // En dispositivos táctiles (sin hover real), el botón siempre es visible
+    @media (hover: none) {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   // ─── Chip (botón de elemento minimizado) ────────────────────────────────────
@@ -67,11 +131,25 @@
     }
 
     // ── Variantes de color semántico ────────────────────────────────────────
-    &--primary { border-color: var(--nui-primary); }
-    &--success { border-color: var(--nui-success); }
-    &--warning { border-color: var(--nui-warning); }
-    &--danger  { border-color: var(--nui-danger); }
-    &--info    { border-color: var(--nui-info); }
+    &--primary {
+      border-color: var(--nui-primary);
+    }
+
+    &--success {
+      border-color: var(--nui-success);
+    }
+
+    &--warning {
+      border-color: var(--nui-warning);
+    }
+
+    &--danger {
+      border-color: var(--nui-danger);
+    }
+
+    &--info {
+      border-color: var(--nui-info);
+    }
   }
 
   // ─── Icono principal del chip ─────────────────────────────────────────────

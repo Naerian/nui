@@ -18,6 +18,11 @@ export const DOCK_I18N_SECTIONS: ComponentSection[] = [
           'Minimized items',
           'components.dock.i18n.keys.rows.ariaLabel',
         ],
+        [
+          '<code>close</code>',
+          'Close',
+          'components.dock.i18n.keys.rows.close',
+        ],
       ],
     },
     examples: [
@@ -27,6 +32,7 @@ export const DOCK_I18N_SECTIONS: ComponentSection[] = [
 import { provideNuiI18n, NuiI18n } from 'nui';
 
 const myI18n: Partial<NuiI18n> = {
+  close: 'Cerrar',
   dock: {
     ariaLabel: 'Elementos minimizados',
   },

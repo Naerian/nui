@@ -65,7 +65,8 @@
       "description": "Le dock expose un libellé accessible utilisé comme <code>aria-label</code> du conteneur de la barre d'outils.",
       "note": "Tous les textes i18n de NUI peuvent être remplacés globalement via <code>provideNuiI18n()</code> ou par composant via la propriété de configuration <code>i18n</code>.",
       "rows": {
-        "ariaLabel": "Libellé accessible de la barre d'outils du dock (élément <code>role=\"toolbar\"</code>)"
+        "ariaLabel": "Libellé accessible de la barre d'outils du dock (élément <code>role=\"toolbar\"</code>)",
+        "close": "Libellé accessible du bouton de fermeture sur chaque chip (clé partagée de niveau supérieur)"
       }
     }
   },

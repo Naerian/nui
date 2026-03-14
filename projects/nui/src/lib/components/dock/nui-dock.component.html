@@ -1,29 +1,39 @@
 <div class="nui-dock__container" role="toolbar" [attr.aria-label]="_i18n().dock.ariaLabel">
   <!-- Modal items -->
   @for (item of modalItems(); track trackById($index, item)) {
-    <button
-      type="button"
-      class="nui-dock__item nui-dock__item--modal"
-      [class]="item.color ? 'nui-dock__item--' + item.color : ''"
-      [ngClass]="item.cssClass"
-      (click)="restoreItem(item.id)"
-      [attr.aria-label]="_i18n().restore + ': ' + item.title"
-      [title]="item.title"
-    >
-      @if (item.prefixIcon) {
-        <i [class]="item.prefixIcon + ' nui-dock__item-icon'" aria-hidden="true"></i>
-      }
-      <span class="nui-dock__item-title">{{ item.title }}</span>
-      @if (!item.hideSuffixIcon) {
-        <i
-          [class]="
-            (item.suffixIcon || 'ri-corner-right-up-line') +
-            ' nui-dock__item-icon nui-dock__item-icon--suffix nui-dock__item-restore'
-          "
-          aria-hidden="true"
-        ></i>
-      }
-    </button>
+    <div class="nui-dock__chip-group">
+      <button
+        type="button"
+        class="nui-dock__item nui-dock__item--modal"
+        [class]="item.color ? 'nui-dock__item--' + item.color : ''"
+        [ngClass]="item.cssClass"
+        (click)="restoreItem(item.id)"
+        [attr.aria-label]="_i18n().restore + ': ' + item.title"
+        [title]="item.title"
+      >
+        @if (item.prefixIcon) {
+          <i [class]="item.prefixIcon + ' nui-dock__item-icon'" aria-hidden="true"></i>
+        }
+        <span class="nui-dock__item-title">{{ item.title }}</span>
+        @if (!item.hideSuffixIcon) {
+          <i
+            [class]="
+              (item.suffixIcon || 'ri-corner-right-up-line') +
+              ' nui-dock__item-icon nui-dock__item-icon--suffix nui-dock__item-restore'
+            "
+            aria-hidden="true"
+          ></i>
+        }
+      </button>
+      <button
+        type="button"
+        class="nui-dock__close"
+        (click)="dismissItem(item.id)"
+        [attr.aria-label]="_i18n().close + ': ' + item.title"
+      >
+        <i class="ri-close-line" aria-hidden="true"></i>
+      </button>
+    </div>
   }
 
   <!-- Separador visual entre grupos modal y sidebar -->
@@ -33,35 +43,45 @@
 
   <!-- Sidebar items -->
   @for (item of sidebarItems(); track trackById($index, item)) {
-    <button
-      type="button"
-      class="nui-dock__item nui-dock__item--sidebar"
-      [class]="item.color ? 'nui-dock__item--' + item.color : ''"
-      [ngClass]="item.cssClass"
-      (click)="restoreItem(item.id)"
-      [attr.aria-label]="_i18n().restore + ': ' + item.title"
-      [title]="item.title"
-    >
-      @if (item.prefixIcon) {
-        <i [class]="item.prefixIcon + ' nui-dock__item-icon'" aria-hidden="true"></i>
-      } @else if (item.position) {
-        <i
-          [class]="
-            POSITION_ICONS[item.position] + ' nui-dock__item-icon nui-dock__item-icon--position'
-          "
-          aria-hidden="true"
-        ></i>
-      }
-      <span class="nui-dock__item-title">{{ item.title }}</span>
-      @if (!item.hideSuffixIcon) {
-        <i
-          [class]="
-            (item.suffixIcon || 'ri-corner-right-up-line') +
-            ' nui-dock__item-icon nui-dock__item-icon--suffix nui-dock__item-restore'
-          "
-          aria-hidden="true"
-        ></i>
-      }
-    </button>
+    <div class="nui-dock__chip-group">
+      <button
+        type="button"
+        class="nui-dock__item nui-dock__item--sidebar"
+        [class]="item.color ? 'nui-dock__item--' + item.color : ''"
+        [ngClass]="item.cssClass"
+        (click)="restoreItem(item.id)"
+        [attr.aria-label]="_i18n().restore + ': ' + item.title"
+        [title]="item.title"
+      >
+        @if (item.prefixIcon) {
+          <i [class]="item.prefixIcon + ' nui-dock__item-icon'" aria-hidden="true"></i>
+        } @else if (item.position) {
+          <i
+            [class]="
+              POSITION_ICONS[item.position] + ' nui-dock__item-icon nui-dock__item-icon--position'
+            "
+            aria-hidden="true"
+          ></i>
+        }
+        <span class="nui-dock__item-title">{{ item.title }}</span>
+        @if (!item.hideSuffixIcon) {
+          <i
+            [class]="
+              (item.suffixIcon || 'ri-corner-right-up-line') +
+              ' nui-dock__item-icon nui-dock__item-icon--suffix nui-dock__item-restore'
+            "
+            aria-hidden="true"
+          ></i>
+        }
+      </button>
+      <button
+        type="button"
+        class="nui-dock__close"
+        (click)="dismissItem(item.id)"
+        [attr.aria-label]="_i18n().close + ': ' + item.title"
+      >
+        <i class="ri-close-line" aria-hidden="true"></i>
+      </button>
+    </div>
   }
 </div>
