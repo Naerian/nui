@@ -14,7 +14,7 @@
     "verification": {
       "title": "Diálogo de verificación",
       "description": "Requiere que el usuario escriba una frase específica antes de confirmar una acción destructiva.",
-      "note": "Usa <code>openVerification()</code> o establece <code>verificationText</code> en la configuración."
+      "note": "Usa <code>openVerification()</code> y establece <code>verificationText</code>, <code>verificationLabel</code> y <code>verificationErrorMessage</code> en la configuración para indicar el texto de verificación, la etiqueta del campo de entrada y el mensaje de error mostrado cuando el texto no coincide."
     },
     "loader": {
       "title": "Modal de carga",
@@ -53,12 +53,12 @@
     },
     "html-content": {
       "title": "Contenido HTML",
-      "description": "Pasa una cadena HTML mediante <code>htmlContent</code> para contenido rico en el cuerpo del modal sin necesidad de un componente Angular completo. La cadena es sanitizada por el <code>DomSanitizer</code> de Angular.",
-      "note": "Usa <code>htmlContent</code> para marcado est\u00e1tico o renderizado desde servidor. Para bindings de Angular (eventos, interpolaci\u00f3n, directivas), usa <code>bodyTemplate</code>."
+      "description": "Añade contenido HTML en tu mensaje.",
+      "note": "Usa <code>message</code> para marcado estático o renderizado desde servidor. La cadena es sanitizada por el DomSanitizer de Angular."
     },
     "body-template": {
       "title": "Template del cuerpo",
-      "description": "Pasa un <code>TemplateRef</code> de Angular mediante <code>bodyTemplate</code> para utilizar bindings de Angular dentro del cuerpo del modal. Combin\u00e1lo con <code>templateContext</code> para inyectar datos din\u00e1micos.",
+      "description": "Pasa un <code>TemplateRef</code> de Angular mediante <code>contentTemplate</code> para utilizar bindings de Angular dentro del cuerpo del modal. Combin\u00e1lo con <code>templateContext</code> para inyectar datos din\u00e1micos.",
       "note": "El template se renderiza con <code>*ngTemplateOutlet</code>. Usa <code>let-nombre=\"clave\"</code> en el template para acceder a los valores del <code>templateContext</code>."
     },
     "prevent-close": {
@@ -68,7 +68,7 @@
     },
     "backdrop": {
       "title": "Backdrop y disparadores de cierre",
-      "description": "Controla la visibilidad del backdrop y qu\u00e9 acciones del usuario pueden cerrar el modal usando <code>hasBackdrop</code>, <code>closeOnBackdropClick</code> y <code>closeOnEscape</code>.",
+      "description": "Controla la visibilidad del backdrop y qu\u00e9 acciones del usuario pueden cerrar el modal usando <code>hasBackdrop</code>, <code>backdropClass</code>, <code>closeOnBackdropClick</code> y <code>closeOnEscape</code>.",
       "note": "Establecer <code>hasBackdrop: false</code> elimina la capa de overlay completamente, permitiendo la interacci\u00f3n con la p\u00e1gina detr\u00e1s del modal."
     },
     "update-ref": {

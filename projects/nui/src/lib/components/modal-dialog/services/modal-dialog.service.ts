@@ -58,8 +58,7 @@ export const MODAL_DIALOG_REF = new InjectionToken<ModalDialogRef>(
 /** Configuración para abrir un modal simple (sin componente dinámico externo) */
 export type SimpleModalDialogConfig<D = any> = ModalDialogConfig<D> & {
   message?: string;
-  htmlContent?: string;
-  bodyTemplate?: TemplateRef<any>;
+  contentTemplate?: TemplateRef<any>;
   templateContext?: any;
 };
 

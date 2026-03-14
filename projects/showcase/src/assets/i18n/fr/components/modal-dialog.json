@@ -4,77 +4,77 @@
   "examples": {
     "basic": {
       "title": "Utilisation de base",
-      "description": "Ouvrez un modal depuis le service ModalDialogService. Le modal glisse depuis le bord de l'écran avec une animation fluide."
+      "description": "Ouvre un modal depuis le service ModalDialogService. Le modal glisse depuis le bord de l'écran avec une animation fluide."
     },
     "semanticTypes": {
       "title": "Types sémantiques",
-      "description": "Utilisez les helpers sémantiques pour ouvrir rapidement des boîtes de dialogue pré-stylisées : <code>openInfo()</code>, <code>openWarning()</code>, <code>openSuccess()</code> et <code>openError()</code>."
+      "description": "Utilisez les helpers sémantiques pour ouvrir rapidement des dialogues pré-stylisés.",
+      "note": "Vous pouvez lancer un modal d'état avec <code>openInfo()</code>, <code>openWarning()</code>, <code>openSuccess()</code> et <code>openError()</code>."
     },
     "verification": {
-      "title": "Boîte de dialogue de vérification",
-      "description": "Demandez à l'utilisateur de saisir une phrase spécifique avant de confirmer une action destructrice. Utilisez <code>openVerification()</code> ou définissez <code>verificationText</code> dans la configuration."
+      "title": "Dialogue de vérification",
+      "description": "Exige que l'utilisateur saisisse une phrase spécifique avant de confirmer une action destructrice.",
+      "note": "Utilisez <code>openVerification()</code> et définissez <code>verificationText</code>, <code>verificationLabel</code> et <code>verificationErrorMessage</code> dans la configuration pour indiquer le texte de vérification, l'étiquette du champ de saisie et le message d'erreur affiché lorsque le texte ne correspond pas."
     },
     "loader": {
       "title": "Modal de chargement",
-      "description": "Affichez un spinner de chargement non-fermable pendant les opérations longues. Utilisez <code>openLoader()</code> et fermez la référence lorsque l'opération se termine."
+      "description": "Affiche un spinner de chargement non fermable pendant les opérations de longue durée.",
+      "note": "Utilisez <code>openLoader()</code> et fermez la référence lorsque l'opération est terminée."
     },
     "dynamicComponent": {
       "title": "Composant dynamique",
-      "description": "Ouvrez un modal avec un composant Angular personnalisé comme corps. Injectez <code>MODAL_DIALOG_DATA</code> pour recevoir des données et <code>MODAL_DIALOG_REF</code> pour contrôler le modal de l'intérieur.",
-      "seeCode": "Consultez les exemples de code ci-dessous pour intégrer un composant personnalisé."
+      "description": "Ouvre un modal avec un composant Angular personnalisé comme corps.",
+      "note": "Injectez <code>MODAL_DIALOG_DATA</code> pour recevoir des données et <code>MODAL_DIALOG_REF</code> pour contrôler le modal depuis l'intérieur."
     },
     "minimizable": {
-      "title": "Modal réductible",
-      "description": "Permettez aux utilisateurs de réduire le modal en une puce dans le dock en bas de l'écran sans perdre le contexte. Nécessite un <code>id</code> unique dans la configuration.",
-      "note": "Un <code>id</code> unique est requis lorsque <code>minimizable: true</code>. Appeler <code>open()</code> avec le même <code>id</code> restaurera le modal réduit au lieu d'en créer un nouveau."
+      "title": "Modal minimizable",
+      "description": "Permet aux utilisateurs de minimiser le modal dans un chip du dock inférieur sans perdre le contexte.",
+      "note": "Un <code>id</code> unique est requis lorsque <code>minimizable: true</code>. Appeler <code>open()</code> avec le même <code>id</code> restaurera le modal minimisé au lieu d'en créer un nouveau."
     },
     "timeout": {
-      "title": "Délai d'attente avec barre de progression",
-      "description": "Fermez automatiquement le modal après une durée configurable. Une barre de progression visuelle suit le temps restant et peut être mise en pause au survol de la souris."
-    },
-    "footerActions": {
-      "title": "Actions du pied de page",
-      "description": "Personnalisez le pied de page du modal avec <code>customButtons</code>, le <code>ModalDialogActionsService</code> (depuis le composant dynamique) ou la directive <code>[nuiModalDialogFooter]</code>."
+      "title": "Timeout avec barre de progression",
+      "description": "Ferme automatiquement le modal après une durée configurable. Une barre de progression visuelle suit le temps restant et peut être mise en pause au survol de la souris.",
+      "note": "Utilisez l'option <code>timeout</code> dans la configuration du modal pour activer cette fonctionnalité. Vous pouvez définir <code>duration</code> en secondes, <code>showProgressBar</code> pour afficher la barre de progression, <code>pauseOnHover</code> pour mettre en pause le minuteur au survol du modal et <code>timeoutAction</code> pour exécuter une fonction personnalisée lorsque le temps est écoulé (<code>'confirm'</code> | <code>'cancel'</code>)."
     },
     "statusBar": {
-      "title": "Barre de statut",
-      "description": "Ajoutez une bordure colorée sur un côté du modal pour transmettre des informations sémantiques supplémentaires via l'option <code>statusBar</code> de la configuration."
+      "title": "Barre d'état",
+      "description": "Ajoute une bande de couleur sur un côté du modal pour transmettre des informations sémantiques supplémentaires en utilisant l'option <code>statusBar</code> de la configuration."
     },
     "footer-custom": {
-      "title": "Actions de pied de page personnalisées",
-      "description": "Personnalisez le pied de page du modal avec vos propres boutons et templates.",
-      "note": "Personnalisez le pied de page du modal avec <code>customButtons</code>, le <code>ModalDialogActionsService</code> (depuis le composant dynamique) ou la directive <code>[nuiModalDialogFooter]</code>."
+      "title": "Actions personnalisées",
+      "description": "Personnalisez les actions du modal avec des boutons personnalisés",
+      "note": "Vous pouvez utiliser l'option <code>customButtons</code> dans la configuration du modal pour définir des boutons avec des actions spécifiques ou <code>nuiModalDialogFooter</code> pour une personnalisation totale du pied de page via un <code>ng-template</code>.<br/><br/>Pour utiliser <code>loading</code> ou <code>disabled</code> de manière réactive, vous pouvez injecter le <code>ModalDialogActionsService</code> dans votre composant enfant pour contrôler l'état des boutons depuis l'intérieur du composant, utiliser la directive <code>nuiModalDialogAction</code> sur vos boutons personnalisés pour les lier à des actions prédéfinies comme 'confirm' ou 'cancel', ou émettre des événements personnalisés et vous y abonner depuis le composant enfant ou en utilisant un template <code>ng-template</code>, sans directive, depuis le composant parent."
     },
     "child-footer-actions": {
       "title": "Actions depuis le composant enfant",
-      "description": "Personnalisez le pied de page du modal depuis un composant dynamique charg\u00e9 dans le modal.",
-      "note": "Injectez <code>ModalDialogActionsService</code> dans votre composant dynamique pour enregistrer des boutons dans le pied de page depuis l'int\u00e9rieur du composant. Les actions prennent en charge des \u00e9tats <code>disabled</code> et <code>loading</code> r\u00e9actifs via des getters, sans <code>update()</code>.",
-      "note2": "Alternativement, utilisez la directive <code>nuiModalDialogFooter</code> dans un composant dynamique pour un contr\u00f4le total du pied de page avec HTML natif. Contrairement \u00e0 <code>ModalDialogActionsService</code>, qui enregistre des donn\u00e9es de boutons rendus par le shell du modal, la directive projette un <code>ng-template</code> complet : tout binding Angular est r\u00e9\u00e9valu\u00e9 automatiquement \u00e0 chaque cycle de d\u00e9tection des changements, sans appel \u00e0 <code>update()</code>."
+      "description": "Personnalisez les actions du modal depuis un composant dynamique chargé à l'intérieur du modal.",
+      "note": "Injectez le <code>ModalDialogActionsService</code> dans votre composant dynamique pour ajouter des boutons au pied de page du modal depuis l'intérieur du composant.",
+      "note2": "Comme alternative, utilisez la directive <code>nuiModalDialogFooter</code> à l'intérieur d'un composant dynamique pour un contrôle total du pied de page avec du HTML natif. Contrairement à <code>ModalDialogActionsService</code>, qui enregistre les données des boutons rendus par le shell du modal, la directive projette un <code>ng-template</code> complet : toute liaison Angular est réévaluée automatiquement à chaque cycle de détection des changements, sans avoir besoin d'appeler <code>update()</code>."
     },
     "html-content": {
       "title": "Contenu HTML",
-      "description": "Passez une cha\u00eene HTML via <code>htmlContent</code> pour un contenu de corps enrichi sans cr\u00e9er un composant Angular complet. La cha\u00eene est sanitiz\u00e9e par <code>DomSanitizer</code> d'Angular.",
-      "note": "Utilisez <code>htmlContent</code> pour du markup statique ou rendu c\u00f4t\u00e9 serveur. Pour les bindings Angular (\u00e9v\u00e9nements, interpolation, directives), utilisez <code>bodyTemplate</code> \u00e0 la place."
+      "description": "Ajoutez du contenu HTML à votre message.",
+      "note": "Utilisez <code>message</code> pour du balisage statique ou rendu côté serveur. La chaîne est assainie par le <code>DomSanitizer</code> d'Angular."
     },
     "body-template": {
       "title": "Template du corps",
-      "description": "Passez un <code>TemplateRef</code> Angular via <code>bodyTemplate</code> pour utiliser les bindings Angular dans le corps du modal. Combinez-le avec <code>templateContext</code> pour injecter des donn\u00e9es dynamiques.",
-      "note": "Le template est rendu avec <code>*ngTemplateOutlet</code>. Utilisez <code>let-nom=\"cl\u00e9\"</code> dans le template pour acc\u00e9der aux valeurs du <code>templateContext</code>."
+      "description": "Passez un <code>TemplateRef</code> d'Angular via <code>contentTemplate</code> pour utiliser des bindings Angular à l'intérieur du corps du modal. Associez-le à <code>templateContext</code> pour injecter des données dynamiques.",
+      "note": "Le template est rendu avec <code>*ngTemplateOutlet</code>. Utilisez <code>let-nom=\"clé\"</code> dans le template pour accéder aux valeurs de <code>templateContext</code>."
     },
     "prevent-close": {
-      "title": "Emp\u00eacher la fermeture",
-      "description": "Utilisez <code>preventClose</code> pour intercepter les tentatives de fermeture et les bloquer conditionnellement. Prend en charge les gardes synchrones et asynchrones. Abonnez-vous \u00e0 <code>closePrevented()</code> pour r\u00e9agir quand une fermeture est bloqu\u00e9e.",
-      "note": "La fonction <code>preventClose</code> doit retourner <code>true</code> (autoriser) ou <code>false</code> / <code>Promise&lt;false&gt;</code> (bloquer). Elle s'ex\u00e9cute \u00e0 chaque tentative de fermeture : ESC, clic sur le backdrop et le bouton X."
+      "title": "Empêcher la fermeture",
+      "description": "Utilisez <code>preventClose</code> pour intercepter les tentatives de fermeture et les bloquer de manière conditionnelle. Prend en charge les gardes synchrones et asynchrones. Abonnez-vous à <code>closePrevented()</code> pour réagir lorsqu'une fermeture est bloquée.",
+      "note": "La fonction <code>preventClose</code> doit retourner <code>true</code> (autoriser) ou <code>false</code> / <code>Promise&lt;false&gt;</code> (bloquer). Elle s'exécute à chaque tentative de fermeture : ESC, clic sur le backdrop et bouton X."
     },
     "backdrop": {
-      "title": "Backdrop et d\u00e9clencheurs de fermeture",
-      "description": "Contr\u00f4lez la visibilit\u00e9 du backdrop et quelles actions utilisateur peuvent fermer le modal avec <code>hasBackdrop</code>, <code>closeOnBackdropClick</code> et <code>closeOnEscape</code>.",
-      "note": "D\u00e9finir <code>hasBackdrop: false</code> supprime enti\u00e8rement la couche overlay, permettant l'interaction avec la page derri\u00e8re le modal."
+      "title": "Backdrop et déclencheurs de fermeture",
+      "description": "Contrôlez la visibilité du backdrop et quelles actions de l'utilisateur peuvent fermer le modal en utilisant <code>hasBackdrop</code>, <code>backdropClass</code>, <code>closeOnBackdropClick</code> et <code>closeOnEscape</code>.",
+      "note": "Définir <code>hasBackdrop: false</code> supprime complètement l'overlay, permettant l'interaction avec la page derrière le modal."
     },
     "update-ref": {
-      "title": "Mises \u00e0 jour \u00e0 chaud via ModalDialogRef",
-      "description": "Utilisez <code>ref.updateTitle()</code>, <code>ref.updateHeaderTemplate()</code> et <code>ref.updateFooterTemplate()</code> pour mettre \u00e0 jour un modal ouvert sans le fermer et le rouvrir.",
-      "note": "La mise \u00e0 jour du titre est bas\u00e9e sur les signals et se rend de mani\u00e8re synchrone \u2014 elle fonctionne m\u00eame en dehors de la zone Angular (ex. depuis <code>setTimeout</code>)."
+      "title": "Mises à jour à chaud via ModalDialogRef",
+      "description": "Utilisez <code>ref.updateTitle()</code>, <code>ref.updateHeaderTemplate()</code> et <code>ref.updateFooterTemplate()</code> pour mettre à jour un modal ouvert sans le fermer et le rouvrir.",
+      "note": "La mise à jour du titre est réactive via les signaux et se rend de manière synchrone, même lorsqu'elle est appelée en dehors de la zone Angular (par exemple depuis <code>setTimeout</code>)."
     }
   },
   "api": {

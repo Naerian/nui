@@ -3,78 +3,78 @@
   "subtitle": "Modale Dialoge über CDK Overlay mit vollständiger Fokusverwaltung, Animationen, Minimierung und Theme-Integration",
   "examples": {
     "basic": {
-      "title": "Einfacher Bestätigungsdialog",
-      "description": "Öffnen Sie ein Modal mit <code>ModalDialogService.open()</code> oder praktischen Hilfsmethoden. Der Service bietet Optionen für Titel, Nachricht, Bestätigen-/Abbrechen-Schaltflächen, Farbe und semantischen Typ."
+      "title": "Grundlegende Verwendung",
+      "description": "Öffnet ein Modal über den Service ModalDialogService. Das Modal gleitet mit einer sanften Animation vom Bildschirmrand hinein."
     },
     "semanticTypes": {
       "title": "Semantische Typen",
-      "description": "Verwenden Sie semantische Hilfsmethoden, um schnell vorgestaltete Dialoge zu öffnen: <code>openInfo()</code>, <code>openWarning()</code>, <code>openSuccess()</code> und <code>openError()</code>."
+      "description": "Verwende semantische Helper, um schnell vorgefertigte Dialoge zu öffnen.",
+      "note": "Du kannst ein Status-Modal mit <code>openInfo()</code>, <code>openWarning()</code>, <code>openSuccess()</code> und <code>openError()</code> öffnen."
     },
     "verification": {
-      "title": "Verifikationsdialog",
-      "description": "Fordern Sie den Benutzer auf, einen bestimmten Text einzugeben, bevor eine destruktive Aktion bestätigt wird. Verwenden Sie <code>openVerification()</code> oder setzen Sie <code>verificationText</code> in der Konfiguration."
+      "title": "Bestätigungsdialog",
+      "description": "Erfordert, dass der Benutzer eine bestimmte Phrase eingibt, bevor eine destruktive Aktion bestätigt werden kann.",
+      "note": "Verwende <code>openVerification()</code> und setze <code>verificationText</code>, <code>verificationLabel</code> und <code>verificationErrorMessage</code> in der Konfiguration, um den Bestätigungstext, die Beschriftung des Eingabefelds und die Fehlermeldung festzulegen, die angezeigt wird, wenn der Text nicht übereinstimmt."
     },
     "loader": {
       "title": "Lade-Modal",
-      "description": "Zeigen Sie einen nicht schließbaren Ladespinner während länger laufender Operationen an. Verwenden Sie <code>openLoader()</code> und schließen Sie die Referenz, wenn die Operation abgeschlossen ist."
+      "description": "Zeigt während lang andauernder Operationen einen nicht schließbaren Lade-Spinner an.",
+      "note": "Verwende <code>openLoader()</code> und schließe die Referenz, sobald die Operation abgeschlossen ist."
     },
     "dynamicComponent": {
       "title": "Dynamische Komponente",
-      "description": "Öffnen Sie ein Modal mit einer benutzerdefinierten Angular-Komponente als Inhalt. Injizieren Sie <code>MODAL_DIALOG_DATA</code>, um Daten zu empfangen, und <code>MODAL_DIALOG_REF</code>, um das Modal von innen zu steuern.",
-      "seeCode": "Sehen Sie sich die Codebeispiele unten an, um eine benutzerdefinierte Komponente zu integrieren."
+      "description": "Öffnet ein Modal mit einer benutzerdefinierten Angular-Komponente als Inhalt.",
+      "note": "Injiziere <code>MODAL_DIALOG_DATA</code>, um Daten zu empfangen, und <code>MODAL_DIALOG_REF</code>, um das Modal von innen zu steuern."
     },
     "minimizable": {
       "title": "Minimierbares Modal",
-      "description": "Ermöglichen Sie Benutzern, das Modal als Chip im Dock am unteren Bildschirmrand zu minimieren, ohne den Kontext zu verlieren. Erfordert eine eindeutige <code>id</code> in der Konfiguration.",
-      "note": "Eine eindeutige <code>id</code> ist erforderlich, wenn <code>minimizable: true</code>. Ein Aufruf von <code>open()</code> mit derselben <code>id</code> stellt das minimierte Modal wieder her, anstatt ein neues zu erstellen."
+      "description": "Ermöglicht es Benutzern, das Modal zu einem Chip im unteren Dock zu minimieren, ohne den Kontext zu verlieren.",
+      "note": "Eine eindeutige <code>id</code> ist erforderlich, wenn <code>minimizable: true</code> gesetzt ist. Ein Aufruf von <code>open()</code> mit derselben <code>id</code> stellt das minimierte Modal wieder her, anstatt ein neues zu erstellen."
     },
     "timeout": {
-      "title": "Zeitlimit mit Fortschrittsanzeige",
-      "description": "Schließen Sie das Modal automatisch nach einer konfigurierbaren Dauer. Ein visueller Fortschrittsbalken verfolgt die verbleibende Zeit und kann beim Überfahren mit der Maus pausiert werden."
-    },
-    "footerActions": {
-      "title": "Fußleisten-Aktionen",
-      "description": "Passen Sie die Fußleiste des Modals mit <code>customButtons</code>, dem <code>ModalDialogActionsService</code> (aus der dynamischen Komponente) oder der Direktive <code>[nuiModalDialogFooter]</code> an."
+      "title": "Timeout mit Fortschrittsbalken",
+      "description": "Schließt das Modal automatisch nach einer konfigurierbaren Dauer. Ein visueller Fortschrittsbalken zeigt die verbleibende Zeit an und kann beim Darüberfahren mit der Maus pausiert werden.",
+      "note": "Verwende die Option <code>timeout</code> in der Modal-Konfiguration, um diese Funktion zu aktivieren. Du kannst <code>duration</code> in Sekunden festlegen, <code>showProgressBar</code> zum Anzeigen des Fortschrittsbalkens, <code>pauseOnHover</code> zum Pausieren des Timers beim Darüberfahren mit der Maus und <code>timeoutAction</code>, um eine benutzerdefinierte Aktion auszuführen, wenn die Zeit abläuft (<code>'confirm'</code> | <code>'cancel'</code>)."
     },
     "statusBar": {
       "title": "Statusleiste",
-      "description": "Fügen Sie einen farbigen Rahmen an einer Seite des Modals hinzu, um zusätzliche semantische Informationen über die Option <code>statusBar</code> in der Konfiguration zu übermitteln."
+      "description": "Fügt eine farbige Randleiste auf einer Seite des Modals hinzu, um zusätzliche semantische Informationen über die Option <code>statusBar</code> in der Konfiguration zu vermitteln."
     },
     "footer-custom": {
-      "title": "Benutzerdefinierte Footer-Aktionen",
-      "description": "Passen Sie die Modal-Fußzeile mit eigenen Schaltflächen und Templates an.",
-      "note": "Passen Sie die Modal-Fußzeile mit <code>customButtons</code>, dem <code>ModalDialogActionsService</code> (von innerhalb der dynamischen Komponente) oder der Direktive <code>[nuiModalDialogFooter]</code> an."
+      "title": "Benutzerdefinierte Aktionen",
+      "description": "Passe die Aktionen des Modals mit benutzerdefinierten Buttons an",
+      "note": "Du kannst die Option <code>customButtons</code> in der Modal-Konfiguration verwenden, um Buttons mit spezifischen Aktionen zu definieren, oder <code>nuiModalDialogFooter</code> für eine vollständige Anpassung des Footers über ein <code>ng-template</code>.<br/><br/>Um <code>loading</code> oder <code>disabled</code> reaktiv zu verwenden, kannst du den <code>ModalDialogActionsService</code> in deine Kindkomponente injizieren, um den Status der Buttons von innerhalb der Komponente zu steuern, die Direktive <code>nuiModalDialogAction</code> auf deinen benutzerdefinierten Buttons verwenden, um sie mit vordefinierten Aktionen wie 'confirm' oder 'cancel' zu verknüpfen, oder benutzerdefinierte Events auslösen und dich darauf aus der Kindkomponente oder über ein <code>ng-template</code>-Template ohne Direktive direkt aus der Elternkomponente abonnieren."
     },
     "child-footer-actions": {
-      "title": "Aktionen aus untergeordneter Komponente",
-      "description": "Passen Sie die Modal-Fu\u00dfzeile von einer dynamisch geladenen Komponente innerhalb des Modals an.",
-      "note": "Injizieren Sie <code>ModalDialogActionsService</code> in Ihre dynamische Komponente, um Footer-Schaltfl\u00e4chen von innerhalb der Komponente zu registrieren. Aktionen unterst\u00fctzen reaktive Zust\u00e4nde f\u00fcr <code>disabled</code> und <code>loading</code> \u00fcber Getter, ohne <code>update()</code>-Aufrufe.",
-      "note2": "Alternativ k\u00f6nnen Sie die Direktive <code>nuiModalDialogFooter</code> in einer dynamischen Komponente verwenden, um volle Kontrolle \u00fcber die Fu\u00dfzeile mit nativem HTML zu erhalten. Im Gegensatz zu <code>ModalDialogActionsService</code>, der Button-Daten registriert und vom Modal-Shell gerendert werden, projiziert die Direktive ein vollst\u00e4ndiges <code>ng-template</code>: Jedes Angular-Binding wird bei jeder \u00c4nderungserkennung automatisch neu ausgewertet, ohne <code>update()</code> aufrufen zu m\u00fcssen."
+      "title": "Aktionen aus der Kindkomponente",
+      "description": "Passe die Aktionen des Modals über eine dynamische Komponente an, die innerhalb des Modals geladen wird.",
+      "note": "Injiziere den <code>ModalDialogActionsService</code> in deine dynamische Komponente, um Buttons zum Footer des Modals von innerhalb der Komponente hinzuzufügen.",
+      "note2": "Alternativ kannst du die Direktive <code>nuiModalDialogFooter</code> innerhalb einer dynamischen Komponente verwenden, um vollständige Kontrolle über den Footer mit nativem HTML zu erhalten. Im Gegensatz zu <code>ModalDialogActionsService</code>, der Button-Daten registriert, die vom Modal-Shell gerendert werden, projiziert die Direktive ein vollständiges <code>ng-template</code>: jede Angular-Bindung wird automatisch bei jedem Change-Detection-Zyklus neu ausgewertet, ohne dass <code>update()</code> aufgerufen werden muss."
     },
     "html-content": {
       "title": "HTML-Inhalt",
-      "description": "\u00dcbergeben Sie einen HTML-String \u00fcber <code>htmlContent</code> f\u00fcr reichhaltigen Body-Inhalt, ohne eine vollst\u00e4ndige Angular-Komponente zu erstellen. Der String wird von Angulars <code>DomSanitizer</code> bereinigt.",
-      "note": "Verwenden Sie <code>htmlContent</code> f\u00fcr statisches oder serverseitig gerendertes Markup. F\u00fcr Angular-Bindings (Ereignisse, Interpolation, Direktiven) verwenden Sie stattdessen <code>bodyTemplate</code>."
+      "description": "Füge HTML-Inhalt in deiner Nachricht hinzu.",
+      "note": "Verwende <code>message</code> für statisches Markup oder serverseitig gerenderten Inhalt. Der String wird vom DomSanitizer von Angular bereinigt."
     },
     "body-template": {
       "title": "Body-Template",
-      "description": "\u00dcbergeben Sie ein Angular-<code>TemplateRef</code> \u00fcber <code>bodyTemplate</code>, um Angular-Bindings im Modal-Body zu verwenden. Kombinieren Sie es mit <code>templateContext</code>, um dynamische Daten einzuspritzen.",
-      "note": "Das Template wird mit <code>*ngTemplateOutlet</code> gerendert. Verwenden Sie <code>let-name=\"key\"</code> im Template, um auf Werte aus <code>templateContext</code> zuzugreifen."
+      "description": "Übergebe ein Angular-<code>TemplateRef</code> über <code>contentTemplate</code>, um Angular-Bindings im Body des Modals zu verwenden. Kombiniere es mit <code>templateContext</code>, um dynamische Daten zu injizieren.",
+      "note": "Das Template wird mit <code>*ngTemplateOutlet</code> gerendert. Verwende <code>let-name=\"key\"</code> im Template, um auf Werte aus dem <code>templateContext</code> zuzugreifen."
     },
     "prevent-close": {
-      "title": "Schlie\u00dfen verhindern",
-      "description": "Verwenden Sie <code>preventClose</code>, um Schlie\u00dfversuche abzufangen und sie bedingt zu blockieren. Unterst\u00fctzt synchrone und asynchrone Guards. Abonnieren Sie <code>closePrevented()</code>, um auf blockierte Schlie\u00dfversuche zu reagieren.",
-      "note": "Die Funktion <code>preventClose</code> muss <code>true</code> (erlauben) oder <code>false</code> / <code>Promise&lt;false&gt;</code> (blockieren) zur\u00fcckgeben. Sie wird bei jedem Schlie\u00dfversuch ausgef\u00fchrt: ESC, Backdrop-Klick und X-Schaltfl\u00e4che."
+      "title": "Schließen verhindern",
+      "description": "Verwende <code>preventClose</code>, um Schließversuche abzufangen und sie bedingt zu blockieren. Unterstützt synchrone und asynchrone Guards. Abonniere <code>closePrevented()</code>, um zu reagieren, wenn ein Schließen blockiert wird.",
+      "note": "Die Funktion <code>preventClose</code> muss <code>true</code> (erlauben) oder <code>false</code> / <code>Promise&lt;false&gt;</code> (blockieren) zurückgeben. Sie wird bei jedem Schließversuch ausgeführt: ESC, Klick auf das Backdrop und der X-Button."
     },
     "backdrop": {
-      "title": "Backdrop und Schlie\u00dfausl\u00f6ser",
-      "description": "Steuern Sie die Backdrop-Sichtbarkeit und welche Benutzeraktionen das Modal schlie\u00dfen k\u00f6nnen, mit <code>hasBackdrop</code>, <code>closeOnBackdropClick</code> und <code>closeOnEscape</code>.",
-      "note": "Das Setzen von <code>hasBackdrop: false</code> entfernt das Overlay vollst\u00e4ndig und erm\u00f6glicht die Interaktion mit der Seite hinter dem Modal."
+      "title": "Backdrop und Auslöser zum Schließen",
+      "description": "Steuere die Sichtbarkeit des Backdrops und welche Benutzeraktionen das Modal schließen können mit <code>hasBackdrop</code>, <code>backdropClass</code>, <code>closeOnBackdropClick</code> und <code>closeOnEscape</code>.",
+      "note": "Das Setzen von <code>hasBackdrop: false</code> entfernt die Overlay-Schicht vollständig und ermöglicht die Interaktion mit der Seite hinter dem Modal."
     },
     "update-ref": {
-      "title": "Hot-Updates \u00fcber ModalDialogRef",
-      "description": "Verwenden Sie <code>ref.updateTitle()</code>, <code>ref.updateHeaderTemplate()</code> und <code>ref.updateFooterTemplate()</code>, um ein ge\u00f6ffnetes Modal direkt zu aktualisieren, ohne es zu schlie\u00dfen.",
-      "note": "Die Titelaktualisierung ist signal-basiert und rendert synchron \u2014 sie funktioniert auch au\u00dferhalb der Angular-Zone (z.B. aus einem <code>setTimeout</code>)."
+      "title": "Live-Updates über ModalDialogRef",
+      "description": "Verwende <code>ref.updateTitle()</code>, <code>ref.updateHeaderTemplate()</code> und <code>ref.updateFooterTemplate()</code>, um ein geöffnetes Modal zu aktualisieren, ohne es zu schließen und erneut zu öffnen.",
+      "note": "Die Aktualisierung des Titels ist reaktiv über Signals und wird synchron gerendert, selbst wenn sie außerhalb der Angular-Zone aufgerufen wird (z. B. über <code>setTimeout</code>)."
     }
   },
   "api": {

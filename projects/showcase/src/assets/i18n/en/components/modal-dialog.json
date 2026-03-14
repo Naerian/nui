@@ -3,78 +3,78 @@
   "subtitle": "Overlay modal dialogs via CDK Overlay with full focus management, animations, minimization, and theme integration",
   "examples": {
     "basic": {
-      "title": "Basic confirm dialog",
-      "description": "Open a modal dialog using <code>ModalDialogService.open()</code> or the convenience helpers. The service provides options for title, message, confirm/cancel labels, color, and semantic type."
+      "title": "Basic Usage",
+      "description": "Opens a modal from the ModalDialogService. The modal slides in from the edge of the screen with a smooth animation."
     },
     "semanticTypes": {
-      "title": "Semantic types",
-      "description": "Use semantic helpers to quickly open pre-styled dialogs: <code>openInfo()</code>, <code>openWarning()</code>, <code>openSuccess()</code>, and <code>openError()</code>."
+      "title": "Semantic Types",
+      "description": "Use semantic helpers to quickly open pre-styled dialogs.",
+      "note": "You can launch a state modal with <code>openInfo()</code>, <code>openWarning()</code>, <code>openSuccess()</code>, and <code>openError()</code>."
     },
     "verification": {
-      "title": "Verification dialog",
-      "description": "Require the user to type a specific phrase before confirming a destructive action. Use <code>openVerification()</code> or set <code>verificationText</code> in the config."
+      "title": "Verification Dialog",
+      "description": "Requires the user to type a specific phrase before confirming a destructive action.",
+      "note": "Use <code>openVerification()</code> and set <code>verificationText</code>, <code>verificationLabel</code>, and <code>verificationErrorMessage</code> in the configuration to specify the verification text, input field label, and error message displayed when the text does not match."
     },
     "loader": {
-      "title": "Loader modal",
-      "description": "Display a non-closeable loading spinner overlay during long-running operations. Use <code>openLoader()</code> and close the reference when the operation completes."
+      "title": "Loading Modal",
+      "description": "Displays a non-closable loading spinner during long-running operations.",
+      "note": "Use <code>openLoader()</code> and close the reference when the operation is complete."
     },
     "dynamicComponent": {
-      "title": "Dynamic component",
-      "description": "Open a modal with a custom Angular component as the body. Inject <code>MODAL_DIALOG_DATA</code> to receive data and <code>MODAL_DIALOG_REF</code> to control the modal from within.",
-      "seeCode": "See the code examples below to integrate a custom component."
+      "title": "Dynamic Component",
+      "description": "Opens a modal with a custom Angular component as the body.",
+      "note": "Inject <code>MODAL_DIALOG_DATA</code> to receive data and <code>MODAL_DIALOG_REF</code> to control the modal from within."
     },
     "minimizable": {
-      "title": "Minimizable modal",
-      "description": "Allow users to minimize the modal to a dock chip at the bottom of the screen without losing context. Requires a unique <code>id</code> in the config.",
+      "title": "Minimizable Modal",
+      "description": "Allows users to minimize the modal to a chip in the bottom dock without losing context.",
       "note": "A unique <code>id</code> is required when <code>minimizable: true</code>. Calling <code>open()</code> with the same <code>id</code> will restore the minimized modal instead of creating a new one."
     },
     "timeout": {
-      "title": "Timeout with progress bar",
-      "description": "Automatically close the modal after a configurable duration. A visual progress bar tracks the remaining time and can be paused on mouse hover."
-    },
-    "footerActions": {
-      "title": "Footer actions",
-      "description": "Customize the modal footer using <code>customButtons</code>, the <code>ModalDialogActionsService</code> (from inside the dynamic component), or the <code>[nuiModalDialogFooter]</code> directive."
+      "title": "Timeout with Progress Bar",
+      "description": "Automatically closes the modal after a configurable duration. A visual progress bar tracks the remaining time and can be paused on mouse hover.",
+      "note": "Use the <code>timeout</code> option in the modal configuration to enable this feature. You can set <code>duration</code> in seconds, <code>showProgressBar</code> to display the progress bar, <code>pauseOnHover</code> to pause the timer on mouse hover, and <code>timeoutAction</code> to execute a custom function when the time is up (<code>'confirm'</code> | <code>'cancel'</code>)."
     },
     "statusBar": {
-      "title": "Status bar",
-      "description": "Add a colored border stripe to one side of the modal to convey additional semantic information using the <code>statusBar</code> config option."
+      "title": "Status Bar",
+      "description": "Adds a colored border strip on one side of the modal to convey additional semantic information using the <code>statusBar</code> option in the configuration."
     },
     "footer-custom": {
-      "title": "Custom footer actions",
-      "description": "Customize the modal footer with your own buttons and templates.",
-      "note": "Customize the modal footer using <code>customButtons</code>, the <code>ModalDialogActionsService</code> (from inside the dynamic component), or the <code>[nuiModalDialogFooter]</code> directive."
+      "title": "Custom Actions",
+      "description": "Customize the modal actions with custom buttons",
+      "note": "You can use the <code>customButtons</code> option in the modal configuration to define buttons with specific actions or <code>nuiModalDialogFooter</code> for full footer customization via an <code>ng-template</code>.<br/><br/>To use <code>loading</code> or <code>disabled</code> reactively, you can inject the <code>ModalDialogActionsService</code> into your child component to control the button states from within the component, use the <code>nuiModalDialogAction</code> directive on your custom buttons to bind them to predefined actions like 'confirm' or 'cancel', or emit custom events and subscribe to them from the child component or using an <code>ng-template</code>, without a directive, from the parent component itself."
     },
     "child-footer-actions": {
-      "title": "Actions from child component",
-      "description": "Customize the modal footer from a dynamic component loaded inside the modal.",
-      "note": "Inject <code>ModalDialogActionsService</code> into your dynamic component to register footer buttons from within the component. Actions support reactive <code>disabled</code> and <code>loading</code> states via getters \u2014 no <code>update()</code> calls needed.",
-      "note2": "Alternatively, use the <code>nuiModalDialogFooter</code> directive inside a dynamic component for full footer control with native HTML. Unlike <code>ModalDialogActionsService</code>, which registers button data rendered by the modal shell, the directive projects a complete <code>ng-template</code>: any Angular binding re-evaluates on every change detection cycle automatically, without calling <code>update()</code>."
+      "title": "Actions from Child Component",
+      "description": "Customize the modal actions from a dynamic component loaded inside the modal.",
+      "note": "Inject the <code>ModalDialogActionsService</code> into your dynamic component to add buttons to the modal footer from within the component.",
+      "note2": "As an alternative, use the <code>nuiModalDialogFooter</code> directive inside a dynamic component for full control of the footer with native HTML. Unlike <code>ModalDialogActionsService</code>, which registers button data rendered by the modal shell, the directive projects a complete <code>ng-template</code>: any Angular bindings are automatically re-evaluated on each change detection cycle, without needing to call <code>update()</code>."
     },
     "html-content": {
-      "title": "HTML content",
-      "description": "Pass an HTML string via <code>htmlContent</code> for rich body content without creating a full Angular component. The string is sanitized by Angular\u2019s <code>DomSanitizer</code>.",
-      "note": "Use <code>htmlContent</code> for static or server-rendered markup. For Angular bindings (events, interpolation, directives), use <code>bodyTemplate</code> instead."
+      "title": "HTML Content",
+      "description": "Add HTML content to your message.",
+      "note": "Use <code>message</code> for static markup or server-side rendering. The string is sanitized by Angular's <code>DomSanitizer</code>."
     },
     "body-template": {
-      "title": "Body template",
-      "description": "Pass an Angular <code>TemplateRef</code> via <code>bodyTemplate</code> to use Angular bindings inside the modal body. Pair with <code>templateContext</code> to inject dynamic data.",
-      "note": "The template is rendered with <code>*ngTemplateOutlet</code>. Use <code>let-varName=\"key\"</code> in the template to access values from <code>templateContext</code>."
+      "title": "Body Template",
+      "description": "Pass an Angular <code>TemplateRef</code> via <code>contentTemplate</code> to use Angular bindings inside the modal body. Combine it with <code>templateContext</code> to inject dynamic data.",
+      "note": "The template is rendered with <code>*ngTemplateOutlet</code>. Use <code>let-name=\"key\"</code> in the template to access values from the <code>templateContext</code>."
     },
     "prevent-close": {
-      "title": "Prevent close",
-      "description": "Use <code>preventClose</code> to intercept close attempts and conditionally block them. Supports both synchronous and async guards. Subscribe to <code>closePrevented()</code> to react when a close is blocked.",
-      "note": "The <code>preventClose</code> function must return <code>true</code> (allow) or <code>false</code> / <code>Promise&lt;false&gt;</code> (block). It runs on every close trigger: ESC, backdrop click, and the X button."
+      "title": "Prevent Close",
+      "description": "Use <code>preventClose</code> to intercept close attempts and block them conditionally. Supports synchronous and asynchronous guards. Subscribe to <code>closePrevented()</code> to react when a close is blocked.",
+      "note": "The <code>preventClose</code> function must return <code>true</code> (allow) or <code>false</code> / <code>Promise&lt;false&gt;</code> (block). It runs on every close attempt: ESC, backdrop click, and the X button."
     },
     "backdrop": {
-      "title": "Backdrop & close triggers",
-      "description": "Control the backdrop visibility and which user actions can close the modal using <code>hasBackdrop</code>, <code>closeOnBackdropClick</code>, and <code>closeOnEscape</code>.",
-      "note": "Setting <code>hasBackdrop: false</code> removes the overlay entirely, allowing interaction with the page behind the modal."
+      "title": "Backdrop and Close Triggers",
+      "description": "Control the visibility of the backdrop and which user actions can close the modal using <code>hasBackdrop</code>, <code>backdropClass</code>, <code>closeOnBackdropClick</code>, and <code>closeOnEscape</code>.",
+      "note": "Setting <code>hasBackdrop: false</code> completely removes the overlay, allowing interaction with the page behind the modal."
     },
     "update-ref": {
-      "title": "Hot updates via ModalDialogRef",
-      "description": "Use <code>ref.updateTitle()</code>, <code>ref.updateHeaderTemplate()</code>, and <code>ref.updateFooterTemplate()</code> to update an open modal in place without closing and reopening it.",
-      "note": "The title update is signal-based and re-renders synchronously \u2014 it works correctly even when called outside Angular\u2019s zone (e.g. from <code>setTimeout</code>)."
+      "title": "Hot Updates via ModalDialogRef",
+      "description": "Use <code>ref.updateTitle()</code>, <code>ref.updateHeaderTemplate()</code>, and <code>ref.updateFooterTemplate()</code> to update an open modal without closing and reopening it.",
+      "note": "Title updates are reactive via signals and render synchronously, even when called outside the Angular zone (e.g., from <code>setTimeout</code>)."
     }
   },
   "api": {

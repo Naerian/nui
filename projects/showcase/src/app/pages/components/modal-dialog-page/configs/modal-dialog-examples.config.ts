@@ -31,6 +31,43 @@ openDeleteConfirm() {
     ],
   },
   {
+    id: 'html-content',
+    title: 'components.modal-dialog.examples.html-content.title',
+    description: 'components.modal-dialog.examples.html-content.description',
+    note: {
+      type: 'info',
+      content: 'components.modal-dialog.examples.html-content.note',
+    },
+    anchor: 'html-content',
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `openOrderSummary() {
+  this.modalService.open({
+    title: 'Order summary',
+    message: \`
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <div style="display: flex; justify-content: space-between;">
+          <span>Product A × 2</span><strong>$58.00</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>Product B × 1</span><strong>$14.00</strong>
+        </div>
+        <hr style="border: none; border-top: 1px solid var(--nui-border-high); margin: 0.25rem 0;">
+        <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1rem;">
+          <span>Total</span><span>$72.00</span>
+        </div>
+      </div>
+    \`,
+    confirmText: 'Proceed to checkout',
+    cancelText: 'Cancel',
+  });
+}`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
     id: 'semantic-types',
     title: 'components.modal-dialog.examples.semanticTypes.title',
     description: 'components.modal-dialog.examples.semanticTypes.description',
@@ -79,6 +116,8 @@ openError() {
     title: 'Delete project',
     message: 'This action is irreversible. Type the project name to confirm.',
     verificationText: 'my-project',
+    verificationLabel: 'Project name',
+    verificationErrorMessage: 'Project name does not match.',
     confirmText: 'Delete permanently',
     cancelText: 'Cancel',
     modalType: 'danger',
@@ -582,43 +621,6 @@ export class UserFormModalComponent implements OnInit {
     ],
   },
   {
-    id: 'html-content',
-    title: 'components.modal-dialog.examples.html-content.title',
-    description: 'components.modal-dialog.examples.html-content.description',
-    note: {
-      type: 'info',
-      content: 'components.modal-dialog.examples.html-content.note',
-    },
-    anchor: 'html-content',
-    examples: [
-      {
-        title: 'codeExamples.typescript',
-        code: `openOrderSummary() {
-  this.modalService.open({
-    title: 'Order summary',
-    htmlContent: \`
-      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-        <div style="display: flex; justify-content: space-between;">
-          <span>Product A × 2</span><strong>$58.00</strong>
-        </div>
-        <div style="display: flex; justify-content: space-between;">
-          <span>Product B × 1</span><strong>$14.00</strong>
-        </div>
-        <hr style="border: none; border-top: 1px solid var(--nui-border-high); margin: 0.25rem 0;">
-        <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1rem;">
-          <span>Total</span><span>$72.00</span>
-        </div>
-      </div>
-    \`,
-    confirmText: 'Proceed to checkout',
-    cancelText: 'Cancel',
-  });
-}`,
-        language: 'typescript',
-      },
-    ],
-  },
-  {
     id: 'body-template',
     title: 'components.modal-dialog.examples.body-template.title',
     description: 'components.modal-dialog.examples.body-template.description',
@@ -647,7 +649,7 @@ export class UserFormModalComponent implements OnInit {
 openUserProfile() {
   this.modalService.open({
     title: 'User profile',
-    bodyTemplate: this.userProfileTpl,
+    contentTemplate: this.userProfileTpl,
     templateContext: {
       user: { name: 'Jane Doe', email: 'jane@example.com', role: 'Admin' },
     },
@@ -772,6 +774,17 @@ this.modalService.open({
   title: 'ESC disabled',
   message: 'Pressing Escape will not close this modal. Use the X button.',
   closeOnEscape: false,
+  confirmText: 'Close',
+});`,
+        language: 'typescript',
+      },
+      {
+        title: 'Custom backdrop',
+        code: `// Custom backdrop with blur effect
+this.modalService.open({
+  title: 'Custom backdrop',
+  message: 'This modal has a custom backdrop with a blur effect.',
+  backdropClass: 'custom-backdrop-blur',
   confirmText: 'Close',
 });`,
         language: 'typescript',

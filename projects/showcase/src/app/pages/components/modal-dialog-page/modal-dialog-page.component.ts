@@ -55,6 +55,7 @@ export class ModalDialogPageComponent extends BaseComponentPage {
       icon: 'ri-code-s-slash-line',
       sections: [
         'basic',
+        'html-content',
         'semantic-types',
         'verification',
         'loader',
@@ -64,7 +65,6 @@ export class ModalDialogPageComponent extends BaseComponentPage {
         'status-bar',
         'footer-custom',
         'child-footer-actions',
-        'html-content',
         'body-template',
         'prevent-close',
         'backdrop',
@@ -400,7 +400,7 @@ export class ModalDialogPageComponent extends BaseComponentPage {
   openHtmlContentModal(): void {
     this._modalService.open({
       title: 'Order summary',
-      htmlContent: `
+      message: `
         <div style="display: flex; flex-direction: column; gap: 0.75rem;">
           <div style="display: flex; justify-content: space-between;">
             <span>Product A &times; 2</span><strong>$58.00</strong>
@@ -419,11 +419,11 @@ export class ModalDialogPageComponent extends BaseComponentPage {
     });
   }
 
-  openBodyTemplateModal(): void {
+  opencontentTemplateModal(): void {
     if (!this.userProfileModalTemplate) return;
     this._modalService.open({
       title: 'User profile',
-      bodyTemplate: this.userProfileModalTemplate,
+      contentTemplate: this.userProfileModalTemplate,
       templateContext: {
         user: { name: 'Jane Doe', email: 'jane@example.com', role: 'Admin' },
       },
@@ -496,6 +496,15 @@ export class ModalDialogPageComponent extends BaseComponentPage {
       title: 'ESC disabled',
       message: 'Pressing the Escape key will not close this modal. Use the X button.',
       closeOnEscape: false,
+      confirmText: 'Close',
+    });
+  }
+
+  openCustomBackdropModal(): void {
+    this._modalService.open({
+      title: 'Custom backdrop',
+      message: 'This modal has a custom backdrop with a blur effect.',
+      backdropClass: 'custom-backdrop-blur',
       confirmText: 'Close',
     });
   }

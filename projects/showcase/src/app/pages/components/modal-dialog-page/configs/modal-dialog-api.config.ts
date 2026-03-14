@@ -86,8 +86,7 @@ export const MODAL_DIALOG_API_SECTIONS: ComponentSection[] = [
       ],
       rows: [
         ['<code>title</code>', 'string', '-', 'Modal title shown in the header'],
-        ['<code>message</code>', 'string', '-', 'Simple text message for the body (simple modals)'],
-        ['<code>htmlContent</code>', 'string', '-', 'Sanitized HTML content for the body'],
+        ['<code>message</code>', 'string', '-', 'HTML message shown in the body (sanitized)'],
         [
           '<code>modalType</code>',
           'ModalDialogType',
@@ -104,14 +103,20 @@ export const MODAL_DIALOG_API_SECTIONS: ComponentSection[] = [
           'Prevents the modal from being closed (hides close button and blocks gestures)',
         ],
         [
-          '<code>bodyTemplate</code>',
+          '<code>contentTemplate</code>',
           'TemplateRef&lt;any&gt;',
           '-',
-          'TemplateRef for the body, takes priority over message and htmlContent. Used with <code>templateContext</code> to pass context data.',
+          'TemplateRef for the body, takes priority over message. Used with <code>templateContext</code> to pass context data.',
         ],
         ['<code>templateContext</code>', 'any', '-', 'Context object for the body template'],
         ['<code>id</code>', 'string', '-', 'Required when minimizable: true (singleton key)'],
         ['<code>hasBackdrop</code>', 'boolean', 'true', 'Show backdrop overlay'],
+        [
+          '<code>backdropClass</code>',
+          'string | string[]',
+          '<code class="neutral">undefined</code>',
+          'Backdrop CSS classes',
+        ],
         ['<code>closeOnBackdropClick</code>', 'boolean', 'true', 'Close on backdrop click'],
         ['<code>closeOnEscape</code>', 'boolean', 'true', 'Close on Escape key'],
         ['<code>closeOnRouteChange</code>', 'boolean', 'false', 'Auto-close on route navigation'],

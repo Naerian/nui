@@ -1386,14 +1386,14 @@ import { ModalDialogService } from '@shared/components/modal-dialog';
   `
 })
 export class ExampleComponent {
-  @ViewChild('customBody') bodyTemplate!: TemplateRef<any>;
+  @ViewChild('customBody') contentTemplate!: TemplateRef<any>;
 
   constructor(private modalService: ModalDialogService) {}
 
   openModalWithTemplate() {
     this.modalService.open({
       title: 'Modal con Template',
-      bodyTemplate: this.bodyTemplate,
+      contentTemplate: this.contentTemplate,
       customValue: 'Hola Mundo', // Data custom
       confirmText: 'Aceptar',
       cancelText: 'Cancelar'
@@ -1594,7 +1594,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
   `
 })
 export class FormModalComponent {
-  @ViewChild('formBody') bodyTemplate!: TemplateRef<any>;
+  @ViewChild('formBody') contentTemplate!: TemplateRef<any>;
   form: FormGroup;
 
   constructor(
@@ -1611,7 +1611,7 @@ export class FormModalComponent {
   openFormModal() {
     this.modalService.open({
       title: 'Cont�ctanos',
-      bodyTemplate: this.bodyTemplate,
+      contentTemplate: this.contentTemplate,
       confirmText: 'Enviar',
       cancelText: 'Cancelar'
     }).afterClosed().subscribe(result => {
@@ -1695,7 +1695,7 @@ export class FormModalComponent {
   `]
 })
 export class ListModalComponent {
-  @ViewChild('listBody') bodyTemplate!: TemplateRef<any>;
+  @ViewChild('listBody') contentTemplate!: TemplateRef<any>;
   selectedId: number | null = null;
 
   selectItem(id: number) {
@@ -1705,7 +1705,7 @@ export class ListModalComponent {
   openListModal() {
     this.modalService.open({
       title: 'Selecciona una opci�n',
-      bodyTemplate: this.bodyTemplate,
+      contentTemplate: this.contentTemplate,
       items: [
         {
           id: 1,
@@ -1922,7 +1922,7 @@ export class MixedTemplatesComponent {
 this.modalService.open({
   // Solo usar templates custom
   headerTemplate: this.customHeader,
-  bodyTemplate: this.customBody,
+  contentTemplate: this.customBody,
   footerTemplate: this.customFooter,
   
   // Ocultar defaults
@@ -1985,7 +1985,7 @@ export class ContextExampleComponent {
 
   openContextModal() {
     this.modalService.open({
-      bodyTemplate: this.template,
+      contentTemplate: this.template,
       customTitle: 'Ejemplo de Context',
       customMessage: 'Todos los datos est�n disponibles',
       counter: 0,
@@ -2441,7 +2441,7 @@ export class DeleteConfirmComponent {
     this.confirmInput = ''; // Reset
     
     this.modalService.open({
-      bodyTemplate: this.template,
+      contentTemplate: this.template,
       itemName: itemName,
       hideDefaultFooter: true,
       width: '500px'
@@ -2511,7 +2511,7 @@ export class TabsModalComponent {
   openTabsModal() {
     this.modalService.open({
       title: 'Configuraci�n',
-      bodyTemplate: this.template,
+      contentTemplate: this.template,
       tabs: [
         { id: 'general', label: 'General', icon: 'ri-settings-line' },
         { id: 'advanced', label: 'Avanzado', icon: 'ri-tools-line' },
@@ -2558,7 +2558,7 @@ export class ParentComponent {
 
   openModal() {
     this.modalService.open({
-      bodyTemplate: this.listTemplate.template,
+      contentTemplate: this.listTemplate.template,
       items: [/* ... */]
     });
   }
@@ -2577,7 +2577,7 @@ interface CustomModalData {
 }
 
 this.modalService.open<CustomModalData>({
-  bodyTemplate: this.template,
+  contentTemplate: this.template,
   items: this.items,
   selectedId: null,
   onSelect: (id) => this.handleSelect(id)
@@ -2604,7 +2604,7 @@ prepareModalData() {
 }
 
 this.modalService.open({
-  bodyTemplate: this.template,
+  contentTemplate: this.template,
   ...this.prepareModalData()
 });
 ```
@@ -2907,7 +2907,7 @@ this.modalService.open({
 ```typescript
 this.modalService.open({
   title: 'Confirmar operaci�n',
-  bodyTemplate: this.confirmationTemplate,
+  contentTemplate: this.confirmationTemplate,
   customButtons: [
     {
       text: 'Confirmar',

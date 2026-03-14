@@ -5,3 +5,13 @@
   font-style: italic;
   font-size: 0.875rem;
 }
+
+::ng-deep .custom-backdrop-blur {
+  // Efecto blur para desenfocar el contenido de fondo
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background-color: rgba(59, 130, 246, 0.25) !important;
+  transition:
+    opacity 300ms ease-in-out,
+    backdrop-filter 300ms ease-in-out;
+}

@@ -306,15 +306,12 @@ interface ModalDialogConfigBase<D = any> {
   verificationErrorMessage?: string;
   /** Verificación distingue mayúsculas/minúsculas. Default: false */
   caseSensitive?: boolean;
-
-  // ── Contenido alternativo al componente dinámico ─────────────
-  /** HTML directo para el body (alternativa a componente dinámico) */
-  htmlContent?: string;
+  
   /**
    * TemplateRef para el body con soporte de contexto dinámico
    * (alternativa a componente dinámico)
    */
-  bodyTemplate?: TemplateRef<any>;
+  contentTemplate?: TemplateRef<any>;
   templateContext?: any;
 }
 
