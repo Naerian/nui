@@ -933,6 +933,7 @@ export class MyFormComponent {
       content: 'components.sidebar-panel.examples.child-footer-actions.note2',
     },
     examples: [
+
       {
         title: 'Child Component',
         code: `import { Component, inject, OnInit, signal, effect, computed, untracked } from '@angular/core';
@@ -1020,6 +1021,129 @@ panelRef.afterClosed().subscribe(result => {
     this.refreshUserList();
   }
 });`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
+    id: 'prevent-close',
+    title: 'components.sidebar-panel.examples.prevent-close.title',
+    description: 'components.sidebar-panel.examples.prevent-close.description',
+    anchor: 'prevent-close',
+    note: {
+      type: 'info',
+      icon: 'ri-shield-check-line',
+      content: 'components.sidebar-panel.examples.prevent-close.note',
+    },
+    examples: [
+      {
+        title: 'Basic — always block',
+        code: `// Block ALL close attempts (backdrop, ESC, close button)
+const panelRef = this.sidebarPanelService.open(EditFormComponent, {
+  title: 'Unsaved Changes',
+  preventClose: () => false,
+});`,
+        language: 'typescript',
+      },
+      {
+        title: 'Conditional — confirm dialog',
+        code: `let hasUnsavedChanges = false;
+
+const panelRef = this.sidebarPanelService.open(EditFormComponent, {
+  title: 'Edit Record',
+  preventClose: () => {
+    if (!hasUnsavedChanges) return true; // No changes → allow close
+    return confirm('You have unsaved changes. Discard them?');
+  },
+  customButtons: [
+    {
+      text: 'Mark as dirty',
+      color: 'secondary', variant: 'outline',
+      callback: () => { hasUnsavedChanges = true; }
+    },
+    {
+      text: 'Save & Close',
+      color: 'primary', variant: 'solid',
+      callback: (ref) => {
+        hasUnsavedChanges = false;
+        ref.close({ saved: true });
+      }
+    }
+  ]
+});`,
+        language: 'typescript',
+      },
+      {
+        title: 'Async — server validation',
+        code: `const panelRef = this.sidebarPanelService.open(CheckoutFormComponent, {
+  title: 'Checkout',
+  preventClose: async () => {
+    const ok = await this.checkoutService.canAbort();
+    return ok;
+  },
+});
+
+// closePrevented() fires every time close is blocked
+panelRef.closePrevented().subscribe(() => {
+  this.toastService.warn('Please finish or cancel the checkout first.');
+});`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
+    id: 'update-ref',
+    title: 'components.sidebar-panel.examples.update-ref.title',
+    description: 'components.sidebar-panel.examples.update-ref.description',
+    anchor: 'update-ref',
+    note: {
+      type: 'info',
+      icon: 'ri-refresh-line',
+      content: 'components.sidebar-panel.examples.update-ref.note',
+    },
+    examples: [
+      {
+        title: 'updateTitle()',
+        code: `const panelRef = this.sidebarPanelService.open(MyComponent, {
+  title: 'Loading...',
+  customButtons: [
+    {
+      text: 'Rename panel',
+      color: 'secondary', variant: 'outline',
+      callback: (ref) => ref.updateTitle('Panel renamed!'),
+    }
+  ]
+});
+
+// Update title after async data loads
+this.userService.getUser(id).then(user => {
+  panelRef.updateTitle(user.name);
+});`,
+        language: 'typescript',
+      },
+      {
+        title: 'updateFooterTemplate()',
+        code: `// Parent component template
+// <ng-template #confirmFooter>
+//   <div class="footer-custom">
+//     <button (click)="confirm()">Confirm</button>
+//   </div>
+// </ng-template>
+
+@ViewChild('confirmFooter') confirmFooter!: TemplateRef<any>;
+
+openAndUpdateFooter(): void {
+  const panelRef = this.sidebarPanelService.open(MyComponent, {
+    title: 'Step 1 — Setup',
+  });
+
+  // Switch to a confirmation footer after some event
+  panelRef.afterOpened().subscribe(() => {
+    setTimeout(() => {
+      panelRef.updateFooterTemplate(this.confirmFooter);
+    }, 2000);
+  });
+}`,
         language: 'typescript',
       },
     ],

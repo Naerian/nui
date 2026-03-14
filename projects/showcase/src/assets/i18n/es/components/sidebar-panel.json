@@ -71,6 +71,16 @@
       "description": "El componente hijo puede registrar sus propias acciones de footer usando SidebarPanelActionsService.",
       "note": "Esta aproximación es ideal para formularios donde el hijo maneja toda la lógica (validación, guardado, estados). El componente hijo inyecta <code>SidebarPanelActionsService</code> y registra las acciones mediante <code>register()</code>. Las acciones pueden tener estados reactivos (disabled, loading) y ejecutar lógica compleja.",
       "note2": "Como alternativa, usa la directiva <code>nuiSidebarPanelFooter</code> dentro de un componente dinámico para tener control total del footer con HTML nativo. A diferencia de <code>SidebarPanelActionsService</code>, que registra datos de botones renderizados por el shell, la directiva proyecta un <code>ng-template</code> completo: cualquier binding de Angular se reevalúa en cada ciclo de detección de cambios sin necesidad de llamar a <code>update()</code>."
+    },
+    "prevent-close": {
+      "title": "Prevención de cierre (dirty guard)",
+      "description": "Bloquea el cierre del panel cuando hay cambios sin guardar o una condición asíncrona no se cumple. Funciona para todos los disparadores de cierre: click en backdrop, tecla Escape y el botón de cerrar del header.",
+      "note": "Pasa una función síncrona o asíncrona a <code>preventClose</code>. Devuelve <code>true</code> para permitir el cierre, <code>false</code> para bloquearlo. Usa <code>panelRef.closePrevented()</code> para reaccionar cada vez que el cierre es bloqueado, ideal para mostrar un toast o animar el panel."
+    },
+    "update-ref": {
+      "title": "Actualizar el panel en caliente",
+      "description": "Modifica el título, el header o el footer del panel después de haberlo abierto, sin cerrarlo ni reabrirlo. Útil cuando llegan datos asíncronos o cambia el estado del panel.",
+      "note": "Llama a <code>panelRef.updateTitle()</code>, <code>panelRef.updateHeaderTemplate()</code> o <code>panelRef.updateFooterTemplate()</code> en cualquier momento después de <code>open()</code>. El shell se re-renderiza automáticamente gracias a que internamente se llama a <code>markForCheck()</code>."
     }
   },
   "api": {

@@ -71,6 +71,16 @@
       "description": "Die untergeordnete Komponente kann eigene Fußzeilen-Aktionen über SidebarPanelActionsService registrieren.",
       "note": "Dieser Ansatz eignet sich ideal für Formulare, bei denen die untergeordnete Komponente die gesamte Logik verwaltet (Validierung, Speichern, Zustände). Die untergeordnete Komponente injiziert <code>SidebarPanelActionsService</code> und registriert Aktionen über <code>register()</code>. Aktionen können reaktive Zustände (deaktiviert, wird geladen) haben und komplexe Logik ausführen.",
       "note2": "Alternativ können Sie die Direktive <code>nuiSidebarPanelFooter</code> in einer dynamischen Komponente verwenden, um volle Kontrolle über die Fußzeile mit nativem HTML zu erhalten. Im Gegensatz zu <code>SidebarPanelActionsService</code>, der Button-Daten registriert und vom Panel-Shell gerendert werden, projiziert die Direktive ein vollständiges <code>ng-template</code>: Jedes Angular-Binding wird bei jeder Änderungserkennung neu ausgewertet, ohne <code>update()</code> aufrufen zu müssen."
+    },
+    "prevent-close": {
+      "title": "Schließen verhindern (Dirty Guard)",
+      "description": "Verhindert das Schließen des Panels, wenn ungespeicherte Änderungen vorliegen oder eine asynchrone Bedingung nicht erfüllt ist. Funktioniert für alle Schließauslöser: Backdrop-Klick, Escape-Taste und den Schließen-Button im Header.",
+      "note": "Übergeben Sie eine synchrone oder asynchrone Funktion an <code>preventClose</code>. Geben Sie <code>true</code> zurück, um das Schließen zu erlauben, oder <code>false</code>, um es zu blockieren. Verwenden Sie <code>panelRef.closePrevented()</code>, um jedes Mal zu reagieren, wenn das Schließen blockiert wird — nützlich für Toast-Nachrichten oder Panel-Animationen."
+    },
+    "update-ref": {
+      "title": "Panel im laufenden Betrieb aktualisieren",
+      "description": "Ändert Titel, Header oder Footer des Panels, nachdem es geöffnet wurde, ohne es zu schließen und neu zu öffnen. Nützlich, wenn asynchrone Daten geladen werden oder sich der Panel-Status ändert.",
+      "note": "Rufen Sie <code>panelRef.updateTitle()</code>, <code>panelRef.updateHeaderTemplate()</code> oder <code>panelRef.updateFooterTemplate()</code> jederzeit nach <code>open()</code> auf. Das Shell re-rendert automatisch, da intern <code>markForCheck()</code> aufgerufen wird."
     }
   },
   "api": {

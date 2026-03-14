@@ -93,6 +93,9 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
   /** ID único para vincular aria-labelledby sin riesgo de duplicados entre paneles */
   readonly instanceId = `nui-sp-${Math.random().toString(36).slice(2, 9)}`;
 
+  /** Signal interno para permitir actualizaciones de título en caliente desde SidebarPanelRef */
+  private readonly _titleOverride = signal<string | undefined>(undefined);
+
   protected readonly actionsService = inject(SidebarPanelActionsService, {
     optional: true,
   });
@@ -400,7 +403,27 @@ export class SidebarPanelComponent implements OnInit, AfterViewInit, OnDestroy {
    * @returns Título del panel o string vacío si no está definido
    */
   get title(): string {
-    return this.sidebarPanelConfig.title ?? '';
+    return this._titleOverride() ?? this.sidebarPanelConfig.title ?? '';
+  }
+
+  /**
+   * Actualiza el título del panel de forma reactiva (signal-based).
+   * Funciona fuera de la zona de Angular sin necesitar detectChanges.
+   *
+   * @internal - Llamado por SidebarPanelRef.updateTitle()
+   */
+  updateTitle(newTitle: string): void {
+    this._titleOverride.set(newTitle);
+  }
+
+  /**
+   * Fuerza la detección de cambios desde dentro del componente.
+   * Necesario para actualizaciones de headerTemplate/footerTemplate desde SidebarPanelRef.
+   *
+   * @internal - Llamado por SidebarPanelRef.updateHeaderTemplate() / updateFooterTemplate()
+   */
+  _refreshView(): void {
+    this._cdr.detectChanges();
   }
 
   /**

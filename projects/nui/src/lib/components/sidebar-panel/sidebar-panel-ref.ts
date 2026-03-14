@@ -249,33 +249,49 @@ export class SidebarPanelRef<T = any, R = any> {
   }
 
   /**
-   * Actualiza el título del panel
+   * Actualiza el título del panel en caliente.
+   *
+   * Llama a `updateTitle()` en la instancia del componente, que usa un signal
+   * interno para actualizar la vista de forma reactiva sin necesitar detectChanges()
+   * ni depender de la zona de Angular.
+   *
    * @param title Nuevo título
    */
   updateTitle(title: string): void {
     if (this.config) {
       this.config.title = title;
     }
+    this._containerComponentRef?.instance?.updateTitle?.(title);
   }
 
   /**
-   * Actualiza el template del header
+   * Actualiza el template del header en caliente.
+   *
+   * Muta el config y llama a `_refreshView()` en la instancia del componente,
+   * que ejecuta su propio `detectChanges()` de forma sincrónica.
+   *
    * @param template Nuevo template
    */
   updateHeaderTemplate(template: TemplateRef<any>): void {
     if (this.config) {
       this.config.headerTemplate = template;
     }
+    this._containerComponentRef?.instance?._refreshView?.();
   }
 
   /**
-   * Actualiza el template del footer
+   * Actualiza el template del footer en caliente.
+   *
+   * Muta el config y llama a `_refreshView()` en la instancia del componente,
+   * que ejecuta su propio `detectChanges()` de forma sincrónica.
+   *
    * @param template Nuevo template
    */
   updateFooterTemplate(template: TemplateRef<any>): void {
     if (this.config) {
       this.config.footerTemplate = template;
     }
+    this._containerComponentRef?.instance?._refreshView?.();
   }
 
   /**

@@ -71,6 +71,16 @@
       "description": "The child component can register its own footer actions using SidebarPanelActionsService.",
       "note": "This approach is ideal for forms where the child handles all the logic (validation, saving, states). The child component injects <code>SidebarPanelActionsService</code> and registers actions via <code>register()</code>. Actions can have reactive states (disabled, loading) and execute complex logic.",
       "note2": "Alternatively, use the <code>nuiSidebarPanelFooter</code> directive inside a dynamic component for full footer control with native HTML. Unlike <code>SidebarPanelActionsService</code>, which registers button data rendered by the shell, the directive projects a complete <code>ng-template</code>: any Angular binding re-evaluates on every change detection cycle without calling <code>update()</code>."
+    },
+    "prevent-close": {
+      "title": "Prevent close (dirty guard)",
+      "description": "Block the panel from closing when there are unsaved changes or when an async condition is not met. Works for all close triggers: backdrop click, Escape key and the header close button.",
+      "note": "Pass a synchronous or async function to <code>preventClose</code>. Return <code>true</code> to allow the close, <code>false</code> to block it. Use <code>panelRef.closePrevented()</code> to react every time a close is blocked — useful to show a toast or shake the panel."
+    },
+    "update-ref": {
+      "title": "Update panel in flight",
+      "description": "Modify the panel title, header or footer template after it has been opened, without closing and reopening it. Useful when async data loads or the panel state changes.",
+      "note": "Call <code>panelRef.updateTitle()</code>, <code>panelRef.updateHeaderTemplate()</code> or <code>panelRef.updateFooterTemplate()</code> at any point after <code>open()</code>. The shell re-renders automatically thanks to <code>markForCheck()</code> being called internally."
     }
   },
   "api": {

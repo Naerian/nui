@@ -63,6 +63,8 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
         'multiple',
         'footer-actions',
         'child-footer-actions',
+        'prevent-close',
+        'update-ref',
       ],
     },
     {
@@ -797,6 +799,96 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
    * Abre un panel con múltiples acciones complejas
    * Demuestra un caso de uso real con validación y flujo complejo
    */
+  /**
+   * Abre un panel que demuestra la prevención de cierre (preventClose)
+   * El panel bloquea el cierre si hay cambios sin guardar
+   */
+  openPreventClosePanel(): void {
+    let hasUnsavedChanges = false;
+
+    const panelRef = this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
+      title: 'Formulario con cambios sin guardar',
+      position: 'right',
+      size: 'md',
+      data: {
+        message:
+          'Este panel bloquea el cierre cuando hay cambios sin guardar. ' +
+          'Pulsa "Marcar como modificado" y luego intenta cerrar el panel ' +
+          '(backdrop, ESC o botón de cerrar).',
+      },
+      preventClose: () => {
+        if (!hasUnsavedChanges) return true;
+        return confirm('¿Tienes cambios sin guardar. ¿Descartarlos?');
+      },
+      customButtons: [
+        {
+          text: 'Marcar como modificado',
+          color: 'secondary',
+          variant: 'outline',
+          prefixIcon: 'ri-edit-line',
+          callback: () => {
+            hasUnsavedChanges = true;
+            alert('El panel ahora bloqueará el cierre hasta que guardes o confirmes el descarte.');
+          },
+        },
+        {
+          text: 'Guardar y cerrar',
+          color: 'primary',
+          variant: 'solid',
+          prefixIcon: 'ri-save-line',
+          callback: ref => {
+            hasUnsavedChanges = false;
+            ref.close({ saved: true });
+          },
+        },
+      ],
+    });
+
+    panelRef.closePrevented().subscribe(() => {
+      console.log('[preventClose] Cierre bloqueado — hay cambios sin guardar');
+    });
+  }
+
+  /**
+   * Abre un panel que demuestra updateTitle() y updateFooterTemplate()
+   * Los métodos actualizan el panel en caliente sin reabrirlo
+   */
+  openUpdateRefPanel(): void {
+    const panelRef = this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
+      title: 'Título inicial',
+      position: 'right',
+      size: 'md',
+      data: {
+        message:
+          'Los botones del footer llaman a métodos del SidebarPanelRef para actualizar ' +
+          'el título del panel en caliente, sin necesidad de cerrarlo y reabrirlo.',
+      },
+      customButtons: [
+        {
+          text: 'Renombrar panel',
+          color: 'secondary',
+          variant: 'outline',
+          prefixIcon: 'ri-edit-line',
+          callback: ref => {
+            const newTitle = `Panel actualizado a las ${new Date().toLocaleTimeString()}`;
+            ref.updateTitle(newTitle);
+          },
+        },
+        {
+          text: 'Cerrar',
+          color: 'secondary',
+          variant: 'ghost',
+          callback: ref => ref.close(),
+        },
+      ],
+    });
+
+    // Simula actualizar el título cuando llegan datos asíncronos
+    panelRef.afterOpened().subscribe(() => {
+      setTimeout(() => panelRef.updateTitle('Datos cargados ✓'), 1500);
+    });
+  }
+
   openPanelWithComplexActions(): void {
     this.sidebarPanelService.open(SidebarPanelExampleContentComponent, {
       title: 'Formulario de Usuario',

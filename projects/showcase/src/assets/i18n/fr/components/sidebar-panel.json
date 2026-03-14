@@ -71,6 +71,16 @@
       "description": "Le composant enfant peut enregistrer ses propres actions de pied de page en utilisant SidebarPanelActionsService.",
       "note": "Cette approche est idéale pour les formulaires où l'enfant gère toute la logique (validation, sauvegarde, états). Le composant enfant injecte <code>SidebarPanelActionsService</code> et enregistre des actions via <code>register()</code>. Les actions peuvent avoir des états réactifs (désactivé, chargement) et exécuter une logique complexe.",
       "note2": "Alternativement, utilisez la directive <code>nuiSidebarPanelFooter</code> dans un composant dynamique pour un contrôle total du pied de page avec HTML natif. Contrairement à <code>SidebarPanelActionsService</code>, qui enregistre des données de boutons rendus par le shell, la directive projette un <code>ng-template</code> complet : tout binding Angular est réévalué à chaque cycle de détection des changements, sans appel à <code>update()</code>."
+    },
+    "prevent-close": {
+      "title": "Empêcher la fermeture (dirty guard)",
+      "description": "Bloque la fermeture du panneau lorsqu'il y a des modifications non enregistrées ou qu'une condition asynchrone n'est pas remplie. Fonctionne pour tous les déclencheurs de fermeture : clic sur le backdrop, touche Escape et le bouton de fermeture du header.",
+      "note": "Passez une fonction synchrone ou asynchrone à <code>preventClose</code>. Retournez <code>true</code> pour autoriser la fermeture, <code>false</code> pour la bloquer. Utilisez <code>panelRef.closePrevented()</code> pour réagir chaque fois qu'une fermeture est bloquée — utile pour afficher un toast ou animer le panneau."
+    },
+    "update-ref": {
+      "title": "Mettre à jour le panneau à chaud",
+      "description": "Modifie le titre, le header ou le footer du panneau après son ouverture, sans le fermer ni le rouvrir. Utile lorsque des données asynchrones arrivent ou que l'état du panneau change.",
+      "note": "Appelez <code>panelRef.updateTitle()</code>, <code>panelRef.updateHeaderTemplate()</code> ou <code>panelRef.updateFooterTemplate()</code> à tout moment après <code>open()</code>. Le shell se re-rend automatiquement grâce à <code>markForCheck()</code> appelé en interne."
     }
   },
   "api": {
