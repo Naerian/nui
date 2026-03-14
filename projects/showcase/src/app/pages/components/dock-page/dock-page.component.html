@@ -1,0 +1,72 @@
+<div class="docs-page">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h1>{{ pageConfig.title | translate }}</h1>
+      <p class="subtitle" [innerHTML]="pageConfig.subtitle | translate"></p>
+    </div>
+
+    <app-component-tabs [tabs]="tabs" [sections]="pageConfig.sections" #tabsComp>
+      @if (tabsComp.activeSections(); as activeSections) {
+        @for (section of activeSections; track section.id) {
+          <div class="section">
+            <app-section-title
+              [title]="section.title | translate"
+              [anchor]="section.anchor"
+              [tabId]="tabsComp.activeTabId()"
+            ></app-section-title>
+
+            @if (section.description) {
+              <p class="section-description" [innerHTML]="section.description | translate"></p>
+            }
+
+            @if (section.note; as note) {
+              <div class="section-note" [ngClass]="note.type">
+                <p [innerHTML]="note.content | translate"></p>
+              </div>
+            }
+
+            @switch (section.id) {
+              @case ('api-service') {
+                <div class="example-preview example-preview--spaced">
+                  <nui-button [color]="'primary'" (click)="openMinimizableModal()">
+                    {{ 'components.dock.demo.openModal' | translate }}
+                  </nui-button>
+                  <nui-button [color]="'primary'" (click)="openMinimizablePanel()">
+                    {{ 'components.dock.demo.openPanel' | translate }}
+                  </nui-button>
+                </div>
+              }
+            }
+
+            @if (section.table) {
+              <div class="api-table">
+                <table>
+                  <thead>
+                    <tr>
+                      @for (header of section.table.headers; track $index) {
+                        <th [innerHTML]="header | translate"></th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of section.table.rows; track $index) {
+                      <tr>
+                        @for (cell of row; track $index) {
+                          <td [innerHTML]="cell | translate"></td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+
+            @if (section.examples && section.examples.length > 0) {
+              <app-code-block [examples]="section.examples"></app-code-block>
+            }
+          </div>
+        }
+      }
+    </app-component-tabs>
+  </div>
+</div>

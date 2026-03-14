@@ -40,7 +40,8 @@
     "progressBar": "Progress Bar",
     "timeSelector": "Time Picker",
     "splitButton": "Split Button",
-    "modalDialog": "Modal Dialog"
+    "modalDialog": "Modal Dialog",
+    "dock": "Dock"
   },
   "presets": {
     "aura": "Aura",

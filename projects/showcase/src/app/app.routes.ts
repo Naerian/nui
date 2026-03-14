@@ -218,6 +218,13 @@ export const routes: Routes = [
             m => m.ModalDialogPageComponent
           ),
       },
+      {
+        path: 'dock',
+        loadComponent: () =>
+          import('./pages/components/dock-page/dock-page.component').then(
+            m => m.DockPageComponent
+          ),
+      },
     ],
   },
 

@@ -1,0 +1,86 @@
+{
+  "title": "NuiDock",
+  "subtitle": "Barra de herramientas unificada y de creación lazy que agrupa los <strong>Modal Dialogs</strong> y <strong>Sidebar Panels</strong> minimizados en una fila de chips al borde inferior (o superior) del viewport. El dock se crea automáticamente por <code>NuiDockService</code> cuando se minimiza el primer elemento, y se destruye cuando se restaura el último.",
+  "demo": {
+    "openModal": "Abrir modal minimizable",
+    "openPanel": "Abrir panel minimizable"
+  },
+  "api": {
+    "service": {
+      "title": "NuiDockService",
+      "description": "Servicio singleton (<code>providedIn: 'root'</code>) que gestiona la colección de elementos minimizados y controla el ciclo de vida de <code>NuiDockComponent</code>. ModalDialog y SidebarPanel lo usan internamente; solo es necesario interactuar con él directamente para integraciones personalizadas.",
+      "rows": {
+        "add": "Registra un nuevo elemento en el dock. Crea el componente dock de forma lazy en la primera llamada.",
+        "remove": "Elimina un elemento del dock por su <code>id</code> sin invocar su callback de restauración.",
+        "restore": "Invoca el callback <code>restore</code> del elemento y lo elimina del dock.",
+        "clearAll": "Elimina todos los elementos del dock y destruye el componente dock.",
+        "items": "Signal de solo lectura que expone el array actual de elementos del dock."
+      }
+    },
+    "dock-item": {
+      "title": "NuiDockItem",
+      "description": "Modelo en tiempo de ejecución que representa un elemento minimizado en el dock. Las instancias son creadas internamente por <code>ModalDialogComponent</code> y <code>SidebarPanelComponent</code> al llamar a <code>minimize()</code>. Los campos marcados como <strong>required</strong> son obligatorios.",
+      "rows": {
+        "id": "Identificador único del elemento del dock; coincide con el <code>id</code> del modal o panel de origen. Obligatorio.",
+        "type": "Tipo de origen del elemento: <code>'modal'</code> para un Modal Dialog, <code>'sidebar'</code> para un Sidebar Panel. Obligatorio.",
+        "title": "Etiqueta de texto mostrada en el chip del dock. Obligatorio.",
+        "prefixIcon": "Clase de icono Remix Icon para el icono prefijo del chip.",
+        "suffixIcon": "Clase de icono Remix Icon para el icono sufijo del chip. Solo se muestra cuando también hay <code>prefixIcon</code>.",
+        "hideSuffixIcon": "Cuando es <code>true</code>, oculta la flecha direccional añadida automáticamente a los chips de sidebar según su posición original.",
+        "color": "Color semántico NUI aplicado como borde de acento en el chip.",
+        "position": "Posición original del panel lateral (<code>'right'</code>, <code>'left'</code>, <code>'top'</code>, <code>'bottom'</code>). Solo presente cuando <code>type === 'sidebar'</code>; se usa para renderizar una flecha direccional.",
+        "cssClass": "Clases CSS adicionales aplicadas al elemento botón del chip.",
+        "restore": "Callback invocado al hacer clic en el chip para restaurar el componente de origen. Obligatorio."
+      }
+    }
+  },
+  "theming": {
+    "colors": {
+      "title": "Tokens de color",
+      "description": "Sobrescribe estas propiedades CSS personalizadas para adaptar la apariencia de los chips del dock a tu marca o tema.",
+      "rows": {
+        "chipBg": "Color de fondo del chip",
+        "chipHoverBg": "Color de fondo del chip al hacer hover",
+        "text": "Color de texto e iconos del chip",
+        "border": "Color del borde del chip",
+        "shadow": "Sombra predeterminada del chip",
+        "hoverShadow": "Sombra del chip al hacer hover",
+        "separatorColor": "Color del separador vertical entre los grupos de chips de modales y sidebars"
+      }
+    },
+    "layout": {
+      "title": "Tokens de layout",
+      "description": "Sobrescribe estas propiedades CSS personalizadas para controlar la posición, el tamaño y la geometría de los chips del dock.",
+      "rows": {
+        "zIndex": "Capa de apilamiento del dock, garantizando que aparezca por encima de otros elementos fijos",
+        "offset": "Distancia entre el dock y el borde del viewport (inferior o superior según la posición)",
+        "maxWidth": "Anchura máxima del contenedor del dock; define un valor para evitar que ocupe todo el viewport",
+        "borderRadius": "Radio de esquina de cada botón chip"
+      }
+    }
+  },
+  "i18n": {
+    "keys": {
+      "title": "Claves i18n",
+      "description": "El dock expone una etiqueta accesible utilizada como <code>aria-label</code> del contenedor de la barra de herramientas.",
+      "note": "Todos los textos i18n de NUI pueden sobrescribirse globalmente mediante <code>provideNuiI18n()</code> o por componente a través de la propiedad de configuración <code>i18n</code>.",
+      "rows": {
+        "ariaLabel": "Etiqueta accesible para la barra de herramientas del dock (elemento <code>role=\"toolbar\"</code>)"
+      }
+    }
+  },
+  "globalConfig": {
+    "options": {
+      "title": "Opciones de configuración global",
+      "description": "Estas opciones pueden definirse globalmente mediante <code>provideNUI({ config: { dock: { ... } } })</code> y se aplican a todas las instancias del dock en la aplicación.",
+      "rows": {
+        "position": "Borde del viewport donde se renderiza el dock",
+        "showTypeSeparator": "Muestra un separador vertical entre los chips de modales y los de sidebars"
+      }
+    },
+    "example": {
+      "title": "Ejemplo de configuración",
+      "description": "Pasa un objeto <code>NuiDockGlobalConfig</code> dentro de <code>provideNUI</code> para establecer los valores predeterminados a nivel de aplicación."
+    }
+  }
+}

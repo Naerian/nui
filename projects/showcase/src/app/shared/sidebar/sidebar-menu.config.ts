@@ -149,6 +149,11 @@ export const SIDEBAR_MENU_CONFIG: MenuItem[] = [
             translationKey: 'sidebar.modalDialog',
             route: '/components/modal-dialog',
           },
+          {
+            label: 'Dock',
+            translationKey: 'sidebar.dock',
+            route: '/components/dock',
+          },
         ],
       },
       {

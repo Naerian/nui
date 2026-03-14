@@ -40,7 +40,8 @@
     "progressBar": "Barre de progression",
     "timeSelector": "Sélecteur d'heure",
     "splitButton": "Bouton Divisé",
-    "modalDialog": "Modal Dialog"
+    "modalDialog": "Modal Dialog",
+    "dock": "Dock"
   },
   "presets": {
     "aura": "Aura",

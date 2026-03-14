@@ -27,6 +27,7 @@ const COMPONENT_FILES: [string, string][] = [
   ['progressBar', 'progress-bar'],
   ['splitButton', 'split-button'],
   ['modal-dialog', 'modal-dialog'],
+  ['dock', 'dock'],
 ];
 
 export class SplitTranslateLoader implements TranslateLoader {

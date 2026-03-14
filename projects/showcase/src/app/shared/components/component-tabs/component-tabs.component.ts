@@ -104,6 +104,12 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // Ensure the initial tab is valid; fall back to the first available tab.
+    const availableTabs = this.tabs();
+    if (availableTabs.length && !availableTabs.find(t => t.id === this.activeTabId())) {
+      this.activeTabId.set(availableTabs[0].id);
+    }
+
     const fragment = this.router.parseUrl(this.router.url).fragment;
     if (!fragment) return;
 
@@ -147,6 +153,9 @@ export class ComponentTabsComponent implements OnInit, OnDestroy {
    */
   private resolveInitialTab(): string {
     const fragment = this.router.parseUrl(this.router.url).fragment;
+    // When there is no fragment, use the configured initialTab as a hint.
+    // ngOnInit() will replace it with the first valid tab if the hint is not
+    // present in the actual tabs array (e.g. pages without an 'examples' tab).
     if (!fragment) return this.initialTab() ?? 'examples';
 
     // Formato canónico tab.section → extraer tab ID
