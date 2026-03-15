@@ -5,6 +5,26 @@ import { ComponentSection } from '../../../../core/models';
  */
 export const SIDEBAR_PANEL_API_SECTIONS: ComponentSection[] = [
   {
+    id: 'api-import',
+    title: 'common.import',
+    description: 'common.api.importService',
+    anchor: 'api-import',
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `import { SidebarPanelService, SidebarPanelRef, SidebarPanelActionsService, SidebarPanelFooterDirective } from 'nui';
+import { SIDEBAR_PANEL_DATA, SIDEBAR_PANEL_REF, SIDEBAR_PANEL_CONFIG } from 'nui';
+import type { SidebarPanelConfig, SidebarPanelState, SidebarPanelAction } from 'nui';
+
+@Component({ standalone: true })
+export class MyComponent {
+  private readonly sidebarPanel = inject(SidebarPanelService);
+}`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
     id: 'api-service',
     title: 'components.sidebar-panel.api.service.title',
     description: 'components.sidebar-panel.api.service.description',
@@ -56,6 +76,22 @@ export const SIDEBAR_PANEL_API_SECTIONS: ComponentSection[] = [
           'ReadonlyArray&lt;SidebarPanelState&gt;',
           'components.sidebar-panel.api.ref.rows.stateHistory',
         ],
+      ],
+    },
+  },
+  {
+    id: 'api-ref-methods',
+    title: 'components.sidebar-panel.api.ref-methods.title',
+    description: 'components.sidebar-panel.api.ref-methods.description',
+    anchor: 'api-ref-methods',
+    table: {
+      headers: [
+        'common.tables.method',
+        'common.tables.parameters',
+        'common.tables.returns',
+        'common.tables.description',
+      ],
+      rows: [
         ['<code>close()</code>', 'result?: R', 'Promise&lt;void&gt;', 'components.sidebar-panel.api.ref.rows.close'],
         ['<code>minimize()</code>', '-', 'void', 'components.sidebar-panel.api.ref.rows.minimize'],
         ['<code>restore()</code>', '-', 'void', 'components.sidebar-panel.api.ref.rows.restore'],
@@ -159,6 +195,18 @@ export const SIDEBAR_PANEL_API_SECTIONS: ComponentSection[] = [
           'string',
           '<code class="neutral">undefined</code>',
           'components.sidebar-panel.api.config.rows.height',
+        ],
+        [
+          '<code>maxWidth</code>',
+          'string',
+          '<code class="neutral">undefined</code>',
+          'components.sidebar-panel.api.config.rows.maxWidth',
+        ],
+        [
+          '<code>maxHeight</code>',
+          'string',
+          '<code class="neutral">undefined</code>',
+          'components.sidebar-panel.api.config.rows.maxHeight',
         ],
         [
           '<code>data</code>',
@@ -273,10 +321,10 @@ export const SIDEBAR_PANEL_API_SECTIONS: ComponentSection[] = [
         [
           '<code>animationDuration</code>',
           'number',
-          '<code class="neutral">225</code>',
+          '<code class="neutral">300</code>',
           'components.sidebar-panel.api.config.rows.animationDuration',
         ],
-        ['<code>zIndex</code>', 'number', '<code class="neutral">1000</code>', 'components.sidebar-panel.api.config.rows.zIndex'],
+        ['<code>zIndex</code>', 'number', '<code class="neutral">1040</code>', 'components.sidebar-panel.api.config.rows.zIndex'],
         [
           '<code>minimizable</code>',
           'boolean',
@@ -304,7 +352,7 @@ export const SIDEBAR_PANEL_API_SECTIONS: ComponentSection[] = [
         [
           '<code>ariaLabel</code>',
           'string',
-          '<code class="neutral">Slide Panel</code>',
+          '<code class="neutral">undefined</code>',
           'components.sidebar-panel.api.config.rows.ariaLabel',
         ],
         [
@@ -336,10 +384,16 @@ export const SIDEBAR_PANEL_API_SECTIONS: ComponentSection[] = [
           'components.sidebar-panel.api.custom-button.rows.text',
         ],
         [
-          '<code>icon</code>',
+          '<code>prefixIcon</code>',
           'string',
           '<code class="neutral">undefined</code>',
-          'components.sidebar-panel.api.custom-button.rows.icon',
+          'components.sidebar-panel.api.custom-button.rows.prefixIcon',
+        ],
+        [
+          '<code>suffixIcon</code>',
+          'string',
+          '<code class="neutral">undefined</code>',
+          'components.sidebar-panel.api.custom-button.rows.suffixIcon',
         ],
         [
           '<code>color</code>',
@@ -373,10 +427,22 @@ export const SIDEBAR_PANEL_API_SECTIONS: ComponentSection[] = [
           'components.sidebar-panel.api.custom-button.rows.loading',
         ],
         [
+          '<code>loadingPosition</code>',
+          'ButtonLoadingPosition',
+          '<code class="neutral">center</code>',
+          'components.sidebar-panel.api.custom-button.rows.loadingPosition',
+        ],
+        [
           '<code>class</code>',
           'string',
           '<code class="neutral">undefined</code>',
           'components.sidebar-panel.api.custom-button.rows.class',
+        ],
+        [
+          '<code>width</code>',
+          'ButtonWidth',
+          '<code class="neutral">auto</code>',
+          'components.sidebar-panel.api.custom-button.rows.width',
         ],
       ],
     },
@@ -453,16 +519,16 @@ export const SIDEBAR_PANEL_API_SECTIONS: ComponentSection[] = [
           'components.sidebar-panel.api.footer-actions.rows.label',
         ],
         [
-          '<code>icon</code>',
+          '<code>prefixIcon</code>',
           'string',
           '<code class="neutral">undefined</code>',
-          'components.sidebar-panel.api.footer-actions.rows.icon',
+          'components.sidebar-panel.api.footer-actions.rows.prefixIcon',
         ],
         [
-          '<code>iconPosition</code>',
-          "'start' | 'end'",
-          '<code class="neutral">start</code>',
-          'components.sidebar-panel.api.footer-actions.rows.iconPosition',
+          '<code>suffixIcon</code>',
+          'string',
+          '<code class="neutral">undefined</code>',
+          'components.sidebar-panel.api.footer-actions.rows.suffixIcon',
         ],
         [
           '<code>color</code>',
@@ -497,8 +563,8 @@ export const SIDEBAR_PANEL_API_SECTIONS: ComponentSection[] = [
         ],
         [
           '<code>loadingPosition</code>',
-          "'start' | 'end'",
-          '<code class="neutral">start</code>',
+          'ButtonLoadingPosition',
+          '<code class="neutral">center</code>',
           'components.sidebar-panel.api.footer-actions.rows.loadingPosition',
         ],
         [
@@ -509,7 +575,7 @@ export const SIDEBAR_PANEL_API_SECTIONS: ComponentSection[] = [
         ],
         [
           '<code>width</code>',
-          "'auto' | 'full'",
+          'ButtonWidth',
           '<code class="neutral">auto</code>',
           'components.sidebar-panel.api.footer-actions.rows.width',
         ],

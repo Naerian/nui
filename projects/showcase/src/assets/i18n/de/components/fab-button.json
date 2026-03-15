@@ -86,10 +86,6 @@
       "title": "Outputs",
       "description": "Ereignisse, die von der FAB-Button-Komponente ausgelöst werden, um auf Benutzerinteraktionen zu reagieren."
     },
-    "computed": {
-      "title": "Berechnete Eigenschaften",
-      "description": "Reaktive berechnete Eigenschaften (Signals), die den aufgelösten internen Zustand der Komponente bereitstellen."
-    },
     "types": {
       "title": "Typen",
       "description": "TypeScript-Typen, die die akzeptierten Werte für FAB-Button-Inputs definieren."
@@ -104,7 +100,8 @@
     },
     "directives": {
       "title": "Template-Direktiven",
-      "description": "Eigenständige Direktiven, die die Projektion benutzerdefinierter Templates in den Trigger und in jedes FAB-Button-Element ermöglichen. Sie werden wie jede Angular-Standalone-Direktive importiert und deklariert."
+      "description": "Eigenständige Direktiven, die die Projektion benutzerdefinierter Templates in den Trigger und in jedes FAB-Button-Element ermöglichen. Sie werden wie jede Angular-Standalone-Direktive importiert und deklariert.",
+      "note": "Beide Direktiven sind standalone. Füge sie zusammen mit <code>FabButtonComponent</code> in das <code>imports</code>-Array deiner Komponente ein."
     },
     "config": {
       "title": "Globale Konfiguration (FabButtonConfig)",

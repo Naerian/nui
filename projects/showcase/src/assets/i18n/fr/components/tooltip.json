@@ -38,11 +38,54 @@
   "api": {
     "inputs": {
       "title": "Entrées",
-      "description": "Propriétés d'entrée de la directive <code>nuiTooltip</code>"
+      "description": "Propriétés d'entrée de la directive <code>nuiTooltip</code>",
+      "rows": {
+        "nuiTooltip": {
+          "description": "Contenu de l'info-bulle. Accepte une chaîne de texte simple ou un <code>TemplateRef</code> Angular pour du contenu HTML riche. Obligatoire."
+        },
+        "nuiTooltipPosition": {
+          "description": "Position préférée de l'info-bulle par rapport à l'élément déclencheur. Utilise la valeur de la configuration globale en repli, puis <code>'top'</code>."
+        },
+        "nuiTooltipEvent": {
+          "description": "Événement d'interaction qui déclenche l'info-bulle. Utilise la valeur de la configuration globale en repli, puis <code>'hover'</code>."
+        },
+        "nuiTooltipShowDelay": {
+          "description": "Délai en millisecondes avant l'apparition de l'info-bulle après l'événement déclencheur. Utilise la valeur de la configuration globale en repli, puis <code>300</code>."
+        },
+        "nuiTooltipHideDelay": {
+          "description": "Délai en millisecondes avant que l'info-bulle se masque une fois la condition de déclenchement terminée. Utilise la valeur de la configuration globale en repli, puis <code>0</code>."
+        },
+        "nuiTooltipDisabled": {
+          "description": "Lorsque <code>true</code>, l'info-bulle est désactivée et n'apparaîtra pas quels que soient les événements déclencheurs."
+        },
+        "nuiTooltipClass": {
+          "description": "Classe CSS personnalisée ajoutée au panneau overlay de l'info-bulle pour un style supplémentaire."
+        },
+        "nuiTooltipShowArrow": {
+          "description": "Indique si une flèche directionnelle pointant vers l'élément déclencheur est affichée. Utilise la valeur de la configuration globale en repli, puis <code>true</code>."
+        },
+        "nuiTooltipAllowHtml": {
+          "description": "Lorsque <code>true</code>, le contenu textuel est rendu en HTML via <code>[innerHTML]</code>. À utiliser avec précaution pour éviter les XSS. Utilise la valeur de la configuration globale en repli, puis <code>false</code>."
+        },
+        "nuiTooltipInteractive": {
+          "description": "Lorsque <code>true</code>, l'info-bulle reste ouverte pendant que le curseur la survole, permettant d'interagir avec son contenu. Utilise la valeur de la configuration globale en repli, puis <code>false</code>."
+        }
+      }
     },
-    "outputs": {
-      "title": "Sorties",
-      "description": "Événements émis par la directive <code>nuiTooltip</code>"
+    "methods": {
+      "title": "Méthodes",
+      "description": "Méthodes publiques exposées par la directive <code>nuiTooltip</code>, accessibles via une variable de référence dans le template (<code>#tooltip=\"nuiTooltip\"</code>).",
+      "rows": {
+        "show": {
+          "description": "Affiche l'info-bulle immédiatement, en respectant le délai d'affichage configuré."
+        },
+        "hide": {
+          "description": "Masque l'info-bulle en respectant le délai de masquage configuré."
+        },
+        "toggle": {
+          "description": "Bascule la visibilité de l'info-bulle : l'affiche si elle est masquée, la masque si elle est visible."
+        }
+      }
     },
     "usage": {
       "title": "Exemples d'utilisation",

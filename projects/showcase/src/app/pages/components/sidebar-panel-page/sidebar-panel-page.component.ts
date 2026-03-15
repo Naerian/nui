@@ -72,8 +72,10 @@ export class SidebarPanelPageComponent extends BaseComponentPage {
       label: 'common.tabs.api',
       icon: 'ri-braces-line',
       sections: [
+        'api-import',
         'api-service',
         'api-ref',
+        'api-ref-methods',
         'api-config',
         'api-custom-button',
         'api-minimized-tab',

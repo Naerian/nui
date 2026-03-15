@@ -51,7 +51,7 @@ export class ButtonPageComponent extends BaseComponentPage {
       id: 'api',
       label: 'common.tabs.api',
       icon: 'ri-braces-line',
-      sections: ['api-inputs', 'api-outputs', 'api-computed', 'api-methods', 'api-models'],
+      sections: ['api-import', 'api-inputs', 'api-outputs', 'api-directive', 'api-models'],
     },
     {
       id: 'theming',

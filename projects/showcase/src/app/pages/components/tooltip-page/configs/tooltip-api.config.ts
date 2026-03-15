@@ -5,6 +5,25 @@ import { ComponentSection } from '../../../../core/models';
  */
 export const TOOLTIP_API_SECTIONS: ComponentSection[] = [
   {
+    id: 'api-import',
+    title: 'common.import',
+    description: 'common.api.importComponent',
+    anchor: 'api-import',
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `import { TooltipDirective } from 'nui';
+
+@Component({
+  standalone: true,
+  imports: [TooltipDirective],
+})
+export class MyComponent {}`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
     id: 'api-inputs',
     title: 'components.tooltip.api.inputs.title',
     description: 'components.tooltip.api.inputs.description',
@@ -20,85 +39,92 @@ export const TOOLTIP_API_SECTIONS: ComponentSection[] = [
         [
           '<code>nuiTooltip</code>',
           'string | TemplateRef&lt;any&gt;',
-          '<code class="neutral">undefined</code>',
-          'Tooltip content (text or template)',
+          '-',
+          'components.tooltip.api.inputs.rows.nuiTooltip.description',
         ],
         [
           '<code>nuiTooltipPosition</code>',
           "'top' | 'bottom' | 'left' | 'right'",
-          '<code class="neutral">top</code>',
-          'Tooltip position relative to element',
+          '<code class="neutral">undefined</code>',
+          'components.tooltip.api.inputs.rows.nuiTooltipPosition.description',
         ],
         [
           '<code>nuiTooltipEvent</code>',
-          "'hover' | 'click' | 'focus'",
-          '<code class="neutral">hover</code>',
-          'Event that triggers the tooltip',
-        ],
-        [
-          '<code>nuiTooltipShowArrow</code>',
-          'boolean',
-          '<code class="neutral">true</code>',
-          'Show arrow pointing to element',
+          "'hover' | 'click' | 'focus' | 'manual'",
+          '<code class="neutral">undefined</code>',
+          'components.tooltip.api.inputs.rows.nuiTooltipEvent.description',
         ],
         [
           '<code>nuiTooltipShowDelay</code>',
           'number',
-          '<code class="neutral">0</code>',
-          'Delay before showing tooltip (ms)',
+          '<code class="neutral">undefined</code>',
+          'components.tooltip.api.inputs.rows.nuiTooltipShowDelay.description',
         ],
         [
           '<code>nuiTooltipHideDelay</code>',
           'number',
-          '<code class="neutral">0</code>',
-          'Delay before hiding tooltip (ms)',
-        ],
-        [
-          '<code>nuiTooltipMaxWidth</code>',
-          'string',
-          '<code class="neutral">200px</code>',
-          'Maximum width of tooltip (CSS value)',
-        ],
-        [
-          '<code>nuiTooltipClass</code>',
-          'string',
           '<code class="neutral">undefined</code>',
-          'Custom CSS class for tooltip',
-        ],
-        [
-          '<code>nuiTooltipOffset</code>',
-          'number',
-          '<code class="neutral">8</code>',
-          'Distance from element (px)',
-        ],
-        [
-          '<code>nuiTooltipInteractive</code>',
-          'boolean',
-          '<code class="neutral">false</code>',
-          'Allow interaction with tooltip content',
+          'components.tooltip.api.inputs.rows.nuiTooltipHideDelay.description',
         ],
         [
           '<code>nuiTooltipDisabled</code>',
           'boolean',
           '<code class="neutral">false</code>',
-          'Disable tooltip',
+          'components.tooltip.api.inputs.rows.nuiTooltipDisabled.description',
+        ],
+        [
+          '<code>nuiTooltipClass</code>',
+          'string',
+          '<code class="neutral">undefined</code>',
+          'components.tooltip.api.inputs.rows.nuiTooltipClass.description',
+        ],
+        [
+          '<code>nuiTooltipShowArrow</code>',
+          'boolean',
+          '<code class="neutral">undefined</code>',
+          'components.tooltip.api.inputs.rows.nuiTooltipShowArrow.description',
+        ],
+        [
+          '<code>nuiTooltipAllowHtml</code>',
+          'boolean',
+          '<code class="neutral">undefined</code>',
+          'components.tooltip.api.inputs.rows.nuiTooltipAllowHtml.description',
+        ],
+        [
+          '<code>nuiTooltipInteractive</code>',
+          'boolean',
+          '<code class="neutral">undefined</code>',
+          'components.tooltip.api.inputs.rows.nuiTooltipInteractive.description',
         ],
       ],
     },
   },
   {
-    id: 'api-outputs',
-    title: 'components.tooltip.api.outputs.title',
-    description: 'components.tooltip.api.outputs.description',
-    anchor: 'api-outputs',
+    id: 'api-methods',
+    title: 'components.tooltip.api.methods.title',
+    description: 'components.tooltip.api.methods.description',
+    anchor: 'api-methods',
     table: {
-      headers: ['common.tables.event', 'common.tables.type', 'common.tables.description'],
+      headers: [
+        'common.tables.method',
+        'common.tables.returns',
+        'common.tables.description',
+      ],
       rows: [
-        ['<code>tooltipShown</code>', 'EventEmitter&lt;void&gt;', 'Emitted when tooltip is shown'],
         [
-          '<code>tooltipHidden</code>',
-          'EventEmitter&lt;void&gt;',
-          'Emitted when tooltip is hidden',
+          '<code>show()</code>',
+          'void',
+          'components.tooltip.api.methods.rows.show.description',
+        ],
+        [
+          '<code>hide()</code>',
+          'void',
+          'components.tooltip.api.methods.rows.hide.description',
+        ],
+        [
+          '<code>toggle()</code>',
+          'void',
+          'components.tooltip.api.methods.rows.toggle.description',
         ],
       ],
     },

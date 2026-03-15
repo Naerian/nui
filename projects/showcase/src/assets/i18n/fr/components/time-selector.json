@@ -84,8 +84,8 @@
         "mode": "Mode de sélection : 'HOUR_12', 'HOUR_24', 'HOUR_MINUTE_12', 'HOUR_MINUTE_24', 'DURATION'",
         "disabled": "État désactivé du composant",
         "title": "Titre personnalisé affiché dans l'en-tête",
-        "showHeader": "Si l'en-tête contenant l'heure formatée s'affiche en haut du sélecteur, il est possible de le personnaliser à l'aide de <code>nuiTimeSelectorHeader</code>.",
-        "showFooter": "Si le pied de page intégré avec les boutons 'Effacer' et 'Maintenant' est affiché. Admet la personnalisation via <code>nuiTimeSelectorFooter</code>.",
+        "showHeader": "Si l'en-tête contenant l'heure formatée s'affiche en haut du sélecteur. Quand <code>undefined</code>, utilise la configuration globale (par défaut : <code>true</code>). Il est possible de le personnaliser à l'aide de <code>nuiTimeSelectorHeader</code>.",
+        "showFooter": "Si le pied de page intégré avec les boutons 'Effacer' et 'Maintenant' est affiché. Quand <code>undefined</code>, utilise la configuration globale (par défaut : <code>true</code>). Admet la personnalisation via <code>nuiTimeSelectorFooter</code>.",
         "config": "Configuration complète : pas, plages, préréglages, durée, etc.",
         "defaultStrategy": "Stratégie de valeur initiale : 'now', 'smart', 'empty', 'custom'",
         "defaultValue": "Valeur personnalisée quand strategy='custom'",
@@ -131,6 +131,8 @@
       }
     },
     "timeValue": {
+      "title": "TimeValue",
+      "description": "Interface représentant une valeur d'heure du jour (heure, minutes et période AM/PM optionnelle)",
       "rows": {
         "hour": "Heure : 0–23 pour le format 24h, 1–12 pour le format 12h",
         "minute": "Minutes : 0–59",
@@ -138,6 +140,8 @@
       }
     },
     "durationValue": {
+      "title": "DurationValue",
+      "description": "Interface représentant un intervalle de temps (durée) avec heures, minutes et secondes optionnelles",
       "rows": {
         "hours": "Heures : 0–n (sans limite supérieure par défaut)",
         "minutes": "Minutes : 0–59",
@@ -145,6 +149,8 @@
       }
     },
     "timePreset": {
+      "title": "TimePreset",
+      "description": "Interface pour définir des préréglages d'heure rapide (ex : 'Maintenant', 'Midi', 'Minuit')",
       "rows": {
         "label": "Texte affiché sur le bouton de préréglage",
         "time": "Valeur de temps vers laquelle le préréglage saute",
@@ -152,6 +158,8 @@
       }
     },
     "durationPreset": {
+      "title": "DurationPreset",
+      "description": "Interface pour définir des préréglages de durée rapide (ex : '15 min', '1 heure')",
       "rows": {
         "label": "Texte affiché sur le bouton de préréglage",
         "duration": "Valeur de durée vers laquelle le préréglage saute",
@@ -159,6 +167,8 @@
       }
     },
     "mode": {
+      "title": "TimeSelectorMode",
+      "description": "Type union avec tous les modes de sélection disponibles",
       "rows": {
         "HOUR_12": "Sélecteur d'heures uniquement en format 12h (AM/PM)",
         "HOUR_24": "Sélecteur d'heures uniquement en format 24h",
@@ -168,6 +178,8 @@
       }
     },
     "strategy": {
+      "title": "TimeSelectorStrategy",
+      "description": "Type union avec les stratégies de valeur initiale disponibles",
       "rows": {
         "now": "Utilise l'heure actuelle comme valeur initiale",
         "smart": "Heure actuelle + décalage (configurable avec smartOffset)",
@@ -176,6 +188,8 @@
       }
     },
     "value": {
+      "title": "TimeSelectorValue",
+      "description": "Type union qui accepte plusieurs formats d'entrée pour la valeur du picker",
       "rows": {
         "timeValue": "{ hour, minute, period? } – Pour les modes HOUR_* (heure du jour)",
         "durationValue": "{ hours, minutes, seconds? } – Pour le mode DURATION (intervalle)",
@@ -210,6 +224,8 @@
       }
     },
     "itemContext": {
+      "title": "TimeSelectorItemContext",
+      "description": "Contexte du template disponible dans <code>[nuiTimeSelectorItem]</code>. Accédez aux propriétés avec <code>let-value</code>, <code>let-type=\"type\"</code>, etc.",
       "rows": {
         "implicit": "Valeur de l'élément (heure ou minute comme nombre, période comme chaîne 'AM'/'PM'). Accès avec <code>let-value</code>.",
         "type": "Type de colonne auquel appartient l'élément.",
@@ -218,6 +234,8 @@
       }
     },
     "footerContext": {
+      "title": "TimeSelectorFooterContext",
+      "description": "Contexte du template disponible dans <code>[nuiTimeSelectorFooter]</code>. Accédez aux propriétés avec <code>let-currentTime</code> et <code>let-actions=\"actions\"</code>.",
       "rows": {
         "implicit": "Valeur actuellement sélectionnée dans le picker. Accès avec <code>let-currentTime</code>.",
         "actionsClear": "Efface la valeur sélectionnée et émet <code>null</code>.",
@@ -227,6 +245,8 @@
       }
     },
     "headerContext": {
+      "title": "TimeSelectorHeaderContext",
+      "description": "Contexte du template disponible dans <code>[nuiTimeSelectorHeader]</code>. Accédez aux propriétés avec <code>let-currentTime</code>, <code>let-formattedTime=\"formattedTime\"</code>, etc.",
       "rows": {
         "implicit": "Valeur actuellement sélectionnée. Accès avec <code>let-currentTime</code>.",
         "mode": "Mode actif du picker, ex. <code>'HOUR_MINUTE_24'</code> ou <code>'DURATION'</code>.",

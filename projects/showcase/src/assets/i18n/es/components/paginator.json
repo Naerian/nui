@@ -35,35 +35,171 @@
     "description": "Documentación completa de inputs, outputs e interfaces del componente Paginator para integración avanzada.",
     "inputs": {
       "title": "Inputs",
-      "description": "Propiedades de entrada del componente Paginator"
+      "description": "Propiedades de entrada del componente Paginator",
+      "rows": {
+        "size": { "description": "Tamaño de los botones del paginador. Valores posibles: 'xs', 'sm', 'md', 'lg', 'xl'. Usa la config global o <code>md</code> como fallback." },
+        "variant": { "description": "Variante visual. Valores posibles: 'solid', 'outline', 'ghost'. Usa la config global o <code>solid</code> como fallback." },
+        "color": { "description": "Paleta de color aplicada a los botones del paginador. Usa la config global o el valor por defecto de la librería." },
+        "mode": { "description": "Modo de visualización del paginador: <code>'default'</code>, <code>'compact'</code>, <code>'fractional'</code> o <code>'minimal'</code>." },
+        "disabled": { "description": "Deshabilita el paginador y todos sus controles." },
+        "currentPage": { "description": "Página actual (1-indexed). Model Signal — soporta two-way binding con <code>[(currentPage)]</code>." },
+        "totalItems": { "description": "Número total de items. Cuando se proporciona, <code>totalPages</code> se calcula automáticamente como <code>Math.ceil(totalItems / itemsPerPage)</code>." },
+        "totalPages": { "description": "Número total de páginas para binding manual cuando no se proporciona <code>totalItems</code>. Model Signal — soporta two-way binding." },
+        "itemsPerPage": { "description": "Items por página. Model Signal — soporta two-way binding con <code>[(itemsPerPage)]</code>." },
+        "maxVisiblePages": { "description": "Número máximo de botones de página visibles. Usa la config global o <code>5</code> como fallback." },
+        "pageSizeOptions": { "description": "Opciones para el selector de tamaño de página. Usa la config global o <code>[10, 20, 50, 100]</code> como fallback." },
+        "showFirstLast": { "description": "Mostrar botones de primera/última página. Usa la config global o <code>true</code> como fallback." },
+        "showPageSizeSelector": { "description": "Mostrar el selector de tamaño de página. Usa la config global o <code>false</code> como fallback." },
+        "showItemRange": { "description": "Mostrar el indicador de rango de items (ej. '1–10 de 100'). Usa la config global o <code>true</code> como fallback." },
+        "showPageJump": { "description": "Mostrar un input para saltar a una página específica. Usa la config global o <code>false</code> como fallback." },
+        "navDisplay": { "description": "Qué mostrar en los botones de navegación: <code>'icon'</code>, <code>'text'</code> o <code>'both'</code>. Usa la config global o <code>'icon'</code> como fallback." },
+        "navIcons": { "description": "Sobrescribe iconos específicos de navegación (first, previous, next, last, loadMore, loading, prefix)." },
+        "navTexts": { "description": "Textos personalizados para el paginador, sobrescribiendo las traducciones i18n para esta instancia." },
+        "autoScroll": { "description": "Scroll automático al inicio al cambiar de página. Usa la config global o <code>false</code> como fallback." },
+        "scrollTarget": { "description": "Selector CSS o elemento HTML al que hacer scroll al cambiar de página. Por defecto <code>window/body</code>." },
+        "keyboard": { "description": "Configuración personalizada de atajos de teclado para la navegación del paginador. Usa la config global como fallback." },
+        "layout": { "description": "Layout personalizado para posicionar los elementos del paginador en áreas (top, left, center, right, bottom)." },
+        "mobileLayout": { "description": "Layout personalizado usado automáticamente en dispositivos móviles. Usa la config global como fallback." },
+        "autoMobile": { "description": "Cambiar automáticamente al modo <code>'fractional'</code> en dispositivos móviles." },
+        "autoWrap": { "description": "Ajustar automáticamente los botones del paginador en pantallas pequeñas para evitar desbordamiento." },
+        "infiniteConfig": { "description": "Configuración del modo de carga infinita (botón de cargar más o scroll infinito)." }
+      }
     },
     "outputs": {
       "title": "Outputs",
-      "description": "Eventos emitidos por el componente Paginator"
+      "description": "Eventos emitidos por el componente Paginator",
+      "rows": {
+        "pageChange": { "description": "Emitido cuando cambia la página actual. Emite el nuevo número de página." },
+        "pageSizeChange": { "description": "Emitido cuando cambia el tamaño de página. Emite el nuevo tamaño." },
+        "pageChangeAdvanced": { "description": "Evento avanzado de cambio de página con contexto completo: nueva página, página anterior, items por página y total de páginas." },
+        "pageSizeChangeAdvanced": { "description": "Evento avanzado de cambio de tamaño con contexto completo: nuevo tamaño, tamaño anterior, página actual y total de páginas." }
+      }
     },
     "texts": {
       "title": "PaginatorI18n",
-      "description": "Interface para textos personalizables del paginador"
+      "description": "Interface para textos personalizables del paginador",
+      "rows": {
+        "itemsPerPage": { "description": "Etiqueta para el selector de items por página (ej. 'Items por página:')." },
+        "showingItems": { "description": "Plantilla para el rango de items. Soporta los marcadores <code>{start}</code>, <code>{end}</code> y <code>{total}</code>." },
+        "page": { "description": "Texto para la palabra 'Página' usado en los modos compact/fractional." },
+        "of": { "description": "Conector 'de' usado en el texto de rango (ej. '1–10 de 100')." },
+        "goToPage": { "description": "Etiqueta para el input de salto de página." },
+        "go": { "description": "Etiqueta del botón 'Ir' en el control de salto de página." },
+        "invalidPage": { "description": "Mensaje de error mostrado cuando el número de página introducido es inválido." },
+        "firstPage": { "description": "Etiqueta accesible para el botón 'Primera página'." },
+        "lastPage": { "description": "Etiqueta accesible para el botón 'Última página'." },
+        "previousPage": { "description": "Etiqueta accesible para el botón 'Página anterior'." },
+        "nextPage": { "description": "Etiqueta accesible para el botón 'Página siguiente'." },
+        "pageLabel": { "description": "Plantilla anunciada al navegar. Soporta el marcador <code>{page}</code> (ej. 'Página {page}')." },
+        "morePages": { "description": "Texto mostrado en el elemento de puntos suspensivos que representa botones de página ocultos." },
+        "loadMore": { "description": "Etiqueta para el botón 'Cargar más' en el modo infinito." },
+        "loading": { "description": "Texto mostrado mientras la carga está en progreso." },
+        "pageJumpHelp": { "description": "Texto de ayuda para el input de salto de página. Soporta el marcador <code>{totalPages}</code>." },
+        "infiniteLoadedItems": { "description": "Texto del contador en modo infinito. Soporta los marcadores <code>{loaded}</code> y <code>{total}</code>." },
+        "infiniteLoadEnd": { "description": "Texto mostrado cuando no hay más items que cargar en el modo infinito." },
+        "a11yPagination": { "description": "ARIA label para la región de navegación <code>&lt;nav&gt;</code> del paginador." },
+        "a11yMorePages": { "description": "ARIA label para el elemento de puntos suspensivos (indicador de más páginas)." },
+        "a11yPage": { "description": "Plantilla usada en la región ARIA live al navegar. Soporta el marcador <code>{page}</code>." },
+        "a11yCurrentPage": { "description": "ARIA label para el botón de la página activa. Soporta el marcador <code>{page}</code> (ej. '{page}, página actual')." },
+        "a11yGoToPage": { "description": "ARIA label para botones de página inactivos. Soporta el marcador <code>{page}</code> (ej. 'Ir a página {page}')." },
+        "a11yCurrentPageWithRange": { "description": "ARIA label cuando el rango de items es visible. Soporta <code>{page}</code>, <code>{totalPages}</code>, <code>{start}</code>, <code>{end}</code> y <code>{total}</code>." },
+        "a11yCurrentPageNoRange": { "description": "ARIA label cuando el rango de items no es visible. Soporta los marcadores <code>{page}</code> y <code>{totalPages}</code>." },
+        "a11yFractionalPage": { "description": "ARIA label para la visualización de página fraccionada. Soporta los marcadores <code>{page}</code> y <code>{totalPages}</code>." },
+        "a11yShowingItems": { "description": "Anuncio ARIA para el rango de items. Soporta los marcadores <code>{start}</code>, <code>{end}</code> y <code>{total}</code>." },
+        "a11yLoading": { "description": "Anuncio ARIA live cuando se está cargando una nueva página." }
+      }
     },
     "keyboard": {
       "title": "KeyboardConfig",
-      "description": "Interface para configuración de navegación por teclado"
+      "description": "Interface para configuración de navegación por teclado",
+      "rows": {
+        "enabled": { "description": "Habilitar la navegación por teclado en el paginador." },
+        "firstPage": { "description": "Teclas para navegar a la primera página. Por defecto: <code>['Home']</code>." },
+        "lastPage": { "description": "Teclas para navegar a la última página. Por defecto: <code>['End']</code>." },
+        "previousPage": { "description": "Teclas para navegar a la página anterior. Por defecto: <code>['ArrowLeft']</code>." },
+        "nextPage": { "description": "Teclas para navegar a la página siguiente. Por defecto: <code>['ArrowRight']</code>." }
+      }
     },
     "loading": {
       "title": "LoadingConfig",
-      "description": "Interface para configuración de estados de loading"
+      "description": "Interface para configuración de estados de loading",
+      "rows": {
+        "showLoading": { "description": "Mostrar un indicador de carga mientras el paginador espera datos." },
+        "loadingDelay": { "description": "Retardo en milisegundos antes de mostrar el indicador de carga." },
+        "disableOnLoading": { "description": "Deshabilitar todos los controles del paginador mientras la carga está activa." }
+      }
     },
     "layout": {
       "title": "PaginatorLayout",
-      "description": "Interface para layout personalizado: organiza elementos en áreas (top, left, center, right, bottom)"
+      "description": "Interface para layout personalizado: organiza elementos en áreas (top, left, center, right, bottom)",
+      "rows": {
+        "top": { "description": "Elementos colocados en el área superior." },
+        "left": { "description": "Elementos colocados en el área izquierda." },
+        "center": { "description": "Elementos colocados en el área central." },
+        "right": { "description": "Elementos colocados en el área derecha." },
+        "bottom": { "description": "Elementos colocados en el área inferior." },
+        "direction": { "description": "Dirección del layout principal: <code>'row'</code> (horizontal) o <code>'column'</code> (vertical)." },
+        "align": { "description": "Alineación de los elementos: <code>'start'</code>, <code>'center'</code>, <code>'end'</code>, <code>'space-between'</code> o <code>'space-around'</code>." },
+        "topConfig": { "description": "Configuración de alineación para el área superior (<code>vertical</code> y <code>horizontal</code>)." },
+        "bottomConfig": { "description": "Configuración de alineación para el área inferior (<code>vertical</code> y <code>horizontal</code>)." },
+        "leftConfig": { "description": "Configuración de alineación para el área izquierda (<code>vertical</code> y <code>horizontal</code>)." },
+        "centerConfig": { "description": "Configuración de alineación para el área central (<code>vertical</code> y <code>horizontal</code>)." },
+        "rightConfig": { "description": "Configuración de alineación para el área derecha (<code>vertical</code> y <code>horizontal</code>)." },
+        "verticalAlign": { "description": "Alineación vertical general para todas las áreas: <code>'start'</code>, <code>'center'</code> o <code>'end'</code>." },
+        "gap": { "description": "Espacio entre áreas del layout (ej. <code>'0.5rem'</code>, <code>'16px'</code>)." }
+      }
     },
     "icons": {
       "title": "navIcons",
-      "description": "Interface para configuración de iconos personalizables"
+      "description": "Interface para configuración de iconos personalizables",
+      "rows": {
+        "first": { "description": "Clase del icono para el botón de primera página." },
+        "previous": { "description": "Clase del icono para el botón de página anterior." },
+        "next": { "description": "Clase del icono para el botón de página siguiente." },
+        "last": { "description": "Clase del icono para el botón de última página." },
+        "loadMore": { "description": "Clase del icono para el botón de cargar más en modo infinito." },
+        "loading": { "description": "Clase del icono para el spinner de carga." },
+        "prefix": { "description": "Prefijo de las clases de icono (ej. <code>'ri-'</code>, <code>'fa-'</code>). Se aplica a todos los nombres de icono." }
+      }
     },
     "infinite": {
       "title": "InfiniteConfig",
-      "description": "Interface para configuración del modo de scroll infinito"
+      "description": "Interface para configuración del modo de scroll infinito",
+      "rows": {
+        "enabled": { "description": "Habilitar el modo de carga infinita." },
+        "mode": { "description": "Tipo de modo infinito: <code>'scroll'</code> (automático al hacer scroll), <code>'button'</code> (manual) o <code>'hybrid'</code>." },
+        "scrollOffset": { "description": "Distancia en píxeles desde el fondo del contenedor que activa la carga." },
+        "itemsPerLoad": { "description": "Número de items a cargar por lote." },
+        "maxItems": { "description": "Número máximo total de items a cargar antes de detenerse." },
+        "showCounter": { "description": "Mostrar un contador de items cargados frente al total." },
+        "initialLoadedItems": { "description": "Número de items ya cargados inicialmente, usado para sincronizar el contador." },
+        "onLoadMore": { "description": "Callback invocado cuando se necesitan más datos. Puede devolver una Promise." }
+      }
+    },
+    "config": {
+      "title": "PaginatorConfig",
+      "description": "Objeto de configuración global proporcionado mediante <code>provideNUI({ paginator: { ... } })</code>. Los valores actúan como valores por defecto para todas las instancias del paginador y pueden sobreescribirse por instancia mediante los inputs del componente.",
+      "rows": {
+        "color": { "description": "Paleta de color por defecto aplicada a todos los botones del paginador." },
+        "size": { "description": "Tamaño por defecto para los botones del paginador." },
+        "variant": { "description": "Variante visual por defecto (solid, outline, ghost)." },
+        "maxVisiblePages": { "description": "Número máximo de botones de página visibles a la vez." },
+        "showFirstLast": { "description": "Si se muestran los botones de primera y última página por defecto." },
+        "showPageSizeSelector": { "description": "Si se muestra el selector de tamaño de página por defecto." },
+        "showItemRange": { "description": "Si se muestra el indicador de rango de items por defecto." },
+        "showPageJump": { "description": "Si se muestra el input de salto de página por defecto." },
+        "pageSizeOptions": { "description": "Opciones disponibles para el selector de tamaño de página." },
+        "autoScroll": { "description": "Si se hace scroll automático al inicio al cambiar de página." },
+        "scrollTarget": { "description": "Selector CSS o elemento por defecto al que hacer scroll al cambiar de página." },
+        "navDisplay": { "description": "Cómo se muestran los botones de navegación globalmente: <code>'icon'</code>, <code>'text'</code> o <code>'both'</code>." },
+        "navIcons": { "description": "Clases de icono personalizadas globales para cada botón de navegación." },
+        "navTexts": { "description": "Textos personalizados globales que sobreescriben las traducciones i18n para todas las instancias del paginador." },
+        "keyboard": { "description": "Configuración global de atajos de teclado para los controles del paginador." },
+        "loading": { "description": "Configuración global del estado de carga (spinner, retardo, deshabilitar al cargar)." },
+        "layout": { "description": "Layout de escritorio por defecto que define la ubicación de cada elemento." },
+        "mobileLayout": { "description": "Layout móvil por defecto optimizado para pantallas pequeñas." },
+        "infinite": { "description": "Configuración por defecto de scroll infinito o carga progresiva." }
+      }
     }
   },
   "styling": {

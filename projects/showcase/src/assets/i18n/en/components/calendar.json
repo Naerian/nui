@@ -118,7 +118,9 @@
         "endTime": { "description": "Initial end time" },
         "dateStatusFn": { "description": "Function that assigns visual states to dates ('success', 'warning', 'danger', 'info')" },
         "isDateEnabledFn": { "description": "Function that dynamically determines if a date is enabled (overrides disabledDates)" },
-        "showWeekNumbers": { "description": "Shows ISO-8601 week numbers in a column to the left. Clickable in WEEK mode or DAY multiple to select the full week" }
+        "showWeekNumbers": { "description": "Shows ISO-8601 week numbers in a column to the left. Clickable in WEEK mode or DAY multiple to select the full week" },
+        "overlayMode": { "description": "Indicates the calendar is embedded inside an overlay (datepicker, popover). Adjusts initial focus behavior and may modify view navigation" },
+        "autoClose": { "description": "If true, emits selectFinished when the selection is complete. Useful for datepicker or overlay integration to know when to close" }
       }
     },
     "outputs": {
@@ -129,10 +131,22 @@
         "selectFinished": { "description": "Emits when the selection is confirmed and the calendar should close. Useful for integration with popovers or modals. Also triggered by <code>actions.close()</code> in a custom footer." }
       }
     },
+    "directives": {
+      "title": "Content directives",
+      "description": "Structural directives for projecting custom templates into the calendar",
+      "note": "Both directives must be imported in the consuming component. Import <code>CalendarFooterDirective</code> to replace the built-in footer and <code>CalendarDayDirective</code> to customize each day cell.",
+      "rows": {
+        "calendarFooter": { "description": "<strong>CalendarFooterDirective</strong> — Marker directive (<code>[nuiCalendarFooter]</code>) for projecting a custom footer template that replaces the built-in Today button. Receives a typed <code>CalendarFooterContext</code> with <code>value</code>, <code>viewMode</code> and <code>actions</code>." },
+        "calendarDay": { "description": "<strong>CalendarDayDirective</strong> — Marker directive (<code>[nuiCalendarDay]</code>) for customizing the visual content of each day cell. The component continues to manage all ARIA attributes and keyboard events. Receives a typed <code>CalendarDayContext</code> with <code>$implicit</code> (CalendarDay), <code>day</code>, <code>isToday</code> and <code>status</code>." }
+      }
+    },
     "calendar-value": {
       "title": "CalendarValue",
       "description": "Union type that represents all possible calendar values depending on the selected type",
-      "note": "The type of returned value depends on the <code>type</code>: <strong>DAY</strong> returns <code>Date | null</code>, <strong>WEEK</strong> returns <code>{ start: Date, end: Date } | null</code>, and <strong>RANGE</strong> returns <code>{ start: Date, end: Date } | null</code>."
+      "note": "The type of returned value depends on the <code>type</code>: <strong>DAY</strong> returns <code>Date | null</code>, <strong>WEEK</strong> returns <code>{ start: Date, end: Date } | null</code>, and <strong>RANGE</strong> returns <code>{ start: Date, end: Date } | null</code>.",
+      "rows": {
+        "type": { "description": "Selection type (DAY, WEEK, RANGE, MONTH, YEAR). Discriminant that determines which additional properties are present in the returned value." }
+      }
     },
     "calendar-type": {
       "title": "CalendarType",
@@ -172,8 +186,7 @@
       "description": "Interface for defining quick range presets with label, date range and optional icon",
       "rows": {
         "label": { "description": "Text shown on the button" },
-        "start": { "description": "Range start date" },
-        "end": { "description": "Range end date" }
+        "getValue": { "description": "Function that returns the preset date range as <code>{ start: Date; end: Date }</code>. Called lazily on each interaction so that relative ranges (e.g. 'last 7 days') are always up to date" }
       }
     },
     "footer-context": {

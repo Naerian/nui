@@ -6,6 +6,25 @@
  */
 export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
   {
+    id: 'api-import',
+    title: 'common.import',
+    description: 'common.api.importComponent',
+    anchor: 'api-import',
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `import { TimeSelectorComponent, TimeSelectorItemDirective, TimeSelectorFooterDirective, TimeSelectorHeaderDirective } from 'nui';
+
+@Component({
+  standalone: true,
+  imports: [TimeSelectorComponent, TimeSelectorItemDirective, TimeSelectorFooterDirective, TimeSelectorHeaderDirective],
+})
+export class MyComponent {}`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
     id: 'api-inputs',
     title: 'components.timeSelector.api.inputs.title',
     description: 'components.timeSelector.api.inputs.description',
@@ -38,20 +57,20 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
         ],
         [
           '<code>showHeader</code>',
-          'boolean',
-          '<code class="neutral">true</code>',
+          'boolean | undefined',
+          '<code class="neutral">undefined</code>',
           'components.timeSelector.api.inputs.rows.showHeader',
         ],
         [
           '<code>showFooter</code>',
-          'boolean',
-          '<code class="neutral">true</code>',
+          'boolean | undefined',
+          '<code class="neutral">undefined</code>',
           'components.timeSelector.api.inputs.rows.showFooter',
         ],
         [
           '<code>config</code>',
           'TimeSelectorConfig',
-          '<code class="neutral">undefined</code>',
+          '<code class="neutral">DEFAULT_CONFIG</code>',
           'components.timeSelector.api.inputs.rows.config',
         ],
         [
@@ -74,8 +93,8 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
         ],
         [
           '<code>value</code>',
-          'TimeSelectorValue',
-          '<code class="neutral">null</code>',
+          'TimeSelectorValue | undefined',
+          '<code class="neutral">undefined</code>',
           'components.timeSelector.api.inputs.rows.value',
         ],
         [
@@ -238,8 +257,8 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'api-time-value',
-    title: 'TimeValue',
-    description: 'Interface para representar un valor de tiempo (hora del día)',
+    title: 'components.timeSelector.api.timeValue.title',
+    description: 'components.timeSelector.api.timeValue.description',
     anchor: 'api-time-value',
     table: {
       headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
@@ -256,8 +275,8 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'api-duration-value',
-    title: 'DurationValue',
-    description: 'Interface para representar un intervalo de tiempo (duración)',
+    title: 'components.timeSelector.api.durationValue.title',
+    description: 'components.timeSelector.api.durationValue.description',
     anchor: 'api-duration-value',
     table: {
       headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
@@ -278,8 +297,8 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'api-time-preset',
-    title: 'TimePreset',
-    description: 'Interface para definir presets de tiempo rápido (ej: "Ahora", "Mediodía")',
+    title: 'components.timeSelector.api.timePreset.title',
+    description: 'components.timeSelector.api.timePreset.description',
     anchor: 'api-time-preset',
     table: {
       headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
@@ -292,8 +311,8 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'api-duration-preset',
-    title: 'DurationPreset',
-    description: 'Interface para definir presets de duración rápida (ej: "15 min", "1 hora")',
+    title: 'components.timeSelector.api.durationPreset.title',
+    description: 'components.timeSelector.api.durationPreset.description',
     anchor: 'api-duration-preset',
     table: {
       headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
@@ -310,8 +329,8 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'api-time-selector-mode',
-    title: 'TimeSelectorMode',
-    description: 'Type con los modos de selección disponibles',
+    title: 'components.timeSelector.api.mode.title',
+    description: 'components.timeSelector.api.mode.description',
     anchor: 'api-time-selector-mode',
     table: {
       headers: ['common.tables.value', 'common.tables.description'],
@@ -326,8 +345,8 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'api-time-selector-strategy',
-    title: 'TimeSelectorStrategy',
-    description: 'Type con las estrategias de valor inicial disponibles',
+    title: 'components.timeSelector.api.strategy.title',
+    description: 'components.timeSelector.api.strategy.description',
     anchor: 'api-time-selector-strategy',
     table: {
       headers: ['common.tables.value', 'common.tables.description'],
@@ -341,8 +360,8 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'api-time-selector-value',
-    title: 'TimeSelectorValue',
-    description: 'Union type que acepta múltiples formatos de entrada para el valor del picker',
+    title: 'components.timeSelector.api.value.title',
+    description: 'components.timeSelector.api.value.description',
     anchor: 'api-time-selector-value',
     table: {
       headers: ['common.tables.type', 'common.tables.description'],
@@ -364,7 +383,7 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
       headers: [
         'common.tables.method',
         'common.tables.parameters',
-        'common.tables.return',
+        'common.tables.returns',
         'common.tables.description',
       ],
       rows: [
@@ -416,7 +435,7 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
     description: 'components.timeSelector.api.contentDirectives.description',
     anchor: 'api-content-directives',
     table: {
-      headers: ['common.tables.directive', 'Selector CSS', 'common.tables.description'],
+      headers: ['common.tables.directive', 'common.tables.binding', 'common.tables.description'],
       rows: [
         [
           '<code>TimeSelectorItemDirective</code>',
@@ -438,9 +457,8 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'api-item-context',
-    title: 'TimeSelectorItemContext',
-    description:
-      'Contexto disponible en el template de <code>[nuiTimeSelectorItem]</code>. Accede con <code>let-value</code>, <code>let-type="type"</code>, etc.',
+    title: 'components.timeSelector.api.itemContext.title',
+    description: 'components.timeSelector.api.itemContext.description',
     anchor: 'api-item-context',
     table: {
       headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
@@ -470,9 +488,8 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'api-footer-context',
-    title: 'TimeSelectorFooterContext',
-    description:
-      'Contexto disponible en el template de <code>[nuiTimeSelectorFooter]</code>. Accede con <code>let-currentTime</code> y <code>let-actions="actions"</code>.',
+    title: 'components.timeSelector.api.footerContext.title',
+    description: 'components.timeSelector.api.footerContext.description',
     anchor: 'api-footer-context',
     table: {
       headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
@@ -507,9 +524,8 @@ export const TIME_SELECTOR_API_SECTIONS: ComponentSection[] = [
   },
   {
     id: 'api-header-context',
-    title: 'TimeSelectorHeaderContext',
-    description:
-      'Contexto disponible en el template de <code>[nuiTimeSelectorHeader]</code>. Accede con <code>let-currentTime</code>, <code>let-formattedTime="formattedTime"</code>, etc.',
+    title: 'components.timeSelector.api.headerContext.title',
+    description: 'components.timeSelector.api.headerContext.description',
     anchor: 'api-header-context',
     table: {
       headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],

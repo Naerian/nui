@@ -97,8 +97,8 @@
       }
     },
     "ref": {
-      "title": "SidebarPanelRef",
-      "description": "Die von <code>open()</code> zurückgegebene Referenz. Verwenden Sie sie, um das Modal zu schließen, auf Ereignisse zu hören und Änderungen im Lebenszyklus zu beobachten.",
+      "title": "SidebarPanelRef — Eigenschaften",
+      "description": "Schreibgeschützte Eigenschaften, die von der durch <code>open()</code> zurückgegebenen Referenz bereitgestellt werden.",
       "rows": {
         "id": "Eindeutiger Bezeichner der Panel-Instanz.",
         "componentInstance": "Referenz auf die dynamisch geladene Komponenteninstanz, oder <code>null</code> wenn noch nicht gerendert.",
@@ -123,6 +123,10 @@
         "closePrevented": "Observable, das emittiert, wenn ein Schließversuch durch den <code>preventClose</code>-Guard blockiert wird."
       }
     },
+    "ref-methods": {
+      "title": "SidebarPanelRef — Methoden",
+      "description": "Methoden, die auf der von <code>open()</code> zurückgegebenen Referenz verfügbar sind. Verwenden Sie sie, um den Panel-Lebenszyklus zu steuern, Inhalte zu aktualisieren und Ereignisse zu beobachten."
+    },
     "tokens": {
       "title": "Injection-Tokens",
       "description": "Verwenden Sie diese Tokens, um den Kontext des Seitenleisten-Panels innerhalb einer dynamischen Komponente zu injizieren, die vom Service geladen wurde.",
@@ -141,6 +145,8 @@
         "size": "Vordefinierte Panelgröße, die über eine CSS-Variable angewendet wird.",
         "width": "Benutzerdefinierte CSS-Breite für links/rechts positionierte Panels. Überschreibt <code>size</code>.",
         "height": "Benutzerdefinierte CSS-Höhe für oben/unten positionierte Panels. Überschreibt <code>size</code>.",
+        "maxWidth": "Maximale CSS-Breite des Panels. Nützlich, um zu breite Panels auf großen Bildschirmen zu vermeiden.",
+        "maxHeight": "Maximale CSS-Höhe des Panels. Nützlich, um zu hohe Panels zu vermeiden.",
         "data": "Beliebige Daten, die über <code>SIDEBAR_PANEL_DATA</code> in die dynamische Komponente injiziert werden.",
         "contentTemplate": "Angular-<code>TemplateRef</code>, das als Panel-Inhalt gerendert wird.",
         "htmlContent": "Einfacher HTML-String, der als Panel-Inhalt gerendert wird. Wird vom <code>DomSanitizer</code> von Angular bereinigt.",
@@ -176,14 +182,17 @@
       "description": "Inline-Button-Definition, die über <code>customButtons</code> in der Konfiguration übergeben wird. Sie wird nur einmal beim Öffnen des Modals ausgewertet — verwenden Sie <code>SidebarPanelActionsService</code> für reaktive Zustände.",
       "rows": {
         "text": "Schaltflächenbeschriftung. Erforderlich.",
-        "icon": "Remix-Icon-Klasse, die in der Schaltfläche angezeigt wird (z. B. <code>ri-save-line</code>).",
+        "prefixIcon": "Remix-Icon-Klasse, die vor der Schaltflächenbeschriftung angezeigt wird (z. B. <code>ri-save-line</code>).",
+        "suffixIcon": "Remix-Icon-Klasse, die nach der Schaltflächenbeschriftung angezeigt wird (z. B. <code>ri-arrow-right-line</code>).",
         "color": "NUI-Farbe, die auf die Schaltfläche angewendet wird.",
         "variant": "Schaltflächenvariante: solid, outline oder ghost.",
         "size": "NUI-Größe, die auf die Schaltfläche angewendet wird.",
         "callback": "Klick-Handler, der mit der <code>SidebarPanelRef</code> aufgerufen wird. Erforderlich.",
         "disabled": "Gibt an, ob die Schaltfläche im deaktivierten Zustand gerendert wird.",
         "loading": "Gibt an, ob die Schaltfläche einen Lade-Spinner anzeigt.",
-        "class": "Eine oder mehrere zusätzliche CSS-Klassen, die auf das Schaltflächenelement angewendet werden."
+        "loadingPosition": "Position des Lade-Spinners relativ zur Beschriftung.",
+        "class": "Eine oder mehrere zusätzliche CSS-Klassen, die auf das Schaltflächenelement angewendet werden.",
+        "width": "Schaltflächenbreite: <code>auto</code> (inhaltsbasiert) oder <code>full</code> (volle Containerbreite)."
       }
     },
     "minimized-tab": {
@@ -203,15 +212,15 @@
       "rows": {
         "id": "Optionaler eindeutiger Bezeichner der Aktion. Nützlich für gezielte Aktualisierungen über <code>updateById()</code>.",
         "label": "Schaltflächenbeschriftung. Erforderlich.",
-        "icon": "Remix-Icon-Klasse, die in der Schaltfläche angezeigt wird (z. B. <code>ri-save-line</code>).",
-        "iconPosition": "Position des Symbols relativ zur Beschriftung: <code>start</code> oder <code>end</code>.",
+        "prefixIcon": "Remix-Icon-Klasse, die vor der Schaltflächenbeschriftung angezeigt wird (z. B. <code>ri-save-line</code>).",
+        "suffixIcon": "Remix-Icon-Klasse, die nach der Schaltflächenbeschriftung angezeigt wird (z. B. <code>ri-arrow-right-line</code>).",
         "color": "NUI-Farbe, die auf die Schaltfläche angewendet wird.",
         "variant": "Schaltflächenvariante: solid, outline oder ghost.",
         "size": "NUI-Größe, die auf die Schaltfläche angewendet wird.",
         "handler": "Klick-Handler-Funktion. Erforderlich.",
         "disabled": "Gibt an, ob die Schaltfläche im deaktivierten Zustand gerendert wird.",
         "loading": "Gibt an, ob die Schaltfläche einen Lade-Spinner anzeigt.",
-        "loadingPosition": "Position des Lade-Spinners relativ zur Beschriftung: <code>start</code> oder <code>end</code>.",
+        "loadingPosition": "Position des Lade-Spinners relativ zur Beschriftung.",
         "class": "Eine oder mehrere zusätzliche CSS-Klassen, die auf das Schaltflächenelement angewendet werden.",
         "width": "Schaltflächenbreite: <code>auto</code> (inhaltsbasiert) oder <code>full</code> (volle Containerbreite)."
       }

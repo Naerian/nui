@@ -46,7 +46,7 @@ export class ToastPageComponent extends BaseComponentPage {
       id: 'api',
       label: 'common.tabs.api',
       icon: 'ri-braces-line',
-      sections: ['api-service', 'api-config', 'api-global', 'api-types', 'api-usage'],
+      sections: ['api-import', 'api-service', 'api-ref', 'api-config', 'api-types', 'api-usage'],
     },
     {
       id: 'theming',

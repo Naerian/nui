@@ -40,15 +40,339 @@
   "api": {
     "service": {
       "title": "ToastService",
-      "description": "Servicio principal para mostrar notificaciones toast. Proporciona métodos para crear, actualizar y cerrar toasts."
+      "description": "Servicio principal para mostrar notificaciones toast. Proporciona métodos para crear, actualizar y cerrar toasts.",
+      "rows": {
+        "success": {
+          "description": "Muestra una notificación toast de éxito."
+        },
+        "error": {
+          "description": "Muestra una notificación toast de error/peligro."
+        },
+        "warning": {
+          "description": "Muestra una notificación toast de advertencia."
+        },
+        "info": {
+          "description": "Muestra una notificación toast informativa."
+        },
+        "custom": {
+          "description": "Muestra un toast genérico/personalizado con estilo secundario."
+        },
+        "loading": {
+          "description": "Muestra un toast de carga persistente (sin timeout, sin botón de cerrar) que puede actualizarse cuando la operación finaliza."
+        },
+        "promise": {
+          "description": "Envuelve una promesa: muestra un toast de carga mientras está pendiente y luego transiciona automáticamente a éxito o error según el resultado."
+        },
+        "update": {
+          "description": "Actualiza un toast existente por ID con nuevas opciones de configuración."
+        },
+        "close": {
+          "description": "Cierra un toast específico por su ID."
+        },
+        "closeAll": {
+          "description": "Cierra todos los toasts activos."
+        },
+        "closeGroup": {
+          "description": "Cierra todos los toasts que pertenecen a un grupo con nombre."
+        },
+        "closeByType": {
+          "description": "Cierra todos los toasts activos de un tipo específico."
+        },
+        "get": {
+          "description": "Devuelve el ToastRef de un toast específico por ID, o undefined si no existe."
+        },
+        "getActive": {
+          "description": "Devuelve el array de todas las instancias ToastRef activas actualmente."
+        },
+        "getGroup": {
+          "description": "Devuelve todas las instancias ToastRef activas que pertenecen a un grupo con nombre."
+        },
+        "clearPersistent": {
+          "description": "Elimina los datos de toasts persistentes del localStorage."
+        }
+      }
+    },
+    "ref": {
+      "title": "ToastRef",
+      "description": "Objeto de referencia devuelto por cada método de creación de toasts. Proporciona control y hooks de ciclo de vida para un toast individual.",
+      "rows": {
+        "close": {
+          "description": "Cierra el toast de forma programática, activando la animación de salida."
+        },
+        "update": {
+          "description": "Actualiza la configuración del toast de forma reactiva (mensaje, tipo, timeout, etc.)."
+        },
+        "pause": {
+          "description": "Pausa el temporizador de cierre automático."
+        },
+        "resume": {
+          "description": "Reanuda el temporizador de cierre automático desde el tiempo restante."
+        },
+        "resetTimeout": {
+          "description": "Reinicia el temporizador de cierre automático desde el principio."
+        },
+        "toggleExpanded": {
+          "description": "Alterna el estado expandido de un toast expandible."
+        },
+        "getState": {
+          "description": "Devuelve un snapshot del estado actual del toast (id, type, config, timeRemaining, isPaused, etc.)."
+        },
+        "afterClosed": {
+          "description": "Observable que emite una vez cuando el toast se ha cerrado completamente y eliminado."
+        },
+        "afterShown": {
+          "description": "Observable que emite una vez cuando el toast ha terminado su animación de entrada."
+        },
+        "onPause": {
+          "description": "Observable que emite cada vez que el temporizador del toast se pausa."
+        },
+        "onResume": {
+          "description": "Observable que emite cada vez que el temporizador del toast se reanuda."
+        }
+      }
     },
     "config": {
       "title": "ToastConfig",
-      "description": "Interfaz de configuración individual por toast. Permite sobrescribir la configuración global para toasts específicos."
+      "description": "Interfaz de configuración individual por toast. Permite sobrescribir la configuración global para toasts específicos.",
+      "rows": {
+        "type": {
+          "description": "Tipo de toast que controla el esquema de color y el icono por defecto (success, danger, warning, info, etc.)."
+        },
+        "title": {
+          "description": "Título opcional mostrado encima del mensaje."
+        },
+        "message": {
+          "description": "Contenido de texto principal del toast."
+        },
+        "html": {
+          "description": "Contenido HTML sin procesar renderizado dentro del toast (sanitizado). Usar con precaución."
+        },
+        "template": {
+          "description": "TemplateRef de Angular renderizado como contenido del toast."
+        },
+        "templateContext": {
+          "description": "Objeto de datos pasado como contexto a la plantilla personalizada."
+        },
+        "templateMode": {
+          "description": "Controla cómo se inserta una plantilla personalizada: <code>replace</code> reemplaza todo el contenido estándar, <code>append</code> lo añade después."
+        },
+        "icon": {
+          "description": "Controla el icono: <code>true</code> usa el icono predeterminado del tipo, <code>false</code> lo oculta, un string establece una clase de icono personalizada."
+        },
+        "iconPosition": {
+          "description": "Posición del icono respecto al contenido: <code>left</code> (en línea) o <code>top</code> (centrado arriba)."
+        },
+        "toastClass": {
+          "description": "Una o más clases CSS adicionales aplicadas al elemento host del toast."
+        },
+        "action": {
+          "description": "Configuración del botón de acción principal (label, onClick, closeOnClick)."
+        },
+        "actions": {
+          "description": "Array de configuraciones de botones de acción adicionales."
+        },
+        "timeout": {
+          "description": "Duración en milisegundos antes de que el toast se cierre automáticamente. Usa <code>0</code> para mantenerlo abierto hasta que se descarte manualmente."
+        },
+        "progressBar": {
+          "description": "Muestra una barra de progreso indicando el tiempo de visualización restante."
+        },
+        "closeButton": {
+          "description": "Muestra un botón de cerrar en el toast."
+        },
+        "pauseOnHover": {
+          "description": "Pausa el temporizador de cierre automático cuando el cursor está sobre el toast."
+        },
+        "pauseOnFocusLoss": {
+          "description": "Pausa el temporizador de cierre automático cuando la ventana del navegador pierde el foco."
+        },
+        "closeOnTouch": {
+          "description": "Cierra el toast cuando el usuario toca o hace clic en su cuerpo."
+        },
+        "swipeToDismiss": {
+          "description": "Permite al usuario descartar el toast deslizando horizontalmente en dispositivos táctiles."
+        },
+        "swipeThreshold": {
+          "description": "Distancia mínima de deslizamiento horizontal en píxeles necesaria para descartar el toast."
+        },
+        "position": {
+          "description": "Sobreescribe la posición global del contenedor para este toast específico."
+        },
+        "animationIn": {
+          "description": "Estilo de animación de entrada."
+        },
+        "animationOut": {
+          "description": "Estilo de animación de salida."
+        },
+        "animationDuration": {
+          "description": "Duración de las animaciones de entrada y salida en milisegundos."
+        },
+        "group": {
+          "description": "Nombre de grupo lógico para gestionar toasts relacionados juntos (p. ej. cerrar por grupo)."
+        },
+        "priority": {
+          "description": "Valor de prioridad usado al reemplazar el toast de menor prioridad al desbordarse."
+        },
+        "id": {
+          "description": "ID único personalizado para el toast, útil para apuntarlo con <code>update()</code> o <code>close()</code>."
+        },
+        "persistent": {
+          "description": "Persiste el toast en localStorage para que vuelva a aparecer después de recargar la página."
+        },
+        "persistentId": {
+          "description": "Clave única para almacenar y recuperar el toast persistente del localStorage."
+        },
+        "expandable": {
+          "description": "Permite expandir el toast en su lugar para revelar contenido adicional."
+        },
+        "expandedContent": {
+          "description": "Contenido adicional mostrado cuando el toast está expandido (string o TemplateRef)."
+        },
+        "sound": {
+          "description": "Reproduce un sonido cuando aparece el toast: <code>true</code> para el sonido predeterminado, o una URL para un archivo de audio personalizado."
+        },
+        "requireOnline": {
+          "description": "Encola el toast y solo lo muestra cuando el navegador vuelve a estar en línea."
+        },
+        "ariaRole": {
+          "description": "Rol ARIA aplicado al elemento toast (<code>status</code>, <code>alert</code> o <code>log</code>)."
+        },
+        "ariaLive": {
+          "description": "Nivel de cortesía ARIA live para los anuncios del lector de pantalla."
+        },
+        "announceToScreenReader": {
+          "description": "Si el toast se anuncia a las tecnologías de asistencia mediante una región live."
+        },
+        "buttonsSize": {
+          "description": "Tamaño de los botones de acción dentro del toast."
+        },
+        "buttonsColor": {
+          "description": "Color de los botones de acción. Por defecto usa el color del tipo del toast."
+        },
+        "buttonsVariant": {
+          "description": "Variante visual aplicada a los botones de acción."
+        },
+        "buttonsShape": {
+          "description": "Forma de los botones de acción."
+        },
+        "onShown": {
+          "description": "Callback ejecutado después de que el toast termina su animación de entrada."
+        },
+        "onClosed": {
+          "description": "Callback ejecutado cuando se cierra el toast."
+        },
+        "onClick": {
+          "description": "Callback ejecutado cuando el usuario hace clic en el cuerpo del toast."
+        },
+        "onTimeout": {
+          "description": "Callback ejecutado cuando expira el timeout de cierre automático."
+        },
+        "onPause": {
+          "description": "Callback ejecutado cuando se pausa el temporizador de cierre automático."
+        },
+        "onResume": {
+          "description": "Callback ejecutado cuando se reanuda el temporizador de cierre automático."
+        }
+      }
     },
     "global": {
       "title": "Configuración global",
-      "description": "Configuración global del sistema de toasts. Se puede establecer durante la inicialización de la aplicación."
+      "description": "Configuración global del sistema de toasts. Se puede establecer durante la inicialización de la aplicación.",
+      "rows": {
+        "timeout": {
+          "description": "Duración predeterminada en milisegundos antes de que un toast se cierre automáticamente. Usa <code>0</code> para toasts persistentes."
+        },
+        "position": {
+          "description": "Posición en pantalla predeterminada para todos los contenedores de toasts."
+        },
+        "preventDuplicates": {
+          "description": "Suprime los nuevos toasts que tienen el mismo tipo, título y mensaje que un toast ya activo."
+        },
+        "progressBar": {
+          "description": "Muestra una barra de progreso en todos los toasts por defecto."
+        },
+        "closeButton": {
+          "description": "Muestra un botón de cerrar en todos los toasts por defecto."
+        },
+        "closeOnTouch": {
+          "description": "Descarta el toast cuando el usuario hace clic o toca su cuerpo."
+        },
+        "icon": {
+          "description": "Muestra el icono del tipo en todos los toasts por defecto."
+        },
+        "iconPosition": {
+          "description": "Posición predeterminada del icono relativa al contenido del toast."
+        },
+        "pauseOnHover": {
+          "description": "Pausa el temporizador de cierre automático cuando el cursor está sobre el toast."
+        },
+        "pauseOnFocusLoss": {
+          "description": "Pausa el temporizador de cierre automático cuando la ventana del navegador pierde el foco."
+        },
+        "maxToasts": {
+          "description": "Número máximo total de toasts visibles simultáneamente en todas las posiciones."
+        },
+        "maxToastsPerPosition": {
+          "description": "Número máximo de toasts visibles en la misma posición simultáneamente."
+        },
+        "stackingBehavior": {
+          "description": "Comportamiento cuando se alcanza el número máximo de toasts: <code>queue</code> (espera), <code>replace-oldest</code>, <code>replace-lowest-priority</code> o <code>ignore</code>."
+        },
+        "stackDirection": {
+          "description": "Si los nuevos toasts se añaden al final o se insertan al principio del stack."
+        },
+        "animationIn": {
+          "description": "Animación de entrada predeterminada para todos los toasts."
+        },
+        "animationOut": {
+          "description": "Animación de salida predeterminada para todos los toasts."
+        },
+        "animationDuration": {
+          "description": "Duración de las animaciones de entrada y salida en milisegundos."
+        },
+        "templateMode": {
+          "description": "Modo predeterminado para plantillas personalizadas: <code>replace</code> o <code>append</code>."
+        },
+        "announceToScreenReader": {
+          "description": "Si los toasts se anuncian a las tecnologías de asistencia mediante una región live."
+        },
+        "ariaRole": {
+          "description": "Rol ARIA predeterminado aplicado a los elementos toast."
+        },
+        "ariaLive": {
+          "description": "Nivel de cortesía ARIA live predeterminado para los anuncios de toast."
+        },
+        "sound": {
+          "description": "Reproduce una notificación de audio cuando aparece un toast."
+        },
+        "expandable": {
+          "description": "Permite expandir los toasts en su lugar para revelar contenido adicional."
+        },
+        "persistent": {
+          "description": "Persiste los toasts en localStorage para que vuelvan a aparecer después de recargar la página."
+        },
+        "swipeToDismiss": {
+          "description": "Permite a los usuarios descartar toasts deslizando horizontalmente en dispositivos táctiles."
+        },
+        "swipeThreshold": {
+          "description": "Distancia mínima de deslizamiento horizontal en píxeles necesaria para descartar un toast."
+        },
+        "icons": {
+          "description": "Sobreescrituras de clases de iconos personalizados para cada tipo de toast (success, danger, warning, info, loading)."
+        },
+        "buttonsSize": {
+          "description": "Tamaño predeterminado para los botones de acción dentro de los toasts."
+        },
+        "buttonsColor": {
+          "description": "Color predeterminado para los botones de acción. Si no se establece, se usa el color del tipo del toast."
+        },
+        "buttonsVariant": {
+          "description": "Variante visual predeterminada para los botones de acción."
+        },
+        "buttonsShape": {
+          "description": "Forma predeterminada para los botones de acción."
+        }
+      }
     },
     "types": {
       "title": "Tipos e interfaces",

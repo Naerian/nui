@@ -32,6 +32,18 @@
         "cssClass": "Classes CSS supplémentaires appliquées à l'élément bouton du chip.",
         "restore": "Callback invoqué lors du clic sur le chip pour restaurer le composant d'origine. Obligatoire."
       }
+    },
+    "dock-tab-config": {
+      "title": "DockTabConfig",
+      "description": "Objet de personnalisation visuelle optionnel accepté par <code>ModalDialogConfig</code> et <code>SidebarPanelConfig</code> via la propriété <code>dockTabConfig</code>. Tous les champs sont optionnels ; les champs omis utilisent les valeurs par défaut du composant.",
+      "note": "Passez un objet <code>DockTabConfig</code> lors de l'ouverture d'un modal ou d'un panneau latéral pour contrôler l'apparence de son chip minimisé dans le dock.",
+      "rows": {
+        "prefixIcon": "Classe d'icône Remix Icons affichée comme icône préfixe dans le chip. Dans un SidebarPanel, une icône directionnelle est affichée par défaut si ce champ est omis.",
+        "suffixIcon": "Classe d'icône Remix Icons affichée comme icône suffixe dans le chip. Rendue uniquement lorsque <code>prefixIcon</code> est également fourni.",
+        "hideSuffixIcon": "Lorsque <code>true</code>, supprime la flèche directionnelle automatique ajoutée aux chips de sidebar selon la position d'origine du panneau.",
+        "label": "Libellé textuel alternatif pour le chip. Si omis, le titre propre du composant est utilisé.",
+        "cssClass": "Une ou plusieurs classes CSS supplémentaires appliquées à l'élément bouton du chip."
+      }
     }
   },
   "theming": {

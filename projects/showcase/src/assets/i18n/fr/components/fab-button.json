@@ -86,10 +86,6 @@
       "title": "Sorties",
       "description": "Événements émis par le composant Bouton FAB pour répondre aux interactions utilisateur."
     },
-    "computed": {
-      "title": "Propriétés calculées",
-      "description": "Propriétés calculées réactives (Signals) qui exposent l'état interne résolu du composant."
-    },
     "types": {
       "title": "Types",
       "description": "Types TypeScript définissant les valeurs acceptées pour les entrées du Bouton FAB."
@@ -104,7 +100,8 @@
     },
     "directives": {
       "title": "Directives de template",
-      "description": "Directives standalone qui permettent de projeter des templates personnalisés dans le déclencheur et dans chaque élément du Bouton FAB. Elles sont importées et déclarées comme toute directive Angular standalone."
+      "description": "Directives standalone qui permettent de projeter des templates personnalisés dans le déclencheur et dans chaque élément du Bouton FAB. Elles sont importées et déclarées comme toute directive Angular standalone.",
+      "note": "Les deux directives sont standalone. Ajoutez-les au tableau <code>imports</code> de votre composant avec <code>FabButtonComponent</code>."
     },
     "config": {
       "title": "Configuration globale (FabButtonConfig)",

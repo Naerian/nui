@@ -32,6 +32,18 @@
         "cssClass": "Zusätzliche CSS-Klassen, die auf das Chip-Button-Element angewendet werden.",
         "restore": "Callback, der beim Klicken auf den Chip aufgerufen wird, um die zugehörige Komponente wiederherzustellen. Obligatorisch."
       }
+    },
+    "dock-tab-config": {
+      "title": "DockTabConfig",
+      "description": "Optionales Objekt zur visuellen Anpassung, das von <code>ModalDialogConfig</code> und <code>SidebarPanelConfig</code> über die Eigenschaft <code>dockTabConfig</code> akzeptiert wird. Alle Felder sind optional; ausgelassene Felder verwenden die Standardwerte des Komponenten.",
+      "note": "Übergeben Sie ein <code>DockTabConfig</code>-Objekt beim Öffnen eines Modals oder Seitenpanels, um das Erscheinungsbild seines minimierten Chips im Dock zu steuern.",
+      "rows": {
+        "prefixIcon": "Remix-Icon-Klasse, die als Präfix-Icon im Chip angezeigt wird. Bei einem SidebarPanel wird standardmäßig ein Richtungspfeil angezeigt, wenn dieses Feld weggelassen wird.",
+        "suffixIcon": "Remix-Icon-Klasse, die als Suffix-Icon im Chip angezeigt wird. Wird nur gerendert, wenn auch <code>prefixIcon</code> angegeben ist.",
+        "hideSuffixIcon": "Wenn <code>true</code>, wird der automatische Richtungspfeil unterdrückt, der Sidebar-Chips basierend auf der ursprünglichen Position des Panels hinzugefügt wird.",
+        "label": "Alternativer Textbezeichner für den Chip. Wenn weggelassen, wird der eigene Titel des Komponenten verwendet.",
+        "cssClass": "Eine oder mehrere zusätzliche CSS-Klassen, die auf das Chip-Button-Element angewendet werden."
+      }
     }
   },
   "theming": {

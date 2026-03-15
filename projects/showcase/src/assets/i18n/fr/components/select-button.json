@@ -45,11 +45,75 @@
     "description": "Documentation complète des entrées, sorties et utilisation avancée du composant Bouton de sélection.",
     "inputs": {
       "title": "Entrées",
-      "description": "Propriétés du composant qui contrôlent son comportement et son apparence."
+      "description": "Propriétés du composant qui contrôlent son comportement et son apparence.",
+      "rows": {
+        "options": {
+          "description": "Tableau d'options requis. Accepte des valeurs primitives (chaînes, nombres) ou des objets."
+        },
+        "mode": {
+          "description": "Mode de sélection : <code>'radio'</code> pour la sélection unique ou <code>'checkbox'</code> pour la sélection multiple."
+        },
+        "labelBy": {
+          "description": "Clé de propriété de l'objet option à utiliser comme libellé visible du bouton."
+        },
+        "valueBy": {
+          "description": "Clé de propriété de l'objet option à utiliser comme valeur interne."
+        },
+        "tooltipBy": {
+          "description": "Clé de propriété de l'objet option à utiliser comme texte d'infobulle du bouton."
+        },
+        "iconBy": {
+          "description": "Clé de propriété de l'objet option contenant la classe CSS RemixIcon pour l'icône du bouton."
+        },
+        "disabledBy": {
+          "description": "Clé de propriété de l'objet option indiquant si l'option est désactivée."
+        },
+        "iconOnly": {
+          "description": "Lorsque <code>true</code>, masque les libellés des boutons et n'affiche que les icônes pour un style de barre d'outils compacte."
+        },
+        "variant": {
+          "description": "Variante visuelle du groupe de boutons : <code>'solid'</code>, <code>'outline'</code>, <code>'ghost'</code> ou <code>'segmented'</code>. Utilise la configuration globale ou la valeur par défaut de la bibliothèque si non spécifié."
+        },
+        "color": {
+          "description": "Thème de couleur appliqué au groupe de boutons. Utilise la configuration globale ou la valeur par défaut de la bibliothèque (<code>'primary'</code>) si non spécifié."
+        },
+        "size": {
+          "description": "Taille du groupe de boutons : <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> ou <code>'xl'</code>. Utilise la configuration globale ou la valeur par défaut de la bibliothèque (<code>'md'</code>) si non spécifié."
+        },
+        "width": {
+          "description": "Comportement de largeur du groupe : <code>'auto'</code> (adapté au contenu) ou <code>'full'</code> (100% du conteneur)."
+        },
+        "disabled": {
+          "description": "Lorsque <code>true</code>, désactive l'ensemble du groupe de boutons et empêche toute interaction."
+        }
+      }
     },
     "outputs": {
       "title": "Sorties",
-      "description": "Événements émis par le composant pendant son cycle de vie."
+      "description": "Événements émis par le composant pendant son cycle de vie.",
+      "rows": {
+        "valueChange": {
+          "description": "Émis lorsque la sélection change. Retourne la valeur sélectionnée (mode radio) ou un tableau de valeurs sélectionnées (mode checkbox)."
+        }
+      }
+    },
+    "models": {
+      "title": "Modèles",
+      "description": "Types, enums et interfaces exportés par le composant Bouton de sélection.",
+      "rows": {
+        "SelectBtnMode": {
+          "description": "Type union pour le mode de sélection du groupe de boutons."
+        },
+        "SelectBtnModeEnum": {
+          "description": "Enum avec les valeurs de mode de sélection disponibles : <code>RADIO</code> et <code>CHECKBOX</code>."
+        },
+        "SelectBtnVariant": {
+          "description": "Type union pour la variante visuelle : étend <code>NUIVariant</code> avec la valeur supplémentaire <code>'segmented'</code>."
+        },
+        "SelectBtnOption": {
+          "description": "Interface pour les objets option avec les propriétés <code>label</code>, <code>value</code>, <code>icon</code> optionnel et <code>disabled</code> optionnel."
+        }
+      }
     }
   },
   "theming": {

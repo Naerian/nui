@@ -75,8 +75,8 @@
         "compact": {
           "description": "R\u00e9duit la barre en un indicateur fin (6 px) et masque la valeur."
         },
-        "color": { "description": "Couleur s\u00e9mantique du composant." },
-        "variant": { "description": "Variante visuelle\u00a0: 'solid', 'outline', 'ghost'." },
+        "color": { "description": "Couleur s\u00e9mantique du composant. Utilise la configuration globale ou <code>primary</code> comme valeur de repli." },
+        "variant": { "description": "Variante visuelle\u00a0: 'solid', 'outline', 'ghost'. Utilise la configuration globale ou <code>solid</code> comme valeur de repli." },
         "value": { "description": "Valeur actuelle de la progression." },
         "maxValue": { "description": "Valeur maximale de la progression." },
         "indeterminate": {
@@ -131,6 +131,10 @@
     "context": {
       "title": "Liaisons de contexte",
       "description": "Contexte de gabarit disponible pour <code>slot=\"value\"</code> et <code>slot=\"label\"</code> (sauf <code>let-label</code>, exclusif au slot label). Syntaxe\u00a0: <code>let-nom=\"cl\u00e9\"</code> &mdash; except\u00e9 <code>$implicit</code>, qui se lie avec un simple <code>let-nom</code> sans <code>=\"...\"</code>.",
+      "slots": {
+        "both": "value + label",
+        "labelOnly": "label uniquement"
+      },
       "rows": {
         "text": {
           "description": "Cha\u00eene pr\u00e9-format\u00e9e (ex. <em>&quot;70 %&quot;</em>). C'est le <code>$implicit</code> du contexte\u00a0: le <strong>seul</strong> binding qui ne n\u00e9cessite <strong>pas</strong> de <code>=&quot;...&quot;</code>, car Angular le mappe automatiquement avec un simple <code>let-X</code>."

@@ -69,7 +69,7 @@ export class PopoverPageComponent extends BaseComponentPage {
       id: 'api',
       label: 'common.tabs.api',
       icon: 'ri-braces-line',
-      sections: ['api-inputs', 'api-outputs', 'api-config', 'api-context', 'api-tokens'],
+      sections: ['api-import', 'api-inputs', 'api-outputs', 'api-methods', 'api-context', 'api-tokens'],
     },
     {
       id: 'theming',

@@ -118,7 +118,9 @@
         "endTime": { "description": "Anfängliche Endzeit" },
         "dateStatusFn": { "description": "Funktion, die Datumsangaben visuelle Zustände zuweist ('success', 'warning', 'danger', 'info')" },
         "isDateEnabledFn": { "description": "Funktion, die dynamisch bestimmt, ob ein Datum aktiviert ist (überschreibt disabledDates)" },
-        "showWeekNumbers": { "description": "Zeigt ISO-8601 Wochennummern in einer Spalte links. Anklickbar im WEEK-Modus oder DAY mehrfach zur vollständigen Wochenauswahl" }
+        "showWeekNumbers": { "description": "Zeigt ISO-8601 Wochennummern in einer Spalte links. Anklickbar im WEEK-Modus oder DAY mehrfach zur vollständigen Wochenauswahl" },
+        "overlayMode": { "description": "Gibt an, dass der Kalender in ein Overlay (Datepicker, Popover) eingebettet ist. Passt das anfängliche Fokusverhalten an und kann die Ansichtsnavigation ändern" },
+        "autoClose": { "description": "Wenn true, wird selectFinished ausgelöst, sobald die Auswahl abgeschlossen ist. Nützlich für die Integration mit Datepicker oder Overlay, um zu wissen, wann geschlossen werden soll" }
       }
     },
     "outputs": {
@@ -129,10 +131,22 @@
         "selectFinished": { "description": "Wird ausgelöst, wenn die Auswahl bestätigt wird und der Kalender geschlossen werden soll. Nützlich für die Integration mit Popovers oder Modals. Wird auch durch <code>actions.close()</code> in einem benutzerdefinierten Footer ausgelöst." }
       }
     },
+    "directives": {
+      "title": "Inhaltsdirektiven",
+      "description": "Strukturdirektiven zum Projizieren benutzerdefinierter Templates in den Kalender",
+      "note": "Beide Direktiven müssen im konsumierenden Komponent importiert werden. Importiere <code>CalendarFooterDirective</code>, um den integrierten Footer zu ersetzen, und <code>CalendarDayDirective</code>, um jede Tageszelle anzupassen.",
+      "rows": {
+        "calendarFooter": { "description": "<strong>CalendarFooterDirective</strong> — Marker-Direktive (<code>[nuiCalendarFooter]</code>) zum Projizieren eines benutzerdefinierten Footer-Templates, das die integrierte Heute-Schaltfläche ersetzt. Empfängt einen typisierten <code>CalendarFooterContext</code> mit <code>value</code>, <code>viewMode</code> und <code>actions</code>." },
+        "calendarDay": { "description": "<strong>CalendarDayDirective</strong> — Marker-Direktive (<code>[nuiCalendarDay]</code>) zur Anpassung des visuellen Inhalts jeder Tageszelle. Die Komponente verwaltet weiterhin alle ARIA-Attribute und Tastaturereignisse. Empfängt einen typisierten <code>CalendarDayContext</code> mit <code>$implicit</code> (CalendarDay), <code>day</code>, <code>isToday</code> und <code>status</code>." }
+      }
+    },
     "calendar-value": {
       "title": "CalendarValue",
       "description": "Union-Typ, der alle möglichen Kalenderwerte je nach ausgewähltem Typ repräsentiert",
-      "note": "Der Typ des zurückgegebenen Werts hängt vom <code>type</code> ab: <strong>DAY</strong> gibt <code>Date | null</code> zurück, <strong>WEEK</strong> gibt <code>{ start: Date, end: Date } | null</code> zurück, und <strong>RANGE</strong> gibt <code>{ start: Date, end: Date } | null</code> zurück."
+      "note": "Der Typ des zurückgegebenen Werts hängt vom <code>type</code> ab: <strong>DAY</strong> gibt <code>Date | null</code> zurück, <strong>WEEK</strong> gibt <code>{ start: Date, end: Date } | null</code> zurück, und <strong>RANGE</strong> gibt <code>{ start: Date, end: Date } | null</code> zurück.",
+      "rows": {
+        "type": { "description": "Auswahltyp (DAY, WEEK, RANGE, MONTH, YEAR). Diskriminator, der bestimmt, welche zusätzlichen Eigenschaften im zurückgegebenen Wert vorhanden sind." }
+      }
     },
     "calendar-type": {
       "title": "CalendarType",
@@ -172,8 +186,7 @@
       "description": "Interface zur Definition von Schnellbereichs-Voreinstellungen mit Label, Datumsbereich und optionalem Icon",
       "rows": {
         "label": { "description": "Auf der Schaltfläche angezeigter Text" },
-        "start": { "description": "Anfangsdatum des Bereichs" },
-        "end": { "description": "Enddatum des Bereichs" }
+        "getValue": { "description": "Funktion, die den Datumsbereich der Voreinstellung als <code>{ start: Date; end: Date }</code> zurückgibt. Wird bei jeder Interaktion lazy aufgerufen, damit relative Bereiche (z.B. 'Letzte 7 Tage') stets aktuell sind" }
       }
     },
     "footer-context": {

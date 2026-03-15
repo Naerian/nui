@@ -348,7 +348,7 @@ export class UserProfilePopoverComponent {
         code: `<!-- Do not close on outside click -->
 <nui-button 
   nuiPopover="Do not close on outside click" 
-  [nuiPopoverCloseOnClickOutside]="false">
+  [nuiPopoverCloseOnOutsideClick]="false">
   Click Outside OFF
 </nui-button>
 
@@ -398,7 +398,7 @@ export class UserProfilePopoverComponent {
 <nui-button 
   [nuiPopover]="modalTemplate" 
   [nuiPopoverBackdrop]="true"
-  [nuiBackdropClose]="false">
+  [nuiPopoverCloseOnBackdrop]="false">
   Backdrop without closing on click
 </nui-button>
 

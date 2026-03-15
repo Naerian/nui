@@ -5,6 +5,25 @@ import { ComponentSection } from '../../../../core/models';
  * Separada en secciones: Inputs, Outputs, Computed, Modelos.
  */
 export const FAB_BUTTON_API_SECTIONS: ComponentSection[] = [
+  {
+    id: 'api-import',
+    title: 'common.import',
+    description: 'common.api.importComponent',
+    anchor: 'api-import',
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `import { FabButtonComponent, FabTriggerDirective, FabItemDirective } from 'nui';
+
+@Component({
+  standalone: true,
+  imports: [FabButtonComponent, FabTriggerDirective, FabItemDirective],
+})
+export class MyComponent {}`,
+        language: 'typescript',
+      },
+    ],
+  },
   // ──────────────────────────────────────────────────────────
   // INPUTS
   // ──────────────────────────────────────────────────────────
@@ -217,81 +236,6 @@ export const FAB_BUTTON_API_SECTIONS: ComponentSection[] = [
   },
 
   // ──────────────────────────────────────────────────────────
-  // COMPUTED
-  // ──────────────────────────────────────────────────────────
-  {
-    id: 'api-computed',
-    title: 'components.fabButton.api.computed.title',
-    description: 'components.fabButton.api.computed.description',
-    anchor: 'computed',
-    table: {
-      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
-      rows: [
-        [
-          '<code>isOpen</code>',
-          'Signal&lt;boolean&gt;',
-          'Expansion surface: reads controlled <code>expanded</code> input or internal signal',
-        ],
-        [
-          '<code>resolvedItems</code>',
-          'Signal&lt;FabButtonItemResolved[]&gt;',
-          'Items extended with computed CSS translate values (tx, ty) for the current layout',
-        ],
-        [
-          '<code>effectiveColor</code>',
-          'Signal&lt;NUIColor&gt;',
-          'Resolved color (Input → Global Config → Default)',
-        ],
-        [
-          '<code>effectiveSize</code>',
-          'Signal&lt;NUISize&gt;',
-          'Resolved size (Input → Global Config → Default)',
-        ],
-        [
-          '<code>effectiveVariant</code>',
-          'Signal&lt;NUIVariant&gt;',
-          'Resolved variant (Input → Global Config → Default)',
-        ],
-        [
-          '<code>effectiveAnimation</code>',
-          'Signal&lt;FabButtonAnimation&gt;',
-          'Resolved animation (Input → Global Config → Default)',
-        ],
-        [
-          '<code>effectiveDirection</code>',
-          'Signal&lt;FabButtonDirection&gt;',
-          'Resolved direction (Input → Global Config → Default)',
-        ],
-        [
-          '<code>effectiveLayout</code>',
-          'Signal&lt;FabButtonLayoutType&gt;',
-          'Resolved layout (Input → Global Config → Default)',
-        ],
-        [
-          '<code>activeTriggerIcon</code>',
-          'Signal&lt;string&gt;',
-          'Trigger icon in use: returns <code>triggerIconOpen</code> while the dial is open (when set), otherwise returns <code>triggerIcon</code>',
-        ],
-        [
-          '<code>effectiveOpenOn</code>',
-          "Signal&lt;'click' | 'hover'&gt;",
-          "Resolved open mode (Input → Global Config → Default 'click')",
-        ],
-        [
-          '<code>effectiveCloseOnItemClick</code>',
-          'Signal&lt;boolean&gt;',
-          'Resolved close-on-item-click (Input → Global Config → Default true)',
-        ],
-        [
-          '<code>effectiveCloseOnScroll</code>',
-          'Signal&lt;boolean&gt;',
-          'Resolved close-on-scroll (Input → Global Config → Default false)',
-        ],
-      ],
-    },
-  },
-
-  // ──────────────────────────────────────────────────────────
   // TYPES
   // ──────────────────────────────────────────────────────────
   {
@@ -489,6 +433,7 @@ export const FAB_BUTTON_API_SECTIONS: ComponentSection[] = [
     title: 'components.fabButton.api.directives.title',
     description: 'components.fabButton.api.directives.description',
     anchor: 'directives',
+    note: { type: 'info', content: 'components.fabButton.api.directives.note' },
     table: {
       headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
@@ -634,7 +579,7 @@ export const FAB_BUTTON_API_SECTIONS: ComponentSection[] = [
     },
     examples: [
       {
-        title: 'Global config via NUI_CONFIG',
+        title: 'codeExamples.configuration',
         language: 'typescript',
         code: `import { provideNuiConfig } from 'nui';
 

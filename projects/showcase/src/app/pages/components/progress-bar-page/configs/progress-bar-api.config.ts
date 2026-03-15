@@ -2,6 +2,25 @@ import { ComponentSection } from '../../../../core/models';
 
 export const PROGRESS_BAR_API_SECTIONS: ComponentSection[] = [
   {
+    id: 'api-import',
+    title: 'common.import',
+    description: 'common.api.importComponent',
+    anchor: 'api-import',
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `import { ProgressBarComponent, ProgressBarTemplateDirective } from 'nui';
+
+@Component({
+  standalone: true,
+  imports: [ProgressBarComponent, ProgressBarTemplateDirective],
+})
+export class MyComponent {}`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
     id: 'api-inputs',
     title: 'components.progressBar.api.inputs.title',
     description: 'components.progressBar.api.inputs.description',
@@ -22,14 +41,14 @@ export const PROGRESS_BAR_API_SECTIONS: ComponentSection[] = [
         ],
         [
           '<code>color</code>',
-          'NUIColor',
-          '<code class="neutral">primary</code>',
+          'NUIColor | undefined',
+          '<code class="neutral">undefined</code>',
           'components.progressBar.api.inputs.rows.color.description',
         ],
         [
           '<code>variant</code>',
-          'NUIVariant',
-          '<code class="neutral">solid</code>',
+          'NUIVariant | undefined',
+          '<code class="neutral">undefined</code>',
           'components.progressBar.api.inputs.rows.variant.description',
         ],
         [
@@ -164,31 +183,31 @@ export const PROGRESS_BAR_API_SECTIONS: ComponentSection[] = [
         [
           '<code>let-text</code> <em>(<code>$implicit</code>)</em>',
           '<code>string</code>',
-          'value + label',
+          'components.progressBar.api.context.slots.both',
           'components.progressBar.api.context.rows.text.description',
         ],
         [
           '<code>let-percent="percent"</code>',
           '<code>number</code>',
-          'value + label',
+          'components.progressBar.api.context.slots.both',
           'components.progressBar.api.context.rows.percent.description',
         ],
         [
           '<code>let-v="value"</code>',
           '<code>number</code>',
-          'value + label',
+          'components.progressBar.api.context.slots.both',
           'components.progressBar.api.context.rows.value.description',
         ],
         [
           '<code>let-max="max"</code>',
           '<code>number</code>',
-          'value + label',
+          'components.progressBar.api.context.slots.both',
           'components.progressBar.api.context.rows.max.description',
         ],
         [
           '<code>let-label="label"</code>',
           '<code>string | null</code>',
-          '<em>solo</em> <code>slot="label"</code>',
+          'components.progressBar.api.context.slots.labelOnly',
           'components.progressBar.api.context.rows.label.description',
         ],
       ],

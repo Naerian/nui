@@ -52,7 +52,7 @@ export class ActionMenuPageComponent extends BaseComponentPage {
       id: 'api',
       label: 'common.tabs.api',
       icon: 'ri-braces-line',
-      sections: ['api-inputs', 'api-outputs', 'api-interface'],
+      sections: ['api-import', 'api-inputs', 'api-outputs', 'api-directives', 'api-interface'],
     },
     {
       id: 'theming',

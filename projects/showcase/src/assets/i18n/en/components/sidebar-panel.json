@@ -97,8 +97,8 @@
       }
     },
     "ref": {
-      "title": "SidebarPanelRef",
-      "description": "The reference returned by <code>open()</code>. Use it to close the modal, listen to events, and observe lifecycle changes.",
+      "title": "SidebarPanelRef — Properties",
+      "description": "Read-only properties exposed by the reference returned from <code>open()</code>.",
       "rows": {
         "id": "Unique identifier of the panel instance.",
         "componentInstance": "Reference to the dynamically loaded component instance, or <code>null</code> if not yet rendered.",
@@ -123,6 +123,10 @@
         "closePrevented": "Observable that emits when a close attempt is blocked by the <code>preventClose</code> guard."
       }
     },
+    "ref-methods": {
+      "title": "SidebarPanelRef — Methods",
+      "description": "Methods available on the reference returned by <code>open()</code>. Use them to control the panel lifecycle, update content, and observe events."
+    },
     "tokens": {
       "title": "Injection tokens",
       "description": "Use these tokens to inject the sidebar panel context inside a dynamic component loaded by the service.",
@@ -141,6 +145,8 @@
         "size": "Predefined panel size applied via a CSS variable.",
         "width": "Custom CSS width for left/right panels. Overrides <code>size</code>.",
         "height": "Custom CSS height for top/bottom panels. Overrides <code>size</code>.",
+        "maxWidth": "Maximum CSS width for the panel. Useful to prevent overly wide panels on large screens.",
+        "maxHeight": "Maximum CSS height for the panel. Useful to prevent overly tall panels.",
         "data": "Arbitrary data injected into the dynamic component via <code>SIDEBAR_PANEL_DATA</code>.",
         "contentTemplate": "Angular <code>TemplateRef</code> rendered as the panel body.",
         "htmlContent": "Raw HTML string rendered as the panel body. Sanitized by Angular's <code>DomSanitizer</code>.",
@@ -176,14 +182,17 @@
       "description": "Inline button definition passed through <code>customButtons</code> in the configuration. It is evaluated only once when the modal opens — use <code>SidebarPanelActionsService</code> for reactive states.",
       "rows": {
         "text": "Button label. Required.",
-        "icon": "Remix Icon class displayed inside the button (e.g., <code>ri-save-line</code>).",
+        "prefixIcon": "Remix Icon class displayed before the button label (e.g., <code>ri-save-line</code>).",
+        "suffixIcon": "Remix Icon class displayed after the button label (e.g., <code>ri-arrow-right-line</code>).",
         "color": "NUI color applied to the button.",
         "variant": "Button variant: solid, outline, or ghost.",
         "size": "NUI size applied to the button.",
         "callback": "Click handler invoked with the <code>SidebarPanelRef</code>. Required.",
         "disabled": "Whether the button is rendered in a disabled state.",
         "loading": "Whether the button shows a loading spinner.",
-        "class": "One or more additional CSS classes applied to the button element."
+        "loadingPosition": "Position of the loading spinner relative to the label.",
+        "class": "One or more additional CSS classes applied to the button element.",
+        "width": "Button width mode: <code>auto</code> (content-sized) or <code>full</code> (full container width)."
       }
     },
     "minimized-tab": {
@@ -203,15 +212,15 @@
       "rows": {
         "id": "Optional unique identifier for the action. Useful for targeted updates via <code>updateById()</code>.",
         "label": "Button label. Required.",
-        "icon": "Remix Icon class displayed inside the button (e.g., <code>ri-save-line</code>).",
-        "iconPosition": "Position of the icon relative to the label: <code>start</code> or <code>end</code>.",
+        "prefixIcon": "Remix Icon class displayed before the button label (e.g., <code>ri-save-line</code>).",
+        "suffixIcon": "Remix Icon class displayed after the button label (e.g., <code>ri-arrow-right-line</code>).",
         "color": "NUI color applied to the button.",
         "variant": "Button variant: solid, outline, or ghost.",
         "size": "NUI size applied to the button.",
         "handler": "Click handler function. Required.",
         "disabled": "Whether the button is rendered in a disabled state.",
         "loading": "Whether the button shows a loading spinner.",
-        "loadingPosition": "Position of the loading spinner relative to the label: <code>start</code> or <code>end</code>.",
+        "loadingPosition": "Position of the loading spinner relative to the label.",
         "class": "One or more additional CSS classes applied to the button element.",
         "width": "Button width mode: <code>auto</code> (content-sized) or <code>full</code> (full container width)."
       }

@@ -45,11 +45,75 @@
     "description": "Complete documentation of inputs, outputs and advanced usage of the Select Button component.",
     "inputs": {
       "title": "Inputs",
-      "description": "Component properties that control its behavior and appearance."
+      "description": "Component properties that control its behavior and appearance.",
+      "rows": {
+        "options": {
+          "description": "Required array of options. Accepts primitive values (strings, numbers) or objects."
+        },
+        "mode": {
+          "description": "Selection mode: <code>'radio'</code> for single selection or <code>'checkbox'</code> for multiple selection."
+        },
+        "labelBy": {
+          "description": "Property key of the option object to use as the visible button label."
+        },
+        "valueBy": {
+          "description": "Property key of the option object to use as the internal value."
+        },
+        "tooltipBy": {
+          "description": "Property key of the option object to use as the button tooltip text."
+        },
+        "iconBy": {
+          "description": "Property key of the option object holding the RemixIcon CSS class for the button icon."
+        },
+        "disabledBy": {
+          "description": "Property key of the option object that indicates whether the option is disabled."
+        },
+        "iconOnly": {
+          "description": "When <code>true</code>, hides button labels and shows only icons for a compact toolbar style."
+        },
+        "variant": {
+          "description": "Visual variant of the button group: <code>'solid'</code>, <code>'outline'</code>, <code>'ghost'</code> or <code>'segmented'</code>. Falls back to global config or library default."
+        },
+        "color": {
+          "description": "Color theme applied to the button group. Falls back to global config or library default (<code>'primary'</code>)."
+        },
+        "size": {
+          "description": "Size of the button group: <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> or <code>'xl'</code>. Falls back to global config or library default (<code>'md'</code>)."
+        },
+        "width": {
+          "description": "Width behaviour of the group: <code>'auto'</code> (shrink-wrap) or <code>'full'</code> (100% of the container)."
+        },
+        "disabled": {
+          "description": "When <code>true</code>, disables the entire button group and prevents interaction."
+        }
+      }
     },
     "outputs": {
       "title": "Outputs",
-      "description": "Events emitted by the component during its lifecycle."
+      "description": "Events emitted by the component during its lifecycle.",
+      "rows": {
+        "valueChange": {
+          "description": "Emitted when the selection changes. Returns the selected value (radio mode) or an array of selected values (checkbox mode)."
+        }
+      }
+    },
+    "models": {
+      "title": "Models",
+      "description": "Types, enums and interfaces exported by the Select Button component.",
+      "rows": {
+        "SelectBtnMode": {
+          "description": "Union type for the selection mode of the button group."
+        },
+        "SelectBtnModeEnum": {
+          "description": "Enum with the available selection mode values: <code>RADIO</code> and <code>CHECKBOX</code>."
+        },
+        "SelectBtnVariant": {
+          "description": "Union type for the visual variant: extends <code>NUIVariant</code> with the additional <code>'segmented'</code> value."
+        },
+        "SelectBtnOption": {
+          "description": "Interface for option objects with <code>label</code>, <code>value</code>, optional <code>icon</code> and optional <code>disabled</code> properties."
+        }
+      }
     }
   },
   "theming": {

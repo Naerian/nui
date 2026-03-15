@@ -60,6 +60,7 @@ export class TimeSelectorPageComponent extends BaseComponentPage {
       label: 'common.tabs.api',
       icon: 'ri-braces-line',
       sections: [
+        'api-import',
         'api-inputs',
         'api-outputs',
         'api-config',
@@ -74,7 +75,6 @@ export class TimeSelectorPageComponent extends BaseComponentPage {
         'api-duration-preset',
         'api-time-selector-mode',
         'api-time-selector-strategy',
-        'api-time-selector-variant',
         'api-time-selector-value',
         'api-methods',
       ],

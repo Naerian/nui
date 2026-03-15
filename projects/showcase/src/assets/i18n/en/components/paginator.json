@@ -35,35 +35,171 @@
     "description": "Complete documentation of inputs, outputs and interfaces of the Paginator component for advanced integration.",
     "inputs": {
       "title": "Inputs",
-      "description": "Input properties of the Paginator component"
+      "description": "Input properties of the Paginator component",
+      "rows": {
+        "size": { "description": "Size of the paginator buttons. Possible values: 'xs', 'sm', 'md', 'lg', 'xl'. Falls back to global config or <code>md</code>." },
+        "variant": { "description": "Visual variant. Possible values: 'solid', 'outline', 'ghost'. Falls back to global config or <code>solid</code>." },
+        "color": { "description": "Color palette applied to paginator buttons. Falls back to global config or the library default." },
+        "mode": { "description": "Display mode of the paginator: <code>'default'</code>, <code>'compact'</code>, <code>'fractional'</code> or <code>'minimal'</code>." },
+        "disabled": { "description": "Disables the paginator and all its controls." },
+        "currentPage": { "description": "Current page (1-indexed). Model Signal — supports two-way binding with <code>[(currentPage)]</code>." },
+        "totalItems": { "description": "Total number of items. When provided, <code>totalPages</code> is calculated automatically as <code>Math.ceil(totalItems / itemsPerPage)</code>." },
+        "totalPages": { "description": "Total number of pages for manual binding when <code>totalItems</code> is not provided. Model Signal — supports two-way binding." },
+        "itemsPerPage": { "description": "Items per page. Model Signal — supports two-way binding with <code>[(itemsPerPage)]</code>." },
+        "maxVisiblePages": { "description": "Maximum number of visible page buttons. Falls back to global config or <code>5</code>." },
+        "pageSizeOptions": { "description": "Options for the page size selector. Falls back to global config or <code>[10, 20, 50, 100]</code>." },
+        "showFirstLast": { "description": "Show first/last page buttons. Falls back to global config or <code>true</code>." },
+        "showPageSizeSelector": { "description": "Show the page size selector. Falls back to global config or <code>false</code>." },
+        "showItemRange": { "description": "Show the item range indicator (e.g. '1–10 of 100'). Falls back to global config or <code>true</code>." },
+        "showPageJump": { "description": "Show an input to jump to a specific page. Falls back to global config or <code>false</code>." },
+        "navDisplay": { "description": "What to show in navigation buttons: <code>'icon'</code>, <code>'text'</code> or <code>'both'</code>. Falls back to global config or <code>'icon'</code>." },
+        "navIcons": { "description": "Overrides specific navigation icons (first, previous, next, last, loadMore, loading, prefix)." },
+        "navTexts": { "description": "Custom texts for the paginator, overriding i18n translations for this instance." },
+        "autoScroll": { "description": "Automatically scroll to the top on page change. Falls back to global config or <code>false</code>." },
+        "scrollTarget": { "description": "CSS selector or HTML element to scroll to on page change. Defaults to <code>window/body</code>." },
+        "keyboard": { "description": "Custom keyboard shortcut configuration for paginator navigation. Falls back to global config." },
+        "layout": { "description": "Custom layout to position paginator elements in areas (top, left, center, right, bottom)." },
+        "mobileLayout": { "description": "Custom layout used automatically on mobile devices. Falls back to global config." },
+        "autoMobile": { "description": "Automatically switch to <code>'fractional'</code> mode on mobile devices." },
+        "autoWrap": { "description": "Automatically wrap paginator buttons on small screens to prevent overflow." },
+        "infiniteConfig": { "description": "Configuration for infinite loading mode (load-more button or infinite scroll)." }
+      }
     },
     "outputs": {
       "title": "Outputs",
-      "description": "Events emitted by the Paginator component"
+      "description": "Events emitted by the Paginator component",
+      "rows": {
+        "pageChange": { "description": "Emitted when the current page changes. Emits the new page number." },
+        "pageSizeChange": { "description": "Emitted when the page size changes. Emits the new page size." },
+        "pageChangeAdvanced": { "description": "Advanced page change event with full context: new page, previous page, items per page and total pages." },
+        "pageSizeChangeAdvanced": { "description": "Advanced page size change event with full context: new size, previous size, current page and total pages." }
+      }
     },
     "texts": {
       "title": "PaginatorI18n",
-      "description": "Interface for customizable paginator texts"
+      "description": "Interface for customizable paginator texts",
+      "rows": {
+        "itemsPerPage": { "description": "Label for the items-per-page selector (e.g. 'Items per page:')." },
+        "showingItems": { "description": "Template for the item range display. Supports <code>{start}</code>, <code>{end}</code> and <code>{total}</code> placeholders." },
+        "page": { "description": "Text for the word 'Page' used in compact/fractional modes." },
+        "of": { "description": "Connector word 'of' used in the range text (e.g. '1–10 of 100')." },
+        "goToPage": { "description": "Label for the page jump input." },
+        "go": { "description": "Label for the 'Go' button in the page jump control." },
+        "invalidPage": { "description": "Error message shown when the entered page number is invalid." },
+        "firstPage": { "description": "Accessible label for the 'First page' button." },
+        "lastPage": { "description": "Accessible label for the 'Last page' button." },
+        "previousPage": { "description": "Accessible label for the 'Previous page' button." },
+        "nextPage": { "description": "Accessible label for the 'Next page' button." },
+        "pageLabel": { "description": "Template announced when navigating. Supports <code>{page}</code> placeholder (e.g. 'Page {page}')." },
+        "morePages": { "description": "Text shown in the ellipsis element representing hidden page buttons." },
+        "loadMore": { "description": "Label for the 'Load more' button in infinite mode." },
+        "loading": { "description": "Text displayed while loading is in progress." },
+        "pageJumpHelp": { "description": "Help text for the page jump input. Supports <code>{totalPages}</code> placeholder." },
+        "infiniteLoadedItems": { "description": "Counter text in infinite mode. Supports <code>{loaded}</code> and <code>{total}</code> placeholders." },
+        "infiniteLoadEnd": { "description": "Text displayed when there are no more items to load in infinite mode." },
+        "a11yPagination": { "description": "ARIA label for the <code>&lt;nav&gt;</code> pagination region." },
+        "a11yMorePages": { "description": "ARIA label for the ellipsis element (more pages indicator)." },
+        "a11yPage": { "description": "Template used in the ARIA live region on navigation. Supports <code>{page}</code> placeholder." },
+        "a11yCurrentPage": { "description": "ARIA label for the active page button. Supports <code>{page}</code> placeholder (e.g. '{page}, current page')." },
+        "a11yGoToPage": { "description": "ARIA label for inactive page buttons. Supports <code>{page}</code> placeholder (e.g. 'Go to page {page}')." },
+        "a11yCurrentPageWithRange": { "description": "ARIA label when item range is visible. Supports <code>{page}</code>, <code>{totalPages}</code>, <code>{start}</code>, <code>{end}</code> and <code>{total}</code>." },
+        "a11yCurrentPageNoRange": { "description": "ARIA label when item range is not visible. Supports <code>{page}</code> and <code>{totalPages}</code> placeholders." },
+        "a11yFractionalPage": { "description": "ARIA label for the fractional page display. Supports <code>{page}</code> and <code>{totalPages}</code> placeholders." },
+        "a11yShowingItems": { "description": "ARIA announcement for the item range. Supports <code>{start}</code>, <code>{end}</code> and <code>{total}</code> placeholders." },
+        "a11yLoading": { "description": "ARIA live announcement made when a new page is loading." }
+      }
     },
     "keyboard": {
       "title": "KeyboardConfig",
-      "description": "Interface for keyboard navigation configuration"
+      "description": "Interface for keyboard navigation configuration",
+      "rows": {
+        "enabled": { "description": "Enable keyboard navigation for the paginator." },
+        "firstPage": { "description": "Keys to navigate to the first page. Default: <code>['Home']</code>." },
+        "lastPage": { "description": "Keys to navigate to the last page. Default: <code>['End']</code>." },
+        "previousPage": { "description": "Keys to navigate to the previous page. Default: <code>['ArrowLeft']</code>." },
+        "nextPage": { "description": "Keys to navigate to the next page. Default: <code>['ArrowRight']</code>." }
+      }
     },
     "loading": {
       "title": "LoadingConfig",
-      "description": "Interface for loading state configuration"
+      "description": "Interface for loading state configuration",
+      "rows": {
+        "showLoading": { "description": "Show a loading indicator while the paginator is waiting for data." },
+        "loadingDelay": { "description": "Delay in milliseconds before the loading indicator is shown." },
+        "disableOnLoading": { "description": "Disable all paginator controls while loading is active." }
+      }
     },
     "layout": {
       "title": "PaginatorLayout",
-      "description": "Interface for custom layout: organizes elements into areas (top, left, center, right, bottom)"
+      "description": "Interface for custom layout: organizes elements into areas (top, left, center, right, bottom)",
+      "rows": {
+        "top": { "description": "Elements placed in the top area." },
+        "left": { "description": "Elements placed in the left area." },
+        "center": { "description": "Elements placed in the center area." },
+        "right": { "description": "Elements placed in the right area." },
+        "bottom": { "description": "Elements placed in the bottom area." },
+        "direction": { "description": "Main layout direction: <code>'row'</code> (horizontal) or <code>'column'</code> (vertical)." },
+        "align": { "description": "Alignment of elements: <code>'start'</code>, <code>'center'</code>, <code>'end'</code>, <code>'space-between'</code> or <code>'space-around'</code>." },
+        "topConfig": { "description": "Alignment configuration for the top area (<code>vertical</code> and <code>horizontal</code>)." },
+        "bottomConfig": { "description": "Alignment configuration for the bottom area (<code>vertical</code> and <code>horizontal</code>)." },
+        "leftConfig": { "description": "Alignment configuration for the left area (<code>vertical</code> and <code>horizontal</code>)." },
+        "centerConfig": { "description": "Alignment configuration for the center area (<code>vertical</code> and <code>horizontal</code>)." },
+        "rightConfig": { "description": "Alignment configuration for the right area (<code>vertical</code> and <code>horizontal</code>)." },
+        "verticalAlign": { "description": "General vertical alignment for all areas: <code>'start'</code>, <code>'center'</code> or <code>'end'</code>." },
+        "gap": { "description": "Gap between layout areas (e.g. <code>'0.5rem'</code>, <code>'16px'</code>)." }
+      }
     },
     "icons": {
       "title": "navIcons",
-      "description": "Interface for customizable icons configuration"
+      "description": "Interface for customizable icons configuration",
+      "rows": {
+        "first": { "description": "Icon class for the first page button." },
+        "previous": { "description": "Icon class for the previous page button." },
+        "next": { "description": "Icon class for the next page button." },
+        "last": { "description": "Icon class for the last page button." },
+        "loadMore": { "description": "Icon class for the load more button in infinite mode." },
+        "loading": { "description": "Icon class for the loading spinner." },
+        "prefix": { "description": "Icon class prefix (e.g. <code>'ri-'</code>, <code>'fa-'</code>). Applied to all icon names." }
+      }
     },
     "infinite": {
       "title": "InfiniteConfig",
-      "description": "Interface for infinite scroll mode configuration"
+      "description": "Interface for infinite scroll mode configuration",
+      "rows": {
+        "enabled": { "description": "Enable infinite loading mode." },
+        "mode": { "description": "Type of infinite mode: <code>'scroll'</code> (auto on scroll), <code>'button'</code> (manual) or <code>'hybrid'</code>." },
+        "scrollOffset": { "description": "Distance in pixels from the bottom of the scroll container that triggers loading." },
+        "itemsPerLoad": { "description": "Number of items to load per batch." },
+        "maxItems": { "description": "Maximum total number of items to load before stopping." },
+        "showCounter": { "description": "Show a counter of loaded vs total items." },
+        "initialLoadedItems": { "description": "Number of items already loaded initially, used to synchronize the counter." },
+        "onLoadMore": { "description": "Callback invoked when more data needs to be loaded. Can return a Promise." }
+      }
+    },
+    "config": {
+      "title": "PaginatorConfig",
+      "description": "Global configuration object provided via <code>provideNUI({ paginator: { ... } })</code>. Values act as defaults for all paginator instances and can be overridden per instance via component inputs.",
+      "rows": {
+        "color": { "description": "Default color palette applied to all paginator buttons." },
+        "size": { "description": "Default size for paginator buttons." },
+        "variant": { "description": "Default visual variant (solid, outline, ghost)." },
+        "maxVisiblePages": { "description": "Maximum number of page buttons visible at once." },
+        "showFirstLast": { "description": "Whether to show the first and last page buttons by default." },
+        "showPageSizeSelector": { "description": "Whether to display the page size selector by default." },
+        "showItemRange": { "description": "Whether to display the item range indicator by default." },
+        "showPageJump": { "description": "Whether to display the page jump input by default." },
+        "pageSizeOptions": { "description": "Available options for the page size selector." },
+        "autoScroll": { "description": "Whether to automatically scroll to the top on page change." },
+        "scrollTarget": { "description": "Default CSS selector or element to scroll to on page change." },
+        "navDisplay": { "description": "How navigation buttons are displayed globally: <code>'icon'</code>, <code>'text'</code> or <code>'both'</code>." },
+        "navIcons": { "description": "Global custom icon classes for each navigation button." },
+        "navTexts": { "description": "Global custom texts overriding i18n translations for all paginator instances." },
+        "keyboard": { "description": "Global keyboard shortcut configuration for paginator controls." },
+        "loading": { "description": "Global loading state configuration (spinner, delay, disable on loading)." },
+        "layout": { "description": "Default desktop layout defining element placement in each area." },
+        "mobileLayout": { "description": "Default mobile layout optimized for small screens." },
+        "infinite": { "description": "Default infinite scroll or load-more configuration." }
+      }
     }
   },
   "styling": {

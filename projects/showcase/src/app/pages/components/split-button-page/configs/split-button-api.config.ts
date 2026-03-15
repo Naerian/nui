@@ -4,6 +4,25 @@ import { ComponentSection } from '../../../../core/models';
  * Configuración de la tab API del componente SplitButton
  */
 export const SPLIT_BUTTON_API_SECTIONS: ComponentSection[] = [
+  {
+    id: 'api-import',
+    title: 'common.import',
+    description: 'common.api.importComponent',
+    anchor: 'api-import',
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `import { SplitButtonComponent } from 'nui';
+
+@Component({
+  standalone: true,
+  imports: [SplitButtonComponent],
+})
+export class MyComponent {}`,
+        language: 'typescript',
+      },
+    ],
+  },
   // ── INPUTS ────────────────────────────────────────────────────────────────
   {
     id: 'api-inputs',

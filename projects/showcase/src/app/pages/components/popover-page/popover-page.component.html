@@ -193,7 +193,7 @@
                 <div class="example-preview flex-row align-items-center">
                   <nui-button
                     nuiPopover="Does not close when clicking outside. Use Escape or click the button."
-                    [nuiPopoverCloseOnClickOutside]="false"
+                    [nuiPopoverCloseOnOutsideClick]="false"
                   >
                     Click Outside OFF
                   </nui-button>
@@ -228,7 +228,7 @@
                   <nui-button
                     [nuiPopover]="backdropNoCloseTemplate"
                     [nuiPopoverBackdrop]="true"
-                    [nuiBackdropClose]="false"
+                    [nuiPopoverCloseOnBackdrop]="false"
                     nuiPopoverAriaLabel="Modal popover without backdrop close"
                   >
                     Backdrop without close

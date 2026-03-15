@@ -75,8 +75,8 @@
         "compact": {
           "description": "Reduce la barra a un indicador fino (6 px) y oculta el valor."
         },
-        "color": { "description": "Color sem\u00e1ntico del componente." },
-        "variant": { "description": "Variante visual: 'solid', 'outline', 'ghost'." },
+        "color": { "description": "Color sem\u00e1ntico del componente. Usa la configuración global o <code>primary</code> como respaldo." },
+        "variant": { "description": "Variante visual: 'solid', 'outline', 'ghost'. Usa la configuración global o <code>solid</code> como respaldo." },
         "value": { "description": "Valor actual del progreso." },
         "maxValue": { "description": "Valor m\u00e1ximo del progreso." },
         "indeterminate": { "description": "Activa la animaci\u00f3n de progreso indeterminado." },
@@ -129,6 +129,10 @@
     "context": {
       "title": "Bindings de contexto",
       "description": "Contexto de plantilla disponible para <code>slot=\"value\"</code> y <code>slot=\"label\"</code> (excepto <code>let-label</code>, exclusivo del slot label). Sintaxis: <code>let-nombre=\"clave\"</code>, excepto <code>$implicit</code>, que se enlaza con un <code>let-nombre</code> simple sin <code>=\"...\"</code>.",
+      "slots": {
+        "both": "value + label",
+        "labelOnly": "solo label"
+      },
       "rows": {
         "text": {
           "description": "Cadena pre-formateada (ej. <em>&quot;70 %&quot;</em>). Es el <code>$implicit</code> del contexto: el <strong>\u00fanico</strong> binding que <strong>no</strong> necesita <code>=&quot;...&quot;</code>, porque Angular lo mapea autom\u00e1ticamente con un <code>let-X</code> libre."

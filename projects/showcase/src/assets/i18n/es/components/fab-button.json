@@ -86,10 +86,6 @@
       "title": "Outputs",
       "description": "Eventos emitidos por el componente FAB Button para responder a interacciones del usuario."
     },
-    "computed": {
-      "title": "Computed Properties",
-      "description": "Propiedades computadas reactivas (Signals) que exponen el estado interno resuelto del componente."
-    },
     "types": {
       "title": "Tipos",
       "description": "Tipos TypeScript que definen los valores aceptados por los inputs del FAB Button."
@@ -104,7 +100,8 @@
     },
     "directives": {
       "title": "Directives de template",
-      "description": "Directivas standalone que permiten proyectar templates personalizados en el trigger y en cada item del FAB Button. Se importan y declaran igual que cualquier directiva Angular standalone."
+      "description": "Directivas standalone que permiten proyectar templates personalizados en el trigger y en cada item del FAB Button. Se importan y declaran igual que cualquier directiva Angular standalone.",
+      "note": "Ambas directivas son standalone. Añádelas al array <code>imports</code> de tu componente junto a <code>FabButtonComponent</code>."
     },
     "config": {
       "title": "Configuración global (FabButtonConfig)",

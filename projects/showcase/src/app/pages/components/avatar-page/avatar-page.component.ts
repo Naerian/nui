@@ -38,7 +38,7 @@ export class AvatarPageComponent extends BaseComponentPage {
       id: 'api',
       label: 'common.tabs.api',
       icon: 'ri-braces-line',
-      sections: ['api-inputs', 'api-outputs'],
+      sections: ['api-import', 'api-inputs', 'api-group-inputs', 'api-models'],
     },
     {
       id: 'theming',

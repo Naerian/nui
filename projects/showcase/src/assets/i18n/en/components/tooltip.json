@@ -38,11 +38,54 @@
   "api": {
     "inputs": {
       "title": "Inputs",
-      "description": "Input properties of the <code>nuiTooltip</code> directive"
+      "description": "Input properties of the <code>nuiTooltip</code> directive",
+      "rows": {
+        "nuiTooltip": {
+          "description": "Tooltip content. Accepts a plain string or an Angular <code>TemplateRef</code> for rich HTML content. Required."
+        },
+        "nuiTooltipPosition": {
+          "description": "Preferred position of the tooltip relative to the trigger element. Falls back to the global config value, then to <code>'top'</code>."
+        },
+        "nuiTooltipEvent": {
+          "description": "Interaction event that triggers the tooltip. Falls back to the global config value, then to <code>'hover'</code>."
+        },
+        "nuiTooltipShowDelay": {
+          "description": "Delay in milliseconds before the tooltip appears after the trigger event. Falls back to the global config value, then to <code>300</code>."
+        },
+        "nuiTooltipHideDelay": {
+          "description": "Delay in milliseconds before the tooltip hides after the trigger condition ends. Falls back to the global config value, then to <code>0</code>."
+        },
+        "nuiTooltipDisabled": {
+          "description": "When <code>true</code>, the tooltip is disabled and will not appear regardless of trigger events."
+        },
+        "nuiTooltipClass": {
+          "description": "Custom CSS class added to the tooltip overlay panel for additional styling."
+        },
+        "nuiTooltipShowArrow": {
+          "description": "Whether a directional arrow pointing to the trigger element is displayed. Falls back to the global config value, then to <code>true</code>."
+        },
+        "nuiTooltipAllowHtml": {
+          "description": "When <code>true</code>, the string content is rendered as HTML via <code>[innerHTML]</code>. Use with caution to avoid XSS. Falls back to the global config value, then to <code>false</code>."
+        },
+        "nuiTooltipInteractive": {
+          "description": "When <code>true</code>, the tooltip remains open while the cursor hovers over it, allowing interaction with its content. Falls back to the global config value, then to <code>false</code>."
+        }
+      }
     },
-    "outputs": {
-      "title": "Outputs",
-      "description": "Events emitted by the <code>nuiTooltip</code> directive"
+    "methods": {
+      "title": "Methods",
+      "description": "Public methods exposed by the <code>nuiTooltip</code> directive, accessible via a template reference variable (<code>#tooltip=\"nuiTooltip\"</code>).",
+      "rows": {
+        "show": {
+          "description": "Shows the tooltip immediately, respecting the configured show delay."
+        },
+        "hide": {
+          "description": "Hides the tooltip, respecting the configured hide delay."
+        },
+        "toggle": {
+          "description": "Toggles the tooltip visibility: shows it if hidden, hides it if visible."
+        }
+      }
     },
     "usage": {
       "title": "Usage examples",

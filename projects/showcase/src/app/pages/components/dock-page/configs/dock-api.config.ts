@@ -123,4 +123,54 @@ export const DOCK_API_SECTIONS: ComponentSection[] = [
       ],
     },
   },
+  {
+    id: 'api-dock-tab-config',
+    title: 'components.dock.api.dock-tab-config.title',
+    description: 'components.dock.api.dock-tab-config.description',
+    anchor: 'api-dock-tab-config',
+    note: {
+      type: 'info',
+      content: 'components.dock.api.dock-tab-config.note',
+    },
+    table: {
+      headers: [
+        'common.tables.property',
+        'common.tables.type',
+        'common.tables.default',
+        'common.tables.description',
+      ],
+      rows: [
+        [
+          '<code>prefixIcon</code>',
+          'string',
+          '<code class="neutral">undefined</code>',
+          'components.dock.api.dock-tab-config.rows.prefixIcon',
+        ],
+        [
+          '<code>suffixIcon</code>',
+          'string',
+          '<code class="neutral">undefined</code>',
+          'components.dock.api.dock-tab-config.rows.suffixIcon',
+        ],
+        [
+          '<code>hideSuffixIcon</code>',
+          'boolean',
+          '<code class="neutral">undefined</code>',
+          'components.dock.api.dock-tab-config.rows.hideSuffixIcon',
+        ],
+        [
+          '<code>label</code>',
+          'string',
+          '<code class="neutral">undefined</code>',
+          'components.dock.api.dock-tab-config.rows.label',
+        ],
+        [
+          '<code>cssClass</code>',
+          'string | string[]',
+          '<code class="neutral">undefined</code>',
+          'components.dock.api.dock-tab-config.rows.cssClass',
+        ],
+      ],
+    },
+  },
 ];

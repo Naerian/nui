@@ -136,6 +136,12 @@
         },
         "showWeekNumbers": {
           "description": "Muestra números de semana ISO-8601 en una columna a la izquierda. Clicables en modo WEEK o DAY múltiple para seleccionar la semana completa"
+        },
+        "overlayMode": {
+          "description": "Indica que el calendario está embebido dentro de un overlay (datepicker, popover). Ajusta el comportamiento del foco inicial y puede modificar la navegación de vista"
+        },
+        "autoClose": {
+          "description": "Si es true, emite selectFinished cuando la selección está completa. Útil para integración con datepicker o overlay para saber cuándo cerrar"
         }
       }
     },
@@ -151,10 +157,22 @@
         }
       }
     },
+    "directives": {
+      "title": "Directivas de contenido",
+      "description": "Directivas estructurales para proyectar plantillas personalizadas en el calendario",
+      "note": "Ambas directivas deben importarse en el componente consumidor. Importa <code>CalendarFooterDirective</code> para reemplazar el footer built-in y <code>CalendarDayDirective</code> para personalizar cada celda de día.",
+      "rows": {
+        "calendarFooter": { "description": "<strong>CalendarFooterDirective</strong> — Directiva marcador (<code>[nuiCalendarFooter]</code>) para proyectar una plantilla de footer personalizada que reemplaza el botón Hoy built-in. Recibe un <code>CalendarFooterContext</code> tipado con <code>value</code>, <code>viewMode</code> y <code>actions</code>." },
+        "calendarDay": { "description": "<strong>CalendarDayDirective</strong> — Directiva marcador (<code>[nuiCalendarDay]</code>) para personalizar el contenido visual de cada celda de día. El componente sigue gestionando todos los atributos ARIA y los eventos de teclado. Recibe un <code>CalendarDayContext</code> tipado con <code>$implicit</code> (CalendarDay), <code>day</code>, <code>isToday</code> y <code>status</code>." }
+      }
+    },
     "calendar-value": {
       "title": "CalendarValue",
       "description": "Unión de tipos que representa todos los posibles valores del calendario según el tipo seleccionado",
-      "note": "El tipo de valor devuelto depende del <code>type</code>: <strong>DAY</strong> devuelve <code>Date | null</code>, <strong>WEEK</strong> devuelve <code>{ start: Date, end: Date } | null</code>, y <strong>RANGE</strong> devuelve <code>{ start: Date, end: Date } | null</code>."
+      "note": "El tipo de valor devuelto depende del <code>type</code>: <strong>DAY</strong> devuelve <code>Date | null</code>, <strong>WEEK</strong> devuelve <code>{ start: Date, end: Date } | null</code>, y <strong>RANGE</strong> devuelve <code>{ start: Date, end: Date } | null</code>.",
+      "rows": {
+        "type": { "description": "Tipo de selección (DAY, WEEK, RANGE, MONTH, YEAR). Discriminante que determina qué propiedades adicionales están presentes en el valor devuelto." }
+      }
     },
     "calendar-type": {
       "title": "CalendarType",
@@ -204,8 +222,7 @@
       "description": "Interface para definir presets de rango rápido con etiqueta, rango de fechas e icono opcional",
       "rows": {
         "label": { "description": "Texto que se muestra en el botón" },
-        "start": { "description": "Fecha de inicio del rango" },
-        "end": { "description": "Fecha de fin del rango" }
+        "getValue": { "description": "Función que devuelve el rango de fechas del preset como <code>{ start: Date; end: Date }</code>. Se llama de forma diferida en cada interacción para que los rangos relativos (p. ej. 'últimos 7 días') estén siempre actualizados" }
       }
     },
     "footer-context": {

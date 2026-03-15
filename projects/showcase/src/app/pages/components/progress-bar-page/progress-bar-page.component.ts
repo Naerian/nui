@@ -71,7 +71,7 @@ export class ProgressBarPageComponent extends BaseComponentPage implements OnDes
       id: 'api',
       label: 'common.tabs.api',
       icon: 'ri-braces-line',
-      sections: ['api-inputs', 'api-templates', 'api-context'],
+      sections: ['api-import', 'api-inputs', 'api-templates', 'api-context'],
     },
     {
       id: 'theming',

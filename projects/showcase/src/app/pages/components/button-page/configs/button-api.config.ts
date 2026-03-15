@@ -6,6 +6,25 @@ import { ComponentSection } from '../../../../core/models';
  */
 export const BUTTON_API_SECTIONS: ComponentSection[] = [
   {
+    id: 'api-import',
+    title: 'common.import',
+    description: 'common.api.importComponent',
+    anchor: 'api-import',
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `import { ButtonComponent, ButtonDirective } from 'nui';
+
+@Component({
+  standalone: true,
+  imports: [ButtonComponent, ButtonDirective],
+})
+export class MyComponent {}`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
     id: 'api-inputs',
     title: 'components.button.api.inputs.title',
     description: 'components.button.api.inputs.description',
@@ -118,43 +137,32 @@ export const BUTTON_API_SECTIONS: ComponentSection[] = [
     },
   },
   {
-    id: 'api-computed',
-    title: 'components.button.api.computed.title',
-    description: 'components.button.api.computed.description',
-    anchor: 'computed',
+    id: 'api-directive',
+    title: 'components.button.api.directive.title',
+    description: 'components.button.api.directive.description',
+    anchor: 'directive',
     table: {
-      headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
+      headers: [
+        'common.tables.property',
+        'common.tables.type',
+        'common.tables.default',
+        'common.tables.description',
+      ],
       rows: [
-        [
-          '<code>effectiveColor</code>',
-          'Signal<NUIColor>',
-          'components.button.api.computed.rows.effectiveColor.description',
-        ],
-        [
-          '<code>effectiveSize</code>',
-          'Signal<NUISize>',
-          'components.button.api.computed.rows.effectiveSize.description',
-        ],
-        [
-          '<code>effectiveVariant</code>',
-          'Signal<NUIVariant>',
-          'components.button.api.computed.rows.effectiveVariant.description',
-        ],
-        [
-          '<code>hasVisibleContent</code>',
-          'Signal<boolean>',
-          'components.button.api.computed.rows.hasVisibleContent.description',
-        ],
-        [
-          '<code>isIconOnly</code>',
-          'Signal<boolean>',
-          'components.button.api.computed.rows.isIconOnly.description',
-        ],
-        [
-          '<code>computedAriaLabel</code>',
-          'Signal<string | null>',
-          'components.button.api.computed.rows.computedAriaLabel.description',
-        ],
+        ['<code>variant</code>', 'NUIVariant | "link"', '<code class="neutral">solid</code>', 'components.button.api.inputs.rows.variant.description'],
+        ['<code>shape</code>', 'NUIShape', '<code class="neutral">rounded</code>', 'components.button.api.inputs.rows.shape.description'],
+        ['<code>raised</code>', 'boolean', '<code class="neutral">false</code>', 'components.button.api.inputs.rows.raised.description'],
+        ['<code>color</code>', 'NUIColor', '<code class="neutral">primary</code>', 'components.button.api.inputs.rows.color.description'],
+        ['<code>size</code>', 'NUISize', '<code class="neutral">md</code>', 'components.button.api.inputs.rows.size.description'],
+        ['<code>prefixIcon</code>', 'string', '<code class="neutral">undefined</code>', 'components.button.api.inputs.rows.prefixIcon.description'],
+        ['<code>suffixIcon</code>', 'string', '<code class="neutral">undefined</code>', 'components.button.api.inputs.rows.suffixIcon.description'],
+        ['<code>loading</code>', 'boolean', '<code class="neutral">false</code>', 'components.button.api.inputs.rows.loading.description'],
+        ['<code>loadingPosition</code>', "'start' | 'center' | 'end'", '<code class="neutral">start</code>', 'components.button.api.inputs.rows.loadingPosition.description'],
+        ['<code>width</code>', "'auto' | 'full' | 'fit'", '<code class="neutral">auto</code>', 'components.button.api.inputs.rows.width.description'],
+        ['<code>disabled</code>', 'boolean', '<code class="neutral">false</code>', 'components.button.api.inputs.rows.disabled.description'],
+        ['<code>type</code>', "'button' | 'submit' | 'reset'", '<code class="neutral">button</code>', 'components.button.api.inputs.rows.type.description'],
+        ['<code>label</code>', 'string', '<code class="neutral">undefined</code>', 'components.button.api.inputs.rows.label.description'],
+        ['<code>onClick</code>', 'OutputEmitterRef<Event>', '-', 'components.button.api.outputs.rows.onClick.description'],
       ],
     },
   },

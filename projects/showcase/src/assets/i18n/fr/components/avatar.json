@@ -68,17 +68,57 @@
         "color": {
           "description": "Couleur d'arrière-plan quand aucune image n'est disponible (accepte les couleurs du thème ou personnalisées)"
         },
-        "textColor": {
-          "description": "Couleur du texte/icône (calculée automatiquement si non spécifiée)"
+        "bordered": {
+          "description": "Indique si l'avatar affiche une bordure visible (utilisé pour la séparation en groupes avec chevauchement)"
+        },
+        "tooltip": {
+          "description": "Texte de l'infobulle affiché au survol, également utilisé comme nom accessible principal"
         }
       }
     },
-    "outputs": {
-      "title": "Sorties du composant",
-      "description": "Événements émis par le composant auxquels vous pouvez réagir pour répondre aux erreurs de chargement d'image.",
+    "groupInputs": {
+      "title": "Entrées d'AvatarGroup",
+      "description": "Propriétés d'entrée du composant <code>nui-avatar-group</code> qui contrôlent la disposition et l'apparence du groupe d'avatars.",
+      "note": "Toutes les entrées visuelles de <code>nui-avatar-group</code> (<code>size</code>, <code>variant</code>, <code>color</code>, <code>bordered</code>) sont appliquées à chaque avatar du groupe, remplaçant les valeurs individuelles de <code>AvatarConfig</code>.",
       "rows": {
-        "imageError": {
-          "description": "Émis lorsque l'image ne peut pas être chargée. Le composant affiche automatiquement le repli."
+        "avatars": {
+          "description": "Tableau d'objets <code>AvatarConfig</code> définissant chaque avatar du groupe"
+        },
+        "max": {
+          "description": "Nombre maximum d'avatars visibles ; le reste est affiché comme un compteur '+N'"
+        },
+        "spacing": {
+          "description": "Espacement de chevauchement entre les avatars en pixels (valeur négative pour superposition)"
+        },
+        "layout": {
+          "description": "Mode de disposition du groupe d'avatars : <code>'stacked'</code> superpose les avatars, <code>'inline'</code> les place côte à côte"
+        },
+        "size": {
+          "description": "Taille appliquée à tous les avatars du groupe"
+        },
+        "variant": {
+          "description": "Variante de forme appliquée à tous les avatars du groupe"
+        },
+        "color": {
+          "description": "Couleur d'arrière-plan appliquée à tous les avatars du groupe"
+        },
+        "bordered": {
+          "description": "Indique si tous les avatars du groupe affichent une bordure visible"
+        },
+        "customSize": {
+          "description": "Taille personnalisée en pixels appliquée à tous les avatars du groupe (remplace size)"
+        }
+      }
+    },
+    "models": {
+      "title": "Modèles et types",
+      "description": "Types et interfaces publics exportés par le module avatar.",
+      "rows": {
+        "AvatarVariant": {
+          "description": "Type union pour les variantes de forme de l'avatar : <code>'circular'</code>, <code>'rounded'</code> ou <code>'square'</code>"
+        },
+        "AvatarConfig": {
+          "description": "Interface utilisée pour définir chaque élément d'avatar dans un <code>nui-avatar-group</code>"
         }
       }
     }

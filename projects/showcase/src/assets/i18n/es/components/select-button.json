@@ -45,11 +45,75 @@
     "description": "Documentación completa de inputs, outputs y uso avanzado del componente Select Button.",
     "inputs": {
       "title": "Inputs",
-      "description": "Propiedades del componente que controlan su comportamiento y apariencia."
+      "description": "Propiedades del componente que controlan su comportamiento y apariencia.",
+      "rows": {
+        "options": {
+          "description": "Array requerido de opciones. Acepta valores primitivos (strings, números) u objetos."
+        },
+        "mode": {
+          "description": "Modo de selección: <code>'radio'</code> para selección única o <code>'checkbox'</code> para selección múltiple."
+        },
+        "labelBy": {
+          "description": "Clave de propiedad del objeto opción que se usará como etiqueta visible del botón."
+        },
+        "valueBy": {
+          "description": "Clave de propiedad del objeto opción que se usará como valor interno."
+        },
+        "tooltipBy": {
+          "description": "Clave de propiedad del objeto opción que se usará como texto del tooltip del botón."
+        },
+        "iconBy": {
+          "description": "Clave de propiedad del objeto opción que contiene la clase CSS RemixIcon para el icono del botón."
+        },
+        "disabledBy": {
+          "description": "Clave de propiedad del objeto opción que indica si la opción está deshabilitada."
+        },
+        "iconOnly": {
+          "description": "Cuando es <code>true</code>, oculta las etiquetas de los botones y muestra solo iconos para un estilo de barra de herramientas compacta."
+        },
+        "variant": {
+          "description": "Variante visual del grupo de botones: <code>'solid'</code>, <code>'outline'</code>, <code>'ghost'</code> o <code>'segmented'</code>. Usa la configuración global o el default de la librería si no se especifica."
+        },
+        "color": {
+          "description": "Color del tema aplicado al grupo de botones. Usa la configuración global o el default de la librería (<code>'primary'</code>) si no se especifica."
+        },
+        "size": {
+          "description": "Tamaño del grupo de botones: <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> o <code>'xl'</code>. Usa la configuración global o el default de la librería (<code>'md'</code>) si no se especifica."
+        },
+        "width": {
+          "description": "Comportamiento del ancho del grupo: <code>'auto'</code> (ajustado al contenido) o <code>'full'</code> (100% del contenedor)."
+        },
+        "disabled": {
+          "description": "Cuando es <code>true</code>, deshabilita todo el grupo de botones e impide la interacción."
+        }
+      }
     },
     "outputs": {
       "title": "Outputs",
-      "description": "Eventos emitidos por el componente durante su ciclo de vida."
+      "description": "Eventos emitidos por el componente durante su ciclo de vida.",
+      "rows": {
+        "valueChange": {
+          "description": "Emitido cuando cambia la selección. Devuelve el valor seleccionado (modo radio) o un array de valores seleccionados (modo checkbox)."
+        }
+      }
+    },
+    "models": {
+      "title": "Modelos",
+      "description": "Tipos, enums e interfaces exportados por el componente Select Button.",
+      "rows": {
+        "SelectBtnMode": {
+          "description": "Tipo union para el modo de selección del grupo de botones."
+        },
+        "SelectBtnModeEnum": {
+          "description": "Enum con los valores de modo de selección disponibles: <code>RADIO</code> y <code>CHECKBOX</code>."
+        },
+        "SelectBtnVariant": {
+          "description": "Tipo union para la variante visual: extiende <code>NUIVariant</code> con el valor adicional <code>'segmented'</code>."
+        },
+        "SelectBtnOption": {
+          "description": "Interfaz para objetos opción con propiedades <code>label</code>, <code>value</code>, <code>icon</code> opcional y <code>disabled</code> opcional."
+        }
+      }
     }
   },
   "theming": {

@@ -115,29 +115,9 @@
         }
       }
     },
-    "computed": {
-      "title": "Propriétés calculées",
-      "description": "Propriétés calculées réactives (Signals) du composant.",
-      "rows": {
-        "effectiveColor": {
-          "description": "Couleur résolue (Entrée > Config globale > Valeur par défaut)"
-        },
-        "effectiveSize": {
-          "description": "Taille résolue (Entrée > Config globale > Valeur par défaut)"
-        },
-        "effectiveVariant": {
-          "description": "Variante résolue (Entrée > Config globale > Valeur par défaut)"
-        },
-        "hasVisibleContent": {
-          "description": "Vrai si le bouton a du contenu textuel ou un libellé"
-        },
-        "isIconOnly": {
-          "description": "Vrai si le bouton ne contient qu'une icône sans texte"
-        },
-        "computedAriaLabel": {
-          "description": "aria-label calculé automatiquement pour l'accessibilité"
-        }
-      }
+    "directive": {
+      "title": "API de la Directive",
+      "description": "ButtonDirective applique les styles de bouton aux éléments natifs. Sélecteur : <code>button[nuiButton]</code> / <code>a[nuiButton]</code>. Expose les mêmes entrées que ButtonComponent (sauf <code>title</code> et <code>ariaLabel</code>) ainsi que la sortie <code>onClick</code>."
     },
     "models": {
       "title": "Modèles",

@@ -60,9 +60,9 @@ export class FabButtonPageComponent extends BaseComponentPage {
       label: 'common.tabs.api',
       icon: 'ri-braces-line',
       sections: [
+        'api-import',
         'api-inputs',
         'api-outputs',
-        'api-computed',
         'api-types',
         'api-item',
         'api-item-resolved',

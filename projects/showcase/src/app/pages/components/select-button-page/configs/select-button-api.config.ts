@@ -6,6 +6,25 @@ import { ComponentSection } from '../../../../core/models';
  */
 export const SELECT_BUTTON_API_SECTIONS: ComponentSection[] = [
   {
+    id: 'api-import',
+    title: 'common.import',
+    description: 'common.api.importComponent',
+    anchor: 'api-import',
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `import { SelectButtonComponent } from 'nui';
+
+@Component({
+  standalone: true,
+  imports: [SelectButtonComponent],
+})
+export class MyComponent {}`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
     id: 'api-inputs',
     title: 'components.selectButton.api.inputs.title',
     description: 'components.selectButton.api.inputs.description',
@@ -20,75 +39,81 @@ export const SELECT_BUTTON_API_SECTIONS: ComponentSection[] = [
       rows: [
         [
           '<code>options</code>',
-          'T[]',
-          '<code class="neutral">[]</code>',
-          'Array de opciones (strings simples u objetos complejos)',
+          'any[]',
+          '-',
+          'components.selectButton.api.inputs.rows.options.description',
         ],
         [
           '<code>mode</code>',
           "'radio' | 'checkbox'",
           '<code class="neutral">radio</code>',
-          'Tipo de selección: única (radio) o múltiple (checkbox)',
+          'components.selectButton.api.inputs.rows.mode.description',
         ],
         [
           '<code>labelBy</code>',
-          'keyof T',
-          '<code class="neutral">undefined</code>',
-          'Propiedad del objeto a usar como etiqueta (solo para objetos)',
+          'string',
+          '<code class="neutral">label</code>',
+          'components.selectButton.api.inputs.rows.labelBy.description',
         ],
         [
           '<code>valueBy</code>',
-          'keyof T',
-          '<code class="neutral">undefined</code>',
-          'Propiedad del objeto a usar como valor (solo para objetos)',
+          'string',
+          '<code class="neutral">value</code>',
+          'components.selectButton.api.inputs.rows.valueBy.description',
+        ],
+        [
+          '<code>tooltipBy</code>',
+          'string',
+          '<code class="neutral">tooltip</code>',
+          'components.selectButton.api.inputs.rows.tooltipBy.description',
         ],
         [
           '<code>iconBy</code>',
-          'keyof T',
-          '<code class="neutral">undefined</code>',
-          'Propiedad del objeto con la clase de icono RemixIcon',
+          'string',
+          '<code class="neutral">icon</code>',
+          'components.selectButton.api.inputs.rows.iconBy.description',
         ],
         [
           '<code>disabledBy</code>',
-          'keyof T',
-          '<code class="neutral">undefined</code>',
-          'Propiedad del objeto que indica si está deshabilitado',
+          'string',
+          '<code class="neutral">disabled</code>',
+          'components.selectButton.api.inputs.rows.disabledBy.description',
         ],
         [
           '<code>iconOnly</code>',
           'boolean',
           '<code class="neutral">false</code>',
-          'Muestra solo iconos sin texto (botones compactos)',
+          'components.selectButton.api.inputs.rows.iconOnly.description',
         ],
         [
           '<code>variant</code>',
-          "NUIVariant | 'segmented'",
-          '<code class="neutral">solid</code>',
-          "Variante del botón: 'solid', 'outline', 'ghost', 'segmented'",
+          "SelectBtnVariant",
+          '<code class="neutral">undefined</code>',
+          'components.selectButton.api.inputs.rows.variant.description',
         ],
         [
           '<code>color</code>',
           'NUIColor',
-          '<code class="neutral">primary</code>',
-          "Color del tema: 'primary', 'secondary', 'accent', etc.",
+          '<code class="neutral">undefined</code>',
+          'components.selectButton.api.inputs.rows.color.description',
         ],
         [
           '<code>size</code>',
           'NUISize',
-          '<code class="neutral">md</code>',
-          "Tamaño: 'xs', 'sm', 'md', 'lg', 'xl'",
+          '<code class="neutral">undefined</code>',
+          'components.selectButton.api.inputs.rows.size.description',
         ],
         [
           '<code>width</code>',
           "'auto' | 'full'",
           '<code class="neutral">auto</code>',
-          'Ancho del grupo: auto (ajustado) o full (100%)',
+          'components.selectButton.api.inputs.rows.width.description',
         ],
         [
           '<code>disabled</code>',
           'boolean',
           '<code class="neutral">false</code>',
-          'Deshabilita todo el grupo de botones',
+          'components.selectButton.api.inputs.rows.disabled.description',
         ],
       ],
     },
@@ -103,8 +128,48 @@ export const SELECT_BUTTON_API_SECTIONS: ComponentSection[] = [
       rows: [
         [
           '<code>valueChange</code>',
-          'EventEmitter<T | T[]>',
-          'Emitido cuando cambia la selección. Retorna valor único (radio) o array (checkbox)',
+          'OutputEmitterRef<any>',
+          'components.selectButton.api.outputs.rows.valueChange.description',
+        ],
+      ],
+    },
+  },
+  {
+    id: 'api-models',
+    title: 'components.selectButton.api.models.title',
+    description: 'components.selectButton.api.models.description',
+    anchor: 'api-models',
+    table: {
+      headers: [
+        'common.tables.property',
+        'common.tables.type',
+        'common.tables.parameters',
+        'common.tables.description',
+      ],
+      rows: [
+        [
+          '<code>SelectBtnMode</code>',
+          'type',
+          "'radio' | 'checkbox'",
+          'components.selectButton.api.models.rows.SelectBtnMode.description',
+        ],
+        [
+          '<code>SelectBtnModeEnum</code>',
+          'enum',
+          '-',
+          'components.selectButton.api.models.rows.SelectBtnModeEnum.description',
+        ],
+        [
+          '<code>SelectBtnVariant</code>',
+          'type',
+          "NUIVariant | 'segmented'",
+          'components.selectButton.api.models.rows.SelectBtnVariant.description',
+        ],
+        [
+          '<code>SelectBtnOption</code>',
+          'interface',
+          '-',
+          'components.selectButton.api.models.rows.SelectBtnOption.description',
         ],
       ],
     },

@@ -38,11 +38,54 @@
   "api": {
     "inputs": {
       "title": "Eingaben",
-      "description": "Eingabeeigenschaften der <code>nuiTooltip</code>-Direktive"
+      "description": "Eingabeeigenschaften der <code>nuiTooltip</code>-Direktive",
+      "rows": {
+        "nuiTooltip": {
+          "description": "Inhalt des Tooltips. Akzeptiert eine einfache Zeichenkette oder ein Angular-<code>TemplateRef</code> für umfangreichen HTML-Inhalt. Pflichtfeld."
+        },
+        "nuiTooltipPosition": {
+          "description": "Bevorzugte Position des Tooltips relativ zum Auslöserelement. Fällt auf den globalen Konfigurationswert zurück, dann auf <code>'top'</code>."
+        },
+        "nuiTooltipEvent": {
+          "description": "Interaktionsereignis, das den Tooltip auslöst. Fällt auf den globalen Konfigurationswert zurück, dann auf <code>'hover'</code>."
+        },
+        "nuiTooltipShowDelay": {
+          "description": "Verzögerung in Millisekunden, bevor der Tooltip nach dem Auslöseereignis erscheint. Fällt auf den globalen Konfigurationswert zurück, dann auf <code>300</code>."
+        },
+        "nuiTooltipHideDelay": {
+          "description": "Verzögerung in Millisekunden, bevor der Tooltip sich ausblendet, nachdem die Auslösebedingung endet. Fällt auf den globalen Konfigurationswert zurück, dann auf <code>0</code>."
+        },
+        "nuiTooltipDisabled": {
+          "description": "Wenn <code>true</code>, ist der Tooltip deaktiviert und erscheint unabhängig von Auslöseereignissen nicht."
+        },
+        "nuiTooltipClass": {
+          "description": "Benutzerdefinierte CSS-Klasse, die dem Tooltip-Overlay-Panel für zusätzliche Stile hinzugefügt wird."
+        },
+        "nuiTooltipShowArrow": {
+          "description": "Gibt an, ob ein Richtungspfeil angezeigt wird, der auf das Auslöserelement zeigt. Fällt auf den globalen Konfigurationswert zurück, dann auf <code>true</code>."
+        },
+        "nuiTooltipAllowHtml": {
+          "description": "Wenn <code>true</code>, wird der Textinhalt als HTML über <code>[innerHTML]</code> gerendert. Mit Vorsicht verwenden, um XSS zu vermeiden. Fällt auf den globalen Konfigurationswert zurück, dann auf <code>false</code>."
+        },
+        "nuiTooltipInteractive": {
+          "description": "Wenn <code>true</code>, bleibt der Tooltip offen, während der Cursor ihn überstreicht, und ermöglicht die Interaktion mit seinem Inhalt. Fällt auf den globalen Konfigurationswert zurück, dann auf <code>false</code>."
+        }
+      }
     },
-    "outputs": {
-      "title": "Ausgaben",
-      "description": "Ereignisse, die von der <code>nuiTooltip</code>-Direktive ausgegeben werden"
+    "methods": {
+      "title": "Methoden",
+      "description": "Öffentliche Methoden der <code>nuiTooltip</code>-Direktive, zugänglich über eine Template-Referenzvariable (<code>#tooltip=\"nuiTooltip\"</code>).",
+      "rows": {
+        "show": {
+          "description": "Zeigt den Tooltip sofort an und berücksichtigt dabei die konfigurierte Einblendeverzögerung."
+        },
+        "hide": {
+          "description": "Blendet den Tooltip aus und berücksichtigt dabei die konfigurierte Ausblendeverzögerung."
+        },
+        "toggle": {
+          "description": "Schaltet die Sichtbarkeit des Tooltips um: zeigt ihn an, wenn er ausgeblendet ist, blendet ihn aus, wenn er sichtbar ist."
+        }
+      }
     },
     "usage": {
       "title": "Verwendungsbeispiele",

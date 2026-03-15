@@ -94,11 +94,8 @@
         "label": {
           "description": "Texto del botón trigger"
         },
-        "icon": {
-          "description": "Icono del botón (Remix Icon)"
-        },
-        "iconPosition": {
-          "description": "Posición del icono"
+        "prefixIcon": {
+          "description": "Clase de icono Remix Icon del botón trigger (por defecto <code>ri-menu-line</code> cuando no se define ni label ni prefixIcon)"
         },
         "iconSubmenu": {
           "description": "Icono para indicar submenú"
@@ -132,6 +129,19 @@
         },
         "menuClose": {
           "description": "Emitido cuando el menú se cierra"
+        }
+      }
+    },
+    "directives": {
+      "title": "Directivas de plantilla",
+      "description": "Directivas de atributo para proyectar contenido personalizado en la cabecera y el pie del menú.",
+      "note": "Estas directivas son standalone. Añade <code>MenuHeaderDirective</code> y <code>MenuFooterDirective</code> al array <code>imports</code> de tu componente.",
+      "rows": {
+        "menuHeader": {
+          "description": "Marca un elemento para situarlo en la parte superior del panel del menú, antes de la lista de items. Selector: <code>[menu-header]</code> o <code>[nuiMenuHeader]</code>."
+        },
+        "menuFooter": {
+          "description": "Marca un elemento para situarlo en la parte inferior del panel del menú, tras la lista de items. Selector: <code>[menu-footer]</code> o <code>[nuiMenuFooter]</code>."
         }
       }
     },

@@ -84,8 +84,8 @@
         "mode": "Auswahlmodus: 'HOUR_12', 'HOUR_24', 'HOUR_MINUTE_12', 'HOUR_MINUTE_24', 'DURATION'",
         "disabled": "Deaktivierter Zustand der Komponente",
         "title": "Benutzerdefinierter Titel im Header",
-        "showHeader": "Ob die Kopfzeile mit der formatierten Zeit oben im Selektor angezeigt wird. Unterstützt die Anpassung über <code>nuiTimeSelectorHeader</code>.",
-        "showFooter": "Ob die integrierte Fußzeile mit den Schaltflächen 'Löschen' und 'Jetzt' angezeigt wird. Unterstützt die Anpassung über <code>nuiTimeSelectorFooter</code>.",
+        "showHeader": "Ob die Kopfzeile mit der formatierten Zeit oben im Selektor angezeigt wird. Bei <code>undefined</code> wird die globale Konfiguration verwendet (Standard: <code>true</code>). Unterstützt die Anpassung über <code>nuiTimeSelectorHeader</code>.",
+        "showFooter": "Ob die integrierte Fußzeile mit den Schaltflächen 'Löschen' und 'Jetzt' angezeigt wird. Bei <code>undefined</code> wird die globale Konfiguration verwendet (Standard: <code>true</code>). Unterstützt die Anpassung über <code>nuiTimeSelectorFooter</code>.",
         "config": "Vollständige Konfiguration: Schritte, Bereiche, Voreinstellungen, Dauer usw.",
         "defaultStrategy": "Anfangswert-Strategie: 'now', 'smart', 'empty', 'custom'",
         "defaultValue": "Benutzerdefinierter Wert wenn strategy='custom'",
@@ -131,6 +131,8 @@
       }
     },
     "timeValue": {
+      "title": "TimeValue",
+      "description": "Interface für einen Tageszeit-Wert (Stunde, Minute und optionale AM/PM-Periode)",
       "rows": {
         "hour": "Stunde: 0–23 für 24h-Format, 1–12 für 12h-Format",
         "minute": "Minuten: 0–59",
@@ -138,6 +140,8 @@
       }
     },
     "durationValue": {
+      "title": "DurationValue",
+      "description": "Interface für ein Zeitintervall (Dauer) mit Stunden, Minuten und optionalen Sekunden",
       "rows": {
         "hours": "Stunden: 0–n (kein Höchstwert standardmäßig)",
         "minutes": "Minuten: 0–59",
@@ -145,6 +149,8 @@
       }
     },
     "timePreset": {
+      "title": "TimePreset",
+      "description": "Interface zur Definition von Schnellzeitvoreinstellungen (z. B. 'Jetzt', 'Mittag', 'Mitternacht')",
       "rows": {
         "label": "Text auf der Voreinstellungsschaltfläche",
         "time": "Zeitwert, auf den die Voreinstellung springt",
@@ -152,6 +158,8 @@
       }
     },
     "durationPreset": {
+      "title": "DurationPreset",
+      "description": "Interface zur Definition von Schnelldauervoreinstellungen (z. B. '15 Min.', '1 Stunde')",
       "rows": {
         "label": "Text auf der Voreinstellungsschaltfläche",
         "duration": "Dauerwert, auf den die Voreinstellung springt",
@@ -159,6 +167,8 @@
       }
     },
     "mode": {
+      "title": "TimeSelectorMode",
+      "description": "Union-Typ mit allen verfügbaren Auswahlmodi",
       "rows": {
         "HOUR_12": "Nur-Stunden-Auswahl im 12h-Format (AM/PM)",
         "HOUR_24": "Nur-Stunden-Auswahl im 24h-Format",
@@ -168,6 +178,8 @@
       }
     },
     "strategy": {
+      "title": "TimeSelectorStrategy",
+      "description": "Union-Typ mit den verfügbaren Anfangswert-Strategien",
       "rows": {
         "now": "Verwendet die aktuelle Zeit als Anfangswert",
         "smart": "Aktuelle Zeit + Versatz (mit smartOffset konfigurierbar)",
@@ -176,6 +188,8 @@
       }
     },
     "value": {
+      "title": "TimeSelectorValue",
+      "description": "Union-Typ, der mehrere Eingabeformate für den Picker-Wert akzeptiert",
       "rows": {
         "timeValue": "{ hour, minute, period? } – Für HOUR_*-Modi (Tageszeit)",
         "durationValue": "{ hours, minutes, seconds? } – Für den DURATION-Modus (Intervall)",
@@ -210,6 +224,8 @@
       }
     },
     "itemContext": {
+      "title": "TimeSelectorItemContext",
+      "description": "Template-Kontext in <code>[nuiTimeSelectorItem]</code>. Zugriff auf Eigenschaften mit <code>let-value</code>, <code>let-type=\"type\"</code> usw.",
       "rows": {
         "implicit": "Elementwert (Stunde oder Minute als Zahl, Periode als String 'AM'/'PM'). Zugriff mit <code>let-value</code>.",
         "type": "Spaltentyp, zu dem das Element gehört.",
@@ -218,6 +234,8 @@
       }
     },
     "footerContext": {
+      "title": "TimeSelectorFooterContext",
+      "description": "Template-Kontext in <code>[nuiTimeSelectorFooter]</code>. Zugriff auf Eigenschaften mit <code>let-currentTime</code> und <code>let-actions=\"actions\"</code>.",
       "rows": {
         "implicit": "Aktuell ausgewählter Wert im Picker. Zugriff mit <code>let-currentTime</code>.",
         "actionsClear": "Löscht den ausgewählten Wert und emittiert <code>null</code>.",
@@ -227,6 +245,8 @@
       }
     },
     "headerContext": {
+      "title": "TimeSelectorHeaderContext",
+      "description": "Template-Kontext in <code>[nuiTimeSelectorHeader]</code>. Zugriff auf Eigenschaften mit <code>let-currentTime</code>, <code>let-formattedTime=\"formattedTime\"</code> usw.",
       "rows": {
         "implicit": "Aktuell ausgewählter Wert. Zugriff mit <code>let-currentTime</code>.",
         "mode": "Aktiver Picker-Modus, z. B. <code>'HOUR_MINUTE_24'</code> oder <code>'DURATION'</code>.",

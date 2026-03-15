@@ -94,11 +94,8 @@
         "label": {
           "description": "Trigger button text"
         },
-        "icon": {
-          "description": "Button icon (Remix Icon)"
-        },
-        "iconPosition": {
-          "description": "Icon position"
+        "prefixIcon": {
+          "description": "Remix Icon class shown as the trigger button icon (defaults to <code>ri-menu-line</code> when neither label nor prefixIcon is set)"
         },
         "iconSubmenu": {
           "description": "Icon to indicate submenu"
@@ -132,6 +129,19 @@
         },
         "menuClose": {
           "description": "Emitted when the menu closes"
+        }
+      }
+    },
+    "directives": {
+      "title": "Template Directives",
+      "description": "Attribute directives for projecting custom content into the menu header and footer.",
+      "note": "These directives are standalone. Add <code>MenuHeaderDirective</code> and <code>MenuFooterDirective</code> to your component's <code>imports</code> array.",
+      "rows": {
+        "menuHeader": {
+          "description": "Marks an element to be placed at the top of the menu panel, before the item list. Selector: <code>[menu-header]</code> or <code>[nuiMenuHeader]</code>."
+        },
+        "menuFooter": {
+          "description": "Marks an element to be placed at the bottom of the menu panel, after the item list. Selector: <code>[menu-footer]</code> or <code>[nuiMenuFooter]</code>."
         }
       }
     },

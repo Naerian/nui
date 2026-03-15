@@ -115,29 +115,9 @@
         }
       }
     },
-    "computed": {
-      "title": "Berechnete Eigenschaften",
-      "description": "Reaktive berechnete Eigenschaften (Signals) der Komponente.",
-      "rows": {
-        "effectiveColor": {
-          "description": "Aufgelöste Farbe (Input > Globale Konfiguration > Standardwert)"
-        },
-        "effectiveSize": {
-          "description": "Aufgelöste Größe (Input > Globale Konfiguration > Standardwert)"
-        },
-        "effectiveVariant": {
-          "description": "Aufgelöste Variante (Input > Globale Konfiguration > Standardwert)"
-        },
-        "hasVisibleContent": {
-          "description": "Wahr, wenn die Schaltfläche Textinhalt oder ein Label hat"
-        },
-        "isIconOnly": {
-          "description": "Wahr, wenn die Schaltfläche nur ein Icon ohne Text enthält"
-        },
-        "computedAriaLabel": {
-          "description": "Automatisch berechnetes aria-label für die Barrierefreiheit"
-        }
-      }
+    "directive": {
+      "title": "Direktiven-API",
+      "description": "ButtonDirective wendet Button-Stile auf native Elemente an. Selektor: <code>button[nuiButton]</code> / <code>a[nuiButton]</code>. Stellt dieselben Inputs wie ButtonComponent bereit (außer <code>title</code> und <code>ariaLabel</code>) sowie den Output <code>onClick</code>."
     },
     "models": {
       "title": "Modelle",

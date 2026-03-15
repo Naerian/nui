@@ -41,7 +41,7 @@ export class DockPageComponent extends BaseComponentPage {
       id: 'api',
       label: 'common.tabs.api',
       icon: 'ri-file-list-3-line',
-      sections: ['api-service', 'api-dock-item'],
+      sections: ['api-service', 'api-dock-item', 'api-dock-tab-config'],
     },
     {
       id: 'theming',

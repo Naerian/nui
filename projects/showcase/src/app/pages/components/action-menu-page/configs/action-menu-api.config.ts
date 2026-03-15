@@ -6,6 +6,25 @@ import { ComponentSection } from '../../../../core/models';
  */
 export const ACTION_MENU_API_SECTIONS: ComponentSection[] = [
   {
+    id: 'api-import',
+    title: 'common.import',
+    description: 'common.api.importComponent',
+    anchor: 'api-import',
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `import { ActionMenuComponent, MenuHeaderDirective, MenuFooterDirective } from 'nui';
+
+@Component({
+  standalone: true,
+  imports: [ActionMenuComponent, MenuHeaderDirective, MenuFooterDirective],
+})
+export class MyComponent {}`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
     id: 'api-inputs',
     title: 'components.actionMenu.api.inputs.title',
     description: 'components.actionMenu.api.inputs.description',
@@ -45,7 +64,7 @@ export const ACTION_MENU_API_SECTIONS: ComponentSection[] = [
         [
           '<code>variant</code>',
           'NUIVariant',
-          '<code class="neutral">solid</code>',
+          '<code class="neutral">ghost</code>',
           'components.actionMenu.api.inputs.rows.variant.description',
         ],
         [
@@ -73,16 +92,10 @@ export const ACTION_MENU_API_SECTIONS: ComponentSection[] = [
           'components.actionMenu.api.inputs.rows.label.description',
         ],
         [
-          '<code>icon</code>',
+          '<code>prefixIcon</code>',
           'string',
           '<code class="neutral">undefined</code>',
-          'components.actionMenu.api.inputs.rows.icon.description',
-        ],
-        [
-          '<code>iconPosition</code>',
-          "'start' | 'end'",
-          '<code class="neutral">start</code>',
-          'components.actionMenu.api.inputs.rows.iconPosition.description',
+          'components.actionMenu.api.inputs.rows.prefixIcon.description',
         ],
         [
           '<code>iconSubmenu</code>',
@@ -105,13 +118,13 @@ export const ACTION_MENU_API_SECTIONS: ComponentSection[] = [
         [
           '<code>offset</code>',
           'number',
-          '<code class="neutral">5</code>',
+          '<code class="neutral">4</code>',
           'components.actionMenu.api.inputs.rows.offset.description',
         ],
         [
           '<code>offsetSubmenu</code>',
           'number',
-          '<code class="neutral">10</code>',
+          '<code class="neutral">4</code>',
           'components.actionMenu.api.inputs.rows.offsetSubmenu.description',
         ],
       ],
@@ -137,6 +150,26 @@ export const ACTION_MENU_API_SECTIONS: ComponentSection[] = [
         ],
         ['<code>menuOpen</code>', 'EventEmitter<void>', 'components.actionMenu.api.outputs.rows.menuOpen.description'],
         ['<code>menuClose</code>', 'EventEmitter<void>', 'components.actionMenu.api.outputs.rows.menuClose.description'],
+      ],
+    },
+  },
+  {
+    id: 'api-directives',
+    title: 'components.actionMenu.api.directives.title',
+    description: 'components.actionMenu.api.directives.description',
+    anchor: 'api-directives',
+    note: { type: 'info', content: 'components.actionMenu.api.directives.note' },
+    table: {
+      headers: ['common.tables.directive', 'common.tables.description'],
+      rows: [
+        [
+          '<code>[menu-header]</code> / <code>[nuiMenuHeader]</code>',
+          'components.actionMenu.api.directives.rows.menuHeader.description',
+        ],
+        [
+          '<code>[menu-footer]</code> / <code>[nuiMenuFooter]</code>',
+          'components.actionMenu.api.directives.rows.menuFooter.description',
+        ],
       ],
     },
   },

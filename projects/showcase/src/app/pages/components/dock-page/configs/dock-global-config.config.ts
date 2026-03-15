@@ -29,7 +29,7 @@ export const DOCK_GLOBAL_CONFIG_SECTIONS: ComponentSection[] = [
         [
           '<code>maxVisibleChips</code>',
           'number | undefined',
-          'undefined',
+          '4',
           'components.dock.globalConfig.options.rows.maxVisibleChips',
         ],
       ],

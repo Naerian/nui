@@ -45,11 +45,75 @@
     "description": "Vollständige Dokumentation der Inputs, Outputs und erweiterten Verwendung der Select-Button-Komponente.",
     "inputs": {
       "title": "Inputs",
-      "description": "Komponenteneigenschaften, die ihr Verhalten und Erscheinungsbild steuern."
+      "description": "Komponenteneigenschaften, die ihr Verhalten und Erscheinungsbild steuern.",
+      "rows": {
+        "options": {
+          "description": "Erforderliches Array von Optionen. Akzeptiert primitive Werte (Strings, Zahlen) oder Objekte."
+        },
+        "mode": {
+          "description": "Auswahlmodus: <code>'radio'</code> für Einzelauswahl oder <code>'checkbox'</code> für Mehrfachauswahl."
+        },
+        "labelBy": {
+          "description": "Eigenschaftsschlüssel des Optionsobjekts, der als sichtbare Schaltflächenbeschriftung verwendet wird."
+        },
+        "valueBy": {
+          "description": "Eigenschaftsschlüssel des Optionsobjekts, der als interner Wert verwendet wird."
+        },
+        "tooltipBy": {
+          "description": "Eigenschaftsschlüssel des Optionsobjekts, der als Tooltip-Text der Schaltfläche verwendet wird."
+        },
+        "iconBy": {
+          "description": "Eigenschaftsschlüssel des Optionsobjekts, der die RemixIcon-CSS-Klasse für das Schaltflächensymbol enthält."
+        },
+        "disabledBy": {
+          "description": "Eigenschaftsschlüssel des Optionsobjekts, der angibt, ob die Option deaktiviert ist."
+        },
+        "iconOnly": {
+          "description": "Wenn <code>true</code>, werden Schaltflächenbeschriftungen ausgeblendet und nur Symbole für einen kompakten Symbolleistenstil angezeigt."
+        },
+        "variant": {
+          "description": "Visuelle Variante der Schaltflächengruppe: <code>'solid'</code>, <code>'outline'</code>, <code>'ghost'</code> oder <code>'segmented'</code>. Verwendet die globale Konfiguration oder den Bibliotheksstandard, wenn nicht angegeben."
+        },
+        "color": {
+          "description": "Farbthema für die Schaltflächengruppe. Verwendet die globale Konfiguration oder den Bibliotheksstandard (<code>'primary'</code>), wenn nicht angegeben."
+        },
+        "size": {
+          "description": "Größe der Schaltflächengruppe: <code>'xs'</code>, <code>'sm'</code>, <code>'md'</code>, <code>'lg'</code> oder <code>'xl'</code>. Verwendet die globale Konfiguration oder den Bibliotheksstandard (<code>'md'</code>), wenn nicht angegeben."
+        },
+        "width": {
+          "description": "Breitenverhalten der Gruppe: <code>'auto'</code> (inhaltsbegrenzt) oder <code>'full'</code> (100% des Containers)."
+        },
+        "disabled": {
+          "description": "Wenn <code>true</code>, wird die gesamte Schaltflächengruppe deaktiviert und Interaktionen werden verhindert."
+        }
+      }
     },
     "outputs": {
       "title": "Outputs",
-      "description": "Ereignisse, die von der Komponente während ihres Lebenszyklus ausgelöst werden."
+      "description": "Ereignisse, die von der Komponente während ihres Lebenszyklus ausgelöst werden.",
+      "rows": {
+        "valueChange": {
+          "description": "Wird ausgelöst, wenn sich die Auswahl ändert. Gibt den ausgewählten Wert (Radio-Modus) oder ein Array ausgewählter Werte (Checkbox-Modus) zurück."
+        }
+      }
+    },
+    "models": {
+      "title": "Modelle",
+      "description": "Typen, Enums und Interfaces, die von der Select-Button-Komponente exportiert werden.",
+      "rows": {
+        "SelectBtnMode": {
+          "description": "Union-Typ für den Auswahlmodus der Schaltflächengruppe."
+        },
+        "SelectBtnModeEnum": {
+          "description": "Enum mit den verfügbaren Auswahlmoduswerten: <code>RADIO</code> und <code>CHECKBOX</code>."
+        },
+        "SelectBtnVariant": {
+          "description": "Union-Typ für die visuelle Variante: erweitert <code>NUIVariant</code> um den zusätzlichen Wert <code>'segmented'</code>."
+        },
+        "SelectBtnOption": {
+          "description": "Interface für Optionsobjekte mit den Eigenschaften <code>label</code>, <code>value</code>, optionalem <code>icon</code> und optionalem <code>disabled</code>."
+        }
+      }
     }
   },
   "theming": {

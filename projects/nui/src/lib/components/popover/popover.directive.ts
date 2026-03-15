@@ -71,7 +71,7 @@ import { injectPopoverConfig, NUIColor, NUIVariant } from '../../configs';
  *   nuiPopoverPosition="right"
  *   [nuiPopoverShowDelay]="200"
  *   [nuiPopoverMaxWidth]="'400px'"
- *   [nuiPopoverCloseOnClickOutside]="true">
+ *   [nuiPopoverCloseOnOutsideClick]="true">
  *   Configurado
  * </button>
  */
@@ -182,7 +182,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
    * Cierra el popover al hacer click fuera
    * @default true (o valor global configurado)
    */
-  readonly nuiPopoverCloseOnClickOutside = input<boolean | undefined>(undefined);
+  readonly nuiPopoverCloseOnOutsideClick = input<boolean | undefined>(undefined);
 
   /**
    * Cierra el popover al presionar Escape
@@ -252,7 +252,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
    * Solo tiene efecto si nuiPopoverBackdrop=true
    * @default true
    */
-  readonly nuiBackdropClose = input(true);
+  readonly nuiPopoverCloseOnBackdrop = input(true);
 
   /**
    * Z-index del popover (útil para controlar el orden de apilamiento)
@@ -295,7 +295,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
 
   private readonly closeOnClickOutside = computed(
     () =>
-      this.nuiPopoverCloseOnClickOutside() ??
+      this.nuiPopoverCloseOnOutsideClick() ??
       this.globalConfig?.closeOnClickOutside ??
       true
   );
@@ -696,7 +696,7 @@ export class PopoverDirective implements OnInit, OnDestroy {
     }
 
     // Listener para clicks en el backdrop (si está habilitado)
-    if (this.nuiPopoverBackdrop() && this.nuiBackdropClose()) {
+    if (this.nuiPopoverBackdrop() && this.nuiPopoverCloseOnBackdrop()) {
       this.overlayRef
         .backdropClick()
         .pipe(takeUntilDestroyed(this.destroyRef))

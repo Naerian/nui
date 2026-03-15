@@ -37,7 +37,7 @@ export class TooltipPageComponent extends BaseComponentPage {
       id: 'api',
       label: 'common.tabs.api',
       icon: 'ri-braces-line',
-      sections: ['api-inputs', 'api-outputs', 'api-usage'],
+      sections: ['api-import', 'api-inputs', 'api-methods', 'api-usage'],
     },
     {
       id: 'theming',

@@ -41,12 +41,12 @@
     "closeOptions": {
       "title": "Opciones de cierre",
       "description": "Controla cómo se puede cerrar el popover: click fuera, tecla Escape, o permitir múltiples popovers abiertos simultáneamente.",
-      "note": "Utiliza <code>nuiPopoverCloseOnClickOutside</code> para cerrar al hacer click fuera, <code>nuiPopoverCloseOnEscape</code> para cerrar con Escape, y <code>nuiPopoverAllowMultiple</code> para permitir múltiples popovers abiertos a la vez."
+      "note": "Utiliza <code>nuiPopoverCloseOnOutsideClick</code> para cerrar al hacer click fuera, <code>nuiPopoverCloseOnEscape</code> para cerrar con Escape, y <code>nuiPopoverAllowMultiple</code> para permitir múltiples popovers abiertos a la vez."
     },
     "backdrop": {
       "title": "Backdrop",
       "description": "Agrega un fondo oscuro detrás del popover para crear una experiencia modal. Puedes controlar si el click en el backdrop cierra o no el popover.",
-      "note": "Usa <code>nuiPopoverBackdrop</code> para habilitar / deshabilitar el backdrop y <code>nuiBackdropClose</code> para controlar si el click en el backdrop cierra el popover."
+      "note": "Usa <code>nuiPopoverBackdrop</code> para habilitar / deshabilitar el backdrop y <code>nuiPopoverCloseOnBackdrop</code> para controlar si el click en el backdrop cierra el popover."
     },
     "disabled": {
       "title": "Estado deshabilitado",
@@ -57,23 +57,84 @@
   "api": {
     "inputs": {
       "title": "Inputs",
-      "description": "Propiedades de entrada de la directiva <code>nuiPopover</code>"
+      "description": "Propiedades de entrada de la directiva <code>nuiPopover</code>",
+      "rows": {
+        "nuiPopover": { "description": "Texto simple, template Angular (<code>TemplateRef</code>) o componente dinámico (<code>Type&lt;any&gt;</code>) a renderizar dentro del popover" },
+        "nuiPopoverPosition": { "description": "Posición preferida respecto al elemento trigger. Se reposiciona automáticamente si no hay espacio suficiente" },
+        "nuiPopoverEvent": { "description": "Evento que dispara el popover: <code>'click'</code> (por defecto), <code>'hover'</code>, o <code>'focus'</code>" },
+        "nuiPopoverColor": { "description": "Color semántico NUI para el panel del popover" },
+        "nuiPopoverVariant": { "description": "Variante visual NUI para el panel del popover" },
+        "nuiPopoverShowDelay": { "description": "Delay en milisegundos antes de mostrar el popover" },
+        "nuiPopoverHideDelay": { "description": "Delay en milisegundos antes de ocultar el popover. En modo hover sin configuración explícita, se aplica automáticamente un mínimo de 100ms para permitir mover el cursor al popover" },
+        "nuiPopoverDisabled": { "description": "Desactiva el popover completamente — no se procesan eventos" },
+        "nuiPopoverClass": { "description": "Clase CSS personalizada añadida al contenedor del panel del popover" },
+        "nuiPopoverShowArrow": { "description": "Muestra una flecha apuntando al elemento trigger" },
+        "nuiPopoverCloseOnOutsideClick": { "description": "Cierra el popover al hacer click fuera del panel" },
+        "nuiPopoverCloseOnEscape": { "description": "Cierra el popover al presionar la tecla Escape" },
+        "nuiPopoverMaxWidth": { "description": "Anchura máxima del popover (cualquier valor CSS de longitud)" },
+        "nuiPopoverMinWidth": { "description": "Anchura mínima del popover (cualquier valor CSS de longitud)" },
+        "nuiPopoverOffset": { "description": "Distancia en píxeles entre el panel del popover y el elemento trigger" },
+        "nuiPopoverData": { "description": "Datos arbitrarios pasados a un componente dinámico o template a través del contexto" },
+        "nuiPopoverAllowMultiple": { "description": "Permite múltiples popovers abiertos simultáneamente. Cuando es <code>false</code>, abrir un popover cierra todos los demás" },
+        "nuiPopoverBackdrop": { "description": "Muestra un fondo oscuro translúcido detrás del panel del popover" },
+        "nuiPopoverCloseOnBackdrop": { "description": "Cierra el popover al hacer click en el backdrop (solo efectivo cuando <code>nuiPopoverBackdrop</code> es <code>true</code>)" },
+        "nuiPopoverZIndex": { "description": "Z-index del overlay del popover para controlar el orden de apilamiento" },
+        "nuiPopoverAriaLabel": { "description": "Etiqueta accesible (<code>aria-label</code>) para el panel <code>role=\"dialog\"</code>. Necesaria para contenido de template o componente donde el texto no se puede derivar automáticamente" },
+        "nuiPopoverAriaLabelledBy": { "description": "ID de un elemento de encabezado visible dentro del popover que sirve como nombre accesible (<code>aria-labelledby</code>). Tiene precedencia sobre <code>nuiPopoverAriaLabel</code>" }
+      }
     },
     "outputs": {
       "title": "Outputs",
-      "description": "Eventos emitidos por la directiva <code>nuiPopover</code>"
+      "description": "Eventos emitidos por la directiva <code>nuiPopover</code>",
+      "rows": {
+        "nuiPopoverShow": { "description": "Se emite cuando el popover se hace visible" },
+        "nuiPopoverHide": { "description": "Se emite cuando el popover se oculta" }
+      }
+    },
+    "methods": {
+      "title": "Métodos",
+      "description": "Métodos públicos de la directiva <code>nuiPopover</code>, accesibles mediante referencia de plantilla.",
+      "note": "Accede a la instancia de la directiva con referencia de plantilla: <code>#myPopover=\"nuiPopover\"</code>, luego llama a <code>myPopover.show()</code>, etc.",
+      "rows": {
+        "show": { "description": "Muestra el popover. Devuelve <code>true</code> si el proceso se inició, <code>false</code> si ya era visible o está deshabilitado" },
+        "hide": { "description": "Oculta el popover. Devuelve <code>true</code> si el proceso se inició, <code>false</code> si ya estaba oculto" },
+        "toggle": { "description": "Alterna la visibilidad del popover (mostrar ↔ ocultar)" },
+        "isOpen": { "description": "Devuelve <code>true</code> si el popover está actualmente visible" }
+      }
     },
     "config": {
       "title": "PopoverConfig",
-      "description": "Interface para configuración global del popover mediante <code>provideNUI({ popover: {...} })</code>"
+      "description": "Interface para configuración global del popover mediante <code>provideNUI({ popover: {...} })</code>",
+      "rows": {
+        "position": { "description": "Posición por defecto respecto al elemento trigger" },
+        "event": { "description": "Evento trigger por defecto" },
+        "showDelay": { "description": "Delay por defecto antes de mostrar (ms)" },
+        "hideDelay": { "description": "Delay por defecto antes de ocultar (ms)" },
+        "disabled": { "description": "Deshabilitado por defecto" },
+        "popoverClass": { "description": "Clase CSS por defecto aplicada al popover" },
+        "showArrow": { "description": "Mostrar flecha por defecto" },
+        "closeOnClickOutside": { "description": "Cerrar al hacer click fuera por defecto" },
+        "closeOnEscape": { "description": "Cerrar con Escape por defecto" },
+        "maxWidth": { "description": "Anchura máxima por defecto" },
+        "minWidth": { "description": "Anchura mínima por defecto" },
+        "allowMultiple": { "description": "Permitir múltiples popovers abiertos simultáneamente por defecto" }
+      }
     },
     "context": {
       "title": "PopoverContext",
-      "description": "Interface del contexto disponible en templates del popover mediante <code>let-close=\"close\"</code> y <code>let-data=\"data\"</code>"
+      "description": "Interface del contexto disponible en templates del popover mediante <code>let-close=\"close\"</code> y <code>let-data=\"data\"</code>",
+      "rows": {
+        "close": { "description": "Función para cerrar el popover desde el interior del template o componente" },
+        "data": { "description": "Datos opcionales pasados al popover desde el componente padre a través de <code>nuiPopoverData</code>" }
+      }
     },
     "tokens": {
       "title": "Tokens de inyección",
-      "description": "Tokens para inyectar datos y funciones en componentes dinámicos del popover"
+      "description": "Tokens para inyectar datos y funciones en componentes dinámicos del popover",
+      "rows": {
+        "POPOVER_DATA": { "description": "Token de inyección para los datos pasados a un componente de popover dinámico. Inyectar con <code>inject(POPOVER_DATA)</code>" },
+        "POPOVER_CLOSE": { "description": "Token de inyección para la función de cierre del popover. Inyectar con <code>inject(POPOVER_CLOSE)</code>" }
+      }
     }
   },
   "theming": {

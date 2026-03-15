@@ -75,8 +75,8 @@
         "compact": {
           "description": "Reduziert die Leiste auf einen d\u00fcnnen Indikator (6\u202fpx) und blendet den Wert aus."
         },
-        "color": { "description": "Semantische Farbe der Komponente." },
-        "variant": { "description": "Visuelle Variante: 'solid', 'outline', 'ghost'." },
+        "color": { "description": "Semantische Farbe der Komponente. Verwendet die globale Konfiguration oder <code>primary</code> als Fallback." },
+        "variant": { "description": "Visuelle Variante: 'solid', 'outline', 'ghost'. Verwendet die globale Konfiguration oder <code>solid</code> als Fallback." },
         "value": { "description": "Aktueller Fortschrittswert." },
         "maxValue": { "description": "Maximaler Fortschrittswert." },
         "indeterminate": { "description": "Aktiviert die unbestimmte Fortschrittsanimation." },
@@ -129,6 +129,10 @@
     "context": {
       "title": "Kontext-Bindungen",
       "description": "Template-Kontext f\u00fcr <code>slot=\"value\"</code> und <code>slot=\"label\"</code> (au\u00dfer <code>let-label</code>, das exklusiv f\u00fcr den label-Slot ist). Syntax: <code>let-Name=\"Schl\u00fcssel\"</code> &mdash; au\u00dfer <code>$implicit</code>, das mit einem einfachen <code>let-Name</code> ohne <code>=\"...\"</code> gebunden wird.",
+      "slots": {
+        "both": "value + label",
+        "labelOnly": "nur label"
+      },
       "rows": {
         "text": {
           "description": "Vorformatierter Wert-String (z.\u202fB. <em>&quot;70 %&quot;</em>). Dies ist der <code>$implicit</code> des Kontexts: das <strong>einzige</strong> Binding, das <strong>kein</strong> <code>=&quot;...&quot;</code> ben\u00f6tigt, da Angular es automatisch mit einem einfachen <code>let-X</code> einbindet."

@@ -68,17 +68,57 @@
         "color": {
           "description": "Color de fondo cuando no hay imagen (acepta colores del tema o personalizados)"
         },
-        "textColor": {
-          "description": "Color del texto/icono (se calcula automáticamente si no se especifica)"
+        "bordered": {
+          "description": "Si el avatar muestra un borde visible (usado para la separación en grupos con superposición)"
+        },
+        "tooltip": {
+          "description": "Texto del tooltip al pasar el ratón, usado también como nombre accesible principal"
         }
       }
     },
-    "outputs": {
-      "title": "Outputs del componente",
-      "description": "Eventos emitidos por el componente que puedes escuchar para reaccionar a errores de carga de imagen.",
+    "groupInputs": {
+      "title": "Inputs de AvatarGroup",
+      "description": "Propiedades de entrada del componente <code>nui-avatar-group</code> que controlan el layout y la apariencia del grupo de avatares.",
+      "note": "Todos los inputs visuales de <code>nui-avatar-group</code> (<code>size</code>, <code>variant</code>, <code>color</code>, <code>bordered</code>) se aplican a cada avatar del grupo, sobrescribiendo los valores individuales de <code>AvatarConfig</code>.",
       "rows": {
-        "imageError": {
-          "description": "Emitido cuando la imagen no se puede cargar. El componente automáticamente muestra el fallback."
+        "avatars": {
+          "description": "Array de objetos <code>AvatarConfig</code> que definen cada avatar del grupo"
+        },
+        "max": {
+          "description": "Número máximo de avatares visibles; el resto se muestra como un contador '+N'"
+        },
+        "spacing": {
+          "description": "Espaciado de superposición entre avatares en píxeles (valor negativo provoca solapamiento)"
+        },
+        "layout": {
+          "description": "Modo de layout del grupo de avatares: <code>'stacked'</code> superpone los avatares, <code>'inline'</code> los coloca en línea"
+        },
+        "size": {
+          "description": "Tamaño aplicado a todos los avatares del grupo"
+        },
+        "variant": {
+          "description": "Variante de forma aplicada a todos los avatares del grupo"
+        },
+        "color": {
+          "description": "Color de fondo aplicado a todos los avatares del grupo"
+        },
+        "bordered": {
+          "description": "Si todos los avatares del grupo muestran un borde visible"
+        },
+        "customSize": {
+          "description": "Tamaño personalizado en píxeles aplicado a todos los avatares del grupo (sobrescribe size)"
+        }
+      }
+    },
+    "models": {
+      "title": "Modelos y tipos",
+      "description": "Tipos e interfaces públicos exportados por el módulo de avatar.",
+      "rows": {
+        "AvatarVariant": {
+          "description": "Tipo unión para las variantes de forma del avatar: <code>'circular'</code>, <code>'rounded'</code> o <code>'square'</code>"
+        },
+        "AvatarConfig": {
+          "description": "Interfaz usada para definir cada elemento de avatar dentro de un <code>nui-avatar-group</code>"
         }
       }
     }

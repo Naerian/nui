@@ -97,8 +97,8 @@
       }
     },
     "ref": {
-      "title": "SidebarPanelRef",
-      "description": "La referencia devuelta por <code>open()</code>. Úsala para cerrar el modal, escuchar eventos y observar los cambios de ciclo de vida.",
+      "title": "SidebarPanelRef — Propiedades",
+      "description": "Propiedades de solo lectura expuestas por la referencia devuelta por <code>open()</code>.",
       "rows": {
         "id": "Identificador único de la instancia del panel.",
         "componentInstance": "Referencia a la instancia del componente cargado dinámicamente, o <code>null</code> si aún no se ha renderizado.",
@@ -123,6 +123,10 @@
         "closePrevented": "Observable que emite cuando un intento de cierre es bloqueado por el guard <code>preventClose</code>."
       }
     },
+    "ref-methods": {
+      "title": "SidebarPanelRef — Métodos",
+      "description": "Métodos disponibles en la referencia devuelta por <code>open()</code>. Úsalos para controlar el ciclo de vida del panel, actualizar el contenido y observar eventos."
+    },
     "tokens": {
       "title": "Tokens de inyección",
       "description": "Usa estos tokens para inyectar contexto del panel lateral dentro de un componente dinámico cargado por el servicio.",
@@ -141,6 +145,8 @@
         "size": "Tamaño predefinido del panel aplicado mediante una variable CSS.",
         "width": "Ancho CSS personalizado para paneles izquierdo/derecho. Sobreescribe <code>size</code>.",
         "height": "Alto CSS personalizado para paneles superior/inferior. Sobreescribe <code>size</code>.",
+        "maxWidth": "Anchura máxima CSS del panel. Útil para evitar paneles demasiado anchos en pantallas grandes.",
+        "maxHeight": "Alto máximo CSS del panel. Útil para evitar paneles demasiado altos.",
         "data": "Datos arbitrarios inyectados en el componente dinámico mediante <code>SIDEBAR_PANEL_DATA</code>.",
         "contentTemplate": "<code>TemplateRef</code> de Angular renderizado como cuerpo del panel.",
         "htmlContent": "Cadena HTML sin formato renderizada como cuerpo del panel. Sanitizada por el <code>DomSanitizer</code> de Angular.",
@@ -176,14 +182,17 @@
       "description": "Definición de botón inline pasada mediante <code>customButtons</code> en la configuración. Se evalúa una sola vez al abrir el modal — usa <code>SidebarPanelActionsService</code> para estados reactivos.",
       "rows": {
         "text": "Etiqueta del botón. Obligatorio.",
-        "icon": "Clase de Remix Icon mostrada dentro del botón (p. ej., <code>ri-save-line</code>).",
+        "prefixIcon": "Clase de Remix Icon mostrada antes de la etiqueta del botón (p. ej., <code>ri-save-line</code>).",
+        "suffixIcon": "Clase de Remix Icon mostrada después de la etiqueta del botón (p. ej., <code>ri-arrow-right-line</code>).",
         "color": "Color NUI aplicado al botón.",
         "variant": "Variante del botón: solid, outline o ghost.",
         "size": "Tamaño NUI aplicado al botón.",
         "callback": "Manejador de clic invocado con la <code>SidebarPanelRef</code>. Obligatorio.",
         "disabled": "Indica si el botón se renderiza en estado deshabilitado.",
         "loading": "Indica si el botón muestra un spinner de carga.",
-        "class": "Una o más clases CSS adicionales aplicadas al elemento del botón."
+        "loadingPosition": "Posición del spinner de carga respecto a la etiqueta.",
+        "class": "Una o más clases CSS adicionales aplicadas al elemento del botón.",
+        "width": "Modo de anchura del botón: <code>auto</code> (ajustado al contenido) o <code>full</code> (ancho completo del contenedor)."
       }
     },
     "minimized-tab": {
@@ -203,15 +212,15 @@
       "rows": {
         "id": "Identificador único opcional de la acción. Útil para actualizaciones puntuales mediante <code>updateById()</code>.",
         "label": "Etiqueta del botón. Obligatorio.",
-        "icon": "Clase de Remix Icon mostrada dentro del botón (p. ej., <code>ri-save-line</code>).",
-        "iconPosition": "Posición del icono respecto a la etiqueta: <code>start</code> o <code>end</code>.",
+        "prefixIcon": "Clase de Remix Icon mostrada antes de la etiqueta del botón (p. ej., <code>ri-save-line</code>).",
+        "suffixIcon": "Clase de Remix Icon mostrada después de la etiqueta del botón (p. ej., <code>ri-arrow-right-line</code>).",
         "color": "Color NUI aplicado al botón.",
         "variant": "Variante del botón: solid, outline o ghost.",
         "size": "Tamaño NUI aplicado al botón.",
         "handler": "Función manejadora del clic. Obligatorio.",
         "disabled": "Indica si el botón se renderiza en estado deshabilitado.",
         "loading": "Indica si el botón muestra un spinner de carga.",
-        "loadingPosition": "Posición del spinner de carga respecto a la etiqueta: <code>start</code> o <code>end</code>.",
+        "loadingPosition": "Posición del spinner de carga respecto a la etiqueta.",
         "class": "Una o más clases CSS adicionales aplicadas al elemento del botón.",
         "width": "Modo de anchura del botón: <code>auto</code> (ajustado al contenido) o <code>full</code> (ancho completo del contenedor)."
       }

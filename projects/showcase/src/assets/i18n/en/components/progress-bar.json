@@ -75,8 +75,8 @@
         "compact": {
           "description": "Reduces the bar to a thin indicator (6 px) and hides the value."
         },
-        "color": { "description": "Semantic color of the component." },
-        "variant": { "description": "Visual variant: 'solid', 'outline', 'ghost'." },
+        "color": { "description": "Semantic color of the component. Falls back to global config or <code>primary</code>." },
+        "variant": { "description": "Visual variant: 'solid', 'outline', 'ghost'. Falls back to global config or <code>solid</code>." },
         "value": { "description": "Current progress value." },
         "maxValue": { "description": "Maximum progress value." },
         "indeterminate": { "description": "Activates the indeterminate progress animation." },
@@ -119,6 +119,10 @@
     "context": {
       "title": "Context Bindings",
       "description": "Template context available for both <code>slot=\"value\"</code> and <code>slot=\"label\"</code> (except <code>let-label</code> which is label-only). Syntax: <code>let-localName=\"contextKey\"</code> &mdash; except <code>$implicit</code>, which binds with a bare <code>let-localName</code> and no <code>=\"...\"</code>.",
+      "slots": {
+        "both": "value + label",
+        "labelOnly": "label only"
+      },
       "rows": {
         "text": {
           "description": "Pre-formatted value string (e.g. <em>&quot;70 %&quot;</em>). This is the <code>$implicit</code> of the context: the <strong>only</strong> binding that does <strong>not</strong> require <code>=&quot;...&quot;</code>, as Angular maps it automatically with a bare <code>let-X</code>."

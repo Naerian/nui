@@ -62,6 +62,11 @@
     "copyright": "2025 NUI (MIT)"
   },
   "common": {
+    "import": "Importer",
+    "api": {
+      "importComponent": "Ajoutez-le au tableau imports de votre composant standalone ou NgModule.",
+      "importService": "Injectez-le dans votre composant à l'aide de la fonction inject() d'Angular."
+    },
     "tabs": {
       "examples": "Exemples",
       "api": "API",

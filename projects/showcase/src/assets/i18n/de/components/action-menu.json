@@ -94,11 +94,8 @@
         "label": {
           "description": "Text der Trigger-Schaltfläche"
         },
-        "icon": {
-          "description": "Icon der Schaltfläche (Remix Icon)"
-        },
-        "iconPosition": {
-          "description": "Position des Icons"
+        "prefixIcon": {
+          "description": "Remix Icon-Klasse des Trigger-Buttons (Standard: <code>ri-menu-line</code>, wenn weder label noch prefixIcon gesetzt ist)"
         },
         "iconSubmenu": {
           "description": "Icon zur Anzeige von Untermenüs"
@@ -132,6 +129,19 @@
         },
         "menuClose": {
           "description": "Wird ausgelöst, wenn das Menü geschlossen wird"
+        }
+      }
+    },
+    "directives": {
+      "title": "Template-Direktiven",
+      "description": "Attribut-Direktiven zum Projizieren von benutzerdefiniertem Inhalt in Kopf- und Fußbereich des Menüs.",
+      "note": "Diese Direktiven sind standalone. Füge <code>MenuHeaderDirective</code> und <code>MenuFooterDirective</code> in das <code>imports</code>-Array deiner Komponente ein.",
+      "rows": {
+        "menuHeader": {
+          "description": "Markiert ein Element, das oben im Menü-Panel vor der Elementliste angezeigt wird. Selektor: <code>[menu-header]</code> oder <code>[nuiMenuHeader]</code>."
+        },
+        "menuFooter": {
+          "description": "Markiert ein Element, das unten im Menü-Panel nach der Elementliste angezeigt wird. Selektor: <code>[menu-footer]</code> oder <code>[nuiMenuFooter]</code>."
         }
       }
     },

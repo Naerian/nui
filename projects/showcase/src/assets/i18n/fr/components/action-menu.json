@@ -94,11 +94,8 @@
         "label": {
           "description": "Texte du bouton déclencheur"
         },
-        "icon": {
-          "description": "Icône du bouton (Remix Icon)"
-        },
-        "iconPosition": {
-          "description": "Position de l'icône"
+        "prefixIcon": {
+          "description": "Classe d'icône Remix Icon du bouton déclencheur (par défaut <code>ri-menu-line</code> quand ni label ni prefixIcon ne sont définis)"
         },
         "iconSubmenu": {
           "description": "Icône pour indiquer un sous-menu"
@@ -132,6 +129,19 @@
         },
         "menuClose": {
           "description": "Émis lorsque le menu se ferme"
+        }
+      }
+    },
+    "directives": {
+      "title": "Directives de gabarit",
+      "description": "Directives d'attribut pour projeter du contenu personnalisé dans l'en-tête et le pied du menu.",
+      "note": "Ces directives sont standalone. Ajoutez <code>MenuHeaderDirective</code> et <code>MenuFooterDirective</code> au tableau <code>imports</code> de votre composant.",
+      "rows": {
+        "menuHeader": {
+          "description": "Marque un élément à placer en haut du panneau de menu, avant la liste d'items. Sélecteur : <code>[menu-header]</code> ou <code>[nuiMenuHeader]</code>."
+        },
+        "menuFooter": {
+          "description": "Marque un élément à placer en bas du panneau de menu, après la liste d'items. Sélecteur : <code>[menu-footer]</code> ou <code>[nuiMenuFooter]</code>."
         }
       }
     },

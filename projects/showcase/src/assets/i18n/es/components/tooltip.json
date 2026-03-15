@@ -38,11 +38,54 @@
   "api": {
     "inputs": {
       "title": "Inputs",
-      "description": "Propiedades de entrada de la directiva <code>nuiTooltip</code>"
+      "description": "Propiedades de entrada de la directiva <code>nuiTooltip</code>",
+      "rows": {
+        "nuiTooltip": {
+          "description": "Contenido del tooltip. Acepta una cadena de texto simple o un <code>TemplateRef</code> de Angular para contenido HTML enriquecido. Requerido."
+        },
+        "nuiTooltipPosition": {
+          "description": "Posición preferida del tooltip respecto al elemento disparador. Usa el valor de la configuración global como fallback, luego <code>'top'</code>."
+        },
+        "nuiTooltipEvent": {
+          "description": "Evento de interacción que dispara el tooltip. Usa el valor de la configuración global como fallback, luego <code>'hover'</code>."
+        },
+        "nuiTooltipShowDelay": {
+          "description": "Retardo en milisegundos antes de que el tooltip aparezca tras el evento disparador. Usa el valor de la configuración global como fallback, luego <code>300</code>."
+        },
+        "nuiTooltipHideDelay": {
+          "description": "Retardo en milisegundos antes de que el tooltip se oculte una vez que la condición de disparo finaliza. Usa el valor de la configuración global como fallback, luego <code>0</code>."
+        },
+        "nuiTooltipDisabled": {
+          "description": "Cuando es <code>true</code>, el tooltip está deshabilitado y no aparecerá independientemente de los eventos disparadores."
+        },
+        "nuiTooltipClass": {
+          "description": "Clase CSS personalizada añadida al panel overlay del tooltip para estilos adicionales."
+        },
+        "nuiTooltipShowArrow": {
+          "description": "Indica si se muestra una flecha direccional apuntando al elemento disparador. Usa el valor de la configuración global como fallback, luego <code>true</code>."
+        },
+        "nuiTooltipAllowHtml": {
+          "description": "Cuando es <code>true</code>, el contenido de texto se renderiza como HTML mediante <code>[innerHTML]</code>. Usar con precaución para evitar XSS. Usa el valor de la configuración global como fallback, luego <code>false</code>."
+        },
+        "nuiTooltipInteractive": {
+          "description": "Cuando es <code>true</code>, el tooltip permanece abierto mientras el cursor lo sobrevolece, permitiendo interactuar con su contenido. Usa el valor de la configuración global como fallback, luego <code>false</code>."
+        }
+      }
     },
-    "outputs": {
-      "title": "Outputs",
-      "description": "Eventos emitidos por la directiva <code>nuiTooltip</code>"
+    "methods": {
+      "title": "Métodos",
+      "description": "Métodos públicos expuestos por la directiva <code>nuiTooltip</code>, accesibles mediante una variable de referencia en el template (<code>#tooltip=\"nuiTooltip\"</code>).",
+      "rows": {
+        "show": {
+          "description": "Muestra el tooltip inmediatamente, respetando el delay de muestra configurado."
+        },
+        "hide": {
+          "description": "Oculta el tooltip, respetando el delay de ocultación configurado."
+        },
+        "toggle": {
+          "description": "Alterna la visibilidad del tooltip: lo muestra si está oculto, lo oculta si está visible."
+        }
+      }
     },
     "usage": {
       "title": "Ejemplos de uso",

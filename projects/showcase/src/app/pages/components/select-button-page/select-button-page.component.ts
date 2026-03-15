@@ -38,7 +38,7 @@ export class SelectButtonPageComponent extends BaseComponentPage {
       id: 'api',
       label: 'common.tabs.api',
       icon: 'ri-braces-line',
-      sections: ['api-inputs', 'api-outputs'],
+      sections: ['api-import', 'api-inputs', 'api-outputs', 'api-models'],
     },
     {
       id: 'theming',

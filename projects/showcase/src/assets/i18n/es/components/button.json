@@ -115,29 +115,9 @@
         }
       }
     },
-    "computed": {
-      "title": "Computed Properties",
-      "description": "Propiedades computadas reactivas (Signals) del componente.",
-      "rows": {
-        "effectiveColor": {
-          "description": "Color resuelto (Input > Config global > Valor por defecto)"
-        },
-        "effectiveSize": {
-          "description": "Tamaño resuelto (Input > Config global > Valor por defecto)"
-        },
-        "effectiveVariant": {
-          "description": "Variante resuelta (Input > Config global > Valor por defecto)"
-        },
-        "hasVisibleContent": {
-          "description": "True si el botón tiene contenido de texto o label"
-        },
-        "isIconOnly": {
-          "description": "True si el botón solo contiene un icono sin texto"
-        },
-        "computedAriaLabel": {
-          "description": "aria-label calculado automáticamente para accesibilidad"
-        }
-      }
+    "directive": {
+      "title": "API de la Directiva",
+      "description": "ButtonDirective aplica estilos de botón a elementos nativos. Selector: <code>button[nuiButton]</code> / <code>a[nuiButton]</code>. Expone los mismos inputs que ButtonComponent (excepto <code>title</code> y <code>ariaLabel</code>) más el output <code>onClick</code>."
     },
     "models": {
       "title": "Modelos",

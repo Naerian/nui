@@ -6,6 +6,25 @@
  */
 export const CALENDAR_API_SECTIONS: ComponentSection[] = [
   {
+    id: 'api-import',
+    title: 'common.import',
+    description: 'common.api.importComponent',
+    anchor: 'api-import',
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        code: `import { CalendarComponent, CalendarFooterDirective, CalendarDayDirective } from 'nui';
+
+@Component({
+  standalone: true,
+  imports: [CalendarComponent, CalendarFooterDirective, CalendarDayDirective],
+})
+export class MyComponent {}`,
+        language: 'typescript',
+      },
+    ],
+  },
+  {
     id: 'api-inputs',
     title: 'components.calendar.api.inputs.title',
     description: 'components.calendar.api.inputs.description',
@@ -32,7 +51,7 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
         ],
         [
           '<code>date</code>',
-          'string | Date | Date[]',
+          'string | Date | Date[] | null',
           '<code class="neutral">undefined</code>',
           'components.calendar.api.inputs.rows.date.description',
         ],
@@ -44,13 +63,13 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
         ],
         [
           '<code>minDate</code>',
-          'Date | string',
+          'Date | string | null',
           '<code class="neutral">undefined</code>',
           'components.calendar.api.inputs.rows.minDate.description',
         ],
         [
           '<code>maxDate</code>',
-          'Date | string',
+          'Date | string | null',
           '<code class="neutral">undefined</code>',
           'components.calendar.api.inputs.rows.maxDate.description',
         ],
@@ -85,27 +104,27 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
           'components.calendar.api.inputs.rows.showTimeSelector.description',
         ],
         [
-          '<code>TimeSelectorMode</code>',
+          '<code>timeSelectorMode</code>',
           'TimeSelectorMode',
           '<code class="neutral">HOUR_MINUTE_24</code>',
-          'components.calendar.api.inputs.rows.TimeSelectorMode.description',
+          'components.calendar.api.inputs.rows.timeSelectorMode.description',
         ],
         [
-          '<code>TimeSelectorConfig</code>',
+          '<code>timeSelectorConfig</code>',
           'TimeSelectorConfig',
-          '<code class="neutral">{}</code>',
-          'components.calendar.api.inputs.rows.TimeSelectorConfig.description',
+          '<code class="neutral">undefined</code>',
+          'components.calendar.api.inputs.rows.timeSelectorConfig.description',
         ],
         [
           '<code>startTime</code>',
-          'TimeValue | Date | string',
-          '<code class="neutral">null</code>',
+          'TimeValue | Date | string | null',
+          '<code class="neutral">undefined</code>',
           'components.calendar.api.inputs.rows.startTime.description',
         ],
         [
           '<code>endTime</code>',
-          'TimeValue | Date | string',
-          '<code class="neutral">null</code>',
+          'TimeValue | Date | string | null',
+          '<code class="neutral">undefined</code>',
           'components.calendar.api.inputs.rows.endTime.description',
         ],
         [
@@ -125,6 +144,18 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
           'boolean',
           '<code class="neutral">false</code>',
           'components.calendar.api.inputs.rows.showWeekNumbers.description',
+        ],
+        [
+          '<code>overlayMode</code>',
+          'boolean',
+          '<code class="neutral">undefined</code>',
+          'components.calendar.api.inputs.rows.overlayMode.description',
+        ],
+        [
+          '<code>autoClose</code>',
+          'boolean',
+          '<code class="neutral">false</code>',
+          'components.calendar.api.inputs.rows.autoClose.description',
         ],
       ],
     },
@@ -151,6 +182,30 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
     },
   },
   {
+    id: 'api-directives',
+    title: 'components.calendar.api.directives.title',
+    description: 'components.calendar.api.directives.description',
+    anchor: 'api-directives',
+    note: {
+      type: 'info',
+      icon: 'ri-information-line',
+      content: 'components.calendar.api.directives.note',
+    },
+    table: {
+      headers: ['common.tables.directive', 'common.tables.description'],
+      rows: [
+        [
+          '<code>CalendarFooterDirective</code> <small><code>[nuiCalendarFooter]</code></small>',
+          'components.calendar.api.directives.rows.calendarFooter.description',
+        ],
+        [
+          '<code>CalendarDayDirective</code> <small><code>[nuiCalendarDay]</code></small>',
+          'components.calendar.api.directives.rows.calendarDay.description',
+        ],
+      ],
+    },
+  },
+  {
     id: 'api-calendar-value',
     title: 'components.calendar.api.calendar-value.title',
     description: 'components.calendar.api.calendar-value.description',
@@ -162,7 +217,7 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
     },
     table: {
       headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
-      rows: [['<code>type</code>', 'CalendarType', 'Tipo de selección (DAY, WEEK, RANGE)']],
+      rows: [['<code>type</code>', 'CalendarType', 'components.calendar.api.calendar-value.rows.type.description']],
     },
   },
   {
@@ -222,28 +277,27 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
       headers: ['common.tables.property', 'common.tables.type', 'common.tables.description'],
       rows: [
         ['<code>label</code>', 'string', 'components.calendar.api.preset.rows.label.description'],
-        ['<code>start</code>', 'Date', 'components.calendar.api.preset.rows.start.description'],
-        ['<code>end</code>', 'Date', 'components.calendar.api.preset.rows.end.description'],
+        ['<code>getValue</code>', '() => { start: Date; end: Date }', 'components.calendar.api.preset.rows.getValue.description'],
       ],
     },
     examples: [
       {
-        title: 'Interface DateRangePreset',
+        title: 'codeExamples.typescript',
         code: `customPresets: DateRangePreset[] = [
   {
     label: 'Last 7 days',
-    start: subDays(new Date(), 7),
-    end: new Date(),
+    getValue: () => ({ start: subDays(new Date(), 7), end: new Date() }),
   },
   {
     label: 'This month',
-    start: startOfMonth(new Date()),
-    end: endOfMonth(new Date()),
+    getValue: () => ({ start: startOfMonth(new Date()), end: endOfMonth(new Date()) }),
   },
   {
     label: 'Last month',
-    start: startOfMonth(subMonths(new Date(), 1)),
-    end: endOfMonth(subMonths(new Date(), 1)),
+    getValue: () => ({
+      start: startOfMonth(subMonths(new Date(), 1)),
+      end: endOfMonth(subMonths(new Date(), 1)),
+    }),
   },
 ];`,
         language: 'typescript',
@@ -355,7 +409,7 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
     },
     examples: [
       {
-        title: 'DateStatusFn (ejemplo)',
+        title: 'DateStatusFn',
         code: `dateStatusFn: DateStatusFn = (date) => {
   const availability = getAvailability(date);
   if (availability === 0) return 'danger';
@@ -366,15 +420,15 @@ export const CALENDAR_API_SECTIONS: ComponentSection[] = [
         language: 'typescript',
       },
       {
-        title: 'IsDateEnabledFn (ejemplo)',
+        title: 'IsDateEnabledFn',
         code: `isDateEnabledFn: IsDateEnabledFn = (date) => {
-  // No permitir fines de semana
+  // Disallow weekends
   const dayOfWeek = date.getDay();
   if (dayOfWeek === 0 || dayOfWeek === 6) return false;
-  
-  // No permitir festivos
+
+  // Disallow holidays
   if (isHoliday(date)) return false;
-  
+
   return true;
 };`,
         language: 'typescript',

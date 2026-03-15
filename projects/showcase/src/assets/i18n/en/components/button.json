@@ -115,29 +115,9 @@
         }
       }
     },
-    "computed": {
-      "title": "Computed Properties",
-      "description": "Reactive computed properties (Signals) of the component.",
-      "rows": {
-        "effectiveColor": {
-          "description": "Resolved color (Input > Global config > Default value)"
-        },
-        "effectiveSize": {
-          "description": "Resolved size (Input > Global config > Default value)"
-        },
-        "effectiveVariant": {
-          "description": "Resolved variant (Input > Global config > Default value)"
-        },
-        "hasVisibleContent": {
-          "description": "True if the button has text content or label"
-        },
-        "isIconOnly": {
-          "description": "True if the button only contains an icon without text"
-        },
-        "computedAriaLabel": {
-          "description": "Automatically calculated aria-label for accessibility"
-        }
-      }
+    "directive": {
+      "title": "Directive API",
+      "description": "ButtonDirective applies button styles to native elements. Selector: <code>button[nuiButton]</code> / <code>a[nuiButton]</code>. Exposes the same inputs as ButtonComponent (except <code>title</code> and <code>ariaLabel</code>) plus the <code>onClick</code> output."
     },
     "models": {
       "title": "Models",

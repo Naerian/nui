@@ -4,7 +4,17 @@
       "Bash(xargs grep:*)",
       "Bash(grep -E \"\\\\.\\(ts|json\\)$\")",
       "Bash(python3 -c \":*)",
-      "Bash(node -e \":*)"
+      "Bash(node -e \":*)",
+      "Bash(grep -n \"\"\"models\"\"\" \"c:/Proyectos/nui/projects/showcase/src/assets/i18n/fr/components/avatar.json\")",
+      "Bash(grep -n \"\"\"models\"\"\" \"c:/Proyectos/nui/projects/showcase/src/assets/i18n/de/components/avatar.json\")",
+      "Bash(node -e \"JSON.parse\\(require\\(''fs''\\).readFileSync\\(''/c/Proyectos/nui/projects/showcase/src/assets/i18n/en/components/time-selector.json'', ''utf8''\\)\\); console.log\\(''Valid JSON''\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\(''fs''\\).readFileSync\\(''C:/Proyectos/nui/projects/showcase/src/assets/i18n/en/components/time-selector.json'', ''utf8''\\)\\); console.log\\(''Valid JSON''\\)\")",
+      "Bash(for f:*)",
+      "Bash(do node:*)",
+      "Bash(done)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\(''''tables'''', {}\\), indent=2\\)\\)\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(list\\(d.keys\\(\\)\\)\\)\")",
+      "Bash(grep -A30 \"id: ''api''\" \"c:/Proyectos/nui/projects/showcase/src/app/pages/components/modal-dialog-page/modal-dialog-page.component.ts\")"
     ]
   }
 }
