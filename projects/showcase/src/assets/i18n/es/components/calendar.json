@@ -289,54 +289,75 @@
       "description": "El calendario usa principalmente las variables del tema global. Los días seleccionados, hover y estados activos usan el color primario del tema activo.",
       "note": "El componente se integra completamente con el sistema de temas de NUI. Los colores primarios, de fondo, texto y bordes se heredan automáticamente del preset de tema seleccionado.",
       "rows": {
+        "bg": { "description": "Color de fondo de la superficie del calendario" },
+        "border": { "description": "Color del borde del contenedor del calendario" },
+        "boxShadow": { "description": "Sombra del contenedor del calendario" },
         "dayBg": { "description": "Color de fondo de las celdas de día" },
         "dayText": { "description": "Color de texto de las celdas de día" },
-        "dayHoverBg": { "description": "Color de fondo al hacer hover en un día" },
+        "dayCurrentMonthText": { "description": "Color de texto de las celdas del mes actual" },
+        "dayTodayBg": { "description": "Color del indicador de hoy (derivado del color primario)" },
+        "dayHoverBg": { "description": "Color de fondo al hacer hover en un día (color primario al 20% de opacidad)" },
         "dayHoverText": { "description": "Color de texto al hacer hover en un día" },
-        "daySelectedBg": { "description": "Color de fondo del día seleccionado" },
+        "daySelectedBg": { "description": "Color de fondo del día seleccionado (color primario al 20% de opacidad)" },
         "daySelectedText": { "description": "Color de texto del día seleccionado" },
-        "daySelectedBorder": { "description": "Color de borde del día seleccionado" },
-        "daySelectedHoverBg": {
-          "description": "Color de fondo del día seleccionado al hacer hover"
-        },
-        "daySelectedHoverBorder": {
-          "description": "Color de borde del día seleccionado al hacer hover"
-        },
-        "dayRangeBg": { "description": "Color de fondo de los días dentro de un rango" },
-        "dayRangeText": { "description": "Color de texto de los días dentro de un rango" }
+        "daySelectedBorder": { "description": "Color de borde del día seleccionado (color primario)" },
+        "daySelectedTodayBg": { "description": "Color del indicador de hoy cuando el día está seleccionado" },
+        "daySelectedHoverBg": { "description": "Color de fondo del día seleccionado al hacer hover (color primario al 30% de opacidad)" },
+        "daySelectedHoverBorder": { "description": "Color de borde del día seleccionado al hacer hover (color primario)" },
+        "dayRangeBg": { "description": "Color de fondo de los días dentro de un rango (color primario al 10% de opacidad)" },
+        "dayRangeText": { "description": "Color de texto de los días dentro de un rango" },
+        "dayRangeBorder": { "description": "Color de borde de los días dentro de un rango (color primario al 40% de opacidad)" },
+        "dayRangeHoverBg": { "description": "Color de fondo de los días en rango al hacer hover (color primario al 15% de opacidad)" },
+        "dayRangeHoverBorder": { "description": "Color de borde de los días en rango al hacer hover (color primario al 50% de opacidad)" },
+        "dayStatusSuccess": { "description": "Color de la barra indicadora de estado éxito en las celdas de día" },
+        "dayStatusInfo": { "description": "Color de la barra indicadora de estado informativo en las celdas de día" },
+        "dayStatusWarning": { "description": "Color de la barra indicadora de estado advertencia en las celdas de día" },
+        "dayStatusDanger": { "description": "Color de la barra indicadora de estado peligro en las celdas de día" },
+        "navBtnBg": { "description": "Color de fondo de los botones de navegación (predeterminado)" },
+        "navBtnText": { "description": "Color de texto de los botones de navegación (predeterminado)" },
+        "navBtnBorder": { "description": "Color de borde de los botones de navegación (predeterminado)" },
+        "navBtnHoverBg": { "description": "Color de fondo de los botones de navegación al hacer hover" },
+        "navBtnHoverText": { "description": "Color de texto de los botones de navegación al hacer hover" },
+        "navBtnHoverBorder": { "description": "Color de borde de los botones de navegación al hacer hover" },
+        "navBtnActiveBg": { "description": "Color de fondo de los botones de navegación al estar activos" },
+        "navBtnActiveBorder": { "description": "Color de borde de los botones de navegación al estar activos" },
+        "navBtnDisabledBg": { "description": "Color de fondo de los botones de navegación deshabilitados" },
+        "navBtnDisabledText": { "description": "Color de texto de los botones de navegación deshabilitados" },
+        "navBtnDisabledBorder": { "description": "Color de borde de los botones de navegación deshabilitados" }
       }
     },
     "sizes": {
       "title": "Tamaños",
-      "description": "Variables CSS específicas por tamaño que controlan ancho, padding, espaciado, tamaño de celdas y tipografía. Cinco variantes de tamaño disponibles: xs, sm, md (predeterminado), lg y xl.",
+      "description": "Variables CSS específicas por tamaño que controlan ancho, padding, espaciado, tamaño de celdas y tipografía. Estas variables usan valores fluidos (clamp) para adaptarse de forma responsiva.",
       "rows": {
         "width": { "description": "Ancho estándar del calendario" },
-        "padding": { "description": "Padding interno del calendario" },
-        "gap": { "description": "Espaciado entre elementos del calendario" },
-        "dayFontSize": { "description": "Tamaño de fuente de las celdas de día" },
+        "padding": { "description": "Padding interno del calendario (fluido: clamp)" },
+        "gap": { "description": "Espaciado entre elementos del calendario (fluido: clamp)" },
+        "dayFontSize": { "description": "Tamaño de fuente de las celdas de día (fluido: clamp)" },
         "titleFontSize": { "description": "Tamaño de fuente del título mes/año" },
-        "weekdayFontSize": {
-          "description": "Tamaño de fuente de los encabezados de día de la semana"
-        },
+        "weekdayFontSize": { "description": "Tamaño de fuente de los encabezados de día de la semana" },
+        "weekFontSize": { "description": "Tamaño de fuente de las celdas de número de semana (fluido: clamp)" },
         "weekdayHeight": { "description": "Altura de la fila de nombres de días" },
-        "monthFontSize": { "description": "Tamaño de fuente en vista de meses" },
-        "yearFontSize": { "description": "Tamaño de fuente en vista de años" },
+        "monthFontSize": { "description": "Tamaño de fuente en vista de meses (fluido: clamp)" },
+        "yearFontSize": { "description": "Tamaño de fuente en vista de años (fluido: clamp)" },
         "navBtnHeight": { "description": "Altura de los botones de navegación" },
         "navBtnPadding": { "description": "Padding de los botones de navegación" },
-        "navBtnFontSize": { "description": "Tamaño de fuente de los botones de navegación" }
+        "navBtnFontSize": { "description": "Tamaño de fuente de los botones de navegación (fluido: clamp)" }
       }
     },
     "structure": {
       "title": "Estructura",
-      "description": "Variables CSS estructurales para controlar bordes, opacidades, animaciones y dimensiones. Incluye personalización de pestañas, días de otros meses, presets y estados de foco.",
+      "description": "Variables CSS estructurales para controlar bordes, opacidades, dimensiones de indicadores y animaciones de transformación. Incluye personalización de pestañas, días de otros meses, presets e indicadores de hoy/estado.",
       "rows": {
-        "tabsBorderWidth": { "description": "Grosor del borde de las pestañas" },
+        "tabsBorderWidth": { "description": "Grosor del borde del separador de pestañas" },
         "dayBorderWidth": { "description": "Grosor del borde de las celdas de día" },
-        "dayOtherMonthOpacity": { "description": "Opacidad de los días de otros meses" },
         "presetBorderWidth": { "description": "Grosor del borde de los botones de preset" },
-        "presetHoverTranslateY": {
-          "description": "Desplazamiento vertical al hacer hover en un preset"
-        }
+        "dayOtherMonthOpacity": { "description": "Opacidad de los días de otros meses" },
+        "presetHoverTranslateY": { "description": "Desplazamiento vertical al hacer hover en un botón de preset" },
+        "todaySize": { "description": "Tamaño del indicador de hoy (fluido: clamp)" },
+        "todayBottom": { "description": "Desplazamiento inferior del indicador de hoy dentro de la celda" },
+        "statusSize": { "description": "Ancho de la barra indicadora de estado relativo a la celda de día" },
+        "statusTop": { "description": "Desplazamiento superior de la barra indicadora de estado dentro de la celda" }
       }
     },
     "customization": {

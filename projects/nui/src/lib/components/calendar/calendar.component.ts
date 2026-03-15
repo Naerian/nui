@@ -2465,10 +2465,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     return days.findIndex(d => d.isCurrentMonth);
   }
 
-  private focusDayButton(index: number): void {
+  private focusDayButton(index: number, preventScroll = false): void {
     const buttons = this.dayButtons();
     if (buttons[index]) {
-      buttons[index].nativeElement.focus();
+      buttons[index].nativeElement.focus({ preventScroll });
     }
   }
 
@@ -2507,7 +2507,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, ControlValueAcc
     // Hacer focus en el d?a encontrado
     if (indexToFocus !== -1) {
       this.focusedDayIndex.set(indexToFocus);
-      this.focusDayButton(indexToFocus);
+      this.focusDayButton(indexToFocus, true);
     }
   }
 

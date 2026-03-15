@@ -291,52 +291,75 @@
       "description": "Le calendrier utilise principalement des variables de thème globales. Les jours sélectionnés, les états de survol et actif utilisent la couleur primaire du thème actif.",
       "note": "Le composant s'intègre pleinement avec le système de thématisation NUI. Les couleurs primaires, l'arrière-plan, le texte et les bordures sont automatiquement hérités du préréglage de thème sélectionné.",
       "rows": {
+        "bg": { "description": "Couleur d'arrière-plan de la surface du calendrier" },
+        "border": { "description": "Couleur de bordure du conteneur du calendrier" },
+        "boxShadow": { "description": "Ombre portée du conteneur du calendrier" },
         "dayBg": { "description": "Couleur d'arrière-plan des cellules de jour" },
         "dayText": { "description": "Couleur de texte des cellules de jour" },
-        "dayHoverBg": { "description": "Couleur d'arrière-plan au survol d'un jour" },
+        "dayCurrentMonthText": { "description": "Couleur de texte des cellules du mois en cours" },
+        "dayTodayBg": { "description": "Couleur de l'indicateur du jour actuel (dérivée de la couleur primaire)" },
+        "dayHoverBg": { "description": "Couleur d'arrière-plan au survol d'un jour (couleur primaire à 20 % d'opacité)" },
         "dayHoverText": { "description": "Couleur de texte au survol d'un jour" },
-        "daySelectedBg": { "description": "Couleur d'arrière-plan du jour sélectionné" },
+        "daySelectedBg": { "description": "Couleur d'arrière-plan du jour sélectionné (couleur primaire à 20 % d'opacité)" },
         "daySelectedText": { "description": "Couleur de texte du jour sélectionné" },
-        "daySelectedBorder": { "description": "Couleur de bordure du jour sélectionné" },
-        "daySelectedHoverBg": {
-          "description": "Couleur d'arrière-plan du jour sélectionné au survol"
-        },
-        "daySelectedHoverBorder": {
-          "description": "Couleur de bordure du jour sélectionné au survol"
-        },
-        "dayRangeBg": { "description": "Couleur d'arrière-plan des jours dans une plage" },
-        "dayRangeText": { "description": "Couleur de texte des jours dans une plage" }
+        "daySelectedBorder": { "description": "Couleur de bordure du jour sélectionné (couleur primaire)" },
+        "daySelectedTodayBg": { "description": "Couleur de l'indicateur du jour actuel lorsque le jour est sélectionné" },
+        "daySelectedHoverBg": { "description": "Couleur d'arrière-plan du jour sélectionné au survol (couleur primaire à 30 % d'opacité)" },
+        "daySelectedHoverBorder": { "description": "Couleur de bordure du jour sélectionné au survol (couleur primaire)" },
+        "dayRangeBg": { "description": "Couleur d'arrière-plan des jours dans une plage (couleur primaire à 10 % d'opacité)" },
+        "dayRangeText": { "description": "Couleur de texte des jours dans une plage" },
+        "dayRangeBorder": { "description": "Couleur de bordure des jours dans une plage (couleur primaire à 40 % d'opacité)" },
+        "dayRangeHoverBg": { "description": "Couleur d'arrière-plan des jours dans une plage au survol (couleur primaire à 15 % d'opacité)" },
+        "dayRangeHoverBorder": { "description": "Couleur de bordure des jours dans une plage au survol (couleur primaire à 50 % d'opacité)" },
+        "dayStatusSuccess": { "description": "Couleur de la barre indicatrice d'état succès sur les cellules de jour" },
+        "dayStatusInfo": { "description": "Couleur de la barre indicatrice d'état informatif sur les cellules de jour" },
+        "dayStatusWarning": { "description": "Couleur de la barre indicatrice d'état avertissement sur les cellules de jour" },
+        "dayStatusDanger": { "description": "Couleur de la barre indicatrice d'état danger sur les cellules de jour" },
+        "navBtnBg": { "description": "Couleur d'arrière-plan des boutons de navigation (défaut)" },
+        "navBtnText": { "description": "Couleur de texte des boutons de navigation (défaut)" },
+        "navBtnBorder": { "description": "Couleur de bordure des boutons de navigation (défaut)" },
+        "navBtnHoverBg": { "description": "Couleur d'arrière-plan des boutons de navigation au survol" },
+        "navBtnHoverText": { "description": "Couleur de texte des boutons de navigation au survol" },
+        "navBtnHoverBorder": { "description": "Couleur de bordure des boutons de navigation au survol" },
+        "navBtnActiveBg": { "description": "Couleur d'arrière-plan des boutons de navigation à l'état actif" },
+        "navBtnActiveBorder": { "description": "Couleur de bordure des boutons de navigation à l'état actif" },
+        "navBtnDisabledBg": { "description": "Couleur d'arrière-plan des boutons de navigation désactivés" },
+        "navBtnDisabledText": { "description": "Couleur de texte des boutons de navigation désactivés" },
+        "navBtnDisabledBorder": { "description": "Couleur de bordure des boutons de navigation désactivés" }
       }
     },
     "sizes": {
       "title": "Tailles",
-      "description": "Variables CSS spécifiques aux tailles qui contrôlent la largeur, le rembourrage, l'espacement, la taille des cellules et la typographie. Cinq variantes de taille disponibles : xs, sm, md (défaut), lg et xl.",
+      "description": "Variables CSS spécifiques aux tailles qui contrôlent la largeur, le rembourrage, l'espacement, la taille des cellules et la typographie. Ces variables utilisent des valeurs fluides (clamp) pour s'adapter de façon responsive.",
       "rows": {
         "width": { "description": "Largeur standard du calendrier" },
-        "padding": { "description": "Rembourrage interne du calendrier" },
-        "gap": { "description": "Espacement entre les éléments du calendrier" },
-        "dayFontSize": { "description": "Taille de police des cellules de jour" },
+        "padding": { "description": "Rembourrage interne du calendrier (fluide : clamp)" },
+        "gap": { "description": "Espacement entre les éléments du calendrier (fluide : clamp)" },
+        "dayFontSize": { "description": "Taille de police des cellules de jour (fluide : clamp)" },
         "titleFontSize": { "description": "Taille de police du titre mois/année" },
         "weekdayFontSize": { "description": "Taille de police des en-têtes de jour de la semaine" },
+        "weekFontSize": { "description": "Taille de police des cellules de numéro de semaine (fluide : clamp)" },
         "weekdayHeight": { "description": "Hauteur de la ligne des noms de jours" },
-        "monthFontSize": { "description": "Taille de police dans la vue des mois" },
-        "yearFontSize": { "description": "Taille de police dans la vue des années" },
+        "monthFontSize": { "description": "Taille de police dans la vue des mois (fluide : clamp)" },
+        "yearFontSize": { "description": "Taille de police dans la vue des années (fluide : clamp)" },
         "navBtnHeight": { "description": "Hauteur des boutons de navigation" },
         "navBtnPadding": { "description": "Rembourrage des boutons de navigation" },
-        "navBtnFontSize": { "description": "Taille de police des boutons de navigation" }
+        "navBtnFontSize": { "description": "Taille de police des boutons de navigation (fluide : clamp)" }
       }
     },
     "structure": {
       "title": "Structure",
-      "description": "Variables CSS structurelles pour contrôler les bordures, opacités, animations et dimensions. Inclut la personnalisation des onglets, des jours des autres mois, des préréglages et des états de focus.",
+      "description": "Variables CSS structurelles pour contrôler les bordures, opacités, dimensions des indicateurs et animations de transformation. Inclut la personnalisation des onglets, des jours des autres mois, des préréglages et des indicateurs du jour actuel et d'état.",
       "rows": {
-        "tabsBorderWidth": { "description": "Épaisseur de bordure des onglets" },
+        "tabsBorderWidth": { "description": "Épaisseur de bordure du séparateur d'onglets" },
         "dayBorderWidth": { "description": "Épaisseur de bordure des cellules de jour" },
-        "dayOtherMonthOpacity": { "description": "Opacité des jours des autres mois" },
         "presetBorderWidth": { "description": "Épaisseur de bordure des boutons de préréglage" },
-        "presetHoverTranslateY": {
-          "description": "Translation verticale au survol d'un préréglage"
-        }
+        "dayOtherMonthOpacity": { "description": "Opacité des jours des autres mois" },
+        "presetHoverTranslateY": { "description": "Translation verticale au survol d'un bouton de préréglage" },
+        "todaySize": { "description": "Taille de l'indicateur du jour actuel (fluide : clamp)" },
+        "todayBottom": { "description": "Décalage inférieur de l'indicateur du jour actuel dans la cellule" },
+        "statusSize": { "description": "Largeur de la barre indicatrice d'état relative à la cellule de jour" },
+        "statusTop": { "description": "Décalage supérieur de la barre indicatrice d'état dans la cellule" }
       }
     },
     "customization": {

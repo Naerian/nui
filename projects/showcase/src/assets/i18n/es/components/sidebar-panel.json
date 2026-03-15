@@ -248,49 +248,87 @@
       "title": "Variables de color",
       "description": "Variables CSS para controlar los colores del panel lateral: fondo, texto, bordes y overlay. Estas variables se adaptan automáticamente al modo claro/oscuro del tema activo.",
       "rows": {
-        "bg": "Color de fondo del panel. Se adapta dinámicamente según el tema activo.",
-        "text": "Color del texto del panel.",
-        "border": "Color del borde del panel. Se adapta dinámicamente según el tema activo.",
-        "overlayBg": "Color de fondo del overlay del backdrop."
+        "bg": {
+          "description": "Color de fondo del panel. Se adapta dinámicamente según el tema activo."
+        },
+        "text": {
+          "description": "Color del texto del panel."
+        },
+        "border": {
+          "description": "Color del borde del panel. Se adapta dinámicamente según el tema activo."
+        },
+        "overlayBg": {
+          "description": "Color de fondo del overlay del backdrop."
+        }
       }
     },
     "layout": {
       "title": "Variables de layout",
       "description": "Variables CSS para controlar el tamaño y espaciado del panel lateral: presets de tamaño predefinidos (xs a full) y padding del header y contenido",
       "rows": {
-        "sizeXsWidth": "Anchura del panel extra pequeño.",
-        "sizeSmWidth": "Anchura del panel pequeño.",
-        "sizeMdWidth": "Anchura del panel mediano (por defecto).",
-        "sizeLgWidth": "Anchura del panel grande.",
-        "sizeXlWidth": "Anchura del panel extra grande.",
-        "sizeFullWidth": "Panel a anchura completa.",
-        "headerPadding": "Padding del header.",
-        "contentPadding": "Padding del área de contenido."
+        "sizeXsWidth": {
+          "description": "Anchura del panel extra pequeño."
+        },
+        "sizeSmWidth": {
+          "description": "Anchura del panel pequeño."
+        },
+        "sizeMdWidth": {
+          "description": "Anchura del panel mediano (por defecto)."
+        },
+        "sizeLgWidth": {
+          "description": "Anchura del panel grande."
+        },
+        "sizeXlWidth": {
+          "description": "Anchura del panel extra grande."
+        },
+        "sizeFullWidth": {
+          "description": "Panel a anchura completa."
+        },
+        "headerPadding": {
+          "description": "Padding del header."
+        },
+        "contentPadding": {
+          "description": "Padding del área de contenido."
+        }
       }
     },
     "typography": {
       "title": "Variables de tipografía",
       "description": "Variables CSS para controlar la tipografía del título del panel lateral",
       "rows": {
-        "titleSize": "Tamaño de fuente del título del panel.",
-        "titleWeight": "Peso de fuente del título del panel."
+        "titleSize": {
+          "description": "Tamaño de fuente del título del panel."
+        },
+        "titleWeight": {
+          "description": "Peso de fuente del título del panel."
+        }
       }
     },
     "elevation": {
       "title": "Variables de elevación",
       "description": "Variables CSS para controlar la sombra y z-index del panel lateral y del overlay",
       "rows": {
-        "shadow": "Sombra del panel para la elevación.",
-        "zIndex": "Capa de apilamiento z-index del panel."
+        "shadow": {
+          "description": "Sombra del panel para la elevación."
+        },
+        "zIndex": {
+          "description": "Capa de apilamiento z-index del panel."
+        }
       }
     },
     "scrollbar": {
       "title": "Variables de scrollbar",
       "description": "Variables CSS para controlar la apariencia de la barra de desplazamiento del panel lateral",
       "rows": {
-        "scrollBg": "Color de fondo del track de la barra de desplazamiento.",
-        "scrollThumbBg": "Color de fondo del thumb de la barra de desplazamiento.",
-        "scrollThumbHoverBg": "Color de fondo del thumb al pasar el cursor."
+        "scrollBg": {
+          "description": "Color de fondo del track de la barra de desplazamiento."
+        },
+        "scrollThumbBg": {
+          "description": "Color de fondo del thumb de la barra de desplazamiento."
+        },
+        "scrollThumbHoverBg": {
+          "description": "Color de fondo del thumb al pasar el cursor."
+        }
       }
     },
     "examples": {

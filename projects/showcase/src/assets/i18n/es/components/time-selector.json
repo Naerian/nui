@@ -260,15 +260,177 @@
   "theming": {
     "colors": {
       "title": "Colores",
-      "description": "Variables CSS de color generadas por el ThemeService para cada color semántico. Cada color genera 9 variables específicas para diferentes estados del picker: fondos de items (normal, hover, seleccionado), colores de texto, estados deshabilitados, acentos y anillo de foco."
+      "description": "Variables CSS de color generadas por el ThemeService para la superficie del selector de tiempo, los estados de los items y los botones de navegación del footer.",
+      "rows": {
+        "bg": {
+          "description": "Color de fondo del contenedor del selector de tiempo."
+        },
+        "border": {
+          "description": "Color del borde del contenedor del selector de tiempo."
+        },
+        "boxShadow": {
+          "description": "Sombra aplicada al contenedor del selector de tiempo."
+        },
+        "itemBg": {
+          "description": "Color de fondo de cada opción de tiempo en su estado predeterminado (no seleccionado)."
+        },
+        "itemText": {
+          "description": "Color de texto de cada opción de tiempo en su estado predeterminado (no seleccionado)."
+        },
+        "itemHoverBg": {
+          "description": "Color de fondo de una opción de tiempo al hacer hover (no seleccionada)."
+        },
+        "itemHoverText": {
+          "description": "Color de texto de una opción de tiempo al hacer hover (no seleccionada)."
+        },
+        "itemSelectedBg": {
+          "description": "Color de fondo de la opción de tiempo actualmente seleccionada."
+        },
+        "itemSelectedBorder": {
+          "description": "Color de borde de la opción de tiempo actualmente seleccionada."
+        },
+        "itemSelectedText": {
+          "description": "Color de texto de la opción de tiempo actualmente seleccionada."
+        },
+        "itemSelectedHoverBg": {
+          "description": "Color de fondo de la opción seleccionada al hacer hover."
+        },
+        "itemSelectedHoverBorder": {
+          "description": "Color de borde de la opción seleccionada al hacer hover."
+        },
+        "itemDisabledBg": {
+          "description": "Color de fondo de una opción de tiempo deshabilitada."
+        },
+        "itemDisabledText": {
+          "description": "Color de texto de una opción de tiempo deshabilitada."
+        },
+        "navBtnBg": {
+          "description": "Color de fondo de los botones de acción del footer en su estado predeterminado."
+        },
+        "navBtnText": {
+          "description": "Color de texto de los botones de acción del footer en su estado predeterminado."
+        },
+        "navBtnBorder": {
+          "description": "Color de borde de los botones de acción del footer en su estado predeterminado."
+        },
+        "navBtnHoverBg": {
+          "description": "Color de fondo de los botones de acción del footer al hacer hover."
+        },
+        "navBtnHoverText": {
+          "description": "Color de texto de los botones de acción del footer al hacer hover."
+        },
+        "navBtnHoverBorder": {
+          "description": "Color de borde de los botones de acción del footer al hacer hover."
+        },
+        "navBtnActiveBg": {
+          "description": "Color de fondo de los botones de acción del footer cuando están activos (pulsados)."
+        },
+        "navBtnActiveBorder": {
+          "description": "Color de borde de los botones de acción del footer cuando están activos (pulsados)."
+        },
+        "navBtnDisabledBg": {
+          "description": "Color de fondo de los botones de acción del footer cuando están deshabilitados."
+        },
+        "navBtnDisabledText": {
+          "description": "Color de texto de los botones de acción del footer cuando están deshabilitados."
+        },
+        "navBtnDisabledBorder": {
+          "description": "Color de borde de los botones de acción del footer cuando están deshabilitados."
+        }
+      }
     },
     "sizes": {
       "title": "Tamaños",
-      "description": "Variables CSS específicas por tamaño que controlan alturas de items, paddings y dimensiones del contenedor. Cinco variantes de tamaño disponibles: xs, sm, md (predeterminado), lg y xl."
+      "description": "Variables CSS que controlan las dimensiones generales, alturas de items, paddings, gaps y tamaños de fuente del selector de tiempo.",
+      "rows": {
+        "width": {
+          "description": "Anchura fija del contenedor del selector de tiempo."
+        },
+        "itemHeight": {
+          "description": "Altura de cada opción de tiempo en las columnas."
+        },
+        "maxHeight": {
+          "description": "Altura máxima de la lista de items desplazable dentro de cada columna."
+        },
+        "minHeight": {
+          "description": "Altura mínima de la lista de items desplazable dentro de cada columna."
+        },
+        "padding": {
+          "description": "Relleno interior del contenedor del selector de tiempo y de los encabezados de columna."
+        },
+        "gap": {
+          "description": "Espacio entre las secciones del layout principal (header, columnas, footer) y entre columnas."
+        },
+        "fontSize": {
+          "description": "Tamaño de fuente base utilizado para los valores de los items y las etiquetas de columna."
+        },
+        "itemRadius": {
+          "description": "Radio de borde aplicado a cada opción de tiempo."
+        }
+      }
     },
     "structure": {
       "title": "Estructura",
-      "description": "Variables CSS estructurales para controlar dimensiones, espaciado, tipografía y apariencia visual. Incluye estilo de separador, personalización de scrollbar, bordes, fuentes y estados de foco."
+      "description": "Variables CSS estructurales que controlan la apariencia del separador, el layout de la lista de items, bordes, tamaños de fuente del display y dimensiones de los botones del footer.",
+      "rows": {
+        "separatorWidth": {
+          "description": "Anchura de la columna separadora entre horas y minutos (o minutos y segundos)."
+        },
+        "separatorLineWidth": {
+          "description": "Grosor de la línea decorativa dibujada dentro de la columna separadora."
+        },
+        "separatorLineHeight": {
+          "description": "Altura de la línea decorativa dibujada dentro de la columna separadora."
+        },
+        "separatorBorderRadius": {
+          "description": "Radio de borde de la línea decorativa del separador."
+        },
+        "separatorPaddingTop": {
+          "description": "Relleno superior de la columna separadora, usado para alinearla verticalmente con los items."
+        },
+        "itemsGap": {
+          "description": "Espacio vertical entre las opciones de tiempo dentro de una columna desplazable."
+        },
+        "itemsPadding": {
+          "description": "Relleno alrededor de la lista de items dentro de cada columna desplazable."
+        },
+        "itemsBorderRadius": {
+          "description": "Radio de borde del contenedor de items desplazable."
+        },
+        "optionMinHeight": {
+          "description": "Altura mínima del área del footer que contiene los botones de acción."
+        },
+        "actionsGap": {
+          "description": "Espacio entre los botones de acción del footer (Limpiar y Ahora)."
+        },
+        "minWidth": {
+          "description": "Anchura mínima del selector cuando muestra solo horas y minutos."
+        },
+        "minWidthWithSeconds": {
+          "description": "Anchura mínima del selector cuando la columna de segundos está visible."
+        },
+        "headerBorderWidth": {
+          "description": "Grosor del borde inferior que separa el header del área de columnas."
+        },
+        "itemBorderWidth": {
+          "description": "Grosor del borde renderizado alrededor de cada opción de tiempo."
+        },
+        "displayFontSize": {
+          "description": "Tamaño de fuente utilizado para el tiempo formateado mostrado en el header."
+        },
+        "normalizedFontSize": {
+          "description": "Tamaño de fuente utilizado para el texto del indicador de normalización en el header."
+        },
+        "navBtnHeight": {
+          "description": "Altura de los botones de acción del footer (Limpiar y Ahora)."
+        },
+        "navBtnPadding": {
+          "description": "Relleno horizontal y vertical dentro de los botones de acción del footer."
+        },
+        "navBtnFontSize": {
+          "description": "Tamaño de fuente del texto e iconos dentro de los botones de acción del footer."
+        }
+      }
     },
     "customization": {
       "title": "Personalización",

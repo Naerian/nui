@@ -195,16 +195,67 @@
           "description": "Rahmenbreite des Avatars im umrandeten Zustand"
         },
         "borderOutset": {
-          "description": "Farbe des äußeren Avatar-Rahmens"
+          "description": "Farbe des äußeren Avatar-Rahmens (wird per Theme-Farbe gesetzt)"
         },
         "defaultBg": {
-          "description": "Standard-Hintergrundfarbe"
+          "description": "Standard-Hintergrundfarbe wenn kein Farbinput gesetzt ist"
         },
         "defaultColor": {
-          "description": "Standard-Text-/Icon-Farbe"
+          "description": "Standard-Text-/Icon-Farbe wenn kein Farbinput gesetzt ist"
         },
         "fontWeight": {
-          "description": "Schriftstärke für Initialen"
+          "description": "Schriftstärke für den Initialen-Text"
+        },
+        "lineHeight": {
+          "description": "Zeilenhöhe für den Initialen-Text"
+        },
+        "textTransform": {
+          "description": "Texttransformation für die Initialen"
+        }
+      }
+    },
+    "group": {
+      "title": "Gruppenvariablen",
+      "description": "CSS-Variablen, die das Layout und das Interaktionsverhalten der Avatar-Gruppe steuern.",
+      "rows": {
+        "groupSpacing": {
+          "description": "Überlappungsversatz zwischen Avataren in einer Gruppe (negativer Wert erzeugt Überlappung)"
+        },
+        "groupHoverScale": {
+          "description": "Skalierungsfaktor, der beim Hover auf einen Avatar innerhalb einer Gruppe angewendet wird"
+        },
+        "groupZIndexHover": {
+          "description": "Z-Index des Avatar beim Hover in der Gruppe, um ihn in den Vordergrund zu bringen"
+        },
+        "zIndexBase": {
+          "description": "Basis-Z-Index für Avatare in einer Gruppe"
+        },
+        "zIndexHover": {
+          "description": "Z-Index des Avatars beim Hover innerhalb einer Gruppe"
+        }
+      }
+    },
+    "excess": {
+      "title": "Variablen des Überschuss-Indikators",
+      "description": "CSS-Variablen, die das Erscheinungsbild des '+N'-Zählers steuern, der angezeigt wird, wenn Avatare das Maximum überschreiten.",
+      "rows": {
+        "excessFontSizeXs": {
+          "description": "Schriftgröße des Überschuss-Indikators (xs)"
+        },
+        "excessFontSizeSm": {
+          "description": "Schriftgröße des Überschuss-Indikators (sm)"
+        },
+        "excessFontSizeMd": {
+          "description": "Schriftgröße des Überschuss-Indikators (md)"
+        },
+        "excessFontSizeLg": {
+          "description": "Schriftgröße des Überschuss-Indikators (lg)"
+        },
+        "excessFontSizeXl": {
+          "description": "Schriftgröße des Überschuss-Indikators (xl)"
+        },
+        "excessFontWeight": {
+          "description": "Schriftstärke des Textes im Überschuss-Indikator"
         }
       }
     }

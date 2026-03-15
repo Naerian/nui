@@ -119,54 +119,84 @@
   "theming": {
     "title": "Stile und Anpassung",
     "description": "Passe das Erscheinungsbild der Auswahlschaltfläche über CSS-Variablen an. Steuere Abstände, Farben, Schatten und mehr.",
-    "general": {
-      "title": "Allgemeine Variablen",
-      "description": "CSS-Variablen zur Anpassung des allgemeinen Stils der Auswahlschaltfläche (Standard-Layout).",
+    "structural": {
+      "title": "Strukturelle Variablen",
+      "description": "CSS-Variablen zur Steuerung von Layout, Abständen, Z-Index-Ebenen, Deckkraft und Rahmenradius der Auswahlschaltfläche.",
       "rows": {
-        "gap": {
-          "description": "Abstand zwischen Schaltflächen im Standard-Layout."
+        "zIndexBase": {
+          "description": "Z-Index jeder Optionsschaltfläche in ihrem Standardzustand (Ruheposition)."
         },
-        "transition": {
-          "description": "CSS-Übergang auf alle Schaltflächen angewendet."
+        "zIndexHover": {
+          "description": "Z-Index, der beim Hover auf die Optionsschaltfläche angewendet wird, damit ihr Rahmen über benachbarten Schaltflächen gerendert wird."
+        },
+        "zIndexSelected": {
+          "description": "Z-Index, der auf die ausgewählte Optionsschaltfläche angewendet wird."
+        },
+        "zIndexFocus": {
+          "description": "Z-Index, der auf die fokussierte Optionsschaltfläche angewendet wird, sodass der Fokusring stets sichtbar ist."
+        },
+        "disabledOpacity": {
+          "description": "Deckkraft, die auf eine einzeln deaktivierte Optionsschaltfläche angewendet wird."
+        },
+        "containerDisabledOpacity": {
+          "description": "Deckkraft, die auf die gesamte Schaltflächengruppe angewendet wird, wenn der Input <code>disabled</code> gesetzt ist."
+        },
+        "borderWidth": {
+          "description": "Rahmenbreite jeder Optionsschaltfläche. Wird auch zur Berechnung des negativen Überlappungsabstands zwischen benachbarten Schaltflächen verwendet."
+        },
+        "overlap": {
+          "description": "Negativer linker Außenabstand für benachbarte Schaltflächen, damit deren Rahmen zu einer einzigen Linie zusammenfallen."
+        },
+        "radius": {
+          "description": "Rahmenradius, der auf die äußeren Ecken der ersten und letzten Optionsschaltfläche angewendet wird."
+        },
+        "iconScale": {
+          "description": "Skalierungsfaktor relativ zur aktuellen Schriftgröße zur Berechnung der Symboldimensionen über alle Größen hinweg."
         }
       }
     },
     "segmented": {
       "title": "Variablen für segmentiertes Layout",
-      "description": "CSS-Variablen spezifisch für den segmentierten Stil (iOS-ähnlich). Steuert den Container, ausgewählte/nicht ausgewählte Zustände und Hover-Effekte.",
+      "description": "CSS-Variablen spezifisch für den Abstands-Layout der segmentierten Variante. Steuert den inneren Abstand und das Padding des Track-Containers.",
       "rows": {
         "gap": {
-          "description": "Abstand zwischen Schaltflächen im segmentierten Layout."
-        },
-        "bg": {
-          "description": "Hintergrundfarbe des segmentierten Containers."
+          "description": "Abstand zwischen Optionsschaltflächen innerhalb des segmentierten Track-Containers."
         },
         "padding": {
-          "description": "Innerer Abstand des segmentierten Containers."
+          "description": "Innerer Abstand des segmentierten Track-Containers."
+        }
+      }
+    },
+    "color": {
+      "title": "Farbvariablen",
+      "description": "Pro Farbe und Variante vom Theme-Engine generierte CSS-Variablen. Ersetze <code>{color}</code> durch eine semantische Farbe (z.B. <code>primary</code>) und <code>{variant}</code> durch <code>solid</code>, <code>outline</code>, <code>ghost</code> oder <code>segmented</code>.",
+      "rows": {
+        "bg": {
+          "description": "Hintergrund nicht ausgewählter Optionsschaltflächen für die angegebene Farbe und Variante."
         },
-        "borderRadius": {
-          "description": "Eckradius des segmentierten Containers."
+        "text": {
+          "description": "Textfarbe nicht ausgewählter Optionsschaltflächen für die angegebene Farbe und Variante."
         },
         "border": {
-          "description": "Rahmen des segmentierten Containers."
-        },
-        "selectedBg": {
-          "description": "Hintergrund der ausgewählten Schaltfläche."
-        },
-        "selectedShadow": {
-          "description": "Schatten der ausgewählten Schaltfläche."
-        },
-        "selectedBorder": {
-          "description": "Rahmen der ausgewählten Schaltfläche."
-        },
-        "unselectedBg": {
-          "description": "Hintergrund nicht ausgewählter Schaltflächen."
-        },
-        "unselectedText": {
-          "description": "Textfarbe nicht ausgewählter Schaltflächen."
+          "description": "Rahmenfarbe nicht ausgewählter Optionsschaltflächen für die angegebene Farbe und Variante."
         },
         "hoverBg": {
-          "description": "Hintergrund der Schaltfläche beim Hover."
+          "description": "Hintergrund einer Optionsschaltfläche beim Hover für die angegebene Farbe und Variante."
+        },
+        "selBg": {
+          "description": "Hintergrund der ausgewählten Optionsschaltfläche für die angegebene Farbe und Variante."
+        },
+        "selText": {
+          "description": "Textfarbe der ausgewählten Optionsschaltfläche für die angegebene Farbe und Variante."
+        },
+        "selBorder": {
+          "description": "Rahmenfarbe der ausgewählten Optionsschaltfläche für die angegebene Farbe und Variante."
+        },
+        "trackBg": {
+          "description": "Hintergrund des segmentierten Track-Containers für die angegebene Farbe. Gilt nur für die Variante <code>segmented</code>."
+        },
+        "trackBorder": {
+          "description": "Rahmenfarbe des segmentierten Track-Containers für die angegebene Farbe. Gilt nur für die Variante <code>segmented</code>."
         }
       }
     }

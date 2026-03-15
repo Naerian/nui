@@ -140,27 +140,53 @@
   "theming": {
     "spacing": {
       "title": "Spacing and dimensions",
-      "description": "CSS variables to control the size, padding and spacing of the popover"
+      "description": "CSS variables to control the size, padding and spacing of the popover",
+      "rows": {
+        "padding": "Internal padding of the popover",
+        "maxWidth": "Maximum width of the popover",
+        "minWidth": "Minimum width of the popover",
+        "arrowSize": "Size of the popover arrow",
+        "distance": "Distance from the trigger element to the popover"
+      }
     },
     "typography": {
       "title": "Typography",
-      "description": "CSS variables to control the font of the popover content"
+      "description": "CSS variables to control the font of the popover content",
+      "rows": {
+        "fontSize": "Font size of the popover content",
+        "fontWeight": "Font weight of the popover content",
+        "lineHeight": "Line height of the popover content"
+      }
     },
     "borders": {
       "title": "Borders",
-      "description": "CSS variables to control the borders and radius of the popover"
+      "description": "CSS variables to control the borders and radius of the popover",
+      "rows": {
+        "borderWidth": "Border width of the popover",
+        "borderRadius": "Border radius of the popover"
+      }
     },
     "shadow": {
       "title": "Shadow",
-      "description": "CSS variable to control the popover shadow"
+      "description": "CSS variable to control the popover shadow",
+      "rows": {
+        "shadow": "Box shadow of the popover for visual depth"
+      }
     },
     "zindex": {
       "title": "Z-index",
-      "description": "CSS variable to control the stacking order of the popover"
+      "description": "CSS variable to control the stacking order of the popover",
+      "rows": {
+        "zIndex": "Z-index of the popover to control stacking order"
+      }
     },
     "animation": {
       "title": "Animation",
-      "description": "CSS variables to control popover transitions and animations"
+      "description": "CSS variables to control popover transitions and animations",
+      "rows": {
+        "transitionDuration": "Duration of the popover enter/leave transitions",
+        "transitionTiming": "Timing function for transitions (easing)"
+      }
     }
   },
   "a11y": {

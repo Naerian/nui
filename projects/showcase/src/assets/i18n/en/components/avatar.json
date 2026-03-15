@@ -195,16 +195,67 @@
           "description": "Avatar border thickness when bordered"
         },
         "borderOutset": {
-          "description": "Avatar outer border color"
+          "description": "Avatar outer border color (set per theme color)"
         },
         "defaultBg": {
-          "description": "Default background color"
+          "description": "Default background color when no color input is set"
         },
         "defaultColor": {
-          "description": "Default text/icon color"
+          "description": "Default text/icon color when no color input is set"
         },
         "fontWeight": {
-          "description": "Font weight for initials"
+          "description": "Font weight for initials text"
+        },
+        "lineHeight": {
+          "description": "Line height for initials text"
+        },
+        "textTransform": {
+          "description": "Text transform applied to initials"
+        }
+      }
+    },
+    "group": {
+      "title": "Group variables",
+      "description": "CSS variables that control the layout and interaction behaviour of the avatar group.",
+      "rows": {
+        "groupSpacing": {
+          "description": "Overlap offset between avatars in a group (negative value creates overlap)"
+        },
+        "groupHoverScale": {
+          "description": "Scale factor applied to an avatar on hover within a group"
+        },
+        "groupZIndexHover": {
+          "description": "Z-index applied to the hovered avatar in a group to bring it to the front"
+        },
+        "zIndexBase": {
+          "description": "Base z-index for avatars in a group"
+        },
+        "zIndexHover": {
+          "description": "Z-index for the hovered avatar within a group"
+        }
+      }
+    },
+    "excess": {
+      "title": "Excess indicator variables",
+      "description": "CSS variables that control the appearance of the '+N' excess counter shown when avatars exceed the max limit.",
+      "rows": {
+        "excessFontSizeXs": {
+          "description": "Font size of the excess indicator (xs)"
+        },
+        "excessFontSizeSm": {
+          "description": "Font size of the excess indicator (sm)"
+        },
+        "excessFontSizeMd": {
+          "description": "Font size of the excess indicator (md)"
+        },
+        "excessFontSizeLg": {
+          "description": "Font size of the excess indicator (lg)"
+        },
+        "excessFontSizeXl": {
+          "description": "Font size of the excess indicator (xl)"
+        },
+        "excessFontWeight": {
+          "description": "Font weight of the excess indicator text"
         }
       }
     }

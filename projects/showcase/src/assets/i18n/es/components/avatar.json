@@ -195,16 +195,67 @@
           "description": "Grosor del borde del avatar cuando está bordeado"
         },
         "borderOutset": {
-          "description": "Color del borde exterior del avatar"
+          "description": "Color del borde exterior del avatar (definido por el color del tema)"
         },
         "defaultBg": {
-          "description": "Color de fondo por defecto"
+          "description": "Color de fondo por defecto cuando no se establece un color"
         },
         "defaultColor": {
-          "description": "Color de texto/icono por defecto"
+          "description": "Color de texto/icono por defecto cuando no se establece un color"
         },
         "fontWeight": {
-          "description": "Peso de fuente para iniciales"
+          "description": "Peso de fuente para el texto de iniciales"
+        },
+        "lineHeight": {
+          "description": "Altura de línea para el texto de iniciales"
+        },
+        "textTransform": {
+          "description": "Transformación de texto aplicada a las iniciales"
+        }
+      }
+    },
+    "group": {
+      "title": "Variables de grupo",
+      "description": "Variables CSS que controlan el layout y el comportamiento de interacción del grupo de avatares.",
+      "rows": {
+        "groupSpacing": {
+          "description": "Desplazamiento de superposición entre avatares en un grupo (valor negativo crea solapamiento)"
+        },
+        "groupHoverScale": {
+          "description": "Factor de escala aplicado a un avatar al pasar el cursor dentro de un grupo"
+        },
+        "groupZIndexHover": {
+          "description": "Z-index aplicado al avatar con hover en el grupo para traerlo al frente"
+        },
+        "zIndexBase": {
+          "description": "Z-index base para los avatares en un grupo"
+        },
+        "zIndexHover": {
+          "description": "Z-index para el avatar con hover dentro de un grupo"
+        }
+      }
+    },
+    "excess": {
+      "title": "Variables del indicador de exceso",
+      "description": "Variables CSS que controlan la apariencia del contador '+N' que se muestra cuando los avatares superan el límite máximo.",
+      "rows": {
+        "excessFontSizeXs": {
+          "description": "Tamaño de fuente del indicador de exceso (xs)"
+        },
+        "excessFontSizeSm": {
+          "description": "Tamaño de fuente del indicador de exceso (sm)"
+        },
+        "excessFontSizeMd": {
+          "description": "Tamaño de fuente del indicador de exceso (md)"
+        },
+        "excessFontSizeLg": {
+          "description": "Tamaño de fuente del indicador de exceso (lg)"
+        },
+        "excessFontSizeXl": {
+          "description": "Tamaño de fuente del indicador de exceso (xl)"
+        },
+        "excessFontWeight": {
+          "description": "Peso de fuente del texto del indicador de exceso"
         }
       }
     }

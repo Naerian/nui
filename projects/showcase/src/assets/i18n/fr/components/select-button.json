@@ -119,54 +119,84 @@
   "theming": {
     "title": "Styles et personnalisation",
     "description": "Personnalisez l'apparence du Bouton de sélection avec des variables CSS. Contrôlez l'espacement, les couleurs, les ombres et plus encore.",
-    "general": {
-      "title": "Variables générales",
-      "description": "Variables CSS pour personnaliser le style général du Bouton de sélection (disposition par défaut).",
+    "structural": {
+      "title": "Variables structurelles",
+      "description": "Variables CSS qui contrôlent la disposition, l'espacement, les couches z-index, l'opacité et le rayon de bordure du Bouton de sélection.",
       "rows": {
-        "gap": {
-          "description": "Espace entre les boutons dans la disposition par défaut."
+        "zIndexBase": {
+          "description": "Z-index de chaque bouton d'option dans son état par défaut (au repos)."
         },
-        "transition": {
-          "description": "Transition CSS appliquée à tous les boutons."
+        "zIndexHover": {
+          "description": "Z-index appliqué au bouton d'option au survol, pour que sa bordure s'affiche au-dessus des boutons adjacents."
+        },
+        "zIndexSelected": {
+          "description": "Z-index appliqué au bouton d'option sélectionné."
+        },
+        "zIndexFocus": {
+          "description": "Z-index appliqué au bouton d'option focalisé, garantissant que l'anneau de focus est toujours visible."
+        },
+        "disabledOpacity": {
+          "description": "Opacité appliquée à un bouton d'option individuellement désactivé."
+        },
+        "containerDisabledOpacity": {
+          "description": "Opacité appliquée à l'ensemble du groupe de boutons lorsque l'input <code>disabled</code> est activé."
+        },
+        "borderWidth": {
+          "description": "Largeur de bordure de chaque bouton d'option. Utilisée aussi pour calculer le chevauchement négatif entre boutons adjacents."
+        },
+        "overlap": {
+          "description": "Marge gauche négative appliquée aux boutons adjacents pour fusionner leurs bordures en une seule ligne."
+        },
+        "radius": {
+          "description": "Rayon de bordure appliqué aux coins externes du premier et du dernier bouton d'option."
+        },
+        "iconScale": {
+          "description": "Facteur d'échelle relatif à la taille de police actuelle pour calculer les dimensions des icônes dans toutes les tailles."
         }
       }
     },
     "segmented": {
       "title": "Variables de disposition segmentée",
-      "description": "Variables CSS spécifiques au style segmenté (similaire iOS). Contrôle le conteneur, les états sélectionné/non sélectionné et les effets de survol.",
+      "description": "Variables CSS spécifiques à l'espacement de la variante segmentée. Contrôle l'écart intérieur et le rembourrage du conteneur de piste.",
       "rows": {
         "gap": {
-          "description": "Espace entre les boutons dans la disposition segmentée."
-        },
-        "bg": {
-          "description": "Couleur de fond du conteneur segmenté."
+          "description": "Écart entre les boutons d'option à l'intérieur du conteneur de piste segmentée."
         },
         "padding": {
-          "description": "Rembourrage intérieur du conteneur segmenté."
+          "description": "Rembourrage intérieur du conteneur de piste segmentée."
+        }
+      }
+    },
+    "color": {
+      "title": "Variables de couleur",
+      "description": "Variables CSS par couleur et par variante générées par le moteur de thèmes. Remplacez <code>{color}</code> par une couleur sémantique (ex. <code>primary</code>) et <code>{variant}</code> par <code>solid</code>, <code>outline</code>, <code>ghost</code> ou <code>segmented</code>.",
+      "rows": {
+        "bg": {
+          "description": "Fond des boutons d'option non sélectionnés pour la couleur et la variante données."
         },
-        "borderRadius": {
-          "description": "Rayon de coin du conteneur segmenté."
+        "text": {
+          "description": "Couleur de texte des boutons d'option non sélectionnés pour la couleur et la variante données."
         },
         "border": {
-          "description": "Bordure du conteneur segmenté."
-        },
-        "selectedBg": {
-          "description": "Fond du bouton sélectionné."
-        },
-        "selectedShadow": {
-          "description": "Ombre du bouton sélectionné."
-        },
-        "selectedBorder": {
-          "description": "Bordure du bouton sélectionné."
-        },
-        "unselectedBg": {
-          "description": "Fond des boutons non sélectionnés."
-        },
-        "unselectedText": {
-          "description": "Couleur de texte des boutons non sélectionnés."
+          "description": "Couleur de bordure des boutons d'option non sélectionnés pour la couleur et la variante données."
         },
         "hoverBg": {
-          "description": "Fond du bouton à l'état de survol."
+          "description": "Fond d'un bouton d'option au survol pour la couleur et la variante données."
+        },
+        "selBg": {
+          "description": "Fond du bouton d'option sélectionné pour la couleur et la variante données."
+        },
+        "selText": {
+          "description": "Couleur de texte du bouton d'option sélectionné pour la couleur et la variante données."
+        },
+        "selBorder": {
+          "description": "Couleur de bordure du bouton d'option sélectionné pour la couleur et la variante données."
+        },
+        "trackBg": {
+          "description": "Fond du conteneur de piste segmentée pour la couleur donnée. S'applique uniquement à la variante <code>segmented</code>."
+        },
+        "trackBorder": {
+          "description": "Couleur de bordure du conteneur de piste segmentée pour la couleur donnée. S'applique uniquement à la variante <code>segmented</code>."
         }
       }
     }

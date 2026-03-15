@@ -163,29 +163,24 @@
         "fillHoverBg": { "description": "Color de fondo del fill en hover." },
         "text": { "description": "Color del texto dentro del fill (modo inside)." },
         "valueText": { "description": "Color del texto del valor fuera del fill." },
-        "labelText": { "description": "Color del texto de la etiqueta." },
-        "stepDivider": {
-          "description": "Color de las l\u00edneas divisorias de pasos (si se usan steps)."
-        }
+        "labelText": { "description": "Color del texto de la etiqueta." }
       }
     },
     "sizes": {
       "title": "Tokens de tamaño",
       "description": "Propiedades CSS personalizadas estructurales que controlan la altura del track, el radio de borde y las transiciones.",
       "rows": {
-        "heightXs": { "description": "Altura de la barra en tama\u00f1o xs." },
-        "heightSm": { "description": "Altura de la barra en tama\u00f1o sm." },
-        "heightMd": { "description": "Altura de la barra en tama\u00f1o md." },
-        "heightLg": { "description": "Altura de la barra en tama\u00f1o lg." },
-        "heightXl": { "description": "Altura de la barra en tama\u00f1o xl." },
+        "height": { "description": "Altura predeterminada del track." },
+        "heightCompact": { "description": "Altura del track en modo compacto." },
+        "radius": { "description": "Radio de borde del track." },
+        "radiusCompact": { "description": "Radio de borde del track en modo compacto." },
         "borderWidth": { "description": "Anchura del borde del track." },
-        "transitionDuration": { "description": "Duraci\u00f3n de la transici\u00f3n del fill." },
-        "indeterminateDuration": {
-          "description": "Duraci\u00f3n del ciclo de animaci\u00f3n indeterminada."
-        },
-        "stepWidth": {
-          "description": "Anchura de las l\u00edneas divisorias de pasos, si <code>steps</code> tiene valor."
-        }
+        "fontWeightInside": { "description": "Peso de fuente del texto del valor renderizado dentro del fill." },
+        "transitionDuration": { "description": "Duración de la transición del fill." },
+        "transitionTiming": { "description": "Función de temporización de la transición del fill." },
+        "indeterminateDuration": { "description": "Duración del ciclo de animación indeterminada." },
+        "indeterminateTiming": { "description": "Función de temporización de la animación indeterminada." },
+        "stepGap": { "description": "Separación entre segmentos de pasos cuando <code>steps</code> está activo." }
       }
     }
   },

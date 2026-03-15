@@ -510,7 +510,8 @@
         "progressBg": "Couleur de la piste de la barre de progression du timeout.",
         "progressColor": "Couleur de remplissage de la barre de progression du timeout.",
         "scrollBg": "Couleur de la piste de la barre de défilement.",
-        "scrollThumbBg": "Couleur du curseur de la barre de défilement."
+        "scrollThumbBg": "Couleur du curseur de la barre de défilement.",
+        "scrollThumbHoverBg": "Couleur du curseur de la barre de défilement au survol."
       }
     },
     "layout": {

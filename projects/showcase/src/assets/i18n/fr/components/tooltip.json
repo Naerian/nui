@@ -95,15 +95,69 @@
   "theming": {
     "container": {
       "title": "Conteneur de l'info-bulle",
-      "description": "Variables CSS pour contrôler l'apparence du conteneur de l'info-bulle : couleurs, dimensions, rembourrage, police, bordures, ombre et z-index"
+      "description": "Variables CSS pour contrôler l'apparence du conteneur de l'info-bulle : couleurs, dimensions, rembourrage, police, bordures, ombre et z-index",
+      "rows": {
+        "bg": {
+          "description": "Couleur d'arrière-plan de l'info-bulle (définie dynamiquement selon le thème actif)"
+        },
+        "text": {
+          "description": "Couleur du texte de l'info-bulle (définie dynamiquement selon le thème actif)"
+        },
+        "paddingY": {
+          "description": "Rembourrage vertical dans la zone de contenu de l'info-bulle"
+        },
+        "paddingX": {
+          "description": "Rembourrage horizontal dans la zone de contenu de l'info-bulle"
+        },
+        "maxWidth": {
+          "description": "Largeur maximale du panneau de l'info-bulle"
+        },
+        "fontSize": {
+          "description": "Taille de police du texte de l'info-bulle"
+        },
+        "fontWeight": {
+          "description": "Graisse de police du texte de l'info-bulle"
+        },
+        "lineHeight": {
+          "description": "Interligne du texte de l'info-bulle"
+        },
+        "borderRadius": {
+          "description": "Rayon de bordure des coins du panneau de l'info-bulle"
+        },
+        "borderWidth": {
+          "description": "Largeur de la bordure du panneau de l'info-bulle"
+        },
+        "borderColor": {
+          "description": "Couleur de la bordure du panneau de l'info-bulle (définie dynamiquement selon le thème actif)"
+        },
+        "shadow": {
+          "description": "Ombre portée appliquée au panneau de l'info-bulle"
+        },
+        "zIndex": {
+          "description": "Z-index de l'overlay de l'info-bulle pour contrôler l'ordre d'empilement"
+        }
+      }
     },
     "arrow": {
       "title": "Flèche de l'info-bulle",
-      "description": "Variable CSS pour contrôler la taille de la flèche de l'info-bulle"
+      "description": "Variable CSS pour contrôler la taille de la flèche de l'info-bulle",
+      "rows": {
+        "arrowSize": {
+          "description": "Taille de la flèche directionnelle pointant de l'info-bulle vers l'élément déclencheur"
+        }
+      }
     },
     "animation": {
       "title": "Animations",
-      "description": "Variables CSS pour contrôler la durée et le timing des animations d'entrée/sortie de l'info-bulle"
+      "description": "Variables CSS pour contrôler la durée et le timing des animations d'entrée/sortie de l'info-bulle",
+      "rows": {
+        "transitionDuration": {
+          "description": "Durée de la transition d'affichage et de masquage de l'info-bulle"
+        },
+        "transitionTiming": {
+          "description": "Fonction de timing de la transition d'affichage et de masquage de l'info-bulle"
+        }
+      }
     },
     "examples": {
       "title": "Exemples de personnalisation",

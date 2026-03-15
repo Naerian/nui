@@ -250,11 +250,11 @@
         "focusOutlineOffset": {
           "description": "Décalage du contour de focus"
         },
+        "itemPadding": {
+          "description": "Rembourrage interne du conteneur d'élément"
+        },
         "arrowPaddingLeft": {
           "description": "Rembourrage gauche de la flèche"
-        },
-        "transition": {
-          "description": "Transitions d'état"
         }
       }
     },
@@ -313,6 +313,12 @@
         "shortcutFontSize": {
           "description": "Taille de police du raccourci"
         },
+        "badgeBg": {
+          "description": "Couleur de fond du badge"
+        },
+        "badgeColor": {
+          "description": "Couleur du texte du badge"
+        },
         "notifySelectedSize": {
           "description": "Taille de l'indicateur d'enfant sélectionné"
         },
@@ -326,29 +332,20 @@
       "description": "Modèle de variable CSS pour personnaliser les couleurs des éléments du menu par état.",
       "note": "Remplacez <code>{color}</code> par n'importe quelle couleur sémantique NUI (<code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>) pour personnaliser l'apparence des éléments dans différents états.",
       "rows": {
-        "bg": {
-          "description": "Arrière-plan de l'élément en état normal"
+        "baseBg": {
+          "description": "Arrière-plan de base pour les états survol et sélectionné"
         },
-        "text": {
-          "description": "Couleur du texte de l'élément"
+        "baseColor": {
+          "description": "Couleur de texte de base pour les états survol et sélectionné"
         },
-        "hoverBg": {
-          "description": "Arrière-plan de l'élément au survol"
+        "border": {
+          "description": "Teinte de couleur de bordure pour le menu et les séparateurs"
         },
-        "hoverText": {
-          "description": "Couleur du texte au survol"
+        "check": {
+          "description": "Couleur de l'icône de coche sur les éléments sélectionnés"
         },
         "activeBg": {
-          "description": "Arrière-plan de l'élément actif"
-        },
-        "selectedBg": {
-          "description": "Arrière-plan de l'élément sélectionné"
-        },
-        "selectedText": {
-          "description": "Couleur du texte de l'élément sélectionné"
-        },
-        "notifySelected": {
-          "description": "Couleur de l'indicateur d'enfant sélectionné"
+          "description": "Arrière-plan de l'élément sélectionné au survol (plus intense)"
         }
       }
     }

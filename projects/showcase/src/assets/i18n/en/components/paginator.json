@@ -209,23 +209,71 @@
   "theming": {
     "layout": {
       "title": "Layout",
-      "description": "CSS variables for the overall paginator layout"
+      "description": "CSS variables for the overall paginator layout and spacing",
+      "rows": {
+        "gap": { "description": "Gap between page buttons inside the paginator." },
+        "disabledOpacity": { "description": "Opacity applied to disabled paginator buttons." },
+        "pageJumpInputWidth": { "description": "Width of the page jump input field." }
+      }
     },
-    "buttons": {
-      "title": "Buttons",
-      "description": "CSS variables for navigation buttons and page numbers"
+    "zindex": {
+      "title": "Z-index",
+      "description": "CSS variables controlling stacking order of paginator elements",
+      "rows": {
+        "base": { "description": "Base z-index for paginator buttons." },
+        "hover": { "description": "Z-index applied on hover." },
+        "active": { "description": "Z-index applied on the active button." },
+        "focus": { "description": "Z-index applied when a button is focused." }
+      }
+    },
+    "inactive": {
+      "title": "Inactive buttons",
+      "description": "CSS variables for inactive (ghost) page buttons — set by ThemeService based on the active preset",
+      "rows": {
+        "ghostBg": { "description": "Background of inactive page buttons (always ghost/transparent)." },
+        "ghostText": { "description": "Text color of inactive page buttons." },
+        "ghostBorder": { "description": "Border color of inactive page buttons." },
+        "ghostHoverBg": { "description": "Background of inactive page buttons on hover." },
+        "ghostHoverBorder": { "description": "Border color of inactive page buttons on hover." }
+      }
     },
     "active": {
-      "title": "Active page",
-      "description": "CSS variables for the active state of the current page"
+      "title": "Active page button",
+      "description": "CSS variables for the active page button across all three variants — set by ThemeService based on the active preset",
+      "rows": {
+        "solidActiveBg": { "description": "Background of the active button in Solid variant." },
+        "solidActiveText": { "description": "Text color of the active button in Solid variant." },
+        "solidActiveBorder": { "description": "Border color of the active button in Solid variant." },
+        "outlineActiveBg": { "description": "Background of the active button in Outline variant." },
+        "outlineActiveText": { "description": "Text color of the active button in Outline variant." },
+        "outlineActiveBorder": { "description": "Border color of the active button in Outline variant." },
+        "ghostActiveBg": { "description": "Background of the active button in Ghost variant." },
+        "ghostActiveText": { "description": "Text color of the active button in Ghost variant." },
+        "ghostActiveBorder": { "description": "Border color of the active button in Ghost variant." }
+      }
     },
-    "controls": {
-      "title": "Controls",
-      "description": "CSS variables for the size selector, item range and page jump"
+    "nav": {
+      "title": "Navigation buttons",
+      "description": "CSS variables for the prev/next/first/last navigation buttons — set by ThemeService based on the active preset",
+      "rows": {
+        "navBg": { "description": "Background of navigation buttons (prev/next/first/last)." },
+        "navText": { "description": "Text/icon color of navigation buttons." },
+        "navBorder": { "description": "Border color of navigation buttons." },
+        "navHoverBg": { "description": "Background of navigation buttons on hover." },
+        "navHoverText": { "description": "Text/icon color of navigation buttons on hover." },
+        "navHoverBorder": { "description": "Border color of navigation buttons on hover." }
+      }
     },
-    "infinite": {
-      "title": "Infinite scroll",
-      "description": "CSS variables for infinite loading mode"
+    "misc": {
+      "title": "Miscellaneous",
+      "description": "CSS variables for the ellipsis, focus ring and page jump controls — set by ThemeService based on the active preset",
+      "rows": {
+        "ellipsisColor": { "description": "Color of the ellipsis (…) element between page buttons." },
+        "focusRing": { "description": "Color of the focus ring shown on keyboard-focused buttons." },
+        "jumpBorder": { "description": "Border color of the page jump input wrapper." },
+        "jumpSeparator": { "description": "Color of the separator between the page jump input and its Go button." },
+        "jumpHoverBg": { "description": "Background of the Go button inside the page jump control on hover." }
+      }
     }
   },
   "i18n": {

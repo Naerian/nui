@@ -19,7 +19,6 @@ export const PROGRESS_BAR_THEMING_SECTIONS: ComponentSection[] = [
         ['<code>--nui-pb-text</code>', 'components.progressBar.theming.colors.rows.text.description'],
         ['<code>--nui-pb-value-text</code>', 'components.progressBar.theming.colors.rows.valueText.description'],
         ['<code>--nui-pb-label-text</code>', 'components.progressBar.theming.colors.rows.labelText.description'],
-        ['<code>--nui-pb-step-divider</code>', 'components.progressBar.theming.colors.rows.stepDivider.description'],
       ],
     },
   },
@@ -35,25 +34,27 @@ export const PROGRESS_BAR_THEMING_SECTIONS: ComponentSection[] = [
         'common.tables.description',
       ],
       rows: [
-        ['<code>--nui-pb-height-xs</code>', '0.25rem', 'components.progressBar.theming.sizes.rows.heightXs.description'],
-        ['<code>--nui-pb-height-sm</code>', '0.375rem', 'components.progressBar.theming.sizes.rows.heightSm.description'],
-        ['<code>--nui-pb-height-md</code>', '0.5rem', 'components.progressBar.theming.sizes.rows.heightMd.description'],
-        ['<code>--nui-pb-height-lg</code>', '0.75rem', 'components.progressBar.theming.sizes.rows.heightLg.description'],
-        ['<code>--nui-pb-height-xl</code>', '1rem', 'components.progressBar.theming.sizes.rows.heightXl.description'],
+        ['<code>--nui-pb-height</code>', '1.25rem', 'components.progressBar.theming.sizes.rows.height.description'],
+        ['<code>--nui-pb-height-compact</code>', '0.375rem', 'components.progressBar.theming.sizes.rows.heightCompact.description'],
+        ['<code>--nui-pb-radius</code>', 'var(--nui-border-radius-md)', 'components.progressBar.theming.sizes.rows.radius.description'],
+        ['<code>--nui-pb-radius-compact</code>', 'var(--nui-border-radius-sm)', 'components.progressBar.theming.sizes.rows.radiusCompact.description'],
         ['<code>--nui-pb-border-width</code>', 'var(--nui-border-width-xs)', 'components.progressBar.theming.sizes.rows.borderWidth.description'],
-        ['<code>--nui-pb-transition-duration</code>', '0.3s', 'components.progressBar.theming.sizes.rows.transitionDuration.description'],
+        ['<code>--nui-pb-font-weight-inside</code>', '600', 'components.progressBar.theming.sizes.rows.fontWeightInside.description'],
+        ['<code>--nui-pb-transition-duration</code>', '0.6s', 'components.progressBar.theming.sizes.rows.transitionDuration.description'],
+        ['<code>--nui-pb-transition-timing</code>', 'ease', 'components.progressBar.theming.sizes.rows.transitionTiming.description'],
         ['<code>--nui-pb-indeterminate-duration</code>', '1.5s', 'components.progressBar.theming.sizes.rows.indeterminateDuration.description'],
-        ['<code>--nui-pb-step-width</code>', '0.188rem', 'components.progressBar.theming.sizes.rows.stepWidth.description'],
+        ['<code>--nui-pb-indeterminate-timing</code>', 'ease-in-out', 'components.progressBar.theming.sizes.rows.indeterminateTiming.description'],
+        ['<code>--nui-pb-step-gap</code>', '0rem', 'components.progressBar.theming.sizes.rows.stepGap.description'],
       ],
     },
     examples: [
       {
         title: 'codeExamples.scss',
-        code: `/* Sobreescribir tokens en tu componente */
+        code: `/* Override tokens on your component */
 nui-progress-bar {
-  --nui-pb-height-md: 0.75rem;
-  --nui-pb-indeterminate-duration: 2s;
-  --nui-pb-step-width: 4px;
+  --nui-pb-height: 1rem;
+  --nui-pb-transition-duration: 1s;
+  --nui-pb-step-gap: 4px;
 }`,
         language: 'scss',
       },

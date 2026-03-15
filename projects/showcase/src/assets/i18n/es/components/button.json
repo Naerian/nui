@@ -222,47 +222,47 @@
         "ghostActiveBorder": {
           "description": "Borde activo para ghost"
         },
-        "focusColor": {
+        "focusRing": {
           "description": "Color del anillo de foco"
+        },
+        "linkBg": {
+          "description": "Color de fondo para la variante link"
+        },
+        "linkText": {
+          "description": "Color de texto para la variante link"
+        },
+        "linkBorder": {
+          "description": "Color de borde para la variante link"
+        },
+        "linkHoverBg": {
+          "description": "Fondo al pasar el cursor para link"
+        },
+        "linkHoverText": {
+          "description": "Color de texto al pasar el cursor para link"
+        },
+        "linkHoverBorder": {
+          "description": "Borde al pasar el cursor para link"
+        },
+        "linkActiveBg": {
+          "description": "Fondo activo para link"
+        },
+        "linkActiveBorder": {
+          "description": "Borde activo para link"
+        },
+        "linkActiveText": {
+          "description": "Color de texto activo para link"
         }
       }
     },
     "structure": {
       "title": "Variables estructurales",
-      "description": "Variables CSS para espaciado, tamaños, tipografía y efectos visuales.",
+      "description": "Variables CSS para espaciado, borde, tipografía y efectos visuales.",
       "rows": {
         "gap": {
           "description": "Espacio entre icono y texto"
         },
-        "paddingXXs": {
-          "description": "Relleno horizontal para el tamaño xs"
-        },
-        "paddingYXs": {
-          "description": "Relleno vertical para el tamaño xs"
-        },
-        "paddingXSm": {
-          "description": "Relleno horizontal para el tamaño sm"
-        },
-        "paddingYSm": {
-          "description": "Relleno vertical para el tamaño sm"
-        },
-        "paddingXMd": {
-          "description": "Relleno horizontal para el tamaño md"
-        },
-        "paddingYMd": {
-          "description": "Relleno vertical para el tamaño md"
-        },
-        "paddingXLg": {
-          "description": "Relleno horizontal para el tamaño lg"
-        },
-        "paddingYLg": {
-          "description": "Relleno vertical para el tamaño lg"
-        },
-        "paddingXXl": {
-          "description": "Relleno horizontal para el tamaño xl"
-        },
-        "paddingYXl": {
-          "description": "Relleno vertical para el tamaño xl"
+        "borderWidth": {
+          "description": "Grosor del borde aplicado a todas las variantes del botón"
         },
         "radiusXs": {
           "description": "Radio de borde para el tamaño xs"
@@ -279,47 +279,20 @@
         "radiusXl": {
           "description": "Radio de borde para el tamaño xl"
         },
-        "fontSizeXs": {
-          "description": "Tamaño de fuente para xs"
-        },
-        "fontSizeSm": {
-          "description": "Tamaño de fuente para sm"
-        },
-        "fontSizeMd": {
-          "description": "Tamaño de fuente para md"
-        },
-        "fontSizeLg": {
-          "description": "Tamaño de fuente para lg"
-        },
-        "fontSizeXl": {
-          "description": "Tamaño de fuente para xl"
-        },
-        "iconSizeXs": {
-          "description": "Tamaño de icono para xs"
-        },
-        "iconSizeSm": {
-          "description": "Tamaño de icono para sm"
-        },
-        "iconSizeMd": {
-          "description": "Tamaño de icono para md"
-        },
-        "iconSizeLg": {
-          "description": "Tamaño de icono para lg"
-        },
-        "iconSizeXl": {
-          "description": "Tamaño de icono para xl"
-        },
-        "transition": {
-          "description": "Duración de la transición"
+        "fontWeight": {
+          "description": "Peso de fuente aplicado a las etiquetas del botón"
         },
         "spinDuration": {
           "description": "Duración de la animación del spinner de carga"
         },
-        "focusWidth": {
-          "description": "Ancho del contorno de foco"
+        "linkUnderlineOffset": {
+          "description": "Desplazamiento del subrayado para la variante link al pasar el cursor"
         },
-        "focusOffset": {
-          "description": "Desplazamiento del contorno de foco"
+        "linkUnderlineThickness": {
+          "description": "Grosor del subrayado para la variante link al pasar el cursor"
+        },
+        "linkUnderlineSkipInk": {
+          "description": "Controla si el subrayado evita los descendentes en la variante link"
         }
       }
     }

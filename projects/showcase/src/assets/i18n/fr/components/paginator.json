@@ -209,23 +209,71 @@
   "theming": {
     "layout": {
       "title": "Disposition",
-      "description": "Variables CSS pour la disposition générale du paginateur"
+      "description": "Variables CSS pour la disposition générale et l'espacement du paginateur",
+      "rows": {
+        "gap": { "description": "Espace entre les boutons de page dans le paginateur." },
+        "disabledOpacity": { "description": "Opacité appliquée aux boutons désactivés du paginateur." },
+        "pageJumpInputWidth": { "description": "Largeur du champ de saisie du saut de page." }
+      }
     },
-    "buttons": {
-      "title": "Boutons",
-      "description": "Variables CSS pour les boutons de navigation et les numéros de page"
+    "zindex": {
+      "title": "Z-index",
+      "description": "Variables CSS contrôlant l'ordre d'empilement des éléments du paginateur",
+      "rows": {
+        "base": { "description": "Z-index de base des boutons du paginateur." },
+        "hover": { "description": "Z-index appliqué au survol." },
+        "active": { "description": "Z-index appliqué au bouton actif." },
+        "focus": { "description": "Z-index appliqué quand un bouton est focalisé." }
+      }
+    },
+    "inactive": {
+      "title": "Boutons inactifs",
+      "description": "Variables CSS pour les boutons de page inactifs (ghost) — définies par ThemeService selon le preset actif",
+      "rows": {
+        "ghostBg": { "description": "Arrière-plan des boutons de page inactifs (toujours ghost/transparent)." },
+        "ghostText": { "description": "Couleur du texte des boutons de page inactifs." },
+        "ghostBorder": { "description": "Couleur de bordure des boutons de page inactifs." },
+        "ghostHoverBg": { "description": "Arrière-plan des boutons de page inactifs au survol." },
+        "ghostHoverBorder": { "description": "Couleur de bordure des boutons de page inactifs au survol." }
+      }
     },
     "active": {
-      "title": "Page active",
-      "description": "Variables CSS pour l'état actif de la page courante"
+      "title": "Bouton de page active",
+      "description": "Variables CSS pour le bouton de page active dans les trois variantes — définies par ThemeService selon le preset actif",
+      "rows": {
+        "solidActiveBg": { "description": "Arrière-plan du bouton actif dans la variante Solid." },
+        "solidActiveText": { "description": "Couleur du texte du bouton actif dans la variante Solid." },
+        "solidActiveBorder": { "description": "Couleur de bordure du bouton actif dans la variante Solid." },
+        "outlineActiveBg": { "description": "Arrière-plan du bouton actif dans la variante Outline." },
+        "outlineActiveText": { "description": "Couleur du texte du bouton actif dans la variante Outline." },
+        "outlineActiveBorder": { "description": "Couleur de bordure du bouton actif dans la variante Outline." },
+        "ghostActiveBg": { "description": "Arrière-plan du bouton actif dans la variante Ghost." },
+        "ghostActiveText": { "description": "Couleur du texte du bouton actif dans la variante Ghost." },
+        "ghostActiveBorder": { "description": "Couleur de bordure du bouton actif dans la variante Ghost." }
+      }
     },
-    "controls": {
-      "title": "Contrôles",
-      "description": "Variables CSS pour le sélecteur de taille, la plage d'éléments et le saut de page"
+    "nav": {
+      "title": "Boutons de navigation",
+      "description": "Variables CSS pour les boutons de navigation précédent/suivant/premier/dernier — définies par ThemeService selon le preset actif",
+      "rows": {
+        "navBg": { "description": "Arrière-plan des boutons de navigation (précédent/suivant/premier/dernier)." },
+        "navText": { "description": "Couleur du texte/icône des boutons de navigation." },
+        "navBorder": { "description": "Couleur de bordure des boutons de navigation." },
+        "navHoverBg": { "description": "Arrière-plan des boutons de navigation au survol." },
+        "navHoverText": { "description": "Couleur du texte/icône des boutons de navigation au survol." },
+        "navHoverBorder": { "description": "Couleur de bordure des boutons de navigation au survol." }
+      }
     },
-    "infinite": {
-      "title": "Défilement infini",
-      "description": "Variables CSS pour le mode de chargement infini"
+    "misc": {
+      "title": "Divers",
+      "description": "Variables CSS pour les points de suspension, l'anneau de focus et les contrôles de saut de page — définies par ThemeService selon le preset actif",
+      "rows": {
+        "ellipsisColor": { "description": "Couleur de l'élément de points de suspension (…) entre les boutons de page." },
+        "focusRing": { "description": "Couleur de l'anneau de focus affiché sur les boutons focalisés au clavier." },
+        "jumpBorder": { "description": "Couleur de bordure du conteneur du champ de saut de page." },
+        "jumpSeparator": { "description": "Couleur du séparateur entre le champ de saut de page et son bouton Aller." },
+        "jumpHoverBg": { "description": "Arrière-plan du bouton Aller dans le contrôle de saut de page au survol." }
+      }
     }
   },
   "i18n": {

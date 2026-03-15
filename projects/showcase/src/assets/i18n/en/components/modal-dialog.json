@@ -510,7 +510,8 @@
         "progressBg": "Timeout progress bar track color.",
         "progressColor": "Timeout progress bar fill color.",
         "scrollBg": "Scrollbar track color.",
-        "scrollThumbBg": "Scrollbar thumb color."
+        "scrollThumbBg": "Scrollbar thumb color.",
+        "scrollThumbHoverBg": "Scrollbar thumb color on hover."
       }
     },
     "layout": {

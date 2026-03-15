@@ -250,11 +250,11 @@
         "focusOutlineOffset": {
           "description": "Versatz des Fokus-Outlines"
         },
+        "itemPadding": {
+          "description": "Innerer Abstand des Eintrag-Containers"
+        },
         "arrowPaddingLeft": {
           "description": "Linker Innenabstand des Pfeils"
-        },
-        "transition": {
-          "description": "Zustandsübergänge"
         }
       }
     },
@@ -313,6 +313,12 @@
         "shortcutFontSize": {
           "description": "Schriftgröße des Shortcuts"
         },
+        "badgeBg": {
+          "description": "Hintergrundfarbe des Badges"
+        },
+        "badgeColor": {
+          "description": "Textfarbe des Badges"
+        },
         "notifySelectedSize": {
           "description": "Größe des Indikators für ausgewählte Kinder"
         },
@@ -326,29 +332,20 @@
       "description": "CSS-Variablenmuster zur Anpassung der Eintragsfarben nach Zustand.",
       "note": "Ersetze <code>{color}</code> durch eine beliebige semantische NUI-Farbe (<code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>), um die Eintragsdarstellung in verschiedenen Zuständen anzupassen.",
       "rows": {
-        "bg": {
-          "description": "Eintragshintergrund im Normalzustand"
+        "baseBg": {
+          "description": "Basishintergrund für Hover- und Ausgewählt-Zustände"
         },
-        "text": {
-          "description": "Textfarbe des Eintrags"
+        "baseColor": {
+          "description": "Basistextfarbe für Hover- und Ausgewählt-Zustände"
         },
-        "hoverBg": {
-          "description": "Eintragshintergrund beim Hover"
+        "border": {
+          "description": "Rahmen-Tintfarbe für Menürahmen und Trenner"
         },
-        "hoverText": {
-          "description": "Textfarbe beim Hover"
+        "check": {
+          "description": "Farbe des Häkchen-Icons bei ausgewählten Einträgen"
         },
         "activeBg": {
-          "description": "Eintragshintergrund beim Klicken"
-        },
-        "selectedBg": {
-          "description": "Hintergrund des ausgewählten Eintrags"
-        },
-        "selectedText": {
-          "description": "Textfarbe des ausgewählten Eintrags"
-        },
-        "notifySelected": {
-          "description": "Farbe des Indikators für ausgewählte Kinder"
+          "description": "Hintergrund des ausgewählten Eintrags beim Hover (intensiver)"
         }
       }
     }

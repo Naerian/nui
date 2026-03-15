@@ -112,11 +112,53 @@
     "colors": {
       "title": "Variables de couleurs",
       "description": "Variables CSS pour personnaliser les couleurs par variante (<code>solid</code>, <code>outline</code>, <code>ghost</code>) et couleur sémantique (<code>primary</code>, <code>secondary</code>, etc.).",
-      "note": "Remplacez <code>{color}</code> par n'importe quelle couleur système : <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>."
+      "note": "Remplacez <code>{color}</code> par n'importe quelle couleur système : <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>.",
+      "rows": {
+        "solidBg": { "description": "Couleur de fond — variante solid" },
+        "solidText": { "description": "Couleur du texte — variante solid" },
+        "solidBorder": { "description": "Couleur de bordure — variante solid" },
+        "solidHoverBg": { "description": "Fond au survol — variante solid" },
+        "solidHoverText": { "description": "Couleur du texte au survol — variante solid" },
+        "solidHoverBorder": { "description": "Couleur de bordure au survol — variante solid" },
+        "solidActiveBg": { "description": "Fond à l'état actif — variante solid" },
+        "outlineBg": { "description": "Couleur de fond — variante outline" },
+        "outlineText": { "description": "Couleur du texte — variante outline" },
+        "outlineBorder": { "description": "Couleur de bordure — variante outline" },
+        "outlineHoverBg": { "description": "Fond au survol — variante outline" },
+        "outlineHoverText": { "description": "Couleur du texte au survol — variante outline" },
+        "outlineHoverBorder": { "description": "Couleur de bordure au survol — variante outline" },
+        "outlineActiveBg": { "description": "Fond à l'état actif — variante outline" },
+        "ghostBg": { "description": "Couleur de fond — variante ghost" },
+        "ghostText": { "description": "Couleur du texte — variante ghost" },
+        "ghostBorder": { "description": "Couleur de bordure — variante ghost" },
+        "ghostHoverBg": { "description": "Fond au survol — variante ghost" },
+        "ghostHoverText": { "description": "Couleur du texte au survol — variante ghost" },
+        "ghostHoverBorder": { "description": "Couleur de bordure au survol — variante ghost" },
+        "ghostActiveBg": { "description": "Fond à l'état actif — variante ghost" },
+        "focusRing": { "description": "Couleur de l'anneau de focus (semi-transparent)" },
+        "badgeBg": { "description": "Couleur de fond du badge du déclencheur (lors de l'utilisation de l'input <code>triggerBadgeColor</code>)" },
+        "badgeText": { "description": "Couleur du texte du badge du déclencheur (calculée automatiquement pour le contraste)" },
+        "badgeBorder": { "description": "Bordure autour du badge du déclencheur pour le séparer de la surface du bouton" }
+      }
     },
     "structure": {
       "title": "Variables structurelles",
-      "description": "Variables CSS pour personnaliser la disposition radiale, les animations, les tailles de boutons, le fond d'écran, les infobulles et l'anneau de focus."
+      "description": "Variables CSS pour personnaliser la disposition radiale, les animations, la mise à l'échelle des icônes, les infobulles et l'anneau de focus.",
+      "rows": {
+        "radius": { "description": "Rayon d'orbite pour les dispositions cercle, demi-cercle et quart-de-cercle" },
+        "spacing": { "description": "Distance de centre à centre entre les éléments dans la disposition linéaire" },
+        "animDuration": { "description": "Durée de la transition d'entrée/sortie des éléments d'action" },
+        "animEasing": { "description": "Courbe d'accélération partagée par tous les types d'animation" },
+        "animDelayStep": { "description": "Délai décalé ajouté par index d'élément" },
+        "triggerRotate": { "description": "Angle de rotation de l'icône du déclencheur lorsque le dial est développé" },
+        "triggerIconScale": { "description": "Facteur d'échelle appliqué à l'icône du déclencheur par rapport à la hauteur du bouton" },
+        "spinDuration": { "description": "Durée de l'animation du spinner de chargement" },
+        "itemIconScale": { "description": "Facteur d'échelle appliqué aux icônes des éléments par rapport à la hauteur du bouton élément" },
+        "tooltipOffset": { "description": "Espace entre un bouton élément et son étiquette infobulle en ligne" },
+        "focusWidth": { "description": "Largeur du contour de focus pour les boutons déclencheur et éléments" },
+        "focusOffset": { "description": "Décalage du contour de focus pour les boutons déclencheur et éléments" },
+        "zIndex": { "description": "Z-index du conteneur FAB (au-dessus des popovers et infobulles, en-dessous des modales)" }
+      }
     }
   },
   "i18n": {

@@ -250,11 +250,11 @@
         "focusOutlineOffset": {
           "description": "Focus outline offset"
         },
+        "itemPadding": {
+          "description": "Item container inner padding"
+        },
         "arrowPaddingLeft": {
           "description": "Arrow left padding"
-        },
-        "transition": {
-          "description": "State transitions"
         }
       }
     },
@@ -313,6 +313,12 @@
         "shortcutFontSize": {
           "description": "Shortcut font size"
         },
+        "badgeBg": {
+          "description": "Badge background color"
+        },
+        "badgeColor": {
+          "description": "Badge text color"
+        },
         "notifySelectedSize": {
           "description": "Selected child indicator size"
         },
@@ -326,29 +332,20 @@
       "description": "CSS variable pattern to customize menu item colors by state.",
       "note": "Replace <code>{color}</code> with any NUI semantic color (<code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>) to customize item appearance in different states.",
       "rows": {
-        "bg": {
-          "description": "Item background in normal state"
+        "baseBg": {
+          "description": "Base background for hover and selected states"
         },
-        "text": {
-          "description": "Item text color"
+        "baseColor": {
+          "description": "Base text color for hover and selected states"
         },
-        "hoverBg": {
-          "description": "Item background on hover"
+        "border": {
+          "description": "Border tint color used for menu border and separator"
         },
-        "hoverText": {
-          "description": "Text color on hover"
+        "check": {
+          "description": "Color of the check icon on selected items"
         },
         "activeBg": {
-          "description": "Item background on active"
-        },
-        "selectedBg": {
-          "description": "Selected item background"
-        },
-        "selectedText": {
-          "description": "Selected item text color"
-        },
-        "notifySelected": {
-          "description": "Selected child indicator color"
+          "description": "Background for selected item on hover (more intense)"
         }
       }
     }

@@ -209,23 +209,71 @@
   "theming": {
     "layout": {
       "title": "Layout",
-      "description": "Variables CSS para el diseño general del paginador"
+      "description": "Variables CSS para el diseño general y el espaciado del paginador",
+      "rows": {
+        "gap": { "description": "Espacio entre los botones de página dentro del paginador." },
+        "disabledOpacity": { "description": "Opacidad aplicada a los botones deshabilitados del paginador." },
+        "pageJumpInputWidth": { "description": "Ancho del campo de entrada de salto de página." }
+      }
     },
-    "buttons": {
-      "title": "Botones",
-      "description": "Variables CSS para los botones de navegación y números de página"
+    "zindex": {
+      "title": "Z-index",
+      "description": "Variables CSS que controlan el orden de apilamiento de los elementos del paginador",
+      "rows": {
+        "base": { "description": "Z-index base de los botones del paginador." },
+        "hover": { "description": "Z-index aplicado al hacer hover." },
+        "active": { "description": "Z-index aplicado al botón activo." },
+        "focus": { "description": "Z-index aplicado cuando un botón tiene el foco." }
+      }
+    },
+    "inactive": {
+      "title": "Botones inactivos",
+      "description": "Variables CSS para los botones de página inactivos (ghost) — definidas por ThemeService según el preset activo",
+      "rows": {
+        "ghostBg": { "description": "Fondo de los botones de página inactivos (siempre ghost/transparente)." },
+        "ghostText": { "description": "Color de texto de los botones de página inactivos." },
+        "ghostBorder": { "description": "Color de borde de los botones de página inactivos." },
+        "ghostHoverBg": { "description": "Fondo de los botones de página inactivos al hacer hover." },
+        "ghostHoverBorder": { "description": "Color de borde de los botones de página inactivos al hacer hover." }
+      }
     },
     "active": {
-      "title": "Página activa",
-      "description": "Variables CSS para el estado activo de la página actual"
+      "title": "Botón de página activa",
+      "description": "Variables CSS para el botón de página activa en las tres variantes — definidas por ThemeService según el preset activo",
+      "rows": {
+        "solidActiveBg": { "description": "Fondo del botón activo en la variante Solid." },
+        "solidActiveText": { "description": "Color de texto del botón activo en la variante Solid." },
+        "solidActiveBorder": { "description": "Color de borde del botón activo en la variante Solid." },
+        "outlineActiveBg": { "description": "Fondo del botón activo en la variante Outline." },
+        "outlineActiveText": { "description": "Color de texto del botón activo en la variante Outline." },
+        "outlineActiveBorder": { "description": "Color de borde del botón activo en la variante Outline." },
+        "ghostActiveBg": { "description": "Fondo del botón activo en la variante Ghost." },
+        "ghostActiveText": { "description": "Color de texto del botón activo en la variante Ghost." },
+        "ghostActiveBorder": { "description": "Color de borde del botón activo en la variante Ghost." }
+      }
     },
-    "controls": {
-      "title": "Controles",
-      "description": "Variables CSS para el selector de tamaño, rango de elementos y salto de página"
+    "nav": {
+      "title": "Botones de navegación",
+      "description": "Variables CSS para los botones de navegación anterior/siguiente/primero/último — definidas por ThemeService según el preset activo",
+      "rows": {
+        "navBg": { "description": "Fondo de los botones de navegación (anterior/siguiente/primero/último)." },
+        "navText": { "description": "Color de texto/icono de los botones de navegación." },
+        "navBorder": { "description": "Color de borde de los botones de navegación." },
+        "navHoverBg": { "description": "Fondo de los botones de navegación al hacer hover." },
+        "navHoverText": { "description": "Color de texto/icono de los botones de navegación al hacer hover." },
+        "navHoverBorder": { "description": "Color de borde de los botones de navegación al hacer hover." }
+      }
     },
-    "infinite": {
-      "title": "Scroll infinito",
-      "description": "Variables CSS para el modo de carga infinita"
+    "misc": {
+      "title": "Varios",
+      "description": "Variables CSS para los puntos suspensivos, el anillo de foco y los controles de salto de página — definidas por ThemeService según el preset activo",
+      "rows": {
+        "ellipsisColor": { "description": "Color del elemento de puntos suspensivos (…) entre los botones de página." },
+        "focusRing": { "description": "Color del anillo de foco mostrado en los botones con foco de teclado." },
+        "jumpBorder": { "description": "Color de borde del contenedor del input de salto de página." },
+        "jumpSeparator": { "description": "Color del separador entre el input de salto de página y su botón Ir." },
+        "jumpHoverBg": { "description": "Fondo del botón Ir dentro del control de salto de página al hacer hover." }
+      }
     }
   },
   "i18n": {

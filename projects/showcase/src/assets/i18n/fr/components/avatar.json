@@ -195,16 +195,67 @@
           "description": "Épaisseur de la bordure quand bordered est actif"
         },
         "borderOutset": {
-          "description": "Couleur de la bordure extérieure de l'avatar"
+          "description": "Couleur de la bordure extérieure de l'avatar (définie par la couleur du thème)"
         },
         "defaultBg": {
-          "description": "Couleur d'arrière-plan par défaut"
+          "description": "Couleur d'arrière-plan par défaut quand aucune couleur n'est définie"
         },
         "defaultColor": {
-          "description": "Couleur du texte/icône par défaut"
+          "description": "Couleur du texte/icône par défaut quand aucune couleur n'est définie"
         },
         "fontWeight": {
-          "description": "Graisse de police pour les initiales"
+          "description": "Graisse de police pour le texte des initiales"
+        },
+        "lineHeight": {
+          "description": "Hauteur de ligne pour le texte des initiales"
+        },
+        "textTransform": {
+          "description": "Transformation de texte appliquée aux initiales"
+        }
+      }
+    },
+    "group": {
+      "title": "Variables de groupe",
+      "description": "Variables CSS qui contrôlent la disposition et le comportement d'interaction du groupe d'avatars.",
+      "rows": {
+        "groupSpacing": {
+          "description": "Décalage de chevauchement entre les avatars d'un groupe (valeur négative pour superposition)"
+        },
+        "groupHoverScale": {
+          "description": "Facteur d'échelle appliqué à un avatar au survol dans un groupe"
+        },
+        "groupZIndexHover": {
+          "description": "Z-index appliqué à l'avatar survolé dans un groupe pour le mettre au premier plan"
+        },
+        "zIndexBase": {
+          "description": "Z-index de base pour les avatars dans un groupe"
+        },
+        "zIndexHover": {
+          "description": "Z-index de l'avatar survolé dans un groupe"
+        }
+      }
+    },
+    "excess": {
+      "title": "Variables de l'indicateur de surplus",
+      "description": "Variables CSS qui contrôlent l'apparence du compteur '+N' affiché quand les avatars dépassent la limite maximale.",
+      "rows": {
+        "excessFontSizeXs": {
+          "description": "Taille de police de l'indicateur de surplus (xs)"
+        },
+        "excessFontSizeSm": {
+          "description": "Taille de police de l'indicateur de surplus (sm)"
+        },
+        "excessFontSizeMd": {
+          "description": "Taille de police de l'indicateur de surplus (md)"
+        },
+        "excessFontSizeLg": {
+          "description": "Taille de police de l'indicateur de surplus (lg)"
+        },
+        "excessFontSizeXl": {
+          "description": "Taille de police de l'indicateur de surplus (xl)"
+        },
+        "excessFontWeight": {
+          "description": "Graisse de police du texte de l'indicateur de surplus"
         }
       }
     }

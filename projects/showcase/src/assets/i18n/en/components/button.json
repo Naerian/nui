@@ -222,47 +222,47 @@
         "ghostActiveBorder": {
           "description": "Active border for ghost"
         },
-        "focusColor": {
+        "focusRing": {
           "description": "Focus ring color"
+        },
+        "linkBg": {
+          "description": "Background color for link variant"
+        },
+        "linkText": {
+          "description": "Text color for link variant"
+        },
+        "linkBorder": {
+          "description": "Border color for link variant"
+        },
+        "linkHoverBg": {
+          "description": "Background on hover for link"
+        },
+        "linkHoverText": {
+          "description": "Text color on hover for link"
+        },
+        "linkHoverBorder": {
+          "description": "Border on hover for link"
+        },
+        "linkActiveBg": {
+          "description": "Active background for link"
+        },
+        "linkActiveBorder": {
+          "description": "Active border for link"
+        },
+        "linkActiveText": {
+          "description": "Active text color for link"
         }
       }
     },
     "structure": {
       "title": "Structural variables",
-      "description": "CSS variables for spacing, sizes, typography and visual effects.",
+      "description": "CSS variables for spacing, border, typography and visual effects.",
       "rows": {
         "gap": {
           "description": "Space between icon and text"
         },
-        "paddingXXs": {
-          "description": "Horizontal padding for xs size"
-        },
-        "paddingYXs": {
-          "description": "Vertical padding for xs size"
-        },
-        "paddingXSm": {
-          "description": "Horizontal padding for sm size"
-        },
-        "paddingYSm": {
-          "description": "Vertical padding for sm size"
-        },
-        "paddingXMd": {
-          "description": "Horizontal padding for md size"
-        },
-        "paddingYMd": {
-          "description": "Vertical padding for md size"
-        },
-        "paddingXLg": {
-          "description": "Horizontal padding for lg size"
-        },
-        "paddingYLg": {
-          "description": "Vertical padding for lg size"
-        },
-        "paddingXXl": {
-          "description": "Horizontal padding for xl size"
-        },
-        "paddingYXl": {
-          "description": "Vertical padding for xl size"
+        "borderWidth": {
+          "description": "Border width applied to all button variants"
         },
         "radiusXs": {
           "description": "Border radius for xs size"
@@ -279,47 +279,20 @@
         "radiusXl": {
           "description": "Border radius for xl size"
         },
-        "fontSizeXs": {
-          "description": "Font size for xs"
-        },
-        "fontSizeSm": {
-          "description": "Font size for sm"
-        },
-        "fontSizeMd": {
-          "description": "Font size for md"
-        },
-        "fontSizeLg": {
-          "description": "Font size for lg"
-        },
-        "fontSizeXl": {
-          "description": "Font size for xl"
-        },
-        "iconSizeXs": {
-          "description": "Icon size for xs"
-        },
-        "iconSizeSm": {
-          "description": "Icon size for sm"
-        },
-        "iconSizeMd": {
-          "description": "Icon size for md"
-        },
-        "iconSizeLg": {
-          "description": "Icon size for lg"
-        },
-        "iconSizeXl": {
-          "description": "Icon size for xl"
-        },
-        "transition": {
-          "description": "Transition duration"
+        "fontWeight": {
+          "description": "Font weight applied to button labels"
         },
         "spinDuration": {
           "description": "Loading spinner animation duration"
         },
-        "focusWidth": {
-          "description": "Focus outline width"
+        "linkUnderlineOffset": {
+          "description": "Underline offset for link variant on hover"
         },
-        "focusOffset": {
-          "description": "Focus outline offset"
+        "linkUnderlineThickness": {
+          "description": "Underline thickness for link variant on hover"
+        },
+        "linkUnderlineSkipInk": {
+          "description": "Controls whether the underline skips descenders in link variant"
         }
       }
     }

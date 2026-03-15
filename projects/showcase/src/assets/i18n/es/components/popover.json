@@ -140,27 +140,53 @@
   "theming": {
     "spacing": {
       "title": "Espaciado y dimensiones",
-      "description": "Variables CSS para controlar el tamaño, padding y espaciado del popover"
+      "description": "Variables CSS para controlar el tamaño, padding y espaciado del popover",
+      "rows": {
+        "padding": "Padding interno del popover",
+        "maxWidth": "Ancho máximo del popover",
+        "minWidth": "Ancho mínimo del popover",
+        "arrowSize": "Tamaño de la flecha del popover",
+        "distance": "Distancia desde el elemento trigger hasta el popover"
+      }
     },
     "typography": {
       "title": "Tipografía",
-      "description": "Variables CSS para controlar la fuente del contenido del popover"
+      "description": "Variables CSS para controlar la fuente del contenido del popover",
+      "rows": {
+        "fontSize": "Tamaño de fuente del contenido del popover",
+        "fontWeight": "Peso de fuente del contenido del popover",
+        "lineHeight": "Altura de línea del contenido del popover"
+      }
     },
     "borders": {
       "title": "Bordes",
-      "description": "Variables CSS para controlar los bordes y radio del popover"
+      "description": "Variables CSS para controlar los bordes y radio del popover",
+      "rows": {
+        "borderWidth": "Ancho del borde del popover",
+        "borderRadius": "Radio de borde del popover"
+      }
     },
     "shadow": {
       "title": "Sombra",
-      "description": "Variable CSS para controlar la sombra del popover"
+      "description": "Variable CSS para controlar la sombra del popover",
+      "rows": {
+        "shadow": "Sombra del popover para darle profundidad visual"
+      }
     },
     "zindex": {
       "title": "Z-index",
-      "description": "Variable CSS para controlar el orden de apilamiento del popover"
+      "description": "Variable CSS para controlar el orden de apilamiento del popover",
+      "rows": {
+        "zIndex": "Z-index del popover para controlar el orden de apilamiento"
+      }
     },
     "animation": {
       "title": "Animación",
-      "description": "Variables CSS para controlar las transiciones y animaciones del popover"
+      "description": "Variables CSS para controlar las transiciones y animaciones del popover",
+      "rows": {
+        "transitionDuration": "Duración de las transiciones de entrada/salida del popover",
+        "transitionTiming": "Función de timing para las transiciones (easing)"
+      }
     }
   },
   "a11y": {

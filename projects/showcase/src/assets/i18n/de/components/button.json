@@ -222,47 +222,47 @@
         "ghostActiveBorder": {
           "description": "Aktiver Rahmen für ghost"
         },
-        "focusColor": {
+        "focusRing": {
           "description": "Fokus-Ring-Farbe"
+        },
+        "linkBg": {
+          "description": "Hintergrundfarbe für link-Variante"
+        },
+        "linkText": {
+          "description": "Textfarbe für link-Variante"
+        },
+        "linkBorder": {
+          "description": "Rahmenfarbe für link-Variante"
+        },
+        "linkHoverBg": {
+          "description": "Hintergrund bei Hover für link"
+        },
+        "linkHoverText": {
+          "description": "Textfarbe bei Hover für link"
+        },
+        "linkHoverBorder": {
+          "description": "Rahmen bei Hover für link"
+        },
+        "linkActiveBg": {
+          "description": "Aktiver Hintergrund für link"
+        },
+        "linkActiveBorder": {
+          "description": "Aktiver Rahmen für link"
+        },
+        "linkActiveText": {
+          "description": "Aktive Textfarbe für link"
         }
       }
     },
     "structure": {
       "title": "Strukturelle Variablen",
-      "description": "CSS-Variablen für Abstände, Größen, Typografie und visuelle Effekte.",
+      "description": "CSS-Variablen für Abstände, Rahmen, Typografie und visuelle Effekte.",
       "rows": {
         "gap": {
           "description": "Abstand zwischen Icon und Text"
         },
-        "paddingXXs": {
-          "description": "Horizontaler Innenabstand für xs-Größe"
-        },
-        "paddingYXs": {
-          "description": "Vertikaler Innenabstand für xs-Größe"
-        },
-        "paddingXSm": {
-          "description": "Horizontaler Innenabstand für sm-Größe"
-        },
-        "paddingYSm": {
-          "description": "Vertikaler Innenabstand für sm-Größe"
-        },
-        "paddingXMd": {
-          "description": "Horizontaler Innenabstand für md-Größe"
-        },
-        "paddingYMd": {
-          "description": "Vertikaler Innenabstand für md-Größe"
-        },
-        "paddingXLg": {
-          "description": "Horizontaler Innenabstand für lg-Größe"
-        },
-        "paddingYLg": {
-          "description": "Vertikaler Innenabstand für lg-Größe"
-        },
-        "paddingXXl": {
-          "description": "Horizontaler Innenabstand für xl-Größe"
-        },
-        "paddingYXl": {
-          "description": "Vertikaler Innenabstand für xl-Größe"
+        "borderWidth": {
+          "description": "Rahmenbreite für alle Schaltflächenvarianten"
         },
         "radiusXs": {
           "description": "Rahmenradius für xs-Größe"
@@ -279,47 +279,20 @@
         "radiusXl": {
           "description": "Rahmenradius für xl-Größe"
         },
-        "fontSizeXs": {
-          "description": "Schriftgröße für xs"
-        },
-        "fontSizeSm": {
-          "description": "Schriftgröße für sm"
-        },
-        "fontSizeMd": {
-          "description": "Schriftgröße für md"
-        },
-        "fontSizeLg": {
-          "description": "Schriftgröße für lg"
-        },
-        "fontSizeXl": {
-          "description": "Schriftgröße für xl"
-        },
-        "iconSizeXs": {
-          "description": "Icon-Größe für xs"
-        },
-        "iconSizeSm": {
-          "description": "Icon-Größe für sm"
-        },
-        "iconSizeMd": {
-          "description": "Icon-Größe für md"
-        },
-        "iconSizeLg": {
-          "description": "Icon-Größe für lg"
-        },
-        "iconSizeXl": {
-          "description": "Icon-Größe für xl"
-        },
-        "transition": {
-          "description": "Übergangsdauer"
+        "fontWeight": {
+          "description": "Schriftgewicht für Schaltflächenbeschriftungen"
         },
         "spinDuration": {
           "description": "Lade-Spinner-Animationsdauer"
         },
-        "focusWidth": {
-          "description": "Fokus-Outline-Breite"
+        "linkUnderlineOffset": {
+          "description": "Unterstrich-Versatz für link-Variante bei Hover"
         },
-        "focusOffset": {
-          "description": "Fokus-Outline-Versatz"
+        "linkUnderlineThickness": {
+          "description": "Unterstrich-Stärke für link-Variante bei Hover"
+        },
+        "linkUnderlineSkipInk": {
+          "description": "Steuert, ob der Unterstrich Unterlängen in der link-Variante überspringt"
         }
       }
     }

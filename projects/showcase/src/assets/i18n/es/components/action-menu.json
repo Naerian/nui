@@ -250,11 +250,11 @@
         "focusOutlineOffset": {
           "description": "Offset del outline de foco"
         },
+        "itemPadding": {
+          "description": "Padding interno del contenedor del item"
+        },
         "arrowPaddingLeft": {
           "description": "Padding izquierdo de la flecha"
-        },
-        "transition": {
-          "description": "Transiciones de estados"
         }
       }
     },
@@ -313,6 +313,12 @@
         "shortcutFontSize": {
           "description": "Tamaño de fuente del shortcut"
         },
+        "badgeBg": {
+          "description": "Color de fondo del badge"
+        },
+        "badgeColor": {
+          "description": "Color del texto del badge"
+        },
         "notifySelectedSize": {
           "description": "Tamaño del indicador de hijo seleccionado"
         },
@@ -326,29 +332,20 @@
       "description": "Patrón de variables CSS para personalizar los colores de los items del menú según el estado.",
       "note": "Reemplaza <code>{color}</code> con cualquier color semántico de NUI (<code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>) para personalizar la apariencia de los items en diferentes estados.",
       "rows": {
-        "bg": {
-          "description": "Fondo del item en estado normal"
+        "baseBg": {
+          "description": "Fondo base para estados hover y seleccionado"
         },
-        "text": {
-          "description": "Color del texto del item"
+        "baseColor": {
+          "description": "Color de texto base para estados hover y seleccionado"
         },
-        "hoverBg": {
-          "description": "Fondo del item en hover"
+        "border": {
+          "description": "Color de tinte del borde del menú y separadores"
         },
-        "hoverText": {
-          "description": "Color del texto en hover"
+        "check": {
+          "description": "Color del icono de check en items seleccionados"
         },
         "activeBg": {
-          "description": "Fondo del item en active"
-        },
-        "selectedBg": {
-          "description": "Fondo del item seleccionado"
-        },
-        "selectedText": {
-          "description": "Color del texto del item seleccionado"
-        },
-        "notifySelected": {
-          "description": "Color del indicador de hijo seleccionado"
+          "description": "Fondo del item seleccionado al hacer hover (más intenso)"
         }
       }
     }

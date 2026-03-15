@@ -248,49 +248,87 @@
       "title": "Variables de couleurs",
       "description": "Variables CSS pour contrôler les couleurs du panneau latéral : fond, texte, bordures et superposition. Ces variables s'adaptent automatiquement au mode clair/sombre du thème actif.",
       "rows": {
-        "bg": "Couleur de fond du panneau. S'adapte dynamiquement selon le thème actif.",
-        "text": "Couleur du texte du panneau.",
-        "border": "Couleur de bordure du panneau. S'adapte dynamiquement selon le thème actif.",
-        "overlayBg": "Couleur de fond de l'overlay de backdrop."
+        "bg": {
+          "description": "Couleur de fond du panneau. S'adapte dynamiquement selon le thème actif."
+        },
+        "text": {
+          "description": "Couleur du texte du panneau."
+        },
+        "border": {
+          "description": "Couleur de bordure du panneau. S'adapte dynamiquement selon le thème actif."
+        },
+        "overlayBg": {
+          "description": "Couleur de fond de l'overlay de backdrop."
+        }
       }
     },
     "layout": {
       "title": "Variables de disposition",
       "description": "Variables CSS pour contrôler la taille et l'espacement du panneau latéral : préréglages de taille prédéfinis (xs à full) et rembourrage de l'en-tête et du contenu",
       "rows": {
-        "sizeXsWidth": "Largeur du panneau extra petit.",
-        "sizeSmWidth": "Largeur du panneau petit.",
-        "sizeMdWidth": "Largeur du panneau moyen (par défaut).",
-        "sizeLgWidth": "Largeur du panneau grand.",
-        "sizeXlWidth": "Largeur du panneau extra grand.",
-        "sizeFullWidth": "Panneau en largeur totale.",
-        "headerPadding": "Rembourrage de l'en-tête.",
-        "contentPadding": "Rembourrage de la zone de contenu."
+        "sizeXsWidth": {
+          "description": "Largeur du panneau extra petit."
+        },
+        "sizeSmWidth": {
+          "description": "Largeur du panneau petit."
+        },
+        "sizeMdWidth": {
+          "description": "Largeur du panneau moyen (par défaut)."
+        },
+        "sizeLgWidth": {
+          "description": "Largeur du panneau grand."
+        },
+        "sizeXlWidth": {
+          "description": "Largeur du panneau extra grand."
+        },
+        "sizeFullWidth": {
+          "description": "Panneau en largeur totale."
+        },
+        "headerPadding": {
+          "description": "Rembourrage de l'en-tête."
+        },
+        "contentPadding": {
+          "description": "Rembourrage de la zone de contenu."
+        }
       }
     },
     "typography": {
       "title": "Variables typographiques",
       "description": "Variables CSS pour contrôler la typographie du titre du panneau latéral",
       "rows": {
-        "titleSize": "Taille de police du titre du panneau.",
-        "titleWeight": "Graisse de police du titre du panneau."
+        "titleSize": {
+          "description": "Taille de police du titre du panneau."
+        },
+        "titleWeight": {
+          "description": "Graisse de police du titre du panneau."
+        }
       }
     },
     "elevation": {
       "title": "Variables d'élévation",
       "description": "Variables CSS pour contrôler l'ombre et le z-index du panneau latéral et de la superposition",
       "rows": {
-        "shadow": "Ombre portée du panneau pour l'élévation.",
-        "zIndex": "Couche d'empilement z-index du panneau."
+        "shadow": {
+          "description": "Ombre portée du panneau pour l'élévation."
+        },
+        "zIndex": {
+          "description": "Couche d'empilement z-index du panneau."
+        }
       }
     },
     "scrollbar": {
       "title": "Variables de barre de défilement",
       "description": "Variables CSS pour contrôler l'apparence de la barre de défilement du panneau latéral",
       "rows": {
-        "scrollBg": "Couleur de fond de la piste de la barre de défilement.",
-        "scrollThumbBg": "Couleur de fond du curseur de la barre de défilement.",
-        "scrollThumbHoverBg": "Couleur de fond du curseur au survol."
+        "scrollBg": {
+          "description": "Couleur de fond de la piste de la barre de défilement."
+        },
+        "scrollThumbBg": {
+          "description": "Couleur de fond du curseur de la barre de défilement."
+        },
+        "scrollThumbHoverBg": {
+          "description": "Couleur de fond du curseur au survol."
+        }
       }
     },
     "examples": {

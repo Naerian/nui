@@ -260,15 +260,177 @@
   "theming": {
     "colors": {
       "title": "Couleurs",
-      "description": "Variables CSS de couleur générées par ThemeService pour chaque couleur sémantique. Chaque couleur génère 9 variables spécifiques pour différents états du sélecteur : fonds des éléments (normal, survol, sélectionné), couleurs de texte, états désactivés, accents et anneau de focus."
+      "description": "Variables CSS de couleur générées par ThemeService pour la surface du sélecteur d'heure, les états des éléments et les boutons de navigation du pied de page.",
+      "rows": {
+        "bg": {
+          "description": "Couleur d'arrière-plan du conteneur du sélecteur d'heure."
+        },
+        "border": {
+          "description": "Couleur de bordure du conteneur du sélecteur d'heure."
+        },
+        "boxShadow": {
+          "description": "Ombre appliquée au conteneur du sélecteur d'heure."
+        },
+        "itemBg": {
+          "description": "Couleur d'arrière-plan de chaque option horaire dans son état par défaut (non sélectionné)."
+        },
+        "itemText": {
+          "description": "Couleur de texte de chaque option horaire dans son état par défaut (non sélectionné)."
+        },
+        "itemHoverBg": {
+          "description": "Couleur d'arrière-plan d'une option horaire au survol (non sélectionnée)."
+        },
+        "itemHoverText": {
+          "description": "Couleur de texte d'une option horaire au survol (non sélectionnée)."
+        },
+        "itemSelectedBg": {
+          "description": "Couleur d'arrière-plan de l'option horaire actuellement sélectionnée."
+        },
+        "itemSelectedBorder": {
+          "description": "Couleur de bordure de l'option horaire actuellement sélectionnée."
+        },
+        "itemSelectedText": {
+          "description": "Couleur de texte de l'option horaire actuellement sélectionnée."
+        },
+        "itemSelectedHoverBg": {
+          "description": "Couleur d'arrière-plan de l'option sélectionnée au survol."
+        },
+        "itemSelectedHoverBorder": {
+          "description": "Couleur de bordure de l'option sélectionnée au survol."
+        },
+        "itemDisabledBg": {
+          "description": "Couleur d'arrière-plan d'une option horaire désactivée."
+        },
+        "itemDisabledText": {
+          "description": "Couleur de texte d'une option horaire désactivée."
+        },
+        "navBtnBg": {
+          "description": "Couleur d'arrière-plan des boutons d'action du pied de page dans leur état par défaut."
+        },
+        "navBtnText": {
+          "description": "Couleur de texte des boutons d'action du pied de page dans leur état par défaut."
+        },
+        "navBtnBorder": {
+          "description": "Couleur de bordure des boutons d'action du pied de page dans leur état par défaut."
+        },
+        "navBtnHoverBg": {
+          "description": "Couleur d'arrière-plan des boutons d'action du pied de page au survol."
+        },
+        "navBtnHoverText": {
+          "description": "Couleur de texte des boutons d'action du pied de page au survol."
+        },
+        "navBtnHoverBorder": {
+          "description": "Couleur de bordure des boutons d'action du pied de page au survol."
+        },
+        "navBtnActiveBg": {
+          "description": "Couleur d'arrière-plan des boutons d'action du pied de page lorsqu'ils sont actifs (pressés)."
+        },
+        "navBtnActiveBorder": {
+          "description": "Couleur de bordure des boutons d'action du pied de page lorsqu'ils sont actifs (pressés)."
+        },
+        "navBtnDisabledBg": {
+          "description": "Couleur d'arrière-plan des boutons d'action du pied de page lorsqu'ils sont désactivés."
+        },
+        "navBtnDisabledText": {
+          "description": "Couleur de texte des boutons d'action du pied de page lorsqu'ils sont désactivés."
+        },
+        "navBtnDisabledBorder": {
+          "description": "Couleur de bordure des boutons d'action du pied de page lorsqu'ils sont désactivés."
+        }
+      }
     },
     "sizes": {
       "title": "Tailles",
-      "description": "Variables CSS spécifiques aux tailles qui contrôlent les hauteurs des éléments, les rembourrages et les dimensions des conteneurs. Cinq variantes de taille disponibles : xs, sm, md (défaut), lg et xl."
+      "description": "Variables CSS qui contrôlent les dimensions générales, les hauteurs des éléments, les rembourrages, les espaces et les tailles de police du sélecteur d'heure.",
+      "rows": {
+        "width": {
+          "description": "Largeur fixe du conteneur du sélecteur d'heure."
+        },
+        "itemHeight": {
+          "description": "Hauteur de chaque option horaire dans les colonnes."
+        },
+        "maxHeight": {
+          "description": "Hauteur maximale de la liste d'éléments défilable dans chaque colonne."
+        },
+        "minHeight": {
+          "description": "Hauteur minimale de la liste d'éléments défilable dans chaque colonne."
+        },
+        "padding": {
+          "description": "Rembourrage intérieur du conteneur du sélecteur d'heure et des en-têtes de colonne."
+        },
+        "gap": {
+          "description": "Espace entre les sections principales (en-tête, colonnes, pied de page) et entre les colonnes."
+        },
+        "fontSize": {
+          "description": "Taille de police de base utilisée pour les valeurs des éléments et les libellés de colonne."
+        },
+        "itemRadius": {
+          "description": "Rayon de bordure appliqué à chaque option horaire."
+        }
+      }
     },
     "structure": {
       "title": "Structure",
-      "description": "Variables CSS structurelles pour contrôler les dimensions, l'espacement, la typographie et l'apparence visuelle. Inclut le style du séparateur, la personnalisation de la barre de défilement, les bordures, les polices et les états de focus."
+      "description": "Variables CSS structurelles qui contrôlent l'apparence du séparateur, la disposition de la liste d'éléments, les bordures, les tailles de police d'affichage et les dimensions des boutons du pied de page.",
+      "rows": {
+        "separatorWidth": {
+          "description": "Largeur de la colonne séparatrice entre heures et minutes (ou minutes et secondes)."
+        },
+        "separatorLineWidth": {
+          "description": "Épaisseur de la ligne décorative dessinée dans la colonne séparatrice."
+        },
+        "separatorLineHeight": {
+          "description": "Hauteur de la ligne décorative dessinée dans la colonne séparatrice."
+        },
+        "separatorBorderRadius": {
+          "description": "Rayon de bordure de la ligne décorative du séparateur."
+        },
+        "separatorPaddingTop": {
+          "description": "Rembourrage supérieur de la colonne séparatrice, utilisé pour l'aligner verticalement avec les éléments."
+        },
+        "itemsGap": {
+          "description": "Espace vertical entre les options horaires dans une colonne défilable."
+        },
+        "itemsPadding": {
+          "description": "Rembourrage autour de la liste d'éléments dans chaque colonne défilable."
+        },
+        "itemsBorderRadius": {
+          "description": "Rayon de bordure du conteneur d'éléments défilable."
+        },
+        "optionMinHeight": {
+          "description": "Hauteur minimale de la zone du pied de page contenant les boutons d'action."
+        },
+        "actionsGap": {
+          "description": "Espace entre les boutons d'action du pied de page (Effacer et Maintenant)."
+        },
+        "minWidth": {
+          "description": "Largeur minimale du sélecteur lors de l'affichage des heures et minutes uniquement."
+        },
+        "minWidthWithSeconds": {
+          "description": "Largeur minimale du sélecteur lorsque la colonne des secondes est visible."
+        },
+        "headerBorderWidth": {
+          "description": "Épaisseur de la bordure inférieure séparant l'en-tête de la zone des colonnes."
+        },
+        "itemBorderWidth": {
+          "description": "Épaisseur de la bordure rendue autour de chaque option horaire."
+        },
+        "displayFontSize": {
+          "description": "Taille de police utilisée pour l'heure formatée affichée dans l'en-tête."
+        },
+        "normalizedFontSize": {
+          "description": "Taille de police utilisée pour le texte de l'indicateur de normalisation dans l'en-tête."
+        },
+        "navBtnHeight": {
+          "description": "Hauteur des boutons d'action du pied de page (Effacer et Maintenant)."
+        },
+        "navBtnPadding": {
+          "description": "Rembourrage horizontal et vertical à l'intérieur des boutons d'action du pied de page."
+        },
+        "navBtnFontSize": {
+          "description": "Taille de police du texte et des icônes à l'intérieur des boutons d'action du pied de page."
+        }
+      }
     },
     "customization": {
       "title": "Personnalisation",

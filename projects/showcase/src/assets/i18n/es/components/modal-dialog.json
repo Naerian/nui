@@ -510,7 +510,8 @@
         "progressBg": "Color del track de la barra de progreso del timeout.",
         "progressColor": "Color de relleno de la barra de progreso del timeout.",
         "scrollBg": "Color del track de la barra de desplazamiento.",
-        "scrollThumbBg": "Color del thumb de la barra de desplazamiento."
+        "scrollThumbBg": "Color del thumb de la barra de desplazamiento.",
+        "scrollThumbHoverBg": "Color del thumb de la barra de desplazamiento al pasar el cursor."
       }
     },
     "layout": {

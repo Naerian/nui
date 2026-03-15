@@ -112,11 +112,53 @@
     "colors": {
       "title": "Farbvariablen",
       "description": "CSS-Variablen zur Anpassung der Farben nach Variante (<code>solid</code>, <code>outline</code>, <code>ghost</code>) und semantischer Farbe (<code>primary</code>, <code>secondary</code>, usw.).",
-      "note": "Ersetze <code>{color}</code> durch eine beliebige Systemfarbe: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>."
+      "note": "Ersetze <code>{color}</code> durch eine beliebige Systemfarbe: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>.",
+      "rows": {
+        "solidBg": { "description": "Hintergrundfarbe — Variante solid" },
+        "solidText": { "description": "Textfarbe — Variante solid" },
+        "solidBorder": { "description": "Rahmenfarbe — Variante solid" },
+        "solidHoverBg": { "description": "Hintergrund beim Hover — Variante solid" },
+        "solidHoverText": { "description": "Textfarbe beim Hover — Variante solid" },
+        "solidHoverBorder": { "description": "Rahmenfarbe beim Hover — Variante solid" },
+        "solidActiveBg": { "description": "Hintergrund im aktiven Zustand — Variante solid" },
+        "outlineBg": { "description": "Hintergrundfarbe — Variante outline" },
+        "outlineText": { "description": "Textfarbe — Variante outline" },
+        "outlineBorder": { "description": "Rahmenfarbe — Variante outline" },
+        "outlineHoverBg": { "description": "Hintergrund beim Hover — Variante outline" },
+        "outlineHoverText": { "description": "Textfarbe beim Hover — Variante outline" },
+        "outlineHoverBorder": { "description": "Rahmenfarbe beim Hover — Variante outline" },
+        "outlineActiveBg": { "description": "Hintergrund im aktiven Zustand — Variante outline" },
+        "ghostBg": { "description": "Hintergrundfarbe — Variante ghost" },
+        "ghostText": { "description": "Textfarbe — Variante ghost" },
+        "ghostBorder": { "description": "Rahmenfarbe — Variante ghost" },
+        "ghostHoverBg": { "description": "Hintergrund beim Hover — Variante ghost" },
+        "ghostHoverText": { "description": "Textfarbe beim Hover — Variante ghost" },
+        "ghostHoverBorder": { "description": "Rahmenfarbe beim Hover — Variante ghost" },
+        "ghostActiveBg": { "description": "Hintergrund im aktiven Zustand — Variante ghost" },
+        "focusRing": { "description": "Farbe des Fokusrings (halbtransparent)" },
+        "badgeBg": { "description": "Hintergrundfarbe des Trigger-Badges (bei Verwendung des Inputs <code>triggerBadgeColor</code>)" },
+        "badgeText": { "description": "Textfarbe des Trigger-Badges (automatisch für Kontrast berechnet)" },
+        "badgeBorder": { "description": "Rahmen um das Trigger-Badge zur Abgrenzung von der Schaltflächenoberfläche" }
+      }
     },
     "structure": {
       "title": "Strukturelle Variablen",
-      "description": "CSS-Variablen zur Anpassung des radialen Layouts, Animationen, Schaltflächengrößen, Hintergrundblatt, Tooltips und des Fokus-Rings."
+      "description": "CSS-Variablen zur Anpassung des radialen Layouts, Animationen, Icon-Skalierung, Tooltips und des Fokus-Rings.",
+      "rows": {
+        "radius": { "description": "Orbit-Radius für Kreis-, Halbkreis- und Viertelkreis-Layouts" },
+        "spacing": { "description": "Mittelpunkt-zu-Mittelpunkt-Abstand zwischen Items im linearen Layout" },
+        "animDuration": { "description": "Dauer der Ein-/Ausblendtransition der Aktionselemente" },
+        "animEasing": { "description": "Easing-Kurve, die von allen Animationstypen geteilt wird" },
+        "animDelayStep": { "description": "Gestaffelter Verzögerungswert, der pro Element-Index hinzugefügt wird" },
+        "triggerRotate": { "description": "Rotationswinkel des Trigger-Icons, wenn das Wahlrad geöffnet ist" },
+        "triggerIconScale": { "description": "Skalierungsfaktor des Trigger-Icons relativ zur Schaltflächenhöhe" },
+        "spinDuration": { "description": "Dauer der Ladespinner-Animation" },
+        "itemIconScale": { "description": "Skalierungsfaktor der Element-Icons relativ zur Höhe des Element-Buttons" },
+        "tooltipOffset": { "description": "Abstand zwischen einem Element-Button und seinem Inline-Tooltip-Label" },
+        "focusWidth": { "description": "Breite des Fokus-Umrisses für Trigger- und Element-Schaltflächen" },
+        "focusOffset": { "description": "Versatz des Fokus-Umrisses für Trigger- und Element-Schaltflächen" },
+        "zIndex": { "description": "Z-Index des FAB-Containers (über Popovers und Tooltips, unter Modals)" }
+      }
     }
   },
   "i18n": {

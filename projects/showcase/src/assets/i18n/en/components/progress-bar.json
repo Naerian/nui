@@ -153,25 +153,24 @@
         "fillHoverBg": { "description": "Fill background color on hover." },
         "text": { "description": "Text color inside the fill (inside mode)." },
         "valueText": { "description": "Value text color outside the fill." },
-        "labelText": { "description": "Label text color." },
-        "stepDivider": { "description": "Color of the step divider lines (if steps are used)." }
+        "labelText": { "description": "Label text color." }
       }
     },
     "sizes": {
       "title": "Size tokens",
       "description": "Structural CSS custom properties that control track height, border radius and transitions. Override them on the element or a parent selector.",
       "rows": {
-        "heightXs": { "description": "Bar height at xs size." },
-        "heightSm": { "description": "Bar height at sm size." },
-        "heightMd": { "description": "Bar height at md size." },
-        "heightLg": { "description": "Bar height at lg size." },
-        "heightXl": { "description": "Bar height at xl size." },
+        "height": { "description": "Default track height." },
+        "heightCompact": { "description": "Track height in compact mode." },
+        "radius": { "description": "Track border radius." },
+        "radiusCompact": { "description": "Track border radius in compact mode." },
         "borderWidth": { "description": "Track border width." },
+        "fontWeightInside": { "description": "Font weight of the value text rendered inside the fill." },
         "transitionDuration": { "description": "Fill transition duration." },
+        "transitionTiming": { "description": "Fill transition timing function." },
         "indeterminateDuration": { "description": "Indeterminate animation cycle duration." },
-        "stepWidth": {
-          "description": "Width of the step divider lines, if <code>steps</code> has a value."
-        }
+        "indeterminateTiming": { "description": "Indeterminate animation timing function." },
+        "stepGap": { "description": "Gap between step segments when <code>steps</code> is active." }
       }
     }
   },

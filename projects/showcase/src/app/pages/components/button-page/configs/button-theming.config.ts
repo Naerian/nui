@@ -19,134 +19,181 @@ export const BUTTON_THEMING_SECTIONS: ComponentSection[] = [
       rows: [
         // Solid variants
         [
-          '<code>--nui-button-{color}-solid-bg</code>',
+          '<code>--nui-btn-{color}-solid-bg</code>',
           'components.button.theming.colors.rows.solidBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-solid-text</code>',
+          '<code>--nui-btn-{color}-solid-text</code>',
           'components.button.theming.colors.rows.solidText.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-solid-border</code>',
+          '<code>--nui-btn-{color}-solid-border</code>',
           'components.button.theming.colors.rows.solidBorder.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-solid-hover-bg</code>',
+          '<code>--nui-btn-{color}-solid-hover-bg</code>',
           'components.button.theming.colors.rows.solidHoverBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-solid-hover-text</code>',
+          '<code>--nui-btn-{color}-solid-hover-text</code>',
           'components.button.theming.colors.rows.solidHoverText.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-solid-hover-border</code>',
+          '<code>--nui-btn-{color}-solid-hover-border</code>',
           'components.button.theming.colors.rows.solidHoverBorder.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-solid-active-bg</code>',
+          '<code>--nui-btn-{color}-solid-active-bg</code>',
           'components.button.theming.colors.rows.solidActiveBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-solid-active-border</code>',
+          '<code>--nui-btn-{color}-solid-active-border</code>',
           'components.button.theming.colors.rows.solidActiveBorder.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
 
         // Outline variants
         [
-          '<code>--nui-button-{color}-outline-bg</code>',
+          '<code>--nui-btn-{color}-outline-bg</code>',
           'components.button.theming.colors.rows.outlineBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-outline-text</code>',
+          '<code>--nui-btn-{color}-outline-text</code>',
           'components.button.theming.colors.rows.outlineText.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-outline-border</code>',
+          '<code>--nui-btn-{color}-outline-border</code>',
           'components.button.theming.colors.rows.outlineBorder.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-outline-hover-bg</code>',
+          '<code>--nui-btn-{color}-outline-hover-bg</code>',
           'components.button.theming.colors.rows.outlineHoverBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-outline-hover-text</code>',
+          '<code>--nui-btn-{color}-outline-hover-text</code>',
           'components.button.theming.colors.rows.outlineHoverText.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-outline-hover-border</code>',
+          '<code>--nui-btn-{color}-outline-hover-border</code>',
           'components.button.theming.colors.rows.outlineHoverBorder.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-outline-active-bg</code>',
+          '<code>--nui-btn-{color}-outline-active-bg</code>',
           'components.button.theming.colors.rows.outlineActiveBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-outline-active-border</code>',
+          '<code>--nui-btn-{color}-outline-active-border</code>',
           'components.button.theming.colors.rows.outlineActiveBorder.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
 
         // Ghost variants
         [
-          '<code>--nui-button-{color}-ghost-bg</code>',
+          '<code>--nui-btn-{color}-ghost-bg</code>',
           'components.button.theming.colors.rows.ghostBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-ghost-text</code>',
+          '<code>--nui-btn-{color}-ghost-text</code>',
           'components.button.theming.colors.rows.ghostText.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-ghost-border</code>',
+          '<code>--nui-btn-{color}-ghost-border</code>',
           'components.button.theming.colors.rows.ghostBorder.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-ghost-hover-bg</code>',
+          '<code>--nui-btn-{color}-ghost-hover-bg</code>',
           'components.button.theming.colors.rows.ghostHoverBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-ghost-hover-text</code>',
+          '<code>--nui-btn-{color}-ghost-hover-text</code>',
           'components.button.theming.colors.rows.ghostHoverText.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-ghost-hover-border</code>',
+          '<code>--nui-btn-{color}-ghost-hover-border</code>',
           'components.button.theming.colors.rows.ghostHoverBorder.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-ghost-active-bg</code>',
+          '<code>--nui-btn-{color}-ghost-active-bg</code>',
           'components.button.theming.colors.rows.ghostActiveBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
-          '<code>--nui-button-{color}-ghost-active-border</code>',
+          '<code>--nui-btn-{color}-ghost-active-border</code>',
           'components.button.theming.colors.rows.ghostActiveBorder.description',
+          'primary, secondary, accent, success, info, warning, danger, neutral',
+        ],
+
+        // Link variants
+        [
+          '<code>--nui-btn-{color}-link-bg</code>',
+          'components.button.theming.colors.rows.linkBg.description',
+          'primary, secondary, accent, success, info, warning, danger, neutral',
+        ],
+        [
+          '<code>--nui-btn-{color}-link-text</code>',
+          'components.button.theming.colors.rows.linkText.description',
+          'primary, secondary, accent, success, info, warning, danger, neutral',
+        ],
+        [
+          '<code>--nui-btn-{color}-link-border</code>',
+          'components.button.theming.colors.rows.linkBorder.description',
+          'primary, secondary, accent, success, info, warning, danger, neutral',
+        ],
+        [
+          '<code>--nui-btn-{color}-link-hover-bg</code>',
+          'components.button.theming.colors.rows.linkHoverBg.description',
+          'primary, secondary, accent, success, info, warning, danger, neutral',
+        ],
+        [
+          '<code>--nui-btn-{color}-link-hover-text</code>',
+          'components.button.theming.colors.rows.linkHoverText.description',
+          'primary, secondary, accent, success, info, warning, danger, neutral',
+        ],
+        [
+          '<code>--nui-btn-{color}-link-hover-border</code>',
+          'components.button.theming.colors.rows.linkHoverBorder.description',
+          'primary, secondary, accent, success, info, warning, danger, neutral',
+        ],
+        [
+          '<code>--nui-btn-{color}-link-active-bg</code>',
+          'components.button.theming.colors.rows.linkActiveBg.description',
+          'primary, secondary, accent, success, info, warning, danger, neutral',
+        ],
+        [
+          '<code>--nui-btn-{color}-link-active-border</code>',
+          'components.button.theming.colors.rows.linkActiveBorder.description',
+          'primary, secondary, accent, success, info, warning, danger, neutral',
+        ],
+        [
+          '<code>--nui-btn-{color}-link-active-text</code>',
+          'components.button.theming.colors.rows.linkActiveText.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
 
         // Focus
         [
-          '<code>--nui-button-{color}-focus-color</code>',
-          'components.button.theming.colors.rows.focusColor.description',
+          '<code>--nui-btn-{color}-focus-ring</code>',
+          'components.button.theming.colors.rows.focusRing.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
       ],
@@ -166,148 +213,70 @@ export const BUTTON_THEMING_SECTIONS: ComponentSection[] = [
           'components.button.theming.structure.rows.gap.description',
           '0.5rem',
         ],
+
+        // Border
         [
-          '<code>--nui-button-padding-x-xs</code>',
-          'components.button.theming.structure.rows.paddingXXs.description',
-          '0.5rem',
-        ],
-        [
-          '<code>--nui-button-padding-y-xs</code>',
-          'components.button.theming.structure.rows.paddingYXs.description',
-          '0.25rem',
-        ],
-        [
-          '<code>--nui-button-padding-x-sm</code>',
-          'components.button.theming.structure.rows.paddingXSm.description',
-          '0.75rem',
-        ],
-        [
-          '<code>--nui-button-padding-y-sm</code>',
-          'components.button.theming.structure.rows.paddingYSm.description',
-          '0.375rem',
-        ],
-        [
-          '<code>--nui-button-padding-x-md</code>',
-          'components.button.theming.structure.rows.paddingXMd.description',
-          '1rem',
-        ],
-        [
-          '<code>--nui-button-padding-y-md</code>',
-          'components.button.theming.structure.rows.paddingYMd.description',
-          '0.5rem',
-        ],
-        [
-          '<code>--nui-button-padding-x-lg</code>',
-          'components.button.theming.structure.rows.paddingXLg.description',
-          '1.25rem',
-        ],
-        [
-          '<code>--nui-button-padding-y-lg</code>',
-          'components.button.theming.structure.rows.paddingYLg.description',
-          '0.625rem',
-        ],
-        [
-          '<code>--nui-button-padding-x-xl</code>',
-          'components.button.theming.structure.rows.paddingXXl.description',
-          '1.5rem',
-        ],
-        [
-          '<code>--nui-button-padding-y-xl</code>',
-          'components.button.theming.structure.rows.paddingYXl.description',
-          '0.75rem',
+          '<code>--nui-button-border-width</code>',
+          'components.button.theming.structure.rows.borderWidth.description',
+          'var(--nui-border-width-sm)',
         ],
 
         // Border radius
         [
           '<code>--nui-button-radius-xs</code>',
           'components.button.theming.structure.rows.radiusXs.description',
-          '0.25rem',
+          'var(--nui-border-radius-xs)',
         ],
         [
           '<code>--nui-button-radius-sm</code>',
           'components.button.theming.structure.rows.radiusSm.description',
-          '0.375rem',
+          'var(--nui-border-radius-sm)',
         ],
         [
           '<code>--nui-button-radius-md</code>',
           'components.button.theming.structure.rows.radiusMd.description',
-          '0.5rem',
+          'var(--nui-border-radius-md)',
         ],
         [
           '<code>--nui-button-radius-lg</code>',
           'components.button.theming.structure.rows.radiusLg.description',
-          '0.625rem',
+          'var(--nui-border-radius-lg)',
         ],
         [
           '<code>--nui-button-radius-xl</code>',
           'components.button.theming.structure.rows.radiusXl.description',
-          '0.75rem',
+          'var(--nui-border-radius-xl)',
         ],
 
-        // Font sizes
+        // Typography
         [
-          '<code>--nui-button-font-size-xs</code>',
-          'components.button.theming.structure.rows.fontSizeXs.description',
-          '0.75rem',
-        ],
-        [
-          '<code>--nui-button-font-size-sm</code>',
-          'components.button.theming.structure.rows.fontSizeSm.description',
-          '0.875rem',
-        ],
-        [
-          '<code>--nui-button-font-size-md</code>',
-          'components.button.theming.structure.rows.fontSizeMd.description',
-          '1rem',
-        ],
-        [
-          '<code>--nui-button-font-size-lg</code>',
-          'components.button.theming.structure.rows.fontSizeLg.description',
-          '1.125rem',
-        ],
-        [
-          '<code>--nui-button-font-size-xl</code>',
-          'components.button.theming.structure.rows.fontSizeXl.description',
-          '1.25rem',
-        ],
-
-        // Icon sizes
-        [
-          '<code>--nui-button-icon-size-xs</code>',
-          'components.button.theming.structure.rows.iconSizeXs.description',
-          '1rem',
-        ],
-        [
-          '<code>--nui-button-icon-size-sm</code>',
-          'components.button.theming.structure.rows.iconSizeSm.description',
-          '1.125rem',
-        ],
-        [
-          '<code>--nui-button-icon-size-md</code>',
-          'components.button.theming.structure.rows.iconSizeMd.description',
-          '1.25rem',
-        ],
-        [
-          '<code>--nui-button-icon-size-lg</code>',
-          'components.button.theming.structure.rows.iconSizeLg.description',
-          '1.375rem',
-        ],
-        [
-          '<code>--nui-button-icon-size-xl</code>',
-          'components.button.theming.structure.rows.iconSizeXl.description',
-          '1.5rem',
+          '<code>--nui-button-font-weight</code>',
+          'components.button.theming.structure.rows.fontWeight.description',
+          'var(--nui-font-weight-semibold)',
         ],
 
         // Animations & Effects
         [
-          '<code>--nui-button-transition</code>',
-          'components.button.theming.structure.rows.transition.description',
-          '0.2s ease',
-        ],
-        [
           '<code>--nui-button-spin-duration</code>',
           'components.button.theming.structure.rows.spinDuration.description',
-          '0.8s',
+          '1s',
+        ],
+
+        // Link variant
+        [
+          '<code>--nui-button-link-underline-offset</code>',
+          'components.button.theming.structure.rows.linkUnderlineOffset.description',
+          '0.25em',
+        ],
+        [
+          '<code>--nui-button-link-underline-thickness</code>',
+          'components.button.theming.structure.rows.linkUnderlineThickness.description',
+          'var(--nui-border-width-sm)',
+        ],
+        [
+          '<code>--nui-button-link-underline-skip-ink</code>',
+          'components.button.theming.structure.rows.linkUnderlineSkipInk.description',
+          'auto',
         ],
       ],
     },

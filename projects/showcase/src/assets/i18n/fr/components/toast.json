@@ -384,37 +384,145 @@
     }
   },
   "theming": {
-    "container": {
-      "title": "Variables du conteneur",
-      "description": "Variables CSS pour personnaliser le conteneur général du toast (fond, bordure, ombre, espacement)."
+    "layout": {
+      "title": "Variables de mise en page",
+      "description": "Variables CSS pour personnaliser les dimensions et l'espacement interne du toast.",
+      "rows": {
+        "width": {
+          "description": "Largeur par défaut de chaque notification toast."
+        },
+        "widthMobile": {
+          "description": "Largeur du toast sur les écrans de moins de 640 px."
+        },
+        "minHeight": {
+          "description": "Hauteur minimale de l'élément toast."
+        },
+        "maxWidth": {
+          "description": "Largeur maximale du conteneur toast sur les grands écrans."
+        },
+        "padding": {
+          "description": "Rembourrage interne appliqué au corps du toast."
+        },
+        "paddingCompact": {
+          "description": "Rembourrage interne réduit utilisé dans les variantes compactes du toast."
+        },
+        "gap": {
+          "description": "Espace entre l'icône et le contenu textuel à l'intérieur du toast."
+        }
+      }
+    },
+    "border": {
+      "title": "Variables de bordure et d'ombre",
+      "description": "Variables CSS pour personnaliser le rayon de bordure, l'épaisseur de bordure et l'ombre du toast.",
+      "rows": {
+        "radius": {
+          "description": "Rayon de bordure appliqué à l'élément toast."
+        },
+        "borderWidth": {
+          "description": "Épaisseur de la bordure du toast."
+        },
+        "shadow": {
+          "description": "Ombre portée appliquée à l'élément toast."
+        }
+      }
     },
     "typography": {
       "title": "Variables typographiques",
-      "description": "Variables CSS pour personnaliser le texte du toast (titre, message, taille de police, poids)."
-    },
-    "icon": {
-      "title": "Variables d'icône",
-      "description": "Variables CSS pour personnaliser l'icône du toast (taille, couleur, espacement)."
-    },
-    "close": {
-      "title": "Variables du bouton de fermeture",
-      "description": "Variables CSS pour personnaliser le bouton de fermeture (taille, couleur, survol)."
-    },
-    "progress": {
-      "title": "Variables de barre de progression",
-      "description": "Variables CSS pour personnaliser la barre de progression automatique (couleur, hauteur, animation)."
-    },
-    "types": {
-      "title": "Variables par type",
-      "description": "Variables CSS spécifiques à chaque type de toast (succès, erreur, avertissement, info, chargement)."
+      "description": "Variables CSS pour personnaliser le texte du toast (taille et poids de police du titre et du message).",
+      "rows": {
+        "titleSize": {
+          "description": "Taille de police du titre du toast."
+        },
+        "titleWeight": {
+          "description": "Poids de police du titre du toast."
+        },
+        "messageSize": {
+          "description": "Taille de police du message du toast."
+        },
+        "messageWeight": {
+          "description": "Poids de police du message du toast."
+        }
+      }
     },
     "animations": {
       "title": "Variables d'animation",
-      "description": "Variables CSS pour personnaliser les animations d'entrée/sortie du toast."
+      "description": "Variables CSS pour personnaliser le timing des animations d'entrée/sortie du toast.",
+      "rows": {
+        "duration": {
+          "description": "Durée des animations d'entrée et de sortie du toast."
+        },
+        "easing": {
+          "description": "Fonction d'accélération CSS utilisée pour les animations d'entrée et de sortie du toast."
+        }
+      }
+    },
+    "zindex": {
+      "title": "Variable de z-index",
+      "description": "Variable CSS qui contrôle la couche d'empilement du conteneur de toasts.",
+      "rows": {
+        "zIndex": {
+          "description": "Z-index du conteneur superposé de toasts. Par défaut, utilise le jeton global z-index de statut."
+        }
+      }
+    },
+    "stacking": {
+      "title": "Variables d'empilement",
+      "description": "Variables CSS qui contrôlent l'effet visuel d'empilement lorsque plusieurs toasts sont regroupés.",
+      "rows": {
+        "stackGap": {
+          "description": "Espacement vertical entre les notifications toast empilées."
+        },
+        "stackScale1": {
+          "description": "Facteur d'échelle appliqué au deuxième toast de la pile (un niveau derrière)."
+        },
+        "stackScale2": {
+          "description": "Facteur d'échelle appliqué au troisième toast de la pile (deux niveaux derrière)."
+        },
+        "stackY1": {
+          "description": "Décalage vertical appliqué au deuxième toast de la pile."
+        },
+        "stackY2": {
+          "description": "Décalage vertical appliqué au troisième toast de la pile."
+        }
+      }
+    },
+    "colors": {
+      "title": "Variables par couleur",
+      "description": "Variables CSS générées par le moteur de thèmes pour chaque couleur sémantique (success, warning, danger, info, primary, neutral). Remplacez <code>{color}</code> par le nom de la couleur.",
+      "rows": {
+        "colorBg": {
+          "description": "Couleur de fond du toast pour la variante de couleur indiquée.",
+          "default": "Généré par le moteur de thèmes à partir du tint/shade de la couleur"
+        },
+        "colorHoverBg": {
+          "description": "Couleur de fond au survol pour la variante de couleur indiquée.",
+          "default": "Généré par le moteur de thèmes à partir du tint/shade de la couleur"
+        },
+        "colorBorder": {
+          "description": "Couleur de bordure du toast pour la variante de couleur indiquée.",
+          "default": "Généré par le moteur de thèmes sous forme de teinte semi-transparente de la couleur"
+        },
+        "colorTitle": {
+          "description": "Couleur du texte du titre pour la variante de couleur indiquée.",
+          "default": "Généré par le moteur de thèmes à partir du shade/tint de la couleur"
+        },
+        "colorIcon": {
+          "description": "Couleur de l'icône pour la variante de couleur indiquée.",
+          "default": "Identique à la couleur du titre"
+        },
+        "colorText": {
+          "description": "Couleur du texte du corps pour la variante de couleur indiquée.",
+          "default": "Blanc en mode sombre, noir en mode clair"
+        },
+        "colorProgress": {
+          "description": "Couleur de la barre de progression pour la variante de couleur indiquée.",
+          "default": "La valeur brute de la couleur de la variante"
+        }
+      }
     },
     "examples": {
       "title": "Exemple de personnalisation",
-      "description": "Exemple de personnalisation complète du toast utilisant des variables CSS pour créer un thème sombre."
+      "description": "Exemples de personnalisation de toasts utilisant des variables CSS pour ajuster la mise en page, la bordure et les animations."
     }
   },
   "i18n": {

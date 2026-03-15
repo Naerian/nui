@@ -510,7 +510,8 @@
         "progressBg": "Hintergrundfarbe der Timeout-Fortschrittsbalken-Leiste.",
         "progressColor": "Füllfarbe des Timeout-Fortschrittsbalkens.",
         "scrollBg": "Hintergrundfarbe der Scrollleisten-Schiene.",
-        "scrollThumbBg": "Farbe des Scrollleisten-Ziehers."
+        "scrollThumbBg": "Farbe des Scrollleisten-Ziehers.",
+        "scrollThumbHoverBg": "Farbe des Scrollleisten-Ziehers beim Darüberfahren."
       }
     },
     "layout": {

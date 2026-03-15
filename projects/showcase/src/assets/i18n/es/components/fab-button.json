@@ -112,11 +112,53 @@
     "colors": {
       "title": "Variables de color",
       "description": "Variables CSS para personalizar colores por variante (<code>solid</code>, <code>outline</code>, <code>ghost</code>) y color semántico (<code>primary</code>, <code>secondary</code>, etc.).",
-      "note": "Reemplaza <code>{color}</code> con cualquier color del sistema: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>."
+      "note": "Reemplaza <code>{color}</code> con cualquier color del sistema: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>.",
+      "rows": {
+        "solidBg": { "description": "Color de fondo — variante solid" },
+        "solidText": { "description": "Color de texto — variante solid" },
+        "solidBorder": { "description": "Color de borde — variante solid" },
+        "solidHoverBg": { "description": "Fondo en hover — variante solid" },
+        "solidHoverText": { "description": "Color de texto en hover — variante solid" },
+        "solidHoverBorder": { "description": "Color de borde en hover — variante solid" },
+        "solidActiveBg": { "description": "Fondo en active — variante solid" },
+        "outlineBg": { "description": "Color de fondo — variante outline" },
+        "outlineText": { "description": "Color de texto — variante outline" },
+        "outlineBorder": { "description": "Color de borde — variante outline" },
+        "outlineHoverBg": { "description": "Fondo en hover — variante outline" },
+        "outlineHoverText": { "description": "Color de texto en hover — variante outline" },
+        "outlineHoverBorder": { "description": "Color de borde en hover — variante outline" },
+        "outlineActiveBg": { "description": "Fondo en active — variante outline" },
+        "ghostBg": { "description": "Color de fondo — variante ghost" },
+        "ghostText": { "description": "Color de texto — variante ghost" },
+        "ghostBorder": { "description": "Color de borde — variante ghost" },
+        "ghostHoverBg": { "description": "Fondo en hover — variante ghost" },
+        "ghostHoverText": { "description": "Color de texto en hover — variante ghost" },
+        "ghostHoverBorder": { "description": "Color de borde en hover — variante ghost" },
+        "ghostActiveBg": { "description": "Fondo en active — variante ghost" },
+        "focusRing": { "description": "Color del anillo de foco (semitransparente)" },
+        "badgeBg": { "description": "Color de fondo para la insignia del trigger (al usar el input <code>triggerBadgeColor</code>)" },
+        "badgeText": { "description": "Color de texto para la insignia del trigger (calculado automáticamente por contraste)" },
+        "badgeBorder": { "description": "Borde alrededor de la insignia del trigger para separarla de la superficie del botón" }
+      }
     },
     "structure": {
       "title": "Variables estructurales",
-      "description": "Variables CSS para personalizar el layout radial, animaciones, tamaños de botón, backdrop, tooltips y el anillo de foco."
+      "description": "Variables CSS para personalizar el layout radial, animaciones, escala de iconos, tooltips y el anillo de foco.",
+      "rows": {
+        "radius": { "description": "Radio de órbita para layouts de círculo, semicírculo y cuarto de círculo" },
+        "spacing": { "description": "Distancia de centro a centro entre items en el layout lineal" },
+        "animDuration": { "description": "Duración de la transición de entrada/salida de los items de acción" },
+        "animEasing": { "description": "Curva de easing compartida por todos los tipos de animación" },
+        "animDelayStep": { "description": "Retraso escalonado añadido por índice de item" },
+        "triggerRotate": { "description": "Ángulo de rotación del icono del trigger cuando el dial está expandido" },
+        "triggerIconScale": { "description": "Factor de escala aplicado al icono del trigger relativo a la altura del botón" },
+        "spinDuration": { "description": "Duración de la animación del spinner de carga" },
+        "itemIconScale": { "description": "Factor de escala aplicado a los iconos de los items relativo a la altura del botón de item" },
+        "tooltipOffset": { "description": "Separación entre el botón de item y su etiqueta tooltip en línea" },
+        "focusWidth": { "description": "Anchura del contorno de foco para los botones trigger e items" },
+        "focusOffset": { "description": "Desplazamiento del contorno de foco para los botones trigger e items" },
+        "zIndex": { "description": "Z-index del contenedor FAB (sobre popovers y tooltips, bajo modales)" }
+      }
     }
   },
   "i18n": {

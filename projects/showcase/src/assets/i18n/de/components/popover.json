@@ -140,27 +140,53 @@
   "theming": {
     "spacing": {
       "title": "Abstände und Abmessungen",
-      "description": "CSS-Variablen zur Steuerung der Größe, des Innenabstands und der Abstände des Popovers"
+      "description": "CSS-Variablen zur Steuerung der Größe, des Innenabstands und der Abstände des Popovers",
+      "rows": {
+        "padding": "Innenabstand des Popovers",
+        "maxWidth": "Maximale Breite des Popovers",
+        "minWidth": "Minimale Breite des Popovers",
+        "arrowSize": "Größe des Popover-Pfeils",
+        "distance": "Abstand vom Trigger-Element zum Popover"
+      }
     },
     "typography": {
       "title": "Typografie",
-      "description": "CSS-Variablen zur Steuerung der Schriftart des Popover-Inhalts"
+      "description": "CSS-Variablen zur Steuerung der Schriftart des Popover-Inhalts",
+      "rows": {
+        "fontSize": "Schriftgröße des Popover-Inhalts",
+        "fontWeight": "Schriftstärke des Popover-Inhalts",
+        "lineHeight": "Zeilenhöhe des Popover-Inhalts"
+      }
     },
     "borders": {
       "title": "Rahmen",
-      "description": "CSS-Variablen zur Steuerung der Rahmen und des Radius des Popovers"
+      "description": "CSS-Variablen zur Steuerung der Rahmen und des Radius des Popovers",
+      "rows": {
+        "borderWidth": "Rahmenbreite des Popovers",
+        "borderRadius": "Rahmenradius des Popovers"
+      }
     },
     "shadow": {
       "title": "Schatten",
-      "description": "CSS-Variable zur Steuerung des Popover-Schattens"
+      "description": "CSS-Variable zur Steuerung des Popover-Schattens",
+      "rows": {
+        "shadow": "Schatten des Popovers für visuelle Tiefe"
+      }
     },
     "zindex": {
       "title": "Z-Index",
-      "description": "CSS-Variable zur Steuerung der Stapelreihenfolge des Popovers"
+      "description": "CSS-Variable zur Steuerung der Stapelreihenfolge des Popovers",
+      "rows": {
+        "zIndex": "Z-Index des Popovers zur Steuerung der Stapelreihenfolge"
+      }
     },
     "animation": {
       "title": "Animation",
-      "description": "CSS-Variablen zur Steuerung von Popover-Übergängen und Animationen"
+      "description": "CSS-Variablen zur Steuerung von Popover-Übergängen und Animationen",
+      "rows": {
+        "transitionDuration": "Dauer der Ein-/Ausblend-Übergänge des Popovers",
+        "transitionTiming": "Timing-Funktion für die Übergänge (Easing)"
+      }
     }
   },
   "a11y": {

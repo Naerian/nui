@@ -222,47 +222,47 @@
         "ghostActiveBorder": {
           "description": "Bordure active pour ghost"
         },
-        "focusColor": {
+        "focusRing": {
           "description": "Couleur du contour de focus"
+        },
+        "linkBg": {
+          "description": "Couleur d'arrière-plan pour la variante link"
+        },
+        "linkText": {
+          "description": "Couleur de texte pour la variante link"
+        },
+        "linkBorder": {
+          "description": "Couleur de bordure pour la variante link"
+        },
+        "linkHoverBg": {
+          "description": "Arrière-plan au survol pour link"
+        },
+        "linkHoverText": {
+          "description": "Couleur de texte au survol pour link"
+        },
+        "linkHoverBorder": {
+          "description": "Bordure au survol pour link"
+        },
+        "linkActiveBg": {
+          "description": "Arrière-plan actif pour link"
+        },
+        "linkActiveBorder": {
+          "description": "Bordure active pour link"
+        },
+        "linkActiveText": {
+          "description": "Couleur de texte actif pour link"
         }
       }
     },
     "structure": {
       "title": "Variables structurelles",
-      "description": "Variables CSS pour l'espacement, les tailles, la typographie et les effets visuels.",
+      "description": "Variables CSS pour l'espacement, la bordure, la typographie et les effets visuels.",
       "rows": {
         "gap": {
           "description": "Espace entre l'icône et le texte"
         },
-        "paddingXXs": {
-          "description": "Rembourrage horizontal pour la taille xs"
-        },
-        "paddingYXs": {
-          "description": "Rembourrage vertical pour la taille xs"
-        },
-        "paddingXSm": {
-          "description": "Rembourrage horizontal pour la taille sm"
-        },
-        "paddingYSm": {
-          "description": "Rembourrage vertical pour la taille sm"
-        },
-        "paddingXMd": {
-          "description": "Rembourrage horizontal pour la taille md"
-        },
-        "paddingYMd": {
-          "description": "Rembourrage vertical pour la taille md"
-        },
-        "paddingXLg": {
-          "description": "Rembourrage horizontal pour la taille lg"
-        },
-        "paddingYLg": {
-          "description": "Rembourrage vertical pour la taille lg"
-        },
-        "paddingXXl": {
-          "description": "Rembourrage horizontal pour la taille xl"
-        },
-        "paddingYXl": {
-          "description": "Rembourrage vertical pour la taille xl"
+        "borderWidth": {
+          "description": "Épaisseur de bordure appliquée à toutes les variantes du bouton"
         },
         "radiusXs": {
           "description": "Rayon de bordure pour la taille xs"
@@ -279,47 +279,20 @@
         "radiusXl": {
           "description": "Rayon de bordure pour la taille xl"
         },
-        "fontSizeXs": {
-          "description": "Taille de police pour xs"
-        },
-        "fontSizeSm": {
-          "description": "Taille de police pour sm"
-        },
-        "fontSizeMd": {
-          "description": "Taille de police pour md"
-        },
-        "fontSizeLg": {
-          "description": "Taille de police pour lg"
-        },
-        "fontSizeXl": {
-          "description": "Taille de police pour xl"
-        },
-        "iconSizeXs": {
-          "description": "Taille d'icône pour xs"
-        },
-        "iconSizeSm": {
-          "description": "Taille d'icône pour sm"
-        },
-        "iconSizeMd": {
-          "description": "Taille d'icône pour md"
-        },
-        "iconSizeLg": {
-          "description": "Taille d'icône pour lg"
-        },
-        "iconSizeXl": {
-          "description": "Taille d'icône pour xl"
-        },
-        "transition": {
-          "description": "Durée de transition"
+        "fontWeight": {
+          "description": "Graisse de police appliquée aux libellés du bouton"
         },
         "spinDuration": {
           "description": "Durée d'animation de l'indicateur de chargement"
         },
-        "focusWidth": {
-          "description": "Largeur du contour de focus"
+        "linkUnderlineOffset": {
+          "description": "Décalage du soulignement pour la variante link au survol"
         },
-        "focusOffset": {
-          "description": "Décalage du contour de focus"
+        "linkUnderlineThickness": {
+          "description": "Épaisseur du soulignement pour la variante link au survol"
+        },
+        "linkUnderlineSkipInk": {
+          "description": "Contrôle si le soulignement contourne les jambages dans la variante link"
         }
       }
     }

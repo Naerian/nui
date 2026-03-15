@@ -140,27 +140,53 @@
   "theming": {
     "spacing": {
       "title": "Espacement et dimensions",
-      "description": "Variables CSS pour contrôler la taille, le rembourrage et l'espacement du popover"
+      "description": "Variables CSS pour contrôler la taille, le rembourrage et l'espacement du popover",
+      "rows": {
+        "padding": "Rembourrage interne du popover",
+        "maxWidth": "Largeur maximale du popover",
+        "minWidth": "Largeur minimale du popover",
+        "arrowSize": "Taille de la flèche du popover",
+        "distance": "Distance entre l'élément déclencheur et le popover"
+      }
     },
     "typography": {
       "title": "Typographie",
-      "description": "Variables CSS pour contrôler la police du contenu du popover"
+      "description": "Variables CSS pour contrôler la police du contenu du popover",
+      "rows": {
+        "fontSize": "Taille de la police du contenu du popover",
+        "fontWeight": "Graisse de la police du contenu du popover",
+        "lineHeight": "Hauteur de ligne du contenu du popover"
+      }
     },
     "borders": {
       "title": "Bordures",
-      "description": "Variables CSS pour contrôler les bordures et le rayon du popover"
+      "description": "Variables CSS pour contrôler les bordures et le rayon du popover",
+      "rows": {
+        "borderWidth": "Épaisseur de la bordure du popover",
+        "borderRadius": "Rayon de la bordure du popover"
+      }
     },
     "shadow": {
       "title": "Ombre",
-      "description": "Variable CSS pour contrôler l'ombre du popover"
+      "description": "Variable CSS pour contrôler l'ombre du popover",
+      "rows": {
+        "shadow": "Ombre du popover pour la profondeur visuelle"
+      }
     },
     "zindex": {
       "title": "Z-index",
-      "description": "Variable CSS pour contrôler l'ordre d'empilement du popover"
+      "description": "Variable CSS pour contrôler l'ordre d'empilement du popover",
+      "rows": {
+        "zIndex": "Z-index du popover pour contrôler l'ordre d'empilement"
+      }
     },
     "animation": {
       "title": "Animation",
-      "description": "Variables CSS pour contrôler les transitions et animations du popover"
+      "description": "Variables CSS pour contrôler les transitions et animations du popover",
+      "rows": {
+        "transitionDuration": "Durée des transitions d'entrée/sortie du popover",
+        "transitionTiming": "Fonction de temporisation pour les transitions (easing)"
+      }
     }
   },
   "a11y": {

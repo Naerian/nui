@@ -112,11 +112,53 @@
     "colors": {
       "title": "Color variables",
       "description": "CSS variables to customize colors by variant (<code>solid</code>, <code>outline</code>, <code>ghost</code>) and semantic color (<code>primary</code>, <code>secondary</code>, etc.).",
-      "note": "Replace <code>{color}</code> with any system color: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>."
+      "note": "Replace <code>{color}</code> with any system color: <code>primary</code>, <code>secondary</code>, <code>accent</code>, <code>success</code>, <code>info</code>, <code>warning</code>, <code>danger</code>, <code>neutral</code>.",
+      "rows": {
+        "solidBg": { "description": "Background color — solid variant" },
+        "solidText": { "description": "Text color — solid variant" },
+        "solidBorder": { "description": "Border color — solid variant" },
+        "solidHoverBg": { "description": "Hover background — solid variant" },
+        "solidHoverText": { "description": "Hover text color — solid variant" },
+        "solidHoverBorder": { "description": "Hover border color — solid variant" },
+        "solidActiveBg": { "description": "Active background — solid variant" },
+        "outlineBg": { "description": "Background color — outline variant" },
+        "outlineText": { "description": "Text color — outline variant" },
+        "outlineBorder": { "description": "Border color — outline variant" },
+        "outlineHoverBg": { "description": "Hover background — outline variant" },
+        "outlineHoverText": { "description": "Hover text color — outline variant" },
+        "outlineHoverBorder": { "description": "Hover border color — outline variant" },
+        "outlineActiveBg": { "description": "Active background — outline variant" },
+        "ghostBg": { "description": "Background color — ghost variant" },
+        "ghostText": { "description": "Text color — ghost variant" },
+        "ghostBorder": { "description": "Border color — ghost variant" },
+        "ghostHoverBg": { "description": "Hover background — ghost variant" },
+        "ghostHoverText": { "description": "Hover text color — ghost variant" },
+        "ghostHoverBorder": { "description": "Hover border color — ghost variant" },
+        "ghostActiveBg": { "description": "Active background — ghost variant" },
+        "focusRing": { "description": "Focus ring color (semi-transparent)" },
+        "badgeBg": { "description": "Background color for trigger badge (when using <code>triggerBadgeColor</code> input)" },
+        "badgeText": { "description": "Text color for trigger badge (automatically calculated for contrast)" },
+        "badgeBorder": { "description": "Border ring around the trigger badge, used to separate it from the button surface" }
+      }
     },
     "structure": {
       "title": "Structural variables",
-      "description": "CSS variables to customize the radial layout, animations, button sizes, backdrop, tooltips and the focus ring."
+      "description": "CSS variables to customize the radial layout, animations, icon scaling, tooltips and the focus ring.",
+      "rows": {
+        "radius": { "description": "Orbit radius for circle / semi-circle / quarter-circle layouts" },
+        "spacing": { "description": "Center-to-center step distance between items in the linear layout" },
+        "animDuration": { "description": "Enter/leave transition duration for action items" },
+        "animEasing": { "description": "Easing curve shared by all animation types" },
+        "animDelayStep": { "description": "Stagger delay delta added per item index" },
+        "triggerRotate": { "description": "Trigger icon rotation angle when the dial is expanded" },
+        "triggerIconScale": { "description": "Scaling factor applied to the trigger icon relative to the button height" },
+        "spinDuration": { "description": "Duration of the loading spinner animation" },
+        "itemIconScale": { "description": "Scaling factor applied to item icons relative to the item button height" },
+        "tooltipOffset": { "description": "Gap between an item button and its inline tooltip label" },
+        "focusWidth": { "description": "Focus outline width for trigger and item buttons" },
+        "focusOffset": { "description": "Focus outline offset for trigger and item buttons" },
+        "zIndex": { "description": "Z-index of the FAB container (above popovers and tooltips, below modals)" }
+      }
     }
   },
   "i18n": {

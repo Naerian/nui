@@ -95,15 +95,69 @@
   "theming": {
     "container": {
       "title": "Contenedor del tooltip",
-      "description": "Variables CSS para controlar la apariencia del contenedor del tooltip: colores, dimensiones, padding, fuente, bordes, sombra y z-index"
+      "description": "Variables CSS para controlar la apariencia del contenedor del tooltip: colores, dimensiones, padding, fuente, bordes, sombra y z-index",
+      "rows": {
+        "bg": {
+          "description": "Color de fondo del tooltip (establecido dinámicamente según el tema activo)"
+        },
+        "text": {
+          "description": "Color del texto del tooltip (establecido dinámicamente según el tema activo)"
+        },
+        "paddingY": {
+          "description": "Relleno vertical dentro del área de contenido del tooltip"
+        },
+        "paddingX": {
+          "description": "Relleno horizontal dentro del área de contenido del tooltip"
+        },
+        "maxWidth": {
+          "description": "Anchura máxima del panel del tooltip"
+        },
+        "fontSize": {
+          "description": "Tamaño de fuente del texto del tooltip"
+        },
+        "fontWeight": {
+          "description": "Peso de fuente del texto del tooltip"
+        },
+        "lineHeight": {
+          "description": "Altura de línea del texto del tooltip"
+        },
+        "borderRadius": {
+          "description": "Radio de borde de las esquinas del panel del tooltip"
+        },
+        "borderWidth": {
+          "description": "Ancho del borde del panel del tooltip"
+        },
+        "borderColor": {
+          "description": "Color del borde del panel del tooltip (establecido dinámicamente según el tema activo)"
+        },
+        "shadow": {
+          "description": "Sombra aplicada al panel del tooltip"
+        },
+        "zIndex": {
+          "description": "Z-index del overlay del tooltip para controlar el orden de apilamiento"
+        }
+      }
     },
     "arrow": {
       "title": "Flecha del tooltip",
-      "description": "Variable CSS para controlar el tamaño de la flecha del tooltip"
+      "description": "Variable CSS para controlar el tamaño de la flecha del tooltip",
+      "rows": {
+        "arrowSize": {
+          "description": "Tamaño de la flecha direccional que apunta desde el tooltip al elemento disparador"
+        }
+      }
     },
     "animation": {
       "title": "Animaciones",
-      "description": "Variables CSS para controlar la duración y timing de las animaciones de entrada y salida del tooltip"
+      "description": "Variables CSS para controlar la duración y timing de las animaciones de entrada y salida del tooltip",
+      "rows": {
+        "transitionDuration": {
+          "description": "Duración de la transición de entrada y salida del tooltip"
+        },
+        "transitionTiming": {
+          "description": "Función de timing de la transición de entrada y salida del tooltip"
+        }
+      }
     },
     "examples": {
       "title": "Ejemplos de personalización",

@@ -155,39 +155,32 @@
   "theming": {
     "colors": {
       "title": "Farb-Tokens",
-      "description": "Lokale CSS-Eigenschaften, die pro Farbe und Variante vom ThemeService aufgel\u00f6st werden.",
+      "description": "Lokale CSS-Eigenschaften, die pro Farbe und Variante vom ThemeService aufgelöst werden.",
       "rows": {
-        "trackBg": {
-          "description": "Hintergrundfarbe des Tracks (per Theme und Variante aufgel\u00f6st)."
-        },
+        "trackBg": { "description": "Hintergrundfarbe des Tracks (per Theme und Variante aufgelöst)." },
         "trackBorder": { "description": "Randfarbe des Tracks." },
-        "fillBg": { "description": "Hintergrundfarbe der F\u00fcllung." },
-        "fillHoverBg": { "description": "Hintergrundfarbe der F\u00fcllung beim Hover." },
-        "text": { "description": "Textfarbe innerhalb der F\u00fcllung (inside-Modus)." },
-        "valueText": { "description": "Textfarbe des Werts au\u00dferhalb der F\u00fcllung." },
-        "labelText": { "description": "Textfarbe der Beschriftung." },
-        "stepDivider": {
-          "description": "Farbe der Schritttrennlinien (wenn steps verwendet werden)."
-        }
+        "fillBg": { "description": "Hintergrundfarbe der Füllung." },
+        "fillHoverBg": { "description": "Hintergrundfarbe der Füllung beim Hover." },
+        "text": { "description": "Textfarbe innerhalb der Füllung (inside-Modus)." },
+        "valueText": { "description": "Textfarbe des Werts außerhalb der Füllung." },
+        "labelText": { "description": "Textfarbe der Beschriftung." }
       }
     },
     "sizes": {
       "title": "Größen-Tokens",
       "description": "Strukturelle CSS-Eigenschaften zur Steuerung von Track-Höhe, Randradius und Übergängen.",
       "rows": {
-        "heightXs": { "description": "Leistenhöhe bei Größe xs." },
-        "heightSm": { "description": "Leistenhöhe bei Größe sm." },
-        "heightMd": { "description": "Leistenhöhe bei Größe md." },
-        "heightLg": { "description": "Leistenhöhe bei Größe lg." },
-        "heightXl": { "description": "Leistenhöhe bei Größe xl." },
+        "height": { "description": "Standardhöhe des Tracks." },
+        "heightCompact": { "description": "Track-Höhe im kompakten Modus." },
+        "radius": { "description": "Rahmenradius des Tracks." },
+        "radiusCompact": { "description": "Rahmenradius des Tracks im kompakten Modus." },
         "borderWidth": { "description": "Randbreite des Tracks." },
+        "fontWeightInside": { "description": "Schriftstärke des Werttexts innerhalb der Füllung." },
         "transitionDuration": { "description": "Übergangsdauer der Füllung." },
-        "indeterminateDuration": {
-          "description": "Animationszyklusdauer der unbestimmten Animation."
-        },
-        "stepWidth": {
-          "description": "Breite der Schritttrennlinien, wenn <code>steps</code> einen Wert hat."
-        }
+        "transitionTiming": { "description": "Timing-Funktion des Füllungsübergangs." },
+        "indeterminateDuration": { "description": "Animationszyklusdauer der unbestimmten Animation." },
+        "indeterminateTiming": { "description": "Timing-Funktion der unbestimmten Animation." },
+        "stepGap": { "description": "Abstand zwischen Segmenten, wenn <code>steps</code> aktiv ist." }
       }
     }
   },

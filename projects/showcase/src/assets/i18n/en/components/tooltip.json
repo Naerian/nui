@@ -95,15 +95,69 @@
   "theming": {
     "container": {
       "title": "Tooltip container",
-      "description": "CSS variables to control the appearance of the tooltip container: colors, dimensions, padding, font, borders, shadow and z-index"
+      "description": "CSS variables to control the appearance of the tooltip container: colors, dimensions, padding, font, borders, shadow and z-index",
+      "rows": {
+        "bg": {
+          "description": "Background color of the tooltip (dynamically set based on the active theme)"
+        },
+        "text": {
+          "description": "Text color of the tooltip (dynamically set based on the active theme)"
+        },
+        "paddingY": {
+          "description": "Vertical padding inside the tooltip content area"
+        },
+        "paddingX": {
+          "description": "Horizontal padding inside the tooltip content area"
+        },
+        "maxWidth": {
+          "description": "Maximum width of the tooltip panel"
+        },
+        "fontSize": {
+          "description": "Font size of the tooltip text"
+        },
+        "fontWeight": {
+          "description": "Font weight of the tooltip text"
+        },
+        "lineHeight": {
+          "description": "Line height of the tooltip text"
+        },
+        "borderRadius": {
+          "description": "Border radius of the tooltip panel corners"
+        },
+        "borderWidth": {
+          "description": "Border width of the tooltip panel"
+        },
+        "borderColor": {
+          "description": "Border color of the tooltip panel (dynamically set based on the active theme)"
+        },
+        "shadow": {
+          "description": "Box shadow applied to the tooltip panel"
+        },
+        "zIndex": {
+          "description": "Z-index of the tooltip overlay for stacking order control"
+        }
+      }
     },
     "arrow": {
       "title": "Tooltip arrow",
-      "description": "CSS variable to control the size of the tooltip arrow"
+      "description": "CSS variable to control the size of the tooltip arrow",
+      "rows": {
+        "arrowSize": {
+          "description": "Size of the directional arrow pointing from the tooltip to the trigger element"
+        }
+      }
     },
     "animation": {
       "title": "Animations",
-      "description": "CSS variables to control the duration and timing of tooltip enter/exit animations"
+      "description": "CSS variables to control the duration and timing of tooltip enter/exit animations",
+      "rows": {
+        "transitionDuration": {
+          "description": "Duration of the tooltip show and hide transition"
+        },
+        "transitionTiming": {
+          "description": "Timing function of the tooltip show and hide transition"
+        }
+      }
     },
     "examples": {
       "title": "Customization examples",

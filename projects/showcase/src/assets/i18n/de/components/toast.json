@@ -384,37 +384,145 @@
     }
   },
   "theming": {
-    "container": {
-      "title": "Container-Variablen",
-      "description": "CSS-Variablen zur Anpassung des allgemeinen Toast-Containers (Hintergrund, Rahmen, Schatten, Abstände)."
+    "layout": {
+      "title": "Layout-Variablen",
+      "description": "CSS-Variablen zur Anpassung der Abmessungen und des internen Abstands des Toasts.",
+      "rows": {
+        "width": {
+          "description": "Standardbreite jeder Toast-Benachrichtigung."
+        },
+        "widthMobile": {
+          "description": "Breite des Toasts auf Bildschirmen unter 640 px."
+        },
+        "minHeight": {
+          "description": "Mindesthöhe des Toast-Elements."
+        },
+        "maxWidth": {
+          "description": "Maximale Breite des Toast-Containers auf größeren Bildschirmen."
+        },
+        "padding": {
+          "description": "Innenabstand des Toast-Körpers."
+        },
+        "paddingCompact": {
+          "description": "Reduzierter Innenabstand für kompakte Toast-Varianten."
+        },
+        "gap": {
+          "description": "Abstand zwischen Symbol und Textinhalt innerhalb des Toasts."
+        }
+      }
+    },
+    "border": {
+      "title": "Rahmen- und Schatten-Variablen",
+      "description": "CSS-Variablen zur Anpassung des Rahmenradius, der Rahmenbreite und des Schattens des Toasts.",
+      "rows": {
+        "radius": {
+          "description": "Rahmenradius des Toast-Elements."
+        },
+        "borderWidth": {
+          "description": "Breite des Toast-Rahmens."
+        },
+        "shadow": {
+          "description": "Box-Schatten des Toast-Elements."
+        }
+      }
     },
     "typography": {
       "title": "Typografie-Variablen",
-      "description": "CSS-Variablen zur Anpassung des Toast-Textes (Titel, Nachricht, Schriftgröße, -gewicht)."
-    },
-    "icon": {
-      "title": "Symbol-Variablen",
-      "description": "CSS-Variablen zur Anpassung des Toast-Symbols (Größe, Farbe, Abstände)."
-    },
-    "close": {
-      "title": "Schließen-Schaltflächen-Variablen",
-      "description": "CSS-Variablen zur Anpassung der Schließen-Schaltfläche (Größe, Farbe, Hover)."
-    },
-    "progress": {
-      "title": "Fortschrittsbalken-Variablen",
-      "description": "CSS-Variablen zur Anpassung des automatischen Fortschrittsbalkens (Farbe, Höhe, Animation)."
-    },
-    "types": {
-      "title": "Typ-spezifische Variablen",
-      "description": "CSS-Variablen spezifisch für jeden Toast-Typ (Erfolg, Fehler, Warnung, Info, Laden)."
+      "description": "CSS-Variablen zur Anpassung des Toast-Textes (Schriftgröße und -gewicht von Titel und Nachricht).",
+      "rows": {
+        "titleSize": {
+          "description": "Schriftgröße des Toast-Titels."
+        },
+        "titleWeight": {
+          "description": "Schriftgewicht des Toast-Titels."
+        },
+        "messageSize": {
+          "description": "Schriftgröße der Toast-Nachricht."
+        },
+        "messageWeight": {
+          "description": "Schriftgewicht der Toast-Nachricht."
+        }
+      }
     },
     "animations": {
       "title": "Animations-Variablen",
-      "description": "CSS-Variablen zur Anpassung der Toast-Ein-/Ausblend-Animationen."
+      "description": "CSS-Variablen zur Anpassung des Timings der Toast-Ein-/Ausblend-Animationen.",
+      "rows": {
+        "duration": {
+          "description": "Dauer der Toast-Ein- und Ausblendanimationen."
+        },
+        "easing": {
+          "description": "CSS-Easing-Funktion für die Toast-Ein- und Ausblendanimationen."
+        }
+      }
+    },
+    "zindex": {
+      "title": "Z-Index-Variable",
+      "description": "CSS-Variable, die die Stapelebene des Toast-Containers steuert.",
+      "rows": {
+        "zIndex": {
+          "description": "Z-Index des Toast-Overlay-Containers. Standardmäßig wird das globale Status-Z-Index-Token verwendet."
+        }
+      }
+    },
+    "stacking": {
+      "title": "Stapel-Variablen",
+      "description": "CSS-Variablen, die den visuellen Stapeleffekt bei mehreren gruppierten Toasts steuern.",
+      "rows": {
+        "stackGap": {
+          "description": "Vertikaler Abstand zwischen gestapelten Toast-Benachrichtigungen."
+        },
+        "stackScale1": {
+          "description": "Skalierungsfaktor des zweiten Toasts im Stapel (eine Ebene dahinter)."
+        },
+        "stackScale2": {
+          "description": "Skalierungsfaktor des dritten Toasts im Stapel (zwei Ebenen dahinter)."
+        },
+        "stackY1": {
+          "description": "Vertikaler Versatz des zweiten Toasts im Stapel."
+        },
+        "stackY2": {
+          "description": "Vertikaler Versatz des dritten Toasts im Stapel."
+        }
+      }
+    },
+    "colors": {
+      "title": "Farb-spezifische Variablen",
+      "description": "CSS-Variablen, die vom Theme-Engine für jede semantische Farbe generiert werden (success, warning, danger, info, primary, neutral). Ersetzen Sie <code>{color}</code> durch den Farbnamen.",
+      "rows": {
+        "colorBg": {
+          "description": "Hintergrundfarbe des Toasts für die angegebene Farbvariante.",
+          "default": "Vom Theme-Engine aus Tint/Shade der Farbe generiert"
+        },
+        "colorHoverBg": {
+          "description": "Hintergrundfarbe beim Hovern für die angegebene Farbvariante.",
+          "default": "Vom Theme-Engine aus Tint/Shade der Farbe generiert"
+        },
+        "colorBorder": {
+          "description": "Rahmenfarbe des Toasts für die angegebene Farbvariante.",
+          "default": "Vom Theme-Engine als halbtransparenter Tint der Farbe generiert"
+        },
+        "colorTitle": {
+          "description": "Titeltext-Farbe für die angegebene Farbvariante.",
+          "default": "Vom Theme-Engine aus Shade/Tint der Farbe generiert"
+        },
+        "colorIcon": {
+          "description": "Symbol-Farbe für die angegebene Farbvariante.",
+          "default": "Identisch mit der Titelfarbe"
+        },
+        "colorText": {
+          "description": "Fließtext-Farbe für die angegebene Farbvariante.",
+          "default": "Weiß im Dunkelmodus, Schwarz im Hellmodus"
+        },
+        "colorProgress": {
+          "description": "Fortschrittsbalken-Farbe für die angegebene Farbvariante.",
+          "default": "Der rohe Farbwert der Variante"
+        }
+      }
     },
     "examples": {
       "title": "Anpassungsbeispiel",
-      "description": "Vollständiges Toast-Anpassungsbeispiel mit CSS-Variablen zur Erstellung eines dunklen Themes."
+      "description": "Toast-Anpassungsbeispiele mit CSS-Variablen zur Anpassung von Layout, Rahmen und Animationen."
     }
   },
   "i18n": {

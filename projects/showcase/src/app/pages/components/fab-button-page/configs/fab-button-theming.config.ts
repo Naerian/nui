@@ -23,131 +23,136 @@ export const FAB_BUTTON_THEMING_SECTIONS: ComponentSection[] = [
         // ── Solid ──────────────────────────────────────────
         [
           '<code>--nui-fab-{color}-solid-bg</code>',
-          'Background color — solid variant',
+          'components.fabButton.theming.colors.rows.solidBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-solid-text</code>',
-          'Text color — solid variant',
+          'components.fabButton.theming.colors.rows.solidText.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-solid-border</code>',
-          'Border color — solid variant',
+          'components.fabButton.theming.colors.rows.solidBorder.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-solid-hover-bg</code>',
-          'Hover background — solid',
+          'components.fabButton.theming.colors.rows.solidHoverBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-solid-hover-text</code>',
-          'Hover text — solid',
+          'components.fabButton.theming.colors.rows.solidHoverText.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-solid-hover-border</code>',
-          'Hover border — solid',
+          'components.fabButton.theming.colors.rows.solidHoverBorder.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-solid-active-bg</code>',
-          'Active background — solid',
+          'components.fabButton.theming.colors.rows.solidActiveBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
 
         // ── Outline ────────────────────────────────────────
         [
           '<code>--nui-fab-{color}-outline-bg</code>',
-          'Background color — outline variant',
+          'components.fabButton.theming.colors.rows.outlineBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-outline-text</code>',
-          'Text color — outline variant',
+          'components.fabButton.theming.colors.rows.outlineText.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-outline-border</code>',
-          'Border color — outline variant',
+          'components.fabButton.theming.colors.rows.outlineBorder.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-outline-hover-bg</code>',
-          'Hover background — outline',
+          'components.fabButton.theming.colors.rows.outlineHoverBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-outline-hover-text</code>',
-          'Hover text — outline',
+          'components.fabButton.theming.colors.rows.outlineHoverText.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-outline-hover-border</code>',
-          'Hover border — outline',
+          'components.fabButton.theming.colors.rows.outlineHoverBorder.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-outline-active-bg</code>',
-          'Active background — outline',
+          'components.fabButton.theming.colors.rows.outlineActiveBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
 
         // ── Ghost ──────────────────────────────────────────
         [
           '<code>--nui-fab-{color}-ghost-bg</code>',
-          'Background color — ghost variant',
+          'components.fabButton.theming.colors.rows.ghostBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-ghost-text</code>',
-          'Text color — ghost variant',
+          'components.fabButton.theming.colors.rows.ghostText.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-ghost-border</code>',
-          'Border color — ghost variant',
+          'components.fabButton.theming.colors.rows.ghostBorder.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-ghost-hover-bg</code>',
-          'Hover background — ghost',
+          'components.fabButton.theming.colors.rows.ghostHoverBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-ghost-hover-text</code>',
-          'Hover text — ghost',
+          'components.fabButton.theming.colors.rows.ghostHoverText.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-ghost-hover-border</code>',
-          'Hover border — ghost',
+          'components.fabButton.theming.colors.rows.ghostHoverBorder.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
         [
           '<code>--nui-fab-{color}-ghost-active-bg</code>',
-          'Active background — ghost',
+          'components.fabButton.theming.colors.rows.ghostActiveBg.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
 
         // ── Focus ──────────────────────────────────────────
         [
           '<code>--nui-fab-{color}-focus-ring</code>',
-          'Focus ring color (semi-transparent)',
+          'components.fabButton.theming.colors.rows.focusRing.description',
           'primary, secondary, accent, success, info, warning, danger, neutral',
         ],
 
-        // ── Others ─────────────────────────────────────
+        // ── Badge & misc ───────────────────────────────────
         [
           '<code>--nui-fab-badge-bg</code>',
-          'Background color for trigger badge (when using <code>triggerBadgeColor</code> input)',
+          'components.fabButton.theming.colors.rows.badgeBg.description',
           'var(--nui-danger)',
         ],
         [
           '<code>--nui-fab-badge-text</code>',
-          'Text color for trigger badge (automatically calculated for contrast)',
+          'components.fabButton.theming.colors.rows.badgeText.description',
           'var(--nui-on-danger)',
+        ],
+        [
+          '<code>--nui-fab-badge-border</code>',
+          'components.fabButton.theming.colors.rows.badgeBorder.description',
+          'var(--nui-border-subtle)',
         ],
       ],
     },
@@ -167,76 +172,86 @@ export const FAB_BUTTON_THEMING_SECTIONS: ComponentSection[] = [
         // Layout
         [
           '<code>--nui-fab-radius</code>',
-          'Radius for circle / semi-circle / quarter-circle layouts',
-          '4rem',
+          'components.fabButton.theming.structure.rows.radius.description',
+          '3.5rem',
         ],
         [
           '<code>--nui-fab-spacing</code>',
-          'Step distance between items in linear layout',
-          '3.5rem',
+          'components.fabButton.theming.structure.rows.spacing.description',
+          '3rem',
         ],
 
         // Animation
         [
           '<code>--nui-fab-anim-duration</code>',
-          'Enter/leave transition duration for items',
+          'components.fabButton.theming.structure.rows.animDuration.description',
           '200ms',
         ],
         [
           '<code>--nui-fab-anim-easing</code>',
-          'Easing curve shared by all animation types',
+          'components.fabButton.theming.structure.rows.animEasing.description',
           'cubic-bezier(0.4, 0, 0.2, 1)',
         ],
-        ['<code>--nui-fab-anim-delay-step</code>', 'Stagger delay delta per item', '30ms'],
+        [
+          '<code>--nui-fab-anim-delay-step</code>',
+          'components.fabButton.theming.structure.rows.animDelayStep.description',
+          '30ms',
+        ],
 
         // Trigger
-        ['<code>--nui-fab-trigger-rotate</code>', 'Trigger icon rotation when expanded', '45deg'],
         [
-          '<code>--nui-fab-trigger-size-{sz}</code>',
-          'Trigger button diameter per size token (xs…xl)',
-          '3rem (md)',
+          '<code>--nui-fab-trigger-rotate</code>',
+          'components.fabButton.theming.structure.rows.triggerRotate.description',
+          '45deg',
         ],
         [
-          '<code>--nui-fab-trigger-icon-{sz}</code>',
-          'Trigger icon font-size per size token',
-          '1.5rem (md)',
+          '<code>--nui-fab-trigger-icon-scale</code>',
+          'components.fabButton.theming.structure.rows.triggerIconScale.description',
+          '0.5',
+        ],
+        [
+          '<code>--nui-fab-spin-duration</code>',
+          'components.fabButton.theming.structure.rows.spinDuration.description',
+          '1s',
         ],
 
         // Items
         [
-          '<code>--nui-fab-item-size-{sz}</code>',
-          'Item button diameter per size token (xs…xl)',
-          '2.5rem (md)',
+          '<code>--nui-fab-item-icon-scale</code>',
+          'components.fabButton.theming.structure.rows.itemIconScale.description',
+          '0.45',
         ],
-        [
-          '<code>--nui-fab-item-icon-{sz}</code>',
-          'Item icon font-size per size token',
-          '1.125rem (md)',
-        ],
-
-        // Backdrop
-        [
-          '<code>--nui-fab-backdrop-bg</code>',
-          'Backdrop overlay background color',
-          'rgba(0,0,0,0.2)',
-        ],
-        ['<code>--nui-fab-backdrop-blur</code>', 'Backdrop CSS blur amount', '2px'],
 
         // Tooltip label
         [
           '<code>--nui-fab-tooltip-offset</code>',
-          'Gap between item button and its inline tooltip label',
+          'components.fabButton.theming.structure.rows.tooltipOffset.description',
           '0.5rem',
         ],
 
         // Focus ring
-        ['<code>--nui-fab-focus-width</code>', 'Focus outline width', '0.125rem'],
-        ['<code>--nui-fab-focus-offset</code>', 'Focus outline offset', '0.125rem'],
+        [
+          '<code>--nui-fab-focus-width</code>',
+          'components.fabButton.theming.structure.rows.focusWidth.description',
+          '0.125rem',
+        ],
+        [
+          '<code>--nui-fab-focus-offset</code>',
+          'components.fabButton.theming.structure.rows.focusOffset.description',
+          '0.125rem',
+        ],
+
+        // Z-index
+        [
+          '<code>--nui-fab-z-index</code>',
+          'components.fabButton.theming.structure.rows.zIndex.description',
+          'var(--nui-z-index-elevated)',
+        ],
       ],
     },
     examples: [
       {
-        title: 'Customisation example (SCSS)',
+        title: 'codeExamples.scss',
         language: 'scss',
         code: `// Override FAB layout tokens globally
 :root {
@@ -248,7 +263,7 @@ export const FAB_BUTTON_THEMING_SECTIONS: ComponentSection[] = [
 }`,
       },
       {
-        title: 'Per-instance override (inline)',
+        title: 'codeExamples.html',
         language: 'html',
         code: `<!-- Override radius directly on the host via style binding -->
 <nui-fab-button

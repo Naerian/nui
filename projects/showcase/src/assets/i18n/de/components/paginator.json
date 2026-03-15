@@ -209,23 +209,71 @@
   "theming": {
     "layout": {
       "title": "Layout",
-      "description": "CSS-Variablen für das Gesamtlayout der Seitennavigation"
+      "description": "CSS-Variablen für das Gesamtlayout und den Abstand der Seitennavigation",
+      "rows": {
+        "gap": { "description": "Abstand zwischen den Seitenschaltflächen im Paginator." },
+        "disabledOpacity": { "description": "Deckkraft deaktivierter Paginator-Schaltflächen." },
+        "pageJumpInputWidth": { "description": "Breite des Eingabefelds für den Seitensprung." }
+      }
     },
-    "buttons": {
-      "title": "Schaltflächen",
-      "description": "CSS-Variablen für Navigationsschaltflächen und Seitennummern"
+    "zindex": {
+      "title": "Z-Index",
+      "description": "CSS-Variablen zur Steuerung der Stapelreihenfolge der Paginator-Elemente",
+      "rows": {
+        "base": { "description": "Basis-Z-Index der Paginator-Schaltflächen." },
+        "hover": { "description": "Z-Index beim Hover." },
+        "active": { "description": "Z-Index der aktiven Schaltfläche." },
+        "focus": { "description": "Z-Index wenn eine Schaltfläche fokussiert ist." }
+      }
+    },
+    "inactive": {
+      "title": "Inaktive Schaltflächen",
+      "description": "CSS-Variablen für inaktive (ghost) Seitenschaltflächen — vom ThemeService gemäß dem aktiven Preset gesetzt",
+      "rows": {
+        "ghostBg": { "description": "Hintergrund inaktiver Seitenschaltflächen (immer ghost/transparent)." },
+        "ghostText": { "description": "Textfarbe inaktiver Seitenschaltflächen." },
+        "ghostBorder": { "description": "Rahmenfarbe inaktiver Seitenschaltflächen." },
+        "ghostHoverBg": { "description": "Hintergrund inaktiver Seitenschaltflächen beim Hover." },
+        "ghostHoverBorder": { "description": "Rahmenfarbe inaktiver Seitenschaltflächen beim Hover." }
+      }
     },
     "active": {
-      "title": "Aktive Seite",
-      "description": "CSS-Variablen für den aktiven Zustand der aktuellen Seite"
+      "title": "Aktive Seiten-Schaltfläche",
+      "description": "CSS-Variablen für die aktive Seiten-Schaltfläche in allen drei Varianten — vom ThemeService gemäß dem aktiven Preset gesetzt",
+      "rows": {
+        "solidActiveBg": { "description": "Hintergrund der aktiven Schaltfläche in der Solid-Variante." },
+        "solidActiveText": { "description": "Textfarbe der aktiven Schaltfläche in der Solid-Variante." },
+        "solidActiveBorder": { "description": "Rahmenfarbe der aktiven Schaltfläche in der Solid-Variante." },
+        "outlineActiveBg": { "description": "Hintergrund der aktiven Schaltfläche in der Outline-Variante." },
+        "outlineActiveText": { "description": "Textfarbe der aktiven Schaltfläche in der Outline-Variante." },
+        "outlineActiveBorder": { "description": "Rahmenfarbe der aktiven Schaltfläche in der Outline-Variante." },
+        "ghostActiveBg": { "description": "Hintergrund der aktiven Schaltfläche in der Ghost-Variante." },
+        "ghostActiveText": { "description": "Textfarbe der aktiven Schaltfläche in der Ghost-Variante." },
+        "ghostActiveBorder": { "description": "Rahmenfarbe der aktiven Schaltfläche in der Ghost-Variante." }
+      }
     },
-    "controls": {
-      "title": "Steuerelemente",
-      "description": "CSS-Variablen für den Größenselektor, Elementbereich und Seitensprung"
+    "nav": {
+      "title": "Navigationsschaltflächen",
+      "description": "CSS-Variablen für die Zurück-/Weiter-/Erste-/Letzte-Navigationsschaltflächen — vom ThemeService gemäß dem aktiven Preset gesetzt",
+      "rows": {
+        "navBg": { "description": "Hintergrund der Navigationsschaltflächen (Zurück/Weiter/Erste/Letzte)." },
+        "navText": { "description": "Text-/Symbolfarbe der Navigationsschaltflächen." },
+        "navBorder": { "description": "Rahmenfarbe der Navigationsschaltflächen." },
+        "navHoverBg": { "description": "Hintergrund der Navigationsschaltflächen beim Hover." },
+        "navHoverText": { "description": "Text-/Symbolfarbe der Navigationsschaltflächen beim Hover." },
+        "navHoverBorder": { "description": "Rahmenfarbe der Navigationsschaltflächen beim Hover." }
+      }
     },
-    "infinite": {
-      "title": "Unendliches Scrollen",
-      "description": "CSS-Variablen für den unendlichen Lademodus"
+    "misc": {
+      "title": "Sonstiges",
+      "description": "CSS-Variablen für Auslassungspunkte, Fokusring und Seitensprung-Steuerelemente — vom ThemeService gemäß dem aktiven Preset gesetzt",
+      "rows": {
+        "ellipsisColor": { "description": "Farbe des Auslassungspunkte-Elements (…) zwischen den Seitenschaltflächen." },
+        "focusRing": { "description": "Farbe des Fokusrings bei per Tastatur fokussierten Schaltflächen." },
+        "jumpBorder": { "description": "Rahmenfarbe des Containers des Seitensprung-Eingabefelds." },
+        "jumpSeparator": { "description": "Farbe des Trennzeichens zwischen dem Seitensprung-Eingabefeld und der Gehe-zu-Schaltfläche." },
+        "jumpHoverBg": { "description": "Hintergrund der Gehe-zu-Schaltfläche im Seitensprung-Steuerelement beim Hover." }
+      }
     }
   },
   "i18n": {

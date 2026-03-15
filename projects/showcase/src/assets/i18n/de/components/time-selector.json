@@ -260,15 +260,177 @@
   "theming": {
     "colors": {
       "title": "Farben",
-      "description": "CSS-Farbvariablen, die vom ThemeService für jede semantische Farbe generiert werden. Jede Farbe erzeugt 9 spezifische Variablen für verschiedene Zeitauswahl-Zustände: Element-Hintergründe (normal, Hover, ausgewählt), Textfarben, deaktivierte Zustände, Akzente und Fokusring."
+      "description": "CSS-Farbvariablen, die vom ThemeService für die Oberfläche der Zeitauswahl, die Element-Zustände und die Navigationsschaltflächen der Fußzeile generiert werden.",
+      "rows": {
+        "bg": {
+          "description": "Hintergrundfarbe des Zeitauswahl-Containers."
+        },
+        "border": {
+          "description": "Rahmenfarbe des Zeitauswahl-Containers."
+        },
+        "boxShadow": {
+          "description": "Schatten des Zeitauswahl-Containers."
+        },
+        "itemBg": {
+          "description": "Hintergrundfarbe jeder Zeitoption im Standardzustand (nicht ausgewählt)."
+        },
+        "itemText": {
+          "description": "Textfarbe jeder Zeitoption im Standardzustand (nicht ausgewählt)."
+        },
+        "itemHoverBg": {
+          "description": "Hintergrundfarbe einer Zeitoption beim Hover (nicht ausgewählt)."
+        },
+        "itemHoverText": {
+          "description": "Textfarbe einer Zeitoption beim Hover (nicht ausgewählt)."
+        },
+        "itemSelectedBg": {
+          "description": "Hintergrundfarbe der aktuell ausgewählten Zeitoption."
+        },
+        "itemSelectedBorder": {
+          "description": "Rahmenfarbe der aktuell ausgewählten Zeitoption."
+        },
+        "itemSelectedText": {
+          "description": "Textfarbe der aktuell ausgewählten Zeitoption."
+        },
+        "itemSelectedHoverBg": {
+          "description": "Hintergrundfarbe der ausgewählten Option beim Hover."
+        },
+        "itemSelectedHoverBorder": {
+          "description": "Rahmenfarbe der ausgewählten Option beim Hover."
+        },
+        "itemDisabledBg": {
+          "description": "Hintergrundfarbe einer deaktivierten Zeitoption."
+        },
+        "itemDisabledText": {
+          "description": "Textfarbe einer deaktivierten Zeitoption."
+        },
+        "navBtnBg": {
+          "description": "Hintergrundfarbe der Fußzeilen-Aktionsschaltflächen im Standardzustand."
+        },
+        "navBtnText": {
+          "description": "Textfarbe der Fußzeilen-Aktionsschaltflächen im Standardzustand."
+        },
+        "navBtnBorder": {
+          "description": "Rahmenfarbe der Fußzeilen-Aktionsschaltflächen im Standardzustand."
+        },
+        "navBtnHoverBg": {
+          "description": "Hintergrundfarbe der Fußzeilen-Aktionsschaltflächen beim Hover."
+        },
+        "navBtnHoverText": {
+          "description": "Textfarbe der Fußzeilen-Aktionsschaltflächen beim Hover."
+        },
+        "navBtnHoverBorder": {
+          "description": "Rahmenfarbe der Fußzeilen-Aktionsschaltflächen beim Hover."
+        },
+        "navBtnActiveBg": {
+          "description": "Hintergrundfarbe der Fußzeilen-Aktionsschaltflächen im aktiven Zustand (gedrückt)."
+        },
+        "navBtnActiveBorder": {
+          "description": "Rahmenfarbe der Fußzeilen-Aktionsschaltflächen im aktiven Zustand (gedrückt)."
+        },
+        "navBtnDisabledBg": {
+          "description": "Hintergrundfarbe der Fußzeilen-Aktionsschaltflächen im deaktivierten Zustand."
+        },
+        "navBtnDisabledText": {
+          "description": "Textfarbe der Fußzeilen-Aktionsschaltflächen im deaktivierten Zustand."
+        },
+        "navBtnDisabledBorder": {
+          "description": "Rahmenfarbe der Fußzeilen-Aktionsschaltflächen im deaktivierten Zustand."
+        }
+      }
     },
     "sizes": {
       "title": "Größen",
-      "description": "Größenspezifische CSS-Variablen zur Steuerung von Elementhöhen, Innenabständen und Containerabmessungen. Fünf Größenvarianten verfügbar: xs, sm, md (Standard), lg und xl."
+      "description": "CSS-Variablen zur Steuerung der Gesamtabmessungen, Elementhöhen, Innenabstände, Abstände und Schriftgrößen der Zeitauswahl.",
+      "rows": {
+        "width": {
+          "description": "Feste Breite des Zeitauswahl-Containers."
+        },
+        "itemHeight": {
+          "description": "Höhe jeder Zeitoption in den Spalten."
+        },
+        "maxHeight": {
+          "description": "Maximale Höhe der scrollbaren Elementliste innerhalb jeder Spalte."
+        },
+        "minHeight": {
+          "description": "Mindesthöhe der scrollbaren Elementliste innerhalb jeder Spalte."
+        },
+        "padding": {
+          "description": "Innenabstand des Zeitauswahl-Containers und der Spaltenüberschriften."
+        },
+        "gap": {
+          "description": "Abstand zwischen den Hauptlayout-Abschnitten (Kopfzeile, Spalten, Fußzeile) und zwischen den Spalten."
+        },
+        "fontSize": {
+          "description": "Basis-Schriftgröße für Elementwerte und Spaltenbeschriftungen."
+        },
+        "itemRadius": {
+          "description": "Rahmenradius jeder Zeitoption."
+        }
+      }
     },
     "structure": {
       "title": "Struktur",
-      "description": "Strukturelle CSS-Variablen zur Steuerung von Abmessungen, Abständen, Typografie und visuellem Erscheinungsbild. Enthält Trennzeichenstil, Scrollleisten-Anpassung, Rahmen, Schriftarten und Fokuszustände."
+      "description": "Strukturelle CSS-Variablen zur Steuerung der Trennzeichendarstellung, des Elementlisten-Layouts, der Rahmen, der Anzeige-Schriftgrößen und der Schaltflächenabmessungen der Fußzeile.",
+      "rows": {
+        "separatorWidth": {
+          "description": "Breite der Trennzeichenspalte zwischen Stunden und Minuten (oder Minuten und Sekunden)."
+        },
+        "separatorLineWidth": {
+          "description": "Dicke der dekorativen Linie innerhalb der Trennzeichenspalte."
+        },
+        "separatorLineHeight": {
+          "description": "Höhe der dekorativen Linie innerhalb der Trennzeichenspalte."
+        },
+        "separatorBorderRadius": {
+          "description": "Rahmenradius der dekorativen Trennzeichenlinie."
+        },
+        "separatorPaddingTop": {
+          "description": "Oberer Innenabstand der Trennzeichenspalte zur vertikalen Ausrichtung mit den Elementen."
+        },
+        "itemsGap": {
+          "description": "Vertikaler Abstand zwischen den Zeitoptionen in einer scrollbaren Spalte."
+        },
+        "itemsPadding": {
+          "description": "Innenabstand um die Elementliste in jeder scrollbaren Spalte."
+        },
+        "itemsBorderRadius": {
+          "description": "Rahmenradius des scrollbaren Element-Containers."
+        },
+        "optionMinHeight": {
+          "description": "Mindesthöhe des Fußzeilenbereichs mit den Aktionsschaltflächen."
+        },
+        "actionsGap": {
+          "description": "Abstand zwischen den Aktionsschaltflächen der Fußzeile (Löschen und Jetzt)."
+        },
+        "minWidth": {
+          "description": "Mindestbreite der Zeitauswahl bei Anzeige von nur Stunden und Minuten."
+        },
+        "minWidthWithSeconds": {
+          "description": "Mindestbreite der Zeitauswahl wenn die Sekundenspalte sichtbar ist."
+        },
+        "headerBorderWidth": {
+          "description": "Dicke der unteren Rahmenlinie, die die Kopfzeile vom Spaltenbereich trennt."
+        },
+        "itemBorderWidth": {
+          "description": "Dicke des Rahmens um jede Zeitoption."
+        },
+        "displayFontSize": {
+          "description": "Schriftgröße für die formatierte Zeit in der Kopfzeile."
+        },
+        "normalizedFontSize": {
+          "description": "Schriftgröße für den Normalisierungsindikator-Text in der Kopfzeile."
+        },
+        "navBtnHeight": {
+          "description": "Höhe der Fußzeilen-Aktionsschaltflächen (Löschen und Jetzt)."
+        },
+        "navBtnPadding": {
+          "description": "Horizontaler und vertikaler Innenabstand der Fußzeilen-Aktionsschaltflächen."
+        },
+        "navBtnFontSize": {
+          "description": "Schriftgröße für Text und Symbole in den Fußzeilen-Aktionsschaltflächen."
+        }
+      }
     },
     "customization": {
       "title": "Anpassung",

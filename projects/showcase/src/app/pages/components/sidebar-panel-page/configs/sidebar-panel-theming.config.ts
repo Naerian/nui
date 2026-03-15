@@ -14,19 +14,23 @@ export const SIDEBAR_PANEL_THEMING_SECTIONS: ComponentSection[] = [
       rows: [
         [
           '<code>--nui-sidebar-panel-bg</code>',
-          'var(--nui-bg-secondary) / var(--nui-bg-primary)',
-          'components.sidebar-panel.theming.colors.rows.bg',
+          'var(--nui-surface-secondary)',
+          'components.sidebar-panel.theming.colors.rows.bg.description',
         ],
-        ['<code>--nui-sidebar-panel-text</code>', 'var(--nui-text-primary)', 'components.sidebar-panel.theming.colors.rows.text'],
+        [
+          '<code>--nui-sidebar-panel-text</code>',
+          'var(--nui-on-surface-secondary)',
+          'components.sidebar-panel.theming.colors.rows.text.description',
+        ],
         [
           '<code>--nui-sidebar-panel-border</code>',
-          'var(--nui-border-primary) / var(--nui-border-secondary)',
-          'components.sidebar-panel.theming.colors.rows.border',
+          'var(--nui-border-subtle)',
+          'components.sidebar-panel.theming.colors.rows.border.description',
         ],
         [
           '<code>--nui-sidebar-panel-overlay-bg</code>',
           'var(--nui-overlay-bg)',
-          'components.sidebar-panel.theming.colors.rows.overlayBg',
+          'components.sidebar-panel.theming.colors.rows.overlayBg.description',
         ],
       ],
     },
@@ -39,14 +43,14 @@ export const SIDEBAR_PANEL_THEMING_SECTIONS: ComponentSection[] = [
     table: {
       headers: ['common.tables.cssVariable', 'common.tables.default', 'common.tables.description'],
       rows: [
-        ['<code>--nui-sidebar-panel-size-xs-width</code>', '320px', 'components.sidebar-panel.theming.layout.rows.sizeXsWidth'],
-        ['<code>--nui-sidebar-panel-size-sm-width</code>', '400px', 'components.sidebar-panel.theming.layout.rows.sizeSmWidth'],
-        ['<code>--nui-sidebar-panel-size-md-width</code>', '560px', 'components.sidebar-panel.theming.layout.rows.sizeMdWidth'],
-        ['<code>--nui-sidebar-panel-size-lg-width</code>', '720px', 'components.sidebar-panel.theming.layout.rows.sizeLgWidth'],
-        ['<code>--nui-sidebar-panel-size-xl-width</code>', '960px', 'components.sidebar-panel.theming.layout.rows.sizeXlWidth'],
-        ['<code>--nui-sidebar-panel-size-full-width</code>', '100vw', 'components.sidebar-panel.theming.layout.rows.sizeFullWidth'],
-        ['<code>--nui-sidebar-panel-header-padding</code>', '1.125rem', 'components.sidebar-panel.theming.layout.rows.headerPadding'],
-        ['<code>--nui-sidebar-panel-content-padding</code>', '1.125rem', 'components.sidebar-panel.theming.layout.rows.contentPadding'],
+        ['<code>--nui-sidebar-panel-size-xs-width</code>', '320px', 'components.sidebar-panel.theming.layout.rows.sizeXsWidth.description'],
+        ['<code>--nui-sidebar-panel-size-sm-width</code>', '400px', 'components.sidebar-panel.theming.layout.rows.sizeSmWidth.description'],
+        ['<code>--nui-sidebar-panel-size-md-width</code>', '560px', 'components.sidebar-panel.theming.layout.rows.sizeMdWidth.description'],
+        ['<code>--nui-sidebar-panel-size-lg-width</code>', '720px', 'components.sidebar-panel.theming.layout.rows.sizeLgWidth.description'],
+        ['<code>--nui-sidebar-panel-size-xl-width</code>', '960px', 'components.sidebar-panel.theming.layout.rows.sizeXlWidth.description'],
+        ['<code>--nui-sidebar-panel-size-full-width</code>', '100vw', 'components.sidebar-panel.theming.layout.rows.sizeFullWidth.description'],
+        ['<code>--nui-sidebar-panel-header-padding</code>', '1.125rem', 'components.sidebar-panel.theming.layout.rows.headerPadding.description'],
+        ['<code>--nui-sidebar-panel-content-padding</code>', '1.125rem', 'components.sidebar-panel.theming.layout.rows.contentPadding.description'],
       ],
     },
   },
@@ -58,8 +62,8 @@ export const SIDEBAR_PANEL_THEMING_SECTIONS: ComponentSection[] = [
     table: {
       headers: ['common.tables.cssVariable', 'common.tables.default', 'common.tables.description'],
       rows: [
-        ['<code>--nui-sidebar-panel-title-size</code>', '1.125rem', 'components.sidebar-panel.theming.typography.rows.titleSize'],
-        ['<code>--nui-sidebar-panel-title-weight</code>', '600', 'components.sidebar-panel.theming.typography.rows.titleWeight'],
+        ['<code>--nui-sidebar-panel-title-size</code>', '1.125rem', 'components.sidebar-panel.theming.typography.rows.titleSize.description'],
+        ['<code>--nui-sidebar-panel-title-weight</code>', '600', 'components.sidebar-panel.theming.typography.rows.titleWeight.description'],
       ],
     },
   },
@@ -73,10 +77,14 @@ export const SIDEBAR_PANEL_THEMING_SECTIONS: ComponentSection[] = [
       rows: [
         [
           '<code>--nui-sidebar-panel-shadow</code>',
-          'var(--nui-box-shadow-xl)',
-          'components.sidebar-panel.theming.elevation.rows.shadow',
+          'var(--nui-box-shadow-md)',
+          'components.sidebar-panel.theming.elevation.rows.shadow.description',
         ],
-        ['<code>--nui-sidebar-panel-z-index</code>', 'var(--nui-z-index-modal);', 'components.sidebar-panel.theming.elevation.rows.zIndex'],
+        [
+          '<code>--nui-sidebar-panel-z-index</code>',
+          'var(--nui-z-index-modal)',
+          'components.sidebar-panel.theming.elevation.rows.zIndex.description',
+        ],
       ],
     },
   },
@@ -90,18 +98,18 @@ export const SIDEBAR_PANEL_THEMING_SECTIONS: ComponentSection[] = [
       rows: [
         [
           '<code>--nui-sidebar-panel-scroll-bg</code>',
-          'var(--nui-bg-secondary)',
-          'components.sidebar-panel.theming.scrollbar.rows.scrollBg',
+          'var(--nui-surface-secondary)',
+          'components.sidebar-panel.theming.scrollbar.rows.scrollBg.description',
         ],
         [
           '<code>--nui-sidebar-panel-scroll-thumb-bg</code>',
-          'var(--nui-border-primary)',
-          'components.sidebar-panel.theming.scrollbar.rows.scrollThumbBg',
+          'var(--nui-border-high)',
+          'components.sidebar-panel.theming.scrollbar.rows.scrollThumbBg.description',
         ],
         [
           '<code>--nui-sidebar-panel-scroll-thumb-hover-bg</code>',
-          'var(--nui-border-primary)',
-          'components.sidebar-panel.theming.scrollbar.rows.scrollThumbHoverBg',
+          'var(--nui-border-high)',
+          'components.sidebar-panel.theming.scrollbar.rows.scrollThumbHoverBg.description',
         ],
       ],
     },

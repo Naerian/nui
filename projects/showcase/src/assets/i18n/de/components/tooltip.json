@@ -95,15 +95,69 @@
   "theming": {
     "container": {
       "title": "Tooltip-Container",
-      "description": "CSS-Variablen zur Steuerung des Tooltip-Container-Erscheinungsbilds: Farben, Abmessungen, Innenabstand, Schrift, Rahmen, Schatten und z-index"
+      "description": "CSS-Variablen zur Steuerung des Tooltip-Container-Erscheinungsbilds: Farben, Abmessungen, Innenabstand, Schrift, Rahmen, Schatten und z-index",
+      "rows": {
+        "bg": {
+          "description": "Hintergrundfarbe des Tooltips (dynamisch entsprechend dem aktiven Theme gesetzt)"
+        },
+        "text": {
+          "description": "Textfarbe des Tooltips (dynamisch entsprechend dem aktiven Theme gesetzt)"
+        },
+        "paddingY": {
+          "description": "Vertikaler Innenabstand im Inhaltsbereich des Tooltips"
+        },
+        "paddingX": {
+          "description": "Horizontaler Innenabstand im Inhaltsbereich des Tooltips"
+        },
+        "maxWidth": {
+          "description": "Maximale Breite des Tooltip-Panels"
+        },
+        "fontSize": {
+          "description": "Schriftgröße des Tooltip-Textes"
+        },
+        "fontWeight": {
+          "description": "Schriftstärke des Tooltip-Textes"
+        },
+        "lineHeight": {
+          "description": "Zeilenhöhe des Tooltip-Textes"
+        },
+        "borderRadius": {
+          "description": "Rahmenradius der Ecken des Tooltip-Panels"
+        },
+        "borderWidth": {
+          "description": "Rahmenbreite des Tooltip-Panels"
+        },
+        "borderColor": {
+          "description": "Rahmenfarbe des Tooltip-Panels (dynamisch entsprechend dem aktiven Theme gesetzt)"
+        },
+        "shadow": {
+          "description": "Auf das Tooltip-Panel angewendeter Schatten"
+        },
+        "zIndex": {
+          "description": "Z-Index des Tooltip-Overlays zur Steuerung der Stapelreihenfolge"
+        }
+      }
     },
     "arrow": {
       "title": "Tooltip-Pfeil",
-      "description": "CSS-Variable zur Steuerung der Größe des Tooltip-Pfeils"
+      "description": "CSS-Variable zur Steuerung der Größe des Tooltip-Pfeils",
+      "rows": {
+        "arrowSize": {
+          "description": "Größe des Richtungspfeils, der vom Tooltip auf das Auslöserelement zeigt"
+        }
+      }
     },
     "animation": {
       "title": "Animationen",
-      "description": "CSS-Variablen zur Steuerung von Dauer und Timing der Tooltip-Ein-/Ausblend-Animationen"
+      "description": "CSS-Variablen zur Steuerung von Dauer und Timing der Tooltip-Ein-/Ausblend-Animationen",
+      "rows": {
+        "transitionDuration": {
+          "description": "Dauer des Ein- und Ausblendeübergangs des Tooltips"
+        },
+        "transitionTiming": {
+          "description": "Timing-Funktion des Ein- und Ausblendeübergangs des Tooltips"
+        }
+      }
     },
     "examples": {
       "title": "Anpassungsbeispiele",

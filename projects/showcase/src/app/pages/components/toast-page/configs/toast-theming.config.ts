@@ -5,62 +5,73 @@ import { ComponentSection } from '../../../../core/models';
  */
 export const TOAST_THEMING_SECTIONS: ComponentSection[] = [
   {
-    id: 'theming-container',
-    title: 'components.toast.theming.container.title',
-    description: 'components.toast.theming.container.description',
-    anchor: 'theming-container',
+    id: 'theming-layout',
+    title: 'components.toast.theming.layout.title',
+    description: 'components.toast.theming.layout.description',
+    anchor: 'theming-layout',
     table: {
       headers: ['common.tables.cssVariable', 'common.tables.description', 'common.tables.default'],
       rows: [
         [
-          '<code>--nui-toast-bg</code>',
-          'Background del toast',
-          '<code>var(--nui-bg-primary)</code>',
+          '<code>--nui-toast-width</code>',
+          'components.toast.theming.layout.rows.width.description',
+          '<code>24rem</code>',
         ],
         [
-          '<code>--nui-toast-text</code>',
-          'Color del texto',
-          '<code>var(--nui-text-primary)</code>',
+          '<code>--nui-toast-width-mobile</code>',
+          'components.toast.theming.layout.rows.widthMobile.description',
+          '<code>calc(100vw - 1.5rem)</code>',
         ],
         [
-          '<code>--nui-toast-border</code>',
-          'Color del borde',
-          '<code>var(--nui-border-primary)</code>',
-        ],
-        [
-          '<code>--nui-toast-border-radius</code>',
-          'Radio del borde',
-          '<code>var(--nui-border-radius-lg)</code>',
-        ],
-        [
-          '<code>--nui-toast-shadow</code>',
-          'Sombra del toast',
-          '<code>var(--nui-shadow-xl)</code>',
-        ],
-        [
-          '<code>--nui-toast-padding</code>',
-          'Padding interno',
-          '<code>var(--nui-spacing-md)</code>',
-        ],
-        [
-          '<code>--nui-toast-min-width</code>',
-          'Ancho mínimo',
-          '<code>300px</code>',
+          '<code>--nui-toast-min-height</code>',
+          'components.toast.theming.layout.rows.minHeight.description',
+          '<code>3.5rem</code>',
         ],
         [
           '<code>--nui-toast-max-width</code>',
-          'Ancho máximo',
-          '<code>500px</code>',
+          'components.toast.theming.layout.rows.maxWidth.description',
+          '<code>32rem</code>',
         ],
         [
-          '<code>--nui-toast-z-index</code>',
-          'Z-index del contenedor',
-          '<code>var(--nui-z-index-status)</code>',
+          '<code>--nui-toast-padding</code>',
+          'components.toast.theming.layout.rows.padding.description',
+          '<code>1rem</code>',
+        ],
+        [
+          '<code>--nui-toast-padding-compact</code>',
+          'components.toast.theming.layout.rows.paddingCompact.description',
+          '<code>0.75rem</code>',
         ],
         [
           '<code>--nui-toast-gap</code>',
-          'Espaciado entre toasts',
-          '<code>var(--nui-spacing-sm)</code>',
+          'components.toast.theming.layout.rows.gap.description',
+          '<code>0.75rem</code>',
+        ],
+      ],
+    },
+  },
+  {
+    id: 'theming-border',
+    title: 'components.toast.theming.border.title',
+    description: 'components.toast.theming.border.description',
+    anchor: 'theming-border',
+    table: {
+      headers: ['common.tables.cssVariable', 'common.tables.description', 'common.tables.default'],
+      rows: [
+        [
+          '<code>--nui-toast-radius</code>',
+          'components.toast.theming.border.rows.radius.description',
+          '<code>var(--nui-border-radius-md)</code>',
+        ],
+        [
+          '<code>--nui-toast-border-width</code>',
+          'components.toast.theming.border.rows.borderWidth.description',
+          '<code>1px</code>',
+        ],
+        [
+          '<code>--nui-toast-shadow</code>',
+          'components.toast.theming.border.rows.shadow.description',
+          '<code>var(--nui-box-shadow-xl)</code>',
         ],
       ],
     },
@@ -74,183 +85,24 @@ export const TOAST_THEMING_SECTIONS: ComponentSection[] = [
       headers: ['common.tables.cssVariable', 'common.tables.description', 'common.tables.default'],
       rows: [
         [
-          '<code>--nui-toast-title-font-size</code>',
-          'Tamaño del título',
-          '<code>var(--nui-font-size-md)</code>',
+          '<code>--nui-toast-title-size</code>',
+          'components.toast.theming.typography.rows.titleSize.description',
+          '<code>0.938rem</code>',
         ],
         [
-          '<code>--nui-toast-title-font-weight</code>',
-          'Peso del título',
-          '<code>var(--nui-font-weight-semibold)</code>',
+          '<code>--nui-toast-title-weight</code>',
+          'components.toast.theming.typography.rows.titleWeight.description',
+          '<code>600</code>',
         ],
         [
-          '<code>--nui-toast-title-color</code>',
-          'Color del título',
-          '<code>var(--nui-text-primary)</code>',
+          '<code>--nui-toast-message-size</code>',
+          'components.toast.theming.typography.rows.messageSize.description',
+          '<code>0.875rem</code>',
         ],
         [
-          '<code>--nui-toast-title-margin-bottom</code>',
-          'Margen inferior del título',
-          '<code>var(--nui-spacing-xs)</code>',
-        ],
-        [
-          '<code>--nui-toast-message-font-size</code>',
-          'Tamaño del mensaje',
-          '<code>var(--nui-font-size-sm)</code>',
-        ],
-        [
-          '<code>--nui-toast-message-color</code>',
-          'Color del mensaje',
-          '<code>var(--nui-text-secondary)</code>',
-        ],
-        [
-          '<code>--nui-toast-message-line-height</code>',
-          'Altura de línea del mensaje',
-          '<code>1.5</code>',
-        ],
-      ],
-    },
-  },
-  {
-    id: 'theming-icon',
-    title: 'components.toast.theming.icon.title',
-    description: 'components.toast.theming.icon.description',
-    anchor: 'theming-icon',
-    table: {
-      headers: ['common.tables.cssVariable', 'common.tables.description', 'common.tables.default'],
-      rows: [
-        [
-          '<code>--nui-toast-icon-size</code>',
-          'Tamaño del icono',
-          '<code>20px</code>',
-        ],
-        [
-          '<code>--nui-toast-icon-margin-right</code>',
-          'Margen derecho del icono',
-          '<code>var(--nui-spacing-sm)</code>',
-        ],
-      ],
-    },
-  },
-  {
-    id: 'theming-close',
-    title: 'components.toast.theming.close.title',
-    description: 'components.toast.theming.close.description',
-    anchor: 'theming-close',
-    table: {
-      headers: ['common.tables.cssVariable', 'common.tables.description', 'common.tables.default'],
-      rows: [
-        [
-          '<code>--nui-toast-close-button-size</code>',
-          'Tamaño del botón de cierre',
-          '<code>20px</code>',
-        ],
-        [
-          '<code>--nui-toast-close-button-color</code>',
-          'Color del botón',
-          '<code>var(--nui-text-neutral)</code>',
-        ],
-        [
-          '<code>--nui-toast-close-button-hover-color</code>',
-          'Color en hover',
-          '<code>var(--nui-text-primary)</code>',
-        ],
-      ],
-    },
-  },
-  {
-    id: 'theming-progress',
-    title: 'components.toast.theming.progress.title',
-    description: 'components.toast.theming.progress.description',
-    anchor: 'theming-progress',
-    table: {
-      headers: ['common.tables.cssVariable', 'common.tables.description', 'common.tables.default'],
-      rows: [
-        [
-          '<code>--nui-toast-progress-bar-height</code>',
-          'Altura de la barra de progreso',
-          '<code>4px</code>',
-        ],
-        [
-          '<code>--nui-toast-progress-bar-bg</code>',
-          'Background de la barra',
-          '<code>rgba(255, 255, 255, 0.3)</code>',
-        ],
-        [
-          '<code>--nui-toast-progress-bar-color</code>',
-          'Color de progreso',
-          '<code>currentColor</code>',
-        ],
-      ],
-    },
-  },
-  {
-    id: 'theming-types',
-    title: 'components.toast.theming.types.title',
-    description: 'components.toast.theming.types.description',
-    anchor: 'theming-types',
-    table: {
-      headers: ['common.tables.cssVariable', 'common.tables.description', 'common.tables.default'],
-      rows: [
-        [
-          '<code>--nui-toast-success-color</code>',
-          'Color de toast success',
-          '<code>var(--success-color)</code>',
-        ],
-        [
-          '<code>--nui-toast-success-bg</code>',
-          'Background de toast success',
-          '<code>var(--success-bg-subtle)</code>',
-        ],
-        [
-          '<code>--nui-toast-success-border</code>',
-          'Borde de toast success',
-          '<code>var(--success-border)</code>',
-        ],
-        [
-          '<code>--nui-toast-error-color</code>',
-          'Color de toast error',
-          '<code>var(--danger-color)</code>',
-        ],
-        [
-          '<code>--nui-toast-error-bg</code>',
-          'Background de toast error',
-          '<code>var(--danger-bg-subtle)</code>',
-        ],
-        [
-          '<code>--nui-toast-error-border</code>',
-          'Borde de toast error',
-          '<code>var(--danger-border)</code>',
-        ],
-        [
-          '<code>--nui-toast-warning-color</code>',
-          'Color de toast warning',
-          '<code>var(--warning-color)</code>',
-        ],
-        [
-          '<code>--nui-toast-warning-bg</code>',
-          'Background de toast warning',
-          '<code>var(--warning-bg-subtle)</code>',
-        ],
-        [
-          '<code>--nui-toast-warning-border</code>',
-          'Borde de toast warning',
-          '<code>var(--warning-border)</code>',
-        ],
-        [
-          '<code>--nui-toast-info-color</code>',
-          'Color de toast info',
-          '<code>var(--info-color)</code>',
-        ],
-        [
-          '<code>--nui-toast-info-bg</code>',
-          'Background de toast info',
-          '<code>var(--info-bg-subtle)</code>',
-        ],
-        [
-          '<code>--nui-toast-info-border</code>',
-          'Borde de toast info',
-          '<code>var(--info-border)</code>',
+          '<code>--nui-toast-message-weight</code>',
+          'components.toast.theming.typography.rows.messageWeight.description',
+          '<code>400</code>',
         ],
       ],
     },
@@ -264,14 +116,112 @@ export const TOAST_THEMING_SECTIONS: ComponentSection[] = [
       headers: ['common.tables.cssVariable', 'common.tables.description', 'common.tables.default'],
       rows: [
         [
-          '<code>--nui-toast-animation-duration</code>',
-          'Duración de animaciones',
+          '<code>--nui-toast-duration</code>',
+          'components.toast.theming.animations.rows.duration.description',
           '<code>300ms</code>',
         ],
         [
-          '<code>--nui-toast-animation-timing</code>',
-          'Función de timing',
+          '<code>--nui-toast-easing</code>',
+          'components.toast.theming.animations.rows.easing.description',
           '<code>cubic-bezier(0.4, 0, 0.2, 1)</code>',
+        ],
+      ],
+    },
+  },
+  {
+    id: 'theming-zindex',
+    title: 'components.toast.theming.zindex.title',
+    description: 'components.toast.theming.zindex.description',
+    anchor: 'theming-zindex',
+    table: {
+      headers: ['common.tables.cssVariable', 'common.tables.description', 'common.tables.default'],
+      rows: [
+        [
+          '<code>--nui-toast-z-index</code>',
+          'components.toast.theming.zindex.rows.zIndex.description',
+          '<code>var(--nui-z-index-status)</code>',
+        ],
+      ],
+    },
+  },
+  {
+    id: 'theming-stacking',
+    title: 'components.toast.theming.stacking.title',
+    description: 'components.toast.theming.stacking.description',
+    anchor: 'theming-stacking',
+    table: {
+      headers: ['common.tables.cssVariable', 'common.tables.description', 'common.tables.default'],
+      rows: [
+        [
+          '<code>--nui-toast-stack-gap</code>',
+          'components.toast.theming.stacking.rows.stackGap.description',
+          '<code>0.75rem</code>',
+        ],
+        [
+          '<code>--nui-toast-stack-scale-1</code>',
+          'components.toast.theming.stacking.rows.stackScale1.description',
+          '<code>0.96</code>',
+        ],
+        [
+          '<code>--nui-toast-stack-scale-2</code>',
+          'components.toast.theming.stacking.rows.stackScale2.description',
+          '<code>0.92</code>',
+        ],
+        [
+          '<code>--nui-toast-stack-y-1</code>',
+          'components.toast.theming.stacking.rows.stackY1.description',
+          '<code>-0.5rem</code>',
+        ],
+        [
+          '<code>--nui-toast-stack-y-2</code>',
+          'components.toast.theming.stacking.rows.stackY2.description',
+          '<code>-1rem</code>',
+        ],
+      ],
+    },
+  },
+  {
+    id: 'theming-colors',
+    title: 'components.toast.theming.colors.title',
+    description: 'components.toast.theming.colors.description',
+    anchor: 'theming-colors',
+    table: {
+      headers: ['common.tables.cssVariable', 'common.tables.description', 'common.tables.default'],
+      rows: [
+        [
+          '<code>--nui-toast-{color}-bg</code>',
+          'components.toast.theming.colors.rows.colorBg.description',
+          'components.toast.theming.colors.rows.colorBg.default',
+        ],
+        [
+          '<code>--nui-toast-{color}-hover-bg</code>',
+          'components.toast.theming.colors.rows.colorHoverBg.description',
+          'components.toast.theming.colors.rows.colorHoverBg.default',
+        ],
+        [
+          '<code>--nui-toast-{color}-border</code>',
+          'components.toast.theming.colors.rows.colorBorder.description',
+          'components.toast.theming.colors.rows.colorBorder.default',
+        ],
+        [
+          '<code>--nui-toast-{color}-title</code>',
+          'components.toast.theming.colors.rows.colorTitle.description',
+          'components.toast.theming.colors.rows.colorTitle.default',
+        ],
+        [
+          '<code>--nui-toast-{color}-icon</code>',
+          'components.toast.theming.colors.rows.colorIcon.description',
+          'components.toast.theming.colors.rows.colorIcon.default',
+        ],
+        [
+          '<code>--nui-toast-{color}-text</code>',
+          'components.toast.theming.colors.rows.colorText.description',
+          'components.toast.theming.colors.rows.colorText.default',
+        ],
+        [
+          '<code>--nui-toast-{color}-progress</code>',
+          'components.toast.theming.colors.rows.colorProgress.description',
+          'components.toast.theming.colors.rows.colorProgress.default',
         ],
       ],
     },
@@ -283,41 +233,26 @@ export const TOAST_THEMING_SECTIONS: ComponentSection[] = [
     anchor: 'theming-examples',
     examples: [
       {
-        title: 'codeExamples.cssVariables',
+        title: 'codeExamples.scss',
         code: `// Example of an iOS-style toast
 .ios-toast {
-  --nui-toast-bg: rgba(255, 255, 255, 0.95);
-  --nui-toast-border: none;
-  --nui-toast-border-radius: 14px;
+  --nui-toast-radius: 14px;
   --nui-toast-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
   --nui-toast-padding: 1rem 1.25rem;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
 }
 
 // Example of a compact toast
 .compact-toast {
-  --nui-toast-padding: var(--nui-spacing-sm) var(--nui-spacing-md);
-  --nui-toast-min-width: 200px;
-  --nui-toast-title-font-size: var(--nui-font-size-sm);
-  --nui-toast-message-font-size: var(--nui-font-size-xs);
-  --nui-toast-icon-size: 16px;
+  --nui-toast-padding: 0.5rem 0.75rem;
+  --nui-toast-padding-compact: 0.375rem 0.5rem;
+  --nui-toast-title-size: 0.813rem;
+  --nui-toast-message-size: 0.75rem;
 }
 
-// Example with custom animation
-@keyframes toastSlideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.animated-toast {
-  animation: toastSlideInRight var(--nui-toast-animation-duration) var(--nui-toast-animation-timing);
+// Example with custom animation timing
+.smooth-toast {
+  --nui-toast-duration: 500ms;
+  --nui-toast-easing: cubic-bezier(0.34, 1.56, 0.64, 1);
 }`,
         language: 'scss',
       },
