@@ -279,11 +279,35 @@
   "i18n": {
     "tokens": {
       "title": "Tokens de traduction",
-      "description": "Le Paginateur utilise des tokens i18n pour les libellés des boutons de navigation, les messages de plage d'éléments et le sélecteur de taille de page.",
-      "note": "Remplacez les tokens avec <code>provideNuiI18n({ paginator: { ... } })</code>.",
+      "description": "Le Paginateur utilise des tokens i18n pour les libellés des boutons de navigation, les messages de plage d'éléments, le sélecteur de taille de page et plus encore.",
+      "note": "Remplacez les tokens globalement avec <code>provideNuiI18n({ paginator: { ... } })</code> dans <code>app.config.ts</code>, ou par instance avec l'input <code>[i18n]</code> sur le composant.",
       "rows": {
+        "itemsPerPage": {
+          "description": "Libellé pour le sélecteur d'éléments par page (ex. 'Éléments par page :')."
+        },
+        "showingItems": {
+          "description": "Modèle pour l'affichage de la plage d'éléments. Prend en charge les marqueurs <code>{start}</code>, <code>{end}</code> et <code>{total}</code>."
+        },
+        "page": {
+          "description": "Texte du mot 'Page' utilisé dans les modes compact et fractional."
+        },
+        "of": {
+          "description": "Connecteur 'sur' utilisé dans le texte de plage (ex. '1–10 sur 100')."
+        },
+        "goToPage": {
+          "description": "Libellé pour le champ de saut de page."
+        },
+        "go": {
+          "description": "Libellé du bouton 'Aller' dans le contrôle de saut de page."
+        },
+        "invalidPage": {
+          "description": "Message d'erreur affiché quand le numéro de page saisi est invalide."
+        },
         "firstPage": {
           "description": "Libellé accessible pour le bouton 'Première page'."
+        },
+        "lastPage": {
+          "description": "Libellé accessible pour le bouton 'Dernière page'."
         },
         "previousPage": {
           "description": "Libellé accessible pour le bouton 'Page précédente'."
@@ -291,30 +315,62 @@
         "nextPage": {
           "description": "Libellé accessible pour le bouton 'Page suivante'."
         },
-        "lastPage": {
-          "description": "Libellé accessible pour le bouton 'Dernière page'."
+        "pageLabel": {
+          "description": "Modèle annoncé dans la région ARIA live lors de la navigation. Prend en charge le marqueur <code>{page}</code> (ex. 'Page {page}')."
         },
-        "itemsPerPage": {
-          "description": "Libellé pour le sélecteur d'éléments par page."
+        "morePages": {
+          "description": "Texte affiché dans l'élément de points de suspension représentant les boutons de page masqués."
         },
-        "of": {
-          "description": "Connecteur 'sur' utilisé dans le texte de plage (ex. '1–10 sur 100')."
+        "loadMore": {
+          "description": "Libellé du bouton 'Charger plus' en mode infini."
         },
-        "jumpToPage": {
-          "description": "Placeholder ou libellé pour le champ de saut de page."
+        "loading": {
+          "description": "Texte affiché pendant le chargement."
+        },
+        "pageJumpHelp": {
+          "description": "Texte d'aide pour le champ de saut de page. Prend en charge le marqueur <code>{totalPages}</code>."
+        },
+        "infiniteLoadedItems": {
+          "description": "Texte du compteur en mode infini. Prend en charge les marqueurs <code>{loaded}</code> et <code>{total}</code>."
+        },
+        "infiniteLoadEnd": {
+          "description": "Texte affiché quand il n'y a plus d'éléments à charger en mode infini."
         }
       }
     },
     "a11yTokens": {
       "title": "Tokens d'accessibilité",
-      "description": "Tokens supplémentaires utilisés pour les annonces des lecteurs d'écran et les attributs aria du paginateur.",
-      "note": "Ces tokens sont localisés sous <code>paginator.a11y</code>.",
+      "description": "Tokens supplémentaires utilisés exclusivement pour les annonces des lecteurs d'écran et les attributs ARIA. Ils sont imbriqués sous <code>paginator.a11y</code>.",
       "rows": {
-        "pageLabel": {
-          "description": "Modèle de texte annoncé lors du changement de page (ex. 'Page 3 sur 10')."
+        "pagination": {
+          "description": "ARIA label pour la région de navigation <code>&lt;nav&gt;</code> du paginateur et l'hôte du composant."
         },
-        "navigation": {
-          "description": "Aria-label pour la région de navigation du paginateur."
+        "morePages": {
+          "description": "ARIA label pour l'élément de points de suspension (indicateur de plus de pages)."
+        },
+        "page": {
+          "description": "Modèle utilisé dans la région ARIA live lors de la navigation. Prend en charge le marqueur <code>{page}</code>."
+        },
+        "currentPage": {
+          "description": "ARIA label pour le bouton de la page active. Prend en charge le marqueur <code>{page}</code> (ex. '{page}, page courante')."
+        },
+        "goToPage": {
+          "description": "ARIA label pour les boutons de page inactifs. Prend en charge le marqueur <code>{page}</code> (ex. 'Aller à la page {page}')."
+        },
+        "currentPageWithRange": {
+          "description": "ARIA label quand la plage d'éléments est visible. Prend en charge <code>{page}</code>, <code>{totalPages}</code>, <code>{start}</code>, <code>{end}</code> et <code>{total}</code>."
+        },
+        "currentPageNoRange": {
+          "description": "ARIA label quand la plage d'éléments n'est pas visible. Prend en charge les marqueurs <code>{page}</code> et <code>{totalPages}</code>."
+        },
+        "fractionalPage": {
+          "description": "ARIA label pour l'affichage de page fractionné. Prend en charge les marqueurs <code>{page}</code> et <code>{totalPages}</code>."
+        },
+        "showingItems": {
+          "description": "Annonce ARIA pour la plage d'éléments. Prend en charge les marqueurs <code>{start}</code>, <code>{end}</code> et <code>{total}</code>."
+        },
+        "loading": {
+          "description": "Annonce ARIA live effectuée lors du chargement d'une nouvelle page."
         }
       }
     }

@@ -26,7 +26,7 @@ export const FAB_BUTTON_I18N_SECTIONS: ComponentSection[] = [
     },
     examples: [
       {
-        title: 'codeExamples.ts',
+        title: 'codeExamples.typescript',
         language: 'typescript',
         code: `// app.config.ts — override global i18n
 import { provideNuiI18n } from 'nui';
@@ -45,7 +45,7 @@ export const appConfig: ApplicationConfig = {
         title: 'codeExamples.html',
         language: 'html',
         code: `<!-- Override por instancia -->
-<nui-fab-button [i18n]="{ triggerAriaLabel: 'Abrir acciones rápidas' }" [actions]="actions" />`,
+<nui-fab-button [i18n]="{ triggerAriaLabel: 'Abrir acciones rápidas' }" [items]="items" />`,
       },
     ],
   },

@@ -339,14 +339,14 @@
   "i18n": {
     "tokens": {
       "title": "Tokens de traducción",
-      "description": "El componente SidebarPanel usa tokens genéricos del NuiI18nService para los botones de control.",
-      "note": "Todos los tokens son compartidos entre varios componentes. Sobreescríbelos globalmente con <code>provideNuiI18n({...})</code>.",
+      "description": "El componente SidebarPanel usa tokens genéricos del NuiI18nService para los botones de cerrar y minimizar.",
+      "note": "Todos los tokens son compartidos entre varios componentes. Sobreescríbelos globalmente con <code>provideNuiI18n({...})</code> en tu <code>app.config.ts</code>.",
       "rows": {
         "close": {
-          "description": "Etiqueta accesible del botón de cierre."
+          "description": "Etiqueta accesible del botón de cierre en el header del panel."
         },
         "minimize": {
-          "description": "Etiqueta accesible del botón de minimizar."
+          "description": "Etiqueta accesible del botón de minimizar en el header del panel."
         },
         "restore": {
           "description": "Etiqueta accesible del botón de restaurar, visible cuando el panel está minimizado."

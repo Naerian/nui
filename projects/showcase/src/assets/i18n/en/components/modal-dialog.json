@@ -551,20 +551,38 @@
     }
   },
   "i18n": {
-    "keys": {
+    "tokens": {
       "title": "Translation tokens",
       "description": "The Modal Dialog component uses its own tokens and some shared tokens.",
-      "note": "All user-facing text in Modal Dialog can be overridden globally using <code>provideNuiI18n()</code>. Others can be translated by passing the custom translation in the <code>open()</code> configuration.",
+      "note": "All user-facing text in Modal Dialog can be overridden globally using <code>provideNuiI18n()</code>. The verification tokens (<code>verificationLabel</code>, <code>verificationPlaceholder</code>, <code>verificationErrorMessage</code>) can also be overridden per-instance by passing them directly in the <code>open()</code> configuration.",
       "rows": {
-        "close": "Aria label and title of the header close button.",
-        "minimize": "Aria label and title of the header minimize button.",
-        "restore": "Label for the dock restore chip.",
-        "confirm": "Default confirm button label.",
-        "cancel": "Default cancel button label.",
-        "modalDialogLoading": "Label displayed in loader modals.",
-        "modalDialogVerificationLabel": "Label of the verification text field.",
-        "modalDialogVerificationPlaceholder": "Placeholder of the verification text field.",
-        "modalDialogVerificationErrorMessage": "Error message shown when the verification text does not match."
+        "close": {
+          "description": "Aria label and title of the header close button."
+        },
+        "minimize": {
+          "description": "Aria label and title of the header minimize button."
+        },
+        "restore": {
+          "description": "Label for the dock restore chip."
+        },
+        "confirm": {
+          "description": "Default confirm button label."
+        },
+        "cancel": {
+          "description": "Default cancel button label."
+        },
+        "modalDialogLoading": {
+          "description": "Label displayed in loader modals."
+        },
+        "modalDialogVerificationLabel": {
+          "description": "Label of the verification text field."
+        },
+        "modalDialogVerificationPlaceholder": {
+          "description": "Placeholder of the verification text field."
+        },
+        "modalDialogVerificationErrorMessage": {
+          "description": "Error message shown when the verification text does not match."
+        }
       }
     }
   },

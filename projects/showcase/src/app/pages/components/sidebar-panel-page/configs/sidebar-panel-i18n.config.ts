@@ -19,49 +19,40 @@ export const SIDEBAR_PANEL_I18N_SECTIONS: ComponentSection[] = [
       rows: [
         [
           '<code>close</code>',
-          '"Close"',
+          'Close',
           'components.sidebar-panel.i18n.tokens.rows.close.description',
         ],
         [
           '<code>minimize</code>',
-          '"Minimize"',
+          'Minimize',
           'components.sidebar-panel.i18n.tokens.rows.minimize.description',
-        ],
-        [
-          '<code>restore</code>',
-          '"Restore"',
-          'components.sidebar-panel.i18n.tokens.rows.restore.description',
-        ],
-        [
-          '<code>expand</code>',
-          '"Expand"',
-          'components.sidebar-panel.i18n.tokens.rows.expand.description',
-        ],
-        [
-          '<code>collapse</code>',
-          '"Collapse"',
-          'components.sidebar-panel.i18n.tokens.rows.collapse.description',
         ],
       ],
     },
     examples: [
       {
-        title: 'codeExamples.ts',
+        title: 'codeExamples.typescript',
         language: 'typescript',
-        code: `// app.config.ts — override de etiquetas globales
-import { provideNuiI18n } from 'nui';
+        code: `// app.config.ts — global label override via provideNuiI18n
+import { provideNuiI18n, NuiI18n } from 'nui';
+
+const myI18n: Partial<NuiI18n> = {
+  close:    'Close',
+  minimize: 'Minimize',
+};
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideNuiI18n({
-      close:    'Close',
-      minimize: 'Minimize',
-      restore:  'Restore',
-      expand:   'Expand',
-      collapse: 'Collapse',
-    }),
+    provideNuiI18n(myI18n),
   ],
 };`,
+      },
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<!-- The SidebarPanel reads i18n tokens internally.
+     No template binding is required in consumer code. -->
+<nui-button (onClick)="openPanel()">Open Panel</nui-button>`,
       },
     ],
   },

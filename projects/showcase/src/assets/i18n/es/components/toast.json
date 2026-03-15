@@ -528,11 +528,20 @@
   "i18n": {
     "tokens": {
       "title": "Tokens de traducción",
-      "description": "El componente Toast utiliza el token genérico <code>close</code> del NuiI18nService para la etiqueta del botón de cerrar.",
-      "note": "El token <code>close</code> es compartido entre varios componentes (Toast, SidebarPanel…). Sobreescríbelo globalmente para localizar todos los botones de cierre a la vez.",
+      "description": "El componente Toast utiliza tokens genéricos (<code>close</code>, <code>expand</code>, <code>collapse</code>) del NuiI18nService para las etiquetas de los botones, y el token específico <code>toast.notifications</code> para la etiqueta accesible de la región del contenedor.",
+      "note": "Los cuatro tokens se sobrescriben globalmente mediante <code>provideNuiI18n()</code> en tu <code>app.config.ts</code>. Los tokens genéricos (<code>close</code>, <code>expand</code>, <code>collapse</code>) son compartidos entre varios componentes, por lo que sobrescribirlos localiza todos los botones correspondientes a la vez. No existe una sobrescritura por instancia a través de <code>ToastConfig</code>.",
       "rows": {
         "close": {
           "description": "Etiqueta accesible del botón de cierre en los toasts descartables."
+        },
+        "expand": {
+          "description": "Etiqueta accesible del botón de expansión en los toasts expandibles."
+        },
+        "collapse": {
+          "description": "Etiqueta accesible del botón de contraer cuando un toast expandible está abierto."
+        },
+        "notifications": {
+          "description": "Etiqueta accesible de la región live del contenedor de toasts (anunciada a los lectores de pantalla cuando el contenedor se renderiza)."
         }
       }
     }

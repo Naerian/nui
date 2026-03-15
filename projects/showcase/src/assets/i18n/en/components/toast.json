@@ -528,11 +528,20 @@
   "i18n": {
     "tokens": {
       "title": "Translation tokens",
-      "description": "The Toast component uses the generic <code>close</code> token from NuiI18nService for the close button label.",
-      "note": "The <code>close</code> token is shared between multiple components (Toast, SidebarPanel…). Override it globally to localize all close buttons at once.",
+      "description": "The Toast component uses generic tokens (<code>close</code>, <code>expand</code>, <code>collapse</code>) from NuiI18nService for button labels, and the component-specific <code>toast.notifications</code> token for the container's accessible region label.",
+      "note": "All four tokens are overridden globally via <code>provideNuiI18n()</code> in your <code>app.config.ts</code>. The generic tokens (<code>close</code>, <code>expand</code>, <code>collapse</code>) are shared across multiple components so overriding them localises all matching buttons at once. There is no per-instance override available through <code>ToastConfig</code>.",
       "rows": {
         "close": {
           "description": "Accessible label for the close button on dismissible toasts."
+        },
+        "expand": {
+          "description": "Accessible label for the expand button on expandable toasts."
+        },
+        "collapse": {
+          "description": "Accessible label for the collapse button when an expandable toast is open."
+        },
+        "notifications": {
+          "description": "Accessible label for the toast container's live region (announced to screen readers when the container is rendered)."
         }
       }
     }

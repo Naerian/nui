@@ -279,42 +279,98 @@
   "i18n": {
     "tokens": {
       "title": "Tokens de traducción",
-      "description": "El Paginator utiliza tokens i18n para las etiquetas de botones de navegación, los mensajes de rango de elementos y el selector de tamaño de página.",
-      "note": "Sobreescribe los tokens con <code>provideNuiI18n({ paginator: { ... } })</code>.",
+      "description": "El Paginator utiliza tokens i18n para las etiquetas de botones de navegación, los mensajes de rango de elementos, el selector de tamaño de página y más.",
+      "note": "Sobreescribe los tokens globalmente con <code>provideNuiI18n({ paginator: { ... } })</code> en <code>app.config.ts</code>, o por instancia con el input <code>[i18n]</code> en el componente.",
       "rows": {
-        "firstPage": {
-          "description": "Etiqueta accesible del botón 'Primera página'."
-        },
-        "previousPage": {
-          "description": "Etiqueta accesible del botón 'Página anterior'."
-        },
-        "nextPage": {
-          "description": "Etiqueta accesible del botón 'Página siguiente'."
-        },
-        "lastPage": {
-          "description": "Etiqueta accesible del botón 'Última página'."
-        },
         "itemsPerPage": {
-          "description": "Etiqueta para el selector del número de elementos por página."
+          "description": "Etiqueta para el selector de elementos por página (ej. 'Elementos por página:')."
+        },
+        "showingItems": {
+          "description": "Plantilla para el rango de elementos. Soporta los marcadores <code>{start}</code>, <code>{end}</code> y <code>{total}</code>."
+        },
+        "page": {
+          "description": "Texto para la palabra 'Página' usado en los modos compact y fractional."
         },
         "of": {
           "description": "Conector 'de' usado en el texto de rango (ej. '1–10 de 100')."
         },
-        "jumpToPage": {
-          "description": "Placeholder o label del input de salto de página."
+        "goToPage": {
+          "description": "Etiqueta para el campo de salto de página."
+        },
+        "go": {
+          "description": "Etiqueta del botón 'Ir' en el control de salto de página."
+        },
+        "invalidPage": {
+          "description": "Mensaje de error mostrado cuando el número de página introducido es inválido."
+        },
+        "firstPage": {
+          "description": "Etiqueta accesible para el botón 'Primera página'."
+        },
+        "lastPage": {
+          "description": "Etiqueta accesible para el botón 'Última página'."
+        },
+        "previousPage": {
+          "description": "Etiqueta accesible para el botón 'Página anterior'."
+        },
+        "nextPage": {
+          "description": "Etiqueta accesible para el botón 'Página siguiente'."
+        },
+        "pageLabel": {
+          "description": "Plantilla anunciada en la región ARIA live al navegar. Soporta el marcador <code>{page}</code> (ej. 'Página {page}')."
+        },
+        "morePages": {
+          "description": "Texto mostrado en el elemento de puntos suspensivos que representa botones de página ocultos."
+        },
+        "loadMore": {
+          "description": "Etiqueta para el botón 'Cargar más' en el modo infinito."
+        },
+        "loading": {
+          "description": "Texto mostrado mientras la carga está en progreso."
+        },
+        "pageJumpHelp": {
+          "description": "Texto de ayuda para el campo de salto de página. Soporta el marcador <code>{totalPages}</code>."
+        },
+        "infiniteLoadedItems": {
+          "description": "Texto del contador en modo infinito. Soporta los marcadores <code>{loaded}</code> y <code>{total}</code>."
+        },
+        "infiniteLoadEnd": {
+          "description": "Texto mostrado cuando no hay más elementos que cargar en el modo infinito."
         }
       }
     },
     "a11yTokens": {
       "title": "Tokens de accesibilidad",
-      "description": "Tokens adicionales utilizados para los anuncios de lectores de pantalla y los atributos aria del paginador.",
-      "note": "Estos tokens se localizan bajo <code>paginator.a11y</code>.",
+      "description": "Tokens adicionales utilizados exclusivamente para los anuncios de lectores de pantalla y los atributos ARIA. Se anidan bajo <code>paginator.a11y</code>.",
       "rows": {
-        "pageLabel": {
-          "description": "Patrón de texto anunciado cuando cambia la página (ej. 'Página 3 de 10')."
+        "pagination": {
+          "description": "ARIA label para la región de navegación <code>&lt;nav&gt;</code> del paginador y el host del componente."
         },
-        "navigation": {
-          "description": "Aria-label para la región de navegación del paginador."
+        "morePages": {
+          "description": "ARIA label para el elemento de puntos suspensivos (indicador de más páginas)."
+        },
+        "page": {
+          "description": "Plantilla usada en la región ARIA live al navegar. Soporta el marcador <code>{page}</code>."
+        },
+        "currentPage": {
+          "description": "ARIA label para el botón de la página activa. Soporta el marcador <code>{page}</code> (ej. '{page}, página actual')."
+        },
+        "goToPage": {
+          "description": "ARIA label para los botones de página inactivos. Soporta el marcador <code>{page}</code> (ej. 'Ir a página {page}')."
+        },
+        "currentPageWithRange": {
+          "description": "ARIA label cuando el rango de elementos es visible. Soporta <code>{page}</code>, <code>{totalPages}</code>, <code>{start}</code>, <code>{end}</code> y <code>{total}</code>."
+        },
+        "currentPageNoRange": {
+          "description": "ARIA label cuando el rango de elementos no es visible. Soporta los marcadores <code>{page}</code> y <code>{totalPages}</code>."
+        },
+        "fractionalPage": {
+          "description": "ARIA label para la visualización de página fraccionada. Soporta los marcadores <code>{page}</code> y <code>{totalPages}</code>."
+        },
+        "showingItems": {
+          "description": "Anuncio ARIA para el rango de elementos. Soporta los marcadores <code>{start}</code>, <code>{end}</code> y <code>{total}</code>."
+        },
+        "loading": {
+          "description": "Anuncio ARIA live realizado cuando se está cargando una nueva página."
         }
       }
     }

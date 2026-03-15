@@ -528,11 +528,20 @@
   "i18n": {
     "tokens": {
       "title": "Übersetzungstoken",
-      "description": "Die Toast-Komponente verwendet den generischen Token <code>close</code> aus NuiI18nService für das Label der Schließen-Schaltfläche.",
-      "note": "Der Token <code>close</code> wird von mehreren Komponenten gemeinsam genutzt (Toast, SidebarPanel…). Überschreiben Sie ihn global, um alle Schließen-Schaltflächen auf einmal zu lokalisieren.",
+      "description": "Die Toast-Komponente verwendet generische Token (<code>close</code>, <code>expand</code>, <code>collapse</code>) aus NuiI18nService für Schaltflächenbeschriftungen sowie den komponentenspezifischen Token <code>toast.notifications</code> für das barrierefreie Label der Container-Region.",
+      "note": "Alle vier Token werden global über <code>provideNuiI18n()</code> in Ihrer <code>app.config.ts</code> überschrieben. Die generischen Token (<code>close</code>, <code>expand</code>, <code>collapse</code>) werden komponentenübergreifend genutzt – das Überschreiben lokalisiert alle betroffenen Schaltflächen gleichzeitig. Eine Überschreibung per Instanz über <code>ToastConfig</code> ist nicht verfügbar.",
       "rows": {
         "close": {
           "description": "Barrierefreies Label für die Schließen-Schaltfläche bei abwerfbaren Toasts."
+        },
+        "expand": {
+          "description": "Barrierefreies Label für die Erweitern-Schaltfläche bei erweiterbaren Toasts."
+        },
+        "collapse": {
+          "description": "Barrierefreies Label für die Reduzieren-Schaltfläche, wenn ein erweiterbarer Toast geöffnet ist."
+        },
+        "notifications": {
+          "description": "Barrierefreies Label für die Live-Region des Toast-Containers (wird Screenreadern beim Rendern des Containers mitgeteilt)."
         }
       }
     }

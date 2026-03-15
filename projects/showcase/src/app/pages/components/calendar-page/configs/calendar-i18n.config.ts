@@ -1,4 +1,4 @@
-﻿import { ComponentSection } from '../../../../core/models';
+import { ComponentSection } from '../../../../core/models';
 
 export const CALENDAR_I18N_SECTIONS: ComponentSection[] = [
   // ─────────────────────────────────────────────────────────────────────────
@@ -58,27 +58,27 @@ export const CALENDAR_I18N_SECTIONS: ComponentSection[] = [
         ],
         [
           '<code>calendar.changeMonth</code>',
-          '"Change month"',
+          '"Select month"',
           'components.calendar.i18n.navigation.rows.changeMonth.description',
         ],
         [
           '<code>calendar.changeYear</code>',
-          '"Change year"',
+          '"Select year"',
           'components.calendar.i18n.navigation.rows.changeYear.description',
         ],
         [
           '<code>calendar.year</code>',
-          '"Year"',
+          '"Select year"',
           'components.calendar.i18n.navigation.rows.year.description',
         ],
         [
           '<code>calendar.week</code>',
-          '"Week"',
+          '"Week {week}"',
           'components.calendar.i18n.navigation.rows.week.description',
         ],
         [
           '<code>calendar.weekNumbers</code>',
-          '"Week numbers"',
+          '"W"',
           'components.calendar.i18n.navigation.rows.weekNumbers.description',
         ],
         [
@@ -87,13 +87,18 @@ export const CALENDAR_I18N_SECTIONS: ComponentSection[] = [
           'components.calendar.i18n.navigation.rows.today.description',
         ],
         [
+          '<code>calendar.clear</code>',
+          '"Clear"',
+          'components.calendar.i18n.navigation.rows.clear.description',
+        ],
+        [
           '<code>calendar.selectDay</code>',
           '"Select day"',
           'components.calendar.i18n.navigation.rows.selectDay.description',
         ],
         [
           '<code>calendar.dayDisabled</code>',
-          '"Day disabled"',
+          '"Disabled: {date}"',
           'components.calendar.i18n.navigation.rows.dayDisabled.description',
         ],
         [
@@ -103,22 +108,22 @@ export const CALENDAR_I18N_SECTIONS: ComponentSection[] = [
         ],
         [
           '<code>calendar.showTime</code>',
-          '"Show time"',
+          '"Show time selector"',
           'components.calendar.i18n.navigation.rows.showTime.description',
         ],
         [
           '<code>calendar.hideTime</code>',
-          '"Hide time"',
+          '"Hide time selector"',
           'components.calendar.i18n.navigation.rows.hideTime.description',
         ],
         [
           '<code>calendar.monthAria</code>',
-          '"Select month"',
+          '"Months view"',
           'components.calendar.i18n.navigation.rows.monthAria.description',
         ],
         [
           '<code>calendar.yearsAria</code>',
-          '"Select year"',
+          '"Years view"',
           'components.calendar.i18n.navigation.rows.yearsAria.description',
         ],
       ],
@@ -132,12 +137,16 @@ export const CALENDAR_I18N_SECTIONS: ComponentSection[] = [
     title: 'components.calendar.i18n.presetsAndTabs.title',
     description: 'components.calendar.i18n.presetsAndTabs.description',
     anchor: 'i18n-presets-tabs',
+    note: {
+      type: 'info',
+      content: 'components.calendar.i18n.presetsAndTabs.note',
+    },
     table: {
       headers: ['common.tables.token', 'common.tables.default', 'common.tables.description'],
       rows: [
         [
           '<code>calendar.presets.shortcuts</code>',
-          '"Quick access"',
+          '"Shortcuts"',
           'components.calendar.i18n.presetsAndTabs.rows.shortcuts.description',
         ],
         [
@@ -177,7 +186,7 @@ export const CALENDAR_I18N_SECTIONS: ComponentSection[] = [
         ],
         [
           '<code>calendar.tabs.presets</code>',
-          '"Presets"',
+          '"Shortcuts"',
           'components.calendar.i18n.presetsAndTabs.rows.tabPresets.description',
         ],
         [
@@ -206,6 +215,10 @@ export const CALENDAR_I18N_SECTIONS: ComponentSection[] = [
     title: 'components.calendar.i18n.ariaTokens.title',
     description: 'components.calendar.i18n.ariaTokens.description',
     anchor: 'i18n-aria-tokens',
+    note: {
+      type: 'info',
+      content: 'components.calendar.i18n.ariaTokens.note',
+    },
     table: {
       headers: ['common.tables.token', 'common.tables.default', 'common.tables.description'],
       rows: [
@@ -231,22 +244,22 @@ export const CALENDAR_I18N_SECTIONS: ComponentSection[] = [
         ],
         [
           '<code>calendar.aria.statusSuccess</code>',
-          '"Success state"',
+          '"Success"',
           'components.calendar.i18n.ariaTokens.rows.statusSuccess.description',
         ],
         [
           '<code>calendar.aria.statusWarning</code>',
-          '"Warning state"',
+          '"Warning"',
           'components.calendar.i18n.ariaTokens.rows.statusWarning.description',
         ],
         [
           '<code>calendar.aria.statusDanger</code>',
-          '"Danger state"',
+          '"Danger"',
           'components.calendar.i18n.ariaTokens.rows.statusDanger.description',
         ],
         [
           '<code>calendar.aria.statusInfo</code>',
-          '"Info state"',
+          '"Information"',
           'components.calendar.i18n.ariaTokens.rows.statusInfo.description',
         ],
         [
@@ -256,34 +269,34 @@ export const CALENDAR_I18N_SECTIONS: ComponentSection[] = [
         ],
         [
           '<code>calendar.a11y.keyboardInstructions</code>',
-          '"Use the date keys..."',
+          '"Use the arrow keys to navigate. Page Up / Page Down to change month. Press T to go to today."',
           'components.calendar.i18n.ariaTokens.rows.keyboardInstructions.description',
         ],
         [
           '<code>calendar.a11y.monthNavigated</code>',
-          '"Navigated to {month} {year}"',
+          '"Navigating to {month} {year}"',
           'components.calendar.i18n.ariaTokens.rows.monthNavigated.description',
         ],
         [
           '<code>calendar.a11y.rangeStart</code>',
-          '"Range start selected"',
+          '"Range start: {date}. Now select the end date."',
           'components.calendar.i18n.ariaTokens.rows.rangeStart.description',
         ],
         [
           '<code>calendar.a11y.rangeComplete</code>',
-          '"Range complete selected"',
+          '"Range selected: {start} to {end}."',
           'components.calendar.i18n.ariaTokens.rows.rangeComplete.description',
         ],
         [
           '<code>calendar.a11y.weekNumberLabel</code>',
-          '"Week {week}"',
+          '"Week"',
           'components.calendar.i18n.ariaTokens.rows.weekNumberLabel.description',
         ],
       ],
     },
     examples: [
       {
-        title: 'codeExamples.ts',
+        title: 'codeExamples.typescript',
         language: 'typescript',
         code: `// app.config.ts — override de tokens del Calendar
 import { provideNuiI18n } from 'nui';
@@ -301,6 +314,14 @@ export const appConfig: ApplicationConfig = {
     }),
   ],
 };`,
+      },
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<!-- Per-instance override using the [i18n] input -->
+<nui-calendar
+  [i18n]="{ today: 'Go to today', clear: 'Reset', prevMonth: 'Previous', nextMonth: 'Next' }"
+/>`,
       },
     ],
   },

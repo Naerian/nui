@@ -268,7 +268,7 @@
     "tokens": {
       "title": "Tokens de traducción",
       "description": "El componente <code>nui-avatar-group</code> usa <code>NuiI18nService</code> para construir la etiqueta accesible y el tooltip del indicador de exceso que se muestra cuando el número de avatares supera el input <code>max</code>.",
-      "note": "Usa el marcador <code>{count}</code> en tu cadena de traducción. El componente lo reemplaza en tiempo de ejecución con el número exacto de avatares ocultos.",
+      "note": "Sobreescribe los tokens globalmente para toda la aplicación usando <code>provideNuiI18n({ avatar: { ... } })</code> en tu configuración de app, o a nivel de instancia usando el input <code>[i18n]</code> directamente en el componente. El marcador <code>{count}</code> se reemplaza en tiempo de ejecución con el número exacto de avatares ocultos.",
       "rows": {
         "moreProfiles": {
           "description": "Etiqueta accesible y tooltip del indicador de exceso (+N). Admite el marcador <code>{count}</code>."

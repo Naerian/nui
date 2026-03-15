@@ -72,14 +72,23 @@
     }
   },
   "i18n": {
-    "keys": {
-      "title": "i18n-Schlüssel",
-      "description": "Der Dock stellt eine zugängliche Beschriftung bereit, die als <code>aria-label</code> des Toolbar-Containers verwendet wird.",
-      "note": "Alle NUI-i18n-Texte können global über <code>provideNuiI18n()</code> oder komponentenspezifisch über die Konfigurationseigenschaft <code>i18n</code> überschrieben werden.",
+    "tokens": {
+      "title": "i18n-Tokens",
+      "description": "Der Dock verwendet zwei komponentenspezifische Tokens (<code>dock.ariaLabel</code>, <code>dock.sheetTitle</code>) und zwei gemeinsame Top-Level-Tokens (<code>restore</code>, <code>close</code>). Alle können global über <code>provideNuiI18n()</code> überschrieben werden.",
+      "note": "Alle NUI-i18n-Texte können global über <code>provideNuiI18n()</code> überschrieben werden. Der Dock unterstützt keine instanzspezifischen i18n-Überschreibungen, da er automatisch vom Service verwaltet wird.",
       "rows": {
-        "ariaLabel": "Zugängliche Beschriftung für die Dock-Toolbar (Element mit <code>role=\"toolbar\"</code>)",
-        "close": "Zugängliche Beschriftung für den Schließen-Button an jedem Chip (gemeinsamer Top-Level-Schlüssel)",
-        "sheetTitle": "Titel in der Kopfzeile des Bottom Sheets und zugängliche Beschriftung des Overflow-Sheet-Dialogs"
+        "ariaLabel": {
+          "description": "Zugängliche Beschriftung für die Dock-Toolbar (Element mit <code>role=\"toolbar\"</code>)"
+        },
+        "sheetTitle": {
+          "description": "Titel in der Kopfzeile des Bottom Sheets und zugängliche Beschriftung des Overflow-Sheet-Dialogs"
+        },
+        "restore": {
+          "description": "Präfix der zugänglichen Beschriftung des Wiederherstellen-Buttons an jedem Chip — wird mit dem Elementtitel zusammengesetzt (gemeinsamer Top-Level-Schlüssel)"
+        },
+        "close": {
+          "description": "Präfix der zugänglichen Beschriftung des Schließen-Buttons an jedem Chip — wird mit dem Elementtitel zusammengesetzt (gemeinsamer Top-Level-Schlüssel)"
+        }
       }
     }
   },

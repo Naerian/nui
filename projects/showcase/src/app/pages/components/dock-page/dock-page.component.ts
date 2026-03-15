@@ -53,7 +53,7 @@ export class DockPageComponent extends BaseComponentPage {
       id: 'i18n',
       label: 'common.tabs.i18n',
       icon: 'ri-translate-2',
-      sections: ['i18n-keys'],
+      sections: ['i18n-tokens'],
     },
     {
       id: 'global-config',

@@ -165,7 +165,7 @@
     "tokens": {
       "title": "Übersetzungs-Tokens",
       "description": "Die FabButton-Komponente stellt ein einzelnes i18n-Token für das zugängliche Label der Trigger-Schaltfläche bereit.",
-      "note": "Überschreibe es mit <code>provideNuiI18n({ fabButton: { triggerAriaLabel: 'Aktionen öffnen' } })</code>.",
+      "note": "Überschreibe es global mit <code>provideNuiI18n({ fabButton: { triggerAriaLabel: '...' } })</code>, oder pro Instanz mit <code>[i18n]=\"{ triggerAriaLabel: '...' }\"</code> am <code>&lt;nui-fab-button&gt;</code>-Element.",
       "rows": {
         "triggerAriaLabel": {
           "description": "Das <code>aria-label</code>, das auf die FAB-Trigger-Schaltfläche angewendet wird. Von Screenreadern verwendet, um die Schaltfläche zu identifizieren, wenn sie nur ein Icon zeigt."

@@ -551,20 +551,38 @@
     }
   },
   "i18n": {
-    "keys": {
+    "tokens": {
       "title": "Übersetzungstoken",
       "description": "Die Modal Dialog-Komponente verwendet eigene Tokens und einige gemeinsame Tokens.",
-      "note": "Alle für den Benutzer sichtbaren Texte im Modal Dialog können global mit <code>provideNuiI18n()</code> überschrieben werden. Andere können durch die Übergabe der benutzerdefinierten Übersetzung in der <code>open()</code>-Konfiguration übersetzt werden.",
+      "note": "Alle für den Benutzer sichtbaren Texte im Modal Dialog können global mit <code>provideNuiI18n()</code> überschrieben werden. Die Verifizierungstoken (<code>verificationLabel</code>, <code>verificationPlaceholder</code>, <code>verificationErrorMessage</code>) können auch pro Instanz überschrieben werden, indem sie direkt in der <code>open()</code>-Konfiguration übergeben werden.",
       "rows": {
-        "close": "Aria-Label und Titel der Schließen-Schaltfläche im Header.",
-        "minimize": "Aria-Label und Titel der Minimieren-Schaltfläche im Header.",
-        "restore": "Beschriftung des Wiederherstellungs-Chips im Dock.",
-        "confirm": "Standard-Beschriftung der Bestätigungsschaltfläche.",
-        "cancel": "Standard-Beschriftung der Abbrechen-Schaltfläche.",
-        "modalDialogLoading": "Beschriftung in Lade-Modals.",
-        "modalDialogVerificationLabel": "Beschriftung des Verifizierungstextfelds.",
-        "modalDialogVerificationPlaceholder": "Platzhalter des Verifizierungstextfelds.",
-        "modalDialogVerificationErrorMessage": "Fehlermeldung, wenn der Verifizierungstext nicht übereinstimmt."
+        "close": {
+          "description": "Aria-Label und Titel der Schließen-Schaltfläche im Header."
+        },
+        "minimize": {
+          "description": "Aria-Label und Titel der Minimieren-Schaltfläche im Header."
+        },
+        "restore": {
+          "description": "Beschriftung des Wiederherstellungs-Chips im Dock."
+        },
+        "confirm": {
+          "description": "Standard-Beschriftung der Bestätigungsschaltfläche."
+        },
+        "cancel": {
+          "description": "Standard-Beschriftung der Abbrechen-Schaltfläche."
+        },
+        "modalDialogLoading": {
+          "description": "Beschriftung in Lade-Modals."
+        },
+        "modalDialogVerificationLabel": {
+          "description": "Beschriftung des Verifizierungstextfelds."
+        },
+        "modalDialogVerificationPlaceholder": {
+          "description": "Platzhalter des Verifizierungstextfelds."
+        },
+        "modalDialogVerificationErrorMessage": {
+          "description": "Fehlermeldung, wenn der Verifizierungstext nicht übereinstimmt."
+        }
       }
     }
   },

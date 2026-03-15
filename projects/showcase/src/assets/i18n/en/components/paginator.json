@@ -279,11 +279,35 @@
   "i18n": {
     "tokens": {
       "title": "Translation tokens",
-      "description": "The Paginator uses i18n tokens for navigation button labels, item range messages and the page size selector.",
-      "note": "Override tokens with <code>provideNuiI18n({ paginator: { ... } })</code>.",
+      "description": "The Paginator uses i18n tokens for navigation button labels, item range messages, the page size selector and more.",
+      "note": "Override tokens globally with <code>provideNuiI18n({ paginator: { ... } })</code> in <code>app.config.ts</code>, or per instance with the <code>[i18n]</code> input on the component.",
       "rows": {
+        "itemsPerPage": {
+          "description": "Label for the items-per-page selector (e.g. 'Items per page:')."
+        },
+        "showingItems": {
+          "description": "Template for the item range display. Supports <code>{start}</code>, <code>{end}</code> and <code>{total}</code> placeholders."
+        },
+        "page": {
+          "description": "Text for the word 'Page' used in compact and fractional modes."
+        },
+        "of": {
+          "description": "Connector word 'of' used in the range text (e.g. '1–10 of 100')."
+        },
+        "goToPage": {
+          "description": "Label for the page jump input field."
+        },
+        "go": {
+          "description": "Label for the 'Go' button in the page jump control."
+        },
+        "invalidPage": {
+          "description": "Error message shown when the entered page number is invalid."
+        },
         "firstPage": {
           "description": "Accessible label for the 'First page' button."
+        },
+        "lastPage": {
+          "description": "Accessible label for the 'Last page' button."
         },
         "previousPage": {
           "description": "Accessible label for the 'Previous page' button."
@@ -291,30 +315,62 @@
         "nextPage": {
           "description": "Accessible label for the 'Next page' button."
         },
-        "lastPage": {
-          "description": "Accessible label for the 'Last page' button."
+        "pageLabel": {
+          "description": "Template announced in the ARIA live region on navigation. Supports <code>{page}</code> placeholder (e.g. 'Page {page}')."
         },
-        "itemsPerPage": {
-          "description": "Label for the items-per-page selector."
+        "morePages": {
+          "description": "Text shown in the ellipsis element representing hidden page buttons."
         },
-        "of": {
-          "description": "Connector 'of' used in the range text (e.g. '1–10 of 100')."
+        "loadMore": {
+          "description": "Label for the 'Load more' button in infinite mode."
         },
-        "jumpToPage": {
-          "description": "Placeholder or label for the page jump input."
+        "loading": {
+          "description": "Text displayed while loading is in progress."
+        },
+        "pageJumpHelp": {
+          "description": "Help text for the page jump input. Supports <code>{totalPages}</code> placeholder."
+        },
+        "infiniteLoadedItems": {
+          "description": "Counter text in infinite mode. Supports <code>{loaded}</code> and <code>{total}</code> placeholders."
+        },
+        "infiniteLoadEnd": {
+          "description": "Text displayed when there are no more items to load in infinite mode."
         }
       }
     },
     "a11yTokens": {
       "title": "Accessibility tokens",
-      "description": "Additional tokens used for screen reader announcements and paginator aria attributes.",
-      "note": "These tokens are localized under <code>paginator.a11y</code>.",
+      "description": "Additional tokens used exclusively for screen reader announcements and ARIA attributes. They are nested under <code>paginator.a11y</code>.",
       "rows": {
-        "pageLabel": {
-          "description": "Text pattern announced when the page changes (e.g. 'Page 3 of 10')."
+        "pagination": {
+          "description": "ARIA label for the <code>&lt;nav&gt;</code> pagination region and the component host."
         },
-        "navigation": {
-          "description": "Aria-label for the paginator navigation region."
+        "morePages": {
+          "description": "ARIA label for the ellipsis element (more pages indicator)."
+        },
+        "page": {
+          "description": "Template used in the ARIA live region on navigation. Supports <code>{page}</code> placeholder."
+        },
+        "currentPage": {
+          "description": "ARIA label for the active page button. Supports <code>{page}</code> placeholder (e.g. '{page}, current page')."
+        },
+        "goToPage": {
+          "description": "ARIA label for inactive page buttons. Supports <code>{page}</code> placeholder (e.g. 'Go to page {page}')."
+        },
+        "currentPageWithRange": {
+          "description": "ARIA label when item range is visible. Supports <code>{page}</code>, <code>{totalPages}</code>, <code>{start}</code>, <code>{end}</code> and <code>{total}</code>."
+        },
+        "currentPageNoRange": {
+          "description": "ARIA label when item range is not visible. Supports <code>{page}</code> and <code>{totalPages}</code> placeholders."
+        },
+        "fractionalPage": {
+          "description": "ARIA label for the fractional page display. Supports <code>{page}</code> and <code>{totalPages}</code> placeholders."
+        },
+        "showingItems": {
+          "description": "ARIA announcement for the item range. Supports <code>{start}</code>, <code>{end}</code> and <code>{total}</code> placeholders."
+        },
+        "loading": {
+          "description": "ARIA live announcement made when a new page is loading."
         }
       }
     }

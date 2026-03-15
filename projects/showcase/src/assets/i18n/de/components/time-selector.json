@@ -441,7 +441,7 @@
     "tokens": {
       "title": "Zeitauswahl-Token",
       "description": "Token für Labels der Zeitauswahl, Aktionsschaltflächen und Screenreader-Texte.",
-      "note": "Überschreiben Sie beliebige Token global mit <code>provideNuiI18n({ timeSelector: { ... } })</code>.",
+      "note": "Überschreiben Sie beliebige Token global mit <code>provideNuiI18n({ timeSelector: { ... } })</code> in der App-Konfiguration. Alle Instanzen der Komponente verwenden die bereitgestellten Werte.",
       "rows": {
         "setToCurrentTime": {
           "description": "Label für die Aktionsschaltfläche 'Aktuelle Zeit einstellen'."
@@ -545,7 +545,7 @@
     "a11yTokens": {
       "title": "Barrierefreiheits-Token",
       "description": "Token, die ausschließlich für Screenreader-Ankündigungen und ARIA-Labels innerhalb der Zeitauswahl verwendet werden.",
-      "note": "Diese Token sind unter <code>timeSelector.a11y</code> verschachtelt.",
+      "note": "Diese Token sind unter <code>timeSelector.a11y</code> verschachtelt. Überschreiben Sie sie global mit <code>provideNuiI18n({ timeSelector: { a11y: { ... } } })</code>. Alle Instanzen der Komponente verwenden die bereitgestellten Werte.",
       "rows": {
         "timeSelectorLabel": {
           "description": "Das <code>aria-label</code> für den Zeitauswahl-Wurzelcontainer im Standardmodus."

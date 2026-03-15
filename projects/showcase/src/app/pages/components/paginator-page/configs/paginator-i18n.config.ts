@@ -18,96 +18,126 @@ export const PAGINATOR_I18N_SECTIONS: ComponentSection[] = [
       rows: [
         [
           '<code>paginator.itemsPerPage</code>',
-          '"Elementos por p\u00e1gina:"',
+          '"Items per page:"',
           'components.paginator.i18n.tokens.rows.itemsPerPage.description',
         ],
         [
           '<code>paginator.showingItems</code>',
-          '"{start}-{end} de {total}"',
+          '"{start}-{end} of {total}"',
           'components.paginator.i18n.tokens.rows.showingItems.description',
         ],
         [
           '<code>paginator.page</code>',
-          '"P\u00e1gina"',
+          '"Page"',
           'components.paginator.i18n.tokens.rows.page.description',
         ],
         [
           '<code>paginator.of</code>',
-          '"de"',
+          '"of"',
           'components.paginator.i18n.tokens.rows.of.description',
         ],
         [
           '<code>paginator.goToPage</code>',
-          '"Ir a p\u00e1gina"',
+          '"Go to page"',
           'components.paginator.i18n.tokens.rows.goToPage.description',
         ],
         [
           '<code>paginator.go</code>',
-          '"Ir"',
+          '"Go"',
           'components.paginator.i18n.tokens.rows.go.description',
         ],
         [
           '<code>paginator.invalidPage</code>',
-          '"P\u00e1gina inv\u00e1lida"',
+          '"Invalid page"',
           'components.paginator.i18n.tokens.rows.invalidPage.description',
         ],
         [
           '<code>paginator.firstPage</code>',
-          '"Primera p\u00e1gina"',
+          '"First page"',
           'components.paginator.i18n.tokens.rows.firstPage.description',
         ],
         [
           '<code>paginator.lastPage</code>',
-          '"Última p\u00e1gina"',
+          '"Last page"',
           'components.paginator.i18n.tokens.rows.lastPage.description',
         ],
         [
           '<code>paginator.previousPage</code>',
-          '"P\u00e1gina anterior"',
+          '"Previous page"',
           'components.paginator.i18n.tokens.rows.previousPage.description',
         ],
         [
           '<code>paginator.nextPage</code>',
-          '"P\u00e1gina siguiente"',
+          '"Next page"',
           'components.paginator.i18n.tokens.rows.nextPage.description',
         ],
         [
           '<code>paginator.pageLabel</code>',
-          '"P\u00e1gina {page}"',
+          '"Page {page}"',
           'components.paginator.i18n.tokens.rows.pageLabel.description',
         ],
         [
           '<code>paginator.morePages</code>',
-          '"M\u00e1s p\u00e1ginas"',
+          '"More pages"',
           'components.paginator.i18n.tokens.rows.morePages.description',
         ],
         [
           '<code>paginator.loadMore</code>',
-          '"Cargar m\u00e1s"',
+          '"Load more"',
           'components.paginator.i18n.tokens.rows.loadMore.description',
         ],
         [
           '<code>paginator.loading</code>',
-          '"Cargando..."',
+          '"Loading..."',
           'components.paginator.i18n.tokens.rows.loading.description',
         ],
         [
           '<code>paginator.pageJumpHelp</code>',
-          '"Ingrese un n\u00famero entre 1 y {totalPages}."',
+          '"Enter a number between 1 and {totalPages}."',
           'components.paginator.i18n.tokens.rows.pageJumpHelp.description',
         ],
         [
           '<code>paginator.infiniteLoadedItems</code>',
-          '"{loaded} elementos cargados de {total}"',
+          '"{loaded} items loaded of {total}"',
           'components.paginator.i18n.tokens.rows.infiniteLoadedItems.description',
         ],
         [
           '<code>paginator.infiniteLoadEnd</code>',
-          '"No hay m\u00e1s elementos que mostrar"',
+          '"No more items to display"',
           'components.paginator.i18n.tokens.rows.infiniteLoadEnd.description',
         ],
       ],
     },
+    examples: [
+      {
+        title: 'codeExamples.typescript',
+        language: 'typescript',
+        code: `// app.config.ts — global override via provideNuiI18n
+import { provideNuiI18n } from 'nui';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideNuiI18n({
+      paginator: {
+        itemsPerPage: 'Items per page:',
+        showingItems: '{start}–{end} of {total}',
+        loadMore: 'Load more',
+      },
+    }),
+  ],
+};`,
+      },
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<!-- Per-instance override via [i18n] input -->
+<nui-paginator
+  [totalItems]="total"
+  [(currentPage)]="page"
+  [i18n]="{ itemsPerPage: 'Per page:', loadMore: 'Show more' }"
+/>`,
+      },
+    ],
   },
   // ─────────────────────────────────────────────────────────────────────────
   // 2. Tokens de accesibilidad (sub-objeto a11y)
@@ -174,9 +204,9 @@ export const PAGINATOR_I18N_SECTIONS: ComponentSection[] = [
     },
     examples: [
       {
-        title: 'codeExamples.ts',
+        title: 'codeExamples.typescript',
         language: 'typescript',
-        code: `// app.config.ts — override de tokens del Paginator
+        code: `// app.config.ts — global override via provideNuiI18n
 import { provideNuiI18n } from 'nui';
 
 export const appConfig: ApplicationConfig = {
@@ -193,6 +223,21 @@ export const appConfig: ApplicationConfig = {
     }),
   ],
 };`,
+      },
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<!-- Per-instance override via [i18n] input -->
+<nui-paginator
+  [totalItems]="total"
+  [(currentPage)]="page"
+  [i18n]="{
+    a11y: {
+      pagination: 'Page navigation',
+      currentPage: '{page}, active'
+    }
+  }"
+/>`,
       },
     ],
   },

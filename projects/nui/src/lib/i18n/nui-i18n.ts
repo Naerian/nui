@@ -5,6 +5,7 @@ import { DEFAULT_MODAL_DIALOG_I18N } from '../components/modal-dialog/models/mod
 import { DEFAULT_PAGINATOR_I18N } from '../components/paginator/models/paginator-i18n.model';
 import { DEFAULT_TIMESELECTOR_I18N } from '../components/time-selector/models/time-selector-i18n.model';
 import { DEFAULT_NUI_DOCK_I18N } from '../components/dock/models/nui-dock-i18n.model';
+import { DEFAULT_TOAST_I18N } from '../components/toast/models/toast-i18n.model';
 import { NuiI18n } from './nui-i18n.model';
 
 export const DEFAULT_GENERIC_I18N = {
@@ -29,4 +30,5 @@ export const NUI_I18N_DEFAULT: NuiI18n = {
   fabButton: DEFAULT_FAB_BUTTON_I18N,
   modalDialog: DEFAULT_MODAL_DIALOG_I18N,
   dock: DEFAULT_NUI_DOCK_I18N,
+  toast: DEFAULT_TOAST_I18N,
 };

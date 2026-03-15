@@ -5,6 +5,7 @@ import { PaginatorI18n } from '../components/paginator/models/paginator-i18n.mod
 import { TimeSelectorI18n } from '../components/time-selector/models/time-selector-i18n.model';
 import { ModalDialogI18n } from '../components/modal-dialog/models/modal-dialog-i18n.model';
 import { NuiDockI18n } from '../components/dock/models/nui-dock-i18n.model';
+import { ToastI18n } from '../components/toast/models/toast-i18n.model';
 
 export const NUI_DATE_FULL_FORMAT = 'PPPP';
 
@@ -34,4 +35,7 @@ export interface NuiI18n {
 
   /** Textos del dock unificado de elementos minimizados */
   dock: NuiDockI18n;
+
+  /** Textos del componente Toast */
+  toast: ToastI18n;
 }

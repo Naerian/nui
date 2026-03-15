@@ -431,16 +431,20 @@
           "description": "Libellé du bouton masquant le sélecteur d'heure."
         },
         "monthAria": {
-          "description": "Libellé accessible pour la grille de sélection de mois."
+          "description": "Libellé accessible pour la grille de la vue des mois."
         },
         "yearsAria": {
-          "description": "Libellé accessible pour la grille de sélection d'années."
+          "description": "Libellé accessible pour la grille de la vue des années."
+        },
+        "clear": {
+          "description": "Libellé du bouton qui efface la sélection de date actuelle."
         }
       }
     },
     "presetsAndTabs": {
       "title": "Tokens de préréglages, onglets et sélecteur d'heure",
       "description": "Tokens pour l'accès rapide aux plages de dates prédéfinies, les onglets de vue et les libellés du sélecteur d'heure intégré.",
+      "note": "Remplacez globalement avec <code>provideNuiI18n({ calendar: { presets: {...}, tabs: {...}, timeSelector: {...} } })</code> ou par instance avec l'entrée <code>[i18n]</code>.",
       "rows": {
         "shortcuts": {
           "description": "Libellé d'en-tête du panneau de préréglages listant les raccourcis de plage de dates rapides."
@@ -483,6 +487,7 @@
     "ariaTokens": {
       "title": "Tokens ARIA d'état et d'accessibilité",
       "description": "Tokens exposés uniquement aux technologies d'assistance pour annoncer les états des jours, les changements de navigation et la sélection de plage.",
+      "note": "Ces tokens ne sont jamais visibles pour les utilisateurs voyants. Remplacez globalement avec <code>provideNuiI18n({ calendar: { aria: {...}, a11y: {...} } })</code> ou par instance avec l'entrée <code>[i18n]</code>.",
       "rows": {
         "ariaToday": {
           "description": "Annotation du lecteur d'écran ajoutée à la cellule du jour actuel."

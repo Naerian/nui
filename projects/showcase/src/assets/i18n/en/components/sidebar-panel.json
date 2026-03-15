@@ -339,14 +339,14 @@
   "i18n": {
     "tokens": {
       "title": "Translation tokens",
-      "description": "The SidebarPanel component uses generic NuiI18nService tokens for the control buttons.",
-      "note": "All tokens are shared between multiple components. Override them globally with <code>provideNuiI18n({...})</code>.",
+      "description": "The SidebarPanel component uses generic NuiI18nService tokens for the close and minimize control buttons.",
+      "note": "All tokens are shared between multiple components. Override them globally with <code>provideNuiI18n({...})</code> in your <code>app.config.ts</code>.",
       "rows": {
         "close": {
-          "description": "Accessible label for the close button."
+          "description": "Accessible label for the close button in the panel header."
         },
         "minimize": {
-          "description": "Accessible label for the minimize button."
+          "description": "Accessible label for the minimize button in the panel header."
         },
         "restore": {
           "description": "Accessible label for the restore button, visible when the panel is minimized."

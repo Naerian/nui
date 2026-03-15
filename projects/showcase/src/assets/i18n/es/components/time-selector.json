@@ -441,7 +441,7 @@
     "tokens": {
       "title": "Tokens del selector de tiempo",
       "description": "Tokens usados para las etiquetas del selector de tiempo, los botones de acción y los textos para lectores de pantalla.",
-      "note": "Sobreescribe cualquier token globalmente con <code>provideNuiI18n({ timeSelector: { ... } })</code>.",
+      "note": "Sobreescribe cualquier token globalmente con <code>provideNuiI18n({ timeSelector: { ... } })</code> en la configuración de la aplicación. Todas las instancias del componente usarán los valores proporcionados.",
       "rows": {
         "setToCurrentTime": {
           "description": "Etiqueta del botón de acción 'establecer a la hora actual'."
@@ -545,7 +545,7 @@
     "a11yTokens": {
       "title": "Tokens de accesibilidad",
       "description": "Tokens usados exclusivamente para los anuncios de lectores de pantalla y etiquetas ARIA dentro del selector de tiempo.",
-      "note": "Estos tokens están anidados bajo <code>timeSelector.a11y</code>.",
+      "note": "Estos tokens están anidados bajo <code>timeSelector.a11y</code>. Sobreescríbelos globalmente con <code>provideNuiI18n({ timeSelector: { a11y: { ... } } })</code>. Todas las instancias del componente usarán los valores proporcionados.",
       "rows": {
         "timeSelectorLabel": {
           "description": "El <code>aria-label</code> aplicado al contenedor raíz del selector de tiempo en modo estándar."

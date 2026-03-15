@@ -165,7 +165,7 @@
     "tokens": {
       "title": "Tokens de traduction",
       "description": "Le composant FabButton expose un seul token i18n pour le libellé accessible du bouton déclencheur.",
-      "note": "Remplacez-le avec <code>provideNuiI18n({ fabButton: { triggerAriaLabel: 'Ouvrir les actions' } })</code>.",
+      "note": "Remplacez-le globalement avec <code>provideNuiI18n({ fabButton: { triggerAriaLabel: '...' } })</code>, ou par instance avec <code>[i18n]=\"{ triggerAriaLabel: '...' }\"</code> sur l'élément <code>&lt;nui-fab-button&gt;</code>.",
       "rows": {
         "triggerAriaLabel": {
           "description": "L'<code>aria-label</code> appliqué au bouton déclencheur FAB. Utilisé par les lecteurs d'écran pour identifier le bouton lorsqu'il n'affiche qu'une icône."

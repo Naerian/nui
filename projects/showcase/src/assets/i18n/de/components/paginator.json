@@ -279,42 +279,98 @@
   "i18n": {
     "tokens": {
       "title": "Übersetzungs-Tokens",
-      "description": "Die Seitennavigation verwendet i18n-Tokens für Navigationsschaltflächen-Labels, Elementbereichsmeldungen und den Seitengrößenselektor.",
-      "note": "Überschreibe Tokens mit <code>provideNuiI18n({ paginator: { ... } })</code>.",
+      "description": "Die Seitennavigation verwendet i18n-Tokens für Navigationsschaltflächen-Labels, Elementbereichsmeldungen, den Seitengrößenselektor und mehr.",
+      "note": "Überschreibe Tokens global mit <code>provideNuiI18n({ paginator: { ... } })</code> in <code>app.config.ts</code>, oder pro Instanz mit dem <code>[i18n]</code>-Input an der Komponente.",
       "rows": {
-        "firstPage": {
-          "description": "Zugängliches Label für die Schaltfläche 'Erste Seite'."
-        },
-        "previousPage": {
-          "description": "Zugängliches Label für die Schaltfläche 'Vorherige Seite'."
-        },
-        "nextPage": {
-          "description": "Zugängliches Label für die Schaltfläche 'Nächste Seite'."
-        },
-        "lastPage": {
-          "description": "Zugängliches Label für die Schaltfläche 'Letzte Seite'."
-        },
         "itemsPerPage": {
-          "description": "Label für den Elemente-pro-Seite-Selektor."
+          "description": "Beschriftung für den Elemente-pro-Seite-Selektor (z. B. 'Elemente pro Seite:')."
+        },
+        "showingItems": {
+          "description": "Vorlage für die Elementbereich-Anzeige. Unterstützt die Platzhalter <code>{start}</code>, <code>{end}</code> und <code>{total}</code>."
+        },
+        "page": {
+          "description": "Text für das Wort 'Seite', das in den Modi compact und fractional verwendet wird."
         },
         "of": {
-          "description": "Verbinder 'von' im Bereichstext (z.B. '1–10 von 100')."
+          "description": "Verbindungswort 'von' im Bereichstext (z. B. '1–10 von 100')."
         },
-        "jumpToPage": {
-          "description": "Platzhalter oder Label für den Seitensprung-Input."
+        "goToPage": {
+          "description": "Beschriftung für das Seitensprung-Eingabefeld."
+        },
+        "go": {
+          "description": "Beschriftung der Schaltfläche 'Gehe zu' im Seitensprung-Steuerelement."
+        },
+        "invalidPage": {
+          "description": "Fehlermeldung, die angezeigt wird, wenn die eingegebene Seitenzahl ungültig ist."
+        },
+        "firstPage": {
+          "description": "Zugängliche Beschriftung für die Schaltfläche 'Erste Seite'."
+        },
+        "lastPage": {
+          "description": "Zugängliche Beschriftung für die Schaltfläche 'Letzte Seite'."
+        },
+        "previousPage": {
+          "description": "Zugängliche Beschriftung für die Schaltfläche 'Vorherige Seite'."
+        },
+        "nextPage": {
+          "description": "Zugängliche Beschriftung für die Schaltfläche 'Nächste Seite'."
+        },
+        "pageLabel": {
+          "description": "Vorlage, die in der ARIA-Live-Region bei der Navigation angesagt wird. Unterstützt den Platzhalter <code>{page}</code> (z. B. 'Seite {page}')."
+        },
+        "morePages": {
+          "description": "Text im Auslassungspunkte-Element, das versteckte Seitenschaltflächen darstellt."
+        },
+        "loadMore": {
+          "description": "Beschriftung der Schaltfläche 'Mehr laden' im unendlichen Modus."
+        },
+        "loading": {
+          "description": "Text, der während des Ladens angezeigt wird."
+        },
+        "pageJumpHelp": {
+          "description": "Hilfetext für das Seitensprung-Eingabefeld. Unterstützt den Platzhalter <code>{totalPages}</code>."
+        },
+        "infiniteLoadedItems": {
+          "description": "Zählertext im unendlichen Modus. Unterstützt die Platzhalter <code>{loaded}</code> und <code>{total}</code>."
+        },
+        "infiniteLoadEnd": {
+          "description": "Text, der angezeigt wird, wenn keine weiteren Elemente im unendlichen Modus geladen werden können."
         }
       }
     },
     "a11yTokens": {
       "title": "Barrierefreiheits-Tokens",
-      "description": "Zusätzliche Tokens für Screenreader-Ansagen und Paginator-ARIA-Attribute.",
-      "note": "Diese Tokens sind unter <code>paginator.a11y</code> lokalisiert.",
+      "description": "Zusätzliche Tokens, die ausschließlich für Screenreader-Ansagen und ARIA-Attribute verwendet werden. Sie sind unter <code>paginator.a11y</code> verschachtelt.",
       "rows": {
-        "pageLabel": {
-          "description": "Textmuster, das beim Seitenwechsel angesagt wird (z.B. 'Seite 3 von 10')."
+        "pagination": {
+          "description": "ARIA-Label für den Navigationsbereich <code>&lt;nav&gt;</code> des Paginators und den Komponenten-Host."
         },
-        "navigation": {
-          "description": "Aria-label für den Navigationsbereich der Seitennavigation."
+        "morePages": {
+          "description": "ARIA-Label für das Auslassungspunkte-Element (Indikator für weitere Seiten)."
+        },
+        "page": {
+          "description": "Vorlage für den ARIA-Live-Bereich bei der Navigation. Unterstützt den Platzhalter <code>{page}</code>."
+        },
+        "currentPage": {
+          "description": "ARIA-Label für die Schaltfläche der aktiven Seite. Unterstützt den Platzhalter <code>{page}</code> (z. B. '{page}, aktuelle Seite')."
+        },
+        "goToPage": {
+          "description": "ARIA-Label für inaktive Seitenschaltflächen. Unterstützt den Platzhalter <code>{page}</code> (z. B. 'Gehe zu Seite {page}')."
+        },
+        "currentPageWithRange": {
+          "description": "ARIA-Label, wenn der Elementbereich sichtbar ist. Unterstützt <code>{page}</code>, <code>{totalPages}</code>, <code>{start}</code>, <code>{end}</code> und <code>{total}</code>."
+        },
+        "currentPageNoRange": {
+          "description": "ARIA-Label, wenn der Elementbereich nicht sichtbar ist. Unterstützt die Platzhalter <code>{page}</code> und <code>{totalPages}</code>."
+        },
+        "fractionalPage": {
+          "description": "ARIA-Label für die Bruchzahl-Seitenanzeige. Unterstützt die Platzhalter <code>{page}</code> und <code>{totalPages}</code>."
+        },
+        "showingItems": {
+          "description": "ARIA-Ankündigung für den Elementbereich. Unterstützt die Platzhalter <code>{start}</code>, <code>{end}</code> und <code>{total}</code>."
+        },
+        "loading": {
+          "description": "ARIA-Live-Ankündigung beim Laden einer neuen Seite."
         }
       }
     }

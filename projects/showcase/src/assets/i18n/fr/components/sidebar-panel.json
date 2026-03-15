@@ -339,14 +339,14 @@
   "i18n": {
     "tokens": {
       "title": "Tokens de traduction",
-      "description": "Le composant SidebarPanel utilise des tokens NuiI18nService génériques pour les boutons de contrôle.",
-      "note": "Tous les tokens sont partagés entre plusieurs composants. Remplacez-les globalement avec <code>provideNuiI18n({...})</code>.",
+      "description": "Le composant SidebarPanel utilise des tokens NuiI18nService génériques pour les boutons de fermeture et de réduction.",
+      "note": "Tous les tokens sont partagés entre plusieurs composants. Remplacez-les globalement avec <code>provideNuiI18n({...})</code> dans votre <code>app.config.ts</code>.",
       "rows": {
         "close": {
-          "description": "Libellé accessible pour le bouton de fermeture."
+          "description": "Libellé accessible pour le bouton de fermeture dans l'en-tête du panneau."
         },
         "minimize": {
-          "description": "Libellé accessible pour le bouton de réduction."
+          "description": "Libellé accessible pour le bouton de réduction dans l'en-tête du panneau."
         },
         "restore": {
           "description": "Libellé accessible pour le bouton de restauration, visible quand le panneau est réduit."

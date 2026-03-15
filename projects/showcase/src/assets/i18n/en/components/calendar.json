@@ -369,16 +369,20 @@
           "description": "Label for the button that hides the time picker."
         },
         "monthAria": {
-          "description": "Accessible label for the month selection grid."
+          "description": "Accessible label for the months view grid."
         },
         "yearsAria": {
-          "description": "Accessible label for the year selection grid."
+          "description": "Accessible label for the years view grid."
+        },
+        "clear": {
+          "description": "Label for the button that clears the current date selection."
         }
       }
     },
     "presetsAndTabs": {
       "title": "Preset, tab and time picker tokens",
       "description": "Tokens for quick access to predefined date ranges, view tabs and integrated time picker labels.",
+      "note": "Override globally with <code>provideNuiI18n({ calendar: { presets: {...}, tabs: {...}, timeSelector: {...} } })</code> or per instance with the <code>[i18n]</code> input.",
       "rows": {
         "shortcuts": {
           "description": "Header label for the presets panel that lists quick date range shortcuts."
@@ -421,6 +425,7 @@
     "ariaTokens": {
       "title": "State and accessibility ARIA tokens",
       "description": "Tokens exposed only to assistive technologies to announce day states, navigation changes and range selection.",
+      "note": "These tokens are never visible to sighted users. Override globally with <code>provideNuiI18n({ calendar: { aria: {...}, a11y: {...} } })</code> or per instance with the <code>[i18n]</code> input.",
       "rows": {
         "ariaToday": {
           "description": "Screen reader annotation added to today's day cell."

@@ -72,14 +72,23 @@
     }
   },
   "i18n": {
-    "keys": {
-      "title": "Clés i18n",
-      "description": "Le dock expose un libellé accessible utilisé comme <code>aria-label</code> du conteneur de la barre d'outils.",
-      "note": "Tous les textes i18n de NUI peuvent être remplacés globalement via <code>provideNuiI18n()</code> ou par composant via la propriété de configuration <code>i18n</code>.",
+    "tokens": {
+      "title": "Tokens i18n",
+      "description": "Le dock utilise deux tokens spécifiques (<code>dock.ariaLabel</code>, <code>dock.sheetTitle</code>) et deux tokens partagés de niveau supérieur (<code>restore</code>, <code>close</code>). Tous peuvent être remplacés globalement via <code>provideNuiI18n()</code>.",
+      "note": "Tous les textes i18n de NUI peuvent être remplacés globalement via <code>provideNuiI18n()</code>. Le dock ne prend pas en charge les remplacements i18n par instance car il est géré automatiquement par le service.",
       "rows": {
-        "ariaLabel": "Libellé accessible de la barre d'outils du dock (élément <code>role=\"toolbar\"</code>)",
-        "close": "Libellé accessible du bouton de fermeture sur chaque chip (clé partagée de niveau supérieur)",
-        "sheetTitle": "Titre affiché dans l'en-tête de la feuille inférieure et utilisé comme libellé accessible du dialogue de dépassement"
+        "ariaLabel": {
+          "description": "Libellé accessible de la barre d'outils du dock (élément <code>role=\"toolbar\"</code>)"
+        },
+        "sheetTitle": {
+          "description": "Titre affiché dans l'en-tête de la feuille inférieure et utilisé comme libellé accessible du dialogue de dépassement"
+        },
+        "restore": {
+          "description": "Préfixe du libellé accessible du bouton de restauration sur chaque chip — concaténé avec le titre de l'élément (clé partagée de niveau supérieur)"
+        },
+        "close": {
+          "description": "Préfixe du libellé accessible du bouton de fermeture sur chaque chip — concaténé avec le titre de l'élément (clé partagée de niveau supérieur)"
+        }
       }
     }
   },

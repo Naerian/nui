@@ -551,20 +551,38 @@
     }
   },
   "i18n": {
-    "keys": {
+    "tokens": {
       "title": "Tokens de traducción",
       "description": "El componente Modal Dialog usa tokens propios y algunos compartidos.",
-      "note": "Todos los textos visibles por el usuario en Modal Dialog pueden ser sobreescritos globalmente usando <code>provideNuiI18n()</code>. Otros pueden traducirse pasando la traducción personalizada en la configuración de <code>open()</code>.",
+      "note": "Todos los textos visibles por el usuario en Modal Dialog pueden ser sobreescritos globalmente usando <code>provideNuiI18n()</code>. Los tokens de verificación (<code>verificationLabel</code>, <code>verificationPlaceholder</code>, <code>verificationErrorMessage</code>) también pueden sobreescribirse por instancia pasándolos directamente en la configuración de <code>open()</code>.",
       "rows": {
-        "close": "Aria label y título del botón de cierre del header.",
-        "minimize": "Aria label y título del botón de minimizar del header.",
-        "restore": "Etiqueta del chip de restauración del dock.",
-        "confirm": "Etiqueta por defecto del botón de confirmación.",
-        "cancel": "Etiqueta por defecto del botón de cancelación.",
-        "modalDialogLoading": "Etiqueta mostrada en los modales de carga.",
-        "modalDialogVerificationLabel": "Etiqueta del campo de texto de verificación.",
-        "modalDialogVerificationPlaceholder": "Placeholder del campo de texto de verificación.",
-        "modalDialogVerificationErrorMessage": "Mensaje de error mostrado cuando el texto de verificación no coincide."
+        "close": {
+          "description": "Aria label y título del botón de cierre del header."
+        },
+        "minimize": {
+          "description": "Aria label y título del botón de minimizar del header."
+        },
+        "restore": {
+          "description": "Etiqueta del chip de restauración del dock."
+        },
+        "confirm": {
+          "description": "Etiqueta por defecto del botón de confirmación."
+        },
+        "cancel": {
+          "description": "Etiqueta por defecto del botón de cancelación."
+        },
+        "modalDialogLoading": {
+          "description": "Etiqueta mostrada en los modales de carga."
+        },
+        "modalDialogVerificationLabel": {
+          "description": "Etiqueta del campo de texto de verificación."
+        },
+        "modalDialogVerificationPlaceholder": {
+          "description": "Placeholder del campo de texto de verificación."
+        },
+        "modalDialogVerificationErrorMessage": {
+          "description": "Mensaje de error mostrado cuando el texto de verificación no coincide."
+        }
       }
     }
   },

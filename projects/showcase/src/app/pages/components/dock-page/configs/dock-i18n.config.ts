@@ -2,31 +2,36 @@ import { ComponentSection } from '../../../../core';
 
 export const DOCK_I18N_SECTIONS: ComponentSection[] = [
   {
-    id: 'i18n-keys',
-    title: 'components.dock.i18n.keys.title',
-    description: 'components.dock.i18n.keys.description',
+    id: 'i18n-tokens',
+    title: 'components.dock.i18n.tokens.title',
+    description: 'components.dock.i18n.tokens.description',
     note: {
       type: 'info',
-      content: 'components.dock.i18n.keys.note',
+      content: 'components.dock.i18n.tokens.note',
     },
-    anchor: 'i18n-keys',
+    anchor: 'i18n-tokens',
     table: {
       headers: ['common.tables.token', 'common.tables.default', 'common.tables.description'],
       rows: [
         [
           '<code>dock.ariaLabel</code>',
           'Minimized items',
-          'components.dock.i18n.keys.rows.ariaLabel',
-        ],
-        [
-          '<code>close</code>',
-          'Close',
-          'components.dock.i18n.keys.rows.close',
+          'components.dock.i18n.tokens.rows.ariaLabel.description',
         ],
         [
           '<code>dock.sheetTitle</code>',
           'Minimized items',
-          'components.dock.i18n.keys.rows.sheetTitle',
+          'components.dock.i18n.tokens.rows.sheetTitle.description',
+        ],
+        [
+          '<code>restore</code>',
+          'Restore',
+          'components.dock.i18n.tokens.rows.restore.description',
+        ],
+        [
+          '<code>close</code>',
+          'Close',
+          'components.dock.i18n.tokens.rows.close.description',
         ],
       ],
     },

@@ -18,16 +18,16 @@ export const AVATAR_I18N_SECTIONS: ComponentSection[] = [
       rows: [
         [
           '<code>avatar.moreProfiles</code>',
-          '"{count} more profiles"',
+          'More {count} profiles',
           'components.avatar.i18n.tokens.rows.moreProfiles.description',
         ],
       ],
     },
     examples: [
       {
-        title: 'codeExamples.ts',
+        title: 'codeExamples.typescript',
         language: 'typescript',
-        code: `// app.config.ts — override global i18n
+        code: `// app.config.ts — global override via provideNuiI18n
 import { provideNuiI18n } from 'nui';
 
 export const appConfig: ApplicationConfig = {
@@ -39,6 +39,16 @@ export const appConfig: ApplicationConfig = {
     }),
   ],
 };`,
+      },
+      {
+        title: 'codeExamples.html',
+        language: 'html',
+        code: `<!-- Per-instance override via [i18n] input -->
+<nui-avatar-group
+  [avatars]="avatars"
+  [max]="3"
+  [i18n]="{ moreProfiles: '{count} weitere Profile' }"
+/>`,
       },
     ],
   },

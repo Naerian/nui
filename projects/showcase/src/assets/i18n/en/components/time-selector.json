@@ -441,7 +441,7 @@
     "tokens": {
       "title": "Time picker tokens",
       "description": "Tokens used for time picker labels, action buttons and screen reader texts.",
-      "note": "Override any token globally with <code>provideNuiI18n({ timeSelector: { ... } })</code>.",
+      "note": "Override any token globally with <code>provideNuiI18n({ timeSelector: { ... } })</code> in your app config. All instances of the component will use the provided values.",
       "rows": {
         "setToCurrentTime": {
           "description": "Label for the 'set to current time' action button."
@@ -545,7 +545,7 @@
     "a11yTokens": {
       "title": "Accessibility tokens",
       "description": "Tokens used exclusively for screen reader announcements and ARIA labels within the time picker.",
-      "note": "These tokens are nested under <code>timeSelector.a11y</code>.",
+      "note": "These tokens are nested under <code>timeSelector.a11y</code>. Override them globally with <code>provideNuiI18n({ timeSelector: { a11y: { ... } } })</code>. All instances of the component will use the provided values.",
       "rows": {
         "timeSelectorLabel": {
           "description": "The <code>aria-label</code> applied to the time picker root container in standard mode."

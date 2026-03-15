@@ -551,20 +551,38 @@
     }
   },
   "i18n": {
-    "keys": {
+    "tokens": {
       "title": "Tokens de traduction",
       "description": "Le composant de dialogue modal utilise ses propres tokens et certains tokens partagés.",
-      "note": "Tous les textes visibles par l'utilisateur dans Modal Dialog peuvent être remplacés globalement en utilisant <code>provideNuiI18n()</code>. D'autres peuvent être traduits en passant la traduction personnalisée dans la configuration de <code>open()</code>.",
+      "note": "Tous les textes visibles par l'utilisateur dans Modal Dialog peuvent être remplacés globalement en utilisant <code>provideNuiI18n()</code>. Les tokens de vérification (<code>verificationLabel</code>, <code>verificationPlaceholder</code>, <code>verificationErrorMessage</code>) peuvent également être remplacés par instance en les passant directement dans la configuration de <code>open()</code>.",
       "rows": {
-        "close": "Aria label et titre du bouton de fermeture dans l'en-tête.",
-        "minimize": "Aria label et titre du bouton de réduction dans l'en-tête.",
-        "restore": "Libellé du chip de restauration dans le dock.",
-        "confirm": "Libellé par défaut du bouton de confirmation.",
-        "cancel": "Libellé par défaut du bouton d'annulation.",
-        "modalDialogLoading": "Libellé affiché dans les modaux de chargement.",
-        "modalDialogVerificationLabel": "Libellé du champ de texte de vérification.",
-        "modalDialogVerificationPlaceholder": "Placeholder du champ de texte de vérification.",
-        "modalDialogVerificationErrorMessage": "Message d'erreur affiché lorsque le texte de vérification ne correspond pas."
+        "close": {
+          "description": "Aria label et titre du bouton de fermeture dans l'en-tête."
+        },
+        "minimize": {
+          "description": "Aria label et titre du bouton de réduction dans l'en-tête."
+        },
+        "restore": {
+          "description": "Libellé du chip de restauration dans le dock."
+        },
+        "confirm": {
+          "description": "Libellé par défaut du bouton de confirmation."
+        },
+        "cancel": {
+          "description": "Libellé par défaut du bouton d'annulation."
+        },
+        "modalDialogLoading": {
+          "description": "Libellé affiché dans les modaux de chargement."
+        },
+        "modalDialogVerificationLabel": {
+          "description": "Libellé du champ de texte de vérification."
+        },
+        "modalDialogVerificationPlaceholder": {
+          "description": "Placeholder du champ de texte de vérification."
+        },
+        "modalDialogVerificationErrorMessage": {
+          "description": "Message d'erreur affiché lorsque le texte de vérification ne correspond pas."
+        }
       }
     }
   },

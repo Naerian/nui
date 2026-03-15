@@ -429,16 +429,20 @@
           "description": "Etiqueta del botón que oculta el selector de hora."
         },
         "monthAria": {
-          "description": "Etiqueta accesible para la cuadrícula de selección de mes."
+          "description": "Etiqueta accesible para la cuadrícula de la vista de meses."
         },
         "yearsAria": {
-          "description": "Etiqueta accesible para la cuadrícula de selección de año."
+          "description": "Etiqueta accesible para la cuadrícula de la vista de años."
+        },
+        "clear": {
+          "description": "Etiqueta del botón que limpia la selección de fecha actual."
         }
       }
     },
     "presetsAndTabs": {
       "title": "Tokens de presets, pestañas y selector de hora",
       "description": "Tokens para accesos rápidos a rangos de fechas predefinidos, pestañas de vista y etiquetas del selector de hora integrado.",
+      "note": "Sobreescribe globalmente con <code>provideNuiI18n({ calendar: { presets: {...}, tabs: {...}, timeSelector: {...} } })</code> o por instancia con el input <code>[i18n]</code>.",
       "rows": {
         "shortcuts": {
           "description": "Etiqueta del encabezado del panel de presets que lista los accesos rápidos de rangos de fechas."
@@ -481,6 +485,7 @@
     "ariaTokens": {
       "title": "Tokens ARIA de estado y accesibilidad",
       "description": "Tokens expuestos solo a las tecnologías asistivas para anunciar estado de los días, cambios de navegación y selección de rango.",
+      "note": "Estos tokens nunca son visibles para los usuarios con visión. Sobreescribe globalmente con <code>provideNuiI18n({ calendar: { aria: {...}, a11y: {...} } })</code> o por instancia con el input <code>[i18n]</code>.",
       "rows": {
         "ariaToday": {
           "description": "Anotación del lector de pantalla añadida a la celda del día de hoy."

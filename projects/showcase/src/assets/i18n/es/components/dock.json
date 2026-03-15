@@ -72,14 +72,23 @@
     }
   },
   "i18n": {
-    "keys": {
-      "title": "Claves i18n",
-      "description": "El dock expone una etiqueta accesible utilizada como <code>aria-label</code> del contenedor de la barra de herramientas.",
-      "note": "Todos los textos i18n de NUI pueden sobrescribirse globalmente mediante <code>provideNuiI18n()</code> o por componente a través de la propiedad de configuración <code>i18n</code>.",
+    "tokens": {
+      "title": "Tokens i18n",
+      "description": "El dock usa dos tokens específicos (<code>dock.ariaLabel</code>, <code>dock.sheetTitle</code>) y dos tokens compartidos de nivel superior (<code>restore</code>, <code>close</code>). Todos pueden sobrescribirse globalmente mediante <code>provideNuiI18n()</code>.",
+      "note": "Todos los textos i18n de NUI pueden sobrescribirse globalmente mediante <code>provideNuiI18n()</code>. El dock no soporta sobreescritura i18n por instancia, ya que es gestionado automáticamente por el servicio.",
       "rows": {
-        "ariaLabel": "Etiqueta accesible para la barra de herramientas del dock (elemento <code>role=\"toolbar\"</code>)",
-        "close": "Etiqueta accesible para el botón de cierre de cada chip (clave compartida de nivel superior)",
-        "sheetTitle": "Título mostrado en el encabezado de la hoja inferior y usado como etiqueta accesible del diálogo de desbordamiento"
+        "ariaLabel": {
+          "description": "Etiqueta accesible para la barra de herramientas del dock (elemento <code>role=\"toolbar\"</code>)"
+        },
+        "sheetTitle": {
+          "description": "Título mostrado en el encabezado de la hoja inferior y usado como etiqueta accesible del diálogo de desbordamiento"
+        },
+        "restore": {
+          "description": "Prefijo de etiqueta accesible para el botón de restaurar de cada chip — se concatena con el título del elemento (clave compartida de nivel superior)"
+        },
+        "close": {
+          "description": "Prefijo de etiqueta accesible para el botón de cierre de cada chip — se concatena con el título del elemento (clave compartida de nivel superior)"
+        }
       }
     }
   },

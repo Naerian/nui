@@ -2,46 +2,46 @@ import { ComponentSection } from '../../../../core';
 
 export const MODAL_DIALOG_I18N_SECTIONS: ComponentSection[] = [
   {
-    id: 'i18n-keys',
-    title: 'components.modal-dialog.i18n.keys.title',
-    description: 'components.modal-dialog.i18n.keys.description',
+    id: 'i18n-tokens',
+    title: 'components.modal-dialog.i18n.tokens.title',
+    description: 'components.modal-dialog.i18n.tokens.description',
     note: {
       type: 'info',
-      content: 'components.modal-dialog.i18n.keys.note',
+      content: 'components.modal-dialog.i18n.tokens.note',
     },
-    anchor: 'i18n-keys',
+    anchor: 'i18n-tokens',
     table: {
       headers: ['common.tables.token', 'common.tables.default', 'common.tables.description'],
       rows: [
         [
           '<code>close</code>',
           'Close',
-          'components.modal-dialog.i18n.keys.rows.close',
+          'components.modal-dialog.i18n.tokens.rows.close.description',
         ],
         [
           '<code>minimize</code>',
           'Minimize',
-          'components.modal-dialog.i18n.keys.rows.minimize',
+          'components.modal-dialog.i18n.tokens.rows.minimize.description',
         ],
-        ['<code>restore</code>', 'Restore', 'components.modal-dialog.i18n.keys.rows.restore'],
-        ['<code>confirm</code>', 'Confirm', 'components.modal-dialog.i18n.keys.rows.confirm'],
-        ['<code>cancel</code>', 'Cancel', 'components.modal-dialog.i18n.keys.rows.cancel'],
+        ['<code>restore</code>', 'Restore', 'components.modal-dialog.i18n.tokens.rows.restore.description'],
+        ['<code>confirm</code>', 'Confirm', 'components.modal-dialog.i18n.tokens.rows.confirm.description'],
+        ['<code>cancel</code>', 'Cancel', 'components.modal-dialog.i18n.tokens.rows.cancel.description'],
 
-        ['<code>modalDialog.loading</code>', 'Loading...', 'components.modal-dialog.i18n.keys.rows.modalDialogLoading'],
+        ['<code>modalDialog.loading</code>', 'Loading...', 'components.modal-dialog.i18n.tokens.rows.modalDialogLoading.description'],
         [
           '<code>modalDialog.verificationLabel</code>',
           'Type the following to confirm',
-          'components.modal-dialog.i18n.keys.rows.modalDialogVerificationLabel',
+          'components.modal-dialog.i18n.tokens.rows.modalDialogVerificationLabel.description',
         ],
         [
           '<code>modalDialog.verificationPlaceholder</code>',
           'Type here to confirm',
-          'components.modal-dialog.i18n.keys.rows.modalDialogVerificationPlaceholder',
+          'components.modal-dialog.i18n.tokens.rows.modalDialogVerificationPlaceholder.description',
         ],
         [
           '<code>modalDialog.verificationErrorMessage</code>',
           'The text does not match. Please try again.',
-          'components.modal-dialog.i18n.keys.rows.modalDialogVerificationErrorMessage',
+          'components.modal-dialog.i18n.tokens.rows.modalDialogVerificationErrorMessage.description',
         ],
       ],
     },
@@ -70,6 +70,20 @@ export const appConfig: ApplicationConfig = {
     provideNuiI18n(myI18n),
   ]
 };`,
+        language: 'typescript',
+      },
+      {
+        title: 'codeExamples.html',
+        code: `<!-- Per-instance override for verification tokens via open() config -->
+<!-- verificationLabel, verificationPlaceholder and verificationErrorMessage
+     can be passed directly in the modal configuration, overriding the global i18n value. -->
+this.modalService.openVerification({
+  title: 'Confirm deletion',
+  verificationText: 'delete',
+  verificationLabel: 'Type "delete" to confirm',
+  verificationPlaceholder: 'Type here…',
+  verificationErrorMessage: 'Text does not match. Please try again.',
+});`,
         language: 'typescript',
       },
     ],

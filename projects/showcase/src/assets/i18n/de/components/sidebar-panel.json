@@ -339,14 +339,14 @@
   "i18n": {
     "tokens": {
       "title": "Übersetzungstoken",
-      "description": "Die SidebarPanel-Komponente verwendet generische NuiI18nService-Token für die Steuerungsschaltflächen.",
-      "note": "Alle Token werden von mehreren Komponenten gemeinsam genutzt. Überschreiben Sie sie global mit <code>provideNuiI18n({...})</code>.",
+      "description": "Die SidebarPanel-Komponente verwendet generische NuiI18nService-Token für die Schließen- und Minimieren-Schaltflächen.",
+      "note": "Alle Token werden von mehreren Komponenten gemeinsam genutzt. Überschreiben Sie sie global mit <code>provideNuiI18n({...})</code> in Ihrer <code>app.config.ts</code>.",
       "rows": {
         "close": {
-          "description": "Barrierefreies Label für die Schließen-Schaltfläche."
+          "description": "Barrierefreies Label für die Schließen-Schaltfläche in der Panel-Kopfzeile."
         },
         "minimize": {
-          "description": "Barrierefreies Label für die Minimieren-Schaltfläche."
+          "description": "Barrierefreies Label für die Minimieren-Schaltfläche in der Panel-Kopfzeile."
         },
         "restore": {
           "description": "Barrierefreies Label für die Wiederherstellen-Schaltfläche, sichtbar wenn das Panel minimiert ist."

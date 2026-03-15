@@ -165,7 +165,7 @@
     "tokens": {
       "title": "Tokens de traducción",
       "description": "El componente FabButton expone un único token i18n para la etiqueta accesible del botón disparador.",
-      "note": "Sobreescríbelo con <code>provideNuiI18n({ fabButton: { triggerAriaLabel: 'Abrir acciones' } })</code>.",
+      "note": "Sobreescríbelo globalmente con <code>provideNuiI18n({ fabButton: { triggerAriaLabel: '...' } })</code>, o por instancia con <code>[i18n]=\"{ triggerAriaLabel: '...' }\"</code> en el elemento <code>&lt;nui-fab-button&gt;</code>.",
       "rows": {
         "triggerAriaLabel": {
           "description": "El <code>aria-label</code> aplicado al botón disparador del FAB. Usado por los lectores de pantalla para identificar el botón cuando solo muestra un icono."

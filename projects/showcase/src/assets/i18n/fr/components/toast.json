@@ -528,11 +528,20 @@
   "i18n": {
     "tokens": {
       "title": "Tokens de traduction",
-      "description": "Le composant Toast utilise le token générique <code>close</code> de NuiI18nService pour le libellé du bouton de fermeture.",
-      "note": "Le token <code>close</code> est partagé entre plusieurs composants (Toast, SidebarPanel…). Remplacez-le globalement pour localiser tous les boutons de fermeture en même temps.",
+      "description": "Le composant Toast utilise des tokens génériques (<code>close</code>, <code>expand</code>, <code>collapse</code>) de NuiI18nService pour les libellés des boutons, ainsi que le token spécifique <code>toast.notifications</code> pour le libellé accessible de la région du conteneur.",
+      "note": "Les quatre tokens sont remplacés globalement via <code>provideNuiI18n()</code> dans votre <code>app.config.ts</code>. Les tokens génériques (<code>close</code>, <code>expand</code>, <code>collapse</code>) sont partagés entre plusieurs composants : les remplacer localise simultanément tous les boutons concernés. Aucun remplacement par instance n'est disponible via <code>ToastConfig</code>.",
       "rows": {
         "close": {
           "description": "Libellé accessible pour le bouton de fermeture sur les toasts dismissibles."
+        },
+        "expand": {
+          "description": "Libellé accessible pour le bouton de développement sur les toasts extensibles."
+        },
+        "collapse": {
+          "description": "Libellé accessible pour le bouton de réduction lorsqu'un toast extensible est ouvert."
+        },
+        "notifications": {
+          "description": "Libellé accessible de la région live du conteneur de toasts (annoncé aux lecteurs d'écran lors du rendu du conteneur)."
         }
       }
     }

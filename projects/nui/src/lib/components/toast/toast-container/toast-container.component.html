@@ -4,7 +4,7 @@
   aria-live="polite"
   aria-relevant="additions"
   aria-atomic="false"
-  aria-label="Notificaciones"
+  [attr.aria-label]="_i18n().notifications"
 >
   @for (toast of toasts(); track toast.id) {
     <nui-toast

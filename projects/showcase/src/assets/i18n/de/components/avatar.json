@@ -268,10 +268,10 @@
     "tokens": {
       "title": "Übersetzungs-Tokens",
       "description": "Die Komponente <code>nui-avatar-group</code> verwendet <code>NuiI18nService</code>, um das zugängliche Label und den Tooltip des Überschuss-Indikators zu erstellen, der angezeigt wird, wenn die Anzahl der Avatare den Input <code>max</code> überschreitet.",
-      "note": "Verwende den Marker <code>{count}</code> in deiner Übersetzungszeichenfolge. Die Komponente ersetzt ihn zur Laufzeit durch die genaue Anzahl der versteckten Avatare.",
+      "note": "Überschreibe Tokens global für die gesamte Anwendung mit <code>provideNuiI18n({ avatar: { ... } })</code> in der App-Konfiguration oder instanzweise über den <code>[i18n]</code>-Input direkt an der Komponente. Der Platzhalter <code>{count}</code> wird zur Laufzeit durch die genaue Anzahl der versteckten Avatare ersetzt.",
       "rows": {
         "moreProfiles": {
-          "description": "Zugängliches Label und Tooltip des Überschuss-Indikators (+N). Unterstützt den Marker <code>{count}</code>."
+          "description": "Zugängliches Label und Tooltip des Überschuss-Indikators (+N). Unterstützt den Platzhalter <code>{count}</code>."
         }
       }
     }

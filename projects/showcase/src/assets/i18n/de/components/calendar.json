@@ -369,16 +369,20 @@
           "description": "Label für die Schaltfläche zum Ausblenden der Zeitauswahl."
         },
         "monthAria": {
-          "description": "Zugängliches Label für das Monatsauswahlraster."
+          "description": "Zugängliches Label für das Raster der Monatsansicht."
         },
         "yearsAria": {
-          "description": "Zugängliches Label für das Jahresauswahlraster."
+          "description": "Zugängliches Label für das Raster der Jahresansicht."
+        },
+        "clear": {
+          "description": "Label für die Schaltfläche zum Löschen der aktuellen Datumsauswahl."
         }
       }
     },
     "presetsAndTabs": {
       "title": "Voreinstellungs-, Tab- und Zeitauswahl-Tokens",
       "description": "Tokens für schnellen Zugriff auf vordefinierte Datumsbereiche, Ansichtstabs und integrierte Zeitauswahl-Labels.",
+      "note": "Überschreibe global mit <code>provideNuiI18n({ calendar: { presets: {...}, tabs: {...}, timeSelector: {...} } })</code> oder pro Instanz mit dem Input <code>[i18n]</code>.",
       "rows": {
         "shortcuts": {
           "description": "Header-Label für das Voreinstellungspanel mit Schnellzugriff auf Datumsbereiche."
@@ -421,6 +425,7 @@
     "ariaTokens": {
       "title": "Zustands- und Barrierefreiheits-ARIA-Tokens",
       "description": "Tokens, die nur für assistive Technologien zugänglich sind, um Tagesstatus, Navigationsänderungen und Bereichsauswahl anzuzeigen.",
+      "note": "Diese Tokens sind für sehende Benutzer nie sichtbar. Überschreibe global mit <code>provideNuiI18n({ calendar: { aria: {...}, a11y: {...} } })</code> oder pro Instanz mit dem Input <code>[i18n]</code>.",
       "rows": {
         "ariaToday": {
           "description": "Screenreader-Anmerkung zur Tageszelle des heutigen Tages."

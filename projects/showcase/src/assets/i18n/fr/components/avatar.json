@@ -268,7 +268,7 @@
     "tokens": {
       "title": "Tokens de traduction",
       "description": "Le composant <code>nui-avatar-group</code> utilise <code>NuiI18nService</code> pour construire le libellé accessible et l'infobulle de l'indicateur de surplus qui apparaît quand le nombre d'avatars dépasse l'entrée <code>max</code>.",
-      "note": "Utilisez le placeholder <code>{count}</code> dans votre chaîne de traduction. Le composant le remplace à l'exécution par le nombre exact d'avatars masqués.",
+      "note": "Remplacez les tokens globalement pour toute l'application via <code>provideNuiI18n({ avatar: { ... } })</code> dans la configuration de l'application, ou par instance via l'entrée <code>[i18n]</code> directement sur le composant. Le placeholder <code>{count}</code> est remplacé à l'exécution par le nombre exact d'avatars masqués.",
       "rows": {
         "moreProfiles": {
           "description": "Libellé accessible et infobulle pour l'indicateur de surplus (+N). Supporte le placeholder <code>{count}</code>."

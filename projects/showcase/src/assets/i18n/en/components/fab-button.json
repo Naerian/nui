@@ -165,7 +165,7 @@
     "tokens": {
       "title": "Translation tokens",
       "description": "The FabButton component exposes a single i18n token for the accessible label of the trigger button.",
-      "note": "Override it with <code>provideNuiI18n({ fabButton: { triggerAriaLabel: 'Open actions' } })</code>.",
+      "note": "Override globally with <code>provideNuiI18n({ fabButton: { triggerAriaLabel: '...' } })</code>, or per instance with <code>[i18n]=\"{ triggerAriaLabel: '...' }\"</code> on the <code>&lt;nui-fab-button&gt;</code> element.",
       "rows": {
         "triggerAriaLabel": {
           "description": "The <code>aria-label</code> applied to the FAB trigger button. Used by screen readers to identify the button when it only shows an icon."

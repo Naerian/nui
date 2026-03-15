@@ -15,6 +15,7 @@ import { ToastComponent } from '../toast.component';
 import { ToastRef } from '../toast-ref';
 import { ToastPosition } from '../models/toast.model';
 import { Subject, takeUntil } from 'rxjs';
+import { NuiI18nService } from '../../../i18n';
 
 @Component({
   selector: 'nui-toast-container',
@@ -31,6 +32,9 @@ export class ToastContainerComponent implements OnInit, OnDestroy {
   private overlay = inject(Overlay);
   private viewContainerRef = inject(ViewContainerRef);
   private destroy$ = new Subject<void>();
+
+  protected readonly _i18nService = inject(NuiI18nService);
+  protected readonly _i18n = computed(() => this._i18nService.translations().toast);
 
   // Signal con todos los toasts activos
   readonly toasts = signal<ToastRef[]>([]);
